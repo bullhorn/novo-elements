@@ -1,0 +1,27 @@
+.idea/
+logs/
+
+.editorconfig
+.eslintrc
+.npmignore
+.babelrc
+.gitignore
+.travis.yml
+CHANGELOG.md
+CONTRIBUTING.md
+protractor.conf.js
+.eslintignore
+.codeclimate.yml
+
+config/
+src/
+.github/
+
+# testing
+karma.conf.js
+coverage/
+
+# demo build
+demo/
+webpack.config.js
+

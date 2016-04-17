@@ -1,0 +1,28 @@
+engines:
+  fixme:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+
+ratings:
+   paths:
+   - "src/**.js"
+
+exclude_paths:
+ - "bundles/*"
+ - ".github/*"
+ - "config/*"
+ - "dist/*"
+ - "lib/*"
+ - "demo/*"
+ - "**/*.scss"
+ - "package.json"
+ - "karma.conf.js"
+ - "webpack.config.js"
+ - "README.md"
+ - "CHANGELOG.md"
+ - "CONTRIBUTING.md"
+ - "LICENSE"
