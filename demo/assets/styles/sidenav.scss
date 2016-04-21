@@ -1,0 +1,171 @@
+// App side menu styles
+nav.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100vh;
+    color: $white;
+    background-color: #1B2127;
+    overflow-y: scroll;
+    padding: 0 20px 60px 20px;
+
+    // Logo Link
+    & > span.logo {
+        padding-top: 30px;
+        cursor: pointer;
+        text-align: center;
+        display: block;
+
+        & > * {
+            display: block;
+        }
+
+        h3, h5 {
+            padding: 0;
+            margin: 5px auto;
+        }
+
+        h5 {
+            color: rgba(#fff, .7);
+            font-weight: 500;
+            letter-spacing: .75px;
+        }
+
+        span.version {
+            text-align: center;
+            opacity: .5;
+        }
+    }
+
+    // Logo SVG
+    [data-name="novo-logo"] {
+        width: 100%;
+        max-width: 100px;
+        margin: 0 auto 20px auto;
+        display: block;
+
+        .center-dot {
+            fill: $white;
+        }
+
+        .outer-ring {
+            fill: $bittersweet;
+            transform-origin: 50% 50%;
+            animation-duration: 20000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-name: rotate-back;
+        }
+
+        .inner-ring {
+            fill: $bittersweet;
+            transform-origin: 50% 50%;
+            animation-duration: 20000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-name: rotate;
+        }
+    }
+
+    // Bullhorn SVG
+    [data-name="bullhorn-text"] {
+        width: 100%;
+        max-width: 150px;
+        margin: 0 auto 20px auto;
+        display: block;
+    }
+
+    // Start menu link styles
+    .menu-list {
+        position: relative;
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .menu-item {
+        display: block;
+        margin: 0;
+        height: 2.5rem;
+    }
+
+    .menu-link {
+        display: block;
+        width: 90%;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        text-align: left;
+        color: darken(#ACAEB1, 4%);
+        transition: color 0.3s;
+        font-size: 1.05em;
+        font-weight: 400;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        padding-left: 15px;
+    }
+
+    .menu-link:hover,
+    .menu-link:focus {
+        outline: none;
+        color: #fff;
+    }
+
+    .menu-item .router-link-active.menu-link {
+        color: #fff;
+        transition: color 0.5s;
+    }
+
+    .menu-section-header {
+        display: block;
+
+        span {
+            height: 2.5rem;
+            line-height: 2.5rem;
+            display: block;
+            text-transform: uppercase;
+            font-size: .9em;
+            font-weight: 500;
+            letter-spacing: .3px;
+            opacity: .25;
+        }
+    }
+
+    .menu-line {
+        position: absolute;
+        left: 100%;
+        top: 0;
+        height: 2.5rem;
+        width: 4px;
+        pointer-events: none;
+        background: $bittersweet;
+        transition: transform 0.5s;
+        transition-timing-function: cubic-bezier(1, 0.01, 0, 1.22);
+    }
+
+    @for $i from 1 through 30 {
+        $number: ($i - 1) * 100;
+        .menu-item:nth-child(#{$i}).current ~ .menu-line {
+            transform: translate3d(0, #{ $number }%, 0);
+        }
+    }
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotate-back {
+    from {
+        -webkit-transform: rotate(360deg);
+    }
+    to {
+        -webkit-transform: rotate(0deg);
+    }
+}

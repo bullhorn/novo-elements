@@ -32,7 +32,22 @@
     
 Depending on what system you are using (SystemJS, Webpack, etc..) the setup will vary.
 
-TODO - add setup instructions
+**SystemJS**
+
+> For SystemJS you will need to add some mappings in order to successfully use this library
+
+    // Add a SystemJS Config mapping for novo-elements
+    // A MomentJS mapping is required as well
+    System.config({
+        defaultJSExtensions: true,
+        paths: {
+            'novo-elements': '/node_modules/novo-elements/lib/novo-elements.ks',
+            'moment': '/node_modules/moment/moment.js',
+            ...
+        }
+    });
+    
+**Note:** You can forgo adding the mappings and just include the `novo-elements/bundles/novo-elements.js` into your `index.html` page instead.
     
 ## Build/Release/Publish
 
@@ -66,16 +81,35 @@ Compiles the main lib and bundles the SystemJS modules
     # npm run compile:lib
     # npm run compile:system
     
-TODO - add the other scripts!
+**compile:lib**
+Compiles the `src` folder into `lib` via babel
 
-## Integrations
+**compile:system**
+Compiles the SystemJS bundles, adding all required dependencies
 
-- [Travis CI](https://travis-ci.org)
-- [Badge Fury (NPM)](https://badge.fury.io/)
-- [Code Climate](https://codeclimate.com)
-- [David-DM](https://david-dm.org/)
-- [IssueStats](http://issuestats.com/)
-- [GreenKeeper](https://greenkeeper.io/)
+**prepublish** / **postpublish**
+Hooks into the publish script to compile and deploy to gh-pages
+
+**start**
+Starts up the Webpack Dev Server for local development
+
+**test**
+Runs all specs via Karma in the `src` folder
+
+**changelog**
+Generates the `CHANGELOG.md` file
+
+**github-release**
+Generates a github release for the project/version
+
+**preversion** / **version** / **postversion**
+Updates the projects version, runs the changelog and commits and pushes
+
+**build:prod**
+Builds the `dist` folder for the demo
+
+**pree2e** / **e2e** / **e2e:live**
+Runs the protractor automation normally or with the element explorer
 
 ## Contribute
 

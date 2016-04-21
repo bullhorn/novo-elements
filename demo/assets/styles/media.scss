@@ -1,0 +1,108 @@
+$breakpoints: ('nill': 0px, 'phone': 320px, 'tween': 500px, 'tablet': 768px, 'desktop': 1024px) !default;
+
+nav.responsive-nav {
+    display: none;
+    padding: 0 20px;
+    width: 100%;
+
+    svg {
+        max-width: 90px;
+        display: inline-block;
+        margin: 0 auto;
+
+        .st0 {
+            fill: #3D464D;
+        }
+    }
+
+    strong {
+        text-transform: uppercase;
+        color: rgba(#3D464D, .5);
+        font-size: .9em;
+        letter-spacing: .3px;
+    }
+}
+
+button[name="open-menu"] {
+    border: none;
+    background: transparent;
+    display: none;
+    font-size: 18px;
+    vertical-align: middle;
+
+    &:focus,
+    &:active {
+        outline: none;
+    }
+}
+
+@include media("<tween") {
+    main.main-content {
+        .container {
+            padding: 70px 2.5rem;
+        }
+
+        header {
+            &.design {
+                > div {
+                    width: 100%;
+                }
+
+                > img {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@include media(">tween", "<tablet") {
+    main.main-content {
+        header {
+            &.design {
+                > div {
+                    width: 100%;
+                }
+
+                > img {
+                    width: 30%;
+                }
+            }
+        }
+    }
+}
+
+@include media(">nill", "<tablet") {
+    nav.main-nav {
+        transform: translateX(-100%);
+        transition: all 200ms ease-in-out;
+
+        &.open {
+            transform: translateX(0px);
+        }
+    }
+
+    main.main-content {
+        margin: 0;
+        transform: translateX(0px);
+        transition: all 200ms ease-in-out;
+
+        &.open {
+            transform: translateX(300px);
+        }
+    }
+
+    nav.responsive-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    button[name="open-menu"] {
+        display: block;
+    }
+}
+
+@include media(">tablet", "<950px") {
+}

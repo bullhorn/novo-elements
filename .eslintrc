@@ -1,3 +1,6 @@
 {
-    "extends": "bullhorn/angular2"
+    "extends": "bullhorn/angular2",
+    "globals": {
+        "VERSION": false
+    }
 }

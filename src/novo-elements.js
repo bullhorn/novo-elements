@@ -1,9 +1,7 @@
-import { Test } from './components/test';
+import { NOVO_BUTTON_ELEMENTS } from './elements/button';
 
-export * from './components/test';
+export * from './elements/button';
 
-export default {
-    directives: [
-        Test
-    ]
-};
+export const NOVO_ELEMENTS = [
+    NOVO_BUTTON_ELEMENTS
+];

@@ -4,17 +4,17 @@ import { By } from 'angular2/platform/common_dom';
 import { beforeEach, expect, describe, it } from 'angular2/testing';
 
 import { createTestContext } from './../../testing/TestContext';
-import { Test } from './test';
+import { Button } from './Button';
 
 @Component({
-    selector: 'blah',
-    directives: [Test],
-    template: '<test-cmp></test-cmp>'
+    selector: 'test-cmp',
+    directives: [Button],
+    template: '<button theme="primary">Test Primary</button>'
 })
 class TestCmp {
 }
 
-describe('Component: Test', () => {
+describe('Component: Button', () => {
     let ctx;
     let instance;
     let element;
@@ -25,7 +25,7 @@ describe('Component: Test', () => {
         ctx.init(TestCmp)
             .finally(done)
             .subscribe(() => {
-                const cmpDebugElement = ctx.fixture.debugElement.query(By.directive(Test));
+                const cmpDebugElement = ctx.fixture.debugElement.query(By.directive(Button));
                 element = cmpDebugElement.nativeElement;
                 instance = cmpDebugElement.componentInstance;
             });

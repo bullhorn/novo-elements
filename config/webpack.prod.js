@@ -92,15 +92,13 @@ module.exports = webpackMerge(commonConfig, {
         //
         // See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
         new DefinePlugin({
+            'VERSION': JSON.stringify(METADATA.version),
             'ENV': JSON.stringify(METADATA.ENV),
-            'HMR': METADATA.HMR,
             'process.env': {
                 'ENV': JSON.stringify(METADATA.ENV),
                 'NODE_ENV': JSON.stringify(METADATA.ENV),
-                'HMR': METADATA.HMR,
             }
         }),
-
 
         // Plugin: UglifyJsPlugin
         // Description: Minimize all JavaScript output of chunks.

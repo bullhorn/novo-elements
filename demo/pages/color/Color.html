@@ -1,0 +1,62 @@
+<header class="design container" [ngClass]="color">
+    <div>
+        <h1 class="title">Color</h1>
+        <h2 class="sub-title">Efficient and expressive</h2>
+        <p class="description">Our colors are bold, fresh, and approachable. They are expressive and delightful, but selected with usability and accessibility in mind.</p>
+    </div>
+    <div class="background-boxes">
+        <div class="bb-lead" (mouseover)="changeColor('lead')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-contact" (mouseover)="changeColor('contact')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-company" (mouseover)="changeColor('company')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-candidate" (mouseover)="changeColor('candidate')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-opportunity" (mouseover)="changeColor('opportunity')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-job" (mouseover)="changeColor('job')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-placement" (mouseover)="changeColor('placement')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-grapefruit" (mouseover)="changeColor('grapefruit')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-bittersweet" (mouseover)="changeColor('bittersweet')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-sunflower" (mouseover)="changeColor('sunflower')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-grass" (mouseover)="changeColor('grass')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-mint" (mouseover)="changeColor('mint')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-aqua" (mouseover)="changeColor('aqua')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-ocean" (mouseover)="changeColor('ocean')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-carnation" (mouseover)="changeColor('carnation')" (mouseout)="changeColor('background')"></div>
+        <div class="bb-lavender" (mouseover)="changeColor('lavender')" (mouseout)="changeColor('background')"></div>
+    </div>
+</header>
+<section class="design container">
+    <h2>Primary Colors</h2>
+    <p>These are the base colors of the application.</p>
+
+    <article class="color-blocks primary-colors">
+        <div *ngFor="#color of primaryColors; #i = index" class="block {{color.name}}-cb">
+            <div class="color-square" (click)="copyLink(color)"></div>
+            <h3 class="color-text" (click)="copyLink(color)"><span>#</span>{{color.hex}}</h3>
+            <h6>{{color.name}}</h6>
+            <span class="vars" *ngFor="#variable of color.variables; #j = index">${{variable}}</span>
+        </div>
+    </article>
+
+    <h2>Entity Colors</h2>
+    <p>This bold palette uses carefully balanced colors to distinguish entities from one another.</p>
+
+    <article class="color-blocks entity-colors">
+        <div *ngFor="#color of entityColors; #i = index" class="block {{color.name}}-cb">
+            <div class="color-square" (click)="copyLink(color)"></div>
+            <h3 class="color-text" (click)="copyLink(color)"><span>#</span>{{color.hex}}</h3>
+            <h6>{{color.name}}</h6>
+            <span class="vars" *ngFor="#variable of color.variables; #j = index">${{variable}}</span>
+        </div>
+    </article>
+
+    <h2>Analytics Colors</h2>
+    <p>This palette features vibrant, bold colors for use in data visualization.</p>
+
+    <article class="color-blocks analytics-colors">
+        <div *ngFor="#color of analyticsColors; #i = index" class="block {{color.name}}-cb">
+            <div class="color-square" (click)="copyLink(color)"></div>
+            <h3 class="color-text" (click)="copyLink(color)"><span>#</span>{{color.hex}}</h3>
+            <h6>{{color.name}}</h6>
+            <span class="vars" *ngFor="#variable of color.variables; #j = index">${{variable}}</span>
+        </div>
+    </article>
+</section>

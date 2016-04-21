@@ -2,33 +2,40 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Angular2 Bootstrap">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
 
-        <title>NOVO Elements</title>
+        <title>Novo Elements</title>
+
+        <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' rel='stylesheet' type='text/css'>
+        <link href="https://rawgit.com/bullhorn/bullhorn-icons/development/fonts/Bullhorn-Glyphicons.css" rel="stylesheet" type="text/css">
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/dragula/3.6.3/dragula.js"></script>
     </head>
     <body>
-        <app>Loading...</app>
-
-        <!-- Google analytics-->
-        <!--<script>-->
-        <!--(function (i, s, o, g, r, a, m) {-->
-        <!--i['GoogleAnalyticsObject'] = r;-->
-        <!--i[r] = i[r] || function () {-->
-        <!--(i[r].q = i[r].q || []).push(arguments)-->
-        <!--}, i[r].l = 1 * new Date();-->
-        <!--a = s.createElement(o),-->
-        <!--m = s.getElementsByTagName(o)[0];-->
-        <!--a.async = 1;-->
-        <!--a.src = g;-->
-        <!--m.parentNode.insertBefore(a, m)-->
-        <!--})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');-->
-
-        <!--ga('create', 'UA-73071494-1', 'auto');-->
-        <!--ga('send', 'pageview');-->
-        <!--</script>-->
-
+        <demo-app>
+            <bh-loading theme="circle" style="position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0;">
+                <div class="cycle">
+                    <div>
+                        <dot class="cycle"></dot>
+                    </div>
+                    <div>
+                        <dot class="cycle"></dot>
+                    </div>
+                    <div>
+                        <dot class="cycle"></dot>
+                    </div>
+                    <div>
+                        <dot class="cycle"></dot>
+                    </div>
+                    <div>
+                        <dot class="cycle"></dot>
+                    </div>
+                </div>
+            </bh-loading>
+        </demo-app>
         <!-- script files will be inserted by html-webpack-plugin -->
     </body>
 </html>

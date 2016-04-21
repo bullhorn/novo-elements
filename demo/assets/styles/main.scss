@@ -1,0 +1,171 @@
+/* Contains all Design Page /Component Demo Page SCSS imports
+starting at line 82. >>
+=============================================================
+*/
+// Main content container
+main.main-content {
+    position: relative;
+    min-height: 300px;
+    margin: 0 0 0 300px;
+
+    // Container class to center content
+    .container {
+        padding: 70px 5.5rem;
+        margin: 0 auto;
+
+        h1 {
+            small {
+                font-size: 14px;
+                vertical-align: middle;
+            }
+        }
+    }
+    // Contains component demos
+    .example {
+        margin-top: 25px;
+        border: 1px solid #E9EAEA;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+        border-bottom: none;
+        max-width: 53em;
+        box-sizing: border-box;
+
+        > * {
+            border-top-right-radius: 3px;
+            border-top-left-radius: 3px;
+        }
+    }
+    // Contains code snippet
+    pre {
+        margin: 0 0 35px;
+        max-width: 53em;
+        box-sizing: border-box;
+
+        code {
+            width: 100%;
+            display: block;
+            box-sizing: border-box;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            line-height: 1.5em;
+            padding: 15px 25px;
+
+            &.hljs {
+                background: #F9F9F9 !important;
+            }
+        }
+    }
+    // DESIGN STYLES
+    header {
+        &.design {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            > * {
+                width: 50%;
+            }
+        }
+    }
+
+    section {
+        &.design {
+            background: $white;
+        }
+
+        > aside {
+            background: $background;
+            padding: 10px 20px;
+            border-radius: 3px;
+            display: inline-block;
+            border: 2px solid darken($background, 2%);
+
+            h6 {
+                color: $mint;
+                margin-bottom: 5px;
+            }
+
+            &.design-principle {
+                h6 {
+                    border-bottom: 1px solid darken($background, 5%);
+                    padding-bottom: 8px;
+
+                    span {
+                        font-weight: 300;
+                    }
+                }
+
+                .hint {
+                    display: block;
+                    color: darken($background, 50%);
+                    margin: 5px 0;
+                    padding: 10px;
+                    font-size: 0.9em;
+                    border-radius: 3px;
+                    background: darken($background, 5%);
+                    border: 1px solid darken($background, 10%);
+
+                    i {
+                        margin-right: 10px;
+                    }
+
+                    > span {
+                        display: block;
+                    }
+
+                    .link {
+                        display: block;
+                        margin-top: 10px;
+                        font-weight: 400;
+
+                        strong {
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .accepted,
+    .not-accepted {
+        display: block;
+        margin-top: 15px;
+    }
+
+    .not-accepted {
+        color: $negative;
+    }
+
+    .accepted {
+        color: $success;
+    }
+    // Custom page element initial display reset
+    home,
+    layout,
+    typography,
+    iconography,
+    color {
+        display: block;
+
+        & > header {
+            background: $off-white;
+        }
+
+        & > section.design.container {
+            article {
+                margin: 80px 0;
+                // TODO: remove this
+            }
+        }
+    }
+    // DEMO STYLES
+    // Custom page element initial display reset
+    from-demo,
+    modal-demo,
+    switch-demo,
+    tooltip-demo,
+    buttons-demo {
+        display: block;
+    }
+}

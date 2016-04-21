@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="230px" height="229px" viewBox="0 0 230 229" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Typography - Page Icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Typography---Page-Icon" sketch:type="MSArtboardGroup">
+            <g id="Group" sketch:type="MSLayerGroup" transform="translate(25.000000, 15.000000)">
+                <path
+                    d="M47,173.149834 L47,31 L93.4089844,31 C108.259934,31 119.886489,34.2054988 128.289,40.6165925 C136.691511,47.0276862 140.892703,56.6441826 140.892703,69.46637 C140.892703,75.7798329 138.873525,81.4260668 134.835109,86.4052411 C130.796693,91.3844154 125.48821,95.0780612 118.9095,97.4862893 C127.507418,99.3087322 134.26515,103.506797 139.182898,110.080608 C144.100647,116.65442 146.559484,124.302057 146.559484,133.023748 C146.559484,146.041197 142.342008,155.983125 133.90693,162.849829 C125.471851,169.716534 114.024416,173.149834 99.5642812,173.149834 L47,173.149834 Z M66.2475156,106.468284 L66.2475156,158.114756 L99.5642813,158.114756 C108.292471,158.114756 115.099054,155.950637 119.984234,151.622335 C124.869415,147.294034 127.311969,141.159653 127.311969,133.219009 C127.311969,124.887841 125.276507,118.346671 121.205523,113.595302 C117.13454,108.843933 110.865318,106.468284 102.397672,106.468284 L66.2475156,106.468284 Z M66.2475156,91.4332057 L97.4148125,91.4332057 C104.579744,91.4332057 110.409306,89.4643461 114.903672,85.5265677 C119.398038,81.5887893 121.645188,76.1052711 121.645188,69.0758485 C121.645188,61.3955535 119.218917,55.6516902 114.366305,51.8440863 C109.513692,48.0364824 102.527988,46.132709 93.4089844,46.132709 L66.2475156,46.132709 L66.2475156,91.4332057 Z"
+                    id="B" fill="#305677" sketch:type="MSShapeGroup"></path>
+                <path d="M47.028,0.675496689 L47.028,203.437059" id="Line" stroke="#BE458D" stroke-linecap="square"
+                      sketch:type="MSShapeGroup"></path>
+                <path d="M66.028,0.675496689 L66.028,203.437059" id="Line" stroke="#BE458D" stroke-linecap="square"
+                      sketch:type="MSShapeGroup"></path>
+                <path d="M183.214844,91 L0,91" id="Line-Copy" stroke="#BE458D" stroke-linecap="square"
+                      sketch:type="MSShapeGroup"></path>
+                <path d="M183.214844,158 L0,158" id="Line-Copy-2" stroke="#BE458D" stroke-linecap="square"
+                      sketch:type="MSShapeGroup"></path>
+                <path d="M183.214844,173 L0,173" id="Line-Copy-3" stroke="#BE458D" stroke-linecap="square"
+                      sketch:type="MSShapeGroup"></path>
+                <path d="M183.214844,107 L0,107" id="Line-Copy-4" stroke="#BE458D" stroke-linecap="square"
+                      sketch:type="MSShapeGroup"></path>
+                <path d="M183.214844,46 L0,46" id="Line-Copy-5" stroke="#BE458D" stroke-linecap="square"
+                      sketch:type="MSShapeGroup"></path>
+                <path d="M183.214844,31 L0,31" id="Line-Copy-8" stroke="#BE458D" stroke-linecap="square"
+                      sketch:type="MSShapeGroup"></path>
+                <ellipse id="Oval-1" stroke="#BE458D" sketch:type="MSShapeGroup" cx="109" cy="66.5757279" rx="32"
+                         ry="31.9761746"></ellipse>
+                <ellipse id="Oval-1-Copy" stroke="#BE458D" sketch:type="MSShapeGroup" cx="108.939999" cy="133.971707"
+                         rx="38" ry="37.9717074"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>

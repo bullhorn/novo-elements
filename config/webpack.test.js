@@ -48,7 +48,14 @@ module.exports = {
             // Eslint loader support for *.js files
             //
             // See: https://github.com/MoOx/eslint-loader
-            { test: /\.js$/, loader: 'eslint-loader', exclude: [helpers.root('node_modules'), helpers.root('config')] },
+            {
+                test: /\.js$/,
+                loader: 'eslint-loader',
+                exclude: [
+                    helpers.root('node_modules'),
+                    helpers.root('config')
+                ]
+            },
 
             // Source map loader support for *.js files
             // Extracts SourceMaps for source files that as added as sourceMappingURL comment.
@@ -56,7 +63,7 @@ module.exports = {
             // See: https://github.com/webpack/source-map-loader
             {
                 test: /\.js$/,
-                loader: "source-map-loader",
+                loader: 'source-map-loader',
                 exclude: [
                     // these packages have problems with their sourcemaps
                     helpers.root('node_modules/rxjs')
@@ -77,7 +84,10 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel',
-                exclude: [/\.e2e\.js$/, helpers.root('node_modules')]
+                exclude: [
+                    /\.e2e\.js$/,
+                    helpers.root('node_modules')
+                ]
             },
 
             // Json loader support for *.json files.
@@ -107,7 +117,8 @@ module.exports = {
             //
             // See: https://github.com/deepsweet/istanbul-instrumenter-loader
             {
-                test: /\.js$/, loader: 'istanbul-instrumenter-loader',
+                test: /\.js$/,
+                loader: 'istanbul-instrumenter-loader',
                 include: helpers.root('src'),
                 exclude: [
                     /\.(e2e|spec)\.js$/,

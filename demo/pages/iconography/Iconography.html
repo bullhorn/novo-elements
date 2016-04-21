@@ -1,0 +1,162 @@
+<header class="design container">
+    <div>
+        <h1 class="title">Iconography</h1>
+        <h2 class="sub-title">Certified Pixel-Perfect</h2>
+
+        <p class="description">
+            Icons are used to represent an action or concept through the most simplistic imagery possible. Icons give additional context to written material, allowing the user to quickly comprehend any given concept. The icons are designed on a highly specific
+            grid to ensure maximum clarity even at a small size. Their design is friendly, human, and bold.
+        </p>
+    </div>
+    <img src="assets/images/IconographyPageIcon.svg" alt=""/>
+</header>
+<section class="design container">
+    <h2>Icons with Typography</h2>
+    <p>
+        An icon will always have slightly larger dimensions than text when they are paired together. This ensures that the icon is visually the same size as the text and that it scales proportionally.
+    </p>
+
+    <article>
+        <h5>Base sizing</h5>
+        <p>Icons placed next to typography should alays follow this convention.</p>
+
+        <div class="base-sizing">
+            <div class="sizing-specs">
+                <span>Bullhorn Glyphicons</span>
+                <span><strong>Size: </strong>1.29em</span>
+                <span><strong>Padding: </strong>.25em</span>
+                <span><strong>Border Radius: </strong>.625em</span>
+            </div>
+            <div class="sizing-demo">
+                <h1><i class="bhi-company"></i>Company Name</h1>
+            </div>
+        </div>
+    </article>
+
+    <article class="entities">
+        <h5>Padding</h5>
+        <p>
+            Icons should have sufficient padding when followed by text.
+        </p>
+
+        <div class="padding">
+            <div>
+                <h4><i class="bhi-circle"></i>Alice Hughes</h4>
+                <h6><i class="bhi-location"></i>Boston, MA</h6>
+                <span class="not-accepted"><i class="bhi-close-o"></i>I feel squished</span>
+            </div>
+            <div>
+                <h4><i class="bhi-circle"></i>Alice Hughes</h4>
+                <h6><i class="bhi-location"></i>Boston, MA</h6>
+                <span class="accepted"><i class="bhi-check"></i>Much better</span>
+            </div>
+        </div>
+    </article>
+
+    <article>
+        <h2>Entity Icons</h2>
+        <h5>Standard Entity Icons</h5>
+        <p>Used with corresponding entity color.</p>
+
+        <div class="example standard-icon-row">
+            <div>
+                <i theme="entity" class="bhi-lead lead"></i>
+                <p>Lead</p>
+            </div>
+            <div>
+                <i theme="entity" class="bhi-person contact"></i>
+                <p>Contact</p>
+            </div>
+            <div>
+                <i theme="entity" class="bhi-company company"></i>
+                <p>Company</p>
+            </div>
+            <div>
+                <i theme="entity" class="bhi-candidate candidate"></i>
+                <p>Candidate</p>
+            </div>
+            <div>
+                <i theme="entity" class="bhi-opportunity opportunity"></i>
+                <p>Opportunity</p>
+            </div>
+            <div>
+                <i theme="entity" class="bhi-job job"></i>
+                <p>Job</p>
+            </div>
+            <div>
+                <i theme="entity" class="bhi-star placement"></i>
+                <p>Placement</p>
+            </div>
+        </div>
+        <pre><code>
+            &lt;i theme="entity" class="bhi-lead lead">&lt;/i&gt;
+            &lt;h6&gt;Lead&lt;/h6&gt;
+            &lt;i theme="entity" class="bhi-person contact"&gt;&lt;/i&gt;
+            &lt;h6&gt;Contact&lt;/h6&gt;
+            &lt;i theme="entity" class="bhi-company company"&gt;&lt;/i&gt;
+            &lt;h6&gt;Company&lt;/h6&gt;
+            &lt;i theme="entity" class="bhi-candidate candidate"&gt;&lt;/i&gt;
+            &lt;h6&gt;Candidate&lt;/h6&gt;
+            &lt;i theme="entity" class="bhi-opportunity opportunity"&gt;&lt;/i&gt;
+            &lt;h6&gt;Opportunity&lt;/h6&gt;
+            &lt;i theme="entity" class="bhi-job job"&gt;&lt;/i&gt;
+            &lt;h6&gt;Job&lt;/h6&gt;
+            &lt;i theme="entity" class="bhi-star placement"&gt;&lt;/i&gt;
+            &lt;h6&gt;Placement&lt;/h6&gt;
+        </code>
+        </pre>
+    </article>
+
+    <h2>Contained Icons</h2>
+    <h5>Scaling</h5>
+    <p>Make sure to scale the corner radius appropriately when enlarging or decreasing the size of the icon.</p>
+
+    <article class="contained-scaling">
+        <figure>
+            <img src="assets/images/IconographyScalingDont.svg" alt=""/>
+            <figcaption class="not-accepted"><i class="bhi-close-o"></i>That doesn't look like a rectangle</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/images/IconographyScalingDo.svg" alt=""/>
+            <figcaption class="accepted"><i class="bhi-check"></i>Always maintain the proportions</figcaption>
+        </figure>
+    </article>
+
+    <h5>Padding</h5>
+    <p>To preserve readability, icons should have sufficient padding from the edges of their containers. Additionally, the icons should be visually centered in their containers.</p>
+
+    <article class="contained-padding">
+        <figure>
+            <img src="assets/images/IconographyPaddingDont.svg" alt=""/>
+            <figcaption class="not-accepted"><i class="bhi-close-o"></i>It's getting crowded in here</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/images/IconographyPaddingDo.svg" alt=""/>
+            <figcaption class="accepted"><i class="bhi-check"></i>It's good to have some breathing room</figcaption>
+        </figure>
+    </article>
+
+    <article>
+        <h5>Examples</h5>
+
+        <div class="example contained-icon-row">
+            <h1><i theme="contained" class="bhi-lead lead"></i>Heading One</h1>
+            <h2><i theme="contained" class="bhi-person contact"></i>Heading Two</h2>
+            <h3><i theme="contained" class="bhi-company company"></i>Heading Three</h3>
+            <h4><i theme="contained" class="bhi-candidate candidate"></i>Heading Four</h4>
+            <h5><i theme="contained" class="bhi-opportunity opportunity"></i>Heading Five</h5>
+            <h6><i theme="contained" class="bhi-job job"></i>Heading Six</h6>
+            <!-- <p><i theme="contained" class="bhi-star placement"></i>Body</p> -->
+        </div>
+        <pre><code class="hljs xml">
+            &lt;h1&gt;&lt;i theme="contained" class="bhi-lead lead"&gt;&lt;/i&gt;Heading One&lt;/h1&gt;
+            &lt;h2&gt;&lt;i theme="contained" class="bhi-person contact"&gt;&lt;/i&gt;Heading Two&lt;/h2&gt;
+            &lt;h3&gt;&lt;i theme="contained" class="bhi-company company"&gt;&lt;/i&gt;Heading Three&lt;/h3&gt;
+            &lt;h4&gt;&lt;i theme="contained" class="bhi-candidate candidate"&gt;&lt;/i&gt;Heading Four&lt;/h4&gt;
+            &lt;h5&gt;&lt;i theme="contained" class="bhi-opportunity opportunity"&gt;&lt;/i&gt;Heading Five&lt;/h5&gt;
+            &lt;h6&gt;&lt;i theme="contained" class="bhi-job job"&gt;&lt;/i&gt;Heading Six&lt;/h6&gt;
+            <!-- &lt;p&gt;&lt;i theme="contained" class="bhi-star placement"&gt;&lt;/i&gt;Body&lt;/p&gt; -->
+        </code>
+        </pre>
+    </article>
+</section>

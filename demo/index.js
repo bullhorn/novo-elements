@@ -1,22 +1,13 @@
-import { Component } from 'angular2/core';
-import { CORE_DIRECTIVES } from 'angular2/common';
-import { bootstrap } from 'angular2/platform/browser';
+import { bootstrap, ELEMENT_PROBE_PROVIDERS } from 'angular2/platform/browser';
+import { provide } from 'angular2/core';
+import { ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy } from 'angular2/router';
+import 'rxjs/add/operator/map';
 
-import { Test } from '../src/novo-elements';
+import { DemoApp } from './pages/app/App';
+import './index.scss';
 
-import '../src/novo-elements.scss';
-
-@Component({
-    selector: 'app',
-    template: `
-    DEMO :) -- <test-cmp></test-cmp>
-    `,
-    directives: [
-        CORE_DIRECTIVES,
-        Test
-    ]
-})
-export class Demo {
-}
-
-bootstrap(Demo);
+bootstrap(DemoApp, [
+    ...ROUTER_PROVIDERS,
+    ...ELEMENT_PROBE_PROVIDERS,
+    provide(LocationStrategy, { useClass: HashLocationStrategy })
+]).catch(err => console.error(err)); // eslint-disable-line

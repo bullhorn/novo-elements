@@ -13,6 +13,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
  */
 const METADATA = {
     name: pkg.name,
+    version: pkg.version,
     title: 'Demo',
     baseUrl: '/'
 };
@@ -158,8 +159,8 @@ module.exports = {
             // See: https://github.com/jtangelder/sass-loader
             {
                 test: /\.scss$/,
-                loaders: ['style', 'css', 'autoprefixer?' + JSON.stringify(autoprefixerOptions), 'sass']
-            },
+                loaders: ['style', 'css?sourceMap', 'autoprefixer?' + JSON.stringify(autoprefixerOptions), 'sass?sourceMap']
+            }
         ]
     },
 
