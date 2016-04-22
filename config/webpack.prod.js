@@ -1,16 +1,13 @@
-var helpers = require('./helpers'); // Helper: root(), and rootDir() are defined at the bottom
-var webpackMerge = require('webpack-merge'); //Used to merge webpack configs
-var commonConfig = require('./webpack.common.js'); //The settings that are common to prod and dev
+const helpers = require('./helpers'); // Helper: root(), and rootDir() are defined at the bottom
+const webpackMerge = require('webpack-merge'); //Used to merge webpack configs
+const commonConfig = require('./webpack.common.js'); //The settings that are common to prod and dev
 
 /**
  * Webpack Plugins
  */
-var ProvidePlugin = require('webpack/lib/ProvidePlugin');
-var DefinePlugin = require('webpack/lib/DefinePlugin');
-var DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
-var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
-var CompressionPlugin = require('compression-webpack-plugin');
-var WebpackMd5Hash = require('webpack-md5-hash');
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const WebpackMd5Hash = require('webpack-md5-hash');
 
 /**
  * Webpack Constants
@@ -69,20 +66,11 @@ module.exports = webpackMerge(commonConfig, {
     //
     // See: http://webpack.github.io/docs/configuration.html#plugins
     plugins: [
-
         // Plugin: WebpackMd5Hash
         // Description: Plugin to replace a standard webpack chunkhash with md5.
         //
         // See: https://www.npmjs.com/package/webpack-md5-hash
         new WebpackMd5Hash(),
-
-        // Plugin: DedupePlugin
-        // Description: Prevents the inclusion of duplicate code into your bundle
-        // and instead applies a copy of the function at runtime.
-        //
-        // See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-        // See: https://github.com/webpack/docs/wiki/optimization#deduplication
-        new DedupePlugin(),
 
         // Plugin: DefinePlugin
         // Description: Define free variables.
@@ -96,26 +84,8 @@ module.exports = webpackMerge(commonConfig, {
             'ENV': JSON.stringify(METADATA.ENV),
             'process.env': {
                 'ENV': JSON.stringify(METADATA.ENV),
-                'NODE_ENV': JSON.stringify(METADATA.ENV),
+                'NODE_ENV': JSON.stringify(METADATA.ENV)
             }
-        }),
-
-        // Plugin: UglifyJsPlugin
-        // Description: Minimize all JavaScript output of chunks.
-        // Loaders are switched into minimizing mode.
-        //
-        // See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-        // NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
-        new UglifyJsPlugin({
-            beautify: false,
-            mangle: {
-                screw_ie8: true,
-                keep_fnames: true
-            },
-            compress: {
-                screw_ie8: true
-            },
-            comments: false
         }),
 
         // Plugin: CompressionPlugin

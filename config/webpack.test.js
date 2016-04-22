@@ -1,10 +1,9 @@
-var helpers = require('./helpers');
+const helpers = require('./helpers');
 
 /**
  * Webpack Plugins
  */
-var ProvidePlugin = require('webpack/lib/ProvidePlugin');
-var DefinePlugin = require('webpack/lib/DefinePlugin');
+const DefinePlugin = require('webpack/lib/DefinePlugin');
 
 /**
  * Webpack Constants

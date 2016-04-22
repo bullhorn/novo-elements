@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 
-const template = require('./Home.html');
+import template from './Home.html';
 
 @Component({
     selector: 'home',

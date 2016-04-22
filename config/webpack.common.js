@@ -1,12 +1,12 @@
-var webpack = require('webpack');
-var helpers = require('./helpers');
-var pkg = require('../package.json');
+const webpack = require('webpack');
+const helpers = require('./helpers');
+const pkg = require('../package.json');
 
 /**
  * Webpack Plugins
  */
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /**
  * Webpack Constants
@@ -21,7 +21,7 @@ const METADATA = {
 /**
  * AutoPrefixer Options
  */
-var autoprefixerOptions = {
+const autoprefixerOptions = {
     browsers: [
         'last 2 versions',
         'iOS >= 7',
@@ -94,7 +94,14 @@ module.exports = {
             // Eslint loader support for *.js files
             //
             // See: https://github.com/MoOx/eslint-loader
-            { test: /\.js$/, loader: 'eslint-loader', exclude: [helpers.root('node_modules'), helpers.root('config')] },
+            {
+                test: /\.js$/,
+                loader: 'eslint-loader',
+                exclude: [
+                    helpers.root('node_modules'),
+                    helpers.root('config')
+                ]
+            },
 
             // Source map loader support for *.js files
             // Extracts SourceMaps for source files that as added as sourceMappingURL comment.
@@ -122,8 +129,11 @@ module.exports = {
             // See: https://github.com/babel/babel-loader
             {
                 test: /\.js$/,
-                loader: 'babel',
-                exclude: [/\.spec\.js$/, helpers.root('node_modules')]
+                loader: 'babel-loader',
+                exclude: [
+                    /\.spec\.js$/,
+                    helpers.root('node_modules')
+                ]
             },
 
             // Json loader support for *.json files.
@@ -150,7 +160,9 @@ module.exports = {
             {
                 test: /\.html$/,
                 loader: 'raw-loader',
-                exclude: [helpers.root('demo/index.html')]
+                exclude: [
+                    helpers.root('demo/index.html')
+                ]
             },
 
             // SCSS/Sass loader support for *.scss / .sass
@@ -159,7 +171,12 @@ module.exports = {
             // See: https://github.com/jtangelder/sass-loader
             {
                 test: /\.scss$/,
-                loaders: ['style', 'css?sourceMap', 'autoprefixer?' + JSON.stringify(autoprefixerOptions), 'sass?sourceMap']
+                loaders: [
+                    'style',
+                    'css?sourceMap',
+                    `autoprefixer?${JSON.stringify(autoprefixerOptions)}`,
+                    'sass?sourceMap'
+                ]
             }
         ]
     },

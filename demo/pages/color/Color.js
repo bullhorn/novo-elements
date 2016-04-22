@@ -3,7 +3,7 @@ import { CORE_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 // import { Toaster, BhToast } from 'bh-elements';
 
-const template = require('./Color.html');
+import template from './Color.html';
 
 @Component({
     selector: 'color',

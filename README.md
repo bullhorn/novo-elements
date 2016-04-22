@@ -41,13 +41,13 @@ Depending on what system you are using (SystemJS, Webpack, etc..) the setup will
     System.config({
         defaultJSExtensions: true,
         paths: {
-            'novo-elements': '/node_modules/novo-elements/lib/novo-elements.ks',
+            'novo-elements': '/node_modules/novo-elements/lib/novo-elements.js',
             'moment': '/node_modules/moment/moment.js',
             ...
         }
     });
     
-**Note:** You can forgo adding the mappings and just include the `novo-elements/bundles/novo-elements.js` into your `index.html` page instead.
+**Note:** You can forgo adding the mappings and just include `novo-elements/bundles/novo-elements.js` as a script tag into your `index.html` page instead.
     
 ## Build/Release/Publish
 
