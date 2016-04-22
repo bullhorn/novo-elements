@@ -145,9 +145,9 @@ nav.main-nav {
     }
 
     @for $i from 1 through 30 {
-        $number: ($i - 1) * 100;
+        $number: ($i - 1);
         .menu-item:nth-child(#{$i}).current ~ .menu-line {
-            transform: translate3d(0, #{ $number }%, 0);
+            transform: translate3d(0, percentage($number), 0);
         }
     }
 }
