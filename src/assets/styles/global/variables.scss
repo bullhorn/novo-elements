@@ -165,17 +165,17 @@ $easing-curves: (
     )
 );
 
-@mixin ease($target, $curve-name) {
-    @function map-deep-get($map, $keys...) {
-        @each $key in $keys {
-            $map: map-get($map, $key);
-        }
-
-        @return $map;
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
     }
+
+    @return $map;
+}
+
+@mixin ease($target, $curve-name) {
     $duration: map-deep-get($easing-curves, $curve-name, "duration");
     $curve: map-deep-get($easing-curves, $curve-name, "curve");
-
     transition: #{$target $duration $curve};
 }
 
