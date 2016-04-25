@@ -6,6 +6,9 @@ npm-debug.log
 # WebStorm
 .idea/
 
+# Atom
+.jsbeautifyrc
+
 # ignore build and dist for now
 bundles/
 dist/
