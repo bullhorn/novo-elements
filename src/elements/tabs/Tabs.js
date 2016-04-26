@@ -134,7 +134,6 @@ export class NovoTabLink {
 
 @Component({
     selector: 'novo-nav-outlet',
-    inputs: [],
     directives: [CORE_DIRECTIVES],
     template: `
         <ng-content></ng-content>

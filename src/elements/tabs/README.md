@@ -1,20 +1,39 @@
-// TODO - jgodi - update README (like tooltip/README)
 # Tabs
-Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets. Tabs in Bullhorn have two different themes; A 'color' theme for tabbed navigation on a colored background, and a 'white' theme for tabs on a white background.
 
 ## Usage
-
 ```javascript
 export { NOVO_TAB_ELEMENTS } from './tabs/Tabs';
 ```
 
-##### BhTabs Properties
-  - `theme : String`
-    * theme of the tabs
+##### NovoNav Properties
+- `'theme' : String`
+  * Defines the theme of the tabs
+- `'direction' : String`
+  * Defines the direction of the tabs
+- `'outlet' : String`
+  * Used when the nav _is not_ being used as a router
+  * Defines which container element will function as the content by using an Angular2 `Local Reference`
+- `'router' : Bool`
+  * Specifies that the nav _is_ being used as a router
 
-##### BhTab Properties
-  - `tab-title : String`
-      * tab header text
+#### NovoTab Properties
+- `'active': String`
+  * Defines which tab is active by adding `.active` class
 
-##### BhTab Events
-  TODO - jgodi - add select/deselect events
+#### NovoTabButton Properties
+- `'active': String`
+  * Defines which tab is active by adding `.active` class
+
+#### NovoTabLink Properties
+- `'active': String`
+  * Defines which tab is active by adding `.active` class
+
+#### NovoNavContent Properties
+- `'active': String`
+  * Defines which tab is active by adding `.active` class
+
+#### NovoNavHeader Properties
+- `'active': String`
+  * Defines which tab is active by adding `.active` class
+- `'for': String`
+  * Defines which container element will function as the content by using an Angular2 `Local Reference`
