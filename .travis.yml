@@ -28,6 +28,7 @@ script:
   - npm run e2e
 
 after_success:
+  - test $TRAVIS_BRANCH = "master" && npm run sca $GALAXY_URL
   - npm install codeclimate-test-reporter -g
   - codeclimate-test-reporter < coverage/lcov.info
 
