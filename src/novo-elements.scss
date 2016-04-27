@@ -4,27 +4,24 @@
 @import "./assets/styles/global/functions";
 @import "./assets/styles/global/variables";
 @import "./assets/styles/global/include-media";
-@import "./assets/styles/global/flex-grid";
+@import "./assets/styles/global/flex-grid"; // Plugins (Third-Party-Libraries)
 
-// Plugins (Third-Party-Libraries)
 // --------------------------------------------------
 //@import "hint";
-
 // Content
 // --------------------------------------------------
-@import "./assets/styles/content/typography";
+@import "./assets/styles/content/typography"; // Components
 
-// Components
 // --------------------------------------------------
-
 // Elements
 // --------------------------------------------------
+
 //@import "./elements/chips/BhChips";
 //@import "./elements/dropdown/BhDropdown";
 //@import "./elements/select/BhSelect";
 //@import "./elements/modal/BhModal";
 //@import "./elements/list/BhList";
-//@import "./elements/tabs/BhTabs";
+@import "./elements/tabs/Tabs";
 //@import "./elements/tooltip/BhTooltip";
 //@import "./elements/table/Table";
 //@import "./elements/table/extras/pagination/Pagination";

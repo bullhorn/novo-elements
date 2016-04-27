@@ -2,7 +2,7 @@ import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES, RouteConfig, Router } from 'angular2/router';
 
-import { Home, ButtonDemo, Layout, Typography, Iconography, Color } from './../pages';
+import { Home, ButtonDemo, TabsDemo, Layout, Typography, Iconography, Color } from './../pages';
 
 const template = require('./App.html');
 
@@ -21,6 +21,7 @@ const template = require('./App.html');
 
     // Element/Component/Service/etc.. Demos
     { path: '/button', component: ButtonDemo, name: 'Button' },
+    { path: '/tabs', component: TabsDemo, name: 'Tabs' },
 
     // Catch-all and redirect back to index
     { path: '/**', redirectTo: ['Home'] }
@@ -39,8 +40,8 @@ export class DemoApp {
         ];
 
         this.componentRoutes = [
-            { name: 'Button', path: '/button' }
-            // { name: 'Tabs', path: '/tabs' },
+            { name: 'Button', path: '/button' },
+            { name: 'Tabs', path: '/tabs' }
             // { name: 'Form', path: '/form' },
             // { name: 'Dropdown', path: '/dropdowns' },
             // { name: 'Tooltip', path: '/tooltips' },
