@@ -11,7 +11,9 @@ import {
     LoadingDemo,
     ButtonDemo,
     TabsDemo,
-    CardDemo
+    CardDemo,
+    UtilsDemo,
+    PipesDemo
 } from './../pages';
 
 const template = require('./App.html');
@@ -35,6 +37,10 @@ const template = require('./App.html');
     { path: '/loading', component: LoadingDemo, name: 'Loading' },
     { path: '/cards', component: CardDemo, name: 'Cards' },
 
+    // Utils
+    { path: '/pipes', component: PipesDemo, name: 'Pipes' },
+    { path: '/utils', component: UtilsDemo, name: 'Utils' },
+
     // Catch-all and redirect back to index
     { path: '/**', redirectTo: ['Home'] }
 ])
@@ -56,6 +62,11 @@ export class DemoApp {
             { name: 'Tabs', path: '/tabs' },
             { name: 'Loading', path: '/loading' },
             { name: 'Cards', path: '/cards' }
+        ];
+
+        this.utilRoutes = [
+            { name: 'Pipes', path: '/pipes' },
+            { name: 'Utils', path: '/utils' }
         ];
 
         router.subscribe(() => {
