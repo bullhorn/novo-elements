@@ -1,3 +1,13 @@
+<a name="0.0.2"></a>
+## [0.0.2](https://github.com/bullhorn/novo-elements/compare/v0.0.1...v0.0.2) (2016-04-28)
+
+
+### Features
+
+* **cards,loading:** Implementing a Card and Loading element, style cleanup. ([d2e9045](https://github.com/bullhorn/novo-elements/commit/d2e9045))
+
+
+
 <a name="0.0.1"></a>
 ## 0.0.1 (2016-04-27)
 
