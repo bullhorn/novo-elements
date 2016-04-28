@@ -5,3 +5,5 @@ export * from './typography/Typography';
 export * from './iconography/Iconography';
 export * from './layout/Layout';
 export * from './home/Home';
+export * from './loading/LoadingDemo';
+export * from './card/CardDemo';

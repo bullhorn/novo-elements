@@ -1,4 +1,4 @@
-describe('Component: Tabs', () => {
+describe('Element: Tabs', () => {
     beforeEach(() => {
         browser.get('/#/tabs');
     });

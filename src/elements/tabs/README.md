@@ -1,9 +1,7 @@
 # Tabs
 
 ## Usage
-```javascript
-export { NOVO_TAB_ELEMENTS } from './tabs/Tabs';
-```
+    export { NOVO_TAB_ELEMENTS } from 'novo-elements';
 
 ##### NovoNav Properties
 - `'theme' : String`

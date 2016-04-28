@@ -1,42 +1,23 @@
+// --------------------------------------------------
 // Global
 // --------------------------------------------------
 @import "./assets/styles/global/reset";
 @import "./assets/styles/global/functions";
 @import "./assets/styles/global/variables";
 @import "./assets/styles/global/include-media";
-@import "./assets/styles/global/flex-grid"; // Plugins (Third-Party-Libraries)
-
+@import "./assets/styles/global/flex-grid";
+// --------------------------------------------------
+// Plugins (Third-Party-Libraries)
 // --------------------------------------------------
 //@import "hint";
+// --------------------------------------------------
 // Content
 // --------------------------------------------------
-@import "./assets/styles/content/typography"; // Components
-
+@import "./assets/styles/content/typography";
 // --------------------------------------------------
 // Elements
 // --------------------------------------------------
-
-//@import "./elements/chips/BhChips";
-//@import "./elements/dropdown/BhDropdown";
-//@import "./elements/select/BhSelect";
-//@import "./elements/modal/BhModal";
-//@import "./elements/list/BhList";
 @import "./elements/tabs/Tabs";
-//@import "./elements/tooltip/BhTooltip";
-//@import "./elements/table/Table";
-//@import "./elements/table/extras/pagination/Pagination";
-//@import "./elements/calendar/BhCalendar";
-//@import "./elements/form/BhForm";
-//@import "./elements/picker/BhPicker";
-//@import "./elements/drawer/BhDrawer";
-//@import "./elements/switch/BhSwitch";
 @import "./elements/button/Button";
-//@import "./elements/loading/BhLoading";
-//@import "./elements/toast/BhToast";
-//@import "./elements/list/BhList";
-//@import "./elements/dragula/Dragula";
-//@import "./elements/cards/BhCard";
-//@import "./elements/cards/BhCardExtras";
-//@import "./elements/chart/BhChart";
-//@import "./elements/email/Email";
-//@import "./elements/header/NovoHeader";
+@import "./elements/card/Card";
+@import "./elements/loading/Loading";

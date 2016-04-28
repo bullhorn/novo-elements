@@ -2,7 +2,17 @@ import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES, RouteConfig, Router } from 'angular2/router';
 
-import { Home, ButtonDemo, TabsDemo, Layout, Typography, Iconography, Color } from './../pages';
+import {
+    Home,
+    Layout,
+    Typography,
+    Iconography,
+    Color,
+    LoadingDemo,
+    ButtonDemo,
+    TabsDemo,
+    CardDemo
+} from './../pages';
 
 const template = require('./App.html');
 
@@ -22,6 +32,8 @@ const template = require('./App.html');
     // Element/Component/Service/etc.. Demos
     { path: '/button', component: ButtonDemo, name: 'Button' },
     { path: '/tabs', component: TabsDemo, name: 'Tabs' },
+    { path: '/loading', component: LoadingDemo, name: 'Loading' },
+    { path: '/cards', component: CardDemo, name: 'Cards' },
 
     // Catch-all and redirect back to index
     { path: '/**', redirectTo: ['Home'] }
@@ -41,22 +53,9 @@ export class DemoApp {
 
         this.componentRoutes = [
             { name: 'Button', path: '/button' },
-            { name: 'Tabs', path: '/tabs' }
-            // { name: 'Form', path: '/form' },
-            // { name: 'Dropdown', path: '/dropdowns' },
-            // { name: 'Tooltip', path: '/tooltips' },
-            // { name: 'Calendar', path: '/calendar' },
-            // { name: 'Table', path: '/table' },
-            // { name: 'Drawer', path: '/drawer' },
-            // { name: 'Switch', path: '/switch' },
-            // { name: 'Modal', path: '/modal' },
-            // { name: 'Toast', path: '/toast' },
-            // { name: 'Loading', path: '/loading' },
-            // { name: 'Dragula', path: '/dragula' },
-            // { name: 'Cards', path: '/cards' },
-            // { name: 'CardExamples', path: '/card-examples' },
-            // { name: 'Chart', path: '/chart' },
-            // { name: 'Headers', path: '/headers' }
+            { name: 'Tabs', path: '/tabs' },
+            { name: 'Loading', path: '/loading' },
+            { name: 'Cards', path: '/cards' }
         ];
 
         router.subscribe(() => {
