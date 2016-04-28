@@ -1,0 +1,24 @@
+loading-demo {
+    div.example {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        header {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &.color-container {
+                background: $ocean;
+            }
+        }
+    }
+    novo-loading {
+        &[theme="circle"] {
+            cursor: pointer;
+        }
+    }
+}

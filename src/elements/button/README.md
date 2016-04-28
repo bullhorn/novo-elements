@@ -2,10 +2,7 @@
 A button clearly indicates a point of action for the user. Bullhorn buttons come in a variety of themes, custom tailored to fit your use-case.
 
 ## Usage
-
-```javascript
-import { NOVO_BUTTON_ELEMENTS } from 'novo-elements';
-```
+    import { NOVO_BUTTON_ELEMENTS } from 'novo-elements';
 
 ##### Properties
 - `'theme' : String`

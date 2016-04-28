@@ -1,0 +1,68 @@
+novo-card-best-time {
+    label {
+        text-transform: uppercase;
+        display: block;
+        color: lighten($grey, 10%);
+        border-bottom: 1px solid lighten($grey, 10%);
+        padding-bottom: 3px;
+        margin-bottom: 10px;
+    }
+
+    .best-time {
+        display: flex;
+        flex-flow: row nowrap;
+
+        > i {
+            font-size: 35px;
+            margin-right: 10px;
+
+            &.morning {
+                &:before {
+                    vertical-align: inherit;
+                }
+            }
+
+            &.day {
+                &:before {
+                    vertical-align: inherit;
+                }
+            }
+
+            &.evening {
+                font-size: 30px;
+            }
+        }
+
+        .time {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+            padding-left: 5px;
+            text-transform: uppercase;
+
+            &.morning {
+                color: $aqua;
+            }
+
+            &.day {
+                color: $sunflower;
+            }
+
+            &.evening {
+                color: $lavender;
+            }
+        }
+
+        .days {
+            .day {
+                padding: 3px 5px;
+
+                &.active {
+                    background-color: $positive;
+                    color: $white;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+}

@@ -1,7 +1,9 @@
+// --------------------------------------------------
 // Plugins (Third-Party-Libraries)
 // --------------------------------------------------
 @import "../src/novo-elements";
 
+// --------------------------------------------------
 // Global
 // --------------------------------------------------
 @import "assets/styles/reset";
@@ -11,6 +13,7 @@
 @import "assets/styles/highlight";
 @import "assets/styles/media";
 
+// --------------------------------------------------
 // Pages
 // --------------------------------------------------
 @import "pages/color/Color";
@@ -21,9 +24,14 @@
 @import "pages/button/ButtonDemo";
 @import "pages/tabs/TabsDemo";
 @import "pages/toast/ToastDemo";
+@import "pages/loading/LoadingDemo";
+@import "pages/card/CardDemo";
+@import "pages/pipes/Plural";
 
+// --------------------------------------------------
 // Shameful CSS is unrefactored, quick fixes.
 // Ideally nothing is in this file - but it's better
 // than mucking up other stylesheets without being
 // totally sure it's a good idea
+// --------------------------------------------------
 @import "assets/styles/shame";

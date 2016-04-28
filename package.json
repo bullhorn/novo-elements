@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
     "clean": "./node_modules/.bin/del bundles coverage lib dist",
@@ -9,6 +9,9 @@
     "compile:system": "./config/bundle-system.js",
     "prepublish": "npm run clean && npm run compile",
     "postpublish": "npm run deploy:gh-pages",
+    "lint": "eslint src demo",
+    "lint:save": "eslint src demo -f node_modules/static-code-analysis/formatters/eslint.js > ./coverage/eslint.json",
+    "loc": "sloc src/ --format json > ./coverage/sloc.json",
     "start": "webpack-dev-server --hot --inline --colors --display-error-details --display-cached",
     "test": "NODE_ENV=test ./node_modules/.bin/karma start",
     "test:watch": "NODE_ENV=test ./node_modules/.bin/karma start --single-run false --auto-watch true",
@@ -23,7 +26,9 @@
     "e2e": "protractor",
     "e2e:live": "npm run e2e -- --elementExplorer",
     "webdriver:update": "webdriver-manager update",
-    "webdriver:start": "webdriver-manager start"
+    "webdriver:start": "webdriver-manager start",
+    "presca": "npm run lint:save && npm run loc",
+    "sca": "sca"
   },
   "main": "lib/novo-elements.js",
   "keywords": [
@@ -98,7 +103,9 @@
     "raw-loader": "0.5.1",
     "require-dir": "0.3.0",
     "sass-loader": "^3.2.0",
+    "sloc": "^0.1.10",
     "source-map-loader": "0.1.5",
+    "static-code-analysis": "0.0.9",
     "style-loader": "^0.13.1",
     "systemjs-builder": "0.15.15",
     "typescript": "^1.8.10",
@@ -107,5 +114,19 @@
     "webpack-dev-server": "1.14.1",
     "webpack-md5-hash": "0.0.5",
     "webpack-merge": "^0.10.0"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "staticCodeAnalysis": {
+    "type": "javascript",
+    "public": true,
+    "locations": {
+      "eslint": "/coverage/eslint.json",
+      "sloc": "/coverage/sloc.json",
+      "karma-coverage": "/coverage/coverage.txt"
+    }
   }
 }

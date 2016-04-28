@@ -2,7 +2,20 @@ import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES, RouteConfig, Router } from 'angular2/router';
 
-import { Home, ButtonDemo, TabsDemo, ToastDemo, Layout, Typography, Iconography, Color } from './../pages';
+import {
+    Home,
+    Layout,
+    Typography,
+    Iconography,
+    Color,
+    LoadingDemo,
+    ButtonDemo,
+    TabsDemo,
+    ToastDemo,
+    CardDemo,
+    UtilsDemo,
+    PipesDemo
+} from './../pages';
 
 const template = require('./App.html');
 
@@ -23,6 +36,12 @@ const template = require('./App.html');
     { path: '/button', component: ButtonDemo, name: 'Button' },
     { path: '/tabs', component: TabsDemo, name: 'Tabs' },
     { path: '/toast', component: ToastDemo, name: 'Toast' },
+    { path: '/loading', component: LoadingDemo, name: 'Loading' },
+    { path: '/cards', component: CardDemo, name: 'Cards' },
+
+    // Utils
+    { path: '/pipes', component: PipesDemo, name: 'Pipes' },
+    { path: '/utils', component: UtilsDemo, name: 'Utils' },
 
     // Catch-all and redirect back to index
     { path: '/**', redirectTo: ['Home'] }
@@ -43,7 +62,9 @@ export class DemoApp {
         this.componentRoutes = [
             { name: 'Button', path: '/button' },
             { name: 'Tabs', path: '/tabs' },
-            { name: 'Toast', path: '/toast' }
+            { name: 'Toast', path: '/toast' },
+            { name: 'Loading', path: '/loading' },
+            { name: 'Cards', path: '/cards' }
             // { name: 'Form', path: '/form' },
             // { name: 'Dropdown', path: '/dropdowns' },
             // { name: 'Tooltip', path: '/tooltips' },
@@ -58,6 +79,11 @@ export class DemoApp {
             // { name: 'CardExamples', path: '/card-examples' },
             // { name: 'Chart', path: '/chart' },
             // { name: 'Headers', path: '/headers' }
+        ];
+
+        this.utilRoutes = [
+            { name: 'Pipes', path: '/pipes' },
+            { name: 'Utils', path: '/utils' }
         ];
 
         router.subscribe(() => {
