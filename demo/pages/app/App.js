@@ -2,7 +2,7 @@ import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES, RouteConfig, Router } from 'angular2/router';
 
-import { Home, ButtonDemo, TabsDemo, Layout, Typography, Iconography, Color } from './../pages';
+import { Home, ButtonDemo, TabsDemo, ToastDemo, Layout, Typography, Iconography, Color } from './../pages';
 
 const template = require('./App.html');
 
@@ -22,6 +22,7 @@ const template = require('./App.html');
     // Element/Component/Service/etc.. Demos
     { path: '/button', component: ButtonDemo, name: 'Button' },
     { path: '/tabs', component: TabsDemo, name: 'Tabs' },
+    { path: '/toast', component: ToastDemo, name: 'Toast' },
 
     // Catch-all and redirect back to index
     { path: '/**', redirectTo: ['Home'] }
@@ -41,7 +42,8 @@ export class DemoApp {
 
         this.componentRoutes = [
             { name: 'Button', path: '/button' },
-            { name: 'Tabs', path: '/tabs' }
+            { name: 'Tabs', path: '/tabs' },
+            { name: 'Toast', path: '/toast' }
             // { name: 'Form', path: '/form' },
             // { name: 'Dropdown', path: '/dropdowns' },
             // { name: 'Tooltip', path: '/tooltips' },
@@ -50,7 +52,6 @@ export class DemoApp {
             // { name: 'Drawer', path: '/drawer' },
             // { name: 'Switch', path: '/switch' },
             // { name: 'Modal', path: '/modal' },
-            // { name: 'Toast', path: '/toast' },
             // { name: 'Loading', path: '/loading' },
             // { name: 'Dragula', path: '/dragula' },
             // { name: 'Cards', path: '/cards' },
