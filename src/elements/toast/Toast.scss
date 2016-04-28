@@ -1,0 +1,291 @@
+novo-toast {
+    display: none;
+    position: fixed;
+    background: $navy;
+    z-index: 9999;
+    color: $white;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+
+    &.show {
+        display: block;
+    }
+}
+
+novo-toast.toast-container {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+}
+
+novo-toast.toast-container > .toast-icon {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    float: left;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    margin-right: 15px;
+
+    i {
+        position: relative;
+        top: 0;
+        font-size: 16px;
+        line-height: 16px;
+    }
+}
+
+novo-toast.toast-container .toast-content {
+    float: left;
+    width: calc(100% - 47px);
+
+    h5 + p {
+        top: 0;
+    }
+
+    p {
+        position: relative;
+        top: -1px;
+    }
+}
+
+novo-toast .toast-content > h5 {
+    display: block;
+    color: $white;
+    margin: 0 0 5px;
+    font-size: 14px;
+}
+
+novo-toast:not(.default) .toast-content > h5 {
+    color: $white;
+}
+
+novo-toast .toast-content > p {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+    max-width: inherit;
+
+    &.message-only {
+        top: 0;
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
+
+novo-toast.danger,
+novo-toast.info,
+novo-toast.success,
+novo-toast.warning {
+    i,
+    p {
+        color: $white;
+    }
+}
+
+novo-toast.success {
+    background: $grass;
+}
+
+novo-toast.info {
+    background: $ocean;
+}
+
+novo-toast.warning {
+    background: $sunflower;
+}
+
+novo-toast.danger {
+    background: $grapefruit;
+}
+
+novo-toast {
+    @each $analytics, $color in $analytics-colors {
+        &.#{$analytics} {
+            background: $color;
+        }
+    }
+    @each $entity, $color in $entity-colors {
+        &.#{$entity} {
+            background: $color;
+        }
+    }
+
+    &.text {
+        background: $dark;
+    }
+
+    &.background {
+        background: $off-white;
+
+        .toast-content > h5 {
+            color: $dark !important;
+        }
+
+        i,
+        p {
+            color: $dark;
+        }
+    }
+
+}
+
+novo-toast.fixedBottom,
+novo-toast.fixedTop {
+    left: 0;
+    right: 0;
+}
+
+novo-toast.fixedTop {
+    top: -100%;
+    padding-top: 20px;
+    @include ease( 'all', 'swift-ease-in-out');
+
+    &.animate {
+        padding-top: 20px;
+        top: -6px;
+    }
+}
+
+novo-toast.fixedBottom {
+    bottom: -100%;
+    padding-bottom: 20px;
+    @include ease( 'all', 'swift-ease-in-out');
+
+    &.animate {
+        padding-bottom: 20px;
+        bottom: -6px;
+    }
+}
+
+novo-toast[class*="growl"] {
+    border-radius: 3px;
+    max-width: 350px;
+
+    .toast-content h5 {
+        display: block;
+        color: #fff;
+        margin: 0 0 5px;
+        font-size: 14px;
+    }
+
+    .toast-content p {
+        font-size: 14px;
+        width: 100%;
+    }
+}
+
+novo-toast.growlBottomLeft,
+novo-toast.growlTopLeft {
+    left: -100%;
+    right: auto;
+    width: calc(100% - 30px);
+    @include ease( 'all', 'swift-ease-in-out');
+
+    &.animate {
+        left: 15px;
+    }
+}
+
+novo-toast.growlTopLeft,
+novo-toast.growlTopRight {
+    top: 15px;
+}
+
+novo-toast.growlBottomLeft,
+novo-toast.growlBottomRight {
+    bottom: 15px;
+}
+
+novo-toast.growlBottomRight,
+novo-toast.growlTopRight {
+    right: -100%;
+    left: auto;
+    width: calc(100% - 30px);
+    @include ease( 'all', 'swift-ease-in-out');
+
+    &.animate {
+        right: 15px;
+    }
+}
+
+novo-toast.growlTopLeft,
+novo-toast.growlTopRight {
+    @for $i from 2 through 100 {
+        &:nth-last-of-type(#{$i}) {
+            top: (25px * $i);
+            transform: scale(1-(1/25));
+            z-index: 100 - $i;
+            filter: brightness(1+(1/7));
+        }
+    }
+}
+
+novo-toast.growlBottomLeft,
+novo-toast.growlBottomRight {
+    @for $i from 2 through 100 {
+        &:nth-last-of-type(#{$i}) {
+            bottom: (25px * $i);
+            transform: scale(1-(1/25));
+            z-index: 100 - $i;
+            filter: brightness(1+(1/7));
+        }
+    }
+}
+
+novo-toast.growlBottomLeft,
+novo-toast.growlBottomRight,
+novo-toast.growlTopLeft,
+novo-toast.growlTopRight {
+    &:last-of-type {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    }
+}
+
+novo-toast.embedded.fixedBottom,
+novo-toast.embedded.fixedTop {
+    top: auto;
+    left: auto;
+    right: auto;
+    width: inherit;
+    margin: -1em -3em;
+
+    &.animate {
+        top: auto;
+    }
+}
+
+novo-toast + *:not(.toast-container) {
+    margin-top: 60px;
+}
+@media screen and (min-width: 350px) {
+    novo-toast[class*="growl-"] {
+        min-width: 350px;
+    }
+
+    novo-toast.growlBottomLeft,
+    novo-toast.growlTopLeft {
+        left: -100%;
+        right: auto;
+        @include ease( 'all', 'swift-ease-in-out');
+
+        &.animate {
+            left: 15px;
+        }
+    }
+
+    novo-toast.growlBottomRight,
+    novo-toast.growlTopRight {
+        right: -100%;
+        left: auto;
+        @include ease( 'all', 'swift-ease-in-out');
+
+        &.animate {
+            right: 15px;
+        }
+    }
+}

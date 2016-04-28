@@ -1,0 +1,24 @@
+toast-demo {
+    .example {
+        padding: 20px;
+    }
+
+    //radio-input {
+    //    flex-wrap: wrap;
+    //
+    //    > div {
+    //        margin-top: 5px;
+    //        margin-bottom: 5px;
+    //    }
+    //}
+
+    form {
+        > * {
+            display: block;
+        }
+
+        label {
+            padding: 10px 0;
+        }
+    }
+}
