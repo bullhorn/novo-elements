@@ -10,3 +10,4 @@ export * from './card/CardDemo';
 export * from './utils/UtilsDemo';
 export * from './pipes/PipesDemo';
 export * from './tooltip/TooltipDemo';
+export * from './drawer/DrawerDemo';
