@@ -1,4 +1,4 @@
-describe('Element: Loading', () => {
+describe('Element: Card', () => {
     beforeEach(() => {
         browser.get('/#/cards');
     });

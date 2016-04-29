@@ -181,6 +181,9 @@ module.exports = {
         ]
     },
 
+    // SCSS/Sass loader configuration
+    //
+    // See: https://github.com/jtangelder/sass-loader
     sassLoader: {
         includePaths: [
             helpers.root('node_modules/hint.css/src')
