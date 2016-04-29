@@ -3,9 +3,14 @@ describe('Component: NovoToast', () => {
         browser.get('/#/toast');
     });
 
-    it('should have <novo-toast>', () => {
-        let subject = element(by.css('demo-app novo-toast')).isPresent();
-        let result = true;
-        expect(subject).toEqual(result);
+    it('should fire <novo-toast>', () => {
+        // toast launcher button
+        let trigger = element(by.css('demo-app [data-automation-id="toast-trigger"]'));
+
+        // click button
+        trigger.click().then(() => {
+            let subject = element(by.css('novo-toast')).isPresent();
+            expect(subject).toBeTruthy();
+        });
     });
 });
