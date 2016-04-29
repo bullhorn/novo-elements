@@ -10,8 +10,12 @@ novo-select {
         .novo-select-list {
             position: fixed;
             z-index: 2;
+            max-height: 200px;
             min-width: 200px;
             width: inherit;
+            overflow: auto;
+            padding: 8px 0 16px;
+            opacity: 1;
         }
     }
 
@@ -103,19 +107,15 @@ novo-select {
                 font-weight: 500;
             }
         }
-        &.active {
-            max-height: 200px;
-            overflow: auto;
-            padding: 8px 0 16px;
-            z-index: 2;
-            opacity: 1;
-        }
         &:focus {
             outline: none;
         }
     }
-}
 
-[md-ink-ripple] {
-    position: relative;
+    &[disabled] {
+        pointer-events: none;
+        button {
+            color: $grey;
+        }
+    }
 }
