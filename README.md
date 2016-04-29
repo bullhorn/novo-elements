@@ -49,6 +49,8 @@ Depending on what system you are using (SystemJS, Webpack, etc..) the setup will
     
 **Note:** You can forgo adding the mappings and just include `novo-elements/bundles/novo-elements.js` as a script tag into your `index.html` page instead.
     
+If using SCSS/SASS you will need to include the following includes: `node_modules/novo-elements/lib` and `node_modules/hint.css/src`.
+
 ## Build/Release/Publish
 
 > Automatically runs the tests, updates the `package.json` version, generates the `CHANGELOG.md`, generates a GitHub release, uploads the demo to GH-Pages and publishes.

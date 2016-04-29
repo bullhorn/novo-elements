@@ -7,5 +7,6 @@ export * from './layout/Layout';
 export * from './home/Home';
 export * from './loading/LoadingDemo';
 export * from './card/CardDemo';
-export * from './utils/Utils';
-export * from './pipes/Pipes';
+export * from './utils/UtilsDemo';
+export * from './pipes/PipesDemo';
+export * from './tooltip/TooltipDemo';

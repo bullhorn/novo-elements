@@ -181,6 +181,12 @@ module.exports = {
         ]
     },
 
+    sassLoader: {
+        includePaths: [
+            helpers.root('node_modules/hint.css/src')
+        ]
+    },
+
     // Add additional plugins to the compiler.
     //
     // See: http://webpack.github.io/docs/configuration.html#plugins

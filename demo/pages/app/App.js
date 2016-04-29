@@ -2,20 +2,6 @@ import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES, RouteConfig, Router } from 'angular2/router';
 
-import {
-    Home,
-    Layout,
-    Typography,
-    Iconography,
-    Color,
-    LoadingDemo,
-    ButtonDemo,
-    TabsDemo,
-    CardDemo,
-    UtilsDemo,
-    PipesDemo
-} from './../pages';
-
 const template = require('./App.html');
 
 @Component({
@@ -25,21 +11,30 @@ const template = require('./App.html');
 })
 @RouteConfig([
     // Base Pages (design system)
-    { path: '/', component: Home, name: 'Home' },
-    { path: '/composition', component: Layout, name: 'Composition' },
-    { path: '/typography', component: Typography, name: 'Typography' },
-    { path: '/icons', component: Iconography, name: 'Iconography' },
-    { path: '/color', component: Color, name: 'Color' },
+    { path: '/', loader: () => require('es6-promise!./../home/Home')('Home'), name: 'Home' },
+    { path: '/composition', loader: () => require('es6-promise!./../layout/Layout')('Layout'), name: 'Composition' },
+    {
+        path: '/typography',
+        loader: () => require('es6-promise!./../typography/Typography')('Typography'),
+        name: 'Typography'
+    },
+    {
+        path: '/icons',
+        loader: () => require('es6-promise!./../iconography/Iconography')('Iconography'),
+        name: 'Iconography'
+    },
+    { path: '/color', loader: () => require('es6-promise!./../color/Color')('Color'), name: 'Color' },
 
     // Element/Component/Service/etc.. Demos
-    { path: '/button', component: ButtonDemo, name: 'Button' },
-    { path: '/tabs', component: TabsDemo, name: 'Tabs' },
-    { path: '/loading', component: LoadingDemo, name: 'Loading' },
-    { path: '/cards', component: CardDemo, name: 'Cards' },
+    { path: '/button', loader: () => require('es6-promise!./../button/ButtonDemo')('ButtonDemo'), name: 'Button' },
+    { path: '/tabs', loader: () => require('es6-promise!./../tabs/TabsDemo')('TabsDemo'), name: 'Tabs' },
+    { path: '/loading', loader: () => require('es6-promise!./../loading/LoadingDemo')('LoadingDemo'), name: 'Loading' },
+    { path: '/cards', loader: () => require('es6-promise!./../card/CardDemo')('CardDemo'), name: 'Cards' },
+    { path: '/tooltip', loader: () => require('es6-promise!./../tooltip/TooltipDemo')('TooltipDemo'), name: 'Tooltip' },
 
     // Utils
-    { path: '/pipes', component: PipesDemo, name: 'Pipes' },
-    { path: '/utils', component: UtilsDemo, name: 'Utils' },
+    { path: '/pipes', loader: () => require('es6-promise!./../pipes/PipesDemo')('PipesDemo'), name: 'Pipes' },
+    { path: '/utils', loader: () => require('es6-promise!./../utils/UtilsDemo')('UtilsDemo'), name: 'Utils' },
 
     // Catch-all and redirect back to index
     { path: '/**', redirectTo: ['Home'] }
@@ -61,7 +56,8 @@ export class DemoApp {
             { name: 'Button', path: '/button' },
             { name: 'Tabs', path: '/tabs' },
             { name: 'Loading', path: '/loading' },
-            { name: 'Cards', path: '/cards' }
+            { name: 'Cards', path: '/cards' },
+            { name: 'Tooltip', path: '/tooltip' }
         ];
 
         this.utilRoutes = [
