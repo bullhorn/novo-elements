@@ -15,7 +15,8 @@ import {
     UtilsDemo,
     PipesDemo,
     TooltipDemo,
-    DrawerDemo
+    DrawerDemo,
+    SelectDemo
 } from './../pages';
 
 const template = require('./App.html');
@@ -23,30 +24,96 @@ const template = require('./App.html');
 @Component({
     selector: 'demo-app',
     template: template,
-    directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES]
+    directives: [
+        ROUTER_DIRECTIVES,
+        CORE_DIRECTIVES
+    ]
 })
 @RouteConfig([
     // Base Pages (design system)
-    { path: '/', component: Home, name: 'Home' },
-    { path: '/composition', component: Layout, name: 'Composition' },
-    { path: '/typography', component: Typography, name: 'Typography' },
-    { path: '/icons', component: Iconography, name: 'Iconography' },
-    { path: '/color', component: Color, name: 'Color' },
+    {
+        path: '/',
+        component: Home,
+        name: 'Home'
+    },
+    {
+        path: '/composition',
+        component: Layout,
+        name: 'Composition'
+    },
+    {
+        path: '/typography',
+        component: Typography,
+        name: 'Typography'
+    },
+    {
+        path: '/icons',
+        component: Iconography,
+        name: 'Iconography'
+    },
+    {
+        path: '/color',
+        component: Color,
+        name: 'Color'
+    },
 
     // Element/Component/Service/etc.. Demos
-    { path: '/button', component: ButtonDemo, name: 'Button' },
-    { path: '/tabs', component: TabsDemo, name: 'Tabs' },
-    { path: '/loading', component: LoadingDemo, name: 'Loading' },
-    { path: '/cards', component: CardDemo, name: 'Cards' },
-    { path: '/tooltip', component: TooltipDemo, name: 'Tooltip' },
-    { path: '/drawer', component: DrawerDemo, name: 'Drawer' },
+    {
+        path: '/button',
+        component: ButtonDemo,
+        name: 'Button'
+    },
+    {
+        path: '/tabs',
+        component: TabsDemo,
+        name: 'Tabs'
+    },
+    {
+        path: '/select',
+        component: SelectDemo,
+        name: 'Select'
+    },
+    {
+        path: '/loading',
+        component: LoadingDemo,
+        name: 'Loading'
+    },
+    {
+        path: '/cards',
+        component: CardDemo,
+        name: 'Cards'
+    },
+    { 
+        path: '/tooltip', 
+        component: TooltipDemo, 
+        name: 'Tooltip' 
+    },
+    { 
+        path: '/drawer', 
+        component: DrawerDemo, 
+        name: 'Drawer' 
+    },
+
 
     // Utils
-    { path: '/pipes', component: PipesDemo, name: 'Pipes' },
-    { path: '/utils', component: UtilsDemo, name: 'Utils' },
+    {
+        path: '/pipes',
+        component: PipesDemo,
+        name: 'Pipes'
+    },
+    {
+        path: '/utils',
+        component: UtilsDemo,
+        name: 'Utils'
+    },
 
     // Catch-all and redirect back to index
-    { path: '/**', redirectTo: ['Home'] }
+    {
+        path: '/**',
+        redirectTo: [
+            'Home'
+        ]
+    }
 ])
 export class DemoApp {
     constructor(router:Router) {
@@ -55,24 +122,64 @@ export class DemoApp {
         this.version = VERSION;
 
         this.designRoutes = [
-            { name: 'Composition', path: '/composition' },
-            { name: 'Typography', path: '/typography' },
-            { name: 'Iconography', path: '/icons' },
-            { name: 'Color', path: '/color' }
+            {
+                name: 'Composition',
+                path: '/composition'
+            },
+            {
+                name: 'Typography',
+                path: '/typography'
+            },
+            {
+                name: 'Iconography',
+                path: '/icons'
+            },
+            {
+                name: 'Color',
+                path: '/color'
+            }
         ];
 
         this.componentRoutes = [
-            { name: 'Button', path: '/button' },
-            { name: 'Tabs', path: '/tabs' },
-            { name: 'Loading', path: '/loading' },
-            { name: 'Cards', path: '/cards' },
-            { name: 'Tooltip', path: '/tooltip' },
-            { name: 'Drawer', path: '/drawer' }
+            {
+                name: 'Button',
+                path: '/button'
+            },
+            {
+                name: 'Tabs',
+                path: '/tabs'
+            }, 
+            {
+                name: 'Select',
+                path: '/select'
+            },
+            {
+                name: 'Loading',
+                path: '/loading'
+            },
+            {
+                name: 'Cards',
+                path: '/cards'
+            },
+            { 
+                name: 'Tooltip', 
+                path: '/tooltip' 
+            },
+            { 
+                name: 'Drawer', 
+                path: '/drawer' 
+            }
         ];
 
         this.utilRoutes = [
-            { name: 'Pipes', path: '/pipes' },
-            { name: 'Utils', path: '/utils' }
+            {
+                name: 'Pipes',
+                path: '/pipes'
+            },
+            {
+                name: 'Utils',
+                path: '/utils'
+            }
         ];
 
         router.subscribe(() => {
