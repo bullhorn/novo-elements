@@ -6,8 +6,8 @@
 ##### Properties
 - `'placeholder' : String`
     * Defines the label to show if no value has been selected yet.
-- `'items' : Array`
+- `'options' : Array`
     * Defines the list of options the user can select from.
-- `'value' : String`
+- `'ngModel' : NgModel`
     * Defines the current value of the field
-    * Can be two-way data bound with `[(value)]="binding"`
+    * Can be two-way data bound with `[(ngModel)]="binding"`

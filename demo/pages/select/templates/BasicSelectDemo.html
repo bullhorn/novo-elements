@@ -1,4 +1,6 @@
 
-    <novo-select [items]="options" [placeholder]="placeholder" [(value)]="value"></novo-select>
-
-    <div>Selected Value: {{value}}</div>
+<div>Selected Value: {{value}}</div>
+<novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value"></novo-select>
+<br>
+<div>Disabled State</div>
+<novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value" disabled></novo-select>
