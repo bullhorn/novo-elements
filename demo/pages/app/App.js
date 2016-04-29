@@ -13,7 +13,8 @@ import {
     TabsDemo,
     CardDemo,
     UtilsDemo,
-    PipesDemo
+    PipesDemo,
+    TooltipDemo
 } from './../pages';
 
 const template = require('./App.html');
@@ -36,6 +37,7 @@ const template = require('./App.html');
     { path: '/tabs', component: TabsDemo, name: 'Tabs' },
     { path: '/loading', component: LoadingDemo, name: 'Loading' },
     { path: '/cards', component: CardDemo, name: 'Cards' },
+    { path: '/tooltip', component: TooltipDemo, name: 'Tooltip' },
 
     // Utils
     { path: '/pipes', component: PipesDemo, name: 'Pipes' },
@@ -61,7 +63,8 @@ export class DemoApp {
             { name: 'Button', path: '/button' },
             { name: 'Tabs', path: '/tabs' },
             { name: 'Loading', path: '/loading' },
-            { name: 'Cards', path: '/cards' }
+            { name: 'Cards', path: '/cards' },
+            { name: 'Tooltip', path: '/tooltip' }
         ];
 
         this.utilRoutes = [
