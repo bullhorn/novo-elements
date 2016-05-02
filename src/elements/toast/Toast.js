@@ -3,7 +3,7 @@ import { CORE_DIRECTIVES } from 'angular2/common';
 
 @Component({
     selector: 'novo-toast',
-    inputs: ['theme', 'icon', 'title', 'message', 'time', 'position'],
+    inputs: ['theme', 'icon', 'title', 'message'],
     host: {
         '[class]': 'alertTheme',
         '[class.show]': 'show',

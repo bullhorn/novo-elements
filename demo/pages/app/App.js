@@ -17,7 +17,8 @@ import {
     PipesDemo,
     TooltipDemo,
     DrawerDemo,
-    SelectDemo
+    SelectDemo,
+    SwitchDemo
 } from './../pages';
 
 const template = require('./App.html');
@@ -88,6 +89,11 @@ const template = require('./App.html');
         component: DrawerDemo,
         name: 'Drawer'
     },
+    {
+        path: '/switch',
+        component: SwitchDemo,
+        name: 'Switch'
+    },
 
     // Utils
     {
@@ -153,6 +159,10 @@ export class DemoApp {
             }, {
                 name: 'Drawer',
                 path: '/drawer'
+            },
+            {
+                name: 'Switch',
+                path: '/switch'
             }
             // { name: 'Form', path: '/form' },
             // { name: 'Dropdown', path: '/dropdowns' },
