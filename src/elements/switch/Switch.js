@@ -5,7 +5,7 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 @Component({
     selector: 'novo-switch',
     inputs: ['checked', 'disabled'],
-    outputs: ['checkedChange'],
+    outputs: ['onChange'],
     host: {
         'role': 'checkbox',
         '[attr.aria-checked]': 'checked',
@@ -30,7 +30,7 @@ export class NovoSwitch {
     constructor() {
         this.checked = false;
         this._disabled = false;
-        this.checkedChange = new EventEmitter();
+        this.onChange = new EventEmitter();
     }
 
     get disabled() {
@@ -58,7 +58,7 @@ export class NovoSwitch {
         }
 
         this.checked = !this.checked;
-        this.checkedChange.next(this.checked);
+        this.onChange.next(this.checked);
     }
 }
 

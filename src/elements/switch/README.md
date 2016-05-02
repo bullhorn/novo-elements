@@ -12,5 +12,5 @@ import { NOVO_BUTTON_ELEMENTS } from 'novo-elements';
     * Defines whether the switch is disabled
 
 #### Outputs
-- `'checkedChange': Function`
+- `'onChange': Function`
     * An event function that is fired when a switch is switched

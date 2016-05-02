@@ -4,7 +4,7 @@
 <label>Toggled
     <span>{{toggledCheck}}</span>
 </label>
-<novo-switch [checked]="checked" (checkedChange)="increment(); toggled($event)"
+<novo-switch [checked]="checked" (onChange)="increment(); toggled($event)"
     data-automation-id="switchTest"></novo-switch>
 <novo-switch class="grapefruit"></novo-switch>
 <novo-switch disabled></novo-switch>
