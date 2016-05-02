@@ -5,7 +5,7 @@ describe('Element: Button', () => {
 
     it('should have <button>', () => {
         let subject = element(by.css('demo-app button')).isPresent();
-        let result = true;
-        expect(subject).toEqual(result);
+        //let result = true;
+        expect(subject).toBeTruthy();
     });
 });

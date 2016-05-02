@@ -6,21 +6,26 @@
 @import "./assets/styles/global/variables";
 @import "./assets/styles/global/include-media";
 @import "./assets/styles/global/flex-grid";
+
 // --------------------------------------------------
 // Plugins (Third-Party-Libraries)
 // --------------------------------------------------
 @import "hint";
+
 // --------------------------------------------------
 // Content
 // --------------------------------------------------
 @import "./assets/styles/content/typography";
+
 // --------------------------------------------------
 // Elements
 // --------------------------------------------------
 @import "./elements/tabs/Tabs";
 @import "./elements/button/Button";
+@import "./elements/toast/Toast";
 @import "./elements/card/Card";
 @import "./elements/loading/Loading";
 @import "./elements/select/Select";
 @import "./elements/dropdown/Dropdown";
 @import "./elements/drawer/Drawer";
+@import "./elements/switch/Switch";

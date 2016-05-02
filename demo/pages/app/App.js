@@ -2,7 +2,7 @@ import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES, RouteConfig, Router } from 'angular2/router';
 
-import { Home, Layout, Typography, Iconography, Color, LoadingDemo, ButtonDemo, TabsDemo, CardDemo, UtilsDemo, PipesDemo, TooltipDemo, DrawerDemo, SelectDemo, DropdownDemo } from './../pages';
+import { Home, Layout, Typography, Iconography, Color, LoadingDemo, ButtonDemo, TabsDemo, ToastDemo, CardDemo, UtilsDemo, PipesDemo, TooltipDemo, DrawerDemo, SelectDemo, SwitchDemo, DropdownDemo } from './../pages';
 
 const template = require('./App.html');
 
@@ -20,23 +20,19 @@ const template = require('./App.html');
         path: '/',
         component: Home,
         name: 'Home'
-    },
-    {
+    }, {
         path: '/composition',
         component: Layout,
         name: 'Composition'
-    },
-    {
+    }, {
         path: '/typography',
         component: Typography,
         name: 'Typography'
-    },
-    {
+    }, {
         path: '/icons',
         component: Iconography,
         name: 'Iconography'
-    },
-    {
+    }, {
         path: '/color',
         component: Color,
         name: 'Color'
@@ -44,16 +40,19 @@ const template = require('./App.html');
 
     // Element/Component/Service/etc.. Demos
     {
+        path: '/toast',
+        component: ToastDemo,
+        name: 'Toast'
+    },
+    {
         path: '/button',
         component: ButtonDemo,
         name: 'Button'
-    },
-    {
+    }, {
         path: '/tabs',
         component: TabsDemo,
         name: 'Tabs'
-    },
-    {
+    }, {
         path: '/select',
         component: SelectDemo,
         name: 'Select'
@@ -61,36 +60,34 @@ const template = require('./App.html');
         path: '/dropdown',
         component: DropdownDemo,
         name: 'Dropdown'
-    },
-    {
+    }, {
         path: '/loading',
         component: LoadingDemo,
         name: 'Loading'
-    },
-    {
+    }, {
         path: '/cards',
         component: CardDemo,
         name: 'Cards'
-    },
-    {
+    }, {
         path: '/tooltip',
         component: TooltipDemo,
         name: 'Tooltip'
-    },
-    {
+    }, {
         path: '/drawer',
         component: DrawerDemo,
         name: 'Drawer'
+    }, {
+        path: '/switch',
+        component: SwitchDemo,
+        name: 'Switch'
     },
-
 
     // Utils
     {
         path: '/pipes',
         component: PipesDemo,
         name: 'Pipes'
-    },
-    {
+    }, {
         path: '/utils',
         component: UtilsDemo,
         name: 'Utils'
@@ -105,75 +102,80 @@ const template = require('./App.html');
     }
 ])
 export class DemoApp {
-    constructor(router:Router) {
+    constructor(router: Router) {
         this.router = router;
         this.menuOpen = false;
         this.version = VERSION;
 
-        this.designRoutes = [
-            {
-                name: 'Composition',
-                path: '/composition'
-            },
-            {
-                name: 'Typography',
-                path: '/typography'
-            },
-            {
-                name: 'Iconography',
-                path: '/icons'
-            },
-            {
-                name: 'Color',
-                path: '/color'
-            }
-        ];
+        this.designRoutes = [{
+            name: 'Composition',
+            path: '/composition'
+        }, {
+            name: 'Typography',
+            path: '/typography'
+        }, {
+            name: 'Iconography',
+            path: '/icons'
+        }, {
+            name: 'Color',
+            path: '/color'
+        }];
 
         this.componentRoutes = [
             {
+                name: 'Toast',
+                path: '/toast'
+            }, {
                 name: 'Button',
                 path: '/button'
-            },
-            {
+            }, {
                 name: 'Tabs',
                 path: '/tabs'
-            },
-            {
+            }, {
                 name: 'Select',
                 path: '/select'
-            },
-            {
+            }, {
                 name: 'Dropdown',
                 path: '/dropdown'
-            },
-            {
+            }, {
                 name: 'Loading',
                 path: '/loading'
-            },
-            {
+            }, {
                 name: 'Cards',
                 path: '/cards'
-            },
-            {
+            }, {
                 name: 'Tooltip',
                 path: '/tooltip'
-            },
-            {
+            }, {
                 name: 'Drawer',
                 path: '/drawer'
+            }, {
+                name: 'Switch',
+                path: '/switch'
             }
+        // { name: 'Form', path: '/form' },
+        // { name: 'Dropdown', path: '/dropdowns' },
+        // { name: 'Tooltip', path: '/tooltips' },
+        // { name: 'Calendar', path: '/calendar' },
+        // { name: 'Table', path: '/table' },
+        // { name: 'Drawer', path: '/drawer' },
+        // { name: 'Switch', path: '/switch' },
+        // { name: 'Modal', path: '/modal' },
+        // { name: 'Loading', path: '/loading' },
+        // { name: 'Dragula', path: '/dragula' },
+        // { name: 'Cards', path: '/cards' },
+        // { name: 'CardExamples', path: '/card-examples' },
+        // { name: 'Chart', path: '/chart' },
+        // { name: 'Headers', path: '/headers' }
         ];
 
-        this.utilRoutes = [
-            {
-                name: 'Pipes',
-                path: '/pipes'
-            },
-            {
-                name: 'Utils',
-                path: '/utils'
-            }
-        ];
+        this.utilRoutes = [{
+            name: 'Pipes',
+            path: '/pipes'
+        }, {
+            name: 'Utils',
+            path: '/utils'
+        }];
 
         router.subscribe(() => {
             document.body.scrollTop = 0;
