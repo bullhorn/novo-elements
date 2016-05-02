@@ -83,15 +83,15 @@ const template = require('./App.html');
         component: CardDemo,
         name: 'Cards'
     },
-    { 
-        path: '/tooltip', 
-        component: TooltipDemo, 
-        name: 'Tooltip' 
+    {
+        path: '/tooltip',
+        component: TooltipDemo,
+        name: 'Tooltip'
     },
-    { 
-        path: '/drawer', 
-        component: DrawerDemo, 
-        name: 'Drawer' 
+    {
+        path: '/drawer',
+        component: DrawerDemo,
+        name: 'Drawer'
     },
 
 
@@ -148,7 +148,7 @@ export class DemoApp {
             {
                 name: 'Tabs',
                 path: '/tabs'
-            }, 
+            },
             {
                 name: 'Select',
                 path: '/select'
@@ -161,13 +161,13 @@ export class DemoApp {
                 name: 'Cards',
                 path: '/cards'
             },
-            { 
-                name: 'Tooltip', 
-                path: '/tooltip' 
+            {
+                name: 'Tooltip',
+                path: '/tooltip'
             },
-            { 
-                name: 'Drawer', 
-                path: '/drawer' 
+            {
+                name: 'Drawer',
+                path: '/drawer'
             }
         ];
 
