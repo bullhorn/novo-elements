@@ -5,7 +5,6 @@ describe('Element: Loading', () => {
 
     it('should have <novo-loading>', () => {
         let subject = element(by.css('demo-app novo-loading')).isPresent();
-        let result = true;
-        expect(subject).toEqual(result);
+        expect(subject).toBeTruthy();
     });
 });

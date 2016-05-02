@@ -16,13 +16,6 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'test';
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = {
-
-    // Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
-    //
-    // Do not change, leave as is or it wont work.
-    // See: https://github.com/webpack/karma-webpack#source-maps
-    devtool: 'inline-source-map',
-
     // Options affecting the resolving of modules.
     //
     // See: http://webpack.github.io/docs/configuration.html#resolve
@@ -53,19 +46,6 @@ module.exports = {
                 exclude: [
                     helpers.root('node_modules'),
                     helpers.root('config')
-                ]
-            },
-
-            // Source map loader support for *.js files
-            // Extracts SourceMaps for source files that as added as sourceMappingURL comment.
-            //
-            // See: https://github.com/webpack/source-map-loader
-            {
-                test: /\.js$/,
-                loader: 'source-map-loader',
-                exclude: [
-                    // these packages have problems with their sourcemaps
-                    helpers.root('node_modules/rxjs')
                 ]
             }
         ],
@@ -105,25 +85,6 @@ module.exports = {
             //
             // See: https://github.com/webpack/raw-loader
             { test: /\.html$/, loader: 'raw-loader' }
-        ],
-
-        // An array of applied pre and post loaders.
-        //
-        // See: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
-        postLoaders: [
-            // Instruments JS files with Istanbul for subsequent code coverage reporting.
-            // Instrument only testing sources.
-            //
-            // See: https://github.com/deepsweet/istanbul-instrumenter-loader
-            {
-                test: /\.js$/,
-                loader: 'istanbul-instrumenter-loader',
-                include: helpers.root('src'),
-                exclude: [
-                    /\.(e2e|spec)\.js$/,
-                    /node_modules/
-                ]
-            }
         ]
     },
 
