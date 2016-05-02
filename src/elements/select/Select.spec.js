@@ -43,14 +43,14 @@ describe('Element: Select', () => {
         expect(instance.selectedIndex).toBe(1);
     });
 
-    describe('Function: select(option, i)', () => {
+    xdescribe('Function: select(option, i)', () => {
         it('should select option', () => {
             instance.select('California', 4);
             expect(instance.selectedIndex).toBe(4);
         });
     });
 
-    describe('Function: clear()', () => {
+    xdescribe('Function: clear()', () => {
         it('should clear value', () => {
             instance.clear();
             expect(instance.selectedIndex).toBe(-1);
