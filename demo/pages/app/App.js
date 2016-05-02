@@ -2,22 +2,7 @@ import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES, RouteConfig, Router } from 'angular2/router';
 
-import {
-    Home,
-    Layout,
-    Typography,
-    Iconography,
-    Color,
-    LoadingDemo,
-    ButtonDemo,
-    TabsDemo,
-    CardDemo,
-    UtilsDemo,
-    PipesDemo,
-    TooltipDemo,
-    DrawerDemo,
-    SelectDemo
-} from './../pages';
+import { Home, Layout, Typography, Iconography, Color, LoadingDemo, ButtonDemo, TabsDemo, CardDemo, UtilsDemo, PipesDemo, TooltipDemo, DrawerDemo, SelectDemo, DropdownDemo } from './../pages';
 
 const template = require('./App.html');
 
@@ -72,6 +57,10 @@ const template = require('./App.html');
         path: '/select',
         component: SelectDemo,
         name: 'Select'
+    }, {
+        path: '/dropdown',
+        component: DropdownDemo,
+        name: 'Dropdown'
     },
     {
         path: '/loading',
@@ -152,6 +141,10 @@ export class DemoApp {
             {
                 name: 'Select',
                 path: '/select'
+            },
+            {
+                name: 'Dropdown',
+                path: '/dropdown'
             },
             {
                 name: 'Loading',
