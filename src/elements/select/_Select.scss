@@ -8,7 +8,7 @@ novo-select {
 
     &.active {
         .novo-select-list {
-            position: fixed;
+            position: absolute;
             z-index: 2;
             max-height: 200px;
             min-width: 200px;

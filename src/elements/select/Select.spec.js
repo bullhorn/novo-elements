@@ -5,6 +5,7 @@ import { beforeEach, expect, describe, it } from 'angular2/testing';
 
 import { createTestContext } from './../../testing/TestContext';
 import { Select } from './Select';
+import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
 @Component({
     selector: 'test-cmp',
@@ -39,5 +40,51 @@ describe('Element: Select', () => {
     it('should be defined', () => {
         expect(instance).toBeDefined();
         expect(element).toBeDefined();
+        expect(instance.selectedIndex).toBe(1);
+    });
+
+    describe('Function: select(option, i)', () => {
+        it('should select option', () => {
+            instance.select('California', 4);
+            expect(instance.selectedIndex).toBe(4);
+        });
+    });
+
+    describe('Function: clear()', () => {
+        it('should clear value', () => {
+            instance.clear();
+            expect(instance.selectedIndex).toBe(-1);
+        });
+    });
+
+    describe('Function: onKeyDown(value)', () => {
+        it('should select next value on Down key', () => {
+            let evt = {
+                keyCode: KeyCodes.DOWN,
+                preventDefault: () => true
+            };
+            instance.select('California', 4);
+            expect(instance.selectedIndex).toBe(4);
+            // force open select list
+            instance.active = true;
+            instance.onKeyDown(evt);
+            expect(instance.selectedIndex).toBe(5);
+            instance.onKeyDown(evt);
+            expect(instance.selectedIndex).toBe(6);
+        });
+        it('should select previous value on Up key', () => {
+            let evt = {
+                keyCode: KeyCodes.UP,
+                preventDefault: () => true
+            };
+            instance.select('California', 4);
+            expect(instance.selectedIndex).toBe(4);
+            // force open select list
+            instance.active = true;
+            instance.onKeyDown(evt);
+            expect(instance.selectedIndex).toBe(3);
+            instance.onKeyDown(evt);
+            expect(instance.selectedIndex).toBe(2);
+        });
     });
 });

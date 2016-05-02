@@ -58,6 +58,10 @@ export class Select extends OutsideClick {
                 return { value: item, label: item }; //esfmt-ignore-line
             });
         }
+
+        if (!this.model.value) {
+            this.clear();
+        }
     }
 
     onClickOption(option, i) {
@@ -72,6 +76,16 @@ export class Select extends OutsideClick {
         this.selected.active = true;
         this.empty = false;
         this.model.viewToModelUpdate(this.selected.value);
+    }
+
+    clear() {
+        this.selected = {
+            label: this.placeholder,
+            value: null,
+            active: false
+        };
+        this.selectedIndex = -1;
+        this.empty = true;
     }
 
     // TODO: Add key listener to jump to options starting with that letter.
@@ -126,13 +140,7 @@ export class Select extends OutsideClick {
             this.selected.active = true;
             this.selectedIndex = this.options.indexOf(item);
         } else {
-            this.selected = {
-                label: this.placeholder,
-                value: null,
-                active: false
-            };
-            this.selectedIndex = -1;
-            this.empty = true;
+            this.clear();
         }
     }
 
