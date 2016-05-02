@@ -1,10 +1,11 @@
 import { Component } from 'angular2/core';
-import { CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/common';
-import { NOVO_BUTTON_ELEMENTS, NovoToast, NovoToaster } from './../../../src/novo-elements';
+import { CORE_DIRECTIVES } from 'angular2/common';
+import { NOVO_BUTTON_ELEMENTS, NovoToast, ToastService } from './../../../src/novo-elements';
 
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
 
 import ToastDemoTpl from './templates/ToastDemo.html';
+import ToastServiceDemoTpl from './templates/ToastServiceDemo.html';
 
 const template = `
 <div class="container">
@@ -23,25 +24,36 @@ const template = `
     <p>This type of toast notification takes a template, a style,
         and a location.</p>
     <div class="example toast-demo">
-        <h2>Edit Toast Styles</h2>
+        <h2>Embedded Toast</h2>
         ${ToastDemoTpl}
     </div>
     <code-snippet [code]="ToastDemoTpl"></code-snippet>
+
+    <div class="example toast-demo">
+        <h2>Toaster Service</h2>
+        ${ToastServiceDemoTpl}
+    </div>
+    <code-snippet [code]="ToastServiceDemoTpl"></code-snippet>
 </div>
 `;
-
-// TODO @asibilia: Replace template form with novo-forms
+// TODO @asibilia: Replace template form with novo-forms and add novo-header
 
 @Component({
     selector: 'toast-demo',
-    directives: [NOVO_BUTTON_ELEMENTS, CORE_DIRECTIVES, FORM_DIRECTIVES, CodeSnippet],
-    providers: [NovoToaster],
+    directives: [NOVO_BUTTON_ELEMENTS, CORE_DIRECTIVES, CodeSnippet, NovoToast],
+    providers: [ToastService],
     template: template
 })
 export class ToastDemo {
-    constructor(toaster: NovoToaster) {
+    constructor(toaster: ToastService) {
+        // Templates
         this.ToastDemoTpl = ToastDemoTpl;
+        this.ToastServiceDemoTpl = ToastServiceDemoTpl;
 
+        // Toaster Service
+        this.toaster = toaster;
+
+        // Default Toast styles
         this.positions = [
             'fixedTop',
             'fixedBottom',
@@ -63,8 +75,6 @@ export class ToastDemo {
             'title': 'Title',
             'message': 'Some Message...'
         };
-
-        this.toaster = toaster;
     }
 
     toastToggled(arg) {

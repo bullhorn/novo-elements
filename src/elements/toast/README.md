@@ -2,10 +2,10 @@
 
 ## Usage
 ```javascript
-export { NovoToast,NovoToaster } from './tabs/Tabs';
+export { NovoToast, ToastService } from './tabs/Tabs';
 
 export class MyToasterComponent {
-    constructor(toaster:NovoToaster) {
+    constructor(toaster:ToastService) {
         toaster.register(element);
         this.toaster = toaster;
     }
@@ -20,8 +20,23 @@ export class MyToasterComponent {
     }
 }
 ```
+#### NovoToast Properties
+- `'theme' : String`
+    * Defines the theme of the toast notification
+    * Default is navy
+- `'icon' : String`
+    * Defines the icon used in the toast notification
+- `'position': String`
+    * Defines the positioning of the notification
+    * Position is ignored in embedded toasts
+- `'title': String`
+    * Defines the title text
+- `'message': String`
+    * Defines the message body text
+- `'time': Int`
+    * Defines the amount of time a notification is shown on screen in ms
 
-##### Toaster Reference Api
+##### ToastService Reference Api
 - `'alert' : Function`
     * Create the toast
 - `'register' : Function`

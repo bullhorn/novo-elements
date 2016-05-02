@@ -1,6 +1,6 @@
 novo-toast {
-    display: none;
-    position: fixed;
+    display: flex;
+    position: relative;
     background: $navy;
     z-index: 9999;
     color: $white;
@@ -10,6 +10,11 @@ novo-toast {
     &.show {
         display: block;
     }
+}
+
+novo-toast.launched {
+    display: none;
+    position: fixed;
 }
 
 novo-toast.toast-container {
@@ -259,9 +264,24 @@ novo-toast.embedded.fixedTop {
     }
 }
 
-novo-toast + *:not(.toast-container) {
-    margin-top: 60px;
+novo-toast:not(.launched) {
+    animation: embedded-slide-in 200ms ease-in-out;
 }
+@keyframes embedded-slide-in {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+//novo-toast + *:not(.toast-container) {
+//    margin-top: 60px;
+//}
 @media screen and (min-width: 350px) {
     novo-toast[class*="growl-"] {
         min-width: 350px;
