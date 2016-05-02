@@ -5,7 +5,6 @@ describe('Element: CardBestTime', () => {
 
     it('should have <novo-card-chart-donut>', () => {
         let subject = element(by.css('demo-app novo-card-chart-donut')).isPresent();
-        let result = true;
-        expect(subject).toEqual(result);
+        expect(subject).toBeTruthy();
     });
 });

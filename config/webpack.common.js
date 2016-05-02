@@ -181,6 +181,15 @@ module.exports = {
         ]
     },
 
+    // SCSS/Sass loader configuration
+    //
+    // See: https://github.com/jtangelder/sass-loader
+    sassLoader: {
+        includePaths: [
+            helpers.root('node_modules/hint.css/src')
+        ]
+    },
+
     // Add additional plugins to the compiler.
     //
     // See: http://webpack.github.io/docs/configuration.html#plugins

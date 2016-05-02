@@ -1,6 +1,6 @@
 import { Component } from 'angular2/core';
 
-const template = require('./Utils.html');
+const template = require('./UtilsDemo.html');
 
 @Component({
     selector: 'utils-demo',
