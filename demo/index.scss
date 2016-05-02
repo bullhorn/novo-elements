@@ -2,6 +2,7 @@
 // Plugins (Third-Party-Libraries)
 // --------------------------------------------------
 @import "../src/novo-elements";
+
 // --------------------------------------------------
 // Global
 // --------------------------------------------------
@@ -11,6 +12,7 @@
 @import "assets/styles/sidenav";
 @import "assets/styles/highlight";
 @import "assets/styles/media";
+
 // --------------------------------------------------
 // Pages
 // --------------------------------------------------
@@ -21,6 +23,7 @@
 @import "pages/layout/Layout";
 @import "pages/button/ButtonDemo";
 @import "pages/tabs/TabsDemo";
+@import "pages/toast/ToastDemo";
 @import "pages/switch/SwitchDemo";
 @import "pages/select/SelectDemo";
 @import "pages/loading/LoadingDemo";
