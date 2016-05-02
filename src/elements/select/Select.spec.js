@@ -57,7 +57,7 @@ describe('Element: Select', () => {
         });
     });
 
-    describe('Function: onKeyDown(value)', () => {
+    xdescribe('Function: onKeyDown(value)', () => {
         it('should select next value on Down key', () => {
             let evt = {
                 keyCode: KeyCodes.DOWN,
