@@ -1,0 +1,202 @@
+// TODO Refactor mixins and clean up scss
+
+@mixin enum-delay-child($map) {
+    $keys: map-keys($map);
+
+    @each $item in $keys {
+        $idx: index($keys, $item);
+
+        &:nth-of-type(#{$idx}) {
+            dot {
+                background-color: map-get($map, $item);
+                &.cycle {
+                    animation-delay: 100ms * $idx;
+                }
+            }
+        }
+    }
+}
+
+novo-loading {
+    padding: 20px;
+
+    dot {
+        @include enumerate($dot-colors, 'background-color', 'map-val', '');
+        display: block;
+        border-radius: 50%;
+    }
+
+    // Line Theme Loader
+    &[theme="line"] {
+        display: flex;
+        flex-direction: row;
+        font-size: 13px;
+
+        dot {
+            margin: 3px;
+            animation: jump 1600ms infinite;
+            @include delay($dot-colors, 70ms);
+            height: 13px;
+            width: 13px;
+
+        }
+    }
+
+    // Circle Theme Loader
+    &[theme="circle"] {
+        display: block;
+        width: 100px;
+        height: 100px;
+        position: relative;
+
+        > div {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+
+            // Spin animations
+            &.open {
+                animation: open-rotate 400ms ease-in-out;
+            }
+            &.cycle {
+                animation: cycle-rotate 10000ms infinite linear;
+            }
+            &.close {
+                animation: close-rotate 400ms ease-in-out;
+            }
+
+            > div {
+                height: 60px;
+                width: 10px;
+                top: 22%;
+                left: 46%;
+                position: absolute;
+                @include enum-delay-child($dot-colors);
+                @include enumerate($dot-colors, 'transform', 'rotate', 72deg);
+            }
+
+            dot {
+                display: block;
+                position: absolute;
+                height: 10px;
+                width: 10px;
+                margin: 3px;
+
+                // Dot animations
+                &.open {
+                    animation: open 400ms ease-in-out;
+                }
+                &.cycle {
+                    animation: circle-jump 1600ms infinite;
+                }
+                &.close {
+                    animation: close 400ms ease-in-out;
+                }
+            }
+        }
+    }
+
+    &[inverse] {
+        dot {
+            background-color: #fff !important;
+        }
+    }
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0px)
+    }
+    30% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+    45% {
+        transform: translateY(-1.5em);
+        opacity: .5;
+    }
+    60% {
+        transform: translateY(.8em);
+        opacity: .95;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes circle-jump {
+    0% {
+        transform: translateY(0px)
+    }
+    30% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+    45% {
+        transform: translateY(-.3em);
+        opacity: .5;
+    }
+    60% {
+        transform: translateY(.13em);
+        opacity: .95;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes open {
+    0% {
+        transform: translateY(2em);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes open-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(690deg);
+    }
+    100% {
+        transform: rotate(720deg);
+    }
+}
+
+@keyframes cycle-rotate {
+    0% {
+        transform: rotate(720deg);
+    }
+    100% {
+        transform: rotate(1080deg);
+    }
+}
+
+@keyframes close-rotate {
+    0% {
+        transform: rotate(720deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes close {
+    0% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(2em);
+        opacity: 0;
+    }
+}

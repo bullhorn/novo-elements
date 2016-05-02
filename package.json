@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
     "clean": "./node_modules/.bin/del bundles coverage lib dist",
@@ -9,6 +9,9 @@
     "compile:system": "./config/bundle-system.js",
     "prepublish": "npm run clean && npm run compile",
     "postpublish": "npm run deploy:gh-pages",
+    "lint": "eslint src demo",
+    "lint:save": "eslint src demo -f node_modules/static-code-analysis/formatters/eslint.js > ./coverage/eslint.json",
+    "loc": "sloc src/ --format json > ./coverage/sloc.json",
     "start": "webpack-dev-server --hot --inline --colors --display-error-details --display-cached",
     "test": "NODE_ENV=test ./node_modules/.bin/karma start",
     "test:watch": "NODE_ENV=test ./node_modules/.bin/karma start --single-run false --auto-watch true",
@@ -23,7 +26,9 @@
     "e2e": "protractor",
     "e2e:live": "npm run e2e -- --elementExplorer",
     "webdriver:update": "webdriver-manager update",
-    "webdriver:start": "webdriver-manager start"
+    "webdriver:start": "webdriver-manager start",
+    "presca": "npm run lint:save && npm run loc",
+    "sca": "sca"
   },
   "main": "lib/novo-elements.js",
   "keywords": [
@@ -38,12 +43,16 @@
   "bugs": {
     "url": "https://github.com/bullhorn/novo-elements/issues"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "dependencies": {
     "angular2": "2.0.0-beta.15",
     "es6-promise": "3.1.2",
     "es6-shim": "0.35.0",
     "es7-reflect-metadata": "1.6.0",
+    "hint.css": "^2.2.1",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
     "zone.js": "0.6.11"
@@ -59,6 +68,7 @@
     "babel-eslint": "~6.0.2",
     "babel-istanbul-loader": "^0.1.0",
     "babel-loader": "^6.2.0",
+    "babel-plugin-__coverage__": "^0.111111.1",
     "babel-plugin-angular2-annotations": "~5.0.0",
     "babel-plugin-transform-class-properties": "~6.6.0",
     "babel-plugin-transform-decorators-legacy": "~1.3.4",
@@ -81,14 +91,12 @@
     "gh-pages": "0.11.0",
     "html-loader": "0.4.3",
     "html-webpack-plugin": "2.15.0",
-    "istanbul-instrumenter-loader": "0.2.0",
     "jasmine": "2.4.1",
     "karma": "0.13.22",
     "karma-chrome-launcher": "0.2.3",
     "karma-coverage": "0.5.5",
     "karma-jasmine": "0.3.8",
     "karma-phantomjs-launcher": "1.0.0",
-    "karma-sourcemap-loader": "0.3.7",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "1.7.0",
     "node-sass": "^3.4.2",
@@ -98,7 +106,9 @@
     "raw-loader": "0.5.1",
     "require-dir": "0.3.0",
     "sass-loader": "^3.2.0",
+    "sloc": "^0.1.10",
     "source-map-loader": "0.1.5",
+    "static-code-analysis": "0.0.9",
     "style-loader": "^0.13.1",
     "systemjs-builder": "0.15.15",
     "typescript": "^1.8.10",
@@ -107,5 +117,19 @@
     "webpack-dev-server": "1.14.1",
     "webpack-md5-hash": "0.0.5",
     "webpack-merge": "^0.10.0"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "staticCodeAnalysis": {
+    "type": "javascript",
+    "public": true,
+    "locations": {
+      "eslint": "/coverage/eslint.json",
+      "sloc": "/coverage/sloc.json",
+      "karma-coverage": "/coverage/coverage.txt"
+    }
   }
 }

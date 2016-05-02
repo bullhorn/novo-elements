@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, EventEmitter } from 'angular2/core';
 
-import { KeyCodes } from '../../utils/all';
+import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
 @Component({
     selector: 'novo-switch',
@@ -38,7 +38,7 @@ export class NovoSwitch {
     }
 
     set disabled(value) {
-        this._disabled = value;
+        this._disabled = (!value);
     }
 
     onKeydown(event) {
@@ -62,4 +62,4 @@ export class NovoSwitch {
     }
 }
 
-export const BH_SWITCH_DIRECTIVES = [NovoSwitch];
+export const NOVO_SWITCH_ELEMENTS = [NovoSwitch];

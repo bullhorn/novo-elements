@@ -11,7 +11,7 @@ import WhiteDemoTpl from './templates/WhiteDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Tabs <small><a target="_blank" href="https://bhsource.bullhorn.com/NOVO/bh-elements/blob/master/src/elements/tabs">(source)</a></small></h1>
+    <h1>Tabs <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/tabs">(source)</a></small></h1>
     <p>Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets. Tabs in Bullhorn have two different themes; A 'color' theme for tabbed navigation on a colored background, and a 'white' theme for tabs on a white background.</p>
 
     <h2>Themes</h2>
@@ -39,7 +39,7 @@ const template = `
     <code-snippet [code]="ButtonTabDemoTpl"></code-snippet>
 
     <h2>As Application Routing Mechanism</h2>
-    <p>Follows the same color/white theme as above, but doesn't use the "bh-tabs" tag and you have to add the classes and html accordingly. The header will now control and route your application and put the content in the "router-outlet" and look/feel like our tabs component.</p>
+    <p>Follows the same color/white theme as above, but doesn't use the "novo-tabs" tag and you have to add the classes and html accordingly. The header will now control and route your application and put the content in the "router-outlet" and look/feel like our tabs component.</p>
     <div class="example transparent-tab-demo">${RouterDemoTpl}</div>
     <code-snippet [code]="RouterDemoTpl"></code-snippet>
 </div>

@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
-// import { Toaster, BhToast } from 'bh-elements';
+// import { Toaster, NovoToast } from './../../src/novo-elements';
 
 import template from './Color.html';
 

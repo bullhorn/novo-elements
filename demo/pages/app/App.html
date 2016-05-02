@@ -85,6 +85,12 @@
         <li class="menu-item" *ngFor="#route of componentRoutes" [class.current]="router.isRouteActive(router.generate(['/'+route.name]))">
             <a [routerLink]="['/'+route.name]" class="menu-link">{{route.name}}</a>
         </li>
+        <li class="menu-section-header">
+            <span class="menu-item-header">Utils</span>
+        </li>
+        <li class="menu-item" *ngFor="#route of utilRoutes" [class.current]="router.isRouteActive(router.generate(['/'+route.name]))">
+            <a [routerLink]="['/'+route.name]" class="menu-link">{{route.name}}</a>
+        </li>
         <li class="menu-line"></li>
     </ul>
 </nav>

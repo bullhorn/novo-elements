@@ -10,10 +10,14 @@ import { CORE_DIRECTIVES } from 'angular2/common';
         '[attr.icon]': 'icon'
     },
     template: `
+        <!--Flex wrapper for cross-browser support-->
         <div [class]="flex">
-          <i *ngIf="icon && iconClass && leftSide" [ngClass]="iconClass"></i>
-          <ng-content></ng-content>
-          <i *ngIf="icon && iconClass && (rightSide || !leftSide)" [ngClass]="iconClass"></i>
+            <!--Left Icon-->
+            <i *ngIf="icon && iconClass && leftSide" [ngClass]="iconClass"></i>
+            <!--Transcluded Content-->
+            <ng-content></ng-content>
+            <!--Right Icon-->
+            <i *ngIf="icon && iconClass && (rightSide || !leftSide)" [ngClass]="iconClass"></i>
         </div>
     `,
     directives: [CORE_DIRECTIVES]

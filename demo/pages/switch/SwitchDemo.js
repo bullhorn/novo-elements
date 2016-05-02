@@ -2,7 +2,6 @@ import { Component } from 'angular2/core';
 import { NOVO_SWITCH_ELEMENTS } from './../../../src/novo-elements';
 
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
-
 import SwitchDemoTpl from './templates/SwitchDemo.html';
 
 const template = `
