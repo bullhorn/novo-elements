@@ -6,14 +6,17 @@
 @import "./assets/styles/global/variables";
 @import "./assets/styles/global/include-media";
 @import "./assets/styles/global/flex-grid";
+
 // --------------------------------------------------
 // Plugins (Third-Party-Libraries)
 // --------------------------------------------------
 @import "hint";
+
 // --------------------------------------------------
 // Content
 // --------------------------------------------------
 @import "./assets/styles/content/typography";
+
 // --------------------------------------------------
 // Elements
 // --------------------------------------------------
@@ -23,3 +26,4 @@
 @import "./elements/loading/Loading";
 @import "./elements/select/Select";
 @import "./elements/drawer/Drawer";
+@import "./elements/switch/Switch";
