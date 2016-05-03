@@ -18,7 +18,8 @@ import {
     TooltipDemo,
     DrawerDemo,
     SelectDemo,
-    SwitchDemo
+    SwitchDemo,
+    HeaderDemo
 } from './../pages';
 
 const template = require('./App.html');
@@ -94,6 +95,11 @@ const template = require('./App.html');
         component: SwitchDemo,
         name: 'Switch'
     },
+    {
+        path: '/header',
+        component: HeaderDemo,
+        name: 'Header'
+    },
 
     // Utils
     {
@@ -163,6 +169,10 @@ export class DemoApp {
             {
                 name: 'Switch',
                 path: '/switch'
+            },
+            {
+                name: 'Header',
+                path: '/header'
             }
             // { name: 'Form', path: '/form' },
             // { name: 'Dropdown', path: '/dropdowns' },
@@ -177,7 +187,6 @@ export class DemoApp {
             // { name: 'Cards', path: '/cards' },
             // { name: 'CardExamples', path: '/card-examples' },
             // { name: 'Chart', path: '/chart' },
-            // { name: 'Headers', path: '/headers' }
         ];
 
         this.utilRoutes = [{

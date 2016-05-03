@@ -1,0 +1,21 @@
+<header title="John Deere" icon="person" [theme]="entity">
+    <utils>
+        <util-action icon="flag" (click)="catchEv('pin', $event)"></util-action>
+        <util-action icon="refresh" (click)="catchEv('refresh', $event)"></util-action>
+        <util-action icon="times" (click)="catchEv('close', $event)"></util-action>
+    </utils>
+    <section>
+        Extra Info
+    </section>
+    <bh-nav theme="color" [outlet]="colornav" direction="horizontal">
+        <bh-tab>
+            <span>Overview</span>
+        </bh-tab>
+        <bh-tab>
+            <span>Activity</span>
+        </bh-tab>
+        <bh-tab>
+            <span>Email</span>
+        </bh-tab>
+    </bh-nav>
+</header>
