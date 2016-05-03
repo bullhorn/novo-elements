@@ -6,6 +6,8 @@ import { NOVO_LOADING_ELEMENTS } from './elements/loading';
 import { NOVO_TOOLTIP_ELEMENTS } from './elements/tooltip';
 import { NOVO_DRAWER_ELEMENTS } from './elements/drawer';
 import { NOVO_SELECT_ELEMENTS } from './elements/select';
+// import { NOVO_DATE_PICKER_ELEMENTS } from './elements/datepicker';
+import { NOVO_TIME_PICKER_ELEMENTS } from './elements/timepicker';
 
 // Elements
 export * from './elements/button';
@@ -17,6 +19,8 @@ export * from './elements/select';
 export * from './elements/tooltip';
 export * from './elements/drawer';
 export * from './elements/switch';
+// export * from './elements/datepicker';
+export * from './elements/timepicker';
 
 // Pipes
 export * from './pipes/plural/Plural';
@@ -25,6 +29,7 @@ export * from './pipes/plural/Plural';
 export * from './utils/outside-click/OutsideClick';
 export * from './utils/key-codes/KeyCodes';
 export * from './utils/deferred/Deferred';
+export * from './utils/Helpers';
 
 export const NOVO_ELEMENTS = [
     NOVO_BUTTON_ELEMENTS,
@@ -35,5 +40,7 @@ export const NOVO_ELEMENTS = [
     NOVO_LOADING_ELEMENTS,
     NOVO_SELECT_ELEMENTS,
     NOVO_TOOLTIP_ELEMENTS,
-    NOVO_DRAWER_ELEMENTS
+    NOVO_DRAWER_ELEMENTS,
+    // NOVO_DATE_PICKER_ELEMENTS,
+    NOVO_TIME_PICKER_ELEMENTS
 ];
