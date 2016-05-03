@@ -18,11 +18,17 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 export class Dropdown extends OutsideClick {
     constructor(element:ElementRef) {
         super(element);
+        this.clickHandler = this.toggleActive.bind(this);
     }
 
     ngOnInit() {
         let button = this.element.nativeElement.querySelector('button');
-        button.addEventListener('click', this.toggleActive.bind(this));
+        button.addEventListener('click', this.clickHandler);
+    }
+
+    ngOnDestroy() {
+        let button = this.element.nativeElement.querySelector('button');
+        button.removeEventListener('click', this.clickHandler);
     }
 
     onKeyDown(event) {

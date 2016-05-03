@@ -5,7 +5,10 @@ Menus allow users to take an action by selecting from a list of choices revealed
     import { NOVO_DROPDOWN_ELEMENTS } from 'novo-elements';
 
 ##### Properties
-- none
+- `'side' : String`
+    * Defines the side the dropdown opens (default: `left`)
+    * Available Values: `['right']`
+
 
 *Dropdown Demo*
 ````xml
