@@ -19,7 +19,8 @@ import {
     DrawerDemo,
     SelectDemo,
     SwitchDemo,
-    HeaderDemo
+    HeaderDemo,
+    DropdownDemo
 } from './../pages';
 
 const template = require('./App.html');
@@ -60,8 +61,8 @@ const template = require('./App.html');
     {
         path: '/toast',
         component: ToastDemo,
-        name: 'Toast' },
-    {
+        name: 'Toast'
+    }, {
         path: '/button',
         component: ButtonDemo,
         name: 'Button'
@@ -73,6 +74,10 @@ const template = require('./App.html');
         path: '/select',
         component: SelectDemo,
         name: 'Select'
+    }, {
+        path: '/dropdown',
+        component: DropdownDemo,
+        name: 'Dropdown'
     }, {
         path: '/loading',
         component: LoadingDemo,
@@ -89,13 +94,11 @@ const template = require('./App.html');
         path: '/drawer',
         component: DrawerDemo,
         name: 'Drawer'
-    },
-    {
+    }, {
         path: '/switch',
         component: SwitchDemo,
         name: 'Switch'
-    },
-    {
+    }, {
         path: '/header',
         component: HeaderDemo,
         name: 'Header'
@@ -154,6 +157,9 @@ export class DemoApp {
                 name: 'Select',
                 path: '/select'
             }, {
+                name: 'Dropdown',
+                path: '/dropdown'
+            }, {
                 name: 'Loading',
                 path: '/loading'
             }, {
@@ -165,28 +171,13 @@ export class DemoApp {
             }, {
                 name: 'Drawer',
                 path: '/drawer'
-            },
-            {
+            }, {
                 name: 'Switch',
                 path: '/switch'
-            },
-            {
+            }, {
                 name: 'Header',
                 path: '/header'
             }
-            // { name: 'Form', path: '/form' },
-            // { name: 'Dropdown', path: '/dropdowns' },
-            // { name: 'Tooltip', path: '/tooltips' },
-            // { name: 'Calendar', path: '/calendar' },
-            // { name: 'Table', path: '/table' },
-            // { name: 'Drawer', path: '/drawer' },
-            // { name: 'Switch', path: '/switch' },
-            // { name: 'Modal', path: '/modal' },
-            // { name: 'Loading', path: '/loading' },
-            // { name: 'Dragula', path: '/dragula' },
-            // { name: 'Cards', path: '/cards' },
-            // { name: 'CardExamples', path: '/card-examples' },
-            // { name: 'Chart', path: '/chart' },
         ];
 
         this.utilRoutes = [{
