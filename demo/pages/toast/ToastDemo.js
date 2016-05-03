@@ -1,6 +1,6 @@
 import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
-import { NOVO_BUTTON_ELEMENTS, NovoToast, ToastService } from './../../../src/novo-elements';
+import { NOVO_BUTTON_ELEMENTS, NOVO_HEADER_ELEMENTS, NovoToast, ToastService } from './../../../src/novo-elements';
 
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
 
@@ -40,7 +40,7 @@ const template = `
 
 @Component({
     selector: 'toast-demo',
-    directives: [NOVO_BUTTON_ELEMENTS, CORE_DIRECTIVES, CodeSnippet, NovoToast],
+    directives: [NOVO_BUTTON_ELEMENTS, NOVO_HEADER_ELEMENTS, CORE_DIRECTIVES, CodeSnippet, NovoToast],
     providers: [ToastService],
     template: template
 })
