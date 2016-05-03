@@ -2,7 +2,6 @@
 // Plugins (Third-Party-Libraries)
 // --------------------------------------------------
 @import "../src/novo-elements";
-
 // --------------------------------------------------
 // Global
 // --------------------------------------------------
@@ -12,7 +11,6 @@
 @import "assets/styles/sidenav";
 @import "assets/styles/highlight";
 @import "assets/styles/media";
-
 // --------------------------------------------------
 // Pages
 // --------------------------------------------------
@@ -30,7 +28,7 @@
 @import "pages/card/CardDemo";
 @import "pages/pipes/PipesDemo";
 @import "pages/tooltip/TooltipDemo";
-
+@import "pages/calendar/CalendarDemo";
 // --------------------------------------------------
 // Shameful CSS is unrefactored, quick fixes.
 // Ideally nothing is in this file - but it's better

@@ -1,5 +1,5 @@
-import { Component, EventEmitter } from 'angular2/core';
-import { CORE_DIRECTIVES } from 'angular2/common';
+import { Component, EventEmitter, OptionalMetadata } from 'angular2/core';
+import { COMMON_DIRECTIVES, NgControl, NgModel } from 'angular2/common';
 import moment from 'moment/moment';
 
 import { swallowEvent } from './../../utils/Helpers';
@@ -7,14 +7,13 @@ import { swallowEvent } from './../../utils/Helpers';
 @Component({
     selector: 'novo-time-picker',
     inputs: [
-        'value',
         'inline'
     ],
     outputs: [
         'onSelect'
     ],
     directives: [
-        CORE_DIRECTIVES
+        COMMON_DIRECTIVES
     ],
     template: `
         <div class="digital">
@@ -39,73 +38,114 @@ import { swallowEvent } from './../../utils/Helpers';
                     </span>
                 </div>
                 <div class="analog--hours">
-                    <span *ngFor="#hour of HOURS; #h=index;" class="analog--hour" [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour)" [attr.data-automation-id]="hour">{{hour}}</span>
+                    <span *ngFor="#hour of HOURS; #h=index;" class="analog--hour" [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour, true)" [attr.data-automation-id]="hour">{{hour}}</span>
                 </div>
                 <div class="analog--minutes">
-                    <span *ngFor="#minute of MINUTES; #m=index;" class="analog--minute" [ngClass]="{active: activeMinute == minute}" (click)="setMinutes($event, minute)" [attr.data-automation-id]="minute">{{minute}}</span>
+                    <span *ngFor="#minute of MINUTES; #m=index;" class="analog--minute" [ngClass]="{active: activeMinute == minute}" (click)="setMinutes($event, minute, true)" [attr.data-automation-id]="minute">{{minute}}</span>
                 </div>
             </div>
         </div>
-    `
+    `,
+    host: {
+        '[class.ng-untouched]': 'model.control?.untouched == true',
+        '[class.ng-touched]': 'model.control?.touched == true',
+        '[class.ng-pristine]': 'model.control?.pristine == true',
+        '[class.ng-dirty]': 'model.control?.dirty == true',
+        '[class.ng-valid]': 'model.control?.valid == true',
+        '[class.ng-invalid]': 'model.control?.valid == false'
+    }
 })
+@Reflect.metadata('parameters', [[new OptionalMetadata()]])
 export class TimePicker {
-    constructor() {
+    constructor(model:NgControl) {
         this.HOURS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
         this.MINUTES = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
         this.MERIDIANS = ['am', 'pm'];
-        this.onSelect = new EventEmitter();
-        this.hours = 3;
-        this.minutes = 15;
+        this.onChange = null;
+        this.onTouched = null;
+        this.onSelect = new EventEmitter(false);
+        this.hours = 12;
+        this.minutes = 0;
+        this.value = null;
+        this.model = model || new NgModel();
+        this.model.valueAccessor = this;
     }
 
     ngOnInit() {
-        if (this.value) {
-            let momentValue = moment(this.value);
-            let hours = momentValue.hours();
-            let minutes = momentValue.minutes();
+        this.ngOnChanges();
+    }
 
-            this.meridian = hours >= 12 ? 'pm' : 'am';
-
-            hours = hours % 12;
-            hours = hours || 12;
-            minutes = minutes < 10 ? `0${minutes}` : minutes;
-
-            this.setHours(null, hours);
-            this.setMinutes(null, minutes);
-            this.checkBetween(minutes);
+    ngOnChanges() {
+        if (this.model.value) {
+            this.init(this.model.value, false);
+        } else {
+            this.init(moment(), false);
         }
     }
 
-    checkBetween(val) {
-        this.inBetween = (this.MINUTES.indexOf(val) >= 0) ? false : true;
+    init(value, dispatch) {
+        let momentValue = moment(value);
+        let hours = momentValue.hours();
+        let minutes = momentValue.minutes();
+
+        this.meridian = hours >= 12 ? 'pm' : 'am';
+
+        hours = hours % 12;
+        hours = hours || 12;
+        minutes = minutes < 10 ? `0${minutes}` : minutes;
+
+        this.setHours(null, hours, dispatch);
+        this.setMinutes(null, minutes, dispatch);
+        this.checkBetween(minutes);
     }
 
-    setHours(event, hours) {
+    checkBetween(value) {
+        this.inBetween = this.MINUTES.indexOf(String(value)) < 0;
+    }
+
+    setHours(event, hours, dispatch) {
         swallowEvent(event);
         this.hours = hours;
         this.hoursClass = `hour-${hours}`;
         this.activeHour = hours;
-        this.dispatchChange();
+
+        if (dispatch) {
+            this.dispatchChange();
+        }
     }
 
-    setMinutes(event, minutes) {
+    setMinutes(event, minutes, dispatch) {
         swallowEvent(event);
         this.minutes = minutes;
         this.minutesClass = `min-${minutes}`;
         this.activeMinute = minutes;
         this.checkBetween(minutes);
-        this.dispatchChange();
+
+        if (dispatch) {
+            this.dispatchChange();
+        }
     }
 
-    setPeriod(event, period) {
+    setPeriod(event, period, dispatch) {
         swallowEvent(event);
         this.meridian = period;
-        this.dispatchChange();
+
+        if (dispatch) {
+            this.dispatchChange();
+        }
     }
 
     dispatchChange() {
-        let hours = (this.meridian === 'pm') ? Number(this.hours) + 12 : this.hours;
-        let value = moment().hours(hours).minutes(this.minutes);
+        let hours = this.meridian === 'pm' ? Number(this.hours) + 12 : Number(this.hours);
+
+        // Special case for 12
+        if (this.meridian === 'pm' && hours === 24) {
+            hours = 12;
+        } else if (this.meridian === 'am' && hours === 12) {
+            hours = 0;
+        }
+
+        let value = moment().hours(hours).minutes(this.minutes).seconds(0);
         this.onSelect.next({
             hours: hours,
             minutes: this.minutes,
@@ -114,6 +154,23 @@ export class TimePicker {
             moment: value,
             text: `${this.hours}:${this.minutes} ${this.meridian}`
         });
+        this.model.viewToModelUpdate(value.toDate());
+    }
+
+    //valueAccessor Functions
+    writeValue(value) {
+        this.value = value;
+        if (value) {
+            this.init(value, false);
+        }
+    }
+
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn) {
+        this.onTouched = fn;
     }
 }
 

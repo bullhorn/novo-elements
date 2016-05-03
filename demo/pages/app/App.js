@@ -18,7 +18,8 @@ import {
     TooltipDemo,
     DrawerDemo,
     SelectDemo,
-    SwitchDemo
+    SwitchDemo,
+    CalendarDemo
 } from './../pages';
 
 const template = require('./App.html');
@@ -59,8 +60,8 @@ const template = require('./App.html');
     {
         path: '/toast',
         component: ToastDemo,
-        name: 'Toast' },
-    {
+        name: 'Toast'
+    }, {
         path: '/button',
         component: ButtonDemo,
         name: 'Button'
@@ -88,11 +89,14 @@ const template = require('./App.html');
         path: '/drawer',
         component: DrawerDemo,
         name: 'Drawer'
-    },
-    {
+    }, {
         path: '/switch',
         component: SwitchDemo,
         name: 'Switch'
+    }, {
+        path: '/calendar',
+        component: CalendarDemo,
+        name: 'Calendar'
     },
 
     // Utils
@@ -115,7 +119,7 @@ const template = require('./App.html');
     }
 ])
 export class DemoApp {
-    constructor(router: Router) {
+    constructor(router:Router) {
         this.router = router;
         this.menuOpen = false;
         this.version = VERSION;
@@ -134,51 +138,37 @@ export class DemoApp {
             path: '/color'
         }];
 
-        this.componentRoutes = [
-            {
-                name: 'Toast',
-                path: '/toast'
-            }, {
-                name: 'Button',
-                path: '/button'
-            }, {
-                name: 'Tabs',
-                path: '/tabs'
-            }, {
-                name: 'Select',
-                path: '/select'
-            }, {
-                name: 'Loading',
-                path: '/loading'
-            }, {
-                name: 'Cards',
-                path: '/cards'
-            }, {
-                name: 'Tooltip',
-                path: '/tooltip'
-            }, {
-                name: 'Drawer',
-                path: '/drawer'
-            },
-            {
-                name: 'Switch',
-                path: '/switch'
-            }
-            // { name: 'Form', path: '/form' },
-            // { name: 'Dropdown', path: '/dropdowns' },
-            // { name: 'Tooltip', path: '/tooltips' },
-            // { name: 'Calendar', path: '/calendar' },
-            // { name: 'Table', path: '/table' },
-            // { name: 'Drawer', path: '/drawer' },
-            // { name: 'Switch', path: '/switch' },
-            // { name: 'Modal', path: '/modal' },
-            // { name: 'Loading', path: '/loading' },
-            // { name: 'Dragula', path: '/dragula' },
-            // { name: 'Cards', path: '/cards' },
-            // { name: 'CardExamples', path: '/card-examples' },
-            // { name: 'Chart', path: '/chart' },
-            // { name: 'Headers', path: '/headers' }
-        ];
+        this.componentRoutes = [{
+            name: 'Toast',
+            path: '/toast'
+        }, {
+            name: 'Button',
+            path: '/button'
+        }, {
+            name: 'Tabs',
+            path: '/tabs'
+        }, {
+            name: 'Select',
+            path: '/select'
+        }, {
+            name: 'Loading',
+            path: '/loading'
+        }, {
+            name: 'Cards',
+            path: '/cards'
+        }, {
+            name: 'Tooltip',
+            path: '/tooltip'
+        }, {
+            name: 'Drawer',
+            path: '/drawer'
+        }, {
+            name: 'Switch',
+            path: '/switch'
+        }, {
+            name: 'Calendar',
+            path: '/calendar'
+        }];
 
         this.utilRoutes = [{
             name: 'Pipes',
