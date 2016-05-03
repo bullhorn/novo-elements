@@ -2,7 +2,7 @@
 
 ## Usage
 ```javascript
-import { NOVO_BUTTON_ELEMENTS } from 'novo-elements';
+import { NOVO_SWITCH_ELEMENTS } from 'novo-elements';
 ```
 
 ##### Properties
