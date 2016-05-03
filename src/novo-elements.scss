@@ -6,17 +6,15 @@
 @import "./assets/styles/global/variables";
 @import "./assets/styles/global/include-media";
 @import "./assets/styles/global/flex-grid";
-
+@import "./assets/styles/global/layout";
 // --------------------------------------------------
 // Plugins (Third-Party-Libraries)
 // --------------------------------------------------
 @import "hint";
-
 // --------------------------------------------------
 // Content
 // --------------------------------------------------
 @import "./assets/styles/content/typography";
-
 // --------------------------------------------------
 // Elements
 // --------------------------------------------------
