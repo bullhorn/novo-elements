@@ -1,4 +1,4 @@
-import { Component, ElementRef } from 'angular2/core';
+import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { NOVO_BUTTON_ELEMENTS } from '../button';
 
@@ -11,9 +11,6 @@ import { NOVO_BUTTON_ELEMENTS } from '../button';
     directives: [NOVO_BUTTON_ELEMENTS]
 })
 export class UtilAction {
-    constructor() {
-
-    }
 }
 
 @Component({
@@ -38,8 +35,7 @@ export class UtilAction {
     directives: [CORE_DIRECTIVES, UtilAction]
 })
 export class NovoHeader {
-    constructor(element:ElementRef) {
-        this.element = element;
+    constructor() {
         this.inverse = 'inverse';
         this.headerClass = 'novo-header';
     }
