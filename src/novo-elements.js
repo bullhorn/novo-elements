@@ -1,5 +1,6 @@
 import { NOVO_BUTTON_ELEMENTS } from './elements/button';
 import { NOVO_TAB_ELEMENTS } from './elements/tabs';
+import { NOVO_TOAST_ELEMENTS } from './elements/toast';
 import { NOVO_SWITCH_ELEMENTS } from './elements/switch';
 import { NOVO_CARD_ELEMENTS, NOVO_CARD_EXTRA_ELEMENTS } from './elements/card';
 import { NOVO_LOADING_ELEMENTS } from './elements/loading';
@@ -12,6 +13,7 @@ import { NOVO_TIME_PICKER_ELEMENTS } from './elements/timepicker';
 // Elements
 export * from './elements/button';
 export * from './elements/tabs';
+export * from './elements/toast';
 export * from './elements/switch';
 export * from './elements/card';
 export * from './elements/loading';
@@ -34,6 +36,7 @@ export * from './utils/Helpers';
 export const NOVO_ELEMENTS = [
     NOVO_BUTTON_ELEMENTS,
     NOVO_TAB_ELEMENTS,
+    NOVO_TOAST_ELEMENTS,
     NOVO_SWITCH_ELEMENTS,
     NOVO_CARD_ELEMENTS,
     NOVO_CARD_EXTRA_ELEMENTS,
