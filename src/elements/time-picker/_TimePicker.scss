@@ -247,7 +247,6 @@ novo-time-picker {
 
     .analog--minute {
         font-size: 1.0em;
-        font-size: 1.0em;
         margin-left: -20px;
         margin-top: -16px;
     }
@@ -272,6 +271,23 @@ novo-time-picker {
         }
         .analog--minute:nth-child(#{$i}) {
             transform: rotate(#{$deg}deg) translate($d) rotate(#{$deg*-1}deg);
+        }
+    }
+    &.military {
+        $md: 5.9em;
+        @for $i from 1 through 24 {
+            $hour: $i - 1;
+            $deg: ($i * 15 - 105);
+            .analog--hour:nth-child(#{$i}) {
+                font-size: 1.2em;
+                transform: rotate(#{$deg}deg) translate($md) rotate(#{$deg*-1}deg);
+            }
+
+            .analog--hand--hours {
+                &.hour-#{$hour} {
+                    transform: rotate(#{$deg}deg);
+                }
+            }
         }
     }
 }

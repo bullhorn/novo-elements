@@ -13,7 +13,7 @@ calendar-demo {
             flex: 1;
         }
     }
-    .example.time-demo {
+    .example.demo {
         padding: 20px;
         background: rgba(0, 0, 0, .45);
         timeselect {
@@ -36,6 +36,15 @@ calendar-demo {
         > label {
             font-weight: 500;
             display: block;
+        }
+    }
+
+    > novo-time-picker,
+    > novo-date-picker {
+        margin-right: 5px;
+
+        &:last-child {
+            margin-right: 0;
         }
     }
 }

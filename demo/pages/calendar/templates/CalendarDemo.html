@@ -1,8 +1,8 @@
-<calendar></calendar>
-<bh-form>
-    <form-title>Calendar Picker</form-title>
-    <form-field>
-        <form-label>Start Date</form-label>
-        <form-input name="startDate" type="date" inline="true" placeholder="Please select a date"></form-input>
-    </form-field>
-</bh-form>
+<div class="calendar-demo-side-by-side">
+    <p>
+        <label>Value</label>
+        {{time | date}}
+    </p>
+    <novo-date-picker [(value)]="time"></novo-date-picker>
+    <novo-date-picker [(value)]="time"></novo-date-picker>
+</div>

@@ -156,51 +156,7 @@ input[type=calendar] {
             font-size: .9em;
         }
 
-        .calendar-time-box {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            overflow-y: hidden;
-            height: 75%;
-
-            .hours, .minutes, .meridiems, .divider {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-
-                .up {
-                    border-right: 8px solid transparent;
-                    border-left: 8px solid transparent;
-                    border-bottom: 8px solid #aaa;
-                    margin: 4px 20px;
-                    vertical-align: middle;
-                    width: 0;
-                    height: 0;
-
-                    &:hover {
-                        opacity: 1;
-                        border-bottom: 8px solid $positive;
-                        cursor: pointer;
-                    }
-                }
-                .down {
-                    border-right: 8px solid transparent;
-                    border-left: 8px solid transparent;
-                    border-top: 8px solid #aaa;
-                    margin: 4px 20px;
-                    vertical-align: middle;
-                    width: 0;
-                    height: 0;
-
-                    &:hover {
-                        opacity: 1;
-                        border-top: 8px solid $positive;
-                        cursor: pointer;
-                    }
-                }
-            }
-        }
-        .year, .month, .hour, .min, .meridiem {
+        .year, .month {
             text-align: center;
             padding: 4px 15px;
             color: #666666;
@@ -263,52 +219,7 @@ input[type=calendar] {
         text-align: left;
 
         .today {
-            color: $positive;
-        }
-    }
-}
-
-/* DATE-TIME PICKER
------------------------------ */
-.datetime-container {
-    position: absolute;
-    z-index: 90;
-    display: flex;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15), 0px 2px 7px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    background-color: #fff;
-
-    > * {
-        box-shadow: none;
-        background: none;
-        background-color: transparent;
-        position: relative;
-        border-radius: initial;
-    }
-
-    calendar {
-        .calendar {
-            box-shadow: none;
-            border-radius: initial;
-            background-color: transparent;
-        }
-    }
-
-    timeselect {
-        border-left: 1px solid #ddd;
-        background: #fff;
-
-        .digital {
-            background-color: #fff;
-            border-bottom: 1px solid #f0f0f0;
-            color: $dark;
-        }
-
-        .digital--clock {
-            color: $dark;
-        }
-
-        .digital--period {
+            cursor: pointer;
             color: $positive;
         }
     }

@@ -1,5 +1,5 @@
 import { Component } from 'angular2/core';
-import { NOVO_TIME_PICKER_ELEMENTS } from './../../../src/novo-elements';
+import { NOVO_TIME_PICKER_ELEMENTS, NOVO_DATE_PICKER_ELEMENTS } from './../../../src/novo-elements';
 
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
 
@@ -20,7 +20,7 @@ const template = `
 
     <h5>Full Calendar Picker</h5>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non massa et augue molestie lacinia. Ut purus sem, bibendum at blandit vitae, bibendum sed turpis. Fusce eros libero, fringilla non dapibus in, cursus elementum ipsum.</p>
-    <div class="example calendar-demo">${CalendarDemoTpl}</div>
+    <div class="example demo">${CalendarDemoTpl}</div>
     <code-snippet [code]="CalendarDemoTpl"></code-snippet>
 
     <h2>Time Picker</h2>
@@ -28,7 +28,7 @@ const template = `
 
     <h5>Standalone Time Picker</h5>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non massa et augue molestie lacinia. Ut purus sem, bibendum at blandit vitae, bibendum sed turpis. Fusce eros libero, fringilla non dapibus in, cursus elementum ipsum.</p>
-    <div class="example time-demo">${TimeDemoTpl}</div>
+    <div class="example demo">${TimeDemoTpl}</div>
     <code-snippet [code]="TimeDemoTpl"></code-snippet>
 
     <h5>Side-By-Side</h5>
@@ -41,7 +41,7 @@ const template = `
 @Component({
     selector: 'calendar-demo',
     template: template,
-    directives: [NOVO_TIME_PICKER_ELEMENTS, CodeSnippet]
+    directives: [NOVO_TIME_PICKER_ELEMENTS, NOVO_DATE_PICKER_ELEMENTS, CodeSnippet]
 })
 export class CalendarDemo {
     constructor() {

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OptionalMetadata } from 'angular2/core';
+import { Component, ElementRef, EventEmitter, Optional } from 'angular2/core'; // eslint-disable-line
 import { COMMON_DIRECTIVES, NgControl, NgModel } from 'angular2/common';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
@@ -28,9 +28,8 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
         '[class.ng-invalid]': 'model.control?.valid == false'
     }
 })
-@Reflect.metadata('parameters', [[new OptionalMetadata()]])
 export class Select extends OutsideClick {
-    constructor(model:NgControl, element:ElementRef) {
+    constructor(@Optional() model:NgControl, element:ElementRef) {
         super(element);
         // Defaults
         this.selectedIndex = -1;
