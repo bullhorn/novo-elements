@@ -5,23 +5,15 @@ import { CORE_DIRECTIVES, NgFor, NgIf, NgClass } from 'angular2/common';
     selector: 'novo-list',
     inputs: ['direction'],
     host: {
-        '[class.vertical-list]': 'vert',
-        '[class.horizontal-list]': 'horiz'
+        '[class.vertical-list]': `direction === 'vertical'`,
+        '[class.horizontal-list]': `direction === 'horizontal'`
     },
     template: `
         <ng-content></ng-content>
     `,
     directives: [CORE_DIRECTIVES, NgFor]
 })
-export class NovoList {
-    constructor() {
-    }
-
-    ngOnInit() {
-        this.vert = (this.direction === 'vertical') ? true : null;
-        this.horiz = (this.direction === 'horizontal') ? true : null;
-    }
-}
+export class NovoList {}
 
 @Component({
     selector: 'novo-list-item',
@@ -35,87 +27,54 @@ export class NovoList {
     `,
     directives: [CORE_DIRECTIVES, NgFor, NgIf]
 })
-export class NovoListItem {
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-}
+export class NovoListItem {}
 
 @Component({
     selector: 'item-avatar',
     inputs: ['icon'],
-    host: {},
     template: `
         <i *ngIf="iconClass" [ngClass]="classMap" theme="contained"></i>
     `,
     directives: [NgIf, NgClass]
 })
 export class ItemAvatar {
-    constructor() {
+    ngOnChanges() {
+        this.iconClass = (this.icon) ? `bhi-${this.icon}` : null;
+        this.classMap = [this.iconClass, this.icon];
     }
 
     ngOnInit() {
-        this.iconClass = (this.icon) ? `bhi-${this.icon}` : null;
-        this.classMap = [this.iconClass, this.icon];
+        this.ngOnChanges();
     }
 }
 
 @Component({
     selector: 'item-title',
-    inputs: [],
-    host: {},
     template: `
         <h3><ng-content></ng-content></h3>
-    `,
-    directives: []
+    `
 })
-export class ItemTitle {
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-}
+export class ItemTitle {}
 
 @Component({
     selector: 'item-content',
     inputs: ['direction'],
     host: {
-        '[class.vertical-list]': 'vert',
-        '[class.horizontal-list]': 'horiz'
+        '[class.vertical-list]': `direction === 'vertical'`,
+        '[class.horizontal-list]': `direction === 'horizontal'`
     },
     template: `
         <ng-content></ng-content>
-    `,
-    directives: []
+    `
 })
-export class ItemContent {
-    constructor() {
-    }
-
-    ngOnInit() {
-        this.vert = (this.direction === 'vertical') ? true : null;
-        this.horiz = (this.direction === 'horizontal') ? true : null;
-    }
-}
+export class ItemContent {}
 
 @Component({
     selector: 'item-end',
-    inputs: [],
-    host: {},
     template: `
         <ng-content></ng-content>
-    `,
-    directives: []
+    `
 })
-export class ItemEnd {
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-}
+export class ItemEnd {}
 
 export const NOVO_LIST_ELEMENTS = [NovoList, NovoListItem, ItemAvatar, ItemTitle, ItemContent, ItemEnd];
