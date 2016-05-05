@@ -25,11 +25,6 @@ export class NovoList {
 
 @Component({
     selector: 'novo-list-item',
-    inputs: ['theme'],
-    host: {
-        '[class.pulse-item]': 'pulse',
-        '[class.arrow-item]': 'arrow'
-    },
     template: `
         <ng-content select="item-avatar"></ng-content>
         <div>
@@ -45,7 +40,6 @@ export class NovoListItem {
     }
 
     ngOnInit() {
-        this.pulse = (this.theme === 'pulse') ? true : null;
     }
 }
 

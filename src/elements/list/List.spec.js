@@ -1,6 +1,4 @@
-// import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import { Component } from 'angular2/core';
-// import {By} from 'angular2/platform/common_dom';
 import { beforeEach, expect, describe, it } from 'angular2/testing';
 
 import { createTestContext } from '../../testing/TestContext';
@@ -27,9 +25,6 @@ describe('Element: NovoList', () => {
             .finally(done)
             .subscribe(() => {
                 instance = ctx.fixture.componentInstance;
-                // const cmpDebugElement = ctx.fixture.debugElement.query(By.directive(BhLoading));
-                // cmpElement = cmpDebugElement.nativeElement;
-                // cmpInstance = cmpDebugElement.componentInstance;
             });
     });
 
