@@ -28,23 +28,36 @@ header {
             &[theme="#{$analytics}"] {
                 background: $color;
                 color: #fff;
+
+                & > section.primary {
+                    background: $color;
+                }
             }
         }
         @each $entity, $color in $entity-colors {
             &[theme="#{$entity}"] {
                 background: $color;
                 color: #fff;
+
+                & > section.primary {
+                    background: $color;
+                }
             }
         }
         @each $basic, $color in $colors {
             &[theme="#{$basic}"] {
                 background: $color;
                 color: #fff;
+
+                & > section.primary {
+                    background: $color;
+                }
             }
         }
-        &[theme="white"],
+
+        &[theme="light"],
         &[theme="off-white"],
-        &[theme="light"] {
+        &[theme="white"] {
             color: $dark;
         }
     }
