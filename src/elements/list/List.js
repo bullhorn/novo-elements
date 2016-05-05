@@ -5,8 +5,8 @@ import { CORE_DIRECTIVES, NgFor, NgIf, NgClass } from 'angular2/common';
     selector: 'novo-list',
     inputs: ['direction'],
     host: {
-        '[class.vertical-list]': `direction === 'vertical'`,
-        '[class.horizontal-list]': `direction === 'horizontal'`
+        '[class.vertical-list]': 'direction === "vertical"',
+        '[class.horizontal-list]': 'direction === "horizontal"'
     },
     template: `
         <ng-content></ng-content>
@@ -60,8 +60,8 @@ export class ItemTitle {}
     selector: 'item-content',
     inputs: ['direction'],
     host: {
-        '[class.vertical-list]': `direction === 'vertical'`,
-        '[class.horizontal-list]': `direction === 'horizontal'`
+        '[class.vertical-list]': 'direction === "vertical"',
+        '[class.horizontal-list]': 'direction === "horizontal"'
     },
     template: `
         <ng-content></ng-content>
