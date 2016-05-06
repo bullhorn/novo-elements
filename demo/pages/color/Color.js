@@ -1,19 +1,18 @@
 import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
-// import { Toaster, NovoToast } from './../../src/novo-elements';
+import { ToastService, NovoToast } from './../../../src/novo-elements';
 
 import template from './Color.html';
 
 @Component({
     selector: 'color',
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES],
-    // providers: [Toaster],
+    providers: [ToastService],
     template: template
 })
 export class Color {
-    constructor(/*toaster:Toaster*/) {
-        // TODO - put toaster back in when that is implemented
+    constructor(toaster:ToastService) {
         this.primaryColors = [
             {
                 name: 'navigation',
@@ -136,7 +135,7 @@ export class Color {
             'position': 'growlTopRight'
         };
 
-        // this.toaster = toaster;
+        this.toaster = toaster;
     }
 
     ngOnInit() {
@@ -171,6 +170,6 @@ export class Color {
         if (color.name === 'action') this.options.theme = 'ocean';
 
         // Fire toast
-        // this.toaster.alert(BhToast, this.options);
+        this.toaster.alert(NovoToast, this.options);
     }
 }

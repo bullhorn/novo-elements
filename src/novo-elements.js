@@ -9,6 +9,10 @@ import { NOVO_DRAWER_ELEMENTS } from './elements/drawer';
 import { NOVO_SELECT_ELEMENTS } from './elements/select';
 import { NOVO_DATE_PICKER_ELEMENTS } from './elements/datepicker';
 import { NOVO_TIME_PICKER_ELEMENTS } from './elements/timepicker';
+import { NOVO_DROPDOWN_ELEMENTS } from './elements/dropdown';
+import { NOVO_HEADER_ELEMENTS } from './elements/header';
+import { NOVO_LIST_ELEMENTS } from './elements/list';
+import { NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS } from './elements/table';
 
 // Elements
 export * from './elements/button';
@@ -18,11 +22,15 @@ export * from './elements/switch';
 export * from './elements/card';
 export * from './elements/loading';
 export * from './elements/select';
+export * from './elements/dropdown';
 export * from './elements/tooltip';
 export * from './elements/drawer';
 export * from './elements/switch';
 export * from './elements/datepicker';
 export * from './elements/timepicker';
+export * from './elements/header';
+export * from './elements/list';
+export * from './elements/table';
 
 // Pipes
 export * from './pipes/plural/Plural';
@@ -42,7 +50,13 @@ export const NOVO_ELEMENTS = [
     NOVO_CARD_EXTRA_ELEMENTS,
     NOVO_LOADING_ELEMENTS,
     NOVO_SELECT_ELEMENTS,
+    NOVO_DROPDOWN_ELEMENTS,
     NOVO_TOOLTIP_ELEMENTS,
+    NOVO_DRAWER_ELEMENTS,
+    NOVO_HEADER_ELEMENTS,
+    NOVO_LIST_ELEMENTS,
+    NOVO_TABLE_ELEMENTS,
+    NOVO_TABLE_EXTRA_ELEMENTS
     NOVO_DRAWER_ELEMENTS,
     NOVO_DATE_PICKER_ELEMENTS,
     NOVO_TIME_PICKER_ELEMENTS

@@ -18,6 +18,10 @@ import {
     TooltipDemo,
     DrawerDemo,
     SelectDemo,
+    HeaderDemo,
+    DropdownDemo,
+    ListDemo,
+    TableDemo
     SwitchDemo,
     CalendarDemo
 } from './../pages';
@@ -74,6 +78,10 @@ const template = require('./App.html');
         component: SelectDemo,
         name: 'Select'
     }, {
+        path: '/dropdown',
+        component: DropdownDemo,
+        name: 'Dropdown'
+    }, {
         path: '/loading',
         component: LoadingDemo,
         name: 'Loading'
@@ -93,6 +101,18 @@ const template = require('./App.html');
         path: '/switch',
         component: SwitchDemo,
         name: 'Switch'
+    }, {
+        path: '/header',
+        component: HeaderDemo,
+        name: 'Header'
+    }, {
+        path: '/list',
+        component: ListDemo,
+        name: 'List'
+    }, {
+        path: '/table',
+        component: TableDemo,
+        name: 'Table'
     }, {
         path: '/calendar',
         component: CalendarDemo,
@@ -169,6 +189,48 @@ export class DemoApp {
             name: 'Calendar',
             path: '/calendar'
         }];
+        this.componentRoutes = [
+            {
+                name: 'Toast',
+                path: '/toast'
+            }, {
+                name: 'Button',
+                path: '/button'
+            }, {
+                name: 'Tabs',
+                path: '/tabs'
+            }, {
+                name: 'Select',
+                path: '/select'
+            }, {
+                name: 'Dropdown',
+                path: '/dropdown'
+            }, {
+                name: 'Loading',
+                path: '/loading'
+            }, {
+                name: 'Cards',
+                path: '/cards'
+            }, {
+                name: 'Tooltip',
+                path: '/tooltip'
+            }, {
+                name: 'Drawer',
+                path: '/drawer'
+            }, {
+                name: 'Switch',
+                path: '/switch'
+            }, {
+                name: 'Header',
+                path: '/header'
+            }, {
+                name: 'List',
+                path: '/list'
+            }, {
+                name: 'Table',
+                path: '/table'
+            }
+        ];
 
         this.utilRoutes = [{
             name: 'Pipes',

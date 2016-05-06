@@ -1,0 +1,375 @@
+novo-table {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    overflow-x: scroll;
+}
+
+/* -- Material Design Table style -------------- */
+// Variables
+// ---------------------
+$table-header-font-weight: 400;
+$table-header-font-color: #757575;
+$table-cell-padding: 1.2rem;
+$table-condensed-cell-padding: $table-cell-padding/2;
+$table-bg: #fff;
+$table-bg-accent: #f4f4f4;
+$table-bg-hover: rgba(0, 0, 0, .12);
+$table-bg-active: $table-bg-hover;
+$table-border-color: #f5f5f5;
+
+// Tables
+//
+// -----------------
+// Baseline styles
+.table {
+    width: 100%;
+    max-width: 100%;
+    background-color: $table-bg;
+
+     > tbody,
+     > thead,
+    > tfoot {
+        > tr {
+            transition: all 0.3s ease;
+
+             > td,
+            > th {
+                position: relative;
+                text-align: left;
+                padding: $table-cell-padding;
+                vertical-align: middle;
+                border-top: 0;
+                transition: all 0.3s ease;
+            }
+        }
+    }
+
+    > thead > tr > th {
+        &:nth-of-type(1) {
+            .th-group {
+                bh-dropdown.column-filters {
+                    .dropdown-container {
+                        left: -80px;
+                    }
+                }
+            }
+        }
+    }
+
+    > thead > tr {
+        th:first-child {
+            novo-dropdown {
+                .dropdown-container {
+                    left: -90px !important;
+                }
+            }
+        }
+
+        th:last-child {
+            novo-dropdown {
+                .dropdown-container {
+                    right: 0 !important;
+                }
+            }
+        }
+    }
+
+    > thead > tr > th {
+        font-weight: $table-header-font-weight;
+        color: $table-header-font-color;
+        vertical-align: bottom;
+        border-bottom: 1px solid rgba(0, 0, 0, .12);
+        padding: 0.75rem;
+        border-right: 1px solid #F4F4F4;
+
+        &.over {
+            background: #eee;
+            border-right: 2px double #000 !important;
+
+            * {
+                pointer-events: none;
+            }
+        }
+
+        .th-group {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            novo-dropdown.column-filters {
+                button.filtered {
+                    i {
+                        color: $positive;
+                    }
+                }
+
+                .dropdown-container {
+                    right: -15px;
+                    min-width: 230px;
+
+                    list {
+                        item.filter-search {
+                            padding: 0;
+                            width: 100%;
+                            height: auto;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            cursor: initial;
+
+                            &:hover {
+                                background: transparent;
+                            }
+
+                            .header {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                                width: 90%;
+                                font-size: 0.9em;
+                                margin: 0 auto;
+
+                                span {
+                                    text-transform: uppercase;
+                                    font-weight: $table-header-font-weight;
+                                }
+
+                                button {
+                                    padding: 0 5px;
+
+                                    i {
+                                        height: auto !important;
+                                        width: auto !important;
+                                        font-size: 0.9em;
+                                    }
+                                }
+                            }
+
+                            input {
+                                border: none;
+                                border-bottom: 2px solid #BEBEBE;
+                                width: 90%;
+                                margin: 10px auto 0;
+                                background: transparent;
+
+                                &:focus {
+                                    outline: none;
+                                    border-bottom: 2px solid $ocean;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .th-title {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 10px;
+                border-radius: 3px;
+                cursor: pointer;
+                font-weight: $table-header-font-weight;
+
+                &:hover {
+                    .table-sort-icons {
+                        opacity: 1;
+
+                        i {
+                            &.bhi-arrow-down {
+                                color: darken(#757575, 10%);
+                            }
+
+                            &.bhi-arrow-up {
+                                color: lighten(#757575, 15%);
+                            }
+                        }
+                    }
+                }
+
+                label {
+                    margin-right: 10px;
+                }
+
+                .table-sort-icons {
+                    display: flex;
+                    flex-direction: row;
+                    opacity: 0.3;
+                    transition: all 200ms ease-in-out;
+
+                    i {
+                        font-size: 0.8em;
+                        margin: 0;
+
+                        &.bhi-arrow-down {
+                            padding-top: 5px;
+                        }
+
+                        &.bhi-arrow-up {}
+                    }
+
+                    &.asc {
+                        opacity: 1;
+
+                        i {
+                            &.bhi-arrow-down {
+                                color: $positive;
+                            }
+
+                            &.bhi-arrow-up {
+                                color: lighten(#757575, 15%);
+                            }
+                        }
+                    }
+
+                    &.desc {
+                        opacity: 1;
+
+                        i {
+                            &.bhi-arrow-down {
+                                color: lighten(#757575, 15%);
+                            }
+
+                            &.bhi-arrow-up {
+                                color: $positive;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+     > colgroup + thead,
+     > thead:first-child,
+    > caption + thead {
+        > tr:first-child {
+             > td,
+            > th {
+                border-top: 0;
+            }
+        }
+    }
+
+    > tbody + tbody {
+        border-top: 1px solid rgba(0, 0, 0, .12);
+    }
+    // Nesting
+    .table {
+        background-color: $table-bg;
+    }
+
+    .row-action {
+        padding: 0.3rem !important;
+    }
+
+    tr.details-row {
+        td {
+            padding-top: 0 !important;
+        }
+    }
+    // Remove border
+    .no-border {
+        border: 0;
+    }
+
+    .no-matching-records {
+        color: $grey;
+        margin: 40px 0;
+        vertical-align: middle;
+        text-transform: uppercase;
+    }
+}
+
+// Condensed table w/ half padding
+.table-condensed {
+     > tbody,
+     > thead,
+    > tfoot {
+        > tr {
+             > td,
+            > th {
+                padding: $table-condensed-cell-padding;
+            }
+        }
+    }
+}
+
+// Bordered version
+// Add horizontal borders between columns.
+.table-bordered {
+     > tbody,
+     > thead,
+    > tfoot {
+        > tr {
+             > td,
+            > th {
+                border-bottom: 1px solid $table-border-color;
+            }
+        }
+    }
+
+    > thead > tr {
+         > td,
+        > th {
+            border-bottom-width: 2px;
+        }
+    }
+}
+
+// Zebra-striping
+// Default zebra-stripe styles (alternating gray and transparent backgrounds)
+.table-striped:not(.table-details) {
+    > tbody tr:nth-of-type(odd) {
+        background-color: $table-bg-accent;
+    }
+}
+
+.table-striped.table-details {
+     > tbody tr:nth-of-type(4n+2),
+    > tbody tr:nth-of-type(4n+1) {
+        background-color: $table-bg-accent;
+    }
+}
+
+// Hover effect
+.table-hover {
+    > tbody > tr:hover {
+        background-color: $table-bg-hover;
+    }
+}
+
+.handle {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    cursor: col-resize;
+}
+
+novo-table {
+    &[dark] {
+        .table > thead > tr > th {
+            border-right: 1px solid rgba(#F4F4F4, .04);
+        }
+
+        .table-striped:not(.table-details) {
+            > tbody tr:nth-of-type(odd) {
+                background-color: rgba($table-bg-accent, .04);
+            }
+        }
+
+        .table-striped.table-details {
+             > tbody tr:nth-of-type(4n+2),
+            > tbody tr:nth-of-type(4n+1) {
+                background-color: rgba($table-bg-accent, .04);
+            }
+        }
+    }
+}
+
+th.dragging {
+    opacity: 0.4;
+}
