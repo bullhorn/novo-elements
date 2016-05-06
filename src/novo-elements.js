@@ -10,6 +10,7 @@ import { NOVO_SELECT_ELEMENTS } from './elements/select';
 import { NOVO_DROPDOWN_ELEMENTS } from './elements/dropdown';
 import { NOVO_HEADER_ELEMENTS } from './elements/header';
 import { NOVO_LIST_ELEMENTS } from './elements/list';
+import { NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS } from './elements/table';
 
 // Elements
 export * from './elements/button';
@@ -24,6 +25,7 @@ export * from './elements/tooltip';
 export * from './elements/drawer';
 export * from './elements/header';
 export * from './elements/list';
+export * from './elements/table';
 
 // Pipes
 export * from './pipes/plural/Plural';
@@ -46,5 +48,7 @@ export const NOVO_ELEMENTS = [
     NOVO_TOOLTIP_ELEMENTS,
     NOVO_DRAWER_ELEMENTS,
     NOVO_HEADER_ELEMENTS,
-    NOVO_LIST_ELEMENTS
+    NOVO_LIST_ELEMENTS,
+    NOVO_TABLE_ELEMENTS,
+    NOVO_TABLE_EXTRA_ELEMENTS
 ];

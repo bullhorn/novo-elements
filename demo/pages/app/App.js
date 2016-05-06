@@ -21,7 +21,8 @@ import {
     SwitchDemo,
     HeaderDemo,
     DropdownDemo,
-    ListDemo
+    ListDemo,
+    TableDemo
 } from './../pages';
 
 const template = require('./App.html');
@@ -107,6 +108,10 @@ const template = require('./App.html');
         path: '/list',
         component: ListDemo,
         name: 'List'
+    }, {
+        path: '/table',
+        component: TableDemo,
+        name: 'Table'
     },
 
     // Utils
@@ -185,6 +190,9 @@ export class DemoApp {
             }, {
                 name: 'List',
                 path: '/list'
+            }, {
+                name: 'Table',
+                path: '/table'
             }
         ];
 
