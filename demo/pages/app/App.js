@@ -21,7 +21,7 @@ import {
     HeaderDemo,
     DropdownDemo,
     ListDemo,
-    TableDemo
+    TableDemo,
     SwitchDemo,
     CalendarDemo
 } from './../pages';
@@ -171,6 +171,9 @@ export class DemoApp {
             name: 'Select',
             path: '/select'
         }, {
+            name: 'Dropdown',
+            path: '/dropdown'
+        }, {
             name: 'Loading',
             path: '/loading'
         }, {
@@ -186,51 +189,18 @@ export class DemoApp {
             name: 'Switch',
             path: '/switch'
         }, {
+            name: 'Header',
+            path: '/header'
+        }, {
+            name: 'List',
+            path: '/list'
+        }, {
+            name: 'Table',
+            path: '/table'
+        }, {
             name: 'Calendar',
             path: '/calendar'
         }];
-        this.componentRoutes = [
-            {
-                name: 'Toast',
-                path: '/toast'
-            }, {
-                name: 'Button',
-                path: '/button'
-            }, {
-                name: 'Tabs',
-                path: '/tabs'
-            }, {
-                name: 'Select',
-                path: '/select'
-            }, {
-                name: 'Dropdown',
-                path: '/dropdown'
-            }, {
-                name: 'Loading',
-                path: '/loading'
-            }, {
-                name: 'Cards',
-                path: '/cards'
-            }, {
-                name: 'Tooltip',
-                path: '/tooltip'
-            }, {
-                name: 'Drawer',
-                path: '/drawer'
-            }, {
-                name: 'Switch',
-                path: '/switch'
-            }, {
-                name: 'Header',
-                path: '/header'
-            }, {
-                name: 'List',
-                path: '/list'
-            }, {
-                name: 'Table',
-                path: '/table'
-            }
-        ];
 
         this.utilRoutes = [{
             name: 'Pipes',
