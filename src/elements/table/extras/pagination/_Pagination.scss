@@ -1,0 +1,74 @@
+novo-pagination {
+    display: flex;
+    flex-flow: row nowrap;
+    background: rgba(0, 0, 0, .15);
+    padding: 10px;
+    color: #fff;
+
+    > * {
+        margin: auto 5px;
+        color: #fff;
+    }
+
+    h5.rows {
+        color: #fff;
+        padding: 0;
+        font-size: 12px;
+        opacity: 0.75;
+        letter-spacing: 0.1px;
+    }
+
+    spacer {
+        flex: 1;
+    }
+
+    bh-select {
+        button {
+            color: #fff;
+            border-bottom: 1px solid rgba(255, 255, 255, .15);
+
+            &:hover {
+                border-bottom: 1px solid rgba(255, 255, 255, .55);
+
+                i {
+                    opacity: 0.75;
+                    color: #fff;
+                }
+            }
+
+            &:focus,
+            &:active {
+                border-bottom: 1px solid rgba(255, 255, 255, .75);
+
+                i {
+                    opacity: 1;
+                    color: #fff;
+                }
+            }
+
+            i {
+                opacity: 0.45;
+                color: #fff;
+            }
+        }
+    }
+
+    .pager {
+        list-style-type: none;
+
+        .page {
+            display: inline-block;
+            padding: 0 10px;
+            line-height: 30px;
+            border-radius: 2px;
+            text-align: center;
+            list-style-type: none;
+            cursor: pointer;
+        }
+
+        .page.active {
+            background-color: rgba(255, 255, 255, .2);
+            color: #fff;
+        }
+    }
+}

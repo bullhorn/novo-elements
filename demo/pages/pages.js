@@ -17,3 +17,4 @@ export * from './drawer/DrawerDemo';
 export * from './switch/SwitchDemo';
 export * from './header/HeaderDemo';
 export * from './list/ListDemo';
+export * from './table/TableDemo';

@@ -1,0 +1,60 @@
+table-demo {
+    .example.table-demo {
+        header {
+            width: 100%;
+            background: $aqua;
+            transition: background 340ms ease-in-out;
+
+            .header-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: #fff;
+                padding: 20px;
+                font-size: 11px;
+
+                h1 {
+                    font-size: 1.5em;
+                    color: #fff;
+                }
+
+                h5 {
+                    color: #fff;
+                    opacity: 0.75;
+                }
+
+                div {
+                    text-align: right;
+                }
+            }
+
+            &.blue {
+                background: $ocean;
+            }
+
+            &.green {
+                background: $grass;
+            }
+
+            &.yellow {
+                background: $sunflower;
+            }
+
+            &.orange {
+                background: $bittersweet;
+            }
+
+            &.red {
+                background: $grapefruit;
+            }
+
+            &.purple {
+                background: $lavender;
+            }
+        }
+
+        novo-table {
+            height: 100%;
+        }
+    }
+}
