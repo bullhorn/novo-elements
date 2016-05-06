@@ -36,7 +36,7 @@ describe('Element: Table', () => {
             .finally(done)
             .subscribe(() => {
                 instance = ctx.fixture.componentInstance;
-                const cmpDebugElement = ctx.fixture.debugElement.query(By.directive(Table));
+                const cmpDebugElement = ctx.fixture.debugElement.query(By.directive(NovoTable));
                 cmpElement = cmpDebugElement.nativeElement;
                 cmpInstance = cmpDebugElement.componentInstance;
             });
