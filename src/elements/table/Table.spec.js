@@ -23,7 +23,7 @@ class TestCmp {
     }
 }
 
-describe('Element: Table', () => {
+describe('Element: NovoTable', () => {
     let ctx;
     let instance;
     let cmpElement;
