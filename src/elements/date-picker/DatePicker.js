@@ -7,10 +7,10 @@ import { swallowEvent } from './../../utils/Helpers';
 @Component({
     selector: 'novo-date-picker',
     inputs: [
-        'format',
-        'inline',
         'minYear',
-        'maxYear'
+        'maxYear',
+        'start',
+        'end'
     ],
     outputs: [
         'onSelect'
@@ -18,7 +18,7 @@ import { swallowEvent } from './../../utils/Helpers';
     directives: [COMMON_DIRECTIVES],
     template: `
         <div class="calendar">
-            <div class="calendar-top" *ngIf="!inline">
+            <div class="calendar-top">
                 <h4 class="day" [attr.data-automation-id]="heading.day">{{heading.day}}</h4>
                 <h2 class="month" [attr.data-automation-id]="heading.month">{{heading.month}}</h2>
                 <h1 class="date" [attr.data-automation-id]="heading.date">{{heading.date}}</h1>
@@ -27,8 +27,8 @@ import { swallowEvent } from './../../utils/Helpers';
             <div class="calendar-header">
                 <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
                 <span class="heading">
-                    <span class="month" (click)="open($event, 'months')" [attr.data-automation-id]="heading.month">{{heading.month}}</span>
-                    <span class="year" (click)="open($event, 'years')" [attr.data-automation-id]="heading.year">{{heading.year}}</span>
+                    <span class="month" (click)="open($event, 'months')" [attr.data-automation-id]="heading.month">{{month.format('MMM')}}</span>
+                    <span class="year" (click)="open($event, 'years')" [attr.data-automation-id]="heading.year">{{month.format('YYYY')}}</span>
                 </span>
                 <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
             </div>
@@ -41,7 +41,7 @@ import { swallowEvent } from './../../utils/Helpers';
                 <tbody>
                     <tr *ngFor="#week of weeks">
                         <td *ngFor="#day of week.days" [ngClass]="{ today: day.isToday, 'notinmonth': !day.isCurrentMonth, selected: day.date.isSame(selected) }">
-                            <div class="day" (click)="select($event, day, true)" [attr.data-automation-id]="day.number">{{day.number}}</div>
+                            <button class="day" (click)="select($event, day, true)" [attr.data-automation-id]="day.number" [disabled]="(start && day.date.isBefore(start)) || (end && day.date.isAfter(end))">{{day.number}}</button>
                         </td>
                     </tr>
                 </tbody>
@@ -88,10 +88,10 @@ export class DatePicker {
         for (let i = start; i <= end; i++) {
             this.years.push(i);
         }
-        this.updateView(this.value, false);
+        this.updateView(this.value, false, true);
     }
 
-    updateView(date, fireEvents) {
+    updateView(date, fireEvents, markedSelected) {
         let value = date ? moment(date) : moment();
         value = this.removeTime(value);
         this.month = value.clone();
@@ -101,26 +101,29 @@ export class DatePicker {
         this.removeTime(start.day(0));
 
         this.buildMonth(start, this.month);
-        this.select(null, { date: value }, fireEvents);
+
+        if (markedSelected) {
+            this.select(null, { date: value }, fireEvents);
+        }
     }
 
     setToday() {
         let tmp = moment();
-        this.updateView(tmp, true);
+        this.updateView(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
     }
 
     setMonth(month) {
         let tmp = this.selected.clone().month(month);
-        this.updateView(tmp, true);
+        this.updateView(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
     }
 
     setYear(year) {
         let tmp = this.selected.clone().year(year);
-        this.updateView(tmp, true);
+        this.updateView(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
     }
@@ -161,16 +164,16 @@ export class DatePicker {
 
     prevMonth(event) {
         swallowEvent(event);
-        let tmp = this.selected.clone();
+        let tmp = this.month.clone();
         tmp = tmp.subtract(1, 'months');
-        this.updateView(tmp, true);
+        this.updateView(tmp, false, false);
     }
 
     nextMonth(event) {
         swallowEvent(event);
-        let tmp = this.selected.clone();
+        let tmp = this.month.clone();
         tmp = tmp.add(1, 'months');
-        this.updateView(tmp, true);
+        this.updateView(tmp, false, false);
     }
 
     updateHeading() {
@@ -239,7 +242,7 @@ export class DatePicker {
     writeValue(value) {
         this.value = value;
         if (value) {
-            this.updateView(value, false);
+            this.updateView(value, false, true);
         }
     }
 

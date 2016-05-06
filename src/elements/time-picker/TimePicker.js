@@ -7,7 +7,6 @@ import { swallowEvent } from './../../utils/Helpers';
 @Component({
     selector: 'novo-time-picker',
     inputs: [
-        'inline',
         'military'
     ],
     outputs: [

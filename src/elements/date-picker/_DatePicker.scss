@@ -182,11 +182,23 @@ input[type=calendar] {
             width: 30px;
             line-height: 30px;
             margin: 1px;
+            border: none;
+            background-color: transparent;
+
+            &:focus {
+                outline: none;
+            }
+
+            &:disabled {
+                color: #D7D9E4;
+                cursor: not-allowed !important;
+                box-shadow: none !important;
+            }
         }
 
         td {
             &.notinmonth {
-                color: #D7D9E4;
+                //color: #D7D9E4;
             }
             &.selected {
                 .day {
