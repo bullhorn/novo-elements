@@ -77,7 +77,7 @@ export class TimePicker {
         // Set the hours
         this.HOURS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
         if (this.military) {
-            this.HOURS = ['0', ...this.HOURS, '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
+            this.HOURS = ['0', ...this.HOURS, '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
         }
         this.ngOnChanges();
     }
@@ -112,7 +112,6 @@ export class TimePicker {
     }
 
     setHours(event, hours, dispatch) {
-        console.log('H', hours);
         swallowEvent(event);
         this.hours = hours;
         this.hoursClass = `hour-${hours}`;
@@ -170,7 +169,7 @@ export class TimePicker {
         this.model.viewToModelUpdate(value.toDate());
     }
 
-    //valueAccessor Functions
+    // ValueAccessor Functions
     writeValue(value) {
         this.value = value;
         if (value) {

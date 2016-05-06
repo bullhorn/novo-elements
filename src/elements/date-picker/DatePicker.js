@@ -1,86 +1,21 @@
-import { Component, EventEmitter } from 'angular2/core';
-import { CORE_DIRECTIVES } from 'angular2/common';
+import { Component, EventEmitter, Optional } from 'angular2/core'; // eslint-disable-line
+import { COMMON_DIRECTIVES, NgControl, NgModel } from 'angular2/common';
+import moment from 'moment/moment';
 
-// a global month names array
-const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-// a global day names array
-const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-// Zero-Fill
-Number.prototype.zf = function (l) {  // eslint-disable-line
-    return '0'.string(l - this.toString().length) + this;
-};
-// return the sub of an integer
-Number.prototype.substr = function (l) {  // eslint-disable-line
-    return this.toString().substr(l);
-};
-// VB-like string
-String.prototype.string = function (l) {  // eslint-disable-line
-    let s = '', i = 0;  // eslint-disable-line
-    while (i++ < l) {
-        s += this;
-    }
-    return s;
-};
-
-// the date format prototype
-export function FormatDate(dt, f) {
-    if (!dt.valueOf()) return ' ';
-
-    return f.replace(/(yyyy|yy|mmmm|mmm|mm|m|dd|d|eeee|eee|ee|e|hh|nn|ss|a\/p)/gi,
-        val => {
-            let h = dt.getHours() % 12;
-            switch (val.toLowerCase()) {
-                case 'yy':
-                    return dt.getFullYear().substr(2);
-                case 'yyyy':
-                    return dt.getFullYear();
-                case 'mmmm':
-                    return MONTH_NAMES[dt.getMonth()];
-                case 'mmm':
-                    return MONTH_NAMES[dt.getMonth()].substr(0, 3);
-                case 'mm':
-                    return (dt.getMonth() + 1).zf(2);
-                case 'm':
-                    return (dt.getMonth() + 1);
-                case 'eeee':
-                    return DAY_NAMES[dt.getDay()];
-                case 'eee':
-                    return DAY_NAMES[dt.getDay()].substr(0, 3);
-                case 'ee':
-                    return DAY_NAMES[dt.getDay()].substr(0, 2);
-                case 'e':
-                    return DAY_NAMES[dt.getDay()].substr(0, 1);
-                case 'dd':
-                    return dt.getDate().zf(2);
-                case 'd':
-                    return dt.getDate();
-                case 'hh':
-                    return (h ? h : 12).zf(2);
-                case 'nn':
-                    return dt.getMinutes().zf(2);
-                case 'ss':
-                    return dt.getSeconds().zf(2);
-                case 'a/p':
-                    return dt.getHours() < 12 ? 'am' : 'pm';
-                default:
-                    return '';
-            }
-        }
-    );
-}
+import { swallowEvent } from './../../utils/Helpers';
 
 @Component({
     selector: 'novo-date-picker',
     inputs: [
         'format',
-        'value',
-        'inline'
+        'inline',
+        'minYear',
+        'maxYear'
     ],
     outputs: [
-        'select'
+        'onSelect'
     ],
-    directives: [CORE_DIRECTIVES],
+    directives: [COMMON_DIRECTIVES],
     template: `
         <div class="calendar">
             <div class="calendar-top" *ngIf="!inline">
@@ -90,12 +25,12 @@ export function FormatDate(dt, f) {
                 <h3 class="year" [attr.data-automation-id]="heading.year">{{heading.year}}</h3>
             </div>
             <div class="calendar-header">
-                <span class="previous" (click)="prev($event)" data-automation-id="calendar-previous"></span>
+                <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
                 <span class="heading">
                     <span class="month" (click)="open($event, 'months')" [attr.data-automation-id]="heading.month">{{heading.month}}</span>
                     <span class="year" (click)="open($event, 'years')" [attr.data-automation-id]="heading.year">{{heading.year}}</span>
                 </span>
-                <span class="next" (click)="next($event)" data-automation-id="calendar-next"></span>
+                <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
             </div>
             <table class="calendar-content days" cellspacing="0" cellpadding="0" *ngIf="view=='days'">
                 <thead>
@@ -105,20 +40,20 @@ export function FormatDate(dt, f) {
                 </thead>
                 <tbody>
                     <tr *ngFor="#week of weeks">
-                        <td *ngFor="#day of weekday; #i = index;" [ngClass]="dayStyle(selected,week,i)">
-                            <div class="day" (click)="onSelect($event,selected,week,i)" [attr.data-automation-id]="dateOfTheWeek(selected, week, i)">{{dateOfTheWeek(selected, week, i)}}</div>
+                        <td *ngFor="#day of week.days" [ngClass]="{ today: day.isToday, 'notinmonth': !day.isCurrentMonth, selected: day.date.isSame(selected) }">
+                            <div class="day" (click)="select($event, day, true)" [attr.data-automation-id]="day.number">{{day.number}}</div>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <ul class="calendar-content months" *ngIf="view=='months'">
-                <li *ngFor="#month of months; #m = index;" (click)="selected.setMonth(m);open($event,'days');">
-                    <div class="month" [ngClass]="{selected: (m==selected.getMonth())}" [attr.data-automation-id]="month">{{month}}</div>
+            <ul class="calendar-content months" *ngIf="view == 'months'">
+                <li *ngFor="#month of months" (click)="setMonth(month)">
+                    <div class="month" [ngClass]="{selected: month == selected.format('MMM')}" [attr.data-automation-id]="month">{{month}}</div>
                 </li>
             </ul>
-            <ul class="calendar-content years" *ngIf="view=='years'" >
-                <li *ngFor="#year of years" (click)="selected.setFullYear(year);open($event,'days');">
-                    <div class="year" [ngClass]="{selected: (year==selected.getFullYear())}" [attr.data-automation-id]="year">{{year}}</div>
+            <ul class="calendar-content years" *ngIf="view == 'years'">
+                <li *ngFor="#year of years" (click)="setYear(year)">
+                    <div class="year" [ngClass]="{selected: year == selected.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
                 </li>
             </ul>
             <div class="calendar-footer">
@@ -128,149 +63,193 @@ export function FormatDate(dt, f) {
     `
 })
 export class DatePicker {
-    constructor() {
-        this.select = new EventEmitter();
-        this.selected = new Date();
-        this.today = FormatDate(new Date(), 'mmmm dd, yyyy');
-        this.view = 'days';
-        this.weekday = DAY_NAMES;
-        this.months = MONTH_NAMES;
-        this.weeks = [0, 1, 2, 3, 4, 5];
-        this.years = [];
+    // Select callback for output
+    onSelect = new EventEmitter(false);
+    // List of all the weekdays (use moment to localize)
+    weekday = moment.weekdays();
+    // List of all months (use moment to localize)
+    months = moment.months();
+    // List of all years (generated in ngOnInit)
+    years = [];
+    // Default view mode (select days)
+    view = 'days';
 
-        let now = new Date();
-        for (let i = now.getFullYear() - 100; i < now.getFullYear() + 10; i++) {
-            this.years.unshift(i);
-        }
+    constructor(@Optional() model:NgControl) {
+        this.model = model || new NgModel();
+        this.model.valueAccessor = this;
     }
 
     ngOnInit() {
-        if (this.value) this.selected = this.value;
-        this.update();
+        // Determine the year array
+        let now = moment();
+        let start = this.minYear ? Number(this.minYear) : now.year() - 100;
+        let end = this.maxYear ? Number(this.maxYear) : now.year() + 10;
+        this.years = [];
+        for (let i = start; i <= end; i++) {
+            this.years.push(i);
+        }
+        this.updateView(this.value, false);
     }
 
-    daysInMonth(month, year) {
-        return new Date(year, month + 1, 0).getDate();
-    }
+    updateView(date, fireEvents) {
+        let value = date ? moment(date) : moment();
+        value = this.removeTime(value);
+        this.month = value.clone();
 
-    getRelativeDay(tmp, week, day) {
-        let firstday = new Date(tmp.getFullYear(), tmp.getMonth(), 1).getDay();
-        return ((day + 1) + (week * 7)) - firstday;
-    }
+        let start = value.clone();
+        start.date(1);
+        this.removeTime(start.day(0));
 
-    setSelected(date) {
-        this.selected = date;
-        this.update();
+        this.buildMonth(start, this.month);
+        this.select(null, { date: value }, fireEvents);
     }
 
     setToday() {
-
-    }
-
-    onSelect(event, tmp, week, day) {
-        if (event) {
-            event.stopPropagation();
-            event.preventDefault();
-        }
-        let num = this.getRelativeDay(tmp, week, day);
-        tmp.setDate(num);
-        if (this.withTime) {
-            event.stopImmediatePropagation();
-            this.value = tmp;
-            this.open(null, 'time');
-        } else {
-            this.update();
-            this.select.next({
-                year: tmp.getFullYear(),
-                month: tmp.getMonth(),
-                day: tmp.getDate(),
-                date: tmp
-            });
-            this.value = tmp;
-        }
-    }
-
-    save() {
-        let tmp = this.selected;
-        this.update();
-        this.select.next({ date: tmp });
+        let tmp = moment();
+        this.updateView(tmp, true);
+        // Go back to days
         this.open(null, 'days');
-        this.value = tmp;
     }
 
-    dayStyle(tmp, week, day) {
-        let now = tmp.getDate();
-        let lastday = new Date(tmp.getFullYear(), tmp.getMonth() + 1, 0).getDate();
-        let num = this.getRelativeDay(tmp, week, day);
-        let relDay = new Date(tmp.getFullYear(), tmp.getMonth(), num);
-
-        if (num <= 0) return 'notinmonth';
-        else if (num > lastday) return 'notinmonth';
-        else if (num === now) return 'selected';
-        else if (FormatDate(relDay, 'yyyymmdd') === FormatDate(new Date(), 'yyyymmdd')) return 'today';
-        return '';
+    setMonth(month) {
+        let tmp = this.selected.clone().month(month);
+        this.updateView(tmp, true);
+        // Go back to days
+        this.open(null, 'days');
     }
 
-    dateOfTheWeek(tmp, week, day) {
-        let prevlastday = new Date(tmp.getFullYear(), tmp.getMonth(), 0).getDate();
-        let lastday = new Date(tmp.getFullYear(), tmp.getMonth() + 1, 0).getDate();
-        let num = this.getRelativeDay(tmp, week, day);
+    setYear(year) {
+        let tmp = this.selected.clone().year(year);
+        this.updateView(tmp, true);
+        // Go back to days
+        this.open(null, 'days');
+    }
 
-        if (num <= 0) num += prevlastday;
-        else if (num > lastday) num -= lastday;
+    select(event, day, fireEvents) {
+        swallowEvent(event);
 
-        return num;
+        this.selected = day.date;
+        this.updateHeading();
+
+        if (fireEvents) {
+            // Emit our output
+            this.onSelect.next({
+                year: this.selected.format('YYYY'),
+                month: this.selected.format('MM'),
+                day: this.selected.format('DD'),
+                date: this.selected.toDate()
+            });
+
+            // Also, update the ngModel
+            this.model.viewToModelUpdate(this.selected.toDate());
+            this.value = this.selected.toDate();
+        }
     }
 
     open(event, type) {
-        if (event) event.stopPropagation();
-        this.view = type;
+        swallowEvent(event);
 
-        this.update();
-    }
-
-    prev(event) {
-        event.stopPropagation();
-        let year = this.selected.getYear(),
-            month = this.selected.getMonth() - 1,
-            day = this.selected.getDate(),
-            maxDays = this.daysInMonth(month, year);
-
-        if (day > maxDays) {
-            day = maxDays;
+        // If they click the toggle two time in a row, close it (go back to days)
+        if (type === this.view) {
+            this.view = 'days';
+        } else {
+            this.view = type;
         }
 
-        this.selected.setMonth(month, day);
-        this.update();
+        this.updateHeading();
     }
 
-    next(event) {
-        event.stopPropagation();
-        let year = this.selected.getYear(),
-            month = this.selected.getMonth() + 1,
-            day = this.selected.getDate(),
-            maxDays = this.daysInMonth(month, year);
-
-        if (day > maxDays) {
-            day = maxDays;
-        }
-
-        this.selected.setMonth(month, day);
-        this.update();
+    prevMonth(event) {
+        swallowEvent(event);
+        let tmp = this.selected.clone();
+        tmp = tmp.subtract(1, 'months');
+        this.updateView(tmp, true);
     }
 
-    capture(event) {
-        event.stopImmediatePropagation();
+    nextMonth(event) {
+        swallowEvent(event);
+        let tmp = this.selected.clone();
+        tmp = tmp.add(1, 'months');
+        this.updateView(tmp, true);
     }
 
-    update() {
+    updateHeading() {
         this.heading = {
-            month: FormatDate(this.selected, 'mmmm'),
-            year: this.selected.getFullYear(),
-            date: FormatDate(new Date(), 'dd'),
-            day: FormatDate(new Date(), 'eeee')
+            month: this.selected.format('MMMM'),
+            year: this.selected.format('YYYY'),
+            date: this.selected.format('DD'),
+            day: this.selected.format('dddd')
         };
+    }
+
+    /**
+     * Remove the time aspect of the date
+     * @param date
+     * @returns {Moment} with time stripped out
+     */
+    removeTime(date) {
+        return date.hour(0).minute(0).second(0).millisecond(0);
+    }
+
+    buildMonth(start, month) {
+        // Reset the weeks
+        this.weeks = [];
+
+        // House keeping variables to know when we are done building the month
+        let done = false,
+            date = start.clone(),
+            monthIndex = date.month(),
+            count = 0;
+
+        while (!done) {
+            // Build the days for the weeks
+            this.weeks.push({ days: this.buildWeek(date.clone(), month) });
+
+            // Increment variables for the next iteration
+            date.add(1, 'w');
+            done = count++ > 2 && monthIndex !== date.month();
+            monthIndex = date.month();
+        }
+    }
+
+    buildWeek(date, month) {
+        // Build out of the days of the week
+        let days = [];
+
+        // Iterate over the days of the week
+        for (let i = 0; i < 7; i++) {
+            // Push a variable on the day array with lots of helpers to make the template easier
+            days.push({
+                name: date.format('dd').substring(0, 1),
+                number: date.date(),
+                isCurrentMonth: date.month() === month.month(),
+                isToday: date.isSame(new Date(), 'day'),
+                date: date
+            });
+
+            // Increment for the next iteration
+            date = date.clone(); // eslint-disable-line
+            date.add(1, 'd');
+        }
+
+        return days;
+    }
+
+    // ValueAccessor Functions
+    writeValue(value) {
+        this.value = value;
+        if (value) {
+            this.updateView(value, false);
+        }
+    }
+
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn) {
+        this.onTouched = fn;
     }
 }
 
-export const NOVO_DATE_PICKER_ELEMENTS = [DatePicker]
+export const NOVO_DATE_PICKER_ELEMENTS = [DatePicker];

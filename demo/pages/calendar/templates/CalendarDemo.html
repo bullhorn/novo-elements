@@ -1,8 +1,8 @@
 <div class="calendar-demo-side-by-side">
     <p>
         <label>Value</label>
-        {{time | date}}
+        {{(time | date) || 'N/A'}}
     </p>
-    <novo-date-picker [(value)]="time"></novo-date-picker>
-    <novo-date-picker [(value)]="time"></novo-date-picker>
+    <novo-date-picker [(ngModel)]="time" minYear="2000" maxYear="2020"></novo-date-picker>
+    <novo-date-picker [(ngModel)]="time"></novo-date-picker>
 </div>

@@ -49,6 +49,6 @@ export class CalendarDemo {
         this.SideBySideDemoTpl = SideBySideDemoTpl;
         this.TimeDemoTpl = TimeDemoTpl;
 
-        this.time = null;
+        this.time = new Date();
     }
 }
