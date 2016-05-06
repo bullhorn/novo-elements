@@ -2,13 +2,13 @@
 
 ## Usage
 ```javascript
-import {NOVO_TABLE_EXTRAS} from 'bh-elements';
+import { NOVO_TABLE_EXTRA_ELEMENTS } from 'novo-elements';
 ```
 
 or
 
 ```javascript
-import {Pagination} from 'bh-elements';
+import { Pagination } from 'novo-elements';
 ```
 
 ##### Properties
