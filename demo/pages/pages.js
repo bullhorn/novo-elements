@@ -15,6 +15,7 @@ export * from './pipes/PipesDemo';
 export * from './tooltip/TooltipDemo';
 export * from './drawer/DrawerDemo';
 export * from './switch/SwitchDemo';
+export * from './calendar/CalendarDemo';
 export * from './header/HeaderDemo';
 export * from './list/ListDemo';
 export * from './table/TableDemo';
