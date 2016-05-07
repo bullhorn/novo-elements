@@ -1,5 +1,5 @@
-import { Component, ElementRef, EventEmitter, Optional } from 'angular2/core'; // eslint-disable-line
-import { COMMON_DIRECTIVES, NgControl, NgModel } from 'angular2/common';
+import { Component, ElementRef, EventEmitter, Optional } from '@angular/core'; // eslint-disable-line
+import { COMMON_DIRECTIVES, NgControl, NgModel } from '@angular/common';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
@@ -11,7 +11,7 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
         <button (click)="toggleActive($event)" tabIndex="-1" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></button>
         <ul class="novo-select-list" tabIndex="-1">
             <ng-content></ng-content>
-            <li *ngFor="#option of options; #i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
+            <li *ngFor="let option of options; let i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
               <span>{{option.label}}</span>
               <i *ngIf="option.active" class="bhi-check"></i>
             </li>
@@ -60,6 +60,9 @@ export class Select extends OutsideClick {
 
         if (!this.model.value) {
             this.clear();
+        } else {
+            // TODO - jgodi - maybe this isn't the best?
+            this.writeValue(this.model.value);
         }
     }
 
@@ -132,14 +135,16 @@ export class Select extends OutsideClick {
     //valueAccessor Functions
     writeValue(value) {
         this.value = value;
-        let item = this.options.find(i => i.value === value);
-        if (item) {
-            this.empty = false;
-            this.selected = item;
-            this.selected.active = true;
-            this.selectedIndex = this.options.indexOf(item);
-        } else {
-            this.clear();
+        if (this.options) {
+            let item = this.options.find(i => i.value === value);
+            if (item) {
+                this.empty = false;
+                this.selected = item;
+                this.selected.active = true;
+                this.selectedIndex = this.options.indexOf(item);
+            } else {
+                this.clear();
+            }
         }
     }
 

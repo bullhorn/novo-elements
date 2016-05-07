@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Optional } from 'angular2/core'; // eslint-disable-line
-import { COMMON_DIRECTIVES, NgControl, NgModel } from 'angular2/common';
+import { Component, EventEmitter, Optional } from '@angular/core'; // eslint-disable-line
+import { COMMON_DIRECTIVES, NgControl, NgModel } from '@angular/common';
 import moment from 'moment/moment';
 
 import { swallowEvent } from './../../utils/Helpers';
@@ -22,7 +22,7 @@ import { swallowEvent } from './../../utils/Helpers';
                     <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
                 </span>
                 <div class="control-block" *ngIf="!military">
-                    <span *ngFor="#period of MERIDIANS" class="digital--period" [class.active]="meridian==period" (click)="setPeriod($event, period, true)" [attr.data-automation-id]="period">{{period}}</span>
+                    <span *ngFor="let period of MERIDIANS" class="digital--period" [class.active]="meridian==period" (click)="setPeriod($event, period, true)" [attr.data-automation-id]="period">{{period}}</span>
                 </div>
             </div>
         </div>
@@ -38,10 +38,10 @@ import { swallowEvent } from './../../utils/Helpers';
                     </span>
                 </div>
                 <div class="analog--hours">
-                    <span *ngFor="#hour of HOURS; #h=index;" class="analog--hour" [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour, true)" [attr.data-automation-id]="hour">{{hour}}</span>
+                    <span *ngFor="let hour of HOURS" class="analog--hour" [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour, true)" [attr.data-automation-id]="hour">{{hour}}</span>
                 </div>
                 <div class="analog--minutes">
-                    <span *ngFor="#minute of MINUTES; #m=index;" class="analog--minute" [ngClass]="{active: activeMinute == minute}" (click)="setMinutes($event, minute, true)" [attr.data-automation-id]="minute">{{minute}}</span>
+                    <span *ngFor="let minute of MINUTES" class="analog--minute" [ngClass]="{active: activeMinute == minute}" (click)="setMinutes($event, minute, true)" [attr.data-automation-id]="minute">{{minute}}</span>
                 </div>
             </div>
         </div>

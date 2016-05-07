@@ -1,11 +1,9 @@
-import { Injectable, ApplicationRef, DynamicComponentLoader, Injector } from 'angular2/core';
+import { Provider, Injectable, DynamicComponentLoader } from '@angular/core';
 
 @Injectable()
 export class ToastService {
-    constructor(loader:DynamicComponentLoader, appRef:ApplicationRef, injector:Injector) {
+    constructor(loader:DynamicComponentLoader) {
         this.loader = loader;
-        this.injector = injector;
-        this.app = appRef;
         this.references = [];
 
         this.positions = [
@@ -40,32 +38,20 @@ export class ToastService {
         };
     }
 
-    register(root, location) {
-        this.root = root;
-        if (location) {
-            this.location = location;
-        }
+    set defaultContainer(view) {
+        this._defaultContainer = view;
     }
 
     alert(component, options) {
         return new Promise((resolve) => {
-            if (!this.root) {
-                this.root = this.app._rootComponents[0].location;
+            if (!this._defaultContainer) {
+                // TODO alert
             }
-            if (this.location) {
-                this.loader.loadIntoLocation(component, this.root, this.location).then(toast => {
-                    toast.instance.embedded = true;
-                    this.references.push(toast);
-                    this.handleAlert(toast.instance, options);
-                    resolve(toast);
-                });
-            } else {
-                this.loader.loadNextToLocation(component, this.root).then(toast => {
-                    this.references.push(toast);
-                    this.handleAlert(toast.instance, options);
-                    resolve(toast);
-                });
-            }
+            this.loader.loadNextToLocation(component, this._defaultContainer).then(toast => {
+                this.references.push(toast);
+                this.handleAlert(toast.instance, options);
+                resolve(toast);
+            });
         });
     }
 
@@ -80,7 +66,7 @@ export class ToastService {
             const REF = this.references.filter(x => x.instance === toast)[0];
             if (REF) {
                 this.references.splice(this.references.indexOf(REF), 1);
-                REF.dispose();
+                REF.destroy();
             }
         }, 300);
     }
@@ -115,8 +101,8 @@ export class ToastService {
         toast.show = true;
         setTimeout(addClass, 25);
         /**
-        * Adds animate class to be called after a timeout
-        **/
+         * Adds animate class to be called after a timeout
+         **/
         function addClass() {
             toast.animate = true;
         }
@@ -129,3 +115,8 @@ export class ToastService {
         }, toast.hideDelay);
     }
 }
+
+export const TOAST_PROVIDERS = [
+    new Provider(ToastService, { useClass: ToastService })
+];
+

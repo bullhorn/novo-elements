@@ -1,5 +1,6 @@
 import * as Rx from 'rxjs/Rx';
-import { inject, TestComponentBuilder } from 'angular2/testing';
+import { inject } from '@angular/core/testing';
+import { TestComponentBuilder } from '@angular/compiler/testing';
 
 const tokens = [TestComponentBuilder];
 

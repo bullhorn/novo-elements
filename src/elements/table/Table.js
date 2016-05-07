@@ -1,6 +1,6 @@
-import { Component, EventEmitter } from 'angular2/core';
-import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgModel } from 'angular2/common';
-import { isFunction, isString } from 'angular2/src/facade/lang';
+import { Component, EventEmitter } from '@angular/core';
+import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgModel } from '@angular/common';
+import { isFunction, isString } from '@angular/core/src/facade/lang';
 
 import { NOVO_BUTTON_ELEMENTS } from '../button';
 import { NOVO_DROPDOWN_ELEMENTS } from '../dropdown';
@@ -30,7 +30,7 @@ import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
             <thead>
                 <tr role="row">
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
-                    <th *ngFor="#column of columns" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
+                    <th *ngFor="let column of columns" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
                         <div class="th-group" [attr.data-automation-id]="column.name">
                             <div class="th-title" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
                                 <label>{{ column.title }}</label>
@@ -49,7 +49,7 @@ import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
                                         </div>
                                     </item>
                                     <item [ngClass]="{active: column.filter && column.filter.length && column.filter.includes(option)}"
-                                        *ngFor="#option of column.options" (click)="onFilterClick(column, option)"
+                                        *ngFor="let option of column.options" (click)="onFilterClick(column, option)"
                                         [attr.data-automation-id]="option">
                                         {{option}} <i class="bhi-check" *ngIf="column.filter && column.filter.length && column.filter.includes(option)"></i>
                                     </item>
@@ -69,13 +69,13 @@ import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
                 </tr>
             </thead>
             <tbody>
-                <template ngFor #row [ngForOf]="rows | slice:getPageStart():getPageEnd()">
+                <template ngFor let-row="$implicit" [ngForOf]="rows | slice:getPageStart():getPageEnd()">
                     <tr class="table-row" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
                         <td class="row-actions" *ngIf="config.hasDetails">
                             <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
                             <button theme="icon" icon="sort-desc" (click)="row._expanded=!row._expanded" *ngIf="row._expanded"></button>
                         </td>
-                        <td *ngFor="#column of columns" [attr.data-automation-id]="column.name">
+                        <td *ngFor="let column of columns" [attr.data-automation-id]="column.name">
                             <novo-table-cell [column]="column" [row]="row"></novo-table-cell>
                         </td>
                     </tr>

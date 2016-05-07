@@ -1,4 +1,4 @@
-// import { Component, EventEmitter, ElementRef } from 'angular2/core';
+// import { Component, EventEmitter, ElementRef } from '@angular/core';
 //
 // @Component({
 //     selector: 'novo-resizer',

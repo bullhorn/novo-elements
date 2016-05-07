@@ -1,4 +1,9 @@
-import { Component, ElementRef, DynamicComponentLoader } from 'angular2/core';
+import {
+    Component,
+    ElementRef,
+    DynamicComponentLoader,
+    ViewContainerRef
+} from '@angular/core';
 
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 
@@ -9,32 +14,28 @@ import { BaseRenderer } from './../base-renderer/BaseRenderer';
         'row'
     ],
     template: `
-        <span #anchor></span>
         <span *ngIf="!column.type || column.type === 'text'">{{ value }}</span>
         <a (click)="onClick($event);" *ngIf="column.type === 'link'">{{ value }}</a>
     `
 })
 export class TableCell {
-    constructor(element:ElementRef, loader:DynamicComponentLoader) {
+    constructor(element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
         this.element = element;
         this.loader = loader;
+        this.view = view;
         this.value = '';
     }
 
     ngOnInit() {
-        if (this.column.renderer) {
-            if (this.column.renderer.prototype instanceof BaseRenderer) {
-                this.column.type = 'customrenderer';
-                this.loader.loadIntoLocation(this.column.renderer, this.element, 'anchor').then(cell => {
-                    cell.instance.meta = this.column;
-                    cell.instance.data = this.row;
-                    cell.instance.value = this.row[this.column.name];
-                });
-            } else {
-                this.value = this.column.renderer(this.row);
-            }
-        } else {
+        if (!this.column.renderer || !(this.column.renderer.prototype instanceof BaseRenderer)) {
             this.value = this.row[this.column.name];
+        } else if (this.column.renderer && this.column.renderer.prototype instanceof BaseRenderer) {
+            this.column.type = 'customrenderer';
+            this.loader.loadNextToLocation(this.column.renderer, this.view).then(cell => {
+                cell.instance.meta = this.column;
+                cell.instance.data = this.row;
+                cell.instance.value = this.row[this.column.name];
+            });
         }
     }
 

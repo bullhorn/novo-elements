@@ -1,5 +1,5 @@
-import { Component, EventEmitter } from 'angular2/core';
-import { CORE_DIRECTIVES } from 'angular2/common';
+import { Component, EventEmitter } from '@angular/core';
+import { CORE_DIRECTIVES } from '@angular/common';
 
 import { NOVO_BUTTON_ELEMENTS } from './../button';
 import { NOVO_LOADING_ELEMENTS } from './../loading';

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, EventEmitter } from 'angular2/core';
+import { Component, ViewEncapsulation, EventEmitter } from '@angular/core';
 
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 

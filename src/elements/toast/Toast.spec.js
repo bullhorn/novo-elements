@@ -1,4 +1,4 @@
-import { beforeEach, expect, describe, it } from 'angular2/testing';
+import { beforeEach, expect, describe, it } from '@angular/core/testing';
 
 import { createTestContext } from '../../testing/TestContext';
 import { NovoToast } from './Toast';

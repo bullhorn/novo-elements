@@ -20,12 +20,12 @@ require('zone.js/dist/jasmine-patch.js');
 // RxJS
 require('rxjs/Rx');
 
-const testing = require('angular2/testing');
-const browser = require('angular2/platform/testing/browser');
+const testing = require('@angular/testing');
+const browser = require('@angular/platform/testing/browser');
 
 testing.setBaseTestProviders(
-    browser.TEST_BROWSER_PLATFORM_PROVIDERS,
-    browser.TEST_BROWSER_APPLICATION_PROVIDERS
+    browser.TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
+    browser.TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS
 );
 
 Object.assign(global, testing);

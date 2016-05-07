@@ -1,5 +1,5 @@
-import { Component } from 'angular2/core';
-import { CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/common';
+import { Component } from '@angular/core';
+import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS, NOVO_TOOLTIP_ELEMENTS, BaseRenderer } from './../../../src/novo-elements';
 
 import { TableData } from './TableData';

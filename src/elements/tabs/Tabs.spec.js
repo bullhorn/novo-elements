@@ -1,6 +1,6 @@
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import { By } from 'angular2/platform/common_dom';
-import { beforeEach, expect, describe, it } from 'angular2/testing';
+import { beforeEach, expect, describe, it } from '@angular/core/testing';
 
 import { createTestContext } from '../../testing/TestContext';
 import { NOVO_TAB_ELEMENTS, NovoNav, NovoNavOutlet } from './Tabs';

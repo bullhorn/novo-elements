@@ -1,4 +1,4 @@
-import { Component, ElementRef } from 'angular2/core';
+import { Component, ElementRef } from '@angular/core';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 

@@ -1,5 +1,5 @@
-import { Component } from 'angular2/core';
-import { beforeEach, expect, describe, it } from 'angular2/testing';
+import { Component } from '@angular/core';
+import { beforeEach, expect, describe, it } from '';
 
 import { createTestContext } from '../../testing/TestContext';
 import { NOVO_HEADER_ELEMENTS } from './Header';

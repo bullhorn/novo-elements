@@ -1,4 +1,4 @@
-import { describe, it, beforeEach } from 'angular2/testing';
+import { describe, it, beforeEach } from '@angular/core/testing';
 
 import { BaseRenderer } from './BaseRenderer';
 

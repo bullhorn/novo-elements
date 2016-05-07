@@ -1,8 +1,8 @@
 // import {DOM} from 'angular2/src/platform/dom/dom_adapter';
-import { Component } from 'angular2/core';
-import { COMMON_DIRECTIVES } from 'angular2/common';
+import { Component } from '@angular/core';
+import { COMMON_DIRECTIVES } from '@angular/common';
 import { By } from 'angular2/platform/common_dom';
-import { beforeEach, expect, describe, it } from 'angular2/testing';
+import { beforeEach, expect, describe, it } from '@angular/core/testing';
 
 import { createTestContext } from '../../testing/TestContext';
 import { TimePicker } from './TimePicker';

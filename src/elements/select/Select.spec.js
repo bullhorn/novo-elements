@@ -1,7 +1,7 @@
 // import {DOM} from 'angular2/src/platform/dom/dom_adapter';
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import { By } from 'angular2/platform/common_dom';
-import { beforeEach, expect, describe, it } from 'angular2/testing';
+import { beforeEach, expect, describe, it } from '@angular/core/testing';
 
 import { createTestContext } from './../../testing/TestContext';
 import { Select } from './Select';
