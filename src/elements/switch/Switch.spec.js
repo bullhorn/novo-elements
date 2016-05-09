@@ -1,37 +1,24 @@
 import { Component } from '@angular/core';
-import { beforeEach, expect, describe, it } from '@angular/core/testing';
 
-import { createTestContext } from '../../testing/TestContext';
-import { NOVO_SWITCH_ELEMENTS } from './Switch';
+import { NOVO_SWITCH_ELEMENTS, NovoSwitch } from './Switch';
+import { testComponent, grabComponent } from './../../testing/TestHelpers';
 
 @Component({
     selector: 'test-cmp',
     directives: [NOVO_SWITCH_ELEMENTS],
-    template: 'TODO'
+    template: '<novo-switch></novo-switch>'
 })
 class TestCmp {
     constructor() {
     }
 }
 
-describe('Element: NovoSwitch', () => {
-    let ctx;
-    let instance;
-
-    beforeEach(createTestContext(_ctx => ctx = _ctx));
-
-    beforeEach(done => {
-        ctx.init(TestCmp)
-            .finally(done)
-            .subscribe(() => {
-                instance = ctx.fixture.componentInstance;
-                // const cmpDebugElement = ctx.fixture.debugElement.query(By.directive(BhTooltip));
-                // cmpElement = cmpDebugElement.nativeElement;
-                // cmpInstance = cmpDebugElement.componentInstance;
-            });
-    });
-
-    it('should have the instance and cmpElement defined', () => {
-        expect(instance).toBeDefined();
-    });
+describe('Element: Switch', () => {
+    it('should initialize correctly', testComponent(TestCmp, (fixture) => {
+        const { instance, element, testComponentInstance, testComponentElement } = grabComponent(fixture, NovoSwitch);
+        expect(instance).toBeTruthy();
+        expect(element).toBeTruthy();
+        expect(testComponentInstance).toBeTruthy();
+        expect(testComponentElement).toBeTruthy();
+    }));
 });

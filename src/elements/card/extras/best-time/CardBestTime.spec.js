@@ -1,10 +1,7 @@
-// import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import { Component } from '@angular/core';
-import { By } from 'angular2/platform/common_dom';
-import { beforeEach, expect, describe, it } from '@angular/core/testing';
 
-import { createTestContext } from './../../../../testing/TestContext';
 import { CardBestTime } from './CardBestTime';
+import { testComponent, grabComponent } from './../../../../testing/TestHelpers';
 
 @Component({
     selector: 'test-cmp',
@@ -20,24 +17,11 @@ class TestCmp {
 }
 
 describe('Element: CardBestTime', () => {
-    let ctx;
-    let instance;
-    let element;
-
-    beforeEach(createTestContext(_ctx => ctx = _ctx));
-
-    beforeEach(done => {
-        ctx.init(TestCmp)
-            .finally(done)
-            .subscribe(() => {
-                const cmpDebugElement = ctx.fixture.debugElement.query(By.directive(CardBestTime));
-                element = cmpDebugElement.nativeElement;
-                instance = cmpDebugElement.componentInstance;
-            });
-    });
-
-    it('should be defined', () => {
-        expect(instance).toBeDefined();
-        expect(element).toBeDefined();
-    });
+    it('should initialize correctly', testComponent(TestCmp, (fixture) => {
+        const { instance, element, testComponentInstance, testComponentElement } = grabComponent(fixture, CardBestTime);
+        expect(instance).toBeTruthy();
+        expect(element).toBeTruthy();
+        expect(testComponentInstance).toBeTruthy();
+        expect(testComponentElement).toBeTruthy();
+    }));
 });

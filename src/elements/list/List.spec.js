@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { beforeEach, expect, describe, it } from '@angular/core/testing';
 
-import { createTestContext } from '../../testing/TestContext';
-import { NOVO_LIST_ELEMENTS } from './List';
+import { NOVO_LIST_ELEMENTS, NovoList } from './List';
+import { testComponent, grabComponent } from './../../testing/TestHelpers';
 
 @Component({
     selector: 'test-cmp',
     directives: [NOVO_LIST_ELEMENTS],
-    template: 'TODO'
+    template: '<novo-list></novo-list>'
 })
 class TestCmp {
     constructor() {
@@ -15,20 +14,11 @@ class TestCmp {
 }
 
 describe('Element: NovoList', () => {
-    let ctx;
-    let instance;
-
-    beforeEach(createTestContext(_ctx => ctx = _ctx));
-
-    beforeEach(done => {
-        ctx.init(TestCmp)
-            .finally(done)
-            .subscribe(() => {
-                instance = ctx.fixture.componentInstance;
-            });
-    });
-
-    it('should have the instance and cmpElement defined', () => {
-        expect(instance).toBeDefined();
-    });
+    it('should initialize correctly', testComponent(TestCmp, (fixture) => {
+        const { instance, element, testComponentInstance, testComponentElement } = grabComponent(fixture, NovoList);
+        expect(instance).toBeTruthy();
+        expect(element).toBeTruthy();
+        expect(testComponentInstance).toBeTruthy();
+        expect(testComponentElement).toBeTruthy();
+    }));
 });

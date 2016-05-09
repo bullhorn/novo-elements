@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { By } from 'angular2/platform/common_dom';
-import { beforeEach, expect, describe, it } from '@angular/core/testing';
 
-import { createTestContext } from '../../testing/TestContext';
-import { NOVO_TAB_ELEMENTS, NovoNav, NovoNavOutlet } from './Tabs';
+import { NOVO_TAB_ELEMENTS, NovoNavOutlet } from './Tabs';
+import { testComponent, grabComponent } from './../../testing/TestHelpers';
 
 @Component({
     selector: 'test-cmp',
@@ -35,24 +33,12 @@ class TestCmp {
 }
 
 
-describe('Element: NovoTabs', () => {
-    let ctx;
-    let novoNavOutletDebugElement;
-    let novoNavDebugElement;
-
-    beforeEach(createTestContext(_ctx => ctx = _ctx));
-
-    beforeEach(done => {
-        ctx.init(TestCmp)
-            .finally(done)
-            .subscribe(() => {
-                novoNavDebugElement = ctx.fixture.debugElement.query(By.directive(NovoNav));
-                novoNavOutletDebugElement = ctx.fixture.debugElement.query(By.directive(NovoNavOutlet));
-            });
-    });
-
-    it('should have the instance and cmpElement defined', () => {
-        expect(novoNavDebugElement).toBeDefined();
-        expect(novoNavOutletDebugElement).toBeDefined();
-    });
+describe('Element: Tabs', () => {
+    it('should initialize correctly', testComponent(TestCmp, (fixture) => {
+        const { instance, element, testComponentInstance, testComponentElement } = grabComponent(fixture, NovoNavOutlet);
+        expect(instance).toBeTruthy();
+        expect(element).toBeTruthy();
+        expect(testComponentInstance).toBeTruthy();
+        expect(testComponentElement).toBeTruthy();
+    }));
 });
