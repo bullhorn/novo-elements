@@ -238,7 +238,7 @@ input[type=calendar] {
                         height: 100%;
                         width: 100%;
                         z-index: -1;
-                        animation: 200ms select ease-in-out;
+                        animation: 360ms select ease-in-out;
                     }
                 }
             }
@@ -270,7 +270,7 @@ input[type=calendar] {
 }
 @keyframes select {
     from {
-        opacity: 1;
+        opacity: 0.8;
         transform: scale(1);
     }
 
