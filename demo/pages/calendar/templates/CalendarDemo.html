@@ -6,6 +6,7 @@
         <label>Value Two</label>
         {{(dateTwo | date) || 'N/A'}}
     </p>
-    <novo-date-picker [(ngModel)]="dateOne" minYear="2000" maxYear="2020" [start]="start" [end]="end"></novo-date-picker>
+    <novo-date-picker [(ngModel)]="dateOne" minYear="2000" maxYear="2020"
+        [start]="start" [end]="end"></novo-date-picker>
     <novo-date-picker [(ngModel)]="dateTwo"></novo-date-picker>
 </div>

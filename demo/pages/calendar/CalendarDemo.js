@@ -10,7 +10,7 @@ import TimeDemoTpl from './templates/TimeDemo.html';
 const template = `
 <div class="container">
     <h1>Date and Time Pickers</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non massa et augue molestie lacinia. Ut purus sem, bibendum at blandit vitae, bibendum sed turpis. Fusce eros libero, fringilla non dapibus in, cursus elementum ipsum.</p>
+    <p></p>
 
     <h2>Calendar Picker</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non massa et augue molestie lacinia. Ut purus sem, bibendum at blandit vitae, bibendum sed turpis. Fusce eros libero, fringilla non dapibus in, cursus elementum ipsum.</p>
