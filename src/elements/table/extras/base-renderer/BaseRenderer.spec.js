@@ -1,5 +1,3 @@
-import { describe, it, beforeEach } from 'angular2/testing';
-
 import { BaseRenderer } from './BaseRenderer';
 
 describe('Element: BaseRenderer', () => {

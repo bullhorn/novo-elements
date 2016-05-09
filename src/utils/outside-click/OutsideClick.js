@@ -1,4 +1,4 @@
-import { EventEmitter } from 'angular2/core';
+import { EventEmitter } from '@angular/core';
 
 /**
  * Outside click helper, makes to set the element as inactive when clicking outside of it

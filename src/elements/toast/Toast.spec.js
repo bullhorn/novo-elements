@@ -1,27 +1,22 @@
-import { beforeEach, expect, describe, it } from 'angular2/testing';
+import { Component } from '@angular/core';
 
-import { createTestContext } from '../../testing/TestContext';
+import { testComponent, grabComponent } from '../../testing/TestHelpers';
 import { NovoToast } from './Toast';
 
+@Component({
+    selector: 'test-cmp',
+    directives: [NovoToast],
+    template: '<novo-toast></novo-toast>'
+})
+class TestCmp {
+    constructor() {
+    }
+}
+
 describe('Element: NovoToast', () => {
-    let ctx;
-    let cmpElement;
-    let cmpInstance;
-
-    beforeEach(createTestContext(_ctx => ctx = _ctx));
-
-    beforeEach(done => {
-        ctx.init(NovoToast)
-            .finally(done)
-            .subscribe(() => {
-                const cmpDebugElement = ctx.fixture.debugElement;
-                cmpElement = cmpDebugElement.nativeElement;
-                cmpInstance = cmpDebugElement.componentInstance;
-            });
-    });
-
-    it('should have the instance and cmpElement defined', () => {
-        expect(cmpElement).toBeDefined();
-        expect(cmpInstance).toBeDefined();
-    });
+    it('should initialize correctly', testComponent(TestCmp, (fixture) => {
+        const { instance, element } = grabComponent(fixture, NovoToast);
+        expect(instance).toBeTruthy();
+        expect(element).toBeTruthy();
+    }));
 });

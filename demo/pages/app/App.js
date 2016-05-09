@@ -1,6 +1,8 @@
-import { Component } from 'angular2/core';
-import { CORE_DIRECTIVES } from 'angular2/common';
-import { ROUTER_DIRECTIVES, RouteConfig, Router } from 'angular2/router';
+import { Component, ViewContainerRef } from '@angular/core';
+import { CORE_DIRECTIVES } from '@angular/common';
+import { ROUTER_DIRECTIVES, RouteConfig, Router } from '@angular/router-deprecated';
+
+import { TOAST_PROVIDERS, ToastService } from './../../../src/novo-elements';
 
 import {
     Home,
@@ -31,6 +33,7 @@ const template = require('./App.html');
 @Component({
     selector: 'demo-app',
     template: template,
+    providers: [...TOAST_PROVIDERS],
     directives: [
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES
@@ -139,10 +142,12 @@ const template = require('./App.html');
     }
 ])
 export class DemoApp {
-    constructor(router:Router) {
+    constructor(router:Router, toastService:ToastService, view:ViewContainerRef) {
         this.router = router;
         this.menuOpen = false;
         this.version = VERSION;
+
+        toastService.defaultContainer = view;
 
         this.designRoutes = [{
             name: 'Composition',

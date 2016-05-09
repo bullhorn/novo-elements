@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import { NOVO_BUTTON_ELEMENTS, NOVO_HEADER_ELEMENTS, NOVO_TAB_ELEMENTS, ToastService, NovoToast } from './../../../src/novo-elements';
 
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
@@ -22,7 +22,6 @@ const template = `
 @Component({
     selector: 'header-demo',
     template: template,
-    providers: [ToastService],
     directives: [NOVO_BUTTON_ELEMENTS, NOVO_HEADER_ELEMENTS, NOVO_TAB_ELEMENTS, CodeSnippet]
 })
 export class HeaderDemo {

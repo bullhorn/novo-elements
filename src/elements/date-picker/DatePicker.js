@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Optional } from 'angular2/core'; // eslint-disable-line
-import { COMMON_DIRECTIVES, NgControl, NgModel } from 'angular2/common';
+import { Component, EventEmitter, Optional } from '@angular/core'; // eslint-disable-line
+import { COMMON_DIRECTIVES, NgControl, NgModel } from '@angular/common';
 import moment from 'moment/moment';
 
 import { swallowEvent } from './../../utils/Helpers';
@@ -35,24 +35,24 @@ import { swallowEvent } from './../../utils/Helpers';
             <table class="calendar-content days" cellspacing="0" cellpadding="0" *ngIf="view=='days'">
                 <thead>
                     <tr>
-                        <th *ngFor="#day of weekday" title="{{day}}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">{{day.substr(0, 2)}}</th>
+                        <th *ngFor="let day of weekday" title="{{day}}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">{{day.substr(0, 2)}}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="#week of weeks">
-                        <td *ngFor="#day of week.days" [ngClass]="{ today: day.isToday, 'notinmonth': !day.isCurrentMonth, selected: day.date.isSame(selected) }">
+                    <tr *ngFor="let week of weeks">
+                        <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday, 'notinmonth': !day.isCurrentMonth, selected: day.date.isSame(selected) }">
                             <button class="day" (click)="select($event, day, true)" [attr.data-automation-id]="day.number" [disabled]="(start && day.date.isBefore(start)) || (end && day.date.isAfter(end))">{{day.number}}</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <ul class="calendar-content months" *ngIf="view == 'months'">
-                <li *ngFor="#month of months" (click)="setMonth(month)">
+                <li *ngFor="let month of months" (click)="setMonth(month)">
                     <div class="month" [ngClass]="{selected: month == selected.format('MMM')}" [attr.data-automation-id]="month">{{month}}</div>
                 </li>
             </ul>
             <ul class="calendar-content years" *ngIf="view == 'years'">
-                <li *ngFor="#year of years" (click)="setYear(year)">
+                <li *ngFor="let year of years" (click)="setYear(year)">
                     <div class="year" [ngClass]="{selected: year == selected.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
                 </li>
             </ul>

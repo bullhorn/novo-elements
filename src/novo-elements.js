@@ -1,6 +1,6 @@
 import { NOVO_BUTTON_ELEMENTS } from './elements/button';
 import { NOVO_TAB_ELEMENTS } from './elements/tabs';
-import { NOVO_TOAST_ELEMENTS } from './elements/toast';
+import { NOVO_TOAST_ELEMENTS, TOAST_PROVIDERS } from './elements/toast';
 import { NOVO_SWITCH_ELEMENTS } from './elements/switch';
 import { NOVO_CARD_ELEMENTS, NOVO_CARD_EXTRA_ELEMENTS } from './elements/card';
 import { NOVO_LOADING_ELEMENTS } from './elements/loading';
@@ -60,4 +60,8 @@ export const NOVO_ELEMENTS = [
     NOVO_DRAWER_ELEMENTS,
     NOVO_DATE_PICKER_ELEMENTS,
     NOVO_TIME_PICKER_ELEMENTS
+];
+
+export const NOVO_PROVIDERS = [
+    TOAST_PROVIDERS
 ];

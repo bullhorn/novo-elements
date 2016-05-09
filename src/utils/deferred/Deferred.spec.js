@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from 'angular2/testing';
+import { describe, expect, it, beforeEach } from '@angular/core/testing';
 
 import { Deferred } from './Deferred';
 

@@ -1,7 +1,7 @@
 <header>
     <novo-list direction="vertical">
 
-        <novo-list-item *ngFor="#item of pulseItems; #i = index">
+        <novo-list-item *ngFor="let item of pulseItems">
             <item-avatar [icon]="item.type"></item-avatar>
             <item-title>{{item.name}}</item-title>
             <item-content direction="vertical">

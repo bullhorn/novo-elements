@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import { NOVO_TIME_PICKER_ELEMENTS, NOVO_DATE_PICKER_ELEMENTS } from './../../../src/novo-elements';
 import moment from 'moment/moment';
 
@@ -9,7 +9,7 @@ import TimeDemoTpl from './templates/TimeDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Date and Time Pickers <small><a target="_blank" href="https://bhsource.bullhorn.com/NOVO/bh-elements/blob/master/src/elements/calendar">(source)</a></small></h1>
+    <h1>Date and Time Pickers</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non massa et augue molestie lacinia. Ut purus sem, bibendum at blandit vitae, bibendum sed turpis. Fusce eros libero, fringilla non dapibus in, cursus elementum ipsum.</p>
 
     <h2>Calendar Picker</h2>
@@ -18,7 +18,7 @@ const template = `
     <h5>Full Calendar Picker</h5>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non massa et augue molestie lacinia. Ut purus sem, bibendum at blandit vitae, bibendum sed turpis. Fusce eros libero, fringilla non dapibus in, cursus elementum ipsum.</p>
 
-    <h5>Full Calendar Picker</h5>
+    <h5>Full Calendar Picker <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/date-picker">(source)</a></small></h5>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non massa et augue molestie lacinia. Ut purus sem, bibendum at blandit vitae, bibendum sed turpis. Fusce eros libero, fringilla non dapibus in, cursus elementum ipsum.</p>
     <div class="example demo">${CalendarDemoTpl}</div>
     <code-snippet [code]="CalendarDemoTpl"></code-snippet>
@@ -26,7 +26,7 @@ const template = `
     <h2>Time Picker</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non massa et augue molestie lacinia. Ut purus sem, bibendum at blandit vitae, bibendum sed turpis. Fusce eros libero, fringilla non dapibus in, cursus elementum ipsum.</p>
 
-    <h5>Standalone Time Picker</h5>
+    <h5>Standalone Time Picker <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/time-picker">(source)</a></small></h5>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non massa et augue molestie lacinia. Ut purus sem, bibendum at blandit vitae, bibendum sed turpis. Fusce eros libero, fringilla non dapibus in, cursus elementum ipsum.</p>
     <div class="example demo">${TimeDemoTpl}</div>
     <code-snippet [code]="TimeDemoTpl"></code-snippet>

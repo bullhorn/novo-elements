@@ -1,6 +1,6 @@
 describe('Element: Loading', () => {
     beforeEach(() => {
-        browser.get('/#/loading');
+        browser.get('/loading');
     });
 
     it('should have <novo-loading>', () => {

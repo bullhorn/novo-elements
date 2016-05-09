@@ -1,6 +1,6 @@
 describe('Element: TimePicker', () => {
     beforeEach(() => {
-        browser.get('/#/calendar');
+        browser.get('/calendar');
     });
 
     it('should have <novo-time-picker>', () => {
