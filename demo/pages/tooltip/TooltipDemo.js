@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import { NOVO_TOOLTIP_ELEMENTS } from './../../../src/novo-elements';
 
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';

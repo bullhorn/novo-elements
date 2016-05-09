@@ -1,6 +1,6 @@
 describe('Element: Dropdown', () => {
     beforeEach(() => {
-        browser.get('/#/dropdown');
+        browser.get('/dropdown');
     });
 
     it('should have <novo-select>', () => {

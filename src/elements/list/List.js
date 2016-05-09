@@ -1,5 +1,5 @@
-import { Component } from 'angular2/core';
-import { CORE_DIRECTIVES, NgFor, NgIf, NgClass } from 'angular2/common';
+import { Component } from '@angular/core';
+import { CORE_DIRECTIVES, NgFor, NgIf, NgClass } from '@angular/common';
 
 @Component({
     selector: 'novo-list',

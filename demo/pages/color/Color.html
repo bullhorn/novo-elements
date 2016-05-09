@@ -28,11 +28,11 @@
     <p>These are the base colors of the application.</p>
 
     <article class="color-blocks primary-colors">
-        <div *ngFor="#color of primaryColors; #i = index" class="block {{color.name}}-cb">
+        <div *ngFor="let color of primaryColors" class="block {{color.name}}-cb">
             <div class="color-square" (click)="copyLink(color)"></div>
             <h3 class="color-text" (click)="copyLink(color)"><span>#</span>{{color.hex}}</h3>
             <h6>{{color.name}}</h6>
-            <span class="vars" *ngFor="#variable of color.variables; #j = index">${{variable}}</span>
+            <span class="vars" *ngFor="let variable of color.variables">${{variable}}</span>
         </div>
     </article>
 
@@ -40,11 +40,11 @@
     <p>This bold palette uses carefully balanced colors to distinguish entities from one another.</p>
 
     <article class="color-blocks entity-colors">
-        <div *ngFor="#color of entityColors; #i = index" class="block {{color.name}}-cb">
+        <div *ngFor="let color of entityColors" class="block {{color.name}}-cb">
             <div class="color-square" (click)="copyLink(color)"></div>
             <h3 class="color-text" (click)="copyLink(color)"><span>#</span>{{color.hex}}</h3>
             <h6>{{color.name}}</h6>
-            <span class="vars" *ngFor="#variable of color.variables; #j = index">${{variable}}</span>
+            <span class="vars" *ngFor="let variable of color.variables">${{variable}}</span>
         </div>
     </article>
 
@@ -52,11 +52,11 @@
     <p>This palette features vibrant, bold colors for use in data visualization.</p>
 
     <article class="color-blocks analytics-colors">
-        <div *ngFor="#color of analyticsColors; #i = index" class="block {{color.name}}-cb">
+        <div *ngFor="let color of analyticsColors" class="block {{color.name}}-cb">
             <div class="color-square" (click)="copyLink(color)"></div>
             <h3 class="color-text" (click)="copyLink(color)"><span>#</span>{{color.hex}}</h3>
             <h6>{{color.name}}</h6>
-            <span class="vars" *ngFor="#variable of color.variables; #j = index">${{variable}}</span>
+            <span class="vars" *ngFor="let variable of color.variables">${{variable}}</span>
         </div>
     </article>
 </section>

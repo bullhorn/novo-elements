@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import { NOVO_DRAWER_ELEMENTS, NOVO_BUTTON_ELEMENTS } from './../../../src/novo-elements';
 
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';

@@ -1,6 +1,6 @@
 describe('Element: List', () => {
     beforeEach(() => {
-        browser.get('/#/list');
+        browser.get('/list');
     });
 
     it('should have <novo-list>', () => {

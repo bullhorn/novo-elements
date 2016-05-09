@@ -1,6 +1,6 @@
 describe('Element: CardBestTime', () => {
     beforeEach(() => {
-        browser.get('/#/cards');
+        browser.get('/cards');
     });
 
     it('should have <novo-card-chart-donut>', () => {

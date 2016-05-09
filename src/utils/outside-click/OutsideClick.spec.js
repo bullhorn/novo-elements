@@ -1,4 +1,4 @@
-import { describe, beforeEach, beforeEachProviders } from 'angular2/testing';
+import { describe, beforeEach, beforeEachProviders } from '@angular/core/testing';
 
 import { OutsideClick } from './OutsideClick';
 

@@ -1,11 +1,11 @@
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import {
     NOVO_CARD_ELEMENTS,
     NOVO_CARD_EXTRA_ELEMENTS,
-    NOVO_BUTTON_ELEMENTS
+    NOVO_BUTTON_ELEMENTS,
+    NovoToast,
+    ToastService
 } from './../../../src/novo-elements';
-
-// TODO - add forms/toasts back in!!
 
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
 
@@ -136,7 +136,9 @@ const template = `
     template: template
 })
 export class CardDemo {
-    constructor() {
+    constructor(toastService:ToastService) {
+        this.toastService = toastService;
+
         // Templates
         this.AttributeCardDemoTpl = AttributeCardDemoTpl;
         this.FullConfigCardDemoTpl = FullConfigCardDemoTpl;
@@ -177,21 +179,19 @@ export class CardDemo {
     }
 
     onClose() {
-        console.log('CLOSED'); // eslint-disable-line
-        // this.toaster.alert(BhToast, {
-        //     theme: 'info',
-        //     title: 'Cards',
-        //     message: 'Close Clicked!'
-        // });
+        this.toastService.alert(NovoToast, {
+            theme: 'info',
+            title: 'Cards',
+            message: 'Close Clicked!'
+        });
     }
 
     onRefresh() {
-        console.log('REFRESHED'); // eslint-disable-line
-        // this.toaster.alert(BhToast, {
-        //     theme: 'success',
-        //     title: 'Cards',
-        //     message: 'Refresh Clicked!'
-        // });
+        this.toastService.alert(NovoToast, {
+            theme: 'success',
+            title: 'Cards',
+            message: 'Refresh Clicked!'
+        });
     }
 
     toggleLoading() {

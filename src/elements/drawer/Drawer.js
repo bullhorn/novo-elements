@@ -1,4 +1,4 @@
-import { Directive, OnInit, OnDestroy, EventEmitter, ElementRef } from 'angular2/core';
+import { Directive, OnInit, OnDestroy, EventEmitter, ElementRef } from '@angular/core';
 
 export const ALWAYS = 'always';
 export const DISABLED = 'disabled';

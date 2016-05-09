@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import { PluralPipe } from './../../../src/novo-elements';
 
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';

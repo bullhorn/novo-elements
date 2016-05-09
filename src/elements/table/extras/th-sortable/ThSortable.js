@@ -1,4 +1,4 @@
-import { Directive, EventEmitter } from 'angular2/core';
+import { Directive, EventEmitter } from '@angular/core';
 
 @Directive({
     selector: '[novoThSortable]',

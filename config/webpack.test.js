@@ -65,7 +65,8 @@ module.exports = {
                 loader: 'babel',
                 exclude: [
                     /\.e2e\.js$/,
-                    helpers.root('node_modules')
+                    helpers.root('node_modules'),
+                    helpers.root('node_modules/@angular')
                 ]
             },
 

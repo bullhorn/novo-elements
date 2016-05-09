@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, ElementRef, Renderer } from 'angular2/core';
+import { Directive, EventEmitter, ElementRef, Renderer } from '@angular/core';
 
 @Directive({
     selector: '[novoTableFilter]',
