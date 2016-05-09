@@ -1,6 +1,6 @@
 describe('Component: Switch', () => {
     beforeEach(() => {
-        browser.get('/#/switch');
+        browser.get('/switch');
     });
 
     it('should have <novo-switch>', () => {
