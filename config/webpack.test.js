@@ -115,7 +115,7 @@ module.exports = {
     // See: https://github.com/MoOx/eslint-loader
     eslint: {
         emitErrors: true,
-        failOnError: false,
+        failOnError: true,
         resourcePath: 'src'
     },
 
