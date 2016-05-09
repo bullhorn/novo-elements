@@ -1,0 +1,83 @@
+novo-list {
+    display: flex;
+
+    &.vertical-list {
+        flex-direction: column;
+    }
+
+    &.horizontal-list {
+        flex-direction: row;
+    }
+}
+
+novo-list-item {
+    background: #fff;
+    border-bottom: 1px solid #f4f4f4;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+
+    item-avatar {
+        margin-right: 15px;
+        font-size: 20px;
+
+        i {
+            @each $entity, $color in $entity-colors {
+                &.#{$entity} {
+                    background: $color;
+                }
+            }
+        }
+    }
+
+    item-title {
+        h3 {
+            font-size: 18px;
+            margin: 0;
+            padding-top: 0;
+            color: #434343;
+        }
+    }
+
+    item-content {
+        display: flex;
+
+        > * {
+            color: rgba(#434343, .65);
+        }
+
+        i {
+            &.positive {
+                color: map-get($analytics-colors, 'grass');
+            }
+
+            &.negative {
+                color: map-get($analytics-colors, 'grapefruit');
+            }
+            @each $analytic, $color in $analytics-colors {
+                &.#{$analytic} {
+                    color: $color;
+                }
+            }
+            @each $entity, $color in $entity-colors {
+                &.#{$entity} {
+                    color: $color;
+                }
+            }
+        }
+
+        &.vertical-list {
+            flex-direction: column;
+        }
+
+        &.horizontal-list {
+            flex-direction: row;
+        }
+    }
+
+    item-end {
+        align-self: center;
+        flex: 1;
+        text-align: right;
+    }
+}

@@ -1,3 +1,20 @@
+<a name="0.0.6"></a>
+## [0.0.6](https://github.com/bullhorn/novo-elements/compare/v0.0.5...v0.0.6) (2016-05-05)
+
+
+### Bug Fixes
+
+* **colors:** Hooks up toast to color copy func([6bbd9a6](https://github.com/bullhorn/novo-elements/commit/6bbd9a6))
+* **style:** fixes href cursor styling ([#39](https://github.com/bullhorn/novo-elements/issues/39))([82ca7b6](https://github.com/bullhorn/novo-elements/commit/82ca7b6)), closes [#39](https://github.com/bullhorn/novo-elements/issues/39)
+
+
+### Features
+
+* **fork me:** Adds 'Fork Me On GH' button to side nav, cleans side nav styles ([#37](https://github.com/bullhorn/novo-elements/issues/37))([ecf4010](https://github.com/bullhorn/novo-elements/commit/ecf4010))
+* **list:** Adds list component and documentation, closes [#11](https://github.com/bullhorn/novo-elements/issues/11) ([#40](https://github.com/bullhorn/novo-elements/issues/40))([3e11da6](https://github.com/bullhorn/novo-elements/commit/3e11da6)), closes [#11](https://github.com/bullhorn/novo-elements/issues/11) [#40](https://github.com/bullhorn/novo-elements/issues/40)
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://github.com/bullhorn/novo-elements/compare/v0.0.4...v0.0.5) (2016-05-03)
 
