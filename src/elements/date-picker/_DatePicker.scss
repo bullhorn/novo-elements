@@ -26,9 +26,10 @@ input[type=calendar] {
     background: #fff;
     color: #3A3A3A;
     -webkit-user-select: none;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, .15), 0px 2px 7px rgba(0, 0, 0, .1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .15), 0 2px 7px rgba(0, 0, 0, .1);
     z-index: 999;
     position: relative;
+
     .calendar-top {
         display: flex;
         flex-flow: column;
@@ -37,25 +38,29 @@ input[type=calendar] {
         font-size: 14px;
         border-top-right-radius: 4px;
         border-top-left-radius: 4px;
+
         h1 {
             font-weight: 600;
             font-size: 4.2em;
             color: #fff;
-            margin: 0px;
+            margin: 0;
             padding: 0;
         }
+
         h2 {
             font-weight: 300;
             opacity: 1;
             margin: 10px auto;
             padding: 0;
         }
+
         h3 {
             font-weight: 400;
-            opacity: .4;
+            opacity: 0.4;
             margin: 15px auto;
             padding: 0;
         }
+
         h4 {
             background: rgba(0, 0, 0, .15);
             font-size: 1em;
@@ -63,10 +68,11 @@ input[type=calendar] {
             padding: 10px;
         }
     }
+
     .calendar-header {
         width: 100%;
         border-collapse: collapse;
-        padding: 14px 0px;
+        padding: 14px 0;
         -webkit-user-select: none;
         cursor: default;
         border-bottom: 1px solid #F0F0F0;
@@ -96,15 +102,18 @@ input[type=calendar] {
             .month {
                 border-radius: 2px;
                 padding: 3px 8px;
+
                 &:hover {
                     background: $positive;
                     color: #fff;
                     cursor: pointer;
                 }
             }
+
             .year {
                 border-radius: 2px;
                 padding: 3px 8px;
+
                 &:hover {
                     background: $positive;
                     color: #fff;
@@ -137,9 +146,9 @@ input[type=calendar] {
         height: 230px;
         overflow-y: scroll;
         position: static;
-        top: 0px;
-        left: 0px;
-        -webkit-padding-start: 0px;
+        top: 0;
+        left: 0;
+        -webkit-padding-start: 0;
         -webkit-transform-origin: 209px 26px;
         -webkit-transform: scale(1);
 
@@ -153,10 +162,11 @@ input[type=calendar] {
         }
 
         tbody {
-            font-size: .9em;
+            font-size: 0.9em;
         }
 
-        .year, .month {
+        .month,
+        .year {
             text-align: center;
             padding: 4px 15px;
             color: #666666;
@@ -177,13 +187,18 @@ input[type=calendar] {
                 color: #fff;
             }
         }
+
         .day {
             height: 30px;
             width: 30px;
-            line-height: 30px;
+            line-height: 27px;
             margin: 1px;
             border: none;
             background-color: transparent;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 2px transparent;
+            transition: box-shadow 140ms ease-in-out;
+            position: relative;
 
             &:focus {
                 outline: none;
@@ -200,29 +215,46 @@ input[type=calendar] {
             &.notinmonth {
                 //color: #D7D9E4;
             }
+
+            &:hover {
+                .day {
+                    cursor: pointer;
+                    box-shadow: inset 0 0 0 2px $positive;
+                }
+            }
+
             &.selected {
                 .day {
                     background: $positive;
                     color: #fff;
-                    border-radius: 50%;
+
+                    &:after {
+                        content: ' ';
+                        background: #9DBEFF;
+                        position: absolute;
+                        border-radius: 50%;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: 100%;
+                        z-index: -1;
+                        animation: 200ms select ease-in-out;
+                    }
                 }
             }
+
             &.today {
                 .day {
-                    box-shadow: inset 0px 0px 0px 2px $light;
-                    border-radius: 50%;
+                    box-shadow: inset 0 0 0 2px $light;
                 }
-            }
-            &:hover {
-                .day {
-                    cursor: pointer;
-                    border-radius: 50%;
-                    box-shadow: inset 0px 0px 0px 2px $positive;
-                }
-            }
 
+                &.selected {
+                    .day {
+                        box-shadow: inset 0 0 0 2px #9DBEFF;
+                    }
+                }
+            }
         }
-
     }
 
     .calendar-footer {
@@ -234,5 +266,16 @@ input[type=calendar] {
             cursor: pointer;
             color: $positive;
         }
+    }
+}
+@keyframes select {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(1.6);
     }
 }
