@@ -5,7 +5,7 @@ novo-time-picker {
     overflow: hidden;
     border-radius: 5px;
     background-color: #fff;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, .15), 0px 2px 7px rgba(0, 0, 0, .1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .15), 0 2px 7px rgba(0, 0, 0, .1);
     z-index: 999;
 
     .digital {
@@ -39,6 +39,7 @@ novo-time-picker {
         text-transform: uppercase;
         margin-left: 5px;
         font-weight: 400;
+
         &.active {
             opacity: 1;
             font-weight: 600;
@@ -77,14 +78,14 @@ novo-time-picker {
         height: 240px;
         display: block;
         position: absolute;
-        top: 0px;
+        top: 0;
         border-radius: 50%;
         transform: rotate(0deg);
         transition: transform 100ms linear;
         z-index: 1;
 
         &:before {
-            content: " ";
+            content: ' ';
             width: 2px;
             top: 0;
             bottom: 0;
@@ -110,40 +111,51 @@ novo-time-picker {
         }
 
         &.hour-12 {
-            transform: rotate(-90deg)
+            transform: rotate(-90deg);
         }
+
         &.hour-1 {
-            transform: rotate(-60deg)
+            transform: rotate(-60deg);
         }
+
         &.hour-2 {
-            transform: rotate(-30deg)
+            transform: rotate(-30deg);
         }
+
         &.hour-3 {
-            transform: rotate(0)
+            transform: rotate(0);
         }
+
         &.hour-4 {
-            transform: rotate(30deg)
+            transform: rotate(30deg);
         }
+
         &.hour-5 {
-            transform: rotate(60deg)
+            transform: rotate(60deg);
         }
+
         &.hour-6 {
-            transform: rotate(90deg)
+            transform: rotate(90deg);
         }
+
         &.hour-7 {
-            transform: rotate(120deg)
+            transform: rotate(120deg);
         }
+
         &.hour-8 {
-            transform: rotate(150deg)
+            transform: rotate(150deg);
         }
+
         &.hour-9 {
-            transform: rotate(180deg)
+            transform: rotate(180deg);
         }
+
         &.hour-10 {
-            transform: rotate(210deg)
+            transform: rotate(210deg);
         }
+
         &.hour-11 {
-            transform: rotate(240deg)
+            transform: rotate(240deg);
         }
     }
 
@@ -153,7 +165,7 @@ novo-time-picker {
         margin: 20px;
         display: block;
         position: absolute;
-        top: 0px;
+        top: 0;
         border-radius: 50%;
         transform: rotate(0deg);
         transition: transform 100ms linear;
@@ -162,7 +174,7 @@ novo-time-picker {
         &:before {
             left: 23%;
             margin: 33%;
-            content: " ";
+            content: ' ';
             width: 2px;
             top: 0;
             bottom: 0;
@@ -193,16 +205,18 @@ novo-time-picker {
         }
 
         &.min-00 {
-            transform: rotate(-90deg)
+            transform: rotate(-90deg);
         }
         @for $i from 1 through 9 {
             $deg: ($i * (30/5) - 90);
+
             &.min-0#{$i} {
                 transform: rotate(#{$deg}deg);
             }
         }
         @for $i from 10 through 59 {
             $deg: ($i * (30/5) - 90);
+
             &.min-#{$i} {
                 transform: rotate(#{$deg}deg);
             }
@@ -224,8 +238,8 @@ novo-time-picker {
         background-color: $background;
     }
 
-    .analog--minute,
-    .analog--hour {
+    .analog--hour,
+    .analog--minute {
         font-size: 1.6em;
         color: #666666;
         left: 50%;
@@ -266,27 +280,59 @@ novo-time-picker {
     $d: 4.5em;
     @for $i from 1 through 12 {
         $deg: ($i * 30 - 90);
+
         .analog--hour:nth-child(#{$i}) {
             transform: rotate(#{$deg}deg) translate($d) rotate(#{$deg*-1}deg);
         }
+
         .analog--minute:nth-child(#{$i}) {
             transform: rotate(#{$deg}deg) translate($d) rotate(#{$deg*-1}deg);
         }
     }
+
     &.military {
-        $md: 5.9em;
+        $md: 8em;
         @for $i from 1 through 24 {
             $hour: $i - 1;
             $deg: ($i * 15 - 105);
+
             .analog--hour:nth-child(#{$i}) {
-                font-size: 1.2em;
                 transform: rotate(#{$deg}deg) translate($md) rotate(#{$deg*-1}deg);
             }
 
             .analog--hand--hours {
+                top: -10px;
+                left: -10px;
+
                 &.hour-#{$hour} {
                     transform: rotate(#{$deg}deg);
                 }
+            }
+        }
+
+        .analog--face {
+            top: 15px;
+            right: 15px;
+            left: 15px;
+            bottom: 15px;
+        }
+
+        .analog--hour {
+            font-size: 0.9em;
+            margin-left: -20px;
+            margin-top: -16px;
+        }
+
+        .analog--hand--minutes {
+            margin: 10px;
+        }
+
+        .analog--hand--hours {
+            .analog--ball {
+                height: 32px;
+                width: 32px;
+                right: 2px;
+                margin-top: -17px;
             }
         }
     }

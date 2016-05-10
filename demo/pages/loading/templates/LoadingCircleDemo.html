@@ -1,6 +1,16 @@
-<header>
-    <novo-loading theme="circle" [stage]="stages" (click)="changeStage();"></novo-loading>
-</header>
-<header class="color-container">
-    <novo-loading theme="circle" [stage]="stages" (click)="changeStage();" inverse></novo-loading>
-</header>
+<section>
+    <div class="whiteBg">
+        <novo-spinner theme="multicolor"></novo-spinner>
+    </div>
+    <div class="grayBg">
+        <novo-spinner></novo-spinner>
+    </div>
+</section>
+<section>
+    <div class="blueBg">
+        <novo-spinner inverse></novo-spinner>
+    </div>
+    <div class="darkBlueBg">
+        <novo-spinner theme="bittersweet"></novo-spinner>
+    </div>
+</section>
