@@ -8,6 +8,10 @@ novo-spinner {
             &.#{$analytics} {
                 .circleGroup circle {
                     fill: $color;
+
+                    &:nth-of-type(odd) {
+                        fill: lighten($color, 5%);
+                    }
                 }
             }
         }
@@ -16,7 +20,11 @@ novo-spinner {
             cx: 47;
             cy: 47;
             r: 6;
-            fill: #2F383F;
+            fill: $dark;
+
+            &:nth-of-type(odd) {
+                fill: lighten($dark, 5%);
+            }
             transform-origin: center center;
             @for $i from 1 through 5 {
                 &:nth-of-type(#{$i}) {
@@ -36,6 +44,10 @@ novo-spinner {
         &[inverse] {
             .circleGroup circle {
                 fill: white;
+
+                &:nth-of-type(odd) {
+                    fill: darken(white, 5%);
+                }
             }
         }
     }
@@ -54,8 +66,8 @@ novo-spinner {
     }
     @keyframes circle1 {
         0% {
-            cx: 47;
-            cy: 47;
+            cx: 43;
+            cy: 43;
         }
 
         25% {
@@ -69,14 +81,14 @@ novo-spinner {
         }
 
         100% {
-            cx: 47;
-            cy: 47;
+            cx: 43;
+            cy: 43;
         }
     }
     @keyframes circle2 {
         0% {
-            cx: 47;
-            cy: 47;
+            cx: 43;
+            cy: 43;
         }
 
         25% {
@@ -90,14 +102,14 @@ novo-spinner {
         }
 
         100% {
-            cx: 47;
-            cy: 47;
+            cx: 43;
+            cy: 43;
         }
     }
     @keyframes circle3 {
         0% {
-            cx: 47;
-            cy: 47;
+            cx: 43;
+            cy: 43;
         }
 
         25% {
@@ -111,14 +123,14 @@ novo-spinner {
         }
 
         100% {
-            cx: 47;
-            cy: 47;
+            cx: 43;
+            cy: 43;
         }
     }
     @keyframes circle4 {
         0% {
-            cx: 47;
-            cy: 47;
+            cx: 43;
+            cy: 43;
         }
 
         25% {
@@ -132,14 +144,14 @@ novo-spinner {
         }
 
         100% {
-            cx: 47;
-            cy: 47;
+            cx: 43;
+            cy: 43;
         }
     }
     @keyframes circle5 {
         0% {
-            cx: 47;
-            cy: 47;
+            cx: 43;
+            cy: 43;
         }
 
         25% {
@@ -153,8 +165,8 @@ novo-spinner {
         }
 
         100% {
-            cx: 47;
-            cy: 47;
+            cx: 43;
+            cy: 43;
         }
     }
 
