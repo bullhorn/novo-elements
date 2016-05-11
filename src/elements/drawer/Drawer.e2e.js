@@ -1,6 +1,6 @@
 describe('Element: drawer', () => {
     beforeEach(() => {
-        browser.get('/drawer');
+        browser.get('/#/drawer');
     });
 
     it('should have [drawer]', () => {

@@ -1,6 +1,6 @@
 describe('Element: Card', () => {
     beforeEach(() => {
-        browser.get('/cards');
+        browser.get('/#/cards');
     });
 
     it('should have <novo-card>', () => {

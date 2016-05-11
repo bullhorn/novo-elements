@@ -1,6 +1,6 @@
 describe('Component: NovoTable', () => {
     beforeEach(() => {
-        browser.get('/table');
+        browser.get('/#/table');
     });
 
     it('should have <novo-table>', () => {

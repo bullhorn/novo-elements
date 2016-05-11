@@ -1,6 +1,6 @@
 describe('Component: NovoToast', () => {
     beforeEach(() => {
-        browser.get('/toast');
+        browser.get('/#/toast');
     });
 
     it('should fire <novo-toast>', () => {

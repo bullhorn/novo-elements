@@ -1,6 +1,6 @@
 describe('Element: Tooltip', () => {
     beforeEach(() => {
-        browser.get('/tooltip');
+        browser.get('/#/tooltip');
     });
 
     it('should have [tooltip]', () => {

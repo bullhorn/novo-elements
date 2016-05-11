@@ -1,6 +1,6 @@
 describe('Element: Tabs', () => {
     beforeEach(() => {
-        browser.get('/tabs');
+        browser.get('/#/tabs');
     });
 
     it('should have <novo-nav>', () => {

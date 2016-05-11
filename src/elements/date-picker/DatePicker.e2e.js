@@ -1,6 +1,6 @@
 describe('Element: DatePicker', () => {
     beforeEach(() => {
-        browser.get('/calendar');
+        browser.get('/#/calendar');
     });
 
     it('should have <novo-date-picker>', () => {

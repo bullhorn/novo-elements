@@ -1,6 +1,6 @@
 describe('Component: Header', () => {
     beforeEach(() => {
-        browser.get('/header');
+        browser.get('/#/header');
     });
 
     it('should have <header>', () => {

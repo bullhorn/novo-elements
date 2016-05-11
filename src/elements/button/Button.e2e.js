@@ -1,6 +1,6 @@
 describe('Element: Button', () => {
     beforeEach(() => {
-        browser.get('/button');
+        browser.get('/#/button');
     });
 
     it('should have <button>', () => {
