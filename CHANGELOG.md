@@ -1,3 +1,19 @@
+<a name="0.0.7"></a>
+## [0.0.7](https://github.com/bullhorn/novo-elements/compare/v0.0.6...v0.0.7) (2016-05-11)
+
+
+### Bug Fixes
+
+* **headers:** Fixes SCSS to give section.primary appropriate background color, closes [#41](https://github.com/bullhorn/novo-elements/issues/41)([a36058a](https://github.com/bullhorn/novo-elements/commit/a36058a)), closes [#41](https://github.com/bullhorn/novo-elements/issues/41)
+
+
+### Features
+
+* **calendar:** Implementing DatePicker and TimePicker, closes [#2](https://github.com/bullhorn/novo-elements/issues/2)([dd44a17](https://github.com/bullhorn/novo-elements/commit/dd44a17)), closes [#2](https://github.com/bullhorn/novo-elements/issues/2)
+* **table:** Adds table element and documentation, closes [#17](https://github.com/bullhorn/novo-elements/issues/17)([c096a60](https://github.com/bullhorn/novo-elements/commit/c096a60)), closes [#17](https://github.com/bullhorn/novo-elements/issues/17)
+
+
+
 <a name="0.0.6"></a>
 ## [0.0.6](https://github.com/bullhorn/novo-elements/compare/v0.0.5...v0.0.6) (2016-05-05)
 
