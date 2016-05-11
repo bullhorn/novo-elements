@@ -22,7 +22,7 @@ export class Loading {}
 
 @Component({
     selector: 'novo-spinner',
-    inputs: ['theme', 'inverse'],
+    inputs: ['theme', 'inverse', 'baseHref'],
     template: `
     <svg class="bullhornSpinner" [ngClass]="theme" height="100" width="100" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" [attr.inverse]="inverse">
         <title>Bullhorn Spinner Animation</title>
@@ -30,8 +30,8 @@ export class Loading {}
         <defs>
             <style>
                 .bullhornSpinner g.circleGroup {
-                    -webkit-filter: url({{absUrl}}#gooEffect);
-                    filter: url({{absUrl}}#gooEffect);
+                    -webkit-filter: url("{{baseHref || ''}}#gooEffect");
+                    filter: url("{{baseHref || ''}}#gooEffect");
                 }
             </style>
             <filter id="gooEffect">
@@ -54,8 +54,6 @@ export class Loading {}
     </svg>
     `
 })
-export class NovoSpinner {
-    absUrl = window.location.href;
-}
+export class NovoSpinner {}
 
 export const NOVO_LOADING_ELEMENTS = [Loading, NovoSpinner];
