@@ -30,8 +30,8 @@ export class Loading {}
         <defs>
             <style>
                 .bullhornSpinner g.circleGroup {
-                    -webkit-filter: url({{absUrl}}#gooEffect);
-                    filter: url({{absUrl}}#gooEffect);
+                    -webkit-filter: url("#gooEffect");
+                    filter: url("#gooEffect");
                 }
             </style>
             <filter id="gooEffect">
@@ -55,7 +55,7 @@ export class Loading {}
     `
 })
 export class NovoSpinner {
-    absUrl = window.location.href;
+    // absUrl = window.location.href;
 }
 
 export const NOVO_LOADING_ELEMENTS = [Loading, NovoSpinner];
