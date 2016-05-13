@@ -7,6 +7,7 @@ export * from './button/ButtonDemo';
 export * from './tabs/TabsDemo';
 export * from './toast/ToastDemo';
 export * from './select/SelectDemo';
+export * from './picker/PickerDemo';
 export * from './dropdown/DropdownDemo';
 export * from './loading/LoadingDemo';
 export * from './card/CardDemo';

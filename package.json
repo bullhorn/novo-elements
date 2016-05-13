@@ -48,7 +48,7 @@
   },
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "dependencies": {
-    "angular2": "2.0.0-beta.15",
+    "angular2": "2.0.0-beta.16",
     "es6-promise": "3.1.2",
     "es6-shim": "0.35.0",
     "es7-reflect-metadata": "1.6.0",
@@ -63,6 +63,7 @@
   "devDependencies": {
     "async": "^2.0.0-rc.3",
     "autoprefixer-loader": "^3.2.0",
+    "ava": "^0.14.0",
     "babel-cli": "~6.7.5",
     "babel-core": "~6.7.4",
     "babel-eslint": "~6.0.2",
@@ -92,6 +93,7 @@
     "html-loader": "0.4.3",
     "html-webpack-plugin": "2.15.0",
     "jasmine": "2.4.1",
+    "jsdom": "^8.5.0",
     "karma": "0.13.22",
     "karma-chrome-launcher": "0.2.3",
     "karma-coverage": "0.5.5",
@@ -116,7 +118,8 @@
     "webpack": "1.13.0",
     "webpack-dev-server": "1.14.1",
     "webpack-md5-hash": "0.0.5",
-    "webpack-merge": "^0.10.0"
+    "webpack-merge": "^0.10.0",
+    "zombie": "^4.2.1"
   },
   "config": {
     "ghooks": {
@@ -131,5 +134,13 @@
       "sloc": "/coverage/sloc.json",
       "karma-coverage": "/coverage/coverage.txt"
     }
+  },
+  "ava": {
+    "require": [
+      "babel-register",
+      "./test/helpers/setup-browser-env.js",
+      "./test/helpers/setup-angular.js"
+    ],
+    "babel": "inherit"
   }
 }

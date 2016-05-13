@@ -18,6 +18,7 @@ import {
     TooltipDemo,
     DrawerDemo,
     SelectDemo,
+    PickerDemo,
     SwitchDemo,
     HeaderDemo,
     DropdownDemo
@@ -74,6 +75,10 @@ const template = require('./App.html');
         path: '/select',
         component: SelectDemo,
         name: 'Select'
+    }, {
+        path: '/picker',
+        component: PickerDemo,
+        name: 'Picker'
     }, {
         path: '/dropdown',
         component: DropdownDemo,
@@ -156,6 +161,9 @@ export class DemoApp {
             }, {
                 name: 'Select',
                 path: '/select'
+            }, {
+                name: 'Picker',
+                path: '/picker'
             }, {
                 name: 'Dropdown',
                 path: '/dropdown'

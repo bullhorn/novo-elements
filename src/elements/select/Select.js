@@ -61,6 +61,9 @@ export class Select extends OutsideClick {
 
         if (!this.model.value) {
             this.clear();
+        } else {
+            //TODO: @jgodi fix this
+            this.writeValue(this.model.value);
         }
     }
 
@@ -133,7 +136,7 @@ export class Select extends OutsideClick {
     //valueAccessor Functions
     writeValue(value) {
         this.value = value;
-        let item = this.options.find(i => i.value === value);
+        let item = this.options && this.options.find(i => i.value === value);
         if (item) {
             this.empty = false;
             this.selected = item;
