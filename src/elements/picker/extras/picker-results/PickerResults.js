@@ -1,4 +1,4 @@
-import { Component, ElementRef } from 'angular2/core';
+import { Component, ElementRef } from '@angular/core';
 import { NOVO_LOADING_ELEMENTS } from './../../../loading/Loading';
 import { Observable } from 'rxjs/Rx';
 
@@ -18,7 +18,7 @@ import { Observable } from 'rxjs/Rx';
         <novo-loading theme="line" *ngIf="loading && !matches.length"></novo-loading>
         <ul *ngIf="matches.length > 0">
             <li
-                *ngFor="#match of matches"
+                *ngFor="let match of matches"
                 (click)="selectMatch($event)"
                 [class.active]="match===activeMatch"
                 (mouseenter)="selectActive(match)">

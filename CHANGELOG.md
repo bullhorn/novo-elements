@@ -1,3 +1,36 @@
+<a name="0.0.7"></a>
+## [0.0.7](https://github.com/bullhorn/novo-elements/compare/v0.0.6...v0.0.7) (2016-05-11)
+
+
+### Bug Fixes
+
+* **headers:** Fixes SCSS to give section.primary appropriate background color, closes [#41](https://github.com/bullhorn/novo-elements/issues/41)([a36058a](https://github.com/bullhorn/novo-elements/commit/a36058a)), closes [#41](https://github.com/bullhorn/novo-elements/issues/41)
+
+
+### Features
+
+* **calendar:** Implementing DatePicker and TimePicker, closes [#2](https://github.com/bullhorn/novo-elements/issues/2)([dd44a17](https://github.com/bullhorn/novo-elements/commit/dd44a17)), closes [#2](https://github.com/bullhorn/novo-elements/issues/2)
+* **table:** Adds table element and documentation, closes [#17](https://github.com/bullhorn/novo-elements/issues/17)([c096a60](https://github.com/bullhorn/novo-elements/commit/c096a60)), closes [#17](https://github.com/bullhorn/novo-elements/issues/17)
+
+
+
+<a name="0.0.6"></a>
+## [0.0.6](https://github.com/bullhorn/novo-elements/compare/v0.0.5...v0.0.6) (2016-05-05)
+
+
+### Bug Fixes
+
+* **colors:** Hooks up toast to color copy func([6bbd9a6](https://github.com/bullhorn/novo-elements/commit/6bbd9a6))
+* **style:** fixes href cursor styling ([#39](https://github.com/bullhorn/novo-elements/issues/39))([82ca7b6](https://github.com/bullhorn/novo-elements/commit/82ca7b6)), closes [#39](https://github.com/bullhorn/novo-elements/issues/39)
+
+
+### Features
+
+* **fork me:** Adds 'Fork Me On GH' button to side nav, cleans side nav styles ([#37](https://github.com/bullhorn/novo-elements/issues/37))([ecf4010](https://github.com/bullhorn/novo-elements/commit/ecf4010))
+* **list:** Adds list component and documentation, closes [#11](https://github.com/bullhorn/novo-elements/issues/11) ([#40](https://github.com/bullhorn/novo-elements/issues/40))([3e11da6](https://github.com/bullhorn/novo-elements/commit/3e11da6)), closes [#11](https://github.com/bullhorn/novo-elements/issues/11) [#40](https://github.com/bullhorn/novo-elements/issues/40)
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://github.com/bullhorn/novo-elements/compare/v0.0.4...v0.0.5) (2016-05-03)
 

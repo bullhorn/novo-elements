@@ -1,4 +1,4 @@
-import { describe, it } from 'angular2/testing';
+import { describe, it } from '@angular/core/testing';
 
 import { KeyCodes } from './KeyCodes';
 

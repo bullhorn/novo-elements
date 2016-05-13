@@ -1,0 +1,17 @@
+<header [ngClass]="color" (click)="changeColor()" bhTooltip="Click Me!" bhTooltipPlacement="top">
+    <div class="header-row">
+        <h1><i class="bhi-email"></i>Email ({{basic.rows.length}})</h1>
+        <div>
+            <h5>Last Activity</h5>
+            <span>12/15/2015</span>
+        </div>
+    </div>
+    <novo-pagination *ngIf="basic.config.paging"
+                     [page]="basic.config.paging.current"
+                     [totalItems]="basic.rows.length"
+                     [itemsPerPage]="basic.config.paging.itemsPerPage"
+                     (onPageChange)="basic.config.paging.onPageChange($event)">
+    </novo-pagination>
+</header>
+
+<novo-table [rows]="basic.rows" [columns]="basic.columns" [config]="basic.config" (onTableChange)="basic.onTableChange($event)"></novo-table>

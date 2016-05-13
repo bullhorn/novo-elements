@@ -1,9 +1,19 @@
-
-<div>Selected Value: {{value}}</div>
-<novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value"></novo-select>
-<br>
-<div>Disabled State</div>
-<novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value" disabled></novo-select>
-<br>
-<div>No Model</div>
-<novo-select [options]="options" [placeholder]="placeholder"></novo-select>
+<div>
+    <label>
+        <span class="caption">Selected Value:</span> {{value}}</label>
+    <novo-select [options]="options" [placeholder]="placeholder"
+        [(ngModel)]="value"></novo-select>
+</div>
+<div>
+    <label>
+        <span class="caption">Disabled State</span>
+    </label>
+    <novo-select [options]="options" [placeholder]="placeholder"
+        [(ngModel)]="value" disabled></novo-select>
+</div>
+<div>
+    <label>
+        <span class="caption">No Model</span>
+    </label>
+    <novo-select [options]="options" [placeholder]="placeholder"></novo-select>
+</div>

@@ -1,10 +1,7 @@
-import { Component } from 'angular2/core';
-import { NgModel } from 'angular2/common';
-import { By } from 'angular2/platform/common_dom';
-import { beforeEach, expect, describe, it } from 'angular2/testing';
-
-import { createTestContext } from './../../testing/TestContext';
+import { Component } from '@angular/core';
+import { NgModel } from '@angular/common';
 import { Picker } from './Picker';
+import { testComponent, grabComponent } from './../../testing/TestHelpers';
 
 @Component({
     selector: 'test-cmp',
@@ -21,43 +18,33 @@ class TestCmp {
 }
 
 describe('Element: Picker', () => {
-    let ctx;
-    let instance;
-    let element;
+    it('should initialize correctly', testComponent(TestCmp, (fixture) => {
+        const { element, testComponentInstance, testComponentElement } = grabComponent(fixture, Picker);
+        //expect(instance).toBeTruthy();
+        expect(element).toBeTruthy();
+        expect(testComponentInstance).toBeTruthy();
+        expect(testComponentElement).toBeTruthy();
+    }));
 
-    beforeEach(createTestContext(_ctx => ctx = _ctx));
-
-    beforeEach(done => {
-        ctx.init(TestCmp)
-            .finally(done)
-            .subscribe(() => {
-                const cmpDebugElement = ctx.fixture.debugElement.query(By.directive(Picker));
-                element = cmpDebugElement.nativeElement;
-                instance = cmpDebugElement.componentInstance;
-            });
-    });
-
-    it('should be defined', () => {
-        expect(instance).toBeDefined();
-        expect(element).toBeDefined();
-    });
-
-    xit('should setup the defaults of the picker.', () => {
+    xit('should setup the defaults of the picker.', testComponent(TestCmp, (fixture) => {
+        const { instance } = grabComponent(fixture, Picker);
         expect(instance.field).toBe('label');
         expect(instance.config).toBeDefined();
         expect(instance.config.options[0]).toBe(1);
-    });
+    }));
 
-    xit('should call the dynamic component loader which shows the results.', () => {
+    xit('should call the dynamic component loader which shows the results.', testComponent(TestCmp, (fixture) => {
+        const { instance } = grabComponent(fixture, Picker);
         spyOn(instance.loader.loadNextToLocation).and.callFake(() => { });
         instance.showResults();
         expect(instance.loader.loadNextToLocation).toHaveBeenCalled();
-    });
+    }));
 
-    xit('should dispose of the results HTML element.', () => {
+    xit('should dispose of the results HTML element.', testComponent(TestCmp, (fixture) => {
+        const { instance } = grabComponent(fixture, Picker);
         instance.popup = { then: () => { } };
         spyOn(instance.popup, 'then').and.callFake(() => { });
         instance.hideResults();
         expect(instance.popup.then).toHaveBeenCalled();
-    });
+    }));
 });

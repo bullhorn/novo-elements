@@ -20,6 +20,7 @@ main.main-content {
             }
         }
     }
+
     // Contains component demos
     .example {
         margin-top: 25px;
@@ -35,6 +36,7 @@ main.main-content {
             border-top-left-radius: 3px;
         }
     }
+
     // Contains code snippet
     pre {
         margin: 0 0 35px;
@@ -141,11 +143,11 @@ main.main-content {
         color: $success;
     }
     // Custom page element initial display reset
+    color,
     home,
-    layout,
-    typography,
     iconography,
-    color {
+    layout,
+    typography {
         display: block;
 
         & > header {
@@ -161,11 +163,11 @@ main.main-content {
     }
     // DEMO STYLES
     // Custom page element initial display reset
+    buttons-demo,
     from-demo,
     modal-demo,
     switch-demo,
-    tooltip-demo,
-    buttons-demo {
+    tooltip-demo {
         display: block;
     }
 }

@@ -1,6 +1,8 @@
-import { Component } from 'angular2/core';
-import { CORE_DIRECTIVES } from 'angular2/common';
-import { ROUTER_DIRECTIVES, RouteConfig, Router } from 'angular2/router';
+import { Component, ViewContainerRef } from '@angular/core';
+import { CORE_DIRECTIVES } from '@angular/common';
+import { ROUTER_DIRECTIVES, RouteConfig, Router } from '@angular/router-deprecated';
+
+import { TOAST_PROVIDERS, ToastService } from './../../../src/novo-elements';
 
 import {
     Home,
@@ -19,9 +21,12 @@ import {
     DrawerDemo,
     SelectDemo,
     PickerDemo,
-    SwitchDemo,
     HeaderDemo,
-    DropdownDemo
+    DropdownDemo,
+    ListDemo,
+    TableDemo,
+    SwitchDemo,
+    CalendarDemo
 } from './../pages';
 
 const template = require('./App.html');
@@ -29,6 +34,7 @@ const template = require('./App.html');
 @Component({
     selector: 'demo-app',
     template: template,
+    providers: [...TOAST_PROVIDERS],
     directives: [
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES
@@ -107,6 +113,18 @@ const template = require('./App.html');
         path: '/header',
         component: HeaderDemo,
         name: 'Header'
+    }, {
+        path: '/list',
+        component: ListDemo,
+        name: 'List'
+    }, {
+        path: '/table',
+        component: TableDemo,
+        name: 'Table'
+    }, {
+        path: '/calendar',
+        component: CalendarDemo,
+        name: 'Calendar'
     },
 
     // Utils
@@ -129,10 +147,12 @@ const template = require('./App.html');
     }
 ])
 export class DemoApp {
-    constructor(router: Router) {
+    constructor(router:Router, toastService:ToastService, view:ViewContainerRef) {
         this.router = router;
         this.menuOpen = false;
         this.version = VERSION;
+
+        toastService.defaultContainer = view;
 
         this.designRoutes = [{
             name: 'Composition',
@@ -148,45 +168,52 @@ export class DemoApp {
             path: '/color'
         }];
 
-        this.componentRoutes = [
-            {
-                name: 'Toast',
-                path: '/toast'
-            }, {
-                name: 'Button',
-                path: '/button'
-            }, {
-                name: 'Tabs',
-                path: '/tabs'
-            }, {
-                name: 'Select',
-                path: '/select'
-            }, {
-                name: 'Picker',
-                path: '/picker'
-            }, {
-                name: 'Dropdown',
-                path: '/dropdown'
-            }, {
-                name: 'Loading',
-                path: '/loading'
-            }, {
-                name: 'Cards',
-                path: '/cards'
-            }, {
-                name: 'Tooltip',
-                path: '/tooltip'
-            }, {
-                name: 'Drawer',
-                path: '/drawer'
-            }, {
-                name: 'Switch',
-                path: '/switch'
-            }, {
-                name: 'Header',
-                path: '/header'
-            }
-        ];
+        this.componentRoutes = [{
+            name: 'Toast',
+            path: '/toast'
+        }, {
+            name: 'Button',
+            path: '/button'
+        }, {
+            name: 'Tabs',
+            path: '/tabs'
+        }, {
+            name: 'Select',
+            path: '/select'
+        }, {
+            name: 'Picker',
+            path: '/picker'
+        }, {
+            name: 'Dropdown',
+            path: '/dropdown'
+        }, {
+            name: 'Loading',
+            path: '/loading'
+        }, {
+            name: 'Cards',
+            path: '/cards'
+        }, {
+            name: 'Tooltip',
+            path: '/tooltip'
+        }, {
+            name: 'Drawer',
+            path: '/drawer'
+        }, {
+            name: 'Switch',
+            path: '/switch'
+        }, {
+            name: 'Header',
+            path: '/header'
+        }, {
+            name: 'List',
+            path: '/list'
+        }, {
+            name: 'Table',
+            path: '/table'
+        }, {
+            name: 'Calendar',
+            path: '/calendar'
+        }];
 
         this.utilRoutes = [{
             name: 'Pipes',

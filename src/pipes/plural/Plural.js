@@ -1,4 +1,4 @@
-import { Injectable, Pipe } from 'angular2/core';
+import { Injectable, Pipe } from '@angular/core';
 
 // Rule storage - pluralize and singularize need to be run sequentially,
 // while other rules can be optimized using an object for instant lookups.

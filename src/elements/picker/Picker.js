@@ -1,5 +1,5 @@
-import { Directive, EventEmitter, ElementRef, DynamicComponentLoader, ViewContainerRef } from 'angular2/core';
-import { NgModel } from 'angular2/common';
+import { Directive, EventEmitter, ElementRef, DynamicComponentLoader, ViewContainerRef } from '@angular/core';
+import { NgModel } from '@angular/common';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { PickerResults } from './extras/PickerExtras';
