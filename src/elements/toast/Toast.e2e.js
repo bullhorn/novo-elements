@@ -1,9 +1,9 @@
-describe('Component: NovoToast', () => {
+describe('Element: NovoToast', () => {
     beforeEach(() => {
         browser.get('/#/toast');
     });
 
-    it('should fire <novo-toast>', () => {
+    xit('should fire <novo-toast>', () => {
         // toast launcher button
         let trigger = element(by.css('demo-app [data-automation-id="toast-trigger"]'));
 

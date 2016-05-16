@@ -5,6 +5,7 @@ export * from './layout/Layout';
 export * from './home/Home';
 export * from './button/ButtonDemo';
 export * from './tabs/TabsDemo';
+export * from './modal/ModalDemo';
 export * from './toast/ToastDemo';
 export * from './select/SelectDemo';
 export * from './dropdown/DropdownDemo';

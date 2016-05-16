@@ -1,9 +1,4 @@
-import {
-    Component,
-    ElementRef,
-    DynamicComponentLoader,
-    ViewContainerRef
-} from '@angular/core';
+import { Component, ElementRef, ComponentResolver, ViewContainerRef } from '@angular/core';
 
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 
@@ -19,9 +14,9 @@ import { BaseRenderer } from './../base-renderer/BaseRenderer';
     `
 })
 export class TableCell {
-    constructor(element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
+    constructor(element:ElementRef, componentResolver:ComponentResolver, view:ViewContainerRef) {
         this.element = element;
-        this.loader = loader;
+        this.componentResolver = componentResolver;
         this.view = view;
         this.value = '';
     }
@@ -31,11 +26,13 @@ export class TableCell {
             this.value = this.row[this.column.name];
         } else if (this.column.renderer && this.column.renderer.prototype instanceof BaseRenderer) {
             this.column.type = 'customrenderer';
-            this.loader.loadNextToLocation(this.column.renderer, this.view).then(cell => {
-                cell.instance.meta = this.column;
-                cell.instance.data = this.row;
-                cell.instance.value = this.row[this.column.name];
-            });
+            this.componentResolver.resolveComponent(this.column.renderer)
+                .then(componentFactory => {
+                    let componentRef = this.view.createComponent(componentFactory);
+                    componentRef.instance.meta = this.column;
+                    componentRef.instance.data = this.row;
+                    componentRef.instance.value = this.row[this.column.name];
+                });
         }
     }
 

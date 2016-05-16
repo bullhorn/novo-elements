@@ -1,4 +1,4 @@
-import { Component, ElementRef, DynamicComponentLoader, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, ComponentResolver, ViewContainerRef } from '@angular/core';
 
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 
@@ -11,9 +11,9 @@ import { BaseRenderer } from './../base-renderer/BaseRenderer';
     template: '<span>{{value}}</span>'
 })
 export class RowDetails {
-    constructor(element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
+    constructor(element:ElementRef, componentResolver:ComponentResolver, view:ViewContainerRef) {
         this.element = element;
-        this.loader = loader;
+        this.componentResolver = componentResolver;
         this.view = view;
         this.value = '';
     }
@@ -21,9 +21,11 @@ export class RowDetails {
     ngOnInit() {
         if (this.renderer) {
             if (this.renderer.prototype instanceof BaseRenderer) {
-                this.loader.loadNextToLocation(this.renderer, this.view).then(row => {
-                    row.instance.data = this.data;
-                });
+                this.componentResolver.resolveComponent(this.renderer)
+                    .then(componentFactory => {
+                        let componentRef = this.view.createComponent(componentFactory);
+                        componentRef.instance.data = this.data;
+                    });
             } else {
                 this.value = this.renderer(this.data);
             }

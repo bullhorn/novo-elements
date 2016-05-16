@@ -39,20 +39,31 @@ function getSystemJsBundleConfig(cb) {
         transpiler: 'typescript',
         map: {
             typescript: path.resolve('node_modules/typescript/lib/typescript.js'),
-            angular2: path.resolve('node_modules/angular2'),
+            '@angular/core': path.resolve('node_modules/@angular/core/index.js'),
+            '@angular/common': path.resolve('node_modules/@angular/common/index.js'),
+            '@angular/compiler': path.resolve('node_modules/@angular/compiler/index.js'),
+            '@angular/platform-browser': path.resolve('node_modules/@angular/platform-browser/index.js'),
+            '@angular/platform-browser-dynamic': path.resolve('node_modules/@angular/platform-browser-dynamic/'),
             rxjs: path.resolve('node_modules/rxjs'),
-            underscore: path.resolve('node_modules/underscore/underscore.js')
+            moment: path.resolve('node_modules/moment/min/moment.min.js')
         },
         paths: {
             '*': '*.js'
         }
     };
 
-    config.meta = ['angular2', 'rxjs'].reduce((memo, currentValue) => {
+    config.meta = [
+        '@angular/common',
+        '@angular/compiler',
+        '@angular/core',
+        '@angular/platform-browser',
+        '@angular/platform-browser-dynamic',
+        'rxjs',
+        'moment'
+    ].reduce((memo, currentValue) => {
         memo[path.resolve(`node_modules/${currentValue}/*`)] = { build: false };
         return memo;
     }, {});
-
     config.meta.moment = { build: false };
     return cb(null, config);
 }

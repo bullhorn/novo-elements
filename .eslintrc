@@ -4,6 +4,7 @@
         "global-require": 0
     },
     "globals": {
-        "VERSION": false
+        "VERSION": false,
+        "beforeEachProviders": false
     }
 }

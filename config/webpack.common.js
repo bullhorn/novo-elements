@@ -5,7 +5,7 @@ const pkg = require('../package.json');
 /**
  * Webpack Plugins
  */
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+var CopyWebpackPlugin = (CopyWebpackPlugin = require('copy-webpack-plugin'), CopyWebpackPlugin.default || CopyWebpackPlugin);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /**
@@ -220,7 +220,7 @@ module.exports = {
         // See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
         // See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
         new webpack.optimize.CommonsChunkPlugin({
-            name: helpers.reverse(['vendor', 'lib', 'demo']),
+            name: ['vendor', 'lib', 'demo'].reverse(),
             minChunks: Infinity
         }),
 
@@ -247,7 +247,7 @@ module.exports = {
         // See: https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
             template: 'demo/index.html',
-            chunksSortMode: helpers.packageSort(['vendor', 'lib', 'demo'])
+            chunksSortMode: 'dependency'
         })
     ],
 

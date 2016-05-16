@@ -1,9 +1,9 @@
-import { Provider, Injectable, DynamicComponentLoader } from '@angular/core';
+import { Provider, Injectable, ComponentResolver } from '@angular/core';
 
 @Injectable()
 export class ToastService {
-    constructor(loader:DynamicComponentLoader) {
-        this.loader = loader;
+    constructor(componentResolver:ComponentResolver) {
+        this.componentResolver = componentResolver;
         this.references = [];
 
         this.positions = [
@@ -47,11 +47,13 @@ export class ToastService {
             if (!this._defaultContainer) {
                 // TODO alert
             }
-            this.loader.loadNextToLocation(component, this._defaultContainer).then(toast => {
-                this.references.push(toast);
-                this.handleAlert(toast.instance, options);
-                resolve(toast);
-            });
+            this.componentResolver.resolveComponent(component)
+                .then(componentFactory => {
+                    let toast = this._defaultContainer.createComponent(componentFactory);
+                    this.references.push(toast);
+                    this.handleAlert(toast.instance, options);
+                    resolve(toast);
+                });
         });
     }
 
