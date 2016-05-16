@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { Dropdown } from './Dropdown';
 import { testComponent, grabComponent } from './../../testing/TestHelpers';
 

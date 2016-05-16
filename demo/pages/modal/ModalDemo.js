@@ -17,7 +17,7 @@ import ModalWarningDemoTpl from './templates/ModalWarningDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Modals <small><a target="_blank" href="https://bhsource.bullhorn.com/NOVO/bh-elements/blob/master/src/elements/modal">(source)</a></small></h1>
+    <h1>Modals <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/modal">(source)</a></small></h1>
     <p>Modals are pop-up dialogues designed to grab attention and inform the user of something critical, force a decision, or extend a workflow. There are two categories of modals: notification and workflow. Regardless of type, a modal should have a maximum of two main buttons.</p>
 
     <h2>Notification Modals</h2>
