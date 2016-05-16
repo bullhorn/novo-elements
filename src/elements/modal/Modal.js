@@ -1,4 +1,4 @@
-import { Directive, Component, ViewContainerRef, ComponentResolver } from '@angular/core';
+import { Component, ViewContainerRef, ComponentResolver, ViewChild } from '@angular/core';
 
 import { NOVO_BUTTON_ELEMENTS } from './../button/Button';
 
@@ -32,30 +32,25 @@ export class ModalRef {
     }
 }
 
-@Directive({
-    selector: 'novo-modal-helper'
+@Component({
+    moduleId: module.id,
+    selector: 'novo-modal-container',
+    template: '<div #container></div>'
 })
-export class NovoModalHelper {
-    constructor(modalRef:ModalRef, componentResolver:ComponentResolver, view:ViewContainerRef) {
+export class NovoModalContainer {
+    @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
+
+    constructor(modalRef:ModalRef, componentResolver:ComponentResolver) {
         this.modalRef = modalRef;
         this.componentResolver = componentResolver;
-        this.view = view;
     }
 
     ngAfterViewInit() {
         this.componentResolver.resolveComponent(this.modalRef.component)
             .then(componentFactory => {
-                this.modalRef.contentRef = this.view.createComponent(componentFactory);
+                this.modalRef.contentRef = this.container.createComponent(componentFactory);
             });
     }
-}
-@Component({
-    moduleId: module.id,
-    selector: 'novo-modal-container',
-    template: '<novo-modal-helper></novo-modal-helper>',
-    directives: [NovoModalHelper]
-})
-export class NovoModalContainer {
 }
 
 @Component({

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ComponentResolver, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, ComponentResolver, ViewChild, ViewContainerRef } from '@angular/core';
 
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 
@@ -9,15 +9,17 @@ import { BaseRenderer } from './../base-renderer/BaseRenderer';
         'row'
     ],
     template: `
+        <span #container></span>
         <span *ngIf="!column.type || column.type === 'text'">{{ value }}</span>
         <a (click)="onClick($event);" *ngIf="column.type === 'link'">{{ value }}</a>
     `
 })
 export class TableCell {
-    constructor(element:ElementRef, componentResolver:ComponentResolver, view:ViewContainerRef) {
+    @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
+
+    constructor(element:ElementRef, componentResolver:ComponentResolver) {
         this.element = element;
         this.componentResolver = componentResolver;
-        this.view = view;
         this.value = '';
     }
 
@@ -28,7 +30,7 @@ export class TableCell {
             this.column.type = 'customrenderer';
             this.componentResolver.resolveComponent(this.column.renderer)
                 .then(componentFactory => {
-                    let componentRef = this.view.createComponent(componentFactory);
+                    let componentRef = this.container.createComponent(componentFactory);
                     componentRef.instance.meta = this.column;
                     componentRef.instance.data = this.row;
                     componentRef.instance.value = this.row[this.column.name];

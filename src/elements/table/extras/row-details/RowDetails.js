@@ -1,4 +1,4 @@
-import { Component, ElementRef, ComponentResolver, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, ComponentResolver, ViewContainerRef, ViewChild } from '@angular/core';
 
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 
@@ -8,13 +8,14 @@ import { BaseRenderer } from './../base-renderer/BaseRenderer';
         'data',
         'renderer'
     ],
-    template: '<span>{{value}}</span>'
+    template: '<span #container>{{value}}</span>'
 })
 export class RowDetails {
-    constructor(element:ElementRef, componentResolver:ComponentResolver, view:ViewContainerRef) {
+    @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
+
+    constructor(element:ElementRef, componentResolver:ComponentResolver) {
         this.element = element;
         this.componentResolver = componentResolver;
-        this.view = view;
         this.value = '';
     }
 
@@ -23,7 +24,7 @@ export class RowDetails {
             if (this.renderer.prototype instanceof BaseRenderer) {
                 this.componentResolver.resolveComponent(this.renderer)
                     .then(componentFactory => {
-                        let componentRef = this.view.createComponent(componentFactory);
+                        let componentRef = this.container.createComponent(componentFactory);
                         componentRef.instance.data = this.data;
                     });
             } else {
