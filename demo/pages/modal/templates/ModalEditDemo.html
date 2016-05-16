@@ -1,0 +1,21 @@
+<novo-modal>
+    <header title="John Deere" icon="candidate" theme="candidate">
+        <utils>
+            <util-action icon="times" (click)="toggleClose($event)"></util-action>
+        </utils>
+    </header>
+    <section>
+        <bh-form>
+            <form-field>
+                <form-label>Status</form-label>
+                <form-input name="status" type="select" [options]="statusOptions" placeholder="Status"></form-input>
+            </form-field>
+            <form-field>
+                <form-label>Start Date</form-label>
+                <form-input name="startDate" type="date" inline="true" placeholder="Please select a date"></form-input>
+            </form-field>
+        </bh-form>
+    </section>
+    <button theme="standard" (click)="close()">Cancel</button>
+    <button theme="primary" color="success" icon="check" (click)="close()">Save</button>
+</novo-modal>

@@ -1,9 +1,4 @@
-import {
-    Component,
-    ElementRef,
-    DynamicComponentLoader,
-    ViewContainerRef
-} from '@angular/core';
+import { Component, ElementRef, ComponentResolver, ViewChild, ViewContainerRef } from '@angular/core';
 
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 
@@ -14,15 +9,17 @@ import { BaseRenderer } from './../base-renderer/BaseRenderer';
         'row'
     ],
     template: `
+        <ref #container></ref>
         <span *ngIf="!column.type || column.type === 'text'">{{ value }}</span>
         <a (click)="onClick($event);" *ngIf="column.type === 'link'">{{ value }}</a>
     `
 })
 export class TableCell {
-    constructor(element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
+    @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
+
+    constructor(element:ElementRef, componentResolver:ComponentResolver) {
         this.element = element;
-        this.loader = loader;
-        this.view = view;
+        this.componentResolver = componentResolver;
         this.value = '';
     }
 
@@ -31,11 +28,13 @@ export class TableCell {
             this.value = this.row[this.column.name];
         } else if (this.column.renderer && this.column.renderer.prototype instanceof BaseRenderer) {
             this.column.type = 'customrenderer';
-            this.loader.loadNextToLocation(this.column.renderer, this.view).then(cell => {
-                cell.instance.meta = this.column;
-                cell.instance.data = this.row;
-                cell.instance.value = this.row[this.column.name];
-            });
+            this.componentResolver.resolveComponent(this.column.renderer)
+                .then(componentFactory => {
+                    let componentRef = this.container.createComponent(componentFactory);
+                    componentRef.instance.meta = this.column;
+                    componentRef.instance.data = this.row;
+                    componentRef.instance.value = this.row[this.column.name];
+                });
         }
     }
 

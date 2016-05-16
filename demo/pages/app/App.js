@@ -2,7 +2,12 @@ import { Component, ViewContainerRef } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { ROUTER_DIRECTIVES, RouteConfig, Router } from '@angular/router-deprecated';
 
-import { TOAST_PROVIDERS, ToastService } from './../../../src/novo-elements';
+import {
+    TOAST_PROVIDERS,
+    ToastService,
+    MODAL_PROVIDERS,
+    ModalService
+} from './../../../src/novo-elements';
 
 import {
     Home,
@@ -15,6 +20,7 @@ import {
     TabsDemo,
     ToastDemo,
     CardDemo,
+    ModalDemo,
     UtilsDemo,
     PipesDemo,
     TooltipDemo,
@@ -33,7 +39,7 @@ const template = require('./App.html');
 @Component({
     selector: 'demo-app',
     template: template,
-    providers: [...TOAST_PROVIDERS],
+    providers: [...TOAST_PROVIDERS, ...MODAL_PROVIDERS],
     directives: [
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES
@@ -68,6 +74,10 @@ const template = require('./App.html');
         path: '/toast',
         component: ToastDemo,
         name: 'Toast'
+    }, {
+        path: '/modal',
+        component: ModalDemo,
+        name: 'Modal'
     }, {
         path: '/button',
         component: ButtonDemo,
@@ -142,12 +152,13 @@ const template = require('./App.html');
     }
 ])
 export class DemoApp {
-    constructor(router:Router, toastService:ToastService, view:ViewContainerRef) {
+    constructor(router:Router, toastService:ToastService, view:ViewContainerRef, modalService:ModalService) {
         this.router = router;
         this.menuOpen = false;
         this.version = VERSION;
 
-        toastService.defaultContainer = view;
+        toastService.parentViewContainer = view;
+        modalService.parentViewContainer = view;
 
         this.designRoutes = [{
             name: 'Composition',
@@ -172,6 +183,9 @@ export class DemoApp {
         }, {
             name: 'Tabs',
             path: '/tabs'
+        }, {
+            name: 'Modal',
+            path: '/Modal'
         }, {
             name: 'Select',
             path: '/select'

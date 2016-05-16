@@ -25,7 +25,6 @@ before_script:
 
 script:
   - npm test
-  - npm run e2e
 
 after_success:
   - test $TRAVIS_BRANCH = "master" && npm run sca $GALAXY_URL
