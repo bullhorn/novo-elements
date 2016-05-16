@@ -14,7 +14,7 @@ class TestCmp {
 }
 
 describe('Element: NovoModal', () => {
-    beforeEachProviders([ModalRef]);
+    beforeEachProviders(() => [ModalRef]);
 
     it('should initialize correctly', testComponent(TestCmp, (fixture) => {
         const { instance, element } = grabComponent(fixture, NovoModal);
