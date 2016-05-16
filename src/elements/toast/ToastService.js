@@ -38,18 +38,18 @@ export class ToastService {
         };
     }
 
-    set defaultViewContainer(view) {
-        this._defaultViewContainer = view;
+    set parentViewContainer(view) {
+        this._parentViewContainer = view;
     }
 
     alert(component, options) {
         return new Promise((resolve) => {
-            if (!this._defaultViewContainer) {
+            if (!this._parentViewContainer) {
                 // TODO alert
             }
             this.componentResolver.resolveComponent(component)
                 .then(componentFactory => {
-                    let toast = this._defaultViewContainer.createComponent(componentFactory);
+                    let toast = this._parentViewContainer.createComponent(componentFactory);
                     this.references.push(toast);
                     this.handleAlert(toast.instance, options);
                     resolve(toast);

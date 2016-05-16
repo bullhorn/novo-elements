@@ -8,12 +8,12 @@ export class ModalService {
         this.componentResolver = componentResolver;
     }
 
-    set defaultViewContainer(view) {
-        this._defaultViewContainer = view;
+    set parentViewContainer(view) {
+        this._parentViewContainer = view;
     }
 
     open(component, scope) {
-        if (!this._defaultViewContainer) {
+        if (!this._parentViewContainer) {
             // TODO alert
         }
 
@@ -24,13 +24,13 @@ export class ModalService {
 
         this.componentResolver.resolveComponent(NovoModalContainer)
             .then(componentFactory => {
-                const ctxInjector = this._defaultViewContainer.injector;
+                const ctxInjector = this._parentViewContainer.injector;
                 let injector = ReflectiveInjector.resolve([
                     { provide: ModalRef, useValue: modal },
                     { provide: ModalParams, useValue: scope }
                 ]);
                 let componentInjector = ReflectiveInjector.fromResolvedProviders(injector, ctxInjector);
-                modal.containerRef = this._defaultViewContainer.createComponent(componentFactory, 0, componentInjector);
+                modal.containerRef = this._parentViewContainer.createComponent(componentFactory, 0, componentInjector);
             });
         return modal;
     }

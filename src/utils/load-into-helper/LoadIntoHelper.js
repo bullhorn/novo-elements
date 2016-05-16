@@ -2,7 +2,7 @@ import { Directive, AfterViewInit, OnDestroy, ComponentResolver, ViewContainerRe
 
 @Directive({
     inputs: ['component'],
-    selector: 'load-into-helper'
+    selector: 'load-intoF'
 })
 export class LoadIntoHelper implements AfterViewInit, OnDestroy {
     constructor(componentResolver:ComponentResolver, view:ViewContainerRef) {
