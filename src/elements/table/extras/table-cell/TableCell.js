@@ -9,7 +9,7 @@ import { BaseRenderer } from './../base-renderer/BaseRenderer';
         'row'
     ],
     template: `
-        <span #container></span>
+        <ref #container></ref>
         <span *ngIf="!column.type || column.type === 'text'">{{ value }}</span>
         <a (click)="onClick($event);" *ngIf="column.type === 'link'">{{ value }}</a>
     `

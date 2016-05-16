@@ -8,7 +8,10 @@ import { BaseRenderer } from './../base-renderer/BaseRenderer';
         'data',
         'renderer'
     ],
-    template: '<span #container>{{value}}</span>'
+    template: `
+        <ref #container></ref>
+        <span>{{value}}</span>
+    `
 })
 export class RowDetails {
     @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
