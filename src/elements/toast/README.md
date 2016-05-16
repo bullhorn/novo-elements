@@ -2,11 +2,17 @@
 
 ## Usage
 ```javascript
-export { NovoToast, ToastService } from './tabs/Tabs';
+export { NovoToast, ToastService } from 'novo-elements';
+
+// Insice APP Component
+export class MyApp {
+    constructor(toaster:ToastService, view:ViewContainerRef) {
+        toaster.defaultViewContainer = view;
+    }
+}
 
 export class MyToasterComponent {
     constructor(toaster:ToastService) {
-        toaster.register(element);
         this.toaster = toaster;
     }
 
@@ -39,5 +45,3 @@ export class MyToasterComponent {
 ##### ToastService Reference Api
 - `'alert' : Function`
     * Create the toast
-- `'register' : Function`
-    * Reference to the container the opened the component
