@@ -7,7 +7,7 @@ export { NovoToast, ToastService } from 'novo-elements';
 // Insice APP Component
 export class MyApp {
     constructor(toaster:ToastService, view:ViewContainerRef) {
-        toaster.defaultContainer = view;
+        toaster.defaultViewContainer = view;
     }
 }
 

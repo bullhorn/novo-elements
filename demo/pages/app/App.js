@@ -157,8 +157,8 @@ export class DemoApp {
         this.menuOpen = false;
         this.version = VERSION;
 
-        toastService.defaultContainer = view;
-        modalService.defaultContainer = view;
+        toastService.defaultViewContainer = view;
+        modalService.defaultViewContainer = view;
 
         this.designRoutes = [{
             name: 'Composition',

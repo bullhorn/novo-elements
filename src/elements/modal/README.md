@@ -7,7 +7,7 @@ export { NOVO_MODAL_ELEMENTS, ModalService } from 'novo-elements';
 // Insice APP Component
 export class MyApp {
     constructor(modalService:ModalService, view:ViewContainerRef) {
-        modalService.defaultContainer = view;
+        modalService.defaultViewContainer = view;
     }
 }
 
