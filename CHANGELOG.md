@@ -1,3 +1,14 @@
+<a name="0.0.8"></a>
+## [0.0.8](https://github.com/bullhorn/novo-elements/compare/v0.0.7...v0.0.8) (2016-05-17)
+
+
+### Features
+
+* **modal:** Adding a Modal, closes [#13](https://github.com/bullhorn/novo-elements/issues/13) ([a9f3331](https://github.com/bullhorn/novo-elements/commit/a9f3331)), closes [#13](https://github.com/bullhorn/novo-elements/issues/13)
+* **picker:** Adding picker, closes [#14](https://github.com/bullhorn/novo-elements/issues/14) ([97a0842](https://github.com/bullhorn/novo-elements/commit/97a0842)), closes [#14](https://github.com/bullhorn/novo-elements/issues/14)
+
+
+
 <a name="0.0.7"></a>
 ## [0.0.7](https://github.com/bullhorn/novo-elements/compare/v0.0.6...v0.0.7) (2016-05-11)
 
