@@ -2,7 +2,6 @@ novo-toast {
     display: flex;
     position: relative;
     background: $navy;
-    z-index: 9999;
     color: $white;
     padding: 15px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
@@ -15,6 +14,7 @@ novo-toast {
 novo-toast.launched {
     display: none;
     position: fixed;
+    z-index: 9999;
 }
 
 novo-toast.toast-container {
