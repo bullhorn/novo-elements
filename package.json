@@ -78,6 +78,7 @@
     "@angular/router-deprecated": "2.0.0-rc.1"
   },
   "devDependencies": {
+    "angular2-hmr": "^0.7.0",
     "async": "^2.0.0-rc.3",
     "autoprefixer-loader": "^3.2.0",
     "babel-cli": "~6.8.0",
@@ -102,6 +103,7 @@
     "css-loader": "^0.23.1",
     "del": "2.2.0",
     "del-cli": "0.2.0",
+    "es6-promise-loader": "^1.0.1",
     "eslint": "2.9.0",
     "eslint-config-bullhorn": "~0.1.0",
     "eslint-loader": "^1.3.0",

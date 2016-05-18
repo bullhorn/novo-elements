@@ -14,7 +14,8 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const METADATA = webpackMerge(commonConfig.metadata, {
     host: 'localhost',
     port: 3000,
-    ENV: ENV
+    ENV: ENV,
+    HMR: true
 });
 
 /**
@@ -78,6 +79,7 @@ module.exports = webpackMerge(commonConfig, {
         new DefinePlugin({
             'VERSION': JSON.stringify(METADATA.version),
             'ENV': JSON.stringify(METADATA.ENV),
+            'HMR': METADATA.HMR,
             'process.env': {
                 'ENV': JSON.stringify(METADATA.ENV),
                 'NODE_ENV': JSON.stringify(METADATA.ENV)

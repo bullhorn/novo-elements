@@ -2,38 +2,7 @@ import { Component, ViewContainerRef } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { ROUTER_DIRECTIVES, RouteConfig, Router } from '@angular/router-deprecated';
 
-import {
-    TOAST_PROVIDERS,
-    ToastService,
-    MODAL_PROVIDERS,
-    ModalService
-} from './../../../src/novo-elements';
-
-import {
-    Home,
-    Layout,
-    Typography,
-    Iconography,
-    Color,
-    LoadingDemo,
-    ButtonDemo,
-    TabsDemo,
-    ToastDemo,
-    CardDemo,
-    ModalDemo,
-    UtilsDemo,
-    PipesDemo,
-    TooltipDemo,
-    DrawerDemo,
-    SelectDemo,
-    PickerDemo,
-    HeaderDemo,
-    DropdownDemo,
-    ListDemo,
-    TableDemo,
-    SwitchDemo,
-    CalendarDemo
-} from './../pages';
+import { TOAST_PROVIDERS, ToastService, MODAL_PROVIDERS, ModalService } from './../../../src/novo-elements';
 
 const template = require('./App.html');
 
@@ -48,113 +17,33 @@ const template = require('./App.html');
 })
 @RouteConfig([
     // Base Pages (design system)
-    {
-        path: '/',
-        component: Home,
-        name: 'Home'
-    }, {
-        path: '/composition',
-        component: Layout,
-        name: 'Composition'
-    }, {
-        path: '/typography',
-        component: Typography,
-        name: 'Typography'
-    }, {
-        path: '/icons',
-        component: Iconography,
-        name: 'Iconography'
-    }, {
-        path: '/color',
-        component: Color,
-        name: 'Color'
-    },
+    { path: '/', name: 'Home', loader: () => require('es6-promise!./../home/Home')('Home'), useAsDefault: true },
+    { path: '/composition', name: 'Composition', loader: () => require('es6-promise!./../layout/Layout')('Layout') },
+    { path: '/typography', name: 'Typography', loader: () => require('es6-promise!./../typography/Typography')('Typography') },
+    { path: '/icons', name: 'Iconography', loader: () => require('es6-promise!./../iconography/Iconography')('Iconography') },
+    { path: '/color', name: 'Color', loader: () => require('es6-promise!./../color/Color')('Color') },
 
     // Element/Component/Service/etc.. Demos
-    {
-        path: '/toast',
-        component: ToastDemo,
-        name: 'Toast'
-    }, {
-        path: '/modal',
-        component: ModalDemo,
-        name: 'Modal'
-    }, {
-        path: '/button',
-        component: ButtonDemo,
-        name: 'Button'
-    }, {
-        path: '/tabs',
-        component: TabsDemo,
-        name: 'Tabs'
-    }, {
-        path: '/select',
-        component: SelectDemo,
-        name: 'Select'
-    }, {
-        path: '/picker',
-        component: PickerDemo,
-        name: 'Picker'
-    }, {
-        path: '/dropdown',
-        component: DropdownDemo,
-        name: 'Dropdown'
-    }, {
-        path: '/loading',
-        component: LoadingDemo,
-        name: 'Loading'
-    }, {
-        path: '/cards',
-        component: CardDemo,
-        name: 'Cards'
-    }, {
-        path: '/tooltip',
-        component: TooltipDemo,
-        name: 'Tooltip'
-    }, {
-        path: '/drawer',
-        component: DrawerDemo,
-        name: 'Drawer'
-    }, {
-        path: '/switch',
-        component: SwitchDemo,
-        name: 'Switch'
-    }, {
-        path: '/header',
-        component: HeaderDemo,
-        name: 'Header'
-    }, {
-        path: '/list',
-        component: ListDemo,
-        name: 'List'
-    }, {
-        path: '/table',
-        component: TableDemo,
-        name: 'Table'
-    }, {
-        path: '/calendar',
-        component: CalendarDemo,
-        name: 'Calendar'
-    },
+    { path: '/button', name: 'Button', loader: () => require('es6-promise!./../button/ButtonDemo')('ButtonDemo') },
+    { path: '/modal', name: 'Modal', loader: () => require('es6-promise!./../modal/ModalDemo')('ModalDemo') },
+    { path: '/toast', name: 'Toast', loader: () => require('es6-promise!./../toast/ToastDemo')('ToastDemo') },
+    { path: '/tooltip', name: 'Tooltip', loader: () => require('es6-promise!./../tooltip/TooltipDemo')('TooltipDemo') },
+    { path: '/cards', name: 'Cards', loader: () => require('es6-promise!./../card/CardDemo')('CardDemo') },
+    { path: '/loading', name: 'Loading', loader: () => require('es6-promise!./../loading/LoadingDemo')('v') },
+    { path: '/dropdown', name: 'Dropdown', loader: () => require('es6-promise!./../dropdown/DropdownDemo')('DropdownDemo') },
+    { path: '/picker', name: 'Picker', loader: () => require('es6-promise!./../picker/PickerDemo')('PickerDemo') },
+    { path: '/select', name: 'Select', loader: () => require('es6-promise!./../select/SelectDemo')('SelectDemo') },
+    { path: '/tabs', name: 'Tabs', loader: () => require('es6-promise!./../tabs/TabsDemo')('TabsDemo') },
+    { path: '/table', name: 'Table', loader: () => require('es6-promise!./../table/TableDemo')('TableDemo') },
+    { path: '/list', name: 'List', loader: () => require('es6-promise!./../list/ListDemo')('ListDemo') },
+    { path: '/header', name: 'Header', loader: () => require('es6-promise!./../header/HeaderDemo')('HeaderDemo') },
+    { path: '/switch', name: 'Switch', loader: () => require('es6-promise!./../switch/SwitchDemo')('SwitchDemo') },
+    { path: '/drawer', name: 'Drawer', loader: () => require('es6-promise!./../drawer/DrawerDemo')('DrawerDemo') },
+    { path: '/calendar', name: 'Calendar', loader: () => require('es6-promise!./../calendar/CalendarDemo')('CalendarDemo') },
 
     // Utils
-    {
-        path: '/pipes',
-        component: PipesDemo,
-        name: 'Pipes'
-    }, {
-        path: '/utils',
-        component: UtilsDemo,
-        name: 'Utils'
-    },
-
-    // Catch-all and redirect back to index
-    {
-        path: '/**',
-        redirectTo: [
-            'Home'
-        ]
-    }
+    { path: '/utils', name: 'Utils', loader: () => require('es6-promise!./../utils/UtilsDemo')('UtilsDemo') },
+    { path: '/pipes', name: 'Pipes', loader: () => require('es6-promise!./../pipes/PipesDemo')('PipesDemo') }
 ])
 export class DemoApp {
     constructor(router:Router, toastService:ToastService, view:ViewContainerRef, modalService:ModalService) {
@@ -165,77 +54,36 @@ export class DemoApp {
         toastService.parentViewContainer = view;
         modalService.parentViewContainer = view;
 
-        this.designRoutes = [{
-            name: 'Composition',
-            path: '/composition'
-        }, {
-            name: 'Typography',
-            path: '/typography'
-        }, {
-            name: 'Iconography',
-            path: '/icons'
-        }, {
-            name: 'Color',
-            path: '/color'
-        }];
+        this.designRoutes = [
+            { name: 'Composition', path: '/composition' },
+            { name: 'Typography', path: '/typography' },
+            { name: 'Iconography', path: '/icons' },
+            { name: 'Color', path: '/color' }
+        ];
 
-        this.componentRoutes = [{
-            name: 'Toast',
-            path: '/toast'
-        }, {
-            name: 'Button',
-            path: '/button'
-        }, {
-            name: 'Tabs',
-            path: '/tabs'
-        }, {
-            name: 'Modal',
-            path: '/Modal'
-        }, {
-            name: 'Select',
-            path: '/select'
-        }, {
-            name: 'Picker',
-            path: '/picker'
-        }, {
-            name: 'Dropdown',
-            path: '/dropdown'
-        }, {
-            name: 'Loading',
-            path: '/loading'
-        }, {
-            name: 'Cards',
-            path: '/cards'
-        }, {
-            name: 'Tooltip',
-            path: '/tooltip'
-        }, {
-            name: 'Drawer',
-            path: '/drawer'
-        }, {
-            name: 'Switch',
-            path: '/switch'
-        }, {
-            name: 'Header',
-            path: '/header'
-        }, {
-            name: 'List',
-            path: '/list'
-        }, {
-            name: 'Table',
-            path: '/table'
-        }, {
-            name: 'Calendar',
-            path: '/calendar'
-        }];
+        this.componentRoutes = [
+            { name: 'Toast', path: '/toast' },
+            { name: 'Button', path: '/button' },
+            { name: 'Tabs', path: '/tabs' },
+            { name: 'Modal', path: '/Modal' },
+            { name: 'Select', path: '/select' },
+            { name: 'Picker', path: '/picker' },
+            { name: 'Dropdown', path: '/dropdown' },
+            { name: 'Loading', path: '/loading' },
+            { name: 'Cards', path: '/cards' },
+            { name: 'Tooltip', path: '/tooltip' },
+            { name: 'Drawer', path: '/drawer' },
+            { name: 'Switch', path: '/switch' },
+            { name: 'Header', path: '/header' },
+            { name: 'List', path: '/list' },
+            { name: 'Table', path: '/table' },
+            { name: 'Calendar', path: '/calendar' }
+        ];
 
-        this.utilRoutes = [{
-            name: 'Pipes',
-            path: '/pipes'
-        }, {
-            name: 'Utils',
-            path: '/utils'
-        }];
+        this.utilRoutes = [
+            { name: 'Pipes', path: '/pipes' },
+            { name: 'Utils', path: '/utils' }
+        ];
 
         router.subscribe(() => {
             document.body.scrollTop = 0;

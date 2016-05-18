@@ -5,6 +5,8 @@
     },
     "globals": {
         "VERSION": false,
+        "ENV": false,
+        "HMR": false,
         "beforeEachProviders": false
     }
 }
