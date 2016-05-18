@@ -93,21 +93,39 @@ export class ToastDemo {
                 theme: 'ocean',
                 position: 'fixedBottom'
             };
-        } else if (arg === 'growlRight') {
+        } else if (arg === 'growlTopRight') {
             this.options = {
                 title: 'Growl',
                 message: 'This positioning is growlTopRight',
                 icon: 'times',
                 theme: 'danger',
-                position: 'growlTopRight'
+                position: 'growlTopRight',
+                hideDelay: 100000000
             };
-        } else {
+        } else if (arg === 'growlTopLeft') {
             this.options = {
                 title: 'Growl',
                 message: 'This positioning is growlTopLeft',
                 icon: 'coffee',
                 theme: 'ocean',
-                position: 'growlTopLeft'
+                position: 'growlTopLeft',
+                hideDelay: 100000000
+            };
+        } else if (arg === 'growlBottomRight') {
+            this.options = {
+                title: 'Growl',
+                message: 'This positioning is growlTopRight',
+                icon: 'times',
+                theme: 'danger',
+                position: 'growlBottomRight'
+            };
+        } else if (arg === 'growlBottomLeft') {
+            this.options = {
+                title: 'Growl',
+                message: 'This positioning is growlTopLeft',
+                icon: 'coffee',
+                theme: 'ocean',
+                position: 'growlBottomLeft'
             };
         }
         this.toaster.alert(NovoToast, this.options);
