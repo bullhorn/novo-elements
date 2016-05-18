@@ -15,6 +15,7 @@ import { NOVO_DROPDOWN_ELEMENTS } from './elements/dropdown';
 import { NOVO_HEADER_ELEMENTS } from './elements/header';
 import { NOVO_LIST_ELEMENTS } from './elements/list';
 import { NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS } from './elements/table';
+import { NOVO_DRAGULA_ELEMENTS } from './elements/dragula';
 
 // Elements
 export * from './elements/button';
@@ -35,6 +36,7 @@ export * from './elements/timepicker';
 export * from './elements/header';
 export * from './elements/list';
 export * from './elements/table';
+export * from './elements/dragula';
 
 // Pipes
 export * from './pipes/plural/Plural';
@@ -65,7 +67,8 @@ export const NOVO_ELEMENTS = [
     NOVO_TABLE_EXTRA_ELEMENTS,
     NOVO_DRAWER_ELEMENTS,
     NOVO_DATE_PICKER_ELEMENTS,
-    NOVO_TIME_PICKER_ELEMENTS
+    NOVO_TIME_PICKER_ELEMENTS,
+    NOVO_DRAGULA_ELEMENTS
 ];
 
 export const NOVO_PROVIDERS = [

@@ -1,0 +1,39 @@
+
+dragula-demo {
+    .wrapper {
+        display: table;
+    }
+    .drag-container {
+        display: table-cell;
+        background-color: #efefef;
+        width: 50%;
+    }
+    .drag-container div,
+    .gu-mirror {
+        margin: 10px;
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.2);
+        transition: opacity 0.4s ease-in-out;
+    }
+    .drag-container div {
+        cursor: move;
+        cursor: grab;
+    }
+    .gu-mirror {
+        cursor: grabbing;
+        cursor: -moz-grabbing;
+        cursor: -webkit-grabbing;
+    }
+    .drag-container .ex-moved {
+        background-color: #e74c3c;
+    }
+    .drag-container.ex-over {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    .handle {
+        padding: 0 5px;
+        margin-right: 5px;
+        background-color: rgba(0, 0, 0, 0.4);
+        cursor: move;
+    }
+}
