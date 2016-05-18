@@ -7,6 +7,7 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
     selector: 'novo-select',
     directives: [COMMON_DIRECTIVES],
     inputs: ['options', 'placeholder', 'readonly'],
+    outputs: ['onSelect'],
     template: `
         <button (click)="toggleActive($event)" tabIndex="-1" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></button>
         <ul class="novo-select-list" tabIndex="-1">
@@ -41,6 +42,7 @@ export class Select extends OutsideClick {
         this.onTouched = null;
         this.onHover = new EventEmitter(false);
         this.onLeave = new EventEmitter(false);
+        this.onSelect = new EventEmitter();
 
         this.model = model || new NgModel();
         this.model.valueAccessor = this;
@@ -77,6 +79,7 @@ export class Select extends OutsideClick {
         this.selected = option;
         this.selected.active = true;
         this.empty = false;
+        this.onSelect.next({ selected: this.selected.value });
         this.model.viewToModelUpdate(this.selected.value);
     }
 

@@ -10,7 +10,8 @@ import { swallowEvent } from './../../utils/Helpers';
         'minYear',
         'maxYear',
         'start',
-        'end'
+        'end',
+        'inline'
     ],
     outputs: [
         'onSelect'
@@ -18,7 +19,7 @@ import { swallowEvent } from './../../utils/Helpers';
     directives: [COMMON_DIRECTIVES],
     template: `
         <div class="calendar">
-            <div class="calendar-top">
+            <div class="calendar-top" *ngIf="!inline">
                 <h4 class="day" [attr.data-automation-id]="heading.day">{{heading.day}}</h4>
                 <h2 class="month" [attr.data-automation-id]="heading.month">{{heading.month}}</h2>
                 <h1 class="date" [attr.data-automation-id]="heading.date">{{heading.date}}</h1>

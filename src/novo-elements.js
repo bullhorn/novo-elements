@@ -9,6 +9,7 @@ import { NOVO_TOOLTIP_ELEMENTS } from './elements/tooltip';
 import { NOVO_DRAWER_ELEMENTS } from './elements/drawer';
 import { NOVO_SELECT_ELEMENTS } from './elements/select';
 import { NOVO_PICKER_ELEMENTS } from './elements/picker';
+import { PICKER_EXTRAS } from './elements/picker/extras/PickerExtras';
 import { NOVO_DATE_PICKER_ELEMENTS } from './elements/datepicker';
 import { NOVO_TIME_PICKER_ELEMENTS } from './elements/timepicker';
 import { NOVO_DROPDOWN_ELEMENTS } from './elements/dropdown';
@@ -27,6 +28,7 @@ export * from './elements/card';
 export * from './elements/loading';
 export * from './elements/select';
 export * from './elements/picker';
+export * from './elements/picker/extras/PickerExtras';
 export * from './elements/dropdown';
 export * from './elements/tooltip';
 export * from './elements/drawer';
@@ -69,6 +71,7 @@ export const NOVO_ELEMENTS = [
     NOVO_DATE_PICKER_ELEMENTS,
     NOVO_TIME_PICKER_ELEMENTS,
     NOVO_DRAGULA_ELEMENTS
+    PICKER_EXTRAS
 ];
 
 export const NOVO_PROVIDERS = [

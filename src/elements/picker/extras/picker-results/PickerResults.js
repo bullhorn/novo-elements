@@ -1,6 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
-import { NOVO_LOADING_ELEMENTS } from './../../../loading/Loading';
 import { Observable } from 'rxjs/Rx';
+
+import { NOVO_LOADING_ELEMENTS } from './../../../loading/Loading';
 
 /**
  * @name: PickerResults
@@ -30,41 +31,35 @@ import { Observable } from 'rxjs/Rx';
     `
 })
 export class PickerResults {
-    _term: string = '';
-    matches: Array = [];
-    hasError: boolean = false;
-    loading: boolean = true;
+    _term:string = '';
+    matches:Array = [];
+    hasError:boolean = false;
+    loading:boolean = true;
 
-    constructor(element: ElementRef) {
+    constructor(element:ElementRef) {
         this.element = element;
     }
 
     get term() {
         return this._term;
     }
-    set term(value: string) {
+
+    set term(value) {
         this._term = value;
         this.hasError = false;
         this.loading = true;
         this.search(value)
             .subscribe(
-            results => {
-                this.matches = this.filterData(results);
-                this.loading = false;
-            },
-            err => {
-                this.handleError(err);
-                this.loading = false;
-            });
+                results => {
+                    this.matches = this.filterData(results);
+                    this.loading = false;
+                },
+                err => {
+                    this.handleError(err);
+                    this.loading = false;
+                });
     }
-    /**
-     * @name getData
-     * @param matchData - The data passed into the picker
-     * @returns { Promise }
-     *
-     * @description This function wraps the picker option in a promise and returns it immediately
-     * if it's an array or after it resolves when it's a promise.
-     */
+
     search(term) {
         let options = this.config.options;
         return Observable.fromPromise(new Promise((resolve, reject) => {
@@ -107,7 +102,7 @@ export class PickerResults {
      * @description This function structures an array of nodes into an array of objects with a
      * 'name' field by default.
      */
-    structureArray(collection: Array) {
+    structureArray(collection:Array) {
         let structuredCollection = [];
         if (collection && (typeof collection[0] === 'string' || typeof collection[0] === 'number')) {
             structuredCollection = collection.map((item) => {
@@ -122,10 +117,8 @@ export class PickerResults {
     }
 
     /**
-     * @name filterData
-     * @param newSearch - String to match
-     * @param matchData - Collection of objects
-     * @param field - Field to filer on
+     * @name filterData=
+     * @param matches - Collection of objects=
      *
      * @description This function loops through the picker options and creates a filtered list of objects that contain
      * the newSearch.
@@ -206,7 +199,6 @@ export class PickerResults {
 
     /**
      * @name selectMatch
-     * @param value
      * @param event
      *
      * @description
@@ -238,12 +230,12 @@ export class PickerResults {
 
     /**
      * @name highlight
-     * @param matchString
+     * @param match
      * @param query
      *
      * @description This function should return a <strong>-tag wrapped HTML string.
      */
-    highlight(match: string, query) {
+    highlight(match, query) {
         // Replaces the capture string with a the same string inside of a "strong" tag
         return query ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
     }

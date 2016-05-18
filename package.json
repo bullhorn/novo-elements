@@ -6,6 +6,7 @@
     "clean": "./node_modules/.bin/del bundles coverage lib dist",
     "compile": "npm run compile:lib && npm run compile:system",
     "compile:lib": "babel src --ignore \".spec.js, .e2e.js, testing/**\" --out-dir lib --copy-files",
+    "compile:lib:watch": "babel src --ignore \".spec.js, .e2e.js, testing/**\" --out-dir lib --copy-files --watch",
     "compile:system": "./config/bundle-system.js",
     "prepublish": "npm run clean && npm run compile",
     "postpublish": "npm run deploy:gh-pages",
