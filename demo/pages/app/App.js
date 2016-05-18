@@ -40,6 +40,7 @@ const template = require('./App.html');
     { path: '/switch', name: 'Switch', loader: () => require('es6-promise!./../switch/SwitchDemo')('SwitchDemo') },
     { path: '/drawer', name: 'Drawer', loader: () => require('es6-promise!./../drawer/DrawerDemo')('DrawerDemo') },
     { path: '/calendar', name: 'Calendar', loader: () => require('es6-promise!./../calendar/CalendarDemo')('CalendarDemo') },
+    { path: '/dragula', name: 'Dragula', loader: () => require('es6-promise!./../dragula/DragulaDemo')('DragulaDemo') },
 
     // Utils
     { path: '/utils', name: 'Utils', loader: () => require('es6-promise!./../utils/UtilsDemo')('UtilsDemo') },
@@ -77,7 +78,8 @@ export class DemoApp {
             { name: 'Header', path: '/header' },
             { name: 'List', path: '/list' },
             { name: 'Table', path: '/table' },
-            { name: 'Calendar', path: '/calendar' }
+            { name: 'Calendar', path: '/calendar' },
+            { name: 'Dragula', path: '/dragula' }
         ];
 
         this.utilRoutes = [
