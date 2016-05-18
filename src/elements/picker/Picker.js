@@ -33,21 +33,21 @@ import 'rxjs/Rx';
 })
 export class Picker extends OutsideClick {
     // Emitter for search changes
-    queryChange: EventEmitter = new EventEmitter(false);
+    queryChange:EventEmitter = new EventEmitter(false);
     // Emitter for selects
-    select: EventEmitter = new EventEmitter();
+    select:EventEmitter = new EventEmitter();
     // Flag for API errors
-    hasDataError: boolean = false;
+    hasDataError:boolean = false;
     // Flag for showing recents
-    showNoRecents: boolean = false;
+    showNoRecents:boolean = false;
     // Flag for loading
-    isLoading: boolean = true;
+    isLoading:boolean = true;
     // Collection for filtered matches
     filteredMatches = [];
     // Flag for remote filtering.
-    isStatic: boolean = true;
+    isStatic:boolean = true;
 
-    constructor(model: NgModel, element: ElementRef, loader: DynamicComponentLoader, view: ViewContainerRef) {
+    constructor(model:NgModel, element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
         super(element);
         // NgModel instance
         this.model = model;
@@ -77,7 +77,7 @@ export class Picker extends OutsideClick {
         this.format = this.config.format;
 
         // Custom results template
-        this.resultsComponent = PickerResults;
+        this.resultsComponent = this.config.resultsTemplate || PickerResults;
 
         // Get all distinct key up events from the input and only fire if long enough and distinct
         const observer = Observable.fromEvent(this.element.nativeElement, 'keyup')
@@ -164,6 +164,7 @@ export class Picker extends OutsideClick {
     onFocus() {
         this.showResults();
     }
+
     /**
      * @name showResults
      *

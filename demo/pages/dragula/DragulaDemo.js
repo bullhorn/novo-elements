@@ -1,7 +1,8 @@
-import { Component } from 'angular2/core';
-import { Dragula, DragulaService } from './../../../src/novo-elements';
+import { Component } from '@angular/core';
 
+import { Dragula, DragulaService } from './../../../src/novo-elements';
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
+
 import DragulaDemoTpl from './templates/DragulaDemo.html';
 import DragulaModelDemoTpl from './templates/DragulaModelDemo.html';
 
