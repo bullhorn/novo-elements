@@ -6,7 +6,6 @@ import { DragulaService } from './DragulaService';
     inputs: ['bag:dragula', 'dragulaModel']
 })
 export class Dragula {
-
     constructor(el:ElementRef, dragulaService:DragulaService) {
         this.container = el.nativeElement;
         this.dragulaService = dragulaService;
