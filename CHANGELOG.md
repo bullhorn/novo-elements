@@ -1,3 +1,13 @@
+<a name="0.0.10"></a>
+## [0.0.10](https://github.com/bullhorn/novo-elements/compare/v0.0.9...v0.0.10) (2016-05-19)
+
+
+### Bug Fixes
+
+* **exports:** Fixing some missing exports and updating deprecated code ([dc48107](https://github.com/bullhorn/novo-elements/commit/dc48107))
+
+
+
 <a name="0.0.9"></a>
 ## [0.0.9](https://github.com/bullhorn/novo-elements/compare/v0.0.8...v0.0.9) (2016-05-19)
 
