@@ -36,6 +36,16 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
+  "contributors": [{
+    "name": "Brian Kimball",
+    "email": "bkimball@bullhorn.com"
+  }, {
+    "name": "Alec Sibilia",
+    "email": "asibilia@bullhorn.com"
+  }, {
+    "name": "Kameron Sween",
+    "email": "ksween@bullhorn.com"
+  }],
   "license": "MIT",
   "repository": {
     "type": "git",
