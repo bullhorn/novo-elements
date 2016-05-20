@@ -24,17 +24,21 @@ export class TableCell {
     }
 
     ngOnInit() {
-        if (!this.column.renderer || !(this.column.renderer.prototype instanceof BaseRenderer)) {
+        if (this.column.renderer) {
+            if (this.column.renderer.prototype instanceof BaseRenderer) {
+                this.column.type = 'customrenderer';
+                this.componentResolver.resolveComponent(this.column.renderer)
+                    .then(componentFactory => {
+                        let componentRef = this.container.createComponent(componentFactory);
+                        componentRef.instance.meta = this.column;
+                        componentRef.instance.data = this.row;
+                        componentRef.instance.value = this.row[this.column.name];
+                    });
+            } else {
+                this.value = this.column.renderer(this.row);
+            }
+        } else {
             this.value = this.row[this.column.name];
-        } else if (this.column.renderer && this.column.renderer.prototype instanceof BaseRenderer) {
-            this.column.type = 'customrenderer';
-            this.componentResolver.resolveComponent(this.column.renderer)
-                .then(componentFactory => {
-                    let componentRef = this.container.createComponent(componentFactory);
-                    componentRef.instance.meta = this.column;
-                    componentRef.instance.data = this.row;
-                    componentRef.instance.value = this.row[this.column.name];
-                });
         }
     }
 

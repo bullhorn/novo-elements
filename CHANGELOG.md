@@ -1,3 +1,30 @@
+<a name="0.0.10"></a>
+## [0.0.10](https://github.com/bullhorn/novo-elements/compare/v0.0.9...v0.0.10) (2016-05-19)
+
+
+### Bug Fixes
+
+* **exports:** Fixing some missing exports and updating deprecated code ([dc48107](https://github.com/bullhorn/novo-elements/commit/dc48107))
+
+
+
+<a name="0.0.9"></a>
+## [0.0.9](https://github.com/bullhorn/novo-elements/compare/v0.0.8...v0.0.9) (2016-05-19)
+
+
+### Bug Fixes
+
+* **exports:** Fixing some exports and properties of elements that were missing ([645a8e1](https://github.com/bullhorn/novo-elements/commit/645a8e1))
+* **exports:** Fixing some exports and properties of elements that were missing ([65c07a1](https://github.com/bullhorn/novo-elements/commit/65c07a1))
+* **toast:** fixed z index bug, added all toast types to demo, closes [#51](https://github.com/bullhorn/novo-elements/issues/51) ([55876dd](https://github.com/bullhorn/novo-elements/commit/55876dd)), closes [#51](https://github.com/bullhorn/novo-elements/issues/51)
+
+
+### Features
+
+* **dragula:** adds dragula element and docs, closes [#5](https://github.com/bullhorn/novo-elements/issues/5) ([16c0c78](https://github.com/bullhorn/novo-elements/commit/16c0c78)), closes [#5](https://github.com/bullhorn/novo-elements/issues/5)
+
+
+
 <a name="0.0.8"></a>
 ## [0.0.8](https://github.com/bullhorn/novo-elements/compare/v0.0.7...v0.0.8) (2016-05-17)
 
