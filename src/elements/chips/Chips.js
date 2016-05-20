@@ -72,7 +72,7 @@ export class Chip {
             [class.selected]="item == selected"
             (remove)="remove($event, item)"
             (select)="select($event, item)">
-            {{ item[field] }}
+            {{ item }}
         </chip>
         <div class="chip-input-container">
             <input
@@ -85,7 +85,15 @@ export class Chip {
                 (blur)="toggleClass('blur')"
                 autocomplete="off" />
         </div>
-  `
+   `,
+    host: {
+        '[class.ng-untouched]': 'model.control?.untouched == true',
+        '[class.ng-touched]': 'model.control?.touched == true',
+        '[class.ng-pristine]': 'model.control?.pristine == true',
+        '[class.ng-dirty]': 'model.control?.dirty == true',
+        '[class.ng-valid]': 'model.control?.valid == true',
+        '[class.ng-invalid]': 'model.control?.valid == false'
+    }
 })
 export class Chips extends OutsideClick {
     changed: EventEmitter = new EventEmitter();
@@ -109,11 +117,7 @@ export class Chips extends OutsideClick {
 
     process() {
         if (this.model.value && typeof this.model.value === 'string') {
-            this.items = this.model.value.split(';').map(i => {
-                let obj = {};
-                obj[this.field] = i;
-                return obj;
-            });
+            this.items = this.model.value.split(';');
         }
         this.writeValue(this.items);
     }
@@ -138,12 +142,10 @@ export class Chips extends OutsideClick {
 
     add(event) {
         if (event) {
-            this.items.push(event);
+            this.items.push(event[this.field]);
             this.valueToAdd = null;
             this.model.viewToModelUpdate(this.items);
-            this.changed.emit({
-                value: this.items
-            });
+            this.changed.emit(this.items);
         }
     }
 
@@ -155,9 +157,7 @@ export class Chips extends OutsideClick {
         this.items.splice(this.items.indexOf(item), 1);
         this.deselectAll();
         this.model.viewToModelUpdate(this.items);
-        this.changed.emit({
-            value: this.items
-        });
+        this.changed.emit(this.items);
     }
 
     onKeyDown(event) {
