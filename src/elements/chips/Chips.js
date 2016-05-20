@@ -25,8 +25,6 @@ import { NOVO_PICKER_ELEMENTS } from '../picker/Picker';
 export class Chip {
     select: EventEmitter = new EventEmitter();
     remove: EventEmitter = new EventEmitter();
-    onChange = null;
-    onTouched = null;
     entity: string;
 
     onRemove(e) {
@@ -50,21 +48,9 @@ export class Chip {
 
 @Component({
     selector: 'chips',
-    inputs: [
-        'source',
-        'placeholder',
-        'value',
-        'type'
-    ],
-    outputs: [
-        'changed'
-    ],
-    directives: [
-        COMMON_DIRECTIVES,
-        NOVO_PICKER_ELEMENTS,
-        Chip,
-        NgModel
-    ],
+    inputs: ['source', 'placeholder', 'value', 'type'],
+    outputs: ['changed'],
+    directives: [COMMON_DIRECTIVES, NOVO_PICKER_ELEMENTS, Chip, NgModel],
     template: `
         <chip
             *ngFor="let item of items"
@@ -72,18 +58,18 @@ export class Chip {
             [class.selected]="item == selected"
             (remove)="remove($event, item)"
             (select)="select($event, item)">
-            {{ item }}
+            {{ item.label }}
         </chip>
         <div class="chip-input-container">
-            <input
-                [(ngModel)]="valueToAdd"
+            <novo-picker
+                [config]="source"
                 [placeholder]="placeholder"
-                [(picker)]="source"
+                [(ngModel)]="itemToAdd"
                 (select)="add($event)"
                 (keydown)="onKeyDown($event)"
-                (focus)="toggleClass('focus')"
-                (blur)="toggleClass('blur')"
-                autocomplete="off" />
+                (focus)="onFocus($event)"
+                (blur)="onTouched($event)">
+            </novo-picker>
         </div>
    `,
     host: {
@@ -98,9 +84,14 @@ export class Chip {
 export class Chips extends OutsideClick {
     changed: EventEmitter = new EventEmitter();
     items: Array = [];
-    value: any = null;
     selected: any = null;
     placeholder: string = '';
+    config: Object = {};
+    // private data model
+    _value: any = '';
+    //Placeholders for the callbacks
+    _onTouchedCallback = () => false;
+    _onChangeCallback = () => false;
 
     constructor(@Optional() model: NgModel, element: ElementRef) {
         super(element);
@@ -110,16 +101,10 @@ export class Chips extends OutsideClick {
     }
 
     ngOnInit() {
-        this.field = this.source.field || 'label';
-        this.process();
         window.document.addEventListener('keydown', this.outsideKeyDown.bind(this));
-    }
-
-    process() {
-        if (this.model.value && typeof this.model.value === 'string') {
-            this.items = this.model.value.split(';');
-        }
-        this.writeValue(this.items);
+        // if (this.model.value) {
+        //     this.writeValue(this.model.value.split(';'));
+        // }
     }
 
     deselectAll() {
@@ -131,21 +116,15 @@ export class Chips extends OutsideClick {
         this.selected = item;
     }
 
-    toggleClass(focusState) {
-        if (focusState === 'focus') {
-            this.deselectAll();
-            this.element.nativeElement.classList.add('selected');
-        } else if (focusState === 'blur') {
-            this.element.nativeElement.classList.remove('selected');
-        }
+    onFocus() {
+        this.deselectAll();
+        this.element.nativeElement.classList.add('selected');
     }
 
     add(event) {
         if (event) {
-            this.items.push(event[this.field]);
-            this.valueToAdd = null;
-            this.model.viewToModelUpdate(this.items);
-            this.changed.emit(this.items);
+            this.items.push(event);
+            this.value = this.items.map(i => i.value);
         }
     }
 
@@ -156,8 +135,7 @@ export class Chips extends OutsideClick {
         }
         this.items.splice(this.items.indexOf(item), 1);
         this.deselectAll();
-        this.model.viewToModelUpdate(this.items);
-        this.changed.emit(this.items);
+        this.value = this.items;
     }
 
     onKeyDown(event) {
@@ -191,19 +169,39 @@ export class Chips extends OutsideClick {
         }
     }
 
-    //valueAccessor Functions
+    //get accessor
+    get value(): any {
+        return this._value;
+    }
+    //set accessor including call the onchange callback
+    set value(selected) {
+        this.itemToAdd = '';
+        if (selected !== this._value) {
+            this._value = selected;
+            this.changed.emit(selected);
+            this._onChangeCallback(selected);
+        }
+    }
+    //From ControlValueAccessor interface
     writeValue(value) {
-        this.value = value;
+        this._value = value;
+        if (Array.isArray(value)) {
+            this.items = value.map(v => ({ value: v, label: v }));
+        }
     }
-
+    //Set touched on blur
+    onTouched() {
+        this.element.nativeElement.classList.remove('selected');
+        this._onTouchedCallback();
+    }
+    //From ControlValueAccessor interface
     registerOnChange(fn) {
-        this.onChange = fn;
+        this._onChangeCallback = fn;
     }
-
+    //From ControlValueAccessor interface
     registerOnTouched(fn) {
-        this.onTouched = fn;
+        this._onTouchedCallback = fn;
     }
-
 }
 
 export const NOVO_CHIPS_ELEMENTS = [Chips, Chip];

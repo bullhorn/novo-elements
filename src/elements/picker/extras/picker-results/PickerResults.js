@@ -1,6 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-
+import { interpolate } from './../../../../utils/Helpers';
 import { NOVO_LOADING_ELEMENTS } from './../../../loading/Loading';
 
 /**
@@ -16,25 +16,26 @@ import { NOVO_LOADING_ELEMENTS } from './../../../loading/Loading';
     },
     directives: [NOVO_LOADING_ELEMENTS],
     template: `
-        <novo-loading theme="line" *ngIf="loading && !matches.length"></novo-loading>
+        <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
         <ul *ngIf="matches.length > 0">
             <li
                 *ngFor="let match of matches"
                 (click)="selectMatch($event)"
                 [class.active]="match===activeMatch"
                 (mouseenter)="selectActive(match)">
-                <span [innerHtml]="highlight(match[field], query)"></span>
+                <span [innerHtml]="highlight(match.label, term)"></span>
             </li>
         </ul>
         <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
-        <p class="picker-null" *ngIf="!loading && !matches.length">No results to display...</p>
+        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
     `
 })
 export class PickerResults {
     _term:string = '';
     matches:Array = [];
     hasError:boolean = false;
-    loading:boolean = true;
+    isLoading:boolean = true;
+    isStatic:boolean = true;
 
     constructor(element:ElementRef) {
         this.element = element;
@@ -47,16 +48,16 @@ export class PickerResults {
     set term(value) {
         this._term = value;
         this.hasError = false;
-        this.loading = true;
+        this.isLoading = true;
         this.search(value)
             .subscribe(
                 results => {
-                    this.matches = this.filterData(results);
-                    this.loading = false;
+                    this.matches = this.isStatic ? this.filterData(results) : results;
+                    this.isLoading = false;
                 },
-                err => {
-                    this.handleError(err);
-                    this.loading = false;
+                () => {
+                    this.hasError = true;
+                    this.isLoading = false;
                 });
     }
 
@@ -102,18 +103,20 @@ export class PickerResults {
      * @description This function structures an array of nodes into an array of objects with a
      * 'name' field by default.
      */
-    structureArray(collection:Array) {
-        let structuredCollection = [];
+    structureArray(collection:Array):Array {
         if (collection && (typeof collection[0] === 'string' || typeof collection[0] === 'number')) {
-            structuredCollection = collection.map((item) => {
-                let obj = {};
-                obj[this.field] = item;
-                return obj;
+            return collection.map((item) => {
+                return {
+                    value: item,
+                    label: item
+                };
             });
-        } else {
-            structuredCollection = collection;
         }
-        return structuredCollection;
+        return collection.map((data) => {
+            let value = this.config.field ? data[this.config.field] : (data.value || data);
+            let label = this.config.format ? interpolate(this.config.format, data) : data.label || String(value);
+            return { value, label, data };
+        });
     }
 
     /**
@@ -123,18 +126,14 @@ export class PickerResults {
      * @description This function loops through the picker options and creates a filtered list of objects that contain
      * the newSearch.
      */
-    filterData(matches) {
-        if (this.term && this.field && matches) {
+    filterData(matches):Array {
+        if (this.term && matches) {
             return matches.filter((match) => {
-                return ~match[this.field].toLowerCase().indexOf(this.term.toLowerCase());
+                return ~String(match.label).toLowerCase().indexOf(this.term.toLowerCase());
             });
         }
         // Show no recent results template
         return matches;
-    }
-
-    handleError() {
-        this.hasError = true;
     }
 
     /**
@@ -163,8 +162,6 @@ export class PickerResults {
      * @description This function sets activeMatch to the match after the current node.
      */
     nextActiveMatch() {
-        // TODO: behaviorally this works, but functionally it doesn't (see spec)
-        // Use this: 'this.parent.field'
         let index = this.matches.indexOf(this.activeMatch);
         this.activeMatch = this.matches[index + 1 > this.matches.length - 1 ? 0 : index + 1];
         this.scrollToActive();
@@ -209,10 +206,11 @@ export class PickerResults {
             event.preventDefault();
         }
 
-        let newValue = this.activeMatch;
-        this.parent.updateSearch(newValue);
-        this.parent.select.emit(newValue);
-        this.parent.hideResults();
+        let selected = this.activeMatch;
+        if (selected) {
+            this.parent.value = selected;
+            this.parent.hideResults();
+        }
         return false;
     }
 
