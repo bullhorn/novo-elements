@@ -16,7 +16,7 @@ import { NOVO_SELECT_ELEMENTS } from '../../../select';
     ],
     template: `
         <h5 class="rows">Rows Per Page: </h5>
-        <bh-select [items]="pageOptions" placeholder="Select..." [value]="itemsPerPage" (valueChange)="onPageSizeChanged($event)" data-automation-id="pager-select"></bh-select>
+        <novo-select [options]="pageOptions" placeholder="Select..." [(ngModel)]="itemsPerPage" (onSelect)="onPageSizeChanged($event)" data-automation-id="pager-select"></novo-select>
         <spacer></spacer>
         <ul class="pager" data-automation-id="pager">
             <li class="page" (click)="selectPage(page-1)"><i class="bhi-previous" [hidden]="noPrevious()" data-automation-id="pager-previous"></i></li>
@@ -29,7 +29,11 @@ export class Pagination {
     constructor() {
         this.maxPagesDisplayed = 5;
         this.itemsPerPage = 10;
-        this.pageOptions = ['10', '50', '500'];
+        this.pageOptions = [
+            { value: 10, label: '10' },
+            { value: 50, label: '50' },
+            { value: 500, label: '500' }
+        ];
         this.onPageChange = new EventEmitter();
     }
 

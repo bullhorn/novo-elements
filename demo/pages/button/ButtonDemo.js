@@ -63,7 +63,7 @@ const template = `
     <p>
         Secondary buttons can also get an <code>inverse</code> attribute for use on a colored background.
     </p>
-    <div class="example header buttons-demo" [ngClass]="color" (click)="changeColor()" bhTooltip="Click Me!" bhTooltipPlacement="top">${HeaderButtonDemoTpl}</div>
+    <div class="example header buttons-demo" [ngClass]="color" (click)="changeColor()" tooltip="Click Me!" tooltipPlacement="top">${HeaderButtonDemoTpl}</div>
     <code-snippet [code]="HeaderButtonDemoTpl"></code-snippet>
     
     <h5>Dialogue</h5>
@@ -97,7 +97,7 @@ const template = `
         <strong>any</strong> icon. Icon buttons may also use an
         <code>inverse</code> attribute to change its icon color to white.
     </p>
-    <div class="example buttons-demo icons" [ngClass]="color" (click)="changeColor()" bhTooltip="Click Me!" bhTooltipPlacement="top">${IconButtonDemoTpl}</div>
+    <div class="example buttons-demo icons" [ngClass]="color" (click)="changeColor()" tooltip="Click Me!" tooltipPlacement="top">${IconButtonDemoTpl}</div>
     <code-snippet [code]="IconButtonDemoTpl"></code-snippet>
 </div>
 `;

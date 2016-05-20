@@ -1,6 +1,7 @@
 import { Component, ViewContainerRef, ComponentResolver, ViewChild } from '@angular/core';
 
 import { NOVO_BUTTON_ELEMENTS } from './../button/Button';
+import { Deferred } from './../../utils/deferred/Deferred';
 
 export class ModalParams {
 }
@@ -13,13 +14,19 @@ export class ModalRef {
         this.contentRef = null;
         this.containerRef = null;
         this.isClosed = false;
+        this._onClosed = new Deferred();
+    }
+
+    // Gets a promise that is resolved when the dialog is closed.
+    get onClosed() {
+        return this._onClosed;
     }
 
     open() {
         document.body.classList.add('modal-open');
     }
 
-    close() {
+    close(result) {
         document.body.classList.remove('modal-open');
 
         if (this.contentRef) {
@@ -29,6 +36,8 @@ export class ModalRef {
         if (this.containerRef) {
             this.containerRef.destroy();
         }
+
+        this._onClosed.resolve(result);
     }
 }
 
