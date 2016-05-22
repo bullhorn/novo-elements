@@ -1,0 +1,8 @@
+<novo-form>
+    <form-title>Radio Buttons</form-title>
+    <form-field>
+        <form-label>Ready to Work?</form-label>
+        <form-input name="isReady" type="radio" [options]="yesNo" [(value)]="amIReady"></form-input>
+    </form-field>
+</novo-form>
+<div>Am I Ready? {{amIReady}}.</div>

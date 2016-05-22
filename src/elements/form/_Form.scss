@@ -1,0 +1,488 @@
+novo-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .novo-form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+
+        header {
+            h1 {
+            }
+        }
+
+        form {
+            width: 100%;
+
+            form-title {
+            }
+
+            form-field {
+                margin-top: 1rem;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+                min-height: 44px;
+                // validation
+                .ng-touched.ng-invalid {
+                    border-bottom: 1px solid $negative;
+
+                    &.valid-number {
+                        border-bottom: none;
+                    }
+                }
+
+                &[hidden] {
+                    display: none !important;
+                }
+
+                .error-message {
+                    color: $negative;
+                    font-size: 0.8em;
+                    position: absolute;
+                    bottom: -17px;
+                }
+
+                form-label {
+                    font-size: 1rem;
+                    flex: 1;
+                    margin-right: 28px;
+                    max-width: 130px;
+
+                    label {
+                        color: #9e9e9e;
+                        font-size: 0.8em;
+                        font-weight: 600;
+                        transition: 200ms ease-out;
+                        margin-right: 35px;
+                        text-transform: uppercase;
+                    }
+                }
+
+                form-input {
+                    display: flex;
+                    align-items: inherit;
+                    flex: 2;
+                    max-width: 450px;
+                    position: relative;
+
+                    &[type="picker"] {
+                        align-self: auto;
+                    }
+
+                    select-input {
+                        height: 2em;
+                    }
+
+                    address-input,
+                    check-list,
+                    currency-input,
+                    date-input,
+                    date-time-input,
+                    float-input,
+                    number-input,
+                    percent-input,
+                    picker-input,
+                    entity-input,
+                    radio-input,
+                    select-input,
+                    text-area,
+                    text-input,
+                    time-input {
+                        font-size: 1rem;
+                        flex: 1;
+                        position: relative;
+
+                        i.required-indicator {
+                            position: absolute;
+                            left: -25px;
+                            height: 15px;
+                            width: 15px;
+                            font-size: 15px;
+                            top: 13px;
+                            transform: translateY(-50%);
+
+                            &.bhi-circle {
+                                color: $grapefruit;
+                                height: 10px;
+                                width: 10px;
+                                text-align: center;
+                                font-size: 7px;
+                            }
+
+                            &.bhi-check {
+                                color: $grass;
+                            }
+                        }
+
+                        input,
+                        textarea {
+                            font-size: 1em;
+                            background: transparent;
+                            border: none;
+                            border-bottom: 1px solid #EAEAEA;
+                            border-radius: 0;
+                            outline: none;
+                            height: 2rem;
+                            width: 100%;
+                            margin: 0;
+                            padding: 0;
+                            box-shadow: none;
+                            box-sizing: content-box;
+                            transition: all 300ms;
+                            color: #26282B;
+
+                            &:hover {
+                                border-bottom: 1px solid lighten($dark, 47%);
+                            }
+
+                            &:focus {
+                                border-bottom: 1px solid $positive;
+                            }
+                        }
+
+                        textarea {
+                            overflow-y: hidden !important;
+                            transition: height 0;
+                        }
+                    }
+
+                    currency-input,
+                    percent-input {
+                        div {
+                            display: flex;
+                            align-items: center;
+
+                            input {
+                                flex: 1;
+                            }
+
+                            label.left-label {
+                                padding-left: 5px;
+                                color: lighten($dark, 47%);
+                            }
+                        }
+                    }
+
+                    time-input {
+                        novo-time-picker {
+                            position: absolute;
+                        }
+                    }
+
+                    date-input {
+                        novo-date-picker {
+                            position: absolute;
+                        }
+                    }
+
+                    date-time-input {
+                        div.datetime-container {
+                            position: absolute;
+                            display: flex;
+                        }
+                    }
+
+                    check-box,
+                    check-list > div,
+                    radio-input {
+                        display: flex;
+                        flex-flow: row wrap;
+
+                        [class*="-group"] {
+                            margin-right: 15px;
+                            cursor: pointer;
+
+                            &:hover {
+                                label {
+                                    i {
+                                        &.bhi-checkbox-empty,
+                                        &.bhi-radio-empty {
+                                            color: $positive;
+                                        }
+                                    }
+                                }
+                            }
+
+                            &.checked {
+                                label {
+                                    color: darken(#D2D2D2, 60%);
+
+                                    i {
+                                        animation: iconEnter 160ms ease-in-out;
+                                    }
+                                }
+                            }
+
+                            label {
+                                color: darken(#D2D2D2, 30%);
+                                margin-left: 0;
+                                cursor: pointer;
+                                transition: all 200ms ease-in-out;
+                                display: flex;
+                                align-items: baseline;
+
+                                i {
+                                    margin-right: 5px;
+                                    transition: all 200ms ease-in-out;
+
+                                    &.bhi-checkbox-empty,
+                                    &.bhi-radio-empty {
+                                        color: #D2D2D2;
+                                    }
+
+                                    &.bhi-checkbox-filled,
+                                    &.bhi-radio-filled {
+                                        color: $positive;
+                                    }
+                                }
+
+                                span {
+                                    display: inline-block;
+                                }
+                            }
+                        }
+                    }
+
+                    date-input,
+                    date-time-input,
+                    picker-input,
+                    entity-input,
+                    time-input {
+                        position: relative;
+
+                        > i {
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                        }
+
+                        input:focus {
+                            & + i {
+                                color: $positive;
+                            }
+                        }
+                    }
+
+                    chips-input,
+                    entity-chips-input {
+                        display: flex;
+                        width: 100%;
+                        position: relative;
+
+                        i.required-indicator {
+                            position: absolute;
+                            left: -25px;
+                            height: 15px;
+                            width: 15px;
+                            font-size: 15px;
+                            top: 13px;
+                            transform: translateY(-50%);
+
+                            &.bhi-circle {
+                                color: $grapefruit;
+                                height: 10px;
+                                width: 10px;
+                                font-size: 10px;
+                            }
+
+                            &.bhi-check {
+                                color: $grass;
+                            }
+                        }
+                    }
+                }
+
+                entity-input,
+                entity-chips-input {
+                    picker-results,
+                    entity-picker-results {
+                        position: absolute;
+                        left: 0;
+                        top: 28px;
+                        color: black;
+                        width: 100%;
+                        max-width: none;
+                        z-index: 10;
+
+                        novo-list {
+                            max-height: 600px;
+                            overflow: auto;
+
+                            novo-list-item {
+                                flex: 0 0;
+                                transition: background-color 250ms;
+                                & > div {
+                                    width: 100%;
+                                }
+
+                                &.active {
+                                    background-color: lighten($positive, 35%);
+                                }
+
+                                &:hover {
+                                    background-color: lighten($positive, 39%);
+                                }
+
+                                item-content {
+                                    flex-flow: row wrap;
+                                    & > * {
+                                        flex: 0 0 33%;
+                                        white-space: nowrap;
+                                    }
+                                }
+                            }
+                        }
+
+                        .no-recents,
+                        .null-results,
+                        .error-results {
+                            text-align: center;
+                            padding: 1em 0 4em;
+                            > i {
+                                font-size: 3em;
+                                margin: .5em;
+                                color: rgba(0, 0, 0, .3);
+                            }
+
+                            > h4,
+                            > p {
+                                margin: 0;
+                                max-width: none;
+                                padding: 0;
+                            }
+                            > h4 {
+                                font-weight: 500;
+                            }
+                            > p {
+
+                            }
+                        }
+
+                        section {
+                            box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.25);
+                            z-index: 9;
+                            position: absolute;
+                            width: 100%;
+                            background-color: white;
+                            color: black;
+                        }
+                    }
+                }
+
+                &[required] {
+                    form-input {
+                        i {
+                            background: #DA4453;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &[dark] {
+        .novo-form-container {
+            form {
+                form-field {
+                    form-label {
+                        label {
+                            color: #747E86;
+                        }
+                    }
+
+                    form-input {
+                        address-input,
+                        currency-input,
+                        date-input,
+                        date-time-input,
+                        float-input,
+                        number-input,
+                        percent-input,
+                        picker-input,
+                        entity-input,
+                        text-area,
+                        text-input,
+                        time-input {
+                            input,
+                            textarea {
+                                color: $light;
+                                border-bottom: 1px solid rgba(lighten($dark, 12%), .25);
+
+                                &:focus {
+                                    border-bottom: 1px solid $ocean;
+                                }
+                            }
+                        }
+
+                        novo-select {
+                            > button {
+                                color: $light;
+                                border-bottom: 1px solid rgba(lighten($dark, 12%), .25);
+
+                                &:focus {
+                                    border-bottom: 1px solid $ocean;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    address-input {
+        display: flex;
+        flex-flow: row wrap;
+
+        input {
+        }
+
+        .street-address {
+            flex: 3 3 75%;
+        }
+
+        .apt {
+            flex: 1 1 25%;
+        }
+
+        .city {
+            flex: 2 2 40%;
+        }
+
+        .state {
+            flex: 1 1 30%;
+        }
+
+        .zip {
+            flex: 1 0 20%;
+        }
+
+        .country-name {
+            flex: 4 4 100%;
+        }
+    }
+}
+
+@keyframes iconEnter {
+    0% {
+        opacity: 0;
+        transform: scale(.8);
+    }
+
+    90% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

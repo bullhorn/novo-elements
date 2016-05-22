@@ -1,0 +1,12 @@
+<novo-form>
+    <form-title>Text Fields</form-title>
+    <form-field required>
+        <form-label>First Name</form-label>
+        <form-input name="firstName" type="text" placeholder="Jack" [(value)]="firstName"></form-input>
+    </form-field>
+    <form-field>
+        <form-label>Last Name</form-label>
+        <form-input name="lastName" type="text" placeholder="White" [(value)]="lastName"></form-input>
+    </form-field>
+</novo-form>
+<div> My name is {{firstName}} {{lastName}}</div>

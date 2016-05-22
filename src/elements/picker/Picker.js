@@ -41,7 +41,7 @@ export class Picker extends OutsideClick {
     // Internal search string
     term:string = '';
     // private data model
-    _value: any = '';
+    _value:any = '';
     //Placeholders for the callbacks
     _onTouchedCallback = () => false;
     _onChangeCallback = () => false;
@@ -167,9 +167,10 @@ export class Picker extends OutsideClick {
     }
 
     //get accessor
-    get value(): any {
+    get value():any {
         return this._value;
     }
+
     //set accessor including call the onchange callback
     set value(selected) {
         if (!selected) {
@@ -183,6 +184,7 @@ export class Picker extends OutsideClick {
             this._onChangeCallback(selected.value);
         }
     }
+
     //Set touched on blur
     onTouched() {
         setTimeout(() => {
@@ -193,6 +195,7 @@ export class Picker extends OutsideClick {
         this.blur.emit(event);
         this._onTouchedCallback();
     }
+
     //From ControlValueAccessor interface
     writeValue(value) {
         if (typeof value === 'string') {
@@ -206,10 +209,12 @@ export class Picker extends OutsideClick {
             this._onChangeCallback();
         }
     }
+
     //From ControlValueAccessor interface
     registerOnChange(fn) {
         this._onChangeCallback = fn;
     }
+
     //From ControlValueAccessor interface
     registerOnTouched(fn) {
         this._onTouchedCallback = fn;
