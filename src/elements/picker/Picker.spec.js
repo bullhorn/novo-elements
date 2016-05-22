@@ -6,7 +6,7 @@ import { testComponent, grabComponent } from './../../testing/TestHelpers';
 @Component({
     selector: 'test-cmp',
     directives: [Picker, NgModel],
-    template: '<input [picker]="config" [(ngModel)]="value"/>'
+    template: '<novo-picker [config]="config" [(ngModel)]="value"></novo-picker>'
 })
 class TestCmp {
     constructor() {
