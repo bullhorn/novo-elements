@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { NgModel } from '@angular/common';
-import { Picker } from './Picker';
+import { Chips } from './Chips';
 import { testComponent, grabComponent } from './../../testing/TestHelpers';
 
 @Component({
     selector: 'test-cmp',
-    directives: [Picker, NgModel],
-    template: '<novo-picker [config]="config" [(ngModel)]="value"></novo-picker>'
+    directives: [Chips, NgModel],
+    template: '<chips [source]="config" [(value)]="value"></chips>'
 })
 class TestCmp {
     constructor() {
@@ -17,9 +17,9 @@ class TestCmp {
     }
 }
 
-describe('Element: Picker', () => {
+describe('Element: Chips', () => {
     it('should initialize correctly', testComponent(TestCmp, (fixture) => {
-        const { element, testComponentInstance, testComponentElement } = grabComponent(fixture, Picker);
+        const { element, testComponentInstance, testComponentElement } = grabComponent(fixture, Chips);
         //expect(instance).toBeTruthy();
         expect(element).toBeTruthy();
         expect(testComponentInstance).toBeTruthy();
@@ -27,23 +27,28 @@ describe('Element: Picker', () => {
     }));
 
     xit('should setup the defaults of the picker.', testComponent(TestCmp, (fixture) => {
-        const { instance } = grabComponent(fixture, Picker);
+        const { instance } = grabComponent(fixture, Chips);
         expect(instance.field).toBe('label');
         expect(instance.config).toBeDefined();
         expect(instance.config.options[0]).toBe(1);
     }));
 
     xit('should call the dynamic component loader which shows the results.', testComponent(TestCmp, (fixture) => {
-        const { instance } = grabComponent(fixture, Picker);
-        spyOn(instance.loader.loadNextToLocation).and.callFake(() => { });
+        const { instance } = grabComponent(fixture, Chips);
+        spyOn(instance.loader.loadNextToLocation).and.callFake(() => {
+        });
         instance.showResults();
         expect(instance.loader.loadNextToLocation).toHaveBeenCalled();
     }));
 
     xit('should dispose of the results HTML element.', testComponent(TestCmp, (fixture) => {
-        const { instance } = grabComponent(fixture, Picker);
-        instance.popup = { then: () => { } };
-        spyOn(instance.popup, 'then').and.callFake(() => { });
+        const { instance } = grabComponent(fixture, Chips);
+        instance.popup = {
+            then: () => {
+            }
+        };
+        spyOn(instance.popup, 'then').and.callFake(() => {
+        });
         instance.hideResults();
         expect(instance.popup.then).toHaveBeenCalled();
     }));

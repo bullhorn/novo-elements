@@ -1,10 +1,10 @@
-import { Directive, EventEmitter, ElementRef, DynamicComponentLoader, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, ElementRef, DynamicComponentLoader, ViewContainerRef, Optional } from '@angular/core'; //eslint-disable-line
 import { NgModel } from '@angular/common';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { PickerResults } from './extras/PickerExtras';
 import { Observable } from 'rxjs/Rx';
-import 'rxjs/Rx';
+import 'rxjs/Rx'; //eslint-disable-line
 
 /**
  * @name Picker
@@ -14,43 +14,43 @@ import 'rxjs/Rx';
  * Picker should be added as a two-way bound ngModel instance `[(picker)]=""` in order to have the picker options
  * dynamically populate.
  */
-@Directive({
-    selector: '[picker]',
-    inputs: [
-        'config: picker'
-    ],
-    host: {
-        '(keyup)': 'onKeyUp($event)',
-        '(focus)': 'onFocus()'
-    },
-    outputs: [
-        'select',
-        'queryChange'
-    ],
-    directives: [
-        NgModel
-    ]
+@Component({
+    selector: 'novo-picker',
+    directives: [NgModel],
+    inputs: ['config', 'placeholder'],
+    outputs: ['select', 'focus', 'blur'],
+    template: `
+        <input
+            type="text"
+            [(ngModel)]="term"
+            [placeholder]="placeholder"
+            (keyup)="onKeyUp($event)"
+            (focus)="onFocus($event)"
+            (blur)="onTouched($event)"
+            autocomplete="off" />
+    `
+
 })
 export class Picker extends OutsideClick {
-    // Emitter for search changes
-    queryChange:EventEmitter = new EventEmitter(false);
     // Emitter for selects
     select:EventEmitter = new EventEmitter();
-    // Flag for API errors
-    hasDataError:boolean = false;
-    // Flag for showing recents
-    showNoRecents:boolean = false;
-    // Flag for loading
-    isLoading:boolean = true;
-    // Collection for filtered matches
-    filteredMatches = [];
+    focus:EventEmitter = new EventEmitter();
+    blur:EventEmitter = new EventEmitter();
     // Flag for remote filtering.
     isStatic:boolean = true;
+    // Internal search string
+    term:string = '';
+    // private data model
+    _value: any = '';
+    //Placeholders for the callbacks
+    _onTouchedCallback = () => false;
+    _onChangeCallback = () => false;
 
-    constructor(model:NgModel, element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
+    constructor(@Optional() model:NgModel, element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
         super(element);
         // NgModel instance
-        this.model = model;
+        this.model = model || new NgModel();
+        this.model.valueAccessor = this;
         // Dynamic Component Loader Instance
         this.loader = loader;
         // View to load next to
@@ -61,10 +61,6 @@ export class Picker extends OutsideClick {
         this.onActiveChange.subscribe(active => {
             if (!active) {
                 setTimeout(() => {
-                    this.filteredMatches = [];
-                    this.queryChange.emit({
-                        message: 'cancelled'
-                    });
                     this.hideResults();
                 });
             }
@@ -72,22 +68,20 @@ export class Picker extends OutsideClick {
     }
 
     ngOnInit() {
-        // Default field name for data model
-        this.field = this.config.field || 'label';
-        this.format = this.config.format;
-
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || PickerResults;
-
         // Get all distinct key up events from the input and only fire if long enough and distinct
-        const observer = Observable.fromEvent(this.element.nativeElement, 'keyup')
+        let input = this.element.nativeElement.querySelector('input');
+        const observer = Observable.fromEvent(input, 'keyup')
             .map(e => e.target.value)
-            .debounceTime(500)
+            .debounceTime(250)
             .distinctUntilChanged();
 
         observer.subscribe(
             term => this.showResults(term),
             err => this.hideResults(err));
+
+        this.writeValue(this.model.value);
     }
 
     /**
@@ -117,52 +111,20 @@ export class Picker extends OutsideClick {
             }
 
             if (event.keyCode === KeyCodes.ENTER) {
-                let newValue = this.container.activeMatch;
-                if (newValue) {
-                    this.updateSearch(newValue);
-                    this.select.emit(newValue);
-                }
-                this.hideResults();
+                this.container.selectActiveMatch();
                 return;
             }
         }
     }
 
     /**
-     * @name updateSearch
-     * @param newValue - A string (that'll be the value of the input).
-     *
-     * @description This function updates the model (ngModel) and emits the queryChange. The queryChange emitter
-     * is needed when the model needs to be used to query an API or some other data resource that updates the
-     * picker's options.
-     */
-
-    updateSearch(newValue) {
-        let value = this.format ? this.interpolate(this.format, newValue) : newValue[this.field];
-        this.model.update.emit(value);
-        this.queryChange.emit(value);
-    }
-
-    interpolate(str, props) {
-        return str.replace(/\$([\w\.]+)/g, (original, key) => {
-            let keys = key.split('.');
-            let value = props[keys.shift()];
-            while (keys.length && value !== undefined) {
-                let k = keys.shift();
-                value = k ? value[k] : `${value}.`;
-            }
-            return value !== undefined ? value : original;
-        });
-    }
-
-    /**
      * @name onFocus
-     *
      * @description When the input's focus event is called this method calls the debounced function that displays the
      * results.
      */
-    onFocus() {
+    onFocus(event) {
         this.showResults();
+        this.focus.emit(event);
     }
 
     /**
@@ -174,18 +136,16 @@ export class Picker extends OutsideClick {
     showResults() {
         //console.log('Results', term);
         this.toggleActive(null, true);
-        //let matches = this.filterData(this.model.value, results, this.field);
         // Update Matches
         if (this.container) {
             // Update existing list or create the DOM element
-            this.container.term = this.model.value;
+            this.container.term = this.term;
         } else {
             this.popup = this.loader.loadNextToLocation(this.resultsComponent, this.view).then((componentRef) => {
                 this.container = componentRef.instance;
                 this.container.parent = this;
                 this.container.config = this.config;
-                this.container.field = this.field;
-                this.container.term = this.model.value;
+                this.container.term = this.term;
                 return componentRef;
             });
         }
@@ -204,6 +164,55 @@ export class Picker extends OutsideClick {
                 return componentRef;
             });
         }
+    }
+
+    //get accessor
+    get value(): any {
+        return this._value;
+    }
+    //set accessor including call the onchange callback
+    set value(selected) {
+        if (!selected) {
+            this.term = '';
+            this._value = null;
+            this._onChangeCallback(null);
+        } else if (selected.value !== this._value) {
+            this.term = selected.label;
+            this._value = selected.value;
+            this.select.emit(selected);
+            this._onChangeCallback(selected.value);
+        }
+    }
+    //Set touched on blur
+    onTouched() {
+        setTimeout(() => {
+            if (this.term !== this._value) {
+                this.value = null;
+            }
+        });
+        this.blur.emit(event);
+        this._onTouchedCallback();
+    }
+    //From ControlValueAccessor interface
+    writeValue(value) {
+        if (typeof value === 'string') {
+            this.term = value;
+            this._value = value;
+        } else {
+            this.term = value;
+            this._value = value;
+        }
+        if (!value) {
+            this._onChangeCallback();
+        }
+    }
+    //From ControlValueAccessor interface
+    registerOnChange(fn) {
+        this._onChangeCallback = fn;
+    }
+    //From ControlValueAccessor interface
+    registerOnTouched(fn) {
+        this._onTouchedCallback = fn;
     }
 }
 
