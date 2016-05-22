@@ -48,7 +48,7 @@ $table-border-color: #f5f5f5;
     > thead > tr > th {
         &:nth-of-type(1) {
             .th-group {
-                bh-dropdown.column-filters {
+                novo-dropdown.column-filters {
                     .dropdown-container {
                         left: -80px;
                     }

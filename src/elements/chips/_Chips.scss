@@ -132,11 +132,11 @@ entity-chips {
         width: 90%;
         max-width: none;
 
-        bh-list {
+        novo-list {
             max-height: 600px;
             overflow: auto;
 
-            bh-list-item {
+            novo-list-item {
                 flex: 0 0;
                 transition: background-color 250ms;
                 & > div {
