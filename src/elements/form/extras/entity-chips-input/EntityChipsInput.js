@@ -19,7 +19,7 @@ import { NOVO_PICKER_ELEMENTS } from './../../../picker';
         <chips
             [type]="options.type"
             [source]="options"
-            [value]="tmp"
+            [ngModel]="tmp"
             (changed)="onChanged($event)"
             [placeholder]="placeholder">
         </chips>

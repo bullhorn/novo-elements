@@ -1,11 +1,11 @@
-<!--<novo-form>-->
-    <!--<form-title>Autocomplete Field With Custom Templates</form-title>-->
-    <!--<form-field>-->
-        <!--<form-label>States with Flags</form-label>-->
-        <!--<form-input name="stateObjects" type="picker" [(options)]="autocompleteObjects" placeholder="Pick a State Object"></form-input>-->
-    <!--</form-field>-->
-    <!--<form-field>-->
-        <!--<form-label>Deferred</form-label>-->
-        <!--<form-input name="stateDeferredObjects" type="picker" [(options)]="deferredAutocompleteData" (broadcast)="updateSearch($event)" placeholder="Pick a Deferred State Object"></form-input>-->
-    <!--</form-field>-->
-<!--</novo-form>-->
+<novo-form>
+    <form-title>Autocomplete Field With Custom Templates</form-title>
+    <form-field>
+        <form-label>States with Flags</form-label>
+        <form-input name="stateObjects" type="picker" [(options)]="autocompleteObjects" placeholder="Pick a State Object"></form-input>
+    </form-field>
+    <form-field>
+        <form-label>Deferred</form-label>
+        <form-input name="stateDeferredObjects" type="picker" [(options)]="deferredAutocompleteData" (broadcast)="updateSearch($event)" placeholder="Pick a Deferred State Object"></form-input>
+    </form-field>
+</novo-form>

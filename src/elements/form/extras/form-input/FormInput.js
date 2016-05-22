@@ -95,6 +95,11 @@ export class FormInput {
             this.type = 'entitychips';
         }
 
+        // Force required = false for fields that it does not make sense for
+        if (['checkbox'].includes(this.type)) {
+            this.required = false;
+        }
+
         const component = FieldTypes[this.type];
         if (component) {
             this.componentResolver.resolveComponent(component)

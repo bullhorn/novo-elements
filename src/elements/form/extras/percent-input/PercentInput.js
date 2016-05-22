@@ -10,10 +10,10 @@ import { FormValidators, BaseInput } from './../FormExtras';
     template: `
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
         <div>
-            <input [class.valid-number]="required && control.touched && !control?.errors?.requiredNumber && !control.touched && control?.errors?.maxDouble" [name]="name" type="number" step="0.01" [attr.id]="name" [placeholder]="placeholder" autocomplete="false" [(ngModel)]="value" [ngFormControl]="control"/>
+            <input [class.valid-number]="required && control.touched && !control.touched && control?.errors?.maxDouble" [name]="name" type="number" step="0.01" [attr.id]="name" [placeholder]="placeholder" autocomplete="false" [(ngModel)]="value" [ngFormControl]="control"/>
             <label class="left-label">%</label>
         </div>
-        <span class="error-message" *ngIf="required && control.touched && (control?.errors?.required || control?.errors?.requiredNumber)">Required</span>
+        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">Required</span>
         <span class="error-message" *ngIf="control.touched && control?.errors?.maxDouble">Number is too large</span>
     `,
     host: {
@@ -22,7 +22,7 @@ import { FormValidators, BaseInput } from './../FormExtras';
 })
 export class PercentInput extends BaseInput {
     constructor() {
-        super([FormValidators.maxDouble, FormValidators.isNumber]);
+        super([FormValidators.maxDouble]);
         this.value = '';
     }
 

@@ -9,8 +9,8 @@ import { FormValidators, BaseInput } from './../FormExtras';
     directives: [COMMON_DIRECTIVES],
     template: `
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
-        <input [class.valid-number]="required && control.touched && !control?.errors?.requiredNumber && !control.touched && control?.errors?.maxDouble" [name]="name" type="number" step="0.01" [attr.id]="name" [placeholder]="placeholder" autocomplete="false" [(ngModel)]="value" [ngFormControl]="control"/>
-        <span class="error-message" *ngIf="required && control.touched && (control?.errors?.required || control?.errors?.requiredNumber)">Required</span>
+        <input [class.valid-number]="required && control.touched && !control.touched && control?.errors?.maxDouble" [name]="name" type="number" step="0.01" [attr.id]="name" [placeholder]="placeholder" autocomplete="false" [(ngModel)]="value" [ngFormControl]="control"/>
+        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">Required</span>
         <span class="error-message" *ngIf="control.touched && control?.errors?.maxDouble">Number is too large</span>
     `,
     host: {
@@ -19,7 +19,7 @@ import { FormValidators, BaseInput } from './../FormExtras';
 })
 export class FloatInput extends BaseInput {
     constructor() {
-        super([FormValidators.maxDouble, FormValidators.isNumber]);
+        super([FormValidators.maxDouble]);
         this.value = '';
     }
 

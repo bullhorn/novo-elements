@@ -456,8 +456,7 @@ export class FormDemo {
                 {
                     name: 'checkbox',
                     type: 'checkbox',
-                    label: 'Checkbox',
-                    required: true
+                    label: 'Checkbox'
                 },
                 {
                     name: 'checklist',

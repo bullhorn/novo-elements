@@ -22,12 +22,7 @@ import { NOVO_PICKER_ELEMENTS } from './../../../picker';
     ],
     template: `
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
-        <chips
-            [source]="options"
-            [value]="tmp"
-            (changed)="onChanged($event)"
-            [placeholder]="placeholder">
-        </chips>
+        <chips [source]="options" [ngModel]="tmp" (changed)="onChanged($event)" [placeholder]="placeholder"></chips>
         <i class="bhi-search"></i>
         <input [name]="name" type="hidden" [attr.id]="name" [(ngModel)]="value" autocomplete="off" [ngFormControl]="control"/>
         <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">Required</span>
@@ -39,7 +34,7 @@ export class ChipsInput extends BaseInput {
     }
 
     onChanged(e) {
-        this.value = e.value.length ? e.value : null;
+        this.value = e.value ? e.value : null;
         this.update.emit(this.value);
     }
 }

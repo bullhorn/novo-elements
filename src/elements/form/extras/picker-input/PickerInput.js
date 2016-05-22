@@ -16,14 +16,7 @@ import { NOVO_PICKER_ELEMENTS } from './../../../picker';
     directives: [COMMON_DIRECTIVES, NOVO_PICKER_ELEMENTS, NgModel],
     template: `
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
-        <input
-            [name]="name"
-            [(ngModel)]="value"
-            [(picker)]="options"
-            [placeholder]="placeholder"
-            (select)="onSelect($event)"
-            autocomplete="false"
-        />
+        <novo-picker [config]="options" [(ngModel)]="value" [placeholder]="placeholder" (select)="onSelect($event)"></novo-picker>
         <i class="bhi-search"></i>
         <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">Required</span>
     `

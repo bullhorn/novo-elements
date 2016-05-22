@@ -41,6 +41,7 @@ export class TimeInput extends OutsideClick {
 
     onSelect(evt) {
         this.value = moment(evt.date).format('hh:mm a');
+        this.toggleActive(null, false);
         this.update.emit(evt.date);
     }
 }

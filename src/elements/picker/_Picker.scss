@@ -4,16 +4,11 @@ novo-picker {
     align-items: center;
     flex-wrap: wrap;
     justify-content: flex-start;
-    border-bottom: 1px solid #EAEAEA;
     padding-bottom: 5px;
     transition: all 200ms ease-in-out;
     position: relative;
-    &:hover {
-        border-bottom: 1px solid lighten($dark, 45%);
-    }
     &.selected,
     &.selected:hover {
-        border-bottom: 1px solid $positive;
         & + i {
             color: $positive;
         }

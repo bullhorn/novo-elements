@@ -12,11 +12,4 @@ export class FormValidators {
         if (control.value > Number.MAX_SAFE_INTEGER) return { 'maxDouble': true };
         return null;
     }
-
-    // Makes sure the control value is NOT NaN
-    // Helps circumvent an NG2 issue where NaN passes validation for required
-    static isNumber(control) {
-        if (Number.isNaN(control.value)) return { 'requiredNumber': true };
-        return null;
-    }
 }
