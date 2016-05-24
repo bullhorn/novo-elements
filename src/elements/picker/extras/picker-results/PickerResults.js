@@ -1,5 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+
 import { interpolate } from './../../../../utils/Helpers';
 import { NOVO_LOADING_ELEMENTS } from './../../../loading/Loading';
 
@@ -62,6 +63,7 @@ export class PickerResults {
     }
 
     search(term) {
+        console.log('SEARCH', term);
         let options = this.config.options;
         return Observable.fromPromise(new Promise((resolve, reject) => {
             // Check if there is match data
