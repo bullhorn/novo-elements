@@ -1,3 +1,19 @@
+<a name="0.0.11"></a>
+## [0.0.11](https://github.com/bullhorn/novo-elements/compare/v0.0.10...v0.0.11) (2016-05-24)
+
+
+### Bug Fixes
+
+* **Modal/Tooltip:** Fixing references to Modal and Tooltip ([25fd5e8](https://github.com/bullhorn/novo-elements/commit/25fd5e8))
+* **TableCell:** Fixing rendering for cells ([103a058](https://github.com/bullhorn/novo-elements/commit/103a058))
+
+
+### Features
+
+* **chips:** Implementing Chips component, closes [#6](https://github.com/bullhorn/novo-elements/issues/6) ([cd0e281](https://github.com/bullhorn/novo-elements/commit/cd0e281)), closes [#6](https://github.com/bullhorn/novo-elements/issues/6)
+
+
+
 <a name="0.0.10"></a>
 ## [0.0.10](https://github.com/bullhorn/novo-elements/compare/v0.0.9...v0.0.10) (2016-05-19)
 
