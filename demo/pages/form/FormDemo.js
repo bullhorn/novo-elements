@@ -12,6 +12,7 @@ import MultiselectDemoTpl from './templates/MultiselectDemo.html';
 import RadioButtonDemoTpl from './templates/RadioButtonsDemo.html';
 import SelectFieldDemoTpl from './templates/SelectFieldDemo.html';
 import TextInputDemoTpl from './templates/TextInputDemo.html';
+import QuickNoteInputDemoTpl from './templates/QuickNoteInputDemo.html';
 
 const template = `
 <div class="container">
@@ -61,6 +62,11 @@ const template = `
     <p>This allows the user to select multiple items from a list, or returned via search.</p>
     <div class="example form-demo">${MultiselectDemoTpl}</div>
     <code-snippet [code]="MultiselectDemoTpl"></code-snippet>
+    
+    <h5>Note</h5>
+    <p>This allows the user to add a note with references/tags.</p>
+    <div class="example form-demo">${QuickNoteInputDemoTpl}</div>
+    <code-snippet [code]="QuickNoteInputDemoTpl"></code-snippet>
 
     <h5>Required Fields</h5>
     <p>Required fields must be filled before the page can advance. Required fields are indicated with a red dot between the label and the field. If a user attempts to advance without filling out a field, all non-required fields will be removed and required fields will be highlighted in red.</p>
@@ -159,6 +165,7 @@ export class FormDemo {
         this.MultiselectDemoTpl = MultiselectDemoTpl;
         this.SelectFieldDemoTpl = SelectFieldDemoTpl;
         this.AutocompleteFieldCustomDemoTpl = AutocompleteFieldCustomDemoTpl;
+        this.QuickNoteInputDemoTpl = QuickNoteInputDemoTpl;
 
         this.yesNo = ['Yes', 'No'];
         this.shifts = ['Morning', 'Day', 'Night', 'Overnight'];
@@ -487,6 +494,19 @@ export class FormDemo {
                 label: 'TRIGGER'
             }
         ];
+
+        this.quickNote = '';
+        this.quickNoteReferences = {};
+        this.quickNoteOptions = {
+            triggers: {
+                tags: '@',
+                references: '#'
+            },
+            options: {
+                tags: ['Test', 'Test'],
+                references: ['Test', 'Test']
+            }
+        };
     }
 
     updateSearch() {

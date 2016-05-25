@@ -72,6 +72,9 @@ export class FormFieldMeta {
                             if (this.data.currencyFormat) {
                                 inputRef.instance.currencyFormat = this.data.currencyFormat;
                             }
+                            if (this.data.references) {
+                                inputRef.instance.referneces = this.data.references;
+                            }
                         });
                 });
         }

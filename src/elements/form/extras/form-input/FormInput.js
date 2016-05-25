@@ -20,7 +20,8 @@ import {
     TimeInput,
     CurrencyInput,
     PercentInput,
-    FloatInput
+    FloatInput,
+    QuickNoteInput
 } from '../FormExtras';
 
 @Component({
@@ -35,7 +36,8 @@ import {
         'options',
         'value',
         'label',
-        'currencyFormat'
+        'currencyFormat',
+        'references'
     ],
     outputs: [
         'broadcast',
@@ -84,7 +86,8 @@ export class FormInput {
             entitychips: EntityChipsInput,
             percentage: PercentInput,
             money: CurrencyInput,
-            float: FloatInput
+            float: FloatInput,
+            note: QuickNoteInput
         };
 
         if (this.type === 'checkbox' && this.options) {
@@ -122,6 +125,9 @@ export class FormInput {
                     }
                     if (this.currencyFormat) {
                         this.componentRef.instance.currencyFormat = this.currencyFormat;
+                    }
+                    if (this.references) {
+                        this.componentRef.instance.references = this.references;
                     }
                 });
         } else {

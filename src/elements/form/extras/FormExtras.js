@@ -18,6 +18,7 @@ import { TimeInput } from './time-input/TimeInput';
 import { CurrencyInput } from './currency-input/CurrencyInput';
 import { PercentInput } from './percent-input/PercentInput';
 import { FloatInput } from './float-input/FloatInput';
+import { QuickNoteInput } from './quick-note-input/QuickNoteInput';
 
 import { FormInput } from './form-input/FormInput';
 import { FormLabel, FormLabelMeta } from './form-label/FormLabel';
@@ -44,6 +45,7 @@ export * from './time-input/TimeInput';
 export * from './currency-input/CurrencyInput';
 export * from './percent-input/PercentInput';
 export * from './float-input/FloatInput';
+export * from './quick-note-input/QuickNoteInput';
 export * from './FormValidators';
 
 export * from './form-input/FormInput';
@@ -71,7 +73,8 @@ export const NOVO_FORM_EXTRAS = [
     CurrencyInput,
     PercentInput,
     FloatInput,
-    FormValidators
+    FormValidators,
+    QuickNoteInput
 ];
 
 export const NOVO_FORM_CORE = [

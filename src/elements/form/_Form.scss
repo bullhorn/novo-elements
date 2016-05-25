@@ -254,6 +254,7 @@ novo-form {
                     date-time-input,
                     picker-input,
                     entity-input,
+                    quick-note-input,
                     time-input {
                         position: relative;
 
@@ -271,6 +272,7 @@ novo-form {
                     }
 
                     chips-input,
+                    quick-note-input,
                     entity-chips-input {
                         display: flex;
                         width: 100%;

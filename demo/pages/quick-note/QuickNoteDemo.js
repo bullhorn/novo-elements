@@ -76,18 +76,20 @@ export class QuickNoteDemo {
         this.references3 = {};
 
         let customData = {
-            tags: [{ id: 1, name: 'Custom Tag 1' }, { id: 2, name: 'Custom Tag 2' }],
-            references: [{ id: 1, title: 'Custom Reference 1' }, { id: 2, title: 'Custom Reference 2' }]
+            tags: [{ id: 1, name: 'OH YA!', test: 'TWO' }, { id: 2, name: 'TAGGING!', test: 'ONE' }],
+            references: [{ id: 1, title: 'Awesome Reference' }, { id: 2, title: 'Angular2' }]
         };
 
         this.config = {
             triggers: {
                 tags: '@',
-                references: '#'
+                references: '#',
+                boos: '^'
             },
             options: {
-                tags: ['Test', 'Test'],
-                references: ['Test', 'Test']
+                tags: ['First', 'Second'],
+                references: ['Third', 'Forth'],
+                boos: ['Test']
             },
             renderer: {
                 tags: (symbol, item) => {
@@ -95,6 +97,9 @@ export class QuickNoteDemo {
                 },
                 references: (symbol, item) => {
                     return `<a class="tag">${symbol}${item.label}</a>`;
+                },
+                boos: (symbol, item) => {
+                    return `<strong>${symbol}${item.label}</strong>`;
                 }
             }
         };
@@ -121,7 +126,7 @@ export class QuickNoteDemo {
                 }
             },
             format: {
-                whos: '$name',
+                whos: '$name $test',
                 whats: '$title'
             },
             renderer: {

@@ -4,7 +4,6 @@ import 'rxjs/Rx'; //eslint-disable-line
 
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { swallowEvent } from './../../utils/Helpers';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
 import { ContentEditableModel } from './../../directives/content-editable-model/ContentEditableModel';
 
@@ -16,14 +15,14 @@ import { ContentEditableModel } from './../../directives/content-editable-model/
     template: `
         <div class="quick-note-wrapper">
             <textarea [(ngModel)]="basicNote"
+                      (ngModelChange)="onChange($event)"
                       (keyup)="onKeyUp($event)"
                       (keypress)="onKeyPress($event)"
                       (focus)="onFocus($event)"
-                      (input)="onInput($event)"
                       (blur)="onTouched($event)">
             </textarea>
             <div class="quick-note-overlay"
-                [(contentEditableModel)]="formattedNote"
+                [innerHTML]="formattedNote"
                 [attr.placeholder]="placeholder">
             </div>
             <ref #results></ref>
@@ -75,6 +74,11 @@ export class QuickNote extends OutsideClick {
             throw new Error('QuickNote config must supply triggers!');
         }
 
+        // Make sure that we have triggers
+        if (!this.config.options) {
+            throw new Error('QuickNote config must supply options!');
+        }
+
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || QuickNoteResults;
         // Write the value to the model
@@ -91,11 +95,13 @@ export class QuickNote extends OutsideClick {
                 this.taggingMode = key;
             }
         });
+        return true;
     }
 
-    onInput(event) {
+    onChange(event) {
         // Keep the formatted note up-to-date
-        this.updateFormattedNote(event.target.value);
+        this.updateFormattedNote(event);
+        return true;
     }
 
     /**
@@ -110,26 +116,24 @@ export class QuickNote extends OutsideClick {
     onKeyUp(event) {
         // Navigation inside the results
         if (this.quickNoteResults) {
-            swallowEvent(event);
-
             if (event.keyCode === KeyCodes.ESC) {
                 this.hideResults();
-                return;
+                return false;
             }
 
             if (event.keyCode === KeyCodes.UP) {
                 this.quickNoteResults.instance.prevActiveMatch();
-                return;
+                return false;
             }
 
             if (event.keyCode === KeyCodes.DOWN) {
                 this.quickNoteResults.instance.nextActiveMatch();
-                return;
+                return false;
             }
 
             if (event.keyCode === KeyCodes.ENTER) {
                 this.quickNoteResults.instance.selectActiveMatch();
-                return;
+                return false;
             }
         }
 
@@ -148,6 +152,7 @@ export class QuickNote extends OutsideClick {
                 }
             }, 250);
         }
+        return true;
     }
 
     /**
