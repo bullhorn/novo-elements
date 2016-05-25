@@ -45,7 +45,7 @@ export class EntityChipsInput extends BaseInput {
     }
 
     onChanged(e) {
-        this.value = e.value.length ? e.value : null;
+        this.value = e;
         this.update.emit(this.value);
     }
 }

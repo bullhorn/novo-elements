@@ -40,7 +40,7 @@ export class EntityInput extends BaseInput {
     }
 
     onChanged(e) {
-        this.value = e.value.length ? e.value : null;
+        this.value = e;
         this.update.emit(this.value);
     }
 
@@ -58,42 +58,42 @@ export class EntityInput extends BaseInput {
             (click)="selectMatch($event)"
             [ngClass]="{active: isActive(match)}"
             (mouseenter)="selectActive(match)">
-                <item-avatar [icon]="getIconForResult(match)"></item-avatar>
+                <item-avatar [icon]="getIconForResult(match.data)"></item-avatar>
                 <item-title>
-                    <span [innerHtml]="highlight(getNameForResult(match), query)"></span>
+                    <span [innerHtml]="highlight(getNameForResult(match.data), query)"></span>
                 </item-title>
                 <item-content direction="horizontal">
                     <!-- COMPANY 1 -->
-                    <p class="company" *ngIf="match.companyName">
+                    <p class="company" *ngIf="match.data.companyName">
                         <i class="bhi-company"></i>
-                        <span [innerHtml]="highlight(match.companyName, query)"></span>
+                        <span [innerHtml]="highlight(match.data.companyName, query)"></span>
                     </p>
                     <!-- CLIENT CORP -->
-                    <p class="company" *ngIf="match?.clientCorporation?.name">
+                    <p class="company" *ngIf="match.data?.clientCorporation?.name">
                         <i class="bhi-company"></i>
-                        <span [innerHtml]="highlight(match.clientCorporation.name, query)"></span>
+                        <span [innerHtml]="highlight(match.data.clientCorporation.name, query)"></span>
                     </p>
                     <!-- EMAIL -->
-                    <p class="email" *ngIf="match.email">
+                    <p class="email" *ngIf="match.data.email">
                         <i class="bhi-email"></i>
-                        <span [innerHtml]="highlight(match.email, query)"></span>
+                        <span [innerHtml]="highlight(match.data.email, query)"></span>
                     </p>
                     <!-- PHONE -->
-                    <p class="phone" *ngIf="match.phone">
+                    <p class="phone" *ngIf="match.data.phone">
                         <i class="bhi-phone"></i>
-                        <span [innerHtml]="highlight(match.phone, query)"></span>
+                        <span [innerHtml]="highlight(match.data.phone, query)"></span>
                     </p>
                     <!-- ADDRESS -->
-                    <p class="location" *ngIf="match.address && (match.address.city || match.address.state)">
+                    <p class="location" *ngIf="match.data.address && (match.data.address.city || match.data.address.state)">
                         <i class="bhi-location"></i>
-                        <span *ngIf="match.address.city" [innerHtml]="highlight(match.address.city, query)"></span>
-                        <span *ngIf="match.address.city && match.address.state">, </span>
-                        <span *ngIf="match.address.state" [innerHtml]="highlight(match.address.state, query)"></span>
+                        <span *ngIf="match.data.address.city" [innerHtml]="highlight(match.data.address.city, query)"></span>
+                        <span *ngIf="match.data.address.city && match.data.address.state">, </span>
+                        <span *ngIf="match.data.address.state" [innerHtml]="highlight(match.data.address.state, query)"></span>
                     </p>
                     <!-- STATUS -->
-                    <p class="status" *ngIf="match.status">
+                    <p class="status" *ngIf="match.data.status">
                         <i class="bhi-info"></i>
-                        <span [innerHtml]="highlight(match.status, query)"></span>
+                        <span [innerHtml]="highlight(match.data.status, query)"></span>
                     </p>
                 </item-content>
             </novo-list-item>
