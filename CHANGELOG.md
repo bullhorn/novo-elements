@@ -1,3 +1,13 @@
+<a name="0.0.12"></a>
+## [0.0.12](https://github.com/bullhorn/novo-elements/compare/v0.0.11...v0.0.12) (2016-05-25)
+
+
+### Features
+
+* **forms, quicknote:** Implementing Forms and FormExtras with a QuickNote component, closes [#7](https://github.com/bullhorn/novo-elements/issues/7) and closes [#8](https://github.com/bullhorn/novo-elements/issues/8) ([a035c7c](https://github.com/bullhorn/novo-elements/commit/a035c7c)), closes [#7](https://github.com/bullhorn/novo-elements/issues/7) [#8](https://github.com/bullhorn/novo-elements/issues/8)
+
+
+
 <a name="0.0.11"></a>
 ## [0.0.11](https://github.com/bullhorn/novo-elements/compare/v0.0.10...v0.0.11) (2016-05-24)
 
