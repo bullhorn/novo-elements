@@ -6962,9 +6962,16 @@ export function findByCountryName(name) {
 }
 
 /**
+ * Find country object by code
+ */
+export function findByCountryCode(code) {
+    return COUNTRIES.find(c => c.code === code.trim());
+}
+
+/**
  * Get states by country name
  */
 export function getStates(name) {
-    let country = COUNTRIES.find(c => c.name === name.trim());
+    let country = COUNTRIES.find(c => c.code === name.trim());
     return country.states.map(s => s.name);
 }
