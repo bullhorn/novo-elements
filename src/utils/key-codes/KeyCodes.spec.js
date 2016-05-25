@@ -18,7 +18,7 @@ describe('Util: KeyCodes', () => {
         expect(KeyCodes.SPACE).toEqual(32);
         expect(KeyCodes.PAGE_UP).toEqual(33);
         expect(KeyCodes.PAGE_DOWN).toEqual(34);
-        expect(KeyCodes.END).toEqual(35);
+        expect(KeyCodes.HASH_SYMBOL).toEqual(35);
         expect(KeyCodes.HOME).toEqual(36);
         expect(KeyCodes.LEFT).toEqual(37);
         expect(KeyCodes.UP).toEqual(38);
@@ -37,6 +37,7 @@ describe('Util: KeyCodes', () => {
         expect(KeyCodes.SEVEN).toEqual(55);
         expect(KeyCodes.EIGHT).toEqual(56);
         expect(KeyCodes.NINE).toEqual(57);
+        expect(KeyCodes.AT_SYMBOL).toEqual(64);
         expect(KeyCodes.A).toEqual(65);
         expect(KeyCodes.B).toEqual(66);
         expect(KeyCodes.C).toEqual(67);

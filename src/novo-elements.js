@@ -9,8 +9,10 @@ import { NOVO_TOOLTIP_ELEMENTS } from './elements/tooltip';
 import { NOVO_DRAWER_ELEMENTS } from './elements/drawer';
 import { NOVO_SELECT_ELEMENTS } from './elements/select';
 import { NOVO_PICKER_ELEMENTS } from './elements/picker';
+import { NOVO_QUICK_NOTE_ELEMENTS } from './elements/quicknote';
 import { NOVO_CHIPS_ELEMENTS } from './elements/chips';
 import { PICKER_EXTRAS } from './elements/picker/extras/PickerExtras';
+import { QUICK_NOTE_EXTRAS } from './elements/quick-note/extras/QuickNoteExtras';
 import { NOVO_DATE_PICKER_ELEMENTS } from './elements/datepicker';
 import { NOVO_TIME_PICKER_ELEMENTS } from './elements/timepicker';
 import { NOVO_DROPDOWN_ELEMENTS } from './elements/dropdown';
@@ -30,7 +32,9 @@ export * from './elements/card';
 export * from './elements/loading';
 export * from './elements/select';
 export * from './elements/picker';
+export * from './elements/quicknote';
 export * from './elements/picker/extras/PickerExtras';
+export * from './elements/quick-note/extras/QuickNoteExtras';
 export * from './elements/chips';
 export * from './elements/dropdown';
 export * from './elements/tooltip';
@@ -43,6 +47,9 @@ export * from './elements/list';
 export * from './elements/table';
 export * from './elements/dragula';
 export * from './elements/form';
+
+// Directives
+export * from './directives/content-editable-model/ContentEditableModel';
 
 // Pipes
 export * from './pipes/plural/Plural';
@@ -73,10 +80,12 @@ export const NOVO_ELEMENTS = [
     NOVO_TABLE_ELEMENTS,
     NOVO_TABLE_EXTRA_ELEMENTS,
     NOVO_DRAWER_ELEMENTS,
+    NOVO_QUICK_NOTE_ELEMENTS,
     NOVO_DATE_PICKER_ELEMENTS,
     NOVO_TIME_PICKER_ELEMENTS,
     NOVO_DRAGULA_ELEMENTS,
     PICKER_EXTRAS,
+    QUICK_NOTE_EXTRAS,
     NOVO_FORM_ELEMENTS,
     NOVO_FORM_CORE,
     NOVO_FORM_EXTRAS
