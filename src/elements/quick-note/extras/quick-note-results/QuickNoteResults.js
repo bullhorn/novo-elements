@@ -27,8 +27,8 @@ import { PickerResults } from './../../../picker/extras/PickerExtras';
     `
 })
 export class QuickNoteResults extends PickerResults {
-    // Type of search
-    type:string = '';
+    // Mode that the quick note is in for tagging
+    taggingMode:string = '';
 
     constructor(element:ElementRef) {
         super(element);
@@ -36,26 +36,23 @@ export class QuickNoteResults extends PickerResults {
 
     set term(value) {
         this._term = value.searchTerm;
-        this.type = value.type;
+        this.taggingMode = value.taggingMode;
         this.hasError = false;
         this.isLoading = true;
-        this.search(value, this.type)
+        this.search(value, this.taggingMode)
             .subscribe(
                 results => {
                     this.matches = this.isStatic ? this.filterData(results) : results;
                     this.isLoading = false;
                 },
-                (err) => {
-                    console.log('ERR', err);
+                () => {
                     this.hasError = true;
                     this.isLoading = false;
                 });
     }
 
-    search(term, type) {
-        console.log('TERM', term);
-        console.log('TYPE', type);
-        let searchCall = this.config.options[type];
+    search(term, taggingMode) {
+        let searchCall = this.config.options[taggingMode];
         return Observable.fromPromise(new Promise((resolve, reject) => {
             // Check if there is match data
             if (searchCall) {
@@ -106,11 +103,10 @@ export class QuickNoteResults extends PickerResults {
             });
         }
         return collection.map((data) => {
-            let value = this.config.field ? data[this.config.field[this.type]] : (data.value || data);
-            let label = this.config.format ? interpolate(this.config.format[this.type], data) : data.label || String(value);
+            let value = this.config.field ? data[this.config.field[this.taggingMode]] : (data.value || data);
+            let label = this.config.format ? interpolate(this.config.format[this.taggingMode], data) : data.label || String(value);
             return { value, label, data };
         });
-        ;
     }
 
 
@@ -128,7 +124,7 @@ export class QuickNoteResults extends PickerResults {
 
         let selected = this.activeMatch;
         if (selected) {
-            this.parent.onSelected(this.type, selected);
+            this.parent.onSelected(this.taggingMode, selected);
             this.parent.hideResults();
         }
         return false;

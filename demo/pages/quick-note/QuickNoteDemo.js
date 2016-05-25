@@ -1,28 +1,55 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
-import { NOVO_QUICK_NOTE_ELEMENTS } from './../../../src/novo-elements';
+import { NOVO_QUICK_NOTE_ELEMENTS, QuickNoteResults, NOVO_LOADING_ELEMENTS } from './../../../src/novo-elements';
 
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
 
 import BasicQuickNoteDemoTpl from './templates/BasicQuickNote.html';
 import CustomQuickNoteDemoTpl from './templates/CustomQuickNote.html';
+import CustomQuickNoteResultsDemoTpl from './templates/CustomQuickNoteResults.html';
+
+@Component({
+    selector: 'custom-quick-note-results',
+    directives: [NOVO_LOADING_ELEMENTS],
+    host: {
+        'class': 'active quick-note-results'
+    },
+    template: `
+        <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
+        <ul *ngIf="matches.length > 0">
+            <li
+                *ngFor="let match of matches"
+                (click)="selectMatch($event)"
+                [class.active]="match===activeMatch"
+                (mouseenter)="selectActive(match)">
+                **CUSTOM** <b [innerHtml]="highlight(match.label, term)"></b>
+            </li>
+        </ul>
+        <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
+        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
+    `
+})
+export class CustomQuickNoteResults extends QuickNoteResults {
+}
 
 const template = `
 <div class="container">
     <h1>Quick Note <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/quick-note">(source)</a></small></h1>
-    <p>TODO</p>
+    <p>Tag Autocomplete</p>
 
     <br/>
 
     <h5>Basic Examples</h5>
-    <p>TODO</p>
-    <div class="example picker-demo">${BasicQuickNoteDemoTpl}</div>
+    <div class="example quick-note-demo">${BasicQuickNoteDemoTpl}</div>
     <code-snippet [code]="BasicQuickNoteDemoTpl"></code-snippet>
     
-    <h5>Custom Examples</h5>
-    <p>TODO</p>
-    <div class="example picker-demo">${CustomQuickNoteDemoTpl}</div>
+    <h5>Custom Triggers</h5>
+    <div class="example quick-note-demo">${CustomQuickNoteDemoTpl}</div>
     <code-snippet [code]="CustomQuickNoteDemoTpl"></code-snippet>
+    
+    <h5>Custom Results Template</h5>
+    <div class="example quick-note-demo">${CustomQuickNoteResultsDemoTpl}</div>
+    <code-snippet [code]="CustomQuickNoteResultsDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -35,6 +62,9 @@ export class QuickNoteDemo {
     constructor() {
         this.BasicQuickNoteDemoTpl = BasicQuickNoteDemoTpl;
         this.CustomQuickNoteDemoTpl = CustomQuickNoteDemoTpl;
+        this.CustomQuickNoteResultsDemoTpl = CustomQuickNoteResultsDemoTpl;
+
+        this.placeholder = 'Enter your note text here. Reference people and distrubution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
 
         this.note = '';
         this.references = {};
@@ -42,43 +72,37 @@ export class QuickNoteDemo {
         this.note2 = 'I am an initial note!';
         this.references2 = {};
 
+        this.note3 = '';
+        this.references3 = {};
+
         let customData = {
             tags: [{ id: 1, name: 'Custom Tag 1' }, { id: 2, name: 'Custom Tag 2' }],
             references: [{ id: 1, title: 'Custom Reference 1' }, { id: 2, title: 'Custom Reference 2' }]
         };
 
-        this.placeholder = 'Enter your note text here. Reference people and distrubution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
         this.config = {
             triggers: {
-                tags: {
-                    symbol: '@',
-                    keyCode: 64
-                },
-                references: {
-                    symbol: '#',
-                    keyCode: 35
-                }
+                tags: '@',
+                references: '#'
             },
             options: {
                 tags: ['Test', 'Test'],
                 references: ['Test', 'Test']
             },
-            renderers: {
+            renderer: {
                 tags: (symbol, item) => {
-                    return `<a class="tag">${symbol}${item.label}</a>`
+                    return `<a class="tag">${symbol}${item.label}</a>`;
+                },
+                references: (symbol, item) => {
+                    return `<a class="tag">${symbol}${item.label}</a>`;
                 }
             }
         };
+
         this.custom = {
             triggers: {
-                whos: {
-                    symbol: '4',
-                    keyCode: 52
-                },
-                whats: {
-                    symbol: '1',
-                    keyCode: 49
-                }
+                whos: '@',
+                whats: '#'
             },
             options: {
                 whos: () => {
@@ -99,6 +123,50 @@ export class QuickNoteDemo {
             format: {
                 whos: '$name',
                 whats: '$title'
+            },
+            renderer: {
+                whos: (symbol, item) => {
+                    return `<a class="WHOS">${symbol}${item.label}</a>`;
+                },
+                whats: (symbol, item) => {
+                    return `<a class="tag">${symbol}${item.label}</a>`;
+                }
+            }
+        };
+
+        this.custom2 = {
+            resultsTemplate: CustomQuickNoteResults,
+            triggers: {
+                names: '@',
+                tags: '#'
+            },
+            options: {
+                names: () => {
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve(customData.tags);
+                        }, 300);
+                    });
+                },
+                tags: () => {
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve(customData.references);
+                        }, 300);
+                    });
+                }
+            },
+            format: {
+                names: '$name',
+                tags: '$title'
+            },
+            renderer: {
+                names: (symbol, item) => {
+                    return `<a class="names">${symbol}${item.label}</a>`;
+                },
+                tags: (symbol, item) => {
+                    return `<a class="tags">${symbol}${item.label}</a>`;
+                }
             }
         };
     }

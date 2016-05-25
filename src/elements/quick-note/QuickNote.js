@@ -12,7 +12,7 @@ import { ContentEditableModel } from './../../directives/content-editable-model/
     selector: 'novo-quick-note',
     directives: [NgModel, ContentEditableModel],
     inputs: ['config', 'placeholder', 'references'],
-    outputs: ['select', 'focus', 'blur'],
+    outputs: ['focus', 'blur'],
     template: `
         <div class="quick-note-wrapper">
             <textarea [(ngModel)]="basicNote"
@@ -32,7 +32,6 @@ import { ContentEditableModel } from './../../directives/content-editable-model/
 })
 export class QuickNote extends OutsideClick {
     // Emitter for selects
-    select:EventEmitter = new EventEmitter();
     focus:EventEmitter = new EventEmitter();
     blur:EventEmitter = new EventEmitter();
 
@@ -66,6 +65,16 @@ export class QuickNote extends OutsideClick {
     }
 
     ngOnInit() {
+        // Make sure we have a proper config
+        if (!this.config) {
+            throw new Error('No config set for QuickNote!');
+        }
+
+        // Make sure that we have triggers
+        if (!this.config.triggers) {
+            throw new Error('QuickNote config must supply triggers!');
+        }
+
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || QuickNoteResults;
         // Write the value to the model
@@ -77,10 +86,9 @@ export class QuickNote extends OutsideClick {
         let triggers = this.config.triggers || {};
         Object.keys(triggers).forEach(key => {
             let trigger = triggers[key] || {};
-            if (event.keyCode === Number(trigger.keyCode)) {
+            if (event.keyCode === trigger.charCodeAt()) {
                 this.isTagging = true;
-                this.type = key;
-                console.log('TAGGING ON', key);
+                this.taggingMode = key;
             }
         });
     }
@@ -131,7 +139,6 @@ export class QuickNote extends OutsideClick {
             timer = setTimeout(() => {
                 let searchQuery;
                 searchQuery = this.extractSearchQuery();
-                console.log('SQ', searchQuery);
                 if (searchQuery.length) {
                     this.searchTerm = searchQuery;
                     this.showResults();
@@ -143,30 +150,56 @@ export class QuickNote extends OutsideClick {
         }
     }
 
+    /**
+     * @name updateFormattedNote
+     * @param value - unformatted text
+     *
+     * @description - Updates the value inside the div to render the text
+     */
     updateFormattedNote(value) {
         // Replace references with anchor tags
-        let temp = value;
+        let tempFormattedValue = value;
+        let tempBasicValue = value;
         if (this.references) {
             Object.keys(this.references).forEach(key => {
                 let array = this.references[key] || [];
-                let formatter = (this.config.renderers ? this.config.renderers[key] : null) || this.renderLink;
-                array.forEach(item => {
-                    temp = temp.replace(`${this.config.triggers[key].symbol}${item.label}`, formatter(this.config.triggers[key].symbol, item));
+                let formatter = (this.config.renderer ? this.config.renderer[key] : null) || this.renderLink;
+                this.references[key] = array.filter(item => {
+                    let ref = `${this.config.triggers[key]}${item.label}`;
+                    let exists = tempFormattedValue.indexOf(ref) !== -1;
+                    if (exists) {
+                        tempFormattedValue = this.replaceLastOccurrence(tempFormattedValue, ref, formatter(this.config.triggers[key], item));
+                    } else {
+                        this.taggingMode = key;
+                        this.isTagging = true;
+                    }
+                    return exists;
                 });
             });
         }
         // Update formatted value
-        this.formattedNote = temp;
+        this.formattedNote = tempFormattedValue;
+        // Update basic note
+        this.basicNote = tempBasicValue;
         // Propagate change to ngModel
-        this._onChangeCallback(this.formattedNote);
+        if (this.formattedNote) {
+            this._onChangeCallback(this.formattedNote);
+        } else {
+            this._onChangeCallback();
+        }
     }
 
     renderLink(symbol, item) {
         return `<a>${symbol}${item.label}</a>`;
     }
 
+    /**
+     * @name extractSearchQuery
+     *
+     * @description - Gets the search query based on what the user is searching for
+     */
     extractSearchQuery() {
-        let symbol = this.config.triggers[this.type].symbol;
+        let symbol = this.config.triggers[this.taggingMode];
         return this.basicNote.slice(this.basicNote.lastIndexOf(symbol), this.basicNote.length);
     }
 
@@ -190,14 +223,14 @@ export class QuickNote extends OutsideClick {
         // Update Matches
         if (this.quickNoteResults) {
             // Update existing list or create the DOM element
-            this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, type: this.type };
+            this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
         } else {
             this.componentResolver.resolveComponent(this.resultsComponent)
                 .then(componentFactory => {
                     this.quickNoteResults = this.results.createComponent(componentFactory);
                     this.quickNoteResults.instance.parent = this;
                     this.quickNoteResults.instance.config = this.config;
-                    this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, type: this.type };
+                    this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
                 });
         }
     }
@@ -215,25 +248,41 @@ export class QuickNote extends OutsideClick {
         }
     }
 
-    onSelected(type, selected) {
+    /**
+     * @name onSelected
+     * @param taggingMode - type of tags we are looking for
+     * @param selected - selected value
+     *
+     * @description - handles the selection from the QuickNoteResults Component
+     */
+    onSelected(taggingMode, selected) {
         // Turn off tagging
         this.isTagging = false;
         // Reset focus
         this.element.nativeElement.querySelector('textarea').focus();
         // Replace searchTerm
-        let symbol = this.config.triggers[this.type].symbol;
-        this.basicNote = this.basicNote.replace(this.searchTerm, `${symbol}${selected.label} `);
+        let symbol = this.config.triggers[this.taggingMode];
+        this.basicNote = this.replaceLastOccurrence(this.basicNote, this.searchTerm, `${symbol}${selected.label}`);
+        // Reset search term
+        this.searchTerm = null;
+
+        // Add the references
+        this.references = this.references || {};
+        this.references[taggingMode] = this.references[taggingMode] || [];
+        this.references[taggingMode].push(selected);
+
         // Update the formatted note
         this.updateFormattedNote(this.basicNote);
         // Propagate change to ngModel
         this._onChangeCallback(this.formattedNote);
+    }
 
-        console.log('SELECTED TYPE', type);
-        console.log('SELECTED', selected);
-
-        this.references = this.references || {};
-        this.references[type] = this.references[type] || [];
-        this.references[type].push(selected);
+    replaceLastOccurrence(value, key, replaceValue) {
+        let index = value.lastIndexOf(key);
+        if (index >= 0) {
+            return value.substring(0, index) + replaceValue + value.substring(index + key.length);
+        }
+        return value.toString();
     }
 
     // Set touched on blur
@@ -244,7 +293,8 @@ export class QuickNote extends OutsideClick {
 
     // From ControlValueAccessor interface
     writeValue(value) {
-        this.note = value;
+        this.basicNote = value;
+        this.updateFormattedNote(value);
         if (!value) {
             this._onChangeCallback();
         }

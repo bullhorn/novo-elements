@@ -12,6 +12,7 @@ import { NOVO_PICKER_ELEMENTS } from './elements/picker';
 import { NOVO_QUICK_NOTE_ELEMENTS } from './elements/quicknote';
 import { NOVO_CHIPS_ELEMENTS } from './elements/chips';
 import { PICKER_EXTRAS } from './elements/picker/extras/PickerExtras';
+import { QUICK_NOTE_EXTRAS } from './elements/quick-note/extras/QuickNoteExtras';
 import { NOVO_DATE_PICKER_ELEMENTS } from './elements/datepicker';
 import { NOVO_TIME_PICKER_ELEMENTS } from './elements/timepicker';
 import { NOVO_DROPDOWN_ELEMENTS } from './elements/dropdown';
@@ -33,6 +34,7 @@ export * from './elements/select';
 export * from './elements/picker';
 export * from './elements/quicknote';
 export * from './elements/picker/extras/PickerExtras';
+export * from './elements/quick-note/extras/QuickNoteExtras';
 export * from './elements/chips';
 export * from './elements/dropdown';
 export * from './elements/tooltip';
@@ -83,6 +85,7 @@ export const NOVO_ELEMENTS = [
     NOVO_TIME_PICKER_ELEMENTS,
     NOVO_DRAGULA_ELEMENTS,
     PICKER_EXTRAS,
+    QUICK_NOTE_EXTRAS,
     NOVO_FORM_ELEMENTS,
     NOVO_FORM_CORE,
     NOVO_FORM_EXTRAS

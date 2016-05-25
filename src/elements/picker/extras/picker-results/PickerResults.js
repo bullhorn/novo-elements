@@ -63,7 +63,6 @@ export class PickerResults {
     }
 
     search(term) {
-        console.log('SEARCH', term);
         let options = this.config.options;
         return Observable.fromPromise(new Promise((resolve, reject) => {
             // Check if there is match data
