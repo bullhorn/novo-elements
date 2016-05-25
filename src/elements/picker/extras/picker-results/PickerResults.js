@@ -1,5 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+
 import { interpolate } from './../../../../utils/Helpers';
 import { NOVO_LOADING_ELEMENTS } from './../../../loading/Loading';
 

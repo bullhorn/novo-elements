@@ -1,0 +1,23 @@
+import { getCountries, getStates } from './Countries';
+
+describe('Util: Countries', () => {
+    describe('Function: getCountries()', () => {
+        it('should be defined', () => {
+            expect(getCountries).toBeDefined();
+        });
+
+        it('should get Countries', () => {
+            expect(getCountries()[0]).toBe('United States');
+        });
+    });
+
+    describe('Function: getStates(country)', () => {
+        it('should be defined', () => {
+            expect(getStates).toBeDefined();
+        });
+
+        it('should get states for US', () => {
+            expect(getStates('US')[0]).toBe('Alabama');
+        });
+    });
+});

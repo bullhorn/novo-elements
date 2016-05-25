@@ -25,7 +25,9 @@ const template = require('./App.html');
 
     // Element/Component/Service/etc.. Demos
     { path: '/button', name: 'Button', loader: () => require('es6-promise!./../button/ButtonDemo')('ButtonDemo') },
+    { path: '/quick-note', name: 'QuickNote', loader: () => require('es6-promise!./../quick-note/QuickNoteDemo')('QuickNoteDemo') },
     { path: '/modal', name: 'Modal', loader: () => require('es6-promise!./../modal/ModalDemo')('ModalDemo') },
+    { path: '/form', name: 'Form', loader: () => require('es6-promise!./../form/FormDemo')('FormDemo') },
     { path: '/toast', name: 'Toast', loader: () => require('es6-promise!./../toast/ToastDemo')('ToastDemo') },
     { path: '/tooltip', name: 'Tooltip', loader: () => require('es6-promise!./../tooltip/TooltipDemo')('TooltipDemo') },
     { path: '/cards', name: 'Cards', loader: () => require('es6-promise!./../card/CardDemo')('CardDemo') },
@@ -64,8 +66,10 @@ export class DemoApp {
         ];
 
         this.componentRoutes = [
+            { name: 'QuickNote', path: '/quick-note' },
             { name: 'Toast', path: '/toast' },
             { name: 'Button', path: '/button' },
+            { name: 'Form', path: '/form' },
             { name: 'Tabs', path: '/tabs' },
             { name: 'Modal', path: '/Modal' },
             { name: 'Select', path: '/select' },
