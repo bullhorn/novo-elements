@@ -3,7 +3,7 @@ import { COMMON_DIRECTIVES, NgModel } from '@angular/common';
 
 import { NOVO_SELECT_ELEMENTS } from './../../../select';
 import { BaseInput } from './../FormExtras';
-import { getCountries, getStates, findByCountryCode } from '../../../../utils/countries/Countries';
+import { getCountries, getStates, findByCountryName } from '../../../../utils/countries/Countries';
 
 @Component({
     selector: 'address-input',
@@ -39,7 +39,7 @@ export class AddressInput extends BaseInput {
         if (!this.value) {
             this.value = {
                 countryID: 1,
-                countryName: 'US'
+                countryName: 'United States'
             };
         } else if (this.value.countryName) {
             this.value.countryName = this.value.countryName.trim();
@@ -50,10 +50,14 @@ export class AddressInput extends BaseInput {
 
     onCountryChange(evt) {
         this.value.countryName = evt;
-        let country = findByCountryCode(this.value.countryName);
+        let country = findByCountryName(this.value.countryName);
         this.value.countryCode = country.code;
         this.value.countryID = country.id;
         this.updateStates();
+
+        // Update state
+        this.value.state = null;
+        this.updateControl();
     }
 
     onStateChange(evt) {

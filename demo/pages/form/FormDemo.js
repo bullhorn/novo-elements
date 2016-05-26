@@ -471,6 +471,12 @@ export class FormDemo {
                     label: 'CheckList',
                     options: this.shifts,
                     required: true
+                },
+                {
+                    name: 'address',
+                    type: 'address',
+                    label: 'Address',
+                    required: true
                 }
             ]
         };

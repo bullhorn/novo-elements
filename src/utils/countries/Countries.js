@@ -6972,6 +6972,6 @@ export function findByCountryCode(code) {
  * Get states by country name
  */
 export function getStates(name) {
-    let country = COUNTRIES.find(c => c.code === name.trim());
-    return country.states.map(s => s.name);
+    let country = COUNTRIES.find(c => c.name === name.trim());
+    return country ? country.states.map(s => s.name) : [];
 }

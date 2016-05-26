@@ -17,7 +17,7 @@ describe('Util: Countries', () => {
         });
 
         it('should get states for US', () => {
-            expect(getStates('US')[0]).toBe('Alabama');
+            expect(getStates('United States')[0]).toBe('Alabama');
         });
     });
 });
