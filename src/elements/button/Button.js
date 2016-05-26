@@ -3,11 +3,12 @@ import { CORE_DIRECTIVES } from '@angular/common';
 
 @Component({
     selector: 'button[theme]',
-    inputs: ['theme', 'icon', 'side', 'color'],
+    inputs: ['theme', 'icon', 'side', 'color', 'disabled'],
     host: {
         '[attr.theme]': 'theme',
         '[attr.color]': 'color',
-        '[attr.icon]': 'icon'
+        '[attr.icon]': 'icon',
+        '[disabled]': 'disabled'
     },
     template: `
         <!--Flex wrapper for cross-browser support-->
