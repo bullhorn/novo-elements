@@ -1,3 +1,14 @@
+<a name="0.0.13"></a>
+## [0.0.13](https://github.com/bullhorn/novo-elements/compare/v0.0.12...v0.0.13) (2016-05-26)
+
+
+### Bug Fixes
+
+* **button:** Adding disabled attribute as input/host property, closes [#61](https://github.com/bullhorn/novo-elements/issues/61) ([b5e1d26](https://github.com/bullhorn/novo-elements/commit/b5e1d26)), closes [#61](https://github.com/bullhorn/novo-elements/issues/61)
+* **countries:** Fixing address input for counties and resetting the validation on the AddressInput when selected a new country ([e5abd7e](https://github.com/bullhorn/novo-elements/commit/e5abd7e))
+
+
+
 <a name="0.0.12"></a>
 ## [0.0.12](https://github.com/bullhorn/novo-elements/compare/v0.0.11...v0.0.12) (2016-05-25)
 
