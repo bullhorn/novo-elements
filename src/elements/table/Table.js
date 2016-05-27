@@ -5,6 +5,7 @@ import { isFunction, isString } from '@angular/core/src/facade/lang';
 import { NOVO_BUTTON_ELEMENTS } from '../button';
 import { NOVO_DROPDOWN_ELEMENTS } from '../dropdown';
 import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
+import { CheckBox } from '../form/extras/FormExtras';
 
 @Component({
     selector: 'novo-table, [novoTable]',
@@ -15,6 +16,7 @@ import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
     ],
     outputs: [
         'onRowClick',
+        'onRowSelect',
         'onTableChange'
     ],
     directives: [
@@ -23,13 +25,17 @@ import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
         CORE_DIRECTIVES,
         FORM_DIRECTIVES,
         NOVO_BUTTON_ELEMENTS,
-        NOVO_DROPDOWN_ELEMENTS
+        NOVO_DROPDOWN_ELEMENTS,
+        CheckBox
     ],
     template: `
         <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid" style="width: 100%;">
             <thead>
                 <tr role="row">
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
+                    <th class="row-actions" *ngIf="config.rowSelectionStyle==='checkbox'">
+                        <check-box [(value)]="master" [indeterminate]="indeterminate" (valueChange)="selectAll($event)" data-automation-id="select-all-checkbox"></check-box>
+                    </th>
                     <th *ngFor="let column of columns" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
                         <div class="th-group" [attr.data-automation-id]="column.name">
                             <div class="th-title" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
@@ -48,9 +54,7 @@ import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
                                             <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">Clear</button>
                                         </div>
                                     </item>
-                                    <item [ngClass]="{active: column.filter && column.filter.length && column.filter.includes(option)}"
-                                        *ngFor="let option of column.options" (click)="onFilterClick(column, option)"
-                                        [attr.data-automation-id]="option">
+                                    <item [ngClass]="{active: column.filter && column.filter.length && column.filter.includes(option)}" *ngFor="let option of column.options" (click)="onFilterClick(column, option)"[attr.data-automation-id]="option">
                                         {{option}} <i class="bhi-check" *ngIf="column.filter && column.filter.length && column.filter.includes(option)"></i>
                                     </item>
                                 </list>
@@ -75,7 +79,10 @@ import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
                             <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
                             <button theme="icon" icon="sort-desc" (click)="row._expanded=!row._expanded" *ngIf="row._expanded"></button>
                         </td>
-                        <td *ngFor="let column of columns" [attr.data-automation-id]="column.name">
+                        <td class="row-actions" *ngIf="config.rowSelectionStyle=='checkbox'">
+                            <check-box [(value)]="row._selected" (valueChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></check-box>
+                        </td>
+                        <td *ngFor="#column of columns" [attr.data-automation-id]="column.name">
                             <novo-table-cell [column]="column" [row]="row"></novo-table-cell>
                         </td>
                     </tr>
@@ -103,12 +110,23 @@ export class NovoTable {
     constructor() {
         this.originalRows = [];
         this.activeId = 0;
+        this.master = false;
+        this.indeterminate = false;
         this.onRowClick = new EventEmitter();
+        this.onRowSelect = new EventEmitter();
         this.onTableChange = new EventEmitter();
+        this.lastPage = 0;
     }
 
     ngOnChanges() {
         this.originalRows = this.originalRows.length === 0 ? this.rows : this.originalRows;
+    }
+
+    ngDoCheck() {
+        if (this.config.paging.current !== this.lastPage) {
+            this.rowSelectHandler();
+        }
+        this.lastPage = this.config.paging.current;
     }
 
     getPageStart() {
@@ -283,6 +301,36 @@ export class NovoTable {
         const newIndex = this.findColumnIndex(event.second.name);
         this.columns.splice(newIndex, 0, this.columns.splice(oldIndex, 1)[0]);
         this.onSortChange(this.currentSortColumn);
+    }
+
+    selectAll() {
+        this.indeterminate = false;
+        let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+        for (let row of pagedData) {
+            row._selected = this.master;
+        }
+        let selected = pagedData.filter(r => r._selected);
+        this.emitSelected(selected);
+    }
+
+    rowSelectHandler() {
+        let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+        let selected = pagedData.filter(r => r._selected);
+        if (selected.length === 0) {
+            this.master = false;
+            this.indeterminate = false;
+        } else if (selected.length === pagedData.length) {
+            this.master = true;
+            this.indeterminate = false;
+        } else {
+            this.master = false;
+            this.indeterminate = true;
+        }
+        this.emitSelected(selected);
+    }
+
+    emitSelected(selected) {
+        this.onRowSelect.emit(selected.length, selected);
     }
 
     rowClickHandler(row) {
