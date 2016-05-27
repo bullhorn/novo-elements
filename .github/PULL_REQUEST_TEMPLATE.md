@@ -7,7 +7,7 @@ _REPLACE ME WITH A SHORT DESCRIPTION_
 ##### **Reviewers**
 * @user
 
-##### **Checklist**
+##### **Checklist (completed via merger)**
 * [ ] Changes are limited to a single goal (no scope creep)
 * [ ] Code can be automatically merged (no conflicts)
 * [ ] Code follows the standards laid out in the [contributing guide](https://github.com/bullhorn/novo-elements/blob/master/CONTRIBUTING.md)
