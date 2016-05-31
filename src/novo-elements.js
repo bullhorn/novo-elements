@@ -58,6 +58,7 @@ export * from './pipes/plural/Plural';
 export * from './utils/outside-click/OutsideClick';
 export * from './utils/key-codes/KeyCodes';
 export * from './utils/deferred/Deferred';
+export * from './utils/countries/Countries';
 export * from './utils/Helpers';
 
 export const NOVO_ELEMENTS = [

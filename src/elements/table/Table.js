@@ -82,7 +82,7 @@ import { CheckBox } from '../form/extras/FormExtras';
                         <td class="row-actions" *ngIf="config.rowSelectionStyle=='checkbox'">
                             <check-box [(value)]="row._selected" (valueChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></check-box>
                         </td>
-                        <td *ngFor="#column of columns" [attr.data-automation-id]="column.name">
+                        <td *ngFor="let column of columns" [attr.data-automation-id]="column.name">
                             <novo-table-cell [column]="column" [row]="row"></novo-table-cell>
                         </td>
                     </tr>
