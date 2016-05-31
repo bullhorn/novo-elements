@@ -1,13 +1,37 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
-import { NOVO_PICKER_ELEMENTS } from './../../../src/novo-elements';
+import { NOVO_PICKER_ELEMENTS, PickerResults, NOVO_LOADING_ELEMENTS } from './../../../src/novo-elements';
 
-// TODO - add tooltips back in when implemented
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
 
 import BasicPickerDemoTpl from './templates/BasicPickerDemo.html';
 import AsyncPickerDemoTpl from './templates/AsyncPickerDemo.html';
 import FormattedPickerDemoTpl from './templates/FormattedPickerDemo.html';
+import CustomPickerResultsDemoTpl from './templates/CustomPickerResultsDemo.html';
+
+@Component({
+    selector: 'custom-picker-results',
+    directives: [NOVO_LOADING_ELEMENTS],
+    host: {
+        'class': 'active picker-results'
+    },
+    template: `
+        <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
+        <ul *ngIf="matches.length > 0">
+            <li
+                *ngFor="let match of matches"
+                (click)="selectMatch($event)"
+                [class.active]="match===activeMatch"
+                (mouseenter)="selectActive(match)">
+                **CUSTOM** <b [innerHtml]="highlight(match.label, term)"></b>
+            </li>
+        </ul>
+        <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
+        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
+    `
+})
+export class CustomPickerResults extends PickerResults {
+}
 
 const template = `
 <div class="container">
@@ -42,6 +66,13 @@ const template = `
     <div class="example picker-demo">${FormattedPickerDemoTpl}</div>
     <code-snippet [code]="FormattedPickerDemoTpl"></code-snippet>
 
+    <h5>Custom Picker Examples</h5>
+    <p>
+        By clicking on the <code>input</code> element, the options list will be displayed.  picker any of the options
+        by clicking on the item in the list.  The value pickered will be displayed and the options list will be removed.
+    </p>
+    <div class="example picker-demo">${CustomPickerResultsDemoTpl}</div>
+    <code-snippet [code]="CustomPickerResultsDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -55,9 +86,12 @@ export class PickerDemo {
         this.BasicPickerDemoTpl = BasicPickerDemoTpl;
         this.AsyncPickerDemoTpl = AsyncPickerDemoTpl;
         this.FormattedPickerDemoTpl = FormattedPickerDemoTpl;
+        this.CustomPickerResultsDemoTpl = CustomPickerResultsDemoTpl;
 
         this.placeholder = 'Select...';
+
         let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
         let abbrieviated = [{
             value: 'USA',
             label: 'United States'
@@ -71,6 +105,7 @@ export class PickerDemo {
             value: 'AU',
             label: 'Austrailia'
         }];
+
         let collaborators = [{
             id: 1,
             firstName: 'Brian',
@@ -88,12 +123,21 @@ export class PickerDemo {
             firstName: 'Kameron',
             lastName: 'Sween'
         }];
+
         this.static = { options: states };
+
         this.formatted = {
             //field: 'id',
             format: '$firstName $lastName',
             options: collaborators
         };
+
+        this.custom = {
+            resultsTemplate: CustomPickerResults,
+            format: '$firstName $lastName',
+            options: collaborators
+        };
+
         this.value = 'Alabama';
         this.async = {
             options: () => {
