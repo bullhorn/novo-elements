@@ -7,6 +7,7 @@ import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
 
 import TableDemoTpl from './templates/TableDemo.html';
 import DetailsTableDemoTpl from './templates/DetailsTableDemo.html';
+import SelectAllTableDemoTpl from './templates/SelectAllTableDemo.html';
 
 const template = `
 <div class="container">
@@ -24,6 +25,11 @@ const template = `
     <p>This has a row renderer to show a new details row that is expanded when you click on the action column.</p>
     <div class="example table-demo">${DetailsTableDemoTpl}</div>
     <code-snippet [code]="DetailsTableDemoTpl"></code-snippet>
+    
+    <h5>Select All Table</h5>
+    <p>This has checkboxes for selection.</p>
+    <div class="example table-demo">${SelectAllTableDemoTpl}</div>
+    <code-snippet [code]="SelectAllTableDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -64,6 +70,7 @@ export class TableDemo {
     constructor() {
         this.TableDemoTpl = TableDemoTpl;
         this.DetailsTableDemoTpl = DetailsTableDemoTpl;
+        this.SelectAllTableDemoTpl = SelectAllTableDemoTpl;
 
         let columns = [
             { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true },
@@ -154,6 +161,27 @@ export class TableDemo {
             onTableChange: (event) => {
                 // console.log('Table Change', event);
                 this.details.rows = event.rows;
+            }
+        };
+
+        this.selectAll = {
+            columns: columns.slice(),
+            rows: TableData.slice(),
+            config: {
+                paging: {
+                    current: 1,
+                    itemsPerPage: 10,
+                    onPageChange: event => {
+                        // console.log('P', event);
+                        this.details.config.paging.current = event.page;
+                        this.details.config.paging.itemsPerPage = event.itemsPerPage;
+                    }
+                },
+                sorting: true,
+                filtering: true,
+                ordering: true,
+                resizing: true,
+                rowSelectionStyle: 'checkbox'
             }
         };
     }
