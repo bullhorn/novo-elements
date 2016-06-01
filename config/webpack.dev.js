@@ -15,7 +15,7 @@ const METADATA = webpackMerge(commonConfig.metadata, {
     host: 'localhost',
     port: 3000,
     ENV: ENV,
-    HMR: true
+    HMR: false
 });
 
 /**

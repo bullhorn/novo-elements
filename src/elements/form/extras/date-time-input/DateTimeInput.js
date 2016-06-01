@@ -5,6 +5,7 @@ import moment from 'moment/moment';
 import { NOVO_DATE_PICKER_ELEMENTS } from './../../../datepicker';
 import { NOVO_TIME_PICKER_ELEMENTS } from './../../../timepicker';
 import { OutsideClick } from './../../../../utils/outside-click/OutsideClick';
+import { NovoLabelService } from './../../../../novo-elements';
 
 @Component({
     selector: 'date-time-input',
@@ -23,13 +24,14 @@ import { OutsideClick } from './../../../../utils/outside-click/OutsideClick';
             <novo-date-picker [hidden]="!active" (onSelect)="onChangeDatePart($event)" [inline]="inline"></novo-date-picker>
             <novo-time-picker [hidden]="!active" (onSelect)="onChangeTimePart($event)" [inline]="inline"></novo-time-picker>
         </div>
-        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">Required</span>
+        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
     `
 })
 export class DateTimeInput extends OutsideClick {
-    constructor(element:ElementRef) {
+    constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
         this.validators = [];
+        this.labels = labels;
         this.date = null;
     }
 

@@ -113,6 +113,23 @@ Builds the `dist` folder for the demo
 **pree2e** / **e2e** / **e2e:live**
 Runs the protractor automation normally or with the element explorer
 
+## Customizing Labels
+
+With Novo Elements there are a few hard coded labels throughout the library. To override these labels with your own, you will simply extend the `NovoLabelService` and override any labels that you wish.
+
+To make Angular2 use this new class over the default one you can provide in the bootstrapping of your application as a provider.
+
+```
+{ provide: NovoLabelService, useClass: MyLabelService }
+```
+
+To use the default labels, you will need to provide the `NOVO_ELEMENTS_LABELS_PROVIDERS` via
+
+```
+import {NOVO_ELEMENTS_LABELS_PROVIDERS} from 'novo-elements';
+bootstrap(MyApp [..NOVO_ELEMENTS_LABELS_PROVIDERS]);
+```
+
 ## Contribute
 
 There are many ways to **[contribute](https://github.com/bullhorn/novo-elements/blob/master/CONTRIBUTING.md)** to our OpenSource projects.

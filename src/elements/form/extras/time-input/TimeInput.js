@@ -4,6 +4,7 @@ import moment from 'moment/moment';
 
 import { NOVO_TIME_PICKER_ELEMENTS } from './../../../timepicker';
 import { OutsideClick } from './../../../../utils/outside-click/OutsideClick';
+import { NovoLabelService } from './../../../../novo-elements';
 
 @Component({
     selector: 'time-input',
@@ -19,12 +20,13 @@ import { OutsideClick } from './../../../../utils/outside-click/OutsideClick';
         <input [name]="name" type="text" [attr.id]="name" [placeholder]="placeholder" (click)="toggleActive($event)" [ngModel]="value" [ngFormControl]="control" readonly/>
         <i class="bhi-clock"></i>
         <novo-time-picker [hidden]="!active" (onSelect)="onSelect($event)" [inline]="inline"></novo-time-picker>
-        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">Required</span>
+        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
     `
 })
 export class TimeInput extends OutsideClick {
-    constructor(element:ElementRef) {
+    constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
+        this.labels = labels;
         this.validators = [];
     }
 

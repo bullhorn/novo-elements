@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { interpolate } from './../../../../utils/Helpers';
 import { NOVO_LOADING_ELEMENTS } from './../../../loading/Loading';
 import { PickerResults } from './../../../picker/extras/PickerExtras';
+import { NovoLabelService } from './../../../../novo-elements';
 
 @Component({
     selector: 'quick-note-results',
@@ -22,16 +23,16 @@ import { PickerResults } from './../../../picker/extras/PickerExtras';
                 <span [innerHtml]="highlight(match.label, term)"></span>
             </li>
         </ul>
-        <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
-        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
+        <p class="picker-error" *ngIf="hasError">{{labels.quickNoteError}}</p>
+        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{labels.quickNoteEmpty}}</p>
     `
 })
 export class QuickNoteResults extends PickerResults {
     // Mode that the quick note is in for tagging
     taggingMode:string = '';
 
-    constructor(element:ElementRef) {
-        super(element);
+    constructor(element:ElementRef, labels:NovoLabelService) {
+        super(element, labels);
     }
 
     set term(value) {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { COMMON_DIRECTIVES } from '@angular/common';
 
 import { BaseInput } from './../FormExtras';
+import { NovoLabelService } from './../../../../novo-elements';
 
 @Component({
     selector: 'radio-input',
@@ -17,12 +18,13 @@ import { BaseInput } from './../FormExtras';
                 <span>{{option.label||option}}</span>
             </label>
         </div>
-        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">Required</span>
+        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
     `
 })
 export class RadioInput extends BaseInput {
-    constructor() {
+    constructor(labels:NovoLabelService) {
         super();
+        this.labels = labels;
         this.value = null;
         this._options = [];
     }

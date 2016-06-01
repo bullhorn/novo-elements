@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { COMMON_DIRECTIVES } from '@angular/common';
 
 import { BaseInput } from './../FormExtras';
+import { NovoLabelService } from './../../../../novo-elements';
 
 @Component({
     selector: 'check-list',
@@ -23,12 +24,13 @@ import { BaseInput } from './../FormExtras';
                 </label>
             </div>
         </div>
-        <span class="error-message" *ngIf="required && empty">Required</span>
+        <span class="error-message" *ngIf="required && empty">{{labels.required}}</span>
     `
 })
 export class CheckList extends BaseInput {
-    constructor() {
+    constructor(labels:NovoLabelService) {
         super();
+        this.labels = labels;
     }
 
     ngOnInit() {
