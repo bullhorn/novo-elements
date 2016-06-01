@@ -6,6 +6,7 @@ import { NOVO_BUTTON_ELEMENTS } from '../button';
 import { NOVO_DROPDOWN_ELEMENTS } from '../dropdown';
 import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
 import { CheckBox } from '../form/extras/FormExtras';
+import { NovoLabelService } from './../../novo-elements';
 
 @Component({
     selector: 'novo-table, [novoTable]',
@@ -50,8 +51,8 @@ import { CheckBox } from '../form/extras/FormExtras';
                                 <list *ngIf="column.options?.length">
                                     <item class="filter-search">
                                         <div class="header">
-                                            <span>Filters</span>
-                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">Clear</button>
+                                            <span>{{labels.filters}}</span>
+                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{labels.clear}}</button>
                                         </div>
                                     </item>
                                     <item [ngClass]="{active: column.filter && column.filter.length && column.filter.includes(option)}" *ngFor="let option of column.options" (click)="onFilterClick(column, option)"[attr.data-automation-id]="option">
@@ -61,8 +62,8 @@ import { CheckBox } from '../form/extras/FormExtras';
                                 <list *ngIf="!column.options?.length">
                                     <item class="filter-search">
                                         <div class="header">
-                                            <span>Filters</span>
-                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">Clear</button>
+                                            <span>{{labels.filters}}</span>
+                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{labels.clear}}</button>
                                         </div>
                                         <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter"/>
                                     </item>
@@ -98,7 +99,7 @@ import { CheckBox } from '../form/extras/FormExtras';
                 <tr>
                     <td colspan="100%">
                         <div class="no-matching-records">
-                            <h4><i class="bhi-search-question"></i> No matching records</h4>
+                            <h4><i class="bhi-search-question"></i> {{labels.emptyTableMessage}}</h4>
                         </div>
                     </td>
                 </tr>
@@ -107,7 +108,8 @@ import { CheckBox } from '../form/extras/FormExtras';
     `
 })
 export class NovoTable {
-    constructor() {
+    constructor(labels:NovoLabelService) {
+        this.labels = labels;
         this.originalRows = [];
         this.activeId = 0;
         this.master = false;

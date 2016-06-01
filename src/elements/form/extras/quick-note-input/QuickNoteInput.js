@@ -3,6 +3,7 @@ import { COMMON_DIRECTIVES, NgModel } from '@angular/common';
 
 import { BaseInput } from './../FormExtras';
 import { NOVO_QUICK_NOTE_ELEMENTS } from './../../../quicknote';
+import { NovoLabelService } from './../../../../novo-elements';
 
 @Component({
     selector: 'quick-note-input',
@@ -17,12 +18,13 @@ import { NOVO_QUICK_NOTE_ELEMENTS } from './../../../quicknote';
     template: `
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
         <novo-quick-note [config]="options" [(ngModel)]="value" (ngModelChange)="onChanged($event)" [placeholder]="placeholder" [references]="references"></novo-quick-note>
-        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">Required</span>
+        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
     `
 })
 export class QuickNoteInput extends BaseInput {
-    constructor() {
+    constructor(labels:NovoLabelService) {
         super();
+        this.labels = labels;
     }
 
     ngOnInit() {

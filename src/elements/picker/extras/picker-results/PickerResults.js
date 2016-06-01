@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { interpolate } from './../../../../utils/Helpers';
 import { NOVO_LOADING_ELEMENTS } from './../../../loading/Loading';
+import { NovoLabelService } from './../../../../novo-elements';
 
 /**
  * @name: PickerResults
@@ -27,8 +28,8 @@ import { NOVO_LOADING_ELEMENTS } from './../../../loading/Loading';
                 <span [innerHtml]="highlight(match.label, term)"></span>
             </li>
         </ul>
-        <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
-        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
+        <p class="picker-error" *ngIf="hasError">{{labels.pickerError}}</p>
+        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{labels.pickerEmpty}}</p>
     `
 })
 export class PickerResults {
@@ -38,8 +39,9 @@ export class PickerResults {
     isLoading:boolean = true;
     isStatic:boolean = true;
 
-    constructor(element:ElementRef) {
+    constructor(element:ElementRef, labels:NovoLabelService) {
         this.element = element;
+        this.labels = labels;
     }
 
     get term() {

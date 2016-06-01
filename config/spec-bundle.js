@@ -16,9 +16,12 @@ import {
     afterEach, beforeEach, beforeEachProviders,
     describe, it, expect,
     inject, injectAsync,
-    async
+    async, getTestInjector
 } from '@angular/core/testing';
 
+import { NOVO_ELEMENTS_LABELS_PROVIDERS } from './../src/novo-elements';
+
+getTestInjector().addProviders(NOVO_ELEMENTS_LABELS_PROVIDERS);
 setBaseTestProviders(TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS, TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
 
 Object.assign(global, {

@@ -3,6 +3,7 @@ import { COMMON_DIRECTIVES, NgModel } from '@angular/common';
 
 import { BaseInput } from './../FormExtras';
 import { NOVO_PICKER_ELEMENTS } from './../../../picker';
+import { NovoLabelService } from './../../../../novo-elements';
 
 
 @Component({
@@ -18,12 +19,13 @@ import { NOVO_PICKER_ELEMENTS } from './../../../picker';
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
         <novo-picker [config]="options" [(ngModel)]="value" [placeholder]="placeholder" (select)="onSelect($event)"></novo-picker>
         <i class="bhi-search"></i>
-        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">Required</span>
+        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
     `
 })
 export class PickerInput extends BaseInput {
-    constructor() {
+    constructor(labels:NovoLabelService) {
         super();
+        this.labels = labels;
     }
 
     ngOnInit() {

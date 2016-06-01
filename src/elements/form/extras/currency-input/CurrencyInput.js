@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { COMMON_DIRECTIVES } from '@angular/common';
 
 import { FormValidators, BaseInput } from './../FormExtras';
+import { NovoLabelService } from './../../../../novo-elements';
 
 @Component({
     selector: 'currency-input',
@@ -13,17 +14,18 @@ import { FormValidators, BaseInput } from './../FormExtras';
             <input [class.valid-number]="required && control.touched && !control.touched && control?.errors?.maxInteger" [name]="name" type="number" step="0.01" [attr.id]="name" [placeholder]="placeholder" autocomplete="false" [(ngModel)]="value" [ngFormControl]="control"/>
             <label class="left-label">{{getCurrencyLabel()}}</label>
         </div>
-        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">Required</span>
-        <span class="error-message" *ngIf="control.touched && control?.errors?.maxInteger">Number is too large</span>
+        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
+        <span class="error-message" *ngIf="control.touched && control?.errors?.maxInteger">{{labels.numberTooLarge}}</span>
     `,
     host: {
         '(change)': 'updateValue(value)'
     }
 })
 export class CurrencyInput extends BaseInput {
-    constructor() {
+    constructor(labels:NovoLabelService) {
         super([FormValidators.maxInteger]);
         this.value = '';
+        this.labels = labels;
     }
 
     updateValue(value) {

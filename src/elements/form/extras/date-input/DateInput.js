@@ -4,6 +4,7 @@ import moment from 'moment/moment';
 
 import { NOVO_DATE_PICKER_ELEMENTS } from './../../../datepicker';
 import { OutsideClick } from './../../../../utils/outside-click/OutsideClick';
+import { NovoLabelService } from './../../../../novo-elements';
 
 @Component({
     selector: 'date-input',
@@ -15,13 +16,14 @@ import { OutsideClick } from './../../../../utils/outside-click/OutsideClick';
         <input [name]="name" type="text" [attr.id]="name" [placeholder]="placeholder" (click)="toggleActive($event)" [ngModel]="value" [ngFormControl]="control" readonly/>
         <i class="bhi-calendar"></i>
         <novo-date-picker [inline]="inline" [hidden]="!active" (onSelect)="onSelect($event)"></novo-date-picker>
-        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">Required</span>
+        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
     `
 })
 export class DateInput extends OutsideClick {
-    constructor(element:ElementRef) {
+    constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
         this.validators = [];
+        this.labels = labels;
     }
 
     ngOnInit() {

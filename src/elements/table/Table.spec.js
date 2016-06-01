@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { NovoTable } from './Table';
 import { testComponent, grabComponent } from './../../testing/TestHelpers';
+import { NOVO_ELEMENTS_LABELS_PROVIDERS } from './../../novo-elements';
 
 @Component({
     selector: 'test-cmp',
@@ -21,6 +22,8 @@ class TestCmp {
 }
 
 describe('Element: Table', () => {
+    beforeEachProviders(() => [NOVO_ELEMENTS_LABELS_PROVIDERS]);
+
     it('should initialize correctly', testComponent(TestCmp, (fixture) => {
         const { instance, element, testComponentInstance, testComponentElement } = grabComponent(fixture, NovoTable);
         expect(instance).toBeTruthy();
