@@ -14,7 +14,8 @@ export class ModalService {
 
     open(component, scope) {
         if (!this._parentViewContainer) {
-            // TODO alert
+            console.error('No parent view container specified for the ModalService. Set it inside your main application. \nthis.modalService.parentViewContainer = view (ViewContainerRef)'); // eslint-disable-line
+            return null;
         }
 
         const modal = new ModalRef();

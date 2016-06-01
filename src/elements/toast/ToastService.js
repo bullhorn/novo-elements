@@ -45,7 +45,8 @@ export class ToastService {
     alert(component, options) {
         return new Promise((resolve) => {
             if (!this._parentViewContainer) {
-                // TODO alert
+                console.error('No parent view container specified for the ToastService. Set it inside your main application. \nthis.toastService.parentViewContainer = view (ViewContainerRef)'); // eslint-disable-line
+                return;
             }
             this.componentResolver.resolveComponent(component)
                 .then(componentFactory => {
