@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NgModel } from '@angular/common';
+
 import { Picker } from './Picker';
 import { testComponent, grabComponent } from './../../testing/TestHelpers';
+import { NOVO_ELEMENTS_LABELS_PROVIDERS } from './../../novo-elements';
 
 @Component({
     selector: 'test-cmp',
@@ -18,6 +20,8 @@ class TestCmp {
 }
 
 describe('Element: Picker', () => {
+    beforeEachProviders(() => [NOVO_ELEMENTS_LABELS_PROVIDERS]);
+
     it('should initialize correctly', testComponent(TestCmp, (fixture) => {
         const { element, testComponentInstance, testComponentElement } = grabComponent(fixture, Picker);
         //expect(instance).toBeTruthy();
@@ -35,15 +39,20 @@ describe('Element: Picker', () => {
 
     xit('should call the dynamic component loader which shows the results.', testComponent(TestCmp, (fixture) => {
         const { instance } = grabComponent(fixture, Picker);
-        spyOn(instance.loader.loadNextToLocation).and.callFake(() => { });
+        spyOn(instance.loader.loadNextToLocation).and.callFake(() => {
+        });
         instance.showResults();
         expect(instance.loader.loadNextToLocation).toHaveBeenCalled();
     }));
 
     xit('should dispose of the results HTML element.', testComponent(TestCmp, (fixture) => {
         const { instance } = grabComponent(fixture, Picker);
-        instance.popup = { then: () => { } };
-        spyOn(instance.popup, 'then').and.callFake(() => { });
+        instance.popup = {
+            then: () => {
+            }
+        };
+        spyOn(instance.popup, 'then').and.callFake(() => {
+        });
         instance.hideResults();
         expect(instance.popup.then).toHaveBeenCalled();
     }));
