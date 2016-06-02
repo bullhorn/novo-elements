@@ -13,6 +13,7 @@ novo-card {
         position: relative;
         border-radius: 3px;
         max-height: 550px;
+        overflow: auto;
 
         header {
             display: flex;
