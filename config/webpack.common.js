@@ -2,15 +2,13 @@ const webpack = require('webpack');
 const helpers = require('./helpers');
 const pkg = require('../package.json');
 
-/**
- * Webpack Plugins
- */
+// Webpack Plugins
 var CopyWebpackPlugin = (CopyWebpackPlugin = require('copy-webpack-plugin'), CopyWebpackPlugin.default || CopyWebpackPlugin);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const extractCSS = new ExtractTextPlugin('[name].css');
 
-/**
- * Webpack Constants
- */
+// Webpack Constants
 const METADATA = {
     name: pkg.name,
     version: pkg.version,
@@ -18,9 +16,7 @@ const METADATA = {
     baseUrl: '/'
 };
 
-/**
- * AutoPrefixer Options
- */
+// AutoPrefixer Options
 const autoprefixerOptions = {
     browsers: [
         'last 2 versions',
@@ -32,11 +28,9 @@ const autoprefixerOptions = {
     cascade: false
 };
 
-/**
- * Webpack configuration
- *
- * See: http://webpack.github.io/docs/configuration.html#cli
- */
+// Webpack configuration
+//
+// See: http://webpack.github.io/docs/configuration.html#cli
 module.exports = {
     // Static metadata for index.html
     //
@@ -182,12 +176,11 @@ module.exports = {
             // See: https://github.com/jtangelder/sass-loader
             {
                 test: /\.scss$/,
-                loaders: [
-                    'style',
+                loader: extractCSS.extract([
                     'css?sourceMap',
                     `autoprefixer?${JSON.stringify(autoprefixerOptions)}`,
                     'sass?sourceMap'
-                ]
+                ])
             }
         ]
     },
@@ -205,6 +198,11 @@ module.exports = {
     //
     // See: http://webpack.github.io/docs/configuration.html#plugins
     plugins: [
+        // Plugin: ExtractTextPlugin
+        // Description: extracts text (scss) into css files
+        // See: https://github.com/webpack/extract-text-webpack-plugin
+        extractCSS,
+
         // Plugin: OccurenceOrderPlugin
         // Description: Varies the distribution of the ids to get the smallest id length
         // for often used ids.
