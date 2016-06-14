@@ -19,7 +19,7 @@ import { NovoLabelService } from './../../../../novo-elements';
     template: `
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
         <input [name]="name" type="text" [attr.id]="name" [placeholder]="placeholder" (click)="toggleActive($event)" [ngModel]="value" [ngFormControl]="control" readonly/>
-        <i class="bhi-calendar"></i>
+        <i (click)="toggleActive($event)" class="bhi-calendar"></i>
         <div class="datetime-container">
             <novo-date-picker [hidden]="!active" (onSelect)="onChangeDatePart($event)" [inline]="inline"></novo-date-picker>
             <novo-time-picker [hidden]="!active" (onSelect)="onChangeTimePart($event)" [inline]="inline"></novo-time-picker>
