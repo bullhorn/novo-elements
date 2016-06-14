@@ -68,17 +68,14 @@ export class QuickNote extends OutsideClick {
         if (!this.config) {
             throw new Error('No config set for QuickNote!');
         }
-
         // Make sure that we have triggers
         if (!this.config.triggers) {
             throw new Error('QuickNote config must supply triggers!');
         }
-
         // Make sure that we have triggers
         if (!this.config.options) {
             throw new Error('QuickNote config must supply options!');
         }
-
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || QuickNoteResults;
         // Write the value to the model
@@ -298,8 +295,11 @@ export class QuickNote extends OutsideClick {
 
     // From ControlValueAccessor interface
     writeValue(value) {
+        // Update formatted note for the initial value
+        if (!this.basicNote) {
+            this.updateFormattedNote(value);
+        }
         this.basicNote = value;
-        this.updateFormattedNote(value);
         if (!value) {
             this._onChangeCallback();
         }

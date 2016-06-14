@@ -6,6 +6,10 @@ novo-quick-note, .quick-note-wrapper {
     max-height: $quick-note-height;
     position: relative;
 
+    a {
+        font-weight: normal;
+    }
+
     textarea {
         resize: none;
         -webkit-text-fill-color: transparent;
