@@ -37,7 +37,8 @@ import {
         'value',
         'label',
         'currencyFormat',
-        'references'
+        'references',
+        'footerConfig'
     ],
     outputs: [
         'broadcast',
@@ -119,6 +120,9 @@ export class FormInput {
                     }
                     if (this.inline) {
                         this.componentRef.instance.inline = this.inline;
+                    }
+                    if (this.footerConfig) {
+                        this.componentRef.instance.footerConfig = this.footerConfig;
                     }
                     if (this.broadcast) {
                         this.componentRef.instance.broadcast = this.broadcast;
