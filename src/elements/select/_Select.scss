@@ -123,6 +123,12 @@ novo-select {
         &:focus {
             outline: none;
         }
+
+        &.footer {
+            max-height: 240px;
+            min-width: 200px;
+            padding: 8px 0 0 0;
+        }
     }
 
     &[disabled] {
@@ -130,6 +136,105 @@ novo-select {
 
         button {
             color: $grey;
+        }
+    }
+
+    .select-footer {
+        button.footer  {
+            text-transform: uppercase;
+            color: $positive;
+            position: relative;
+            text-align: left;
+            cursor: pointer;
+            height: 48px;
+            margin: 0;
+            padding: 10px 16px 0px 10px;
+            box-sizing: border-box;
+            border: none;
+            display: block;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1rem;
+
+            &:focus,
+            &:hover {
+                background: lighten($light, 10%);
+                color: darken($light, 55%);
+            }
+
+            i {
+                color: $positive;
+                padding-right: 10px;
+            }
+
+            span {
+                text-align: left;
+            }
+        }
+
+        div.active {
+            background: #F4F4F4;
+            width: 100%;
+            float: right;
+            padding: 5px;
+
+            footer {
+                float: right;
+            }
+
+            button {
+                display: inline-block;
+                border: none;
+                float: left;
+                width: auto;
+                font-weight: 500;
+                font-size: .9rem;
+                color: #ACACAC;
+
+                &:hover {
+                    color: darken(#ACACAC, 15%);
+                }
+            }
+
+            button.primary {
+                color: $positive;
+                &:hover {
+                    color: darken($positive, 15%);
+                }
+            }
+
+            input {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: transparent;
+                border: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                color: rgba(0, 0, 0, 0.73);
+                height: 2.05rem;
+                position: relative;
+                text-align: left;
+                text-shadow: none;
+                width: 100%;
+                z-index: 1;
+                cursor: pointer;
+                text-transform: none;
+                padding-top: 10px;
+                font-size: 1rem;
+                &.empty {
+                    color: #A9A9A9;
+                }
+                &:focus {
+                    outline: none;
+                }
+                &:hover {
+                    border-bottom: 1px solid $positive;
+                }
+
+                &.invalid {
+                    border-bottom: 1px solid #DA4453;
+                }
+            }
         }
     }
 }

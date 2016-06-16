@@ -6,16 +6,26 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 @Component({
     selector: 'novo-select',
     directives: [COMMON_DIRECTIVES],
-    inputs: ['options', 'placeholder', 'readonly'],
+    inputs: ['options', 'placeholder', 'readonly', 'footerConfig'],
     outputs: ['onSelect'],
     template: `
         <button (click)="toggleActive($event)" tabIndex="-1" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></button>
-        <ul class="novo-select-list" tabIndex="-1">
+        <ul class="novo-select-list" tabIndex="-1" [ngClass]="{footer: footerConfig}">
             <ng-content></ng-content>
             <li *ngFor="let option of options; let i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
               <span>{{option.label}}</span>
               <i *ngIf="option.active" class="bhi-check"></i>
             </li>
+            <div *ngIf="footerConfig" class="select-footer">
+                <button  *ngIf="!footer.open" (click)="toggleFooter($event); false" tabIndex="-1" type="button" class="footer"><i class="bhi-add-thin"></i>{{footerConfig.label}}</button>
+                <div *ngIf="footer.open" [ngClass]="{active: footer.open}">
+                    <input autofocus type="text" [placeholder]="footerConfig.placeholder" [attr.id]="name" autocomplete="false" [(ngModel)]="footer.value" [ngClass]="{invalid: !footer.valid}"/>
+                    <footer>
+                        <button (click)="toggleFooter($event, false)">Cancel</button>
+                        <button (click)="saveFooter()" class="primary">Save</button>
+                    </footer>
+                </div>
+            </div>
         </ul>
     `,
     host: {
@@ -46,6 +56,12 @@ export class Select extends OutsideClick {
 
         this.model = model || new NgModel();
         this.model.valueAccessor = this;
+
+        this.footer = {
+            open: false,
+            valid: true,
+            value: ''
+        };
     }
 
     ngOnInit() {
@@ -60,8 +76,12 @@ export class Select extends OutsideClick {
             });
         }
 
-        if (!this.model.value) {
+        if (!this.model.value && !this.createdItem) {
             this.clear();
+        } else if (this.createdItem) {
+            let item = this.options.find(i => i.label === this.createdItem);
+            let index = this.options.indexOf(item);
+            this.select(item, index);
         } else {
             // TODO - jgodi - maybe this isn't the best?
             this.writeValue(this.model.value);
@@ -89,6 +109,11 @@ export class Select extends OutsideClick {
             value: null,
             active: false
         };
+        this.footer = {
+            open: false,
+            valid: true,
+            value: ''
+        };
         this.selectedIndex = -1;
         this.empty = true;
     }
@@ -96,14 +121,20 @@ export class Select extends OutsideClick {
     // TODO: Add key listener to jump to options starting with that letter.
     onKeyDown(event) {
         if (this.active) {
-            // Prevent Scrolling
-            event.preventDefault();
+            if (!this.footer.open) {
+                // Prevent Scrolling
+                event.preventDefault();
+            }
             // Close popup on escape key
             if (event.keyCode === KeyCodes.ESC) {
                 this.toggleActive();
                 return;
             }
             if (event.keyCode === KeyCodes.ENTER) {
+                if (this.footer.open && this.footer.value) {
+                    this.saveFooter();
+                    return;
+                }
                 this.select(this.options[this.selectedIndex], this.selectedIndex);
                 this.toggleActive();
                 return;
@@ -117,6 +148,8 @@ export class Select extends OutsideClick {
                 this.selectedIndex++;
                 this.select(this.options[this.selectedIndex], this.selectedIndex);
                 this.scrollToSelected();
+            } else if (event.keyCode === KeyCodes.DOWN && this.selectedIndex === this.options.length - 1) {
+                this.toggleFooter(null, true);
             } else if (event.keyCode >= 65 && event.keyCode <= 90) {
                 let char = String.fromCharCode(event.keyCode);
                 let element = this.element.nativeElement;
@@ -157,6 +190,46 @@ export class Select extends OutsideClick {
 
     registerOnTouched(fn) {
         this.onTouched = fn;
+    }
+
+    toggleFooter(event, forceValue) {
+        if (event) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+        // Reverse the active property (if forceValue, use that)
+        this.footer = {
+            open: forceValue !== undefined ? forceValue : !this.footer.open,
+            value: '',
+            valid: true
+        };
+    }
+
+    toggleActive(event, forceValue) {
+        // Reverse the active property (if forceValue, use that)
+        this.active = forceValue || !this.active;
+        // Bind window click events to hide on outside click
+        if (this.active) {
+            window.addEventListener('click', this.onOutsideClick);
+        } else {
+            window.removeEventListener('click', this.onOutsideClick);
+        }
+        // Fire the active change event
+        this.onActiveChange.emit(this.active);
+
+        //If closing select, also close footer
+        this.toggleFooter(event, false);
+    }
+
+    saveFooter() {
+        //save value, select value, close list
+        if (this.footer.value) {
+            this.footerConfig.onSave(this.footer.value);
+            this.createdItem = this.footer.value;
+            this.toggleActive();
+        } else {
+            this.footer.valid = false;
+        }
     }
 }
 

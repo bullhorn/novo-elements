@@ -16,7 +16,7 @@ const template = `
     <p>The select element (<code>novo-select</code>) represents a control that presents a menu of options. The options
     within are set by the <code>items</code> attribute. Options can be pre-selected for the user using the <code>value</code>
     attribute.</p>
-
+    
     <br/>
 
     <h5>Basic Examples</h5>
@@ -52,5 +52,14 @@ export class SelectDemo {
         this.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
         this.value = 'Bravo';
         this.state = null;
+        this.footerConfig = {
+            label: 'Add New Item',
+            placeholder: 'Enter item here',
+            onSave: this.create.bind(this)
+        };
+    }
+
+    create(opt) {
+        this.options = [...this.options, opt];
     }
 }
