@@ -63,7 +63,11 @@ export class DemoApp {
             { name: 'Typography', path: '/typography' },
             { name: 'Iconography', path: '/icons' },
             { name: 'Color', path: '/color' }
-        ];
+        ].sort((a, b) => {
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+        });
 
         this.componentRoutes = [
             { name: 'QuickNote', path: '/quick-note' },
@@ -86,12 +90,20 @@ export class DemoApp {
             { name: 'Table', path: '/table' },
             { name: 'Calendar', path: '/calendar' },
             { name: 'Dragula', path: '/dragula' }
-        ];
+        ].sort((a, b) => {
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+        });
 
         this.utilRoutes = [
             { name: 'Pipes', path: '/pipes' },
             { name: 'Utils', path: '/utils' }
-        ];
+        ].sort((a, b) => {
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+        });
 
         router.subscribe(() => {
             document.body.scrollTop = 0;

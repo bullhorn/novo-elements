@@ -28,7 +28,6 @@ main.main-content {
         border-top-right-radius: 3px;
         border-top-left-radius: 3px;
         border-bottom: none;
-        max-width: 53em;
         box-sizing: border-box;
 
         > * {
@@ -40,7 +39,6 @@ main.main-content {
     // Contains code snippet
     pre {
         margin: 0 0 35px;
-        max-width: 53em;
         box-sizing: border-box;
 
         code {

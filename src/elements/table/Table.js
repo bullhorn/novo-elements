@@ -75,7 +75,7 @@ import { NovoLabelService } from './../../novo-elements';
             </thead>
             <tbody>
                 <template ngFor let-row="$implicit" [ngForOf]="rows | slice:getPageStart():getPageEnd()">
-                    <tr class="table-row" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
+                    <tr class="table-row" [ngClass]="row.customClass || ''" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
                         <td class="row-actions" *ngIf="config.hasDetails">
                             <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
                             <button theme="icon" icon="sort-desc" (click)="row._expanded=!row._expanded" *ngIf="row._expanded"></button>

@@ -12,18 +12,18 @@ import { Directive } from '@angular/core';
         'position:tooltipPosition'
     ],
     host: {
-        '[class.hint--top]': 'isPosition("top")',
-        '[class.hint--left]': 'isPosition("left")',
-        '[class.hint--right]': 'isPosition("right")',
-        '[class.hint--bottom]': 'isPosition("bottom")',
-        '[class.hint--error]': 'isType("error")',
-        '[class.hint--info]': 'isType("info")',
-        '[class.hint--warning]': 'isType("warning")',
-        '[class.hint--success]': 'isType("success")',
-        '[class.hint--always]': 'always',
-        '[class.hint--rounded]': 'rounded',
-        '[class.hint--no-animate]': 'noAnimate',
-        '[class.hint--bounce]': 'bounce',
+        '[class.hint--top]': 'tooltip && isPosition("top")',
+        '[class.hint--left]': 'tooltip && isPosition("left")',
+        '[class.hint--right]': 'tooltip && isPosition("right")',
+        '[class.hint--bottom]': 'tooltip && isPosition("bottom")',
+        '[class.hint--error]': 'tooltip && isType("error")',
+        '[class.hint--info]': 'tooltip && isType("info")',
+        '[class.hint--warning]': 'tooltip && isType("warning")',
+        '[class.hint--success]': 'tooltip && isType("success")',
+        '[class.hint--always]': 'tooltip && always',
+        '[class.hint--rounded]': 'tooltip && rounded',
+        '[class.hint--no-animate]': 'tooltip && noAnimate',
+        '[class.hint--bounce]': 'tooltip && bounce',
         '[attr.data-hint]': 'tooltip'
     }
 })
