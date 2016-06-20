@@ -1,3 +1,13 @@
+<a name="0.0.22"></a>
+## [0.0.22](https://github.com/bullhorn/novo-elements/compare/v0.0.21...v0.0.22) (2016-06-20)
+
+
+### Features
+
+* **table,tooltip:** Adding in a custom class for the rows of the Table and not showing the tooltip if there is no content ([3809c72](https://github.com/bullhorn/novo-elements/commit/3809c72))
+
+
+
 <a name="0.0.21"></a>
 ## [0.0.21](https://github.com/bullhorn/novo-elements/compare/v0.0.20...v0.0.21) (2016-06-16)
 
