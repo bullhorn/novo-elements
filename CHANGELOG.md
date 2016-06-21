@@ -1,3 +1,13 @@
+<a name="0.0.23"></a>
+## [0.0.23](https://github.com/bullhorn/novo-elements/compare/v0.0.22...v0.0.23) (2016-06-21)
+
+
+### Features
+
+* **checkbox:** Adding a disabled property to the checkbox input ([3c6669a](https://github.com/bullhorn/novo-elements/commit/3c6669a))
+
+
+
 <a name="0.0.22"></a>
 ## [0.0.22](https://github.com/bullhorn/novo-elements/compare/v0.0.21...v0.0.22) (2016-06-20)
 
