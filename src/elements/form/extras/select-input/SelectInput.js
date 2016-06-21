@@ -7,11 +7,11 @@ import { NovoLabelService } from './../../../../novo-elements';
 
 @Component({
     selector: 'select-input',
-    inputs: ['name', 'options', 'required', 'footerConfig'],
+    inputs: ['name', 'options', 'required', 'headerConfig'],
     directives: [COMMON_DIRECTIVES, NOVO_SELECT_ELEMENTS],
     template: `
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
-        <novo-select [(options)]="options" [footerConfig]="footerConfig" [placeholder]="placeholder" [(ngModel)]="value" (onSelect)="select($event)" [class.error]="control.touched && !control.valid"></novo-select>
+        <novo-select [(options)]="options" [headerConfig]="headerConfig" [placeholder]="placeholder" [(ngModel)]="value" (onSelect)="select($event)" [class.error]="control.touched && !control.valid"></novo-select>
         <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
     `
 })

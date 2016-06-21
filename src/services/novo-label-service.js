@@ -11,6 +11,8 @@ export class NovoLabelService {
     quickNoteEmpty = 'No results to display...';
     required = 'Required';
     numberTooLarge = 'Number is too large';
+    save = 'Save';
+    cancel = 'Cancel';
 }
 
 export const NOVO_ELEMENTS_LABELS_PROVIDERS = [

@@ -2,30 +2,31 @@ import { Component, ElementRef, EventEmitter, Optional } from '@angular/core'; /
 import { COMMON_DIRECTIVES, NgControl, NgModel } from '@angular/common';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
+import { NovoLabelService } from './../../novo-elements';
 
 @Component({
     selector: 'novo-select',
     directives: [COMMON_DIRECTIVES],
-    inputs: ['options', 'placeholder', 'readonly', 'footerConfig'],
+    inputs: ['options', 'placeholder', 'readonly', 'headerConfig'],
     outputs: ['onSelect'],
     template: `
         <button (click)="toggleActive($event)" tabIndex="-1" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></button>
-        <ul class="novo-select-list" tabIndex="-1" [ngClass]="{footer: footerConfig}">
+        <ul class="novo-select-list" tabIndex="-1" [ngClass]="{header: headerConfig}">
             <ng-content></ng-content>
+            <li *ngIf="headerConfig" class="select-header" [ngClass]="{open: header.open}">
+                <button  *ngIf="!header.open" (click)="toggleHeader($event); false" tabIndex="-1" type="button" class="header"><i class="bhi-add-thin"></i>&nbsp;{{headerConfig.label}}</button>
+                <div *ngIf="header.open" [ngClass]="{active: header.open}">
+                    <input autofocus type="text" [placeholder]="headerConfig.placeholder" [attr.id]="name" autocomplete="false" [(ngModel)]="header.value" [ngClass]="{invalid: !header.valid}"/>
+                    <footer>
+                        <button (click)="toggleHeader($event, false)">{{labels.cancel}}</button>
+                        <button (click)="saveHeader()" class="primary">{{labels.save}}</button>
+                    </footer>
+                </div>
+            </li>
             <li *ngFor="let option of options; let i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
               <span>{{option.label}}</span>
               <i *ngIf="option.active" class="bhi-check"></i>
             </li>
-            <div *ngIf="footerConfig" class="select-footer">
-                <button  *ngIf="!footer.open" (click)="toggleFooter($event); false" tabIndex="-1" type="button" class="footer"><i class="bhi-add-thin"></i>{{footerConfig.label}}</button>
-                <div *ngIf="footer.open" [ngClass]="{active: footer.open}">
-                    <input autofocus type="text" [placeholder]="footerConfig.placeholder" [attr.id]="name" autocomplete="false" [(ngModel)]="footer.value" [ngClass]="{invalid: !footer.valid}"/>
-                    <footer>
-                        <button (click)="toggleFooter($event, false)">Cancel</button>
-                        <button (click)="saveFooter()" class="primary">Save</button>
-                    </footer>
-                </div>
-            </div>
         </ul>
     `,
     host: {
@@ -40,13 +41,14 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
     }
 })
 export class Select extends OutsideClick {
-    constructor(@Optional() model:NgControl, element:ElementRef) {
+    constructor(@Optional() model:NgControl, element:ElementRef, labels:NovoLabelService) {
         super(element);
         // Defaults
         this.selectedIndex = -1;
         this.placeholder = 'Select...';
         this.empty = true;
         this.value = null;
+        this.labels = labels;
 
         this.onChange = null;
         this.onTouched = null;
@@ -57,7 +59,7 @@ export class Select extends OutsideClick {
         this.model = model || new NgModel();
         this.model.valueAccessor = this;
 
-        this.footer = {
+        this.header = {
             open: false,
             valid: true,
             value: ''
@@ -109,7 +111,7 @@ export class Select extends OutsideClick {
             value: null,
             active: false
         };
-        this.footer = {
+        this.header = {
             open: false,
             valid: true,
             value: ''
@@ -121,7 +123,7 @@ export class Select extends OutsideClick {
     // TODO: Add key listener to jump to options starting with that letter.
     onKeyDown(event) {
         if (this.active) {
-            if (!this.footer.open) {
+            if (!this.header.open) {
                 // Prevent Scrolling
                 event.preventDefault();
             }
@@ -131,8 +133,8 @@ export class Select extends OutsideClick {
                 return;
             }
             if (event.keyCode === KeyCodes.ENTER) {
-                if (this.footer.open && this.footer.value) {
-                    this.saveFooter();
+                if (this.header.open && this.header.value) {
+                    this.saveHeader();
                     return;
                 }
                 this.select(this.options[this.selectedIndex], this.selectedIndex);
@@ -148,8 +150,10 @@ export class Select extends OutsideClick {
                 this.selectedIndex++;
                 this.select(this.options[this.selectedIndex], this.selectedIndex);
                 this.scrollToSelected();
-            } else if (event.keyCode === KeyCodes.DOWN && this.selectedIndex === this.options.length - 1) {
-                this.toggleFooter(null, true);
+                if (this.header.open) { this.toggleHeader(null, false); }
+            } else if (event.keyCode === KeyCodes.UP && this.selectedIndex === 0) {
+                this.selectedIndex--;
+                this.toggleHeader(null, true);
             } else if (event.keyCode >= 65 && event.keyCode <= 90) {
                 let char = String.fromCharCode(event.keyCode);
                 let element = this.element.nativeElement;
@@ -192,14 +196,14 @@ export class Select extends OutsideClick {
         this.onTouched = fn;
     }
 
-    toggleFooter(event, forceValue) {
+    toggleHeader(event, forceValue) {
         if (event) {
             event.stopPropagation();
             event.preventDefault();
         }
         // Reverse the active property (if forceValue, use that)
-        this.footer = {
-            open: forceValue !== undefined ? forceValue : !this.footer.open,
+        this.header = {
+            open: forceValue !== undefined ? forceValue : !this.header.open,
             value: '',
             valid: true
         };
@@ -217,18 +221,18 @@ export class Select extends OutsideClick {
         // Fire the active change event
         this.onActiveChange.emit(this.active);
 
-        //If closing select, also close footer
-        this.toggleFooter(event, false);
+        //If closing select, also close header
+        this.toggleHeader(event, false);
     }
 
-    saveFooter() {
+    saveHeader() {
         //save value, select value, close list
-        if (this.footer.value) {
-            this.footerConfig.onSave(this.footer.value);
-            this.createdItem = this.footer.value;
+        if (this.header.value) {
+            this.headerConfig.onSave(this.header.value);
+            this.createdItem = this.header.value;
             this.toggleActive();
         } else {
-            this.footer.valid = false;
+            this.header.valid = false;
         }
     }
 }
