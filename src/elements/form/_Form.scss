@@ -220,6 +220,14 @@ novo-form {
                                 }
                             }
 
+                            &.disabled {
+                                opacity: 0.3;
+                                pointer-events: none;
+                                label {
+                                    opacity: 1;
+                                }
+                            }
+
                             label {
                                 color: darken(#D2D2D2, 30%);
                                 margin-left: 0;
