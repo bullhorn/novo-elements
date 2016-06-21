@@ -38,7 +38,8 @@ import {
         'label',
         'currencyFormat',
         'references',
-        'footerConfig'
+        'footerConfig',
+        'disabled'
     ],
     outputs: [
         'broadcast',
@@ -115,6 +116,7 @@ export class FormInput {
                     this.componentRef.instance.value = this.value;
                     this.componentRef.instance.label = this.label;
                     this.componentRef.instance.update = this.valueChange;
+                    this.componentRef.instance.disabled = this.disabled;
                     if (this.options) {
                         this.componentRef.instance.options = this.options;
                     }

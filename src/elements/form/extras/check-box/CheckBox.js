@@ -5,11 +5,11 @@ import { BaseInput } from './../FormExtras';
 
 @Component({
     selector: 'check-box',
-    inputs: ['name', 'label', 'required', 'indeterminate', 'value'],
+    inputs: ['name', 'label', 'required', 'indeterminate', 'value', 'disabled'],
     outputs: ['valueChange'],
     directives: [COMMON_DIRECTIVES],
     template: `
-        <div class="check-box-group" [class.checked]="value">
+        <div class="check-box-group" [class.checked]="value" [class.disabled]="disabled">
             <input hidden="true" [name]="name" type="checkbox" [(ngModel)]="value" [attr.id]="name">
             <label [attr.for]="name" (click)="select($event)">
               <i [class.bhi-checkbox-empty]="!value && !indeterminate"
