@@ -1,3 +1,13 @@
+<a name="0.0.24"></a>
+## [0.0.24](https://github.com/bullhorn/novo-elements/compare/v0.0.23...v0.0.24) (2016-06-22)
+
+
+### Features
+
+* **form:** Adding hidden flag to form fields ([0c79a45](https://github.com/bullhorn/novo-elements/commit/0c79a45))
+
+
+
 <a name="0.0.23"></a>
 ## [0.0.23](https://github.com/bullhorn/novo-elements/compare/v0.0.22...v0.0.23) (2016-06-21)
 
