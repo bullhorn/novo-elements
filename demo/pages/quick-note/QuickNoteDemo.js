@@ -66,13 +66,9 @@ export class QuickNoteDemo {
 
         this.placeholder = 'Enter your note text here. Reference people and distrubution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
 
-        this.note = '';
         this.references = {};
-
         this.note2 = 'I am an initial note!';
         this.references2 = {};
-
-        this.note3 = '';
         this.references3 = {};
 
         let customData = {

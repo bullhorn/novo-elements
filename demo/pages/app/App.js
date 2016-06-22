@@ -1,17 +1,17 @@
 import { Component, ViewContainerRef } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
-import { ROUTER_DIRECTIVES, RouteConfig, Router } from '@angular/router-deprecated';
+import { RouteConfig, Router } from '@angular/router-deprecated';
 
 import { TOAST_PROVIDERS, ToastService, MODAL_PROVIDERS, ModalService } from './../../../src/novo-elements';
 
-const template = require('./App.html');
-
 @Component({
     selector: 'demo-app',
-    template: template,
-    providers: [...TOAST_PROVIDERS, ...MODAL_PROVIDERS],
+    template: require('./App.html'),
+    providers: [
+        ...TOAST_PROVIDERS,
+        ...MODAL_PROVIDERS
+    ],
     directives: [
-        ROUTER_DIRECTIVES,
         CORE_DIRECTIVES
     ]
 })

@@ -501,7 +501,6 @@ export class FormDemo {
             }
         ];
 
-        this.quickNote = '';
         this.quickNoteReferences = {};
         this.quickNoteOptions = {
             triggers: {

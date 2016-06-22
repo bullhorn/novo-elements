@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
-import { ROUTER_DIRECTIVES } from 'angular2/router';
 import { ToastService, NovoToast } from './../../../src/novo-elements';
 
 import template from './Color.html';
 
 @Component({
     selector: 'color',
-    directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES],
+    directives: [CORE_DIRECTIVES],
     template: template
 })
 export class Color {

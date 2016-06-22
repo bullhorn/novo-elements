@@ -5,11 +5,10 @@ import 'rxjs/Rx'; //eslint-disable-line
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
-import { ContentEditableModel } from './../../directives/content-editable-model/ContentEditableModel';
 
 @Component({
     selector: 'novo-quick-note',
-    directives: [NgModel, ContentEditableModel],
+    directives: [NgModel],
     inputs: ['config', 'placeholder', 'references'],
     outputs: ['focus', 'blur'],
     template: `
@@ -299,7 +298,7 @@ export class QuickNote extends OutsideClick {
         if (!this.basicNote) {
             this.updateFormattedNote(value);
         }
-        this.basicNote = value;
+        // this.basicNote = value;
         if (!value) {
             this._onChangeCallback();
         }

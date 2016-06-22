@@ -1,27 +1,23 @@
 const helpers = require('./helpers');
 
-/**
- * Webpack Plugins
- */
+// Webpack Plugins
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 
-/**
- * Webpack Constants
- */
+// Webpack Constants
 const ENV = process.env.ENV = process.env.NODE_ENV = 'test';
 
-/**
- * Webpack configuration
- *
- * See: http://webpack.github.io/docs/configuration.html#cli
- */
+// Webpack configuration
+// See: http://webpack.github.io/docs/configuration.html#cli
 module.exports = {
+    // Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
+    // Do not change, leave as is or it wont work.
+    // See: https://github.com/webpack/karma-webpack#source-maps
+    devtool: 'inline-source-map',
+
     // Options affecting the resolving of modules.
-    //
     // See: http://webpack.github.io/docs/configuration.html#resolve
     resolve: {
         // An array of extensions that should be used to resolve modules.
-        //
         // See: http://webpack.github.io/docs/configuration.html#resolve-extensions
         extensions: ['', '.js'],
 
@@ -30,15 +26,12 @@ module.exports = {
     },
 
     // Options affecting the normal modules.
-    //
     // See: http://webpack.github.io/docs/configuration.html#module
     module: {
         // An array of applied pre and post loaders.
-        //
         // See: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
         preLoaders: [
             // Eslint loader support for *.js files
-            //
             // See: https://github.com/MoOx/eslint-loader
             {
                 test: /\.js$/,
@@ -51,18 +44,15 @@ module.exports = {
         ],
 
         // An array of automatically applied loaders.
-        //
         // IMPORTANT: The loaders here are resolved relative to the resource which they are applied to.
         // This means they are not resolved relative to the configuration file.
-        //
         // See: http://webpack.github.io/docs/configuration.html#module-loaders
         loaders: [
             // Loader support for .js using babel
-            //
             // See: https://github.com/babel/babel-loader
             {
                 test: /\.js$/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 exclude: [
                     /\.e2e\.js$/,
                     helpers.root('node_modules'),
@@ -71,34 +61,28 @@ module.exports = {
             },
 
             // Json loader support for *.json files.
-            //
             // See: https://github.com/webpack/json-loader
-            { test: /\.json$/, loader: 'json-loader' },
+            { test: /\.json$/, loader: 'json-loader', exclude: [helpers.root('demo/index.html')] },
 
             // Raw loader support for *.css files
             // Returns file content as string
-            //
             // See: https://github.com/webpack/raw-loader
-            { test: /\.css$/, loader: 'raw-loader' },
+            { test: /\.css$/, loaders: ['to-string-loader', 'css-loader'], exclude: [helpers.root('demo/index.html')] },
 
             // Raw loader support for *.html
             // Returns file content as string
-            //
             // See: https://github.com/webpack/raw-loader
-            { test: /\.html$/, loader: 'raw-loader' }
+            { test: /\.html$/, loader: 'raw-loader', exclude: [helpers.root('demo/index.html')] }
         ]
     },
 
     // Add additional plugins to the compiler.
-    //
     // See: http://webpack.github.io/docs/configuration.html#plugins
     plugins: [
         // Plugin: DefinePlugin
         // Description: Define free variables.
         // Useful for having development builds with debug logging or adding global constants.
-        //
         // Environment helpers
-        //
         // See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
         new DefinePlugin({
             'ENV': JSON.stringify(ENV),
@@ -111,17 +95,15 @@ module.exports = {
 
     // Static analysis linter for JavaScript advanced options configuration
     // Description: An extensible linter for the JavaScript language.
-    //
     // See: https://github.com/MoOx/eslint-loader
     eslint: {
-        emitErrors: true,
-        failOnError: true,
+        emitErrors: false,
+        failOnError: false,
         resourcePath: 'src'
     },
 
     // Include polyfills or mocks for various node stuff
     // Description: Node configuration
-    //
     // See: https://webpack.github.io/docs/configuration.html#node
     node: {
         global: 'window',

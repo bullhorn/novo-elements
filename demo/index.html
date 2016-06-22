@@ -24,6 +24,10 @@
                 <dot></dot>
             </novo-loading>
         </demo-app>
-        <!-- script files will be inserted by html-webpack-plugin -->
+
+        <% if (webpackConfig.metadata.isDevServer) { %>
+        <!-- Webpack Dev Server reload -->
+        <script src="/webpack-dev-server.js"></script>
+        <% } %>
     </body>
 </html>

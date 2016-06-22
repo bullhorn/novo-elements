@@ -205,9 +205,6 @@ export class Picker extends OutsideClick {
             this.term = value;
             this._value = value;
         }
-        if (!value) {
-            this._onChangeCallback();
-        }
     }
 
     //From ControlValueAccessor interface

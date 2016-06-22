@@ -52,9 +52,6 @@ export * from './elements/table';
 export * from './elements/dragula';
 export * from './elements/form';
 
-// Directives
-export * from './directives/content-editable-model/ContentEditableModel';
-
 // Pipes
 export * from './pipes/plural/Plural';
 
