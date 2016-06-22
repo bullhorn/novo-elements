@@ -23,6 +23,7 @@ before_script:
   - sleep 3
 
 script:
+  - npm update
   - npm test
 
 after_success:
