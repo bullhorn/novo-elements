@@ -44,6 +44,7 @@ export class FormFieldMeta {
     ngOnInit() {
         if (this.data) {
             this.name = this.data.name;
+            this.hidden = this.data.hidden;
             this.componentResolver.resolveComponent(FormLabelMeta)
                 .then(labelComponentFactory => {
                     let labelRef = this.field.createComponent(labelComponentFactory);
