@@ -27,7 +27,7 @@ script:
   - npm test
 
 after_success:
-  - test $TRAVIS_BRANCH = "master" && npm run sca $GALAXY_URL
+  - test $TRAVIS_BRANCH = "master" && npm run sca $GALAXY_URL $SLACK_WEBHOOK $SLACK_CHANNEL
   - npm install codeclimate-test-reporter -g
   - codeclimate-test-reporter < coverage/lcov.info
 
