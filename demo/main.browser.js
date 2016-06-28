@@ -1,7 +1,7 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
 
 import { PLATFORM_PROVIDERS } from './platform/browser';
-import { ENV_PROVIDERS, decorateComponentRef } from './platform/environment';
+import { ENV_PROVIDERS } from './platform/environment';
 import { DemoApp } from './pages/app/App';
 import './demo.scss';
 
@@ -14,7 +14,7 @@ export function main() {
         ...PLATFORM_PROVIDERS,
         ...ENV_PROVIDERS
     ])
-        .then(decorateComponentRef)
+        // .then(decorateComponentRef)
         .catch(err => console.error(err)); // eslint-disable-line
 }
 
