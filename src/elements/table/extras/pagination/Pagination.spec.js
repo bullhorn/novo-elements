@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { Pagination } from './Pagination';
 import { testComponent, grabComponent } from './../../../../testing/TestHelpers';
+import { NOVO_ELEMENTS_LABELS_PROVIDERS } from './../../../../novo-elements';
 
 @Component({
     selector: 'test-cmp',
@@ -26,6 +27,8 @@ class TestCmp {
 }
 
 describe('Element: Pagination', () => {
+    beforeEachProviders(() => [NOVO_ELEMENTS_LABELS_PROVIDERS]);
+
     it('should initialize correctly', testComponent(TestCmp, (fixture) => {
         const { instance, element, testComponentInstance, testComponentElement } = grabComponent(fixture, Pagination);
         expect(instance).toBeTruthy();

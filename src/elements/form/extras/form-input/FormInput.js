@@ -38,8 +38,8 @@ import {
         'label',
         'currencyFormat',
         'references',
-        'footerConfig',
-        'disabled'
+        'disabled',
+        'headerConfig'
     ],
     outputs: [
         'broadcast',
@@ -123,8 +123,8 @@ export class FormInput {
                     if (this.inline) {
                         this.componentRef.instance.inline = this.inline;
                     }
-                    if (this.footerConfig) {
-                        this.componentRef.instance.footerConfig = this.footerConfig;
+                    if (this.headerConfig) {
+                        this.componentRef.instance.headerConfig = this.headerConfig;
                     }
                     if (this.broadcast) {
                         this.componentRef.instance.broadcast = this.broadcast;
