@@ -25,6 +25,7 @@ import { TOAST_PROVIDERS, ToastService, MODAL_PROVIDERS, ModalService } from './
 
     // Element/Component/Service/etc.. Demos
     { path: '/button', name: 'Button', loader: () => require('es6-promise!./../button/ButtonDemo')('ButtonDemo') },
+    { path: '/radio', name: 'Radio', loader: () => require('es6-promise!./../radio/RadioDemo')('RadioDemo') },
     { path: '/quick-note', name: 'QuickNote', loader: () => require('es6-promise!./../quick-note/QuickNoteDemo')('QuickNoteDemo') },
     { path: '/modal', name: 'Modal', loader: () => require('es6-promise!./../modal/ModalDemo')('ModalDemo') },
     { path: '/form', name: 'Form', loader: () => require('es6-promise!./../form/FormDemo')('FormDemo') },
@@ -71,6 +72,7 @@ export class DemoApp {
 
         this.componentRoutes = [
             { name: 'QuickNote', path: '/quick-note' },
+            { name: 'Radio', path: '/radio' },
             { name: 'Toast', path: '/toast' },
             { name: 'Button', path: '/button' },
             { name: 'Form', path: '/form' },

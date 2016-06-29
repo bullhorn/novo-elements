@@ -3,6 +3,7 @@ import { NOVO_ELEMENTS_LABELS_PROVIDERS, NovoLabelService } from './services/nov
 export * from './services/novo-label-service';
 
 import { NOVO_BUTTON_ELEMENTS } from './elements/button';
+import { NOVO_RADIO_ELEMENTS } from './elements/radio';
 import { NOVO_TAB_ELEMENTS } from './elements/tabs';
 import { NOVO_TOAST_ELEMENTS, TOAST_PROVIDERS } from './elements/toast';
 import { NOVO_MODAL_ELEMENTS, MODAL_PROVIDERS } from './elements/modal';
@@ -28,6 +29,7 @@ import { NOVO_FORM_ELEMENTS, NOVO_FORM_CORE, NOVO_FORM_EXTRAS } from './elements
 
 // Elements
 export * from './elements/button';
+export * from './elements/radio';
 export * from './elements/tabs';
 export * from './elements/toast';
 export * from './elements/modal';
@@ -64,6 +66,7 @@ export * from './utils/Helpers';
 
 export const NOVO_ELEMENTS = [
     ...NOVO_BUTTON_ELEMENTS,
+    ...NOVO_RADIO_ELEMENTS,
     ...NOVO_TAB_ELEMENTS,
     ...NOVO_TOAST_ELEMENTS,
     ...NOVO_MODAL_ELEMENTS,
