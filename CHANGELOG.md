@@ -1,3 +1,13 @@
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/bullhorn/novo-elements/compare/v0.1.2...v0.1.3) (2016-06-29)
+
+
+### Features
+
+* **radio:** Adding a radio group element ([9209f0a](https://github.com/bullhorn/novo-elements/commit/9209f0a))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/bullhorn/novo-elements/compare/v0.1.1...v0.1.2) (2016-06-28)
 
