@@ -31,6 +31,12 @@ button {
             cursor: not-allowed;
             pointer-events: none;
         }
+
+        &[disabled="false"] {
+            opacity: 1;
+            cursor: pointer;
+            pointer-events: auto;
+        }
         // Primary Themed Button
         &[theme="primary"] {
             background: $positive;
@@ -78,8 +84,7 @@ button {
                 background: darken($positive, 5%);
             }
             // Loop Generic Colors (Primary, Success, Negative, Etc.)
-            @each $button,
-            $color in $colors {
+            @each $button, $color in $colors {
                 &[color="#{$button}"] {
                     background: $color;
 
@@ -92,6 +97,7 @@ button {
                     }
                 }
             }
+
             &[color="white"] {
                 background: $white;
                 color: $ocean;
@@ -109,8 +115,7 @@ button {
                 }
             }
             // Loop Analytics Colors
-            @each $analytics,
-            $color in $analytics-colors {
+            @each $analytics, $color in $analytics-colors {
                 &[color="#{$analytics}"] {
                     background: $color;
 
@@ -178,15 +183,13 @@ button {
 
                 &[icon="collapse"] {
                     i {
-                        &:before {
-                        }
+                        &:before {}
                     }
                 }
 
                 &[icon="convert"] {
                     i {
-                        &:before {
-                        }
+                        &:before {}
                     }
                 }
             }
@@ -253,8 +256,7 @@ button {
                 }
             }
             // Loop Generic Colors (Primary, Success, Negative, Etc.)
-            @each $button,
-            $color in $colors {
+            @each $button, $color in $colors {
                 &[color="#{$button}"] {
                     color: $color;
 
@@ -264,8 +266,7 @@ button {
                 }
             }
             // Loop Analytics Colors
-            @each $analytics,
-            $color in $analytics-colors {
+            @each $analytics, $color in $analytics-colors {
                 &[color="#{$analytics}"] {
                     color: $color;
 
@@ -292,27 +293,25 @@ button {
                 box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
             }
             // Loop Generic Colors (Primary, Success, Negative, Etc.)
-            @each $button,
-            $color in $colors {
+            @each $button, $color in $colors {
                 &[color="#{$button}"] {
                     color: $white;
                     background: $color;
                 }
             }
             // Loop Analytics Colors
-            @each $analytics,
-            $color in $analytics-colors {
+            @each $analytics, $color in $analytics-colors {
                 &[color="#{$analytics}"] {
                     color: $white;
                     background: $color;
                 }
             }
 
-            &[color="light"],
-            &[color="white"],
-            &[color="gray"],
             &[color="background"],
-            &[color="off-white"] {
+            &[color="gray"],
+            &[color="light"],
+            &[color="off-white"],
+            &[color="white"] {
                 color: $dark;
             }
         }
