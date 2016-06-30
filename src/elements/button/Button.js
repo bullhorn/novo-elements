@@ -8,7 +8,7 @@ import { CORE_DIRECTIVES } from '@angular/common';
         '[attr.theme]': 'theme',
         '[attr.color]': 'color',
         '[attr.icon]': 'icon',
-        '[disabled]': 'disabled'
+        '[attr.disabled]': 'disabled'
     },
     template: `
         <!--Flex wrapper for cross-browser support-->
