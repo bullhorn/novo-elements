@@ -3,10 +3,6 @@ language: node_js
 node_js:
   - "5"
 
-cache:
-  directories:
-    - node_modules
-
 addons:
   firefox: "latest"
   code_climate:
@@ -23,7 +19,7 @@ before_script:
   - sleep 3
 
 script:
-  - npm update
+  - npm install
   - npm test
 
 after_success:
