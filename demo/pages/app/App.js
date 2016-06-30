@@ -45,6 +45,7 @@ import { TOAST_PROVIDERS, ToastService, MODAL_PROVIDERS, ModalService } from './
     { path: '/drawer', name: 'Drawer', loader: () => require('es6-promise!./../drawer/DrawerDemo')('DrawerDemo') },
     { path: '/calendar', name: 'Calendar', loader: () => require('es6-promise!./../calendar/CalendarDemo')('CalendarDemo') },
     { path: '/dragula', name: 'Dragula', loader: () => require('es6-promise!./../dragula/DragulaDemo')('DragulaDemo') },
+    { path: '/tiles', name: 'Tiles', loader: () => require('es6-promise!./../tiles/TilesDemo')('TilesDemo') },
 
     // Utils
     { path: '/utils', name: 'Utils', loader: () => require('es6-promise!./../utils/UtilsDemo')('UtilsDemo') },
@@ -91,7 +92,8 @@ export class DemoApp {
             { name: 'List', path: '/list' },
             { name: 'Table', path: '/table' },
             { name: 'Calendar', path: '/calendar' },
-            { name: 'Dragula', path: '/dragula' }
+            { name: 'Dragula', path: '/dragula' },
+            { name: 'Tiles', path: '/tiles' }
         ].sort((a, b) => {
             if (a.name < b.name) return -1;
             if (a.name > b.name) return 1;
