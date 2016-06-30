@@ -1,0 +1,90 @@
+novo-tiles {
+    display: flex;
+    border-radius: .5em;
+    color: $grey;
+    font-weight: 500;
+    width: 100%;
+    margin-left: 2px;
+
+    i.required-indicator {
+        position: absolute;
+        left: -25px;
+        height: 15px;
+        width: 15px;
+        font-size: 15px;
+        top: 13px;
+        transform: translateY(-50%);
+
+        &.bhi-circle {
+            color: $grapefruit;
+            height: 10px;
+            width: 10px;
+            text-align: center;
+            font-size: 7px;
+        }
+
+        &.bhi-check {
+            color: $grass;
+        }
+    }
+
+    $border-properties: solid 2px lighten($grey, 20%);
+
+    div.tile:nth-of-type(1) {
+        border-top-left-radius: .5em;
+        border-left: $border-properties;
+        border-bottom-left-radius: .5em;
+    }
+
+    div.tile:last-child {
+        border-top-right-radius: .5em;
+        border-right: $border-properties;
+        border-bottom-right-radius: .5em;
+
+        &.active {
+            label {
+                left: 2px;
+            }
+        }
+    }
+
+    > div {
+        cursor: pointer;
+        flex: 1;
+        min-width: 40px;
+        min-height: 40px;
+        padding: 1em;
+        text-align: center;
+        background-color: $off-white;
+        border-top: $border-properties;
+        border-bottom: $border-properties;
+        position: relative;
+        transition: border-color 250ms, background-color 250ms, color 250ms;
+
+        label {
+            transition: border-color 250ms, background-color 250ms, color 250ms;
+            cursor: pointer;
+            span {
+                transition: border-color 250ms, background-color 250ms, color 250ms;
+                cursor: pointer;
+            }
+        }
+
+        &.active {
+            label {
+                left: -2px;
+                top: -2px;
+                width: 100%;
+                position: absolute;
+                display: block;
+                padding: 1em;
+                border: solid 2px $positive;
+                border-radius: .5em;
+                background-color: white;
+                span {
+                    color: $positive;
+                }
+            }
+        }
+    }
+}
