@@ -16,14 +16,23 @@ describe('Element: Radio', () => {
     });
 
     describe('Method: select(event, radio)', () => {
-        it('should modify the radio checked state', () => {
+        it('should modify the radio checked state if it was false', () => {
+            spyOn(comp.change, 'emit');
+
+            let radio = { checked: false };
+            comp.value = 'test';
+            comp.select(null, radio);
+            expect(radio.checked).toBe(true);
+            expect(comp.change.emit).toHaveBeenCalledWith('test');
+        });
+
+        it('should not modify the radio checked state if it was true', () => {
             spyOn(comp.change, 'emit');
 
             let radio = { checked: true };
-            comp.value = 'test';
             comp.select(null, radio);
-            expect(radio.checked).toBe(false);
-            expect(comp.change.emit).toHaveBeenCalledWith('test');
+            expect(radio.checked).toBe(true);
+            expect(comp.change.emit).not.toHaveBeenCalled();
         });
     });
 });
