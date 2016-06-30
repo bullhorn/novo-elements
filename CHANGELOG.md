@@ -1,3 +1,13 @@
+<a name="0.1.5"></a>
+## [0.1.5](https://github.com/bullhorn/novo-elements/compare/v0.1.4...v0.1.5) (2016-06-30)
+
+
+### Features
+
+* **radio:** Adding a label input to the radio ([34db6b9](https://github.com/bullhorn/novo-elements/commit/34db6b9))
+
+
+
 <a name="0.1.4"></a>
 ## [0.1.4](https://github.com/bullhorn/novo-elements/compare/v0.1.3...v0.1.4) (2016-06-29)
 
