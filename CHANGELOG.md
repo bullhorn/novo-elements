@@ -1,3 +1,18 @@
+<a name="0.1.8"></a>
+## [0.1.8](https://github.com/bullhorn/novo-elements/compare/v0.1.7...v0.1.8) (2016-06-30)
+
+
+
+<a name="0.1.7"></a>
+## [0.1.7](https://github.com/bullhorn/novo-elements/compare/v0.1.6...v0.1.7) (2016-06-30)
+
+
+### Bug Fixes
+
+* **button:** Fixing the disabled attr for buttons ([b72b895](https://github.com/bullhorn/novo-elements/commit/b72b895))
+
+
+
 <a name="0.1.6"></a>
 ## [0.1.6](https://github.com/bullhorn/novo-elements/compare/v0.1.4...v0.1.6) (2016-06-30)
 
