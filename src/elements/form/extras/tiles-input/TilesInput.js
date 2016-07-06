@@ -23,7 +23,7 @@ import { NovoLabelService } from './../../../../novo-elements';
     ],
     template: `
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
-        <novo-tiles [options]="options" (changed)="onChanged($event)"></novo-tiles>
+        <novo-tiles [options]="options" (changed)="onChanged($event)" [value]="value"></novo-tiles>
         <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
     `
 })

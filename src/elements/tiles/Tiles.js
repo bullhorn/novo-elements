@@ -1,14 +1,13 @@
 import { Component, EventEmitter } from '@angular/core';
 import { CORE_DIRECTIVES, Validators, Control } from '@angular/common';
 
-import { NovoLabelService } from '../../services/novo-label-service';
-
 @Component({
     selector: 'novo-tiles',
     inputs: [
         'name',
         'options',
-        'required'
+        'required',
+        'value'
     ],
     directives: [
         CORE_DIRECTIVES
@@ -17,24 +16,21 @@ import { NovoLabelService } from '../../services/novo-label-service';
         'update'
     ],
     template: `
-        <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
         <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked}" (click)="select($event, option, i)">
             <label [attr.for]="name + i">
                 <span>{{ option.label || option}}</span>
             </label>
             <input [hidden]="true" [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i">
         </div>
-        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{ labels.required }}</span>
     `
 })
 export class Tiles {
     update:EventEmitter = new EventEmitter();
 
-    constructor(labels: NovoLabelService) {
+    constructor() {
         this.validators = [];
         this.value = null;
         this._options = [];
-        this.labels = labels;
     }
 
     ngOnInit() {
