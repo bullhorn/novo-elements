@@ -6,8 +6,7 @@ import { CORE_DIRECTIVES, NgControl, NgModel } from '@angular/common';
     inputs: [
         'name',
         'options',
-        'required',
-        'value'
+        'required'
     ],
     outputs: [
         'changed'
