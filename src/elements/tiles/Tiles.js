@@ -1,5 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
-import { CORE_DIRECTIVES, Validators, Control } from '@angular/common';
+import { CORE_DIRECTIVES } from '@angular/common';
 
 @Component({
     selector: 'novo-tiles',
@@ -28,18 +28,16 @@ export class Tiles {
     update:EventEmitter = new EventEmitter();
 
     constructor() {
-        this.validators = [];
         this.value = null;
         this._options = [];
     }
 
     ngOnInit() {
         this.name = this.name || '';
-        if (this.required) {
-            this.validators.push(Validators.required);
+
+        if (this.control) {
+            this.control.updateValue(this.value);
         }
-        this.control = new Control('', Validators.compose(this.validators));
-        this.control.updateValue(this.value);
         if (this.options && this.options.length && !this.options[0].value) {
             this._options = this.options.map((x) => {
                 return { value: x, label: x, checked: this.value === x };
@@ -67,8 +65,12 @@ export class Tiles {
             option.checked = false;
         }
         item.checked = !item.checked;
-        if (this.update) this.update.emit(item.value);
-        if (this.control) this.control.updateValue(item.value);
+        if (this.update) {
+            this.update.emit(item.value);
+        }
+        if (this.control) {
+            this.control.updateValue(item.value);
+        }
     }
 }
 
