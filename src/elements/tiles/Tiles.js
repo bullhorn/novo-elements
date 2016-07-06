@@ -1,5 +1,5 @@
-import { Component, EventEmitter } from '@angular/core';
-import { CORE_DIRECTIVES } from '@angular/common';
+import { Component, EventEmitter, Optional } from '@angular/core'; // eslint-disable-line
+import { CORE_DIRECTIVES, NgControl, NgModel } from '@angular/common';
 
 @Component({
     selector: 'novo-tiles',
@@ -26,8 +26,9 @@ import { CORE_DIRECTIVES } from '@angular/common';
 })
 export class Tiles {
     changed:EventEmitter = new EventEmitter;
-    constructor() {
-        this.value = null;
+    constructor(@Optional() model:NgControl) {
+        this.model = model || new NgModel();
+        this.model.valueAccessor = this;
         this._options = [];
     }
 
@@ -65,6 +66,20 @@ export class Tiles {
         }
         item.checked = !item.checked;
         this.changed.emit(item.value);
+        this.model.viewToModelUpdate(item.value);
+    }
+
+    // ValueAccessor Functions
+    writeValue(value) {
+        this.value = value;
+    }
+
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn) {
+        this.onTouched = fn;
     }
 }
 
