@@ -9,11 +9,11 @@ import { CORE_DIRECTIVES } from '@angular/common';
         'required',
         'value'
     ],
+    outputs: [
+        'changed'
+    ],
     directives: [
         CORE_DIRECTIVES
-    ],
-    outputs: [
-        'update'
     ],
     template: `
         <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked}" (click)="select($event, option, i)">
@@ -25,8 +25,7 @@ import { CORE_DIRECTIVES } from '@angular/common';
     `
 })
 export class Tiles {
-    update:EventEmitter = new EventEmitter();
-
+    changed:EventEmitter = new EventEmitter;
     constructor() {
         this.value = null;
         this._options = [];
@@ -65,12 +64,7 @@ export class Tiles {
             option.checked = false;
         }
         item.checked = !item.checked;
-        if (this.update) {
-            this.update.emit(item.value);
-        }
-        if (this.control) {
-            this.control.updateValue(item.value);
-        }
+        this.changed.emit(item.value);
     }
 }
 

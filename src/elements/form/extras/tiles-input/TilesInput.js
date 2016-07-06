@@ -33,8 +33,9 @@ export class TilesInput extends BaseInput {
         this.labels = labels;
     }
 
-    onChanged(e) {
-        this.value = e.value ? e.value : null;
+    onChanged(newValue) {
+        this.value = newValue.value ? newValue.value : null;
         this.update.emit(this.value);
+        this.control.updateValue(this.value);
     }
 }
