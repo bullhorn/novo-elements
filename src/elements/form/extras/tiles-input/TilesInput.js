@@ -34,7 +34,7 @@ export class TilesInput extends BaseInput {
     }
 
     onChanged(newValue) {
-        this.value = newValue.value ? newValue.value : null;
+        this.value = newValue;
         this.update.emit(this.value);
         this.control.updateValue(this.value);
     }
