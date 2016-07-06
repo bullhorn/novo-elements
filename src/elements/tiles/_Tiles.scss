@@ -17,25 +17,25 @@ novo-tiles {
         border-bottom-right-radius: .5em;
     }
 
-    div.tile {
+    > div {
         cursor: pointer;
         display: inline-block;
-        padding: 10px 14px;
+        padding: 1em;
         text-align: center;
         background-color: $off-white;
-        //border: solid 2px $off-white;
         border-top: $border-properties;
         border-bottom: $border-properties;
         position: relative;
         transition: border-color 250ms, background-color 250ms, color 250ms;
-        margin-left: -3px;
+        margin-left:-3px;
 
         &.active{
-            padding: 10px 12px;
+            display: inline-block;
+            z-index: 1;
+            padding: 1em calc(1em - 2px);
         }
         &:nth-of-type(1).active{
-            padding-left: 14px;
-            padding-right: 12px;
+            padding: 1em calc(1em - 2px) 1em 1em;
         }
 
         label {
@@ -48,8 +48,6 @@ novo-tiles {
         }
 
         &.active {
-            display: inline-block;
-            z-index: 1;
             border: solid 2px $positive!important;
             border-radius: .5em;
             background-color: white;
