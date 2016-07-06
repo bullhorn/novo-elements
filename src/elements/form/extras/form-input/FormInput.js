@@ -21,7 +21,8 @@ import {
     CurrencyInput,
     PercentInput,
     FloatInput,
-    QuickNoteInput
+    QuickNoteInput,
+    TilesInput
 } from '../FormExtras';
 
 @Component({
@@ -89,7 +90,8 @@ export class FormInput {
             percentage: PercentInput,
             money: CurrencyInput,
             float: FloatInput,
-            note: QuickNoteInput
+            note: QuickNoteInput,
+            tiles: TilesInput
         };
 
         if (this.type === 'checkbox' && this.options) {

@@ -62,7 +62,7 @@ const template = `
     <p>This allows the user to select multiple items from a list, or returned via search.</p>
     <div class="example form-demo">${MultiselectDemoTpl}</div>
     <code-snippet [code]="MultiselectDemoTpl"></code-snippet>
-    
+
     <h5>Note</h5>
     <p>This allows the user to add a note with references/tags.</p>
     <div class="example form-demo">${QuickNoteInputDemoTpl}</div>
@@ -271,7 +271,29 @@ export class FormDemo {
                             label: 'TRIGGER'
                         }
                     ]
-                }, {
+                },
+                {
+                    name: 'nextAction',
+                    type: 'tiles',
+                    dataType: 'String',
+                    label: 'Next Action',
+                    required: true,
+                    options: [
+                        {
+                            value: 'none',
+                            label: 'None'
+                        },
+                        {
+                            value: 'task',
+                            label: 'Task'
+                        },
+                        {
+                            value: 'appointment',
+                            label: 'Appointment'
+                        }
+                    ]
+                },
+                {
                     name: 'state',
                     type: 'picker',
                     dataType: 'String',
