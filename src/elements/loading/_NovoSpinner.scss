@@ -17,9 +17,9 @@ novo-spinner {
         }
 
         .circleGroup circle {
-            cx: 47;
-            cy: 47;
-            r: 6;
+            //cx: 47;
+            //cy: 47;
+            //r: 6;
             fill: $dark;
 
             &:nth-of-type(odd) {
@@ -28,7 +28,7 @@ novo-spinner {
             transform-origin: center center;
             @for $i from 1 through 5 {
                 &:nth-of-type(#{$i}) {
-                    animation: circle#{$i} 3400ms infinite;
+                    //animation: circle#{$i} 3400ms infinite;
                     animation-delay: $i * 70ms;
                 }
             }
@@ -169,5 +169,4 @@ novo-spinner {
             cy: 43;
         }
     }
-
 }
