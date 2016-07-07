@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef, ComponentResolver, ViewChild, EventEmitter, ElementRef } from '@angular/core';
+import { Component, ViewContainerRef, ComponentResolver, ViewChild, EventEmitter, ElementRef, Query, QueryList } from '@angular/core'; //eslint-disable-line
 
 import { FormLabelMeta, FormInput } from '../FormExtras';
 
@@ -7,18 +7,33 @@ import { FormLabelMeta, FormInput } from '../FormExtras';
     inputs: [
         'name',
         'data',
-        'value'
+        'value',
+        'active'
     ],
     template: `
         <ng-content></ng-content>
     `,
     host: {
-        '[attr.data-automation-id]': 'name'
+        '[attr.data-automation-id]': 'name',
+        '[class.active]': 'active'
     }
 })
 export class FormField {
-    constructor(el:ElementRef) {
+    field:FormInput;
+    inputs:QueryList;
+    active:Boolean = false;
+    constructor(el:ElementRef, @Query(FormInput) inputs:QueryList) {
         this.element = el;
+        this.inputs = inputs;
+    }
+
+    ngOnInit() {
+        setTimeout(() => {
+            this.field = this.inputs.first;
+            this.field.inputState.subscribe((evt) => {
+                this.active = evt.value;
+            });
+        });
     }
 }
 
@@ -65,6 +80,9 @@ export class FormFieldMeta {
                                     name: this.data.name,
                                     value: newValue
                                 });
+                            });
+                            inputRef.instance.inputState.subscribe((evt) => {
+                                this.active = evt.value;
                             });
 
                             if (this.data.optionsUrl && !this.data.options) {

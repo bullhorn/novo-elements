@@ -25,7 +25,7 @@ const template = `
 
     <h5>Text Input</h5>
     <p>This is the basic text input field.</p>
-    <div class="example form-demo">${TextInputDemoTpl}</div>
+    <div class="example form-demo text-input">${TextInputDemoTpl}</div>
     <code-snippet [code]="TextInputDemoTpl"></code-snippet>
 
     <h5>Radio Buttons</h5>

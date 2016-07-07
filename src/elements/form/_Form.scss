@@ -12,15 +12,13 @@ novo-form {
         width: 100%;
 
         header {
-            h1 {
-            }
+            h1 {}
         }
 
         form {
             width: 100%;
 
-            form-title {
-            }
+            form-title {}
 
             form-field {
                 margin-top: 1rem;
@@ -85,11 +83,11 @@ novo-form {
                     currency-input,
                     date-input,
                     date-time-input,
+                    entity-input,
                     float-input,
                     number-input,
                     percent-input,
                     picker-input,
-                    entity-input,
                     radio-input,
                     select-input,
                     text-area,
@@ -224,6 +222,7 @@ novo-form {
                             &.disabled {
                                 opacity: 0.3;
                                 pointer-events: none;
+
                                 label {
                                     opacity: 1;
                                 }
@@ -261,8 +260,8 @@ novo-form {
 
                     date-input,
                     date-time-input,
-                    picker-input,
                     entity-input,
+                    picker-input,
                     quick-note-input,
                     time-input {
                         position: relative;
@@ -281,8 +280,8 @@ novo-form {
                     }
 
                     chips-input,
-                    quick-note-input,
-                    entity-chips-input {
+                    entity-chips-input,
+                    quick-note-input {
                         display: flex;
                         width: 100%;
                         position: relative;
@@ -310,10 +309,10 @@ novo-form {
                     }
                 }
 
-                entity-input,
-                entity-chips-input {
-                    picker-results,
-                    entity-picker-results {
+                entity-chips-input,
+                entity-input {
+                    entity-picker-results,
+                    picker-results {
                         position: absolute;
                         left: 0;
                         top: 28px;
@@ -329,6 +328,7 @@ novo-form {
                             novo-list-item {
                                 flex: 0 0;
                                 transition: background-color 250ms;
+
                                 & > div {
                                     width: 100%;
                                 }
@@ -343,6 +343,7 @@ novo-form {
 
                                 item-content {
                                     flex-flow: row wrap;
+
                                     & > * {
                                         flex: 0 0 33%;
                                         white-space: nowrap;
@@ -351,33 +352,34 @@ novo-form {
                             }
                         }
 
+                        .error-results,
                         .no-recents,
-                        .null-results,
-                        .error-results {
+                        .null-results {
                             text-align: center;
                             padding: 1em 0 4em;
+
                             > i {
                                 font-size: 3em;
-                                margin: .5em;
+                                margin: 0.5em;
                                 color: rgba(0, 0, 0, .3);
                             }
 
-                            > h4,
+                             > h4,
                             > p {
                                 margin: 0;
                                 max-width: none;
                                 padding: 0;
                             }
+
                             > h4 {
                                 font-weight: 500;
                             }
-                            > p {
 
-                            }
+                            > p {}
                         }
 
                         section {
-                            box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.25);
+                            box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
                             z-index: 9;
                             position: absolute;
                             width: 100%;
@@ -413,11 +415,11 @@ novo-form {
                         currency-input,
                         date-input,
                         date-time-input,
+                        entity-input,
                         float-input,
                         number-input,
                         percent-input,
                         picker-input,
-                        entity-input,
                         text-area,
                         text-input,
                         time-input {
@@ -452,8 +454,7 @@ novo-form {
         display: flex;
         flex-flow: row wrap;
 
-        input {
-        }
+        input {}
 
         .street-address {
             flex: 3 3 75%;
@@ -479,8 +480,41 @@ novo-form {
             flex: 4 4 100%;
         }
     }
-}
 
+    &[layout="vertical"] {
+        .novo-form-container {
+            form {
+                form-field {
+                    margin-top: 2rem;
+                    position: relative;
+
+                    form-label {
+                        position: absolute;
+                        bottom: 13px;
+                        transition: all 90ms ease-in-out;
+
+                        label {
+                            font-size: 1em;
+                            font-weight: 400;
+                            transition: font-size 7ms ease-in-out;
+                        }
+                    }
+
+                    &.active {
+                        form-label {
+                            transform: translateY(-24px);
+
+                            label {
+                                font-size: 0.9em;
+                                font-weight: 500;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 @keyframes iconEnter {
     0% {
         opacity: 0;
