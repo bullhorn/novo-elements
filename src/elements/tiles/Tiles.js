@@ -1,11 +1,12 @@
-import { Component, EventEmitter } from '@angular/core';
-import { CORE_DIRECTIVES, Validators, Control } from '@angular/common';
+import { Component, EventEmitter, Optional } from '@angular/core'; // eslint-disable-line
+import { CORE_DIRECTIVES, NgControl, NgModel, Control, Validators } from '@angular/common';
 
 import { NovoLabelService } from '../../services/novo-label-service';
 
 @Component({
     selector: 'novo-tiles',
     inputs: [
+        'value',
         'name',
         'options',
         'required'
@@ -30,9 +31,10 @@ import { NovoLabelService } from '../../services/novo-label-service';
 export class Tiles {
     update:EventEmitter = new EventEmitter();
 
-    constructor(labels: NovoLabelService) {
+    constructor(@Optional() model:NgControl, labels:NovoLabelService) {
         this.validators = [];
-        this.value = null;
+        this.model = model || new NgModel();
+        this.model.valueAccessor = this;
         this._options = [];
         this.labels = labels;
     }
@@ -56,7 +58,7 @@ export class Tiles {
         }
     }
 
-	/**
+    /**
      * @name select
      *
      * @param event
@@ -73,6 +75,20 @@ export class Tiles {
         item.checked = !item.checked;
         if (this.update) this.update.emit(item.value);
         if (this.control) this.control.updateValue(item.value);
+        this.model.viewToModelUpdate(item.value);
+    }
+
+    // ValueAccessor Functions
+    writeValue(value) {
+        this.value = value;
+    }
+
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn) {
+        this.onTouched = fn;
     }
 }
 
