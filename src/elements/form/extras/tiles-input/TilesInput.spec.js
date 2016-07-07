@@ -1,50 +1,58 @@
-// // import {DOM} from 'angular2/src/platform/dom/dom_adapter';
-// import { Component } from '@angular/core';
-// import { By } from 'angular2/platform/common_dom';
-// import { beforeEach, expect, describe, it } from 'angular2/testing';
-// import { createTestContext } from '../../../../testing/TestContext';
-// import { FormInput, TilesInput } from '../FormExtras';
-//
-// @Component({
-//     selector: 'test-cmp',
-//     directives: [FormInput, TilesInput],
-//     template: `
-//     <form-input type="picker" multiple="true"></form-input>
-// `
-// })
-// class TestCmp {
-//     constructor() {
-//     }
-// }
-//
-// describe('Element: TilesInput', () => {
-//     let ctx;
-//     let instance;
-//     let cmpElement;
-//     let cmpInstance;
-//
-//     beforeEach(createTestContext(_ctx => ctx = _ctx));
-//
-//     beforeEach(done => {
-//         ctx.init(TestCmp)
-//             .finally(done)
-//             .subscribe(() => {
-//                 instance = ctx.fixture.componentInstance;
-//             });
-//     });
-//
-//     beforeEach(done => {
-//         setTimeout(() => {
-//             const cmpDebugElement = ctx.fixture.debugElement.query(By.directive(TilesInput));
-//             cmpElement = cmpDebugElement.nativeElement;
-//             cmpInstance = cmpDebugElement.componentInstance;
-//             done();
-//         }, 50);
-//     });
-//
-//     it('should have the instance and cmpElement defined', () => {
-//         expect(instance).toBeDefined();
-//         expect(cmpInstance).toBeDefined();
-//         expect(cmpElement).toBeDefined();
-//     });
-// });
+import { Component } from '@angular/core';
+import { TilesInput } from './TilesInput';
+import { testComponent, grabComponent } from './../../../../testing/TestHelpers';
+import { NovoLabelService } from './../../../../novo-elements';
+
+
+@Component({
+    selector: 'tiles-input',
+    directives: [TilesInput],
+    template: `
+        <tiles-input></tiles-input>
+    `
+})
+class TestCmp {
+}
+
+describe('Component: TilesInput', () => {
+    let comp;
+
+    beforeEachProviders(() => [
+        TilesInput,
+        NovoLabelService
+    ]);
+
+    describe('Element: TilesInput', () => {
+        it('should initialize correctly', testComponent(TestCmp, (fixture) => {
+            const { instance, element, testComponentInstance } = grabComponent(fixture, TilesInput);
+            expect(instance).toBeTruthy();
+            expect(element).toBeTruthy();
+            expect(element.innerHTML).toContain('novo-tiles');
+            expect(element.outerHTML).toContain('tiles-input');
+            expect(testComponentInstance).toBeTruthy();
+        }));
+    });
+
+    beforeEach(inject([TilesInput], _comp => {
+        comp = _comp;
+    }));
+
+    it('instantiate with all defaults.', () => {
+        expect(comp).toBeDefined();
+        expect(comp.labels).toBeDefined();
+    });
+
+    describe('Function: onChanged', () => {
+        it('should update value', () => {
+            expect(comp.onChanged).toBeDefined();
+            comp.update = { emit: () => {} };
+            comp.control = { updateValue: () => {} };
+            spyOn(comp.update, 'emit').and.callThrough();
+            spyOn(comp.control, 'updateValue').and.callThrough();
+            comp.onChanged(10);
+            expect(comp.value).toBe(10);
+            expect(comp.update.emit).toHaveBeenCalledWith(10);
+            expect(comp.control.updateValue).toHaveBeenCalledWith(10);
+        });
+    });
+});
