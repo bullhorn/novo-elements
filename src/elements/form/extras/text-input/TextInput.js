@@ -28,10 +28,22 @@ export class TextInput extends BaseInput {
         this.inputState = new EventEmitter();
     }
 
+    ngOnInit() {
+        super.ngOnInit();
+        setTimeout(() => {
+            this.toggleActive(null);
+        }, 10);
+    }
+
     toggleActive(evt) {
-        if (evt.type === 'focus') this.active = true;
-        else if (evt.type === 'blur' && evt.target.value.length > 0) this.active = true;
-        else this.active = false;
+        if (evt) {
+            if (evt.type === 'focus' || this.placeholder) this.active = true;
+            else if (evt.type === 'blur' && evt.target.value.length > 0 || this.placeholder) this.active = true;
+            else this.active = false;
+        } else {
+            if (this.placeholder) this.active = true;
+            else this.active = false;
+        }
 
         this.inputState.emit({
             value: this.active
