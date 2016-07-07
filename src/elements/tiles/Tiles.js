@@ -1,7 +1,5 @@
-import { Component, EventEmitter } from '@angular/core';
-import { CORE_DIRECTIVES, Validators, Control } from '@angular/common';
-
-import { NovoLabelService } from '../../services/novo-label-service';
+import { Component, EventEmitter, Optional } from '@angular/core'; // eslint-disable-line
+import { CORE_DIRECTIVES, NgControl, NgModel } from '@angular/common';
 
 @Component({
     selector: 'novo-tiles',
@@ -10,40 +8,35 @@ import { NovoLabelService } from '../../services/novo-label-service';
         'options',
         'required'
     ],
+    outputs: [
+        'changed'
+    ],
     directives: [
         CORE_DIRECTIVES
     ],
-    outputs: [
-        'update'
-    ],
     template: `
-        <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
         <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked}" (click)="select($event, option, i)">
             <label [attr.for]="name + i">
                 <span>{{ option.label || option}}</span>
             </label>
             <input [hidden]="true" [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i">
         </div>
-        <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{ labels.required }}</span>
     `
 })
 export class Tiles {
-    update:EventEmitter = new EventEmitter();
-
-    constructor(labels: NovoLabelService) {
-        this.validators = [];
-        this.value = null;
+    changed:EventEmitter = new EventEmitter;
+    constructor(@Optional() model:NgControl) {
+        this.model = model || new NgModel();
+        this.model.valueAccessor = this;
         this._options = [];
-        this.labels = labels;
     }
 
     ngOnInit() {
         this.name = this.name || '';
-        if (this.required) {
-            this.validators.push(Validators.required);
+
+        if (this.control) {
+            this.control.updateValue(this.value);
         }
-        this.control = new Control('', Validators.compose(this.validators));
-        this.control.updateValue(this.value);
         if (this.options && this.options.length && !this.options[0].value) {
             this._options = this.options.map((x) => {
                 return { value: x, label: x, checked: this.value === x };
@@ -71,8 +64,21 @@ export class Tiles {
             option.checked = false;
         }
         item.checked = !item.checked;
-        if (this.update) this.update.emit(item.value);
-        if (this.control) this.control.updateValue(item.value);
+        this.changed.emit(item.value);
+        this.model.viewToModelUpdate(item.value);
+    }
+
+    // ValueAccessor Functions
+    writeValue(value) {
+        this.value = value;
+    }
+
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn) {
+        this.onTouched = fn;
     }
 }
 
