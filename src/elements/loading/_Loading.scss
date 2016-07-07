@@ -1,20 +1,3 @@
-@mixin enum-delay-child($map) {
-    $keys: map-keys($map);
-    @each $item in $keys {
-        $idx: index($keys, $item);
-
-        &:nth-of-type(#{$idx}) {
-            dot {
-                background-color: map-get($map, $item);
-
-                &.cycle {
-                    animation-delay: 100ms * $idx;
-                }
-            }
-        }
-    }
-}
-
 novo-loading {
     padding: 20px;
     display: flex;
@@ -25,11 +8,10 @@ novo-loading {
         display: block;
         border-radius: 50%;
         margin: 3px;
-        animation: jump 1600ms infinite;
         height: 13px;
         width: 13px;
         @include enumerate($dot-colors, 'background-color', 'map-val', '');
-        @include delay($dot-colors, 70ms);
+        @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, '', '');
     }
     @each $analytics, $color in $analytics-colors {
         &.#{$analytics} {
