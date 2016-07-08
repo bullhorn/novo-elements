@@ -10,7 +10,7 @@ import { NovoLabelService } from './../../novo-elements';
     inputs: ['options', 'placeholder', 'readonly', 'headerConfig'],
     outputs: ['onSelect'],
     template: `
-        <button (click)="toggleActive($event)" tabIndex="-1" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></button>
+        <div (click)="toggleActive($event)" tabIndex="-1" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></div>
         <ul class="novo-select-list" tabIndex="-1" [ngClass]="{header: headerConfig}">
             <ng-content></ng-content>
             <li *ngIf="headerConfig" class="select-header" [ngClass]="{open: header.open}">

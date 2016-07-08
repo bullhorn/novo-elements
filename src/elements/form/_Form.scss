@@ -185,6 +185,20 @@ novo-form {
                         div.datetime-container {
                             position: absolute;
                             display: flex;
+                            box-shadow: 0 1px 3px rgba(#000,.1);
+
+                            .calendar {
+                                border-top-right-radius: 0;
+                                border-bottom-right-radius: 0;
+                                box-shadow: none;
+                                border-right: 1px solid rgba($light, .5);
+                            }
+
+                            novo-time-picker {
+                                border-top-left-radius: 0;
+                                border-bottom-left-radius: 0;
+                                box-shadow: none;
+                            }
                         }
                     }
 
@@ -364,8 +378,8 @@ novo-form {
                                 color: rgba(0, 0, 0, .3);
                             }
 
-                             > h4,
-                            > p {
+                             > p,
+                            > h4 {
                                 margin: 0;
                                 max-width: none;
                                 padding: 0;
@@ -509,6 +523,12 @@ novo-form {
                             label {
                                 font-size: 1em;
                                 font-weight: 400;
+                            }
+                        }
+
+                        novo-select {
+                            div[type="button"] {
+                                justify-content: flex-end;
                             }
                         }
                     }

@@ -1,8 +1,16 @@
 <novo-form>
-    <form-title>Select Field</form-title>
+    <form-title>Default Select Field</form-title>
     <form-field>
         <form-label>Select</form-label>
         <form-input name="status" type="select" [options]="statusOptions" [(value)]="myStatus" placeholder="Status"></form-input>
     </form-field>
 </novo-form>
-<div>My status is {{myStatus}}</div>
+<div class="final-value">My status is {{myStatus}}</div>
+<novo-form layout="vertical">
+    <form-title>Vertical Select Field</form-title>
+    <form-field>
+        <form-label>Select</form-label>
+        <form-input name="status" type="select" [options]="statusOptions" [(value)]="myStatus"></form-input>
+    </form-field>
+</novo-form>
+<div class="final-value">My status is {{myStatus}}</div>
