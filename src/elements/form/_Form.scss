@@ -490,23 +490,25 @@ novo-form {
 
                     form-label {
                         position: absolute;
-                        bottom: 13px;
+                        top: -13px;
                         transition: all 90ms ease-in-out;
+                        width: 100%;
+                        max-width: 390px;
 
                         label {
-                            font-size: 1em;
-                            font-weight: 400;
+                            font-size: 0.8em;
+                            font-weight: 500;
                             transition: font-size 7ms ease-in-out;
                         }
                     }
 
-                    &.active {
+                    &.inactive {
                         form-label {
-                            transform: translateY(-26px);
+                            transform: translateY(26px);
 
                             label {
-                                font-size: 0.8em;
-                                font-weight: 500;
+                                font-size: 1em;
+                                font-weight: 400;
                             }
                         }
                     }

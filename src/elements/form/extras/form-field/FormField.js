@@ -15,13 +15,13 @@ import { FormLabelMeta, FormInput } from '../FormExtras';
     `,
     host: {
         '[attr.data-automation-id]': 'name',
-        '[class.active]': 'active'
+        '[class.inactive]': 'inactive'
     }
 })
 export class FormField {
     field:FormInput;
     inputs:QueryList;
-    active:Boolean = false;
+    inactive:Boolean = false;
     constructor(el:ElementRef, @Query(FormInput) inputs:QueryList) {
         this.element = el;
         this.inputs = inputs;
@@ -31,7 +31,7 @@ export class FormField {
         setTimeout(() => {
             this.field = this.inputs.first;
             this.field.inputState.subscribe((evt) => {
-                this.active = evt.value;
+                this.inactive = evt.value;
             });
         });
     }

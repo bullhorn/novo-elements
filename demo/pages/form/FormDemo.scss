@@ -16,14 +16,14 @@ form-demo {
         }
     }
 
-    .text-input {
-        novo-form {
-            margin: 25px 0;
-        }
+    novo-form {
+        margin: 25px 0;
     }
 
     .final-value {
         color: #afafaf;
-        padding-bottom: 45px;
+        padding: 10px;
+        background: #f4f4f4;
+        margin-bottom: 45px;
     }
 }

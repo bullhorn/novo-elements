@@ -20,7 +20,7 @@ import { NovoLabelService } from './../../../../novo-elements';
 })
 export class TextInput extends BaseInput {
     value:String = '';
-    active:Boolean = false;
+    inactive:Boolean = false;
 
     constructor(labels:NovoLabelService) {
         super();
@@ -37,16 +37,16 @@ export class TextInput extends BaseInput {
 
     toggleActive(evt) {
         if (evt) {
-            if (evt.type === 'focus' || this.placeholder) this.active = true;
-            else if (evt.type === 'blur' && evt.target.value.length > 0 || this.placeholder) this.active = true;
-            else this.active = false;
+            if (evt.type === 'focus' || this.placeholder) this.inactive = false;
+            else if (evt.type === 'blur' && evt.target.value.length > 0 || this.placeholder) this.inactive = false;
+            else this.inactive = true;
         } else {
-            if (this.placeholder) this.active = true;
-            else this.active = false;
+            if (this.placeholder) this.inactive = false;
+            else this.inactive = true;
         }
 
         this.inputState.emit({
-            value: this.active
+            value: this.inactive
         });
     }
 }
