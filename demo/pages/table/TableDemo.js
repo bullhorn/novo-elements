@@ -40,7 +40,7 @@ const HEADER_COLORS = ['blue', 'green', 'yellow', 'orange', 'red', 'purple'];
     template: `
         <div class="status-cell">
             <i class="bhi-info"></i>
-            <label>{{value}}</label>
+            <label>{{ value }}</label>
         </div>
     `
 })
@@ -52,9 +52,9 @@ export class StatusCell extends BaseRenderer {
     template: `
         <div class="extra-data">
             <label><i class="bhi-info"></i>Description</label>
-            <p>{{data.description}}</p>
+            <p>{{ data.description }}</p>
             <label><i class="bhi-info"></i>Categories</label>
-            <p>{{data.categories}}</p>
+            <p>{{ data.categories }}</p>
         </div>
     `
 })
@@ -95,7 +95,16 @@ export class TableDemo {
                     return 0;
                 }
             },
-            { title: 'Start date', name: 'startDate', ordering: true },
+            {
+                title: 'Start date',
+                name: 'startDate',
+                ordering: true,
+                filtering: true,
+                options: {
+                    type: 'date',
+                    data: ['Last 7 Days']
+                }
+            },
             {
                 title: 'Salary',
                 name: 'salary',
@@ -107,7 +116,10 @@ export class TableDemo {
             {
                 title: 'Status',
                 name: 'status',
-                options: ['New Lead', 'Active', 'Archived'],
+                options: {
+                    type: 'list',
+                    data: ['New Lead', 'Active', 'Archived']
+                },
                 ordering: true,
                 renderer: StatusCell,
                 filtering: true
@@ -122,7 +134,6 @@ export class TableDemo {
                     current: 1,
                     itemsPerPage: 10,
                     onPageChange: event => {
-                        // console.log('P', event);
                         this.basic.config.paging.current = event.page;
                         this.basic.config.paging.itemsPerPage = event.itemsPerPage;
                     }
@@ -133,7 +144,6 @@ export class TableDemo {
                 resizing: true
             },
             onTableChange: (event) => {
-                // console.log('Table Change', event);
                 this.basic.rows = event.rows;
             }
         };
@@ -146,7 +156,6 @@ export class TableDemo {
                     current: 1,
                     itemsPerPage: 10,
                     onPageChange: event => {
-                        // console.log('P', event);
                         this.details.config.paging.current = event.page;
                         this.details.config.paging.itemsPerPage = event.itemsPerPage;
                     }
@@ -159,7 +168,6 @@ export class TableDemo {
                 detailsRenderer: ExtraDetails
             },
             onTableChange: (event) => {
-                // console.log('Table Change', event);
                 this.details.rows = event.rows;
             }
         };
@@ -172,7 +180,6 @@ export class TableDemo {
                     current: 1,
                     itemsPerPage: 10,
                     onPageChange: event => {
-                        // console.log('P', event);
                         this.details.config.paging.current = event.page;
                         this.details.config.paging.itemsPerPage = event.itemsPerPage;
                     }
