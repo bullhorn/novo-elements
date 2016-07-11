@@ -10,3 +10,15 @@
         <form-input name="entity" type="entity" [(options)]="autocompleteContacts" placeholder="Pick a Contact"></form-input>
     </form-field>
 </novo-form>
+
+<novo-form layout="vertical">
+    <form-title>Vertical Autocomplete Field</form-title>
+    <form-field>
+        <form-label>State</form-label>
+        <form-input name="state" type="picker" [(options)]="autocompleteFlatArrayOptions" placeholder="Pick a State"></form-input>
+    </form-field>
+    <form-field>
+        <form-label>State</form-label>
+        <form-input name="state" type="picker" [(options)]="autocompleteFlatArrayOptions"></form-input>
+    </form-field>
+</novo-form>

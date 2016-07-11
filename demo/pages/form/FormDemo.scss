@@ -1,6 +1,10 @@
 form-demo {
     .example.form-demo {
         padding: 20px;
+
+        &.dynamic {
+            padding-left: 40px;
+        }
     }
 
     .dynamic-demo-footer {

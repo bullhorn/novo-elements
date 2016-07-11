@@ -73,7 +73,7 @@ const template = `
 
     <h2>Dynamic Form</h2>
     <p>Dynamic forms are composed of one element, <code>&lt;novo-form [meta]="dynamicData"/&gt;</code> and allow you to pass in dynamic data as a <code>[meta]</code> attribute.</p>
-    <div class="example form-demo">${DynamicFormDemoTpl}</div>
+    <div class="example form-demo dynamic">${DynamicFormDemoTpl}</div>
     <code-snippet [code]="DynamicFormDemoTpl"></code-snippet>
 </div>
 `;
