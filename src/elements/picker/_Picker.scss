@@ -95,7 +95,7 @@ picker-null-recent-results {
     &.active {
         max-height: 200px;
         overflow: auto;
-        padding: 8px 0 16px;
+        padding: 0 0 16px;
         z-index: 2;
     }
     &:focus {
@@ -116,4 +116,3 @@ picker-loader {
     align-items: center;
     flex-direction: column;
 }
-
