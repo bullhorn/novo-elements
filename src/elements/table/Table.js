@@ -337,7 +337,7 @@ export class NovoTable {
                     return columnFilter.label === filter.label;
                 });
             } else {
-                isActive = columnFilters.filter.includes(filter);
+                isActive = ~columnFilters.filter.indexOf(filter);
             }
         }
         return isActive;
