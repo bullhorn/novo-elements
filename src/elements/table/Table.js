@@ -270,7 +270,10 @@ export class NovoTable {
                     this.rows = this.originalRows.filter(item => {
                         let matched;
                         for (const column of filters) {
-                            if (Array.isArray(column.filter)) {
+                            if (column.match && isFunction(column.match)) {
+                                // Custom match function on the column
+                                matched = column.match(item[column.name], column.filter);
+                            } else if (Array.isArray(column.filter)) {
                                 // The filters are an array (multi-select), check value
                                 if (column.options && column.options.type && column.options.type === 'date') {
                                     // It's a date, use the date difference
@@ -291,9 +294,6 @@ export class NovoTable {
                                     // It's a list of options
                                     matched = column.filter.includes(item[column.name]);
                                 }
-                            } else if (column.match && isFunction(column.match)) {
-                                // Custom match function on the column
-                                matched = column.match(item[column.name], column.filter);
                             } else if (Array.isArray(item[column.name])) {
                                 // Value is an array
                                 for (const value of item[column.name]) {
