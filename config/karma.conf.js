@@ -58,12 +58,13 @@ module.exports = function (config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: [
-            'Chrome'
-            // 'PhantomJS'
+            // 'Chrome'
+            'PhantomJS'
         ],
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
-        singleRun: false
+        // singleRun: false
+        singleRun: true
     });
 };

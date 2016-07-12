@@ -66,24 +66,21 @@ import { NovoLabelService } from './../../novo-elements';
                                                 <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{ labels.clear }}</button>
                                             </div>
                                         </item>
-                                        <item [ngClass]="{ active: column.filter && column.filter.length && column.filter.includes(option) }" *ngFor="let option of column.options.data" (click)="onFilterClick(column, option)"[attr.data-automation-id]="option">
-                                            {{ option }} <i class="bhi-check" *ngIf="column.filter && column.filter.length && column.filter.includes(option)"></i>
+                                        <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options.data" (click)="onFilterClick(column, option)" [attr.data-automation-id]="option">
+                                            {{ option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
                                         </item>
                                     </list>
                                     <!-- FILTER OPTIONS DATE -->
                                     <list *ngSwitchWhen="'date'">
-                                        
                                         <item class="filter-search">
                                             <div class="header">
                                                 <span>{{ labels.filters }}</span>
                                                 <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{ labels.clear }}</button>
                                             </div>
                                         </item>
-                                        
-                                        <item [ngClass]="{ active: column.filter && column.filter.length && column.filter.includes(option) }" *ngFor="let option of getDateIntervals(column.options, rows)" (click)="onFilterClick(column, option)"[attr.data-automation-id]="option">
-                                            {{ option }} <i class="bhi-check" *ngIf="column.filter && column.filter.length && column.filter.includes(option)"></i>
+                                        <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options.data" (click)="onFilterClick(column, option)" [attr.data-automation-id]="option">
+                                            {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
                                         </item>
-                                        
                                     </list>
                                     <!-- FILTER SEARCH INPUT -->
                                     <list *ngSwitchDefault="">
@@ -102,7 +99,7 @@ import { NovoLabelService } from './../../novo-elements';
                 </tr>
             </thead>
             <!-- TABLE DATA -->
-            <tbody>
+            <tbody *ngIf="rows.length > 0">
                 <template ngFor let-row="$implicit" [ngForOf]="rows | slice:getPageStart():getPageEnd()">
                     <tr class="table-row" [ngClass]="row.customClass || ''" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
                         <td class="row-actions" *ngIf="config.hasDetails">
@@ -125,9 +122,9 @@ import { NovoLabelService } from './../../novo-elements';
                 </template>
             </tbody>
             <!-- NO TABLE DATA PLACEHOLDER -->
-            <tbody *ngIf="rows.length <= 0" data-automation-id="empty-table">
+            <tbody *ngIf="rows.length === 0" data-automation-id="empty-table">
                 <tr>
-                    <td>
+                    <td colspan="100%">
                         <div class="no-matching-records">
                             <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
                         </div>
@@ -139,7 +136,7 @@ import { NovoLabelService } from './../../novo-elements';
 })
 export class NovoTable {
     constructor(labels:NovoLabelService) {
-        // NG2
+        // NG2 (outputs)
         this.onRowClick = new EventEmitter();
         this.onRowSelect = new EventEmitter();
         this.onTableChange = new EventEmitter();
@@ -151,49 +148,29 @@ export class NovoTable {
         this.master = false;
         this.indeterminate = false;
         this.lastPage = 0;
-
-        // TODO: Delete this
-        this.intervalIndex = 0;
     }
 
-    getDateIntervals(options, rowData) {
-        let intervals = [];
+    ngOnInit() {
+        // Fail-safe inputs
+        this.rows = this.rows || [];
+        this.columns = this.columns || [];
+        this.config = this.config || {};
 
-        // Only assign date intervals to cells with dates
-        if (options && options.type && options.type === 'date') {
-
-            // this.intervalIndex = this.intervalIndex + 1;
-
-            // console.log(options);
-
-            intervals = Array.isArray(options.data) ? options.data : [];
-
-            // Add a filter key to the row data (only execute once)
-            if (rowData && rowData.length && !rowData[0].hasOwnProperty('dateDifference')) {
-                rowData.map(row => {
-                    return row.dateDifference = 1;
-                });
+        // Check columns for cell option types
+        this.columns.forEach(column => {
+            if (column && column.options && column.options.type) {
+                switch (column.options.type) {
+                    case 'date':
+                        // Structure dates to be sortable
+                        this.structureDateCells(this.rows, column.name);
+                        // Set options based on dates if there are none
+                        column.options.data = (column.options.data || this.setDateOptions(this.rows));
+                        break;
+                    default:
+                        break;
+                }
             }
-
-            // let range = [];
-            // // Get max and min
-            // this.rows.forEach(row => {
-            //     range.push(row.startDate);
-            // });
-            //
-            // range.sort((firstDate, secondDate) => {
-            //     return new Date(firstDate) - new Date(secondDate);
-            // });
-            //
-            // let minDate = range[0];
-            //
-            // let maxDate = range[range.length - 1];
-            //
-            // console.log(`Min: ${minDate} \rMax: ${maxDate}`);
-
-            console.log(`Ran ${this.intervalIndex} times.`);
-        }
-        return intervals;
+        });
     }
 
 	/**
@@ -277,36 +254,55 @@ export class NovoTable {
 
 	/**
      * @name onFilterChange
+     *
+     * @description This method updates the row data to reflect the active filters.
      */
     onFilterChange() {
         if (this.config.filtering) {
-            const filters = this.columns.filter((col) => col.filter && col.filter.length);
-
+            // Array of filters
+            const filters = this.columns.filter(col => col.filter && col.filter.length);
+            // debugger;
             if (filters.length) {
                 if (isFunction(this.config.filtering)) {
                     // Custom filter function on the table config
                     this.rows = this.config.filtering(filters, this.originalRows);
                 } else {
-                    this.rows = this.originalRows.filter((item) => {
+                    this.rows = this.originalRows.filter(item => {
                         let matched;
                         for (const column of filters) {
                             if (Array.isArray(column.filter)) {
-                                // If the filters are an array (multi-select), check value
-                                matched = column.filter.includes(item[column.name]);
-                            } else {
-                                if (column.match && isFunction(column.match)) {
-                                    // Custom match function on the column
-                                    matched = column.match(item[column.name], column.filter);
-                                } else if (Array.isArray(item[column.name])) {
-                                    // Value is an array
-                                    for (const value of item[column.name]) {
-                                        matched = value.match(new RegExp(column.filter, 'gi'));
-                                        if (!matched) break;
-                                    }
+                                // The filters are an array (multi-select), check value
+                                if (column.options && column.options.type && column.options.type === 'date') {
+                                    // It's a date, use the date difference
+                                    matched = column.filter.some(value => {
+                                        let min = value.min;
+                                        let max = value.max;
+                                        let isMatch = false;
+                                        if (typeof(min) !== 'undefined' && typeof(max) !== 'undefined') {
+                                            isMatch = (item._dateDifference >= min && item._dateDifference <= max);
+                                        } else if (typeof(min) !== 'undefined') {
+                                            isMatch = item._dateDifference >= min;
+                                        } else if (typeof(max) !== 'undefined') {
+                                            isMatch = item._dateDifference <= max;
+                                        }
+                                        return isMatch;
+                                    });
                                 } else {
-                                    // Basic, value is just a string
-                                    matched = JSON.stringify(item[column.name]).match(new RegExp(column.filter, 'gi'));
+                                    // It's a list of options
+                                    matched = column.filter.includes(item[column.name]);
                                 }
+                            } else if (column.match && isFunction(column.match)) {
+                                // Custom match function on the column
+                                matched = column.match(item[column.name], column.filter);
+                            } else if (Array.isArray(item[column.name])) {
+                                // Value is an array
+                                for (const value of item[column.name]) {
+                                    matched = value.match(new RegExp(column.filter, 'gi'));
+                                    if (!matched) break;
+                                }
+                            } else {
+                                // Basic, value is just a string
+                                matched = JSON.stringify((item[column.name] || '')).match(new RegExp(column.filter, 'gi'));
                             }
                             if (!matched) break;
                         }
@@ -316,15 +312,35 @@ export class NovoTable {
             } else {
                 this.rows = this.originalRows;
             }
-
             // Trickle down to keep sort
             this.onSortChange(this.currentSortColumn);
-
             // If paging, reset page
             if (this.config.paging) {
                 this.config.paging.current = 1;
             }
         }
+    }
+
+	/**
+     * @name isFilterActive
+     * @param columnFilters
+     * @param filter
+     * @returns {boolean}
+     *
+     * @description
+     */
+    isFilterActive(columnFilters, filter) {
+        let isActive = false;
+        if (columnFilters && columnFilters.filter && filter) {
+            if (typeof(filter) !== 'string') {
+                isActive = columnFilters.filter.some(columnFilter => {
+                    return columnFilter.label === filter.label;
+                });
+            } else {
+                isActive = columnFilters.filter.includes(filter);
+            }
+        }
+        return isActive;
     }
 
 	/**
@@ -475,6 +491,73 @@ export class NovoTable {
         if (this.config.rowSelect) {
             this.activeId = row.id || 0;
             this.onRowClick.emit(row);
+        }
+    }
+
+    /**
+     * @name setDateOptions
+     * @param rowData
+     * @returns {Array}
+     */
+    setDateOptions(rowData) {
+        let range = [];
+        // Get max and min
+        rowData.forEach(row => {
+            range.push(row._dateDifference);
+        });
+        range.sort();
+        let minDate = range[0];
+        let maxDate = range[range.length - 1];
+        let dateOptions = [];
+        // For performance these could be staggered mathematically, but the order of the options needs to be preserved
+        if (maxDate > 91) {
+            dateOptions.push({ label: 'Beyond 90 Days', min: 90 });
+        }
+        if (maxDate >= 90) {
+            dateOptions.push({ label: 'Next 90 Days', min: 0, max: 90 });
+        }
+        if (maxDate >= 30) {
+            dateOptions.push({ label: 'Next 30 Days', min: 0, max: 30 });
+        }
+        if (maxDate >= 7) {
+            dateOptions.push({ label: 'Next 7 Days', min: 0, max: 7 });
+        }
+        if (minDate <= -7) {
+            dateOptions.push({ label: 'Past 7 Days', min: -7, max: 0 });
+        }
+        if (minDate <= -30) {
+            dateOptions.push({ label: 'Past 30 Days', min: -30, max: 0 });
+        }
+        if (minDate <= -90) {
+            dateOptions.push({ label: 'Past 90 Days', min: -90, max: 0 });
+        }
+        if (minDate < -91) {
+            dateOptions.push({ label: 'Older than 90 Days', max: -90 });
+        }
+        return dateOptions;
+    }
+
+    /**
+     * @name structureDateCells
+     * @param rowData
+     * @param key
+     */
+    structureDateCells(rowData, key) {
+        // Add a filter key to the row data (only execute once)
+        if (rowData && rowData.length && !rowData[0].hasOwnProperty('dateDifference') && key) {
+            rowData.map(row => {
+                let oneDay = 24 * 60 * 60 * 1000;
+                // Assumes row data contains a JS date object
+                let firstDate = row[key];
+                let secondDate = new Date();
+                let difference = 0;
+                try {
+                    difference = Math.round((firstDate.getTime() - secondDate.getTime()) / oneDay);
+                } catch (error) {
+                    throw new Error('Row data of type \'date\' must contain a JS date object as its value.', error);
+                }
+                return row._dateDifference = difference;
+            });
         }
     }
 }
