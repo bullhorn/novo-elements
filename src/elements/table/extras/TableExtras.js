@@ -7,4 +7,6 @@ import { ThSortable } from './th-sortable/ThSortable';
 import { DateCell } from './date-cell/DateCell';
 
 export { BaseRenderer } from './base-renderer/BaseRenderer';
+export { DateCell } from './date-cell/DateCell';
+
 export const NOVO_TABLE_EXTRA_ELEMENTS = [Pagination, RowDetails, TableCell, TableFilter, ThOrderable, ThSortable, DateCell];

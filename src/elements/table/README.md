@@ -50,7 +50,7 @@ In general the column definition will be an object with some basic configuration
     * Key to render when rendering the row object
 - `'type' : String : default: 'text'`
     * Type of the column
-    * Current Values: `['text', 'link']`
+    * Current Values: `['text', 'link', 'date']`
 - `'ordering' : Bool : default: false`
     * Determines if the column can be re-ordered
 - `'sorting' : Bool : default: false`
@@ -63,3 +63,5 @@ In general the column definition will be an object with some basic configuration
     * Custom compare function for the column, used in sorting, useful if it is an embedded object
 - `'match' : Func : default: null`
     * Custom match function for the column, used in filtering, useful if it uses an embedded object
+- `'options' : Array : default: null`
+    * Custom options for a filter

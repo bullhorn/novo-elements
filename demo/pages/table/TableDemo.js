@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS, NOVO_TOOLTIP_ELEMENTS, BaseRenderer } from './../../../src/novo-elements';
-import { DateCell } from './../../../src/elements/table/extras/date-cell/DateCell';
+import { DateCell } from '../../../src/elements/table/extras/TableExtras';
 
 import { TableData } from './TableData';
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
@@ -73,8 +73,6 @@ export class TableDemo {
         this.DetailsTableDemoTpl = DetailsTableDemoTpl;
         this.SelectAllTableDemoTpl = SelectAllTableDemoTpl;
 
-        // console.log(DateCell);
-
         let columns = [
             { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true },
             { title: 'Position', name: 'position', ordering: true, filtering: true },
@@ -100,13 +98,11 @@ export class TableDemo {
             },
             {
                 title: 'Start date',
+                type: 'date',
                 name: 'startDate',
+                renderer: DateCell,
                 ordering: true,
-                filtering: true,
-                options: {
-                    type: 'date'
-                },
-                renderer: DateCell
+                filtering: true
             },
             {
                 title: 'Salary',
@@ -119,10 +115,7 @@ export class TableDemo {
             {
                 title: 'Status',
                 name: 'status',
-                options: {
-                    type: 'list',
-                    data: ['New Lead', 'Active', 'Archived']
-                },
+                options: ['New Lead', 'Active', 'Archived'],
                 ordering: true,
                 renderer: StatusCell,
                 filtering: true

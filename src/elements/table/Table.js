@@ -1,6 +1,6 @@
 // NG2
 import { Component, EventEmitter } from '@angular/core';
-import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgModel, NgSwitch, NgSwitchWhen, NgSwitchDefault } from '@angular/common';
+import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgModel } from '@angular/common';
 import { isFunction, isString } from '@angular/core/src/facade/lang';
 // App
 import { NOVO_BUTTON_ELEMENTS } from '../button';
@@ -28,10 +28,7 @@ import { NovoLabelService } from './../../novo-elements';
         FORM_DIRECTIVES,
         NOVO_BUTTON_ELEMENTS,
         NOVO_DROPDOWN_ELEMENTS,
-        CheckBox,
-        NgSwitch,
-        NgSwitchWhen,
-        NgSwitchDefault
+        CheckBox
     ],
     template: `
         <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
@@ -57,42 +54,28 @@ import { NovoLabelService } from './../../novo-elements';
                             <!-- FILTER DROP-DOWN -->
                             <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters">
                                 <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter" (click)="focusInput(column.name)"></button>
-                                <div [ngSwitch]="column?.options?.type">
-                                    <!-- FILTER OPTIONS LIST -->
-                                    <list *ngSwitchWhen="'list'">
-                                        <item class="filter-search">
-                                            <div class="header">
-                                                <span>{{ labels.filters }}</span>
-                                                <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{ labels.clear }}</button>
-                                            </div>
-                                        </item>
-                                        <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options.data" (click)="onFilterClick(column, option)" [attr.data-automation-id]="option">
-                                            {{ option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
-                                        </item>
-                                    </list>
-                                    <!-- FILTER OPTIONS DATE -->
-                                    <list *ngSwitchWhen="'date'">
-                                        <item class="filter-search">
-                                            <div class="header">
-                                                <span>{{ labels.filters }}</span>
-                                                <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{ labels.clear }}</button>
-                                            </div>
-                                        </item>
-                                        <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options.data" (click)="onFilterClick(column, option)" [attr.data-automation-id]="option">
-                                            {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
-                                        </item>
-                                    </list>
-                                    <!-- FILTER SEARCH INPUT -->
-                                    <list *ngSwitchDefault="">
-                                        <item class="filter-search">
-                                            <div class="header">
-                                                <span>{{ labels.filters }}</span>
-                                                <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{ labels.clear }}</button>
-                                            </div>
-                                            <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter"/>
-                                        </item>
-                                    </list>
-                                </div>
+                                <!-- FILTER OPTIONS LIST -->
+                                <list *ngIf="column?.options?.length">
+                                    <item class="filter-search">
+                                        <div class="header">
+                                            <span>{{ labels.filters }}</span>
+                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{ labels.clear }}</button>
+                                        </div>
+                                    </item>
+                                    <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="option">
+                                        {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
+                                    </item>
+                                </list>
+                                <!-- FILTER SEARCH INPUT -->
+                                <list *ngIf="!column?.options?.length">
+                                    <item class="filter-search">
+                                        <div class="header">
+                                            <span>{{ labels.filters }}</span>
+                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{ labels.clear }}</button>
+                                        </div>
+                                        <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter"/>
+                                    </item>
+                                </list>
                             </novo-dropdown>
                         </div>
                     </th>
@@ -158,13 +141,13 @@ export class NovoTable {
 
         // Check columns for cell option types
         this.columns.forEach(column => {
-            if (column && column.options && column.options.type) {
-                switch (column.options.type) {
+            if (column && column.type) {
+                switch (column.type) {
                     case 'date':
                         // Structure dates to be sortable
                         this.structureDateCells(this.rows, column.name);
                         // Set options based on dates if there are none
-                        column.options.data = (column.options.data || this.setDateOptions(this.rows));
+                        column.options = (column.options || this.setDateOptions(this.rows));
                         break;
                     default:
                         break;
@@ -275,7 +258,7 @@ export class NovoTable {
                                 matched = column.match(item[column.name], column.filter);
                             } else if (Array.isArray(column.filter)) {
                                 // The filters are an array (multi-select), check value
-                                if (column.options && column.options.type && column.options.type === 'date') {
+                                if (column.type && column.type === 'date') {
                                     // It's a date, use the date difference
                                     matched = column.filter.some(value => {
                                         let min = value.min;

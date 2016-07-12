@@ -7,6 +7,9 @@ import { BaseRenderer } from '../base-renderer/BaseRenderer';
     pipes: [
         DatePipe
     ],
+    inputs: [
+        'value'
+    ],
     template: `
         <div class="date-cell">
             <label>{{ value | date }}</label>

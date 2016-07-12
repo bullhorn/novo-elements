@@ -15,7 +15,6 @@ class TestCmp {
         this.columns = [{ name: 1 }, { name: 2 }];
         this.config = {};
     }
-
     onTableChange(event) {
         this.event = event;
     }
@@ -161,10 +160,8 @@ describe('Element: Table', () => {
             expect(comp.structureDateCells).toBeDefined();
             let mockOption = { label: 'Today', min: -1, max: 1 };
             comp.columns = [{
-                options: {
-                    type: 'date',
-                    data: [mockOption]
-                }
+                type: 'date',
+                options: [mockOption]
             }];
             // Set dates
             comp.originalRows[0].name = new Date();
