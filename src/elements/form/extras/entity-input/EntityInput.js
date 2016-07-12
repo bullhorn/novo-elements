@@ -26,10 +26,11 @@ import { NovoLabelService } from './../../../../novo-elements';
 })
 export class EntityInput extends BaseInput {
     inactive:Boolean = false;
+    inputState:EventEmitter = new EventEmitter();
+
     constructor(labels:NovoLabelService) {
         super();
         this.labels = labels;
-        this.inputState = new EventEmitter();
     }
 
     ngOnInit() {
@@ -59,14 +60,12 @@ export class EntityInput extends BaseInput {
         this.toggleInactive(value);
     }
 
-    toggleInactive(val) {
-        if (val) {
-            if (val.type === 'focus' || val.type === 'select' || this.placeholder) this.inactive = false;
-            else if (val.type === 'blur' && val.target.value.length > 0 || this.placeholder) this.inactive = false;
-            else if (val.value || this.placeholder) this.inactive = false;
+    toggleInactive(ev) {
+        if (ev) {
+            if (ev.type === 'focus' || this.value || this.placeholder) this.inactive = false;
             else this.inactive = true;
         } else {
-            if (this.placeholder) this.inactive = false;
+            if (this.value || this.placeholder) this.inactive = false;
             else this.inactive = true;
         }
 

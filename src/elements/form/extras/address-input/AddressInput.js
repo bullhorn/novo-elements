@@ -28,10 +28,10 @@ import { getCountries, getStates, findByCountryName } from '../../../../utils/co
     `
 })
 export class AddressInput extends BaseInput {
+    states:Array = [];
     constructor() {
         super();
         this.countries = getCountries();
-        this.states = [];
     }
 
     ngOnInit() {

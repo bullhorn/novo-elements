@@ -25,10 +25,10 @@ import { NovoLabelService } from './../../../../novo-elements';
 })
 export class PickerInput extends BaseInput {
     inactive:Boolean = false;
+    inputState:EventEmitter = new EventEmitter();
     constructor(labels:NovoLabelService) {
         super();
         this.labels = labels;
-        this.inputState = new EventEmitter();
     }
 
     ngOnInit() {
@@ -45,23 +45,22 @@ export class PickerInput extends BaseInput {
     onSelect(value) {
         this.update.emit(value);
         this.control.updateValue(value);
-
         this.toggleInactive(value);
     }
 
-    toggleInactive(val) {
-        if (val) {
-            if (val.type === 'focus' || val.type === 'select' || this.placeholder) this.inactive = false;
-            else if (val.type === 'blur' && val.target.value.length > 0 || this.placeholder) this.inactive = false;
-            else if (val.value || this.placeholder) this.inactive = false;
-            else this.inactive = true;
-        } else {
-            if (this.placeholder) this.inactive = false;
-            else this.inactive = true;
-        }
+    toggleInactive(ev) {
+        setTimeout(() => {
+            if (ev) {
+                if (ev.type === 'focus' || this.value || this.placeholder) this.inactive = false;
+                else this.inactive = true;
+            } else {
+                if (this.value || this.placeholder) this.inactive = false;
+                else this.inactive = true;
+            }
 
-        this.inputState.emit({
-            value: this.inactive
+            this.inputState.emit({
+                value: this.inactive
+            });
         });
     }
 }

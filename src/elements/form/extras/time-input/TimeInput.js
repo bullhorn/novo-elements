@@ -27,10 +27,11 @@ import { NovoLabelService } from './../../../../novo-elements';
 export class TimeInput extends OutsideClick {
     inactive:Boolean = false;
     validators:Array = [];
+    inputState:EventEmitter = new EventEmitter();
+
     constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
         this.labels = labels;
-        this.inputState = new EventEmitter();
     }
 
     // TODO - rethink this
@@ -55,18 +56,20 @@ export class TimeInput extends OutsideClick {
     }
 
     toggleInactive(evt) {
-        if (evt) {
-            if (evt.type === 'focus' || this.placeholder) this.inactive = false;
-            else if (evt.type === 'blur' && evt.target.value.length > 0 || this.placeholder) this.inactive = false;
-            else if (evt.date || this.placeholder) this.inactive = false;
-            else this.inactive = true;
-        } else {
-            if (this.placeholder) this.inactive = false;
-            else this.inactive = true;
-        }
+        setTimeout(() => {
+            if (evt) {
+                if (evt.type === 'focus' || evt.date || this.placeholder) this.inactive = false;
+                else if (evt.type === 'blur' && this.value) this.inactive = false;
+                else if (evt.date && this.value) this.inactive = false;
+                else this.inactive = true;
+            } else {
+                if (this.value || this.placeholder) this.inactive = false;
+                else this.inactive = true;
+            }
 
-        this.inputState.emit({
-            value: this.inactive
+            this.inputState.emit({
+                value: this.inactive
+            });
         });
     }
 }

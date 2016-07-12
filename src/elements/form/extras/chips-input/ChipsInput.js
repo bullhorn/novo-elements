@@ -24,18 +24,18 @@ import { NovoLabelService } from './../../../../novo-elements';
     ],
     template: `
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
-        <chips [source]="options" [ngModel]="tmp" (changed)="onChanged($event)" [placeholder]="placeholder"></chips>
+        <chips [source]="options" [ngModel]="tmp" [placeholder]="placeholder" (changed)="onChanged($event)" (focus)="toggleInactive($event)" (blur)="toggleInactive($event)"></chips>
         <i class="bhi-search"></i>
-        <input [name]="name" type="hidden" [attr.id]="name" (blur)="toggleInactive($event)" (focus)="toggleInactive($event)" [(ngModel)]="value" autocomplete="off" [ngFormControl]="control"/>
+        <input [name]="name" type="hidden" [attr.id]="name" [(ngModel)]="value" autocomplete="off" [ngFormControl]="control"/>
         <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
     `
 })
 export class ChipsInput extends BaseInput {
     inactive:Boolean = false;
+    inputState:EventEmitter = new EventEmitter();
     constructor(labels:NovoLabelService) {
         super();
         this.labels = labels;
-        this.inputState = new EventEmitter();
     }
 
     ngOnInit() {
@@ -46,24 +46,26 @@ export class ChipsInput extends BaseInput {
     }
 
     onChanged(e) {
-        this.value = e.value ? e.value : null;
+        this.value = e.value ? e.value : e;
         this.update.emit(this.value);
-        this.toggleInactive({ value: e });
+        this.toggleInactive({ type: 'select' });
     }
 
-    toggleInactive(val) {
-        if (val) {
-            if (val.type === 'focus' || val.type === 'select' || this.placeholder) this.inactive = false;
-            else if (val.type === 'blur' && val.target.value.length > 0 || this.placeholder) this.inactive = false;
-            else if (val.value || this.placeholder) this.inactive = false;
-            else this.inactive = true;
-        } else {
-            if (this.placeholder) this.inactive = false;
-            else this.inactive = true;
-        }
+    toggleInactive(ev) {
+        setTimeout(() => {
+            this.value = this.value || [];
 
-        this.inputState.emit({
-            value: this.inactive
+            if (ev) {
+                if (ev.type === 'focus' || this.value.length || this.placeholder) this.inactive = false;
+                else this.inactive = true;
+            } else {
+                if (this.placeholder || this.value.length) this.inactive = false;
+                else this.inactive = true;
+            }
+
+            this.inputState.emit({
+                value: this.inactive
+            });
         });
     }
 }

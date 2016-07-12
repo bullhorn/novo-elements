@@ -21,11 +21,11 @@ import { NovoLabelService } from './../../../../novo-elements';
 export class TextInput extends BaseInput {
     value:String = '';
     inactive:Boolean = false;
+    inputState:EventEmitter = new EventEmitter();
 
     constructor(labels:NovoLabelService) {
         super();
         this.labels = labels;
-        this.inputState = new EventEmitter();
     }
 
     ngOnInit() {

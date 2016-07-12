@@ -19,10 +19,11 @@ import { NovoLabelService } from './../../../../novo-elements';
     }
 })
 export class FloatInput extends BaseInput {
+    value:String = '';
+
     constructor(labels:NovoLabelService) {
         super([FormValidators.maxDouble]);
         this.labels = labels;
-        this.value = '';
     }
 
     updateValue(value) {

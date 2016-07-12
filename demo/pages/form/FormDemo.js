@@ -65,7 +65,7 @@ const template = `
 
     <h5>Note</h5>
     <p>This allows the user to add a note with references/tags.</p>
-    <div class="example form-demo">${QuickNoteInputDemoTpl}</div>
+    <div class="example form-demo quicknote">${QuickNoteInputDemoTpl}</div>
     <code-snippet [code]="QuickNoteInputDemoTpl"></code-snippet>
 
     <h5>Required Fields</h5>
