@@ -156,18 +156,15 @@ describe('Element: Table', () => {
 
         it('should update the row data to reflect the active filters (custom config filter).', () => {
             expect(comp.onFilterChange).toBeDefined();
-            // This is needed for the filter
-            expect(comp.structureDateCells).toBeDefined();
-            let mockOption = { label: 'Today', min: -1, max: 1 };
+            let mockOption = { label: 'Today', min: -2, max: 2 };
             comp.columns = [{
+                name: 'name',
                 type: 'date',
                 options: [mockOption]
             }];
             // Set dates
             comp.originalRows[0].name = new Date();
             comp.originalRows[1].name = new Date(1970, 3, 11, 13, 13);
-            // Get's the date difference and appends it to the original rows data (done on init).
-            comp.rows = comp.structureDateCells(comp.originalRows, 'name');
             // Set active filter
             comp.columns[0].filter = [mockOption];
             comp.onFilterChange();
@@ -251,63 +248,11 @@ describe('Element: Table', () => {
         });
     });
 
-    describe('Function: setDateOptions(rowData)', () => {
-        it('should return all options when the data dates cover the full range.', () => {
-            expect(comp.setDateOptions).toBeDefined();
-            let mockRows = [
-                {
-                    id: 1,
-                    name: 'Jane',
-                    _dateDifference: -100
-                },
-                {
-                    id: 2,
-                    name: 'John',
-                    _dateDifference: 100
-                }
-            ];
-            let mockOptions = comp.setDateOptions(mockRows);
-            expect(mockOptions.length).toBe(8);
-        });
+    describe('Function: getDefaultOptions()', () => {
         it('should return a subset of options when the data dates cover a small range.', () => {
-            expect(comp.setDateOptions).toBeDefined();
-            let mockRows = [
-                {
-                    id: 1,
-                    name: 'Jane',
-                    _dateDifference: -33
-                },
-                {
-                    id: 2,
-                    name: 'John',
-                    _dateDifference: 30
-                }
-            ];
-            let mockOptions = comp.setDateOptions(mockRows);
-            expect(mockOptions.length).toBe(4);
-        });
-    });
-
-    describe('Function: structureDateCells(rowData, key)', () => {
-        it('should structure all of the rows to have a \'_dateDifference\' value for filtering.', () => {
-            expect(comp.structureDateCells).toBeDefined();
-            let mockRows = [
-                {
-                    id: 1,
-                    name: 'Jane',
-                    date: new Date()
-                },
-                {
-                    id: 2,
-                    name: 'John',
-                    date: new Date()
-                }
-            ];
-            comp.structureDateCells(mockRows, 'date');
-            expect(mockRows[0]._dateDifference).toBeDefined();
-            expect(mockRows[0]._dateDifference).toBe(0);
-            expect(mockRows[1]._dateDifference).toBeDefined();
-            expect(mockRows[1]._dateDifference).toBe(0);
+            expect(comp.getDefaultOptions).toBeDefined();
+            let mockOptions = comp.getDefaultOptions();
+            expect(mockOptions.length).toBe(8);
         });
     });
 });
