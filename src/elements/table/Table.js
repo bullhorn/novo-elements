@@ -161,7 +161,7 @@ export class NovoTable {
                 switch (column.type) {
                     case 'date':
                         // Set options based on dates if there are none
-                        column.options = (column.options || this.getDefaultOptions(this.rows));
+                        column.options = (column.options || this.getDefaultOptions());
                         break;
                     default:
                         break;
