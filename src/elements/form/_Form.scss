@@ -385,8 +385,8 @@ novo-form {
                                 color: rgba(0, 0, 0, .3);
                             }
 
-                             > p,
-                            > h4 {
+                             > h4,
+                            > p {
                                 margin: 0;
                                 max-width: none;
                                 padding: 0;
@@ -457,7 +457,7 @@ novo-form {
                         }
 
                         novo-select {
-                            > button {
+                            > div[type="button"] {
                                 color: $light;
                                 border-bottom: 1px solid rgba(lighten($dark, 12%), .25);
 
