@@ -11,7 +11,7 @@ import { NovoLabelService } from './../../../../novo-elements';
     directives: [COMMON_DIRECTIVES],
     template: `
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
-        <input [name]="name" type="text" (focus)="toggleActive($event)" (blur)="toggleActive($event)" [attr.id]="name" [placeholder]="placeholder" autocomplete="false" [(ngModel)]="value" [ngFormControl]="control"/>
+        <input [name]="name" type="text" (focus)="toggleInactive($event)" (blur)="toggleInactive($event)" [attr.id]="name" [placeholder]="placeholder" autocomplete="false" [(ngModel)]="value" [ngFormControl]="control"/>
         <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
     `,
     host: {
@@ -31,20 +31,19 @@ export class TextInput extends BaseInput {
     ngOnInit() {
         super.ngOnInit();
         setTimeout(() => {
-            this.toggleActive(null);
+            this.toggleInactive(null);
         }, 10);
     }
 
-    toggleActive(evt) {
+    toggleInactive(evt) {
         if (evt) {
-            if (evt.type === 'focus' || this.placeholder) this.inactive = false;
-            else if (evt.type === 'blur' && evt.target.value.length > 0 || this.placeholder) this.inactive = false;
+            if (evt.type === 'focus' || this.value || this.placeholder) this.inactive = false;
+            else if (evt.type === 'blur' && this.value || this.placeholder) this.inactive = false;
             else this.inactive = true;
         } else {
-            if (this.placeholder) this.inactive = false;
+            if (this.value || this.placeholder) this.inactive = false;
             else this.inactive = true;
         }
-
         this.inputState.emit({
             value: this.inactive
         });
