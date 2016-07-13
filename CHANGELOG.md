@@ -1,3 +1,34 @@
+<a name="0.1.12"></a>
+## [0.1.12](https://github.com/bullhorn/novo-elements/compare/v0.1.11...v0.1.12) (2016-07-13)
+
+
+### Bug Fixes
+
+* **chips:** change extra margin/padding on bottom ([#101](https://github.com/bullhorn/novo-elements/issues/101)) ([35b64be](https://github.com/bullhorn/novo-elements/commit/35b64be))
+
+
+### Features
+
+* **form:** form output to subscribe to changes ([#102](https://github.com/bullhorn/novo-elements/issues/102)) ([6dc3c56](https://github.com/bullhorn/novo-elements/commit/6dc3c56))
+
+
+
+<a name="0.1.11"></a>
+## [0.1.11](https://github.com/bullhorn/novo-elements/compare/v0.1.10...v0.1.11) (2016-07-07)
+
+
+### Bug Fixes
+
+* **forms & select:** Style updates ([2351215](https://github.com/bullhorn/novo-elements/commit/2351215))
+* **loading:** cross-browser fixes for loading animations: chrome, firefox, safari, iOS ([a4668de](https://github.com/bullhorn/novo-elements/commit/a4668de))
+
+
+### Features
+
+* **tiles:** Tiles input and some logic refactoring ([5d14629](https://github.com/bullhorn/novo-elements/commit/5d14629))
+
+
+
 <a name="0.1.10"></a>
 ## [0.1.10](https://github.com/bullhorn/novo-elements/compare/v0.1.9...v0.1.10) (2016-07-06)
 

@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef, ComponentResolver, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewContainerRef, ComponentResolver, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { COMMON_DIRECTIVES } from '@angular/common';
 import { isBlank } from '@angular/core/src/facade/lang';
 
@@ -11,6 +11,7 @@ import { FormField, FormFieldMeta, FormLabel, FormInput } from './extras/FormExt
         'meta',
         'data'
     ],
+    outputs: ['changed'],
     directives: [COMMON_DIRECTIVES],
     template: `
         <div class="novo-form-container">
@@ -33,6 +34,7 @@ export class Form {
         this.element = el;
         this.data = {};
         this.fields = [];
+        this.changed = new EventEmitter();
     }
 
     hideCompletedFields() {
@@ -76,6 +78,7 @@ export class Form {
                             } else {
                                 this.data[event.name] = event.value;
                             }
+                            this.changed.emit(this.data);
                         });
                     });
             });

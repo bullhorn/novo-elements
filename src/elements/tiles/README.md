@@ -11,3 +11,5 @@ A tile is like a radio button group.
     * Collection of values to use
 - `'required' : String`
     * Is this field required
+- `'ngModel' : String`
+    * The value of the Tiles, will be broad casted when the Tiles selected changes

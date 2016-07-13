@@ -192,7 +192,8 @@ export class FormDemo {
             field: 'name'
         };
         this.dynamicData = {
-            lastName: 'Sullivan'
+            lastName: 'Sullivan',
+            nextAction: 'task'
         };
         this.dynamic = {
             entity: 'Opportunity',

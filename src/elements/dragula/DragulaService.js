@@ -30,6 +30,12 @@ export class DragulaService {
         this.bags = [];
     }
 
+	/**
+     * @name add
+     * @param name
+     * @param drake
+     * @returns {*}
+     */
     add(name, drake) {
         let bag = this.find(name);
         if (bag) {
@@ -49,6 +55,11 @@ export class DragulaService {
         return bag;
     }
 
+	/**
+     * @name find
+     * @param name
+     * @returns {*}
+     */
     find(name) {
         for (let i = 0; i < this.bags.length; i++) {
             if (this.bags[i].name === name) {
@@ -58,6 +69,10 @@ export class DragulaService {
         return null;
     }
 
+	/**
+     * @name destroy
+     * @param name
+     */
     destroy(name) {
         let bag = this.find(name);
         let i = this.bags.indexOf(bag);
@@ -65,11 +80,21 @@ export class DragulaService {
         bag.drake.destroy();
     }
 
+	/**
+     * @name setOptions
+     * @param name
+     * @param options
+     */
     setOptions(name, options) {
         let bag = this.add(name, dragula(options)); // eslint-disable-line
         this.handleModels(name, bag.drake);
     }
 
+	/**
+     * @name handleModels
+     * @param name
+     * @param drake
+     */
     handleModels(name, drake) {
         let dragElm;
         let dragIndex;
@@ -114,12 +139,16 @@ export class DragulaService {
         });
     }
 
+	/**
+     * @name setupEvents
+     * @param bag
+     */
     setupEvents(bag) {
         bag.initEvents = true;
         let that = this;
         let emitter = (type) => {
-            function replicate() {
-                let args = Array.prototype.slice.call(arguments);
+            function replicate() { // eslint-disable-line
+                let args = Array.prototype.slice.call(arguments); // eslint-disable-line
                 that[type].emit([bag.name].concat(args));
             }
 
@@ -128,6 +157,12 @@ export class DragulaService {
         this.events.forEach(emitter);
     }
 
+	/**
+     * @name domIndexOf
+     * @param child
+     * @param parent
+     * @returns {*}
+     */
     domIndexOf(child, parent) {
         return Array.prototype.indexOf.call(parent.children, child);
     }

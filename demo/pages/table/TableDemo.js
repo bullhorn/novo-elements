@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS, NOVO_TOOLTIP_ELEMENTS, BaseRenderer } from './../../../src/novo-elements';
+import { DateCell } from '../../../src/elements/table/extras/TableExtras';
 
 import { TableData } from './TableData';
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
@@ -40,7 +41,7 @@ const HEADER_COLORS = ['blue', 'green', 'yellow', 'orange', 'red', 'purple'];
     template: `
         <div class="status-cell">
             <i class="bhi-info"></i>
-            <label>{{value}}</label>
+            <label>{{ value }}</label>
         </div>
     `
 })
@@ -52,9 +53,9 @@ export class StatusCell extends BaseRenderer {
     template: `
         <div class="extra-data">
             <label><i class="bhi-info"></i>Description</label>
-            <p>{{data.description}}</p>
+            <p>{{ data.description }}</p>
             <label><i class="bhi-info"></i>Categories</label>
-            <p>{{data.categories}}</p>
+            <p>{{ data.categories }}</p>
         </div>
     `
 })
@@ -95,7 +96,14 @@ export class TableDemo {
                     return 0;
                 }
             },
-            { title: 'Start date', name: 'startDate', ordering: true },
+            {
+                title: 'Start date',
+                type: 'date',
+                name: 'startDate',
+                renderer: DateCell,
+                ordering: true,
+                filtering: true
+            },
             {
                 title: 'Salary',
                 name: 'salary',
@@ -122,7 +130,6 @@ export class TableDemo {
                     current: 1,
                     itemsPerPage: 10,
                     onPageChange: event => {
-                        // console.log('P', event);
                         this.basic.config.paging.current = event.page;
                         this.basic.config.paging.itemsPerPage = event.itemsPerPage;
                     }
@@ -133,7 +140,6 @@ export class TableDemo {
                 resizing: true
             },
             onTableChange: (event) => {
-                // console.log('Table Change', event);
                 this.basic.rows = event.rows;
             }
         };
@@ -146,7 +152,6 @@ export class TableDemo {
                     current: 1,
                     itemsPerPage: 10,
                     onPageChange: event => {
-                        // console.log('P', event);
                         this.details.config.paging.current = event.page;
                         this.details.config.paging.itemsPerPage = event.itemsPerPage;
                     }
@@ -159,7 +164,6 @@ export class TableDemo {
                 detailsRenderer: ExtraDetails
             },
             onTableChange: (event) => {
-                // console.log('Table Change', event);
                 this.details.rows = event.rows;
             }
         };
@@ -172,7 +176,6 @@ export class TableDemo {
                     current: 1,
                     itemsPerPage: 10,
                     onPageChange: event => {
-                        // console.log('P', event);
                         this.details.config.paging.current = event.page;
                         this.details.config.paging.itemsPerPage = event.itemsPerPage;
                     }

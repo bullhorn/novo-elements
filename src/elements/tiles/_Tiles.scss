@@ -40,7 +40,8 @@ novo-tiles {
         top: -$border-width;
         left: -$border-width;
         height: calc(100% + #{$border-width*2});
-        width: 20px;
+        width: 100%;
+        opacity: 0;
         z-index: 0;
         background: white;
         border: 2px solid $positive;
