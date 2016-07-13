@@ -1,3 +1,18 @@
+<a name="0.1.12"></a>
+## [0.1.12](https://github.com/bullhorn/novo-elements/compare/v0.1.11...v0.1.12) (2016-07-13)
+
+
+### Bug Fixes
+
+* **chips:** change extra margin/padding on bottom ([#101](https://github.com/bullhorn/novo-elements/issues/101)) ([35b64be](https://github.com/bullhorn/novo-elements/commit/35b64be))
+
+
+### Features
+
+* **form:** form output to subscribe to changes ([#102](https://github.com/bullhorn/novo-elements/issues/102)) ([6dc3c56](https://github.com/bullhorn/novo-elements/commit/6dc3c56))
+
+
+
 <a name="0.1.11"></a>
 ## [0.1.11](https://github.com/bullhorn/novo-elements/compare/v0.1.10...v0.1.11) (2016-07-07)
 
