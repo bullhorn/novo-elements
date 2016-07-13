@@ -1,4 +1,6 @@
 import { Component, ElementRef, ComponentResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { COMMON_DIRECTIVES } from '@angular/common';
+import { DateCell } from '../date-cell/DateCell';
 
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 
@@ -8,10 +10,17 @@ import { BaseRenderer } from './../base-renderer/BaseRenderer';
         'column',
         'row'
     ],
+    directives: [
+        DateCell,
+        COMMON_DIRECTIVES
+    ],
     template: `
-        <ref #container></ref>
-        <span *ngIf="!column.type || column.type === 'text'">{{ value }}</span>
-        <a (click)="onClick($event);" *ngIf="column.type === 'link'">{{ value }}</a>
+        <div [ngSwitch]="column._type">
+            <ref *ngSwitchWhen="'custom'" #container></ref>
+            <date-cell *ngSwitchWhen="'date'" [value]="value"></date-cell>
+            <a *ngSwitchWhen="'link'" (click)="onClick($event);">{{ value }}</a>
+            <span *ngSwitchDefault>{{ value }}</span>
+        </div>
     `
 })
 export class TableCell {
@@ -24,9 +33,10 @@ export class TableCell {
     }
 
     ngOnInit() {
+        this.column._type = this.column.type || 'text';
         if (this.column.renderer) {
             if (this.column.renderer.prototype instanceof BaseRenderer) {
-                this.column.type = 'customrenderer';
+                this.column._type = 'custom';
                 this.componentResolver.resolveComponent(this.column.renderer)
                     .then(componentFactory => {
                         let componentRef = this.container.createComponent(componentFactory);
