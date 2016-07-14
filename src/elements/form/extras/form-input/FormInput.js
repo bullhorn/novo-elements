@@ -44,7 +44,8 @@ import {
     ],
     outputs: [
         'broadcast',
-        'valueChange'
+        'valueChange',
+        'inputState'
     ],
     directives: [COMMON_DIRECTIVES],
     template: '<ref #container></ref>'
@@ -57,6 +58,7 @@ export class FormInput {
         this.element = el;
         this.broadcast = new EventEmitter();
         this.valueChange = new EventEmitter();
+        this.inputState = new EventEmitter();
         this.componentRef = null;
     }
 
@@ -118,6 +120,7 @@ export class FormInput {
                     this.componentRef.instance.value = this.value;
                     this.componentRef.instance.label = this.label;
                     this.componentRef.instance.update = this.valueChange;
+                    this.componentRef.instance.inputState = this.inputState;
                     this.componentRef.instance.disabled = this.disabled;
                     if (this.options) {
                         this.componentRef.instance.options = this.options;

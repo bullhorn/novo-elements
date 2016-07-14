@@ -23,7 +23,9 @@ novo-pagination {
     }
 
     novo-select {
-        button {
+        max-width: 200px;
+
+        div[type="button"] {
             color: #fff;
             border-bottom: 1px solid rgba(255, 255, 255, .15);
 
@@ -36,8 +38,8 @@ novo-pagination {
                 }
             }
 
-            &:focus,
-            &:active {
+            &:active,
+            &:focus {
                 border-bottom: 1px solid rgba(255, 255, 255, .75);
 
                 i {

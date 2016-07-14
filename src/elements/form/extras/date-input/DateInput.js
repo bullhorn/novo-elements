@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter } from '@angular/core';
 import { COMMON_DIRECTIVES, Control, Validators } from '@angular/common';
 import moment from 'moment/moment';
 
@@ -9,20 +9,24 @@ import { NovoLabelService } from './../../../../novo-elements';
 @Component({
     selector: 'date-input',
     inputs: ['name', 'placeholder', 'inline', 'required'],
+    outputs: ['inputState'],
     properties: ['placeholder', 'inline'],
     directives: [NOVO_DATE_PICKER_ELEMENTS, COMMON_DIRECTIVES],
     template: `
         <i *ngIf="required" class="required-indicator" [ngClass]="{'bhi-circle': !control.valid, 'bhi-check': control.valid}"></i>
-        <input [name]="name" type="text" [attr.id]="name" [placeholder]="placeholder" (click)="toggleActive($event)" [ngModel]="value" [ngFormControl]="control" readonly/>
+        <input [name]="name" type="text" [attr.id]="name" [placeholder]="placeholder" (focus)="toggleInactive($event)" (blur)="toggleInactive($event)" (click)="toggleActive($event)" [ngModel]="value" [ngFormControl]="control" readonly/>
         <i (click)="toggleActive($event)" class="bhi-calendar"></i>
-        <novo-date-picker [inline]="inline" [hidden]="!active" (onSelect)="onSelect($event)"></novo-date-picker>
+        <novo-date-picker [inline]="inline" [hidden]="!active" (onSelect)="onSelect($event); toggleInactive($event)"></novo-date-picker>
         <span class="error-message" *ngIf="required && control.touched && control?.errors?.required">{{labels.required}}</span>
     `
 })
 export class DateInput extends OutsideClick {
+    inactive:Boolean = false;
+    validators:Array = [];
+    inputState:EventEmitter = new EventEmitter();
+
     constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
-        this.validators = [];
         this.labels = labels;
     }
 
@@ -34,11 +38,33 @@ export class DateInput extends OutsideClick {
             this.validators.push(Validators.required);
         }
         this.control = new Control('', Validators.compose(this.validators));
+
+        setTimeout(() => {
+            this.toggleInactive(null);
+        }, 10);
     }
 
     onSelect(evt) {
         this.value = moment(evt.date).format('MMMM DD, YYYY');
         this.toggleActive(null, false);
         this.update.emit(evt.date);
+    }
+
+    toggleInactive(evt) {
+        setTimeout(() => {
+            if (evt) {
+                if (evt.type === 'focus' || evt.date || this.placeholder) this.inactive = false;
+                else if (evt.type === 'blur' && this.value) this.inactive = false;
+                else if (evt.date && this.value) this.inactive = false;
+                else this.inactive = true;
+            } else {
+                if (this.value || this.placeholder) this.inactive = false;
+                else this.inactive = true;
+            }
+
+            this.inputState.emit({
+                value: this.inactive
+            });
+        });
     }
 }

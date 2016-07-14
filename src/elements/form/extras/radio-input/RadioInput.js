@@ -22,11 +22,12 @@ import { NovoLabelService } from './../../../../novo-elements';
     `
 })
 export class RadioInput extends BaseInput {
+    _options:Array = [];
+
     constructor(labels:NovoLabelService) {
         super();
         this.labels = labels;
         this.value = null;
-        this._options = [];
     }
 
     ngOnInit() {

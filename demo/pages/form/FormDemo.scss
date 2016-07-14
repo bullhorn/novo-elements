@@ -1,6 +1,16 @@
 form-demo {
     .example.form-demo {
         padding: 20px;
+
+        &.dynamic {
+            padding-left: 40px;
+        }
+
+        &.quicknote {
+            novo-quick-note {
+                border-bottom: 2px solid darken(#f4f4f4, 5%);
+            }
+        }
     }
 
     .dynamic-demo-footer {
@@ -14,5 +24,16 @@ form-demo {
         & > button {
             margin-left: 10px;
         }
+    }
+
+    novo-form {
+        margin: 25px 0;
+    }
+
+    .final-value {
+        color: #afafaf;
+        padding: 10px;
+        background: #f4f4f4;
+        margin-bottom: 45px;
     }
 }

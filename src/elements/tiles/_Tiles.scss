@@ -1,61 +1,51 @@
 novo-tiles {
-    border-radius: .5em;
+    display: inline-block;
     color: $grey;
-    margin-left:3px;
+    $border-width: 2px;
+    $border-properties: solid $border-width lighten($grey, 20%);
 
-    $border-properties: solid 2px lighten($grey, 20%);
-
-    div.tile:nth-of-type(1) {
-        border-top-left-radius: .5em;
-        border-left: $border-properties;
-        border-bottom-left-radius: .5em;
-    }
-
-    div.tile:last-child {
-        border-top-right-radius: .5em;
-        border-right: $border-properties;
-        border-bottom-right-radius: .5em;
-    }
-
-    > div {
-        cursor: pointer;
+    & > .tile-container {
         display: inline-block;
-        padding: 1em;
+        height: calc(2.5em + 4px);
         text-align: center;
-        background-color: $off-white;
-        border-top: $border-properties;
-        border-bottom: $border-properties;
+        background-color: #f4f4f4;
+        border: $border-properties;
+        border-radius: 6px;
         position: relative;
-        transition: border-color 250ms, background-color 250ms, color 250ms;
-        margin-left:-3px;
+        display: flex;
+        cursor: pointer;
 
-        &.active{
-            display: inline-block;
+        .tile {
+            padding: 0 15px;
+            line-height: 2.5em;
+            height: 100%;
             z-index: 1;
-            padding: 1em calc(1em - 2px);
-        }
-        &:nth-of-type(1).active{
-            padding: 1em calc(1em - 2px) 1em 1em;
-        }
-
-        label {
-            transition: border-color 250ms, background-color 250ms, color 250ms;
+            position: relative;
             cursor: pointer;
-            span {
-                transition: border-color 250ms, background-color 250ms, color 250ms;
-                cursor: pointer;
-            }
-        }
 
-        &.active {
-            border: solid 2px $positive!important;
-            border-radius: .5em;
-            background-color: white;
+            &.active {
+                color: $positive;
+            }
+
             label {
-                span {
-                    color: $positive;
-                }
+                cursor: pointer;
+                z-index: 1;
+                position: relative;
             }
         }
+    }
+
+    span.active-indicator {
+        position: absolute;
+        top: -$border-width;
+        left: -$border-width;
+        height: calc(100% + #{$border-width*2});
+        width: 100%;
+        opacity: 0;
+        z-index: 0;
+        background: white;
+        border: 2px solid $positive;
+        border-radius: 6px;
+        transition: all 140ms ease-in-out;
     }
 }

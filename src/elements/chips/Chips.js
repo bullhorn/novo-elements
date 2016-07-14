@@ -49,7 +49,7 @@ export class Chip {
 @Component({
     selector: 'chips',
     inputs: ['source', 'placeholder', 'value', 'type'],
-    outputs: ['changed'],
+    outputs: ['changed', 'focus', 'blur'],
     directives: [COMMON_DIRECTIVES, NOVO_PICKER_ELEMENTS, Chip, NgModel],
     template: `
         <chip
@@ -83,6 +83,8 @@ export class Chip {
 })
 export class Chips extends OutsideClick {
     changed: EventEmitter = new EventEmitter();
+    focus: EventEmitter = new EventEmitter();
+    blur: EventEmitter = new EventEmitter();
     items: Array = [];
     selected: any = null;
     placeholder: string = '';
@@ -116,9 +118,10 @@ export class Chips extends OutsideClick {
         this.selected = item;
     }
 
-    onFocus() {
+    onFocus(e) {
         this.deselectAll();
         this.element.nativeElement.classList.add('selected');
+        this.focus.emit(e);
     }
 
     add(event) {
@@ -190,9 +193,10 @@ export class Chips extends OutsideClick {
         }
     }
     //Set touched on blur
-    onTouched() {
+    onTouched(e) {
         this.element.nativeElement.classList.remove('selected');
         this._onTouchedCallback();
+        this.blur.emit(e);
     }
     //From ControlValueAccessor interface
     registerOnChange(fn) {

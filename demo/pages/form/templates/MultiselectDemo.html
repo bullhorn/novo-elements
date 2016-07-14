@@ -9,3 +9,14 @@
         <form-input name="entity" type="entity" [(options)]="autocompleteContacts" [multiple]="true" placeholder="Pick a Contact"></form-input>
     </form-field>
 </novo-form>
+<novo-form layout="vertical">
+    <form-title>Vertical Multi-Picker Field</form-title>
+    <form-field>
+        <form-label>Locations</form-label>
+        <form-input name="locations" type="picker" [(options)]="autocompleteFlatArrayOptions" [multiple]="true"></form-input>
+    </form-field>
+    <form-field>
+        <form-label>Contact</form-label>
+        <form-input name="entity" type="entity" [(options)]="autocompleteContacts" [multiple]="true"></form-input>
+    </form-field>
+</novo-form>

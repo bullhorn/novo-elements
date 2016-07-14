@@ -1,7 +1,8 @@
 novo-select {
     display: block;
     position: relative;
-    max-width: 180px;
+    width: 100%;
+    max-width: 800px;
     min-width: 180px;
     cursor: pointer;
     font-size: 1rem;
@@ -12,6 +13,8 @@ novo-select {
             z-index: 2;
             max-height: 200px;
             min-width: 200px;
+            width: 100%;
+            max-width: 800px;
             width: inherit;
             overflow: auto;
             padding: 8px 0 16px;
@@ -19,7 +22,7 @@ novo-select {
         }
     }
 
-    button {
+    div[type="button"] {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -63,7 +66,6 @@ novo-select {
             font-size: 0.8em;
             color: #A9A9A9;
         }
-
     }
 
     .novo-select-list {
@@ -79,7 +81,7 @@ novo-select {
         transform: translateY(-50%);
         transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
         width: 100%;
-        box-shadow: 0 -1px 3px -2px  rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+        box-shadow: 0 -1px 3px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
         font-size: 1rem;
         z-index: -1;
         opacity: 0;
@@ -121,12 +123,11 @@ novo-select {
 
             &.open.select-header {
                 background: lighten($light, 10%);
-                padding: 10px 0 0 0;
+                padding: 10px 0 0;
                 line-height: 28px;
                 height: 60px;
                 border-bottom: 1px solid #e9e9e9;
             }
-
         }
 
         &:focus {
@@ -143,7 +144,7 @@ novo-select {
     &[disabled] {
         pointer-events: none;
 
-        button {
+        div[type="button"] {
             color: $grey;
         }
     }
@@ -152,7 +153,7 @@ novo-select {
         button {
             text-transform: uppercase;
 
-            &.header  {
+            &.header {
                 color: $positive;
                 position: relative;
                 text-align: left;
@@ -198,7 +199,7 @@ novo-select {
                 float: left;
                 width: auto;
                 font-weight: 500;
-                font-size: .8rem;
+                font-size: 0.8rem;
                 color: #ACACAC;
 
                 &:hover {
@@ -208,6 +209,7 @@ novo-select {
 
             button.primary {
                 color: $positive;
+
                 &:hover {
                     color: darken($positive, 15%);
                 }
@@ -231,12 +233,15 @@ novo-select {
                 text-transform: none;
                 padding-top: 10px;
                 font-size: 1rem;
+
                 &.empty {
                     color: #A9A9A9;
                 }
+
                 &:focus {
                     outline: none;
                 }
+
                 &:hover {
                     border-bottom: 1px solid $positive;
                 }

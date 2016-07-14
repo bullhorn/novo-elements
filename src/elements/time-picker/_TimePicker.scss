@@ -3,7 +3,7 @@ novo-time-picker {
     width: 250px;
     min-width: 250px;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 4px;
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .15), 0 2px 7px rgba(0, 0, 0, .1);
     z-index: 999;
@@ -45,7 +45,6 @@ novo-time-picker {
             font-weight: 600;
         }
     }
-
     /* ANALOG CLOCK
     ----------------------------- */
     .analog {
@@ -276,7 +275,6 @@ novo-time-picker {
     .analog--minutes {
         position: absolute;
     }
-
     $d: 4.5em;
     @for $i from 1 through 12 {
         $deg: ($i * 30 - 90);

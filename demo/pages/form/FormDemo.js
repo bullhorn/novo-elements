@@ -25,7 +25,7 @@ const template = `
 
     <h5>Text Input</h5>
     <p>This is the basic text input field.</p>
-    <div class="example form-demo">${TextInputDemoTpl}</div>
+    <div class="example form-demo text-input">${TextInputDemoTpl}</div>
     <code-snippet [code]="TextInputDemoTpl"></code-snippet>
 
     <h5>Radio Buttons</h5>
@@ -65,7 +65,7 @@ const template = `
 
     <h5>Note</h5>
     <p>This allows the user to add a note with references/tags.</p>
-    <div class="example form-demo">${QuickNoteInputDemoTpl}</div>
+    <div class="example form-demo quicknote">${QuickNoteInputDemoTpl}</div>
     <code-snippet [code]="QuickNoteInputDemoTpl"></code-snippet>
 
     <h5>Required Fields</h5>
@@ -73,7 +73,7 @@ const template = `
 
     <h2>Dynamic Form</h2>
     <p>Dynamic forms are composed of one element, <code>&lt;novo-form [meta]="dynamicData"/&gt;</code> and allow you to pass in dynamic data as a <code>[meta]</code> attribute.</p>
-    <div class="example form-demo">${DynamicFormDemoTpl}</div>
+    <div class="example form-demo dynamic">${DynamicFormDemoTpl}</div>
     <code-snippet [code]="DynamicFormDemoTpl"></code-snippet>
 </div>
 `;
