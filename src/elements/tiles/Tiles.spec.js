@@ -1,8 +1,16 @@
-import { Component } from '@angular/core';
-
+import { Component, ElementRef } from '@angular/core';
 import { Tiles } from './Tiles';
 import { testComponent, grabComponent } from './../../testing/TestHelpers';
 import { NovoLabelService } from '../../services/novo-label-service';
+
+class MockElementRef {
+    nativeElement:HTMLDivElement = document.createElement('div');
+    constructor() {
+        this.nativeElement.querySelector = () => {
+            return document.createElement('div');
+        };
+    }
+}
 
 @Component({
     selector: 'test-cmp',
@@ -32,7 +40,8 @@ describe('Element: Tiles', () => {
     let comp;
     beforeEachProviders(() => [
         Tiles,
-        NovoLabelService
+        NovoLabelService,
+        { provide: ElementRef, useClass: MockElementRef }
     ]);
 
     it('should initialize correctly', testComponent(TestCmp, (fixture) => {
