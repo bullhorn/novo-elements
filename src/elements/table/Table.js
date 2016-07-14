@@ -136,31 +136,38 @@ export class NovoTable {
     ngOnInit() {
         // Fail-safe inputs
         this.rows = this.rows || [];
+        this.originalRows = this.rows;
         this.columns = this.columns || [];
         this.config = this.config || {};
+        if (this.rows.length > 0) {
+            this.setupColumnDefaults();
+        }
+    }
 
+    ngOnChanges(changes) {
+        this.originalRows = this.originalRows.length === 0 ? this.rows : this.originalRows;
+        if (changes && changes.rows && (changes.rows.previousValue !== changes.rows.currentValue)) {
+            this.setupColumnDefaults();
+        }
+    }
+
+	/**
+     * @name buildDateRange
+     */
+    setupColumnDefaults() {
         // Check columns for cell option types
         this.columns.forEach(column => {
             if (column && column.type) {
                 switch (column.type) {
                     case 'date':
-                        // Structure dates to be sortable
-                        this.structureDateCells(this.rows, column.name);
                         // Set options based on dates if there are none
-                        column.options = (column.options || this.setDateOptions(this.rows));
+                        column.options = (column.options || this.getDefaultOptions());
                         break;
                     default:
                         break;
                 }
             }
         });
-    }
-
-	/**
-     * @name ngOnChanges
-     */
-    ngOnChanges() {
-        this.originalRows = this.originalRows.length === 0 ? this.rows : this.originalRows;
     }
 
 	/**
@@ -250,12 +257,12 @@ export class NovoTable {
                     // Custom filter function on the table config
                     this.rows = this.config.filtering(filters, this.originalRows);
                 } else {
-                    this.rows = this.originalRows.filter(item => {
+                    this.rows = this.originalRows.filter(row => {
                         let matched;
                         for (const column of filters) {
                             if (column.match && isFunction(column.match)) {
                                 // Custom match function on the column
-                                matched = column.match(item[column.name], column.filter);
+                                matched = column.match(row[column.name], column.filter);
                             } else if (Array.isArray(column.filter)) {
                                 // The filters are an array (multi-select), check value
                                 if (column.type && column.type === 'date') {
@@ -264,28 +271,38 @@ export class NovoTable {
                                         let min = value.min;
                                         let max = value.max;
                                         let isMatch = false;
+                                        let oneDay = 24 * 60 * 60 * 1000;
+                                        // Assumes row data contains a JS date object
+                                        let firstDate = row[column.name] instanceof Date ? row[column.name].getTime() : row[column.name];
+                                        let secondDate = new Date();
+                                        let difference = 0;
+                                        try {
+                                            difference = Math.round((firstDate - secondDate.getTime()) / oneDay);
+                                        } catch (error) {
+                                            throw new Error('Row data of type \'date\' must contain a JS date object or a timestamp as its value.', error);
+                                        }
                                         if (typeof(min) !== 'undefined' && typeof(max) !== 'undefined') {
-                                            isMatch = (item._dateDifference >= min && item._dateDifference <= max);
+                                            isMatch = (difference >= min && difference <= max);
                                         } else if (typeof(min) !== 'undefined') {
-                                            isMatch = item._dateDifference >= min;
+                                            isMatch = difference >= min;
                                         } else if (typeof(max) !== 'undefined') {
-                                            isMatch = item._dateDifference <= max;
+                                            isMatch = difference <= max;
                                         }
                                         return isMatch;
                                     });
                                 } else {
                                     // It's a list of options
-                                    matched = column.filter.includes(item[column.name]);
+                                    matched = column.filter.includes(row[column.name]);
                                 }
-                            } else if (Array.isArray(item[column.name])) {
+                            } else if (Array.isArray(row[column.name])) {
                                 // Value is an array
-                                for (const value of item[column.name]) {
+                                for (const value of row[column.name]) {
                                     matched = value.match(new RegExp(column.filter, 'gi'));
                                     if (!matched) break;
                                 }
                             } else {
                                 // Basic, value is just a string
-                                matched = JSON.stringify((item[column.name] || '')).match(new RegExp(column.filter, 'gi'));
+                                matched = JSON.stringify((row[column.name] || '')).match(new RegExp(column.filter, 'gi'));
                             }
                             if (!matched) break;
                         }
@@ -479,69 +496,19 @@ export class NovoTable {
 
     /**
      * @name setDateOptions
-     * @param rowData
      * @returns {Array}
      */
-    setDateOptions(rowData) {
-        let range = [];
-        // Get max and min
-        rowData.forEach(row => {
-            range.push(row._dateDifference);
-        });
-        range.sort();
-        let minDate = range[0];
-        let maxDate = range[range.length - 1];
-        let dateOptions = [];
-        // For performance these could be staggered mathematically, but the order of the options needs to be preserved
-        if (maxDate > 91) {
-            dateOptions.push({ label: 'Beyond 90 Days', min: 90 });
-        }
-        if (maxDate >= 90) {
-            dateOptions.push({ label: 'Next 90 Days', min: 0, max: 90 });
-        }
-        if (maxDate >= 30) {
-            dateOptions.push({ label: 'Next 30 Days', min: 0, max: 30 });
-        }
-        if (maxDate >= 7) {
-            dateOptions.push({ label: 'Next 7 Days', min: 0, max: 7 });
-        }
-        if (minDate <= -7) {
-            dateOptions.push({ label: 'Past 7 Days', min: -7, max: 0 });
-        }
-        if (minDate <= -30) {
-            dateOptions.push({ label: 'Past 30 Days', min: -30, max: 0 });
-        }
-        if (minDate <= -90) {
-            dateOptions.push({ label: 'Past 90 Days', min: -90, max: 0 });
-        }
-        if (minDate < -91) {
-            dateOptions.push({ label: 'Older than 90 Days', max: -90 });
-        }
-        return dateOptions;
-    }
-
-    /**
-     * @name structureDateCells
-     * @param rowData
-     * @param key
-     */
-    structureDateCells(rowData, key) {
-        // Add a filter key to the row data (only execute once)
-        if (rowData && rowData.length && !rowData[0].hasOwnProperty('dateDifference') && key) {
-            rowData.map(row => {
-                let oneDay = 24 * 60 * 60 * 1000;
-                // Assumes row data contains a JS date object
-                let firstDate = row[key];
-                let secondDate = new Date();
-                let difference = 0;
-                try {
-                    difference = Math.round((firstDate.getTime() - secondDate.getTime()) / oneDay);
-                } catch (error) {
-                    throw new Error('Row data of type \'date\' must contain a JS date object as its value.', error);
-                }
-                return row._dateDifference = difference;
-            });
-        }
+    getDefaultOptions() {
+        return [
+            { label: 'Beyond 90 Days', min: 90 },
+            { label: 'Next 90 Days', min: 0, max: 90 },
+            { label: 'Next 30 Days', min: 0, max: 30 },
+            { label: 'Next 7 Days', min: 0, max: 7 },
+            { label: 'Past 7 Days', min: -7, max: 0 },
+            { label: 'Past 30 Days', min: -30, max: 0 },
+            { label: 'Past 90 Days', min: -90, max: 0 },
+            { label: 'Older than 90 Days', max: -90 }
+        ];
     }
 }
 

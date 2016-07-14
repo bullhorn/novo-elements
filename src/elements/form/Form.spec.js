@@ -12,6 +12,11 @@ class TestCmp {
 }
 
 describe('Element: Form', () => {
+    let comp;
+    beforeEachProviders(() => [
+        Form
+    ]);
+
     it('should initialize correctly', testComponent(TestCmp, (fixture) => {
         const { instance, element, testComponentInstance, testComponentElement } = grabComponent(fixture, Form);
         expect(instance).toBeTruthy();
@@ -19,4 +24,37 @@ describe('Element: Form', () => {
         expect(testComponentInstance).toBeTruthy();
         expect(testComponentElement).toBeTruthy();
     }));
+
+    beforeEach(inject([Form], _comp => {
+        comp = _comp;
+    }));
+
+    describe('Function: hideCompletedFields', () => {
+        it('should not hide required fields with no data', () => {
+            comp.fields = [{
+                data: {
+                    name: 'stuff',
+                    required: true
+                },
+                hidden: false
+            }];
+            comp.data = {};
+            comp.hideCompletedFields();
+            expect(comp.fields[0].hidden).toBeFalsy();
+        });
+        it('should hide required fields with data', () => {
+            comp.fields = [{
+                data: {
+                    name: 'stuff',
+                    required: true
+                },
+                hidden: false
+            }];
+            comp.data = {
+                stuff: 'stuff'
+            };
+            comp.hideCompletedFields();
+            expect(comp.fields[0].hidden).toBeTruthy();
+        });
+    });
 });
