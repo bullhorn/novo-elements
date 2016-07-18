@@ -3,7 +3,7 @@ novo-toast {
     position: relative;
     background: $navy;
     color: $white;
-    padding: 15px;
+    padding: 15px 15px 15px 25px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
 
     &.show {
@@ -37,6 +37,7 @@ novo-toast.toast-container > .toast-icon {
     margin-right: 15px;
 
     i {
+        display: flex;
         position: relative;
         top: 0;
         font-size: 16px;
@@ -47,6 +48,8 @@ novo-toast.toast-container > .toast-icon {
 novo-toast.toast-container .toast-content {
     float: left;
     width: calc(100% - 47px);
+    flex-direction: column;
+    display: flex;
 
     h5 + p {
         top: 0;
@@ -77,8 +80,9 @@ novo-toast .toast-content > p {
 
     &.message-only {
         top: 0;
-        font-size: 18px;
+        font-size: 16px;
         line-height: 22px;
+        padding: 0;
     }
 }
 

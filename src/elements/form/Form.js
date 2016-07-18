@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef, ComponentResolver, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { Component, ViewContainerRef, ComponentResolver, ViewChild, EventEmitter } from '@angular/core';
 import { COMMON_DIRECTIVES } from '@angular/common';
 import { isBlank } from '@angular/core/src/facade/lang';
 
@@ -29,9 +29,8 @@ import { FormField, FormFieldMeta, FormLabel, FormInput } from './extras/FormExt
 export class Form {
     @ViewChild('form', { read: ViewContainerRef }) form:ViewContainerRef;
 
-    constructor(componentResolver:ComponentResolver, el:ElementRef) {
+    constructor(componentResolver:ComponentResolver) {
         this.componentResolver = componentResolver;
-        this.element = el;
         this.data = {};
         this.fields = [];
         this.changed = new EventEmitter();
@@ -43,7 +42,7 @@ export class Form {
             let required = field.data.required;
             let data = this.data[name];
 
-            if ((data && required) || !required) {
+            if ((data !== undefined && data !== null && required) || !required) {
                 field.hidden = true;
             }
         }

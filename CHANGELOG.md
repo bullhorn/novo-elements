@@ -1,3 +1,14 @@
+<a name="0.1.13"></a>
+## [0.1.13](https://github.com/bullhorn/novo-elements/compare/v0.1.12...v0.1.13) (2016-07-14)
+
+
+### Features
+
+* **entitycolor:** adding notes entity color ([#104](https://github.com/bullhorn/novo-elements/issues/104)) ([b2c35c6](https://github.com/bullhorn/novo-elements/commit/b2c35c6))
+* **forms:** Updates Forms to allow vertical layout ([#106](https://github.com/bullhorn/novo-elements/issues/106)) ([9fe6cb9](https://github.com/bullhorn/novo-elements/commit/9fe6cb9))
+
+
+
 <a name="0.1.12"></a>
 ## [0.1.12](https://github.com/bullhorn/novo-elements/compare/v0.1.11...v0.1.12) (2016-07-13)
 
