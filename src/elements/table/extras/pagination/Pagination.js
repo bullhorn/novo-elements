@@ -7,7 +7,8 @@ import { NOVO_SELECT_ELEMENTS } from '../../../select';
     inputs: [
         'page',
         'totalItems',
-        'itemsPerPage'
+        'itemsPerPage',
+        'pageOptions'
     ],
     outputs: ['onPageChange'],
     directives: [
@@ -29,12 +30,16 @@ export class Pagination {
     constructor() {
         this.maxPagesDisplayed = 5;
         this.itemsPerPage = 10;
-        this.pageOptions = [
+        this.onPageChange = new EventEmitter();
+    }
+
+    ngOnInit() {
+        this.pageOptions = this.pageOptions || [
             { value: 10, label: '10' },
+            { value: 25, label: '25' },
             { value: 50, label: '50' },
             { value: 500, label: '500' }
         ];
-        this.onPageChange = new EventEmitter();
     }
 
     ngOnChanges() {
