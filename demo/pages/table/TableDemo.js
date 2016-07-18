@@ -73,6 +73,13 @@ export class TableDemo {
         this.DetailsTableDemoTpl = DetailsTableDemoTpl;
         this.SelectAllTableDemoTpl = SelectAllTableDemoTpl;
 
+        this.customPageOptions = [
+            { label: '10', value: 10 },
+            { label: '20', value: 20 },
+            { label: '30', value: 30 },
+            { label: '40', value: 40 }
+        ];
+
         let columns = [
             { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true },
             { title: 'Position', name: 'position', ordering: true, filtering: true },
