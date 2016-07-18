@@ -6,7 +6,7 @@ novo-tiles {
 
     & > .tile-container {
         display: inline-block;
-        height: calc(2.5em + 4px);
+        //height: calc(2.5em + 4px);
         text-align: center;
         background-color: #f4f4f4;
         border: $border-properties;
@@ -14,10 +14,11 @@ novo-tiles {
         position: relative;
         display: flex;
         cursor: pointer;
+        align-items: center;
 
         .tile {
-            padding: 0 15px;
-            line-height: 2.5em;
+            padding: 10px 15px;
+            line-height: 1.5em;
             height: 100%;
             z-index: 1;
             position: relative;
