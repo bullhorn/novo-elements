@@ -22,7 +22,7 @@ import { CORE_DIRECTIVES, NgControl, NgModel } from '@angular/common';
                 </label>
                 <input [hidden]="true" [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i">
             </div>
-            <span class="active-indicator" *ngIf="activeTile"></span>
+            <span class="active-indicator" [hidden]="(activeTile === undefined || activeTile === null)"></span>
         </div>
     `
 })
