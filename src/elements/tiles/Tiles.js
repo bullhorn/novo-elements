@@ -22,7 +22,7 @@ import { CORE_DIRECTIVES, NgControl, NgModel } from '@angular/common';
                 </label>
                 <input [hidden]="true" [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i">
             </div>
-            <span class="active-indicator" *ngIf="activeTile"></span>
+            <span class="active-indicator" [hidden]="(activeTile === undefined || activeTile === null)"></span>
         </div>
     `
 })
@@ -45,7 +45,7 @@ export class Tiles {
         if (this.control) {
             this.control.updateValue(this.value);
         }
-        if (this.options && this.options.length && !this.options[0].value) {
+        if (this.options && this.options.length && (this.options[0].value === undefined || this.options[0].value === null)) {
             this._options = this.options.map((x) => {
                 let item = { value: x, label: x, checked: this.value === x };
                 return item;
