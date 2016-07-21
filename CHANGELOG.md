@@ -1,3 +1,13 @@
+<a name="0.1.16"></a>
+## [0.1.16](https://github.com/bullhorn/novo-elements/compare/v0.1.15...v0.1.16) (2016-07-21)
+
+
+### Bug Fixes
+
+* **tiles:** fix for no defaults ([#114](https://github.com/bullhorn/novo-elements/issues/114)) ([de4a37b](https://github.com/bullhorn/novo-elements/commit/de4a37b)), closes [#114](https://github.com/bullhorn/novo-elements/issues/114)
+
+
+
 <a name="0.1.15"></a>
 ## [0.1.15](https://github.com/bullhorn/novo-elements/compare/v0.1.14...v0.1.15) (2016-07-19)
 
