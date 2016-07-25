@@ -1,3 +1,13 @@
+<a name="0.1.17"></a>
+## [0.1.17](https://github.com/bullhorn/novo-elements/compare/v0.1.16...v0.1.17) (2016-07-25)
+
+
+### Features
+
+* **table:** Only showing the clear button when there is a filter, otherwise hiding it ([#117](https://github.com/bullhorn/novo-elements/issues/117)) ([3e6436e](https://github.com/bullhorn/novo-elements/commit/3e6436e))
+
+
+
 <a name="0.1.16"></a>
 ## [0.1.16](https://github.com/bullhorn/novo-elements/compare/v0.1.15...v0.1.16) (2016-07-21)
 
