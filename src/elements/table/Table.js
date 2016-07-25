@@ -59,7 +59,7 @@ import { NovoLabelService } from './../../novo-elements';
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
-                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{ labels.clear }}</button>
+                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
                                     </item>
                                     <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="option">
@@ -71,7 +71,7 @@ import { NovoLabelService } from './../../novo-elements';
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
-                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{ labels.clear }}</button>
+                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
                                         <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter"/>
                                     </item>
@@ -499,6 +499,7 @@ export class NovoTable {
      * @returns {Array}
      */
     getDefaultOptions() {
+        // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
         return [
             { label: 'Beyond 90 Days', min: 90 },
             { label: 'Next 90 Days', min: 0, max: 90 },
