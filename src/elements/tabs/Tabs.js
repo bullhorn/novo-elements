@@ -146,6 +146,7 @@ export class NovoNavOutlet {
 
     show(index) {
         let item = this.items[index];
+
         /**
          * Deactivates other tab items
          * @param items - deactivated items

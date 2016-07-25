@@ -30,7 +30,7 @@ export class DragulaService {
         this.bags = [];
     }
 
-	/**
+    /**
      * @name add
      * @param name
      * @param drake
@@ -55,7 +55,7 @@ export class DragulaService {
         return bag;
     }
 
-	/**
+    /**
      * @name find
      * @param name
      * @returns {*}
@@ -69,7 +69,7 @@ export class DragulaService {
         return null;
     }
 
-	/**
+    /**
      * @name destroy
      * @param name
      */
@@ -80,7 +80,7 @@ export class DragulaService {
         bag.drake.destroy();
     }
 
-	/**
+    /**
      * @name setOptions
      * @param name
      * @param options
@@ -90,7 +90,7 @@ export class DragulaService {
         this.handleModels(name, bag.drake);
     }
 
-	/**
+    /**
      * @name handleModels
      * @param name
      * @param drake
@@ -139,7 +139,7 @@ export class DragulaService {
         });
     }
 
-	/**
+    /**
      * @name setupEvents
      * @param bag
      */
@@ -157,7 +157,7 @@ export class DragulaService {
         this.events.forEach(emitter);
     }
 
-	/**
+    /**
      * @name domIndexOf
      * @param child
      * @param parent

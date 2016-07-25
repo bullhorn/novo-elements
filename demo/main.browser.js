@@ -14,7 +14,7 @@ export function main() {
         ...PLATFORM_PROVIDERS,
         ...ENV_PROVIDERS
     ])
-        // .then(decorateComponentRef)
+    // .then(decorateComponentRef)
         .catch(err => console.error(err)); // eslint-disable-line
 }
 

@@ -8,7 +8,7 @@ import { NOVO_SELECT_ELEMENTS } from '../../../select';
         'page',
         'totalItems',
         'itemsPerPage',
-        'pageOptions'
+        'rowOptions'
     ],
     outputs: ['onPageChange'],
     directives: [
@@ -17,7 +17,7 @@ import { NOVO_SELECT_ELEMENTS } from '../../../select';
     ],
     template: `
         <h5 class="rows">Rows Per Page: </h5>
-        <novo-select [options]="pageOptions" placeholder="Select..." [(ngModel)]="itemsPerPage" (onSelect)="onPageSizeChanged($event)" data-automation-id="pager-select"></novo-select>
+        <novo-select [options]="rowOptions" placeholder="Select..." [(ngModel)]="itemsPerPage" (onSelect)="onPageSizeChanged($event)" data-automation-id="pager-select"></novo-select>
         <spacer></spacer>
         <ul class="pager" data-automation-id="pager">
             <li class="page" (click)="selectPage(page-1)"><i class="bhi-previous" [hidden]="noPrevious()" data-automation-id="pager-previous"></i></li>
@@ -34,18 +34,22 @@ export class Pagination {
     }
 
     ngOnInit() {
-        this.pageOptions = this.pageOptions || [
-            { value: 10, label: '10' },
-            { value: 25, label: '25' },
-            { value: 50, label: '50' },
-            { value: 500, label: '500' }
-        ];
+        this.rowOptions = this.rowOptions || this.getDefaultRowOptions();
     }
 
     ngOnChanges() {
         this.page = this.page || 1;
         this.totalPages = this.calculateTotalPages();
         this.pages = this.getPages(this.page, this.totalPages);
+    }
+
+    getDefaultRowOptions() {
+        return [
+            { value: 10, label: '10' },
+            { value: 25, label: '25' },
+            { value: 50, label: '50' },
+            { value: 100, label: '100' }
+        ];
     }
 
     onPageSizeChanged(event) {

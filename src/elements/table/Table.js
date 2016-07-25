@@ -1,4 +1,4 @@
-// NG2
+// Vendor
 import { Component, EventEmitter } from '@angular/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgModel } from '@angular/common';
 import { isFunction, isString } from '@angular/core/src/facade/lang';
@@ -59,7 +59,7 @@ import { NovoLabelService } from './../../novo-elements';
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
-                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{ labels.clear }}</button>
+                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
                                     </item>
                                     <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="option">
@@ -71,7 +71,7 @@ import { NovoLabelService } from './../../novo-elements';
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
-                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)">{{ labels.clear }}</button>
+                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
                                         <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter"/>
                                     </item>
@@ -151,7 +151,7 @@ export class NovoTable {
         }
     }
 
-	/**
+    /**
      * @name buildDateRange
      */
     setupColumnDefaults() {
@@ -170,7 +170,7 @@ export class NovoTable {
         });
     }
 
-	/**
+    /**
      * @name ngDoCheck
      */
     ngDoCheck() {
@@ -180,7 +180,7 @@ export class NovoTable {
         this.lastPage = this.config.paging.current;
     }
 
-	/**
+    /**
      * @name getPageStart
      * @returns {number}
      */
@@ -188,15 +188,15 @@ export class NovoTable {
         return this.config.paging ? (this.config.paging.current - 1) * this.config.paging.itemsPerPage : 0;
     }
 
-	/**
-	 * @name getPageEnd
+    /**
+     * @name getPageEnd
      * @returns {*}
      */
     getPageEnd() {
         return this.config.paging && this.config.paging.itemsPerPage > -1 ? this.getPageStart() + this.config.paging.itemsPerPage : this.rows.length;
     }
 
-	/**
+    /**
      * @name focusInput
      * @param name
      */
@@ -209,8 +209,8 @@ export class NovoTable {
         }
     }
 
-	/**
-	 * @name onFilterClick
+    /**
+     * @name onFilterClick
      * @param column
      * @param filter
      */
@@ -233,7 +233,7 @@ export class NovoTable {
         this.onFilterChange();
     }
 
-	/**
+    /**
      * @name onFilterClear
      * @param column
      */
@@ -242,7 +242,7 @@ export class NovoTable {
         this.onFilterChange();
     }
 
-	/**
+    /**
      * @name onFilterChange
      *
      * @description This method updates the row data to reflect the active filters.
@@ -321,7 +321,7 @@ export class NovoTable {
         }
     }
 
-	/**
+    /**
      * @name isFilterActive
      * @param columnFilters
      * @param filter
@@ -343,7 +343,7 @@ export class NovoTable {
         return isActive;
     }
 
-	/**
+    /**
      * @name onSortChange
      * @param newSortColumn
      */
@@ -402,7 +402,7 @@ export class NovoTable {
         }
     }
 
-	/**
+    /**
      * @name fireTableChangeEvent
      */
     fireTableChangeEvent() {
@@ -418,7 +418,7 @@ export class NovoTable {
         this.onTableChange.emit(onTableChange);
     }
 
-	/**
+    /**
      * @name findColumnIndex
      * @param value
      * @returns {*}
@@ -435,7 +435,7 @@ export class NovoTable {
     /**
      * @name onOrderChange
      * @param event
-	 */
+     */
     onOrderChange(event) {
         const oldIndex = this.findColumnIndex(event.first.name);
         const newIndex = this.findColumnIndex(event.second.name);
@@ -443,7 +443,7 @@ export class NovoTable {
         this.onSortChange(this.currentSortColumn);
     }
 
-	/**
+    /**
      * @name selectAll
      */
     selectAll() {
@@ -456,7 +456,7 @@ export class NovoTable {
         this.emitSelected(selected);
     }
 
-	/**
+    /**
      * @name rowSelectHandler
      */
     rowSelectHandler() {
@@ -475,7 +475,7 @@ export class NovoTable {
         this.emitSelected(selected);
     }
 
-	/**
+    /**
      * @name emitSelected
      * @param selected
      */
@@ -483,7 +483,7 @@ export class NovoTable {
         this.onRowSelect.emit(selected.length, selected);
     }
 
-	/**
+    /**
      * @name rowClickHandler
      * @param row
      */
@@ -499,6 +499,7 @@ export class NovoTable {
      * @returns {Array}
      */
     getDefaultOptions() {
+        // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
         return [
             { label: 'Beyond 90 Days', min: 90 },
             { label: 'Next 90 Days', min: 0, max: 90 },

@@ -23,9 +23,9 @@ import { NOVO_PICKER_ELEMENTS } from '../picker/Picker';
   `
 })
 export class Chip {
-    select: EventEmitter = new EventEmitter();
-    remove: EventEmitter = new EventEmitter();
-    entity: string;
+    select:EventEmitter = new EventEmitter();
+    remove:EventEmitter = new EventEmitter();
+    entity:string;
 
     onRemove(e) {
         if (e) {
@@ -82,20 +82,20 @@ export class Chip {
     }
 })
 export class Chips extends OutsideClick {
-    changed: EventEmitter = new EventEmitter();
-    focus: EventEmitter = new EventEmitter();
-    blur: EventEmitter = new EventEmitter();
-    items: Array = [];
-    selected: any = null;
-    placeholder: string = '';
-    config: Object = {};
+    changed:EventEmitter = new EventEmitter();
+    focus:EventEmitter = new EventEmitter();
+    blur:EventEmitter = new EventEmitter();
+    items:Array = [];
+    selected:any = null;
+    placeholder:string = '';
+    config:Object = {};
     // private data model
-    _value: any = '';
+    _value:any = '';
     //Placeholders for the callbacks
     _onTouchedCallback = () => false;
     _onChangeCallback = () => false;
 
-    constructor(@Optional() model: NgModel, element: ElementRef) {
+    constructor(@Optional() model:NgModel, element:ElementRef) {
         super(element);
         this.element = element;
         this.model = model || new NgModel();
@@ -173,9 +173,10 @@ export class Chips extends OutsideClick {
     }
 
     //get accessor
-    get value(): any {
+    get value():any {
         return this._value;
     }
+
     //set accessor including call the onchange callback
     set value(selected) {
         this.itemToAdd = '';
@@ -185,6 +186,7 @@ export class Chips extends OutsideClick {
             this._onChangeCallback(selected);
         }
     }
+
     //From ControlValueAccessor interface
     writeValue(value) {
         this._value = value;
@@ -192,16 +194,19 @@ export class Chips extends OutsideClick {
             this.items = value.map(v => ({ value: v, label: v }));
         }
     }
+
     //Set touched on blur
     onTouched(e) {
         this.element.nativeElement.classList.remove('selected');
         this._onTouchedCallback();
         this.blur.emit(e);
     }
+
     //From ControlValueAccessor interface
     registerOnChange(fn) {
         this._onChangeCallback = fn;
     }
+
     //From ControlValueAccessor interface
     registerOnTouched(fn) {
         this._onTouchedCallback = fn;

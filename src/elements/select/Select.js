@@ -150,7 +150,9 @@ export class Select extends OutsideClick {
                 this.selectedIndex++;
                 this.select(this.options[this.selectedIndex], this.selectedIndex);
                 this.scrollToSelected();
-                if (this.header.open) { this.toggleHeader(null, false); }
+                if (this.header.open) {
+                    this.toggleHeader(null, false);
+                }
             } else if (event.keyCode === KeyCodes.UP && this.selectedIndex === 0) {
                 this.selectedIndex--;
                 this.toggleHeader(null, true);

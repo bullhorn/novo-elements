@@ -33,6 +33,7 @@ import { NovoLabelService } from './../../../../novo-elements';
 export class ChipsInput extends BaseInput {
     inactive:Boolean = false;
     inputState:EventEmitter = new EventEmitter();
+
     constructor(labels:NovoLabelService) {
         super();
         this.labels = labels;

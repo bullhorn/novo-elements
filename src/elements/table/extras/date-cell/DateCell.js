@@ -16,4 +16,5 @@ import { BaseRenderer } from '../base-renderer/BaseRenderer';
         </div>
     `
 })
-export class DateCell extends BaseRenderer {}
+export class DateCell extends BaseRenderer {
+}

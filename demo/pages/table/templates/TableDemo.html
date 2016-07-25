@@ -8,7 +8,7 @@
     </div>
     <novo-pagination *ngIf="basic.config.paging"
                      [page]="basic.config.paging.current"
-                     [pageOptions]="customPageOptions"
+                     [rowOptions]="customRowOptions"
                      [totalItems]="basic.rows.length"
                      [itemsPerPage]="basic.config.paging.itemsPerPage"
                      (onPageChange)="basic.config.paging.onPageChange($event)">

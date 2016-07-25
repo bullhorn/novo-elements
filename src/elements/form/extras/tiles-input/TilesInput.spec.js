@@ -45,8 +45,14 @@ describe('Component: TilesInput', () => {
     describe('Function: onChanged', () => {
         it('should update value', () => {
             expect(comp.onChanged).toBeDefined();
-            comp.update = { emit: () => {} };
-            comp.control = { updateValue: () => {} };
+            comp.update = {
+                emit: () => {
+                }
+            };
+            comp.control = {
+                updateValue: () => {
+                }
+            };
             spyOn(comp.update, 'emit').and.callThrough();
             spyOn(comp.control, 'updateValue').and.callThrough();
             comp.onChanged(10);

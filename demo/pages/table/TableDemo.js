@@ -73,7 +73,7 @@ export class TableDemo {
         this.DetailsTableDemoTpl = DetailsTableDemoTpl;
         this.SelectAllTableDemoTpl = SelectAllTableDemoTpl;
 
-        this.customPageOptions = [
+        this.customRowOptions = [
             { label: '10', value: 10 },
             { label: '20', value: 20 },
             { label: '30', value: 30 },

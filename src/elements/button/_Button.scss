@@ -183,13 +183,15 @@ button {
 
                 &[icon="collapse"] {
                     i {
-                        &:before {}
+                        &:before {
+                        }
                     }
                 }
 
                 &[icon="convert"] {
                     i {
-                        &:before {}
+                        &:before {
+                        }
                     }
                 }
             }

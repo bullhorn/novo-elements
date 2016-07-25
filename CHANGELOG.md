@@ -1,3 +1,33 @@
+<a name="0.1.17"></a>
+## [0.1.17](https://github.com/bullhorn/novo-elements/compare/v0.1.16...v0.1.17) (2016-07-25)
+
+
+### Features
+
+* **table:** Only showing the clear button when there is a filter, otherwise hiding it ([#117](https://github.com/bullhorn/novo-elements/issues/117)) ([3e6436e](https://github.com/bullhorn/novo-elements/commit/3e6436e))
+
+
+
+<a name="0.1.16"></a>
+## [0.1.16](https://github.com/bullhorn/novo-elements/compare/v0.1.15...v0.1.16) (2016-07-21)
+
+
+### Bug Fixes
+
+* **tiles:** fix for no defaults ([#114](https://github.com/bullhorn/novo-elements/issues/114)) ([de4a37b](https://github.com/bullhorn/novo-elements/commit/de4a37b)), closes [#114](https://github.com/bullhorn/novo-elements/issues/114)
+
+
+
+<a name="0.1.15"></a>
+## [0.1.15](https://github.com/bullhorn/novo-elements/compare/v0.1.14...v0.1.15) (2016-07-19)
+
+
+
+<a name="0.1.14"></a>
+## [0.1.14](https://github.com/bullhorn/novo-elements/compare/v0.1.13...v0.1.14) (2016-07-18)
+
+
+
 <a name="0.1.13"></a>
 ## [0.1.13](https://github.com/bullhorn/novo-elements/compare/v0.1.12...v0.1.13) (2016-07-14)
 

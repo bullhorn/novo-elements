@@ -13,7 +13,8 @@ import { CORE_DIRECTIVES, NgFor, NgIf, NgClass } from '@angular/common';
     `,
     directives: [CORE_DIRECTIVES, NgFor]
 })
-export class NovoList {}
+export class NovoList {
+}
 
 @Component({
     selector: 'novo-list-item',
@@ -27,7 +28,8 @@ export class NovoList {}
     `,
     directives: [CORE_DIRECTIVES, NgFor, NgIf]
 })
-export class NovoListItem {}
+export class NovoListItem {
+}
 
 @Component({
     selector: 'item-avatar',
@@ -54,7 +56,8 @@ export class ItemAvatar {
         <h3><ng-content></ng-content></h3>
     `
 })
-export class ItemTitle {}
+export class ItemTitle {
+}
 
 @Component({
     selector: 'item-content',
@@ -67,7 +70,8 @@ export class ItemTitle {}
         <ng-content></ng-content>
     `
 })
-export class ItemContent {}
+export class ItemContent {
+}
 
 @Component({
     selector: 'item-end',
@@ -75,6 +79,7 @@ export class ItemContent {}
         <ng-content></ng-content>
     `
 })
-export class ItemEnd {}
+export class ItemEnd {
+}
 
 export const NOVO_LIST_ELEMENTS = [NovoList, NovoListItem, ItemAvatar, ItemTitle, ItemContent, ItemEnd];

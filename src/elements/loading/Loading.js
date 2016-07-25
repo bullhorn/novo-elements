@@ -18,7 +18,8 @@ import { CORE_DIRECTIVES } from '@angular/common';
         CORE_DIRECTIVES
     ]
 })
-export class Loading {}
+export class Loading {
+}
 
 @Component({
     selector: 'novo-spinner',
@@ -111,6 +112,7 @@ export class Loading {}
     </svg>
     `
 })
-export class NovoSpinner {}
+export class NovoSpinner {
+}
 
 export const NOVO_LOADING_ELEMENTS = [Loading, NovoSpinner];

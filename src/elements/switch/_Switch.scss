@@ -31,7 +31,7 @@ novo-switch {
     cursor: pointer;
     outline: none;
     user-select: none;
-    @include ease( 'all', 'swift-ease-in-out');
+    @include ease('all', 'swift-ease-in-out');
 
     * {
         box-sizing: border-box;
@@ -107,7 +107,7 @@ novo-switch {
         .novo-switch-bar,
         .novo-switch-thumb,
         .novo-switch-thumb-container {
-            @include ease( 'all', 'swift-ease-in-out');
+            @include ease('all', 'swift-ease-in-out');
             transition-property: transform, background-color;
         }
 
