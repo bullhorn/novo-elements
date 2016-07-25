@@ -22,6 +22,7 @@ export class FormField {
     field:FormInput;
     inputs:QueryList;
     inactive:Boolean = false;
+
     constructor(el:ElementRef, @Query(FormInput) inputs:QueryList) {
         this.element = el;
         this.inputs = inputs;

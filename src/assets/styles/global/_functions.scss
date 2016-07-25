@@ -21,6 +21,7 @@
         }
     }
 }
+
 // Animation Delay Function - multiplies $base-speed by key index;
 @mixin delay($map, $base-speed) {
     $keys: map-keys($map);
@@ -32,6 +33,7 @@
         }
     }
 }
+
 // FULL Animation Delay Function - multiplies $base-speed by key index;
 @mixin animationMapDelay($map, $animation-name, $animation-duration, $animation-timing-function, $delay-base-speed, $animation-direction, $animation-iterate-count, $animation-fill-mode, $animation-play-state) {
     $keys: map-keys($map);

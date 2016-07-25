@@ -23,7 +23,7 @@ import { CORE_DIRECTIVES } from '@angular/common';
     directives: [CORE_DIRECTIVES]
 })
 export class NovoToast {
-    constructor(element: ElementRef) {
+    constructor(element:ElementRef) {
         this.show = false;
         this.animate = false;
         this.parent = null;

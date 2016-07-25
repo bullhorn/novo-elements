@@ -152,7 +152,7 @@ novo-toast.fixedTop {
 novo-toast.fixedTop {
     top: -100%;
     padding-top: 20px;
-    @include ease( 'all', 'swift-ease-in-out');
+    @include ease('all', 'swift-ease-in-out');
 
     &.animate {
         padding-top: 20px;
@@ -163,7 +163,7 @@ novo-toast.fixedTop {
 novo-toast.fixedBottom {
     bottom: -100%;
     padding-bottom: 20px;
-    @include ease( 'all', 'swift-ease-in-out');
+    @include ease('all', 'swift-ease-in-out');
 
     &.animate {
         padding-bottom: 20px;
@@ -193,7 +193,7 @@ novo-toast.growlTopLeft {
     left: -100%;
     right: auto;
     width: calc(100% - 30px);
-    @include ease( 'all', 'swift-ease-in-out');
+    @include ease('all', 'swift-ease-in-out');
 
     &.animate {
         left: 15px;
@@ -215,7 +215,7 @@ novo-toast.growlTopRight {
     right: -100%;
     left: auto;
     width: calc(100% - 30px);
-    @include ease( 'all', 'swift-ease-in-out');
+    @include ease('all', 'swift-ease-in-out');
 
     &.animate {
         right: 15px;
@@ -271,6 +271,7 @@ novo-toast.embedded.fixedTop {
 novo-toast:not(.launched) {
     animation: embedded-slide-in 200ms ease-in-out;
 }
+
 @keyframes embedded-slide-in {
     from {
         transform: translateY(-100%);
@@ -295,7 +296,7 @@ novo-toast:not(.launched) {
     novo-toast.growlTopLeft {
         left: -100%;
         right: auto;
-        @include ease( 'all', 'swift-ease-in-out');
+        @include ease('all', 'swift-ease-in-out');
 
         &.animate {
             left: 15px;
@@ -306,7 +307,7 @@ novo-toast:not(.launched) {
     novo-toast.growlTopRight {
         right: -100%;
         left: auto;
-        @include ease( 'all', 'swift-ease-in-out');
+        @include ease('all', 'swift-ease-in-out');
 
         &.animate {
             right: 15px;

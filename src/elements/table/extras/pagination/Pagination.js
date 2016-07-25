@@ -34,18 +34,22 @@ export class Pagination {
     }
 
     ngOnInit() {
-        this.rowOptions = this.rowOptions || [
-            { value: 10, label: '10' },
-            { value: 25, label: '25' },
-            { value: 50, label: '50' },
-            { value: 100, label: '100' }
-        ];
+        this.rowOptions = this.rowOptions || this.getDefaultRowOptions();
     }
 
     ngOnChanges() {
         this.page = this.page || 1;
         this.totalPages = this.calculateTotalPages();
         this.pages = this.getPages(this.page, this.totalPages);
+    }
+
+    getDefaultRowOptions() {
+        return [
+            { value: 10, label: '10' },
+            { value: 25, label: '25' },
+            { value: 50, label: '50' },
+            { value: 100, label: '100' }
+        ];
     }
 
     onPageSizeChanged(event) {

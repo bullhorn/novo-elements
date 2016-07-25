@@ -61,7 +61,7 @@ export class Tiles {
         }
     }
 
-	/**
+    /**
      * @name select
      *
      * @param event

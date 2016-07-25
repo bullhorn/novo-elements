@@ -12,13 +12,15 @@ novo-form {
         width: 100%;
 
         header {
-            h1 {}
+            h1 {
+            }
         }
 
         form {
             width: 100%;
 
-            form-title {}
+            form-title {
+            }
 
             form-field {
                 margin-top: 1rem;
@@ -192,7 +194,7 @@ novo-form {
                         div.datetime-container {
                             position: absolute;
                             display: flex;
-                            box-shadow: 0 1px 3px rgba(#000,.1);
+                            box-shadow: 0 1px 3px rgba(#000, .1);
 
                             .calendar {
                                 border-top-right-radius: 0;
@@ -385,7 +387,7 @@ novo-form {
                                 color: rgba(0, 0, 0, .3);
                             }
 
-                             > h4,
+                            > h4,
                             > p {
                                 margin: 0;
                                 max-width: none;
@@ -396,7 +398,8 @@ novo-form {
                                 font-weight: 500;
                             }
 
-                            > p {}
+                            > p {
+                            }
                         }
 
                         section {
@@ -476,7 +479,8 @@ novo-form {
         display: flex;
         flex-flow: row wrap;
 
-        input {}
+        input {
+        }
 
         .street-address {
             flex: 3 3 75%;
@@ -550,6 +554,7 @@ novo-form {
         }
     }
 }
+
 @keyframes iconEnter {
     0% {
         opacity: 0;

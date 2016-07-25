@@ -15,6 +15,7 @@ class TestCmp {
         this.columns = [{ name: 1 }, { name: 2 }];
         this.config = {};
     }
+
     onTableChange(event) {
         this.event = event;
     }

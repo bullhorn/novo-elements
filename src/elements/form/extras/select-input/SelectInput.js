@@ -18,6 +18,7 @@ import { NovoLabelService } from './../../../../novo-elements';
 })
 export class SelectInput extends BaseInput {
     inactive:Boolean = false;
+
     constructor(labels:NovoLabelService) {
         super();
         this.labels = labels;

@@ -5,6 +5,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 
 class MockElementRef {
     nativeElement:HTMLDivElement = document.createElement('div');
+
     constructor() {
         this.nativeElement.querySelector = () => {
             return document.createElement('div');
