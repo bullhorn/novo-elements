@@ -16,7 +16,9 @@ const template = `
     <h4>Demo</h4>
     <div>${TilesDemoTpl}</div>
     <br>
-    You have picked: <strong>{{ currentColor || 'No selection' }}</strong>
+    You have picked (output): <strong>{{ currentColor || 'No selection' }}</strong>
+    <br/>
+    You have picked (ngModel): <strong>{{ value || 'No selection' }}</strong>
     <h4>Code</h4>
     <code-snippet [code]="TilesDemoTpl"></code-snippet>
 </div>

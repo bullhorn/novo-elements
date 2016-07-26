@@ -31,14 +31,9 @@ export class SwitchDemo {
         this.SwitchDemoTpl = SwitchDemoTpl;
         this.toggleCount = 0;
         this.checked = true;
-        this.toggledCheck = true;
     }
 
     increment() {
         this.toggleCount++;
-    }
-
-    toggled(event) {
-        this.toggledCheck = event;
     }
 }

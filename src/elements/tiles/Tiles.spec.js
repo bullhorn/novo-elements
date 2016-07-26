@@ -16,7 +16,7 @@ class MockElementRef {
 @Component({
     selector: 'test-cmp',
     directives: [Tiles],
-    template: '<novo-tiles [options]="demoTiles" (changed)="colorSelect($event)" [(ngModel)]="value"></novo-tiles>'
+    template: '<novo-tiles [options]="demoTiles" (onChange)="colorSelect($event)" [(ngModel)]="value"></novo-tiles>'
 })
 class TestCmp {
     constructor() {

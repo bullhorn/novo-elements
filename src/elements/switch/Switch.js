@@ -1,19 +1,23 @@
-import { Component, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, Provider } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
+// Value accessor for the Tiles component (supports ngModel)
+const SWITCH_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => NovoSwitch),
+    multi: true
+});
+
 @Component({
     selector: 'novo-switch',
-    inputs: ['checked', 'disabled'],
-    outputs: ['onChange'],
+    providers: [SWITCH_VALUE_ACCESSOR],
     host: {
         'role': 'checkbox',
-        '[attr.aria-checked]': 'checked',
-        '[attr.aria-disabled]': '_disabled',
+        '[attr.aria-checked]': 'model',
+        '[attr.aria-disabled]': 'disabled',
         '(keydown)': 'onKeydown($event)'
     },
-    directives: [],
-    encapsulation: ViewEncapsulation.None,
     template: `
         <div (click)="toggle($event)">
             <div class="novo-switch-container">
@@ -26,17 +30,21 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
         </div>
     `
 })
-export class NovoSwitch {
-    constructor() {
-        this.checked = false;
-        this._disabled = false;
-        this.onChange = new EventEmitter();
-    }
+export class NovoSwitch implements ControlValueAccessor {
+    @Output() onChange:EventEmitter<any> = new EventEmitter();
+
+    _disabled:boolean = false;
+    model:any;
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
 
     get disabled() {
         return this._disabled;
     }
 
+    @Input('disabled')
     set disabled(value) {
         this._disabled = (!value);
     }
@@ -53,12 +61,26 @@ export class NovoSwitch {
             event.stopPropagation();
             event.preventDefault();
         }
+
         if (this.disabled) {
             return;
         }
 
-        this.checked = !this.checked;
-        this.onChange.next(this.checked);
+        this.model = !this.model;
+        this.onChange.next(this.model);
+        this.onModelChange(this.model);
+    }
+
+    writeValue(model:any):void {
+        this.model = model;
+    }
+
+    registerOnChange(fn:Function):void {
+        this.onModelChange = fn;
+    }
+
+    registerOnTouched(fn:Function):void {
+        this.onModelTouched = fn;
     }
 }
 

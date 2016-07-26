@@ -1,10 +1,11 @@
-<label>Count
+<label>
+    Count
     <span>{{toggleCount}}</span>
 </label>
-<label>Toggled
-    <span>{{toggledCheck}}</span>
+<label>
+    Toggled
+    <span>{{checked}}</span>
 </label>
-<novo-switch [checked]="checked" (onChange)="increment(); toggled($event)"
-             data-automation-id="switchTest"></novo-switch>
+<novo-switch [(ngModel)]="checked" (onChange)="increment()"></novo-switch>
 <novo-switch class="grapefruit"></novo-switch>
 <novo-switch disabled></novo-switch>

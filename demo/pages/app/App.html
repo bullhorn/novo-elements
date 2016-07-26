@@ -76,29 +76,28 @@
         <a href="https://github.com/bullhorn/novo-elements" target="_blank"
            class="fork-me">Fork Me On Github</a>
     </span>
-    <app-nav [routes]="appRoutes"></app-nav>
     <ul class="menu-list">
-        <li class="menu-item" [class.current]="router.isRouteActive(router.generate(['/Home']))">
-            <a [routerLink]="['/Home']" class="menu-link">Introduction</a>
+        <li class="menu-item" routerLinkActive="current" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="/home" class="menu-link">Introduction</a>
         </li>
 
         <li class="menu-section-header">
             <span class="menu-item-header">Design</span>
         </li>
-        <li class="menu-item" *ngFor="let route of designRoutes" [class.current]="router.isRouteActive(router.generate(['/'+route.name]))">
-            <a [routerLink]="['/' + route.name]" class="menu-link">{{route.name}}</a>
+        <li class="menu-item" *ngFor="let route of designRoutes" routerLinkActive="current" [routerLinkActiveOptions]="{exact: true}">
+            <a [routerLink]="route.path" class="menu-link">{{route.name}}</a>
         </li>
         <li class="menu-section-header">
             <span class="menu-item-header">Components</span>
         </li>
-        <li class="menu-item" *ngFor="let route of componentRoutes" [class.current]="router.isRouteActive(router.generate(['/'+route.name]))">
-            <a [routerLink]="['/'+route.name]" class="menu-link">{{route.name}}</a>
+        <li class="menu-item" *ngFor="let route of componentRoutes" routerLinkActive="current" [routerLinkActiveOptions]="{exact: true}">
+            <a [routerLink]="route.path" class="menu-link">{{route.name}}</a>
         </li>
         <li class="menu-section-header">
             <span class="menu-item-header">Utils</span>
         </li>
-        <li class="menu-item" *ngFor="let route of utilRoutes" [class.current]="router.isRouteActive(router.generate(['/'+route.name]))">
-            <a [routerLink]="['/'+route.name]" class="menu-link">{{route.name}}</a>
+        <li class="menu-item" *ngFor="let route of utilRoutes" routerLinkActive="current" [routerLinkActiveOptions]="{exact: true}">
+            <a [routerLink]="route.path" class="menu-link">{{route.name}}</a>
         </li>
         <li class="menu-line"></li>
     </ul>
