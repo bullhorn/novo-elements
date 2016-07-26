@@ -1,3 +1,13 @@
+<a name="0.1.18"></a>
+## [0.1.18](https://github.com/bullhorn/novo-elements/compare/v0.1.17...v0.1.18) (2016-07-26)
+
+
+### Features
+
+* **modal:** Adds Custom Notification Modals ([f3ef112](https://github.com/bullhorn/novo-elements/commit/f3ef112))
+
+
+
 <a name="0.1.17"></a>
 ## [0.1.17](https://github.com/bullhorn/novo-elements/compare/v0.1.16...v0.1.17) (2016-07-25)
 
