@@ -1,3 +1,13 @@
+<a name="0.1.21"></a>
+## [0.1.21](https://github.com/bullhorn/novo-elements/compare/v0.1.20...v0.1.21) (2016-07-27)
+
+
+### Bug Fixes
+
+* **table:** Fixing overflow ([62b5eba](https://github.com/bullhorn/novo-elements/commit/62b5eba))
+
+
+
 <a name="0.1.20"></a>
 ## [0.1.20](https://github.com/bullhorn/novo-elements/compare/v0.1.19...v0.1.20) (2016-07-27)
 
