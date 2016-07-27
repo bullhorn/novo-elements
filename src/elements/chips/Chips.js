@@ -1,19 +1,20 @@
-import { Component, EventEmitter, ElementRef, Optional } from '@angular/core'; // eslint-disable-line
-import { COMMON_DIRECTIVES, NgModel } from '@angular/common';
+import { Component, EventEmitter, forwardRef, Provider, ElementRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { NOVO_PICKER_ELEMENTS } from '../picker/Picker';
 
+// Value accessor for the component (supports ngModel)
+const CHIPS_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => Chips),
+    multi: true
+});
+
 @Component({
     selector: 'chip',
-    directives: [COMMON_DIRECTIVES],
-    inputs: [
-        'type'
-    ],
-    outputs: [
-        'select',
-        'remove'
-    ],
+    inputs: ['type'],
+    outputs: ['select', 'remove'],
     template: `
         <span (click)="onSelect($event)" [ngClass]="type">
             <i *ngIf="type" class="bhi-circle"></i>
@@ -50,7 +51,8 @@ export class Chip {
     selector: 'chips',
     inputs: ['source', 'placeholder', 'value', 'type'],
     outputs: ['changed', 'focus', 'blur'],
-    directives: [COMMON_DIRECTIVES, NOVO_PICKER_ELEMENTS, Chip, NgModel],
+    directives: [NOVO_PICKER_ELEMENTS, Chip],
+    providers: [CHIPS_VALUE_ACCESSOR],
     template: `
         <chip
             *ngFor="let item of items"
@@ -71,15 +73,7 @@ export class Chip {
                 (blur)="onTouched($event)">
             </novo-picker>
         </div>
-   `,
-    host: {
-        '[class.ng-untouched]': 'model.control?.untouched == true',
-        '[class.ng-touched]': 'model.control?.touched == true',
-        '[class.ng-pristine]': 'model.control?.pristine == true',
-        '[class.ng-dirty]': 'model.control?.dirty == true',
-        '[class.ng-valid]': 'model.control?.valid == true',
-        '[class.ng-invalid]': 'model.control?.valid == false'
-    }
+   `
 })
 export class Chips extends OutsideClick {
     changed:EventEmitter = new EventEmitter();
@@ -91,22 +85,19 @@ export class Chips extends OutsideClick {
     config:Object = {};
     // private data model
     _value:any = '';
-    //Placeholders for the callbacks
-    _onTouchedCallback = () => false;
-    _onChangeCallback = () => false;
+    // Placeholders for the callbacks
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
 
-    constructor(@Optional() model:NgModel, element:ElementRef) {
+    constructor(element:ElementRef) {
         super(element);
         this.element = element;
-        this.model = model || new NgModel();
-        this.model.valueAccessor = this;
     }
 
     ngOnInit() {
         window.document.addEventListener('keydown', this.outsideKeyDown.bind(this));
-        // if (this.model.value) {
-        //     this.writeValue(this.model.value.split(';'));
-        // }
     }
 
     deselectAll() {
@@ -173,7 +164,7 @@ export class Chips extends OutsideClick {
     }
 
     //get accessor
-    get value():any {
+    get value() {
         return this._value;
     }
 
@@ -183,33 +174,30 @@ export class Chips extends OutsideClick {
         if (selected !== this._value) {
             this._value = selected;
             this.changed.emit(selected);
-            this._onChangeCallback(selected);
+            this.onModelChange(selected);
         }
     }
 
-    //From ControlValueAccessor interface
-    writeValue(value) {
-        this._value = value;
-        if (Array.isArray(value)) {
-            this.items = value.map(v => ({ value: v, label: v }));
-        }
-    }
-
-    //Set touched on blur
+    // Set touched on blur
     onTouched(e) {
         this.element.nativeElement.classList.remove('selected');
-        this._onTouchedCallback();
+        this.onModelTouched();
         this.blur.emit(e);
     }
 
-    //From ControlValueAccessor interface
-    registerOnChange(fn) {
-        this._onChangeCallback = fn;
+    writeValue(model:any):void {
+        this.model = model;
+        if (Array.isArray(model)) {
+            this.items = model.map(v => ({ value: v, label: v }));
+        }
     }
 
-    //From ControlValueAccessor interface
-    registerOnTouched(fn) {
-        this._onTouchedCallback = fn;
+    registerOnChange(fn:Function):void {
+        this.onModelChange = fn;
+    }
+
+    registerOnTouched(fn:Function):void {
+        this.onModelTouched = fn;
     }
 }
 
