@@ -1,10 +1,16 @@
-import { Component, EventEmitter, ElementRef, DynamicComponentLoader, ViewContainerRef, Optional } from '@angular/core'; //eslint-disable-line
-import { NgModel } from '@angular/common';
+import { Component, EventEmitter, ElementRef, DynamicComponentLoader, ViewContainerRef, forwardRef, Provider } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Observable } from 'rxjs/Rx';
+
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { PickerResults } from './extras/PickerExtras';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/Rx'; //eslint-disable-line
+
+// Value accessor for the component (supports ngModel)
+const PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => Picker),
+    multi: true
+});
 
 /**
  * @name Picker
@@ -16,9 +22,9 @@ import 'rxjs/Rx'; //eslint-disable-line
  */
 @Component({
     selector: 'novo-picker',
-    directives: [NgModel],
     inputs: ['config', 'placeholder'],
     outputs: ['select', 'focus', 'blur'],
+    providers: [PICKER_VALUE_ACCESSOR],
     template: `
         <input
             type="text"
@@ -36,21 +42,21 @@ export class Picker extends OutsideClick {
     select:EventEmitter = new EventEmitter();
     focus:EventEmitter = new EventEmitter();
     blur:EventEmitter = new EventEmitter();
-    // Flag for remote filtering.
+
+    // Flag for remote filtering
     isStatic:boolean = true;
+
     // Internal search string
     term:string = '';
-    // private data model
-    _value:any = '';
-    //Placeholders for the callbacks
-    _onTouchedCallback = () => false;
-    _onChangeCallback = () => false;
 
-    constructor(@Optional() model:NgModel, element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
+    _value:any;
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
+
+    constructor(element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
         super(element);
-        // NgModel instance
-        this.model = model || new NgModel();
-        this.model.valueAccessor = this;
         // Dynamic Component Loader Instance
         this.loader = loader;
         // View to load next to
@@ -76,12 +82,9 @@ export class Picker extends OutsideClick {
             .map(e => e.target.value)
             .debounceTime(250)
             .distinctUntilChanged();
-
         observer.subscribe(
             term => this.showResults(term),
             err => this.hideResults(err));
-
-        this.writeValue(this.model.value);
     }
 
     /**
@@ -166,26 +169,26 @@ export class Picker extends OutsideClick {
         }
     }
 
-    //get accessor
-    get value():any {
+    // get accessor
+    get value() {
         return this._value;
     }
 
-    //set accessor including call the onchange callback
+    // set accessor including call the onchange callback
     set value(selected) {
         if (!selected) {
             this.term = '';
             this._value = null;
-            this._onChangeCallback(null);
+            this.onModelChange(null);
         } else if (selected.value !== this._value) {
             this.term = selected.label;
             this._value = selected.value;
             this.select.emit(selected);
-            this._onChangeCallback(selected.value);
+            this.onModelChange(selected.value);
         }
     }
 
-    //Set touched on blur
+    // Set touched on blur
     onTouched() {
         setTimeout(() => {
             if (this.term !== this._value) {
@@ -193,28 +196,20 @@ export class Picker extends OutsideClick {
             }
         });
         this.blur.emit(event);
-        this._onTouchedCallback();
+        this.onModelTouched();
     }
 
-    //From ControlValueAccessor interface
-    writeValue(value) {
-        if (typeof value === 'string') {
-            this.term = value;
-            this._value = value;
-        } else {
-            this.term = value;
-            this._value = value;
-        }
+    writeValue(model:any):void {
+        this._value = model;
+        this.term = model;
     }
 
-    //From ControlValueAccessor interface
-    registerOnChange(fn) {
-        this._onChangeCallback = fn;
+    registerOnChange(fn:Function):void {
+        this.onModelChange = fn;
     }
 
-    //From ControlValueAccessor interface
-    registerOnTouched(fn) {
-        this._onTouchedCallback = fn;
+    registerOnTouched(fn:Function):void {
+        this.onModelTouched = fn;
     }
 }
 

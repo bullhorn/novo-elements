@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, forwardRef, Provider, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
-// Value accessor for the Tiles component (supports ngModel)
+// Value accessor for the component (supports ngModel)
 const TILES_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
     useExisting: forwardRef(() => Tiles),
     multi: true

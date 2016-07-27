@@ -1,5 +1,4 @@
 import { Component, EventEmitter } from '@angular/core';
-import { CORE_DIRECTIVES } from '@angular/common';
 
 import { swallowEvent } from './../../utils/Helpers';
 
@@ -7,9 +6,6 @@ import { swallowEvent } from './../../utils/Helpers';
     selector: 'novo-radio',
     inputs: ['name', 'value', 'checked', 'vertical', 'label'],
     outputs: ['change'],
-    host: {
-        '[class.vertical]': 'vertical'
-    },
     template: `
             <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" #radio>
             <label [attr.for]="name" (click)="select($event, radio)">
@@ -18,7 +14,9 @@ import { swallowEvent } from './../../utils/Helpers';
                 <ng-content></ng-content>
             </label>
     `,
-    directives: [CORE_DIRECTIVES]
+    host: {
+        '[class.vertical]': 'vertical'
+    }
 })
 export class Radio {
     // Emitter for when the value changes

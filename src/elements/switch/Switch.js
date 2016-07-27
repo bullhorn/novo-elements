@@ -3,7 +3,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
-// Value accessor for the Tiles component (supports ngModel)
+// Value accessor for the component (supports ngModel)
 const SWITCH_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
     useExisting: forwardRef(() => NovoSwitch),
     multi: true
@@ -12,12 +12,6 @@ const SWITCH_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
 @Component({
     selector: 'novo-switch',
     providers: [SWITCH_VALUE_ACCESSOR],
-    host: {
-        'role': 'checkbox',
-        '[attr.aria-checked]': 'model',
-        '[attr.aria-disabled]': 'disabled',
-        '(keydown)': 'onKeydown($event)'
-    },
     template: `
         <div (click)="toggle($event)">
             <div class="novo-switch-container">
@@ -28,7 +22,13 @@ const SWITCH_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
             </div>
             <div class="novo-switch-label"><ng-content></ng-content></div>
         </div>
-    `
+    `,
+    host: {
+        'role': 'checkbox',
+        '[attr.aria-checked]': 'model',
+        '[attr.aria-disabled]': 'disabled',
+        '(keydown)': 'onKeydown($event)'
+    }
 })
 export class NovoSwitch implements ControlValueAccessor {
     @Output() onChange:EventEmitter<any> = new EventEmitter();

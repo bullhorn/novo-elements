@@ -1,14 +1,19 @@
-import { Component, ElementRef, EventEmitter, Optional } from '@angular/core'; // eslint-disable-line
-import { COMMON_DIRECTIVES, NgControl, NgModel } from '@angular/common';
+import { Component, Input, Output, EventEmitter, forwardRef, Provider, ElementRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from './../../novo-elements';
 
+// Value accessor for the component (supports ngModel)
+const SELECT_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => Select),
+    multi: true
+});
+
 @Component({
     selector: 'novo-select',
-    directives: [COMMON_DIRECTIVES],
-    inputs: ['options', 'placeholder', 'readonly', 'headerConfig'],
-    outputs: ['onSelect'],
+    providers: [SELECT_VALUE_ACCESSOR],
     template: `
         <div (click)="toggleActive($event)" tabIndex="-1" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></div>
         <ul class="novo-select-list" tabIndex="-1" [ngClass]="{header: headerConfig}">
@@ -31,34 +36,29 @@ import { NovoLabelService } from './../../novo-elements';
     `,
     host: {
         '(keydown)': 'onKeyDown($event)',
-        '[class.active]': 'active',
-        '[class.ng-untouched]': 'model.control?.untouched == true',
-        '[class.ng-touched]': 'model.control?.touched == true',
-        '[class.ng-pristine]': 'model.control?.pristine == true',
-        '[class.ng-dirty]': 'model.control?.dirty == true',
-        '[class.ng-valid]': 'model.control?.valid == true',
-        '[class.ng-invalid]': 'model.control?.valid == false'
+        '[class.active]': 'active'
     }
 })
 export class Select extends OutsideClick {
-    constructor(@Optional() model:NgControl, element:ElementRef, labels:NovoLabelService) {
+    @Input() options:Array;
+    @Input() placeholder:String = 'Select...';
+    @Input() readonly:boolean;
+    @Input() headerConfig:any;
+    @Output() onSelect:EventEmitter<any> = new EventEmitter();
+
+    model:any;
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
+
+    constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
+
         // Defaults
         this.selectedIndex = -1;
-        this.placeholder = 'Select...';
         this.empty = true;
-        this.value = null;
         this.labels = labels;
-
-        this.onChange = null;
-        this.onTouched = null;
-        this.onHover = new EventEmitter(false);
-        this.onLeave = new EventEmitter(false);
-        this.onSelect = new EventEmitter();
-
-        this.model = model || new NgModel();
-        this.model.valueAccessor = this;
-
         this.header = {
             open: false,
             valid: true,
@@ -74,19 +74,18 @@ export class Select extends OutsideClick {
         this.readonly = this.readonly === true;
         if (this.options && this.options.length && typeof this.options[0] === 'string') {
             this.options = this.options.map((item) => {
-                return { value: item, label: item }; //esfmt-ignore-line
+                return { value: item, label: item };
             });
         }
 
-        if (!this.model.value && !this.createdItem) {
+        if (!this.model && !this.createdItem) {
             this.clear();
         } else if (this.createdItem) {
             let item = this.options.find(i => i.label === this.createdItem);
             let index = this.options.indexOf(item);
             this.select(item, index);
         } else {
-            // TODO - jgodi - maybe this isn't the best?
-            this.writeValue(this.model.value);
+            this.writeValue(this.model);
         }
     }
 
@@ -101,8 +100,8 @@ export class Select extends OutsideClick {
         this.selected = option;
         this.selected.active = true;
         this.empty = false;
-        this.onSelect.next({ selected: this.selected.value });
-        this.model.viewToModelUpdate(this.selected.value);
+        this.onSelect.emit({ selected: this.selected.value });
+        this.onModelChange(this.selected.value);
     }
 
     clear() {
@@ -174,30 +173,6 @@ export class Select extends OutsideClick {
         list.scrollTop = 48 * (this.selectedIndex - 1);
     }
 
-    //valueAccessor Functions
-    writeValue(value) {
-        this.value = value;
-        if (this.options) {
-            let item = this.options.find(i => i.value === value);
-            if (item) {
-                this.empty = false;
-                this.selected = item;
-                this.selected.active = true;
-                this.selectedIndex = this.options.indexOf(item);
-            } else {
-                this.clear();
-            }
-        }
-    }
-
-    registerOnChange(fn) {
-        this.onChange = fn;
-    }
-
-    registerOnTouched(fn) {
-        this.onTouched = fn;
-    }
-
     toggleHeader(event, forceValue) {
         if (event) {
             event.stopPropagation();
@@ -220,10 +195,7 @@ export class Select extends OutsideClick {
         } else {
             window.removeEventListener('click', this.onOutsideClick);
         }
-        // Fire the active change event
-        this.onActiveChange.emit(this.active);
-
-        //If closing select, also close header
+        // If closing select, also close header
         this.toggleHeader(event, false);
     }
 
@@ -236,6 +208,29 @@ export class Select extends OutsideClick {
         } else {
             this.header.valid = false;
         }
+    }
+
+    writeValue(model:any):void {
+        this.model = model;
+        if (this.options) {
+            let item = this.options.find(i => i.value === model);
+            if (item) {
+                this.empty = false;
+                this.selected = item;
+                this.selected.active = true;
+                this.selectedIndex = this.options.indexOf(item);
+            } else {
+                this.clear();
+            }
+        }
+    }
+
+    registerOnChange(fn:Function):void {
+        this.onModelChange = fn;
+    }
+
+    registerOnTouched(fn:Function):void {
+        this.onModelTouched = fn;
     }
 }
 
