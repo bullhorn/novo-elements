@@ -50,9 +50,7 @@ color {
                     border-radius: 50%;
                 }
             }
-
-            @each $entity,
-            $color in $entity-colors {
+            @each $entity, $color in $entity-colors {
                 .bb-#{$entity} {
                     $randNum: random(20) + 25px;
                     background: $color;
@@ -60,9 +58,7 @@ color {
                     height: $randNum;
                 }
             }
-
-            @each $analytics,
-            $color in $analytics-colors {
+            @each $analytics, $color in $analytics-colors {
                 .bb-#{$analytics} {
                     $randNum: random(20) + 25px;
                     background: $color;
@@ -91,9 +87,9 @@ color {
                 padding-top: 140px;
                 margin-bottom: 95px;
 
-                &:hover,
+                &:active,
                 &:focus,
-                &:active {
+                &:hover {
                     .color-square {
                         transform: scale(1.125);
                     }
@@ -173,6 +169,12 @@ color {
                     }
                 }
 
+                &.neutral-cb {
+                    .color-square {
+                        background: $neutral;
+                    }
+                }
+
                 &.background-cb {
                     color: $dark;
 
@@ -198,18 +200,14 @@ color {
                         background: $background;
                     }
                 }
-
-                @each $entity,
-                $color in $entity-colors {
+                @each $entity, $color in $entity-colors {
                     &.#{$entity}-cb {
                         .color-square {
                             background: $color;
                         }
                     }
                 }
-
-                @each $analytics,
-                $color in $analytics-colors {
+                @each $analytics, $color in $analytics-colors {
                     &.#{$analytics}-cb {
                         .color-square {
                             background: $color;
@@ -223,8 +221,7 @@ color {
 
 color {
     & > header {
-        @each $analytics,
-        $color in $analytics-colors {
+        @each $analytics, $color in $analytics-colors {
             &.#{$analytics} {
                 h1,
                 h2,
@@ -238,9 +235,7 @@ color {
                 }
             }
         }
-
-        @each $entity,
-        $color in $entity-colors {
+        @each $entity, $color in $entity-colors {
             &.#{$entity} {
                 h1,
                 h2,
