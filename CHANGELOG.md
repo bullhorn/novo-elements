@@ -1,3 +1,13 @@
+<a name="0.1.23"></a>
+## [0.1.23](https://github.com/bullhorn/novo-elements/compare/v0.1.22...v0.1.23) (2016-07-28)
+
+
+### Bug Fixes
+
+* **task:** Adding task as entity color ([cbf1c84](https://github.com/bullhorn/novo-elements/commit/cbf1c84))
+
+
+
 <a name="0.1.22"></a>
 ## [0.1.22](https://github.com/bullhorn/novo-elements/compare/v0.1.21...v0.1.22) (2016-07-28)
 
