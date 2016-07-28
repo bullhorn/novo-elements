@@ -1,3 +1,68 @@
+<a name="0.1.24"></a>
+## [0.1.24](https://github.com/bullhorn/novo-elements/compare/v0.1.23...v0.1.24) (2016-07-28)
+
+
+### Bug Fixes
+
+* **form:** Fix NPE when using a manual form field ([9ecbdfd](https://github.com/bullhorn/novo-elements/commit/9ecbdfd))
+
+
+
+<a name="0.1.23"></a>
+## [0.1.23](https://github.com/bullhorn/novo-elements/compare/v0.1.22...v0.1.23) (2016-07-28)
+
+
+### Bug Fixes
+
+* **task:** Adding task as entity color ([cbf1c84](https://github.com/bullhorn/novo-elements/commit/cbf1c84))
+
+
+
+<a name="0.1.22"></a>
+## [0.1.22](https://github.com/bullhorn/novo-elements/compare/v0.1.21...v0.1.22) (2016-07-28)
+
+
+### Features
+
+* **slider:** Adding a slider component ([1e181ed](https://github.com/bullhorn/novo-elements/commit/1e181ed))
+
+
+
+<a name="0.1.21"></a>
+## [0.1.21](https://github.com/bullhorn/novo-elements/compare/v0.1.20...v0.1.21) (2016-07-27)
+
+
+### Bug Fixes
+
+* **table:** Fixing overflow ([62b5eba](https://github.com/bullhorn/novo-elements/commit/62b5eba))
+
+
+
+<a name="0.1.20"></a>
+## [0.1.20](https://github.com/bullhorn/novo-elements/compare/v0.1.19...v0.1.20) (2016-07-27)
+
+
+### Features
+
+* **colors:** Adds Neutral Color ([8903a41](https://github.com/bullhorn/novo-elements/commit/8903a41))
+
+
+
+<a name="0.1.19"></a>
+## [0.1.19](https://github.com/bullhorn/novo-elements/compare/v0.1.18...v0.1.19) (2016-07-26)
+
+
+
+<a name="0.1.18"></a>
+## [0.1.18](https://github.com/bullhorn/novo-elements/compare/v0.1.17...v0.1.18) (2016-07-26)
+
+
+### Features
+
+* **modal:** Adds Custom Notification Modals ([f3ef112](https://github.com/bullhorn/novo-elements/commit/f3ef112))
+
+
+
 <a name="0.1.17"></a>
 ## [0.1.17](https://github.com/bullhorn/novo-elements/compare/v0.1.16...v0.1.17) (2016-07-25)
 

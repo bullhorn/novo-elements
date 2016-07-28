@@ -1,9 +1,8 @@
 novo-table {
     width: 100%;
-    overflow: hidden;
+    display: block;
     overflow-x: scroll;
 }
-
 /* -- Material Design Table style -------------- */
 // Variables
 // ---------------------
@@ -15,24 +14,23 @@ $table-bg: #fff;
 $table-bg-accent: #f4f4f4;
 $table-bg-hover: rgba(0, 0, 0, .12);
 $table-bg-active: $table-bg-hover;
-$table-border-color: #f5f5f5;
-
-// Tables
+$table-border-color: #f5f5f5; // Tables
 //
 // -----------------
 // Baseline styles
+
 .table {
     width: 100%;
     max-width: 100%;
     background-color: $table-bg;
 
-    > tbody,
-    > thead,
+     > tbody,
+     > thead,
     > tfoot {
         > tr {
             transition: all 0.3s ease;
 
-            > td,
+             > td,
             > th {
                 position: relative;
                 text-align: left;
@@ -204,8 +202,7 @@ $table-border-color: #f5f5f5;
                             padding-top: 5px;
                         }
 
-                        &.bhi-arrow-up {
-                        }
+                        &.bhi-arrow-up {}
                     }
 
                     &.asc {
@@ -240,11 +237,11 @@ $table-border-color: #f5f5f5;
         }
     }
 
-    > colgroup + thead,
-    > thead:first-child,
+     > colgroup + thead,
+     > thead:first-child,
     > caption + thead {
         > tr:first-child {
-            > td,
+             > td,
             > th {
                 border-top: 0;
             }
@@ -280,29 +277,29 @@ $table-border-color: #f5f5f5;
         text-transform: uppercase;
     }
 }
-
 // Condensed table w/ half padding
+
 .table-condensed {
-    > tbody,
-    > thead,
+     > tbody,
+     > thead,
     > tfoot {
         > tr {
-            > td,
+             > td,
             > th {
                 padding: $table-condensed-cell-padding;
             }
         }
     }
 }
-
 // Bordered version
 // Add horizontal borders between columns.
+
 .table-bordered {
-    > tbody,
-    > thead,
+     > tbody,
+     > thead,
     > tfoot {
         > tr {
-            > td,
+             > td,
             > th {
                 border-bottom: 1px solid $table-border-color;
             }
@@ -310,15 +307,15 @@ $table-border-color: #f5f5f5;
     }
 
     > thead > tr {
-        > td,
+         > td,
         > th {
             border-bottom-width: 2px;
         }
     }
 }
-
 // Zebra-striping
 // Default zebra-stripe styles (alternating gray and transparent backgrounds)
+
 .table-striped:not(.table-details) {
     > tbody tr:nth-of-type(odd) {
         background-color: $table-bg-accent;
@@ -326,13 +323,13 @@ $table-border-color: #f5f5f5;
 }
 
 .table-striped.table-details {
-    > tbody tr:nth-of-type(4n+2),
+     > tbody tr:nth-of-type(4n+2),
     > tbody tr:nth-of-type(4n+1) {
         background-color: $table-bg-accent;
     }
 }
-
 // Hover effect
+
 .table-hover {
     > tbody > tr:hover {
         background-color: $table-bg-hover;
@@ -362,7 +359,7 @@ novo-table {
         }
 
         .table-striped.table-details {
-            > tbody tr:nth-of-type(4n+2),
+             > tbody tr:nth-of-type(4n+2),
             > tbody tr:nth-of-type(4n+1) {
                 background-color: rgba($table-bg-accent, .04);
             }

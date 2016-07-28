@@ -12,6 +12,7 @@ import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
 import ModalAddDemoTpl from './templates/ModalAddDemo.html';
 import ModalEditDemoTpl from './templates/ModalEditDemo.html';
 import ModalErrorDemoTpl from './templates/ModalErrorDemo.html';
+import ModalCustomDemoTpl from './templates/ModalCustomDemo.html';
 import ModalSuccessDemoTpl from './templates/ModalSuccessDemo.html';
 import ModalWarningDemoTpl from './templates/ModalWarningDemo.html';
 
@@ -36,6 +37,11 @@ const template = `
     <p>Error modals indicate that an attempted action has failed. The first line should apologize and state the what happened. The second line should quickly attempt to explain to the user why this has happened, and instruct the user on the best course of action.</p>
     <div class="example modal-demo"><button theme="secondary" (click)="showError()">Show Me :)</button></div>
     <code-snippet [code]="ModalErrorDemoTpl"></code-snippet>
+
+    <h5>Custom</h5>
+    <p>In the case where "Success", "Warning", and "Error" notfications aren't enough, use the custom notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.</p>
+    <div class="example modal-demo"><button theme="secondary" (click)="showCustom()">Show Me :)</button></div>
+    <code-snippet [code]="ModalCustomDemoTpl"></code-snippet>
 
     <h2>Workflow Modals</h2>
 
@@ -97,6 +103,21 @@ export class ModalErrorDemo {
 }
 
 @Component({
+    selector: 'modal-custom-demo',
+    template: ModalCustomDemoTpl,
+    directives: [NOVO_MODAL_ELEMENTS]
+})
+export class ModalCustomDemo {
+    constructor(modalRef:ModalRef) {
+        this.modalRef = modalRef;
+    }
+
+    close() {
+        this.modalRef.close();
+    }
+}
+
+@Component({
     selector: 'modal-add-demo',
     template: ModalAddDemoTpl,
     directives: [NOVO_MODAL_ELEMENTS]
@@ -138,6 +159,7 @@ export class ModalDemo {
         this.ModalAddDemoTpl = ModalAddDemoTpl;
         this.ModalEditDemoTpl = ModalEditDemoTpl;
         this.ModalErrorDemoTpl = ModalErrorDemoTpl;
+        this.ModalCustomDemoTpl = ModalCustomDemoTpl;
         this.ModalSuccessDemoTpl = ModalSuccessDemoTpl;
         this.ModalWarningDemoTpl = ModalWarningDemoTpl;
     }
@@ -152,6 +174,10 @@ export class ModalDemo {
 
     showError() {
         this.modalService.open(ModalErrorDemo);
+    }
+
+    showCustom() {
+        this.modalService.open(ModalCustomDemo);
     }
 
     showAdd() {

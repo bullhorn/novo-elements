@@ -27,6 +27,7 @@ import { NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS } from './elements/table
 import { NOVO_DRAGULA_ELEMENTS } from './elements/dragula';
 import { NOVO_FORM_ELEMENTS, NOVO_FORM_CORE, NOVO_FORM_EXTRAS } from './elements/form';
 import { NOVO_TILES_ELEMENTS } from './elements/tiles';
+import { NOVO_SLIDER_ELEMENTS } from './elements/slider';
 
 // Elements
 export * from './elements/button';
@@ -55,6 +56,7 @@ export * from './elements/table';
 export * from './elements/dragula';
 export * from './elements/form';
 export * from './elements/tiles';
+export * from './elements/slider';
 
 // Pipes
 export * from './pipes/plural/Plural';
@@ -96,7 +98,8 @@ export const NOVO_ELEMENTS = [
     ...NOVO_FORM_ELEMENTS,
     ...NOVO_FORM_CORE,
     ...NOVO_FORM_EXTRAS,
-    ...NOVO_TILES_ELEMENTS
+    ...NOVO_TILES_ELEMENTS,
+    ...NOVO_SLIDER_ELEMENTS
 ];
 
 export const NOVO_SERVICES = [

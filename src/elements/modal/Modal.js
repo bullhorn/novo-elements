@@ -86,7 +86,7 @@ export class NovoModal {
 @Component({
     moduleId: module.id,
     selector: 'novo-notification',
-    inputs: ['type'],
+    inputs: ['type', 'icon'],
     template: `
         <button class="modal-close" theme="icon" icon="times" (click)="close()"></button>
         <header>
@@ -123,6 +123,9 @@ export class Notification {
                 break;
             case 'error':
                 this.iconType = 'bhi-caution-o';
+                break;
+            case 'custom':
+                this.iconType = `bhi-${this.icon}`;
                 break;
             default:
                 break;

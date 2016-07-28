@@ -31,6 +31,11 @@ export class Color {
                 name: 'background',
                 variables: ['off-white', 'background'],
                 hex: 'F4F4F4'
+            },
+            {
+                name: 'neutral',
+                variables: ['neutral'],
+                hex: '747884'
             }
         ];
 

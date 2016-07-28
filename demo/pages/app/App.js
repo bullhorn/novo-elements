@@ -56,7 +56,8 @@ export class DemoApp {
             { name: 'Table', path: '/table' },
             { name: 'Calendar', path: '/calendar' },
             { name: 'Dragula', path: '/dragula' },
-            { name: 'Tiles', path: '/tiles' }
+            { name: 'Tiles', path: '/tiles' },
+            { name: 'Slides', path: '/slides' }
         ].sort((a, b) => {
             if (a.name < b.name) return -1;
             if (a.name > b.name) return 1;

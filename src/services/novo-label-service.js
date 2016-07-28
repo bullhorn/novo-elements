@@ -13,6 +13,7 @@ export class NovoLabelService {
     numberTooLarge = 'Number is too large';
     save = 'Save';
     cancel = 'Cancel';
+    next = 'Next'
 }
 
 export const NOVO_ELEMENTS_LABELS_PROVIDERS = [

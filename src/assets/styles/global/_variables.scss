@@ -39,6 +39,7 @@ $negative: $grapefruit;
 $warning: $sunflower;
 $background: $off-white;
 $background-dark: #E2E2E2;
+$neutral: #747884;
 
 /*
 ===================
@@ -70,7 +71,8 @@ $entity-colors: (
     job: $job,
     submission: $submission,
     placement: $placement,
-    note: $note
+    note: $note,
+    task: $dark
 );
 
 // Generic Color Map
@@ -86,7 +88,8 @@ $colors: (
     off-white: $off-white,
     dark: $dark,
     light: $light,
-    pulse: $pulse
+    pulse: $pulse,
+    neutral: $neutral
 );
 
 // Loading Dot Color Map
