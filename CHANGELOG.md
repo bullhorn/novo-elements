@@ -1,3 +1,13 @@
+<a name="0.1.22"></a>
+## [0.1.22](https://github.com/bullhorn/novo-elements/compare/v0.1.21...v0.1.22) (2016-07-28)
+
+
+### Features
+
+* **slider:** Adding a slider component ([1e181ed](https://github.com/bullhorn/novo-elements/commit/1e181ed))
+
+
+
 <a name="0.1.21"></a>
 ## [0.1.21](https://github.com/bullhorn/novo-elements/compare/v0.1.20...v0.1.21) (2016-07-27)
 
