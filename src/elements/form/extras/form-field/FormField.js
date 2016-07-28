@@ -31,9 +31,11 @@ export class FormField {
     ngOnInit() {
         setTimeout(() => {
             this.field = this.inputs.first;
-            this.field.inputState.subscribe((evt) => {
-                this.inactive = evt.value;
-            });
+            if (this.field) {
+                this.field.inputState.subscribe((evt) => {
+                    this.inactive = evt.value;
+                });
+            }
         });
     }
 }
