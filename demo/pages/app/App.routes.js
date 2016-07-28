@@ -34,6 +34,7 @@ export const routes = [
     { path: 'calendar', component: 'CalendarDemo' },
     { path: 'dragula', component: 'DragulaDemo' },
     { path: 'tiles', component: 'TilesDemo' },
+    { path: 'slides', component: 'SlidesDemo' },
 
     // Utils
     { path: 'utils', component: 'UtilsDemo' },
@@ -77,6 +78,7 @@ export const asyncRoutes = {
     'CalendarDemo': require('es6-promise-loader!./../calendar/CalendarDemo'),
     'DragulaDemo': require('es6-promise-loader!./../dragula/DragulaDemo'),
     'TilesDemo': require('es6-promise-loader!./../tiles/TilesDemo'),
+    'SlidesDemo': require('es6-promise-loader!./../slides/SlidesDemo'),
 
     // Utils
     'UtilsDemo': require('es6-promise-loader!./../utils/UtilsDemo'),
