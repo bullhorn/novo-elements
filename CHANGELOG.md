@@ -1,3 +1,13 @@
+<a name="0.1.24"></a>
+## [0.1.24](https://github.com/bullhorn/novo-elements/compare/v0.1.23...v0.1.24) (2016-07-28)
+
+
+### Bug Fixes
+
+* **form:** Fix NPE when using a manual form field ([9ecbdfd](https://github.com/bullhorn/novo-elements/commit/9ecbdfd))
+
+
+
 <a name="0.1.23"></a>
 ## [0.1.23](https://github.com/bullhorn/novo-elements/compare/v0.1.22...v0.1.23) (2016-07-28)
 
