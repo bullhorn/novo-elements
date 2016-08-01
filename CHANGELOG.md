@@ -1,3 +1,13 @@
+<a name="0.1.25"></a>
+## [0.1.25](https://github.com/bullhorn/novo-elements/compare/v0.1.24...v0.1.25) (2016-08-01)
+
+
+### Features
+
+* **Tooltips:** Enhanced positioning ([#127](https://github.com/bullhorn/novo-elements/issues/127)) ([cd3b3dc](https://github.com/bullhorn/novo-elements/commit/cd3b3dc))
+
+
+
 <a name="0.1.24"></a>
 ## [0.1.24](https://github.com/bullhorn/novo-elements/compare/v0.1.23...v0.1.24) (2016-07-28)
 
