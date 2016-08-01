@@ -100,6 +100,11 @@ export class Chips extends OutsideClick {
         window.document.addEventListener('keydown', this.outsideKeyDown.bind(this));
     }
 
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        window.document.removeEventListener('keydown', this.outsideKeyDown.bind(this));
+    }
+
     deselectAll() {
         this.selected = null;
     }

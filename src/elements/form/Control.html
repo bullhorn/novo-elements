@@ -1,0 +1,27 @@
+<div class="novo-control-container" [formGroup]="form">
+    <!--Label-->
+    <label [attr.for]="control.key">{{control.label}}</label>
+    <!--Required Indicator-->
+    <i [hidden]="!control.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
+    <!--Form Controls-->
+    <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType">
+        <!--Text-based Inputs-->
+        <input *ngSwitchCase="'textbox'" [formControlName]="control.key" [id]="control.key" [type]="control.type">
+        <!--HTML5 Select-->
+        <select [id]="control.key" *ngSwitchCase="'dropdown'" [formControlName]="control.key">
+            <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>
+        </select>
+        <!--Tiles-->
+        <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key"></novo-tiles>
+        <!--Picker-->
+        <div class="novo-control-input-container" *ngSwitchCase="'picker'">
+            <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple"></novo-picker>
+            <chips [source]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple"></chips>
+            <i class="bhi-search"></i>
+        </div>
+        <!--Novo Select-->
+        <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key"></novo-select>
+        <!--Error Message-->
+        <div class="error-message" *ngIf="!isValid && isDirty">{{control.label | uppercase}} is required</div>
+    </div>
+</div>
