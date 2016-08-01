@@ -2,7 +2,7 @@
 
 ## Usage
     import { NOVO_TOOLTIP_ELEMENTS } from 'novo-elements';
-    
+
 > A SCSS/SASS include for `node_modules/hint.css/src` will be required!
 
 ##### Properties
@@ -13,7 +13,7 @@
     * Available Values: `['info', 'warning', 'error', 'success']`
 - `'tooltipPosition' : String`
     * Defines the position of the tooltip
-    * Available Values: `['top', 'bottom', 'right', 'left']`
+    * Available Values: `['top', 'bottom', 'right', 'left', 'top-left', 'top-right', 'bottom-left', 'bottom-right']`
 - `'tooltipRounded' : Bool`
     * Makes the tooltip rounded
 - `'tooltipNoAnimate' : Bool`

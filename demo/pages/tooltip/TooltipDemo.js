@@ -5,6 +5,7 @@ import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
 
 import TooltipOptionsDemoTpl from './templates/TooltipOptionsDemo.html';
 import TooltipPlacementDemoTpl from './templates/TooltipPlacementDemo.html';
+import TooltipAlignDemoTpl from './templates/TooltipAlignDemo.html';
 import TooltipTypesDemoTpl from './templates/TooltipTypesDemo.html';
 
 const template = `
@@ -18,6 +19,10 @@ const template = `
     <h5>Placement</h5>
     <div class="example tooltip-demo">${TooltipPlacementDemoTpl}</div>
     <code-snippet [code]="TooltipPlacementDemoTpl"></code-snippet>
+
+    <h5>Alignment</h5>
+    <div class="example tooltip-demo">${TooltipAlignDemoTpl}</div>
+    <code-snippet [code]="TooltipAlignDemoTpl"></code-snippet>
 
     <h5>Types</h5>
     <div class="example tooltip-demo">${TooltipTypesDemoTpl}</div>
@@ -41,5 +46,6 @@ export class TooltipDemo {
         this.TooltipOptionsDemoTpl = TooltipOptionsDemoTpl;
         this.TooltipTypesDemoTpl = TooltipTypesDemoTpl;
         this.TooltipPlacementDemoTpl = TooltipPlacementDemoTpl;
+        this.TooltipAlignDemoTpl = TooltipAlignDemoTpl;
     }
 }
