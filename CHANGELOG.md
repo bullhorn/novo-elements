@@ -1,3 +1,13 @@
+<a name="0.1.27"></a>
+## [0.1.27](https://github.com/bullhorn/novo-elements/compare/v0.1.26...v0.1.27) (2016-08-02)
+
+
+### Bug Fixes
+
+* **tipwell:** Fixing anonymous instances of TipWells ([c19b5db](https://github.com/bullhorn/novo-elements/commit/c19b5db))
+
+
+
 <a name="0.1.26"></a>
 ## [0.1.26](https://github.com/bullhorn/novo-elements/compare/v0.1.25...v0.1.26) (2016-08-02)
 
