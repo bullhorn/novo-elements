@@ -519,6 +519,7 @@ export class NovoTable {
             row._selected = true;
         }
         this.selected = this.rows;
+        this.showSelectAllMessage = false;
         this.emitSelected(this.selected);
     }
 
