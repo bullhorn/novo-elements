@@ -1,0 +1,17 @@
+novo-tip-well {
+    width: 100%;
+    min-height: 3em;
+    margin: 1em 0 1em;
+    > div {
+        border-radius: .25em;
+        background-color: $off-white;
+        color: $dark;
+        padding: 1em;
+        text-align: right;
+        
+        > p {
+            width: 100%;
+            text-align: left;
+        }
+    }
+}
