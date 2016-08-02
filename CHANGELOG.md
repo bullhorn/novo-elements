@@ -1,3 +1,39 @@
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/bullhorn/novo-elements/compare/v0.1.28...v0.2.1) (2016-08-02)
+
+
+### Features
+
+* **table:** Moving pagination into table, adding custom header/actions and custom themes to table, fixing things around selection ([4ccbd22](https://github.com/bullhorn/novo-elements/commit/4ccbd22))
+
+
+### BREAKING CHANGES
+
+* table: The new version of table has pagination already in place, so to migrate to the new table you will simple remove your instance of `novo-pagination` and use the one provided
+
+For example:
+
+BEFORE:
+
+```
+<novo-pagination></novo-pagination>
+<novo-table></novo-table>
+```
+
+AFTER:
+
+```
+<novo-table></novo-table>
+```
+
+Also, any custom header or custom actions that your table already implemented along side the `novo-pagination` element, those will move into the `novo-table-header` and `novo-table-actions` components inside the table. See below for more information on those.
+
+In order to turn off pagination you will simply pass `paging: false` in the config object you provide with the table. The rest of the config object that is passed into the table did not change at all!
+
+For docs on how to use the custom headers/actions please refer to [TABLE README](https://github.com/bullhorn/novo-elements/blob/master/src/elements/table/README.md)
+
+
+
 <a name="0.1.28"></a>
 ## [0.1.28](https://github.com/bullhorn/novo-elements/compare/v0.1.27...v0.1.28) (2016-08-02)
 
