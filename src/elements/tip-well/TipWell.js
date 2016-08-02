@@ -43,7 +43,7 @@ export class TipWell {
         this.tip = this.tip || '';
         this.buttonText = this.buttonText || 'Ok, Got it';
         // Set a (semi) unique name for the tip-well
-        this.name = this.name || Math.round(Math.round() * 100);
+        this.name = this.name || Math.round(Math.random() * 100);
         this.localStorageKey = `novo-tw_${this.name}`;
         // Check localStorage for state
         if (this.isLocalStorageEnabled) {
