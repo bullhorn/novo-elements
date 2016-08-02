@@ -1,3 +1,13 @@
+<a name="0.1.26"></a>
+## [0.1.26](https://github.com/bullhorn/novo-elements/compare/v0.1.25...v0.1.26) (2016-08-02)
+
+
+### Features
+
+* **TipWell:** adding new TipWell feature for displaying a tip dialog in-line ([#129](https://github.com/bullhorn/novo-elements/issues/129)) ([d20c207](https://github.com/bullhorn/novo-elements/commit/d20c207))
+
+
+
 <a name="0.1.25"></a>
 ## [0.1.25](https://github.com/bullhorn/novo-elements/compare/v0.1.24...v0.1.25) (2016-08-01)
 
