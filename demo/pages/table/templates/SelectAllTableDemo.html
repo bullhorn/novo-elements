@@ -1,17 +1,13 @@
-<header [ngClass]="color" (click)="changeColor()" bhTooltip="Click Me!" bhTooltipPlacement="top">
-    <div class="header-row">
-        <h1><i class="bhi-email"></i>Email ({{selectAll.rows.length}})</h1>
-        <div>
-            <h5>Last Activity</h5>
-            <span>12/15/2015</span>
-        </div>
-    </div>
-    <novo-pagination *ngIf="selectAll.config.paging"
-                     [page]="selectAll.config.paging.current"
-                     [totalItems]="selectAll.rows.length"
-                     [itemsPerPage]="selectAll.config.paging.itemsPerPage"
-                     (onPageChange)="selectAll.config.paging.onPageChange($event)">
-    </novo-pagination>
-</header>
-
-<novo-table [rows]="selectAll.rows" [columns]="selectAll.columns" [config]="selectAll.config" (onTableChange)="selectAll.onTableChange($event)"></novo-table>
+<novo-table [rows]="selectAll.rows" [columns]="selectAll.columns" [config]="selectAll.config" (onTableChange)="selectAll.onTableChange($event)" #table>
+    <novo-table-actions>
+        <button theme="secondary" (click)="singleAction()">Click Me!</button>
+        <novo-dropdown side="right" *ngIf="table.selected.length">
+            <button theme="primary" icon="collapse" inverse>{{table.selected.length}} Selected</button>
+            <list>
+                <item (click)="selectedAction('action 1')">Action 1</item>
+                <item (click)="selectedAction('action 2')">Action 2</item>
+                <item (click)="selectedAction('action 3')">Action 3</item>
+            </list>
+        </novo-dropdown>
+    </novo-table-actions>
+</novo-table>

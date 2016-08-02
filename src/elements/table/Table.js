@@ -4,17 +4,33 @@ import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgModel } from '@angular/common';
 import { isFunction, isString } from '@angular/core/src/facade/lang';
 // App
 import { NOVO_BUTTON_ELEMENTS } from '../button';
+import { NOVO_TOOLTIP_ELEMENTS } from '../tooltip';
 import { NOVO_DROPDOWN_ELEMENTS } from '../dropdown';
 import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
 import { CheckBox } from '../form/extras/FormExtras';
 import { NovoLabelService } from './../../novo-elements';
 
 @Component({
+    selector: 'novo-table-actions',
+    template: '<ng-content></ng-content>'
+})
+export class NovoTableActions {
+}
+
+@Component({
+    selector: 'novo-table-header',
+    template: '<ng-content></ng-content>'
+})
+export class NovoTableHeader {
+}
+
+@Component({
     selector: 'novo-table, [novoTable]',
     inputs: [
         'rows',
         'columns',
-        'config'
+        'config',
+        'theme'
     ],
     outputs: [
         'onRowClick',
@@ -28,21 +44,39 @@ import { NovoLabelService } from './../../novo-elements';
         FORM_DIRECTIVES,
         NOVO_BUTTON_ELEMENTS,
         NOVO_DROPDOWN_ELEMENTS,
+        NOVO_TOOLTIP_ELEMENTS,
         CheckBox
     ],
+    host: {
+        '[attr.theme]': 'theme'
+    },
     template: `
-        <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
+        <header>
+            <ng-content select="novo-table-header"></ng-content>
+            <div class="header-actions">
+                <novo-pagination *ngIf="config.paging"
+                                 [page]="config.paging.current"
+                                 [rowOptions]="config.customRowOptions"
+                                 [totalItems]="rows.length"
+                                 [itemsPerPage]="config.paging.itemsPerPage"
+                                 (onPageChange)="config.paging.onPageChange($event)">
+                </novo-pagination>
+                <ng-content select="novo-table-actions"></ng-content>
+            </div>
+        </header>
+        <div class="table-container">
+            <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
             <thead>
                 <tr role="row">
                     <!-- DETAILS -->
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
                     <!-- CHECKBOX -->
-                    <th class="row-actions" *ngIf="config.rowSelectionStyle === 'checkbox'">
-                        <check-box [(value)]="master" [indeterminate]="indeterminate" (valueChange)="selectAll($event)" data-automation-id="select-all-checkbox"></check-box>
+                    <th class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
+                        <check-box [(value)]="master" [indeterminate]="indeterminate" (valueChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></check-box>
                     </th>
                     <!-- TABLE HEADERS -->
                     <th *ngFor="let column of columns" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
-                        <div class="th-group" [attr.data-automation-id]="column.name">
+                        <div class="th-group" [attr.data-automation-id]="column.name" *ngIf="!column.hideHeader">
                             <!-- LABEL & SORT ARROWS -->
                             <div class="th-title" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
                                 <label>{{ column.title }}</label>
@@ -83,6 +117,11 @@ import { NovoLabelService } from './../../novo-elements';
             </thead>
             <!-- TABLE DATA -->
             <tbody *ngIf="rows.length > 0">
+                <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage">
+                    <td colspan="100%">
+                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll()">{{labels.totalRecords(rows.length)}}</a>
+                    </td>
+                </tr>
                 <template ngFor let-row="$implicit" [ngForOf]="rows | slice:getPageStart():getPageEnd()">
                     <tr class="table-row" [ngClass]="row.customClass || ''" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
                         <td class="row-actions" *ngIf="config.hasDetails">
@@ -115,6 +154,7 @@ import { NovoLabelService } from './../../novo-elements';
                 </tr>
             </tbody>
         </table>
+        </div>
     `
 })
 export class NovoTable {
@@ -127,10 +167,13 @@ export class NovoTable {
         this.labels = labels;
         // Vars
         this.originalRows = [];
+        this.selected = [];
         this.activeId = 0;
         this.master = false;
         this.indeterminate = false;
         this.lastPage = 0;
+        this.selectedPageCount = 0;
+        this.showSelectAllMessage = false;
     }
 
     ngOnInit() {
@@ -174,10 +217,11 @@ export class NovoTable {
      * @name ngDoCheck
      */
     ngDoCheck() {
-        if (this.config.paging.current !== this.lastPage) {
+        if (this.config.paging && this.config.paging.current !== this.lastPage) {
             this.rowSelectHandler();
+            this.showSelectAllMessage = false;
         }
-        this.lastPage = this.config.paging.current;
+        this.lastPage = this.config.paging ? this.config.paging.current : 1;
     }
 
     /**
@@ -444,16 +488,39 @@ export class NovoTable {
     }
 
     /**
-     * @name selectAll
+     * @name selectPage
      */
-    selectAll() {
+    selectPage() {
         this.indeterminate = false;
         let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
         for (let row of pagedData) {
             row._selected = this.master;
         }
-        let selected = pagedData.filter(r => r._selected);
-        this.emitSelected(selected);
+        this.selected = this.rows.filter(r => r._selected);
+        this.emitSelected(this.selected);
+
+        // Only show the select all message when there is only one new page selected at a time
+        if (this.master) {
+            this.selectedPageCount++;
+            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.rows.length;
+        } else {
+            this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
+            this.showSelectAllMessage = false;
+        }
+    }
+
+    /**
+     * @name selectAll
+     */
+    selectAll() {
+        this.master = true;
+        this.indeterminate = false;
+        for (let row of this.rows) {
+            row._selected = true;
+        }
+        this.selected = this.rows;
+        this.showSelectAllMessage = false;
+        this.emitSelected(this.selected);
     }
 
     /**
@@ -461,18 +528,23 @@ export class NovoTable {
      */
     rowSelectHandler() {
         let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-        let selected = pagedData.filter(r => r._selected);
-        if (selected.length === 0) {
+        let pageSelected = pagedData.filter(r => r._selected);
+        this.selected = this.rows.filter(r => r._selected);
+        if (pageSelected.length === 0) {
             this.master = false;
             this.indeterminate = false;
-        } else if (selected.length === pagedData.length) {
+        } else if (pageSelected.length === pagedData.length) {
             this.master = true;
             this.indeterminate = false;
         } else {
             this.master = false;
             this.indeterminate = true;
+
+            // Breaking the selected page count
+            this.showSelectAllMessage = false;
+            this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
         }
-        this.emitSelected(selected);
+        this.emitSelected(this.selected);
     }
 
     /**
@@ -513,4 +585,4 @@ export class NovoTable {
     }
 }
 
-export const NOVO_TABLE_ELEMENTS = [NovoTable];
+export const NOVO_TABLE_ELEMENTS = [NovoTable, NovoTableActions, NovoTableHeader];

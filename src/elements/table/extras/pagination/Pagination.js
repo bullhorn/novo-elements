@@ -1,5 +1,7 @@
 import { Component, EventEmitter } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
+
+import { NovoLabelService } from './../../../../services/novo-label-service';
 import { NOVO_SELECT_ELEMENTS } from '../../../select';
 
 @Component({
@@ -8,7 +10,8 @@ import { NOVO_SELECT_ELEMENTS } from '../../../select';
         'page',
         'totalItems',
         'itemsPerPage',
-        'rowOptions'
+        'rowOptions',
+        'label'
     ],
     outputs: ['onPageChange'],
     directives: [
@@ -16,8 +19,8 @@ import { NOVO_SELECT_ELEMENTS } from '../../../select';
         NOVO_SELECT_ELEMENTS
     ],
     template: `
-        <h5 class="rows">Rows Per Page: </h5>
-        <novo-select [options]="rowOptions" placeholder="Select..." [(ngModel)]="itemsPerPage" (onSelect)="onPageSizeChanged($event)" data-automation-id="pager-select"></novo-select>
+        <h5 class="rows">{{label}}</h5>
+        <novo-select [options]="rowOptions" [placeholder]="labels.select" [(ngModel)]="itemsPerPage" (onSelect)="onPageSizeChanged($event)" data-automation-id="pager-select"></novo-select>
         <spacer></spacer>
         <ul class="pager" data-automation-id="pager">
             <li class="page" (click)="selectPage(page-1)"><i class="bhi-previous" [hidden]="noPrevious()" data-automation-id="pager-previous"></i></li>
@@ -27,13 +30,15 @@ import { NOVO_SELECT_ELEMENTS } from '../../../select';
   `
 })
 export class Pagination {
-    constructor() {
+    constructor(labels:NovoLabelService) {
+        this.labels = labels;
         this.maxPagesDisplayed = 5;
         this.itemsPerPage = 10;
         this.onPageChange = new EventEmitter();
     }
 
     ngOnInit() {
+        this.label = this.label || this.labels.itemsPerPage;
         this.rowOptions = this.rowOptions || this.getDefaultRowOptions();
     }
 

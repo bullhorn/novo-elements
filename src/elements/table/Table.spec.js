@@ -231,6 +231,12 @@ describe('Element: Table', () => {
         });
     });
 
+    describe('Function: selectPage()', () => {
+        it('should .', () => {
+            expect(comp.selectPage).toBeDefined();
+        });
+    });
+
     describe('Function: rowSelectHandler()', () => {
         it('should .', () => {
             expect(comp.rowSelectHandler).toBeDefined();
