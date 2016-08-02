@@ -1,17 +1,13 @@
 novo-pagination {
     display: flex;
     flex-flow: row nowrap;
-    background: rgba(0, 0, 0, .15);
     padding: 10px;
-    color: #fff;
 
     > * {
         margin: auto 5px;
-        color: #fff;
     }
 
     h5.rows {
-        color: #fff;
         padding: 0;
         font-size: 12px;
         opacity: 0.75;
@@ -23,34 +19,25 @@ novo-pagination {
     }
 
     novo-select {
-        max-width: 200px;
+        max-width: 100px;
+        min-width: 100px;
 
         div[type="button"] {
-            color: #fff;
-            border-bottom: 1px solid rgba(255, 255, 255, .15);
-
             &:hover {
-                border-bottom: 1px solid rgba(255, 255, 255, .55);
-
                 i {
                     opacity: 0.75;
-                    color: #fff;
                 }
             }
 
             &:active,
             &:focus {
-                border-bottom: 1px solid rgba(255, 255, 255, .75);
-
                 i {
                     opacity: 1;
-                    color: #fff;
                 }
             }
 
             i {
                 opacity: 0.45;
-                color: #fff;
             }
         }
     }
@@ -66,11 +53,16 @@ novo-pagination {
             text-align: center;
             list-style-type: none;
             cursor: pointer;
+            color: $company;
+
+            &:last-child {
+                padding-right: 0;
+            }
         }
 
         .page.active {
-            background-color: rgba(255, 255, 255, .2);
-            color: #fff;
+            color: $company;
+            background-color: $off-white;
         }
     }
 }
