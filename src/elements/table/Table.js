@@ -119,7 +119,7 @@ export class NovoTableHeader {
             <tbody *ngIf="rows.length > 0">
                 <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage">
                     <td colspan="100%">
-                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll()">{{labels.totalRecords(rows.length)}}</a>
+                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)">{{labels.totalRecords(rows.length)}}</a>
                     </td>
                 </tr>
                 <template ngFor let-row="$implicit" [ngForOf]="rows | slice:getPageStart():getPageEnd()">
@@ -362,6 +362,10 @@ export class NovoTable {
             if (this.config.paging) {
                 this.config.paging.current = 1;
             }
+            // Remove all selection on sort change if selection is on
+            if (this.config.rowSelectionStyle === 'checkbox') {
+                this.selectAll(false);
+            }
         }
     }
 
@@ -444,6 +448,11 @@ export class NovoTable {
         if (this.config.paging) {
             this.config.paging.current = 1;
         }
+
+        // Remove all selection on sort change if selection is on
+        if (this.config.rowSelectionStyle === 'checkbox') {
+            this.selectAll(false);
+        }
     }
 
     /**
@@ -512,13 +521,13 @@ export class NovoTable {
     /**
      * @name selectAll
      */
-    selectAll() {
-        this.master = true;
+    selectAll(value) {
+        this.master = value;
         this.indeterminate = false;
         for (let row of this.rows) {
-            row._selected = true;
+            row._selected = value;
         }
-        this.selected = this.rows;
+        this.selected = value ? this.rows : 0;
         this.showSelectAllMessage = false;
         this.emitSelected(this.selected);
     }
