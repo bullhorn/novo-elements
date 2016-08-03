@@ -1,3 +1,13 @@
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/bullhorn/novo-elements/compare/v0.2.1...v0.2.2) (2016-08-03)
+
+
+### Features
+
+* **table:** Removing selection when sort/filter change ([0994367](https://github.com/bullhorn/novo-elements/commit/0994367))
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/bullhorn/novo-elements/compare/v0.1.28...v0.2.1) (2016-08-02)
 
