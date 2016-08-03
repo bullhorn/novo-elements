@@ -1,3 +1,13 @@
+<a name="0.2.3"></a>
+## [0.2.3](https://github.com/bullhorn/novo-elements/compare/v0.2.2...v0.2.3) (2016-08-03)
+
+
+### Bug Fixes
+
+* **table:** Fixing table selection mode for when the page size changes. ([366e410](https://github.com/bullhorn/novo-elements/commit/366e410))
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/bullhorn/novo-elements/compare/v0.2.1...v0.2.2) (2016-08-03)
 
