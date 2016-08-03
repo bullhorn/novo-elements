@@ -1,3 +1,13 @@
+<a name="0.2.4"></a>
+## [0.2.4](https://github.com/bullhorn/novo-elements/compare/v0.2.3...v0.2.4) (2016-08-03)
+
+
+### Features
+
+* **Table:** changed Date filtering to allow multiple or single selection ([#135](https://github.com/bullhorn/novo-elements/issues/135)) ([517d45f](https://github.com/bullhorn/novo-elements/commit/517d45f))
+
+
+
 <a name="0.2.3"></a>
 ## [0.2.3](https://github.com/bullhorn/novo-elements/compare/v0.2.2...v0.2.3) (2016-08-03)
 
