@@ -260,7 +260,7 @@ export class NovoTable {
      */
     onFilterClick(column, filter) {
         if (Array.isArray(column.filter) && column.multiple) {
-            if (column.filter.indexOf(filter) > -1) {
+            if (~column.filter.indexOf(filter)) {
                 // Remove filter
                 column.filter.splice(column.filter.indexOf(filter), 1);
 
