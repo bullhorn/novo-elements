@@ -59,7 +59,7 @@ export class NovoTableHeader {
                                  [rowOptions]="config.customRowOptions"
                                  [totalItems]="rows.length"
                                  [itemsPerPage]="config.paging.itemsPerPage"
-                                 (onPageChange)="config.paging.onPageChange($event)">
+                                 (onPageChange)="onPageChange($event)">
                 </novo-pagination>
                 <ng-content select="novo-table-actions"></ng-content>
             </div>
@@ -72,7 +72,7 @@ export class NovoTableHeader {
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
                     <!-- CHECKBOX -->
                     <th class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
-                        <check-box [(value)]="master" [indeterminate]="indeterminate" (valueChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></check-box>
+                        <check-box [(value)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < config.paging.itemsPerPage" (valueChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></check-box>
                     </th>
                     <!-- TABLE HEADERS -->
                     <th *ngFor="let column of columns" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
@@ -191,6 +191,16 @@ export class NovoTable {
         this.originalRows = this.originalRows.length === 0 ? this.rows : this.originalRows;
         if (changes && changes.rows && (changes.rows.previousValue !== changes.rows.currentValue)) {
             this.setupColumnDefaults();
+        }
+    }
+
+    onPageChange(event) {
+        this.config.paging.onPageChange(event);
+
+        // Remove all selection on sort change if selection is on
+        if (this.config.rowSelectionStyle === 'checkbox') {
+            let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+            this.pageSelected = pagedData.filter(r => r._selected);
         }
     }
 
@@ -506,6 +516,7 @@ export class NovoTable {
             row._selected = this.master;
         }
         this.selected = this.rows.filter(r => r._selected);
+        this.pageSelected = pagedData.filter(r => r._selected);
         this.emitSelected(this.selected);
 
         // Only show the select all message when there is only one new page selected at a time
@@ -537,12 +548,12 @@ export class NovoTable {
      */
     rowSelectHandler() {
         let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-        let pageSelected = pagedData.filter(r => r._selected);
+        this.pageSelected = pagedData.filter(r => r._selected);
         this.selected = this.rows.filter(r => r._selected);
-        if (pageSelected.length === 0) {
+        if (this.pageSelected.length === 0) {
             this.master = false;
             this.indeterminate = false;
-        } else if (pageSelected.length === pagedData.length) {
+        } else if (this.pageSelected.length === pagedData.length) {
             this.master = true;
             this.indeterminate = false;
         } else {

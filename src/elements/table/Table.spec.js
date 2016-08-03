@@ -84,6 +84,12 @@ describe('Element: Table', () => {
         });
     });
 
+    describe('Function: onPageChange()', () => {
+        it('should .', () => {
+            expect(comp.onPageChange).toBeDefined();
+        });
+    });
+
     describe('Function: focusInput()', () => {
         it('should .', () => {
             expect(comp.focusInput).toBeDefined();
