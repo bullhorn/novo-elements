@@ -97,8 +97,52 @@ describe('Element: Table', () => {
     });
 
     describe('Function: onFilterClick()', () => {
+        beforeEach(() => {
+            comp.columns = [
+                {
+                    filtering: true,
+                    name: 'date',
+                    type: 'date'
+                }
+            ];
+            comp.originalRows = [
+                {
+                    id: 1,
+                    date: new Date().timestamp
+                },
+                {
+                    id: 2,
+                    date: new Date().timestamp
+                }
+            ];
+            comp.config = {
+                filtering: true
+            };
+        });
         it('should .', () => {
             expect(comp.onFilterClick).toBeDefined();
+        });
+
+        it('should allow multiple date selections if multiple=true/false', () => {
+            comp.columns[0].multiple = true;
+            comp.setupColumnDefaults();
+            // Select 4 rows
+            comp.onFilterClick(comp.columns[0], comp.columns[0].options[0]);
+            comp.onFilterClick(comp.columns[0], comp.columns[0].options[1]);
+            comp.onFilterClick(comp.columns[0], comp.columns[0].options[2]);
+            comp.onFilterClick(comp.columns[0], comp.columns[0].options[3]);
+            expect(comp.columns[0].filter.length).toBe(4);
+            // deselect 4 rows
+            comp.onFilterClick(comp.columns[0], comp.columns[0].options[0]);
+            comp.onFilterClick(comp.columns[0], comp.columns[0].options[1]);
+            comp.onFilterClick(comp.columns[0], comp.columns[0].options[2]);
+            comp.onFilterClick(comp.columns[0], comp.columns[0].options[3]);
+            expect(comp.columns[0].filter).toBe(null);
+            // set multiple to false and try and click 2 rows
+            comp.columns[0].multiple = false;
+            comp.onFilterClick(comp.columns[0], comp.columns[0].options[1]);
+            comp.onFilterClick(comp.columns[0], comp.columns[0].options[2]);
+            expect(comp.columns[0].filter.length).toBe(1);
         });
     });
 
