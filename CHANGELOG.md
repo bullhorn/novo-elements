@@ -1,3 +1,13 @@
+<a name="0.2.10"></a>
+## [0.2.10](https://github.com/bullhorn/novo-elements/compare/v0.2.9...v0.2.10) (2016-08-04)
+
+
+### Features
+
+* **dropdown:** Adding ability to disable an item inside a dropdown ([#138](https://github.com/bullhorn/novo-elements/issues/138)) ([e33be26](https://github.com/bullhorn/novo-elements/commit/e33be26))
+
+
+
 <a name="0.2.9"></a>
 ## [0.2.9](https://github.com/bullhorn/novo-elements/compare/v0.2.8...v0.2.9) (2016-08-04)
 
