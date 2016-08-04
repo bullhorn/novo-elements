@@ -1,3 +1,13 @@
+<a name="0.2.8"></a>
+## [0.2.8](https://github.com/bullhorn/novo-elements/compare/v0.2.7...v0.2.8) (2016-08-04)
+
+
+### Bug Fixes
+
+* **Table:** Fixing selection logic when the page is not full ([0920934](https://github.com/bullhorn/novo-elements/commit/0920934))
+
+
+
 <a name="0.2.7"></a>
 ## [0.2.7](https://github.com/bullhorn/novo-elements/compare/v0.2.6...v0.2.7) (2016-08-04)
 
