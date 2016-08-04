@@ -510,22 +510,23 @@ export class NovoTable {
      * @name selectPage
      */
     selectPage() {
-        this.indeterminate = false;
-        let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-        for (let row of pagedData) {
-            row._selected = this.master;
-        }
-        this.selected = this.rows.filter(r => r._selected);
-        this.pageSelected = pagedData.filter(r => r._selected);
-        this.emitSelected(this.selected);
-
-        // Only show the select all message when there is only one new page selected at a time
-        if (this.master) {
-            this.selectedPageCount++;
-            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.rows.length;
-        } else {
+        if (!this.master) {
+            this.selectAll(false);
+            // Only show the select all message when there is only one new page selected at a time
             this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
             this.showSelectAllMessage = false;
+        } else {
+            this.indeterminate = false;
+            let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+            for (let row of pagedData) {
+                row._selected = this.master;
+            }
+            this.selected = this.rows.filter(r => r._selected);
+            this.pageSelected = pagedData.filter(r => r._selected);
+            this.emitSelected(this.selected);
+            // Only show the select all message when there is only one new page selected at a time
+            this.selectedPageCount++;
+            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.rows.length;
         }
     }
 
