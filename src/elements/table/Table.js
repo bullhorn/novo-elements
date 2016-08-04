@@ -72,7 +72,7 @@ export class NovoTableHeader {
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
                     <!-- CHECKBOX -->
                     <th class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
-                        <check-box [(value)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < config.paging.itemsPerPage" (valueChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></check-box>
+                        <check-box [(value)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < pagedData.length" (valueChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></check-box>
                     </th>
                     <!-- TABLE HEADERS -->
                     <th *ngFor="let column of columns" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
@@ -128,7 +128,7 @@ export class NovoTableHeader {
                             <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
                             <button theme="icon" icon="sort-desc" (click)="row._expanded=!row._expanded" *ngIf="row._expanded"></button>
                         </td>
-                        <td class="row-actions" *ngIf="config.rowSelectionStyle === 'checkbox'">
+                        <td class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
                             <check-box [(value)]="row._selected" (valueChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></check-box>
                         </td>
                         <td *ngFor="let column of columns" [attr.data-automation-id]="column.name">
@@ -199,8 +199,8 @@ export class NovoTable {
 
         // Remove all selection on sort change if selection is on
         if (this.config.rowSelectionStyle === 'checkbox') {
-            let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-            this.pageSelected = pagedData.filter(r => r._selected);
+            this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+            this.pageSelected = this.pagedData.filter(r => r._selected);
         }
     }
 
@@ -517,12 +517,12 @@ export class NovoTable {
             this.showSelectAllMessage = false;
         } else {
             this.indeterminate = false;
-            let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-            for (let row of pagedData) {
+            this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+            for (let row of this.pagedData) {
                 row._selected = this.master;
             }
             this.selected = this.rows.filter(r => r._selected);
-            this.pageSelected = pagedData.filter(r => r._selected);
+            this.pageSelected = this.pagedData.filter(r => r._selected);
             this.emitSelected(this.selected);
             // Only show the select all message when there is only one new page selected at a time
             this.selectedPageCount++;
@@ -548,13 +548,13 @@ export class NovoTable {
      * @name rowSelectHandler
      */
     rowSelectHandler() {
-        let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-        this.pageSelected = pagedData.filter(r => r._selected);
+        this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+        this.pageSelected = this.pagedData.filter(r => r._selected);
         this.selected = this.rows.filter(r => r._selected);
         if (this.pageSelected.length === 0) {
             this.master = false;
             this.indeterminate = false;
-        } else if (this.pageSelected.length === pagedData.length) {
+        } else if (this.pageSelected.length === this.pagedData.length) {
             this.master = true;
             this.indeterminate = false;
         } else {
