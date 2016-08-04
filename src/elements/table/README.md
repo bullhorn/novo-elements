@@ -87,9 +87,9 @@ In general the column definition will be an object with some basic configuration
         <novo-dropdown side="right" *ngIf="table.selected.length">
             <button theme="primary" icon="collapse" inverse>{{table.selected.length}} Selected</button>
             <list>
-                <item (click)="selectedAction('action 1')">Action 1</item>
-                <item (click)="selectedAction('action 2')">Action 2</item>
-                <item (click)="selectedAction('action 3')">Action 3</item>
+                <item (action)="selectedAction('action 1')">Action 1</item>
+                <item (action)="selectedAction('action 2')">Action 2</item>
+                <item (action)="selectedAction('action 3')" disabled="true">Action 3</item>
             </list>
         </novo-dropdown>
     </novo-table-actions>
