@@ -44,9 +44,15 @@ export class PickerInput extends BaseInput {
     }
 
     onSelect(value) {
-        this.update.emit(value);
-        this.control.updateValue(value);
-        this.toggleInactive(value);
+        if (value instanceof Event) {
+            this.update.emit(null);
+            this.control.updateValue(null);
+            this.toggleInactive(null);
+        } else {
+            this.update.emit(value);
+            this.control.updateValue(value);
+            this.toggleInactive(value);
+        }
     }
 
     toggleInactive(ev) {
