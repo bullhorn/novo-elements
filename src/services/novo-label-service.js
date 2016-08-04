@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class NovoLabelService {
-    filters = 'Filters';
+    filters = 'Filter';
     clear = 'Clear';
     emptyTableMessage = 'No Matching Records';
     pickerError = 'Oops! An error occurred.';
