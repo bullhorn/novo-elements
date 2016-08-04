@@ -541,6 +541,7 @@ export class NovoTable {
         }
         this.selected = value ? this.rows : 0;
         this.showSelectAllMessage = false;
+        this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
         this.emitSelected(this.selected);
     }
 
