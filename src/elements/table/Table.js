@@ -117,9 +117,9 @@ export class NovoTableHeader {
             </thead>
             <!-- TABLE DATA -->
             <tbody *ngIf="rows.length > 0">
-                <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage">
+                <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage" data-automation-id="table-selection-row">
                     <td colspan="100%">
-                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)">{{labels.totalRecords(rows.length)}}</a>
+                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(rows.length)}}</a>
                     </td>
                 </tr>
                 <template ngFor let-row="$implicit" [ngForOf]="rows | slice:getPageStart():getPageEnd()">
