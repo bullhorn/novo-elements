@@ -1,3 +1,13 @@
+<a name="0.2.5"></a>
+## [0.2.5](https://github.com/bullhorn/novo-elements/compare/v0.2.4...v0.2.5) (2016-08-04)
+
+
+### Bug Fixes
+
+* **table:** Unselect should unselect all instead of just page ([3dc47dd](https://github.com/bullhorn/novo-elements/commit/3dc47dd))
+
+
+
 <a name="0.2.4"></a>
 ## [0.2.4](https://github.com/bullhorn/novo-elements/compare/v0.2.3...v0.2.4) (2016-08-03)
 
