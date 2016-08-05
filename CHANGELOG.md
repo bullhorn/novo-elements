@@ -1,3 +1,13 @@
+<a name="0.2.12"></a>
+## [0.2.12](https://github.com/bullhorn/novo-elements/compare/v0.2.11...v0.2.12) (2016-08-05)
+
+
+### Bug Fixes
+
+* **table:** Fixing table filter styling ([e52c751](https://github.com/bullhorn/novo-elements/commit/e52c751))
+
+
+
 <a name="0.2.11"></a>
 ## [0.2.11](https://github.com/bullhorn/novo-elements/compare/v0.2.10...v0.2.11) (2016-08-05)
 
