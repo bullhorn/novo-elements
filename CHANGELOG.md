@@ -1,3 +1,13 @@
+<a name="0.2.14"></a>
+## [0.2.14](https://github.com/bullhorn/novo-elements/compare/v0.2.13...v0.2.14) (2016-08-08)
+
+
+### Features
+
+* **editor:** Updating the editor to have a base set of config ([6a0605b](https://github.com/bullhorn/novo-elements/commit/6a0605b))
+
+
+
 <a name="0.2.13"></a>
 ## [0.2.13](https://github.com/bullhorn/novo-elements/compare/v0.2.12...v0.2.13) (2016-08-08)
 
