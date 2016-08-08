@@ -1,3 +1,13 @@
+<a name="0.2.13"></a>
+## [0.2.13](https://github.com/bullhorn/novo-elements/compare/v0.2.12...v0.2.13) (2016-08-08)
+
+
+### Features
+
+* **editor:** Adding in a wrapper around the CKEditor ([0850329](https://github.com/bullhorn/novo-elements/commit/0850329))
+
+
+
 <a name="0.2.12"></a>
 ## [0.2.12](https://github.com/bullhorn/novo-elements/compare/v0.2.11...v0.2.12) (2016-08-05)
 
