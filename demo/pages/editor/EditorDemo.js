@@ -23,5 +23,6 @@ const template = `
 export class EditorDemo {
     constructor() {
         this.BasicDemoTpl = BasicDemoTpl;
+        this.editorValue = '<p>I AM A PRE-RENDERED VALUE</p><h1>TEST</h1>';
     }
 }
