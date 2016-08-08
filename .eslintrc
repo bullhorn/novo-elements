@@ -4,6 +4,7 @@
         "global-require": 0
     },
     "globals": {
+        "CKEDITOR": false,
         "VERSION": false,
         "ENV": false,
         "HMR": false,
