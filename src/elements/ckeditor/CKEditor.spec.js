@@ -73,6 +73,7 @@ describe('Element: Editor', () => {
         });
 
         it('should set the base config', () => {
+            comp.config = {};
             comp.ngAfterViewInit();
             expect(comp.ckeditorInit).toHaveBeenCalledWith({});
         });
@@ -173,6 +174,28 @@ describe('Element: Editor', () => {
         it('should work', () => {
             comp.registerOnTouched({});
             expect(comp.onTouched).toEqual({});
+        });
+    });
+
+    describe('Function: getBaseConfig()', () => {
+        it('should be defined', () => {
+            expect(comp.getBaseConfig).toBeDefined();
+        });
+
+        it('should work', () => {
+            let config = comp.getBaseConfig();
+            expect(config).toEqual({
+                toolbar: [
+                    { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo', 'Scayt'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
+                    { name: 'links', items: ['Link'] },
+                    { name: 'tools', items: ['Maximize', 'Source'] },
+                    '/',
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] }
+                ]
+            });
         });
     });
 });

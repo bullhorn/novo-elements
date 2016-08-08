@@ -34,7 +34,7 @@ export class CKEditor {
 
     ngAfterViewInit() {
         // Configuration
-        let config = this.config || {};
+        let config = this.config || this.getBaseConfig();
         this.ckeditorInit(config);
     }
 
@@ -84,6 +84,21 @@ export class CKEditor {
 
     registerOnTouched(fn) {
         this.onTouched = fn;
+    }
+
+    getBaseConfig() {
+        return {
+            toolbar: [
+                { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo', 'Scayt'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
+                { name: 'links', items: ['Link'] },
+                { name: 'tools', items: ['Maximize', 'Source'] },
+                '/',
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
+                { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                { name: 'colors', items: ['TextColor', 'BGColor'] }
+            ]
+        };
     }
 }
 
