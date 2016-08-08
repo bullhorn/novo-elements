@@ -5,8 +5,6 @@ const pkg = require('../package.json');
 // Webpack Plugins
 var CopyWebpackPlugin = (CopyWebpackPlugin = require('copy-webpack-plugin'), CopyWebpackPlugin.default || CopyWebpackPlugin);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const extractCSS = new ExtractTextPlugin('[name].css');
 
 // Webpack Constants
 const METADATA = {
@@ -27,6 +25,7 @@ const autoprefixerOptions = {
     ],
     cascade: false
 };
+METADATA.autoprefixer = autoprefixerOptions;
 
 // Webpack configuration
 // See: http://webpack.github.io/docs/configuration.html#cli
@@ -137,18 +136,6 @@ module.exports = {
                 exclude: [
                     helpers.root('demo/index.html')
                 ]
-            },
-
-            // SCSS/Sass loader support for *.scss / .sass
-            // Returns file content as string
-            // See: https://github.com/jtangelder/sass-loader
-            {
-                test: /\.scss$/,
-                loader: extractCSS.extract([
-                    'raw-loader',
-                    `autoprefixer?${JSON.stringify(autoprefixerOptions)}`,
-                    'sass-loader'
-                ])
             }
         ]
     },
@@ -164,11 +151,6 @@ module.exports = {
     // Add additional plugins to the compiler.
     // See: http://webpack.github.io/docs/configuration.html#plugins
     plugins: [
-        // Plugin: ExtractTextPlugin
-        // Description: extracts text (scss) into css files
-        // See: https://github.com/webpack/extract-text-webpack-plugin
-        extractCSS,
-
         // Plugin: OccurenceOrderPlugin
         // Description: Varies the distribution of the ids to get the smallest id length
         // for often used ids.
