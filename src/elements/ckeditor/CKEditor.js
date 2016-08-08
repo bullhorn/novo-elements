@@ -8,7 +8,6 @@ import { NgControl } from '@angular/common';
 export class CKEditor {
     @Input() config;
     @Input() ngModel;
-
     @Output() change = new EventEmitter();
     @ViewChild('host') host;
 
