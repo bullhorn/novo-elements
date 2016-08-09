@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { Dropdown, Item } from './Dropdown';
 import { testComponent, grabComponent } from './../../testing/TestHelpers';
+
+class MockElementRef {
+}
 
 @Component({
     selector: 'test-cmp',
@@ -32,7 +35,9 @@ describe('Element: Dropdown', () => {
         let comp;
 
         beforeEachProviders(() => [
-            Item
+            Item,
+            { provide: ElementRef, useClass: MockElementRef },
+            Dropdown
         ]);
 
         beforeEach(inject([Item], _comp => {
