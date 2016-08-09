@@ -200,11 +200,16 @@ export class Picker extends OutsideClick {
     writeValue(value) {
         if (typeof value === 'string') {
             this.term = value;
-            this._value = value;
+        } else if (value && value.label) {
+            this.term = value.label;
+        } else if (value && value.firstName) {
+            this.term = `${value.firstName} ${value.lastName}`;
+        } else if (value && value.name) {
+            this.term = value.name;
         } else {
             this.term = value;
-            this._value = value;
         }
+        this._value = value;
     }
 
     //From ControlValueAccessor interface
