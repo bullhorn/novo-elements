@@ -1,3 +1,15 @@
+<a name="0.2.15"></a>
+## [0.2.15](https://github.com/bullhorn/novo-elements/compare/v0.2.14...v0.2.15) (2016-08-09)
+
+
+### Bug Fixes
+
+* **dropdown:** Fixing minor dropdown styling ([d556ab8](https://github.com/bullhorn/novo-elements/commit/d556ab8))
+* **dropdown:** Toggling the dropdown when an item is clicked ([8c76228](https://github.com/bullhorn/novo-elements/commit/8c76228))
+* **picker:** Fixing the initial value being [Object object] ([23fc7c3](https://github.com/bullhorn/novo-elements/commit/23fc7c3))
+
+
+
 <a name="0.2.14"></a>
 ## [0.2.14](https://github.com/bullhorn/novo-elements/compare/v0.2.13...v0.2.14) (2016-08-08)
 
