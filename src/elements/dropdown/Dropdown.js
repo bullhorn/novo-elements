@@ -3,26 +3,6 @@ import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
 @Component({
-    selector: 'item',
-    inputs: ['disabled'],
-    outputs: ['action'],
-    template: '<ng-content></ng-content>',
-    host: {
-        '(click)': 'onClick()',
-        '[class.disabled]': 'disabled'
-    }
-})
-export class Item {
-    action = new EventEmitter();
-
-    onClick() {
-        if (!this.disabled) {
-            this.action.emit();
-        }
-    }
-}
-
-@Component({
     selector: 'novo-dropdown',
     template: `
         <ng-content select="button"></ng-content>
@@ -57,5 +37,31 @@ export class Dropdown extends OutsideClick {
         }
     }
 }
+
+@Component({
+    selector: 'item',
+    inputs: ['disabled'],
+    outputs: ['action'],
+    template: '<ng-content></ng-content>',
+    host: {
+        '(click)': 'onClick()',
+        '[class.disabled]': 'disabled'
+    }
+})
+export class Item {
+    action = new EventEmitter();
+
+    constructor(dropdown:Dropdown) {
+        this.dropdown = dropdown;
+    }
+
+    onClick() {
+        if (!this.disabled) {
+            this.dropdown.toggleActive();
+            this.action.emit();
+        }
+    }
+}
+
 
 export const NOVO_DROPDOWN_ELEMENTS = [Dropdown, Item];
