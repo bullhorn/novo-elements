@@ -26,7 +26,7 @@ const template = `
     <p>This has a row renderer to show a new details row that is expanded when you click on the action column.</p>
     <div class="example table-demo">${DetailsTableDemoTpl}</div>
     <code-snippet [code]="DetailsTableDemoTpl"></code-snippet>
-    
+
     <h5>Select All Table w/ Custom Actions</h5>
     <p>This has checkboxes for selection with custom actions.</p>
     <div class="example table-demo">${SelectAllTableDemoTpl}</div>
@@ -124,6 +124,7 @@ export class TableDemo {
                 name: 'status',
                 options: ['New Lead', 'Active', 'Archived'],
                 ordering: true,
+                multiple: true,
                 renderer: StatusCell,
                 filtering: true
             }

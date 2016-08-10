@@ -53,6 +53,30 @@ module.exports = webpackMerge(commonConfig, {
         chunkFilename: '[id].chunk.js'
     },
 
+    // Options affecting the normal modules.
+    // See: http://webpack.github.io/docs/configuration.html#module
+    module: {
+        // An array of automatically applied loaders.
+        // IMPORTANT: The loaders here are resolved relative to the resource which they are applied to.
+        // This means they are not resolved relative to the configuration file.
+        // See: http://webpack.github.io/docs/configuration.html#module-loaders
+        loaders: [
+            // SCSS/Sass loader support for *.scss / .sass
+            // Returns file content as string
+            // See: https://github.com/jtangelder/sass-loader
+            {
+                test: /\.scss$/,
+                loaders: [
+                    'style-loader',
+                    'css-loader',
+                    `autoprefixer?${JSON.stringify(METADATA.autoprefixer)}`,
+                    'sass-loader'
+
+                ]
+            }
+        ]
+    },
+
     plugins: [
         // Plugin: DefinePlugin
         // Description: Define free variables.

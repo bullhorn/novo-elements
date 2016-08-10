@@ -29,6 +29,7 @@ import { NOVO_FORM_ELEMENTS, NOVO_FORM_CORE, NOVO_FORM_EXTRAS } from './elements
 import { NOVO_TILES_ELEMENTS } from './elements/tiles';
 import { NOVO_SLIDER_ELEMENTS } from './elements/slider';
 import { NOVO_TIPWELL_ELEMENTS } from './elements/tip-well';
+import { NOVO_EDITOR_ELEMENTS } from './elements/ckeditor';
 
 // Elements
 export * from './elements/button';
@@ -59,6 +60,7 @@ export * from './elements/form';
 export * from './elements/tiles';
 export * from './elements/slider';
 export * from './elements/tip-well';
+export * from './elements/ckeditor';
 
 // Pipes
 export * from './pipes/plural/Plural';
@@ -102,7 +104,8 @@ export const NOVO_ELEMENTS = [
     ...NOVO_FORM_EXTRAS,
     ...NOVO_TILES_ELEMENTS,
     ...NOVO_SLIDER_ELEMENTS,
-    ...NOVO_TIPWELL_ELEMENTS
+    ...NOVO_TIPWELL_ELEMENTS,
+    ...NOVO_EDITOR_ELEMENTS
 ];
 
 export const NOVO_SERVICES = [

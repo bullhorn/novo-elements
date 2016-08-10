@@ -27,4 +27,8 @@ export class DropdownDemo {
     constructor() {
         this.DropdownDemoTpl = DropdownDemoTpl;
     }
+
+    clickMe(data) {
+        console.log('CLICKED!', data); // eslint-disable-line
+    }
 }

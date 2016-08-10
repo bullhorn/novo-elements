@@ -1,3 +1,130 @@
+<a name="0.2.15"></a>
+## [0.2.15](https://github.com/bullhorn/novo-elements/compare/v0.2.14...v0.2.15) (2016-08-09)
+
+
+### Bug Fixes
+
+* **dropdown:** Fixing minor dropdown styling ([d556ab8](https://github.com/bullhorn/novo-elements/commit/d556ab8))
+* **dropdown:** Toggling the dropdown when an item is clicked ([8c76228](https://github.com/bullhorn/novo-elements/commit/8c76228))
+* **picker:** Fixing the initial value being [Object object] ([23fc7c3](https://github.com/bullhorn/novo-elements/commit/23fc7c3))
+
+
+
+<a name="0.2.14"></a>
+## [0.2.14](https://github.com/bullhorn/novo-elements/compare/v0.2.13...v0.2.14) (2016-08-08)
+
+
+### Features
+
+* **editor:** Updating the editor to have a base set of config ([6a0605b](https://github.com/bullhorn/novo-elements/commit/6a0605b))
+
+
+
+<a name="0.2.13"></a>
+## [0.2.13](https://github.com/bullhorn/novo-elements/compare/v0.2.12...v0.2.13) (2016-08-08)
+
+
+### Features
+
+* **editor:** Adding in a wrapper around the CKEditor ([0850329](https://github.com/bullhorn/novo-elements/commit/0850329))
+
+
+
+<a name="0.2.12"></a>
+## [0.2.12](https://github.com/bullhorn/novo-elements/compare/v0.2.11...v0.2.12) (2016-08-05)
+
+
+### Bug Fixes
+
+* **table:** Fixing table filter styling ([e52c751](https://github.com/bullhorn/novo-elements/commit/e52c751))
+
+
+
+<a name="0.2.11"></a>
+## [0.2.11](https://github.com/bullhorn/novo-elements/compare/v0.2.10...v0.2.11) (2016-08-05)
+
+
+
+<a name="0.2.10"></a>
+## [0.2.10](https://github.com/bullhorn/novo-elements/compare/v0.2.9...v0.2.10) (2016-08-04)
+
+
+### Features
+
+* **dropdown:** Adding ability to disable an item inside a dropdown ([#138](https://github.com/bullhorn/novo-elements/issues/138)) ([e33be26](https://github.com/bullhorn/novo-elements/commit/e33be26))
+
+
+
+<a name="0.2.9"></a>
+## [0.2.9](https://github.com/bullhorn/novo-elements/compare/v0.2.8...v0.2.9) (2016-08-04)
+
+
+
+<a name="0.2.8"></a>
+## [0.2.8](https://github.com/bullhorn/novo-elements/compare/v0.2.7...v0.2.8) (2016-08-04)
+
+
+### Bug Fixes
+
+* **Table:** Fixing selection logic when the page is not full ([0920934](https://github.com/bullhorn/novo-elements/commit/0920934))
+
+
+
+<a name="0.2.7"></a>
+## [0.2.7](https://github.com/bullhorn/novo-elements/compare/v0.2.6...v0.2.7) (2016-08-04)
+
+
+### Bug Fixes
+
+* **Table:** Fixing selection logic when the page is not full ([365ce46](https://github.com/bullhorn/novo-elements/commit/365ce46))
+
+
+
+<a name="0.2.6"></a>
+## [0.2.6](https://github.com/bullhorn/novo-elements/compare/v0.2.5...v0.2.6) (2016-08-04)
+
+
+
+<a name="0.2.5"></a>
+## [0.2.5](https://github.com/bullhorn/novo-elements/compare/v0.2.4...v0.2.5) (2016-08-04)
+
+
+### Bug Fixes
+
+* **table:** Unselect should unselect all instead of just page ([3dc47dd](https://github.com/bullhorn/novo-elements/commit/3dc47dd))
+
+
+
+<a name="0.2.4"></a>
+## [0.2.4](https://github.com/bullhorn/novo-elements/compare/v0.2.3...v0.2.4) (2016-08-03)
+
+
+### Features
+
+* **Table:** changed Date filtering to allow multiple or single selection ([#135](https://github.com/bullhorn/novo-elements/issues/135)) ([517d45f](https://github.com/bullhorn/novo-elements/commit/517d45f))
+
+
+
+<a name="0.2.3"></a>
+## [0.2.3](https://github.com/bullhorn/novo-elements/compare/v0.2.2...v0.2.3) (2016-08-03)
+
+
+### Bug Fixes
+
+* **table:** Fixing table selection mode for when the page size changes. ([366e410](https://github.com/bullhorn/novo-elements/commit/366e410))
+
+
+
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/bullhorn/novo-elements/compare/v0.2.1...v0.2.2) (2016-08-03)
+
+
+### Features
+
+* **table:** Removing selection when sort/filter change ([0994367](https://github.com/bullhorn/novo-elements/commit/0994367))
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/bullhorn/novo-elements/compare/v0.1.28...v0.2.1) (2016-08-02)
 

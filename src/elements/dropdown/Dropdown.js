@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter } from '@angular/core';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
@@ -38,4 +38,30 @@ export class Dropdown extends OutsideClick {
     }
 }
 
-export const NOVO_DROPDOWN_ELEMENTS = [Dropdown];
+@Component({
+    selector: 'item',
+    inputs: ['disabled'],
+    outputs: ['action'],
+    template: '<ng-content></ng-content>',
+    host: {
+        '(click)': 'onClick()',
+        '[class.disabled]': 'disabled'
+    }
+})
+export class Item {
+    action = new EventEmitter();
+
+    constructor(dropdown:Dropdown) {
+        this.dropdown = dropdown;
+    }
+
+    onClick() {
+        if (!this.disabled) {
+            this.dropdown.toggleActive();
+            this.action.emit();
+        }
+    }
+}
+
+
+export const NOVO_DROPDOWN_ELEMENTS = [Dropdown, Item];
