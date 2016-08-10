@@ -20,7 +20,7 @@ novo-dropdown {
     &.active {
         .dropdown-container {
             max-height: 500px;
-            overflow: auto;
+            display: block;
             z-index: 2;
             border-radius: 2px;
             top: 100%;
@@ -32,7 +32,7 @@ novo-dropdown {
         background-color: white;
         list-style: none;
         line-height: 26px;
-        overflow: hidden;
+        display: none;
         margin: 0;
         max-height: 0;
         position: absolute;
@@ -78,7 +78,7 @@ novo-dropdown {
                 }
 
                 &.disabled {
-                    opacity: 0.5;
+                    color: $light;
                     cursor: not-allowed;
                 }
             }

@@ -47,6 +47,8 @@ const template = `
     directives: [NOVO_TOOLTIP_ELEMENTS, NOVO_BUTTON_ELEMENTS, CodeSnippet]
 })
 export class TooltipDemo {
+    tooltipActive = false;
+
     constructor() {
         this.TooltipOptionsDemoTpl = TooltipOptionsDemoTpl;
         this.TooltipTypesDemoTpl = TooltipTypesDemoTpl;
