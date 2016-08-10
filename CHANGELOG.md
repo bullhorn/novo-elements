@@ -1,3 +1,13 @@
+<a name="0.2.16"></a>
+## [0.2.16](https://github.com/bullhorn/novo-elements/compare/v0.2.15...v0.2.16) (2016-08-10)
+
+
+### Features
+
+* **tooltip:** Adding ability to enable/disable the tooltip from appearing. ([bf0226a](https://github.com/bullhorn/novo-elements/commit/bf0226a))
+
+
+
 <a name="0.2.15"></a>
 ## [0.2.15](https://github.com/bullhorn/novo-elements/compare/v0.2.14...v0.2.15) (2016-08-09)
 
