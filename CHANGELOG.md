@@ -1,3 +1,13 @@
+<a name="0.2.17"></a>
+## [0.2.17](https://github.com/bullhorn/novo-elements/compare/v0.2.16...v0.2.17) (2016-08-10)
+
+
+### Bug Fixes
+
+* **dropdown:** Fixing dropdown's overflow ([b894cdb](https://github.com/bullhorn/novo-elements/commit/b894cdb))
+
+
+
 <a name="0.2.16"></a>
 ## [0.2.16](https://github.com/bullhorn/novo-elements/compare/v0.2.15...v0.2.16) (2016-08-10)
 
