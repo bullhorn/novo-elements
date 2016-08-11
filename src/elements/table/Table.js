@@ -6,6 +6,7 @@ import { isFunction, isString } from '@angular/core/src/facade/lang';
 import { NOVO_BUTTON_ELEMENTS } from '../button';
 import { NOVO_TOOLTIP_ELEMENTS } from '../tooltip';
 import { NOVO_DROPDOWN_ELEMENTS } from '../dropdown';
+import { NOVO_DATE_PICKER_ELEMENTS } from '../datepicker';
 import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
 import { CheckBox } from '../form/extras/FormExtras';
 import { NovoLabelService } from './../../novo-elements';
@@ -45,6 +46,7 @@ export class NovoTableHeader {
         NOVO_BUTTON_ELEMENTS,
         NOVO_DROPDOWN_ELEMENTS,
         NOVO_TOOLTIP_ELEMENTS,
+        NOVO_DATE_PICKER_ELEMENTS,
         CheckBox
     ],
     host: {
@@ -86,10 +88,11 @@ export class NovoTableHeader {
                                 </div>
                             </div>
                             <!-- FILTER DROP-DOWN -->
-                            <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters">
+                            <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters" [showAfterSelect]="column.range || column.multiple">
+
                                 <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter" (click)="focusInput(column.name)"></button>
                                 <!-- FILTER OPTIONS LIST -->
-                                <list *ngIf="column?.options?.length">
+                                <list *ngIf="column?.options?.length && column?.type!='date'">
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
@@ -109,6 +112,22 @@ export class NovoTableHeader {
                                         </div>
                                         <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter"/>
                                     </item>
+                                </list>
+                                <!-- FILTER DATE OPTIONS -->
+                                <list *ngIf="column?.options?.length && column?.type=='date'">
+                                    <item class="filter-search" *ngIf="!column.calenderShow">
+                                        <div class="header">
+                                            <span>{{ labels.filters }}</span>
+                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
+                                        </div>
+                                    </item>
+                                    <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [showAfterSelect]="option.range" [attr.data-automation-id]="option">
+                                        {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
+                                    </item>
+                                    <div class="calender-container" [class.active]="column.calenderShow">
+                                        <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>Back to Preset Filters</div>
+                                        <novo-date-picker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column?.options[column.options.length-1].value" range="true"></novo-date-picker>
+                                    </div>
                                 </list>
                             </novo-dropdown>
                         </div>
@@ -214,7 +233,7 @@ export class NovoTable {
                 switch (column.type) {
                     case 'date':
                         // Set options based on dates if there are none
-                        column.options = (column.options || this.getDefaultOptions());
+                        column.options = (column.options || this.getDefaultOptions(column));
                         break;
                     default:
                         break;
@@ -269,16 +288,22 @@ export class NovoTable {
      * @param filter
      */
     onFilterClick(column, filter) {
+        if (filter.range) {
+            column.calenderShow = true;
+        }
         if (Array.isArray(column.filter) && column.multiple) {
             if (~column.filter.indexOf(filter)) {
-                // Remove filter
+                    // Remove filter
                 column.filter.splice(column.filter.indexOf(filter), 1);
+                if (filter.range) {
+                    column.calenderShow = false;
+                }
 
                 if (column.filter.length === 0) {
                     column.filter = null;
                 }
             } else {
-                // Add filter
+                    // Add filter
                 column.filter.push(filter);
             }
         } else {
@@ -305,7 +330,7 @@ export class NovoTable {
         if (this.config.filtering) {
             // Array of filters
             const filters = this.columns.filter(col => col.filter && col.filter.length);
-            // debugger;
+
             if (filters.length) {
                 if (isFunction(this.config.filtering)) {
                     // Custom filter function on the table config
@@ -319,7 +344,19 @@ export class NovoTable {
                                 matched = column.match(row[column.name], column.filter);
                             } else if (Array.isArray(column.filter)) {
                                 // The filters are an array (multi-select), check value
-                                if (column.type && column.type === 'date') {
+                                if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
+                                    matched = column.filter.some(obj => {
+                                        let start = obj.value ? new Date(obj.value.startDate).getTime() : 0;
+                                        let end = obj.value ? new Date(obj.value.endDate).getTime() : 0;
+                                        let isMatch = false;
+                                        // Assumes row data contains a JS date object
+                                        let date = row[column.name] instanceof Date ? row[column.name].getTime() : row[column.name];
+                                        if (start !== 0 && end !== 0) {
+                                            isMatch = (date >= start && date <= end);
+                                        } else isMatch = true;
+                                        return isMatch;
+                                    });
+                                } else if (column.type && column.type === 'date') {
                                     // It's a date, use the date difference
                                     matched = column.filter.some(value => {
                                         let min = value.min;
@@ -472,7 +509,6 @@ export class NovoTable {
         // Construct a table change object
         const onTableChange = {};
         const filters = this.columns.filter((col) => col.filter && col.filter.length);
-
         onTableChange.filter = filters.length ? filters : false;
         onTableChange.sort = this.currentSortColumn ? this.currentSortColumn : false;
         onTableChange.rows = this.rows;
@@ -592,9 +628,9 @@ export class NovoTable {
      * @name setDateOptions
      * @returns {Array}
      */
-    getDefaultOptions() {
+    getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
-        return [
+        let opts = [
             { label: 'Beyond 90 Days', min: 90 },
             { label: 'Next 90 Days', min: 0, max: 90 },
             { label: 'Next 30 Days', min: 0, max: 30 },
@@ -604,6 +640,26 @@ export class NovoTable {
             { label: 'Past 90 Days', min: -90, max: 0 },
             { label: 'Older than 90 Days', max: -90 }
         ];
+
+        if (column && column.range) {
+            opts.push({
+                label: 'Custom Date Range',
+                range: true,
+                value: {
+                    startDate: null,
+                    endDate: null
+                }
+            });
+        }
+        return opts;
+    }
+
+    onCalenderSelect(column, event) {
+        setTimeout(() => {
+            if (event.startDate && event.endDate) {
+                this.onFilterChange();
+            }
+        }, 10);
     }
 }
 

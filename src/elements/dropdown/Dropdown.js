@@ -40,7 +40,7 @@ export class Dropdown extends OutsideClick {
 
 @Component({
     selector: 'item',
-    inputs: ['disabled'],
+    inputs: ['disabled', 'showAfterSelect'],
     outputs: ['action'],
     template: '<ng-content></ng-content>',
     host: {
@@ -57,7 +57,7 @@ export class Item {
 
     onClick() {
         if (!this.disabled) {
-            this.dropdown.toggleActive();
+            if (!this.showAfterSelect) this.dropdown.toggleActive();
             this.action.emit();
         }
     }
