@@ -4,6 +4,7 @@ import { Directive } from '@angular/core';
     selector: '[tooltip]',
     properties: [
         'tooltip:tooltip',
+        'active:tooltipActive',
         'always:tooltipAlways',
         'rounded:tooltipRounded',
         'noAnimate:tooltipNoAnimate',
@@ -28,6 +29,7 @@ import { Directive } from '@angular/core';
         '[class.hint--rounded]': 'tooltip && rounded',
         '[class.hint--no-animate]': 'tooltip && noAnimate',
         '[class.hint--bounce]': 'tooltip && bounce',
+        '[class.hint--hidden]': 'active === false',
         '[attr.data-hint]': 'tooltip'
     }
 })

@@ -3,14 +3,14 @@
     <list>
         <item (action)="clickMe()">Action 1</item>
         <item (action)="clickMe('WITH DATA')">Action 2</item>
-        <item [disabled]="true" (action)="clickMe()">Action 3</item>
+        <item tooltip="Test tooltip :)" tooltipPosition="right" [disabled]="true" (action)="clickMe()">Action 3</item>
     </list>
 </novo-dropdown>
 <novo-dropdown side="right">
     <button type="button" theme="icon" icon="menu" inverse></button>
     <list>
         <item>Action 1</item>
-        <item>Action 2</item>
+        <item tooltip="Test tooltip :)" tooltipPosition="left">Action 2</item>
         <item>Action 3</item>
     </list>
 </novo-dropdown>
