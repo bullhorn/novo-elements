@@ -131,6 +131,7 @@ novo-form {
                             border-radius: 0;
                             outline: none;
                             height: 2rem;
+                            line-height: 2em;
                             width: 100%;
                             margin: 0;
                             padding: 0;
@@ -511,8 +512,12 @@ novo-form {
         .novo-form-container {
             form {
                 form-field {
-                    margin-top: 2rem;
+                    margin-top: 2.2rem;
                     position: relative;
+
+                    &:first-of-type {
+                        margin-top: 0;
+                    }
 
                     form-label {
                         position: absolute;
