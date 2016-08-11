@@ -1,3 +1,13 @@
+<a name="0.2.18"></a>
+## [0.2.18](https://github.com/bullhorn/novo-elements/compare/v0.2.17...v0.2.18) (2016-08-11)
+
+
+### Features
+
+* **calendar, table:** Adding ability to select a range of dates and being about to sort on date ranges ([#147](https://github.com/bullhorn/novo-elements/issues/147)) ([bd5da58](https://github.com/bullhorn/novo-elements/commit/bd5da58))
+
+
+
 <a name="0.2.17"></a>
 ## [0.2.17](https://github.com/bullhorn/novo-elements/compare/v0.2.16...v0.2.17) (2016-08-10)
 
