@@ -67,7 +67,7 @@ import { swallowEvent } from './../../utils/Helpers';
                     <div class="year" [ngClass]="{selected: year == selected?.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
                 </li>
             </ul>
-            <div class="calendar-footer">
+            <div class="calendar-footer" *ngIf="!range">
                 <span (click)="setToday()" class="today" title="{{today}}" data-automation-id="calendar-today">Today</span>
             </div>
         </div>
