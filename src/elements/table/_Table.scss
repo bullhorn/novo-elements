@@ -153,6 +153,7 @@ $table-border-color: #f5f5f5; // Tables
                 .dropdown-container {
                     right: -15px;
                     min-width: 230px;
+                    overflow-x: hidden;
                     list {
                         item.filter-search {
                             padding: 10px 0;
