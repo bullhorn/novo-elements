@@ -31,14 +31,17 @@ export class SelectInput extends BaseInput {
         this.control.updateValue(this.value);
 
         setTimeout(() => {
-            this.toggleInactive(null);
+            if (this.value) {
+                this.toggleInactive({ selected: this.value });
+            } else {
+                this.toggleInactive(null);
+            }
         }, 10);
     }
 
     select(val) {
         this.update.emit(val.selected);
         this.control.updateValue(val.selected);
-
         this.toggleInactive(val);
     }
 

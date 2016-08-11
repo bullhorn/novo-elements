@@ -510,6 +510,9 @@ novo-form {
 
     &[layout="vertical"] {
         .novo-form-container {
+            header {
+                margin-bottom: 20px;
+            }
             form {
                 form-field {
                     margin-top: 2.2rem;
