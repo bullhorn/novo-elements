@@ -88,7 +88,7 @@ export class NovoTableHeader {
                                 </div>
                             </div>
                             <!-- FILTER DROP-DOWN -->
-                            <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters" [showAfterSelect]="column.range || column.multiple">
+                            <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters">
 
                                 <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter" (click)="focusInput(column.name)"></button>
                                 <!-- FILTER OPTIONS LIST -->
