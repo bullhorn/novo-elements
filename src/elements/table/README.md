@@ -59,6 +59,8 @@ In general the column definition will be an object with some basic configuration
     * Determines if the column can be filtered
 - `'multiple' : Bool : default: false`
     * Determines if the column can be filtered by multiple values
+- `'range' : Bool : default: false`
+    * Determines if the filter should include a date range option
 - `'renderer' : Func | Cell : default: null`
     * Custom renderer for the column, useful if it is an embedded object
 - `'compare' : Func : default: null`
