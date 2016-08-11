@@ -1,3 +1,13 @@
+<a name="0.2.19"></a>
+## [0.2.19](https://github.com/bullhorn/novo-elements/compare/v0.2.18...v0.2.19) (2016-08-11)
+
+
+### Bug Fixes
+
+* **form:** Fixing vertical layout initial value for select ([98888ed](https://github.com/bullhorn/novo-elements/commit/98888ed))
+
+
+
 <a name="0.2.18"></a>
 ## [0.2.18](https://github.com/bullhorn/novo-elements/compare/v0.2.17...v0.2.18) (2016-08-11)
 
