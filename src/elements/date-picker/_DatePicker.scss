@@ -69,6 +69,25 @@ input[type=calendar] {
         }
     }
 
+    .calendar-range{
+        display: flex;
+        flex-flow: row;
+        span{
+            text-align: center;
+            margin: auto;
+            text-transform: uppercase;
+            line-height: 2.5em;
+            width: 50%;
+            border-bottom: 2px solid transparent;
+            color: $grey;
+            transition: all 300ms ease-in-out;
+        }
+        .active{
+            color:$positive;
+            border-bottom: 2px solid $positive;
+        }
+    }
+
     .calendar-header {
         width: 100%;
         border-collapse: collapse;
@@ -223,33 +242,55 @@ input[type=calendar] {
                 }
             }
 
+            &.filler button{
+                background: $positive;
+                color: #fff;
+                height: 30px;
+                width: 100%;
+                border-radius: 0;
+            }
+
+            &.filler + .selected button,
+            &.startfill button,
+            &.startfill + .selected button{
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                width: 100%;
+                .day{
+                    box-shadow: 0;
+                }
+            }
+            &.startfill button{
+                border-radius: 50%;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                box-shadow: none!important;
+            }
+
             &.selected {
                 .day {
                     background: $positive;
                     color: #fff;
-
-                    &:after {
-                        content: ' ';
-                        background: #9DBEFF;
-                        position: absolute;
-                        border-radius: 50%;
-                        top: 0;
-                        left: 0;
-                        height: 100%;
-                        width: 100%;
-                        z-index: -1;
-                        animation: 360ms select ease-in-out;
-                    }
                 }
             }
 
             &.today {
-                .day {
+                .day:after {
+                    content: '';
+                    position: absolute;
+                    top:0;
+                    left:50%;
+                    transform: translateX(-15px);
+                    border-radius: 100%;
+                    width: 100%;
+                    height:100%;
+                    max-width: 30px;
+                    margin: 0 auto;
                     box-shadow: inset 0 0 0 2px $light;
                 }
 
-                &.selected {
-                    .day {
+                &.selected, &.filler {
+                    .day:after {
                         box-shadow: inset 0 0 0 2px #9DBEFF;
                     }
                 }

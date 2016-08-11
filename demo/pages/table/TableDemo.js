@@ -21,7 +21,6 @@ const template = `
     <p>This is the most basic table.</p>
     <div class="example table-demo">${TableDemoTpl}</div>
     <code-snippet [code]="TableDemoTpl"></code-snippet>
-
     <h5>Details Table</h5>
     <p>This has a row renderer to show a new details row that is expanded when you click on the action column.</p>
     <div class="example table-demo">${DetailsTableDemoTpl}</div>
@@ -109,7 +108,8 @@ export class TableDemo {
                 name: 'startDate',
                 renderer: DateCell,
                 ordering: true,
-                filtering: true
+                filtering: true,
+                range: true
             },
             {
                 title: 'Salary',
