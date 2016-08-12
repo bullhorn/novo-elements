@@ -17,7 +17,7 @@ import 'rxjs/Rx'; //eslint-disable-line
 @Component({
     selector: 'novo-picker',
     directives: [NgModel],
-    inputs: ['config', 'placeholder'],
+    inputs: ['config', 'placeholder', 'clearValueOnSelect'],
     outputs: ['select', 'focus', 'blur'],
     template: `
         <input
@@ -172,13 +172,13 @@ export class Picker extends OutsideClick {
     }
 
     //set accessor including call the onchange callback
-    set value(selected) {
+    set value(selected:any) {
         if (!selected) {
             this.term = '';
             this._value = null;
             this._onChangeCallback(null);
         } else if (selected.value !== this._value) {
-            this.term = selected.label;
+            this.term = this.clearValueOnSelect ? '' : selected.label;
             this._value = selected.value;
             this.select.emit(selected);
             this._onChangeCallback(selected.value);
@@ -187,27 +187,26 @@ export class Picker extends OutsideClick {
 
     //Set touched on blur
     onTouched() {
-        setTimeout(() => {
-            if (this.term !== this._value) {
-                this.value = null;
-            }
-        });
         this.blur.emit(event);
         this._onTouchedCallback();
     }
 
     //From ControlValueAccessor interface
     writeValue(value) {
-        if (typeof value === 'string') {
-            this.term = value;
-        } else if (value && value.label) {
-            this.term = value.label;
-        } else if (value && value.firstName) {
-            this.term = `${value.firstName} ${value.lastName}`;
-        } else if (value && value.name) {
-            this.term = value.name;
+        if (this.clearValueOnSelect) {
+            this.term = '';
         } else {
-            this.term = value;
+            if (typeof value === 'string') {
+                this.term = value;
+            } else if (value && value.label) {
+                this.term = value.label;
+            } else if (value && value.firstName) {
+                this.term = `${value.firstName} ${value.lastName}`;
+            } else if (value && value.name) {
+                this.term = value.name;
+            } else {
+                this.term = value;
+            }
         }
         this._value = value;
     }

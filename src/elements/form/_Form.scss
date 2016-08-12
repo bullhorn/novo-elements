@@ -339,11 +339,12 @@ novo-form {
                     picker-results {
                         position: absolute;
                         left: 0;
-                        top: 28px;
+                        top: 100%;
                         color: black;
                         width: 100%;
                         max-width: none;
                         z-index: 10;
+                        border: 1px solid #4A89DC;
 
                         novo-list {
                             max-height: 600px;
