@@ -4,6 +4,7 @@ novo-picker {
     align-items: center;
     flex-wrap: wrap;
     justify-content: flex-start;
+    padding-bottom: 5px;
     transition: all 200ms ease-in-out;
     position: relative;
     &.selected,

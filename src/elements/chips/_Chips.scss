@@ -6,6 +6,7 @@ entity-chips {
     flex-wrap: wrap;
     justify-content: flex-start;
     border-bottom: 1px solid #EAEAEA;
+    padding-bottom: 5px;
     transition: all 200ms ease-in-out;
     position: relative;
     &:hover {
