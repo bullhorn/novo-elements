@@ -8,15 +8,20 @@ import { NOVO_BUTTON_ELEMENTS } from '../button';
     inputs: [
         'name',
         'tip',
-        'buttonText'
+        'buttonText',
+        'hasButton',
+        'icon'
     ],
     directives: [
         NOVO_BUTTON_ELEMENTS
     ],
     template: `
         <div *ngIf="isActive">
-            <p>{{ tip }}</p>
-            <button theme="dialogue" (click)="hideTip()">{{ buttonText }}</button>
+            <div>
+                <i class="bhi-{{ icon }}" *ngIf="icon"></i>
+                <p>{{ tip }}</p>
+            </div>
+            <button theme="dialogue" (click)="hideTip()" *ngIf="hasButton!=='false'">{{ buttonText }}</button>
         </div>
     `
 })
@@ -42,6 +47,8 @@ export class TipWell {
     ngOnInit() {
         this.tip = this.tip || '';
         this.buttonText = this.buttonText || 'Ok, Got it';
+        this.hasButton = this.hasButton || 'true';
+        this.icon = this.icon || null;
         // Set a (semi) unique name for the tip-well
         this.name = this.name || Math.round(Math.random() * 100);
         this.localStorageKey = `novo-tw_${this.name}`;

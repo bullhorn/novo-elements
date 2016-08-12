@@ -35,12 +35,15 @@ describe('Component: TipWell', () => {
     beforeEach(inject([TipWell], _comp => {
         comp = _comp;
         localStorage.clear();
+        comp.ngOnInit();
     }));
 
     it('should initialize with defaults.', () => {
         expect(comp).toBeDefined();
         expect(comp.isActive).toBeTruthy();
         expect(comp.isLocalStorageEnabled).toBeTruthy();
+        expect(comp.hasButton).toBeTruthy();
+        expect(comp.icon).toBeNull();
     });
 
     describe('Method: hideTip()', () => {

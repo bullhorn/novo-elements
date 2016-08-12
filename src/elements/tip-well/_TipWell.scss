@@ -8,10 +8,18 @@ novo-tip-well {
         color: $dark;
         padding: 1em;
         text-align: right;
-        
-        > p {
-            width: 100%;
-            text-align: left;
+
+        > div {
+            display: flex;
+            > i {
+                flex: 1;
+                text-align: center;
+                margin-top: .5em;
+            }
+            > p {
+                flex: 12;
+                text-align: left;
+            }
         }
     }
 }
