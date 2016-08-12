@@ -1,3 +1,13 @@
+<a name="0.2.20"></a>
+## [0.2.20](https://github.com/bullhorn/novo-elements/compare/v0.2.19...v0.2.20) (2016-08-12)
+
+
+### Bug Fixes
+
+* **picker,chips:** Fixing selection in chips that was always remaining and some minor styling fixes for chips dropdown. ([5acfa07](https://github.com/bullhorn/novo-elements/commit/5acfa07))
+
+
+
 <a name="0.2.19"></a>
 ## [0.2.19](https://github.com/bullhorn/novo-elements/compare/v0.2.18...v0.2.19) (2016-08-11)
 
