@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+'use strict';
+
+/*eslint no-console: 0, no-sync: 0*/
+
 // System.js bundler
 // simple and yet reusable system.js bundler
 // bundles, minifies and gzips
@@ -15,14 +19,12 @@ const pkg = require('../package.json');
 const name = pkg.name;
 const targetFolder = path.resolve('./bundles');
 
-console.log('target directory:', targetFolder); // eslint-disable-line
-
 async.waterfall([
     cleanBundlesFolder,
     getSystemJsBundleConfig,
-    buildSystemJs({ minify: false, sourceMaps: true, mangle: false }),
+    buildSystemJs({ minify: false, sourceMaps: true, mangle: false, noEmitHelpers: false, declaration: true }),
     getSystemJsBundleConfig,
-    buildSystemJs({ minify: true, sourceMaps: true, mangle: false }),
+    buildSystemJs({ minify: true, sourceMaps: true, mangle: false, noEmitHelpers: false, declaration: true }),
     gzipSystemJsBundle
 ], err => {
     if (err) {
@@ -37,11 +39,15 @@ function getSystemJsBundleConfig(cb) {
     const config = {
         baseURL: '..',
         transpiler: 'typescript',
+        typescriptOptions: {
+            module: 'cjs'
+        },
         map: {
             typescript: path.resolve('node_modules/typescript/lib/typescript.js'),
             '@angular/core': path.resolve('node_modules/@angular/core/index.js'),
             '@angular/common': path.resolve('node_modules/@angular/common/index.js'),
             '@angular/compiler': path.resolve('node_modules/@angular/compiler/index.js'),
+            '@angular/forms': path.resolve('node_modules/@angular/forms/index.js'),
             '@angular/platform-browser': path.resolve('node_modules/@angular/platform-browser/index.js'),
             '@angular/platform-browser-dynamic': path.resolve('node_modules/@angular/platform-browser-dynamic/'),
             rxjs: path.resolve('node_modules/rxjs'),
@@ -56,6 +62,7 @@ function getSystemJsBundleConfig(cb) {
         '@angular/common',
         '@angular/compiler',
         '@angular/core',
+        '@angular/forms',
         '@angular/platform-browser',
         '@angular/platform-browser-dynamic',
         'rxjs',
@@ -74,7 +81,7 @@ function getSystemJsBundleConfig(cb) {
 function cleanBundlesFolder(cb) {
     return del(targetFolder)
         .then(paths => {
-            console.log('Deleted files and folders:', paths.join(',')); // eslint-disable-line
+            console.log('Deleted files and folders:\n', paths.join('\n'));
             cb();
         });
 }
@@ -89,7 +96,7 @@ function buildSystemJs(options) {
         const dest = path.resolve(__dirname, targetFolder, fileName);
         const builder = new Builder();
 
-        console.log('Bundling system.js file:', fileName, options); // eslint-disable-line
+        console.log('Bundling system.js file:', fileName, options);
         builder.config(config);
         return builder
             .bundle([name, 'src', name].join('/'), dest, options)
@@ -110,7 +117,7 @@ function gzipSystemJsBundle(cb) {
 
     return async.eachSeries(files, (file, gzipcb) => {
         process.nextTick(() => {
-            console.log('Gzipping ', file); // eslint-disable-line
+            console.log('Gzipping ', file);
             const gzip = zlib.createGzip({ level: 9 });
             const inp = fs.createReadStream(file);
             const out = fs.createWriteStream(`${file}.gz`);

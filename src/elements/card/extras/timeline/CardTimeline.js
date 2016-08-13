@@ -1,5 +1,5 @@
+// NG2
 import { Component } from '@angular/core';
-import { CORE_DIRECTIVES } from '@angular/common';
 
 @Component({
     selector: 'novo-card-timeline',
@@ -18,10 +18,9 @@ import { CORE_DIRECTIVES } from '@angular/common';
                 </div>
             </div>
         </div>
-    `,
-    directives: [CORE_DIRECTIVES]
+    `
 })
-export class CardTimeline {
+export class CardTimelineElement {
     constructor() {
         this.now = new Date().getFullYear();
     }

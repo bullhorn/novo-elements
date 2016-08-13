@@ -1,8 +1,5 @@
+// NG2
 import { Component, EventEmitter } from '@angular/core';
-import { CORE_DIRECTIVES } from '@angular/common';
-
-import { NOVO_BUTTON_ELEMENTS } from './../button';
-import { NOVO_LOADING_ELEMENTS } from './../loading';
 
 @Component({
     selector: 'novo-card',
@@ -50,14 +47,9 @@ import { NOVO_LOADING_ELEMENTS } from './../loading';
             <!--Card Footer-->
             <ng-content *ngIf="!(loading || config.loading) && !(message || config.message)" select="footer"></ng-content>
         </div>
-    `,
-    directives: [
-        CORE_DIRECTIVES,
-        NOVO_BUTTON_ELEMENTS,
-        NOVO_LOADING_ELEMENTS
-    ]
+    `
 })
-export class Card {
+export class CardElement {
     constructor() {
         this.onClose = new EventEmitter();
         this.onRefresh = new EventEmitter();
@@ -94,5 +86,3 @@ export class Card {
         }
     }
 }
-
-export const NOVO_CARD_ELEMENTS = [Card];

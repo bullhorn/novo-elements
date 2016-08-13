@@ -1,3 +1,4 @@
+// NG2
 import { Component } from '@angular/core';
 import { DomSanitizationService } from '@angular/platform-browser';
 

@@ -1,11 +1,14 @@
-import { Provider, Injectable, ComponentResolver } from '@angular/core';
+// NG2
+import { Injectable, ComponentResolver } from '@angular/core';
+// APP
+import { NovoToastElement } from './Toast';
 
 @Injectable()
-export class ToastService {
+export class NovoToastService {
+    // TODO - use ComponentFactoryResolver instead
     constructor(componentResolver:ComponentResolver) {
         this.componentResolver = componentResolver;
         this.references = [];
-
         this.positions = [
             'fixedTop',
             'fixedBottom',
@@ -14,7 +17,6 @@ export class ToastService {
             'growlBottomLeft',
             'growlBottomRight'
         ];
-
         this.themes = [
             'default',
             'success',
@@ -22,7 +24,6 @@ export class ToastService {
             'warning',
             'danger'
         ];
-
         this.icons = {
             default: 'bell',
             success: 'check',
@@ -30,7 +31,6 @@ export class ToastService {
             warning: 'warning',
             danger: 'remove'
         };
-
         this.defaults = {
             hideDelay: 3500,
             position: 'growlTopRight',
@@ -42,13 +42,13 @@ export class ToastService {
         this._parentViewContainer = view;
     }
 
-    alert(component, options) {
+    alert(options) {
         return new Promise((resolve) => {
             if (!this._parentViewContainer) {
                 console.error('No parent view container specified for the ToastService. Set it inside your main application. \nthis.toastService.parentViewContainer = view (ViewContainerRef)'); // eslint-disable-line
                 return;
             }
-            this.componentResolver.resolveComponent(component)
+            this.componentResolver.resolveComponent(NovoToastElement)
                 .then(componentFactory => {
                     let toast = this._parentViewContainer.createComponent(componentFactory);
                     this.references.push(toast);
@@ -118,8 +118,4 @@ export class ToastService {
         }, toast.hideDelay);
     }
 }
-
-export const TOAST_PROVIDERS = [
-    new Provider(ToastService, { useClass: ToastService })
-];
 

@@ -1,3 +1,4 @@
+// NG2
 import { Component, ElementRef } from '@angular/core';
 
 @Component({
@@ -27,7 +28,7 @@ import { Component, ElementRef } from '@angular/core';
         </aside>
     `
 })
-export class CardDonutChart {
+export class CardDonutChartElement {
     constructor(element:ElementRef) {
         this.element = element;
         // Geometric number that represents 100% of the chart area

@@ -1,5 +1,5 @@
+// NG2
 import { Component } from '@angular/core';
-import { CORE_DIRECTIVES } from '@angular/common';
 
 @Component({
     selector: 'button[theme]',
@@ -19,10 +19,9 @@ import { CORE_DIRECTIVES } from '@angular/common';
             <!--Right Icon-->
             <i *ngIf="icon && iconClass && (rightSide || !leftSide)" [ngClass]="iconClass"></i>
         </div>
-    `,
-    directives: [CORE_DIRECTIVES]
+    `
 })
-export class Button {
+export class NovoButtonElement {
     ngOnInit() {
         this.iconClass = this.icon ? `bhi-${this.icon}` : '';
         this.flex = this.theme ? 'flex-wrapper' : '';
@@ -32,5 +31,3 @@ export class Button {
         }
     }
 }
-
-export const NOVO_BUTTON_ELEMENTS = [Button];

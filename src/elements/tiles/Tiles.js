@@ -1,9 +1,10 @@
+// NG2
 import { Component, Input, Output, EventEmitter, forwardRef, Provider, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 // Value accessor for the component (supports ngModel)
 const TILES_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => Tiles),
+    useExisting: forwardRef(() => TilesElement),
     multi: true
 });
 
@@ -22,7 +23,7 @@ const TILES_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         </div>
     `
 })
-export class Tiles implements ControlValueAccessor {
+export class TilesElement implements ControlValueAccessor {
     @Input() name:String;
     @Input() options:any;
     @Input() required:boolean;
@@ -115,5 +116,3 @@ export class Tiles implements ControlValueAccessor {
         this.onModelTouched = fn;
     }
 }
-
-export const NOVO_TILES_ELEMENTS = [Tiles];

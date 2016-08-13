@@ -1,3 +1,4 @@
+// NG2
 import { Directive } from '@angular/core';
 
 @Directive({
@@ -27,7 +28,7 @@ import { Directive } from '@angular/core';
         '[attr.data-hint]': 'tooltip'
     }
 })
-export class Tooltip {
+export class TooltipDirective {
     ngOnInit() {
         if (!this.position) {
             this.position = 'top';
@@ -42,5 +43,3 @@ export class Tooltip {
         return type.toLowerCase() === (this.type || '').toLowerCase();
     }
 }
-
-export const NOVO_TOOLTIP_ELEMENTS = [Tooltip];

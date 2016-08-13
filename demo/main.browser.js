@@ -1,31 +1,37 @@
-import { bootstrap } from '@angular/platform-browser-dynamic';
+// NG2
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+// APP
+import { NovoElementsDemoModule } from './novo-elements-demo.module';
 
-import { PLATFORM_PROVIDERS } from './platform/browser';
-import { ENV_PROVIDERS, decorateComponentRef } from './platform/environment';
-import { DemoApp } from './pages/app/App';
-import './demo.scss';
-
-/**
- * Bootstrap our Angular app with a top level component `App` and inject
- * our Services and Providers into Angular's dependency injection
- */
-export function main() {
-    return bootstrap(DemoApp, [
-        ...PLATFORM_PROVIDERS,
-        ...ENV_PROVIDERS
-    ])
-        .then(decorateComponentRef)
-        .catch(err => console.error(err)); // eslint-disable-line
+// Enable prod mode
+if (ENV === 'production') {
+    enableProdMode();
 }
 
+/**
+ * Bootstrap via function to ensure DOM is ready
+ */
+export function main() {
+    return platformBrowserDynamic().bootstrapModule(NovoElementsDemoModule);
+}
 
-// Hot Module Reload
-// experimental version by @gdi2290
-if (ENV === 'development' && HMR === true) {
+/**
+ * If DEV then we bootstrap via HMR otherwise, just call directly
+ */
+export function bootstrapDomReady() {
+    document.addEventListener('DOMContentLoaded', main);
+}
+
+// Hot Module Replacement
+if (ENV === 'development' && HMR) {
     // activate hot module reload
-    let ngHmr = require('angular2-hmr');
-    ngHmr.hotModuleReplacement(main, module);
+    if (document.readyState === 'complete') {
+        main();
+    } else {
+        bootstrapDomReady();
+    }
+    module.hot.accept();
 } else {
-    // bootstrap when document is ready
-    document.addEventListener('DOMContentLoaded', () => main());
+    bootstrapDomReady();
 }
