@@ -47,7 +47,7 @@ export const routes:Routes = [
     // { path: 'drawer', component: 'DrawerDemo' },
     // { path: 'calendar', component: 'CalendarDemo' },
     // { path: 'dragula', component: 'DragulaDemo' },
-    { path: 'tiles', component: TilesDemoComponent }
+    { path: 'tiles', component: TilesDemoComponent },
     // { path: 'slides', component: 'SlidesDemo' },
 
     // Utils

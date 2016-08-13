@@ -64,6 +64,7 @@ export class Chip {
         </chip>
         <div class="chip-input-container">
             <novo-picker
+                clearValueOnSelect="true"
                 [config]="source"
                 [placeholder]="placeholder"
                 [(ngModel)]="itemToAdd"
@@ -134,7 +135,7 @@ export class Chips extends OutsideClick {
         }
         this.items.splice(this.items.indexOf(item), 1);
         this.deselectAll();
-        this.value = this.items;
+        this.value = this.items.map(i => i.value);
     }
 
     onKeyDown(event) {
@@ -174,7 +175,7 @@ export class Chips extends OutsideClick {
     }
 
     //set accessor including call the onchange callback
-    set value(selected) {
+    set value(selected:any) {
         this.itemToAdd = '';
         if (selected !== this._value) {
             this._value = selected;

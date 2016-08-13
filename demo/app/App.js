@@ -6,7 +6,7 @@ import { NovoToastService } from './../../src/novo-elements';
 
 @Component({
     selector: 'demo-app',
-    template: require('./App.html'),
+    template: require('./App.html')
 })
 export class DemoComponent {
     constructor(router:Router, viewContainerRef:ViewContainerRef, toaster:NovoToastService) {

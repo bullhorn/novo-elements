@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NOVO_DROPDOWN_ELEMENTS, NOVO_BUTTON_ELEMENTS } from './../../../src/novo-elements';
+import { NOVO_DROPDOWN_ELEMENTS, NOVO_BUTTON_ELEMENTS, NOVO_TOOLTIP_ELEMENTS } from './../../../src/novo-elements';
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
 
 import DropdownDemoTpl from './templates/DropdownDemo.html';
@@ -21,10 +21,14 @@ const template = `
 @Component({
     selector: 'dropdown-demo',
     template: template,
-    directives: [NOVO_DROPDOWN_ELEMENTS, NOVO_BUTTON_ELEMENTS, CodeSnippet]
+    directives: [NOVO_DROPDOWN_ELEMENTS, NOVO_BUTTON_ELEMENTS, NOVO_TOOLTIP_ELEMENTS, CodeSnippet]
 })
 export class DropdownDemo {
     constructor() {
         this.DropdownDemoTpl = DropdownDemoTpl;
+    }
+
+    clickMe(data) {
+        console.log('CLICKED!', data); // eslint-disable-line
     }
 }

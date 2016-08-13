@@ -20,8 +20,7 @@ novo-dropdown {
     &.active {
         .dropdown-container {
             max-height: 500px;
-            overflow: auto;
-            padding: 8px 0 16px;
+            display: block;
             z-index: 2;
             border-radius: 2px;
             top: 100%;
@@ -31,23 +30,19 @@ novo-dropdown {
 
     .dropdown-container {
         background-color: white;
-        cursor: pointer;
         list-style: none;
         line-height: 26px;
-        overflow: hidden;
+        display: none;
         margin: 0;
         max-height: 0;
         position: absolute;
         padding: 0;
         transform: translateY(0);
         transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
-        width: 100%;
-        max-width: 180px;
         min-width: 180px;
         box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
 
         list {
-
             item {
                 cursor: pointer;
                 height: 48px;
@@ -58,9 +53,12 @@ novo-dropdown {
                 align-items: center;
                 justify-content: space-between;
                 color: darken($light, 45%);
+                white-space: nowrap;
+
                 span {
                     display: inline-block;
                 }
+
                 i {
                     height: 30px !important;
                     width: 15px !important;
@@ -68,30 +66,38 @@ novo-dropdown {
                     margin: 0 !important;
                     color: $positive;
                 }
-                &:focus,
-                &:hover {
+
+                &:focus, &:hover {
                     background: lighten($light, 10%);
                     color: darken($light, 55%);
                 }
+
                 &.active {
                     color: darken($light, 55%);
                     font-weight: 500;
                 }
+
+                &.disabled {
+                    color: $light;
+                    cursor: not-allowed;
+                }
             }
         }
     }
+
     &[side=left] {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
     }
+
     &[side=right] {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+
         .dropdown-container {
             right: 0px;
         }
     }
-
 }

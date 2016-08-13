@@ -6,6 +6,8 @@ const commonConfig = require('./webpack.common.js'); //The settings that are com
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const extractCSS = new ExtractTextPlugin('[name].css');
 
 // Webpack Constants
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
@@ -51,9 +53,36 @@ module.exports = webpackMerge(commonConfig, {
         chunkFilename: '[id].[chunkhash].chunk.js'
     },
 
+    // Options affecting the normal modules.
+    // See: http://webpack.github.io/docs/configuration.html#module
+    module: {
+        // An array of automatically applied loaders.
+        // IMPORTANT: The loaders here are resolved relative to the resource which they are applied to.
+        // This means they are not resolved relative to the configuration file.
+        // See: http://webpack.github.io/docs/configuration.html#module-loaders
+        loaders: [
+            // SCSS/Sass loader support for *.scss / .sass
+            // Returns file content as string
+            // See: https://github.com/jtangelder/sass-loader
+            {
+                test: /\.scss$/,
+                loader: extractCSS.extract([
+                    'raw-loader',
+                    `autoprefixer?${JSON.stringify(METADATA.autoprefixer)}`,
+                    'sass-loader'
+                ])
+            }
+        ]
+    },
+
     // Add additional plugins to the compiler.
     // See: http://webpack.github.io/docs/configuration.html#plugins
     plugins: [
+        // Plugin: ExtractTextPlugin
+        // Description: extracts text (scss) into css files
+        // See: https://github.com/webpack/extract-text-webpack-plugin
+        extractCSS,
+
         // Plugin: WebpackMd5Hash
         // Description: Plugin to replace a standard webpack chunkhash with md5.
         // See: https://www.npmjs.com/package/webpack-md5-hash

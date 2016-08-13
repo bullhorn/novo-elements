@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class NovoLabelService {
-    filters = 'Filters';
+    filters = 'Filter';
     clear = 'Clear';
     emptyTableMessage = 'No Matching Records';
     pickerError = 'Oops! An error occurred.';
@@ -13,7 +13,20 @@ export class NovoLabelService {
     numberTooLarge = 'Number is too large';
     save = 'Save';
     cancel = 'Cancel';
-    next = 'Next'
+    next = 'Next';
+    itemsPerPage = 'Items per page:';
+    select = 'Select...';
+    selected = 'Selected';
+    selectAllOnPage = 'Select all on page';
+    deselectAll = 'Deselect all';
+
+    selectedRecords(selected) {
+        return `Only ${selected} records selected.`;
+    }
+
+    totalRecords(total) {
+        return `Select all ${total} matching records.`;
+    }
 }
 
 export const NOVO_ELEMENTS_LABELS_PROVIDERS = [

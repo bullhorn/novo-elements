@@ -4,17 +4,34 @@ import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgModel } from '@angular/common';
 import { isFunction, isString } from '@angular/core/src/facade/lang';
 // App
 import { NOVO_BUTTON_ELEMENTS } from '../button';
+import { NOVO_TOOLTIP_ELEMENTS } from '../tooltip';
 import { NOVO_DROPDOWN_ELEMENTS } from '../dropdown';
+import { NOVO_DATE_PICKER_ELEMENTS } from '../datepicker';
 import { NOVO_TABLE_EXTRA_ELEMENTS } from './extras/TableExtras';
 import { CheckBox } from '../form/extras/FormExtras';
 import { NovoLabelService } from './../../novo-elements';
+
+@Component({
+    selector: 'novo-table-actions',
+    template: '<ng-content></ng-content>'
+})
+export class NovoTableActions {
+}
+
+@Component({
+    selector: 'novo-table-header',
+    template: '<ng-content></ng-content>'
+})
+export class NovoTableHeader {
+}
 
 @Component({
     selector: 'novo-table, [novoTable]',
     inputs: [
         'rows',
         'columns',
-        'config'
+        'config',
+        'theme'
     ],
     outputs: [
         'onRowClick',
@@ -28,21 +45,40 @@ import { NovoLabelService } from './../../novo-elements';
         FORM_DIRECTIVES,
         NOVO_BUTTON_ELEMENTS,
         NOVO_DROPDOWN_ELEMENTS,
+        NOVO_TOOLTIP_ELEMENTS,
+        NOVO_DATE_PICKER_ELEMENTS,
         CheckBox
     ],
+    host: {
+        '[attr.theme]': 'theme'
+    },
     template: `
-        <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
+        <header>
+            <ng-content select="novo-table-header"></ng-content>
+            <div class="header-actions">
+                <novo-pagination *ngIf="config.paging"
+                                 [page]="config.paging.current"
+                                 [rowOptions]="config.customRowOptions"
+                                 [totalItems]="rows.length"
+                                 [itemsPerPage]="config.paging.itemsPerPage"
+                                 (onPageChange)="onPageChange($event)">
+                </novo-pagination>
+                <ng-content select="novo-table-actions"></ng-content>
+            </div>
+        </header>
+        <div class="table-container">
+            <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
             <thead>
                 <tr role="row">
                     <!-- DETAILS -->
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
                     <!-- CHECKBOX -->
-                    <th class="row-actions" *ngIf="config.rowSelectionStyle === 'checkbox'">
-                        <check-box [(value)]="master" [indeterminate]="indeterminate" (valueChange)="selectAll($event)" data-automation-id="select-all-checkbox"></check-box>
+                    <th class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
+                        <check-box [(value)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < pagedData.length" (valueChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></check-box>
                     </th>
                     <!-- TABLE HEADERS -->
                     <th *ngFor="let column of columns" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
-                        <div class="th-group" [attr.data-automation-id]="column.name">
+                        <div class="th-group" [attr.data-automation-id]="column.name" *ngIf="!column.hideHeader">
                             <!-- LABEL & SORT ARROWS -->
                             <div class="th-title" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
                                 <label>{{ column.title }}</label>
@@ -53,9 +89,10 @@ import { NovoLabelService } from './../../novo-elements';
                             </div>
                             <!-- FILTER DROP-DOWN -->
                             <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters">
+
                                 <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter" (click)="focusInput(column.name)"></button>
                                 <!-- FILTER OPTIONS LIST -->
-                                <list *ngIf="column?.options?.length">
+                                <list *ngIf="column?.options?.length && column?.type!='date'">
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
@@ -76,6 +113,22 @@ import { NovoLabelService } from './../../novo-elements';
                                         <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter"/>
                                     </item>
                                 </list>
+                                <!-- FILTER DATE OPTIONS -->
+                                <list *ngIf="column?.options?.length && column?.type=='date'">
+                                    <item class="filter-search" *ngIf="!column.calenderShow">
+                                        <div class="header">
+                                            <span>{{ labels.filters }}</span>
+                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
+                                        </div>
+                                    </item>
+                                    <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [showAfterSelect]="option.range" [attr.data-automation-id]="option">
+                                        {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
+                                    </item>
+                                    <div class="calender-container" [class.active]="column.calenderShow">
+                                        <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>Back to Preset Filters</div>
+                                        <novo-date-picker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column?.options[column.options.length-1].value" range="true"></novo-date-picker>
+                                    </div>
+                                </list>
                             </novo-dropdown>
                         </div>
                     </th>
@@ -83,13 +136,18 @@ import { NovoLabelService } from './../../novo-elements';
             </thead>
             <!-- TABLE DATA -->
             <tbody *ngIf="rows.length > 0">
+                <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage" data-automation-id="table-selection-row">
+                    <td colspan="100%">
+                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(rows.length)}}</a>
+                    </td>
+                </tr>
                 <template ngFor let-row="$implicit" [ngForOf]="rows | slice:getPageStart():getPageEnd()">
                     <tr class="table-row" [ngClass]="row.customClass || ''" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
                         <td class="row-actions" *ngIf="config.hasDetails">
                             <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
                             <button theme="icon" icon="sort-desc" (click)="row._expanded=!row._expanded" *ngIf="row._expanded"></button>
                         </td>
-                        <td class="row-actions" *ngIf="config.rowSelectionStyle === 'checkbox'">
+                        <td class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
                             <check-box [(value)]="row._selected" (valueChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></check-box>
                         </td>
                         <td *ngFor="let column of columns" [attr.data-automation-id]="column.name">
@@ -115,6 +173,7 @@ import { NovoLabelService } from './../../novo-elements';
                 </tr>
             </tbody>
         </table>
+        </div>
     `
 })
 export class NovoTable {
@@ -127,10 +186,13 @@ export class NovoTable {
         this.labels = labels;
         // Vars
         this.originalRows = [];
+        this.selected = [];
         this.activeId = 0;
         this.master = false;
         this.indeterminate = false;
         this.lastPage = 0;
+        this.selectedPageCount = 0;
+        this.showSelectAllMessage = false;
     }
 
     ngOnInit() {
@@ -151,6 +213,16 @@ export class NovoTable {
         }
     }
 
+    onPageChange(event) {
+        this.config.paging.onPageChange(event);
+
+        // Remove all selection on sort change if selection is on
+        if (this.config.rowSelectionStyle === 'checkbox') {
+            this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+            this.pageSelected = this.pagedData.filter(r => r._selected);
+        }
+    }
+
     /**
      * @name buildDateRange
      */
@@ -161,7 +233,7 @@ export class NovoTable {
                 switch (column.type) {
                     case 'date':
                         // Set options based on dates if there are none
-                        column.options = (column.options || this.getDefaultOptions());
+                        column.options = (column.options || this.getDefaultOptions(column));
                         break;
                     default:
                         break;
@@ -174,10 +246,11 @@ export class NovoTable {
      * @name ngDoCheck
      */
     ngDoCheck() {
-        if (this.config.paging.current !== this.lastPage) {
+        if (this.config.paging && this.config.paging.current !== this.lastPage) {
             this.rowSelectHandler();
+            this.showSelectAllMessage = false;
         }
-        this.lastPage = this.config.paging.current;
+        this.lastPage = this.config.paging ? this.config.paging.current : 1;
     }
 
     /**
@@ -215,16 +288,22 @@ export class NovoTable {
      * @param filter
      */
     onFilterClick(column, filter) {
-        if (Array.isArray(column.filter)) {
-            if (column.filter.includes(filter)) {
-                // Remove filter
+        if (filter.range) {
+            column.calenderShow = true;
+        }
+        if (Array.isArray(column.filter) && column.multiple) {
+            if (~column.filter.indexOf(filter)) {
+                    // Remove filter
                 column.filter.splice(column.filter.indexOf(filter), 1);
+                if (filter.range) {
+                    column.calenderShow = false;
+                }
 
                 if (column.filter.length === 0) {
                     column.filter = null;
                 }
             } else {
-                // Add filter
+                    // Add filter
                 column.filter.push(filter);
             }
         } else {
@@ -251,7 +330,7 @@ export class NovoTable {
         if (this.config.filtering) {
             // Array of filters
             const filters = this.columns.filter(col => col.filter && col.filter.length);
-            // debugger;
+
             if (filters.length) {
                 if (isFunction(this.config.filtering)) {
                     // Custom filter function on the table config
@@ -265,7 +344,19 @@ export class NovoTable {
                                 matched = column.match(row[column.name], column.filter);
                             } else if (Array.isArray(column.filter)) {
                                 // The filters are an array (multi-select), check value
-                                if (column.type && column.type === 'date') {
+                                if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
+                                    matched = column.filter.some(obj => {
+                                        let start = obj.value ? new Date(obj.value.startDate).getTime() : 0;
+                                        let end = obj.value ? new Date(obj.value.endDate).getTime() : 0;
+                                        let isMatch = false;
+                                        // Assumes row data contains a JS date object
+                                        let date = row[column.name] instanceof Date ? row[column.name].getTime() : row[column.name];
+                                        if (start !== 0 && end !== 0) {
+                                            isMatch = (date >= start && date <= end);
+                                        } else isMatch = true;
+                                        return isMatch;
+                                    });
+                                } else if (column.type && column.type === 'date') {
                                     // It's a date, use the date difference
                                     matched = column.filter.some(value => {
                                         let min = value.min;
@@ -317,6 +408,10 @@ export class NovoTable {
             // If paging, reset page
             if (this.config.paging) {
                 this.config.paging.current = 1;
+            }
+            // Remove all selection on sort change if selection is on
+            if (this.config.rowSelectionStyle === 'checkbox') {
+                this.selectAll(false);
             }
         }
     }
@@ -400,6 +495,11 @@ export class NovoTable {
         if (this.config.paging) {
             this.config.paging.current = 1;
         }
+
+        // Remove all selection on sort change if selection is on
+        if (this.config.rowSelectionStyle === 'checkbox') {
+            this.selectAll(false);
+        }
     }
 
     /**
@@ -409,7 +509,6 @@ export class NovoTable {
         // Construct a table change object
         const onTableChange = {};
         const filters = this.columns.filter((col) => col.filter && col.filter.length);
-
         onTableChange.filter = filters.length ? filters : false;
         onTableChange.sort = this.currentSortColumn ? this.currentSortColumn : false;
         onTableChange.rows = this.rows;
@@ -444,35 +543,66 @@ export class NovoTable {
     }
 
     /**
+     * @name selectPage
+     */
+    selectPage() {
+        if (!this.master) {
+            this.selectAll(false);
+            // Only show the select all message when there is only one new page selected at a time
+            this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
+            this.showSelectAllMessage = false;
+        } else {
+            this.indeterminate = false;
+            this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+            for (let row of this.pagedData) {
+                row._selected = this.master;
+            }
+            this.selected = this.rows.filter(r => r._selected);
+            this.pageSelected = this.pagedData.filter(r => r._selected);
+            this.emitSelected(this.selected);
+            // Only show the select all message when there is only one new page selected at a time
+            this.selectedPageCount++;
+            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.rows.length;
+        }
+    }
+
+    /**
      * @name selectAll
      */
-    selectAll() {
+    selectAll(value) {
+        this.master = value;
         this.indeterminate = false;
-        let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-        for (let row of pagedData) {
-            row._selected = this.master;
+        for (let row of this.rows) {
+            row._selected = value;
         }
-        let selected = pagedData.filter(r => r._selected);
-        this.emitSelected(selected);
+        this.selected = value ? this.rows : 0;
+        this.showSelectAllMessage = false;
+        this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
+        this.emitSelected(this.selected);
     }
 
     /**
      * @name rowSelectHandler
      */
     rowSelectHandler() {
-        let pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-        let selected = pagedData.filter(r => r._selected);
-        if (selected.length === 0) {
+        this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+        this.pageSelected = this.pagedData.filter(r => r._selected);
+        this.selected = this.rows.filter(r => r._selected);
+        if (this.pageSelected.length === 0) {
             this.master = false;
             this.indeterminate = false;
-        } else if (selected.length === pagedData.length) {
+        } else if (this.pageSelected.length === this.pagedData.length) {
             this.master = true;
             this.indeterminate = false;
         } else {
             this.master = false;
             this.indeterminate = true;
+
+            // Breaking the selected page count
+            this.showSelectAllMessage = false;
+            this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
         }
-        this.emitSelected(selected);
+        this.emitSelected(this.selected);
     }
 
     /**
@@ -498,9 +628,9 @@ export class NovoTable {
      * @name setDateOptions
      * @returns {Array}
      */
-    getDefaultOptions() {
+    getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
-        return [
+        let opts = [
             { label: 'Beyond 90 Days', min: 90 },
             { label: 'Next 90 Days', min: 0, max: 90 },
             { label: 'Next 30 Days', min: 0, max: 30 },
@@ -510,7 +640,27 @@ export class NovoTable {
             { label: 'Past 90 Days', min: -90, max: 0 },
             { label: 'Older than 90 Days', max: -90 }
         ];
+
+        if (column && column.range) {
+            opts.push({
+                label: 'Custom Date Range',
+                range: true,
+                value: {
+                    startDate: null,
+                    endDate: null
+                }
+            });
+        }
+        return opts;
+    }
+
+    onCalenderSelect(column, event) {
+        setTimeout(() => {
+            if (event.startDate && event.endDate) {
+                this.onFilterChange();
+            }
+        }, 10);
     }
 }
 
-export const NOVO_TABLE_ELEMENTS = [NovoTable];
+export const NOVO_TABLE_ELEMENTS = [NovoTable, NovoTableActions, NovoTableHeader];

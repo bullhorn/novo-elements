@@ -10,14 +10,14 @@ Menus allow users to take an action by selecting from a list of choices revealed
     * Available Values: `['right']`
 
 
-*Dropdown Demo*
-````xml
-<novo-dropdown>
-    <button type="button" theme="header" icon="collapse">Actions</button>
-    <list>
-        <item>Action 1</item>
-        <item>Action 2</item>
-        <item>Action 3</item>
-    </list>
-</novo-dropdown>
-````
+## Item
+
+##### Properties
+- `'disabled' : bool`
+    * Toggles the item as disabled or enabled
+- `'showAfterSelect' : bool : default: false`
+    * Whether the dropdown should collapse after clicking an item
+
+##### Events
+- `'action'`
+    * Action to perform when the item is clicked

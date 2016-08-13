@@ -22,7 +22,7 @@ const PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
  */
 @Component({
     selector: 'novo-picker',
-    inputs: ['config', 'placeholder'],
+    inputs: ['config', 'placeholder', 'clearValueOnSelect'],
     outputs: ['select', 'focus', 'blur'],
     providers: [PICKER_VALUE_ACCESSOR],
     template: `
@@ -174,14 +174,14 @@ export class Picker extends OutsideClick {
         return this._value;
     }
 
-    // set accessor including call the onchange callback
-    set value(selected) {
+    //set accessor including call the onchange callback
+    set value(selected:any) {
         if (!selected) {
             this.term = '';
             this._value = null;
             this.onModelChange(null);
         } else if (selected.value !== this._value) {
-            this.term = selected.label;
+            this.term = this.clearValueOnSelect ? '' : selected.label;
             this._value = selected.value;
             this.select.emit(selected);
             this.onModelChange(selected.value);
@@ -190,18 +190,28 @@ export class Picker extends OutsideClick {
 
     // Set touched on blur
     onTouched() {
-        setTimeout(() => {
-            if (this.term !== this._value) {
-                this.value = null;
-            }
-        });
         this.blur.emit(event);
         this.onModelTouched();
     }
 
-    writeValue(model:any):void {
-        this._value = model;
-        this.term = model;
+    //From ControlValueAccessor interface
+    writeValue(value) {
+        if (this.clearValueOnSelect) {
+            this.term = '';
+        } else {
+            if (typeof value === 'string') {
+                this.term = value;
+            } else if (value && value.label) {
+                this.term = value.label;
+            } else if (value && value.firstName) {
+                this.term = `${value.firstName} ${value.lastName}`;
+            } else if (value && value.name) {
+                this.term = value.name;
+            } else {
+                this.term = value;
+            }
+        }
+        this._value = value;
     }
 
     registerOnChange(fn:Function):void {

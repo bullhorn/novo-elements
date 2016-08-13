@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
-import { NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS, NOVO_TOOLTIP_ELEMENTS, BaseRenderer } from './../../../src/novo-elements';
+import { NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS, NOVO_TOOLTIP_ELEMENTS, BaseRenderer, NOVO_DROPDOWN_ELEMENTS, NOVO_BUTTON_ELEMENTS } from './../../../src/novo-elements';
 import { DateCell } from '../../../src/elements/table/extras/TableExtras';
 
 import { TableData } from './TableData';
@@ -21,20 +21,19 @@ const template = `
     <p>This is the most basic table.</p>
     <div class="example table-demo">${TableDemoTpl}</div>
     <code-snippet [code]="TableDemoTpl"></code-snippet>
-
     <h5>Details Table</h5>
     <p>This has a row renderer to show a new details row that is expanded when you click on the action column.</p>
     <div class="example table-demo">${DetailsTableDemoTpl}</div>
     <code-snippet [code]="DetailsTableDemoTpl"></code-snippet>
-    
-    <h5>Select All Table</h5>
-    <p>This has checkboxes for selection.</p>
+
+    <h5>Select All Table w/ Custom Actions</h5>
+    <p>This has checkboxes for selection with custom actions.</p>
     <div class="example table-demo">${SelectAllTableDemoTpl}</div>
     <code-snippet [code]="SelectAllTableDemoTpl"></code-snippet>
 </div>
 `;
 
-const HEADER_COLORS = ['blue', 'green', 'yellow', 'orange', 'red', 'purple'];
+const HEADER_COLORS = ['aqua', 'ocean', 'mint', 'grass', 'sunflower', 'company', 'lead', 'positive', 'black'];
 
 @Component({
     selector: 'status-cell',
@@ -65,7 +64,7 @@ export class ExtraDetails extends BaseRenderer {
 @Component({
     selector: 'table-demo',
     template: template,
-    directives: [NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS, CORE_DIRECTIVES, FORM_DIRECTIVES, NOVO_TOOLTIP_ELEMENTS, CodeSnippet]
+    directives: [NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS, CORE_DIRECTIVES, FORM_DIRECTIVES, NOVO_TOOLTIP_ELEMENTS, CodeSnippet, NOVO_DROPDOWN_ELEMENTS, NOVO_BUTTON_ELEMENTS]
 })
 export class TableDemo {
     constructor() {
@@ -109,7 +108,8 @@ export class TableDemo {
                 name: 'startDate',
                 renderer: DateCell,
                 ordering: true,
-                filtering: true
+                filtering: true,
+                range: true
             },
             {
                 title: 'Salary',
@@ -124,6 +124,7 @@ export class TableDemo {
                 name: 'status',
                 options: ['New Lead', 'Active', 'Archived'],
                 ordering: true,
+                multiple: true,
                 renderer: StatusCell,
                 filtering: true
             }
@@ -183,8 +184,8 @@ export class TableDemo {
                     current: 1,
                     itemsPerPage: 10,
                     onPageChange: event => {
-                        this.details.config.paging.current = event.page;
-                        this.details.config.paging.itemsPerPage = event.itemsPerPage;
+                        this.selectAll.config.paging.current = event.page;
+                        this.selectAll.config.paging.itemsPerPage = event.itemsPerPage;
                     }
                 },
                 sorting: true,
@@ -192,16 +193,30 @@ export class TableDemo {
                 ordering: true,
                 resizing: true,
                 rowSelectionStyle: 'checkbox'
+            },
+            onTableChange: (event) => {
+                this.selectAll.rows = event.rows;
             }
         };
     }
 
     ngOnInit() {
-        this.color = 'blue';
+        this.theme = HEADER_COLORS[0];
     }
 
-    changeColor() {
-        let idx = HEADER_COLORS.indexOf(this.color);
-        this.color = HEADER_COLORS[idx + 1];
+    changeTheme() {
+        let idx = HEADER_COLORS.indexOf(this.theme);
+        if (idx === HEADER_COLORS.length - 1) {
+            idx = -1;
+        }
+        this.theme = HEADER_COLORS[idx + 1];
+    }
+
+    singleAction() {
+        window.alert('HI!');
+    }
+
+    selectedAction(action) {
+        window.alert(`You clicked ${action}!`);
     }
 }

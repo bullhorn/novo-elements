@@ -3,7 +3,9 @@ import { Component } from '@angular/core';
 // APP
 import TooltipOptionsDemoTpl from './templates/TooltipOptionsDemo.html';
 import TooltipPlacementDemoTpl from './templates/TooltipPlacementDemo.html';
+import TooltipAlignDemoTpl from './templates/TooltipAlignDemo.html';
 import TooltipTypesDemoTpl from './templates/TooltipTypesDemo.html';
+import TooltipToggleDemoTpl from './templates/TooltipToggleDemo.html';
 
 const template = `
 <div class="container">
@@ -17,6 +19,10 @@ const template = `
     <div class="example tooltip-demo">${TooltipPlacementDemoTpl}</div>
     <code-snippet [code]="TooltipPlacementDemoTpl"></code-snippet>
 
+    <h5>Alignment</h5>
+    <div class="example tooltip-demo">${TooltipAlignDemoTpl}</div>
+    <code-snippet [code]="TooltipAlignDemoTpl"></code-snippet>
+
     <h5>Types</h5>
     <div class="example tooltip-demo">${TooltipTypesDemoTpl}</div>
     <code-snippet [code]="TooltipTypesDemoTpl"></code-snippet>
@@ -25,8 +31,9 @@ const template = `
     <div class="example tooltip-demo">${TooltipOptionsDemoTpl}</div>
     <code-snippet [code]="TooltipOptionsDemoTpl"></code-snippet>
 
-    <h2>Analytic</h2>
-    <p>Analytic tooltips appear in data visualizations to help provide additional insight into a specific datapoint.</p>
+    <h5>Toggle Trigger</h5>
+    <div class="example tooltip-demo">${TooltipToggleDemoTpl}</div>
+    <code-snippet [code]="TooltipToggleDemoTpl"></code-snippet>
 </div>
 `;
 @Component({
@@ -38,5 +45,11 @@ export class TooltipDemoComponent {
         this.TooltipOptionsDemoTpl = TooltipOptionsDemoTpl;
         this.TooltipTypesDemoTpl = TooltipTypesDemoTpl;
         this.TooltipPlacementDemoTpl = TooltipPlacementDemoTpl;
+        this.TooltipAlignDemoTpl = TooltipAlignDemoTpl;
+        this.TooltipToggleDemoTpl = TooltipToggleDemoTpl;
+    }
+
+    toggleTooltip() {
+        this.tooltipActive = !this.tooltipActive;
     }
 }

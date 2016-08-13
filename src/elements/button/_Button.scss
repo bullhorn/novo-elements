@@ -49,7 +49,7 @@ button {
             }
 
             &[icon] {
-                padding: ($padding-top - 5px) ($padding-side - 10px) ($padding-top - 5px) $padding-side;
+                padding: ($padding-top - 4px) ($padding-side - 10px) ($padding-top - 4px) $padding-side;
 
                 i {
                     background: rgba(0, 0, 0, .15);
@@ -129,9 +129,8 @@ button {
                 }
             }
         }
-        // Secondadry Themed Button
+        // Secondary Themed Button
         &[theme="secondary"] {
-            min-width: 110px;
             text-align: left;
             align-items: center;
             background: #fff;

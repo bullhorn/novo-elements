@@ -57,6 +57,10 @@ In general the column definition will be an object with some basic configuration
     * Determines if the column can be sorted
 - `'filtering' : Bool : default: false`
     * Determines if the column can be filtered
+- `'multiple' : Bool : default: false`
+    * Determines if the column can be filtered by multiple values
+- `'range' : Bool : default: false`
+    * Determines if the filter should include a date range option
 - `'renderer' : Func | Cell : default: null`
     * Custom renderer for the column, useful if it is an embedded object
 - `'compare' : Func : default: null`
@@ -65,3 +69,31 @@ In general the column definition will be an object with some basic configuration
     * Custom match function for the column, used in filtering, useful if it uses an embedded object
 - `'options' : Array : default: null`
     * Custom options for a filter
+
+#### Custom Header
+
+```html
+<novo-table [theme]="theme" [rows]="rows" [columns]="columns" [config]="config" (onTableChange)="onTableChange($event)">
+    <novo-table-header>
+        TEST :)
+    </novo-table-header>
+</novo-table>
+```
+
+#### Custom Actions
+
+```html
+<novo-table [rows]="rows" [columns]="columns" [config]="config" (onTableChange)="onTableChange($event)" #table>
+    <novo-table-actions>
+        <button theme="secondary" (click)="singleAction()">Click Me!</button>
+        <novo-dropdown side="right" *ngIf="table.selected.length">
+            <button theme="primary" icon="collapse" inverse>{{table.selected.length}} Selected</button>
+            <list>
+                <item (action)="selectedAction('action 1')">Action 1</item>
+                <item (action)="selectedAction('action 2')">Action 2</item>
+                <item (action)="selectedAction('action 3')" disabled="true">Action 3</item>
+            </list>
+        </novo-dropdown>
+    </novo-table-actions>
+</novo-table>
+```
