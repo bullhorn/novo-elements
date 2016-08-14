@@ -9,6 +9,7 @@ entity-chips {
     padding-bottom: 5px;
     transition: all 200ms ease-in-out;
     position: relative;
+    margin-top: -10px;
     &:hover {
         border-bottom: 1px solid lighten($dark, 45%);
     }

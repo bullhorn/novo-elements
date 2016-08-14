@@ -1,10 +1,18 @@
 // NG2
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Provider, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { swallowEvent } from './../../utils/Helpers';
 
+// Value accessor for the component (supports ngModel)
+const RADIO_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => NovoRadioElement),
+    multi: true
+});
+
 @Component({
     selector: 'novo-radio',
+    providers: [RADIO_VALUE_ACCESSOR],
     inputs: ['name', 'value', 'checked', 'vertical', 'label'],
     outputs: ['change'],
     template: `
@@ -19,9 +27,15 @@ import { swallowEvent } from './../../utils/Helpers';
         '[class.vertical]': 'vertical'
     }
 })
-export class NovoRadioElement {
+export class NovoRadioElement implements ControlValueAccessor {
     // Emitter for when the value changes
     change:EventEmitter = new EventEmitter();
+
+    model:any;
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
 
     /**
      * Handles the select of the radio button, will only change if a new radio is selected
@@ -34,6 +48,19 @@ export class NovoRadioElement {
         if (!radio.checked) {
             radio.checked = !radio.checked;
             this.change.emit(this.value);
+            this.onModelChange(this.value);
         }
+    }
+
+    writeValue(model:any):void {
+        this.model = model;
+    }
+
+    registerOnChange(fn:Function):void {
+        this.onModelChange = fn;
+    }
+
+    registerOnTouched(fn:Function):void {
+        this.onModelTouched = fn;
     }
 }

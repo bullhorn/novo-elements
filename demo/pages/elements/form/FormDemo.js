@@ -70,6 +70,16 @@ export class PickerControl extends ControlBase {
     }
 }
 
+export class RadioControl extends ControlBase {
+    controlType = 'radio';
+    options = [];
+
+    constructor(config = {}) {
+        super(config);
+        this.options = config.options || [];
+    }
+}
+
 @Component({
     selector: 'form-demo',
     template: `
@@ -166,9 +176,18 @@ export class FormDemoComponent {
         ];
 
         let questions = [
+            new RadioControl({
+                key: 'radio',
+                label: 'Basic Radio',
+                options: [
+                    { key: 'yes', value: 'Yes' },
+                    { key: 'no', value: 'No' }
+                ]
+            }),
+
             new DropdownControl({
-                key: 'brave',
-                label: 'Bravery Rating',
+                key: 'select',
+                label: 'Basic Select',
                 // hidden: true,
                 options: [
                     { key: 'solid', value: 'Solid' },
@@ -181,22 +200,23 @@ export class FormDemoComponent {
 
             new TextboxControl({
                 key: 'firstName',
-                label: 'First name',
+                label: 'Basic Text',
                 required: true,
                 order: 1
             }),
 
             new TextboxControl({
                 key: 'emailAddress',
-                label: 'Email',
+                label: 'Basic Email',
                 type: 'email',
+                placeholder: 'PLACEHOLDER',
                 // hidden: true,
                 order: 2
             }),
 
             new TilesControl({
                 key: 'tiles',
-                label: 'Test',
+                label: 'Tiles',
                 required: true,
                 options: [
                     { value: 'solid', label: 'Solid' },

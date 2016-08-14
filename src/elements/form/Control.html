@@ -6,7 +6,7 @@
     <!--Form Controls-->
     <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType">
         <!--Text-based Inputs-->
-        <input *ngSwitchCase="'textbox'" [formControlName]="control.key" [id]="control.key" [type]="control.type">
+        <input *ngSwitchCase="'textbox'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder">
         <!--HTML5 Select-->
         <select [id]="control.key" *ngSwitchCase="'dropdown'" [formControlName]="control.key">
             <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>
@@ -21,6 +21,10 @@
         </div>
         <!--Novo Select-->
         <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key"></novo-select>
+        <!--Radio-->
+        <div class="novo-control-input-container" *ngSwitchCase="'radio'">
+            <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of control.options" [value]="option.key" [label]="option.value"></novo-radio>
+        </div>
         <!--Error Message-->
         <div class="error-message" *ngIf="!isValid && isDirty">{{control.label | uppercase}} is required</div>
     </div>
