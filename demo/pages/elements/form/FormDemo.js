@@ -17,6 +17,7 @@ export class ControlBase {
         this.config = config.config || null;
         this.multiple = !!config.multiple;
         this.headerConfig = config.headerConfig || null;
+        this.currencyFormat = config.currencyFormat || null;
     }
 }
 
@@ -25,7 +26,19 @@ export class TextboxControl extends ControlBase {
 
     constructor(config = {}) {
         super(config);
-        this.type = config.type || '';
+        this.type = this.getTextboxType(config.type) || '';
+        this.subType = config.type || '';
+    }
+
+    getTextboxType(type) {
+        switch (type) {
+            case 'percentage':
+            case 'currency':
+            case 'float':
+                return 'number';
+            default:
+                return type;
+        }
     }
 }
 
@@ -209,6 +222,43 @@ export class FormDemoComponent {
                 key: 'emailAddress',
                 label: 'Basic Email',
                 type: 'email',
+                placeholder: 'PLACEHOLDER',
+                // hidden: true,
+                order: 2
+            }),
+
+            new TextboxControl({
+                key: 'number',
+                label: 'Basic Number',
+                type: 'number',
+                placeholder: 'PLACEHOLDER',
+                // hidden: true,
+                order: 2
+            }),
+
+            new TextboxControl({
+                key: 'float',
+                label: 'Basic Float',
+                type: 'float',
+                placeholder: 'PLACEHOLDER',
+                // hidden: true,
+                order: 2
+            }),
+
+            new TextboxControl({
+                key: 'currency',
+                label: 'Basic Currency',
+                type: 'currency',
+                placeholder: 'PLACEHOLDER',
+                currencyFormat: 'USD',
+                // hidden: true,
+                order: 2
+            }),
+
+            new TextboxControl({
+                key: 'percentage',
+                label: 'Basic Percentage',
+                type: 'percentage',
                 placeholder: 'PLACEHOLDER',
                 // hidden: true,
                 order: 2

@@ -108,6 +108,20 @@ novo-form, novo-dynamic-form {
                                 background: transparent !important;
                             }
 
+                            > div.novo-control-input-with-label {
+                                display: flex;
+                                align-items: center;
+
+                                input {
+                                    flex: 1;
+                                }
+
+                                label.input-label {
+                                    padding-left: 5px;
+                                    color: lighten($dark, 47%);
+                                }
+                            }
+
                             > div.novo-control-input-container {
                                 font-size: 1rem;
                                 flex: 1;

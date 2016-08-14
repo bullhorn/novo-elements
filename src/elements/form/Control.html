@@ -6,7 +6,11 @@
     <!--Form Controls-->
     <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType">
         <!--Text-based Inputs-->
-        <input *ngSwitchCase="'textbox'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder">
+        <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'">
+            <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder">
+            <label class="input-label" *ngIf="control.subType === 'currency'">{{getCurrencyLabel(control.currencyFormat)}}</label>
+            <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
+        </div>
         <!--HTML5 Select-->
         <select [id]="control.key" *ngSwitchCase="'dropdown'" [formControlName]="control.key">
             <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>

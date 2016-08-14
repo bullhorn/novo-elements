@@ -20,6 +20,32 @@ export class NovoControlElement {
     get isDirty() {
         return this.form.controls[this.control.key].dirty;
     }
+
+    getCurrencyLabel(currencyFormat) {
+        let moneySymbol;
+        switch (currencyFormat) {
+            case 'USD':
+            case 'CAD':
+            case 'AUD':
+            case 'HKD':
+            case 'NZD':
+                moneySymbol = '$';
+                break;
+            case 'GBP':
+                moneySymbol = '£';
+                break;
+            case 'EUR':
+                moneySymbol = '€';
+                break;
+            case 'JPY':
+                moneySymbol = '¥';
+                break;
+            default:
+                moneySymbol = '';
+                break;
+        }
+        return `${moneySymbol} ${currencyFormat || ''}`.trim();
+    }
 }
 
 @Component({
