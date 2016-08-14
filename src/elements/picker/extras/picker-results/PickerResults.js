@@ -1,9 +1,10 @@
+// NG2
 import { Component, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-
+// APP
 import { interpolate } from './../../../../utils/Helpers';
-import { NOVO_LOADING_ELEMENTS } from './../../../loading/Loading';
-import { NovoLabelService } from './../../../../novo-elements';
+import { NovoLabelService } from './../../../../services/novo-label-service';
+// Vendor
+import { Observable } from 'rxjs/Rx';
 
 /**
  * @name: PickerResults
@@ -16,7 +17,6 @@ import { NovoLabelService } from './../../../../novo-elements';
     host: {
         'class': 'active'
     },
-    directives: [NOVO_LOADING_ELEMENTS],
     template: `
         <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
         <ul *ngIf="matches.length > 0">

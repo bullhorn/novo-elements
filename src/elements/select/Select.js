@@ -1,13 +1,14 @@
+// NG2
 import { Component, Input, Output, EventEmitter, forwardRef, Provider, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-
-import { OutsideClick } from './../../utils/outside-click/OutsideClick';
+// APP
+import { OutsideClick } from './../../utils/outside-click/OutsideClick'; // TODO - change imports
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { NovoLabelService } from './../../novo-elements';
+import { NovoLabelService } from './../../services/novo-label-service';
 
 // Value accessor for the component (supports ngModel)
 const SELECT_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => Select),
+    useExisting: forwardRef(() => NovoSelectElement),
     multi: true
 });
 
@@ -39,7 +40,7 @@ const SELECT_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         '[class.active]': 'active'
     }
 })
-export class Select extends OutsideClick {
+export class NovoSelectElement extends OutsideClick {
     @Input() options:Array;
     @Input() placeholder:String = 'Select...';
     @Input() readonly:boolean;
@@ -233,5 +234,3 @@ export class Select extends OutsideClick {
         this.onModelTouched = fn;
     }
 }
-
-export const NOVO_SELECT_ELEMENTS = [Select];

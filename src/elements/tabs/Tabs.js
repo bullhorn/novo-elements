@@ -14,10 +14,6 @@ export class NovoNavElement {
     }
 
     select(item) {
-        /**
-         * Deactivates other tab items
-         * @param items - deactivated items
-         */
         function _deactivateAllItems(items) {
             items.forEach((t) => {
                 if (t.active === true) {
@@ -33,7 +29,7 @@ export class NovoNavElement {
             this.outlet.show(this.items.indexOf(item));
         }
 
-        // TODO - remove hack to make DOM rerender
+        // TODO - remove hack to make DOM rerender - jgodi
         let element = document.querySelector('novo-tab-link.active span.indicator');
         if (element) {
             element.style.opacity = 0.99;
@@ -41,7 +37,6 @@ export class NovoNavElement {
                 element.style.opacity = 1;
             }, 10);
         }
-        // item.selected.next();
     }
 
     add(item) {

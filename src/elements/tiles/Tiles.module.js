@@ -2,12 +2,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // APP
-import { TilesElement } from './Tiles';
+import { NovoTilesElement } from './Tiles';
 
 @NgModule({
     imports: [CommonModule],
-    declarations: [TilesElement],
-    exports: [TilesElement]
+    declarations: [NovoTilesElement],
+    exports: [NovoTilesElement]
 })
 export class NovoTilesModule {
 }

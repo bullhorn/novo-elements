@@ -1,60 +1,18 @@
-import { Component, ElementRef } from '@angular/core';
-import { Tiles } from './Tiles';
-import { testComponent, grabComponent } from './../../testing/TestHelpers';
-import { NovoLabelService } from '../../services/novo-label-service';
-
-class MockElementRef {
-    nativeElement:HTMLDivElement = document.createElement('div');
-
-    constructor() {
-        this.nativeElement.querySelector = () => {
-            return document.createElement('div');
-        };
-    }
-}
-
-@Component({
-    selector: 'test-cmp',
-    directives: [Tiles],
-    template: '<novo-tiles [options]="demoTiles" (onChange)="colorSelect($event)" [(ngModel)]="value"></novo-tiles>'
-})
-class TestCmp {
-    constructor() {
-        this.demoTiles = [
-            {
-                label: '1',
-                value: '1'
-            },
-            {
-                label: '2',
-                value: '2'
-            },
-            {
-                label: '3',
-                value: '3'
-            }
-        ];
-    }
-}
+// APP
+import { NovoTilesElement } from './Tiles';
+import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
 
 describe('Element: Tiles', () => {
     let comp;
-    beforeEachProviders(() => [
-        Tiles,
-        NovoLabelService,
-        { provide: ElementRef, useClass: MockElementRef }
-    ]);
 
-    it('should initialize correctly', testComponent(TestCmp, (fixture) => {
-        const { instance, element, testComponentInstance, testComponentElement } = grabComponent(fixture, Tiles);
-        expect(instance).toBeTruthy();
-        expect(element).toBeTruthy();
-        expect(element.outerHTML).toContain('novo-tiles');
-        expect(testComponentInstance).toBeTruthy();
-        expect(testComponentElement).toBeTruthy();
-    }));
+    beforeEach(() => {
+        addProviders([
+            NovoTilesElement,
+            APP_TEST_PROVIDERS
+        ]);
+    });
 
-    beforeEach(inject([Tiles], _comp => {
+    beforeEach(inject([NovoTilesElement], _comp => {
         comp = _comp;
         comp.options = [
             {
@@ -123,7 +81,7 @@ describe('Element: Tiles', () => {
 
         it('should change the value', () => {
             comp.writeValue(10);
-            expect(comp.value).toBe(10);
+            expect(comp.model).toBe(10);
         });
     });
 

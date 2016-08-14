@@ -1,3 +1,4 @@
+// NG2
 import { Directive, EventEmitter, ElementRef } from '@angular/core';
 
 @Directive({

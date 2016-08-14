@@ -1,8 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 // Vendor
-// TODO - add back!
-// import { ToastService, NovoToast } from './../../../src/novo-elements';
+import { NovoToastService } from './../../../../src/novo-elements';
 
 @Component({
     selector: 'color',
@@ -11,7 +10,9 @@ import { Component } from '@angular/core';
 export class ColorComponent {
     color:String = 'background';
 
-    constructor() {
+    constructor(toaster:NovoToastService) {
+        this.toaster = toaster;
+
         this.primaryColors = [
             {
                 name: 'navigation',
@@ -158,6 +159,6 @@ export class ColorComponent {
         if (color.name === 'action') this.options.theme = 'ocean';
 
         // Fire toast
-        // this.toaster.alert(NovoToast, this.options);
+        this.toaster.alert(this.options);
     }
 }

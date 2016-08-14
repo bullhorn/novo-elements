@@ -91,7 +91,7 @@
             <span class="menu-item-header">Components</span>
         </li>
         <li class="menu-item" *ngFor="let route of componentRoutes" routerLinkActive="current" [routerLinkActiveOptions]="{exact: true}">
-        <a [routerLink]="route.path" class="menu-link">{{route.name}}</a>
+            <a [routerLink]="route.path" class="menu-link">{{route.name}}</a>
         </li>
         <li class="menu-section-header">
             <span class="menu-item-header">Utils</span>

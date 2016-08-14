@@ -1,17 +1,19 @@
+// NG2
 import { Component, Input, Output, EventEmitter, forwardRef, Provider } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-
+// APP
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
 // Value accessor for the component (supports ngModel)
 const SWITCH_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => NovoSwitch),
+    useExisting: forwardRef(() => NovoSwitchElement),
     multi: true
 });
 
 @Component({
     selector: 'novo-switch',
     providers: [SWITCH_VALUE_ACCESSOR],
+    inputs: ['theme'],
     template: `
         <div (click)="toggle($event)">
             <div class="novo-switch-container">
@@ -27,10 +29,11 @@ const SWITCH_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         'role': 'checkbox',
         '[attr.aria-checked]': 'model',
         '[attr.aria-disabled]': 'disabled',
-        '(keydown)': 'onKeydown($event)'
+        '(keydown)': 'onKeydown($event)',
+        '[class]': 'theme'
     }
 })
-export class NovoSwitch implements ControlValueAccessor {
+export class NovoSwitchElement implements ControlValueAccessor {
     @Output() onChange:EventEmitter<any> = new EventEmitter();
 
     _disabled:boolean = false;
@@ -83,5 +86,3 @@ export class NovoSwitch implements ControlValueAccessor {
         this.onModelTouched = fn;
     }
 }
-
-export const NOVO_SWITCH_ELEMENTS = [NovoSwitch];

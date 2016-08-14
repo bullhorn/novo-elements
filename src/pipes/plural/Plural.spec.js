@@ -1,4 +1,4 @@
-import { describe, it, beforeEach } from '@angular/core/testing';
+// APP
 import { PluralPipe } from './Plural';
 
 describe('Pipe: Plural', () => {

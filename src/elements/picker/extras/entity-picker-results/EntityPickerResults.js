@@ -1,7 +1,7 @@
+// NG2
 import { Component, ElementRef } from '@angular/core';
-
+// APP
 import { PickerResults } from './../picker-results/PickerResults';
-import { NOVO_LIST_ELEMENTS } from './../../../list';
 
 @Component({
     selector: 'entity-picker-results',
@@ -51,8 +51,7 @@ import { NOVO_LIST_ELEMENTS } from './../../../list';
                 </item-content>
             </novo-list-item>
         </novo-list>
-    `,
-    directives: [NOVO_LIST_ELEMENTS]
+    `
 })
 export class EntityPickerResults extends PickerResults {
     constructor(element:ElementRef) {

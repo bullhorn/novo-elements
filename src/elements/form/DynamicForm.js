@@ -1,14 +1,32 @@
+// NG2
 import { Component, Input } from '@angular/core';
-import { FormGroup, REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
-import { NovoControl } from './Control';
+@Component({
+    selector: 'novo-control',
+    template: require('./Control.html'),
+    host: {
+        '[hidden]': 'control.hidden'
+    }
+})
+export class NovoControlElement {
+    @Input() control;
+    @Input() form:FormGroup;
+
+    get isValid() {
+        return this.form.controls[this.control.key].valid;
+    }
+
+    get isDirty() {
+        return this.form.controls[this.control.key].dirty;
+    }
+}
 
 @Component({
     selector: 'novo-dynamic-form',
-    directives: [REACTIVE_FORM_DIRECTIVES, NovoControl],
     template: require('./DynamicForm.html')
 })
-export class NovoDynamicForm {
+export class NovoDynamicFormElement {
     @Input() controls = [];
     @Input() form:FormGroup;
 

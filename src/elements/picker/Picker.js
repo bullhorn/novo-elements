@@ -1,14 +1,16 @@
+// NG2
 import { Component, EventEmitter, ElementRef, DynamicComponentLoader, ViewContainerRef, forwardRef, Provider } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Observable } from 'rxjs/Rx';
-
+// APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { PickerResults } from './extras/PickerExtras';
+import { PickerResults } from './extras/picker-results/PickerResults';
+// Vendor
+import { Observable } from 'rxjs/Rx';
 
 // Value accessor for the component (supports ngModel)
 const PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => Picker),
+    useExisting: forwardRef(() => NovoPickerElement),
     multi: true
 });
 
@@ -37,7 +39,7 @@ const PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
     `
 
 })
-export class Picker extends OutsideClick {
+export class NovoPickerElement extends OutsideClick {
     // Emitter for selects
     select:EventEmitter = new EventEmitter();
     focus:EventEmitter = new EventEmitter();
@@ -175,7 +177,7 @@ export class Picker extends OutsideClick {
     }
 
     //set accessor including call the onchange callback
-    set value(selected:any) {
+    set value(selected) {
         if (!selected) {
             this.term = '';
             this._value = null;
@@ -222,5 +224,3 @@ export class Picker extends OutsideClick {
         this.onModelTouched = fn;
     }
 }
-
-export const NOVO_PICKER_ELEMENTS = [Picker, PickerResults];

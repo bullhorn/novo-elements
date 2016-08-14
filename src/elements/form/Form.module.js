@@ -1,0 +1,15 @@
+// NG2
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+// APP
+import { NovoTilesModule, NovoSelectModule, NovoPickerModule, NovoChipsModule } from './../../novo-elements';
+import { NovoDynamicFormElement, NovoControlElement } from './DynamicForm';
+
+@NgModule({
+    imports: [CommonModule, ReactiveFormsModule, NovoTilesModule, NovoSelectModule, NovoPickerModule, NovoChipsModule],
+    declarations: [NovoControlElement, NovoDynamicFormElement],
+    exports: [NovoDynamicFormElement, NovoControlElement]
+})
+export class NovoFormModule {
+}

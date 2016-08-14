@@ -2,16 +2,19 @@
 import { Component, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 // Vendor
-import { NovoToastService } from './../../src/novo-elements';
+import { NovoToastService, NovoModalService } from './../../src/novo-elements';
 
 @Component({
     selector: 'demo-app',
     template: require('./App.html')
 })
 export class DemoComponent {
-    constructor(router:Router, viewContainerRef:ViewContainerRef, toaster:NovoToastService) {
+    constructor(router:Router, viewContainerRef:ViewContainerRef, toaster:NovoToastService, modalService:NovoModalService) {
         this.viewContainerRef = viewContainerRef;
+
         toaster.parentViewContainer = viewContainerRef;
+        modalService.parentViewContainer = viewContainerRef;
+
         this.menuOpen = false;
         this.version = VERSION;
 
@@ -49,7 +52,9 @@ export class DemoComponent {
             { name: 'Calendar', path: '/calendar' },
             { name: 'Dragula', path: '/dragula' },
             { name: 'Tiles', path: '/tiles' },
-            { name: 'Slides', path: '/slides' }
+            { name: 'Slides', path: '/slides' },
+            { name: 'Editor', path: '/editor' },
+            { name: 'TipWell', path: '/tipwell' }
         ].sort((a, b) => {
             if (a.name < b.name) return -1;
             if (a.name > b.name) return 1;

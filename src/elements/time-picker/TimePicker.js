@@ -1,12 +1,14 @@
+// NG2
 import { Component, EventEmitter, forwardRef, Provider } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import moment from 'moment/moment';
-
+// APP
 import { swallowEvent } from './../../utils/Helpers';
+// Vendor
+import moment from 'moment/moment';
 
 // Value accessor for the component (supports ngModel)
 const TIME_PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => TimePicker),
+    useExisting: forwardRef(() => NovoTimePickerElement),
     multi: true
 });
 
@@ -50,7 +52,7 @@ const TIME_PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         '[class.military]': 'military'
     }
 })
-export class TimePicker implements ControlValueAccessor {
+export class NovoTimePickerElement implements ControlValueAccessor {
     hours = 12;
     minutes = 0;
     value = null;
@@ -177,5 +179,3 @@ export class TimePicker implements ControlValueAccessor {
         this.onModelTouched = fn;
     }
 }
-
-export const NOVO_TIME_PICKER_ELEMENTS = [TimePicker];

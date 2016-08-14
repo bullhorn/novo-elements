@@ -1,10 +1,10 @@
-import { Tooltip } from './Tooltip';
+import { TooltipDirective } from './Tooltip';
 
 describe('Element: Tooltip', () => {
     let tooltip;
 
     beforeEach(() => {
-        tooltip = new Tooltip();
+        tooltip = new TooltipDirective();
     });
 
     it('should set the position when none is set', () => {

@@ -1,12 +1,8 @@
-import { describe, beforeEach, beforeEachProviders } from '@angular/core/testing';
-
+// APP
 import { OutsideClick } from './OutsideClick';
 
 describe('Util: OutsideClick', () => {
     let instance;
-
-    // Inject whatever needed to fulfill DI
-    beforeEachProviders(() => []);
 
     beforeEach(() => {
         instance = new OutsideClick({});

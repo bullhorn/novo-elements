@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 // APP
 import { Home } from './../pages/home/Home';
 import { ColorComponent, TypographyComponent, CompositionComponent, IconographyComponent } from './../pages/design/all';
+import { PipesDemoComponent, UtilsDemoComponent } from './../pages/utils/all';
 import {
     ButtonDemoComponent,
     LoadingDemoComponent,
@@ -11,7 +12,24 @@ import {
     TooltipDemoComponent,
     HeaderDemoComponent,
     TabsDemoComponent,
-    TilesDemoComponent
+    TilesDemoComponent,
+    ModalDemoComponent,
+    QuickNoteDemoComponent,
+    RadioDemoComponent,
+    DropdownDemoComponent,
+    SelectDemoComponent,
+    ListDemoComponent,
+    SwitchDemoComponent,
+    DrawerDemoComponent,
+    DragulaDemoComponent,
+    SlidesDemoComponent,
+    PickerDemoComponent,
+    ChipsDemoComponent,
+    CalendarDemoComponent,
+    EditorDemoComponent,
+    TipWellDemoComponent,
+    TableDemoComponent,
+    FormDemoComponent
 } from './../pages/elements/all';
 
 export const routes:Routes = [
@@ -27,32 +45,34 @@ export const routes:Routes = [
 
     // Element/Component/Service/etc.. Demos
     { path: 'button', component: ButtonDemoComponent },
-    // { path: 'radio', component: 'RadioDemo' },
-    // { path: 'quick-note', component: 'QuickNoteDemo' },
-    // { path: 'modal', component: 'ModalDemo' },
-    // { path: 'form', component: 'FormDemo' },
+    { path: 'radio', component: RadioDemoComponent },
+    { path: 'quick-note', component: QuickNoteDemoComponent },
+    { path: 'modal', component: ModalDemoComponent },
+    { path: 'form', component: FormDemoComponent },
     { path: 'toast', component: ToastDemoComponent },
     { path: 'tooltip', component: TooltipDemoComponent },
     { path: 'cards', component: CardDemoComponent },
     { path: 'loading', component: LoadingDemoComponent },
-    // { path: 'dropdown', component: 'DropdownDemo' },
-    // { path: 'picker', component: 'PickerDemo' },
-    // { path: 'chips', component: 'ChipsDemo' },
-    // { path: 'select', component: 'SelectDemo' },
+    { path: 'dropdown', component: DropdownDemoComponent },
+    { path: 'picker', component: PickerDemoComponent },
+    { path: 'chips', component: ChipsDemoComponent },
+    { path: 'select', component: SelectDemoComponent },
     { path: 'tabs', component: TabsDemoComponent },
-    // { path: 'table', component: 'TableDemo' },
-    // { path: 'list', component: 'ListDemo' },
+    { path: 'table', component: TableDemoComponent },
+    { path: 'list', component: ListDemoComponent },
     { path: 'header', component: HeaderDemoComponent },
-    // { path: 'switch', component: 'SwitchDemo' },
-    // { path: 'drawer', component: 'DrawerDemo' },
-    // { path: 'calendar', component: 'CalendarDemo' },
-    // { path: 'dragula', component: 'DragulaDemo' },
+    { path: 'switch', component: SwitchDemoComponent },
+    { path: 'drawer', component: DrawerDemoComponent },
+    { path: 'calendar', component: CalendarDemoComponent },
+    { path: 'dragula', component: DragulaDemoComponent },
     { path: 'tiles', component: TilesDemoComponent },
-    // { path: 'slides', component: 'SlidesDemo' },
+    { path: 'slides', component: SlidesDemoComponent },
+    { path: 'editor', component: EditorDemoComponent },
+    { path: 'tipwell', component: TipWellDemoComponent },
 
     // Utils
-    // { path: 'utils', component: 'UtilsDemo' },
-    // { path: 'pipes', component: 'PipesDemo' },
+    { path: 'utils', component: UtilsDemoComponent },
+    { path: 'pipes', component: PipesDemoComponent },
 
     // Catch All
     { path: '**', redirectTo: '/' }

@@ -1,13 +1,14 @@
+// NG2
 import { Component, EventEmitter, forwardRef, Provider, ElementRef, ComponentResolver, ViewChild, ViewContainerRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-
+// APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
 
 // Value accessor for the component (supports ngModel)
 const QUICK_NOTE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => QuickNote),
+    useExisting: forwardRef(() => QuickNoteElement),
     multi: true
 });
 
@@ -33,7 +34,7 @@ const QUICK_NOTE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         </div>
     `
 })
-export class QuickNote extends OutsideClick {
+export class QuickNoteElement extends OutsideClick {
     // Emitter for selects
     focus:EventEmitter = new EventEmitter();
     blur:EventEmitter = new EventEmitter();
@@ -310,5 +311,3 @@ export class QuickNote extends OutsideClick {
         this.onModelTouched = fn;
     }
 }
-
-export const NOVO_QUICK_NOTE_ELEMENTS = [QuickNote];

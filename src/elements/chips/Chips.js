@@ -1,13 +1,13 @@
+// NG2
 import { Component, EventEmitter, forwardRef, Provider, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-
+// APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { NOVO_PICKER_ELEMENTS } from '../picker/Picker';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => Chips),
+    useExisting: forwardRef(() => NovoChipsElement),
     multi: true
 });
 
@@ -23,7 +23,7 @@ const CHIPS_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         <i class="bhi-close" (click)="onRemove($event)"></i>
   `
 })
-export class Chip {
+export class NovoChipElement {
     select:EventEmitter = new EventEmitter();
     remove:EventEmitter = new EventEmitter();
     entity:string;
@@ -51,7 +51,6 @@ export class Chip {
     selector: 'chips',
     inputs: ['source', 'placeholder', 'value', 'type'],
     outputs: ['changed', 'focus', 'blur'],
-    directives: [NOVO_PICKER_ELEMENTS, Chip],
     providers: [CHIPS_VALUE_ACCESSOR],
     template: `
         <chip
@@ -76,7 +75,7 @@ export class Chip {
         </div>
    `
 })
-export class Chips extends OutsideClick {
+export class NovoChipsElement extends OutsideClick {
     changed:EventEmitter = new EventEmitter();
     focus:EventEmitter = new EventEmitter();
     blur:EventEmitter = new EventEmitter();
@@ -175,7 +174,7 @@ export class Chips extends OutsideClick {
     }
 
     //set accessor including call the onchange callback
-    set value(selected:any) {
+    set value(selected) {
         this.itemToAdd = '';
         if (selected !== this._value) {
             this._value = selected;
@@ -206,5 +205,3 @@ export class Chips extends OutsideClick {
         this.onModelTouched = fn;
     }
 }
-
-export const NOVO_CHIPS_ELEMENTS = [Chips, Chip];

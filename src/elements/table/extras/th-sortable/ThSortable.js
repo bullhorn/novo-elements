@@ -1,11 +1,9 @@
+// NG2
 import { Directive, EventEmitter } from '@angular/core';
 
 @Directive({
     selector: '[novoThSortable]',
-    inputs: [
-        'config: novoThSortable',
-        'column'
-    ],
+    inputs: ['config: novoThSortable', 'column'],
     outputs: ['onSortChange'],
     host: {
         '(click)': 'onToggleSort($event, $target)'

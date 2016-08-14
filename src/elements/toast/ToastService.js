@@ -5,7 +5,7 @@ import { NovoToastElement } from './Toast';
 
 @Injectable()
 export class NovoToastService {
-    // TODO - use ComponentFactoryResolver instead
+    // TODO - use ComponentFactoryResolver instead - jgodi
     constructor(componentResolver:ComponentResolver) {
         this.componentResolver = componentResolver;
         this.references = [];

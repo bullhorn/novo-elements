@@ -6,6 +6,8 @@ import FullConfigCardDemoTpl from './templates/FullConfigCardDemo.html';
 import ExtrasTimelineDemoTpl from './templates/ExtrasTimelineDemo.html';
 import ExtrasBestTimeDemoTpl from './templates/ExtrasBestTimeDemo.html';
 import ExtrasChartDonutDemoTpl from './templates/ExtrasChartDemoDemo.html';
+// Vendor
+import { NovoToastService } from './../../../../src/novo-elements';
 
 // TODO - actions back in
 const template = `
@@ -71,8 +73,8 @@ const template = `
     template: template
 })
 export class CardDemoComponent {
-    constructor() {
-        // this.toastService = toastService;
+    constructor(toaster:NovoToastService) {
+        this.toaster = toaster;
 
         // Templates
         this.AttributeCardDemoTpl = AttributeCardDemoTpl;
@@ -114,21 +116,19 @@ export class CardDemoComponent {
     }
 
     onClose() {
-        // TODO
-        // this.toastService.alert(NovoToast, {
-        //     theme: 'info',
-        //     title: 'Cards',
-        //     message: 'Close Clicked!'
-        // });
+        this.toaster.alert({
+            theme: 'info',
+            title: 'Cards',
+            message: 'Close Clicked!'
+        });
     }
 
     onRefresh() {
-        // TODO
-        // this.toastService.alert(NovoToast, {
-        //     theme: 'success',
-        //     title: 'Cards',
-        //     message: 'Refresh Clicked!'
-        // });
+        this.toaster.alert({
+            theme: 'success',
+            title: 'Cards',
+            message: 'Refresh Clicked!'
+        });
     }
 
     toggleLoading() {

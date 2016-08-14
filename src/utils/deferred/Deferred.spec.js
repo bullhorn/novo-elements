@@ -1,5 +1,4 @@
-import { describe, expect, it, beforeEach } from '@angular/core/testing';
-
+// APP
 import { Deferred } from './Deferred';
 
 describe('Service: Deferred', () => {

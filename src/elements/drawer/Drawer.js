@@ -1,3 +1,4 @@
+// NG2
 import { Directive, OnInit, OnDestroy, EventEmitter, ElementRef } from '@angular/core';
 
 export const ALWAYS = 'always';
@@ -66,7 +67,7 @@ const drawerService = new DrawerService();
         '[class.open]': 'isOpen'
     }
 })
-export class Drawer implements OnInit, OnDestroy {
+export class NovoDrawerElement implements OnInit, OnDestroy {
     constructor(el:ElementRef) {
         this.el = el;
         this.onDrawerToggle = new EventEmitter();
@@ -120,8 +121,8 @@ export class Drawer implements OnInit, OnDestroy {
 @Directive({
     selector: '[drawerContent], .drawer-content'
 })
-export class DrawerContent implements OnInit {
-    constructor(drawer:Drawer, el:ElementRef) {
+export class NovoDrawerContentElement implements OnInit {
+    constructor(drawer:NovoDrawerElement, el:ElementRef) {
         this.drawer = drawer;
         this.el = el;
     }
@@ -140,8 +141,8 @@ export class DrawerContent implements OnInit {
         '[class.disabled]': 'disabled'
     }
 })
-export class DrawerToggle implements OnInit {
-    constructor(drawer:Drawer, el:ElementRef) {
+export class NovoDrawerToggleElement implements OnInit {
+    constructor(drawer:NovoDrawerElement, el:ElementRef) {
         this.el = el;
         this.disabled = false;
         this.drawer = drawer;
@@ -164,5 +165,3 @@ export class DrawerToggle implements OnInit {
         }
     }
 }
-
-export const NOVO_DRAWER_ELEMENTS = [Drawer, DrawerContent, DrawerToggle];

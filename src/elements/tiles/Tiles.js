@@ -4,7 +4,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 // Value accessor for the component (supports ngModel)
 const TILES_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => TilesElement),
+    useExisting: forwardRef(() => NovoTilesElement),
     multi: true
 });
 
@@ -23,7 +23,7 @@ const TILES_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         </div>
     `
 })
-export class TilesElement implements ControlValueAccessor {
+export class NovoTilesElement implements ControlValueAccessor {
     @Input() name:String;
     @Input() options:any;
     @Input() required:boolean;
@@ -91,7 +91,8 @@ export class TilesElement implements ControlValueAccessor {
             let w = el.clientWidth;
             let left = el.offsetLeft;
 
-            // These style adjustments need to occur in this order. TODO: Remove this and use ngAnimate2 - @asibilia
+            // These style adjustments need to occur in this order.
+            // TODO: Remove this and use ngAnimate2 - @asibilia
             setTimeout(() => {
                 ind.style.width = `${w + 4}px`;
                 setTimeout(() => {

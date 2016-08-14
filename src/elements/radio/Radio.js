@@ -1,5 +1,6 @@
+// NG2
 import { Component, EventEmitter } from '@angular/core';
-
+// APP
 import { swallowEvent } from './../../utils/Helpers';
 
 @Component({
@@ -18,7 +19,7 @@ import { swallowEvent } from './../../utils/Helpers';
         '[class.vertical]': 'vertical'
     }
 })
-export class Radio {
+export class NovoRadioElement {
     // Emitter for when the value changes
     change:EventEmitter = new EventEmitter();
 
@@ -36,5 +37,3 @@ export class Radio {
         }
     }
 }
-
-export const NOVO_RADIO_ELEMENTS = [Radio];

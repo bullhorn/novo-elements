@@ -1,12 +1,14 @@
+// NG2
 import { Component, EventEmitter, forwardRef, Provider } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import moment from 'moment/moment';
-
+// APP
 import { swallowEvent } from './../../utils/Helpers';
+// Vendor
+import moment from 'moment/moment';
 
 // Value accessor for the component (supports ngModel)
 const DATE_PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => DatePicker),
+    useExisting: forwardRef(() => NovoDatePickerElement),
     multi: true
 });
 
@@ -70,7 +72,7 @@ const DATE_PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         </div>
     `
 })
-export class DatePicker implements ControlValueAccessor {
+export class NovoDatePickerElement implements ControlValueAccessor {
     // Select callback for output
     onSelect = new EventEmitter(false);
     // List of all the weekdays (use moment to localize)
@@ -310,5 +312,3 @@ export class DatePicker implements ControlValueAccessor {
         this.onModelTouched = fn;
     }
 }
-
-export const NOVO_DATE_PICKER_ELEMENTS = [DatePicker];

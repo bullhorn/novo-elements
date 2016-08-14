@@ -1,23 +1,12 @@
+// NG2
 import { Component, EventEmitter } from '@angular/core';
-import { CORE_DIRECTIVES } from '@angular/common';
-
+// APP
 import { NovoLabelService } from './../../../../services/novo-label-service';
-import { NOVO_SELECT_ELEMENTS } from '../../../select';
 
 @Component({
     selector: 'novo-pagination',
-    inputs: [
-        'page',
-        'totalItems',
-        'itemsPerPage',
-        'rowOptions',
-        'label'
-    ],
+    inputs: ['page', 'totalItems', 'itemsPerPage', 'rowOptions', 'label'],
     outputs: ['onPageChange'],
-    directives: [
-        CORE_DIRECTIVES,
-        NOVO_SELECT_ELEMENTS
-    ],
     template: `
         <h5 class="rows">{{label}}</h5>
         <novo-select [options]="rowOptions" [placeholder]="labels.select" [(ngModel)]="itemsPerPage" (onSelect)="onPageSizeChanged($event)" data-automation-id="pager-select"></novo-select>

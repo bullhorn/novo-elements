@@ -1,3 +1,4 @@
+// NG2
 import { Injectable, Pipe } from '@angular/core';
 
 // Rule storage - pluralize and singularize need to be run sequentially,

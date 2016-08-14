@@ -1,7 +1,8 @@
+// NG2
 import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable()
-export class DragulaService {
+export class NovoDragulaService {
     constructor() {
         this.cancel = new EventEmitter();
         this.cloned = new EventEmitter();
