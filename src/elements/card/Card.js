@@ -50,10 +50,12 @@ import { Component, EventEmitter } from '@angular/core';
     `
 })
 export class CardElement {
+    config:any = {};
+    onClose:EventEmitter = new EventEmitter();
+    onRefresh:EventEmitter = new EventEmitter();
+    padding:boolean = true;
+
     constructor() {
-        this.onClose = new EventEmitter();
-        this.onRefresh = new EventEmitter();
-        this.padding = true;
     }
 
     ngOnInit() {
