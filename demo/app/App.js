@@ -18,62 +18,20 @@ export class DemoComponent {
         this.menuOpen = false;
         this.version = VERSION;
 
-        this.designRoutes = [
-            { name: 'Composition', path: '/composition' },
-            { name: 'Typography', path: '/typography' },
-            { name: 'Iconography', path: '/icons' },
-            { name: 'Color', path: '/color' }
-        ].sort((a, b) => {
-            if (a.name < b.name) return -1;
-            if (a.name > b.name) return 1;
-            return 0;
-        });
-
-        this.componentRoutes = [
-            { name: 'QuickNote', path: '/quick-note' },
-            { name: 'Radio', path: '/radio' },
-            { name: 'Toast', path: '/toast' },
-            { name: 'Button', path: '/button' },
-            { name: 'Form', path: '/form' },
-            { name: 'Tabs', path: '/tabs' },
-            { name: 'Modal', path: '/modal' },
-            { name: 'Select', path: '/select' },
-            { name: 'Picker', path: '/picker' },
-            { name: 'Chips', path: '/chips' },
-            { name: 'Dropdown', path: '/dropdown' },
-            { name: 'Loading', path: '/loading' },
-            { name: 'Cards', path: '/cards' },
-            { name: 'Tooltip', path: '/tooltip' },
-            { name: 'Drawer', path: '/drawer' },
-            { name: 'Switch', path: '/switch' },
-            { name: 'Header', path: '/header' },
-            { name: 'List', path: '/list' },
-            { name: 'Table', path: '/table' },
-            { name: 'Calendar', path: '/calendar' },
-            { name: 'Dragula', path: '/dragula' },
-            { name: 'Tiles', path: '/tiles' },
-            { name: 'Slides', path: '/slides' },
-            { name: 'Editor', path: '/editor' },
-            { name: 'TipWell', path: '/tipwell' }
-        ].sort((a, b) => {
-            if (a.name < b.name) return -1;
-            if (a.name > b.name) return 1;
-            return 0;
-        });
-
-        this.utilRoutes = [
-            { name: 'Pipes', path: '/pipes' },
-            { name: 'Utils', path: '/utils' }
-        ].sort((a, b) => {
-            if (a.name < b.name) return -1;
-            if (a.name > b.name) return 1;
-            return 0;
-        });
+        this.designRoutes = router.config.filter(r => r.section === 'design').sort(this.sortMenu);
+        this.componentRoutes = router.config.filter(r => r.section === 'components').sort(this.sortMenu);
+        this.utilRoutes = router.config.filter(r => r.section === 'utils').sort(this.sortMenu);
 
         router.routerEvents.subscribe(() => {
             document.body.scrollTop = 0;
             this.menuOpen = false;
         });
+    }
+
+    sortMenu(a, b) {
+        if (a.title < b.title) return -1;
+        if (a.title > b.title) return 1;
+        return 0;
     }
 
     toggleMenu() {

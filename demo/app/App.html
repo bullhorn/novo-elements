@@ -85,19 +85,19 @@
             <span class="menu-item-header">Design</span>
         </li>
         <li class="menu-item" *ngFor="let route of designRoutes" routerLinkActive="current" [routerLinkActiveOptions]="{exact: true}">
-            <a [routerLink]="route.path" class="menu-link">{{route.name}}</a>
+            <a [routerLink]="route.path" class="menu-link">{{route.title}}</a>
         </li>
         <li class="menu-section-header">
             <span class="menu-item-header">Components</span>
         </li>
         <li class="menu-item" *ngFor="let route of componentRoutes" routerLinkActive="current" [routerLinkActiveOptions]="{exact: true}">
-            <a [routerLink]="route.path" class="menu-link">{{route.name}}</a>
+            <a [routerLink]="route.path" class="menu-link">{{route.title}}</a>
         </li>
         <li class="menu-section-header">
             <span class="menu-item-header">Utils</span>
         </li>
         <li class="menu-item" *ngFor="let route of utilRoutes" routerLinkActive="current" [routerLinkActiveOptions]="{exact: true}">
-            <a [routerLink]="route.path" class="menu-link">{{route.name}}</a>
+            <a [routerLink]="route.path" class="menu-link">{{route.title}}</a>
         </li>
         <li class="menu-line"></li>
     </ul>
