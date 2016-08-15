@@ -84,6 +84,17 @@ novo-form, novo-dynamic-form {
                                 margin-bottom: 10px;
                             }
 
+                            novo-quick-note {
+                                margin-bottom: 10px;
+                                textarea {
+                                    line-height: inherit;
+                                }
+
+                                .quick-note-overlay {
+                                    padding: 0;
+                                }
+                            }
+
                             input, textarea {
                                 font-size: 1em;
                                 background: transparent !important;
@@ -135,7 +146,7 @@ novo-form, novo-dynamic-form {
                                 flex: 1;
                                 position: relative;
 
-                                > i.bhi-search, i.bhi-clock {
+                                > i.bhi-search, > i.bhi-clock, > i.bhi-calendar {
                                     position: absolute;
                                     right: 0;
                                     top: 0

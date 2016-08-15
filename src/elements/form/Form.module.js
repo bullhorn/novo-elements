@@ -11,7 +11,8 @@ import {
     NovoChipsModule,
     NovoDatePickerModule,
     NovoTimePickerModule,
-    NovoNovoCKEditorModule
+    NovoNovoCKEditorModule,
+    NovoQuickNoteModule
 } from './../../novo-elements';
 import { NovoDynamicFormElement, NovoControlElement } from './DynamicForm';
 import { NovoFormExtrasModule } from './extras/FormExtras.module';
@@ -28,7 +29,8 @@ import { NovoFormExtrasModule } from './extras/FormExtras.module';
         NovoDatePickerModule,
         NovoTimePickerModule,
         NovoNovoCKEditorModule,
-        NovoFormExtrasModule
+        NovoFormExtrasModule,
+        NovoQuickNoteModule
     ],
     declarations: [NovoControlElement, NovoDynamicFormElement],
     exports: [NovoDynamicFormElement, NovoControlElement]

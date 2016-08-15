@@ -183,6 +183,16 @@ export class CheckListControl extends ControlBase {
     }
 }
 
+export class QuickNoteControl extends ControlBase {
+    controlType = 'quick-note';
+    options = [];
+
+    constructor(config = {}) {
+        super(config);
+        this.options = config.options || [];
+    }
+}
+
 @Component({
     selector: 'form-demo',
     template: `
@@ -193,9 +203,9 @@ export class CheckListControl extends ControlBase {
             <button (click)="test.showAllFields()">Show All Fields</button>
             <button (click)="submit(test)">Submit</button>
             <br>
-            <p>Value: {{form.value | json}}</p>
-            <p>Valid: {{form.valid}}</p>
-            <p>ONLY CHANGED VALUES: {{test.value | json}}</p>
+            <p>Value: {{test.value | json}}</p>
+            <p>Valid: {{test.isValid}}</p>
+            <p>ONLY CHANGED VALUES: {{test.changedValue | json}}</p>
         </div>
     `
 })
@@ -279,6 +289,21 @@ export class FormDemoComponent {
         ];
 
         let questions = [
+            new QuickNoteControl({
+                key: 'quick-note',
+                label: 'Quick Note',
+                config: {
+                    triggers: {
+                        tags: '@',
+                        references: '#'
+                    },
+                    options: {
+                        tags: ['Test', 'Test'],
+                        references: ['Test', 'Test']
+                    }
+                }
+            }),
+
             new CheckboxControl({
                 key: 'checkbox',
                 label: 'Checkbox'

@@ -17,6 +17,7 @@ export class FormValidators {
         return !control.value || EMAIL_REGEXP.test(control.value) ? null : { 'invalidEmail': true };
     }
 
+    // Makes sure the control value is a valid address
     static isValidAddress(control) {
         if (control.value) {
             let valid = true;

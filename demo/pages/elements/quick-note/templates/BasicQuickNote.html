@@ -1,5 +1,4 @@
-<novo-quick-note [(ngModel)]="note" [references]="references" [placeholder]="placeholder" [config]="config"></novo-quick-note>
+<novo-quick-note [(ngModel)]="note" [placeholder]="placeholder" [config]="config"></novo-quick-note>
 <div class="data">
-    <p>Note: {{note}}</p>
-    <p>References: {{references | json}}</p>
+    <p>Note: {{note | json}}</p>
 </div>

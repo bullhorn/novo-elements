@@ -14,7 +14,7 @@ const QUICK_NOTE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
 
 @Component({
     selector: 'novo-quick-note',
-    inputs: ['config', 'placeholder', 'references'],
+    inputs: ['config', 'placeholder'],
     outputs: ['focus', 'blur'],
     providers: [QUICK_NOTE_VALUE_ACCESSOR],
     template: `
@@ -164,11 +164,11 @@ export class QuickNoteElement extends OutsideClick {
         // Replace references with anchor tags
         let tempFormattedValue = value;
         let tempBasicValue = value;
-        if (this.references) {
-            Object.keys(this.references).forEach(key => {
-                let array = this.references[key] || [];
+        if (this.model.references) {
+            Object.keys(this.model.references).forEach(key => {
+                let array = this.model.references[key] || [];
                 let formatter = (this.config.renderer ? this.config.renderer[key] : null) || this.renderLink;
-                this.references[key] = array.filter(item => {
+                this.model.references[key] = array.filter(item => {
                     let ref = `${this.config.triggers[key]}${item.label}`;
                     let exists = tempFormattedValue.indexOf(ref) !== -1;
                     if (exists) {
@@ -187,9 +187,9 @@ export class QuickNoteElement extends OutsideClick {
         this.basicNote = tempBasicValue;
         // Propagate change to ngModel
         if (this.formattedNote) {
-            this.onModelChange(this.formattedNote);
+            this.onModelChange({ note: this.formattedNote, references: this.model.references });
         } else {
-            this.onModelChange();
+            this.onModelChange('');
         }
     }
 
@@ -271,14 +271,14 @@ export class QuickNoteElement extends OutsideClick {
         this.searchTerm = null;
 
         // Add the references
-        this.references = this.references || {};
-        this.references[taggingMode] = this.references[taggingMode] || [];
-        this.references[taggingMode].push(selected);
+        this.model.references = this.model.references || {};
+        this.model.references[taggingMode] = this.model.references[taggingMode] || [];
+        this.model.references[taggingMode].push(selected);
 
         // Update the formatted note
         this.updateFormattedNote(this.basicNote);
         // Propagate change to ngModel
-        this.onModelChange(this.formattedNote);
+        this.onModelChange({ note: this.formattedNote, references: this.model.references });
     }
 
     replaceLastOccurrence(value, key, replaceValue) {
@@ -296,10 +296,13 @@ export class QuickNoteElement extends OutsideClick {
     }
 
     writeValue(model:any):void {
-        this.model = model;
+        this.model = {
+            note: model,
+            references: {}
+        };
         // Update formatted note for the initial value
         if (!this.basicNote) {
-            this.updateFormattedNote(model);
+            this.updateFormattedNote(this.model.note);
         }
     }
 

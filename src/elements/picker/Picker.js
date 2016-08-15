@@ -191,6 +191,7 @@ export class NovoPickerElement extends OutsideClick {
         }
     }
 
+    // Makes sure to clear the model if the user clears the text box
     checkTerm(event) {
         if (!event || !event.length) {
             this.onModelChange('');

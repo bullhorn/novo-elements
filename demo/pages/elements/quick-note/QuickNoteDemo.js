@@ -63,11 +63,6 @@ export class QuickNoteDemoComponent {
 
         this.placeholder = 'Enter your note text here. Reference people and distrubution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
 
-        this.references = {};
-        this.note2 = 'I am an initial note!';
-        this.references2 = {};
-        this.references3 = {};
-
         let customData = {
             tags: [{ id: 1, name: 'OH YA!', test: 'TWO' }, { id: 2, name: 'TAGGING!', test: 'ONE' }],
             references: [{ id: 1, title: 'Awesome Reference' }, { id: 2, title: 'Angular2' }]
@@ -96,7 +91,6 @@ export class QuickNoteDemoComponent {
                 }
             }
         };
-
         this.custom = {
             triggers: {
                 whos: '@',
@@ -131,7 +125,6 @@ export class QuickNoteDemoComponent {
                 }
             }
         };
-
         this.custom2 = {
             resultsTemplate: CustomQuickNoteResults,
             triggers: {

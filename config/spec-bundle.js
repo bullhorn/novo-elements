@@ -14,7 +14,6 @@ import 'rxjs/add/operator/mergeMap';
 
 import { TestBed, addProviders, inject } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-// import { NOVO_ELEMENTS_LABELS_PROVIDERS } from './../src/novo-elements';
 
 // Setup the test injector and set base providers
 TestBed.initTestEnvironment(
