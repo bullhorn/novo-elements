@@ -27,6 +27,7 @@ export { NovoTipWellModule } from './elements/tip-well/TipWell.module';
 export { NovoTableModule } from './elements/table/Table.module';
 export { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './elements/form/Form.module';
+export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
 
 // Export all services
 export { NovoToastService } from './elements/toast/ToastService';
@@ -43,7 +44,6 @@ export { BaseRenderer } from './elements/table/extras/base-renderer/BaseRenderer
 export { DateCell } from './elements/table/extras/date-cell/DateCell';
 export { FormValidators } from './elements/form/FormValidators';
 
-// Utils
 // Utils
 export * from './utils/outside-click/OutsideClick';
 export * from './utils/key-codes/KeyCodes';

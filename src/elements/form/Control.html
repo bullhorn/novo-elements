@@ -55,9 +55,12 @@
                 <novo-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event, 'time')" [formControlName]="control.key"></novo-time-picker>
             </div>
         </div>
+        <!--Address-->
+        <novo-address *ngSwitchCase="'address'" [formControlName]="control.key"></novo-address>
         <!--Error Message-->
         <div class="error-message" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</div>
         <div class="error-message" *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</div>
+        <div class="error-message" *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</div>
         <div class="error-message" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</div>
     </div>
 </div>

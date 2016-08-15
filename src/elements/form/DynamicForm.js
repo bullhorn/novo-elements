@@ -27,6 +27,10 @@ export class NovoControlElement extends OutsideClick {
         return this.form.controls[this.control.key].errors;
     }
 
+    get isValid() {
+        return this.form.controls[this.control.key].valid;
+    }
+
     get isDirty() {
         return this.form.controls[this.control.key].dirty;
     }

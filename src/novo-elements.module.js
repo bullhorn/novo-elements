@@ -30,6 +30,7 @@ import { NovoTipWellModule } from './elements/tip-well/TipWell.module';
 import { NovoTableModule } from './elements/table/Table.module';
 import { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 import { NovoFormModule } from './elements/form/Form.module';
+import { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
 
 import { NovoLabelService } from './services/novo-label-service';
 import { NovoDragulaService } from './elements/dragula/DragulaService';
@@ -66,7 +67,8 @@ import { NovoDragulaService } from './elements/dragula/DragulaService';
         NovoTipWellModule,
         NovoTableModule,
         NovoTableExtrasModule,
-        NovoFormModule
+        NovoFormModule,
+        NovoFormExtrasModule
     ],
     providers: [
         { provide: NovoLabelService, useClass: NovoLabelService },

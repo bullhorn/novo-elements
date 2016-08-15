@@ -157,6 +157,15 @@ export class EditorControl extends ControlBase {
     }
 }
 
+export class AddressControl extends ControlBase {
+    controlType = 'address';
+
+    constructor(config = {}) {
+        super(config);
+        this.validators.push(FormValidators.isValidAddress);
+    }
+}
+
 @Component({
     selector: 'form-demo',
     template: `
@@ -443,6 +452,13 @@ export class FormDemoComponent {
                     { value: 'TRIGGER', label: 'TRIGGER' }
                 ],
                 order: 9
+            }),
+
+            new AddressControl({
+                key: 'address',
+                label: 'Address',
+                order: 20,
+                required: true
             })
         ];
         return questions.sort((a, b) => a.order - b.order);

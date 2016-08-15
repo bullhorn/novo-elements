@@ -1,3 +1,5 @@
+@import "./extras/address/Address";
+
 novo-form, novo-dynamic-form {
     display: flex;
     flex-direction: column;
@@ -168,7 +170,7 @@ novo-form, novo-dynamic-form {
                                 > novo-picker {
                                     padding-bottom: 0;
 
-                                    &.ng-touched.ng-invalid {
+                                    &.ng-touched.ng-invalid:not(.ng-pristine) {
                                         > input, > input:focus, > input:hover {
                                             border-bottom-color: transparent !important;
                                         }
@@ -180,7 +182,6 @@ novo-form, novo-dynamic-form {
                                         padding-bottom: 0;
                                         > input {
                                             border: none;
-                                            margin-top: 10px;
                                         }
                                     }
                                 }

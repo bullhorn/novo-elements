@@ -14,6 +14,7 @@ import {
     NovoNovoCKEditorModule
 } from './../../novo-elements';
 import { NovoDynamicFormElement, NovoControlElement } from './DynamicForm';
+import { NovoFormExtrasModule } from './extras/FormExtras.module';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { NovoDynamicFormElement, NovoControlElement } from './DynamicForm';
         NovoChipsModule,
         NovoDatePickerModule,
         NovoTimePickerModule,
-        NovoNovoCKEditorModule
+        NovoNovoCKEditorModule,
+        NovoFormExtrasModule
     ],
     declarations: [NovoControlElement, NovoDynamicFormElement],
     exports: [NovoDynamicFormElement, NovoControlElement]
