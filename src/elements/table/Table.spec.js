@@ -146,10 +146,10 @@ describe('Element: Table', () => {
             expect(comp.columns[0].filter.length).toBe(1);
         });
 
-        it('should add range to options (9 total) if range is set', () => {
+        it('should add range to options (11 total) if range is set', () => {
             comp.columns[0].range = true;
             comp.setupColumnDefaults();
-            expect(comp.columns[0].options.length).toBe(9);
+            expect(comp.columns[0].options.length).toBe(11);
         });
 
         it('should add calenderShow if range is set', () => {
@@ -323,7 +323,7 @@ describe('Element: Table', () => {
         it('should return a subset of options when the data dates cover a small range.', () => {
             expect(comp.getDefaultOptions).toBeDefined();
             let mockOptions = comp.getDefaultOptions();
-            expect(mockOptions.length).toBe(8);
+            expect(mockOptions.length).toBe(10);
         });
     });
 });
