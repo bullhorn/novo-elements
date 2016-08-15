@@ -31,4 +31,14 @@ describe('Component: TipWell', () => {
             expect(JSON.parse(localStorage.getItem(comp.localStorageKey))).toBeFalsy();
         });
     });
+
+    describe('Method: ngOnInit()', () => {
+        it('should initialize tipwell variables to defaults', () => {
+            comp.ngOnInit();
+            expect(comp.tip).toEqual('');
+            expect(comp.buttonText).toEqual('Ok, Got it');
+            expect(comp.button).toBeTruthy();
+            expect(comp.icon).toBeNull();
+        });
+    });
 });

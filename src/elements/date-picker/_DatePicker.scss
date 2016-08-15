@@ -86,6 +86,9 @@ input[type=calendar] {
             color:$positive;
             border-bottom: 2px solid $positive;
         }
+        &+.calendar-header{
+            border-top: 1px solid #F0F0F0;
+        }
     }
 
     .calendar-header {
@@ -97,22 +100,29 @@ input[type=calendar] {
         border-bottom: 1px solid #F0F0F0;
 
         .previous {
-            border-bottom: 4px solid transparent;
-            border-top: 4px solid transparent;
-            border-right: 4px solid #aaa;
+            width: 30px;
+            height: 15px;
             display: inline-block;
-            height: 0;
-            vertical-align: middle;
-            width: 0;
+            cursor: pointer;
+            &:after{
+                content: '';
+                border-bottom: 4px solid transparent;
+                border-top: 4px solid transparent;
+                border-right: 4px solid #aaa;
+                display: inline-block;
+                height: 0;
+                vertical-align: middle;
+                width: 0;
+            }
 
-            &:hover {
+            &:hover:after {
                 border-right: 4px solid $positive;
                 cursor: pointer;
             }
         }
 
         .heading {
-            width: 80%;
+            width: calc(100% - 70px);
             display: inline-block;
             vertical-align: middle;
             color: $positive;
@@ -143,15 +153,22 @@ input[type=calendar] {
         }
 
         .next {
-            border-bottom: 4px solid transparent;
-            border-top: 4px solid transparent;
-            border-left: 4px solid #aaa;
+            width: 30px;
+            height: 15px;
             display: inline-block;
-            height: 0;
-            vertical-align: middle;
-            width: 0;
+            cursor: pointer;
+            &:before{
+                content: '';
+                border-bottom: 4px solid transparent;
+                border-top: 4px solid transparent;
+                border-left: 4px solid #aaa;
+                display: inline-block;
+                height: 0;
+                vertical-align: middle;
+                width: 0;
+            }
 
-            &:hover {
+            &:hover:before {
                 opacity: 1;
                 border-left: 4px solid $positive;
                 cursor: pointer;

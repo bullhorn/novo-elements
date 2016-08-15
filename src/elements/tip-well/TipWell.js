@@ -3,11 +3,14 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'novo-tip-well',
-    inputs: ['name', 'tip', 'buttonText'],
+    inputs: ['name', 'tip', 'buttonText', 'button', 'icon'],
     template: `
         <div *ngIf="isActive">
-            <p>{{ tip }}</p>
-            <button theme="dialogue" (click)="hideTip()">{{ buttonText }}</button>
+            <div>
+                <i class="bhi-{{ icon }}" *ngIf="icon"></i>
+                <p>{{ tip }}</p>
+            </div>
+            <button theme="dialogue" (click)="hideTip()" *ngIf="button==='true'">{{ buttonText }}</button>
         </div>
     `
 })
@@ -33,6 +36,8 @@ export class NovoTipWellElement {
     ngOnInit() {
         this.tip = this.tip || '';
         this.buttonText = this.buttonText || 'Ok, Got it';
+        this.button = this.button || 'true';
+        this.icon = this.icon || null;
         // Set a (semi) unique name for the tip-well
         this.name = this.name || Math.round(Math.random() * 100);
         this.localStorageKey = `novo-tw_${this.name}`;
