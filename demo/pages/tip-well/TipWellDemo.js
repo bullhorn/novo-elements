@@ -5,6 +5,8 @@ import { CORE_DIRECTIVES } from '@angular/common';
 import { NOVO_TIPWELL_ELEMENTS, NOVO_BUTTON_ELEMENTS } from './../../../src/novo-elements';
 import { CodeSnippet } from '../../elements/codesnippet/CodeSnippet';
 import TipWellDemoTpl from './templates/TipWellDemo.html';
+import TipWellNoButtonDemoTpl from './templates/TipWellNoButtonDemo.html';
+import TipWellIconDemoTpl from './templates/TipWellIconDemo.html';
 
 const template = `
 <div class="container">
@@ -20,6 +22,19 @@ const template = `
     <br />
     <h4>Code</h4>
     <code-snippet [code]="TipWellDemoTpl"></code-snippet>
+    <h4>No Button Demo</h4>
+    <div>${TipWellNoButtonDemoTpl}</div>
+    <br />
+    <h4>Code</h4>
+    <code-snippet [code]="TipWellNoButtonDemoTpl"></code-snippet>
+    <h4>Icon Demo</h4>
+    <div>${TipWellIconDemoTpl}</div>
+    <br />
+    <p>Did you hide the TipWell?</p>
+    <button theme="primary" color="success" icon="refresh" (click)="clearLocalStorage()">Reset localStorage and Reload</button>
+    <br />
+    <h4>Code</h4>
+    <code-snippet [code]="TipWellIconDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -36,6 +51,8 @@ const template = `
 export class TipWellDemo {
     constructor() {
         this.TipWellDemoTpl = TipWellDemoTpl;
+        this.TipWellNoButtonDemoTpl = TipWellNoButtonDemoTpl;
+        this.TipWellIconDemoTpl = TipWellIconDemoTpl;
         this.demoTip = 'Sed sodales ligula et fermentum bibendum. Aliquam tincidunt sagittis leo eget auctor. Fusce eu sagittis metus, ut viverra magna. Mauris mollis nisl nec libero tincidunt posuere.';
     }
 

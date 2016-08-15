@@ -35,15 +35,12 @@ describe('Component: TipWell', () => {
     beforeEach(inject([TipWell], _comp => {
         comp = _comp;
         localStorage.clear();
-        comp.ngOnInit();
     }));
 
     it('should initialize with defaults.', () => {
         expect(comp).toBeDefined();
         expect(comp.isActive).toBeTruthy();
         expect(comp.isLocalStorageEnabled).toBeTruthy();
-        expect(comp.hasButton).toBeTruthy();
-        expect(comp.icon).toBeNull();
     });
 
     describe('Method: hideTip()', () => {
@@ -52,6 +49,16 @@ describe('Component: TipWell', () => {
             expect(localStorage.getItem(comp.localStorageKey)).toBe(null);
             comp.hideTip();
             expect(JSON.parse(localStorage.getItem(comp.localStorageKey))).toBeFalsy();
+        });
+    });
+
+    describe('Method: ngOnInit()', () => {
+        it('should initialize tipwell variables to defaults', () => {
+            comp.ngOnInit();
+            expect(comp.tip).toEqual('');
+            expect(comp.buttonText).toEqual('Ok, Got it');
+            expect(comp.button).toBeTruthy();
+            expect(comp.icon).toBeNull();
         });
     });
 });

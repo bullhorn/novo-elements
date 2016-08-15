@@ -1,8 +1,8 @@
 novo-tip-well {
-    width: 100%;
-    min-height: 3em;
+    display: inline-block;
     margin: 1em 0 1em;
     > div {
+        display: inline-block;
         border-radius: .25em;
         background-color: $off-white;
         color: $dark;
@@ -12,12 +12,14 @@ novo-tip-well {
         > div {
             display: flex;
             > i {
-                flex: 1;
+                flex-shrink: 0;
                 text-align: center;
-                margin-top: .5em;
+                margin-top: .3em;
+                margin-right: 10px;
             }
             > p {
-                flex: 12;
+                width: 100%;
+                max-width: 33em; 
                 text-align: left;
             }
         }
