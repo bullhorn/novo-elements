@@ -11,6 +11,10 @@
             <label class="input-label" *ngIf="control.subType === 'currency'">{{getCurrencyLabel(control.currencyFormat)}}</label>
             <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
         </div>
+        <!--TextArea-->
+        <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)"></textarea>
+        <!--Editor-->
+        <novo-editor *ngSwitchCase="'editor'" [formControlName]="control.key"></novo-editor>
         <!--HTML5 Select-->
         <select [id]="control.key" *ngSwitchCase="'native-select'" [formControlName]="control.key">
             <option *ngIf="control.placeholder" value="" disabled selected hidden>{{control.placeholder}}</option>
@@ -52,6 +56,8 @@
             </div>
         </div>
         <!--Error Message-->
-        <div class="error-message" *ngIf="!isValid && isDirty">{{control.label | uppercase}} is required</div>
+        <div class="error-message" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</div>
+        <div class="error-message" *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</div>
+        <div class="error-message" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</div>
     </div>
 </div>

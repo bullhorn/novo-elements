@@ -41,6 +41,7 @@ export { PickerResults } from './elements/picker/extras/picker-results/PickerRes
 export { EntityPickerResults } from './elements/picker/extras/entity-picker-results/EntityPickerResults';
 export { BaseRenderer } from './elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './elements/table/extras/date-cell/DateCell';
+export { FormValidators } from './elements/form/FormValidators';
 
 // Utils
 // Utils

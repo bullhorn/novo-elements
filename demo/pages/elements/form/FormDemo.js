@@ -2,10 +2,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 // Vendor
-import { EntityPickerResults } from './../../../../src/novo-elements';
+import { EntityPickerResults, FormValidators } from './../../../../src/novo-elements';
 
 export class ControlBase {
     constructor(config = {}) {
+        this.validators = [];
         this.value = config.value;
         this.key = config.key || '';
         this.label = config.label || '';
@@ -18,6 +19,10 @@ export class ControlBase {
         this.multiple = !!config.multiple;
         this.headerConfig = config.headerConfig || null;
         this.currencyFormat = config.currencyFormat || null;
+
+        if (this.required) {
+            this.validators.push(Validators.required);
+        }
     }
 }
 
@@ -28,6 +33,25 @@ export class TextboxControl extends ControlBase {
         super(config);
         this.type = this.getTextboxType(config.type) || '';
         this.subType = config.type || '';
+        this.setValidators(this.subType);
+    }
+
+    setValidators(type) {
+        switch (type) {
+            case 'email':
+                this.validators.push(FormValidators.isEmail);
+                break;
+            case 'number':
+            case 'currency':
+                this.validators.push(FormValidators.maxInteger);
+                break;
+            case 'float':
+            case 'percentage':
+                this.validators.push(FormValidators.maxDouble);
+                break;
+            default:
+                break;
+        }
     }
 
     getTextboxType(type) {
@@ -111,6 +135,22 @@ export class DateControl extends ControlBase {
 
 export class DateTimeControl extends ControlBase {
     controlType = 'date-time';
+
+    constructor(config = {}) {
+        super(config);
+    }
+}
+
+export class TextAreaControl extends ControlBase {
+    controlType = 'text-area';
+
+    constructor(config = {}) {
+        super(config);
+    }
+}
+
+export class EditorControl extends ControlBase {
+    controlType = 'editor';
 
     constructor(config = {}) {
         super(config);
@@ -304,6 +344,19 @@ export class FormDemoComponent {
                 order: 2
             }),
 
+            new TextAreaControl({
+                key: 'text-area',
+                label: 'Text Area',
+                placeholder: 'TYPE IN ME',
+                order: 2
+            }),
+
+            new EditorControl({
+                key: 'editor',
+                label: 'Editor',
+                order: 20
+            }),
+
             new TilesControl({
                 key: 'tiles',
                 label: 'Tiles',
@@ -398,7 +451,7 @@ export class FormDemoComponent {
     toFormGroup(controls) {
         let group:any = {};
         controls.forEach(control => {
-            group[control.key] = control.required ? new FormControl(control.value || '', Validators.required) : new FormControl(control.value || '');
+            group[control.key] = control.validators.length > 0 ? new FormControl(control.value || '', control.validators) : new FormControl(control.value || '');
         });
         return new FormGroup(group);
     }

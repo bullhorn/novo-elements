@@ -10,7 +10,8 @@ import {
     NovoPickerModule,
     NovoChipsModule,
     NovoDatePickerModule,
-    NovoTimePickerModule
+    NovoTimePickerModule,
+    NovoNovoCKEditorModule
 } from './../../novo-elements';
 import { NovoDynamicFormElement, NovoControlElement } from './DynamicForm';
 
@@ -24,7 +25,8 @@ import { NovoDynamicFormElement, NovoControlElement } from './DynamicForm';
         NovoPickerModule,
         NovoChipsModule,
         NovoDatePickerModule,
-        NovoTimePickerModule
+        NovoTimePickerModule,
+        NovoNovoCKEditorModule
     ],
     declarations: [NovoControlElement, NovoDynamicFormElement],
     exports: [NovoDynamicFormElement, NovoControlElement]

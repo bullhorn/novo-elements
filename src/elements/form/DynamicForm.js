@@ -23,8 +23,8 @@ export class NovoControlElement extends OutsideClick {
         super(element);
     }
 
-    get isValid() {
-        return this.form.controls[this.control.key].valid;
+    get errors() {
+        return this.form.controls[this.control.key].errors;
     }
 
     get isDirty() {
@@ -79,6 +79,13 @@ export class NovoControlElement extends OutsideClick {
         }
         return `${moneySymbol} ${currencyFormat || ''}`.trim();
     }
+
+    resizeTextArea(event) {
+        // Reset the height
+        let height = event.target.value.length > 0 ? `${event.target.scrollHeight}px` : '2rem';
+        event.target.style.height = '';
+        event.target.style.height = height;
+    }
 }
 
 @Component({
@@ -100,12 +107,19 @@ export class NovoDynamicFormElement {
 
     showOnlyRequired(hideRequiredWithValue) {
         this.controls.forEach(control => {
+            // Hide any non-required fields
             if (!control.required) {
                 control.hidden = true;
             }
 
+            // Hide required fields that have been successfully filled out
             if (hideRequiredWithValue && this.form.value[control.key]) {
                 control.hidden = true;
+            }
+
+            // Don't hide fields with errors
+            if (this.form.controls[control.key].errors) {
+                control.hidden = false;
             }
         });
     }
