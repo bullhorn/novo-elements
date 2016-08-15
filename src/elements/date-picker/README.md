@@ -12,7 +12,9 @@
     * Specifies the start date, will be unable to select dates before this
 - `'end' : date`
     * Specifies the end date, will be unable to select dates after this
-    
+- `'range' : boolean : default: false`
+    * Toggles calendar to use date range style picker
+
 ##### Properties
 - `'onSelect'`
     * Fired when a new value is selected

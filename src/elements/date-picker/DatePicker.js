@@ -11,7 +11,8 @@ import { swallowEvent } from './../../utils/Helpers';
         'maxYear',
         'start',
         'end',
-        'inline'
+        'inline',
+        'range'
     ],
     outputs: [
         'onSelect'
@@ -19,17 +20,21 @@ import { swallowEvent } from './../../utils/Helpers';
     directives: [COMMON_DIRECTIVES],
     template: `
         <div class="calendar">
-            <div class="calendar-top" *ngIf="!inline">
-                <h4 class="day" [attr.data-automation-id]="heading.day">{{heading.day}}</h4>
-                <h2 class="month" [attr.data-automation-id]="heading.month">{{heading.month}}</h2>
-                <h1 class="date" [attr.data-automation-id]="heading.date">{{heading.date}}</h1>
-                <h3 class="year" [attr.data-automation-id]="heading.year">{{heading.year}}</h3>
+            <div class="calendar-top" *ngIf="!inline && !range">
+                <h4 class="day" [attr.data-automation-id]="heading?.day">{{heading?.day}}</h4>
+                <h2 class="month" [attr.data-automation-id]="heading?.month">{{heading?.month}}</h2>
+                <h1 class="date" [attr.data-automation-id]="heading?.date">{{heading?.date}}</h1>
+                <h3 class="year" [attr.data-automation-id]="heading?.year">{{heading?.year}}</h3>
+            </div>
+            <div *ngIf="range" class="calendar-range">
+                <span [class.active]="!calendarRangeEnd">{{(selected?.format('MMM D, YYYY') ) || 'Start Date'}}</span>
+                <span [class.active]="calendarRangeEnd">{{(selected2?selected2.format('MMM D, YYYY'):null ) || 'End Date'}}</span>
             </div>
             <div class="calendar-header">
                 <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
                 <span class="heading">
-                    <span class="month" (click)="open($event, 'months')" [attr.data-automation-id]="heading.month">{{month.format('MMM')}}</span>
-                    <span class="year" (click)="open($event, 'years')" [attr.data-automation-id]="heading.year">{{month.format('YYYY')}}</span>
+                    <span class="month" (click)="open($event, 'months')" [attr.data-automation-id]="heading?.month">{{month?.format('MMM')}}</span>
+                    <span class="year" (click)="open($event, 'years')" [attr.data-automation-id]="heading?.year">{{month?.format('YYYY')}}</span>
                 </span>
                 <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
             </div>
@@ -41,7 +46,12 @@ import { swallowEvent } from './../../utils/Helpers';
                 </thead>
                 <tbody>
                     <tr *ngFor="let week of weeks">
-                        <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday, 'notinmonth': !day.isCurrentMonth, selected: day.date.isSame(selected) }">
+                        <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday,
+                            'notinmonth': !day.isCurrentMonth,
+                            selected: (!range ? day.date.isSame(selected) : (day.date.isSame(selected) || day.date.isSame(selected2))),
+                            filler: (range && selected2 && day.date.isAfter(selected) && day.date.isBefore(selected2)),
+                            startfill: (range && selected2 && day.date.isSame(selected) && day.date.isBefore(selected2))
+                        }">
                             <button class="day" (click)="select($event, day, true)" [attr.data-automation-id]="day.number" [disabled]="(start && day.date.isBefore(start)) || (end && day.date.isAfter(end))">{{day.number}}</button>
                         </td>
                     </tr>
@@ -49,15 +59,15 @@ import { swallowEvent } from './../../utils/Helpers';
             </table>
             <ul class="calendar-content months" *ngIf="view == 'months'">
                 <li *ngFor="let month of months" (click)="setMonth(month)">
-                    <div class="month" [ngClass]="{selected: month == selected.format('MMM')}" [attr.data-automation-id]="month">{{month}}</div>
+                    <div class="month" [ngClass]="{selected: month == selected?.format('MMM')}" [attr.data-automation-id]="month">{{month}}</div>
                 </li>
             </ul>
             <ul class="calendar-content years" *ngIf="view == 'years'">
                 <li *ngFor="let year of years" (click)="setYear(year)">
-                    <div class="year" [ngClass]="{selected: year == selected.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
+                    <div class="year" [ngClass]="{selected: year == selected?.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
                 </li>
             </ul>
-            <div class="calendar-footer">
+            <div class="calendar-footer" *ngIf="!range">
                 <span (click)="setToday()" class="today" title="{{today}}" data-automation-id="calendar-today">Today</span>
             </div>
         </div>
@@ -89,6 +99,8 @@ export class DatePicker {
         for (let i = start; i <= end; i++) {
             this.years.push(i);
         }
+        this.range = this.range ? this.range : false;
+
         this.updateView(this.value, false, true);
     }
 
@@ -102,8 +114,7 @@ export class DatePicker {
         this.removeTime(start.day(0));
 
         this.buildMonth(start, this.month);
-
-        if (markedSelected) {
+        if (markedSelected && (!this.range && this.range !== undefined)) {
             this.select(null, { date: value }, fireEvents);
         }
     }
@@ -131,22 +142,71 @@ export class DatePicker {
 
     select(event, day, fireEvents) {
         swallowEvent(event);
-
-        this.selected = day.date;
-        this.updateHeading();
-
-        if (fireEvents) {
+        if (this.range) {
+            if (!this.selected && event) {
+                this.selected = day.date;
+            } else if (this.selected && this.selected2) {
+                this.selected = day.date;
+                this.selected2 = null;
+                this.calendarRangeEnd = false;
+            } else if (day.date.isAfter(this.selected)) {
+                this.selected2 = day.date;
+            } else if (day.date.isBefore(this.selected)) {
+                this.selected2 = this.selected;
+                this.selected = day.date;
+            } else if (day.date.isSame(this.selected) && day.date.isSame(this.selected2)) {
+                this.selected = day.date;
+                this.selected2 = day.date;
+                this.calendarRangeEnd = !this.calendarRangeEnd;
+            }
+            this.calendarRangeEnd = !this.calendarRangeEnd;
+        } else {
+            this.selected = day.date;
+            this.updateHeading();
+        }
+        if (fireEvents && this.selected) {
             // Emit our output
-            this.onSelect.next({
-                year: this.selected.format('YYYY'),
-                month: this.selected.format('MM'),
-                day: this.selected.format('DD'),
-                date: this.selected.toDate()
-            });
+            if (this.range && this.selected && this.selected2) {
+                this.onSelect.next({
+                    startDate: {
+                        year: this.selected.format('YYYY'),
+                        month: this.selected.format('MM'),
+                        day: this.selected.format('DD'),
+                        date: this.selected.toDate()
+                    },
+                    endDate: {
+                        year: this.selected2.format('YYYY'),
+                        month: this.selected2.format('MM'),
+                        day: this.selected2.format('DD'),
+                        date: this.selected2.toDate()
+                    }
+                });
+            } else {
+                this.onSelect.next({
+                    year: this.selected.format('YYYY'),
+                    month: this.selected.format('MM'),
+                    day: this.selected.format('DD'),
+                    date: this.selected.toDate()
+                });
+            }
 
-            // Also, update the ngModel
-            this.model.viewToModelUpdate(this.selected.toDate());
-            this.value = this.selected.toDate();
+
+            if (this.range) {
+                // Also, update the ngModel
+                this.model.viewToModelUpdate({
+                    startDate: this.selected.toDate(),
+                    endDate: this.selected2 ? this.selected2.toDate() : null
+                });
+                this.value = {
+                    startDate: this.selected.toDate(),
+                    endDate: this.selected2 ? this.selected2.toDate() : null
+                };
+                //this.value = this.selected.toDate();
+            } else {
+                // Also, update the ngModel
+                this.model.viewToModelUpdate(this.selected.toDate());
+                this.value = this.selected.toDate();
+            }
         }
     }
 
@@ -178,6 +238,7 @@ export class DatePicker {
     }
 
     updateHeading() {
+        if (!this.selected) return;
         this.heading = {
             month: this.selected.format('MMMM'),
             year: this.selected.format('YYYY'),

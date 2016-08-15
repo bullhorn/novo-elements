@@ -131,6 +131,7 @@ novo-form {
                             border-radius: 0;
                             outline: none;
                             height: 2rem;
+                            line-height: 2em;
                             width: 100%;
                             margin: 0;
                             padding: 0;
@@ -338,11 +339,12 @@ novo-form {
                     picker-results {
                         position: absolute;
                         left: 0;
-                        top: 28px;
+                        top: 100%;
                         color: black;
                         width: 100%;
                         max-width: none;
                         z-index: 10;
+                        border: 1px solid #4A89DC;
 
                         novo-list {
                             max-height: 600px;
@@ -509,10 +511,17 @@ novo-form {
 
     &[layout="vertical"] {
         .novo-form-container {
+            header {
+                margin-bottom: 20px;
+            }
             form {
                 form-field {
-                    margin-top: 2rem;
+                    margin-top: 2.2rem;
                     position: relative;
+
+                    &:first-of-type {
+                        margin-top: 0;
+                    }
 
                     form-label {
                         position: absolute;

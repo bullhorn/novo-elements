@@ -119,6 +119,7 @@ describe('Element: Table', () => {
                 filtering: true
             };
         });
+
         it('should .', () => {
             expect(comp.onFilterClick).toBeDefined();
         });
@@ -143,6 +144,19 @@ describe('Element: Table', () => {
             comp.onFilterClick(comp.columns[0], comp.columns[0].options[1]);
             comp.onFilterClick(comp.columns[0], comp.columns[0].options[2]);
             expect(comp.columns[0].filter.length).toBe(1);
+        });
+
+        it('should add range to options (9 total) if range is set', () => {
+            comp.columns[0].range = true;
+            comp.setupColumnDefaults();
+            expect(comp.columns[0].options.length).toBe(9);
+        });
+
+        it('should add calenderShow if range is set', () => {
+            comp.columns[0].range = true;
+            comp.setupColumnDefaults();
+            comp.onFilterClick(comp.columns[0], comp.columns[0].options[comp.columns[0].options.length - 1]);
+            expect(comp.columns[0].calenderShow).toBeTruthy();
         });
     });
 
