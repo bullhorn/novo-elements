@@ -127,10 +127,41 @@ novo-form, novo-dynamic-form {
                                 flex: 1;
                                 position: relative;
 
-                                > i.bhi-search {
+                                > i.bhi-search, i.bhi-clock {
                                     position: absolute;
                                     right: 0;
                                     top: 0
+                                }
+
+                                > novo-time-picker, > novo-date-picker {
+                                    position: absolute;
+                                    top: 100%;
+                                    left: 0;
+                                }
+
+                                > div.date-time-container {
+                                    position: absolute;
+                                    top: 100%;
+                                    left: 0;
+                                    display: flex;
+                                    box-shadow: 0 1px 3px rgba(#000, .1);
+
+                                    novo-date-picker {
+                                        border-top-right-radius: 0;
+                                        border-bottom-right-radius: 0;
+                                        box-shadow: none;
+                                        border-right: 1px solid rgba($light, .5);
+
+                                        > .calendar {
+                                            box-shadow: none;
+                                        }
+                                    }
+
+                                    novo-time-picker {
+                                        border-top-left-radius: 0;
+                                        border-bottom-left-radius: 0;
+                                        box-shadow: none;
+                                    }
                                 }
 
                                 > novo-picker {

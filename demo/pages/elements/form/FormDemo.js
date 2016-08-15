@@ -42,8 +42,8 @@ export class TextboxControl extends ControlBase {
     }
 }
 
-export class DropdownControl extends ControlBase {
-    controlType = 'dropdown';
+export class NativeSelectControl extends ControlBase {
+    controlType = 'native-select';
     options = [];
 
     constructor(config = {}) {
@@ -90,6 +90,30 @@ export class RadioControl extends ControlBase {
     constructor(config = {}) {
         super(config);
         this.options = config.options || [];
+    }
+}
+
+export class TimeControl extends ControlBase {
+    controlType = 'time';
+
+    constructor(config = {}) {
+        super(config);
+    }
+}
+
+export class DateControl extends ControlBase {
+    controlType = 'date';
+
+    constructor(config = {}) {
+        super(config);
+    }
+}
+
+export class DateTimeControl extends ControlBase {
+    controlType = 'date-time';
+
+    constructor(config = {}) {
+        super(config);
     }
 }
 
@@ -189,6 +213,21 @@ export class FormDemoComponent {
         ];
 
         let questions = [
+            new TimeControl({
+                key: 'time',
+                label: 'Time'
+            }),
+
+            new DateControl({
+                key: 'date',
+                label: 'Date'
+            }),
+
+            new DateTimeControl({
+                key: 'datetime',
+                label: 'DateTime'
+            }),
+
             new RadioControl({
                 key: 'radio',
                 label: 'Basic Radio',
@@ -198,9 +237,10 @@ export class FormDemoComponent {
                 ]
             }),
 
-            new DropdownControl({
-                key: 'select',
+            new NativeSelectControl({
+                key: 'native-select',
                 label: 'Basic Select',
+                placeholder: 'Select One',
                 // hidden: true,
                 options: [
                     { key: 'solid', value: 'Solid' },
