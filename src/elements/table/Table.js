@@ -126,7 +126,7 @@ export class NovoTableHeader {
                                     </item>
                                     <div class="calender-container" [class.active]="column.calenderShow">
                                         <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>Back to Preset Filters</div>
-                                        <novo-date-picker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column?.options[column.options.length-1].value" range="true"></novo-date-picker>
+                                        <novo-date-picker *ngIf="column.calenderShow" (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column?.options[column.options.length-1].value" range="true"></novo-date-picker>
                                     </div>
                                 </list>
                             </novo-dropdown>
@@ -317,6 +317,14 @@ export class NovoTable {
      * @param column
      */
     onFilterClear(column) {
+        if (column.range) {
+            for (let i in column.options) {
+                if (column.options[i].range) {
+                    column.options[i].value = null;
+                }
+            }
+        }
+
         column.filter = null;
         this.onFilterChange();
     }
@@ -631,24 +639,23 @@ export class NovoTable {
     getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
         let opts = [
-            { label: 'Beyond 90 Days', min: 90 },
-            { label: 'Next 90 Days', min: 0, max: 90 },
-            { label: 'Next 30 Days', min: 0, max: 30 },
-            { label: 'Next 7 Days', min: 0, max: 7 },
+            { label: 'Past 1 Day', min: -1, max: 0 },
             { label: 'Past 7 Days', min: -7, max: 0 },
             { label: 'Past 30 Days', min: -30, max: 0 },
             { label: 'Past 90 Days', min: -90, max: 0 },
-            { label: 'Older than 90 Days', max: -90 }
+            { label: 'Past 1 Year', min: -366, max: 0 },
+            { label: 'Next 1 Day', min: 0, max: 1 },
+            { label: 'Next 7 Days', min: 0, max: 7 },
+            { label: 'Next 30 Days', min: 0, max: 30 },
+            { label: 'Next 90 Days', min: 0, max: 90 },
+            { label: 'Next 1 Year', min: 0, max: 366 }
+
         ];
 
         if (column && column.range) {
             opts.push({
                 label: 'Custom Date Range',
-                range: true,
-                value: {
-                    startDate: null,
-                    endDate: null
-                }
+                range: true
             });
         }
         return opts;
