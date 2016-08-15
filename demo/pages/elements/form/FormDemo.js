@@ -166,6 +166,23 @@ export class AddressControl extends ControlBase {
     }
 }
 
+export class CheckboxControl extends ControlBase {
+    controlType = 'checkbox';
+
+    constructor(config = {}) {
+        super(config);
+    }
+}
+
+export class CheckListControl extends ControlBase {
+    controlType = 'checklist';
+
+    constructor(config = {}) {
+        super(config);
+        this.options = config.options || [];
+    }
+}
+
 @Component({
     selector: 'form-demo',
     template: `
@@ -262,6 +279,17 @@ export class FormDemoComponent {
         ];
 
         let questions = [
+            new CheckboxControl({
+                key: 'checkbox',
+                label: 'Checkbox'
+            }),
+
+            new CheckListControl({
+                key: 'checklist',
+                label: 'Check List',
+                options: ['One', 'Two', 'Three']
+            }),
+
             new TimeControl({
                 key: 'time',
                 label: 'Time'

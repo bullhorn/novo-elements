@@ -57,6 +57,10 @@
         </div>
         <!--Address-->
         <novo-address *ngSwitchCase="'address'" [formControlName]="control.key"></novo-address>
+        <!--Checkbox-->
+        <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key"></novo-checkbox>
+        <!--Checklist-->
+        <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="control.options"></novo-check-list>
         <!--Error Message-->
         <div class="error-message" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</div>
         <div class="error-message" *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</div>
