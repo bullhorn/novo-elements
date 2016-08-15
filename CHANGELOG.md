@@ -1,3 +1,43 @@
+<a name="0.2.22"></a>
+## [0.2.22](https://github.com/bullhorn/novo-elements/compare/v0.2.21...v0.2.22) (2016-08-12)
+
+
+
+<a name="0.2.21"></a>
+## [0.2.21](https://github.com/bullhorn/novo-elements/compare/v0.2.20...v0.2.21) (2016-08-12)
+
+
+
+<a name="0.2.20"></a>
+## [0.2.20](https://github.com/bullhorn/novo-elements/compare/v0.2.19...v0.2.20) (2016-08-12)
+
+
+### Bug Fixes
+
+* **picker,chips:** Fixing selection in chips that was always remaining and some minor styling fixes for chips dropdown. ([5acfa07](https://github.com/bullhorn/novo-elements/commit/5acfa07))
+
+
+
+<a name="0.2.19"></a>
+## [0.2.19](https://github.com/bullhorn/novo-elements/compare/v0.2.18...v0.2.19) (2016-08-11)
+
+
+### Bug Fixes
+
+* **form:** Fixing vertical layout initial value for select ([98888ed](https://github.com/bullhorn/novo-elements/commit/98888ed))
+
+
+
+<a name="0.2.18"></a>
+## [0.2.18](https://github.com/bullhorn/novo-elements/compare/v0.2.17...v0.2.18) (2016-08-11)
+
+
+### Features
+
+* **calendar, table:** Adding ability to select a range of dates and being about to sort on date ranges ([#147](https://github.com/bullhorn/novo-elements/issues/147)) ([bd5da58](https://github.com/bullhorn/novo-elements/commit/bd5da58))
+
+
+
 <a name="0.2.17"></a>
 ## [0.2.17](https://github.com/bullhorn/novo-elements/compare/v0.2.16...v0.2.17) (2016-08-10)
 

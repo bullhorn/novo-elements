@@ -67,7 +67,6 @@ picker-null-recent-results {
             display: flex;
             flex-wrap: wrap;
             flex-direction: column;
-            margin: 0 0 15px 0;
             font-size: 0.9em;
             span {
                 display: inline-block;
@@ -95,7 +94,6 @@ picker-null-recent-results {
     &.active {
         max-height: 200px;
         overflow: auto;
-        padding: 0 0 16px;
         z-index: 2;
     }
     &:focus {
