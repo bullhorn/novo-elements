@@ -1,3 +1,18 @@
+<a name="0.2.23"></a>
+## [0.2.23](https://github.com/bullhorn/novo-elements/compare/v0.2.22...v0.2.23) (2016-08-15)
+
+
+### Bug Fixes
+
+* **calendar:** Cleanup of ability to select a range of dates ([#149](https://github.com/bullhorn/novo-elements/issues/149)) ([9fcc8ae](https://github.com/bullhorn/novo-elements/commit/9fcc8ae))
+
+
+### Features
+
+* **tipwell:** Add icon and optional button ([#148](https://github.com/bullhorn/novo-elements/issues/148)) ([0bab7c0](https://github.com/bullhorn/novo-elements/commit/0bab7c0))
+
+
+
 <a name="0.2.22"></a>
 ## [0.2.22](https://github.com/bullhorn/novo-elements/compare/v0.2.21...v0.2.22) (2016-08-12)
 
