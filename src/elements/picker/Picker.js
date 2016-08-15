@@ -31,6 +31,7 @@ const PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         <input
             type="text"
             [(ngModel)]="term"
+            (ngModelChange)="checkTerm($event)"
             [placeholder]="placeholder"
             (keyup)="onKeyUp($event)"
             (focus)="onFocus($event)"
@@ -187,6 +188,12 @@ export class NovoPickerElement extends OutsideClick {
             this._value = selected.value;
             this.select.emit(selected);
             this.onModelChange(selected.value);
+        }
+    }
+
+    checkTerm(event) {
+        if (!event || !event.length) {
+            this.onModelChange('');
         }
     }
 

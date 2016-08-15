@@ -135,6 +135,7 @@ export class NovoChipsElement extends OutsideClick {
         this.items.splice(this.items.indexOf(item), 1);
         this.deselectAll();
         this.value = this.items.map(i => i.value);
+        this.onModelChange(this.value.length ? this.value : '');
     }
 
     onKeyDown(event) {

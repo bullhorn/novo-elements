@@ -80,6 +80,10 @@ novo-form, novo-dynamic-form {
                                 align-self: auto;
                             }
 
+                            &.editor {
+                                margin-bottom: 10px;
+                            }
+
                             input, textarea {
                                 font-size: 1em;
                                 background: transparent !important;

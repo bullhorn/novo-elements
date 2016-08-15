@@ -35,7 +35,7 @@ export class NovoCheckListElement implements ControlValueAccessor {
         swallowEvent(event);
         item.checked = !item.checked;
         this.model = this._options.filter(checkBox => checkBox.checked).map(x => x.value);
-        this.onModelChange(this.model);
+        this.onModelChange(this.model.length > 0 ? this.model : '');
     }
 
     writeValue(model:any):void {
