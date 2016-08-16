@@ -114,6 +114,13 @@ export class Picker extends OutsideClick {
                 this.container.selectActiveMatch();
                 return;
             }
+
+            if (event.keyCode === KeyCodes.BACKSPACE && this.value !== null) {
+                this.term = null;
+                this.value = null;
+                this.select.emit(null);
+                this.showResults();
+            }
         }
     }
 
