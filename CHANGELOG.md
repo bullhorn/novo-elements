@@ -1,3 +1,14 @@
+<a name="0.2.25"></a>
+## [0.2.25](https://github.com/bullhorn/novo-elements/compare/v0.2.24...v0.2.25) (2016-08-16)
+
+
+### Bug Fixes
+
+* **chips:** Making it so you can set an intial value with chips that is an array of objects. ([32292c7](https://github.com/bullhorn/novo-elements/commit/32292c7))
+* **tipwell:** Updating color, closes [#151](https://github.com/bullhorn/novo-elements/issues/151) ([6d9d188](https://github.com/bullhorn/novo-elements/commit/6d9d188))
+
+
+
 <a name="0.2.24"></a>
 ## [0.2.24](https://github.com/bullhorn/novo-elements/compare/v0.2.23...v0.2.24) (2016-08-16)
 
