@@ -27,7 +27,6 @@ module.exports = function (config) {
         coverageReporter: {
             dir: 'coverage/',
             reporters: [
-                { type: 'text' },
                 { type: 'text', subdir: '.', file: 'coverage.txt' },
                 { type: 'html', subdir: 'html' },
                 { type: 'lcov', subdir: '.' }
@@ -41,6 +40,15 @@ module.exports = function (config) {
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         reporters: ['mocha', 'coverage'],
+
+        // Dots reporter config
+        superDotsReporter: {
+            icon: {
+                success: '☺',
+                failure: '✖',
+                ignore: 'ℹ'
+            }
+        },
 
         // web server port
         port: 9876,

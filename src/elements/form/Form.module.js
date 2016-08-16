@@ -14,7 +14,9 @@ import {
     NovoNovoCKEditorModule,
     NovoQuickNoteModule
 } from './../../novo-elements';
-import { NovoDynamicFormElement, NovoControlElement } from './DynamicForm';
+import { NovoDynamicFormElement } from './DynamicForm';
+import { NovoFormElement } from './Form';
+import { NovoControlElement } from './Control';
 import { NovoFormExtrasModule } from './extras/FormExtras.module';
 
 @NgModule({
@@ -32,8 +34,8 @@ import { NovoFormExtrasModule } from './extras/FormExtras.module';
         NovoFormExtrasModule,
         NovoQuickNoteModule
     ],
-    declarations: [NovoControlElement, NovoDynamicFormElement],
-    exports: [NovoDynamicFormElement, NovoControlElement]
+    declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement],
+    exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement]
 })
 export class NovoFormModule {
 }
