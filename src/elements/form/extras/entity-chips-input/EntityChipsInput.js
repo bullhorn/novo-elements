@@ -21,7 +21,7 @@ import { NovoLabelService } from './../../../../novo-elements';
         <chips
             [type]="options.type"
             [source]="options"
-            [ngModel]="tmp"
+            [ngModel]="value"
             (changed)="onChanged($event)"
             [placeholder]="placeholder"
             (focus)="toggleInactive($event)"

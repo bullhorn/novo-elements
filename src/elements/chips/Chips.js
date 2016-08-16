@@ -3,6 +3,7 @@ import { COMMON_DIRECTIVES, NgModel } from '@angular/common';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { NOVO_PICKER_ELEMENTS } from '../picker/Picker';
+import { interpolate } from './../../utils/Helpers';
 
 @Component({
     selector: 'chip',
@@ -105,6 +106,15 @@ export class Chips extends OutsideClick {
 
     ngOnInit() {
         window.document.addEventListener('keydown', this.outsideKeyDown.bind(this));
+
+        if (Array.isArray(this._value)) {
+            this.items = this._value.map(v => {
+                if (this.source && this.source.format) {
+                    return { value: v, label: interpolate(this.source.format, v) };
+                }
+                return { value: v, label: v };
+            });
+        }
     }
 
     deselectAll() {
@@ -188,9 +198,6 @@ export class Chips extends OutsideClick {
     //From ControlValueAccessor interface
     writeValue(value) {
         this._value = value;
-        if (Array.isArray(value)) {
-            this.items = value.map(v => ({ value: v, label: v }));
-        }
     }
 
     //Set touched on blur
