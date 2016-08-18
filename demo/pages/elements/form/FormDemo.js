@@ -5,6 +5,7 @@ import DynamicFormDemoTpl from './templates/DynamicForm.html';
 import VerticalDynamicFormDemoTpl from './templates/VerticalDynamicForm.html';
 import TextBasedControlsDemoTpl from './templates/TextBasedControls.html';
 import CheckBoxControlsDemoTpl from './templates/CheckBoxControls.html';
+import MockMeta from './MockMeta';
 // Vendor
 import { NovoFormUtils, TextBoxControl, CheckboxControl, CheckListControl } from './../../../../src/novo-elements';
 
@@ -62,10 +63,9 @@ export class FormDemoComponent {
         this.checkForm = NovoFormUtils.toFormGroup([this.checkControl, this.checkListControl]);
 
         // Dynamic
-        this.meta = {};
-        this.dynamic = NovoFormUtils.toControls(this.meta);
+        this.dynamic = NovoFormUtils.toControls(MockMeta, '$ USD', {}, 'TOKEN');
         this.dynamicForm = NovoFormUtils.toFormGroup(this.dynamic);
-        this.dynamicVertical = NovoFormUtils.toControls(this.meta);
+        this.dynamicVertical = NovoFormUtils.toControls(MockMeta, '$ USD', {}, 'TOKEN');
         this.dynamicVerticalForm = NovoFormUtils.toFormGroup(this.dynamicVertical);
     }
 }

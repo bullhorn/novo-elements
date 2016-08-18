@@ -8,9 +8,7 @@ import {
     DateControl,
     DateTimeControl,
     EditorControl,
-    NativeSelectControl,
     PickerControl,
-    QuickNoteControl,
     RadioControl,
     SelectControl,
     TextAreaControl,
@@ -29,295 +27,218 @@ export class NovoFormUtils {
         return new FormGroup(group);
     }
 
-    static toControls() {
-        let contactOptions = [
-            {
-                searchEntity: 'ClientContact',
-                id: 101,
-                name: 'James Smith',
-                phone: '617-555-1234',
-                email: 'jsmith@acme.com',
-                status: 'Active',
-                clientCorporation: {
-                    id: 210,
-                    name: 'Acme, Inc'
-                },
-                address: {
-                    city: 'Boston',
-                    state: 'MA'
-                }
-            }, {
-                searchEntity: 'ClientContact',
-                id: 102,
-                name: 'John Smith',
-                phone: '617-555-1234',
-                email: 'jsmith@bigcompany.com',
-                status: 'Active',
-                clientCorporation: {
-                    id: 220,
-                    name: 'Big Company'
-                },
-                address: {
-                    city: 'Boston',
-                    state: 'MA'
-                }
-            }, {
-                searchEntity: 'ClientContact',
-                id: 103,
-                name: 'Jane Smith',
-                phone: '617-555-1234',
-                email: 'jsmith@quickstaff.com',
-                status: 'Active',
-                clientCorporation: {
-                    id: 230,
-                    name: 'QuickStaff LLC'
-                },
-                address: {
-                    city: 'Boston',
-                    state: 'MA'
-                }
-            }, {
-                searchEntity: 'ClientContact',
-                id: 104,
-                name: 'James Anderson',
-                phone: '617-555-1234',
-                email: 'janderson@acme.com',
-                status: 'Active',
-                clientCorporation: {
-                    id: 210,
-                    name: 'Acme, Inc'
-                },
-                address: {
-                    city: 'Boston',
-                    state: 'MA'
-                }
+    static determineInputType(field) {
+        let type = null;
+
+        // Determine TYPE because its not just 1 value that determines this.
+        if (field.type === 'TO_MANY') {
+            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person'].indexOf(field.associatedEntity.entity)) {
+                type = 'entitychips';
+            } else {
+                type = 'chips';
             }
-        ];
-        return [
-            new QuickNoteControl({
-                key: 'quick-note',
-                label: 'Quick Note',
-                config: {
-                    triggers: {
-                        tags: '@',
-                        references: '#'
-                    },
-                    options: {
-                        tags: ['Test', 'Test'],
-                        references: ['Test', 'Test']
-                    }
+        } else if (field.type === 'TO_ONE') {
+            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person'].indexOf(field.associatedEntity.entity)) {
+                type = 'entity';
+            } else {
+                type = 'picker';
+            }
+        } else if (field.dataSpecialization === 'DATETIME') {
+            type = 'datetime';
+        } else if (field.dataSpecialization === 'TIME') {
+            type = 'time';
+        } else if (field.dataSpecialization === 'MONEY') {
+            type = 'currency';
+        } else if (field.dataSpecialization === 'PERCENTAGE') {
+            type = 'percentage';
+        } else if (field.dataSpecialization === 'HTML') {
+            type = 'editor';
+        } else if (field.dataType === 'Timestamp') {
+            type = 'date';
+        } else if (field.dataType === 'Boolean') {
+            type = 'tiles';
+        } else if (~['Double', 'BigDecimal'].indexOf(field.dataType)) {
+            type = 'float';
+        } else if (field.inputType === 'TEXTAREA') {
+            type = 'textarea';
+        } else if (field.options && ~['CHECKBOX', 'RADIO'].indexOf(field.inputType) && field.multiValue) {
+            type = 'checklist';
+        } else if (field.options && ~['CHECKBOX', 'RADIO'].indexOf(field.inputType) && !field.multiValue) {
+            type = 'radio';
+        } else if (field.optionsUrl && field.inputType === 'SELECT') {
+            if (field.optionsType && ~['CandidateText', 'ClientText', 'ClientContactText', 'ClientCorporationText', 'LeadText', 'OpportunityText', 'JobOrderText', 'CorporateUserText', 'PersonText'].indexOf(field.optionsType)) {
+                type = 'entitypicker';
+            } else {
+                type = 'picker';
+            }
+        } else if (field.options && ~['SELECT'].indexOf(field.inputType) && field.multiValue) {
+            type = 'chips';
+        } else if (field.options && ~['SELECT'].indexOf(field.inputType) && !field.multiValue) {
+            type = 'select';
+        } else if (field.options && ~['TILES'].indexOf(field.inputType) && !field.multiValue) {
+            type = 'tiles';
+        } else if (field.type === 'COMPOSITE') {
+            type = 'address';
+        } else if (field.dataType === 'Integer') {
+            type = 'number';
+        }
+
+        // Overrides
+        if (type === 'checkbox' && field.options) {
+            type = 'checklist';
+        } else if (type === 'picker' && field.multiValue) {
+            type = 'chips';
+        } else if (type === 'entity' && field.multiValue) {
+            type = 'entitychips';
+        }
+
+        return type;
+    }
+
+    static getControlForField(field, http, token) {
+        let type = NovoFormUtils.determineInputType(field) || field.type;
+        let control;
+        let controlConfig = {
+            type: type,
+            key: field.name,
+            label: field.label,
+            placeholder: field.hint || '',
+            required: field.required,
+            hidden: !field.required,
+            value: field.value || field.defaultValue
+        };
+        let optionsConfig = NovoFormUtils.getControlOptions(field, http, token);
+
+        if (Array.isArray(optionsConfig)) {
+            controlConfig.options = optionsConfig;
+        } else if (optionsConfig) {
+            controlConfig.config = optionsConfig;
+        }
+
+        switch (type) {
+            case 'entitychips':
+                controlConfig.multiple = true;
+                controlConfig.config.resultsTemplate = EntityPickerResults;
+                control = new PickerControl(controlConfig);
+                break;
+            case 'chips':
+                controlConfig.multiple = true;
+                control = new PickerControl(controlConfig);
+                break;
+            case 'entitypicker':
+                controlConfig.config.resultsTemplate = EntityPickerResults;
+                control = new PickerControl(controlConfig);
+                break;
+            case 'picker':
+                control = new PickerControl(controlConfig);
+                break;
+            case 'datetime':
+                control = new DateTimeControl(controlConfig);
+                break;
+            case 'date':
+                control = new DateControl(controlConfig);
+                break;
+            case 'time':
+                control = new TimeControl(controlConfig);
+                break;
+            case 'currency':
+            case 'money':
+            case 'email':
+            case 'percentage':
+            case 'float':
+            case 'number':
+                if (type === 'money') {
+                    type = 'currency';
                 }
-            }),
+                controlConfig.type = type;
+                control = new TextBoxControl(controlConfig);
+                break;
+            case 'text':
+                control = new TextBoxControl(controlConfig);
+                break;
+            case 'textarea':
+                control = new TextAreaControl(controlConfig);
+                break;
+            case 'editor':
+                control = new EditorControl(controlConfig);
+                break;
+            case 'tiles':
+                control = new TilesControl(controlConfig);
+                break;
+            case 'checkbox':
+                control = new CheckboxControl(controlConfig);
+                break;
+            case 'checklist':
+                control = new CheckListControl(controlConfig);
+                break;
+            case 'radio':
+                control = new RadioControl(controlConfig);
+                break;
+            case 'select':
+                control = new SelectControl(controlConfig);
+                break;
+            case 'address':
+                control = new AddressControl(controlConfig);
+                break;
+            default:
+                control = new TextBoxControl(controlConfig);
+                break;
+        }
+        return control;
+    }
 
-            new CheckboxControl({
-                key: 'checkbox',
-                label: 'Checkbox'
-            }),
+    static toControls(meta, currencyFormat, http, token) {
+        let controls = [];
 
-            new CheckListControl({
-                key: 'checklist',
-                label: 'Check List',
-                options: ['One', 'Two', 'Three']
-            }),
+        if (meta && meta.fields) {
+            let fields = meta.fields;
+            fields.forEach(field => {
+                if (field.name !== 'id' && (!field.readOnly && field.type !== 'TO_MANY') && (field.dataSpecialization !== 'SYSTEM')) {
+                    let control = NovoFormUtils.getControlForField(field, http, token);
+                    // Set currency format
+                    if (control.subType === 'currency') {
+                        control.currencyFormat = currencyFormat;
+                    }
+                    // Add to controls
+                    controls.push(control);
+                }
+            });
+        }
+        return controls;
+    }
 
-            new TimeControl({
-                key: 'time',
-                label: 'Time'
-            }),
-
-            new DateControl({
-                key: 'date',
-                label: 'Date'
-            }),
-
-            new DateTimeControl({
-                key: 'datetime',
-                label: 'DateTime'
-            }),
-
-            new RadioControl({
-                key: 'radio',
-                label: 'Basic Radio',
-                options: [
-                    { key: 'yes', value: 'Yes' },
-                    { key: 'no', value: 'No' }
-                ]
-            }),
-
-            new NativeSelectControl({
-                key: 'native-select',
-                label: 'Basic Select',
-                placeholder: 'Select One',
-                // hidden: true,
-                options: [
-                    { key: 'solid', value: 'Solid' },
-                    { key: 'great', value: 'Great' },
-                    { key: 'good', value: 'Good' },
-                    { key: 'unproven', value: 'Unproven' }
-                ],
-                order: 3
-            }),
-
-            new TextBoxControl({
-                key: 'firstName',
-                label: 'Basic Text',
-                required: true,
-                order: 1
-            }),
-
-            new TextBoxControl({
-                key: 'emailAddress',
-                label: 'Basic Email',
-                type: 'email',
-                placeholder: 'PLACEHOLDER',
-                // hidden: true,
-                order: 2
-            }),
-
-            new TextBoxControl({
-                key: 'number',
-                label: 'Basic Number',
-                type: 'number',
-                placeholder: 'PLACEHOLDER',
-                // hidden: true,
-                order: 2
-            }),
-
-            new TextBoxControl({
-                key: 'float',
-                label: 'Basic Float',
-                type: 'float',
-                placeholder: 'PLACEHOLDER',
-                // hidden: true,
-                order: 2
-            }),
-
-            new TextBoxControl({
-                key: 'currency',
-                label: 'Basic Currency',
-                type: 'currency',
-                placeholder: 'PLACEHOLDER',
-                currencyFormat: 'USD',
-                // hidden: true,
-                order: 2
-            }),
-
-            new TextBoxControl({
-                key: 'percentage',
-                label: 'Basic Percentage',
-                type: 'percentage',
-                placeholder: 'PLACEHOLDER',
-                // hidden: true,
-                order: 2
-            }),
-
-            new TextAreaControl({
-                key: 'text-area',
-                label: 'Text Area',
-                placeholder: 'TYPE IN ME',
-                order: 2
-            }),
-
-            new EditorControl({
-                key: 'editor',
-                label: 'Editor',
-                order: 20
-            }),
-
-            new TilesControl({
-                key: 'tiles',
-                label: 'Tiles',
-                required: true,
-                options: [
-                    { value: 'solid', label: 'Solid' },
-                    { value: 'great', label: 'Great' },
-                    { value: 'good', label: 'Good' },
-                    { value: 'unproven', label: 'Unproven' }
-                ],
-                order: 4
-            }),
-
-            new PickerControl({
-                key: 'picker',
-                label: 'Picker',
-                required: true,
-                placeholder: 'PICK ONE',
-                config: {
-                    options: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
-                        'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
-                        'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-                        'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
-                        'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-                        'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-                        'West Virginia', 'Wisconsin', 'Wyoming']
-                },
-                order: 5
-            }),
-
-            new PickerControl({
-                key: 'entity',
-                label: 'Entity',
-                required: true,
-                placeholder: 'PICK ONE!!!',
-                config: {
-                    options: contactOptions,
-                    field: 'name',
-                    resultsTemplate: EntityPickerResults
-                },
-                order: 6
-            }),
-
-            new PickerControl({
-                key: 'pickerMulti',
-                label: 'Picker Multi',
-                required: true,
-                placeholder: 'PICK ONE',
-                config: {
-                    options: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
-                        'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
-                        'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-                        'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
-                        'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-                        'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-                        'West Virginia', 'Wisconsin', 'Wyoming']
-                },
-                multiple: true,
-                order: 7
-            }),
-
-            new PickerControl({
-                key: 'entityMulti',
-                label: 'Entity Multi',
-                required: true,
-                placeholder: 'PICK ONE!!!',
-                config: {
-                    options: contactOptions,
-                    field: 'name',
-                    resultsTemplate: EntityPickerResults
-                },
-                multiple: true,
-                order: 8
-            }),
-
-            new SelectControl({
-                key: 'select',
-                label: 'Select',
-                required: true,
-                options: [
-                    { value: 'Open', label: 'Open' },
-                    { value: 'Qualifying', label: 'Qualifying' },
-                    { value: 'Negotiating', label: 'Negotiating' },
-                    { value: 'TRIGGER', label: 'TRIGGER' }
-                ],
-                order: 9
-            }),
-
-            new AddressControl({
-                key: 'address',
-                label: 'Address',
-                order: 20,
-                required: true
-            })
-        ];
+    static getControlOptions(field, http, token) {
+        if (field.dataType === 'Boolean' && !field.options) {
+            return [
+                { value: false, label: 'No' },
+                { value: true, label: 'Yes' }
+            ];
+        } else if (field.optionsUrl) {
+            return {
+                field: 'value',
+                format: '$label',
+                options: (query) => {
+                    return new Promise((resolve, reject) => {
+                        if (query && query.length) {
+                            http.get(`${field.optionsUrl}?filter=${query || ''}&BhRestToken=${token}`)
+                                .map(response => response.json().data)
+                                .subscribe(resolve, reject);
+                        } else {
+                            resolve([]);
+                        }
+                    });
+                }
+            };
+        } else if (Array.isArray(field.options) && field.type === 'chips') {
+            let options = field.options;
+            return {
+                field: 'value',
+                format: '$label',
+                options
+            };
+        } else if (field.options) {
+            return field.options;
+        }
+        return null;
     }
 }

@@ -10,7 +10,7 @@
             <!--TODO prefix/suffix on the control-->
             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'">
                 <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder">
-                <label class="input-label" *ngIf="control.subType === 'currency'">{{getCurrencyLabel(control.currencyFormat)}}</label>
+                <label class="input-label" *ngIf="control.subType === 'currency'">{{control.currencyFormat}}</label>
                 <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
             </div>
             <!--TextArea-->

@@ -10,7 +10,7 @@ import moment from 'moment/moment';
     selector: 'novo-control',
     template: require('./Control.html'),
     host: {
-        '[hidden]': 'control.hidden'
+        '[hidden]': 'control.hidden || control.type === \'hidden\''
     }
 })
 export class NovoControlElement extends OutsideClick {
@@ -56,32 +56,6 @@ export class NovoControlElement extends OutsideClick {
                 break;
         }
         this.formattedValue = moment(date).format(format);
-    }
-
-    getCurrencyLabel(currencyFormat) {
-        let moneySymbol;
-        switch (currencyFormat) {
-            case 'USD':
-            case 'CAD':
-            case 'AUD':
-            case 'HKD':
-            case 'NZD':
-                moneySymbol = '$';
-                break;
-            case 'GBP':
-                moneySymbol = '£';
-                break;
-            case 'EUR':
-                moneySymbol = '€';
-                break;
-            case 'JPY':
-                moneySymbol = '¥';
-                break;
-            default:
-                moneySymbol = '';
-                break;
-        }
-        return `${moneySymbol} ${currencyFormat || ''}`.trim();
     }
 
     resizeTextArea(event) {

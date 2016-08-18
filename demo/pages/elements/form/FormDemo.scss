@@ -2,10 +2,8 @@ form-demo {
     .example.form-demo {
         padding: 20px;
 
-        &.quicknote {
-            novo-quick-note {
-                border-bottom: 2px solid darken(#f4f4f4, 5%);
-            }
+        .dynamic {
+            margin-top: 20px;
         }
     }
 
