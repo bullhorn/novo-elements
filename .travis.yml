@@ -8,7 +8,6 @@ addons:
     repo_token: $CODECLIMATE_REPO_TOKEN
 
 script:
-  - rm -rf node_modules
   - npm install
   - npm test
 
