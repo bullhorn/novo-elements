@@ -36,7 +36,6 @@ export const routes:Routes = [
     { path: '', component: Home },
     { path: 'home', component: Home },
 
-    // Make sure you match the component type string to the require in asyncRoutes
     // Base Pages (design system)
     { path: 'color', component: ColorComponent, title: 'Color', section: 'design' },
     { path: 'composition', component: CompositionComponent, title: 'Composition', section: 'design' },
