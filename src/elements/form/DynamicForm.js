@@ -11,10 +11,39 @@ export class NovoDynamicFormElement {
     @Input() controls = [];
     @Input() form:FormGroup;
 
+    allFieldsRequired = false;
+    allFieldsNotRequired = false;
+    showingAllFields = false;
+    showingRequiredFields = true;
+
+    ngOnInit() {
+        let requiredFields = [];
+        let nonRequiredFields = [];
+
+        this.controls.forEach(control => {
+            if (control.required) {
+                requiredFields.push(control);
+            } else {
+                nonRequiredFields.push(control);
+            }
+        });
+
+        this.allFieldsRequired = requiredFields.length === this.controls.length;
+        this.allFieldsNotRequired = nonRequiredFields.length === this.controls.length;
+
+        if (this.allFieldsNotRequired) {
+            this.controls.forEach(control => {
+                control.hidden = false;
+            });
+        }
+    }
+
     showAllFields() {
         this.controls.forEach(control => {
             control.hidden = false;
         });
+        this.showingAllFields = true;
+        this.showingRequiredFields = false;
     }
 
     showOnlyRequired(hideRequiredWithValue) {
@@ -34,6 +63,8 @@ export class NovoDynamicFormElement {
                 control.hidden = false;
             }
         });
+        this.showingAllFields = false;
+        this.showingRequiredFields = true;
     }
 
     get values() {

@@ -95,7 +95,7 @@ export class NovoFormUtils {
         return type;
     }
 
-    static getControlForField(field, http, token) {
+    static getControlForField(field, http, config) {
         let type = NovoFormUtils.determineInputType(field) || field.type;
         let control;
         let controlConfig = {
@@ -105,12 +105,17 @@ export class NovoFormUtils {
             placeholder: field.hint || '',
             required: field.required,
             hidden: !field.required,
-            value: field.value || field.defaultValue
+            value: field.value || field.defaultValue,
+            sortOrder: field.sortOrder
         };
-        let optionsConfig = NovoFormUtils.getControlOptions(field, http, token);
+        let optionsConfig = NovoFormUtils.getControlOptions(field, http, config);
 
-        if (Array.isArray(optionsConfig)) {
+        if (Array.isArray(optionsConfig) && !(type === 'chips' || type === 'picker')) {
             controlConfig.options = optionsConfig;
+        } else if (Array.isArray(optionsConfig) && (type === 'chips' || type === 'picker')) {
+            controlConfig.config = {
+                options: optionsConfig
+            };
         } else if (optionsConfig) {
             controlConfig.config = optionsConfig;
         }
@@ -187,14 +192,14 @@ export class NovoFormUtils {
         return control;
     }
 
-    static toControls(meta, currencyFormat, http, token) {
+    static toControls(meta, currencyFormat, http, config) {
         let controls = [];
 
         if (meta && meta.fields) {
             let fields = meta.fields;
             fields.forEach(field => {
                 if (field.name !== 'id' && (!field.readOnly && field.type !== 'TO_MANY') && (field.dataSpecialization !== 'SYSTEM')) {
-                    let control = NovoFormUtils.getControlForField(field, http, token);
+                    let control = NovoFormUtils.getControlForField(field, http, config);
                     // Set currency format
                     if (control.subType === 'currency') {
                         control.currencyFormat = currencyFormat;
@@ -207,7 +212,7 @@ export class NovoFormUtils {
         return controls;
     }
 
-    static getControlOptions(field, http, token) {
+    static getControlOptions(field, http, config) {
         if (field.dataType === 'Boolean' && !field.options) {
             return [
                 { value: false, label: 'No' },
@@ -220,7 +225,7 @@ export class NovoFormUtils {
                 options: (query) => {
                     return new Promise((resolve, reject) => {
                         if (query && query.length) {
-                            http.get(`${field.optionsUrl}?filter=${query || ''}&BhRestToken=${token}`)
+                            http.get(`${field.optionsUrl}?filter=${query || ''}&BhRestToken=${config.token}`)
                                 .map(response => response.json().data)
                                 .subscribe(resolve, reject);
                         } else {
@@ -240,5 +245,13 @@ export class NovoFormUtils {
             return field.options;
         }
         return null;
+    }
+
+    static setInitialValues(controls, values) {
+        controls.forEach(control => {
+            if (values[control.key]) {
+                control.value = values[control.key];
+            }
+        });
     }
 }
