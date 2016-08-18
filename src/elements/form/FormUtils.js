@@ -18,7 +18,7 @@ import {
     TilesControl,
     TimeControl
 } from './FormControls';
-import { EntityPickerResults } from './../../../src/novo-elements';
+import { EntityPickerResults } from './../picker/extras/entity-picker-results/EntityPickerResults';
 
 export class NovoFormUtils {
     static toFormGroup(controls) {
