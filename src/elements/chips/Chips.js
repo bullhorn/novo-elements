@@ -4,6 +4,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
+import { interpolate } from './../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
@@ -98,6 +99,15 @@ export class NovoChipsElement extends OutsideClick {
 
     ngOnInit() {
         window.document.addEventListener('keydown', this.outsideKeyDown.bind(this));
+
+        if (Array.isArray(this.model)) {
+            this.items = this.model.map(v => {
+                if (this.source && this.source.format) {
+                    return { value: v, label: interpolate(this.source.format, v) };
+                }
+                return { value: v, label: v };
+            });
+        }
     }
 
     ngOnDestroy() {
@@ -193,9 +203,6 @@ export class NovoChipsElement extends OutsideClick {
 
     writeValue(model:any):void {
         this.model = model;
-        if (Array.isArray(model)) {
-            this.items = model.map(v => ({ value: v, label: v }));
-        }
     }
 
     registerOnChange(fn:Function):void {

@@ -1,3 +1,44 @@
+<a name="0.2.26"></a>
+## [0.2.26](https://github.com/bullhorn/novo-elements/compare/v0.2.25...v0.2.26) (2016-08-16)
+
+
+### Bug Fixes
+
+* **picker:** Deleting a character will clear the entity selected ([8406b64](https://github.com/bullhorn/novo-elements/commit/8406b64))
+
+
+
+<a name="0.2.25"></a>
+## [0.2.25](https://github.com/bullhorn/novo-elements/compare/v0.2.24...v0.2.25) (2016-08-16)
+
+
+### Bug Fixes
+
+* **chips:** Making it so you can set an intial value with chips that is an array of objects. ([32292c7](https://github.com/bullhorn/novo-elements/commit/32292c7))
+* **tipwell:** Updating color, closes [#151](https://github.com/bullhorn/novo-elements/issues/151) ([6d9d188](https://github.com/bullhorn/novo-elements/commit/6d9d188))
+
+
+
+<a name="0.2.24"></a>
+## [0.2.24](https://github.com/bullhorn/novo-elements/compare/v0.2.23...v0.2.24) (2016-08-16)
+
+
+
+<a name="0.2.23"></a>
+## [0.2.23](https://github.com/bullhorn/novo-elements/compare/v0.2.22...v0.2.23) (2016-08-15)
+
+
+### Bug Fixes
+
+* **calendar:** Cleanup of ability to select a range of dates ([#149](https://github.com/bullhorn/novo-elements/issues/149)) ([9fcc8ae](https://github.com/bullhorn/novo-elements/commit/9fcc8ae))
+
+
+### Features
+
+* **tipwell:** Add icon and optional button ([#148](https://github.com/bullhorn/novo-elements/issues/148)) ([0bab7c0](https://github.com/bullhorn/novo-elements/commit/0bab7c0))
+
+
+
 <a name="0.2.22"></a>
 ## [0.2.22](https://github.com/bullhorn/novo-elements/compare/v0.2.21...v0.2.22) (2016-08-12)
 
