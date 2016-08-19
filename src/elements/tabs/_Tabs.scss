@@ -215,16 +215,6 @@ novo-nav {
         }
     }
 
-    &[router] {
-        novo-tab-link.active:not(.router-link-active) {
-            opacity: 0.65;
-
-            .indicator {
-                background: inherit;
-                width: inherit;
-            }
-        }
-    }
 }
 
 // Outlets
