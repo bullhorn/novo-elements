@@ -31,6 +31,10 @@ export class NovoCheckListElement implements ControlValueAccessor {
     onModelTouched:Function = () => {
     };
 
+    ngOnInit() {
+        this.setupOptions();
+    }
+
     select(event, item) {
         swallowEvent(event);
         item.checked = !item.checked;
@@ -38,9 +42,7 @@ export class NovoCheckListElement implements ControlValueAccessor {
         this.onModelChange(this.model.length > 0 ? this.model : '');
     }
 
-    writeValue(model:any):void {
-        this.model = model || [];
-
+    setupOptions() {
         this.options = this.options || [];
         this._options = [];
         if (this.options.length && !this.options[0].value) {
@@ -58,6 +60,13 @@ export class NovoCheckListElement implements ControlValueAccessor {
                 formattedOption.checked = (this.model.length && (this.model.indexOf(option.value) !== -1));
                 this._options.push(formattedOption);
             });
+        }
+    }
+
+    writeValue(model:any):void {
+        this.model = model || [];
+        if (model) {
+            this.setupOptions();
         }
     }
 

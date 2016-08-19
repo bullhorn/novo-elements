@@ -147,7 +147,6 @@ export class NovoPickerElement extends OutsideClick {
      * instance.
      */
     showResults() {
-        //console.log('Results', term);
         this.toggleActive(null, true);
         // Update Matches
         if (this.container) {

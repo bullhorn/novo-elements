@@ -8,7 +8,7 @@ import { routing } from './app/App.routes';
 import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
 import './demo.scss';
 // Vendor
-import { NovoElementsModule } from './../src/novo-elements';
+import { NovoElementsModule, FormUtils } from './../src/novo-elements';
 
 @NgModule({
     declarations: [
@@ -22,7 +22,9 @@ import { NovoElementsModule } from './../src/novo-elements';
         routing,
         NovoElementsModule
     ],
-    providers: [],
+    providers: [
+        FormUtils
+    ],
     entryComponents: [DemoComponent],
     bootstrap: [DemoComponent]
 })

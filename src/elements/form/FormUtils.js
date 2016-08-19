@@ -1,5 +1,7 @@
 // NG2
+import { Injectable } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { isBlank } from '@angular/core/src/facade/lang';
 // APP
 import {
     AddressControl,
@@ -18,16 +20,18 @@ import {
 } from './FormControls';
 import { EntityPickerResults } from './../picker/extras/entity-picker-results/EntityPickerResults';
 
-export class NovoFormUtils {
-    static toFormGroup(controls) {
+@Injectable()
+export class FormUtils {
+    toFormGroup(controls) {
         let group:any = {};
         controls.forEach(control => {
-            group[control.key] = control.validators.length > 0 ? new FormControl(control.value || '', control.validators) : new FormControl(control.value || '');
+            let value = isBlank(control.value) ? '' : control.value;
+            group[control.key] = control.validators && control.validators.length > 0 ? new FormControl(value, control.validators) : new FormControl(value);
         });
         return new FormGroup(group);
     }
 
-    static determineInputType(field) {
+    determineInputType(field) {
         let type = null;
 
         // Determine TYPE because its not just 1 value that determines this.
@@ -39,7 +43,7 @@ export class NovoFormUtils {
             }
         } else if (field.type === 'TO_ONE') {
             if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person'].indexOf(field.associatedEntity.entity)) {
-                type = 'entity';
+                type = 'entitypicker';
             } else {
                 type = 'picker';
             }
@@ -88,15 +92,15 @@ export class NovoFormUtils {
             type = 'checklist';
         } else if (type === 'picker' && field.multiValue) {
             type = 'chips';
-        } else if (type === 'entity' && field.multiValue) {
+        } else if (type === 'entitypicker' && field.multiValue) {
             type = 'entitychips';
         }
 
         return type;
     }
 
-    static getControlForField(field, http, config) {
-        let type = NovoFormUtils.determineInputType(field) || field.type;
+    getControlForField(field, http, config) {
+        let type = this.determineInputType(field) || field.type;
         let control;
         let controlConfig = {
             type: type,
@@ -106,9 +110,11 @@ export class NovoFormUtils {
             required: field.required,
             hidden: !field.required,
             value: field.value || field.defaultValue,
-            sortOrder: field.sortOrder
+            sortOrder: field.sortOrder,
+            associatedEntity: field.associatedEntity,
+            optionsType: field.optionsType
         };
-        let optionsConfig = NovoFormUtils.getControlOptions(field, http, config);
+        let optionsConfig = this.getControlOptions(field, http, config);
 
         if (Array.isArray(optionsConfig) && !(type === 'chips' || type === 'picker')) {
             controlConfig.options = optionsConfig;
@@ -192,14 +198,14 @@ export class NovoFormUtils {
         return control;
     }
 
-    static toControls(meta, currencyFormat, http, config) {
+    toControls(meta, currencyFormat, http, config) {
         let controls = [];
 
         if (meta && meta.fields) {
             let fields = meta.fields;
             fields.forEach(field => {
-                if (field.name !== 'id' && (!field.readOnly && field.type !== 'TO_MANY') && (field.dataSpecialization !== 'SYSTEM')) {
-                    let control = NovoFormUtils.getControlForField(field, http, config);
+                if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM')) {
+                    let control = this.getControlForField(field, http, config);
                     // Set currency format
                     if (control.subType === 'currency') {
                         control.currencyFormat = currencyFormat;
@@ -212,7 +218,7 @@ export class NovoFormUtils {
         return controls;
     }
 
-    static getControlOptions(field, http, config) {
+    getControlOptions(field, http, config) {
         if (field.dataType === 'Boolean' && !field.options) {
             return [
                 { value: false, label: 'No' },
@@ -247,10 +253,11 @@ export class NovoFormUtils {
         return null;
     }
 
-    static setInitialValues(controls, values) {
+    setInitialValues(controls, values) {
         controls.forEach(control => {
-            if (values[control.key]) {
+            if (!isBlank(values[control.key])) {
                 control.value = values[control.key];
+                control.dirty = true;
             }
         });
     }

@@ -76,9 +76,12 @@ export class NovoDynamicFormElement {
     }
 
     get updatedValues() {
-        let ret = {};
+        let ret = null;
         this.controls.forEach(control => {
-            if (this.form.controls[control.key].dirty) {
+            if (this.form.controls[control.key].dirty || control.dirty) {
+                if (!ret) {
+                    ret = {};
+                }
                 ret[control.key] = this.form.value[control.key];
             }
         });

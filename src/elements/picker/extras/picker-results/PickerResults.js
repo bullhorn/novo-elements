@@ -15,7 +15,8 @@ import { Observable } from 'rxjs/Rx';
 @Component({
     selector: 'picker-results',
     host: {
-        'class': 'active'
+        'class': 'active',
+        '[hidden]': 'matches.length === 0'
     },
     template: `
         <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>

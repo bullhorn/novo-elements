@@ -23,6 +23,13 @@ export class NovoControlElement extends OutsideClick {
         super(element);
     }
 
+    ngOnInit() {
+        // Make sure to initially format the time controls
+        if (~['date', 'time', 'date-time'].indexOf(this.control.controlType) && this.control.value) {
+            this.formatDateTimeValue({ date: this.control.value });
+        }
+    }
+
     get errors() {
         return this.form.controls[this.control.key].errors;
     }
@@ -44,10 +51,12 @@ export class NovoControlElement extends OutsideClick {
                 break;
             case 'date-time':
                 date = new Date();
-                if (part === 'time') {
-                    date.setHours(event.hours, event.minutes, 0);
-                } else {
-                    date.setFullYear(event.year, event.month, event.day);
+                if (event.hours || event.minutes || event.year || event.month || event.day) {
+                    if (part === 'time') {
+                        date.setHours(event.hours, event.minutes, 0);
+                    } else {
+                        date.setFullYear(event.year, event.month, event.day);
+                    }
                 }
                 format = 'MMMM DD, YYYY hh:mm a';
                 break;

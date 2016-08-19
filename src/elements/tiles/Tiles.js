@@ -44,15 +44,18 @@ export class NovoTilesElement implements ControlValueAccessor {
 
     ngOnInit() {
         this.name = this.name || '';
+        this.setupOptions();
+    }
 
+    setupOptions() {
         if (this.options && this.options.length && (this.options[0].value === undefined || this.options[0].value === null)) {
             this._options = this.options.map((x) => {
-                let item = { value: x, label: x, checked: this.value === x };
+                let item = { value: x, label: x, checked: this.model === x };
                 return item;
             });
         } else {
             this._options = this.options.map((x) => {
-                x.checked = this.value === x.value;
+                x.checked = this.model === x.value;
                 if (x.checked) {
                     this.setTile(x);
                 }
@@ -107,6 +110,9 @@ export class NovoTilesElement implements ControlValueAccessor {
 
     writeValue(model:any):void {
         this.model = model;
+        if (model) {
+            this.setupOptions();
+        }
     }
 
     registerOnChange(fn:Function):void {

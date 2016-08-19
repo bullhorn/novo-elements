@@ -15,7 +15,6 @@ export class NovoDragulaElement {
     }
 
     ngOnInit() {
-        // console.log(this.bag);
         let bag = this.dragulaService.find(this.bag);
 
         if (bag) {

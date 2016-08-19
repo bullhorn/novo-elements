@@ -27,7 +27,7 @@
             <!--Picker-->
             <div class="novo-control-input-container" *ngSwitchCase="'picker'">
                 <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple"></novo-picker>
-                <chips [source]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple"></chips>
+                <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple"></chips>
                 <i class="bhi-search"></i>
             </div>
             <!--Novo Select-->

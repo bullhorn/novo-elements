@@ -43,7 +43,7 @@ export { EntityPickerResults } from './elements/picker/extras/entity-picker-resu
 export { BaseRenderer } from './elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './elements/table/extras/date-cell/DateCell';
 export { FormValidators } from './elements/form/FormValidators';
-export { NovoFormUtils } from './elements/form/FormUtils';
+export { FormUtils } from './elements/form/FormUtils';
 export * from './elements/form/FormControls';
 
 // Utils

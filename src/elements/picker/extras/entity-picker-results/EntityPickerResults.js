@@ -51,7 +51,10 @@ import { PickerResults } from './../picker-results/PickerResults';
                 </item-content>
             </novo-list-item>
         </novo-list>
-    `
+    `,
+    host: {
+        '[hidden]': 'matches.length === 0'
+    }
 })
 export class EntityPickerResults extends PickerResults {
     constructor(element:ElementRef) {

@@ -103,6 +103,5 @@ export class ChipsDemoComponent {
     }
 
     onChanged() {
-        // console.log('Changed', event);
     }
 }
