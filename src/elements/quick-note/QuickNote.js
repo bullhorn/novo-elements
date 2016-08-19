@@ -296,10 +296,17 @@ export class QuickNoteElement extends OutsideClick {
     }
 
     writeValue(model:any):void {
-        this.model = {
-            note: model,
-            references: {}
-        };
+        if (model.references || model.note) {
+            this.model = {
+                note: model.note || '',
+                references: model.references || {}
+            };
+        } else {
+            this.model = {
+                note: model,
+                references: {}
+            };
+        }
         // Update formatted note for the initial value
         if (!this.basicNote) {
             this.updateFormattedNote(this.model.note);

@@ -25,8 +25,10 @@ export class NovoControlElement extends OutsideClick {
 
     ngOnInit() {
         // Make sure to initially format the time controls
-        if (~['date', 'time', 'date-time'].indexOf(this.control.controlType) && this.control.value) {
-            this.formatDateTimeValue({ date: this.control.value });
+        if (this.control) {
+            if (~['date', 'time', 'date-time'].indexOf(this.control.controlType) && this.control.value) {
+                this.formatDateTimeValue({ date: this.control.value });
+            }
         }
     }
 

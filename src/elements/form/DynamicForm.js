@@ -17,24 +17,30 @@ export class NovoDynamicFormElement {
     showingRequiredFields = true;
 
     ngOnInit() {
-        let requiredFields = [];
-        let nonRequiredFields = [];
+        this.ngOnChanges();
+    }
 
-        this.controls.forEach(control => {
-            if (control.required) {
-                requiredFields.push(control);
-            } else {
-                nonRequiredFields.push(control);
-            }
-        });
+    ngOnChanges() {
+        if (this.controls) {
+            let requiredFields = [];
+            let nonRequiredFields = [];
 
-        this.allFieldsRequired = requiredFields.length === this.controls.length;
-        this.allFieldsNotRequired = nonRequiredFields.length === this.controls.length;
-
-        if (this.allFieldsNotRequired) {
             this.controls.forEach(control => {
-                control.hidden = false;
+                if (control.required) {
+                    requiredFields.push(control);
+                } else {
+                    nonRequiredFields.push(control);
+                }
             });
+
+            this.allFieldsRequired = requiredFields.length === this.controls.length;
+            this.allFieldsNotRequired = nonRequiredFields.length === this.controls.length;
+
+            if (this.allFieldsNotRequired) {
+                this.controls.forEach(control => {
+                    control.hidden = false;
+                });
+            }
         }
     }
 

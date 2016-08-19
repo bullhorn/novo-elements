@@ -261,4 +261,10 @@ export class FormUtils {
             }
         });
     }
+
+    forceShowAllControls(controls) {
+        controls.forEach(control => {
+            control.hidden = false;
+        });
+    }
 }
