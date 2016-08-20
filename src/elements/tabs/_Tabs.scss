@@ -3,8 +3,7 @@ novo-nav {
     padding: 0;
     list-style: none;
     display: flex;
-    //width: 100%;
-    align-items: baseline;
+    align-items: center;
     justify-content: flex-start;
     margin: 0;
 
@@ -12,7 +11,10 @@ novo-nav {
     novo-tab-link {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
+        height: 100%;
+        position: relative;
 
         .novo-tab-link {
             padding: 10px 20px;
@@ -24,6 +26,8 @@ novo-nav {
         }
 
         .indicator {
+            position: absolute;
+            bottom: 0;
             width: 0;
             height: 2px;
             display: block;
@@ -187,6 +191,7 @@ novo-nav {
             }
 
             .indicator {
+                position: relative;
                 width: 2px;
                 height: 0;
                 display: block;

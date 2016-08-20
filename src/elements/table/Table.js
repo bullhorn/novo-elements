@@ -1,7 +1,7 @@
 // Vendor
 import { Component, EventEmitter } from '@angular/core';
 import { isFunction, isString } from '@angular/core/src/facade/lang';
-// App
+// APP
 import { NovoLabelService } from './../../services/novo-label-service';
 
 @Component({
@@ -18,7 +18,6 @@ export class NovoTableActionsElement {
 export class NovoTableHeaderElement {
 }
 
-// TODO - put checkboxes back in with new forms - jgodi
 @Component({
     selector: 'novo-table, [novoTable]',
     inputs: ['rows', 'columns', 'config', 'theme'
@@ -49,7 +48,7 @@ export class NovoTableHeaderElement {
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
                     <!-- CHECKBOX -->
                     <th class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
-                        <!--<check-box [(value)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < pagedData.length" (valueChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></check-box>-->
+                        <novo-checkbox [(ngModel)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < pagedData.length" (ngModelChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></novo-checkbox>
                     </th>
                     <!-- TABLE HEADERS -->
                     <th *ngFor="let column of columns" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
@@ -64,7 +63,6 @@ export class NovoTableHeaderElement {
                             </div>
                             <!-- FILTER DROP-DOWN -->
                             <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters">
-
                                 <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter" (click)="focusInput(column.name)"></button>
                                 <!-- FILTER OPTIONS LIST -->
                                 <list *ngIf="column?.options?.length && column?.type!='date'">
@@ -123,7 +121,7 @@ export class NovoTableHeaderElement {
                             <button theme="icon" icon="sort-desc" (click)="row._expanded=!row._expanded" *ngIf="row._expanded"></button>
                         </td>
                         <td class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
-                            <!--<check-box [(value)]="row._selected" (valueChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></check-box>-->
+                            <novo-checkbox [(ngModel)]="row._selected" (ngModelChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></novo-checkbox>
                         </td>
                         <td *ngFor="let column of columns" [attr.data-automation-id]="column.name">
                             <novo-table-cell [column]="column" [row]="row"></novo-table-cell>

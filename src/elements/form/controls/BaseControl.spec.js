@@ -30,8 +30,8 @@ describe('Control: BaseControl', () => {
         it('should set the multiple', () => {
             expect(control.multiple).toBe(false);
         });
-        it('should set the order', () => {
-            expect(control.order).toBe(1);
+        it('should set the sortOrder', () => {
+            expect(control.sortOrder).toBe(1);
         });
         it('should set the placeholder', () => {
             expect(control.placeholder).toEqual('');
@@ -45,6 +45,12 @@ describe('Control: BaseControl', () => {
         it('should set the headerConfig', () => {
             expect(control.headerConfig).toEqual(null);
         });
+        it('should set the associatedEntity', () => {
+            expect(control.associatedEntity).toEqual(null);
+        });
+        it('should set the optionsType', () => {
+            expect(control.optionsType).toEqual(null);
+        });
     });
 
     describe('With Config', () => {
@@ -56,12 +62,14 @@ describe('Control: BaseControl', () => {
                 label: 'TEST_LABEL',
                 required: true,
                 hidden: false,
-                order: 2,
+                sortOrder: 2,
                 placeholder: 'TEST_PLACEHOLDER',
                 config: { test: 'TEST_CONFIG' },
                 multiple: true,
                 headerConfig: { test: 'TEST_HEADER_CONFIG' },
-                currencyFormat: 'TEST_CURRENCY_FORMAT'
+                currencyFormat: 'TEST_CURRENCY_FORMAT',
+                associatedEntity: 'ENTITY',
+                optionsType: 'TYPE'
             });
         });
 
@@ -86,8 +94,8 @@ describe('Control: BaseControl', () => {
         it('should set the multiple', () => {
             expect(control.multiple).toBe(true);
         });
-        it('should set the order', () => {
-            expect(control.order).toBe(2);
+        it('should set the sortOrder', () => {
+            expect(control.sortOrder).toBe(2);
         });
         it('should set the placeholder', () => {
             expect(control.placeholder).toEqual('TEST_PLACEHOLDER');
@@ -100,6 +108,12 @@ describe('Control: BaseControl', () => {
         });
         it('should set the headerConfig', () => {
             expect(control.headerConfig).toEqual({ test: 'TEST_HEADER_CONFIG' });
+        });
+        it('should set the associatedEntity', () => {
+            expect(control.associatedEntity).toEqual('ENTITY');
+        });
+        it('should set the optionsType', () => {
+            expect(control.optionsType).toEqual('TYPE');
         });
     });
 });
