@@ -1,4 +1,6 @@
+// NG2
 import { Component } from '@angular/core';
+import { DomSanitizationService } from '@angular/platform-browser';
 
 @Component({
     inputs: ['code'],
@@ -6,7 +8,11 @@ import { Component } from '@angular/core';
     template: '<pre><code [innerHtml]="highlight"></code></pre>'
 })
 export class CodeSnippet {
+    constructor(sanitizer:DomSanitizationService) {
+        this.sanitizer = sanitizer;
+    }
+
     ngOnInit() {
-        this.highlight = hljs.highlightAuto(this.code).value;
+        this.highlight = this.sanitizer.bypassSecurityTrustHtml(hljs.highlightAuto(this.code).value);
     }
 }

@@ -1,5 +1,5 @@
+// NG2
 import { Component } from '@angular/core';
-import { CORE_DIRECTIVES } from '@angular/common';
 
 @Component({
     selector: 'novo-card-best-time',
@@ -26,10 +26,9 @@ import { CORE_DIRECTIVES } from '@angular/common';
                 </div>
             </div>
         </div>
-    `,
-    directives: [CORE_DIRECTIVES]
+    `
 })
-export class CardBestTime {
+export class CardBestTimeElement {
     ngOnChanges() {
         if (this.time) {
             let timeIconAndStyle = this.getTimeOfDayStyleAndIcon(this.time);

@@ -13,3 +13,7 @@ A tile is like a radio button group.
     * Is this field required
 - `'ngModel' : String`
     * The value of the Tiles, will be broad casted when the Tiles selected changes
+
+#### Outputs
+- `'onChange': Function`
+    * An event function that is fired when the value is changed

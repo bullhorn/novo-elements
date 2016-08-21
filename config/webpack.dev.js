@@ -3,6 +3,9 @@ const webpackMerge = require('webpack-merge'); //Used to merge webpack configs
 const commonConfig = require('./webpack.common.js'); //The settings that are common to prod and dev
 
 // Webpack Plugins
+const Dashboard = require('webpack-dashboard');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+const dashboard = new Dashboard();
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 
 // Webpack Constants
@@ -91,7 +94,10 @@ module.exports = webpackMerge(commonConfig, {
                 'ENV': JSON.stringify(METADATA.ENV),
                 'NODE_ENV': JSON.stringify(METADATA.ENV)
             }
-        })
+        }),
+
+        // Plugin: WebpackDashboard
+        new DashboardPlugin(dashboard.setData)
     ],
 
     // Static analysis linter for JavaScript advanced options configuration
@@ -116,6 +122,7 @@ module.exports = webpackMerge(commonConfig, {
             aggregateTimeout: 300,
             poll: 1000
         },
+        quiet: true,
         outputPath: helpers.root('dist')
     },
 

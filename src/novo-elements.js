@@ -1,69 +1,50 @@
-// Labels
-import { NOVO_ELEMENTS_LABELS_PROVIDERS, NovoLabelService } from './services/novo-label-service';
-export * from './services/novo-label-service';
+// Export all modules
+export { NovoPipesModule } from './pipes/Pipes.module';
+export { NovoButtonModule } from './elements/button/Button.module';
+export { NovoLoadingModule } from './elements/loading/Loading.module';
+export { NovoCardModule } from './elements/card/Card.module';
+export { NovoToastModule } from './elements/toast/Toast.module';
+export { NovoTooltipModule } from './elements/tooltip/Tooltip.module';
+export { NovoHeaderModule } from './elements/header/Header.module';
+export { NovoTabModule } from './elements/tabs/Tabs.module';
+export { NovoTilesModule } from './elements/tiles/Tiles.module';
+export { NovoModalModule } from './elements/modal/Modal.module';
+export { NovoQuickNoteModule } from './elements/quick-note/QuickNote.module';
+export { NovoRadioModule } from './elements/radio/Radio.module';
+export { NovoDropdownModule } from './elements/dropdown/Dropdown.module';
+export { NovoSelectModule } from './elements/select/Select.module';
+export { NovoListModule } from './elements/list/List.module';
+export { NovoSwitchModule } from './elements/switch/Switch.module';
+export { NovoDrawerModule } from './elements/drawer/Drawer.module';
+export { NovoDragulaModule } from './elements/dragula/Dragula.module';
+export { NovoSliderModule } from './elements/slider/Slider.module';
+export { NovoPickerModule } from './elements/picker/Picker.module';
+export { NovoChipsModule } from './elements/chips/Chips.module';
+export { NovoDatePickerModule } from './elements/date-picker/DatePicker.module';
+export { NovoTimePickerModule } from './elements/time-picker/TimePicker.module';
+export { NovoNovoCKEditorModule } from './elements/ckeditor/CKEditor.module';
+export { NovoTipWellModule } from './elements/tip-well/TipWell.module';
+export { NovoTableModule } from './elements/table/Table.module';
+export { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
+export { NovoFormModule } from './elements/form/Form.module';
+export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
 
-import { NOVO_BUTTON_ELEMENTS } from './elements/button';
-import { NOVO_RADIO_ELEMENTS } from './elements/radio';
-import { NOVO_TAB_ELEMENTS } from './elements/tabs';
-import { NOVO_TOAST_ELEMENTS, TOAST_PROVIDERS } from './elements/toast';
-import { NOVO_MODAL_ELEMENTS, MODAL_PROVIDERS } from './elements/modal';
-import { NOVO_SWITCH_ELEMENTS } from './elements/switch';
-import { NOVO_CARD_ELEMENTS, NOVO_CARD_EXTRA_ELEMENTS } from './elements/card';
-import { NOVO_LOADING_ELEMENTS } from './elements/loading';
-import { NOVO_TOOLTIP_ELEMENTS } from './elements/tooltip';
-import { NOVO_DRAWER_ELEMENTS } from './elements/drawer';
-import { NOVO_SELECT_ELEMENTS } from './elements/select';
-import { NOVO_PICKER_ELEMENTS } from './elements/picker';
-import { NOVO_QUICK_NOTE_ELEMENTS } from './elements/quicknote';
-import { NOVO_CHIPS_ELEMENTS } from './elements/chips';
-import { PICKER_EXTRAS } from './elements/picker/extras/PickerExtras';
-import { QUICK_NOTE_EXTRAS } from './elements/quick-note/extras/QuickNoteExtras';
-import { NOVO_DATE_PICKER_ELEMENTS } from './elements/datepicker';
-import { NOVO_TIME_PICKER_ELEMENTS } from './elements/timepicker';
-import { NOVO_DROPDOWN_ELEMENTS } from './elements/dropdown';
-import { NOVO_HEADER_ELEMENTS } from './elements/header';
-import { NOVO_LIST_ELEMENTS } from './elements/list';
-import { NOVO_TABLE_ELEMENTS, NOVO_TABLE_EXTRA_ELEMENTS } from './elements/table';
-import { NOVO_DRAGULA_ELEMENTS } from './elements/dragula';
-import { NOVO_FORM_ELEMENTS, NOVO_FORM_CORE, NOVO_FORM_EXTRAS } from './elements/form';
-import { NOVO_TILES_ELEMENTS } from './elements/tiles';
-import { NOVO_SLIDER_ELEMENTS } from './elements/slider';
-import { NOVO_TIPWELL_ELEMENTS } from './elements/tip-well';
-import { NOVO_EDITOR_ELEMENTS } from './elements/ckeditor';
+// Export all services
+export { NovoToastService } from './elements/toast/ToastService';
+export { NovoModalService } from './elements/modal/ModalService';
+export { NovoLabelService } from './services/novo-label-service';
+export { NovoDragulaService } from './elements/dragula/DragulaService';
 
-// Elements
-export * from './elements/button';
-export * from './elements/radio';
-export * from './elements/tabs';
-export * from './elements/toast';
-export * from './elements/modal';
-export * from './elements/switch';
-export * from './elements/card';
-export * from './elements/loading';
-export * from './elements/select';
-export * from './elements/picker';
-export * from './elements/quicknote';
-export * from './elements/picker/extras/PickerExtras';
-export * from './elements/quick-note/extras/QuickNoteExtras';
-export * from './elements/chips';
-export * from './elements/dropdown';
-export * from './elements/tooltip';
-export * from './elements/drawer';
-export * from './elements/switch';
-export * from './elements/datepicker';
-export * from './elements/timepicker';
-export * from './elements/header';
-export * from './elements/list';
-export * from './elements/table';
-export * from './elements/dragula';
-export * from './elements/form';
-export * from './elements/tiles';
-export * from './elements/slider';
-export * from './elements/tip-well';
-export * from './elements/ckeditor';
-
-// Pipes
-export * from './pipes/plural/Plural';
+// Export classes that will need to be imported
+export { NovoModalParams, NovoModalRef } from './elements/modal/Modal';
+export { QuickNoteResults } from './elements/quick-note/extras/quick-note-results/QuickNoteResults';
+export { PickerResults } from './elements/picker/extras/picker-results/PickerResults';
+export { EntityPickerResults } from './elements/picker/extras/entity-picker-results/EntityPickerResults';
+export { BaseRenderer } from './elements/table/extras/base-renderer/BaseRenderer';
+export { DateCell } from './elements/table/extras/date-cell/DateCell';
+export { FormValidators } from './elements/form/FormValidators';
+export { FormUtils } from './elements/form/FormUtils';
+export * from './elements/form/FormControls';
 
 // Utils
 export * from './utils/outside-click/OutsideClick';
@@ -72,48 +53,5 @@ export * from './utils/deferred/Deferred';
 export * from './utils/countries/Countries';
 export * from './utils/Helpers';
 
-export const NOVO_ELEMENTS = [
-    ...NOVO_BUTTON_ELEMENTS,
-    ...NOVO_RADIO_ELEMENTS,
-    ...NOVO_TAB_ELEMENTS,
-    ...NOVO_TOAST_ELEMENTS,
-    ...NOVO_MODAL_ELEMENTS,
-    ...NOVO_SWITCH_ELEMENTS,
-    ...NOVO_CARD_ELEMENTS,
-    ...NOVO_CARD_EXTRA_ELEMENTS,
-    ...NOVO_LOADING_ELEMENTS,
-    ...NOVO_SELECT_ELEMENTS,
-    ...NOVO_PICKER_ELEMENTS,
-    ...NOVO_CHIPS_ELEMENTS,
-    ...NOVO_DROPDOWN_ELEMENTS,
-    ...NOVO_TOOLTIP_ELEMENTS,
-    ...NOVO_DRAWER_ELEMENTS,
-    ...NOVO_HEADER_ELEMENTS,
-    ...NOVO_LIST_ELEMENTS,
-    ...NOVO_TABLE_ELEMENTS,
-    ...NOVO_TABLE_EXTRA_ELEMENTS,
-    ...NOVO_DRAWER_ELEMENTS,
-    ...NOVO_QUICK_NOTE_ELEMENTS,
-    ...NOVO_DATE_PICKER_ELEMENTS,
-    ...NOVO_TIME_PICKER_ELEMENTS,
-    ...NOVO_DRAGULA_ELEMENTS,
-    ...PICKER_EXTRAS,
-    ...QUICK_NOTE_EXTRAS,
-    ...NOVO_FORM_ELEMENTS,
-    ...NOVO_FORM_CORE,
-    ...NOVO_FORM_EXTRAS,
-    ...NOVO_TILES_ELEMENTS,
-    ...NOVO_SLIDER_ELEMENTS,
-    ...NOVO_TIPWELL_ELEMENTS,
-    ...NOVO_EDITOR_ELEMENTS
-];
-
-export const NOVO_SERVICES = [
-    NovoLabelService
-];
-
-export const NOVO_PROVIDERS = [
-    ...TOAST_PROVIDERS,
-    ...MODAL_PROVIDERS,
-    ...NOVO_ELEMENTS_LABELS_PROVIDERS
-];
+// Export main module
+export { NovoElementsModule } from './novo-elements.module';

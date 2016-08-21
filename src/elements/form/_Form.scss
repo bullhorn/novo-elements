@@ -1,4 +1,7 @@
-novo-form {
+@import "./extras/address/Address";
+@import "./extras/checkbox/Checkbox";
+
+novo-form, novo-dynamic-form {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -11,414 +14,309 @@ novo-form {
         align-items: flex-start;
         width: 100%;
 
-        header {
-            h1 {
-            }
-        }
-
         form {
             width: 100%;
 
-            form-title {
-            }
-
-            form-field {
-                margin-top: 1rem;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
+            > div.novo-form-row {
                 width: 100%;
-                min-height: 44px;
-                // validation
-                .ng-touched.ng-invalid {
-                    border-bottom: 1px solid $negative;
 
-                    &.valid-number {
-                        border-bottom: none;
+                &:first-child {
+                    > novo-control {
+                        margin-top: 0;
                     }
                 }
 
-                &[hidden] {
-                    display: none !important;
-                }
-
-                .error-message {
-                    color: $negative;
-                    font-size: 0.8em;
-                    position: absolute;
-                    bottom: -17px;
-                }
-
-                form-label {
-                    font-size: 1rem;
-                    flex: 1;
-                    margin-right: 28px;
-                    max-width: 130px;
-
-                    label {
-                        color: #9e9e9e;
-                        font-size: 0.9em;
-                        font-weight: 500;
-                        transition: 200ms ease-out;
-                        margin-right: 35px;
-                        text-transform: uppercase;
-                    }
-                }
-
-                form-input {
+                novo-control {
+                    margin-top: 1rem;
                     display: flex;
-                    align-items: inherit;
-                    flex: 2;
-                    max-width: 450px;
-                    position: relative;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 100%;
+                    min-height: 44px;
 
-                    &[type="picker"] {
-                        align-self: auto;
+                    .ng-touched.ng-invalid:not(.ng-pristine) {
+                        border-bottom: 1px solid $negative !important;
+
+                        &.valid-number {
+                            border-bottom: none !important;
+                        }
                     }
 
-                    select-input {
+                    &[hidden] {
+                        display: none !important;
+                    }
+
+                    .error-message {
+                        color: $negative;
+                        font-size: 0.8em;
+                        padding: 5px 0;
+                        flex-basis: 100%;
+                        margin-left: 185px;
+                        margin-bottom: 5px;
                         height: 2em;
+
+                        &[hidden] {
+                            display: block !important;
+                            visibility: hidden;
+                        }
                     }
 
-                    address-input,
-                    check-list,
-                    currency-input,
-                    date-input,
-                    date-time-input,
-                    entity-input,
-                    float-input,
-                    number-input,
-                    percent-input,
-                    picker-input,
-                    radio-input,
-                    select-input,
-                    text-area,
-                    text-input,
-                    tiles-input,
-                    time-input {
-                        font-size: 1rem;
+                    > div.novo-control-container {
                         flex: 1;
-                        position: relative;
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        width: 100%;
 
-                        i.required-indicator {
-                            position: absolute;
-                            left: -25px;
-                            height: 15px;
-                            width: 15px;
-                            font-size: 15px;
-                            top: 50%;
-                            transform: translateY(-50%);
-
-                            &.bhi-circle {
-                                color: $grapefruit;
-                                height: 10px;
-                                width: 10px;
-                                text-align: center;
-                                font-size: 7px;
-                            }
-
-                            &.bhi-check {
-                                color: $grass;
-                            }
+                        > label {
+                            color: #9e9e9e;
+                            font-size: 0.9em;
+                            flex: 1;
+                            max-width: 130px;
+                            font-weight: 500;
+                            transition: 200ms ease-out;
+                            margin-right: 35px;
+                            text-transform: uppercase;
                         }
 
-                        input,
-                        textarea {
-                            font-size: 1em;
-                            background: transparent !important;
-                            border: none;
-                            border-bottom: 1px solid #EAEAEA;
-                            border-radius: 0;
-                            outline: none;
-                            height: 2rem;
-                            line-height: 2em;
-                            width: 100%;
-                            margin: 0;
-                            padding: 0;
-                            box-shadow: none;
-                            box-sizing: content-box;
-                            transition: all 300ms;
-                            color: #26282B;
-
-                            &:hover {
-                                border-bottom: 1px solid lighten($dark, 47%);
-                            }
-
-                            &:focus {
-                                border-bottom: 1px solid $positive;
-                            }
-                        }
-
-                        textarea {
-                            overflow-y: hidden !important;
-                            transition: height 0;
-                            background: transparent !important;
-                        }
-                    }
-
-                    novo-quick-note {
-                        textarea {
-                            background: transparent !important;
-                        }
-                    }
-
-                    currency-input,
-                    percent-input {
-                        div {
+                        > div.novo-control-input-container {
                             display: flex;
                             align-items: center;
+                            max-width: 450px;
+                            flex: 2;
 
-                            input {
-                                flex: 1;
-                            }
+                            > div.novo-control-input {
+                                width: 100%;
+                                position: relative;
 
-                            label.left-label {
-                                padding-left: 5px;
-                                color: lighten($dark, 47%);
-                            }
-                        }
-                    }
+                                &[type="picker"] {
+                                    align-self: auto;
+                                }
 
-                    time-input {
-                        novo-time-picker {
-                            position: absolute;
-                        }
-                    }
+                                &.editor {
+                                    margin-bottom: 10px;
+                                }
 
-                    date-input {
-                        novo-date-picker {
-                            position: absolute;
-                        }
-                    }
+                                novo-quick-note {
+                                    margin-bottom: 10px;
+                                    textarea {
+                                        line-height: inherit;
+                                    }
 
-                    date-time-input {
-                        div.datetime-container {
-                            position: absolute;
-                            display: flex;
-                            box-shadow: 0 1px 3px rgba(#000, .1);
+                                    .quick-note-overlay {
+                                        padding: 0;
+                                    }
+                                }
 
-                            .calendar {
-                                border-top-right-radius: 0;
-                                border-bottom-right-radius: 0;
-                                box-shadow: none;
-                                border-right: 1px solid rgba($light, .5);
-                            }
+                                input, textarea {
+                                    font-size: 1em;
+                                    background: transparent !important;
+                                    border: none;
+                                    border-bottom: 1px solid #EAEAEA;
+                                    border-radius: 0;
+                                    outline: none;
+                                    height: 2rem;
+                                    width: 100%;
+                                    margin: 0;
+                                    padding: 0;
+                                    box-shadow: none;
+                                    box-sizing: content-box;
+                                    transition: all 300ms;
+                                    color: #26282B;
 
-                            novo-time-picker {
-                                border-top-left-radius: 0;
-                                border-bottom-left-radius: 0;
-                                box-shadow: none;
-                            }
-                        }
-                    }
+                                    &:hover {
+                                        border-bottom: 1px solid lighten($dark, 47%);
+                                    }
 
-                    check-box,
-                    check-list > div,
-                    radio-input {
-                        display: flex;
-                        flex-flow: row wrap;
+                                    &:focus {
+                                        border-bottom: 1px solid $positive;
+                                    }
+                                }
 
-                        [class*="-group"] {
-                            margin-right: 15px;
-                            cursor: pointer;
+                                textarea {
+                                    overflow-y: hidden !important;
+                                    transition: height 0;
+                                    background: transparent !important;
+                                }
 
-                            &:hover {
-                                label {
-                                    i {
-                                        &.bhi-checkbox-empty,
-                                        &.bhi-radio-empty {
-                                            color: $positive;
+                                > div.novo-control-input-with-label {
+                                    display: flex;
+                                    align-items: center;
+
+                                    input {
+                                        flex: 1;
+                                    }
+
+                                    label.input-label {
+                                        padding-left: 5px;
+                                        color: lighten($dark, 47%);
+                                    }
+                                }
+
+                                > div.novo-control-input-container {
+                                    font-size: 1rem;
+                                    flex: 1;
+                                    position: relative;
+
+                                    > i.bhi-search, > i.bhi-clock, > i.bhi-calendar {
+                                        position: absolute;
+                                        right: 0;
+                                        top: 0
+                                    }
+
+                                    > novo-time-picker, > novo-date-picker {
+                                        position: absolute;
+                                        top: 100%;
+                                        left: 0;
+                                    }
+
+                                    > div.date-time-container {
+                                        position: absolute;
+                                        top: 100%;
+                                        left: 0;
+                                        display: flex;
+                                        box-shadow: 0 1px 3px rgba(#000, .1);
+
+                                        novo-date-picker {
+                                            border-top-right-radius: 0;
+                                            border-bottom-right-radius: 0;
+                                            box-shadow: none;
+                                            border-right: 1px solid rgba($light, .5);
+
+                                            > .calendar {
+                                                box-shadow: none;
+                                            }
+                                        }
+
+                                        novo-time-picker {
+                                            border-top-left-radius: 0;
+                                            border-bottom-left-radius: 0;
+                                            box-shadow: none;
+                                        }
+                                    }
+
+                                    > novo-picker {
+                                        padding-bottom: 0;
+
+                                        &.ng-touched.ng-invalid:not(.ng-pristine) {
+                                            > input, > input:focus, > input:hover {
+                                                border-bottom-color: transparent !important;
+                                            }
+                                        }
+                                    }
+
+                                    > chips {
+                                        novo-picker {
+                                            padding-bottom: 0;
+                                            > input {
+                                                border: none;
+                                            }
+                                        }
+                                    }
+
+                                    entity-picker-results,
+                                    picker-results {
+                                        position: absolute;
+                                        color: black;
+                                        min-width: 100%;
+                                        max-width: none;
+                                        z-index: 10;
+                                        top: 100%;
+                                        border: 1px solid #4A89DC;
+
+                                        novo-list {
+                                            max-height: 600px;
+                                            overflow: auto;
+
+                                            novo-list-item {
+                                                cursor: pointer;
+                                                flex: 0 0;
+                                                transition: background-color 250ms;
+
+                                                & > div {
+                                                    width: 100%;
+                                                }
+
+                                                &.active {
+                                                    background-color: lighten($positive, 35%);
+                                                }
+
+                                                &:hover {
+                                                    background-color: lighten($positive, 39%);
+                                                }
+
+                                                item-content {
+                                                    flex-flow: row wrap;
+
+                                                    & > * {
+                                                        flex: 0 0 33%;
+                                                        white-space: nowrap;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .error-results,
+                                        .no-recents,
+                                        .null-results {
+                                            text-align: center;
+                                            padding: 1em 0 4em;
+
+                                            > i {
+                                                font-size: 3em;
+                                                margin: 0.5em;
+                                                color: rgba(0, 0, 0, .3);
+                                            }
+
+                                            > h4,
+                                            > p {
+                                                margin: 0;
+                                                max-width: none;
+                                                padding: 0;
+                                            }
+
+                                            > h4 {
+                                                font-weight: 500;
+                                            }
+
+                                            > p {
+                                            }
+                                        }
+
+                                        section {
+                                            box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
+                                            z-index: 9;
+                                            position: absolute;
+                                            width: 100%;
+                                            background-color: white;
+                                            color: black;
                                         }
                                     }
                                 }
                             }
 
-                            &.checked {
-                                label {
-                                    color: darken(#D2D2D2, 60%);
+                            i.required-indicator {
+                                height: 13px;
+                                width: 13px;
+                                font-size: 13px;
+                                margin-right: 10px;
 
-                                    i {
-                                        animation: iconEnter 160ms ease-in-out;
-                                    }
-                                }
-                            }
-
-                            &.disabled {
-                                opacity: 0.3;
-                                pointer-events: none;
-
-                                label {
-                                    opacity: 1;
-                                }
-                            }
-
-                            label {
-                                color: darken(#D2D2D2, 30%);
-                                margin-left: 0;
-                                cursor: pointer;
-                                transition: all 200ms ease-in-out;
-                                display: flex;
-                                align-items: baseline;
-
-                                i {
-                                    margin-right: 5px;
-                                    transition: all 200ms ease-in-out;
-
-                                    &.bhi-checkbox-empty,
-                                    &.bhi-radio-empty {
-                                        color: #D2D2D2;
-                                    }
-
-                                    &.bhi-checkbox-filled,
-                                    &.bhi-radio-filled {
-                                        color: $positive;
-                                    }
+                                &.bhi-circle {
+                                    color: $grapefruit;
+                                    text-align: center;
+                                    font-size: 7px;
                                 }
 
-                                span {
-                                    display: inline-block;
-                                }
-                            }
-                        }
-                    }
-
-                    date-input,
-                    date-time-input,
-                    entity-input,
-                    picker-input,
-                    quick-note-input,
-                    time-input {
-                        position: relative;
-
-                        > i {
-                            position: absolute;
-                            right: 0;
-                            top: 0;
-                        }
-
-                        input:focus {
-                            & + i {
-                                color: $positive;
-                            }
-                        }
-                    }
-
-                    chips-input,
-                    entity-chips-input,
-                    quick-note-input {
-                        display: flex;
-                        width: 100%;
-                        position: relative;
-
-                        i.required-indicator {
-                            position: absolute;
-                            left: -25px;
-                            height: 15px;
-                            width: 15px;
-                            font-size: 15px;
-                            top: 13px;
-                            transform: translateY(-50%);
-
-                            &.bhi-circle {
-                                color: $grapefruit;
-                                height: 10px;
-                                width: 10px;
-                                font-size: 7px;
-                            }
-
-                            &.bhi-check {
-                                color: $grass;
-                            }
-                        }
-                    }
-                }
-
-                entity-chips-input,
-                entity-input {
-                    entity-picker-results,
-                    picker-results {
-                        position: absolute;
-                        left: 0;
-                        top: 100%;
-                        color: black;
-                        width: 100%;
-                        max-width: none;
-                        z-index: 10;
-                        border: 1px solid #4A89DC;
-
-                        novo-list {
-                            max-height: 600px;
-                            overflow: auto;
-
-                            novo-list-item {
-                                flex: 0 0;
-                                transition: background-color 250ms;
-
-                                & > div {
-                                    width: 100%;
+                                &.bhi-check {
+                                    color: $grass;
                                 }
 
-                                &.active {
-                                    background-color: lighten($positive, 35%);
-                                }
-
-                                &:hover {
-                                    background-color: lighten($positive, 39%);
-                                }
-
-                                item-content {
-                                    flex-flow: row wrap;
-
-                                    & > * {
-                                        flex: 0 0 33%;
-                                        white-space: nowrap;
-                                    }
+                                &[hidden] {
+                                    display: inherit !important;
+                                    visibility: hidden;
                                 }
                             }
-                        }
-
-                        .error-results,
-                        .no-recents,
-                        .null-results {
-                            text-align: center;
-                            padding: 1em 0 4em;
-
-                            > i {
-                                font-size: 3em;
-                                margin: 0.5em;
-                                color: rgba(0, 0, 0, .3);
-                            }
-
-                            > h4,
-                            > p {
-                                margin: 0;
-                                max-width: none;
-                                padding: 0;
-                            }
-
-                            > h4 {
-                                font-weight: 500;
-                            }
-
-                            > p {
-                            }
-                        }
-
-                        section {
-                            box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
-                            z-index: 9;
-                            position: absolute;
-                            width: 100%;
-                            background-color: white;
-                            color: black;
-                        }
-                    }
-                }
-
-                &[required] {
-                    form-input {
-                        i {
-                            background: #DA4453;
                         }
                     }
                 }
@@ -511,55 +409,38 @@ novo-form {
 
     &[layout="vertical"] {
         .novo-form-container {
-            header {
-                margin-bottom: 20px;
-            }
             form {
-                form-field {
-                    margin-top: 2.2rem;
-                    position: relative;
-
-                    &:first-of-type {
+                > div.novo-form-row {
+                    novo-control {
                         margin-top: 0;
-                    }
 
-                    form-label {
-                        position: absolute;
-                        top: -13px;
-                        transition: all 90ms ease-in-out;
-                        width: 100%;
-                        max-width: 390px;
+                        .novo-control-container {
+                            flex-direction: column;
+                            align-items: flex-start;
+                            position: relative;
 
-                        label {
-                            font-size: 0.8em;
-                            font-weight: 500;
-                            transition: font-size 7ms ease-in-out;
-                        }
-                    }
-
-                    &.inactive {
-                        form-label {
-                            transform: translateY(26px);
-
-                            label {
-                                font-size: 1em;
-                                font-weight: 400;
+                            > label {
+                                margin-bottom: 5px;
+                                padding-left: 22px;
+                                max-width: 100%;
                             }
-                        }
 
-                        novo-select {
-                            div[type="button"] {
-                                justify-content: flex-end;
+                            .novo-control-input-container {
+                                display: flex;
+                                align-items: center;
+                                max-width: 450px;
+                                width: 100%;
+                            }
+
+                            .error-message {
+                                padding-left: 22px;
+                                position: relative;
+                                margin-left: 0;
                             }
                         }
                     }
                 }
             }
-        }
-
-        address-input,
-        tiles-input {
-            margin-top: 10px;
         }
     }
 }

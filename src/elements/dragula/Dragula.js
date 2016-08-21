@@ -1,19 +1,20 @@
+// NG2
 import { Directive, ElementRef } from '@angular/core';
-import { DragulaService } from './DragulaService';
+// APP
+import { NovoDragulaService } from './DragulaService';
 
 @Directive({
     selector: '[dragula]',
     inputs: ['bag:dragula', 'dragulaModel']
 })
-export class Dragula {
-    constructor(el:ElementRef, dragulaService:DragulaService) {
+export class NovoDragulaElement {
+    constructor(el:ElementRef, dragulaService:NovoDragulaService) {
         this.container = el.nativeElement;
         this.dragulaService = dragulaService;
         this.drake = null;
     }
 
     ngOnInit() {
-        // console.log(this.bag);
         let bag = this.dragulaService.find(this.bag);
 
         if (bag) {
@@ -52,5 +53,3 @@ export class Dragula {
         }
     }
 }
-
-export const NOVO_DRAGULA_ELEMENTS = [Dragula, DragulaService];

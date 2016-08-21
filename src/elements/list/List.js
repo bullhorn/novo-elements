@@ -1,5 +1,5 @@
+// NG2
 import { Component } from '@angular/core';
-import { CORE_DIRECTIVES, NgFor, NgIf, NgClass } from '@angular/common';
 
 @Component({
     selector: 'novo-list',
@@ -10,10 +10,9 @@ import { CORE_DIRECTIVES, NgFor, NgIf, NgClass } from '@angular/common';
     },
     template: `
         <ng-content></ng-content>
-    `,
-    directives: [CORE_DIRECTIVES, NgFor]
+    `
 })
-export class NovoList {
+export class NovoListElement {
 }
 
 @Component({
@@ -25,10 +24,9 @@ export class NovoList {
             <ng-content select="item-content"></ng-content>
         </div>
         <ng-content select="item-end"></ng-content>
-    `,
-    directives: [CORE_DIRECTIVES, NgFor, NgIf]
+    `
 })
-export class NovoListItem {
+export class NovoListItemElement {
 }
 
 @Component({
@@ -36,10 +34,9 @@ export class NovoListItem {
     inputs: ['icon'],
     template: `
         <i *ngIf="iconClass" [ngClass]="classMap" theme="contained"></i>
-    `,
-    directives: [NgIf, NgClass]
+    `
 })
-export class ItemAvatar {
+export class NovoItemAvatarElement {
     ngOnChanges() {
         this.iconClass = (this.icon) ? `bhi-${this.icon}` : null;
         this.classMap = [this.iconClass, this.icon];
@@ -56,7 +53,7 @@ export class ItemAvatar {
         <h3><ng-content></ng-content></h3>
     `
 })
-export class ItemTitle {
+export class NovoItemTitleElement {
 }
 
 @Component({
@@ -70,7 +67,7 @@ export class ItemTitle {
         <ng-content></ng-content>
     `
 })
-export class ItemContent {
+export class NovoItemContentElement {
 }
 
 @Component({
@@ -79,7 +76,5 @@ export class ItemContent {
         <ng-content></ng-content>
     `
 })
-export class ItemEnd {
+export class NovoItemEndElement {
 }
-
-export const NOVO_LIST_ELEMENTS = [NovoList, NovoListItem, ItemAvatar, ItemTitle, ItemContent, ItemEnd];

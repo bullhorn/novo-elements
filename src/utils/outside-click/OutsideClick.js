@@ -1,3 +1,4 @@
+// NG2
 import { EventEmitter } from '@angular/core';
 
 /**

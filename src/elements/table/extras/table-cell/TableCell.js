@@ -1,19 +1,11 @@
+// NG2
 import { Component, ElementRef, ComponentResolver, ViewChild, ViewContainerRef } from '@angular/core';
-import { COMMON_DIRECTIVES } from '@angular/common';
-import { DateCell } from '../date-cell/DateCell';
-
+// APP
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 
 @Component({
     selector: 'novo-table-cell',
-    inputs: [
-        'column',
-        'row'
-    ],
-    directives: [
-        DateCell,
-        COMMON_DIRECTIVES
-    ],
+    inputs: ['column', 'row'],
     template: `
         <div [ngSwitch]="column._type">
             <ref *ngSwitchWhen="'custom'" #container></ref>

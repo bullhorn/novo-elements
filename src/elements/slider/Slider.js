@@ -1,19 +1,17 @@
+// NG2
 import { Component, ElementRef } from '@angular/core';
-import { COMMON_DIRECTIVES } from '@angular/common';
-
-import { NOVO_BUTTON_ELEMENTS } from './../button';
-import { NovoLabelService } from './../../novo-elements';
+// APP
+import { NovoLabelService } from './../../services/novo-label-service';
 
 @Component({
     selector: 'novo-slider',
     inputs: ['slides'],
-    directives: [COMMON_DIRECTIVES, NOVO_BUTTON_ELEMENTS],
     template: require('./Slider.html'),
     host: {
         '[class]': 'currentClass'
     }
 })
-export class Slider {
+export class NovoSliderElement {
     constructor(element:ElementRef, labels:NovoLabelService) {
         this.element = element;
         this.labels = labels;
@@ -62,5 +60,3 @@ export class Slider {
         this.currentClass = `slide-${this.currentSlide}`;
     }
 }
-
-export const NOVO_SLIDER_ELEMENTS = [Slider];

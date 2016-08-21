@@ -9,27 +9,22 @@ import 'zone.js/dist/jasmine-patch';
 import 'zone.js/dist/async-test';
 import 'zone.js/dist/fake-async-test';
 import 'zone.js/dist/sync-test';
-import 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 
-import { TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS, TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS } from '@angular/platform-browser-dynamic/testing';
-import { setBaseTestProviders, afterEach, beforeEach, beforeEachProviders, describe, it, expect, inject, injectAsync, async, getTestInjector } from '@angular/core/testing';
-import { NOVO_ELEMENTS_LABELS_PROVIDERS } from './../src/novo-elements';
+import { TestBed, addProviders, inject } from '@angular/core/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 
 // Setup the test injector and set base providers
-getTestInjector().addProviders(NOVO_ELEMENTS_LABELS_PROVIDERS);
-setBaseTestProviders(TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS, TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
+TestBed.initTestEnvironment(
+    BrowserDynamicTestingModule,
+    platformBrowserDynamicTesting()
+);
 
 // Assign all these to the global namespace
 Object.assign(global, {
-    afterEach,
-    beforeEach,
-    beforeEachProviders,
-    describe,
-    it,
-    expect,
-    inject,
-    injectAsync,
-    async
+    addProviders,
+    inject
 });
 
 // Get all the spec files

@@ -1,19 +1,16 @@
-import { Component, EventEmitter, ElementRef, Optional } from '@angular/core'; //eslint-disable-line
-import { CORE_DIRECTIVES, NgControl, NgModel } from '@angular/common';
+// NG2
+import { Component, Input, Output, EventEmitter, forwardRef, Provider, ElementRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+
+// Value accessor for the component (supports ngModel)
+const TILES_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => NovoTilesElement),
+    multi: true
+});
 
 @Component({
     selector: 'novo-tiles',
-    inputs: [
-        'name',
-        'options',
-        'required'
-    ],
-    outputs: [
-        'changed'
-    ],
-    directives: [
-        CORE_DIRECTIVES
-    ],
+    providers: [TILES_VALUE_ACCESSOR],
     template: `
         <div class="tile-container">
             <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked}" (click)="select($event, option, i)">
@@ -26,33 +23,39 @@ import { CORE_DIRECTIVES, NgControl, NgModel } from '@angular/common';
         </div>
     `
 })
-export class Tiles {
-    validators:Array = [];
-    _options:Array = [];
-    value:any = null;
-    activeTile:any = null;
-    changed:EventEmitter = new EventEmitter;
+export class NovoTilesElement implements ControlValueAccessor {
+    @Input() name:String;
+    @Input() options:any;
+    @Input() required:boolean;
+    @Output() onChange:EventEmitter<any> = new EventEmitter();
 
-    constructor(@Optional() model:NgControl, element:ElementRef) {
+    _options:Array = [];
+    activeTile:any = null;
+
+    model:any;
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
+
+    constructor(element:ElementRef) {
         this.element = element;
-        this.model = model || new NgModel();
-        this.model.valueAccessor = this;
     }
 
     ngOnInit() {
         this.name = this.name || '';
+        this.setupOptions();
+    }
 
-        if (this.control) {
-            this.control.updateValue(this.value);
-        }
+    setupOptions() {
         if (this.options && this.options.length && (this.options[0].value === undefined || this.options[0].value === null)) {
             this._options = this.options.map((x) => {
-                let item = { value: x, label: x, checked: this.value === x };
+                let item = { value: x, label: x, checked: this.model === x };
                 return item;
             });
         } else {
             this._options = this.options.map((x) => {
-                x.checked = this.value === x.value;
+                x.checked = this.model === x.value;
                 if (x.checked) {
                     this.setTile(x);
                 }
@@ -61,23 +64,19 @@ export class Tiles {
         }
     }
 
-    /**
-     * @name select
-     *
-     * @param event
-     * @param item
-     */
     select(event, item) {
         if (event) {
             event.stopPropagation();
             event.preventDefault();
         }
+
         for (let option of this._options) {
             option.checked = false;
         }
+
         item.checked = !item.checked;
-        this.changed.emit(item.value);
-        this.model.viewToModelUpdate(item.value);
+        this.onChange.emit(item.value);
+        this.onModelChange(item.value);
         this.setTile(item);
     }
 
@@ -95,7 +94,8 @@ export class Tiles {
             let w = el.clientWidth;
             let left = el.offsetLeft;
 
-            // These style adjustments need to occur in this order. TODO: Remove this and use ngAnimate2 - @asibilia
+            // These style adjustments need to occur in this order.
+            // TODO: Remove this and use ngAnimate2 - @asibilia
             setTimeout(() => {
                 ind.style.width = `${w + 4}px`;
                 setTimeout(() => {
@@ -108,18 +108,18 @@ export class Tiles {
         });
     }
 
-    // ValueAccessor Functions
-    writeValue(value) {
-        this.value = value;
+    writeValue(model:any):void {
+        this.model = model;
+        if (model) {
+            this.setupOptions();
+        }
     }
 
-    registerOnChange(fn) {
-        this.onChange = fn;
+    registerOnChange(fn:Function):void {
+        this.onModelChange = fn;
     }
 
-    registerOnTouched(fn) {
-        this.onTouched = fn;
+    registerOnTouched(fn:Function):void {
+        this.onModelTouched = fn;
     }
 }
-
-export const NOVO_TILES_ELEMENTS = [Tiles];

@@ -1,20 +1,9 @@
 // NG2
 import { Component } from '@angular/core';
-// App
-import { NOVO_BUTTON_ELEMENTS } from '../button';
 
 @Component({
     selector: 'novo-tip-well',
-    inputs: [
-        'name',
-        'tip',
-        'buttonText',
-        'button',
-        'icon'
-    ],
-    directives: [
-        NOVO_BUTTON_ELEMENTS
-    ],
+    inputs: ['name', 'tip', 'buttonText', 'button', 'icon'],
     template: `
         <div *ngIf="isActive">
             <div>
@@ -25,7 +14,7 @@ import { NOVO_BUTTON_ELEMENTS } from '../button';
         </div>
     `
 })
-export class TipWell {
+export class NovoTipWellElement {
     constructor() {
         this.isActive = true;
         // Check if localStorage is enabled
@@ -59,7 +48,7 @@ export class TipWell {
         }
     }
 
-	/**
+    /**
      * @name hideTip
      */
     hideTip() {
@@ -69,5 +58,3 @@ export class TipWell {
         this.isActive = false;
     }
 }
-
-export const NOVO_TIPWELL_ELEMENTS = [TipWell];

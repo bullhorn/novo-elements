@@ -1,0 +1,68 @@
+novo-checkbox,
+novo-check-list {
+    display: flex;
+    flex-flow: row wrap;
+
+    [class*="-group"] {
+        margin-right: 15px;
+        cursor: pointer;
+
+        &:hover {
+            label {
+                i {
+                    &.bhi-checkbox-empty,
+                    &.bhi-radio-empty {
+                        color: $positive;
+                    }
+                }
+            }
+        }
+
+        &.checked {
+            label {
+                color: darken(#D2D2D2, 60%);
+
+                i {
+                    animation: iconEnter 160ms ease-in-out;
+                }
+            }
+        }
+
+        &.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+
+            label {
+                opacity: 1;
+            }
+        }
+
+        label {
+            color: darken(#D2D2D2, 30%);
+            margin-left: 0;
+            cursor: pointer;
+            transition: all 200ms ease-in-out;
+            display: flex;
+            align-items: baseline;
+
+            i {
+                margin-right: 5px;
+                transition: all 200ms ease-in-out;
+
+                &.bhi-checkbox-empty,
+                &.bhi-radio-empty {
+                    color: #D2D2D2;
+                }
+
+                &.bhi-checkbox-filled,
+                &.bhi-radio-filled {
+                    color: $positive;
+                }
+            }
+
+            span {
+                display: inline-block;
+            }
+        }
+    }
+}

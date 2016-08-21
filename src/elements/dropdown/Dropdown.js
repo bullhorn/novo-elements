@@ -1,4 +1,6 @@
+// NG2
 import { Component, ElementRef, EventEmitter } from '@angular/core';
+// APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
@@ -15,7 +17,7 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
         '[class.active]': 'active'
     }
 })
-export class Dropdown extends OutsideClick {
+export class NovoDropdownElement extends OutsideClick {
     constructor(element:ElementRef) {
         super(element);
         this.clickHandler = this.toggleActive.bind(this);
@@ -48,10 +50,10 @@ export class Dropdown extends OutsideClick {
         '[class.disabled]': 'disabled'
     }
 })
-export class Item {
+export class NovoItemElement {
     action = new EventEmitter();
 
-    constructor(dropdown:Dropdown) {
+    constructor(dropdown:NovoDropdownElement) {
         this.dropdown = dropdown;
     }
 
@@ -62,6 +64,3 @@ export class Item {
         }
     }
 }
-
-
-export const NOVO_DROPDOWN_ELEMENTS = [Dropdown, Item];

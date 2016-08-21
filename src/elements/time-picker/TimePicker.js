@@ -1,20 +1,22 @@
-import { Component, EventEmitter, Optional } from '@angular/core'; // eslint-disable-line
-import { COMMON_DIRECTIVES, NgControl, NgModel } from '@angular/common';
+// NG2
+import { Component, EventEmitter, forwardRef, Provider } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+// APP
+import { swallowEvent } from './../../utils/Helpers';
+// Vendor
 import moment from 'moment/moment';
 
-import { swallowEvent } from './../../utils/Helpers';
+// Value accessor for the component (supports ngModel)
+const TIME_PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => NovoTimePickerElement),
+    multi: true
+});
 
 @Component({
     selector: 'novo-time-picker',
-    inputs: [
-        'military'
-    ],
-    outputs: [
-        'onSelect'
-    ],
-    directives: [
-        COMMON_DIRECTIVES
-    ],
+    inputs: ['military'],
+    outputs: ['onSelect'],
+    providers: [TIME_PICKER_VALUE_ACCESSOR],
     template: `
         <div class="digital">
             <div class="digital--inner">
@@ -47,30 +49,23 @@ import { swallowEvent } from './../../utils/Helpers';
         </div>
     `,
     host: {
-        '[class.ng-untouched]': 'model.control?.untouched == true',
-        '[class.ng-touched]': 'model.control?.touched == true',
-        '[class.ng-pristine]': 'model.control?.pristine == true',
-        '[class.ng-dirty]': 'model.control?.dirty == true',
-        '[class.ng-valid]': 'model.control?.valid == true',
-        '[class.ng-invalid]': 'model.control?.valid == false',
         '[class.military]': 'military'
     }
 })
-export class TimePicker {
+export class NovoTimePickerElement implements ControlValueAccessor {
     hours = 12;
     minutes = 0;
     value = null;
     onSelect = new EventEmitter(false);
-    onChange = null;
-    onTouched = null;
 
     MERIDIANS = ['am', 'pm'];
     MINUTES = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
 
-    constructor(@Optional() model:NgControl) {
-        this.model = model || new NgModel();
-        this.model.valueAccessor = this;
-    }
+    model:any;
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
 
     ngOnInit() {
         // Set the hours
@@ -82,8 +77,8 @@ export class TimePicker {
     }
 
     ngOnChanges() {
-        if (this.model.value) {
-            this.init(this.model.value, false);
+        if (this.model) {
+            this.init(this.model, false);
         } else {
             this.init(moment(), false);
         }
@@ -165,24 +160,22 @@ export class TimePicker {
             moment: value,
             text: `${this.hours}:${this.minutes} ${this.meridian}`
         });
-        this.model.viewToModelUpdate(value.toDate());
+        this.onModelChange(value.toDate());
     }
 
     // ValueAccessor Functions
-    writeValue(value) {
-        this.value = value;
-        if (value) {
-            this.init(value, false);
+    writeValue(model:any):void {
+        this.model = model;
+        if (model) {
+            this.init(model, false);
         }
     }
 
-    registerOnChange(fn) {
-        this.onChange = fn;
+    registerOnChange(fn:Function):void {
+        this.onModelChange = fn;
     }
 
-    registerOnTouched(fn) {
-        this.onTouched = fn;
+    registerOnTouched(fn:Function):void {
+        this.onModelTouched = fn;
     }
 }
-
-export const NOVO_TIME_PICKER_ELEMENTS = [TimePicker];

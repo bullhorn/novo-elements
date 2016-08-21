@@ -1,15 +1,11 @@
+// NG2
 import { Component } from '@angular/core';
-import { DatePipe } from '@angular/common';
+// APP
 import { BaseRenderer } from '../base-renderer/BaseRenderer';
 
 @Component({
     selector: 'date-cell',
-    pipes: [
-        DatePipe
-    ],
-    inputs: [
-        'value'
-    ],
+    inputs: ['value'],
     template: `
         <div class="date-cell">
             <label>{{ value | date }}</label>

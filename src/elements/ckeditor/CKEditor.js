@@ -1,49 +1,73 @@
-import { Component, Input, Output, ViewChild, Optional, EventEmitter, Renderer } from '@angular/core'; // eslint-disable-line
-import { NgControl } from '@angular/common';
+// NG2
+import { Component, Input, Output, ViewChild, EventEmitter, NgZone, Provider, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
+// Value accessor for the component (supports ngModel)
+const CKEDITOR_CONTROL_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => NovoCKEditorElement),
+    multi: true
+});
+
+/**
+ * CKEditor component
+ * Usage :
+ *  <novo-editor [(ngModel)]="data" [config]="{...}" debounce="500"></novo-editor>
+ */
 @Component({
     selector: 'novo-editor',
-    template: '<textarea #host (change)="onValueChange($event)"></textarea>'
+    providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
+    template: '<textarea #host></textarea>'
 })
-export class CKEditor {
+export class NovoCKEditorElement {
     @Input() config;
-    @Input() ngModel;
+    @Input() debounce;
+
     @Output() change = new EventEmitter();
+    @Output() ready = new EventEmitter();
     @ViewChild('host') host;
 
-    value = '';
+    _value = '';
     instance;
-    ngControl;
-    renderer;
+    debounceTimeout;
+    zone;
 
-    constructor(@Optional() ngControl:NgControl, renderer:Renderer) {
-        if (ngControl) {
-            ngControl.valueAccessor = this;
-            this.ngControl = ngControl;
+    constructor(zone:NgZone) {
+        this.zone = zone;
+    }
+
+    get value() {
+        return this._value;
+    }
+
+    @Input() set value(v) {
+        if (v !== this._value) {
+            this._value = v;
+            this.onChange(v);
         }
-        this.renderer = renderer;
     }
 
     ngOnDestroy() {
         if (this.instance) {
-            this.instance.removeAllListeners();
-            this.instance.destroy();
-            this.instance = null;
+            setTimeout(() => {
+                this.instance.removeAllListeners();
+                this.instance.destroy();
+                this.instance = null;
+            });
         }
     }
 
     ngAfterViewInit() {
-        // Configuration
-        let config = this.config || this.getBaseConfig();
+        let config = this.confi || this.getBaseConfig();
         this.ckeditorInit(config);
     }
 
-    onValueChange() {
-        let value = this.host.nativeElement.value;
-        this.change.emit(value);
-        if (this.ngControl) {
-            this.ngControl.viewToModelUpdate(value);
-        }
+    updateValue(value) {
+        this.zone.run(() => {
+            this.value = value;
+            this.onChange(value);
+            this.onTouched();
+            this.change.emit(value);
+        });
     }
 
     ckeditorInit(config) {
@@ -58,15 +82,47 @@ export class CKEditor {
         // Set initial value
         this.instance.setData(this.value);
 
+        // listen for instanceReady event
+        this.instance.on('instanceReady', (evt) => {
+            // send the evt to the EventEmitter
+            this.ready.emit(evt);
+        });
+
         // CKEditor change event
         this.instance.on('change', () => {
-            this.renderer.setElementProperty(this.host.nativeElement, 'value', this.instance.getData());
-            this.renderer.invokeElementMethod(this.host.nativeElement, 'dispatchEvent', [new Event('change')]);
+            this.onTouched();
+            let value = this.instance.getData();
+
+            // Debounce update
+            if (this.debounce) {
+                if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
+                this.debounceTimeout = setTimeout(() => {
+                    this.updateValue(value);
+                    this.debounceTimeout = null;
+                }, parseInt(this.debounce)); // eslint-disable-line
+            } else {
+                this.updateValue(value);
+            }
         });
     }
 
+    getBaseConfig() {
+        return {
+            toolbar: [
+                { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo', 'Scayt'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
+                { name: 'links', items: ['Link'] },
+                { name: 'tools', items: ['Maximize', 'Source'] },
+                '/',
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
+                { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                { name: 'colors', items: ['TextColor', 'BGColor'] }
+            ]
+        };
+    }
+
     writeValue(value) {
-        this.value = value;
+        this._value = value;
         if (this.instance) {
             this.instance.setData(value);
         }
@@ -85,21 +141,4 @@ export class CKEditor {
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
-
-    getBaseConfig() {
-        return {
-            toolbar: [
-                { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo', 'Scayt'] },
-                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
-                { name: 'links', items: ['Link'] },
-                { name: 'tools', items: ['Maximize', 'Source'] },
-                '/',
-                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
-                { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
-                { name: 'colors', items: ['TextColor', 'BGColor'] }
-            ]
-        };
-    }
 }
-
-export const NOVO_EDITOR_ELEMENTS = [CKEditor];

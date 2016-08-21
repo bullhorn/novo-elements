@@ -1,6 +1,7 @@
 novo-tip-well {
     display: inline-block;
-    margin: 1em 0 1em;
+    margin-bottom: 1em;
+
     > div {
         display: inline-block;
         border-radius: .25em;
@@ -11,6 +12,7 @@ novo-tip-well {
 
         > div {
             display: flex;
+
             > i {
                 flex-shrink: 0;
                 text-align: center;
@@ -18,6 +20,7 @@ novo-tip-well {
                 margin-right: 10px;
                 color: #aaaaaa;
             }
+
             > p {
                 width: 100%;
                 max-width: 33em;

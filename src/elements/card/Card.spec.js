@@ -1,45 +1,99 @@
-import { Component } from '@angular/core';
-
-import { Card } from './Card';
-import { testComponent, grabComponent } from './../../testing/TestHelpers';
-
-@Component({
-    selector: 'test-cmp',
-    directives: [Card],
-    template: `
-        <novo-card [title]="'All Attributes :)'"
-                [loading]="loading"
-                [message]="message"
-                [refresh]="refresh"
-                [close]="close"
-                (onRefresh)="onRefresh()"
-                (onClose)="onClose()">
-            This is the ALL attribute card content!
-            <footer>I AM THE FOOTER</footer>
-        </novo-card>
-    `
-})
-class TestCmp {
-    constructor() {
-        this.refresh = true;
-        this.close = true;
-    }
-
-    onClose() {
-        console.log('CLOSE'); // eslint-disable-line
-    }
-
-    onRefresh() {
-        console.log('REFRESH'); // eslint-disable-line
-    }
-}
+import { CardElement } from './Card';
+import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
 
 describe('Element: Card', () => {
-    it('should initialize correctly', testComponent(TestCmp, (fixture) => {
-        const { instance, element, testComponentInstance, testComponentElement } = grabComponent(fixture, Card);
-        expect(instance).toBeTruthy();
-        expect(element).toBeTruthy();
-        expect(testComponentInstance).toBeTruthy();
-        expect(testComponentElement).toBeTruthy();
+    let component;
+
+    beforeEach(() => {
+        addProviders([
+            CardElement,
+            APP_TEST_PROVIDERS
+        ]);
+    });
+
+    beforeEach(inject([CardElement], _component => {
+        component = _component;
     }));
+
+    describe('Function: ngOnInit()', () => {
+        it('should initialize correctly', () => {
+            expect(component).toBeTruthy();
+            expect(component.ngOnInit).toBeDefined();
+            expect(component.onClose).toBeDefined();
+            expect(component.onRefresh).toBeDefined();
+            expect(component.padding).toBeTruthy();
+        });
+    });
+
+    describe('Function: ngOnChanges()', () => {
+        it('should be defined', () => {
+            expect(component.ngOnChanges).toBeDefined();
+        });
+
+        it('should set defaults', () => {
+            component.ngOnChanges();
+            expect(component.config).toBeDefined();
+            expect(component.cardAutomationId).toBe('no-title-card');
+            expect(component.iconClass).toBeFalsy();
+            expect(component.messageIconClass).toBeFalsy();
+        });
+
+        it('should setup with value set on component', () => {
+            component.title = 'test';
+            component.icon = 'test';
+            component.messageIcon = 'test';
+            component.ngOnChanges();
+            expect(component.cardAutomationId).toBe('test-card');
+            expect(component.iconClass).toBe('bhi-test');
+            expect(component.messageIconClass).toBe('bhi-test');
+        });
+
+        it('should setup with value set in config', () => {
+            component.config = {
+                title: 'test',
+                icon: 'test',
+                messageIcon: 'test'
+            };
+            component.ngOnChanges();
+            expect(component.cardAutomationId).toBe('test-card');
+            expect(component.iconClass).toBe('bhi-test');
+            expect(component.messageIconClass).toBe('bhi-test');
+        });
+    });
+
+    describe('Function: toggleClose()', () => {
+        it('should emit close event', () => {
+            spyOn(component.onClose, 'next');
+            component.toggleClose();
+            expect(component.onClose.next).toHaveBeenCalledWith();
+        });
+
+        it('should call close function if defined in config', () => {
+            component.config.onClose = () => {
+            };
+            spyOn(component.onClose, 'next');
+            spyOn(component.config, 'onClose');
+            component.toggleClose();
+            expect(component.onClose.next).not.toHaveBeenCalled();
+            expect(component.config.onClose).toHaveBeenCalled();
+        });
+    });
+
+    describe('Function: toggleRefresh()', () => {
+        it('should emit close event', () => {
+            spyOn(component.onRefresh, 'next');
+            component.toggleRefresh();
+            expect(component.onRefresh.next).toHaveBeenCalledWith();
+        });
+
+        it('should call refresh function if defined in config', () => {
+            component.config.onRefresh = () => {
+            };
+            spyOn(component.onRefresh, 'next');
+            spyOn(component.config, 'onRefresh');
+            component.toggleRefresh();
+            expect(component.onRefresh.next).not.toHaveBeenCalled();
+            expect(component.config.onRefresh).toHaveBeenCalled();
+        });
+    });
 });

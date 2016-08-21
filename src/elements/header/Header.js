@@ -1,16 +1,14 @@
+// NG2
 import { Component } from '@angular/core';
-import { CORE_DIRECTIVES } from '@angular/common';
-import { NOVO_BUTTON_ELEMENTS } from '../button';
 
 @Component({
     selector: 'util-action',
     inputs: ['icon', 'inverse'],
     template: `
         <button theme="icon" [icon]="icon" [attr.inverse]="inverse"></button>
-    `,
-    directives: [NOVO_BUTTON_ELEMENTS]
+    `
 })
-export class UtilAction {
+export class UtilActionElement {
 }
 
 @Component({
@@ -31,10 +29,9 @@ export class UtilAction {
             <ng-content select="utils"></ng-content>
         </section>
         <ng-content></ng-content>
-    `,
-    directives: [CORE_DIRECTIVES, UtilAction]
+    `
 })
-export class NovoHeader {
+export class NovoHeaderElement {
     constructor() {
         this.inverse = 'inverse';
         this.headerClass = 'novo-header';
@@ -46,5 +43,3 @@ export class NovoHeader {
         this.inverse = (this.theme === 'white' || this.theme === 'off-white' || this.theme === 'light') ? null : 'inverse';
     }
 }
-
-export const NOVO_HEADER_ELEMENTS = [NovoHeader, UtilAction];

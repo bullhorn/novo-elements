@@ -4,6 +4,8 @@
         "global-require": 0
     },
     "globals": {
+        "addProviders": false,
+        "inject": false,
         "CKEDITOR": false,
         "VERSION": false,
         "ENV": false,
