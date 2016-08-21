@@ -1,3 +1,13 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/bullhorn/novo-elements/compare/v0.2.26...v1.0.1) (2016-08-21)
+
+
+### Features
+
+* **RC.5:** Updating to RC.5 (changelog inc) ([892ad53](https://github.com/bullhorn/novo-elements/commit/892ad53))
+
+
+
 <a name="0.2.26"></a>
 ## [0.2.26](https://github.com/bullhorn/novo-elements/compare/v0.2.25...v0.2.26) (2016-08-16)
 
