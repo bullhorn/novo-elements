@@ -48,7 +48,7 @@ export class NovoTipWellElement {
         }
     }
 
-	/**
+    /**
      * @name hideTip
      */
     hideTip() {

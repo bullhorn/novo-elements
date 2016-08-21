@@ -69,7 +69,8 @@ describe('Element: Card', () => {
         });
 
         it('should call close function if defined in config', () => {
-            component.config.onClose = () => {};
+            component.config.onClose = () => {
+            };
             spyOn(component.onClose, 'next');
             spyOn(component.config, 'onClose');
             component.toggleClose();
@@ -86,7 +87,8 @@ describe('Element: Card', () => {
         });
 
         it('should call refresh function if defined in config', () => {
-            component.config.onRefresh = () => {};
+            component.config.onRefresh = () => {
+            };
             spyOn(component.onRefresh, 'next');
             spyOn(component.config, 'onRefresh');
             component.toggleRefresh();
