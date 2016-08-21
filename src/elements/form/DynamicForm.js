@@ -74,11 +74,11 @@ export class NovoDynamicFormElement {
     }
 
     get values() {
-        return this.form.value;
+        return this.form ? this.form.value : null;
     }
 
     get isValid() {
-        return this.form.valid;
+        return this.form ? this.form.valid : false;
     }
 
     get updatedValues() {

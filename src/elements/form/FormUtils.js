@@ -253,11 +253,11 @@ export class FormUtils {
         return null;
     }
 
-    setInitialValues(controls, values) {
+    setInitialValues(controls, values, keepClean = false) {
         controls.forEach(control => {
-            if (!isBlank(values[control.key])) {
+            if (!isBlank(values[control.key]) && values[control.key].length !== 0) {
                 control.value = values[control.key];
-                control.dirty = true;
+                control.dirty = !keepClean;
             }
         });
     }
