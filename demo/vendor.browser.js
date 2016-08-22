@@ -5,6 +5,7 @@ import '@angular/core';
 import '@angular/common';
 import '@angular/forms';
 import '@angular/router';
+import '@angular/http';
 
 // RxJS
 import 'rxjs/add/operator/map';

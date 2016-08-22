@@ -1,5 +1,6 @@
 // NG2
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // APP
@@ -18,6 +19,7 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
     imports: [
         BrowserModule,
         FormsModule,
+        HttpModule,
         ReactiveFormsModule,
         routing,
         NovoElementsModule
