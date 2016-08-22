@@ -5,7 +5,7 @@
         <!--Required Indicator-->
         <i [hidden]="!control.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
         <!--Form Controls-->
-        <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType">
+        <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType" [attr.data-automation-id]="control.key">
             <!--Text-based Inputs-->
             <!--TODO prefix/suffix on the control-->
             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'">
