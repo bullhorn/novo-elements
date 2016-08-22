@@ -2,7 +2,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // APP
-import { NovoButtonModule, NovoLoadingModule } from './../../novo-elements';
+import { NovoLoadingModule } from './../loading/Loading.module';
+import { NovoButtonModule } from './../button/Button.module';
 import { CardElement } from './Card';
 import { CardBestTimeElement } from './extras/best-time/CardBestTime';
 import { CardDonutChartElement } from './extras/donut-chart/CardDonutChart';

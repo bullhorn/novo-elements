@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // APP
-import { NovoButtonModule } from './../../novo-elements';
+import { NovoButtonModule } from './../button/Button.module';
 import { NovoTipWellElement } from './TipWell';
 
 @NgModule({

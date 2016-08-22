@@ -189,7 +189,7 @@ export class QuickNoteElement extends OutsideClick {
         if (this.formattedNote) {
             this.onModelChange({ note: this.formattedNote, references: this.model.references });
         } else {
-            this.onModelChange('');
+            this.onModelChange({ note: '', references: {} });
         }
     }
 
@@ -296,7 +296,7 @@ export class QuickNoteElement extends OutsideClick {
     }
 
     writeValue(model:any):void {
-        if (model.references || model.note) {
+        if (model && (model.references || model.note)) {
             this.model = {
                 note: model.note || '',
                 references: model.references || {}
