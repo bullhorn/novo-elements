@@ -50,14 +50,14 @@ export class NovoCheckListElement implements ControlValueAccessor {
                 let formattedOption = {
                     value: option,
                     label: option,
-                    checked: (this.model.length && (this.model.indexOf(option.value) !== -1))
+                    checked: (this.model && this.model.length && (this.model.indexOf(option.value) !== -1))
                 };
                 this._options.push(formattedOption);
             });
         } else {
             this.options.forEach(option => {
                 let formattedOption = option;
-                formattedOption.checked = (this.model.length && (this.model.indexOf(option.value) !== -1));
+                formattedOption.checked = (this.model && this.model.length && (this.model.indexOf(option.value) !== -1));
                 this._options.push(formattedOption);
             });
         }
