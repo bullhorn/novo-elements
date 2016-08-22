@@ -1,4 +1,6 @@
 novo-radio {
+    margin-right: 10px;
+
     &.vertical {
         display: block;
     }
@@ -10,6 +12,8 @@ novo-radio {
     }
 
     > label {
+        cursor: pointer;
+
         i {
             margin-right: 5px;
             transition: all 200ms ease-in-out;

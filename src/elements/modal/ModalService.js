@@ -1,9 +1,11 @@
-import { Provider, ComponentResolver, Injectable, ReflectiveInjector } from '@angular/core';
-
-import { ModalRef, ModalParams, NovoModalContainer } from './Modal';
+// NG2
+import { ComponentResolver, Injectable, ReflectiveInjector } from '@angular/core';
+// APP
+import { NovoModalRef, NovoModalParams, NovoModalContainerElement } from './Modal';
 
 @Injectable()
-export class ModalService {
+export class NovoModalService {
+    // TODO - use ComponentFactoryResolver instead - jgodi
     constructor(componentResolver:ComponentResolver) {
         this.componentResolver = componentResolver;
     }
@@ -18,17 +20,16 @@ export class ModalService {
             return null;
         }
 
-        const modal = new ModalRef();
+        const modal = new NovoModalRef();
         modal.component = component;
-
         modal.open();
 
-        this.componentResolver.resolveComponent(NovoModalContainer)
+        this.componentResolver.resolveComponent(NovoModalContainerElement)
             .then(componentFactory => {
                 const ctxInjector = this._parentViewContainer.injector;
                 let injector = ReflectiveInjector.resolve([
-                    { provide: ModalRef, useValue: modal },
-                    { provide: ModalParams, useValue: scope }
+                    { provide: NovoModalRef, useValue: modal },
+                    { provide: NovoModalParams, useValue: scope }
                 ]);
                 let componentInjector = ReflectiveInjector.fromResolvedProviders(injector, ctxInjector);
                 modal.containerRef = this._parentViewContainer.createComponent(componentFactory, 0, componentInjector);
@@ -36,7 +37,3 @@ export class ModalService {
         return modal;
     }
 }
-
-export const MODAL_PROVIDERS = [
-    new Provider(ModalService, { useClass: ModalService })
-];

@@ -62,6 +62,7 @@ p {
     line-height: 1.7rem;
     margin: 0;
     padding: 0.25rem 0 0.55rem;
+    max-width: 33em;
 }
 
 // Special Classes
@@ -97,17 +98,13 @@ i {
                 vertical-align: baseline;
                 line-height: 1.8;
             }
-
-            @each $entity,
-            $color in $entity-colors {
+            @each $entity, $color in $entity-colors {
                 &.#{$entity} {
                     color: $white;
                     background: $color;
                 }
             }
-
-            @each $key,
-            $color in $analytics-colors {
+            @each $key, $color in $analytics-colors {
                 &.#{$key} {
                     color: $white;
                     background: $color;
@@ -116,8 +113,7 @@ i {
         }
 
         &[theme="entity"] {
-            @each $entity,
-            $color in $entity-colors {
+            @each $entity, $color in $entity-colors {
                 &.#{$entity} {
                     color: $color;
                     background: transparent;
@@ -128,6 +124,7 @@ i {
 }
 
 // Nested icons
+figcaption,
 h1,
 h2,
 h3,
@@ -135,8 +132,7 @@ h4,
 h5,
 h6,
 p,
-span,
-figcaption {
+span {
     i {
         margin: 0 0.45em 0 0;
         padding: 0;
@@ -174,8 +170,8 @@ a {
         color: $positive;
     }
 
-    &:hover,
-    &:active {
+    &:active,
+    &:hover {
         color: darken($positive, 10%);
     }
 }

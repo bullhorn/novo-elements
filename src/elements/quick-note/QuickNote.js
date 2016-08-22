@@ -1,16 +1,22 @@
-import { Component, EventEmitter, ElementRef, ViewContainerRef, ComponentResolver, ViewChild, Optional } from '@angular/core'; //eslint-disable-line
-import { NgModel } from '@angular/common';
-import 'rxjs/Rx'; //eslint-disable-line
-
+// NG2
+import { Component, EventEmitter, forwardRef, Provider, ElementRef, ComponentResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+// APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
 
+// Value accessor for the component (supports ngModel)
+const QUICK_NOTE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => QuickNoteElement),
+    multi: true
+});
+
 @Component({
     selector: 'novo-quick-note',
-    directives: [NgModel],
-    inputs: ['config', 'placeholder', 'references'],
+    inputs: ['config', 'placeholder'],
     outputs: ['focus', 'blur'],
+    providers: [QUICK_NOTE_VALUE_ACCESSOR],
     template: `
         <div class="quick-note-wrapper">
             <textarea [(ngModel)]="basicNote"
@@ -28,7 +34,7 @@ import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
         </div>
     `
 })
-export class QuickNote extends OutsideClick {
+export class QuickNoteElement extends OutsideClick {
     // Emitter for selects
     focus:EventEmitter = new EventEmitter();
     blur:EventEmitter = new EventEmitter();
@@ -36,18 +42,17 @@ export class QuickNote extends OutsideClick {
     // Internal search string
     searchTerm:string = '';
 
-    // Placeholders for the callbacks
-    _onTouchedCallback = () => false;
-    _onChangeCallback = () => false;
+    model:any;
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
 
     // Results container
     @ViewChild('results', { read: ViewContainerRef }) results:ViewContainerRef;
 
-    constructor(@Optional() model:NgModel, element:ElementRef, componentResolver:ComponentResolver) {
+    constructor(element:ElementRef, componentResolver:ComponentResolver) {
         super(element);
-        // NgModel instance
-        this.model = model || new NgModel();
-        this.model.valueAccessor = this;
         // Component Resolver  Instance
         this.componentResolver = componentResolver;
         // Instance of element
@@ -77,8 +82,6 @@ export class QuickNote extends OutsideClick {
         }
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || QuickNoteResults;
-        // Write the value to the model
-        this.writeValue(this.model.value);
     }
 
     onKeyPress(event) {
@@ -161,11 +164,11 @@ export class QuickNote extends OutsideClick {
         // Replace references with anchor tags
         let tempFormattedValue = value;
         let tempBasicValue = value;
-        if (this.references) {
-            Object.keys(this.references).forEach(key => {
-                let array = this.references[key] || [];
+        if (this.model.references) {
+            Object.keys(this.model.references).forEach(key => {
+                let array = this.model.references[key] || [];
                 let formatter = (this.config.renderer ? this.config.renderer[key] : null) || this.renderLink;
-                this.references[key] = array.filter(item => {
+                this.model.references[key] = array.filter(item => {
                     let ref = `${this.config.triggers[key]}${item.label}`;
                     let exists = tempFormattedValue.indexOf(ref) !== -1;
                     if (exists) {
@@ -184,9 +187,9 @@ export class QuickNote extends OutsideClick {
         this.basicNote = tempBasicValue;
         // Propagate change to ngModel
         if (this.formattedNote) {
-            this._onChangeCallback(this.formattedNote);
+            this.onModelChange({ note: this.formattedNote, references: this.model.references });
         } else {
-            this._onChangeCallback();
+            this.onModelChange('');
         }
     }
 
@@ -268,14 +271,14 @@ export class QuickNote extends OutsideClick {
         this.searchTerm = null;
 
         // Add the references
-        this.references = this.references || {};
-        this.references[taggingMode] = this.references[taggingMode] || [];
-        this.references[taggingMode].push(selected);
+        this.model.references = this.model.references || {};
+        this.model.references[taggingMode] = this.model.references[taggingMode] || [];
+        this.model.references[taggingMode].push(selected);
 
         // Update the formatted note
         this.updateFormattedNote(this.basicNote);
         // Propagate change to ngModel
-        this._onChangeCallback(this.formattedNote);
+        this.onModelChange({ note: this.formattedNote, references: this.model.references });
     }
 
     replaceLastOccurrence(value, key, replaceValue) {
@@ -289,30 +292,32 @@ export class QuickNote extends OutsideClick {
     // Set touched on blur
     onTouched() {
         this.blur.emit(event);
-        this._onTouchedCallback();
+        this.onModelTouched();
     }
 
-    // From ControlValueAccessor interface
-    writeValue(value) {
+    writeValue(model:any):void {
+        if (model.references || model.note) {
+            this.model = {
+                note: model.note || '',
+                references: model.references || {}
+            };
+        } else {
+            this.model = {
+                note: model,
+                references: {}
+            };
+        }
         // Update formatted note for the initial value
         if (!this.basicNote) {
-            this.updateFormattedNote(value);
-        }
-        // this.basicNote = value;
-        if (!value) {
-            this._onChangeCallback();
+            this.updateFormattedNote(this.model.note);
         }
     }
 
-    // From ControlValueAccessor interface
-    registerOnChange(fn) {
-        this._onChangeCallback = fn;
+    registerOnChange(fn:Function):void {
+        this.onModelChange = fn;
     }
 
-    // From ControlValueAccessor interface
-    registerOnTouched(fn) {
-        this._onTouchedCallback = fn;
+    registerOnTouched(fn:Function):void {
+        this.onModelTouched = fn;
     }
 }
-
-export const NOVO_QUICK_NOTE_ELEMENTS = [QuickNote];

@@ -1,43 +1,23 @@
-// NG2
-import { Component } from '@angular/core';
 // App
-import { TipWell } from './TipWell';
-import { testComponent, grabComponent } from './../../testing/TestHelpers';
-
-@Component({
-    selector: 'test-cmp',
-    directives: [
-        TipWell
-    ],
-    template: '<novo-tip-well></novo-tip-well>'
-})
-class TestCmp {
-}
+import { NovoTipWellElement } from './TipWell';
+import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
 
 describe('Component: TipWell', () => {
     let comp;
 
-    beforeEachProviders(() => [
-        TipWell
-    ]);
-
-    describe('Element: TipWell', () => {
-        it('should initialize correctly', testComponent(TestCmp, (fixture) => {
-            const { instance, element, testComponentInstance, testComponentElement } = grabComponent(fixture, TipWell);
-            expect(instance).toBeTruthy();
-            expect(element).toBeTruthy();
-            expect(element.innerHTML).toContain('template bindings');
-            expect(testComponentInstance).toBeTruthy();
-            expect(testComponentElement).toBeTruthy();
-        }));
+    beforeEach(() => {
+        addProviders([
+            NovoTipWellElement,
+            APP_TEST_PROVIDERS
+        ]);
     });
 
-    beforeEach(inject([TipWell], _comp => {
+    beforeEach(inject([NovoTipWellElement], _comp => {
         comp = _comp;
         localStorage.clear();
     }));
 
-    it('should initialize with defaults.', () => {
+    it('should initialize with defaults', () => {
         expect(comp).toBeDefined();
         expect(comp.isActive).toBeTruthy();
         expect(comp.isLocalStorageEnabled).toBeTruthy();
@@ -49,6 +29,16 @@ describe('Component: TipWell', () => {
             expect(localStorage.getItem(comp.localStorageKey)).toBe(null);
             comp.hideTip();
             expect(JSON.parse(localStorage.getItem(comp.localStorageKey))).toBeFalsy();
+        });
+    });
+
+    describe('Method: ngOnInit()', () => {
+        it('should initialize tipwell variables to defaults', () => {
+            comp.ngOnInit();
+            expect(comp.tip).toEqual('');
+            expect(comp.buttonText).toEqual('Ok, Got it');
+            expect(comp.button).toBeTruthy();
+            expect(comp.icon).toBeNull();
         });
     });
 });

@@ -1,13 +1,11 @@
+// NG2
 import { Component, ElementRef, ComponentResolver, ViewContainerRef, ViewChild } from '@angular/core';
-
+// APP
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 
 @Component({
     selector: 'novo-row-details',
-    inputs: [
-        'data',
-        'renderer'
-    ],
+    inputs: ['data', 'renderer'],
     template: `
         <ref #container></ref>
         <span>{{value}}</span>

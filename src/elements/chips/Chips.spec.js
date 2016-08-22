@@ -1,55 +1,145 @@
-import { Component } from '@angular/core';
-import { NgModel } from '@angular/common';
-import { Chips } from './Chips';
-import { testComponent, grabComponent } from './../../testing/TestHelpers';
+import { NovoChipElement, NovoChipsElement } from './Chips';
+import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
 
-@Component({
-    selector: 'test-cmp',
-    directives: [Chips, NgModel],
-    template: '<chips [source]="config" [(value)]="value"></chips>'
-})
-class TestCmp {
-    constructor() {
-        this.config = {
-            options: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
-        };
-        this.value = 'Alaska';
-    }
-}
+describe('Element: NovoChipElement', () => {
+    let component;
 
-describe('Element: Chips', () => {
-    it('should initialize correctly', testComponent(TestCmp, (fixture) => {
-        const { element, testComponentInstance, testComponentElement } = grabComponent(fixture, Chips);
-        //expect(instance).toBeTruthy();
-        expect(element).toBeTruthy();
-        expect(testComponentInstance).toBeTruthy();
-        expect(testComponentElement).toBeTruthy();
+    beforeEach(() => {
+        addProviders([
+            NovoChipElement,
+            APP_TEST_PROVIDERS
+        ]);
+    });
+
+    beforeEach(inject([NovoChipElement], _component => {
+        component = _component;
     }));
 
-    xit('should setup the defaults of the picker.', testComponent(TestCmp, (fixture) => {
-        const { instance } = grabComponent(fixture, Chips);
-        expect(instance.field).toBe('label');
-        expect(instance.config).toBeDefined();
-        expect(instance.config.options[0]).toBe(1);
-    }));
-
-    xit('should call the dynamic component loader which shows the results.', testComponent(TestCmp, (fixture) => {
-        const { instance } = grabComponent(fixture, Chips);
-        spyOn(instance.loader.loadNextToLocation).and.callFake(() => {
+    describe('Function: ngOnInit()', () => {
+        it('should initialize correctly', () => {
+            expect(component).toBeTruthy();
+            expect(component.select).toBeDefined();
+            expect(component.remove).toBeDefined();
+            expect(component.entity).toBeUndefined();
         });
-        instance.showResults();
-        expect(instance.loader.loadNextToLocation).toHaveBeenCalled();
+    });
+
+    describe('Function: onRemove(event)', () => {
+        it('should emit remove event', () => {
+            spyOn(component.remove, 'emit');
+            component.onRemove();
+            expect(component.remove.emit).toHaveBeenCalled();
+        });
+    });
+
+    describe('Function: onSelect(event)', () => {
+        it('should emit select event', () => {
+            spyOn(component.select, 'emit');
+            component.onSelect();
+            expect(component.select.emit).toHaveBeenCalled();
+        });
+    });
+});
+
+describe('Element: NovoChipsElement', () => {
+    let component;
+
+    beforeEach(() => {
+        addProviders([
+            NovoChipsElement,
+            APP_TEST_PROVIDERS
+        ]);
+    });
+
+    beforeEach(inject([NovoChipsElement], _component => {
+        component = _component;
     }));
 
-    xit('should dispose of the results HTML element.', testComponent(TestCmp, (fixture) => {
-        const { instance } = grabComponent(fixture, Chips);
-        instance.popup = {
-            then: () => {
-            }
-        };
-        spyOn(instance.popup, 'then').and.callFake(() => {
+    describe('Function: ngOnInit()', () => {
+        it('should initialize correctly', () => {
+            expect(component).toBeTruthy();
+            expect(component.ngOnInit).toBeDefined();
+            expect(component.changed).toBeDefined();
+            expect(component.focus).toBeDefined();
+            expect(component.blur).toBeDefined();
+            expect(component.items.length).toBe(0);
         });
-        instance.hideResults();
-        expect(instance.popup.then).toHaveBeenCalled();
-    }));
+
+        it('should add keydown listeners', () => {
+            spyOn(window.document, 'addEventListener');
+            component.ngOnInit();
+            expect(window.document.addEventListener).toHaveBeenCalled();
+        });
+    });
+
+    describe('Function: ngOnDestroy(event)', () => {
+        it('should remove keydown listeners', () => {
+            spyOn(window.document, 'removeEventListener');
+            component.ngOnDestroy();
+            expect(window.document.removeEventListener).toHaveBeenCalled();
+        });
+    });
+
+    describe('Function: deselectAll()', () => {
+        it('should remove selection', () => {
+            component.selected = 'test';
+            component.deselectAll();
+            expect(component.selected).toBeFalsy();
+        });
+    });
+
+    describe('Function: select(event, item)', () => {
+        it('should select item', () => {
+            component.selected = 'before';
+            component.select(null, 'after');
+            expect(component.selected).toBe('after');
+        });
+    });
+
+    describe('Function: onFocus(event)', () => {
+        it('should remove selection', () => {
+            spyOn(component.focus, 'emit');
+            component.onFocus();
+            expect(component.focus.emit).toHaveBeenCalled();
+        });
+    });
+
+    describe('Function: add(event)', () => {
+        it('should add an item', () => {
+            component.add({ value: 'test' });
+            expect(component.items[0].value).toBe('test');
+        });
+    });
+
+    describe('Function: remove(event, item)', () => {
+        it('should remove an item', () => {
+            let item = { value: 'test' };
+            component.items = [item];
+            component.remove(null, item);
+            expect(component.items.length).toBe(0);
+        });
+    });
+
+    describe('Function: writeValue()', () => {
+        it('should be defined.', () => {
+            expect(component.writeValue).toBeDefined();
+        });
+
+        it('should change the value', () => {
+            component.writeValue(10);
+            expect(component.model).toBe(10);
+        });
+    });
+
+    describe('Function: registerOnChange()', () => {
+        it('should be defined.', () => {
+            expect(component.registerOnChange).toBeDefined();
+        });
+    });
+
+    describe('Function: registerOnTouched()', () => {
+        it('should be defined.', () => {
+            expect(component.registerOnTouched).toBeDefined();
+        });
+    });
 });

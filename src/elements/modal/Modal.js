@@ -1,15 +1,18 @@
+// NG2
 import { Component, ViewContainerRef, ComponentResolver, ViewChild } from '@angular/core';
-
-import { NOVO_BUTTON_ELEMENTS } from './../button/Button';
+// APP
 import { Deferred } from './../../utils/deferred/Deferred';
 
-export class ModalParams {
+/**
+ * Params that can be passed to the Modal
+ */
+export class NovoModalParams {
 }
 
 /**
  * Reference to an opened dialog.
  */
-export class ModalRef {
+export class NovoModalRef {
     constructor() {
         this.contentRef = null;
         this.containerRef = null;
@@ -42,14 +45,13 @@ export class ModalRef {
 }
 
 @Component({
-    moduleId: module.id,
     selector: 'novo-modal-container',
     template: '<ref #container></ref>'
 })
-export class NovoModalContainer {
+export class NovoModalContainerElement {
     @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
 
-    constructor(modalRef:ModalRef, componentResolver:ComponentResolver) {
+    constructor(modalRef:NovoModalRef, componentResolver:ComponentResolver) {
         this.modalRef = modalRef;
         this.componentResolver = componentResolver;
     }
@@ -63,7 +65,6 @@ export class NovoModalContainer {
 }
 
 @Component({
-    moduleId: module.id,
     selector: 'novo-modal',
     template: `
         <ng-content select="header"></ng-content>
@@ -73,8 +74,8 @@ export class NovoModalContainer {
         </footer>
     `
 })
-export class NovoModal {
-    constructor(modalRef:ModalRef) {
+export class NovoModalElement {
+    constructor(modalRef:NovoModalRef) {
         this.modalRef = modalRef;
     }
 
@@ -84,7 +85,6 @@ export class NovoModal {
 }
 
 @Component({
-    moduleId: module.id,
     selector: 'novo-notification',
     inputs: ['type', 'icon'],
     template: `
@@ -101,11 +101,10 @@ export class NovoModal {
         <footer>
             <ng-content select="button"></ng-content>
         </footer>
-    `,
-    directives: [NOVO_BUTTON_ELEMENTS]
+    `
 })
-export class Notification {
-    constructor(modalRef:ModalRef) {
+export class NovoModalNotificationElement {
+    constructor(modalRef:NovoModalRef) {
         this.modalRef = modalRef;
     }
 
@@ -132,5 +131,3 @@ export class Notification {
         }
     }
 }
-
-export const NOVO_MODAL_ELEMENTS = [NovoModalContainer, NovoModal, Notification];

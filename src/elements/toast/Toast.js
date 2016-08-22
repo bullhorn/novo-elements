@@ -1,5 +1,5 @@
+// NG2
 import { Component, ElementRef } from '@angular/core';
-import { CORE_DIRECTIVES } from '@angular/common';
 
 @Component({
     selector: 'novo-toast',
@@ -19,10 +19,9 @@ import { CORE_DIRECTIVES } from '@angular/common';
             <h5 *ngIf="title">{{title}}</h5>
             <p *ngIf="message" [class.message-only]="!title">{{message}}</p>
         </div>
-    `,
-    directives: [CORE_DIRECTIVES]
+    `
 })
-export class NovoToast {
+export class NovoToastElement {
     constructor(element:ElementRef) {
         this.show = false;
         this.animate = false;
@@ -52,5 +51,3 @@ export class NovoToast {
         }
     }
 }
-
-export const NOVO_TOAST_ELEMENTS = [NovoToast];

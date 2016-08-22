@@ -1,13 +1,12 @@
+// NG2
 import { Component } from '@angular/core';
-import { CORE_DIRECTIVES } from '@angular/common';
 
 @Component({
     selector: 'novo-nav',
     inputs: ['theme', 'direction', 'outlet', 'router'],
-    directives: [CORE_DIRECTIVES],
     template: '<ng-content></ng-content>'
 })
-export class NovoNav {
+export class NovoNavElement {
     constructor() {
         this.items = [];
         this.theme = '';
@@ -15,10 +14,6 @@ export class NovoNav {
     }
 
     select(item) {
-        /**
-         * Deactivates other tab items
-         * @param items - deactivated items
-         */
         function _deactivateAllItems(items) {
             items.forEach((t) => {
                 if (t.active === true) {
@@ -34,7 +29,7 @@ export class NovoNav {
             this.outlet.show(this.items.indexOf(item));
         }
 
-        // TODO - remove hack to make DOM rerender
+        // TODO - remove hack to make DOM rerender - jgodi
         let element = document.querySelector('novo-tab-link.active span.indicator');
         if (element) {
             element.style.opacity = 0.99;
@@ -42,7 +37,6 @@ export class NovoNav {
                 element.style.opacity = 1;
             }, 10);
         }
-        // item.selected.next();
     }
 
     add(item) {
@@ -57,7 +51,6 @@ export class NovoNav {
 @Component({
     selector: 'novo-tab',
     inputs: ['active'],
-    directives: [CORE_DIRECTIVES],
     host: {
         '(click)': 'select()',
         '[class.active]': 'active'
@@ -67,10 +60,10 @@ export class NovoNav {
             <ng-content></ng-content>
         </div>
         <span class="indicator"></span>
-  `
+   `
 })
-export class NovoTab {
-    constructor(nav:NovoNav) {
+export class NovoTabElement {
+    constructor(nav:NovoNavElement) {
         this.active = this.active || false;
         this.nav = nav;
         this.nav.add(this);
@@ -84,17 +77,14 @@ export class NovoTab {
 @Component({
     selector: 'novo-tab-button',
     inputs: ['active'],
-    directives: [CORE_DIRECTIVES],
     host: {
         '(click)': 'select()',
         '[class.active]': 'active'
     },
-    template: `
-            <ng-content></ng-content>
-  `
+    template: '<ng-content></ng-content>'
 })
-export class NovoTabButton {
-    constructor(nav:NovoNav) {
+export class NovoTabButtonElement {
+    constructor(nav:NovoNavElement) {
         this.active = this.active || false;
         this.nav = nav;
         this.nav.add(this);
@@ -108,7 +98,6 @@ export class NovoTabButton {
 @Component({
     selector: 'novo-tab-link',
     inputs: ['active'],
-    directives: [CORE_DIRECTIVES],
     host: {
         '(click)': 'select()',
         '[class.active]': 'active'
@@ -118,10 +107,10 @@ export class NovoTabButton {
             <ng-content></ng-content>
         </div>
         <span class="indicator"></span>
-  `
+    `
 })
-export class NovoTabLink {
-    constructor(nav:NovoNav) {
+export class NovoTabLinkElement {
+    constructor(nav:NovoNavElement) {
         this.active = this.active || false;
         this.nav = nav;
         this.nav.add(this);
@@ -134,12 +123,9 @@ export class NovoTabLink {
 
 @Component({
     selector: 'novo-nav-outlet',
-    directives: [CORE_DIRECTIVES],
-    template: `
-        <ng-content></ng-content>
-  `
+    template: '<ng-content></ng-content>'
 })
-export class NovoNavOutlet {
+export class NovoNavOutletElement {
     constructor() {
         this.items = [];
     }
@@ -175,16 +161,13 @@ export class NovoNavOutlet {
 @Component({
     selector: 'novo-nav-content',
     inputs: ['active'],
-    directives: [CORE_DIRECTIVES],
     host: {
         '[class.active]': 'active'
     },
-    template: `
-        <ng-content></ng-content>
-  `
+    template: '<ng-content></ng-content>'
 })
-export class NovoNavContent {
-    constructor(outlet:NovoNavOutlet) {
+export class NovoNavContentElement {
+    constructor(outlet:NovoNavOutletElement) {
         this.active = this.active || false;
         outlet.add(this);
     }
@@ -193,17 +176,14 @@ export class NovoNavContent {
 @Component({
     selector: 'novo-nav-header',
     inputs: ['active', 'for'],
-    directives: [CORE_DIRECTIVES],
     host: {
         '[class.active]': 'active',
         '(click)': 'show($event)'
     },
-    template: `
-        <ng-content></ng-content>
-  `
+    template: '<ng-content></ng-content>'
 })
-export class NovoNavHeader {
-    constructor(outlet:NovoNavOutlet) {
+export class NovoNavHeaderElement {
+    constructor(outlet:NovoNavOutletElement) {
         this.active = this.active || false;
         this.outlet = outlet;
     }
@@ -219,5 +199,3 @@ export class NovoNavHeader {
         }
     }
 }
-
-export const NOVO_TAB_ELEMENTS = [NovoNav, NovoTab, NovoTabLink, NovoNavOutlet, NovoNavHeader, NovoNavContent, NovoTabButton];

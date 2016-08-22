@@ -1,22 +1,22 @@
-import { Component } from '@angular/core';
+// APP
+import { NovoToastElement } from './Toast';
+import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
 
-import { testComponent, grabComponent } from '../../testing/TestHelpers';
-import { NovoToast } from './Toast';
+describe('Component: Toast', () => {
+    let comp;
 
-@Component({
-    selector: 'test-cmp',
-    directives: [NovoToast],
-    template: '<novo-toast></novo-toast>'
-})
-class TestCmp {
-    constructor() {
-    }
-}
+    beforeEach(() => {
+        addProviders([
+            NovoToastElement,
+            APP_TEST_PROVIDERS
+        ]);
+    });
 
-describe('Element: NovoToast', () => {
-    it('should initialize correctly', testComponent(TestCmp, (fixture) => {
-        const { instance, element } = grabComponent(fixture, NovoToast);
-        expect(instance).toBeTruthy();
-        expect(element).toBeTruthy();
+    beforeEach(inject([NovoToastElement], _comp => {
+        comp = _comp;
     }));
+
+    it('should initialize with defaults', () => {
+        expect(comp).toBeDefined();
+    });
 });

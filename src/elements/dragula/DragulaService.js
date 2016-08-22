@@ -1,7 +1,8 @@
+// NG2
 import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable()
-export class DragulaService {
+export class NovoDragulaService {
     constructor() {
         this.cancel = new EventEmitter();
         this.cloned = new EventEmitter();
@@ -106,8 +107,6 @@ export class DragulaService {
             }
             sourceModel = drake.models[drake.containers.indexOf(source)];
             sourceModel.splice(dragIndex, 1);
-            // console.log('REMOVE');
-            // console.log(sourceModel);
             this.removeModel.emit([name, el, source]);
         });
         drake.on('drag', (el, source) => {
@@ -120,8 +119,6 @@ export class DragulaService {
             }
             dropIndex = this.domIndexOf(dropElm, target);
             sourceModel = drake.models[drake.containers.indexOf(source)];
-            // console.log('DROP');
-            // console.log(sourceModel);
             if (target === source) {
                 sourceModel.splice(dropIndex, 0, sourceModel.splice(dragIndex, 1)[0]);
             } else {

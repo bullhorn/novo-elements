@@ -1,10 +1,18 @@
-import { Component, EventEmitter, ElementRef, DynamicComponentLoader, ViewContainerRef, Optional } from '@angular/core'; //eslint-disable-line
-import { NgModel } from '@angular/common';
+// NG2
+import { Component, EventEmitter, ElementRef, DynamicComponentLoader, ViewContainerRef, forwardRef, Provider } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+// APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { PickerResults } from './extras/PickerExtras';
+import { PickerResults } from './extras/picker-results/PickerResults';
+// Vendor
 import { Observable } from 'rxjs/Rx';
-import 'rxjs/Rx'; //eslint-disable-line
+
+// Value accessor for the component (supports ngModel)
+const PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => NovoPickerElement),
+    multi: true
+});
 
 /**
  * @name Picker
@@ -16,13 +24,14 @@ import 'rxjs/Rx'; //eslint-disable-line
  */
 @Component({
     selector: 'novo-picker',
-    directives: [NgModel],
     inputs: ['config', 'placeholder', 'clearValueOnSelect'],
     outputs: ['select', 'focus', 'blur'],
+    providers: [PICKER_VALUE_ACCESSOR],
     template: `
         <input
             type="text"
             [(ngModel)]="term"
+            (ngModelChange)="checkTerm($event)"
             [placeholder]="placeholder"
             (keyup)="onKeyUp($event)"
             (focus)="onFocus($event)"
@@ -31,26 +40,26 @@ import 'rxjs/Rx'; //eslint-disable-line
     `
 
 })
-export class Picker extends OutsideClick {
+export class NovoPickerElement extends OutsideClick {
     // Emitter for selects
     select:EventEmitter = new EventEmitter();
     focus:EventEmitter = new EventEmitter();
     blur:EventEmitter = new EventEmitter();
-    // Flag for remote filtering.
+
+    // Flag for remote filtering
     isStatic:boolean = true;
+
     // Internal search string
     term:string = '';
-    // private data model
-    _value:any = '';
-    //Placeholders for the callbacks
-    _onTouchedCallback = () => false;
-    _onChangeCallback = () => false;
 
-    constructor(@Optional() model:NgModel, element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
+    _value:any;
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
+
+    constructor(element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
         super(element);
-        // NgModel instance
-        this.model = model || new NgModel();
-        this.model.valueAccessor = this;
         // Dynamic Component Loader Instance
         this.loader = loader;
         // View to load next to
@@ -76,12 +85,9 @@ export class Picker extends OutsideClick {
             .map(e => e.target.value)
             .debounceTime(250)
             .distinctUntilChanged();
-
         observer.subscribe(
             term => this.showResults(term),
             err => this.hideResults(err));
-
-        this.writeValue(this.model.value);
     }
 
     /**
@@ -114,6 +120,13 @@ export class Picker extends OutsideClick {
                 this.container.selectActiveMatch();
                 return;
             }
+
+            if (event.keyCode === KeyCodes.BACKSPACE && this.value !== null) {
+                this.term = null;
+                this.value = null;
+                this.select.emit(null);
+                this.showResults();
+            }
         }
     }
 
@@ -134,7 +147,6 @@ export class Picker extends OutsideClick {
      * instance.
      */
     showResults() {
-        //console.log('Results', term);
         this.toggleActive(null, true);
         // Update Matches
         if (this.container) {
@@ -166,29 +178,36 @@ export class Picker extends OutsideClick {
         }
     }
 
-    //get accessor
-    get value():any {
+    // get accessor
+    get value() {
         return this._value;
     }
 
     //set accessor including call the onchange callback
-    set value(selected:any) {
+    set value(selected) {
         if (!selected) {
             this.term = '';
             this._value = null;
-            this._onChangeCallback(null);
+            this.onModelChange(null);
         } else if (selected.value !== this._value) {
             this.term = this.clearValueOnSelect ? '' : selected.label;
             this._value = selected.value;
             this.select.emit(selected);
-            this._onChangeCallback(selected.value);
+            this.onModelChange(selected.value);
         }
     }
 
-    //Set touched on blur
+    // Makes sure to clear the model if the user clears the text box
+    checkTerm(event) {
+        if (!event || !event.length) {
+            this.onModelChange('');
+        }
+    }
+
+    // Set touched on blur
     onTouched() {
         this.blur.emit(event);
-        this._onTouchedCallback();
+        this.onModelTouched();
     }
 
     //From ControlValueAccessor interface
@@ -211,15 +230,11 @@ export class Picker extends OutsideClick {
         this._value = value;
     }
 
-    //From ControlValueAccessor interface
-    registerOnChange(fn) {
-        this._onChangeCallback = fn;
+    registerOnChange(fn:Function):void {
+        this.onModelChange = fn;
     }
 
-    //From ControlValueAccessor interface
-    registerOnTouched(fn) {
-        this._onTouchedCallback = fn;
+    registerOnTouched(fn:Function):void {
+        this.onModelTouched = fn;
     }
 }
-
-export const NOVO_PICKER_ELEMENTS = [Picker, PickerResults];

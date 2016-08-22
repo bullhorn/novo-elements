@@ -6,7 +6,6 @@ entity-chips {
     flex-wrap: wrap;
     justify-content: flex-start;
     border-bottom: 1px solid #EAEAEA;
-    padding-bottom: 5px;
     transition: all 200ms ease-in-out;
     position: relative;
     &:hover {
@@ -27,8 +26,8 @@ entity-chips {
         background: #EEEEEE;
         border-radius: 4px;
         padding: .5em .75em;
-        margin-right: 10px;
-        margin-top: 10px;
+        margin-right: 5px;
+        margin-bottom: 5px;
         width: auto;
         max-width: 180px;
         border: 1px solid transparent;
@@ -40,6 +39,8 @@ entity-chips {
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
             i {
                 &:before {
                     vertical-align: baseline !important;

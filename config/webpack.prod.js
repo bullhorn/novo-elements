@@ -123,7 +123,6 @@ module.exports = webpackMerge(commonConfig, {
 
     // Html loader advanced options
     // See: https://github.com/webpack/html-loader#advanced-options
-    // TODO: Need to workaround Angular 2's html syntax => #id [bind] (event) *ngFor
     htmlLoader: {
         minimize: true,
         removeAttributeQuotes: false,

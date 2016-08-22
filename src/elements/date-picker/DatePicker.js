@@ -1,23 +1,22 @@
-import { Component, EventEmitter, Optional } from '@angular/core'; // eslint-disable-line
-import { COMMON_DIRECTIVES, NgControl, NgModel } from '@angular/common';
+// NG2
+import { Component, EventEmitter, forwardRef, Provider } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+// APP
+import { swallowEvent } from './../../utils/Helpers';
+// Vendor
 import moment from 'moment/moment';
 
-import { swallowEvent } from './../../utils/Helpers';
+// Value accessor for the component (supports ngModel)
+const DATE_PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => NovoDatePickerElement),
+    multi: true
+});
 
 @Component({
     selector: 'novo-date-picker',
-    inputs: [
-        'minYear',
-        'maxYear',
-        'start',
-        'end',
-        'inline',
-        'range'
-    ],
-    outputs: [
-        'onSelect'
-    ],
-    directives: [COMMON_DIRECTIVES],
+    inputs: ['minYear', 'maxYear', 'start', 'end', 'inline', 'range'],
+    outputs: ['onSelect'],
+    providers: [DATE_PICKER_VALUE_ACCESSOR],
     template: `
         <div class="calendar">
             <div class="calendar-top" *ngIf="!inline && !range">
@@ -73,7 +72,7 @@ import { swallowEvent } from './../../utils/Helpers';
         </div>
     `
 })
-export class DatePicker {
+export class NovoDatePickerElement implements ControlValueAccessor {
     // Select callback for output
     onSelect = new EventEmitter(false);
     // List of all the weekdays (use moment to localize)
@@ -85,10 +84,11 @@ export class DatePicker {
     // Default view mode (select days)
     view = 'days';
 
-    constructor(@Optional() model:NgControl) {
-        this.model = model || new NgModel();
-        this.model.valueAccessor = this;
-    }
+    model:any;
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
 
     ngOnInit() {
         // Determine the year array
@@ -99,9 +99,7 @@ export class DatePicker {
         for (let i = start; i <= end; i++) {
             this.years.push(i);
         }
-        this.range = this.range ? this.range : false;
-
-        this.updateView(this.value, false, true);
+        this.updateView(this.model, false, true);
     }
 
     updateView(date, fireEvents, markedSelected) {
@@ -190,22 +188,20 @@ export class DatePicker {
                 });
             }
 
-
             if (this.range) {
                 // Also, update the ngModel
-                this.model.viewToModelUpdate({
+                this.onModelChange({
                     startDate: this.selected.toDate(),
                     endDate: this.selected2 ? this.selected2.toDate() : null
                 });
-                this.value = {
+                this.model = {
                     startDate: this.selected.toDate(),
                     endDate: this.selected2 ? this.selected2.toDate() : null
                 };
-                //this.value = this.selected.toDate();
             } else {
                 // Also, update the ngModel
-                this.model.viewToModelUpdate(this.selected.toDate());
-                this.value = this.selected.toDate();
+                this.onModelChange(this.selected.toDate());
+                this.model = this.selected.toDate();
             }
         }
     }
@@ -301,20 +297,18 @@ export class DatePicker {
     }
 
     // ValueAccessor Functions
-    writeValue(value) {
-        this.value = value;
-        if (value) {
-            this.updateView(value, false, true);
+    writeValue(model:any):void {
+        this.model = model;
+        if (model) {
+            this.updateView(model, false, true);
         }
     }
 
-    registerOnChange(fn) {
-        this.onChange = fn;
+    registerOnChange(fn:Function):void {
+        this.onModelChange = fn;
     }
 
-    registerOnTouched(fn) {
-        this.onTouched = fn;
+    registerOnTouched(fn:Function):void {
+        this.onModelTouched = fn;
     }
 }
-
-export const NOVO_DATE_PICKER_ELEMENTS = [DatePicker];

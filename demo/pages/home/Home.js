@@ -1,10 +1,9 @@
+// NG2
 import { Component } from '@angular/core';
-
-import template from './Home.html';
 
 @Component({
     selector: 'home',
-    template: template
+    template: require('./Home.html')
 })
 export class Home {
 }

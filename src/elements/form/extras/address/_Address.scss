@@ -1,0 +1,31 @@
+novo-address {
+    display: flex;
+    flex-flow: row wrap;
+
+    input {
+    }
+
+    .street-address {
+        flex: 3 3 75%;
+    }
+
+    .apt {
+        flex: 1 1 25%;
+    }
+
+    .city {
+        flex: 2 2 40%;
+    }
+
+    .state {
+        flex: 1 1 30%;
+    }
+
+    .zip {
+        flex: 1 0 20%;
+    }
+
+    .country-name {
+        flex: 4 4 100%;
+    }
+}
