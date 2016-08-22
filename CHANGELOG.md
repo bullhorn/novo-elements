@@ -1,3 +1,13 @@
+<a name="1.0.3"></a>
+## [1.0.3](https://github.com/bullhorn/novo-elements/compare/v1.0.2...v1.0.3) (2016-08-22)
+
+
+### Bug Fixes
+
+* **quicknote:** Adding missing module ([8cfc52e](https://github.com/bullhorn/novo-elements/commit/8cfc52e))
+
+
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://github.com/bullhorn/novo-elements/compare/v1.0.1...v1.0.2) (2016-08-22)
 
