@@ -1,3 +1,13 @@
+<a name="1.0.2"></a>
+## [1.0.2](https://github.com/bullhorn/novo-elements/compare/v1.0.1...v1.0.2) (2016-08-22)
+
+
+### Bug Fixes
+
+* **checklist:** Fixing issue where it the model wasn't there so the options weren't set ([46bcc90](https://github.com/bullhorn/novo-elements/commit/46bcc90))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/bullhorn/novo-elements/compare/v0.2.26...v1.0.1) (2016-08-21)
 
