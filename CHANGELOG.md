@@ -1,3 +1,13 @@
+<a name="1.0.4"></a>
+## [1.0.4](https://github.com/bullhorn/novo-elements/compare/v1.0.3...v1.0.4) (2016-08-22)
+
+
+### Bug Fixes
+
+* **modules:** Fixing module declarations ([b747a52](https://github.com/bullhorn/novo-elements/commit/b747a52))
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/bullhorn/novo-elements/compare/v1.0.2...v1.0.3) (2016-08-22)
 
