@@ -99,7 +99,7 @@ export class NovoTableHeaderElement {
                                     </item>
                                     <div class="calender-container" [class.active]="column.calenderShow">
                                         <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>Back to Preset Filters</div>
-                                        <novo-date-picker *ngIf="column.calenderShow" (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column?.options[column.options.length-1].value" range="true"></novo-date-picker>
+                                        <novo-date-picker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column?.options[column.options.length-1].value" range="true"></novo-date-picker>
                                     </div>
                                 </list>
                             </novo-dropdown>
@@ -293,7 +293,7 @@ export class NovoTableElement {
         if (column.range) {
             for (let i in column.options) {
                 if (column.options[i].range) {
-                    column.options[i].value = null;
+                    column.options[i].value = { startDate: null, endDate: null };
                 }
             }
         }
@@ -622,7 +622,6 @@ export class NovoTableElement {
             { label: 'Next 30 Days', min: 0, max: 30 },
             { label: 'Next 90 Days', min: 0, max: 90 },
             { label: 'Next 1 Year', min: 0, max: 366 }
-
         ];
 
         if (column && column.range) {
