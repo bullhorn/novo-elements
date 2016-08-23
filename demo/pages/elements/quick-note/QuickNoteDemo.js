@@ -61,7 +61,7 @@ export class QuickNoteDemoComponent {
         this.CustomQuickNoteDemoTpl = CustomQuickNoteDemoTpl;
         this.CustomQuickNoteResultsDemoTpl = CustomQuickNoteResultsDemoTpl;
 
-        this.placeholder = 'Enter your note text here. Reference people and distrubution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
+        this.placeholder = 'Enter your note text here. Reference people and distribution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
 
         let customData = {
             tags: [{ id: 1, name: 'OH YA!', test: 'TWO' }, { id: 2, name: 'TAGGING!', test: 'ONE' }],

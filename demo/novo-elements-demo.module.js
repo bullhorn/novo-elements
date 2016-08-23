@@ -7,6 +7,38 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoComponent } from './app/App';
 import { routing } from './app/App.routes';
 import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
+import { Home } from './pages/home/Home';
+import { ColorComponent, CompositionComponent, TypographyComponent, IconographyComponent } from './pages/design/all';
+import {
+    ButtonDemoComponent,
+    RadioDemoComponent,
+    QuickNoteDemoComponent,
+    ModalDemoComponent,
+    FormDemoComponent,
+    ToastDemoComponent,
+    TooltipDemoComponent,
+    CardDemoComponent,
+    LoadingDemoComponent,
+    DropdownDemoComponent,
+    PickerDemoComponent,
+    ChipsDemoComponent,
+    SelectDemoComponent,
+    TabsDemoComponent,
+    TableDemoComponent,
+    ListDemoComponent,
+    HeaderDemoComponent,
+    SwitchDemoComponent,
+    DrawerDemoComponent,
+    CalendarDemoComponent,
+    DragulaDemoComponent,
+    TilesDemoComponent,
+    SlidesDemoComponent,
+    EditorDemoComponent,
+    TipWellDemoComponent
+} from './pages/elements/all';
+import { UtilsDemoComponent } from './pages/utils/utils/UtilsDemo';
+import { PipesDemoComponent } from './pages/utils/pipes/PipesDemo';
+
 import './demo.scss';
 // Vendor
 import { NovoElementsModule, FormUtils } from './../src/novo-elements';
@@ -14,7 +46,39 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
 @NgModule({
     declarations: [
         DemoComponent,
-        CodeSnippet
+        CodeSnippet,
+        Home,
+        ColorComponent,
+        CompositionComponent,
+        TypographyComponent,
+        IconographyComponent,
+        ButtonDemoComponent,
+        RadioDemoComponent,
+        QuickNoteDemoComponent,
+        ModalDemoComponent,
+        FormDemoComponent,
+        ToastDemoComponent,
+        TooltipDemoComponent,
+        CardDemoComponent,
+        LoadingDemoComponent,
+        DropdownDemoComponent,
+        PickerDemoComponent,
+        ChipsDemoComponent,
+        SelectDemoComponent,
+        TabsDemoComponent,
+        TableDemoComponent,
+        ListDemoComponent,
+        HeaderDemoComponent,
+        SwitchDemoComponent,
+        DrawerDemoComponent,
+        CalendarDemoComponent,
+        DragulaDemoComponent,
+        TilesDemoComponent,
+        SlidesDemoComponent,
+        EditorDemoComponent,
+        TipWellDemoComponent,
+        UtilsDemoComponent,
+        PipesDemoComponent
     ],
     imports: [
         BrowserModule,
@@ -27,8 +91,11 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
     providers: [
         FormUtils
     ],
-    entryComponents: [DemoComponent],
+    entryComponents: [
+        DemoComponent
+    ],
     bootstrap: [DemoComponent]
 })
 export class NovoElementsDemoModule {
 }
+
