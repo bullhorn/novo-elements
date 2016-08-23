@@ -85,10 +85,8 @@ export class NovoDatePickerElement implements ControlValueAccessor {
     view = 'days';
 
     model:any;
-    onModelChange:Function = () => {
-    };
-    onModelTouched:Function = () => {
-    };
+    onModelChange:Function = () => {};
+    onModelTouched:Function = () => {};
 
     ngOnInit() {
         // Determine the year array
@@ -99,21 +97,27 @@ export class NovoDatePickerElement implements ControlValueAccessor {
         for (let i = start; i <= end; i++) {
             this.years.push(i);
         }
+
         this.updateView(this.model, false, true);
     }
 
     updateView(date, fireEvents, markedSelected) {
-        let value = date ? moment(date) : moment();
-        value = this.removeTime(value);
-        this.month = value.clone();
+        if (date && date.startDate === null) {
+            this.clearRange();
+        } else {
+            let value = date ? moment(date) : moment();
+            value = this.removeTime(value);
+            this.month = value.clone();
 
-        let start = value.clone();
-        start.date(1);
-        this.removeTime(start.day(0));
+            let start = value.clone();
+            start.date(1);
+            this.removeTime(start.day(0));
 
-        this.buildMonth(start, this.month);
-        if (markedSelected && (!this.range && this.range !== undefined)) {
-            this.select(null, { date: value }, fireEvents);
+            this.buildMonth(start, this.month);
+
+            if (markedSelected && !this.range) {
+                this.select(null, { date: value }, fireEvents);
+            }
         }
     }
 
@@ -124,15 +128,20 @@ export class NovoDatePickerElement implements ControlValueAccessor {
         this.open(null, 'days');
     }
 
+    clearRange() {
+        this.selected = null;
+        this.selected2 = null;
+    }
+
     setMonth(month) {
-        let tmp = this.selected.clone().month(month);
+        let tmp = this.selected ? this.selected.clone().month(month) : new moment().month(month);
         this.updateView(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
     }
 
     setYear(year) {
-        let tmp = this.selected.clone().year(year);
+        let tmp = this.selected ? this.selected.clone().year(year) : new moment().year(year);
         this.updateView(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
@@ -299,9 +308,7 @@ export class NovoDatePickerElement implements ControlValueAccessor {
     // ValueAccessor Functions
     writeValue(model:any):void {
         this.model = model;
-        if (model) {
-            this.updateView(model, false, true);
-        }
+        this.updateView(model, false, true);
     }
 
     registerOnChange(fn:Function):void {

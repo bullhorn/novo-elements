@@ -118,6 +118,18 @@ describe('Element: NovoDatePickerElement', () => {
         });
     });
 
+    describe('Function: clearRange()', () => {
+        it('should be defined.', () => {
+            expect(component.clearRange).toBeDefined();
+        });
+
+        it('should set the selected value to null', () => {
+            component.clearRange();
+            expect(component.selected).toBe(null);
+            expect(component.selected2).toBe(null);
+        });
+    });
+
     describe('Function: registerOnChange()', () => {
         it('should be defined.', () => {
             expect(component.registerOnChange).toBeDefined();
