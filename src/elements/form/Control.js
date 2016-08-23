@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, ElementRef } from '@angular/core';
+import { Component, Input, ElementRef, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -11,12 +11,15 @@ import moment from 'moment/moment';
     template: require('./Control.html'),
     host: {
         '[hidden]': 'control.hidden || control.type === \'hidden\''
-    }
+    },
+    outputs: [
+        'changed'
+    ]
 })
 export class NovoControlElement extends OutsideClick {
     @Input() control;
     @Input() form:FormGroup;
-
+    changed:EventEmitter = new EventEmitter;
     formattedValue:String = '';
 
     constructor(element:ElementRef) {
@@ -74,5 +77,9 @@ export class NovoControlElement extends OutsideClick {
         let height = event.target.value.length > 0 ? `${event.target.scrollHeight}px` : '2rem';
         event.target.style.height = '';
         event.target.style.height = height;
+    }
+
+    modelChange(value) {
+        this.changed.emit(value);
     }
 }

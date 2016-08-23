@@ -7,7 +7,7 @@ import TextBasedControlsDemoTpl from './templates/TextBasedControls.html';
 import CheckBoxControlsDemoTpl from './templates/CheckBoxControls.html';
 import MockMeta from './MockMeta';
 // Vendor
-import { FormUtils, TextBoxControl, CheckboxControl, CheckListControl } from './../../../../src/novo-elements';
+import { FormUtils, TextBoxControl, CheckboxControl, CheckListControl, QuickNoteControl } from './../../../../src/novo-elements';
 
 const template = `
 <div class="container">
@@ -47,7 +47,30 @@ export class FormDemoComponent {
         this.VerticalDynamicFormDemoTpl = VerticalDynamicFormDemoTpl;
         this.TextBasedControlsDemoTpl = TextBasedControlsDemoTpl;
         this.CheckBoxControlsDemoTpl = CheckBoxControlsDemoTpl;
-
+        // Quick note config
+        this.quickNoteConfig = {
+            triggers: {
+                tags: '@',
+                references: '#',
+                boos: '^'
+            },
+            options: {
+                tags: ['First', 'Second'],
+                references: ['Third', 'Forth'],
+                boos: ['Test']
+            },
+            renderer: {
+                tags: (symbol, item) => {
+                    return `<a class="tag">${symbol}${item.label}</a>`;
+                },
+                references: (symbol, item) => {
+                    return `<a class="tag">${symbol}${item.label}</a>`;
+                },
+                boos: (symbol, item) => {
+                    return `<strong>${symbol}${item.label}</strong>`;
+                }
+            }
+        };
         // Text-based Controls
         this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box' });
         this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email' });
@@ -55,7 +78,8 @@ export class FormDemoComponent {
         this.currencyControl = new TextBoxControl({ type: 'currency', key: 'currency', label: 'Currency', currencyFormat: '$ USD' });
         this.floatControl = new TextBoxControl({ type: 'float', key: 'float', label: 'Float' });
         this.percentageControl = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent' });
-        this.textForm = formUtils.toFormGroup([this.textControl, this.emailControl, this.numberControl, this.currencyControl, this.floatControl, this.percentageControl]);
+        this.quickNoteControl = new QuickNoteControl({ key: 'note', label: 'Note', config: this.quickNoteConfig });
+        this.textForm = formUtils.toFormGroup([this.textControl, this.emailControl, this.numberControl, this.currencyControl, this.floatControl, this.percentageControl, this.quickNoteControl]);
 
         // Check box controls
         this.checkControl = new CheckboxControl({ key: 'check', label: 'Checkbox' });

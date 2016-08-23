@@ -14,8 +14,15 @@ const QUICK_NOTE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
 
 @Component({
     selector: 'novo-quick-note',
-    inputs: ['config', 'placeholder'],
-    outputs: ['focus', 'blur'],
+    inputs: [
+        'config',
+        'placeholder'
+    ],
+    outputs: [
+        'focus',
+        'blur',
+        'changed'
+    ],
     providers: [QUICK_NOTE_VALUE_ACCESSOR],
     template: `
         <div class="quick-note-wrapper">
@@ -38,15 +45,13 @@ export class QuickNoteElement extends OutsideClick {
     // Emitter for selects
     focus:EventEmitter = new EventEmitter();
     blur:EventEmitter = new EventEmitter();
-
+    changed:EventEmitter = new EventEmitter();
     // Internal search string
     searchTerm:string = '';
 
     model:any;
-    onModelChange:Function = () => {
-    };
-    onModelTouched:Function = () => {
-    };
+    onModelChange:Function = () => {};
+    onModelTouched:Function = () => {};
 
     // Results container
     @ViewChild('results', { read: ViewContainerRef }) results:ViewContainerRef;
@@ -186,11 +191,9 @@ export class QuickNoteElement extends OutsideClick {
         // Update basic note
         this.basicNote = tempBasicValue;
         // Propagate change to ngModel
-        if (this.formattedNote) {
-            this.onModelChange({ note: this.formattedNote, references: this.model.references });
-        } else {
-            this.onModelChange({ note: '', references: {} });
-        }
+        let newModel = { note: (this.formattedNote || ''), references: this.model.references };
+        this.onModelChange(newModel);
+        this.changed.emit(newModel);
     }
 
     renderLink(symbol, item) {
