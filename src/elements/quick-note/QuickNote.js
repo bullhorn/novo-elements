@@ -21,7 +21,7 @@ const QUICK_NOTE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
     outputs: [
         'focus',
         'blur',
-        'changed'
+        'change'
     ],
     providers: [QUICK_NOTE_VALUE_ACCESSOR],
     template: `
@@ -45,7 +45,7 @@ export class QuickNoteElement extends OutsideClick {
     // Emitter for selects
     focus:EventEmitter = new EventEmitter();
     blur:EventEmitter = new EventEmitter();
-    changed:EventEmitter = new EventEmitter();
+    change:EventEmitter = new EventEmitter();
     // Internal search string
     searchTerm:string = '';
 
@@ -193,7 +193,7 @@ export class QuickNoteElement extends OutsideClick {
         // Propagate change to ngModel
         let newModel = { note: (this.formattedNote || ''), references: this.model.references };
         this.onModelChange(newModel);
-        this.changed.emit(newModel);
+        this.change.emit(newModel);
     }
 
     renderLink(symbol, item) {

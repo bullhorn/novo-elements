@@ -13,13 +13,13 @@ import moment from 'moment/moment';
         '[hidden]': 'control.hidden || control.type === \'hidden\''
     },
     outputs: [
-        'changed'
+        'change'
     ]
 })
 export class NovoControlElement extends OutsideClick {
     @Input() control;
     @Input() form:FormGroup;
-    changed:EventEmitter = new EventEmitter;
+    change:EventEmitter = new EventEmitter;
     formattedValue:String = '';
 
     constructor(element:ElementRef) {
@@ -80,6 +80,6 @@ export class NovoControlElement extends OutsideClick {
     }
 
     modelChange(value) {
-        this.changed.emit(value);
+        this.change.emit(value);
     }
 }
