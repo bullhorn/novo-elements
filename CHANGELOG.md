@@ -1,3 +1,13 @@
+<a name="1.0.5"></a>
+## [1.0.5](https://github.com/bullhorn/novo-elements/compare/v1.0.4...v1.0.5) (2016-08-23)
+
+
+### Bug Fixes
+
+* **Date Picker:** Fixed errors on select year from dropdowns in range picker ([#157](https://github.com/bullhorn/novo-elements/issues/157)) ([2346961](https://github.com/bullhorn/novo-elements/commit/2346961))
+
+
+
 <a name="1.0.4"></a>
 ## [1.0.4](https://github.com/bullhorn/novo-elements/compare/v1.0.3...v1.0.4) (2016-08-22)
 
