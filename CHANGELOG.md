@@ -1,3 +1,13 @@
+<a name="1.0.9"></a>
+## [1.0.9](https://github.com/bullhorn/novo-elements/compare/v1.0.8...v1.0.9) (2016-08-24)
+
+
+### Bug Fixes
+
+* **picker:** Fixing backspacing on picker ([#163](https://github.com/bullhorn/novo-elements/issues/163)) ([6227050](https://github.com/bullhorn/novo-elements/commit/6227050))
+
+
+
 <a name="1.0.8"></a>
 ## [1.0.8](https://github.com/bullhorn/novo-elements/compare/v1.0.7...v1.0.8) (2016-08-24)
 
