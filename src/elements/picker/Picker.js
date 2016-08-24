@@ -1,6 +1,7 @@
 // NG2
 import { Component, EventEmitter, ElementRef, DynamicComponentLoader, ViewContainerRef, forwardRef, Provider } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { isBlank } from '@angular/core/src/facade/lang';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
@@ -121,10 +122,10 @@ export class NovoPickerElement extends OutsideClick {
                 return;
             }
 
-            if (event.keyCode === KeyCodes.BACKSPACE && this.value !== null) {
-                this.term = null;
-                this.value = null;
-                this.select.emit(null);
+            if (event.keyCode === KeyCodes.BACKSPACE && !isBlank(this._value)) {
+                this._value = null;
+                this.select.emit(this._value);
+                this.onModelChange(this._value);
                 this.showResults();
             }
         }
@@ -188,7 +189,7 @@ export class NovoPickerElement extends OutsideClick {
         if (!selected) {
             this.term = '';
             this._value = null;
-            this.onModelChange(null);
+            this.onModelChange(this._value);
         } else if (selected.value !== this._value) {
             this.term = this.clearValueOnSelect ? '' : selected.label;
             this._value = selected.value;
@@ -200,7 +201,8 @@ export class NovoPickerElement extends OutsideClick {
     // Makes sure to clear the model if the user clears the text box
     checkTerm(event) {
         if (!event || !event.length) {
-            this.onModelChange('');
+            this._value = null;
+            this.onModelChange(this._value);
         }
     }
 
