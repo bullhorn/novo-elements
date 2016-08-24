@@ -1,3 +1,13 @@
+<a name="1.0.7"></a>
+## [1.0.7](https://github.com/bullhorn/novo-elements/compare/v1.0.6...v1.0.7) (2016-08-24)
+
+
+### Bug Fixes
+
+* **Table:** Fixing sorting when the value is null, treating it like an empty string ([12784e6](https://github.com/bullhorn/novo-elements/commit/12784e6))
+
+
+
 <a name="1.0.6"></a>
 ## [1.0.6](https://github.com/bullhorn/novo-elements/compare/v1.0.5...v1.0.6) (2016-08-23)
 
