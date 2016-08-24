@@ -440,8 +440,8 @@ export class NovoTableElement {
             } else {
                 this.rows.sort((previous, current) => {
                     const columnName = newSortColumn.name;
-                    let first = previous[columnName],
-                        second = current[columnName];
+                    let first = previous[columnName] || '';
+                    let second = current[columnName] || '';
 
                     // Custom compare function on the column
                     if (newSortColumn.compare && isFunction(newSortColumn.compare)) {
