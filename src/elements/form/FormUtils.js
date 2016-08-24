@@ -200,11 +200,10 @@ export class FormUtils {
 
     toControls(meta, currencyFormat, http, config) {
         let controls = [];
-
         if (meta && meta.fields) {
             let fields = meta.fields;
             fields.forEach(field => {
-                if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM')) {
+                if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM') && !field.readOnly) {
                     let control = this.getControlForField(field, http, config);
                     // Set currency format
                     if (control.subType === 'currency') {
