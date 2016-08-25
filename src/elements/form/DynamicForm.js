@@ -81,7 +81,7 @@ export class NovoDynamicFormElement {
         return this.form ? this.form.valid : false;
     }
 
-    get updatedValues() {
+    updatedValues() {
         let ret = null;
         this.controls.forEach(control => {
             if (this.form.controls[control.key].dirty || control.dirty) {

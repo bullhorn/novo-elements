@@ -13,6 +13,7 @@ export class BaseControl {
         this.controlType = config.controlType || '';
         this.placeholder = config.placeholder || '';
         this.config = config.config || null;
+        this.dirty = !!config.value;
         this.multiple = !!config.multiple;
         this.headerConfig = config.headerConfig || null;
         this.currencyFormat = config.currencyFormat || null;

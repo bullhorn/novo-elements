@@ -3,4 +3,4 @@
 <novo-dynamic-form layout="vertical" class="dynamic" [controls]="dynamicVertical" [(form)]="dynamicVerticalForm" #nomyform></novo-dynamic-form>
 <div class="final-value">Valid: {{nomyform.isValid | json}}</div>
 <div class="final-value">Values: {{nomyform.values | json}}</div>
-<div class="final-value">Updated Values: {{nomyform.updatedValues | json}}</div>
+<div class="final-value">Updated Values: {{nomyform.updatedValues() | json}}</div>
