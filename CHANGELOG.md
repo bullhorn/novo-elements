@@ -1,3 +1,13 @@
+<a name="1.0.11"></a>
+## [1.0.11](https://github.com/bullhorn/novo-elements/compare/v1.0.10...v1.0.11) (2016-08-25)
+
+
+### Bug Fixes
+
+* **forms:** Fixing initial values for the updated values and validation ([#164](https://github.com/bullhorn/novo-elements/issues/164)) ([60e4503](https://github.com/bullhorn/novo-elements/commit/60e4503))
+
+
+
 <a name="1.0.10"></a>
 ## [1.0.10](https://github.com/bullhorn/novo-elements/compare/v1.0.9...v1.0.10) (2016-08-25)
 
