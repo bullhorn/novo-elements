@@ -1,6 +1,7 @@
 // NG2
 import { Component, Input, Output, EventEmitter, forwardRef, Provider, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { isBlank } from '@angular/core/src/facade/lang';
 
 // Value accessor for the component (supports ngModel)
 const TILES_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
@@ -110,7 +111,7 @@ export class NovoTilesElement implements ControlValueAccessor {
 
     writeValue(model:any):void {
         this.model = model;
-        if (model) {
+        if (!isBlank(model)) {
             this.setupOptions();
         }
     }
