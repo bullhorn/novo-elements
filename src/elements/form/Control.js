@@ -44,7 +44,7 @@ export class NovoControlElement extends OutsideClick {
     }
 
     get isDirty() {
-        return this.form.controls[this.control.key].dirty;
+        return this.form.controls[this.control.key].dirty || this.control.dirty;
     }
 
     formatDateTimeValue(event, part) {
