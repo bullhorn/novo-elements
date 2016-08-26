@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'novo-list',
-    inputs: ['direction'],
+    inputs: ['theme', 'direction'],
     host: {
         '[class.vertical-list]': 'direction === "vertical"',
-        '[class.horizontal-list]': 'direction === "horizontal"'
+        '[class.horizontal-list]': 'direction === "horizontal"',
+        '[attr.theme]': 'theme'
     },
     template: `
         <ng-content></ng-content>
