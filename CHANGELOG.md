@@ -1,3 +1,18 @@
+<a name="1.0.12"></a>
+## [1.0.12](https://github.com/bullhorn/novo-elements/compare/v1.0.11...v1.0.12) (2016-08-26)
+
+
+### Bug Fixes
+
+* **Chips:** Preventing null values from being passed on double-click ([#168](https://github.com/bullhorn/novo-elements/issues/168)) ([f61f647](https://github.com/bullhorn/novo-elements/commit/f61f647))
+
+
+### Features
+
+* **list:** Added themes support to Novo List ([#167](https://github.com/bullhorn/novo-elements/issues/167)) ([3449fef](https://github.com/bullhorn/novo-elements/commit/3449fef))
+
+
+
 <a name="1.0.11"></a>
 ## [1.0.11](https://github.com/bullhorn/novo-elements/compare/v1.0.10...v1.0.11) (2016-08-25)
 
