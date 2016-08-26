@@ -134,7 +134,7 @@ export class NovoChipsElement extends OutsideClick {
     }
 
     add(event) {
-        if (event) {
+        if (event && !(event instanceof Event)) {
             this.items.push(event);
             this.value = this.items.map(i => i.value);
         }
