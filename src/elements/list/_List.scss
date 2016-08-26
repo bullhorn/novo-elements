@@ -8,6 +8,47 @@ novo-list {
     &.horizontal-list {
         flex-direction: row;
     }
+
+    @each $entity, $color in $entity-colors {
+        &[theme="#{$entity}"] {
+            novo-list-item {
+                background: $color;
+                color: #fff;
+                border-bottom: 1px solid rgba(#fff, .1);
+                i {
+                    color: #fff;
+                }
+                item-title h3 {
+                    color: #fff;
+                }
+                item-content {
+                    > * {
+                        color: rgba(#fff, .65);
+                    }
+                }
+            }
+        }
+    }
+    @each $basic, $color in $colors {
+        &[theme="#{$basic}"] {
+            novo-list-item {
+                background: $color;
+                color: #fff;
+                border-bottom: 1px solid rgba(#fff, .1);
+                i {
+                    color: #fff;
+                }
+                item-title h3 {
+                    color: #fff;
+                }
+                item-content {
+                    > * {
+                        color: rgba(#fff, .65);
+                    }
+                }
+            }
+        }
+    }
 }
 
 novo-list-item {

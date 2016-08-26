@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 // APP
 import ListDemoTpl from './templates/ListDemo.html';
+import ThemedListDemoTpl from './templates/ThemedListDemo.html';
 
 const template = `
 <div class="container">
@@ -15,6 +16,11 @@ const template = `
     <p>This is an example of a standard list.</p>
     <div class="example standard-list-demo">${ListDemoTpl}</div>
     <code-snippet [code]="ListDemoTpl"></code-snippet>
+
+    <h5>Themed List</h5>
+    <p>This is an example of a themed list.</p>
+    <div class="example themed-list-demo">${ThemedListDemoTpl}</div>
+    <code-snippet [code]="ThemedListDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -25,6 +31,7 @@ const template = `
 export class ListDemoComponent {
     constructor() {
         this.ListDemoTpl = ListDemoTpl;
+        this.ThemedListDemoTpl = ThemedListDemoTpl;
 
         let ONE_HOUR = 60 * 60 * 1000;
         /* ms */

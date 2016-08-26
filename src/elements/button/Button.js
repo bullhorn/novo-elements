@@ -24,8 +24,9 @@ import { Component } from '@angular/core';
 export class NovoButtonElement {
     leftSide:boolean = false;
     rightSide:boolean = true;
+    icon:string
 
-    ngOnInit() {
+    ngOnChanges() {
         this.iconClass = this.icon ? `bhi-${this.icon}` : '';
         this.flex = this.theme ? 'flex-wrapper' : '';
         if (this.side !== null && this.theme !== 'primary') {

@@ -15,42 +15,42 @@ describe('Element: NovoButtonElement', () => {
         component = _component;
     }));
 
-    describe('Function: ngOnInit()', () => {
+    describe('Function: ngOnChanges()', () => {
         it('should initialize correctly', () => {
             expect(component).toBeTruthy();
         });
     });
 
-    describe('Function: ngOnInit()', () => {
+    describe('Function: ngOnChanges()', () => {
         it('should initialize correctly', () => {
             expect(component).toBeTruthy();
-            expect(component.ngOnInit).toBeDefined();
+            expect(component.ngOnChanges).toBeDefined();
         });
 
         it('should setup the iconClass if icon is passed', () => {
             component.icon = 'test';
-            component.ngOnInit();
+            component.ngOnChanges();
             expect(component.iconClass).toBe('bhi-test');
         });
 
         it('should NOT set the iconClass if icon is NOT present', () => {
-            component.ngOnInit();
+            component.ngOnChanges();
             expect(component.iconClass).toBe('');
         });
 
         it('should set flex based on theme', () => {
             component.theme = 'primary';
-            component.ngOnInit();
+            component.ngOnChanges();
             expect(component.flex).toBe('flex-wrapper');
             component.theme = null;
-            component.ngOnInit();
+            component.ngOnChanges();
             expect(component.flex).toBe('');
         });
 
         it('should force icon to right if theme is primary', () => {
             component.theme = 'primary';
             component.side = 'left';
-            component.ngOnInit();
+            component.ngOnChanges();
             expect(component.leftSide).toBeFalsy();
             expect(component.rightSide).toBeTruthy();
         });
@@ -58,7 +58,7 @@ describe('Element: NovoButtonElement', () => {
         it('should set icon to left as long as theme is NOT primary', () => {
             component.theme = 'secondary';
             component.side = 'left';
-            component.ngOnInit();
+            component.ngOnChanges();
             expect(component.leftSide).toBeTruthy();
             expect(component.rightSide).toBeFalsy();
         });
