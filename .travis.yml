@@ -17,3 +17,6 @@ after_script:
 
 after_success:
   - test $TRAVIS_BRANCH = "master" && npm run sca $GALAXY_URL $SLACK_WEBHOOK $SLACK_CHANNEL
+
+notifications:
+  slack: $SLACK
