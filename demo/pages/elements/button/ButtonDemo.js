@@ -7,13 +7,14 @@ import HeaderButtonDemoTpl from './templates/HeaderButtonDemo.html';
 import IconButtonDemoTpl from './templates/IconButtonDemo.html';
 import StandardButtonDemoTpl from './templates/StandardButtonDemo.html';
 import SecondaryButtonDemoTpl from './templates/SecondaryButtonDemo.html';
+import DynamicButtonDemoTpl from './templates/DynamicButtonDemo.html';
 
 const template = `
 <div class="container">
     <h1>Button <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/button">(source)</a></small></h1>
     <p>A button clearly indicates a point of action for the user. Bullhorn buttons
      come in a variety of themes, custom tailored to fit your use-case.</p>
-    
+
     <h2>Themes</h2>
     <p>
         Bullhorn button themes were hand crafted to make your life easier.
@@ -26,15 +27,15 @@ const template = `
          There are also three other button types that are independent of function:
          Dialogue, Icon, and Header.
     </p>
-    
+
     <h5>Colors</h5>
     <p>
         Acceptable colors include <code>Primary</code>, <code>Success</code>, <code>Warning</code>, <code>Negative</code>,
          and <strong>all analytics colors</strong> which can be found in the color section of the style guide.
     </p>
-    
+
     <br/>
-    
+
     <h5>Primary</h5>
     <p>
         Primary buttons are used to as primary calls-to-action. They should <strong>always</strong>
@@ -45,7 +46,7 @@ const template = `
     </p>
     <div class="example buttons-demo">${PrimaryButtonDemoTpl}</div>
     <code-snippet [code]="PrimaryButtonDemoTpl"></code-snippet>
-    
+
     <h5>Secondary</h5>
     <p>
         Secondary buttons are used as an alternative Primary button or when there
@@ -60,7 +61,7 @@ const template = `
     </p>
     <div class="example header buttons-demo" [ngClass]="color" (click)="changeColor()" tooltip="Click Me!" tooltipPlacement="top">${HeaderButtonDemoTpl}</div>
     <code-snippet [code]="HeaderButtonDemoTpl"></code-snippet>
-    
+
     <h5>Dialogue</h5>
     <p>
         Similar to icon buttons, dialogue buttons require less visual dominance but often need additional helper text. Dialogue buttons
@@ -70,7 +71,7 @@ const template = `
     </p>
     <div class="example buttons-demo">${DialogueButtonDemoTpl}</div>
     <code-snippet [code]="DialogueButtonDemoTpl"></code-snippet>
-    
+
     <h5>Standard</h5>
     <p>
         Standard buttons are the most generic button style. Standard buttons by default are
@@ -83,7 +84,7 @@ const template = `
     </p>
     <div class="example buttons-demo">${StandardButtonDemoTpl}</div>
     <code-snippet [code]="NeutralButtonDemoTpl"></code-snippet>
-    
+
     <h5>Icon</h5>
     <p>
         The <code>icon</code> theme is used to create
@@ -94,6 +95,14 @@ const template = `
     </p>
     <div class="example buttons-demo icons" [ngClass]="color" (click)="changeColor()" tooltip="Click Me!" tooltipPlacement="top">${IconButtonDemoTpl}</div>
     <code-snippet [code]="IconButtonDemoTpl"></code-snippet>
+
+    <h5>Dynamic</h5>
+    <p>
+        Button parameters can be dynamically set and change at runtime.  The styles should
+        change and be applied when the values change.
+    </p>
+    <div class="example buttons-demo">${DynamicButtonDemoTpl}</div>
+    <code-snippet [code]="DynamicButtonDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -111,6 +120,10 @@ export class ButtonDemoComponent {
         this.NeutralButtonDemoTpl = StandardButtonDemoTpl;
         this.HeaderButtonDemoTpl = HeaderButtonDemoTpl;
         this.IconButtonDemoTpl = IconButtonDemoTpl;
+        this.DynamicButtonDemoTpl = DynamicButtonDemoTpl;
+
+        this.theme = 'primary';
+        this.isChecked = false;
     }
 
     ngOnInit() {
@@ -121,5 +134,10 @@ export class ButtonDemoComponent {
     changeColor() {
         let idx = HEADER_COLORS.indexOf(this.color);
         this.color = HEADER_COLORS[idx + 1];
+    }
+
+    changeTheme() {
+        let i = Math.floor(Math.random() * 4);
+        this.theme = ['primary', 'secondary', 'dialogue', 'standard', 'icon'][i];
     }
 }
