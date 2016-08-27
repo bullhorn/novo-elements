@@ -50,6 +50,7 @@ entity-chips {
             display: flex;
             align-items: center;
             i {
+                font-size: 0.8em;
                 &:before {
                     vertical-align: baseline !important;
                 }
