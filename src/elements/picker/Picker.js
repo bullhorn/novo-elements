@@ -38,6 +38,8 @@ const PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
             (focus)="onFocus($event)"
             (blur)="onTouched($event)"
             autocomplete="off" />
+        <i class="bhi-search" *ngIf="!_value"></i>
+        <i class="bhi-times" *ngIf="_value" (click)="clearValue(true)"></i>
     `
 
 })
@@ -123,11 +125,20 @@ export class NovoPickerElement extends OutsideClick {
             }
 
             if (event.keyCode === KeyCodes.BACKSPACE && !isBlank(this._value)) {
-                this._value = null;
-                this.select.emit(this._value);
-                this.onModelChange(this._value);
+                this.clearValue(false);
                 this.showResults();
             }
+        }
+    }
+
+    clearValue(wipeTerm) {
+        this._value = null;
+        this.select.emit(this._value);
+        this.onModelChange(this._value);
+
+        if (wipeTerm) {
+            this.term = null;
+            this.hideResults();
         }
     }
 

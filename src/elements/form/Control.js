@@ -47,6 +47,15 @@ export class NovoControlElement extends OutsideClick {
         return this.form.controls[this.control.key].dirty || this.control.dirty;
     }
 
+    get hasValue() {
+        return !!this.form.value[this.control.key];
+    }
+
+    clearValue() {
+        this.form.controls[this.control.key].updateValue(null);
+        this.formattedValue = null;
+    }
+
     formatDateTimeValue(event, part) {
         let format = '';
         let date = event.date;
@@ -67,6 +76,7 @@ export class NovoControlElement extends OutsideClick {
                 break;
             default: // 'date'
                 format = 'MMMM DD, YYYY';
+                this.toggleActive(null, false);
                 break;
         }
         this.formattedValue = moment(date).format(format);
