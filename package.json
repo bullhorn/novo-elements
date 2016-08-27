@@ -11,8 +11,6 @@
     "prepublish": "npm run clean && npm run compile",
     "postpublish": "npm run deploy:gh-pages",
     "lint": "eslint src demo",
-    "lint:save": "eslint src demo -f node_modules/static-code-analysis/formatters/eslint.js > ./coverage/eslint.json",
-    "loc": "sloc src/ --format json > ./coverage/sloc.json",
     "start": "webpack-dev-server --hot --inline --colors --display-error-details --display-cached",
     "test": "cross-env NODE_ENV=test node_modules/.bin/karma start",
     "test:watch": "cross-env NODE_ENV=test node_modules/.bin/karma start --single-run false --auto-watch true",
@@ -23,8 +21,6 @@
     "version": "npm run changelog && git add -A",
     "postversion": "git push origin master && git push --tags && npm run github-release && npm publish",
     "build:prod": "webpack --config config/webpack.prod.js --progress --profile --colors --display-error-details --display-cached --bail",
-    "presca": "npm run lint:save && npm run loc",
-    "sca": "sca"
   },
   "main": "lib/novo-elements.js",
   "keywords": [
@@ -131,7 +127,6 @@
     "sass-loader": "^3.2.0",
     "sloc": "^0.1.10",
     "source-map-loader": "0.1.5",
-    "static-code-analysis": "~0.1.0",
     "style-loader": "^0.13.1",
     "systemjs-builder": "0.15.23",
     "to-string-loader": "^1.1.4",
@@ -147,15 +142,6 @@
   "config": {
     "ghooks": {
       "pre-commit": "npm run lint"
-    }
-  },
-  "staticCodeAnalysis": {
-    "type": "javascript",
-    "public": true,
-    "locations": {
-      "eslint": "/coverage/eslint.json",
-      "sloc": "/coverage/sloc.json",
-      "karma-coverage": "/coverage/coverage.txt"
     }
   }
 }
