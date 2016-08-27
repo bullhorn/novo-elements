@@ -14,6 +14,9 @@ script:
 after_script:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
+after_success:
+  - test $TRAVIS_BRANCH = "master" && npm run galaxy -- $FIREBASE_URL $SLACK_WEB_HOOK $SLACK_CHANNEL
+
 notifications:
   slack:
     secure: JRrQfxo0BQnktERRXqaEGphgY5kftwaGt7qzGuF4FaouiqnPa5G3DyPzn6YNHmSjp+H78h3dsd0hP3ZtgjaROwdtjqn//qJkjYeNYl/QxxZcsTErWAwdL6W+RfnRd5iHlNa8czASpjsltV3ZY4UYQ9aifXDnhnZC5hyT8z2DIfwkK+lkI6WK3vBsDvuX+Ae93xOScqUHg/z3RL/ewij/A9iEIouCD/65GAhTBR+lh1jbXGo3ZV52j3xjyBEJZCD2jzgZsUzbO8aPOKZ34cvnarQeG0M9DFSGpZ8FfjrssK97A6xla1jqKr+HtxlQTRG4AvKu3vwAOGV00P10TgszfsW03X++FOgRUrPiwwUdf8zXZQifMggNMz7v0dL0nnAfeL1c35nhionjHZ/hh0gMy3QUhy9WajV+vSI9YBZIitadQ8zgFazWv/CZtuYbS6+6bD9IM0icKar0MkbDs/duBZEGtlR54ASUksd9dWwFtyzmzc1Iw40bheJeWtZNLwocr6atst/tH/0OGDlxh+XbLVIxRLk7NogHtc80S+/eWAdDJAANDj3kUJBWedbSzJo1jOEmlARR9yMaXJpj8i9rphYM41YsaYTwU5TpPlwBODU0KETeRmb/HcGG1ITiFx3taI/ojnMnuA72g9Kq9uZjwNc+fd4GL7I/iqhAQNChQOQ=
