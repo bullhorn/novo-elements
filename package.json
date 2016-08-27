@@ -20,7 +20,7 @@
     "preversion": "npm test",
     "version": "npm run changelog && git add -A",
     "postversion": "git push origin master && git push --tags && npm run github-release && npm publish",
-    "build:prod": "webpack --config config/webpack.prod.js --progress --profile --colors --display-error-details --display-cached --bail",
+    "build:prod": "webpack --config config/webpack.prod.js --progress --profile --colors --display-error-details --display-cached --bail"
   },
   "main": "lib/novo-elements.js",
   "keywords": [
