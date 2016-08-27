@@ -117,6 +117,134 @@ export class TableDemoComponent {
                 }
             },
             {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
+                title: 'Salary',
+                name: 'salary',
+                ordering: true,
+                renderer: (object) => {
+                    return `$ ${Number(object.salary).toFixed(2)}`;
+                }
+            },
+            {
                 title: 'Status',
                 name: 'status',
                 options: ['New Lead', 'Active', 'Archived'],

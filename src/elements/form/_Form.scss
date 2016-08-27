@@ -159,10 +159,15 @@ novo-form, novo-dynamic-form {
                                     flex: 1;
                                     position: relative;
 
-                                    > i.bhi-search, > i.bhi-clock, > i.bhi-calendar {
+                                    > i.bhi-search, > i.bhi-clock, > i.bhi-calendar, > i.bhi-times {
                                         position: absolute;
                                         right: 0;
                                         top: 0
+                                    }
+
+                                    > i.bhi-times {
+                                        cursor: pointer;
+                                        font-size: 1.1em;
                                     }
 
                                     > novo-time-picker, > novo-date-picker {
@@ -207,11 +212,17 @@ novo-form, novo-dynamic-form {
                                     }
 
                                     > chips {
+                                        padding: 2px 0;
+
                                         novo-picker {
                                             padding-bottom: 0;
                                             > input {
                                                 border: none;
                                             }
+                                        }
+
+                                        &.with-value {
+                                            margin-bottom: 0;
                                         }
                                     }
 

@@ -74,7 +74,12 @@ export class NovoChipElement {
                 (blur)="onTouched($event)">
             </novo-picker>
         </div>
-   `
+        <i class="bhi-search"></i>
+        <label class="clear-all" *ngIf="items.length" (click)="clearValue()"><i class="bhi-times"></i> CLEAR ALL</label>
+   `,
+    host: {
+        '[class.with-value]': 'items.length > 0'
+    }
 })
 export class NovoChipsElement extends OutsideClick {
     changed:EventEmitter = new EventEmitter();
@@ -105,6 +110,12 @@ export class NovoChipsElement extends OutsideClick {
     ngOnDestroy() {
         super.ngOnDestroy();
         window.document.removeEventListener('keydown', this.outsideKeyDown.bind(this));
+    }
+
+    clearValue() {
+        this.items = [];
+        this.value = null;
+        this.onModelChange(this.value);
     }
 
     setItems() {
