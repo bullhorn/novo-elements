@@ -1,3 +1,13 @@
+<a name="1.0.13"></a>
+## [1.0.13](https://github.com/bullhorn/novo-elements/compare/v1.0.12...v1.0.13) (2016-08-27)
+
+
+### Features
+
+* **form:** Allowing to clear values for Picker/Chips/Date inputs and some style updated ([f231b6f](https://github.com/bullhorn/novo-elements/commit/f231b6f))
+
+
+
 <a name="1.0.12"></a>
 ## [1.0.12](https://github.com/bullhorn/novo-elements/compare/v1.0.11...v1.0.12) (2016-08-26)
 

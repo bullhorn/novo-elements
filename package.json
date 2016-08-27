@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
     "clean": "node_modules/.bin/del bundles coverage lib dist",
@@ -154,7 +154,7 @@
     "type": "javascript",
     "goal": 80,
     "public": true,
-    "threshold": 0.10,
+    "threshold": 0.1,
     "locations": {
       "eslint": "/coverage/eslint.json",
       "sloc": "/coverage/sloc.json",
