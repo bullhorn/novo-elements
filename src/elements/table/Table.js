@@ -94,12 +94,12 @@ export class NovoTableHeaderElement {
                                             <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
                                     </item>
-                                    <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [showAfterSelect]="option.range" [attr.data-automation-id]="(option?.label || option)">
+                                    <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [showAfterSelect]="option.range" [hidden]="column.calenderShow" [attr.data-automation-id]="(option?.label || option)">
                                         {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
                                     </item>
-                                    <div class="calender-container" [class.active]="column.calenderShow">
+                                    <div class="calender-container" [hidden]="!column.calenderShow">
                                         <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>Back to Preset Filters</div>
-                                        <novo-date-picker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column?.options[column.options.length-1].value" range="true"></novo-date-picker>
+                                        <novo-date-picker #rangePicker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column?.options[column.options.length-1].value" range="true"></novo-date-picker>
                                     </div>
                                 </list>
                             </novo-dropdown>
