@@ -37,7 +37,7 @@ const DATE_PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
                 </span>
                 <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
             </div>
-            <table class="calendar-content days" cellspacing="0" cellpadding="0" *ngIf="view=='days'">
+            <table class="calendar-content days" cellspacing="0" cellpadding="0" [hidden]="!(view=='days')">
                 <thead>
                     <tr>
                         <th *ngFor="let day of weekday" title="{{day}}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">{{day.substr(0, 2)}}</th>
@@ -56,12 +56,12 @@ const DATE_PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
                     </tr>
                 </tbody>
             </table>
-            <ul class="calendar-content months" *ngIf="view == 'months'">
+            <ul class="calendar-content months" [hidden]="!(view == 'months')">
                 <li *ngFor="let month of months" (click)="setMonth(month)">
                     <div class="month" [ngClass]="{selected: month == selected?.format('MMM')}" [attr.data-automation-id]="month">{{month}}</div>
                 </li>
             </ul>
-            <ul class="calendar-content years" *ngIf="view == 'years'">
+            <ul class="calendar-content years" [hidden]="!(view == 'years')">
                 <li *ngFor="let year of years" (click)="setYear(year)">
                     <div class="year" [ngClass]="{selected: year == selected?.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
                 </li>
@@ -157,13 +157,13 @@ export class NovoDatePickerElement implements ControlValueAccessor {
                 this.selected2 = null;
                 this.calendarRangeEnd = false;
             } else if (day.date.isAfter(this.selected)) {
-                this.selected2 = day.date;
+                this.selected2 = day.date.endOf('day');
             } else if (day.date.isBefore(this.selected)) {
-                this.selected2 = this.selected;
+                this.selected2 = this.selected.endOf('day');
                 this.selected = day.date;
             } else if (day.date.isSame(this.selected) && day.date.isSame(this.selected2)) {
                 this.selected = day.date;
-                this.selected2 = day.date;
+                this.selected2 = day.date.endOf('day');
                 this.calendarRangeEnd = !this.calendarRangeEnd;
             }
             this.calendarRangeEnd = !this.calendarRangeEnd;
