@@ -152,7 +152,7 @@ export class NovoDatePickerElement implements ControlValueAccessor {
             } else if (day.date.isBefore(this.selected)) {
                 this.selected2 = this.selected;
                 this.selected = day.date;
-            } else if (day.date.isSame(this.selected) && day.date.isSame(this.selected2)) {
+            } else if (day.date.isSame(this.selected)) {
                 this.selected = day.date;
                 this.selected2 = day.date;
                 this.calendarRangeEnd = !this.calendarRangeEnd;
