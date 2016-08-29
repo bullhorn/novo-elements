@@ -1,3 +1,13 @@
+<a name="1.0.14"></a>
+## [1.0.14](https://github.com/bullhorn/novo-elements/compare/v1.0.13...v1.0.14) (2016-08-29)
+
+
+### Bug Fixes
+
+* **DatePicker:** Fix for Date filter dropdown closes out and DatePicker sizing ([#173](https://github.com/bullhorn/novo-elements/issues/173)) ([7ff76a9](https://github.com/bullhorn/novo-elements/commit/7ff76a9))
+
+
+
 <a name="1.0.13"></a>
 ## [1.0.13](https://github.com/bullhorn/novo-elements/compare/v1.0.12...v1.0.13) (2016-08-27)
 
