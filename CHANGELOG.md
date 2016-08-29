@@ -1,3 +1,13 @@
+<a name="1.0.15"></a>
+## [1.0.15](https://github.com/bullhorn/novo-elements/compare/v1.0.14...v1.0.15) (2016-08-29)
+
+
+### Bug Fixes
+
+* **OutsideClick:** Fix bug if the force value was false it wasn't used. ([bd17716](https://github.com/bullhorn/novo-elements/commit/bd17716))
+
+
+
 <a name="1.0.14"></a>
 ## [1.0.14](https://github.com/bullhorn/novo-elements/compare/v1.0.13...v1.0.14) (2016-08-29)
 
