@@ -1,3 +1,13 @@
+<a name="1.0.17"></a>
+## [1.0.17](https://github.com/bullhorn/novo-elements/compare/v1.0.16...v1.0.17) (2016-08-30)
+
+
+### Features
+
+* **DatePicker:** Added ability to select a single day in range picker ([#174](https://github.com/bullhorn/novo-elements/issues/174)) ([4e08e09](https://github.com/bullhorn/novo-elements/commit/4e08e09))
+
+
+
 <a name="1.0.16"></a>
 ## [1.0.16](https://github.com/bullhorn/novo-elements/compare/v1.0.15...v1.0.16) (2016-08-30)
 
