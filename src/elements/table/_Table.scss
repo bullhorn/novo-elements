@@ -80,6 +80,10 @@ $table-border-color: #f5f5f5; // Tables
                 &.checkbox {
                     text-align: center;
                     padding-bottom: 15px;
+
+                    > novo-checkbox {
+                        justify-content: center;
+                    }
                 }
             }
 
