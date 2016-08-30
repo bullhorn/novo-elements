@@ -1,3 +1,13 @@
+<a name="1.0.16"></a>
+## [1.0.16](https://github.com/bullhorn/novo-elements/compare/v1.0.15...v1.0.16) (2016-08-30)
+
+
+### Bug Fixes
+
+* **table:** Checkbox styling ([ec930df](https://github.com/bullhorn/novo-elements/commit/ec930df))
+
+
+
 <a name="1.0.15"></a>
 ## [1.0.15](https://github.com/bullhorn/novo-elements/compare/v1.0.14...v1.0.15) (2016-08-29)
 
