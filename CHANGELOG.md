@@ -1,3 +1,13 @@
+<a name="1.0.19"></a>
+## [1.0.19](https://github.com/bullhorn/novo-elements/compare/v1.0.18...v1.0.19) (2016-08-31)
+
+
+### Bug Fixes
+
+* **chips:** Fixing extra event that was added to the DOM and slowing up forms, fixes [#177](https://github.com/bullhorn/novo-elements/issues/177) ([f732a69](https://github.com/bullhorn/novo-elements/commit/f732a69))
+
+
+
 <a name="1.0.18"></a>
 ## [1.0.18](https://github.com/bullhorn/novo-elements/compare/v1.0.17...v1.0.18) (2016-08-31)
 
