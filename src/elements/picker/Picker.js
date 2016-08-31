@@ -41,7 +41,6 @@ const PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         <i class="bhi-search" *ngIf="!_value"></i>
         <i class="bhi-times" *ngIf="_value" (click)="clearValue(true)"></i>
     `
-
 })
 export class NovoPickerElement extends OutsideClick {
     // Emitter for selects

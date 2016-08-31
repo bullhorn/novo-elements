@@ -100,17 +100,10 @@ export class NovoChipsElement extends OutsideClick {
     constructor(element:ElementRef) {
         super(element);
         this.element = element;
-        this.outsideKeyDownHandler = this.outsideKeyDown.bind(this);
     }
 
     ngOnInit() {
-        window.document.addEventListener('keydown', this.outsideKeyDownHandler);
         this.setItems();
-    }
-
-    ngOnDestroy() {
-        super.ngOnDestroy();
-        window.document.removeEventListener('keydown', this.outsideKeyDownHandler);
     }
 
     clearValue() {
@@ -151,6 +144,11 @@ export class NovoChipsElement extends OutsideClick {
         if (event && !(event instanceof Event)) {
             this.items.push(event);
             this.value = this.items.map(i => i.value);
+            // Set focus on the picker
+            let input = this.element.nativeElement.querySelector('novo-picker > input');
+            if (input) {
+                input.focus();
+            }
         }
     }
 
@@ -177,14 +175,6 @@ export class NovoChipsElement extends OutsideClick {
                 } else {
                     this.select(event, this.items[this.items.length - 1]);
                 }
-            }
-        }
-    }
-
-    outsideKeyDown(event) {
-        if (event.keyCode === KeyCodes.BACKSPACE) {
-            if (this.selected) {
-                this.remove(event, this.selected);
             }
         }
     }
