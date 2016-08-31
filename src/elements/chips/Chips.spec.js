@@ -64,20 +64,6 @@ describe('Element: NovoChipsElement', () => {
             expect(component.blur).toBeDefined();
             expect(component.items.length).toBe(0);
         });
-
-        it('should add keydown listeners', () => {
-            spyOn(window.document, 'addEventListener');
-            component.ngOnInit();
-            expect(window.document.addEventListener).toHaveBeenCalled();
-        });
-    });
-
-    describe('Function: ngOnDestroy(event)', () => {
-        it('should remove keydown listeners', () => {
-            spyOn(window.document, 'removeEventListener');
-            component.ngOnDestroy();
-            expect(window.document.removeEventListener).toHaveBeenCalled();
-        });
     });
 
     describe('Function: deselectAll()', () => {
