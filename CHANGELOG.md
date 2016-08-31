@@ -1,3 +1,13 @@
+<a name="1.0.20"></a>
+## [1.0.20](https://github.com/bullhorn/novo-elements/compare/v1.0.19...v1.0.20) (2016-08-31)
+
+
+### Bug Fixes
+
+* **picker:** Fixing issue where the collection would be an object with data rather than an array. ([a1371b4](https://github.com/bullhorn/novo-elements/commit/a1371b4))
+
+
+
 <a name="1.0.19"></a>
 ## [1.0.19](https://github.com/bullhorn/novo-elements/compare/v1.0.18...v1.0.19) (2016-08-31)
 
