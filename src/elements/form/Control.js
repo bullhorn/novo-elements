@@ -33,6 +33,16 @@ export class NovoControlElement extends OutsideClick {
                 this.formatDateTimeValue({ date: this.control.value });
             }
         }
+        // Listen to clear events
+        this.control.forceClear.subscribe(() => {
+            this.clearValue();
+        });
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        // Unlisten for clear events
+        this.control.forceClear.unsubscribe();
     }
 
     get errors() {

@@ -3,6 +3,7 @@
 <novo-dynamic-form class="dynamic" [controls]="dynamic" [(form)]="dynamicForm" #myform></novo-dynamic-form>
 <footer class="dynamic-demo-footer">
     <button (click)="save(myform)" theme="primary" icon="check">Save</button>
+    <button (click)="clear()" theme="secondary" icon="check">Clear</button>
 </footer>
 <div class="final-value">Valid: {{myform.isValid | json}}</div>
 <div class="final-value">Values: {{myform.values | json}}</div>

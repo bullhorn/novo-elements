@@ -1,5 +1,6 @@
 // NG2
 import { Validators } from '@angular/forms';
+import { EventEmitter } from '@angular/core';
 
 export class BaseControl {
     constructor(config = {}) {
@@ -19,6 +20,7 @@ export class BaseControl {
         this.currencyFormat = config.currencyFormat || null;
         this.associatedEntity = config.associatedEntity || null;
         this.optionsType = config.optionsType || null;
+        this.forceClear = new EventEmitter();
 
         if (this.required) {
             this.validators.push(Validators.required);

@@ -101,4 +101,10 @@ export class FormDemoComponent {
             alert('SAVING'); // eslint-disable-line
         }
     }
+
+    clear() {
+        this.dynamic.forEach(control => {
+            control.forceClear.emit();
+        });
+    }
 }

@@ -141,8 +141,8 @@ export default {
             confidential: false,
             optional: false,
             label: 'Categories',
-            required: false,
-            readOnly: true,
+            required: true,
+            readOnly: false,
             multiValue: true,
             inputType: 'SELECT',
             options: [
