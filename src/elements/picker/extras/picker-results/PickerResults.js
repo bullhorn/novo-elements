@@ -108,7 +108,8 @@ export class PickerResults {
      * 'name' field by default.
      */
     structureArray(collection:Array):Array {
-        if (collection && (typeof collection[0] === 'string' || typeof collection[0] === 'number')) {
+        let dataArray = collection.data ? collection.data : collection;
+        if (dataArray && (typeof dataArray[0] === 'string' || typeof dataArray[0] === 'number')) {
             return collection.map((item) => {
                 return {
                     value: item,
@@ -116,7 +117,7 @@ export class PickerResults {
                 };
             });
         }
-        return collection.map((data) => {
+        return dataArray.map((data) => {
             let value = this.config.field ? data[this.config.field] : (data.value || data);
             let label = this.config.format ? interpolate(this.config.format, data) : data.label || String(value);
             return { value, label, data };

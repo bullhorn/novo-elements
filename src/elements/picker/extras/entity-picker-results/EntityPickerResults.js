@@ -62,42 +62,48 @@ export class EntityPickerResults extends PickerResults {
     }
 
     getIconForResult(result) {
-        switch (result.searchEntity) {
-            case 'ClientContact':
-                return 'person contact';
-            case 'ClientCorporation':
-                return 'company';
-            case 'Opportunity':
-                return 'opportunity';
-            case 'Candidate':
-                return 'candidate';
-            case 'Lead':
-                return 'lead';
-            case 'JobOrder':
-                return 'job';
-            default:
-                return '';
+        if (result) {
+            switch (result.searchEntity) {
+                case 'ClientContact':
+                    return 'person contact';
+                case 'ClientCorporation':
+                    return 'company';
+                case 'Opportunity':
+                    return 'opportunity';
+                case 'Candidate':
+                    return 'candidate';
+                case 'Lead':
+                    return 'lead';
+                case 'JobOrder':
+                    return 'job';
+                default:
+                    return '';
+            }
         }
+        return '';
     }
 
     getNameForResult(result) {
-        switch (result.searchEntity) {
-            case 'Lead':
-            case 'CorporateUser':
-            case 'ClientContact':
-            case 'Candidate':
-            case 'Person':
-                if ('firstName' in result) {
-                    return `${result.firstName} ${result.lastName}`.trim();
-                }
-                return `${result.name || ''}`.trim();
-            case 'ClientCorporation':
-                return `${result.name || ''}`.trim();
-            case 'Opportunity':
-            case 'JobOrder':
-                return `${result.title || ''}`.trim();
-            default:
-                return `${result.name || ''}`.trim();
+        if (result) {
+            switch (result.searchEntity) {
+                case 'Lead':
+                case 'CorporateUser':
+                case 'ClientContact':
+                case 'Candidate':
+                case 'Person':
+                    if ('firstName' in result) {
+                        return `${result.firstName} ${result.lastName}`.trim();
+                    }
+                    return `${result.name || ''}`.trim();
+                case 'ClientCorporation':
+                    return `${result.name || ''}`.trim();
+                case 'Opportunity':
+                case 'JobOrder':
+                    return `${result.title || ''}`.trim();
+                default:
+                    return `${result.name || ''}`.trim();
+            }
         }
+        return '';
     }
 }
