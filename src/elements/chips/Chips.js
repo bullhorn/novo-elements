@@ -100,16 +100,17 @@ export class NovoChipsElement extends OutsideClick {
     constructor(element:ElementRef) {
         super(element);
         this.element = element;
+        this.outsideKeyDownHandler = this.outsideKeyDown.bind(this);
     }
 
     ngOnInit() {
-        window.document.addEventListener('keydown', this.outsideKeyDown.bind(this));
+        window.document.addEventListener('keydown', this.outsideKeyDownHandler);
         this.setItems();
     }
 
     ngOnDestroy() {
         super.ngOnDestroy();
-        window.document.removeEventListener('keydown', this.outsideKeyDown.bind(this));
+        window.document.removeEventListener('keydown', this.outsideKeyDownHandler);
     }
 
     clearValue() {
@@ -119,13 +120,15 @@ export class NovoChipsElement extends OutsideClick {
     }
 
     setItems() {
-        if (Array.isArray(this.model)) {
+        if (this.model && Array.isArray(this.model)) {
             this.items = this.model.map(v => {
                 if (this.source && this.source.format) {
                     return { value: v, label: interpolate(this.source.format, v) };
                 }
                 return { value: v, label: v };
             });
+        } else {
+            this.items = [];
         }
     }
 
@@ -217,9 +220,7 @@ export class NovoChipsElement extends OutsideClick {
 
     writeValue(model:any):void {
         this.model = model;
-        if (model) {
-            this.setItems();
-        }
+        this.setItems();
     }
 
     registerOnChange(fn:Function):void {
