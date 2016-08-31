@@ -1,3 +1,13 @@
+<a name="1.0.21"></a>
+## [1.0.21](https://github.com/bullhorn/novo-elements/compare/v1.0.20...v1.0.21) (2016-08-31)
+
+
+### Bug Fixes
+
+* **form:** Output change method for Tiles on Control ([45f3a34](https://github.com/bullhorn/novo-elements/commit/45f3a34))
+
+
+
 <a name="1.0.20"></a>
 ## [1.0.20](https://github.com/bullhorn/novo-elements/compare/v1.0.19...v1.0.20) (2016-08-31)
 
