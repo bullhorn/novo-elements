@@ -23,7 +23,7 @@
                 <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>
             </select>
             <!--Tiles-->
-            <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key"></novo-tiles>
+            <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)"></novo-tiles>
             <!--Picker-->
             <div class="novo-control-input-container" *ngSwitchCase="'picker'">
                 <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple"></novo-picker>

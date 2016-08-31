@@ -7,7 +7,7 @@ import TextBasedControlsDemoTpl from './templates/TextBasedControls.html';
 import CheckBoxControlsDemoTpl from './templates/CheckBoxControls.html';
 import MockMeta from './MockMeta';
 // Vendor
-import { FormUtils, TextBoxControl, CheckboxControl, CheckListControl, QuickNoteControl } from './../../../../src/novo-elements';
+import { FormUtils, TextBoxControl, CheckboxControl, CheckListControl, QuickNoteControl, TilesControl } from './../../../../src/novo-elements';
 
 const template = `
 <div class="container">
@@ -84,7 +84,8 @@ export class FormDemoComponent {
         // Check box controls
         this.checkControl = new CheckboxControl({ key: 'check', label: 'Checkbox' });
         this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'] });
-        this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl]);
+        this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }] });
+        this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl]);
 
         // Dynamic
         this.dynamic = formUtils.toControls(MockMeta, '$ USD', {}, 'TOKEN');
@@ -106,5 +107,9 @@ export class FormDemoComponent {
         this.dynamic.forEach(control => {
             control.forceClear.emit();
         });
+    }
+
+    onChange(value) {
+        console.log('I changed!', value); // eslint-disable-line
     }
 }
