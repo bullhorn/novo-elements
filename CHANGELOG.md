@@ -1,3 +1,13 @@
+<a name="1.0.23"></a>
+## [1.0.23](https://github.com/bullhorn/novo-elements/compare/v1.0.22...v1.0.23) (2016-09-06)
+
+
+### Bug Fixes
+
+* **table:** Fixing when unselected a page it would not have the correct intermediate section ([756e547](https://github.com/bullhorn/novo-elements/commit/756e547))
+
+
+
 <a name="1.0.22"></a>
 ## [1.0.22](https://github.com/bullhorn/novo-elements/compare/v1.0.21...v1.0.22) (2016-09-06)
 
