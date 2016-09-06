@@ -556,7 +556,7 @@ export class NovoTableElement {
         for (let row of this.rows) {
             row._selected = value;
         }
-        this.selected = value ? this.rows : 0;
+        this.selected = value ? this.rows : [];
         this.showSelectAllMessage = false;
         this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
         this.emitSelected(this.selected);
