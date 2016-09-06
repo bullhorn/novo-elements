@@ -559,7 +559,7 @@ export class NovoTableElement {
         this.selected = value ? this.rows : [];
         this.showSelectAllMessage = false;
         this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
-        this.emitSelected(this.selected);
+        this.rowSelectHandler();
     }
 
     /**
