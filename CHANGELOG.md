@@ -1,3 +1,13 @@
+<a name="1.0.22"></a>
+## [1.0.22](https://github.com/bullhorn/novo-elements/compare/v1.0.21...v1.0.22) (2016-09-06)
+
+
+### Bug Fixes
+
+* **table:** Fixing bug where the selected was set to 0 if you select/unselect the whole page ([9c628ae](https://github.com/bullhorn/novo-elements/commit/9c628ae))
+
+
+
 <a name="1.0.21"></a>
 ## [1.0.21](https://github.com/bullhorn/novo-elements/compare/v1.0.20...v1.0.21) (2016-08-31)
 
