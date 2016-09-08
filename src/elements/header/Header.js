@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'util-action',
-    inputs: ['icon', 'inverse'],
+    inputs: ['icon', 'inverse', 'disabled'],
     template: `
-        <button theme="icon" [icon]="icon" [attr.inverse]="inverse"></button>
+        <button theme="icon" [icon]="icon" [attr.inverse]="inverse" [disabled]="disabled"></button>
     `
 })
 export class UtilActionElement {
