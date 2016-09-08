@@ -5,6 +5,7 @@ export * from './controls/checkbox/CheckboxControl';
 export * from './controls/date/DateControl';
 export * from './controls/date-time/DateTimeControl';
 export * from './controls/editor/EditorControl';
+export * from './controls/file/FileControl';
 export * from './controls/native-select/NativeSelectControl';
 export * from './controls/picker/PickerControl';
 export * from './controls/quick-note/QuickNoteControl';

@@ -3,15 +3,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 // APP
-import { NovoSelectModule } from './../../../novo-elements';
+import { NovoButtonModule, NovoSelectModule } from './../../../novo-elements';
 import { NovoAddressElement } from './address/Address';
 import { NovoCheckboxElement } from './checkbox/Checkbox';
 import { NovoCheckListElement } from './checkbox/CheckList';
+import { NovoFileInputElement } from './file/FileInput';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, NovoSelectModule],
-    declarations: [NovoAddressElement, NovoCheckboxElement, NovoCheckListElement],
-    exports: [NovoAddressElement, NovoCheckboxElement, NovoCheckListElement]
+    imports: [CommonModule, FormsModule, NovoButtonModule, NovoSelectModule],
+    declarations: [NovoAddressElement, NovoCheckboxElement, NovoCheckListElement, NovoFileInputElement],
+    exports: [NovoAddressElement, NovoCheckboxElement, NovoCheckListElement, NovoFileInputElement]
 })
 export class NovoFormExtrasModule {
 }

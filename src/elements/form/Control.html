@@ -22,6 +22,8 @@
                 <option *ngIf="control.placeholder" value="" disabled selected hidden>{{control.placeholder}}</option>
                 <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>
             </select>
+            <!--File-->
+            <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="control.placeholder" [multiple]="control.multiple"></novo-file-input>
             <!--Tiles-->
             <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)"></novo-tiles>
             <!--Picker-->
