@@ -1,3 +1,13 @@
+<a name="1.0.25"></a>
+## [1.0.25](https://github.com/bullhorn/novo-elements/compare/v1.0.24...v1.0.25) (2016-09-08)
+
+
+### Features
+
+* **header:** Allowing the utils for headers to be disabled ([e9c1953](https://github.com/bullhorn/novo-elements/commit/e9c1953))
+
+
+
 <a name="1.0.24"></a>
 ## [1.0.24](https://github.com/bullhorn/novo-elements/compare/v1.0.23...v1.0.24) (2016-09-08)
 
