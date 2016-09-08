@@ -49,7 +49,7 @@ button {
             }
 
             &[icon] {
-                padding: ($padding-top - 4px) ($padding-side - 10px) ($padding-top - 4px) $padding-side;
+                padding: ($padding-top - 3px) ($padding-side - 10px) ($padding-top - 3px) $padding-side;
 
                 i {
                     background: rgba(0, 0, 0, .15);
@@ -164,7 +164,7 @@ button {
             }
 
             &[icon] {
-                padding: ($padding-top - 7px) ($padding-side - 11px) ($padding-top - 7px) ($padding-side - 1px);
+                padding: ($padding-top - 4px) ($padding-side - 11px) ($padding-top - 4px) ($padding-side - 1px);
 
                 i {
                     padding: 5px;
@@ -223,7 +223,7 @@ button {
                 }
 
                 &[side="left"] {
-                    padding: ($padding-top - 5px) $padding-side ($padding-top - 5px) ($padding-side - 10px);
+                    padding: ($padding-top - 4px) $padding-side ($padding-top - 4px) ($padding-side - 10px);
 
                     i {
                         margin-right: 5px;

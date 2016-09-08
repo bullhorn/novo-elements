@@ -52,7 +52,7 @@ export class NovoTableHeaderElement {
                     </th>
                     <!-- TABLE HEADERS -->
                     <th *ngFor="let column of columns" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
-                        <div class="th-group" [attr.data-automation-id]="column.name" *ngIf="!column.hideHeader">
+                        <div class="th-group" [attr.data-automation-id]="column.id || column.name" *ngIf="!column.hideHeader">
                             <!-- LABEL & SORT ARROWS -->
                             <div class="th-title" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
                                 <label>{{ column.title }}</label>
@@ -123,7 +123,7 @@ export class NovoTableHeaderElement {
                         <td class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
                             <novo-checkbox [(ngModel)]="row._selected" (ngModelChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></novo-checkbox>
                         </td>
-                        <td *ngFor="let column of columns" [attr.data-automation-id]="column.name">
+                        <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name">
                             <novo-table-cell [column]="column" [row]="row"></novo-table-cell>
                         </td>
                     </tr>
