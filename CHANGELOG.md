@@ -1,3 +1,13 @@
+<a name="1.0.24"></a>
+## [1.0.24](https://github.com/bullhorn/novo-elements/compare/v1.0.23...v1.0.24) (2016-09-08)
+
+
+### Bug Fixes
+
+* **table:** Fixing data-automation-ids for Table columns that share the same name ([b68da3f](https://github.com/bullhorn/novo-elements/commit/b68da3f))
+
+
+
 <a name="1.0.23"></a>
 ## [1.0.23](https://github.com/bullhorn/novo-elements/compare/v1.0.22...v1.0.23) (2016-09-06)
 
