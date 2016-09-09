@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, forwardRef, Provider } from '@angular/core';
+import { Component, Input, ElementRef, forwardRef, Provider } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 // Value accessor for the component (supports ngModel)
@@ -21,7 +21,7 @@ const FILE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
                 </div>
             </div>
         </div>
-        <div class="file-input-group" [class.disabled]="disabled">
+        <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
             <input type="file" [name]="name" [attr.id]="name" (change)="check($event)" [attr.multiple]="multiple"/>
             <label [attr.for]="name">
                 <span>{{placeholder}}</span>
@@ -36,11 +36,69 @@ export class NovoFileInputElement implements ControlValueAccessor {
     @Input() disabled:boolean;
     @Input() placeholder:string = 'Choose a file';
 
-    value:boolean = false;
+    value:Array = [];
     files:Array = [];
     model:any;
+    hovered:boolean = false;
     onModelChange:Function = () => {};
     onModelTouched:Function = () => {};
+
+    constructor(element:ElementRef) {
+        this.element = element;
+    }
+
+    ngOnInit() {
+        this.commands = {
+            dragenter: this.dragEnterHandler.bind(this),
+            dragleave: this.dragLeaveHandler.bind(this),
+            dragover: this.dragOverHandler.bind(this),
+            drop: this.dropHandler.bind(this)
+        };
+
+        ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(type => {
+            this.element.nativeElement.addEventListener(type, this.commands[type]);
+        });
+    }
+
+    ngOnDestroy() {
+        ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(type => {
+            this.element.nativeElement.removeEventListener(type, this.commands[type]);
+        });
+    }
+
+    dragEnterHandler(event) {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'copy';
+        this.target = event.target;
+        this.active = true;
+    }
+
+    dragLeaveHandler(event) {
+        event.preventDefault();
+        if (this.target === event.target) {
+            //do something
+            this.active = false;
+        }
+    }
+
+    dragOverHandler(event) {
+        event.preventDefault();
+        // no-op
+    }
+
+    dropHandler(event) {
+        event.preventDefault();
+        this.visible = false;
+        if (event.dataTransfer.types[0] !== 'Files') return;
+        if (this.multiple) {
+            this.files = Array.from(event.dataTransfer.files);
+        } else {
+            this.files = [Array.from(event.dataTransfer.files)[0]];
+        }
+
+        this.model = this.files;
+        this.onModelChange(this.model);
+    }
 
     writeValue(model:any):void {
         this.model = model;

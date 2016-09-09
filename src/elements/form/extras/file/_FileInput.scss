@@ -48,7 +48,8 @@ novo-file-input {
             cursor: pointer;
         }
 
-        &:hover {
+        &:hover,
+        &.active {
             label {
                 border: 2px dashed $positive;
             }
