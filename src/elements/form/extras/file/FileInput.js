@@ -32,14 +32,14 @@ const FILE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
 })
 export class NovoFileInputElement implements ControlValueAccessor {
     @Input() name:string;
-    @Input() multiple:boolean;
-    @Input() disabled:boolean;
+    @Input() multiple:boolean = false;
+    @Input() disabled:boolean = false;
     @Input() placeholder:string = 'Choose a file';
 
     value:Array = [];
     files:Array = [];
     model:any;
-    hovered:boolean = false;
+    active:boolean = false;
     onModelChange:Function = () => {};
     onModelTouched:Function = () => {};
 
@@ -98,6 +98,7 @@ export class NovoFileInputElement implements ControlValueAccessor {
 
         this.model = this.files;
         this.onModelChange(this.model);
+        this.active = false;
     }
 
     writeValue(model:any):void {
