@@ -1,5 +1,5 @@
 import { NovoFileInputElement } from './FileInput';
-import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
+import { APP_TEST_PROVIDERS } from './../../../../testing/test-providers';
 
 describe('Element: NovoFileInputElement', () => {
     let component;
@@ -7,7 +7,8 @@ describe('Element: NovoFileInputElement', () => {
         return {
             preventDefault: () => {},
             dataTransfer: {
-                dropEffect: 'fake'
+                dropEffect: 'fake',
+                types: ['File']
             },
             target: 'test-target'
         };
@@ -38,7 +39,7 @@ describe('Element: NovoFileInputElement', () => {
         it('should destroy events.', () => {
             expect(component.ngOnDestroy).toBeDefined();
             spyOn(component.element.nativeElement, 'removeEventListener');
-            component.ngOnInit();
+            component.ngOnDestroy();
             expect(component.element.nativeElement.removeEventListener).toHaveBeenCalled();
         });
     });
@@ -48,8 +49,8 @@ describe('Element: NovoFileInputElement', () => {
             expect(component.dragEnterHandler).toBeDefined();
             let evt = new FakeEvent();
             component.dragEnterHandler(evt);
-            expect(evt.dropEffect).toBe('copy');
-            expect(component.active).toBe(false);
+            expect(evt.dataTransfer.dropEffect).toBe('copy');
+            expect(component.active).toBe(true);
         });
     });
 

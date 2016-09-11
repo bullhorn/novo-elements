@@ -45,16 +45,15 @@ export class NovoFileInputElement implements ControlValueAccessor {
 
     constructor(element:ElementRef) {
         this.element = element;
-    }
-
-    ngOnInit() {
         this.commands = {
             dragenter: this.dragEnterHandler.bind(this),
             dragleave: this.dragLeaveHandler.bind(this),
             dragover: this.dragOverHandler.bind(this),
             drop: this.dropHandler.bind(this)
         };
+    }
 
+    ngOnInit() {
         ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(type => {
             this.element.nativeElement.addEventListener(type, this.commands[type]);
         });
