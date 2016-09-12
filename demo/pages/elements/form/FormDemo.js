@@ -5,9 +5,10 @@ import DynamicFormDemoTpl from './templates/DynamicForm.html';
 import VerticalDynamicFormDemoTpl from './templates/VerticalDynamicForm.html';
 import TextBasedControlsDemoTpl from './templates/TextBasedControls.html';
 import CheckBoxControlsDemoTpl from './templates/CheckBoxControls.html';
+import FileInputControlsDemoTpl from './templates/FileInputControls.html';
 import MockMeta from './MockMeta';
 // Vendor
-import { FormUtils, TextBoxControl, CheckboxControl, CheckListControl, QuickNoteControl, TilesControl } from './../../../../src/novo-elements';
+import { FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl, QuickNoteControl, TilesControl } from './../../../../src/novo-elements';
 
 const template = `
 <div class="container">
@@ -23,6 +24,10 @@ const template = `
     <h5>Checkbox Controls</h5>
     <div class="example form-demo">${CheckBoxControlsDemoTpl}</div>
     <code-snippet [code]="CheckBoxControlsDemoTpl"></code-snippet>
+
+    <h5>File Input Controls</h5>
+    <div class="example form-demo">${FileInputControlsDemoTpl}</div>
+    <code-snippet [code]="FileInputControlsDemoTpl"></code-snippet>
     
     <h2>Dynamic Form</h2>
     <p>Dynamic forms are composed of one element, <code>&lt;novo-dynamic-form [controls]="controls"/&gt;</code> and allow you to pass in the controls and form and it will create the form for you.</p>
@@ -47,6 +52,7 @@ export class FormDemoComponent {
         this.VerticalDynamicFormDemoTpl = VerticalDynamicFormDemoTpl;
         this.TextBasedControlsDemoTpl = TextBasedControlsDemoTpl;
         this.CheckBoxControlsDemoTpl = CheckBoxControlsDemoTpl;
+        this.FileInputControlsDemoTpl = FileInputControlsDemoTpl;
         // Quick note config
         this.quickNoteConfig = {
             triggers: {
@@ -86,6 +92,11 @@ export class FormDemoComponent {
         this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'] });
         this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }] });
         this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl]);
+
+        // File input controls
+        this.fileControl = new FileControl({ key: 'file', name: 'myfile', label: 'File' });
+        this.multiFileControl = new FileControl({ key: 'file', name: 'myfile', label: 'Multiple Files', multiple: true });
+        this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
 
         // Dynamic
         this.dynamic = formUtils.toControls(MockMeta, '$ USD', {}, 'TOKEN');
