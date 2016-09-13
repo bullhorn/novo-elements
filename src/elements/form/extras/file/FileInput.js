@@ -92,6 +92,7 @@ export class NovoFileInputElement implements ControlValueAccessor {
         if (event.dataTransfer.types[0] !== 'Files') return;
         let filelist = Array.from(event.dataTransfer.files);
         this.process(this.multiple ? filelist : [filelist[0]]);
+        this.active = false;
     }
 
     writeValue(model:any):void {

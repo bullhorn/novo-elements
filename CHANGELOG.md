@@ -1,3 +1,23 @@
+<a name="1.0.26"></a>
+## [1.0.26](https://github.com/bullhorn/novo-elements/compare/v1.0.25...v1.0.26) (2016-09-12)
+
+
+### Features
+
+* **fileInput:** Added Single and Multi File Input Control. closes [#181](https://github.com/bullhorn/novo-elements/issues/181) ([#183](https://github.com/bullhorn/novo-elements/issues/183)) ([edb6038](https://github.com/bullhorn/novo-elements/commit/edb6038))
+
+
+
+<a name="1.0.25"></a>
+## [1.0.25](https://github.com/bullhorn/novo-elements/compare/v1.0.24...v1.0.25) (2016-09-08)
+
+
+### Features
+
+* **header:** Allowing the utils for headers to be disabled ([e9c1953](https://github.com/bullhorn/novo-elements/commit/e9c1953))
+
+
+
 <a name="1.0.24"></a>
 ## [1.0.24](https://github.com/bullhorn/novo-elements/compare/v1.0.23...v1.0.24) (2016-09-08)
 
