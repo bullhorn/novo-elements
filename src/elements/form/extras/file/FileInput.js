@@ -15,11 +15,11 @@ const FILE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         <div class="file-output-group">
             <div class="file-item" *ngFor="let file of files">
                 <label>{{file.name}}</label>
-                <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="!file.loading">
+                <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
                     <button theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'"></button>
                     <button theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'"></button>
                 </div>
-                <novo-loading *ngIf="file.loading"></novo-loading>
+                <novo-loading *ngIf="!file.loaded"></novo-loading>
             </div>
         </div>
         <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
@@ -136,26 +136,49 @@ export class NovoFileInputElement implements ControlValueAccessor {
     }
 
     readFile(file) {
+        return new NovoFile(file).read();
+    }
+}
+
+
+export class NovoFile {
+    name:string = '';
+    contentType:string = '';
+    lastModified:number = 0;
+    size:number = 0;
+    loaded:boolean = false;
+    fileContents:string;
+    dataURL:string;
+
+    constructor(file:File) {
+        this.name = file.name;
+        this.contentType = file.type;
+        this.lastModified = file.lastModified;
+        this.size = file.size;
+        this.file = file;
+    }
+
+    read() {
         return new Promise((resolve) => {
+            resolve(this);
             let reader = new FileReader();
-            let fileref = {
-                name: file.name,
-                contentType: file.type,
-                lastModified: file.lastModified,
-                size: file.size,
-                file: file,
-                loading: true
+            reader.onload = (event) => {
+                this.fileContents = event.target.result.split(',')[1];
+                this.dataURL = event.target.result;
+                this.loaded = true;
             };
-            resolve(fileref);
-            setTimeout(() => {
-                reader.onload = (event) => {
-                    fileref.fileContents = event.target.result.split(',')[1];
-                    fileref.dataURL = event.target.result;
-                    fileref.loading = false;
-                };
-                // when the file is read it triggers the onload event above.
-                reader.readAsDataURL(file);
-            });
+            // when the file is read it triggers the onload event above.
+            reader.readAsDataURL(this.file);
         });
+    }
+
+    toJSON() {
+        return {
+            name: this.name,
+            contentType: this.type,
+            lastModified: this.lastModified,
+            size: this.size,
+            fileContents: this.fileContents
+        };
     }
 }
