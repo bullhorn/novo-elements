@@ -95,7 +95,7 @@ export class FormDemoComponent {
 
         // File input controls
         this.fileControl = new FileControl({ key: 'file', name: 'myfile', label: 'File' });
-        this.multiFileControl = new FileControl({ key: 'file', name: 'myfile', label: 'Multiple Files', multiple: true });
+        this.multiFileControl = new FileControl({ key: 'files', name: 'myfiles', label: 'Multiple Files', multiple: true });
         this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
 
         // Dynamic

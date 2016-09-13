@@ -10,6 +10,7 @@ import {
     DateControl,
     DateTimeControl,
     EditorControl,
+    FileControl,
     PickerControl,
     RadioControl,
     SelectControl,
@@ -85,6 +86,8 @@ export class FormUtils {
             type = 'address';
         } else if (field.dataType === 'Integer') {
             type = 'number';
+        } else if (field.type === 'file') {
+            type = 'file';
         }
 
         // Overrides
@@ -112,7 +115,8 @@ export class FormUtils {
             value: field.value || field.defaultValue,
             sortOrder: field.sortOrder,
             associatedEntity: field.associatedEntity,
-            optionsType: field.optionsType
+            optionsType: field.optionsType,
+            multiple: field.multiValue
         };
         let optionsConfig = this.getControlOptions(field, http, config);
 
@@ -190,6 +194,9 @@ export class FormUtils {
                 break;
             case 'address':
                 control = new AddressControl(controlConfig);
+                break;
+            case 'file':
+                control = new FileControl(controlConfig);
                 break;
             default:
                 control = new TextBoxControl(controlConfig);
