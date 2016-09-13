@@ -142,6 +142,7 @@ export class NovoFileInputElement implements ControlValueAccessor {
                 contentType: file.type,
                 lastModified: file.lastModified,
                 size: file.size,
+                file: file,
                 loading: true
             };
             resolve(fileref);
