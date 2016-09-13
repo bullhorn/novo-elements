@@ -149,6 +149,7 @@ export class NovoFile {
     loaded:boolean = false;
     fileContents:string;
     dataURL:string;
+    reader:FileReader = new FileReader();
 
     constructor(file:File) {
         this.name = file.name;
@@ -156,19 +157,18 @@ export class NovoFile {
         this.lastModified = file.lastModified;
         this.size = file.size;
         this.file = file;
+        this.reader.onload = (event) => {
+            this.fileContents = event.target.result.split(',')[1];
+            this.dataURL = event.target.result;
+            this.loaded = true;
+        };
     }
 
     read() {
         return new Promise((resolve) => {
             resolve(this);
-            let reader = new FileReader();
-            reader.onload = (event) => {
-                this.fileContents = event.target.result.split(',')[1];
-                this.dataURL = event.target.result;
-                this.loaded = true;
-            };
             // when the file is read it triggers the onload event above.
-            reader.readAsDataURL(this.file);
+            this.reader.readAsDataURL(this.file);
         });
     }
 
