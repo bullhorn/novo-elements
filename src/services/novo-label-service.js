@@ -1,4 +1,7 @@
+// NG2
 import { Injectable } from '@angular/core';
+// Vendor
+import moment from 'moment/moment';
 
 @Injectable()
 export class NovoLabelService {
@@ -19,6 +22,9 @@ export class NovoLabelService {
     selected = 'Selected';
     selectAllOnPage = 'Select all on page';
     deselectAll = 'Deselect all';
+    dateFormat = 'MMMM DD, YYYY';
+    timeFormat = 'hh:mm a';
+    dateTimeFormat = 'MMMM DD, YYYY hh:mm a';
 
     selectedRecords(selected) {
         return `Only ${selected} records selected.`;
@@ -26,6 +32,10 @@ export class NovoLabelService {
 
     totalRecords(total) {
         return `Select all ${total} matching records.`;
+    }
+
+    formatDateWithFormat(value, format) {
+        return moment(value).format(format);
     }
 }
 

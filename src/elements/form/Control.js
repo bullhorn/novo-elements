@@ -3,8 +3,7 @@ import { Component, Input, ElementRef, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
-// Vendor
-import moment from 'moment/moment';
+import { NovoLabelService } from './../../services/novo-label-service';
 
 @Component({
     selector: 'novo-control',
@@ -22,8 +21,9 @@ export class NovoControlElement extends OutsideClick {
     change:EventEmitter = new EventEmitter;
     formattedValue:String = '';
 
-    constructor(element:ElementRef) {
+    constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
+        this.labels = labels;
     }
 
     ngOnInit() {
@@ -66,30 +66,25 @@ export class NovoControlElement extends OutsideClick {
         this.formattedValue = null;
     }
 
+    formatDateValue(event) {
+        this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.dateFormat);
+        this.toggleActive(null, false);
+    }
+
+    formatTimeValue(event) {
+        this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.timeFormat);
+    }
+
     formatDateTimeValue(event, part) {
-        let format = '';
-        let date = event.date;
-        switch (this.control.controlType) {
-            case 'time':
-                format = 'hh:mm a';
-                break;
-            case 'date-time':
-                date = new Date();
-                if (event.hours || event.minutes || event.year || event.month || event.day) {
-                    if (part === 'time') {
-                        date.setHours(event.hours, event.minutes, 0);
-                    } else {
-                        date.setFullYear(event.year, event.month, event.day);
-                    }
-                }
-                format = 'MMMM DD, YYYY hh:mm a';
-                break;
-            default: // 'date'
-                format = 'MMMM DD, YYYY';
-                this.toggleActive(null, false);
-                break;
+        this.formattedDateTimeValue = this.formattedDateTimeValue || new Date();
+
+        if (part === 'date') {
+            this.formattedDateTimeValue.setFullYear(event.year, event.month - 1, event.day);
+        } else {
+            this.formattedDateTimeValue.setHours(event.hours, event.minutes, 0);
         }
-        this.formattedValue = moment(date).format(format);
+
+        this.formattedValue = this.labels.formatDateWithFormat(this.formattedDateTimeValue, this.labels.dateTimeFormat);
     }
 
     resizeTextArea(event) {

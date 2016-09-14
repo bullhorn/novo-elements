@@ -6,9 +6,13 @@ import VerticalDynamicFormDemoTpl from './templates/VerticalDynamicForm.html';
 import TextBasedControlsDemoTpl from './templates/TextBasedControls.html';
 import CheckBoxControlsDemoTpl from './templates/CheckBoxControls.html';
 import FileInputControlsDemoTpl from './templates/FileInputControls.html';
+import CalendarControlsDemoTpl from './templates/CalendarInputControls.html';
 import MockMeta from './MockMeta';
 // Vendor
-import { FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl, QuickNoteControl, TilesControl } from './../../../../src/novo-elements';
+import {
+    FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
+    QuickNoteControl, TilesControl, DateControl, TimeControl, DateTimeControl
+} from './../../../../src/novo-elements';
 
 const template = `
 <div class="container">
@@ -28,6 +32,10 @@ const template = `
     <h5>File Input Controls</h5>
     <div class="example form-demo">${FileInputControlsDemoTpl}</div>
     <code-snippet [code]="FileInputControlsDemoTpl"></code-snippet>
+        
+    <h5>Calendar Controls</h5>
+    <div class="example form-demo">${CalendarControlsDemoTpl}</div>
+    <code-snippet [code]="CalendarControlsDemoTpl"></code-snippet>
     
     <h2>Dynamic Form</h2>
     <p>Dynamic forms are composed of one element, <code>&lt;novo-dynamic-form [controls]="controls"/&gt;</code> and allow you to pass in the controls and form and it will create the form for you.</p>
@@ -53,6 +61,8 @@ export class FormDemoComponent {
         this.TextBasedControlsDemoTpl = TextBasedControlsDemoTpl;
         this.CheckBoxControlsDemoTpl = CheckBoxControlsDemoTpl;
         this.FileInputControlsDemoTpl = FileInputControlsDemoTpl;
+        this.CalendarControlsDemoTpl = CalendarControlsDemoTpl;
+
         // Quick note config
         this.quickNoteConfig = {
             triggers: {
@@ -97,6 +107,12 @@ export class FormDemoComponent {
         this.fileControl = new FileControl({ key: 'file', name: 'myfile', label: 'File' });
         this.multiFileControl = new FileControl({ key: 'files', name: 'myfiles', label: 'Multiple Files', multiple: true });
         this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
+
+        // Calendar input controls
+        this.dateControl = new DateControl({ key: 'date', label: 'Date' });
+        this.timeControl = new TimeControl({ key: 'time', label: 'Time' });
+        this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time' });
+        this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
 
         // Dynamic
         this.dynamic = formUtils.toControls(MockMeta, '$ USD', {}, 'TOKEN');
