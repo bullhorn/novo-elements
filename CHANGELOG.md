@@ -1,3 +1,13 @@
+<a name="1.0.29"></a>
+## [1.0.29](https://github.com/bullhorn/novo-elements/compare/v1.0.28...v1.0.29) (2016-09-14)
+
+
+### Bug Fixes
+
+* **table:** Fixing the table filtering if the list of options were of the form {value, label} ([6739ce3](https://github.com/bullhorn/novo-elements/commit/6739ce3))
+
+
+
 <a name="1.0.28"></a>
 ## [1.0.28](https://github.com/bullhorn/novo-elements/compare/v1.0.27...v1.0.28) (2016-09-14)
 
