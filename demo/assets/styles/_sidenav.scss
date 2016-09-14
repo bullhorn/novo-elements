@@ -157,7 +157,7 @@ nav.main-nav {
         transition: transform 0.5s;
         transition-timing-function: cubic-bezier(1, 0.01, 0, 1.22);
     }
-    @for $i from 1 through 30 {
+    @for $i from 1 through 40 {
         $number: ($i - 1);
 
         .menu-item:nth-child(#{$i}).current ~ .menu-line {
