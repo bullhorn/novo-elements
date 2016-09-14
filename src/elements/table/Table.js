@@ -363,8 +363,13 @@ export class NovoTableElement {
                                         return isMatch;
                                     });
                                 } else {
+                                    let options = column.filter;
+                                    // We have an array of {value: '', labels: ''}
+                                    if (options[0].value || options[0].label) {
+                                        options = column.filter.map(opt => opt.value);
+                                    }
                                     // It's a list of options
-                                    matched = column.filter.includes(row[column.name]);
+                                    matched = options.includes(row[column.name]);
                                 }
                             } else if (Array.isArray(row[column.name])) {
                                 // Value is an array
