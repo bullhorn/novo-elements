@@ -1,3 +1,13 @@
+<a name="1.0.27"></a>
+## [1.0.27](https://github.com/bullhorn/novo-elements/compare/v1.0.26...v1.0.27) (2016-09-14)
+
+
+### Features
+
+* **FILE INPUT:** Multi File Input is now additive ([#184](https://github.com/bullhorn/novo-elements/issues/184)) ([223ef2b](https://github.com/bullhorn/novo-elements/commit/223ef2b))
+
+
+
 <a name="1.0.26"></a>
 ## [1.0.26](https://github.com/bullhorn/novo-elements/compare/v1.0.25...v1.0.26) (2016-09-12)
 
