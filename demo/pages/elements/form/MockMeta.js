@@ -310,6 +310,13 @@ export default {
             type: 'address',
             label: 'Address',
             required: true
+        },
+        {
+            name: 'attachments',
+            type: 'file',
+            label: 'Attachments',
+            multiValue: true,
+            required: true
         }
     ]
 };

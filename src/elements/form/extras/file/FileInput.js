@@ -15,10 +15,11 @@ const FILE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
         <div class="file-output-group">
             <div class="file-item" *ngFor="let file of files">
                 <label>{{file.name}}</label>
-                <div class="actions" [attr.data-automation-id]="'file-actions'">
+                <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
                     <button theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'"></button>
                     <button theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'"></button>
                 </div>
+                <novo-loading *ngIf="!file.loaded"></novo-loading>
             </div>
         </div>
         <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
@@ -89,14 +90,8 @@ export class NovoFileInputElement implements ControlValueAccessor {
         event.preventDefault();
         this.visible = false;
         if (event.dataTransfer.types[0] !== 'Files') return;
-        if (this.multiple) {
-            this.files = Array.from(event.dataTransfer.files);
-        } else {
-            this.files = [Array.from(event.dataTransfer.files)[0]];
-        }
-
-        this.model = this.files;
-        this.onModelChange(this.model);
+        let filelist = Array.from(event.dataTransfer.files);
+        this.process(this.multiple ? filelist : [filelist[0]]);
         this.active = false;
     }
 
@@ -113,27 +108,77 @@ export class NovoFileInputElement implements ControlValueAccessor {
     }
 
     check(event) {
-        // get selected file element
-        let input = event.target;
-        this.files = Array.from(input.files);
-        this.model = this.files;
-        this.onModelChange(this.model);
+        this.process(Array.from(event.target.files));
+    }
+
+    process(filelist) {
+        Promise.all(
+            filelist.map((file) => this.readFile(file))
+        ).then((files) => {
+            if (this.multiple) {
+                this.files.push(...files);
+            } else {
+                this.files = files;
+            }
+            this.model = this.files;
+            this.onModelChange(this.model);
+        });
     }
 
     download(file) {
-        let reader = new FileReader();
-        // inject an image with the src url
-        reader.onload = (event) => {
-            let url = event.target.result;
-            window.open(url, '_blank');
-        };
-        // when the file is read it triggers the onload event above.
-        reader.readAsDataURL(file);
+        window.open(file.dataURL, '_blank');
     }
 
     remove(file) {
-        this.files.splice(this.files.findIndex(f => f.name === file.name), 1);
+        this.files.splice(this.files.findIndex(f => (f.name === file.name && f.size === file.size)), 1);
         this.model = this.files;
         this.onModelChange(this.model);
+    }
+
+    readFile(file) {
+        return new NovoFile(file).read();
+    }
+}
+
+
+export class NovoFile {
+    name:string = '';
+    contentType:string = '';
+    lastModified:number = 0;
+    size:number = 0;
+    loaded:boolean = false;
+    fileContents:string;
+    dataURL:string;
+    reader:FileReader = new FileReader();
+
+    constructor(file:File) {
+        this.name = file.name;
+        this.contentType = file.type;
+        this.lastModified = file.lastModified;
+        this.size = file.size;
+        this.file = file;
+        this.reader.onload = (event) => {
+            this.fileContents = event.target.result.split(',')[1];
+            this.dataURL = event.target.result;
+            this.loaded = true;
+        };
+    }
+
+    read() {
+        return new Promise((resolve) => {
+            resolve(this);
+            // when the file is read it triggers the onload event above.
+            this.reader.readAsDataURL(this.file);
+        });
+    }
+
+    toJSON() {
+        return {
+            name: this.name,
+            contentType: this.type,
+            lastModified: this.lastModified,
+            size: this.size,
+            fileContents: this.fileContents
+        };
     }
 }
