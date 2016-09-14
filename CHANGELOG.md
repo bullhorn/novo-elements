@@ -1,3 +1,13 @@
+<a name="1.0.28"></a>
+## [1.0.28](https://github.com/bullhorn/novo-elements/compare/v1.0.27...v1.0.28) (2016-09-14)
+
+
+### Bug Fixes
+
+* **calendar controls:** Fixing the rendering of the Calendar Controls (date, time, datetime). Fixes [#186](https://github.com/bullhorn/novo-elements/issues/186) and [#185](https://github.com/bullhorn/novo-elements/issues/185) ([bf632ae](https://github.com/bullhorn/novo-elements/commit/bf632ae))
+
+
+
 <a name="1.0.27"></a>
 ## [1.0.27](https://github.com/bullhorn/novo-elements/compare/v1.0.26...v1.0.27) (2016-09-14)
 
