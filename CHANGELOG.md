@@ -1,3 +1,15 @@
+<a name="1.0.32"></a>
+## [1.0.32](https://github.com/bullhorn/novo-elements/compare/v1.0.31...v1.0.32) (2016-09-15)
+
+
+### Bug Fixes
+
+* **form:** Fix initial control rendering of dates ([76ec452](https://github.com/bullhorn/novo-elements/commit/76ec452))
+* **pagination:** Fixes table headers + pagination, closes [#180](https://github.com/bullhorn/novo-elements/issues/180) + [#190](https://github.com/bullhorn/novo-elements/issues/190) ([#192](https://github.com/bullhorn/novo-elements/issues/192)) ([272fe6f](https://github.com/bullhorn/novo-elements/commit/272fe6f))
+* **z-index:** Fixing z-index of the dropdowns/selects ([d6575e5](https://github.com/bullhorn/novo-elements/commit/d6575e5))
+
+
+
 <a name="1.0.31"></a>
 ## [1.0.31](https://github.com/bullhorn/novo-elements/compare/v1.0.30...v1.0.31) (2016-09-15)
 

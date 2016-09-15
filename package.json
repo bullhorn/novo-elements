@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
     "clean": "node_modules/.bin/del bundles coverage lib dist",
