@@ -1,3 +1,13 @@
+<a name="1.0.31"></a>
+## [1.0.31](https://github.com/bullhorn/novo-elements/compare/v1.0.30...v1.0.31) (2016-09-15)
+
+
+### Bug Fixes
+
+* **table:** Fixing the data-automation-ids around the table filters ([45bebcd](https://github.com/bullhorn/novo-elements/commit/45bebcd))
+
+
+
 <a name="1.0.30"></a>
 ## [1.0.30](https://github.com/bullhorn/novo-elements/compare/v1.0.29...v1.0.30) (2016-09-14)
 
