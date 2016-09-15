@@ -15,11 +15,11 @@
 // Pages
 // --------------------------------------------------
 // Design
+@import "pages/home/Home";
 @import "pages/design/color/Color";
 @import "pages/design/composition/Composition";
 @import "pages/design/iconography/Iconography";
-@import "pages/design/typography/Typography";
-// Elements
+@import "pages/design/typography/Typography"; // Elements
 @import "pages/elements/button/ButtonDemo";
 @import "pages/elements/loading/LoadingDemo";
 @import "pages/elements/card/CardDemo";
@@ -43,6 +43,5 @@
 @import "pages/elements/editor/EditorDemo";
 @import "pages/elements/tip-well/TipWellDemo";
 @import "pages/elements/table/TableDemo";
-@import "pages/elements/form/FormDemo";
-// Utils
+@import "pages/elements/form/FormDemo"; // Utils
 @import "pages/utils/pipes/PipesDemo";
