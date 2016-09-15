@@ -1,6 +1,6 @@
 // Vendor
 import { Component, EventEmitter } from '@angular/core';
-import { isFunction, isString } from '@angular/core/src/facade/lang';
+import { isFunction, isString, isBlank } from '@angular/core/src/facade/lang';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
 
@@ -72,7 +72,7 @@ export class NovoTableHeaderElement {
                                             <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
                                     </item>
-                                    <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="option?.value || option">
+                                    <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="getOptionDataAutomationId(option)">
                                         {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
                                     </item>
                                 </list>
@@ -194,6 +194,13 @@ export class NovoTableElement {
             this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
             this.pageSelected = this.pagedData.filter(r => r._selected);
         }
+    }
+
+    getOptionDataAutomationId(option) {
+        if (!isBlank(option.value)) {
+            return option.value;
+        }
+        return option;
     }
 
     /**
