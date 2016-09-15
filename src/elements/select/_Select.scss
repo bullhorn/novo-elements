@@ -10,7 +10,7 @@ novo-select {
     &.active {
         .novo-select-list {
             position: absolute;
-            z-index: 2;
+            z-index: 1000;
             max-height: 200px;
             min-width: 200px;
             width: 100%;

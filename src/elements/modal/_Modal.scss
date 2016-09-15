@@ -59,7 +59,7 @@ novo-notification {
     margin-bottom: 1em;
     border-radius: 4px;
     box-shadow: 0 1px 7px rgba(0, 0, 0, .09), 0 1px 3px rgba(0, 0, 0, .20);
-    z-index: 2;
+    z-index: 1000;
     position: relative;
 
     & > button.modal-close {
