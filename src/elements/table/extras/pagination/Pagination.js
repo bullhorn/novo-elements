@@ -12,9 +12,9 @@ import { NovoLabelService } from './../../../../services/novo-label-service';
         <novo-select [options]="rowOptions" [placeholder]="labels.select" [(ngModel)]="itemsPerPage" (onSelect)="onPageSizeChanged($event)" data-automation-id="pager-select"></novo-select>
         <spacer></spacer>
         <ul class="pager" data-automation-id="pager">
-            <li class="page" (click)="selectPage(page-1)"><i class="bhi-previous" [hidden]="noPrevious()" data-automation-id="pager-previous"></i></li>
+            <li class="page" (click)="selectPage(page-1)" [ngClass]="{'disabled': noPrevious()}"><i class="bhi-previous" data-automation-id="pager-previous"></i></li>
             <li class="page" [ngClass]="{active: p.number==page}" *ngFor="let p of pages" (click)="selectPage(p.number)">{{p.text}}</li>
-            <li class="page" (click)="selectPage(page+1)"><i class="bhi-next" [hidden]="noNext()" data-automation-id="pager-next"></i></li>
+            <li class="page" (click)="selectPage(page+1)" [ngClass]="{'disabled': noNext()}"><i class="bhi-next" data-automation-id="pager-next"></i></li>
         </ul>
   `
 })

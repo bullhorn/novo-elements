@@ -58,6 +58,11 @@ novo-pagination {
             &:last-child {
                 padding-right: 0;
             }
+
+            &.disabled {
+                opacity: 0.3;
+                pointer-events: none;
+            }
         }
 
         .page.active {
