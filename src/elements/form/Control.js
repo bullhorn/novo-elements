@@ -11,15 +11,15 @@ import { NovoLabelService } from './../../services/novo-label-service';
     animations: [
         trigger('heroState', [
             state('inactive', style({
-                backgroundColor: '#eee',
-                transform: 'scale(1)'
+                backgroundColor: 'transparent',
+                transform: 'translateY(20px)'
             })),
             state('active', style({
                 backgroundColor: '#cfd8dc',
-                transform: 'scale(1.1)'
+                transform: 'translateY(0px)'
             })),
-            transition('inactive => active', animate('100ms ease-in')),
-            transition('active => inactive', animate('100ms ease-out'))
+            transition('inactive => active', animate('200ms ease-in')),
+            transition('active => inactive', animate('200ms ease-out'))
         ])
     ],
     host: {

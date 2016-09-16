@@ -1,6 +1,6 @@
-<div class="novo-control-container" [formGroup]="form" [@heroState]="state">
+<div class="novo-control-container" [formGroup]="form">
     <!--Label-->
-    <label [attr.for]="control.key">{{control.label}}</label>
+    <label [attr.for]="control.key" [@heroState]="state">{{control.label}}</label>
     <div class="novo-control-input-container">
         <!--Required Indicator-->
         <i [hidden]="!control.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
