@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, ElementRef, EventEmitter } from '@angular/core';
+import { Component, Input, ElementRef, EventEmitter, trigger, state, style, transition, animate } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -8,6 +8,20 @@ import { NovoLabelService } from './../../services/novo-label-service';
 @Component({
     selector: 'novo-control',
     template: require('./Control.html'),
+    animations: [
+        trigger('heroState', [
+            state('inactive', style({
+                backgroundColor: '#eee',
+                transform: 'scale(1)'
+            })),
+            state('active', style({
+                backgroundColor: '#cfd8dc',
+                transform: 'scale(1.1)'
+            })),
+            transition('inactive => active', animate('100ms ease-in')),
+            transition('active => inactive', animate('100ms ease-out'))
+        ])
+    ],
     host: {
         '[hidden]': 'control.hidden || control.type === \'hidden\''
     },
@@ -20,6 +34,7 @@ export class NovoControlElement extends OutsideClick {
     @Input() form:FormGroup;
     change:EventEmitter = new EventEmitter;
     formattedValue:String = '';
+    state:String = 'inactive';
 
     constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
@@ -32,6 +47,7 @@ export class NovoControlElement extends OutsideClick {
             if (~['date', 'time', 'date-time'].indexOf(this.control.controlType) && this.control.value) {
                 this.formatDateTimeValue({ date: this.control.value });
             }
+            this.checkState();
         }
         // Listen to clear events
         this.control.forceClear.subscribe(() => {
@@ -96,5 +112,26 @@ export class NovoControlElement extends OutsideClick {
 
     modelChange(value) {
         this.change.emit(value);
+        this.checkState();
+    }
+
+    checkState() {
+        if (this.control.key === 'note') {
+            this.state = (this.form.value[this.control.key].note) ? 'active' : 'inactive';
+        } else {
+            this.state = (this.form.value[this.control.key]) ? 'active' : 'inactive';
+        }
+    }
+
+    toggleState() {
+        if (this.control.key === 'note') {
+            if (!this.form.value[this.control.key].note) {
+                this.state = (this.state === 'active' ? 'inactive' : 'active');
+            }
+        } else {
+            if (!this.form.value[this.control.key]) {
+                this.state = (this.state === 'active' ? 'inactive' : 'active');
+            }
+        }
     }
 }
