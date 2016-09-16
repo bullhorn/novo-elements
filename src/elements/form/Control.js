@@ -36,6 +36,7 @@ export class NovoControlElement extends OutsideClick {
     change:EventEmitter = new EventEmitter;
     formattedValue:String = '';
     state:String = 'inactive';
+    alwaysActive:Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'quick-note', 'radio', 'text-area'];
 
     constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
@@ -118,8 +119,10 @@ export class NovoControlElement extends OutsideClick {
 
     checkState() {
         if (this.form.layout === 'vertical') {
-            if (this.control.key === 'note') {
-                this.state = (this.form.value[this.control.key].note) ? 'active' : 'inactive';
+            if (this.control.controlType === 'textbox') {
+                this.state = (this.form.value[this.control.key][0]) ? 'active' : 'inactive';
+            } else if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
+                this.state = 'active';
             } else {
                 this.state = (this.form.value[this.control.key]) ? 'active' : 'inactive';
             }
@@ -130,10 +133,12 @@ export class NovoControlElement extends OutsideClick {
 
     toggleState() {
         if (this.form.layout === 'vertical') {
-            if (this.control.key === 'note') {
-                if (!this.form.value[this.control.key].note) {
+            if (this.control.controlType === 'textbox') {
+                if (!this.form.value[this.control.key][0]) {
                     this.state = (this.state === 'active' ? 'inactive' : 'active');
                 }
+            } else if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
+                this.state = 'active';
             } else {
                 if (!this.form.value[this.control.key]) {
                     this.state = (this.state === 'active' ? 'inactive' : 'active');
