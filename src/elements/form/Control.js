@@ -16,6 +16,9 @@ import { NovoLabelService } from './../../services/novo-label-service';
             state('active', style({
                 transform: 'translateY(0px)'
             })),
+            state('horizontal', style({
+                transform: 'translateY(0px)'
+            })),
             transition('inactive => active', animate('200ms ease-in')),
             transition('active => inactive', animate('200ms ease-out'))
         ])
@@ -114,22 +117,30 @@ export class NovoControlElement extends OutsideClick {
     }
 
     checkState() {
-        if (this.control.key === 'note') {
-            this.state = (this.form.value[this.control.key].note) ? 'active' : 'inactive';
+        if (this.form.layout === 'vertical') {
+            if (this.control.key === 'note') {
+                this.state = (this.form.value[this.control.key].note) ? 'active' : 'inactive';
+            } else {
+                this.state = (this.form.value[this.control.key]) ? 'active' : 'inactive';
+            }
         } else {
-            this.state = (this.form.value[this.control.key]) ? 'active' : 'inactive';
+            this.state = 'horizontal';
         }
     }
 
     toggleState() {
-        if (this.control.key === 'note') {
-            if (!this.form.value[this.control.key].note) {
-                this.state = (this.state === 'active' ? 'inactive' : 'active');
+        if (this.form.layout === 'vertical') {
+            if (this.control.key === 'note') {
+                if (!this.form.value[this.control.key].note) {
+                    this.state = (this.state === 'active' ? 'inactive' : 'active');
+                }
+            } else {
+                if (!this.form.value[this.control.key]) {
+                    this.state = (this.state === 'active' ? 'inactive' : 'active');
+                }
             }
         } else {
-            if (!this.form.value[this.control.key]) {
-                this.state = (this.state === 'active' ? 'inactive' : 'active');
-            }
+            this.state = 'horizontal';
         }
     }
 }
