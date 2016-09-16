@@ -11,11 +11,9 @@ import { NovoLabelService } from './../../services/novo-label-service';
     animations: [
         trigger('heroState', [
             state('inactive', style({
-                backgroundColor: 'transparent',
-                transform: 'translateY(20px)'
+                transform: 'translateY(25px)'
             })),
             state('active', style({
-                backgroundColor: '#cfd8dc',
                 transform: 'translateY(0px)'
             })),
             transition('inactive => active', animate('200ms ease-in')),
