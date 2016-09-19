@@ -11,13 +11,13 @@ import { NovoLabelService } from './../../services/novo-label-service';
     animations: [
         trigger('heroState', [
             state('inactive', style({
-                transform: 'translateY(25px)'
+                transform: 'translate(0px, 25px) scale(1)'
             })),
             state('active', style({
-                transform: 'translateY(0px)'
+                transform: 'translate(-5px, 0px) scale(.8)'
             })),
             state('horizontal', style({
-                transform: 'translateY(0px)'
+                transform: 'translateY(0px. 0px) scale(1)'
             })),
             transition('inactive => active', animate('200ms ease-in')),
             transition('active => inactive', animate('200ms ease-out')),
@@ -38,7 +38,7 @@ export class NovoControlElement extends OutsideClick {
     change:EventEmitter = new EventEmitter;
     formattedValue:String = '';
     state:String = 'horizontal';
-    alwaysActive:Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'quick-note', 'radio', 'text-area'];
+    alwaysActive:Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'quick-note', 'radio', 'text-area', 'select'];
 
     constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
@@ -159,5 +159,6 @@ export class NovoControlElement extends OutsideClick {
         } else {
             this.state = 'horizontal';
         }
+        console.log(this.control.key, 'in...', this.form.value); //eslint-disable-line
     }
 }
