@@ -38,6 +38,7 @@ import {
 } from './pages/elements/all';
 import { UtilsDemoComponent } from './pages/utils/utils/UtilsDemo';
 import { PipesDemoComponent } from './pages/utils/pipes/PipesDemo';
+import { ModalSuccessDemo, M } from './pages/elements/modal/ModalDemo';
 
 import './demo.scss';
 // Vendor
@@ -78,7 +79,8 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
         EditorDemoComponent,
         TipWellDemoComponent,
         UtilsDemoComponent,
-        PipesDemoComponent
+        PipesDemoComponent,
+        ModalSuccessDemo
     ],
     imports: [
         BrowserModule,
@@ -92,7 +94,8 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
         FormUtils
     ],
     entryComponents: [
-        DemoComponent
+        DemoComponent,
+        ModalSuccessDemo
     ],
     bootstrap: [DemoComponent]
 })

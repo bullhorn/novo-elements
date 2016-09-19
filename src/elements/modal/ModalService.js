@@ -2,12 +2,13 @@
 import { ComponentResolver, Injectable, ReflectiveInjector } from '@angular/core';
 // APP
 import { NovoModalRef, NovoModalParams, NovoModalContainerElement } from './Modal';
+import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 @Injectable()
 export class NovoModalService {
     // TODO - use ComponentFactoryResolver instead - jgodi
-    constructor(componentResolver:ComponentResolver) {
-        this.componentResolver = componentResolver;
+    constructor(componentUtils:ComponentUtils) {
+        this.componentUtils = componentUtils;
     }
 
     set parentViewContainer(view) {
@@ -23,17 +24,12 @@ export class NovoModalService {
         const modal = new NovoModalRef();
         modal.component = component;
         modal.open();
-
-        this.componentResolver.resolveComponent(NovoModalContainerElement)
-            .then(componentFactory => {
-                const ctxInjector = this._parentViewContainer.injector;
-                let injector = ReflectiveInjector.resolve([
-                    { provide: NovoModalRef, useValue: modal },
-                    { provide: NovoModalParams, useValue: scope }
-                ]);
-                let componentInjector = ReflectiveInjector.fromResolvedProviders(injector, ctxInjector);
-                modal.containerRef = this._parentViewContainer.createComponent(componentFactory, 0, componentInjector);
-            });
+        
+        let bindings = ReflectiveInjector.resolve([
+            { provide: NovoModalRef, useValue: modal },
+            { provide: NovoModalParams, useValue: scope }
+        ]);
+        modal.containerRef = this.componentUtils.appendNextToRoot(NovoModalContainerElement, bindings);
         return modal;
     }
 }
