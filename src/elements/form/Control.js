@@ -20,7 +20,9 @@ import { NovoLabelService } from './../../services/novo-label-service';
                 transform: 'translateY(0px)'
             })),
             transition('inactive => active', animate('200ms ease-in')),
-            transition('active => inactive', animate('200ms ease-out'))
+            transition('active => inactive', animate('200ms ease-out')),
+            transition('inactive => horizontal', animate('0ms ease-in')),
+            transition('horizontal => inactive', animate('0ms ease-out'))
         ])
     ],
     host: {
@@ -35,7 +37,7 @@ export class NovoControlElement extends OutsideClick {
     @Input() form:FormGroup;
     change:EventEmitter = new EventEmitter;
     formattedValue:String = '';
-    state:String = 'inactive';
+    state:String = 'horizontal';
     alwaysActive:Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'quick-note', 'radio', 'text-area'];
 
     constructor(element:ElementRef, labels:NovoLabelService) {
@@ -59,6 +61,10 @@ export class NovoControlElement extends OutsideClick {
         this.control.forceClear.subscribe(() => {
             this.clearValue();
         });
+    }
+
+    ngOnChanges() {
+        this.checkState();
     }
 
     ngOnDestroy() {
