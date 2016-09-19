@@ -38,7 +38,7 @@ export class NovoControlElement extends OutsideClick {
     change:EventEmitter = new EventEmitter;
     formattedValue:String = '';
     state:String = 'horizontal';
-    alwaysActive:Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'quick-note', 'radio', 'text-area', 'select'];
+    alwaysActive:Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'quick-note', 'radio', 'text-area', 'select', 'native-select'];
 
     constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
@@ -130,35 +130,38 @@ export class NovoControlElement extends OutsideClick {
     }
 
     checkState() {
-        if (this.form.layout === 'vertical') {
-            if (this.control.controlType === 'textbox') {
-                this.state = (this.form.value[this.control.key][0]) ? 'active' : 'inactive';
-            } else if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
-                this.state = 'active';
+        setTimeout(() => {
+            if (this.form.layout === 'vertical') {
+                if (this.control.controlType === 'textbox') {
+                    this.state = (this.form.value[this.control.key][0]) ? 'active' : 'inactive';
+                } else if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
+                    this.state = 'active';
+                } else {
+                    this.state = (this.form.value[this.control.key]) ? 'active' : 'inactive';
+                }
             } else {
-                this.state = (this.form.value[this.control.key]) ? 'active' : 'inactive';
+                this.state = 'horizontal';
             }
-        } else {
-            this.state = 'horizontal';
-        }
+        });
     }
 
     toggleState() {
-        if (this.form.layout === 'vertical') {
-            if (this.control.controlType === 'textbox') {
-                if (!this.form.value[this.control.key][0]) {
-                    this.state = (this.state === 'active' ? 'inactive' : 'active');
+        setTimeout(() => {
+            if (this.form.layout === 'vertical') {
+                if (this.control.controlType === 'textbox') {
+                    if (!this.form.value[this.control.key][0]) {
+                        this.state = (this.state === 'active' ? 'inactive' : 'active');
+                    }
+                } else if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
+                    this.state = 'active';
+                } else {
+                    if (!this.form.value[this.control.key]) {
+                        this.state = (this.state === 'active' ? 'inactive' : 'active');
+                    }
                 }
-            } else if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
-                this.state = 'active';
             } else {
-                if (!this.form.value[this.control.key]) {
-                    this.state = (this.state === 'active' ? 'inactive' : 'active');
-                }
+                this.state = 'horizontal';
             }
-        } else {
-            this.state = 'horizontal';
-        }
-        console.log(this.control.key, 'in...', this.form.value); //eslint-disable-line
+        });
     }
 }
