@@ -51,6 +51,13 @@ export default {
             required: true
         },
         {
+            name: 'datetime',
+            type: 'date-time',
+            label: 'DateTime',
+            dataSpecialization: 'DATETIME',
+            required: true
+        },
+        {
             name: 'status',
             type: 'select',
             dataType: 'String',
