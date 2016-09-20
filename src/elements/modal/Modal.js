@@ -1,7 +1,8 @@
 // NG2
-import { Component, ViewContainerRef, ComponentResolver, ViewChild } from '@angular/core';
+import { Component, ViewContainerRef, ViewChild } from '@angular/core';
 // APP
 import { Deferred } from './../../utils/deferred/Deferred';
+import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 /**
  * Params that can be passed to the Modal
@@ -51,16 +52,15 @@ export class NovoModalRef {
 export class NovoModalContainerElement {
     @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
 
-    constructor(modalRef:NovoModalRef, componentResolver:ComponentResolver) {
+    constructor(modalRef:NovoModalRef, componentUtils:ComponentUtils) {
         this.modalRef = modalRef;
-        this.componentResolver = componentResolver;
+        this.componentUtils = componentUtils;
     }
 
     ngAfterViewInit() {
-        this.componentResolver.resolveComponent(this.modalRef.component)
-            .then(componentFactory => {
-                this.modalRef.contentRef = this.container.createComponent(componentFactory);
-            });
+        setTimeout(() => {
+            this.modalRef.contentRef = this.componentUtils.appendNextToLocation(this.modalRef.component, this.container);
+        });
     }
 }
 

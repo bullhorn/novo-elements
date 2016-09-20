@@ -9,6 +9,7 @@ import { NovoToastService } from './ToastService';
     imports: [CommonModule],
     declarations: [NovoToastElement],
     exports: [NovoToastElement],
+    entryComponents: [NovoToastElement],
     providers: [
         { provide: NovoToastService, useClass: NovoToastService }
     ]

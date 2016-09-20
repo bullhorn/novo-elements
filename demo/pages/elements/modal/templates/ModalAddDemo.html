@@ -1,31 +1,20 @@
 <novo-modal>
     <header title="Add Contact" icon="person" theme="contact">
         <utils>
-            <util-action icon="times" (click)="toggleClose($event)"></util-action>
+            <util-action icon="times" (click)="close()"></util-action>
         </utils>
     </header>
     <section>
-        <novo-form>
-            <form-field>
-                <form-label>First Name</form-label>
-                <form-input name="firstName" type="text" placeholder="Jack"></form-input>
-            </form-field>
-            <form-field>
-                <form-label>Last Name</form-label>
-                <form-input name="lastName" type="text" placeholder="White"></form-input>
-            </form-field>
-            <form-field>
-                <form-label>Email</form-label>
-                <form-input name="email" type="text" placeholder="jwhite@gmail.com"></form-input>
-            </form-field>
-            <form-field>
-                <form-label>Title</form-label>
-                <form-input name="title" type="text" placeholder="Operations Manager"></form-input>
-            </form-field>
-            <form-field>
-                <form-label>Current Company</form-label>
-                <form-input name="company" type="text" placeholder="Amazon"></form-input>
-            </form-field>
+        <novo-form [form]="textForm">
+            <div class="novo-form-row">
+                <novo-control [form]="textForm" [control]="textControl"></novo-control>
+            </div>
+            <div class="novo-form-row">
+                <novo-control [form]="textForm" [control]="emailControl"></novo-control>
+            </div>
+            <div class="novo-form-row">
+                <novo-control [form]="textForm" [control]="numberControl"></novo-control>
+            </div>
         </novo-form>
     </section>
     <button theme="standard" (click)="close()">Cancel</button>

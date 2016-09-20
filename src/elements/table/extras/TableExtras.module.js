@@ -15,7 +15,8 @@ import { DateCell } from './date-cell/DateCell';
 @NgModule({
     imports: [CommonModule, FormsModule, NovoSelectModule],
     declarations: [Pagination, RowDetails, TableCell, TableFilter, ThOrderable, ThSortable, DateCell],
-    exports: [Pagination, RowDetails, TableCell, TableFilter, ThOrderable, ThSortable, DateCell]
+    exports: [Pagination, RowDetails, TableCell, TableFilter, ThOrderable, ThSortable, DateCell],
+    entryComponents: [DateCell]
 })
 export class NovoTableExtrasModule {
 }

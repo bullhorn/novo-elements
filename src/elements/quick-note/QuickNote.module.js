@@ -11,7 +11,8 @@ import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
 @NgModule({
     imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule],
     declarations: [QuickNoteElement, QuickNoteResults],
-    exports: [QuickNoteElement, QuickNoteResults]
+    exports: [QuickNoteElement, QuickNoteResults],
+    entryComponents: [QuickNoteResults]
 })
 export class NovoQuickNoteModule {
 }

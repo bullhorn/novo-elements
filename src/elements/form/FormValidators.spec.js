@@ -1,6 +1,9 @@
 // APP
 import { FormValidators } from './FormValidators';
 
+/**
+ * Creates a mock address
+ */
 function createAddress(address1, city, state, zip, countryName) {
     return {
         address1: address1,

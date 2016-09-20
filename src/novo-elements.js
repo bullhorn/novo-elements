@@ -52,6 +52,7 @@ export * from './utils/key-codes/KeyCodes';
 export * from './utils/deferred/Deferred';
 export * from './utils/countries/Countries';
 export * from './utils/Helpers';
+export * from './utils/component-utils/ComponentUtils';
 
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';

@@ -1,16 +1,17 @@
 // NG2
-import { Component, ElementRef, ComponentResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
 // APP
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
+import { ComponentUtils } from './../../../../utils/component-utils/ComponentUtils';
 
 @Component({
     selector: 'novo-table-cell',
     inputs: ['column', 'row'],
     template: `
         <div [ngSwitch]="column._type">
-            <ref *ngSwitchWhen="'custom'" #container></ref>
-            <date-cell *ngSwitchWhen="'date'" [value]="value"></date-cell>
-            <a *ngSwitchWhen="'link'" (click)="onClick($event);">{{ value }}</a>
+            <ref #container></ref>
+            <date-cell *ngSwitchCase="'date'" [value]="value"></date-cell>
+            <a *ngSwitchCase="'link'" (click)="onClick($event);">{{ value }}</a>
             <span *ngSwitchDefault>{{ value }}</span>
         </div>
     `
@@ -18,9 +19,9 @@ import { BaseRenderer } from './../base-renderer/BaseRenderer';
 export class TableCell {
     @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
 
-    constructor(element:ElementRef, componentResolver:ComponentResolver) {
+    constructor(element:ElementRef, componentUtils:ComponentUtils) {
         this.element = element;
-        this.componentResolver = componentResolver;
+        this.componentUtils = componentUtils;
         this.value = '';
     }
 
@@ -29,13 +30,10 @@ export class TableCell {
         if (this.column.renderer) {
             if (this.column.renderer.prototype instanceof BaseRenderer) {
                 this.column._type = 'custom';
-                this.componentResolver.resolveComponent(this.column.renderer)
-                    .then(componentFactory => {
-                        let componentRef = this.container.createComponent(componentFactory);
-                        componentRef.instance.meta = this.column;
-                        componentRef.instance.data = this.row;
-                        componentRef.instance.value = this.row[this.column.name];
-                    });
+                let componentRef = this.componentUtils.appendNextToLocation(this.column.renderer, this.container);
+                componentRef.instance.meta = this.column;
+                componentRef.instance.data = this.row;
+                componentRef.instance.value = this.row[this.column.name];
             } else {
                 this.value = this.column.renderer(this.row);
             }

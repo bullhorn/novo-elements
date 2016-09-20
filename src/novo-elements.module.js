@@ -34,6 +34,7 @@ import { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
 
 import { NovoLabelService } from './services/novo-label-service';
 import { NovoDragulaService } from './elements/dragula/DragulaService';
+import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 
 @NgModule({
     imports: [
@@ -71,6 +72,7 @@ import { NovoDragulaService } from './elements/dragula/DragulaService';
         NovoFormExtrasModule
     ],
     providers: [
+        { provide: ComponentUtils, useClass: ComponentUtils },
         { provide: NovoLabelService, useClass: NovoLabelService },
         { provide: NovoDragulaService, useClass: NovoDragulaService }
     ]

@@ -1,10 +1,11 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Provider, ElementRef, ComponentResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Provider, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
+import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 // Value accessor for the component (supports ngModel)
 const QUICK_NOTE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
@@ -50,16 +51,18 @@ export class QuickNoteElement extends OutsideClick {
     searchTerm:string = '';
 
     model:any;
-    onModelChange:Function = () => {};
-    onModelTouched:Function = () => {};
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
 
     // Results container
     @ViewChild('results', { read: ViewContainerRef }) results:ViewContainerRef;
 
-    constructor(element:ElementRef, componentResolver:ComponentResolver) {
+    constructor(element:ElementRef, componentUtils:ComponentUtils) {
         super(element);
-        // Component Resolver  Instance
-        this.componentResolver = componentResolver;
+        // Component Utils
+        this.componentUtils = componentUtils;
         // Instance of element
         this.element = element;
         // Bind to the active change event from the OutsideClick
@@ -232,13 +235,10 @@ export class QuickNoteElement extends OutsideClick {
             // Update existing list or create the DOM element
             this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
         } else {
-            this.componentResolver.resolveComponent(this.resultsComponent)
-                .then(componentFactory => {
-                    this.quickNoteResults = this.results.createComponent(componentFactory);
-                    this.quickNoteResults.instance.parent = this;
-                    this.quickNoteResults.instance.config = this.config;
-                    this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
-                });
+            this.quickNoteResults = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
+            this.quickNoteResults.instance.parent = this;
+            this.quickNoteResults.instance.config = this.config;
+            this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
         }
     }
 

@@ -14,6 +14,9 @@ export class NovoNavElement {
     }
 
     select(item) {
+        /**
+         * Deactivate all other tabs
+         */
         function _deactivateAllItems(items) {
             items.forEach((t) => {
                 if (t.active === true) {
