@@ -20,11 +20,11 @@ const template = `
     <p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'</p>
     <h2>Static Form</h2>
     <p>Static forms <code>&lt;novo-form /&gt;</code>.
-    
+
     <h5>Textbox Based Controls</h5>
     <div class="example form-demo">${TextBasedControlsDemoTpl}</div>
     <code-snippet [code]="TextBasedControlsDemoTpl"></code-snippet>
-    
+
     <h5>Checkbox Controls</h5>
     <div class="example form-demo">${CheckBoxControlsDemoTpl}</div>
     <code-snippet [code]="CheckBoxControlsDemoTpl"></code-snippet>
@@ -32,18 +32,18 @@ const template = `
     <h5>File Input Controls</h5>
     <div class="example form-demo">${FileInputControlsDemoTpl}</div>
     <code-snippet [code]="FileInputControlsDemoTpl"></code-snippet>
-        
+
     <h5>Calendar Controls</h5>
     <div class="example form-demo">${CalendarControlsDemoTpl}</div>
     <code-snippet [code]="CalendarControlsDemoTpl"></code-snippet>
-    
+
     <h2>Dynamic Form</h2>
     <p>Dynamic forms are composed of one element, <code>&lt;novo-dynamic-form [controls]="controls"/&gt;</code> and allow you to pass in the controls and form and it will create the form for you.</p>
-    
+
     <h5>Basic</h5>
     <div class="example form-demo dynamic">${DynamicFormDemoTpl}</div>
     <code-snippet [code]="DynamicFormDemoTpl"></code-snippet>
-    
+
     <h5>Vertical</h5>
     <div class="example form-demo dynamic">${VerticalDynamicFormDemoTpl}</div>
     <code-snippet [code]="VerticalDynamicFormDemoTpl"></code-snippet>

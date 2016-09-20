@@ -130,6 +130,7 @@ export class NovoChipsElement extends OutsideClick {
     }
 
     select(event, item) {
+        this.blur.emit(event);
         this.deselectAll();
         this.selected = item;
     }
@@ -182,6 +183,7 @@ export class NovoChipsElement extends OutsideClick {
     handleOutsideClick(event) {
         // If the elements doesn't contain the target element, it is an outside click
         if (!this.element.nativeElement.contains(event.target)) {
+            this.blur.emit(event);
             this.deselectAll(event, false);
         }
     }

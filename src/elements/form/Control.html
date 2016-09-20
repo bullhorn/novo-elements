@@ -1,6 +1,6 @@
 <div class="novo-control-container" [formGroup]="form">
     <!--Label-->
-    <label [attr.for]="control.key">{{control.label}}</label>
+    <label [attr.for]="control.key" [@heroState]="state">{{control.label}}</label>
     <div class="novo-control-input-container">
         <!--Required Indicator-->
         <i [hidden]="!control.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
@@ -9,7 +9,7 @@
             <!--Text-based Inputs-->
             <!--TODO prefix/suffix on the control-->
             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'">
-                <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder">
+                <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (focus)="toggleState()" (blur)="toggleState()">
                 <label class="input-label" *ngIf="control.subType === 'currency'">{{control.currencyFormat}}</label>
                 <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
             </div>
@@ -28,8 +28,8 @@
             <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)"></novo-tiles>
             <!--Picker-->
             <div class="novo-control-input-container" *ngSwitchCase="'picker'">
-                <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple"></novo-picker>
-                <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple"></chips>
+                <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple" (select)="toggleState()" (focus)="toggleState()" (blur)="toggleState()"></novo-picker>
+                <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" (focus)="toggleState()" (blur)="toggleState()"></chips>
             </div>
             <!--Novo Select-->
             <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key"></novo-select>
@@ -39,26 +39,26 @@
             </div>
             <!--Time-->
             <div class="novo-control-input-container" *ngSwitchCase="'time'">
-                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event)" [value]="formattedValue" readonly/>
+                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event); toggleState()" [value]="formattedValue" readonly/>
                 <i (click)="toggleActive($event)" class="bhi-clock" *ngIf="!hasValue"></i>
                 <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
-                <novo-time-picker [hidden]="!active" (onSelect)="formatTimeValue($event)" [formControlName]="control.key"></novo-time-picker>
+                <novo-time-picker [hidden]="!active" (onSelect)="formatTimeValue($event); checkState();" [formControlName]="control.key"></novo-time-picker>
             </div>
             <!--Date-->
             <div class="novo-control-input-container" *ngSwitchCase="'date'">
-                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event)" [value]="formattedValue" readonly/>
+                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event); toggleState()" [value]="formattedValue" readonly/>
                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                 <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
-                <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateValue($event)" [formControlName]="control.key"></novo-date-picker>
+                <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateValue($event); checkState();" [formControlName]="control.key"></novo-date-picker>
             </div>
             <!--Date and Time-->
             <div class="novo-control-input-container" *ngSwitchCase="'date-time'">
-                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event)" [value]="formattedValue" readonly/>
+                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event); toggleState();" [value]="formattedValue" readonly/>
                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                 <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
                 <div class="date-time-container">
-                    <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateTimeValue($event, 'date')" [formControlName]="control.key"></novo-date-picker>
-                    <novo-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event, 'time')" [formControlName]="control.key"></novo-time-picker>
+                    <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateTimeValue($event, 'date'); checkState();" [formControlName]="control.key"></novo-date-picker>
+                    <novo-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event, 'time'); checkState();" [formControlName]="control.key"></novo-time-picker>
                 </div>
             </div>
             <!--Address-->

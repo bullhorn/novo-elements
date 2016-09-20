@@ -74,6 +74,7 @@ export class NovoPickerElement extends OutsideClick {
             if (!active) {
                 setTimeout(() => {
                     this.hideResults();
+                    this.blur.emit();
                 });
             }
         });

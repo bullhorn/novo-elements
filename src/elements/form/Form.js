@@ -10,6 +10,10 @@ import { FormGroup } from '@angular/forms';
 export class NovoFormElement {
     @Input() form:FormGroup;
 
+    ngOnInit() {
+        this.form.layout = this.layout;
+    }
+
     get value() {
         return this.form.value;
     }

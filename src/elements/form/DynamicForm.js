@@ -18,6 +18,7 @@ export class NovoDynamicFormElement {
 
     ngOnInit() {
         this.ngOnChanges();
+        this.form.layout = this.layout;
     }
 
     ngOnChanges() {
@@ -94,4 +95,3 @@ export class NovoDynamicFormElement {
         return ret;
     }
 }
-

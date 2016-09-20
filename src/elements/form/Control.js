@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, ElementRef, EventEmitter } from '@angular/core';
+import { Component, Input, ElementRef, EventEmitter, trigger, state, style, transition, animate } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -8,6 +8,23 @@ import { NovoLabelService } from './../../services/novo-label-service';
 @Component({
     selector: 'novo-control',
     template: require('./Control.html'),
+    animations: [
+        trigger('heroState', [
+            state('inactive', style({
+                transform: 'translate(0px, 25px) scale(1)'
+            })),
+            state('active', style({
+                transform: 'translate(-5px, 0px) scale(.8)'
+            })),
+            state('horizontal', style({
+                transform: 'translateY(0px. 0px) scale(1)'
+            })),
+            transition('inactive => active', animate('200ms ease-in')),
+            transition('active => inactive', animate('200ms ease-out')),
+            transition('inactive => horizontal', animate('0ms ease-in')),
+            transition('horizontal => inactive', animate('0ms ease-out'))
+        ])
+    ],
     host: {
         '[hidden]': 'control.hidden || control.type === \'hidden\''
     },
@@ -20,10 +37,20 @@ export class NovoControlElement extends OutsideClick {
     @Input() form:FormGroup;
     change:EventEmitter = new EventEmitter;
     formattedValue:String = '';
+    state:String = 'horizontal';
+    alwaysActive:Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
 
     constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
         this.labels = labels;
+
+        this.onActiveChange.subscribe(active => {
+            if (!active) {
+                setTimeout(() => {
+                    this.checkState();
+                });
+            }
+        });
     }
 
     ngOnInit() {
@@ -36,11 +63,16 @@ export class NovoControlElement extends OutsideClick {
             } else if (this.control.controlType === 'date-time') {
                 this.formatDateTimeValue({ date: this.control.value });
             }
+            this.checkState();
         }
         // Listen to clear events
         this.control.forceClear.subscribe(() => {
             this.clearValue();
         });
+    }
+
+    ngOnChanges() {
+        this.checkState();
     }
 
     ngOnDestroy() {
@@ -68,6 +100,7 @@ export class NovoControlElement extends OutsideClick {
     clearValue() {
         this.form.controls[this.control.key].updateValue(null);
         this.formattedValue = null;
+        this.checkState();
     }
 
     formatDateValue(event) {
@@ -102,5 +135,36 @@ export class NovoControlElement extends OutsideClick {
 
     modelChange(value) {
         this.change.emit(value);
+        this.checkState();
+    }
+
+    checkState() {
+        setTimeout(() => {
+            if (this.form.layout === 'vertical') {
+                if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
+                    this.state = 'active';
+                } else {
+                    this.state = (this.form.value[this.control.key]) ? 'active' : 'inactive';
+                }
+            } else {
+                this.state = 'horizontal';
+            }
+        });
+    }
+
+    toggleState() {
+        setTimeout(() => {
+            if (this.form.layout === 'vertical') {
+                if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
+                    this.state = 'active';
+                } else {
+                    if (!this.form.value[this.control.key]) {
+                        this.state = (this.state === 'active' ? 'inactive' : 'active');
+                    }
+                }
+            } else {
+                this.state = 'horizontal';
+            }
+        });
     }
 }
