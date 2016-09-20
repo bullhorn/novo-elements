@@ -28,7 +28,7 @@ export class NovoModalService {
             { provide: NovoModalRef, useValue: modal },
             { provide: NovoModalParams, useValue: scope }
         ]);
-        modal.containerRef = this.componentUtils.appendNextToRoot(NovoModalContainerElement, bindings);
+        modal.containerRef = this.componentUtils.appendNextToLocation(NovoModalContainerElement, this._parentViewContainer, bindings);
         return modal;
     }
 }

@@ -41,7 +41,7 @@ export class NovoToastService {
                 return;
             }
 
-            let toast = this.componentUtils.appendNextToRoot(NovoToastElement);
+            let toast = this.componentUtils.appendNextToLocation(NovoToastElement, this._parentViewContainer);
             this.references.push(toast);
             this.handleAlert(toast.instance, options);
             resolve(toast);
