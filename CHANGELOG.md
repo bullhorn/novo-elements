@@ -1,3 +1,14 @@
+<a name="1.0.35"></a>
+## [1.0.35](https://github.com/bullhorn/novo-elements/compare/v1.0.34...v1.0.35) (2016-09-20)
+
+
+### Features
+
+* **ComponentUtils:** Adding a ComponentUtils that can dynamically load components into locations ([1572464](https://github.com/bullhorn/novo-elements/commit/1572464))
+* **form:** vertical form animations ([418b169](https://github.com/bullhorn/novo-elements/commit/418b169))
+
+
+
 <a name="1.0.34"></a>
 ## [1.0.34](https://github.com/bullhorn/novo-elements/compare/v1.0.33...v1.0.34) (2016-09-20)
 
