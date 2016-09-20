@@ -149,7 +149,7 @@ export class NovoControlElement extends OutsideClick {
                 if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
                     this.state = 'active';
                 } else {
-                    if (!this.form.value[this.control.key] && !this.form.value[this.control.key][0]) {
+                    if (!this.form.value[this.control.key]) {
                         this.state = (this.state === 'active' ? 'inactive' : 'active');
                     }
                 }
