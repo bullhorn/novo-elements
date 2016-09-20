@@ -43,6 +43,14 @@ export class NovoControlElement extends OutsideClick {
     constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
         this.labels = labels;
+
+        this.onActiveChange.subscribe(active => {
+            if (!active) {
+                setTimeout(() => {
+                    this.checkState();
+                });
+            }
+        });
     }
 
     ngOnInit() {
@@ -92,6 +100,7 @@ export class NovoControlElement extends OutsideClick {
     clearValue() {
         this.form.controls[this.control.key].updateValue(null);
         this.formattedValue = null;
+        this.checkState();
     }
 
     formatDateValue(event) {

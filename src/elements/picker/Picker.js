@@ -250,11 +250,4 @@ export class NovoPickerElement extends OutsideClick {
     registerOnTouched(fn:Function):void {
         this.onModelTouched = fn;
     }
-
-    handleOutsideClick(event) {
-        // If the elements doesn't contain the target element, it is an outside click
-        if (!this.element.nativeElement.contains(event.target)) {
-            this.hideResults();
-        }
-    }
 }
