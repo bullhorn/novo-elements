@@ -8,7 +8,7 @@ import ModalCustomDemoTpl from './templates/ModalCustomDemo.html';
 import ModalSuccessDemoTpl from './templates/ModalSuccessDemo.html';
 import ModalWarningDemoTpl from './templates/ModalWarningDemo.html';
 // Vendor
-import { NovoModalRef, NovoModalService } from './../../../../src/novo-elements';
+import { NovoModalRef, NovoModalService, TextBoxControl, FormUtils } from './../../../../src/novo-elements';
 
 const template = `
 <div class="container">
@@ -112,8 +112,16 @@ export class ModalCustomDemo {
     template: ModalAddDemoTpl
 })
 export class ModalAddDemo {
-    constructor(modalRef:NovoModalRef) {
+    constructor(modalRef:NovoModalRef, formUtils:FormUtils) {
+        this.formUtils = formUtils;
         this.modalRef = modalRef;
+    }
+
+    ngOnInit() {
+        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box' });
+        this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email' });
+        this.numberControl = new TextBoxControl({ type: 'number', key: 'number', label: 'Number' });
+        this.textForm = this.formUtils.toFormGroup([this.textControl, this.emailControl, this.numberControl]);
     }
 
     close() {
@@ -126,8 +134,16 @@ export class ModalAddDemo {
     template: ModalEditDemoTpl
 })
 export class ModalEditDemo {
-    constructor(modalRef:NovoModalRef) {
+    constructor(modalRef:NovoModalRef, formUtils:FormUtils) {
+        this.formUtils = formUtils;
         this.modalRef = modalRef;
+    }
+
+    ngOnInit() {
+        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box' });
+        this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email' });
+        this.numberControl = new TextBoxControl({ type: 'number', key: 'number', label: 'Number' });
+        this.textForm = this.formUtils.toFormGroup([this.textControl, this.emailControl, this.numberControl]);
     }
 
     close() {

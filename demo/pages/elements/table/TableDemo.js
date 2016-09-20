@@ -210,10 +210,10 @@ export class TableDemoComponent {
     }
 
     singleAction() {
-        window.alert('HI!');
+        window.alert('HI!'); // eslint-disable-line
     }
 
     selectedAction(action) {
-        window.alert(`You clicked ${action}!`);
+        window.alert(`You clicked ${action}!`); // eslint-disable-line
     }
 }

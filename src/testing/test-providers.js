@@ -3,6 +3,7 @@ import { ElementRef } from '@angular/core';
 // App
 import { NovoToastService } from './../elements/toast/ToastService';
 import { NovoLabelService } from './../services/novo-label-service';
+import { ComponentUtils } from './../utils/component-utils/ComponentUtils';
 
 class MockElementRef {
     nativeElement:HTMLDivElement = document.createElement('div');
@@ -17,5 +18,6 @@ class MockElementRef {
 export const APP_TEST_PROVIDERS = [
     { provide: ElementRef, useClass: MockElementRef },
     { provide: NovoToastService, useClass: NovoToastService },
+    { provide: ComponentUtils, useClass: ComponentUtils },
     { provide: NovoLabelService, useClass: NovoLabelService }
 ];

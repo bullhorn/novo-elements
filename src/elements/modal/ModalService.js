@@ -1,12 +1,11 @@
 // NG2
-import { ComponentResolver, Injectable, ReflectiveInjector } from '@angular/core';
+import { Injectable, ReflectiveInjector } from '@angular/core';
 // APP
 import { NovoModalRef, NovoModalParams, NovoModalContainerElement } from './Modal';
 import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 @Injectable()
 export class NovoModalService {
-    // TODO - use ComponentFactoryResolver instead - jgodi
     constructor(componentUtils:ComponentUtils) {
         this.componentUtils = componentUtils;
     }
@@ -24,7 +23,7 @@ export class NovoModalService {
         const modal = new NovoModalRef();
         modal.component = component;
         modal.open();
-        
+
         let bindings = ReflectiveInjector.resolve([
             { provide: NovoModalRef, useValue: modal },
             { provide: NovoModalParams, useValue: scope }

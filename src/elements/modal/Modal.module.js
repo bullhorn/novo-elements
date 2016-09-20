@@ -8,8 +8,9 @@ import { NovoModalService } from './ModalService';
 
 @NgModule({
     imports: [CommonModule, NovoButtonModule],
-    declarations: [NovoModalElement, NovoModalNotificationElement],
+    declarations: [NovoModalContainerElement, NovoModalElement, NovoModalNotificationElement],
     exports: [NovoModalElement, NovoModalNotificationElement],
+    entryComponents: [NovoModalContainerElement],
     providers: [
         { provide: NovoModalService, useClass: NovoModalService }
     ]

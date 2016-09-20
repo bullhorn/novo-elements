@@ -36,8 +36,6 @@ import { NovoLabelService } from './services/novo-label-service';
 import { NovoDragulaService } from './elements/dragula/DragulaService';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 
-import { NovoModalContainerElement } from './elements/modal/Modal';
-
 @NgModule({
     imports: [
         ReactiveFormsModule
@@ -72,12 +70,6 @@ import { NovoModalContainerElement } from './elements/modal/Modal';
         NovoTableExtrasModule,
         NovoFormModule,
         NovoFormExtrasModule
-    ],
-    declarations: [
-        NovoModalContainerElement
-    ],
-    entryComponents: [
-        NovoModalContainerElement
     ],
     providers: [
         { provide: ComponentUtils, useClass: ComponentUtils },

@@ -1,11 +1,12 @@
 // NG2
-import { Component, EventEmitter, ElementRef, DynamicComponentLoader, ViewContainerRef, forwardRef, Provider } from '@angular/core';
+import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, Provider } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isBlank } from '@angular/core/src/facade/lang';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { PickerResults } from './extras/picker-results/PickerResults';
+import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 // Vendor
 import { Observable } from 'rxjs/Rx';
 
@@ -60,10 +61,10 @@ export class NovoPickerElement extends OutsideClick {
     onModelTouched:Function = () => {
     };
 
-    constructor(element:ElementRef, loader:DynamicComponentLoader, view:ViewContainerRef) {
+    constructor(element:ElementRef, componentUtils:ComponentUtils, view:ViewContainerRef) {
         super(element);
-        // Dynamic Component Loader Instance
-        this.loader = loader;
+        // Component Utils
+        this.componentUtils = componentUtils;
         // View to load next to
         this.view = view;
         // Instance of element
@@ -102,24 +103,24 @@ export class NovoPickerElement extends OutsideClick {
      * because the quantity of different behaviors would make a messy element.
      */
     onKeyUp(event) {
-        if (this.container) {
+        if (this.popup) {
             if (event.keyCode === KeyCodes.ESC) {
                 this.hideResults();
                 return;
             }
 
             if (event.keyCode === KeyCodes.UP) {
-                this.container.prevActiveMatch();
+                this.popup.instance.prevActiveMatch();
                 return;
             }
 
             if (event.keyCode === KeyCodes.DOWN) {
-                this.container.nextActiveMatch();
+                this.popup.instance.nextActiveMatch();
                 return;
             }
 
             if (event.keyCode === KeyCodes.ENTER) {
-                this.container.selectActiveMatch();
+                this.popup.instance.selectActiveMatch();
                 return;
             }
 
@@ -160,17 +161,14 @@ export class NovoPickerElement extends OutsideClick {
     showResults() {
         this.toggleActive(null, true);
         // Update Matches
-        if (this.container) {
+        if (this.popup) {
             // Update existing list or create the DOM element
-            this.container.term = this.term;
+            this.popup.instance.term = this.term;
         } else {
-            this.popup = this.loader.loadNextToLocation(this.resultsComponent, this.view).then((componentRef) => {
-                this.container = componentRef.instance;
-                this.container.parent = this;
-                this.container.config = this.config;
-                this.container.term = this.term;
-                return componentRef;
-            });
+            this.popup = this.componentUtils.appendNextToLocation(this.resultsComponent, this.view);
+            this.popup.instance.parent = this;
+            this.popup.instance.config = this.config;
+            this.popup.instance.term = this.term;
         }
     }
 
@@ -180,12 +178,9 @@ export class NovoPickerElement extends OutsideClick {
      * @description - This method deletes the picker results from the DOM.
      */
     hideResults() {
-        if (this.container) {
-            this.popup.then((componentRef) => {
-                componentRef.destroy();
-                this.container = null;
-                return componentRef;
-            });
+        if (this.popup) {
+            this.popup.destroy();
+            this.popup = null;
         }
     }
 

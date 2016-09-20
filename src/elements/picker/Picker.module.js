@@ -12,7 +12,8 @@ import { EntityPickerResults } from './extras/entity-picker-results/EntityPicker
 @NgModule({
     imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule],
     declarations: [NovoPickerElement, PickerResults, EntityPickerResults],
-    exports: [NovoPickerElement, PickerResults, EntityPickerResults]
+    exports: [NovoPickerElement, PickerResults, EntityPickerResults],
+    entryComponents: [PickerResults, EntityPickerResults]
 })
 export class NovoPickerModule {
 }

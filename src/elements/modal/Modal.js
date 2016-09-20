@@ -1,5 +1,5 @@
 // NG2
-import { Component, ViewContainerRef, ComponentResolver, ViewChild } from '@angular/core';
+import { Component, ViewContainerRef, ViewChild } from '@angular/core';
 // APP
 import { Deferred } from './../../utils/deferred/Deferred';
 import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';

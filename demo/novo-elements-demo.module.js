@@ -38,8 +38,9 @@ import {
 } from './pages/elements/all';
 import { UtilsDemoComponent } from './pages/utils/utils/UtilsDemo';
 import { PipesDemoComponent } from './pages/utils/pipes/PipesDemo';
-import { ModalSuccessDemo, M } from './pages/elements/modal/ModalDemo';
-
+import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
+import { StatusCell, ExtraDetails } from './pages/elements/table/TableDemo';
+import { CustomPickerResults } from './pages/elements/picker/PickerDemo';
 import './demo.scss';
 // Vendor
 import { NovoElementsModule, FormUtils } from './../src/novo-elements';
@@ -80,7 +81,15 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
         TipWellDemoComponent,
         UtilsDemoComponent,
         PipesDemoComponent,
-        ModalSuccessDemo
+        ModalSuccessDemo,
+        ModalWarningDemo,
+        ModalErrorDemo,
+        ModalCustomDemo,
+        ModalAddDemo,
+        ModalEditDemo,
+        StatusCell,
+        ExtraDetails,
+        CustomPickerResults
     ],
     imports: [
         BrowserModule,
@@ -95,7 +104,15 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
     ],
     entryComponents: [
         DemoComponent,
-        ModalSuccessDemo
+        ModalSuccessDemo,
+        ModalWarningDemo,
+        ModalErrorDemo,
+        ModalCustomDemo,
+        ModalAddDemo,
+        ModalEditDemo,
+        StatusCell,
+        ExtraDetails,
+        CustomPickerResults
     ],
     bootstrap: [DemoComponent]
 })

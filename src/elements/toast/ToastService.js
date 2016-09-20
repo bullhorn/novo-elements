@@ -1,22 +1,14 @@
 // NG2
-import { Injectable, ComponentResolver } from '@angular/core';
+import { Injectable } from '@angular/core';
 // APP
 import { NovoToastElement } from './Toast';
+import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 @Injectable()
 export class NovoToastService {
-    // TODO - use ComponentFactoryResolver instead - jgodi
-    constructor(componentResolver:ComponentResolver) {
-        this.componentResolver = componentResolver;
+    constructor(componentUtils:ComponentUtils) {
+        this.componentUtils = componentUtils;
         this.references = [];
-        this.positions = [
-            'fixedTop',
-            'fixedBottom',
-            'growlTopLeft',
-            'growlTopRight',
-            'growlBottomLeft',
-            'growlBottomRight'
-        ];
         this.themes = [
             'default',
             'success',
@@ -48,13 +40,11 @@ export class NovoToastService {
                 console.error('No parent view container specified for the ToastService. Set it inside your main application. \nthis.toastService.parentViewContainer = view (ViewContainerRef)'); // eslint-disable-line
                 return;
             }
-            this.componentResolver.resolveComponent(NovoToastElement)
-                .then(componentFactory => {
-                    let toast = this._parentViewContainer.createComponent(componentFactory);
-                    this.references.push(toast);
-                    this.handleAlert(toast.instance, options);
-                    resolve(toast);
-                });
+
+            let toast = this.componentUtils.appendNextToRoot(NovoToastElement);
+            this.references.push(toast);
+            this.handleAlert(toast.instance, options);
+            resolve(toast);
         });
     }
 

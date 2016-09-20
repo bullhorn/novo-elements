@@ -1,7 +1,8 @@
 // NG2
-import { Component, ElementRef, ComponentResolver, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewContainerRef, ViewChild } from '@angular/core';
 // APP
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
+import { ComponentUtils } from './../../../../utils/component-utils/ComponentUtils';
 
 @Component({
     selector: 'novo-row-details',
@@ -14,20 +15,17 @@ import { BaseRenderer } from './../base-renderer/BaseRenderer';
 export class RowDetails {
     @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
 
-    constructor(element:ElementRef, componentResolver:ComponentResolver) {
+    constructor(element:ElementRef, componentUtils:ComponentUtils) {
         this.element = element;
-        this.componentResolver = componentResolver;
+        this.componentUtils = componentUtils;
         this.value = '';
     }
 
     ngOnInit() {
         if (this.renderer) {
             if (this.renderer.prototype instanceof BaseRenderer) {
-                this.componentResolver.resolveComponent(this.renderer)
-                    .then(componentFactory => {
-                        let componentRef = this.container.createComponent(componentFactory);
-                        componentRef.instance.data = this.data;
-                    });
+                let componentRef = this.componentUtils.appendNextToLocation(this.renderer, this.container);
+                componentRef.instance.data = this.data;
             } else {
                 this.value = this.renderer(this.data);
             }
