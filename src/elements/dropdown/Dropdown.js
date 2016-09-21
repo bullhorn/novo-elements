@@ -41,6 +41,15 @@ export class NovoDropdownElement extends OutsideClick {
 }
 
 @Component({
+    selector: 'list',
+    template: `
+        <ng-content></ng-content>
+    `
+})
+export class NovoListElement {
+}
+
+@Component({
     selector: 'item',
     inputs: ['disabled', 'showAfterSelect'],
     outputs: ['action'],

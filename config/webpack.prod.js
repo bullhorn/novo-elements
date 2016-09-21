@@ -16,8 +16,7 @@ const PORT = process.env.PORT || 8080;
 const METADATA = webpackMerge(commonConfig.metadata, {
     host: HOST,
     port: PORT,
-    ENV: ENV,
-    HMR: false
+    ENV: ENV
 });
 
 module.exports = webpackMerge(commonConfig, {
@@ -95,21 +94,8 @@ module.exports = webpackMerge(commonConfig, {
         // See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
         new DefinePlugin({
             'VERSION': JSON.stringify(METADATA.version),
-            'ENV': JSON.stringify(METADATA.ENV),
-            'HMR': METADATA.HMR,
-            'process.env': {
-                'ENV': JSON.stringify(METADATA.ENV),
-                'NODE_ENV': JSON.stringify(METADATA.ENV)
-            }
-        }),
-
-        // Plugin: NormalModuleReplacementPlugin
-        // Description: Replace resources that matches resourceRegExp with newResource
-        // See: http://webpack.github.io/docs/list-of-plugins.html#normalmodulereplacementplugin
-        new NormalModuleReplacementPlugin(
-            /angular2-hmr/,
-            helpers.root('config/modules/angular2-hmr-prod.js')
-        )
+            'ENV': JSON.stringify(METADATA.ENV)
+        })
     ],
 
     // Static analysis linter for JavaScript advanced options configuration

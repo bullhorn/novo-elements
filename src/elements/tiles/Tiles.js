@@ -1,13 +1,15 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, Provider, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { isBlank } from '@angular/core/src/facade/lang';
+// APP
+import { Helpers } from './../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
-const TILES_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const TILES_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoTilesElement),
     multi: true
-});
+};
 
 @Component({
     selector: 'novo-tiles',
@@ -111,7 +113,7 @@ export class NovoTilesElement implements ControlValueAccessor {
 
     writeValue(model:any):void {
         this.model = model;
-        if (!isBlank(model)) {
+        if (!Helpers.isBlank(model)) {
             this.setupOptions();
         }
     }

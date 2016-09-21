@@ -1,8 +1,8 @@
 // Vendor
 import { Component, EventEmitter } from '@angular/core';
-import { isFunction, isString, isBlank } from '@angular/core/src/facade/lang';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
+import { Helpers } from './../../utils/Helpers';
 
 @Component({
     selector: 'novo-table-actions',
@@ -197,7 +197,7 @@ export class NovoTableElement {
     }
 
     getOptionDataAutomationId(option) {
-        if (!isBlank(option.value)) {
+        if (!Helpers.isBlank(option.value)) {
             return option.value;
         }
         return option;
@@ -320,14 +320,14 @@ export class NovoTableElement {
             const filters = this.columns.filter(col => col.filter && col.filter.length);
 
             if (filters.length) {
-                if (isFunction(this.config.filtering)) {
+                if (Helpers.isFunction(this.config.filtering)) {
                     // Custom filter function on the table config
                     this.rows = this.config.filtering(filters, this.originalRows);
                 } else {
                     this.rows = this.originalRows.filter(row => {
                         let matched;
                         for (const column of filters) {
-                            if (column.match && isFunction(column.match)) {
+                            if (column.match && Helpers.isFunction(column.match)) {
                                 // Custom match function on the column
                                 matched = column.match(row[column.name], column.filter);
                             } else if (Array.isArray(column.filter)) {
@@ -446,7 +446,7 @@ export class NovoTableElement {
                 return false;
             });
 
-            if (isFunction(this.config.sorting)) {
+            if (Helpers.isFunction(this.config.sorting)) {
                 // Custom sort function on the table config
                 this.rows = this.config.sorting(newSortColumn, this.rows);
             } else {
@@ -456,11 +456,11 @@ export class NovoTableElement {
                     let second = current[columnName] || '';
 
                     // Custom compare function on the column
-                    if (newSortColumn.compare && isFunction(newSortColumn.compare)) {
+                    if (newSortColumn.compare && Helpers.isFunction(newSortColumn.compare)) {
                         return newSortColumn.compare(newSortColumn.sort, first, second);
                     }
 
-                    if (isString(first) && isString(second)) {
+                    if (Helpers.isString(first) && Helpers.isString(second)) {
                         // Basic strings
                         first = first.toLowerCase();
                         second = second.toLowerCase();

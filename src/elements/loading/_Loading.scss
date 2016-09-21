@@ -4,7 +4,7 @@ novo-loading {
     flex-direction: row;
     font-size: 13px;
 
-    dot {
+    span.dot {
         display: block;
         border-radius: 50%;
         margin: 3px;
@@ -15,7 +15,7 @@ novo-loading {
     }
     @each $analytics, $color in $analytics-colors {
         &.#{$analytics} {
-            dot {
+            span.dot {
                 background-color: $color;
             }
         }
@@ -23,7 +23,7 @@ novo-loading {
 
     &.white,
     &[inverse] {
-        dot {
+        span.dot {
             background-color: #fff !important;
         }
     }

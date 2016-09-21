@@ -1,7 +1,7 @@
 // NG2
 import { Component, ElementRef } from '@angular/core';
 // APP
-import { interpolate } from './../../../../utils/Helpers';
+import { Helpers } from './../../../../utils/Helpers';
 import { NovoLabelService } from './../../../../services/novo-label-service';
 // Vendor
 import { Observable } from 'rxjs/Rx';
@@ -119,7 +119,7 @@ export class PickerResults {
         }
         return dataArray.map((data) => {
             let value = this.config.field ? data[this.config.field] : (data.value || data);
-            let label = this.config.format ? interpolate(this.config.format, data) : data.label || String(value);
+            let label = this.config.format ? Helpers.interpolate(this.config.format, data) : data.label || String(value);
             return { value, label, data };
         });
     }

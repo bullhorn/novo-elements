@@ -60,7 +60,7 @@ const drawerService = new DrawerService();
 
 @Directive({
     selector: '[drawer]',
-    properties: ['isOpen', 'autoClose', 'position'],
+    inputs: ['isOpen', 'autoClose', 'position'],
     outputs: ['onDrawerToggle'],
     host: {
         '[class.drawer]': 'true',
@@ -134,7 +134,7 @@ export class NovoDrawerContentElement implements OnInit {
 
 @Directive({
     selector: '[drawerToggle]',
-    properties: ['disabled'],
+    inputs: ['disabled'],
     host: {
         '(click)': 'toggleDrawer($event)',
         '[class.drawer-toggle]': 'true',

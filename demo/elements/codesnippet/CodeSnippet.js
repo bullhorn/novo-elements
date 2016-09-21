@@ -1,6 +1,6 @@
 // NG2
 import { Component } from '@angular/core';
-import { DomSanitizationService } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     inputs: ['code'],
@@ -8,7 +8,7 @@ import { DomSanitizationService } from '@angular/platform-browser';
     template: '<pre><code [innerHtml]="highlight"></code></pre>'
 })
 export class CodeSnippet {
-    constructor(sanitizer:DomSanitizationService) {
+    constructor(sanitizer:DomSanitizer) {
         this.sanitizer = sanitizer;
     }
 

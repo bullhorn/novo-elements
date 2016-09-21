@@ -47,7 +47,7 @@ export class NovoModalRef {
 
 @Component({
     selector: 'novo-modal-container',
-    template: '<ref #container></ref>'
+    template: '<span #container></span>'
 })
 export class NovoModalContainerElement {
     @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;

@@ -1,16 +1,17 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Provider, ElementRef } from '@angular/core';
+import { Component, EventEmitter, forwardRef, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { interpolate } from './../../utils/Helpers';
+import { Helpers } from './../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
-const CHIPS_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const CHIPS_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoChipsElement),
     multi: true
-});
+};
 
 @Component({
     selector: 'chip',
@@ -116,7 +117,7 @@ export class NovoChipsElement extends OutsideClick {
         if (this.model && Array.isArray(this.model)) {
             this.items = this.model.map(v => {
                 if (this.source && this.source.format) {
-                    return { value: v, label: interpolate(this.source.format, v) };
+                    return { value: v, label: Helpers.interpolate(this.source.format, v) };
                 }
                 return { value: v, label: v };
             });

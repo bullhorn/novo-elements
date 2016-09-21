@@ -16,22 +16,4 @@ export function main() {
     return platformBrowserDynamic().bootstrapModule(NovoElementsDemoModule);
 }
 
-/**
- * If DEV then we bootstrap via HMR otherwise, just call directly
- */
-export function bootstrapDomReady() {
-    document.addEventListener('DOMContentLoaded', main);
-}
-
-// Hot Module Replacement
-if (ENV === 'development' && HMR) {
-    // activate hot module reload
-    if (document.readyState === 'complete') {
-        main();
-    } else {
-        bootstrapDomReady();
-    }
-    module.hot.accept();
-} else {
-    bootstrapDomReady();
-}
+document.addEventListener('DOMContentLoaded', main);

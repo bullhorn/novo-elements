@@ -1,20 +1,21 @@
 // NG2
-import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, Provider } from '@angular/core';
+import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { isBlank } from '@angular/core/src/facade/lang';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { PickerResults } from './extras/picker-results/PickerResults';
 import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
+import { Helpers } from './../../utils/Helpers';
 // Vendor
 import { Observable } from 'rxjs/Rx';
 
 // Value accessor for the component (supports ngModel)
-const PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const PICKER_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoPickerElement),
     multi: true
-});
+};
 
 /**
  * @name Picker
@@ -125,7 +126,7 @@ export class NovoPickerElement extends OutsideClick {
                 return;
             }
 
-            if (event.keyCode === KeyCodes.BACKSPACE && !isBlank(this._value)) {
+            if (event.keyCode === KeyCodes.BACKSPACE && !Helpers.isBlank(this._value)) {
                 this.clearValue(false);
                 this.showResults();
             }

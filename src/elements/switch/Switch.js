@@ -1,14 +1,15 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, Provider } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
 // Value accessor for the component (supports ngModel)
-const SWITCH_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const SWITCH_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoSwitchElement),
     multi: true
-});
+};
 
 @Component({
     selector: 'novo-switch',

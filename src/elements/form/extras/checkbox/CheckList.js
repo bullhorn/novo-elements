@@ -1,14 +1,15 @@
 // NG2
-import { Component, forwardRef, Provider } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { swallowEvent } from './../../../../utils/Helpers';
+import { Helpers } from './../../../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
-const CHECKLIST_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const CHECKLIST_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoCheckListElement),
     multi: true
-});
+};
 
 @Component({
     selector: 'novo-check-list',
@@ -36,7 +37,7 @@ export class NovoCheckListElement implements ControlValueAccessor {
     }
 
     select(event, item) {
-        swallowEvent(event);
+        Helpers.swallowEvent(event);
         item.checked = !item.checked;
         this.model = this._options.filter(checkBox => checkBox.checked).map(x => x.value);
         this.onModelChange(this.model.length > 0 ? this.model : '');

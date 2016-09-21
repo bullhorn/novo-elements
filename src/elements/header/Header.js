@@ -2,6 +2,15 @@
 import { Component } from '@angular/core';
 
 @Component({
+    selector: 'utils',
+    template: `
+        <ng-content></ng-content>
+    `
+})
+export class UtilsElement {
+}
+
+@Component({
     selector: 'util-action',
     inputs: ['icon', 'inverse', 'disabled'],
     template: `

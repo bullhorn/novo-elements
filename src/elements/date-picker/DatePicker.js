@@ -1,16 +1,17 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Provider } from '@angular/core';
+import { Component, EventEmitter, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { swallowEvent } from './../../utils/Helpers';
+import { Helpers } from './../../utils/Helpers';
 // Vendor
 import moment from 'moment/moment';
 
 // Value accessor for the component (supports ngModel)
-const DATE_PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const DATE_PICKER_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoDatePickerElement),
     multi: true
-});
+};
 
 @Component({
     selector: 'novo-date-picker',
@@ -148,7 +149,7 @@ export class NovoDatePickerElement implements ControlValueAccessor {
     }
 
     select(event, day, fireEvents) {
-        swallowEvent(event);
+        Helpers.swallowEvent(event);
         if (this.range) {
             if (!this.selected && event) {
                 this.selected = day.date;
@@ -216,7 +217,7 @@ export class NovoDatePickerElement implements ControlValueAccessor {
     }
 
     open(event, type) {
-        swallowEvent(event);
+        Helpers.swallowEvent(event);
 
         // If they click the toggle two time in a row, close it (go back to days)
         if (type === this.view) {
@@ -229,14 +230,14 @@ export class NovoDatePickerElement implements ControlValueAccessor {
     }
 
     prevMonth(event) {
-        swallowEvent(event);
+        Helpers.swallowEvent(event);
         let tmp = this.month.clone();
         tmp = tmp.subtract(1, 'months');
         this.updateView(tmp, false, false);
     }
 
     nextMonth(event) {
-        swallowEvent(event);
+        Helpers.swallowEvent(event);
         let tmp = this.month.clone();
         tmp = tmp.add(1, 'months');
         this.updateView(tmp, false, false);

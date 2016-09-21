@@ -1,12 +1,13 @@
 // NG2
-import { Component, Input, ElementRef, forwardRef, Provider } from '@angular/core';
+import { Component, Input, ElementRef, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 // Value accessor for the component (supports ngModel)
-const FILE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const FILE_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoFileInputElement),
     multi: true
-});
+};
 
 @Component({
     selector: 'novo-file-input',

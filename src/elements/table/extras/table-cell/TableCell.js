@@ -9,7 +9,7 @@ import { ComponentUtils } from './../../../../utils/component-utils/ComponentUti
     inputs: ['column', 'row'],
     template: `
         <div [ngSwitch]="column._type">
-            <ref #container></ref>
+            <span #container></span>
             <date-cell *ngSwitchCase="'date'" [value]="value"></date-cell>
             <a *ngSwitchCase="'link'" (click)="onClick($event);">{{ value }}</a>
             <span *ngSwitchDefault>{{ value }}</span>

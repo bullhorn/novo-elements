@@ -1,14 +1,15 @@
 // NG2
-import { Component, forwardRef, Provider } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { getCountries, getStates, findByCountryName } from '../../../../utils/countries/Countries';
 
 // Value accessor for the component (supports ngModel)
-const ADDRESS_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const ADDRESS_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoAddressElement),
     multi: true
-});
+};
 
 @Component({
     selector: 'novo-address',

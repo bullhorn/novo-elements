@@ -87,7 +87,6 @@ export class ChipsDemoComponent {
         }];
         this.static = { options: states };
         this.formatted = {
-            //field: 'id',
             format: '$firstName $lastName',
             options: collaborators
         };

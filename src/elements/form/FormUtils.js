@@ -1,7 +1,6 @@
 // NG2
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { isBlank } from '@angular/core/src/facade/lang';
 // APP
 import {
     AddressControl,
@@ -20,13 +19,14 @@ import {
     TimeControl
 } from './FormControls';
 import { EntityPickerResults } from './../picker/extras/entity-picker-results/EntityPickerResults';
+import { Helpers } from './../../utils/Helpers';
 
 @Injectable()
 export class FormUtils {
     toFormGroup(controls) {
         let group:any = {};
         controls.forEach(control => {
-            let value = isBlank(control.value) ? '' : control.value;
+            let value = Helpers.isBlank(control.value) ? '' : control.value;
             group[control.key] = control.validators && control.validators.length > 0 ? new FormControl(value, control.validators) : new FormControl(value);
         });
         return new FormGroup(group);
@@ -261,7 +261,7 @@ export class FormUtils {
 
     setInitialValues(controls, values, keepClean = false) {
         controls.forEach(control => {
-            if (!isBlank(values[control.key]) && values[control.key].length !== 0) {
+            if (!Helpers.isBlank(values[control.key]) && values[control.key].length !== 0) {
                 control.value = values[control.key];
                 control.dirty = !keepClean;
             }

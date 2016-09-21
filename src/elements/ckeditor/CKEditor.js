@@ -1,12 +1,13 @@
 // NG2
-import { Component, Input, Output, ViewChild, EventEmitter, NgZone, Provider, forwardRef } from '@angular/core';
+import { Component, Input, Output, ViewChild, EventEmitter, NgZone, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // Value accessor for the component (supports ngModel)
-const CKEDITOR_CONTROL_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoCKEditorElement),
     multi: true
-});
+};
 
 /**
  * CKEditor component

@@ -6,7 +6,7 @@
 
 ## Dependencies
 
-- [NodeJS v4.0+](https://nodejs.org/en/)
+- [NodeJS v6.0+](https://nodejs.org/en/)
 - [NPM v3.0+](https://github.com/npm/npm)
 
 ## Quick Start
@@ -29,23 +29,6 @@
     npm install --save novo-elements
     
 Depending on what system you are using (SystemJS, Webpack, etc..) the setup will vary.
-
-**SystemJS**
-
-> For SystemJS you will need to add some mappings in order to successfully use this library
-
-    // Add a SystemJS Config mapping for novo-elements
-    // A MomentJS mapping is required as well
-    System.config({
-        defaultJSExtensions: true,
-        paths: {
-            'novo-elements': '/node_modules/novo-elements/lib/novo-elements.js',
-            'moment': '/node_modules/moment/moment.js',
-            ...
-        }
-    });
-    
-**Note:** You can forgo adding the mappings and just include `novo-elements/bundles/novo-elements.js` as a script tag into your `index.html` page instead.
     
 If using SCSS/SASS you will need to include the following includes: `node_modules/novo-elements/lib` and `node_modules/hint.css/src`.
 

@@ -1,13 +1,12 @@
 {
   "name": "novo-elements",
-  "version": "1.0.35",
+  "version": "1.1.0",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
-    "clean": "node_modules/.bin/del bundles coverage lib dist",
-    "compile": "npm run compile:lib && npm run compile:system",
+    "clean": "node_modules/.bin/del coverage lib dist",
+    "compile": "npm run compile:lib",
     "compile:lib": "babel src --ignore \".spec.js, testing/**\" --out-dir lib --copy-files",
     "compile:lib:watch": "babel src --ignore \".spec.js, testing/**\" --out-dir lib --copy-files --watch",
-    "compile:system": "./config/bundle-system.js",
     "prepublish": "npm run clean && npm run compile",
     "postpublish": "npm run deploy:gh-pages",
     "lint": "eslint src demo",
@@ -62,21 +61,20 @@
     "moment": "^2.13.0"
   },
   "peerDependencies": {
-    "@angular/common": "2.0.0-rc.5",
-    "@angular/compiler": "2.0.0-rc.5",
-    "@angular/core": "2.0.0-rc.5",
-    "@angular/forms": "0.3.0"
+    "@angular/common": "2.0.0",
+    "@angular/compiler": "2.0.0",
+    "@angular/core": "2.0.0",
+    "@angular/forms": "3.0.0"
   },
   "devDependencies": {
-    "@angular/common": "2.0.0-rc.5",
-    "@angular/compiler": "2.0.0-rc.5",
-    "@angular/core": "2.0.0-rc.5",
-    "@angular/forms": "0.3.0",
-    "@angular/http": "2.0.0-rc.5",
-    "@angular/platform-browser": "2.0.0-rc.5",
-    "@angular/platform-browser-dynamic": "2.0.0-rc.5",
-    "@angular/router": "3.0.0-rc.1",
-    "angular2-hmr": "~0.8.0",
+    "@angular/common": "2.0.0",
+    "@angular/compiler": "2.0.0",
+    "@angular/core": "2.0.0",
+    "@angular/forms": "2.0.0",
+    "@angular/http": "2.0.0",
+    "@angular/platform-browser": "2.0.0",
+    "@angular/platform-browser-dynamic": "2.0.0",
+    "@angular/router": "3.0.0",
     "async": "^2.0.0-rc.5",
     "autoprefixer-loader": "^3.2.0",
     "babel-cli": "~6.10.1",
@@ -128,7 +126,7 @@
     "raw-loader": "0.5.1",
     "reflect-metadata": "0.1.8",
     "require-dir": "0.3.0",
-    "rxjs": "5.0.0-beta.6",
+    "rxjs": "5.0.0-beta.12",
     "sass-loader": "^3.2.0",
     "sloc": "^0.1.10",
     "source-map-loader": "0.1.5",
@@ -142,7 +140,7 @@
     "webpack-dev-server": "1.14.1",
     "webpack-md5-hash": "0.0.5",
     "webpack-merge": "^0.14.0",
-    "zone.js": "0.6.12"
+    "zone.js": "^0.6.21"
   },
   "config": {
     "ghooks": {

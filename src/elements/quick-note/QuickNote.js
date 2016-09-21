@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Provider, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, forwardRef, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -8,10 +8,11 @@ import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
 import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 // Value accessor for the component (supports ngModel)
-const QUICK_NOTE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const QUICK_NOTE_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => QuickNoteElement),
     multi: true
-});
+};
 
 @Component({
     selector: 'novo-quick-note',
@@ -38,7 +39,7 @@ const QUICK_NOTE_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
                 [innerHTML]="formattedNote"
                 [attr.placeholder]="placeholder">
             </div>
-            <ref #results></ref>
+            <span #results></span>
         </div>
     `
 })

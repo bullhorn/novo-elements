@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, Provider, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick'; // TODO - change imports
@@ -7,10 +7,11 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from './../../services/novo-label-service';
 
 // Value accessor for the component (supports ngModel)
-const SELECT_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const SELECT_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoSelectElement),
     multi: true
-});
+};
 
 @Component({
     selector: 'novo-select',

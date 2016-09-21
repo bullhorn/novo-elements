@@ -1,7 +1,7 @@
 // NG2
 import { Component, ElementRef } from '@angular/core';
 // APP
-import { interpolate } from './../../../../utils/Helpers';
+import { Helpers } from './../../../../utils/Helpers';
 import { PickerResults } from './../../../picker/extras/picker-results/PickerResults';
 import { NovoLabelService } from './../../../../services/novo-label-service';
 // Vendor
@@ -105,7 +105,7 @@ export class QuickNoteResults extends PickerResults {
         }
         return collection.map((data) => {
             let value = this.config.field ? data[this.config.field[this.taggingMode]] : (data.value || data);
-            let label = this.config.format ? interpolate(this.config.format[this.taggingMode], data) : data.label || String(value);
+            let label = this.config.format ? Helpers.interpolate(this.config.format[this.taggingMode], data) : data.label || String(value);
             return { value, label, data };
         });
     }

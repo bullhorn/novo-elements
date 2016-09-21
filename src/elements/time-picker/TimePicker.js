@@ -1,16 +1,17 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Provider } from '@angular/core';
+import { Component, EventEmitter, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { swallowEvent } from './../../utils/Helpers';
+import { Helpers } from './../../utils/Helpers';
 // Vendor
 import moment from 'moment/moment';
 
 // Value accessor for the component (supports ngModel)
-const TIME_PICKER_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const TIME_PICKER_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoTimePickerElement),
     multi: true
-});
+};
 
 @Component({
     selector: 'novo-time-picker',
@@ -106,7 +107,7 @@ export class NovoTimePickerElement implements ControlValueAccessor {
     }
 
     setHours(event, hours, dispatch) {
-        swallowEvent(event);
+        Helpers.swallowEvent(event);
         this.hours = hours;
         this.hoursClass = `hour-${hours}`;
         this.activeHour = hours;
@@ -117,7 +118,7 @@ export class NovoTimePickerElement implements ControlValueAccessor {
     }
 
     setMinutes(event, minutes, dispatch) {
-        swallowEvent(event);
+        Helpers.swallowEvent(event);
         this.minutes = minutes;
         this.minutesClass = `min-${minutes}`;
         this.activeMinute = minutes;
@@ -129,7 +130,7 @@ export class NovoTimePickerElement implements ControlValueAccessor {
     }
 
     setPeriod(event, period, dispatch) {
-        swallowEvent(event);
+        Helpers.swallowEvent(event);
         this.meridian = period;
 
         if (dispatch) {

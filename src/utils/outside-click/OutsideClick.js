@@ -1,6 +1,7 @@
 // NG2
 import { EventEmitter } from '@angular/core';
-import { isBlank } from '@angular/core/src/facade/lang';
+// APP
+import { Helpers } from './../../utils/Helpers';
 
 /**
  * Outside click helper, makes to set the element as inactive when clicking outside of it
@@ -25,7 +26,7 @@ export class OutsideClick {
      */
     toggleActive(event, forceValue) {
         // Reverse the active property (if forceValue, use that)
-        this.active = !isBlank(forceValue) ? forceValue : !this.active;
+        this.active = !Helpers.isBlank(forceValue) ? forceValue : !this.active;
         // Bind window click events to hide on outside click
         if (this.active) {
             window.addEventListener('click', this.onOutsideClick);

@@ -8,7 +8,7 @@ import { ComponentUtils } from './../../../../utils/component-utils/ComponentUti
     selector: 'novo-row-details',
     inputs: ['data', 'renderer'],
     template: `
-        <ref #container></ref>
+        <span #container></span>
         <span>{{value}}</span>
     `
 })

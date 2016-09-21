@@ -5,6 +5,7 @@ const pkg = require('../package.json');
 // Webpack Plugins
 var CopyWebpackPlugin = (CopyWebpackPlugin = require('copy-webpack-plugin'), CopyWebpackPlugin.default || CopyWebpackPlugin);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 
 // Webpack Constants
 const METADATA = {
@@ -188,7 +189,22 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'demo/index.html',
             chunksSortMode: 'dependency'
-        })
+        }),
+
+        // Plugin: ContextReplacementPlugin
+        // Description: Provides context to Angular's use of System.import
+        // See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
+        // See: https://github.com/angular/angular/issues/11580
+        new ContextReplacementPlugin(
+            // The (\\|\/) piece accounts for path separators in *nix and Windows
+            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            helpers.root('src')
+        ),
+        new ContextReplacementPlugin(
+            // The (\\|\/) piece accounts for path separators in *nix and Windows
+            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            helpers.root('demo')
+        ),
     ],
 
     // Include polyfills or mocks for various node stuff

@@ -8,11 +8,11 @@ import { Component } from '@angular/core';
         '[class]': 'theme || ""'
     },
     template: `
-        <dot></dot>
-        <dot></dot>
-        <dot></dot>
-        <dot></dot>
-        <dot></dot>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
     `
 })
 export class NovoLoadingElement {

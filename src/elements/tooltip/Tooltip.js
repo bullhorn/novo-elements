@@ -3,7 +3,7 @@ import { Directive } from '@angular/core';
 
 @Directive({
     selector: '[tooltip]',
-    properties: [
+    inputs: [
         'tooltip:tooltip',
         'active:tooltipActive',
         'always:tooltipAlways',

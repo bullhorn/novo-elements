@@ -35,7 +35,7 @@ novo-form, novo-dynamic-form {
                     width: 100%;
                     min-height: 44px;
 
-                    .ng-touched.ng-invalid:not(.ng-pristine) {
+                    .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
                         border-bottom: 1px solid $negative !important;
 
                         &.valid-number {

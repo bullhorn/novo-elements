@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // APP
 import { NovoButtonModule } from './../button/Button.module';
-import { NovoHeaderElement, UtilActionElement } from './Header';
+import { NovoHeaderElement, UtilActionElement, UtilsElement } from './Header';
 
 @NgModule({
     imports: [CommonModule, NovoButtonModule],
-    declarations: [NovoHeaderElement, UtilActionElement],
-    exports: [NovoHeaderElement, UtilActionElement]
+    declarations: [NovoHeaderElement, UtilActionElement, UtilsElement],
+    exports: [NovoHeaderElement, UtilActionElement, UtilsElement]
 })
 export class NovoHeaderModule {
 }

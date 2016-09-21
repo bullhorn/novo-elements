@@ -1,14 +1,15 @@
 // NG2
-import { Component, EventEmitter, Provider, forwardRef } from '@angular/core';
+import { Component, EventEmitter, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { swallowEvent } from './../../utils/Helpers';
+import { Helpers } from './../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
-const RADIO_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+const RADIO_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoRadioElement),
     multi: true
-});
+};
 
 @Component({
     selector: 'novo-radio',
@@ -43,7 +44,7 @@ export class NovoRadioElement implements ControlValueAccessor {
      * @param radio
      */
     select(event, radio) {
-        swallowEvent(event);
+        Helpers.swallowEvent(event);
         // Only change the checked state if this is a new radio, they are not toggle buttons
         if (!radio.checked) {
             radio.checked = !radio.checked;

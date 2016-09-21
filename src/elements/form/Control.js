@@ -98,7 +98,7 @@ export class NovoControlElement extends OutsideClick {
     }
 
     clearValue() {
-        this.form.controls[this.control.key].updateValue(null);
+        this.form.controls[this.control.key].setValue(null);
         this.formattedValue = null;
         this.checkState();
     }
