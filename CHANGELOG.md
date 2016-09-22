@@ -1,3 +1,14 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/bullhorn/novo-elements/compare/v1.0.35...v1.1.1) (2016-09-22)
+
+
+### Bug Fixes
+
+* **forms:** Adds support for placeholders in vertical layout ([#199](https://github.com/bullhorn/novo-elements/issues/199)) ([a6d7daf](https://github.com/bullhorn/novo-elements/commit/a6d7daf))
+* **forms:** Small tweaks to vertical forms ([#197](https://github.com/bullhorn/novo-elements/issues/197)) ([b48493f](https://github.com/bullhorn/novo-elements/commit/b48493f))
+
+
+
 <a name="1.1.0"></a>
 ## [1.1.0](https://github.com/bullhorn/novo-elements/compare/v1.0.0...v1.1.0) (2016-09-21)
 
