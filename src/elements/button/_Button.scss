@@ -64,6 +64,28 @@ button {
                     &:before {
                         vertical-align: baseline;
                     }
+
+                    &.loading {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        animation: rotate 1600ms linear infinite;
+
+                        span.circle {
+                            height: 5px;
+                            width: 5px;
+                            background: white;
+                            display: inline-block;
+                            border-radius: 50%;
+                            margin: 0 3px;
+                            flex-shrink: 0;
+
+                            &:first-of-type {
+                                width: 4px;
+                                height: 4px;
+                            }
+                        }
+                    }
                 }
 
                 &[icon="send"] {
@@ -182,15 +204,13 @@ button {
 
                 &[icon="collapse"] {
                     i {
-                        &:before {
-                        }
+                        &:before {}
                     }
                 }
 
                 &[icon="convert"] {
                     i {
-                        &:before {
-                        }
+                        &:before {}
                     }
                 }
             }
@@ -342,5 +362,14 @@ button {
                 background: rgba(0, 0, 0, .25);
             }
         }
+    }
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
     }
 }

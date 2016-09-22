@@ -8,6 +8,7 @@ import IconButtonDemoTpl from './templates/IconButtonDemo.html';
 import StandardButtonDemoTpl from './templates/StandardButtonDemo.html';
 import SecondaryButtonDemoTpl from './templates/SecondaryButtonDemo.html';
 import DynamicButtonDemoTpl from './templates/DynamicButtonDemo.html';
+import LoadingButtonDemoTpl from './templates/LoadingButtonDemo.html';
 
 const template = `
 <div class="container">
@@ -103,6 +104,13 @@ const template = `
     </p>
     <div class="example buttons-demo">${DynamicButtonDemoTpl}</div>
     <code-snippet [code]="DynamicButtonDemoTpl"></code-snippet>
+
+    <h5>Loading</h5>
+    <p>
+        Lipsum.
+    </p>
+    <div class="example buttons-demo">${LoadingButtonDemoTpl}</div>
+    <code-snippet [code]="LoadingButtonDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -113,6 +121,9 @@ const HEADER_COLORS = ['blue', 'green', 'yellow', 'orange', 'red', 'purple'];
     template: template
 })
 export class ButtonDemoComponent {
+    loading:Boolean = false;
+    loadingButtonText:String = 'Delete';
+
     constructor() {
         this.PrimaryButtonDemoTpl = PrimaryButtonDemoTpl;
         this.SecondaryButtonDemoTpl = SecondaryButtonDemoTpl;
@@ -121,6 +132,7 @@ export class ButtonDemoComponent {
         this.HeaderButtonDemoTpl = HeaderButtonDemoTpl;
         this.IconButtonDemoTpl = IconButtonDemoTpl;
         this.DynamicButtonDemoTpl = DynamicButtonDemoTpl;
+        this.LoadingButtonDemoTpl = LoadingButtonDemoTpl;
 
         this.theme = 'primary';
         this.isChecked = false;
@@ -139,5 +151,14 @@ export class ButtonDemoComponent {
     changeTheme() {
         let i = Math.floor(Math.random() * 4);
         this.theme = ['primary', 'secondary', 'dialogue', 'standard', 'icon'][i];
+    }
+
+    fakeRequest() {
+        this.loading = true;
+        this.loadingButtonText = (this.loading) ? 'Removing... ' : 'Delete';
+        setTimeout(() => {
+            this.loading = false;
+            this.loadingButtonText = (this.loading) ? 'Removing... ' : 'Delete';
+        }, 4000);
     }
 }
