@@ -11,10 +11,10 @@ import { NovoLabelService } from './../../services/novo-label-service';
     animations: [
         trigger('heroState', [
             state('inactive', style({
-                transform: 'translate(0px, 25px) scale(1)'
+                transform: 'translate(0px, 25px) scale(1.1)'
             })),
             state('active', style({
-                transform: 'translate(-5px, 0px) scale(.8)'
+                transform: 'translate(-5px, 0px) scale(1)'
             })),
             state('horizontal', style({
                 transform: 'translateY(0px. 0px) scale(1)'
