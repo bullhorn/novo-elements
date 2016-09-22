@@ -204,7 +204,7 @@ module.exports = {
             // The (\\|\/) piece accounts for path separators in *nix and Windows
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
             helpers.root('demo')
-        ),
+        )
     ],
 
     // Include polyfills or mocks for various node stuff
