@@ -14,7 +14,7 @@ import { NovoLabelService } from './../../services/novo-label-service';
                 transform: 'translate(0px, 25px) scale(1.1)'
             })),
             state('active', style({
-                transform: 'translate(-5px, 0px) scale(1)'
+                transform: 'translate(-1px, 0px) scale(1)'
             })),
             state('horizontal', style({
                 transform: 'translateY(0px. 0px) scale(1)'
@@ -144,7 +144,7 @@ export class NovoControlElement extends OutsideClick {
                 if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
                     this.state = 'active';
                 } else {
-                    this.state = (this.form.value[this.control.key]) ? 'active' : 'inactive';
+                    this.state = (this.form.value[this.control.key] || this.control.placeholder) ? 'active' : 'inactive';
                 }
             } else {
                 this.state = 'horizontal';
@@ -158,7 +158,7 @@ export class NovoControlElement extends OutsideClick {
                 if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
                     this.state = 'active';
                 } else {
-                    if (!this.form.value[this.control.key]) {
+                    if (!this.form.value[this.control.key] && !this.control.placeholder) {
                         this.state = (this.state === 'active' ? 'inactive' : 'active');
                     }
                 }
