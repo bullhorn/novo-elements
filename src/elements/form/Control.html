@@ -28,8 +28,8 @@
             <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)"></novo-tiles>
             <!--Picker-->
             <div class="novo-control-input-container" *ngSwitchCase="'picker'">
-                <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple" (select)="toggleState()" (focus)="toggleState()" (blur)="toggleState()"></novo-picker>
-                <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" (focus)="toggleState()" (blur)="toggleState()"></chips>
+                <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple" (select)="checkState()" (focus)="toggleState()" (blur)="checkState()"></novo-picker>
+                <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" (focus)="toggleState()" (blur)="checkState()"></chips>
             </div>
             <!--Novo Select-->
             <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key"></novo-select>
