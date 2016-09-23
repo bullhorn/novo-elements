@@ -17,7 +17,6 @@ describe('Component: EntityPickerResults', () => {
     }));
 
     it('should initialize correctly', () => {
-        console.log(comp);
         expect(comp).toBeDefined();
     });
 
@@ -103,6 +102,20 @@ describe('Component: EntityPickerResults', () => {
                 }
             };
             expect(comp.getNameForResult(input)).toBe('James Bond');
+        });
+        it('should return the name when present for an unknown entity', () => {
+            let input = {
+                searchEntity: 'Unknown',
+                name: 'James Bond'
+            };
+            expect(comp.getNameForResult(input)).toBe('James Bond');
+        });
+        it('should return an empty string when name is not present for an unknown entity', () => {
+            let input = {
+                searchEntity: 'Unknown',
+                title: 'Mock Job Title'
+            };
+            expect(comp.getNameForResult(input)).toBe('');
         });
     });
 });
