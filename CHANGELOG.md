@@ -1,3 +1,13 @@
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/bullhorn/novo-elements/compare/v1.1.3...v1.1.4) (2016-09-26)
+
+
+### Bug Fixes
+
+* **control:** Adding change output for chips in the control ([fd70d7e](https://github.com/bullhorn/novo-elements/commit/fd70d7e))
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/bullhorn/novo-elements/compare/v1.1.2...v1.1.3) (2016-09-26)
 
