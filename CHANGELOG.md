@@ -1,3 +1,13 @@
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/bullhorn/novo-elements/compare/v1.1.1...v1.1.2) (2016-09-26)
+
+
+### Bug Fixes
+
+* **table:** Fixing internal structure for sorting/filtering so that a user can change the data in the table properly ([ba44af7](https://github.com/bullhorn/novo-elements/commit/ba44af7))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/bullhorn/novo-elements/compare/v1.0.35...v1.1.1) (2016-09-22)
 
