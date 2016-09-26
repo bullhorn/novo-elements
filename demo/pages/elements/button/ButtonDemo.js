@@ -159,6 +159,6 @@ export class ButtonDemoComponent {
         setTimeout(() => {
             this.loading = false;
             this.loadingButtonText = (this.loading) ? 'Removing... ' : 'Delete';
-        }, 4000);
+        }, 60000);
     }
 }
