@@ -29,7 +29,7 @@
             <!--Picker-->
             <div class="novo-control-input-container" *ngSwitchCase="'picker'">
                 <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple" (select)="modelChange($event);checkState()" (focus)="toggleState()" (blur)="checkState()"></novo-picker>
-                <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" (focus)="toggleState()" (blur)="checkState()" (changed)="checkState()"></chips>
+                <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" (focus)="toggleState()" (blur)="checkState()" (changed)="modelChange($event);checkState()"></chips>
             </div>
             <!--Novo Select-->
             <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key"></novo-select>
