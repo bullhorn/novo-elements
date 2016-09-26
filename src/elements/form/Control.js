@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, ElementRef, EventEmitter, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, Input, Output, ElementRef, EventEmitter, trigger, state, style, transition, animate } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -27,15 +27,12 @@ import { NovoLabelService } from './../../services/novo-label-service';
     ],
     host: {
         '[hidden]': 'control.hidden || control.type === \'hidden\''
-    },
-    outputs: [
-        'change'
-    ]
+    }
 })
 export class NovoControlElement extends OutsideClick {
     @Input() control;
     @Input() form:FormGroup;
-    change:EventEmitter = new EventEmitter;
+    @Output() change:EventEmitter = new EventEmitter();
     formattedValue:String = '';
     state:String = 'horizontal';
     alwaysActive:Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];

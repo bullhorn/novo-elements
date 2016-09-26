@@ -76,6 +76,8 @@ export class EntityPickerResults extends PickerResults {
                     return 'lead';
                 case 'JobOrder':
                     return 'job';
+                case 'Placement':
+                    return 'star placement';
                 default:
                     return '';
             }
@@ -100,6 +102,8 @@ export class EntityPickerResults extends PickerResults {
                 case 'Opportunity':
                 case 'JobOrder':
                     return `${result.title || ''}`.trim();
+                case 'Placement':
+                    return `${result.candidate.firstName || ''} ${result.candidate.lastName || ''}`.trim();
                 default:
                     return `${result.name || ''}`.trim();
             }
