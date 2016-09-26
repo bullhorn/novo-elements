@@ -143,9 +143,6 @@ export class TableDemoComponent {
                 sorting: true,
                 ordering: true,
                 resizing: true
-            },
-            onTableChange: (event) => {
-                this.basic.rows = event.rows;
             }
         };
 
@@ -167,9 +164,6 @@ export class TableDemoComponent {
                 resizing: true,
                 hasDetails: true,
                 detailsRenderer: ExtraDetails
-            },
-            onTableChange: (event) => {
-                this.details.rows = event.rows;
             }
         };
 
@@ -190,9 +184,6 @@ export class TableDemoComponent {
                 ordering: true,
                 resizing: true,
                 rowSelectionStyle: 'checkbox'
-            },
-            onTableChange: (event) => {
-                this.selectAll.rows = event.rows;
             }
         };
     }

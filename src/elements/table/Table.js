@@ -1,5 +1,5 @@
 // Vendor
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
 import { Helpers } from './../../utils/Helpers';
@@ -20,9 +20,6 @@ export class NovoTableHeaderElement {
 
 @Component({
     selector: 'novo-table, [novoTable]',
-    inputs: ['rows', 'columns', 'config', 'theme'
-    ],
-    outputs: ['onRowClick', 'onRowSelect', 'onTableChange'],
     host: {
         '[attr.theme]': 'theme'
     },
@@ -33,7 +30,7 @@ export class NovoTableHeaderElement {
                 <novo-pagination *ngIf="config.paging"
                                  [page]="config.paging.current"
                                  [rowOptions]="config.customRowOptions"
-                                 [totalItems]="rows.length"
+                                 [totalItems]="modifiedRows.length"
                                  [itemsPerPage]="config.paging.itemsPerPage"
                                  (onPageChange)="onPageChange($event)">
                 </novo-pagination>
@@ -108,13 +105,13 @@ export class NovoTableHeaderElement {
                 </tr>
             </thead>
             <!-- TABLE DATA -->
-            <tbody *ngIf="rows.length > 0">
+            <tbody *ngIf="modifiedRows.length > 0">
                 <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage" data-automation-id="table-selection-row">
                     <td colspan="100%">
-                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(rows.length)}}</a>
+                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(modifiedRows.length)}}</a>
                     </td>
                 </tr>
-                <template ngFor let-row="$implicit" [ngForOf]="rows | slice:getPageStart():getPageEnd()">
+                <template ngFor let-row="$implicit" [ngForOf]="modifiedRows | slice:getPageStart():getPageEnd()">
                     <tr class="table-row" [ngClass]="row.customClass || ''" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
                         <td class="row-actions" *ngIf="config.hasDetails">
                             <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
@@ -136,7 +133,7 @@ export class NovoTableHeaderElement {
                 </template>
             </tbody>
             <!-- NO TABLE DATA PLACEHOLDER -->
-            <tbody *ngIf="rows.length === 0" data-automation-id="empty-table">
+            <tbody *ngIf="modifiedRows.length === 0" data-automation-id="empty-table">
                 <tr>
                     <td colspan="100%">
                         <div class="no-matching-records">
@@ -150,40 +147,41 @@ export class NovoTableHeaderElement {
     `
 })
 export class NovoTableElement {
+    _rows:[any] = [];
+    modifiedRows:[any] = [];
+    selected:[any] = [];
+    activeId:number = 0;
+    master:boolean = false;
+    indeterminate:boolean = false;
+    lastPage:number = 0;
+    selectedPageCount:number = 0;
+    showSelectAllMessage:boolean = false;
+
+    @Input() config:any;
+    @Input() columns:[any];
+    @Input() theme:string;
+
+    @Input()
+    set rows(rows) {
+        this._rows = Array.isArray(rows) ? rows.slice() : [];
+        this.modifiedRows = Array.isArray(rows) ? rows.slice() : [];
+
+        if (rows && rows.length > 0) {
+            this.setupColumnDefaults();
+        }
+        this.clearAllSortAndFilters();
+    }
+
+    get rows() {
+        return this._rows;
+    }
+
+    @Output() onRowClick:EventEmitter = new EventEmitter();
+    @Output() onRowSelect:EventEmitter = new EventEmitter();
+    @Output() onTableChange:EventEmitter = new EventEmitter();
+
     constructor(labels:NovoLabelService) {
-        // NG2 (outputs)
-        this.onRowClick = new EventEmitter();
-        this.onRowSelect = new EventEmitter();
-        this.onTableChange = new EventEmitter();
-        // App
         this.labels = labels;
-        // Vars
-        this.originalRows = [];
-        this.selected = [];
-        this.activeId = 0;
-        this.master = false;
-        this.indeterminate = false;
-        this.lastPage = 0;
-        this.selectedPageCount = 0;
-        this.showSelectAllMessage = false;
-    }
-
-    ngOnInit() {
-        // Fail-safe inputs
-        this.rows = this.rows || [];
-        this.originalRows = this.rows;
-        this.columns = this.columns || [];
-        this.config = this.config || {};
-        if (this.rows.length > 0) {
-            this.setupColumnDefaults();
-        }
-    }
-
-    ngOnChanges(changes) {
-        this.originalRows = this.originalRows.length === 0 ? this.rows : this.originalRows;
-        if (changes && changes.rows && (changes.rows.previousValue !== changes.rows.currentValue)) {
-            this.setupColumnDefaults();
-        }
     }
 
     onPageChange(event) {
@@ -191,7 +189,7 @@ export class NovoTableElement {
 
         // Remove all selection on sort change if selection is on
         if (this.config.rowSelectionStyle === 'checkbox') {
-            this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+            this.pagedData = this.modifiedRows.slice(this.getPageStart(), this.getPageEnd());
             this.pageSelected = this.pagedData.filter(r => r._selected);
         }
     }
@@ -246,7 +244,7 @@ export class NovoTableElement {
      * @returns {*}
      */
     getPageEnd() {
-        return this.config.paging && this.config.paging.itemsPerPage > -1 ? this.getPageStart() + this.config.paging.itemsPerPage : this.rows.length;
+        return this.config.paging && this.config.paging.itemsPerPage > -1 ? this.getPageStart() + this.config.paging.itemsPerPage : this.modifiedRows.length;
     }
 
     /**
@@ -309,6 +307,22 @@ export class NovoTableElement {
         this.onFilterChange();
     }
 
+    clearAllSortAndFilters() {
+        if (this.config.filtering) {
+            this.columns.forEach(column => {
+                if (column.range) {
+                    for (let i in column.options) {
+                        if (column.options[i].range) {
+                            column.options[i].value = { startDate: null, endDate: null };
+                        }
+                    }
+                }
+                column.filter = null;
+                column.sort = null;
+            });
+        }
+    }
+
     /**
      * @name onFilterChange
      *
@@ -322,9 +336,9 @@ export class NovoTableElement {
             if (filters.length) {
                 if (Helpers.isFunction(this.config.filtering)) {
                     // Custom filter function on the table config
-                    this.rows = this.config.filtering(filters, this.originalRows);
+                    this.modifiedRows = this.config.filtering(filters, this._rows.slice());
                 } else {
-                    this.rows = this.originalRows.filter(row => {
+                    this.modifiedRows = this._rows.slice().filter(row => {
                         let matched;
                         for (const column of filters) {
                             if (column.match && Helpers.isFunction(column.match)) {
@@ -394,7 +408,7 @@ export class NovoTableElement {
                     });
                 }
             } else {
-                this.rows = this.originalRows;
+                this.modifiedRows = this._rows.slice();
             }
             // Trickle down to keep sort
             this.onSortChange(this.currentSortColumn);
@@ -448,9 +462,9 @@ export class NovoTableElement {
 
             if (Helpers.isFunction(this.config.sorting)) {
                 // Custom sort function on the table config
-                this.rows = this.config.sorting(newSortColumn, this.rows);
+                this.modifiedRows = this.config.sorting(newSortColumn, this.modifiedRows);
             } else {
-                this.rows.sort((previous, current) => {
+                this.modifiedRows.sort((previous, current) => {
                     const columnName = newSortColumn.name;
                     let first = previous[columnName] || '';
                     let second = current[columnName] || '';
@@ -504,7 +518,7 @@ export class NovoTableElement {
         const filters = this.columns.filter((col) => col.filter && col.filter.length);
         onTableChange.filter = filters.length ? filters : false;
         onTableChange.sort = this.currentSortColumn ? this.currentSortColumn : false;
-        onTableChange.rows = this.rows;
+        onTableChange.rows = this.modifiedRows;
 
         // Emit event
         this.onTableChange.emit(onTableChange);
@@ -546,16 +560,16 @@ export class NovoTableElement {
             this.showSelectAllMessage = false;
         } else {
             this.indeterminate = false;
-            this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+            this.pagedData = this.modifiedRows.slice(this.getPageStart(), this.getPageEnd());
             for (let row of this.pagedData) {
                 row._selected = this.master;
             }
-            this.selected = this.rows.filter(r => r._selected);
+            this.selected = this.modifiedRows.filter(r => r._selected);
             this.pageSelected = this.pagedData.filter(r => r._selected);
             this.emitSelected(this.selected);
             // Only show the select all message when there is only one new page selected at a time
             this.selectedPageCount++;
-            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.rows.length;
+            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.modifiedRows.length;
         }
     }
 
@@ -565,10 +579,10 @@ export class NovoTableElement {
     selectAll(value) {
         this.master = value;
         this.indeterminate = false;
-        for (let row of this.rows) {
+        for (let row of this.modifiedRows) {
             row._selected = value;
         }
-        this.selected = value ? this.rows : [];
+        this.selected = value ? this.modifiedRows : [];
         this.showSelectAllMessage = false;
         this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
         this.rowSelectHandler();
@@ -578,9 +592,9 @@ export class NovoTableElement {
      * @name rowSelectHandler
      */
     rowSelectHandler() {
-        this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+        this.pagedData = this.modifiedRows.slice(this.getPageStart(), this.getPageEnd());
         this.pageSelected = this.pagedData.filter(r => r._selected);
-        this.selected = this.rows.filter(r => r._selected);
+        this.selected = this.modifiedRows.filter(r => r._selected);
         if (this.pageSelected.length === 0) {
             this.master = false;
             this.indeterminate = false;
