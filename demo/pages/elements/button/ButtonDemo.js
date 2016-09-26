@@ -107,7 +107,8 @@ const template = `
 
     <h5>Loading</h5>
     <p>
-        Lipsum.
+        Buttons can display a loading state when given the "loading" parameter. When loading is true
+        the button will be disabled and get a loading spinner.
     </p>
     <div class="example buttons-demo">${LoadingButtonDemoTpl}</div>
     <code-snippet [code]="LoadingButtonDemoTpl"></code-snippet>
