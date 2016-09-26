@@ -6,6 +6,9 @@
 
 * **table:** Fixing internal structure for sorting/filtering so that a user can change the data in the table properly ([ba44af7](https://github.com/bullhorn/novo-elements/commit/ba44af7))
 
+### Breaking Changes
+
+If you are using Tables and have code that resets the `rows` on `onTableChange`, then that can go away. All logic around that is handled inside the table now.
 
 
 <a name="1.1.1"></a>
