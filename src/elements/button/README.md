@@ -16,3 +16,6 @@ A button clearly indicates a point of action for the user. Bullhorn buttons come
     * Available Values: `['left', 'right']`
 - `'inverse' : Bool`
     * Can be added to 'dialogue' theme buttons for buttons on a dark background
+- `'loading' : Bool`
+    * Can be added to all buttons
+    * Adds a loading spinner and disables the button while `loading = true`
