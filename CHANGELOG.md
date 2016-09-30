@@ -1,3 +1,13 @@
+<a name="1.1.5"></a>
+## [1.1.5](https://github.com/bullhorn/novo-elements/compare/v1.1.4...v1.1.5) (2016-09-30)
+
+
+### Bug Fixes
+
+* **table:** Fixing the `onRowSelect` output to emit the proper object ([2a6c566](https://github.com/bullhorn/novo-elements/commit/2a6c566))
+
+
+
 <a name="1.1.4"></a>
 ## [1.1.4](https://github.com/bullhorn/novo-elements/compare/v1.1.3...v1.1.4) (2016-09-26)
 
