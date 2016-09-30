@@ -1,3 +1,23 @@
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/bullhorn/novo-elements/compare/v1.1.3...v1.1.4) (2016-09-26)
+
+
+### Bug Fixes
+
+* **control:** Adding change output for chips in the control ([fd70d7e](https://github.com/bullhorn/novo-elements/commit/fd70d7e))
+
+
+
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/bullhorn/novo-elements/compare/v1.1.2...v1.1.3) (2016-09-26)
+
+
+### Features
+
+* **buttons:** Adds "Loading" state styles ([#202](https://github.com/bullhorn/novo-elements/issues/202)) ([cdfb93b](https://github.com/bullhorn/novo-elements/commit/cdfb93b))
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/bullhorn/novo-elements/compare/v1.1.1...v1.1.2) (2016-09-26)
 
@@ -6,6 +26,9 @@
 
 * **table:** Fixing internal structure for sorting/filtering so that a user can change the data in the table properly ([ba44af7](https://github.com/bullhorn/novo-elements/commit/ba44af7))
 
+### Breaking Changes
+
+If you are using Tables and have code that resets the `rows` on `onTableChange`, then that can go away. All logic around that is handled inside the table now.
 
 
 <a name="1.1.1"></a>
