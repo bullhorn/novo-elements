@@ -617,7 +617,7 @@ export class NovoTableElement {
      * @param selected
      */
     emitSelected(selected) {
-        this.onRowSelect.emit(selected.length, selected);
+        this.onRowSelect.emit({ length: selected.length, selected: selected });
     }
 
     /**
