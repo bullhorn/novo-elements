@@ -2,7 +2,8 @@
 @import "./extras/checkbox/Checkbox";
 @import "./extras/file/FileInput";
 
-novo-form, novo-dynamic-form {
+novo-dynamic-form,
+novo-form {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -84,7 +85,7 @@ novo-form, novo-dynamic-form {
                         > div.novo-control-input-container {
                             display: flex;
                             align-items: center;
-                            max-width: 450px;
+                            max-width: 550px;
                             flex: 2;
 
                             > div.novo-control-input {
@@ -101,6 +102,7 @@ novo-form, novo-dynamic-form {
 
                                 novo-quick-note {
                                     margin-bottom: 10px;
+
                                     textarea {
                                         line-height: inherit;
                                     }
@@ -110,7 +112,8 @@ novo-form, novo-dynamic-form {
                                     }
                                 }
 
-                                input, textarea {
+                                input,
+                                textarea {
                                     font-size: 1em;
                                     background: transparent !important;
                                     border: none;
@@ -160,10 +163,13 @@ novo-form, novo-dynamic-form {
                                     flex: 1;
                                     position: relative;
 
-                                    > i.bhi-search, > i.bhi-clock, > i.bhi-calendar, > i.bhi-times {
+                                     > i.bhi-calendar,
+                                     > i.bhi-clock,
+                                     > i.bhi-times,
+                                    > i.bhi-search {
                                         position: absolute;
                                         right: 0;
-                                        top: 0
+                                        top: 0;
                                     }
 
                                     > i.bhi-times {
@@ -171,7 +177,8 @@ novo-form, novo-dynamic-form {
                                         font-size: 1.1em;
                                     }
 
-                                    > novo-time-picker, > novo-date-picker {
+                                     > novo-date-picker,
+                                    > novo-time-picker {
                                         position: absolute;
                                         top: 100%;
                                         left: 0;
@@ -206,7 +213,9 @@ novo-form, novo-dynamic-form {
                                         padding-bottom: 0;
 
                                         &.ng-touched.ng-invalid:not(.ng-pristine) {
-                                            > input, > input:focus, > input:hover {
+                                             > input:focus,
+                                             > input:hover,
+                                            > input {
                                                 border-bottom-color: transparent !important;
                                             }
                                         }
@@ -217,6 +226,7 @@ novo-form, novo-dynamic-form {
 
                                         novo-picker {
                                             padding-bottom: 0;
+
                                             > input {
                                                 border: none;
                                             }
@@ -281,8 +291,8 @@ novo-form, novo-dynamic-form {
                                                 color: rgba(0, 0, 0, .3);
                                             }
 
-                                            > h4,
-                                            > p {
+                                             > p,
+                                            > h4 {
                                                 margin: 0;
                                                 max-width: none;
                                                 padding: 0;
@@ -292,8 +302,7 @@ novo-form, novo-dynamic-form {
                                                 font-weight: 500;
                                             }
 
-                                            > p {
-                                            }
+                                            > p {}
                                         }
 
                                         section {
@@ -391,8 +400,7 @@ novo-form, novo-dynamic-form {
         display: flex;
         flex-flow: row wrap;
 
-        input {
-        }
+        input {}
 
         .street-address {
             flex: 3 3 75%;
@@ -456,7 +464,6 @@ novo-form, novo-dynamic-form {
         }
     }
 }
-
 @keyframes iconEnter {
     0% {
         opacity: 0;
