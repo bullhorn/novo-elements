@@ -1,4 +1,4 @@
-<novo-editor [(ngModel)]="editorValue"></novo-editor>
+<novo-editor [name]="'demoEditor'" [(ngModel)]="editorValue" #editor></novo-editor>
 
 <p>Value:</p>
 <p [innerHtml]="editorValue"></p>

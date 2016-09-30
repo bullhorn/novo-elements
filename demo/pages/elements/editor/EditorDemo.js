@@ -9,6 +9,8 @@ const template = `
     <p>Basic HTML editor using CK Editor.</p>
 
     <h5>Basic</h5>
+    <button theme="primary" (click)="insertText(editor)">Insert "Hello World" at Cursor</button>
+    <br />
     <div class="example editor-demo">${BasicDemoTpl}</div>
     <code-snippet [code]="BasicDemoTpl"></code-snippet>
 </div>
@@ -22,5 +24,9 @@ export class EditorDemoComponent {
     constructor() {
         this.BasicDemoTpl = BasicDemoTpl;
         this.editorValue = '<p>I AM A PRE-RENDERED VALUE</p><h1>TEST</h1>';
+    }
+
+    insertText(editor) {
+        editor.insertText('Hello World');
     }
 }
