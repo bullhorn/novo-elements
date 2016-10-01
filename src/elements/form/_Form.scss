@@ -450,6 +450,10 @@ novo-form {
                                 align-items: center;
                                 max-width: 450px;
                                 width: 100%;
+
+                                .tiles, .checklist, .address, .file, .select, .checkbox {
+                                    margin-top: 0.5em;
+                                }
                             }
 
                             .error-message {
