@@ -27,6 +27,8 @@ novo-modal {
     }
     & > section {
         padding: 1em 3em;
+        max-height: 500px;
+        overflow: auto;
     }
     & > footer {
         display: flex;
