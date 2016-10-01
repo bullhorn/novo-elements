@@ -217,6 +217,11 @@ export class NovoPickerElement extends OutsideClick {
     onTouched() {
         this.blur.emit(event);
         this.onModelTouched();
+
+        // If we don't have a value then clear the text in the picker
+        if (!this._value) {
+            this.term = '';
+        }
     }
 
     //From ControlValueAccessor interface
