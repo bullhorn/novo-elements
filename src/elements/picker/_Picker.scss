@@ -7,12 +7,14 @@ novo-picker {
     padding-bottom: 5px;
     transition: all 200ms ease-in-out;
     position: relative;
+
     &.selected,
     &.selected:hover {
         & + i {
             color: $positive;
         }
     }
+
     input {
         padding-top: 10px;
         border: none;
@@ -33,6 +35,13 @@ novo-picker {
         cursor: pointer;
         font-size: 1.15em;
     }
+
+    div.picker-results-container {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        margin-top: 0.5em;
+    }
 }
 
 quick-note-results,
@@ -42,8 +51,6 @@ picker-results,
 entity-chip-results {
     display: block;
     position: relative;
-    max-width: 270px;
-    min-width: 180px;
     cursor: pointer;
 }
 

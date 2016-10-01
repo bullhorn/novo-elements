@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef } from '@angular/core';
+import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -42,9 +42,15 @@ const PICKER_VALUE_ACCESSOR = {
             autocomplete="off" />
         <i class="bhi-search" *ngIf="!_value"></i>
         <i class="bhi-times" *ngIf="_value" (click)="clearValue(true)"></i>
+        <div class="picker-results-container">
+            <span #results></span>
+        </div>
     `
 })
 export class NovoPickerElement extends OutsideClick {
+    // Container for the results
+    @ViewChild('results', { read: ViewContainerRef }) results:ViewContainerRef;
+
     // Emitter for selects
     select:EventEmitter = new EventEmitter();
     focus:EventEmitter = new EventEmitter();
@@ -62,12 +68,10 @@ export class NovoPickerElement extends OutsideClick {
     onModelTouched:Function = () => {
     };
 
-    constructor(element:ElementRef, componentUtils:ComponentUtils, view:ViewContainerRef) {
+    constructor(element:ElementRef, componentUtils:ComponentUtils) {
         super(element);
         // Component Utils
         this.componentUtils = componentUtils;
-        // View to load next to
-        this.view = view;
         // Instance of element
         this.element = element;
         // Bind to the active change event from the OutsideClick
@@ -167,7 +171,7 @@ export class NovoPickerElement extends OutsideClick {
             // Update existing list or create the DOM element
             this.popup.instance.term = this.term;
         } else {
-            this.popup = this.componentUtils.appendNextToLocation(this.resultsComponent, this.view);
+            this.popup = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
             this.popup.instance.parent = this;
             this.popup.instance.config = this.config;
             this.popup.instance.term = this.term;
