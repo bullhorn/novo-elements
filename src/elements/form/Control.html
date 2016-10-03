@@ -16,7 +16,7 @@
             <!--TextArea-->
             <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)"></textarea>
             <!--Editor-->
-            <novo-editor *ngSwitchCase="'editor'" [formControlName]="control.key"></novo-editor>
+            <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key"></novo-editor>
             <!--HTML5 Select-->
             <select [id]="control.key" *ngSwitchCase="'native-select'" [formControlName]="control.key">
                 <option *ngIf="control.placeholder" value="" disabled selected hidden>{{control.placeholder}}</option>
