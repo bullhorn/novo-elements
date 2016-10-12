@@ -352,11 +352,11 @@ $table-border-color: #f5f5f5; // Tables
             margin-right: 0;
 
             &.checked {
-                color: $company;
+                color: $positive;
             }
 
             .bhi-checkbox-indeterminate {
-                color: $company;
+                color: $positive;
             }
         }
     }

@@ -17,11 +17,12 @@ const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
 @Component({
     selector: 'novo-editor',
     providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
-    template: '<textarea #host></textarea>'
+    template: '<textarea [name]="name" [id]="name" #host></textarea>'
 })
 export class NovoCKEditorElement {
     @Input() config;
     @Input() debounce;
+    @Input() name;
 
     @Output() change = new EventEmitter();
     @Output() ready = new EventEmitter();
@@ -141,5 +142,10 @@ export class NovoCKEditorElement {
 
     registerOnTouched(fn) {
         this.onTouched = fn;
+    }
+
+    insertText(text) {
+        let trimmedText = text.trim();
+        this.instance.insertText(trimmedText);
     }
 }

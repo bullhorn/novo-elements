@@ -1,3 +1,18 @@
+<a name="1.1.7"></a>
+## [1.1.7](https://github.com/bullhorn/novo-elements/compare/v1.1.6...v1.1.7) (2016-10-04)
+
+
+
+<a name="1.1.6"></a>
+## [1.1.6](https://github.com/bullhorn/novo-elements/compare/v1.1.5...v1.1.6) (2016-10-03)
+
+
+### Bug Fixes
+
+* **Picker:** Fixing issue in picker where if a value wasn't selected the text remained, closes [#203](https://github.com/bullhorn/novo-elements/issues/203) ([dbdc68d](https://github.com/bullhorn/novo-elements/commit/dbdc68d))
+
+
+
 <a name="1.1.5"></a>
 ## [1.1.5](https://github.com/bullhorn/novo-elements/compare/v1.1.4...v1.1.5) (2016-09-30)
 

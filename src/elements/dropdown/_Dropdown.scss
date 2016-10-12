@@ -19,6 +19,7 @@ novo-dropdown {
 
     &.active {
         .dropdown-container {
+            overflow: auto;
             max-height: 500px;
             display: block;
             z-index: 1000;

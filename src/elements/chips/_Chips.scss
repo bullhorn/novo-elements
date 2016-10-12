@@ -85,13 +85,15 @@ entity-chips {
         }
     }
 
-    picker-results {
-        top: 100%;
-    }
-
     novo-picker {
+        position: inherit;
+
         > i {
             display: none;
+        }
+
+        div.picker-results-container {
+            left: 0;
         }
     }
 
@@ -181,8 +183,6 @@ entity-chips {
     picker-results {
         position: absolute;
         color: black;
-        width: 90%;
-        max-width: none;
 
         novo-list {
             max-height: 600px;
