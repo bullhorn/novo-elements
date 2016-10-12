@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
@@ -24,7 +24,24 @@ const TILES_VALUE_ACCESSOR = {
             </div>
             <span class="active-indicator" [hidden]="(activeTile === undefined || activeTile === null)"></span>
         </div>
-    `
+    `,
+    animations: [
+        trigger('heroState', [
+            state('inactive', style({
+                transform: 'translate(0px, 25px) scale(1.1)'
+            })),
+            state('active', style({
+                transform: 'translate(-1px, 0px) scale(1)'
+            })),
+            state('horizontal', style({
+                transform: 'translateY(0px. 0px) scale(1)'
+            })),
+            transition('inactive => active', animate('200ms ease-in')),
+            transition('active => inactive', animate('200ms ease-out')),
+            transition('inactive => horizontal', animate('0ms ease-in')),
+            transition('horizontal => inactive', animate('0ms ease-out'))
+        ])
+    ]
 })
 export class NovoTilesElement implements ControlValueAccessor {
     @Input() name:String;
