@@ -1,3 +1,13 @@
+<a name="1.1.8"></a>
+## [1.1.8](https://github.com/bullhorn/novo-elements/compare/v1.1.7...v1.1.8) (2016-10-12)
+
+
+### Features
+
+* **form:** TextBoxControl emits change events on input ([16c7870](https://github.com/bullhorn/novo-elements/commit/16c7870))
+
+
+
 <a name="1.1.7"></a>
 ## [1.1.7](https://github.com/bullhorn/novo-elements/compare/v1.1.6...v1.1.7) (2016-10-04)
 
