@@ -135,6 +135,10 @@ export class NovoControlElement extends OutsideClick {
         this.checkState();
     }
 
+    emitChange(value) {
+        this.change.emit(value);
+    }
+
     checkState() {
         setTimeout(() => {
             if (this.form.layout === 'vertical') {
