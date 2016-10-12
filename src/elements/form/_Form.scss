@@ -163,10 +163,10 @@ novo-form {
                                     flex: 1;
                                     position: relative;
 
-                                     > i.bhi-clock,
+                                     > i.bhi-calendar,
                                      > i.bhi-search,
                                      > i.bhi-times,
-                                    > i.bhi-calendar {
+                                    > i.bhi-clock {
                                         position: absolute;
                                         right: 0;
                                         top: 0;
@@ -177,8 +177,8 @@ novo-form {
                                         font-size: 1.1em;
                                     }
 
-                                     > novo-time-picker,
-                                    > novo-date-picker {
+                                     > novo-date-picker,
+                                    > novo-time-picker {
                                         position: absolute;
                                         top: 100%;
                                         left: 0;
@@ -189,7 +189,11 @@ novo-form {
                                         top: 100%;
                                         left: 0;
                                         display: flex;
-                                        box-shadow: 0 1px 3px rgba(#000, .1);
+                                        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+                                        border-bottom-right-radius: 3px;
+                                        border-bottom-left-radius: 3px;
+                                        border-top-left-radius: 3px;
+                                        border-top-right-radius: 3px;
 
                                         novo-date-picker {
                                             border-top-right-radius: 0;
@@ -213,9 +217,9 @@ novo-form {
                                         padding-bottom: 0;
 
                                         &.ng-touched.ng-invalid:not(.ng-pristine) {
-                                             > input,
+                                             > input:focus,
                                              > input:hover,
-                                            > input:focus {
+                                            > input {
                                                 border-bottom-color: transparent !important;
                                             }
                                         }
@@ -291,8 +295,8 @@ novo-form {
                                                 color: rgba(0, 0, 0, .3);
                                             }
 
-                                             > h4,
-                                            > p {
+                                             > p,
+                                            > h4 {
                                                 margin: 0;
                                                 max-width: none;
                                                 padding: 0;
