@@ -21,9 +21,11 @@ export class BaseControl {
         this.associatedEntity = config.associatedEntity || null;
         this.optionsType = config.optionsType || null;
         this.forceClear = new EventEmitter();
-
         if (this.required) {
             this.validators.push(Validators.required);
+        }
+        if (config.maxlength) {
+            this.maxlength = config.maxlength;
         }
     }
 }
