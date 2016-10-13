@@ -1,3 +1,13 @@
+<a name="1.1.9"></a>
+## [1.1.9](https://github.com/bullhorn/novo-elements/compare/v1.1.8...v1.1.9) (2016-10-13)
+
+
+### Features
+
+* **form:** allowing setting of maxlength on input ([d398fc6](https://github.com/bullhorn/novo-elements/commit/d398fc6))
+
+
+
 <a name="1.1.8"></a>
 ## [1.1.8](https://github.com/bullhorn/novo-elements/compare/v1.1.7...v1.1.8) (2016-10-12)
 
