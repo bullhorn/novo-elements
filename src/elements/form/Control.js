@@ -40,7 +40,6 @@ export class NovoControlElement extends OutsideClick {
     constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
         this.labels = labels;
-
         this.onActiveChange.subscribe(active => {
             if (!active) {
                 setTimeout(() => {

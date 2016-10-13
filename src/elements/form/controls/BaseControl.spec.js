@@ -69,7 +69,8 @@ describe('Control: BaseControl', () => {
                 headerConfig: { test: 'TEST_HEADER_CONFIG' },
                 currencyFormat: 'TEST_CURRENCY_FORMAT',
                 associatedEntity: 'ENTITY',
-                optionsType: 'TYPE'
+                optionsType: 'TYPE',
+                maxlength: 100
             });
         });
 
@@ -114,6 +115,9 @@ describe('Control: BaseControl', () => {
         });
         it('should set the optionsType', () => {
             expect(control.optionsType).toEqual('TYPE');
+        });
+        it('should set maxlength', () => {
+            expect(control.maxlength).toEqual(100);
         });
     });
 });
