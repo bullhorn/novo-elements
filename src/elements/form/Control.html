@@ -14,7 +14,7 @@
                 <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
             </div>
             <!--TextArea-->
-            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)"></textarea>
+            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)" [maxlength]="control.maxlength"></textarea>
             <!--Editor-->
             <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key"></novo-editor>
             <!--HTML5 Select-->
