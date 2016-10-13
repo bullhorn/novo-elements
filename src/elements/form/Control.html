@@ -9,12 +9,12 @@
             <!--Text-based Inputs-->
             <!--TODO prefix/suffix on the control-->
             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'">
-                <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (focus)="toggleState()" (blur)="toggleState()" (input)="emitChange($event)">
+                <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (focus)="toggleState()" (blur)="toggleState()" (input)="emitChange($event)" [maxlength]="control.maxlength">
                 <label class="input-label" *ngIf="control.subType === 'currency'">{{control.currencyFormat}}</label>
                 <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
             </div>
             <!--TextArea-->
-            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)"></textarea>
+            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)" [maxlength]="control.maxlength"></textarea>
             <!--Editor-->
             <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key"></novo-editor>
             <!--HTML5 Select-->
