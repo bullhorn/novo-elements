@@ -1,1 +1,5 @@
-novo-tiles {}
+novo-tiles {
+    &.hidden {
+        display: none;
+    }
+}
