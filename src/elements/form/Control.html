@@ -1,6 +1,6 @@
-<div class="novo-control-container" [formGroup]="form">
+<div class="novo-control-container" [formGroup]="form" *ngIf="!control.hidden || control.type === 'hidden'">
     <!--Label-->
-    <label [attr.for]="control.key" [@heroState]="state">{{control.label}}</label>
+    <label [attr.for]="control.key" [@verticalState]="state">{{control.label}}</label>
     <div class="novo-control-input-container">
         <!--Required Indicator-->
         <i [hidden]="!control.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>

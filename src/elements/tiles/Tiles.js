@@ -3,8 +3,6 @@ import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
-// Vendor
-import { Observable } from 'rxjs/Rx';
 
 // Value accessor for the component (supports ngModel)
 const TILES_VALUE_ACCESSOR = {
@@ -63,7 +61,6 @@ export class NovoTilesElement implements ControlValueAccessor {
     ngOnInit() {
         this.name = this.name || '';
         this.setupOptions();
-        this.getTilesWidth();
     }
 
     setupOptions() {
@@ -103,18 +100,6 @@ export class NovoTilesElement implements ControlValueAccessor {
         if (item) {
             this.activeTile = item.value;
             this.moveTile();
-        }
-    }
-
-    getTilesWidth() {
-        let parent = this.element.nativeElement.querySelector('div.tile-container');
-        if (parent) {
-            const observer = Observable.of(parent);
-            const interval = Observable.interval(300);
-            let result = observer.concat(interval);
-            result.subscribe(() => {
-                if (this.activeTile) this.moveTile();
-            });
         }
     }
 

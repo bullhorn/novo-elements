@@ -88,7 +88,7 @@ export default {
             type: 'tiles',
             dataType: 'String',
             label: 'Next Action',
-            required: true,
+            required: false,
             options: [
                 {
                     value: 'none',

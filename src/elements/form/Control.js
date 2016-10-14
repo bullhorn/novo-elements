@@ -9,7 +9,7 @@ import { NovoLabelService } from './../../services/novo-label-service';
     selector: 'novo-control',
     template: require('./Control.html'),
     animations: [
-        trigger('heroState', [
+        trigger('verticalState', [
             state('inactive', style({
                 transform: 'translate(0px, 25px) scale(1.1)'
             })),
@@ -23,10 +23,23 @@ import { NovoLabelService } from './../../services/novo-label-service';
             transition('active => inactive', animate('200ms ease-out')),
             transition('inactive => horizontal', animate('0ms ease-in')),
             transition('horizontal => inactive', animate('0ms ease-out'))
+        ]),
+        trigger('hiddenState', [
+            state('hidden', style({
+                'opacity': '0',
+                'height': '0',
+                'min-height': '0'
+            })),
+            state('shown', style({
+                'opacity': '1',
+                'height': 'auto',
+                'min-height': '44px'
+            })),
+            transition('hidden <=> shown', animate('200ms ease-in'))
         ])
     ],
     host: {
-        '[hidden]': 'control.hidden || control.type === \'hidden\''
+        '[@hiddenState]': 'calcHideState()'
     }
 })
 export class NovoControlElement extends OutsideClick {
@@ -35,6 +48,7 @@ export class NovoControlElement extends OutsideClick {
     @Output() change:EventEmitter = new EventEmitter();
     formattedValue:String = '';
     state:String = 'horizontal';
+    hideState:String = 'hidden';
     alwaysActive:Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
 
     constructor(element:ElementRef, labels:NovoLabelService) {
@@ -132,6 +146,14 @@ export class NovoControlElement extends OutsideClick {
     modelChange(value) {
         this.change.emit(value);
         this.checkState();
+    }
+
+    calcHideState() {
+        let hideState;
+        if (this.control) {
+            hideState = (this.control.hidden || this.control.type === 'hidden') ? 'hidden' : 'shown';
+        }
+        return hideState;
     }
 
     emitChange(value) {
