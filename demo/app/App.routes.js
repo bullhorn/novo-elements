@@ -29,7 +29,8 @@ import {
     EditorDemoComponent,
     TipWellDemoComponent,
     TableDemoComponent,
-    FormDemoComponent
+    FormDemoComponent,
+    CategoryDropdownDemoComponent
 } from './../pages/elements/all';
 
 export const routes:Routes = [
@@ -68,6 +69,7 @@ export const routes:Routes = [
     { path: 'slides', component: SlidesDemoComponent, title: 'Slides', section: 'components' },
     { path: 'editor', component: EditorDemoComponent, title: 'Editor', section: 'components' },
     { path: 'tipwell', component: TipWellDemoComponent, title: 'Tip Well', section: 'components' },
+    { path: 'category-dropdown', component: CategoryDropdownDemoComponent, title: 'Category Dropdown', section: 'components' },
 
     // Utils
     { path: 'utils', component: UtilsDemoComponent, title: 'Utils', section: 'utils' },
