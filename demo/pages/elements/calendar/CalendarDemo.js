@@ -12,14 +12,14 @@ const template = `
     <h1>Date and Time Pickers</h1>
     <p>These allow users to easily select a time and date. It comes in a handful of varieties based on the content of the field.</p>
 
-    <h2>Calendar Picker  <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/date-picker">(source)</a></small></h2>
+    <h2>Calendar Picker  <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/date-picker">(source)</a></small></h2>
     <p>The calendar picker is used to select a date. It appears in all date picker fields.</p>
 
     <h5>Full Calendar Picker</h5>
     <div class="example demo">${CalendarDemoTpl}</div>
     <code-snippet [code]="CalendarDemoTpl"></code-snippet>
 
-    <h2>Time Picker  <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/time-picker">(source)</a></small></h2>
+    <h2>Time Picker  <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/time-picker">(source)</a></small></h2>
     <p>Time pickers come in 12 hour or 24 hour style.</p>
 
     <h5>Standalone Time Picker</h5>

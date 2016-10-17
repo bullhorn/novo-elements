@@ -7,7 +7,7 @@ import { NovoToastService } from './../../../../src/novo-elements';
 
 const template = `
 <div class="container">
-    <h1>Headers <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/header">(source)</a></small></h1>
+    <h1>Headers <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/header">(source)</a></small></h1>
     <p>Headers are used in Mainframe Record pages and some modals. </p>
 
     <h2>Types</h2>

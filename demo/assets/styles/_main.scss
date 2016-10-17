@@ -40,8 +40,13 @@ main.main-content {
     pre {
         margin: 0 0 35px;
         box-sizing: border-box;
+        font-size: 0.8em;
+        background: #F8F8F8;
+        border: 1px solid #E9EAEA;
+        color: #4C545A;
 
         code {
+            border: none;
             width: 100%;
             display: block;
             box-sizing: border-box;
@@ -166,5 +171,37 @@ main.main-content {
     switch-demo,
     tooltip-demo {
         display: block;
+    }
+}
+
+multi-code-snippet {
+    background: #F8F8F8;
+    border: 1px solid #E9EAEA;
+    display: block;
+
+    label {
+        font-size: 0.8em;
+        font-weight: 500;
+        padding: 5px 10px;
+        text-transform: uppercase;
+    }
+
+    pre {
+        margin: 0 !important;
+        font-size: 0.8em;
+        color: #4C545A;
+        border: none !important;
+
+        code {
+            border: none;
+            width: 100%;
+            display: block;
+            line-height: 1.5em;
+            padding: 15px 25px;
+
+            &.hljs {
+                background: #F9F9F9 !important;
+            }
+        }
     }
 }

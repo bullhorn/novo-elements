@@ -12,7 +12,7 @@ import LoadingButtonDemoTpl from './templates/LoadingButtonDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Button <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/button">(source)</a></small></h1>
+    <h1>Button <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/button">(source)</a></small></h1>
     <p>A button clearly indicates a point of action for the user. Bullhorn buttons
      come in a variety of themes, custom tailored to fit your use-case.</p>
 

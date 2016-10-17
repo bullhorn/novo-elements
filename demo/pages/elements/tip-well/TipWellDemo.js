@@ -7,7 +7,7 @@ import TipWellIconDemoTpl from './templates/TipWellIconDemo.html';
 
 const template = `
 <div class="container">
-    <h1>TipWell <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/tip-well">(source)</a></small></h1>
+    <h1>TipWell <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/tip-well">(source)</a></small></h1>
     <p>
         This component is meant to be akin to Bootstrap's 'well'. It's a small container for help text.
     </p>

@@ -9,7 +9,7 @@ import WhiteDemoTpl from './templates/WhiteDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Tabs <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/tabs">(source)</a></small></h1>
+    <h1>Tabs <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/tabs">(source)</a></small></h1>
     <p>Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets. Tabs in Bullhorn have two different themes; A 'color' theme for tabbed navigation on a colored background, and a 'white' theme for tabs on a white background.</p>
 
     <h2>Themes</h2>

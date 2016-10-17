@@ -28,6 +28,7 @@ export { NovoTableModule } from './elements/table/Table.module';
 export { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './elements/form/Form.module';
 export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
+export { NovoCategoryDropdownModule } from './elements/category-dropdown/CategoryDropdown.module';
 
 // Export all services
 export { NovoToastService } from './elements/toast/ToastService';

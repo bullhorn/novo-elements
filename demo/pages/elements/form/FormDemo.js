@@ -16,7 +16,7 @@ import {
 
 const template = `
 <div class="container">
-    <h1>Forms <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/form">(source)</a></small></h1>
+    <h1>Forms <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/form">(source)</a></small></h1>
     <p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'</p>
     <h2>Static Form</h2>
     <p>Static forms <code>&lt;novo-form /&gt;</code>.
