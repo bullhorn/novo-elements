@@ -28,9 +28,24 @@ novo-form {
                     }
                 }
 
-                &.disabled {
-                    pointer-events: none;
-                    novo-control {
+                novo-control {
+                    margin-top: 1rem;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 100%;
+                    min-height: 44px;
+
+                    .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+                        border-bottom: 1px solid $negative !important;
+
+                        &.valid-number {
+                            border-bottom: none !important;
+                        }
+                    }
+
+                    &.disabled {
+                        pointer-events: none;
                         input {
                             &::-webkit-input-placeholder {
                                 color: $light !important;
@@ -51,23 +66,6 @@ novo-form {
 
                         .bhi-search {
                             display: none;
-                        }
-                    }
-                }
-
-                novo-control {
-                    margin-top: 1rem;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    width: 100%;
-                    min-height: 44px;
-
-                    .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
-                        border-bottom: 1px solid $negative !important;
-
-                        &.valid-number {
-                            border-bottom: none !important;
                         }
                     }
 
@@ -462,10 +460,11 @@ novo-form {
         .novo-form-container {
             form {
                 > div.novo-form-row {
+                    novo-control {
+                        margin-top: 0;
 
-                    &.disabled {
-                        pointer-events: none;
-                        novo-control {
+                        &.disabled {
+                            pointer-events: none;
                             input {
                                 &::-webkit-input-placeholder {
                                     color: $light !important;
@@ -488,9 +487,6 @@ novo-form {
                                 display: none;
                             }
                         }
-                    }
-                    novo-control {
-                        margin-top: 0;
 
                         .novo-control-container {
                             flex-direction: column;

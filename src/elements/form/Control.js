@@ -26,7 +26,8 @@ import { NovoLabelService } from './../../services/novo-label-service';
         ])
     ],
     host: {
-        '[hidden]': 'control.hidden || control.type === \'hidden\''
+        '[hidden]': 'control.hidden || control.type === \'hidden\'',
+        '[class.disabled]': 'control.disabled'
     }
 })
 export class NovoControlElement extends OutsideClick {
