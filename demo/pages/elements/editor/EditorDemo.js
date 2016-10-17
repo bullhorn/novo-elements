@@ -5,7 +5,7 @@ import BasicDemoTpl from './templates/BasicEditorDemo.html';
 
 const template = `
 <div class="container">
-    <h1>CK Editor <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/editor">(source)</a></small></h1>
+    <h1>CK Editor <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/editor">(source)</a></small></h1>
     <p>Basic HTML editor using CK Editor.</p>
 
     <h5>Basic</h5>

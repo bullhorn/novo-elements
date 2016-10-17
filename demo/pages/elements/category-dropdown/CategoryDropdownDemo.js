@@ -13,7 +13,7 @@ import FooterDemoTpl from './templates/FooterDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Category Dropdown <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/dropdown">(source)</a></small></h1>
+    <h1>Category Dropdown <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/category-dropdown">(source)</a></small></h1>
     <p>A category dropdown that allows the items to be grouped and searchable.</p>
 
     <h5>Basic</h5>

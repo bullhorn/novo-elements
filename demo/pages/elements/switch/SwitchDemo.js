@@ -5,7 +5,7 @@ import SwitchDemoTpl from './templates/SwitchDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Switches & Toggles <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/switch">(source)</a></small></h1>
+    <h1>Switches & Toggles <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/switch">(source)</a></small></h1>
     <p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
 
     <h2>Types</h2>

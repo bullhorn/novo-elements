@@ -10,7 +10,7 @@ const template = `
 <div class="container">
     <h1>Toast Notifications
         <small>
-            <a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/toast">(source)</a>
+            <a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/toast">(source)</a>
         </small>
     </h1>
     <p>Toasts are used as system notifications. They can contain custom

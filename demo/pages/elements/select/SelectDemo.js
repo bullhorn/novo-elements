@@ -7,7 +7,7 @@ import LongSelectDemoTpl from './templates/LongSelectDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Select <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/select">(source)</a></small></h1>
+    <h1>Select <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/select">(source)</a></small></h1>
     <p>The select element (<code>novo-select</code>) represents a control that presents a menu of options. The options
     within are set by the <code>items</code> attribute. Options can be pre-selected for the user using the <code>value</code>
     attribute.</p>

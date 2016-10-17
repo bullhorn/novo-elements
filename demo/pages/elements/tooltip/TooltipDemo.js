@@ -9,7 +9,7 @@ import TooltipToggleDemoTpl from './templates/TooltipToggleDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Tooltips <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/tooltip">(source)</a></small></h1>
+    <h1>Tooltips <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/tooltip">(source)</a></small></h1>
     <p>We use the <a href="http://kushagragour.in/lab/hint/">hint.css</a> module for our tooltip implementation, wrapping it inside a directive.</p>
 
     <h2>Helper</h2>
