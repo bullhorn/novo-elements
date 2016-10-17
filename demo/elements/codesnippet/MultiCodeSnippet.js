@@ -19,7 +19,7 @@ export class MultiCodeSnippet {
     @Input()
     set code(code) {
         this._sections = Object.keys(code);
-        this._map = code;
+        this._map = Object.assign({}, code);
     }
 
     constructor(sanitizer:DomSanitizer) {

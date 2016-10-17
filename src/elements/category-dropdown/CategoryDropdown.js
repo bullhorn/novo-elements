@@ -10,6 +10,11 @@ import { Helpers } from './../../utils/Helpers';
     template: `
         <ng-content select="button"></ng-content>
         <div class="dropdown-container" *ngIf="active">
+            <div class="novo-category-dropdown-search" *ngIf="search">
+                <input type="text" [placeholder]="search.placeholder || 'SEARCH'" [value]="_query" (input)="queryCategories($event.target.value)"/>
+                <i class="bhi-search" *ngIf="!_query"></i>
+                <i class="bhi-times" *ngIf="_query" (click)="clearQuery($event)"></i>
+            </div>
             <novo-nav theme="white" [outlet]="novoCategoryDropdownOutlet" direction="vertical">
                 <novo-tab *ngFor="let category of _categories">
                     <span>{{ category }} ({{ _categoryMap[category].length }})</span>
@@ -24,9 +29,15 @@ import { Helpers } from './../../utils/Helpers';
                             <item-end class="novo-category-dropdown-hover" *ngIf="item.hoverIcon && !item.selected"><i class="bhi-{{ item.hoverIcon }}"></i></item-end>
                             <item-end *ngIf="item.selected"><i class="bhi-check"></i></item-end>
                         </novo-list-item>
+                        <novo-list-item *ngIf="_categoryMap[category].length === 0 && search" class="novo-category-dropdown-empty-item">
+                            <item-content>{{ search.emptyMessage || 'There are no items.' }}</item-content>
+                        </novo-list-item>
                     </novo-list>
                 </novo-nav-content>
             </novo-nav-outlet>
+            <footer *ngIf="footer" class="novo-category-dropdown-footer-align-{{ footer.align || 'right' }}">
+                <a *ngFor="let link of footer.links" (click)="link.callback($event)">{{ link.label }}</a>
+            </footer>
         </div>
     `,
     host: {
@@ -35,15 +46,34 @@ import { Helpers } from './../../utils/Helpers';
     }
 })
 export class NovoCategoryDropdownElement extends OutsideClick {
+    _query:string = '';
     _categoryMap:any = {};
     _categories:string[] = [];
+    // Boolean to keep the selection persist when closing the dropdown
     @Input() persistSelection:boolean = false;
+    // Boolean to close the dropdown on selection
     @Input() closeOnSelect:boolean = false;
-    @Output('select') _select:EventEmitter = new EventEmitter();
+    // Search Config
+    // {
+    //   placeholder: 'STRING' // defaults to "SEARCH" - placeholder for search input
+    //   emptyMessage: 'STRING' // defaults to "There are no items." - empty message when there are no items in the category
+    //   debounce: 'NUMBER (in MS)' // defaults to 300ms - debounce time for the search
+    //   compare: 'FUNCTION' // default to simple indexOf - compare function for category search, should accept (query, item) and return true/false
+    // }
+    @Input() search:any;
+    // Footer config
+    // {
+    //   align: 'STRING' // defaults to "right" - alignment of the links
+    //   links: 'ARRAY' // array of links to go into the footer, be away of spacing - { label, callback } for the object inside
+    // }
+    @Input() footer:any;
+    // Event that is emitted whenever an item is selected
+    @Output('itemSelected') _select:EventEmitter = new EventEmitter();
 
     @Input()
     set categories(categories:any) {
-        this._categoryMap = categories;
+        this._masterCategoryMap = Object.assign({}, categories);
+        this._categoryMap = Object.assign({}, categories);
         this._categories = Object.keys(categories);
     }
 
@@ -89,5 +119,33 @@ export class NovoCategoryDropdownElement extends OutsideClick {
         if (this.closeOnSelect) {
             this.toggleActive();
         }
+    }
+
+    clearQuery(event) {
+        Helpers.swallowEvent(event);
+        this._query = '';
+        // Reset the categories
+        this._categories.forEach(category => {
+            this._categoryMap[category] = this._masterCategoryMap[category];
+        });
+    }
+
+    queryCategories(query) {
+        // Save the query
+        this._query = query;
+        // Check timeout
+        if (this._queryTimeout) {
+            clearTimeout(this._queryTimeout);
+        }
+        // Store a timeout, to debounce user input
+        this._queryTimeout = setTimeout(() => {
+            this._categories.forEach(category => {
+                if (this.search.compare) {
+                    this._categoryMap[category] = this._masterCategoryMap[category].filter(item => this.search.compare(query, item));
+                } else {
+                    this._categoryMap[category] = this._masterCategoryMap[category].filter(item => ~item.label.toLowerCase().indexOf(query.toLowerCase()));
+                }
+            });
+        }, this.search.debounce || 300);
     }
 }
