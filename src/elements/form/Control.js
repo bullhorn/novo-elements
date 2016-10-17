@@ -39,8 +39,7 @@ import { NovoLabelService } from './../../services/novo-label-service';
         ])
     ],
     host: {
-        '[class.disabled]': 'control.disabled',
-        '[@hiddenState]': 'calcHideState()'
+        '[class.disabled]': 'control.disabled'
     }
 })
 export class NovoControlElement extends OutsideClick {
@@ -49,7 +48,6 @@ export class NovoControlElement extends OutsideClick {
     @Output() change:EventEmitter = new EventEmitter();
     formattedValue:String = '';
     state:String = 'horizontal';
-    hideState:String = 'hidden';
     alwaysActive:Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
 
     constructor(element:ElementRef, labels:NovoLabelService) {
@@ -88,7 +86,7 @@ export class NovoControlElement extends OutsideClick {
 
     ngOnDestroy() {
         super.ngOnDestroy();
-        // Unlisten for clear events
+        // Un-listen for clear events
         this.control.forceClear.unsubscribe();
     }
 
@@ -147,14 +145,6 @@ export class NovoControlElement extends OutsideClick {
     modelChange(value) {
         this.change.emit(value);
         this.checkState();
-    }
-
-    calcHideState() {
-        let hideState;
-        if (this.control) {
-            hideState = (this.control.hidden || this.control.type === 'hidden') ? 'hidden' : 'shown';
-        }
-        return hideState;
     }
 
     emitChange(value) {
