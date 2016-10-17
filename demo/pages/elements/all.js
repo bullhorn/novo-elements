@@ -23,3 +23,4 @@ export * from './editor/EditorDemo';
 export * from './tip-well/TipWellDemo';
 export * from './table/TableDemo';
 export * from './form/FormDemo';
+export * from './category-dropdown/CategoryDropdownDemo';

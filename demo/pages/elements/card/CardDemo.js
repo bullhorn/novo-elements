@@ -12,7 +12,7 @@ import { NovoToastService } from './../../../../src/novo-elements';
 // TODO - actions back in
 const template = `
 <div class="container">
-    <h1>Cards <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/card">(source)</a></small></h1>
+    <h1>Cards <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/card">(source)</a></small></h1>
     <p>Components and elements for cards to make sure the loading/empty/layout views are all consistent.</p>
 
     <h5>Examples</h5>

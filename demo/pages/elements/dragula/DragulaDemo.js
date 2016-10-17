@@ -8,7 +8,7 @@ import { NovoDragulaService } from './../../../../src/novo-elements';
 
 const template = `
 <div class="container">
-    <h1>Dragula <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/dragula">(source)</a></small></h1>
+    <h1>Dragula <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/dragula">(source)</a></small></h1>
     <p>Drag and Drop directives supported by dragula</p>
 
     <h5>Examples</h5>

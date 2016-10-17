@@ -5,7 +5,7 @@ import DrawerDemoTpl from './templates/DrawerDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Drawer <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/drawer">(source)</a></small></h1>
+    <h1>Drawer <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/drawer">(source)</a></small></h1>
     <p>Drawer Blurb</p>
 
     <h2>Type</h2>

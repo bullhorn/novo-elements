@@ -116,7 +116,8 @@ export class FormUtils {
             sortOrder: field.sortOrder,
             associatedEntity: field.associatedEntity,
             optionsType: field.optionsType,
-            multiple: field.multiValue
+            multiple: field.multiValue,
+            disabled: field.disabled || false
         };
         let optionsConfig = this.getControlOptions(field, http, config);
 

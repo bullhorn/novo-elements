@@ -5,7 +5,7 @@ import DropdownDemoTpl from './templates/DropdownDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Dropdown <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/dropdown">(source)</a></small></h1>
+    <h1>Dropdown <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/dropdown">(source)</a></small></h1>
     <p>Dropdown allow users to take an action by selecting from a list of choices revealed upon opening a temporary menu.</p>
 
     <h2>Types</h2>

@@ -39,6 +39,7 @@ import { NovoLabelService } from './../../services/novo-label-service';
         ])
     ],
     host: {
+        '[class.disabled]': 'control.disabled',
         '[@hiddenState]': 'calcHideState()'
     }
 })

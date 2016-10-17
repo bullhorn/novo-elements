@@ -5,7 +5,7 @@ import TilesDemoTpl from './templates/TilesDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Tiles <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/tiles">(source)</a></small></h1>
+    <h1>Tiles <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/tiles">(source)</a></small></h1>
     <p>
         This component is intended to behave akin to the radio button component.
     </p>

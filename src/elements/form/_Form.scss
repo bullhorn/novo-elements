@@ -52,6 +52,31 @@ novo-form {
                         opacity: 0;
                     }
 
+                    &.disabled {
+                        pointer-events: none;
+                        input {
+                            &::-webkit-input-placeholder {
+                                color: $light !important;
+                            }
+                        }
+
+                        label {
+                            color: $light !important;
+                        }
+
+                        chips {
+                            border-bottom: 1px dashed $light !important;;
+
+                            chip {
+                                opacity: 0.5;
+                            }
+                        }
+
+                        .bhi-search {
+                            display: none;
+                        }
+                    }
+
                     .error-message {
                         color: $negative;
                         font-size: 0.8em;
@@ -441,6 +466,31 @@ novo-form {
                 > div.novo-form-row {
                     novo-control {
                         margin-top: 0;
+
+                        &.disabled {
+                            pointer-events: none;
+                            input {
+                                &::-webkit-input-placeholder {
+                                    color: $light !important;
+                                }
+                            }
+
+                            label {
+                                color: $light !important;
+                            }
+
+                            chips {
+                                border-bottom: 1px dashed $light !important;;
+
+                                chip {
+                                    opacity: 0.5;
+                                }
+                            }
+
+                            .bhi-search {
+                                display: none;
+                            }
+                        }
 
                         .novo-control-container {
                             flex-direction: column;

@@ -33,7 +33,7 @@ export class CustomPickerResults extends PickerResults {
 
 const template = `
 <div class="container">
-    <h1>Picker <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/picker">(source)</a></small></h1>
+    <h1>Picker <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/picker">(source)</a></small></h1>
     <p>The picker element (<code>input[picker]</code>) represents a control that presents a menu of options. The options
     within are set by the <code>items</code> attribute. Options can be pre-pickered for the user using the <code>value</code>
     attribute.</p>

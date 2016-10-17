@@ -6,7 +6,7 @@ import ThemedListDemoTpl from './templates/ThemedListDemo.html';
 
 const template = `
 <div class="container">
-    <h1>List / Item <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/list">(source)</a></small></h1>
+    <h1>List / Item <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/list">(source)</a></small></h1>
     <p>Lists are used to display rows of information like entities or entity data
     and appear on cards, our mobile app, and several other places across the Bullhorn platform.</p>
 
