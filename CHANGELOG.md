@@ -1,3 +1,13 @@
+<a name="1.1.12"></a>
+## [1.1.12](https://github.com/bullhorn/novo-elements/compare/v1.1.11...v1.1.12) (2016-10-17)
+
+
+### Bug Fixes
+
+* **categorydropdown:** Fixing the demo ([1bc3ea7](https://github.com/bullhorn/novo-elements/commit/1bc3ea7))
+
+
+
 <a name="1.1.11"></a>
 ## [1.1.11](https://github.com/bullhorn/novo-elements/compare/v1.1.10...v1.1.11) (2016-10-17)
 
