@@ -10,20 +10,20 @@ import { Helpers } from './../../utils/Helpers';
     template: `
         <ng-content select="button"></ng-content>
         <div class="dropdown-container" *ngIf="active">
-            <div class="novo-category-dropdown-search" *ngIf="search">
+            <div class="novo-category-dropdown-search" *ngIf="search" data-automation-id="novo-category-dropdown-search">
                 <input type="text" [placeholder]="search.placeholder || 'SEARCH'" [value]="_query" (input)="queryCategories($event.target.value)"/>
                 <i class="bhi-search" *ngIf="!_query"></i>
                 <i class="bhi-times" *ngIf="_query" (click)="clearQuery($event)"></i>
             </div>
             <novo-nav theme="white" [outlet]="novoCategoryDropdownOutlet" direction="vertical">
-                <novo-tab *ngFor="let category of _categories">
+                <novo-tab *ngFor="let category of _categories" [attr.data-automation-id]="category">
                     <span>{{ category }} ({{ _categoryMap[category].length }})</span>
                 </novo-tab>
             </novo-nav>
             <novo-nav-outlet #novoCategoryDropdownOutlet>
                 <novo-nav-content *ngFor="let category of _categories">
                     <novo-list direction="vertical">
-                        <novo-list-item *ngFor="let item of _categoryMap[category]" (click)="select($event, item)">
+                        <novo-list-item *ngFor="let item of _categoryMap[category]" (click)="select($event, item)" [attr.data-automation-id]="item.label">
                             <item-content>{{ item.label }}</item-content>
                             <item-end class="novo-category-dropdown-hover" *ngIf="item.hoverText && !item.selected">{{ item.hoverText }}</item-end>
                             <item-end class="novo-category-dropdown-hover" *ngIf="item.hoverIcon && !item.selected"><i class="bhi-{{ item.hoverIcon }}"></i></item-end>
