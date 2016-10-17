@@ -25,6 +25,7 @@ const template = `
     template: template
 })
 export class TilesDemoComponent {
+    shown:Boolean = false;
     constructor() {
         this.TilesDemoTpl = TilesDemoTpl;
         this.demoTiles = [
@@ -45,5 +46,9 @@ export class TilesDemoComponent {
 
     colorSelect(newColorValue) {
         this.currentColor = newColorValue;
+    }
+
+    toggleShown() {
+        this.shown = !this.shown;
     }
 }
