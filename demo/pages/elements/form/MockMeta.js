@@ -18,7 +18,8 @@ export default {
             name: 'number',
             type: 'number',
             label: 'Number',
-            required: true
+            required: true,
+            disabled: true
         },
         {
             name: 'float',

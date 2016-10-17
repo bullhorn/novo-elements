@@ -21,6 +21,7 @@ export class BaseControl {
         this.associatedEntity = config.associatedEntity || null;
         this.optionsType = config.optionsType || null;
         this.forceClear = new EventEmitter();
+        this.disabled = config.disabled || false;
         if (this.required) {
             this.validators.push(Validators.required);
         }
