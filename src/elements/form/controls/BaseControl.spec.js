@@ -51,6 +51,9 @@ describe('Control: BaseControl', () => {
         it('should set the optionsType', () => {
             expect(control.optionsType).toEqual(null);
         });
+        it('should set the disabled', () => {
+            expect(control.disabled).toEqual(false);
+        });
     });
 
     describe('With Config', () => {
@@ -70,7 +73,8 @@ describe('Control: BaseControl', () => {
                 currencyFormat: 'TEST_CURRENCY_FORMAT',
                 associatedEntity: 'ENTITY',
                 optionsType: 'TYPE',
-                maxlength: 100
+                maxlength: 100,
+                disabled: true
             });
         });
 
@@ -118,6 +122,9 @@ describe('Control: BaseControl', () => {
         });
         it('should set maxlength', () => {
             expect(control.maxlength).toEqual(100);
+        });
+        it('should set the disabled', () => {
+            expect(control.disabled).toEqual(true);
         });
     });
 });

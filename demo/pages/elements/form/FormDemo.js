@@ -117,6 +117,7 @@ export class FormDemoComponent {
         // Dynamic
         this.dynamic = formUtils.toControls(MockMeta, '$ USD', {}, 'TOKEN');
         formUtils.setInitialValues(this.dynamic, { firstName: 'Initial F Name' });
+        formUtils.setInitialValues(this.dynamic, { number: 12 });
         this.dynamicForm = formUtils.toFormGroup(this.dynamic);
         this.dynamicVertical = formUtils.toControls(MockMeta, '$ USD', {}, 'TOKEN');
         this.dynamicVerticalForm = formUtils.toFormGroup(this.dynamicVertical);

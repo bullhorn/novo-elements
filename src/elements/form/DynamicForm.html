@@ -4,7 +4,7 @@
         <ng-content select="form-subtitle"></ng-content>
     </header>
     <form class="novo-form" [formGroup]="form" autocomplete="off">
-        <div *ngFor="let control of controls" class="novo-form-row">
+        <div *ngFor="let control of controls" class="novo-form-row" [class.disabled]="control.disabled">
             <novo-control [control]="control" [form]="form"></novo-control>
         </div>
     </form>

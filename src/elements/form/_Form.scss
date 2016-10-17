@@ -28,6 +28,33 @@ novo-form {
                     }
                 }
 
+                &.disabled {
+                    pointer-events: none;
+                    novo-control {
+                        input {
+                            &::-webkit-input-placeholder {
+                                color: $light !important;
+                            }
+                        }
+
+                        label {
+                            color: $light !important;
+                        }
+
+                        chips {
+                            border-bottom: 1px dashed $light !important;;
+
+                            chip {
+                                opacity: 0.5;
+                            }
+                        }
+
+                        .bhi-search {
+                            display: none;
+                        }
+                    }
+                }
+
                 novo-control {
                     margin-top: 1rem;
                     display: flex;
@@ -435,6 +462,33 @@ novo-form {
         .novo-form-container {
             form {
                 > div.novo-form-row {
+
+                    &.disabled {
+                        pointer-events: none;
+                        novo-control {
+                            input {
+                                &::-webkit-input-placeholder {
+                                    color: $light !important;
+                                }
+                            }
+
+                            label {
+                                color: $light !important;
+                            }
+
+                            chips {
+                                border-bottom: 1px dashed $light !important;;
+
+                                chip {
+                                    opacity: 0.5;
+                                }
+                            }
+
+                            .bhi-search {
+                                display: none;
+                            }
+                        }
+                    }
                     novo-control {
                         margin-top: 0;
 
