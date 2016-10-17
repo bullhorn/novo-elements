@@ -1,3 +1,19 @@
+<a name="1.1.11"></a>
+## [1.1.11](https://github.com/bullhorn/novo-elements/compare/v1.1.10...v1.1.11) (2016-10-17)
+
+
+### Bug Fixes
+
+* **forms:** Form controls now use ngIf to show / hide rather than add a "hidden" property ([610d0ed](https://github.com/bullhorn/novo-elements/commit/610d0ed))
+
+
+### Features
+
+* **CategoryDropdown:** Adding a Categorized Dropdown Element ([24074c8](https://github.com/bullhorn/novo-elements/commit/24074c8))
+* **forms:** Add disabled element and styling to form fields ([#217](https://github.com/bullhorn/novo-elements/issues/217)) ([acb975b](https://github.com/bullhorn/novo-elements/commit/acb975b))
+
+
+
 <a name="1.1.10"></a>
 ## [1.1.10](https://github.com/bullhorn/novo-elements/compare/v1.1.9...v1.1.10) (2016-10-14)
 
