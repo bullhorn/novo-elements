@@ -91,9 +91,21 @@ export class CategoryDropdownDemoComponent {
                 { label: 'Nine', value: 9 }
             ],
             'Category 4': [
-                { label: 'Seven', value: 7 },
-                { label: 'Eight', value: 8 },
-                { label: 'Nine', value: 9 }
+                { label: 'Ten', value: 10 },
+                { label: 'Eleven', value: 11 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 },
+                { label: 'Twelve', value: 12 }
             ]
         };
         this.basicCodeSnippet = {
