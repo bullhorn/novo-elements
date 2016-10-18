@@ -37,10 +37,10 @@ export class NovoToastService {
     alert(options) {
         return new Promise((resolve) => {
             if (!this._parentViewContainer) {
-                console.error('No parent view container specified for the ToastService. Set it inside your main application. \nthis.toastService.parentViewContainer = view (ViewContainerRef)'); // eslint-disable-line
+                
+                .error('No parent view container specified for the ToastService. Set it inside your main application. \nthis.toastService.parentViewContainer = view (ViewContainerRef)'); // eslint-disable-line
                 return;
             }
-            console.log('toast alert was called');//eslint-disable-line
             let toast = this.componentUtils.appendNextToLocation(NovoToastElement, this._parentViewContainer);
             this.references.push(toast);
             this.handleAlert(toast.instance, options);
@@ -62,12 +62,10 @@ export class NovoToastService {
                 REF.destroy();
             }
         }, 300);
-        console.log('hiding toast', this.references);//eslint-disable-line
     }
 
     handleAlert(toast, options) {
         this.setToastOnSession(toast, options);
-        console.log('toast: handleAlert was called');//eslint-disable-line
         setTimeout(() => {
             this.show(toast);
         }, 20);
@@ -101,7 +99,6 @@ export class NovoToastService {
         function addClass() {
             toast.animate = true;
         }
-        console.log('showing toast');//eslint-disable-line
     }
 
     toastTimer(toast) {
