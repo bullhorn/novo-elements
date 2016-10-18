@@ -1,8 +1,6 @@
 // NG2
 import { Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
-//APP
-import { FormValidators } from './../FormValidators';
 
 export class BaseControl {
     constructor(config = {}) {
@@ -24,10 +22,6 @@ export class BaseControl {
         this.optionsType = config.optionsType || null;
         this.forceClear = new EventEmitter();
         this.disabled = config.disabled || false;
-        if (config.customValidator) {
-            this.customValidator = config.customValidator;
-            this.validators.push(FormValidators.custom);
-        }
         if (this.required) {
             this.validators.push(Validators.required);
         }
