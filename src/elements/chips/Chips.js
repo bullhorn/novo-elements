@@ -5,6 +5,8 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { Helpers } from './../../utils/Helpers';
+// Vendor
+import { Observable } from 'rxjs/Rx';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -114,16 +116,51 @@ export class NovoChipsElement extends OutsideClick {
     }
 
     setItems() {
+        this.items = [];
         if (this.model && Array.isArray(this.model)) {
-            this.items = this.model.map(v => {
-                if (this.source && this.source.format) {
-                    return { value: v, label: Helpers.interpolate(this.source.format, v) };
+            this.getItemsWithLabel(this.model).subscribe(
+                result => {
+                    if (result instanceof Array) {
+                        this.items = this.items.concat(result);
+                    } else {
+                        this.items.push(result);
+                    }
                 }
-                return { value: v, label: v };
-            });
-        } else {
-            this.items = [];
+            );
         }
+    }
+
+    getItemsWithLabel(values) {
+        return new Observable(observer => {
+            let noLabels = [];
+            for (let value of values) {
+                let label;
+                if (this.source && this.source.format) {
+                    label = Helpers.interpolate(this.source.format, value);
+                }
+                if (label) {
+                    observer.next({
+                        value,
+                        label
+                    });
+                } else if (this.source.getLabels && typeof this.source.getLabels === 'function') {
+                    noLabels.push(value);
+                } else {
+                    observer.next({
+                        value,
+                        label: value
+                    });
+                }
+            }
+            if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
+                this.source.getLabels(noLabels).then(result => {
+                    observer.next(result);
+                    observer.complete();
+                }, () => {
+                    observer.complete();
+                });
+            }
+        });
     }
 
     deselectAll() {

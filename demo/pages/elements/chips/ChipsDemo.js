@@ -97,10 +97,21 @@ export class ChipsDemoComponent {
                         resolve(abbrieviated);
                     }, 300);
                 });
+            },
+            getLabels: () => {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve(abbrieviated);
+                    }, 300);
+                });
             }
         };
+        this.avalue = [{
+            value: 'USA'
+        }, {
+            value: 'GB'
+        }];
     }
-
     onChanged() {
     }
 }

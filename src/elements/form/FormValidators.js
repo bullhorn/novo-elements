@@ -46,4 +46,21 @@ export class FormValidators {
         }
         return null;
     }
+
+    static custom(control) {
+        console.log('custom!!!');//eslint-disable-line
+        return new Promise((resolve, reject) => {
+            let customValidator = control.customValidator;
+            debugger;
+            if (customValidator && control.value &&
+            (((customValidator.hasOwnProperty('reject') && customValidator.hasOwnProperty('resolve')) || Object.getPrototypeOf(customValidator).hasOwnProperty('then')) ||
+            typeof customValidator === 'function')) {
+                console.log('calling function');//eslint-disable-line
+                customValidator.then(resolve, reject);
+            } else {
+                console.log('just resolving');//eslint-disable-line
+                resolve(true);
+            }
+        });
+    }
 }
