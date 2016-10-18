@@ -141,7 +141,6 @@ export class NovoChipsElement extends OutsideClick {
                 }
             }
             if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
-                console.log('calling getLabels for', noLabels);//eslint-disable-line
                 this.source.getLabels(noLabels).then(result => {
                     this.items = this.items.concat(result);
                     this._items.next(this.items);
