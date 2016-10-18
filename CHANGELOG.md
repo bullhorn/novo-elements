@@ -1,3 +1,13 @@
+<a name="1.1.14"></a>
+## [1.1.14](https://github.com/bullhorn/novo-elements/compare/v1.1.13...v1.1.14) (2016-10-18)
+
+
+### Features
+
+* **picker, chips:** Adding support for async labels ([bf0b08d](https://github.com/bullhorn/novo-elements/commit/bf0b08d))
+
+
+
 <a name="1.1.13"></a>
 ## [1.1.13](https://github.com/bullhorn/novo-elements/compare/v1.1.12...v1.1.13) (2016-10-17)
 
