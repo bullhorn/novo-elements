@@ -5,6 +5,8 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { Helpers } from './../../utils/Helpers';
+// Vendor
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -56,7 +58,7 @@ export class NovoChipElement {
     providers: [CHIPS_VALUE_ACCESSOR],
     template: `
         <chip
-            *ngFor="let item of items"
+            *ngFor="let item of _items | async"
             [type]="type"
             [class.selected]="item == selected"
             (remove)="remove($event, item)"
@@ -76,7 +78,7 @@ export class NovoChipElement {
             </novo-picker>
         </div>
         <i class="bhi-search"></i>
-        <label class="clear-all" *ngIf="items.length" (click)="clearValue()"><i class="bhi-times"></i> CLEAR ALL</label>
+        <label class="clear-all" *ngIf="_items.length" (click)="clearValue()"><i class="bhi-times"></i> CLEAR ALL</label>
    `,
     host: {
         '[class.with-value]': 'items.length > 0'
@@ -87,6 +89,7 @@ export class NovoChipsElement extends OutsideClick {
     focus:EventEmitter = new EventEmitter();
     blur:EventEmitter = new EventEmitter();
     items:Array = [];
+    _items = new ReplaySubject(1);
     selected:any = null;
     placeholder:string = '';
     config:Object = {};
@@ -109,21 +112,42 @@ export class NovoChipsElement extends OutsideClick {
 
     clearValue() {
         this.items = [];
+        this._items.next(this.items);
         this.value = null;
         this.onModelChange(this.value);
     }
 
     setItems() {
+        this.items = [];
         if (this.model && Array.isArray(this.model)) {
-            this.items = this.model.map(v => {
+            let noLabels = [];
+            for (let value of this.model) {
+                let label;
                 if (this.source && this.source.format) {
-                    return { value: v, label: Helpers.interpolate(this.source.format, v) };
+                    label = Helpers.interpolate(this.source.format, value);
                 }
-                return { value: v, label: v };
-            });
-        } else {
-            this.items = [];
+                if (this.source && label && label !== this.source.format) {
+                    this.items.push({
+                        value,
+                        label
+                    });
+                } else if (this.source.getLabels && typeof this.source.getLabels === 'function') {
+                    noLabels.push(value);
+                } else {
+                    this.items.push({
+                        value,
+                        label: value
+                    });
+                }
+            }
+            if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
+                this.source.getLabels(noLabels).then(result => {
+                    this.items = this.items.concat(result);
+                    this._items.next(this.items);
+                });
+            }
         }
+        this._items.next(this.items);
     }
 
     deselectAll() {
@@ -152,6 +176,7 @@ export class NovoChipsElement extends OutsideClick {
                 input.focus();
             }
         }
+        this._items.next(this.items);
     }
 
     remove(event, item) {
@@ -163,6 +188,7 @@ export class NovoChipsElement extends OutsideClick {
         this.deselectAll();
         this.value = this.items.map(i => i.value);
         this.onModelChange(this.value.length ? this.value : '');
+        this._items.next(this.items);
     }
 
     onKeyDown(event) {
