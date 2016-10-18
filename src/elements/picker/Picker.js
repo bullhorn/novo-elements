@@ -241,6 +241,14 @@ export class NovoPickerElement extends OutsideClick {
                 this.term = `${value.firstName} ${value.lastName}`;
             } else if (value && value.name) {
                 this.term = value.name;
+            } else if (this.config.getLabels && typeof this.config.getLabels === 'function') {
+                this.config.getLabels(value).then(result => {
+                    if (result) {
+                        this.term = result.label || '';
+                    } else {
+                        this.term = value;
+                    }
+                });
             } else {
                 this.term = value;
             }

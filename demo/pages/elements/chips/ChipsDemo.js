@@ -98,10 +98,12 @@ export class ChipsDemoComponent {
                     }, 300);
                 });
             },
-            getLabels: () => {
+            getLabels: (data) => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
-                        resolve(abbrieviated);
+                        let values = data.map(item => item.value);
+                        let results = abbrieviated.filter(item => values.includes(item.value));
+                        resolve(results);
                     }, 300);
                 });
             }
