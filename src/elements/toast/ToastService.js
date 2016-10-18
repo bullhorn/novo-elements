@@ -37,8 +37,7 @@ export class NovoToastService {
     alert(options) {
         return new Promise((resolve) => {
             if (!this._parentViewContainer) {
-                
-                .error('No parent view container specified for the ToastService. Set it inside your main application. \nthis.toastService.parentViewContainer = view (ViewContainerRef)'); // eslint-disable-line
+                console.error('No parent view container specified for the ToastService. Set it inside your main application. \nthis.toastService.parentViewContainer = view (ViewContainerRef)'); // eslint-disable-line
                 return;
             }
             let toast = this.componentUtils.appendNextToLocation(NovoToastElement, this._parentViewContainer);
