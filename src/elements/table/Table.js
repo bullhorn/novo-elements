@@ -160,6 +160,7 @@ export class NovoTableElement {
     @Input() config:any;
     @Input() columns:[any];
     @Input() theme:string;
+    @Input() skipSortAndFilterClear:boolean = false;
 
     @Input()
     set rows(rows) {
@@ -169,7 +170,10 @@ export class NovoTableElement {
         if (rows && rows.length > 0) {
             this.setupColumnDefaults();
         }
-        this.clearAllSortAndFilters();
+        //this is a temporary/hacky fix until async dataloading is handled within the table
+        if (!this.skipSortAndFilterClear) {
+            this.clearAllSortAndFilters();
+        }
     }
 
     get rows() {
