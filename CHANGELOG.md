@@ -1,3 +1,13 @@
+<a name="1.1.17"></a>
+## [1.1.17](https://github.com/bullhorn/novo-elements/compare/v1.1.16...v1.1.17) (2016-10-25)
+
+
+### Features
+
+* **table:** make clearing filtering/sorting optional when setting rows ([#225](https://github.com/bullhorn/novo-elements/issues/225)) ([5a4528a](https://github.com/bullhorn/novo-elements/commit/5a4528a))
+
+
+
 <a name="1.1.16"></a>
 ## [1.1.16](https://github.com/bullhorn/novo-elements/compare/v1.1.15...v1.1.16) (2016-10-24)
 
