@@ -90,9 +90,7 @@ export class FormUtils {
         }
 
         // Overrides
-        if (type === 'checkbox' && field.options) {
-            type = 'checklist';
-        } else if (type === 'picker' && field.multiValue) {
+        if (type === 'picker' && field.multiValue) {
             type = 'chips';
         } else if (type === 'entitypicker' && field.multiValue) {
             type = 'entitychips';
