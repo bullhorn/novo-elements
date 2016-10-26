@@ -34,16 +34,15 @@ export class FormUtils {
 
     determineInputType(field) {
         let type = null;
-
         // Determine TYPE because its not just 1 value that determines this.
         if (field.type === 'TO_MANY') {
-            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person'].indexOf(field.associatedEntity.entity)) {
+            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person', 'Placement'].indexOf(field.associatedEntity.entity)) {
                 type = 'entitychips';
             } else {
                 type = 'chips';
             }
         } else if (field.type === 'TO_ONE') {
-            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person'].indexOf(field.associatedEntity.entity)) {
+            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person', 'Placement'].indexOf(field.associatedEntity.entity)) {
                 type = 'entitypicker';
             } else {
                 type = 'picker';
@@ -91,9 +90,7 @@ export class FormUtils {
         }
 
         // Overrides
-        if (type === 'checkbox' && field.options) {
-            type = 'checklist';
-        } else if (type === 'picker' && field.multiValue) {
+        if (type === 'picker' && field.multiValue) {
             type = 'chips';
         } else if (type === 'entitypicker' && field.multiValue) {
             type = 'entitychips';
