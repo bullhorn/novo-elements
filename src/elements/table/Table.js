@@ -147,6 +147,7 @@ export class NovoTableHeaderElement {
     `
 })
 export class NovoTableElement {
+    _dataProvider:any = new ArrayCollection();
     _rows:[any] = [];
     modifiedRows:[any] = [];
     selected:[any] = [];
@@ -174,6 +175,22 @@ export class NovoTableElement {
 
     get rows() {
         return this._rows;
+    }
+
+
+    @Input()
+    set dataProvider(dp) {
+        this._dataProvider = Array.isArray(dp) ? new ArrayCollection(dp) : dp;
+        this.rows = this._dataProvider.list;
+        this.modifiedRows = Array.isArray(rows) ? rows.slice() : [];
+        if (dp && dp.length > 0) {
+            this.setupColumnDefaults();
+        }
+        this.clearAllSortAndFilters();
+    }
+
+    get dataProvider() {
+        return this._dataProvider;
     }
 
     @Output() onRowClick:EventEmitter = new EventEmitter();
