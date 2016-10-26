@@ -1,9 +1,9 @@
 // NG2
 import { Component, ElementRef } from '@angular/core';
 // Vendor
-import moment from 'moment/moment';
 // APP
 import { PickerResults } from './../picker-results/PickerResults';
+import { NovoLabelService } from '../../../../services/novo-label-service';
 
 @Component({
     selector: 'entity-picker-results',
@@ -69,8 +69,9 @@ import { PickerResults } from './../picker-results/PickerResults';
     }
 })
 export class EntityPickerResults extends PickerResults {
-    constructor(element:ElementRef) {
+    constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
+        this.labels = labels;
     }
 
     getIconForResult(result) {
@@ -100,7 +101,7 @@ export class EntityPickerResults extends PickerResults {
     renderTimestamp(date) {
         let timestamp = '';
         if (date) {
-            timestamp = moment(date).format('L');
+            timestamp = this.labels.formatDateWithFormat(date, 'L');
         }
         return timestamp;
     }
