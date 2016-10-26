@@ -1,7 +1,9 @@
 // NG2
 import { Component, ElementRef } from '@angular/core';
+// Vendor
 // APP
 import { PickerResults } from './../picker-results/PickerResults';
+import { NovoLabelService } from '../../../../services/novo-label-service';
 
 @Component({
     selector: 'entity-picker-results',
@@ -25,6 +27,16 @@ import { PickerResults } from './../picker-results/PickerResults';
                     <p class="company" *ngIf="match.data?.clientCorporation?.name">
                         <i class="bhi-company"></i>
                         <span [innerHtml]="highlight(match.data.clientCorporation.name, query)"></span>
+                    </p>
+                    <!-- CANDIDATE -->
+                    <p class="candidate" *ngIf="match.data.candidate && match.data.searchEntity === 'Placement'">
+                        <i class="bhi-candidate"></i>
+                        <span [innerHtml]="highlight((match.data.candidate.firstName + ' ' + match.data.candidate.lastName), term)"></span>
+                    </p>
+                    <!-- START & END DATE -->
+                    <p class="start-date" *ngIf="match.data.dateBegin && match.data.searchEntity === 'Placement'">
+                        <i class="bhi-calendar"></i>
+                        <span [innerHtml]="renderTimestamp(match.data.dateBegin) + ' - ' + renderTimestamp(match.data.dateEnd)"></span>
                     </p>
                     <!-- EMAIL -->
                     <p class="email" *ngIf="match.data.email">
@@ -57,8 +69,9 @@ import { PickerResults } from './../picker-results/PickerResults';
     }
 })
 export class EntityPickerResults extends PickerResults {
-    constructor(element:ElementRef) {
+    constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
+        this.labels = labels;
     }
 
     getIconForResult(result) {
@@ -85,6 +98,14 @@ export class EntityPickerResults extends PickerResults {
         return '';
     }
 
+    renderTimestamp(date) {
+        let timestamp = '';
+        if (date) {
+            timestamp = this.labels.formatDateWithFormat(date, 'L');
+        }
+        return timestamp;
+    }
+
     getNameForResult(result) {
         if (result) {
             switch (result.searchEntity) {
@@ -103,7 +124,14 @@ export class EntityPickerResults extends PickerResults {
                 case 'JobOrder':
                     return `${result.title || ''}`.trim();
                 case 'Placement':
-                    return `${result.candidate.firstName || ''} ${result.candidate.lastName || ''}`.trim();
+                    let label = '';
+                    if (result.candidate) {
+                        label = `${result.candidate.firstName} ${result.candidate.lastName}`.trim();
+                    }
+                    if (result.jobOrder) {
+                        label = `${label} - ${result.jobOrder.title}`.trim();
+                    }
+                    return label;
                 default:
                     return `${result.name || ''}`.trim();
             }
