@@ -1,3 +1,13 @@
+<a name="1.1.20"></a>
+## [1.1.20](https://github.com/bullhorn/novo-elements/compare/v1.1.19...v1.1.20) (2016-10-27)
+
+
+### Bug Fixes
+
+* **Form:** Ignore unsubscibe event onNgDestroy when control doesn't exist ([#228](https://github.com/bullhorn/novo-elements/issues/228)) ([54d15a7](https://github.com/bullhorn/novo-elements/commit/54d15a7))
+
+
+
 <a name="1.1.19"></a>
 ## [1.1.19](https://github.com/bullhorn/novo-elements/compare/v1.1.18...v1.1.19) (2016-10-26)
 
