@@ -74,10 +74,12 @@ export class NovoControlElement extends OutsideClick {
             }
             this.checkState();
         }
-        // Listen to clear events
-        this.control.forceClear.subscribe(() => {
-            this.clearValue();
-        });
+        if (this.control) {
+            // Listen to clear events
+            this.control.forceClear.subscribe(() => {
+                this.clearValue();
+            });
+        }
     }
 
     ngOnChanges() {
@@ -86,8 +88,10 @@ export class NovoControlElement extends OutsideClick {
 
     ngOnDestroy() {
         super.ngOnDestroy();
-        // Un-listen for clear events
-        this.control.forceClear.unsubscribe();
+        if (this.control) {
+            // Un-listen for clear events
+            this.control.forceClear.unsubscribe();
+        }
     }
 
     get errors() {
