@@ -72,13 +72,12 @@ export class Helpers {
             }
 
             if (first > second) {
-                return newSortColumn.sort === 'desc' ? -1 : 1;
+                return column.sort === 'desc' ? -1 : 1;
             }
             if (first < second) {
-                return newSortColumn.sort === 'asc' ? -1 : 1;
+                return column.sort === 'asc' ? -1 : 1;
             }
             return 0;
-        });
         };
     }
 
