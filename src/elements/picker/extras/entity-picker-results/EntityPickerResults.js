@@ -19,14 +19,14 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                 </item-title>
                 <item-content direction="horizontal">
                     <!-- COMPANY 1 -->
-                    <p class="company" *ngIf="match.data.companyName">
+                    <p class="company" *ngIf="match.data.companyName || match.data?.clientCorporation?.name">
                         <i class="bhi-company"></i>
-                        <span [innerHtml]="highlight(match.data.companyName, query)"></span>
+                        <span [innerHtml]="highlight(match.data.companyName || match.data?.clientCorporation?.name, query)"></span>
                     </p>
-                    <!-- CLIENT CORP -->
-                    <p class="company" *ngIf="match.data?.clientCorporation?.name">
-                        <i class="bhi-company"></i>
-                        <span [innerHtml]="highlight(match.data.clientCorporation.name, query)"></span>
+                    <!-- CLIENT CONTACT -->
+                    <p class="contact" *ngIf="match.data?.clientContact?.firstName">
+                        <i class="bhi-person contact person"></i>
+                        <span [innerHtml]="highlight(match.data.clientContact.firstName + ' ' + match.data.clientContact.lastName, query)"></span>
                     </p>
                     <!-- CANDIDATE -->
                     <p class="candidate" *ngIf="match.data.candidate && match.data.searchEntity === 'Placement'">
