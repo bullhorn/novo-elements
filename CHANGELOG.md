@@ -1,3 +1,13 @@
+<a name="1.1.21"></a>
+## [1.1.21](https://github.com/bullhorn/novo-elements/compare/v1.1.20...v1.1.21) (2016-10-28)
+
+
+### Bug Fixes
+
+* **Picker:** Fixing EntityPickerResults to properly work for Placements ([3321619](https://github.com/bullhorn/novo-elements/commit/3321619))
+
+
+
 <a name="1.1.20"></a>
 ## [1.1.20](https://github.com/bullhorn/novo-elements/compare/v1.1.19...v1.1.20) (2016-10-27)
 
