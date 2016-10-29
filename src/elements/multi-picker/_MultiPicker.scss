@@ -1,0 +1,12 @@
+multi-picker {
+    @extend chips;
+
+    novo-picker {
+        li {
+            &.header {
+                text-transform: uppercase;
+                font-weight: 400;
+            }
+        }
+    }
+}

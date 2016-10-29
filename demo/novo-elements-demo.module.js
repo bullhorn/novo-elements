@@ -36,7 +36,8 @@ import {
     SlidesDemoComponent,
     EditorDemoComponent,
     TipWellDemoComponent,
-    CategoryDropdownDemoComponent
+    CategoryDropdownDemoComponent,
+    MultiPickerDemoComponent
 } from './pages/elements/all';
 import { UtilsDemoComponent } from './pages/utils/utils/UtilsDemo';
 import { PipesDemoComponent } from './pages/utils/pipes/PipesDemo';
@@ -93,7 +94,8 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
         StatusCell,
         ExtraDetails,
         CustomPickerResults,
-        CategoryDropdownDemoComponent
+        CategoryDropdownDemoComponent,
+        MultiPickerDemoComponent
     ],
     imports: [
         BrowserModule,

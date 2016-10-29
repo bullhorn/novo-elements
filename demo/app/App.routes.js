@@ -30,7 +30,8 @@ import {
     TipWellDemoComponent,
     TableDemoComponent,
     FormDemoComponent,
-    CategoryDropdownDemoComponent
+    CategoryDropdownDemoComponent,
+    MultiPickerDemoComponent
 } from './../pages/elements/all';
 
 export const routes:Routes = [
@@ -55,6 +56,7 @@ export const routes:Routes = [
     { path: 'loading', component: LoadingDemoComponent, title: 'Loading', section: 'components' },
     { path: 'dropdown', component: DropdownDemoComponent, title: 'Dropdown', section: 'components' },
     { path: 'picker', component: PickerDemoComponent, title: 'Picker', section: 'components' },
+    { path: 'multi-picker', component: MultiPickerDemoComponent, title: 'MultiPicker', section: 'components' },
     { path: 'chips', component: ChipsDemoComponent, title: 'Chips', section: 'components' },
     { path: 'select', component: SelectDemoComponent, title: 'Select', section: 'components' },
     { path: 'tabs', component: TabsDemoComponent, title: 'Tabs', section: 'components' },
