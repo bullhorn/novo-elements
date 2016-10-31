@@ -31,6 +31,13 @@ export class Helpers {
     /**
      * Checks to see if the object is a string
      */
+    static isDate(obj:any) {
+        return obj instanceof Date;
+    }
+
+    /**
+     * Checks to see if the object is a string
+     */
     static isString(obj:any) {
         return typeof obj === 'string';
     }
@@ -49,10 +56,9 @@ export class Helpers {
         return typeof obj === 'function';
     }
 
-    static sortByField = (column) => {
+    static sortByField = (field, reverse) => {
         return (previous, current) => {
             //return (a[field] < b[field]) ? -1 : (a[field] > b[field]) ? 1 : 0; // eslint-disable-line
-            const field = column.name;
             let first = previous[field] || '';
             let second = current[field] || '';
 
@@ -61,7 +67,11 @@ export class Helpers {
             //     return column.compare(column.sort, first, second);
             // }
 
-            if (Helpers.isString(first) && Helpers.isString(second)) {
+            if (Helpers.isDate(first) && Helpers.isDate(second)) {
+                // Dates
+                first = first.getTime();
+                second = second.getTime();
+            } else if (Helpers.isString(first) && Helpers.isString(second)) {
                 // Basic strings
                 first = first.toLowerCase();
                 second = second.toLowerCase();
@@ -72,10 +82,9 @@ export class Helpers {
             }
 
             if (first > second) {
-                return column.sort === 'desc' ? -1 : 1;
-            }
-            if (first < second) {
-                return column.sort === 'asc' ? -1 : 1;
+                return (reverse) ? -1 : 1;
+            } else if (first < second) {
+                return (reverse) ? 1 : -1;
             }
             return 0;
         };
@@ -90,16 +99,23 @@ export class Helpers {
             if (Array.isArray(value)) {
                 results.push(value.includes(field));
             } else if (value instanceof Object) {
+                if (field instanceof Date) {
+                    field = field.getTime(); //Math.round((field.getTime() - Date.now()) / (24 * 60 * 60 * 1000));
+                }
                 if (value.min) {
                     results.push(field > value.min);
                 }
                 if (value.max) {
                     results.push(field < value.max);
                 }
-                if (value.any && value.any instanceof Array) {
-                    results.push(value.any.some(v => field.includes(v)));
+                if (value.any && Array.isArray(value.any)) {
+                    if (Array.isArray(field)) {
+                        results.push(value.any.some(v => field.includes(v)));
+                    } else {
+                        results.push(value.any.includes(field));
+                    }
                 }
-                if (value.all && value.all instanceof Array) {
+                if (value.all && Array.isArray(value.all)) {
                     results.push(value.all.every(v => field.includes(v)));
                 }
                 if (value.not) {
@@ -140,7 +156,10 @@ class Can {
         return thing !== void 0;
     }
 }
-
+/**
+ * @param {any} obj
+ * @returns
+ */
 function can(obj) {
-	    return new Can(obj);
+    return new Can(obj);
 }

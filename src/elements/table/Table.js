@@ -30,7 +30,7 @@ export class NovoTableHeaderElement {
                 <novo-pagination *ngIf="config.paging"
                                  [page]="config.paging.current"
                                  [rowOptions]="config.customRowOptions"
-                                 [totalItems]="rows.length"
+                                 [totalItems]="dataProvider.length"
                                  [itemsPerPage]="config.paging.itemsPerPage"
                                  (onPageChange)="onPageChange($event)">
                 </novo-pagination>
@@ -111,7 +111,7 @@ export class NovoTableHeaderElement {
                         {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(rows.length)}}</a>
                     </td>
                 </tr>
-                <template ngFor let-row="$implicit" [ngForOf]="rows | slice:getPageStart():getPageEnd()">
+                <template ngFor let-row="$implicit" [ngForOf]="rows">
                     <tr class="table-row" [ngClass]="row.customClass || ''" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
                         <td class="row-actions" *ngIf="config.hasDetails">
                             <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
@@ -164,9 +164,7 @@ export class NovoTableElement {
 
     @Input()
     set rows(rows) {
-        this._rows = Array.isArray(rows) ? rows.slice() : [];
-        this.rows = Array.isArray(rows) ? rows.slice() : [];
-
+        this.dataProvider = rows;
         if (rows && rows.length > 0) {
             this.setupColumnDefaults();
         }
@@ -183,14 +181,22 @@ export class NovoTableElement {
     @Input()
     set dataProvider(dp) {
         this._dataProvider = Array.isArray(dp) ? new DataProvider(dp) : dp;
-        this.rows = this._dataProvider.list;
+        this._rows = this._dataProvider.list;
+        this._dataProvider.page = this.config.paging.current;
+        this._dataProvider.pageSize = this.config.paging.itemsPerPage;
+        this.pagedData = this._rows;
+
         if (dp && dp.length > 0) {
             this.setupColumnDefaults();
         }
-        this.clearAllSortAndFilters();
-
         this._dataProvider.dataChange.subscribe((results) => {
-            this.rows = results;
+            this._rows = results;
+            // Remove all selection on sort change if selection is on
+            if (this.config.rowSelectionStyle === 'checkbox') {
+                this.pagedData = results;
+                this.pageSelected = this.pagedData.filter(r => r._selected);
+                this.rowSelectHandler();
+            }
         });
     }
     get dataProvider() {
@@ -208,12 +214,6 @@ export class NovoTableElement {
     onPageChange(event) {
         this.dataProvider.page = event.page;
         this.dataProvider.pageSize = event.itemsPerPage;
-
-        // Remove all selection on sort change if selection is on
-        if (this.config.rowSelectionStyle === 'checkbox') {
-            this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-            this.pageSelected = this.pagedData.filter(r => r._selected);
-        }
     }
 
     getOptionDataAutomationId(option) {
@@ -258,7 +258,7 @@ export class NovoTableElement {
      * @returns {number}
      */
     getPageStart() {
-        return this.config.paging ? (this.config.paging.current - 1) * this.config.paging.itemsPerPage : 0;
+        return this.config.paging ? (this.dataProvider.page - 1) * this.dataProvider.pageSize : 0;
     }
 
     /**
@@ -266,7 +266,7 @@ export class NovoTableElement {
      * @returns {*}
      */
     getPageEnd() {
-        return this.config.paging && this.config.paging.itemsPerPage > -1 ? this.getPageStart() + this.config.paging.itemsPerPage : this.rows.length;
+        return this.config.paging && this.dataProvider.pageSize > -1 ? this.getPageStart() + this.dataProvider.pageSize : this.rows.length;
     }
 
     /**
@@ -354,23 +354,25 @@ export class NovoTableElement {
         if (this.config.filtering) {
             // Array of filters
             const filters = this.columns.filter(col => col.filter && col.filter.length);
-
             if (filters.length) {
                 let query = {};
                 for (const column of filters) {
                     if (Array.isArray(column.filter)) {
                         // The filters are an array (multi-select), check value
                         if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
-                            query[column.name] = {
-                                any: column.filter.map(f => {
-                                    return {
-                                        min: f.value ? new Date(f.value.startDate).getTime() : 0,
-                                        max: f.value ? new Date(f.value.endDate).getTime() : 0
-                                    };
-                                })
-                            };
+                            query[column.name] = column.filter.map(f => {
+                                return {
+                                    min: f.value ? new Date(f.value.startDate).getTime() : 0,
+                                    max: f.value ? new Date(f.value.endDate).getTime() : 0
+                                };
+                            })[0];
                         } else if (column.type && column.type === 'date') {
-                            query[column.name] = { any: column.filter };
+                            query[column.name] = column.filter.map(f => {
+                                return {
+                                    min: f.min ? Date.now() + (f.min * (24 * 60 * 60 * 1000)) : Date.now(),
+                                    max: f.max ? Date.now() + (f.max * (24 * 60 * 60 * 1000)) : Date.now()
+                                };
+                            })[0];
                         } else {
                             let options = column.filter;
                             // We have an array of {value: '', labels: ''}
@@ -384,14 +386,16 @@ export class NovoTableElement {
                     }
                 }
                 this._dataProvider.filter = query;
+            } else {
+                this._dataProvider.filter = {};
             }
             // Trickle down to keep sort
             // this.onSortChange(this.currentSortColumn);
 
             // If paging, reset page
-            if (this.config.paging) {
-                this.config.paging.current = 1;
-            }
+            //if (this.config.paging) {
+            this.config.paging.current = 1;
+            //}
             // Remove all selection on sort change if selection is on
             if (this.config.rowSelectionStyle === 'checkbox') {
                 this.selectAll(false);
@@ -425,22 +429,18 @@ export class NovoTableElement {
      * @name onSortChange
      * @param newSortColumn
      */
-    onSortChange(newSortColumn) {
-        this.currentSortColumn = newSortColumn;
+    onSortChange(column) {
+        if (this.currentSortColumn && this.currentSortColumn !== column) {
+            this.currentSortColumn.sort = null;
+        }
+        this.currentSortColumn = column;
 
-        if (newSortColumn) {
-            this.columns.map(column => {
-                if (column.name !== newSortColumn.name) {
-                    delete column.sort;
-                }
-                return false;
-            });
-
-            this._dataProvider.sort = [{ fieldName: newSortColumn.name, options: newSortColumn }];
+        if (column) {
+            this._dataProvider.sort = [{ field: column.name, reverse: column.sort === 'desc' }];
         }
 
         // Fire table change event
-        this.fireTableChangeEvent();
+        // this.fireTableChangeEvent();
 
         // If paging, reset page
         if (this.config.paging) {
@@ -504,7 +504,7 @@ export class NovoTableElement {
             this.showSelectAllMessage = false;
         } else {
             this.indeterminate = false;
-            this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+            //this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
             for (let row of this.pagedData) {
                 row._selected = this.master;
             }
@@ -536,7 +536,7 @@ export class NovoTableElement {
      * @name rowSelectHandler
      */
     rowSelectHandler() {
-        this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+        //this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
         this.pageSelected = this.pagedData.filter(r => r._selected);
         this.selected = this.rows.filter(r => r._selected);
         if (this.pageSelected.length === 0) {

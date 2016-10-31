@@ -1,7 +1,8 @@
 {
     "extends": "bullhorn/angular2",
     "rules": {
-        "global-require": 0
+        "global-require": 0,
+        "no-console": 1
     },
     "globals": {
         "addProviders": false,

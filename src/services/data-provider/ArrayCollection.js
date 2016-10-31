@@ -23,16 +23,14 @@ export class ArrayCollection {
     dataChange:EventEmitter = new EventEmitter();
     list:Array = [];
     source:Array = [];
-    _page:number = -1;
-    _pageSize:number = -1;
 
-    constructor(value:Array) {
-        this.source = value || [];
-        this.list = this.source.splice();
+    constructor(value:Array = []) {
+        this.source = value;
+        this.list = this.source.slice();
     }
 
     get length() {
-        return this.source.length;
+        return this.list.length;
     }
 
     /**
@@ -144,9 +142,7 @@ export class ArrayCollection {
      *
      * @memberOf ArrayCollection
      */
-    invalidateItem(item:any):void {
-
-    }
+    //invalidateItem(item:any):void {}
 
     /**
      * Invalidates the item at the specified index.
@@ -155,9 +151,7 @@ export class ArrayCollection {
      *
      * @memberOf ArrayCollection
      */
-    invalidateItemAt(index:number):void {
-
-    }
+    //invalidateItemAt(index:number):void {}
 
     /**
      * Appends the specified data into the data that the data provider contains and removes any duplicate items.
@@ -183,9 +177,10 @@ export class ArrayCollection {
      * @memberOf ArrayCollection
      */
     removeAll():void {
-        let oldData = this.list.slice();
+        //let oldData = this.list.slice();
+        this.source = [];
         this.list = [];
-        this.dataChange.emit(new DataChangeEvent(DataChangeEvent.REMOVE_ALL, oldData));
+        //this.dataChange.emit(new DataChangeEvent(DataChangeEvent.REMOVE_ALL, oldData));
     }
 
     /**
@@ -250,12 +245,11 @@ export class ArrayCollection {
      *
      * @memberOf ArrayCollection
      */
-    sort(...sortArgs):Promise {
-        let results = [];
-        for (let item of sortArgs.reverse()) {
-            results.push(this.sortOn(item.fieldName, item.options));
+    sort(sorts):Promise {
+        for (let item of sorts.reverse()) {
+            this.sortOn(item.field, item.reverse);
         }
-        return Promise.all(results);
+        return Promise.resolve(this.list);
     }
 
     /**
@@ -267,21 +261,16 @@ export class ArrayCollection {
      *
      * @memberOf ArrayCollection
      */
-    sortOn(fieldName:any, options:any = null):Promise {
-        this.list = this.list.sort(Helpers.sortByField(fieldName));
-        if (options.reverse) {
-            this.list.reverse();
-        }
+    sortOn(fieldName:any, reverse:boolean = false):Promise {
+        this.list = this.list.sort(Helpers.sortByField(fieldName, reverse));
         this.dataChange.emit(new DataChangeEvent(DataChangeEvent.SORT));
-        return Promise.resolve(this.list);
+        return this.list;
     }
 
     filter(filters):Promise {
-        this.list = this.source.splice();
-        if (filters.length) {
-            for (let key in filters) { //eslint-disable-line
-                this.filterOn(key, filters[key]);
-            }
+        this.list = this.source.slice();
+        for (let key in filters) { //eslint-disable-line
+            this.filterOn(key, filters[key]);
         }
         return Promise.resolve(this.list);
     }
@@ -291,23 +280,10 @@ export class ArrayCollection {
         return this.list;
     }
 
-    page(num:number) {
-        this._page = num;
-        if (num >= 0 && this._pageSize > 0) {
-            let start = this._page * this._pageSize;
-            let end = start + this._pageSize;
-            let result = this.list.slice(start, end);
-            return Promise.resolve(result);
-        }
-
-        return Promise.resolve(this.list);
-    }
-
-    pageSize(num:number) {
-        this._pageSize = num;
-        if (num >= 0 && this._pageSize > 0) {
-            let start = this._page * this._pageSize;
-            let end = start + this._pageSize;
+    page(num:number = 1, size:number = 10) {
+        if (num >= 0) {
+            let start = (num - 1) * size;
+            let end = start + size;
             let result = this.list.slice(start, end);
             return Promise.resolve(result);
         }

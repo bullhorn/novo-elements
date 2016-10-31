@@ -3,7 +3,6 @@ import { EventEmitter } from '@angular/core';
 // App
 import { DataChangeEvent } from './DataChangeEvent';
 import { ArrayCollection } from './ArrayCollection';
-import { DataService } from './DataService';
 
 /**
  * Base Class for all Collection based data providers
@@ -92,9 +91,9 @@ export class RecordSet extends ArrayCollection {
      *
      * @memberOf ArrayCollection
      */
-    invalidateItem(item:any):void {
+    //invalidateItem(item:any):void {
         //do something
-    }
+    //}
 
     /**
      * Invalidates the item at the specified index.
@@ -103,9 +102,9 @@ export class RecordSet extends ArrayCollection {
      *
      * @memberOf ArrayCollection
      */
-    invalidateItemAt(index:number):void {
+    //invalidateItemAt(index:number):void {
         //do something
-    }
+    //}
 
     /**
      * Appends the specified data into the data that the data provider contains and removes any duplicate items.
