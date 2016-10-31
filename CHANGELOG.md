@@ -1,3 +1,14 @@
+<a name="1.1.22"></a>
+## [1.1.22](https://github.com/bullhorn/novo-elements/compare/v1.1.21...v1.1.22) (2016-10-31)
+
+
+### Bug Fixes
+
+* **button:** Fixes buttons so that they apply disabled attribute when disabled - issue [#232](https://github.com/bullhorn/novo-elements/issues/232) ([#233](https://github.com/bullhorn/novo-elements/issues/233)) ([3d6dc97](https://github.com/bullhorn/novo-elements/commit/3d6dc97))
+* **chips:** Fixing Placement ([5c4b28a](https://github.com/bullhorn/novo-elements/commit/5c4b28a))
+
+
+
 <a name="1.1.21"></a>
 ## [1.1.21](https://github.com/bullhorn/novo-elements/compare/v1.1.20...v1.1.21) (2016-10-28)
 
