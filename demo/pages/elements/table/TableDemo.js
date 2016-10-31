@@ -16,6 +16,7 @@ const template = `
 
     <h2>Types</h2>
 
+<button (click)="reload()">RELOAD</button>
     <h5>Basic Table</h5>
     <p>This is the most basic table.</p>
     <div class="example table-demo">${TableDemoTpl}</div>
@@ -99,16 +100,16 @@ export class MovieDataProvider extends DataProvider {
             let search = this.filter.Title || 'Star';
             let type = (this.filter.Type) ? this.filter.Type.any[0] : '';
             return fetch(`http://www.omdbapi.com/?s=${search}&y=${year}&type=${type}&plot=short&r=json&page=${this.pagesLoaded}`)
-            .then(response => response.json())
-            .then(result => {
-                this.collection.addItems(result.Search);
-                this.totalResults = result.totalResults;
-                let recordsNeeded = this.page * this.pageSize;
-                if (this.collection.length <= recordsNeeded) {
-                    return this.loadMore();
-                }
-                return this;
-            });
+                .then(response => response.json())
+                .then(result => {
+                    this.collection.addItems(result.Search);
+                    this.totalResults = result.totalResults;
+                    let recordsNeeded = this.page * this.pageSize;
+                    if (this.collection.length <= recordsNeeded) {
+                        return this.loadMore();
+                    }
+                    return this;
+                });
         }
         return Promise.resolve([]);
     }
@@ -122,6 +123,7 @@ export class MovieDataProvider extends DataProvider {
     get page():number {
         return this._page;
     }
+
     set page(value:number) {
         this._page = value;
         let recordsNeeded = value * this.pageSize;
@@ -135,6 +137,7 @@ export class MovieDataProvider extends DataProvider {
     get pageSize():number {
         return this._pageSize;
     }
+
     set pageSize(value:number) {
         if (this._pageSize !== value) {
             this._pageSize = value;
@@ -150,6 +153,7 @@ export class MovieDataProvider extends DataProvider {
     get filter():any {
         return this._filter;
     }
+
     set filter(value:any) {
         this._filter = value;
         this.collection.removeAll();
@@ -160,6 +164,7 @@ export class MovieDataProvider extends DataProvider {
     get sort():any {
         return this._sort;
     }
+
     set sort(value:any) {
         //console.log('Sorting on ', value);
         this._sort = value;
@@ -327,6 +332,10 @@ export class TableDemoComponent {
 
     ngOnInit() {
         this.theme = HEADER_COLORS[0];
+    }
+
+    reload() {
+        this.basic.rows = TableData.slice();
     }
 
     changeTheme() {
