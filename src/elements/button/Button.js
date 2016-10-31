@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
         '[attr.theme]': 'theme',
         '[attr.color]': 'color',
         '[attr.icon]': 'icon',
-        '[disabled]': 'loading',
         '[attr.loading]': 'loading'
     },
     template: `
