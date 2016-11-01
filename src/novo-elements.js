@@ -55,5 +55,8 @@ export * from './utils/countries/Countries';
 export * from './utils/Helpers';
 export * from './utils/component-utils/ComponentUtils';
 
+// Pipes
+export * from './pipes/plural/Plural';
+
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';
