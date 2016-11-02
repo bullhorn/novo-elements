@@ -6,8 +6,7 @@
             <util-action icon="times"></util-action>
         </utils>
     </header>
-    <novo-toast theme="danger" title="Save Failed" message="Oops! Looks like you're missing some required fields"
-                icon="caution" position="growlTopRight"></novo-toast>
+    <novo-toast [theme]="toast.theme" [icon]="toast.icon" title="Save Failed" message="Oops! Looks like you're missing some required fields"></novo-toast>
     <div class="content">
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -20,5 +19,6 @@
             sunt in culpa qui officia deserunt mollit anim id
             est laborum.
         </p>
+        <button (click)="changeToast()">Change toast!</button>
     </div>
 </div>
