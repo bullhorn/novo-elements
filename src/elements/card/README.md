@@ -22,7 +22,7 @@
     * All above properties can be passed in via a single config object (or mix/match)
 - `'padding' : Bool`
     * Toggles inner padding for card, useful for content that already has padding
-    
+
 #### Events
 - `'onClose'`
     * Fires when the close icon is clicked
@@ -33,5 +33,16 @@
 
 ## Usage
     import { NOVO_CARD_EXTRA_ELEMENTS } from 'novo-elements';
+
+# Custom Actions
+
+```html
+<novo-card [config]="fullConfig">
+    <novo-card-actions>
+        <button theme="icon" icon="info" (click)="singleAction()"></button>
+    </novo-card-actions>
+    DEMO :)
+</novo-card>
+```
 
 TODO - add rest

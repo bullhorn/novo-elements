@@ -22,18 +22,18 @@ const template = `
         <div class="actions">
             <button theme="secondary" (click)="toggleLoading()">Toggle Loading</button>
             <button theme="secondary" (click)="toggleMessage()">Toggle Message</button>
-      
+
         </div>
     </div>
     <code-snippet [code]="AttributeCardDemoTpl"></code-snippet>
 
-    <p>Basic Card (using config object)</p>
+    <p>Card (using config object and card-actions)</p>
     <div class="example">
         ${FullConfigCardDemoTpl}
         <div class="actions">
             <button theme="secondary" (click)="toggleLoadingConfig()">Toggle Loading</button>
             <button theme="secondary" (click)="toggleMessageConfig()">Toggle Message</button>
-          
+
         </div>
     </div>
     <code-snippet [code]="FullConfigCardDemoTpl"></code-snippet>
@@ -43,7 +43,7 @@ const template = `
     <div class="example">
         ${ExtrasTimelineDemoTpl}
         <div class="actions">
-          
+
         </div>
     </div>
     <code-snippet [code]="ExtrasTimelineDemoTpl"></code-snippet>
@@ -52,7 +52,7 @@ const template = `
     <div class="example">
         ${ExtrasBestTimeDemoTpl}
         <div class="actions">
-       
+
         </div>
     </div>
     <code-snippet [code]="ExtrasBestTimeDemoTpl"></code-snippet>
@@ -61,7 +61,7 @@ const template = `
     <div class="example">
         ${ExtrasChartDonutDemoTpl}
         <div class="actions">
-          
+
         </div>
     </div>
     <code-snippet [code]="ExtrasChartDonutDemoTpl"></code-snippet>
@@ -154,5 +154,9 @@ export class CardDemoComponent {
         } else {
             this.fullConfig.message = undefined;
         }
+    }
+
+    singleAction() {
+        window.alert('HELLO!');//eslint-disable-line
     }
 }
