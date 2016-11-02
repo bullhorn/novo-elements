@@ -1,9 +1,8 @@
 // NG2
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 
 @Component({
     selector: 'novo-toast',
-    inputs: ['theme', 'icon', 'title', 'message'],
     host: {
         '[class]': 'alertTheme',
         '[class.show]': 'show',
@@ -22,6 +21,11 @@ import { Component, ElementRef } from '@angular/core';
     `
 })
 export class NovoToastElement {
+    @Input() theme:string = 'danger';
+    @Input() icon:string = 'caution';
+    @Input() title:string;
+    @Input() message:string;
+
     constructor(element:ElementRef) {
         this.show = false;
         this.animate = false;
@@ -39,6 +43,12 @@ export class NovoToastElement {
             this.iconClass = `bhi-${this.icon}`;
             this.alertTheme = `${this.theme} toast-container embedded`;
         }
+    }
+
+    ngOnChanges() {
+        // set icon and styling
+        this.iconClass = `bhi-${this.icon}`;
+        this.alertTheme = `${this.theme} toast-container embedded`;
     }
 
     clickHandler(event) {
