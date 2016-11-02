@@ -1,3 +1,13 @@
+<a name="1.1.25"></a>
+## [1.1.25](https://github.com/bullhorn/novo-elements/compare/v1.1.24...v1.1.25) (2016-11-02)
+
+
+### Bug Fixes
+
+* **Toast:** Theme and Icon are now bound properly ([#236](https://github.com/bullhorn/novo-elements/issues/236)) ([823a0c3](https://github.com/bullhorn/novo-elements/commit/823a0c3))
+
+
+
 <a name="1.1.24"></a>
 ## [1.1.24](https://github.com/bullhorn/novo-elements/compare/v1.1.23...v1.1.24) (2016-11-01)
 
