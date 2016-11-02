@@ -48,13 +48,14 @@ novo-category-dropdown {
                 border-radius: 0;
                 outline: none;
                 height: 2rem;
-                width: 100%;
+                width: 95%;
                 margin: 0;
                 padding: 0;
                 box-shadow: none;
                 box-sizing: content-box;
                 transition: all 300ms;
                 color: #26282B;
+                margin-left: 10px;
 
                 &:hover {
                     border-bottom: 1px solid lighten($dark, 47%);
@@ -65,7 +66,7 @@ novo-category-dropdown {
                 }
 
                 &::-webkit-input-placeholder {
-                    color: #EAEAEA;
+                    color: #aaaaaa;
                 }
             }
 
@@ -73,8 +74,9 @@ novo-category-dropdown {
                 position: absolute;
                 top: 5px;
                 right: 5px;
-                color: #EAEAEA;
+                color: #aaaaaa;
                 font-size: 1em;
+                margin-right: 10px;
             }
 
             i.bhi-times {
@@ -92,6 +94,7 @@ novo-category-dropdown {
             > a {
                 margin-left: 10px;
                 margin-right: 0;
+                font-weight: 500;
             }
 
             &.novo-category-dropdown-footer-align-left {
