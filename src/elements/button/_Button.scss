@@ -39,6 +39,9 @@ button {
         }
 
         &[loading="true"] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
             i.loading {
                 display: flex;
                 align-items: center;

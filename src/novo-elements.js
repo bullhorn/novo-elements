@@ -58,5 +58,8 @@ export * from './utils/component-utils/ComponentUtils';
 // Providers
 export * from './novo-elements.providers';
 
+// Pipes
+export * from './pipes/plural/Plural';
+
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';

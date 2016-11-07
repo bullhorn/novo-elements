@@ -142,7 +142,16 @@ export class NovoChipsElement extends OutsideClick {
             }
             if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
                 this.source.getLabels(noLabels).then(result => {
-                    this.items = this.items.concat(result);
+                    for (let value of result) {
+                        if (value.hasOwnProperty('label')) {
+                            this.items.push({
+                                value,
+                                label: value.label
+                            });
+                        } else {
+                            this.items.push(value);
+                        }
+                    }
                     this._items.next(this.items);
                 });
             }
