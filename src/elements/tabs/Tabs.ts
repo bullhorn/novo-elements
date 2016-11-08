@@ -1,17 +1,17 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'novo-nav',
-    inputs: ['theme', 'direction', 'outlet', 'router'],
     template: '<ng-content></ng-content>'
 })
 export class NovoNavElement {
-    constructor() {
-        this.items = [];
-        this.theme = '';
-        this.direction = '';
-    }
+    @Input() theme: string = '';
+    @Input() direction: string = '';
+    @Input() outlet: string;
+    @Input() router: string;
+
+    items: Array<any> = [];
 
     select(item) {
         /**
@@ -53,7 +53,6 @@ export class NovoNavElement {
 
 @Component({
     selector: 'novo-tab',
-    inputs: ['active'],
     host: {
         '(click)': 'select()',
         '[class.active]': 'active'
@@ -66,8 +65,11 @@ export class NovoNavElement {
    `
 })
 export class NovoTabElement {
+    @Input() active: boolean = false;
+
+    nav: any;
+
     constructor(nav: NovoNavElement) {
-        this.active = this.active || false;
         this.nav = nav;
         this.nav.add(this);
     }
@@ -79,7 +81,6 @@ export class NovoTabElement {
 
 @Component({
     selector: 'novo-tab-button',
-    inputs: ['active'],
     host: {
         '(click)': 'select()',
         '[class.active]': 'active'
@@ -87,8 +88,11 @@ export class NovoTabElement {
     template: '<ng-content></ng-content>'
 })
 export class NovoTabButtonElement {
+    @Input() active: boolean = false;
+
+    nav: any;
+
     constructor(nav: NovoNavElement) {
-        this.active = this.active || false;
         this.nav = nav;
         this.nav.add(this);
     }
@@ -100,7 +104,6 @@ export class NovoTabButtonElement {
 
 @Component({
     selector: 'novo-tab-link',
-    inputs: ['active'],
     host: {
         '(click)': 'select()',
         '[class.active]': 'active'
@@ -113,8 +116,11 @@ export class NovoTabButtonElement {
     `
 })
 export class NovoTabLinkElement {
+    @Input() active: boolean = false;
+
+    nav: any;
+
     constructor(nav: NovoNavElement) {
-        this.active = this.active || false;
         this.nav = nav;
         this.nav.add(this);
     }
@@ -129,9 +135,7 @@ export class NovoTabLinkElement {
     template: '<ng-content></ng-content>'
 })
 export class NovoNavOutletElement {
-    constructor() {
-        this.items = [];
-    }
+    items: Array<any> = [];
 
     show(index) {
         let item = this.items[index];
@@ -163,22 +167,22 @@ export class NovoNavOutletElement {
 
 @Component({
     selector: 'novo-nav-content',
-    inputs: ['active'],
     host: {
         '[class.active]': 'active'
     },
     template: '<ng-content></ng-content>'
 })
 export class NovoNavContentElement {
+    @Input() active: boolean = false;
+
     constructor(outlet: NovoNavOutletElement) {
-        this.active = this.active || false;
         outlet.add(this);
     }
 }
 
 @Component({
     selector: 'novo-nav-header',
-    inputs: ['active', 'for'],
+    inputs: ['for'],
     host: {
         '[class.active]': 'active',
         '(click)': 'show($event)'
@@ -186,6 +190,10 @@ export class NovoNavContentElement {
     template: '<ng-content></ng-content>'
 })
 export class NovoNavHeaderElement {
+    @Input() active: boolean = false;
+
+    outlet: any;
+
     constructor(outlet: NovoNavOutletElement) {
         this.active = this.active || false;
         this.outlet = outlet;

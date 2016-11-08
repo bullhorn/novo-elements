@@ -44,7 +44,7 @@ export class NovoTilesElement implements ControlValueAccessor {
     @Input() required: boolean;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
 
-    _options: Array = [];
+    _options: Array<any> = [];
     activeTile: any = null;
     state: String = 'inactive';
 
@@ -54,8 +54,7 @@ export class NovoTilesElement implements ControlValueAccessor {
     onModelTouched: Function = () => {
     };
 
-    constructor(element: ElementRef) {
-        this.element = element;
+    constructor(private element: ElementRef) {
     }
 
     ngOnInit() {

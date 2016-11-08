@@ -6,28 +6,29 @@ import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 @Injectable()
 export class NovoToastService {
-    constructor(componentUtils: ComponentUtils) {
-        this.componentUtils = componentUtils;
-        this.references = [];
-        this.themes = [
-            'default',
-            'success',
-            'info',
-            'warning',
-            'danger'
-        ];
-        this.icons = {
-            default: 'bell',
-            success: 'check',
-            info: 'info',
-            warning: 'warning',
-            danger: 'remove'
-        };
-        this.defaults = {
-            hideDelay: 3500,
-            position: 'growlTopRight',
-            theme: 'default'
-        };
+    _parentViewContainer:any;
+    references: Array<any> = [];
+    themes: Array<string> = [
+        'default',
+        'success',
+        'info',
+        'warning',
+        'danger'
+    ];
+    icons: any = {
+        default: 'bell',
+        success: 'check',
+        info: 'info',
+        warning: 'warning',
+        danger: 'remove'
+    };
+    defaults: any = {
+        hideDelay: 3500,
+        position: 'growlTopRight',
+        theme: 'default'
+    };
+
+    constructor(private componentUtils: ComponentUtils) {
     }
 
     set parentViewContainer(view) {

@@ -1,9 +1,8 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'novo-tip-well',
-    inputs: ['name', 'tip', 'buttonText', 'button', 'icon'],
     template: `
         <div *ngIf="isActive">
             <div>
@@ -15,6 +14,16 @@ import { Component } from '@angular/core';
     `
 })
 export class NovoTipWellElement {
+    @Input() name:string;
+    @Input() tip: string;
+    @Input() buttonText: string;
+    @Input() button: string;
+    @Input() icon: string;
+
+    isActive: boolean = true;
+    isLocalStorageEnabled: any;
+    localStorageKey: string;
+
     constructor() {
         this.isActive = true;
         // Check if localStorage is enabled

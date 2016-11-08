@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
@@ -15,7 +15,6 @@ const TIME_PICKER_VALUE_ACCESSOR = {
 
 @Component({
     selector: 'novo-time-picker',
-    inputs: ['military'],
     outputs: ['onSelect'],
     providers: [TIME_PICKER_VALUE_ACCESSOR],
     template: `
@@ -54,14 +53,21 @@ const TIME_PICKER_VALUE_ACCESSOR = {
     }
 })
 export class NovoTimePickerElement implements ControlValueAccessor {
-    hours = 12;
-    minutes = 0;
-    value = null;
-    onSelect = new EventEmitter(false);
+    @Input() military: boolean = false;
 
-    MERIDIANS = ['am', 'pm'];
-    MINUTES = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
-
+    hours: number = 12;
+    minutes: number = 0;
+    value: any = null;
+    meridian: string;
+    inBetween: boolean;
+    hoursClass: string;
+    activeHour;
+    minutesClass: string;
+    activeMinute;
+    onSelect: EventEmitter<any> = new EventEmitter(false);
+    MERIDIANS: [string] = ['am', 'pm'];
+    MINUTES: [string] = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
+    HOURS: [string] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     model: any;
     onModelChange: Function = () => {
     };
@@ -69,8 +75,6 @@ export class NovoTimePickerElement implements ControlValueAccessor {
     };
 
     ngOnInit() {
-        // Set the hours
-        this.HOURS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
         if (this.military) {
             this.HOURS = ['0', ...this.HOURS, '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
         }

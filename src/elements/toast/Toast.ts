@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'novo-toast',
@@ -20,18 +20,20 @@ import { Component, ElementRef, Input } from '@angular/core';
         </div>
     `
 })
-export class NovoToastElement {
+export class NovoToastElement implements OnInit {
     @Input() theme: string = 'danger';
     @Input() icon: string = 'caution';
     @Input() title: string;
     @Input() message: string;
 
-    constructor(element: ElementRef) {
-        this.show = false;
-        this.animate = false;
-        this.parent = null;
-        this.ref = element;
-    }
+    show: boolean = false;
+    animate: boolean = false;
+    parent: any = null;
+    launched: boolean = false;
+    position: any;
+    time: any;
+    iconClass: string;
+    alertTheme: string;
 
     ngOnInit() {
         if (!this.launched) {

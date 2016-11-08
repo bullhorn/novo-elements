@@ -1,18 +1,8 @@
 // NG2
-import { Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
 @Directive({
     selector: '[tooltip]',
-    inputs: [
-        'tooltip:tooltip',
-        'active:tooltipActive',
-        'always:tooltipAlways',
-        'rounded:tooltipRounded',
-        'noAnimate:tooltipNoAnimate',
-        'bounce:tooltipBounce',
-        'type:tooltipType',
-        'position:tooltipPosition'
-    ],
     host: {
         '[class.hint--top]': 'tooltip && isPosition("top")',
         '[class.hint--left]': 'tooltip && isPosition("left")',
@@ -35,17 +25,20 @@ import { Directive } from '@angular/core';
     }
 })
 export class TooltipDirective {
-    ngOnInit() {
-        if (!this.position) {
-            this.position = 'top';
-        }
-    }
+    @Input() tooltip: string;
+    @Input('tooltipPosition') position: string = 'top';
+    @Input('tooltipType') type: string;
+    @Input('tooltipBounce') bounce: string;
+    @Input('tooltipNoAnimate') noAnimate: boolean;
+    @Input('tooltipRounded') rounded: boolean;
+    @Input('tooltipAlways') always: boolean;
+    @Input('tooltipActive') active: boolean;
 
-    isPosition(position) {
+    isPosition(position: string): boolean {
         return position.toLowerCase() === (this.position || '').toLowerCase();
     }
 
-    isType(type) {
+    isType(type: string): boolean {
         return type.toLowerCase() === (this.type || '').toLowerCase();
     }
 }
