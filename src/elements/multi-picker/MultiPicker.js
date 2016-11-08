@@ -22,13 +22,18 @@ const CHIPS_VALUE_ACCESSOR = {
     providers: [CHIPS_VALUE_ACCESSOR],
     template: `
         <chip
-            *ngFor="let item of _items | async"
+            *ngFor="let item of _items | async | slice:0:4"
             [type]="type"
             [class.selected]="item == selected"
             (remove)="remove($event, item)"
             (select)="select($event, item)">
             {{ item.label }}
         </chip>
+        <span *ngIf="items.length > 4">
+            <span *ngFor="let type of types">
+                <span *ngIf="notShown[type]" class="summary"> + {{notShown[type]}} more {{type}}</span>
+            </span>
+        </span>
         <div class="chip-input-container">
             <novo-picker
                 clearValueOnSelect="true"
@@ -59,6 +64,7 @@ export class NovoMultiPickerElement extends OutsideClick {
     config:Object = {};
     // private data model
     _value:Object = {};
+    notShown:Object = {};
     // Placeholders for the callbacks
     onModelChange:Function = () => {
     };
@@ -192,16 +198,36 @@ export class NovoMultiPickerElement extends OutsideClick {
                 input.focus();
             }
         }
-        this._items.next(this.items);
     }
 
     add(event) {
         if (event.value === 'ALL') {
             this.modifyAllOfType(event.type, 'select');
         } else {
-            this.select(null, event);
-            this.items.push(event);
+            this.updateItems(event, 'add');
             this.value[event.type].push({ value: event.value });
+        }
+        this.select(null, event);
+    }
+
+    updateItems(item, action) {
+        let adding = action === 'add';
+        if (adding) {
+            this.items.push(item);
+        } else {
+            if (this.items.indexOf(item) > -1) { this.items.splice(this.items.indexOf(item), 1); }
+        }
+        this.updateMoreItemsText(this.items);
+        this._items.next(this.items);
+    }
+
+    updateMoreItemsText(items) {
+        let notShown = items.slice(4);
+        if (notShown.length > 0) {
+            this.types.forEach(type => {
+                let count = notShown.filter(x => x.type === type).length;
+                this.notShown[type] = count;
+            });
         }
     }
 
@@ -222,12 +248,11 @@ export class NovoMultiPickerElement extends OutsideClick {
 
     removeItem(item) {
         item.checked = false;
-        if (this.items.indexOf(item) > -1) { this.items.splice(this.items.indexOf(item), 1); }
         this.deselectAll();
         let updatedValues = this.value[item.type].filter(x => x.value !== item.value);
         this.value[item.type] = updatedValues;
         this.onModelChange(this.value);
-        this._items.next(this.items);
+        this.updateItems(item, 'remove');
     }
 
     onKeyDown(event) {
@@ -238,7 +263,7 @@ export class NovoMultiPickerElement extends OutsideClick {
                     event.preventDefault();
                 }
                 if (this.selected) {
-                    this.remove(event, this.selected);
+                    this.remove(null, this.selected);
                 } else {
                     this.select(event, this.items[this.items.length - 1]);
                 }
@@ -260,7 +285,7 @@ export class NovoMultiPickerElement extends OutsideClick {
             values.splice(0, 1);
             let updatedItems = this.items.filter(x => x.type !== type);
             this.items = updatedItems;
-            this.items.push(allOfType[0]);
+            this.updateItems(allOfType[0], 'add');
         } else {
             values = [];
         }
@@ -295,20 +320,15 @@ export class NovoMultiPickerElement extends OutsideClick {
     }
 
     //set accessor including call the onchange callback
-    set value(selected) {
-        this.itemToAdd = '';
-        if (selected !== this._value) {
-            if (selected && selected.type) {
-                this._value = selected.type ? selected.data.slice() : {};
-            } else if (selected) {
-                this.types.forEach(x => this._value[x] = selected[x]);
-            } else {
-                this._value = {};
-                this.types.forEach(x => this._value[x] = []);
-            }
-            this.changed.emit(selected);
-            this.onModelChange(selected);
+    set value(selectedItems) {
+        if (selectedItems) {
+            this.types.forEach(x => this._value[x] = selectedItems[x]);
+        } else {
+            this._value = {};
+            this.types.forEach(x => this._value[x] = []);
         }
+        this.changed.emit(selectedItems);
+        this.onModelChange(selectedItems);
     }
 
     setInitialValue(model) {
@@ -336,8 +356,8 @@ export class NovoMultiPickerElement extends OutsideClick {
     writeValue(model:any):void {
         this.model = model;
         this.setInitialValue(model);
-        this.setItems();
         this.setInitialOptionValues();
+        this.setItems();
     }
 
     registerOnChange(fn:Function):void {

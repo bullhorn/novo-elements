@@ -1,12 +1,32 @@
 multi-picker {
     @extend chips;
 
+    .chip-input-container {
+        padding-top: 10px;
+        width: 100%;
+    }
+
+    .summary {
+        color: #6b6b6b;
+    }
+
     novo-picker {
         li {
             &.header {
                 text-transform: uppercase;
                 font-weight: 400;
+                border-top: 1px solid #e8e8e8;
+            }
+            label {
+                text-transform: capitalize;
             }
         }
     }
+
+    chip {
+        span {
+            text-transform: capitalize;
+        }
+    }
+
 }
