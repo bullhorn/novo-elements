@@ -1,14 +1,8 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'novo-card-best-time',
-    inputs: [
-        'label',
-        'time',
-        'day',
-        'hideLabel'
-    ],
     template: `
         <label *ngIf="!hideLabel" [attr.data-automation-id]="dataAutomationId + '-label'">{{ label }}</label>
         <div class="best-time">
@@ -28,7 +22,17 @@ import { Component } from '@angular/core';
         </div>
     `
 })
-export class CardBestTimeElement {
+export class CardBestTimeElement implements OnChanges {
+    @Input() label: string;
+    @Input() time: string;
+    @Input() day: string;
+    @Input() hideLabel: boolean;
+    
+    timeIcon: string;
+    timeStyle: string;
+    dayLowerCase: string;
+    dataAutomationId: string;
+    
     ngOnChanges() {
         if (this.time) {
             let timeIconAndStyle = this.getTimeOfDayStyleAndIcon(this.time);

@@ -49,6 +49,9 @@ export class NovoCategoryDropdownElement extends OutsideClick {
     _query: string = '';
     _categoryMap: any = {};
     _categories: string[] = [];
+    clickHandler: Function;
+    _masterCategoryMap: any;
+    _queryTimeout: any;
     // Boolean to keep the selection persist when closing the dropdown
     @Input() persistSelection: boolean = false;
     // Boolean to close the dropdown on selection

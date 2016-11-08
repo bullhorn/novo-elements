@@ -25,7 +25,7 @@ export class OutsideClick implements OnDestroy {
      * @param event
      * @param forceValue
      */
-    toggleActive(event, forceValue) {
+    toggleActive(event?, forceValue?) {
         // Reverse the active property (if forceValue, use that)
         this.active = !Helpers.isBlank(forceValue) ? forceValue : !this.active;
         // Bind window click events to hide on outside click

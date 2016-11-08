@@ -1,13 +1,8 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'novo-card-timeline',
-    inputs: [
-        'start',
-        'end',
-        'created'
-    ],
     template: `
         <div class="timeline-container">
             <div class="timeline-background">
@@ -21,9 +16,13 @@ import { Component } from '@angular/core';
     `
 })
 export class CardTimelineElement {
-    constructor() {
-        this.now = new Date().getFullYear();
-    }
+    @Input() start: number;
+    @Input() end: number;
+    @Input() created: number;
+
+    now: number = new Date().getFullYear();
+    length: number;
+    offset: number;;
 
     ngOnChanges() {
         this.length = ((this.end - this.start) / (this.now - this.created)) * 100;

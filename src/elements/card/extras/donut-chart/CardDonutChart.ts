@@ -1,13 +1,8 @@
 // NG2
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'novo-card-chart-donut',
-    inputs: [
-        'value',
-        'label',
-        'color'
-    ],
     template: `
         <aside id="chart-percent-{{ uid }}">
             <!-- COLORED FILL -->
@@ -28,9 +23,15 @@ import { Component, ElementRef } from '@angular/core';
         </aside>
     `
 })
-export class CardDonutChartElement {
-    constructor(element: ElementRef) {
-        this.element = element;
+export class CardDonutChartElement implements OnInit, OnChanges {
+    @Input() value: number;
+    @Input() label;
+    @Input() color;
+    chartFillMax;
+    uid;
+    isChartDrawing;
+
+    constructor(private element: ElementRef) {
         // Geometric number that represents 100% of the chart area
         this.chartFillMax = 629;
         // Unique ID for instance

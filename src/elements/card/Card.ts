@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, OnInit } from '@angular/core';
 //APP
 import { NovoLabelService } from './../../services/novo-label-service';
 
@@ -43,31 +43,27 @@ export class CardActionsElement {
         </div>
     `
 })
-export class CardElement {
+export class CardElement implements OnChanges, OnInit {
 
-    inputs: [
-        'loading',
-        'title',
-        'icon',
-        'config',
-        'message',
-        'messageIcon',
-        'refresh',
-        'close',
-        'move',
-        'padding'
-    ],
     @Input() padding: boolean = true;
     @Input() config: any = {};
-     @Input() icon: string;
-    @Input() color: string; 
-    @Input() side: string;
-    @Input() theme: string;
+    @Input() title: string;
+    @Input() message: string;
+    @Input() messageIcon: string;
+    @Input() icon: string;
+    @Input() refresh: boolean; 
+    @Input() close: boolean;
+    @Input() move: boolean;
     @Input() loading: boolean;
+    
     @Output() onClose: EventEmitter<any> = new EventEmitter();
     @Output() onRefresh: EventEmitter<any> = new EventEmitter();
     
-
+    cardAutomationId: string;
+    labels: NovoLabelService;
+    iconClass: string|null;
+    messageIconClass: string;
+    
     constructor(labels: NovoLabelService) {
         this.labels = labels;
     }
@@ -80,8 +76,8 @@ export class CardElement {
         this.config = this.config || {};
         this.cardAutomationId = `${(this.title || this.config.title || 'no-title').toLowerCase().replace(/\s/g, '-')}-card`;
 
-        let newIcon = this.icon || this.config.icon;
-        let newMessageIcon = this.messageIcon || this.config.messageIcon;
+        let newIcon: string = this.icon || this.config.icon;
+        let newMessageIcon: string = this.messageIcon || this.config.messageIcon;
         this.iconClass = newIcon ? `bhi-${newIcon}` : null;
         this.messageIconClass = newMessageIcon ? `bhi-${newMessageIcon}` : null;
     }

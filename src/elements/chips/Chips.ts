@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef, ElementRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -17,8 +17,6 @@ const CHIPS_VALUE_ACCESSOR = {
 
 @Component({
     selector: 'chip',
-    inputs: ['type'],
-    outputs: ['select', 'remove'],
     template: `
         <span (click)="onSelect($event)" [ngClass]="type">
             <i *ngIf="type" class="bhi-circle"></i>
@@ -28,8 +26,9 @@ const CHIPS_VALUE_ACCESSOR = {
   `
 })
 export class NovoChipElement {
-    select: EventEmitter<any> = new EventEmitter();
-    remove: EventEmitter<any> = new EventEmitter();
+    @Input() type: any;
+    @Output() select: EventEmitter<any> = new EventEmitter();
+    @Output() remove: EventEmitter<any> = new EventEmitter();
     entity: string;
 
     onRemove(e) {
@@ -53,8 +52,6 @@ export class NovoChipElement {
 
 @Component({
     selector: 'chips',
-    inputs: ['source', 'placeholder', 'value', 'type'],
-    outputs: ['changed', 'focus', 'blur'],
     providers: [CHIPS_VALUE_ACCESSOR],
     template: `
         <chip
@@ -85,21 +82,23 @@ export class NovoChipElement {
     }
 })
 export class NovoChipsElement extends OutsideClick {
-    changed: EventEmitter<any> = new EventEmitter();
-    focus: EventEmitter<any> = new EventEmitter();
-    blur: EventEmitter<any> = new EventEmitter();
-    items: Array = [];
-    _items = new ReplaySubject(1);
+    @Input() placeholder: string = '';
+    @Input() source: any;
+    @Input() type: any;
+    @Output() changed: EventEmitter<any> = new EventEmitter();
+    @Output() focus: EventEmitter<any> = new EventEmitter();
+    @Output() blur: EventEmitter<any> = new EventEmitter();
+    items: Array<any> = [];
     selected: any = null;
-    placeholder: string = '';
     config: Object = {};
+    model: any;
+    itemToAdd: any;
     // private data model
     _value: any = '';
+    _items = new ReplaySubject(1);
     // Placeholders for the callbacks
-    onModelChange: Function = () => {
-    };
-    onModelTouched: Function = () => {
-    };
+    onModelChange: Function = () => {};
+    onModelTouched: Function = () => {};
 
     constructor(element: ElementRef) {
         super(element);
@@ -108,6 +107,20 @@ export class NovoChipsElement extends OutsideClick {
 
     ngOnInit() {
         this.setItems();
+    }
+    //get accessor
+    get value() {
+        return this._value;
+    }
+    //set accessor including call the onchange callback
+    @Input()
+    set value(selected) {
+        this.itemToAdd = '';
+        if (selected !== this._value) {
+            this._value = selected;
+            this.changed.emit(selected);
+            this.onModelChange(selected);
+        }
     }
 
     clearValue() {
@@ -159,20 +172,20 @@ export class NovoChipsElement extends OutsideClick {
         this._items.next(this.items);
     }
 
-    deselectAll() {
+    deselectAll(event?) {
         this.selected = null;
     }
 
-    select(event, item) {
+    select(event?, item?) {
         this.blur.emit(event);
         this.deselectAll();
         this.selected = item;
     }
 
-    onFocus(e) {
+    onFocus(event?) {
         this.deselectAll();
         this.element.nativeElement.classList.add('selected');
-        this.focus.emit(e);
+        this.focus.emit(event);
     }
 
     add(event) {
@@ -216,26 +229,11 @@ export class NovoChipsElement extends OutsideClick {
         }
     }
 
-    handleOutsideClick(event) {
+    handleOutsideClick(event?) {
         // If the elements doesn't contain the target element, it is an outside click
         if (!this.element.nativeElement.contains(event.target)) {
             this.blur.emit(event);
-            this.deselectAll(event, false);
-        }
-    }
-
-    //get accessor
-    get value() {
-        return this._value;
-    }
-
-    //set accessor including call the onchange callback
-    set value(selected) {
-        this.itemToAdd = '';
-        if (selected !== this._value) {
-            this._value = selected;
-            this.changed.emit(selected);
-            this.onModelChange(selected);
+            this.deselectAll(event);
         }
     }
 
