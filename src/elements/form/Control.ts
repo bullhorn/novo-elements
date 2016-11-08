@@ -127,7 +127,7 @@ import { NovoLabelService } from './../../services/novo-label-service';
 export class NovoControlElement extends OutsideClick {
     @Input() control;
     @Input() form: FormGroup;
-    @Output() change: EventEmitter = new EventEmitter();
+    @Output() change: EventEmitter<any> = new EventEmitter();
     formattedValue: String = '';
     state: String = 'horizontal';
     alwaysActive: Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];

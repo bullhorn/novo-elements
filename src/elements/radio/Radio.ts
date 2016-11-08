@@ -30,7 +30,7 @@ const RADIO_VALUE_ACCESSOR = {
 })
 export class NovoRadioElement implements ControlValueAccessor {
     // Emitter for when the value changes
-    change: EventEmitter = new EventEmitter();
+    change: EventEmitter<any> = new EventEmitter();
 
     model: any;
     onModelChange: Function = () => {

@@ -52,9 +52,9 @@ export class NovoPickerElement extends OutsideClick {
     @ViewChild('results', { read: ViewContainerRef }) results: ViewContainerRef;
 
     // Emitter for selects
-    select: EventEmitter = new EventEmitter();
-    focus: EventEmitter = new EventEmitter();
-    blur: EventEmitter = new EventEmitter();
+    select: EventEmitter<any> = new EventEmitter();
+    focus: EventEmitter<any> = new EventEmitter();
+    blur: EventEmitter<any> = new EventEmitter();
 
     // Flag for remote filtering
     isStatic: boolean = true;

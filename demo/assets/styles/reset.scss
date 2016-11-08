@@ -1,0 +1,20 @@
+// App Container Sizing Reset
+html {
+    height: 100%;
+    width: 100%;
+
+    body {
+        height: 100%;
+        width: 100%;
+
+        demo-app {
+            height: 100%;
+            width: 100%;
+
+        }
+    }
+}
+
+*, *:after, *:before {
+    box-sizing: border-box;
+}

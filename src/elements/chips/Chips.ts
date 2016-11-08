@@ -28,8 +28,8 @@ const CHIPS_VALUE_ACCESSOR = {
   `
 })
 export class NovoChipElement {
-    select: EventEmitter = new EventEmitter();
-    remove: EventEmitter = new EventEmitter();
+    select: EventEmitter<any> = new EventEmitter();
+    remove: EventEmitter<any> = new EventEmitter();
     entity: string;
 
     onRemove(e) {
@@ -85,9 +85,9 @@ export class NovoChipElement {
     }
 })
 export class NovoChipsElement extends OutsideClick {
-    changed: EventEmitter = new EventEmitter();
-    focus: EventEmitter = new EventEmitter();
-    blur: EventEmitter = new EventEmitter();
+    changed: EventEmitter<any> = new EventEmitter();
+    focus: EventEmitter<any> = new EventEmitter();
+    blur: EventEmitter<any> = new EventEmitter();
     items: Array = [];
     _items = new ReplaySubject(1);
     selected: any = null;

@@ -180,9 +180,9 @@ export class NovoTableElement {
         return this._rows;
     }
 
-    @Output() onRowClick: EventEmitter = new EventEmitter();
-    @Output() onRowSelect: EventEmitter = new EventEmitter();
-    @Output() onTableChange: EventEmitter = new EventEmitter();
+    @Output() onRowClick: EventEmitter<any> = new EventEmitter();
+    @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
+    @Output() onTableChange: EventEmitter<any> = new EventEmitter();
 
     constructor(labels: NovoLabelService) {
         this.labels = labels;

@@ -68,7 +68,7 @@ export class NovoCategoryDropdownElement extends OutsideClick {
     // }
     @Input() footer: any;
     // Event that is emitted whenever an item is selected
-    @Output('itemSelected') _select: EventEmitter = new EventEmitter();
+    @Output('itemSelected') _select: EventEmitter<any> = new EventEmitter();
 
     @Input()
     set categories(categories: any) {

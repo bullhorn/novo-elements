@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 //APP
 import { NovoLabelService } from './../../services/novo-label-service';
 
@@ -12,22 +12,6 @@ export class CardActionsElement {
 
 @Component({
     selector: 'novo-card',
-    inputs: [
-        'loading',
-        'title',
-        'icon',
-        'config',
-        'message',
-        'messageIcon',
-        'refresh',
-        'close',
-        'move',
-        'padding'
-    ],
-    outputs: [
-        'onClose',
-        'onRefresh'
-    ],
     template: `
         <div class="novo-card" [attr.data-automation-id]="cardAutomationId" [ngClass]="{'no-padding': !padding}">
             <!--Card Header-->
@@ -60,10 +44,29 @@ export class CardActionsElement {
     `
 })
 export class CardElement {
-    config: any = {};
-    onClose: EventEmitter = new EventEmitter();
-    onRefresh: EventEmitter = new EventEmitter();
-    padding: boolean = true;
+
+    inputs: [
+        'loading',
+        'title',
+        'icon',
+        'config',
+        'message',
+        'messageIcon',
+        'refresh',
+        'close',
+        'move',
+        'padding'
+    ],
+    @Input() padding: boolean = true;
+    @Input() config: any = {};
+     @Input() icon: string;
+    @Input() color: string; 
+    @Input() side: string;
+    @Input() theme: string;
+    @Input() loading: boolean;
+    @Output() onClose: EventEmitter<any> = new EventEmitter();
+    @Output() onRefresh: EventEmitter<any> = new EventEmitter();
+    
 
     constructor(labels: NovoLabelService) {
         this.labels = labels;

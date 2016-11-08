@@ -1,9 +1,8 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'button[theme]',
-    inputs: ['theme', 'icon', 'side', 'color', 'loading'],
     host: {
         '[attr.theme]': 'theme',
         '[attr.color]': 'color',
@@ -35,10 +34,17 @@ import { Component } from '@angular/core';
         </div>
     `
 })
-export class NovoButtonElement {
+export class NovoButtonElement implements OnChanges {
+    @Input() icon: string;
+    @Input() color: string; 
+    @Input() side: string;
+    @Input() theme: string;
+    @Input() loading: boolean;
+
     leftSide: boolean = false;
     rightSide: boolean = true;
-    icon: string;
+    iconClass: string;
+    flex: string;
 
     ngOnChanges() {
         this.iconClass = (this.icon && !this.loading) ? `bhi-${this.icon}` : '';

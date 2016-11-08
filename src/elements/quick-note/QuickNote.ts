@@ -45,9 +45,9 @@ const QUICK_NOTE_VALUE_ACCESSOR = {
 })
 export class QuickNoteElement extends OutsideClick {
     // Emitter for selects
-    focus: EventEmitter = new EventEmitter();
-    blur: EventEmitter = new EventEmitter();
-    change: EventEmitter = new EventEmitter();
+    focus: EventEmitter<any> = new EventEmitter();
+    blur: EventEmitter<any> = new EventEmitter();
+    change: EventEmitter<any> = new EventEmitter();
     // Internal search string
     searchTerm: string = '';
 
