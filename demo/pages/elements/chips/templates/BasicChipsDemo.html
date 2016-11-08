@@ -1,0 +1,7 @@
+<div class="selected-value">Selected Value: {{value}}</div>
+<chips
+    [source]="static"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    (changed)="onChanged($event)">
+</chips>

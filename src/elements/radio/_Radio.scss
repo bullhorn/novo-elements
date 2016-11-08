@@ -1,0 +1,32 @@
+novo-radio {
+    margin-right: 10px;
+
+    &.vertical {
+        display: block;
+    }
+
+    > input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+    }
+
+    > label {
+        cursor: pointer;
+
+        i {
+            margin-right: 5px;
+            transition: all 200ms ease-in-out;
+
+            &.bhi-checkbox-empty,
+            &.bhi-radio-empty {
+                color: #D2D2D2;
+            }
+
+            &.bhi-checkbox-filled,
+            &.bhi-radio-filled {
+                color: $positive;
+            }
+        }
+    }
+}

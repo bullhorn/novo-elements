@@ -1,0 +1,139 @@
+{
+  "name": "novo-elements",
+  "version": "2.0.0",
+  "description": "Bullhorn's NOVO Element Repository for Angular 2",
+  "scripts": {
+    "clean": "node_modules/.bin/rimraf coverage lib dist",
+    "compile": "ngc -p tsconfig.publish.json",
+    "postpublish": "npm run deploy:gh-pages",
+    "lint": "tslint \"src/**/*.ts\"",
+    "start": "webpack-dev-server --config config/webpack.dev.js --progress --profile --watch --content-base demo/",
+    "test": "cross-env NODE_ENV=test node_modules/.bin/karma start",
+    "test:watch": "cross-env NODE_ENV=test node_modules/.bin/karma start --single-run false --auto-watch true",
+    "changelog": "conventional-changelog -i CHANGELOG.md -s -p angular -v",
+    "github-release": "conventional-github-releaser -p angular",
+    "deploy:gh-pages": "npm run build:prod && ./node_modules/.bin/gh-pages -d dist",
+    "preversion": "npm test",
+    "version": "npm run changelog && git add -A",
+    "postversion": "git push origin master && git push --tags && npm run github-release && npm publish",
+    "build:prod": "webpack --config config/webpack.prod.js --progress --profile --colors --display-error-details --display-cached --bail",
+    "lint:save": "eslint src demo -f node_modules/galaxy-parser/formatters/eslint.js > ./coverage/eslint.json",
+    "loc": "sloc src/ --format json > ./coverage/sloc.json",
+    "pregalaxy": "npm run lint:save && npm run loc",
+    "galaxy": "galaxy analyze"
+  },
+  "main": "novo-elements.js",
+  "keywords": [
+    "angular2"
+  ],
+  "author": "Joshua Godi <joshuagodi@gmail.com>",
+  "contributors": [
+    {
+      "name": "Brian Kimball",
+      "email": "bkimball@bullhorn.com"
+    },
+    {
+      "name": "Alec Sibilia",
+      "email": "asibilia@bullhorn.com"
+    },
+    {
+      "name": "Kameron Sween",
+      "email": "ksween@bullhorn.com"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bullhorn/novo-elements.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bullhorn/novo-elements/issues"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "homepage": "https://github.com/bullhorn/novo-elements#readme",
+  "dependencies": {
+    "hint.css": "2.4.1",
+    "moment": "2.15.2"
+  },
+  "peerDependencies": {
+    "@angular/common": "2.1.2",
+    "@angular/compiler": "2.1.2",
+    "@angular/core": "2.1.2",
+    "@angular/forms": "2.1.2",
+    "core-js": "2.4.1",
+    "ie-shim": "0.1.0",
+    "rxjs": "5.0.0-rc.2",
+    "zone.js": "0.6.26"
+  },
+  "devDependencies": {
+    "@angular/common": "2.1.2",
+    "@angular/compiler": "2.1.2",
+    "@angular/compiler-cli": "2.1.2",
+    "@angular/core": "2.1.2",
+    "@angular/forms": "2.1.2",
+    "@angular/http": "2.1.2",
+    "@angular/platform-browser": "2.1.2",
+    "@angular/platform-browser-dynamic": "2.1.2",
+    "@angular/router": "3.1.2",
+    "@types/jasmine": "2.5.37",
+    "@types/node": "^6.0.46",
+    "@types/webpack": "1.12.35",
+    "assets-webpack-plugin": "3.5.0",
+    "autoprefixer": "6.5.2",
+    "codelyzer": "1.0.0-beta.3",
+    "copy-webpack-plugin": "4.0.0",
+    "core-js": "2.4.1",
+    "css-loader": "0.25.0",
+    "exports-loader": "0.6.3",
+    "expose-loader": "0.7.1",
+    "extract-text-webpack-plugin": "2.0.0-beta.4",
+    "file-loader": "0.9.0",
+    "gh-pages": "0.11.0",
+    "html-webpack-plugin": "2.24.1",
+    "ie-shim": "0.1.0",
+    "imports-loader": "0.6.5",
+    "istanbul-instrumenter-loader": "1.0.0",
+    "json-loader": "0.5.4",
+    "karma": "1.3.0",
+    "karma-chrome-launcher": "2.0.0",
+    "karma-coverage": "1.1.1",
+    "karma-jasmine": "1.0.2",
+    "karma-mocha-reporter": "2.2.0",
+    "karma-remap-coverage": "0.1.2",
+    "karma-sourcemap-loader": "0.3.7",
+    "karma-webpack": "1.8.0",
+    "node-sass": "3.11.2",
+    "parse5": "2.2.3",
+    "postcss-loader": "1.1.0",
+    "protractor": "4.0.10",
+    "raw-loader": "0.5.1",
+    "rimraf": "2.5.4",
+    "rxjs": "5.0.0-rc.2",
+    "sass-loader": "4.0.2",
+    "script-ext-html-webpack-plugin": "1.3.2",
+    "source-map-loader": "0.1.5",
+    "string-replace-loader": "1.0.5",
+    "style-loader": "0.13.1",
+    "to-string-loader": "1.1.5",
+    "ts-helpers": "1.1.2",
+    "ts-loader": "^1.1.0",
+    "ts-node": "1.7.0",
+    "tslint": "4.0.0-dev.0",
+    "tslint-loader": "2.1.5",
+    "typedoc": "0.5.1",
+    "typescript": "2.0.8",
+    "url-loader": "0.5.7",
+    "webpack": "2.1.0-beta.25",
+    "webpack-dev-middleware": "1.8.4",
+    "webpack-dev-server": "2.1.0-beta.9",
+    "webpack-md5-hash": "0.0.5",
+    "webpack-merge": "0.15.0",
+    "zone.js": "0.6.26"
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3"
+  }
+}

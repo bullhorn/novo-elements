@@ -1,0 +1,4 @@
+<novo-tiles [options]="demoTiles" (onChange)="colorSelect($event)" [(ngModel)]="value"></novo-tiles>
+<hr>
+<button type="button" name="button" (click)="toggleShown()">Show Tiles</button>
+<novo-tiles *ngIf="shown" [options]="demoTiles" (onChange)="colorSelect($event)" [(ngModel)]="value"></novo-tiles>

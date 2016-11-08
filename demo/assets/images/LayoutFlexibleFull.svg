@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="190px" height="109px" viewBox="0 0 190 109" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Layout - Flexible Full</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="--Images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Layout---Flexible-Full" sketch:type="MSArtboardGroup">
+            <g id="Group" sketch:type="MSLayerGroup" transform="translate(5.000000, 4.000000)">
+                <rect id="Rectangle-51" stroke="#CCCDCC" stroke-width="2" sketch:type="MSShapeGroup" x="0.293358657"
+                      y="0" width="175.662709" height="97.9635986" rx="3"></rect>
+                <rect id="Rectangle-52" opacity="0.5" fill="#CCCDCC" sketch:type="MSShapeGroup" x="8.18902732"
+                      y="7.06562285" width="21.8472606" height="83.8323529" rx="2"></rect>
+                <rect id="Rectangle-52-Copy-5" opacity="0.5" fill="#38C6C2" sketch:type="MSShapeGroup" x="35.4281745"
+                      y="23.3663581" width="84.9966912" height="27.9441176" rx="2"></rect>
+                <rect id="Rectangle-52-Copy-8" opacity="0.5" fill="#38C6C2" sketch:type="MSShapeGroup" x="35.4281745"
+                      y="58.2965052" width="39.5875" height="27.9441176" rx="2"></rect>
+                <rect id="Rectangle-52-Copy-6" opacity="0.5" fill="#38C6C2" sketch:type="MSShapeGroup" x="125.807656"
+                      y="23.3663581" width="39.5875" height="27.9441176" rx="2"></rect>
+                <rect id="Rectangle-52-Copy-10" opacity="0.5" fill="#38C6C2" sketch:type="MSShapeGroup" x="82.3644226"
+                      y="58.2965052" width="39.5875" height="4" rx="1"></rect>
+                <rect id="Rectangle-52-Copy-11" opacity="0.5" fill="#38C6C2" sketch:type="MSShapeGroup" x="82.3644226"
+                      y="68.4230641" width="39.5875" height="4" rx="1"></rect>
+                <rect id="Rectangle-52-Copy-12" opacity="0.5" fill="#38C6C2" sketch:type="MSShapeGroup" x="82.3644226"
+                      y="77.73777" width="27.7565046" height="4" rx="1"></rect>
+            </g>
+            <rect id="Rectangle-216" opacity="0.5" fill="#CCCDCC" sketch:type="MSShapeGroup" x="39" y="11" width="135"
+                  height="10" rx="2"></rect>
+        </g>
+    </g>
+</svg>

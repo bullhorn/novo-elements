@@ -1,27 +1,45 @@
-.idea/
-logs/
+.idea
+logs
 
-.editorconfig
-.eslintrc
-.npmignore
-.babelrc
-.gitignore
-.travis.yml
-CHANGELOG.md
-CONTRIBUTING.md
-protractor.conf.js
-.eslintignore
-.codeclimate.yml
-
-config/
-src/
-.github/
+# typings
+typings
 
 # testing
 karma.conf.js
-coverage/
+test.bundle.js
+coverage
+
+#dev stuff
+.config
+.editorconfig
+.eslintrc.json
+.ng2-config.js
+.npmignore
+.travis.yml
+gulpfile.js
+protractor.conf.js
+spec-bundle.js
+tsconfig.json
+tsconfig.publish.json
+tslint.json
+typedoc.js
+wallaby.js
+angular-cli.json
 
 # demo build
-demo/
+doc
+demo
+dist
 webpack.config.js
 
+#typescript sources
+*.ts
+*.js.map
+!/bundles/*.js.map
+!*.d.ts
+!*.metadata.json
+make.js
+/components/**/*.ts
+!/components/**/*.d.ts
+
+factories

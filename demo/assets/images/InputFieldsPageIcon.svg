@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="264px" height="87px" viewBox="0 0 264 87" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>InputFieldsPageIcon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path id="path-1"
+              d="M0.54296875,0.504394531 L249.339844,0.504394531 L260.12793,13.2841797 L11.3310547,13.2841797 L0.54296875,0.504394531 L0.54296875,0.504394531 Z"></path>
+        <path id="path-3"
+              d="M0.833064795,0.817871094 L69.2492325,0.817871094 L81,12.3527832 L11.8325273,12.3527832 L0.833064795,0.817871094 L0.833064795,0.817871094 Z"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="InputFieldsPageIcon" sketch:type="MSLayerGroup" transform="translate(1.000000, 1.000000)">
+            <g id="--Images">
+                <g id="Input-Fields---Page-Icon">
+                    <g id="Group" transform="translate(1.000000, 72.000000)">
+                        <g id="mask-2" fill="#FFFFFF" sketch:type="MSShapeGroup">
+                            <path
+                                d="M0.54296875,0.504394531 L249.339844,0.504394531 L260.12793,13.2841797 L11.3310547,13.2841797 L0.54296875,0.504394531 L0.54296875,0.504394531 Z"
+                                id="path-1"></path>
+                        </g>
+                        <g id="Mask" stroke="#3399DD" sketch:type="MSShapeGroup">
+                            <path
+                                d="M0.54296875,0.504394531 L249.339844,0.504394531 L260.12793,13.2841797 L11.3310547,13.2841797 L0.54296875,0.504394531 L0.54296875,0.504394531 Z"
+                                id="path-1"></path>
+                        </g>
+                        <g id="Clipped">
+                            <mask id="mask-2" sketch:name="path-1" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <g id="path-1"></g>
+                            <g id="Group" mask="url(#mask-2)">
+                                <g transform="translate(-203.000000, -138.000000)">
+                                    <g>
+                                        <path d="M0.526287935,0.812011719 L208.026883,208.312607" id="Line"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M13.5429688,0.812011719 L221.043564,208.312607" id="Line-Copy-8"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M26.5429688,0.812011719 L234.043564,208.312607" id="Line-Copy-9"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M39.5429688,0.812011719 L247.043564,208.312607" id="Line-Copy-10"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M52.5429688,0.812011719 L260.043564,208.312607" id="Line-Copy-11"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M65.5429688,0.812011719 L270.5,209.5" id="Line-Copy-12"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M78.5429688,0.812011719 L286.043564,208.312607" id="Line-Copy-13"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M91.5429688,0.812011719 L299.043564,208.312607" id="Line-Copy-14"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M104.542969,0.812011719 L312.043564,208.312607" id="Line-Copy-15"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M117.542969,0.812011719 L325.043564,208.312607" id="Line-Copy-16"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M130.542969,0.812011719 L338.043564,208.312607" id="Line-Copy-18"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M143.542969,0.812011719 L351.043564,208.312607" id="Line-Copy-19"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M156.542969,0.812011719 L364.043564,208.312607" id="Line-Copy-20"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M169.542969,0.812011719 L377.043564,208.312607" id="Line-Copy-21"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M182.542969,0.812011719 L390.043564,208.312607" id="Line-Copy-22"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M195.542969,0.812011719 L403.043564,208.312607" id="Line-Copy-23"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M208.542969,0.812011719 L416.043564,208.312607" id="Line-Copy-24"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M221.542969,0.812011719 L429.043564,208.312607" id="Line-Copy-25"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M234.542969,0.812011719 L442.043564,208.312607" id="Line-Copy-26"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M247.542969,0.812011719 L455.043564,208.312607" id="Line-Copy-27"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M260.542969,0.812011719 L468.043564,208.312607" id="Line-Copy-28"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M273.542969,0.812011719 L481.043564,208.312607" id="Line-Copy-29"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M286.542969,0.812011719 L494.043564,208.312607" id="Line-Copy-30"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M299.542969,0.812011719 L507.043564,208.312607" id="Line-Copy-31"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M312.542969,0.812011719 L520.043564,208.312607" id="Line-Copy-32"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M325.542969,0.812011719 L533.043564,208.312607" id="Line-Copy-33"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M338.542969,0.812011719 L546.043564,208.312607" id="Line-Copy-34"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M351.542969,0.812011719 L559.043564,208.312607" id="Line-Copy-35"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M364.542969,0.812011719 L572.043564,208.312607" id="Line-Copy-36"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                    <g id="Group"
+                       transform="translate(256.491274, 43.499924) scale(1, -1) rotate(90.000000) translate(-256.491274, -43.499924) translate(212.991274, 35.999924)">
+                        <g id="mask-4" transform="translate(0.999924, 0.991274)" fill="#FFFFFF"
+                           sketch:type="MSShapeGroup">
+                            <path
+                                d="M0.833064795,0.817871094 L72.912113,0.817871094 L85.2919958,12.3527832 L12.4214191,12.3527832 L0.833064795,0.817871094 L0.833064795,0.817871094 Z"
+                                id="path-3"></path>
+                        </g>
+                        <g id="Mask" transform="translate(1.999924, 1.991274)" stroke="#3399DD"
+                           sketch:type="MSShapeGroup">
+                            <path
+                                d="M0.813691195,0.817871094 L71.2164825,0.817871094 L83.308461,12.3527832 L12.1325489,12.3527832 L0.813691195,0.817871094 L0.813691195,0.817871094 Z"
+                                id="path-3"></path>
+                        </g>
+                        <g id="Clipped" transform="translate(0.999924, 1.991274)">
+                            <mask id="mask-4" sketch:name="path-3" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <g id="path-3"></g>
+                            <g id="Group" mask="url(#mask-4)">
+                                <g transform="translate(-261.000000, -138.000000)">
+                                    <g>
+                                        <path d="M65.542969,0.812011719 L273.043564,208.312607" id="Line-Copy-22"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M78.542969,0.812011719 L286.043564,208.312607" id="Line-Copy-23"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M91.542969,0.812011719 L299.043564,208.312607" id="Line-Copy-24"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M104.542969,0.812011719 L312.043564,208.312607" id="Line-Copy-25"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M117.542969,0.812011719 L325.043564,208.312607" id="Line-Copy-26"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M130.542969,0.812011719 L338.043564,208.312607" id="Line-Copy-27"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M143.542969,0.812011719 L351.043564,208.312607" id="Line-Copy-28"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M156.542969,0.812011719 L364.043564,208.312607" id="Line-Copy-29"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M169.542969,0.812011719 L377.043564,208.312607" id="Line-Copy-30"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M182.542969,0.812011719 L390.043564,208.312607" id="Line-Copy-31"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M194.542969,0.812011719 L402.043564,208.312607" id="Line-Copy-32"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M208.542969,0.812011719 L416.043564,208.312607" id="Line-Copy-33"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M221.542969,0.812011719 L429.043564,208.312607" id="Line-Copy-34"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M234.542969,0.812011719 L442.043564,208.312607" id="Line-Copy-35"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                        <path d="M247.542969,0.812011719 L455.043564,208.312607" id="Line-Copy-36"
+                                              stroke="#3399DD" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                    <rect id="Rectangle-253" stroke="#3399DD" sketch:type="MSShapeGroup" x="0" y="0.0512695" width="250"
+                          height="72.453125" rx="3"></rect>
+                    <path d="M19.3852681,55.929688 L229.396057,55.929688" id="Path-196" stroke="#EB6845"
+                          sketch:type="MSShapeGroup"></path>
+                    <path
+                        d="M220.720611,33.5997012 L220.720611,44.9201397 L226.381076,39.2596743 L220.720611,33.5997012 L220.720611,33.5997012 Z"
+                        id="Page-1" fill="#EB6845" sketch:type="MSShapeGroup"
+                        transform="translate(223.550844, 39.259920) rotate(90.000000) translate(-223.550844, -39.259920) "></path>
+                    <text id="Status" fill="#EB6845" sketch:type="MSTextLayer" font-family="Roboto"
+                          font-size="13.6533333" font-weight="normal">
+                        <tspan x="18.5625" y="37.9296875" fill="#000000">Status</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
