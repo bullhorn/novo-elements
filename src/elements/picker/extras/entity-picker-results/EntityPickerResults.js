@@ -13,10 +13,12 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
             (click)="selectMatch($event)"
             [ngClass]="{active: isActive(match)}"
             (mouseenter)="selectActive(match)">
-                <item-avatar [icon]="getIconForResult(match.data)"></item-avatar>
-                <item-title>
-                    <span [innerHtml]="highlight(getNameForResult(match.data), query)"></span>
-                </item-title>
+                <item-header>
+                    <item-avatar [icon]="getIconForResult(match.data)"></item-avatar>
+                    <item-title>
+                        <span [innerHtml]="highlight(getNameForResult(match.data), query)"></span>
+                    </item-title>
+                </item-header>
                 <item-content direction="horizontal">
                     <!-- COMPANY 1 -->
                     <p class="company" *ngIf="match.data.companyName || match.data?.clientCorporation?.name">

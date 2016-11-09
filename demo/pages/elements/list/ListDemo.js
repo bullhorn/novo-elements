@@ -132,10 +132,6 @@ export class ListDemoComponent {
                 item.icon.name = (obj.sentiment.rating === 'positive') ? 'bhi-trending-up' : 'bhi-trending-down';
             }
 
-            if (obj.sentiment.type === 'probability') {
-                item.icon.name = (obj.sentiment.rating === 'positive') ? 'bhi-bar-positive' : 'bhi-bar-negative';
-            }
-
             item.icon.sentiment = obj.sentiment.rating;
             item.comment = obj.sentiment.comment;
             item.timeAgo = obj.dateCreated;
