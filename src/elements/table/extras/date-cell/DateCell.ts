@@ -1,11 +1,10 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 // APP
 import { BaseRenderer } from '../base-renderer/BaseRenderer';
 
 @Component({
     selector: 'date-cell',
-    inputs: ['value'],
     template: `
         <div class="date-cell">
             <label>{{ value | date }}</label>
@@ -13,4 +12,5 @@ import { BaseRenderer } from '../base-renderer/BaseRenderer';
     `
 })
 export class DateCell extends BaseRenderer {
+    @Input() value: any;
 }

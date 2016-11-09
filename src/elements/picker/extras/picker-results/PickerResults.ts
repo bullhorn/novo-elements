@@ -35,10 +35,15 @@ import { Observable } from 'rxjs/Rx';
 })
 export class PickerResults {
     _term: string = '';
-    matches: Array = [];
+    matches: any = [];
     hasError: boolean = false;
     isLoading: boolean = true;
     isStatic: boolean = true;
+    config: any;
+    activeMatch: any;
+    parent: any;
+    element: ElementRef;
+    labels: NovoLabelService;
 
     constructor(element: ElementRef, labels: NovoLabelService) {
         this.element = element;
@@ -107,7 +112,7 @@ export class PickerResults {
      * @description This function structures an array of nodes into an array of objects with a
      * 'name' field by default.
      */
-    structureArray(collection: Array): Array {
+    structureArray(collection: any): any {
         let dataArray = collection.data ? collection.data : collection;
         if (dataArray && (typeof dataArray[0] === 'string' || typeof dataArray[0] === 'number')) {
             return collection.map((item) => {
@@ -131,7 +136,7 @@ export class PickerResults {
      * @description This function loops through the picker options and creates a filtered list of objects that contain
      * the newSearch.
      */
-    filterData(matches): Array {
+    filterData(matches): Array<any> {
         if (this.term && matches) {
             return matches.filter((match) => {
                 return ~String(match.label).toLowerCase().indexOf(this.term.toLowerCase());
@@ -174,7 +179,7 @@ export class PickerResults {
 
     scrollToActive() {
         let list = this.element.nativeElement;
-        //let list = element.querySelector('ul');
+        // let list = element.querySelector('ul');
         let index = this.matches.indexOf(this.activeMatch);
         list.scrollTop = 65 * (index - 1);
     }
@@ -205,7 +210,7 @@ export class PickerResults {
      *
      * @description
      */
-    selectMatch(event) {
+    selectMatch(event?: any) {
         if (event) {
             event.stopPropagation();
             event.preventDefault();

@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, OnInit, OnChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick'; // TODO - change imports
@@ -41,31 +41,30 @@ const SELECT_VALUE_ACCESSOR = {
         '[class.active]': 'active'
     }
 })
-export class NovoSelectElement extends OutsideClick {
-    @Input() options: Array;
-    @Input() placeholder: String = 'Select...';
+export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges {
+    @Input() options: Array<any>;
+    @Input() placeholder: string = 'Select...';
     @Input() readonly: boolean;
     @Input() headerConfig: any;
     @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
+    selectedIndex: number = -1;
+    empty: boolean = true;
+    header: any = {
+        open: false,
+        valid: true,
+        value: ''
+    };
+    createdItem: any;
+    selected: any;
     model: any;
     onModelChange: Function = () => {
     };
     onModelTouched: Function = () => {
     };
 
-    constructor(element: ElementRef, labels: NovoLabelService) {
+    constructor(element: ElementRef, private labels: NovoLabelService) {
         super(element);
-
-        // Defaults
-        this.selectedIndex = -1;
-        this.empty = true;
-        this.labels = labels;
-        this.header = {
-            open: false,
-            valid: true,
-            value: ''
-        };
     }
 
     ngOnInit() {
@@ -188,7 +187,7 @@ export class NovoSelectElement extends OutsideClick {
         };
     }
 
-    toggleActive(event, forceValue) {
+    toggleActive(event?, forceValue?) {
         // Reverse the active property (if forceValue, use that)
         this.active = forceValue || !this.active;
         // Bind window click events to hide on outside click
@@ -202,7 +201,6 @@ export class NovoSelectElement extends OutsideClick {
     }
 
     saveHeader() {
-        //save value, select value, close list
         if (this.header.value) {
             this.headerConfig.onSave(this.header.value);
             this.createdItem = this.header.value;

@@ -6,38 +6,29 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
     "noImplicitAny": false,
-    "noEmitHelpers": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "strictNullChecks": false,
-    "baseUrl": "./src",
-    "paths": {
-    },
     "lib": [
-      "dom",
-      "es6"
+      "es5",
+      "es6",
+      "dom"
     ],
-    "types": [
-      "node",
-      "jasmine",
-      "webpack"
+    "noEmitHelpers": true,
+    "skipDefaultLibCheck": true,
+    "pretty": true,
+    "sourceMap": true,
+    "strictNullChecks": false,
+    "typeRoots": [
+      "node_modules/@types"
     ]
   },
   "exclude": [
     "node_modules",
     "dist"
   ],
-  "files": [
-    "./demo/custom-typings.d.ts",
-    "./novo-elements.ts"
-  ],
   "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "forkCheckerSilent": true,
     "useWebpackText": true,
-    "transpileOnly": false
+    "forkChecker": true,
+    "useCache": true
   },
   "compileOnSave": false,
   "buildOnSave": false,

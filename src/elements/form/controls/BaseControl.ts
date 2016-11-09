@@ -2,8 +2,54 @@
 import { Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 
+export interface NovoControlConfig {
+    validators?: Array<any>;
+    value?: any;
+    key?: string;
+    label?: string;
+    required?: boolean;
+    hidden?: boolean;
+    sortOrder?: number;
+    controlType?: string;
+    placeholder?: string;
+    config?: any;
+    dirty?: boolean;
+    multiple?: boolean;
+    headerConfig?: any;
+    currencyFormat?: string;
+    associatedEntity?: string;
+    optionsType?: string;
+    forceClear?: EventEmitter<any>;
+    disabled?: boolean;
+    maxlength?: number;
+    options?: Array<any>;
+    type?: string;
+}
+
 export class BaseControl {
-    constructor(config = {}) {
+    validators: Array<any>;
+    value: any;
+    key: string;
+    label: string;
+    required: boolean;
+    hidden: boolean;
+    sortOrder: number;
+    controlType: string;
+    placeholder: string;
+    config: NovoControlConfig;
+    dirty: boolean;
+    multiple: boolean;
+    headerConfig: any;
+    currencyFormat: string;
+    associatedEntity: string;
+    optionsType: string;
+    forceClear: EventEmitter<any>;
+    disabled: boolean;
+    maxlength: number;
+    options: Array<any>;
+    type: string;
+
+    constructor(config: NovoControlConfig) {
         this.validators = config.validators || [];
         this.value = config.value;
         this.key = config.key || '';

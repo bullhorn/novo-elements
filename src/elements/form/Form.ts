@@ -1,10 +1,10 @@
 // NG2
-import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+// APP
+import { NovoFormGroup } from './DynamicForm';
 
 @Component({
     selector: 'novo-form',
-    inputs: ['layout'],
     template: `
         <div class="novo-form-container">
             <header>
@@ -17,8 +17,9 @@ import { FormGroup } from '@angular/forms';
         </div>
     `
 })
-export class NovoFormElement {
-    @Input() form: FormGroup;
+export class NovoFormElement implements OnInit {
+    @Input() form: NovoFormGroup;
+    @Input() layout: string;
 
     ngOnInit() {
         this.form.layout = this.layout;

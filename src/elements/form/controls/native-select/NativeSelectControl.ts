@@ -1,11 +1,11 @@
 // APP
-import { BaseControl } from './../BaseControl';
+import { BaseControl, NovoControlConfig } from './../BaseControl';
 
 export class NativeSelectControl extends BaseControl {
     controlType = 'native-select';
     options = [];
 
-    constructor(config = {}) {
+    constructor(config: NovoControlConfig) {
         super(config);
         this.options = config.options || [];
     }

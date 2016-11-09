@@ -1,7 +1,7 @@
 // NG2
-import { Component, Input, Output, ElementRef, EventEmitter, trigger, state, style, transition, animate } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input, Output, ElementRef, EventEmitter, trigger, state, style, transition, animate, OnInit, OnChanges, OnDestroy } from '@angular/core';
 // APP
+import { NovoFormGroup } from './DynamicForm';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { NovoLabelService } from './../../services/novo-label-service';
 
@@ -124,17 +124,18 @@ import { NovoLabelService } from './../../services/novo-label-service';
         '[class.disabled]': 'control.disabled'
     }
 })
-export class NovoControlElement extends OutsideClick {
+export class NovoControlElement extends OutsideClick implements OnInit, OnChanges, OnDestroy {
     @Input() control;
-    @Input() form: FormGroup;
+    @Input() form: NovoFormGroup;
     @Output() change: EventEmitter<any> = new EventEmitter();
-    formattedValue: String = '';
-    state: String = 'horizontal';
-    alwaysActive: Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
 
-    constructor(element: ElementRef, labels: NovoLabelService) {
+    formattedDateTimeValue: any;
+    formattedValue: string = '';
+    state: string = 'horizontal';
+    alwaysActive: [any] = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
+
+    constructor(element: ElementRef, private labels: NovoLabelService) {
         super(element);
-        this.labels = labels;
         this.onActiveChange.subscribe(active => {
             if (!active) {
                 setTimeout(() => {
@@ -207,7 +208,7 @@ export class NovoControlElement extends OutsideClick {
         this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.timeFormat);
     }
 
-    formatDateTimeValue(event, part) {
+    formatDateTimeValue(event, part?) {
         this.formattedDateTimeValue = this.formattedDateTimeValue || new Date();
 
         if (part === 'date') {

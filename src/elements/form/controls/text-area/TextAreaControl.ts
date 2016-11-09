@@ -1,10 +1,10 @@
 // APP
-import { BaseControl } from './../BaseControl';
+import { BaseControl, NovoControlConfig } from './../BaseControl';
 
 export class TextAreaControl extends BaseControl {
     controlType = 'text-area';
 
-    constructor(config = {}) {
+    constructor(config: NovoControlConfig) {
         super(config);
     }
 }

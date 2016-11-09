@@ -1,5 +1,5 @@
 // NG2
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../../../utils/Helpers';
@@ -14,7 +14,6 @@ const CHECKBOX_VALUE_ACCESSOR = {
 @Component({
     selector: 'novo-checkbox',
     providers: [CHECKBOX_VALUE_ACCESSOR],
-    inputs: ['name', 'label', 'indeterminate', 'disabled'],
     template: `
         <div class="check-box-group" [class.checked]="model" [class.disabled]="disabled">
             <input hidden="true" [name]="name" type="checkbox" [(ngModel)]="model" [attr.id]="name">
@@ -28,8 +27,11 @@ const CHECKBOX_VALUE_ACCESSOR = {
     `
 })
 export class NovoCheckboxElement implements ControlValueAccessor {
+    @Input() name: string;
+    @Input() label: string;
+    @Input() indeterminate: boolean = false;
+    @Input() disabled: boolean;
     value: boolean = false;
-    indeterminate: boolean = false;
 
     model;
     onModelChange: Function = () => {

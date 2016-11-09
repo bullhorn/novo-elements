@@ -1,10 +1,14 @@
 // NG2
+<<<<<<< HEAD
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+=======
+import { Component, EventEmitter, forwardRef, Input, Output, OnInit } from '@angular/core';
+>>>>>>> 5e928048c8dc79eb46ed90a3a8af3499dc799f88
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
 // Vendor
-import * as moment from 'moment'
+import * as moment from 'moment';
 
 // Value accessor for the component (supports ngModel)
 const DATE_PICKER_VALUE_ACCESSOR = {
@@ -71,6 +75,7 @@ const DATE_PICKER_VALUE_ACCESSOR = {
         </div>
     `
 })
+<<<<<<< HEAD
 export class NovoDatePickerElement implements ControlValueAccessor {
     @Input() minYear: number;
     @Input() maxYear: number;
@@ -81,6 +86,17 @@ export class NovoDatePickerElement implements ControlValueAccessor {
 
     // Select callback for output
     @Output() onSelect = new EventEmitter(false);
+=======
+export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
+    @Input() minYear: any;
+    @Input() maxYear: any;
+    @Input() start: any;
+    @Input() end: any;
+    @Input() inline: any;
+    @Input() range: any;
+    // Select callback for output
+    @Output() onSelect: EventEmitter<any> = new EventEmitter(false);
+>>>>>>> 5e928048c8dc79eb46ed90a3a8af3499dc799f88
     // List of all the weekdays (use moment to localize)
     weekday = moment.weekdays();
     // List of all months (use moment to localize)
@@ -89,6 +105,15 @@ export class NovoDatePickerElement implements ControlValueAccessor {
     years = [];
     // Default view mode (select days)
     view = 'days';
+<<<<<<< HEAD
+=======
+    month: any;
+    selected: any;
+    selected2: any;
+    calendarRangeEnd: any;
+    heading: any;
+    weeks: any;
+>>>>>>> 5e928048c8dc79eb46ed90a3a8af3499dc799f88
     model: any;
     month: any;
     weeks: any;
@@ -145,14 +170,14 @@ export class NovoDatePickerElement implements ControlValueAccessor {
     }
 
     setMonth(month) {
-        let tmp = this.selected ? this.selected.clone().month(month) : new moment().month(month);
+        let tmp = this.selected ? this.selected.clone().month(month) : moment().month(month);
         this.updateView(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
     }
 
     setYear(year) {
-        let tmp = this.selected ? this.selected.clone().year(year) : new moment().year(year);
+        let tmp = this.selected ? this.selected.clone().year(year) : moment().year(year);
         this.updateView(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
@@ -254,7 +279,9 @@ export class NovoDatePickerElement implements ControlValueAccessor {
     }
 
     updateHeading() {
-        if (!this.selected) return;
+        if (!this.selected) {
+            return;
+        }
         this.heading = {
             month: this.selected.format('MMMM'),
             year: this.selected.format('YYYY'),
@@ -266,7 +293,7 @@ export class NovoDatePickerElement implements ControlValueAccessor {
     /**
      * Remove the time aspect of the date
      * @param date
-     * @returns {Moment} with time stripped out
+     * @returns with time stripped out
      */
     removeTime(date) {
         return date.hour(0).minute(0).second(0).millisecond(0);

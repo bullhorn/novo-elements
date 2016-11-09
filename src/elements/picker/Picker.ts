@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild, Input, Output, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -27,8 +27,6 @@ const PICKER_VALUE_ACCESSOR = {
  */
 @Component({
     selector: 'novo-picker',
-    inputs: ['config', 'placeholder', 'clearValueOnSelect'],
-    outputs: ['select', 'focus', 'blur'],
     providers: [PICKER_VALUE_ACCESSOR],
     template: `
         <input
@@ -47,33 +45,31 @@ const PICKER_VALUE_ACCESSOR = {
         </div>
     `
 })
-export class NovoPickerElement extends OutsideClick {
+export class NovoPickerElement extends OutsideClick implements OnInit {
     // Container for the results
     @ViewChild('results', { read: ViewContainerRef }) results: ViewContainerRef;
 
+    @Input() config: any;
+    @Input() placeholder: string;
+    @Input() clearValueOnSelect: boolean;
+
     // Emitter for selects
-    select: EventEmitter<any> = new EventEmitter();
-    focus: EventEmitter<any> = new EventEmitter();
-    blur: EventEmitter<any> = new EventEmitter();
+    @Output() select: EventEmitter<any> = new EventEmitter();
+    @Output() focus: EventEmitter<any> = new EventEmitter();
+    @Output() blur: EventEmitter<any> = new EventEmitter();
 
-    // Flag for remote filtering
     isStatic: boolean = true;
-
-    // Internal search string
     term: string = '';
-
+    resultsComponent: any;
+    popup: any;
     _value: any;
     onModelChange: Function = () => {
     };
     onModelTouched: Function = () => {
     };
 
-    constructor(element: ElementRef, componentUtils: ComponentUtils) {
+    constructor(element: ElementRef, private componentUtils: ComponentUtils) {
         super(element);
-        // Component Utils
-        this.componentUtils = componentUtils;
-        // Instance of element
-        this.element = element;
         // Bind to the active change event from the OutsideClick
         this.onActiveChange.subscribe(active => {
             if (!active) {
@@ -91,7 +87,7 @@ export class NovoPickerElement extends OutsideClick {
         // Get all distinct key up events from the input and only fire if long enough and distinct
         let input = this.element.nativeElement.querySelector('input');
         const observer = Observable.fromEvent(input, 'keyup')
-            .map(e => e.target.value)
+            .map((e: any) => e.target.value)
             .debounceTime(250)
             .distinctUntilChanged();
         observer.subscribe(
@@ -164,7 +160,7 @@ export class NovoPickerElement extends OutsideClick {
      * @description This method creates an instance of the results (called popup) and adds all the bindings to that
      * instance.
      */
-    showResults() {
+    showResults(term?: any) {
         this.toggleActive(null, true);
         // Update Matches
         if (this.popup) {
@@ -183,7 +179,7 @@ export class NovoPickerElement extends OutsideClick {
      *
      * @description - This method deletes the picker results from the DOM.
      */
-    hideResults() {
+    hideResults(err?: any) {
         if (this.popup) {
             this.popup.destroy();
             this.popup = null;
@@ -195,7 +191,7 @@ export class NovoPickerElement extends OutsideClick {
         return this._value;
     }
 
-    //set accessor including call the onchange callback
+    // set accessor including call the onchange callback
     set value(selected) {
         if (!selected) {
             this.term = '';
@@ -228,7 +224,7 @@ export class NovoPickerElement extends OutsideClick {
         }
     }
 
-    //From ControlValueAccessor interface
+    // From ControlValueAccessor interface
     writeValue(value) {
         if (this.clearValueOnSelect) {
             this.term = '';

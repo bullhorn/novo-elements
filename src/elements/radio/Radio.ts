@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
@@ -14,8 +14,6 @@ const RADIO_VALUE_ACCESSOR = {
 @Component({
     selector: 'novo-radio',
     providers: [RADIO_VALUE_ACCESSOR],
-    inputs: ['name', 'value', 'checked', 'vertical', 'label'],
-    outputs: ['change'],
     template: `
             <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" #radio>
             <label [attr.for]="name" (click)="select($event, radio)">
@@ -29,8 +27,13 @@ const RADIO_VALUE_ACCESSOR = {
     }
 })
 export class NovoRadioElement implements ControlValueAccessor {
-    // Emitter for when the value changes
-    change: EventEmitter<any> = new EventEmitter();
+    @Input() name: string;
+    @Input() value: any;
+    @Input() checked: boolean;
+    @Input() vertical: boolean;
+    @Input() label: string;
+
+    @Output() change: EventEmitter<any> = new EventEmitter();
 
     model: any;
     onModelChange: Function = () => {

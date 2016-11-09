@@ -1,11 +1,10 @@
 // NG2
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
 
 @Component({
     selector: 'novo-slider',
-    inputs: ['slides'],
     template: `
         <section class="slides">
             <ng-content select="div[slide]"></ng-content>
@@ -23,14 +22,17 @@ import { NovoLabelService } from './../../services/novo-label-service';
         '[class]': 'currentClass'
     }
 })
-export class NovoSliderElement {
-    constructor(element: ElementRef, labels: NovoLabelService) {
-        this.element = element;
-        this.labels = labels;
-        this.currentSlide = 0;
-        this.start = true;
-        this.end = false;
-        this.currSlides = ['active'];
+export class NovoSliderElement implements OnInit, OnDestroy {
+    @Input() slides: any;
+
+    currentSlide: number = 0;
+    start: boolean = true;
+    end: boolean = true;
+    currSlides: Array<any> = ['active'];
+    handleKeyDownFunc: any;
+    currentClass: string;
+
+    constructor(private element: ElementRef, private labels: NovoLabelService) {
         this.handleKeyDownFunc = this.handleKeyDown.bind(this);
     }
 
@@ -55,10 +57,14 @@ export class NovoSliderElement {
 
     changeSlide(direction) {
         if (direction === 'next') {
-            if (this.currentSlide === this.slides - 1) return;
+            if (this.currentSlide === this.slides - 1) {
+                return;
+            }
             this.currentSlide++;
         } else {
-            if (this.currentSlide === 0) return;
+            if (this.currentSlide === 0) {
+                return;
+            }
             this.currentSlide--;
         }
 

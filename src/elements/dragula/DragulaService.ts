@@ -1,35 +1,35 @@
 // NG2
 import { Injectable, EventEmitter } from '@angular/core';
+// Vendor
+import * as dragula from 'dragula';
 
 @Injectable()
 export class NovoDragulaService {
-    constructor() {
-        this.cancel = new EventEmitter();
-        this.cloned = new EventEmitter();
-        this.drag = new EventEmitter();
-        this.dragend = new EventEmitter();
-        this.drop = new EventEmitter();
-        this.out = new EventEmitter();
-        this.over = new EventEmitter();
-        this.remove = new EventEmitter();
-        this.shadow = new EventEmitter();
-        this.dropModel = new EventEmitter();
-        this.removeModel = new EventEmitter();
-        this.events = [
-            'cancel',
-            'cloned',
-            'drag',
-            'dragend',
-            'drop',
-            'out',
-            'over',
-            'remove',
-            'shadow',
-            'dropModel',
-            'removeModel'
-        ];
-        this.bags = [];
-    }
+    cancel: EventEmitter<any> = new EventEmitter();
+    cloned: EventEmitter<any> = new EventEmitter();
+    drag: EventEmitter<any> = new EventEmitter();
+    dragend: EventEmitter<any> = new EventEmitter();
+    drop: EventEmitter<any> = new EventEmitter();
+    out: EventEmitter<any> = new EventEmitter();
+    over: EventEmitter<any> = new EventEmitter();
+    remove: EventEmitter<any> = new EventEmitter();
+    shadow: EventEmitter<any> = new EventEmitter();
+    dropModel: EventEmitter<any> = new EventEmitter();
+    removeModel: EventEmitter<any> = new EventEmitter();
+    events: Array<string> = [
+        'cancel',
+        'cloned',
+        'drag',
+        'dragend',
+        'drop',
+        'out',
+        'over',
+        'remove',
+        'shadow',
+        'dropModel',
+        'removeModel'
+    ];
+    bags: Array<any>;
 
     /**
      * @name add
@@ -87,7 +87,7 @@ export class NovoDragulaService {
      * @param options
      */
     setOptions(name, options) {
-        let bag = this.add(name, dragula(options)); // eslint-disable-line
+        let bag = this.add(name, dragula(options));
         this.handleModels(name, bag.drake);
     }
 
@@ -144,8 +144,8 @@ export class NovoDragulaService {
         bag.initEvents = true;
         let that = this;
         let emitter = (type) => {
-            function replicate() { // eslint-disable-line
-                let args = Array.prototype.slice.call(arguments); // eslint-disable-line
+            function replicate() {
+                let args = Array.prototype.slice.call(arguments);
                 that[type].emit([bag.name].concat(args));
             }
 

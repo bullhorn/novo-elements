@@ -1,5 +1,5 @@
 // NG2
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { getCountries, getStates, findByCountryName } from '../../../../utils/countries/Countries';
@@ -23,9 +23,9 @@ const ADDRESS_VALUE_ACCESSOR = {
         <novo-select class="country-name" id="country" [options]="countries" placeholder="Country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event)"></novo-select>
     `
 })
-export class NovoAddressElement implements ControlValueAccessor {
-    states: Array = [];
-    countries: Array = getCountries();
+export class NovoAddressElement implements ControlValueAccessor, OnInit {
+    states: Array<any> = [];
+    countries: Array<any> = getCountries();
 
     model;
     onModelChange: Function = () => {

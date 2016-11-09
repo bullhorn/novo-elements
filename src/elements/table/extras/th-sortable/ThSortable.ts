@@ -1,20 +1,16 @@
 // NG2
-import { Directive, EventEmitter } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 
 @Directive({
     selector: '[novoThSortable]',
-    inputs: ['config: novoThSortable', 'column'],
-    outputs: ['onSortChange'],
     host: {
         '(click)': 'onToggleSort($event, $target)'
     }
 })
 export class ThSortable {
-    constructor() {
-        this.config = null;
-        this.column = null;
-        this.onSortChange = new EventEmitter();
-    }
+    @Input('novoThSortable') config: any;
+    @Input() column: any;
+    @Output() onSortChange: EventEmitter<any> = new EventEmitter();
 
     onToggleSort(event) {
         if (event) {

@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, ViewChild, EventEmitter, NgZone, forwardRef } from '@angular/core';
+import { Component, Input, Output, ViewChild, EventEmitter, NgZone, forwardRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // Value accessor for the component (supports ngModel)
@@ -19,7 +19,7 @@ const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
     providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
     template: '<textarea [name]="name" [id]="name" #host></textarea>'
 })
-export class NovoCKEditorElement {
+export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
     @Input() config;
     @Input() debounce;
     @Input() name;
@@ -95,7 +95,9 @@ export class NovoCKEditorElement {
 
             // Debounce update
             if (this.debounce) {
-                if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
+                if (this.debounceTimeout) {
+                    clearTimeout(this.debounceTimeout);
+                }
                 this.debounceTimeout = setTimeout(() => {
                     this.updateValue(value);
                     this.debounceTimeout = null;
@@ -128,7 +130,11 @@ export class NovoCKEditorElement {
         }
     }
 
+<<<<<<< HEAD
     onChange(event?) {
+=======
+    onChange(value?: any) {
+>>>>>>> 5e928048c8dc79eb46ed90a3a8af3499dc799f88
     }
 
     onTouched(event?) {

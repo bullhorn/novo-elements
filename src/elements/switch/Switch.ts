@@ -14,7 +14,6 @@ const SWITCH_VALUE_ACCESSOR = {
 @Component({
     selector: 'novo-switch',
     providers: [SWITCH_VALUE_ACCESSOR],
-    inputs: ['theme'],
     template: `
         <div (click)="toggle($event)">
             <div class="novo-switch-container">
@@ -35,6 +34,7 @@ const SWITCH_VALUE_ACCESSOR = {
     }
 })
 export class NovoSwitchElement implements ControlValueAccessor {
+    @Input() theme: string;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
 
     _disabled: boolean = false;
