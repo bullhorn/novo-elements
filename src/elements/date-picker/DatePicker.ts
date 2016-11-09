@@ -1,9 +1,5 @@
 // NG2
-<<<<<<< HEAD
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-=======
 import { Component, EventEmitter, forwardRef, Input, Output, OnInit } from '@angular/core';
->>>>>>> 5e928048c8dc79eb46ed90a3a8af3499dc799f88
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
@@ -75,18 +71,7 @@ const DATE_PICKER_VALUE_ACCESSOR = {
         </div>
     `
 })
-<<<<<<< HEAD
-export class NovoDatePickerElement implements ControlValueAccessor {
-    @Input() minYear: number;
-    @Input() maxYear: number;
-    @Input() start: number;
-    @Input() end: number;
-    @Input() inline: boolean;
-    @Input() range: any;
 
-    // Select callback for output
-    @Output() onSelect = new EventEmitter(false);
-=======
 export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     @Input() minYear: any;
     @Input() maxYear: any;
@@ -96,7 +81,6 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     @Input() range: any;
     // Select callback for output
     @Output() onSelect: EventEmitter<any> = new EventEmitter(false);
->>>>>>> 5e928048c8dc79eb46ed90a3a8af3499dc799f88
     // List of all the weekdays (use moment to localize)
     weekday = moment.weekdays();
     // List of all months (use moment to localize)
@@ -105,15 +89,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     years = [];
     // Default view mode (select days)
     view = 'days';
-<<<<<<< HEAD
-=======
-    month: any;
-    selected: any;
-    selected2: any;
-    calendarRangeEnd: any;
-    heading: any;
-    weeks: any;
->>>>>>> 5e928048c8dc79eb46ed90a3a8af3499dc799f88
+
     model: any;
     month: any;
     weeks: any;
