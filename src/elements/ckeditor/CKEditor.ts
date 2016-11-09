@@ -28,13 +28,11 @@ export class NovoCKEditorElement {
     @Output() ready = new EventEmitter();
     @ViewChild('host') host;
 
-    _value = '';
+    _value:string = '';
     instance;
     debounceTimeout;
-    zone;
 
-    constructor(zone: NgZone) {
-        this.zone = zone;
+    constructor(private zone: NgZone) {
     }
 
     get value() {
@@ -59,7 +57,7 @@ export class NovoCKEditorElement {
     }
 
     ngAfterViewInit() {
-        let config = this.confi || this.getBaseConfig();
+        let config = this.config || this.getBaseConfig();
         this.ckeditorInit(config);
     }
 
@@ -130,10 +128,10 @@ export class NovoCKEditorElement {
         }
     }
 
-    onChange() {
+    onChange(event?) {
     }
 
-    onTouched() {
+    onTouched(event?) {
     }
 
     registerOnChange(fn) {
