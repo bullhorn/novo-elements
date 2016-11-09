@@ -70,8 +70,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
 })
 export class EntityPickerResults extends PickerResults {
     constructor(element: ElementRef, labels: NovoLabelService) {
-        super(element);
-        this.labels = labels;
+        super(element, labels);
     }
 
     getIconForResult(result) {

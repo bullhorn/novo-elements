@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, forwardRef, ElementRef, ViewChild, ViewContainerRef, Input, Output, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -16,15 +16,6 @@ const QUICK_NOTE_VALUE_ACCESSOR = {
 
 @Component({
     selector: 'novo-quick-note',
-    inputs: [
-        'config',
-        'placeholder'
-    ],
-    outputs: [
-        'focus',
-        'blur',
-        'change'
-    ],
     providers: [QUICK_NOTE_VALUE_ACCESSOR],
     template: `
         <div class="quick-note-wrapper">
@@ -43,29 +34,33 @@ const QUICK_NOTE_VALUE_ACCESSOR = {
         </div>
     `
 })
-export class QuickNoteElement extends OutsideClick {
-    // Emitter for selects
-    focus: EventEmitter<any> = new EventEmitter();
-    blur: EventEmitter<any> = new EventEmitter();
-    change: EventEmitter<any> = new EventEmitter();
-    // Internal search string
-    searchTerm: string = '';
+export class QuickNoteElement extends OutsideClick implements OnInit {
+    // Results container
+    @ViewChild('results', { read: ViewContainerRef }) results: ViewContainerRef;
 
+    @Input() config: any;
+    @Input() placeholder: string;
+
+    // Emitter for selects
+    @Output() focus: EventEmitter<any> = new EventEmitter();
+    @Output() blur: EventEmitter<any> = new EventEmitter();
+    @Output() change: EventEmitter<any> = new EventEmitter();
+
+    searchTerm: string = '';
+    resultsComponent: any;
+    quickNoteResults: any;
+    formattedNote: any;
+    basicNote: any;
+    isTagging: boolean;
+    taggingMode: string;
     model: any;
     onModelChange: Function = () => {
     };
     onModelTouched: Function = () => {
     };
 
-    // Results container
-    @ViewChild('results', { read: ViewContainerRef }) results: ViewContainerRef;
-
-    constructor(element: ElementRef, componentUtils: ComponentUtils) {
+    constructor(element: ElementRef, private componentUtils: ComponentUtils) {
         super(element);
-        // Component Utils
-        this.componentUtils = componentUtils;
-        // Instance of element
-        this.element = element;
         // Bind to the active change event from the OutsideClick
         this.onActiveChange.subscribe(active => {
             if (!active) {
