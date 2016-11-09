@@ -83,6 +83,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
 
     ngOnInit() {
         // Custom results template
+        console.log('CONFIG', this.config);
         this.resultsComponent = this.config.resultsTemplate || PickerResults;
         // Get all distinct key up events from the input and only fire if long enough and distinct
         let input = this.element.nativeElement.querySelector('input');

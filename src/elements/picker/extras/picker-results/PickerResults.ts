@@ -12,28 +12,7 @@ import { Observable } from 'rxjs/Rx';
  * @description This is the actual list of matches that gets injected into the DOM. It's also the piece that can be
  * overwritten if custom list options are needed.
  */
-@Component({
-    selector: 'picker-results',
-    host: {
-        'class': 'active',
-        '[hidden]': 'matches.length === 0'
-    },
-    template: `
-        <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
-        <ul *ngIf="matches.length > 0">
-            <li
-                *ngFor="let match of matches"
-                (click)="selectMatch($event)"
-                [class.active]="match===activeMatch"
-                (mouseenter)="selectActive(match)">
-                <span [innerHtml]="highlight(match.label, term)"></span>
-            </li>
-        </ul>
-        <p class="picker-error" *ngIf="hasError">{{labels.pickerError}}</p>
-        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{labels.pickerEmpty}}</p>
-    `
-})
-export class PickerResults {
+export class BasePickerResults {
     _term: string = '';
     matches: any = [];
     hasError: boolean = false;
@@ -43,11 +22,9 @@ export class PickerResults {
     activeMatch: any;
     parent: any;
     element: ElementRef;
-    labels: NovoLabelService;
 
-    constructor(element: ElementRef, labels: NovoLabelService) {
+    constructor(element: ElementRef) {
         this.element = element;
-        this.labels = labels;
     }
 
     get term() {
@@ -246,5 +223,32 @@ export class PickerResults {
     highlight(match, query) {
         // Replaces the capture string with a the same string inside of a "strong" tag
         return query ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
+    }
+}
+
+@Component({
+    selector: 'picker-results',
+    host: {
+        'class': 'active',
+        '[hidden]': 'matches.length === 0'
+    },
+    template: `
+        <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
+        <ul *ngIf="matches.length > 0">
+            <li
+                *ngFor="let match of matches"
+                (click)="selectMatch($event)"
+                [class.active]="match===activeMatch"
+                (mouseenter)="selectActive(match)">
+                <span [innerHtml]="highlight(match.label, term)"></span>
+            </li>
+        </ul>
+        <p class="picker-error" *ngIf="hasError">{{labels.pickerError}}</p>
+        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{labels.pickerEmpty}}</p>
+    `
+})
+export class PickerResults extends BasePickerResults {
+    constructor(element: ElementRef, private labels: NovoLabelService) {
+        super(element);
     }
 }

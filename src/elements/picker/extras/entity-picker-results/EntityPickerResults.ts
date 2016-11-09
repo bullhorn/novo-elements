@@ -2,7 +2,7 @@
 import { Component, ElementRef } from '@angular/core';
 // Vendor
 // APP
-import { PickerResults } from './../picker-results/PickerResults';
+import { BasePickerResults } from './../picker-results/PickerResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 
 @Component({
@@ -68,9 +68,9 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
         '[hidden]': 'matches.length === 0'
     }
 })
-export class EntityPickerResults extends PickerResults {
-    constructor(element: ElementRef, labels: NovoLabelService) {
-        super(element, labels);
+export class EntityPickerResults extends BasePickerResults {
+    constructor(element: ElementRef, private labels: NovoLabelService) {
+        super(element);
     }
 
     getIconForResult(result) {
