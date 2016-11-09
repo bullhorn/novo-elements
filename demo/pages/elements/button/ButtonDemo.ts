@@ -124,25 +124,19 @@ const HEADER_COLORS = ['blue', 'green', 'yellow', 'orange', 'red', 'purple'];
 export class ButtonDemoComponent {
     loading: boolean = false;
     loadingButtonText: string = 'Delete';
-
-    constructor() {
-        this.PrimaryButtonDemoTpl = PrimaryButtonDemoTpl;
-        this.SecondaryButtonDemoTpl = SecondaryButtonDemoTpl;
-        this.DialogueButtonDemoTpl = DialogueButtonDemoTpl;
-        this.NeutralButtonDemoTpl = StandardButtonDemoTpl;
-        this.HeaderButtonDemoTpl = HeaderButtonDemoTpl;
-        this.IconButtonDemoTpl = IconButtonDemoTpl;
-        this.DynamicButtonDemoTpl = DynamicButtonDemoTpl;
-        this.LoadingButtonDemoTpl = LoadingButtonDemoTpl;
-
-        this.theme = 'primary';
-        this.isChecked = false;
-    }
-
-    ngOnInit() {
-        this.color = 'blue';
-        this.negativeColor = 'negative';
-    }
+    theme: string = 'primary';
+    isChecked: boolean = false;
+    negativeColor: string = 'negative';
+    color: string = 'blue';
+    // Templates
+    PrimaryButtonDemoTpl: string = PrimaryButtonDemoTpl;
+    SecondaryButtonDemoTpl: string = SecondaryButtonDemoTpl;
+    DialogueButtonDemoTpl: string = DialogueButtonDemoTpl;
+    NeutralButtonDemoTpl: string = StandardButtonDemoTpl;
+    HeaderButtonDemoTpl: string = HeaderButtonDemoTpl;
+    IconButtonDemoTpl: string = IconButtonDemoTpl;
+    DynamicButtonDemoTpl: string = DynamicButtonDemoTpl;
+    LoadingButtonDemoTpl: string = LoadingButtonDemoTpl;
 
     changeColor() {
         let idx = HEADER_COLORS.indexOf(this.color);
@@ -160,6 +154,6 @@ export class ButtonDemoComponent {
         setTimeout(() => {
             this.loading = false;
             this.loadingButtonText = (this.loading) ? 'Removing... ' : 'Delete';
-        }, 60000);
+        }, 5000);
     }
 }

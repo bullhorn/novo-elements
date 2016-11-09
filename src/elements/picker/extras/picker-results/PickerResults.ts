@@ -70,7 +70,7 @@ export class PickerResults {
                 });
     }
 
-    search(term) {
+    search(term, mode?) {
         let options = this.config.options;
         return Observable.fromPromise(new Promise((resolve, reject) => {
             // Check if there is match data

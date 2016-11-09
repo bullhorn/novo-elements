@@ -1,5 +1,5 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'utils',
@@ -12,22 +12,18 @@ export class UtilsElement {
 
 @Component({
     selector: 'util-action',
-    inputs: ['icon', 'inverse', 'disabled'],
     template: `
         <button theme="icon" [icon]="icon" [attr.inverse]="inverse" [disabled]="disabled"></button>
     `
 })
 export class UtilActionElement {
+    @Input() icon: string;
+    @Input() inverse: boolean;
+    @Input() disabled: boolean;
 }
 
 @Component({
     selector: 'header[theme]',
-    inputs: [
-        'title',
-        'theme',
-        'icon',
-        'config'
-    ],
     host: {
         '[class]': 'headerClass',
         '[attr.theme]': 'theme'
@@ -40,11 +36,15 @@ export class UtilActionElement {
         <ng-content></ng-content>
     `
 })
-export class NovoHeaderElement {
-    constructor() {
-        this.inverse = 'inverse';
-        this.headerClass = 'novo-header';
-    }
+export class NovoHeaderElement implements OnInit {
+    @Input() title: string;
+    @Input() theme: string;
+    @Input() icon: string;
+    @Input() config: any;
+
+    inverse: string = 'inverse';
+    headerClass: string = 'novo-header';
+    iconClass: string;
 
     ngOnInit() {
         this.iconClass = `bhi-${this.icon}`;

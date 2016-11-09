@@ -29,7 +29,7 @@ export class NovoDragulaService {
         'dropModel',
         'removeModel'
     ];
-    bags: Array<any>;
+    bags: Array<any> = [];
 
     /**
      * @name add

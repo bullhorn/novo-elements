@@ -1,9 +1,8 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
     selector: 'novo-list',
-    inputs: ['theme', 'direction'],
     host: {
         '[class.vertical-list]': 'direction === "vertical"',
         '[class.horizontal-list]': 'direction === "horizontal"',
@@ -14,6 +13,8 @@ import { Component } from '@angular/core';
     `
 })
 export class NovoListElement {
+    @Input() theme: string;
+    @Input() direction: string;
 }
 
 @Component({
@@ -32,12 +33,16 @@ export class NovoListItemElement {
 
 @Component({
     selector: 'item-avatar',
-    inputs: ['icon'],
     template: `
         <i *ngIf="iconClass" [ngClass]="classMap" theme="contained"></i>
     `
 })
-export class NovoItemAvatarElement {
+export class NovoItemAvatarElement implements OnChanges, OnInit {
+    @Input() icon: string;
+
+    iconClass: string;
+    classMap: any;
+
     ngOnChanges() {
         this.iconClass = (this.icon) ? `bhi-${this.icon}` : null;
         this.classMap = [this.iconClass, this.icon];
@@ -59,7 +64,6 @@ export class NovoItemTitleElement {
 
 @Component({
     selector: 'item-content',
-    inputs: ['direction'],
     host: {
         '[class.vertical-list]': 'direction === "vertical"',
         '[class.horizontal-list]': 'direction === "horizontal"'
@@ -69,6 +73,7 @@ export class NovoItemTitleElement {
     `
 })
 export class NovoItemContentElement {
+    @Input() direction: string;
 }
 
 @Component({

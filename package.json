@@ -3,8 +3,9 @@
   "version": "2.0.0",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
-    "clean": "node_modules/.bin/rimraf coverage lib dist",
+    "clean": "node_modules/.bin/rimraf coverage dist",
     "compile": "ngc -p tsconfig.publish.json",
+    "prepublish": "npm run clean && npm run compile",
     "postpublish": "npm run deploy:gh-pages",
     "lint": "tslint \"src/**/*.ts\"",
     "start": "webpack-dev-server --config config/webpack.dev.js --progress --profile --watch --content-base demo/",
@@ -54,6 +55,7 @@
   },
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "dependencies": {
+    "dragula": "^3.7.2",
     "hint.css": "2.4.1",
     "moment": "2.15.2"
   },
@@ -77,10 +79,12 @@
     "@angular/platform-browser": "2.1.2",
     "@angular/platform-browser-dynamic": "2.1.2",
     "@angular/router": "3.1.2",
+    "@types/chai": "^3.4.34",
     "@types/ckeditor": "0.0.34",
     "@types/core-js": "0.9.34",
     "@types/dragula": "^2.1.29",
     "@types/hammerjs": "2.0.33",
+    "@types/highlight.js": "^9.1.8",
     "@types/jasmine": "2.5.37",
     "@types/moment": "2.13.0",
     "@types/node": "6.0.46",

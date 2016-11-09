@@ -1,5 +1,5 @@
 // NG2
-import { Component, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, ViewContainerRef, ViewChild, AfterViewInit, Input, OnInit } from '@angular/core';
 // APP
 import { Deferred } from './../../utils/deferred/Deferred';
 import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
@@ -14,12 +14,11 @@ export class NovoModalParams {
  * Reference to an opened dialog.
  */
 export class NovoModalRef {
-    constructor() {
-        this.contentRef = null;
-        this.containerRef = null;
-        this.isClosed = false;
-        this._onClosed = new Deferred();
-    }
+    component: any = null;
+    contentRef: any = null;
+    containerRef: any = null;
+    isClosed: boolean = false;
+    _onClosed: any = Deferred();
 
     // Gets a promise that is resolved when the dialog is closed.
     get onClosed() {
@@ -30,7 +29,7 @@ export class NovoModalRef {
         document.body.classList.add('modal-open');
     }
 
-    close(result) {
+    close(result?: any) {
         document.body.classList.remove('modal-open');
 
         if (this.contentRef) {
@@ -49,12 +48,10 @@ export class NovoModalRef {
     selector: 'novo-modal-container',
     template: '<span #container></span>'
 })
-export class NovoModalContainerElement {
+export class NovoModalContainerElement implements AfterViewInit {
     @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
 
-    constructor(modalRef: NovoModalRef, componentUtils: ComponentUtils) {
-        this.modalRef = modalRef;
-        this.componentUtils = componentUtils;
+    constructor(private modalRef: NovoModalRef, private componentUtils: ComponentUtils) {
     }
 
     ngAfterViewInit() {
@@ -75,8 +72,7 @@ export class NovoModalContainerElement {
     `
 })
 export class NovoModalElement {
-    constructor(modalRef: NovoModalRef) {
-        this.modalRef = modalRef;
+    constructor(private modalRef: NovoModalRef) {
     }
 
     close() {
@@ -86,7 +82,6 @@ export class NovoModalElement {
 
 @Component({
     selector: 'novo-notification',
-    inputs: ['type', 'icon'],
     template: `
         <button class="modal-close" theme="icon" icon="times" (click)="close()"></button>
         <header>
@@ -103,8 +98,13 @@ export class NovoModalElement {
         </footer>
     `
 })
-export class NovoModalNotificationElement {
-    constructor(modalRef: NovoModalRef) {
+export class NovoModalNotificationElement implements OnInit {
+    @Input() type: string;
+    @Input() icon: string;
+
+    iconType: string;
+
+    constructor(private modalRef: NovoModalRef) {
         this.modalRef = modalRef;
     }
 

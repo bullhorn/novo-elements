@@ -1,7 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import PluralizeDemoTpl = require('./templates/PluralizeDemo.html');
+let PluralizeDemoTpl = require('./templates/PluralizeDemo.html');
 
 const template = `
 <div class="container">
@@ -20,7 +20,5 @@ const template = `
     template: template
 })
 export class PipesDemoComponent {
-    constructor() {
-        this.PluralizeDemoTpl = PluralizeDemoTpl;
-    }
+    PluralizeDemoTpl = PluralizeDemoTpl;
 }

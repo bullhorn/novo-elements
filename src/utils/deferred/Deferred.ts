@@ -3,7 +3,7 @@
  */
 export function Deferred() {
     const temp: any = {};
-    const promise = new Promise((resolve: any, reject: any) => {
+    const promise: any = new Promise((resolve: any, reject: any) => {
         temp.resolve = resolve;
         temp.reject = reject;
     });

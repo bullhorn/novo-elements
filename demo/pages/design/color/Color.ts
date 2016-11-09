@@ -9,126 +9,125 @@ import { NovoToastService } from './../../../../novo-elements';
 })
 export class ColorComponent {
     color: String = 'background';
+    primaryColors: Array<any> = [
+        {
+            name: 'navigation',
+            variables: ['navigation'],
+            hex: '2F383F'
+        },
+        {
+            name: 'action',
+            variables: ['positive'],
+            hex: '4A89DC'
+        },
+        {
+            name: 'text',
+            variables: ['dark', 'base-font-color'],
+            hex: '474747'
+        },
+        {
+            name: 'background',
+            variables: ['off-white', 'background'],
+            hex: 'F4F4F4'
+        },
+        {
+            name: 'neutral',
+            variables: ['neutral'],
+            hex: '747884'
+        }
+    ];
+    entityColors: Array<any> = [
+        {
+            name: 'lead',
+            variables: ['lead'],
+            hex: 'AA6699'
+        },
+        {
+            name: 'contact',
+            variables: ['contact'],
+            hex: 'FFAA44'
+        },
+        {
+            name: 'company',
+            variables: ['company'],
+            hex: '3399DD'
+        },
+        {
+            name: 'candidate',
+            variables: ['candidate'],
+            hex: '44BB77'
+        },
+        {
+            name: 'opportunity',
+            variables: ['opportunity'],
+            hex: '662255'
+        },
+        {
+            name: 'job',
+            variables: ['job'],
+            hex: 'BB5566'
+        },
+        {
+            name: 'submission',
+            variables: ['submission'],
+            hex: '778899'
+        },
+        {
+            name: 'placement',
+            variables: ['placement'],
+            hex: '0B344F'
+        }
+    ];
+    analyticsColors: Array<any> = [
+        {
+            name: 'grapefruit',
+            variables: ['grapefruit'],
+            hex: 'DA4453'
+        },
+        {
+            name: 'bittersweet',
+            variables: ['bittersweet'],
+            hex: 'EB6845'
+        },
+        {
+            name: 'sunflower',
+            variables: ['sunflower'],
+            hex: 'F6B042'
+        },
+        {
+            name: 'grass',
+            variables: ['grass'],
+            hex: '8CC152'
+        },
+        {
+            name: 'mint',
+            variables: ['mint'],
+            hex: '37BC9B'
+        },
+        {
+            name: 'aqua',
+            variables: ['aqua'],
+            hex: '3BAFDA'
+        },
+        {
+            name: 'ocean',
+            variables: ['ocean'],
+            hex: '4A89DC'
+        },
+        {
+            name: 'carnation',
+            variables: ['carnation'],
+            hex: 'D770AD'
+        },
+        {
+            name: 'lavender',
+            variables: ['lavender'],
+            hex: '967ADC'
+        }
+    ];
+    options: any;
 
-    constructor(toaster: NovoToastService) {
-        this.toaster = toaster;
-
-        this.primaryColors = [
-            {
-                name: 'navigation',
-                variables: ['navigation'],
-                hex: '2F383F'
-            },
-            {
-                name: 'action',
-                variables: ['positive'],
-                hex: '4A89DC'
-            },
-            {
-                name: 'text',
-                variables: ['dark', 'base-font-color'],
-                hex: '474747'
-            },
-            {
-                name: 'background',
-                variables: ['off-white', 'background'],
-                hex: 'F4F4F4'
-            },
-            {
-                name: 'neutral',
-                variables: ['neutral'],
-                hex: '747884'
-            }
-        ];
-        this.entityColors = [
-            {
-                name: 'lead',
-                variables: ['lead'],
-                hex: 'AA6699'
-            },
-            {
-                name: 'contact',
-                variables: ['contact'],
-                hex: 'FFAA44'
-            },
-            {
-                name: 'company',
-                variables: ['company'],
-                hex: '3399DD'
-            },
-            {
-                name: 'candidate',
-                variables: ['candidate'],
-                hex: '44BB77'
-            },
-            {
-                name: 'opportunity',
-                variables: ['opportunity'],
-                hex: '662255'
-            },
-            {
-                name: 'job',
-                variables: ['job'],
-                hex: 'BB5566'
-            },
-            {
-                name: 'submission',
-                variables: ['submission'],
-                hex: '778899'
-            },
-            {
-                name: 'placement',
-                variables: ['placement'],
-                hex: '0B344F'
-            }
-        ];
-        this.analyticsColors = [
-            {
-                name: 'grapefruit',
-                variables: ['grapefruit'],
-                hex: 'DA4453'
-            },
-            {
-                name: 'bittersweet',
-                variables: ['bittersweet'],
-                hex: 'EB6845'
-            },
-            {
-                name: 'sunflower',
-                variables: ['sunflower'],
-                hex: 'F6B042'
-            },
-            {
-                name: 'grass',
-                variables: ['grass'],
-                hex: '8CC152'
-            },
-            {
-                name: 'mint',
-                variables: ['mint'],
-                hex: '37BC9B'
-            },
-            {
-                name: 'aqua',
-                variables: ['aqua'],
-                hex: '3BAFDA'
-            },
-            {
-                name: 'ocean',
-                variables: ['ocean'],
-                hex: '4A89DC'
-            },
-            {
-                name: 'carnation',
-                variables: ['carnation'],
-                hex: 'D770AD'
-            },
-            {
-                name: 'lavender',
-                variables: ['lavender'],
-                hex: '967ADC'
-            }
-        ];
+    constructor(private toaster: NovoToastService) {
     }
 
     changeColor(color) {
@@ -156,7 +155,9 @@ export class ColorComponent {
             position: 'growlTopRight'
         };
 
-        if (color.name === 'action') this.options.theme = 'ocean';
+        if (color.name === 'action') {
+            this.options.theme = 'ocean';
+        }
 
         // Fire toast
         this.toaster.alert(this.options);

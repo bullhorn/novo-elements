@@ -1,11 +1,11 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import CalendarDemoTpl = require('./templates/CalendarDemo.html');
-import TimeDemoTpl = require('./templates/TimeDemo.html');
-import RangeDemoTpl = require('./templates/RangeDemo.html');
+let CalendarDemoTpl = require('./templates/CalendarDemo.html');
+let TimeDemoTpl = require('./templates/TimeDemo.html');
+let RangeDemoTpl = require('./templates/RangeDemo.html');
 // Vendor
-import * as moment from 'moment'
+import * as moment from 'moment';
 
 const template = `
 <div class="container">
@@ -37,19 +37,17 @@ const template = `
     template: template
 })
 export class CalendarDemoComponent {
-    constructor() {
-        this.CalendarDemoTpl = CalendarDemoTpl;
-        this.TimeDemoTpl = TimeDemoTpl;
-        this.RangeDemoTpl = RangeDemoTpl;
+    CalendarDemoTpl: string = CalendarDemoTpl;
+    TimeDemoTpl: string = TimeDemoTpl;
+    RangeDemoTpl: string = RangeDemoTpl;
 
-        this.time = new Date();
-        this.dateOne = new Date();
-        this.dateTwo = new Date();
-        this.start = moment().subtract(1, 'months');
-        this.end = moment().add(1, 'months');
-        this.value = {
-            startDate: null,
-            endDate: null
-        };
-    }
+    time: Date = new Date();
+    dateOne: Date = new Date();
+    dateTwo: Date = new Date();
+    start: any = moment().subtract(1, 'months');
+    end: any = moment().add(1, 'months');
+    value: any = {
+        startDate: null,
+        endDate: null
+    };
 }

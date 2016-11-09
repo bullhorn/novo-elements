@@ -9,30 +9,25 @@ karma.conf.js
 test.bundle.js
 coverage
 
-#dev stuff
-.config
+# dev stuff
+config
+.github
 .editorconfig
-.eslintrc.json
-.ng2-config.js
 .npmignore
 .travis.yml
-gulpfile.js
-protractor.conf.js
 spec-bundle.js
 tsconfig.json
 tsconfig.publish.json
 tslint.json
-typedoc.js
-wallaby.js
-angular-cli.json
+typedoc.json
+yarn.lock
 
 # demo build
 doc
 demo
 dist
-webpack.config.js
 
-#typescript sources
+# typescript sources
 *.ts
 *.js.map
 !/bundles/*.js.map

@@ -1,14 +1,15 @@
 // NG2
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
     selector: 'code-snippet',
     template: '<pre><code [innerHtml]="highlight"></code></pre>'
 })
-export class CodeSnippet {
-    highlight: SafeHtml;
+export class CodeSnippet implements OnInit {
     @Input() code;
+
+    highlight: SafeHtml;
 
     constructor(private sanitizer: DomSanitizer) {
     }

@@ -1,5 +1,5 @@
 // NG2
-import { Injectable, Pipe } from '@angular/core';
+import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 // Rule storage - pluralize and singularize need to be run sequentially,
 // while other rules can be optimized using an object for instant lookups.
@@ -122,73 +122,47 @@ function replaceWord(replaceMap, keepMap, rules) {
     };
 }
 
-/**
- * Pluralize or singularize a word based on the passed in count.
- * @param {String} word
- * @param {Number} count
- * @param {Boolean} inclusive
- * @return {String}
- */
-function pluralize(word, count, inclusive) {
-    let pluralized = count === 1 ? pluralize.singular(word) : pluralize.plural(word);
-    return (inclusive ? `${count} ` : '') + pluralized;
-}
-
-/**
- * Pluralize a word.
- */
-pluralize.plural = replaceWord(irregularSingles, irregularPlurals, pluralRules);
-
-/**
- * Singularize a word.
- */
-pluralize.singular = replaceWord(irregularPlurals, irregularSingles, singularRules);
-
-/**
- * Add a pluralization rule to the collection.
- * @param {(string|RegExp)} rule
- * @param {string} replacement
- */
-pluralize.addPluralRule = (rule, replacement) => {
-    pluralRules.push([sanitizeRule(rule), replacement]);
-};
-
-/**
- * Add a singularization rule to the collection.
- * @param {(string|RegExp)} rule
- * @param {string} replacement
- */
-pluralize.addSingularRule = (rule, replacement) => {
-    singularRules.push([sanitizeRule(rule), replacement]);
-};
-
-/**
- * Add an uncountable word rule.
- * @param {(string|RegExp)} word
- */
-pluralize.addUncountableRule = (word) => {
-    if (typeof word === 'string') {
-        uncountables[word.toLowerCase()] = true;
-        return;
+class Pluralize {
+    static pluralize(word, count = 1, inclusive?) {
+        let pluralized = count === 1 ? Pluralize.singular(word) : Pluralize.plural(word);
+        return (inclusive ? `${count} ` : '') + pluralized;
     }
 
-    // Set singular and plural references for the word.
-    pluralize.addPluralRule(word, '$0');
-    pluralize.addSingularRule(word, '$0');
-};
+    static singular(word) {
+        return replaceWord(irregularSingles, irregularPlurals, pluralRules)(word);
+    }
 
-/**
- * Add an irregular word definition.
- * @param {String} single
- * @param {String} plural
- */
-pluralize.addIrregularRule = (single, plural) => {
-    let one = plural.toLowerCase();
-    let many = single.toLowerCase();
+    static plural(word) {
+        return replaceWord(irregularPlurals, irregularSingles, singularRules)(word);
+    }
 
-    irregularSingles[one] = many;
-    irregularPlurals[many] = one;
-};
+    static addPluralRule(rule, replacement) {
+        pluralRules.push([sanitizeRule(rule), replacement]);
+    }
+
+    static addSingularRule(rule, replacement) {
+        singularRules.push([sanitizeRule(rule), replacement]);
+    }
+
+    static addUncountableRule(word) {
+        if (typeof word === 'string') {
+            uncountables[word.toLowerCase()] = true;
+            return;
+        }
+
+        // Set singular and plural references for the word.
+        Pluralize.addPluralRule(word, '$0');
+        Pluralize.addSingularRule(word, '$0');
+    }
+
+    static addIrregularRule(single, plural) {
+        let one = plural.toLowerCase();
+        let many = single.toLowerCase();
+
+        irregularSingles[one] = many;
+        irregularPlurals[many] = one;
+    };
+}
 
 /**
  * Irregular rules.
@@ -245,7 +219,7 @@ pluralize.addIrregularRule = (single, plural) => {
     ['pickaxe', 'pickaxes'],
     ['whiskey', 'whiskies']
 ].forEach((rule) => {
-    return pluralize.addIrregularRule(rule[0], rule[1]);
+    return Pluralize.addIrregularRule(rule[0], rule[1]);
 });
 
 /**
@@ -277,7 +251,7 @@ pluralize.addIrregularRule = (single, plural) => {
     [/m[ae]n$/i, 'men'],
     ['thou', 'you']
 ].forEach((rule) => {
-    return pluralize.addPluralRule(rule[0], rule[1]);
+    return Pluralize.addPluralRule(rule[0], rule[1]);
 });
 
 /**
@@ -310,7 +284,7 @@ pluralize.addIrregularRule = (single, plural) => {
     [/(eau)x?$/i, '$1'],
     [/men$/i, 'man']
 ].forEach((rule) => {
-    return pluralize.addSingularRule(rule[0], rule[1]);
+    return Pluralize.addSingularRule(rule[0], rule[1]);
 });
 
 /**
@@ -406,12 +380,12 @@ pluralize.addIrregularRule = (single, plural) => {
     /sheep$/i,
     /measles$/i,
     /[^aeiou]ese$/i // "chinese", "japanese"
-].forEach(pluralize.addUncountableRule);
+].forEach(Pluralize.addUncountableRule);
 
 @Pipe({ name: 'plural' })
 @Injectable()
-export class PluralPipe {
+export class PluralPipe implements PipeTransform {
     transform(value) {
-        return pluralize(value);
+        return Pluralize.pluralize(value);
     }
 }

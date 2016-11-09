@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class NovoNavElement {
     @Input() theme: string = '';
     @Input() direction: string = '';
-    @Input() outlet: string;
+    @Input() outlet: any;
     @Input() router: string;
 
     items: Array<any> = [];
@@ -33,7 +33,7 @@ export class NovoNavElement {
         }
 
         // TODO - remove hack to make DOM rerender - jgodi
-        let element = document.querySelector('novo-tab-link.active span.indicator');
+        let element = document.querySelector('novo-tab-link.active span.indicator') as any;
         if (element) {
             element.style.opacity = 0.99;
             setTimeout(() => {
@@ -182,7 +182,6 @@ export class NovoNavContentElement {
 
 @Component({
     selector: 'novo-nav-header',
-    inputs: ['for'],
     host: {
         '[class.active]': 'active',
         '(click)': 'show($event)'
@@ -191,7 +190,7 @@ export class NovoNavContentElement {
 })
 export class NovoNavHeaderElement {
     @Input() active: boolean = false;
-
+    @Input('for') forElement: any;
     outlet: any;
 
     constructor(outlet: NovoNavOutletElement) {
@@ -201,7 +200,7 @@ export class NovoNavHeaderElement {
 
     show() {
         try {
-            const INDEX = this.outlet.items.indexOf(this.for);
+            const INDEX = this.outlet.items.indexOf(this.forElement);
             if (INDEX > -1) {
                 this.outlet.show(INDEX);
             }

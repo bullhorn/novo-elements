@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, EventEmitter } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, OnDestroy, Input, Output } from '@angular/core';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
@@ -17,7 +17,9 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
         '[class.active]': 'active'
     }
 })
-export class NovoDropdownElement extends OutsideClick {
+export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestroy {
+    clickHandler: any;
+
     constructor(element: ElementRef) {
         super(element);
         this.clickHandler = this.toggleActive.bind(this);
@@ -51,8 +53,6 @@ export class NovoListElement {
 
 @Component({
     selector: 'item',
-    inputs: ['disabled', 'showAfterSelect'],
-    outputs: ['action'],
     template: '<ng-content></ng-content>',
     host: {
         '(click)': 'onClick()',
@@ -60,15 +60,18 @@ export class NovoListElement {
     }
 })
 export class NovoItemElement {
-    action = new EventEmitter();
+    @Input() disabled: boolean;
+    @Input() showAfterSelect: boolean;
+    @Output() action: EventEmitter<any> = new EventEmitter();
 
-    constructor(dropdown: NovoDropdownElement) {
-        this.dropdown = dropdown;
+    constructor(private dropdown: NovoDropdownElement) {
     }
 
     onClick() {
         if (!this.disabled) {
-            if (!this.showAfterSelect) this.dropdown.toggleActive();
+            if (!this.showAfterSelect) {
+                this.dropdown.toggleActive();
+            }
             this.action.emit();
         }
     }

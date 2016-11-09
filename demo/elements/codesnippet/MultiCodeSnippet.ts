@@ -16,13 +16,13 @@ export class MultiCodeSnippet {
     _sections: string[] = [];
     _map: any = {};
 
+    constructor(private sanitizer: DomSanitizer) {
+    }
+
     @Input()
     set code(code) {
         this._sections = Object.keys(code);
         this._map = Object.assign({}, code);
-    }
-
-    constructor(private sanitizer: DomSanitizer) {
     }
 
     getHighlight(code) {
