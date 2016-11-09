@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'novo-tip-well',
@@ -13,8 +13,8 @@ import { Component, Input } from '@angular/core';
         </div>
     `
 })
-export class NovoTipWellElement {
-    @Input() name:string;
+export class NovoTipWellElement implements OnInit {
+    @Input() name: string|number;
     @Input() tip: string;
     @Input() buttonText: string;
     @Input() button: string;
@@ -31,7 +31,7 @@ export class NovoTipWellElement {
             let isEnabled = false;
             if (typeof localStorage === 'object') {
                 try {
-                    localStorage.setItem('lsTest', 1);
+                    localStorage.setItem('lsTest', '1');
                     localStorage.removeItem('lsTest');
                     isEnabled = true;
                 } catch (e) {
