@@ -1,5 +1,5 @@
 // NG2
-import { Directive, OnInit, OnDestroy, EventEmitter, ElementRef } from '@angular/core';
+import { Directive, OnInit, EventEmitter, ElementRef, Input, Output } from '@angular/core';
 
 export const ALWAYS = 'always';
 export const DISABLED = 'disabled';
@@ -11,6 +11,10 @@ export const POSITION_TOP = 'top';
 export const POSITION_BOTTOM = 'bottom';
 
 class DrawerService {
+    closeDrawerBind: any;
+    openScope: any;
+    scope: any;
+
     constructor() {
         this.closeDrawerBind = this.closeDrawer.bind(this);
     }
@@ -60,17 +64,21 @@ const drawerService = new DrawerService();
 
 @Directive({
     selector: '[drawer]',
-    inputs: ['isOpen', 'autoClose', 'position'],
-    outputs: ['onDrawerToggle'],
     host: {
         '[class.drawer]': 'true',
         '[class.open]': 'isOpen'
     }
 })
-export class NovoDrawerElement implements OnInit, OnDestroy {
-    constructor(el: ElementRef) {
-        this.el = el;
-        this.onDrawerToggle = new EventEmitter();
+export class NovoDrawerElement implements OnInit {
+    @Input() autoClose: any;
+    @Input() position: string;
+    @Output() onDrawerToggle: EventEmitter<any> = new EventEmitter();
+
+    _isOpen: boolean;
+    drawerEl: any;
+    toggleEl: any;
+
+    constructor(private el: ElementRef) {
     }
 
     ngOnInit() {
@@ -91,10 +99,11 @@ export class NovoDrawerElement implements OnInit, OnDestroy {
         this.toggleEl = drawerToggle.el;
     }
 
-    toggle(open) {
+    toggle(open?: any) {
         return this.isOpen = open ? !!open : !this.isOpen;
     }
 
+    @Input()
     get isOpen() {
         return this._isOpen;
     }
@@ -119,12 +128,10 @@ export class NovoDrawerElement implements OnInit, OnDestroy {
 }
 
 @Directive({
-    selector: '[drawerContent], .drawer-content'
+    selector: '[drawerContent]'
 })
 export class NovoDrawerContentElement implements OnInit {
-    constructor(drawer: NovoDrawerElement, el: ElementRef) {
-        this.drawer = drawer;
-        this.el = el;
+    constructor(private drawer: NovoDrawerElement, private el: ElementRef) {
     }
 
     ngOnInit() {
@@ -134,7 +141,6 @@ export class NovoDrawerContentElement implements OnInit {
 
 @Directive({
     selector: '[drawerToggle]',
-    inputs: ['disabled'],
     host: {
         '(click)': 'toggleDrawer($event)',
         '[class.drawer-toggle]': 'true',
@@ -142,10 +148,9 @@ export class NovoDrawerContentElement implements OnInit {
     }
 })
 export class NovoDrawerToggleElement implements OnInit {
-    constructor(drawer: NovoDrawerElement, el: ElementRef) {
-        this.el = el;
-        this.disabled = false;
-        this.drawer = drawer;
+    @Input() disabled: boolean = false;
+
+    constructor(private drawer: NovoDrawerElement, private el: ElementRef) {
     }
 
     ngOnInit() {
