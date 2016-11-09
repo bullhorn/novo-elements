@@ -1,16 +1,21 @@
 // NG2
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, OnInit, Input, OnChanges } from '@angular/core';
+// Vendor
+import * as dragula from 'dragula';
 // APP
 import { NovoDragulaService } from './DragulaService';
 
 @Directive({
-    selector: '[dragula]',
-    inputs: ['bag:dragula', 'dragulaModel']
+    selector: '[dragula]'
 })
-export class NovoDragulaElement {
-    constructor(el: ElementRef, dragulaService: NovoDragulaService) {
+export class NovoDragulaElement implements OnInit, OnChanges {
+    @Input('dragula') bag: any;
+    @Input() dragulaModel: any;
+    drake: any;
+    container: any;
+
+    constructor(el: ElementRef, private dragulaService: NovoDragulaService) {
         this.container = el.nativeElement;
-        this.dragulaService = dragulaService;
         this.drake = null;
     }
 
@@ -22,7 +27,7 @@ export class NovoDragulaElement {
             this.checkModel();
             this.drake.containers.push(this.container);
         } else {
-            this.drake = dragula({ // eslint-disable-line
+            this.drake = dragula({
                 containers: [this.container]
             });
             this.checkModel();
