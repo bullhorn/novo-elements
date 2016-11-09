@@ -1,10 +1,10 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Input } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output, OnInit, OnChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
 // Vendor
-import * as moment from 'moment'
+import * as moment from 'moment';
 
 // Value accessor for the component (supports ngModel)
 const TIME_PICKER_VALUE_ACCESSOR = {
@@ -15,7 +15,6 @@ const TIME_PICKER_VALUE_ACCESSOR = {
 
 @Component({
     selector: 'novo-time-picker',
-    outputs: ['onSelect'],
     providers: [TIME_PICKER_VALUE_ACCESSOR],
     template: `
         <div class="digital">
@@ -52,8 +51,9 @@ const TIME_PICKER_VALUE_ACCESSOR = {
         '[class.military]': 'military'
     }
 })
-export class NovoTimePickerElement implements ControlValueAccessor {
+export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
     @Input() military: boolean = false;
+    @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
     hours: number = 12;
     minutes: number = 0;
@@ -64,10 +64,9 @@ export class NovoTimePickerElement implements ControlValueAccessor {
     activeHour;
     minutesClass: string;
     activeMinute;
-    onSelect: EventEmitter<any> = new EventEmitter(false);
-    MERIDIANS: [string] = ['am', 'pm'];
-    MINUTES: [string] = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
-    HOURS: [string] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    MERIDIANS: Array<string> = ['am', 'pm'];
+    MINUTES: Array<string> = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
+    HOURS: Array<string> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     model: any;
     onModelChange: Function = () => {
     };
@@ -91,8 +90,8 @@ export class NovoTimePickerElement implements ControlValueAccessor {
 
     init(value, dispatch) {
         let momentValue = moment(value);
-        let hours = momentValue.hours();
-        let minutes = momentValue.minutes();
+        let hours: string|number = momentValue.hours();
+        let minutes: string|number = momentValue.minutes();
 
         if (!this.military) {
             this.meridian = hours >= 12 ? 'pm' : 'am';
