@@ -1,9 +1,8 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'novo-loading',
-    inputs: ['theme'],
     host: {
         '[class]': 'theme || ""'
     },
@@ -16,11 +15,11 @@ import { Component } from '@angular/core';
     `
 })
 export class NovoLoadingElement {
+    @Input() theme: string;
 }
 
 @Component({
     selector: 'novo-spinner',
-    inputs: ['theme', 'inverse', 'baseHref'],
     template: `
         <svg class="bullhornSpinner" [ngClass]="theme" height="100" width="100" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" [attr.inverse]="inverse">
             <title>Bullhorn Spinner Animation</title>
@@ -99,4 +98,7 @@ export class NovoLoadingElement {
     `
 })
 export class NovoSpinnerElement {
+    @Input() theme: string;
+    @Input() inverse: boolean;
+    @Input() baseHref: string;
 }

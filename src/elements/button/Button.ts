@@ -36,7 +36,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 })
 export class NovoButtonElement implements OnChanges {
     @Input() icon: string;
-    @Input() color: string; 
+    @Input() color: string;
     @Input() side: string;
     @Input() theme: string;
     @Input() loading: boolean;
