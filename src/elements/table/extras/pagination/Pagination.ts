@@ -1,12 +1,10 @@
 // NG2
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges } from '@angular/core';
 // APP
 import { NovoLabelService } from './../../../../services/novo-label-service';
 
 @Component({
     selector: 'novo-pagination',
-    inputs: ['page', 'totalItems', 'itemsPerPage', 'rowOptions', 'label'],
-    outputs: ['onPageChange'],
     template: `
         <h5 class="rows">{{label}}</h5>
         <novo-select [options]="rowOptions" [placeholder]="labels.select" [(ngModel)]="itemsPerPage" (onSelect)="onPageSizeChanged($event)" data-automation-id="pager-select"></novo-select>
@@ -18,12 +16,20 @@ import { NovoLabelService } from './../../../../services/novo-label-service';
         </ul>
   `
 })
-export class Pagination {
-    constructor(labels: NovoLabelService) {
-        this.labels = labels;
-        this.maxPagesDisplayed = 5;
-        this.itemsPerPage = 10;
-        this.onPageChange = new EventEmitter();
+export class Pagination implements OnInit, OnChanges {
+    @Input() page: number;
+    @Input() totalItems: number;
+    @Input() itemsPerPage: number = 10;
+    @Input() rowOptions: any;
+    @Input() label: string;
+
+    @Output() onPageChange: EventEmitter<any> = new EventEmitter();
+
+    maxPagesDisplayed: number = 5;
+    totalPages: number;
+    pages: Array<any>;
+
+    constructor(private labels: NovoLabelService) {
     }
 
     ngOnInit() {

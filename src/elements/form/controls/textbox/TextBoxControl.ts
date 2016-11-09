@@ -1,11 +1,13 @@
 // APP
-import { BaseControl } from './../BaseControl';
+import { BaseControl, NovoControlConfig } from './../BaseControl';
 import { FormValidators } from './../../FormValidators';
 
 export class TextBoxControl extends BaseControl {
-    controlType = 'textbox';
+    controlType:string = 'textbox';
+    type:string;
+    subType:string;
 
-    constructor(config = {}) {
+    constructor(config: NovoControlConfig) {
         super(config);
         this.type = this.getTextboxType(config.type) || '';
         this.subType = config.type || '';

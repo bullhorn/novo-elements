@@ -1,5 +1,5 @@
 // Vendor
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
 import { Helpers } from './../../utils/Helpers';
@@ -19,7 +19,7 @@ export class NovoTableHeaderElement {
 }
 
 @Component({
-    selector: 'novo-table, [novoTable]',
+    selector: 'novo-table',
     host: {
         '[attr.theme]': 'theme'
     },
@@ -146,21 +146,31 @@ export class NovoTableHeaderElement {
         </div>
     `
 })
-export class NovoTableElement {
-    _rows: [any] = [];
-    modifiedRows: [any] = [];
-    selected: [any] = [];
+export class NovoTableElement implements DoCheck {
+    @Input() config: any;
+    @Input() columns: Array<any>;
+    @Input() theme: string;
+    @Input() skipSortAndFilterClear: boolean = false;
+
+    @Output() onRowClick: EventEmitter<any> = new EventEmitter();
+    @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
+    @Output() onTableChange: EventEmitter<any> = new EventEmitter();
+
+    _rows: Array<any> = [];
+    modifiedRows: Array<any> = [];
+    selected: Array<any> = [];
     activeId: number = 0;
     master: boolean = false;
     indeterminate: boolean = false;
     lastPage: number = 0;
     selectedPageCount: number = 0;
     showSelectAllMessage: boolean = false;
+    currentSortColumn: any;
+    pagedData: any;
+    pageSelected: any;
 
-    @Input() config: any;
-    @Input() columns: [any];
-    @Input() theme: string;
-    @Input() skipSortAndFilterClear: boolean = false;
+    constructor(private labels: NovoLabelService) {
+    }
 
     @Input()
     set rows(rows) {
@@ -170,7 +180,7 @@ export class NovoTableElement {
         if (rows && rows.length > 0) {
             this.setupColumnDefaults();
         }
-        //this is a temporary/hacky fix until async dataloading is handled within the table
+        // This is a temporary/hacky fix until async dataloading is handled within the table
         if (!this.skipSortAndFilterClear) {
             this.clearAllSortAndFilters();
         }
@@ -178,14 +188,6 @@ export class NovoTableElement {
 
     get rows() {
         return this._rows;
-    }
-
-    @Output() onRowClick: EventEmitter<any> = new EventEmitter();
-    @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
-    @Output() onTableChange: EventEmitter<any> = new EventEmitter();
-
-    constructor(labels: NovoLabelService) {
-        this.labels = labels;
     }
 
     onPageChange(event) {
@@ -359,7 +361,9 @@ export class NovoTableElement {
                                         let date = row[column.name] instanceof Date ? row[column.name].getTime() : row[column.name];
                                         if (start !== 0 && end !== 0) {
                                             isMatch = (date >= start && date <= end);
-                                        } else isMatch = true;
+                                        } else {
+                                            isMatch = true;
+                                        }
                                         return isMatch;
                                     });
                                 } else if (column.type && column.type === 'date') {
@@ -376,7 +380,7 @@ export class NovoTableElement {
                                         try {
                                             difference = Math.round((firstDate - secondDate.getTime()) / oneDay);
                                         } catch (error) {
-                                            throw new Error('Row data of type \'date\' must contain a JS date object or a timestamp as its value.', error);
+                                            throw new Error('Row data of type \'date\' must contain a JS date object or a timestamp as its value.');
                                         }
                                         if (typeof(min) !== 'undefined' && typeof(max) !== 'undefined') {
                                             isMatch = (difference >= min && difference <= max);
@@ -400,13 +404,17 @@ export class NovoTableElement {
                                 // Value is an array
                                 for (const value of row[column.name]) {
                                     matched = value.match(new RegExp(column.filter, 'gi'));
-                                    if (!matched) break;
+                                    if (!matched) {
+                                        break;
+                                    }
                                 }
                             } else {
                                 // Basic, value is just a string
                                 matched = JSON.stringify((row[column.name] || '')).match(new RegExp(column.filter, 'gi'));
                             }
-                            if (!matched) break;
+                            if (!matched) {
+                                break;
+                            }
                         }
                         return matched;
                     });
@@ -443,7 +451,7 @@ export class NovoTableElement {
                     return columnFilter.label === filter.label;
                 });
             } else {
-                isActive = ~columnFilters.filter.indexOf(filter);
+                isActive = columnFilters.filter.indexOf(filter) !== -1;
             }
         }
         return isActive;
@@ -518,7 +526,7 @@ export class NovoTableElement {
      */
     fireTableChangeEvent() {
         // Construct a table change object
-        const onTableChange = {};
+        const onTableChange: any = {};
         const filters = this.columns.filter((col) => col.filter && col.filter.length);
         onTableChange.filter = filters.length ? filters : false;
         onTableChange.sort = this.currentSortColumn ? this.currentSortColumn : false;
@@ -641,7 +649,7 @@ export class NovoTableElement {
      */
     getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
-        let opts = [
+        let opts: Array<any> = [
             { label: 'Past 1 Day', min: -1, max: 0 },
             { label: 'Past 7 Days', min: -7, max: 0 },
             { label: 'Past 30 Days', min: -30, max: 0 },

@@ -1,6 +1,4 @@
 export class BaseRenderer {
-    constructor() {
-        this.data = {};
-        this.value = '';
-    }
+    data: any = {};
+    value: any = '';
 }

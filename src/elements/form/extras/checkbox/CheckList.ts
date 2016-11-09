@@ -1,5 +1,5 @@
 // NG2
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../../../utils/Helpers';
@@ -14,7 +14,6 @@ const CHECKLIST_VALUE_ACCESSOR = {
 @Component({
     selector: 'novo-check-list',
     providers: [CHECKLIST_VALUE_ACCESSOR],
-    inputs: ['name', 'options'],
     template: `
         <div class="check-box-group" *ngFor="let option of _options; let i = index" [ngClass]="{checked: option.checked}" >
             <input [hidden]="true" [name]="name" type="checkbox" [ngModel]="option.checked" [attr.id]="name+i" [value]="option.checked">
@@ -25,8 +24,12 @@ const CHECKLIST_VALUE_ACCESSOR = {
         </div>
     `
 })
-export class NovoCheckListElement implements ControlValueAccessor {
-    model;
+export class NovoCheckListElement implements ControlValueAccessor, OnInit {
+    @Input() name: string;
+    @Input() options: Array<any>;
+
+    _options: Array<any>;
+    model: any;
     onModelChange: Function = () => {
     };
     onModelTouched: Function = () => {

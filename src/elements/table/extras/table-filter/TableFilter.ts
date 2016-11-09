@@ -1,20 +1,22 @@
 // NG2
-import { Directive, EventEmitter, ElementRef, Renderer } from '@angular/core';
+import { Directive, EventEmitter, ElementRef, Renderer, OnChanges, OnInit, Input, Output } from '@angular/core';
 
 @Directive({
     selector: '[novoTableFilter]',
-    inputs: ['config: novoTableFilter'],
-    outputs: ['onFilterChange'],
     host: {
         '(input)': 'onChangeFilter($event)',
         '(click)': 'onClick($event)'
     }
 })
-export class TableFilter {
-    constructor(element: ElementRef, renderer: Renderer) {
+export class TableFilter implements OnInit, OnChanges {
+    @Input('novoTableFilter') config: any;
+    @Output() onFilterChange: EventEmitter<any> = new EventEmitter();
+
+    filterThrottle: any;
+
+    constructor(private element: ElementRef, private renderer: Renderer) {
         this.element = element;
         this.renderer = renderer;
-        this.onFilterChange = new EventEmitter();
     }
 
     ngOnInit() {

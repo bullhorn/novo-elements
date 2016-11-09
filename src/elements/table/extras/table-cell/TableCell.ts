@@ -1,12 +1,11 @@
 // NG2
-import { Component, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, ViewChild, ViewContainerRef, OnInit, Input } from '@angular/core';
 // APP
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 import { ComponentUtils } from './../../../../utils/component-utils/ComponentUtils';
 
 @Component({
     selector: 'novo-table-cell',
-    inputs: ['column', 'row'],
     template: `
         <div [ngSwitch]="column._type">
             <span #container></span>
@@ -16,13 +15,17 @@ import { ComponentUtils } from './../../../../utils/component-utils/ComponentUti
         </div>
     `
 })
-export class TableCell {
+export class TableCell implements OnInit {
     @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
 
-    constructor(element: ElementRef, componentUtils: ComponentUtils) {
+    @Input() column: any;
+    @Input() row: any;
+
+    value: any = '';
+
+    constructor(private element: ElementRef, private componentUtils: ComponentUtils) {
         this.element = element;
         this.componentUtils = componentUtils;
-        this.value = '';
     }
 
     ngOnInit() {

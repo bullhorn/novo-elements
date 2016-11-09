@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, ElementRef, forwardRef } from '@angular/core';
+import { Component, Input, ElementRef, forwardRef, OnInit, OnDestroy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 // Value accessor for the component (supports ngModel)
@@ -32,23 +32,25 @@ const FILE_VALUE_ACCESSOR = {
         </div>
     `
 })
-export class NovoFileInputElement implements ControlValueAccessor {
+export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDestroy {
     @Input() name: string;
     @Input() multiple: boolean = false;
     @Input() disabled: boolean = false;
     @Input() placeholder: string = 'Choose a file';
 
-    value: Array = [];
-    files: Array = [];
+    value: Array<any> = [];
+    files: Array<any> = [];
     model: any;
     active: boolean = false;
+    commands: any;
+    visible: boolean;
+    target: any;
     onModelChange: Function = () => {
     };
     onModelTouched: Function = () => {
     };
 
-    constructor(element: ElementRef) {
-        this.element = element;
+    constructor(private element: ElementRef) {
         this.commands = {
             dragenter: this.dragEnterHandler.bind(this),
             dragleave: this.dragLeaveHandler.bind(this),
@@ -79,7 +81,6 @@ export class NovoFileInputElement implements ControlValueAccessor {
     dragLeaveHandler(event) {
         event.preventDefault();
         if (this.target === event.target) {
-            //do something
             this.active = false;
         }
     }
@@ -92,7 +93,9 @@ export class NovoFileInputElement implements ControlValueAccessor {
     dropHandler(event) {
         event.preventDefault();
         this.visible = false;
-        if (event.dataTransfer.types[0] !== 'Files') return;
+        if (event.dataTransfer.types[0] !== 'Files') {
+            return;
+        }
         let filelist = Array.from(event.dataTransfer.files);
         this.process(this.multiple ? filelist : [filelist[0]]);
         this.active = false;
@@ -146,6 +149,8 @@ export class NovoFileInputElement implements ControlValueAccessor {
 
 export class NovoFile {
     name: string = '';
+    file: any;
+    type: any;
     contentType: string = '';
     lastModified: number = 0;
     size: number = 0;
@@ -154,13 +159,13 @@ export class NovoFile {
     dataURL: string;
     reader: FileReader = new FileReader();
 
-    constructor(file: File) {
+    constructor(file) {
         this.name = file.name;
         this.contentType = file.type;
         this.lastModified = file.lastModified;
         this.size = file.size;
         this.file = file;
-        this.reader.onload = (event) => {
+        this.reader.onload = (event: any) => {
             this.fileContents = event.target.result.split(',')[1];
             this.dataURL = event.target.result;
             this.loaded = true;

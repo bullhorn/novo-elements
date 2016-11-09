@@ -1,10 +1,8 @@
 // NG2
-import { Directive, EventEmitter, ElementRef } from '@angular/core';
+import { Directive, EventEmitter, ElementRef, OnInit, Input, Output } from '@angular/core';
 
 @Directive({
     selector: '[novoThOrderable]',
-    inputs: ['column: novoThOrderable'],
-    outputs: ['onOrderChange'],
     host: {
         '(dragstart)': 'onDragStart($event)',
         '(dragover)': 'onDragOver($event)',
@@ -14,11 +12,16 @@ import { Directive, EventEmitter, ElementRef } from '@angular/core';
         '(drop)': 'onDrop($event)'
     }
 })
-export class ThOrderable {
-    constructor(element: ElementRef) {
+export class ThOrderable implements OnInit {
+    @Input('novoThOrderable') column: any;
+    @Output() onOrderChange: EventEmitter<any> = new EventEmitter();
+
+    table: any;
+    clone: any;
+    target: any;
+
+    constructor(private element: ElementRef) {
         this.element = element;
-        this.column = null;
-        this.onOrderChange = new EventEmitter();
     }
 
     ngOnInit() {

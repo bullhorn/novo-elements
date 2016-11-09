@@ -16,7 +16,8 @@ import {
     TextAreaControl,
     TextBoxControl,
     TilesControl,
-    TimeControl
+    TimeControl,
+    NovoControlConfig
 } from './FormControls';
 import { EntityPickerResults } from './../picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from './../../utils/Helpers';
@@ -102,7 +103,7 @@ export class FormUtils {
     getControlForField(field, http, config) {
         let type = this.determineInputType(field) || field.type;
         let control;
-        let controlConfig = {
+        let controlConfig: NovoControlConfig = {
             type: type,
             key: field.name,
             label: field.label,
@@ -114,7 +115,9 @@ export class FormUtils {
             associatedEntity: field.associatedEntity,
             optionsType: field.optionsType,
             multiple: field.multiValue,
-            disabled: field.disabled || false
+            disabled: field.disabled || false,
+            config: null,
+            options: null
         };
         let optionsConfig = this.getControlOptions(field, http, config);
 
@@ -257,7 +260,7 @@ export class FormUtils {
         return null;
     }
 
-    setInitialValues(controls, values, keepClean = false) {
+    setInitialValues(controls: Array<NovoControlConfig>, values, keepClean = false) {
         controls.forEach(control => {
             if (!Helpers.isBlank(values[control.key]) && values[control.key].length !== 0) {
                 control.value = values[control.key];
@@ -266,7 +269,7 @@ export class FormUtils {
         });
     }
 
-    forceShowAllControls(controls) {
+    forceShowAllControls(controls: Array<NovoControlConfig>) {
         controls.forEach(control => {
             control.hidden = false;
         });
