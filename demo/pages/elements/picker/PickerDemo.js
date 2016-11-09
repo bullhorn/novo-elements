@@ -4,10 +4,9 @@ import { Component } from '@angular/core';
 import BasicPickerDemoTpl from './templates/BasicPickerDemo.html';
 import AsyncPickerDemoTpl from './templates/AsyncPickerDemo.html';
 import FormattedPickerDemoTpl from './templates/FormattedPickerDemo.html';
-import ChecklistPickerResultsDemoTpl from './templates/ChecklistPickerResultsDemo.html';
 import CustomPickerResultsDemoTpl from './templates/CustomPickerResultsDemo.html';
 // Vendor
-import { PickerResults, ChecklistPickerResults } from './../../../../src/novo-elements';
+import { PickerResults } from './../../../../src/novo-elements';
 
 @Component({
     selector: 'custom-picker-results',
@@ -38,8 +37,28 @@ const template = `
     <p>The picker element (<code>input[picker]</code>) represents a control that presents a menu of options. The options
     within are set by the <code>items</code> attribute. Options can be pre-pickered for the user using the <code>value</code>
     attribute.</p>
-
     <br/>
+    <h5>Basic Examples</h5>
+    <p>
+        By clicking on the <code>input</code> element, the options list will be displayed.  picker any of the options
+        by clicking on the item in the list.  The value pickered will be displayed and the options list will be removed.
+    </p>
+    <div class="example picker-demo">${BasicPickerDemoTpl}</div>
+    <code-snippet [code]="BasicPickerDemoTpl"></code-snippet>
+    <h5>Async Examples</h5>
+    <p>
+        By clicking on the <code>input</code> element, the options list will be displayed.  picker any of the options
+        by clicking on the item in the list.  The value pickered will be displayed and the options list will be removed.
+    </p>
+    <div class="example picker-demo">${AsyncPickerDemoTpl}</div>
+    <code-snippet [code]="AsyncPickerDemoTpl"></code-snippet>
+    <h5>Formated Picker Examples</h5>
+    <p>
+        By clicking on the <code>input</code> element, the options list will be displayed.  picker any of the options
+        by clicking on the item in the list.  The value pickered will be displayed and the options list will be removed.
+    </p>
+    <div class="example picker-demo">${FormattedPickerDemoTpl}</div>
+    <code-snippet [code]="FormattedPickerDemoTpl"></code-snippet>
     <h5>Custom Picker Examples</h5>
     <p>
         By clicking on the <code>input</code> element, the options list will be displayed.  picker any of the options
@@ -59,7 +78,6 @@ export class PickerDemoComponent {
         this.BasicPickerDemoTpl = BasicPickerDemoTpl;
         this.AsyncPickerDemoTpl = AsyncPickerDemoTpl;
         this.FormattedPickerDemoTpl = FormattedPickerDemoTpl;
-        this.ChecklistPickerResultsDemoTpl = ChecklistPickerResultsDemoTpl;
         this.CustomPickerResultsDemoTpl = CustomPickerResultsDemoTpl;
 
         this.placeholder = 'Select...';
@@ -106,11 +124,6 @@ export class PickerDemoComponent {
             options: collaborators
         };
 
-        this.checklist = {
-            resultsTemplate: ChecklistPickerResults,
-            format: '$firstName $lastName',
-            options: collaborators
-        };
         this.custom = {
             resultsTemplate: CustomPickerResults,
             format: '$firstName $lastName',

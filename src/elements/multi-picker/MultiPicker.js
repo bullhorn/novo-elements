@@ -29,11 +29,11 @@ const CHIPS_VALUE_ACCESSOR = {
             (select)="select($event, item)">
             {{ item.label }}
         </chip>
-        <span *ngIf="items.length > 4">
-            <span *ngFor="let type of types">
-                <span *ngIf="notShown[type]" class="summary"> + {{notShown[type]}} more {{type}}</span>
-            </span>
-        </span>
+        <div *ngIf="items.length > 4">
+            <ul class="summary">
+                <li *ngFor="let type of notShown">+ {{type.count}} more {{type.type}}</li>
+            </ul>
+        </div>
         <div class="chip-input-container">
             <novo-picker
                 clearValueOnSelect="true"
@@ -82,6 +82,7 @@ export class NovoMultiPickerElement extends OutsideClick {
     }
 
     clearValue() {
+        this.types.forEach(type => this.modifyAllOfType(type, 'unselect'));
         this.items = [];
         this._items.next(this.items);
         this.value = this.setInitialValue(null);
@@ -149,7 +150,7 @@ export class NovoMultiPickerElement extends OutsideClick {
         }, this);
         let selectAll = {
             value: 'ALL',
-            label: `All ${option.type}`,
+            label: `All ${option.type}s`,
             type: option.type,
             checked: (this.model && this.model.length && (this.model.indexOf('ALL') !== -1))
         };
@@ -222,11 +223,19 @@ export class NovoMultiPickerElement extends OutsideClick {
     }
 
     updateMoreItemsText(items) {
+        this.notShown = [];
         let notShown = items.slice(4);
         if (notShown.length > 0) {
             this.types.forEach(type => {
-                let count = notShown.filter(x => x.type === type).length;
-                this.notShown[type] = count;
+                let count;
+                let selectedOfType = notShown.filter(x => x.type === type);
+                if (selectedOfType.length === 1 && selectedOfType[0].value === 'ALL') {
+                    count = this._options.filter(x => x.type === type)[0].data.length - 1;
+                } else {
+                    count = selectedOfType.length;
+                }
+                let displayType = count === 1 ? type.replace(/s$/g, '') : type;
+                if (count > 0) { this.notShown.push({ type: displayType, count: count }); }
             });
         }
     }
@@ -300,6 +309,7 @@ export class NovoMultiPickerElement extends OutsideClick {
         let allOfType = this._options.filter(x => x.type === type)[0].data;
         let allItem = allOfType[0];
         this.removeItem(allItem);
+        allItem.indeterminate = true;
         let selectedItems = allOfType.filter(i => i.checked === true);
         this.items = [...this.items, ...selectedItems];
         let values = selectedItems.map(i => { return { value: i.value }; });

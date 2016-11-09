@@ -1,14 +1,48 @@
 multi-picker {
     @extend chips;
+    @extend novo-checkbox;
 
     .chip-input-container {
         padding-top: 10px;
-        width: 100%;
+    }
+
+    ul.summary {
+        display: inline;
+        list-style: none;
+        padding: 0 10px 0;
+
+        li {
+            display: inline;
+            padding: 0 3px;
+        }
+
+        li:after {
+            content: ", ";
+        }
+
+        li:last-child:after {
+            content: " ";
+        }
     }
 
     .summary {
         color: #6b6b6b;
     }
+    label {
+        color: darken(#D2D2D2, 30%);
+        margin-left: 0;
+        cursor: pointer;
+        transition: all 200ms ease-in-out;
+        display: flex;
+        align-items: baseline;
+
+        span {
+            display: inline-block;
+        }
+    }
+
+    //decrease padding below header
+    //caption style try that - either that or label
 
     novo-picker {
         li {
@@ -16,9 +50,42 @@ multi-picker {
                 text-transform: uppercase;
                 font-weight: 400;
                 border-top: 1px solid #e8e8e8;
+                padding-bottom: 0;
             }
             label {
+                color: #9e9e9e;
                 text-transform: capitalize;
+                &:hover {
+                    i {
+                        &.bhi-checkbox-empty,
+                        &.bhi-checkbox-indeterminate {
+                            color: $positive;
+                        }
+                    }
+                }
+            }
+            &.checked {
+                label {
+                    color: darken(#D2D2D2, 60%);
+
+                    i {
+                        animation: iconEnter 160ms ease-in-out;
+                    }
+                }
+            }
+        }
+        i {
+            margin-right: 5px;
+            transition: all 200ms ease-in-out;
+
+            &.bhi-checkbox-empty,
+            &.bhi-radio-empty {
+                color: #D2D2D2;
+            }
+
+            &.bhi-checkbox-filled,
+            &.bhi-checkbox-indeterminate {
+                color: $positive;
             }
         }
     }

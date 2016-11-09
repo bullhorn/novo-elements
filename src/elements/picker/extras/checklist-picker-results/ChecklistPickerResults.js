@@ -22,14 +22,14 @@ import { Observable } from 'rxjs/Rx';
         <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
         <ul *ngIf="matches.length > 0">
             <span *ngFor="let section of matches; let i = index">
-                <li class="header" *ngIf="section.data.length > 0">{{section.type}}</li>
+                <li class="header caption" *ngIf="section.data.length > 0">{{section.type}}</li>
                 <li
                     *ngFor="let match of section.data; let i = index" [ngClass]="{checked: match.checked}"
                     (click)="selectMatch($event, match)"
                     [class.active]="match===activeMatch"
                     (mouseenter)="selectActive(match)">
                     <label>
-                        <i [ngClass]="{'bhi-checkbox-empty': !match.checked, 'bhi-checkbox-filled': match.checked }"></i>
+                        <i [ngClass]="{'bhi-checkbox-empty': !match.checked, 'bhi-checkbox-filled': match.checked, 'bhi-checkbox-indeterminate': match.indeterminate }"></i>
                         {{match.label}}
                     </label>
                 </li>
@@ -140,6 +140,7 @@ export class ChecklistPickerResults extends PickerResults {
     selectMatch(event, item) {
         Helpers.swallowEvent(event);
         item.checked = !item.checked;
+        if (item.indeterminate) { item.indeterminate = false; }
 
         let selected = this.activeMatch;
         if (selected) {
