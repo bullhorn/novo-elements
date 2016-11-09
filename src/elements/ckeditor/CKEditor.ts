@@ -130,11 +130,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
         }
     }
 
-<<<<<<< HEAD
-    onChange(event?) {
-=======
     onChange(value?: any) {
->>>>>>> 5e928048c8dc79eb46ed90a3a8af3499dc799f88
     }
 
     onTouched(event?) {
