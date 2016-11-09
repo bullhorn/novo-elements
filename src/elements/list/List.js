@@ -19,9 +19,8 @@ export class NovoListElement {
 @Component({
     selector: 'novo-list-item',
     template: `
-        <ng-content select="item-avatar"></ng-content>
-        <div>
-            <ng-content select="item-title"></ng-content>
+        <div class="list-item">
+            <ng-content select="item-header"></ng-content>
             <ng-content select="item-content"></ng-content>
         </div>
         <ng-content select="item-end"></ng-content>
@@ -51,10 +50,30 @@ export class NovoItemAvatarElement {
 @Component({
     selector: 'item-title',
     template: `
-        <h3><ng-content></ng-content></h3>
+        <h6><ng-content></ng-content></h6>
     `
 })
 export class NovoItemTitleElement {
+}
+
+@Component({
+    selector: 'item-header',
+    template: `
+            <ng-content select="item-avatar"></ng-content>
+            <ng-content select="item-title"></ng-content>
+            <ng-content select="item-date"></ng-content>
+    `
+})
+export class NovoItemHeaderElement {
+}
+
+@Component({
+    selector: 'item-date',
+    template: `
+        <ng-content></ng-content>
+    `
+})
+export class NovoItemDateElement {
 }
 
 @Component({
