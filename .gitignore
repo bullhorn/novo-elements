@@ -10,7 +10,11 @@
 /src/**/*.js.map
 /src/**/*.d.ts
 novo-elements.js
-novo-elemenst.d.ts
+novo-elements.d.ts
+novo-elements.module.js
+novo-elements.module.d.ts
+novo-elements.providers.js
+novo-elements.providers.d.ts
 
 
 # dependencies
