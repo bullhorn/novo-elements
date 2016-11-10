@@ -5964,7 +5964,7 @@ picker-loader {
   -ms-flex-direction: column;
   flex-direction: column; }
 
-chips,
+chips, multi-picker,
 entity-chips {
   width: 100%;
   display: -webkit-box;
@@ -5987,21 +5987,21 @@ entity-chips {
   transition: all 200ms ease-in-out;
   position: relative;
   padding: 5px 20px 5px 0; }
-  chips.with-value,
+  chips.with-value, multi-picker.with-value,
   entity-chips.with-value {
     margin-bottom: 20px; }
-  chips:hover,
+  chips:hover, multi-picker:hover,
   entity-chips:hover {
     border-bottom: 1px solid #afb9c0; }
-  chips.selected, chips.selected:hover,
+  chips.selected, multi-picker.selected, chips.selected:hover, multi-picker.selected:hover,
   entity-chips.selected,
   entity-chips.selected:hover {
     border-bottom: 1px solid #4A89DC; }
-    chips.selected + i, chips.selected:hover + i,
+    chips.selected + i, multi-picker.selected + i, chips.selected:hover + i, multi-picker.selected:hover + i,
     entity-chips.selected + i,
     entity-chips.selected:hover + i {
       color: #4A89DC; }
-  chips chip,
+  chips chip, multi-picker chip,
   entity-chips chip {
     display: -webkit-box;
     display: -webkit-flex;
@@ -6029,7 +6029,7 @@ entity-chips {
     border: 1px solid transparent;
     -webkit-transition: all 200ms ease-in-out;
     transition: all 200ms ease-in-out; }
-    chips chip span,
+    chips chip span, multi-picker chip span,
     entity-chips chip span {
       color: #7b7b7b;
       vertical-align: middle;
@@ -6045,51 +6045,51 @@ entity-chips {
       -webkit-align-items: center;
       -ms-flex-align: center;
       align-items: center; }
-      chips chip span i,
+      chips chip span i, multi-picker chip span i,
       entity-chips chip span i {
         font-size: 0.8em; }
-        chips chip span i:before,
+        chips chip span i:before, multi-picker chip span i:before,
         entity-chips chip span i:before {
           vertical-align: baseline !important; }
-    chips chip i.bhi-close,
+    chips chip i.bhi-close, multi-picker chip i.bhi-close,
     entity-chips chip i.bhi-close {
       margin-left: 10px;
       cursor: pointer;
       color: #c8c8c8; }
-      chips chip i.bhi-close:before,
+      chips chip i.bhi-close:before, multi-picker chip i.bhi-close:before,
       entity-chips chip i.bhi-close:before {
         vertical-align: baseline; }
-      chips chip i.bhi-close:hover,
+      chips chip i.bhi-close:hover, multi-picker chip i.bhi-close:hover,
       entity-chips chip i.bhi-close:hover {
         color: #959595; }
-    chips chip.selected,
+    chips chip.selected, multi-picker chip.selected,
     entity-chips chip.selected {
       border: 1px solid #4A89DC; }
-  chips .chip-input-container,
+  chips .chip-input-container, multi-picker .chip-input-container,
   entity-chips .chip-input-container {
     -webkit-box-flex: 4;
     -webkit-flex-grow: 4;
     -ms-flex-positive: 4;
     flex-grow: 4; }
-    chips .chip-input-container input,
+    chips .chip-input-container input, multi-picker .chip-input-container input,
     entity-chips .chip-input-container input {
       padding-top: 0;
       border: none;
       background: transparent;
       width: 100%; }
-      chips .chip-input-container input:focus,
+      chips .chip-input-container input:focus, multi-picker .chip-input-container input:focus,
       entity-chips .chip-input-container input:focus {
         outline: none; }
-  chips novo-picker,
+  chips novo-picker, multi-picker novo-picker,
   entity-chips novo-picker {
     position: inherit; }
-    chips novo-picker > i,
+    chips novo-picker > i, multi-picker novo-picker > i,
     entity-chips novo-picker > i {
       display: none; }
-    chips novo-picker div.picker-results-container,
+    chips novo-picker div.picker-results-container, multi-picker novo-picker div.picker-results-container,
     entity-chips novo-picker div.picker-results-container {
       left: 0; }
-  chips label.clear-all,
+  chips label.clear-all, multi-picker label.clear-all,
   entity-chips label.clear-all {
     -webkit-box-flex: 1;
     -webkit-flex: 1 100%;
@@ -6109,18 +6109,18 @@ entity-chips {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center; }
-    chips label.clear-all i,
+    chips label.clear-all i, multi-picker label.clear-all i,
     entity-chips label.clear-all i {
       font-size: 0.6rem;
       padding-bottom: 2px;
       margin-right: 5px; }
-  chips i.bhi-search,
+  chips i.bhi-search, multi-picker i.bhi-search,
   entity-chips i.bhi-search {
     position: absolute;
     top: 5px;
     right: 0; }
 
-chips + i,
+chips + i, multi-picker + i,
 entity-chips + i {
   position: absolute;
   right: 0;
@@ -8309,12 +8309,17 @@ novo-table {
       .table > tfoot > tr > th.checkbox {
         text-align: center;
         padding-bottom: 15px; }
-        .table > tbody > tr > td.checkbox > novo-checkbox,
+        .table > tbody > tr > td.checkbox > novo-checkbox, .table > tbody > tr > td.checkbox > multi-picker,
         .table > tbody > tr > th.checkbox > novo-checkbox,
+        .table > tbody > tr > th.checkbox > multi-picker,
         .table > thead > tr > td.checkbox > novo-checkbox,
+        .table > thead > tr > td.checkbox > multi-picker,
         .table > thead > tr > th.checkbox > novo-checkbox,
+        .table > thead > tr > th.checkbox > multi-picker,
         .table > tfoot > tr > td.checkbox > novo-checkbox,
-        .table > tfoot > tr > th.checkbox > novo-checkbox {
+        .table > tfoot > tr > td.checkbox > multi-picker,
+        .table > tfoot > tr > th.checkbox > novo-checkbox,
+        .table > tfoot > tr > th.checkbox > multi-picker {
           -webkit-box-pack: center;
           -webkit-justify-content: center;
           -ms-flex-pack: center;
@@ -8502,12 +8507,12 @@ novo-table {
     margin: 40px 0;
     vertical-align: middle;
     text-transform: uppercase; }
-  .table novo-checkbox .check-box-group {
+  .table novo-checkbox .check-box-group, .table multi-picker .check-box-group {
     color: #999999;
     margin-right: 0; }
-    .table novo-checkbox .check-box-group.checked {
+    .table novo-checkbox .check-box-group.checked, .table multi-picker .check-box-group.checked {
       color: #4A89DC; }
-    .table novo-checkbox .check-box-group .bhi-checkbox-indeterminate {
+    .table novo-checkbox .check-box-group .bhi-checkbox-indeterminate, .table multi-picker .check-box-group .bhi-checkbox-indeterminate {
       color: #4A89DC; }
 
 .table-condensed > tbody > tr > td,
@@ -9290,7 +9295,7 @@ novo-address {
     flex: 4 4 100%;
     padding: 10px 0 0 !important; }
 
-novo-checkbox,
+novo-checkbox, multi-picker,
 novo-check-list {
   display: -webkit-box;
   display: -webkit-flex;
@@ -9299,29 +9304,29 @@ novo-check-list {
   -webkit-flex-flow: row wrap;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap; }
-  novo-checkbox [class*="-group"],
+  novo-checkbox [class*="-group"], multi-picker [class*="-group"],
   novo-check-list [class*="-group"] {
     margin-right: 15px;
     cursor: pointer; }
-    novo-checkbox [class*="-group"]:hover label i.bhi-checkbox-empty, novo-checkbox [class*="-group"]:hover label i.bhi-radio-empty,
+    novo-checkbox [class*="-group"]:hover label i.bhi-checkbox-empty, multi-picker [class*="-group"]:hover label i.bhi-checkbox-empty, novo-checkbox [class*="-group"]:hover label i.bhi-radio-empty, multi-picker [class*="-group"]:hover label i.bhi-radio-empty,
     novo-check-list [class*="-group"]:hover label i.bhi-checkbox-empty,
     novo-check-list [class*="-group"]:hover label i.bhi-radio-empty {
       color: #4A89DC; }
-    novo-checkbox [class*="-group"].checked label,
+    novo-checkbox [class*="-group"].checked label, multi-picker [class*="-group"].checked label,
     novo-check-list [class*="-group"].checked label {
       color: #393939; }
-      novo-checkbox [class*="-group"].checked label i,
+      novo-checkbox [class*="-group"].checked label i, multi-picker [class*="-group"].checked label i,
       novo-check-list [class*="-group"].checked label i {
         -webkit-animation: iconEnter 160ms ease-in-out;
         animation: iconEnter 160ms ease-in-out; }
-    novo-checkbox [class*="-group"].disabled,
+    novo-checkbox [class*="-group"].disabled, multi-picker [class*="-group"].disabled,
     novo-check-list [class*="-group"].disabled {
       opacity: 0.3;
       pointer-events: none; }
-      novo-checkbox [class*="-group"].disabled label,
+      novo-checkbox [class*="-group"].disabled label, multi-picker [class*="-group"].disabled label,
       novo-check-list [class*="-group"].disabled label {
         opacity: 1; }
-    novo-checkbox [class*="-group"] label,
+    novo-checkbox [class*="-group"] label, multi-picker [class*="-group"] label,
     novo-check-list [class*="-group"] label {
       color: #868686;
       margin-left: 0;
@@ -9336,20 +9341,20 @@ novo-check-list {
       -webkit-align-items: baseline;
       -ms-flex-align: baseline;
       align-items: baseline; }
-      novo-checkbox [class*="-group"] label i,
+      novo-checkbox [class*="-group"] label i, multi-picker [class*="-group"] label i,
       novo-check-list [class*="-group"] label i {
         margin-right: 5px;
         -webkit-transition: all 200ms ease-in-out;
         transition: all 200ms ease-in-out; }
-        novo-checkbox [class*="-group"] label i.bhi-checkbox-empty, novo-checkbox [class*="-group"] label i.bhi-radio-empty,
+        novo-checkbox [class*="-group"] label i.bhi-checkbox-empty, multi-picker [class*="-group"] label i.bhi-checkbox-empty, novo-checkbox [class*="-group"] label i.bhi-radio-empty, multi-picker [class*="-group"] label i.bhi-radio-empty,
         novo-check-list [class*="-group"] label i.bhi-checkbox-empty,
         novo-check-list [class*="-group"] label i.bhi-radio-empty {
           color: #D2D2D2; }
-        novo-checkbox [class*="-group"] label i.bhi-checkbox-filled, novo-checkbox [class*="-group"] label i.bhi-radio-filled,
+        novo-checkbox [class*="-group"] label i.bhi-checkbox-filled, multi-picker [class*="-group"] label i.bhi-checkbox-filled, novo-checkbox [class*="-group"] label i.bhi-radio-filled, multi-picker [class*="-group"] label i.bhi-radio-filled,
         novo-check-list [class*="-group"] label i.bhi-checkbox-filled,
         novo-check-list [class*="-group"] label i.bhi-radio-filled {
           color: #4A89DC; }
-      novo-checkbox [class*="-group"] label span,
+      novo-checkbox [class*="-group"] label span, multi-picker [class*="-group"] label span,
       novo-check-list [class*="-group"] label span {
         display: inline-block; }
 
@@ -9529,11 +9534,13 @@ novo-form {
             novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control.disabled label,
             novo-form .novo-form-container form > div.novo-form-row novo-control.disabled label {
               color: #D9DADC !important; }
-            novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control.disabled chips,
-            novo-form .novo-form-container form > div.novo-form-row novo-control.disabled chips {
+            novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control.disabled chips, novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control.disabled multi-picker,
+            novo-form .novo-form-container form > div.novo-form-row novo-control.disabled chips,
+            novo-form .novo-form-container form > div.novo-form-row novo-control.disabled multi-picker {
               border-bottom: 1px dashed #D9DADC !important; }
-              novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control.disabled chips chip,
-              novo-form .novo-form-container form > div.novo-form-row novo-control.disabled chips chip {
+              novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control.disabled chips chip, novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control.disabled multi-picker chip,
+              novo-form .novo-form-container form > div.novo-form-row novo-control.disabled chips chip,
+              novo-form .novo-form-container form > div.novo-form-row novo-control.disabled multi-picker chip {
                 opacity: 0.5; }
             novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control.disabled .bhi-search,
             novo-form .novo-form-container form > div.novo-form-row novo-control.disabled .bhi-search {
@@ -9750,17 +9757,21 @@ novo-form {
                     novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:hover,
                     novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:focus {
                       border-bottom-color: transparent !important; }
-                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips,
-                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips {
+                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips, novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > multi-picker,
+                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips,
+                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > multi-picker {
                     padding: 2px 0; }
-                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips novo-picker,
-                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips novo-picker {
+                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips novo-picker, novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > multi-picker novo-picker,
+                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips novo-picker,
+                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > multi-picker novo-picker {
                       padding-bottom: 0; }
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips novo-picker > input,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips novo-picker > input {
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips novo-picker > input, novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > multi-picker novo-picker > input,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips novo-picker > input,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > multi-picker novo-picker > input {
                         border: none; }
-                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips.with-value,
-                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips.with-value {
+                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips.with-value, novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > multi-picker.with-value,
+                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips.with-value,
+                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > multi-picker.with-value {
                       margin-bottom: 0; }
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results,
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results,
@@ -10085,11 +10096,13 @@ novo-form {
       novo-dynamic-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled label,
       novo-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled label {
         color: #D9DADC !important; }
-      novo-dynamic-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled chips,
-      novo-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled chips {
+      novo-dynamic-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled chips, novo-dynamic-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled multi-picker,
+      novo-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled chips,
+      novo-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled multi-picker {
         border-bottom: 1px dashed #D9DADC !important; }
-        novo-dynamic-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled chips chip,
-        novo-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled chips chip {
+        novo-dynamic-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled chips chip, novo-dynamic-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled multi-picker chip,
+        novo-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled chips chip,
+        novo-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled multi-picker chip {
           opacity: 0.5; }
       novo-dynamic-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled .bhi-search,
       novo-form[layout="vertical"] .novo-form-container form > div.novo-form-row novo-control.disabled .bhi-search {
@@ -11109,6 +11122,52 @@ novo-category-dropdown {
     novo-category-dropdown[side=right] .dropdown-container {
       right: 0px; }
 
+multi-picker .chip-input-container {
+  padding-top: 10px; }
+
+multi-picker ul.summary {
+  display: inline;
+  list-style: none;
+  color: #868686;
+  padding: 0 10px 0; }
+  multi-picker ul.summary li {
+    display: inline;
+    padding: 0 3px; }
+  multi-picker ul.summary li:after {
+    content: ", "; }
+  multi-picker ul.summary li:last-child:after {
+    content: " "; }
+
+multi-picker novo-picker li.header {
+  text-transform: uppercase;
+  font-weight: 400;
+  border-top: 1px solid #e8e8e8;
+  padding-bottom: 0; }
+
+multi-picker novo-picker li label {
+  color: #9e9e9e;
+  text-transform: capitalize; }
+  multi-picker novo-picker li label:hover i.bhi-checkbox-empty, multi-picker novo-picker li label:hover i.bhi-checkbox-indeterminate {
+    color: #4A89DC; }
+
+multi-picker novo-picker li.checked label {
+  color: #393939; }
+  multi-picker novo-picker li.checked label i {
+    -webkit-animation: iconEnter 160ms ease-in-out;
+    animation: iconEnter 160ms ease-in-out; }
+
+multi-picker novo-picker i {
+  margin-right: 5px;
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out; }
+  multi-picker novo-picker i.bhi-checkbox-empty {
+    color: #D2D2D2; }
+  multi-picker novo-picker i.bhi-checkbox-filled, multi-picker novo-picker i.bhi-checkbox-indeterminate {
+    color: #4A89DC; }
+
+multi-picker chip span {
+  text-transform: capitalize; }
+
 html {
   height: 100%;
   width: 100%; }
@@ -11807,84 +11866,84 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 26px;
-      height: 26px; }
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 29px;
-      height: 29px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 36px;
-      height: 36px; }
+      width: 31px;
+      height: 31px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 44px;
-      height: 44px; }
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-submission {
-      background: #778899;
       width: 35px;
       height: 35px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
       width: 30px;
       height: 30px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 26px;
+      height: 26px; }
+    color header .background-boxes .bb-submission {
+      background: #778899;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-note {
       background: #747884;
-      width: 37px;
-      height: 37px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-task {
       background: #747884;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
       width: 42px;
       height: 42px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-ocean {
       background: #4A89DC;
       width: 30px;
       height: 30px; }
     color header .background-boxes .bb-mint {
       background: #37BC9B;
-      width: 44px;
-      height: 44px; }
+      width: 39px;
+      height: 39px; }
     color header .background-boxes .bb-grass {
       background: #8CC152;
-      width: 42px;
-      height: 42px; }
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-sunflower {
       background: #F6B042;
-      width: 33px;
-      height: 33px; }
+      width: 39px;
+      height: 39px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
-      width: 33px;
-      height: 33px; }
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
-      width: 28px;
-      height: 28px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 40px;
-      height: 40px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 26px;
-      height: 26px; }
+      width: 42px;
+      height: 42px; }
 
 color article.color-blocks {
   display: -webkit-box;
@@ -12957,4 +13016,4 @@ category-dropdown-demo div.example {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=demo.add3797c0679acfd0ad7.map*/
+/*# sourceMappingURL=demo.e2d3c45369ef38c7d286.map*/
