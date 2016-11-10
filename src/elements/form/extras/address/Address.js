@@ -1,8 +1,8 @@
 // NG2
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { getCountries, getStates, findByCountryName } from '../../../../utils/countries/Countries';
+import { getCountries, getStates, findByCountryName, findByCountryId } from '../../../../utils/countries/Countries';
 
 // Value accessor for the component (supports ngModel)
 const ADDRESS_VALUE_ACCESSOR = {
@@ -15,19 +15,19 @@ const ADDRESS_VALUE_ACCESSOR = {
     selector: 'novo-address',
     providers: [ADDRESS_VALUE_ACCESSOR],
     template: `
-        <input type="text" class="street-address" id="address1" name="address1" placeholder="Address" [(ngModel)]="model.address1" (ngModelChange)="updateControl()"/>
-        <input type="text" class="apt suite" id="address2" name="address2" placeholder="Apt" [(ngModel)]="model.address2" (ngModelChange)="updateControl()"/>
-        <input type="text" class="city locality" id="city" name="city" placeholder="City / Locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()"/>
-        <novo-select class="state region" id="state" [options]="states" placeholder="State / Region" [(ngModel)]="model.state" (ngModelChange)="onStateChange($event)"></novo-select>
-        <input type="text" class="zip postal-code" id="zip" name="zip" placeholder="Postal Code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()"/>
-        <novo-select class="country-name" id="country" [options]="countries" placeholder="Country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event)"></novo-select>
+        <input type="text" class="street-address" id="address1" name="address1" placeholder="Address" [(ngModel)]="address1" (ngModelChange)="updateControl()"/>
+        <input type="text" class="apt suite" id="address2" name="address2" placeholder="Apt" [(ngModel)]="address2" (ngModelChange)="updateControl()"/>
+        <input type="text" class="city locality" id="city" name="city" placeholder="City / Locality" [(ngModel)]="city" (ngModelChange)="updateControl()"/>
+        <novo-select class="state region" id="state" [options]="states" placeholder="State / Region" [(ngModel)]="state" (ngModelChange)="onStateChange($event)"></novo-select>
+        <input type="text" class="zip postal-code" id="zip" name="zip" placeholder="Postal Code" [(ngModel)]="zip" (ngModelChange)="updateControl()"/>
+        <novo-select class="country-name" id="country" [options]="countries" placeholder="Country" [(ngModel)]="countryName" (ngModelChange)="onCountryChange($event)"></novo-select>
     `
 })
 export class NovoAddressElement implements ControlValueAccessor {
     states:Array = [];
     countries:Array = getCountries();
 
-    model;
+    @Input() model;
     onModelChange:Function = () => {
     };
     onModelTouched:Function = () => {
@@ -41,20 +41,32 @@ export class NovoAddressElement implements ControlValueAccessor {
             };
         } else if (this.model.countryName) {
             this.model.countryName = this.model.countryName.trim();
+        } else {
+            this.address1 = this.model.address1;
+            this.address2 = this.model.address2;
+            this.city = this.model.city;
+            this.state = this.model.state;
+            this.zip = this.model.zip;
+            this.countryID = this.model.countryID;
         }
         this.updateControl();
         this.updateStates();
     }
 
     onCountryChange(evt) {
-        this.model.countryName = evt;
-        let country = findByCountryName(this.model.countryName);
+        let country;
+        if (typeof evt === 'number') {
+            country = findByCountryId(this.model.countryID);
+        } else {
+            country = findByCountryName(evt);
+        }
+        this.model.countryName = country.name;
         this.model.countryCode = country.code;
         this.model.countryID = country.id;
         this.updateStates();
 
         // Update state
-        this.model.state = null;
+        // this.model.state = null;
         this.updateControl();
     }
 
