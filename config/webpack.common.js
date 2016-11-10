@@ -47,7 +47,7 @@ module.exports = {
     // See: http://webpack.github.io/docs/configuration.html#entry
     entry: {
         'polyfills': './demo/polyfills.browser.js',
-        'vendor': './demo/vendor.browser.js',
+        'deps': './demo/vendor.browser.js',
         'demo': './demo/main.browser.js',
         'lib': [`src/${METADATA.name}`]
     },
@@ -165,7 +165,7 @@ module.exports = {
         // See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
         // See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['polyfills', 'vendor', 'lib'].reverse()
+            name: ['polyfills', 'deps', 'lib'].reverse()
         }),
 
         // Plugin: CopyWebpackPlugin

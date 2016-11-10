@@ -39,12 +39,12 @@ module.exports = webpackMerge(commonConfig, {
         // Specifies the name of each output file on disk.
         // IMPORTANT: You must not specify an absolute path here!
         // See: http://webpack.github.io/docs/configuration.html#output-filename
-        filename: '[name].[chunkhash].bundle.js',
+        filename: '[name].[chunkhash].js',
 
         // The filename of the SourceMaps for the JavaScript files.
         // They are inside the output.path directory.
         // See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
-        sourceMapFilename: '[name].[chunkhash].bundle.map',
+        sourceMapFilename: '[name].[chunkhash].map',
 
         // The filename of non-entry chunks as relative path
         // inside the output.path directory.
