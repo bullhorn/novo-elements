@@ -1,5 +1,5 @@
 // NG2
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { getCountries, getStates, findByCountryName, findByCountryId } from '../../../../utils/countries/Countries';
@@ -14,6 +14,7 @@ const ADDRESS_VALUE_ACCESSOR = {
 @Component({
     selector: 'novo-address',
     providers: [ADDRESS_VALUE_ACCESSOR],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <input type="text" class="street-address" id="address1" name="address1" placeholder="Address" [(ngModel)]="address1" (ngModelChange)="updateControl()"/>
         <input type="text" class="apt suite" id="address2" name="address2" placeholder="Apt" [(ngModel)]="address2" (ngModelChange)="updateControl()"/>
@@ -28,29 +29,37 @@ export class NovoAddressElement implements ControlValueAccessor {
     countries:Array = getCountries();
 
     @Input() model;
+    constructor(changeDetectorRef:ChangeDetectorRef) {
+        this.changeDetectorRef = changeDetectorRef;
+    }
     onModelChange:Function = () => {
     };
     onModelTouched:Function = () => {
     };
 
     ngOnInit() {
-        if (!this.model) {
-            this.model = {
-                countryID: 1,
-                countryName: 'United States'
-            };
-        } else if (this.model.countryName) {
+        this.values = {};
+        if (this.model) {
+            Object.assign(this.values, this.model);
+        }
+        if (this.model.countryName) {
             this.model.countryName = this.model.countryName.trim();
         } else {
-            this.address1 = this.model.address1;
-            this.address2 = this.model.address2;
-            this.city = this.model.city;
-            this.state = this.model.state;
-            this.zip = this.model.zip;
-            this.countryID = this.model.countryID;
+            setTimeout(() => {
+                if (this.model) {
+                    this.address1 = this.values.address1;
+                    this.address2 = this.values.address2;
+                    this.city = this.values.city;
+                    this.zip = this.values.zip;
+                    this.countryID = this.values.countryID;
+                    this.onCountryChange(this.values.countryID);
+                    this.state = this.states.find(state => {
+                        return state === this.values.state;
+                    });
+                    this.updateControl();
+                }
+            });
         }
-        this.updateControl();
-        this.updateStates();
     }
 
     onCountryChange(evt) {
@@ -60,13 +69,13 @@ export class NovoAddressElement implements ControlValueAccessor {
         } else {
             country = findByCountryName(evt);
         }
-        this.model.countryName = country.name;
-        this.model.countryCode = country.code;
-        this.model.countryID = country.id;
+        this.countryName = country.name;
+        this.countryCode = country.code;
+        this.countryID = country.id;
         this.updateStates();
 
         // Update state
-        // this.model.state = null;
+        this.state = null;
         this.updateControl();
     }
 
@@ -85,6 +94,7 @@ export class NovoAddressElement implements ControlValueAccessor {
 
     updateControl() {
         this.onModelChange(this.model);
+        this.changeDetectorRef.markForCheck();
     }
 
     writeValue(model:any):void {
