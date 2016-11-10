@@ -10,8 +10,7 @@ import { Observable } from 'rxjs/Rx';
 /**
  * @name: ChecklistPickerResults
  *
- * @description This is the actual list of matches that gets injected into the DOM. It's also the piece that can be
- * overwritten if custom list options are needed.
+ * @description This is the actual list of matches that gets injected into the DOM.
  */
 @Component({
     selector: 'checklist-picker-results',
@@ -44,7 +43,7 @@ export class ChecklistPickerResults extends PickerResults {
         super(element, labels);
     }
 
-    search(term) {
+    search() {
         let options = this.config.options;
         //only set this the first time
         return Observable.fromPromise(new Promise((resolve, reject) => {
@@ -54,19 +53,7 @@ export class ChecklistPickerResults extends PickerResults {
                 if (Array.isArray(options)) {
                     this.isStatic = true;
                     // Arrays are returned immediately
-                    resolve(this.structureArray(options));
-                } else if ((options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) || Object.getPrototypeOf(options).hasOwnProperty('then')) {
-                    this.isStatic = false;
-                    // Promises (ES6 or Deferred) are resolved whenever they resolve
-                    options
-                        .then(this.structureArray.bind(this))
-                        .then(resolve, reject);
-                } else if (typeof options === 'function') {
-                    this.isStatic = false;
-                    // Promises (ES6 or Deferred) are resolved whenever they resolve
-                    options(term)
-                        .then(this.structureArray.bind(this))
-                        .then(resolve, reject);
+                    resolve(options);
                 } else {
                     // All other kinds of data are rejected
                     reject('The data provided is not an array or a promise');
@@ -78,32 +65,6 @@ export class ChecklistPickerResults extends PickerResults {
             }
         }));
     }
-
-    /**
-     * @name structureArray
-     * @param collection - the data once getData resolves it
-     * @returns { Array }
-     *
-     * @description This function structures an array of nodes into an array of objects with a
-     * 'name' field by default.
-     */
-    structureArray(collection:Array):Array {
-        return collection;
-        // if (dataArray && (typeof dataArray[0] === 'string' || typeof dataArray[0] === 'number')) {
-        //     return collection.map((item) => {
-        //         return {
-        //             value: item,
-        //             label: item
-        //         };
-        //     });
-        // }
-        // return dataArray.map((data) => {
-        //     let value = this.config.field ? data[this.config.field] : (data.value || data);
-        //     let label = this.config.format ? Helpers.interpolate(this.config.format, data) : data.label || String(value);
-        //     return { value, label, data };
-        // });
-    }
-
     /**
      * @name filterData=
      * @param matches - Collection of objects=

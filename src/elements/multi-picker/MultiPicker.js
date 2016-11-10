@@ -77,7 +77,6 @@ export class NovoMultiPickerElement extends OutsideClick {
     }
 
     ngOnInit() {
-        this.setItems();
         this.setupOptions();
     }
 
@@ -87,40 +86,6 @@ export class NovoMultiPickerElement extends OutsideClick {
         this._items.next(this.items);
         this.value = this.setInitialValue(null);
         this.onModelChange(this.value);
-    }
-
-    setItems() {
-        this.items = [];
-        if (this.model && this.types) {
-            this.types.forEach(type => {
-                if (this.model[type] && Array.isArray(this.model[type])) {
-                    let noLabels = [];
-                    for (let value of this.model[type]) {
-                        let label;
-                        if (this.source && this.source.format) {
-                            label = Helpers.interpolate(this.source.format, value);
-                        }
-                        if (this.source && label && label !== this.source.format) {
-                            this.items.push({
-                                value,
-                                label
-                            });
-                        } else if (this.source.getLabels && typeof this.source.getLabels === 'function') {
-                            noLabels.push(value);
-                        } else {
-                            this.items.push(value);
-                        }
-                    }
-                    if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
-                        this.source.getLabels(noLabels).then(result => {
-                            this.items = this.items.concat(result);
-                            this._items.next(this.items);
-                        });
-                    }
-                }
-            });
-        }
-        this._items.next(this.items);
     }
 
     setupOptions() {
@@ -150,25 +115,13 @@ export class NovoMultiPickerElement extends OutsideClick {
         }, this);
         let selectAll = {
             value: 'ALL',
-            label: `All ${option.type}s`,
+            label: `All ${option.type}`,
             type: option.type,
             checked: (this.model && this.model.length && (this.model.indexOf('ALL') !== -1))
         };
         formattedSection.data.splice(0, 0, selectAll);
         formattedSection.originalData = formattedSection.data.slice();
         return formattedSection;
-    }
-
-    setInitialOptionValues() {
-        if (this.model) {
-            this.types.forEach(type => {
-                let optionsByType = this._options.filter(x => x.type === type)[0].data;
-                this.model[type].forEach(item => {
-                    let value = optionsByType.filter(x => x.value === item.value)[0];
-                    value.checked = true;
-                });
-            });
-        }
     }
 
     deselectAll() {
@@ -206,7 +159,7 @@ export class NovoMultiPickerElement extends OutsideClick {
             this.modifyAllOfType(event.type, 'select');
         } else {
             this.updateItems(event, 'add');
-            this.value[event.type].push({ value: event.value });
+            this.value[event.type].push(event.value);
         }
         this.select(null, event);
     }
@@ -234,8 +187,7 @@ export class NovoMultiPickerElement extends OutsideClick {
                 } else {
                     count = selectedOfType.length;
                 }
-                let displayType = count === 1 ? type.replace(/s$/g, '') : type;
-                if (count > 0) { this.notShown.push({ type: displayType, count: count }); }
+                if (count > 0) { this.notShown.push({ type: count === 1 ? type.replace(/s$/g, '') : type, count: count }); }
             });
         }
     }
@@ -248,8 +200,7 @@ export class NovoMultiPickerElement extends OutsideClick {
         let itemToRemove = event || item;
         if (itemToRemove.value === 'ALL') {
             this.modifyAllOfType(itemToRemove.type, 'unselect');
-        }
-        if (this.allOfTypeSelected(itemToRemove.type)) {
+        } else if (this.allOfTypeSelected(itemToRemove.type)) {
             this.handleRemoveItemIfAllSelected(event, item);
         }
         this.removeItem(item);
@@ -258,7 +209,7 @@ export class NovoMultiPickerElement extends OutsideClick {
     removeItem(item) {
         item.checked = false;
         this.deselectAll();
-        let updatedValues = this.value[item.type].filter(x => x.value !== item.value);
+        let updatedValues = this.value[item.type].filter(x => x !== item.value);
         this.value[item.type] = updatedValues;
         this.onModelChange(this.value);
         this.updateItems(item, 'remove');
@@ -288,20 +239,24 @@ export class NovoMultiPickerElement extends OutsideClick {
         let selecting = action === 'select';
         let allOfType = this._options.filter(x => x.type === type)[0].data;
         allOfType.forEach(item => item.checked = selecting);
-        let values;
         if (selecting) {
-            values = allOfType.map(i => { return { value: i.value }; });
-            values.splice(0, 1);
-            let updatedItems = this.items.filter(x => x.type !== type);
-            this.items = updatedItems;
-            this.updateItems(allOfType[0], 'add');
+            this.selectAll(allOfType, type);
         } else {
-            values = [];
+            this.value[type] = [];
         }
-        this.value[type] = values;
         let updatedObject = {};
         this.types.forEach(x => updatedObject[x] = this.value[x]);
         this.value = updatedObject;
+    }
+
+    selectAll(allOfType, type) {
+        let values = allOfType.map(i => { return i.value; });
+        //remove 'ALL' value
+        values.splice(0, 1);
+        this.value[type] = values;
+        let updatedItems = this.items.filter(x => x.type !== type);
+        this.items = updatedItems;
+        this.updateItems(allOfType[0], 'add');
     }
 
     handleRemoveItemIfAllSelected(event, item) {
@@ -312,7 +267,7 @@ export class NovoMultiPickerElement extends OutsideClick {
         allItem.indeterminate = true;
         let selectedItems = allOfType.filter(i => i.checked === true);
         this.items = [...this.items, ...selectedItems];
-        let values = selectedItems.map(i => { return { value: i.value }; });
+        let values = selectedItems.map(i => { return i.value; });
         this.value[type] = [...values];
     }
 
@@ -342,13 +297,23 @@ export class NovoMultiPickerElement extends OutsideClick {
     }
 
     setInitialValue(model) {
+        this.items = [];
         this.value = model || {};
         if (this.types) {
             this.types.forEach(type => {
                 if (this.value[type]) {
+                    let allSelected = false;
+                    let optionsByType = this._options.filter(x => x.type === type)[0].data;
+                    if (this.value[type].length === optionsByType.length - 1) {
+                        allSelected = true;
+                        optionsByType[0].checked = true;
+                        this.updateItems(optionsByType[0], 'add');
+                    }
                     this.value[type].forEach(item => {
-                        item.type = type;
-                    });
+                        let value = optionsByType.filter(x => x.value === item)[0];
+                        value.checked = true;
+                        if (!allSelected) { this.updateItems(value, 'add'); }
+                    }, this);
                 } else {
                     this.value[type] = [];
                 }
@@ -366,8 +331,6 @@ export class NovoMultiPickerElement extends OutsideClick {
     writeValue(model:any):void {
         this.model = model;
         this.setInitialValue(model);
-        this.setInitialOptionValues();
-        this.setItems();
     }
 
     registerOnChange(fn:Function):void {

@@ -32,23 +32,10 @@ export class MultiPickerDemoComponent {
         this.BasicMultiPicker = BasicMultiPicker;
 
         this.placeholder = 'Select...';
-        this.value = { states: [{ value: 'Alabama', label: 'Alabama' }], collaborators: [] };
+        this.value = { states: ['Alabama'], collaborators: [1, 2, 3, 4] };
         this.types = ['states', 'collaborators'];
 
         let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-        let abbrieviated = [{
-            value: 'USA',
-            label: 'United States'
-        }, {
-            value: 'GB',
-            label: 'Great Britain'
-        }, {
-            value: 'CA',
-            label: 'Canada'
-        }, {
-            value: 'AU',
-            label: 'Austrailia'
-        }];
         let collaborators = [{
             id: 1,
             firstName: 'Brian',
@@ -77,29 +64,6 @@ export class MultiPickerDemoComponent {
             format: '$firstName $lastName',
             options: collaborators
         };
-        this.async = {
-            options: () => {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve(abbrieviated);
-                    }, 300);
-                });
-            },
-            getLabels: (data) => {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        let values = data.map(item => item.value);
-                        let results = abbrieviated.filter(item => values.includes(item.value));
-                        resolve(results);
-                    }, 300);
-                });
-            }
-        };
-        this.avalue = [{
-            value: 'USA'
-        }, {
-            value: 'GB'
-        }];
     }
     onChanged() {
     }
