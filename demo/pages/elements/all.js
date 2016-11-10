@@ -17,6 +17,7 @@ export * from './drawer/DrawerDemo';
 export * from './dragula/DragulaDemo';
 export * from './slides/SlidesDemo';
 export * from './picker/PickerDemo';
+export * from './multi-picker/MultiPickerDemo';
 export * from './chips/ChipsDemo';
 export * from './calendar/CalendarDemo';
 export * from './editor/EditorDemo';
