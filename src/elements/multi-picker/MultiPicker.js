@@ -98,25 +98,24 @@ export class NovoMultiPickerElement extends OutsideClick {
             });
         }
         this.source.options = this._options;
-        return this._options;
     }
 
-    setupOptionsByType(option) {
+    setupOptionsByType(section) {
         let formattedSection = {
-            type: option.type
+            type: section.type
         };
-        formattedSection.data = option.data.map(item => {
+        formattedSection.data = section.data.map(item => {
             return {
-                value: option.field ? item[option.field] : (item.value || item),
-                label: option.format ? Helpers.interpolate(option.format, item) : item.label || String(item.value || item),
-                type: option.type,
+                value: section.field ? item[section.field] : (item.value || item),
+                label: section.format ? Helpers.interpolate(section.format, item) : item.label || String(item.value || item),
+                type: section.type,
                 checked: undefined
             };
         }, this);
         let selectAll = {
             value: 'ALL',
-            label: `All ${option.type}`,
-            type: option.type,
+            label: `All ${section.type}`,
+            type: section.type,
             checked: (this.model && this.model.length && (this.model.indexOf('ALL') !== -1))
         };
         formattedSection.data.splice(0, 0, selectAll);
@@ -187,7 +186,8 @@ export class NovoMultiPickerElement extends OutsideClick {
                 } else {
                     count = selectedOfType.length;
                 }
-                if (count > 0) { this.notShown.push({ type: count === 1 ? type.replace(/s$/g, '') : type, count: count }); }
+                let displayType = count === 1 ? type.replace(/s$/g, '') : type;
+                if (count > 0) { this.notShown.push({ type: displayType, count: count }); }
             });
         }
     }
@@ -201,7 +201,7 @@ export class NovoMultiPickerElement extends OutsideClick {
         if (itemToRemove.value === 'ALL') {
             this.modifyAllOfType(itemToRemove.type, 'unselect');
         } else if (this.allOfTypeSelected(itemToRemove.type)) {
-            this.handleRemoveItemIfAllSelected(event, item);
+            this.handleRemoveItemIfAllSelected(itemToRemove);
         }
         this.removeItem(item);
     }
@@ -259,7 +259,7 @@ export class NovoMultiPickerElement extends OutsideClick {
         this.updateItems(allOfType[0], 'add');
     }
 
-    handleRemoveItemIfAllSelected(event, item) {
+    handleRemoveItemIfAllSelected(item) {
         let type = item.type;
         let allOfType = this._options.filter(x => x.type === type)[0].data;
         let allItem = allOfType[0];
