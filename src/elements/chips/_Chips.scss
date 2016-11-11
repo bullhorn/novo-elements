@@ -119,15 +119,15 @@ entity-chips {
         align-items: center;
 
         i {
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             padding-bottom: 2px;
-            margin-right: 5px;
+            margin-left: 5px;
         }
     }
 
     i.bhi-search {
         position: absolute;
-        top: 5px;
+        bottom: 8px;
         right: 0;
         font-size: 1.2em;
     }
