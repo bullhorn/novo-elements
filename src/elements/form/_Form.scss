@@ -53,6 +53,7 @@ novo-form {
 
                     &.disabled {
                         pointer-events: none;
+
                         input {
                             &::-webkit-input-placeholder {
                                 color: $light !important;
@@ -64,7 +65,7 @@ novo-form {
                         }
 
                         chips {
-                            border-bottom: 1px dashed $light !important;;
+                            border-bottom: 1px dashed $light !important;
 
                             chip {
                                 opacity: 0.5;
@@ -191,13 +192,14 @@ novo-form {
                                     flex: 1;
                                     position: relative;
 
-                                     > i.bhi-clock,
+                                     > i.bhi-calendar,
                                      > i.bhi-search,
                                      > i.bhi-times,
-                                    > i.bhi-calendar {
+                                    > i.bhi-clock {
                                         position: absolute;
                                         right: 0;
                                         top: 0;
+                                        font-size: 1.2em;
                                     }
 
                                     > i.bhi-times {
@@ -205,8 +207,8 @@ novo-form {
                                         font-size: 1.1em;
                                     }
 
-                                     > novo-time-picker,
-                                    > novo-date-picker {
+                                     > novo-date-picker,
+                                    > novo-time-picker {
                                         position: absolute;
                                         top: 100%;
                                         left: 0;
@@ -245,9 +247,9 @@ novo-form {
                                         padding-bottom: 0;
 
                                         &.ng-touched.ng-invalid:not(.ng-pristine) {
-                                             > input,
+                                             > input:focus,
                                              > input:hover,
-                                            > input:focus {
+                                            > input {
                                                 border-bottom-color: transparent !important;
                                             }
                                         }
@@ -323,8 +325,8 @@ novo-form {
                                                 color: rgba(0, 0, 0, .3);
                                             }
 
-                                             > h4,
-                                            > p {
+                                             > p,
+                                            > h4 {
                                                 margin: 0;
                                                 max-width: none;
                                                 padding: 0;
@@ -468,6 +470,7 @@ novo-form {
 
                         &.disabled {
                             pointer-events: none;
+
                             input {
                                 &::-webkit-input-placeholder {
                                     color: $light !important;
@@ -479,7 +482,7 @@ novo-form {
                             }
 
                             chips {
-                                border-bottom: 1px dashed $light !important;;
+                                border-bottom: 1px dashed $light !important;
 
                                 chip {
                                     opacity: 0.5;
