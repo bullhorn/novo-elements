@@ -31,6 +31,10 @@ novo-table {
                         margin-right: 0;
                     }
                 }
+
+                > button {
+                    height: 39px;
+                }
             }
         }
     }
@@ -41,7 +45,6 @@ novo-table {
         display: block;
     }
 }
-
 /* -- Material Design Table style -------------- */
 // Variables
 // ---------------------
@@ -63,19 +66,18 @@ $table-border-color: #f5f5f5; // Tables
     max-width: 100%;
     background-color: $table-bg;
 
-    > tbody,
-    > thead,
+     > tbody,
+     > thead,
     > tfoot {
         > tr {
-            transition: all 0.3s ease;
+            transform-style: preserve-3d;
 
-            > td,
+             > td,
             > th {
                 position: relative;
                 text-align: left;
                 padding: $table-cell-padding;
                 vertical-align: middle;
-                transition: all 0.3s ease;
 
                 &.checkbox {
                     text-align: center;
@@ -361,29 +363,29 @@ $table-border-color: #f5f5f5; // Tables
         }
     }
 }
-
 // Condensed table w/ half padding
+
 .table-condensed {
-    > tbody,
-    > thead,
+     > tbody,
+     > thead,
     > tfoot {
         > tr {
-            > td,
+             > td,
             > th {
                 padding: $table-condensed-cell-padding;
             }
         }
     }
 }
-
 // Bordered version
 // Add horizontal borders between columns.
+
 .table-bordered {
-    > tbody,
-    > thead,
+     > tbody,
+     > thead,
     > tfoot {
         > tr {
-            > td,
+             > td,
             > th {
                 border-bottom: 1px solid $table-border-color;
             }
@@ -391,29 +393,33 @@ $table-border-color: #f5f5f5; // Tables
     }
 
     > thead > tr {
-        > td,
+         > td,
         > th {
             border-bottom-width: 2px;
         }
     }
 }
-
 // Zebra-striping
 // Default zebra-stripe styles (alternating gray and transparent backgrounds)
+
 .table-striped:not(.table-details) {
     > tbody tr:nth-of-type(odd) {
         background-color: $table-bg-accent;
+
+        td {
+            background-color: $table-bg-accent;
+        }
     }
 }
 
 .table-striped.table-details {
-    > tbody tr:nth-of-type(4n+2),
+     > tbody tr:nth-of-type(4n+2),
     > tbody tr:nth-of-type(4n+1) {
         background-color: $table-bg-accent;
     }
 }
-
 // Hover effect
+
 .table-hover {
     > tbody > tr:hover {
         background-color: $table-bg-hover;
@@ -439,11 +445,15 @@ novo-table {
         .table-striped:not(.table-details) {
             > tbody tr:nth-of-type(odd) {
                 background-color: rgba($table-bg-accent, .04);
+
+                td {
+                    background-color: transparent;
+                }
             }
         }
 
         .table-striped.table-details {
-            > tbody tr:nth-of-type(4n+2),
+             > tbody tr:nth-of-type(4n+2),
             > tbody tr:nth-of-type(4n+1) {
                 background-color: rgba($table-bg-accent, .04);
             }
