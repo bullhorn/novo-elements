@@ -47,7 +47,7 @@ const CHIPS_VALUE_ACCESSOR = {
             </novo-picker>
         </div>
         <i class="bhi-search"></i>
-        <label class="clear-all" *ngIf="items.length" (click)="clearValue()"><i class="bhi-times"></i> CLEAR ALL</label>
+        <label class="clear-all" *ngIf="items.length" (click)="clearValue()">CLEAR ALL <i class="bhi-times"></i></label>
    `,
     host: {
         '[class.with-value]': 'items.length > 0'
