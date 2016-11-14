@@ -93,12 +93,12 @@ export class NovoAddressElement implements ControlValueAccessor {
                     countryName: 'United States'
                 };
             } else {
-                model.countryName = findByCountryId(model.countryID);
-                model.state = this.states.find(state => {
+                model.countryName = findByCountryId(model.countryID).name;
+                this.model = model;
+                let modelState = this.states.find(state => {
                     return state === model.state;
                 });
-                this.model = model;
-                this.updateControl();
+                this.onStateChange(modelState);
             }
         });
     }
