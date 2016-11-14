@@ -100,8 +100,12 @@ export class ChecklistPickerResults extends PickerResults {
      */
     selectMatch(event, item) {
         Helpers.swallowEvent(event);
-        item.checked = !item.checked;
-        if (item.indeterminate) { item.indeterminate = false; }
+        if (item.indeterminate) {
+            item.indeterminate = false;
+            item.checked = true;
+        } else {
+            item.checked = !item.checked;
+        }
 
         let selected = this.activeMatch;
         if (selected) {
