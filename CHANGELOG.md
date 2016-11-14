@@ -1,3 +1,18 @@
+<a name="1.1.29"></a>
+## [1.1.29](https://github.com/bullhorn/novo-elements/compare/v1.1.28...v1.1.29) (2016-11-14)
+
+
+### Bug Fixes
+
+* **Address:** Show and populate address fields ([#246](https://github.com/bullhorn/novo-elements/issues/246)) ([4ef5369](https://github.com/bullhorn/novo-elements/commit/4ef5369))
+
+
+### Features
+
+* **multipicker:** Make 'All [type]' indeterminate state function like table ([#245](https://github.com/bullhorn/novo-elements/issues/245)) ([fd680b6](https://github.com/bullhorn/novo-elements/commit/fd680b6))
+
+
+
 <a name="1.1.28"></a>
 ## [1.1.28](https://github.com/bullhorn/novo-elements/compare/v1.1.27...v1.1.28) (2016-11-10)
 
