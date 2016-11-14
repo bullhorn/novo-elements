@@ -1,8 +1,8 @@
 // NG2
-import { Component, forwardRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { getCountries, getStates, findByCountryName, findByCountryId } from '../../../../utils/countries/Countries';
+import { getCountries, getStates, getStateObjects, findByCountryName, findByCountryId } from '../../../../utils/countries/Countries';
 
 // Value accessor for the component (supports ngModel)
 const ADDRESS_VALUE_ACCESSOR = {
@@ -14,7 +14,6 @@ const ADDRESS_VALUE_ACCESSOR = {
 @Component({
     selector: 'novo-address',
     providers: [ADDRESS_VALUE_ACCESSOR],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <input type="text" class="street-address" id="address1" name="address1" placeholder="Address" [(ngModel)]="model.address1" (ngModelChange)="updateControl()"/>
         <input type="text" class="apt suite" id="address2" name="address2" placeholder="Apt" [(ngModel)]="model.address2" (ngModelChange)="updateControl()"/>
@@ -28,10 +27,7 @@ export class NovoAddressElement implements ControlValueAccessor {
     states:Array = [];
     countries:Array = getCountries();
 
-    model;
-    constructor(changeDetectorRef:ChangeDetectorRef) {
-        this.changeDetectorRef = changeDetectorRef;
-    }
+    model:any;
     onModelChange:Function = () => {
     };
     onModelTouched:Function = () => {
@@ -51,12 +47,7 @@ export class NovoAddressElement implements ControlValueAccessor {
     }
 
     onCountryChange(evt) {
-        let country;
-        if (typeof evt === 'number') {
-            country = findByCountryId(evt);
-        } else {
-            country = findByCountryName(evt);
-        }
+        let country = findByCountryName(evt);
         this.model.countryName = country.name;
         this.model.countryCode = country.code;
         this.model.countryID = country.id;
@@ -82,25 +73,24 @@ export class NovoAddressElement implements ControlValueAccessor {
 
     updateControl() {
         this.onModelChange(this.model);
-        this.changeDetectorRef.markForCheck();
     }
 
     writeValue(model:any):void {
-        setTimeout(() => {
-            if (!model) {
-                this.model = {
-                    countryID: 1,
-                    countryName: 'United States'
-                };
-            } else {
-                model.countryName = findByCountryId(model.countryID).name;
-                this.model = model;
-                let modelState = this.states.find(state => {
-                    return state === model.state;
-                });
-                this.onStateChange(modelState);
+        if (!model) {
+            this.model = {
+                countryID: 1,
+                countryName: 'United States'
+            };
+        } else {
+            let countryName = model.countryName;
+            if (!countryName) {
+                countryName = findByCountryId(model.countryID).name;
             }
-        });
+            let stateObj = getStateObjects(countryName).find(state => {
+                return state.code === model.state || state.name === model.state;
+            });
+            this.model = Object.assign(model, { countryName: countryName, state: stateObj.name });
+        }
     }
 
     registerOnChange(fn:Function):void {

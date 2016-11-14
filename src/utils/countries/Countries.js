@@ -6975,3 +6975,11 @@ export function getStates(name) {
     let country = COUNTRIES.find(c => c.name === name.trim());
     return country ? country.states.map(s => s.name) : [];
 }
+
+/**
+ * Get states by country name
+ */
+export function getStateObjects(name) {
+    let country = COUNTRIES.find(c => c.name === name.trim());
+    return country ? country.states : [];
+}
