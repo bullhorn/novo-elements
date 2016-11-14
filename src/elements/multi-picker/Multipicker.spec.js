@@ -28,11 +28,12 @@ describe('Element: NovoMultiPickerElement', () => {
             component.types = ['numbers'];
             component.items = [1, 2];
             component.value = [1, 2];
-            component._options = [{ type: 'numbers', data: [{ value: 1, checked: true }, { value: 2, checked: false }] }];
+            component._options = [{ type: 'numbers', data: [{ value: 1, checked: true }, { value: 2, checked: false, indeterminate: true }] }];
             component.clearValue();
             expect(component.items.length).toBe(0);
             expect(component.value).toEqual({ numbers: [] });
             expect(component._options[0].data[0].checked).toBeFalsy();
+            expect(component._options[0].data[1].indeterminate).toBeFalsy();
         });
     });
 
