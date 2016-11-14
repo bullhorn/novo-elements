@@ -251,7 +251,10 @@ export class NovoMultiPickerElement extends OutsideClick {
     modifyAllOfType(type, action) {
         let selecting = action === 'select';
         let allOfType = this.getAllOfType(type);
-        allOfType.forEach(item => item.checked = selecting);
+        allOfType.forEach(item => {
+            item.checked = selecting;
+            item.indeterminate = false;
+        });
         if (selecting) {
             this.selectAll(allOfType, type);
         } else {
