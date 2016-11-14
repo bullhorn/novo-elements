@@ -5787,36 +5787,38 @@ novo-picker {
     width: 100%; }
     novo-picker input:focus {
       outline: none; }
-  novo-picker i.bhi-search, novo-picker i.bhi-times {
+  novo-picker i.bhi-search,
+  novo-picker i.bhi-times {
     position: absolute;
     top: 0;
-    right: 0; }
+    right: 0;
+    font-size: 1.2em; }
   novo-picker i.bhi-times {
     cursor: pointer;
-    font-size: 1.15em; }
+    font-size: 1em; }
   novo-picker div.picker-results-container {
     position: absolute;
     top: 100%;
     width: 100%;
     margin-top: 0.5em; }
 
-quick-note-results,
-.quick-note-results,
-picker-results,
 .picker-results,
-entity-chip-results {
+.quick-note-results,
+entity-chip-results,
+picker-results,
+quick-note-results {
   display: block;
   position: relative;
   cursor: pointer; }
 
-picker-results,
 .picker-results,
-quick-note-results,
 .quick-note-results,
 picker-error,
 picker-loader,
+picker-null-recent-results,
 picker-null-results,
-picker-null-recent-results {
+picker-results,
+quick-note-results {
   background-color: white;
   cursor: default;
   line-height: 26px;
@@ -5830,25 +5832,25 @@ picker-null-recent-results {
   width: 100%;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   border: 1px solid #4A89DC; }
-  picker-results ul,
   .picker-results ul,
-  quick-note-results ul,
   .quick-note-results ul,
   picker-error ul,
   picker-loader ul,
+  picker-null-recent-results ul,
   picker-null-results ul,
-  picker-null-recent-results ul {
+  picker-results ul,
+  quick-note-results ul {
     list-style: none;
     padding: 0;
     margin: 0; }
-    picker-results ul li,
     .picker-results ul li,
-    quick-note-results ul li,
     .quick-note-results ul li,
     picker-error ul li,
     picker-loader ul li,
+    picker-null-recent-results ul li,
     picker-null-results ul li,
-    picker-null-recent-results ul li {
+    picker-results ul li,
+    quick-note-results ul li {
       cursor: pointer;
       padding: 10px 16px;
       box-sizing: border-box;
@@ -5865,45 +5867,39 @@ picker-null-recent-results {
       -ms-flex-direction: column;
       flex-direction: column;
       font-size: 0.9em; }
-      picker-results ul li span,
       .picker-results ul li span,
-      quick-note-results ul li span,
       .quick-note-results ul li span,
       picker-error ul li span,
       picker-loader ul li span,
+      picker-null-recent-results ul li span,
       picker-null-results ul li span,
-      picker-null-recent-results ul li span {
+      picker-results ul li span,
+      quick-note-results ul li span {
         display: inline-block;
         min-width: 100px;
         margin: 2px 0; }
-      picker-results ul li h6,
       .picker-results ul li h6,
-      quick-note-results ul li h6,
       .quick-note-results ul li h6,
       picker-error ul li h6,
       picker-loader ul li h6,
+      picker-null-recent-results ul li h6,
       picker-null-results ul li h6,
-      picker-null-recent-results ul li h6 {
+      picker-results ul li h6,
+      quick-note-results ul li h6 {
         padding-top: 0;
         font-weight: 400;
         color: #93a0a9; }
-        picker-results ul li h6 strong,
         .picker-results ul li h6 strong,
-        quick-note-results ul li h6 strong,
         .quick-note-results ul li h6 strong,
         picker-error ul li h6 strong,
         picker-loader ul li h6 strong,
+        picker-null-recent-results ul li h6 strong,
         picker-null-results ul li h6 strong,
-        picker-null-recent-results ul li h6 strong {
+        picker-results ul li h6 strong,
+        quick-note-results ul li h6 strong {
           font-weight: 400;
           color: #3D464D; }
-      picker-results ul li.active, picker-results ul li:focus, picker-results ul li:hover,
-      .picker-results ul li.active,
-      .picker-results ul li:focus,
-      .picker-results ul li:hover,
-      quick-note-results ul li.active,
-      quick-note-results ul li:focus,
-      quick-note-results ul li:hover,
+      .picker-results ul li.active, .picker-results ul li:focus, .picker-results ul li:hover,
       .quick-note-results ul li.active,
       .quick-note-results ul li:focus,
       .quick-note-results ul li:hover,
@@ -5913,39 +5909,45 @@ picker-null-recent-results {
       picker-loader ul li.active,
       picker-loader ul li:focus,
       picker-loader ul li:hover,
+      picker-null-recent-results ul li.active,
+      picker-null-recent-results ul li:focus,
+      picker-null-recent-results ul li:hover,
       picker-null-results ul li.active,
       picker-null-results ul li:focus,
       picker-null-results ul li:hover,
-      picker-null-recent-results ul li.active,
-      picker-null-recent-results ul li:focus,
-      picker-null-recent-results ul li:hover {
+      picker-results ul li.active,
+      picker-results ul li:focus,
+      picker-results ul li:hover,
+      quick-note-results ul li.active,
+      quick-note-results ul li:focus,
+      quick-note-results ul li:hover {
         background: #f4f4f4;
         color: #63666c; }
-  picker-results.active,
   .picker-results.active,
-  quick-note-results.active,
   .quick-note-results.active,
   picker-error.active,
   picker-loader.active,
+  picker-null-recent-results.active,
   picker-null-results.active,
-  picker-null-recent-results.active {
+  picker-results.active,
+  quick-note-results.active {
     max-height: 200px;
     overflow: auto;
     z-index: 1000; }
-  picker-results:focus,
   .picker-results:focus,
-  quick-note-results:focus,
   .quick-note-results:focus,
   picker-error:focus,
   picker-loader:focus,
+  picker-null-recent-results:focus,
   picker-null-results:focus,
-  picker-null-recent-results:focus {
+  picker-results:focus,
+  quick-note-results:focus {
     outline: none; }
 
-picker-null-results,
-picker-null-recent-results,
 picker-error,
-picker-loader {
+picker-loader,
+picker-null-recent-results,
+picker-null-results {
   text-align: center;
   color: #b1b3b7; }
 
@@ -6021,7 +6023,7 @@ entity-chips {
     justify-content: space-between;
     background: #EEEEEE;
     border-radius: 4px;
-    padding: .5em .75em;
+    padding: 0.5em 0.75em;
     margin-right: 5px;
     margin-bottom: 5px;
     width: auto;
@@ -6111,14 +6113,15 @@ entity-chips {
     align-items: center; }
     chips label.clear-all i, multi-picker label.clear-all i,
     entity-chips label.clear-all i {
-      font-size: 0.6rem;
+      font-size: 0.7rem;
       padding-bottom: 2px;
-      margin-right: 5px; }
+      margin-left: 5px; }
   chips i.bhi-search, multi-picker i.bhi-search,
   entity-chips i.bhi-search {
     position: absolute;
-    top: 5px;
-    right: 0; }
+    bottom: 8px;
+    right: 0;
+    font-size: 1.2em; }
 
 chips + i, multi-picker + i,
 entity-chips + i {
@@ -6172,29 +6175,29 @@ entity-chips picker-results {
           -ms-flex: 0 0 33%;
           flex: 0 0 33%;
           white-space: nowrap; }
+  entity-chips picker-results .error-results,
   entity-chips picker-results .no-recents,
-  entity-chips picker-results .null-results,
-  entity-chips picker-results .error-results {
+  entity-chips picker-results .null-results {
     text-align: center;
     padding: 1em 0 4em; }
+    entity-chips picker-results .error-results > i,
     entity-chips picker-results .no-recents > i,
-    entity-chips picker-results .null-results > i,
-    entity-chips picker-results .error-results > i {
+    entity-chips picker-results .null-results > i {
       font-size: 3em;
-      margin: .5em;
+      margin: 0.5em;
       color: rgba(0, 0, 0, 0.3); }
+    entity-chips picker-results .error-results > h4,
+    entity-chips picker-results .error-results > p,
     entity-chips picker-results .no-recents > h4,
     entity-chips picker-results .no-recents > p,
     entity-chips picker-results .null-results > h4,
-    entity-chips picker-results .null-results > p,
-    entity-chips picker-results .error-results > h4,
-    entity-chips picker-results .error-results > p {
+    entity-chips picker-results .null-results > p {
       margin: 0;
       max-width: none;
       padding: 0; }
+    entity-chips picker-results .error-results > h4,
     entity-chips picker-results .no-recents > h4,
-    entity-chips picker-results .null-results > h4,
-    entity-chips picker-results .error-results > h4 {
+    entity-chips picker-results .null-results > h4 {
       font-weight: 500; }
   entity-chips picker-results section {
     box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
@@ -8274,6 +8277,8 @@ novo-table {
         margin-right: 10px; }
         novo-table > header div.header-actions > novo-table-actions > *:last-child {
           margin-right: 0; }
+      novo-table > header div.header-actions > novo-table-actions > button {
+        height: 39px; }
   novo-table > .table-container {
     overflow-x: auto;
     width: 100%;
@@ -8287,8 +8292,8 @@ novo-table {
   .table > tbody > tr,
   .table > thead > tr,
   .table > tfoot > tr {
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease; }
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d; }
     .table > tbody > tr > td,
     .table > tbody > tr > th,
     .table > thead > tr > td,
@@ -8298,9 +8303,7 @@ novo-table {
       position: relative;
       text-align: left;
       padding: 1.2rem;
-      vertical-align: middle;
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease; }
+      vertical-align: middle; }
       .table > tbody > tr > td.checkbox,
       .table > tbody > tr > th.checkbox,
       .table > thead > tr > td.checkbox,
@@ -8537,6 +8540,8 @@ novo-table {
 
 .table-striped:not(.table-details) > tbody tr:nth-of-type(odd) {
   background-color: #f4f4f4; }
+  .table-striped:not(.table-details) > tbody tr:nth-of-type(odd) td {
+    background-color: #f4f4f4; }
 
 .table-striped.table-details > tbody tr:nth-of-type(4n+2),
 .table-striped.table-details > tbody tr:nth-of-type(4n+1) {
@@ -8559,6 +8564,8 @@ novo-table[dark] .table > thead > tr > th {
 
 novo-table[dark] .table-striped:not(.table-details) > tbody tr:nth-of-type(odd) {
   background-color: rgba(244, 244, 244, 0.04); }
+  novo-table[dark] .table-striped:not(.table-details) > tbody tr:nth-of-type(odd) td {
+    background-color: transparent; }
 
 novo-table[dark] .table-striped.table-details > tbody tr:nth-of-type(4n+2),
 novo-table[dark] .table-striped.table-details > tbody tr:nth-of-type(4n+1) {
@@ -9697,25 +9704,26 @@ novo-form {
                   -ms-flex: 1;
                   flex: 1;
                   position: relative; }
-                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-clock,
+                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-calendar,
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-search,
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-times,
-                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-calendar,
-                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-clock,
+                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-clock,
+                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-calendar,
                   novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-search,
                   novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-times,
-                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-calendar {
+                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-clock {
                     position: absolute;
                     right: 0;
-                    top: 0; }
+                    top: 0;
+                    font-size: 1.2em; }
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-times,
                   novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-times {
                     cursor: pointer;
                     font-size: 1.1em; }
-                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-time-picker,
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-date-picker,
-                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-time-picker,
-                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-date-picker {
+                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-time-picker,
+                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-date-picker,
+                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-time-picker {
                     position: absolute;
                     top: 100%;
                     left: 0; }
@@ -9750,12 +9758,12 @@ novo-form {
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker,
                   novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker {
                     padding-bottom: 0; }
-                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input,
-                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:hover,
                     novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:focus,
-                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input,
+                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:hover,
+                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input,
+                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:focus,
                     novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:hover,
-                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:focus {
+                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input {
                       border-bottom-color: transparent !important; }
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips, novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > multi-picker,
                   novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips,
@@ -9861,30 +9869,30 @@ novo-form {
                         font-size: 3em;
                         margin: 0.5em;
                         color: rgba(0, 0, 0, 0.3); }
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > h4,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > p,
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > h4,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > h4,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > p,
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > h4,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > h4,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > p,
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > h4,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > h4,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > p,
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > h4,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > h4,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > p,
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > h4,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > h4,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > p,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > h4,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > h4,
                       novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > p,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > h4,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > h4,
                       novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > p,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > h4,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > h4,
                       novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > p,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > h4,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > h4,
                       novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > p,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > h4,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > h4,
                       novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > p,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > h4,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > p {
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > h4,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > p,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > h4 {
                         margin: 0;
                         max-width: none;
                         padding: 0; }
@@ -11025,9 +11033,10 @@ novo-category-dropdown {
           border-bottom: 1px solid #4A89DC; }
         novo-category-dropdown .dropdown-container .novo-category-dropdown-search input::-webkit-input-placeholder {
           color: #aaaaaa; }
-      novo-category-dropdown .dropdown-container .novo-category-dropdown-search i.bhi-search, novo-category-dropdown .dropdown-container .novo-category-dropdown-search i.bhi-times {
+      novo-category-dropdown .dropdown-container .novo-category-dropdown-search i.bhi-search,
+      novo-category-dropdown .dropdown-container .novo-category-dropdown-search i.bhi-times {
         position: absolute;
-        top: 5px;
+        bottom: 8px;
         right: 5px;
         color: #aaaaaa;
         font-size: 1em;
@@ -11078,10 +11087,10 @@ novo-category-dropdown {
       min-height: 45px;
       cursor: pointer;
       font-size: 0.9em; }
-      novo-category-dropdown .dropdown-container novo-list-item:hover, novo-category-dropdown .dropdown-container novo-list-item:focus {
+      novo-category-dropdown .dropdown-container novo-list-item:focus, novo-category-dropdown .dropdown-container novo-list-item:hover {
         background: #f4f4f4;
         color: #4b4d51; }
-        novo-category-dropdown .dropdown-container novo-list-item:hover .novo-category-dropdown-hover, novo-category-dropdown .dropdown-container novo-list-item:focus .novo-category-dropdown-hover {
+        novo-category-dropdown .dropdown-container novo-list-item:focus .novo-category-dropdown-hover, novo-category-dropdown .dropdown-container novo-list-item:hover .novo-category-dropdown-hover {
           display: block; }
       novo-category-dropdown .dropdown-container novo-list-item .novo-category-dropdown-hover {
         display: none;
@@ -11120,7 +11129,7 @@ novo-category-dropdown {
     -ms-flex-align: end;
     align-items: flex-end; }
     novo-category-dropdown[side=right] .dropdown-container {
-      right: 0px; }
+      right: 0; }
 
 multi-picker .chip-input-container {
   padding-top: 10px; }
@@ -11866,84 +11875,84 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 34px;
-      height: 34px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 32px;
-      height: 32px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 31px;
-      height: 31px; }
+      width: 30px;
+      height: 30px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 34px;
-      height: 34px; }
+      width: 41px;
+      height: 41px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
       width: 35px;
       height: 35px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
       width: 26px;
       height: 26px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-submission {
       background: #778899;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-task {
-      background: #747884;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-carnation {
-      background: #D770AD;
       width: 29px;
       height: 29px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-task {
+      background: #747884;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 26px;
+      height: 26px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-carnation {
+      background: #D770AD;
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 42px;
-      height: 42px; }
+      width: 44px;
+      height: 44px; }
 
 color article.color-blocks {
   display: -webkit-box;
