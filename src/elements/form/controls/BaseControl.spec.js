@@ -12,6 +12,9 @@ describe('Control: BaseControl', () => {
         it('should set the validators', () => {
             expect(control.validators.length).toBe(0);
         });
+        it('should set the asyncValidators', () => {
+            expect(control.asyncValidators.length).toBe(0);
+        });
         it('should set the value', () => {
             expect(control.value).toBeFalsy();
         });
