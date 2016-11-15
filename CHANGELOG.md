@@ -1,3 +1,18 @@
+<a name="1.1.30"></a>
+## [1.1.30](https://github.com/bullhorn/novo-elements/compare/v1.1.29...v1.1.30) (2016-11-15)
+
+
+### Bug Fixes
+
+* **Table:** Fix column sorting ([4d043fd](https://github.com/bullhorn/novo-elements/commit/4d043fd))
+
+
+### Features
+
+* **Forms:** Adding async validator support for Controls ([#248](https://github.com/bullhorn/novo-elements/issues/248)) ([0974e3f](https://github.com/bullhorn/novo-elements/commit/0974e3f))
+
+
+
 <a name="1.1.29"></a>
 ## [1.1.29](https://github.com/bullhorn/novo-elements/compare/v1.1.28...v1.1.29) (2016-11-14)
 
