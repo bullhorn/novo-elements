@@ -1,3 +1,14 @@
+<a name="1.1.31"></a>
+## [1.1.31](https://github.com/bullhorn/novo-elements/compare/v1.1.30...v1.1.31) (2016-11-16)
+
+
+### Bug Fixes
+
+* **address field:** state matching and country name matching ([#251](https://github.com/bullhorn/novo-elements/issues/251)) ([1ef86bd](https://github.com/bullhorn/novo-elements/commit/1ef86bd))
+* **tables:** fixes broken z-indexes caused by preserve-3d ([#252](https://github.com/bullhorn/novo-elements/issues/252)) ([2425351](https://github.com/bullhorn/novo-elements/commit/2425351))
+
+
+
 <a name="1.1.30"></a>
 ## [1.1.30](https://github.com/bullhorn/novo-elements/compare/v1.1.29...v1.1.30) (2016-11-15)
 
