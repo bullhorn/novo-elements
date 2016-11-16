@@ -8289,49 +8289,44 @@ novo-table {
   width: 100%;
   max-width: 100%;
   background-color: #fff; }
-  .table > tbody > tr,
-  .table > thead > tr,
-  .table > tfoot > tr {
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d; }
-    .table > tbody > tr > td,
-    .table > tbody > tr > th,
-    .table > thead > tr > td,
-    .table > thead > tr > th,
-    .table > tfoot > tr > td,
-    .table > tfoot > tr > th {
-      position: relative;
-      text-align: left;
-      padding: 1.2rem;
-      vertical-align: middle; }
-      .table > tbody > tr > td.checkbox,
-      .table > tbody > tr > th.checkbox,
-      .table > thead > tr > td.checkbox,
-      .table > thead > tr > th.checkbox,
-      .table > tfoot > tr > td.checkbox,
-      .table > tfoot > tr > th.checkbox {
-        text-align: center;
-        padding-bottom: 15px; }
-        .table > tbody > tr > td.checkbox > novo-checkbox, .table > tbody > tr > td.checkbox > multi-picker,
-        .table > tbody > tr > th.checkbox > novo-checkbox,
-        .table > tbody > tr > th.checkbox > multi-picker,
-        .table > thead > tr > td.checkbox > novo-checkbox,
-        .table > thead > tr > td.checkbox > multi-picker,
-        .table > thead > tr > th.checkbox > novo-checkbox,
-        .table > thead > tr > th.checkbox > multi-picker,
-        .table > tfoot > tr > td.checkbox > novo-checkbox,
-        .table > tfoot > tr > td.checkbox > multi-picker,
-        .table > tfoot > tr > th.checkbox > novo-checkbox,
-        .table > tfoot > tr > th.checkbox > multi-picker {
-          -webkit-box-pack: center;
-          -webkit-justify-content: center;
-          -ms-flex-pack: center;
-          justify-content: center; }
-    .table > tbody > tr.table-selection-row,
-    .table > thead > tr.table-selection-row,
-    .table > tfoot > tr.table-selection-row {
-      background-color: #2F384F !important;
-      color: #ffffff; }
+  .table > tfoot > tr > th,
+  .table > tfoot > tr > td,
+  .table > thead > tr > th,
+  .table > thead > tr > td,
+  .table > tbody > tr > th,
+  .table > tbody > tr > td {
+    position: relative;
+    text-align: left;
+    padding: 1.2rem;
+    vertical-align: middle; }
+    .table > tfoot > tr > th.checkbox,
+    .table > tfoot > tr > td.checkbox,
+    .table > thead > tr > th.checkbox,
+    .table > thead > tr > td.checkbox,
+    .table > tbody > tr > th.checkbox,
+    .table > tbody > tr > td.checkbox {
+      text-align: center;
+      padding-bottom: 15px; }
+      .table > tfoot > tr > th.checkbox > novo-checkbox, .table > tfoot > tr > th.checkbox > multi-picker,
+      .table > tfoot > tr > td.checkbox > novo-checkbox,
+      .table > tfoot > tr > td.checkbox > multi-picker,
+      .table > thead > tr > th.checkbox > novo-checkbox,
+      .table > thead > tr > th.checkbox > multi-picker,
+      .table > thead > tr > td.checkbox > novo-checkbox,
+      .table > thead > tr > td.checkbox > multi-picker,
+      .table > tbody > tr > th.checkbox > novo-checkbox,
+      .table > tbody > tr > th.checkbox > multi-picker,
+      .table > tbody > tr > td.checkbox > novo-checkbox,
+      .table > tbody > tr > td.checkbox > multi-picker {
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center; }
+  .table > tfoot > tr.table-selection-row,
+  .table > thead > tr.table-selection-row,
+  .table > tbody > tr.table-selection-row {
+    background-color: #2F384F !important;
+    color: #ffffff; }
   .table > thead > tr > th:nth-of-type(1) .th-group novo-dropdown.column-filters .dropdown-container {
     left: -80px; }
   .table > thead > tr th:first-child novo-dropdown .dropdown-container {
@@ -8520,33 +8515,33 @@ novo-table {
     .table novo-checkbox .check-box-group .bhi-checkbox-indeterminate, .table multi-picker .check-box-group .bhi-checkbox-indeterminate {
       color: #4A89DC; }
 
-.table-condensed > tbody > tr > td,
-.table-condensed > tbody > tr > th,
-.table-condensed > thead > tr > td,
-.table-condensed > thead > tr > th,
+.table-condensed > tfoot > tr > th,
 .table-condensed > tfoot > tr > td,
-.table-condensed > tfoot > tr > th {
+.table-condensed > thead > tr > th,
+.table-condensed > thead > tr > td,
+.table-condensed > tbody > tr > th,
+.table-condensed > tbody > tr > td {
   padding: 0.6rem; }
 
-.table-bordered > tbody > tr > td,
-.table-bordered > tbody > tr > th,
-.table-bordered > thead > tr > td,
-.table-bordered > thead > tr > th,
+.table-bordered > tfoot > tr > th,
 .table-bordered > tfoot > tr > td,
-.table-bordered > tfoot > tr > th {
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > th,
+.table-bordered > tbody > tr > td {
   border-bottom: 1px solid #f5f5f5; }
 
-.table-bordered > thead > tr > td,
-.table-bordered > thead > tr > th {
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td {
   border-bottom-width: 2px; }
 
-.table-striped:not(.table-details) > tbody tr:nth-of-type(odd) {
+.table-striped:not(.table-details) > tbody tr:nth-of-type(odd):not(.table-selection-row) {
   background-color: #f4f4f4; }
-  .table-striped:not(.table-details) > tbody tr:nth-of-type(odd) td {
+  .table-striped:not(.table-details) > tbody tr:nth-of-type(odd):not(.table-selection-row) td {
     background-color: #f4f4f4; }
 
-.table-striped.table-details > tbody tr:nth-of-type(4n+2),
-.table-striped.table-details > tbody tr:nth-of-type(4n+1) {
+.table-striped.table-details > tbody tr:nth-of-type(4n+1),
+.table-striped.table-details > tbody tr:nth-of-type(4n+2) {
   background-color: #f4f4f4; }
 
 .table-hover > tbody > tr:hover {
@@ -8569,8 +8564,8 @@ novo-table[dark] .table-striped:not(.table-details) > tbody tr:nth-of-type(odd) 
   novo-table[dark] .table-striped:not(.table-details) > tbody tr:nth-of-type(odd) td {
     background-color: transparent; }
 
-novo-table[dark] .table-striped.table-details > tbody tr:nth-of-type(4n+2),
-novo-table[dark] .table-striped.table-details > tbody tr:nth-of-type(4n+1) {
+novo-table[dark] .table-striped.table-details > tbody tr:nth-of-type(4n+1),
+novo-table[dark] .table-striped.table-details > tbody tr:nth-of-type(4n+2) {
   background-color: rgba(244, 244, 244, 0.04); }
 
 novo-table[theme="aqua"] > header {
@@ -11877,84 +11872,84 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 37px;
-      height: 37px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 32px;
-      height: 32px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 31px;
-      height: 31px; }
+      width: 30px;
+      height: 30px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
-      width: 37px;
-      height: 37px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 26px;
-      height: 26px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
       width: 45px;
       height: 45px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-submission {
       background: #778899;
-      width: 27px;
-      height: 27px; }
+      width: 41px;
+      height: 41px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
-      width: 38px;
-      height: 38px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-note {
-      background: #747884;
-      width: 36px;
-      height: 36px; }
-    color header .background-boxes .bb-task {
       background: #747884;
       width: 34px;
       height: 34px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 26px;
-      height: 26px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
+    color header .background-boxes .bb-task {
+      background: #747884;
       width: 28px;
       height: 28px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
       width: 45px;
       height: 45px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
       width: 41px;
       height: 41px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 39px;
+      height: 39px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
       width: 43px;
       height: 43px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 40px;
-      height: 40px; }
+      width: 38px;
+      height: 38px; }
 
 color article.color-blocks {
   display: -webkit-box;
