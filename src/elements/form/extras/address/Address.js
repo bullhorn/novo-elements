@@ -86,9 +86,13 @@ export class NovoAddressElement implements ControlValueAccessor {
             if (!countryName) {
                 countryName = findByCountryId(model.countryID).name;
             }
+            if (countryName) {
+                countryName = countryName.trim();
+            }
+            model.state = model.state || '';
             let stateObj = getStateObjects(countryName).find(state => {
-                return state.code === model.state || state.name === model.state;
-            });
+                return state.code === model.state.replace(/\W+/g, '').toUpperCase() || state.name === model.state;
+            }) || {};
             this.model = Object.assign(model, { countryName: countryName, state: stateObj.name });
         }
     }
