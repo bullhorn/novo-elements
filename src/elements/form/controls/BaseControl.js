@@ -5,6 +5,7 @@ import { EventEmitter } from '@angular/core';
 export class BaseControl {
     constructor(config = {}) {
         this.validators = config.validators || [];
+        this.asyncValidators = config.asyncValidators || [];
         this.value = config.value;
         this.key = config.key || '';
         this.label = config.label || '';

@@ -28,11 +28,12 @@ describe('Element: NovoMultiPickerElement', () => {
             component.types = ['numbers'];
             component.items = [1, 2];
             component.value = [1, 2];
-            component._options = [{ type: 'numbers', data: [{ value: 1, checked: true }, { value: 2, checked: false }] }];
+            component._options = [{ type: 'numbers', data: [{ value: 1, checked: true }, { value: 2, checked: false, indeterminate: true }] }];
             component.clearValue();
             expect(component.items.length).toBe(0);
             expect(component.value).toEqual({ numbers: [] });
             expect(component._options[0].data[0].checked).toBeFalsy();
+            expect(component._options[0].data[1].indeterminate).toBeFalsy();
         });
     });
 
@@ -132,6 +133,30 @@ describe('Element: NovoMultiPickerElement', () => {
             spyOn(component, 'removeItem');
             component.remove(null, itemToRemove);
             expect(component.removeItem).toHaveBeenCalled();
+        });
+    });
+
+    describe('Function: add(event)', () => {
+        it('should add ALL item correctly', () => {
+            let item = { value: 'ALL' };
+            spyOn(component, 'modifyAllOfType');
+            spyOn(component, 'select');
+            component.add(item);
+            expect(component.modifyAllOfType).toHaveBeenCalled();
+            expect(component.select).toHaveBeenCalled();
+        });
+
+        it('should correctly add individual item', () => {
+            component.types = ['cats'];
+            component.value = { cats: [] };
+            component._options = [{ type: 'cats', data: [{ value: 'ALL', indeterminate: undefined }, { value: 'Kitty' }, { value: 'Tiger' }] }];
+            let itemToAdd = { value: 'Cat', label: 'Cat', type: 'cats' };
+            spyOn(component, 'updateItems');
+            spyOn(component, 'updateIndeterminateState');
+            component.add(itemToAdd);
+            expect(component.updateItems).toHaveBeenCalled();
+            expect(component.updateIndeterminateState).toHaveBeenCalled();
+            expect(component.value.cats.length).toBe(1);
         });
     });
 
@@ -251,6 +276,44 @@ describe('Element: NovoMultiPickerElement', () => {
             component.setInitialValue(null);
             expect(component.items).toEqual([]);
             expect(component.value.cats).toEqual([]);
+        });
+    });
+
+    describe('Function: updateIndeterminateState(type, status)', () => {
+        it('should correctly set "ALL [type" to true', () => {
+            component.types = ['cats'];
+            component._options = [{ type: 'cats', data: [{ value: 'ALL', checked: false, type: 'cats', indeterminate: undefined }] }];
+            component.updateIndeterminateState('cats', true);
+            expect(component._options[0].data[0].indeterminate).toBeTruthy();
+        });
+        it('should correctly set "ALL [type" to false', () => {
+            component.types = ['cats'];
+            component._options = [{ type: 'cats', data: [{ value: 'ALL', checked: false, type: 'cats', indeterminate: undefined }] }];
+            component.updateIndeterminateState('cats', false);
+            expect(component._options[0].data[0].indeterminate).toBeFalsy();
+        });
+    });
+
+    describe('Function: getAllOfType(type)', () => {
+        it('should get all of type', () => {
+            component.types = ['cats'];
+            component._options = [{ type: 'cats', data: [1, 2, 3, 4] }];
+            let result = component.getAllOfType('cats');
+            expect(result.length).toBe(4);
+        });
+    });
+    describe('Function: allItemsSelected(optionsByType, type)', () => {
+        it('should return true if all individual items are selected', () => {
+            component.types = ['cats'];
+            let options = ['All', 'Kitty', 'Tiger'];
+            component.value = { cats: ['Kitty', 'Tiger'] };
+            expect(component.allItemsSelected(options, 'cats')).toBeTruthy();
+        });
+        it('should return false if all individual items are not selected', () => {
+            component.types = ['cats'];
+            let options = ['All', 'Kitty', 'Tiger'];
+            component.value = { cats: ['Kitty'] };
+            expect(component.allItemsSelected(options, 'cats')).toBeFalsy();
         });
     });
 });

@@ -159,8 +159,20 @@ export class NovoMultiPickerElement extends OutsideClick {
         } else {
             this.updateItems(event, 'add');
             this.value[event.type].push(event.value);
+            let allOfType = this.getAllOfType(event.type);
+            let allOfTypeSelected = this.allItemsSelected(allOfType, event.type);
+            this.updateIndeterminateState(event.type, !allOfTypeSelected);
+            if (allOfTypeSelected) {
+                this.selectAll(allOfType, event.type);
+            }
         }
         this.select(null, event);
+    }
+
+    updateIndeterminateState(type, status) {
+        let allOfType = this.getAllOfType(type);
+        let allItem = allOfType[0];
+        allItem.indeterminate = status;
     }
 
     updateItems(item, action) {
@@ -182,7 +194,7 @@ export class NovoMultiPickerElement extends OutsideClick {
                 let count;
                 let selectedOfType = notShown.filter(x => x.type === type);
                 if (selectedOfType.length === 1 && selectedOfType[0].value === 'ALL') {
-                    count = this._options.filter(x => x.type === type)[0].data.length - 1;
+                    count = this.getAllOfType(type).length - 1;
                 } else {
                     count = selectedOfType.length;
                 }
@@ -213,6 +225,7 @@ export class NovoMultiPickerElement extends OutsideClick {
         this.value[item.type] = updatedValues;
         this.onModelChange(this.value);
         this.updateItems(item, 'remove');
+        if (this.value[item.type].length === 0) { this.updateIndeterminateState(item.type, false); }
     }
 
     onKeyDown(event) {
@@ -237,8 +250,11 @@ export class NovoMultiPickerElement extends OutsideClick {
 
     modifyAllOfType(type, action) {
         let selecting = action === 'select';
-        let allOfType = this._options.filter(x => x.type === type)[0].data;
-        allOfType.forEach(item => item.checked = selecting);
+        let allOfType = this.getAllOfType(type);
+        allOfType.forEach(item => {
+            item.checked = selecting;
+            item.indeterminate = false;
+        });
         if (selecting) {
             this.selectAll(allOfType, type);
         } else {
@@ -250,6 +266,7 @@ export class NovoMultiPickerElement extends OutsideClick {
     }
 
     selectAll(allOfType, type) {
+        allOfType[0].checked = true;
         let values = allOfType.map(i => { return i.value; });
         //remove 'ALL' value
         values.splice(0, 1);
@@ -261,9 +278,10 @@ export class NovoMultiPickerElement extends OutsideClick {
 
     handleRemoveItemIfAllSelected(item) {
         let type = item.type;
-        let allOfType = this._options.filter(x => x.type === type)[0].data;
+        let allOfType = this.getAllOfType(type);
         let allItem = allOfType[0];
         this.removeItem(allItem);
+
         allItem.indeterminate = true;
         let selectedItems = allOfType.filter(i => i.checked === true);
         this.items = [...this.items, ...selectedItems];
@@ -277,6 +295,10 @@ export class NovoMultiPickerElement extends OutsideClick {
             this.blur.emit(event);
             this.deselectAll(event, false);
         }
+    }
+
+    getAllOfType(type) {
+        return this._options.filter(x => x.type === type)[0].data;
     }
 
     //get accessor
@@ -302,14 +324,17 @@ export class NovoMultiPickerElement extends OutsideClick {
         if (this.types) {
             this.types.forEach(type => {
                 if (this.value[type]) {
-                    let allSelected = false;
-                    let optionsByType = this._options.filter(x => x.type === type)[0].data;
-                    if (this.value[type].length === optionsByType.length - 1) {
-                        allSelected = true;
-                        optionsByType[0].checked = true;
-                        this.updateItems(optionsByType[0], 'add');
+                    let indeterminateIsSet = false;
+                    let optionsByType = this.getAllOfType(type);
+                    let allSelected = this.allItemsSelected(optionsByType, type);
+                    if (allSelected) {
+                        this.selectAll(optionsByType, type);
                     }
                     this.value[type].forEach(item => {
+                        if (!allSelected && !indeterminateIsSet) {
+                            indeterminateIsSet = true;
+                            this.updateIndeterminateState(type, true);
+                        }
                         let value = optionsByType.filter(x => x.value === item)[0];
                         value.checked = true;
                         if (!allSelected) { this.updateItems(value, 'add'); }
@@ -319,6 +344,10 @@ export class NovoMultiPickerElement extends OutsideClick {
                 }
             });
         }
+    }
+
+    allItemsSelected(optionsByType, type) {
+        return this.value[type].length === optionsByType.length - 1;
     }
 
     // Set touched on blur

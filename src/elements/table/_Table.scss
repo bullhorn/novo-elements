@@ -247,8 +247,16 @@ $table-border-color: #f5f5f5; // Tables
                 align-items: center;
                 padding: 10px;
                 border-radius: 3px;
-                cursor: pointer;
                 font-weight: $table-header-font-weight;
+
+                &.sortable {
+                    cursor: pointer;
+
+                    label {
+                        cursor: pointer; // chrome user agent style will override this unless explicitly set on the element
+                        margin-right: 10px;
+                    }
+                }
 
                 &:hover {
                     .table-sort-icons {
@@ -264,10 +272,6 @@ $table-border-color: #f5f5f5; // Tables
                             }
                         }
                     }
-                }
-
-                label {
-                    margin-right: 10px;
                 }
 
                 .table-sort-icons {
