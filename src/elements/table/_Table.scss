@@ -405,7 +405,7 @@ $table-border-color: #f5f5f5; // Tables
 // Default zebra-stripe styles (alternating gray and transparent backgrounds)
 
 .table-striped:not(.table-details) {
-    > tbody tr:nth-of-type(odd) {
+    > tbody tr:nth-of-type(odd):not(.table-selection-row) {
         background-color: $table-bg-accent;
 
         td {
