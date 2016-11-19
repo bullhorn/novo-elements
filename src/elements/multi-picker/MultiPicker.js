@@ -81,7 +81,7 @@ export class NovoMultiPickerElement extends OutsideClick {
     }
 
     clearValue() {
-        this.types.forEach(type => this.modifyAllOfType(type, 'unselect'));
+        this.types.forEach(type => this.modifyAllOfType(type.value, 'unselect'));
         this.items = [];
         this._items.next(this.items);
         this.value = this.setInitialValue(null);
@@ -105,22 +105,45 @@ export class NovoMultiPickerElement extends OutsideClick {
             type: section.type
         };
         formattedSection.data = section.data.map(item => {
-            return {
-                value: section.field ? item[section.field] : (item.value || item),
-                label: section.format ? Helpers.interpolate(section.format, item) : item.label || String(item.value || item),
-                type: section.type,
-                checked: undefined
-            };
+            return this.formatOption(section, item);
         }, this);
+        let selectAll = this.createSelectAllOption(section);
+        formattedSection.data.splice(0, 0, selectAll);
+        formattedSection.originalData = formattedSection.data.slice();
+        return formattedSection;
+    }
+
+    formatOption(section, item) {
+        let obj = {
+            value: section.field ? item[section.field] : (item.value || item),
+            label: section.format ? Helpers.interpolate(section.format, item) : item.label || String(item.value || item),
+            type: section.type,
+            checked: undefined,
+            isParent: section.isParent,
+            isChild: section.isChild
+        };
+        if (obj.isChild) {
+            obj[section.isChild.parentType] = item[section.isChild.parentType];
+        }
+        return obj;
+    }
+
+    createSelectAllOption(section) {
         let selectAll = {
             value: 'ALL',
             label: `All ${section.type}`,
             type: section.type,
-            checked: (this.model && this.model.length && (this.model.indexOf('ALL') !== -1))
+            checked: (this.model && this.model.length && (this.model.indexOf('ALL') !== -1)),
+            isParent: section.isParent,
+            isChild: section.isChild
         };
-        formattedSection.data.splice(0, 0, selectAll);
-        formattedSection.originalData = formattedSection.data.slice();
-        return formattedSection;
+        if (section.isChild) {
+            let allParents = section.data.reduce((accum, next) => {
+                return accum.concat(next[section.isChild.parentType]);
+            }, []);
+            selectAll[section.isChild.parentType] = allParents;
+        }
+        return selectAll;
     }
 
     deselectAll() {
@@ -157,16 +180,24 @@ export class NovoMultiPickerElement extends OutsideClick {
         if (event.value === 'ALL') {
             this.modifyAllOfType(event.type, 'select');
         } else {
-            this.updateItems(event, 'add');
+            this.updateDisplayItems(event, 'add');
             this.value[event.type].push(event.value);
-            let allOfType = this.getAllOfType(event.type);
-            let allOfTypeSelected = this.allItemsSelected(allOfType, event.type);
-            this.updateIndeterminateState(event.type, !allOfTypeSelected);
-            if (allOfTypeSelected) {
-                this.selectAll(allOfType, event.type);
-            }
+            this.updateAllItemState(event.type, true);
         }
+        this.updateParentOrChildren(event, 'select');
         this.select(null, event);
+    }
+
+    updateAllItemState(type, addingItem) {
+        let allOfType = this.getAllOfType(type);
+        let allOfTypeSelected = this.allItemsSelected(allOfType, type);
+        if (allOfTypeSelected) {
+            this.selectAll(allOfType, type);
+        }
+        if (addingItem) {
+            this.updateIndeterminateState(type, !allOfTypeSelected);
+        }
+        return { allOfType, allOfTypeSelected };
     }
 
     updateIndeterminateState(type, status) {
@@ -175,30 +206,30 @@ export class NovoMultiPickerElement extends OutsideClick {
         allItem.indeterminate = status;
     }
 
-    updateItems(item, action) {
+    updateDisplayItems(item, action) {
         let adding = action === 'add';
         if (adding) {
             this.items.push(item);
         } else {
             if (this.items.indexOf(item) > -1) { this.items.splice(this.items.indexOf(item), 1); }
         }
-        this.updateMoreItemsText(this.items);
+        this.updateDisplayText(this.items);
         this._items.next(this.items);
     }
 
-    updateMoreItemsText(items) {
+    updateDisplayText(items) {
         this.notShown = [];
         let notShown = items.slice(4);
         if (notShown.length > 0) {
             this.types.forEach(type => {
                 let count;
-                let selectedOfType = notShown.filter(x => x.type === type);
+                let selectedOfType = notShown.filter(x => x.type === type.value);
                 if (selectedOfType.length === 1 && selectedOfType[0].value === 'ALL') {
-                    count = this.getAllOfType(type).length - 1;
+                    count = this.getAllOfType(type.value).length - 1;
                 } else {
                     count = selectedOfType.length;
                 }
-                let displayType = count === 1 ? type.replace(/s$/g, '') : type;
+                let displayType = count === 1 ? type.singular : type.value;
                 if (count > 0) { this.notShown.push({ type: displayType, count: count }); }
             });
         }
@@ -221,10 +252,15 @@ export class NovoMultiPickerElement extends OutsideClick {
     removeItem(item) {
         item.checked = false;
         this.deselectAll();
+        this.removeValue(item);
+        this.updateParentOrChildren(item, 'unselect');
+    }
+
+    removeValue(item) {
         let updatedValues = this.value[item.type].filter(x => x !== item.value);
         this.value[item.type] = updatedValues;
         this.onModelChange(this.value);
-        this.updateItems(item, 'remove');
+        this.updateDisplayItems(item, 'remove');
         if (this.value[item.type].length === 0) { this.updateIndeterminateState(item.type, false); }
     }
 
@@ -254,6 +290,7 @@ export class NovoMultiPickerElement extends OutsideClick {
         allOfType.forEach(item => {
             item.checked = selecting;
             item.indeterminate = false;
+            this.updateParentOrChildren(item, action);
         });
         if (selecting) {
             this.selectAll(allOfType, type);
@@ -261,7 +298,7 @@ export class NovoMultiPickerElement extends OutsideClick {
             this.value[type] = [];
         }
         let updatedObject = {};
-        this.types.forEach(x => updatedObject[x] = this.value[x]);
+        this.types.forEach(x => updatedObject[x.value] = this.value[x.value]);
         this.value = updatedObject;
     }
 
@@ -273,7 +310,7 @@ export class NovoMultiPickerElement extends OutsideClick {
         this.value[type] = values;
         let updatedItems = this.items.filter(x => x.type !== type);
         this.items = updatedItems;
-        this.updateItems(allOfType[0], 'add');
+        this.updateDisplayItems(allOfType[0], 'add');
     }
 
     handleRemoveItemIfAllSelected(item) {
@@ -309,27 +346,103 @@ export class NovoMultiPickerElement extends OutsideClick {
     //set accessor including call the onchange callback
     set value(selectedItems) {
         if (selectedItems) {
-            this.types.forEach(x => this._value[x] = selectedItems[x]);
+            this.types.forEach(x => this._value[x.value] = selectedItems[x.value]);
         } else {
             this._value = {};
-            this.types.forEach(x => this._value[x] = []);
+            this.types.forEach(x => this._value[x.value] = []);
         }
         this.changed.emit(selectedItems);
         this.onModelChange(selectedItems);
+    }
+
+    updateParentOrChildren(item, action) {
+        if (item.isParent) {
+            this.updateChildrenValue(item, action);
+        } else if (item.isChild) {
+            this.updateParentValue(item, action);
+        }
+    }
+
+
+    updateChildrenValue(parent, action) {
+        let selecting = action === 'select';
+        let childType = parent.isParent.childType;
+        let potentialChildren = this.getAllOfType(childType);
+        let allParentType;
+        potentialChildren.forEach(x => {
+            if (x.isChild && x[parent.type] && x.value !== 'ALL') {
+                if (x[parent.type].filter(y => y.id === parent.value).length > 0) {
+                    if (x.checked) { this.removeValue(x); }
+                    //if x has another parent, need to figure out how its state is affected
+                    if (x[parent.type].length > 1) {
+                        let affectedParents = x[parent.type].filter(y => y.id !== parent.value);
+                        allParentType = this.getAllOfType(parent.type);
+                        affectedParents.forEach(obj => {
+                            let parentObj = allParentType.filter(par => par.value === obj.id)[0];
+                            this.determineIndeterminateState(parentObj, selecting);
+                        });
+                    }
+                    x.checked = selecting;
+                    if (selecting) {
+                        this.updateIndeterminateState(x.type, true);
+                    }
+                }
+            }
+        });
+    }
+
+    updateParentValue(child, action) {
+        let selecting = action === 'select';
+        let parentType = child.isChild.parentType;
+        let potentialParents = this.getAllOfType(parentType);
+        child[parentType].forEach(parent => {
+            let item = potentialParents.filter(x => x.value === parent.id)[0];
+            this.determineIndeterminateState(item, selecting);
+        }, this);
+    }
+
+    determineIndeterminateState(parent, selecting) {
+        if (parent.checked) { parent.checked = false; }
+        if (selecting) {
+            parent.indeterminate = true;
+            this.updateIndeterminateState(parent.type, true);
+        } else {
+            let potentialChildren = this.getAllOfType(parent.isParent.childType);
+            let selectedChildren = potentialChildren.filter(x => {
+                if (!x[parent.type]) { return false; }
+                return x.checked && x[parent.type].filter(y => y.id === parent.value).length > 0;
+            });
+            if (selectedChildren.length > 0) {
+                parent.indeterminate = true;
+                this.addIndividualChildren(selectedChildren);
+                this.removeValue(parent);
+            } else {
+                this.remove(null, parent);
+                parent.indeterminate = false;
+                this.updateIndeterminateState(parent.type, false);
+            }
+        }
+    }
+
+    addIndividualChildren(children) {
+        children.forEach(x => {
+            if (this.value[x.type].filter(item => item === x.value).length === 0) {
+                this.add(x);
+            }
+        });
     }
 
     setInitialValue(model) {
         this.items = [];
         this.value = model || {};
         if (this.types) {
-            this.types.forEach(type => {
+            let simpleTypes = this.types.map(x => x.value);
+            simpleTypes.forEach(type => {
                 if (this.value[type]) {
                     let indeterminateIsSet = false;
-                    let optionsByType = this.getAllOfType(type);
-                    let allSelected = this.allItemsSelected(optionsByType, type);
-                    if (allSelected) {
-                        this.selectAll(optionsByType, type);
-                    }
+                    let options = this.updateAllItemState(type, false);
+                    let optionsByType = options.allOfType;
+                    let allSelected = options.allOfTypeSelected;
                     this.value[type].forEach(item => {
                         if (!allSelected && !indeterminateIsSet) {
                             indeterminateIsSet = true;
@@ -337,8 +450,8 @@ export class NovoMultiPickerElement extends OutsideClick {
                         }
                         let value = optionsByType.filter(x => x.value === item)[0];
                         value.checked = true;
-                        if (!allSelected) { this.updateItems(value, 'add'); }
-                    }, this);
+                        if (!allSelected) { this.updateDisplayItems(value, 'add'); }
+                    });
                 } else {
                     this.value[type] = [];
                 }

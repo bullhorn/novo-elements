@@ -1,0 +1,9 @@
+<div class="selected-value">Selected States: <span *ngFor="let item of parentChildValue.states">{{item}} </span>
+    Selected Cities: <span *ngFor="let item of parentChildValue.cities">{{item}} </span></div>
+<multi-picker
+    [source]="parentChild"
+    [placeholder]="placeholder"
+    [types]="parentChildTypes"
+    [(ngModel)]="parentChildValue"
+    (changed)="onChanged($event)">
+</multi-picker>
