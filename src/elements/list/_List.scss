@@ -90,15 +90,19 @@ novo-list-item {
             }
         }
 
-        item-date {
+        item-header-end {
             flex: 1 0 0;
             text-align: right;
         }
     }
 
+    .avatar item-content {
+        margin-left: 2.7em;
+    }
+
     item-content {
         display: flex;
-        margin-left: 2.7em;
+        margin-left: 0.2em;
         > * {
             color: rgba(#434343, .65);
         }
