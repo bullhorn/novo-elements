@@ -4,12 +4,12 @@
             <item-header>
                 <item-avatar [icon]="item.type"></item-avatar>
                 <item-title>{{item.name}}</item-title>
-                <item-date>
+                <item-header-end>
                     <span>
                         <i class="bhi-clock"></i>
                         {{item.timeAgo | date: 'shortTime'}}
                     </span>
-                </item-date>
+                </item-header-end>
             </item-header>
             <item-content direction="vertical">
                 <p>

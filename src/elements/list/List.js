@@ -70,14 +70,14 @@ export class NovoItemTitleElement {
     template: `
             <ng-content select="item-avatar"></ng-content>
             <ng-content select="item-title"></ng-content>
-            <ng-content select="item-date"></ng-content>
+            <ng-content select="item-header-end"></ng-content>
     `
 })
 export class NovoItemHeaderElement {
 }
 
 @Component({
-    selector: 'item-date', //item-header-end
+    selector: 'item-header-end',
     template: `
         <ng-content></ng-content>
     `
