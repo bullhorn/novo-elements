@@ -96,9 +96,13 @@ novo-list-item {
         }
     }
 
+    .avatar item-content {
+        margin-left: 2.7em;
+    }
+
     item-content {
         display: flex;
-        margin-left: 2.7em;
+        margin-left: 0.2em;
         > * {
             color: rgba(#434343, .65);
         }
