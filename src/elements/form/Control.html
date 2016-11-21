@@ -57,7 +57,7 @@
                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                 <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
                 <div class="date-time-container">
-                    <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateTimeValue($event, 'date'); checkState();" [formControlName]="control.key"></novo-date-picker>
+                    <novo-date-picker [hidden]="!active" inline="true" (onSelect)="formatDateTimeValue($event, 'date'); checkState();" [formControlName]="control.key"></novo-date-picker>
                     <novo-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event, 'time'); checkState();" [formControlName]="control.key"></novo-time-picker>
                 </div>
             </div>
