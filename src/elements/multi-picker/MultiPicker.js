@@ -183,6 +183,7 @@ export class NovoMultiPickerElement extends OutsideClick {
             this.updateDisplayItems(event, 'add');
             this.value[event.type].push(event.value);
             this.updateAllItemState(event.type, true);
+            this.triggerValueUpdate();
         }
         this.updateParentOrChildren(event, 'select');
         this.select(null, event);
@@ -259,7 +260,7 @@ export class NovoMultiPickerElement extends OutsideClick {
     removeValue(item) {
         let updatedValues = this.value[item.type].filter(x => x !== item.value);
         this.value[item.type] = updatedValues;
-        this.onModelChange(this.value);
+        this.triggerValueUpdate();
         this.updateDisplayItems(item, 'remove');
         if (this.value[item.type].length === 0) { this.updateIndeterminateState(item.type, false); }
     }
@@ -297,6 +298,10 @@ export class NovoMultiPickerElement extends OutsideClick {
         } else {
             this.value[type] = [];
         }
+        this.triggerValueUpdate();
+    }
+
+    triggerValueUpdate() {
         let updatedObject = {};
         this.types.forEach(x => updatedObject[x.value] = this.value[x.value]);
         this.value = updatedObject;
