@@ -1,5 +1,5 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'novo-list',
@@ -19,7 +19,7 @@ export class NovoListElement {
 @Component({
     selector: 'novo-list-item',
     template: `
-        <div class="list-item">
+        <div class="list-item" [ngClass]="{'avatar': avatar}">
             <ng-content select="item-header"></ng-content>
             <ng-content select="item-content"></ng-content>
         </div>
@@ -27,6 +27,15 @@ export class NovoListElement {
     `
 })
 export class NovoListItemElement {
+    avatar:boolean = false;
+    element:ElementRef;
+
+    constructor(element:ElementRef) {
+        this.element = element;
+    }
+    ngAfterViewInit() {
+        this.avatar = !!this.element.nativeElement.querySelector('item-avatar');
+    }
 }
 
 @Component({
@@ -61,14 +70,14 @@ export class NovoItemTitleElement {
     template: `
             <ng-content select="item-avatar"></ng-content>
             <ng-content select="item-title"></ng-content>
-            <ng-content select="item-date"></ng-content>
+            <ng-content select="item-header-end"></ng-content>
     `
 })
 export class NovoItemHeaderElement {
 }
 
 @Component({
-    selector: 'item-date',
+    selector: 'item-header-end',
     template: `
         <ng-content></ng-content>
     `
