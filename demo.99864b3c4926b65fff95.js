@@ -1519,7 +1519,7 @@ webpackJsonp([2],[
 	        modalService.parentViewContainer = viewContainerRef;
 	
 	        this.menuOpen = false;
-	        this.version = ("1.1.31");
+	        this.version = ("1.1.32");
 	
 	        this.designRoutes = router.config.filter(function (r) {
 	            return r.section === 'design';
@@ -5931,7 +5931,7 @@ webpackJsonp([2],[
 /* 496 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <novo-list direction=\"vertical\">\n        <novo-list-item *ngFor=\"let item of pulseItems\">\n            <item-header>\n                <item-avatar [icon]=\"item.type\"></item-avatar>\n                <item-title>{{item.name}}</item-title>\n                <item-date>\n                    <span>\n                        <i class=\"bhi-clock\"></i>\n                        {{item.timeAgo | date: 'shortTime'}}\n                    </span>\n                </item-date>\n            </item-header>\n            <item-content direction=\"vertical\">\n                <p>\n                    <i *ngIf=\"item.icon.name\" class=\"{{item.icon.name}} {{item.icon.sentiment}}\"></i>\n                    {{item.comment}}\n                </p>\n            </item-content>\n        </novo-list-item>\n    </novo-list>\n</header>\n"
+	module.exports = "<header>\n    <novo-list direction=\"vertical\">\n        <novo-list-item *ngFor=\"let item of pulseItems\">\n            <item-header>\n                <item-avatar [icon]=\"item.type\"></item-avatar>\n                <item-title>{{item.name}}</item-title>\n                <item-header-end>\n                    <span>\n                        <i class=\"bhi-clock\"></i>\n                        {{item.timeAgo | date: 'shortTime'}}\n                    </span>\n                </item-header-end>\n            </item-header>\n            <item-content direction=\"vertical\">\n                <p>\n                    <i *ngIf=\"item.icon.name\" class=\"{{item.icon.name}} {{item.icon.sentiment}}\"></i>\n                    {{item.comment}}\n                </p>\n            </item-content>\n        </novo-list-item>\n    </novo-list>\n</header>\n"
 
 /***/ },
 /* 497 */
@@ -6205,4 +6205,4 @@ webpackJsonp([2],[
 
 /***/ }
 ]);
-//# sourceMappingURL=demo.e2d3c45369ef38c7d286.map
+//# sourceMappingURL=demo.99864b3c4926b65fff95.map
