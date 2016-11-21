@@ -19,7 +19,7 @@ export class NovoListElement {
 @Component({
     selector: 'novo-list-item',
     template: `
-        <div class="list-item" [class.avatar]="avatar">
+        <div class="list-item" [ngClass]="{'avatar': avatar}">
             <ng-content select="item-header"></ng-content>
             <ng-content select="item-content"></ng-content>
         </div>
@@ -34,7 +34,7 @@ export class NovoListItemElement {
         this.element = element;
     }
     ngAfterViewInit() {
-        this.avatar = this.element.nativeElement.querySelector('item-avatar');
+        this.avatar = !!this.element.nativeElement.querySelector('item-avatar');
     }
 }
 
