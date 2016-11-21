@@ -24,8 +24,7 @@ const template = `
     
     <h5>Nested Example</h5>
     <p>
-        By clicking on the <code>multi-picker</code> element, the options list will be displayed.  Select any of the options
-        by clicking on the item in the list.  The value selected will be added to the list of selected values.
+        The multipicker can also support a parent-child relationship between the types, such as the relationship between a state with many cities or a department with users.
     </p>
     <div class="example chips-demo">${NestedMultiPicker}</div>
     <code-snippet [code]="NestedMultiPicker"></code-snippet>
