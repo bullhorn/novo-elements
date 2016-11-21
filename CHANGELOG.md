@@ -1,3 +1,13 @@
+<a name="1.1.32"></a>
+## [1.1.32](https://github.com/bullhorn/novo-elements/compare/v1.1.31...v1.1.32) (2016-11-21)
+
+
+### Bug Fixes
+
+* **list:** Fixing list elements/styles ([f5633f0](https://github.com/bullhorn/novo-elements/commit/f5633f0))
+
+
+
 <a name="1.1.31"></a>
 ## [1.1.31](https://github.com/bullhorn/novo-elements/compare/v1.1.30...v1.1.31) (2016-11-16)
 
