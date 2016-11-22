@@ -13,20 +13,53 @@ novo-date-time-picker {
     .date-time-container {
         position: relative;
 
-        &.time-select {
-            .time-picker {
-                transform: translateY(0%);
-            }
+        .view-container {
+            position: relative;
         }
 
         .time-picker {
             position: absolute;
             height: 100%;
             background: #fff;
-            top: 0;
-            transform: translateY(100%);
+            transform: translateX(100%);
             transition: transform 200ms ease-in-out;
             z-index: 2;
+            top: 0;
+        }
+
+        .date-time-tabs {
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            height: 45px;
+
+            & > span {
+                text-align: center;
+                flex: 1;
+                cursor: pointer;
+                transition: opacity 200ms ease-in-out;
+                opacity: 0.6;
+
+                &:hover {
+                    opacity: 1 !important;
+                }
+
+                .meridian {
+                    text-transform: uppercase;
+                }
+            }
+
+            .indicator {
+                position: absolute;
+                width: 50%;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background: $positive;
+                transition: transform 200ms ease-in-out;
+            }
         }
     }
     // Calendar Styles
@@ -58,11 +91,9 @@ novo-date-time-picker {
         background: #fff;
         color: #3A3A3A;
         -webkit-user-select: none;
-        border-bottom: 1px solid #f4f4f4;
         box-shadow: none;
         z-index: 1;
         position: relative;
-        margin-bottom: 45px;
 
         .calendar-top {
             display: flex;
@@ -409,6 +440,15 @@ novo-date-time-picker {
         display: inline-block;
     }
 
+    .meridian-control-block {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 14px 0;
+        justify-content: center;
+        border-bottom: 1px solid #F0F0F0;
+    }
+
     .digital--period {
         display: block;
         color: $positive;
@@ -416,8 +456,8 @@ novo-date-time-picker {
         font-size: 1em;
         opacity: 0.6;
         text-transform: uppercase;
-        margin-left: 5px;
         font-weight: 400;
+        margin: 0 20px;
 
         &.active {
             opacity: 1;
@@ -429,7 +469,7 @@ novo-date-time-picker {
     .analog {
         height: 250px;
         width: 250px;
-        top: 30px;
+        top: 0;
         margin: 0 auto;
         background: #fff;
         z-index: 2;
@@ -715,6 +755,17 @@ novo-date-time-picker {
                 right: 2px;
                 margin-top: -17px;
             }
+        }
+    }
+
+    .time-footer {
+        width: 100%;
+        padding: 0 10px;
+        text-align: left;
+
+        .now {
+            cursor: pointer;
+            color: $positive;
         }
     }
     @keyframes select {

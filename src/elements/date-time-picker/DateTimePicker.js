@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef } from '@angular/core';
+import { Component, EventEmitter, forwardRef, trigger, state, style, transition, animate } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
@@ -18,83 +18,126 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
     inputs: ['minYear', 'maxYear', 'start', 'end', 'inline', 'range', 'military'],
     outputs: ['onSelect'],
     providers: [DATE_TIME_PICKER_VALUE_ACCESSOR],
+    animations: [
+        trigger('dateTextState', [
+            state('date', style({
+                'opacity': '1.0'
+            })),
+            state('time', style({
+                'opacity': '0.6'
+            })),
+            transition('date <=> time', animate('200ms ease-in'))
+        ]),
+        trigger('timeTextState', [
+            state('date', style({
+                'opacity': '0.6'
+            })),
+            state('time', style({
+                'opacity': '1.0'
+            })),
+            transition('date <=> time', animate('200ms ease-in'))
+        ]),
+        trigger('indicatorState', [
+            state('date', style({
+                'transform': 'translateX(0%)'
+            })),
+            state('time', style({
+                'transform': 'translateX(100%)'
+            })),
+            transition('date <=> time', animate('200ms ease-in'))
+        ]),
+        trigger('containerState', [
+            state('date', style({
+                'transform': 'translateX(0%)'
+            })),
+            state('time', style({
+                'transform': 'translateX(-100%)'
+            })),
+            transition('date <=> time', animate('200ms ease-in'))
+        ])
+    ],
     template: `
-        <div class="date-time-container" [ngClass]="{'time-select': showClock}">
-            <div class="calendar">
-                <div *ngIf="range" class="calendar-range">
-                    <span [class.active]="!calendarRangeEnd">{{(selected?.format('MMM D, YYYY') ) || 'Start Date'}}</span>
-                    <span [class.active]="calendarRangeEnd">{{(selected2?selected2.format('MMM D, YYYY'):null ) || 'End Date'}}</span>
-                </div>
-                <div class="calendar-header">
-                    <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
-                    <span class="heading">
-                        <span class="month" (click)="open($event, 'months')" [attr.data-automation-id]="heading?.month">{{month?.format('MMM')}}</span>
-                        <span class="year" (click)="open($event, 'years')" [attr.data-automation-id]="heading?.year">{{month?.format('YYYY')}}</span>
-                    </span>
-                    <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
-                </div>
-                <table class="calendar-content days" cellspacing="0" cellpadding="0" [hidden]="!(view=='days')">
-                    <thead>
-                        <tr>
-                            <th *ngFor="let day of weekday" title="{{day}}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">{{day.substr(0, 2)}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let week of weeks">
-                            <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday,
-                                'notinmonth': !day.isCurrentMonth,
-                                selected: (!range ? day.date.isSame(selected) : (day.date.isSame(selected) || day.date.isSame(selected2))),
-                                filler: (range && selected2 && day.date.isAfter(selected) && day.date.isBefore(selected2)),
-                                startfill: (range && selected2 && day.date.isSame(selected) && day.date.isBefore(selected2))
-                            }">
-                                <button class="day" (click)="select($event, day, true)" [attr.data-automation-id]="day.number" [disabled]="(start && day.date.isBefore(start)) || (end && day.date.isAfter(end))">{{day.number}}</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <ul class="calendar-content months" [hidden]="!(view == 'months')">
-                    <li *ngFor="let month of months" (click)="setMonth(month)">
-                        <div class="month" [ngClass]="{selected: month == selected?.format('MMM')}" [attr.data-automation-id]="month">{{month}}</div>
-                    </li>
-                </ul>
-                <ul class="calendar-content years" [hidden]="!(view == 'years')">
-                    <li *ngFor="let year of years" (click)="setYear(year)">
-                        <div class="year" [ngClass]="{selected: year == selected?.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
-                    </li>
-                </ul>
-                <div class="calendar-footer" *ngIf="!range">
-                    <span (click)="setToday()" class="today" title="{{today}}" data-automation-id="calendar-today">Today</span>
-                </div>
+        <div class="date-time-container">
+            <div class="date-time-tabs">
+                <span class="date-tab" (click)="toggleTimePicker('date')" [@dateTextState]="componentTabState">DATE</span>
+                <span class="time-tab" (click)="toggleTimePicker('time')" [@timeTextState]="componentTabState">
+                    <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
+                    <span *ngIf="!military" class="meridian">{{meridian}}</span>
+                </span>
+                <i class="indicator" [@indicatorState]="componentTabState"></i>
             </div>
-            <div class="time-picker">
-                <div class="digital" (click)="toggleTimePicker()">
-                    <i [ngClass]="{'bhi-sort-desc': showClock, 'bhi-sort-asc': !showClock}"></i>
-                    <div class="digital--inner">
-                        <span class="digital--clock">
-                            <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
+            <div class="view-container" [@containerState]="componentTabState">
+                <div class="calendar">
+                    <div *ngIf="range" class="calendar-range">
+                        <span [class.active]="!calendarRangeEnd">{{(selected?.format('MMM D, YYYY') ) || 'Start Date'}}</span>
+                        <span [class.active]="calendarRangeEnd">{{(selected2?selected2.format('MMM D, YYYY'):null ) || 'End Date'}}</span>
+                    </div>
+                    <div class="calendar-header">
+                        <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
+                        <span class="heading">
+                            <span class="month" (click)="open($event, 'months')" [attr.data-automation-id]="heading?.month">{{month?.format('MMM')}}</span>
+                            <span class="year" (click)="open($event, 'years')" [attr.data-automation-id]="heading?.year">{{month?.format('YYYY')}}</span>
                         </span>
-                        <div class="control-block" *ngIf="!military">
-                            <span *ngFor="let period of MERIDIANS" class="digital--period" [class.active]="meridian==period" (click)="setPeriod($event, period, true)" [attr.data-automation-id]="period">{{period}}</span>
-                        </div>
+                        <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
+                    </div>
+                    <table class="calendar-content days" cellspacing="0" cellpadding="0" [hidden]="!(view=='days')">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let day of weekday" title="{{day}}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">{{day.substr(0, 2)}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let week of weeks">
+                                <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday,
+                                    'notinmonth': !day.isCurrentMonth,
+                                    selected: (!range ? day.date.isSame(selected) : (day.date.isSame(selected) || day.date.isSame(selected2))),
+                                    filler: (range && selected2 && day.date.isAfter(selected) && day.date.isBefore(selected2)),
+                                    startfill: (range && selected2 && day.date.isSame(selected) && day.date.isBefore(selected2))
+                                }">
+                                    <button class="day" (click)="select($event, day, true)" [attr.data-automation-id]="day.number" [disabled]="(start && day.date.isBefore(start)) || (end && day.date.isAfter(end))">{{day.number}}</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul class="calendar-content months" [hidden]="!(view == 'months')">
+                        <li *ngFor="let month of months" (click)="setMonth(month)">
+                            <div class="month" [ngClass]="{selected: month == selected?.format('MMM')}" [attr.data-automation-id]="month">{{month}}</div>
+                        </li>
+                    </ul>
+                    <ul class="calendar-content years" [hidden]="!(view == 'years')">
+                        <li *ngFor="let year of years" (click)="setYear(year)">
+                            <div class="year" [ngClass]="{selected: year == selected?.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
+                        </li>
+                    </ul>
+                    <div class="calendar-footer" *ngIf="!range">
+                        <span (click)="setToday()" class="today" title="{{today}}" data-automation-id="calendar-today">Today</span>
                     </div>
                 </div>
-                <div class="analog">
-                    <div class="analog--inner">
-                        <div class="analog--face">
-                            <span class="analog--center"></span>
-                            <span class="analog--hand--hours" [ngClass]="hoursClass">
-                                <span class="analog--ball"></span>
-                            </span>
-                            <span class="analog--hand--minutes" [ngClass]="minutesClass">
-                                <span class="analog--ball" [ngClass]="{between: inBetween}"></span>
-                            </span>
+                <div class="time-picker">
+                    <div class="meridian-control-block" *ngIf="!military">
+                        <span *ngFor="let period of MERIDIANS" class="digital--period" [class.active]="meridian==period" (click)="setPeriod($event, period, true)" [attr.data-automation-id]="period">{{period}}</span>
+                    </div>
+                    <div class="analog">
+                        <div class="analog--inner">
+                            <div class="analog--face">
+                                <span class="analog--center"></span>
+                                <span class="analog--hand--hours" [ngClass]="hoursClass">
+                                    <span class="analog--ball"></span>
+                                </span>
+                                <span class="analog--hand--minutes" [ngClass]="minutesClass">
+                                    <span class="analog--ball" [ngClass]="{between: inBetween}"></span>
+                                </span>
+                            </div>
+                            <div class="analog--hours">
+                                <span *ngFor="let hour of HOURS" class="analog--hour" [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour, true)" [attr.data-automation-id]="hour">{{hour}}</span>
+                            </div>
+                            <div class="analog--minutes">
+                                <span *ngFor="let minute of MINUTES" class="analog--minute" [ngClass]="{active: activeMinute == minute}" (click)="setMinutes($event, minute, true)" [attr.data-automation-id]="minute">{{minute}}</span>
+                            </div>
                         </div>
-                        <div class="analog--hours">
-                            <span *ngFor="let hour of HOURS" class="analog--hour" [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour, true)" [attr.data-automation-id]="hour">{{hour}}</span>
-                        </div>
-                        <div class="analog--minutes">
-                            <span *ngFor="let minute of MINUTES" class="analog--minute" [ngClass]="{active: activeMinute == minute}" (click)="setMinutes($event, minute, true)" [attr.data-automation-id]="minute">{{minute}}</span>
-                        </div>
+                    </div>
+                    <div class="time-footer">
+                        <span class="now" (click)="clearTime()">Now</span>
                     </div>
                 </div>
             </div>
@@ -117,6 +160,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     minutes = 0;
     value = null;
     showClock:Boolean = false;
+    componentTabState:String = 'date';
 
     MERIDIANS = ['am', 'pm'];
     HOURS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
@@ -145,16 +189,12 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     }
 
     ngOnChanges() {
-        if (this.model) {
-            this.updateCal(this.model, false, true);
-            this.updateTime(this.model, false);
-        } else {
-            this.updateTime(moment(), false);
-        }
+        this.updateCal(this.model, false, true);
+        this.updateTime(this.model, false);
     }
 
     updateTime(time, fireEvents) {
-        let momentValue = moment(time);
+        let momentValue = time ? moment(time) : moment();
         let hours = momentValue.hours();
         let minutes = momentValue.minutes();
 
@@ -434,24 +474,22 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
         this.onModelChange(value.toDate());
     }
 
-    toggleTimePicker() {
-        this.showClock = !this.showClock;
+    clearTime() {
+        this.updateTime(null, true);
     }
 
-    // // ValueAccessor Functions
+    toggleTimePicker(tab) {
+        this.showClock = !this.showClock;
+        this.componentTabState = tab;
+    }
+
+    // ValueAccessor Functions
+
     // writeValue(model:any):void {
     //     this.model = model;
     //     if (model) {
     //         this.updateTime(model, false);
     //     }
-    // }
-    //
-    // registerOnChange(fn:Function):void {
-    //     this.onModelChange = fn;
-    // }
-    //
-    // registerOnTouched(fn:Function):void {
-    //     this.onModelTouched = fn;
     // }
 
     // ValueAccessor Functions
