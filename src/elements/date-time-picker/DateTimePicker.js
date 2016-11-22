@@ -59,7 +59,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
     template: `
         <div class="date-time-container">
             <div class="date-time-tabs">
-                <span class="date-tab" (click)="toggleTimePicker('date')" [@dateTextState]="componentTabState">DATE</span>
+                <span class="date-tab" (click)="toggleTimePicker('date')" [@dateTextState]="componentTabState">{{(selected?.format('MMM D, YYYY') ) || 'Date'}}</span>
                 <span class="time-tab" (click)="toggleTimePicker('time')" [@timeTextState]="componentTabState">
                     <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
                     <span *ngIf="!military" class="meridian">{{meridian}}</span>
