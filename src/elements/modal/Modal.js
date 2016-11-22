@@ -93,7 +93,7 @@ export class NovoModalElement {
             <ng-content select="label"></ng-content>
         </header>
         <section class="notification-body">
-            <i class="indicator" [ngClass]="iconType"></i>
+            <i class="indicator" [ngClass]="iconType" *ngIf="iconType"></i>
             <ng-content select="h1"></ng-content>
             <ng-content select="h4"></ng-content>
             <ng-content select="p"></ng-content>
