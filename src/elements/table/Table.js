@@ -701,13 +701,19 @@ export class NovoTableElement {
     }
 
     onFilterKeydown(event, column) {
-        let label;
-        if (event && event.keyCode === KeyCodes.ENTER && event.target && event.target.value) {
-            if (column.options && column.options.length) {
-                label = column.options[0] && column.options[0].label ? { label: event.target.value } : event.target.value;
+        let filter = event && event.target && event.target.value ? event.target.value : '';
+        if (event && event.keyCode === KeyCodes.ENTER) {
+            if (column.options && column.options.length && column.options[0]) {
+                filter = column.options[0].label ? { label: filter } : filter;
+                column.options.forEach(opt => {
+                    if ((opt.label && opt.label.toLowerCase() === filter.label.toLowerCase()) ||
+                    (opt.toLowerCase && filter.toLowerCase && opt.toLowerCase() === filter.toLowerCase())) {
+                        filter = opt;
+                    }
+                });
             }
             column.filterKeywords = '';
-            this.onFilterClick(column, label);
+            this.onFilterClick(column, filter);
         }
     }
 }
