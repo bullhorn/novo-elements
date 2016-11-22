@@ -40,6 +40,10 @@ export class NovoLabelService {
     formatDateWithFormat(value, format) {
         return moment(value).format(format);
     }
+
+    getProperty(value) {
+        return this[value];
+    }
 }
 
 export const NOVO_ELEMENTS_LABELS_PROVIDERS = [
