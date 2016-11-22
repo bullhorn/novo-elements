@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
 import { Helpers } from './../../utils/Helpers';
+import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
 @Component({
     selector: 'novo-table-actions',
@@ -68,6 +69,7 @@ export class NovoTableHeaderElement {
                                             <span>{{ labels.filters }}</span>
                                             <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
+                                        <input type="text" [attr.id]="column.name + '-input'" (keydown)="onFilterKeydown($event, column)" (keyup)="onFilterKeywords($event, column)" [(ngModel)]="column.filterKeywords"/>
                                     </item>
                                     <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="getOptionDataAutomationId(option)">
                                         {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
@@ -221,6 +223,7 @@ export class NovoTableElement {
                         break;
                 }
             }
+            column.originalOptions = column.options;
         });
     }
 
@@ -308,6 +311,8 @@ export class NovoTableElement {
         }
 
         column.filter = null;
+        column.filterKeywords = null;
+        column.options = column.originalOptions;
         this.onFilterChange();
     }
 
@@ -389,12 +394,12 @@ export class NovoTableElement {
                                     });
                                 } else {
                                     let options = column.filter;
-                                    // We have an array of {value: '', labels: ''}
-                                    if (options[0].value || options[0].label) {
-                                        options = column.filter.map(opt => opt.value);
-                                    }
+                                    options = column.filter.map(opt => {
+                                        let option = opt.label || opt.value || opt || '';
+                                        return option.toLowerCase();
+                                    });
                                     // It's a list of options
-                                    matched = options.includes(row[column.name]);
+                                    matched = options.includes(row[column.name].toLowerCase());
                                 }
                             } else if (Array.isArray(row[column.name])) {
                                 // Value is an array
@@ -669,5 +674,40 @@ export class NovoTableElement {
                 this.onFilterChange();
             }
         }, 10);
+    }
+
+    onFilterKeywords(event, column) {
+        if (event && event.target && event.target.value) {
+            let filterKeywords = event.target.value.toLowerCase();
+            let exactMatch = false;
+            let newOptions = column.originalOptions.filter(option => {
+                let value = option && option.label ? option.label : option;
+                value = value.toLowerCase() ? value.toLowerCase() : value;
+                if (value === filterKeywords) {
+                    exactMatch = true;
+                    return true;
+                } else if (~ value.indexOf(filterKeywords) || ~ value.indexOf(filterKeywords)) {
+                    return true;
+                }
+                return false;
+            });
+            if (!exactMatch) {
+                newOptions.push(event.target.value);
+            }
+            column.options = newOptions;
+        } else {
+            column.options = column.originalOptions;
+        }
+    }
+
+    onFilterKeydown(event, column) {
+        let label;
+        if (event && event.keyCode === KeyCodes.ENTER && event.target && event.target.value) {
+            if (column.options && column.options.length) {
+                label = column.options[0] && column.options[0].label ? { label: event.target.value } : event.target.value;
+            }
+            column.filterKeywords = '';
+            this.onFilterClick(column, label);
+        }
     }
 }
