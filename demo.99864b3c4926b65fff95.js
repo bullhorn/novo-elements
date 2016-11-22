@@ -1519,7 +1519,7 @@ webpackJsonp([2],[
 	        modalService.parentViewContainer = viewContainerRef;
 	
 	        this.menuOpen = false;
-	        this.version = ("1.1.32");
+	        this.version = ("1.1.33");
 	
 	        this.designRoutes = router.config.filter(function (r) {
 	            return r.section === 'design';
