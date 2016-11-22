@@ -7,7 +7,7 @@ import { Helpers } from './../../utils/Helpers';
 import moment from 'moment/moment';
 
 // Value accessor for the component (supports ngModel)
-const DATE_PICKER_VALUE_ACCESSOR = {
+const DATE_TIME_PICKER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NovoDateTimePickerElement),
     multi: true
@@ -17,7 +17,7 @@ const DATE_PICKER_VALUE_ACCESSOR = {
     selector: 'novo-date-time-picker',
     inputs: ['minYear', 'maxYear', 'start', 'end', 'inline', 'range', 'military'],
     outputs: ['onSelect'],
-    providers: [DATE_PICKER_VALUE_ACCESSOR],
+    providers: [DATE_TIME_PICKER_VALUE_ACCESSOR],
     template: `
         <div class="date-time-container" [ngClass]="{'time-select': showClock}">
             <div class="calendar">
@@ -68,6 +68,7 @@ const DATE_PICKER_VALUE_ACCESSOR = {
             </div>
             <div class="time-picker">
                 <div class="digital" (click)="toggleTimePicker()">
+                    <i [ngClass]="{'bhi-sort-desc': showClock, 'bhi-sort-asc': !showClock}"></i>
                     <div class="digital--inner">
                         <span class="digital--clock">
                             <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
@@ -118,6 +119,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     showClock:Boolean = false;
 
     MERIDIANS = ['am', 'pm'];
+    HOURS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     MINUTES = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
 
     model:any;
@@ -129,16 +131,12 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
         let now = moment();
         let start = this.minYear ? Number(this.minYear) : now.year() - 100;
         let end = this.maxYear ? Number(this.maxYear) : now.year() + 10;
-        this.years = [];
+
         for (let i = start; i <= end; i++) {
             this.years.push(i);
         }
 
-        this.updateCal(this.model, false, true);
-
-        // TIME
-        // Set the hours
-        this.HOURS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+        // Set the hours if military
         if (this.military) {
             this.HOURS = ['0', ...this.HOURS, '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
         }
@@ -148,6 +146,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
 
     ngOnChanges() {
         if (this.model) {
+            this.updateCal(this.model, false, true);
             this.updateTime(this.model, false);
         } else {
             this.updateTime(moment(), false);
@@ -376,24 +375,6 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
         return days;
     }
 
-    // ValueAccessor Functions
-    writeValue(model:any):void {
-        this.model = model;
-        this.updateCal(model, false, true);
-    }
-
-    registerOnChange(fn:Function):void {
-        this.onModelChange = fn;
-    }
-
-    registerOnTouched(fn:Function):void {
-        this.onModelTouched = fn;
-    }
-
-    checkBetween(value) {
-        this.inBetween = this.MINUTES.indexOf(String(value)) < 0;
-    }
-
     // TIME
     setHours(event, hours, dispatch) {
         Helpers.swallowEvent(event);
@@ -472,4 +453,23 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     // registerOnTouched(fn:Function):void {
     //     this.onModelTouched = fn;
     // }
+
+    // ValueAccessor Functions
+    writeValue(model:any):void {
+        this.model = model;
+        this.updateCal(model, false, true);
+        // this.updateTime(model, false);
+    }
+
+    registerOnChange(fn:Function):void {
+        this.onModelChange = fn;
+    }
+
+    registerOnTouched(fn:Function):void {
+        this.onModelTouched = fn;
+    }
+
+    checkBetween(value) {
+        this.inBetween = this.MINUTES.indexOf(String(value)) < 0;
+    }
 }

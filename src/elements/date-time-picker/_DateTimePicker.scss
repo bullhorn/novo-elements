@@ -369,9 +369,26 @@ novo-date-time-picker {
     }
     // Time Styles
     .digital {
-        padding: 6.5px 0;
-        background-color: #fff;
         height: $time-select-height;
+        padding: 6.5px 15px;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        border-bottom: 1px solid #f4f4f4;
+
+        & > i {
+            color: #aaa;
+            font-size: 1.2em;
+            transition: color 140ms ease-in-out;
+        }
+
+        &:hover {
+            & > i {
+                color: $positive;
+            }
+        }
     }
 
     .digital--inner {
@@ -382,9 +399,10 @@ novo-date-time-picker {
     }
 
     .digital--clock {
-        color: $positive;
-        font-size: 1.8em;
-        font-weight: 500;
+        color: $dark;
+        font-size: 1.4em;
+        font-weight: 400;
+        margin-right: 7px;
     }
 
     .control-block {
@@ -411,7 +429,7 @@ novo-date-time-picker {
     .analog {
         height: 250px;
         width: 250px;
-        top: 0;
+        top: 30px;
         margin: 0 auto;
         background: #fff;
         z-index: 2;

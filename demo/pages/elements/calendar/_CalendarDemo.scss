@@ -19,7 +19,8 @@ calendar-demo {
 
     .example.demo {
         padding: 20px;
-        background: rgba(0, 0, 0, .45);
+        // background: rgba(0, 0, 0, .45);
+        background: $mint;
 
         timeselect {
             margin: 0 auto;
@@ -31,6 +32,7 @@ calendar-demo {
     }
 }
 
+.calendar-demo-date-time,
 .calendar-demo-side-by-side {
     display: flex;
     align-items: center;
@@ -48,8 +50,8 @@ calendar-demo {
         }
     }
 
-    > novo-date-picker,
-    > novo-time-picker {
+     > novo-time-picker,
+    > novo-date-picker {
         margin-right: 5px;
 
         &:last-child {
