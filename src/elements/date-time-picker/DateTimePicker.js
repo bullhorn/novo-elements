@@ -94,7 +94,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
                                     filler: (range && selected2 && day.date.isAfter(selected) && day.date.isBefore(selected2)),
                                     startfill: (range && selected2 && day.date.isSame(selected) && day.date.isBefore(selected2))
                                 }">
-                                    <button class="day" (click)="select($event, day, true)" [attr.data-automation-id]="day.number" [disabled]="(start && day.date.isBefore(start)) || (end && day.date.isAfter(end))">{{day.number}}</button>
+                                    <button class="day" (click)="select($event, day, true); toggleTimePicker('time')" [attr.data-automation-id]="day.number" [disabled]="(start && day.date.isBefore(start)) || (end && day.date.isAfter(end))">{{day.number}}</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -321,6 +321,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
                 // Also, update the ngModel
                 this.onModelChange(this.selected.toDate());
                 this.model = this.selected.toDate();
+                this.dispatchChange();
             }
         }
     }
@@ -462,7 +463,13 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
             }
         }
 
+
         let value = moment().hours(hours).minutes(this.minutes).seconds(0);
+
+        if (this.model) {
+            value = moment(this.model).hours(hours).minutes(this.minutes).seconds(0);
+        }
+
         this.onSelect.next({
             hours: hours,
             minutes: this.minutes,
@@ -471,7 +478,9 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
             moment: value,
             text: `${this.hours}:${this.minutes} ${this.meridian}`
         });
+
         this.onModelChange(value.toDate());
+        this.model = value.toDate();
     }
 
     clearTime() {
@@ -484,19 +493,10 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     }
 
     // ValueAccessor Functions
-
-    // writeValue(model:any):void {
-    //     this.model = model;
-    //     if (model) {
-    //         this.updateTime(model, false);
-    //     }
-    // }
-
-    // ValueAccessor Functions
     writeValue(model:any):void {
         this.model = model;
         this.updateCal(model, false, true);
-        // this.updateTime(model, false);
+        this.updateTime(model, false);
     }
 
     registerOnChange(fn:Function):void {

@@ -56,10 +56,7 @@
                 <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event); toggleState();" [value]="formattedValue" readonly/>
                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                 <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
-                <div class="date-time-container">
-                    <novo-date-picker [hidden]="!active" inline="true" (onSelect)="formatDateTimeValue($event, 'date'); checkState();" [formControlName]="control.key"></novo-date-picker>
-                    <novo-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event, 'time'); checkState();" [formControlName]="control.key"></novo-time-picker>
-                </div>
+                <novo-date-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event); checkState();" [formControlName]="control.key"></novo-date-time-picker>
             </div>
             <!--Address-->
             <novo-address *ngSwitchCase="'address'" [formControlName]="control.key"></novo-address>

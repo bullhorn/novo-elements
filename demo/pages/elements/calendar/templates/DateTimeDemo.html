@@ -2,9 +2,6 @@
     <p>
         <label>Date</label>
         {{(model | json) || 'N/A'}}
-
-        <label>Time</label>
-        {{(model | json) || 'N/A'}}
     </p>
     <novo-date-time-picker [(ngModel)]="date-time"></novo-date-time-picker>
 </div>

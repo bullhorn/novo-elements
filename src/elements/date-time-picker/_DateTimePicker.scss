@@ -36,6 +36,7 @@ novo-date-time-picker {
             height: 45px;
 
             & > span {
+                color: $positive;
                 text-align: center;
                 flex: 1;
                 cursor: pointer;

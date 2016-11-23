@@ -10,6 +10,7 @@ import { NovoPickerModule } from './../picker/Picker.module';
 import { NovoChipsModule } from './../chips/Chips.module';
 import { NovoDatePickerModule } from './../date-picker/DatePicker.module';
 import { NovoTimePickerModule } from './../time-picker/TimePicker.module';
+import { NovoDateTimePickerModule } from './../date-time-picker/DateTimePicker.module';
 import { NovoNovoCKEditorModule } from './../ckeditor/CKEditor.module';
 import { NovoQuickNoteModule } from './../quick-note/QuickNote.module';
 import { NovoDynamicFormElement } from './DynamicForm';
@@ -30,7 +31,8 @@ import { NovoFormExtrasModule } from './extras/FormExtras.module';
         NovoTimePickerModule,
         NovoNovoCKEditorModule,
         NovoFormExtrasModule,
-        NovoQuickNoteModule
+        NovoQuickNoteModule,
+        NovoDateTimePickerModule
     ],
     declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement],
     exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement]
