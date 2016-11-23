@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
@@ -22,9 +22,21 @@ const TILES_VALUE_ACCESSOR = {
                 </label>
                 <input [hidden]="true" [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i">
             </div>
-            <span class="active-indicator" [hidden]="(activeTile === undefined || activeTile === null)"></span>
+            <span class="active-indicator" [@tileState]="state" [hidden]="(activeTile === undefined || activeTile === null)"></span>
         </div>
-    `
+    `,
+    animations: [
+        trigger('tileState', [
+            state('inactive', style({
+                opacity: '0'
+            })),
+            state('active', style({
+                opacity: '1'
+            })),
+            transition('inactive => active', animate('200ms ease-in')),
+            transition('active => inactive', animate('200ms ease-out'))
+        ])
+    ]
 })
 export class NovoTilesElement implements ControlValueAccessor {
     @Input() name:String;
@@ -34,6 +46,7 @@ export class NovoTilesElement implements ControlValueAccessor {
 
     _options:Array = [];
     activeTile:any = null;
+    state:String = 'inactive';
 
     model:any;
     onModelChange:Function = () => {
@@ -98,13 +111,12 @@ export class NovoTilesElement implements ControlValueAccessor {
             let left = el.offsetLeft;
 
             // These style adjustments need to occur in this order.
-            // TODO: Remove this and use ngAnimate2 - @asibilia
             setTimeout(() => {
                 ind.style.width = `${w + 4}px`;
                 setTimeout(() => {
                     ind.style.transform = `translateX(${left}px)`;
                     setTimeout(() => {
-                        ind.style.opacity = '1';
+                        this.state = 'active';
                     });
                 });
             });

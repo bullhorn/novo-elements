@@ -1,4 +1,4 @@
-<novo-table [rows]="selectAll.rows" [columns]="selectAll.columns" [config]="selectAll.config" (onTableChange)="selectAll.onTableChange($event)" #table>
+<novo-table [rows]="selectAll.rows" [columns]="selectAll.columns" [config]="selectAll.config" #table>
     <novo-table-actions>
         <button theme="secondary" (click)="singleAction()">Click Me!</button>
         <novo-dropdown side="right" *ngIf="table.selected.length">

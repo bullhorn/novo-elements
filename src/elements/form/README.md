@@ -20,3 +20,6 @@ import {NOVO_FORM_ELEMENTS} from 'novo-elements';
     * Adds placeholder text to form field in empty state    
 - `'multiple' : Bool`
     * Determines whether **pickers** can have multiple values.
+- `'maxlength' : Number`
+    * The maximum number of characters (Unicode code points) that the user can enter. If it is not specified, the user can enter an unlimited number of characters.
+    * Works for textarea and textbox

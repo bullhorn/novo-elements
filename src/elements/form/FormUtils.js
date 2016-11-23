@@ -27,23 +27,22 @@ export class FormUtils {
         let group:any = {};
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
-            group[control.key] = control.validators && control.validators.length > 0 ? new FormControl(value, control.validators) : new FormControl(value);
+            group[control.key] = new FormControl(value, control.validators, control.asyncValidators);
         });
         return new FormGroup(group);
     }
 
     determineInputType(field) {
         let type = null;
-
         // Determine TYPE because its not just 1 value that determines this.
         if (field.type === 'TO_MANY') {
-            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person'].indexOf(field.associatedEntity.entity)) {
+            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person', 'Placement'].indexOf(field.associatedEntity.entity)) {
                 type = 'entitychips';
             } else {
                 type = 'chips';
             }
         } else if (field.type === 'TO_ONE') {
-            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person'].indexOf(field.associatedEntity.entity)) {
+            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person', 'Placement'].indexOf(field.associatedEntity.entity)) {
                 type = 'entitypicker';
             } else {
                 type = 'picker';
@@ -91,9 +90,7 @@ export class FormUtils {
         }
 
         // Overrides
-        if (type === 'checkbox' && field.options) {
-            type = 'checklist';
-        } else if (type === 'picker' && field.multiValue) {
+        if (type === 'picker' && field.multiValue) {
             type = 'chips';
         } else if (type === 'entitypicker' && field.multiValue) {
             type = 'entitychips';
@@ -116,7 +113,8 @@ export class FormUtils {
             sortOrder: field.sortOrder,
             associatedEntity: field.associatedEntity,
             optionsType: field.optionsType,
-            multiple: field.multiValue
+            multiple: field.multiValue,
+            disabled: field.disabled || false
         };
         let optionsConfig = this.getControlOptions(field, http, config);
 
@@ -210,7 +208,7 @@ export class FormUtils {
         if (meta && meta.fields) {
             let fields = meta.fields;
             fields.forEach(field => {
-                if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM') && !field.readOnly) {
+                if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || field.name === 'address') && !field.readOnly) {
                     let control = this.getControlForField(field, http, config);
                     // Set currency format
                     if (control.subType === 'currency') {

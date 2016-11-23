@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoComponent } from './app/App';
 import { routing } from './app/App.routes';
 import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
+import { MultiCodeSnippet } from './elements/codesnippet/MultiCodeSnippet';
 import { Home } from './pages/home/Home';
 import { ColorComponent, CompositionComponent, TypographyComponent, IconographyComponent } from './pages/design/all';
 import {
@@ -34,7 +35,9 @@ import {
     TilesDemoComponent,
     SlidesDemoComponent,
     EditorDemoComponent,
-    TipWellDemoComponent
+    TipWellDemoComponent,
+    CategoryDropdownDemoComponent,
+    MultiPickerDemoComponent
 } from './pages/elements/all';
 import { UtilsDemoComponent } from './pages/utils/utils/UtilsDemo';
 import { PipesDemoComponent } from './pages/utils/pipes/PipesDemo';
@@ -49,6 +52,7 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
     declarations: [
         DemoComponent,
         CodeSnippet,
+        MultiCodeSnippet,
         Home,
         ColorComponent,
         CompositionComponent,
@@ -89,7 +93,9 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
         ModalEditDemo,
         StatusCell,
         ExtraDetails,
-        CustomPickerResults
+        CustomPickerResults,
+        CategoryDropdownDemoComponent,
+        MultiPickerDemoComponent
     ],
     imports: [
         BrowserModule,

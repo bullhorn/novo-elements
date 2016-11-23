@@ -29,7 +29,9 @@ import {
     EditorDemoComponent,
     TipWellDemoComponent,
     TableDemoComponent,
-    FormDemoComponent
+    FormDemoComponent,
+    CategoryDropdownDemoComponent,
+    MultiPickerDemoComponent
 } from './../pages/elements/all';
 
 export const routes:Routes = [
@@ -54,6 +56,7 @@ export const routes:Routes = [
     { path: 'loading', component: LoadingDemoComponent, title: 'Loading', section: 'components' },
     { path: 'dropdown', component: DropdownDemoComponent, title: 'Dropdown', section: 'components' },
     { path: 'picker', component: PickerDemoComponent, title: 'Picker', section: 'components' },
+    { path: 'multi-picker', component: MultiPickerDemoComponent, title: 'MultiPicker', section: 'components' },
     { path: 'chips', component: ChipsDemoComponent, title: 'Chips', section: 'components' },
     { path: 'select', component: SelectDemoComponent, title: 'Select', section: 'components' },
     { path: 'tabs', component: TabsDemoComponent, title: 'Tabs', section: 'components' },
@@ -68,6 +71,7 @@ export const routes:Routes = [
     { path: 'slides', component: SlidesDemoComponent, title: 'Slides', section: 'components' },
     { path: 'editor', component: EditorDemoComponent, title: 'Editor', section: 'components' },
     { path: 'tipwell', component: TipWellDemoComponent, title: 'Tip Well', section: 'components' },
+    { path: 'category-dropdown', component: CategoryDropdownDemoComponent, title: 'Category Dropdown', section: 'components' },
 
     // Utils
     { path: 'utils', component: UtilsDemoComponent, title: 'Utils', section: 'utils' },

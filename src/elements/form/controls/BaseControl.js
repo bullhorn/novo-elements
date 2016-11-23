@@ -5,6 +5,7 @@ import { EventEmitter } from '@angular/core';
 export class BaseControl {
     constructor(config = {}) {
         this.validators = config.validators || [];
+        this.asyncValidators = config.asyncValidators || [];
         this.value = config.value;
         this.key = config.key || '';
         this.label = config.label || '';
@@ -21,9 +22,12 @@ export class BaseControl {
         this.associatedEntity = config.associatedEntity || null;
         this.optionsType = config.optionsType || null;
         this.forceClear = new EventEmitter();
-
+        this.disabled = config.disabled || false;
         if (this.required) {
             this.validators.push(Validators.required);
+        }
+        if (config.maxlength) {
+            this.maxlength = config.maxlength;
         }
     }
 }

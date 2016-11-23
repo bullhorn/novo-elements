@@ -1,6 +1,6 @@
-<div class="novo-control-container" [formGroup]="form">
+<div class="novo-control-container" [formGroup]="form" *ngIf="!control.hidden || control.type === 'hidden'">
     <!--Label-->
-    <label [attr.for]="control.key" [@heroState]="state">{{control.label}}</label>
+    <label [attr.for]="control.key" [@verticalState]="state">{{control.label}}</label>
     <div class="novo-control-input-container">
         <!--Required Indicator-->
         <i [hidden]="!control.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
@@ -9,12 +9,12 @@
             <!--Text-based Inputs-->
             <!--TODO prefix/suffix on the control-->
             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'">
-                <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (focus)="toggleState()" (blur)="toggleState()">
+                <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (focus)="toggleState()" (blur)="toggleState()" (input)="emitChange($event)" [maxlength]="control.maxlength">
                 <label class="input-label" *ngIf="control.subType === 'currency'">{{control.currencyFormat}}</label>
                 <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
             </div>
             <!--TextArea-->
-            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)"></textarea>
+            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)" (input)="emitChange($event)" [maxlength]="control.maxlength"></textarea>
             <!--Editor-->
             <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key"></novo-editor>
             <!--HTML5 Select-->
@@ -28,8 +28,8 @@
             <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)"></novo-tiles>
             <!--Picker-->
             <div class="novo-control-input-container" *ngSwitchCase="'picker'">
-                <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple" (select)="checkState()" (focus)="toggleState()" (blur)="checkState()"></novo-picker>
-                <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" (focus)="toggleState()" (blur)="checkState()" (changed)="checkState()"></chips>
+                <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple" (select)="modelChange($event);checkState()" (focus)="toggleState()" (blur)="checkState()"></novo-picker>
+                <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" (focus)="toggleState()" (blur)="checkState()" (changed)="modelChange($event);checkState()"></chips>
             </div>
             <!--Novo Select-->
             <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key"></novo-select>

@@ -12,6 +12,9 @@ describe('Control: BaseControl', () => {
         it('should set the validators', () => {
             expect(control.validators.length).toBe(0);
         });
+        it('should set the asyncValidators', () => {
+            expect(control.asyncValidators.length).toBe(0);
+        });
         it('should set the value', () => {
             expect(control.value).toBeFalsy();
         });
@@ -51,6 +54,9 @@ describe('Control: BaseControl', () => {
         it('should set the optionsType', () => {
             expect(control.optionsType).toEqual(null);
         });
+        it('should set the disabled', () => {
+            expect(control.disabled).toEqual(false);
+        });
     });
 
     describe('With Config', () => {
@@ -69,7 +75,9 @@ describe('Control: BaseControl', () => {
                 headerConfig: { test: 'TEST_HEADER_CONFIG' },
                 currencyFormat: 'TEST_CURRENCY_FORMAT',
                 associatedEntity: 'ENTITY',
-                optionsType: 'TYPE'
+                optionsType: 'TYPE',
+                maxlength: 100,
+                disabled: true
             });
         });
 
@@ -114,6 +122,12 @@ describe('Control: BaseControl', () => {
         });
         it('should set the optionsType', () => {
             expect(control.optionsType).toEqual('TYPE');
+        });
+        it('should set maxlength', () => {
+            expect(control.maxlength).toEqual(100);
+        });
+        it('should set the disabled', () => {
+            expect(control.disabled).toEqual(true);
         });
     });
 });

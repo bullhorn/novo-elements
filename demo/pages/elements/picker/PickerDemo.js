@@ -33,13 +33,11 @@ export class CustomPickerResults extends PickerResults {
 
 const template = `
 <div class="container">
-    <h1>Picker <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/picker">(source)</a></small></h1>
+    <h1>Picker <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/picker">(source)</a></small></h1>
     <p>The picker element (<code>input[picker]</code>) represents a control that presents a menu of options. The options
     within are set by the <code>items</code> attribute. Options can be pre-pickered for the user using the <code>value</code>
     attribute.</p>
-
     <br/>
-
     <h5>Basic Examples</h5>
     <p>
         By clicking on the <code>input</code> element, the options list will be displayed.  picker any of the options
@@ -47,7 +45,6 @@ const template = `
     </p>
     <div class="example picker-demo">${BasicPickerDemoTpl}</div>
     <code-snippet [code]="BasicPickerDemoTpl"></code-snippet>
-
     <h5>Async Examples</h5>
     <p>
         By clicking on the <code>input</code> element, the options list will be displayed.  picker any of the options
@@ -55,7 +52,6 @@ const template = `
     </p>
     <div class="example picker-demo">${AsyncPickerDemoTpl}</div>
     <code-snippet [code]="AsyncPickerDemoTpl"></code-snippet>
-
     <h5>Formated Picker Examples</h5>
     <p>
         By clicking on the <code>input</code> element, the options list will be displayed.  picker any of the options
@@ -63,7 +59,6 @@ const template = `
     </p>
     <div class="example picker-demo">${FormattedPickerDemoTpl}</div>
     <code-snippet [code]="FormattedPickerDemoTpl"></code-snippet>
-
     <h5>Custom Picker Examples</h5>
     <p>
         By clicking on the <code>input</code> element, the options list will be displayed.  picker any of the options

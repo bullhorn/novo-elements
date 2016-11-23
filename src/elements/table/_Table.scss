@@ -31,6 +31,10 @@ novo-table {
                         margin-right: 0;
                     }
                 }
+
+                > button {
+                    height: 39px;
+                }
             }
         }
     }
@@ -41,7 +45,6 @@ novo-table {
         display: block;
     }
 }
-
 /* -- Material Design Table style -------------- */
 // Variables
 // ---------------------
@@ -63,19 +66,16 @@ $table-border-color: #f5f5f5; // Tables
     max-width: 100%;
     background-color: $table-bg;
 
-    > tbody,
-    > thead,
-    > tfoot {
+     > tfoot,
+     > thead,
+    > tbody {
         > tr {
-            transition: all 0.3s ease;
-
-            > td,
-            > th {
+             > th,
+            > td {
                 position: relative;
                 text-align: left;
                 padding: $table-cell-padding;
                 vertical-align: middle;
-                transition: all 0.3s ease;
 
                 &.checkbox {
                     text-align: center;
@@ -247,8 +247,16 @@ $table-border-color: #f5f5f5; // Tables
                 align-items: center;
                 padding: 10px;
                 border-radius: 3px;
-                cursor: pointer;
                 font-weight: $table-header-font-weight;
+
+                &.sortable {
+                    cursor: pointer;
+
+                    label {
+                        cursor: pointer; // chrome user agent style will override this unless explicitly set on the element
+                        margin-right: 10px;
+                    }
+                }
 
                 &:hover {
                     .table-sort-icons {
@@ -264,10 +272,6 @@ $table-border-color: #f5f5f5; // Tables
                             }
                         }
                     }
-                }
-
-                label {
-                    margin-right: 10px;
                 }
 
                 .table-sort-icons {
@@ -352,68 +356,72 @@ $table-border-color: #f5f5f5; // Tables
             margin-right: 0;
 
             &.checked {
-                color: $company;
+                color: $positive;
             }
 
             .bhi-checkbox-indeterminate {
-                color: $company;
+                color: $positive;
             }
         }
     }
 }
-
 // Condensed table w/ half padding
+
 .table-condensed {
-    > tbody,
-    > thead,
-    > tfoot {
+     > tfoot,
+     > thead,
+    > tbody {
         > tr {
-            > td,
-            > th {
+             > th,
+            > td {
                 padding: $table-condensed-cell-padding;
             }
         }
     }
 }
-
 // Bordered version
 // Add horizontal borders between columns.
+
 .table-bordered {
-    > tbody,
-    > thead,
-    > tfoot {
+     > tfoot,
+     > thead,
+    > tbody {
         > tr {
-            > td,
-            > th {
+             > th,
+            > td {
                 border-bottom: 1px solid $table-border-color;
             }
         }
     }
 
     > thead > tr {
-        > td,
-        > th {
+         > th,
+        > td {
             border-bottom-width: 2px;
         }
     }
 }
-
 // Zebra-striping
 // Default zebra-stripe styles (alternating gray and transparent backgrounds)
+
 .table-striped:not(.table-details) {
-    > tbody tr:nth-of-type(odd) {
+    > tbody tr:nth-of-type(odd):not(.table-selection-row) {
         background-color: $table-bg-accent;
+
+        td {
+            background-color: $table-bg-accent;
+        }
     }
 }
 
 .table-striped.table-details {
-    > tbody tr:nth-of-type(4n+2),
-    > tbody tr:nth-of-type(4n+1) {
+     > tbody tr:nth-of-type(4n+1),
+    > tbody tr:nth-of-type(4n+2) {
         background-color: $table-bg-accent;
     }
 }
-
 // Hover effect
+
 .table-hover {
     > tbody > tr:hover {
         background-color: $table-bg-hover;
@@ -439,12 +447,16 @@ novo-table {
         .table-striped:not(.table-details) {
             > tbody tr:nth-of-type(odd) {
                 background-color: rgba($table-bg-accent, .04);
+
+                td {
+                    background-color: transparent;
+                }
             }
         }
 
         .table-striped.table-details {
-            > tbody tr:nth-of-type(4n+2),
-            > tbody tr:nth-of-type(4n+1) {
+             > tbody tr:nth-of-type(4n+1),
+            > tbody tr:nth-of-type(4n+2) {
                 background-color: rgba($table-bg-accent, .04);
             }
         }

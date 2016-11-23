@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, ElementRef, EventEmitter, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, Input, Output, ElementRef, EventEmitter, trigger, state, style, transition, animate } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -9,7 +9,7 @@ import { NovoLabelService } from './../../services/novo-label-service';
     selector: 'novo-control',
     template: require('./Control.html'),
     animations: [
-        trigger('heroState', [
+        trigger('verticalState', [
             state('inactive', style({
                 transform: 'translate(0px, 25px) scale(1.1)'
             })),
@@ -23,19 +23,29 @@ import { NovoLabelService } from './../../services/novo-label-service';
             transition('active => inactive', animate('200ms ease-out')),
             transition('inactive => horizontal', animate('0ms ease-in')),
             transition('horizontal => inactive', animate('0ms ease-out'))
+        ]),
+        trigger('hiddenState', [
+            state('hidden', style({
+                'opacity': '0',
+                'height': '0',
+                'min-height': '0'
+            })),
+            state('shown', style({
+                'opacity': '1',
+                'height': 'auto',
+                'min-height': '44px'
+            })),
+            transition('hidden <=> shown', animate('200ms ease-in'))
         ])
     ],
     host: {
-        '[hidden]': 'control.hidden || control.type === \'hidden\''
-    },
-    outputs: [
-        'change'
-    ]
+        '[class.disabled]': 'control.disabled'
+    }
 })
 export class NovoControlElement extends OutsideClick {
     @Input() control;
     @Input() form:FormGroup;
-    change:EventEmitter = new EventEmitter;
+    @Output() change:EventEmitter = new EventEmitter();
     formattedValue:String = '';
     state:String = 'horizontal';
     alwaysActive:Array = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
@@ -43,7 +53,6 @@ export class NovoControlElement extends OutsideClick {
     constructor(element:ElementRef, labels:NovoLabelService) {
         super(element);
         this.labels = labels;
-
         this.onActiveChange.subscribe(active => {
             if (!active) {
                 setTimeout(() => {
@@ -65,10 +74,12 @@ export class NovoControlElement extends OutsideClick {
             }
             this.checkState();
         }
-        // Listen to clear events
-        this.control.forceClear.subscribe(() => {
-            this.clearValue();
-        });
+        if (this.control) {
+            // Listen to clear events
+            this.control.forceClear.subscribe(() => {
+                this.clearValue();
+            });
+        }
     }
 
     ngOnChanges() {
@@ -77,8 +88,10 @@ export class NovoControlElement extends OutsideClick {
 
     ngOnDestroy() {
         super.ngOnDestroy();
-        // Unlisten for clear events
-        this.control.forceClear.unsubscribe();
+        if (this.control) {
+            // Un-listen for clear events
+            this.control.forceClear.unsubscribe();
+        }
     }
 
     get errors() {
@@ -136,6 +149,10 @@ export class NovoControlElement extends OutsideClick {
     modelChange(value) {
         this.change.emit(value);
         this.checkState();
+    }
+
+    emitChange(value) {
+        this.change.emit(value);
     }
 
     checkState() {

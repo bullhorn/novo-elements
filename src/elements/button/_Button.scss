@@ -37,6 +37,27 @@ button {
             cursor: pointer;
             pointer-events: auto;
         }
+
+        &[loading="true"] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+            i.loading {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: rotate 1200ms linear infinite;
+
+                svg {
+                    width: 100%;
+                    height: 100%;
+
+                    .spinner {
+                        fill: white;
+                    }
+                }
+            }
+        }
         // Primary Themed Button
         &[theme="primary"] {
             background: $positive;
@@ -141,6 +162,16 @@ button {
                 justify-content: space-between;
             }
 
+            i.loading {
+                margin-left: 10px;
+
+                svg {
+                    .spinner {
+                        fill: $positive;
+                    }
+                }
+            }
+
             &:hover {
                 box-shadow: 0 3px 7px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .15);
             }
@@ -160,6 +191,14 @@ button {
 
                 &:focus {
                     background: rgba(0, 0, 0, .45);
+                }
+
+                i.loading {
+                    svg {
+                        .spinner {
+                            fill: $white;
+                        }
+                    }
                 }
             }
 
@@ -182,15 +221,13 @@ button {
 
                 &[icon="collapse"] {
                     i {
-                        &:before {
-                        }
+                        &:before {}
                     }
                 }
 
                 &[icon="convert"] {
                     i {
-                        &:before {
-                        }
+                        &:before {}
                     }
                 }
             }
@@ -263,6 +300,16 @@ button {
 
                     i {
                         color: $color;
+
+                        &.loading {
+                            margin-left: 10px;
+
+                            svg {
+                                .spinner {
+                                    fill: $color;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -273,6 +320,16 @@ button {
 
                     i {
                         color: $color;
+
+                        &.loading {
+                            margin-left: 10px;
+
+                            svg {
+                                .spinner {
+                                    fill: $color;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -342,5 +399,14 @@ button {
                 background: rgba(0, 0, 0, .25);
             }
         }
+    }
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
     }
 }

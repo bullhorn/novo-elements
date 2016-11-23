@@ -7,54 +7,64 @@ novo-picker {
     padding-bottom: 5px;
     transition: all 200ms ease-in-out;
     position: relative;
+
     &.selected,
     &.selected:hover {
         & + i {
             color: $positive;
         }
     }
+
     input {
         padding-top: 10px;
         border: none;
         background: transparent;
         width: 100%;
+
         &:focus {
             outline: none;
         }
     }
 
-    i.bhi-search, i.bhi-times {
+    i.bhi-search,
+    i.bhi-times {
         position: absolute;
         top: 0;
         right: 0;
+        font-size: 1.2em;
     }
 
     i.bhi-times {
         cursor: pointer;
-        font-size: 1.15em;
+        font-size: 1em;
+    }
+
+    div.picker-results-container {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        margin-top: 0.5em;
     }
 }
 
-quick-note-results,
-.quick-note-results,
-picker-results,
 .picker-results,
-entity-chip-results {
+.quick-note-results,
+entity-chip-results,
+picker-results,
+quick-note-results {
     display: block;
     position: relative;
-    max-width: 270px;
-    min-width: 180px;
     cursor: pointer;
 }
 
-picker-results,
 .picker-results,
-quick-note-results,
 .quick-note-results,
 picker-error,
 picker-loader,
+picker-null-recent-results,
 picker-null-results,
-picker-null-recent-results {
+picker-results,
+quick-note-results {
     background-color: white;
     cursor: default;
     line-height: 26px;
@@ -71,6 +81,7 @@ picker-null-recent-results {
         list-style: none;
         padding: 0;
         margin: 0;
+
         li {
             cursor: pointer;
             padding: 10px 16px;
@@ -79,20 +90,24 @@ picker-null-recent-results {
             flex-wrap: wrap;
             flex-direction: column;
             font-size: 0.9em;
+
             span {
                 display: inline-block;
                 min-width: 100px;
                 margin: 2px 0;
             }
+
             h6 {
                 padding-top: 0;
                 font-weight: 400;
                 color: lighten($dark, 35%);
+
                 strong {
                     font-weight: 400;
                     color: $dark;
                 }
             }
+
             &.active,
             &:focus,
             &:hover {
@@ -107,15 +122,16 @@ picker-null-recent-results {
         overflow: auto;
         z-index: 1000;
     }
+
     &:focus {
         outline: none;
     }
 }
 
-picker-null-results,
-picker-null-recent-results,
 picker-error,
-picker-loader {
+picker-loader,
+picker-null-recent-results,
+picker-null-results {
     text-align: center;
     color: darken($light, 15%);
 }

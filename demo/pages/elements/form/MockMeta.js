@@ -18,7 +18,8 @@ export default {
             name: 'number',
             type: 'number',
             label: 'Number',
-            required: true
+            required: true,
+            disabled: true
         },
         {
             name: 'float',
@@ -88,7 +89,7 @@ export default {
             type: 'tiles',
             dataType: 'String',
             label: 'Next Action',
-            required: true,
+            required: false,
             options: [
                 {
                     value: 'none',

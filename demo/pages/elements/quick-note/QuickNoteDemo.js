@@ -32,7 +32,7 @@ export class CustomQuickNoteResults extends QuickNoteResults {
 
 const template = `
 <div class="container">
-    <h1>Quick Note <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/quick-note">(source)</a></small></h1>
+    <h1>Quick Note <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/quick-note">(source)</a></small></h1>
     <p>Tag Autocomplete</p>
 
     <br/>

@@ -123,6 +123,41 @@ describe('Element: NovoChipsElement', () => {
         });
     });
 
+    describe('Function: setItems()', () => {
+        beforeEach(() => {
+            component.model = [{
+                value: 1
+            }, {
+                value: 2,
+                label: 'two'
+            }];
+            component.source = {
+                format: '$name',
+                getLabels: (values) => {
+                    return new Promise(resolve => {
+                        values.map(item => {
+                            item.label = 'one';
+                            return item;
+                        });
+                        resolve(values);
+                    });
+                }
+            };
+        });
+        it('should be defined.', () => {
+            expect(component.setItems).toBeDefined();
+        });
+        it('should retrieve items with labels', (done) => {
+            component.setItems();
+            setTimeout(() => {
+                component._items.subscribe(result => {
+                    expect(result[0].label).toEqual('one');
+                    done();
+                });
+            }, 1);
+        });
+    });
+
     describe('Function: registerOnTouched()', () => {
         it('should be defined.', () => {
             expect(component.registerOnTouched).toBeDefined();

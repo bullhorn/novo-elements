@@ -25,6 +25,9 @@ export class NovoLabelService {
     dateFormat = 'MMMM DD, YYYY';
     timeFormat = 'hh:mm a';
     dateTimeFormat = 'MMMM DD, YYYY hh:mm a';
+    refresh = 'Refresh';
+    close = 'Close';
+    move = 'Move';
 
     selectedRecords(selected) {
         return `Only ${selected} records selected.`;
@@ -36,6 +39,10 @@ export class NovoLabelService {
 
     formatDateWithFormat(value, format) {
         return moment(value).format(format);
+    }
+
+    getProperty(value) {
+        return this[value];
     }
 }
 

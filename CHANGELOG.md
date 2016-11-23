@@ -1,3 +1,294 @@
+<a name="1.1.33"></a>
+## [1.1.33](https://github.com/bullhorn/novo-elements/compare/v1.1.32...v1.1.33) (2016-11-22)
+
+
+### Bug Fixes
+
+* **notifications:** Fixing Icon in Notifications ([cfc95ad](https://github.com/bullhorn/novo-elements/commit/cfc95ad))
+
+
+
+<a name="1.1.32"></a>
+## [1.1.32](https://github.com/bullhorn/novo-elements/compare/v1.1.31...v1.1.32) (2016-11-21)
+
+
+### Bug Fixes
+
+* **list:** Fixing list elements/styles ([f5633f0](https://github.com/bullhorn/novo-elements/commit/f5633f0))
+
+
+
+<a name="1.1.31"></a>
+## [1.1.31](https://github.com/bullhorn/novo-elements/compare/v1.1.30...v1.1.31) (2016-11-16)
+
+
+### Bug Fixes
+
+* **address field:** state matching and country name matching ([#251](https://github.com/bullhorn/novo-elements/issues/251)) ([1ef86bd](https://github.com/bullhorn/novo-elements/commit/1ef86bd))
+* **tables:** fixes broken z-indexes caused by preserve-3d ([#252](https://github.com/bullhorn/novo-elements/issues/252)) ([2425351](https://github.com/bullhorn/novo-elements/commit/2425351))
+
+
+
+<a name="1.1.30"></a>
+## [1.1.30](https://github.com/bullhorn/novo-elements/compare/v1.1.29...v1.1.30) (2016-11-15)
+
+
+### Bug Fixes
+
+* **Table:** Fix column sorting ([4d043fd](https://github.com/bullhorn/novo-elements/commit/4d043fd))
+
+
+### Features
+
+* **Forms:** Adding async validator support for Controls ([#248](https://github.com/bullhorn/novo-elements/issues/248)) ([0974e3f](https://github.com/bullhorn/novo-elements/commit/0974e3f))
+
+
+
+<a name="1.1.29"></a>
+## [1.1.29](https://github.com/bullhorn/novo-elements/compare/v1.1.28...v1.1.29) (2016-11-14)
+
+
+### Bug Fixes
+
+* **Address:** Show and populate address fields ([#246](https://github.com/bullhorn/novo-elements/issues/246)) ([4ef5369](https://github.com/bullhorn/novo-elements/commit/4ef5369))
+
+
+### Features
+
+* **multipicker:** Make 'All [type]' indeterminate state function like table ([#245](https://github.com/bullhorn/novo-elements/issues/245)) ([fd680b6](https://github.com/bullhorn/novo-elements/commit/fd680b6))
+
+
+
+<a name="1.1.28"></a>
+## [1.1.28](https://github.com/bullhorn/novo-elements/compare/v1.1.27...v1.1.28) (2016-11-10)
+
+
+### Features
+
+* **Multipicker:** Adding a multipicker component ([e9bb57a](https://github.com/bullhorn/novo-elements/commit/e9bb57a))
+
+
+
+<a name="1.1.27"></a>
+## [1.1.27](https://github.com/bullhorn/novo-elements/compare/v1.1.26...v1.1.27) (2016-11-10)
+
+
+
+<a name="1.1.26"></a>
+## [1.1.26](https://github.com/bullhorn/novo-elements/compare/v1.1.25...v1.1.26) (2016-11-02)
+
+
+
+<a name="1.1.25"></a>
+## [1.1.25](https://github.com/bullhorn/novo-elements/compare/v1.1.24...v1.1.25) (2016-11-02)
+
+
+### Bug Fixes
+
+* **Toast:** Theme and Icon are now bound properly ([#236](https://github.com/bullhorn/novo-elements/issues/236)) ([823a0c3](https://github.com/bullhorn/novo-elements/commit/823a0c3))
+
+
+
+<a name="1.1.24"></a>
+## [1.1.24](https://github.com/bullhorn/novo-elements/compare/v1.1.23...v1.1.24) (2016-11-01)
+
+
+
+<a name="1.1.23"></a>
+## [1.1.23](https://github.com/bullhorn/novo-elements/compare/v1.1.22...v1.1.23) (2016-11-01)
+
+
+
+<a name="1.1.22"></a>
+## [1.1.22](https://github.com/bullhorn/novo-elements/compare/v1.1.21...v1.1.22) (2016-10-31)
+
+
+### Bug Fixes
+
+* **button:** Fixes buttons so that they apply disabled attribute when disabled - issue [#232](https://github.com/bullhorn/novo-elements/issues/232) ([#233](https://github.com/bullhorn/novo-elements/issues/233)) ([3d6dc97](https://github.com/bullhorn/novo-elements/commit/3d6dc97))
+* **chips:** Fixing Placement ([5c4b28a](https://github.com/bullhorn/novo-elements/commit/5c4b28a))
+
+
+
+<a name="1.1.21"></a>
+## [1.1.21](https://github.com/bullhorn/novo-elements/compare/v1.1.20...v1.1.21) (2016-10-28)
+
+
+### Bug Fixes
+
+* **Picker:** Fixing EntityPickerResults to properly work for Placements ([3321619](https://github.com/bullhorn/novo-elements/commit/3321619))
+
+
+
+<a name="1.1.20"></a>
+## [1.1.20](https://github.com/bullhorn/novo-elements/compare/v1.1.19...v1.1.20) (2016-10-27)
+
+
+### Bug Fixes
+
+* **Form:** Ignore unsubscibe event onNgDestroy when control doesn't exist ([#228](https://github.com/bullhorn/novo-elements/issues/228)) ([54d15a7](https://github.com/bullhorn/novo-elements/commit/54d15a7))
+
+
+
+<a name="1.1.19"></a>
+## [1.1.19](https://github.com/bullhorn/novo-elements/compare/v1.1.18...v1.1.19) (2016-10-26)
+
+
+
+<a name="1.1.18"></a>
+## [1.1.18](https://github.com/bullhorn/novo-elements/compare/v1.1.17...v1.1.18) (2016-10-26)
+
+
+
+<a name="1.1.17"></a>
+## [1.1.17](https://github.com/bullhorn/novo-elements/compare/v1.1.16...v1.1.17) (2016-10-25)
+
+
+### Features
+
+* **table:** make clearing filtering/sorting optional when setting rows ([#225](https://github.com/bullhorn/novo-elements/issues/225)) ([5a4528a](https://github.com/bullhorn/novo-elements/commit/5a4528a))
+
+
+
+<a name="1.1.16"></a>
+## [1.1.16](https://github.com/bullhorn/novo-elements/compare/v1.1.15...v1.1.16) (2016-10-24)
+
+
+
+<a name="1.1.15"></a>
+## [1.1.15](https://github.com/bullhorn/novo-elements/compare/v1.1.14...v1.1.15) (2016-10-20)
+
+
+
+<a name="1.1.14"></a>
+## [1.1.14](https://github.com/bullhorn/novo-elements/compare/v1.1.13...v1.1.14) (2016-10-18)
+
+
+### Features
+
+* **picker, chips:** Adding support for async labels ([bf0b08d](https://github.com/bullhorn/novo-elements/commit/bf0b08d))
+
+
+
+<a name="1.1.13"></a>
+## [1.1.13](https://github.com/bullhorn/novo-elements/compare/v1.1.12...v1.1.13) (2016-10-17)
+
+
+### Bug Fixes
+
+* **Control:** Quick fix for the Control modifying the value of hideState too quickly ([75774c5](https://github.com/bullhorn/novo-elements/commit/75774c5))
+
+
+
+<a name="1.1.12"></a>
+## [1.1.12](https://github.com/bullhorn/novo-elements/compare/v1.1.11...v1.1.12) (2016-10-17)
+
+
+### Bug Fixes
+
+* **categorydropdown:** Fixing the demo ([1bc3ea7](https://github.com/bullhorn/novo-elements/commit/1bc3ea7))
+
+
+
+<a name="1.1.11"></a>
+## [1.1.11](https://github.com/bullhorn/novo-elements/compare/v1.1.10...v1.1.11) (2016-10-17)
+
+
+### Bug Fixes
+
+* **forms:** Form controls now use ngIf to show / hide rather than add a "hidden" property ([610d0ed](https://github.com/bullhorn/novo-elements/commit/610d0ed))
+
+
+### Features
+
+* **CategoryDropdown:** Adding a Categorized Dropdown Element ([24074c8](https://github.com/bullhorn/novo-elements/commit/24074c8))
+* **forms:** Add disabled element and styling to form fields ([#217](https://github.com/bullhorn/novo-elements/issues/217)) ([acb975b](https://github.com/bullhorn/novo-elements/commit/acb975b))
+
+
+
+<a name="1.1.10"></a>
+## [1.1.10](https://github.com/bullhorn/novo-elements/compare/v1.1.9...v1.1.10) (2016-10-14)
+
+
+
+<a name="1.1.9"></a>
+## [1.1.9](https://github.com/bullhorn/novo-elements/compare/v1.1.8...v1.1.9) (2016-10-13)
+
+
+### Features
+
+* **form:** allowing setting of maxlength on input ([d398fc6](https://github.com/bullhorn/novo-elements/commit/d398fc6))
+
+
+
+<a name="1.1.8"></a>
+## [1.1.8](https://github.com/bullhorn/novo-elements/compare/v1.1.7...v1.1.8) (2016-10-12)
+
+
+### Features
+
+* **form:** TextBoxControl emits change events on input ([16c7870](https://github.com/bullhorn/novo-elements/commit/16c7870))
+
+
+
+<a name="1.1.7"></a>
+## [1.1.7](https://github.com/bullhorn/novo-elements/compare/v1.1.6...v1.1.7) (2016-10-04)
+
+
+
+<a name="1.1.6"></a>
+## [1.1.6](https://github.com/bullhorn/novo-elements/compare/v1.1.5...v1.1.6) (2016-10-03)
+
+
+### Bug Fixes
+
+* **Picker:** Fixing issue in picker where if a value wasn't selected the text remained, closes [#203](https://github.com/bullhorn/novo-elements/issues/203) ([dbdc68d](https://github.com/bullhorn/novo-elements/commit/dbdc68d))
+
+
+
+<a name="1.1.5"></a>
+## [1.1.5](https://github.com/bullhorn/novo-elements/compare/v1.1.4...v1.1.5) (2016-09-30)
+
+
+### Bug Fixes
+
+* **table:** Fixing the `onRowSelect` output to emit the proper object ([2a6c566](https://github.com/bullhorn/novo-elements/commit/2a6c566))
+
+
+
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/bullhorn/novo-elements/compare/v1.1.3...v1.1.4) (2016-09-26)
+
+
+### Bug Fixes
+
+* **control:** Adding change output for chips in the control ([fd70d7e](https://github.com/bullhorn/novo-elements/commit/fd70d7e))
+
+
+
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/bullhorn/novo-elements/compare/v1.1.2...v1.1.3) (2016-09-26)
+
+
+### Features
+
+* **buttons:** Adds "Loading" state styles ([#202](https://github.com/bullhorn/novo-elements/issues/202)) ([cdfb93b](https://github.com/bullhorn/novo-elements/commit/cdfb93b))
+
+
+
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/bullhorn/novo-elements/compare/v1.1.1...v1.1.2) (2016-09-26)
+
+
+### Bug Fixes
+
+* **table:** Fixing internal structure for sorting/filtering so that a user can change the data in the table properly ([ba44af7](https://github.com/bullhorn/novo-elements/commit/ba44af7))
+
+### Breaking Changes
+
+If you are using Tables and have code that resets the `rows` on `onTableChange`, then that can go away. All logic around that is handled inside the table now.
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/bullhorn/novo-elements/compare/v1.0.35...v1.1.1) (2016-09-22)
 

@@ -10,7 +10,7 @@ const template = `
 <div class="container">
     <h1>Toast Notifications
         <small>
-            <a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/toast">(source)</a>
+            <a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/toast">(source)</a>
         </small>
     </h1>
     <p>Toasts are used as system notifications. They can contain custom
@@ -65,9 +65,27 @@ export class ToastDemoComponent {
             'warning',
             'danger'
         ];
+        this.icons = [
+            'add',
+            'check',
+            'clock',
+            'lock',
+            'caution'
+        ];
         this.options = {
             'title': 'Title',
             'message': 'Some Message...'
+        };
+        this.toast = {
+            theme: 'danger',
+            icon: 'caution'
+        };
+    }
+
+    changeToast() {
+        this.toast = {
+            theme: this.themes[(this.themes.indexOf(this.toast.theme) + 1) % (this.themes.length)],
+            icon: this.icons[(this.icons.indexOf(this.toast.icon) + 1) % (this.icons.length)]
         };
     }
 

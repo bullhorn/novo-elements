@@ -6,7 +6,7 @@ import VerticalRadioTpl from './templates/VerticalRadio.html';
 
 const template = `
 <div class="container">
-    <h1>Radio <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/radio">(source)</a></small></h1>
+    <h1>Radio <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/radio">(source)</a></small></h1>
     <p>A radio group</p>
    
     <h5>Basic</h5>

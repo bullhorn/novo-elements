@@ -28,6 +28,8 @@ export { NovoTableModule } from './elements/table/Table.module';
 export { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './elements/form/Form.module';
 export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
+export { NovoCategoryDropdownModule } from './elements/category-dropdown/CategoryDropdown.module';
+export { NovoMultiPickerModule } from './elements/multi-picker/MultiPicker.module';
 
 // Export all services
 export { NovoToastService } from './elements/toast/ToastService';
@@ -40,6 +42,7 @@ export { NovoModalParams, NovoModalRef } from './elements/modal/Modal';
 export { QuickNoteResults } from './elements/quick-note/extras/quick-note-results/QuickNoteResults';
 export { PickerResults } from './elements/picker/extras/picker-results/PickerResults';
 export { EntityPickerResults } from './elements/picker/extras/entity-picker-results/EntityPickerResults';
+export { ChecklistPickerResults } from './elements/picker/extras/checklist-picker-results/ChecklistPickerResults';
 export { BaseRenderer } from './elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './elements/table/extras/date-cell/DateCell';
 export { FormValidators } from './elements/form/FormValidators';
@@ -53,6 +56,9 @@ export * from './utils/deferred/Deferred';
 export * from './utils/countries/Countries';
 export * from './utils/Helpers';
 export * from './utils/component-utils/ComponentUtils';
+
+// Pipes
+export * from './pipes/plural/Plural';
 
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';

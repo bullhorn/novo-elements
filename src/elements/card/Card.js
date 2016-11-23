@@ -1,5 +1,14 @@
 // NG2
 import { Component, EventEmitter } from '@angular/core';
+//APP
+import { NovoLabelService } from './../../services/novo-label-service';
+
+@Component({
+    selector: 'novo-card-actions',
+    template: '<ng-content></ng-content>'
+})
+export class CardActionsElement {
+}
 
 @Component({
     selector: 'novo-card',
@@ -25,14 +34,15 @@ import { Component, EventEmitter } from '@angular/core';
             <header>
                 <div class="title">
                     <!--Grabber Icon-->
-                    <i *ngIf="move || config.move" class="bhi-move" [attr.data-automation-id]="cardAutomationId + '-move'"></i>
+                    <span tooltip="{{ labels.move }}" tooltipPosition="bottom"><i *ngIf="move || config.move" class="bhi-move" [attr.data-automation-id]="cardAutomationId + '-move'"></i></span>
                     <!--Card Title-->
                     <h3 [attr.data-automation-id]="cardAutomationId + '-title'"><i *ngIf="icon" [ngClass]="iconClass"></i> {{title || config.title}}</h3>
                 </div>
                 <!--Card Actions-->
                 <div class="actions" [attr.data-automation-id]="cardAutomationId + '-actions'">
-                    <button theme="icon" icon="refresh-o"  (click)="toggleRefresh()" *ngIf="refresh || config.refresh" [attr.data-automation-id]="cardAutomationId + '-refresh'"></button>
-                    <button theme="icon" icon="close-o" (click)="toggleClose()" *ngIf="close || config.close" [attr.data-automation-id]="cardAutomationId + '-close'"></button>
+                    <ng-content select="novo-card-actions"></ng-content>
+                    <button theme="icon" icon="refresh-o"  (click)="toggleRefresh()" *ngIf="refresh || config.refresh" [attr.data-automation-id]="cardAutomationId + '-refresh'" tooltip="{{ labels.refresh }}" tooltipPosition="bottom"></button>
+                    <button theme="icon" icon="close-o" (click)="toggleClose()" *ngIf="close || config.close" [attr.data-automation-id]="cardAutomationId + '-close'" tooltip="{{ labels.close }}" tooltipPosition="bottom"></button>
                 </div>
             </header>
             <!--Card Main-->
@@ -55,7 +65,8 @@ export class CardElement {
     onRefresh:EventEmitter = new EventEmitter();
     padding:boolean = true;
 
-    constructor() {
+    constructor(labels:NovoLabelService) {
+        this.labels = labels;
     }
 
     ngOnInit() {

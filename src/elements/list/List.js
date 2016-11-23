@@ -1,5 +1,5 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'novo-list',
@@ -19,15 +19,23 @@ export class NovoListElement {
 @Component({
     selector: 'novo-list-item',
     template: `
-        <ng-content select="item-avatar"></ng-content>
-        <div>
-            <ng-content select="item-title"></ng-content>
+        <div class="list-item" [ngClass]="{'avatar': avatar}">
+            <ng-content select="item-header"></ng-content>
             <ng-content select="item-content"></ng-content>
         </div>
         <ng-content select="item-end"></ng-content>
     `
 })
 export class NovoListItemElement {
+    avatar:boolean = false;
+    element:ElementRef;
+
+    constructor(element:ElementRef) {
+        this.element = element;
+    }
+    ngAfterViewInit() {
+        this.avatar = !!this.element.nativeElement.querySelector('item-avatar');
+    }
 }
 
 @Component({
@@ -51,10 +59,30 @@ export class NovoItemAvatarElement {
 @Component({
     selector: 'item-title',
     template: `
-        <h3><ng-content></ng-content></h3>
+        <h6><ng-content></ng-content></h6>
     `
 })
 export class NovoItemTitleElement {
+}
+
+@Component({
+    selector: 'item-header',
+    template: `
+            <ng-content select="item-avatar"></ng-content>
+            <ng-content select="item-title"></ng-content>
+            <ng-content select="item-header-end"></ng-content>
+    `
+})
+export class NovoItemHeaderElement {
+}
+
+@Component({
+    selector: 'item-header-end',
+    template: `
+        <ng-content></ng-content>
+    `
+})
+export class NovoItemDateElement {
 }
 
 @Component({

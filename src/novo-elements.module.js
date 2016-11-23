@@ -31,6 +31,8 @@ import { NovoTableModule } from './elements/table/Table.module';
 import { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 import { NovoFormModule } from './elements/form/Form.module';
 import { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
+import { NovoCategoryDropdownModule } from './elements/category-dropdown/CategoryDropdown.module';
+import { NovoMultiPickerModule } from './elements/multi-picker/MultiPicker.module';
 
 import { NovoLabelService } from './services/novo-label-service';
 import { NovoDragulaService } from './elements/dragula/DragulaService';
@@ -69,7 +71,9 @@ import { ComponentUtils } from './utils/component-utils/ComponentUtils';
         NovoTableModule,
         NovoTableExtrasModule,
         NovoFormModule,
-        NovoFormExtrasModule
+        NovoFormExtrasModule,
+        NovoCategoryDropdownModule,
+        NovoMultiPickerModule
     ],
     providers: [
         { provide: ComponentUtils, useClass: ComponentUtils },

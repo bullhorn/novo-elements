@@ -7,7 +7,7 @@ import FormattedChipsDemoTpl from './templates/FormattedChipsDemo.html';
 
 const template = `
 <div class="container">
-    <h1>Chips <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/tree/master/src/elements/chips">(source)</a></small></h1>
+    <h1>Chips <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/chips">(source)</a></small></h1>
     <p>The chips element (<code>chips</code>) represents a control that presents a menu of options. The options
     within are set by the <code>source</code> attribute. Options can be pre-selected for the user using the <code>ngModel</code>
     attribute. Chips are the multi-select version of <code>pickers</code></p>
@@ -97,10 +97,23 @@ export class ChipsDemoComponent {
                         resolve(abbrieviated);
                     }, 300);
                 });
+            },
+            getLabels: (data) => {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        let values = data.map(item => item.value);
+                        let results = abbrieviated.filter(item => values.includes(item.value));
+                        resolve(results);
+                    }, 300);
+                });
             }
         };
+        this.avalue = [{
+            value: 'USA'
+        }, {
+            value: 'GB'
+        }];
     }
-
     onChanged() {
     }
 }
