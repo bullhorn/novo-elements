@@ -437,8 +437,10 @@ describe('Element: NovoMultiPickerElement', () => {
             expect(component.updateIndeterminateState).toHaveBeenCalled();
             expect(parent.indeterminate).toBeTruthy();
         });
-        it('should set remove parent if no other children are selected if removing', () => {
+        it('should remove parent if no other children are selected if removing', () => {
             let parent = { indeterminate: false, type: 'cats', isParent: { childType: 'kittens' } };
+            component.types = [{ value: 'cats' }, { value: 'kittens' }];
+            component.value = { cats: [1], kittens: [] };
             spyOn(component, 'getAllOfType').and.returnValue([{ checked: false }]);
             spyOn(component, 'remove');
             component.determineIndeterminateState(parent, false);
