@@ -17,7 +17,7 @@ describe('Control: SelectControl', () => {
     });
 
     it('should set the placeholder', () => {
-        expect(control.placeholder).toEqual('Select One');
+        expect(control.placeholder).toEqual('');
     });
 
     it('should set the options if passed', () => {
