@@ -27,12 +27,12 @@ export class CardBestTimeElement implements OnChanges {
     @Input() time: string;
     @Input() day: string;
     @Input() hideLabel: boolean;
-    
+
     timeIcon: string;
     timeStyle: string;
     dayLowerCase: string;
     dataAutomationId: string;
-    
+
     ngOnChanges() {
         if (this.time) {
             let timeIconAndStyle = this.getTimeOfDayStyleAndIcon(this.time);

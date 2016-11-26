@@ -97,8 +97,10 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     selected2: any;
     heading: any;
     calendarRangeEnd: any;
-    onModelChange: Function = () => {};
-    onModelTouched: Function = () => {};
+    onModelChange: Function = () => {
+    };
+    onModelTouched: Function = () => {
+    };
 
     ngOnInit() {
         // Determine the year array
@@ -312,7 +314,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
             });
 
             // Increment for the next iteration
-            date = date.clone(); // eslint-disable-line
+            date = date.clone();
             date.add(1, 'd');
         }
 

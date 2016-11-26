@@ -1,7 +1,7 @@
 // NG2
 import { Injectable } from '@angular/core';
 // Vendor
-import * as moment from 'moment'
+import * as moment from 'moment';
 
 @Injectable()
 export class NovoLabelService {

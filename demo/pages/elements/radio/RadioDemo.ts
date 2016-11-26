@@ -1,8 +1,8 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import BasicRadioTpl = require('./templates/BasicRadio.html');
-import VerticalRadioTpl = require('./templates/VerticalRadio.html');
+let BasicRadioTpl = require('./templates/BasicRadio.html');
+let VerticalRadioTpl = require('./templates/VerticalRadio.html');
 
 const template = `
 <div class="container">
@@ -30,10 +30,10 @@ export class RadioDemoComponent {
     }
 
     onChangeVertical(change) {
-        console.log('Vertical Radio Change:', change); // eslint-disable-line
+        console.log('Vertical Radio Change:', change);
     }
 
     onChangeBasic(change) {
-        console.log('Basic Radio Change:', change); // eslint-disable-line
+        console.log('Basic Radio Change:', change);
     }
 }

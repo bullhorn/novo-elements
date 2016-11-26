@@ -3,16 +3,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // APP
 import { NovoToastElement } from './Toast';
-import { NovoToastService } from './ToastService';
 
 @NgModule({
     imports: [CommonModule],
     declarations: [NovoToastElement],
     exports: [NovoToastElement],
-    entryComponents: [NovoToastElement],
-    providers: [
-        { provide: NovoToastService, useClass: NovoToastService }
-    ]
+    entryComponents: [NovoToastElement]
 })
 export class NovoToastModule {
 }

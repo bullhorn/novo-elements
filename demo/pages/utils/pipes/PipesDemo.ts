@@ -20,5 +20,5 @@ const template = `
     template: template
 })
 export class PipesDemoComponent {
-    PluralizeDemoTpl = PluralizeDemoTpl;
+    private PluralizeDemoTpl: string = PluralizeDemoTpl;
 }

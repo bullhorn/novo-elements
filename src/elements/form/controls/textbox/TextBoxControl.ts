@@ -3,9 +3,9 @@ import { BaseControl, NovoControlConfig } from './../BaseControl';
 import { FormValidators } from './../../FormValidators';
 
 export class TextBoxControl extends BaseControl {
-    controlType:string = 'textbox';
-    type:string;
-    subType:string;
+    controlType: string = 'textbox';
+    type: string;
+    subType: string;
 
     constructor(config: NovoControlConfig) {
         super(config);

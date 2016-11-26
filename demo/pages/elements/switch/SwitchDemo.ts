@@ -1,7 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import SwitchDemoTpl = require('./templates/SwitchDemo.html');
+let SwitchDemoTpl = require('./templates/SwitchDemo.html');
 
 const template = `
 <div class="container">
@@ -25,11 +25,9 @@ const template = `
     template: template
 })
 export class SwitchDemoComponent {
-    constructor() {
-        this.SwitchDemoTpl = SwitchDemoTpl;
-        this.toggleCount = 0;
-        this.checked = true;
-    }
+    private SwitchDemoTpl: string = SwitchDemoTpl;
+    private toggleCount: number = 0;
+    private checked: boolean = true;
 
     increment() {
         this.toggleCount++;

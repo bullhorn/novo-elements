@@ -24,6 +24,7 @@ export interface NovoControlConfig {
     maxlength?: number;
     options?: Array<any>;
     type?: string;
+    name?: string;
 }
 
 export class BaseControl {
@@ -48,12 +49,14 @@ export class BaseControl {
     maxlength: number;
     options: Array<any>;
     type: string;
+    name: string;
 
     constructor(config: NovoControlConfig) {
         this.validators = config.validators || [];
         this.value = config.value;
         this.key = config.key || '';
         this.label = config.label || '';
+        this.name = config.name || '';
         this.required = !!config.required;
         this.hidden = !!config.hidden;
         this.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;

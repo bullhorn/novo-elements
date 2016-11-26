@@ -4,16 +4,12 @@ import { CommonModule } from '@angular/common';
 // APP
 import { NovoButtonModule } from './../button/Button.module';
 import { NovoModalContainerElement, NovoModalElement, NovoModalNotificationElement } from './Modal';
-import { NovoModalService } from './ModalService';
 
 @NgModule({
     imports: [CommonModule, NovoButtonModule],
     declarations: [NovoModalContainerElement, NovoModalElement, NovoModalNotificationElement],
     exports: [NovoModalElement, NovoModalNotificationElement],
-    entryComponents: [NovoModalContainerElement],
-    providers: [
-        { provide: NovoModalService, useClass: NovoModalService }
-    ]
+    entryComponents: [NovoModalContainerElement]
 })
 export class NovoModalModule {
 }

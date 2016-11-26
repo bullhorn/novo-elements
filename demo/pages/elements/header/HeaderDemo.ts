@@ -1,7 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import HeaderDemoTpl = require('./templates/HeaderDemo.html');
+let HeaderDemoTpl = require('./templates/HeaderDemo.html');
 // Vendor
 import { NovoToastService } from './../../../../novo-elements';
 
@@ -24,9 +24,12 @@ const template = `
     template: template
 })
 export class HeaderDemoComponent {
-    constructor(toaster: NovoToastService) {
+    private HeaderDemoTpl: string = HeaderDemoTpl;
+    private entity: string;
+    private options: any;
+
+    constructor(private toaster: NovoToastService) {
         this.toaster = toaster;
-        this.HeaderDemoTpl = HeaderDemoTpl;
         this.entity = 'company';
         this.options = {
             'title': 'Title',

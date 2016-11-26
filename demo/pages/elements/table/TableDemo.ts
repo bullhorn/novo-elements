@@ -1,10 +1,10 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 // APP
 import { TableData } from './TableData';
-import TableDemoTpl = require('./templates/TableDemo.html');
-import DetailsTableDemoTpl = require('./templates/DetailsTableDemo.html');
-import SelectAllTableDemoTpl = require('./templates/SelectAllTableDemo.html');
+let TableDemoTpl = require('./templates/TableDemo.html');
+let DetailsTableDemoTpl = require('./templates/DetailsTableDemo.html');
+let SelectAllTableDemoTpl = require('./templates/SelectAllTableDemo.html');
 // Vendor
 import { DateCell, BaseRenderer } from './../../../../novo-elements';
 
@@ -63,19 +63,22 @@ export class ExtraDetails extends BaseRenderer {
     selector: 'table-demo',
     template: template
 })
-export class TableDemoComponent {
+export class TableDemoComponent implements OnInit {
+    private TableDemoTpl: string = TableDemoTpl;
+    private DetailsTableDemoTpl: string = DetailsTableDemoTpl;
+    private SelectAllTableDemoTpl: string = SelectAllTableDemoTpl;
+    private customRowOptions: Array<any> = [
+        { label: '10', value: 10 },
+        { label: '20', value: 20 },
+        { label: '30', value: 30 },
+        { label: '40', value: 40 }
+    ];
+    private theme: string;
+    private basic: any;
+    private details: any;
+    private selectAll: any;
+
     constructor() {
-        this.TableDemoTpl = TableDemoTpl;
-        this.DetailsTableDemoTpl = DetailsTableDemoTpl;
-        this.SelectAllTableDemoTpl = SelectAllTableDemoTpl;
-
-        this.customRowOptions = [
-            { label: '10', value: 10 },
-            { label: '20', value: 20 },
-            { label: '30', value: 30 },
-            { label: '40', value: 40 }
-        ];
-
         let columns = [
             { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true },
             { title: 'Position', name: 'position', ordering: true, filtering: true },
@@ -126,7 +129,6 @@ export class TableDemoComponent {
                 filtering: true
             }
         ];
-
         this.basic = {
             columns: columns.slice(),
             rows: TableData.slice(),
@@ -145,7 +147,6 @@ export class TableDemoComponent {
                 resizing: true
             }
         };
-
         this.details = {
             columns: columns.slice(),
             rows: TableData.slice(),
@@ -166,7 +167,6 @@ export class TableDemoComponent {
                 detailsRenderer: ExtraDetails
             }
         };
-
         this.selectAll = {
             columns: columns.slice(),
             rows: TableData.slice(),
@@ -201,10 +201,10 @@ export class TableDemoComponent {
     }
 
     singleAction() {
-        window.alert('HI!'); // eslint-disable-line
+        window.alert('HI!');
     }
 
     selectedAction(action) {
-        window.alert(`You clicked ${action}!`); // eslint-disable-line
+        window.alert(`You clicked ${action}!`);
     }
 }

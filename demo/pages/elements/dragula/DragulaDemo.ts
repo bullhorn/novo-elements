@@ -1,8 +1,8 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import DragulaDemoTpl = require('./templates/DragulaDemo.html');
-import DragulaModelDemoTpl = require('./templates/DragulaModelDemo.html');
+let DragulaDemoTpl = require('./templates/DragulaDemo.html');
+let DragulaModelDemoTpl = require('./templates/DragulaModelDemo.html');
 // Vendor
 import { NovoDragulaService } from './../../../../novo-elements';
 
@@ -28,12 +28,12 @@ const template = `
     template: template
 })
 export class DragulaDemoComponent {
-    constructor(dragulaService: NovoDragulaService) {
-        this.DragulaDemoTpl = DragulaDemoTpl;
-        this.DragulaModelDemoTpl = DragulaModelDemoTpl;
-        this.many = ['The', 'possibilities', 'are', 'endless!'];
-        this.many2 = ['Explore', 'them'];
+    private DragulaDemoTpl: string = DragulaDemoTpl;
+    private DragulaModelDemoTpl: string = DragulaModelDemoTpl;
+    private many: Array<string> = ['The', 'possibilities', 'are', 'endless!'];
+    private many2: Array<string> = ['Explore', 'them'];
 
+    constructor(private dragulaService: NovoDragulaService) {
         dragulaService.dropModel.subscribe((value) => {
             this.onDropModel(value.slice(1));
         });
@@ -43,12 +43,12 @@ export class DragulaDemoComponent {
     }
 
     onDropModel(args) {
-        let [el, target, source] = args; // eslint-disable-line
+        let [el, target, source] = args;
         // do something else
     }
 
     onRemoveModel(args) {
-        let [el, source] = args; // eslint-disable-line
+        let [el, source] = args;
         // do something else
     }
 }

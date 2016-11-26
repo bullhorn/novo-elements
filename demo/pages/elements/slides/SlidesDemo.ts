@@ -1,7 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import BasicSlideDemoTpl = require('./templates/BasicSlide.html');
+let BasicSlideDemoTpl = require('./templates/BasicSlide.html');
 
 const template = `
 <div class="container">
@@ -19,7 +19,5 @@ const template = `
     template: template
 })
 export class SlidesDemoComponent {
-    constructor() {
-        this.BasicSlideDemoTpl = BasicSlideDemoTpl;
-    }
+    private BasicSlideDemoTpl: string = BasicSlideDemoTpl;
 }

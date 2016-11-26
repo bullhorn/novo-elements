@@ -1,9 +1,9 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import BasicQuickNoteDemoTpl = require('./templates/BasicQuickNote.html');
-import CustomQuickNoteDemoTpl = require('./templates/CustomQuickNote.html');
-import CustomQuickNoteResultsDemoTpl = require('./templates/CustomQuickNoteResults.html');
+let BasicQuickNoteDemoTpl = require('./templates/BasicQuickNote.html');
+let CustomQuickNoteDemoTpl = require('./templates/CustomQuickNote.html');
+let CustomQuickNoteResultsDemoTpl = require('./templates/CustomQuickNoteResults.html');
 // Vendor
 import { QuickNoteResults } from './../../../../novo-elements';
 
@@ -56,18 +56,19 @@ const template = `
     template: template
 })
 export class QuickNoteDemoComponent {
+    private BasicQuickNoteDemoTpl: string = BasicQuickNoteDemoTpl;
+    private CustomQuickNoteDemoTpl: string = CustomQuickNoteDemoTpl;
+    private CustomQuickNoteResultsDemoTpl: string = CustomQuickNoteResultsDemoTpl;
+    private placeholder: string = 'Enter your note text here. Reference people and distribution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
+    private config: any;
+    private custom: any;
+    private custom2: any;
+
     constructor() {
-        this.BasicQuickNoteDemoTpl = BasicQuickNoteDemoTpl;
-        this.CustomQuickNoteDemoTpl = CustomQuickNoteDemoTpl;
-        this.CustomQuickNoteResultsDemoTpl = CustomQuickNoteResultsDemoTpl;
-
-        this.placeholder = 'Enter your note text here. Reference people and distribution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
-
         let customData = {
             tags: [{ id: 1, name: 'OH YA!', test: 'TWO' }, { id: 2, name: 'TAGGING!', test: 'ONE' }],
             references: [{ id: 1, title: 'Awesome Reference' }, { id: 2, title: 'Angular2' }]
         };
-
         this.config = {
             triggers: {
                 tags: '@',

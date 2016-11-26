@@ -1,10 +1,10 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import BasicPickerDemoTpl = require('./templates/BasicPickerDemo.html');
-import AsyncPickerDemoTpl = require('./templates/AsyncPickerDemo.html');
-import FormattedPickerDemoTpl = require('./templates/FormattedPickerDemo.html');
-import CustomPickerResultsDemoTpl = require('./templates/CustomPickerResultsDemo.html');
+let BasicPickerDemoTpl = require('./templates/BasicPickerDemo.html');
+let AsyncPickerDemoTpl = require('./templates/AsyncPickerDemo.html');
+let FormattedPickerDemoTpl = require('./templates/FormattedPickerDemo.html');
+let CustomPickerResultsDemoTpl = require('./templates/CustomPickerResultsDemo.html');
 // Vendor
 import { PickerResults } from './../../../../novo-elements';
 
@@ -79,14 +79,18 @@ const template = `
     template: template
 })
 export class PickerDemoComponent {
+    private BasicPickerDemoTpl: string = BasicPickerDemoTpl;
+    private AsyncPickerDemoTpl: string = AsyncPickerDemoTpl;
+    private FormattedPickerDemoTpl: string = FormattedPickerDemoTpl;
+    private CustomPickerResultsDemoTpl: string = CustomPickerResultsDemoTpl;
+    private placeholder: string = 'Select...';
+    private staticDemo: any;
+    private formatted: any;
+    private custom: any;
+    private value: string;
+    private async: any;
+
     constructor() {
-        this.BasicPickerDemoTpl = BasicPickerDemoTpl;
-        this.AsyncPickerDemoTpl = AsyncPickerDemoTpl;
-        this.FormattedPickerDemoTpl = FormattedPickerDemoTpl;
-        this.CustomPickerResultsDemoTpl = CustomPickerResultsDemoTpl;
-
-        this.placeholder = 'Select...';
-
         let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
         let abbrieviated = [{
@@ -121,10 +125,10 @@ export class PickerDemoComponent {
             lastName: 'Sween'
         }];
 
-        this.static = { options: states };
+        this.staticDemo = { options: states };
 
         this.formatted = {
-            //field: 'id',
+            // field: 'id',
             format: '$firstName $lastName',
             options: collaborators
         };

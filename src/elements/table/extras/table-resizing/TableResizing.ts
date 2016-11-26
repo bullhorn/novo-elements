@@ -29,7 +29,7 @@
 //                     // Explicitly declare percentage widths on columns for manipulation later;
 //                     column.style.width = `${column.clientWidth / this.tableWidth * 100}%`;
 //
-//                     handle && handle.addEventListener('mousedown', (event) => { // eslint-disable-line
+//                     handle && handle.addEventListener('mousedown', (event) => {
 //                         if (event) {
 //                             event.preventDefault();
 //                             event.stopPropagation();

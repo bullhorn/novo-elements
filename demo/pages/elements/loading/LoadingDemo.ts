@@ -1,8 +1,8 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import LoadingCircleDemoTpl = require('./templates/LoadingCircleDemo.html');
-import LoadingLineDemoTpl = require('./templates/LoadingLineDemo.html');
+let LoadingCircleDemoTpl = require('./templates/LoadingCircleDemo.html');
+let LoadingLineDemoTpl = require('./templates/LoadingLineDemo.html');
 
 const template = `
 <div class="container">
@@ -30,8 +30,6 @@ const template = `
     template: template
 })
 export class LoadingDemoComponent {
-    constructor() {
-        this.LoadingCircleDemoTpl = LoadingCircleDemoTpl;
-        this.LoadingLineDemoTpl = LoadingLineDemoTpl;
-    }
+    private LoadingCircleDemoTpl: string = LoadingCircleDemoTpl;
+    private LoadingLineDemoTpl: string = LoadingLineDemoTpl;
 }

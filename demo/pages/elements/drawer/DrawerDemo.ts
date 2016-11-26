@@ -1,7 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import DrawerDemoTpl = require('./templates/DrawerDemo.html');
+let DrawerDemoTpl = require('./templates/DrawerDemo.html');
 
 const template = `
 <div class="container">
@@ -22,11 +22,9 @@ const template = `
     template: template
 })
 export class DrawerDemoComponent {
-    constructor() {
-        this.DrawerDemoTpl = DrawerDemoTpl;
-    }
+    private DrawerDemoTpl: string = DrawerDemoTpl;
 
     drawerToggled(event) {
-        console.log('Drawer Toggled', event); // eslint-disable-line
+        console.log('Drawer Toggled', event);
     }
 }

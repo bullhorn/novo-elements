@@ -6,7 +6,7 @@ import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 @Injectable()
 export class NovoToastService {
-    _parentViewContainer:any;
+    _parentViewContainer: any;
     references: Array<any> = [];
     themes: Array<string> = [
         'default',
@@ -38,7 +38,7 @@ export class NovoToastService {
     alert(options) {
         return new Promise((resolve) => {
             if (!this._parentViewContainer) {
-                console.error('No parent view container specified for the ToastService. Set it inside your main application. \nthis.toastService.parentViewContainer = view (ViewContainerRef)'); // eslint-disable-line
+                console.error('No parent view container specified for the ToastService. Set it inside your main application. \nthis.toastService.parentViewContainer = view (ViewContainerRef)');
                 return;
             }
             let toast = this.componentUtils.appendNextToLocation(NovoToastElement, this._parentViewContainer);
@@ -102,7 +102,9 @@ export class NovoToastService {
     }
 
     toastTimer(toast) {
-        if (toast.hideDelay < 0) return;
+        if (toast.hideDelay < 0) {
+            return;
+        }
         setTimeout(() => {
             this.hide(toast);
         }, toast.hideDelay);

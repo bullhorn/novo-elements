@@ -28,7 +28,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
     @Output() ready = new EventEmitter();
     @ViewChild('host') host;
 
-    _value:string = '';
+    _value: string = '';
     instance;
     debounceTimeout;
 
@@ -72,7 +72,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
 
     ckeditorInit(config) {
         if (!CKEDITOR) {
-            console.error('Make sure to include CKEditor sources in your dependencies!'); // eslint-disable-line
+            console.error('Make sure to include CKEditor sources in your dependencies!');
             return;
         }
 
@@ -101,7 +101,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
                 this.debounceTimeout = setTimeout(() => {
                     this.updateValue(value);
                     this.debounceTimeout = null;
-                }, parseInt(this.debounce)); // eslint-disable-line
+                }, parseInt(this.debounce));
             } else {
                 this.updateValue(value);
             }

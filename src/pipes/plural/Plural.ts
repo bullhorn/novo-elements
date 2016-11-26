@@ -25,7 +25,7 @@ function toTitleCase(str) {
  */
 function sanitizeRule(rule) {
     if (typeof rule === 'string') {
-        return new RegExp('^' + rule + '$', 'i'); // eslint-disable-line
+        return new RegExp('^' + rule + '$', 'i');
     }
     return rule;
 }

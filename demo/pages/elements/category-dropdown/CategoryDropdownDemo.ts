@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 // Vendor
 import { NovoToastService } from './../../../../novo-elements';
 // APP
-import BasicDemoTpl = require('./templates/BasicDemo.html');
-import PersistSelectionDemoTpl = require('./templates/PersistSelectionDemo.html');
-import CloseOnSelectDemoTpl = require('./templates/CloseOnSelectDemo.html');
-import HoverItemLabelsDemoTpl = require('./templates/HoverItemLabelsDemo.html');
-import BasicSearchDemoTpl = require('./templates/BasicSearchDemo.html');
-import CustomSearchDemoTpl = require('./templates/CustomSearchDemo.html');
-import FooterDemoTpl = require('./templates/FooterDemo.html');
+let BasicDemoTpl = require('./templates/BasicDemo.html');
+let PersistSelectionDemoTpl = require('./templates/PersistSelectionDemo.html');
+let CloseOnSelectDemoTpl = require('./templates/CloseOnSelectDemo.html');
+let HoverItemLabelsDemoTpl = require('./templates/HoverItemLabelsDemo.html');
+let BasicSearchDemoTpl = require('./templates/BasicSearchDemo.html');
+let CustomSearchDemoTpl = require('./templates/CustomSearchDemo.html');
+let FooterDemoTpl = require('./templates/FooterDemo.html');
 
 const template = `
 <div class="container">
@@ -64,139 +64,140 @@ const template = `
     template: template
 })
 export class CategoryDropdownDemoComponent {
-    constructor(toaster: NovoToastService) {
+    BasicDemoTpl = BasicDemoTpl;
+    PersistSelectionDemoTpl = PersistSelectionDemoTpl;
+    CloseOnSelectDemoTpl = CloseOnSelectDemoTpl;
+    HoverItemLabelsDemoTpl = HoverItemLabelsDemoTpl;
+    BasicSearchDemoTpl = BasicSearchDemoTpl;
+    CustomSearchDemoTpl = CustomSearchDemoTpl;
+    FooterDemoTpl = FooterDemoTpl;
+
+    basicCategories = {
+        'Category 1': [
+            { label: 'One', value: 1 },
+            { label: 'Two', value: 2 },
+            { label: 'Three', value: 3 }
+        ],
+        'Category 2': [
+            { label: 'Four', value: 4 },
+            { label: 'Five', value: 5 },
+            { label: 'Six', value: 6 }
+        ],
+        'Category 3': [
+            { label: 'Seven', value: 7 },
+            { label: 'Eight', value: 8 },
+            { label: 'Nine', value: 9 }
+        ],
+        'Category 4': [
+            { label: 'Ten', value: 10 },
+            { label: 'Eleven', value: 11 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 },
+            { label: 'Twelve', value: 12 }
+        ]
+    };
+    basicCodeSnippet = {
+        'Template': BasicDemoTpl
+    };
+
+    persistCategories = {
+        'One': [
+            { label: 'Test', value: 1 },
+            { label: 'Test', value: 1 },
+            { label: 'Test', value: 1 },
+            { label: 'Test', value: 1 }
+        ],
+        'Two': [
+            { label: 'Hello', value: 2 },
+            { label: 'Hello', value: 2 },
+            { label: 'Hello', value: 2 },
+            { label: 'Hello', value: 2 }
+        ]
+    };
+    persistCodeSnippet = {
+        'Template': PersistSelectionDemoTpl,
+        'Other Inputs': JSON.stringify({ persistSelection: true })
+    };
+
+    closeCodeSnippet = {
+        'Template': CloseOnSelectDemoTpl,
+        'Other Inputs': JSON.stringify({ closeOnSelect: true })
+    };
+
+    hoverCategories = {
+        'One': [
+            { label: 'Test', value: 1, hoverText: 'Hello!' },
+            { label: 'Test', value: 1, hoverIcon: 'star' },
+            { label: 'Test', value: 1, hoverIcon: 'check' },
+            { label: 'Test', value: 1, hoverText: 'BOOM' }
+        ],
+        'Two': [
+            { label: 'Hello', value: 1, hoverText: 'Hello!' },
+            { label: 'Hello', value: 1, hoverIcon: 'star' },
+            { label: 'Hello', value: 1, hoverIcon: 'check' },
+            { label: 'Hello', value: 1, hoverText: 'BOOM' }
+        ]
+    };
+    hoverCodeSnippet = {
+        'Template': HoverItemLabelsDemoTpl,
+        'Sample Item': JSON.stringify(this.hoverCategories.One[0])
+    };
+
+    searchCategories = {
+        'Greetings': [
+            { label: 'Hello', value: 1 },
+            { label: 'Sup?', value: 1 },
+            { label: 'Hey!', value: 1 },
+            { label: 'Heeeyo', value: 1 }
+        ],
+        'Salutations': [
+            { label: 'Goodbye', value: 1 },
+            { label: 'My Good Sir', value: 1 },
+            { label: 'See Ya Later!', value: 1 },
+            { label: 'Smell Ya Later!', value: 1 }
+        ]
+    };
+    searchConfig = {
+        placeholder: 'I wait 1s to search...',
+        debounce: 1000,
+        emptyMessage: 'NO ITEMS IN HERE!',
+        compare: (query, item) => {
+            return ~item.label.toLowerCase().indexOf(query.toLowerCase());
+        }
+    };
+    basicSearchCodeSnippet = {
+        'Template': BasicSearchDemoTpl,
+        'Other Inputs': JSON.stringify({ search: true })
+    };
+    customSearchCodeSnippet = {
+        'Template': BasicSearchDemoTpl,
+        'Other Inputs': JSON.stringify({ search: this.searchConfig })
+    };
+
+    footerConfig = {
+        align: 'left',
+        links: [
+            { label: 'Link 1', callback: this.footerClick.bind(this) },
+            { label: 'Link 2', callback: this.footerClick.bind(this) }
+        ]
+    };
+    footerCodeSnippet = {
+        'Template': FooterDemoTpl,
+        'Other Inputs': JSON.stringify(this.footerConfig)
+    };
+
+    constructor(private toaster: NovoToastService) {
         this.toaster = toaster;
-        this.BasicDemoTpl = BasicDemoTpl;
-        this.PersistSelectionDemoTpl = PersistSelectionDemoTpl;
-        this.CloseOnSelectDemoTpl = CloseOnSelectDemoTpl;
-        this.HoverItemLabelsDemoTpl = HoverItemLabelsDemoTpl;
-        this.BasicSearchDemoTpl = BasicSearchDemoTpl;
-        this.CustomSearchDemoTpl = CustomSearchDemoTpl;
-        this.FooterDemoTpl = FooterDemoTpl;
-
-        this.basicCategories = {
-            'Category 1': [
-                { label: 'One', value: 1 },
-                { label: 'Two', value: 2 },
-                { label: 'Three', value: 3 }
-            ],
-            'Category 2': [
-                { label: 'Four', value: 4 },
-                { label: 'Five', value: 5 },
-                { label: 'Six', value: 6 }
-            ],
-            'Category 3': [
-                { label: 'Seven', value: 7 },
-                { label: 'Eight', value: 8 },
-                { label: 'Nine', value: 9 }
-            ],
-            'Category 4': [
-                { label: 'Ten', value: 10 },
-                { label: 'Eleven', value: 11 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 },
-                { label: 'Twelve', value: 12 }
-            ]
-        };
-        this.basicCodeSnippet = {
-            'Template': BasicDemoTpl
-        };
-
-        this.persistCategories = {
-            'One': [
-                { label: 'Test', value: 1 },
-                { label: 'Test', value: 1 },
-                { label: 'Test', value: 1 },
-                { label: 'Test', value: 1 }
-            ],
-            'Two': [
-                { label: 'Hello', value: 2 },
-                { label: 'Hello', value: 2 },
-                { label: 'Hello', value: 2 },
-                { label: 'Hello', value: 2 }
-            ]
-        };
-        this.persistCodeSnippet = {
-            'Template': PersistSelectionDemoTpl,
-            'Other Inputs': JSON.stringify({ persistSelection: true })
-        };
-
-        this.closeCodeSnippet = {
-            'Template': CloseOnSelectDemoTpl,
-            'Other Inputs': JSON.stringify({ closeOnSelect: true })
-        };
-
-        this.hoverCategories = {
-            'One': [
-                { label: 'Test', value: 1, hoverText: 'Hello!' },
-                { label: 'Test', value: 1, hoverIcon: 'star' },
-                { label: 'Test', value: 1, hoverIcon: 'check' },
-                { label: 'Test', value: 1, hoverText: 'BOOM' }
-            ],
-            'Two': [
-                { label: 'Hello', value: 1, hoverText: 'Hello!' },
-                { label: 'Hello', value: 1, hoverIcon: 'star' },
-                { label: 'Hello', value: 1, hoverIcon: 'check' },
-                { label: 'Hello', value: 1, hoverText: 'BOOM' }
-            ]
-        };
-        this.hoverCodeSnippet = {
-            'Template': HoverItemLabelsDemoTpl,
-            'Sample Item': JSON.stringify(this.hoverCategories.One[0])
-        };
-
-        this.searchCategories = {
-            'Greetings': [
-                { label: 'Hello', value: 1 },
-                { label: 'Sup?', value: 1 },
-                { label: 'Hey!', value: 1 },
-                { label: 'Heeeyo', value: 1 }
-            ],
-            'Salutations': [
-                { label: 'Goodbye', value: 1 },
-                { label: 'My Good Sir', value: 1 },
-                { label: 'See Ya Later!', value: 1 },
-                { label: 'Smell Ya Later!', value: 1 }
-            ]
-        };
-        this.searchConfig = {
-            placeholder: 'I wait 1s to search...',
-            debounce: 1000,
-            emptyMessage: 'NO ITEMS IN HERE!',
-            compare: (query, item) => {
-                return ~item.label.toLowerCase().indexOf(query.toLowerCase());
-            }
-        };
-        this.basicSearchCodeSnippet = {
-            'Template': BasicSearchDemoTpl,
-            'Other Inputs': JSON.stringify({ search: true })
-        };
-        this.customSearchCodeSnippet = {
-            'Template': BasicSearchDemoTpl,
-            'Other Inputs': JSON.stringify({ search: this.searchConfig })
-        };
-
-        this.footerConfig = {
-            align: 'left',
-            links: [
-                { label: 'Link 1', callback: this.footerClick.bind(this) },
-                { label: 'Link 2', callback: this.footerClick.bind(this) }
-            ]
-        };
-        this.footerCodeSnippet = {
-            'Template': FooterDemoTpl,
-            'Other Inputs': JSON.stringify(this.footerConfig)
-        };
     }
 
     footerClick() {

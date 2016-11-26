@@ -40,7 +40,7 @@ module.exports = function () {
                 {
                     test: /\.s?css$/,
                     exclude: /node_modules/,
-                    loader: extractCSS.extract(['css', 'postcss', 'sass'])
+                    loader: extractCSS.extract(['css-loader', 'postcss-loader', 'sass-loader'])
                 }
             ]
         },

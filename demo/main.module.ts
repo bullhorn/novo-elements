@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Vendor
-import { NovoElementsModule, FormUtils } from './../novo-elements';
+import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService } from './../novo-elements';
 // APP
 import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
 import { MultiCodeSnippet } from './elements/codesnippet/MultiCodeSnippet';
@@ -103,11 +103,13 @@ import './demo.scss';
         ReactiveFormsModule,
         // Vendor
         NovoElementsModule,
+        NovoElementProviders.forRoot(),
         // APP
         routing
     ],
     providers: [
-        FormUtils
+        FormUtils,
+        NovoLabelService
     ],
     entryComponents: [
         DemoComponent,

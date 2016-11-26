@@ -2,6 +2,7 @@
     display: inline;
     .drawer-content {
         position: fixed;
+        display: none;
         background-color: white;
         box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.15), 1px 1px 17px rgba(0, 0, 0, 0.15);
         transition: all 160ms ease-in-out;
@@ -36,6 +37,7 @@
     }
     &.open {
         .drawer-content {
+            display: block;
             &.left,
             &.right,
             &.top,

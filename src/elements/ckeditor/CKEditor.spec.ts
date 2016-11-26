@@ -109,7 +109,7 @@
 //         it('should throw error if the CKEDITOR is not present', () => {
 //             window.CKEDITOR = null;
 //             comp.ckeditorInit({});
-//             expect(console.error).toHaveBeenCalled(); // eslint-disable-line
+//             expect(console.error).toHaveBeenCalled();
 //         });
 //
 //         describe('with CKEDITOR added', () => {

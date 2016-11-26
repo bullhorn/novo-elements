@@ -1,8 +1,8 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import ToastDemoTpl = require('./templates/ToastDemo.html');
-import ToastServiceDemoTpl = require('./templates/ToastServiceDemo.html');
+let ToastDemoTpl = require('./templates/ToastDemo.html');
+let ToastServiceDemoTpl = require('./templates/ToastServiceDemo.html');
 // Vendor
 import { NovoToastService } from './../../../../novo-elements';
 
@@ -41,45 +41,40 @@ const template = `
     template: template
 })
 export class ToastDemoComponent {
-    constructor(toaster: NovoToastService) {
-        // Templates
-        this.ToastDemoTpl = ToastDemoTpl;
-        this.ToastServiceDemoTpl = ToastServiceDemoTpl;
+    private ToastDemoTpl: string = ToastDemoTpl;
+    private ToastServiceDemoTpl: string = ToastServiceDemoTpl;
+    private positions: Array<string> = [
+        'fixedTop',
+        'fixedBottom',
+        'growlTopLeft',
+        'growlTopRight',
+        'growlBottomLeft',
+        'growlBottomRight'
+    ];
+    private themes: Array<string> = [
+        'default',
+        'success',
+        'info',
+        'warning',
+        'danger'
+    ];
+    private icons: Array<string> = [
+        'add',
+        'check',
+        'clock',
+        'lock',
+        'caution'
+    ];
+    private options: any = {
+        'title': 'Title',
+        'message': 'Some Message...'
+    };
+    private toast: any = {
+        theme: 'danger',
+        icon: 'caution'
+    };
 
-        // Toaster Service
-        this.toaster = toaster;
-
-        // Default Toast styles
-        this.positions = [
-            'fixedTop',
-            'fixedBottom',
-            'growlTopLeft',
-            'growlTopRight',
-            'growlBottomLeft',
-            'growlBottomRight'
-        ];
-        this.themes = [
-            'default',
-            'success',
-            'info',
-            'warning',
-            'danger'
-        ];
-        this.icons = [
-            'add',
-            'check',
-            'clock',
-            'lock',
-            'caution'
-        ];
-        this.options = {
-            'title': 'Title',
-            'message': 'Some Message...'
-        };
-        this.toast = {
-            theme: 'danger',
-            icon: 'caution'
-        };
+    constructor(private toaster: NovoToastService) {
     }
 
     changeToast() {

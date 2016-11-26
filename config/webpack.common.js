@@ -20,15 +20,15 @@ module.exports = function (options) {
         },
         resolve: {
             extensions: ['.ts', '.js', '.json'],
-            modules: [helpers.root('demo'), 'node_modules'],
+            modules: [helpers.root('demo'), 'node_modules']
         },
         module: {
             rules: [
                 {
                     enforce: 'pre',
                     test: /\.ts$/,
-                    loader: 'tslint',
-                    exclude: /(node_modules)/,
+                    loader: 'tslint-loader',
+                    exclude: /(node_modules)/
                 },
                 {
                     test: /\.ts$/,
@@ -52,7 +52,7 @@ module.exports = function (options) {
                 },
                 {
                     test: /\.(jpg|png|gif)$/,
-                    loader: 'file'
+                    loader: 'file-loader'
                 }
             ]
         },
@@ -73,10 +73,10 @@ module.exports = function (options) {
             ),
             new CopyWebpackPlugin([{
                 from: 'demo/assets/images',
-                to: 'assets/images',
+                to: 'assets/images'
             }, {
-                from: 'demo/favicon.ico',
-            },]),
+                from: 'demo/favicon.ico'
+            }]),
             new HtmlWebpackPlugin({
                 template: 'demo/index.html',
                 chunksSortMode: 'dependency',

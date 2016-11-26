@@ -1,8 +1,8 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import ListDemoTpl = require('./templates/ListDemo.html');
-import ThemedListDemoTpl = require('./templates/ThemedListDemo.html');
+let ListDemoTpl = require('./templates/ListDemo.html');
+let ThemedListDemoTpl = require('./templates/ThemedListDemo.html');
 
 const template = `
 <div class="container">
@@ -29,10 +29,11 @@ const template = `
     template: template
 })
 export class ListDemoComponent {
-    constructor() {
-        this.ListDemoTpl = ListDemoTpl;
-        this.ThemedListDemoTpl = ThemedListDemoTpl;
+    private ListDemoTpl: string = ListDemoTpl;
+    private ThemedListDemoTpl: string = ThemedListDemoTpl;
+    private pulseItems: any;
 
+    constructor() {
         let ONE_HOUR = 60 * 60 * 1000;
         /* ms */
         let TWO_HOURS = ONE_HOUR * 2;
@@ -101,7 +102,7 @@ export class ListDemoComponent {
 
     buildItems(resp) {
         for (let obj of resp) {
-            let item = {};
+            let item: any = {};
 
             /*
              ||| This is the item structure to be pushed to pulseItems[] and used

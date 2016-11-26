@@ -1,11 +1,11 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import TooltipOptionsDemoTpl = require('./templates/TooltipOptionsDemo.html');
-import TooltipPlacementDemoTpl = require('./templates/TooltipPlacementDemo.html');
-import TooltipAlignDemoTpl = require('./templates/TooltipAlignDemo.html');
-import TooltipTypesDemoTpl = require('./templates/TooltipTypesDemo.html');
-import TooltipToggleDemoTpl = require('./templates/TooltipToggleDemo.html');
+let TooltipOptionsDemoTpl = require('./templates/TooltipOptionsDemo.html');
+let TooltipPlacementDemoTpl = require('./templates/TooltipPlacementDemo.html');
+let TooltipAlignDemoTpl = require('./templates/TooltipAlignDemo.html');
+let TooltipTypesDemoTpl = require('./templates/TooltipTypesDemo.html');
+let TooltipToggleDemoTpl = require('./templates/TooltipToggleDemo.html');
 
 const template = `
 <div class="container">
@@ -41,13 +41,12 @@ const template = `
     template: template
 })
 export class TooltipDemoComponent {
-    constructor() {
-        this.TooltipOptionsDemoTpl = TooltipOptionsDemoTpl;
-        this.TooltipTypesDemoTpl = TooltipTypesDemoTpl;
-        this.TooltipPlacementDemoTpl = TooltipPlacementDemoTpl;
-        this.TooltipAlignDemoTpl = TooltipAlignDemoTpl;
-        this.TooltipToggleDemoTpl = TooltipToggleDemoTpl;
-    }
+    private tooltipActive: boolean;
+    private TooltipOptionsDemoTpl: string = TooltipOptionsDemoTpl;
+    private TooltipTypesDemoTpl: string = TooltipTypesDemoTpl;
+    private TooltipPlacementDemoTpl: string = TooltipPlacementDemoTpl;
+    private TooltipAlignDemoTpl: string = TooltipAlignDemoTpl;
+    private TooltipToggleDemoTpl: string = TooltipToggleDemoTpl;
 
     toggleTooltip() {
         this.tooltipActive = !this.tooltipActive;

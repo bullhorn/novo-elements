@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, Input, Output, forwardRef, ElementRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -81,7 +81,7 @@ export class NovoChipElement {
         '[class.with-value]': 'items.length > 0'
     }
 })
-export class NovoChipsElement extends OutsideClick {
+export class NovoChipsElement extends OutsideClick implements OnInit {
     @Input() placeholder: string = '';
     @Input() source: any;
     @Input() type: any;
@@ -97,8 +97,10 @@ export class NovoChipsElement extends OutsideClick {
     _value: any = '';
     _items = new ReplaySubject(1);
     // Placeholders for the callbacks
-    onModelChange: Function = () => {};
-    onModelTouched: Function = () => {};
+    onModelChange: Function = () => {
+    };
+    onModelTouched: Function = () => {
+    };
 
     constructor(element: ElementRef) {
         super(element);
@@ -108,10 +110,12 @@ export class NovoChipsElement extends OutsideClick {
     ngOnInit() {
         this.setItems();
     }
+
     //get accessor
     get value() {
         return this._value;
     }
+
     //set accessor including call the onchange callback
     @Input()
     set value(selected) {

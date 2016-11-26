@@ -1,9 +1,9 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import BasicChipsDemoTpl = require('./templates/BasicChipsDemo.html');
-import AsyncChipsDemoTpl = require('./templates/AsyncChipsDemo.html');
-import FormattedChipsDemoTpl = require('./templates/FormattedChipsDemo.html');
+let BasicChipsDemoTpl = require('./templates/BasicChipsDemo.html');
+let AsyncChipsDemoTpl = require('./templates/AsyncChipsDemo.html');
+let FormattedChipsDemoTpl = require('./templates/FormattedChipsDemo.html');
 
 const template = `
 <div class="container">
@@ -46,14 +46,17 @@ const template = `
     template: template
 })
 export class ChipsDemoComponent {
+    private BasicChipsDemoTpl: string = BasicChipsDemoTpl;
+    private AsyncChipsDemoTpl: string = AsyncChipsDemoTpl;
+    private FormattedChipsDemoTpl: string = FormattedChipsDemoTpl;
+    private placeholder: string = 'Select...';
+    private value: any = ['Alabama'];
+    private staticDemo: any;
+    private formatted: any;
+    private async: any;
+    private avalue: any;
+
     constructor() {
-        this.BasicChipsDemoTpl = BasicChipsDemoTpl;
-        this.AsyncChipsDemoTpl = AsyncChipsDemoTpl;
-        this.FormattedChipsDemoTpl = FormattedChipsDemoTpl;
-
-        this.placeholder = 'Select...';
-        this.value = ['Alabama'];
-
         let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
         let abbrieviated = [{
             value: 'USA',
@@ -85,7 +88,7 @@ export class ChipsDemoComponent {
             firstName: 'Kameron',
             lastName: 'Sween'
         }];
-        this.static = { options: states };
+        this.staticDemo = { options: states };
         this.formatted = {
             format: '$firstName $lastName',
             options: collaborators

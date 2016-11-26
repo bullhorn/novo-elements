@@ -1,7 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import BasicDemoTpl = require('./templates/BasicEditorDemo.html');
+let BasicDemoTpl = require('./templates/BasicEditorDemo.html');
 
 const template = `
 <div class="container">
@@ -21,10 +21,8 @@ const template = `
     template: template
 })
 export class EditorDemoComponent {
-    constructor() {
-        this.BasicDemoTpl = BasicDemoTpl;
-        this.editorValue = '<p>I AM A PRE-RENDERED VALUE</p><h1>TEST</h1>';
-    }
+    private BasicDemoTpl: string = BasicDemoTpl;
+    private editorValue: string = '<p>I AM A PRE-RENDERED VALUE</p><h1>TEST</h1>';
 
     insertText(editor) {
         editor.insertText('Hello World');

@@ -15,9 +15,9 @@ export class NovoModalService {
         this._parentViewContainer = view;
     }
 
-    open(component, scope) {
+    open(component, scope = {}) {
         if (!this._parentViewContainer) {
-            console.error('No parent view container specified for the ModalService. Set it inside your main application. \nthis.modalService.parentViewContainer = view (ViewContainerRef)'); // eslint-disable-line
+            console.error('No parent view container specified for the ModalService. Set it inside your main application. \nthis.modalService.parentViewContainer = view (ViewContainerRef)');
             return null;
         }
 

@@ -1,7 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import TilesDemoTpl = require('./templates/TilesDemo.html');
+let TilesDemoTpl = require('./templates/TilesDemo.html');
 
 const template = `
 <div class="container">
@@ -25,25 +25,23 @@ const template = `
     template: template
 })
 export class TilesDemoComponent {
-    shown: Boolean = false;
-
-    constructor() {
-        this.TilesDemoTpl = TilesDemoTpl;
-        this.demoTiles = [
-            {
-                label: 'Red',
-                value: 'red'
-            },
-            {
-                label: 'Green',
-                value: 'green'
-            },
-            {
-                label: 'Blue',
-                value: 'blue'
-            }
-        ];
-    }
+    private TilesDemoTpl: string = TilesDemoTpl;
+    private shown: boolean = false;
+    private demoTiles: Array<any> = [
+        {
+            label: 'Red',
+            value: 'red'
+        },
+        {
+            label: 'Green',
+            value: 'green'
+        },
+        {
+            label: 'Blue',
+            value: 'blue'
+        }
+    ];
+    private currentColor: string;
 
     colorSelect(newColorValue) {
         this.currentColor = newColorValue;

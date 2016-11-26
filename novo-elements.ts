@@ -61,5 +61,6 @@ export * from './novo-elements.providers';
 // Pipes
 export * from './src/pipes/plural/Plural';
 
-// Export main module
+// Export modules
 export { NovoElementsModule } from './novo-elements.module';
+export { NovoElementProviders } from './novo-elements.providers';

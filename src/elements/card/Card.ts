@@ -51,19 +51,19 @@ export class CardElement implements OnChanges, OnInit {
     @Input() message: string;
     @Input() messageIcon: string;
     @Input() icon: string;
-    @Input() refresh: boolean; 
+    @Input() refresh: boolean;
     @Input() close: boolean;
     @Input() move: boolean;
     @Input() loading: boolean;
-    
+
     @Output() onClose: EventEmitter<any> = new EventEmitter();
     @Output() onRefresh: EventEmitter<any> = new EventEmitter();
-    
+
     cardAutomationId: string;
     labels: NovoLabelService;
     iconClass: string|null;
     messageIconClass: string;
-    
+
     constructor(labels: NovoLabelService) {
         this.labels = labels;
     }

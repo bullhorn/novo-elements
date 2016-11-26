@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, OnDestroy, OnInit } from '@angular/core';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
@@ -45,7 +45,7 @@ import { Helpers } from './../../utils/Helpers';
         '[class.active]': 'active'
     }
 })
-export class NovoCategoryDropdownElement extends OutsideClick {
+export class NovoCategoryDropdownElement extends OutsideClick implements OnInit, OnDestroy {
     _query: string = '';
     _categoryMap: any = {};
     _categories: string[] = [];

@@ -35,7 +35,7 @@ export class NovoTipWellElement implements OnInit {
                     localStorage.removeItem('lsTest');
                     isEnabled = true;
                 } catch (e) {
-                    console.warn('This web browser does not support storing settings locally. In Safari, the most common cause of this is using "Private Browsing Mode". Some settings may not save or some features may not work properly for you.'); // eslint-disable-line
+                    console.warn('This web browser does not support storing settings locally. In Safari, the most common cause of this is using "Private Browsing Mode". Some settings may not save or some features may not work properly for you.');
                 }
             }
             return isEnabled;

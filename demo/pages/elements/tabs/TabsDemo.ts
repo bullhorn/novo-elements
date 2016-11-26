@@ -1,11 +1,11 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import ButtonTabDemoTpl = require('./templates/ButtonTabDemo.html');
-import ColorDemoTpl = require('./templates/ColorDemo.html');
-import RouterDemoTpl = require('./templates/RouterDemo.html');
-import VerticalDemoTpl = require('./templates/VerticalDemo.html');
-import WhiteDemoTpl = require('./templates/WhiteDemo.html');
+let ButtonTabDemoTpl = require('./templates/ButtonTabDemo.html');
+let ColorDemoTpl = require('./templates/ColorDemo.html');
+let RouterDemoTpl = require('./templates/RouterDemo.html');
+let VerticalDemoTpl = require('./templates/VerticalDemo.html');
+let WhiteDemoTpl = require('./templates/WhiteDemo.html');
 
 const template = `
 <div class="container">
@@ -48,19 +48,17 @@ const template = `
     template: template
 })
 export class TabsDemoComponent {
-    constructor() {
-        this.ColorDemoTpl = ColorDemoTpl;
-        this.WhiteDemoTpl = WhiteDemoTpl;
-        this.VerticalDemoTpl = VerticalDemoTpl;
-        this.ButtonTabDemoTpl = ButtonTabDemoTpl;
-        this.RouterDemoTpl = RouterDemoTpl;
-    }
+    private ColorDemoTpl: string = ColorDemoTpl;
+    private WhiteDemoTpl: string = WhiteDemoTpl;
+    private VerticalDemoTpl: string = VerticalDemoTpl;
+    private ButtonTabDemoTpl: string = ButtonTabDemoTpl;
+    private RouterDemoTpl: string = RouterDemoTpl;
 
     tabSelected() {
-        console.log('TAB SELECTED'); // eslint-disable-line
+        console.log('TAB SELECTED');
     }
 
     tabDeselected() {
-        console.log('TAB DESELECTED'); // eslint-disable-line
+        console.log('TAB DESELECTED');
     }
 }

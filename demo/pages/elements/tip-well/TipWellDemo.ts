@@ -1,9 +1,9 @@
 // NG2
 import { Component } from '@angular/core';
 // App
-import TipWellDemoTpl = require('./templates/TipWellDemo.html');
-import TipWellNoButtonDemoTpl = require('./templates/TipWellNoButtonDemo.html');
-import TipWellIconDemoTpl = require('./templates/TipWellIconDemo.html');
+let TipWellDemoTpl = require('./templates/TipWellDemo.html');
+let TipWellNoButtonDemoTpl = require('./templates/TipWellNoButtonDemo.html');
+let TipWellIconDemoTpl = require('./templates/TipWellIconDemo.html');
 
 const template = `
 <div class="container">
@@ -40,12 +40,10 @@ const template = `
     template: template
 })
 export class TipWellDemoComponent {
-    constructor() {
-        this.TipWellDemoTpl = TipWellDemoTpl;
-        this.TipWellNoButtonDemoTpl = TipWellNoButtonDemoTpl;
-        this.TipWellIconDemoTpl = TipWellIconDemoTpl;
-        this.demoTip = 'Sed sodales ligula et fermentum bibendum. Aliquam tincidunt sagittis leo eget auctor. Fusce eu sagittis metus, ut viverra magna. Mauris mollis nisl nec libero tincidunt posuere.';
-    }
+    private TipWellDemoTpl: string = TipWellDemoTpl;
+    private TipWellNoButtonDemoTpl: string = TipWellNoButtonDemoTpl;
+    private TipWellIconDemoTpl: string = TipWellIconDemoTpl;
+    private demoTip: string = 'Sed sodales ligula et fermentum bibendum. Aliquam tincidunt sagittis leo eget auctor. Fusce eu sagittis metus, ut viverra magna. Mauris mollis nisl nec libero tincidunt posuere.';
 
     clearLocalStorage() {
         localStorage.removeItem('novo-tw_Demo');

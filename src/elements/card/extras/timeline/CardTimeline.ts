@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'novo-card-timeline',
@@ -15,14 +15,14 @@ import { Component, Input } from '@angular/core';
         </div>
     `
 })
-export class CardTimelineElement {
+export class CardTimelineElement implements OnChanges {
     @Input() start: number;
     @Input() end: number;
     @Input() created: number;
 
     now: number = new Date().getFullYear();
     length: number;
-    offset: number;;
+    offset: number;
 
     ngOnChanges() {
         this.length = ((this.end - this.start) / (this.now - this.created)) * 100;

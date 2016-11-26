@@ -1,15 +1,14 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import AttributeCardDemoTpl = require('./templates/AttributeCardDemo.html');
-import FullConfigCardDemoTpl = require('./templates/FullConfigCardDemo.html');
-import ExtrasTimelineDemoTpl = require('./templates/ExtrasTimelineDemo.html');
-import ExtrasBestTimeDemoTpl = require('./templates/ExtrasBestTimeDemo.html');
-import ExtrasChartDonutDemoTpl = require('./templates/ExtrasChartDemoDemo.html');
+let AttributeCardDemoTpl = require('./templates/AttributeCardDemo.html');
+let FullConfigCardDemoTpl = require('./templates/FullConfigCardDemo.html');
+let ExtrasTimelineDemoTpl = require('./templates/ExtrasTimelineDemo.html');
+let ExtrasBestTimeDemoTpl = require('./templates/ExtrasBestTimeDemo.html');
+let ExtrasChartDonutDemoTpl = require('./templates/ExtrasChartDemoDemo.html');
 // Vendor
 import { NovoToastService } from './../../../../novo-elements';
 
-// TODO - actions back in
 const template = `
 <div class="container">
     <h1>Cards <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/card">(source)</a></small></h1>
@@ -73,46 +72,48 @@ const template = `
     template: template
 })
 export class CardDemoComponent {
-    constructor(toaster: NovoToastService) {
-        this.toaster = toaster;
+    // Templates
+    AttributeCardDemoTpl: string = AttributeCardDemoTpl;
+    FullConfigCardDemoTpl: string = FullConfigCardDemoTpl;
+    ExtrasTimelineDemoTpl: string = ExtrasTimelineDemoTpl;
+    ExtrasBestTimeDemoTpl: string = ExtrasBestTimeDemoTpl;
+    ExtrasChartDonutDemoTpl: string = ExtrasChartDonutDemoTpl;
 
-        // Templates
-        this.AttributeCardDemoTpl = AttributeCardDemoTpl;
-        this.FullConfigCardDemoTpl = FullConfigCardDemoTpl;
-        this.ExtrasTimelineDemoTpl = ExtrasTimelineDemoTpl;
-        this.ExtrasBestTimeDemoTpl = ExtrasBestTimeDemoTpl;
-        this.ExtrasChartDonutDemoTpl = ExtrasChartDonutDemoTpl;
+    // Config for demos
+    refresh: boolean = true;
+    close: boolean = true;
+    move: boolean = true;
+    padding: boolean = true;
+    loading: boolean = true;
 
-        // Config for demos
-        this.refresh = true;
-        this.close = true;
-        this.move = true;
-        this.padding = true;
+    fullConfig: any = {
+        refresh: false,
+        icon: 'email',
+        messageIcon: 'email',
+        close: false,
+        move: true,
+        onClose: this.onClose.bind(this),
+        onRefresh: this.onRefresh.bind(this),
+        title: 'Test',
+        loading: false,
+        padding: true
+    };
 
-        this.fullConfig = {
-            refresh: false,
-            icon: 'email',
-            messageIcon: 'email',
-            close: false,
-            move: true,
-            onClose: this.onClose.bind(this),
-            onRefresh: this.onRefresh.bind(this),
-            title: 'Test',
-            loading: false,
-            padding: true
-        };
+    start: number = 2000;
+    end: number = 2005;
+    created: number = 1995;
 
-        this.start = 2000;
-        this.end = 2005;
-        this.created = 1995;
+    bestLabel: string = 'BEST TIME TO CONTACT';
+    bestTime: string = '1-PM';
+    bestDay: string = 'Friday';
+    message: string;
+    messageIcon: string;
 
-        this.bestLabel = 'BEST TIME TO CONTACT';
-        this.bestTime = '1-PM';
-        this.bestDay = 'Friday';
+    donutValue: number = 0.5;
+    donutColor: string = '#662255';
+    donutLabel: string = 'Probability of Win %';
 
-        this.donutValue = 0.5;
-        this.donutColor = '#662255';
-        this.donutLabel = 'Probability of Win %';
+    constructor(private toaster: NovoToastService) {
     }
 
     onClose() {
@@ -157,6 +158,6 @@ export class CardDemoComponent {
     }
 
     singleAction() {
-        window.alert('HELLO!');//eslint-disable-line
+        window.alert('HELLO!');
     }
 }

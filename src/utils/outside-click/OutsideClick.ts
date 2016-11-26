@@ -10,7 +10,7 @@ export class OutsideClick implements OnDestroy {
     element: ElementRef;
     active: boolean = false;
     onOutsideClick: any;
-    onActiveChange: EventEmitter<boolean> = new EventEmitter();
+    onActiveChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(element: ElementRef) {
         // Component element

@@ -1,12 +1,12 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import DynamicFormDemoTpl = require('./templates/DynamicForm.html');
-import VerticalDynamicFormDemoTpl = require('./templates/VerticalDynamicForm.html');
-import TextBasedControlsDemoTpl = require('./templates/TextBasedControls.html');
-import CheckBoxControlsDemoTpl = require('./templates/CheckBoxControls.html');
-import FileInputControlsDemoTpl = require('./templates/FileInputControls.html');
-import CalendarControlsDemoTpl = require('./templates/CalendarInputControls.html');
+let DynamicFormDemoTpl = require('./templates/DynamicForm.html');
+let VerticalDynamicFormDemoTpl = require('./templates/VerticalDynamicForm.html');
+let TextBasedControlsDemoTpl = require('./templates/TextBasedControls.html');
+let CheckBoxControlsDemoTpl = require('./templates/CheckBoxControls.html');
+let FileInputControlsDemoTpl = require('./templates/FileInputControls.html');
+let CalendarControlsDemoTpl = require('./templates/CalendarInputControls.html');
 import MockMeta from './MockMeta';
 // Vendor
 import {
@@ -55,14 +55,38 @@ const template = `
     template: template
 })
 export class FormDemoComponent {
-    constructor(formUtils: FormUtils) {
-        this.DynamicFormDemoTpl = DynamicFormDemoTpl;
-        this.VerticalDynamicFormDemoTpl = VerticalDynamicFormDemoTpl;
-        this.TextBasedControlsDemoTpl = TextBasedControlsDemoTpl;
-        this.CheckBoxControlsDemoTpl = CheckBoxControlsDemoTpl;
-        this.FileInputControlsDemoTpl = FileInputControlsDemoTpl;
-        this.CalendarControlsDemoTpl = CalendarControlsDemoTpl;
+    private DynamicFormDemoTpl: string = DynamicFormDemoTpl;
+    private VerticalDynamicFormDemoTpl: string = VerticalDynamicFormDemoTpl;
+    private TextBasedControlsDemoTpl: string = TextBasedControlsDemoTpl;
+    private CheckBoxControlsDemoTpl: string = CheckBoxControlsDemoTpl;
+    private FileInputControlsDemoTpl: string = FileInputControlsDemoTpl;
+    private CalendarControlsDemoTpl: string = CalendarControlsDemoTpl;
+    private quickNoteConfig: any;
+    private textControl: any;
+    private emailControl: any;
+    private numberControl: any;
+    private currencyControl: any;
+    private floatControl: any;
+    private percentageControl: any;
+    private quickNoteControl: any;
+    private textForm: any;
+    private checkControl: any;
+    private checkListControl: any;
+    private tilesControl: any;
+    private checkForm: any;
+    private fileControl: any;
+    private multiFileControl: any;
+    private fileForm: any;
+    private dateControl: any;
+    private timeControl: any;
+    private dateTimeControl: any;
+    private dynamic: any;
+    private dynamicForm: any;
+    private dynamicVertical: any;
+    private dynamicVerticalForm: any;
+    private calendarForm: any;
 
+    constructor(private formUtils: FormUtils) {
         // Quick note config
         this.quickNoteConfig = {
             triggers: {
@@ -126,7 +150,7 @@ export class FormDemoComponent {
         if (!form.isValid) {
             form.showOnlyRequired(true);
         } else {
-            alert('SAVING'); // eslint-disable-line
+            alert('SAVING');
         }
     }
 
@@ -137,6 +161,6 @@ export class FormDemoComponent {
     }
 
     onChange(value) {
-        console.log('I changed!', value); // eslint-disable-line
+        console.log('I changed!', value);
     }
 }

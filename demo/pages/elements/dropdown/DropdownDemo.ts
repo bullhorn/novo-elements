@@ -1,7 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import DropdownDemoTpl = require('./templates/DropdownDemo.html');
+let DropdownDemoTpl = require('./templates/DropdownDemo.html');
 
 const template = `
 <div class="container">
@@ -22,11 +22,9 @@ const template = `
     template: template
 })
 export class DropdownDemoComponent {
-    constructor() {
-        this.DropdownDemoTpl = DropdownDemoTpl;
-    }
+    private DropdownDemoTpl: string = DropdownDemoTpl;
 
     clickMe(data) {
-        console.log('CLICKED!', data); // eslint-disable-line
+        console.log('CLICKED!', data);
     }
 }

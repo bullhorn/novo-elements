@@ -32,7 +32,6 @@ import { NovoTableExtrasModule } from './src/elements/table/extras/TableExtras.m
 import { NovoFormModule } from './src/elements/form/Form.module';
 import { NovoFormExtrasModule } from './src/elements/form/extras/FormExtras.module';
 import { NovoCategoryDropdownModule } from './src/elements/category-dropdown/CategoryDropdown.module';
-import { NOVO_ELEMENTS_PROVIDERS } from './novo-elements.providers';
 
 @NgModule({
     imports: [
@@ -69,9 +68,6 @@ import { NOVO_ELEMENTS_PROVIDERS } from './novo-elements.providers';
         NovoFormModule,
         NovoFormExtrasModule,
         NovoCategoryDropdownModule
-    ],
-    providers: [
-        ...NOVO_ELEMENTS_PROVIDERS
     ]
 })
 export class NovoElementsModule {
