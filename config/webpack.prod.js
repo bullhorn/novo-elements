@@ -79,7 +79,9 @@ module.exports = function () {
                     tslint: {
                         emitErrors: false,
                         failOnHint: false,
-                        resourcePath: 'demo'
+                        resourcePath: 'demo',
+                        formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
+                        formatter: 'grouped'
                     },
                     htmlLoader: {
                         minimize: true,

@@ -1,4 +1,4 @@
-import * as moment from 'moment'
+import * as moment from 'moment';
 import { NovoDatePickerElement } from './DatePicker';
 import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
 
@@ -25,7 +25,7 @@ describe('Element: NovoDatePickerElement', () => {
     describe('Function: select()', () => {
         it('should set selected', () => {
             expect(component.select).toBeDefined();
-            component.select(event, { date: undefined });
+            component.select({}, { date: undefined });
             let day = { date: moment('12/08/16') };
             let event = { preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
             component.select(event, day);
@@ -41,7 +41,7 @@ describe('Element: NovoDatePickerElement', () => {
 
         it('should set selected values for range', () => {
             expect(component.select).toBeDefined();
-            component.select(event, { date: undefined });
+            component.select({}, { date: undefined });
             let day = { date: moment('12/08/16') };
             let day2 = { date: moment('12/10/16') };
             let event = { preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
@@ -54,7 +54,7 @@ describe('Element: NovoDatePickerElement', () => {
 
         it('should not set selected2 value if not range', () => {
             expect(component.select).toBeDefined();
-            component.select(event, { date: undefined });
+            component.select({}, { date: undefined });
             let day = { date: moment('12/08/16') };
             let day2 = { date: moment('12/10/16') };
             let event = { preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
@@ -67,7 +67,7 @@ describe('Element: NovoDatePickerElement', () => {
 
         it('should swap the selected values if selected2 is before selected', () => {
             expect(component.select).toBeDefined();
-            component.select(event, { date: undefined });
+            component.select({}, { date: undefined });
             let day = { date: moment('12/10/16') };
             let day2 = { date: moment('12/08/16') };
             let event = { preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
@@ -80,7 +80,7 @@ describe('Element: NovoDatePickerElement', () => {
 
         it('should clear selected range on 3rd date selection', () => {
             expect(component.select).toBeDefined();
-            component.select(event, { date: undefined });
+            component.select({}, { date: undefined });
             let day = { date: moment('12/08/16') };
             let day2 = { date: moment('12/09/16') };
             let day3 = { date: moment('12/10/16') };
