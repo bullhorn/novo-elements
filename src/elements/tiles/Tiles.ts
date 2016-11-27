@@ -39,22 +39,22 @@ const TILES_VALUE_ACCESSOR = {
     ]
 })
 export class NovoTilesElement implements ControlValueAccessor, OnInit {
-    @Input() name: String;
-    @Input() options: any;
-    @Input() required: boolean;
-    @Output() onChange: EventEmitter<any> = new EventEmitter();
+    @Input() name:String;
+    @Input() options:any;
+    @Input() required:boolean;
+    @Output() onChange:EventEmitter<any> = new EventEmitter();
 
-    _options: Array<any> = [];
-    activeTile: any = null;
-    state: String = 'inactive';
+    _options:Array<any> = [];
+    activeTile:any = null;
+    state:String = 'inactive';
 
-    model: any;
-    onModelChange: Function = () => {
+    model:any;
+    onModelChange:Function = () => {
     };
-    onModelTouched: Function = () => {
+    onModelTouched:Function = () => {
     };
 
-    constructor(private element: ElementRef) {
+    constructor(private element:ElementRef) {
     }
 
     ngOnInit() {
@@ -122,18 +122,18 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
         });
     }
 
-    writeValue(model: any): void {
+    writeValue(model:any):void {
         this.model = model;
         if (!Helpers.isBlank(model)) {
             this.setupOptions();
         }
     }
 
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn:Function):void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn:Function):void {
         this.onModelTouched = fn;
     }
 }

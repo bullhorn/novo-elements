@@ -9,4 +9,10 @@ if (ENV === 'production') {
     enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(MainModule);
+/**
+ * Bootstrap via function to ensure DOM is ready
+ */
+export function main() {
+    return platformBrowserDynamic().bootstrapModule(MainModule);
+}
+document.addEventListener('DOMContentLoaded', main);

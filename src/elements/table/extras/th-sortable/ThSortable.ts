@@ -8,9 +8,9 @@ import { Directive, EventEmitter, Input, Output } from '@angular/core';
     }
 })
 export class ThSortable {
-    @Input('novoThSortable') config: any;
-    @Input() column: any;
-    @Output() onSortChange: EventEmitter<any> = new EventEmitter();
+    @Input('novoThSortable') config:any;
+    @Input() column:any;
+    @Output() onSortChange:EventEmitter<any> = new EventEmitter();
 
     onToggleSort(event) {
         if (event) {

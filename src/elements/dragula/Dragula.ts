@@ -9,12 +9,12 @@ import { NovoDragulaService } from './DragulaService';
     selector: '[dragula]'
 })
 export class NovoDragulaElement implements OnInit, OnChanges {
-    @Input('dragula') bag: any;
-    @Input() dragulaModel: any;
-    drake: any;
-    container: any;
+    @Input('dragula') bag:any;
+    @Input() dragulaModel:any;
+    drake:any;
+    container:any;
 
-    constructor(el: ElementRef, private dragulaService: NovoDragulaService) {
+    constructor(el:ElementRef, private dragulaService:NovoDragulaService) {
         this.container = el.nativeElement;
         this.drake = null;
     }

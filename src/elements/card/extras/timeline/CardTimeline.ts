@@ -16,13 +16,13 @@ import { Component, Input, OnChanges } from '@angular/core';
     `
 })
 export class CardTimelineElement implements OnChanges {
-    @Input() start: number;
-    @Input() end: number;
-    @Input() created: number;
+    @Input() start:number;
+    @Input() end:number;
+    @Input() created:number;
 
-    now: number = new Date().getFullYear();
-    length: number;
-    offset: number;
+    now:number = new Date().getFullYear();
+    length:number;
+    offset:number;
 
     ngOnChanges() {
         this.length = ((this.end - this.start) / (this.now - this.created)) * 100;

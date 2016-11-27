@@ -6,12 +6,12 @@ import { Component, Input } from '@angular/core';
     template: '<ng-content></ng-content>'
 })
 export class NovoNavElement {
-    @Input() theme: string = '';
-    @Input() direction: string = '';
-    @Input() outlet: any;
-    @Input() router: string;
+    @Input() theme:string = '';
+    @Input() direction:string = '';
+    @Input() outlet:any;
+    @Input() router:string;
 
-    items: Array<any> = [];
+    items:Array<any> = [];
 
     select(item) {
         /**
@@ -65,11 +65,11 @@ export class NovoNavElement {
    `
 })
 export class NovoTabElement {
-    @Input() active: boolean = false;
+    @Input() active:boolean = false;
 
-    nav: any;
+    nav:any;
 
-    constructor(nav: NovoNavElement) {
+    constructor(nav:NovoNavElement) {
         this.nav = nav;
         this.nav.add(this);
     }
@@ -88,11 +88,11 @@ export class NovoTabElement {
     template: '<ng-content></ng-content>'
 })
 export class NovoTabButtonElement {
-    @Input() active: boolean = false;
+    @Input() active:boolean = false;
 
-    nav: any;
+    nav:any;
 
-    constructor(nav: NovoNavElement) {
+    constructor(nav:NovoNavElement) {
         this.nav = nav;
         this.nav.add(this);
     }
@@ -116,11 +116,11 @@ export class NovoTabButtonElement {
     `
 })
 export class NovoTabLinkElement {
-    @Input() active: boolean = false;
+    @Input() active:boolean = false;
 
-    nav: any;
+    nav:any;
 
-    constructor(nav: NovoNavElement) {
+    constructor(nav:NovoNavElement) {
         this.nav = nav;
         this.nav.add(this);
     }
@@ -135,7 +135,7 @@ export class NovoTabLinkElement {
     template: '<ng-content></ng-content>'
 })
 export class NovoNavOutletElement {
-    items: Array<any> = [];
+    items:Array<any> = [];
 
     show(index) {
         let item = this.items[index];
@@ -173,9 +173,9 @@ export class NovoNavOutletElement {
     template: '<ng-content></ng-content>'
 })
 export class NovoNavContentElement {
-    @Input() active: boolean = false;
+    @Input() active:boolean = false;
 
-    constructor(outlet: NovoNavOutletElement) {
+    constructor(outlet:NovoNavOutletElement) {
         outlet.add(this);
     }
 }
@@ -189,11 +189,11 @@ export class NovoNavContentElement {
     template: '<ng-content></ng-content>'
 })
 export class NovoNavHeaderElement {
-    @Input() active: boolean = false;
-    @Input('for') forElement: any;
-    outlet: any;
+    @Input() active:boolean = false;
+    @Input('for') forElement:any;
+    outlet:any;
 
-    constructor(outlet: NovoNavOutletElement) {
+    constructor(outlet:NovoNavOutletElement) {
         this.active = this.active || false;
         this.outlet = outlet;
     }

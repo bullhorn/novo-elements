@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 let ToastDemoTpl = require('./templates/ToastDemo.html');
 let ToastServiceDemoTpl = require('./templates/ToastServiceDemo.html');
 // Vendor
-import { NovoToastService } from './../../../../novo-elements';
+import { NovoToastService } from './../../../../index';
 
 const template = `
 <div class="container">
@@ -41,9 +41,9 @@ const template = `
     template: template
 })
 export class ToastDemoComponent {
-    private ToastDemoTpl: string = ToastDemoTpl;
-    private ToastServiceDemoTpl: string = ToastServiceDemoTpl;
-    private positions: Array<string> = [
+    private ToastDemoTpl:string = ToastDemoTpl;
+    private ToastServiceDemoTpl:string = ToastServiceDemoTpl;
+    private positions:Array<string> = [
         'fixedTop',
         'fixedBottom',
         'growlTopLeft',
@@ -51,30 +51,30 @@ export class ToastDemoComponent {
         'growlBottomLeft',
         'growlBottomRight'
     ];
-    private themes: Array<string> = [
+    private themes:Array<string> = [
         'default',
         'success',
         'info',
         'warning',
         'danger'
     ];
-    private icons: Array<string> = [
+    private icons:Array<string> = [
         'add',
         'check',
         'clock',
         'lock',
         'caution'
     ];
-    private options: any = {
+    private options:any = {
         'title': 'Title',
         'message': 'Some Message...'
     };
-    private toast: any = {
+    private toast:any = {
         theme: 'danger',
         icon: 'caution'
     };
 
-    constructor(private toaster: NovoToastService) {
+    constructor(private toaster:NovoToastService) {
     }
 
     changeToast() {

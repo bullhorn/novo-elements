@@ -19,5 +19,5 @@ const template = `
     template: template
 })
 export class SlidesDemoComponent {
-    private BasicSlideDemoTpl: string = BasicSlideDemoTpl;
+    private BasicSlideDemoTpl:string = BasicSlideDemoTpl;
 }

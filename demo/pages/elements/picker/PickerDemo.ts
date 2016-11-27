@@ -6,7 +6,7 @@ let AsyncPickerDemoTpl = require('./templates/AsyncPickerDemo.html');
 let FormattedPickerDemoTpl = require('./templates/FormattedPickerDemo.html');
 let CustomPickerResultsDemoTpl = require('./templates/CustomPickerResultsDemo.html');
 // Vendor
-import { PickerResults } from './../../../../novo-elements';
+import { PickerResults } from './../../../../index';
 
 @Component({
     selector: 'custom-picker-results',
@@ -79,16 +79,16 @@ const template = `
     template: template
 })
 export class PickerDemoComponent {
-    private BasicPickerDemoTpl: string = BasicPickerDemoTpl;
-    private AsyncPickerDemoTpl: string = AsyncPickerDemoTpl;
-    private FormattedPickerDemoTpl: string = FormattedPickerDemoTpl;
-    private CustomPickerResultsDemoTpl: string = CustomPickerResultsDemoTpl;
-    private placeholder: string = 'Select...';
-    private staticDemo: any;
-    private formatted: any;
-    private custom: any;
-    private value: string;
-    private async: any;
+    private BasicPickerDemoTpl:string = BasicPickerDemoTpl;
+    private AsyncPickerDemoTpl:string = AsyncPickerDemoTpl;
+    private FormattedPickerDemoTpl:string = FormattedPickerDemoTpl;
+    private CustomPickerResultsDemoTpl:string = CustomPickerResultsDemoTpl;
+    private placeholder:string = 'Select...';
+    private staticDemo:any;
+    private formatted:any;
+    private custom:any;
+    private value:string;
+    private async:any;
 
     constructor() {
         let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];

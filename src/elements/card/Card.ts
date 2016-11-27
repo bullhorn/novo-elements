@@ -45,26 +45,26 @@ export class CardActionsElement {
 })
 export class CardElement implements OnChanges, OnInit {
 
-    @Input() padding: boolean = true;
-    @Input() config: any = {};
-    @Input() title: string;
-    @Input() message: string;
-    @Input() messageIcon: string;
-    @Input() icon: string;
-    @Input() refresh: boolean;
-    @Input() close: boolean;
-    @Input() move: boolean;
-    @Input() loading: boolean;
+    @Input() padding:boolean = true;
+    @Input() config:any = {};
+    @Input() title:string;
+    @Input() message:string;
+    @Input() messageIcon:string;
+    @Input() icon:string;
+    @Input() refresh:boolean;
+    @Input() close:boolean;
+    @Input() move:boolean;
+    @Input() loading:boolean;
 
-    @Output() onClose: EventEmitter<any> = new EventEmitter();
-    @Output() onRefresh: EventEmitter<any> = new EventEmitter();
+    @Output() onClose:EventEmitter<any> = new EventEmitter();
+    @Output() onRefresh:EventEmitter<any> = new EventEmitter();
 
-    cardAutomationId: string;
-    labels: NovoLabelService;
-    iconClass: string|null;
-    messageIconClass: string;
+    cardAutomationId:string;
+    labels:NovoLabelService;
+    iconClass:string|null;
+    messageIconClass:string;
 
-    constructor(labels: NovoLabelService) {
+    constructor(labels:NovoLabelService) {
         this.labels = labels;
     }
 
@@ -76,8 +76,8 @@ export class CardElement implements OnChanges, OnInit {
         this.config = this.config || {};
         this.cardAutomationId = `${(this.title || this.config.title || 'no-title').toLowerCase().replace(/\s/g, '-')}-card`;
 
-        let newIcon: string = this.icon || this.config.icon;
-        let newMessageIcon: string = this.messageIcon || this.config.messageIcon;
+        let newIcon:string = this.icon || this.config.icon;
+        let newMessageIcon:string = this.messageIcon || this.config.messageIcon;
         this.iconClass = newIcon ? `bhi-${newIcon}` : null;
         this.messageIconClass = newMessageIcon ? `bhi-${newMessageIcon}` : null;
     }

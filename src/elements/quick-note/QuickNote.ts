@@ -36,30 +36,30 @@ const QUICK_NOTE_VALUE_ACCESSOR = {
 })
 export class QuickNoteElement extends OutsideClick implements OnInit {
     // Results container
-    @ViewChild('results', { read: ViewContainerRef }) results: ViewContainerRef;
+    @ViewChild('results', { read: ViewContainerRef }) results:ViewContainerRef;
 
-    @Input() config: any;
-    @Input() placeholder: string;
+    @Input() config:any;
+    @Input() placeholder:string;
 
     // Emitter for selects
-    @Output() focus: EventEmitter<any> = new EventEmitter();
-    @Output() blur: EventEmitter<any> = new EventEmitter();
-    @Output() change: EventEmitter<any> = new EventEmitter();
+    @Output() focus:EventEmitter<any> = new EventEmitter();
+    @Output() blur:EventEmitter<any> = new EventEmitter();
+    @Output() change:EventEmitter<any> = new EventEmitter();
 
-    searchTerm: string = '';
-    resultsComponent: any;
-    quickNoteResults: any;
-    formattedNote: any;
-    basicNote: any;
-    isTagging: boolean;
-    taggingMode: string;
-    model: any;
-    onModelChange: Function = () => {
+    searchTerm:string = '';
+    resultsComponent:any;
+    quickNoteResults:any;
+    formattedNote:any;
+    basicNote:any;
+    isTagging:boolean;
+    taggingMode:string;
+    model:any;
+    onModelChange:Function = () => {
     };
-    onModelTouched: Function = () => {
+    onModelTouched:Function = () => {
     };
 
-    constructor(element: ElementRef, private componentUtils: ComponentUtils) {
+    constructor(element:ElementRef, private componentUtils:ComponentUtils) {
         super(element);
         // Bind to the active change event from the OutsideClick
         this.onActiveChange.subscribe(active => {
@@ -294,7 +294,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
         this.onModelTouched();
     }
 
-    writeValue(model: any): void {
+    writeValue(model:any):void {
         if (model && (model.references || model.note)) {
             this.model = {
                 note: model.note || '',
@@ -312,11 +312,11 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
         }
     }
 
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn:Function):void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn:Function):void {
         this.onModelTouched = fn;
     }
 }

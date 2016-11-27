@@ -1,7 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 // Vendor
-import { NovoToastService } from './../../../../novo-elements';
+import { NovoToastService } from './../../../../index';
 // APP
 let BasicDemoTpl = require('./templates/BasicDemo.html');
 let PersistSelectionDemoTpl = require('./templates/PersistSelectionDemo.html');
@@ -196,7 +196,7 @@ export class CategoryDropdownDemoComponent {
         'Other Inputs': JSON.stringify(this.footerConfig)
     };
 
-    constructor(private toaster: NovoToastService) {
+    constructor(private toaster:NovoToastService) {
         this.toaster = toaster;
     }
 

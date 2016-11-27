@@ -2,10 +2,10 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
 export interface NovoFormGroup {
-    layout?: any;
-    controls?: any;
-    value?: any;
-    valid?: boolean;
+    layout?:any;
+    controls?:any;
+    value?:any;
+    valid?:boolean;
 }
 
 @Component({
@@ -25,9 +25,9 @@ export interface NovoFormGroup {
     `
 })
 export class NovoDynamicFormElement implements OnInit, OnChanges {
-    @Input() controls: Array<any> = [];
-    @Input() form: NovoFormGroup;
-    @Input() layout: string;
+    @Input() controls:Array<any> = [];
+    @Input() form:NovoFormGroup;
+    @Input() layout:string;
 
     allFieldsRequired = false;
     allFieldsNotRequired = false;
@@ -41,8 +41,8 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
 
     ngOnChanges() {
         if (this.controls) {
-            let requiredFields: Array<any> = [];
-            let nonRequiredFields: Array<any> = [];
+            let requiredFields:Array<any> = [];
+            let nonRequiredFields:Array<any> = [];
 
             this.controls.forEach(control => {
                 if (control.required) {

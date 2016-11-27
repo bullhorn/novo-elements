@@ -29,9 +29,9 @@ const template = `
     template: template
 })
 export class ListDemoComponent {
-    private ListDemoTpl: string = ListDemoTpl;
-    private ThemedListDemoTpl: string = ThemedListDemoTpl;
-    private pulseItems: any;
+    private ListDemoTpl:string = ListDemoTpl;
+    private ThemedListDemoTpl:string = ThemedListDemoTpl;
+    private pulseItems:any;
 
     constructor() {
         let ONE_HOUR = 60 * 60 * 1000;
@@ -102,7 +102,7 @@ export class ListDemoComponent {
 
     buildItems(resp) {
         for (let obj of resp) {
-            let item: any = {};
+            let item:any = {};
 
             /*
              ||| This is the item structure to be pushed to pulseItems[] and used

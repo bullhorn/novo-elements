@@ -12,14 +12,14 @@ import { ComponentUtils } from './../../../../utils/component-utils/ComponentUti
     `
 })
 export class RowDetails implements OnInit {
-    @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
+    @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
 
-    @Input() data: any;
-    @Input() renderer: any;
+    @Input() data:any;
+    @Input() renderer:any;
 
-    value: any = '';
+    value:any = '';
 
-    constructor(private element: ElementRef, private componentUtils: ComponentUtils) {
+    constructor(private element:ElementRef, private componentUtils:ComponentUtils) {
     }
 
     ngOnInit() {

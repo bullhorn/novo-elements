@@ -6,7 +6,7 @@ let TableDemoTpl = require('./templates/TableDemo.html');
 let DetailsTableDemoTpl = require('./templates/DetailsTableDemo.html');
 let SelectAllTableDemoTpl = require('./templates/SelectAllTableDemo.html');
 // Vendor
-import { DateCell, BaseRenderer } from './../../../../novo-elements';
+import { DateCell, BaseRenderer } from './../../../../index';
 
 const template = `
 <div class="container">
@@ -64,19 +64,19 @@ export class ExtraDetails extends BaseRenderer {
     template: template
 })
 export class TableDemoComponent implements OnInit {
-    private TableDemoTpl: string = TableDemoTpl;
-    private DetailsTableDemoTpl: string = DetailsTableDemoTpl;
-    private SelectAllTableDemoTpl: string = SelectAllTableDemoTpl;
-    private customRowOptions: Array<any> = [
+    private TableDemoTpl:string = TableDemoTpl;
+    private DetailsTableDemoTpl:string = DetailsTableDemoTpl;
+    private SelectAllTableDemoTpl:string = SelectAllTableDemoTpl;
+    private customRowOptions:Array<any> = [
         { label: '10', value: 10 },
         { label: '20', value: 20 },
         { label: '30', value: 30 },
         { label: '40', value: 40 }
     ];
-    private theme: string;
-    private basic: any;
-    private details: any;
-    private selectAll: any;
+    private theme:string;
+    private basic:any;
+    private details:any;
+    private selectAll:any;
 
     constructor() {
         let columns = [

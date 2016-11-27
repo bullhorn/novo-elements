@@ -12,5 +12,5 @@ import { BaseRenderer } from '../base-renderer/BaseRenderer';
     `
 })
 export class DateCell extends BaseRenderer {
-    @Input() value: any;
+    @Input() value:any;
 }

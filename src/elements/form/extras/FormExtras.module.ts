@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 // APP
-import { NovoButtonModule, NovoSelectModule, NovoLoadingModule } from './../../../../novo-elements';
+import { NovoButtonModule } from './../../button/Button.module';
+import { NovoSelectModule } from './../../select/Select.module';
+import { NovoLoadingModule } from './../../loading/Loading.module';
 import { NovoAddressElement } from './address/Address';
 import { NovoCheckboxElement } from './checkbox/Checkbox';
 import { NovoCheckListElement } from './checkbox/CheckList';

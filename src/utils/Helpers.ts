@@ -31,21 +31,21 @@ export class Helpers {
     /**
      * Checks to see if the object is a string
      */
-    static isString(obj: any) {
+    static isString(obj:any) {
         return typeof obj === 'string';
     }
 
     /**
      * Checks to see if the object is a undefined or null
      */
-    static isBlank(obj: any): boolean {
+    static isBlank(obj:any):boolean {
         return obj === undefined || obj === null;
     }
 
     /**
      * Checks to see if the object is a function
      */
-    static isFunction(obj: any): boolean {
+    static isFunction(obj:any):boolean {
         return typeof obj === 'function';
     }
 }

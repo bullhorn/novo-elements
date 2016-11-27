@@ -7,12 +7,12 @@ import { Helpers } from '../Helpers';
  * Outside click helper, makes to set the element as inactive when clicking outside of it
  */
 export class OutsideClick implements OnDestroy {
-    element: ElementRef;
-    active: boolean = false;
-    onOutsideClick: any;
-    onActiveChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    element:ElementRef;
+    active:boolean = false;
+    onOutsideClick:any;
+    onActiveChange:EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    constructor(element: ElementRef) {
+    constructor(element:ElementRef) {
         // Component element
         this.element = element;
         // Outside click handler

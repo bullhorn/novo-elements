@@ -2,29 +2,29 @@
 import { Component, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 // Vendor
-import { NovoToastService, NovoModalService } from './../../novo-elements';
+import { NovoToastService, NovoModalService } from './../../index';
 
 @Component({
     selector: 'demo-app',
     template: require('./App.html')
 })
 export class DemoComponent {
-    menuOpen: boolean = false;
-    version: string;
-    designRoutes: Array<any>;
-    componentRoutes: Array<any>;
-    utilRoutes: Array<any>;
+    menuOpen:boolean = false;
+    version:string;
+    designRoutes:Array<any>;
+    componentRoutes:Array<any>;
+    utilRoutes:Array<any>;
 
-    constructor(router: Router, private viewContainerRef: ViewContainerRef, toaster: NovoToastService, modalService: NovoModalService) {
+    constructor(router:Router, private viewContainerRef:ViewContainerRef, toaster:NovoToastService, modalService:NovoModalService) {
         toaster.parentViewContainer = viewContainerRef;
         modalService.parentViewContainer = viewContainerRef;
 
         this.menuOpen = false;
         this.version = VERSION;
 
-        this.designRoutes = router.config.filter((r: any) => r.section === 'design').sort(this.sortMenu);
-        this.componentRoutes = router.config.filter((r: any) => r.section === 'components').sort(this.sortMenu);
-        this.utilRoutes = router.config.filter((r: any) => r.section === 'utils').sort(this.sortMenu);
+        this.designRoutes = router.config.filter((r:any) => r.section === 'design').sort(this.sortMenu);
+        this.componentRoutes = router.config.filter((r:any) => r.section === 'components').sort(this.sortMenu);
+        this.utilRoutes = router.config.filter((r:any) => r.section === 'utils').sort(this.sortMenu);
 
         router.events.subscribe(() => {
             document.body.scrollTop = 0;

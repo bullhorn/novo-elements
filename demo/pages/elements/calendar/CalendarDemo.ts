@@ -37,16 +37,16 @@ const template = `
     template: template
 })
 export class CalendarDemoComponent {
-    CalendarDemoTpl: string = CalendarDemoTpl;
-    TimeDemoTpl: string = TimeDemoTpl;
-    RangeDemoTpl: string = RangeDemoTpl;
+    CalendarDemoTpl:string = CalendarDemoTpl;
+    TimeDemoTpl:string = TimeDemoTpl;
+    RangeDemoTpl:string = RangeDemoTpl;
 
-    time: Date = new Date();
-    dateOne: Date = new Date();
-    dateTwo: Date = new Date();
-    start: any = moment().subtract(1, 'months');
-    end: any = moment().add(1, 'months');
-    value: any = {
+    time:Date = new Date();
+    dateOne:Date = new Date();
+    dateTwo:Date = new Date();
+    start:any = moment().subtract(1, 'months');
+    end:any = moment().add(1, 'months');
+    value:any = {
         startDate: null,
         endDate: null
     };

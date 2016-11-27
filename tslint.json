@@ -23,7 +23,6 @@
     "no-console": [
       true,
       "debug",
-      "info",
       "time",
       "timeEnd",
       "trace"
@@ -78,8 +77,7 @@
       "check-branch",
       "check-decl",
       "check-operator",
-      "check-separator",
-      "check-type"
+      "check-separator"
     ],
     "directive-selector-name": [
       true,

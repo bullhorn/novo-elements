@@ -46,16 +46,16 @@ import { Helpers } from './../../utils/Helpers';
     }
 })
 export class NovoCategoryDropdownElement extends OutsideClick implements OnInit, OnDestroy {
-    _query: string = '';
-    _categoryMap: any = {};
-    _categories: string[] = [];
-    clickHandler: Function;
-    _masterCategoryMap: any;
-    _queryTimeout: any;
+    _query:string = '';
+    _categoryMap:any = {};
+    _categories:string[] = [];
+    clickHandler:Function;
+    _masterCategoryMap:any;
+    _queryTimeout:any;
     // Boolean to keep the selection persist when closing the dropdown
-    @Input() persistSelection: boolean = false;
+    @Input() persistSelection:boolean = false;
     // Boolean to close the dropdown on selection
-    @Input() closeOnSelect: boolean = false;
+    @Input() closeOnSelect:boolean = false;
     // Search Config
     // {
     //   placeholder: 'STRING' // defaults to "SEARCH" - placeholder for search input
@@ -63,24 +63,24 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
     //   debounce: 'NUMBER (in MS)' // defaults to 300ms - debounce time for the search
     //   compare: 'FUNCTION' // default to simple indexOf - compare function for category search, should accept (query, item) and return true/false
     // }
-    @Input() search: any;
+    @Input() search:any;
     // Footer config
     // {
     //   align: 'STRING' // defaults to "right" - alignment of the links
     //   links: 'ARRAY' // array of links to go into the footer, be away of spacing - { label, callback } for the object inside
     // }
-    @Input() footer: any;
+    @Input() footer:any;
     // Event that is emitted whenever an item is selected
-    @Output('itemSelected') _select: EventEmitter<any> = new EventEmitter();
+    @Output('itemSelected') _select:EventEmitter<any> = new EventEmitter();
 
     @Input()
-    set categories(categories: any) {
+    set categories(categories:any) {
         this._masterCategoryMap = Object.assign({}, categories);
         this._categoryMap = Object.assign({}, categories);
         this._categories = Object.keys(categories);
     }
 
-    constructor(element: ElementRef) {
+    constructor(element:ElementRef) {
         super(element);
         this.clickHandler = this.toggleActive.bind(this);
     }

@@ -18,9 +18,9 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
     }
 })
 export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestroy {
-    clickHandler: any;
+    clickHandler:any;
 
-    constructor(element: ElementRef) {
+    constructor(element:ElementRef) {
         super(element);
         this.clickHandler = this.toggleActive.bind(this);
     }
@@ -60,11 +60,11 @@ export class NovoListElement {
     }
 })
 export class NovoItemElement {
-    @Input() disabled: boolean;
-    @Input() showAfterSelect: boolean;
-    @Output() action: EventEmitter<any> = new EventEmitter();
+    @Input() disabled:boolean;
+    @Input() showAfterSelect:boolean;
+    @Output() action:EventEmitter<any> = new EventEmitter();
 
-    constructor(private dropdown: NovoDropdownElement) {
+    constructor(private dropdown:NovoDropdownElement) {
     }
 
     onClick() {

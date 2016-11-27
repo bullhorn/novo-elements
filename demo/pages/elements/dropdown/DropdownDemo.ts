@@ -22,7 +22,7 @@ const template = `
     template: template
 })
 export class DropdownDemoComponent {
-    private DropdownDemoTpl: string = DropdownDemoTpl;
+    private DropdownDemoTpl:string = DropdownDemoTpl;
 
     clickMe(data) {
         console.log('CLICKED!', data);

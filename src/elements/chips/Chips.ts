@@ -26,10 +26,10 @@ const CHIPS_VALUE_ACCESSOR = {
   `
 })
 export class NovoChipElement {
-    @Input() type: any;
-    @Output() select: EventEmitter<any> = new EventEmitter();
-    @Output() remove: EventEmitter<any> = new EventEmitter();
-    entity: string;
+    @Input() type:any;
+    @Output() select:EventEmitter<any> = new EventEmitter();
+    @Output() remove:EventEmitter<any> = new EventEmitter();
+    entity:string;
 
     onRemove(e) {
         if (e) {
@@ -82,27 +82,27 @@ export class NovoChipElement {
     }
 })
 export class NovoChipsElement extends OutsideClick implements OnInit {
-    @Input() placeholder: string = '';
-    @Input() source: any;
-    @Input() type: any;
-    @Output() changed: EventEmitter<any> = new EventEmitter();
-    @Output() focus: EventEmitter<any> = new EventEmitter();
-    @Output() blur: EventEmitter<any> = new EventEmitter();
-    items: Array<any> = [];
-    selected: any = null;
-    config: Object = {};
-    model: any;
-    itemToAdd: any;
+    @Input() placeholder:string = '';
+    @Input() source:any;
+    @Input() type:any;
+    @Output() changed:EventEmitter<any> = new EventEmitter();
+    @Output() focus:EventEmitter<any> = new EventEmitter();
+    @Output() blur:EventEmitter<any> = new EventEmitter();
+    items:Array<any> = [];
+    selected:any = null;
+    config:Object = {};
+    model:any;
+    itemToAdd:any;
     // private data model
-    _value: any = '';
+    _value:any = '';
     _items = new ReplaySubject(1);
     // Placeholders for the callbacks
-    onModelChange: Function = () => {
+    onModelChange:Function = () => {
     };
-    onModelTouched: Function = () => {
+    onModelTouched:Function = () => {
     };
 
-    constructor(element: ElementRef) {
+    constructor(element:ElementRef) {
         super(element);
         this.element = element;
     }
@@ -248,16 +248,16 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
         this.blur.emit(e);
     }
 
-    writeValue(model: any): void {
+    writeValue(model:any):void {
         this.model = model;
         this.setItems();
     }
 
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn:Function):void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn:Function):void {
         this.onModelTouched = fn;
     }
 }

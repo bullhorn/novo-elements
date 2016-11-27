@@ -69,7 +69,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
     }
 })
 export class EntityPickerResults extends BasePickerResults {
-    constructor(element: ElementRef, private labels: NovoLabelService) {
+    constructor(element:ElementRef, private labels:NovoLabelService) {
         super(element);
     }
 

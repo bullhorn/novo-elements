@@ -35,16 +35,16 @@ import { Component, Input, OnChanges } from '@angular/core';
     `
 })
 export class NovoButtonElement implements OnChanges {
-    @Input() icon: string;
-    @Input() color: string;
-    @Input() side: string;
-    @Input() theme: string;
-    @Input() loading: boolean;
+    @Input() icon:string;
+    @Input() color:string;
+    @Input() side:string;
+    @Input() theme:string;
+    @Input() loading:boolean;
 
-    leftSide: boolean = false;
-    rightSide: boolean = true;
-    iconClass: string;
-    flex: string;
+    leftSide:boolean = false;
+    rightSide:boolean = true;
+    iconClass:string;
+    flex:string;
 
     ngOnChanges() {
         this.iconClass = (this.icon && !this.loading) ? `bhi-${this.icon}` : '';

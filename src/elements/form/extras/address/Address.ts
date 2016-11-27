@@ -24,13 +24,13 @@ const ADDRESS_VALUE_ACCESSOR = {
     `
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
-    states: Array<any> = [];
-    countries: Array<any> = getCountries();
+    states:Array<any> = [];
+    countries:Array<any> = getCountries();
 
     model;
-    onModelChange: Function = () => {
+    onModelChange:Function = () => {
     };
-    onModelTouched: Function = () => {
+    onModelTouched:Function = () => {
     };
 
     ngOnInit() {
@@ -75,7 +75,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         this.onModelChange(this.model);
     }
 
-    writeValue(model: any): void {
+    writeValue(model:any):void {
         if (!this.model || !this.model.length) {
             this.model = {
                 countryID: 1,
@@ -86,11 +86,11 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         }
     }
 
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn:Function):void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn:Function):void {
         this.onModelTouched = fn;
     }
 }

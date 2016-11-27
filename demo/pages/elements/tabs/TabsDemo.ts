@@ -48,11 +48,11 @@ const template = `
     template: template
 })
 export class TabsDemoComponent {
-    private ColorDemoTpl: string = ColorDemoTpl;
-    private WhiteDemoTpl: string = WhiteDemoTpl;
-    private VerticalDemoTpl: string = VerticalDemoTpl;
-    private ButtonTabDemoTpl: string = ButtonTabDemoTpl;
-    private RouterDemoTpl: string = RouterDemoTpl;
+    private ColorDemoTpl:string = ColorDemoTpl;
+    private WhiteDemoTpl:string = WhiteDemoTpl;
+    private VerticalDemoTpl:string = VerticalDemoTpl;
+    private ButtonTabDemoTpl:string = ButtonTabDemoTpl;
+    private RouterDemoTpl:string = RouterDemoTpl;
 
     tabSelected() {
         console.log('TAB SELECTED');

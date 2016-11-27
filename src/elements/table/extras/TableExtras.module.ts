@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 // APP
-import { NovoSelectModule } from './../../../../novo-elements';
+import { NovoSelectModule } from './../../select/Select.module';
 import { Pagination } from './pagination/Pagination';
 import { RowDetails } from './row-details/RowDetails';
 import { TableCell } from './table-cell/TableCell';

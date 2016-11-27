@@ -37,20 +37,20 @@ const template = `
     template: template
 })
 export class SelectDemoComponent {
-    private BasicSelectDemoTpl: string = BasicSelectDemoTpl;
-    private LongSelectDemoTpl: string = LongSelectDemoTpl;
-    private placeholder: string = 'Select...';
-    private options: Array<string> = ['Alpha', 'Bravo', 'Charlie'];
-    private withNumbers: Array<any> = [
+    private BasicSelectDemoTpl:string = BasicSelectDemoTpl;
+    private LongSelectDemoTpl:string = LongSelectDemoTpl;
+    private placeholder:string = 'Select...';
+    private options:Array<string> = ['Alpha', 'Bravo', 'Charlie'];
+    private withNumbers:Array<any> = [
         { label: 'One', value: 1 },
         { label: 'Two', value: 2 },
         { label: 'Zero', value: 0 }
     ];
-    private withNumbersValue: number = 0;
-    private states: Array<string> = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-    private value: string = 'Bravo';
-    private state: any;
-    private headerConfig: any = {
+    private withNumbersValue:number = 0;
+    private states:Array<string> = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+    private value:string = 'Bravo';
+    private state:any;
+    private headerConfig:any = {
         label: 'Add New Item',
         placeholder: 'Enter item here',
         onSave: this.create.bind(this)

@@ -7,7 +7,7 @@ let ExtrasTimelineDemoTpl = require('./templates/ExtrasTimelineDemo.html');
 let ExtrasBestTimeDemoTpl = require('./templates/ExtrasBestTimeDemo.html');
 let ExtrasChartDonutDemoTpl = require('./templates/ExtrasChartDemoDemo.html');
 // Vendor
-import { NovoToastService } from './../../../../novo-elements';
+import { NovoToastService } from './../../../../index';
 
 const template = `
 <div class="container">
@@ -73,20 +73,20 @@ const template = `
 })
 export class CardDemoComponent {
     // Templates
-    AttributeCardDemoTpl: string = AttributeCardDemoTpl;
-    FullConfigCardDemoTpl: string = FullConfigCardDemoTpl;
-    ExtrasTimelineDemoTpl: string = ExtrasTimelineDemoTpl;
-    ExtrasBestTimeDemoTpl: string = ExtrasBestTimeDemoTpl;
-    ExtrasChartDonutDemoTpl: string = ExtrasChartDonutDemoTpl;
+    AttributeCardDemoTpl:string = AttributeCardDemoTpl;
+    FullConfigCardDemoTpl:string = FullConfigCardDemoTpl;
+    ExtrasTimelineDemoTpl:string = ExtrasTimelineDemoTpl;
+    ExtrasBestTimeDemoTpl:string = ExtrasBestTimeDemoTpl;
+    ExtrasChartDonutDemoTpl:string = ExtrasChartDonutDemoTpl;
 
     // Config for demos
-    refresh: boolean = true;
-    close: boolean = true;
-    move: boolean = true;
-    padding: boolean = true;
-    loading: boolean = true;
+    refresh:boolean = true;
+    close:boolean = true;
+    move:boolean = true;
+    padding:boolean = true;
+    loading:boolean = true;
 
-    fullConfig: any = {
+    fullConfig:any = {
         refresh: false,
         icon: 'email',
         messageIcon: 'email',
@@ -99,21 +99,21 @@ export class CardDemoComponent {
         padding: true
     };
 
-    start: number = 2000;
-    end: number = 2005;
-    created: number = 1995;
+    start:number = 2000;
+    end:number = 2005;
+    created:number = 1995;
 
-    bestLabel: string = 'BEST TIME TO CONTACT';
-    bestTime: string = '1-PM';
-    bestDay: string = 'Friday';
-    message: string;
-    messageIcon: string;
+    bestLabel:string = 'BEST TIME TO CONTACT';
+    bestTime:string = '1-PM';
+    bestDay:string = 'Friday';
+    message:string;
+    messageIcon:string;
 
-    donutValue: number = 0.5;
-    donutColor: string = '#662255';
-    donutLabel: string = 'Probability of Win %';
+    donutValue:number = 0.5;
+    donutColor:string = '#662255';
+    donutLabel:string = 'Probability of Win %';
 
-    constructor(private toaster: NovoToastService) {
+    constructor(private toaster:NovoToastService) {
     }
 
     onClose() {

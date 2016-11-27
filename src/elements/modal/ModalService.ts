@@ -6,9 +6,9 @@ import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 @Injectable()
 export class NovoModalService {
-    _parentViewContainer: any = null;
+    _parentViewContainer:any = null;
 
-    constructor(private componentUtils: ComponentUtils) {
+    constructor(private componentUtils:ComponentUtils) {
     }
 
     set parentViewContainer(view) {

@@ -13,8 +13,8 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
     `
 })
 export class NovoListElement {
-    @Input() theme: string;
-    @Input() direction: string;
+    @Input() theme:string;
+    @Input() direction:string;
 }
 
 @Component({
@@ -38,10 +38,10 @@ export class NovoListItemElement {
     `
 })
 export class NovoItemAvatarElement implements OnChanges, OnInit {
-    @Input() icon: string;
+    @Input() icon:string;
 
-    iconClass: string;
-    classMap: any;
+    iconClass:string;
+    classMap:any;
 
     ngOnChanges() {
         this.iconClass = (this.icon) ? `bhi-${this.icon}` : null;
@@ -73,7 +73,7 @@ export class NovoItemTitleElement {
     `
 })
 export class NovoItemContentElement {
-    @Input() direction: string;
+    @Input() direction:string;
 }
 
 @Component({

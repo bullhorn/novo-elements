@@ -13,14 +13,14 @@ import { Directive, EventEmitter, ElementRef, OnInit, Input, Output } from '@ang
     }
 })
 export class ThOrderable implements OnInit {
-    @Input('novoThOrderable') column: any;
-    @Output() onOrderChange: EventEmitter<any> = new EventEmitter();
+    @Input('novoThOrderable') column:any;
+    @Output() onOrderChange:EventEmitter<any> = new EventEmitter();
 
-    table: any;
-    clone: any;
-    target: any;
+    table:any;
+    clone:any;
+    target:any;
 
-    constructor(private element: ElementRef) {
+    constructor(private element:ElementRef) {
         this.element = element;
     }
 

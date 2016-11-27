@@ -17,9 +17,9 @@ export class UtilsElement {
     `
 })
 export class UtilActionElement {
-    @Input() icon: string;
-    @Input() inverse: boolean;
-    @Input() disabled: boolean;
+    @Input() icon:string;
+    @Input() inverse:boolean;
+    @Input() disabled:boolean;
 }
 
 @Component({
@@ -37,14 +37,14 @@ export class UtilActionElement {
     `
 })
 export class NovoHeaderElement implements OnInit {
-    @Input() title: string;
-    @Input() theme: string;
-    @Input() icon: string;
-    @Input() config: any;
+    @Input() title:string;
+    @Input() theme:string;
+    @Input() icon:string;
+    @Input() config:any;
 
-    inverse: string = 'inverse';
-    headerClass: string = 'novo-header';
-    iconClass: string;
+    inverse:string = 'inverse';
+    headerClass:string = 'novo-header';
+    iconClass:string;
 
     ngOnInit() {
         this.iconClass = `bhi-${this.icon}`;

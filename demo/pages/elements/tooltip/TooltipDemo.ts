@@ -41,12 +41,12 @@ const template = `
     template: template
 })
 export class TooltipDemoComponent {
-    private tooltipActive: boolean;
-    private TooltipOptionsDemoTpl: string = TooltipOptionsDemoTpl;
-    private TooltipTypesDemoTpl: string = TooltipTypesDemoTpl;
-    private TooltipPlacementDemoTpl: string = TooltipPlacementDemoTpl;
-    private TooltipAlignDemoTpl: string = TooltipAlignDemoTpl;
-    private TooltipToggleDemoTpl: string = TooltipToggleDemoTpl;
+    private tooltipActive:boolean;
+    private TooltipOptionsDemoTpl:string = TooltipOptionsDemoTpl;
+    private TooltipTypesDemoTpl:string = TooltipTypesDemoTpl;
+    private TooltipPlacementDemoTpl:string = TooltipPlacementDemoTpl;
+    private TooltipAlignDemoTpl:string = TooltipAlignDemoTpl;
+    private TooltipToggleDemoTpl:string = TooltipToggleDemoTpl;
 
     toggleTooltip() {
         this.tooltipActive = !this.tooltipActive;

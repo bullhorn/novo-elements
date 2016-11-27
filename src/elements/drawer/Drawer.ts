@@ -11,9 +11,9 @@ export const POSITION_TOP = 'top';
 export const POSITION_BOTTOM = 'bottom';
 
 class DrawerService {
-    closeDrawerBind: any;
-    openScope: any;
-    scope: any;
+    closeDrawerBind:any;
+    openScope:any;
+    scope:any;
 
     constructor() {
         this.closeDrawerBind = this.closeDrawer.bind(this);
@@ -70,15 +70,15 @@ const drawerService = new DrawerService();
     }
 })
 export class NovoDrawerElement implements OnInit {
-    @Input() autoClose: any;
-    @Input() position: string;
-    @Output() onDrawerToggle: EventEmitter<any> = new EventEmitter();
+    @Input() autoClose:any;
+    @Input() position:string;
+    @Output() onDrawerToggle:EventEmitter<any> = new EventEmitter();
 
-    _isOpen: boolean;
-    drawerEl: any;
-    toggleEl: any;
+    _isOpen:boolean;
+    drawerEl:any;
+    toggleEl:any;
 
-    constructor(private el: ElementRef) {
+    constructor(private el:ElementRef) {
     }
 
     ngOnInit() {
@@ -99,7 +99,7 @@ export class NovoDrawerElement implements OnInit {
         this.toggleEl = drawerToggle.el;
     }
 
-    toggle(open?: any) {
+    toggle(open?:any) {
         return this.isOpen = open ? !!open : !this.isOpen;
     }
 
@@ -131,7 +131,7 @@ export class NovoDrawerElement implements OnInit {
     selector: '[drawerContent]'
 })
 export class NovoDrawerContentElement implements OnInit {
-    constructor(private drawer: NovoDrawerElement, private el: ElementRef) {
+    constructor(private drawer:NovoDrawerElement, private el:ElementRef) {
     }
 
     ngOnInit() {
@@ -148,9 +148,9 @@ export class NovoDrawerContentElement implements OnInit {
     }
 })
 export class NovoDrawerToggleElement implements OnInit {
-    @Input() disabled: boolean = false;
+    @Input() disabled:boolean = false;
 
-    constructor(private drawer: NovoDrawerElement, private el: ElementRef) {
+    constructor(private drawer:NovoDrawerElement, private el:ElementRef) {
     }
 
     ngOnInit() {

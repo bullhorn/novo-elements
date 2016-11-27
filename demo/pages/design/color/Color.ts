@@ -1,15 +1,15 @@
 // NG2
 import { Component } from '@angular/core';
 // Vendor
-import { NovoToastService } from './../../../../novo-elements';
+import { NovoToastService } from './../../../../index';
 
 @Component({
     selector: 'color',
     template: require('./Color.html')
 })
 export class ColorComponent {
-    color: String = 'background';
-    primaryColors: Array<any> = [
+    color:String = 'background';
+    primaryColors:Array<any> = [
         {
             name: 'navigation',
             variables: ['navigation'],
@@ -36,7 +36,7 @@ export class ColorComponent {
             hex: '747884'
         }
     ];
-    entityColors: Array<any> = [
+    entityColors:Array<any> = [
         {
             name: 'lead',
             variables: ['lead'],
@@ -78,7 +78,7 @@ export class ColorComponent {
             hex: '0B344F'
         }
     ];
-    analyticsColors: Array<any> = [
+    analyticsColors:Array<any> = [
         {
             name: 'grapefruit',
             variables: ['grapefruit'],
@@ -125,9 +125,9 @@ export class ColorComponent {
             hex: '967ADC'
         }
     ];
-    options: any;
+    options:any;
 
-    constructor(private toaster: NovoToastService) {
+    constructor(private toaster:NovoToastService) {
     }
 
     changeColor(color) {

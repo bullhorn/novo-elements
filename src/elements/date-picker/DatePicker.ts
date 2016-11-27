@@ -73,14 +73,14 @@ const DATE_PICKER_VALUE_ACCESSOR = {
 })
 
 export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
-    @Input() minYear: any;
-    @Input() maxYear: any;
-    @Input() start: any;
-    @Input() end: any;
-    @Input() inline: any;
-    @Input() range: any;
+    @Input() minYear:any;
+    @Input() maxYear:any;
+    @Input() start:any;
+    @Input() end:any;
+    @Input() inline:any;
+    @Input() range:any;
     // Select callback for output
-    @Output() onSelect: EventEmitter<any> = new EventEmitter(false);
+    @Output() onSelect:EventEmitter<any> = new EventEmitter(false);
     // List of all the weekdays (use moment to localize)
     weekday = moment.weekdays();
     // List of all months (use moment to localize)
@@ -90,16 +90,16 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     // Default view mode (select days)
     view = 'days';
 
-    model: any;
-    month: any;
-    weeks: any;
-    selected: any;
-    selected2: any;
-    heading: any;
-    calendarRangeEnd: any;
-    onModelChange: Function = () => {
+    model:any;
+    month:any;
+    weeks:any;
+    selected:any;
+    selected2:any;
+    heading:any;
+    calendarRangeEnd:any;
+    onModelChange:Function = () => {
     };
-    onModelTouched: Function = () => {
+    onModelTouched:Function = () => {
     };
 
     ngOnInit() {
@@ -322,16 +322,16 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     }
 
     // ValueAccessor Functions
-    writeValue(model: any): void {
+    writeValue(model:any):void {
         this.model = model;
         this.updateView(model, false, true);
     }
 
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn:Function):void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn:Function):void {
         this.onModelTouched = fn;
     }
 }

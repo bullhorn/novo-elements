@@ -21,19 +21,19 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
     `
 })
 export class NovoToastElement implements OnInit, OnChanges {
-    @Input() theme: string = 'danger';
-    @Input() icon: string = 'caution';
-    @Input() title: string;
-    @Input() message: string;
+    @Input() theme:string = 'danger';
+    @Input() icon:string = 'caution';
+    @Input() title:string;
+    @Input() message:string;
 
-    show: boolean = false;
-    animate: boolean = false;
-    parent: any = null;
-    launched: boolean = false;
-    position: any;
-    time: any;
-    iconClass: string;
-    alertTheme: string;
+    show:boolean = false;
+    animate:boolean = false;
+    parent:any = null;
+    launched:boolean = false;
+    position:any;
+    time:any;
+    iconClass:string;
+    alertTheme:string;
 
     ngOnInit() {
         if (!this.launched) {

@@ -9,12 +9,12 @@ import { Directive, EventEmitter, ElementRef, Renderer, OnChanges, OnInit, Input
     }
 })
 export class TableFilter implements OnInit, OnChanges {
-    @Input('novoTableFilter') config: any;
-    @Output() onFilterChange: EventEmitter<any> = new EventEmitter();
+    @Input('novoTableFilter') config:any;
+    @Output() onFilterChange:EventEmitter<any> = new EventEmitter();
 
-    filterThrottle: any;
+    filterThrottle:any;
 
-    constructor(private element: ElementRef, private renderer: Renderer) {
+    constructor(private element:ElementRef, private renderer:Renderer) {
         this.element = element;
         this.renderer = renderer;
     }

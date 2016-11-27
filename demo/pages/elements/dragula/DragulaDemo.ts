@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 let DragulaDemoTpl = require('./templates/DragulaDemo.html');
 let DragulaModelDemoTpl = require('./templates/DragulaModelDemo.html');
 // Vendor
-import { NovoDragulaService } from './../../../../novo-elements';
+import { NovoDragulaService } from './../../../../index';
 
 const template = `
 <div class="container">
@@ -28,12 +28,12 @@ const template = `
     template: template
 })
 export class DragulaDemoComponent {
-    private DragulaDemoTpl: string = DragulaDemoTpl;
-    private DragulaModelDemoTpl: string = DragulaModelDemoTpl;
-    private many: Array<string> = ['The', 'possibilities', 'are', 'endless!'];
-    private many2: Array<string> = ['Explore', 'them'];
+    private DragulaDemoTpl:string = DragulaDemoTpl;
+    private DragulaModelDemoTpl:string = DragulaModelDemoTpl;
+    private many:Array<string> = ['The', 'possibilities', 'are', 'endless!'];
+    private many2:Array<string> = ['Explore', 'them'];
 
-    constructor(private dragulaService: NovoDragulaService) {
+    constructor(private dragulaService:NovoDragulaService) {
         dragulaService.dropModel.subscribe((value) => {
             this.onDropModel(value.slice(1));
         });

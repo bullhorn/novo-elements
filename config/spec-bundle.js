@@ -22,6 +22,21 @@ testing.TestBed.initTestEnvironment(
     browser.platformBrowserDynamicTesting()
 );
 
+/**
+ * Add Providers (was removed)
+ * @param providers
+ */
+function addProviders(providers:Array<any>):void {
+    if (!providers) return;
+    TestBed.configureTestingModule({ providers: providers });
+}
+
+// Assign all these to the global namespace
+Object.assign(global, {
+    addProviders,
+    inject
+});
+
 var testContext = require.context('../src', true, /\.spec\.ts/);
 
 function requireAll(requireContext) {

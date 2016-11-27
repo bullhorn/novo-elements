@@ -5,18 +5,18 @@ import * as dragula from 'dragula';
 
 @Injectable()
 export class NovoDragulaService {
-    cancel: EventEmitter<any> = new EventEmitter();
-    cloned: EventEmitter<any> = new EventEmitter();
-    drag: EventEmitter<any> = new EventEmitter();
-    dragend: EventEmitter<any> = new EventEmitter();
-    drop: EventEmitter<any> = new EventEmitter();
-    out: EventEmitter<any> = new EventEmitter();
-    over: EventEmitter<any> = new EventEmitter();
-    remove: EventEmitter<any> = new EventEmitter();
-    shadow: EventEmitter<any> = new EventEmitter();
-    dropModel: EventEmitter<any> = new EventEmitter();
-    removeModel: EventEmitter<any> = new EventEmitter();
-    events: Array<string> = [
+    cancel:EventEmitter<any> = new EventEmitter();
+    cloned:EventEmitter<any> = new EventEmitter();
+    drag:EventEmitter<any> = new EventEmitter();
+    dragend:EventEmitter<any> = new EventEmitter();
+    drop:EventEmitter<any> = new EventEmitter();
+    out:EventEmitter<any> = new EventEmitter();
+    over:EventEmitter<any> = new EventEmitter();
+    remove:EventEmitter<any> = new EventEmitter();
+    shadow:EventEmitter<any> = new EventEmitter();
+    dropModel:EventEmitter<any> = new EventEmitter();
+    removeModel:EventEmitter<any> = new EventEmitter();
+    events:Array<string> = [
         'cancel',
         'cloned',
         'drag',
@@ -29,7 +29,7 @@ export class NovoDragulaService {
         'dropModel',
         'removeModel'
     ];
-    bags: Array<any> = [];
+    bags:Array<any> = [];
 
     /**
      * @name add

@@ -33,24 +33,24 @@ const FILE_VALUE_ACCESSOR = {
     `
 })
 export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDestroy {
-    @Input() name: string;
-    @Input() multiple: boolean = false;
-    @Input() disabled: boolean = false;
-    @Input() placeholder: string = 'Choose a file';
+    @Input() name:string;
+    @Input() multiple:boolean = false;
+    @Input() disabled:boolean = false;
+    @Input() placeholder:string = 'Choose a file';
 
-    value: Array<any> = [];
-    files: Array<any> = [];
-    model: any;
-    active: boolean = false;
-    commands: any;
-    visible: boolean;
-    target: any;
-    onModelChange: Function = () => {
+    value:Array<any> = [];
+    files:Array<any> = [];
+    model:any;
+    active:boolean = false;
+    commands:any;
+    visible:boolean;
+    target:any;
+    onModelChange:Function = () => {
     };
-    onModelTouched: Function = () => {
+    onModelTouched:Function = () => {
     };
 
-    constructor(private element: ElementRef) {
+    constructor(private element:ElementRef) {
         this.commands = {
             dragenter: this.dragEnterHandler.bind(this),
             dragleave: this.dragLeaveHandler.bind(this),
@@ -101,15 +101,15 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
         this.active = false;
     }
 
-    writeValue(model: any): void {
+    writeValue(model:any):void {
         this.model = model;
     }
 
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn:Function):void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn:Function):void {
         this.onModelTouched = fn;
     }
 
@@ -148,16 +148,16 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
 
 
 export class NovoFile {
-    name: string = '';
-    file: any;
-    type: any;
-    contentType: string = '';
-    lastModified: number = 0;
-    size: number = 0;
-    loaded: boolean = false;
-    fileContents: string;
-    dataURL: string;
-    reader: FileReader = new FileReader();
+    name:string = '';
+    file:any;
+    type:any;
+    contentType:string = '';
+    lastModified:number = 0;
+    size:number = 0;
+    loaded:boolean = false;
+    fileContents:string;
+    dataURL:string;
+    reader:FileReader = new FileReader();
 
     constructor(file) {
         this.name = file.name;
@@ -165,7 +165,7 @@ export class NovoFile {
         this.lastModified = file.lastModified;
         this.size = file.size;
         this.file = file;
-        this.reader.onload = (event: any) => {
+        this.reader.onload = (event:any) => {
             this.fileContents = event.target.result.split(',')[1];
             this.dataURL = event.target.result;
             this.loaded = true;

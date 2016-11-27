@@ -9,9 +9,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class CodeSnippet implements OnInit {
     @Input() code;
 
-    highlight: SafeHtml;
+    highlight:SafeHtml;
 
-    constructor(private sanitizer: DomSanitizer) {
+    constructor(private sanitizer:DomSanitizer) {
     }
 
     ngOnInit() {

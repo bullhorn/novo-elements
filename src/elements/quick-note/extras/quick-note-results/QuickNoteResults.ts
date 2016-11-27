@@ -29,9 +29,9 @@ import { Observable } from 'rxjs/Rx';
 })
 export class QuickNoteResults extends PickerResults {
     // Mode that the quick note is in for tagging
-    taggingMode: string = '';
+    taggingMode:string = '';
 
-    constructor(element: ElementRef, labels: NovoLabelService) {
+    constructor(element:ElementRef, labels:NovoLabelService) {
         super(element, labels);
     }
 

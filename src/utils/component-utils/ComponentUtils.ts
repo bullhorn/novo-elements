@@ -3,16 +3,16 @@ import { ComponentFactoryResolver, ComponentRef, Injectable, Injector, Reflectiv
 
 @Injectable()
 export class ComponentUtils {
-    componentFactoryResolver: ComponentFactoryResolver;
+    componentFactoryResolver:ComponentFactoryResolver;
 
-    constructor(componentFactoryResolver: ComponentFactoryResolver) {
+    constructor(componentFactoryResolver:ComponentFactoryResolver) {
         this.componentFactoryResolver = componentFactoryResolver;
     }
 
-    appendNextToLocation(ComponentClass, location: ViewContainerRef, providers?: ResolvedReflectiveProvider[]): ComponentRef<any> {
+    appendNextToLocation(ComponentClass, location:ViewContainerRef, providers?:ResolvedReflectiveProvider[]):ComponentRef<any> {
         let componentFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentClass);
         let parentInjector = location.parentInjector;
-        let childInjector: Injector = parentInjector;
+        let childInjector:Injector = parentInjector;
         if (providers && providers.length > 0) {
             childInjector = ReflectiveInjector.fromResolvedProviders(providers, parentInjector);
         }

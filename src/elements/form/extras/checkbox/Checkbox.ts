@@ -27,16 +27,16 @@ const CHECKBOX_VALUE_ACCESSOR = {
     `
 })
 export class NovoCheckboxElement implements ControlValueAccessor {
-    @Input() name: string;
-    @Input() label: string;
-    @Input() indeterminate: boolean = false;
-    @Input() disabled: boolean;
-    value: boolean = false;
+    @Input() name:string;
+    @Input() label:string;
+    @Input() indeterminate:boolean = false;
+    @Input() disabled:boolean;
+    value:boolean = false;
 
     model;
-    onModelChange: Function = () => {
+    onModelChange:Function = () => {
     };
-    onModelTouched: Function = () => {
+    onModelTouched:Function = () => {
     };
 
     select(event) {
@@ -45,15 +45,15 @@ export class NovoCheckboxElement implements ControlValueAccessor {
         this.onModelChange(this.model);
     }
 
-    writeValue(model: any): void {
+    writeValue(model:any):void {
         this.model = model;
     }
 
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn:Function):void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn:Function):void {
         this.onModelTouched = fn;
     }
 }

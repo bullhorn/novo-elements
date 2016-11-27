@@ -22,7 +22,7 @@ const template = `
     template: template
 })
 export class DrawerDemoComponent {
-    private DrawerDemoTpl: string = DrawerDemoTpl;
+    private DrawerDemoTpl:string = DrawerDemoTpl;
 
     drawerToggled(event) {
         console.log('Drawer Toggled', event);

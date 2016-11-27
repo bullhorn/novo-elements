@@ -16,14 +16,14 @@ import { ComponentUtils } from './../../../../utils/component-utils/ComponentUti
     `
 })
 export class TableCell implements OnInit {
-    @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
+    @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
 
-    @Input() column: any;
-    @Input() row: any;
+    @Input() column:any;
+    @Input() row:any;
 
-    value: any = '';
+    value:any = '';
 
-    constructor(private element: ElementRef, private componentUtils: ComponentUtils) {
+    constructor(private element:ElementRef, private componentUtils:ComponentUtils) {
         this.element = element;
         this.componentUtils = componentUtils;
     }

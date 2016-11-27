@@ -24,14 +24,14 @@ import { Component, ElementRef, Input, OnInit, OnChanges } from '@angular/core';
     `
 })
 export class CardDonutChartElement implements OnInit, OnChanges {
-    @Input() value: number;
+    @Input() value:number;
     @Input() label;
     @Input() color;
     chartFillMax;
     uid;
     isChartDrawing;
 
-    constructor(private element: ElementRef) {
+    constructor(private element:ElementRef) {
         // Geometric number that represents 100% of the chart area
         this.chartFillMax = 629;
         // Unique ID for instance

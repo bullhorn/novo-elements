@@ -23,7 +23,7 @@
     "pregalaxy": "npm run lint:save && npm run loc",
     "galaxy": "galaxy analyze"
   },
-  "main": "novo-elements.js",
+  "main": "index.js",
   "keywords": [
     "angular2"
   ],

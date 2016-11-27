@@ -25,14 +25,14 @@ const CHECKLIST_VALUE_ACCESSOR = {
     `
 })
 export class NovoCheckListElement implements ControlValueAccessor, OnInit {
-    @Input() name: string;
-    @Input() options: Array<any>;
+    @Input() name:string;
+    @Input() options:Array<any>;
 
-    _options: Array<any>;
-    model: any;
-    onModelChange: Function = () => {
+    _options:Array<any>;
+    model:any;
+    onModelChange:Function = () => {
     };
-    onModelTouched: Function = () => {
+    onModelTouched:Function = () => {
     };
 
     ngOnInit() {
@@ -67,18 +67,18 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
         }
     }
 
-    writeValue(model: any): void {
+    writeValue(model:any):void {
         this.model = model || [];
         if (model) {
             this.setupOptions();
         }
     }
 
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn:Function):void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn:Function):void {
         this.onModelTouched = fn;
     }
 }

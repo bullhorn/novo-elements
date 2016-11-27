@@ -4,7 +4,7 @@ import { BaseControl, NovoControlConfig } from './../BaseControl';
 export class DateControl extends BaseControl {
     controlType = 'date';
 
-    constructor(config: NovoControlConfig) {
+    constructor(config:NovoControlConfig) {
         super(config);
     }
 }

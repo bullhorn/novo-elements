@@ -5,7 +5,7 @@ export class NativeSelectControl extends BaseControl {
     controlType = 'native-select';
     options = [];
 
-    constructor(config: NovoControlConfig) {
+    constructor(config:NovoControlConfig) {
         super(config);
         this.options = config.options || [];
     }

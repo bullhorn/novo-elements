@@ -13,10 +13,10 @@ import { DomSanitizer } from '@angular/platform-browser';
     `
 })
 export class MultiCodeSnippet {
-    _sections: string[] = [];
-    _map: any = {};
+    _sections:string[] = [];
+    _map:any = {};
 
-    constructor(private sanitizer: DomSanitizer) {
+    constructor(private sanitizer:DomSanitizer) {
     }
 
     @Input()

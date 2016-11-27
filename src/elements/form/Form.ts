@@ -18,8 +18,8 @@ import { NovoFormGroup } from './DynamicForm';
     `
 })
 export class NovoFormElement implements OnInit {
-    @Input() form: NovoFormGroup;
-    @Input() layout: string;
+    @Input() form:NovoFormGroup;
+    @Input() layout:string;
 
     ngOnInit() {
         this.form.layout = this.layout;

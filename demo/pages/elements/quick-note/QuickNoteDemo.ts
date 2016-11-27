@@ -5,7 +5,7 @@ let BasicQuickNoteDemoTpl = require('./templates/BasicQuickNote.html');
 let CustomQuickNoteDemoTpl = require('./templates/CustomQuickNote.html');
 let CustomQuickNoteResultsDemoTpl = require('./templates/CustomQuickNoteResults.html');
 // Vendor
-import { QuickNoteResults } from './../../../../novo-elements';
+import { QuickNoteResults } from './../../../../index';
 
 @Component({
     selector: 'custom-quick-note-results',
@@ -56,13 +56,13 @@ const template = `
     template: template
 })
 export class QuickNoteDemoComponent {
-    private BasicQuickNoteDemoTpl: string = BasicQuickNoteDemoTpl;
-    private CustomQuickNoteDemoTpl: string = CustomQuickNoteDemoTpl;
-    private CustomQuickNoteResultsDemoTpl: string = CustomQuickNoteResultsDemoTpl;
-    private placeholder: string = 'Enter your note text here. Reference people and distribution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
-    private config: any;
-    private custom: any;
-    private custom2: any;
+    private BasicQuickNoteDemoTpl:string = BasicQuickNoteDemoTpl;
+    private CustomQuickNoteDemoTpl:string = CustomQuickNoteDemoTpl;
+    private CustomQuickNoteResultsDemoTpl:string = CustomQuickNoteResultsDemoTpl;
+    private placeholder:string = 'Enter your note text here. Reference people and distribution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
+    private config:any;
+    private custom:any;
+    private custom2:any;
 
     constructor() {
         let customData = {

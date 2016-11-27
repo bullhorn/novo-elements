@@ -28,11 +28,11 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
     @Output() ready = new EventEmitter();
     @ViewChild('host') host;
 
-    _value: string = '';
+    _value:string = '';
     instance;
     debounceTimeout;
 
-    constructor(private zone: NgZone) {
+    constructor(private zone:NgZone) {
     }
 
     get value() {
@@ -130,7 +130,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
         }
     }
 
-    onChange(value?: any) {
+    onChange(value?:any) {
     }
 
     onTouched(event?) {

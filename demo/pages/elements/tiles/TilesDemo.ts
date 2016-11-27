@@ -25,9 +25,9 @@ const template = `
     template: template
 })
 export class TilesDemoComponent {
-    private TilesDemoTpl: string = TilesDemoTpl;
-    private shown: boolean = false;
-    private demoTiles: Array<any> = [
+    private TilesDemoTpl:string = TilesDemoTpl;
+    private shown:boolean = false;
+    private demoTiles:Array<any> = [
         {
             label: 'Red',
             value: 'red'
@@ -41,7 +41,7 @@ export class TilesDemoComponent {
             value: 'blue'
         }
     ];
-    private currentColor: string;
+    private currentColor:string;
 
     colorSelect(newColorValue) {
         this.currentColor = newColorValue;

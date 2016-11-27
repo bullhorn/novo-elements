@@ -122,21 +122,21 @@ const HEADER_COLORS = ['blue', 'green', 'yellow', 'orange', 'red', 'purple'];
     template: template
 })
 export class ButtonDemoComponent {
-    loading: boolean = false;
-    loadingButtonText: string = 'Delete';
-    theme: string = 'primary';
-    isChecked: boolean = false;
-    negativeColor: string = 'negative';
-    color: string = 'blue';
+    loading:boolean = false;
+    loadingButtonText:string = 'Delete';
+    theme:string = 'primary';
+    isChecked:boolean = false;
+    negativeColor:string = 'negative';
+    color:string = 'blue';
     // Templates
-    PrimaryButtonDemoTpl: string = PrimaryButtonDemoTpl;
-    SecondaryButtonDemoTpl: string = SecondaryButtonDemoTpl;
-    DialogueButtonDemoTpl: string = DialogueButtonDemoTpl;
-    NeutralButtonDemoTpl: string = StandardButtonDemoTpl;
-    HeaderButtonDemoTpl: string = HeaderButtonDemoTpl;
-    IconButtonDemoTpl: string = IconButtonDemoTpl;
-    DynamicButtonDemoTpl: string = DynamicButtonDemoTpl;
-    LoadingButtonDemoTpl: string = LoadingButtonDemoTpl;
+    PrimaryButtonDemoTpl:string = PrimaryButtonDemoTpl;
+    SecondaryButtonDemoTpl:string = SecondaryButtonDemoTpl;
+    DialogueButtonDemoTpl:string = DialogueButtonDemoTpl;
+    NeutralButtonDemoTpl:string = StandardButtonDemoTpl;
+    HeaderButtonDemoTpl:string = HeaderButtonDemoTpl;
+    IconButtonDemoTpl:string = IconButtonDemoTpl;
+    DynamicButtonDemoTpl:string = DynamicButtonDemoTpl;
+    LoadingButtonDemoTpl:string = LoadingButtonDemoTpl;
 
     changeColor() {
         let idx = HEADER_COLORS.indexOf(this.color);

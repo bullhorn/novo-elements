@@ -25,7 +25,7 @@ import { Helpers } from './../../utils/Helpers';
 @Injectable()
 export class FormUtils {
     toFormGroup(controls) {
-        let group: any = {};
+        let group:any = {};
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
             group[control.key] = control.validators && control.validators.length > 0 ? new FormControl(value, control.validators) : new FormControl(value);
@@ -103,7 +103,7 @@ export class FormUtils {
     getControlForField(field, http, config) {
         let type = this.determineInputType(field) || field.type;
         let control;
-        let controlConfig: NovoControlConfig = {
+        let controlConfig:NovoControlConfig = {
             type: type,
             key: field.name,
             label: field.label,
@@ -260,7 +260,7 @@ export class FormUtils {
         return null;
     }
 
-    setInitialValues(controls: Array<NovoControlConfig>, values, keepClean = false) {
+    setInitialValues(controls:Array<NovoControlConfig>, values, keepClean = false) {
         controls.forEach(control => {
             if (!Helpers.isBlank(values[control.key]) && values[control.key].length !== 0) {
                 control.value = values[control.key];
@@ -269,7 +269,7 @@ export class FormUtils {
         });
     }
 
-    forceShowAllControls(controls: Array<NovoControlConfig>) {
+    forceShowAllControls(controls:Array<NovoControlConfig>) {
         controls.forEach(control => {
             control.hidden = false;
         });

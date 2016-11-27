@@ -126,15 +126,15 @@ import { NovoLabelService } from './../../services/novo-label-service';
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnChanges, OnDestroy {
     @Input() control;
-    @Input() form: NovoFormGroup;
-    @Output() change: EventEmitter<any> = new EventEmitter();
+    @Input() form:NovoFormGroup;
+    @Output() change:EventEmitter<any> = new EventEmitter();
 
-    formattedDateTimeValue: any;
-    formattedValue: string = '';
-    state: string = 'horizontal';
-    alwaysActive: [any] = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
+    formattedDateTimeValue:any;
+    formattedValue:string = '';
+    state:string = 'horizontal';
+    alwaysActive:[any] = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
 
-    constructor(element: ElementRef, private labels: NovoLabelService) {
+    constructor(element:ElementRef, private labels:NovoLabelService) {
         super(element);
         this.onActiveChange.subscribe(active => {
             if (!active) {

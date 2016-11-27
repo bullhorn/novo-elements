@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Vendor
-import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService } from './../novo-elements';
+import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService } from './../index';
 // APP
 import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
 import { MultiCodeSnippet } from './elements/codesnippet/MultiCodeSnippet';

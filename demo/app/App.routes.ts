@@ -33,7 +33,7 @@ import {
     CategoryDropdownDemoComponent
 } from './../pages/elements';
 
-export const routes: any = [
+export const routes:any = [
     { path: '', component: Home },
     { path: 'home', component: Home },
 

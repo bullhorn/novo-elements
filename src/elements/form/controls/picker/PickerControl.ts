@@ -5,7 +5,7 @@ export class PickerControl extends BaseControl {
     controlType = 'picker';
     options = [];
 
-    constructor(config: NovoControlConfig) {
+    constructor(config:NovoControlConfig) {
         super(config);
         this.options = config.options || [];
     }

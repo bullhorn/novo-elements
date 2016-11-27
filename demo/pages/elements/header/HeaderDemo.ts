@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 // APP
 let HeaderDemoTpl = require('./templates/HeaderDemo.html');
 // Vendor
-import { NovoToastService } from './../../../../novo-elements';
+import { NovoToastService } from './../../../../index';
 
 const template = `
 <div class="container">
@@ -24,11 +24,11 @@ const template = `
     template: template
 })
 export class HeaderDemoComponent {
-    private HeaderDemoTpl: string = HeaderDemoTpl;
-    private entity: string;
-    private options: any;
+    private HeaderDemoTpl:string = HeaderDemoTpl;
+    private entity:string;
+    private options:any;
 
-    constructor(private toaster: NovoToastService) {
+    constructor(private toaster:NovoToastService) {
         this.toaster = toaster;
         this.entity = 'company';
         this.options = {

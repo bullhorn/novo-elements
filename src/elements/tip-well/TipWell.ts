@@ -14,15 +14,15 @@ import { Component, Input, OnInit } from '@angular/core';
     `
 })
 export class NovoTipWellElement implements OnInit {
-    @Input() name: string|number;
-    @Input() tip: string;
-    @Input() buttonText: string;
-    @Input() button: string;
-    @Input() icon: string;
+    @Input() name:string|number;
+    @Input() tip:string;
+    @Input() buttonText:string;
+    @Input() button:string;
+    @Input() icon:string;
 
-    isActive: boolean = true;
-    isLocalStorageEnabled: any;
-    localStorageKey: string;
+    isActive:boolean = true;
+    isLocalStorageEnabled:any;
+    localStorageKey:string;
 
     constructor() {
         this.isActive = true;
