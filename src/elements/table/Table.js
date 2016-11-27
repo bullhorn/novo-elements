@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
 import { Helpers } from './../../utils/Helpers';
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 
 @Component({
     selector: 'novo-table-actions',
@@ -63,20 +62,20 @@ export class NovoTableHeaderElement {
                             <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters">
                                 <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter" (click)="focusInput(column.name)"></button>
                                 <!-- FILTER OPTIONS LIST -->
-                                <list *ngIf="column?.options?.length && column?.type!='date'">
+                                <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type!='date'">
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
                                             <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
-                                        <input type="text" [attr.id]="column.name + '-input'" (keydown)="onFilterKeydown($event, column)" (keyup)="onFilterKeywords($event, column)" [(ngModel)]="column.filterKeywords"/>
+                                        <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.filter"/>
                                     </item>
                                     <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="getOptionDataAutomationId(option)">
                                         {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
                                     </item>
                                 </list>
                                 <!-- FILTER SEARCH INPUT -->
-                                <list *ngIf="!column?.options?.length">
+                                <list *ngIf="!(column?.options?.length || column?.originalOptions?.length)">
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
@@ -676,44 +675,24 @@ export class NovoTableElement {
         }, 10);
     }
 
-    onFilterKeywords(event, column) {
-        if (event && event.target && event.target.value) {
-            let filterKeywords = event.target.value.toLowerCase();
-            let exactMatch = false;
-            let newOptions = column.originalOptions.filter(option => {
+    onFilterKeywords(config) {
+        if (config && config.filtering && config.filtering.filter) {
+            let filterKeywords = config.filtering.filter.toLowerCase();
+            let newOptions = config.filtering.originalOptions.filter(option => {
                 let value = option && option.label ? option.label : option;
                 value = value.toLowerCase() ? value.toLowerCase() : value;
                 if (value === filterKeywords) {
-                    exactMatch = true;
                     return true;
                 } else if (~ value.indexOf(filterKeywords) || ~ value.indexOf(filterKeywords)) {
                     return true;
                 }
                 return false;
             });
-            if (!exactMatch) {
-                newOptions.push(event.target.value);
-            }
-            column.options = newOptions;
+            config.filtering.options = newOptions;
         } else {
-            column.options = column.originalOptions;
+            config.filtering.options = config.filtering.originalOptions;
         }
+        this.onFilterChange(config);
     }
 
-    onFilterKeydown(event, column) {
-        let filter = event && event.target && event.target.value ? event.target.value : '';
-        if (event && event.keyCode === KeyCodes.ENTER) {
-            if (column.options && column.options.length && column.options[0]) {
-                filter = column.options[0].label ? { label: filter } : filter;
-                column.options.forEach(opt => {
-                    if ((opt.label && opt.label.toLowerCase() === filter.label.toLowerCase()) ||
-                    (opt.toLowerCase && filter.toLowerCase && opt.toLowerCase() === filter.toLowerCase())) {
-                        filter = opt;
-                    }
-                });
-            }
-            column.filterKeywords = '';
-            this.onFilterClick(column, filter);
-        }
-    }
 }
