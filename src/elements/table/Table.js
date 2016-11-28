@@ -68,7 +68,7 @@ export class NovoTableHeaderElement {
                                             <span>{{ labels.filters }}</span>
                                             <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
-                                        <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.filter"/>
+                                        <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.freetextFilter"/>
                                     </item>
                                     <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="getOptionDataAutomationId(option)">
                                         {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
@@ -310,7 +310,7 @@ export class NovoTableElement {
         }
 
         column.filter = null;
-        column.filterKeywords = null;
+        column.freetextFilter = null;
         column.options = column.originalOptions;
         this.onFilterChange();
     }
@@ -675,8 +675,8 @@ export class NovoTableElement {
     }
 
     onFilterKeywords(config) {
-        if (config && config.filtering && config.filtering.filter) {
-            let filterKeywords = config.filtering.filter.toLowerCase();
+        if (config && config.filtering && config.filtering.freetextFilter) {
+            let filterKeywords = config.filtering.freetextFilter.toLowerCase();
             let newOptions = config.filtering.originalOptions.filter(option => {
                 let value = option && option.label ? option.label : option;
                 value = value.toLowerCase() ? value.toLowerCase() : value;
@@ -688,6 +688,11 @@ export class NovoTableElement {
                 return false;
             });
             config.filtering.options = newOptions;
+            if (config.filtering.originalOptions[0].label) {
+                config.filtering.filter = [{ label: config.filtering.freetextFilter }];
+            } else {
+                config.filtering.filter = config.filtering.freetextFilter;
+            }
         } else {
             config.filtering.options = config.filtering.originalOptions;
         }
