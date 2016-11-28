@@ -340,7 +340,6 @@ export class NovoTableElement {
         if (this.config.filtering) {
             // Array of filters
             const filters = this.columns.filter(col => col.filter && col.filter.length);
-
             if (filters.length) {
                 if (Helpers.isFunction(this.config.filtering)) {
                     // Custom filter function on the table config
@@ -441,7 +440,7 @@ export class NovoTableElement {
      */
     isFilterActive(columnFilters, filter) {
         let isActive = false;
-        if (columnFilters && columnFilters.filter && filter) {
+        if (columnFilters && columnFilters.filter && columnFilters.filter.some && filter) {
             if (typeof(filter) !== 'string') {
                 isActive = columnFilters.filter.some(columnFilter => {
                     return columnFilter.label === filter.label;
