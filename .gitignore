@@ -10,8 +10,8 @@
 /src/**/*.js
 /src/**/*.js.map
 /src/**/*.d.ts
-novo-elements.js
-novo-elements.d.ts
+index.js
+index.d.ts
 novo-elements.module.js
 novo-elements.module.d.ts
 novo-elements.providers.js
