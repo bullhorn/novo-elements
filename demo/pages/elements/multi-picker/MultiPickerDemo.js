@@ -62,55 +62,43 @@ export class MultiPickerDemoComponent {
             firstName: 'Kameron',
             lastName: 'Sween'
         }];
-        let statesWithIds = [{
+        let departments = [{
             id: 1,
-            name: 'Massachusetts'
+            name: 'Sales'
         }, {
             id: 2,
-            name: 'Missouri'
+            name: 'Engineering'
         }, {
             id: 3,
-            name: 'New York'
+            name: 'Marketing'
         }, {
             id: 4,
-            name: 'Virginia'
+            name: 'Finance'
         }];
-        let cities = [{
+        let users = [{
             id: 1,
-            states: [{
-                id: 1
-            }],
-            name: 'Boston'
+            departments: [1, 3, 4],
+            name: 'Bob Sales/Engineering/Fin'
         }, {
             id: 2,
-            states: [{
-                id: 4
-            }],
-            name: 'Richmond'
+            departments: [4],
+            name: 'Beth Fin'
         }, {
             id: 3,
-            states: [{
-                id: 4
-            }],
-            name: 'Charlottesville'
+            departments: [2],
+            name: 'Artemis Eng'
         }, {
             id: 4,
-            states: [{
-                id: 2
-            }],
-            name: 'St. Louis'
+            departments: [1],
+            name: 'Andy Sales'
         }, {
             id: 5,
-            states: [{
-                id: 3
-            }],
-            name: 'New York City'
+            departments: [3],
+            name: 'Zoe Marketing'
         }, {
             id: 6,
-            states: [{
-                id: 4
-            }],
-            name: 'Roanoke'
+            departments: [4, 2],
+            name: 'Ziva Eng Fin'
         }];
         this.static = {
             options: [
@@ -121,17 +109,17 @@ export class MultiPickerDemoComponent {
         };
         this.parentChild = {
             options: [
-                { type: 'states', data: statesWithIds, format: '$name', field: 'id', isParent: { childType: 'cities' } },
-                { type: 'cities', data: cities, format: '$name', field: 'id', isChild: { parentType: 'states' } }
+                { type: 'departments', data: departments, format: '$name', field: 'id', isParent: { childType: 'users' } },
+                { type: 'users', data: users, format: '$name', field: 'id', isChild: { parentType: 'departments' } }
             ],
             resultsTemplate: ChecklistPickerResults
         };
-        this.parentChildTypes = [{ value: 'states', isParent: true, singular: 'state' }, { value: 'cities', isChild: true, singular: 'city' }];
+        this.parentChildTypes = [{ value: 'departments', isParent: true, singular: 'department' }, { value: 'users', isChild: true, singular: 'user' }];
         this.formatted = {
             format: '$firstName $lastName',
             options: collaborators
         };
-        this.parentChildValue = { states: [], cities: [] };
+        this.parentChildValue = { departments: [4], users: [2, 5] };
     }
     onChanged() {
     }
