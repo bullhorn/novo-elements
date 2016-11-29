@@ -11,10 +11,13 @@
 /src/**/*.js.map
 /src/**/*.d.ts
 index.js
+index.js.map
 index.d.ts
 novo-elements.module.js
+novo-elements.module.js.map
 novo-elements.module.d.ts
 novo-elements.providers.js
+novo-elements.providers.js.map
 novo-elements.providers.d.ts
 
 
