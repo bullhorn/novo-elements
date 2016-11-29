@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'button[theme]',
@@ -46,7 +46,7 @@ export class NovoButtonElement implements OnChanges {
     iconClass:string;
     flex:string;
 
-    ngOnChanges() {
+    ngOnChanges(changes?:SimpleChanges) {
         this.iconClass = (this.icon && !this.loading) ? `bhi-${this.icon}` : '';
         this.flex = this.theme ? 'flex-wrapper' : '';
         if (this.side !== null && this.theme !== 'primary') {

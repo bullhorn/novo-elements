@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 export interface NovoFormGroup {
     layout?:any;
@@ -39,7 +39,7 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
         this.form.layout = this.layout;
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes?:SimpleChanges) {
         if (this.controls) {
             let requiredFields:Array<any> = [];
             let nonRequiredFields:Array<any> = [];

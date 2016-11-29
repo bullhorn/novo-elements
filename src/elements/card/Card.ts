@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, Input, Output, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 //APP
 import { NovoLabelService } from './../../services/novo-label-service';
 
@@ -72,7 +72,7 @@ export class CardElement implements OnChanges, OnInit {
         this.config = this.config || {};
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes?:SimpleChanges) {
         this.config = this.config || {};
         this.cardAutomationId = `${(this.title || this.config.title || 'no-title').toLowerCase().replace(/\s/g, '-')}-card`;
 

@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, ElementRef, EventEmitter, trigger, state, style, transition, animate, OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { Component, Input, Output, ElementRef, EventEmitter, trigger, state, style, transition, animate, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 // APP
 import { NovoFormGroup } from './DynamicForm';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -165,7 +165,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnChange
         }
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes?:SimpleChanges) {
         this.checkState();
     }
 

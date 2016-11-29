@@ -73,7 +73,7 @@ export class EntityPickerResults extends BasePickerResults {
         super(element);
     }
 
-    getIconForResult(result) {
+    getIconForResult(result?:any) {
         if (result) {
             switch (result.searchEntity) {
                 case 'ClientContact':
@@ -97,7 +97,7 @@ export class EntityPickerResults extends BasePickerResults {
         return '';
     }
 
-    renderTimestamp(date) {
+    renderTimestamp(date?:any) {
         let timestamp = '';
         if (date) {
             timestamp = this.labels.formatDateWithFormat(date, 'L');
@@ -105,7 +105,7 @@ export class EntityPickerResults extends BasePickerResults {
         return timestamp;
     }
 
-    getNameForResult(result) {
+    getNameForResult(result?:any) {
         if (result) {
             switch (result.searchEntity) {
                 case 'Lead':

@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'novo-card-timeline',
@@ -24,7 +24,7 @@ export class CardTimelineElement implements OnChanges {
     length:number;
     offset:number;
 
-    ngOnChanges() {
+    ngOnChanges(changes?:SimpleChanges) {
         this.length = ((this.end - this.start) / (this.now - this.created)) * 100;
         this.offset = ((this.start - this.created) * (100 / (this.now - this.created)));
     }

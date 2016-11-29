@@ -56,6 +56,8 @@
   },
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "dependencies": {
+    "@types/ckeditor": "0.0.34",
+    "@types/dragula": "2.1.29",
     "dragula": "3.7.2",
     "hint.css": "2.4.1",
     "moment": "2.17.0"
@@ -65,10 +67,12 @@
     "@angular/compiler": "2.2.3",
     "@angular/core": "2.2.3",
     "@angular/forms": "2.2.3",
+    "@types/ckeditor": "0.0.34",
+    "@types/dragula": "2.1.29",
     "core-js": "2.4.1",
     "ie-shim": "0.1.0",
     "rxjs": "5.0.0-beta.12",
-    "zone.js": "0.6.25"
+    "zone.js": "0.6.26"
   },
   "devDependencies": {
     "@angular/common": "2.2.3",
@@ -81,9 +85,7 @@
     "@angular/platform-browser-dynamic": "2.2.3",
     "@angular/router": "3.2.3",
     "@types/chai": "3.4.34",
-    "@types/ckeditor": "0.0.34",
     "@types/core-js": "0.9.34",
-    "@types/dragula": "2.1.29",
     "@types/hammerjs": "2.0.33",
     "@types/highlight.js": "9.1.8",
     "@types/jasmine": "2.5.38",
@@ -142,7 +144,7 @@
     "webpack-dev-server": "2.1.0-beta.9",
     "webpack-md5-hash": "0.0.5",
     "webpack-merge": "0.18.0",
-    "zone.js": "0.6.25"
+    "zone.js": "0.6.26"
   },
   "engines": {
     "node": ">= 6.0.0",

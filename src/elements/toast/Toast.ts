@@ -34,6 +34,7 @@ export class NovoToastElement implements OnInit, OnChanges {
     time:any;
     iconClass:string;
     alertTheme:string;
+    embedded:any;
 
     ngOnInit() {
         if (!this.launched) {

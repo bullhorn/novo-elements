@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'novo-card-chart-donut',
@@ -40,7 +40,7 @@ export class CardDonutChartElement implements OnInit, OnChanges {
         this.isChartDrawing = false;
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes?:SimpleChanges) {
         if (!this.isChartDrawing) {
             this.drawChart();
         }

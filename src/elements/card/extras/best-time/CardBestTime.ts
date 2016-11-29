@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'novo-card-best-time',
@@ -33,7 +33,7 @@ export class CardBestTimeElement implements OnChanges {
     dayLowerCase:string;
     dataAutomationId:string;
 
-    ngOnChanges() {
+    ngOnChanges(changes?:SimpleChanges) {
         if (this.time) {
             let timeIconAndStyle = this.getTimeOfDayStyleAndIcon(this.time);
             this.timeIcon = timeIconAndStyle.icon;

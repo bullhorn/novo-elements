@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'novo-list',
@@ -43,7 +43,7 @@ export class NovoItemAvatarElement implements OnChanges, OnInit {
     iconClass:string;
     classMap:any;
 
-    ngOnChanges() {
+    ngOnChanges(changes?:SimpleChanges) {
         this.iconClass = (this.icon) ? `bhi-${this.icon}` : null;
         this.classMap = [this.iconClass, this.icon];
     }
