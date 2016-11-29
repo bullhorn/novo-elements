@@ -1,7 +1,7 @@
 <div class="calendar-demo-date-time">
     <p>
         <label>Date</label>
-        {{(value | json) || 'N/A'}}
+        {{(value?.date | json) || 'N/A'}}
     </p>
     <novo-date-time-picker [(ngModel)]="date-time"></novo-date-time-picker>
 </div>

@@ -206,22 +206,18 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     }
 
     updateCal(date, fireEvents, markedSelected) {
-        if (date && date.startDate === null) {
-            this.clearRange();
-        } else {
-            let value = date ? moment(date) : moment();
-            value = this.removeTime(value);
-            this.month = value.clone();
+        let value = date ? moment(date) : moment();
+        value = this.removeTime(value);
+        this.month = value.clone();
 
-            let start = value.clone();
-            start.date(1);
-            this.removeTime(start.day(0));
+        let start = value.clone();
+        start.date(1);
+        this.removeTime(start.day(0));
 
-            this.buildMonth(start, this.month);
+        this.buildMonth(start, this.month);
 
-            if (markedSelected) {
-                this.select(null, { date: value }, fireEvents);
-            }
+        if (markedSelected) {
+            this.select(null, { date: value }, fireEvents);
         }
     }
 
@@ -230,10 +226,6 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
         this.updateCal(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
-    }
-
-    clearRange() {
-        this.selected = null;
     }
 
     setMonth(month) {

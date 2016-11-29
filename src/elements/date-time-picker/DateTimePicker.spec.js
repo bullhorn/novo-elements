@@ -1,18 +1,18 @@
 import moment from 'moment/moment';
-import { NovoDatePickerElement } from './DatePicker';
+import { NovoDateTimePickerElement } from './DateTimePicker';
 import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
 
-describe('Element: NovoDatePickerElement', () => {
+describe('Element: NovoDateTimePickerElement', () => {
     let component;
 
     beforeEach(() => {
         addProviders([
-            NovoDatePickerElement,
+            NovoDateTimePickerElement,
             APP_TEST_PROVIDERS
         ]);
     });
 
-    beforeEach(inject([NovoDatePickerElement], _component => {
+    beforeEach(inject([NovoDateTimePickerElement], _component => {
         component = _component;
     }));
 
@@ -30,67 +30,6 @@ describe('Element: NovoDatePickerElement', () => {
             let event = { preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
             component.select(event, day);
             expect(component.selected).toBe(day.date);
-        });
-
-        it('should not set default selected values for range', () => {
-            expect(component.select).toBeDefined();
-            component.range = true;
-            expect(component.selected).not.toBeDefined();
-            expect(component.selected2).not.toBeDefined();
-        });
-
-        it('should set selected values for range', () => {
-            expect(component.select).toBeDefined();
-            component.select(event, { date: undefined });
-            let day = { date: moment('12/08/16') };
-            let day2 = { date: moment('12/10/16') };
-            let event = { preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
-            component.range = true;
-            component.select(event, day);
-            component.select(event, day2);
-            expect(component.selected).toBe(day.date);
-            expect(component.selected2).toBe(day2.date);
-        });
-
-        it('should not set selected2 value if not range', () => {
-            expect(component.select).toBeDefined();
-            component.select(event, { date: undefined });
-            let day = { date: moment('12/08/16') };
-            let day2 = { date: moment('12/10/16') };
-            let event = { preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
-            component.range = false;
-            component.select(event, day);
-            component.select(event, day2);
-            expect(component.selected).toBe(day2.date);
-            expect(component.selected2).toBe(undefined);
-        });
-
-        it('should swap the selected values if selected2 is before selected', () => {
-            expect(component.select).toBeDefined();
-            component.select(event, { date: undefined });
-            let day = { date: moment('12/10/16') };
-            let day2 = { date: moment('12/08/16') };
-            let event = { preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
-            component.range = true;
-            component.select(event, day);
-            component.select(event, day2);
-            expect(component.selected2).toBe(day.date);
-            expect(component.selected).toBe(day2.date);
-        });
-
-        it('should clear selected range on 3rd date selection', () => {
-            expect(component.select).toBeDefined();
-            component.select(event, { date: undefined });
-            let day = { date: moment('12/08/16') };
-            let day2 = { date: moment('12/09/16') };
-            let day3 = { date: moment('12/10/16') };
-            let event = { preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
-            component.range = true;
-            component.select(event, day);
-            component.select(event, day2);
-            component.select(event, day3);
-            expect(component.selected2).toBe(null);
-            expect(component.selected).toBe(day3.date);
         });
     });
 
@@ -115,18 +54,6 @@ describe('Element: NovoDatePickerElement', () => {
         it('should change the value', () => {
             component.writeValue(10);
             expect(component.model).toBe(10);
-        });
-    });
-
-    describe('Function: clearRange()', () => {
-        it('should be defined.', () => {
-            expect(component.clearRange).toBeDefined();
-        });
-
-        it('should set the selected value to null', () => {
-            component.clearRange();
-            expect(component.selected).toBe(null);
-            expect(component.selected2).toBe(null);
         });
     });
 
