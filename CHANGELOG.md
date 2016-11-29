@@ -1,3 +1,13 @@
+<a name="1.1.33"></a>
+## [1.1.33](https://github.com/bullhorn/novo-elements/compare/v1.1.32...v1.1.33) (2016-11-22)
+
+
+### Bug Fixes
+
+* **notifications:** Fixing Icon in Notifications ([cfc95ad](https://github.com/bullhorn/novo-elements/commit/cfc95ad))
+
+
+
 <a name="1.1.32"></a>
 ## [1.1.32](https://github.com/bullhorn/novo-elements/compare/v1.1.31...v1.1.32) (2016-11-21)
 
