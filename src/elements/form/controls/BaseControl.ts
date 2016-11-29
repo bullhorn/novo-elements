@@ -55,6 +55,7 @@ export class BaseControl {
 
     constructor(config:NovoControlConfig) {
         this.validators = config.validators || [];
+        this.asyncValidators = config.asyncValidators || [];
         this.value = config.value;
         this.key = config.key || '';
         this.label = config.label || '';
