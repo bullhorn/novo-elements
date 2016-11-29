@@ -58,5 +58,6 @@ export class CalendarDemoComponent {
             startDate: null,
             endDate: null
         };
+        this.dateTime = new Date();
     }
 }
