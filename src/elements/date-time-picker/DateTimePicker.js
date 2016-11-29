@@ -15,7 +15,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
 
 @Component({
     selector: 'novo-date-time-picker',
-    inputs: ['minYear', 'maxYear', 'start', 'end', 'inline', 'range', 'military'],
+    inputs: ['minYear', 'maxYear', 'start', 'end', 'inline', 'military'],
     outputs: ['onSelect'],
     providers: [DATE_TIME_PICKER_VALUE_ACCESSOR],
     animations: [
@@ -68,10 +68,6 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
             </div>
             <div class="view-container" [@containerState]="componentTabState">
                 <div class="calendar">
-                    <div *ngIf="range" class="calendar-range">
-                        <span [class.active]="!calendarRangeEnd">{{(selected?.format('MMM D, YYYY') ) || 'Start Date'}}</span>
-                        <span [class.active]="calendarRangeEnd">{{(selected2?selected2.format('MMM D, YYYY'):null ) || 'End Date'}}</span>
-                    </div>
                     <div class="calendar-header">
                         <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
                         <span class="heading">
@@ -90,9 +86,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
                             <tr *ngFor="let week of weeks">
                                 <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday,
                                     'notinmonth': !day.isCurrentMonth,
-                                    selected: (!range ? day.date.isSame(selected) : (day.date.isSame(selected) || day.date.isSame(selected2))),
-                                    filler: (range && selected2 && day.date.isAfter(selected) && day.date.isBefore(selected2)),
-                                    startfill: (range && selected2 && day.date.isSame(selected) && day.date.isBefore(selected2))
+                                    selected: day.date.isSame(selected)
                                 }">
                                     <button class="day" (click)="select($event, day, true); toggleTimePicker('time')" [attr.data-automation-id]="day.number" [disabled]="(start && day.date.isBefore(start)) || (end && day.date.isAfter(end))">{{day.number}}</button>
                                 </td>
@@ -109,7 +103,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
                             <div class="year" [ngClass]="{selected: year == selected?.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
                         </li>
                     </ul>
-                    <div class="calendar-footer" *ngIf="!range">
+                    <div class="calendar-footer">
                         <span (click)="setToday()" class="today" title="{{today}}" data-automation-id="calendar-today">Today</span>
                     </div>
                 </div>
@@ -225,7 +219,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
 
             this.buildMonth(start, this.month);
 
-            if (markedSelected && !this.range) {
+            if (markedSelected) {
                 this.select(null, { date: value }, fireEvents);
             }
         }
@@ -240,7 +234,6 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
 
     clearRange() {
         this.selected = null;
-        this.selected2 = null;
     }
 
     setMonth(month) {
@@ -259,70 +252,23 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
 
     select(event, day, fireEvents) {
         Helpers.swallowEvent(event);
-        if (this.range) {
-            if (!this.selected && event) {
-                this.selected = day.date;
-            } else if (this.selected && this.selected2) {
-                this.selected = day.date;
-                this.selected2 = null;
-                this.calendarRangeEnd = false;
-            } else if (day.date.isAfter(this.selected)) {
-                this.selected2 = day.date.endOf('day');
-            } else if (day.date.isBefore(this.selected)) {
-                this.selected2 = this.selected.endOf('day');
-                this.selected = day.date;
-            } else if (day.date.isSame(this.selected)) {
-                this.selected = day.date;
-                this.selected2 = day.date.endOf('day');
-                this.calendarRangeEnd = !this.calendarRangeEnd;
-            }
-            this.calendarRangeEnd = !this.calendarRangeEnd;
-        } else {
-            this.selected = day.date;
-            this.updateHeading();
-        }
+
+        this.selected = day.date;
+        this.updateHeading();
+
         if (fireEvents && this.selected) {
             // Emit our output
-            if (this.range && this.selected && this.selected2) {
-                this.onSelect.next({
-                    startDate: {
-                        year: this.selected.format('YYYY'),
-                        month: this.selected.format('MM'),
-                        day: this.selected.format('DD'),
-                        date: this.selected.toDate()
-                    },
-                    endDate: {
-                        year: this.selected2.format('YYYY'),
-                        month: this.selected2.format('MM'),
-                        day: this.selected2.format('DD'),
-                        date: this.selected2.toDate()
-                    }
-                });
-            } else {
-                this.onSelect.next({
-                    year: this.selected.format('YYYY'),
-                    month: this.selected.format('MM'),
-                    day: this.selected.format('DD'),
-                    date: this.selected.toDate()
-                });
-            }
+            this.onSelect.next({
+                year: this.selected.format('YYYY'),
+                month: this.selected.format('MM'),
+                day: this.selected.format('DD'),
+                date: this.selected.toDate()
+            });
 
-            if (this.range) {
-                // Also, update the ngModel
-                this.onModelChange({
-                    startDate: this.selected.toDate(),
-                    endDate: this.selected2 ? this.selected2.toDate() : null
-                });
-                this.model = {
-                    startDate: this.selected.toDate(),
-                    endDate: this.selected2 ? this.selected2.toDate() : null
-                };
-            } else {
-                // Also, update the ngModel
-                this.onModelChange(this.selected.toDate());
-                this.model = this.selected.toDate();
-                this.dispatchChange();
-            }
+            // Also, update the ngModel
+            this.onModelChange(this.selected.toDate());
+            this.model = this.selected.toDate();
+            this.dispatchChange();
         }
     }
 
@@ -462,7 +408,6 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
                 hours = 0;
             }
         }
-
 
         let value = moment().hours(hours).minutes(this.minutes).seconds(0);
 
