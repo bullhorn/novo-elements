@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 
 export interface NovoControlConfig {
     validators?:Array<any>;
+    asyncValidators?:Array<any>;
     value?:any;
     key?:string;
     label?:string;
@@ -29,6 +30,7 @@ export interface NovoControlConfig {
 
 export class BaseControl {
     validators:Array<any>;
+    asyncValidators?:Array<any>;
     value:any;
     key:string;
     label:string;

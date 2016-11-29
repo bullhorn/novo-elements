@@ -7,7 +7,11 @@ import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 /**
  * Params that can be passed to the Modal
  */
-export class NovoModalParams {
+
+export interface ModalParams {
+    [propName:string]:any;
+}
+export class NovoModalParams implements ModalParams {
 }
 
 /**
