@@ -1,3 +1,13 @@
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/bullhorn/novo-elements/compare/v2.0.2...v2.0.3) (2016-11-30)
+
+
+### Bug Fixes
+
+* **DateTimePicker:** Fixing unused property ([21c6ce0](https://github.com/bullhorn/novo-elements/commit/21c6ce0))
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/bullhorn/novo-elements/compare/v2.0.0...v2.0.2) (2016-11-30)
 
