@@ -77,7 +77,7 @@ export class MultiPickerDemoComponent {
         }];
         let users = [{
             id: 1,
-            departments: [1, 3, 4],
+            departments: [1, 2, 4],
             name: 'Bob Sales/Engineering/Fin'
         }, {
             id: 2,
@@ -109,12 +109,12 @@ export class MultiPickerDemoComponent {
         };
         this.parentChild = {
             options: [
-                { type: 'departments', data: departments, format: '$name', field: 'id', isParent: { childType: 'users' } },
-                { type: 'users', data: users, format: '$name', field: 'id', isChild: { parentType: 'departments' } }
+                { type: 'departments', data: departments, format: '$name', field: 'id', isParentOf: 'users' },
+                { type: 'users', data: users, format: '$name', field: 'id', isChildOf: 'departments' }
             ],
             resultsTemplate: ChecklistPickerResults
         };
-        this.parentChildTypes = [{ value: 'departments', isParent: true, singular: 'department' }, { value: 'users', isChild: true, singular: 'user' }];
+        this.parentChildTypes = [{ value: 'departments', isParentOf: true, singular: 'department' }, { value: 'users', isChildOf: true, singular: 'user' }];
         this.formatted = {
             format: '$firstName $lastName',
             options: collaborators

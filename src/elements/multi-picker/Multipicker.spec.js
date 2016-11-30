@@ -14,9 +14,9 @@ describe('Element: NovoMultiPickerElement', () => {
 
     beforeEach(inject([NovoMultiPickerElement], _component => {
         component = _component;
-        component.types = [{ value: 'cats', isParent: { childType: 'kittens' } }, { value: 'kittens', isChild: { parentType: 'cats' } }];
+        component.types = [{ value: 'cats', isParentOf: 'kittens' }, { value: 'kittens', isChildOf: 'cats' }];
         // let kittens = [{ value: 'ALL', checked: true, type: 'kittens' }, { value: 'Kitty', checked: true, type: 'kittens' }, { value: 'Tiger', checked: true, type: 'kittens' }];
-        let cats = [{ value: 'ALL', checked: true, type: 'cats', isParent: { childType: 'kittens' } }, { value: 'Kitty', checked: true, type: 'cats', isParent: { childType: 'kittens' } }, { value: 'Tiger', checked: true, type: 'cats' }];
+        let cats = [{ value: 'ALL', checked: true, type: 'cats', isParentOf: 'kittens' }, { value: 'Kitty', checked: true, type: 'cats', isParentOf: 'kittens' }, { value: 'Tiger', checked: true, type: 'cats' }];
         component._options = [{ type: 'cats', data: cats, originalData: cats }];
     }));
 
@@ -48,7 +48,7 @@ describe('Element: NovoMultiPickerElement', () => {
         it('should correctly setup options', () => {
             component.source = { options: [{ type: 'numbers', data: [1] }] };
             component.setupOptions();
-            let data = [{ value: 'ALL', label: 'All numbers', type: 'numbers', checked: undefined, isParent: undefined, isChild: undefined }, { value: 1, label: '1', type: 'numbers', checked: undefined, isParent: undefined, isChild: undefined }];
+            let data = [{ value: 'ALL', label: 'All numbers', type: 'numbers', checked: undefined, isParentOf: undefined, isChildOf: undefined }, { value: 1, label: '1', type: 'numbers', checked: undefined, isParentOf: undefined, isChildOf: undefined }];
             let originalData = data;
             expect(component._options).toEqual([{ type: 'numbers', data: data, originalData: originalData }]);
             expect(component.source.options).toBe(component._options);
@@ -57,33 +57,29 @@ describe('Element: NovoMultiPickerElement', () => {
 
     describe('Function: formatOption(section)', () => {
         it('should correctly format a parent option', () => {
-            let section = { type: 'cats', isParent: { childType: 'kittens' } };
+            let section = { type: 'cats', isParentOf: 'kittens' };
             let item = { value: 1 };
             let expectedObj = {
                 value: 1,
                 label: '1',
                 type: 'cats',
                 checked: undefined,
-                isParent: {
-                    childType: 'kittens'
-                },
-                isChild: undefined
+                isParentOf: 'kittens',
+                isChildOf: undefined
             };
             let actual = component.formatOption(section, item);
             expect(actual).toEqual(expectedObj);
         });
         it('should correctly format a child option', () => {
-            let section = { type: 'kittens', isChild: { parentType: 'cats' } };
+            let section = { type: 'kittens', isChildOf: 'cats' };
             let item = { value: 1, cats: [{ id: 1 }] };
             let expectedObj = {
                 value: 1,
                 label: '1',
                 type: 'kittens',
                 checked: undefined,
-                isChild: {
-                    parentType: 'cats'
-                },
-                isParent: undefined,
+                isChildOf: 'cats',
+                isParentOf: undefined,
                 cats: [{ id: 1 }]
             };
             let actual = component.formatOption(section, item);
@@ -97,8 +93,8 @@ describe('Element: NovoMultiPickerElement', () => {
                 label: '1',
                 type: 'kittens',
                 checked: undefined,
-                isChild: undefined,
-                isParent: undefined
+                isChildOf: undefined,
+                isParentOf: undefined
             };
             let actual = component.formatOption(section, item);
             expect(actual).toEqual(expectedObj);
@@ -107,28 +103,28 @@ describe('Element: NovoMultiPickerElement', () => {
 
     describe('Function: createSelectAllOption(section, item)', () => {
         it('should correctly create a select all option for a child type', () => {
-            let section = { type: 'kittens', isChild: { parentType: 'cats' }, data: [{ cats: [{ id: 1 }, { id: 2 }] }] };
+            let section = { type: 'kittens', isChildOf: 'cats', data: [{ cats: [{ id: 1 }, { id: 2 }] }] };
             let expected = {
                 value: 'ALL',
                 label: 'All kittens',
                 type: 'kittens',
                 checked: undefined,
-                isParent: undefined,
-                isChild: { parentType: 'cats' },
+                isParentOf: undefined,
+                isChildOf: 'cats',
                 cats: [{ id: 1 }, { id: 2 }]
             };
             let actualResult = component.createSelectAllOption(section);
             expect(actualResult).toEqual(expected);
         });
         it('should correctly create a select all option for a parent type', () => {
-            let section = { type: 'cats', isParent: { childType: 'kittens' }, data: [{ cats: [{ id: 1 }, { id: 2 }] }] };
+            let section = { type: 'cats', isParentOf: 'kittens', data: [{ cats: [{ id: 1 }, { id: 2 }] }] };
             let expected = {
                 value: 'ALL',
                 label: 'All cats',
                 type: 'cats',
                 checked: undefined,
-                isParent: { childType: 'kittens' },
-                isChild: undefined
+                isParentOf: 'kittens',
+                isChildOf: undefined
             };
             let actualResult = component.createSelectAllOption(section);
             expect(actualResult).toEqual(expected);
@@ -138,7 +134,7 @@ describe('Element: NovoMultiPickerElement', () => {
     describe('Function: setupOptionByType(section)', () => {
         it('should correctly format a section of options', () => {
             let section = { type: 'cats', data: ['Kitty'] };
-            let data = [{ value: 'ALL', label: 'All cats', type: 'cats', checked: undefined, isParent: undefined, isChild: undefined }, { value: 'Kitty', label: 'Kitty', type: 'cats', checked: undefined, isParent: undefined, isChild: undefined }];
+            let data = [{ value: 'ALL', label: 'All cats', type: 'cats', checked: undefined, isParentOf: undefined, isChildOf: undefined }, { value: 'Kitty', label: 'Kitty', type: 'cats', checked: undefined, isParentOf: undefined, isChildOf: undefined }];
             let expected = { type: 'cats', data: data, originalData: data };
             let actualResult = component.setupOptionsByType(section);
             expect(actualResult).toEqual(expected);
@@ -449,16 +445,16 @@ describe('Element: NovoMultiPickerElement', () => {
         });
     });
     describe('Function: updateParentOrChildren(item, action)', () => {
-        it('should call updateChildrenValue if item isParent', () => {
-            let item = { isParent: true };
+        it('should call updateChildrenValue if item isParentOf', () => {
+            let item = { isParentOf: true };
             spyOn(component, 'updateChildrenValue');
             spyOn(component, 'updateParentValue');
             component.updateParentOrChildren(item);
             expect(component.updateChildrenValue).toHaveBeenCalled();
             expect(component.updateParentValue).not.toHaveBeenCalled();
         });
-        it('should call updateParentValue if item isChild', () => {
-            let item = { isChild: true };
+        it('should call updateParentValue if item isChildOf', () => {
+            let item = { isChildOf: true };
             spyOn(component, 'updateChildrenValue');
             spyOn(component, 'updateParentValue');
             component.updateParentOrChildren(item);
@@ -467,16 +463,16 @@ describe('Element: NovoMultiPickerElement', () => {
         });
     });
     describe('Function: updateParentOrChildren(item, action)', () => {
-        it('should call updateChildrenValue if item isParent', () => {
-            let item = { isParent: true };
+        it('should call updateChildrenValue if item isParentOf', () => {
+            let item = { isParentOf: true };
             spyOn(component, 'updateChildrenValue');
             spyOn(component, 'updateParentValue');
             component.updateParentOrChildren(item);
             expect(component.updateChildrenValue).toHaveBeenCalled();
             expect(component.updateParentValue).not.toHaveBeenCalled();
         });
-        it('should call updateParentValue if item isChild', () => {
-            let item = { isChild: true };
+        it('should call updateParentValue if item isChildOf', () => {
+            let item = { isChildOf: true };
             spyOn(component, 'updateChildrenValue');
             spyOn(component, 'updateParentValue');
             component.updateParentOrChildren(item);
@@ -485,16 +481,16 @@ describe('Element: NovoMultiPickerElement', () => {
         });
     });
     describe('Function: updateAllParentsOrChildren(item, action)', () => {
-        it('should call updateChildrenValue if item isParent', () => {
-            let item = { isParent: true };
+        it('should call updateChildrenValue if item isParentOf', () => {
+            let item = { isParentOf: true };
             spyOn(component, 'updateAllChildrenValue');
             spyOn(component, 'updateAllParentValue');
             component.updateAllParentsOrChildren(item);
             expect(component.updateAllChildrenValue).toHaveBeenCalled();
             expect(component.updateAllParentValue).not.toHaveBeenCalled();
         });
-        it('should call updateParentValue if item isChild', () => {
-            let item = { isChild: true };
+        it('should call updateParentValue if item isChildOf', () => {
+            let item = { isChildOf: true };
             spyOn(component, 'updateAllChildrenValue');
             spyOn(component, 'updateAllParentValue');
             component.updateAllParentsOrChildren(item);
@@ -506,7 +502,7 @@ describe('Element: NovoMultiPickerElement', () => {
         it('should handle removing item while all parents selected', () => {
             component._options = [{ type: 'cats', data: [{ checked: true, type: 'cats' }], originalData: [{ checked: true, type: 'cats' }] }];
             spyOn(component, 'handleRemoveItemIfAllSelected');
-            component.updateParentValue({ isChild: { parentType: 'cats' } }, 'remove');
+            component.updateParentValue({ isChildOf: 'cats' }, 'remove');
             expect(component.handleRemoveItemIfAllSelected).toHaveBeenCalled();
         });
     });
@@ -514,7 +510,7 @@ describe('Element: NovoMultiPickerElement', () => {
         it('should set all parents to indeterminate if not already checked', () => {
             let cat = { checked: false, type: 'cats', indeterminate: false };
             component._options = [{ type: 'cats', data: [cat], originalData: [cat] }];
-            component.updateAllParentValue({ isChild: { parentType: 'cats' } }, 'select');
+            component.updateAllParentValue({ isChildOf: 'cats' }, 'select');
             expect(component._options[0].data[0].indeterminate).toBeTruthy();
         });
     });
@@ -522,7 +518,7 @@ describe('Element: NovoMultiPickerElement', () => {
         it('should set children to checked if selecting', () => {
             let cat = { checked: false, type: 'cats', indeterminate: false, cats: [1] };
             component._options = [{ type: 'kittens', data: [cat], originalData: [cat] }];
-            component.updateChildrenValue({ type: 'cats', value: 1, isParent: { childType: 'kittens' } }, 'select');
+            component.updateChildrenValue({ type: 'cats', value: 1, isParentOf: 'kittens' }, 'select');
             expect(component._options[0].data[0].checked).toBeTruthy();
         });
     });
@@ -546,16 +542,16 @@ describe('Element: NovoMultiPickerElement', () => {
     });
     describe('Function: modifyAffectedParentsOrChildren(selecting, itemChanged)', () => {
         it('should update indeterminate states for parent and child type', () => {
-            let kitty = { value: 'Kitty', checked: false, type: 'cats', isParent: { childType: 'kittens' } };
-            let allCat = { value: 'ALL', checked: true, type: 'cats', isParent: { childType: 'kittens' } };
-            let allKitten = { value: 'ALL', checked: true, type: 'kittens', isChild: { parentType: 'cats' } };
-            let cat = { value: 'Cat', checked: true, type: 'kittens', isChild: { parentType: 'cats' } };
+            let kitty = { value: 'Kitty', checked: false, type: 'cats', isParentOf: 'kittens' };
+            let allCat = { value: 'ALL', checked: true, type: 'cats', isParentOf: 'kittens' };
+            let allKitten = { value: 'ALL', checked: true, type: 'kittens', isChildOf: 'cats', cats: [1] };
+            let cat = { value: 'Cat', checked: true, type: 'kittens', isChildOf: 'cats', cats: [1] };
             component._options = [
                 { type: 'cats', data: [allCat, kitty], originalData: [allCat, kitty] },
                 { type: 'kittens', data: [allKitten, cat], originalData: [allKitten, cat] }
             ];
             spyOn(component, 'setIndeterminateState');
-            component.modifyAffectedParentsOrChildren(true, { isParent: true, type: 'cats' });
+            component.modifyAffectedParentsOrChildren(true, { isParentOf: true, type: 'cats' });
             expect(component._options[0].data[0].checked).toBeTruthy();
             expect(component.setIndeterminateState).toHaveBeenCalled();
         });
