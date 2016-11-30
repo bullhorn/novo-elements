@@ -1,7 +1,7 @@
 // NG2
 import { Component, ElementRef } from '@angular/core';
 // APP
-import { PickerResults } from './../picker-results/PickerResults';
+import { BasePickerResults } from './../picker-results/PickerResults';
 import { Helpers } from './../../../../utils/Helpers';
 import { NovoLabelService } from './../../../../services/novo-label-service';
 // Vendor
@@ -38,9 +38,11 @@ import { Observable } from 'rxjs/Rx';
         <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
     `
 })
-export class ChecklistPickerResults extends PickerResults {
-    constructor(element:ElementRef, labels:NovoLabelService) {
-        super(element, labels);
+export class ChecklistPickerResults extends BasePickerResults {
+    filteredMatches:any;
+
+    constructor(element:ElementRef, public labels:NovoLabelService) {
+        super(element);
     }
 
     search() {
@@ -65,6 +67,7 @@ export class ChecklistPickerResults extends PickerResults {
             }
         }));
     }
+
     /**
      * @name filterData=
      * @param matches - Collection of objects=
@@ -72,7 +75,7 @@ export class ChecklistPickerResults extends PickerResults {
      * @description This function loops through the picker options and creates a filtered list of objects that contain
      * the newSearch.
      */
-    filterData(matches):Array {
+    filterData(matches):any {
         if (this.term && matches) {
             this.filteredMatches = matches.map(section => {
                 let items = section.originalData.filter((match) => {
@@ -95,6 +98,7 @@ export class ChecklistPickerResults extends PickerResults {
     /**
      * @name selectMatch
      * @param event
+     * @param item
      *
      * @description
      */

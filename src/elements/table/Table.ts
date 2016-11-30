@@ -148,29 +148,29 @@ export class NovoTableHeaderElement {
     `
 })
 export class NovoTableElement implements DoCheck {
-    @Input() config: any;
-    @Input() columns: Array<any>;
-    @Input() theme: string;
-    @Input() skipSortAndFilterClear: boolean = false;
+    @Input() config:any;
+    @Input() columns:Array<any>;
+    @Input() theme:string;
+    @Input() skipSortAndFilterClear:boolean = false;
 
-    @Output() onRowClick: EventEmitter<any> = new EventEmitter();
-    @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
-    @Output() onTableChange: EventEmitter<any> = new EventEmitter();
+    @Output() onRowClick:EventEmitter<any> = new EventEmitter();
+    @Output() onRowSelect:EventEmitter<any> = new EventEmitter();
+    @Output() onTableChange:EventEmitter<any> = new EventEmitter();
 
-    _rows: Array<any> = [];
-    modifiedRows: Array<any> = [];
-    selected: Array<any> = [];
-    activeId: number = 0;
-    master: boolean = false;
-    indeterminate: boolean = false;
-    lastPage: number = 0;
-    selectedPageCount: number = 0;
-    showSelectAllMessage: boolean = false;
-    currentSortColumn: any;
-    pagedData: any;
-    pageSelected: any;
+    _rows:Array<any> = [];
+    modifiedRows:Array<any> = [];
+    selected:Array<any> = [];
+    activeId:number = 0;
+    master:boolean = false;
+    indeterminate:boolean = false;
+    lastPage:number = 0;
+    selectedPageCount:number = 0;
+    showSelectAllMessage:boolean = false;
+    currentSortColumn:any;
+    pagedData:any;
+    pageSelected:any;
 
-    constructor(public labels: NovoLabelService) {
+    constructor(public labels:NovoLabelService) {
     }
 
     @Input()
@@ -529,7 +529,7 @@ export class NovoTableElement implements DoCheck {
      */
     fireTableChangeEvent() {
         // Construct a table change object
-        const onTableChange: any = {};
+        const onTableChange:any = {};
         const filters = this.columns.filter((col) => col.filter && col.filter.length);
         onTableChange.filter = filters.length ? filters : false;
         onTableChange.sort = this.currentSortColumn ? this.currentSortColumn : false;
@@ -652,7 +652,7 @@ export class NovoTableElement implements DoCheck {
      */
     getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
-        let opts: Array<any> = [
+        let opts:Array<any> = [
             { label: 'Past 1 Day', min: -1, max: 0 },
             { label: 'Past 7 Days', min: -7, max: 0 },
             { label: 'Past 30 Days', min: -30, max: 0 },
@@ -690,7 +690,7 @@ export class NovoTableElement implements DoCheck {
                 value = value.toLowerCase() ? value.toLowerCase() : value;
                 if (value === filterKeywords) {
                     return true;
-                } else if (~ value.indexOf(filterKeywords) || ~ value.indexOf(filterKeywords)) {
+                } else if (~value.indexOf(filterKeywords) || ~value.indexOf(filterKeywords)) {
                     return true;
                 }
                 return false;
@@ -704,7 +704,6 @@ export class NovoTableElement implements DoCheck {
         } else {
             config.filtering.options = config.filtering.originalOptions;
         }
-        this.onFilterChange(config);
+        this.onFilterChange();
     }
-
 }

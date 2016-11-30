@@ -25,7 +25,7 @@ describe('Element: NovoDateTimePickerElement', () => {
     describe('Function: select()', () => {
         it('should set selected', () => {
             expect(component.select).toBeDefined();
-            component.select(event, { date: undefined });
+            component.select({}, { date: undefined });
             let day = { date: moment('12/08/16') };
             let event = { preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
             component.select(event, day);

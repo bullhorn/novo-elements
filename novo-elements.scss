@@ -6,16 +6,13 @@
 @import "./src/styles/global/variables";
 @import "./src/styles/global/include-media";
 @import "./src/styles/global/flex-grid";
-@import "./src/styles/global/layout";
-// --------------------------------------------------
+@import "./src/styles/global/layout"; // --------------------------------------------------
 // Plugins (Third-Party-Libraries)
 // --------------------------------------------------
-@import "hint";
-// --------------------------------------------------
+@import "hint"; // --------------------------------------------------
 // Content
 // --------------------------------------------------
-@import "./src/styles/content/typography";
-// --------------------------------------------------
+@import "./src/styles/content/typography"; // --------------------------------------------------
 // Elements
 // --------------------------------------------------
 @import "./src/elements/tabs/Tabs";
@@ -34,6 +31,7 @@
 @import "./src/elements/switch/Switch";
 @import "./src/elements/date-picker/DatePicker";
 @import "./src/elements/time-picker/TimePicker";
+@import "./src/elements/date-time-picker/DateTimePicker";
 @import "./src/elements/header/Header";
 @import "./src/elements/list/List";
 @import "./src/elements/table/Table";
@@ -47,3 +45,4 @@
 @import "./src/elements/tip-well/TipWell";
 @import "./src/elements/ckeditor/CKEditor";
 @import "./src/elements/category-dropdown/CategoryDropdown";
+@import "./src/elements/multi-picker/MultiPicker";

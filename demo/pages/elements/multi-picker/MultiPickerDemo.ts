@@ -1,9 +1,9 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import BasicMultiPicker from './templates/BasicMultiPickerDemo.html';
-import NestedMultiPicker from './templates/NestedMultiPickerDemo.html';
-import { ChecklistPickerResults } from './../../../../src/novo-elements';
+import { ChecklistPickerResults } from './../../../../index';
+let BasicMultiPicker = require('./templates/BasicMultiPickerDemo.html');
+let NestedMultiPicker = require('./templates/NestedMultiPickerDemo.html');
 
 const template = `
 <div class="container">
@@ -36,14 +36,19 @@ const template = `
     template: template
 })
 export class MultiPickerDemoComponent {
+    BasicMultiPicker:string = BasicMultiPicker;
+    NestedMultiPicker:string = NestedMultiPicker;
+
+    placeholder:string = 'Select...';
+    value:any = { states: ['Alabama'], collaborators: [1, 2, 3, 4] };
+    types:any = [{ value: 'states', singular: 'state' }, { value: 'collaborators', singular: 'collaborator' }];
+    staticDemo:any;
+    parentChild:any;
+    parentChildTypes:any;
+    formatted:any;
+    parentChildValue:any;
+
     constructor() {
-        this.BasicMultiPicker = BasicMultiPicker;
-        this.NestedMultiPicker = NestedMultiPicker;
-
-        this.placeholder = 'Select...';
-        this.value = { states: ['Alabama'], collaborators: [1, 2, 3, 4] };
-        this.types = [{ value: 'states', singular: 'state' }, { value: 'collaborators', singular: 'collaborator' }];
-
         let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
         let collaborators = [{
             id: 1,
@@ -100,7 +105,7 @@ export class MultiPickerDemoComponent {
             departments: [4, 2],
             name: 'Ziva Eng Fin'
         }];
-        this.static = {
+        this.staticDemo = {
             options: [
                 { type: 'collaborators', data: collaborators, format: '$firstName $lastName', field: 'id' },
                 { type: 'states', data: states }
@@ -121,6 +126,7 @@ export class MultiPickerDemoComponent {
         };
         this.parentChildValue = { departments: [4], users: [2, 5] };
     }
+
     onChanged() {
     }
 }

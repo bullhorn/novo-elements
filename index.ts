@@ -22,6 +22,7 @@ export { NovoPickerModule } from './src/elements/picker/Picker.module';
 export { NovoChipsModule } from './src/elements/chips/Chips.module';
 export { NovoDatePickerModule } from './src/elements/date-picker/DatePicker.module';
 export { NovoTimePickerModule } from './src/elements/time-picker/TimePicker.module';
+export { NovoDateTimePickerModule } from './src/elements/date-time-picker/DateTimePicker.module';
 export { NovoNovoCKEditorModule } from './src/elements/ckeditor/CKEditor.module';
 export { NovoTipWellModule } from './src/elements/tip-well/TipWell.module';
 export { NovoTableModule } from './src/elements/table/Table.module';
@@ -29,6 +30,7 @@ export { NovoTableExtrasModule } from './src/elements/table/extras/TableExtras.m
 export { NovoFormModule } from './src/elements/form/Form.module';
 export { NovoFormExtrasModule } from './src/elements/form/extras/FormExtras.module';
 export { NovoCategoryDropdownModule } from './src/elements/category-dropdown/CategoryDropdown.module';
+export { NovoMultiPickerModule } from './src/elements/multi-picker/MultiPicker.module';
 
 // Export all services
 export { NovoToastService } from './src/elements/toast/ToastService';
@@ -39,8 +41,9 @@ export { NovoDragulaService } from './src/elements/dragula/DragulaService';
 // Export classes that will need to be imported
 export { NovoModalParams, NovoModalRef } from './src/elements/modal/Modal';
 export { QuickNoteResults } from './src/elements/quick-note/extras/quick-note-results/QuickNoteResults';
-export { PickerResults, BasePickerResults } from './src/elements/picker/extras/picker-results/PickerResults';
+export { PickerResults } from './src/elements/picker/extras/picker-results/PickerResults';
 export { EntityPickerResults } from './src/elements/picker/extras/entity-picker-results/EntityPickerResults';
+export { ChecklistPickerResults } from './src/elements/picker/extras/checklist-picker-results/ChecklistPickerResults';
 export { BaseRenderer } from './src/elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './src/elements/table/extras/date-cell/DateCell';
 export { FormValidators } from './src/elements/form/FormValidators';
@@ -61,6 +64,5 @@ export * from './novo-elements.providers';
 // Pipes
 export * from './src/pipes/plural/Plural';
 
-// Export modules
+// Export main module
 export { NovoElementsModule } from './novo-elements.module';
-export { NovoElementProviders } from './novo-elements.providers';

@@ -27,7 +27,7 @@ export class NovoListElement {
         <ng-content select="item-end"></ng-content>
     `
 })
-export class NovoListItemElement {
+export class NovoListItemElement implements OnInit {
     avatar:boolean = false;
 
     constructor(private element:ElementRef) {

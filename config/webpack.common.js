@@ -28,12 +28,12 @@ module.exports = function (options) {
             rules: [{
                 enforce: 'pre',
                 test: /\.ts$/,
-                loader: 'awesome-typescript-loader',
+                loader: 'tslint-loader',
                 exclude: /(node_modules)/
             }, {
                 test: /\.ts$/,
                 loaders: [
-                    'ts-loader?transpileOnly=true'
+                    'awesome-typescript-loader'
                 ],
                 exclude: [/\.(spec|e2e)\.ts$/]
             }, {

@@ -36,7 +36,7 @@ import {
     SlidesDemoComponent,
     EditorDemoComponent,
     TipWellDemoComponent,
-    CategoryDropdownDemoComponent
+    CategoryDropdownDemoComponent,
     MultiPickerDemoComponent
 } from './pages/elements';
 import { UtilsDemoComponent } from './pages/utils/utils/UtilsDemo';

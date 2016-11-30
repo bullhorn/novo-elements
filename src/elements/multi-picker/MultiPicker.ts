@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef, ElementRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, forwardRef, ElementRef, Input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -17,8 +17,6 @@ const CHIPS_VALUE_ACCESSOR = {
 
 @Component({
     selector: 'multi-picker',
-    inputs: ['source', 'placeholder', 'value', 'types'],
-    outputs: ['changed', 'focus', 'blur'],
     providers: [CHIPS_VALUE_ACCESSOR],
     template: `
         <chip
@@ -53,19 +51,41 @@ const CHIPS_VALUE_ACCESSOR = {
         '[class.with-value]': 'items.length > 0'
     }
 })
-export class NovoMultiPickerElement extends OutsideClick {
-    changed:EventEmitter = new EventEmitter();
-    focus:EventEmitter = new EventEmitter();
-    blur:EventEmitter = new EventEmitter();
-    items:Array = [];
+export class NovoMultiPickerElement extends OutsideClick implements OnInit {
+    @Input() source:any;
+    @Input() placeholder:any = '';
+    @Input() types:any;
+    @Output() changed:EventEmitter<any> = new EventEmitter();
+    @Output() focus:EventEmitter<any> = new EventEmitter();
+    @Output() blur:EventEmitter<any> = new EventEmitter();
+
+    get value() {
+        return this._value;
+    }
+
+    @Input()
+    set value(selectedItems) {
+        if (selectedItems) {
+            this.types.forEach(x => this._value[x.value] = selectedItems[x.value]);
+        } else {
+            this._value = {};
+            this.types.forEach(x => this._value[x.value] = []);
+        }
+        this.changed.emit(selectedItems);
+        this.onModelChange(selectedItems);
+    }
+
+    items:any = [];
     _items = new ReplaySubject(1);
+    options:any;
+    _options:any;
     selected:any = null;
-    placeholder:string = '';
-    config:Object = {};
+    config:any = {};
     // private data model
-    _value:Object = {};
-    notShown:Object = {};
+    _value:any = {};
+    notShown:any = {};
     // Placeholders for the callbacks
+    model:any;
     onModelChange:Function = () => {
     };
     onModelTouched:Function = () => {
@@ -106,7 +126,7 @@ export class NovoMultiPickerElement extends OutsideClick {
     }
 
     setupOptionsByType(section) {
-        let formattedSection = {
+        let formattedSection:any = {
             type: section.type
         };
         formattedSection.data = section.data.map(item => {
@@ -188,7 +208,7 @@ export class NovoMultiPickerElement extends OutsideClick {
         } else {
             this.updateDisplayItems(event, 'add');
             this.value[event.type].push(event.value);
-            this.updateAllItemState(event.type, true);
+            this.updateAllItemState(event.type);
             this.triggerValueUpdate();
         }
         this.updateParentOrChildren(event, 'select');
@@ -214,7 +234,9 @@ export class NovoMultiPickerElement extends OutsideClick {
         if (adding) {
             this.items.push(item);
         } else {
-            if (this.items.indexOf(item) > -1) { this.items.splice(this.items.indexOf(item), 1); }
+            if (this.items.indexOf(item) > -1) {
+                this.items.splice(this.items.indexOf(item), 1);
+            }
         }
         this.updateDisplayText(this.items);
         this._items.next(this.items);
@@ -233,7 +255,9 @@ export class NovoMultiPickerElement extends OutsideClick {
                     count = selectedOfType.length;
                 }
                 let displayType = count === 1 ? type.singular : type.value;
-                if (count > 0) { this.notShown.push({ type: displayType, count: count }); }
+                if (count > 0) {
+                    this.notShown.push({ type: displayType, count: count });
+                }
             });
         }
     }
@@ -253,7 +277,7 @@ export class NovoMultiPickerElement extends OutsideClick {
         this.removeItem(item, triggeredByEvent);
     }
 
-    removeItem(item, triggeredByEvent) {
+    removeItem(item, triggeredByEvent?:any) {
         item.checked = false;
         this.deselectAll();
         this.removeValue(item);
@@ -316,7 +340,9 @@ export class NovoMultiPickerElement extends OutsideClick {
 
     selectAll(allOfType, type) {
         allOfType[0].checked = true;
-        let values = allOfType.map(i => { return i.value; });
+        let values = allOfType.map(i => {
+            return i.value;
+        });
         //remove 'ALL' value
         values.splice(0, 1);
         this.value[type] = values;
@@ -333,7 +359,9 @@ export class NovoMultiPickerElement extends OutsideClick {
         allItem.indeterminate = true;
         let selectedItems = allOfType.filter(i => i.checked === true);
         this.items = [...this.items, ...selectedItems];
-        let values = selectedItems.map(i => { return i.value; });
+        let values = selectedItems.map(i => {
+            return i.value;
+        });
         this.value[type] = [...values];
     }
 
@@ -341,29 +369,12 @@ export class NovoMultiPickerElement extends OutsideClick {
         // If the elements doesn't contain the target element, it is an outside click
         if (!this.element.nativeElement.contains(event.target)) {
             this.blur.emit(event);
-            this.deselectAll(event, false);
+            this.deselectAll();
         }
     }
 
     getAllOfType(type) {
         return this._options.filter(x => x.type === type)[0].originalData;
-    }
-
-    //get accessor
-    get value() {
-        return this._value;
-    }
-
-    //set accessor including call the onchange callback
-    set value(selectedItems) {
-        if (selectedItems) {
-            this.types.forEach(x => this._value[x.value] = selectedItems[x.value]);
-        } else {
-            this._value = {};
-            this.types.forEach(x => this._value[x.value] = []);
-        }
-        this.changed.emit(selectedItems);
-        this.onModelChange(selectedItems);
     }
 
     updateParentOrChildren(item, action) {
@@ -387,12 +398,16 @@ export class NovoMultiPickerElement extends OutsideClick {
         let allCheckedChildren = allChildren.filter(x => x.checked === true);
 
         allParentType.forEach(obj => {
-            if (obj.value === 'ALL') { return; }
+            if (obj.value === 'ALL') {
+                return;
+            }
             let selectedChildrenOfParent = allCheckedChildren.filter(x => {
                 return x[parentType].filter(y => y === obj.value).length > 0;
             });
             if (selecting) {
-                if (obj.checked) { return; }
+                if (obj.checked) {
+                    return;
+                }
                 obj.indeterminate = selectedChildrenOfParent.length > 0;
             } else {
                 if (selectedChildrenOfParent.length > 0) {
@@ -450,7 +465,9 @@ export class NovoMultiPickerElement extends OutsideClick {
             if (x.value === 'ALL' && !x.checked) {
                 x.indeterminate = selecting;
             } else {
-                if (x.checked && !selecting) { this.remove(null, x); }
+                if (x.checked && !selecting) {
+                    this.remove(null, x);
+                }
                 x.checked = selecting;
             }
         });
@@ -472,7 +489,9 @@ export class NovoMultiPickerElement extends OutsideClick {
         let childType = parent.isParentOf;
         let potentialChildren = this.getAllOfType(childType);
         potentialChildren.forEach(x => {
-            if (x.value === 'ALL') { return; }
+            if (x.value === 'ALL') {
+                return;
+            }
             if (x[parent.type].filter(y => y === parent.value).length > 0) {
                 if (x.checked && !selecting) {
                     x.checked = false;
@@ -513,7 +532,9 @@ export class NovoMultiPickerElement extends OutsideClick {
     setInitialValue(model) {
         this.items = [];
         this.value = model || {};
-        if (!this.types) { return; }
+        if (!this.types) {
+            return;
+        }
         this.types.forEach(typeObj => {
             let type = typeObj.value;
             if (this.value[type]) {
@@ -528,7 +549,9 @@ export class NovoMultiPickerElement extends OutsideClick {
                     }
                     let value = optionsByType.filter(x => x.value === item)[0];
                     value.checked = true;
-                    if (!allSelected) { this.updateDisplayItems(value, 'add'); }
+                    if (!allSelected) {
+                        this.updateDisplayItems(value, 'add');
+                    }
                     if (value.isParentOf) {
                         this.updateChildrenValue(value, 'select');
                     }

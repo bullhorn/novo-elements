@@ -66,10 +66,7 @@ import { NovoLabelService } from './../../services/novo-label-service';
                         <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event); toggleState();" [value]="formattedValue" readonly/>
                         <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                         <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
-                        <div class="date-time-container">
-                            <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateTimeValue($event, 'date'); checkState();" [formControlName]="control.key"></novo-date-picker>
-                            <novo-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event, 'time'); checkState();" [formControlName]="control.key"></novo-time-picker>
-                        </div>
+                        <novo-date-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event); checkState();" [formControlName]="control.key"></novo-date-time-picker>
                     </div>
                     <!--Address-->
                     <novo-address *ngSwitchCase="'address'" [formControlName]="control.key"></novo-address>
@@ -129,7 +126,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnChange
     @Input() form:NovoFormGroup;
     @Output() change:EventEmitter<any> = new EventEmitter();
 
-    formattedDateTimeValue:any;
     formattedValue:string = '';
     state:string = 'horizontal';
     alwaysActive:[any] = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
@@ -208,18 +204,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnChange
         this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.timeFormat);
     }
 
-    formatDateTimeValue(event, part?) {
-        this.formattedDateTimeValue = this.formattedDateTimeValue || new Date();
-
-        if (part === 'date') {
-            this.formattedDateTimeValue.setFullYear(event.year, event.month - 1, event.day);
-        } else if (part === 'time') {
-            this.formattedDateTimeValue.setHours(event.hours, event.minutes, 0);
-        } else {
-            this.formattedDateTimeValue = new Date(event.date);
-        }
-
-        this.formattedValue = this.labels.formatDateWithFormat(this.formattedDateTimeValue, this.labels.dateTimeFormat);
+    formatDateTimeValue(event) {
+        this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.dateTimeFormat);
     }
 
     resizeTextArea(event) {

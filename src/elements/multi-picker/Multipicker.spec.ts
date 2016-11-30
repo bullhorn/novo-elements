@@ -329,8 +329,10 @@ describe('Element: NovoMultiPickerElement', () => {
         it('should unselect all if unselecting', () => {
             component.types = [{ value: 'cats' }];
             let kitty = { value: 'Kitty', checked: true, type: 'cats' };
-            component._options = [{ type: 'cats',
-                data: [{ value: 'ALL', checked: false, type: 'cats' }, kitty], originalData: [{ value: 'ALL', checked: false, type: 'cats' }, kitty] }];
+            component._options = [{
+                type: 'cats',
+                data: [{ value: 'ALL', checked: false, type: 'cats' }, kitty], originalData: [{ value: 'ALL', checked: false, type: 'cats' }, kitty]
+            }];
             component.value = { cats: [{ value: 'Kitty', checked: true, type: 'cats' }] };
             component.modifyAllOfType('cats', 'unselect');
             expect(component._options[0].data[1].checked).toBeFalsy();
@@ -524,7 +526,11 @@ describe('Element: NovoMultiPickerElement', () => {
     });
     describe('Function: onKeyDown(selecting, itemChanged)', () => {
         it('remove item if selected', () => {
-            let event = { keyCode: KeyCodes.BACKSPACE, target: { value: [] }, stopPropagation: () => {}, preventDefault: () => {} };
+            let event = {
+                keyCode: KeyCodes.BACKSPACE, target: { value: [] }, stopPropagation: () => {
+                }, preventDefault: () => {
+                }
+            };
             component.items = [1];
             component.selected = true;
             spyOn(component, 'remove');
@@ -532,7 +538,11 @@ describe('Element: NovoMultiPickerElement', () => {
             expect(component.remove).toHaveBeenCalled();
         });
         it('select item if none selected', () => {
-            let event = { keyCode: KeyCodes.BACKSPACE, target: { value: [] }, stopPropagation: () => {}, preventDefault: () => {} };
+            let event = {
+                keyCode: KeyCodes.BACKSPACE, target: { value: [] }, stopPropagation: () => {
+                }, preventDefault: () => {
+                }
+            };
             component.items = [1];
             component.selected = false;
             spyOn(component, 'select');

@@ -47,7 +47,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     }
 
     onCountryChange(evt) {
-        let country = findByCountryName(evt);
+        let country:any = findByCountryName(evt);
         this.model.countryName = country.name;
         this.model.countryCode = country.code;
         this.model.countryID = country.id;
@@ -90,9 +90,9 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
                 countryName = countryName.trim();
             }
             model.state = model.state || '';
-            let stateObj = getStateObjects(countryName).find(state => {
-                return state.code === model.state.replace(/\W+/g, '').toUpperCase() || state.name === model.state;
-            }) || {};
+            let stateObj:any = getStateObjects(countryName).find(state => {
+                    return state.code === model.state.replace(/\W+/g, '').toUpperCase() || state.name === model.state;
+                }) || {};
             this.model = Object.assign(model, { countryName: countryName, state: stateObj.name });
         }
     }

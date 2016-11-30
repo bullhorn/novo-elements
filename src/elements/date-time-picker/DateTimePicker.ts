@@ -1,10 +1,10 @@
 // NG2
-import { Component, EventEmitter, forwardRef, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef, trigger, state, style, transition, animate, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
 // Vendor
-import moment from 'moment/moment';
+import * as moment from 'moment';
 
 // Value accessor for the component (supports ngModel)
 const DATE_TIME_PICKER_VALUE_ACCESSOR = {
@@ -15,8 +15,6 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
 
 @Component({
     selector: 'novo-date-time-picker',
-    inputs: ['minYear', 'maxYear', 'start', 'end', 'inline', 'military'],
-    outputs: ['onSelect'],
     providers: [DATE_TIME_PICKER_VALUE_ACCESSOR],
     animations: [
         trigger('dateTextState', [
@@ -138,9 +136,16 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
         </div>
     `
 })
-export class NovoDateTimePickerElement implements ControlValueAccessor {
+export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
+    @Input() minYear:any;
+    @Input() maxYear:any;
+    @Input() start:any;
+    @Input() end:any;
+    @Input() inline:any;
+    @Input() military:any;
     // Select callback for output
-    onSelect = new EventEmitter(false);
+    @Output() onSelect:EventEmitter<any> = new EventEmitter(false);
+
     // List of all the weekdays (use moment to localize)
     weekday = moment.weekdays();
     // List of all months (use moment to localize)
@@ -161,8 +166,20 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     MINUTES = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
 
     model:any;
-    onModelChange:Function = () => {};
-    onModelTouched:Function = () => {};
+    month:any;
+    weeks:any;
+    selected:any;
+    meridian:any;
+    heading:any;
+    hoursClass:string;
+    activeHour;
+    minutesClass:string;
+    activeMinute;
+    inBetween;
+    onModelChange:Function = () => {
+    };
+    onModelTouched:Function = () => {
+    };
 
     ngOnInit() {
         // Determine the year array
@@ -182,7 +199,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
         this.ngOnChanges();
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes?:SimpleChanges) {
         this.updateCal(this.model, false, true);
         this.updateTime(this.model, false);
     }
@@ -190,7 +207,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     updateTime(time, fireEvents) {
         let momentValue = time ? moment(time) : moment();
         let hours = momentValue.hours();
-        let minutes = momentValue.minutes();
+        let minutes:any = momentValue.minutes();
 
         if (!this.military) {
             this.meridian = hours >= 12 ? 'pm' : 'am';
@@ -229,14 +246,14 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     }
 
     setMonth(month) {
-        let tmp = this.selected ? this.selected.clone().month(month) : new moment().month(month);
+        let tmp = this.selected ? this.selected.clone().month(month) : moment().month(month);
         this.updateCal(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
     }
 
     setYear(year) {
-        let tmp = this.selected ? this.selected.clone().year(year) : new moment().year(year);
+        let tmp = this.selected ? this.selected.clone().year(year) : moment().year(year);
         this.updateCal(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
@@ -292,7 +309,9 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     }
 
     updateHeading() {
-        if (!this.selected) return;
+        if (!this.selected) {
+            return;
+        }
         this.heading = {
             month: this.selected.format('MMMM'),
             year: this.selected.format('YYYY'),

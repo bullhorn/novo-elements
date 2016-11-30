@@ -13,17 +13,17 @@ import { Observable } from 'rxjs/Rx';
  * overwritten if custom list options are needed.
  */
 export class BasePickerResults {
-    _term: string = '';
-    matches: any = [];
-    hasError: boolean = false;
-    isLoading: boolean = true;
-    isStatic: boolean = true;
-    config: any;
-    activeMatch: any;
-    parent: any;
-    element: ElementRef;
+    _term:string = '';
+    matches:any = [];
+    hasError:boolean = false;
+    isLoading:boolean = true;
+    isStatic:boolean = true;
+    config:any;
+    activeMatch:any;
+    parent:any;
+    element:ElementRef;
 
-    constructor(element: ElementRef) {
+    constructor(element:ElementRef) {
         this.element = element;
     }
 
@@ -37,14 +37,14 @@ export class BasePickerResults {
         this.isLoading = true;
         this.search(value)
             .subscribe(
-            results => {
-                this.matches = this.isStatic ? this.filterData(results) : results;
-                this.isLoading = false;
-            },
-            () => {
-                this.hasError = true;
-                this.isLoading = false;
-            });
+                results => {
+                    this.matches = this.isStatic ? this.filterData(results) : results;
+                    this.isLoading = false;
+                },
+                () => {
+                    this.hasError = true;
+                    this.isLoading = false;
+                });
     }
 
     search(term, mode?) {
@@ -89,7 +89,7 @@ export class BasePickerResults {
      * @description This function structures an array of nodes into an array of objects with a
      * 'name' field by default.
      */
-    structureArray(collection: any): any {
+    structureArray(collection:any):any {
         let dataArray = collection.data ? collection.data : collection;
         if (dataArray && (typeof dataArray[0] === 'string' || typeof dataArray[0] === 'number')) {
             return collection.map((item) => {
@@ -113,7 +113,7 @@ export class BasePickerResults {
      * @description This function loops through the picker options and creates a filtered list of objects that contain
      * the newSearch.
      */
-    filterData(matches): Array<any> {
+    filterData(matches):Array<any> {
         if (this.term && matches) {
             return matches.filter((match) => {
                 return ~String(match.label).toLowerCase().indexOf(this.term.toLowerCase());
@@ -184,10 +184,11 @@ export class BasePickerResults {
     /**
      * @name selectMatch
      * @param event
+     * @param item
      *
      * @description
      */
-    selectMatch(event?: any) {
+    selectMatch(event?:any, item?:any) {
         if (event) {
             event.stopPropagation();
             event.preventDefault();
@@ -248,7 +249,7 @@ export class BasePickerResults {
     `
 })
 export class PickerResults extends BasePickerResults {
-    constructor(element: ElementRef, public labels: NovoLabelService) {
+    constructor(element:ElementRef, public labels:NovoLabelService) {
         super(element);
     }
 }
