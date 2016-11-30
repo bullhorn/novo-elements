@@ -55,38 +55,38 @@ const template = `
     template: template
 })
 export class FormDemoComponent {
-    private DynamicFormDemoTpl:string = DynamicFormDemoTpl;
-    private VerticalDynamicFormDemoTpl:string = VerticalDynamicFormDemoTpl;
-    private TextBasedControlsDemoTpl:string = TextBasedControlsDemoTpl;
-    private CheckBoxControlsDemoTpl:string = CheckBoxControlsDemoTpl;
-    private FileInputControlsDemoTpl:string = FileInputControlsDemoTpl;
-    private CalendarControlsDemoTpl:string = CalendarControlsDemoTpl;
-    private quickNoteConfig:any;
-    private textControl:any;
-    private emailControl:any;
-    private numberControl:any;
-    private currencyControl:any;
-    private floatControl:any;
-    private percentageControl:any;
-    private quickNoteControl:any;
-    private textForm:any;
-    private checkControl:any;
-    private checkListControl:any;
-    private tilesControl:any;
-    private checkForm:any;
-    private fileControl:any;
-    private multiFileControl:any;
-    private fileForm:any;
-    private dateControl:any;
-    private timeControl:any;
-    private dateTimeControl:any;
-    private dynamic:any;
-    private dynamicForm:any;
-    private dynamicVertical:any;
-    private dynamicVerticalForm:any;
-    private calendarForm:any;
+    private DynamicFormDemoTpl: string = DynamicFormDemoTpl;
+    private VerticalDynamicFormDemoTpl: string = VerticalDynamicFormDemoTpl;
+    private TextBasedControlsDemoTpl: string = TextBasedControlsDemoTpl;
+    private CheckBoxControlsDemoTpl: string = CheckBoxControlsDemoTpl;
+    private FileInputControlsDemoTpl: string = FileInputControlsDemoTpl;
+    private CalendarControlsDemoTpl: string = CalendarControlsDemoTpl;
+    private quickNoteConfig: any;
+    private textControl: any;
+    private emailControl: any;
+    private numberControl: any;
+    private currencyControl: any;
+    private floatControl: any;
+    private percentageControl: any;
+    private quickNoteControl: any;
+    private textForm: any;
+    private checkControl: any;
+    private checkListControl: any;
+    private tilesControl: any;
+    private checkForm: any;
+    private fileControl: any;
+    private multiFileControl: any;
+    private fileForm: any;
+    private dateControl: any;
+    private timeControl: any;
+    private dateTimeControl: any;
+    private dynamic: any;
+    private dynamicForm: any;
+    private dynamicVertical: any;
+    private dynamicVerticalForm: any;
+    private calendarForm: any;
 
-    constructor(private formUtils:FormUtils) {
+    constructor(private formUtils: FormUtils) {
         // Quick note config
         this.quickNoteConfig = {
             triggers: {
@@ -161,6 +161,6 @@ export class FormDemoComponent {
     }
 
     onChange(value) {
-        console.log('I changed!', value);
+        console.log('I changed!', value); // tslint:disable-line
     }
 }

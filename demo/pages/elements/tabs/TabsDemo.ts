@@ -55,10 +55,10 @@ export class TabsDemoComponent {
     private RouterDemoTpl:string = RouterDemoTpl;
 
     tabSelected() {
-        console.log('TAB SELECTED');
+        console.log('TAB SELECTED'); // tslint:disable-line
     }
 
     tabDeselected() {
-        console.log('TAB DESELECTED');
+        console.log('TAB DESELECTED'); // tslint:disable-line
     }
 }

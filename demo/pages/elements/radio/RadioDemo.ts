@@ -28,10 +28,10 @@ export class RadioDemoComponent {
     VerticalRadioTpl: string = VerticalRadioTpl;
 
     onChangeVertical(change) {
-        console.log('Vertical Radio Change:', change);
+        console.log('Vertical Radio Change:', change); // tslint:disable-line
     }
 
     onChangeBasic(change) {
-        console.log('Basic Radio Change:', change);
+        console.log('Basic Radio Change:', change); // tslint:disable-line
     }
 }
