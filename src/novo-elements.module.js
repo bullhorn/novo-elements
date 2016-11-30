@@ -25,6 +25,7 @@ import { NovoPickerModule } from './elements/picker/Picker.module';
 import { NovoChipsModule } from './elements/chips/Chips.module';
 import { NovoDatePickerModule } from './elements/date-picker/DatePicker.module';
 import { NovoTimePickerModule } from './elements/time-picker/TimePicker.module';
+import { NovoDateTimePickerModule } from './elements/date-time-picker/DateTimePicker.module';
 import { NovoNovoCKEditorModule } from './elements/ckeditor/CKEditor.module';
 import { NovoTipWellModule } from './elements/tip-well/TipWell.module';
 import { NovoTableModule } from './elements/table/Table.module';
@@ -66,6 +67,7 @@ import { ComponentUtils } from './utils/component-utils/ComponentUtils';
         NovoChipsModule,
         NovoDatePickerModule,
         NovoTimePickerModule,
+        NovoDateTimePickerModule,
         NovoNovoCKEditorModule,
         NovoTipWellModule,
         NovoTableModule,

@@ -125,18 +125,8 @@ export class NovoControlElement extends OutsideClick {
         this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.timeFormat);
     }
 
-    formatDateTimeValue(event, part) {
-        this.formattedDateTimeValue = this.formattedDateTimeValue || new Date();
-
-        if (part === 'date') {
-            this.formattedDateTimeValue.setFullYear(event.year, event.month - 1, event.day);
-        } else if (part === 'time') {
-            this.formattedDateTimeValue.setHours(event.hours, event.minutes, 0);
-        } else {
-            this.formattedDateTimeValue = new Date(event.date);
-        }
-
-        this.formattedValue = this.labels.formatDateWithFormat(this.formattedDateTimeValue, this.labels.dateTimeFormat);
+    formatDateTimeValue(event) {
+        this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.dateTimeFormat);
     }
 
     resizeTextArea(event) {

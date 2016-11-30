@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import CalendarDemoTpl from './templates/CalendarDemo.html';
 import TimeDemoTpl from './templates/TimeDemo.html';
 import RangeDemoTpl from './templates/RangeDemo.html';
+import DateTimeDemoTpl from './templates/DateTimeDemo.html';
+
 // Vendor
 import moment from 'moment/moment';
 
@@ -29,6 +31,10 @@ const template = `
     <h5>Range Picker</h5>
     <div class="example demo">${RangeDemoTpl}</div>
     <code-snippet [code]="RangeDemoTpl"></code-snippet>
+
+    <h5>Date Time Picker</h5>
+    <div class="example demo">${DateTimeDemoTpl}</div>
+    <code-snippet [code]="DateTimeDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -41,6 +47,7 @@ export class CalendarDemoComponent {
         this.CalendarDemoTpl = CalendarDemoTpl;
         this.TimeDemoTpl = TimeDemoTpl;
         this.RangeDemoTpl = RangeDemoTpl;
+        this.DateTimeDemoTpl = DateTimeDemoTpl;
 
         this.time = new Date();
         this.dateOne = new Date();
@@ -51,5 +58,6 @@ export class CalendarDemoComponent {
             startDate: null,
             endDate: null
         };
+        this.dateTime = new Date();
     }
 }

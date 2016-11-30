@@ -192,10 +192,10 @@ novo-form {
                                     flex: 1;
                                     position: relative;
 
-                                     > i.bhi-calendar,
+                                     > i.bhi-clock,
                                      > i.bhi-search,
                                      > i.bhi-times,
-                                    > i.bhi-clock {
+                                    > i.bhi-calendar {
                                         position: absolute;
                                         right: 0;
                                         top: 0;
@@ -207,8 +207,9 @@ novo-form {
                                         font-size: 1.1em;
                                     }
 
-                                     > novo-date-picker,
-                                    > novo-time-picker {
+                                     > novo-time-picker,
+                                    > novo-date-picker,
+                                    novo-date-time-picker {
                                         position: absolute;
                                         top: 100%;
                                         left: 0;
@@ -219,6 +220,9 @@ novo-form {
                                         top: 100%;
                                         left: 0;
                                         display: flex;
+                                        flex-direction: column;
+                                        background: #fff;
+                                        z-index: 9;
                                         box-shadow: 0 1px 3px rgba(0,0,0,0.3);
                                         border-bottom-right-radius: 3px;
                                         border-bottom-left-radius: 3px;
@@ -237,9 +241,32 @@ novo-form {
                                         }
 
                                         novo-time-picker {
+                                            position: absolute;
+                                            height: 100%;
+                                            width: 100%;
                                             border-top-left-radius: 0;
                                             border-bottom-left-radius: 0;
                                             box-shadow: none;
+
+                                            .digital {
+                                                display: block;
+                                                position: absolute;
+                                                bottom: 0;
+                                                width: 100%;
+                                            }
+                                        }
+
+                                        .time-control {
+                                            border-top: 1px solid #f4f4f4;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+
+                                            .am-pm {
+                                                display: flex;
+                                                flex-direction: column;
+                                                margin-left: 10px;
+                                            }
                                         }
                                     }
 
@@ -247,9 +274,9 @@ novo-form {
                                         padding-bottom: 0;
 
                                         &.ng-touched.ng-invalid:not(.ng-pristine) {
-                                             > input:focus,
+                                             > input,
                                              > input:hover,
-                                            > input {
+                                            > input:focus {
                                                 border-bottom-color: transparent !important;
                                             }
                                         }
@@ -325,8 +352,8 @@ novo-form {
                                                 color: rgba(0, 0, 0, .3);
                                             }
 
-                                             > p,
-                                            > h4 {
+                                             > h4,
+                                            > p {
                                                 margin: 0;
                                                 max-width: none;
                                                 padding: 0;
