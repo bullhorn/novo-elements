@@ -1567,7 +1567,8 @@ p {
   padding: 0.25em 0 0.55em;
   max-width: 33em; }
 
-.caption, .calendar-demo-side-by-side > p > label {
+.caption, .calendar-demo-date-time > p > label,
+.calendar-demo-side-by-side > p > label {
   font-size: 1.125em;
   font-weight: 700;
   text-transform: uppercase;
@@ -5602,7 +5603,9 @@ novo-select {
         color: rgba(0, 0, 0, 0.73); }
     novo-select div[type="button"] i {
       font-size: 0.8em;
-      color: #A9A9A9; }
+      color: #A9A9A9;
+      position: absolute;
+      right: 10px; }
   novo-select .novo-select-list {
     background-color: white;
     cursor: default;
@@ -5801,6 +5804,9 @@ novo-picker {
     top: 100%;
     width: 100%;
     margin-top: 0.5em; }
+    novo-picker div.picker-results-container entity-picker-results,
+    novo-picker div.picker-results-container picker-results.active {
+      margin-bottom: 100px; }
 
 .picker-results,
 .quick-note-results,
@@ -6923,7 +6929,8 @@ novo-time-picker {
   novo-time-picker .analog {
     height: 250px;
     width: 250px;
-    position: relative; }
+    position: relative;
+    margin: 10% auto; }
   novo-time-picker .analog--inner {
     top: 0;
     left: 0;
@@ -7587,6 +7594,1086 @@ novo-time-picker {
     width: 32px;
     right: 2px;
     margin-top: -17px; }
+
+novo-date-time-picker {
+  display: block;
+  width: 250px;
+  min-width: 250px;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  /* ANALOG CLOCK
+    ----------------------------- */ }
+  novo-date-time-picker .date-time-container {
+    position: relative; }
+    novo-date-time-picker .date-time-container .view-container {
+      position: relative; }
+    novo-date-time-picker .date-time-container .time-picker {
+      position: absolute;
+      height: 100%;
+      background: #fff;
+      -webkit-transform: translateX(100%);
+      transform: translateX(100%);
+      -webkit-transition: -webkit-transform 200ms ease-in-out;
+      transition: -webkit-transform 200ms ease-in-out;
+      transition: transform 200ms ease-in-out;
+      transition: transform 200ms ease-in-out, -webkit-transform 200ms ease-in-out;
+      z-index: 2;
+      top: 0; }
+    novo-date-time-picker .date-time-container .date-time-tabs {
+      border-bottom: 1px solid #e0e0e0;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      position: relative;
+      height: 45px; }
+      novo-date-time-picker .date-time-container .date-time-tabs > span {
+        color: #4A89DC;
+        text-align: center;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        cursor: pointer;
+        -webkit-transition: opacity 200ms ease-in-out;
+        transition: opacity 200ms ease-in-out;
+        opacity: 0.6; }
+        novo-date-time-picker .date-time-container .date-time-tabs > span:hover {
+          opacity: 1 !important; }
+        novo-date-time-picker .date-time-container .date-time-tabs > span .meridian {
+          text-transform: uppercase; }
+      novo-date-time-picker .date-time-container .date-time-tabs .indicator {
+        position: absolute;
+        width: 50%;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background: #4A89DC;
+        -webkit-transition: -webkit-transform 200ms ease-in-out;
+        transition: -webkit-transform 200ms ease-in-out;
+        transition: transform 200ms ease-in-out;
+        transition: transform 200ms ease-in-out, -webkit-transform 200ms ease-in-out; }
+  novo-date-time-picker input[type=calendar] {
+    padding: 6px;
+    font-size: 14px;
+    line-height: 14px;
+    color: #333;
+    width: 140px;
+    display: inline-block;
+    border: 2px solid #ddd;
+    border-radius: 4px; }
+  novo-date-time-picker .calendar.popup {
+    display: none;
+    position: absolute;
+    z-index: 999; }
+  novo-date-time-picker .calendar.popup.open {
+    display: block; }
+  novo-date-time-picker .calendar {
+    border-radius: 4px;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    color: #3A3A3A;
+    -webkit-user-select: none;
+    box-shadow: none;
+    z-index: 1;
+    position: relative; }
+    novo-date-time-picker .calendar .calendar-top {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-flow: column;
+      -ms-flex-flow: column;
+      flex-flow: column;
+      background: #4A89DC;
+      color: #fff;
+      font-size: 14px;
+      border-top-right-radius: 4px;
+      border-top-left-radius: 4px; }
+      novo-date-time-picker .calendar .calendar-top h1 {
+        font-weight: 600;
+        font-size: 4.2em;
+        color: #fff;
+        margin: 0;
+        padding: 0; }
+      novo-date-time-picker .calendar .calendar-top h2 {
+        font-weight: 300;
+        opacity: 1;
+        margin: 10px auto;
+        padding: 0; }
+      novo-date-time-picker .calendar .calendar-top h3 {
+        font-weight: 400;
+        opacity: 0.4;
+        margin: 15px auto;
+        padding: 0; }
+      novo-date-time-picker .calendar .calendar-top h4 {
+        background: rgba(0, 0, 0, 0.15);
+        font-size: 1em;
+        font-weight: 300;
+        padding: 10px; }
+    novo-date-time-picker .calendar .calendar-range {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-flow: row;
+      -ms-flex-flow: row;
+      flex-flow: row; }
+      novo-date-time-picker .calendar .calendar-range span {
+        text-align: center;
+        margin: auto;
+        text-transform: uppercase;
+        line-height: 2.5em;
+        width: 50%;
+        border-bottom: 2px solid transparent;
+        color: #999999;
+        -webkit-transition: all 300ms ease-in-out;
+        transition: all 300ms ease-in-out; }
+      novo-date-time-picker .calendar .calendar-range .active {
+        color: #4A89DC;
+        border-bottom: 2px solid #4A89DC; }
+      novo-date-time-picker .calendar .calendar-range + .calendar-header {
+        border-top: 1px solid #F0F0F0; }
+    novo-date-time-picker .calendar .calendar-header {
+      width: 100%;
+      border-collapse: collapse;
+      padding: 14px 0;
+      -webkit-user-select: none;
+      cursor: default;
+      border-bottom: 1px solid #F0F0F0; }
+      novo-date-time-picker .calendar .calendar-header .previous {
+        width: 30px;
+        height: 15px;
+        display: inline-block;
+        cursor: pointer; }
+        novo-date-time-picker .calendar .calendar-header .previous:after {
+          content: '';
+          border-bottom: 4px solid transparent;
+          border-top: 4px solid transparent;
+          border-right: 4px solid #aaa;
+          display: inline-block;
+          height: 0;
+          vertical-align: middle;
+          width: 0; }
+        novo-date-time-picker .calendar .calendar-header .previous:hover:after {
+          border-right: 4px solid #4A89DC;
+          cursor: pointer; }
+      novo-date-time-picker .calendar .calendar-header .heading {
+        width: calc(100% - 70px);
+        display: inline-block;
+        vertical-align: middle;
+        color: #4A89DC;
+        font-weight: 600; }
+        novo-date-time-picker .calendar .calendar-header .heading .month {
+          border-radius: 2px;
+          padding: 3px 8px; }
+          novo-date-time-picker .calendar .calendar-header .heading .month:hover {
+            background: #4A89DC;
+            color: #fff;
+            cursor: pointer; }
+        novo-date-time-picker .calendar .calendar-header .heading .year {
+          border-radius: 2px;
+          padding: 3px 8px; }
+          novo-date-time-picker .calendar .calendar-header .heading .year:hover {
+            background: #4A89DC;
+            color: #fff;
+            cursor: pointer; }
+      novo-date-time-picker .calendar .calendar-header .next {
+        width: 30px;
+        height: 15px;
+        display: inline-block;
+        cursor: pointer; }
+        novo-date-time-picker .calendar .calendar-header .next:before {
+          content: '';
+          border-bottom: 4px solid transparent;
+          border-top: 4px solid transparent;
+          border-left: 4px solid #aaa;
+          display: inline-block;
+          height: 0;
+          vertical-align: middle;
+          width: 0; }
+        novo-date-time-picker .calendar .calendar-header .next:hover:before {
+          opacity: 1;
+          border-left: 4px solid #4A89DC;
+          cursor: pointer; }
+    novo-date-time-picker .calendar .calendar-content {
+      background: #fff;
+      width: 100%;
+      height: 230px;
+      overflow-y: scroll;
+      position: static;
+      top: 0;
+      left: 0;
+      -webkit-padding-start: 0;
+      -webkit-transform-origin: 209px 26px;
+      -webkit-transform: scale(1); }
+      novo-date-time-picker .calendar .calendar-content thead {
+        background: #fff; }
+        novo-date-time-picker .calendar .calendar-content thead th {
+          width: 30px;
+          padding: 10px 0; }
+      novo-date-time-picker .calendar .calendar-content tbody {
+        font-size: 0.9em; }
+      novo-date-time-picker .calendar .calendar-content .month,
+      novo-date-time-picker .calendar .calendar-content .year {
+        text-align: center;
+        padding: 4px 15px;
+        color: #666666;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        margin: 5px;
+        font-weight: normal;
+        border-radius: 3px; }
+        novo-date-time-picker .calendar .calendar-content .month.selected,
+        novo-date-time-picker .calendar .calendar-content .year.selected {
+          background-color: #4A89DC;
+          color: #fff; }
+        novo-date-time-picker .calendar .calendar-content .month:hover,
+        novo-date-time-picker .calendar .calendar-content .year:hover {
+          cursor: pointer;
+          background-color: #4A89DC;
+          color: #fff; }
+      novo-date-time-picker .calendar .calendar-content .day {
+        height: 30px;
+        width: 30px;
+        line-height: 27px;
+        margin: 1px;
+        border: none;
+        background-color: transparent;
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 2px transparent;
+        -webkit-transition: box-shadow 140ms ease-in-out;
+        transition: box-shadow 140ms ease-in-out;
+        position: relative; }
+        novo-date-time-picker .calendar .calendar-content .day:focus {
+          outline: none; }
+        novo-date-time-picker .calendar .calendar-content .day:disabled {
+          color: #D7D9E4;
+          cursor: not-allowed !important;
+          box-shadow: none !important; }
+      novo-date-time-picker .calendar .calendar-content td:hover .day {
+        cursor: pointer;
+        box-shadow: inset 0 0 0 2px #4A89DC; }
+      novo-date-time-picker .calendar .calendar-content td.filler button {
+        background: #4A89DC;
+        color: #fff;
+        height: 30px;
+        width: 100%;
+        border-radius: 0; }
+      novo-date-time-picker .calendar .calendar-content td.filler + .selected button,
+      novo-date-time-picker .calendar .calendar-content td.startfill + .selected button,
+      novo-date-time-picker .calendar .calendar-content td.startfill button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        width: 100%; }
+        novo-date-time-picker .calendar .calendar-content td.filler + .selected button .day,
+        novo-date-time-picker .calendar .calendar-content td.startfill + .selected button .day,
+        novo-date-time-picker .calendar .calendar-content td.startfill button .day {
+          box-shadow: 0; }
+      novo-date-time-picker .calendar .calendar-content td.startfill button {
+        border-radius: 50%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow: none !important; }
+      novo-date-time-picker .calendar .calendar-content td.selected .day {
+        background: #4A89DC;
+        color: #fff; }
+      novo-date-time-picker .calendar .calendar-content td.today .day:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        -webkit-transform: translateX(-15px);
+        transform: translateX(-15px);
+        border-radius: 100%;
+        width: 100%;
+        height: 100%;
+        max-width: 30px;
+        margin: 0 auto;
+        box-shadow: inset 0 0 0 2px #D9DADC; }
+      novo-date-time-picker .calendar .calendar-content td.today.filler .day:after, novo-date-time-picker .calendar .calendar-content td.today.selected .day:after {
+        box-shadow: inset 0 0 0 2px #9DBEFF; }
+    novo-date-time-picker .calendar .calendar-footer {
+      width: 100%;
+      padding: 15px 10px;
+      text-align: left; }
+      novo-date-time-picker .calendar .calendar-footer .today {
+        cursor: pointer;
+        color: #4A89DC; }
+  novo-date-time-picker .digital {
+    height: 45px;
+    padding: 6.5px 15px;
+    background-color: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    cursor: pointer;
+    border-bottom: 1px solid #f4f4f4; }
+    novo-date-time-picker .digital > i {
+      color: #aaa;
+      font-size: 1.2em;
+      -webkit-transition: color 140ms ease-in-out;
+      transition: color 140ms ease-in-out; }
+    novo-date-time-picker .digital:hover > i {
+      color: #4A89DC; }
+  novo-date-time-picker .digital--inner {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    text-align: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center; }
+  novo-date-time-picker .digital--clock {
+    color: #3D464D;
+    font-size: 1.4em;
+    font-weight: 400;
+    margin-right: 7px; }
+  novo-date-time-picker .control-block {
+    display: inline-block; }
+  novo-date-time-picker .meridian-control-block {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    padding: 14px 0;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-bottom: 1px solid #F0F0F0; }
+  novo-date-time-picker .digital--period {
+    display: block;
+    color: #4A89DC;
+    cursor: pointer;
+    font-size: 1em;
+    opacity: 0.6;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 0 20px; }
+    novo-date-time-picker .digital--period.active {
+      opacity: 1;
+      font-weight: 600; }
+  novo-date-time-picker .analog {
+    height: 250px;
+    width: 250px;
+    top: 0;
+    margin: 0 auto;
+    background: #fff;
+    z-index: 2;
+    position: relative; }
+  novo-date-time-picker .analog--inner {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    -webkit-transition: -webkit-transform 125ms linear;
+    transition: -webkit-transform 125ms linear;
+    transition: transform 125ms linear;
+    transition: transform 125ms linear, -webkit-transform 125ms linear; }
+  novo-date-time-picker .analog--face {
+    top: 5px;
+    right: 5px;
+    left: 5px;
+    bottom: 5px;
+    position: absolute;
+    border-radius: 50%; }
+  novo-date-time-picker .analog--hand--hours {
+    width: 240px;
+    height: 240px;
+    display: block;
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: -webkit-transform 100ms linear;
+    transition: -webkit-transform 100ms linear;
+    transition: transform 100ms linear;
+    transition: transform 100ms linear, -webkit-transform 100ms linear;
+    z-index: 1; }
+    novo-date-time-picker .analog--hand--hours:before {
+      content: ' ';
+      width: 2px;
+      top: 0;
+      bottom: 0;
+      left: 30%;
+      margin: 30%;
+      z-index: -1;
+      display: block;
+      position: absolute;
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg); }
+    novo-date-time-picker .analog--hand--hours .analog--ball {
+      height: 42px;
+      width: 42px;
+      display: block;
+      right: -2px;
+      top: 50%;
+      margin-top: -21px;
+      border-radius: 50%;
+      position: absolute;
+      border: 3px solid #4A89DC;
+      background: #4A89DC; }
+    novo-date-time-picker .analog--hand--hours.hour-12 {
+      -webkit-transform: rotate(-90deg);
+      transform: rotate(-90deg); }
+    novo-date-time-picker .analog--hand--hours.hour-1 {
+      -webkit-transform: rotate(-60deg);
+      transform: rotate(-60deg); }
+    novo-date-time-picker .analog--hand--hours.hour-2 {
+      -webkit-transform: rotate(-30deg);
+      transform: rotate(-30deg); }
+    novo-date-time-picker .analog--hand--hours.hour-3 {
+      -webkit-transform: rotate(0);
+      transform: rotate(0); }
+    novo-date-time-picker .analog--hand--hours.hour-4 {
+      -webkit-transform: rotate(30deg);
+      transform: rotate(30deg); }
+    novo-date-time-picker .analog--hand--hours.hour-5 {
+      -webkit-transform: rotate(60deg);
+      transform: rotate(60deg); }
+    novo-date-time-picker .analog--hand--hours.hour-6 {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg); }
+    novo-date-time-picker .analog--hand--hours.hour-7 {
+      -webkit-transform: rotate(120deg);
+      transform: rotate(120deg); }
+    novo-date-time-picker .analog--hand--hours.hour-8 {
+      -webkit-transform: rotate(150deg);
+      transform: rotate(150deg); }
+    novo-date-time-picker .analog--hand--hours.hour-9 {
+      -webkit-transform: rotate(180deg);
+      transform: rotate(180deg); }
+    novo-date-time-picker .analog--hand--hours.hour-10 {
+      -webkit-transform: rotate(210deg);
+      transform: rotate(210deg); }
+    novo-date-time-picker .analog--hand--hours.hour-11 {
+      -webkit-transform: rotate(240deg);
+      transform: rotate(240deg); }
+  novo-date-time-picker .analog--hand--minutes {
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+    display: block;
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: -webkit-transform 100ms linear;
+    transition: -webkit-transform 100ms linear;
+    transition: transform 100ms linear;
+    transition: transform 100ms linear, -webkit-transform 100ms linear;
+    z-index: 1; }
+    novo-date-time-picker .analog--hand--minutes:before {
+      left: 23%;
+      margin: 33%;
+      content: ' ';
+      width: 2px;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      display: block;
+      position: absolute;
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg); }
+    novo-date-time-picker .analog--hand--minutes .analog--ball {
+      display: block;
+      top: 50%;
+      border-radius: 50%;
+      position: absolute;
+      height: 32px;
+      width: 32px;
+      right: 21px;
+      margin-top: -16px;
+      border: 2px solid #75a5e4;
+      background: #75a5e4;
+      -webkit-transition: all 160ms ease-in-out;
+      transition: all 160ms ease-in-out; }
+      novo-date-time-picker .analog--hand--minutes .analog--ball.between {
+        height: 1px;
+        border-radius: 2em;
+        margin-top: 0; }
+    novo-date-time-picker .analog--hand--minutes.min-00 {
+      -webkit-transform: rotate(-90deg);
+      transform: rotate(-90deg); }
+    novo-date-time-picker .analog--hand--minutes.min-01 {
+      -webkit-transform: rotate(-84deg);
+      transform: rotate(-84deg); }
+    novo-date-time-picker .analog--hand--minutes.min-02 {
+      -webkit-transform: rotate(-78deg);
+      transform: rotate(-78deg); }
+    novo-date-time-picker .analog--hand--minutes.min-03 {
+      -webkit-transform: rotate(-72deg);
+      transform: rotate(-72deg); }
+    novo-date-time-picker .analog--hand--minutes.min-04 {
+      -webkit-transform: rotate(-66deg);
+      transform: rotate(-66deg); }
+    novo-date-time-picker .analog--hand--minutes.min-05 {
+      -webkit-transform: rotate(-60deg);
+      transform: rotate(-60deg); }
+    novo-date-time-picker .analog--hand--minutes.min-06 {
+      -webkit-transform: rotate(-54deg);
+      transform: rotate(-54deg); }
+    novo-date-time-picker .analog--hand--minutes.min-07 {
+      -webkit-transform: rotate(-48deg);
+      transform: rotate(-48deg); }
+    novo-date-time-picker .analog--hand--minutes.min-08 {
+      -webkit-transform: rotate(-42deg);
+      transform: rotate(-42deg); }
+    novo-date-time-picker .analog--hand--minutes.min-09 {
+      -webkit-transform: rotate(-36deg);
+      transform: rotate(-36deg); }
+    novo-date-time-picker .analog--hand--minutes.min-10 {
+      -webkit-transform: rotate(-30deg);
+      transform: rotate(-30deg); }
+    novo-date-time-picker .analog--hand--minutes.min-11 {
+      -webkit-transform: rotate(-24deg);
+      transform: rotate(-24deg); }
+    novo-date-time-picker .analog--hand--minutes.min-12 {
+      -webkit-transform: rotate(-18deg);
+      transform: rotate(-18deg); }
+    novo-date-time-picker .analog--hand--minutes.min-13 {
+      -webkit-transform: rotate(-12deg);
+      transform: rotate(-12deg); }
+    novo-date-time-picker .analog--hand--minutes.min-14 {
+      -webkit-transform: rotate(-6deg);
+      transform: rotate(-6deg); }
+    novo-date-time-picker .analog--hand--minutes.min-15 {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg); }
+    novo-date-time-picker .analog--hand--minutes.min-16 {
+      -webkit-transform: rotate(6deg);
+      transform: rotate(6deg); }
+    novo-date-time-picker .analog--hand--minutes.min-17 {
+      -webkit-transform: rotate(12deg);
+      transform: rotate(12deg); }
+    novo-date-time-picker .analog--hand--minutes.min-18 {
+      -webkit-transform: rotate(18deg);
+      transform: rotate(18deg); }
+    novo-date-time-picker .analog--hand--minutes.min-19 {
+      -webkit-transform: rotate(24deg);
+      transform: rotate(24deg); }
+    novo-date-time-picker .analog--hand--minutes.min-20 {
+      -webkit-transform: rotate(30deg);
+      transform: rotate(30deg); }
+    novo-date-time-picker .analog--hand--minutes.min-21 {
+      -webkit-transform: rotate(36deg);
+      transform: rotate(36deg); }
+    novo-date-time-picker .analog--hand--minutes.min-22 {
+      -webkit-transform: rotate(42deg);
+      transform: rotate(42deg); }
+    novo-date-time-picker .analog--hand--minutes.min-23 {
+      -webkit-transform: rotate(48deg);
+      transform: rotate(48deg); }
+    novo-date-time-picker .analog--hand--minutes.min-24 {
+      -webkit-transform: rotate(54deg);
+      transform: rotate(54deg); }
+    novo-date-time-picker .analog--hand--minutes.min-25 {
+      -webkit-transform: rotate(60deg);
+      transform: rotate(60deg); }
+    novo-date-time-picker .analog--hand--minutes.min-26 {
+      -webkit-transform: rotate(66deg);
+      transform: rotate(66deg); }
+    novo-date-time-picker .analog--hand--minutes.min-27 {
+      -webkit-transform: rotate(72deg);
+      transform: rotate(72deg); }
+    novo-date-time-picker .analog--hand--minutes.min-28 {
+      -webkit-transform: rotate(78deg);
+      transform: rotate(78deg); }
+    novo-date-time-picker .analog--hand--minutes.min-29 {
+      -webkit-transform: rotate(84deg);
+      transform: rotate(84deg); }
+    novo-date-time-picker .analog--hand--minutes.min-30 {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg); }
+    novo-date-time-picker .analog--hand--minutes.min-31 {
+      -webkit-transform: rotate(96deg);
+      transform: rotate(96deg); }
+    novo-date-time-picker .analog--hand--minutes.min-32 {
+      -webkit-transform: rotate(102deg);
+      transform: rotate(102deg); }
+    novo-date-time-picker .analog--hand--minutes.min-33 {
+      -webkit-transform: rotate(108deg);
+      transform: rotate(108deg); }
+    novo-date-time-picker .analog--hand--minutes.min-34 {
+      -webkit-transform: rotate(114deg);
+      transform: rotate(114deg); }
+    novo-date-time-picker .analog--hand--minutes.min-35 {
+      -webkit-transform: rotate(120deg);
+      transform: rotate(120deg); }
+    novo-date-time-picker .analog--hand--minutes.min-36 {
+      -webkit-transform: rotate(126deg);
+      transform: rotate(126deg); }
+    novo-date-time-picker .analog--hand--minutes.min-37 {
+      -webkit-transform: rotate(132deg);
+      transform: rotate(132deg); }
+    novo-date-time-picker .analog--hand--minutes.min-38 {
+      -webkit-transform: rotate(138deg);
+      transform: rotate(138deg); }
+    novo-date-time-picker .analog--hand--minutes.min-39 {
+      -webkit-transform: rotate(144deg);
+      transform: rotate(144deg); }
+    novo-date-time-picker .analog--hand--minutes.min-40 {
+      -webkit-transform: rotate(150deg);
+      transform: rotate(150deg); }
+    novo-date-time-picker .analog--hand--minutes.min-41 {
+      -webkit-transform: rotate(156deg);
+      transform: rotate(156deg); }
+    novo-date-time-picker .analog--hand--minutes.min-42 {
+      -webkit-transform: rotate(162deg);
+      transform: rotate(162deg); }
+    novo-date-time-picker .analog--hand--minutes.min-43 {
+      -webkit-transform: rotate(168deg);
+      transform: rotate(168deg); }
+    novo-date-time-picker .analog--hand--minutes.min-44 {
+      -webkit-transform: rotate(174deg);
+      transform: rotate(174deg); }
+    novo-date-time-picker .analog--hand--minutes.min-45 {
+      -webkit-transform: rotate(180deg);
+      transform: rotate(180deg); }
+    novo-date-time-picker .analog--hand--minutes.min-46 {
+      -webkit-transform: rotate(186deg);
+      transform: rotate(186deg); }
+    novo-date-time-picker .analog--hand--minutes.min-47 {
+      -webkit-transform: rotate(192deg);
+      transform: rotate(192deg); }
+    novo-date-time-picker .analog--hand--minutes.min-48 {
+      -webkit-transform: rotate(198deg);
+      transform: rotate(198deg); }
+    novo-date-time-picker .analog--hand--minutes.min-49 {
+      -webkit-transform: rotate(204deg);
+      transform: rotate(204deg); }
+    novo-date-time-picker .analog--hand--minutes.min-50 {
+      -webkit-transform: rotate(210deg);
+      transform: rotate(210deg); }
+    novo-date-time-picker .analog--hand--minutes.min-51 {
+      -webkit-transform: rotate(216deg);
+      transform: rotate(216deg); }
+    novo-date-time-picker .analog--hand--minutes.min-52 {
+      -webkit-transform: rotate(222deg);
+      transform: rotate(222deg); }
+    novo-date-time-picker .analog--hand--minutes.min-53 {
+      -webkit-transform: rotate(228deg);
+      transform: rotate(228deg); }
+    novo-date-time-picker .analog--hand--minutes.min-54 {
+      -webkit-transform: rotate(234deg);
+      transform: rotate(234deg); }
+    novo-date-time-picker .analog--hand--minutes.min-55 {
+      -webkit-transform: rotate(240deg);
+      transform: rotate(240deg); }
+    novo-date-time-picker .analog--hand--minutes.min-56 {
+      -webkit-transform: rotate(246deg);
+      transform: rotate(246deg); }
+    novo-date-time-picker .analog--hand--minutes.min-57 {
+      -webkit-transform: rotate(252deg);
+      transform: rotate(252deg); }
+    novo-date-time-picker .analog--hand--minutes.min-58 {
+      -webkit-transform: rotate(258deg);
+      transform: rotate(258deg); }
+    novo-date-time-picker .analog--hand--minutes.min-59 {
+      -webkit-transform: rotate(264deg);
+      transform: rotate(264deg); }
+  novo-date-time-picker .analog--center {
+    height: 155px;
+    width: 155px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    margin-top: -2px;
+    margin-left: -2px;
+    display: block;
+    position: absolute;
+    background-color: #f4f4f4; }
+  novo-date-time-picker .analog--hour,
+  novo-date-time-picker .analog--minute {
+    font-size: 1.6em;
+    color: #666666;
+    left: 50%;
+    top: 50%;
+    z-index: 3;
+    text-align: center;
+    width: 40px;
+    padding: 8px 0;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: -20px;
+    margin-top: -20px;
+    position: absolute; }
+    novo-date-time-picker .analog--hour.active,
+    novo-date-time-picker .analog--minute.active {
+      color: #fff; }
+  novo-date-time-picker .analog--minute {
+    font-size: 1.0em;
+    margin-left: -20px;
+    margin-top: -16px; }
+  novo-date-time-picker .analog--hours,
+  novo-date-time-picker .analog--minutes {
+    width: 250px;
+    height: 100%;
+    float: left;
+    position: relative; }
+  novo-date-time-picker .analog--minutes {
+    position: absolute; }
+  novo-date-time-picker .analog--hour:nth-child(1) {
+    -webkit-transform: rotate(-60deg) translate(4.5em) rotate(60deg);
+    transform: rotate(-60deg) translate(4.5em) rotate(60deg); }
+  novo-date-time-picker .analog--minute:nth-child(1) {
+    -webkit-transform: rotate(-60deg) translate(4.5em) rotate(60deg);
+    transform: rotate(-60deg) translate(4.5em) rotate(60deg); }
+  novo-date-time-picker .analog--hour:nth-child(2) {
+    -webkit-transform: rotate(-30deg) translate(4.5em) rotate(30deg);
+    transform: rotate(-30deg) translate(4.5em) rotate(30deg); }
+  novo-date-time-picker .analog--minute:nth-child(2) {
+    -webkit-transform: rotate(-30deg) translate(4.5em) rotate(30deg);
+    transform: rotate(-30deg) translate(4.5em) rotate(30deg); }
+  novo-date-time-picker .analog--hour:nth-child(3) {
+    -webkit-transform: rotate(0deg) translate(4.5em) rotate(0deg);
+    transform: rotate(0deg) translate(4.5em) rotate(0deg); }
+  novo-date-time-picker .analog--minute:nth-child(3) {
+    -webkit-transform: rotate(0deg) translate(4.5em) rotate(0deg);
+    transform: rotate(0deg) translate(4.5em) rotate(0deg); }
+  novo-date-time-picker .analog--hour:nth-child(4) {
+    -webkit-transform: rotate(30deg) translate(4.5em) rotate(-30deg);
+    transform: rotate(30deg) translate(4.5em) rotate(-30deg); }
+  novo-date-time-picker .analog--minute:nth-child(4) {
+    -webkit-transform: rotate(30deg) translate(4.5em) rotate(-30deg);
+    transform: rotate(30deg) translate(4.5em) rotate(-30deg); }
+  novo-date-time-picker .analog--hour:nth-child(5) {
+    -webkit-transform: rotate(60deg) translate(4.5em) rotate(-60deg);
+    transform: rotate(60deg) translate(4.5em) rotate(-60deg); }
+  novo-date-time-picker .analog--minute:nth-child(5) {
+    -webkit-transform: rotate(60deg) translate(4.5em) rotate(-60deg);
+    transform: rotate(60deg) translate(4.5em) rotate(-60deg); }
+  novo-date-time-picker .analog--hour:nth-child(6) {
+    -webkit-transform: rotate(90deg) translate(4.5em) rotate(-90deg);
+    transform: rotate(90deg) translate(4.5em) rotate(-90deg); }
+  novo-date-time-picker .analog--minute:nth-child(6) {
+    -webkit-transform: rotate(90deg) translate(4.5em) rotate(-90deg);
+    transform: rotate(90deg) translate(4.5em) rotate(-90deg); }
+  novo-date-time-picker .analog--hour:nth-child(7) {
+    -webkit-transform: rotate(120deg) translate(4.5em) rotate(-120deg);
+    transform: rotate(120deg) translate(4.5em) rotate(-120deg); }
+  novo-date-time-picker .analog--minute:nth-child(7) {
+    -webkit-transform: rotate(120deg) translate(4.5em) rotate(-120deg);
+    transform: rotate(120deg) translate(4.5em) rotate(-120deg); }
+  novo-date-time-picker .analog--hour:nth-child(8) {
+    -webkit-transform: rotate(150deg) translate(4.5em) rotate(-150deg);
+    transform: rotate(150deg) translate(4.5em) rotate(-150deg); }
+  novo-date-time-picker .analog--minute:nth-child(8) {
+    -webkit-transform: rotate(150deg) translate(4.5em) rotate(-150deg);
+    transform: rotate(150deg) translate(4.5em) rotate(-150deg); }
+  novo-date-time-picker .analog--hour:nth-child(9) {
+    -webkit-transform: rotate(180deg) translate(4.5em) rotate(-180deg);
+    transform: rotate(180deg) translate(4.5em) rotate(-180deg); }
+  novo-date-time-picker .analog--minute:nth-child(9) {
+    -webkit-transform: rotate(180deg) translate(4.5em) rotate(-180deg);
+    transform: rotate(180deg) translate(4.5em) rotate(-180deg); }
+  novo-date-time-picker .analog--hour:nth-child(10) {
+    -webkit-transform: rotate(210deg) translate(4.5em) rotate(-210deg);
+    transform: rotate(210deg) translate(4.5em) rotate(-210deg); }
+  novo-date-time-picker .analog--minute:nth-child(10) {
+    -webkit-transform: rotate(210deg) translate(4.5em) rotate(-210deg);
+    transform: rotate(210deg) translate(4.5em) rotate(-210deg); }
+  novo-date-time-picker .analog--hour:nth-child(11) {
+    -webkit-transform: rotate(240deg) translate(4.5em) rotate(-240deg);
+    transform: rotate(240deg) translate(4.5em) rotate(-240deg); }
+  novo-date-time-picker .analog--minute:nth-child(11) {
+    -webkit-transform: rotate(240deg) translate(4.5em) rotate(-240deg);
+    transform: rotate(240deg) translate(4.5em) rotate(-240deg); }
+  novo-date-time-picker .analog--hour:nth-child(12) {
+    -webkit-transform: rotate(270deg) translate(4.5em) rotate(-270deg);
+    transform: rotate(270deg) translate(4.5em) rotate(-270deg); }
+  novo-date-time-picker .analog--minute:nth-child(12) {
+    -webkit-transform: rotate(270deg) translate(4.5em) rotate(-270deg);
+    transform: rotate(270deg) translate(4.5em) rotate(-270deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(1) {
+    -webkit-transform: rotate(-90deg) translate(8em) rotate(90deg);
+    transform: rotate(-90deg) translate(8em) rotate(90deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-0 {
+      -webkit-transform: rotate(-90deg);
+      transform: rotate(-90deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(2) {
+    -webkit-transform: rotate(-75deg) translate(8em) rotate(75deg);
+    transform: rotate(-75deg) translate(8em) rotate(75deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-1 {
+      -webkit-transform: rotate(-75deg);
+      transform: rotate(-75deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(3) {
+    -webkit-transform: rotate(-60deg) translate(8em) rotate(60deg);
+    transform: rotate(-60deg) translate(8em) rotate(60deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-2 {
+      -webkit-transform: rotate(-60deg);
+      transform: rotate(-60deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(4) {
+    -webkit-transform: rotate(-45deg) translate(8em) rotate(45deg);
+    transform: rotate(-45deg) translate(8em) rotate(45deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-3 {
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(5) {
+    -webkit-transform: rotate(-30deg) translate(8em) rotate(30deg);
+    transform: rotate(-30deg) translate(8em) rotate(30deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-4 {
+      -webkit-transform: rotate(-30deg);
+      transform: rotate(-30deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(6) {
+    -webkit-transform: rotate(-15deg) translate(8em) rotate(15deg);
+    transform: rotate(-15deg) translate(8em) rotate(15deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-5 {
+      -webkit-transform: rotate(-15deg);
+      transform: rotate(-15deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(7) {
+    -webkit-transform: rotate(0deg) translate(8em) rotate(0deg);
+    transform: rotate(0deg) translate(8em) rotate(0deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-6 {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(8) {
+    -webkit-transform: rotate(15deg) translate(8em) rotate(-15deg);
+    transform: rotate(15deg) translate(8em) rotate(-15deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-7 {
+      -webkit-transform: rotate(15deg);
+      transform: rotate(15deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(9) {
+    -webkit-transform: rotate(30deg) translate(8em) rotate(-30deg);
+    transform: rotate(30deg) translate(8em) rotate(-30deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-8 {
+      -webkit-transform: rotate(30deg);
+      transform: rotate(30deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(10) {
+    -webkit-transform: rotate(45deg) translate(8em) rotate(-45deg);
+    transform: rotate(45deg) translate(8em) rotate(-45deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-9 {
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(11) {
+    -webkit-transform: rotate(60deg) translate(8em) rotate(-60deg);
+    transform: rotate(60deg) translate(8em) rotate(-60deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-10 {
+      -webkit-transform: rotate(60deg);
+      transform: rotate(60deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(12) {
+    -webkit-transform: rotate(75deg) translate(8em) rotate(-75deg);
+    transform: rotate(75deg) translate(8em) rotate(-75deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-11 {
+      -webkit-transform: rotate(75deg);
+      transform: rotate(75deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(13) {
+    -webkit-transform: rotate(90deg) translate(8em) rotate(-90deg);
+    transform: rotate(90deg) translate(8em) rotate(-90deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-12 {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(14) {
+    -webkit-transform: rotate(105deg) translate(8em) rotate(-105deg);
+    transform: rotate(105deg) translate(8em) rotate(-105deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-13 {
+      -webkit-transform: rotate(105deg);
+      transform: rotate(105deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(15) {
+    -webkit-transform: rotate(120deg) translate(8em) rotate(-120deg);
+    transform: rotate(120deg) translate(8em) rotate(-120deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-14 {
+      -webkit-transform: rotate(120deg);
+      transform: rotate(120deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(16) {
+    -webkit-transform: rotate(135deg) translate(8em) rotate(-135deg);
+    transform: rotate(135deg) translate(8em) rotate(-135deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-15 {
+      -webkit-transform: rotate(135deg);
+      transform: rotate(135deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(17) {
+    -webkit-transform: rotate(150deg) translate(8em) rotate(-150deg);
+    transform: rotate(150deg) translate(8em) rotate(-150deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-16 {
+      -webkit-transform: rotate(150deg);
+      transform: rotate(150deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(18) {
+    -webkit-transform: rotate(165deg) translate(8em) rotate(-165deg);
+    transform: rotate(165deg) translate(8em) rotate(-165deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-17 {
+      -webkit-transform: rotate(165deg);
+      transform: rotate(165deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(19) {
+    -webkit-transform: rotate(180deg) translate(8em) rotate(-180deg);
+    transform: rotate(180deg) translate(8em) rotate(-180deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-18 {
+      -webkit-transform: rotate(180deg);
+      transform: rotate(180deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(20) {
+    -webkit-transform: rotate(195deg) translate(8em) rotate(-195deg);
+    transform: rotate(195deg) translate(8em) rotate(-195deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-19 {
+      -webkit-transform: rotate(195deg);
+      transform: rotate(195deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(21) {
+    -webkit-transform: rotate(210deg) translate(8em) rotate(-210deg);
+    transform: rotate(210deg) translate(8em) rotate(-210deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-20 {
+      -webkit-transform: rotate(210deg);
+      transform: rotate(210deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(22) {
+    -webkit-transform: rotate(225deg) translate(8em) rotate(-225deg);
+    transform: rotate(225deg) translate(8em) rotate(-225deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-21 {
+      -webkit-transform: rotate(225deg);
+      transform: rotate(225deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(23) {
+    -webkit-transform: rotate(240deg) translate(8em) rotate(-240deg);
+    transform: rotate(240deg) translate(8em) rotate(-240deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-22 {
+      -webkit-transform: rotate(240deg);
+      transform: rotate(240deg); }
+  novo-date-time-picker.military .analog--hour:nth-child(24) {
+    -webkit-transform: rotate(255deg) translate(8em) rotate(-255deg);
+    transform: rotate(255deg) translate(8em) rotate(-255deg); }
+  novo-date-time-picker.military .analog--hand--hours {
+    top: -10px;
+    left: -10px; }
+    novo-date-time-picker.military .analog--hand--hours.hour-23 {
+      -webkit-transform: rotate(255deg);
+      transform: rotate(255deg); }
+  novo-date-time-picker.military .analog--face {
+    top: 15px;
+    right: 15px;
+    left: 15px;
+    bottom: 15px; }
+  novo-date-time-picker.military .analog--hour {
+    font-size: 0.9em;
+    margin-left: -20px;
+    margin-top: -16px; }
+  novo-date-time-picker.military .analog--hand--minutes {
+    margin: 10px; }
+  novo-date-time-picker.military .analog--hand--hours .analog--ball {
+    height: 32px;
+    width: 32px;
+    right: 2px;
+    margin-top: -17px; }
+  novo-date-time-picker .time-footer {
+    width: 100%;
+    padding: 0 10px;
+    text-align: left; }
+    novo-date-time-picker .time-footer .now {
+      cursor: pointer;
+      color: #4A89DC; }
+
+@keyframes select {
+  from {
+    opacity: 0.8;
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  to {
+    opacity: 0;
+    -webkit-transform: scale(1.6);
+    transform: scale(1.6); } }
 
 header.novo-header > section.primary {
   display: -webkit-box;
@@ -9703,14 +10790,14 @@ novo-form {
                   -ms-flex: 1;
                   flex: 1;
                   position: relative; }
-                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-calendar,
+                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-clock,
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-search,
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-times,
-                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-clock,
-                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-calendar,
+                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-calendar,
+                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-clock,
                   novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-search,
                   novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-times,
-                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-clock {
+                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-calendar {
                     position: absolute;
                     right: 0;
                     top: 0;
@@ -9719,10 +10806,12 @@ novo-form {
                   novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > i.bhi-times {
                     cursor: pointer;
                     font-size: 1.1em; }
-                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-date-picker,
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-time-picker,
+                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-date-picker,
+                  novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container novo-date-time-picker,
+                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-time-picker,
                   novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-date-picker,
-                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-time-picker {
+                  novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container novo-date-time-picker {
                     position: absolute;
                     top: 100%;
                     left: 0; }
@@ -9735,6 +10824,13 @@ novo-form {
                     display: -webkit-flex;
                     display: -ms-flexbox;
                     display: flex;
+                    -webkit-box-orient: vertical;
+                    -webkit-box-direction: normal;
+                    -webkit-flex-direction: column;
+                    -ms-flex-direction: column;
+                    flex-direction: column;
+                    background: #fff;
+                    z-index: 9;
                     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
                     border-bottom-right-radius: 3px;
                     border-bottom-left-radius: 3px;
@@ -9751,18 +10847,54 @@ novo-form {
                         box-shadow: none; }
                     novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > div.date-time-container novo-time-picker,
                     novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > div.date-time-container novo-time-picker {
+                      position: absolute;
+                      height: 100%;
+                      width: 100%;
                       border-top-left-radius: 0;
                       border-bottom-left-radius: 0;
                       box-shadow: none; }
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > div.date-time-container novo-time-picker .digital,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > div.date-time-container novo-time-picker .digital {
+                        display: block;
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%; }
+                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > div.date-time-container .time-control,
+                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > div.date-time-container .time-control {
+                      border-top: 1px solid #f4f4f4;
+                      display: -webkit-box;
+                      display: -webkit-flex;
+                      display: -ms-flexbox;
+                      display: flex;
+                      -webkit-box-align: center;
+                      -webkit-align-items: center;
+                      -ms-flex-align: center;
+                      align-items: center;
+                      -webkit-box-pack: center;
+                      -webkit-justify-content: center;
+                      -ms-flex-pack: center;
+                      justify-content: center; }
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > div.date-time-container .time-control .am-pm,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > div.date-time-container .time-control .am-pm {
+                        display: -webkit-box;
+                        display: -webkit-flex;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-orient: vertical;
+                        -webkit-box-direction: normal;
+                        -webkit-flex-direction: column;
+                        -ms-flex-direction: column;
+                        flex-direction: column;
+                        margin-left: 10px; }
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker,
                   novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker {
                     padding-bottom: 0; }
-                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:focus,
-                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:hover,
                     novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input,
-                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:focus,
+                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:hover,
+                    novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:focus,
+                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input,
                     novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:hover,
-                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input {
+                    novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > novo-picker.ng-touched.ng-invalid:not(.ng-pristine) > input:focus {
                       border-bottom-color: transparent !important; }
                   novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips, novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > multi-picker,
                   novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container > chips,
@@ -9868,30 +11000,30 @@ novo-form {
                         font-size: 3em;
                         margin: 0.5em;
                         color: rgba(0, 0, 0, 0.3); }
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > p,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > h4,
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > p,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > p,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > h4,
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > p,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > p,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > h4,
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > p,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > p,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > h4,
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > p,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > p,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > h4,
-                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > p,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > p,
                       novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > h4,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > p,
+                      novo-dynamic-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > p,
                       novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > h4,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > p,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .error-results > p,
                       novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > h4,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > p,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .no-recents > p,
                       novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > h4,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > p,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results .null-results > p,
                       novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > h4,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > p,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .error-results > p,
                       novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > h4,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > p,
-                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > h4 {
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .no-recents > p,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > h4,
+                      novo-form .novo-form-container form > div.novo-form-row novo-control > div.novo-control-container > div.novo-control-input-container > div.novo-control-input > div.novo-control-input-container picker-results .null-results > p {
                         margin: 0;
                         max-width: none;
                         padding: 0; }
@@ -11874,84 +13006,84 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-candidate {
-      background: #44BB77;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-navigation {
-      background: #2F384F;
-      width: 36px;
-      height: 36px; }
-    color header .background-boxes .bb-lead {
-      background: #AA6699;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-submission {
-      background: #778899;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-task {
-      background: #747884;
       width: 31px;
       height: 31px; }
+    color header .background-boxes .bb-candidate {
+      background: #44BB77;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-navigation {
+      background: #2F384F;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-lead {
+      background: #AA6699;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-submission {
+      background: #778899;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-task {
+      background: #747884;
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-aqua {
       background: #3BAFDA;
-      width: 39px;
-      height: 39px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-ocean {
       background: #4A89DC;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
       width: 44px;
       height: 44px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-grass {
       background: #8CC152;
-      width: 35px;
-      height: 35px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-sunflower {
       background: #F6B042;
-      width: 30px;
-      height: 30px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
-      width: 41px;
-      height: 41px; }
+      width: 39px;
+      height: 39px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
-      width: 30px;
-      height: 30px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 35px;
-      height: 35px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 29px;
-      height: 29px; }
+      width: 28px;
+      height: 28px; }
 
 color article.color-blocks {
   display: -webkit-box;
@@ -12797,7 +13929,8 @@ select-demo .example.select-demo {
   select-demo .example.select-demo label {
     margin-bottom: 10px;
     display: block; }
-  select-demo .example.select-demo .caption, select-demo .example.select-demo .calendar-demo-side-by-side > p > label {
+  select-demo .example.select-demo .caption, select-demo .example.select-demo .calendar-demo-date-time > p > label, select-demo .example.select-demo
+  .calendar-demo-side-by-side > p > label {
     font-size: 0.9em;
     margin-right: 5px; }
 
@@ -12940,13 +14073,14 @@ calendar-demo .example.calendar-demo {
 
 calendar-demo .example.demo {
   padding: 20px;
-  background: rgba(0, 0, 0, 0.45); }
+  background: #37BC9B; }
   calendar-demo .example.demo timeselect {
     margin: 0 auto; }
 
 calendar-demo .example.side-by-side-demo {
   padding: 20px; }
 
+.calendar-demo-date-time,
 .calendar-demo-side-by-side {
   display: -webkit-box;
   display: -webkit-flex;
@@ -12959,21 +14093,27 @@ calendar-demo .example.side-by-side-demo {
   -webkit-flex-flow: row wrap;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap; }
+  .calendar-demo-date-time > p,
   .calendar-demo-side-by-side > p {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
     color: #fff; }
+    .calendar-demo-date-time > p > label,
     .calendar-demo-side-by-side > p > label {
       margin-top: 15px;
       display: block;
       font-size: 0.9em; }
-  .calendar-demo-side-by-side > novo-date-picker,
-  .calendar-demo-side-by-side > novo-time-picker {
+  .calendar-demo-date-time > novo-time-picker,
+  .calendar-demo-date-time > novo-date-picker,
+  .calendar-demo-side-by-side > novo-time-picker,
+  .calendar-demo-side-by-side > novo-date-picker {
     margin-right: 5px; }
-    .calendar-demo-side-by-side > novo-date-picker:last-child,
-    .calendar-demo-side-by-side > novo-time-picker:last-child {
+    .calendar-demo-date-time > novo-time-picker:last-child,
+    .calendar-demo-date-time > novo-date-picker:last-child,
+    .calendar-demo-side-by-side > novo-time-picker:last-child,
+    .calendar-demo-side-by-side > novo-date-picker:last-child {
       margin-right: 0; }
 
 .editor-demo p {
@@ -13024,4 +14164,4 @@ category-dropdown-demo div.example {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=demo.99864b3c4926b65fff95.map*/
+/*# sourceMappingURL=demo.891abbf25f0161fd0265.map*/
