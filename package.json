@@ -15,7 +15,6 @@
     "changelog": "conventional-changelog -i CHANGELOG.md -s -p angular -v",
     "github-release": "conventional-github-releaser -p angular",
     "deploy:gh-pages": "npm run build:prod && ./node_modules/.bin/gh-pages -d dist",
-    "preversion": "npm test",
     "version": "npm run changelog && git add -A",
     "postversion": "git push origin master && git push --tags && npm run github-release && npm publish",
     "build:prod": "webpack --config config/webpack.prod.js --progress --profile --colors --display-error-details --display-cached --bail",
