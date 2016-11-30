@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick'; // TODO - change imports
@@ -42,28 +42,28 @@ const SELECT_VALUE_ACCESSOR = {
     }
 })
 export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges {
-    @Input() options:Array<any>;
-    @Input() placeholder:string = 'Select...';
-    @Input() readonly:boolean;
-    @Input() headerConfig:any;
-    @Output() onSelect:EventEmitter<any> = new EventEmitter();
+    @Input() options: Array<any>;
+    @Input() placeholder: string = 'Select...';
+    @Input() readonly: boolean;
+    @Input() headerConfig: any;
+    @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
-    selectedIndex:number = -1;
-    empty:boolean = true;
-    header:any = {
+    selectedIndex: number = -1;
+    empty: boolean = true;
+    header: any = {
         open: false,
         valid: true,
         value: ''
     };
-    createdItem:any;
-    selected:any;
-    model:any;
-    onModelChange:Function = () => {
+    createdItem: any;
+    selected: any;
+    model: any;
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
-    constructor(element:ElementRef, private labels:NovoLabelService) {
+    constructor(element: ElementRef, private labels: NovoLabelService) {
         super(element);
     }
 
@@ -71,7 +71,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         this.ngOnChanges();
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes?: SimpleChanges) {
         this.readonly = this.readonly === true;
         if (this.options && this.options.length && typeof this.options[0] === 'string') {
             this.options = this.options.map((item) => {
@@ -210,7 +210,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         }
     }
 
-    writeValue(model:any):void {
+    writeValue(model: any): void {
         this.model = model;
         if (this.options) {
             let item = this.options.find(i => i.value === model);
@@ -225,11 +225,11 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         }
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 }

@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, Input, Output, OnInit, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 // APP
 import { NovoLabelService } from './../../../../services/novo-label-service';
 
@@ -17,19 +17,19 @@ import { NovoLabelService } from './../../../../services/novo-label-service';
   `
 })
 export class Pagination implements OnInit, OnChanges {
-    @Input() page:number;
-    @Input() totalItems:number;
-    @Input() itemsPerPage:number = 10;
-    @Input() rowOptions:any;
-    @Input() label:string;
+    @Input() page: number;
+    @Input() totalItems: number;
+    @Input() itemsPerPage: number = 10;
+    @Input() rowOptions: any;
+    @Input() label: string;
 
-    @Output() onPageChange:EventEmitter<any> = new EventEmitter();
+    @Output() onPageChange: EventEmitter<any> = new EventEmitter();
 
-    maxPagesDisplayed:number = 5;
-    totalPages:number;
-    pages:Array<any>;
+    maxPagesDisplayed: number = 5;
+    totalPages: number;
+    pages: Array<any>;
 
-    constructor(private labels:NovoLabelService) {
+    constructor(private labels: NovoLabelService) {
     }
 
     ngOnInit() {
@@ -37,7 +37,7 @@ export class Pagination implements OnInit, OnChanges {
         this.rowOptions = this.rowOptions || this.getDefaultRowOptions();
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes?: SimpleChanges) {
         this.page = this.page || 1;
         this.totalPages = this.calculateTotalPages();
         this.pages = this.getPages(this.page, this.totalPages);

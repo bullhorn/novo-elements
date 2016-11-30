@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'novo-toast',
@@ -21,20 +21,20 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
     `
 })
 export class NovoToastElement implements OnInit, OnChanges {
-    @Input() theme:string = 'danger';
-    @Input() icon:string = 'caution';
-    @Input() title:string;
-    @Input() message:string;
+    @Input() theme: string = 'danger';
+    @Input() icon: string = 'caution';
+    @Input() title: string;
+    @Input() message: string;
 
-    show:boolean = false;
-    animate:boolean = false;
-    parent:any = null;
-    launched:boolean = false;
-    position:any;
-    time:any;
-    iconClass:string;
-    alertTheme:string;
-    embedded:any;
+    show: boolean = false;
+    animate: boolean = false;
+    parent: any = null;
+    launched: boolean = false;
+    position: any;
+    time: any;
+    iconClass: string;
+    alertTheme: string;
+    embedded: any;
 
     ngOnInit() {
         if (!this.launched) {
@@ -48,7 +48,7 @@ export class NovoToastElement implements OnInit, OnChanges {
         }
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes?: SimpleChanges) {
         // set icon and styling
         this.iconClass = `bhi-${this.icon}`;
         this.alertTheme = `${this.theme} toast-container embedded`;

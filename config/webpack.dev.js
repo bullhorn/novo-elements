@@ -21,7 +21,9 @@ const METADATA = {
 };
 
 module.exports = function () {
-    return webpackMerge(commonConfig({ env: ENV }), {
+    return webpackMerge(commonConfig({
+        env: ENV
+    }), {
         devtool: 'cheap-module-source-map',
         output: {
             path: helpers.root('dist'),
@@ -32,13 +34,11 @@ module.exports = function () {
             libraryTarget: 'var',
         },
         module: {
-            rules: [
-                {
-                    test: /\.s?css$/,
-                    exclude: /node_modules/,
-                    loader: 'style-loader!css-loader!postcss-loader!sass-loader'
-                }
-            ]
+            rules: [{
+                test: /\.s?css$/,
+                exclude: /node_modules/,
+                loader: 'style-loader!css-loader!postcss-loader!sass-loader'
+            }]
         },
         plugins: [
             new DefinePlugin({
@@ -62,7 +62,9 @@ module.exports = function () {
                         ]
                     },
                     postcss: () => {
-                        return [autoprefixer({ browsers: ['last 2 versions'] })];
+                        return [autoprefixer({
+                            browsers: ['last 2 versions']
+                        })];
                     }
                 }
             })
@@ -71,6 +73,7 @@ module.exports = function () {
             port: METADATA.port,
             host: METADATA.host,
             historyApiFallback: true,
+            quiet: true,
             watchOptions: {
                 aggregateTimeout: 300,
                 poll: 1000

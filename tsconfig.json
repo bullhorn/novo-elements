@@ -1,15 +1,10 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": false,
     "lib": [
       "es5",
-      "es6",
       "dom"
     ],
     "noEmitHelpers": true,
@@ -23,7 +18,8 @@
   },
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "factories"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true,

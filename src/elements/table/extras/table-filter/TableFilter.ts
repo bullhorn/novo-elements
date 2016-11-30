@@ -1,5 +1,5 @@
 // NG2
-import { Directive, EventEmitter, ElementRef, Renderer, OnChanges, OnInit, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, ElementRef, Renderer, OnChanges, OnInit, Input, Output, SimpleChanges } from '@angular/core';
 
 @Directive({
     selector: '[novoTableFilter]',
@@ -9,12 +9,12 @@ import { Directive, EventEmitter, ElementRef, Renderer, OnChanges, OnInit, Input
     }
 })
 export class TableFilter implements OnInit, OnChanges {
-    @Input('novoTableFilter') config:any;
-    @Output() onFilterChange:EventEmitter<any> = new EventEmitter();
+    @Input('novoTableFilter') config: any;
+    @Output() onFilterChange: EventEmitter<any> = new EventEmitter();
 
-    filterThrottle:any;
+    filterThrottle: any;
 
-    constructor(private element:ElementRef, private renderer:Renderer) {
+    constructor(private element: ElementRef, private renderer: Renderer) {
         this.element = element;
         this.renderer = renderer;
     }
@@ -23,7 +23,7 @@ export class TableFilter implements OnInit, OnChanges {
         this.ngOnChanges();
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes?: SimpleChanges) {
         this.renderer.setElementProperty(this.element, 'value', this.config.filter);
     }
 

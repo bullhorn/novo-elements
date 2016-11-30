@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Input, Output, OnInit, OnChanges } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
@@ -52,25 +52,25 @@ const TIME_PICKER_VALUE_ACCESSOR = {
     }
 })
 export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
-    @Input() military:boolean = false;
-    @Output() onSelect:EventEmitter<any> = new EventEmitter();
+    @Input() military: boolean = false;
+    @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
-    hours:number = 12;
-    minutes:number = 0;
-    value:any = null;
-    meridian:string;
-    inBetween:boolean;
-    hoursClass:string;
+    hours: number = 12;
+    minutes: number = 0;
+    value: any = null;
+    meridian: string;
+    inBetween: boolean;
+    hoursClass: string;
     activeHour;
-    minutesClass:string;
+    minutesClass: string;
     activeMinute;
-    MERIDIANS:Array<string> = ['am', 'pm'];
-    MINUTES:Array<string> = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
-    HOURS:Array<string> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-    model:any;
-    onModelChange:Function = () => {
+    MERIDIANS: Array<string> = ['am', 'pm'];
+    MINUTES: Array<string> = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
+    HOURS: Array<string> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    model: any;
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
     ngOnInit() {
@@ -80,7 +80,7 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
         this.ngOnChanges();
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes?: SimpleChanges) {
         if (this.model) {
             this.init(this.model, false);
         } else {
@@ -90,8 +90,8 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
 
     init(value, dispatch) {
         let momentValue = moment(value);
-        let hours:string|number = momentValue.hours();
-        let minutes:string|number = momentValue.minutes();
+        let hours: string | number = momentValue.hours();
+        let minutes: string | number = momentValue.minutes();
 
         if (!this.military) {
             this.meridian = hours >= 12 ? 'pm' : 'am';
@@ -168,18 +168,18 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
     }
 
     // ValueAccessor Functions
-    writeValue(model:any):void {
+    writeValue(model: any): void {
         this.model = model;
         if (model) {
             this.init(model, false);
         }
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 }

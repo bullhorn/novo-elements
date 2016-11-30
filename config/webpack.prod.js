@@ -12,7 +12,10 @@ const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractCSS = new ExtractTextPlugin({ filename: '[name].[chunkhash].css', isCacheable: false });
+const extractCSS = new ExtractTextPlugin({
+    filename: '[name].[chunkhash].css',
+    isCacheable: false
+});
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 const HOST = process.env.HOST || 'localhost';
@@ -27,7 +30,9 @@ const METADATA = {
 };
 
 module.exports = function () {
-    return webpackMerge(commonConfig({ env: ENV }), {
+    return webpackMerge(commonConfig({
+        env: ENV
+    }), {
         devtool: 'source-map',
         output: {
             path: helpers.root('dist'),
@@ -36,13 +41,11 @@ module.exports = function () {
             chunkFilename: '[id].[chunkhash].chunk.js'
         },
         module: {
-            rules: [
-                {
-                    test: /\.s?css$/,
-                    exclude: /node_modules/,
-                    loader: extractCSS.extract(['css-loader', 'postcss-loader', 'sass-loader'])
-                }
-            ]
+            rules: [{
+                test: /\.s?css$/,
+                exclude: /node_modules/,
+                loader: extractCSS.extract(['css-loader', 'postcss-loader', 'sass-loader'])
+            }]
         },
         plugins: [
             extractCSS,
@@ -100,7 +103,9 @@ module.exports = function () {
                         ]
                     },
                     postcss: () => {
-                        return [autoprefixer({ browsers: ['last 2 versions'] })];
+                        return [autoprefixer({
+                            browsers: ['last 2 versions']
+                        })];
                     }
                 }
             })

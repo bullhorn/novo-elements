@@ -1,20 +1,18 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": false,
-    "noEmitHelpers": false,
-    "noImplicitAny": false,
-    "declaration": true,
-    "skipLibCheck": true,
-    "stripInternal": true,
+    "noEmitHelpers": true,
+    "pretty": false,
+    "sourceMap": true,
     "lib": [
       "es5",
       "dom"
     ],
+    "noEmit": true,
+    "strictNullChecks": false,
+    "skipDefaultLibCheck": true,
     "typeRoots": [
       "node_modules/@types"
     ]
@@ -26,7 +24,18 @@
     "./demo/custom-typings.d.ts",
     "./index.ts"
   ],
+  "awesomeTypescriptLoaderOptions": {
+    "useWebpackText": true,
+    "forkChecker": true,
+    "useCache": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  },
   "angularCompilerOptions": {
-    "genDir": "factories"
+    "genDir": "public/compiled",
+    "skipMetadataEmit": true
   }
 }
