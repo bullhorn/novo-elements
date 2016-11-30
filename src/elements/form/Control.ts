@@ -134,7 +134,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnChange
     state:string = 'horizontal';
     alwaysActive:[any] = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
 
-    constructor(element:ElementRef, private labels:NovoLabelService) {
+    constructor(element:ElementRef, public labels:NovoLabelService) {
         super(element);
         this.onActiveChange.subscribe(active => {
             if (!active) {

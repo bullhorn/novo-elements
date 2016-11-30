@@ -63,7 +63,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     onModelTouched: Function = () => {
     };
 
-    constructor(element: ElementRef, private labels: NovoLabelService) {
+    constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
     }
 

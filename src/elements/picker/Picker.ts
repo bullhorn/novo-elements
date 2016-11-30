@@ -47,28 +47,28 @@ const PICKER_VALUE_ACCESSOR = {
 })
 export class NovoPickerElement extends OutsideClick implements OnInit {
     // Container for the results
-    @ViewChild('results', { read: ViewContainerRef }) results:ViewContainerRef;
+    @ViewChild('results', { read: ViewContainerRef }) results: ViewContainerRef;
 
-    @Input() config:any;
-    @Input() placeholder:string;
-    @Input() clearValueOnSelect:boolean;
+    @Input() config: any;
+    @Input() placeholder: string;
+    @Input() clearValueOnSelect: boolean;
 
     // Emitter for selects
-    @Output() select:EventEmitter<any> = new EventEmitter();
-    @Output() focus:EventEmitter<any> = new EventEmitter();
-    @Output() blur:EventEmitter<any> = new EventEmitter();
+    @Output() select: EventEmitter<any> = new EventEmitter();
+    @Output() focus: EventEmitter<any> = new EventEmitter();
+    @Output() blur: EventEmitter<any> = new EventEmitter();
 
-    isStatic:boolean = true;
-    term:string = '';
-    resultsComponent:any;
-    popup:any;
-    _value:any;
-    onModelChange:Function = () => {
+    isStatic: boolean = true;
+    term: string = '';
+    resultsComponent: any;
+    popup: any;
+    _value: any;
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
-    constructor(element:ElementRef, private componentUtils:ComponentUtils) {
+    constructor(element: ElementRef, private componentUtils: ComponentUtils) {
         super(element);
         // Bind to the active change event from the OutsideClick
         this.onActiveChange.subscribe(active => {
@@ -87,7 +87,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         // Get all distinct key up events from the input and only fire if long enough and distinct
         let input = this.element.nativeElement.querySelector('input');
         const observer = Observable.fromEvent(input, 'keyup')
-            .map((e:any) => e.target.value)
+            .map((e: any) => e.target.value)
             .debounceTime(250)
             .distinctUntilChanged();
         observer.subscribe(
@@ -160,7 +160,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
      * @description This method creates an instance of the results (called popup) and adds all the bindings to that
      * instance.
      */
-    showResults(term?:any) {
+    showResults(term?: any) {
         this.toggleActive(null, true);
         // Update Matches
         if (this.popup) {
@@ -179,7 +179,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
      *
      * @description - This method deletes the picker results from the DOM.
      */
-    hideResults(err?:any) {
+    hideResults(err?: any) {
         if (this.popup) {
             this.popup.destroy();
             this.popup = null;
@@ -214,7 +214,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     }
 
     // Set touched on blur
-    onTouched() {
+    onTouched(event?: any) {
         this.blur.emit(event);
         this.onModelTouched();
 
@@ -252,11 +252,11 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         this._value = value;
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 }

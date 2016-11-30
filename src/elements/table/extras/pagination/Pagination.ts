@@ -29,7 +29,7 @@ export class Pagination implements OnInit, OnChanges {
     totalPages: number;
     pages: Array<any>;
 
-    constructor(private labels: NovoLabelService) {
+    constructor(public labels: NovoLabelService) {
     }
 
     ngOnInit() {

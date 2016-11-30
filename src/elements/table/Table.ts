@@ -147,29 +147,29 @@ export class NovoTableHeaderElement {
     `
 })
 export class NovoTableElement implements DoCheck {
-    @Input() config:any;
-    @Input() columns:Array<any>;
-    @Input() theme:string;
-    @Input() skipSortAndFilterClear:boolean = false;
+    @Input() config: any;
+    @Input() columns: Array<any>;
+    @Input() theme: string;
+    @Input() skipSortAndFilterClear: boolean = false;
 
-    @Output() onRowClick:EventEmitter<any> = new EventEmitter();
-    @Output() onRowSelect:EventEmitter<any> = new EventEmitter();
-    @Output() onTableChange:EventEmitter<any> = new EventEmitter();
+    @Output() onRowClick: EventEmitter<any> = new EventEmitter();
+    @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
+    @Output() onTableChange: EventEmitter<any> = new EventEmitter();
 
-    _rows:Array<any> = [];
-    modifiedRows:Array<any> = [];
-    selected:Array<any> = [];
-    activeId:number = 0;
-    master:boolean = false;
-    indeterminate:boolean = false;
-    lastPage:number = 0;
-    selectedPageCount:number = 0;
-    showSelectAllMessage:boolean = false;
-    currentSortColumn:any;
-    pagedData:any;
-    pageSelected:any;
+    _rows: Array<any> = [];
+    modifiedRows: Array<any> = [];
+    selected: Array<any> = [];
+    activeId: number = 0;
+    master: boolean = false;
+    indeterminate: boolean = false;
+    lastPage: number = 0;
+    selectedPageCount: number = 0;
+    showSelectAllMessage: boolean = false;
+    currentSortColumn: any;
+    pagedData: any;
+    pageSelected: any;
 
-    constructor(private labels:NovoLabelService) {
+    constructor(public labels: NovoLabelService) {
     }
 
     @Input()
@@ -382,11 +382,11 @@ export class NovoTableElement implements DoCheck {
                                         } catch (error) {
                                             throw new Error('Row data of type \'date\' must contain a JS date object or a timestamp as its value.');
                                         }
-                                        if (typeof(min) !== 'undefined' && typeof(max) !== 'undefined') {
+                                        if (typeof (min) !== 'undefined' && typeof (max) !== 'undefined') {
                                             isMatch = (difference >= min && difference <= max);
-                                        } else if (typeof(min) !== 'undefined') {
+                                        } else if (typeof (min) !== 'undefined') {
                                             isMatch = difference >= min;
-                                        } else if (typeof(max) !== 'undefined') {
+                                        } else if (typeof (max) !== 'undefined') {
                                             isMatch = difference <= max;
                                         }
                                         return isMatch;
@@ -446,7 +446,7 @@ export class NovoTableElement implements DoCheck {
     isFilterActive(columnFilters, filter) {
         let isActive = false;
         if (columnFilters && columnFilters.filter && filter) {
-            if (typeof(filter) !== 'string') {
+            if (typeof (filter) !== 'string') {
                 isActive = columnFilters.filter.some(columnFilter => {
                     return columnFilter.label === filter.label;
                 });
@@ -526,7 +526,7 @@ export class NovoTableElement implements DoCheck {
      */
     fireTableChangeEvent() {
         // Construct a table change object
-        const onTableChange:any = {};
+        const onTableChange: any = {};
         const filters = this.columns.filter((col) => col.filter && col.filter.length);
         onTableChange.filter = filters.length ? filters : false;
         onTableChange.sort = this.currentSortColumn ? this.currentSortColumn : false;
@@ -649,7 +649,7 @@ export class NovoTableElement implements DoCheck {
      */
     getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
-        let opts:Array<any> = [
+        let opts: Array<any> = [
             { label: 'Past 1 Day', min: -1, max: 0 },
             { label: 'Past 7 Days', min: -7, max: 0 },
             { label: 'Past 30 Days', min: -30, max: 0 },

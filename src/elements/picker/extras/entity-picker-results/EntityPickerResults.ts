@@ -69,11 +69,11 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
     }
 })
 export class EntityPickerResults extends BasePickerResults {
-    constructor(element:ElementRef, private labels:NovoLabelService) {
+    constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
     }
 
-    getIconForResult(result?:any) {
+    getIconForResult(result?: any) {
         if (result) {
             switch (result.searchEntity) {
                 case 'ClientContact':
@@ -97,7 +97,7 @@ export class EntityPickerResults extends BasePickerResults {
         return '';
     }
 
-    renderTimestamp(date?:any) {
+    renderTimestamp(date?: any) {
         let timestamp = '';
         if (date) {
             timestamp = this.labels.formatDateWithFormat(date, 'L');
@@ -105,7 +105,7 @@ export class EntityPickerResults extends BasePickerResults {
         return timestamp;
     }
 
-    getNameForResult(result?:any) {
+    getNameForResult(result?: any) {
         if (result) {
             switch (result.searchEntity) {
                 case 'Lead':

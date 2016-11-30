@@ -23,16 +23,16 @@ import { NovoLabelService } from './../../services/novo-label-service';
     }
 })
 export class NovoSliderElement implements OnInit, OnDestroy {
-    @Input() slides:any;
+    @Input() slides: any;
 
-    currentSlide:number = 0;
-    start:boolean = true;
-    end:boolean = true;
-    currSlides:Array<any> = ['active'];
-    handleKeyDownFunc:any;
-    currentClass:string;
+    currentSlide: number = 0;
+    start: boolean = true;
+    end: boolean = true;
+    currSlides: Array<any> = ['active'];
+    handleKeyDownFunc: any;
+    currentClass: string;
 
-    constructor(private element:ElementRef, private labels:NovoLabelService) {
+    constructor(private element: ElementRef, public labels: NovoLabelService) {
         this.handleKeyDownFunc = this.handleKeyDown.bind(this);
     }
 
