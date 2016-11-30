@@ -102,7 +102,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
                         </li>
                     </ul>
                     <div class="calendar-footer">
-                        <span (click)="setToday()" class="today" title="{{today}}" data-automation-id="calendar-today">Today</span>
+                        <span (click)="setToday()" class="today" data-automation-id="calendar-today">Today</span>
                     </div>
                 </div>
                 <div class="time-picker">
@@ -137,14 +137,14 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
     `
 })
 export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
-    @Input() minYear:any;
-    @Input() maxYear:any;
-    @Input() start:any;
-    @Input() end:any;
-    @Input() inline:any;
-    @Input() military:any;
+    @Input() minYear: any;
+    @Input() maxYear: any;
+    @Input() start: any;
+    @Input() end: any;
+    @Input() inline: any;
+    @Input() military: any;
     // Select callback for output
-    @Output() onSelect:EventEmitter<any> = new EventEmitter(false);
+    @Output() onSelect: EventEmitter<any> = new EventEmitter(false);
 
     // List of all the weekdays (use moment to localize)
     weekday = moment.weekdays();
@@ -158,27 +158,27 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     hours = 12;
     minutes = 0;
     value = null;
-    showClock:Boolean = false;
-    componentTabState:String = 'date';
+    showClock: Boolean = false;
+    componentTabState: String = 'date';
 
     MERIDIANS = ['am', 'pm'];
     HOURS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     MINUTES = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
 
-    model:any;
-    month:any;
-    weeks:any;
-    selected:any;
-    meridian:any;
-    heading:any;
-    hoursClass:string;
+    model: any;
+    month: any;
+    weeks: any;
+    selected: any;
+    meridian: any;
+    heading: any;
+    hoursClass: string;
     activeHour;
-    minutesClass:string;
+    minutesClass: string;
     activeMinute;
     inBetween;
-    onModelChange:Function = () => {
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
     ngOnInit() {
@@ -199,7 +199,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.ngOnChanges();
     }
 
-    ngOnChanges(changes?:SimpleChanges) {
+    ngOnChanges(changes?: SimpleChanges) {
         this.updateCal(this.model, false, true);
         this.updateTime(this.model, false);
     }
@@ -207,7 +207,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     updateTime(time, fireEvents) {
         let momentValue = time ? moment(time) : moment();
         let hours = momentValue.hours();
-        let minutes:any = momentValue.minutes();
+        let minutes: any = momentValue.minutes();
 
         if (!this.military) {
             this.meridian = hours >= 12 ? 'pm' : 'am';
@@ -449,17 +449,17 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     }
 
     // ValueAccessor Functions
-    writeValue(model:any):void {
+    writeValue(model: any): void {
         this.model = model;
         this.updateCal(model, false, true);
         this.updateTime(model, false);
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 
