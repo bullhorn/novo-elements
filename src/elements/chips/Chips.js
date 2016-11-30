@@ -37,7 +37,7 @@ export class NovoChipElement {
             e.stopPropagation();
             e.preventDefault();
         }
-        this.remove.emit();
+        this.remove.emit(e);
         return false;
     }
 
@@ -46,7 +46,7 @@ export class NovoChipElement {
             e.stopPropagation();
             e.preventDefault();
         }
-        this.select.emit();
+        this.select.emit(e);
         return false;
     }
 }

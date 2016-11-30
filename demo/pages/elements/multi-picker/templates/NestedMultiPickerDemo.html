@@ -1,0 +1,9 @@
+<div class="selected-value">Selected Departments: <span *ngFor="let item of parentChildValue.departments">{{item}} </span>
+    Selected Users: <span *ngFor="let item of parentChildValue.users">{{item}} </span></div>
+<multi-picker
+    [source]="parentChild"
+    [placeholder]="placeholder"
+    [types]="parentChildTypes"
+    [(ngModel)]="parentChildValue"
+    (changed)="onChanged($event)">
+</multi-picker>
