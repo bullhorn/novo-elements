@@ -1,3 +1,19 @@
+<a name="1.1.34"></a>
+## [1.1.34](https://github.com/bullhorn/novo-elements/compare/v1.1.33...v1.1.34) (2016-11-30)
+
+
+### Bug Fixes
+
+* **select,picker:** Select Dropdown and Picker Container ([#265](https://github.com/bullhorn/novo-elements/issues/265)) ([c84b2db](https://github.com/bullhorn/novo-elements/commit/c84b2db))
+
+
+### Features
+
+* **multipicker:** Initial setup for parent/child relationship for multipicker categories ([5be7a41](https://github.com/bullhorn/novo-elements/commit/5be7a41))
+* **select:** Replaced placeholder default for selects with an empty string ([#263](https://github.com/bullhorn/novo-elements/issues/263)) ([573ba45](https://github.com/bullhorn/novo-elements/commit/573ba45))
+
+
+
 <a name="1.1.33"></a>
 ## [1.1.33](https://github.com/bullhorn/novo-elements/compare/v1.1.32...v1.1.33) (2016-11-22)
 
