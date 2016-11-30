@@ -1,3 +1,22 @@
+<a name="2.0.0"></a>
+## [2.0.0](https://github.com/bullhorn/novo-elements/compare/v1.1.34...v2.0.0) (2016-11-30)
+
+* Converted to Typescript
+
+### BREAKING CHANGES
+
+`NovoElementsModule` no longer has the providers, you will also have to import the `NovoElementsProviders` too.
+
+```
+@NgModule({ imports: [  NovoElementsModule, NovoElementProviders.forRoot() ] })
+```
+
+You will also have to provide a base `NovoLabelService`
+
+```
+@NgModule({ providers: [  NovoLabelService ] })
+```
+
 <a name="1.1.34"></a>
 ## [1.1.34](https://github.com/bullhorn/novo-elements/compare/v1.1.33...v1.1.34) (2016-11-30)
 
