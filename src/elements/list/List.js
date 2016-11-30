@@ -33,7 +33,7 @@ export class NovoListItemElement {
     constructor(element:ElementRef) {
         this.element = element;
     }
-    ngAfterViewInit() {
+    ngOnInit() {
         this.avatar = !!this.element.nativeElement.querySelector('item-avatar');
     }
 }

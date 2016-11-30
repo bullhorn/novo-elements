@@ -62,19 +62,20 @@ export class NovoTableHeaderElement {
                             <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters">
                                 <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter" (click)="focusInput(column.name)"></button>
                                 <!-- FILTER OPTIONS LIST -->
-                                <list *ngIf="column?.options?.length && column?.type!='date'">
+                                <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type!='date'">
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
                                             <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
+                                        <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.freetextFilter"/>
                                     </item>
                                     <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="getOptionDataAutomationId(option)">
                                         {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
                                     </item>
                                 </list>
                                 <!-- FILTER SEARCH INPUT -->
-                                <list *ngIf="!column?.options?.length">
+                                <list *ngIf="!(column?.options?.length || column?.originalOptions?.length)">
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
@@ -221,6 +222,7 @@ export class NovoTableElement {
                         break;
                 }
             }
+            column.originalOptions = column.options;
         });
     }
 
@@ -308,6 +310,8 @@ export class NovoTableElement {
         }
 
         column.filter = null;
+        column.freetextFilter = null;
+        column.options = column.originalOptions;
         this.onFilterChange();
     }
 
@@ -336,7 +340,6 @@ export class NovoTableElement {
         if (this.config.filtering) {
             // Array of filters
             const filters = this.columns.filter(col => col.filter && col.filter.length);
-
             if (filters.length) {
                 if (Helpers.isFunction(this.config.filtering)) {
                     // Custom filter function on the table config
@@ -389,12 +392,12 @@ export class NovoTableElement {
                                     });
                                 } else {
                                     let options = column.filter;
-                                    // We have an array of {value: '', labels: ''}
-                                    if (options[0].value || options[0].label) {
-                                        options = column.filter.map(opt => opt.value);
-                                    }
+                                    options = column.filter.map(opt => {
+                                        let option = opt.label || opt.value || opt || '';
+                                        return option.toLowerCase();
+                                    });
                                     // It's a list of options
-                                    matched = options.includes(row[column.name]);
+                                    matched = options.includes(row[column.name].toLowerCase());
                                 }
                             } else if (Array.isArray(row[column.name])) {
                                 // Value is an array
@@ -437,7 +440,7 @@ export class NovoTableElement {
      */
     isFilterActive(columnFilters, filter) {
         let isActive = false;
-        if (columnFilters && columnFilters.filter && filter) {
+        if (columnFilters && columnFilters.filter && columnFilters.filter.some && filter) {
             if (typeof(filter) !== 'string') {
                 isActive = columnFilters.filter.some(columnFilter => {
                     return columnFilter.label === filter.label;
@@ -670,4 +673,30 @@ export class NovoTableElement {
             }
         }, 10);
     }
+
+    onFilterKeywords(config) {
+        if (config && config.filtering && config.filtering.freetextFilter) {
+            let filterKeywords = config.filtering.freetextFilter.toLowerCase();
+            let newOptions = config.filtering.originalOptions.filter(option => {
+                let value = option && option.label ? option.label : option;
+                value = value.toLowerCase() ? value.toLowerCase() : value;
+                if (value === filterKeywords) {
+                    return true;
+                } else if (~ value.indexOf(filterKeywords) || ~ value.indexOf(filterKeywords)) {
+                    return true;
+                }
+                return false;
+            });
+            config.filtering.options = newOptions;
+            if (config.filtering.originalOptions[0].label) {
+                config.filtering.filter = [{ label: config.filtering.freetextFilter }];
+            } else {
+                config.filtering.filter = config.filtering.freetextFilter;
+            }
+        } else {
+            config.filtering.options = config.filtering.originalOptions;
+        }
+        this.onFilterChange(config);
+    }
+
 }
