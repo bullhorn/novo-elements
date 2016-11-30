@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
 import { Helpers } from './../../utils/Helpers';
-
+import { DataProvider } from './../../services/data-provider/DataProvider';
 @Component({
     selector: 'novo-table-actions',
     template: '<ng-content></ng-content>'
@@ -30,7 +30,7 @@ export class NovoTableHeaderElement {
                 <novo-pagination *ngIf="config.paging"
                                  [page]="config.paging.current"
                                  [rowOptions]="config.customRowOptions"
-                                 [totalItems]="modifiedRows.length"
+                                 [totalItems]="dataProvider.length"
                                  [itemsPerPage]="config.paging.itemsPerPage"
                                  (onPageChange)="onPageChange($event)">
                 </novo-pagination>
@@ -105,13 +105,13 @@ export class NovoTableHeaderElement {
                 </tr>
             </thead>
             <!-- TABLE DATA -->
-            <tbody *ngIf="modifiedRows.length > 0">
+            <tbody *ngIf="rows.length > 0">
                 <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage" data-automation-id="table-selection-row">
                     <td colspan="100%">
-                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(modifiedRows.length)}}</a>
+                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(rows.length)}}</a>
                     </td>
                 </tr>
-                <template ngFor let-row="$implicit" [ngForOf]="modifiedRows | slice:getPageStart():getPageEnd()">
+                <template ngFor let-row="$implicit" [ngForOf]="rows">
                     <tr class="table-row" [ngClass]="row.customClass || ''" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
                         <td class="row-actions" *ngIf="config.hasDetails">
                             <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
@@ -133,7 +133,7 @@ export class NovoTableHeaderElement {
                 </template>
             </tbody>
             <!-- NO TABLE DATA PLACEHOLDER -->
-            <tbody *ngIf="modifiedRows.length === 0" data-automation-id="empty-table">
+            <tbody *ngIf="rows.length === 0" data-automation-id="empty-table">
                 <tr>
                     <td colspan="100%">
                         <div class="no-matching-records">
@@ -147,8 +147,8 @@ export class NovoTableHeaderElement {
     `
 })
 export class NovoTableElement {
+    _dataProvider:any = new DataProvider();
     _rows:[any] = [];
-    modifiedRows:[any] = [];
     selected:[any] = [];
     activeId:number = 0;
     master:boolean = false;
@@ -164,9 +164,7 @@ export class NovoTableElement {
 
     @Input()
     set rows(rows) {
-        this._rows = Array.isArray(rows) ? rows.slice() : [];
-        this.modifiedRows = Array.isArray(rows) ? rows.slice() : [];
-
+        this.dataProvider = rows;
         if (rows && rows.length > 0) {
             this.setupColumnDefaults();
         }
@@ -175,9 +173,34 @@ export class NovoTableElement {
             this.clearAllSortAndFilters();
         }
     }
-
     get rows() {
         return this._rows;
+    }
+
+
+    @Input()
+    set dataProvider(dp) {
+        this._dataProvider = Array.isArray(dp) ? new DataProvider(dp) : dp;
+        this._rows = this._dataProvider.list;
+        this._dataProvider.page = this.config.paging.current;
+        this._dataProvider.pageSize = this.config.paging.itemsPerPage;
+        this.pagedData = this._rows;
+
+        if (dp && dp.length > 0) {
+            this.setupColumnDefaults();
+        }
+        this._dataProvider.dataChange.subscribe((results) => {
+            this._rows = results;
+            // Remove all selection on sort change if selection is on
+            if (this.config.rowSelectionStyle === 'checkbox') {
+                this.pagedData = results;
+                this.pageSelected = this.pagedData.filter(r => r._selected);
+                this.rowSelectHandler();
+            }
+        });
+    }
+    get dataProvider() {
+        return this._dataProvider;
     }
 
     @Output() onRowClick:EventEmitter = new EventEmitter();
@@ -189,13 +212,8 @@ export class NovoTableElement {
     }
 
     onPageChange(event) {
-        this.config.paging.onPageChange(event);
-
-        // Remove all selection on sort change if selection is on
-        if (this.config.rowSelectionStyle === 'checkbox') {
-            this.pagedData = this.modifiedRows.slice(this.getPageStart(), this.getPageEnd());
-            this.pageSelected = this.pagedData.filter(r => r._selected);
-        }
+        this.dataProvider.page = event.page;
+        this.dataProvider.pageSize = event.itemsPerPage;
     }
 
     getOptionDataAutomationId(option) {
@@ -240,7 +258,7 @@ export class NovoTableElement {
      * @returns {number}
      */
     getPageStart() {
-        return this.config.paging ? (this.config.paging.current - 1) * this.config.paging.itemsPerPage : 0;
+        return this.config.paging ? (this.dataProvider.page - 1) * this.dataProvider.pageSize : 0;
     }
 
     /**
@@ -248,7 +266,7 @@ export class NovoTableElement {
      * @returns {*}
      */
     getPageEnd() {
-        return this.config.paging && this.config.paging.itemsPerPage > -1 ? this.getPageStart() + this.config.paging.itemsPerPage : this.modifiedRows.length;
+        return this.config.paging && this.dataProvider.pageSize > -1 ? this.getPageStart() + this.dataProvider.pageSize : this.rows.length;
     }
 
     /**
@@ -336,90 +354,48 @@ export class NovoTableElement {
         if (this.config.filtering) {
             // Array of filters
             const filters = this.columns.filter(col => col.filter && col.filter.length);
-
             if (filters.length) {
-                if (Helpers.isFunction(this.config.filtering)) {
-                    // Custom filter function on the table config
-                    this.modifiedRows = this.config.filtering(filters, this._rows.slice());
-                } else {
-                    this.modifiedRows = this._rows.slice().filter(row => {
-                        let matched;
-                        for (const column of filters) {
-                            if (column.match && Helpers.isFunction(column.match)) {
-                                // Custom match function on the column
-                                matched = column.match(row[column.name], column.filter);
-                            } else if (Array.isArray(column.filter)) {
-                                // The filters are an array (multi-select), check value
-                                if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
-                                    matched = column.filter.some(obj => {
-                                        let start = obj.value ? new Date(obj.value.startDate).getTime() : 0;
-                                        let end = obj.value ? new Date(obj.value.endDate).getTime() : 0;
-                                        let isMatch = false;
-                                        // Assumes row data contains a JS date object
-                                        let date = row[column.name] instanceof Date ? row[column.name].getTime() : row[column.name];
-                                        if (start !== 0 && end !== 0) {
-                                            isMatch = (date >= start && date <= end);
-                                        } else isMatch = true;
-                                        return isMatch;
-                                    });
-                                } else if (column.type && column.type === 'date') {
-                                    // It's a date, use the date difference
-                                    matched = column.filter.some(value => {
-                                        let min = value.min;
-                                        let max = value.max;
-                                        let isMatch = false;
-                                        let oneDay = 24 * 60 * 60 * 1000;
-                                        // Assumes row data contains a JS date object
-                                        let firstDate = row[column.name] instanceof Date ? row[column.name].getTime() : row[column.name];
-                                        let secondDate = new Date();
-                                        let difference = 0;
-                                        try {
-                                            difference = Math.round((firstDate - secondDate.getTime()) / oneDay);
-                                        } catch (error) {
-                                            throw new Error('Row data of type \'date\' must contain a JS date object or a timestamp as its value.', error);
-                                        }
-                                        if (typeof(min) !== 'undefined' && typeof(max) !== 'undefined') {
-                                            isMatch = (difference >= min && difference <= max);
-                                        } else if (typeof(min) !== 'undefined') {
-                                            isMatch = difference >= min;
-                                        } else if (typeof(max) !== 'undefined') {
-                                            isMatch = difference <= max;
-                                        }
-                                        return isMatch;
-                                    });
-                                } else {
-                                    let options = column.filter;
-                                    // We have an array of {value: '', labels: ''}
-                                    if (options[0].value || options[0].label) {
-                                        options = column.filter.map(opt => opt.value);
-                                    }
-                                    // It's a list of options
-                                    matched = options.includes(row[column.name]);
-                                }
-                            } else if (Array.isArray(row[column.name])) {
-                                // Value is an array
-                                for (const value of row[column.name]) {
-                                    matched = value.match(new RegExp(column.filter, 'gi'));
-                                    if (!matched) break;
-                                }
-                            } else {
-                                // Basic, value is just a string
-                                matched = JSON.stringify((row[column.name] || '')).match(new RegExp(column.filter, 'gi'));
+                let query = {};
+                for (const column of filters) {
+                    if (Array.isArray(column.filter)) {
+                        // The filters are an array (multi-select), check value
+                        if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
+                            query[column.name] = column.filter.map(f => {
+                                return {
+                                    min: f.value ? new Date(f.value.startDate).getTime() : 0,
+                                    max: f.value ? new Date(f.value.endDate).getTime() : 0
+                                };
+                            })[0];
+                        } else if (column.type && column.type === 'date') {
+                            query[column.name] = column.filter.map(f => {
+                                return {
+                                    min: f.min ? Date.now() + (f.min * (24 * 60 * 60 * 1000)) : Date.now(),
+                                    max: f.max ? Date.now() + (f.max * (24 * 60 * 60 * 1000)) : Date.now()
+                                };
+                            })[0];
+                        } else {
+                            let options = column.filter;
+                            // We have an array of {value: '', labels: ''}
+                            if (options[0].value || options[0].label) {
+                                options = column.filter.map(opt => opt.value);
                             }
-                            if (!matched) break;
+                            query[column.name] = { any: options };
                         }
-                        return matched;
-                    });
+                    } else {
+                        query[column.name] = column.filter;
+                    }
                 }
+                this._dataProvider.filter = query;
             } else {
-                this.modifiedRows = this._rows.slice();
+                this._dataProvider.filter = {};
             }
             // Trickle down to keep sort
-            this.onSortChange(this.currentSortColumn);
+            // this.onSortChange(this.currentSortColumn);
+
             // If paging, reset page
-            if (this.config.paging) {
-                this.config.paging.current = 1;
-            }
+            //if (this.config.paging) {
+            this.config.paging.current = 1;
+            //}
             // Remove all selection on sort change if selection is on
             if (this.config.rowSelectionStyle === 'checkbox') {
                 this.selectAll(false);
@@ -453,54 +429,18 @@ export class NovoTableElement {
      * @name onSortChange
      * @param newSortColumn
      */
-    onSortChange(newSortColumn) {
-        this.currentSortColumn = newSortColumn;
+    onSortChange(column) {
+        if (this.currentSortColumn && this.currentSortColumn !== column) {
+            this.currentSortColumn.sort = null;
+        }
+        this.currentSortColumn = column;
 
-        if (newSortColumn) {
-            this.columns.map(column => {
-                if (column.name !== newSortColumn.name) {
-                    delete column.sort;
-                }
-                return false;
-            });
-
-            if (Helpers.isFunction(this.config.sorting)) {
-                // Custom sort function on the table config
-                this.modifiedRows = this.config.sorting(newSortColumn, this.modifiedRows);
-            } else {
-                this.modifiedRows.sort((previous, current) => {
-                    const columnName = newSortColumn.name;
-                    let first = previous[columnName] || '';
-                    let second = current[columnName] || '';
-
-                    // Custom compare function on the column
-                    if (newSortColumn.compare && Helpers.isFunction(newSortColumn.compare)) {
-                        return newSortColumn.compare(newSortColumn.sort, first, second);
-                    }
-
-                    if (Helpers.isString(first) && Helpers.isString(second)) {
-                        // Basic strings
-                        first = first.toLowerCase();
-                        second = second.toLowerCase();
-                    } else {
-                        // Numbers
-                        first = isNaN(Number(first)) ? first : Number(first);
-                        second = isNaN(Number(second)) ? second : Number(second);
-                    }
-
-                    if (first > second) {
-                        return newSortColumn.sort === 'desc' ? -1 : 1;
-                    }
-                    if (first < second) {
-                        return newSortColumn.sort === 'asc' ? -1 : 1;
-                    }
-                    return 0;
-                });
-            }
+        if (column) {
+            this._dataProvider.sort = [{ field: column.name, reverse: column.sort === 'desc' }];
         }
 
         // Fire table change event
-        this.fireTableChangeEvent();
+        // this.fireTableChangeEvent();
 
         // If paging, reset page
         if (this.config.paging) {
@@ -522,7 +462,7 @@ export class NovoTableElement {
         const filters = this.columns.filter((col) => col.filter && col.filter.length);
         onTableChange.filter = filters.length ? filters : false;
         onTableChange.sort = this.currentSortColumn ? this.currentSortColumn : false;
-        onTableChange.rows = this.modifiedRows;
+        onTableChange.rows = this.rows;
 
         // Emit event
         this.onTableChange.emit(onTableChange);
@@ -564,16 +504,16 @@ export class NovoTableElement {
             this.showSelectAllMessage = false;
         } else {
             this.indeterminate = false;
-            this.pagedData = this.modifiedRows.slice(this.getPageStart(), this.getPageEnd());
+            //this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
             for (let row of this.pagedData) {
                 row._selected = this.master;
             }
-            this.selected = this.modifiedRows.filter(r => r._selected);
+            this.selected = this.rows.filter(r => r._selected);
             this.pageSelected = this.pagedData.filter(r => r._selected);
             this.emitSelected(this.selected);
             // Only show the select all message when there is only one new page selected at a time
             this.selectedPageCount++;
-            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.modifiedRows.length;
+            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.rows.length;
         }
     }
 
@@ -583,10 +523,10 @@ export class NovoTableElement {
     selectAll(value) {
         this.master = value;
         this.indeterminate = false;
-        for (let row of this.modifiedRows) {
+        for (let row of this.rows) {
             row._selected = value;
         }
-        this.selected = value ? this.modifiedRows : [];
+        this.selected = value ? this.rows : [];
         this.showSelectAllMessage = false;
         this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
         this.rowSelectHandler();
@@ -596,9 +536,9 @@ export class NovoTableElement {
      * @name rowSelectHandler
      */
     rowSelectHandler() {
-        this.pagedData = this.modifiedRows.slice(this.getPageStart(), this.getPageEnd());
+        //this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
         this.pageSelected = this.pagedData.filter(r => r._selected);
-        this.selected = this.modifiedRows.filter(r => r._selected);
+        this.selected = this.rows.filter(r => r._selected);
         if (this.pageSelected.length === 0) {
             this.master = false;
             this.indeterminate = false;

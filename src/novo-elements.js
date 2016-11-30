@@ -49,6 +49,12 @@ export { FormValidators } from './elements/form/FormValidators';
 export { FormUtils } from './elements/form/FormUtils';
 export * from './elements/form/FormControls';
 
+// Data
+export * from './services/data-provider/ArrayCollection';
+export * from './services/data-provider/DataChangeEvent';
+export * from './services/data-provider/RecordSet';
+export * from './services/data-provider/DataProvider';
+
 // Utils
 export * from './utils/outside-click/OutsideClick';
 export * from './utils/key-codes/KeyCodes';

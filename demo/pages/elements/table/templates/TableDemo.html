@@ -1,6 +1,9 @@
-<novo-table [theme]="theme" [rows]="basic.rows" [columns]="basic.columns" [config]="basic.config">
+<novo-table [theme]="theme" [dataProvider]="basic.rows" [columns]="basic.columns" [config]="basic.config">
     <novo-table-header class="demo-custom-header">
         TEST :)
-        <button theme="secondary" (click)="changeTheme()">Change Theme!</button>
+        <div>
+            <button theme="secondary" (click)="reload()">Reload Data</button>
+            <button theme="secondary" (click)="changeTheme()">Change Theme!</button>
+        </div>
     </novo-table-header>
 </novo-table>

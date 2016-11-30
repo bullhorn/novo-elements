@@ -42,7 +42,7 @@ import {
 import { UtilsDemoComponent } from './pages/utils/utils/UtilsDemo';
 import { PipesDemoComponent } from './pages/utils/pipes/PipesDemo';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
-import { StatusCell, ExtraDetails } from './pages/elements/table/TableDemo';
+import { StatusCell, ImageCell, ExtraDetails } from './pages/elements/table/TableDemo';
 import { CustomPickerResults } from './pages/elements/picker/PickerDemo';
 import './demo.scss';
 // Vendor
@@ -92,6 +92,7 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
         ModalAddDemo,
         ModalEditDemo,
         StatusCell,
+        ImageCell,
         ExtraDetails,
         CustomPickerResults,
         CategoryDropdownDemoComponent,
@@ -117,6 +118,7 @@ import { NovoElementsModule, FormUtils } from './../src/novo-elements';
         ModalAddDemo,
         ModalEditDemo,
         StatusCell,
+        ImageCell,
         ExtraDetails,
         CustomPickerResults
     ],
