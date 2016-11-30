@@ -17,7 +17,7 @@ export class ThSortable {
             event.preventDefault();
         }
 
-        if (this.config && this.column && this.config.sorting !== false && this.column.sort !== false) {
+        if (this.config && this.column && this.config.sorting !== false && this.column.sorting !== false) {
             switch (this.column.sort) {
                 case 'asc':
                     this.column.sort = 'desc';

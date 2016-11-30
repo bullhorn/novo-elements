@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 let CalendarDemoTpl = require('./templates/CalendarDemo.html');
 let TimeDemoTpl = require('./templates/TimeDemo.html');
 let RangeDemoTpl = require('./templates/RangeDemo.html');
+let DateTimeDemoTpl = require('./templates/DateTimeDemo.html');
 // Vendor
 import * as moment from 'moment';
 
@@ -29,6 +30,10 @@ const template = `
     <h5>Range Picker</h5>
     <div class="example demo">${RangeDemoTpl}</div>
     <code-snippet [code]="RangeDemoTpl"></code-snippet>
+
+    <h5>Date Time Picker</h5>
+    <div class="example demo">${DateTimeDemoTpl}</div>
+    <code-snippet [code]="DateTimeDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -40,10 +45,12 @@ export class CalendarDemoComponent {
     CalendarDemoTpl:string = CalendarDemoTpl;
     TimeDemoTpl:string = TimeDemoTpl;
     RangeDemoTpl:string = RangeDemoTpl;
+    DateTimeDemoTpl:string = DateTimeDemoTpl;
 
     time:Date = new Date();
     dateOne:Date = new Date();
     dateTwo:Date = new Date();
+    dateTime:Date = new Date();
     start:any = moment().subtract(1, 'months');
     end:any = moment().add(1, 'months');
     value:any = {

@@ -53,6 +53,7 @@ novo-form {
 
                     &.disabled {
                         pointer-events: none;
+
                         input {
                             &::-webkit-input-placeholder {
                                 color: $light !important;
@@ -64,7 +65,7 @@ novo-form {
                         }
 
                         chips {
-                            border-bottom: 1px dashed $light !important;;
+                            border-bottom: 1px dashed $light !important;
 
                             chip {
                                 opacity: 0.5;
@@ -198,6 +199,7 @@ novo-form {
                                         position: absolute;
                                         right: 0;
                                         top: 0;
+                                        font-size: 1.2em;
                                     }
 
                                     > i.bhi-times {
@@ -205,8 +207,9 @@ novo-form {
                                         font-size: 1.1em;
                                     }
 
-                                    > novo-time-picker,
-                                    > novo-date-picker {
+                                     > novo-time-picker,
+                                    > novo-date-picker,
+                                    novo-date-time-picker {
                                         position: absolute;
                                         top: 100%;
                                         left: 0;
@@ -217,7 +220,10 @@ novo-form {
                                         top: 100%;
                                         left: 0;
                                         display: flex;
-                                        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                                        flex-direction: column;
+                                        background: #fff;
+                                        z-index: 9;
+                                        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
                                         border-bottom-right-radius: 3px;
                                         border-bottom-left-radius: 3px;
                                         border-top-left-radius: 3px;
@@ -235,9 +241,32 @@ novo-form {
                                         }
 
                                         novo-time-picker {
+                                            position: absolute;
+                                            height: 100%;
+                                            width: 100%;
                                             border-top-left-radius: 0;
                                             border-bottom-left-radius: 0;
                                             box-shadow: none;
+
+                                            .digital {
+                                                display: block;
+                                                position: absolute;
+                                                bottom: 0;
+                                                width: 100%;
+                                            }
+                                        }
+
+                                        .time-control {
+                                            border-top: 1px solid #f4f4f4;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+
+                                            .am-pm {
+                                                display: flex;
+                                                flex-direction: column;
+                                                margin-left: 10px;
+                                            }
                                         }
                                     }
 
@@ -470,6 +499,7 @@ novo-form {
 
                         &.disabled {
                             pointer-events: none;
+
                             input {
                                 &::-webkit-input-placeholder {
                                     color: $light !important;
@@ -481,7 +511,7 @@ novo-form {
                             }
 
                             chips {
-                                border-bottom: 1px dashed $light !important;;
+                                border-bottom: 1px dashed $light !important;
 
                                 chip {
                                     opacity: 0.5;

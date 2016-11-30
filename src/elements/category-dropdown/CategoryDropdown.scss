@@ -70,9 +70,10 @@ novo-category-dropdown {
                 }
             }
 
-            i.bhi-search, i.bhi-times {
+            i.bhi-search,
+            i.bhi-times {
                 position: absolute;
-                top: 5px;
+                bottom: 8px;
                 right: 5px;
                 color: #aaaaaa;
                 font-size: 1em;
@@ -115,6 +116,7 @@ novo-category-dropdown {
             > novo-tab {
                 height: 40px;
                 min-height: 40px;
+
                 > .novo-tab-link {
                     max-width: 100%;
                     height: 100%;
@@ -135,7 +137,8 @@ novo-category-dropdown {
             cursor: pointer;
             font-size: 0.9em;
 
-            &:hover, &:focus {
+            &:focus,
+            &:hover {
                 background: lighten($light, 10%);
                 color: darken($light, 55%);
 
@@ -172,7 +175,7 @@ novo-category-dropdown {
         align-items: flex-end;
 
         .dropdown-container {
-            right: 0px;
+            right: 0;
         }
     }
 }

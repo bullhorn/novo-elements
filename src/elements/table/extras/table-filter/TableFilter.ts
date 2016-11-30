@@ -24,7 +24,13 @@ export class TableFilter implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes?: SimpleChanges) {
-        this.renderer.setElementProperty(this.element, 'value', this.config.filter);
+        let label = '';
+        if (this.config.freetextFilter) {
+            label = this.config.freetextFilter;
+        } else if (this.config.filter) {
+            label = this.config.filter;
+        }
+        this.renderer.setElementProperty(this.element, 'value', label);
     }
 
     onChangeFilter(event) {

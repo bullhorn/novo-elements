@@ -8,6 +8,6 @@ export class SelectControl extends BaseControl {
     constructor(config:NovoControlConfig) {
         super(config);
         this.options = config.options || [];
-        this.placeholder = config.placeholder || 'Select One';
+        this.placeholder = config.placeholder || '';
     }
 }

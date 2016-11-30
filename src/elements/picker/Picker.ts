@@ -202,6 +202,8 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
             this._value = selected.value;
             this.select.emit(selected);
             this.onModelChange(selected.value);
+        } else {
+            this.select.emit(selected);
         }
     }
 

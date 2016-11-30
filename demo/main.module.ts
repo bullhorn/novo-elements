@@ -37,6 +37,7 @@ import {
     EditorDemoComponent,
     TipWellDemoComponent,
     CategoryDropdownDemoComponent
+    MultiPickerDemoComponent
 } from './pages/elements';
 import { UtilsDemoComponent } from './pages/utils/utils/UtilsDemo';
 import { PipesDemoComponent } from './pages/utils/pipes/PipesDemo';
@@ -93,7 +94,8 @@ import './demo.scss';
         StatusCell,
         ExtraDetails,
         CustomPickerResults,
-        CategoryDropdownDemoComponent
+        CategoryDropdownDemoComponent,
+        MultiPickerDemoComponent
     ],
     imports: [
         // NG2

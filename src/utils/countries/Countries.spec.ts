@@ -1,5 +1,5 @@
 // APP
-import { getCountries, getStates } from './Countries';
+import { getCountries, getStates, getStateObjects } from './Countries';
 
 describe('Util: Countries', () => {
     describe('Function: getCountries()', () => {
@@ -19,6 +19,16 @@ describe('Util: Countries', () => {
 
         it('should get states for US', () => {
             expect(getStates('United States')[0]).toBe('Alabama');
+        });
+    });
+
+    describe('Function: getStateObjects(countryName)', () => {
+        it('should be defined', () => {
+            expect(getStateObjects).toBeDefined();
+        });
+
+        it('should get states for US', () => {
+            expect(getStateObjects('United States')[0]).toEqual({ code: 'AL', name: 'Alabama' });
         });
     });
 });

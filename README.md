@@ -23,9 +23,12 @@
     # Start
     npm start
     
+    # Access the Demo in your browser at
+    http://localhost:3000/
+    
 ## Integrating into a project
 
-    # Install the modile
+    # Install the module
     npm install --save novo-elements
     
 Depending on what system you are using (SystemJS, Webpack, etc..) the setup will vary.

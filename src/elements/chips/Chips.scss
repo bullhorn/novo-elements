@@ -21,6 +21,7 @@ entity-chips {
     &.selected,
     &.selected:hover {
         border-bottom: 1px solid $positive;
+
         & + i {
             color: $positive;
         }
@@ -33,13 +34,14 @@ entity-chips {
         justify-content: space-between;
         background: #EEEEEE;
         border-radius: 4px;
-        padding: .5em .75em;
+        padding: 0.5em 0.75em;
         margin-right: 5px;
         margin-bottom: 5px;
         width: auto;
         max-width: 180px;
         border: 1px solid transparent;
         transition: all 200ms ease-in-out;
+
         span {
             color: darken(#eee, 45%);
             vertical-align: middle;
@@ -49,24 +51,30 @@ entity-chips {
             text-overflow: ellipsis;
             display: flex;
             align-items: center;
+
             i {
                 font-size: 0.8em;
+
                 &:before {
                     vertical-align: baseline !important;
                 }
             }
         }
+
         i.bhi-close {
             margin-left: 10px;
             cursor: pointer;
             color: darken(#eee, 15%);
+
             &:before {
                 vertical-align: baseline;
             }
+
             &:hover {
                 color: darken(#eee, 35%);
             }
         }
+
         &.selected {
             border: 1px solid $positive;
         }
@@ -74,11 +82,13 @@ entity-chips {
 
     .chip-input-container {
         flex-grow: 4;
+
         input {
             padding-top: 0;
             border: none;
             background: transparent;
             width: 100%;
+
             &:focus {
                 outline: none;
             }
@@ -109,16 +119,17 @@ entity-chips {
         align-items: center;
 
         i {
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             padding-bottom: 2px;
-            margin-right: 5px;
+            margin-left: 5px;
         }
     }
 
     i.bhi-search {
         position: absolute;
-        top: 5px;
+        bottom: 8px;
         right: 0;
+        font-size: 1.2em;
     }
 }
 
@@ -191,6 +202,7 @@ entity-chips {
             novo-list-item {
                 flex: 0 0;
                 transition: background-color 250ms;
+
                 & > div {
                     width: 100%;
                 }
@@ -205,6 +217,7 @@ entity-chips {
 
                 item-content {
                     flex-flow: row wrap;
+
                     & > * {
                         flex: 0 0 33%;
                         white-space: nowrap;
@@ -213,33 +226,34 @@ entity-chips {
             }
         }
 
+        .error-results,
         .no-recents,
-        .null-results,
-        .error-results {
+        .null-results {
             text-align: center;
             padding: 1em 0 4em;
+
             > i {
                 font-size: 3em;
-                margin: .5em;
+                margin: 0.5em;
                 color: rgba(0, 0, 0, .3);
             }
 
-            > h4,
+             > h4,
             > p {
                 margin: 0;
                 max-width: none;
                 padding: 0;
             }
+
             > h4 {
                 font-weight: 500;
             }
-            > p {
 
-            }
+            > p {}
         }
 
         section {
-            box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.25);
+            box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
             z-index: 9;
             position: absolute;
             width: 100%;

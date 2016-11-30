@@ -18,7 +18,7 @@ export class CardActionsElement {
             <header>
                 <div class="title">
                     <!--Grabber Icon-->
-                    <i *ngIf="move || config.move" class="bhi-move" [attr.data-automation-id]="cardAutomationId + '-move'"></i>
+                    <span tooltip="{{ labels.move }}" tooltipPosition="bottom"><i *ngIf="move || config.move" class="bhi-move" [attr.data-automation-id]="cardAutomationId + '-move'"></i></span>
                     <!--Card Title-->
                     <h3 [attr.data-automation-id]="cardAutomationId + '-title'"><i *ngIf="icon" [ngClass]="iconClass"></i> {{title || config.title}}</h3>
                 </div>
