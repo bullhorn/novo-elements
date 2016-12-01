@@ -26,6 +26,7 @@ export interface NovoControlConfig {
     options?:Array<any>;
     type?:string;
     name?:string;
+    readOnly?: boolean;
 }
 
 export class BaseControl {
@@ -52,6 +53,7 @@ export class BaseControl {
     options:Array<any>;
     type:string;
     name:string;
+    readOnly: boolean;
 
     constructor(config:NovoControlConfig) {
         this.validators = config.validators || [];
@@ -74,6 +76,7 @@ export class BaseControl {
         this.optionsType = config.optionsType || null;
         this.forceClear = new EventEmitter();
         this.disabled = config.disabled || false;
+        this.readOnly = config.readOnly || false;
         if (this.required) {
             this.validators.push(Validators.required);
         }
