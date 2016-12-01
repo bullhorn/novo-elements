@@ -1,3 +1,14 @@
+<a name="2.0.4"></a>
+## [2.0.4](https://github.com/bullhorn/novo-elements/compare/v2.0.3...v2.0.4) (2016-12-01)
+
+
+### Bug Fixes
+
+* **forms:** Add disabled class to dynamic form fields ([#269](https://github.com/bullhorn/novo-elements/issues/269)) ([f26929f](https://github.com/bullhorn/novo-elements/commit/f26929f))
+* **forms:** Adding missing property to the BaseControl ([65f83e0](https://github.com/bullhorn/novo-elements/commit/65f83e0))
+
+
+
 <a name="2.0.3"></a>
 ## [2.0.3](https://github.com/bullhorn/novo-elements/compare/v2.0.2...v2.0.3) (2016-11-30)
 
