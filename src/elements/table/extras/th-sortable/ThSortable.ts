@@ -4,13 +4,13 @@ import { Directive, EventEmitter, Input, Output } from '@angular/core';
 @Directive({
     selector: '[novoThSortable]',
     host: {
-        '(click)': 'onToggleSort($event, $target)'
+        '(click)': 'onToggleSort($event)'
     }
 })
 export class ThSortable {
-    @Input('novoThSortable') config:any;
-    @Input() column:any;
-    @Output() onSortChange:EventEmitter<any> = new EventEmitter();
+    @Input('novoThSortable') config: any;
+    @Input() column: any;
+    @Output() onSortChange: EventEmitter<any> = new EventEmitter();
 
     onToggleSort(event) {
         if (event) {

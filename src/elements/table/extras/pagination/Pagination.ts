@@ -63,7 +63,7 @@ export class Pagination implements OnInit, OnChanges {
         });
     }
 
-    selectPage(page, event) {
+    selectPage(page, event?: any) {
         if (event) {
             event.preventDefault();
         }

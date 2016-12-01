@@ -13,14 +13,14 @@ import { Directive, EventEmitter, ElementRef, OnInit, Input, Output } from '@ang
     }
 })
 export class ThOrderable implements OnInit {
-    @Input('novoThOrderable') column:any;
-    @Output() onOrderChange:EventEmitter<any> = new EventEmitter();
+    @Input('novoThOrderable') column: any;
+    @Output() onOrderChange: EventEmitter<any> = new EventEmitter();
 
-    table:any;
-    clone:any;
-    target:any;
+    table: any;
+    clone: any;
+    target: any;
 
-    constructor(private element:ElementRef) {
+    constructor(private element: ElementRef) {
         this.element = element;
     }
 
@@ -31,7 +31,7 @@ export class ThOrderable implements OnInit {
         }
     }
 
-    onDragStart(event) {
+    onDragStart(event?: any) {
         if (this.column.ordering) {
             this.element.nativeElement.classList.add('dragging');
             event.dataTransfer.effectAllowed = 'move';
@@ -81,7 +81,7 @@ export class ThOrderable implements OnInit {
         return undefined;
     }
 
-    onDrag(event) {
+    onDrag(event?: any) {
         if (event) {
             event.preventDefault();
             event.stopPropagation();
@@ -89,7 +89,7 @@ export class ThOrderable implements OnInit {
         return false;
     }
 
-    onDragEnd(event) {
+    onDragEnd(event?: any) {
         if (event) {
             event.preventDefault();
             event.stopPropagation();
@@ -100,7 +100,7 @@ export class ThOrderable implements OnInit {
         return false;
     }
 
-    onDrop(event) {
+    onDrop(event?: any) {
         if (event) {
             event.preventDefault();
             event.stopPropagation();
@@ -117,7 +117,7 @@ export class ThOrderable implements OnInit {
         return false;
     }
 
-    onDragOver(event) {
+    onDragOver(event?: any) {
         if (event.preventDefault) {
             event.preventDefault();
         }
@@ -126,12 +126,12 @@ export class ThOrderable implements OnInit {
         return false;
     }
 
-    onDragEnter(event) {
+    onDragEnter(event?: any) {
         this.element.nativeElement.classList.add('over');
         this.target = event.target;
     }
 
-    onDragLeave() {
+    onDragLeave(event?: any) {
         this.element.nativeElement.classList.remove('over');
     }
 }
