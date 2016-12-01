@@ -49,6 +49,8 @@ var DatePicker_module_1 = require('./src/elements/date-picker/DatePicker.module'
 exports.NovoDatePickerModule = DatePicker_module_1.NovoDatePickerModule;
 var TimePicker_module_1 = require('./src/elements/time-picker/TimePicker.module');
 exports.NovoTimePickerModule = TimePicker_module_1.NovoTimePickerModule;
+var DateTimePicker_module_1 = require('./src/elements/date-time-picker/DateTimePicker.module');
+exports.NovoDateTimePickerModule = DateTimePicker_module_1.NovoDateTimePickerModule;
 var CKEditor_module_1 = require('./src/elements/ckeditor/CKEditor.module');
 exports.NovoNovoCKEditorModule = CKEditor_module_1.NovoNovoCKEditorModule;
 var TipWell_module_1 = require('./src/elements/tip-well/TipWell.module');
@@ -63,6 +65,8 @@ var FormExtras_module_1 = require('./src/elements/form/extras/FormExtras.module'
 exports.NovoFormExtrasModule = FormExtras_module_1.NovoFormExtrasModule;
 var CategoryDropdown_module_1 = require('./src/elements/category-dropdown/CategoryDropdown.module');
 exports.NovoCategoryDropdownModule = CategoryDropdown_module_1.NovoCategoryDropdownModule;
+var MultiPicker_module_1 = require('./src/elements/multi-picker/MultiPicker.module');
+exports.NovoMultiPickerModule = MultiPicker_module_1.NovoMultiPickerModule;
 // Export all services
 var ToastService_1 = require('./src/elements/toast/ToastService');
 exports.NovoToastService = ToastService_1.NovoToastService;
@@ -83,6 +87,8 @@ exports.PickerResults = PickerResults_1.PickerResults;
 exports.BasePickerResults = PickerResults_1.BasePickerResults;
 var EntityPickerResults_1 = require('./src/elements/picker/extras/entity-picker-results/EntityPickerResults');
 exports.EntityPickerResults = EntityPickerResults_1.EntityPickerResults;
+var ChecklistPickerResults_1 = require('./src/elements/picker/extras/checklist-picker-results/ChecklistPickerResults');
+exports.ChecklistPickerResults = ChecklistPickerResults_1.ChecklistPickerResults;
 var BaseRenderer_1 = require('./src/elements/table/extras/base-renderer/BaseRenderer');
 exports.BaseRenderer = BaseRenderer_1.BaseRenderer;
 var DateCell_1 = require('./src/elements/table/extras/date-cell/DateCell');
@@ -103,8 +109,6 @@ __export(require('./src/utils/component-utils/ComponentUtils'));
 __export(require('./novo-elements.providers'));
 // Pipes
 __export(require('./src/pipes/plural/Plural'));
-// Export modules
+// Export main module
 var novo_elements_module_1 = require('./novo-elements.module');
 exports.NovoElementsModule = novo_elements_module_1.NovoElementsModule;
-var novo_elements_providers_2 = require('./novo-elements.providers');
-exports.NovoElementProviders = novo_elements_providers_2.NovoElementProviders;
