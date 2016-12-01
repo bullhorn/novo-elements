@@ -165,6 +165,10 @@ novo-form {
                                     &:focus {
                                         border-bottom: 1px solid $positive;
                                     }
+
+                                    &:invalid {
+                                        border-bottom: 1px solid #DA4453;
+                                    }
                                 }
 
                                 textarea {
