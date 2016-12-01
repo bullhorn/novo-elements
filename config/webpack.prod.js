@@ -1,135 +1,122 @@
-const helpers = require('./helpers'); // Helper: root(), and rootDir() are defined at the bottom
-const webpackMerge = require('webpack-merge'); //Used to merge webpack configs
-const commonConfig = require('./webpack.common.js'); //The settings that are common to prod and dev
-
-// Webpack Plugins
+const helpers = require('./helpers');
+const pkg = require('../package.json');
+const autoprefixer = require('autoprefixer');
+const webpackMerge = require('webpack-merge');
+const commonConfig = require('./webpack.common.js');
+const DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
+const IgnorePlugin = require('webpack/lib/IgnorePlugin');
+const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
+const ProvidePlugin = require('webpack/lib/ProvidePlugin');
+const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const extractCSS = new ExtractTextPlugin('[name].css');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractCSS = new ExtractTextPlugin({
+    filename: '[name].[chunkhash].css',
+    isCacheable: false
+});
 
-// Webpack Constants
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8080;
-const METADATA = webpackMerge(commonConfig.metadata, {
+const VERSION = pkg.version;
+const METADATA = {
     host: HOST,
     port: PORT,
-    ENV: ENV
-});
+    ENV: ENV,
+    HMR: false,
+    VERSION: VERSION
+};
 
-module.exports = webpackMerge(commonConfig, {
-    // Switch loaders to debug mode.
-    // See: http://webpack.github.io/docs/configuration.html#debug
-    debug: false,
+module.exports = function () {
+    return webpackMerge(commonConfig({
+        env: ENV
+    }), {
+        devtool: 'source-map',
+        output: {
+            path: helpers.root('dist'),
+            filename: '[name].[chunkhash].bundle.js',
+            sourceMapFilename: '[name].[chunkhash].bundle.map',
+            chunkFilename: '[id].[chunkhash].chunk.js'
+        },
+        module: {
+            rules: [{
+                test: /\.s?css$/,
+                exclude: /node_modules/,
+                loader: extractCSS.extract(['css-loader', 'postcss-loader', 'sass-loader'])
+            }]
+        },
+        plugins: [
+            extractCSS,
+            new WebpackMd5Hash(),
+            // new DedupePlugin(), // see: https://github.com/angular/angular-cli/issues/1587
+            new DefinePlugin({
+                'VERSION': JSON.stringify(METADATA.VERSION),
+                'ENV': JSON.stringify(METADATA.ENV)
+            }),
+            new UglifyJsPlugin({
+                beautify: false,
+                mangle: {
+                    screw_ie8: true,
+                    keep_fnames: true
+                },
+                compress: {
+                    screw_ie8: true
+                },
+                comments: false
+            }),
 
-    // Developer tool to enhance debugging
-    // See: http://webpack.github.io/docs/configuration.html#devtool
-    // See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
-    devtool: 'source-map',
-
-    // Options affecting the output of the compilation.
-    // See: http://webpack.github.io/docs/configuration.html#output
-    output: {
-        // The output directory as absolute path (required).
-        // See: http://webpack.github.io/docs/configuration.html#output-path
-        path: helpers.root('dist'),
-
-        // Specifies the name of each output file on disk.
-        // IMPORTANT: You must not specify an absolute path here!
-        // See: http://webpack.github.io/docs/configuration.html#output-filename
-        filename: '[name].[chunkhash].js',
-
-        // The filename of the SourceMaps for the JavaScript files.
-        // They are inside the output.path directory.
-        // See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
-        sourceMapFilename: '[name].[chunkhash].map',
-
-        // The filename of non-entry chunks as relative path
-        // inside the output.path directory.
-        // See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
-        chunkFilename: '[id].[chunkhash].chunk.js'
-    },
-
-    // Options affecting the normal modules.
-    // See: http://webpack.github.io/docs/configuration.html#module
-    module: {
-        // An array of automatically applied loaders.
-        // IMPORTANT: The loaders here are resolved relative to the resource which they are applied to.
-        // This means they are not resolved relative to the configuration file.
-        // See: http://webpack.github.io/docs/configuration.html#module-loaders
-        loaders: [
-            // SCSS/Sass loader support for *.scss / .sass
-            // Returns file content as string
-            // See: https://github.com/jtangelder/sass-loader
-            {
-                test: /\.scss$/,
-                loader: extractCSS.extract([
-                    'raw-loader',
-                    `autoprefixer?${JSON.stringify(METADATA.autoprefixer)}`,
-                    'sass-loader'
-                ])
-            }
-        ]
-    },
-
-    // Add additional plugins to the compiler.
-    // See: http://webpack.github.io/docs/configuration.html#plugins
-    plugins: [
-        // Plugin: ExtractTextPlugin
-        // Description: extracts text (scss) into css files
-        // See: https://github.com/webpack/extract-text-webpack-plugin
-        extractCSS,
-
-        // Plugin: WebpackMd5Hash
-        // Description: Plugin to replace a standard webpack chunkhash with md5.
-        // See: https://www.npmjs.com/package/webpack-md5-hash
-        new WebpackMd5Hash(),
-
-        // Plugin: DefinePlugin
-        // Description: Define free variables.
-        // Useful for having development builds with debug logging or adding global constants.
-        // Environment helpers
-        // See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-        new DefinePlugin({
-            'VERSION': JSON.stringify(METADATA.version),
-            'ENV': JSON.stringify(METADATA.ENV)
-        })
-    ],
-
-    // Static analysis linter for JavaScript advanced options configuration
-    // Description: An extensible linter for the JavaScript language.
-    // See: https://github.com/MoOx/eslint-loader
-    eslint: {
-        emitErrors: true,
-        failOnHint: true,
-        resourcePath: 'src'
-    },
-
-    // Html loader advanced options
-    // See: https://github.com/webpack/html-loader#advanced-options
-    htmlLoader: {
-        minimize: true,
-        removeAttributeQuotes: false,
-        caseSensitive: true,
-        customAttrSurround: [
-            [/#/, /(?:)/],
-            [/\*/, /(?:)/],
-            [/\[?\(?/, /(?:)/]
+            new NormalModuleReplacementPlugin(
+                /angular2-hmr/,
+                helpers.root('config/modules/angular2-hmr-prod.js')
+            ),
+            // new IgnorePlugin(/angular2-hmr/),
+            // new CompressionPlugin({
+            //   regExp: /\.css$|\.html$|\.js$|\.map$/,
+            //   threshold: 2 * 1024
+            // })
+            new LoaderOptionsPlugin({
+                debug: false,
+                options: {
+                    tslint: {
+                        emitErrors: false,
+                        failOnHint: false,
+                        resourcePath: 'demo',
+                        formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
+                        formatter: 'grouped'
+                    },
+                    htmlLoader: {
+                        minimize: true,
+                        removeAttributeQuotes: false,
+                        caseSensitive: true,
+                        customAttrSurround: [
+                            [/#/, /(?:)/],
+                            [/\*/, /(?:)/],
+                            [/\[?\(?/, /(?:)/]
+                        ],
+                        customAttrAssign: [/\)?\]?=/]
+                    },
+                    sassLoader: {
+                        includePaths: [
+                            helpers.root('node_modules/hint.css/src')
+                        ]
+                    },
+                    postcss: () => {
+                        return [autoprefixer({
+                            browsers: ['last 2 versions']
+                        })];
+                    }
+                }
+            })
         ],
-        customAttrAssign: [/\)?\]?=/]
-    },
-
-    // Include polyfills or mocks for various node stuff
-    // Description: Node configuration
-    // See: https://webpack.github.io/docs/configuration.html#node
-    node: {
-        global: 'window',
-        crypto: 'empty',
-        process: false,
-        module: false,
-        clearImmediate: false,
-        setImmediate: false
-    }
-});
+        node: {
+            global: true,
+            crypto: 'empty',
+            process: false,
+            module: false,
+            clearImmediate: false,
+            setImmediate: false
+        }
+    });
+};

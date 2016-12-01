@@ -1,0 +1,7 @@
+<div class="calendar-demo-date-time">
+    <p>
+        <label>Date-Time</label>
+        {{(dateTime | date:'medium') || 'N/A'}}
+    </p>
+    <novo-date-time-picker [(ngModel)]="dateTime"></novo-date-time-picker>
+</div>

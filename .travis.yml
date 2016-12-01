@@ -7,15 +7,13 @@ cache:
   directories:
     - node_modules
 
+before_install:
+  - npm install -g npm@latest
+
 script:
   - npm install
-  - npm test
-
-after_script:
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-
-after_success:
-  - test $TRAVIS_BRANCH = "master" && npm run galaxy -- $FIREBASE_URL $SLACK_WEB_HOOK $SLACK_CHANNEL
+  - npm run lint
+  - npm run compile
 
 notifications:
   slack:
