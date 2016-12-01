@@ -389,7 +389,6 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
         if (!itemChanged.isChildOf && !itemChanged.isParentOf) {
             return;
         }
-
         let parent = this.types.filter(x => !!x.isParentOf)[0];
         let parentType = parent.value;
         let allParentType = this.getAllOfType(parentType);
@@ -457,12 +456,15 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
         let selecting = action === 'select';
         let childType = item.isParentOf;
         let potentialChildren = this.getAllOfType(childType);
-        if (this.allOfTypeSelected(childType)) {
+        if (this.allOfTypeSelected(childType) && !selecting) {
             this.remove(null, potentialChildren[0]);
             return;
         }
         potentialChildren.forEach(x => {
             if (x.value === 'ALL' && !x.checked) {
+                if (selecting) {
+                    x.checked = true;
+                }
                 x.indeterminate = selecting;
             } else {
                 if (x.checked && !selecting) {
