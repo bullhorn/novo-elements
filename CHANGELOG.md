@@ -1,3 +1,13 @@
+<a name="2.0.6"></a>
+## [2.0.6](https://github.com/bullhorn/novo-elements/compare/v2.0.5...v2.0.6) (2016-12-01)
+
+
+### Bug Fixes
+
+* **iconography:** Replaces icon link in demo ([#271](https://github.com/bullhorn/novo-elements/issues/271)) ([45dfb5f](https://github.com/bullhorn/novo-elements/commit/45dfb5f))
+
+
+
 <a name="2.0.5"></a>
 ## [2.0.5](https://github.com/bullhorn/novo-elements/compare/v2.0.4...v2.0.5) (2016-12-01)
 
