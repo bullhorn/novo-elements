@@ -48,10 +48,12 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
     onCountryChange(evt) {
         let country:any = findByCountryName(evt);
-        this.model.countryName = country.name;
-        this.model.countryCode = country.code;
-        this.model.countryID = country.id;
-        this.updateStates();
+        if (country) {
+            this.model.countryName = country.name;
+            this.model.countryCode = country.code;
+            this.model.countryID = country.id;
+            this.updateStates();
+        }
 
         // Update state
         this.model.state = undefined;
@@ -84,15 +86,16 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         } else {
             let countryName = model.countryName;
             if (!countryName) {
-                countryName = findByCountryId(model.countryID).name;
+                let country:any = findByCountryId(model.countryID);
+                countryName = country ? country.name : 'United States';
             }
             if (countryName) {
                 countryName = countryName.trim();
             }
             model.state = model.state || '';
             let stateObj:any = getStateObjects(countryName).find(state => {
-                    return state.code === model.state.replace(/\W+/g, '').toUpperCase() || state.name === model.state;
-                }) || {};
+                return state.code === model.state.replace(/\W+/g, '').toUpperCase() || state.name === model.state;
+            }) || {};
             this.model = Object.assign(model, { countryName: countryName, state: stateObj.name });
         }
     }
