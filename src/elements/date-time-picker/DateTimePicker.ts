@@ -13,6 +13,8 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
     multi: true
 };
 
+type componentTabStates = 'date' | 'time';
+
 @Component({
     selector: 'novo-date-time-picker',
     providers: [DATE_TIME_PICKER_VALUE_ACCESSOR],
@@ -258,7 +260,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.open(null, 'days');
     }
 
-    select(event: any, day: any, fireEvents: boolean): void {
+    select(event: Event, day: any, fireEvents: boolean): void {
         Helpers.swallowEvent(event);
 
         this.selected = day.date;
@@ -280,7 +282,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         }
     }
 
-    open(event: any, type: string): void {
+    open(event: Event, type: string): void {
         Helpers.swallowEvent(event);
 
         // If they click the toggle two time in a row, close it (go back to days)
@@ -293,14 +295,14 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.updateHeading();
     }
 
-    prevMonth(event: any): void {
+    prevMonth(event: Event): void {
         Helpers.swallowEvent(event);
         let tmp = this.month.clone();
         tmp = tmp.subtract(1, 'months');
         this.updateCal(tmp, false, false);
     }
 
-    nextMonth(event: any): void {
+    nextMonth(event: Event): void {
         Helpers.swallowEvent(event);
         let tmp = this.month.clone();
         tmp = tmp.add(1, 'months');
@@ -373,7 +375,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     }
 
     // TIME
-    setHours(event: any, hours: number, dispatch: boolean): void {
+    setHours(event: Event, hours: number, dispatch: boolean): void {
         Helpers.swallowEvent(event);
         this.hours = hours;
         this.hoursClass = `hour-${hours}`;
@@ -384,7 +386,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         }
     }
 
-    setMinutes(event: any, minutes: number, dispatch: boolean): void {
+    setMinutes(event: Event, minutes: number, dispatch: boolean): void {
         Helpers.swallowEvent(event);
         this.minutes = minutes;
         this.minutesClass = `min-${minutes}`;
@@ -396,7 +398,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         }
     }
 
-    setPeriod(event: any, period: string, dispatch: boolean): void {
+    setPeriod(event: Event, period: string, dispatch: boolean): void {
         Helpers.swallowEvent(event);
         this.meridian = period;
 
@@ -442,7 +444,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.updateTime(null, true);
     }
 
-    toggleTimePicker(tab: string): void {
+    toggleTimePicker(tab: componentTabStates): void {
         this.showClock = !this.showClock;
         this.componentTabState = tab;
     }
