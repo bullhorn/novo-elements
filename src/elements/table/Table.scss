@@ -104,6 +104,10 @@ $table-border-color: #f5f5f5; // Tables
                 }
             }
         }
+
+        &.sorted {
+            background: rgba($positive, .2);
+        }
     }
 
     > thead > tr {
@@ -264,11 +268,11 @@ $table-border-color: #f5f5f5; // Tables
 
                         i {
                             &.bhi-arrow-down {
-                                color: darken(#757575, 10%);
+                                color: lighten(#757575, 15%);
                             }
 
                             &.bhi-arrow-up {
-                                color: lighten(#757575, 15%);
+                                color: darken(#757575, 10%);
                             }
                         }
                     }
@@ -294,11 +298,11 @@ $table-border-color: #f5f5f5; // Tables
 
                         i {
                             &.bhi-arrow-down {
-                                color: $positive;
+                                color: lighten(#757575, 15%);
                             }
 
                             &.bhi-arrow-up {
-                                color: lighten(#757575, 15%);
+                                color: $positive;
                             }
                         }
                     }
@@ -308,11 +312,11 @@ $table-border-color: #f5f5f5; // Tables
 
                         i {
                             &.bhi-arrow-down {
-                                color: lighten(#757575, 15%);
+                                color: $positive;
                             }
 
                             &.bhi-arrow-up {
-                                color: $positive;
+                                color: lighten(#757575, 15%);
                             }
                         }
                     }
