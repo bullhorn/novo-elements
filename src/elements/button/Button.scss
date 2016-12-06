@@ -1,0 +1,415 @@
+$padding-top: 10px;
+$padding-side: 15px;
+
+button {
+    &[theme] {
+        font-size: 1rem;
+        border: none;
+        background: transparent;
+        border-radius: 3px;
+        padding: $padding-top $padding-side;
+        text-transform: uppercase;
+        transition: all 200ms ease-in-out;
+
+        div.flex-wrapper {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            align-items: center;
+        }
+
+        i {
+            font-size: 1em;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        &[disabled="false"] {
+            opacity: 1;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        &[loading="true"] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+            i.loading {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: rotate 1200ms linear infinite;
+
+                svg {
+                    width: 100%;
+                    height: 100%;
+
+                    .spinner {
+                        fill: white;
+                    }
+                }
+            }
+        }
+        // Primary Themed Button
+        &[theme="primary"] {
+            background: $positive;
+            color: #fff;
+            min-width: 120px;
+            text-align: left;
+
+            .flex-wrapper {
+                justify-content: center;
+            }
+
+            &[icon] {
+                padding: ($padding-top - 3px) ($padding-side - 10px) ($padding-top - 3px) $padding-side;
+
+                i {
+                    background: rgba(0, 0, 0, .15);
+                    padding: 5px;
+                    border-radius: 50%;
+                    height: 25px;
+                    width: 25px;
+                    display: inline-block;
+                    margin-left: 10px;
+                    line-height: 16px;
+
+                    &:before {
+                        vertical-align: baseline;
+                    }
+                }
+
+                &[icon="send"] {
+                    i {
+                        &:before {
+                            margin-top: 1px;
+                            margin-left: -2px;
+                        }
+                    }
+                }
+            }
+
+            &:hover {
+                background: lighten($positive, 10%);
+            }
+
+            &:focus {
+                background: darken($positive, 5%);
+            }
+            // Loop Generic Colors (Primary, Success, Negative, Etc.)
+            @each $button, $color in $colors {
+                &[color="#{$button}"] {
+                    background: $color;
+
+                    &:hover {
+                        background: lighten($color, 10%);
+                    }
+
+                    &:focus {
+                        background: darken($color, 5%);
+                    }
+                }
+            }
+
+            &[color="white"] {
+                background: $white;
+                color: $ocean;
+
+                &:hover {
+                    background: $background;
+                }
+
+                &:focus {
+                    background: darken($background, 5%);
+                }
+
+                i {
+                    background: rgba(0, 0, 0, .05);
+                }
+            }
+            // Loop Analytics Colors
+            @each $analytics, $color in $analytics-colors {
+                &[color="#{$analytics}"] {
+                    background: $color;
+
+                    &:hover {
+                        background: lighten($color, 10%);
+                    }
+
+                    &:focus {
+                        background: darken($color, 5%);
+                    }
+                }
+            }
+        }
+        // Secondary Themed Button
+        &[theme="secondary"] {
+            text-align: left;
+            align-items: center;
+            background: #fff;
+            color: $positive;
+            border: 1px solid $positive;
+
+            .flex-wrapper {
+                justify-content: space-between;
+            }
+
+            i.loading {
+                margin-left: 10px;
+
+                svg {
+                    .spinner {
+                        fill: $positive;
+                    }
+                }
+            }
+
+            &:hover {
+                box-shadow: 0 3px 7px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .15);
+            }
+
+            &:focus {
+                box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            }
+
+            &[inverse] {
+                background: rgba(0, 0, 0, .25);
+                color: #fff;
+                border: 1px solid #fff;
+
+                &:hover {
+                    background: rgba(0, 0, 0, .35);
+                }
+
+                &:focus {
+                    background: rgba(0, 0, 0, .45);
+                }
+
+                i.loading {
+                    svg {
+                        .spinner {
+                            fill: $white;
+                        }
+                    }
+                }
+            }
+
+            &[icon] {
+                padding: ($padding-top - 4px) ($padding-side - 11px) ($padding-top - 4px) ($padding-side - 1px);
+
+                i {
+                    padding: 5px;
+                    border-radius: 50%;
+                    height: 25px;
+                    width: 25px;
+                    display: inline-block;
+                    margin-left: 10px;
+                    line-height: 16px;
+
+                    &:before {
+                        vertical-align: baseline;
+                    }
+                }
+
+                &[icon="collapse"] {
+                    i {
+                        &:before {
+                        }
+                    }
+                }
+
+                &[icon="convert"] {
+                    i {
+                        &:before {
+                        }
+                    }
+                }
+            }
+        }
+        // Dialoge Themed Button
+        &[theme="dialogue"] {
+            background: transparent;
+            color: $positive;
+
+            .flex-wrapper {
+                justify-content: center;
+            }
+
+            &[icon] {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                i {
+                    padding: 5px;
+                    border-radius: 50%;
+                    height: 25px;
+                    width: 25px;
+                    display: inline-block;
+                    line-height: 16px;
+
+                    &:before {
+                        vertical-align: baseline;
+                    }
+                }
+
+                &[side="left"] {
+                    padding: ($padding-top - 4px) $padding-side ($padding-top - 4px) ($padding-side - 10px);
+
+                    i {
+                        margin-right: 5px;
+                    }
+                }
+
+                &[side="right"] {
+                    padding: ($padding-top - 5px) ($padding-side - 10px) ($padding-top - 5px) $padding-side;
+
+                    i {
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+            &:hover {
+                background: lighten($light, 7%);
+            }
+
+            &:focus {
+                background: lighten($light, 2%);
+            }
+
+            &[inverse] {
+                &:hover {
+                    background: rgba(0, 0, 0, .2);
+                }
+
+                &:focus {
+                    background: rgba(0, 0, 0, .35);
+                }
+            }
+            // Loop Generic Colors (Primary, Success, Negative, Etc.)
+            @each $button, $color in $colors {
+                &[color="#{$button}"] {
+                    color: $color;
+
+                    i {
+                        color: $color;
+
+                        &.loading {
+                            margin-left: 10px;
+
+                            svg {
+                                .spinner {
+                                    fill: $color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            // Loop Analytics Colors
+            @each $analytics, $color in $analytics-colors {
+                &[color="#{$analytics}"] {
+                    color: $color;
+
+                    i {
+                        color: $color;
+
+                        &.loading {
+                            margin-left: 10px;
+
+                            svg {
+                                .spinner {
+                                    fill: $color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Standard Themed Icon
+        &[theme="standard"] {
+            color: $dark;
+            background: $light;
+
+            .flex-wrapper {
+                justify-content: center;
+            }
+
+            &:hover {
+                box-shadow: 0 3px 7px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .15);
+            }
+
+            &:focus {
+                box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            }
+            // Loop Generic Colors (Primary, Success, Negative, Etc.)
+            @each $button, $color in $colors {
+                &[color="#{$button}"] {
+                    color: $white;
+                    background: $color;
+                }
+            }
+            // Loop Analytics Colors
+            @each $analytics, $color in $analytics-colors {
+                &[color="#{$analytics}"] {
+                    color: $white;
+                    background: $color;
+                }
+            }
+
+            &[color="background"],
+            &[color="gray"],
+            &[color="light"],
+            &[color="off-white"],
+            &[color="white"] {
+                color: $dark;
+            }
+        }
+        // Icon Themed Button
+        &[theme="icon"] {
+            .flex-wrapper {
+                text-align: center;
+
+                i {
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+
+            &[inverse] {
+                color: #fff;
+            }
+            width: 40px;
+            height: 40px;
+            padding: 10px;
+
+            &:hover {
+                background: rgba(0, 0, 0, .1);
+            }
+
+            &:focus {
+                background: rgba(0, 0, 0, .25);
+            }
+        }
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

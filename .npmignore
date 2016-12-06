@@ -1,27 +1,25 @@
-.idea/
-logs/
+.idea
+logs
 
-.editorconfig
-.eslintrc
-.npmignore
-.babelrc
-.gitignore
-.travis.yml
-CHANGELOG.md
-CONTRIBUTING.md
-protractor.conf.js
-.eslintignore
-.codeclimate.yml
-
-config/
-src/
-.github/
+# typings
+typings
 
 # testing
 karma.conf.js
-coverage/
+test.bundle.js
+coverage
+
+# dev stuff
+config
+.github
+.editorconfig
+.npmignore
+.travis.yml
+spec-bundle.js
+tslint.json
+typedoc.json
+yarn.lock
 
 # demo build
-demo/
-webpack.config.js
-
+doc
+dist

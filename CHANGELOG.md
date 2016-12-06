@@ -1,3 +1,94 @@
+<a name="2.0.9"></a>
+## [2.0.9](https://github.com/bullhorn/novo-elements/compare/v2.0.8...v2.0.9) (2016-12-05)
+
+
+
+<a name="2.0.8"></a>
+## [2.0.8](https://github.com/bullhorn/novo-elements/compare/v2.0.7...v2.0.8) (2016-12-05)
+
+
+
+<a name="2.0.7"></a>
+## [2.0.7](https://github.com/bullhorn/novo-elements/compare/v2.0.6...v2.0.7) (2016-12-01)
+
+
+
+<a name="2.0.6"></a>
+## [2.0.6](https://github.com/bullhorn/novo-elements/compare/v2.0.5...v2.0.6) (2016-12-01)
+
+
+### Bug Fixes
+
+* **iconography:** Replaces icon link in demo ([#271](https://github.com/bullhorn/novo-elements/issues/271)) ([45dfb5f](https://github.com/bullhorn/novo-elements/commit/45dfb5f))
+
+
+
+<a name="2.0.5"></a>
+## [2.0.5](https://github.com/bullhorn/novo-elements/compare/v2.0.4...v2.0.5) (2016-12-01)
+
+
+
+<a name="2.0.4"></a>
+## [2.0.4](https://github.com/bullhorn/novo-elements/compare/v2.0.3...v2.0.4) (2016-12-01)
+
+
+### Bug Fixes
+
+* **forms:** Add disabled class to dynamic form fields ([#269](https://github.com/bullhorn/novo-elements/issues/269)) ([f26929f](https://github.com/bullhorn/novo-elements/commit/f26929f))
+* **forms:** Adding missing property to the BaseControl ([65f83e0](https://github.com/bullhorn/novo-elements/commit/65f83e0))
+
+
+
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/bullhorn/novo-elements/compare/v2.0.2...v2.0.3) (2016-11-30)
+
+
+### Bug Fixes
+
+* **DateTimePicker:** Fixing unused property ([21c6ce0](https://github.com/bullhorn/novo-elements/commit/21c6ce0))
+
+
+
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/bullhorn/novo-elements/compare/v2.0.0...v2.0.2) (2016-11-30)
+
+
+
+<a name="2.0.0"></a>
+## [2.0.0](https://github.com/bullhorn/novo-elements/compare/v1.1.34...v2.0.0) (2016-11-30)
+
+* Converted to Typescript
+
+### BREAKING CHANGES
+
+`NovoElementsModule` no longer has the providers, you will also have to import the `NovoElementsProviders` too.
+
+```
+@NgModule({ imports: [  NovoElementsModule, NovoElementProviders.forRoot() ] })
+```
+
+You will also have to provide a base `NovoLabelService`
+
+```
+@NgModule({ providers: [  NovoLabelService ] })
+```
+
+<a name="1.1.34"></a>
+## [1.1.34](https://github.com/bullhorn/novo-elements/compare/v1.1.33...v1.1.34) (2016-11-30)
+
+
+### Bug Fixes
+
+* **select,picker:** Select Dropdown and Picker Container ([#265](https://github.com/bullhorn/novo-elements/issues/265)) ([c84b2db](https://github.com/bullhorn/novo-elements/commit/c84b2db))
+
+
+### Features
+
+* **multipicker:** Initial setup for parent/child relationship for multipicker categories ([5be7a41](https://github.com/bullhorn/novo-elements/commit/5be7a41))
+* **select:** Replaced placeholder default for selects with an empty string ([#263](https://github.com/bullhorn/novo-elements/issues/263)) ([573ba45](https://github.com/bullhorn/novo-elements/commit/573ba45))
+
+
+
 <a name="1.1.33"></a>
 ## [1.1.33](https://github.com/bullhorn/novo-elements/compare/v1.1.32...v1.1.33) (2016-11-22)
 
