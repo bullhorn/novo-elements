@@ -13,14 +13,14 @@ const DATE_PICKER_VALUE_ACCESSOR = {
     multi: true
 };
 
-type dateModel = string;
-interface RangeModal {
+export type dateModel = string;
+export interface RangeModal {
     startDate: dateModel;
     endDate: dateModel;
 };
-type modelTypes = dateModel | RangeModal;
+export type modelTypes = dateModel | RangeModal;
 
-interface Day {
+export interface Day {
     date: moment.Moment;
     isCurrentMonth?: boolean;
     isToday?: boolean;
@@ -28,7 +28,7 @@ interface Day {
     number?: string | number;
 }
 
-type rangeSelectModes = 'startDate' | 'endDate';
+export type rangeSelectModes = 'startDate' | 'endDate';
 
 @Component({
     selector: 'novo-date-picker',

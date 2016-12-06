@@ -13,7 +13,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
     multi: true
 };
 
-type componentTabStates = 'date' | 'time';
+export type componentTabStates = 'date' | 'time';
 
 @Component({
     selector: 'novo-date-time-picker',
