@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, forwardRef, trigger, state, style, transition, animate, Input, Output, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
@@ -13,9 +13,55 @@ const DATE_PICKER_VALUE_ACCESSOR = {
     multi: true
 };
 
+type dateModel = string;
+interface RangeModal {
+    startDate: dateModel;
+    endDate: dateModel;
+};
+type modelTypes = dateModel | RangeModal;
+
+interface Day {
+    date: moment.Moment;
+    isCurrentMonth?: boolean;
+    isToday?: boolean;
+    name?: string;
+    number?: string | number;
+}
+
+type rangeSelectModes = 'startDate' | 'endDate';
+
 @Component({
     selector: 'novo-date-picker',
     providers: [DATE_PICKER_VALUE_ACCESSOR],
+    animations: [
+        trigger('startDateTextState', [
+            state('startDate', style({
+                'opacity': '1.0'
+            })),
+            state('endDate', style({
+                'opacity': '0.6'
+            })),
+            transition('startDate <=> endDate', animate('200ms ease-in'))
+        ]),
+        trigger('endDateTextState', [
+            state('startDate', style({
+                'opacity': '0.6'
+            })),
+            state('endDate', style({
+                'opacity': '1.0'
+            })),
+            transition('startDate <=> endDate', animate('200ms ease-in'))
+        ]),
+        trigger('indicatorState', [
+            state('startDate', style({
+                'transform': 'translateX(0%)'
+            })),
+            state('endDate', style({
+                'transform': 'translateX(100%)'
+            })),
+            transition('startDate <=> endDate', animate('200ms ease-in'))
+        ])
+    ],
     template: `
         <div class="calendar">
             <div class="calendar-top" *ngIf="!inline && !range">
@@ -24,9 +70,10 @@ const DATE_PICKER_VALUE_ACCESSOR = {
                 <h1 class="date" [attr.data-automation-id]="heading?.date">{{heading?.date}}</h1>
                 <h3 class="year" [attr.data-automation-id]="heading?.year">{{heading?.year}}</h3>
             </div>
-            <div *ngIf="range" class="calendar-range">
-                <span [class.active]="!calendarRangeEnd">{{(selected?.format('MMM D, YYYY') ) || 'Start Date'}}</span>
-                <span [class.active]="calendarRangeEnd">{{(selected2?selected2.format('MMM D, YYYY'):null ) || 'End Date'}}</span>
+            <div class="date-range-tabs" *ngIf="range">
+                <span class="range-tab" (click)="toggleRangeSelect('startDate')" [@startDateTextState]="rangeSelectMode">{{(selected?.format('MMM D, YYYY') ) || 'Start Date'}}</span>
+                <span class="range-tab" (click)="toggleRangeSelect('endDate')" [@endDateTextState]="rangeSelectMode">{{(selected2?selected2.format('MMM D, YYYY'):null ) || 'End Date'}}</span>
+                <i class="indicator" [@indicatorState]="rangeSelectMode"></i>
             </div>
             <div class="calendar-header">
                 <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
@@ -44,13 +91,16 @@ const DATE_PICKER_VALUE_ACCESSOR = {
                 </thead>
                 <tbody>
                     <tr *ngFor="let week of weeks">
-                        <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday,
+                        <td *ngFor="let day of week.days" [ngClass]="{
+                            today: day.isToday,
                             'notinmonth': !day.isCurrentMonth,
                             selected: (!range ? day.date.isSame(selected) : (day.date.isSame(selected) || day.date.isSame(selected2))),
                             filler: (range && selected2 && day.date.isAfter(selected) && day.date.isBefore(selected2)),
-                            startfill: (range && selected2 && day.date.isSame(selected) && day.date.isBefore(selected2))
-                        }">
-                            <button class="day" (click)="select($event, day, true)" [attr.data-automation-id]="day.number" [disabled]="(start && day.date.isBefore(start)) || (end && day.date.isAfter(end))">{{day.number}}</button>
+                            startfill: (range && selected2 && day.date.isSame(selected) && day.date.isBefore(selected2)),
+                            endfill: (range && selected2 && day.date.isSame(selected2.startOf('day')) && day.date.isAfter(selected)),
+                            'selecting-range': (range && ((selected && !selected2 && day.date.isAfter(selected) && day.date.isBefore(hoverDay)) || (!selected && selected2 && day.date.isBefore(selected2) && day.date.isAfter(hoverDay)) || ( rangeSelectMode === 'startDate' && (selected && selected2 && day.date.isBefore(selected) && day.date.isAfter(hoverDay))) || ( rangeSelectMode === 'endDate' && (selected && selected2 && day.date.isAfter(selected2) && day.date.isBefore(hoverDay)))))
+                        }" (click)="select($event, day, true)" (mouseover)="rangeHover($event, day)">
+                            <button class="day" [attr.data-automation-id]="day.number" [disabled]="(start && day.date.isBefore(start)) || (end && day.date.isAfter(end))">{{day.number}}</button>
                         </td>
                     </tr>
                 </tbody>
@@ -65,7 +115,7 @@ const DATE_PICKER_VALUE_ACCESSOR = {
                     <div class="year" [ngClass]="{selected: year == selected?.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
                 </li>
             </ul>
-            <div class="calendar-footer" *ngIf="!range">
+            <div class="calendar-footer">
                 <span (click)="setToday()" class="today" title="{{today}}" data-automation-id="calendar-today">Today</span>
             </div>
         </div>
@@ -86,28 +136,28 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     // List of all months (use moment to localize)
     months = moment.months();
     // List of all years (generated in ngOnInit)
-    years = [];
+    years:Array<any> = [];
     // Default view mode (select days)
-    view = 'days';
+    view:string = 'days';
+    heading:any;
 
-    model:any;
+    model:modelTypes;
     month:any;
     weeks:any;
     selected:any;
     selected2:any;
-    heading:any;
-    calendarRangeEnd:any;
-    onModelChange:Function = () => {
-    };
-    onModelTouched:Function = () => {
-    };
+    hoverDay:any;
+
+    rangeSelectMode:rangeSelectModes = 'startDate';
+    onModelChange:Function = () => {};
+    onModelTouched:Function = () => {};
 
     ngOnInit() {
         // Determine the year array
         let now = moment();
         let start = this.minYear ? Number(this.minYear) : now.year() - 100;
         let end = this.maxYear ? Number(this.maxYear) : now.year() + 10;
-        this.years = [];
+
         for (let i = start; i <= end; i++) {
             this.years.push(i);
         }
@@ -115,7 +165,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         this.updateView(this.model, false, true);
     }
 
-    updateView(date, fireEvents, markedSelected) {
+    updateView(date, fireEvents:boolean, markedSelected:boolean) {
         if (date && date.startDate === null) {
             this.clearRange();
         } else {
@@ -129,7 +179,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
 
             this.buildMonth(start, this.month);
 
-            if (markedSelected && !this.range) {
+            if (markedSelected) {
                 this.select(null, { date: value }, fireEvents);
             }
         }
@@ -161,26 +211,28 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         this.open(null, 'days');
     }
 
-    select(event, day, fireEvents) {
+    select(event:Event, day:Day, fireEvents:boolean) {
         Helpers.swallowEvent(event);
         if (this.range) {
-            if (!this.selected && event) {
+
+            if (this.rangeSelectMode === 'startDate') {
+                if (day.date.isAfter(this.selected2)) {
+                    // CLEAR END DATE
+                    this.selected2 = null;
+                }
+                // SET START DATE
                 this.selected = day.date;
-            } else if (this.selected && this.selected2) {
-                this.selected = day.date;
-                this.selected2 = null;
-                this.calendarRangeEnd = false;
-            } else if (day.date.isAfter(this.selected)) {
+                if (event) { this.rangeSelectMode = 'endDate'; }
+            } else {
+                if (day.date.isBefore(this.selected)) {
+                    // CLEAR START DATE
+                    this.selected = null;
+                }
+                // SET END DATE
                 this.selected2 = day.date.endOf('day');
-            } else if (day.date.isBefore(this.selected)) {
-                this.selected2 = this.selected.endOf('day');
-                this.selected = day.date;
-            } else if (day.date.isSame(this.selected)) {
-                this.selected = day.date;
-                this.selected2 = day.date.endOf('day');
-                this.calendarRangeEnd = !this.calendarRangeEnd;
+                if (event) { this.rangeSelectMode = 'startDate'; }
             }
-            this.calendarRangeEnd = !this.calendarRangeEnd;
+
         } else {
             this.selected = day.date;
             this.updateHeading();
@@ -229,7 +281,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         }
     }
 
-    open(event, type) {
+    open(event:Event, type:string) {
         Helpers.swallowEvent(event);
 
         // If they click the toggle two time in a row, close it (go back to days)
@@ -242,14 +294,14 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         this.updateHeading();
     }
 
-    prevMonth(event) {
+    prevMonth(event:Event) {
         Helpers.swallowEvent(event);
         let tmp = this.month.clone();
         tmp = tmp.subtract(1, 'months');
         this.updateView(tmp, false, false);
     }
 
-    nextMonth(event) {
+    nextMonth(event:Event) {
         Helpers.swallowEvent(event);
         let tmp = this.month.clone();
         tmp = tmp.add(1, 'months');
@@ -298,7 +350,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         }
     }
 
-    buildWeek(date, month) {
+    buildWeek(date, month):Array<Day> {
         // Build out of the days of the week
         let days = [];
 
@@ -321,8 +373,16 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         return days;
     }
 
+    toggleRangeSelect(range:rangeSelectModes):void {
+        this.rangeSelectMode = range;
+    }
+
+    rangeHover(event:Event, day:Day):void {
+        this.hoverDay = day.date;
+    }
+
     // ValueAccessor Functions
-    writeValue(model:any):void {
+    writeValue(model:modelTypes):void {
         this.model = model;
         this.updateView(model, false, true);
     }

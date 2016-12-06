@@ -177,7 +177,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     activeMinute: number;
     inBetween: boolean;
     showClock: boolean = false;
-    componentTabState: string = 'date';
+    componentTabState: componentTabStates = 'date';
 
     onModelChange: Function = () => {};
     onModelTouched: Function = () => {};
