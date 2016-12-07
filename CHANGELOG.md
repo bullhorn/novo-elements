@@ -1,3 +1,13 @@
+<a name="2.0.11"></a>
+## [2.0.11](https://github.com/bullhorn/novo-elements/compare/v2.0.10...v2.0.11) (2016-12-07)
+
+
+### Bug Fixes
+
+* **DatePicker:** Fixing AOT compile issue ([bc4df01](https://github.com/bullhorn/novo-elements/commit/bc4df01))
+
+
+
 <a name="2.0.10"></a>
 ## [2.0.10](https://github.com/bullhorn/novo-elements/compare/v2.0.9...v2.0.10) (2016-12-07)
 
