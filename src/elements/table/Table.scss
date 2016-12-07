@@ -66,12 +66,12 @@ $table-border-color: #f5f5f5; // Tables
     max-width: 100%;
     background-color: $table-bg;
 
-     > tfoot,
+     > tbody,
      > thead,
-    > tbody {
+    > tfoot {
         > tr {
-             > th,
-            > td {
+             > td,
+            > th {
                 position: relative;
                 text-align: left;
                 padding: $table-cell-padding;
@@ -132,10 +132,10 @@ $table-border-color: #f5f5f5; // Tables
         font-weight: $table-header-font-weight;
         color: $table-header-font-color;
         vertical-align: bottom;
-        border-bottom: 1px solid rgba(0, 0, 0, .12);
-        border-top: 1px solid rgba(0, 0, 0, .12);
-        padding: 0.75rem;
+        border-bottom: 1px solid #F4F4F4;
+        border-top: 1px solid #F4F4F4;
         border-right: 1px solid #F4F4F4;
+        padding: 0.75rem;
 
         &.over {
             background: #eee;
@@ -372,12 +372,12 @@ $table-border-color: #f5f5f5; // Tables
 // Condensed table w/ half padding
 
 .table-condensed {
-     > tfoot,
+     > tbody,
      > thead,
-    > tbody {
+    > tfoot {
         > tr {
-             > th,
-            > td {
+             > td,
+            > th {
                 padding: $table-condensed-cell-padding;
             }
         }
@@ -387,20 +387,20 @@ $table-border-color: #f5f5f5; // Tables
 // Add horizontal borders between columns.
 
 .table-bordered {
-     > tfoot,
+     > tbody,
      > thead,
-    > tbody {
+    > tfoot {
         > tr {
-             > th,
-            > td {
+             > td,
+            > th {
                 border-bottom: 1px solid $table-border-color;
             }
         }
     }
 
     > thead > tr {
-         > th,
-        > td {
+         > td,
+        > th {
             border-bottom-width: 2px;
         }
     }
@@ -419,8 +419,8 @@ $table-border-color: #f5f5f5; // Tables
 }
 
 .table-striped.table-details {
-     > tbody tr:nth-of-type(4n+1),
-    > tbody tr:nth-of-type(4n+2) {
+     > tbody tr:nth-of-type(4n+2),
+    > tbody tr:nth-of-type(4n+1) {
         background-color: $table-bg-accent;
     }
 }
@@ -459,8 +459,8 @@ novo-table {
         }
 
         .table-striped.table-details {
-             > tbody tr:nth-of-type(4n+1),
-            > tbody tr:nth-of-type(4n+2) {
+             > tbody tr:nth-of-type(4n+2),
+            > tbody tr:nth-of-type(4n+1) {
                 background-color: rgba($table-bg-accent, .04);
             }
         }
