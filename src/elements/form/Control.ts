@@ -4,6 +4,7 @@ import { Component, Input, Output, ElementRef, EventEmitter, trigger, state, sty
 import { NovoFormGroup } from './DynamicForm';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { NovoLabelService } from './../../services/novo-label-service';
+import { Helpers } from './../../utils/Helpers';
 
 @Component({
     selector: 'novo-control',
@@ -85,7 +86,7 @@ import { NovoLabelService } from './../../services/novo-label-service';
                 <span *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
                 <span *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
             </div>
-        </div>    
+        </div>
     `,
     animations: [
         trigger('verticalState', [
@@ -230,7 +231,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnChange
                 if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
                     this.state = 'active';
                 } else {
-                    this.state = (this.form.value[this.control.key] || this.control.placeholder) ? 'active' : 'inactive';
+                    this.state = (!Helpers.isBlank(this.form.value[this.control.key]) || this.control.placeholder) ? 'active' : 'inactive';
                 }
             } else {
                 this.state = 'horizontal';
