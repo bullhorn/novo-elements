@@ -13,7 +13,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
     multi: true
 };
 
-type componentTabStates = 'date' | 'time';
+export type componentTabStates = 'date' | 'time';
 
 @Component({
     selector: 'novo-date-time-picker',
@@ -177,7 +177,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     activeMinute: number;
     inBetween: boolean;
     showClock: boolean = false;
-    componentTabState: string = 'date';
+    componentTabState: componentTabStates = 'date';
 
     onModelChange: Function = () => {};
     onModelTouched: Function = () => {};
