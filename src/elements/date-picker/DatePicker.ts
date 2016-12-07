@@ -107,12 +107,12 @@ export type rangeSelectModes = 'startDate' | 'endDate';
             </table>
             <ul class="calendar-content months" [hidden]="!(view == 'months')">
                 <li *ngFor="let month of months" (click)="setMonth(month)">
-                    <div class="month" [ngClass]="{selected: month == selected?.format('MMM')}" [attr.data-automation-id]="month">{{month}}</div>
+                    <div class="month" [ngClass]="{selected: checkSelected(month, 'MMMM')}" [attr.data-automation-id]="month">{{month}}</div>
                 </li>
             </ul>
             <ul class="calendar-content years" [hidden]="!(view == 'years')">
                 <li *ngFor="let year of years" (click)="setYear(year)">
-                    <div class="year" [ngClass]="{selected: year == selected?.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
+                    <div class="year" [ngClass]="{selected: checkSelected(year, 'YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
                 </li>
             </ul>
             <div class="calendar-footer">
@@ -158,7 +158,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         let start = this.minYear ? Number(this.minYear) : now.year() - 100;
         let end = this.maxYear ? Number(this.maxYear) : now.year() + 10;
 
-        for (let i = start; i <= end; i++) {
+        for (let i = end; i >= start; i--) {
             this.years.push(i);
         }
 
@@ -199,14 +199,14 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
 
     setMonth(month) {
         let tmp = this.selected ? this.selected.clone().month(month) : moment().month(month);
-        this.updateView(tmp, true, true);
+        this.updateView(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
     }
 
     setYear(year) {
         let tmp = this.selected ? this.selected.clone().year(year) : moment().year(year);
-        this.updateView(tmp, true, true);
+        this.updateView(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
     }
@@ -306,6 +306,18 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         let tmp = this.month.clone();
         tmp = tmp.add(1, 'months');
         this.updateView(tmp, false, false);
+    }
+
+    checkSelected(item:string, format:string) {
+        let selected = true;
+
+        if (this.rangeSelectMode === 'endDate') {
+            selected = this.selected2 ? item === this.selected2.format(format) : false;
+        } else {
+            selected = this.selected ? item === this.selected.format(format) : false;
+        }
+
+        return selected;
     }
 
     updateHeading() {
