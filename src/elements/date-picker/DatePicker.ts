@@ -116,7 +116,7 @@ export type rangeSelectModes = 'startDate' | 'endDate';
                 </li>
             </ul>
             <div class="calendar-footer">
-                <span (click)="setToday()" class="today" title="{{today}}" data-automation-id="calendar-today">Today</span>
+                <span (click)="setToday()" class="today" title="Today" data-automation-id="calendar-today">Today</span>
             </div>
         </div>
     `
