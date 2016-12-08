@@ -74,6 +74,7 @@ export interface Collection<T> {
      */
     //itemUpdated(item: Object, property?: Object, oldValue?: Object, newValue?: Object): void;
 
+    removeItem(item: T):boolean;
     /** 
      *  Removes all items from the list.
      */

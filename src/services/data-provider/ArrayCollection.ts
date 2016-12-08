@@ -209,9 +209,9 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    removeItem(item:T):any {
+    removeItem(item:T):boolean {
         let index = this.getItemIndex(item);
-        this.removeItemAt(index);
+        return this.removeItemAt(index);
     }
 
     /**
@@ -222,8 +222,8 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    removeItemAt(index:number):any {
-        this.filterData.splice(index, 1);
+    removeItemAt(index:number):boolean {
+        return !!(this.filterData.splice(index, 1));
     }
 
     /**
