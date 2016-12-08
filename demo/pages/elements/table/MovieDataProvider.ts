@@ -1,0 +1,69 @@
+import { PagedArrayCollection, CollectionEvent } from './../../../../index';
+
+export class MovieDataProvider extends PagedArrayCollection<any> {
+    // http://www.omdbapi.com/?s=Star&y=2016&plot=short&r=json&page=2
+    totalResults = 0;
+    pagesLoaded = 0;
+
+    constructor(source:Array<any> = []) {
+        super(source);
+        this.refresh();
+    }
+
+    get total() {
+        return this.totalResults;
+    }
+
+    get filter():any {
+        return this._filter;
+    }
+
+    set filter(value:any) {
+        this._filter = value;
+        this.pagesLoaded = 0;
+        this.removeAll();
+        this.refresh();
+    }
+
+    get sort():Array<any> {
+        return this._sort;
+    }
+
+    set sort(value:Array<any>) {
+        this._sort = value;
+        this.pagesLoaded = 0;
+        this.removeAll();
+        this.refresh();
+    }
+
+    loadMore() {
+        if (this.filter && this.needMore()) {
+            this.pagesLoaded++;
+            let year = this.filter.Year || '';
+            let search = this.filter.Title || 'Star';
+            let type = (this.filter.Type) ? this.filter.Type.any[0] : '';
+            return fetch(`http://www.omdbapi.com/?s=${search}&y=${year}&type=${type}&plot=short&r=json&page=${this.pagesLoaded}`)
+                .then(response => response.json())
+                .then((result:any) => {
+                    this.addItems(result.Search);
+                    this.totalResults = result.totalResults;
+                    return this.loadMore();
+                });
+        }
+        let start = (this.page - 1) * this.pageSize;
+        let end = start + this.pageSize; ;
+        let result = this.source.slice(start, end);
+        return Promise.resolve(result);
+    }
+
+    needMore():boolean {
+        let recordsNeeded = this.page * this.pageSize;
+        return (this.source.length < recordsNeeded);
+    }
+
+    refresh() {
+        this.loadMore().then((results:Array<any>) => {
+            this.onDataChange(new CollectionEvent(CollectionEvent.CHANGE, results));
+        });
+    }
+}

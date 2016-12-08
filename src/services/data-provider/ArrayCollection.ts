@@ -1,9 +1,8 @@
-import { DataSource } from './DataSource';
 // Ng
 import { EventEmitter } from '@angular/core';
 // App
-import { DataSource } from './DataSource';
-import { DataChangeEvent } from './DataChangeEvent';
+import { Collection } from './Collection';
+import { CollectionEvent } from './CollectionEvent';
 import { Helpers } from '../../utils/Helpers';
 
 /**
@@ -21,18 +20,28 @@ import { Helpers } from '../../utils/Helpers';
  *  var myList:List = new List();
  *  myList.dataProvider = dp;
  */
-export class ArrayCollection implements DataSource {
-    dataChange:EventEmitter = new EventEmitter();
-    list:Array = [];
-    source:Array = [];
+export class ArrayCollection<T> implements Collection<T> {
+    dataChange:EventEmitter<CollectionEvent> = new EventEmitter<CollectionEvent>();
+    source:Array<T> = [];
+    filterData:Array<T> = [];
+    _filter:any = {};
+    _sort:Array<any> = [];
 
-    constructor(value:Array = []) {
-        this.source = value;
-        this.list = this.source.slice();
+    constructor(source:Array<T> = []) {
+        this.source = source;
+        this.filterData = source.slice();
     }
 
     get length() {
-        return this.list.length;
+        return this.filterData.length;
+    }
+
+    get total(): number {
+        return this.filterData.length;
+    }
+
+    get list():Array<T>  {
+        return this.filterData;
     }
 
     /**
@@ -42,8 +51,10 @@ export class ArrayCollection implements DataSource {
      *
      * @memberOf ArrayCollection
      */
-    addItem(item:any):void {
-        this.list.push(item);
+    addItem(item:T):void {
+        this.source.push(item);
+        this.onDataChange(new CollectionEvent(CollectionEvent.ADD, [item]));
+        this.refresh();
     }
 
     /**
@@ -54,32 +65,35 @@ export class ArrayCollection implements DataSource {
      *
      * @memberOf ArrayCollection
      */
-    addItemAt(item:any, index:number):void {
-        this.list.splice(index, 0, item);
+    addItemAt(item:T, index:number):void {
+        this.source.splice(index, 0, item);
+        this.onDataChange(new CollectionEvent(CollectionEvent.ADD, [item]));
+        this.refresh();
     }
 
     /**
-     *  Appends multiple items to the end of the DataProvider and dispatches a DataChangeEvent.ADD event.
+     *  Appends multiple items to the end of the DataProvider and dispatches a CollectionEvent.ADD event.
      *
      * @param {any} items
      *
      * @memberOf ArrayCollection
      */
-    addItems(items):void {
-        this.list.push(...items);
-        this.dataChange.emit(new DataChangeEvent(DataChangeEvent.ADD), items);
+    addItems(items:Array<T>):void {
+        this.source.push(...items);
+        this.onDataChange(new CollectionEvent(CollectionEvent.ADD, items));
+        this.refresh();
     }
 
     /**
-     * Adds several items to the data provider at the specified index and dispatches a DataChangeEvent.ADD event.
+     * Adds several items to the data provider at the specified index and dispatches a CollectionEvent.ADD event.
      *
      * @param {any} items
      * @param {number} index
      *
      * @memberOf ArrayCollection
      */
-    addItemsAt(items:any, index:number):void {
-        this.list.splice(index, 0, ...items);
+    addItemsAt(items:Array<T>, index:number):void {
+        this.source.splice(index, 0, ...items);
     }
 
     /**
@@ -89,8 +103,8 @@ export class ArrayCollection implements DataSource {
      *
      * @memberOf ArrayCollection
      */
-    clone():ArrayCollection {
-        return new ArrayCollection(this.list.slice());
+    clone():ArrayCollection<T> {
+        return new ArrayCollection(this.source.slice());
     }
 
     /**
@@ -100,7 +114,7 @@ export class ArrayCollection implements DataSource {
      *
      * @memberOf ArrayCollection
      */
-    concat(items:Array<any>):void {
+    concat(items:Array<T>):void {
         this.addItems(items);
     }
 
@@ -113,7 +127,7 @@ export class ArrayCollection implements DataSource {
      * @memberOf ArrayCollection
      */
     getItemAt(index:number):any {
-        return this.list[index];
+        return this.source[index];
     }
 
     /**
@@ -124,17 +138,17 @@ export class ArrayCollection implements DataSource {
      *
      * @memberOf ArrayCollection
      */
-    getItemIndex(item:any):number {
-        return this.list.indexOf(item);
+    getItemIndex(item:T):number {
+        return this.source.indexOf(item);
     }
 
     /**
-     * Invalidates all the data items that the DataProvider contains and dispatches a DataChangeEvent.INVALIDATE_ALL event.
+     * Invalidates all the data items that the DataProvider contains and dispatches a CollectionEvent.INVALIDATE_ALL event.
      *
      * @memberOf ArrayCollection
      */
     invalidate():void {
-        this.dataChange.emit(new DataChangeEvent(DataChangeEvent.INVALIDATE_ALL));
+        this.onDataChange(new CollectionEvent(CollectionEvent.INVALIDATE_ALL));
     }
 
     /**
@@ -162,11 +176,11 @@ export class ArrayCollection implements DataSource {
      *
      * @memberOf ArrayCollection
      */
-    merge(newData:Array):void {
+    merge(newData:Array<T>):void {
         for (let obj of newData) {
             let existing = ~this.getItemIndex(obj);
             if (existing) {
-                this.replaceItem();
+                this.replaceItem(obj, existing);
             } else {
                 this.addItem(obj);
             }
@@ -174,32 +188,34 @@ export class ArrayCollection implements DataSource {
     }
 
     /**
-     * Removes all items from the data provider and dispatches a DataChangeEvent.REMOVE_ALL event.
+     * Removes all items from the data provider and dispatches a CollectionEvent.REMOVE_ALL event.
      *
      * @memberOf ArrayCollection
      */
     removeAll():void {
-        //let oldData = this.list.slice();
+        //let oldData = this.filterData.slice();
         this.source = [];
-        this.list = [];
-        //this.dataChange.emit(new DataChangeEvent(DataChangeEvent.REMOVE_ALL, oldData));
+        this.filterData = [];
+        this.onDataChange(new CollectionEvent(CollectionEvent.REMOVE_ALL, []));
+        this.refresh();
+        //this.onDataChange(new CollectionEvent(CollectionEvent.REMOVE_ALL, oldData));
     }
 
     /**
-     * Removes the specified item from the data provider and dispatches a DataChangeEvent.REMOVE event.
+     * Removes the specified item from the data provider and dispatches a CollectionEvent.REMOVE event.
      *
      * @param {any} item
      * @returns {any}
      *
      * @memberOf ArrayCollection
      */
-    removeItem(item:any):any {
+    removeItem(item:T):any {
         let index = this.getItemIndex(item);
         this.removeItemAt(index);
     }
 
     /**
-     * Removes the item at the specified index and dispatches a DataChangeEvent.REMOVE event.
+     * Removes the item at the specified index and dispatches a CollectionEvent.REMOVE event.
      *
      * @param {number} index
      * @returns {any}
@@ -207,11 +223,11 @@ export class ArrayCollection implements DataSource {
      * @memberOf ArrayCollection
      */
     removeItemAt(index:number):any {
-        this.list.splice(index, 1);
+        this.filterData.splice(index, 1);
     }
 
     /**
-     * Replaces an existing item with a new item and dispatches a DataChangeEvent.REPLACE event.
+     * Replaces an existing item with a new item and dispatches a CollectionEvent.REPLACE event.
      *
      * @param {any} newItem
      * @param {any} oldItem
@@ -227,7 +243,7 @@ export class ArrayCollection implements DataSource {
     }
 
     /**
-     * Replaces the item at the specified index and dispatches a DataChangeEvent.REPLACE event.
+     * Replaces the item at the specified index and dispatches a CollectionEvent.REPLACE event.
      *
      * @param {any} newItem
      * @param {number} index
@@ -236,26 +252,28 @@ export class ArrayCollection implements DataSource {
      * @memberOf ArrayCollection
      */
     replaceItemAt(newItem:any, index:number):any {
-        this.list.splice(index, 1, newItem);
+        this.filterData.splice(index, 1, newItem);
     }
 
     /**
-     * Sorts the items that the data provider contains and dispatches a DataChangeEvent.SORT event.
+     * Sorts the items that the data provider contains and dispatches a CollectionEvent.SORT event.
      *
      * @param {any} sortArgs
      * @returns null
      *
      * @memberOf ArrayCollection
      */
-    sort(sorts):Promise {
-        for (let item of sorts.reverse()) {
-            this.sortOn(item.field, item.reverse);
-        }
-        return Promise.resolve(this.list);
+    get sort():Array<any> {
+        return this._sort;
+    }
+
+    set sort(value:Array<any>) {
+        this._sort = value;
+        this.refresh();
     }
 
     /**
-     * Sorts the items that the data provider contains by the specified field and dispatches a DataChangeEvent.SORT event.
+     * Sorts the items that the data provider contains by the specified field and dispatches a CollectionEvent.SORT event.
      *
      * @param {any} fieldName
      * @param {any} [options=null]
@@ -263,34 +281,41 @@ export class ArrayCollection implements DataSource {
      *
      * @memberOf ArrayCollection
      */
-    sortOn(fieldName:any, reverse:boolean = false):Promise {
-        this.list = this.list.sort(Helpers.sortByField(fieldName, reverse));
-        this.dataChange.emit(new DataChangeEvent(DataChangeEvent.SORT));
-        return this.list;
+    sortOn(fieldName:any, reverse = false):Array<T> {
+        this.filterData = this.filterData.sort(Helpers.sortByField(fieldName, reverse));
+        this.onDataChange(new CollectionEvent(CollectionEvent.SORT));
+        return this.filterData;
     }
 
-    filter(filters):Promise {
-        this.list = this.source.slice();
-        for (let key in filters) {
-            this.filterOn(key, filters[key]);
+    get filter():any {
+        return this._filter;
+    }
+
+    set filter(value:any) {
+        this._filter = value;
+        this.refresh();
+    }
+
+    filterOn(fieldName:any, value:any = null):Array<T> {
+        this.filterData = this.filterData.filter(Helpers.filterByField(fieldName, value));
+        return this.filterData;
+    }
+
+    onDataChange(event:CollectionEvent):void {
+        this.dataChange.emit(event);
+    }
+
+    refresh():void {
+        this.filterData = this.source.slice();
+        for (let item of this._sort.reverse()) {
+            this.sortOn(item.field, item.reverse);
         }
-        return Promise.resolve(this.list);
-    }
-
-    filterOn(fieldName:any, value:any = null):Promise {
-        this.list = this.list.filter(Helpers.filterByField(fieldName, value));
-        return this.list;
-    }
-
-    page(num:number = 1, size:number = 10) {
-        if (num >= 0) {
-            let start = (num - 1) * size;
-            let end = start + size;
-            let result = this.list.slice(start, end);
-            return Promise.resolve(result);
+        for (let key in this._filter) {
+            if (key) {
+                this.filterOn(key, this._filter[key]);
+            }
         }
-
-        return Promise.resolve(this.list);
+        this.onDataChange(new CollectionEvent(CollectionEvent.CHANGE, this.filterData));
     }
 
     /**
@@ -300,11 +325,11 @@ export class ArrayCollection implements DataSource {
      *
      * @memberOf ArrayCollection
      */
-    toArray():Array {
-        return this.list;
+    toArray():Array<T> {
+        return this.source;
     }
 
     toJSON() {
-        return this.list;
+        return this.source;
     }
 }
