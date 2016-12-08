@@ -1,10 +1,13 @@
 // NG2
 import { Component, OnInit } from '@angular/core';
 // APP
+import { MovieDataProvider } from './MovieDataProvider';
 import { TableData } from './TableData';
 let TableDemoTpl = require('./templates/TableDemo.html');
 let DetailsTableDemoTpl = require('./templates/DetailsTableDemo.html');
 let SelectAllTableDemoTpl = require('./templates/SelectAllTableDemo.html');
+let MovieTableDemoTpl = require('./templates/MovieTableDemo.html');
+
 // Vendor
 import { DateCell, BaseRenderer } from './../../../../index';
 
@@ -28,6 +31,11 @@ const template = `
     <p>This has checkboxes for selection with custom actions.</p>
     <div class="example table-demo">${SelectAllTableDemoTpl}</div>
     <code-snippet [code]="SelectAllTableDemoTpl"></code-snippet>
+
+    <h5>Remote Table Provider</h5>
+    <p>This has connects to the OMDB service.</p>
+    <div class="example table-demo">${MovieTableDemoTpl}</div>
+    <code-snippet [code]="MovieTableDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -60,6 +68,17 @@ export class ExtraDetails extends BaseRenderer {
 }
 
 @Component({
+    selector: 'image-cell',
+    template: `
+        <div class="image-cell">
+            <img src="{{value}}"/>
+        </div>
+    `
+})
+export class ImageCell extends BaseRenderer {
+}
+
+@Component({
     selector: 'table-demo',
     template: template
 })
@@ -67,6 +86,7 @@ export class TableDemoComponent implements OnInit {
     private TableDemoTpl:string = TableDemoTpl;
     private DetailsTableDemoTpl:string = DetailsTableDemoTpl;
     private SelectAllTableDemoTpl:string = SelectAllTableDemoTpl;
+    private MovieTableDemoTpl:string = MovieTableDemoTpl;
     private customRowOptions:Array<any> = [
         { label: '10', value: 10 },
         { label: '20', value: 20 },
@@ -77,6 +97,7 @@ export class TableDemoComponent implements OnInit {
     private basic:any;
     private details:any;
     private selectAll:any;
+    private remote:any;
 
     constructor() {
         let columns = [
@@ -184,6 +205,32 @@ export class TableDemoComponent implements OnInit {
                 ordering: true,
                 resizing: true,
                 rowSelectionStyle: 'checkbox'
+            }
+        };
+
+        let imdbColumns = [
+            { title: 'Title', name: 'Title', ordering: true, filtering: true },
+            { title: 'Year', name: 'Year', ordering: true, filtering: true },
+            { title: 'Type', name: 'Type', ordering: true, filtering: true, options: ['movie', 'series', 'episode'], multiple: true },
+            { title: 'Poster', name: 'Poster', ordering: false, filtering: false, renderer: ImageCell }
+        ];
+
+        this.remote = {
+            columns: imdbColumns.slice(),
+            dataProvider: new MovieDataProvider(),
+            config: {
+                paging: {
+                    current: 1,
+                    itemsPerPage: 10,
+                    onPageChange: event => {
+                        this.basic.config.paging.current = event.page;
+                        this.basic.config.paging.itemsPerPage = event.itemsPerPage;
+                    }
+                },
+                filtering: true,
+                sorting: true,
+                ordering: true,
+                resizing: true
             }
         };
     }
