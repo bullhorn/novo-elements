@@ -110,7 +110,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
 
     removeFromDisplay(event, item) {
         this.remove(true, item);
-        this.modifyAffectedParentsOrChildren(false, event);
+        this.modifyAffectedParentsOrChildren(false, item);
     }
 
     setupOptions() {
@@ -444,7 +444,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
                 }
             }
         });
-        let allCheckedOrIndeterminateParents = allParentType.filter(x => !!x.checked || !!x.indeterminate);
+        let allCheckedOrIndeterminateParents = allParentType.filter(x => (!!x.checked || !!x.indeterminate) && x.value !== 'ALL');
         let isParentIndeterminate = !!allParentType[0].checked ? false : allCheckedOrIndeterminateParents.length > 0;
         let isChildIndeterminate = !!allChildren[0].checked ? false : allCheckedChildren.length > 0;
         this.setIndeterminateState(allParentType, isParentIndeterminate);
