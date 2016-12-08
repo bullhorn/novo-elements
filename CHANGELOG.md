@@ -1,3 +1,41 @@
+<a name="2.0.13"></a>
+## [2.0.13](https://github.com/bullhorn/novo-elements/compare/v2.0.12...v2.0.13) (2016-12-08)
+
+
+
+<a name="2.0.12"></a>
+## [2.0.12](https://github.com/bullhorn/novo-elements/compare/v2.0.11...v2.0.12) (2016-12-08)
+
+
+
+<a name="2.0.11"></a>
+## [2.0.11](https://github.com/bullhorn/novo-elements/compare/v2.0.10...v2.0.11) (2016-12-07)
+
+
+### Bug Fixes
+
+* **DatePicker:** Fixing AOT compile issue ([bc4df01](https://github.com/bullhorn/novo-elements/commit/bc4df01))
+
+
+
+<a name="2.0.10"></a>
+## [2.0.10](https://github.com/bullhorn/novo-elements/compare/v2.0.9...v2.0.10) (2016-12-07)
+
+
+### Bug Fixes
+
+* **calendar:** Month / Year picker auto focus on currently selected month / year ([#281](https://github.com/bullhorn/novo-elements/issues/281)) ([1f03475](https://github.com/bullhorn/novo-elements/commit/1f03475))
+* **controls:** if default value was 0 or 0.0, it was seen as empty and then label would covered value ([#280](https://github.com/bullhorn/novo-elements/issues/280)) ([40df102](https://github.com/bullhorn/novo-elements/commit/40df102))
+* **tables:** Fix sort order, fix button focus styles, add sorted column header color ([#277](https://github.com/bullhorn/novo-elements/issues/277)) ([4721137](https://github.com/bullhorn/novo-elements/commit/4721137))
+* **tables:** Fixed TH Border colors  ([#279](https://github.com/bullhorn/novo-elements/issues/279)) ([c776d34](https://github.com/bullhorn/novo-elements/commit/c776d34))
+
+
+### Features
+
+* **calendar:** Fixes date-range pickers to allow tabbing ([#276](https://github.com/bullhorn/novo-elements/issues/276)) ([82f0569](https://github.com/bullhorn/novo-elements/commit/82f0569))
+
+
+
 <a name="2.0.9"></a>
 ## [2.0.9](https://github.com/bullhorn/novo-elements/compare/v2.0.8...v2.0.9) (2016-12-05)
 

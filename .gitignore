@@ -13,6 +13,8 @@
 index.js
 index.js.map
 index.d.ts
+novo-elements.js
+novo-elements.d.ts
 novo-elements.module.js
 novo-elements.module.js.map
 novo-elements.module.d.ts
@@ -31,6 +33,9 @@ novo-elements.providers.d.ts
 .classpath
 *.launch
 .settings/
+*.iml
+*.ipr
+*.iws
 
 # misc
 .awcache/

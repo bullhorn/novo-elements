@@ -37,6 +37,12 @@ export { NovoToastService } from './src/elements/toast/ToastService';
 export { NovoModalService } from './src/elements/modal/ModalService';
 export { NovoLabelService } from './src/services/novo-label-service';
 export { NovoDragulaService } from './src/elements/dragula/DragulaService';
+// Export all data services
+export { Collection } from './src/services/data-provider/Collection';
+export { CollectionEvent } from './src/services/data-provider/CollectionEvent';
+export { ArrayCollection } from './src/services/data-provider/ArrayCollection';
+export { PagedArrayCollection } from './src/services/data-provider/PagedArrayCollection';
+//export { DataProvider } from './src/services/data-provider/DataProvider';
 
 // Export classes that will need to be imported
 export { NovoModalParams, NovoModalRef } from './src/elements/modal/Modal';
