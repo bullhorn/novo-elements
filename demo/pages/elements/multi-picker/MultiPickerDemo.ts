@@ -79,6 +79,9 @@ export class MultiPickerDemoComponent {
         }, {
             id: 4,
             name: 'Finance'
+        }, {
+            id: 5,
+            name: 'Nobody Works Here'
         }];
         let users = [{
             id: 1,
@@ -124,7 +127,7 @@ export class MultiPickerDemoComponent {
             format: '$firstName $lastName',
             options: collaborators
         };
-        this.parentChildValue = { departments: [4], users: [2, 5] };
+        this.parentChildValue = { departments: [1, 2, 3, 4, 5], users: [] };
     }
 
     onChanged() {

@@ -13,6 +13,8 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
     multi: true
 };
 
+export type componentTabStates = 'date' | 'time';
+
 @Component({
     selector: 'novo-date-time-picker',
     providers: [DATE_TIME_PICKER_VALUE_ACCESSOR],
@@ -151,19 +153,17 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     // List of all months (use moment to localize)
     months = moment.months();
     // List of all years (generated in ngOnInit)
-    years = [];
+    years: Array<number> = [];
     // Default view mode (select days)
-    view = 'days';
+    view: string = 'days';
 
-    hours = 12;
-    minutes = 0;
-    value = null;
-    showClock: Boolean = false;
-    componentTabState: String = 'date';
+    hours: number = 12;
+    minutes: number = 0;
+    value: any = null;
 
-    MERIDIANS = ['am', 'pm'];
-    HOURS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-    MINUTES = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
+    MERIDIANS: Array<string> = ['am', 'pm'];
+    HOURS: Array<string> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    MINUTES: Array<string> = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
 
     model: any;
     month: any;
@@ -172,14 +172,15 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     meridian: any;
     heading: any;
     hoursClass: string;
-    activeHour;
     minutesClass: string;
-    activeMinute;
-    inBetween;
-    onModelChange: Function = () => {
-    };
-    onModelTouched: Function = () => {
-    };
+    activeHour: number;
+    activeMinute: number;
+    inBetween: boolean;
+    showClock: boolean = false;
+    componentTabState: componentTabStates = 'date';
+
+    onModelChange: Function = () => {};
+    onModelTouched: Function = () => {};
 
     ngOnInit() {
         // Determine the year array
@@ -199,12 +200,12 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.ngOnChanges();
     }
 
-    ngOnChanges(changes?: SimpleChanges) {
+    ngOnChanges(changes?: SimpleChanges): void {
         this.updateCal(this.model, false, true);
         this.updateTime(this.model, false);
     }
 
-    updateTime(time, fireEvents) {
+    updateTime(time: any, fireEvents: boolean): void {
         let momentValue = time ? moment(time) : moment();
         let hours = momentValue.hours();
         let minutes: any = momentValue.minutes();
@@ -222,7 +223,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.checkBetween(minutes);
     }
 
-    updateCal(date, fireEvents, markedSelected) {
+    updateCal(date: any, fireEvents: boolean, markedSelected: boolean): void {
         let value = date ? moment(date) : moment();
         value = this.removeTime(value);
         this.month = value.clone();
@@ -238,28 +239,28 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         }
     }
 
-    setToday() {
+    setToday(): void {
         let tmp = moment();
         this.updateCal(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
     }
 
-    setMonth(month) {
+    setMonth(month: string): void {
         let tmp = this.selected ? this.selected.clone().month(month) : moment().month(month);
         this.updateCal(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
     }
 
-    setYear(year) {
+    setYear(year: number): void {
         let tmp = this.selected ? this.selected.clone().year(year) : moment().year(year);
         this.updateCal(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
     }
 
-    select(event, day, fireEvents) {
+    select(event: Event, day: any, fireEvents: boolean): void {
         Helpers.swallowEvent(event);
 
         this.selected = day.date;
@@ -281,7 +282,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         }
     }
 
-    open(event, type) {
+    open(event: Event, type: string): void {
         Helpers.swallowEvent(event);
 
         // If they click the toggle two time in a row, close it (go back to days)
@@ -294,21 +295,21 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.updateHeading();
     }
 
-    prevMonth(event) {
+    prevMonth(event: Event): void {
         Helpers.swallowEvent(event);
         let tmp = this.month.clone();
         tmp = tmp.subtract(1, 'months');
         this.updateCal(tmp, false, false);
     }
 
-    nextMonth(event) {
+    nextMonth(event: Event): void {
         Helpers.swallowEvent(event);
         let tmp = this.month.clone();
         tmp = tmp.add(1, 'months');
         this.updateCal(tmp, false, false);
     }
 
-    updateHeading() {
+    updateHeading(): void {
         if (!this.selected) {
             return;
         }
@@ -325,11 +326,11 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
      * @param date
      * @returns {Moment} with time stripped out
      */
-    removeTime(date) {
+    removeTime(date: any) {
         return date.hour(0).minute(0).second(0).millisecond(0);
     }
 
-    buildMonth(start, month) {
+    buildMonth(start: any, month: any) {
         // Reset the weeks
         this.weeks = [];
 
@@ -350,7 +351,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         }
     }
 
-    buildWeek(date, month) {
+    buildWeek(date: any, month: any): Array<Object> {
         // Build out of the days of the week
         let days = [];
 
@@ -374,7 +375,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     }
 
     // TIME
-    setHours(event, hours, dispatch) {
+    setHours(event: Event, hours: number, dispatch: boolean): void {
         Helpers.swallowEvent(event);
         this.hours = hours;
         this.hoursClass = `hour-${hours}`;
@@ -385,7 +386,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         }
     }
 
-    setMinutes(event, minutes, dispatch) {
+    setMinutes(event: Event, minutes: number, dispatch: boolean): void {
         Helpers.swallowEvent(event);
         this.minutes = minutes;
         this.minutesClass = `min-${minutes}`;
@@ -397,7 +398,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         }
     }
 
-    setPeriod(event, period, dispatch) {
+    setPeriod(event: Event, period: string, dispatch: boolean): void {
         Helpers.swallowEvent(event);
         this.meridian = period;
 
@@ -406,7 +407,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         }
     }
 
-    dispatchChange() {
+    dispatchChange(): void {
         let hours = Number(this.hours);
 
         if (!this.military) {
@@ -439,11 +440,11 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.model = value.toDate();
     }
 
-    clearTime() {
+    clearTime(): void {
         this.updateTime(null, true);
     }
 
-    toggleTimePicker(tab) {
+    toggleTimePicker(tab: componentTabStates): void {
         this.showClock = !this.showClock;
         this.componentTabState = tab;
     }
@@ -463,7 +464,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.onModelTouched = fn;
     }
 
-    checkBetween(value) {
+    checkBetween(value: number): void {
         this.inBetween = this.MINUTES.indexOf(String(value)) < 0;
     }
 }

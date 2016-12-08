@@ -42,6 +42,7 @@ button {
             opacity: 0.5;
             cursor: not-allowed;
             pointer-events: none;
+
             i.loading {
                 display: flex;
                 align-items: center;
@@ -101,7 +102,7 @@ button {
                 background: lighten($positive, 10%);
             }
 
-            &:focus {
+            &:active {
                 background: darken($positive, 5%);
             }
             // Loop Generic Colors (Primary, Success, Negative, Etc.)
@@ -113,7 +114,7 @@ button {
                         background: lighten($color, 10%);
                     }
 
-                    &:focus {
+                    &:active {
                         background: darken($color, 5%);
                     }
                 }
@@ -127,7 +128,7 @@ button {
                     background: $background;
                 }
 
-                &:focus {
+                &:active {
                     background: darken($background, 5%);
                 }
 
@@ -144,7 +145,7 @@ button {
                         background: lighten($color, 10%);
                     }
 
-                    &:focus {
+                    &:active {
                         background: darken($color, 5%);
                     }
                 }
@@ -176,7 +177,7 @@ button {
                 box-shadow: 0 3px 7px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .15);
             }
 
-            &:focus {
+            &:active {
                 box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
             }
 
@@ -189,7 +190,7 @@ button {
                     background: rgba(0, 0, 0, .35);
                 }
 
-                &:focus {
+                &:active {
                     background: rgba(0, 0, 0, .45);
                 }
 
@@ -221,15 +222,13 @@ button {
 
                 &[icon="collapse"] {
                     i {
-                        &:before {
-                        }
+                        &:before {}
                     }
                 }
 
                 &[icon="convert"] {
                     i {
-                        &:before {
-                        }
+                        &:before {}
                     }
                 }
             }
@@ -282,7 +281,7 @@ button {
                 background: lighten($light, 7%);
             }
 
-            &:focus {
+            &:active {
                 background: lighten($light, 2%);
             }
 
@@ -291,7 +290,7 @@ button {
                     background: rgba(0, 0, 0, .2);
                 }
 
-                &:focus {
+                &:active {
                     background: rgba(0, 0, 0, .35);
                 }
             }
@@ -349,7 +348,7 @@ button {
                 box-shadow: 0 3px 7px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .15);
             }
 
-            &:focus {
+            &:active {
                 box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
             }
             // Loop Generic Colors (Primary, Success, Negative, Etc.)
@@ -397,13 +396,12 @@ button {
                 background: rgba(0, 0, 0, .1);
             }
 
-            &:focus {
+            &:active {
                 background: rgba(0, 0, 0, .25);
             }
         }
     }
 }
-
 @keyframes rotate {
     from {
         transform: rotate(0deg);

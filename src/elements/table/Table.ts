@@ -51,14 +51,14 @@ export class NovoTableHeaderElement {
                         <novo-checkbox [(ngModel)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < pagedData.length" (ngModelChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></novo-checkbox>
                     </th>
                     <!-- TABLE HEADERS -->
-                    <th *ngFor="let column of columns" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
+                    <th *ngFor="let column of columns" [ngClass]="{sorted: column.sort}" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
                         <div class="th-group" [attr.data-automation-id]="column.id || column.name" *ngIf="!column.hideHeader">
                             <!-- LABEL & SORT ARROWS -->
                             <div class="th-title" [ngClass]="(config.sorting !== false && column.sorting !== false) ? 'sortable' : ''" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
                                 <label>{{ column.title }}</label>
                                 <div class="table-sort-icons" [ngClass]="column.sort || ''" *ngIf="config.sorting !== false && column.sorting !== false">
-                                    <i class="bhi-arrow-down"></i>
                                     <i class="bhi-arrow-up"></i>
+                                    <i class="bhi-arrow-down"></i>
                                 </div>
                             </div>
                             <!-- FILTER DROP-DOWN -->
