@@ -36,6 +36,7 @@ const PICKER_VALUE_ACCESSOR = {
             [placeholder]="placeholder"
             (keyup)="onKeyUp($event)"
             (focus)="onFocus($event)"
+            (click)="onFocus($event)"
             (blur)="onTouched($event)"
             autocomplete="off" />
         <i class="bhi-search" *ngIf="!_value"></i>
