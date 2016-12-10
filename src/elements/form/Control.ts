@@ -124,14 +124,14 @@ import { Helpers } from './../../utils/Helpers';
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnChanges, OnDestroy {
     @Input() control;
-    @Input() form:NovoFormGroup;
-    @Output() change:EventEmitter<any> = new EventEmitter();
+    @Input() form: NovoFormGroup;
+    @Output() change: EventEmitter<any> = new EventEmitter();
 
-    formattedValue:string = '';
-    state:string = 'horizontal';
-    alwaysActive:[any] = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
+    formattedValue: string = '';
+    state: string = 'horizontal';
+    alwaysActive: [any] = ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'select', 'native-select', 'quick-note'];
 
-    constructor(element:ElementRef, public labels:NovoLabelService) {
+    constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
         this.onActiveChange.subscribe(active => {
             if (!active) {
@@ -162,7 +162,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnChange
         }
     }
 
-    ngOnChanges(changes?:SimpleChanges) {
+    ngOnChanges(changes?: SimpleChanges) {
         this.checkState();
     }
 
@@ -231,7 +231,13 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnChange
                 if (this.alwaysActive.indexOf(this.control.controlType) !== -1) {
                     this.state = 'active';
                 } else {
-                    this.state = (!Helpers.isBlank(this.form.value[this.control.key]) || this.control.placeholder) ? 'active' : 'inactive';
+                    let stateToggle = !Helpers.isEmpty(this.form.value[this.control.key]);
+
+                    if (this.control.placeholder) {
+                        stateToggle = true;
+                    }
+
+                    this.state = stateToggle ? 'active' : 'inactive';
                 }
             } else {
                 this.state = 'horizontal';
