@@ -42,6 +42,14 @@ export class Helpers {
         return obj === undefined || obj === null;
     }
 
+
+    /**
+     * Checks to see if the object is a undefined or null
+     */
+    static isEmpty(obj:any):boolean {
+        return Helpers.isBlank(obj) || obj === '';
+    }
+
     /**
      * Checks to see if the object is a function
      */
