@@ -65,6 +65,7 @@ export class NovoChipElement {
         <div class="chip-input-container">
             <novo-picker
                 clearValueOnSelect="true"
+                hideResultsOnSelect="false"
                 [config]="source"
                 [placeholder]="placeholder"
                 [(ngModel)]="itemToAdd"

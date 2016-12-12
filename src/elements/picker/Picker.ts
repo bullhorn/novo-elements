@@ -52,6 +52,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     @Input() config: any;
     @Input() placeholder: string;
     @Input() clearValueOnSelect: boolean;
+    @Input() hideResultsOnSelect: boolean = true;
 
     // Emitter for selects
     @Output() select: EventEmitter<any> = new EventEmitter();
