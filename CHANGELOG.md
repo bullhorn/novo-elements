@@ -1,3 +1,23 @@
+<a name="2.0.14"></a>
+## [2.0.14](https://github.com/bullhorn/novo-elements/compare/v2.0.13...v2.0.14) (2016-12-10)
+
+
+### Bug Fixes
+
+* **forms:** Fixing logic for the form label animations ([23218b7](https://github.com/bullhorn/novo-elements/commit/23218b7))
+
+
+
+<a name="2.0.13"></a>
+## [2.0.13](https://github.com/bullhorn/novo-elements/compare/v2.0.12...v2.0.13) (2016-12-08)
+
+
+
+<a name="2.0.12"></a>
+## [2.0.12](https://github.com/bullhorn/novo-elements/compare/v2.0.11...v2.0.12) (2016-12-08)
+
+
+
 <a name="2.0.11"></a>
 ## [2.0.11](https://github.com/bullhorn/novo-elements/compare/v2.0.10...v2.0.11) (2016-12-07)
 

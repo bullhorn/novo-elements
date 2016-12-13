@@ -28,7 +28,8 @@ $lead: #AA6699;
 $contact: #FFAA44;
 $opportunity: #662255;
 $job: #BB5566;
-$submission: #778899;
+$submission: #747884;
+$sendout: #747884;
 $placement: #0B344F;
 $note: #747884;
 
@@ -71,6 +72,7 @@ $entity-colors: (
     opportunity: $opportunity,
     job: $job,
     submission: $submission,
+    sendout: $sendout,
     placement: $placement,
     note: $note,
     task: $neutral

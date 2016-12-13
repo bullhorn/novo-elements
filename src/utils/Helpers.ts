@@ -42,6 +42,14 @@ export class Helpers {
         return obj === undefined || obj === null;
     }
 
+
+    /**
+     * Checks to see if the object is a undefined or null
+     */
+    static isEmpty(obj:any):boolean {
+        return Helpers.isBlank(obj) || obj === '';
+    }
+
     /**
      * Checks to see if the object is a function
      */
@@ -65,6 +73,7 @@ export class Helpers {
             }
             let first = previous[field] || '';
             let second = current[field] || '';
+
             if (Helpers.isDate(first) && Helpers.isDate(second)) {
                 // Dates
                 first = first.getTime();
@@ -164,4 +173,3 @@ class Can {
 function can(obj) {
     return new Can(obj);
 }
-
