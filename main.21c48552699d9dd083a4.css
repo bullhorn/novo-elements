@@ -1456,7 +1456,10 @@ i {
       background: #BB5566; }
     i[theme][theme="contained"].submission {
       color: #ffffff;
-      background: #778899; }
+      background: #747884; }
+    i[theme][theme="contained"].sendout {
+      color: #ffffff;
+      background: #747884; }
     i[theme][theme="contained"].placement {
       color: #ffffff;
       background: #0B344F; }
@@ -1515,7 +1518,10 @@ i {
     color: #BB5566;
     background: transparent; }
   i[theme][theme="entity"].submission {
-    color: #778899;
+    color: #747884;
+    background: transparent; }
+  i[theme][theme="entity"].sendout {
+    color: #747884;
     background: transparent; }
   i[theme][theme="entity"].placement {
     color: #0B344F;
@@ -2509,7 +2515,10 @@ novo-toast.job {
   background: #BB5566; }
 
 novo-toast.submission {
-  background: #778899; }
+  background: #747884; }
+
+novo-toast.sendout {
+  background: #747884; }
 
 novo-toast.placement {
   background: #0B344F; }
@@ -7442,10 +7451,16 @@ header.novo-header[theme="job"] {
     background: #BB5566; }
 
 header.novo-header[theme="submission"] {
-  background: #778899;
+  background: #747884;
   color: #fff; }
   header.novo-header[theme="submission"] > section.primary {
-    background: #778899; }
+    background: #747884; }
+
+header.novo-header[theme="sendout"] {
+  background: #747884;
+  color: #fff; }
+  header.novo-header[theme="sendout"] > section.primary {
+    background: #747884; }
 
 header.novo-header[theme="placement"] {
   background: #0B344F;
@@ -7626,7 +7641,7 @@ novo-list {
     novo-list[theme="job"] novo-list-item item-content > * {
       color: rgba(255, 255, 255, 0.65); }
   novo-list[theme="submission"] novo-list-item {
-    background: #778899;
+    background: #747884;
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     novo-list[theme="submission"] novo-list-item i {
@@ -7634,6 +7649,16 @@ novo-list {
     novo-list[theme="submission"] novo-list-item item-title h6 {
       color: #fff; }
     novo-list[theme="submission"] novo-list-item item-content > * {
+      color: rgba(255, 255, 255, 0.65); }
+  novo-list[theme="sendout"] novo-list-item {
+    background: #747884;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    novo-list[theme="sendout"] novo-list-item i {
+      color: #fff; }
+    novo-list[theme="sendout"] novo-list-item item-title h6 {
+      color: #fff; }
+    novo-list[theme="sendout"] novo-list-item item-content > * {
       color: rgba(255, 255, 255, 0.65); }
   novo-list[theme="placement"] novo-list-item {
     background: #0B344F;
@@ -7836,7 +7861,9 @@ novo-list-item {
       novo-list-item item-header item-avatar i.job {
         background: #BB5566; }
       novo-list-item item-header item-avatar i.submission {
-        background: #778899; }
+        background: #747884; }
+      novo-list-item item-header item-avatar i.sendout {
+        background: #747884; }
       novo-list-item item-header item-avatar i.placement {
         background: #0B344F; }
       novo-list-item item-header item-avatar i.note {
@@ -7899,7 +7926,9 @@ novo-list-item {
     novo-list-item item-content i.job {
       color: #BB5566; }
     novo-list-item item-content i.submission {
-      color: #778899; }
+      color: #747884; }
+    novo-list-item item-content i.sendout {
+      color: #747884; }
     novo-list-item item-content i.placement {
       color: #0B344F; }
     novo-list-item item-content i.note {
@@ -8494,7 +8523,7 @@ novo-table[theme="job"] > header {
         color: #ffffff !important; }
 
 novo-table[theme="submission"] > header {
-  background: #778899;
+  background: #747884;
   color: #fff; }
   novo-table[theme="submission"] > header novo-pagination {
     background: rgba(0, 0, 0, 0.15); }
@@ -8509,6 +8538,24 @@ novo-table[theme="submission"] > header {
       color: #ffffff;
       border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
       novo-table[theme="submission"] > header novo-pagination novo-select div[type="button"] i {
+        color: #ffffff !important; }
+
+novo-table[theme="sendout"] > header {
+  background: #747884;
+  color: #fff; }
+  novo-table[theme="sendout"] > header novo-pagination {
+    background: rgba(0, 0, 0, 0.15); }
+    novo-table[theme="sendout"] > header novo-pagination > * {
+      color: #ffffff;
+      opacity: 1; }
+    novo-table[theme="sendout"] > header novo-pagination .page {
+      color: #ffffff; }
+    novo-table[theme="sendout"] > header novo-pagination h5.rows {
+      opacity: 0.75; }
+    novo-table[theme="sendout"] > header novo-pagination novo-select div[type="button"] {
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+      novo-table[theme="sendout"] > header novo-pagination novo-select div[type="button"] i {
         color: #ffffff !important; }
 
 novo-table[theme="placement"] > header {
@@ -11112,84 +11159,88 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-candidate {
-      background: #44BB77;
       width: 38px;
       height: 38px; }
+    color header .background-boxes .bb-candidate {
+      background: #44BB77;
+      width: 39px;
+      height: 39px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
       width: 40px;
       height: 40px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 33px;
-      height: 33px; }
+      width: 39px;
+      height: 39px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 30px;
-      height: 30px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 27px;
-      height: 27px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
-      width: 38px;
-      height: 38px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-submission {
-      background: #778899;
-      width: 37px;
-      height: 37px; }
+      background: #747884;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 31px;
+      height: 31px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
-      width: 34px;
-      height: 34px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-note {
       background: #747884;
-      width: 44px;
-      height: 44px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-task {
       background: #747884;
-      width: 37px;
-      height: 37px; }
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-aqua {
       background: #3BAFDA;
-      width: 29px;
-      height: 29px; }
+      width: 28px;
+      height: 28px; }
     color header .background-boxes .bb-ocean {
       background: #4A89DC;
-      width: 29px;
-      height: 29px; }
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-mint {
       background: #37BC9B;
-      width: 44px;
-      height: 44px; }
+      width: 36px;
+      height: 36px; }
     color header .background-boxes .bb-grass {
       background: #8CC152;
-      width: 29px;
-      height: 29px; }
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-sunflower {
       background: #F6B042;
-      width: 29px;
-      height: 29px; }
+      width: 36px;
+      height: 36px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
-      width: 44px;
-      height: 44px; }
+      width: 41px;
+      height: 41px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
-      width: 43px;
-      height: 43px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 32px;
-      height: 32px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 37px;
-      height: 37px; }
+      width: 44px;
+      height: 44px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -11294,7 +11345,9 @@ color article.color-blocks {
     color article.color-blocks .block.job-cb .color-square {
       background: #BB5566; }
     color article.color-blocks .block.submission-cb .color-square {
-      background: #778899; }
+      background: #747884; }
+    color article.color-blocks .block.sendout-cb .color-square {
+      background: #747884; }
     color article.color-blocks .block.placement-cb .color-square {
       background: #0B344F; }
     color article.color-blocks .block.note-cb .color-square {
@@ -11465,13 +11518,22 @@ color > header.job {
     background: #BB5566 !important; }
 
 color > header.submission {
-  background: #778899 !important; }
+  background: #747884 !important; }
   color > header.submission h1,
   color > header.submission h2,
   color > header.submission p {
     color: #fff; }
   color > header.submission .background-boxes {
-    background: #778899 !important; }
+    background: #747884 !important; }
+
+color > header.sendout {
+  background: #747884 !important; }
+  color > header.sendout h1,
+  color > header.sendout h2,
+  color > header.sendout p {
+    color: #fff; }
+  color > header.sendout .background-boxes {
+    background: #747884 !important; }
 
 color > header.placement {
   background: #0B344F !important; }
@@ -12077,4 +12139,4 @@ category-dropdown-demo div.example {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.75c53b0ce506f18e6797.bundle.map*/
+/*# sourceMappingURL=main.21c48552699d9dd083a4.bundle.map*/
