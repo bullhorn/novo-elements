@@ -113,21 +113,24 @@ export class MultiPickerDemoComponent {
                 { type: 'collaborators', data: collaborators, format: '$firstName $lastName', field: 'id' },
                 { type: 'states', data: states }
             ],
-            resultsTemplate: ChecklistPickerResults
+            resultsTemplate: ChecklistPickerResults,
+            selectAllOption: true
         };
         this.parentChild = {
             options: [
-                { type: 'departments', data: departments, format: '$name', field: 'id', isParentOf: 'users' },
-                { type: 'users', data: users, format: '$name', field: 'id', isChildOf: 'departments' }
+                { type: 'departments', data: departments, format: '$name', field: 'id', isParentOf: 'users', strictRelationship: false },
+                { type: 'users', data: users, format: '$name', field: 'id', isChildOf: 'departments', strictRelationship: false }
             ],
-            resultsTemplate: ChecklistPickerResults
+            resultsTemplate: ChecklistPickerResults,
+            selectAllOption: false,
+            chipsCount: 6
         };
-        this.parentChildTypes = [{ value: 'departments', isParentOf: true, singular: 'department' }, { value: 'users', isChildOf: true, singular: 'user' }];
+        this.parentChildTypes = [{ value: 'departments', isParentOf: true, singular: 'department', selectAll: true }, { value: 'users', isChildOf: true, singular: 'user', selectAll: true }];
         this.formatted = {
             format: '$firstName $lastName',
             options: collaborators
         };
-        this.parentChildValue = { departments: [1, 2, 3, 4, 5], users: [] };
+        this.parentChildValue = { departments: [2, 3, 4], users: [4, 5] };
     }
 
     onChanged() {

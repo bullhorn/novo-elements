@@ -20,14 +20,14 @@ const CHIPS_VALUE_ACCESSOR = {
     providers: [CHIPS_VALUE_ACCESSOR],
     template: `
         <chip
-            *ngFor="let item of _items | async | slice:0:4"
+            *ngFor="let item of _items | async | slice:0:chipsCount"
             [type]="type"
             [class.selected]="item == selected"
             (remove)="removeFromDisplay($event, item)"
             (select)="select($event, item)">
             {{ item.label }}
         </chip>
-        <div *ngIf="items.length > 4">
+        <div *ngIf="items.length > chipsCount">
             <ul class="summary">
                 <li *ngFor="let type of notShown">+ {{type.count}} more {{type.type}}</li>
             </ul>
@@ -81,6 +81,8 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
     _options:any;
     selected:any = null;
     config:any = {};
+    chipsCount:number;
+    selectAllOption:boolean;
     // private data model
     _value:any = {};
     notShown:any = {};
@@ -94,9 +96,12 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
     constructor(element:ElementRef) {
         super(element);
         this.element = element;
+        this.chipsCount = 4;
     }
 
     ngOnInit() {
+        this.selectAllOption = this.source.selectAllOption || false;
+        this.chipsCount = this.source.chipsCount || 4;
         this.setupOptions();
     }
 
@@ -132,8 +137,10 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
         formattedSection.data = section.data.map(item => {
             return this.formatOption(section, item);
         });
-        let selectAll = this.createSelectAllOption(section);
-        formattedSection.data.splice(0, 0, selectAll);
+        if (this.selectAllOption) {
+            let selectAll = this.createSelectAllOption(section);
+            formattedSection.data.splice(0, 0, selectAll);
+        }
         formattedSection.originalData = formattedSection.data.slice();
         return formattedSection;
     }
@@ -145,6 +152,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
             type: section.type,
             checked: undefined,
             isParentOf: section.isParentOf,
+            strictRelationship: section.strictRelationship,
             isChildOf: section.isChildOf
         };
         if (obj.isChildOf) {
@@ -225,6 +233,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
     }
 
     setIndeterminateState(allOfType, status) {
+        if (!this.selectAllOption) { return; }
         let allItem = allOfType[0];
         allItem.indeterminate = status;
     }
@@ -244,7 +253,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
 
     updateDisplayText(items) {
         this.notShown = [];
-        let notShown = items.slice(4);
+        let notShown = items.slice(this.chipsCount);
         if (notShown.length > 0) {
             this.types.forEach(type => {
                 let count;
@@ -283,9 +292,6 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
         this.removeValue(item);
         if (item.value !== 'ALL') {
             this.updateParentOrChildren(item, 'unselect');
-        }
-        if (triggeredByEvent) {
-            this.modifyAffectedParentsOrChildren(false, item);
         }
     }
 
@@ -330,7 +336,9 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
             this._items.next(this.items);
             this.value[type] = [];
         }
-        this.updateAllParentsOrChildren(allOfType[0], action);
+        if (this.selectAllOption) {
+            this.updateAllParentsOrChildren(allOfType[0], action);
+        }
         this.triggerValueUpdate();
     }
 
@@ -341,6 +349,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
     }
 
     selectAll(allOfType, type) {
+        if (!this.selectAllOption) { return; }
         allOfType[0].checked = true;
         let values = allOfType.map(i => {
             return i.value;
@@ -354,6 +363,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
     }
 
     handleRemoveItemIfAllSelected(item) {
+        if (!this.selectAllOption) { return; }
         let type = item.type;
         let allOfType = this.getAllOfType(type);
         let allItem = allOfType[0];
@@ -380,9 +390,9 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
     }
 
     updateParentOrChildren(item, action) {
-        if (item.isParentOf) {
+        if (item.isParentOf && item.strictRelationship) {
             this.updateChildrenValue(item, action);
-        } else if (item.isChildOf) {
+        } else if (item.isChildOf && this.selectAllOption) {
             this.updateParentValue(item, action);
         }
     }
@@ -407,16 +417,14 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
             });
 
             if (selecting) {
-                if (obj.checked) {
-                    return;
-                }
+                if (obj.checked) { return; }
                 obj.indeterminate = selectedChildrenOfParent.length > 0;
             } else {
                 let allChildrenOfParent = allChildren.filter(x => {
                     return x.value !== 'ALL' && x[parentType].filter(y => y === obj.value).length > 0;
                 });
                 if (selectedChildrenOfParent.length > 0) {
-                    if (obj.checked) {
+                    if (obj.checked && obj.strictRelationship) {
                         if (allChildrenOfParent.length !== selectedChildrenOfParent.length) {
                             obj.indeterminate = true;
                             obj.checked = false;
@@ -426,7 +434,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
                     } else {
                         obj.indeterminate = true;
                     }
-                    if (itemChanged.type !== parentType) {
+                    if (itemChanged.type !== parentType && obj.strictRelationship) {
                         if (obj.checked) {
                             obj.checked = false;
                             this.removeValue(obj);
@@ -436,19 +444,21 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
                 } else {
                     obj.indeterminate = false;
                     if (allChildrenOfParent.length === 0) {
-                        //if it has no children and is checked, it stay checked
+                        //if it has no children and is checked, it should stay checked
                         return;
-                    } else if (itemChanged.type !== parentType) {
+                    } else if (itemChanged.type !== parentType && obj.strictRelationship) {
                         this.remove(null, obj);
                     }
                 }
             }
         });
-        let allCheckedOrIndeterminateParents = allParentType.filter(x => (!!x.checked || !!x.indeterminate) && x.value !== 'ALL');
-        let isParentIndeterminate = !!allParentType[0].checked ? false : allCheckedOrIndeterminateParents.length > 0;
-        let isChildIndeterminate = !!allChildren[0].checked ? false : allCheckedChildren.length > 0;
-        this.setIndeterminateState(allParentType, isParentIndeterminate);
-        this.setIndeterminateState(allChildren, isChildIndeterminate);
+        if (this.selectAllOption) {
+            let allCheckedOrIndeterminateParents = allParentType.filter(x => (!!x.checked || !!x.indeterminate) && x.value !== 'ALL');
+            let isParentIndeterminate = !!allParentType[0].checked ? false : allCheckedOrIndeterminateParents.length > 0;
+            let isChildIndeterminate = !!allChildren[0].checked ? false : allCheckedChildren.length > 0;
+            this.setIndeterminateState(allParentType, isParentIndeterminate);
+            this.setIndeterminateState(allChildren, isChildIndeterminate);
+        }
     }
 
     updateAllParentsOrChildren(allItem, action) {
@@ -463,7 +473,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
         let selecting = action === 'select';
         let childType = item.isParentOf;
         let potentialChildren = this.getAllOfType(childType);
-        if (this.allOfTypeSelected(childType) && !selecting) {
+        if (this.allOfTypeSelected(childType) && !selecting && this.selectAllOption) {
             this.remove(null, potentialChildren[0]);
             return;
         }
@@ -517,7 +527,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
 
     updateParentValue(child, action) {
         let allParentType = this.getAllOfType(child.isChildOf);
-        if (!!allParentType[0].checked && action !== 'select') {
+        if ((allParentType[0].checked && allParentType.value === 'ALL') && action !== 'select') {
             this.handleRemoveItemIfAllSelected(allParentType[0]);
         }
     }
@@ -561,7 +571,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
                     if (!allSelected) {
                         this.updateDisplayItems(value, 'add');
                     }
-                    if (value.isParentOf) {
+                    if (value.isParentOf && value.shouldAffectChildren) {
                         this.updateChildrenValue(value, 'select');
                     }
                 });
