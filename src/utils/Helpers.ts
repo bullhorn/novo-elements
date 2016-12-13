@@ -56,17 +56,15 @@ export class Helpers {
         return obj instanceof Date;
     }
 
-    static sortByField(field, reverse) {
-        return (previous, current) => {
+    static sortByField(field:any, reverse = false) {
+        return (previous:any, current:any) => {
             //return (a[field] < b[field]) ? -1 : (a[field] > b[field]) ? 1 : 0; // eslint-disable-line
+            // Custom compare function on the column
+            if (Helpers.isFunction(field)) {
+                return field((reverse) ? 'desc' : 'asc',  previous, current);
+            }
             let first = previous[field] || '';
             let second = current[field] || '';
-
-            // Custom compare function on the column
-            // if (column.compare && Helpers.isFunction(column.compare)) {
-            //     return column.compare(column.sort, first, second);
-            // }
-
             if (Helpers.isDate(first) && Helpers.isDate(second)) {
                 // Dates
                 first = first.getTime();
