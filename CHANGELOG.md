@@ -1,3 +1,18 @@
+<a name="2.0.15"></a>
+## [2.0.15](https://github.com/bullhorn/novo-elements/compare/v2.0.14...v2.0.15) (2016-12-13)
+
+
+### Bug Fixes
+
+* **Table:** Custom compare functionality re-implemented ([#287](https://github.com/bullhorn/novo-elements/issues/287)) ([e19f6ef](https://github.com/bullhorn/novo-elements/commit/e19f6ef))
+
+
+### Features
+
+* **colors:** adding sendout entity color ([#286](https://github.com/bullhorn/novo-elements/issues/286)) ([1f5a525](https://github.com/bullhorn/novo-elements/commit/1f5a525))
+
+
+
 <a name="2.0.14"></a>
 ## [2.0.14](https://github.com/bullhorn/novo-elements/compare/v2.0.13...v2.0.14) (2016-12-10)
 
