@@ -443,7 +443,7 @@ export class NovoTableElement implements DoCheck {
         this.currentSortColumn = column;
 
         if (column) {
-            this._dataProvider.sort = [{ field: column.name, reverse: column.sort === 'desc' }];
+            this._dataProvider.sort = [{ field: (column.compare || column.name), reverse: column.sort === 'desc' }];
         }
 
         // Fire table change event
