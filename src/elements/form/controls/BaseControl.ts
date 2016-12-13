@@ -27,6 +27,7 @@ export interface NovoControlConfig {
     type?:string;
     name?:string;
     readOnly?: boolean;
+    closeOnSelect?: boolean;
 }
 
 export class BaseControl {
@@ -54,6 +55,7 @@ export class BaseControl {
     type:string;
     name:string;
     readOnly: boolean;
+    closeOnSelect: boolean;
 
     constructor(config:NovoControlConfig) {
         this.validators = config.validators || [];
@@ -83,5 +85,6 @@ export class BaseControl {
         if (config.maxlength) {
             this.maxlength = config.maxlength;
         }
+        this.closeOnSelect = config.closeOnSelect || true;
     }
 }
