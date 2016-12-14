@@ -1,3 +1,13 @@
+<a name="2.0.19"></a>
+## [2.0.19](https://github.com/bullhorn/novo-elements/compare/v2.0.18...v2.0.19) (2016-12-14)
+
+
+### Bug Fixes
+
+* **form:** padding ([#292](https://github.com/bullhorn/novo-elements/issues/292)) ([1e111b9](https://github.com/bullhorn/novo-elements/commit/1e111b9))
+
+
+
 <a name="2.0.18"></a>
 ## [2.0.18](https://github.com/bullhorn/novo-elements/compare/v2.0.17...v2.0.18) (2016-12-14)
 
