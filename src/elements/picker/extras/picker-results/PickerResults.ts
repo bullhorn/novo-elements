@@ -197,7 +197,10 @@ export class BasePickerResults {
         let selected = this.activeMatch;
         if (selected) {
             this.parent.value = selected;
-            this.parent.hideResults();
+
+            if (this.parent.closeOnSelect === true) {
+                this.parent.hideResults();
+            }
         }
         return false;
     }

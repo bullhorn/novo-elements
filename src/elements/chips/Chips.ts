@@ -65,6 +65,7 @@ export class NovoChipElement {
         <div class="chip-input-container">
             <novo-picker
                 clearValueOnSelect="true"
+                [closeOnSelect]="closeOnSelect"
                 [config]="source"
                 [placeholder]="placeholder"
                 [(ngModel)]="itemToAdd"
@@ -82,6 +83,7 @@ export class NovoChipElement {
     }
 })
 export class NovoChipsElement extends OutsideClick implements OnInit {
+    @Input() closeOnSelect: boolean = false;
     @Input() placeholder:string = '';
     @Input() source:any;
     @Input() type:any;

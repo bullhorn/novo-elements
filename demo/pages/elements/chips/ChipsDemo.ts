@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 let BasicChipsDemoTpl = require('./templates/BasicChipsDemo.html');
 let AsyncChipsDemoTpl = require('./templates/AsyncChipsDemo.html');
 let FormattedChipsDemoTpl = require('./templates/FormattedChipsDemo.html');
+let CloseOnSelectChipsDemoTpl = require('./templates/CloseOnSelectChipsDemo.html');
 
 const template = `
 <div class="container">
@@ -17,7 +18,7 @@ const template = `
     <h5>Basic Examples</h5>
     <p>
         By clicking on the <code>chips</code> element, the options list will be displayed.  Select any of the options
-        by clicking on the item in the list.  The value selected will be added to the list of selected values and the options list will be removed.
+        by clicking on the item in the list.  The value selected will be added to the list of selected values.
     </p>
     <div class="example chips-demo">${BasicChipsDemoTpl}</div>
     <code-snippet [code]="BasicChipsDemoTpl"></code-snippet>
@@ -25,7 +26,7 @@ const template = `
     <h5>Async Examples</h5>
     <p>
         By clicking on the <code>chips</code> element, the options list will be displayed.  Select any of the options
-        by clicking on the item in the list.  The value selected will be added to the list of selected values and the options list will be removed.
+        by clicking on the item in the list.  The value selected will be added to the list of selected values.
     </p>
     <div class="example chips-demo">${AsyncChipsDemoTpl}</div>
     <code-snippet [code]="AsyncChipsDemoTpl"></code-snippet>
@@ -33,10 +34,18 @@ const template = `
     <h5>Formatted Examples</h5>
     <p>
         By clicking on the <code>chips</code> element, the options list will be displayed.  Select any of the options
-        by clicking on the item in the list.  The value selected will be added to the list of selected values and the options list will be removed.
+        by clicking on the item in the list.  The value selected will be added to the list of selected values.
     </p>
     <div class="example chips-demo">${FormattedChipsDemoTpl}</div>
     <code-snippet [code]="FormattedChipsDemoTpl"></code-snippet>
+
+    <h5>Options Closing Example</h5>
+    <p>
+        By clicking on the <code>chips</code> element, the options list will be displayed.  Select any of the options
+        by clicking on the item in the list.  The value selected will be added to the list of selected values and the options list will be removed.
+    </p>
+    <div class="example chips-demo">${CloseOnSelectChipsDemoTpl}</div>
+    <code-snippet [code]="CloseOnSelectChipsDemoTpl"></code-snippet>
 
 </div>
 `;
@@ -49,6 +58,7 @@ export class ChipsDemoComponent {
     private BasicChipsDemoTpl:string = BasicChipsDemoTpl;
     private AsyncChipsDemoTpl:string = AsyncChipsDemoTpl;
     private FormattedChipsDemoTpl:string = FormattedChipsDemoTpl;
+    private CloseOnSelectChipsDemoTpl:string = CloseOnSelectChipsDemoTpl;
     private placeholder:string = 'Select...';
     private value:any = ['Alabama'];
     private staticDemo:any;
