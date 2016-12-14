@@ -392,7 +392,11 @@ export class NovoTableElement implements DoCheck {
                         query[column.name] = column.filter;
                     }
                 }
-                this._dataProvider.filter = query;
+                if (Helpers.isFunction(this.config.filtering)) {
+                    this.config.filtering(query);
+                } else {
+                    this._dataProvider.filter = query;
+                }
             } else {
                 this._dataProvider.filter = {};
             }
@@ -400,9 +404,9 @@ export class NovoTableElement implements DoCheck {
             // this.onSortChange(this.currentSortColumn);
 
             // If paging, reset page
-            //if (this.config.paging) {
-            this.config.paging.current = 1;
-            //}
+            if (this.config.paging) {
+                this.config.paging.current = 1;
+            }
             // Remove all selection on sort change if selection is on
             if (this.config.rowSelectionStyle === 'checkbox') {
                 this.selectAll(false);
@@ -443,7 +447,11 @@ export class NovoTableElement implements DoCheck {
         this.currentSortColumn = column;
 
         if (column) {
-            this._dataProvider.sort = [{ field: (column.compare || column.name), reverse: column.sort === 'desc' }];
+            if (Helpers.isFunction(this.config.sorting)) {
+                this.config.sorting();
+            } else {
+                this._dataProvider.sort = [{ field: (column.compare || column.name), reverse: column.sort === 'desc' }];
+            }
         }
 
         // Fire table change event
