@@ -1,3 +1,13 @@
+<a name="2.0.16"></a>
+## [2.0.16](https://github.com/bullhorn/novo-elements/compare/v2.0.15...v2.0.16) (2016-12-14)
+
+
+### Bug Fixes
+
+* **chips:** Picker results for chips will now stay open when selecting. ([#285](https://github.com/bullhorn/novo-elements/issues/285)) ([dbe2c03](https://github.com/bullhorn/novo-elements/commit/dbe2c03))
+
+
+
 <a name="2.0.15"></a>
 ## [2.0.15](https://github.com/bullhorn/novo-elements/compare/v2.0.14...v2.0.15) (2016-12-13)
 
