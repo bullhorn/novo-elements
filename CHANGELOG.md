@@ -1,3 +1,15 @@
+<a name="2.0.20"></a>
+## [2.0.20](https://github.com/bullhorn/novo-elements/compare/v2.0.19...v2.0.20) (2016-12-14)
+
+
+### Bug Fixes
+
+* **chips:** Picker results for chips will now stay open when selecting. ([68ca60f](https://github.com/bullhorn/novo-elements/commit/68ca60f))
+* **picker:** Clicking the picker should open the picker ([59ee189](https://github.com/bullhorn/novo-elements/commit/59ee189))
+* **table:** add back in custom sorting/filtering functions ([#293](https://github.com/bullhorn/novo-elements/issues/293)) ([64e3c23](https://github.com/bullhorn/novo-elements/commit/64e3c23))
+
+
+
 <a name="2.0.19"></a>
 ## [2.0.19](https://github.com/bullhorn/novo-elements/compare/v2.0.18...v2.0.19) (2016-12-14)
 
