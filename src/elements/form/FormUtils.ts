@@ -21,6 +21,7 @@ import {
 } from './FormControls';
 import { EntityPickerResults } from './../picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from './../../utils/Helpers';
+import { NovoFieldset } from './DynamicForm';
 
 @Injectable()
 export class FormUtils {
@@ -31,6 +32,14 @@ export class FormUtils {
             group[control.key] = new FormControl(value, control.validators, control.asyncValidators);
         });
         return new FormGroup(group);
+    }
+
+    toFormGroupFromFieldset(fieldsets:Array<NovoFieldset>) {
+        let controls = [];
+        fieldsets.forEach(fieldset => {
+            controls.push(...fieldset.controls);
+        });
+        return this.toFormGroup(controls);
     }
 
     determineInputType(field) {
@@ -225,6 +234,76 @@ export class FormUtils {
         return controls;
     }
 
+    toFieldSets(meta, currencyFormat, http, config) {
+        let fieldsets:Array<NovoFieldset> = [];
+        let ranges = [];
+        if (meta && meta.fields) {
+            meta.fields.sort(Helpers.sortByField('sortOrder'));
+            if (meta.sectionHeaders && meta.sectionHeaders.length) {
+                meta.sectionHeaders.sort(Helpers.sortByField('sortOrder'));
+                meta.sectionHeaders.forEach((item, i) => {
+                    if (item.enabled) {
+                        if (item.sortOrder > 0 && fieldsets.length === 0) {
+                            fieldsets.push({
+                                controls:[]
+                            });
+                            ranges.push({
+                                min: 0,
+                                max: item.sortOrder - 1,
+                                fieldsetIdx: 0
+                            });
+                        }
+                        fieldsets.push({
+                            title: item.label,
+                            controls: []
+                        });
+                        ranges.push({
+                            min: item.sortOrder,
+                            max: Number.MAX_SAFE_INTEGER,
+                            fieldsetIdx:fieldsets.length - 1
+                        });
+                        if (i > 0 && fieldsets.length > 1) {
+                            ranges[fieldsets.length - 2].max = item.sortOrder - 1;
+                        }
+                    }
+                });
+            } else {
+                fieldsets.push({
+                    controls:[]
+                });
+                ranges.push({
+                    min: 0,
+                    max: Number.MAX_SAFE_INTEGER,
+                    fieldsetIdx: 0
+                });
+            }
+            let fields = meta.fields;
+            fields.forEach(field => {
+                if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || field.name === 'address') && !field.readOnly) {
+                    let control = this.getControlForField(field, http, config);
+                    // Set currency format
+                    if (control.subType === 'currency') {
+                        control.currencyFormat = currencyFormat;
+                    }
+                    let location = ranges.find(item => {
+                        return (item.min <= field.sortOrder && field.sortOrder < item.max);
+                    });
+                    if (location) {
+                        // Add to controls
+                        fieldsets[location.fieldsetIdx].controls.push(control);
+                    }
+                }
+            });
+        }
+        if (fieldsets.length > 0) {
+            return fieldsets;
+        } else {
+            return [{
+                controls: this.toControls(meta, currencyFormat, http, config)
+            }];
+        }
+    }
+
     getControlOptions(field, http, config) {
         if (field.dataType === 'Boolean' && !field.options) {
             return [
@@ -269,9 +348,23 @@ export class FormUtils {
         });
     }
 
+    setInitialValuesFieldsets(fieldsets:Array<NovoFieldset>, values, keepClean = false) {
+        fieldsets.forEach(fieldset => {
+            this.setInitialValues(fieldset.controls, values, keepClean);
+        });
+    }
+
     forceShowAllControls(controls:Array<NovoControlConfig>) {
         controls.forEach(control => {
             control.hidden = false;
+        });
+    }
+
+    forceShowAllControlsInFieldsets(fieldsets:Array<NovoFieldset>) {
+        fieldsets.forEach(fieldset => {
+            fieldset.controls.forEach(control => {
+                control.hidden = false;
+            });
         });
     }
 }

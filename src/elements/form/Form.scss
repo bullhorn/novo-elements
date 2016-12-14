@@ -18,8 +18,24 @@ novo-form {
 
         form {
             width: 100%;
+            novo-fieldset-header {
+              background: $off-white;
+              box-sizing: content-box;
+              padding: 1em 1em 1em;
+              margin-bottom: 2em;
+              display: flex;
+              margin-left: -1.5em;
+              margin-right: -1.5em;
+              i {
+                  margin-right: 10px;
+              }
 
-            > div.novo-form-row {
+              h6 {
+                  font-weight: 400;
+                  padding: 0;
+              }
+            }
+            div.novo-form-row {
                 width: 100%;
 
                 &:first-child {
@@ -497,7 +513,7 @@ novo-form {
     &[layout="vertical"] {
         .novo-form-container {
             form {
-                > div.novo-form-row {
+                div.novo-form-row {
                     novo-control {
                         margin-top: 0;
 
