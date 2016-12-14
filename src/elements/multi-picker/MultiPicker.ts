@@ -83,6 +83,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
     config:any = {};
     chipsCount:number;
     selectAllOption:boolean;
+    strictRelationship:boolean;
     // private data model
     _value:any = {};
     notShown:any = {};
@@ -102,6 +103,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
     ngOnInit() {
         this.selectAllOption = this.source.selectAllOption || false;
         this.chipsCount = this.source.chipsCount || 4;
+        this.strictRelationship = this.source.strictRelationship || false;
         this.setupOptions();
     }
 
@@ -152,7 +154,6 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
             type: section.type,
             checked: undefined,
             isParentOf: section.isParentOf,
-            strictRelationship: section.strictRelationship,
             isChildOf: section.isChildOf
         };
         if (obj.isChildOf) {
@@ -293,6 +294,9 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
         if (item.value !== 'ALL') {
             this.updateParentOrChildren(item, 'unselect');
         }
+        if (triggeredByEvent) {
+            this.modifyAffectedParentsOrChildren(false, item);
+        }
     }
 
     removeValue(item) {
@@ -390,7 +394,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
     }
 
     updateParentOrChildren(item, action) {
-        if (item.isParentOf && item.strictRelationship) {
+        if (this.strictRelationship && item.isParentOf) {
             this.updateChildrenValue(item, action);
         } else if (item.isChildOf && this.selectAllOption) {
             this.updateParentValue(item, action);
@@ -424,7 +428,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
                     return x.value !== 'ALL' && x[parentType].filter(y => y === obj.value).length > 0;
                 });
                 if (selectedChildrenOfParent.length > 0) {
-                    if (obj.checked && obj.strictRelationship) {
+                    if (this.strictRelationship && obj.checked) {
                         if (allChildrenOfParent.length !== selectedChildrenOfParent.length) {
                             obj.indeterminate = true;
                             obj.checked = false;
@@ -434,7 +438,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
                     } else {
                         obj.indeterminate = true;
                     }
-                    if (itemChanged.type !== parentType && obj.strictRelationship) {
+                    if (this.strictRelationship && itemChanged.type !== parentType) {
                         if (obj.checked) {
                             obj.checked = false;
                             this.removeValue(obj);
@@ -446,18 +450,14 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
                     if (allChildrenOfParent.length === 0) {
                         //if it has no children and is checked, it should stay checked
                         return;
-                    } else if (itemChanged.type !== parentType && obj.strictRelationship) {
+                    } else if (this.strictRelationship && itemChanged.type !== parentType) {
                         this.remove(null, obj);
                     }
                 }
             }
         });
         if (this.selectAllOption) {
-            let allCheckedOrIndeterminateParents = allParentType.filter(x => (!!x.checked || !!x.indeterminate) && x.value !== 'ALL');
-            let isParentIndeterminate = !!allParentType[0].checked ? false : allCheckedOrIndeterminateParents.length > 0;
-            let isChildIndeterminate = !!allChildren[0].checked ? false : allCheckedChildren.length > 0;
-            this.setIndeterminateState(allParentType, isParentIndeterminate);
-            this.setIndeterminateState(allChildren, isChildIndeterminate);
+            this.updateIndeterminateStates(allParentType, allChildren, allCheckedChildren);
         }
     }
 
@@ -473,7 +473,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
         let selecting = action === 'select';
         let childType = item.isParentOf;
         let potentialChildren = this.getAllOfType(childType);
-        if (this.allOfTypeSelected(childType) && !selecting && this.selectAllOption) {
+        if (this.selectAllOption && this.allOfTypeSelected(childType) && !selecting) {
             this.remove(null, potentialChildren[0]);
             return;
         }
@@ -503,6 +503,14 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
         });
     }
 
+    updateIndeterminateStates(allParentType, allChildren, allCheckedChildren) {
+        let allCheckedOrIndeterminateParents = allParentType.filter(x => (!!x.checked || !!x.indeterminate) && x.value !== 'ALL');
+        let isParentIndeterminate = !!allParentType[0].checked ? false : allCheckedOrIndeterminateParents.length > 0;
+        let isChildIndeterminate = !!allChildren[0].checked ? false : allCheckedChildren.length > 0;
+        this.setIndeterminateState(allParentType, isParentIndeterminate);
+        this.setIndeterminateState(allChildren, isChildIndeterminate);
+    }
+
     updateChildrenValue(parent, action) {
         let selecting = action === 'select';
         let childType = parent.isParentOf;
@@ -527,7 +535,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
 
     updateParentValue(child, action) {
         let allParentType = this.getAllOfType(child.isChildOf);
-        if ((allParentType[0].checked && allParentType.value === 'ALL') && action !== 'select') {
+        if (allParentType[0].checked && action !== 'select') {
             this.handleRemoveItemIfAllSelected(allParentType[0]);
         }
     }
@@ -571,7 +579,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
                     if (!allSelected) {
                         this.updateDisplayItems(value, 'add');
                     }
-                    if (value.isParentOf && value.shouldAffectChildren) {
+                    if (this.strictRelationship && value.isParentOf) {
                         this.updateChildrenValue(value, 'select');
                     }
                 });

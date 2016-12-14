@@ -118,14 +118,15 @@ export class MultiPickerDemoComponent {
         };
         this.parentChild = {
             options: [
-                { type: 'departments', data: departments, format: '$name', field: 'id', isParentOf: 'users', strictRelationship: false },
-                { type: 'users', data: users, format: '$name', field: 'id', isChildOf: 'departments', strictRelationship: false }
+                { type: 'departments', data: departments, format: '$name', field: 'id', isParentOf: 'users' },
+                { type: 'users', data: users, format: '$name', field: 'id', isChildOf: 'departments' }
             ],
             resultsTemplate: ChecklistPickerResults,
             selectAllOption: false,
+            strictRelationship: false,
             chipsCount: 6
         };
-        this.parentChildTypes = [{ value: 'departments', isParentOf: true, singular: 'department', selectAll: true }, { value: 'users', isChildOf: true, singular: 'user', selectAll: true }];
+        this.parentChildTypes = [{ value: 'departments', isParentOf: true, singular: 'department'}, { value: 'users', isChildOf: true, singular: 'user' }];
         this.formatted = {
             format: '$firstName $lastName',
             options: collaborators
