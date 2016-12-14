@@ -1,6 +1,7 @@
 // NG2
 import { Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
+import {Helpers} from "../../../utils/Helpers";
 
 export interface NovoControlConfig {
     validators?:Array<any>;
@@ -85,6 +86,6 @@ export class BaseControl {
         if (config.maxlength) {
             this.maxlength = config.maxlength;
         }
-        this.closeOnSelect = config.closeOnSelect || true;
+        this.closeOnSelect = !Helpers.isEmpty(config.closeOnSelect) ? config.closeOnSelect : true;
     }
 }
