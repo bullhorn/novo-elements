@@ -14,9 +14,12 @@ import { NovoDateTimePickerModule } from './../date-time-picker/DateTimePicker.m
 import { NovoNovoCKEditorModule } from './../ckeditor/CKEditor.module';
 import { NovoQuickNoteModule } from './../quick-note/QuickNote.module';
 import { NovoDynamicFormElement } from './DynamicForm';
+import { NovoFieldsetElement } from './DynamicForm';
+import { NovoFieldsetHeaderElement } from './DynamicForm';
 import { NovoFormElement } from './Form';
 import { NovoControlElement } from './Control';
 import { NovoFormExtrasModule } from './extras/FormExtras.module';
+import { NovoHeaderModule } from './../header/Header.module';
 
 @NgModule({
     imports: [
@@ -32,10 +35,11 @@ import { NovoFormExtrasModule } from './extras/FormExtras.module';
         NovoNovoCKEditorModule,
         NovoFormExtrasModule,
         NovoQuickNoteModule,
-        NovoDateTimePickerModule
+        NovoDateTimePickerModule,
+        NovoHeaderModule
     ],
-    declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement],
-    exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement]
+    declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement],
+    exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement]
 })
 export class NovoFormModule {
 }

@@ -1,4 +1,4 @@
-export default {
+export const MockMeta = {
     entity: 'Opportunity',
     entityMetaUrl: 'http://develop-backend.bh-bos2.bullhorn.com:8181/rest-services/1yg8p/meta/Opportunity?fields=*',
     label: 'Opportunity',
@@ -7,56 +7,65 @@ export default {
             name: 'firstName',
             type: 'text',
             label: 'First Name',
-            required: true
+            required: true,
+            sortOrder: 10
         },
         {
             name: 'lastName',
             type: 'text',
-            label: 'Last Name'
+            label: 'Last Name',
+            sortOrder: 20
         },
         {
             name: 'number',
             type: 'number',
             label: 'Number',
             required: true,
-            disabled: true
+            disabled: true,
+            sortOrder: 40
         },
         {
             name: 'float',
             type: 'float',
             label: 'Float',
-            required: true
+            required: true,
+            sortOrder: 50
         },
         {
             name: 'currency',
             type: 'money',
             label: 'Cost',
-            currencyFormat: 'USD'
+            currencyFormat: 'USD',
+            sortOrder: 60
         },
         {
             name: 'percent',
             type: 'percentage',
             label: 'Percentage',
-            required: true
+            required: true,
+            sortOrder: 70
         },
         {
             name: 'date',
             type: 'date',
             label: 'Date',
-            required: true
+            required: true,
+            sortOrder: 90
         },
         {
             name: 'time',
             type: 'time',
             label: 'Time',
-            required: true
+            required: true,
+            sortOrder: 100
         },
         {
             name: 'datetime',
             type: 'date-time',
             label: 'DateTime',
             dataSpecialization: 'DATETIME',
-            required: true
+            required: true,
+            sortOrder: 110
         },
         {
             name: 'status',
@@ -82,7 +91,8 @@ export default {
                     value: 'TRIGGER',
                     label: 'TRIGGER'
                 }
-            ]
+            ],
+            sortOrder: 120
         },
         {
             name: 'nextAction',
@@ -103,7 +113,8 @@ export default {
                     value: 'appointment',
                     label: 'Appointment'
                 }
-            ]
+            ],
+            sortOrder: 130
         },
         {
             name: 'state',
@@ -123,26 +134,30 @@ export default {
                     'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
                     'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
                     'West Virginia', 'Wisconsin', 'Wyoming']
-            }
+            },
+            sortOrder: 530
         }, {
             name: 'startDate',
             type: 'datetime',
             dataType: 'Timestamp',
             label: 'Start Date',
-            required: true
+            required: true,
+            sortOrder: 540
         }, {
             name: 'quota',
             type: 'number',
             dataType: 'Integer',
             label: 'Quota',
-            required: true
+            required: true,
+            sortOrder: 550
         }, {
             name: 'secret',
             type: 'hidden',
             dataType: 'String',
             label: 'Top Secret',
             required: true,
-            defaultValue: 'The secret code is: 08322'
+            defaultValue: 'The secret code is: 08322',
+            sortOrder: 560
         }, {
             name: 'categories',
             type: 'picker',
@@ -170,7 +185,8 @@ export default {
                     value: 'TRIGGER',
                     label: 'TRIGGER'
                 }
-            ]
+            ],
+            sortOrder: 570
         }, {
             name: 'owner',
             type: 'entity',
@@ -187,7 +203,8 @@ export default {
             associatedEntity: {
                 entity: 'CorporateUser',
                 label: 'Corporate User'
-            }
+            },
+            sortOrder: 580
         }, {
             name: 'address',
             type: 'address',
@@ -299,32 +316,51 @@ export default {
                     maxLength: 0,
                     optional: true
                 }
-            ]
+            ],
+            sortOrder: 590
         },
         {
             name: 'checkbox',
             type: 'checkbox',
-            label: 'Checkbox'
+            label: 'Checkbox',
+            sortOrder: 600
         },
         {
             name: 'checklist',
             type: 'checklist',
             label: 'CheckList',
             options: ['Morning', 'Day', 'Night', 'Overnight'],
-            required: true
+            required: true,
+            sortOrder: 610
         },
         {
             name: 'address',
             type: 'address',
             label: 'Address',
-            required: true
+            required: true,
+            sortOrder: 620
         },
         {
             name: 'attachments',
             type: 'file',
             label: 'Attachments',
             multiValue: true,
-            required: true
+            required: true,
+            sortOrder: 630
         }
     ]
 };
+export const MockMetaHeaders = {
+    sectionHeaders: [{
+          'label': 'Section 2',
+          'name': 'sectionHeader1',
+          'sortOrder': 500,
+          'enabled': true
+        }, {
+          'label': 'Section 1',
+          'name': 'sectionHeader2',
+          'sortOrder': 45,
+          'enabled': true
+    }],
+};
+Object.assign(MockMetaHeaders, MockMeta);
