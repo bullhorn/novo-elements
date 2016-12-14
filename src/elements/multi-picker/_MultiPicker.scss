@@ -49,16 +49,11 @@ multi-picker {
             &.checked {
                 label {
                     color: darken(#D2D2D2, 60%);
-
-                    i {
-                        animation: iconEnter 160ms ease-in-out;
-                    }
                 }
             }
         }
         i {
             margin-right: 5px;
-            transition: all 200ms ease-in-out;
 
             &.bhi-checkbox-empty {
                 color: #D2D2D2;
