@@ -1,3 +1,14 @@
+<a name="2.0.18"></a>
+## [2.0.18](https://github.com/bullhorn/novo-elements/compare/v2.0.17...v2.0.18) (2016-12-14)
+
+
+### Features
+
+* **form:** added fieldsets with headers ([#289](https://github.com/bullhorn/novo-elements/issues/289)) ([2a10801](https://github.com/bullhorn/novo-elements/commit/2a10801))
+* **multipicker:** make creating a select all item optional, add a 'strict relationship' mode, make selectAllOption, strictRelationship, and chipsCount configurable ([fc49b30](https://github.com/bullhorn/novo-elements/commit/fc49b30))
+
+
+
 <a name="2.0.17"></a>
 ## [2.0.17](https://github.com/bullhorn/novo-elements/compare/v2.0.16...v2.0.17) (2016-12-14)
 
