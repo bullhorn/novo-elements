@@ -449,8 +449,9 @@ export class NovoTableElement implements DoCheck {
         if (column) {
             if (Helpers.isFunction(this.config.sorting)) {
                 this.config.sorting();
+            } else {
+                this._dataProvider.sort = [{ field: (column.compare || column.name), reverse: column.sort === 'desc' }];
             }
-            this._dataProvider.sort = [{ field: (column.compare || column.name), reverse: column.sort === 'desc' }];
         }
 
         // Fire table change event
