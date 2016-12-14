@@ -362,40 +362,39 @@ export class NovoTableElement implements DoCheck {
             // Array of filters
             const filters = this.columns.filter(col => col.filter && col.filter.length);
             if (filters.length) {
-                if (Helpers.isFunction(this.config.filtering)) {
-                    this.config.filtering();
-                    return;
-                } else {
-                    let query = {};
-                    for (const column of filters) {
-                        if (Array.isArray(column.filter)) {
-                            // The filters are an array (multi-select), check value
-                            if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
-                                query[column.name] = column.filter.map(f => {
-                                    return {
-                                        min: f.value ? new Date(f.value.startDate).getTime() : 0,
-                                        max: f.value ? new Date(f.value.endDate).getTime() : 0
-                                    };
-                                })[0];
-                            } else if (column.type && column.type === 'date') {
-                                query[column.name] = column.filter.map(f => {
-                                    return {
-                                        min: f.min ? Date.now() + (f.min * (24 * 60 * 60 * 1000)) : Date.now(),
-                                        max: f.max ? Date.now() + (f.max * (24 * 60 * 60 * 1000)) : Date.now()
-                                    };
-                                })[0];
-                            } else {
-                                let options = column.filter;
-                                // We have an array of {value: '', labels: ''}
-                                if (options[0].value || options[0].label) {
-                                    options = column.filter.map(opt => opt.value);
-                                }
-                                query[column.name] = { any: options };
-                            }
+                let query = {};
+                for (const column of filters) {
+                    if (Array.isArray(column.filter)) {
+                        // The filters are an array (multi-select), check value
+                        if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
+                            query[column.name] = column.filter.map(f => {
+                                return {
+                                    min: f.value ? new Date(f.value.startDate).getTime() : 0,
+                                    max: f.value ? new Date(f.value.endDate).getTime() : 0
+                                };
+                            })[0];
+                        } else if (column.type && column.type === 'date') {
+                            query[column.name] = column.filter.map(f => {
+                                return {
+                                    min: f.min ? Date.now() + (f.min * (24 * 60 * 60 * 1000)) : Date.now(),
+                                    max: f.max ? Date.now() + (f.max * (24 * 60 * 60 * 1000)) : Date.now()
+                                };
+                            })[0];
                         } else {
-                            query[column.name] = column.filter;
+                            let options = column.filter;
+                            // We have an array of {value: '', labels: ''}
+                            if (options[0].value || options[0].label) {
+                                options = column.filter.map(opt => opt.value);
+                            }
+                            query[column.name] = { any: options };
                         }
+                    } else {
+                        query[column.name] = column.filter;
                     }
+                }
+                if (Helpers.isFunction(this.config.filtering)) {
+                    this.config.filtering(query);
+                } else {
                     this._dataProvider.filter = query;
                 }
             } else {
@@ -405,9 +404,9 @@ export class NovoTableElement implements DoCheck {
             // this.onSortChange(this.currentSortColumn);
 
             // If paging, reset page
-            //if (this.config.paging) {
-            this.config.paging.current = 1;
-            //}
+            if (this.config.paging) {
+                this.config.paging.current = 1;
+            }
             // Remove all selection on sort change if selection is on
             if (this.config.rowSelectionStyle === 'checkbox') {
                 this.selectAll(false);
@@ -450,7 +449,6 @@ export class NovoTableElement implements DoCheck {
         if (column) {
             if (Helpers.isFunction(this.config.sorting)) {
                 this.config.sorting();
-                return;
             }
             this._dataProvider.sort = [{ field: (column.compare || column.name), reverse: column.sort === 'desc' }];
         }
