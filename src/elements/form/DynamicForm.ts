@@ -8,6 +8,38 @@ export interface NovoFormGroup {
     valid?:boolean;
 }
 
+export interface NovoFieldset {
+    title?:string;
+    controls:Array<any>;
+}
+
+@Component({
+    selector: 'novo-fieldset-header',
+    template: `
+        <h6><i class="bhi-section"></i>{{title}}</h6>
+    `
+})
+export class NovoFieldsetHeaderElement {
+    @Input() title:string;
+}
+
+@Component({
+    selector: 'novo-fieldset',
+    template: `
+        <div class="novo-fieldset-container">
+            <novo-fieldset-header [title]="title" *ngIf="title"></novo-fieldset-header>
+            <div *ngFor="let control of controls" class="novo-form-row" [class.disabled]="control.disabled">
+                <novo-control [control]="control" [form]="form"></novo-control>
+            </div>
+        </div>
+    `
+})
+export class NovoFieldsetElement {
+    @Input() controls:Array<any> = [];
+    @Input() form:any;
+    @Input() title:string;
+}
+
 @Component({
     selector: 'novo-dynamic-form',
     template: `
@@ -17,15 +49,15 @@ export interface NovoFormGroup {
                 <ng-content select="form-subtitle"></ng-content>
             </header>
             <form class="novo-form" [formGroup]="form" autocomplete="off">
-                <div *ngFor="let control of controls" class="novo-form-row" [class.disabled]="control.disabled">
-                    <novo-control [control]="control" [form]="form"></novo-control>
-                </div>
+                <novo-fieldset *ngFor="let fieldset of fieldsets" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form">
+                </novo-fieldset>
             </form>
         </div>
     `
 })
 export class NovoDynamicFormElement implements OnInit, OnChanges {
     @Input() controls:Array<any> = [];
+    @Input() fieldsets:Array<NovoFieldset> = [];
     @Input() form:NovoFormGroup;
     @Input() layout:string;
 
@@ -33,60 +65,76 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
     allFieldsNotRequired = false;
     showingAllFields = false;
     showingRequiredFields = true;
+    numControls = 0;
 
     ngOnInit() {
-        this.ngOnChanges();
         this.form.layout = this.layout;
+        if (!(this.fieldsets && this.fieldsets.length) && this.controls && this.controls.length) {
+            this.fieldsets = [{
+                controls: this.controls
+            }];
+            this.numControls = this.controls.length;
+        } else if (this.fieldsets) {
+            this.fieldsets.forEach(fieldset => {
+                this.numControls = this.numControls + fieldset.controls.length;
+            });
+        }
+        this.ngOnChanges();
     }
 
     ngOnChanges(changes?:SimpleChanges) {
-        if (this.controls) {
+        if (this.fieldsets) {
             let requiredFields:Array<any> = [];
             let nonRequiredFields:Array<any> = [];
-
-            this.controls.forEach(control => {
-                if (control.required) {
-                    requiredFields.push(control);
-                } else {
-                    nonRequiredFields.push(control);
-                }
+            this.fieldsets.forEach(fieldset => {
+                fieldset.controls.forEach(control => {
+                    if (control.required) {
+                        requiredFields.push(control);
+                    } else {
+                        nonRequiredFields.push(control);
+                    }
+                });
             });
-
-            this.allFieldsRequired = requiredFields.length === this.controls.length;
-            this.allFieldsNotRequired = nonRequiredFields.length === this.controls.length;
-
+            this.allFieldsRequired = requiredFields.length === this.numControls;
+            this.allFieldsNotRequired = nonRequiredFields.length === this.numControls;
             if (this.allFieldsNotRequired) {
-                this.controls.forEach(control => {
-                    control.hidden = false;
+                this.fieldsets.forEach(fieldset => {
+                    fieldset.controls.forEach(control => {
+                        control.hidden = false;
+                    });
                 });
             }
         }
     }
 
     showAllFields() {
-        this.controls.forEach(control => {
-            control.hidden = false;
+        this.fieldsets.forEach(fieldset => {
+            fieldset.controls.forEach(control => {
+                control.hidden = false;
+            });
         });
         this.showingAllFields = true;
         this.showingRequiredFields = false;
     }
 
     showOnlyRequired(hideRequiredWithValue) {
-        this.controls.forEach(control => {
-            // Hide any non-required fields
-            if (!control.required) {
-                control.hidden = true;
-            }
+        this.fieldsets.forEach(fieldset => {
+            fieldset.controls.forEach(control => {
+                // Hide any non-required fields
+                if (!control.required) {
+                    control.hidden = true;
+                }
 
-            // Hide required fields that have been successfully filled out
-            if (hideRequiredWithValue && this.form.value[control.key]) {
-                control.hidden = true;
-            }
+                // Hide required fields that have been successfully filled out
+                if (hideRequiredWithValue && this.form.value[control.key]) {
+                    control.hidden = true;
+                }
 
-            // Don't hide fields with errors
-            if (this.form.controls[control.key].errors) {
-                control.hidden = false;
-            }
+                // Don't hide fields with errors
+                if (this.form.controls[control.key].errors) {
+                    control.hidden = false;
+                }
+            });
         });
         this.showingAllFields = false;
         this.showingRequiredFields = true;
@@ -102,13 +150,15 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
 
     updatedValues() {
         let ret = null;
-        this.controls.forEach(control => {
-            if (this.form.controls[control.key].dirty || control.dirty) {
-                if (!ret) {
-                    ret = {};
+        this.fieldsets.forEach(fieldset => {
+            fieldset.controls.forEach(control => {
+                if (this.form.controls[control.key].dirty || control.dirty) {
+                    if (!ret) {
+                        ret = {};
+                    }
+                    ret[control.key] = this.form.value[control.key];
                 }
-                ret[control.key] = this.form.value[control.key];
-            }
+            });
         });
         return ret;
     }

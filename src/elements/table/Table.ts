@@ -621,6 +621,9 @@ export class NovoTableElement implements DoCheck {
     onFilterKeywords(config) {
         if (config && config.filtering && config.filtering.freetextFilter) {
             let filterKeywords = config.filtering.freetextFilter.toLowerCase();
+            if (!config.filtering.originalOptions) {
+                config.filtering.originalOptions = config.filtering.options;
+            }
             let newOptions = config.filtering.originalOptions.filter(option => {
                 let value = option && option.label ? option.label : option;
                 value = value.toLowerCase() ? value.toLowerCase() : value;
@@ -633,7 +636,7 @@ export class NovoTableElement implements DoCheck {
             });
             config.filtering.options = newOptions;
             if (config.filtering.originalOptions[0].label) {
-                config.filtering.filter = [{ label: config.filtering.freetextFilter }];
+                config.filtering.filter = [{ label: config.filtering.freetextFilter, value: config.filtering.freetextFilter }];
             } else {
                 config.filtering.filter = config.filtering.freetextFilter;
             }

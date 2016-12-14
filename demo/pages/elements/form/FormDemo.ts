@@ -7,7 +7,8 @@ let TextBasedControlsDemoTpl = require('./templates/TextBasedControls.html');
 let CheckBoxControlsDemoTpl = require('./templates/CheckBoxControls.html');
 let FileInputControlsDemoTpl = require('./templates/FileInputControls.html');
 let CalendarControlsDemoTpl = require('./templates/CalendarInputControls.html');
-import MockMeta from './MockMeta';
+let FieldsetsFormDemoTpl = require('./templates/DynamicFormFieldSets.html');
+import { MockMeta, MockMetaHeaders } from './MockMeta';
 // Vendor
 import {
     FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
@@ -47,6 +48,10 @@ const template = `
     <h5>Vertical</h5>
     <div class="example form-demo dynamic">${VerticalDynamicFormDemoTpl}</div>
     <code-snippet [code]="VerticalDynamicFormDemoTpl"></code-snippet>
+
+    <h5>Fieldsets</h5>
+    <div class="example form-demo fieldsets">${FieldsetsFormDemoTpl}</div>
+    <code-snippet [code]="FieldsetsFormDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -61,6 +66,7 @@ export class FormDemoComponent {
     private CheckBoxControlsDemoTpl: string = CheckBoxControlsDemoTpl;
     private FileInputControlsDemoTpl: string = FileInputControlsDemoTpl;
     private CalendarControlsDemoTpl: string = CalendarControlsDemoTpl;
+    private FieldsetsFormDemoTpl: string = FieldsetsFormDemoTpl;
     private quickNoteConfig: any;
     private textControl: any;
     private emailControl: any;
@@ -85,7 +91,8 @@ export class FormDemoComponent {
     private dynamicVertical: any;
     private dynamicVerticalForm: any;
     private calendarForm: any;
-
+    private fieldsets: Array<any>;
+    private fieldsetsForm:any;
     constructor(private formUtils: FormUtils) {
         // Quick note config
         this.quickNoteConfig = {
@@ -139,13 +146,19 @@ export class FormDemoComponent {
         this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
 
         // Dynamic
-        this.dynamic = formUtils.toControls(MockMeta, '$ USD', {}, 'TOKEN');
-        formUtils.setInitialValues(this.dynamic, { firstName: 'Initial F Name', number: 12 });
-        this.dynamicForm = formUtils.toFormGroup(this.dynamic);
+        this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, 'TOKEN');
+        formUtils.setInitialValuesFieldsets(this.dynamic, { firstName: 'Initial F Name', number: 12 });
+        this.dynamicForm = formUtils.toFormGroupFromFieldset(this.dynamic);
 
         this.dynamicVertical = formUtils.toControls(MockMeta, '$ USD', {}, 'TOKEN');
         formUtils.setInitialValues(this.dynamicVertical, { number: 0 });
         this.dynamicVerticalForm = formUtils.toFormGroup(this.dynamicVertical);
+
+        // Dynamic + Fieldsets
+        this.fieldsets = formUtils.toFieldSets(MockMetaHeaders, '$ USD', {}, 'TOKEN');
+        formUtils.setInitialValuesFieldsets(this.fieldsets, { firstName: 'Initial F Name', number: 12 });
+        this.fieldsetsForm = formUtils.toFormGroupFromFieldset(this.fieldsets);
+
     }
 
     save(form) {
