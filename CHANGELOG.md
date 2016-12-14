@@ -1,3 +1,13 @@
+<a name="2.0.17"></a>
+## [2.0.17](https://github.com/bullhorn/novo-elements/compare/v2.0.16...v2.0.17) (2016-12-14)
+
+
+### Bug Fixes
+
+* **Table:** Free Text Filtering bug fixed ([#290](https://github.com/bullhorn/novo-elements/issues/290)) ([f493972](https://github.com/bullhorn/novo-elements/commit/f493972))
+
+
+
 <a name="2.0.16"></a>
 ## [2.0.16](https://github.com/bullhorn/novo-elements/compare/v2.0.15...v2.0.16) (2016-12-14)
 
