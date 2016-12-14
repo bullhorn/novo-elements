@@ -198,7 +198,7 @@ export class BasePickerResults {
         if (selected) {
             this.parent.value = selected;
 
-            if (this.parent.closeOnSelect === true) {
+            if (this.parent.closeOnSelect) {
                 this.parent.hideResults();
             }
         }

@@ -85,6 +85,6 @@ export class BaseControl {
         if (config.maxlength) {
             this.maxlength = config.maxlength;
         }
-        this.closeOnSelect = config.closeOnSelect || true;
+        this.closeOnSelect = !!config.closeOnSelect;
     }
 }
