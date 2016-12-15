@@ -22,7 +22,8 @@ export class Pagination implements OnInit, OnChanges {
     @Input() itemsPerPage: number = 10;
     @Input() rowOptions: any;
     @Input() label: string;
-
+    @Output() pageChange: EventEmitter<any> = new EventEmitter();
+    @Output() itemsPerPageChange: EventEmitter<any> = new EventEmitter();
     @Output() onPageChange: EventEmitter<any> = new EventEmitter();
 
     maxPagesDisplayed: number = 5;
@@ -57,6 +58,8 @@ export class Pagination implements OnInit, OnChanges {
         this.itemsPerPage = event.selected;
         this.totalPages = this.calculateTotalPages();
         this.pages = this.getPages(this.page, this.totalPages);
+        this.pageChange.emit(this.page);
+        this.itemsPerPageChange.emit(this.itemsPerPage);
         this.onPageChange.emit({
             page: this.page,
             itemsPerPage: this.itemsPerPage
@@ -70,6 +73,7 @@ export class Pagination implements OnInit, OnChanges {
 
         this.page = page;
         this.pages = this.getPages(this.page, this.totalPages);
+        this.pageChange.emit(this.page);
         this.onPageChange.emit({
             page: this.page,
             itemsPerPage: this.itemsPerPage

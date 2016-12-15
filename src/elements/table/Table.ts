@@ -31,10 +31,10 @@ export class NovoTableHeaderElement {
             <ng-content select="novo-table-header"></ng-content>
             <div class="header-actions">
                 <novo-pagination *ngIf="config.paging"
-                                 [page]="config.paging.current"
                                  [rowOptions]="config.customRowOptions"
+                                 [(page)]="dataProvider.page"
+                                 [(itemsPerPage)]="dataProvider.pageSize"
                                  [totalItems]="dataProvider.total"
-                                 [itemsPerPage]="config.paging.itemsPerPage"
                                  (onPageChange)="onPageChange($event)">
                 </novo-pagination>
                 <ng-content select="novo-table-actions"></ng-content>
@@ -219,8 +219,8 @@ export class NovoTableElement implements DoCheck {
     constructor(public labels:NovoLabelService) {}
 
     onPageChange(event) {
-        this.dataProvider.page = event.page;
-        this.dataProvider.pageSize = event.itemsPerPage;
+        //this.dataProvider.page = event.page;
+        //this.dataProvider.pageSize = event.itemsPerPage;
     }
 
     getOptionDataAutomationId(option) {
