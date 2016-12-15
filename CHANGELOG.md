@@ -1,3 +1,13 @@
+<a name="2.0.22"></a>
+## [2.0.22](https://github.com/bullhorn/novo-elements/compare/v2.0.21...v2.0.22) (2016-12-15)
+
+
+### Bug Fixes
+
+* **pagination:** Fix data-provider pagination ([1751783](https://github.com/bullhorn/novo-elements/commit/1751783))
+
+
+
 <a name="2.0.21"></a>
 ## [2.0.21](https://github.com/bullhorn/novo-elements/compare/v2.0.20...v2.0.21) (2016-12-15)
 
