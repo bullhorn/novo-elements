@@ -1,3 +1,13 @@
+<a name="2.0.21"></a>
+## [2.0.21](https://github.com/bullhorn/novo-elements/compare/v2.0.20...v2.0.21) (2016-12-15)
+
+
+### Bug Fixes
+
+* **multipicker:** rearrange logic to correctly handle non-strict relationship ([#296](https://github.com/bullhorn/novo-elements/issues/296)) ([5accf75](https://github.com/bullhorn/novo-elements/commit/5accf75))
+
+
+
 <a name="2.0.20"></a>
 ## [2.0.20](https://github.com/bullhorn/novo-elements/compare/v2.0.19...v2.0.20) (2016-12-14)
 
