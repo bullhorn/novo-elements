@@ -49,8 +49,8 @@ export class NovoFieldsetElement {
                 <ng-content select="form-subtitle"></ng-content>
             </header>
             <form class="novo-form" [formGroup]="form" autocomplete="off">
-                <novo-fieldset *ngFor="let fieldset of fieldsets" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form">
-                </novo-fieldset>
+                <span *ngFor="let fieldset of fieldsets"><novo-fieldset *ngIf="fieldset.controls.length" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form">
+                </novo-fieldset></span>
             </form>
         </div>
     `
