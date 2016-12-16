@@ -1,3 +1,13 @@
+<a name="2.0.24"></a>
+## [2.0.24](https://github.com/bullhorn/novo-elements/compare/v2.0.23...v2.0.24) (2016-12-16)
+
+
+### Bug Fixes
+
+* **Table:** Fixed the custom Match functions ([f8f4dae](https://github.com/bullhorn/novo-elements/commit/f8f4dae))
+
+
+
 <a name="2.0.23"></a>
 ## [2.0.23](https://github.com/bullhorn/novo-elements/compare/v2.0.22...v2.0.23) (2016-12-16)
 
