@@ -280,6 +280,9 @@ export class FormUtils {
             let fields = meta.fields;
             fields.forEach(field => {
                 if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || field.name === 'address') && !field.readOnly) {
+                    if (!field.hasOwnProperty('sortOrder')) {
+                        field.sortOrder = 0;
+                    }
                     let control = this.getControlForField(field, http, config);
                     // Set currency format
                     if (control.subType === 'currency') {
