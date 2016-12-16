@@ -364,7 +364,11 @@ export class NovoTableElement implements DoCheck {
             if (filters.length) {
                 let query = {};
                 for (const column of filters) {
-                    if (Array.isArray(column.filter)) {
+                    if (Helpers.isFunction(column.match)) {
+                        query[column.name] = (value, record) => {
+                            return column.match(record, column.filter);
+                        };
+                    } else if (Array.isArray(column.filter)) {
                         // The filters are an array (multi-select), check value
                         if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
                             query[column.name] = column.filter.map(f => {
@@ -389,7 +393,11 @@ export class NovoTableElement implements DoCheck {
                             query[column.name] = { any: options };
                         }
                     } else {
-                        query[column.name] = column.filter;
+                        if ( column.preFilter && Helpers.isFunction(column.preFilter)) {
+                            query = Object.assign({}, query, column.preFilter(column.filter));
+                        } else {
+                            query[column.name] = column.filter;
+                        }
                     }
                 }
                 if (Helpers.isFunction(this.config.filtering)) {
@@ -449,6 +457,8 @@ export class NovoTableElement implements DoCheck {
         if (column) {
             if (Helpers.isFunction(this.config.sorting)) {
                 this.config.sorting();
+            } else if (Helpers.isFunction(column.preSort)) {
+                this._dataProvider.sort = [].concat(column.preSort(column));
             } else {
                 this._dataProvider.sort = [{ field: (column.compare || column.name), reverse: column.sort === 'desc' }];
             }
