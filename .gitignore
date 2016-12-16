@@ -50,6 +50,7 @@ testem.log
 /typings
 /**/*.metadata.json
 /**/*.ngfactory.ts
+/factories
 
 # e2e
 /e2e/*.js
