@@ -31,14 +31,14 @@ export class Helpers {
     /**
      * Checks to see if the object is a string
      */
-    static isString(obj:any) {
+    static isString(obj: any) {
         return typeof obj === 'string';
     }
 
     /**
      * Checks to see if the object is a undefined or null
      */
-    static isBlank(obj:any):boolean {
+    static isBlank(obj: any): boolean {
         return obj === undefined || obj === null;
     }
 
@@ -46,30 +46,30 @@ export class Helpers {
     /**
      * Checks to see if the object is a undefined or null
      */
-    static isEmpty(obj:any):boolean {
+    static isEmpty(obj: any): boolean {
         return Helpers.isBlank(obj) || obj === '';
     }
 
     /**
      * Checks to see if the object is a function
      */
-    static isFunction(obj:any):boolean {
+    static isFunction(obj: any): boolean {
         return typeof obj === 'function';
     }
 
     /**
      * Checks to see if the object is a Date
      */
-    static isDate(obj:any) {
+    static isDate(obj: any) {
         return obj instanceof Date;
     }
 
-    static sortByField(field:any, reverse = false) {
-        return (previous:any, current:any) => {
+    static sortByField(field: any, reverse = false) {
+        return (previous: any, current: any) => {
             //return (a[field] < b[field]) ? -1 : (a[field] > b[field]) ? 1 : 0; // eslint-disable-line
             // Custom compare function on the column
             if (Helpers.isFunction(field)) {
-                return field((reverse) ? 'desc' : 'asc',  previous, current);
+                return field((reverse) ? 'desc' : 'asc', previous, current);
             }
             let first = previous[field] || '';
             let second = current[field] || '';
@@ -145,14 +145,14 @@ export class Helpers {
     }
 }
 class Can {
-    obj:Object;
-    constructor(obj:Object) {
+    obj: Object;
+    constructor(obj: Object) {
         this.obj = obj;
     }
 
-    have(key:string):any {
+    have(key: string): any {
         let props = key.split('.');
-        let item:any = this.obj;
+        let item: any = this.obj;
         for (let i = 0; i < props.length; i++) {
             item = item[props[i]];
             if (this.check(item) === false) {
@@ -162,7 +162,7 @@ class Can {
         return item;
     }
 
-    check(thing:any):boolean {
+    check(thing: any): boolean {
         return thing !== void 0;
     }
 }

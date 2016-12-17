@@ -72,6 +72,7 @@ export class NovoChipElement {
                 (select)="add($event)"
                 (keydown)="onKeyDown($event)"
                 (focus)="onFocus($event)"
+                (typing)="onTyping($event)"
                 (blur)="onTouched($event)">
             </novo-picker>
         </div>
@@ -90,6 +91,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
     @Output() changed:EventEmitter<any> = new EventEmitter();
     @Output() focus:EventEmitter<any> = new EventEmitter();
     @Output() blur:EventEmitter<any> = new EventEmitter();
+    @Output() typing:EventEmitter<any> = new EventEmitter();
     items:Array<any> = [];
     selected:any = null;
     config:Object = {};
@@ -186,6 +188,10 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
         this.blur.emit(event);
         this.deselectAll();
         this.selected = item;
+    }
+
+    onTyping(event?) {
+        this.typing.emit(event);
     }
 
     onFocus(event?) {

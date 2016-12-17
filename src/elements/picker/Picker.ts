@@ -59,6 +59,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     @Output() select: EventEmitter<any> = new EventEmitter();
     @Output() focus: EventEmitter<any> = new EventEmitter();
     @Output() blur: EventEmitter<any> = new EventEmitter();
+    @Output() typing: EventEmitter<any> = new EventEmitter();
 
     isStatic: boolean = true;
     term: string = '';
@@ -211,6 +212,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
 
     // Makes sure to clear the model if the user clears the text box
     checkTerm(event) {
+        this.typing.emit(event);
         if (!event || !event.length) {
             this._value = null;
             this.onModelChange(this._value);
