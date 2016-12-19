@@ -1,3 +1,18 @@
+<a name="2.0.26"></a>
+## [2.0.26](https://github.com/bullhorn/novo-elements/compare/v2.0.25...v2.0.26) (2016-12-19)
+
+
+### Bug Fixes
+
+* **form:** make address fields show properly ([1390d0f](https://github.com/bullhorn/novo-elements/commit/1390d0f))
+
+
+### Features
+
+* **form:** allowing number fields to have decimals ([7133761](https://github.com/bullhorn/novo-elements/commit/7133761))
+
+
+
 <a name="2.0.25"></a>
 ## [2.0.25](https://github.com/bullhorn/novo-elements/compare/v2.0.24...v2.0.25) (2016-12-19)
 
