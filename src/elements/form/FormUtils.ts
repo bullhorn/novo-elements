@@ -220,7 +220,7 @@ export class FormUtils {
         if (meta && meta.fields) {
             let fields = meta.fields;
             fields.forEach(field => {
-                if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || field.name === 'address') && !field.readOnly) {
+                if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
                     let control = this.getControlForField(field, http, config);
                     // Set currency format
                     if (control.subType === 'currency') {
@@ -279,7 +279,7 @@ export class FormUtils {
             }
             let fields = meta.fields;
             fields.forEach(field => {
-                if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || field.name === 'address') && !field.readOnly) {
+                if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
                     if (!field.hasOwnProperty('sortOrder')) {
                         field.sortOrder = 0;
                     }
