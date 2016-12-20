@@ -5173,57 +5173,109 @@ entity-chips + i {
   right: 0;
   bottom: 7px; }
 
-entity-chips chip span {
+chips chip span.contact, multi-picker chip span.contact,
+entity-chips chip span.contact {
   color: #4A89DC; }
+  chips chip span.contact i, multi-picker chip span.contact i,
   entity-chips chip span.contact i {
     color: #FFAA44; }
+
+chips chip span.company, multi-picker chip span.company,
+entity-chips chip span.company {
+  color: #4A89DC; }
+  chips chip span.company i, multi-picker chip span.company i,
   entity-chips chip span.company i {
     color: #3399DD; }
+
+chips chip span.candidate, multi-picker chip span.candidate,
+entity-chips chip span.candidate {
+  color: #4A89DC; }
+  chips chip span.candidate i, multi-picker chip span.candidate i,
   entity-chips chip span.candidate i {
     color: #44BB77; }
+
+chips chip span.job, multi-picker chip span.job,
+entity-chips chip span.job {
+  color: #4A89DC; }
+  chips chip span.job i, multi-picker chip span.job i,
   entity-chips chip span.job i {
     color: #BB5566; }
+
+chips chip span.placement, multi-picker chip span.placement,
+entity-chips chip span.placement {
+  color: #4A89DC; }
+  chips chip span.placement i, multi-picker chip span.placement i,
   entity-chips chip span.placement i {
     color: #0B344F; }
+
+chips chip span.opportunity, multi-picker chip span.opportunity,
+entity-chips chip span.opportunity {
+  color: #4A89DC; }
+  chips chip span.opportunity i, multi-picker chip span.opportunity i,
   entity-chips chip span.opportunity i {
     color: #662255; }
+
+chips chip span.lead, multi-picker chip span.lead,
+entity-chips chip span.lead {
+  color: #4A89DC; }
+  chips chip span.lead i, multi-picker chip span.lead i,
   entity-chips chip span.lead i {
     color: #AA6699; }
 
+chips picker-results, multi-picker picker-results,
 entity-chips picker-results {
   position: absolute;
   color: black; }
+  chips picker-results novo-list, multi-picker picker-results novo-list,
   entity-chips picker-results novo-list {
     max-height: 600px;
     overflow: auto; }
+    chips picker-results novo-list novo-list-item, multi-picker picker-results novo-list novo-list-item,
     entity-chips picker-results novo-list novo-list-item {
       -ms-flex: 0 0;
           flex: 0 0;
       transition: background-color 250ms; }
+      chips picker-results novo-list novo-list-item > div, multi-picker picker-results novo-list novo-list-item > div,
       entity-chips picker-results novo-list novo-list-item > div {
         width: 100%; }
+      chips picker-results novo-list novo-list-item.active, multi-picker picker-results novo-list novo-list-item.active,
       entity-chips picker-results novo-list novo-list-item.active {
         background-color: #e0ebf9; }
+      chips picker-results novo-list novo-list-item:hover, multi-picker picker-results novo-list novo-list-item:hover,
       entity-chips picker-results novo-list novo-list-item:hover {
         background-color: #f1f6fc; }
+      chips picker-results novo-list novo-list-item item-content, multi-picker picker-results novo-list novo-list-item item-content,
       entity-chips picker-results novo-list novo-list-item item-content {
         -ms-flex-flow: row wrap;
             flex-flow: row wrap; }
+        chips picker-results novo-list novo-list-item item-content > *, multi-picker picker-results novo-list novo-list-item item-content > *,
         entity-chips picker-results novo-list novo-list-item item-content > * {
           -ms-flex: 0 0 33%;
               flex: 0 0 33%;
           white-space: nowrap; }
+  chips picker-results .error-results, multi-picker picker-results .error-results,
+  chips picker-results .no-recents, multi-picker picker-results .no-recents,
+  chips picker-results .null-results, multi-picker picker-results .null-results,
   entity-chips picker-results .error-results,
   entity-chips picker-results .no-recents,
   entity-chips picker-results .null-results {
     text-align: center;
     padding: 1em 0 4em; }
+    chips picker-results .error-results > i, multi-picker picker-results .error-results > i,
+    chips picker-results .no-recents > i, multi-picker picker-results .no-recents > i,
+    chips picker-results .null-results > i, multi-picker picker-results .null-results > i,
     entity-chips picker-results .error-results > i,
     entity-chips picker-results .no-recents > i,
     entity-chips picker-results .null-results > i {
       font-size: 3em;
       margin: 0.5em;
       color: rgba(0, 0, 0, 0.3); }
+    chips picker-results .error-results > h4, multi-picker picker-results .error-results > h4,
+    chips picker-results .error-results > p, multi-picker picker-results .error-results > p,
+    chips picker-results .no-recents > h4, multi-picker picker-results .no-recents > h4,
+    chips picker-results .no-recents > p, multi-picker picker-results .no-recents > p,
+    chips picker-results .null-results > h4, multi-picker picker-results .null-results > h4,
+    chips picker-results .null-results > p, multi-picker picker-results .null-results > p,
     entity-chips picker-results .error-results > h4,
     entity-chips picker-results .error-results > p,
     entity-chips picker-results .no-recents > h4,
@@ -5233,10 +5285,14 @@ entity-chips picker-results {
       margin: 0;
       max-width: none;
       padding: 0; }
+    chips picker-results .error-results > h4, multi-picker picker-results .error-results > h4,
+    chips picker-results .no-recents > h4, multi-picker picker-results .no-recents > h4,
+    chips picker-results .null-results > h4, multi-picker picker-results .null-results > h4,
     entity-chips picker-results .error-results > h4,
     entity-chips picker-results .no-recents > h4,
     entity-chips picker-results .null-results > h4 {
       font-weight: 500; }
+  chips picker-results section, multi-picker picker-results section,
   entity-chips picker-results section {
     box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
     z-index: 9;
@@ -11247,88 +11303,88 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-candidate {
-      background: #44BB77;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-navigation {
-      background: #2F384F;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-lead {
-      background: #AA6699;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-submission {
-      background: #747884;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-task {
-      background: #747884;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-carnation {
-      background: #D770AD;
       width: 29px;
       height: 29px; }
+    color header .background-boxes .bb-candidate {
+      background: #44BB77;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-navigation {
+      background: #2F384F;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-lead {
+      background: #AA6699;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-submission {
+      background: #747884;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-task {
+      background: #747884;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-carnation {
+      background: #D770AD;
+      width: 36px;
+      height: 36px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 26px;
-      height: 26px; }
+      width: 44px;
+      height: 44px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -12227,4 +12283,4 @@ category-dropdown-demo div.example {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.12cf29236bad0f3fd49a.bundle.map*/
+/*# sourceMappingURL=main.9b47f1b7dad83aa07db2.bundle.map*/
