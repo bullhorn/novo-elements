@@ -18,18 +18,24 @@ const CHIPS_VALUE_ACCESSOR = {
 @Component({
     selector: 'chip',
     template: `
-        <span (click)="onSelect($event)" [ngClass]="type">
-            <i *ngIf="type" class="bhi-circle"></i>
+        <span (click)="onSelect($event)" [ngClass]="_type">
+            <i *ngIf="_type" class="bhi-circle"></i>
             <ng-content></ng-content>
         </span>
         <i class="bhi-close" (click)="onRemove($event)"></i>
   `
 })
 export class NovoChipElement {
-    @Input() type:any;
-    @Output() select:EventEmitter<any> = new EventEmitter();
-    @Output() remove:EventEmitter<any> = new EventEmitter();
-    entity:string;
+    @Input()
+    set type(type: string) {
+        this._type = type ? type.toLowerCase() : null;
+    }
+
+    @Output() select: EventEmitter<any> = new EventEmitter();
+    @Output() remove: EventEmitter<any> = new EventEmitter();
+
+    entity: string;
+    _type: string;
 
     onRemove(e) {
         if (e) {
@@ -85,28 +91,30 @@ export class NovoChipElement {
 })
 export class NovoChipsElement extends OutsideClick implements OnInit {
     @Input() closeOnSelect: boolean = false;
-    @Input() placeholder:string = '';
-    @Input() source:any;
-    @Input() type:any;
-    @Output() changed:EventEmitter<any> = new EventEmitter();
-    @Output() focus:EventEmitter<any> = new EventEmitter();
-    @Output() blur:EventEmitter<any> = new EventEmitter();
-    @Output() typing:EventEmitter<any> = new EventEmitter();
-    items:Array<any> = [];
-    selected:any = null;
-    config:Object = {};
-    model:any;
-    itemToAdd:any;
+    @Input() placeholder: string = '';
+    @Input() source: any;
+    @Input() type: any;
+
+    @Output() changed: EventEmitter<any> = new EventEmitter();
+    @Output() focus: EventEmitter<any> = new EventEmitter();
+    @Output() blur: EventEmitter<any> = new EventEmitter();
+    @Output() typing: EventEmitter<any> = new EventEmitter();
+
+    items: Array<any> = [];
+    selected: any = null;
+    config: Object = {};
+    model: any;
+    itemToAdd: any;
     // private data model
-    _value:any = '';
+    _value: any = '';
     _items = new ReplaySubject(1);
     // Placeholders for the callbacks
-    onModelChange:Function = () => {
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
-    constructor(element:ElementRef) {
+    constructor(element: ElementRef) {
         super(element);
         this.element = element;
     }
@@ -256,16 +264,16 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
         this.blur.emit(e);
     }
 
-    writeValue(model:any):void {
+    writeValue(model: any): void {
         this.model = model;
         this.setItems();
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 }

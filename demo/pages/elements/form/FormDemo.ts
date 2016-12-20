@@ -8,11 +8,13 @@ let CheckBoxControlsDemoTpl = require('./templates/CheckBoxControls.html');
 let FileInputControlsDemoTpl = require('./templates/FileInputControls.html');
 let CalendarControlsDemoTpl = require('./templates/CalendarInputControls.html');
 let FieldsetsFormDemoTpl = require('./templates/DynamicFormFieldSets.html');
+let PickerControlsDemoTpl = require('./templates/PickerControls.html');
 import { MockMeta, MockMetaHeaders } from './MockMeta';
 // Vendor
 import {
     FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
-    QuickNoteControl, TilesControl, DateControl, TimeControl, DateTimeControl
+    QuickNoteControl, TilesControl, DateControl, TimeControl, DateTimeControl,
+    PickerControl
 } from './../../../../index';
 
 const template = `
@@ -37,6 +39,10 @@ const template = `
     <h5>Calendar Controls</h5>
     <div class="example form-demo">${CalendarControlsDemoTpl}</div>
     <code-snippet [code]="CalendarControlsDemoTpl"></code-snippet>
+
+    <h5>Picker Controls</h5>
+    <div class="example form-demo">${PickerControlsDemoTpl}</div>
+    <code-snippet [code]="PickerControlsDemoTpl"></code-snippet>
 
     <h2>Dynamic Form</h2>
     <p>Dynamic forms are composed of one element, <code>&lt;novo-dynamic-form [controls]="controls"/&gt;</code> and allow you to pass in the controls and form and it will create the form for you.</p>
@@ -67,6 +73,7 @@ export class FormDemoComponent {
     private FileInputControlsDemoTpl: string = FileInputControlsDemoTpl;
     private CalendarControlsDemoTpl: string = CalendarControlsDemoTpl;
     private FieldsetsFormDemoTpl: string = FieldsetsFormDemoTpl;
+    private PickerControlsDemoTpl: string = PickerControlsDemoTpl;
     private quickNoteConfig: any;
     private textControl: any;
     private emailControl: any;
@@ -92,7 +99,11 @@ export class FormDemoComponent {
     private dynamicVerticalForm: any;
     private calendarForm: any;
     private fieldsets: Array<any>;
-    private fieldsetsForm:any;
+    private fieldsetsForm: any;
+    private singlePickerControl: any;
+    private multiPickerControl: any;
+    private pickerForm: any;
+
     constructor(private formUtils: FormUtils) {
         // Quick note config
         this.quickNoteConfig = {
@@ -133,6 +144,11 @@ export class FormDemoComponent {
         this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'] });
         this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }] });
         this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl]);
+
+        // Picker controls
+        this.singlePickerControl = new PickerControl({ key: 'singlePicker', label: 'Single', config: { options: ['One', 'Two', 'Three'] } });
+        this.multiPickerControl = new PickerControl({ key: 'multiPicker', label: 'Multiple', multiple: true, config: { options: ['One', 'Two', 'Three'], type: 'candidate' } });
+        this.pickerForm = formUtils.toFormGroup([this.singlePickerControl, this.multiPickerControl]);
 
         // File input controls
         this.fileControl = new FileControl({ key: 'file', name: 'myfile', label: 'File' });
