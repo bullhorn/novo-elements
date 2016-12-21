@@ -1,3 +1,13 @@
+<a name="2.0.29"></a>
+## [2.0.29](https://github.com/bullhorn/novo-elements/compare/v2.0.28...v2.0.29) (2016-12-21)
+
+
+### Bug Fixes
+
+* **form:** Fixing initial value setters ([b4c78fd](https://github.com/bullhorn/novo-elements/commit/b4c78fd))
+
+
+
 <a name="2.0.28"></a>
 ## [2.0.28](https://github.com/bullhorn/novo-elements/compare/v2.0.27...v2.0.28) (2016-12-21)
 
