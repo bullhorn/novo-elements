@@ -1,3 +1,13 @@
+<a name="2.0.30"></a>
+## [2.0.30](https://github.com/bullhorn/novo-elements/compare/v2.0.29...v2.0.30) (2016-12-21)
+
+
+### Bug Fixes
+
+* **picker:** fix showing error if the term was empty ([31791a7](https://github.com/bullhorn/novo-elements/commit/31791a7))
+
+
+
 <a name="2.0.29"></a>
 ## [2.0.29](https://github.com/bullhorn/novo-elements/compare/v2.0.28...v2.0.29) (2016-12-21)
 
