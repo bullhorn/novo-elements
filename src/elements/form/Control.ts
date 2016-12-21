@@ -35,7 +35,7 @@ import { Helpers } from './../../utils/Helpers';
                     <!--TODO prefix/suffix on the control-->
                     <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'">
                         <input *ngIf="control.type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)">
-                        <input *ngIf="control.type === 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any">
+                        <input *ngIf="control.type === 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (keypress)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any">
                         <label class="input-label" *ngIf="control.subType === 'currency'">{{control.currencyFormat}}</label>
                         <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
                     </div>
@@ -235,6 +235,17 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
             this._focused = false;
         }
         this.change.emit(value);
+    }
+
+    restrictKeys(event) {
+        const NUMBERS_ONLY = /[0-9]/;
+        const NUMBERS_WITH_DECIMAL = /[0-9\.]/;
+        let key = String.fromCharCode(event.charCode);
+        if (this.control.subType === 'number' && !NUMBERS_ONLY.test(key)) {
+            event.preventDefault();
+        } else if (~['currency', 'float', 'percentage'].indexOf(this.control.subType) && !NUMBERS_WITH_DECIMAL.test(key)) {
+            event.preventDefault();
+        }
     }
 
     emitChange(value) {
