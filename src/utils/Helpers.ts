@@ -47,7 +47,7 @@ export class Helpers {
      * Checks to see if the object is a undefined or null
      */
     static isEmpty(obj: any): boolean {
-        return Helpers.isBlank(obj) || obj === '';
+        return Helpers.isBlank(obj) || obj === '' || (Array.isArray(obj) && obj.length === 0);
     }
 
     /**

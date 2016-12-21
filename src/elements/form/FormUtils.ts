@@ -26,7 +26,7 @@ import { NovoFieldset } from './DynamicForm';
 @Injectable()
 export class FormUtils {
     toFormGroup(controls) {
-        let group:any = {};
+        let group: any = {};
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
             group[control.key] = new FormControl(value, control.validators, control.asyncValidators);
@@ -34,7 +34,7 @@ export class FormUtils {
         return new FormGroup(group);
     }
 
-    toFormGroupFromFieldset(fieldsets:Array<NovoFieldset>) {
+    toFormGroupFromFieldset(fieldsets: Array<NovoFieldset>) {
         let controls = [];
         fieldsets.forEach(fieldset => {
             controls.push(...fieldset.controls);
@@ -112,7 +112,7 @@ export class FormUtils {
     getControlForField(field, http, config) {
         let type = this.determineInputType(field) || field.type;
         let control;
-        let controlConfig:NovoControlConfig = {
+        let controlConfig: NovoControlConfig = {
             type: type,
             key: field.name,
             label: field.label,
@@ -235,7 +235,7 @@ export class FormUtils {
     }
 
     toFieldSets(meta, currencyFormat, http, config) {
-        let fieldsets:Array<NovoFieldset> = [];
+        let fieldsets: Array<NovoFieldset> = [];
         let ranges = [];
         if (meta && meta.fields) {
             meta.fields.sort(Helpers.sortByField('sortOrder'));
@@ -245,7 +245,7 @@ export class FormUtils {
                     if (item.enabled) {
                         if (item.sortOrder > 0 && fieldsets.length === 0) {
                             fieldsets.push({
-                                controls:[]
+                                controls: []
                             });
                             ranges.push({
                                 min: 0,
@@ -260,7 +260,7 @@ export class FormUtils {
                         ranges.push({
                             min: item.sortOrder,
                             max: Number.MAX_SAFE_INTEGER,
-                            fieldsetIdx:fieldsets.length - 1
+                            fieldsetIdx: fieldsets.length - 1
                         });
                         if (i > 0 && fieldsets.length > 1) {
                             ranges[fieldsets.length - 2].max = item.sortOrder - 1;
@@ -269,7 +269,7 @@ export class FormUtils {
                 });
             } else {
                 fieldsets.push({
-                    controls:[]
+                    controls: []
                 });
                 ranges.push({
                     min: 0,
@@ -342,28 +342,41 @@ export class FormUtils {
         return null;
     }
 
-    setInitialValues(controls:Array<NovoControlConfig>, values, keepClean = false) {
-        controls.forEach(control => {
-            if (!Helpers.isBlank(values[control.key]) && values[control.key].length !== 0) {
-                control.value = values[control.key];
-                control.dirty = !keepClean;
+    setInitialValues(controls: Array<NovoControlConfig>, values, keepClean = false) {
+        for (let i = 0; i < controls.length; i++) {
+            let control = controls[i];
+            let value = values[control.key];
+
+            if (Helpers.isBlank(value)) {
+                continue;
             }
-        });
+
+            if (Array.isArray(value) && value.length === 0) {
+                continue;
+            }
+
+            if (value.data && value.data.length === 0) {
+                continue;
+            }
+
+            control.value = values[control.key];
+            control.dirty = !keepClean;
+        }
     }
 
-    setInitialValuesFieldsets(fieldsets:Array<NovoFieldset>, values, keepClean = false) {
+    setInitialValuesFieldsets(fieldsets: Array<NovoFieldset>, values, keepClean = false) {
         fieldsets.forEach(fieldset => {
             this.setInitialValues(fieldset.controls, values, keepClean);
         });
     }
 
-    forceShowAllControls(controls:Array<NovoControlConfig>) {
+    forceShowAllControls(controls: Array<NovoControlConfig>) {
         controls.forEach(control => {
             control.hidden = false;
         });
     }
 
-    forceShowAllControlsInFieldsets(fieldsets:Array<NovoFieldset>) {
+    forceShowAllControlsInFieldsets(fieldsets: Array<NovoFieldset>) {
         fieldsets.forEach(fieldset => {
             fieldset.controls.forEach(control => {
                 control.hidden = false;

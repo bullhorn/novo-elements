@@ -171,7 +171,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     get hasValue() {
-        return !Helpers.isEmpty(this.form.value[this.control.key]) || (Array.isArray(this.form.value[this.control.key]) && this.form.value[this.control.key].length !== 0);
+        return !Helpers.isEmpty(this.form.value[this.control.key]);
     }
 
     get focused() {

@@ -39,12 +39,15 @@ entity-chips {
         span {
             color: darken(#eee, 45%);
             vertical-align: middle;
-            max-width: 120px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
             display: flex;
             align-items: center;
+            span {
+                max-width: 120px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                display: block;
+            }
             i {
                 font-size: 0.8em;
                 &:before {

@@ -20,7 +20,7 @@ const CHIPS_VALUE_ACCESSOR = {
     template: `
         <span (click)="onSelect($event)" [ngClass]="_type">
             <i *ngIf="_type" class="bhi-circle"></i>
-            <ng-content></ng-content>
+            <span><ng-content></ng-content></span>
         </span>
         <i class="bhi-close" (click)="onRemove($event)"></i>
   `
