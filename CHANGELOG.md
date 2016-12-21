@@ -1,3 +1,13 @@
+<a name="2.0.28"></a>
+## [2.0.28](https://github.com/bullhorn/novo-elements/compare/v2.0.27...v2.0.28) (2016-12-21)
+
+
+### Bug Fixes
+
+* **form:** Fixing number inputs to not allow decimals but still allow for percentage/currency/float ([a021a08](https://github.com/bullhorn/novo-elements/commit/a021a08))
+
+
+
 <a name="2.0.27"></a>
 ## [2.0.27](https://github.com/bullhorn/novo-elements/compare/v2.0.26...v2.0.27) (2016-12-20)
 
