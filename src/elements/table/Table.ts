@@ -1,3 +1,4 @@
+import * as console from 'console';
 // Vendor
 import { Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
 // APP
@@ -112,7 +113,7 @@ export class NovoTableHeaderElement {
             <tbody *ngIf="rows.length > 0">
                 <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage" data-automation-id="table-selection-row">
                     <td colspan="100%">
-                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(rows.length)}}</a>
+                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(dataProvider.total)}}</a>
                     </td>
                 </tr>
                 <template ngFor let-row="$implicit" [ngForOf]="rows">
@@ -533,12 +534,12 @@ export class NovoTableElement implements DoCheck {
             for (let row of this.pagedData) {
                 row._selected = this.master;
             }
-            this.selected = this.rows.filter(r => r._selected);
+            this.selected = this.dataProvider.list.filter(r => r._selected);
             this.pageSelected = this.pagedData.filter(r => r._selected);
             this.emitSelected(this.selected);
             // Only show the select all message when there is only one new page selected at a time
             this.selectedPageCount++;
-            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.rows.length;
+            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.dataProvider.length;
         }
     }
 
@@ -548,10 +549,10 @@ export class NovoTableElement implements DoCheck {
     selectAll(value) {
         this.master = value;
         this.indeterminate = false;
-        for (let row of this.rows) {
+        for (let row of this.dataProvider.list) {
             row._selected = value;
         }
-        this.selected = value ? this.rows : [];
+        this.selected = value ? this.dataProvider.list : [];
         this.showSelectAllMessage = false;
         this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
         this.rowSelectHandler();
@@ -563,7 +564,7 @@ export class NovoTableElement implements DoCheck {
     rowSelectHandler() {
         //this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
         this.pageSelected = this.pagedData.filter(r => r._selected);
-        this.selected = this.rows.filter(r => r._selected);
+        this.selected = this.dataProvider.list.filter(r => r._selected);
         if (this.pageSelected.length === 0) {
             this.master = false;
             this.indeterminate = false;
