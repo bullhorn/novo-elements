@@ -56,7 +56,6 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         // Update state
         this.model.state = undefined;
         this.updateControl();
-        console.log('country changed?', this.model);
     }
 
     onStateChange(evt) {
@@ -96,7 +95,6 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
                 this.model = Object.assign(model, { countryName: countryName, state: stateObj.name });
             }
         }
-        console.log('value', this.model);
     }
 
     registerOnChange(fn:Function):void {
