@@ -34,8 +34,9 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     };
 
     ngOnInit() {
-        if (this.model && this.model.countryName) {
-            this.model.countryName = this.model.countryName.trim();
+        if (this.model) {
+            // this.model.countryName = this.model.countryName.trim();
+            this.writeValue(this.model);
             this.updateStates();
             this.updateControl();
         } else if (!this.model) {
@@ -92,6 +93,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
                     return state.code === model.state.replace(/\W+/g, '').toUpperCase() || state.name === model.state;
                 }) || {};
                 this.model = Object.assign(model, { countryName: countryName, state: stateObj.name });
+                this.updateStates();
             }
         }
     }
