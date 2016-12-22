@@ -1,3 +1,13 @@
+<a name="2.0.31"></a>
+## [2.0.31](https://github.com/bullhorn/novo-elements/compare/v2.0.30...v2.0.31) (2016-12-22)
+
+
+### Bug Fixes
+
+* **Table:** SelectAll functionality has been fixed ([#301](https://github.com/bullhorn/novo-elements/issues/301)) ([78d9006](https://github.com/bullhorn/novo-elements/commit/78d9006))
+
+
+
 <a name="2.0.30"></a>
 ## [2.0.30](https://github.com/bullhorn/novo-elements/compare/v2.0.29...v2.0.30) (2016-12-21)
 
