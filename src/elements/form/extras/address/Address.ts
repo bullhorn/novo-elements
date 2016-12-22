@@ -34,7 +34,6 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     };
 
     ngOnInit() {
-        console.log('init,', this.model);
         if (this.model && this.model.countryName) {
             this.model.countryName = this.model.countryName.trim();
             this.updateStates();
