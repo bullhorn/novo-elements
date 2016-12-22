@@ -278,10 +278,11 @@ export class FormUtils {
                 });
             }
             let fields = meta.fields;
+
             fields.forEach(field => {
                 if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
                     if (!field.hasOwnProperty('sortOrder')) {
-                        field.sortOrder = 0;
+                        field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
                     }
                     let control = this.getControlForField(field, http, config);
                     // Set currency format
@@ -289,7 +290,7 @@ export class FormUtils {
                         control.currencyFormat = currencyFormat;
                     }
                     let location = ranges.find(item => {
-                        return (item.min <= field.sortOrder && field.sortOrder < item.max);
+                        return (item.min <= field.sortOrder && field.sortOrder < item.max) || (item.min <= field.sortOrder && item.min === item.max);
                     });
                     if (location) {
                         // Add to controls

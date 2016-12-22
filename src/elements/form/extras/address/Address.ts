@@ -34,16 +34,14 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     };
 
     ngOnInit() {
-        if (!this.model) {
-            this.model = {
-                countryID: 1,
-                countryName: 'United States'
-            };
-        } else if (this.model.countryName) {
+        console.log('init,', this.model);
+        if (this.model && this.model.countryName) {
             this.model.countryName = this.model.countryName.trim();
+            this.updateStates();
+            this.updateControl();
+        } else if (!this.model) {
+            this.model = {};
         }
-        this.updateControl();
-        this.updateStates();
     }
 
     onCountryChange(evt) {
@@ -58,6 +56,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         // Update state
         this.model.state = undefined;
         this.updateControl();
+        console.log('country changed?', this.model);
     }
 
     onStateChange(evt) {
@@ -78,26 +77,26 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     }
 
     writeValue(model:any):void {
-        if (!model) {
-            this.model = {
-                countryID: 1,
-                countryName: 'United States'
-            };
-        } else {
-            let countryName = model.countryName;
-            if (!countryName) {
+        if (model) {
+            let countryName;
+            if (model.countryName) {
+                countryName = model.countryName;
+            } else if (model.countryID) {
                 let country:any = findByCountryId(model.countryID);
-                countryName = country ? country.name : 'United States';
+                if (country) {
+                    countryName = country.name;
+                };
             }
             if (countryName) {
                 countryName = countryName.trim();
+                model.state = model.state || '';
+                let stateObj:any = getStateObjects(countryName).find(state => {
+                    return state.code === model.state.replace(/\W+/g, '').toUpperCase() || state.name === model.state;
+                }) || {};
+                this.model = Object.assign(model, { countryName: countryName, state: stateObj.name });
             }
-            model.state = model.state || '';
-            let stateObj:any = getStateObjects(countryName).find(state => {
-                return state.code === model.state.replace(/\W+/g, '').toUpperCase() || state.name === model.state;
-            }) || {};
-            this.model = Object.assign(model, { countryName: countryName, state: stateObj.name });
         }
+        console.log('value', this.model);
     }
 
     registerOnChange(fn:Function):void {
