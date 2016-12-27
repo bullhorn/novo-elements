@@ -354,6 +354,21 @@ $table-border-color: #f5f5f5; // Tables
         text-transform: uppercase;
     }
 
+    .table-error-message {
+        color: $grey;
+        margin: 40px 0;
+        vertical-align: middle;
+        text-transform: uppercase;
+    }
+
+    .table-loading {
+        display: flex;
+        vertical-align: middle;
+        align-items: center;
+        justify-content: center;
+    }
+
+
     novo-checkbox {
         .check-box-group {
             color: $grey;

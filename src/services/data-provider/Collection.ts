@@ -11,6 +11,9 @@ export interface Collection<T> {
     filter:any;
     sort:Array<any>;
 
+    isEmpty():boolean;
+    hasErrors():boolean;
+
     /**
      *  Adds the specified item to the end of the list.
      *  Equivalent to <code>addItemAt(item, length)</code>.

@@ -8,6 +8,7 @@ export class NovoLabelService {
     filters = 'Filter';
     clear = 'Clear';
     emptyTableMessage = 'No Matching Records';
+    erroredTableMessage = 'Oops! An error occurred.';
     pickerError = 'Oops! An error occurred.';
     pickerEmpty = 'No results to display...';
     quickNoteError = 'Oops! An error occurred.';
