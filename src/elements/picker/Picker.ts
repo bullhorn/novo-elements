@@ -78,6 +78,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
             if (!active) {
                 setTimeout(() => {
                     this.hideResults();
+                    this.term = '';
                     this.blur.emit();
                 });
             }
@@ -220,14 +221,9 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     }
 
     // Set touched on blur
-    onTouched(event?: any) {
-        this.blur.emit(event);
+    onTouched(event?: Event) {
         this.onModelTouched();
-
-        // If we don't have a value then clear the text in the picker
-        if (!this._value) {
-            this.term = '';
-        }
+        this.blur.emit(event);
     }
 
     // From ControlValueAccessor interface

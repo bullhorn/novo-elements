@@ -175,7 +175,7 @@ export class NovoTableHeaderElement {
     `
 })
 export class NovoTableElement implements DoCheck {
-    @Input() config:any;
+    @Input() config:any = {};
     @Input() columns:Array<any>;
     @Input() theme:string;
     @Input() skipSortAndFilterClear:boolean = false;
