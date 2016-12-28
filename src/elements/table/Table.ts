@@ -28,7 +28,7 @@ export class NovoTableHeaderElement {
         '[attr.theme]': 'theme'
     },
     template: `
-        <header>
+        <header *ngIf="!dataProvider.isEmpty()">
             <ng-content select="novo-table-header"></ng-content>
             <div class="header-actions">
                 <novo-pagination *ngIf="config.paging"
@@ -43,7 +43,7 @@ export class NovoTableHeaderElement {
         </header>
         <div class="table-container">
             <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
-            <thead>
+            <thead *ngIf="!dataProvider.isEmpty()">
                 <tr role="row">
                     <!-- DETAILS -->
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
@@ -110,7 +110,7 @@ export class NovoTableHeaderElement {
                 </tr>
             </thead>
             <!-- TABLE DATA -->
-            <tbody *ngIf="rows.length > 0">
+            <tbody *ngIf="!dataProvider.isEmpty()">
                 <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage" data-automation-id="table-selection-row">
                     <td colspan="100%">
                         {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(dataProvider.total)}}</a>
@@ -138,17 +138,40 @@ export class NovoTableHeaderElement {
                 </template>
             </tbody>
             <!-- NO TABLE DATA PLACEHOLDER -->
-            <tbody *ngIf="rows.length === 0" data-automation-id="empty-table">
+            <tbody class="table-message" *ngIf="dataProvider.isEmpty()" data-automation-id="empty-table">
                 <tr>
                     <td colspan="100%">
-                        <div class="no-matching-records">
+                        <div #emptymessage><ng-content select="[table-empty-message]"></ng-content></div>
+                        <div class="no-matching-records" *ngIf="emptymessage.childNodes.length == 0">
                             <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
                         </div>
                     </td>
                 </tr>
             </tbody>
+            <!-- TABLE DATA ERROR PLACEHOLDER -->
+            <tbody class="table-message" *ngIf="dataProvider.hasErrors()" data-automation-id="table-errors">
+                <tr>
+                    <td colspan="100%">
+                        <div #errormessage><ng-content select="[table-error-message]"></ng-content></div>
+                        <div class="table-error-message" *ngIf="errormessage.childNodes.length == 0">
+                            <h4><i class="bhi-caution"></i> {{ labels.erroredTableMessage }}</h4>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- TABLE LOADING PLACEHOLDER -->
+            <tbody *ngIf="dataProvider.isLoading()" data-automation-id="table-loading">
+                <tr>
+                    <td colspan="100%">
+                        <div #loader><ng-content select="[table-loader]"></ng-content></div>
+                        <div class="table-loading" *ngIf="loader.childNodes.length == 0">
+                            <novo-loading></novo-loading>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
-        </div>
+    </div>
     `
 })
 export class NovoTableElement implements DoCheck {

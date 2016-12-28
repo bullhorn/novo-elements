@@ -40,8 +40,20 @@ export class ArrayCollection<T> implements Collection<T> {
         return this.filterData.length;
     }
 
-    get list():Array<T>  {
+    get list():Array<T> {
         return this.filterData;
+    }
+
+    isEmpty():boolean {
+        return this.length <= 0 && !this.isLoading() && !this.hasErrors();
+    }
+
+    hasErrors():boolean {
+        return false;
+    }
+
+    isLoading():boolean {
+        return false;
     }
 
     /**

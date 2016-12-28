@@ -6,13 +6,14 @@ import { CommonModule } from '@angular/common';
 import { NovoButtonModule } from './../button/Button.module';
 import { NovoTooltipModule } from './../tooltip/Tooltip.module';
 import { NovoDropdownModule } from './../dropdown/Dropdown.module';
+import { NovoLoadingModule } from './../loading/Loading.module';
 import { NovoDatePickerModule } from './../date-picker/DatePicker.module';
 import { NovoTableExtrasModule } from './extras/TableExtras.module';
 import { NovoTableActionsElement, NovoTableElement, NovoTableHeaderElement } from './Table';
 import { NovoFormExtrasModule } from './../form/extras/FormExtras.module';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, NovoTableExtrasModule, NovoButtonModule, NovoTooltipModule, NovoDropdownModule, NovoDatePickerModule, NovoFormExtrasModule],
+    imports: [CommonModule, FormsModule, NovoTableExtrasModule, NovoButtonModule, NovoTooltipModule, NovoDropdownModule, NovoLoadingModule, NovoDatePickerModule, NovoFormExtrasModule],
     declarations: [NovoTableActionsElement, NovoTableElement, NovoTableHeaderElement],
     exports: [NovoTableActionsElement, NovoTableElement, NovoTableHeaderElement]
 })
