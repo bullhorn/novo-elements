@@ -152,7 +152,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
             let noLabels = [];
             for (let value of this.model) {
                 let label;
-                if (this.source && this.source.format) {
+                if (this.source && this.source.format && Helpers.validateInterpolationProps(this.source.format, value)) {
                     label = Helpers.interpolate(this.source.format, value);
                 }
                 if (this.source && label && label !== this.source.format) {

@@ -29,6 +29,19 @@ export class Helpers {
     }
 
     /**
+     * Verifies that an object has every property expected by a string to interpolate
+     * @param  {String} str   The string to interpolate
+     * @param  {Object} props The params to replace in string.
+     * @return {Boolean}
+     */
+    static validateInterpolationProps(str, props) {
+        let keys = str.match(/\$([\w\.]+)/g);
+        return keys.every(key => {
+            return props.hasOwnProperty(key.substr(1));
+        });
+    }
+
+    /**
      * Checks to see if the object is a string
      */
     static isString(obj: any) {
