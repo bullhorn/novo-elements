@@ -28,7 +28,7 @@ export class NovoTableHeaderElement {
         '[attr.theme]': 'theme'
     },
     template: `
-        <header *ngIf="!dataProvider.isEmpty()">
+        <header *ngIf="columns.length">
             <ng-content select="novo-table-header"></ng-content>
             <div class="header-actions">
                 <novo-pagination *ngIf="config.paging"
@@ -43,7 +43,7 @@ export class NovoTableHeaderElement {
         </header>
         <div class="table-container">
             <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
-            <thead *ngIf="!dataProvider.isEmpty()">
+            <thead *ngIf="columns.length">
                 <tr role="row">
                     <!-- DETAILS -->
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
@@ -111,7 +111,7 @@ export class NovoTableHeaderElement {
             </thead>
             <!-- TABLE DATA -->
             <tbody *ngIf="!dataProvider.isEmpty()">
-                <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage" data-automation-id="table-selection-row">
+                <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage && config.selectAllEnabled" data-automation-id="table-selection-row">
                     <td colspan="100%">
                         {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(dataProvider.total)}}</a>
                     </td>
@@ -160,7 +160,7 @@ export class NovoTableHeaderElement {
                 </tr>
             </tbody>
             <!-- TABLE LOADING PLACEHOLDER -->
-            <tbody *ngIf="dataProvider.isLoading()" data-automation-id="table-loading">
+            <tbody class="table-message" *ngIf="dataProvider.isLoading()" data-automation-id="table-loading">
                 <tr>
                     <td colspan="100%">
                         <div #loader><ng-content select="[table-loader]"></ng-content></div>
@@ -175,7 +175,7 @@ export class NovoTableHeaderElement {
     `
 })
 export class NovoTableElement implements DoCheck {
-    @Input() config:any;
+    @Input() config:any = {};
     @Input() columns:Array<any>;
     @Input() theme:string;
     @Input() skipSortAndFilterClear:boolean = false;

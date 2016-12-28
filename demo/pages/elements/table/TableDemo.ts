@@ -234,6 +234,7 @@ export class TableDemoComponent implements OnInit {
                 filtering: true,
                 ordering: true,
                 resizing: true,
+                selectAllEnabled: true,
                 rowSelectionStyle: 'checkbox'
             }
         };
