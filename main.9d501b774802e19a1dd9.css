@@ -8219,6 +8219,8 @@ novo-table {
               color: #9b9b9b; }
   .table > tbody + tbody {
     border-top: 1px solid rgba(0, 0, 0, 0.12); }
+  .table .table-message tr, .table .table-message td {
+    background-color: #ffffff !important; }
   .table .table {
     background-color: #fff; }
   .table .row-action {
@@ -8232,6 +8234,19 @@ novo-table {
     margin: 40px 0;
     vertical-align: middle;
     text-transform: uppercase; }
+  .table .table-error-message {
+    color: #999999;
+    margin: 40px 0;
+    vertical-align: middle;
+    text-transform: uppercase; }
+  .table .table-loading {
+    display: -ms-flexbox;
+    display: flex;
+    vertical-align: middle;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center; }
   .table novo-checkbox .check-box-group, .table multi-picker .check-box-group {
     color: #999999;
     margin-right: 0; }
@@ -11306,72 +11321,72 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 39px;
-      height: 39px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 38px;
-      height: 38px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 45px;
-      height: 45px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
       width: 45px;
       height: 45px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 32px;
-      height: 32px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-submission {
-      background: #747884;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
       width: 39px;
       height: 39px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-submission {
+      background: #747884;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 28px;
+      height: 28px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
-      width: 33px;
-      height: 33px; }
+      width: 28px;
+      height: 28px; }
     color header .background-boxes .bb-note {
       background: #747884;
-      width: 31px;
-      height: 31px; }
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-task {
       background: #747884;
-      width: 44px;
-      height: 44px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-aqua {
       background: #3BAFDA;
-      width: 26px;
-      height: 26px; }
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-ocean {
       background: #4A89DC;
-      width: 45px;
-      height: 45px; }
+      width: 41px;
+      height: 41px; }
     color header .background-boxes .bb-mint {
       background: #37BC9B;
-      width: 38px;
-      height: 38px; }
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-grass {
       background: #8CC152;
-      width: 45px;
-      height: 45px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-sunflower {
       background: #F6B042;
-      width: 36px;
-      height: 36px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
       width: 32px;
@@ -11382,12 +11397,12 @@ color header {
       height: 38px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 45px;
-      height: 45px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 29px;
-      height: 29px; }
+      width: 34px;
+      height: 34px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -12286,4 +12301,4 @@ category-dropdown-demo div.example {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.b0253cd1c0c78dbebfce.bundle.map*/
+/*# sourceMappingURL=main.9d501b774802e19a1dd9.bundle.map*/
