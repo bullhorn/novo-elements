@@ -78,7 +78,6 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
             if (!active) {
                 setTimeout(() => {
                     this.hideResults();
-                    this.term = '';
                     this.blur.emit();
                 });
             }
