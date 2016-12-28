@@ -28,7 +28,7 @@ export class NovoTableHeaderElement {
         '[attr.theme]': 'theme'
     },
     template: `
-        <header>
+        <header *ngIf="!dataProvider.isEmpty()">
             <ng-content select="novo-table-header"></ng-content>
             <div class="header-actions">
                 <novo-pagination *ngIf="config.paging"
@@ -43,7 +43,7 @@ export class NovoTableHeaderElement {
         </header>
         <div class="table-container">
             <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
-            <thead>
+            <thead *ngIf="!dataProvider.isEmpty()">
                 <tr role="row">
                     <!-- DETAILS -->
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
@@ -138,7 +138,7 @@ export class NovoTableHeaderElement {
                 </template>
             </tbody>
             <!-- NO TABLE DATA PLACEHOLDER -->
-            <tbody *ngIf="dataProvider.isEmpty()" data-automation-id="empty-table">
+            <tbody class="table-message" *ngIf="dataProvider.isEmpty()" data-automation-id="empty-table">
                 <tr>
                     <td colspan="100%">
                         <div #emptymessage><ng-content select="[table-empty-message]"></ng-content></div>
@@ -149,7 +149,7 @@ export class NovoTableHeaderElement {
                 </tr>
             </tbody>
             <!-- TABLE DATA ERROR PLACEHOLDER -->
-            <tbody *ngIf="dataProvider.hasErrors()" data-automation-id="table-errors">
+            <tbody class="table-message" *ngIf="dataProvider.hasErrors()" data-automation-id="table-errors">
                 <tr>
                     <td colspan="100%">
                         <div #errormessage><ng-content select="[table-error-message]"></ng-content></div>
