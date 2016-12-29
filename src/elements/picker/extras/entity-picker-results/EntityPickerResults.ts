@@ -108,17 +108,6 @@ export class EntityPickerResults extends BasePickerResults {
         return timestamp;
     }
 
-    preselected(match) {
-        return this.selected.findIndex(item => {
-            let isPreselected = false;
-            if (item && item.value && match && match.value) {
-                isPreselected = item.value.id === match.value.id;
-            }
-
-            return isPreselected;
-        }) !== -1;
-    }
-
     getNameForResult(result?: any) {
         if (result) {
             switch (result.searchEntity) {

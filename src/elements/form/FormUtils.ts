@@ -360,6 +360,10 @@ export class FormUtils {
                 continue;
             }
 
+            if (Object.keys(value).length === 0 && value.constructor === Object) {
+                continue;
+            }
+
             control.value = values[control.key];
             control.dirty = !keepClean;
         }

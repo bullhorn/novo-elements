@@ -234,9 +234,12 @@ export class BasePickerResults {
         return this.selected.findIndex(item => {
             let isPreselected = false;
             if (item && item.value && match && match.value) {
-                isPreselected = item.value.id === match.value.id;
+                if (item.value.id && match.value.id) {
+                    isPreselected = item.value.id === match.value.id;
+                } else {
+                    isPreselected = item.value === match.value;
+                }
             }
-
             return isPreselected;
         }) !== -1;
     }
