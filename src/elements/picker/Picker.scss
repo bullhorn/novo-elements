@@ -119,6 +119,10 @@ quick-note-results {
                 background: lighten($light, 10%);
                 color: darken($light, 45%);
             }
+            &.disabled {
+                opacity: 0.5;
+                pointer-events: none;
+            }
         }
     }
 
@@ -130,6 +134,16 @@ quick-note-results {
 
     &:focus {
         outline: none;
+    }
+}
+
+entity-picker-results {
+    novo-list {
+        background: $white;
+        novo-list-item.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
     }
 }
 

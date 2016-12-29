@@ -54,6 +54,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     @Input() placeholder: string;
     @Input() clearValueOnSelect: boolean;
     @Input() closeOnSelect: boolean = true;
+    @Input() selected: Array<any> = [];
 
     // Emitter for selects
     @Output() select: EventEmitter<any> = new EventEmitter();
@@ -169,11 +170,13 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         if (this.popup) {
             // Update existing list or create the DOM element
             this.popup.instance.term = this.term;
+            this.popup.instance.selected = this.selected;
         } else {
             this.popup = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
             this.popup.instance.parent = this;
             this.popup.instance.config = this.config;
             this.popup.instance.term = this.term;
+            this.popup.instance.selected = this.selected;
         }
     }
 

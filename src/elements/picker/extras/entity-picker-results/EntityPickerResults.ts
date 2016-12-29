@@ -12,7 +12,8 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
             <novo-list-item *ngFor="let match of matches"
             (click)="selectMatch($event)"
             [ngClass]="{active: isActive(match)}"
-            (mouseenter)="selectActive(match)">
+            (mouseenter)="selectActive(match)"
+            [class.disabled]="preselected(match)">
                 <item-header>
                     <item-avatar [icon]="getIconForResult(match.data)"></item-avatar>
                     <item-title>
@@ -105,6 +106,10 @@ export class EntityPickerResults extends BasePickerResults {
             timestamp = this.labels.formatDateWithFormat(date, 'L');
         }
         return timestamp;
+    }
+
+    preselected(match) {
+        return this.selected.findIndex(item => item.data.id === match.data.id) > -1;
     }
 
     getNameForResult(result?: any) {
