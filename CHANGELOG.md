@@ -1,3 +1,165 @@
+<a name="2.0.38"></a>
+## [2.0.38](https://github.com/bullhorn/novo-elements/compare/v2.0.37...v2.0.38) (2016-12-29)
+
+
+### Bug Fixes
+
+* **Chips:** Validate properties before interpolating a label string ([#309](https://github.com/bullhorn/novo-elements/issues/309)) ([0cf78bb](https://github.com/bullhorn/novo-elements/commit/0cf78bb))
+
+
+
+<a name="2.0.37"></a>
+## [2.0.37](https://github.com/bullhorn/novo-elements/compare/v2.0.36...v2.0.37) (2016-12-28)
+
+
+
+<a name="2.0.36"></a>
+## [2.0.36](https://github.com/bullhorn/novo-elements/compare/v2.0.35...v2.0.36) (2016-12-28)
+
+
+### Bug Fixes
+
+* **Table:** Header hid when you filtered to no results. ([#307](https://github.com/bullhorn/novo-elements/issues/307)) ([eb1f751](https://github.com/bullhorn/novo-elements/commit/eb1f751))
+
+
+
+<a name="2.0.35"></a>
+## [2.0.35](https://github.com/bullhorn/novo-elements/compare/v2.0.34...v2.0.35) (2016-12-28)
+
+
+
+<a name="2.0.34"></a>
+## [2.0.34](https://github.com/bullhorn/novo-elements/compare/v2.0.33...v2.0.34) (2016-12-27)
+
+
+
+<a name="2.0.33"></a>
+## [2.0.33](https://github.com/bullhorn/novo-elements/compare/v2.0.32...v2.0.33) (2016-12-23)
+
+
+
+<a name="2.0.32"></a>
+## [2.0.32](https://github.com/bullhorn/novo-elements/compare/v2.0.31...v2.0.32) (2016-12-22)
+
+
+
+<a name="2.0.31"></a>
+## [2.0.31](https://github.com/bullhorn/novo-elements/compare/v2.0.30...v2.0.31) (2016-12-22)
+
+
+### Bug Fixes
+
+* **Table:** SelectAll functionality has been fixed ([#301](https://github.com/bullhorn/novo-elements/issues/301)) ([78d9006](https://github.com/bullhorn/novo-elements/commit/78d9006))
+
+
+
+<a name="2.0.30"></a>
+## [2.0.30](https://github.com/bullhorn/novo-elements/compare/v2.0.29...v2.0.30) (2016-12-21)
+
+
+### Bug Fixes
+
+* **picker:** fix showing error if the term was empty ([31791a7](https://github.com/bullhorn/novo-elements/commit/31791a7))
+
+
+
+<a name="2.0.29"></a>
+## [2.0.29](https://github.com/bullhorn/novo-elements/compare/v2.0.28...v2.0.29) (2016-12-21)
+
+
+### Bug Fixes
+
+* **form:** Fixing initial value setters ([b4c78fd](https://github.com/bullhorn/novo-elements/commit/b4c78fd))
+
+
+
+<a name="2.0.28"></a>
+## [2.0.28](https://github.com/bullhorn/novo-elements/compare/v2.0.27...v2.0.28) (2016-12-21)
+
+
+### Bug Fixes
+
+* **form:** Fixing number inputs to not allow decimals but still allow for percentage/currency/float ([a021a08](https://github.com/bullhorn/novo-elements/commit/a021a08))
+
+
+
+<a name="2.0.27"></a>
+## [2.0.27](https://github.com/bullhorn/novo-elements/compare/v2.0.26...v2.0.27) (2016-12-20)
+
+
+
+<a name="2.0.26"></a>
+## [2.0.26](https://github.com/bullhorn/novo-elements/compare/v2.0.25...v2.0.26) (2016-12-19)
+
+
+### Bug Fixes
+
+* **form:** make address fields show properly ([1390d0f](https://github.com/bullhorn/novo-elements/commit/1390d0f))
+
+
+### Features
+
+* **form:** allowing number fields to have decimals ([7133761](https://github.com/bullhorn/novo-elements/commit/7133761))
+
+
+
+<a name="2.0.25"></a>
+## [2.0.25](https://github.com/bullhorn/novo-elements/compare/v2.0.24...v2.0.25) (2016-12-19)
+
+
+### Bug Fixes
+
+* **forms:** Fixing the form labels and animations ([933abe9](https://github.com/bullhorn/novo-elements/commit/933abe9))
+
+
+
+<a name="2.0.24"></a>
+## [2.0.24](https://github.com/bullhorn/novo-elements/compare/v2.0.23...v2.0.24) (2016-12-16)
+
+
+### Bug Fixes
+
+* **Table:** Fixed the custom Match functions ([f8f4dae](https://github.com/bullhorn/novo-elements/commit/f8f4dae))
+
+
+
+<a name="2.0.23"></a>
+## [2.0.23](https://github.com/bullhorn/novo-elements/compare/v2.0.22...v2.0.23) (2016-12-16)
+
+
+
+<a name="2.0.22"></a>
+## [2.0.22](https://github.com/bullhorn/novo-elements/compare/v2.0.21...v2.0.22) (2016-12-15)
+
+
+### Bug Fixes
+
+* **pagination:** Fix data-provider pagination ([1751783](https://github.com/bullhorn/novo-elements/commit/1751783))
+
+
+
+<a name="2.0.21"></a>
+## [2.0.21](https://github.com/bullhorn/novo-elements/compare/v2.0.20...v2.0.21) (2016-12-15)
+
+
+### Bug Fixes
+
+* **multipicker:** rearrange logic to correctly handle non-strict relationship ([#296](https://github.com/bullhorn/novo-elements/issues/296)) ([5accf75](https://github.com/bullhorn/novo-elements/commit/5accf75))
+
+
+
+<a name="2.0.20"></a>
+## [2.0.20](https://github.com/bullhorn/novo-elements/compare/v2.0.19...v2.0.20) (2016-12-14)
+
+
+### Bug Fixes
+
+* **chips:** Picker results for chips will now stay open when selecting. ([68ca60f](https://github.com/bullhorn/novo-elements/commit/68ca60f))
+* **picker:** Clicking the picker should open the picker ([59ee189](https://github.com/bullhorn/novo-elements/commit/59ee189))
+* **table:** add back in custom sorting/filtering functions ([#293](https://github.com/bullhorn/novo-elements/issues/293)) ([64e3c23](https://github.com/bullhorn/novo-elements/commit/64e3c23))
+
+
+
 <a name="2.0.19"></a>
 ## [2.0.19](https://github.com/bullhorn/novo-elements/compare/v2.0.18...v2.0.19) (2016-12-14)
 

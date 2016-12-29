@@ -328,6 +328,13 @@ $table-border-color: #f5f5f5; // Tables
     > tbody + tbody {
         border-top: 1px solid rgba(0, 0, 0, .12);
     }
+
+    .table-message {
+        tr, td {
+            background-color: $white !important;
+        }
+    }
+
     // Nesting
     .table {
         background-color: $table-bg;
@@ -353,6 +360,22 @@ $table-border-color: #f5f5f5; // Tables
         vertical-align: middle;
         text-transform: uppercase;
     }
+
+    .table-error-message {
+        color: $grey;
+        margin: 40px 0;
+        vertical-align: middle;
+        text-transform: uppercase;
+    }
+
+    .table-loading {
+        display: flex;
+        vertical-align: middle;
+        align-items: center;
+        justify-content: center;
+        background: $white;
+    }
+
 
     novo-checkbox {
         .check-box-group {

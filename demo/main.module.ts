@@ -42,7 +42,7 @@ import {
 import { UtilsDemoComponent } from './pages/utils/utils/UtilsDemo';
 import { PipesDemoComponent } from './pages/utils/pipes/PipesDemo';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
-import { StatusCell, ExtraDetails, ImageCell } from './pages/elements/table/TableDemo';
+import { StatusCell, ExtraDetails, ImageCell, ActionsCell } from './pages/elements/table/TableDemo';
 import { CustomPickerResults } from './pages/elements/picker/PickerDemo';
 import { DemoComponent } from './app/App';
 import { routing } from './app/App.routes';
@@ -92,6 +92,7 @@ import './demo.scss';
         ModalAddDemo,
         ModalEditDemo,
         StatusCell,
+        ActionsCell,
         ExtraDetails,
         ImageCell,
         CustomPickerResults,
@@ -125,6 +126,7 @@ import './demo.scss';
         StatusCell,
         ExtraDetails,
         ImageCell,
+        ActionsCell,
         CustomPickerResults
     ],
     bootstrap: [DemoComponent]

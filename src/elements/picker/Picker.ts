@@ -36,6 +36,7 @@ const PICKER_VALUE_ACCESSOR = {
             [placeholder]="placeholder"
             (keyup)="onKeyUp($event)"
             (focus)="onFocus($event)"
+            (click)="onFocus($event)"
             (blur)="onTouched($event)"
             autocomplete="off" />
         <i class="bhi-search" *ngIf="!_value"></i>
@@ -53,11 +54,13 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     @Input() placeholder: string;
     @Input() clearValueOnSelect: boolean;
     @Input() closeOnSelect: boolean = true;
+    @Input() selected: Array<any> = [];
 
     // Emitter for selects
     @Output() select: EventEmitter<any> = new EventEmitter();
     @Output() focus: EventEmitter<any> = new EventEmitter();
     @Output() blur: EventEmitter<any> = new EventEmitter();
+    @Output() typing: EventEmitter<any> = new EventEmitter();
 
     isStatic: boolean = true;
     term: string = '';
@@ -167,11 +170,13 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         if (this.popup) {
             // Update existing list or create the DOM element
             this.popup.instance.term = this.term;
+            this.popup.instance.selected = this.selected;
         } else {
             this.popup = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
             this.popup.instance.parent = this;
             this.popup.instance.config = this.config;
             this.popup.instance.term = this.term;
+            this.popup.instance.selected = this.selected;
         }
     }
 
@@ -210,6 +215,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
 
     // Makes sure to clear the model if the user clears the text box
     checkTerm(event) {
+        this.typing.emit(event);
         if (!event || !event.length) {
             this._value = null;
             this.onModelChange(this._value);
@@ -217,14 +223,9 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     }
 
     // Set touched on blur
-    onTouched(event?: any) {
-        this.blur.emit(event);
+    onTouched(event?: Event) {
         this.onModelTouched();
-
-        // If we don't have a value then clear the text in the picker
-        if (!this._value) {
-            this.term = '';
-        }
+        this.blur.emit(event);
     }
 
     // From ControlValueAccessor interface

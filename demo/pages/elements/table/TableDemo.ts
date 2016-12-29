@@ -79,28 +79,58 @@ export class ImageCell extends BaseRenderer {
 }
 
 @Component({
+    selector: 'actions-cell',
+    template: `
+        <novo-dropdown>
+            <button type="button" theme="dialogue" icon="collapse">Actions!</button>
+            <list>
+                <item>Item 1</item>
+                <item>Item 2</item>
+                <item>Item 3</item>
+                <item>Item 4</item>
+                <item>Item 5</item>
+                <item>Item 6</item>
+                <item>Item 7</item>
+                <item>Item 8</item>
+                <item>Item 9</item>
+            </list>
+        </novo-dropdown>
+    `
+})
+export class ActionsCell extends BaseRenderer {
+    constructor() {
+        super();
+    }
+
+    getActionContext(data, meta) {
+        return { item: data, meta };
+    }
+}
+
+@Component({
     selector: 'table-demo',
     template: template
 })
 export class TableDemoComponent implements OnInit {
-    private TableDemoTpl:string = TableDemoTpl;
-    private DetailsTableDemoTpl:string = DetailsTableDemoTpl;
-    private SelectAllTableDemoTpl:string = SelectAllTableDemoTpl;
-    private MovieTableDemoTpl:string = MovieTableDemoTpl;
-    private customRowOptions:Array<any> = [
+    private TableDemoTpl: string = TableDemoTpl;
+    private DetailsTableDemoTpl: string = DetailsTableDemoTpl;
+    private SelectAllTableDemoTpl: string = SelectAllTableDemoTpl;
+    private MovieTableDemoTpl: string = MovieTableDemoTpl;
+    private customRowOptions: Array<any> = [
         { label: '10', value: 10 },
         { label: '20', value: 20 },
         { label: '30', value: 30 },
         { label: '40', value: 40 }
     ];
-    private theme:string;
-    private basic:any;
-    private details:any;
-    private selectAll:any;
-    private remote:any;
+    private theme: string;
+    private basic: any;
+    private details: any;
+    private selectAll: any;
+    private remote: any;
 
     constructor() {
         let columns = [
+            { title: 'Actions', renderer: ActionsCell },
             { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true },
             { title: 'Position', name: 'position', ordering: true, filtering: true },
             {
@@ -204,6 +234,7 @@ export class TableDemoComponent implements OnInit {
                 filtering: true,
                 ordering: true,
                 resizing: true,
+                selectAllEnabled: true,
                 rowSelectionStyle: 'checkbox'
             }
         };

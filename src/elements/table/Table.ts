@@ -1,3 +1,4 @@
+import * as console from 'console';
 // Vendor
 import { Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
 // APP
@@ -27,14 +28,14 @@ export class NovoTableHeaderElement {
         '[attr.theme]': 'theme'
     },
     template: `
-        <header>
+        <header *ngIf="columns.length">
             <ng-content select="novo-table-header"></ng-content>
             <div class="header-actions">
                 <novo-pagination *ngIf="config.paging"
-                                 [page]="config.paging.current"
                                  [rowOptions]="config.customRowOptions"
+                                 [(page)]="dataProvider.page"
+                                 [(itemsPerPage)]="dataProvider.pageSize"
                                  [totalItems]="dataProvider.total"
-                                 [itemsPerPage]="config.paging.itemsPerPage"
                                  (onPageChange)="onPageChange($event)">
                 </novo-pagination>
                 <ng-content select="novo-table-actions"></ng-content>
@@ -42,7 +43,7 @@ export class NovoTableHeaderElement {
         </header>
         <div class="table-container">
             <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
-            <thead>
+            <thead *ngIf="columns.length">
                 <tr role="row">
                     <!-- DETAILS -->
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
@@ -109,10 +110,10 @@ export class NovoTableHeaderElement {
                 </tr>
             </thead>
             <!-- TABLE DATA -->
-            <tbody *ngIf="rows.length > 0">
-                <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage" data-automation-id="table-selection-row">
+            <tbody *ngIf="!dataProvider.isEmpty()">
+                <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage && config.selectAllEnabled" data-automation-id="table-selection-row">
                     <td colspan="100%">
-                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(rows.length)}}</a>
+                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(dataProvider.total)}}</a>
                     </td>
                 </tr>
                 <template ngFor let-row="$implicit" [ngForOf]="rows">
@@ -137,21 +138,44 @@ export class NovoTableHeaderElement {
                 </template>
             </tbody>
             <!-- NO TABLE DATA PLACEHOLDER -->
-            <tbody *ngIf="rows.length === 0" data-automation-id="empty-table">
+            <tbody class="table-message" *ngIf="dataProvider.isEmpty()" data-automation-id="empty-table">
                 <tr>
                     <td colspan="100%">
-                        <div class="no-matching-records">
+                        <div #emptymessage><ng-content select="[table-empty-message]"></ng-content></div>
+                        <div class="no-matching-records" *ngIf="emptymessage.childNodes.length == 0">
                             <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
                         </div>
                     </td>
                 </tr>
             </tbody>
+            <!-- TABLE DATA ERROR PLACEHOLDER -->
+            <tbody class="table-message" *ngIf="dataProvider.hasErrors()" data-automation-id="table-errors">
+                <tr>
+                    <td colspan="100%">
+                        <div #errormessage><ng-content select="[table-error-message]"></ng-content></div>
+                        <div class="table-error-message" *ngIf="errormessage.childNodes.length == 0">
+                            <h4><i class="bhi-caution"></i> {{ labels.erroredTableMessage }}</h4>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- TABLE LOADING PLACEHOLDER -->
+            <tbody class="table-message" *ngIf="dataProvider.isLoading()" data-automation-id="table-loading">
+                <tr>
+                    <td colspan="100%">
+                        <div #loader><ng-content select="[table-loader]"></ng-content></div>
+                        <div class="table-loading" *ngIf="loader.childNodes.length == 0">
+                            <novo-loading></novo-loading>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
-        </div>
+    </div>
     `
 })
 export class NovoTableElement implements DoCheck {
-    @Input() config:any;
+    @Input() config:any = {};
     @Input() columns:Array<any>;
     @Input() theme:string;
     @Input() skipSortAndFilterClear:boolean = false;
@@ -219,8 +243,8 @@ export class NovoTableElement implements DoCheck {
     constructor(public labels:NovoLabelService) {}
 
     onPageChange(event) {
-        this.dataProvider.page = event.page;
-        this.dataProvider.pageSize = event.itemsPerPage;
+        //this.dataProvider.page = event.page;
+        //this.dataProvider.pageSize = event.itemsPerPage;
     }
 
     getOptionDataAutomationId(option) {
@@ -364,7 +388,11 @@ export class NovoTableElement implements DoCheck {
             if (filters.length) {
                 let query = {};
                 for (const column of filters) {
-                    if (Array.isArray(column.filter)) {
+                    if (Helpers.isFunction(column.match)) {
+                        query[column.name] = (value, record) => {
+                            return column.match(record, column.filter);
+                        };
+                    } else if (Array.isArray(column.filter)) {
                         // The filters are an array (multi-select), check value
                         if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
                             query[column.name] = column.filter.map(f => {
@@ -389,10 +417,18 @@ export class NovoTableElement implements DoCheck {
                             query[column.name] = { any: options };
                         }
                     } else {
-                        query[column.name] = column.filter;
+                        if ( column.preFilter && Helpers.isFunction(column.preFilter)) {
+                            query = Object.assign({}, query, column.preFilter(column.filter));
+                        } else {
+                            query[column.name] = column.filter;
+                        }
                     }
                 }
-                this._dataProvider.filter = query;
+                if (Helpers.isFunction(this.config.filtering)) {
+                    this.config.filtering(query);
+                } else {
+                    this._dataProvider.filter = query;
+                }
             } else {
                 this._dataProvider.filter = {};
             }
@@ -400,9 +436,9 @@ export class NovoTableElement implements DoCheck {
             // this.onSortChange(this.currentSortColumn);
 
             // If paging, reset page
-            //if (this.config.paging) {
-            this.config.paging.current = 1;
-            //}
+            if (this.config.paging) {
+                this.config.paging.current = 1;
+            }
             // Remove all selection on sort change if selection is on
             if (this.config.rowSelectionStyle === 'checkbox') {
                 this.selectAll(false);
@@ -443,7 +479,13 @@ export class NovoTableElement implements DoCheck {
         this.currentSortColumn = column;
 
         if (column) {
-            this._dataProvider.sort = [{ field: (column.compare || column.name), reverse: column.sort === 'desc' }];
+            if (Helpers.isFunction(this.config.sorting)) {
+                this.config.sorting();
+            } else if (Helpers.isFunction(column.preSort)) {
+                this._dataProvider.sort = [].concat(column.preSort(column));
+            } else {
+                this._dataProvider.sort = [{ field: (column.compare || column.name), reverse: column.sort === 'desc' }];
+            }
         }
 
         // Fire table change event
@@ -515,12 +557,12 @@ export class NovoTableElement implements DoCheck {
             for (let row of this.pagedData) {
                 row._selected = this.master;
             }
-            this.selected = this.rows.filter(r => r._selected);
+            this.selected = this.dataProvider.list.filter(r => r._selected);
             this.pageSelected = this.pagedData.filter(r => r._selected);
             this.emitSelected(this.selected);
             // Only show the select all message when there is only one new page selected at a time
             this.selectedPageCount++;
-            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.rows.length;
+            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.dataProvider.length;
         }
     }
 
@@ -530,10 +572,10 @@ export class NovoTableElement implements DoCheck {
     selectAll(value) {
         this.master = value;
         this.indeterminate = false;
-        for (let row of this.rows) {
+        for (let row of this.dataProvider.list) {
             row._selected = value;
         }
-        this.selected = value ? this.rows : [];
+        this.selected = value ? this.dataProvider.list : [];
         this.showSelectAllMessage = false;
         this.selectedPageCount = this.selectedPageCount > 0 ? this.selectedPageCount - 1 : 0;
         this.rowSelectHandler();
@@ -545,7 +587,7 @@ export class NovoTableElement implements DoCheck {
     rowSelectHandler() {
         //this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
         this.pageSelected = this.pagedData.filter(r => r._selected);
-        this.selected = this.rows.filter(r => r._selected);
+        this.selected = this.dataProvider.list.filter(r => r._selected);
         if (this.pageSelected.length === 0) {
             this.master = false;
             this.indeterminate = false;

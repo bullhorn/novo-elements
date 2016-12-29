@@ -428,8 +428,8 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
                     return x.value !== 'ALL' && x[parentType].filter(y => y === obj.value).length > 0;
                 });
                 if (selectedChildrenOfParent.length > 0) {
-                    if (this.strictRelationship && obj.checked) {
-                        if (allChildrenOfParent.length !== selectedChildrenOfParent.length) {
+                    if (obj.checked) {
+                        if (this.strictRelationship && (allChildrenOfParent.length !== selectedChildrenOfParent.length)) {
                             obj.indeterminate = true;
                             obj.checked = false;
                             this.removeValue(obj);

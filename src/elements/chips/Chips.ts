@@ -18,18 +18,24 @@ const CHIPS_VALUE_ACCESSOR = {
 @Component({
     selector: 'chip',
     template: `
-        <span (click)="onSelect($event)" [ngClass]="type">
-            <i *ngIf="type" class="bhi-circle"></i>
-            <ng-content></ng-content>
+        <span (click)="onSelect($event)" [ngClass]="_type">
+            <i *ngIf="_type" class="bhi-circle"></i>
+            <span><ng-content></ng-content></span>
         </span>
         <i class="bhi-close" (click)="onRemove($event)"></i>
   `
 })
 export class NovoChipElement {
-    @Input() type:any;
-    @Output() select:EventEmitter<any> = new EventEmitter();
-    @Output() remove:EventEmitter<any> = new EventEmitter();
-    entity:string;
+    @Input()
+    set type(type: string) {
+        this._type = type ? type.toLowerCase() : null;
+    }
+
+    @Output() select: EventEmitter<any> = new EventEmitter();
+    @Output() remove: EventEmitter<any> = new EventEmitter();
+
+    entity: string;
+    _type: string;
 
     onRemove(e) {
         if (e) {
@@ -72,7 +78,9 @@ export class NovoChipElement {
                 (select)="add($event)"
                 (keydown)="onKeyDown($event)"
                 (focus)="onFocus($event)"
-                (blur)="onTouched($event)">
+                (typing)="onTyping($event)"
+                (blur)="onTouched($event)"
+                [selected]="items">
             </novo-picker>
         </div>
         <i class="bhi-search"></i>
@@ -84,27 +92,30 @@ export class NovoChipElement {
 })
 export class NovoChipsElement extends OutsideClick implements OnInit {
     @Input() closeOnSelect: boolean = false;
-    @Input() placeholder:string = '';
-    @Input() source:any;
-    @Input() type:any;
-    @Output() changed:EventEmitter<any> = new EventEmitter();
-    @Output() focus:EventEmitter<any> = new EventEmitter();
-    @Output() blur:EventEmitter<any> = new EventEmitter();
-    items:Array<any> = [];
-    selected:any = null;
-    config:Object = {};
-    model:any;
-    itemToAdd:any;
+    @Input() placeholder: string = '';
+    @Input() source: any;
+    @Input() type: any;
+
+    @Output() changed: EventEmitter<any> = new EventEmitter();
+    @Output() focus: EventEmitter<any> = new EventEmitter();
+    @Output() blur: EventEmitter<any> = new EventEmitter();
+    @Output() typing: EventEmitter<any> = new EventEmitter();
+
+    items: Array<any> = [];
+    selected: any = null;
+    config: Object = {};
+    model: any;
+    itemToAdd: any;
     // private data model
-    _value:any = '';
+    _value: any = '';
     _items = new ReplaySubject(1);
     // Placeholders for the callbacks
-    onModelChange:Function = () => {
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
-    constructor(element:ElementRef) {
+    constructor(element: ElementRef) {
         super(element);
         this.element = element;
     }
@@ -142,7 +153,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
             let noLabels = [];
             for (let value of this.model) {
                 let label;
-                if (this.source && this.source.format) {
+                if (this.source && this.source.format && Helpers.validateInterpolationProps(this.source.format, value)) {
                     label = Helpers.interpolate(this.source.format, value);
                 }
                 if (this.source && label && label !== this.source.format) {
@@ -186,6 +197,10 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
         this.blur.emit(event);
         this.deselectAll();
         this.selected = item;
+    }
+
+    onTyping(event?) {
+        this.typing.emit(event);
     }
 
     onFocus(event?) {
@@ -250,16 +265,16 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
         this.blur.emit(e);
     }
 
-    writeValue(model:any):void {
+    writeValue(model: any): void {
         this.model = model;
         this.setItems();
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 }

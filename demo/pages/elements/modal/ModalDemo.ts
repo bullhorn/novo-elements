@@ -8,7 +8,7 @@ let ModalCustomDemoTpl = require('./templates/ModalCustomDemo.html');
 let ModalSuccessDemoTpl = require('./templates/ModalSuccessDemo.html');
 let ModalWarningDemoTpl = require('./templates/ModalWarningDemo.html');
 // Vendor
-import { NovoModalRef, NovoModalService, TextBoxControl, FormUtils } from './../../../../index';
+import { NovoModalRef, NovoModalService, TextBoxControl, PickerControl, PickerResults, FormUtils } from './../../../../index';
 
 const template = `
 <div class="container">
@@ -111,6 +111,7 @@ export class ModalAddDemo implements OnInit {
     private textControl:any;
     private emailControl:any;
     private numberControl:any;
+    private pickerControl:any;
     private textForm:any;
 
     constructor(private modalRef:NovoModalRef, private formUtils:FormUtils) {
@@ -120,7 +121,18 @@ export class ModalAddDemo implements OnInit {
         this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box' });
         this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email' });
         this.numberControl = new TextBoxControl({ type: 'number', key: 'number', label: 'Number' });
-        this.textForm = this.formUtils.toFormGroup([this.textControl, this.emailControl, this.numberControl]);
+        this.pickerControl = new PickerControl({
+            key: 'picker',
+            multiple: false,
+            label: 'Picker',
+            required: true,
+            config: {
+                resultsTemplate: PickerResults,
+                options: ['Apple', 'Banana', 'Grapes', 'Orange', 'Pear']
+            },
+        });
+
+        this.textForm = this.formUtils.toFormGroup([this.textControl, this.emailControl, this.numberControl, this.pickerControl]);
     }
 
     close() {
@@ -136,6 +148,7 @@ export class ModalEditDemo implements OnInit {
     private textControl:any;
     private emailControl:any;
     private numberControl:any;
+    private pickerControl:any;
     private textForm:any;
 
     constructor(private modalRef:NovoModalRef, private formUtils:FormUtils) {
@@ -147,7 +160,18 @@ export class ModalEditDemo implements OnInit {
         this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box' });
         this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email' });
         this.numberControl = new TextBoxControl({ type: 'number', key: 'number', label: 'Number' });
-        this.textForm = this.formUtils.toFormGroup([this.textControl, this.emailControl, this.numberControl]);
+        this.pickerControl = new PickerControl({
+            key: 'picker',
+            multiple: true,
+            label: 'Picker',
+            required: true,
+            config: {
+                resultsTemplate: PickerResults,
+                options: ['Apple', 'Banana', 'Grapes', 'Orange', 'Pear']
+            },
+        });
+
+        this.textForm = this.formUtils.toFormGroup([this.textControl, this.emailControl, this.numberControl, this.pickerControl]);
     }
 
     close() {

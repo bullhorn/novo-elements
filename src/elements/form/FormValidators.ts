@@ -19,7 +19,7 @@ export class FormValidators {
 
     // Makes sure the control value is a valid address
     static isValidAddress(control) {
-        if (control.value) {
+        if (control.value && control.dirty) {
             let valid = true;
             // Address
             if (!control.value.address1 || control.value.address1.length === 0) {
