@@ -55,7 +55,7 @@ import { Helpers } from './../../utils/Helpers';
                     <!--Picker-->
                     <div class="novo-control-input-container" *ngSwitchCase="'picker'">
                         <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple" (select)="modelChange($event);" (typing)="handleTyping($event)"></novo-picker>
-                        <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" (changed)="modelChange($event)" (typing)="handleTyping($event)"></chips>
+                        <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" [closeOnSelect]="control.closeOnSelect" (changed)="modelChange($event)" (typing)="handleTyping($event)"></chips>
                     </div>
                     <!--Novo Select-->
                     <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key"></novo-select>
