@@ -1,3 +1,13 @@
+<a name="2.0.38"></a>
+## [2.0.38](https://github.com/bullhorn/novo-elements/compare/v2.0.37...v2.0.38) (2016-12-29)
+
+
+### Bug Fixes
+
+* **Chips:** Validate properties before interpolating a label string ([#309](https://github.com/bullhorn/novo-elements/issues/309)) ([0cf78bb](https://github.com/bullhorn/novo-elements/commit/0cf78bb))
+
+
+
 <a name="2.0.37"></a>
 ## [2.0.37](https://github.com/bullhorn/novo-elements/compare/v2.0.36...v2.0.37) (2016-12-28)
 
