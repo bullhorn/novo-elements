@@ -1,3 +1,13 @@
+<a name="2.0.39"></a>
+## [2.0.39](https://github.com/bullhorn/novo-elements/compare/v2.0.38...v2.0.39) (2016-12-29)
+
+
+### Bug Fixes
+
+* **chips:** Checking for null and defaulting to false when checking if result has been selected ([#311](https://github.com/bullhorn/novo-elements/issues/311)) ([d64b7cd](https://github.com/bullhorn/novo-elements/commit/d64b7cd))
+
+
+
 <a name="2.0.38"></a>
 ## [2.0.38](https://github.com/bullhorn/novo-elements/compare/v2.0.37...v2.0.38) (2016-12-29)
 
