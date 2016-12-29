@@ -14,6 +14,7 @@ import { Observable } from 'rxjs/Rx';
  */
 export class BasePickerResults {
     _term: string = '';
+    selected: Array<any> = [];
     matches: any = [];
     hasError: boolean = false;
     isLoading: boolean = true;
@@ -228,6 +229,10 @@ export class BasePickerResults {
         // Replaces the capture string with a the same string inside of a "strong" tag
         return query ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
     }
+
+    preselected(match) {
+        return this.selected.findIndex(item => item.value === match.value) > -1;
+    }
 }
 
 @Component({
@@ -243,7 +248,8 @@ export class BasePickerResults {
                 *ngFor="let match of matches"
                 (click)="selectMatch($event)"
                 [class.active]="match===activeMatch"
-                (mouseenter)="selectActive(match)">
+                (mouseenter)="selectActive(match)"
+                [class.disabled]="preselected(match)">
                 <span [innerHtml]="highlight(match.label, term)"></span>
             </li>
         </ul>

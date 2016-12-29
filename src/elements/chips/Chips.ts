@@ -79,7 +79,8 @@ export class NovoChipElement {
                 (keydown)="onKeyDown($event)"
                 (focus)="onFocus($event)"
                 (typing)="onTyping($event)"
-                (blur)="onTouched($event)">
+                (blur)="onTouched($event)"
+                [selected]="items">
             </novo-picker>
         </div>
         <i class="bhi-search"></i>
