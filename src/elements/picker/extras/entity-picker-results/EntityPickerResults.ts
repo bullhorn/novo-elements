@@ -109,7 +109,14 @@ export class EntityPickerResults extends BasePickerResults {
     }
 
     preselected(match) {
-        return this.selected.findIndex(item => item.data.id === match.data.id) > -1;
+        return this.selected.findIndex(item => {
+            let isPreselected = false;
+            if (item && item.value && match && match.value) {
+                isPreselected = item.value.id === match.value.id;
+            }
+
+            return isPreselected;
+        }) !== -1;
     }
 
     getNameForResult(result?: any) {

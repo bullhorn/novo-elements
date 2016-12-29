@@ -231,7 +231,14 @@ export class BasePickerResults {
     }
 
     preselected(match) {
-        return this.selected.findIndex(item => item.value === match.value) > -1;
+        return this.selected.findIndex(item => {
+            let isPreselected = false;
+            if (item && item.value && match && match.value) {
+                isPreselected = item.value.id === match.value.id;
+            }
+
+            return isPreselected;
+        }) !== -1;
     }
 }
 
