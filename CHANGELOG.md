@@ -1,3 +1,13 @@
+<a name="2.0.40"></a>
+## [2.0.40](https://github.com/bullhorn/novo-elements/compare/v2.0.39...v2.0.40) (2016-12-29)
+
+
+### Bug Fixes
+
+* **form:** Empty form state and chip pre-selecting ([1de9f8d](https://github.com/bullhorn/novo-elements/commit/1de9f8d))
+
+
+
 <a name="2.0.39"></a>
 ## [2.0.39](https://github.com/bullhorn/novo-elements/compare/v2.0.38...v2.0.39) (2016-12-29)
 
