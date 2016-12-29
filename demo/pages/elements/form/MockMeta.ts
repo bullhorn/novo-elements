@@ -347,6 +347,38 @@ export const MockMeta = {
             multiValue: true,
             required: true,
             sortOrder: 630
+        },
+        {
+            name: 'attachments',
+            type: 'file',
+            label: 'Attachments',
+            multiValue: true,
+            required: true,
+            sortOrder: 630
+        }, {
+            defaultValue: 'Cold',
+            inputType: 'RADIO',
+            label: 'Types/Ratings',
+            maxLength: 100,
+            multiValue: false,
+            name: 'type',
+            optional: true,
+            options: [
+                {
+                    value: 'Hot',
+                    label: 'Hot'
+                },
+                {
+                    value: 'Cold',
+                    label: 'Cold'
+                },
+                {
+                    value: 'Eh...',
+                    label: 'Eh...'
+                }
+            ],
+            required: true,
+            sortOrder: 9000
         }
     ]
 };
