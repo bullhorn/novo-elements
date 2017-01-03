@@ -356,6 +356,13 @@ export class FormUtils {
                 continue;
             }
 
+            if (Array.isArray(value) && value.length > 0) {
+                value = value.filter(val => !(Object.keys(val).length === 0 && val.constructor === Object));
+                if (value.length === 0) {
+                    continue;
+                }
+            }
+
             if (value.data && value.data.length === 0) {
                 continue;
             }
@@ -364,7 +371,7 @@ export class FormUtils {
                 continue;
             }
 
-            control.value = values[control.key];
+            control.value = value;
             control.dirty = !keepClean;
         }
     }
