@@ -72,7 +72,7 @@ export class NovoTableHeaderElement {
                                             <span>{{ labels.filters }}</span>
                                             <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
-                                        <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.freetextFilter"/>
+                                        <input type="text" *ngIf="showOptionsTextInput(column)" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.freetextFilter"/>
                                     </item>
                                     <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="getOptionDataAutomationId(option)">
                                         {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
@@ -686,5 +686,9 @@ export class NovoTableElement implements DoCheck {
             config.filtering.options = config.filtering.originalOptions;
         }
         this.onFilterChange();
+    }
+
+    showOptionsTextInput(column) {
+        return typeof (column.options[0].value) === 'string';
     }
 }
