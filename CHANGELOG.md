@@ -1,3 +1,13 @@
+<a name="2.0.44"></a>
+## [2.0.44](https://github.com/bullhorn/novo-elements/compare/v2.0.43...v2.0.44) (2017-01-03)
+
+
+### Bug Fixes
+
+* **pickers:** fix for removing empty objects so they do not populate as [object Object] in multi select pickers ([#320](https://github.com/bullhorn/novo-elements/issues/320)) ([fb134e5](https://github.com/bullhorn/novo-elements/commit/fb134e5))
+
+
+
 <a name="2.0.43"></a>
 ## [2.0.43](https://github.com/bullhorn/novo-elements/compare/v2.0.42...v2.0.43) (2016-12-30)
 
