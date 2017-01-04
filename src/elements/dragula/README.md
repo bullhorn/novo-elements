@@ -84,7 +84,7 @@ export class EventExample {
       this.onDrag(value.slice(1));
     });
     dragulaService.drop.subscribe((value) => {
-      console.log(`drop: ${value[0]}`);
+      (`drop: ${value[0]}`);
       this.onDrop(value.slice(1));
     });
     dragulaService.over.subscribe((value) => {
