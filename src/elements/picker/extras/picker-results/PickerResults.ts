@@ -58,22 +58,27 @@ export class BasePickerResults {
                     this.isStatic = true;
                     // Arrays are returned immediately
                     resolve(this.structureArray(options));
-                } else if ((options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) || Object.getPrototypeOf(options).hasOwnProperty('then')) {
+                } else if (term && term.length > 0) {
+                    if ((options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) || Object.getPrototypeOf(options).hasOwnProperty('then')) {
                     this.isStatic = false;
                     // Promises (ES6 or Deferred) are resolved whenever they resolve
                     options
                         .then(this.structureArray.bind(this))
                         .then(resolve, reject);
-                } else if (typeof options === 'function') {
-                    this.isStatic = false;
-                    // Promises (ES6 or Deferred) are resolved whenever they resolve
-                    options(term)
-                        .then(this.structureArray.bind(this))
-                        .then(resolve, reject);
+                    } else if (typeof options === 'function') {
+                        this.isStatic = false;
+                        // Promises (ES6 or Deferred) are resolved whenever they resolve
+                        options(term)
+                            .then(this.structureArray.bind(this))
+                            .then(resolve, reject);
+                    } else {
+                        // All other kinds of data are rejected
+                        reject('The data provided is not an array or a promise');
+                        throw new Error('The data provided is not an array or a promise');
+                    }
                 } else {
-                    // All other kinds of data are rejected
-                    reject('The data provided is not an array or a promise');
-                    throw new Error('The data provided is not an array or a promise');
+                    // No search term gets rejected
+                    reject('No search term');
                 }
             } else {
                 // No data gets rejected
