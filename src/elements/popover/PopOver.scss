@@ -1,0 +1,190 @@
+//
+// Popovers
+// --------------------------------------------------
+
+@mixin reset-text() {
+    font-family: $base-font-family;
+    // We deliberately do NOT reset font-size.
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-break: auto;
+    line-height: 1.428571429;
+    text-align: left; // Fallback for where `start` is not supported
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    white-space: normal;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+}
+
+popover-content {
+    .popover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1060;
+        display: none;
+        width: 400px;
+        padding: 23px 16px 16px 16px;
+        // Our parent element can be arbitrary since popovers are by default inserted as a sibling of their target element.
+        // So reset our font and text properties to avoid inheriting weird values.
+        @include reset-text;
+        font-size: 14px;
+
+        background-color: #fff;
+        background-clip: padding-box;
+        box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
+
+        &.top {
+            margin-top: -10px;
+            &.virtual-area {
+                bottom: -11px;
+            }
+        }
+        &.right {
+            margin-left: 10px; 
+            &.virtual-area {
+                left: -11px;
+            }
+        }
+        &.bottom {
+            margin-top: 10px; 
+            &.virtual-area {
+                top: -11px;
+            }
+        }
+        &.left {
+            margin-left: -10px;
+            &.virtual-area {
+                right: -11px;
+            }
+        }
+        .virtual-area {
+            height: 11px;
+            width: 100%;
+            position: absolute;
+        }
+
+        // Arrows
+        // .arrow is outer, .arrow:after is inner
+        &.top > .arrow {
+            margin-left: -9px;
+            border-bottom-width: 0;
+            border-top-color: rgba(0, 0, 0, 0.10);
+            bottom: -9px;
+            &:after {
+                content: " ";
+                bottom: 1px;
+                margin-left: -10px;
+                border-bottom-width: 0;
+                border-top-color: #fff;
+            }
+            &.center {
+                left: 50%;
+            }
+            &.left {
+                left: 91%;
+            }
+            &.right {
+                left: 9%;
+            }
+        }
+        &.right > .arrow {
+            left: -9px;
+            margin-top: -9px;
+            border-left-width: 0;
+            border-right-color: rgba(0, 0, 0, 0.10);
+            &:after {
+                content: " ";
+                left: 1px;
+                bottom: -10px;
+                border-left-width: 0;
+                border-right-color: #fff;
+            }
+            &.center {
+                top: 50%;
+            }
+            &.top {
+                top: 91%;
+            }
+            &.bottom {
+                top: 9%;
+            }
+        }
+        &.bottom > .arrow {
+            margin-left: -9px;
+            border-top-width: 0;
+            border-bottom-color: rgba(0, 0, 0, 0.10);
+            top: -9px;
+            &:after {
+                content: " ";
+                top: 1px;
+                margin-left: -10px;
+                border-top-width: 0;
+                border-bottom-color: #fff;
+            }
+            &.center {
+                left: 50%;
+            }
+            &.left {
+                left: 91%;
+            }
+            &.right {
+                left: 9%;
+            }
+        }
+        &.left > .arrow {
+            right: -9px;
+            margin-top: -9px;
+            border-right-width: 0;
+            border-left-color: rgba(0, 0, 0, 0.10);
+            &:after {
+                content: " ";
+                right: 1px;
+                border-right-width: 0;
+                border-left-color: #fff;
+                bottom: -10px;
+            }
+            &.center {
+                top: 50%;
+            }
+            &.top {
+                top: 91%;
+            }
+            &.bottom {
+                top: 9%;
+            }
+        }
+    }
+    .popover > .arrow {
+        border-width: 9px;
+        &,
+        &:after {
+            position: absolute;
+            display: block;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+        }
+        &:after {
+            border-width: 10px;
+            content: "";
+        }
+    }
+    .popover-title {
+        margin: 0; // reset heading margin
+        padding: 0px 14px 8px 14px;
+        font-weight: 600;
+    }
+    .popover-content {
+        padding: 9px 14px;
+        .popover-content-text {
+            white-space: pre-line;
+        }
+    }
+}
