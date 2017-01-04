@@ -1,3 +1,13 @@
+<a name="2.0.46"></a>
+## [2.0.46](https://github.com/bullhorn/novo-elements/compare/v2.0.45...v2.0.46) (2017-01-04)
+
+
+### Bug Fixes
+
+* **Table:** column filtering by options should not have text input if values are not string ([#322](https://github.com/bullhorn/novo-elements/issues/322)) ([5a3dea2](https://github.com/bullhorn/novo-elements/commit/5a3dea2))
+
+
+
 <a name="2.0.45"></a>
 ## [2.0.45](https://github.com/bullhorn/novo-elements/compare/v2.0.44...v2.0.45) (2017-01-04)
 
