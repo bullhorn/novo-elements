@@ -689,6 +689,10 @@ export class NovoTableElement implements DoCheck {
     }
 
     showOptionsTextInput(column) {
-        return typeof (column.options[0].value) === 'string';
+        if (column.hasOwnProperty('freetextFilter')) {
+            return true;
+        } else {
+            return typeof (column.options[0].value) === 'string';
+        }
     }
 }
