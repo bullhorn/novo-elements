@@ -1,3 +1,13 @@
+<a name="2.0.49"></a>
+## [2.0.49](https://github.com/bullhorn/novo-elements/compare/v2.0.48...v2.0.49) (2017-01-05)
+
+
+### Features
+
+* **Table:** Adding actions column header type ([#326](https://github.com/bullhorn/novo-elements/issues/326)) ([b9626f7](https://github.com/bullhorn/novo-elements/commit/b9626f7))
+
+
+
 <a name="2.0.48"></a>
 ## [2.0.48](https://github.com/bullhorn/novo-elements/compare/v2.0.47...v2.0.48) (2017-01-05)
 
