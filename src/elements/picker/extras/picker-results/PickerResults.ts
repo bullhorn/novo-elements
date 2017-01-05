@@ -58,13 +58,13 @@ export class BasePickerResults {
                     this.isStatic = true;
                     // Arrays are returned immediately
                     resolve(this.structureArray(options));
-                } else if (term && term.length > 0) {
+                } else if (term && term.length >= (this.config.minSearchLength || 1)) {
                     if ((options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) || Object.getPrototypeOf(options).hasOwnProperty('then')) {
-                    this.isStatic = false;
-                    // Promises (ES6 or Deferred) are resolved whenever they resolve
-                    options
-                        .then(this.structureArray.bind(this))
-                        .then(resolve, reject);
+                        this.isStatic = false;
+                        // Promises (ES6 or Deferred) are resolved whenever they resolve
+                        options
+                            .then(this.structureArray.bind(this))
+                            .then(resolve, reject);
                     } else if (typeof options === 'function') {
                         this.isStatic = false;
                         // Promises (ES6 or Deferred) are resolved whenever they resolve
@@ -77,8 +77,17 @@ export class BasePickerResults {
                         throw new Error('The data provided is not an array or a promise');
                     }
                 } else {
-                    // No search term gets rejected
-                    reject('No search term');
+                    if (this.config.defaultOptions) {
+                        this.isStatic = false;
+                        if (this.config.defaultOptions instanceof Function) {
+                            resolve(this.structureArray(this.config.defaultOptions()));
+                        } else {
+                            resolve(this.structureArray(this.config.defaultOptions));
+                        }
+                    } else {
+                        // No search term gets rejected
+                        reject('No search term');
+                    }
                 }
             } else {
                 // No data gets rejected
