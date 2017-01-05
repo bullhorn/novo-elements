@@ -1,3 +1,13 @@
+<a name="2.0.48"></a>
+## [2.0.48](https://github.com/bullhorn/novo-elements/compare/v2.0.47...v2.0.48) (2017-01-05)
+
+
+### Bug Fixes
+
+* **pickers:** fix so does not search when no search term entered ([#324](https://github.com/bullhorn/novo-elements/issues/324)) ([85beda6](https://github.com/bullhorn/novo-elements/commit/85beda6))
+
+
+
 <a name="2.0.47"></a>
 ## [2.0.47](https://github.com/bullhorn/novo-elements/compare/v2.0.46...v2.0.47) (2017-01-04)
 
