@@ -116,6 +116,9 @@ export class BasePickerResults {
         }
         return dataArray.map((data) => {
             let value = this.config.field ? data[this.config.field] : (data.value || data);
+            if (this.config.valueFormat) {
+                value = Helpers.interpolate(this.config.valueFormat, data);
+            }
             let label = this.config.format ? Helpers.interpolate(this.config.format, data) : data.label || String(value);
             return { value, label, data };
         });
