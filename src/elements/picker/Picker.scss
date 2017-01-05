@@ -144,6 +144,16 @@ entity-picker-results {
             opacity: 0.5;
             pointer-events: none;
         }
+        item-content{
+            > p {
+                min-width: 15em;
+                font-size: .9em;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                padding-right: 1em;
+            }
+        }
     }
 }
 
