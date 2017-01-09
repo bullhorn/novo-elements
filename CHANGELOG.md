@@ -1,3 +1,14 @@
+<a name="2.0.57"></a>
+## [2.0.57](https://github.com/bullhorn/novo-elements/compare/v2.0.56...v2.0.57) (2017-01-09)
+
+
+### Bug Fixes
+
+* **Form:** Making address.state not required ([98e47fb](https://github.com/bullhorn/novo-elements/commit/98e47fb))
+* **quicknote:** Fixing validation around quick note ([0d9c2a6](https://github.com/bullhorn/novo-elements/commit/0d9c2a6))
+
+
+
 <a name="2.0.56"></a>
 ## [2.0.56](https://github.com/bullhorn/novo-elements/compare/v2.0.55...v2.0.56) (2017-01-09)
 
