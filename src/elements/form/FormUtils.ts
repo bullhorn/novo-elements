@@ -238,7 +238,12 @@ export class FormUtils {
         let fieldsets: Array<NovoFieldset> = [];
         let ranges = [];
         if (meta && meta.fields) {
-            meta.fields.sort(Helpers.sortByField('sortOrder'));
+            let fields = meta.fields.map(field => {
+                if (!field.hasOwnProperty('sortOrder')) {
+                    field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
+                }
+                return field;
+            }).sort(Helpers.sortByField('sortOrder'));
             if (meta.sectionHeaders && meta.sectionHeaders.length) {
                 meta.sectionHeaders.sort(Helpers.sortByField('sortOrder'));
                 meta.sectionHeaders.forEach((item, i) => {
@@ -277,13 +282,9 @@ export class FormUtils {
                     fieldsetIdx: 0
                 });
             }
-            let fields = meta.fields;
 
             fields.forEach(field => {
                 if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
-                    if (!field.hasOwnProperty('sortOrder')) {
-                        field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
-                    }
                     let control = this.getControlForField(field, http, config);
                     // Set currency format
                     if (control.subType === 'currency') {
