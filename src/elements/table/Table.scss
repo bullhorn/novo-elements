@@ -354,7 +354,9 @@ $table-border-color: #f5f5f5; // Tables
         border: 0;
     }
 
-    .no-matching-records {
+    .table-message,
+    .no-matching-records,
+    .table-empty-message {
         color: $grey;
         margin: 40px 0;
         vertical-align: middle;

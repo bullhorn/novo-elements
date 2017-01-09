@@ -56,6 +56,10 @@ export class ArrayCollection<T> implements Collection<T> {
         return false;
     }
 
+    isFiltered():boolean {
+        return (Object.keys(this._filter).length > 0);
+    }
+
     /**
      * Appends an item to the end of the data provider.
      *

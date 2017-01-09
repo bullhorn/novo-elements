@@ -7,7 +7,8 @@ import * as moment from 'moment';
 export class NovoLabelService {
     filters = 'Filter';
     clear = 'Clear';
-    emptyTableMessage = 'No Matching Records';
+    emptyTableMessage = 'No Records to display...';
+    noMatchingRecordsMessage = 'No Matching Records';
     erroredTableMessage = 'Oops! An error occurred.';
     pickerError = 'Oops! An error occurred.';
     pickerEmpty = 'No results to display...';

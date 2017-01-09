@@ -13,6 +13,8 @@ export interface Collection<T> {
 
     isEmpty():boolean;
     hasErrors():boolean;
+    isLoading():boolean;
+    isFiltered():boolean;
 
     /**
      *  Adds the specified item to the end of the list.
