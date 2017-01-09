@@ -182,7 +182,7 @@ export class TableDemoComponent implements OnInit {
         ];
         this.basic = {
             columns: columns.slice(),
-            rows: TableData.slice(),
+            rows: [],
             config: {
                 paging: {
                     current: 1,
@@ -268,6 +268,10 @@ export class TableDemoComponent implements OnInit {
 
     ngOnInit() {
         this.theme = HEADER_COLORS[0];
+    }
+
+    reload() {
+        this.basic.rows = TableData.slice();
     }
 
     changeTheme() {

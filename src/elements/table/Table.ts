@@ -43,7 +43,7 @@ export class NovoTableHeaderElement {
         </header>
         <div class="table-container">
             <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
-            <thead *ngIf="columns.length">
+            <thead *ngIf="columns.length && (!dataProvider.isEmpty() || dataProvider.isFiltered())">
                 <tr role="row">
                     <!-- DETAILS -->
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
@@ -138,12 +138,23 @@ export class NovoTableHeaderElement {
                 </template>
             </tbody>
             <!-- NO TABLE DATA PLACEHOLDER -->
-            <tbody class="table-message" *ngIf="dataProvider.isEmpty()" data-automation-id="empty-table">
+            <tbody class="table-message" *ngIf="dataProvider.isEmpty() && !dataProvider.isFiltered()" data-automation-id="empty-table">
                 <tr>
                     <td colspan="100%">
                         <div #emptymessage><ng-content select="[table-empty-message]"></ng-content></div>
-                        <div class="no-matching-records" *ngIf="emptymessage.childNodes.length == 0">
+                        <div class="table-empty-message" *ngIf="emptymessage.childNodes.length == 0">
                             <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- NO MATCHING RECORDS -->
+            <tbody class="table-message" *ngIf="dataProvider.isEmpty() && dataProvider.isFiltered()" data-automation-id="empty-table">
+                <tr>
+                    <td colspan="100%">
+                        <div #nomatchmessage><ng-content select="[table-no-matching-records-message]"></ng-content></div>
+                        <div class="no-matching-records" *ngIf="nomatchmessage.childNodes.length == 0">
+                            <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
                         </div>
                     </td>
                 </tr>
