@@ -136,7 +136,7 @@ export class FormDemoComponent {
         this.currencyControl = new TextBoxControl({ type: 'currency', key: 'currency', label: 'Currency', currencyFormat: '$ USD' });
         this.floatControl = new TextBoxControl({ type: 'float', key: 'float', label: 'Float' });
         this.percentageControl = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent' });
-        this.quickNoteControl = new QuickNoteControl({ key: 'note', label: 'Note', config: this.quickNoteConfig });
+        this.quickNoteControl = new QuickNoteControl({ key: 'note', label: 'Note', config: this.quickNoteConfig, required: true });
         this.textForm = formUtils.toFormGroup([this.textControl, this.emailControl, this.numberControl, this.currencyControl, this.floatControl, this.percentageControl, this.quickNoteControl]);
 
         // Check box controls
