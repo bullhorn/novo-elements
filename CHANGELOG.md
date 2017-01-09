@@ -1,3 +1,18 @@
+<a name="2.0.56"></a>
+## [2.0.56](https://github.com/bullhorn/novo-elements/compare/v2.0.55...v2.0.56) (2017-01-09)
+
+
+### Bug Fixes
+
+* **DatePicker:** Selecting either month or year in Date Picker resets other value to default ([#334](https://github.com/bullhorn/novo-elements/issues/334)) ([5460cfc](https://github.com/bullhorn/novo-elements/commit/5460cfc))
+
+
+### Features
+
+* **Chips:** Adding support for Chips labels to be displayed correctly when only value passed in ([#332](https://github.com/bullhorn/novo-elements/issues/332)) ([396bbf3](https://github.com/bullhorn/novo-elements/commit/396bbf3))
+
+
+
 <a name="2.0.55"></a>
 ## [2.0.55](https://github.com/bullhorn/novo-elements/compare/v2.0.54...v2.0.55) (2017-01-09)
 
