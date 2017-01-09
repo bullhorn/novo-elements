@@ -97,3 +97,13 @@ In general the column definition will be an object with some basic configuration
     </novo-table-actions>
 </novo-table>
 ```
+
+#### Custom State Messaging
+
+```
+<novo-table [theme]="theme" [dataProvider]="basic.rows" [columns]="basic.columns" [config]="basic.config">
+    <div classs="table-message" table-empty-message>Custom Empty State Template! Click RELOAD to get Data!</div>
+    <div classs="table-message" table-no-matching-records-message>Custom No Matched Records</div>
+    <div classs="table-message" table-error-message>Oh No! There was an Error</div>
+</div>
+```
