@@ -1,3 +1,18 @@
+<a name="2.0.55"></a>
+## [2.0.55](https://github.com/bullhorn/novo-elements/compare/v2.0.54...v2.0.55) (2017-01-09)
+
+
+### Bug Fixes
+
+* **Forms:** Properly set sort order ([37c3379](https://github.com/bullhorn/novo-elements/commit/37c3379))
+
+
+### Features
+
+* **Table:** Split Empty and NoMatchingRecords States for Tables ([#330](https://github.com/bullhorn/novo-elements/issues/330)) ([7c42003](https://github.com/bullhorn/novo-elements/commit/7c42003))
+
+
+
 <a name="2.0.54"></a>
 ## [2.0.54](https://github.com/bullhorn/novo-elements/compare/v2.0.53...v2.0.54) (2017-01-06)
 
