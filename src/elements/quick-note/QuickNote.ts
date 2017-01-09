@@ -183,6 +183,10 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
                     }
                     return exists;
                 });
+                // If no references, then delete the key
+                if (this.model.references[key].length === 0) {
+                    delete this.model.references[key];
+                }
             });
         }
         // Update formatted value
@@ -191,6 +195,10 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
         this.basicNote = tempBasicValue;
         // Propagate change to ngModel
         let newModel = { note: (this.formattedNote || ''), references: this.model.references };
+        // If no note or references, delete the model (form validation)
+        if (newModel.note === '' && Object.keys(newModel.references).length === 0) {
+            newModel = null;
+        }
         this.onModelChange(newModel);
         this.change.emit(newModel);
     }
