@@ -29,10 +29,7 @@ export class FormValidators {
             if (!control.value.city || control.value.city.length === 0) {
                 valid = false;
             }
-            // State
-            if (!control.value.state || control.value.state.length < 2) {
-                valid = false;
-            }
+            // State - No Longer a Required Field
             // Zip
             // TODO: may need to change this depending on localization
             if (!control.value.zip || control.value.zip.length < 5) {
