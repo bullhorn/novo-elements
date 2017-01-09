@@ -198,14 +198,14 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     }
 
     setMonth(month) {
-        let tmp = this.selected ? this.selected.clone().month(month) : moment().month(month);
+        let tmp = this.month ? this.month.clone().month(month) : moment().month(month);
         this.updateView(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
     }
 
     setYear(year) {
-        let tmp = this.selected ? this.selected.clone().year(year) : moment().year(year);
+        let tmp = this.month ? this.month.clone().year(year) : moment().year(year);
         this.updateView(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
