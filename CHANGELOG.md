@@ -1,3 +1,19 @@
+<a name="2.0.61"></a>
+## [2.0.61](https://github.com/bullhorn/novo-elements/compare/v2.0.60...v2.0.61) (2017-01-10)
+
+
+### Bug Fixes
+
+* **Form:** Fixing default sort order ([ad6fba3](https://github.com/bullhorn/novo-elements/commit/ad6fba3))
+* **Table:** Tables won't convert Dates into timestamps just in case custom functions need to know if it is a Number vs a Date ([#336](https://github.com/bullhorn/novo-elements/issues/336)) ([cf74bc8](https://github.com/bullhorn/novo-elements/commit/cf74bc8))
+
+
+### Features
+
+* **popover:** Adding a PopOver element ([aa4ebb4](https://github.com/bullhorn/novo-elements/commit/aa4ebb4))
+
+
+
 <a name="2.0.60"></a>
 ## [2.0.60](https://github.com/bullhorn/novo-elements/compare/v2.0.59...v2.0.60) (2017-01-10)
 
