@@ -65,21 +65,21 @@ import { Helpers } from './../../utils/Helpers';
                     </div>
                     <!--Time-->
                     <div class="novo-control-input-container" *ngSwitchCase="'time'">
-                        <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
+                        <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
                         <i (click)="toggleActive($event)" class="bhi-clock" *ngIf="!hasValue"></i>
                         <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
                         <novo-time-picker [hidden]="!active" (onSelect)="formatTimeValue($event);" [formControlName]="control.key"></novo-time-picker>
                     </div>
                     <!--Date-->
                     <div class="novo-control-input-container" *ngSwitchCase="'date'">
-                        <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
+                        <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
                         <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                         <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
                         <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateValue($event);" [formControlName]="control.key"></novo-date-picker>
                     </div>
                     <!--Date and Time-->
                     <div class="novo-control-input-container" *ngSwitchCase="'date-time'">
-                        <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
+                        <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
                         <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                         <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
                         <novo-date-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event);" [formControlName]="control.key"></novo-date-time-picker>
@@ -106,7 +106,8 @@ import { Helpers } from './../../utils/Helpers';
         </div>
     `,
     host: {
-        '[class.disabled]': 'control.disabled'
+        '[class.disabled]': 'control.disabled',
+        '[class]': 'control.controlType'
     }
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy {

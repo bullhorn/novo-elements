@@ -52,7 +52,17 @@ novo-form {
                             border-bottom: none !important;
                         }
                     }
-                    &.hidden {
+                    &.checklist,
+                    &.file,
+                    &.address {
+                        .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+                            border-bottom: none !important;
+                            &.valid-number {
+                                border-bottom: none !important;
+                            }
+                        }
+                    }
+                    & &.hidden {
                         height: 0;
                         min-height: 0;
                         opacity: 0;
