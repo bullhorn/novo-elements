@@ -1,3 +1,13 @@
+<a name="2.0.64"></a>
+## [2.0.64](https://github.com/bullhorn/novo-elements/compare/v2.0.63...v2.0.64) (2017-01-10)
+
+
+### Features
+
+* **Chips:** Adding check to make sure options is an array before using getLabelFromOptions() in Chips labels ([#342](https://github.com/bullhorn/novo-elements/issues/342)) ([d207c89](https://github.com/bullhorn/novo-elements/commit/d207c89))
+
+
+
 <a name="2.0.63"></a>
 ## [2.0.63](https://github.com/bullhorn/novo-elements/compare/v2.0.62...v2.0.63) (2017-01-10)
 
