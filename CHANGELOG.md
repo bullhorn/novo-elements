@@ -1,3 +1,13 @@
+<a name="2.0.59"></a>
+## [2.0.59](https://github.com/bullhorn/novo-elements/compare/v2.0.58...v2.0.59) (2017-01-10)
+
+
+### Bug Fixes
+
+* **Form:** Adding validators for min/max length and more disabled CSS ([07aafd3](https://github.com/bullhorn/novo-elements/commit/07aafd3))
+
+
+
 <a name="2.0.58"></a>
 ## [2.0.58](https://github.com/bullhorn/novo-elements/compare/v2.0.57...v2.0.58) (2017-01-10)
 
