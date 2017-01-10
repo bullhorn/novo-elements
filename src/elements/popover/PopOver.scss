@@ -29,7 +29,7 @@ popover-content {
         z-index: 1060;
         display: none;
         width: 400px;
-        padding: 23px 16px 16px 16px;
+        padding: 23px 20px 16px 20px;
         // Our parent element can be arbitrary since popovers are by default inserted as a sibling of their target element.
         // So reset our font and text properties to avoid inheriting weird values.
         @include reset-text;
@@ -178,11 +178,11 @@ popover-content {
     }
     .popover-title {
         margin: 0; // reset heading margin
-        padding: 0px 14px 8px 14px;
+        padding: 0 0 8px 0;
         font-weight: 600;
     }
     .popover-content {
-        padding: 9px 14px;
+        padding: 9px 0;
         .popover-content-text {
             white-space: pre-line;
         }
