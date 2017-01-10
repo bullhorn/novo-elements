@@ -163,7 +163,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
                     });
                 } else if (this.source.getLabels && typeof this.source.getLabels === 'function') {
                     noLabels.push(value);
-                } else if (this.source.options) {
+                } else if (this.source.options && Array.isArray(this.source.options)) {
                     this.items.push(this.getLabelFromOptions(value));
                 } else {
                     this.items.push({
@@ -180,7 +180,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
                                 value,
                                 label: value.label
                             });
-                        } else if (this.source.options) {
+                        } else if (this.source.options && Array.isArray(this.source.options)) {
                             this.items.push(this.getLabelFromOptions(value));
                         } else {
                             this.items.push(value);
