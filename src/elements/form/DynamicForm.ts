@@ -138,6 +138,7 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
         });
         this.showingAllFields = false;
         this.showingRequiredFields = true;
+        this.forceValidation();
     }
 
     get values() {
@@ -161,5 +162,13 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
             });
         });
         return ret;
+    }
+
+    forceValidation(): void {
+        Object.keys(this.form.controls).forEach((key: string) => {
+            let control: any = this.form.controls[key];
+            control.markAsDirty();
+            control.markAsTouched();
+        });
     }
 }
