@@ -1,0 +1,11 @@
+<popover-content 
+    #dynamicHtmlPopOver 
+    title="this header can be omitted" 
+    placement="right">
+    
+    <b>Very</b> <span style="color: #C21F39">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Popover With</span></i></b> <small>Html support</small>. Click outside of this popover and it will be dismissed automatically.
+    <u (click)="dynamicHtmlPopOver.hide()" style="cursor: pointer">Or click here to close it</u> and can listen to the onHidden or onShown events to perform additional tasks.
+</popover-content>
+
+<span [popover]="dynamicHtmlPopOver">Click to see a popover with dynamic html</span>

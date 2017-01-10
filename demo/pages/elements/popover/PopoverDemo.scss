@@ -1,0 +1,12 @@
+popover-demo {
+    .example.popover-demo {
+        margin: auto;
+        padding: 20px 30px;
+        position: relative;
+        display: flex;
+        span {
+            cursor: pointer;
+            margin: auto;
+        }
+    }
+}
