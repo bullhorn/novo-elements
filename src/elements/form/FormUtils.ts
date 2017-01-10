@@ -405,4 +405,12 @@ export class FormUtils {
             });
         });
     }
+
+    forceValidation(form: FormGroup): void {
+        Object.keys(form.controls).forEach((key: string) => {
+            let control: any = form.controls[key];
+            control.markAsDirty();
+            control.markAsTouched();
+        });
+    }
 }
