@@ -252,7 +252,7 @@ export class FormUtils {
                     field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
                 }
                 return field;
-            }).sort(Helpers.sortByField('sortOrder'));
+            }).sort(Helpers.sortByField(['sortOrder', 'name']));
             if (meta.sectionHeaders && meta.sectionHeaders.length) {
                 meta.sectionHeaders.sort(Helpers.sortByField('sortOrder'));
                 meta.sectionHeaders.forEach((item, i) => {

@@ -77,34 +77,40 @@ export class Helpers {
         return obj instanceof Date;
     }
 
-    static sortByField(field: any, reverse = false) {
+    static sortByField(fields: any, reverse = false) {
         return (previous: any, current: any) => {
             //return (a[field] < b[field]) ? -1 : (a[field] > b[field]) ? 1 : 0; // eslint-disable-line
             // Custom compare function on the column
-            if (Helpers.isFunction(field)) {
-                return field((reverse) ? 'desc' : 'asc', previous, current);
+            if (Helpers.isFunction(fields)) {
+                return fields((reverse) ? 'desc' : 'asc', previous, current);
             }
-            let first = previous[field] || '';
-            let second = current[field] || '';
-
-            if (Helpers.isDate(first) && Helpers.isDate(second)) {
-                // Dates
-                first = first.getTime();
-                second = second.getTime();
-            } else if (Helpers.isString(first) && Helpers.isString(second)) {
-                // Basic strings
-                first = first.toLowerCase();
-                second = second.toLowerCase();
-            } else {
-                // Numbers
-                first = isNaN(Number(first)) ? first : Number(first);
-                second = isNaN(Number(second)) ? second : Number(second);
+            if (!Array.isArray(fields)) {
+                fields = [fields];
             }
+            for (let i = 0; i < fields.length; i++) {
+                let field: string = fields[i];
+                let first = previous[field] || '';
+                let second = current[field] || '';
 
-            if (first > second) {
-                return (reverse) ? -1 : 1;
-            } else if (first < second) {
-                return (reverse) ? 1 : -1;
+                if (Helpers.isDate(first) && Helpers.isDate(second)) {
+                    // Dates
+                    first = first.getTime();
+                    second = second.getTime();
+                } else if (Helpers.isString(first) && Helpers.isString(second)) {
+                    // Basic strings
+                    first = first.toLowerCase();
+                    second = second.toLowerCase();
+                } else {
+                    // Numbers
+                    first = isNaN(Number(first)) ? first : Number(first);
+                    second = isNaN(Number(second)) ? second : Number(second);
+                }
+
+                if (first > second) {
+                    return (reverse) ? -1 : 1;
+                } else if (first < second) {
+                    return (reverse) ? 1 : -1;
+                }
             }
             return 0;
         };
