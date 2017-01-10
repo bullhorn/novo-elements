@@ -1,3 +1,13 @@
+<a name="2.0.62"></a>
+## [2.0.62](https://github.com/bullhorn/novo-elements/compare/v2.0.61...v2.0.62) (2017-01-10)
+
+
+### Features
+
+* **Form:** Adding ability to force validation ([f49441d](https://github.com/bullhorn/novo-elements/commit/f49441d))
+
+
+
 <a name="2.0.61"></a>
 ## [2.0.61](https://github.com/bullhorn/novo-elements/compare/v2.0.60...v2.0.61) (2017-01-10)
 
