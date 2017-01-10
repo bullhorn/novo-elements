@@ -9310,7 +9310,8 @@ novo-form {
             pointer-events: none; }
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled input,
             novo-form .novo-form-container form div.novo-form-row novo-control.disabled input {
-              border-bottom-style: dashed !important; }
+              border-bottom-style: dashed !important;
+              color: #D9DADC !important; }
               novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled input::-webkit-input-placeholder,
               novo-form .novo-form-container form div.novo-form-row novo-control.disabled input::-webkit-input-placeholder {
                 color: #D9DADC !important; }
@@ -9321,6 +9322,9 @@ novo-form {
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled label,
             novo-form .novo-form-container form div.novo-form-row novo-control.disabled label {
               color: #D9DADC !important; }
+              novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled label.clear-all,
+              novo-form .novo-form-container form div.novo-form-row novo-control.disabled label.clear-all {
+                display: none; }
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled chips, novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled multi-picker,
             novo-form .novo-form-container form div.novo-form-row novo-control.disabled chips,
             novo-form .novo-form-container form div.novo-form-row novo-control.disabled multi-picker {
@@ -9332,7 +9336,12 @@ novo-form {
               novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled chips chip, novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled multi-picker chip,
               novo-form .novo-form-container form div.novo-form-row novo-control.disabled chips chip,
               novo-form .novo-form-container form div.novo-form-row novo-control.disabled multi-picker chip {
-                opacity: 0.5; }
+                opacity: 0.5;
+                padding: 10px; }
+                novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled chips chip .bhi-close, novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled multi-picker chip .bhi-close,
+                novo-form .novo-form-container form div.novo-form-row novo-control.disabled chips chip .bhi-close,
+                novo-form .novo-form-container form div.novo-form-row novo-control.disabled multi-picker chip .bhi-close {
+                  display: none; }
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled .bhi-search,
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled .bhi-times,
             novo-form .novo-form-container form div.novo-form-row novo-control.disabled .bhi-search,
@@ -9340,10 +9349,18 @@ novo-form {
               display: none; }
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-clock,
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-collapse,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-radio-filled,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-radio-empty,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-checkbox-filled,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-checkbox-empty,
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-search,
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-calendar,
             novo-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-clock,
             novo-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-collapse,
+            novo-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-radio-filled,
+            novo-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-radio-empty,
+            novo-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-checkbox-filled,
+            novo-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-checkbox-empty,
             novo-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-search,
             novo-form .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-calendar {
               color: #D9DADC !important; }
@@ -9877,7 +9894,8 @@ novo-form {
       pointer-events: none; }
       novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled input,
       novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled input {
-        border-bottom-style: dashed !important; }
+        border-bottom-style: dashed !important;
+        color: #D9DADC !important; }
         novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled input::-webkit-input-placeholder,
         novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled input::-webkit-input-placeholder {
           color: #D9DADC !important; }
@@ -9888,6 +9906,9 @@ novo-form {
       novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled label,
       novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled label {
         color: #D9DADC !important; }
+        novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled label.clear-all,
+        novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled label.clear-all {
+          display: none; }
       novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled chips, novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled multi-picker,
       novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled chips,
       novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled multi-picker {
@@ -9899,7 +9920,12 @@ novo-form {
         novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled chips chip, novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled multi-picker chip,
         novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled chips chip,
         novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled multi-picker chip {
-          opacity: 0.5; }
+          opacity: 0.5;
+          padding: 10px; }
+          novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled chips chip .bhi-close, novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled multi-picker chip .bhi-close,
+          novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled chips chip .bhi-close,
+          novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled multi-picker chip .bhi-close {
+            display: none; }
       novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled .bhi-search,
       novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled .bhi-times,
       novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled .bhi-search,
@@ -9908,10 +9934,18 @@ novo-form {
       novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-clock,
       novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-collapse,
       novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-search,
+      novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-radio-filled,
+      novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-radio-empty,
+      novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-checkbox-filled,
+      novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-checkbox-empty,
       novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-calendar,
       novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-clock,
       novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-collapse,
       novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-search,
+      novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-radio-filled,
+      novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-radio-empty,
+      novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-checkbox-filled,
+      novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-checkbox-empty,
       novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control.disabled i.bhi-calendar {
         color: #D9DADC !important; }
     novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container,
@@ -11394,92 +11428,92 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 27px;
-      height: 27px; }
+      width: 26px;
+      height: 26px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 33px;
-      height: 33px; }
+      width: 26px;
+      height: 26px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 43px;
-      height: 43px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-submission {
-      background: #747884;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-task {
-      background: #747884;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-distributionList {
-      background: #747884;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
       width: 34px;
       height: 34px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-submission {
+      background: #747884;
+      width: 26px;
+      height: 26px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-task {
+      background: #747884;
       width: 29px;
       height: 29px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-carnation {
-      background: #D770AD;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-lavender {
-      background: #967ADC;
+    color header .background-boxes .bb-distributionList {
+      background: #747884;
       width: 35px;
       height: 35px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 26px;
+      height: 26px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-carnation {
+      background: #D770AD;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-lavender {
+      background: #967ADC;
+      width: 27px;
+      height: 27px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -12389,4 +12423,4 @@ category-dropdown-demo div.example {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.b1e983e5e91cf9c459df.bundle.map*/
+/*# sourceMappingURL=main.e29988330b8dd7f657be.bundle.map*/
