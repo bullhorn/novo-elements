@@ -87,7 +87,7 @@ export class Helpers {
             if (!Array.isArray(fields)) {
                 fields = [fields];
             }
-            for (let i:number=0;i<fields.length;i++) {
+            for (let i = 0; i < fields.length; i++) {
                 let field: string = fields[i];
                 let first = previous[field] || '';
                 let second = current[field] || '';
