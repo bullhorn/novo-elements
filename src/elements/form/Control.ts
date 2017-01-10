@@ -241,9 +241,14 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         const NUMBERS_ONLY = /[0-9]/;
         const NUMBERS_WITH_DECIMAL = /[0-9\.]/;
         let key = String.fromCharCode(event.charCode);
+        // Types
         if (this.control.subType === 'number' && !NUMBERS_ONLY.test(key)) {
             event.preventDefault();
         } else if (~['currency', 'float', 'percentage'].indexOf(this.control.subType) && !NUMBERS_WITH_DECIMAL.test(key)) {
+            event.preventDefault();
+        }
+        // Max Length
+        if (this.control.maxlength && event.target.value.length >= this.control.maxlength) {
             event.preventDefault();
         }
     }
