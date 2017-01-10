@@ -1,63 +1,67 @@
 // NG2
 import { Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
+// APP
+import { Helpers } from '../../../utils/Helpers';
 
 export interface NovoControlConfig {
-    validators?:Array<any>;
-    asyncValidators?:Array<any>;
-    value?:any;
-    key?:string;
-    label?:string;
-    required?:boolean;
-    hidden?:boolean;
-    sortOrder?:number;
-    controlType?:string;
-    placeholder?:string;
-    config?:any;
-    dirty?:boolean;
-    multiple?:boolean;
-    headerConfig?:any;
-    currencyFormat?:string;
-    associatedEntity?:string;
-    optionsType?:string;
-    forceClear?:EventEmitter<any>;
-    disabled?:boolean;
-    maxlength?:number;
-    options?:Array<any>;
-    type?:string;
-    name?:string;
+    validators?: Array<any>;
+    asyncValidators?: Array<any>;
+    value?: any;
+    key?: string;
+    label?: string;
+    required?: boolean;
+    hidden?: boolean;
+    sortOrder?: number;
+    controlType?: string;
+    placeholder?: string;
+    config?: any;
+    dirty?: boolean;
+    multiple?: boolean;
+    headerConfig?: any;
+    currencyFormat?: string;
+    associatedEntity?: string;
+    optionsType?: string;
+    forceClear?: EventEmitter<any>;
+    disabled?: boolean;
+    maxlength?: number;
+    minlength?: number;
+    options?: Array<any>;
+    type?: string;
+    name?: string;
     readOnly?: boolean;
     closeOnSelect?: boolean;
 }
 
 export class BaseControl {
-    validators:Array<any>;
-    asyncValidators?:Array<any>;
-    value:any;
-    key:string;
-    label:string;
-    required:boolean;
-    hidden:boolean;
-    sortOrder:number;
-    controlType:string;
-    placeholder:string;
-    config:NovoControlConfig;
-    dirty:boolean;
-    multiple:boolean;
-    headerConfig:any;
-    currencyFormat:string;
-    associatedEntity:string;
-    optionsType:string;
-    forceClear:EventEmitter<any>;
-    disabled:boolean;
-    maxlength:number;
-    options:Array<any>;
-    type:string;
-    name:string;
+    validators: Array<any>;
+    asyncValidators?: Array<any>;
+    value: any;
+    key: string;
+    label: string;
+    required: boolean;
+    hidden: boolean;
+    sortOrder: number;
+    controlType: string;
+    placeholder: string;
+    config: NovoControlConfig;
+    dirty: boolean;
+    multiple: boolean;
+    headerConfig: any;
+    currencyFormat: string;
+    associatedEntity: string;
+    optionsType: string;
+    forceClear: EventEmitter<any>;
+    disabled: boolean;
+    maxlength: number;
+    minlength: number;
+    options: Array<any>;
+    type: string;
+    name: string;
     readOnly: boolean;
     closeOnSelect: boolean;
 
-    constructor(config:NovoControlConfig) {
+    constructor(config: NovoControlConfig) {
         this.validators = config.validators || [];
         this.asyncValidators = config.asyncValidators || [];
         this.value = config.value;
@@ -82,8 +86,13 @@ export class BaseControl {
         if (this.required) {
             this.validators.push(Validators.required);
         }
-        if (config.maxlength) {
+        if (!Helpers.isBlank(config.maxlength)) {
             this.maxlength = config.maxlength;
+            this.validators.push(Validators.maxLength(this.maxlength));
+        }
+        if (!Helpers.isBlank(config.minlength)) {
+            this.minlength = config.minlength;
+            this.validators.push(Validators.minLength(this.minlength));
         }
         this.closeOnSelect = !!config.closeOnSelect;
     }

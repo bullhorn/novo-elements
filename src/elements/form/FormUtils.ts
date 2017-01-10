@@ -182,6 +182,7 @@ export class FormUtils {
                 } else if (type === 'year') {
                     type = 'number';
                     controlConfig.maxlength = 4;
+                    controlConfig.minlength = 4;
                 }
                 controlConfig.type = type;
                 control = new TextBoxControl(controlConfig);

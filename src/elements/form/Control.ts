@@ -97,6 +97,8 @@ import { Helpers } from './../../utils/Helpers';
             <!--Error Message-->
             <div class="error-message">
                 <span *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
+                <span *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
+                <span *ngIf="isDirty && errors?.maxlength">{{control.label | uppercase}} is required to be a maximum of {{ control.maxlength }} characters</span>
                 <span *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
                 <span *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
                 <span *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
