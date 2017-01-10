@@ -25,6 +25,13 @@ export const MockMeta = {
             sortOrder: 40
         },
         {
+            name: 'dateFounded',
+            type: 'number',
+            label: 'Date Founded',
+            required: true,
+            sortOrder: 40
+        },
+        {
             name: 'float',
             type: 'float',
             label: 'Float',
@@ -141,6 +148,7 @@ export const MockMeta = {
             type: 'datetime',
             dataType: 'Timestamp',
             label: 'Start Date',
+            disabled: true,
             required: true,
             sortOrder: 540
         }, {
@@ -384,15 +392,15 @@ export const MockMeta = {
 };
 export const MockMetaHeaders = {
     sectionHeaders: [{
-          'label': 'Section 2',
-          'name': 'sectionHeader1',
-          'sortOrder': 500,
-          'enabled': true
-        }, {
-          'label': 'Section 1',
-          'name': 'sectionHeader2',
-          'sortOrder': 45,
-          'enabled': true
+        'label': 'Section 2',
+        'name': 'sectionHeader1',
+        'sortOrder': 500,
+        'enabled': true
+    }, {
+        'label': 'Section 1',
+        'name': 'sectionHeader2',
+        'sortOrder': 45,
+        'enabled': true
     }],
 };
 Object.assign(MockMetaHeaders, MockMeta);
