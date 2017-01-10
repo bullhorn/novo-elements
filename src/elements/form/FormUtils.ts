@@ -105,10 +105,6 @@ export class FormUtils {
         } else if (type === 'entitypicker' && field.multiValue) {
             type = 'entitychips';
         }
-        // Force dateFounded to be a year (gets retyped to number later with maxlength at 4)
-        if (field.name === 'dateFounded') {
-            type = 'year';
-        }
 
         return type;
     }
@@ -179,10 +175,6 @@ export class FormUtils {
             case 'year':
                 if (type === 'money') {
                     type = 'currency';
-                } else if (type === 'year') {
-                    type = 'number';
-                    controlConfig.maxlength = 4;
-                    controlConfig.minlength = 4;
                 }
                 controlConfig.type = type;
                 control = new TextBoxControl(controlConfig);
