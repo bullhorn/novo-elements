@@ -1,3 +1,13 @@
+<a name="2.0.58"></a>
+## [2.0.58](https://github.com/bullhorn/novo-elements/compare/v2.0.57...v2.0.58) (2017-01-10)
+
+
+### Bug Fixes
+
+* **Form:** Fixing dateFounded fields to be a number with maxlength at 4 ([6fcee44](https://github.com/bullhorn/novo-elements/commit/6fcee44))
+
+
+
 <a name="2.0.57"></a>
 ## [2.0.57](https://github.com/bullhorn/novo-elements/compare/v2.0.56...v2.0.57) (2017-01-09)
 
