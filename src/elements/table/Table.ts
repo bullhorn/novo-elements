@@ -408,15 +408,15 @@ export class NovoTableElement implements DoCheck {
                         if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
                             query[column.name] = column.filter.map(f => {
                                 return {
-                                    min: f.value ? new Date(f.value.startDate).getTime() : 0,
-                                    max: f.value ? new Date(f.value.endDate).getTime() : 0
+                                    min: f.value ? new Date(f.value.startDate) : 0,
+                                    max: f.value ? new Date(f.value.endDate) : 0
                                 };
                             })[0];
                         } else if (column.type && column.type === 'date') {
                             query[column.name] = column.filter.map(f => {
                                 return {
-                                    min: f.min ? Date.now() + (f.min * (24 * 60 * 60 * 1000)) : Date.now(),
-                                    max: f.max ? Date.now() + (f.max * (24 * 60 * 60 * 1000)) : Date.now()
+                                    min: f.min ? new Date(Date.now() + (f.min * (24 * 60 * 60 * 1000))) : new Date(),
+                                    max: f.max ? new Date(Date.now() + (f.max * (24 * 60 * 60 * 1000))) : new Date()
                                 };
                             })[0];
                         } else {
