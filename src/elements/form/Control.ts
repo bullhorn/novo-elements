@@ -106,8 +106,8 @@ import { Helpers } from './../../utils/Helpers';
         </div>
     `,
     host: {
-        '[class.disabled]': 'control.disabled',
-        '[class]': 'control.controlType'
+        '[class]': 'control.controlType',
+        '[class.disabled]': 'control.disabled'
     }
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy {
