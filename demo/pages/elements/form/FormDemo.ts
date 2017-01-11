@@ -9,6 +9,7 @@ let FileInputControlsDemoTpl = require('./templates/FileInputControls.html');
 let CalendarControlsDemoTpl = require('./templates/CalendarInputControls.html');
 let FieldsetsFormDemoTpl = require('./templates/DynamicFormFieldSets.html');
 let PickerControlsDemoTpl = require('./templates/PickerControls.html');
+let UpdatingFormDemoTpl = require('./templates/UpdatingFormDemo.html');
 import { MockMeta, MockMetaHeaders } from './MockMeta';
 // Vendor
 import {
@@ -24,40 +25,9 @@ const template = `
     <h2>Static Form</h2>
     <p>Static forms <code>&lt;novo-form /&gt;</code>.
 
-    <h5>Textbox Based Controls</h5>
-    <div class="example form-demo">${TextBasedControlsDemoTpl}</div>
-    <code-snippet [code]="TextBasedControlsDemoTpl"></code-snippet>
-
-    <h5>Checkbox Controls</h5>
-    <div class="example form-demo">${CheckBoxControlsDemoTpl}</div>
-    <code-snippet [code]="CheckBoxControlsDemoTpl"></code-snippet>
-
-    <h5>File Input Controls</h5>
-    <div class="example form-demo">${FileInputControlsDemoTpl}</div>
-    <code-snippet [code]="FileInputControlsDemoTpl"></code-snippet>
-
-    <h5>Calendar Controls</h5>
-    <div class="example form-demo">${CalendarControlsDemoTpl}</div>
-    <code-snippet [code]="CalendarControlsDemoTpl"></code-snippet>
-
-    <h5>Picker Controls</h5>
-    <div class="example form-demo">${PickerControlsDemoTpl}</div>
-    <code-snippet [code]="PickerControlsDemoTpl"></code-snippet>
-
-    <h2>Dynamic Form</h2>
-    <p>Dynamic forms are composed of one element, <code>&lt;novo-dynamic-form [controls]="controls"/&gt;</code> and allow you to pass in the controls and form and it will create the form for you.</p>
-
-    <h5>Basic</h5>
-    <div class="example form-demo dynamic">${DynamicFormDemoTpl}</div>
-    <code-snippet [code]="DynamicFormDemoTpl"></code-snippet>
-
-    <h5>Vertical</h5>
-    <div class="example form-demo dynamic">${VerticalDynamicFormDemoTpl}</div>
-    <code-snippet [code]="VerticalDynamicFormDemoTpl"></code-snippet>
-
-    <h5>Fieldsets</h5>
-    <div class="example form-demo fieldsets">${FieldsetsFormDemoTpl}</div>
-    <code-snippet [code]="FieldsetsFormDemoTpl"></code-snippet>
+    <h5>Updating Fields/Status</h5>
+    <div class="example form-demo updating">${UpdatingFormDemoTpl}</div>
+    <code-snippet [code]="UpdatingFormDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -74,6 +44,7 @@ export class FormDemoComponent {
     private CalendarControlsDemoTpl: string = CalendarControlsDemoTpl;
     private FieldsetsFormDemoTpl: string = FieldsetsFormDemoTpl;
     private PickerControlsDemoTpl: string = PickerControlsDemoTpl;
+    private UpdatingFormDemoTpl: string = UpdatingFormDemoTpl;
     private quickNoteConfig: any;
     private textControl: any;
     private emailControl: any;
@@ -103,6 +74,8 @@ export class FormDemoComponent {
     private singlePickerControl: any;
     private multiPickerControl: any;
     private pickerForm: any;
+    private updatingForm: any;
+    private updatingFormControls: [any];
 
     constructor(private formUtils: FormUtils) {
         // Quick note config
@@ -175,6 +148,9 @@ export class FormDemoComponent {
         formUtils.setInitialValuesFieldsets(this.fieldsets, { firstName: 'Initial F Name', number: 12 });
         this.fieldsetsForm = formUtils.toFormGroupFromFieldset(this.fieldsets);
 
+        // Updating form
+        this.updatingFormControls = [this.textControl, this.percentageControl, this.checkControl, this.singlePickerControl, this.fileControl];
+        this.updatingForm = formUtils.toFormGroup(this.updatingFormControls);
     }
 
     save(form) {

@@ -28,7 +28,7 @@ import { Helpers } from './../../utils/Helpers';
                     {{control.label}}
                 </label>
                 <!--Required Indicator-->
-                <i [hidden]="!control.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
+                <i [hidden]="!form.controls[control.key].required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
                 <!--Form Controls-->
                 <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType" [attr.data-automation-id]="control.key">
                     <!--Text-based Inputs-->
@@ -102,12 +102,14 @@ import { Helpers } from './../../utils/Helpers';
                 <span *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
                 <span *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
                 <span *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
+                <span *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
             </div>
         </div>
     `,
     host: {
         '[class]': 'control.controlType',
-        '[class.disabled]': 'control.disabled'
+        '[class.disabled]': 'form.controls[control.key].disabled',
+        '[class.hidden]': 'form.controls[control.key].hidden'
     }
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy {
