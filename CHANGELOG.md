@@ -1,3 +1,13 @@
+<a name="2.0.66"></a>
+## [2.0.66](https://github.com/bullhorn/novo-elements/compare/v2.0.65...v2.0.66) (2017-01-11)
+
+
+### Features
+
+* **select:** allowing typeaheads for selects to handle multiple characters ([e9c1484](https://github.com/bullhorn/novo-elements/commit/e9c1484))
+
+
+
 <a name="2.0.65"></a>
 ## [2.0.65](https://github.com/bullhorn/novo-elements/compare/v2.0.64...v2.0.65) (2017-01-11)
 
