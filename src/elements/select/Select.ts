@@ -62,6 +62,8 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     };
     onModelTouched: Function = () => {
     };
+    filterTerm: string = '';
+    filterTermTimeout;
 
     constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
@@ -120,7 +122,6 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         this.empty = true;
     }
 
-    // TODO: Add key listener to jump to options starting with that letter.
     onKeyDown(event) {
         if (this.active) {
             if (!this.header.open) {
@@ -157,10 +158,13 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
                 this.selectedIndex--;
                 this.toggleHeader(null, true);
             } else if (event.keyCode >= 65 && event.keyCode <= 90) {
+                clearTimeout(this.filterTermTimeout);
+                this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 500);
                 let char = String.fromCharCode(event.keyCode);
+                this.filterTerm = this.filterTerm.concat(char);
                 let element = this.element.nativeElement;
                 let list = element.querySelector('.novo-select-list');
-                let item = element.querySelector(`[data-automation-value^=${char}]`);
+                let item = element.querySelector(`[data-automation-value^=${this.filterTerm} i]`);
                 if (item) {
                     list.scrollTop = item.offsetTop;
                 }
