@@ -5,8 +5,6 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick'; // TODO - change imports
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from './../../services/novo-label-service';
-// Vendor
-import { Observable } from 'rxjs/Rx';
 
 // Value accessor for the component (supports ngModel)
 const SELECT_VALUE_ACCESSOR = {
@@ -64,15 +62,11 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     };
     onModelTouched: Function = () => {
     };
-    filterTerm: string;
+    filterTerm: string = '';
+    filterTermTimeout;
 
     constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
-        this.filterTerm = '';
-
-        let keydown = Observable.fromEvent(document, 'keydown')
-                                .debounceTime(500);
-        keydown.subscribe(x => this.filterTerm = '');
     }
 
     ngOnInit() {
@@ -164,6 +158,8 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
                 this.selectedIndex--;
                 this.toggleHeader(null, true);
             } else if (event.keyCode >= 65 && event.keyCode <= 90) {
+                clearTimeout(this.filterTermTimeout);
+                this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 500);
                 let char = String.fromCharCode(event.keyCode);
                 this.filterTerm = this.filterTerm.concat(char);
                 let element = this.element.nativeElement;
