@@ -1,3 +1,13 @@
+<a name="2.0.65"></a>
+## [2.0.65](https://github.com/bullhorn/novo-elements/compare/v2.0.64...v2.0.65) (2017-01-11)
+
+
+### Bug Fixes
+
+* **Form:** Fixing disabled styles ([73e86ac](https://github.com/bullhorn/novo-elements/commit/73e86ac))
+
+
+
 <a name="2.0.64"></a>
 ## [2.0.64](https://github.com/bullhorn/novo-elements/compare/v2.0.63...v2.0.64) (2017-01-10)
 
