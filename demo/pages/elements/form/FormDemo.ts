@@ -184,7 +184,6 @@ export class FormDemoComponent {
         this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time' });
         this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
 
-
         let calculateTaxes = (form) => {
             let itemValue = Math.round(((form.controls['tax'].value / 100) * form.controls['itemValue'].value) * 100) / 100;
             form.controls['totalValue'].setValue(itemValue);
@@ -194,14 +193,11 @@ export class FormDemoComponent {
                 form.controls['comments'].show();
                 form.controls['comments'].enable();
                 form.controls['comments'].setRequired(true);
-                form.controls['comments'].markAsInvalid('This field is now required!');
-                let comments = document.getElementById('comments');
-                if (comments) {
-                    comments.focus();
+                if (!control.value) {
+                    form.controls['comments'].markAsInvalid('This field is now required!');
                 }
             } else {
-                form.controls['comments'].hide();
-                form.controls['comments'].reset();
+                form.controls['comments'].hide(false);
                 form.controls['comments'].disable();
                 form.controls['comments'].setRequired(false);
             }
@@ -211,10 +207,10 @@ export class FormDemoComponent {
         // Tax Demo
         this.salesTaxControl = new TextBoxControl({ type: 'number', key: 'tax', value: 9, label: 'Tax', interactions: [calculateTaxes] });
         this.itemValueControl = new TextBoxControl({ type: 'number', key: 'itemValue', value: 348.22, label: 'Item Value', interactions: [calculateTaxes] });
-        this.totalValueControl = new TextBoxControl({ type: 'number', readOnly: true, key: 'totalValue', label: 'Total Value' });
+        this.totalValueControl = new TextBoxControl({ type: 'number', disabled: true, key: 'totalValue' });
         // Show/Hide Demo
         this.hasCommentsControl = new CheckboxControl({ key: 'isCommentEnabled', value: false, label: 'I have a comment', interactions: [toggleCommentsInput] });
-        this.commentsControl = new TextBoxControl({ type: 'text', key: 'comments', disabled: true, /*hidden: true,*/ label: 'Comments' });
+        this.commentsControl = new TextBoxControl({ type: 'text', key: 'comments', disabled: true, hidden: true, label: 'Comments' });
         this.fieldInteractionForm = formUtils.toFormGroup([this.salesTaxControl, this.itemValueControl, this.totalValueControl, this.hasCommentsControl, this.commentsControl]);
 
         // Dynamic
