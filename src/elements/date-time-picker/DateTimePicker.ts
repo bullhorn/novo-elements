@@ -64,7 +64,7 @@ export type componentTabStates = 'date' | 'time';
                     <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
                     <span *ngIf="!military" class="meridian">{{meridian}}</span>
                 </span>
-                <i class="indicator" [@indicatorState]="componentTabState"></i>
+                <i class="date-time-indicator" [@indicatorState]="componentTabState"></i>
             </div>
             <div class="view-container" [@containerState]="componentTabState">
                 <div class="calendar">
