@@ -2,15 +2,15 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 export interface NovoFormGroup {
-    layout?:any;
-    controls?:any;
-    value?:any;
-    valid?:boolean;
+    layout?: any;
+    controls?: any;
+    value?: any;
+    valid?: boolean;
 }
 
 export interface NovoFieldset {
-    title?:string;
-    controls:Array<any>;
+    title?: string;
+    controls: Array<any>;
 }
 
 @Component({
@@ -20,7 +20,7 @@ export interface NovoFieldset {
     `
 })
 export class NovoFieldsetHeaderElement {
-    @Input() title:string;
+    @Input() title: string;
 }
 
 @Component({
@@ -35,9 +35,9 @@ export class NovoFieldsetHeaderElement {
     `
 })
 export class NovoFieldsetElement {
-    @Input() controls:Array<any> = [];
-    @Input() form:any;
-    @Input() title:string;
+    @Input() controls: Array<any> = [];
+    @Input() form: any;
+    @Input() title: string;
 }
 
 @Component({
@@ -56,10 +56,10 @@ export class NovoFieldsetElement {
     `
 })
 export class NovoDynamicFormElement implements OnInit, OnChanges {
-    @Input() controls:Array<any> = [];
-    @Input() fieldsets:Array<NovoFieldset> = [];
-    @Input() form:NovoFormGroup;
-    @Input() layout:string;
+    @Input() controls: Array<any> = [];
+    @Input() fieldsets: Array<NovoFieldset> = [];
+    @Input() form: NovoFormGroup;
+    @Input() layout: string;
 
     allFieldsRequired = false;
     allFieldsNotRequired = false;
@@ -82,10 +82,10 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
         this.ngOnChanges();
     }
 
-    ngOnChanges(changes?:SimpleChanges) {
+    ngOnChanges(changes?: SimpleChanges) {
         if (this.fieldsets) {
-            let requiredFields:Array<any> = [];
-            let nonRequiredFields:Array<any> = [];
+            let requiredFields: Array<any> = [];
+            let nonRequiredFields: Array<any> = [];
             this.fieldsets.forEach(fieldset => {
                 fieldset.controls.forEach(control => {
                     if (control.required) {

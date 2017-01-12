@@ -28,7 +28,7 @@ import { Helpers } from './../../utils/Helpers';
                     {{control.label}}
                 </label>
                 <!--Required Indicator-->
-                <i [hidden]="!form.controls[control.key].required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
+                <i [hidden]="!form?.controls[control.key]?.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
                 <!--Form Controls-->
                 <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType" [attr.data-automation-id]="control.key">
                     <!--Text-based Inputs-->
@@ -108,8 +108,8 @@ import { Helpers } from './../../utils/Helpers';
     `,
     host: {
         '[class]': 'control.controlType',
-        '[class.disabled]': 'form.controls[control.key].disabled',
-        '[class.hidden]': 'form.controls[control.key].hidden'
+        '[class.disabled]': 'form?.controls[control.key]?.disabled',
+        '[class.hidden]': 'form?.controls[control.key]?.hidden'
     }
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy {

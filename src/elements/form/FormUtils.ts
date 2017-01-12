@@ -58,18 +58,27 @@ export class NovoFormControl extends FormControl {
     markAsInvalid(message: string): void {
         this.markAsDirty();
         this.markAsTouched();
-        this.setErrors(Object.assign(this.errors, { custom: message }));
+        this.setErrors(Object.assign(this.errors || {}, { custom: message }));
     }
 }
 
 @Injectable()
 export class FormUtils {
-    toFormGroup(controls) {
+    toFormGroupNew(controls) {
         let group: any = {};
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
             let formControl = new NovoFormControl(control, value);
             group[control.key] = formControl;
+        });
+        return new FormGroup(group);
+    }
+
+    toFormGroup(controls) {
+        let group: any = {};
+        controls.forEach(control => {
+            let value = Helpers.isBlank(control.value) ? '' : control.value;
+            group[control.key] = new FormControl(value, control.validators, control.asyncValidators);
         });
         return new FormGroup(group);
     }
