@@ -77,6 +77,26 @@ export class Helpers {
         return obj instanceof Date;
     }
 
+    static today():Date {
+        return Helpers.clearTime(new Date());
+    }
+
+    static tomorrow(value?:any):Date {
+        let dt = (value) ? Helpers.clearTime(value) : Helpers.today();
+        return Helpers.addDays(Helpers.today(), 1);
+    }
+
+    static clearTime(value: any):Date {
+        let dt = Helpers.isDate(value) ? value : new Date(value);
+        return new Date(dt.setHours(0, 0, 0, 0));
+    }
+
+    static addDays(value: any, num = 1):Date {
+        let dt = Helpers.isDate(value) ? value : new Date(value);
+        let aDay:number = (24 * 60 * 60 * 1000);
+        return new Date(dt.getTime() + (aDay * num));
+    }
+
     static sortByField(fields: any, reverse = false) {
         return (previous: any, current: any) => {
             //return (a[field] < b[field]) ? -1 : (a[field] > b[field]) ? 1 : 0; // eslint-disable-line

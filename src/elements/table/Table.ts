@@ -1,4 +1,3 @@
-import * as console from 'console';
 // Vendor
 import { Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
 // APP
@@ -332,6 +331,7 @@ export class NovoTableElement implements DoCheck {
     onFilterClick(column, filter) {
         if (filter.range) {
             column.calenderShow = true;
+            return;
         }
         if (Array.isArray(column.filter) && column.multiple) {
             if (~column.filter.indexOf(filter)) {
@@ -406,17 +406,20 @@ export class NovoTableElement implements DoCheck {
                     } else if (Array.isArray(column.filter)) {
                         // The filters are an array (multi-select), check value
                         if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
-                            query[column.name] = column.filter.map(f => {
+                            let ranges = column.filter.filter(f => f.value.startDate && f.value.endDate).map(f => {
                                 return {
-                                    min: f.value ? new Date(f.value.startDate) : 0,
-                                    max: f.value ? new Date(f.value.endDate) : 0
+                                    min: f.value ? Helpers.clearTime(f.value.startDate) : 0,
+                                    max: f.value ? Helpers.tomorrow(f.value.endDate) : 0
                                 };
-                            })[0];
+                            });
+                            if (ranges.length) {
+                                query[column.name] = ranges[0];
+                            }
                         } else if (column.type && column.type === 'date') {
                             query[column.name] = column.filter.map(f => {
                                 return {
-                                    min: f.min ? new Date(Date.now() + (f.min * (24 * 60 * 60 * 1000))) : new Date(),
-                                    max: f.max ? new Date(Date.now() + (f.max * (24 * 60 * 60 * 1000))) : new Date()
+                                    min: f.min ? Helpers.addDays(Helpers.today(), f.min) : Helpers.today(),
+                                    max: f.max ? Helpers.addDays(Helpers.tomorrow(), f.max) : Helpers.tomorrow()
                                 };
                             })[0];
                         } else {
