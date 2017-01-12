@@ -2,6 +2,7 @@
 import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
+import { NovoToastService } from '../../elements/toast/ToastService';
 // APP
 import { NovoFormGroup } from './DynamicForm';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -134,7 +135,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private _focused: boolean = false;
     formattedValue: string = '';
 
-    constructor(element: ElementRef, public labels: NovoLabelService) {
+    constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService) {
         super(element);
     }
 
@@ -157,12 +158,19 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
         // Subscribe to control interactions
         if (this.control.interactions) {
+            if (!Helpers.isBlank(this.form.controls[this.control.key].value)) {
+                this.executeInteractions();
+            }
             // On init, iterate through all actions and subscribe to
-            this.valueChangeSubscription = this.form[this.control.key].valueChange.subscribe(() => {
-                for (let interaction of this.control.interactions) {
-                    interaction(this.form, this.control);
-                }
+            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.subscribe(() => {
+                this.executeInteractions();
             });
+        }
+    }
+
+    executeInteractions() {
+        for (let interaction of this.control.interactions) {
+            interaction(this.form, this.form.controls[this.control.key], this.toast);
         }
     }
 

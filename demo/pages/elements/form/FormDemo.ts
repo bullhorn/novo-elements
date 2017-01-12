@@ -10,6 +10,7 @@ let CalendarControlsDemoTpl = require('./templates/CalendarInputControls.html');
 let FieldsetsFormDemoTpl = require('./templates/DynamicFormFieldSets.html');
 let PickerControlsDemoTpl = require('./templates/PickerControls.html');
 let UpdatingFormDemoTpl = require('./templates/UpdatingFormDemo.html');
+let FieldInteractionTpl = require('./templates/FieldInteraction.html');
 import { MockMeta, MockMetaHeaders } from './MockMeta';
 // Vendor
 import {
@@ -64,6 +65,10 @@ const template = `
     <h5>Updating Fields/Status</h5>
     <div class="example form-demo updating">${UpdatingFormDemoTpl}</div>
     <code-snippet [code]="UpdatingFormDemoTpl"></code-snippet>
+    
+    <h5>Field Interactions</h5>
+    <div class="example form-demo field-interactions">${FieldInteractionTpl}</div>
+    <code-snippet [code]="FieldInteractionTpl"></code-snippet>
 </div>
 `;
 
@@ -81,6 +86,7 @@ export class FormDemoComponent {
     private FieldsetsFormDemoTpl: string = FieldsetsFormDemoTpl;
     private PickerControlsDemoTpl: string = PickerControlsDemoTpl;
     private UpdatingFormDemoTpl: string = UpdatingFormDemoTpl;
+    private FieldInteractionTpl: string = FieldInteractionTpl;
     private quickNoteConfig: any;
     private textControl: any;
     private emailControl: any;
@@ -105,6 +111,12 @@ export class FormDemoComponent {
     private dynamicVertical: any;
     private dynamicVerticalForm: any;
     private calendarForm: any;
+    private salesTaxControl: any;
+    private itemValueControl: any;
+    private totalValueControl: any;
+    private fieldInteractionForm: any;
+    private hasCommentsControl: any;
+    private commentsControl: any;
     private fieldsets: Array<any>;
     private fieldsetsForm: any;
     private singlePickerControl: any;
@@ -171,6 +183,39 @@ export class FormDemoComponent {
         this.timeControl = new TimeControl({ key: 'time', label: 'Time' });
         this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time' });
         this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
+
+
+        let calculateTaxes = (form) => {
+            let itemValue = Math.round(((form.controls['tax'].value / 100) * form.controls['itemValue'].value) * 100) / 100;
+            form.controls['totalValue'].setValue(itemValue);
+        };
+        let toggleCommentsInput = (form, control) => {
+            if (control.value) {
+                form.controls['comments'].show();
+                form.controls['comments'].enable();
+                form.controls['comments'].setRequired(true);
+                form.controls['comments'].markAsInvalid('This field is now required!');
+                let comments = document.getElementById('comments');
+                if (comments) {
+                    comments.focus();
+                }
+            } else {
+                form.controls['comments'].hide();
+                form.controls['comments'].reset();
+                form.controls['comments'].disable();
+                form.controls['comments'].setRequired(false);
+            }
+        };
+
+        // Fields with interactions
+        // Tax Demo
+        this.salesTaxControl = new TextBoxControl({ type: 'number', key: 'tax', value: 9, label: 'Tax', interactions: [calculateTaxes] });
+        this.itemValueControl = new TextBoxControl({ type: 'number', key: 'itemValue', value: 348.22, label: 'Item Value', interactions: [calculateTaxes] });
+        this.totalValueControl = new TextBoxControl({ type: 'number', readOnly: true, key: 'totalValue', label: 'Total Value' });
+        // Show/Hide Demo
+        this.hasCommentsControl = new CheckboxControl({ key: 'isCommentEnabled', value: false, label: 'I have a comment', interactions: [toggleCommentsInput] });
+        this.commentsControl = new TextBoxControl({ type: 'text', key: 'comments', disabled: true, /*hidden: true,*/ label: 'Comments' });
+        this.fieldInteractionForm = formUtils.toFormGroup([this.salesTaxControl, this.itemValueControl, this.totalValueControl, this.hasCommentsControl, this.commentsControl]);
 
         // Dynamic
         this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, 'TOKEN');
