@@ -1,0 +1,8 @@
+<button theme="secondary" (click)="toggleEnabled()">Toggle Enabled</button>
+<button theme="secondary" (click)="toggleRequired()">Toggle Required</button>
+<button theme="secondary" (click)="markAsInvalid()">Mark As Invalid</button>
+<br/><br/>
+<novo-dynamic-form layout="vertical" [controls]="updatingFormControls" [(form)]="updatingForm" #updatingFormRef></novo-dynamic-form>
+<div class="final-value">Valid: {{updatingFormRef.isValid | json}}</div>
+<div class="final-value">Values: {{updatingFormRef.values | json}}</div>
+<div class="final-value">Updated Values: {{updatingFormRef.updatedValues() | json}}</div>

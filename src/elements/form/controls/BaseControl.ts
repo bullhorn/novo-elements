@@ -31,6 +31,7 @@ export interface NovoControlConfig {
     name?: string;
     readOnly?: boolean;
     closeOnSelect?: boolean;
+    interactions?: Array<Function>;
 }
 
 export class BaseControl {
@@ -60,6 +61,7 @@ export class BaseControl {
     name: string;
     readOnly: boolean;
     closeOnSelect: boolean;
+    interactions: Array<Function>;
 
     constructor(config: NovoControlConfig) {
         this.validators = config.validators || [];
@@ -95,5 +97,6 @@ export class BaseControl {
             this.validators.push(Validators.minLength(this.minlength));
         }
         this.closeOnSelect = !!config.closeOnSelect;
+        this.interactions = config.interactions;
     }
 }

@@ -106,7 +106,7 @@ export const MockMeta = {
             type: 'tiles',
             dataType: 'String',
             label: 'Next Action',
-            required: false,
+            required: true,
             options: [
                 {
                     value: 'none',

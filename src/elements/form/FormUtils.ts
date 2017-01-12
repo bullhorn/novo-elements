@@ -23,13 +23,53 @@ import { EntityPickerResults } from './../picker/extras/entity-picker-results/En
 import { Helpers } from './../../utils/Helpers';
 import { NovoFieldset } from './DynamicForm';
 
+export class NovoFormControl extends FormControl {
+    hidden: boolean;
+    required: boolean;
+
+    constructor(value: any, control: NovoControlConfig) {
+        super(value, control.validators, control.asyncValidators);
+
+        // Setting disable/enable
+        if (control.disabled) {
+            this.disable();
+        } else {
+            this.enable();
+        }
+        // Set hidden
+        this.hidden = control.hidden;
+        // Set required
+        this.required = control.required;
+    }
+
+    hide(): void {
+        this.hidden = true;
+        this.setValue(null);
+    }
+
+    show(): void {
+        this.hidden = false;
+    }
+
+    setRequired(req: boolean) {
+        this.required = req;
+    }
+
+    markAsInvalid(message: string): void {
+        this.markAsDirty();
+        this.markAsTouched();
+        this.setErrors(Object.assign({}, this.errors, { custom: message }));
+    }
+}
+
 @Injectable()
 export class FormUtils {
     toFormGroup(controls) {
         let group: any = {};
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
-            group[control.key] = new FormControl(value, control.validators, control.asyncValidators);
+            let formControl = new NovoFormControl(value, control);
+            group[control.key] = formControl;
         });
         return new FormGroup(group);
     }

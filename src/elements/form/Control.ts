@@ -1,7 +1,8 @@
 // NG2
-import { Component, Input, Output, ElementRef, EventEmitter, trigger, state, style, transition, animate, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
+import { NovoToastService } from '../../elements/toast/ToastService';
 // APP
 import { NovoFormGroup } from './DynamicForm';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -28,7 +29,7 @@ import { Helpers } from './../../utils/Helpers';
                     {{control.label}}
                 </label>
                 <!--Required Indicator-->
-                <i [hidden]="!control.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
+                <i [hidden]="!form?.controls[control.key]?.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
                 <!--Form Controls-->
                 <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType" [attr.data-automation-id]="control.key">
                     <!--Text-based Inputs-->
@@ -102,18 +103,22 @@ import { Helpers } from './../../utils/Helpers';
                 <span *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
                 <span *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
                 <span *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
+                <span *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
             </div>
         </div>
     `,
     host: {
         '[class]': 'control.controlType',
-        '[class.disabled]': 'control.disabled'
+        '[class.disabled]': 'form?.controls[control.key]?.disabled',
+        '[class.hidden]': 'form?.controls[control.key]?.hidden'
     }
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy {
     @Input() control;
     @Input() form: NovoFormGroup;
     @Output() change: EventEmitter<any> = new EventEmitter();
+
+    valueChangeSubscription: any;
 
     @Output('blur')
     get onBlur(): Observable<FocusEvent> {
@@ -130,7 +135,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private _focused: boolean = false;
     formattedValue: string = '';
 
-    constructor(element: ElementRef, public labels: NovoLabelService) {
+    constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService) {
         super(element);
     }
 
@@ -151,9 +156,29 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 this.clearValue();
             });
         }
+        // Subscribe to control interactions
+        if (this.control.interactions) {
+            if (!Helpers.isBlank(this.form.controls[this.control.key].value)) {
+                this.executeInteractions();
+            }
+            // On init, iterate through all actions and subscribe to
+            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.subscribe(() => {
+                this.executeInteractions();
+            });
+        }
+    }
+
+    executeInteractions() {
+        for (let interaction of this.control.interactions) {
+            interaction(this.form, this.form.controls[this.control.key], this.toast);
+        }
     }
 
     ngOnDestroy() {
+        // Unsubscribe from control interactions
+        if (this.valueChangeSubscription) {
+            this.valueChangeSubscription.unsubscribe();
+        }
         super.ngOnDestroy();
         if (this.control) {
             // Un-listen for clear events
