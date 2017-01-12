@@ -1,3 +1,18 @@
+<a name="2.0.67"></a>
+## [2.0.67](https://github.com/bullhorn/novo-elements/compare/v2.0.66...v2.0.67) (2017-01-12)
+
+
+### Bug Fixes
+
+* **Table:** Date Ranges should clear times accordingly. ([#346](https://github.com/bullhorn/novo-elements/issues/346)) ([93ed484](https://github.com/bullhorn/novo-elements/commit/93ed484))
+
+
+### Features
+
+* **form:** Adding ability to have form interactions that can modify other fields and perform actions on the form ([63ba3c7](https://github.com/bullhorn/novo-elements/commit/63ba3c7))
+
+
+
 <a name="2.0.66"></a>
 ## [2.0.66](https://github.com/bullhorn/novo-elements/compare/v2.0.65...v2.0.66) (2017-01-11)
 
