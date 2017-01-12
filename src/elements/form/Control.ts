@@ -12,7 +12,7 @@ import { Helpers } from './../../utils/Helpers';
 @Component({
     selector: 'novo-control',
     template: `
-        <div class="novo-control-container" [formGroup]="form" *ngIf="!control.hidden || control.type === 'hidden' || control.controlType === 'hidden'">
+        <div class="novo-control-container" [formGroup]="form" [hidden]="form?.controls[control.key]?.hidden || control.type === 'hidden' || control.controlType === 'hidden'">
             <!--Label (for horizontal)-->
             <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical'">{{control.label}}</label>
             <div class="novo-control-input-container">

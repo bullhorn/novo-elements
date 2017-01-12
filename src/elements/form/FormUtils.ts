@@ -26,10 +26,11 @@ import { NovoFieldset } from './DynamicForm';
 export class NovoFormControl extends FormControl {
     hidden: boolean;
     required: boolean;
+    initialValue: any;
 
     constructor(value: any, control: NovoControlConfig) {
         super(value, control.validators, control.asyncValidators);
-
+        this.initialValue = value;
         // Setting disable/enable
         if (control.disabled) {
             this.disable();
@@ -42,9 +43,11 @@ export class NovoFormControl extends FormControl {
         this.required = control.required;
     }
 
-    hide(): void {
+    hide(clearValue: true): void {
         this.hidden = true;
-        this.setValue(null);
+        if (clearValue) {
+            this.setValue(null);
+        }
     }
 
     show(): void {
@@ -166,7 +169,8 @@ export class FormUtils {
             multiple: field.multiValue,
             disabled: field.disabled || false,
             config: null,
-            options: null
+            options: null,
+            interactions: field.interactions
         };
         let optionsConfig = this.getControlOptions(field, http, config);
 
