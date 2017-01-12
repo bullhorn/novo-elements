@@ -58,7 +58,7 @@ export class NovoFormControl extends FormControl {
     markAsInvalid(message: string): void {
         this.markAsDirty();
         this.markAsTouched();
-        this.setErrors(Object.assign(this.errors || {}, { custom: message }));
+        this.setErrors(Object.assign({}, this.errors, { custom: message }));
     }
 }
 
