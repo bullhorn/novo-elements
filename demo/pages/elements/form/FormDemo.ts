@@ -188,7 +188,7 @@ export class FormDemoComponent {
 
         // Updating form
         this.updatingFormControls = [this.textControl, this.percentageControl, this.checkControl, this.singlePickerControl, this.fileControl];
-        this.updatingForm = formUtils.toFormGroupNew(this.updatingFormControls);
+        this.updatingForm = formUtils.toFormGroup(this.updatingFormControls);
     }
 
     toggleEnabled() {

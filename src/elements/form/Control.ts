@@ -117,6 +117,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     @Input() form: NovoFormGroup;
     @Output() change: EventEmitter<any> = new EventEmitter();
 
+    valueChangeSubscription: any;
+
     @Output('blur')
     get onBlur(): Observable<FocusEvent> {
         return this._blurEmitter.asObservable();
@@ -156,7 +158,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         // Subscribe to control interactions
         if (this.control.interactions) {
             // On init, iterate through all actions and subscribe to
-            this.change.subscribe(() => {
+            this.valueChangeSubscription = this.form[this.control.key].valueChange.subscribe(() => {
                 for (let interaction of this.control.interactions) {
                     interaction(this.form, this.control);
                 }
@@ -166,7 +168,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     ngOnDestroy() {
         // Unsubscribe from control interactions
-        this.change.unsubscribe();
+        if (this.valueChangeSubscription) {
+            this.valueChangeSubscription.unsubscribe();
+        }
         super.ngOnDestroy();
         if (this.control) {
             // Un-listen for clear events

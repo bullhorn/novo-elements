@@ -64,21 +64,12 @@ export class NovoFormControl extends FormControl {
 
 @Injectable()
 export class FormUtils {
-    toFormGroupNew(controls) {
-        let group: any = {};
-        controls.forEach(control => {
-            let value = Helpers.isBlank(control.value) ? '' : control.value;
-            let formControl = new NovoFormControl(control, value);
-            group[control.key] = formControl;
-        });
-        return new FormGroup(group);
-    }
-
     toFormGroup(controls) {
         let group: any = {};
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
-            group[control.key] = new FormControl(value, control.validators, control.asyncValidators);
+            let formControl = new NovoFormControl(value, control);
+            group[control.key] = formControl;
         });
         return new FormGroup(group);
     }
