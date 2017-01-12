@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, ElementRef, EventEmitter, trigger, state, style, transition, animate, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
 // APP
@@ -153,9 +153,20 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 this.clearValue();
             });
         }
+        // Subscribe to control interactions
+        if (this.control.interactions) {
+            // On init, iterate through all actions and subscribe to
+            this.change.subscribe(() => {
+                for (let interaction of this.control.interactions) {
+                    interaction(this.form, this.control);
+                }
+            });
+        }
     }
 
     ngOnDestroy() {
+        // Unsubscribe from control interactions
+        this.change.unsubscribe();
         super.ngOnDestroy();
         if (this.control) {
             // Un-listen for clear events
