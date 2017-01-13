@@ -98,7 +98,8 @@ import { Helpers } from './../../utils/Helpers';
             <div class="error-message">
                 <span *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
                 <span *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
-                <span *ngIf="isDirty && errors?.maxlength">{{control.label | uppercase}} is required to be a maximum of {{ control.maxlength }} characters</span>
+                <span *ngIf="isDirty && maxLengthMet && !maxLength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
+                <span *ngIf="errors?.maxlength">Sorry, you have exceeded the maximum character count of {{ control.maxlength }} for this field</span>
                 <span *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
                 <span *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
                 <span *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
@@ -129,6 +130,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private _focusEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
     private _focused: boolean = false;
     formattedValue: string = '';
+    maxLengthMet: boolean = false;
 
     constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
@@ -233,24 +235,35 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         event.target.style.height = height;
     }
 
+    checkMaxLength(event) {
+        if (this.control && this.control.maxlength) {
+            if (event.target.value.length >= this.control.maxlength) {
+                this.maxLengthMet = true;
+            } else {
+                this.maxLengthMet = false;
+            }
+        }
+    }
+
     modelChange(value) {
         if (!value) {
             this._focused = false;
         }
         this.change.emit(value);
+        this.checkMaxLength(value);
     }
 
     restrictKeys(event) {
         const NUMBERS_ONLY = /[0-9]/;
         const NUMBERS_WITH_DECIMAL = /[0-9\.]/;
         let key = String.fromCharCode(event.charCode);
-        // Types
+        //Type
         if (this.control.subType === 'number' && !NUMBERS_ONLY.test(key)) {
             event.preventDefault();
         } else if (~['currency', 'float', 'percentage'].indexOf(this.control.subType) && !NUMBERS_WITH_DECIMAL.test(key)) {
             event.preventDefault();
         }
-        // Max Length
+        //Max Length
         if (this.control.maxlength && event.target.value.length >= this.control.maxlength) {
             event.preventDefault();
         }
@@ -258,5 +271,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     emitChange(value) {
         this.change.emit(value);
+        this.checkMaxLength(value);
     }
 }

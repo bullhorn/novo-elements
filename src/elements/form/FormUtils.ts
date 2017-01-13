@@ -124,6 +124,7 @@ export class FormUtils {
             associatedEntity: field.associatedEntity,
             optionsType: field.optionsType,
             multiple: field.multiValue,
+            maxlength: field.maxLength,
             disabled: field.disabled || false,
             config: null,
             options: null
