@@ -240,15 +240,18 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     formatDateValue(event) {
         this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.dateFormat);
+        this.form.controls[this.control.key].setValue(this.formattedValue);
         this.toggleActive(null, false);
     }
 
     formatTimeValue(event) {
         this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.timeFormat);
+        this.form.controls[this.control.key].setValue(this.formattedValue);
     }
 
     formatDateTimeValue(event) {
         this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.dateTimeFormat);
+        this.form.controls[this.control.key].setValue(this.formattedValue);
     }
 
     resizeTextArea(event) {
