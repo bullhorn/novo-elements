@@ -58,6 +58,7 @@ export class BaseControl {
     options: Array<any>;
     type: string;
     name: string;
+    disabled: boolean;
     readOnly: boolean; // "disabled", so it appears in the model still
     closeOnSelect: boolean;
     interactions: Array<Function>;
@@ -83,6 +84,7 @@ export class BaseControl {
         this.optionsType = config.optionsType || null;
         this.forceClear = new EventEmitter();
         this.readOnly = !!config.readOnly || !!config.disabled;
+        this.disabled = !!config.disabled;
         if (this.required) {
             this.validators.push(Validators.required);
         }
