@@ -1,3 +1,13 @@
+<a name="2.0.70"></a>
+## [2.0.70](https://github.com/bullhorn/novo-elements/compare/v2.0.69...v2.0.70) (2017-01-17)
+
+
+### Bug Fixes
+
+* **form:** Fixing new disabled state to readOnly so the values appear in the mdoel ([ae846c5](https://github.com/bullhorn/novo-elements/commit/ae846c5))
+
+
+
 <a name="2.0.69"></a>
 ## [2.0.69](https://github.com/bullhorn/novo-elements/compare/v2.0.68...v2.0.69) (2017-01-17)
 
