@@ -27,10 +27,12 @@ export class NovoFormControl extends FormControl {
     hidden: boolean;
     required: boolean;
     initialValue: any;
+    label: string;
 
     constructor(value: any, control: NovoControlConfig) {
         super(value, control.validators, control.asyncValidators);
         this.initialValue = value;
+        this.label = control.label;
         // Setting disable/enable
         if (control.disabled) {
             this.disable();
