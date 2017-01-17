@@ -28,17 +28,14 @@ export class NovoFormControl extends FormControl {
     required: boolean;
     initialValue: any;
     label: string;
+    readOnly: boolean;
 
     constructor(value: any, control: NovoControlConfig) {
         super(value, control.validators, control.asyncValidators);
         this.initialValue = value;
         this.label = control.label;
-        // Setting disable/enable
-        if (control.disabled) {
-            this.disable();
-        } else {
-            this.enable();
-        }
+        // Setting read only
+        this.readOnly = control.readOnly;
         // Set hidden
         this.hidden = control.hidden;
         // Set required
@@ -58,6 +55,10 @@ export class NovoFormControl extends FormControl {
 
     setRequired(req: boolean) {
         this.required = req;
+    }
+
+    setReadOnly(read: boolean) {
+        this.readOnly = read;
     }
 
     markAsInvalid(message: string): void {
@@ -169,7 +170,7 @@ export class FormUtils {
             associatedEntity: field.associatedEntity,
             optionsType: field.optionsType,
             multiple: field.multiValue,
-            disabled: field.disabled || false,
+            readOnly: !!field.disabled || !!field.readOnly,
             config: null,
             options: null,
             interactions: field.interactions

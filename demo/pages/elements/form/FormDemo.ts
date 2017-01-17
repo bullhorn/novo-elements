@@ -65,7 +65,7 @@ const template = `
     <h5>Updating Fields/Status</h5>
     <div class="example form-demo updating">${UpdatingFormDemoTpl}</div>
     <code-snippet [code]="UpdatingFormDemoTpl"></code-snippet>
-    
+
     <h5>Field Interactions</h5>
     <div class="example form-demo field-interactions">${FieldInteractionTpl}</div>
     <code-snippet [code]="FieldInteractionTpl"></code-snippet>
@@ -219,7 +219,7 @@ export class FormDemoComponent {
         this.dynamicForm = formUtils.toFormGroupFromFieldset(this.dynamic);
 
         this.dynamicVertical = formUtils.toControls(MockMeta, '$ USD', {}, 'TOKEN');
-        formUtils.setInitialValues(this.dynamicVertical, { number: 0 });
+        formUtils.setInitialValues(this.dynamicVertical, { number: 0, firstName: 'Bobby Flay' });
         this.dynamicVerticalForm = formUtils.toFormGroup(this.dynamicVertical);
 
         // Dynamic + Fieldsets

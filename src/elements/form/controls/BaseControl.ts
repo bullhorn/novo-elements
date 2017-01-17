@@ -53,13 +53,12 @@ export class BaseControl {
     associatedEntity: string;
     optionsType: string;
     forceClear: EventEmitter<any>;
-    disabled: boolean;
     maxlength: number;
     minlength: number;
     options: Array<any>;
     type: string;
     name: string;
-    readOnly: boolean;
+    readOnly: boolean; // "disabled", so it appears in the model still
     closeOnSelect: boolean;
     interactions: Array<Function>;
 
@@ -83,8 +82,7 @@ export class BaseControl {
         this.associatedEntity = config.associatedEntity || null;
         this.optionsType = config.optionsType || null;
         this.forceClear = new EventEmitter();
-        this.disabled = config.disabled || false;
-        this.readOnly = config.readOnly || false;
+        this.readOnly = !!config.readOnly || !!config.disabled;
         if (this.required) {
             this.validators.push(Validators.required);
         }

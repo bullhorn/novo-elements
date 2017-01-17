@@ -8,6 +8,7 @@ export const MockMeta = {
             type: 'text',
             label: 'First Name',
             required: true,
+            disabled: true,
             sortOrder: 10
         },
         {
