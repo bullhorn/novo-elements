@@ -1,6 +1,6 @@
 // NG2
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 // APP
 import {
     AddressControl,
@@ -29,9 +29,12 @@ export class NovoFormControl extends FormControl {
     initialValue: any;
     label: string;
     readOnly: boolean;
+    validators: any;
+    hasRequiredValidator: boolean;
 
     constructor(value: any, control: NovoControlConfig) {
         super(value, control.validators, control.asyncValidators);
+        this.validators = control.validators;
         this.initialValue = value;
         this.label = control.label;
         // Setting read only
@@ -40,6 +43,7 @@ export class NovoFormControl extends FormControl {
         this.hidden = control.hidden;
         // Set required
         this.required = control.required;
+        this.hasRequiredValidator = this.required;
     }
 
     hide(clearValue: true): void {
@@ -55,6 +59,14 @@ export class NovoFormControl extends FormControl {
 
     setRequired(req: boolean) {
         this.required = req;
+
+        // Update validators to have the required
+        if (this.required && !this.hasRequiredValidator) {
+            let validators = [...this.validators];
+            validators.push(Validators.required);
+            this.setValidators(validators);
+            this.updateValueAndValidity();
+        }
     }
 
     setReadOnly(read: boolean) {
