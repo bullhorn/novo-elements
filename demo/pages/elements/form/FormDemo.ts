@@ -188,17 +188,17 @@ export class FormDemoComponent {
             let itemValue = Math.round(((form.controls['tax'].value / 100) * form.controls['itemValue'].value) * 100) / 100;
             form.controls['totalValue'].setValue(itemValue);
         };
-        let toggleCommentsInput = (form, control) => {
+         let toggleCommentsInput = (form, control) => {
             if (control.value) {
                 form.controls['comments'].show();
-                form.controls['comments'].enable();
+                form.controls['comments'].setReadOnly(false);
                 form.controls['comments'].setRequired(true);
                 if (!control.value) {
                     form.controls['comments'].markAsInvalid('This field is now required!');
                 }
             } else {
                 form.controls['comments'].hide(false);
-                form.controls['comments'].disable();
+                form.controls['comments'].setReadOnly(true);
                 form.controls['comments'].setRequired(false);
             }
         };
