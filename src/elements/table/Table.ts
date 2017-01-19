@@ -71,7 +71,7 @@ export class NovoTableHeaderElement {
                                             <span>{{ labels.filters }}</span>
                                             <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
-                                        <input type="text" *ngIf="showOptionsTextInput(column)" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.freetextFilter"/>
+                                        <input type="text" *ngIf="!!column.allowCustomTextOption" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.freetextFilter"/>
                                     </item>
                                     <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="getOptionDataAutomationId(option)">
                                         {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
@@ -100,7 +100,7 @@ export class NovoTableHeaderElement {
                                     </item>
                                     <div class="calender-container" [hidden]="!column.calenderShow">
                                         <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>Back to Preset Filters</div>
-                                        <novo-date-picker #rangePicker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column?.options[column.options.length-1].value" range="true"></novo-date-picker>
+                                        <novo-date-picker #rangePicker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column.filter" range="true"></novo-date-picker>
                                     </div>
                                 </list>
                             </novo-dropdown>
@@ -185,30 +185,30 @@ export class NovoTableHeaderElement {
     `
 })
 export class NovoTableElement implements DoCheck {
-    @Input() config:any = {};
-    @Input() columns:Array<any>;
-    @Input() theme:string;
-    @Input() skipSortAndFilterClear:boolean = false;
+    @Input() config: any = {};
+    @Input() columns: Array<any>;
+    @Input() theme: string;
+    @Input() skipSortAndFilterClear: boolean = false;
 
-    @Output() onRowClick:EventEmitter<any> = new EventEmitter();
-    @Output() onRowSelect:EventEmitter<any> = new EventEmitter();
-    @Output() onTableChange:EventEmitter<any> = new EventEmitter();
+    @Output() onRowClick: EventEmitter<any> = new EventEmitter();
+    @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
+    @Output() onTableChange: EventEmitter<any> = new EventEmitter();
 
-    _dataProvider:PagedCollection<any>;
-    _rows:Array<any> = [];
-    selected:Array<any> = [];
-    activeId:number = 0;
-    master:boolean = false;
-    indeterminate:boolean = false;
-    lastPage:number = 0;
-    selectedPageCount:number = 0;
-    showSelectAllMessage:boolean = false;
-    currentSortColumn:any;
-    pagedData:Array<any> = [];
-    pageSelected:any;
+    _dataProvider: PagedCollection<any>;
+    _rows: Array<any> = [];
+    selected: Array<any> = [];
+    activeId: number = 0;
+    master: boolean = false;
+    indeterminate: boolean = false;
+    lastPage: number = 0;
+    selectedPageCount: number = 0;
+    showSelectAllMessage: boolean = false;
+    currentSortColumn: any;
+    pagedData: Array<any> = [];
+    pageSelected: any;
 
     @Input()
-    set rows(rows:Array<any>) {
+    set rows(rows: Array<any>) {
         this.dataProvider = rows;
         if (rows && rows.length > 0) {
             this.setupColumnDefaults();
@@ -223,15 +223,15 @@ export class NovoTableElement implements DoCheck {
     }
 
     @Input()
-    set dataProvider(dp:any) {
+    set dataProvider(dp: any) {
         this._dataProvider = Array.isArray(dp) ? new PagedArrayCollection<any>(dp) : dp;
-        this._dataProvider.dataChange.debounceTime(100).subscribe((event:CollectionEvent) => {
+        this._dataProvider.dataChange.debounceTime(100).subscribe((event: CollectionEvent) => {
             switch (event.type) {
                 case CollectionEvent.CHANGE:
                     this._rows = event.data;
                     // Remove all selection on sort change if selection is on
                     if (this.config.rowSelectionStyle === 'checkbox') {
-                        this.pagedData =  event.data;
+                        this.pagedData = event.data;
                         this.pageSelected = this.pagedData.filter(r => r._selected);
                         this.rowSelectHandler();
                     }
@@ -250,7 +250,7 @@ export class NovoTableElement implements DoCheck {
         return this._dataProvider;
     }
 
-    constructor(public labels:NovoLabelService) {}
+    constructor(public labels: NovoLabelService) { }
 
     onPageChange(event) {
         //this.dataProvider.page = event.page;
@@ -329,7 +329,7 @@ export class NovoTableElement implements DoCheck {
      * @param filter
      */
     onFilterClick(column, filter) {
-        if (filter.range) {
+        if (filter.range && !column.calendarShow) {
             column.calenderShow = true;
             return;
         }
@@ -349,7 +349,7 @@ export class NovoTableElement implements DoCheck {
                 column.filter.push(filter);
             }
         } else {
-            column.filter = [filter];
+            column.filter = filter.value || filter;
         }
         this.onFilterChange();
     }
@@ -395,7 +395,7 @@ export class NovoTableElement implements DoCheck {
     onFilterChange() {
         if (this.config.filtering) {
             // Array of filters
-            const filters = this.columns.filter(col => col.filter && col.filter.length);
+            const filters = this.columns.filter(col => !Helpers.isEmpty(col.filter));
             if (filters.length) {
                 let query = {};
                 for (const column of filters) {
@@ -403,39 +403,30 @@ export class NovoTableElement implements DoCheck {
                         query[column.name] = (value, record) => {
                             return column.match(record, column.filter);
                         };
+                    } else if (column.preFilter && Helpers.isFunction(column.preFilter)) {
+                        query = Object.assign({}, query, column.preFilter(column.filter));
                     } else if (Array.isArray(column.filter)) {
                         // The filters are an array (multi-select), check value
-                        if (column.type && column.type === 'date' && column.filter.filter(fil => fil.range).length > 0) {
-                            let ranges = column.filter.filter(f => f.value.startDate && f.value.endDate).map(f => {
-                                return {
-                                    min: f.value ? Helpers.clearTime(f.value.startDate) : 0,
-                                    max: f.value ? Helpers.tomorrow(f.value.endDate) : 0
-                                };
-                            });
-                            if (ranges.length) {
-                                query[column.name] = ranges[0];
-                            }
-                        } else if (column.type && column.type === 'date') {
-                            query[column.name] = column.filter.map(f => {
-                                return {
-                                    min: f.min ? Helpers.addDays(Helpers.today(), f.min) : Helpers.today(),
-                                    max: f.max ? Helpers.addDays(Helpers.tomorrow(), f.max) : Helpers.tomorrow()
-                                };
-                            })[0];
+                        let options = column.filter;
+                        // We have an array of {value: '', labels: ''}
+                        if (options[0].value || options[0].label) {
+                            options = column.filter.map(opt => opt.value);
+                        }
+                        query[column.name] = { any: options };
+                    } else if (column.type && column.type === 'date') {
+                        if (column.filter.startDate && column.filter.endDate) {
+                            query[column.name] = {
+                                min: Helpers.clearTime(column.filter.startDate),
+                                max: Helpers.tomorrow(column.filter.endDate)
+                            };
                         } else {
-                            let options = column.filter;
-                            // We have an array of {value: '', labels: ''}
-                            if (options[0].value || options[0].label) {
-                                options = column.filter.map(opt => opt.value);
-                            }
-                            query[column.name] = { any: options };
+                            query[column.name] = {
+                                min: column.filter.min ? Helpers.addDays(Helpers.today(), column.filter.min) : Helpers.today(),
+                                max: column.filter.max ? Helpers.addDays(Helpers.tomorrow(), column.filter.max) : Helpers.tomorrow()
+                            };
                         }
                     } else {
-                        if ( column.preFilter && Helpers.isFunction(column.preFilter)) {
-                            query = Object.assign({}, query, column.preFilter(column.filter));
-                        } else {
-                            query[column.name] = column.filter;
-                        }
+                        query[column.name] = column.filter;
                     }
                 }
                 if (Helpers.isFunction(this.config.filtering)) {
@@ -468,15 +459,24 @@ export class NovoTableElement implements DoCheck {
      *
      * @description
      */
-    isFilterActive(columnFilters, filter) {
+    isFilterActive(column, filter) {
+        //TODO: This needs to be refactored
         let isActive = false;
-        if (columnFilters && columnFilters.filter && filter) {
-            if (typeof(filter) !== 'string') {
-                isActive = columnFilters.filter.some(columnFilter => {
-                    return columnFilter.label === filter.label;
-                });
+        if (column && column.filter && filter) {
+            if (Array.isArray(column.filter)) {
+                if (typeof (filter) !== 'string') {
+                    isActive = column.filter.some(item => {
+                        return item.label === filter.label;
+                    });
+                } else {
+                    isActive = column.filter.includes(filter);
+                }
             } else {
-                isActive = columnFilters.filter.includes(filter);
+                if (typeof (column.filter) === typeof (filter) ) {
+                    isActive = (column.filter === filter);
+                } else {
+                    isActive = (column.filter === filter.value);
+                }
             }
         }
         return isActive;
@@ -521,7 +521,7 @@ export class NovoTableElement implements DoCheck {
      */
     fireTableChangeEvent() {
         // Construct a table change object
-        const onTableChange:any = {};
+        const onTableChange: any = {};
         const filters = this.columns.filter((col) => col.filter && col.filter.length);
         onTableChange.filter = filters.length ? filters : false;
         onTableChange.sort = this.currentSortColumn ? this.currentSortColumn : false;
@@ -644,7 +644,7 @@ export class NovoTableElement implements DoCheck {
      */
     getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
-        let opts:Array<any> = [
+        let opts: Array<any> = [
             { label: 'Past 1 Day', min: -1, max: 0 },
             { label: 'Past 7 Days', min: -7, max: 0 },
             { label: 'Past 30 Days', min: -30, max: 0 },
@@ -691,22 +691,14 @@ export class NovoTableElement implements DoCheck {
                 return false;
             });
             config.filtering.options = newOptions;
-            if (config.filtering.originalOptions[0].label) {
-                config.filtering.filter = [{ label: config.filtering.freetextFilter, value: config.filtering.freetextFilter }];
-            } else {
-                config.filtering.filter = config.filtering.freetextFilter;
-            }
+            // if (config.filtering.originalOptions[0].label) {
+            //     config.filtering.filter = [{ label: config.filtering.freetextFilter, value: config.filtering.freetextFilter }];
+            // } else {
+            config.filtering.filter = config.filtering.freetextFilter;
+            // }
         } else {
             config.filtering.options = config.filtering.originalOptions;
         }
         this.onFilterChange();
-    }
-
-    showOptionsTextInput(column) {
-        if (column.hasOwnProperty('freetextFilter')) {
-            return true;
-        } else {
-            return typeof (column.options[0].value) === 'string';
-        }
     }
 }
