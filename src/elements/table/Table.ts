@@ -185,30 +185,30 @@ export class NovoTableHeaderElement {
     `
 })
 export class NovoTableElement implements DoCheck {
-    @Input() config:any = {};
-    @Input() columns:Array<any>;
-    @Input() theme:string;
-    @Input() skipSortAndFilterClear:boolean = false;
+    @Input() config: any = {};
+    @Input() columns: Array<any>;
+    @Input() theme: string;
+    @Input() skipSortAndFilterClear: boolean = false;
 
-    @Output() onRowClick:EventEmitter<any> = new EventEmitter();
-    @Output() onRowSelect:EventEmitter<any> = new EventEmitter();
-    @Output() onTableChange:EventEmitter<any> = new EventEmitter();
+    @Output() onRowClick: EventEmitter<any> = new EventEmitter();
+    @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
+    @Output() onTableChange: EventEmitter<any> = new EventEmitter();
 
-    _dataProvider:PagedCollection<any>;
-    _rows:Array<any> = [];
-    selected:Array<any> = [];
-    activeId:number = 0;
-    master:boolean = false;
-    indeterminate:boolean = false;
-    lastPage:number = 0;
-    selectedPageCount:number = 0;
-    showSelectAllMessage:boolean = false;
-    currentSortColumn:any;
-    pagedData:Array<any> = [];
-    pageSelected:any;
+    _dataProvider: PagedCollection<any>;
+    _rows: Array<any> = [];
+    selected: Array<any> = [];
+    activeId: number = 0;
+    master: boolean = false;
+    indeterminate: boolean = false;
+    lastPage: number = 0;
+    selectedPageCount: number = 0;
+    showSelectAllMessage: boolean = false;
+    currentSortColumn: any;
+    pagedData: Array<any> = [];
+    pageSelected: any;
 
     @Input()
-    set rows(rows:Array<any>) {
+    set rows(rows: Array<any>) {
         this.dataProvider = rows;
         if (rows && rows.length > 0) {
             this.setupColumnDefaults();
@@ -223,15 +223,15 @@ export class NovoTableElement implements DoCheck {
     }
 
     @Input()
-    set dataProvider(dp:any) {
+    set dataProvider(dp: any) {
         this._dataProvider = Array.isArray(dp) ? new PagedArrayCollection<any>(dp) : dp;
-        this._dataProvider.dataChange.debounceTime(100).subscribe((event:CollectionEvent) => {
+        this._dataProvider.dataChange.debounceTime(100).subscribe((event: CollectionEvent) => {
             switch (event.type) {
                 case CollectionEvent.CHANGE:
                     this._rows = event.data;
                     // Remove all selection on sort change if selection is on
                     if (this.config.rowSelectionStyle === 'checkbox') {
-                        this.pagedData =  event.data;
+                        this.pagedData = event.data;
                         this.pageSelected = this.pagedData.filter(r => r._selected);
                         this.rowSelectHandler();
                     }
@@ -250,7 +250,7 @@ export class NovoTableElement implements DoCheck {
         return this._dataProvider;
     }
 
-    constructor(public labels:NovoLabelService) {}
+    constructor(public labels: NovoLabelService) { }
 
     onPageChange(event) {
         //this.dataProvider.page = event.page;
@@ -403,7 +403,7 @@ export class NovoTableElement implements DoCheck {
                         query[column.name] = (value, record) => {
                             return column.match(record, column.filter);
                         };
-                    } else if ( column.preFilter && Helpers.isFunction(column.preFilter)) {
+                    } else if (column.preFilter && Helpers.isFunction(column.preFilter)) {
                         query = Object.assign({}, query, column.preFilter(column.filter));
                     } else if (Array.isArray(column.filter)) {
                         // The filters are an array (multi-select), check value
@@ -412,7 +412,7 @@ export class NovoTableElement implements DoCheck {
                         if (options[0].value || options[0].label) {
                             options = column.filter.map(opt => opt.value);
                         }
-                        query[column.name] = { any: options }; 
+                        query[column.name] = { any: options };
                     } else if (column.type && column.type === 'date') {
                         if (column.filter.startDate && column.filter.endDate) {
                             query[column.name] = {
@@ -464,7 +464,7 @@ export class NovoTableElement implements DoCheck {
         let isActive = false;
         if (column && column.filter && filter) {
             if (Array.isArray(column.filter)) {
-                if (typeof(filter) !== 'string') {
+                if (typeof (filter) !== 'string') {
                     isActive = column.filter.some(item => {
                         return item.label === filter.label;
                     });
@@ -472,7 +472,7 @@ export class NovoTableElement implements DoCheck {
                     isActive = column.filter.includes(filter);
                 }
             } else {
-                if (typeof(column.filter) !== 'string') {
+                if (typeof (column.filter) !== 'string') {
                     isActive = (column.filter === filter);
                 } else {
                     isActive = (column.filter === filter.value);
@@ -521,7 +521,7 @@ export class NovoTableElement implements DoCheck {
      */
     fireTableChangeEvent() {
         // Construct a table change object
-        const onTableChange:any = {};
+        const onTableChange: any = {};
         const filters = this.columns.filter((col) => col.filter && col.filter.length);
         onTableChange.filter = filters.length ? filters : false;
         onTableChange.sort = this.currentSortColumn ? this.currentSortColumn : false;
@@ -644,7 +644,7 @@ export class NovoTableElement implements DoCheck {
      */
     getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
-        let opts:Array<any> = [
+        let opts: Array<any> = [
             { label: 'Past 1 Day', min: -1, max: 0 },
             { label: 'Past 7 Days', min: -7, max: 0 },
             { label: 'Past 30 Days', min: -30, max: 0 },
