@@ -1,3 +1,13 @@
+<a name="2.0.73"></a>
+## [2.0.73](https://github.com/bullhorn/novo-elements/compare/v2.0.72...v2.0.73) (2017-01-19)
+
+
+### Bug Fixes
+
+* **Table:** Date Filtering and Options filtering is more stable. ([#358](https://github.com/bullhorn/novo-elements/issues/358)) ([5ab0e98](https://github.com/bullhorn/novo-elements/commit/5ab0e98))
+
+
+
 <a name="2.0.72"></a>
 ## [2.0.72](https://github.com/bullhorn/novo-elements/compare/v2.0.71...v2.0.72) (2017-01-19)
 
