@@ -41,7 +41,7 @@ import { Helpers } from './../../utils/Helpers';
                         <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
                     </div>
                     <!--TextArea-->
-                    <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)" (input)="emitChange($event)" [maxlength]="control.maxlength"></textarea>
+                    <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)" (keypress)="checkMaxLength($event)" (input)="emitChange($event)" [maxlength]="control.maxlength"></textarea>
                     <!--Editor-->
                     <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key"></novo-editor>
                     <!--HTML5 Select-->
@@ -95,11 +95,14 @@ import { Helpers } from './../../utils/Helpers';
                     <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [placeholder]="control.placeholder" [config]="control.config" (change)="modelChange($event)"></novo-quick-note>
                 </div>
             </div>
+            <div class="text-field-character-limit" [attr.data-automation-id]="text-area-character-count" *ngIf="_focused && control.maxlength && (control.controlType=='text-area' || control.controlType=='textbox')">
+                Character Count: {{ characterCount }}/{{ control.maxlength }}
+            </div>
             <!--Error Message-->
             <div class="error-message">
                 <span *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
                 <span *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
-                <span *ngIf="isDirty && maxLengthMet && !maxLength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
+                <span *ngIf="isDirty && maxLengthMet && _focused && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
                 <span *ngIf="errors?.maxlength">Sorry, you have exceeded the maximum character count of {{ control.maxlength }} for this field</span>
                 <span *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
                 <span *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
@@ -136,6 +139,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private _focused: boolean = false;
     formattedValue: string = '';
     maxLengthMet: boolean = false;
+    characterCount: number = 0;
 
     constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService) {
         super(element);
@@ -150,6 +154,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 this.formatTimeValue({ date: this.control.value });
             } else if (this.control.controlType === 'date-time') {
                 this.formatDateTimeValue({ date: this.control.value });
+            } else if (this.control.controlType === 'textbox' || this.control.controlType === 'text-area') {
+                this.characterCount = this.control.value.length;
             }
         }
         if (this.control) {
@@ -253,6 +259,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.dateTimeFormat);
     }
 
+
     resizeTextArea(event) {
         // Reset the height
         let height = event.target.value.length > 0 ? `${event.target.scrollHeight}px` : '2rem';
@@ -262,6 +269,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     checkMaxLength(event) {
         if (this.control && this.control.maxlength) {
+            this.characterCount = event.target.value.length;
             if (event.target.value.length >= this.control.maxlength) {
                 this.maxLengthMet = true;
             } else {
@@ -282,7 +290,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         const NUMBERS_ONLY = /[0-9]/;
         const NUMBERS_WITH_DECIMAL = /[0-9\.]/;
         let key = String.fromCharCode(event.charCode);
-        //Type
+        //Types
         if (this.control.subType === 'number' && !NUMBERS_ONLY.test(key)) {
             event.preventDefault();
         } else if (~['currency', 'float', 'percentage'].indexOf(this.control.subType) && !NUMBERS_WITH_DECIMAL.test(key)) {

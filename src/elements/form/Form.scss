@@ -114,6 +114,15 @@ novo-form {
                             color: $light !important;
                         }
                     }
+                    .text-field-character-limit {
+                        font-size: 12px;
+                        color: $grey;
+                        padding: 5px 0;
+                        flex-basis: 100%;
+                        margin-left: 185px;
+                        margin-bottom: -5px;
+                        height: 2em;
+                    }
                     .error-message {
                         color: $negative;
                         font-size: 0.8em;
