@@ -1,3 +1,13 @@
+<a name="2.0.75"></a>
+## [2.0.75](https://github.com/bullhorn/novo-elements/compare/v2.0.74...v2.0.75) (2017-01-19)
+
+
+### Features
+
+* **dropdown:** Allowing dropdown to be appended to the body ([c06cd6d](https://github.com/bullhorn/novo-elements/commit/c06cd6d))
+
+
+
 <a name="2.0.74"></a>
 ## [2.0.74](https://github.com/bullhorn/novo-elements/compare/v2.0.73...v2.0.74) (2017-01-19)
 
