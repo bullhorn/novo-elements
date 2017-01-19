@@ -472,7 +472,7 @@ export class NovoTableElement implements DoCheck {
                     isActive = column.filter.includes(filter);
                 }
             } else {
-                if (typeof (column.filter) !== 'string') {
+                if (typeof (column.filter) === typeof (filter) ) {
                     isActive = (column.filter === filter);
                 } else {
                     isActive = (column.filter === filter.value);
