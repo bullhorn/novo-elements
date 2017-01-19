@@ -1,3 +1,13 @@
+<a name="2.0.74"></a>
+## [2.0.74](https://github.com/bullhorn/novo-elements/compare/v2.0.73...v2.0.74) (2017-01-19)
+
+
+### Bug Fixes
+
+* **Table:** Temporary fix for tables that aren't switch to DataProviders ([d395f66](https://github.com/bullhorn/novo-elements/commit/d395f66))
+
+
+
 <a name="2.0.73"></a>
 ## [2.0.73](https://github.com/bullhorn/novo-elements/compare/v2.0.72...v2.0.73) (2017-01-19)
 
