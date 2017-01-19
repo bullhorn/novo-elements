@@ -62,10 +62,16 @@ export class NovoFormControl extends FormControl {
 
         // Update validators to have the required
         if (this.required && !this.hasRequiredValidator) {
-            let validators = [...this.validators];
+            let validators: any = [...this.validators];
             validators.push(Validators.required);
             this.setValidators(validators);
             this.updateValueAndValidity();
+            this.hasRequiredValidator = this.required;
+        } else if (this.hasRequiredValidator) {
+            let validators: any = [...this.validators];
+            this.setValidators(validators);
+            this.updateValueAndValidity();
+            this.hasRequiredValidator = this.required;
         }
     }
 
