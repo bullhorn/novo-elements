@@ -101,21 +101,9 @@ export class FormUtils {
     }
 
     determineInputType(field) {
-        let type = null;
+        let type:string;
         // Determine TYPE because its not just 1 value that determines this.
-        if (field.type === 'TO_MANY') {
-            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person', 'Placement'].indexOf(field.associatedEntity.entity)) {
-                type = 'entitychips';
-            } else {
-                type = 'chips';
-            }
-        } else if (field.type === 'TO_ONE') {
-            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person', 'Placement'].indexOf(field.associatedEntity.entity)) {
-                type = 'entitypicker';
-            } else {
-                type = 'picker';
-            }
-        } else if (field.dataSpecialization === 'DATETIME') {
+        if (field.dataSpecialization === 'DATETIME') {
             type = 'datetime';
         } else if (field.dataSpecialization === 'TIME') {
             type = 'time';
@@ -129,25 +117,19 @@ export class FormUtils {
             type = 'date';
         } else if (field.dataType === 'Boolean') {
             type = 'tiles';
-        } else if (~['Double', 'BigDecimal'].indexOf(field.dataType)) {
-            type = 'float';
-        } else if (field.inputType === 'TEXTAREA') {
+        }else if (field.inputType === 'TEXTAREA') {
             type = 'textarea';
         } else if (field.options && ~['CHECKBOX', 'RADIO'].indexOf(field.inputType) && field.multiValue) {
             type = 'checklist';
         } else if (field.options && ~['CHECKBOX', 'RADIO'].indexOf(field.inputType) && !field.multiValue) {
             type = 'radio';
-        } else if (field.optionsUrl && field.inputType === 'SELECT') {
-            if (field.optionsType && ~['CandidateText', 'ClientText', 'ClientContactText', 'ClientCorporationText', 'LeadText', 'OpportunityText', 'JobOrderText', 'CorporateUserText', 'PersonText'].indexOf(field.optionsType)) {
-                type = 'entitypicker';
-            } else {
-                type = 'picker';
-            }
         } else if (field.options && ~['SELECT'].indexOf(field.inputType) && field.multiValue) {
             type = 'chips';
         } else if (field.options && ~['SELECT'].indexOf(field.inputType) && !field.multiValue) {
             type = 'select';
-        } else if (field.options && ~['TILES'].indexOf(field.inputType) && !field.multiValue) {
+        } else if (~['Double', 'BigDecimal'].indexOf(field.dataType)) {
+            type = 'float';
+        }  else if (field.options && ~['TILES'].indexOf(field.inputType) && !field.multiValue) {
             type = 'tiles';
         } else if (field.type === 'COMPOSITE') {
             type = 'address';
@@ -156,14 +138,12 @@ export class FormUtils {
         } else if (field.type === 'file') {
             type = 'file';
         }
-
         // Overrides
         if (type === 'picker' && field.multiValue) {
             type = 'chips';
         } else if (type === 'entitypicker' && field.multiValue) {
             type = 'entitychips';
         }
-
         return type;
     }
 
