@@ -5342,69 +5342,11 @@ entity-chip-results {
 novo-dropdown {
   display: block;
   position: relative; }
-  novo-dropdown .mask {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background: transparent;
-    top: 0;
-    left: 0;
-    z-index: 1; }
   novo-dropdown button {
     position: relative;
     z-index: 0; }
-  novo-dropdown.active .dropdown-container {
-    overflow: auto;
-    max-height: 500px;
-    display: block;
-    z-index: 1000;
-    border-radius: 2px;
-    top: 100%;
-    margin-top: 5px; }
-  novo-dropdown .dropdown-container {
-    background-color: white;
-    list-style: none;
-    line-height: 26px;
-    display: none;
-    margin: 0;
-    max-height: 0;
-    position: absolute;
-    padding: 0;
-    transform: translateY(0);
-    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
-    min-width: 180px;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
-    novo-dropdown .dropdown-container list item {
-      cursor: pointer;
-      height: 48px;
-      margin: 0;
-      padding: 10px 16px;
-      box-sizing: border-box;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-align: center;
-          align-items: center;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-      color: #63666c;
-      white-space: nowrap; }
-      novo-dropdown .dropdown-container list item span {
-        display: inline-block; }
-      novo-dropdown .dropdown-container list item i {
-        height: 30px !important;
-        width: 15px !important;
-        border-radius: 0;
-        margin: 0 !important;
-        color: #4A89DC; }
-      novo-dropdown .dropdown-container list item:focus, novo-dropdown .dropdown-container list item:hover {
-        background: #f4f4f4;
-        color: #4b4d51; }
-      novo-dropdown .dropdown-container list item.active {
-        color: #4b4d51;
-        font-weight: 500; }
-      novo-dropdown .dropdown-container list item.disabled {
-        color: #D9DADC;
-        cursor: not-allowed; }
+  novo-dropdown novo-dropdown-container {
+    margin-top: 10px; }
   novo-dropdown[side=left] {
     display: -ms-flexbox;
     display: flex;
@@ -5419,8 +5361,55 @@ novo-dropdown {
         flex-direction: column;
     -ms-flex-align: end;
         align-items: flex-end; }
-    novo-dropdown[side=right] .dropdown-container {
-      right: 0px; }
+    novo-dropdown[side=right] novo-dropdown-container {
+      margin-top: 50px; }
+
+novo-dropdown-container {
+  background-color: #ffffff;
+  list-style: none;
+  line-height: 26px;
+  display: none;
+  margin: 0;
+  position: absolute;
+  padding: 0;
+  min-width: 180px;
+  max-height: 500px;
+  overflow: auto;
+  z-index: 1000;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+  novo-dropdown-container list item {
+    cursor: pointer;
+    height: 48px;
+    width: 100%;
+    margin: 0;
+    padding: 10px 16px;
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    color: #63666c;
+    white-space: nowrap;
+    text-align: left; }
+    novo-dropdown-container list item span {
+      display: inline-block; }
+    novo-dropdown-container list item i {
+      height: 30px !important;
+      width: 15px !important;
+      border-radius: 0;
+      margin: 0 !important;
+      color: #4A89DC; }
+    novo-dropdown-container list item:focus, novo-dropdown-container list item:hover {
+      background: #f4f4f4;
+      color: #4b4d51; }
+    novo-dropdown-container list item.active {
+      color: #4b4d51;
+      font-weight: 500; }
+    novo-dropdown-container list item.disabled {
+      color: #D9DADC;
+      cursor: not-allowed; }
 
 .drawer {
   display: inline; }
@@ -8133,13 +8122,13 @@ novo-table {
   .table > tfoot > tr.table-selection-row {
     background-color: #2F384F !important;
     color: #ffffff; }
-  .table > thead > tr > th:nth-of-type(1) .th-group novo-dropdown.column-filters .dropdown-container {
+  .table > thead > tr > th:nth-of-type(1) .th-group novo-dropdown.column-filters novo-dropdown-container {
     left: -80px; }
   .table > thead > tr > th.sorted {
     background: rgba(74, 137, 220, 0.2); }
-  .table > thead > tr th:first-child novo-dropdown .dropdown-container {
+  .table > thead > tr th:first-child novo-dropdown novo-dropdown-container {
     left: -90px !important; }
-  .table > thead > tr th:last-child novo-dropdown .dropdown-container {
+  .table > thead > tr th:last-child novo-dropdown novo-dropdown-container {
     right: 0 !important; }
   .table > thead > tr > th {
     font-weight: 400;
@@ -8163,67 +8152,6 @@ novo-table {
           align-items: center; }
       .table > thead > tr > th .th-group novo-dropdown.column-filters button.filtered i {
         color: #4A89DC; }
-      .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container {
-        right: -15px;
-        min-width: 230px;
-        overflow-x: hidden; }
-        .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container list item.filter-search {
-          padding: 10px 0;
-          width: 100%;
-          height: auto;
-          -ms-flex-direction: column;
-              flex-direction: column;
-          -ms-flex-align: start;
-              align-items: flex-start;
-          cursor: initial; }
-          .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container list item.filter-search:hover {
-            background: transparent; }
-          .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container list item.filter-search .header {
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-align: center;
-                align-items: center;
-            -ms-flex-pack: justify;
-                justify-content: space-between;
-            width: 90%;
-            font-size: 0.9em;
-            margin: 0 auto; }
-            .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container list item.filter-search .header span {
-              text-transform: uppercase;
-              font-weight: 400; }
-            .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container list item.filter-search .header button {
-              padding: 0 5px; }
-              .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container list item.filter-search .header button i {
-                height: auto !important;
-                width: auto !important;
-                font-size: 0.9em; }
-          .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container list item.filter-search input {
-            border: none;
-            border-bottom: 2px solid #BEBEBE;
-            width: 90%;
-            margin: 0 auto;
-            background: transparent; }
-            .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container list item.filter-search input:focus {
-              outline: none;
-              border-bottom: 2px solid #4A89DC; }
-        .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container .calender-container {
-          height: 100%;
-          min-height: 200px;
-          width: 100%;
-          background: #fff; }
-          .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container .calender-container > div {
-            color: #4A89DC;
-            line-height: 3em;
-            font-size: 0.9em;
-            padding-left: 5px;
-            cursor: pointer; }
-          .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container .calender-container novo-date-picker .calendar {
-            width: 100%;
-            height: 100%;
-            box-shadow: none;
-            padding: 0 5px 10px; }
-            .table > thead > tr > th .th-group novo-dropdown.column-filters .dropdown-container .calender-container novo-date-picker .calendar .calendar-top {
-              display: none; }
       .table > thead > tr > th .th-group .th-title {
         display: -ms-flexbox;
         display: flex;
@@ -8271,7 +8199,8 @@ novo-table {
               color: #9b9b9b; }
   .table > tbody + tbody {
     border-top: 1px solid rgba(0, 0, 0, 0.12); }
-  .table .table-message tr, .table .table-message td {
+  .table .table-message tr,
+  .table .table-message td {
     background-color: #ffffff !important; }
   .table .table {
     background-color: #fff; }
@@ -8309,6 +8238,69 @@ novo-table {
       color: #4A89DC; }
     .table novo-checkbox .check-box-group .bhi-checkbox-indeterminate, .table multi-picker .check-box-group .bhi-checkbox-indeterminate {
       color: #4A89DC; }
+
+novo-dropdown-container.table-dropdown {
+  right: -15px;
+  min-width: 230px;
+  max-width: 230px;
+  overflow-x: hidden; }
+  novo-dropdown-container.table-dropdown list item.filter-search {
+    padding: 10px 0;
+    width: 100%;
+    height: auto;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: start;
+        align-items: flex-start;
+    cursor: initial; }
+    novo-dropdown-container.table-dropdown list item.filter-search:hover {
+      background: transparent; }
+    novo-dropdown-container.table-dropdown list item.filter-search .header {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+      width: 90%;
+      font-size: 0.9em;
+      margin: 0 auto; }
+      novo-dropdown-container.table-dropdown list item.filter-search .header span {
+        text-transform: uppercase;
+        font-weight: 400; }
+      novo-dropdown-container.table-dropdown list item.filter-search .header button {
+        padding: 0 5px; }
+        novo-dropdown-container.table-dropdown list item.filter-search .header button i {
+          height: auto !important;
+          width: auto !important;
+          font-size: 0.9em; }
+    novo-dropdown-container.table-dropdown list item.filter-search input {
+      border: none;
+      border-bottom: 2px solid #BEBEBE;
+      width: 90%;
+      margin: 0 auto;
+      background: transparent; }
+      novo-dropdown-container.table-dropdown list item.filter-search input:focus {
+        outline: none;
+        border-bottom: 2px solid #4A89DC; }
+  novo-dropdown-container.table-dropdown .calender-container {
+    height: 100%;
+    min-height: 200px;
+    width: 100%;
+    background: #fff; }
+    novo-dropdown-container.table-dropdown .calender-container > div {
+      color: #4A89DC;
+      line-height: 3em;
+      font-size: 0.9em;
+      padding-left: 5px;
+      cursor: pointer; }
+    novo-dropdown-container.table-dropdown .calender-container novo-date-picker .calendar {
+      width: 100%;
+      height: 100%;
+      box-shadow: none;
+      padding: 0 5px 10px; }
+      novo-dropdown-container.table-dropdown .calender-container novo-date-picker .calendar .calendar-top {
+        display: none; }
 
 .table-condensed > tbody > tr > td,
 .table-condensed > tbody > tr > th,
@@ -11589,92 +11581,92 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 31px;
-      height: 31px; }
+      width: 30px;
+      height: 30px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-navigation {
-      background: #2F384F;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-lead {
-      background: #AA6699;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
       width: 27px;
       height: 27px; }
+    color header .background-boxes .bb-navigation {
+      background: #2F384F;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-lead {
+      background: #AA6699;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 40px;
-      height: 40px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
       width: 37px;
       height: 37px; }
     color header .background-boxes .bb-submission {
       background: #747884;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-task {
-      background: #747884;
-      width: 37px;
-      height: 37px; }
-    color header .background-boxes .bb-distributionList {
-      background: #747884;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
       width: 29px;
       height: 29px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-task {
+      background: #747884;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-distributionList {
+      background: #747884;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 31px;
+      height: 31px; }
     color header .background-boxes .bb-ocean {
       background: #4A89DC;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 26px;
-      height: 26px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
       width: 45px;
       height: 45px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 26px;
+      height: 26px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
-      width: 32px;
-      height: 32px; }
+      width: 41px;
+      height: 41px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 38px;
-      height: 38px; }
+      width: 36px;
+      height: 36px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 43px;
-      height: 43px; }
+      width: 41px;
+      height: 41px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -12367,6 +12359,14 @@ dropdown-demo .example.dropdown-demo {
   -ms-flex-align: center;
       align-items: center; }
 
+dropdown-demo .example.dropdown-demo-scroll {
+  background: #4A89DC;
+  padding: 20px;
+  overflow: auto; }
+
+novo-dropdown-container.custom-class {
+  background: red; }
+
 select-demo .example.select-demo {
   padding: 20px 30px;
   border-top-right-radius: 3px;
@@ -12594,4 +12594,4 @@ popover-demo .example.popover-demo {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.1a10dfad1ed7703f85a4.bundle.map*/
+/*# sourceMappingURL=main.4435b3d3c7a4c5af002e.bundle.map*/
