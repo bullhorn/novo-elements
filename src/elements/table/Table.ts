@@ -42,7 +42,8 @@ export class NovoTableHeaderElement {
         </header>
         <div class="table-container">
             <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
-            <thead *ngIf="columns.length && (!dataProvider.isEmpty() || dataProvider.isFiltered())">
+            <!-- skipSortAndFilterClear is a hack right now, will be removed once Canvas is refactored -->
+            <thead *ngIf="columns.length && (!dataProvider.isEmpty() || dataProvider.isFiltered() || skipSortAndFilterClear)">
                 <tr role="row">
                     <!-- DETAILS -->
                     <th class="row-actions" *ngIf="config.hasDetails"></th>
