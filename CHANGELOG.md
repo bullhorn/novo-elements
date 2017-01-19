@@ -1,3 +1,13 @@
+<a name="2.0.72"></a>
+## [2.0.72](https://github.com/bullhorn/novo-elements/compare/v2.0.71...v2.0.72) (2017-01-19)
+
+
+### Bug Fixes
+
+* **Form:** Form interactions required field does not validate correctly ([#356](https://github.com/bullhorn/novo-elements/issues/356)) ([dcd77f3](https://github.com/bullhorn/novo-elements/commit/dcd77f3))
+
+
+
 <a name="2.0.71"></a>
 ## [2.0.71](https://github.com/bullhorn/novo-elements/compare/v2.0.70...v2.0.71) (2017-01-17)
 
