@@ -83,7 +83,7 @@ export class Helpers {
 
     static tomorrow(value?:any):Date {
         let dt = (value) ? Helpers.clearTime(value) : Helpers.today();
-        return Helpers.addDays(Helpers.today(), 1);
+        return Helpers.addDays(dt, 1);
     }
 
     static clearTime(value: any):Date {

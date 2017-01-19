@@ -1,3 +1,48 @@
+<a name="2.0.74"></a>
+## [2.0.74](https://github.com/bullhorn/novo-elements/compare/v2.0.73...v2.0.74) (2017-01-19)
+
+
+### Bug Fixes
+
+* **Table:** Temporary fix for tables that aren't switch to DataProviders ([d395f66](https://github.com/bullhorn/novo-elements/commit/d395f66))
+
+
+
+<a name="2.0.73"></a>
+## [2.0.73](https://github.com/bullhorn/novo-elements/compare/v2.0.72...v2.0.73) (2017-01-19)
+
+
+### Bug Fixes
+
+* **Table:** Date Filtering and Options filtering is more stable. ([#358](https://github.com/bullhorn/novo-elements/issues/358)) ([5ab0e98](https://github.com/bullhorn/novo-elements/commit/5ab0e98))
+
+
+
+<a name="2.0.72"></a>
+## [2.0.72](https://github.com/bullhorn/novo-elements/compare/v2.0.71...v2.0.72) (2017-01-19)
+
+
+### Bug Fixes
+
+* **Form:** Form interactions required field does not validate correctly ([#356](https://github.com/bullhorn/novo-elements/issues/356)) ([dcd77f3](https://github.com/bullhorn/novo-elements/commit/dcd77f3))
+
+
+
+<a name="2.0.71"></a>
+## [2.0.71](https://github.com/bullhorn/novo-elements/compare/v2.0.70...v2.0.71) (2017-01-17)
+
+
+
+<a name="2.0.70"></a>
+## [2.0.70](https://github.com/bullhorn/novo-elements/compare/v2.0.69...v2.0.70) (2017-01-17)
+
+
+### Bug Fixes
+
+* **form:** Fixing new disabled state to readOnly so the values appear in the mdoel ([ae846c5](https://github.com/bullhorn/novo-elements/commit/ae846c5))
+
+
+
 <a name="2.0.69"></a>
 ## [2.0.69](https://github.com/bullhorn/novo-elements/compare/v2.0.68...v2.0.69) (2017-01-17)
 

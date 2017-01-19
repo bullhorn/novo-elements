@@ -1,6 +1,6 @@
 // NG2
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 // APP
 import {
     AddressControl,
@@ -28,21 +28,22 @@ export class NovoFormControl extends FormControl {
     required: boolean;
     initialValue: any;
     label: string;
+    readOnly: boolean;
+    validators: any;
+    hasRequiredValidator: boolean;
 
     constructor(value: any, control: NovoControlConfig) {
         super(value, control.validators, control.asyncValidators);
+        this.validators = control.validators;
         this.initialValue = value;
         this.label = control.label;
-        // Setting disable/enable
-        if (control.disabled) {
-            this.disable();
-        } else {
-            this.enable();
-        }
+        // Setting read only
+        this.readOnly = control.readOnly;
         // Set hidden
         this.hidden = control.hidden;
         // Set required
         this.required = control.required;
+        this.hasRequiredValidator = this.required;
     }
 
     hide(clearValue: true): void {
@@ -58,6 +59,18 @@ export class NovoFormControl extends FormControl {
 
     setRequired(req: boolean) {
         this.required = req;
+
+        // Update validators to have the required
+        if (this.required && !this.hasRequiredValidator) {
+            let validators = [...this.validators];
+            validators.push(Validators.required);
+            this.setValidators(validators);
+            this.updateValueAndValidity();
+        }
+    }
+
+    setReadOnly(read: boolean) {
+        this.readOnly = read;
     }
 
     markAsInvalid(message: string): void {
@@ -88,21 +101,9 @@ export class FormUtils {
     }
 
     determineInputType(field) {
-        let type = null;
+        let type:string;
         // Determine TYPE because its not just 1 value that determines this.
-        if (field.type === 'TO_MANY') {
-            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person', 'Placement'].indexOf(field.associatedEntity.entity)) {
-                type = 'entitychips';
-            } else {
-                type = 'chips';
-            }
-        } else if (field.type === 'TO_ONE') {
-            if (field.associatedEntity && ~['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person', 'Placement'].indexOf(field.associatedEntity.entity)) {
-                type = 'entitypicker';
-            } else {
-                type = 'picker';
-            }
-        } else if (field.dataSpecialization === 'DATETIME') {
+        if (field.dataSpecialization === 'DATETIME') {
             type = 'datetime';
         } else if (field.dataSpecialization === 'TIME') {
             type = 'time';
@@ -116,25 +117,19 @@ export class FormUtils {
             type = 'date';
         } else if (field.dataType === 'Boolean') {
             type = 'tiles';
-        } else if (~['Double', 'BigDecimal'].indexOf(field.dataType)) {
-            type = 'float';
-        } else if (field.inputType === 'TEXTAREA') {
+        }else if (field.inputType === 'TEXTAREA') {
             type = 'textarea';
         } else if (field.options && ~['CHECKBOX', 'RADIO'].indexOf(field.inputType) && field.multiValue) {
             type = 'checklist';
         } else if (field.options && ~['CHECKBOX', 'RADIO'].indexOf(field.inputType) && !field.multiValue) {
             type = 'radio';
-        } else if (field.optionsUrl && field.inputType === 'SELECT') {
-            if (field.optionsType && ~['CandidateText', 'ClientText', 'ClientContactText', 'ClientCorporationText', 'LeadText', 'OpportunityText', 'JobOrderText', 'CorporateUserText', 'PersonText'].indexOf(field.optionsType)) {
-                type = 'entitypicker';
-            } else {
-                type = 'picker';
-            }
         } else if (field.options && ~['SELECT'].indexOf(field.inputType) && field.multiValue) {
             type = 'chips';
         } else if (field.options && ~['SELECT'].indexOf(field.inputType) && !field.multiValue) {
             type = 'select';
-        } else if (field.options && ~['TILES'].indexOf(field.inputType) && !field.multiValue) {
+        } else if (~['Double', 'BigDecimal'].indexOf(field.dataType)) {
+            type = 'float';
+        }  else if (field.options && ~['TILES'].indexOf(field.inputType) && !field.multiValue) {
             type = 'tiles';
         } else if (field.type === 'COMPOSITE') {
             type = 'address';
@@ -143,14 +138,12 @@ export class FormUtils {
         } else if (field.type === 'file') {
             type = 'file';
         }
-
         // Overrides
         if (type === 'picker' && field.multiValue) {
             type = 'chips';
         } else if (type === 'entitypicker' && field.multiValue) {
             type = 'entitychips';
         }
-
         return type;
     }
 
@@ -169,8 +162,8 @@ export class FormUtils {
             associatedEntity: field.associatedEntity,
             optionsType: field.optionsType,
             multiple: field.multiValue,
+            readOnly: !!field.disabled || !!field.readOnly,
             maxlength: field.maxLength,
-            disabled: field.disabled || false,
             config: null,
             options: null,
             interactions: field.interactions

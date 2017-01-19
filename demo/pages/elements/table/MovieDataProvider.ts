@@ -46,7 +46,7 @@ export class MovieDataProvider extends PagedArrayCollection<any> {
             this.pagesLoaded++;
             let year = this.filter.Year || '';
             let search = this.filter.Title || 'Star';
-            let type = (this.filter.Type) ? this.filter.Type.any[0] : '';
+            let type = (this.filter.Type) ? this.filter.Type : '';
             return fetch(`http://www.omdbapi.com/?s=${search}&y=${year}&type=${type}&plot=short&r=json&page=${this.pagesLoaded}`)
                 .then(response => response.json())
                 .then((result:any) => {

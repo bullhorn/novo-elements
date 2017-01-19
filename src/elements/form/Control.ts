@@ -113,7 +113,7 @@ import { Helpers } from './../../utils/Helpers';
     `,
     host: {
         '[class]': 'control.controlType',
-        '[class.disabled]': 'form?.controls[control.key]?.disabled',
+        '[class.disabled]': 'form?.controls[control.key]?.readOnly',
         '[class.hidden]': 'form?.controls[control.key]?.hidden'
     }
 })
