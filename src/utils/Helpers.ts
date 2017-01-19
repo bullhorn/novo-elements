@@ -77,23 +77,23 @@ export class Helpers {
         return obj instanceof Date;
     }
 
-    static today():Date {
+    static today(): Date {
         return Helpers.clearTime(new Date());
     }
 
-    static tomorrow(value?:any):Date {
+    static tomorrow(value?: any): Date {
         let dt = (value) ? Helpers.clearTime(value) : Helpers.today();
         return Helpers.addDays(dt, 1);
     }
 
-    static clearTime(value: any):Date {
+    static clearTime(value: any): Date {
         let dt = Helpers.isDate(value) ? value : new Date(value);
         return new Date(dt.setHours(0, 0, 0, 0));
     }
 
-    static addDays(value: any, num = 1):Date {
+    static addDays(value: any, num = 1): Date {
         let dt = Helpers.isDate(value) ? value : new Date(value);
-        let aDay:number = (24 * 60 * 60 * 1000);
+        let aDay: number = (24 * 60 * 60 * 1000);
         return new Date(dt.getTime() + (aDay * num));
     }
 
@@ -181,6 +181,50 @@ export class Helpers {
 
             return results.every(x => x);
         };
+    }
+
+    static calcPositionOffset(position: ClientRect, element: Element, side: string): { top: string, left: string } {
+        if (!position) {
+            return;
+        }
+
+        let supportPageOffset = window.pageXOffset !== undefined;
+        let isCSS1Compat = ((document.compatMode || '') === 'CSS1Compat');
+
+        let x = supportPageOffset ? window.pageXOffset : isCSS1Compat ?
+            document.documentElement.scrollLeft : document.body.scrollLeft;
+        let y = supportPageOffset ? window.pageYOffset : isCSS1Compat ?
+            document.documentElement.scrollTop : document.body.scrollTop;
+
+        let sideOffset = 0;
+
+        if (side === 'right') {
+            sideOffset = position.width - element.clientWidth;
+        }
+
+        let top = `${position.top + y + position.height + 10}px`;
+        let left = `${position.left + x + sideOffset}px`;
+
+        const clientWidth = element.clientWidth,
+            clientHeight = element.clientHeight,
+
+            marginFromBottom = parseInt(top) + clientHeight,
+            marginFromRight = parseInt(left) + clientWidth,
+
+            windowScrollHeight = window.innerHeight + window.scrollY,
+            windowScrollWidth = window.innerWidth + window.scrollX;
+
+        if (marginFromBottom >= windowScrollHeight) {
+            top = `${parseInt(top.replace('px', '')) - clientHeight - position.height - 20}px`;
+        }
+
+        if (marginFromRight >= windowScrollWidth) {
+            left = `${parseInt(left.replace('px', '')) - clientWidth + position.width}px`;
+        }
+
+        // TODO - handle open in middle if over top
+
+        return { top, left };
     }
 }
 class Can {

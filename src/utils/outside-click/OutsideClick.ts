@@ -7,12 +7,13 @@ import { Helpers } from '../Helpers';
  * Outside click helper, makes to set the element as inactive when clicking outside of it
  */
 export class OutsideClick implements OnDestroy {
-    element:ElementRef;
-    active:boolean = false;
-    onOutsideClick:any;
-    onActiveChange:EventEmitter<boolean> = new EventEmitter<boolean>();
+    element: ElementRef;
+    _otherElement: ElementRef;
+    active: boolean = false;
+    onOutsideClick: EventListenerOrEventListenerObject;
+    onActiveChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    constructor(element:ElementRef) {
+    constructor(element: ElementRef) {
         // Component element
         this.element = element;
         // Outside click handler
@@ -21,11 +22,22 @@ export class OutsideClick implements OnDestroy {
     }
 
     /**
+    * When the element is destroyed, make sure to remove the handler
+    */
+    ngOnDestroy() {
+        window.removeEventListener('click', this.onOutsideClick);
+    }
+
+    public set otherElement(element: ElementRef) {
+        this._otherElement = element;
+    }
+
+    /**
      * Toggles the element as active and adds/removes the outside click handler
      * @param event
      * @param forceValue
      */
-    toggleActive(event?, forceValue?) {
+    public toggleActive(event?: MouseEvent, forceValue?: boolean): void {
         // Reverse the active property (if forceValue, use that)
         this.active = !Helpers.isBlank(forceValue) ? forceValue : !this.active;
         // Bind window click events to hide on outside click
@@ -39,19 +51,16 @@ export class OutsideClick implements OnDestroy {
     }
 
     /**
-     * When the element is destroyed, make sure to remove the handler
-     */
-    ngOnDestroy() {
-        window.removeEventListener('click', this.onOutsideClick);
-    }
-
-    /**
      * When clicking outside, checks the element and closes if outside
      * @param event
      */
-    handleOutsideClick(event) {
+    public handleOutsideClick(event: MouseEvent): void {
         // If the elements doesn't contain the target element, it is an outside click
-        if (!this.element.nativeElement.contains(event.target)) {
+        let outsideClick = !this.element.nativeElement.contains(event.target);
+        if (this._otherElement && outsideClick) {
+            outsideClick = !this._otherElement.nativeElement.contains(event.target);
+        }
+        if (outsideClick) {
             this.toggleActive(event, false);
         }
     }

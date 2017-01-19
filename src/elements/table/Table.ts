@@ -63,7 +63,7 @@ export class NovoTableHeaderElement {
                                 </div>
                             </div>
                             <!-- FILTER DROP-DOWN -->
-                            <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters">
+                            <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
                                 <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter" (click)="focusInput(column.name)"></button>
                                 <!-- FILTER OPTIONS LIST -->
                                 <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type!='date'">
@@ -96,7 +96,7 @@ export class NovoTableHeaderElement {
                                             <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
                                     </item>
-                                    <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [showAfterSelect]="option.range" [hidden]="column.calenderShow" [attr.data-automation-id]="(option?.label || option)">
+                                    <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [keepOpen]="option.range" [hidden]="column.calenderShow" [attr.data-automation-id]="(option?.label || option)">
                                         {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
                                     </item>
                                     <div class="calender-container" [hidden]="!column.calenderShow">
@@ -473,7 +473,7 @@ export class NovoTableElement implements DoCheck {
                     isActive = column.filter.includes(filter);
                 }
             } else {
-                if (typeof (column.filter) === typeof (filter) ) {
+                if (typeof (column.filter) === typeof (filter)) {
                     isActive = (column.filter === filter);
                 } else {
                     isActive = (column.filter === filter.value);

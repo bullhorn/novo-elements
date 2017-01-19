@@ -9,7 +9,7 @@ import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
  */
 
 export interface ModalParams {
-    [propName:string]:any;
+    [propName: string]: any;
 }
 export class NovoModalParams implements ModalParams {
 }
@@ -18,11 +18,11 @@ export class NovoModalParams implements ModalParams {
  * Reference to an opened dialog.
  */
 export class NovoModalRef {
-    component:any = null;
-    contentRef:any = null;
-    containerRef:any = null;
-    isClosed:boolean = false;
-    _onClosed:any = Deferred();
+    component: any = null;
+    contentRef: any = null;
+    containerRef: any = null;
+    isClosed: boolean = false;
+    _onClosed: any = Deferred();
 
     // Gets a promise that is resolved when the dialog is closed.
     get onClosed() {
@@ -33,7 +33,7 @@ export class NovoModalRef {
         document.body.classList.add('modal-open');
     }
 
-    close(result?:any) {
+    close(result?: any) {
         document.body.classList.remove('modal-open');
 
         if (this.contentRef) {
@@ -53,9 +53,9 @@ export class NovoModalRef {
     template: '<span #container></span>'
 })
 export class NovoModalContainerElement implements AfterViewInit {
-    @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
+    @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
 
-    constructor(private modalRef:NovoModalRef, private componentUtils:ComponentUtils) {
+    constructor(private modalRef: NovoModalRef, private componentUtils: ComponentUtils) {
     }
 
     ngAfterViewInit() {
@@ -76,7 +76,7 @@ export class NovoModalContainerElement implements AfterViewInit {
     `
 })
 export class NovoModalElement {
-    constructor(private modalRef:NovoModalRef) {
+    constructor(private modalRef: NovoModalRef) {
     }
 
     close() {
@@ -103,12 +103,12 @@ export class NovoModalElement {
     `
 })
 export class NovoModalNotificationElement implements OnInit {
-    @Input() type:string;
-    @Input() icon:string;
+    @Input() type: string;
+    @Input() icon: string;
 
-    iconType:string;
+    iconType: string;
 
-    constructor(private modalRef:NovoModalRef) {
+    constructor(private modalRef: NovoModalRef) {
         this.modalRef = modalRef;
     }
 

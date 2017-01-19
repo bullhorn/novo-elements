@@ -15,7 +15,7 @@ Menus allow users to take an action by selecting from a list of choices revealed
 ##### Properties
 - `'disabled' : bool`
     * Toggles the item as disabled or enabled
-- `'showAfterSelect' : bool : default: false`
+- `'keepOpen' : bool : default: false`
     * Whether the dropdown should collapse after clicking an item
 
 ##### Events

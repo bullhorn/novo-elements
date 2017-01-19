@@ -4,27 +4,28 @@ import { PopOverDirective } from './PopOver';
 @Component({
     selector: 'popover-content',
     template: `
-<div #popoverDiv class="popover {{ effectivePlacement }}"
-     [style.top]="top + 'px'"
-     [style.left]="left + 'px'"
-     [class.fade]="animation"
-     style="display: block"
-     role="popover">
-    <div class="virtual-area"></div>
-    <div class="arrow {{effectiveAlignment}}"></div> 
-    <h4 class="popover-title" [hidden]="!title">{{ title }}</h4>
-    <div class="popover-content">
-        <ng-content></ng-content>
-        <div class="popover-content-text">{{ content }}</div>
-    </div> 
-</div>
-`
+        <div #popoverDiv
+            class="popover {{ effectivePlacement }}"
+            [style.top]="top + 'px'"
+            [style.left]="left + 'px'"
+            [class.fade]="animation"
+            style="display: block"
+            role="popover">
+            <div class="virtual-area"></div>
+            <div class="arrow {{effectiveAlignment}}"></div>
+            <h4 class="popover-title" [hidden]="!title">{{ title }}</h4>
+            <div class="popover-content">
+                <ng-content></ng-content>
+                <div class="popover-content-text">{{ content }}</div>
+            </div>
+        </div>
+    `
 })
 export class PopOverContent implements AfterViewInit {
-    @Input() content:string;
-    @Input() placement:string = 'top';
-    @Input() title:string;
-    @Input() animation:boolean = true;
+    @Input() content: string;
+    @Input() placement: string = 'top';
+    @Input() title: string;
+    @Input() animation: boolean = true;
 
     @ViewChild('popoverDiv')
     popoverDiv: ElementRef;
@@ -38,7 +39,7 @@ export class PopOverContent implements AfterViewInit {
     isHidden: boolean = false;
 
     constructor(protected element: ElementRef,
-                protected cdr: ChangeDetectorRef) {
+        protected cdr: ChangeDetectorRef) {
     }
 
     ngAfterViewInit(): void {
@@ -88,25 +89,25 @@ export class PopOverContent implements AfterViewInit {
 
         let shiftWidth: any = {
             center: function (): number {
-                return hostElPos.left + ( hostElPos.width - targetElWidth ) / 2;
+                return hostElPos.left + (hostElPos.width - targetElWidth) / 2;
             },
             right: function (): number {
                 return hostElPos.left;
             },
             left: function (): number {
-                return hostElPos.left + ( hostElPos.width - targetElWidth );
+                return hostElPos.left + (hostElPos.width - targetElWidth);
             }
         };
 
         let shiftHeight: any = {
             center: function (): number {
-                return hostElPos.top + ( hostElPos.height - targetElHeight ) / 2;
+                return hostElPos.top + (hostElPos.height - targetElHeight) / 2;
             },
             bottom: function (): number {
                 return hostElPos.top;
             },
             top: function (): number {
-                return hostElPos.top + ( hostElPos.height - targetElHeight );
+                return hostElPos.top + (hostElPos.height - targetElHeight);
             }
         };
 
@@ -186,7 +187,7 @@ export class PopOverContent implements AfterViewInit {
     }
 
     protected isStaticPositioned(nativeEl: HTMLElement): boolean {
-        return (this.getStyle(nativeEl, 'position') || 'static' ) === 'static';
+        return (this.getStyle(nativeEl, 'position') || 'static') === 'static';
     }
 
     protected parentOffsetEl(nativeEl: HTMLElement): any {

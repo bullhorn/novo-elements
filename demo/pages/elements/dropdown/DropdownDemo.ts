@@ -2,6 +2,10 @@
 import { Component } from '@angular/core';
 // APP
 let DropdownDemoTpl = require('./templates/DropdownDemo.html');
+let CustomClassTpl = require('./templates/CustomClassDemo.html');
+let AppendToBodyTpl = require('./templates/AppendToBodyDemo.html');
+let KeepOpenTpl = require('./templates/KeepOpenDemo.html');
+let AppendToBodyWithScrollTpl = require('./templates/AppendToBodyWithScrollDemo.html');
 
 const template = `
 <div class="container">
@@ -14,6 +18,25 @@ const template = `
     <p>This is a simple dropdown menu.</p>
     <div class="example dropdown-demo">${DropdownDemoTpl}</div>
     <code-snippet [code]="DropdownDemoTpl"></code-snippet>
+
+    <h5>Custom Class</h5>
+    <p>You can have custom classes on the dropdown container that opens up by using the "containerClass" property.</p>
+    <div class="example dropdown-demo">${CustomClassTpl}</div>
+    <code-snippet [code]="CustomClassTpl"></code-snippet>
+
+    <h5>Keep Open</h5>
+    <p>You can set the "keepOpen" property on the "item" in order to keep it from closing the dropdown automatically.</p>
+    <div class="example dropdown-demo">${KeepOpenTpl}</div>
+    <code-snippet [code]="KeepOpenTpl"></code-snippet>
+
+    <h5>Append To Body</h5>
+    <p>You can append Dropdowns to the body if they are stuck in container that has overflow and you want the dropdown over everything.</p>
+    <div class="example dropdown-demo">${AppendToBodyTpl}</div>
+    <code-snippet [code]="AppendToBodyTpl"></code-snippet>
+
+    <p>Sometimes you will have embedded dropdowns in containers that control custom scrolling, you can tie into those scroll events using a "parentScrollSelector".</p>
+    <div class="example dropdown-demo-scroll">${AppendToBodyWithScrollTpl}</div>
+    <code-snippet [code]="AppendToBodyWithScrollTpl"></code-snippet>
 </div>
 `;
 
@@ -22,9 +45,13 @@ const template = `
     template: template
 })
 export class DropdownDemoComponent {
-    private DropdownDemoTpl: string = DropdownDemoTpl;
+    public DropdownDemoTpl: string = DropdownDemoTpl;
+    public AppendToBodyTpl: string = AppendToBodyTpl;
+    public KeepOpenTpl: string = KeepOpenTpl;
+    public AppendToBodyWithScrollTpl: string = AppendToBodyWithScrollTpl;
+    public CustomClassTpl: string = CustomClassTpl;
 
-    clickMe(data) {
+    public clickMe(data: string): void {
         console.log('CLICKED!', data); // tslint:disable-line
     }
 }

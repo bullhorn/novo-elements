@@ -10,17 +10,15 @@ export class PopOverDirective implements OnChanges {
     protected popover: ComponentRef<PopOverContent>;
     protected visible: boolean;
 
-    constructor(protected viewContainerRef: ViewContainerRef,
-                protected resolver: ComponentFactoryResolver) {
-    }
+    constructor(protected viewContainerRef: ViewContainerRef, protected resolver: ComponentFactoryResolver) { }
 
-    @Input('popover') content:string|PopOverContent;
-    @Input() popoverDisabled:boolean;
-    @Input() popoverAlways:boolean;
-    @Input() popoverAnimation:boolean;
-    @Input() popoverPlacement:string;
-    @Input() popoverTitle:string;
-    @Input() popoverOnHover:boolean = false;
+    @Input('popover') content: string | PopOverContent;
+    @Input() popoverDisabled: boolean;
+    @Input() popoverAlways: boolean;
+    @Input() popoverAnimation: boolean;
+    @Input() popoverPlacement: string;
+    @Input() popoverTitle: string;
+    @Input() popoverOnHover: boolean = false;
     @Input() popoverDismissTimeout: number = 0;
 
     @Output() onShown = new EventEmitter<PopOverDirective>();
@@ -55,7 +53,7 @@ export class PopOverDirective implements OnChanges {
         this.hide();
     }
 
-    ngOnChanges(changes: {[propertyName: string]: SimpleChange}) {
+    ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
         if (changes['popoverDisabled']) {
             if (changes['popoverDisabled'].currentValue) {
                 this.hide();

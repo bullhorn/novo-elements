@@ -1,51 +1,45 @@
 novo-table {
     width: 100%;
     display: block;
-
-    > header {
+    >header {
         novo-table-header {
             padding: 10px;
         }
-
         div.header-actions {
             display: flex;
             align-items: center;
-
-            > novo-pagination {
+            >novo-pagination {
                 flex: 1;
-
-                > h5 {
+                >h5 {
                     margin-left: 0;
                 }
             }
-
-            > novo-table-actions {
+            >novo-table-actions {
                 padding: 10px;
                 display: flex;
                 align-items: center;
-
-                > * {
+                >* {
                     margin-right: 10px;
-
                     &:last-child {
                         margin-right: 0;
                     }
                 }
-
-                > button {
+                >button {
                     height: 39px;
                 }
             }
         }
     }
-
-    > .table-container {
+    >.table-container {
         overflow-x: auto;
         width: 100%;
         display: block;
     }
 }
+
+
 /* -- Material Design Table style -------------- */
+
 // Variables
 // ---------------------
 $table-header-font-weight: 400;
@@ -60,75 +54,65 @@ $table-border-color: #f5f5f5; // Tables
 //
 // -----------------
 // Baseline styles
-
 .table {
     width: 100%;
     max-width: 100%;
     background-color: $table-bg;
-
-     > tbody,
-     > thead,
-    > tfoot {
-        > tr {
-             > td,
-            > th {
+    >tbody,
+    >thead,
+    >tfoot {
+        >tr {
+            >td,
+            >th {
                 position: relative;
                 text-align: left;
                 padding: $table-cell-padding;
                 vertical-align: middle;
-
                 &.checkbox {
                     text-align: center;
                     padding-bottom: 15px;
-
-                    > novo-checkbox {
+                    >novo-checkbox {
                         justify-content: center;
                     }
                 }
             }
-
             &.table-selection-row {
                 background-color: $navigation !important;
                 color: $white;
             }
         }
     }
-
-    > thead > tr > th {
+    >thead>tr>th {
         &:nth-of-type(1) {
             .th-group {
                 novo-dropdown.column-filters {
-                    .dropdown-container {
+                    novo-dropdown-container {
                         left: -80px;
                     }
                 }
             }
         }
-
         &.sorted {
             background: rgba($positive, .2);
         }
     }
-
-    > thead > tr {
+    >thead>tr {
         th:first-child {
             novo-dropdown {
-                .dropdown-container {
+                novo-dropdown-container {
                     left: -90px !important;
                 }
             }
         }
-
         th:last-child {
             novo-dropdown {
-                .dropdown-container {
+                novo-dropdown-container {
                     right: 0 !important;
                 }
             }
         }
     }
-
-    > thead > tr > th {
+    >thead>tr>th {
         font-weight: $table-header-font-weight;
         color: $table-header-font-color;
         vertical-align: bottom;
@@ -136,115 +120,24 @@ $table-border-color: #f5f5f5; // Tables
         border-top: 1px solid #F4F4F4;
         border-right: 1px solid #F4F4F4;
         padding: 0.75rem;
-
         &.over {
             background: #eee;
             border-right: 2px double #000 !important;
-
             * {
                 pointer-events: none;
             }
         }
-
         .th-group {
             display: flex;
             flex-direction: row;
             align-items: center;
-
             novo-dropdown.column-filters {
                 button.filtered {
                     i {
                         color: $positive;
                     }
                 }
-
-                .dropdown-container {
-                    right: -15px;
-                    min-width: 230px;
-                    overflow-x: hidden;
-
-                    list {
-                        item.filter-search {
-                            padding: 10px 0;
-                            width: 100%;
-                            height: auto;
-                            flex-direction: column;
-                            align-items: flex-start;
-                            cursor: initial;
-
-                            &:hover {
-                                background: transparent;
-                            }
-
-                            .header {
-                                display: flex;
-                                align-items: center;
-                                justify-content: space-between;
-                                width: 90%;
-                                font-size: 0.9em;
-                                margin: 0 auto;
-
-                                span {
-                                    text-transform: uppercase;
-                                    font-weight: $table-header-font-weight;
-                                }
-
-                                button {
-                                    padding: 0 5px;
-
-                                    i {
-                                        height: auto !important;
-                                        width: auto !important;
-                                        font-size: 0.9em;
-                                    }
-                                }
-                            }
-
-                            input {
-                                border: none;
-                                border-bottom: 2px solid #BEBEBE;
-                                width: 90%;
-                                margin: 0 auto;
-                                background: transparent;
-
-                                &:focus {
-                                    outline: none;
-                                    border-bottom: 2px solid $ocean;
-                                }
-                            }
-                        }
-                    }
-
-                    .calender-container {
-                        height: 100%;
-                        min-height: 200px;
-                        width: 100%;
-                        background: #fff;
-
-                        > div {
-                            color: $positive;
-                            line-height: 3em;
-                            font-size: 0.9em;
-                            padding-left: 5px;
-                            cursor: pointer;
-                        }
-
-                        novo-date-picker {
-                            .calendar {
-                                width: 100%;
-                                height: 100%;
-                                box-shadow: none;
-                                padding: 0 5px 10px;
-
-                                .calendar-top {
-                                    display: none;
-                                }
-                            }
-                        }
-                    }
-                }
             }
-
             .th-title {
                 display: flex;
                 flex-direction: row;
@@ -252,69 +145,55 @@ $table-border-color: #f5f5f5; // Tables
                 padding: 10px;
                 border-radius: 3px;
                 font-weight: $table-header-font-weight;
-
                 &.sortable {
                     cursor: pointer;
-
                     label {
                         cursor: pointer; // chrome user agent style will override this unless explicitly set on the element
                         margin-right: 10px;
                     }
                 }
-
                 &:hover {
                     .table-sort-icons {
                         opacity: 1;
-
                         i {
                             &.bhi-arrow-down {
                                 color: lighten(#757575, 15%);
                             }
-
                             &.bhi-arrow-up {
                                 color: darken(#757575, 10%);
                             }
                         }
                     }
                 }
-
                 .table-sort-icons {
                     display: flex;
                     flex-direction: row;
                     opacity: 0.3;
                     transition: all 200ms ease-in-out;
-
                     i {
                         font-size: 0.8em;
                         margin: 0;
-
                         &.bhi-arrow-down {
                             padding-top: 5px;
                         }
                     }
-
                     &.asc {
                         opacity: 1;
-
                         i {
                             &.bhi-arrow-down {
                                 color: lighten(#757575, 15%);
                             }
-
                             &.bhi-arrow-up {
                                 color: $positive;
                             }
                         }
                     }
-
                     &.desc {
                         opacity: 1;
-
                         i {
                             &.bhi-arrow-down {
                                 color: $positive;
                             }
-
                             &.bhi-arrow-up {
                                 color: lighten(#757575, 15%);
                             }
@@ -324,26 +203,22 @@ $table-border-color: #f5f5f5; // Tables
             }
         }
     }
-
-    > tbody + tbody {
+    >tbody+tbody {
         border-top: 1px solid rgba(0, 0, 0, .12);
     }
-
     .table-message {
-        tr, td {
+        tr,
+        td {
             background-color: $white !important;
         }
     }
-
     // Nesting
     .table {
         background-color: $table-bg;
     }
-
     .row-action {
         padding: 0.3rem !important;
     }
-
     tr.details-row {
         td {
             padding-top: 0 !important;
@@ -353,7 +228,6 @@ $table-border-color: #f5f5f5; // Tables
     .no-border {
         border: 0;
     }
-
     .table-message,
     .no-matching-records,
     .table-empty-message {
@@ -362,14 +236,12 @@ $table-border-color: #f5f5f5; // Tables
         vertical-align: middle;
         text-transform: uppercase;
     }
-
     .table-error-message {
         color: $grey;
         margin: 40px 0;
         vertical-align: middle;
         text-transform: uppercase;
     }
-
     .table-loading {
         display: flex;
         vertical-align: middle;
@@ -377,66 +249,135 @@ $table-border-color: #f5f5f5; // Tables
         justify-content: center;
         background: $white;
     }
-
-
     novo-checkbox {
         .check-box-group {
             color: $grey;
             margin-right: 0;
-
             &.checked {
                 color: $positive;
             }
-
             .bhi-checkbox-indeterminate {
                 color: $positive;
             }
         }
     }
 }
-// Condensed table w/ half padding
 
+novo-dropdown-container.table-dropdown {
+    right: -15px;
+    min-width: 230px;
+    max-width: 230px;
+    overflow-x: hidden;
+    list {
+        item.filter-search {
+            padding: 10px 0;
+            width: 100%;
+            height: auto;
+            flex-direction: column;
+            align-items: flex-start;
+            cursor: initial;
+            &:hover {
+                background: transparent;
+            }
+            .header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 90%;
+                font-size: 0.9em;
+                margin: 0 auto;
+                span {
+                    text-transform: uppercase;
+                    font-weight: $table-header-font-weight;
+                }
+                button {
+                    padding: 0 5px;
+                    i {
+                        height: auto !important;
+                        width: auto !important;
+                        font-size: 0.9em;
+                    }
+                }
+            }
+            input {
+                border: none;
+                border-bottom: 2px solid #BEBEBE;
+                width: 90%;
+                margin: 0 auto;
+                background: transparent;
+                &:focus {
+                    outline: none;
+                    border-bottom: 2px solid $ocean;
+                }
+            }
+        }
+    }
+    .calender-container {
+        height: 100%;
+        min-height: 200px;
+        width: 100%;
+        background: #fff;
+        >div {
+            color: $positive;
+            line-height: 3em;
+            font-size: 0.9em;
+            padding-left: 5px;
+            cursor: pointer;
+        }
+        novo-date-picker {
+            .calendar {
+                width: 100%;
+                height: 100%;
+                box-shadow: none;
+                padding: 0 5px 10px;
+                .calendar-top {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+// Condensed table w/ half padding
 .table-condensed {
-     > tbody,
-     > thead,
-    > tfoot {
-        > tr {
-             > td,
-            > th {
+    >tbody,
+    >thead,
+    >tfoot {
+        >tr {
+            >td,
+            >th {
                 padding: $table-condensed-cell-padding;
             }
         }
     }
 }
+
 // Bordered version
 // Add horizontal borders between columns.
-
 .table-bordered {
-     > tbody,
-     > thead,
-    > tfoot {
-        > tr {
-             > td,
-            > th {
+    >tbody,
+    >thead,
+    >tfoot {
+        >tr {
+            >td,
+            >th {
                 border-bottom: 1px solid $table-border-color;
             }
         }
     }
-
-    > thead > tr {
-         > td,
-        > th {
+    >thead>tr {
+        >td,
+        >th {
             border-bottom-width: 2px;
         }
     }
 }
+
 // Zebra-striping
 // Default zebra-stripe styles (alternating gray and transparent backgrounds)
-
 .table-striped:not(.table-details) {
-    > tbody tr:nth-of-type(odd):not(.table-selection-row) {
+    >tbody tr:nth-of-type(odd):not(.table-selection-row) {
         background-color: $table-bg-accent;
-
         td {
             background-color: $table-bg-accent;
         }
@@ -444,15 +385,15 @@ $table-border-color: #f5f5f5; // Tables
 }
 
 .table-striped.table-details {
-     > tbody tr:nth-of-type(4n+2),
-    > tbody tr:nth-of-type(4n+1) {
+    >tbody tr:nth-of-type(4n+2),
+    >tbody tr:nth-of-type(4n+1) {
         background-color: $table-bg-accent;
     }
 }
-// Hover effect
 
+// Hover effect
 .table-hover {
-    > tbody > tr:hover {
+    >tbody>tr:hover {
         background-color: $table-bg-hover;
     }
 }
@@ -469,54 +410,46 @@ $table-border-color: #f5f5f5; // Tables
 
 novo-table {
     &[dark] {
-        .table > thead > tr > th {
+        .table>thead>tr>th {
             border-right: 1px solid rgba(#F4F4F4, .04);
         }
-
         .table-striped:not(.table-details) {
-            > tbody tr:nth-of-type(odd) {
+            >tbody tr:nth-of-type(odd) {
                 background-color: rgba($table-bg-accent, .04);
-
                 td {
                     background-color: transparent;
                 }
             }
         }
-
         .table-striped.table-details {
-             > tbody tr:nth-of-type(4n+2),
-            > tbody tr:nth-of-type(4n+1) {
+            >tbody tr:nth-of-type(4n+2),
+            >tbody tr:nth-of-type(4n+1) {
                 background-color: rgba($table-bg-accent, .04);
             }
         }
     }
-    @each $analytics, $color in $analytics-colors {
+    @each $analytics,
+    $color in $analytics-colors {
         &[theme="#{$analytics}"] {
-            > header {
+            >header {
                 background: $color;
                 color: #fff;
-
                 novo-pagination {
                     background: rgba(0, 0, 0, 0.15);
-
-                    > * {
+                    >* {
                         color: $white;
                         opacity: 1;
                     }
-
                     .page {
                         color: $white;
                     }
-
                     h5.rows {
                         opacity: 0.75;
                     }
-
                     novo-select {
                         div[type="button"] {
                             color: $white;
                             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-
                             i {
                                 color: $white !important;
                             }
@@ -526,33 +459,28 @@ novo-table {
             }
         }
     }
-    @each $entity, $color in $entity-colors {
+    @each $entity,
+    $color in $entity-colors {
         &[theme="#{$entity}"] {
-            > header {
+            >header {
                 background: $color;
                 color: #fff;
-
                 novo-pagination {
                     background: rgba(0, 0, 0, 0.15);
-
-                    > * {
+                    >* {
                         color: $white;
                         opacity: 1;
                     }
-
                     .page {
                         color: $white;
                     }
-
                     h5.rows {
                         opacity: 0.75;
                     }
-
                     novo-select {
                         div[type="button"] {
                             color: $white;
                             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-
                             i {
                                 color: $white !important;
                             }
@@ -562,33 +490,28 @@ novo-table {
             }
         }
     }
-    @each $basic, $color in $colors {
+    @each $basic,
+    $color in $colors {
         &[theme="#{$basic}"] {
-            > header {
+            >header {
                 background: $color;
                 color: #fff;
-
                 novo-pagination {
                     background: rgba(0, 0, 0, 0.15);
-
-                    > * {
+                    >* {
                         color: $white;
                         opacity: 1;
                     }
-
                     .page {
                         color: $white;
                     }
-
                     h5.rows {
                         opacity: 0.75;
                     }
-
                     novo-select {
                         div[type="button"] {
                             color: $white;
                             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-
                             i {
                                 color: $white !important;
                             }
@@ -598,37 +521,29 @@ novo-table {
             }
         }
     }
-
     &[dark] {
-        > header {
+        >header {
             color: #fff;
-
             novo-pagination {
                 background: rgba(0, 0, 0, 0.15);
-
-                > * {
+                >* {
                     color: $white;
                     opacity: 1;
                 }
-
                 .page {
                     color: $white;
-
                     &.active {
                         color: #FFF;
                         background: rgba(0, 0, 0, 0.15);
                     }
                 }
-
                 h5.rows {
                     opacity: 0.75;
                 }
-
                 novo-select {
                     div[type="button"] {
                         color: $white;
                         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-
                         i {
                             color: $white !important;
                         }
