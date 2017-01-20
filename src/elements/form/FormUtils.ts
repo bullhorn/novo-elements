@@ -297,7 +297,7 @@ export class FormUtils {
                 return field;
             }).sort(Helpers.sortByField(['sortOrder', 'name']));
             if (meta.sectionHeaders && meta.sectionHeaders.length) {
-                meta.sectionHeaders.sort(Helpers.sortByField('sortOrder'));
+                meta.sectionHeaders.sort(Helpers.sortByField(['sortOrder', 'name']));
                 meta.sectionHeaders.forEach((item, i) => {
                     if (item.enabled) {
                         if (item.sortOrder > 0 && fieldsets.length === 0) {
@@ -334,7 +334,6 @@ export class FormUtils {
                     fieldsetIdx: 0
                 });
             }
-
             fields.forEach(field => {
                 if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
                     let control = this.getControlForField(field, http, config);
@@ -343,7 +342,7 @@ export class FormUtils {
                         control.currencyFormat = currencyFormat;
                     }
                     let location = ranges.find(item => {
-                        return (item.min <= field.sortOrder && field.sortOrder < item.max) || (item.min <= field.sortOrder && item.min === item.max);
+                        return (item.min <= field.sortOrder && field.sortOrder <= item.max) || (item.min <= field.sortOrder && item.min === item.max);
                     });
                     if (location) {
                         // Add to controls
