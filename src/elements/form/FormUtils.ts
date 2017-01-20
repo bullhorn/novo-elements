@@ -62,10 +62,16 @@ export class NovoFormControl extends FormControl {
 
         // Update validators to have the required
         if (this.required && !this.hasRequiredValidator) {
-            let validators = [...this.validators];
+            let validators: any = [...this.validators];
             validators.push(Validators.required);
             this.setValidators(validators);
             this.updateValueAndValidity();
+            this.hasRequiredValidator = this.required;
+        } else if (this.hasRequiredValidator) {
+            let validators: any = [...this.validators];
+            this.setValidators(validators);
+            this.updateValueAndValidity();
+            this.hasRequiredValidator = this.required;
         }
     }
 
@@ -101,7 +107,7 @@ export class FormUtils {
     }
 
     determineInputType(field) {
-        let type:string;
+        let type: string;
         // Determine TYPE because its not just 1 value that determines this.
         if (field.dataSpecialization === 'DATETIME') {
             type = 'datetime';
@@ -113,11 +119,13 @@ export class FormUtils {
             type = 'percentage';
         } else if (field.dataSpecialization === 'HTML') {
             type = 'editor';
+        } else if (field.dataSpecialization === 'YEAR') {
+            type = 'year';
         } else if (field.dataType === 'Timestamp') {
             type = 'date';
         } else if (field.dataType === 'Boolean') {
             type = 'tiles';
-        }else if (field.inputType === 'TEXTAREA') {
+        } else if (field.inputType === 'TEXTAREA') {
             type = 'textarea';
         } else if (field.options && ~['CHECKBOX', 'RADIO'].indexOf(field.inputType) && field.multiValue) {
             type = 'checklist';
@@ -129,7 +137,7 @@ export class FormUtils {
             type = 'select';
         } else if (~['Double', 'BigDecimal'].indexOf(field.dataType)) {
             type = 'float';
-        }  else if (field.options && ~['TILES'].indexOf(field.inputType) && !field.multiValue) {
+        } else if (field.options && ~['TILES'].indexOf(field.inputType) && !field.multiValue) {
             type = 'tiles';
         } else if (field.type === 'COMPOSITE') {
             type = 'address';
@@ -215,6 +223,10 @@ export class FormUtils {
             case 'year':
                 if (type === 'money') {
                     type = 'currency';
+                } else if (type === 'year') {
+                    controlConfig.minlength = 4;
+                    controlConfig.maxlength = 4;
+                    type = 'number';
                 }
                 controlConfig.type = type;
                 control = new TextBoxControl(controlConfig);
@@ -286,7 +298,7 @@ export class FormUtils {
                 return field;
             }).sort(Helpers.sortByField(['sortOrder', 'name']));
             if (meta.sectionHeaders && meta.sectionHeaders.length) {
-                meta.sectionHeaders.sort(Helpers.sortByField('sortOrder'));
+                meta.sectionHeaders.sort(Helpers.sortByField(['sortOrder', 'name']));
                 meta.sectionHeaders.forEach((item, i) => {
                     if (item.enabled) {
                         if (item.sortOrder > 0 && fieldsets.length === 0) {
@@ -323,7 +335,6 @@ export class FormUtils {
                     fieldsetIdx: 0
                 });
             }
-
             fields.forEach(field => {
                 if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
                     let control = this.getControlForField(field, http, config);
@@ -332,7 +343,7 @@ export class FormUtils {
                         control.currencyFormat = currencyFormat;
                     }
                     let location = ranges.find(item => {
-                        return (item.min <= field.sortOrder && field.sortOrder < item.max) || (item.min <= field.sortOrder && item.min === item.max);
+                        return (item.min <= field.sortOrder && field.sortOrder <= item.max) || (item.min <= field.sortOrder && item.min === item.max);
                     });
                     if (location) {
                         // Add to controls

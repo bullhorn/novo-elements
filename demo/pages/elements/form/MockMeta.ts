@@ -29,7 +29,7 @@ export const MockMeta = {
             name: 'dateFounded',
             type: 'number',
             label: 'Date Founded',
-            required: true,
+            dataSpecialization: 'YEAR',
             sortOrder: 40
         },
         {

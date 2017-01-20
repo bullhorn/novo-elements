@@ -81,7 +81,7 @@ export class ImageCell extends BaseRenderer {
 @Component({
     selector: 'actions-cell',
     template: `
-        <novo-dropdown>
+        <novo-dropdown appendToBody="true" parentScrollSelector=".table-container">
             <button type="button" theme="dialogue" icon="collapse">Actions!</button>
             <list>
                 <item>Item 1</item>

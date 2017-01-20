@@ -56,7 +56,7 @@ const template = `
     template: ModalSuccessDemoTpl
 })
 export class ModalSuccessDemo {
-    constructor(private modalRef:NovoModalRef) {
+    constructor(private modalRef: NovoModalRef) {
     }
 
     close() {
@@ -69,7 +69,7 @@ export class ModalSuccessDemo {
     template: ModalWarningDemoTpl
 })
 export class ModalWarningDemo {
-    constructor(private modalRef:NovoModalRef) {
+    constructor(private modalRef: NovoModalRef) {
     }
 
     close() {
@@ -82,7 +82,7 @@ export class ModalWarningDemo {
     template: ModalErrorDemoTpl
 })
 export class ModalErrorDemo {
-    constructor(private modalRef:NovoModalRef) {
+    constructor(private modalRef: NovoModalRef) {
     }
 
     close() {
@@ -95,7 +95,7 @@ export class ModalErrorDemo {
     template: ModalCustomDemoTpl
 })
 export class ModalCustomDemo {
-    constructor(private modalRef:NovoModalRef) {
+    constructor(private modalRef: NovoModalRef) {
     }
 
     close() {
@@ -108,13 +108,13 @@ export class ModalCustomDemo {
     template: ModalAddDemoTpl
 })
 export class ModalAddDemo implements OnInit {
-    private textControl:any;
-    private emailControl:any;
-    private numberControl:any;
-    private pickerControl:any;
-    private textForm:any;
+    private textControl: any;
+    private emailControl: any;
+    private numberControl: any;
+    private pickerControl: any;
+    private textForm: any;
 
-    constructor(private modalRef:NovoModalRef, private formUtils:FormUtils) {
+    constructor(private modalRef: NovoModalRef, private formUtils: FormUtils) {
     }
 
     ngOnInit() {
@@ -145,13 +145,13 @@ export class ModalAddDemo implements OnInit {
     template: ModalEditDemoTpl
 })
 export class ModalEditDemo implements OnInit {
-    private textControl:any;
-    private emailControl:any;
-    private numberControl:any;
-    private pickerControl:any;
-    private textForm:any;
+    private textControl: any;
+    private emailControl: any;
+    private numberControl: any;
+    private pickerControl: any;
+    private textForm: any;
 
-    constructor(private modalRef:NovoModalRef, private formUtils:FormUtils) {
+    constructor(private modalRef: NovoModalRef, private formUtils: FormUtils) {
         this.formUtils = formUtils;
         this.modalRef = modalRef;
     }
@@ -184,14 +184,14 @@ export class ModalEditDemo implements OnInit {
     template: template
 })
 export class ModalDemoComponent {
-    private ModalAddDemoTpl:string = ModalAddDemoTpl;
-    private ModalEditDemoTpl:string = ModalEditDemoTpl;
-    private ModalErrorDemoTpl:string = ModalErrorDemoTpl;
-    private ModalCustomDemoTpl:string = ModalCustomDemoTpl;
-    private ModalSuccessDemoTpl:string = ModalSuccessDemoTpl;
-    private ModalWarningDemoTpl:string = ModalWarningDemoTpl;
+    private ModalAddDemoTpl: string = ModalAddDemoTpl;
+    private ModalEditDemoTpl: string = ModalEditDemoTpl;
+    private ModalErrorDemoTpl: string = ModalErrorDemoTpl;
+    private ModalCustomDemoTpl: string = ModalCustomDemoTpl;
+    private ModalSuccessDemoTpl: string = ModalSuccessDemoTpl;
+    private ModalWarningDemoTpl: string = ModalWarningDemoTpl;
 
-    constructor(private modalService:NovoModalService) {
+    constructor(private modalService: NovoModalService) {
         this.modalService = modalService;
     }
 

@@ -1,3 +1,33 @@
+<a name="2.0.77"></a>
+## [2.0.77](https://github.com/bullhorn/novo-elements/compare/v2.0.76...v2.0.77) (2017-01-20)
+
+
+### Bug Fixes
+
+* **Dropdown:** Allow to open in middle ([35265b7](https://github.com/bullhorn/novo-elements/commit/35265b7))
+
+
+
+<a name="2.0.76"></a>
+## [2.0.76](https://github.com/bullhorn/novo-elements/compare/v2.0.75...v2.0.76) (2017-01-20)
+
+
+### Bug Fixes
+
+* **dropdown:** Listening for outside clicks on container too ([62f55ef](https://github.com/bullhorn/novo-elements/commit/62f55ef))
+
+
+
+<a name="2.0.75"></a>
+## [2.0.75](https://github.com/bullhorn/novo-elements/compare/v2.0.74...v2.0.75) (2017-01-19)
+
+
+### Features
+
+* **dropdown:** Allowing dropdown to be appended to the body ([c06cd6d](https://github.com/bullhorn/novo-elements/commit/c06cd6d))
+
+
+
 <a name="2.0.74"></a>
 ## [2.0.74](https://github.com/bullhorn/novo-elements/compare/v2.0.73...v2.0.74) (2017-01-19)
 
