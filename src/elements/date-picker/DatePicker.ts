@@ -169,6 +169,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         if (date && date.startDate === null) {
             this.clearRange();
         } else {
+            if (!date) {
+                this.clearRange();
+            }
             let value = date ? moment(date) : moment();
             value = this.removeTime(value);
             this.month = value.clone();

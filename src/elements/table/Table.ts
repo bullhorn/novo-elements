@@ -360,28 +360,18 @@ export class NovoTableElement implements DoCheck {
      * @param column
      */
     onFilterClear(column) {
-        if (column.range) {
-            for (let i in column.options) {
-                if (column.options[i].range) {
-                    column.options[i].value = { startDate: null, endDate: null };
-                }
-            }
-        }
-
-        column.filter = null;
-        this.onFilterChange();
+        // if (column.filter && column.filter.startDate) {
+        //     column.filter = { startDate: null, endDate: null };
+        // }
+        setTimeout(() => {
+            column.filter = null;
+            this.onFilterChange();
+        });
     }
 
     clearAllSortAndFilters() {
         if (this.config.filtering) {
             this.columns.forEach(column => {
-                if (column.range) {
-                    for (let i in column.options) {
-                        if (column.options[i].range) {
-                            column.options[i].value = { startDate: null, endDate: null };
-                        }
-                    }
-                }
                 column.filter = null;
                 column.sort = null;
             });
