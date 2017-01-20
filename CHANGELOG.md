@@ -1,3 +1,13 @@
+<a name="2.0.84"></a>
+## [2.0.84](https://github.com/bullhorn/novo-elements/compare/v2.0.83...v2.0.84) (2017-01-20)
+
+
+### Bug Fixes
+
+* **dropdown:** Opening to right if not enough space on left ([64837d3](https://github.com/bullhorn/novo-elements/commit/64837d3))
+
+
+
 <a name="2.0.83"></a>
 ## [2.0.83](https://github.com/bullhorn/novo-elements/compare/v2.0.80...v2.0.83) (2017-01-20)
 
