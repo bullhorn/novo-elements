@@ -1,3 +1,14 @@
+<a name="2.0.78"></a>
+## [2.0.78](https://github.com/bullhorn/novo-elements/compare/v2.0.77...v2.0.78) (2017-01-20)
+
+
+### Bug Fixes
+
+* **form:** Making the control have the data specialization ([15ba7c0](https://github.com/bullhorn/novo-elements/commit/15ba7c0))
+* **Table:** DateRange now clears when filter is set to Null ([b14025f](https://github.com/bullhorn/novo-elements/commit/b14025f))
+
+
+
 <a name="2.0.77"></a>
 ## [2.0.77](https://github.com/bullhorn/novo-elements/compare/v2.0.76...v2.0.77) (2017-01-20)
 
