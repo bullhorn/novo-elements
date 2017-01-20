@@ -1,3 +1,13 @@
+<a name="2.0.80"></a>
+## [2.0.80](https://github.com/bullhorn/novo-elements/compare/v2.0.79...v2.0.80) (2017-01-20)
+
+
+### Bug Fixes
+
+* **form:** When forcing validation, only force validation on required fields ([8737e02](https://github.com/bullhorn/novo-elements/commit/8737e02))
+
+
+
 <a name="2.0.79"></a>
 ## [2.0.79](https://github.com/bullhorn/novo-elements/compare/v2.0.78...v2.0.79) (2017-01-20)
 
