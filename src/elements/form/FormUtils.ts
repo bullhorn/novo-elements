@@ -75,6 +75,17 @@ export class NovoFormControl extends FormControl {
         }
     }
 
+    setValue(value: any, {onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange}: {
+            onlySelf?: boolean,
+            emitEvent?: boolean,
+            emitModelToViewChange?: boolean,
+            emitViewToModelChange?: boolean
+        } = {}) {
+        this.markAsDirty();
+        this.markAsTouched();
+        super.setValue(value, {onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange});
+    }
+
     setReadOnly(read: boolean) {
         this.readOnly = read;
     }
