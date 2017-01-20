@@ -1,3 +1,13 @@
+<a name="2.0.76"></a>
+## [2.0.76](https://github.com/bullhorn/novo-elements/compare/v2.0.75...v2.0.76) (2017-01-20)
+
+
+### Bug Fixes
+
+* **dropdown:** Listening for outside clicks on container too ([62f55ef](https://github.com/bullhorn/novo-elements/commit/62f55ef))
+
+
+
 <a name="2.0.75"></a>
 ## [2.0.75](https://github.com/bullhorn/novo-elements/compare/v2.0.74...v2.0.75) (2017-01-19)
 
