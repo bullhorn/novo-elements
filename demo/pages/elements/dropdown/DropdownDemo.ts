@@ -6,6 +6,7 @@ let CustomClassTpl = require('./templates/CustomClassDemo.html');
 let AppendToBodyTpl = require('./templates/AppendToBodyDemo.html');
 let KeepOpenTpl = require('./templates/KeepOpenDemo.html');
 let AppendToBodyWithScrollTpl = require('./templates/AppendToBodyWithScrollDemo.html');
+let CrazyLargeTpl = require('./templates/CrazyLargeDemo.html');
 
 const template = `
 <div class="container">
@@ -37,6 +38,11 @@ const template = `
     <p>Sometimes you will have embedded dropdowns in containers that control custom scrolling, you can tie into those scroll events using a "parentScrollSelector".</p>
     <div class="example dropdown-demo-scroll">${AppendToBodyWithScrollTpl}</div>
     <code-snippet [code]="AppendToBodyWithScrollTpl"></code-snippet>
+    <code-snippet [code]="AppendToBodyTpl"></code-snippet>
+
+    <p>Craxy large dropdown to demonstrate how the smart positioning works.</p>
+    <div class="example dropdown-demo">${CrazyLargeTpl}</div>
+    <code-snippet [code]="CrazyLargeTpl"></code-snippet>
 </div>
 `;
 
@@ -50,6 +56,15 @@ export class DropdownDemoComponent {
     public KeepOpenTpl: string = KeepOpenTpl;
     public AppendToBodyWithScrollTpl: string = AppendToBodyWithScrollTpl;
     public CustomClassTpl: string = CustomClassTpl;
+    public CrazyLargeTpl: string = CrazyLargeTpl;
+
+    public items: string[] = [];
+
+    constructor() {
+        for (let i = 0; i < 50; i++) {
+            this.items.push('ITEM!');
+        }
+    }
 
     public clickMe(data: string): void {
         console.log('CLICKED!', data); // tslint:disable-line

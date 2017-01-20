@@ -100,7 +100,7 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
             if (this.allFieldsNotRequired) {
                 this.fieldsets.forEach(fieldset => {
                     fieldset.controls.forEach(control => {
-                        control.hidden = false;
+                        this.form.controls[control.key].hidden = false;
                     });
                 });
             }
@@ -110,7 +110,7 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
     showAllFields() {
         this.fieldsets.forEach(fieldset => {
             fieldset.controls.forEach(control => {
-                control.hidden = false;
+                this.form.controls[control.key].hidden = false;
             });
         });
         this.showingAllFields = true;
@@ -122,17 +122,17 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
             fieldset.controls.forEach(control => {
                 // Hide any non-required fields
                 if (!control.required) {
-                    control.hidden = true;
+                    this.form.controls[control.key].hidden = true;
                 }
 
                 // Hide required fields that have been successfully filled out
                 if (hideRequiredWithValue && this.form.value[control.key]) {
-                    control.hidden = true;
+                    this.form.controls[control.key].hidden = true;
                 }
 
                 // Don't hide fields with errors
                 if (this.form.controls[control.key].errors) {
-                    control.hidden = false;
+                    this.form.controls[control.key].hidden = false;
                 }
             });
         });

@@ -214,17 +214,27 @@ export class Helpers {
             windowScrollHeight = window.innerHeight + window.scrollY,
             windowScrollWidth = window.innerWidth + window.scrollX;
 
+        // Force open up
         if (marginFromBottom >= windowScrollHeight) {
             top = `${parseInt(top.replace('px', '')) - clientHeight - position.height - 20}px`;
         }
 
+        // Force open right
         if (marginFromRight >= windowScrollWidth) {
             left = `${parseInt(left.replace('px', '')) - clientWidth + position.width}px`;
         }
 
-        // TODO - handle open in middle if over top
+        // Force open middle
+        if (parseInt(top.replace('px', '')) <= window.scrollY) {
+            top = `${parseInt(top.replace('px', '')) + (clientHeight / 2) + (position.height / 2) + 10}px`;
+        }
 
         return { top, left };
+    }
+
+    static findAncestor(element: Element, selector: string): Element {
+        while ((element = element.parentElement) && !(element.matches.call(element, selector))); // tslint:disable-line
+        return element;
     }
 }
 class Can {

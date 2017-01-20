@@ -66,6 +66,7 @@ novo-form {
                         height: 0;
                         min-height: 0;
                         opacity: 0;
+                        display: none;
                     }
                     &.disabled {
                         pointer-events: none;
@@ -99,9 +100,9 @@ novo-form {
                                 }
                             }
                         }
-                        novo-tiles{
+                        novo-tiles {
                             opacity: .5 !important;
-                            label{
+                            label {
                                 color: inherit !important;
                             }
                         }
@@ -506,9 +507,9 @@ novo-form {
                                     }
                                 }
                             }
-                            novo-tiles{
+                            novo-tiles {
                                 opacity: .5 !important;
-                                label{
+                                label {
                                     color: inherit !important;
                                 }
                             }

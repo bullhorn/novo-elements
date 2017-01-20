@@ -107,7 +107,7 @@ export class FormUtils {
     }
 
     determineInputType(field) {
-        let type:string;
+        let type: string;
         // Determine TYPE because its not just 1 value that determines this.
         if (field.dataSpecialization === 'DATETIME') {
             type = 'datetime';
@@ -119,11 +119,13 @@ export class FormUtils {
             type = 'percentage';
         } else if (field.dataSpecialization === 'HTML') {
             type = 'editor';
+        } else if (field.dataSpecialization === 'YEAR') {
+            type = 'year';
         } else if (field.dataType === 'Timestamp') {
             type = 'date';
         } else if (field.dataType === 'Boolean') {
             type = 'tiles';
-        }else if (field.inputType === 'TEXTAREA') {
+        } else if (field.inputType === 'TEXTAREA') {
             type = 'textarea';
         } else if (field.options && ~['CHECKBOX', 'RADIO'].indexOf(field.inputType) && field.multiValue) {
             type = 'checklist';
@@ -135,7 +137,7 @@ export class FormUtils {
             type = 'select';
         } else if (~['Double', 'BigDecimal'].indexOf(field.dataType)) {
             type = 'float';
-        }  else if (field.options && ~['TILES'].indexOf(field.inputType) && !field.multiValue) {
+        } else if (field.options && ~['TILES'].indexOf(field.inputType) && !field.multiValue) {
             type = 'tiles';
         } else if (field.type === 'COMPOSITE') {
             type = 'address';
@@ -220,6 +222,10 @@ export class FormUtils {
             case 'year':
                 if (type === 'money') {
                     type = 'currency';
+                } else if (type === 'year') {
+                    controlConfig.minlength = 4;
+                    controlConfig.maxlength = 4;
+                    type = 'number';
                 }
                 controlConfig.type = type;
                 control = new TextBoxControl(controlConfig);

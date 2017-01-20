@@ -32,6 +32,7 @@ export class NovoDropdownContainer implements DoCheck {
     }
 
     private handleScroll(): void {
+        // On scroll, don't force the position to update (jump from top/middle/bottom/right)
         this.updatePosition(this.relativeElement, this.side);
     }
 
@@ -112,7 +113,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
         let button = this.element.nativeElement.querySelector('button');
         button.addEventListener('click', this.clickHandler);
         if (this.parentScrollSelector) {
-            this.parentScrollElement = this.findAncestor(this.element.nativeElement, this.parentScrollSelector);
+            this.parentScrollElement = Helpers.findAncestor(this.element.nativeElement, this.parentScrollSelector);
         }
     }
 
@@ -152,11 +153,6 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
                 this.parentScrollElement.removeEventListener('scroll', this.closeHandler);
             }
         }
-    }
-
-    private findAncestor(element: Element, selector: string): Element {
-        while ((element = element.parentElement) && !(element.matches.call(element, selector))); // tslint:disable-line
-        return element;
     }
 
     public onKeyDown(event): void {
