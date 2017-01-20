@@ -162,7 +162,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 this.executeInteractions();
             }
             // On init, iterate through all actions and subscribe to
-            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.subscribe(() => {
+            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
                 this.executeInteractions();
             });
         }
