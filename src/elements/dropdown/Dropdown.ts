@@ -124,6 +124,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
 
     private show(): void {
         this.container.show(this.appendToBody);
+        this.otherElement = this.container.element;
         if (this.appendToBody) {
             this.container.updatePosition(this.element.nativeElement.children[0], this.side);
             // If append to body then rip it out of here and put on body

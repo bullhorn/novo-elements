@@ -8,7 +8,7 @@ import { Helpers } from '../Helpers';
  */
 export class OutsideClick implements OnDestroy {
     element: ElementRef;
-    _otherElement: ElementRef;
+    otherElement: ElementRef;
     active: boolean = false;
     onOutsideClick: EventListenerOrEventListenerObject;
     onActiveChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -26,10 +26,6 @@ export class OutsideClick implements OnDestroy {
     */
     ngOnDestroy() {
         window.removeEventListener('click', this.onOutsideClick);
-    }
-
-    public set otherElement(element: ElementRef) {
-        this._otherElement = element;
     }
 
     /**
@@ -57,8 +53,8 @@ export class OutsideClick implements OnDestroy {
     public handleOutsideClick(event: MouseEvent): void {
         // If the elements doesn't contain the target element, it is an outside click
         let outsideClick = !this.element.nativeElement.contains(event.target);
-        if (this._otherElement && outsideClick) {
-            outsideClick = !this._otherElement.nativeElement.contains(event.target);
+        if (this.otherElement && outsideClick) {
+            outsideClick = !this.otherElement.nativeElement.contains(event.target);
         }
         if (outsideClick) {
             this.toggleActive(event, false);
