@@ -173,7 +173,8 @@ export class FormUtils {
             readOnly: !!field.disabled || !!field.readOnly,
             config: null,
             options: null,
-            interactions: field.interactions
+            interactions: field.interactions,
+            dataSpecialization: field.dataSpecialization
         };
         let optionsConfig = this.getControlOptions(field, http, config);
 
