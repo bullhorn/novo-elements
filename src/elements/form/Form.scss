@@ -138,9 +138,10 @@ novo-form {
                             color: $grey;
                             display: inline-block;
                             margin-bottom: 5px;
+                            float: right;
+                            width: 400px;
                         }
                         .character-limit-error {
-                            width: 495px;
                             display: inline-block;
                         }
                     }
