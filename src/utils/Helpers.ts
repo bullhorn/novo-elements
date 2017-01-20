@@ -229,6 +229,11 @@ export class Helpers {
             top = `${parseInt(top.replace('px', '')) + (clientHeight / 2) + (position.height / 2) + 10}px`;
         }
 
+        // Force open left
+        if (parseInt(left.replace('px', '')) <= window.scrollX) {
+            left = `${parseInt(left.replace('px', '')) + (clientWidth / 2) + (position.width * 2) - 4}px`;
+        }
+
         return { top, left };
     }
 
