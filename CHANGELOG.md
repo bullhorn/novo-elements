@@ -1,3 +1,13 @@
+<a name="2.0.77"></a>
+## [2.0.77](https://github.com/bullhorn/novo-elements/compare/v2.0.76...v2.0.77) (2017-01-20)
+
+
+### Bug Fixes
+
+* **Dropdown:** Allow to open in middle ([35265b7](https://github.com/bullhorn/novo-elements/commit/35265b7))
+
+
+
 <a name="2.0.76"></a>
 ## [2.0.76](https://github.com/bullhorn/novo-elements/compare/v2.0.75...v2.0.76) (2017-01-20)
 
