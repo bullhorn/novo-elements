@@ -99,9 +99,9 @@ import { Helpers } from './../../utils/Helpers';
             <div class="error-message">
                 <span *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
                 <span *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
-                <span class="character-limit-error" *ngIf="isDirty && maxLengthMet && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
+                <span class="character-limit-error" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
                 <span class="character-limit-error" *ngIf="errors?.maxlength">Sorry, you have exceeded the maximum character count of {{ control.maxlength }} for this field</span>
-                <span class="text-field-character-limit" *ngIf=" control.maxlength && (control.controlType=='text-area' || control.controlType=='textbox')">{{ characterCount }}/{{ control.maxlength }}</span>
+                <span class="text-field-character-limit" *ngIf="focused && control.maxlength && (control.controlType=='text-area' || control.controlType=='textbox')">{{ characterCount }}/{{ control.maxlength }}</span>
                 <span *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
                 <span *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
                 <span *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
