@@ -76,14 +76,14 @@ export class NovoFormControl extends FormControl {
     }
 
     setValue(value: any, {onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange}: {
-            onlySelf?: boolean,
-            emitEvent?: boolean,
-            emitModelToViewChange?: boolean,
-            emitViewToModelChange?: boolean
-        } = {}) {
+        onlySelf?: boolean,
+        emitEvent?: boolean,
+        emitModelToViewChange?: boolean,
+        emitViewToModelChange?: boolean
+    } = {}) {
         this.markAsDirty();
         this.markAsTouched();
-        super.setValue(value, {onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange});
+        super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
     }
 
     setReadOnly(read: boolean) {
@@ -463,8 +463,10 @@ export class FormUtils {
     forceValidation(form: FormGroup): void {
         Object.keys(form.controls).forEach((key: string) => {
             let control: any = form.controls[key];
-            control.markAsDirty();
-            control.markAsTouched();
+            if (control.required && Helpers.isBlank(form.value[control.key])) {
+                control.markAsDirty();
+                control.markAsTouched();
+            }
         });
     }
 }
