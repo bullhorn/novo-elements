@@ -35,13 +35,13 @@ import { Helpers } from './../../utils/Helpers';
                     <!--Text-based Inputs-->
                     <!--TODO prefix/suffix on the control-->
                     <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'">
-                        <input *ngIf="control.type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (input)="emitChange($event)" (keypress)="checkMaxLength($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)">
+                        <input *ngIf="control.type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)">
                         <input *ngIf="control.type === 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (keypress)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any">
                         <label class="input-label" *ngIf="control.subType === 'currency'">{{control.currencyFormat}}</label>
                         <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
                     </div>
                     <!--TextArea-->
-                    <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)" (keypress)="checkMaxLength($event)" (input)="emitChange($event)" [maxlength]="control.maxlength"></textarea>
+                    <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)" (input)="emitChange($event)" [maxlength]="control.maxlength"></textarea>
                     <!--Editor-->
                     <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key"></novo-editor>
                     <!--HTML5 Select-->
@@ -95,15 +95,15 @@ import { Helpers } from './../../utils/Helpers';
                     <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [placeholder]="control.placeholder" [config]="control.config" (change)="modelChange($event)"></novo-quick-note>
                 </div>
             </div>
-            <div class="text-field-character-limit" [attr.data-automation-id]="text-area-character-count" *ngIf="_focused && control.maxlength && (control.controlType=='text-area' || control.controlType=='textbox')">
-                Character Count: {{ characterCount }}/{{ control.maxlength }}
-            </div>
             <!--Error Message-->
             <div class="error-message">
                 <span *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
                 <span *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
-                <span *ngIf="isDirty && maxLengthMet && _focused && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
-                <span *ngIf="errors?.maxlength">Sorry, you have exceeded the maximum character count of {{ control.maxlength }} for this field</span>
+                <span class="character-limit-error" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
+                <span class="character-limit-error" *ngIf="errors?.maxlength">Sorry, you have exceeded the maximum character count of {{ control.maxlength }} for this field</span>
+                <span class="text-field-character-limit" [attr.data-automation-id]="text-area-character-count" *ngIf="focused && control.maxlength && (control.controlType=='text-area' || control.controlType=='textbox')">
+                    {{ characterCount }}/{{ control.maxlength }}
+                </span>
                 <span *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
                 <span *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
                 <span *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
@@ -270,11 +270,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     checkMaxLength(event) {
         if (this.control && this.control.maxlength) {
             this.characterCount = event.target.value.length;
-            if (event.target.value.length >= this.control.maxlength) {
-                this.maxLengthMet = true;
-            } else {
-                this.maxLengthMet = false;
-            }
+            this.maxLengthMet = event.target.value.length >= this.control.maxlength;
         }
     }
 
@@ -283,7 +279,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
             this._focused = false;
         }
         this.change.emit(value);
-        this.checkMaxLength(value);
     }
 
     restrictKeys(event) {
