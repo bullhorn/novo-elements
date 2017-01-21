@@ -252,10 +252,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     resizeTextArea(event) {
-        // Reset the height
-        let height = event.target.value.length > 0 ? `${event.target.scrollHeight}px` : '2rem';
-        event.target.style.height = '';
-        event.target.style.height = height;
+        // Reset the heighte
+        event.target.style.height = 'auto';
+        event.target.style.height = event.target.value.length > 0 ? `${event.target.scrollHeight - 14}px` : '2rem';
     }
 
     modelChange(value) {
