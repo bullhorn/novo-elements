@@ -31,7 +31,7 @@ const SELECT_VALUE_ACCESSOR = {
                 </div>
             </li>
             <li *ngFor="let option of options; let i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
-              <span>{{option.label}}</span>
+              <span [innerHtml]="highlight(option.label, filterTerm)"></span>
               <i *ngIf="option.active" class="bhi-check"></i>
             </li>
         </ul>
@@ -122,7 +122,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         this.empty = true;
     }
 
-    onKeyDown(event) {
+    onKeyDown(event: KeyboardEvent): void {
         if (this.active) {
             if (!this.header.open) {
                 // Prevent Scrolling
@@ -157,17 +157,24 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
             } else if (event.keyCode === KeyCodes.UP && this.selectedIndex === 0) {
                 this.selectedIndex--;
                 this.toggleHeader(null, true);
-            } else if (event.keyCode >= 65 && event.keyCode <= 90) {
+            } else if (event.keyCode >= 65 && event.keyCode <= 90 || event.keyCode === KeyCodes.SPACE) {
                 clearTimeout(this.filterTermTimeout);
-                this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 500);
+                this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 2000);
                 let char = String.fromCharCode(event.keyCode);
                 this.filterTerm = this.filterTerm.concat(char);
                 let element = this.element.nativeElement;
                 let list = element.querySelector('.novo-select-list');
-                let item = element.querySelector(`[data-automation-value^=${this.filterTerm} i]`);
+                let item = element.querySelector(`[data-automation-value^="${this.filterTerm}" i]`);
                 if (item) {
                     list.scrollTop = item.offsetTop;
+                    let listItems = Array.from(list.querySelectorAll('li')).map((element: any) => element.getAttribute('data-automation-value'));
+                    this.selectedIndex = listItems.indexOf(item.getAttribute('data-automation-value'));
+                    this.select(this.options[this.selectedIndex], this.selectedIndex);
                 }
+            } else if ([KeyCodes.BACKSPACE, KeyCodes.DELETE].includes(event.keyCode)) {
+                clearTimeout(this.filterTermTimeout);
+                this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 2000);
+                this.filterTerm = this.filterTerm.slice(0, -1);
             }
         }
     }
@@ -202,6 +209,16 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         }
         // If closing select, also close header
         this.toggleHeader(event, false);
+    }
+
+    highlight(match, query) {
+        // Replaces the capture string with a the same string inside of a "strong" tag
+        return query ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
+    }
+
+    escapeRegexp(queryToEscape) {
+        // Ex: if the capture is "a" the result will be \a
+        return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
     }
 
     saveHeader() {
