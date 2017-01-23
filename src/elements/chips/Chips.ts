@@ -62,7 +62,7 @@ export class NovoChipElement {
     template: `
         <chip
             *ngFor="let item of _items | async"
-            [type]="type"
+            [type]="type || item?.value?.searchEntity"
             [class.selected]="item == selected"
             (remove)="remove($event, item)"
             (select)="select($event, item)">
