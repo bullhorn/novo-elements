@@ -1,3 +1,13 @@
+<a name="2.0.89"></a>
+## [2.0.89](https://github.com/bullhorn/novo-elements/compare/v2.0.88...v2.0.89) (2017-01-23)
+
+
+### Bug Fixes
+
+* **Form:** Adding setTimeout to the setValue for field interactions to prevent expression changed errors ([#368](https://github.com/bullhorn/novo-elements/issues/368)) ([60a2418](https://github.com/bullhorn/novo-elements/commit/60a2418))
+
+
+
 <a name="2.0.88"></a>
 ## [2.0.88](https://github.com/bullhorn/novo-elements/compare/v2.0.87...v2.0.88) (2017-01-23)
 
