@@ -1,3 +1,13 @@
+<a name="2.0.88"></a>
+## [2.0.88](https://github.com/bullhorn/novo-elements/compare/v2.0.87...v2.0.88) (2017-01-23)
+
+
+### Features
+
+* **select:** Highlighting matches, selecting match as user types, upping timeout to clear filter to 2s (per UX) ([e54f450](https://github.com/bullhorn/novo-elements/commit/e54f450))
+
+
+
 <a name="2.0.87"></a>
 ## [2.0.87](https://github.com/bullhorn/novo-elements/compare/v2.0.86...v2.0.87) (2017-01-23)
 
