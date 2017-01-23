@@ -267,7 +267,9 @@ novo-dropdown-container.table-dropdown {
     right: -15px;
     min-width: 230px;
     max-width: 230px;
+    max-height: 500px;
     overflow-x: hidden;
+    overflow-y: auto;
     list {
         item.filter-search {
             padding: 10px 0;
