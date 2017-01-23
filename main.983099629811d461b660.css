@@ -5208,18 +5208,22 @@ entity-chips + i {
   right: 0;
   bottom: 7px; }
 
-chips chip span.contact, multi-picker chip span.contact,
-entity-chips chip span.contact {
+chips chip span.contact, multi-picker chip span.contact, chips chip span.clientcontact, multi-picker chip span.clientcontact,
+entity-chips chip span.contact,
+entity-chips chip span.clientcontact {
   color: #4A89DC; }
-  chips chip span.contact i, multi-picker chip span.contact i,
-  entity-chips chip span.contact i {
+  chips chip span.contact i, multi-picker chip span.contact i, chips chip span.clientcontact i, multi-picker chip span.clientcontact i,
+  entity-chips chip span.contact i,
+  entity-chips chip span.clientcontact i {
     color: #FFAA44; }
 
-chips chip span.company, multi-picker chip span.company,
-entity-chips chip span.company {
+chips chip span.company, multi-picker chip span.company, chips chip span.clientcorporation, multi-picker chip span.clientcorporation,
+entity-chips chip span.company,
+entity-chips chip span.clientcorporation {
   color: #4A89DC; }
-  chips chip span.company i, multi-picker chip span.company i,
-  entity-chips chip span.company i {
+  chips chip span.company i, multi-picker chip span.company i, chips chip span.clientcorporation i, multi-picker chip span.clientcorporation i,
+  entity-chips chip span.company i,
+  entity-chips chip span.clientcorporation i {
     color: #3399DD; }
 
 chips chip span.candidate, multi-picker chip span.candidate,
@@ -5229,11 +5233,13 @@ entity-chips chip span.candidate {
   entity-chips chip span.candidate i {
     color: #44BB77; }
 
-chips chip span.job, multi-picker chip span.job,
-entity-chips chip span.job {
+chips chip span.job, multi-picker chip span.job, chips chip span.joborder, multi-picker chip span.joborder,
+entity-chips chip span.job,
+entity-chips chip span.joborder {
   color: #4A89DC; }
-  chips chip span.job i, multi-picker chip span.job i,
-  entity-chips chip span.job i {
+  chips chip span.job i, multi-picker chip span.job i, chips chip span.joborder i, multi-picker chip span.joborder i,
+  entity-chips chip span.job i,
+  entity-chips chip span.joborder i {
     color: #BB5566; }
 
 chips chip span.placement, multi-picker chip span.placement,
@@ -5370,6 +5376,7 @@ novo-dropdown-container {
   line-height: 26px;
   display: none;
   margin: 0;
+  margin-bottom: 20px;
   position: absolute;
   padding: 0;
   min-width: 180px;
@@ -7418,6 +7425,7 @@ header.novo-header > section.primary {
   header.novo-header > section.primary h1 {
     font-size: 1.5em;
     margin: 0;
+    padding: 0;
     display: inline-block;
     font-weight: 400;
     max-width: 70%;
@@ -8241,7 +8249,9 @@ novo-dropdown-container.table-dropdown {
   right: -15px;
   min-width: 230px;
   max-width: 230px;
-  overflow-x: hidden; }
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: auto; }
   novo-dropdown-container.table-dropdown list item.filter-search {
     padding: 10px 0;
     width: 100%;
@@ -11602,88 +11612,88 @@ color header {
       height: 30px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 37px;
-      height: 37px; }
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 41px;
-      height: 41px; }
+      width: 36px;
+      height: 36px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
       width: 42px;
       height: 42px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-submission {
-      background: #747884;
       width: 30px;
       height: 30px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-submission {
+      background: #747884;
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-task {
+      background: #747884;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-distributionList {
       background: #747884;
       width: 43px;
       height: 43px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 26px;
-      height: 26px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-task {
-      background: #747884;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-distributionList {
-      background: #747884;
-      width: 31px;
-      height: 31px; }
     color header .background-boxes .bb-aqua {
       background: #3BAFDA;
-      width: 34px;
-      height: 34px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-ocean {
       background: #4A89DC;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 37px;
-      height: 37px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-carnation {
-      background: #D770AD;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-lavender {
-      background: #967ADC;
       width: 32px;
       height: 32px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-carnation {
+      background: #D770AD;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-lavender {
+      background: #967ADC;
+      width: 39px;
+      height: 39px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -12611,4 +12621,4 @@ popover-demo .example.popover-demo {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.e73307953faaf8a6ac96.bundle.map*/
+/*# sourceMappingURL=main.983099629811d461b660.bundle.map*/
