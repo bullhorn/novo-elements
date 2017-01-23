@@ -1,3 +1,14 @@
+<a name="2.0.90"></a>
+## [2.0.90](https://github.com/bullhorn/novo-elements/compare/v2.0.89...v2.0.90) (2017-01-23)
+
+
+### Bug Fixes
+
+* **chips:** Use right entity color icon, fixes [#219](https://github.com/bullhorn/novo-elements/issues/219) ([b380f33](https://github.com/bullhorn/novo-elements/commit/b380f33))
+* **Table:** Fixing filters to keep focus on opening and closing, fixes [#143](https://github.com/bullhorn/novo-elements/issues/143) ([6ba6aeb](https://github.com/bullhorn/novo-elements/commit/6ba6aeb))
+
+
+
 <a name="2.0.89"></a>
 ## [2.0.89](https://github.com/bullhorn/novo-elements/compare/v2.0.88...v2.0.89) (2017-01-23)
 
