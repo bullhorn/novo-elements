@@ -97,14 +97,17 @@ import { Helpers } from './../../utils/Helpers';
             </div>
             <!--Error Message-->
             <div class="error-message">
-                <span *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
-                <span *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
-                <span *ngIf="isDirty && errors?.maxlength">{{control.label | uppercase}} is required to be a maximum of {{ control.maxlength }} characters</span>
-                <span *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
-                <span *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
-                <span *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
+                <span class="error-text" *ngIf="noErrors"></span>           
+                <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
+                <span class="error-text" *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
+                <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
+                <span class="error-text" *ngIf="errors?.maxlength">Sorry, you have exceeded the maximum character count of {{ control.maxlength }} for this field</span>
+                <span class="character-count" [class.error]="errors?.maxlength" *ngIf="control.maxlength && focused && (control.controlType=='text-area' || control.controlType=='textbox')">{{ characterCount }}/{{ control.maxlength }}</span>
+                <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
+                <span class="error-text" *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
+                <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
                 <span *ngIf="isDirty && errors?.minYear">{{control.label | uppercase}} is not a valid year</span>
-                <span *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
+                <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
             </div>
         </div>
     `,
@@ -135,11 +138,16 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private _focusEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
     private _focused: boolean = false;
     formattedValue: string = '';
+    maxLengthMet: boolean = false;
+    characterCount: number = 0;
 
     constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService) {
         super(element);
     }
 
+    get noErrors() {
+        return !this.errors && !this.maxLengthMet;
+    }
     ngOnInit() {
         // Make sure to initially format the time controls
         if (this.control && this.control.value) {
@@ -149,6 +157,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 this.formatTimeValue({ date: this.control.value });
             } else if (this.control.controlType === 'date-time') {
                 this.formatDateTimeValue({ date: this.control.value });
+            } else if (this.control.controlType === 'textbox' || this.control.controlType === 'text-area') {
+                this.characterCount = this.control.value.length;
             }
         }
         if (this.control) {
@@ -252,10 +262,18 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.dateTimeFormat);
     }
 
+
     resizeTextArea(event) {
         // Reset the heighte
         event.target.style.height = 'auto';
         event.target.style.height = event.target.value.length > 0 ? `${event.target.scrollHeight - 14}px` : '2rem';
+    }
+
+    checkMaxLength(event) {
+        if (this.control && this.control.maxlength) {
+            this.characterCount = event.target.value.length;
+            this.maxLengthMet = event.target.value.length >= this.control.maxlength;
+        }
     }
 
     modelChange(value) {
@@ -269,13 +287,13 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         const NUMBERS_ONLY = /[0-9]/;
         const NUMBERS_WITH_DECIMAL = /[0-9\.]/;
         let key = String.fromCharCode(event.charCode);
-        // Types
+        //Types
         if (this.control.subType === 'number' && !NUMBERS_ONLY.test(key)) {
             event.preventDefault();
         } else if (~['currency', 'float', 'percentage'].indexOf(this.control.subType) && !NUMBERS_WITH_DECIMAL.test(key)) {
             event.preventDefault();
         }
-        // Max Length
+        //Max Length
         if (this.control.maxlength && event.target.value.length >= this.control.maxlength) {
             event.preventDefault();
         }
@@ -283,5 +301,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     emitChange(value) {
         this.change.emit(value);
+        this.checkMaxLength(value);
     }
 }
