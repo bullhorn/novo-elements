@@ -1,3 +1,13 @@
+<a name="2.0.97"></a>
+## [2.0.97](https://github.com/bullhorn/novo-elements/compare/v2.0.96...v2.0.97) (2017-01-24)
+
+
+### Features
+
+* **Select:** Increase Form Dropdown Height by 2.5 Items [#313](https://github.com/bullhorn/novo-elements/issues/313) ([#372](https://github.com/bullhorn/novo-elements/issues/372)) ([47b0775](https://github.com/bullhorn/novo-elements/commit/47b0775))
+
+
+
 <a name="2.0.96"></a>
 ## [2.0.96](https://github.com/bullhorn/novo-elements/compare/v2.0.95...v2.0.96) (2017-01-24)
 
