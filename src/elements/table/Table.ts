@@ -476,10 +476,13 @@ export class NovoTableElement implements DoCheck {
      * @param newSortColumn
      */
     onSortChange(column) {
-        if (this.currentSortColumn && this.currentSortColumn !== column) {
-            this.currentSortColumn.sort = null;
-        }
         this.currentSortColumn = column;
+        let sortedColumns: any = this.columns.filter( (thisColumn) => {
+            return thisColumn.sort && thisColumn !== this.currentSortColumn;
+        });
+        for (let sortedColumn of sortedColumns) {
+            sortedColumn.sort = null;
+        }
 
         if (column) {
             if (Helpers.isFunction(this.config.sorting)) {
