@@ -81,7 +81,7 @@ export class NovoFormControl extends FormControl {
         emitModelToViewChange?: boolean,
         emitViewToModelChange?: boolean
     } = {}) {
-       setTimeout(() => {
+        setTimeout(() => {
             this.markAsDirty();
             this.markAsTouched();
             super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
@@ -237,9 +237,7 @@ export class FormUtils {
                 if (type === 'money') {
                     type = 'currency';
                 } else if (type === 'year') {
-                    controlConfig.minlength = 4;
                     controlConfig.maxlength = 4;
-                    type = 'number';
                 }
                 controlConfig.type = type;
                 control = new TextBoxControl(controlConfig);

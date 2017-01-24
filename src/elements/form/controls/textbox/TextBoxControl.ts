@@ -3,11 +3,11 @@ import { BaseControl, NovoControlConfig } from './../BaseControl';
 import { FormValidators } from './../../FormValidators';
 
 export class TextBoxControl extends BaseControl {
-    controlType:string = 'textbox';
-    type:string;
-    subType:string;
+    controlType: string = 'textbox';
+    type: string;
+    subType: string;
 
-    constructor(config:NovoControlConfig) {
+    constructor(config: NovoControlConfig) {
         super(config);
         this.type = this.getTextboxType(config.type) || '';
         this.subType = config.type || '';
@@ -27,6 +27,9 @@ export class TextBoxControl extends BaseControl {
             case 'percentage':
                 this.validators.push(FormValidators.maxDouble);
                 break;
+            case 'year':
+                this.validators.push(FormValidators.minYear);
+                break;
             default:
                 break;
         }
@@ -37,6 +40,7 @@ export class TextBoxControl extends BaseControl {
             case 'percentage':
             case 'currency':
             case 'float':
+            case 'year':
                 return 'number';
             default:
                 return type;

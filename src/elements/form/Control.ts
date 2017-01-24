@@ -103,6 +103,7 @@ import { Helpers } from './../../utils/Helpers';
                 <span *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
                 <span *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
                 <span *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
+                <span *ngIf="isDirty && errors?.minYear">{{control.label | uppercase}} is not a valid year</span>
                 <span *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
             </div>
         </div>
