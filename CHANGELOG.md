@@ -1,3 +1,13 @@
+<a name="2.0.91"></a>
+## [2.0.91](https://github.com/bullhorn/novo-elements/compare/v2.0.90...v2.0.91) (2017-01-24)
+
+
+### Bug Fixes
+
+* **dropdown:** Make sure to listen to enter/esc to close ([a9a3471](https://github.com/bullhorn/novo-elements/commit/a9a3471))
+
+
+
 <a name="2.0.90"></a>
 ## [2.0.90](https://github.com/bullhorn/novo-elements/compare/v2.0.89...v2.0.90) (2017-01-23)
 
