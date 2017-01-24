@@ -15,6 +15,7 @@ export class NovoDropdownContainer implements DoCheck {
     private relativeElement: Element;
     private scrollHandler: any;
     private side: string;
+    private appendToBody: boolean;
 
     constructor(public element: ElementRef, private renderer: Renderer) {
         this.scrollHandler = this.handleScroll.bind(this);
@@ -37,6 +38,7 @@ export class NovoDropdownContainer implements DoCheck {
     }
 
     public show(appendToBody: boolean): void {
+        this.appendToBody = appendToBody;
         this.renderer.setElementStyle(this.element.nativeElement, 'display', 'block');
         this.renderer.setElementStyle(this.element.nativeElement, 'visibility', 'visible');
         this.isVisible = true;
@@ -45,10 +47,10 @@ export class NovoDropdownContainer implements DoCheck {
         }
     }
 
-    public hide(appendToBody: boolean): void {
+    public hide(): void {
         this.isVisible = false;
         this.renderer.setElementStyle(this.element.nativeElement, 'visibility', 'hidden');
-        if (appendToBody) {
+        if (this.appendToBody) {
             window.removeEventListener('scroll', this.scrollHandler);
         }
     }
@@ -59,6 +61,14 @@ export class NovoDropdownContainer implements DoCheck {
         this.position = element.getBoundingClientRect();
         this.ngDoCheck();
     }
+
+    @HostListener('keydown', ['$event'])
+    public onKeyDown(event: KeyboardEvent): void {
+        // Close with ESC/Enter
+        if (this.isVisible && (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER)) {
+            this.hide();
+        }
+    }
 }
 
 @Component({
@@ -68,10 +78,7 @@ export class NovoDropdownContainer implements DoCheck {
         <novo-dropdown-container class="dropdown-container {{ containerClass }}">
             <ng-content></ng-content>
         </novo-dropdown-container>
-    `,
-    host: {
-        '(keydown)': 'onKeyDown($event)'
-    }
+    `
 })
 export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestroy {
     // Append the dropdown container to the body
@@ -141,7 +148,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
     }
 
     private hide(): void {
-        this.container.hide(this.appendToBody);
+        this.container.hide();
         // If append to body then rip it out of here and put on body
         if (this.appendToBody) {
             let elm = this.container.element.nativeElement;
@@ -155,7 +162,8 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
         }
     }
 
-    public onKeyDown(event): void {
+    @HostListener('keydown', ['$event'])
+    public onKeyDown(event: KeyboardEvent): void {
         // Close with ESC/Enter
         if (this.active && (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER)) {
             this.toggleActive();
