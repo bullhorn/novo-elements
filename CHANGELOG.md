@@ -1,3 +1,13 @@
+<a name="2.0.95"></a>
+## [2.0.95](https://github.com/bullhorn/novo-elements/compare/v2.0.94...v2.0.95) (2017-01-24)
+
+
+### Bug Fixes
+
+* **table:** Dropdown filters with free text to have the input have focus ([e03bee8](https://github.com/bullhorn/novo-elements/commit/e03bee8))
+
+
+
 <a name="2.0.94"></a>
 ## [2.0.94](https://github.com/bullhorn/novo-elements/compare/v2.0.93...v2.0.94) (2017-01-24)
 
