@@ -1,3 +1,18 @@
+<a name="2.0.93"></a>
+## [2.0.93](https://github.com/bullhorn/novo-elements/compare/v2.0.92...v2.0.93) (2017-01-24)
+
+
+### Bug Fixes
+
+* **form:** Fixing validation around year fields ([0b9239f](https://github.com/bullhorn/novo-elements/commit/0b9239f))
+
+
+### Features
+
+* **Editor:** Updated to version 4.6.2 and fixed styling ([#370](https://github.com/bullhorn/novo-elements/issues/370)) ([e836122](https://github.com/bullhorn/novo-elements/commit/e836122))
+
+
+
 <a name="2.0.92"></a>
 ## [2.0.92](https://github.com/bullhorn/novo-elements/compare/v2.0.91...v2.0.92) (2017-01-24)
 
