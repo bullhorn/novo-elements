@@ -16,6 +16,7 @@ export class NovoDropdownContainer implements DoCheck {
     private scrollHandler: any;
     private side: string;
     private appendToBody: boolean;
+    public parent: NovoDropdownElement;
 
     constructor(public element: ElementRef, private renderer: Renderer) {
         this.scrollHandler = this.handleScroll.bind(this);
@@ -66,7 +67,7 @@ export class NovoDropdownContainer implements DoCheck {
     public onKeyDown(event: KeyboardEvent): void {
         // Close with ESC/Enter
         if (this.isVisible && (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER)) {
-            this.hide();
+            this.parent.toggleActive(null, false);
         }
     }
 }
@@ -131,6 +132,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
     }
 
     private show(): void {
+        this.container.parent = this;
         this.container.show(this.appendToBody);
         this.otherElement = this.container.element;
         if (this.appendToBody) {
