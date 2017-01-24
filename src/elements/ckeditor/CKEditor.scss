@@ -12,51 +12,6 @@ novo-editor {
         .cke_bottom {
             border-top: none;
         }
-
-        .cke_toolgroup {
-            background: $background none;
-            box-shadow: none;
-            border-radius: 3px;
-
-            .cke_toolbar_separator {
-                display: none;
-                visibility: hidden;
-            }
-
-            a.cke_button {
-                padding: 6px;
-                border-right: 1px solid $background-dark;
-
-                &:active, &:focus, &:hover, &.cke_button_on {
-                    box-shadow: none;
-                    background: $background-dark none;
-                }
-
-                &:last-child {
-                    border-right: none;
-                }
-            }
-        }
-
-        .cke_combo {
-            a.cke_combo_button {
-                padding: 2px;
-                box-shadow: none;
-                background: $background none;
-
-                &:active, &:focus, &:hover {
-                    box-shadow: none;
-                    background: $background-dark none;
-                }
-            }
-
-            &.cke_combo_on {
-                a.cke_combo_button {
-                    box-shadow: none;
-                    background: $background-dark none;
-                }
-            }
-        }
     }
 }
 

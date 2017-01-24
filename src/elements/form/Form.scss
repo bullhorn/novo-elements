@@ -187,8 +187,7 @@ novo-form {
                                         padding: 0;
                                     }
                                 }
-                                input,
-                                textarea {
+                                input {
                                     font-size: 1em;
                                     background: transparent !important;
                                     border: none;
@@ -199,6 +198,32 @@ novo-form {
                                     width: 100%;
                                     margin: 0;
                                     padding: 0;
+                                    box-shadow: none;
+                                    box-sizing: content-box;
+                                    transition: all 300ms;
+                                    color: #26282B;
+                                    &:hover {
+                                        border-bottom: 1px solid lighten($dark, 47%);
+                                    }
+                                    &:focus {
+                                        border-bottom: 1px solid $positive;
+                                    }
+                                    &:invalid {
+                                        border-bottom: 1px solid #DA4453;
+                                    }
+                                }
+                                textarea {
+                                    font-size: 1em;
+                                    height: 2rem;
+                                    background: transparent !important;
+                                    border: none;
+                                    border-bottom: 1px solid #EAEAEA;
+                                    border-radius: 0;
+                                    outline: none;
+                                    width: 100%;
+                                    resize: vertical;
+                                    margin: 0;
+                                    padding: 5px 0;
                                     box-shadow: none;
                                     box-sizing: content-box;
                                     transition: all 300ms;

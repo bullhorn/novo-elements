@@ -1,5 +1,7 @@
 // NG2
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+// APP
+import { Helpers } from './../../utils/Helpers.js';
 
 export interface NovoFormGroup {
     layout?: any;
@@ -167,8 +169,10 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
     forceValidation(): void {
         Object.keys(this.form.controls).forEach((key: string) => {
             let control: any = this.form.controls[key];
-            control.markAsDirty();
-            control.markAsTouched();
+            if (control.required && Helpers.isBlank(this.form.value[control.key])) {
+                control.markAsDirty();
+                control.markAsTouched();
+            }
         });
     }
 }

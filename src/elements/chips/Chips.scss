@@ -128,13 +128,15 @@ chips,
 entity-chips {
     chip {
         span {
-            &.contact {
+            &.contact,
+            &.clientcontact {
                 color: $positive;
                 i {
                     color: $contact;
                 }
             }
-            &.company {
+            &.company,
+            &.clientcorporation {
                 color: $positive;
                 i {
                     color: $company;
@@ -146,7 +148,8 @@ entity-chips {
                     color: $candidate;
                 }
             }
-            &.job {
+            &.job,
+            &.joborder {
                 color: $positive;
                 i {
                     color: $job;

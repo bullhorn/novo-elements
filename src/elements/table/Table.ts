@@ -1,11 +1,22 @@
 // Vendor
-import { Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
+import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, Directive, AfterViewChecked } from '@angular/core';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
 import { Helpers } from './../../utils/Helpers';
 import { CollectionEvent } from './../../services/data-provider/CollectionEvent';
 import { PagedArrayCollection } from './../../services/data-provider/PagedArrayCollection';
 import { PagedCollection } from './../../services/data-provider/PagedCollection';
+
+@Directive({
+    selector: '[keepFilterFocused]'
+})
+export class NovoTableKeepFilterFocus implements AfterViewChecked {
+    constructor(private element: ElementRef) { }
+
+    ngAfterViewChecked() {
+        this.element.nativeElement.focus();
+    }
+}
 
 @Component({
     selector: 'novo-table-actions',
@@ -64,7 +75,7 @@ export class NovoTableHeaderElement {
                             </div>
                             <!-- FILTER DROP-DOWN -->
                             <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
-                                <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter" (click)="focusInput(column.name)"></button>
+                                <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter"></button>
                                 <!-- FILTER OPTIONS LIST -->
                                 <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type!='date'">
                                     <item class="filter-search">
@@ -85,7 +96,7 @@ export class NovoTableHeaderElement {
                                             <span>{{ labels.filters }}</span>
                                             <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                         </div>
-                                        <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter"/>
+                                        <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter" keepFilterFocused/>
                                     </item>
                                 </list>
                                 <!-- FILTER DATE OPTIONS -->
@@ -312,19 +323,6 @@ export class NovoTableElement implements DoCheck {
     }
 
     /**
-     * @name focusInput
-     * @param name
-     */
-    focusInput(name) {
-        const element = document.getElementById(`${name}-input`);
-        if (element) {
-            setTimeout(() => {
-                element.focus();
-            });
-        }
-    }
-
-    /**
      * @name onFilterClick
      * @param column
      * @param filter
@@ -478,10 +476,13 @@ export class NovoTableElement implements DoCheck {
      * @param newSortColumn
      */
     onSortChange(column) {
-        if (this.currentSortColumn && this.currentSortColumn !== column) {
-            this.currentSortColumn.sort = null;
-        }
         this.currentSortColumn = column;
+        let sortedColumns: any = this.columns.filter( (thisColumn) => {
+            return thisColumn.sort && thisColumn !== this.currentSortColumn;
+        });
+        for (let sortedColumn of sortedColumns) {
+            sortedColumn.sort = null;
+        }
 
         if (column) {
             if (Helpers.isFunction(this.config.sorting)) {

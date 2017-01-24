@@ -13,26 +13,26 @@
 
     # Clone the project
     git clone git@github.com:bullhorn/novo-elements.git
-    
+
     # Change directory
     cd novo-elements
-    
+
     # Install
     npm install
-    
+
     # Start
     npm start
-    
+
     # Access the Demo in your browser at
     http://localhost:3000/
-    
+
 ## Integrating into a project
 
     # Install the module
     npm install --save novo-elements
-    
+
 Depending on what system you are using (SystemJS, Webpack, etc..) the setup will vary.
-    
+
 If using SCSS/SASS you will need to include the following includes: `node_modules/novo-elements/lib` and `node_modules/hint.css/src`.
 
 ## Build/Release/Publish
@@ -41,7 +41,7 @@ If using SCSS/SASS you will need to include the following includes: `node_module
 
     # Bump the version up via NPM
     npm version patch|major|minor
-    
+
     # This runs the following scripts AUTOMATICALLY
     # npm test
     # npm run changelog (pushes git)
@@ -50,52 +50,6 @@ If using SCSS/SASS you will need to include the following includes: `node_module
     # npm run compile (demo/bundles)
     # npm run deploy:gh-pages
     # npm publish
-    
-## Scripts
-
-**clean**
-Cleans up the generated files/folders.
-
-    npm run clean
-    
-**compile**
-Compiles the main lib and bundles the SystemJS modules
-
-    npm run compile
-    
-    # This runs the following scripts AUTOMATICALLY
-    # npm run compile:lib
-    # npm run compile:system
-    
-**compile:lib**
-Compiles the `src` folder into `lib` via babel
-
-**compile:system**
-Compiles the SystemJS bundles, adding all required dependencies
-
-**prepublish** / **postpublish**
-Hooks into the publish script to compile and deploy to gh-pages
-
-**start**
-Starts up the Webpack Dev Server for local development
-
-**test**
-Runs all specs via Karma in the `src` folder
-
-**changelog**
-Generates the `CHANGELOG.md` file
-
-**github-release**
-Generates a github release for the project/version
-
-**preversion** / **version** / **postversion**
-Updates the projects version, runs the changelog and commits and pushes
-
-**build:prod**
-Builds the `dist` folder for the demo
-
-**pree2e** / **e2e** / **e2e:live**
-Runs the protractor automation normally or with the element explorer
 
 ## Customizing Labels
 

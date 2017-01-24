@@ -1,3 +1,135 @@
+<a name="2.0.93"></a>
+## [2.0.93](https://github.com/bullhorn/novo-elements/compare/v2.0.92...v2.0.93) (2017-01-24)
+
+
+### Bug Fixes
+
+* **form:** Fixing validation around year fields ([0b9239f](https://github.com/bullhorn/novo-elements/commit/0b9239f))
+
+
+### Features
+
+* **Editor:** Updated to version 4.6.2 and fixed styling ([#370](https://github.com/bullhorn/novo-elements/issues/370)) ([e836122](https://github.com/bullhorn/novo-elements/commit/e836122))
+
+
+
+<a name="2.0.92"></a>
+## [2.0.92](https://github.com/bullhorn/novo-elements/compare/v2.0.91...v2.0.92) (2017-01-24)
+
+
+### Bug Fixes
+
+* **dropdown:** Toggling when enter/esc instead of hiding ([ac52062](https://github.com/bullhorn/novo-elements/commit/ac52062))
+
+
+
+<a name="2.0.91"></a>
+## [2.0.91](https://github.com/bullhorn/novo-elements/compare/v2.0.90...v2.0.91) (2017-01-24)
+
+
+### Bug Fixes
+
+* **dropdown:** Make sure to listen to enter/esc to close ([a9a3471](https://github.com/bullhorn/novo-elements/commit/a9a3471))
+
+
+
+<a name="2.0.90"></a>
+## [2.0.90](https://github.com/bullhorn/novo-elements/compare/v2.0.89...v2.0.90) (2017-01-23)
+
+
+### Bug Fixes
+
+* **chips:** Use right entity color icon, fixes [#219](https://github.com/bullhorn/novo-elements/issues/219) ([b380f33](https://github.com/bullhorn/novo-elements/commit/b380f33))
+* **Table:** Fixing filters to keep focus on opening and closing, fixes [#143](https://github.com/bullhorn/novo-elements/issues/143) ([6ba6aeb](https://github.com/bullhorn/novo-elements/commit/6ba6aeb))
+
+
+
+<a name="2.0.89"></a>
+## [2.0.89](https://github.com/bullhorn/novo-elements/compare/v2.0.88...v2.0.89) (2017-01-23)
+
+
+### Bug Fixes
+
+* **Form:** Adding setTimeout to the setValue for field interactions to prevent expression changed errors ([#368](https://github.com/bullhorn/novo-elements/issues/368)) ([60a2418](https://github.com/bullhorn/novo-elements/commit/60a2418))
+
+
+
+<a name="2.0.88"></a>
+## [2.0.88](https://github.com/bullhorn/novo-elements/compare/v2.0.87...v2.0.88) (2017-01-23)
+
+
+### Features
+
+* **select:** Highlighting matches, selecting match as user types, upping timeout to clear filter to 2s (per UX) ([e54f450](https://github.com/bullhorn/novo-elements/commit/e54f450))
+
+
+
+<a name="2.0.87"></a>
+## [2.0.87](https://github.com/bullhorn/novo-elements/compare/v2.0.86...v2.0.87) (2017-01-23)
+
+
+
+<a name="2.0.86"></a>
+## [2.0.86](https://github.com/bullhorn/novo-elements/compare/v2.0.85...v2.0.86) (2017-01-21)
+
+
+
+<a name="2.0.85"></a>
+## [2.0.85](https://github.com/bullhorn/novo-elements/compare/v2.0.84...v2.0.85) (2017-01-20)
+
+
+
+<a name="2.0.84"></a>
+## [2.0.84](https://github.com/bullhorn/novo-elements/compare/v2.0.83...v2.0.84) (2017-01-20)
+
+
+### Bug Fixes
+
+* **dropdown:** Opening to right if not enough space on left ([64837d3](https://github.com/bullhorn/novo-elements/commit/64837d3))
+
+
+
+<a name="2.0.83"></a>
+## [2.0.83](https://github.com/bullhorn/novo-elements/compare/v2.0.80...v2.0.83) (2017-01-20)
+
+
+
+<a name="2.0.82"></a>
+## [2.0.82](https://github.com/bullhorn/novo-elements/compare/v2.0.81...v2.0.82) (2017-01-20)
+
+
+
+<a name="2.0.81"></a>
+## [2.0.81](https://github.com/bullhorn/novo-elements/compare/v2.0.80...v2.0.81) (2017-01-20)
+
+
+
+<a name="2.0.80"></a>
+## [2.0.80](https://github.com/bullhorn/novo-elements/compare/v2.0.79...v2.0.80) (2017-01-20)
+
+
+### Bug Fixes
+
+* **form:** When forcing validation, only force validation on required fields ([8737e02](https://github.com/bullhorn/novo-elements/commit/8737e02))
+
+
+
+<a name="2.0.79"></a>
+## [2.0.79](https://github.com/bullhorn/novo-elements/compare/v2.0.78...v2.0.79) (2017-01-20)
+
+
+
+<a name="2.0.78"></a>
+## [2.0.78](https://github.com/bullhorn/novo-elements/compare/v2.0.77...v2.0.78) (2017-01-20)
+
+
+### Bug Fixes
+
+* **form:** Making the control have the data specialization ([15ba7c0](https://github.com/bullhorn/novo-elements/commit/15ba7c0))
+* **Table:** DateRange now clears when filter is set to Null ([b14025f](https://github.com/bullhorn/novo-elements/commit/b14025f))
+
+
+
 <a name="2.0.77"></a>
 ## [2.0.77](https://github.com/bullhorn/novo-elements/compare/v2.0.76...v2.0.77) (2017-01-20)
 

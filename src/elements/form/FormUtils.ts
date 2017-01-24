@@ -67,12 +67,25 @@ export class NovoFormControl extends FormControl {
             this.setValidators(validators);
             this.updateValueAndValidity();
             this.hasRequiredValidator = this.required;
-        } else if (this.hasRequiredValidator) {
+        } else if (!this.required && this.hasRequiredValidator) {
             let validators: any = [...this.validators];
             this.setValidators(validators);
             this.updateValueAndValidity();
             this.hasRequiredValidator = this.required;
         }
+    }
+
+    setValue(value: any, {onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange}: {
+        onlySelf?: boolean,
+        emitEvent?: boolean,
+        emitModelToViewChange?: boolean,
+        emitViewToModelChange?: boolean
+    } = {}) {
+        setTimeout(() => {
+            this.markAsDirty();
+            this.markAsTouched();
+            super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
+        });
     }
 
     setReadOnly(read: boolean) {
@@ -174,7 +187,8 @@ export class FormUtils {
             maxlength: field.maxLength,
             config: null,
             options: null,
-            interactions: field.interactions
+            interactions: field.interactions,
+            dataSpecialization: field.dataSpecialization
         };
         let optionsConfig = this.getControlOptions(field, http, config);
 
@@ -224,9 +238,7 @@ export class FormUtils {
                 if (type === 'money') {
                     type = 'currency';
                 } else if (type === 'year') {
-                    controlConfig.minlength = 4;
                     controlConfig.maxlength = 4;
-                    type = 'number';
                 }
                 controlConfig.type = type;
                 control = new TextBoxControl(controlConfig);
@@ -452,8 +464,10 @@ export class FormUtils {
     forceValidation(form: FormGroup): void {
         Object.keys(form.controls).forEach((key: string) => {
             let control: any = form.controls[key];
-            control.markAsDirty();
-            control.markAsTouched();
+            if (control.required && Helpers.isBlank(form.value[control.key])) {
+                control.markAsDirty();
+                control.markAsTouched();
+            }
         });
     }
 }

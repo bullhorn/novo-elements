@@ -106,6 +106,7 @@ import { Helpers } from './../../utils/Helpers';
                 <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
                 <span class="error-text" *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
                 <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
+                <span *ngIf="isDirty && errors?.minYear">{{control.label | uppercase}} is not a valid year</span>
                 <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
             </div>
         </div>
@@ -172,7 +173,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 this.executeInteractions();
             }
             // On init, iterate through all actions and subscribe to
-            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.subscribe(() => {
+            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
                 this.executeInteractions();
             });
         }
@@ -263,10 +264,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
 
     resizeTextArea(event) {
-        // Reset the height
-        let height = event.target.value.length > 0 ? `${event.target.scrollHeight}px` : '2rem';
-        event.target.style.height = '';
-        event.target.style.height = height;
+        // Reset the heighte
+        event.target.style.height = 'auto';
+        event.target.style.height = event.target.value.length > 0 ? `${event.target.scrollHeight - 14}px` : '2rem';
     }
 
     checkMaxLength(event) {
