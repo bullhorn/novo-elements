@@ -177,6 +177,7 @@ export class TableDemoComponent implements OnInit {
                 ordering: true,
                 multiple: true,
                 renderer: StatusCell,
+                allowCustomTextOption: true,
                 filtering: true
             }
         ];
