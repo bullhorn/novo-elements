@@ -1,3 +1,13 @@
+<a name="2.0.94"></a>
+## [2.0.94](https://github.com/bullhorn/novo-elements/compare/v2.0.93...v2.0.94) (2017-01-24)
+
+
+### Features
+
+* **form:** Character count for inputs with maxlength ([abbd8ea](https://github.com/bullhorn/novo-elements/commit/abbd8ea))
+
+
+
 <a name="2.0.93"></a>
 ## [2.0.93](https://github.com/bullhorn/novo-elements/compare/v2.0.92...v2.0.93) (2017-01-24)
 
