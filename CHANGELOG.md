@@ -1,3 +1,13 @@
+<a name="2.0.92"></a>
+## [2.0.92](https://github.com/bullhorn/novo-elements/compare/v2.0.91...v2.0.92) (2017-01-24)
+
+
+### Bug Fixes
+
+* **dropdown:** Toggling when enter/esc instead of hiding ([ac52062](https://github.com/bullhorn/novo-elements/commit/ac52062))
+
+
+
 <a name="2.0.91"></a>
 ## [2.0.91](https://github.com/bullhorn/novo-elements/compare/v2.0.90...v2.0.91) (2017-01-24)
 
