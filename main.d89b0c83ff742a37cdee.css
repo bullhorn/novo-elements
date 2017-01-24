@@ -10669,31 +10669,6 @@ novo-editor .cke {
     box-shadow: none; }
   novo-editor .cke .cke_bottom {
     border-top: none; }
-  novo-editor .cke .cke_toolgroup {
-    background: #f4f4f4 none;
-    box-shadow: none;
-    border-radius: 3px; }
-    novo-editor .cke .cke_toolgroup .cke_toolbar_separator {
-      display: none;
-      visibility: hidden; }
-    novo-editor .cke .cke_toolgroup a.cke_button {
-      padding: 6px;
-      border-right: 1px solid #E2E2E2; }
-      novo-editor .cke .cke_toolgroup a.cke_button:active, novo-editor .cke .cke_toolgroup a.cke_button:focus, novo-editor .cke .cke_toolgroup a.cke_button:hover, novo-editor .cke .cke_toolgroup a.cke_button.cke_button_on {
-        box-shadow: none;
-        background: #E2E2E2 none; }
-      novo-editor .cke .cke_toolgroup a.cke_button:last-child {
-        border-right: none; }
-  novo-editor .cke .cke_combo a.cke_combo_button {
-    padding: 2px;
-    box-shadow: none;
-    background: #f4f4f4 none; }
-    novo-editor .cke .cke_combo a.cke_combo_button:active, novo-editor .cke .cke_combo a.cke_combo_button:focus, novo-editor .cke .cke_combo a.cke_combo_button:hover {
-      box-shadow: none;
-      background: #E2E2E2 none; }
-  novo-editor .cke .cke_combo.cke_combo_on a.cke_combo_button {
-    box-shadow: none;
-    background: #E2E2E2 none; }
 
 .cke_dialog_background_cover {
   background-color: #000000 !important; }
@@ -11608,92 +11583,92 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 32px;
-      height: 32px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
       width: 36px;
       height: 36px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 29px;
-      height: 29px; }
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 31px;
-      height: 31px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 28px;
-      height: 28px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 40px;
-      height: 40px; }
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
-      width: 40px;
-      height: 40px; }
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-submission {
       background: #747884;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-task {
-      background: #747884;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-distributionList {
-      background: #747884;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
       width: 26px;
       height: 26px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 26px;
+      height: 26px; }
+    color header .background-boxes .bb-task {
+      background: #747884;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-distributionList {
+      background: #747884;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
       width: 40px;
       height: 40px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
-      width: 44px;
-      height: 44px; }
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 43px;
-      height: 43px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 30px;
-      height: 30px; }
+      width: 43px;
+      height: 43px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -12621,4 +12596,4 @@ popover-demo .example.popover-demo {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.4dd6e657878c9bf7556a.bundle.map*/
+/*# sourceMappingURL=main.d89b0c83ff742a37cdee.bundle.map*/
