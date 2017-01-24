@@ -5,6 +5,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick'; // TODO - change imports
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from './../../services/novo-label-service';
+import { Helpers } from './../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const SELECT_VALUE_ACCESSOR = {
@@ -235,6 +236,13 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         this.model = model;
         if (this.options) {
             let item = this.options.find(i => i.value === model);
+            if (!item && !Helpers.isBlank(model)) {
+                item = {
+                    label: model,
+                    value: model
+                };
+                this.options.unshift(item);
+            }
             if (item) {
                 this.empty = false;
                 this.selected = item;
@@ -243,6 +251,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
             } else {
                 this.clear();
             }
+
         }
     }
 
