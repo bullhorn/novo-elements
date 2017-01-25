@@ -10085,17 +10085,22 @@ novo-form {
     opacity: 1;
     transform: scale(1); } }
 
-novo-quick-note, .quick-note-wrapper {
+novo-quick-note,
+.quick-note-wrapper {
   width: 100%;
   min-height: 200px;
   max-height: 200px;
   position: relative; }
-  novo-quick-note a, .quick-note-wrapper a {
+  novo-quick-note a,
+  .quick-note-wrapper a {
     font-weight: normal; }
-  novo-quick-note textarea, .quick-note-wrapper textarea {
-    resize: none;
-    -webkit-text-fill-color: transparent; }
-  novo-quick-note .quick-note-overlay, .quick-note-wrapper .quick-note-overlay {
+  novo-quick-note textarea,
+  .quick-note-wrapper textarea {
+    resize: none !important;
+    -webkit-text-fill-color: transparent;
+    padding: 0 !important; }
+  novo-quick-note .quick-note-overlay,
+  .quick-note-wrapper .quick-note-overlay {
     position: absolute;
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -10105,20 +10110,30 @@ novo-quick-note, .quick-note-wrapper {
     right: 0;
     bottom: 0;
     left: 0; }
-    novo-quick-note .quick-note-overlay:empty:before, .quick-note-wrapper .quick-note-overlay:empty:before {
+    novo-quick-note .quick-note-overlay:empty:before,
+    .quick-note-wrapper .quick-note-overlay:empty:before {
       content: attr(placeholder);
       display: block;
       color: #999999; }
-  novo-quick-note .quick-note-overlay, novo-quick-note textarea, .quick-note-wrapper .quick-note-overlay, .quick-note-wrapper textarea {
+  novo-quick-note .quick-note-overlay,
+  novo-quick-note textarea,
+  .quick-note-wrapper .quick-note-overlay,
+  .quick-note-wrapper textarea {
     min-height: 200px;
     max-height: 200px;
     width: 100%;
     border: none;
     overflow: auto;
     padding: 10px; }
-    novo-quick-note .quick-note-overlay:focus, novo-quick-note textarea:focus, .quick-note-wrapper .quick-note-overlay:focus, .quick-note-wrapper textarea:focus {
+    novo-quick-note .quick-note-overlay:focus,
+    novo-quick-note textarea:focus,
+    .quick-note-wrapper .quick-note-overlay:focus,
+    .quick-note-wrapper textarea:focus {
       outline: none; }
-  novo-quick-note quick-note-results, novo-quick-note .quick-note-results, .quick-note-wrapper quick-note-results, .quick-note-wrapper .quick-note-results {
+  novo-quick-note quick-note-results,
+  novo-quick-note .quick-note-results,
+  .quick-note-wrapper quick-note-results,
+  .quick-note-wrapper .quick-note-results {
     bottom: 0;
     left: 0;
     right: 0;
@@ -10132,9 +10147,15 @@ novo-quick-note, .quick-note-wrapper {
         justify-content: center;
     padding: 0 !important;
     border: none !important; }
-    novo-quick-note quick-note-results ul, novo-quick-note .quick-note-results ul, .quick-note-wrapper quick-note-results ul, .quick-note-wrapper .quick-note-results ul {
+    novo-quick-note quick-note-results ul,
+    novo-quick-note .quick-note-results ul,
+    .quick-note-wrapper quick-note-results ul,
+    .quick-note-wrapper .quick-note-results ul {
       width: 100%; }
-      novo-quick-note quick-note-results ul li, novo-quick-note .quick-note-results ul li, .quick-note-wrapper quick-note-results ul li, .quick-note-wrapper .quick-note-results ul li {
+      novo-quick-note quick-note-results ul li,
+      novo-quick-note .quick-note-results ul li,
+      .quick-note-wrapper quick-note-results ul li,
+      .quick-note-wrapper .quick-note-results ul li {
         margin: 0 !important; }
 
 novo-tiles {
@@ -11599,92 +11620,92 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-candidate {
-      background: #44BB77;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-navigation {
-      background: #2F384F;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-lead {
-      background: #AA6699;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
       width: 31px;
       height: 31px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-submission {
-      background: #747884;
+    color header .background-boxes .bb-candidate {
+      background: #44BB77;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-navigation {
+      background: #2F384F;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-lead {
+      background: #AA6699;
       width: 30px;
       height: 30px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-submission {
+      background: #747884;
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-sendout {
       background: #747884;
-      width: 37px;
-      height: 37px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
-      width: 27px;
-      height: 27px; }
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-note {
       background: #747884;
       width: 26px;
       height: 26px; }
     color header .background-boxes .bb-task {
       background: #747884;
-      width: 33px;
-      height: 33px; }
+      width: 31px;
+      height: 31px; }
     color header .background-boxes .bb-distributionList {
       background: #747884;
-      width: 33px;
-      height: 33px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-aqua {
       background: #3BAFDA;
-      width: 38px;
-      height: 38px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-ocean {
       background: #4A89DC;
       width: 45px;
       height: 45px; }
     color header .background-boxes .bb-mint {
       background: #37BC9B;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
       width: 43px;
       height: 43px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
-      width: 41px;
-      height: 41px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
-      width: 30px;
-      height: 30px; }
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 38px;
-      height: 38px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 41px;
-      height: 41px; }
+      width: 36px;
+      height: 36px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -12612,4 +12633,4 @@ popover-demo .example.popover-demo {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.0c2cf320af035bad41eb.bundle.map*/
+/*# sourceMappingURL=main.6d75df0b6e9293f33d0d.bundle.map*/
