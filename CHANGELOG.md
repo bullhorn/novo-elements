@@ -1,3 +1,13 @@
+<a name="2.0.98"></a>
+## [2.0.98](https://github.com/bullhorn/novo-elements/compare/v2.0.97...v2.0.98) (2017-01-25)
+
+
+### Bug Fixes
+
+* **quicknote:** Fixing quick note styling and form setValue issue ([d42e4fa](https://github.com/bullhorn/novo-elements/commit/d42e4fa))
+
+
+
 <a name="2.0.97"></a>
 ## [2.0.97](https://github.com/bullhorn/novo-elements/compare/v2.0.96...v2.0.97) (2017-01-24)
 
