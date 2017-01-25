@@ -13,6 +13,11 @@ novo-table {
                 >h5 {
                     margin-left: 0;
                 }
+                novo-select {
+                    .novo-select-list {
+                        transform: translateY(5%) !important;
+                    }
+                }
             }
             >novo-table-actions {
                 padding: 10px;
