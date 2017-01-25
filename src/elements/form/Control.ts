@@ -169,22 +169,39 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
         // Subscribe to control interactions
         if (this.control.interactions) {
-            if (!Helpers.isBlank(this.form.controls[this.control.key].value)) {
-                this.executeInteractions();
+            for (let interaction of this.control.interactions) {
+                switch (interaction.event) {
+                    case 'blur':
+                        this.valueChangeSubscription = this.onBlur.subscribe(() => {
+                            this.executeInteraction(interaction);
+                        });
+                        break;
+                    case 'focus':
+                        this.valueChangeSubscription = this.onFocus.subscribe(() => {
+                            this.executeInteraction(interaction);
+                        });
+                        break;
+                    case 'change':
+                        this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
+                            this.executeInteraction(interaction);
+                        });
+                        break;
+                    default:
+                        break;
+                }
+                if (interaction.invokeOnInit) {
+                    this.executeInteraction(interaction);
+                }
             }
-            // On init, iterate through all actions and subscribe to
-            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
-                this.executeInteractions();
-            });
         }
     }
 
-    executeInteractions() {
-        setTimeout(() => {
-            for (let interaction of this.control.interactions) {
-                interaction(this.form, this.form.controls[this.control.key], this.toast);
-            }
-        });
+    executeInteraction(interaction) {
+        if (interaction.script) {
+            setTimeout(() => {
+                interaction.script(this.form, this.form.controls[this.control.key], this.toast);
+            });
+        }
     }
 
     ngOnDestroy() {
