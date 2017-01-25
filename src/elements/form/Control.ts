@@ -180,9 +180,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     executeInteractions() {
-        for (let interaction of this.control.interactions) {
-            interaction(this.form, this.form.controls[this.control.key], this.toast);
-        }
+        setTimeout(() => {
+            for (let interaction of this.control.interactions) {
+                interaction(this.form, this.form.controls[this.control.key], this.toast);
+            }
+        });
     }
 
     ngOnDestroy() {
