@@ -84,11 +84,6 @@ export class NovoFormControl extends FormControl {
         this.markAsTouched();
         this.setErrors(Object.assign({}, this.errors, { custom: message }));
     }
-
-    markAsDirty() {
-        this.markAsDirty();
-        this.markAsTouched();
-    }
 }
 
 @Injectable()
