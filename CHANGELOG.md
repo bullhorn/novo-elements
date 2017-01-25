@@ -1,3 +1,13 @@
+<a name="2.0.100"></a>
+## [2.0.100](https://github.com/bullhorn/novo-elements/compare/v2.0.99...v2.0.100) (2017-01-25)
+
+
+### Bug Fixes
+
+* **form:** Fix infinite loops :) ([93037c9](https://github.com/bullhorn/novo-elements/commit/93037c9))
+
+
+
 <a name="2.0.99"></a>
 ## [2.0.99](https://github.com/bullhorn/novo-elements/compare/v2.0.98...v2.0.99) (2017-01-25)
 
