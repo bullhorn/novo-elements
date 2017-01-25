@@ -43,7 +43,7 @@ import { Helpers } from './../../utils/Helpers';
                     <!--TextArea-->
                     <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)" (input)="emitChange($event)" [maxlength]="control.maxlength"></textarea>
                     <!--Editor-->
-                    <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key"></novo-editor>
+                    <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
                     <!--HTML5 Select-->
                     <select [id]="control.key" *ngSwitchCase="'native-select'" [formControlName]="control.key">
                         <option *ngIf="control.placeholder" value="" disabled selected hidden>{{control.placeholder}}</option>
