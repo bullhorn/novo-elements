@@ -1,3 +1,14 @@
+<a name="2.0.102"></a>
+## [2.0.102](https://github.com/bullhorn/novo-elements/compare/v2.0.101...v2.0.102) (2017-01-25)
+
+
+### Features
+
+* **editor:** Focus/Blur events for CKEditor ([d4993ad](https://github.com/bullhorn/novo-elements/commit/d4993ad))
+* **FieldInteractions:** Reworking field interactions to have events and invokeOnInit ([#373](https://github.com/bullhorn/novo-elements/issues/373)) ([32ee689](https://github.com/bullhorn/novo-elements/commit/32ee689))
+
+
+
 <a name="2.0.101"></a>
 ## [2.0.101](https://github.com/bullhorn/novo-elements/compare/v2.0.100...v2.0.101) (2017-01-25)
 
