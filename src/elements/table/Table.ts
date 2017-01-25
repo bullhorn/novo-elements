@@ -75,13 +75,13 @@ export class NovoTableHeaderElement {
                             </div>
                             <!-- FILTER DROP-DOWN -->
                             <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
-                                <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter"></button>
+                                <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter || column.filter===false"></button>
                                 <!-- FILTER OPTIONS LIST -->
                                 <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type!='date'">
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
-                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
+                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter || column.filter===false">{{ labels.clear }}</button>
                                         </div>
                                         <input type="text" *ngIf="!!column.allowCustomTextOption" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.freetextFilter" keepFilterFocused/>
                                     </item>
@@ -348,7 +348,7 @@ export class NovoTableElement implements DoCheck {
                 column.filter.push(filter);
             }
         } else {
-            column.filter = filter.value || filter;
+            column.filter = Helpers.isBlank(filter.value) ? filter : filter.value;
         }
         this.onFilterChange();
     }
@@ -451,7 +451,7 @@ export class NovoTableElement implements DoCheck {
     isFilterActive(column, filter) {
         //TODO: This needs to be refactored
         let isActive = false;
-        if (column && column.filter && filter) {
+        if (column && !Helpers.isBlank(column.filter) && !Helpers.isBlank(filter)) {
             if (Array.isArray(column.filter)) {
                 if (typeof (filter) !== 'string') {
                     isActive = column.filter.some(item => {
