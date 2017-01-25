@@ -1,3 +1,13 @@
+<a name="2.0.104"></a>
+## [2.0.104](https://github.com/bullhorn/novo-elements/compare/v2.0.103...v2.0.104) (2017-01-25)
+
+
+### Bug Fixes
+
+* **Table:** Filter now handles values === false ([94682bb](https://github.com/bullhorn/novo-elements/commit/94682bb))
+
+
+
 <a name="2.0.103"></a>
 ## [2.0.103](https://github.com/bullhorn/novo-elements/compare/v2.0.102...v2.0.103) (2017-01-25)
 
