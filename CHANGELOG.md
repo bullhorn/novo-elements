@@ -1,3 +1,13 @@
+<a name="2.0.99"></a>
+## [2.0.99](https://github.com/bullhorn/novo-elements/compare/v2.0.98...v2.0.99) (2017-01-25)
+
+
+### Bug Fixes
+
+* **interactions:** Moving the setTimeout to the execute rather then setValue to not conflicts with required fields ([2c4a9d5](https://github.com/bullhorn/novo-elements/commit/2c4a9d5))
+
+
+
 <a name="2.0.98"></a>
 ## [2.0.98](https://github.com/bullhorn/novo-elements/compare/v2.0.97...v2.0.98) (2017-01-25)
 
