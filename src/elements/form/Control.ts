@@ -43,7 +43,7 @@ import { Helpers } from './../../utils/Helpers';
                     <!--TextArea-->
                     <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)" (input)="emitChange($event)" [maxlength]="control.maxlength"></textarea>
                     <!--Editor-->
-                    <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key"></novo-editor>
+                    <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
                     <!--HTML5 Select-->
                     <select [id]="control.key" *ngSwitchCase="'native-select'" [formControlName]="control.key">
                         <option *ngIf="control.placeholder" value="" disabled selected hidden>{{control.placeholder}}</option>
@@ -169,22 +169,39 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
         // Subscribe to control interactions
         if (this.control.interactions) {
-            if (!Helpers.isBlank(this.form.controls[this.control.key].value)) {
-                this.executeInteractions();
+            for (let interaction of this.control.interactions) {
+                switch (interaction.event) {
+                    case 'blur':
+                        this.valueChangeSubscription = this.onBlur.subscribe(() => {
+                            this.executeInteraction(interaction);
+                        });
+                        break;
+                    case 'focus':
+                        this.valueChangeSubscription = this.onFocus.subscribe(() => {
+                            this.executeInteraction(interaction);
+                        });
+                        break;
+                    case 'change':
+                        this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
+                            this.executeInteraction(interaction);
+                        });
+                        break;
+                    default:
+                        break;
+                }
+                if (interaction.invokeOnInit) {
+                    this.executeInteraction(interaction);
+                }
             }
-            // On init, iterate through all actions and subscribe to
-            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
-                this.executeInteractions();
-            });
         }
     }
 
-    executeInteractions() {
-        setTimeout(() => {
-            for (let interaction of this.control.interactions) {
-                interaction(this.form, this.form.controls[this.control.key], this.toast);
-            }
-        });
+    executeInteraction(interaction) {
+        if (interaction.script) {
+            setTimeout(() => {
+                interaction.script(this.form, this.form.controls[this.control.key], this.toast);
+            });
+        }
     }
 
     ngOnDestroy() {
