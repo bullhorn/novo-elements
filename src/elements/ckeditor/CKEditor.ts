@@ -26,13 +26,15 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
 
     @Output() change = new EventEmitter();
     @Output() ready = new EventEmitter();
+    @Output() blur = new EventEmitter();
+    @Output() focus = new EventEmitter();
     @ViewChild('host') host;
 
-    _value:string = '';
+    _value: string = '';
     instance;
     debounceTimeout;
 
-    constructor(private zone:NgZone) {
+    constructor(private zone: NgZone) {
     }
 
     get value() {
@@ -106,6 +108,12 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
                 this.updateValue(value);
             }
         });
+        this.instance.on('blur', (event) => {
+            this.blur.emit(event);
+        });
+        this.instance.on('focus', (event) => {
+            this.focus.emit(event);
+        });
     }
 
     getBaseConfig() {
@@ -130,7 +138,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
         }
     }
 
-    onChange(value?:any) {
+    onChange(value?: any) {
     }
 
     onTouched(event?) {
