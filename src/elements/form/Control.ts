@@ -97,7 +97,7 @@ import { Helpers } from './../../utils/Helpers';
             </div>
             <!--Error Message-->
             <div class="error-message">
-                <span class="error-text" *ngIf="noErrors"></span>           
+                <span class="error-text" *ngIf="noErrors"></span>
                 <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
                 <span class="error-text" *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
                 <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>

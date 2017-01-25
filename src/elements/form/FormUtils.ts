@@ -75,19 +75,6 @@ export class NovoFormControl extends FormControl {
         }
     }
 
-    setValue(value: any, {onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange}: {
-        onlySelf?: boolean,
-        emitEvent?: boolean,
-        emitModelToViewChange?: boolean,
-        emitViewToModelChange?: boolean
-    } = {}) {
-        setTimeout(() => {
-            this.markAsDirty();
-            this.markAsTouched();
-            super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
-        });
-    }
-
     setReadOnly(read: boolean) {
         this.readOnly = read;
     }
@@ -96,6 +83,11 @@ export class NovoFormControl extends FormControl {
         this.markAsDirty();
         this.markAsTouched();
         this.setErrors(Object.assign({}, this.errors, { custom: message }));
+    }
+
+    markAsDirty() {
+        this.markAsDirty();
+        this.markAsTouched();
     }
 }
 

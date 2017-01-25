@@ -1,20 +1,18 @@
 $quick-note-height: 200px;
-
-novo-quick-note, .quick-note-wrapper {
+novo-quick-note,
+.quick-note-wrapper {
     width: 100%;
     min-height: $quick-note-height;
     max-height: $quick-note-height;
     position: relative;
-
     a {
         font-weight: normal;
     }
-
     textarea {
-        resize: none;
+        resize: none !important;
         -webkit-text-fill-color: transparent;
+        padding: 0 !important;
     }
-
     .quick-note-overlay {
         position: absolute;
         white-space: pre-wrap;
@@ -25,28 +23,26 @@ novo-quick-note, .quick-note-wrapper {
         right: 0;
         bottom: 0;
         left: 0;
-
         &:empty:before {
             content: attr(placeholder);
             display: block;
             color: $grey;
         }
     }
-
-    .quick-note-overlay, textarea {
+    .quick-note-overlay,
+    textarea {
         min-height: $quick-note-height;
         max-height: $quick-note-height;
         width: 100%;
         border: none;
         overflow: auto;
         padding: 10px;
-
         &:focus {
             outline: none;
         }
     }
-
-    quick-note-results, .quick-note-results {
+    quick-note-results,
+    .quick-note-results {
         bottom: 0;
         left: 0;
         right: 0;
@@ -57,10 +53,8 @@ novo-quick-note, .quick-note-wrapper {
         justify-content: center;
         padding: 0 !important;
         border: none !important;
-
         ul {
             width: 100%;
-
             li {
                 margin: 0 !important;
             }
