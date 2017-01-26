@@ -49,7 +49,7 @@ const template = `
     <div class="example picker-demo">${BasicPickerDemoTpl}</div>
     <code-snippet [code]="BasicPickerDemoTpl"></code-snippet>
 
-    <h5>Async Examples</h5>
+    <h5>Async Examples (With Infinite Scroll)</h5>
     <p>
         By clicking on the <code>input</code> element, the options list will be displayed.  picker any of the options
         by clicking on the item in the list.  The value pickered will be displayed and the options list will be removed.
@@ -155,10 +155,14 @@ export class PickerDemoComponent {
 
         this.value = 'Alabama';
         this.async = {
-            options: () => {
+            options: (term, page) => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
-                        resolve(abbrieviated);
+                        if (page >= 10) {
+                            resolve([]);
+                        } else {
+                            resolve(abbrieviated);
+                        }
                     }, 300);
                 });
             }

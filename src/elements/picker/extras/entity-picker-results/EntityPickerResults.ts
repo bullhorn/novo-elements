@@ -65,6 +65,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                     </p>
                 </item-content>
             </novo-list-item>
+            <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>            
         </novo-list>
     `,
     host: {

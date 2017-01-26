@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 // APP
 import { Helpers } from './../../../../utils/Helpers';
 import { NovoLabelService } from './../../../../services/novo-label-service';
@@ -17,15 +17,30 @@ export class BasePickerResults {
     selected: Array<any> = [];
     matches: any = [];
     hasError: boolean = false;
-    isLoading: boolean = true;
+    isLoading: boolean = false;
     isStatic: boolean = true;
     config: any;
     activeMatch: any;
     parent: any;
     element: ElementRef;
-
+    page: number = 0;
+    lastPage: boolean = false;
     constructor(element: ElementRef) {
         this.element = element;
+    }
+
+    @HostListener('scroll', ['$event.target'])
+    onScrollDown(target) {
+        if (target) {
+                let offset = target.offsetHeight + target.scrollTop,
+                    bottom = target.scrollHeight;
+                if (offset >= bottom) {
+                    event.stopPropagation();
+                    if (!this.lastPage) {
+                        this.processSearch();
+                    }
+                }
+            }
     }
 
     get term() {
@@ -33,18 +48,36 @@ export class BasePickerResults {
     }
 
     set term(value) {
-        this._term = value;
+        if (value !== this._term || this.page === 0) {
+            this._term = value;
+            this.page = 1;
+            this.matches = [];
+            this.processSearch();
+        }
+    }
+
+    processSearch() {
         this.hasError = false;
         this.isLoading = true;
-        this.search(value)
+        this.search(this.term)
             .subscribe(
-            results => {
-                this.matches = this.isStatic ? this.filterData(results) : results;
+            (results: any) => {
+                if (this.isStatic) {
+                    this.matches = this.filterData(results);
+                } else {
+                    this.matches = this.matches.concat(results);
+                    if (results && !results.length) {
+                        this.lastPage = true;
+                    } else {
+                        this.lastPage = false;
+                    }
+                }
                 this.isLoading = false;
             },
             () => {
-                this.hasError = value && value.length !== 0;
+                this.hasError = this.term && this.term.length !== 0;
                 this.isLoading = false;
+                this.lastPage = true;
             });
     }
 
@@ -68,7 +101,7 @@ export class BasePickerResults {
                     } else if (typeof options === 'function') {
                         this.isStatic = false;
                         // Promises (ES6 or Deferred) are resolved whenever they resolve
-                        options(term)
+                        options(term, ++this.page)
                             .then(this.structureArray.bind(this))
                             .then(resolve, reject);
                     } else {
@@ -260,6 +293,7 @@ export class BasePickerResults {
             return isPreselected;
         }) !== -1;
     }
+
 }
 
 @Component({
@@ -269,7 +303,7 @@ export class BasePickerResults {
         '[hidden]': 'matches.length === 0'
     },
     template: `
-        <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
+        <novo-loading theme="line" *ngIf="isLoading && matches.length === 0"></novo-loading>
         <ul *ngIf="matches.length > 0">
             <li
                 *ngFor="let match of matches"
@@ -279,6 +313,7 @@ export class BasePickerResults {
                 [class.disabled]="preselected(match)">
                 <span [innerHtml]="highlight(match.label, term)"></span>
             </li>
+            <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>            
         </ul>
         <p class="picker-error" *ngIf="hasError">{{labels.pickerError}}</p>
         <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{labels.pickerEmpty}}</p>
