@@ -188,7 +188,7 @@ export class FormDemoComponent {
             let itemValue = Math.round(((form.controls['tax'].value / 100) * form.controls['itemValue'].value) * 100) / 100;
             form.controls['totalValue'].setValue(itemValue);
         };
-         let toggleCommentsInput = (form, control) => {
+        let toggleCommentsInput = (form, control) => {
             if (control.value) {
                 form.controls['comments'].show();
                 form.controls['comments'].setReadOnly(false);
@@ -205,11 +205,11 @@ export class FormDemoComponent {
 
         // Fields with interactions
         // Tax Demo
-        this.salesTaxControl = new TextBoxControl({ type: 'number', key: 'tax', value: 9, label: 'Tax', interactions: [calculateTaxes] });
-        this.itemValueControl = new TextBoxControl({ type: 'number', key: 'itemValue', value: 348.22, label: 'Item Value', interactions: [calculateTaxes] });
+        this.salesTaxControl = new TextBoxControl({ type: 'number', key: 'tax', value: 9, label: 'Tax', interactions: [{ event:'change', script: calculateTaxes }] });
+        this.itemValueControl = new TextBoxControl({ type: 'number', key: 'itemValue', value: 348.22, label: 'Item Value', interactions: [{ event: 'change', script: calculateTaxes }] });
         this.totalValueControl = new TextBoxControl({ type: 'number', disabled: true, key: 'totalValue' });
         // Show/Hide Demo
-        this.hasCommentsControl = new CheckboxControl({ key: 'isCommentEnabled', value: false, label: 'I have a comment', interactions: [toggleCommentsInput] });
+        this.hasCommentsControl = new CheckboxControl({ key: 'isCommentEnabled', value: false, label: 'I have a comment', interactions: [{event:'change', script: toggleCommentsInput}] });
         this.commentsControl = new TextBoxControl({ type: 'text', key: 'comments', disabled: true, hidden: true, label: 'Comments' });
         this.fieldInteractionForm = formUtils.toFormGroup([this.salesTaxControl, this.itemValueControl, this.totalValueControl, this.hasCommentsControl, this.commentsControl]);
 
