@@ -8,8 +8,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
 @Component({
     selector: 'entity-picker-results',
     template: `
-        <novo-list *ngIf="matches.length > 0" direction="vertical"
-             (scroll)="onScrollDown($event)">
+        <novo-list *ngIf="matches.length > 0" direction="vertical">
             <novo-list-item *ngFor="let match of matches"
             (click)="selectMatch($event)"
             [ngClass]="{active: isActive(match)}"
@@ -70,8 +69,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
         </novo-list>
     `,
     host: {
-        '[hidden]': 'matches.length === 0',
-        '(scroll)': 'onScrollDown($event)'
+        '[hidden]': 'matches.length === 0'
     }
 })
 export class EntityPickerResults extends BasePickerResults {

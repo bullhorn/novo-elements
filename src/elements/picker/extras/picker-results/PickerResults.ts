@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 // APP
 import { Helpers } from './../../../../utils/Helpers';
 import { NovoLabelService } from './../../../../services/novo-label-service';
@@ -27,6 +27,20 @@ export class BasePickerResults {
     lastPage: boolean = false;
     constructor(element: ElementRef) {
         this.element = element;
+    }
+
+    @HostListener('scroll', ['$event.target'])
+    onScrollDown(target) {
+        if (target) {
+                let offset = target.offsetHeight + target.scrollTop,
+                    bottom = target.scrollHeight;
+                if (offset >= bottom) {
+                    event.stopPropagation();
+                    if (!this.lastPage) {
+                        this.processSearch();
+                    }
+                }
+            }
     }
 
     get term() {
@@ -280,26 +294,13 @@ export class BasePickerResults {
         }) !== -1;
     }
 
-    onScrollDown(event) {
-        if (event.target) {
-                let offset = event.target.offsetHeight + event.target.scrollTop,
-                    bottom = event.target.scrollHeight;
-                if (offset >= bottom) {
-                    event.stopPropagation();
-                    if (!this.lastPage) {
-                        this.processSearch();
-                    }
-                }
-            }
-    }
 }
 
 @Component({
     selector: 'picker-results',
     host: {
         'class': 'active',
-        '[hidden]': 'matches.length === 0',
-        '(scroll)': 'onScrollDown($event)'
+        '[hidden]': 'matches.length === 0'
     },
     template: `
         <novo-loading theme="line" *ngIf="isLoading && matches.length === 0"></novo-loading>
