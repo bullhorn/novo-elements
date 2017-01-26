@@ -236,7 +236,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         this.model = model;
         if (this.options) {
             let item = this.options.find(i => i.value === model);
-            if (!item && !Helpers.isBlank(model)) {
+            if (!item && !Helpers.isEmpty(model)) {
                 item = {
                     label: model,
                     value: model
