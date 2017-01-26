@@ -5030,7 +5030,7 @@ quick-note-results {
   picker-null-results.active,
   picker-results.active,
   quick-note-results.active {
-    max-height: 219px;
+    max-height: 200px;
     overflow: auto;
     z-index: 1000; }
   .picker-results:focus,
@@ -11622,92 +11622,92 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-candidate {
-      background: #44BB77;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-navigation {
-      background: #2F384F;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-lead {
-      background: #AA6699;
-      width: 36px;
-      height: 36px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
       width: 41px;
       height: 41px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
+    color header .background-boxes .bb-candidate {
+      background: #44BB77;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-navigation {
+      background: #2F384F;
       width: 27px;
       height: 27px; }
+    color header .background-boxes .bb-lead {
+      background: #AA6699;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-submission {
       background: #747884;
       width: 42px;
       height: 42px; }
     color header .background-boxes .bb-sendout {
       background: #747884;
-      width: 30px;
-      height: 30px; }
+      width: 41px;
+      height: 41px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
-      width: 31px;
-      height: 31px; }
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-note {
       background: #747884;
-      width: 39px;
-      height: 39px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-task {
       background: #747884;
-      width: 28px;
-      height: 28px; }
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-distributionList {
       background: #747884;
-      width: 37px;
-      height: 37px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
       width: 31px;
       height: 31px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 44px;
+      height: 44px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-grass {
       background: #8CC152;
-      width: 36px;
-      height: 36px; }
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-sunflower {
       background: #F6B042;
-      width: 39px;
-      height: 39px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
-      width: 30px;
-      height: 30px; }
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
-      width: 30px;
-      height: 30px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 42px;
-      height: 42px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 39px;
-      height: 39px; }
+      width: 36px;
+      height: 36px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -12635,4 +12635,4 @@ popover-demo .example.popover-demo {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.dbb5a35fa779454e8387.bundle.map*/
+/*# sourceMappingURL=main.8e8db00b3f7d27de705a.bundle.map*/
