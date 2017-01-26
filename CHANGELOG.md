@@ -1,3 +1,13 @@
+<a name="2.0.105"></a>
+## [2.0.105](https://github.com/bullhorn/novo-elements/compare/v2.0.104...v2.0.105) (2017-01-26)
+
+
+### Features
+
+* **pickers:** Implement infinite scroll for pickers with a lot of data ([fac13ec](https://github.com/bullhorn/novo-elements/commit/fac13ec))
+
+
+
 <a name="2.0.104"></a>
 ## [2.0.104](https://github.com/bullhorn/novo-elements/compare/v2.0.103...v2.0.104) (2017-01-25)
 
