@@ -1,3 +1,13 @@
+<a name="2.0.108"></a>
+## [2.0.108](https://github.com/bullhorn/novo-elements/compare/v2.0.107...v2.0.108) (2017-01-27)
+
+
+### Bug Fixes
+
+* **table:** Allow filters to have enter and close ([d6f4b18](https://github.com/bullhorn/novo-elements/commit/d6f4b18))
+
+
+
 <a name="2.0.107"></a>
 ## [2.0.107](https://github.com/bullhorn/novo-elements/compare/v2.0.106...v2.0.107) (2017-01-27)
 
