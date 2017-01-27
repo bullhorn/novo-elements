@@ -1,3 +1,13 @@
+<a name="2.0.107"></a>
+## [2.0.107](https://github.com/bullhorn/novo-elements/compare/v2.0.106...v2.0.107) (2017-01-27)
+
+
+### Bug Fixes
+
+* **dropdown:** Not closing the dropdown on enter, only esc ([136231b](https://github.com/bullhorn/novo-elements/commit/136231b))
+
+
+
 <a name="2.0.106"></a>
 ## [2.0.106](https://github.com/bullhorn/novo-elements/compare/v2.0.105...v2.0.106) (2017-01-27)
 
