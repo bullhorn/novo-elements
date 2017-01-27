@@ -1,3 +1,13 @@
+<a name="2.0.106"></a>
+## [2.0.106](https://github.com/bullhorn/novo-elements/compare/v2.0.105...v2.0.106) (2017-01-27)
+
+
+### Bug Fixes
+
+* **table:** Fixing the keepFocus directive for dropdowns by properly making sure the list is hidden via ngIF ([65599df](https://github.com/bullhorn/novo-elements/commit/65599df))
+
+
+
 <a name="2.0.105"></a>
 ## [2.0.105](https://github.com/bullhorn/novo-elements/compare/v2.0.104...v2.0.105) (2017-01-26)
 
