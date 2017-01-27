@@ -93,6 +93,8 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
     @Input() containerClass: string;
     // Side the dropdown will open
     @Input() side: string = 'left';
+    // Output for when the dropdown is toggled
+    @Output() toggled: EventEmitter<boolean>;
 
     @ViewChild(NovoDropdownContainer) public container: NovoDropdownContainer;
     @ViewChild('trigger') public button;
@@ -106,6 +108,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
         // Click handler
         this.clickHandler = this.toggleActive.bind(this);
         this.closeHandler = this.toggleActive.bind(this);
+        this.toggled = this.onActiveChange;
         // Listen for active change to hide/show menu
         this.onActiveChange.subscribe((active) => {
             if (active) {
@@ -184,7 +187,6 @@ export class NovoListElement {
     selector: 'item',
     template: '<ng-content></ng-content>',
     host: {
-        '(click)': 'onClick()',
         '[class.disabled]': 'disabled'
     }
 })
@@ -195,7 +197,8 @@ export class NovoItemElement {
 
     constructor(private dropdown: NovoDropdownElement) { }
 
-    public onClick(): void {
+    @HostListener('click', ['$event'])
+    public onClick(event: MouseEvent): void {
         // Poor man's disable
         if (!this.disabled) {
             // Close if keepOpen is false

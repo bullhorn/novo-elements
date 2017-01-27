@@ -1,5 +1,5 @@
 // Vendor
-import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, Directive, AfterViewChecked } from '@angular/core';
+import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, Directive, AfterViewInit } from '@angular/core';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
 import { Helpers } from './../../utils/Helpers';
@@ -10,10 +10,10 @@ import { PagedCollection } from './../../services/data-provider/PagedCollection'
 @Directive({
     selector: '[keepFilterFocused]'
 })
-export class NovoTableKeepFilterFocus implements AfterViewChecked {
+export class NovoTableKeepFilterFocus implements AfterViewInit {
     constructor(private element: ElementRef) { }
 
-    ngAfterViewChecked() {
+    ngAfterViewInit() {
         this.element.nativeElement.focus();
     }
 }
@@ -74,10 +74,10 @@ export class NovoTableHeaderElement {
                                 </div>
                             </div>
                             <!-- FILTER DROP-DOWN -->
-                            <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
+                            <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters" (toggled)="onDropdownToggled($event, column.name)" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
                                 <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter || column.filter===false"></button>
                                 <!-- FILTER OPTIONS LIST -->
-                                <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type!='date'">
+                                <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type !== 'date' && toggledDropdownMap[column.name]">
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
@@ -90,7 +90,7 @@ export class NovoTableHeaderElement {
                                     </item>
                                 </list>
                                 <!-- FILTER SEARCH INPUT -->
-                                <list *ngIf="!(column?.options?.length || column?.originalOptions?.length)">
+                                <list *ngIf="!(column?.options?.length || column?.originalOptions?.length) && toggledDropdownMap[column.name]">
                                     <item class="filter-search">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
@@ -100,7 +100,7 @@ export class NovoTableHeaderElement {
                                     </item>
                                 </list>
                                 <!-- FILTER DATE OPTIONS -->
-                                <list *ngIf="column?.options?.length && column?.type=='date'">
+                                <list *ngIf="column?.options?.length && column?.type === 'date' && toggledDropdownMap[column.name]">
                                     <item class="filter-search" *ngIf="!column.calenderShow">
                                         <div class="header">
                                             <span>{{ labels.filters }}</span>
@@ -218,6 +218,10 @@ export class NovoTableElement implements DoCheck {
     currentSortColumn: any;
     pagedData: Array<any> = [];
     pageSelected: any;
+    // Map to keep track of what dropdowns are toggled
+    // Used to properly *ngIf the <list> so that the keepFilterFocused Directive
+    // will properly fire the ngAfterViewInit event
+    toggledDropdownMap: any = {};
 
     @Input()
     set rows(rows: Array<any>) {
@@ -263,6 +267,10 @@ export class NovoTableElement implements DoCheck {
     }
 
     constructor(public labels: NovoLabelService) { }
+
+    onDropdownToggled(event, column): void {
+        this.toggledDropdownMap[column] = event;
+    }
 
     onPageChange(event) {
         //this.dataProvider.page = event.page;
