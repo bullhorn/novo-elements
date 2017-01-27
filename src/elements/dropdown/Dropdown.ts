@@ -66,7 +66,7 @@ export class NovoDropdownContainer implements DoCheck {
     @HostListener('keydown', ['$event'])
     public onKeyDown(event: KeyboardEvent): void {
         // Close with ESC/Enter
-        if (this.isVisible && (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER)) {
+        if (this.isVisible && event.keyCode === KeyCodes.ESC) {
             this.parent.toggleActive(null, false);
         }
     }
@@ -170,7 +170,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
     @HostListener('keydown', ['$event'])
     public onKeyDown(event: KeyboardEvent): void {
         // Close with ESC/Enter
-        if (this.active && (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER)) {
+        if (this.active && event.keyCode === KeyCodes.ESC) {
             this.toggleActive();
         }
     }
