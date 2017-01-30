@@ -238,7 +238,7 @@ novo-form {
                                         border-bottom: 1px solid #DA4453;
                                     }
                                 }
-                                textarea {
+                                textarea:not(.quick-note-textarea) {
                                     overflow-y: hidden !important;
                                     transition: height 0;
                                     background: transparent !important;
