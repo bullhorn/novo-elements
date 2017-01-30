@@ -31,7 +31,7 @@ export interface NovoControlConfig {
     name?: string;
     readOnly?: boolean;
     closeOnSelect?: boolean;
-    interactions?: Array<Function>;
+    interactions?: Array<Object>;
     dataSpecialization?: string;
 }
 
@@ -62,7 +62,7 @@ export class BaseControl {
     disabled: boolean;
     readOnly: boolean; // "disabled", so it appears in the model still
     closeOnSelect: boolean;
-    interactions: Array<Function>;
+    interactions: Array<Object>;
     dataSpecialization: string;
 
     constructor(config: NovoControlConfig) {
