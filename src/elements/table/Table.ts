@@ -74,7 +74,7 @@ export class NovoTableHeaderElement {
                                 </div>
                             </div>
                             <!-- FILTER DROP-DOWN -->
-                            <novo-dropdown side="right" *ngIf="config.filtering !== false && column.filtering !== false" class="column-filters" (toggled)="onDropdownToggled($event, column.name)" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
+                            <novo-dropdown side="right" *ngIf="config.filtering" class="column-filters" (toggled)="onDropdownToggled($event, column.name)" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
                                 <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter || column.filter===false"></button>
                                 <!-- FILTER OPTIONS LIST -->
                                 <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type !== 'date' && toggledDropdownMap[column.name]">
@@ -256,8 +256,8 @@ export class NovoTableElement implements DoCheck {
                     break;
             }
         });
-        this._dataProvider.page = this.config.paging.current;
-        this._dataProvider.pageSize = this.config.paging.itemsPerPage;
+        this._dataProvider.page = this.config.paging ? this.config.paging.current : 0;
+        this._dataProvider.pageSize = this.config.paging ? this.config.paging.itemsPerPage : 500;
         if (dp && dp.length > 0) {
             this.setupColumnDefaults();
         }
