@@ -155,7 +155,7 @@ export class NovoFile {
     lastModified:number = 0;
     size:number = 0;
     loaded:boolean = false;
-    fileContents:string;
+    fileContent:string;
     dataURL:string;
     reader:FileReader = new FileReader();
 
@@ -166,7 +166,7 @@ export class NovoFile {
         this.size = file.size;
         this.file = file;
         this.reader.onload = (event:any) => {
-            this.fileContents = event.target.result.split(',')[1];
+            this.fileContent = event.target.result.split(',')[1];
             this.dataURL = event.target.result;
             this.loaded = true;
         };
@@ -186,7 +186,7 @@ export class NovoFile {
             contentType: this.type,
             lastModified: this.lastModified,
             size: this.size,
-            fileContents: this.fileContents
+            fileContents: this.fileContent
         };
     }
 }
