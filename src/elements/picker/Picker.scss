@@ -111,6 +111,9 @@ quick-note-results {
                 pointer-events: none;
             }
         }
+        novo-loading {
+            justify-content: center;
+        }
     }
     &.active {
         max-height: 200px;
