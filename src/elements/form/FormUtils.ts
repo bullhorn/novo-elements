@@ -109,6 +109,14 @@ export class FormUtils {
         return new FormGroup(group);
     }
 
+    addControls(formGroup: FormGroup, controls: NovoControlConfig[]) {
+        controls.forEach(control => {
+            let value = Helpers.isBlank(control.value) ? '' : control.value;
+            let formControl = new NovoFormControl(value, control);
+            formGroup.addControl(control.key, formControl);
+        });
+    }
+
     toFormGroupFromFieldset(fieldsets: Array<NovoFieldset>) {
         let controls = [];
         fieldsets.forEach(fieldset => {
@@ -406,10 +414,11 @@ export class FormUtils {
         return null;
     }
 
-    setInitialValues(controls: Array<NovoControlConfig>, values, keepClean = false) {
+    setInitialValues(controls: Array<NovoControlConfig>, values, keepClean = false, keyOverride?: string) {
         for (let i = 0; i < controls.length; i++) {
             let control = controls[i];
-            let value = values[control.key];
+            let key = keyOverride ? control.key.replace(keyOverride, '') : control.key;
+            let value = values[key];
 
             if (Helpers.isBlank(value)) {
                 continue;

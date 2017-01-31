@@ -40,6 +40,9 @@ novo-table {
         width: 100%;
         display: block;
     }
+    novo-table-footer {
+        display: flex;
+    }
 }
 
 
@@ -64,8 +67,7 @@ $table-border-color: #f5f5f5; // Tables
     max-width: 100%;
     background-color: $table-bg;
     >tbody,
-    >thead,
-    >tfoot {
+    >thead {
         >tr {
             >td,
             >th {

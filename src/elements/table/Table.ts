@@ -1,11 +1,18 @@
 // Vendor
-import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, Directive, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, Directive, AfterViewInit, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
 import { Helpers } from './../../utils/Helpers';
+import { FormUtils } from './../form/FormUtils';
 import { CollectionEvent } from './../../services/data-provider/CollectionEvent';
 import { PagedArrayCollection } from './../../services/data-provider/PagedArrayCollection';
 import { PagedCollection } from './../../services/data-provider/PagedCollection';
+
+export enum NovoTableMode {
+    VIEW = 1,
+    EDIT = 2
+}
 
 @Directive({
     selector: '[keepFilterFocused]'
@@ -33,6 +40,13 @@ export class NovoTableHeaderElement {
 }
 
 @Component({
+    selector: 'novo-table-footer',
+    template: '<ng-content></ng-content>'
+})
+export class NovoTableFooterElement {
+}
+
+@Component({
     selector: 'novo-table',
     host: {
         '[attr.theme]': 'theme'
@@ -52,155 +66,166 @@ export class NovoTableHeaderElement {
             </div>
         </header>
         <div class="table-container">
-            <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
-            <!-- skipSortAndFilterClear is a hack right now, will be removed once Canvas is refactored -->
-            <thead *ngIf="columns.length && (!dataProvider.isEmpty() || dataProvider.isFiltered() || skipSortAndFilterClear)">
-                <tr role="row">
-                    <!-- DETAILS -->
-                    <th class="row-actions" *ngIf="config.hasDetails"></th>
-                    <!-- CHECKBOX -->
-                    <th class="row-actions checkbox mass-action" *ngIf="config.rowSelectionStyle === 'checkbox'">
-                        <novo-checkbox [(ngModel)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < pagedData.length" (ngModelChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></novo-checkbox>
-                    </th>
-                    <!-- TABLE HEADERS -->
-                    <th *ngFor="let column of columns" [ngClass]="{ 'mass-action': config?.rowSelectionStyle === 'checkbox', 'actions': column?.actions?.items?.length > 0, 'preview': column?.name === 'preview' }" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
-                        <div class="th-group" [attr.data-automation-id]="column.id || column.name" *ngIf="!column.hideHeader">
-                            <!-- LABEL & SORT ARROWS -->
-                            <div class="th-title" [ngClass]="(config.sorting !== false && column.sorting !== false) ? 'sortable' : ''" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
-                                <label>{{ column.title }}</label>
-                                <div class="table-sort-icons" [ngClass]="column.sort || ''" *ngIf="config.sorting !== false && column.sorting !== false">
-                                    <i class="bhi-arrow-up"></i>
-                                    <i class="bhi-arrow-down"></i>
-                                </div>
-                            </div>
-                            <!-- FILTER DROP-DOWN -->
-                            <novo-dropdown side="right" *ngIf="config.filtering !== false && column.filtering !== false" class="column-filters" (toggled)="onDropdownToggled($event, column.name)" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
-                                <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter || column.filter===false"></button>
-                                <!-- FILTER OPTIONS LIST -->
-                                <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type !== 'date' && toggledDropdownMap[column.name]">
-                                    <item class="filter-search">
-                                        <div class="header">
-                                            <span>{{ labels.filters }}</span>
-                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter || column.filter===false">{{ labels.clear }}</button>
-                                        </div>
-                                        <input type="text" *ngIf="!!column.allowCustomTextOption" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.freetextFilter" keepFilterFocused/>
-                                    </item>
-                                    <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="getOptionDataAutomationId(option)">
-                                        {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
-                                    </item>
-                                </list>
-                                <!-- FILTER SEARCH INPUT -->
-                                <list *ngIf="!(column?.options?.length || column?.originalOptions?.length) && toggledDropdownMap[column.name]">
-                                    <item class="filter-search">
-                                        <div class="header">
-                                            <span>{{ labels.filters }}</span>
-                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
-                                        </div>
-                                        <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter" keepFilterFocused/>
-                                    </item>
-                                </list>
-                                <!-- FILTER DATE OPTIONS -->
-                                <list *ngIf="column?.options?.length && column?.type === 'date' && toggledDropdownMap[column.name]">
-                                    <item class="filter-search" *ngIf="!column.calenderShow">
-                                        <div class="header">
-                                            <span>{{ labels.filters }}</span>
-                                            <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
-                                        </div>
-                                    </item>
-                                    <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [keepOpen]="option.range" [hidden]="column.calenderShow" [attr.data-automation-id]="(option?.label || option)">
-                                        {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
-                                    </item>
-                                    <div class="calender-container" [hidden]="!column.calenderShow">
-                                        <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>Back to Preset Filters</div>
-                                        <novo-date-picker #rangePicker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column.filter" range="true"></novo-date-picker>
+            <novo-form hideHeader="true" [form]="tableForm">
+                <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
+                <!-- skipSortAndFilterClear is a hack right now, will be removed once Canvas is refactored -->
+                <thead *ngIf="columns.length && (!dataProvider.isEmpty() || dataProvider.isFiltered() || skipSortAndFilterClear)">
+                    <tr role="row">
+                        <!-- DETAILS -->
+                        <th class="row-actions" *ngIf="config.hasDetails"></th>
+                        <!-- CHECKBOX -->
+                        <th class="row-actions checkbox mass-action" *ngIf="config.rowSelectionStyle === 'checkbox'">
+                            <novo-checkbox [(ngModel)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < pagedData.length" (ngModelChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></novo-checkbox>
+                        </th>
+                        <!-- TABLE HEADERS -->
+                        <th *ngFor="let column of columns" [ngClass]="{ 'mass-action': config?.rowSelectionStyle === 'checkbox', 'actions': column?.actions?.items?.length > 0, 'preview': column?.name === 'preview' }" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
+                            <div class="th-group" [attr.data-automation-id]="column.id || column.name" *ngIf="!column.hideHeader">
+                                <!-- LABEL & SORT ARROWS -->
+                                <div class="th-title" [ngClass]="(config.sorting !== false && column.sorting !== false) ? 'sortable' : ''" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
+                                    <label>{{ column.title }}</label>
+                                    <div class="table-sort-icons" [ngClass]="column.sort || ''" *ngIf="config.sorting !== false && column.sorting !== false">
+                                        <i class="bhi-arrow-up"></i>
+                                        <i class="bhi-arrow-down"></i>
                                     </div>
-                                </list>
-                            </novo-dropdown>
-                        </div>
-                    </th>
-                </tr>
-            </thead>
-            <!-- TABLE DATA -->
-            <tbody *ngIf="!dataProvider.isEmpty()">
-                <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage && config.selectAllEnabled" data-automation-id="table-selection-row">
-                    <td colspan="100%">
-                        {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(dataProvider.total)}}</a>
-                    </td>
-                </tr>
-                <template ngFor let-row="$implicit" [ngForOf]="rows">
-                    <tr class="table-row" [ngClass]="row.customClass || ''" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
-                        <td class="row-actions" *ngIf="config.hasDetails">
-                            <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
-                            <button theme="icon" icon="sort-desc" (click)="row._expanded=!row._expanded" *ngIf="row._expanded"></button>
-                        </td>
-                        <td class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
-                            <novo-checkbox [(ngModel)]="row._selected" (ngModelChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></novo-checkbox>
-                        </td>
-                        <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name">
-                            <novo-table-cell [column]="column" [row]="row"></novo-table-cell>
+                                </div>
+                                <!-- FILTER DROP-DOWN -->
+                                <novo-dropdown side="right" *ngIf="column.filtering" class="column-filters" (toggled)="onDropdownToggled($event, column.name)" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
+                                    <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter || column.filter===false"></button>
+                                    <!-- FILTER OPTIONS LIST -->
+                                    <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type !== 'date' && toggledDropdownMap[column.name]">
+                                        <item class="filter-search">
+                                            <div class="header">
+                                                <span>{{ labels.filters }}</span>
+                                                <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter || column.filter===false">{{ labels.clear }}</button>
+                                            </div>
+                                            <input type="text" *ngIf="!!column.allowCustomTextOption" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.freetextFilter" keepFilterFocused/>
+                                        </item>
+                                        <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="getOptionDataAutomationId(option)">
+                                            {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
+                                        </item>
+                                    </list>
+                                    <!-- FILTER SEARCH INPUT -->
+                                    <list *ngIf="!(column?.options?.length || column?.originalOptions?.length) && toggledDropdownMap[column.name]">
+                                        <item class="filter-search">
+                                            <div class="header">
+                                                <span>{{ labels.filters }}</span>
+                                                <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
+                                            </div>
+                                            <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter" keepFilterFocused/>
+                                        </item>
+                                    </list>
+                                    <!-- FILTER DATE OPTIONS -->
+                                    <list *ngIf="column?.options?.length && column?.type === 'date' && toggledDropdownMap[column.name]">
+                                        <item class="filter-search" *ngIf="!column.calenderShow">
+                                            <div class="header">
+                                                <span>{{ labels.filters }}</span>
+                                                <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
+                                            </div>
+                                        </item>
+                                        <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [keepOpen]="option.range" [hidden]="column.calenderShow" [attr.data-automation-id]="(option?.label || option)">
+                                            {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
+                                        </item>
+                                        <div class="calender-container" [hidden]="!column.calenderShow">
+                                            <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>Back to Preset Filters</div>
+                                            <novo-date-picker #rangePicker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column.filter" range="true"></novo-date-picker>
+                                        </div>
+                                    </list>
+                                </novo-dropdown>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <!-- TABLE DATA -->
+                <tbody *ngIf="!dataProvider.isEmpty()">
+                    <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage && config.selectAllEnabled" data-automation-id="table-selection-row">
+                        <td colspan="100%">
+                            {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(dataProvider.total)}}</a>
                         </td>
                     </tr>
-                    <tr class="details-row" *ngIf="config.hasDetails" [hidden]="!row._expanded" [attr.data-automation-id]="'details-row-'+row.id">
-                        <td class="row-actions"></td>
-                        <td [attr.colspan]="columns.length">
-                            <novo-row-details [data]="row" [renderer]="config.detailsRenderer"></novo-row-details>
+                    <template ngFor let-row="$implicit" let-i="index" [ngForOf]="rows">
+                           <tr class="table-row" [ngClass]="row.customClass || ''" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
+                                <td class="row-actions" *ngIf="config.hasDetails">
+                                    <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
+                                    <button theme="icon" icon="sort-desc" (click)="row._expanded=!row._expanded" *ngIf="row._expanded"></button>
+                                </td>
+                                <td class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
+                                    <novo-checkbox [(ngModel)]="row._selected" (ngModelChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></novo-checkbox>
+                                </td>
+                                <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name">
+                                    <novo-table-cell *ngIf="!column.editor || mode === NovoTableMode.VIEW" [hasEditor]="!!column.editor" [column]="column" [row]="row" [form]="tableForm.controls.rows.controls[i]"></novo-table-cell>
+                                    <novo-control *ngIf="column.editor && mode === NovoTableMode.EDIT" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]"></novo-control>
+                                </td>
+                            </tr>
+                            <tr class="details-row" *ngIf="config.hasDetails" [hidden]="!row._expanded" [attr.data-automation-id]="'details-row-'+row.id">
+                                <td class="row-actions"></td>
+                                <td [attr.colspan]="columns.length">
+                                    <novo-row-details [data]="row" [renderer]="config.detailsRenderer"></novo-row-details>
+                                </td>
+                            </tr>
+                    </template>
+                </tbody>
+                <!-- NO TABLE DATA PLACEHOLDER -->
+                <tbody class="table-message" *ngIf="dataProvider.isEmpty() && !dataProvider.isFiltered()" data-automation-id="empty-table">
+                    <tr>
+                        <td colspan="100%">
+                            <div #emptymessage><ng-content select="[table-empty-message]"></ng-content></div>
+                            <div class="table-empty-message" *ngIf="emptymessage.childNodes.length == 0">
+                                <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
+                            </div>
                         </td>
                     </tr>
-                </template>
-            </tbody>
-            <!-- NO TABLE DATA PLACEHOLDER -->
-            <tbody class="table-message" *ngIf="dataProvider.isEmpty() && !dataProvider.isFiltered()" data-automation-id="empty-table">
-                <tr>
-                    <td colspan="100%">
-                        <div #emptymessage><ng-content select="[table-empty-message]"></ng-content></div>
-                        <div class="table-empty-message" *ngIf="emptymessage.childNodes.length == 0">
-                            <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            <!-- NO MATCHING RECORDS -->
-            <tbody class="table-message" *ngIf="dataProvider.isEmpty() && dataProvider.isFiltered()" data-automation-id="empty-table">
-                <tr>
-                    <td colspan="100%">
-                        <div #nomatchmessage><ng-content select="[table-no-matching-records-message]"></ng-content></div>
-                        <div class="no-matching-records" *ngIf="nomatchmessage.childNodes.length == 0">
-                            <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            <!-- TABLE DATA ERROR PLACEHOLDER -->
-            <tbody class="table-message" *ngIf="dataProvider.hasErrors()" data-automation-id="table-errors">
-                <tr>
-                    <td colspan="100%">
-                        <div #errormessage><ng-content select="[table-error-message]"></ng-content></div>
-                        <div class="table-error-message" *ngIf="errormessage.childNodes.length == 0">
-                            <h4><i class="bhi-caution"></i> {{ labels.erroredTableMessage }}</h4>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            <!-- TABLE LOADING PLACEHOLDER -->
-            <tbody class="table-message" *ngIf="dataProvider.isLoading()" data-automation-id="table-loading">
-                <tr>
-                    <td colspan="100%">
-                        <div #loader><ng-content select="[table-loader]"></ng-content></div>
-                        <div class="table-loading" *ngIf="loader.childNodes.length == 0">
-                            <novo-loading></novo-loading>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                </tbody>
+                <!-- NO MATCHING RECORDS -->
+                <tbody class="table-message" *ngIf="dataProvider.isEmpty() && dataProvider.isFiltered()" data-automation-id="empty-table">
+                    <tr>
+                        <td colspan="100%">
+                            <div #nomatchmessage><ng-content select="[table-no-matching-records-message]"></ng-content></div>
+                            <div class="no-matching-records" *ngIf="nomatchmessage.childNodes.length == 0">
+                                <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <!-- TABLE DATA ERROR PLACEHOLDER -->
+                <tbody class="table-message" *ngIf="dataProvider.hasErrors()" data-automation-id="table-errors">
+                    <tr>
+                        <td colspan="100%">
+                            <div #errormessage><ng-content select="[table-error-message]"></ng-content></div>
+                            <div class="table-error-message" *ngIf="errormessage.childNodes.length == 0">
+                                <h4><i class="bhi-caution"></i> {{ labels.erroredTableMessage }}</h4>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <!-- TABLE LOADING PLACEHOLDER -->
+                <tbody class="table-message" *ngIf="dataProvider.isLoading()" data-automation-id="table-loading">
+                    <tr>
+                        <td colspan="100%">
+                            <div #loader><ng-content select="[table-loader]"></ng-content></div>
+                            <div class="table-loading" *ngIf="loader.childNodes.length == 0">
+                                <novo-loading></novo-loading>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="100%">
+                            <ng-content select="novo-table-footer"></ng-content>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </novo-form>
     </div>
     `
 })
-export class NovoTableElement implements DoCheck {
+export class NovoTableElement implements DoCheck, OnInit {
     @Input() config: any = {};
     @Input() columns: Array<any>;
     @Input() theme: string;
     @Input() skipSortAndFilterClear: boolean = false;
+    @Input() mode: NovoTableMode = NovoTableMode.VIEW;
 
     @Output() onRowClick: EventEmitter<any> = new EventEmitter();
     @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
@@ -222,6 +247,8 @@ export class NovoTableElement implements DoCheck {
     // Used to properly *ngIf the <list> so that the keepFilterFocused Directive
     // will properly fire the ngAfterViewInit event
     toggledDropdownMap: any = {};
+    public NovoTableMode = NovoTableMode;
+    public tableForm: FormGroup = new FormGroup({});
 
     @Input()
     set rows(rows: Array<any>) {
@@ -251,6 +278,20 @@ export class NovoTableElement implements DoCheck {
                         this.pageSelected = this.pagedData.filter(r => r._selected);
                         this.rowSelectHandler();
                     }
+                    // Make a form for each row
+                    let columnControls = this.columns.filter(column => !Helpers.isBlank(column.editor)).map(column => column.editor);
+                    let BLAH = <FormArray>this.tableForm.controls['rows'];
+                    this._rows.forEach((row, index) => {
+                        let rowControls = [];
+                        row.controls = {};
+                        for (let i = 0; i < columnControls.length; i++) {
+                            let control = Object.assign({}, columnControls[i]);
+                            row.controls[columnControls[i].key] = control;
+                            rowControls.push(control);
+                        }
+                        this.formUtils.setInitialValues(rowControls, row, false);
+                        BLAH.push(this.formUtils.toFormGroup(rowControls));
+                    });
                     break;
                 default:
                     break;
@@ -266,7 +307,23 @@ export class NovoTableElement implements DoCheck {
         return this._dataProvider;
     }
 
-    constructor(public labels: NovoLabelService) { }
+    get editing() {
+        return this.mode === NovoTableMode.EDIT;
+    }
+
+    get formValue() {
+        return this.tableForm.value;
+    }
+
+    constructor(public labels: NovoLabelService, private formUtils: FormUtils, private builder: FormBuilder) { }
+
+    ngOnInit() {
+        // TODO - clear form contorls when paging!!!
+        // TODO - clear form when cancel!!! -- ADD A WAY TO CANCEL
+        this.tableForm = this.builder.group({
+            rows: this.builder.array([])
+        });
+    }
 
     onDropdownToggled(event, column): void {
         this.toggledDropdownMap[column] = event;
@@ -700,5 +757,54 @@ export class NovoTableElement implements DoCheck {
             config.filtering.options = config.filtering.originalOptions;
         }
         this.onFilterChange();
+    }
+
+    setTableEdit(rowNumber?: number, columnNumber?: number) {
+        console.log('SETTING', rowNumber, columnNumber);
+        this.mode = NovoTableMode.EDIT;
+        this._rows.forEach((row, rowIndex) => {
+            row._editing = row._editing || {};
+            this.columns.forEach((column, columnIndex) => {
+                if (Helpers.isBlank(rowNumber) && !Helpers.isBlank(columnNumber)) {
+                    row._editing[column.name] = true;
+                } else if (!Helpers.isBlank(rowNumber) && rowIndex === rowNumber && Helpers.isBlank(columnNumber)) {
+                    row._editing[column.name] = true;
+                } else if (!Helpers.isBlank(rowNumber) && !Helpers.isBlank(columnNumber) && rowIndex === rowNumber && columnIndex === columnNumber) {
+                    row._editing[column.name] = true;
+                } else {
+                    row._editing[column.name] = false;
+                }
+            });
+        });
+        console.log('ROWS', this._rows);
+    }
+
+    setTableView() {
+        this.mode = NovoTableMode.VIEW;
+        this._rows.forEach((row, rowIndex) => {
+            row._editing = row._editing || {};
+            this.columns.forEach((column, columnIndex) => {
+                row._editing[column.name] = false;
+            });
+        });
+        console.log('ROWS', this._rows);
+    }
+
+    // TODO - pass default object
+    // TODO - save - add to provider
+    addEditableRow() {
+        let columnControls = this.columns.filter(column => !Helpers.isBlank(column.editor)).map(column => column.editor);
+        let BLAH = <FormArray>this.tableForm.controls['rows'];
+        let row: any = {};
+        let rowControls = [];
+        row.controls = {};
+        for (let i = 0; i < columnControls.length; i++) {
+            let control = Object.assign({}, columnControls[i]);
+            row.controls[columnControls[i].key] = control;
+            rowControls.push(control);
+        }
+        this.formUtils.setInitialValues(rowControls, row, false);
+        BLAH.push(this.formUtils.toFormGroup(rowControls));
+        this._rows.push(row);
     }
 }

@@ -140,6 +140,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     formattedValue: string = '';
     maxLengthMet: boolean = false;
     characterCount: number = 0;
+    private forceClearSubscription: any;
 
     constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService) {
         super(element);
@@ -148,6 +149,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     get noErrors() {
         return !this.errors && !this.maxLengthMet;
     }
+
     ngOnInit() {
         // Make sure to initially format the time controls
         if (this.control && this.control.value) {
@@ -163,34 +165,34 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
         if (this.control) {
             // Listen to clear events
-            this.control.forceClear.subscribe(() => {
+            this.forceClearSubscription = this.control.forceClear.subscribe(() => {
                 this.clearValue();
             });
-        }
-        // Subscribe to control interactions
-        if (this.control.interactions) {
-            for (let interaction of this.control.interactions) {
-                switch (interaction.event) {
-                    case 'blur':
-                        this.valueChangeSubscription = this.onBlur.subscribe(() => {
-                            this.executeInteraction(interaction);
-                        });
-                        break;
-                    case 'focus':
-                        this.valueChangeSubscription = this.onFocus.subscribe(() => {
-                            this.executeInteraction(interaction);
-                        });
-                        break;
-                    case 'change':
-                        this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
-                            this.executeInteraction(interaction);
-                        });
-                        break;
-                    default:
-                        break;
-                }
-                if (interaction.invokeOnInit) {
-                    this.executeInteraction(interaction);
+            // Subscribe to control interactions
+            if (this.control.interactions) {
+                for (let interaction of this.control.interactions) {
+                    switch (interaction.event) {
+                        case 'blur':
+                            this.valueChangeSubscription = this.onBlur.subscribe(() => {
+                                this.executeInteraction(interaction);
+                            });
+                            break;
+                        case 'focus':
+                            this.valueChangeSubscription = this.onFocus.subscribe(() => {
+                                this.executeInteraction(interaction);
+                            });
+                            break;
+                        case 'change':
+                            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
+                                this.executeInteraction(interaction);
+                            });
+                            break;
+                        default:
+                            break;
+                    }
+                    if (interaction.invokeOnInit) {
+                        this.executeInteraction(interaction);
+                    }
                 }
             }
         }
@@ -209,11 +211,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         if (this.valueChangeSubscription) {
             this.valueChangeSubscription.unsubscribe();
         }
-        super.ngOnDestroy();
-        if (this.control) {
+        if (this.forceClearSubscription) {
             // Un-listen for clear events
-            this.control.forceClear.unsubscribe();
+            this.forceClearSubscription.unsubscribe();
         }
+        super.ngOnDestroy();
     }
 
     get errors() {
