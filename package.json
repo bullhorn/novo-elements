@@ -6,6 +6,7 @@
     "precommit": "npm run lint",
     "clean": "node_modules/.bin/rimraf coverage dist",
     "compile": "ngc -p tsconfig.publish.json",
+    "postinstall": "npm run clean && npm run compile",
     "prepublish": "npm run clean && npm run compile",
     "postpublish": "npm run deploy:gh-pages",
     "lint": "tslint -s node_modules/custom-tslint-formatters/formatters -t grouped \"src/**/*.ts\" \"demo/**/*.ts\"",
