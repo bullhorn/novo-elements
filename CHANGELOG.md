@@ -1,3 +1,18 @@
+<a name="2.0.110"></a>
+## [2.0.110](https://github.com/bullhorn/novo-elements/compare/v2.0.109...v2.0.110) (2017-01-31)
+
+
+### Bug Fixes
+
+* **Table:** When paging is false the start and count values are not set on the dataprovider ([#383](https://github.com/bullhorn/novo-elements/issues/383)) ([e126c59](https://github.com/bullhorn/novo-elements/commit/e126c59))
+
+
+### Features
+
+* **quicknote:** Allow for scrolling ([2ba4d9d](https://github.com/bullhorn/novo-elements/commit/2ba4d9d))
+
+
+
 <a name="2.0.109"></a>
 ## [2.0.109](https://github.com/bullhorn/novo-elements/compare/v2.0.108...v2.0.109) (2017-01-31)
 
