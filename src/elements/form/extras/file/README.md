@@ -11,7 +11,7 @@ The File Input supports single and multiple file input types.  It also has suppo
     size: 64185, // File Size in bytes 
     file: File,  // Reference to the HTML5 File Object
     loading: true  // is the Reader has finished loading the document
-    fileContents: 'iVBORw0KGgoAAAANSUhEUgAAAKEAAACrCAYAAAAOyvzQAAAABmJLR0QA...';
+    fileContent: 'iVBORw0KGgoAAAANSUhEUgAAAKEAAACrCAYAAAAOyvzQAAAABmJLR0QA...';
     dataURL: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKEAAACrCAYAAAAOyvzQAAAABmJLR0QA...';
 };
 ```
