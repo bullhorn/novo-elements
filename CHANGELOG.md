@@ -1,3 +1,20 @@
+<a name="2.0.109"></a>
+## [2.0.109](https://github.com/bullhorn/novo-elements/compare/v2.0.108...v2.0.109) (2017-01-31)
+
+
+### Bug Fixes
+
+* **Control:** Updating the TypeScript definitions and form demo to work with new field interactions ([#375](https://github.com/bullhorn/novo-elements/issues/375)) ([7bb0d7e](https://github.com/bullhorn/novo-elements/commit/7bb0d7e))
+* **Table:** Table filtering should be disabled for all columns if set in config ([#379](https://github.com/bullhorn/novo-elements/issues/379)) ([23e80d5](https://github.com/bullhorn/novo-elements/commit/23e80d5))
+* **Table:** When paging is false the start and count values are not set on the dataprovider ([#382](https://github.com/bullhorn/novo-elements/issues/382)) ([9b08f10](https://github.com/bullhorn/novo-elements/commit/9b08f10))
+
+
+### Features
+
+* **tip-well:** emit event on hide tip ([#378](https://github.com/bullhorn/novo-elements/issues/378)) ([7754792](https://github.com/bullhorn/novo-elements/commit/7754792))
+
+
+
 <a name="2.0.108"></a>
 ## [2.0.108](https://github.com/bullhorn/novo-elements/compare/v2.0.107...v2.0.108) (2017-01-27)
 
