@@ -432,12 +432,13 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
         document.body.appendChild(div);
 
         let style = div.style;
-        let computed = window.getComputedStyle? getComputedStyle(element) : element.currentStyle;  // currentStyle for IE < 9
+        let computed = window.getComputedStyle ? getComputedStyle(element) : element.currentStyle; // currentStyle for IE < 9
 
         // default textarea styles
         style.whiteSpace = 'pre-wrap';
-        if (element.nodeName !== 'INPUT')
-            style.wordWrap = 'break-word';  // only for textarea-s
+        if (element.nodeName !== 'INPUT') {
+            style.wordWrap = 'break-word'; // only for textarea-s
+        }
 
         // position off-screen
         style.position = 'absolute';  // required to return coordinates properly
@@ -451,8 +452,9 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
 
         div.textContent = element.value.substring(0, element.selectionEnd);
         // the second special handling for input type="text" vs textarea: spaces need to be replaced with non-breaking spaces - http://stackoverflow.com/a/13402035/1269037
-        if (element.nodeName === 'INPUT')
+        if (element.nodeName === 'INPUT') {
             div.textContent = div.textContent.replace(/\s/g, '\u00a0');
+        }
 
         let span = document.createElement('span');
         // Wrapping must be replicated *exactly*, including when a long word gets
