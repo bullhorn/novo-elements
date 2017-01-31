@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'novo-tip-well',
@@ -19,6 +19,7 @@ export class NovoTipWellElement implements OnInit {
     @Input() buttonText:string;
     @Input() button:string;
     @Input() icon:string;
+    @Output() confirmed = new EventEmitter();
 
     isActive:boolean = true;
     isLocalStorageEnabled:any;
@@ -65,5 +66,6 @@ export class NovoTipWellElement implements OnInit {
             localStorage.setItem(this.localStorageKey, JSON.stringify(false));
         }
         this.isActive = false;
+        this.confirmed.emit();
     }
 }
