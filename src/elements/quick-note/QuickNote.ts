@@ -19,22 +19,28 @@ const QUICK_NOTE_VALUE_ACCESSOR = {
     providers: [QUICK_NOTE_VALUE_ACCESSOR],
     template: `
         <div class="quick-note-wrapper">
-            <textarea [(ngModel)]="basicNote"
+            <textarea class="quick-note-textarea"
+                      [(ngModel)]="basicNote"
                       (ngModelChange)="onChange($event)"
                       (keyup)="onKeyUp($event)"
                       (keypress)="onKeyPress($event)"
+                      (scroll)="onScroll($event)"
                       (focus)="onFocus($event)"
                       (blur)="onTouched($event)">
             </textarea>
             <div class="quick-note-overlay"
                 [innerHTML]="formattedNote"
-                [attr.placeholder]="placeholder">
+                [attr.placeholder]="placeholder"
+                 #quickNoteOverlay>
             </div>
             <span #results></span>
         </div>
     `
 })
 export class QuickNoteElement extends OutsideClick implements OnInit {
+    // HTML rendered overlay on top of the text area
+    @ViewChild('quickNoteOverlay') public overlay: ElementRef;
+
     // Results container
     @ViewChild('results', { read: ViewContainerRef }) results: ViewContainerRef;
 
@@ -155,6 +161,20 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
                 }
             }, 250);
         }
+        return true;
+    }
+
+    /**
+     * @name onScroll
+     *
+     * @description Keeps the overlay in sync with the text area behind it, that is driving it
+     */
+    onScroll(event) {
+        let maxScroll = this.overlay.nativeElement.scrollHeight - this.overlay.nativeElement.clientHeight;
+        if (event.target.scrollTop <= maxScroll) {
+            this.overlay.nativeElement.scrollTop = event.target.scrollTop;
+        }
+
         return true;
     }
 
