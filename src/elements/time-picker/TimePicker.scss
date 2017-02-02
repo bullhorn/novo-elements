@@ -98,12 +98,12 @@ novo-time-picker {
         }
 
         .analog--ball {
-            height: 42px;
-            width: 42px;
+            height: 37px;
+            width: 37px;
             display: block;
-            right: -2px;
+            right: 8px;
             top: 50%;
-            margin-top: -21px;
+            margin-top: -18px;
             border-radius: 50%;
             position: absolute;
             border: 3px solid $positive;
@@ -191,7 +191,7 @@ novo-time-picker {
             position: absolute;
             height: 32px;
             width: 32px;
-            right: 21px;
+            right: 25px;
             margin-top: -16px;
             border: 2px solid lighten($positive, 10%);
             background: lighten($positive, 10%);
@@ -231,8 +231,8 @@ novo-time-picker {
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1;
-        margin-top: -2px;
-        margin-left: -2px;
+        margin-top: 1px;
+        margin-left: 1px;
         display: block;
         position: absolute;
         background-color: $background;
@@ -328,10 +328,10 @@ novo-time-picker {
 
         .analog--hand--hours {
             .analog--ball {
-                height: 32px;
-                width: 32px;
-                right: 2px;
-                margin-top: -17px;
+                height: 28px;
+                width: 28px;
+                right: 13px;
+                margin-top: -14px;
             }
         }
     }
