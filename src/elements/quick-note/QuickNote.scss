@@ -23,6 +23,7 @@ novo-quick-note,
         right: 0;
         bottom: 0;
         left: 0;
+        padding: 0 0 40px !important;
         &:empty:before {
             content: attr(placeholder);
             display: block;
@@ -36,7 +37,6 @@ novo-quick-note,
         width: 100%;
         border: none;
         overflow: auto;
-        padding: 0 !important;
         &:focus {
             outline: none;
         }
