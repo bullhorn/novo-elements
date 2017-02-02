@@ -26,7 +26,8 @@ const QUICK_NOTE_VALUE_ACCESSOR = {
                       (keypress)="onKeyPress($event)"
                       (scroll)="onScroll($event)"
                       (focus)="onFocus($event)"
-                      (blur)="onTouched($event)">
+                      (blur)="onTouched($event)"
+                      #textArea>
             </textarea>
             <div class="quick-note-overlay"
                 [innerHTML]="formattedNote"
@@ -38,6 +39,9 @@ const QUICK_NOTE_VALUE_ACCESSOR = {
     `
 })
 export class QuickNoteElement extends OutsideClick implements OnInit {
+    // The text area for user input
+    @ViewChild('textArea') public textArea: ElementRef;
+
     // HTML rendered overlay on top of the text area
     @ViewChild('quickNoteOverlay') public overlay: ElementRef;
 
@@ -264,6 +268,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
             this.quickNoteResults.instance.config = this.config;
             this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
         }
+        this.positionResultsDropdown();
     }
 
     /**
@@ -290,7 +295,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
         // Turn off tagging
         this.isTagging = false;
         // Reset focus
-        this.element.nativeElement.querySelector('textarea').focus();
+        this.textArea.nativeElement.focus();
         // Replace searchTerm
         let symbol = this.config.triggers[this.taggingMode];
         this.basicNote = this.replaceLastOccurrence(this.basicNote, this.searchTerm, `${symbol}${selected.label}`);
@@ -346,5 +351,127 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
 
     registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
+    }
+
+    /**
+     * Positions the results dropdown based on the location of the cursor in the text field
+     */
+    private positionResultsDropdown(): void {
+        const DROPDOWN_OFFSET: number = 30; // The distance between the cursor and the dropdown
+        const MIN_MARGIN_TOP: number = DROPDOWN_OFFSET;
+        const MAX_MARGIN_TOP: number = this.overlay.nativeElement.clientHeight;
+
+        let textAreaCoordinates = this.getCaretCoordinates(this.textArea.nativeElement);
+
+        // Take out the scroll so that the dropdown operates properly even if the text area is scrolled down
+        let marginTop: number = textAreaCoordinates.top - this.overlay.nativeElement.scrollTop + DROPDOWN_OFFSET;
+
+        // Check that the margin is within the visible bounds
+        marginTop = Math.max(marginTop, MIN_MARGIN_TOP);
+        marginTop = Math.min(marginTop, MAX_MARGIN_TOP);
+
+        // Set the margin-top of the dropdown
+        this.quickNoteResults.instance.element.nativeElement.style.setProperty('margin-top', marginTop + 'px');
+    }
+
+    /**
+     * Started with: https://github.com/component/textarea-caret-position and modified to fit our framework
+     *
+     * @param element
+     * @returns {{top: number, left: number}}
+     */
+    getCaretCoordinates(element): any {
+        // The properties that we copy into a mirrored div.
+        // Note that some browsers, such as Firefox,
+        // do not concatenate properties, i.e. padding-top, bottom etc. -> padding,
+        // so we have to do every single property specifically.
+        let properties = [
+            'direction',  // RTL support
+            'boxSizing',
+            'width',  // on Chrome and IE, exclude the scrollbar, so the mirror div wraps exactly as the textarea does
+            'height',
+            'overflowX',
+            'overflowY',  // copy the scrollbar for IE
+
+            'borderTopWidth',
+            'borderRightWidth',
+            'borderBottomWidth',
+            'borderLeftWidth',
+            'borderStyle',
+
+            'paddingTop',
+            'paddingRight',
+            'paddingBottom',
+            'paddingLeft',
+
+            // https://developer.mozilla.org/en-US/docs/Web/CSS/font
+            'fontStyle',
+            'fontVariant',
+            'fontWeight',
+            'fontStretch',
+            'fontSize',
+            'fontSizeAdjust',
+            'lineHeight',
+            'fontFamily',
+
+            'textAlign',
+            'textTransform',
+            'textIndent',
+            'textDecoration',  // might not make a difference, but better be safe
+
+            'letterSpacing',
+            'wordSpacing',
+
+            'tabSize',
+            'MozTabSize'
+        ];
+
+        // mirrored div
+        let div = document.createElement('div');
+        div.id = 'input-textarea-caret-position-mirror-div';
+        document.body.appendChild(div);
+
+        let style = div.style;
+        let computed = window.getComputedStyle ? getComputedStyle(element) : element.currentStyle; // currentStyle for IE < 9
+
+        // default textarea styles
+        style.whiteSpace = 'pre-wrap';
+        if (element.nodeName !== 'INPUT') {
+            style.wordWrap = 'break-word'; // only for textarea-s
+        }
+
+        // position off-screen
+        style.position = 'absolute';  // required to return coordinates properly
+
+        // transfer the element's properties to the div
+        properties.forEach(function (prop) {
+            style[prop] = computed[prop];
+        });
+
+        style.overflow = 'hidden';  // for Chrome to not render a scrollbar; IE keeps overflowY = 'scroll'
+
+        div.textContent = element.value.substring(0, element.selectionEnd);
+        // the second special handling for input type="text" vs textarea: spaces need to be replaced with non-breaking spaces - http://stackoverflow.com/a/13402035/1269037
+        if (element.nodeName === 'INPUT') {
+            div.textContent = div.textContent.replace(/\s/g, '\u00a0');
+        }
+
+        let span = document.createElement('span');
+        // Wrapping must be replicated *exactly*, including when a long word gets
+        // onto the next line, with whitespace at the end of the line before (#7).
+        // The  *only* reliable way to do that is to copy the *entire* rest of the
+        // textarea's content into the <span> created at the caret position.
+        // for inputs, just '.' would be enough, but why bother?
+        span.textContent = element.value.substring(element.selectionEnd) || '.';  // || because a completely empty faux span doesn't render at all
+        div.appendChild(span);
+
+        let coordinates = {
+            top: span.offsetTop + parseInt(computed['borderTopWidth']),
+            left: span.offsetLeft + parseInt(computed['borderLeftWidth'])
+        };
+
+        document.body.removeChild(div);
+
+        return coordinates;
     }
 }
