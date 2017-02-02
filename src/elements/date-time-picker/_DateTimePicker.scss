@@ -521,12 +521,12 @@ novo-date-time-picker {
         }
 
         .analog--ball {
-            height: 42px;
-            width: 42px;
+            height: 34px;
+            width: 34px;
             display: block;
-            right: -2px;
+            right: 9px;
             top: 50%;
-            margin-top: -21px;
+            margin-top: -17px;
             border-radius: 50%;
             position: absolute;
             border: 3px solid $positive;
@@ -612,10 +612,10 @@ novo-date-time-picker {
             top: 50%;
             border-radius: 50%;
             position: absolute;
-            height: 32px;
-            width: 32px;
-            right: 21px;
-            margin-top: -16px;
+            height: 30px;
+            width: 30px;
+            right: 26px;
+            margin-top: -15px;
             border: 2px solid lighten($positive, 10%);
             background: lighten($positive, 10%);
             transition: all 160ms ease-in-out;
@@ -654,8 +654,8 @@ novo-date-time-picker {
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1;
-        margin-top: -2px;
-        margin-left: -2px;
+        margin-top: -1px;
+        margin-left: -1px;
         display: block;
         position: absolute;
         background-color: $background;
