@@ -263,6 +263,7 @@ export class NovoTableElement implements DoCheck {
         if (dp && dp.length > 0) {
             this.setupColumnDefaults();
         }
+        this._dataProvider.refresh();
     }
     get dataProvider() {
         return this._dataProvider;
