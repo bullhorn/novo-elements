@@ -1,3 +1,13 @@
+<a name="2.0.112"></a>
+## [2.0.112](https://github.com/bullhorn/novo-elements/compare/v2.0.111...v2.0.112) (2017-02-02)
+
+
+### Bug Fixes
+
+* **table:** Make sure to refresh when setting a new data provider ([32c751c](https://github.com/bullhorn/novo-elements/commit/32c751c))
+
+
+
 <a name="2.0.111"></a>
 ## [2.0.111](https://github.com/bullhorn/novo-elements/compare/v2.0.110...v2.0.111) (2017-02-02)
 
