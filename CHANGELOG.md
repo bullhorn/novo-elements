@@ -1,3 +1,13 @@
+<a name="2.0.113"></a>
+## [2.0.113](https://github.com/bullhorn/novo-elements/compare/v2.0.112...v2.0.113) (2017-02-02)
+
+
+### Bug Fixes
+
+* **table:** fixing default page size of there is no paging ([877e48e](https://github.com/bullhorn/novo-elements/commit/877e48e))
+
+
+
 <a name="2.0.112"></a>
 ## [2.0.112](https://github.com/bullhorn/novo-elements/compare/v2.0.111...v2.0.112) (2017-02-02)
 
