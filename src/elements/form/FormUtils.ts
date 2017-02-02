@@ -69,6 +69,7 @@ export class NovoFormControl extends FormControl {
             this.hasRequiredValidator = this.required;
         } else if (!this.required && this.hasRequiredValidator) {
             let validators: any = [...this.validators];
+            validators = validators.filter(val => val !== Validators.required);
             this.setValidators(validators);
             this.updateValueAndValidity();
             this.hasRequiredValidator = this.required;
@@ -194,7 +195,8 @@ export class FormUtils {
             config: null,
             options: null,
             interactions: field.interactions,
-            dataSpecialization: field.dataSpecialization
+            dataSpecialization: field.dataSpecialization,
+            description: field.description || ''
         };
         let optionsConfig = this.getControlOptions(field, http, config);
 
