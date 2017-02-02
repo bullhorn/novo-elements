@@ -1,3 +1,13 @@
+<a name="2.0.111"></a>
+## [2.0.111](https://github.com/bullhorn/novo-elements/compare/v2.0.110...v2.0.111) (2017-02-02)
+
+
+### Features
+
+* **quicknote:** Position picker under mouse caret ([a087717](https://github.com/bullhorn/novo-elements/commit/a087717))
+
+
+
 <a name="2.0.110"></a>
 ## [2.0.110](https://github.com/bullhorn/novo-elements/compare/v2.0.109...v2.0.110) (2017-01-31)
 
