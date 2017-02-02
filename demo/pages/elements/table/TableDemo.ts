@@ -101,22 +101,23 @@ export class ActionsCell extends BaseRenderer {
     template: template
 })
 export class TableDemoComponent implements OnInit {
-    private TableDemoTpl: string = TableDemoTpl;
-    private DetailsTableDemoTpl: string = DetailsTableDemoTpl;
-    private SelectAllTableDemoTpl: string = SelectAllTableDemoTpl;
-    private MovieTableDemoTpl: string = MovieTableDemoTpl;
-    private customRowOptions: Array<any> = [
+    public TableDemoTpl: string = TableDemoTpl;
+    public DetailsTableDemoTpl: string = DetailsTableDemoTpl;
+    public SelectAllTableDemoTpl: string = SelectAllTableDemoTpl;
+    public MovieTableDemoTpl: string = MovieTableDemoTpl;
+    public customRowOptions: Array<any> = [
         { label: '10', value: 10 },
         { label: '20', value: 20 },
         { label: '30', value: 30 },
         { label: '40', value: 40 }
     ];
-    private theme: string;
-    private basic: any;
-    private details: any;
+    public theme: string;
+    public basic: any;
+    public details: any;
     private selectAll: any;
-    private remote: any;
-    private editable: any;
+    public remote: any;
+    public editable: any;
+    public editableNewRowDefault: any = { name: 'Default', jobType: 'Contract' };
 
     constructor() {
         let columns = [
@@ -260,13 +261,13 @@ export class TableDemoComponent implements OnInit {
             columns: [
                 { title: 'Name', name: 'name', ordering: true, filtering: true, editor: new TextBoxControl({ key: 'name' }) },
                 { title: 'Job Type', name: 'jobType', ordering: true, filtering: true, editor: new SelectControl({ key: 'jobType', options: ['Freelance', 'Contract', 'Billable'] }) },
-                { title: 'Rate', name: 'rate', ordering: true, filtering: true, editor: new TextBoxControl({ key: 'rate', type: 'currency' }) },
-                { title: 'Not Edit', name: 'nope' }
+                { title: 'Rate', name: 'rate', ordering: true, filtering: true, editor: new TextBoxControl({ key: 'rate', type: 'currency', required: true }) },
+                { title: 'Rating', name: 'rating' }
             ],
             rows: [
-                { name: 'Joshua Godi', jobType: 'Freelance', rate: null, nope: 'Hi' },
-                { name: 'Brian Kimball', jobType: 'Contact', rate: 100, nope: 'Hi' },
-                { name: 'Kameron Sween', jobType: 'Billable', rate: 1000, nope: 'Hi' }
+                { id: 1, name: 'Joshua Godi', jobType: 'Freelance', rate: null, rating: 'High' },
+                { id: 2, name: 'Brian Kimball', jobType: 'Contact', rate: 100, rating: 'High' },
+                { id: 3, name: 'Kameron Sween', jobType: 'Billable', rate: 1000, rating: 'High' }
             ],
             config: {
                 paging: {
@@ -310,6 +311,7 @@ export class TableDemoComponent implements OnInit {
     }
 
     save(table: any) {
+        // table.commitChanges();
         console.log('SAVING', table.formValue);
         table.setTableView();
     }

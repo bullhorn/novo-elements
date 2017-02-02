@@ -43,6 +43,20 @@ novo-table {
     novo-table-footer {
         display: flex;
     }
+    // Disable all filtering/sorting/pagination IF we are editing
+    &.editing {
+        th .th-title,
+        th novo-dropdown,
+        novo-pagination h5,
+        novo-pagination novo-select,
+        novo-pagination ul.pager {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        novo-control {
+            margin-top: 0 !important;
+        }
+    }
 }
 
 

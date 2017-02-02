@@ -49,7 +49,8 @@ export class NovoTableFooterElement {
 @Component({
     selector: 'novo-table',
     host: {
-        '[attr.theme]': 'theme'
+        '[attr.theme]': 'theme',
+        '[class.editing]': 'mode === NovoTableMode.EDIT'
     },
     template: `
         <header *ngIf="columns.length">
@@ -152,8 +153,8 @@ export class NovoTableFooterElement {
                                     <novo-checkbox [(ngModel)]="row._selected" (ngModelChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></novo-checkbox>
                                 </td>
                                 <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name">
-                                    <novo-table-cell *ngIf="!column.editor || mode === NovoTableMode.VIEW" [hasEditor]="!!column.editor" [column]="column" [row]="row" [form]="tableForm.controls.rows.controls[i]"></novo-table-cell>
-                                    <novo-control *ngIf="column.editor && mode === NovoTableMode.EDIT" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]"></novo-control>
+                                    <novo-table-cell *ngIf="!column.editor || !row._editing[column.name]" [hasEditor]="!!column.editor" [column]="column" [row]="row" [form]="tableForm.controls.rows.controls[i]"></novo-table-cell>
+                                    <novo-control *ngIf="column.editor && row._editing[column.name]" condensed="true" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]"></novo-control>
                                 </td>
                             </tr>
                             <tr class="details-row" *ngIf="config.hasDetails" [hidden]="!row._expanded" [attr.data-automation-id]="'details-row-'+row.id">
@@ -280,17 +281,18 @@ export class NovoTableElement implements DoCheck, OnInit {
                     }
                     // Make a form for each row
                     let columnControls = this.columns.filter(column => !Helpers.isBlank(column.editor)).map(column => column.editor);
-                    let BLAH = <FormArray>this.tableForm.controls['rows'];
+                    let tableFormRows = <FormArray>this.tableForm.controls['rows'];
                     this._rows.forEach((row, index) => {
                         let rowControls = [];
                         row.controls = {};
+                        row._editing = {};
                         for (let i = 0; i < columnControls.length; i++) {
                             let control = Object.assign({}, columnControls[i]);
                             row.controls[columnControls[i].key] = control;
                             rowControls.push(control);
                         }
                         this.formUtils.setInitialValues(rowControls, row, false);
-                        BLAH.push(this.formUtils.toFormGroup(rowControls));
+                        tableFormRows.push(this.formUtils.toFormGroup(rowControls));
                     });
                     break;
                 default:
@@ -423,11 +425,9 @@ export class NovoTableElement implements DoCheck, OnInit {
      * @param column
      */
     onFilterClear(column) {
-        // if (column.filter && column.filter.startDate) {
-        //     column.filter = { startDate: null, endDate: null };
-        // }
         setTimeout(() => {
             column.filter = null;
+            column.freeTextFilter = null;
             this.onFilterChange();
         });
     }
@@ -760,23 +760,21 @@ export class NovoTableElement implements DoCheck, OnInit {
     }
 
     setTableEdit(rowNumber?: number, columnNumber?: number) {
-        console.log('SETTING', rowNumber, columnNumber);
         this.mode = NovoTableMode.EDIT;
         this._rows.forEach((row, rowIndex) => {
             row._editing = row._editing || {};
             this.columns.forEach((column, columnIndex) => {
-                if (Helpers.isBlank(rowNumber) && !Helpers.isBlank(columnNumber)) {
+                if (Helpers.isEmpty(rowNumber) && Helpers.isEmpty(columnNumber)) {
                     row._editing[column.name] = true;
-                } else if (!Helpers.isBlank(rowNumber) && rowIndex === rowNumber && Helpers.isBlank(columnNumber)) {
+                } else if (!Helpers.isEmpty(rowNumber) && rowIndex === Number(rowNumber) && Helpers.isEmpty(columnNumber)) {
                     row._editing[column.name] = true;
-                } else if (!Helpers.isBlank(rowNumber) && !Helpers.isBlank(columnNumber) && rowIndex === rowNumber && columnIndex === columnNumber) {
+                } else if (!Helpers.isEmpty(rowNumber) && !Helpers.isEmpty(columnNumber) && rowIndex === Number(rowNumber) && columnIndex === Number(columnNumber)) {
                     row._editing[column.name] = true;
                 } else {
                     row._editing[column.name] = false;
                 }
             });
         });
-        console.log('ROWS', this._rows);
     }
 
     setTableView() {
@@ -787,24 +785,38 @@ export class NovoTableElement implements DoCheck, OnInit {
                 row._editing[column.name] = false;
             });
         });
-        console.log('ROWS', this._rows);
     }
 
     // TODO - pass default object
     // TODO - save - add to provider
-    addEditableRow() {
+    addEditableRow(defaultValue: any = {}) {
         let columnControls = this.columns.filter(column => !Helpers.isBlank(column.editor)).map(column => column.editor);
-        let BLAH = <FormArray>this.tableForm.controls['rows'];
+        let tableFormRows = <FormArray>this.tableForm.controls['rows'];
         let row: any = {};
         let rowControls = [];
         row.controls = {};
+        row._editing = {};
         for (let i = 0; i < columnControls.length; i++) {
             let control = Object.assign({}, columnControls[i]);
             row.controls[columnControls[i].key] = control;
+            row._editing[columnControls[i].key] = true;
             rowControls.push(control);
         }
-        this.formUtils.setInitialValues(rowControls, row, false);
-        BLAH.push(this.formUtils.toFormGroup(rowControls));
+        this.formUtils.setInitialValues(rowControls, defaultValue, false);
+        tableFormRows.push(this.formUtils.toFormGroup(rowControls));
         this._rows.push(row);
+    }
+
+    getDirtyForm() {
+        // VALIDATE - show any errors
+        // RETURN ERRORS
+        // GRAB ROW THAT CHANGE
+        // GRAB COLUMNS THAT CHANGE
+        // RETURN ROWS with ID/KEY and ONLY THINGS THAT ARE DIRTY
+        // return { rows: [{ id, }] };
+    }
+
+    cancelEdit() {
+        // Put form back!
     }
 }

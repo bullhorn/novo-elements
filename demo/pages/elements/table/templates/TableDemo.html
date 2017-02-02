@@ -9,7 +9,7 @@
         </div>
     </novo-table-header>
     <novo-table-footer class="demo-custom-footer" [class.editing]="table.editing">
-        <button theme="dialogue" icon="addcard" side="left" *ngIf="table.editing" (click)="table.addEditableRow()">Add Row</button>
+        <button theme="dialogue" icon="addcard" side="left" *ngIf="table.editing" (click)="table.addEditableRow(editableNewRowDefault)">Add Row</button>
     </novo-table-footer>
     <div classs="table-message" table-empty-message><i class="bhi-search-question"></i> Custom Empty State Template! Click RELOAD to get Data!</div>
     <div classs="table-message" table-no-matching-records-message><i class="bhi-search-question"></i> Custom No Matched Records</div>

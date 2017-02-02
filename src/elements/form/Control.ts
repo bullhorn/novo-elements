@@ -14,11 +14,11 @@ import { Helpers } from './../../utils/Helpers';
     template: `
         <div class="novo-control-container" [formGroup]="form" [hidden]="form?.controls[control.key]?.hidden || control.type === 'hidden' || control.controlType === 'hidden'">
             <!--Label (for horizontal)-->
-            <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical'">{{control.label}}</label>
+            <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && control.label && !condensed">{{control.label}}</label>
             <div class="novo-control-input-container">
                 <!--Label (for vertical)-->
                 <label
-                    *ngIf="form.layout === 'vertical'"
+                    *ngIf="form.layout === 'vertical' && control.label && !condensed"
                     class="novo-control-label"
                     [attr.for]="control.key"
                     [class.novo-control-empty]="!hasValue"
@@ -29,7 +29,7 @@ import { Helpers } from './../../utils/Helpers';
                     {{control.label}}
                 </label>
                 <!--Required Indicator-->
-                <i [hidden]="!form?.controls[control.key]?.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
+                <i [hidden]="!form?.controls[control.key]?.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form?.controls[control.key]?.required"></i>
                 <!--Form Controls-->
                 <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType" [attr.data-automation-id]="control.key">
                     <!--Text-based Inputs-->
@@ -96,7 +96,7 @@ import { Helpers } from './../../utils/Helpers';
                 </div>
             </div>
             <!--Error Message-->
-            <div class="error-message">
+            <div class="error-message" *ngIf="!condensed">
                 <span class="error-text" *ngIf="noErrors"></span>
                 <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
                 <span class="error-text" *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
@@ -120,6 +120,7 @@ import { Helpers } from './../../utils/Helpers';
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy {
     @Input() control;
     @Input() form: NovoFormGroup;
+    @Input() condensed: boolean = false;
     @Output() change: EventEmitter<any> = new EventEmitter();
 
     valueChangeSubscription: any;
