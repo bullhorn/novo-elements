@@ -1365,7 +1365,7 @@ th {
 
 html {
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   color: #3D464D; }
 
 h1 {
@@ -6079,12 +6079,12 @@ novo-time-picker {
       position: absolute;
       transform: rotate(90deg); }
     novo-time-picker .analog--hand--hours .analog--ball {
-      height: 42px;
-      width: 42px;
+      height: 37px;
+      width: 37px;
       display: block;
-      right: -2px;
+      right: 8px;
       top: 50%;
-      margin-top: -21px;
+      margin-top: -18px;
       border-radius: 50%;
       position: absolute;
       border: 3px solid #4A89DC;
@@ -6142,7 +6142,7 @@ novo-time-picker {
       position: absolute;
       height: 32px;
       width: 32px;
-      right: 21px;
+      right: 25px;
       margin-top: -16px;
       border: 2px solid #75a5e4;
       background: #75a5e4;
@@ -6279,8 +6279,8 @@ novo-time-picker {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
-    margin-top: -2px;
-    margin-left: -2px;
+    margin-top: 1px;
+    margin-left: 1px;
     display: block;
     position: absolute;
     background-color: #f4f4f4; }
@@ -6542,10 +6542,10 @@ novo-time-picker {
   novo-time-picker.military .analog--hand--minutes {
     margin: 10px; }
   novo-time-picker.military .analog--hand--hours .analog--ball {
-    height: 32px;
-    width: 32px;
-    right: 2px;
-    margin-top: -17px; }
+    height: 28px;
+    width: 28px;
+    right: 13px;
+    margin-top: -14px; }
 
 novo-date-time-picker {
   display: block;
@@ -6939,12 +6939,12 @@ novo-date-time-picker {
       position: absolute;
       transform: rotate(90deg); }
     novo-date-time-picker .analog--hand--hours .analog--ball {
-      height: 42px;
-      width: 42px;
+      height: 34px;
+      width: 34px;
       display: block;
-      right: -2px;
+      right: 9px;
       top: 50%;
-      margin-top: -21px;
+      margin-top: -17px;
       border-radius: 50%;
       position: absolute;
       border: 3px solid #4A89DC;
@@ -7000,10 +7000,10 @@ novo-date-time-picker {
       top: 50%;
       border-radius: 50%;
       position: absolute;
-      height: 32px;
-      width: 32px;
-      right: 21px;
-      margin-top: -16px;
+      height: 30px;
+      width: 30px;
+      right: 26px;
+      margin-top: -15px;
       border: 2px solid #75a5e4;
       background: #75a5e4;
       transition: all 160ms ease-in-out; }
@@ -7139,8 +7139,8 @@ novo-date-time-picker {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
-    margin-top: -2px;
-    margin-left: -2px;
+    margin-top: -1px;
+    margin-left: -1px;
     display: block;
     position: absolute;
     background-color: #f4f4f4; }
@@ -11102,7 +11102,7 @@ main.main-content {
   main.main-content pre {
     margin: 0 0 35px;
     box-sizing: border-box;
-    font-size: 0.8em;
+    font-size: 0.9em;
     background: #F8F8F8;
     border: 1px solid #E9EAEA;
     color: #4C545A; }
@@ -11632,92 +11632,92 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-candidate {
-      background: #44BB77;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-navigation {
-      background: #2F384F;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-lead {
-      background: #AA6699;
-      width: 26px;
-      height: 26px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-submission {
-      background: #747884;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 36px;
-      height: 36px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
       width: 45px;
       height: 45px; }
-    color header .background-boxes .bb-task {
-      background: #747884;
+    color header .background-boxes .bb-candidate {
+      background: #44BB77;
       width: 40px;
       height: 40px; }
-    color header .background-boxes .bb-distributionList {
-      background: #747884;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
+    color header .background-boxes .bb-navigation {
+      background: #2F384F;
       width: 42px;
       height: 42px; }
+    color header .background-boxes .bb-lead {
+      background: #AA6699;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-submission {
+      background: #747884;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 44px;
+      height: 44px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-task {
+      background: #747884;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-distributionList {
+      background: #747884;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 26px;
+      height: 26px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 27px;
-      height: 27px; }
+      width: 26px;
+      height: 26px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 31px;
-      height: 31px; }
+      width: 26px;
+      height: 26px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -12645,4 +12645,4 @@ popover-demo .example.popover-demo {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.3a855ed8f95f9a4ca5e1.bundle.map*/
+/*# sourceMappingURL=main.c40c8b5ff65e812aa898.bundle.map*/
