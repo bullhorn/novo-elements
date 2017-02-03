@@ -9,15 +9,9 @@ let DetailsTableDemoTpl = require('./templates/DetailsTableDemo.html');
 let SelectAllTableDemoTpl = require('./templates/SelectAllTableDemo.html');
 let MovieTableDemoTpl = require('./templates/MovieTableDemo.html');
 let TotalFooterTableDemoTpl = require('./templates/TotalFooterTableDemo.html');
-// Vendor
-import {
-    FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
-    QuickNoteControl, TilesControl, DateControl, TimeControl, DateTimeControl,
-    PickerControl, SelectControl
-} from './../../../../index';
 
 // Vendor
-import { DateCell, BaseRenderer, NovoTableElement } from './../../../../index';
+import { DateCell, BaseRenderer, NovoTableElement, NovoTableConfig, TextBoxControl, SelectControl } from './../../../../index';
 
 const template = `
 <div class="container">
@@ -125,6 +119,13 @@ export class ActionsCell extends BaseRenderer {
     }
 }
 
+interface TableDemoConfig {
+    rows?: any[];
+    dataProvider?: any;
+    columns: any[];
+    config: NovoTableConfig;
+}
+
 @Component({
     selector: 'table-demo',
     template: template
@@ -143,12 +144,12 @@ export class TableDemoComponent implements OnInit {
         { label: '40', value: 40 }
     ];
     public theme: string;
-    public basic: any;
-    public details: any;
-    private selectAll: any;
-    public remote: any;
-    public totalFooter: any;
-    public editable: any;
+    public basic: TableDemoConfig;
+    public details: TableDemoConfig;
+    private selectAll: TableDemoConfig;
+    public remote: TableDemoConfig;
+    public totalFooter: TableDemoConfig;
+    public editable: TableDemoConfig;
     public editableNewRowDefault: any = { name: 'Default', jobType: 'Contract' };
 
     constructor() {

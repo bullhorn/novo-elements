@@ -9,6 +9,30 @@ import { CollectionEvent } from './../../services/data-provider/CollectionEvent'
 import { PagedArrayCollection } from './../../services/data-provider/PagedArrayCollection';
 import { PagedCollection } from './../../services/data-provider/PagedCollection';
 
+export interface NovoTableConfig {
+    // Paging config
+    paging?: {
+        current: number, // current page
+        itemsPerPage: number, // items per page
+        onPageChange: Function // function to handle page changing
+    };
+    // Footer config (total footer)
+    footer?: {
+        totalColumns: string[], // string array of columns to total
+        labelColumn: string, // column to use as the "total" label
+        label: string // label to use in the "total" label
+    };
+    filtering?: boolean | any; // Turn on filtering for the table, boolean or function for filtering callback
+    sorting?: boolean | any; // Turn on sorting for the table, boolean or function for sorting callback
+    ordering?: boolean | any; // Turn on ordering for the table, boolean or function for ordering callback
+    resizing?: boolean | any; // Turn on resizing for the table, boolean or function for resizing callback
+    rowSelectionStyle?: string; // Row selection style, checkbox or row
+    rowSelect?: boolean; // Turn on row selection
+    hasDetails?: boolean; // Turn on details row for the table
+    detailsRenderer?: any; // Renderer/component for the details row
+    selectAllEnabled?: boolean; // Allows the table, while in selection mode to have a select all at the top
+}
+
 // TODO - support (1) clicking cell to edit, (2) clicking row to edit, (3) button to trigger full table to edit
 export enum NovoTableMode {
     VIEW = 1,
@@ -250,7 +274,7 @@ export class NovoTableElement implements DoCheck {
     //     ordering: true,
     //     resizing: true
     // };
-    @Input() config: any = {};
+    @Input() config: NovoTableConfig = {};
     @Input() columns: Array<any>;
     @Input() theme: string;
     @Input() skipSortAndFilterClear: boolean = false;

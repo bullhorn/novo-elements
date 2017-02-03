@@ -32,7 +32,7 @@ export { NovoFormExtrasModule } from './src/elements/form/extras/FormExtras.modu
 export { NovoCategoryDropdownModule } from './src/elements/category-dropdown/CategoryDropdown.module';
 export { NovoMultiPickerModule } from './src/elements/multi-picker/MultiPicker.module';
 // Export specific elements that are used in local references and/or view children
-export { NovoTableElement } from './src/elements/table/Table';
+export { NovoTableElement, NovoTableConfig } from './src/elements/table/Table';
 // Export all services
 export { NovoToastService } from './src/elements/toast/ToastService';
 export { NovoModalService } from './src/elements/modal/ModalService';
