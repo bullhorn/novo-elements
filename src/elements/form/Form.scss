@@ -641,6 +641,8 @@ novo-form {
                                     &.novo-control-empty {
                                         display: block;
                                         cursor: text;
+                                        top: 7px;
+                                        bottom: 0;
                                     }
                                     &.novo-control-extra-spacing,
                                     &.novo-control-always-active {
