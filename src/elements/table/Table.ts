@@ -260,8 +260,9 @@ export class NovoTableElement implements DoCheck {
             this._dataProvider.page = this.config.paging.current;
             this._dataProvider.pageSize = this.config.paging.itemsPerPage;
         } else {
+            // Paging turned off, return basically all of the data
             this._dataProvider.page = 1;
-            this._dataProvider.pageSize = Number.MAX_VALUE;
+            this._dataProvider.pageSize = 500;
         }
         if (dp && dp.length > 0) {
             this.setupColumnDefaults();
