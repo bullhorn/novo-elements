@@ -15,7 +15,7 @@ import { Helpers } from './../../utils/Helpers';
         <div class="novo-control-container" [formGroup]="form" [hidden]="form?.controls[control.key]?.hidden || control.type === 'hidden' || control.controlType === 'hidden'">
             <!--Label (for horizontal)-->
             <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && control.label && !condensed">{{control.label}}</label>
-            <div class="novo-control-input-container">
+            <div class="novo-control-outer-container">
                 <!--Label (for vertical)-->
                 <label
                     *ngIf="form.layout === 'vertical' && control.label && !condensed"
@@ -43,7 +43,7 @@ import { Helpers } from './../../utils/Helpers';
                                 <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
                             </div>
                             <!--TextArea-->
-                            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)" (input)="emitChange($event)" [maxlength]="control.maxlength"></textarea>
+                            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength"></textarea>
                             <!--Editor-->
                             <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
                             <!--HTML5 Select-->
@@ -100,26 +100,26 @@ import { Helpers } from './../../utils/Helpers';
                             <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
                         </div>
                     </div>
-                <!--Error Message-->
-                <div class="field-message" *ngIf="errors || showCount || !condensed">
-                    <div class="messages">
-                        <span class="error-text" *ngIf="showFieldMessage"></span>
-                        <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
-                        <span class="error-text" *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
-                        <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
-                        <span class="error-text" *ngIf="errors?.maxlength">Sorry, you have exceeded the maximum character count of {{ control.maxlength }} for this field</span>
-                        <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
-                        <span class="error-text" *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
-                        <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
-                        <span *ngIf="isDirty && errors?.minYear">{{control.label | uppercase}} is not a valid year</span>
-                        <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
-                        <!--Field Hint-->
-                        <span class="description" *ngIf="control.description">
-                            {{ control.description }}
-                        </span>
+                    <!--Error Message-->
+                    <div class="field-message" *ngIf="errors || showCount || control.description || !condensed">
+                        <div class="messages">
+                            <span class="error-text" *ngIf="showFieldMessage"></span>
+                            <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
+                            <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
+                            <span class="error-text" *ngIf="errors?.maxlength">Sorry, you have exceeded the maximum character count of {{ control.maxlength }} for this field</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
+                            <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
+                            <span *ngIf="isDirty && errors?.minYear">{{control.label | uppercase}} is not a valid year</span>
+                            <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
+                            <!--Field Hint-->
+                            <span class="description" *ngIf="control.description">
+                                {{ control.description }}
+                            </span>
+                        </div>
+                        <span class="character-count" [class.error]="errors?.maxlength" *ngIf="showCount">{{ characterCount }}/{{ control.maxlength }}</span>
                     </div>
-                    <span class="character-count" [class.error]="errors?.maxlength" *ngIf="showCount">{{ characterCount }}/{{ control.maxlength }}</span>
-                </div>
                 </div>
             </div>
         </div>
@@ -306,6 +306,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         // Reset the heighte
         event.target.style.height = 'auto';
         event.target.style.height = event.target.value.length > 0 ? `${event.target.scrollHeight - 14}px` : '2rem';
+    }
+
+    handleTextAreaInput(event) {
+        this.resizeTextArea(event);
+        this.emitChange(event);
+        this.restrictKeys(event);
     }
 
     checkMaxLength(event) {

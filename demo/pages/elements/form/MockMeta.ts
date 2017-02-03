@@ -392,6 +392,14 @@ export const MockMeta = {
             ],
             required: true,
             sortOrder: 9000
+        }, {
+            name: 'comments',
+            type: 'textarea',
+            label: 'Comments',
+            required: true,
+            sortOrder: 9010,
+            maxLength: 150,
+            description: 'Comments, Please'
         }
     ]
 };

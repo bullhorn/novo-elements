@@ -170,7 +170,7 @@ novo-form {
                             text-transform: uppercase;
                             padding-top: 8px;
                         }
-                        >div.novo-control-input-container {
+                        >div.novo-control-outer-container {
                             display: flex;
                             align-items: center;
                             max-width: 550px;
@@ -592,28 +592,35 @@ novo-form {
                             align-items: flex-start;
                             position: relative;
                             margin-top: 16px;
-                            .novo-control-input-container {
-                                display: flex;
-                                align-items: center;
+                            .novo-control-outer-container {
+                                // display: flex;
+                                // align-items: center;
                                 max-width: 550px;
                                 width: 100%;
-                                flex-direction: column;
+                                // flex-direction: column;
+                                // position: relative;
+                                label {
+                                  // bottom: 20px;
+                                }
                                 .novo-control-inner-container {
+                                    position: relative;
                                     .novo-control-inner-input-container {
                                         align-items: flex-start;
+                                        position: relative;
                                         i.required-indicator {
-                                            padding-top: 3px;
+                                            padding-top: 10px;
                                         }
                                         .novo-control-input-container.novo-control-input-with-label {
                                             flex-direction: row;
                                             display: flex;
                                             input {
-                                                height: 1.5rem;
+                                                // height: 1.5rem;
                                             }
                                         }
                                     }
                                 }
                                 >label.novo-control-label {
+                                    bottom: 20px;
                                     color: #9e9e9e;
                                     font-size: 0.9em;
                                     font-weight: 500;
@@ -645,6 +652,8 @@ novo-form {
                                         display: block;
                                         padding-bottom: 5px;
                                         transform: translateY(-100%) scale(0.9);
+                                        height: 1.5em;
+                                        top: 0;
                                     }
                                 }
                                 .address,
