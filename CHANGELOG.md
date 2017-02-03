@@ -1,3 +1,13 @@
+<a name="2.0.114"></a>
+## [2.0.114](https://github.com/bullhorn/novo-elements/compare/v2.0.113...v2.0.114) (2017-02-03)
+
+
+### Bug Fixes
+
+* **table:** Cannot use MAX_INT, just set to 500 ([7662dcc](https://github.com/bullhorn/novo-elements/commit/7662dcc))
+
+
+
 <a name="2.0.113"></a>
 ## [2.0.113](https://github.com/bullhorn/novo-elements/compare/v2.0.112...v2.0.113) (2017-02-02)
 
