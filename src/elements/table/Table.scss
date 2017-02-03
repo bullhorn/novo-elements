@@ -1,3 +1,13 @@
+// Variables
+$table-header-font-weight: 400;
+$table-header-font-color: #757575;
+$table-cell-padding: 1.2rem;
+$table-condensed-cell-padding: $table-cell-padding/2;
+$table-bg: #fff;
+$table-bg-accent: #f4f4f4;
+$table-bg-hover: rgba(0, 0, 0, .12);
+$table-bg-active: $table-bg-hover;
+$table-border-color: #f5f5f5; // Tables
 novo-table {
     width: 100%;
     display: block;
@@ -43,6 +53,11 @@ novo-table {
     novo-table-footer {
         display: flex;
     }
+    tfoot.novo-table-total-footer {
+        td {
+            padding: $table-cell-padding;
+        }
+    }
     // Disable all filtering/sorting/pagination IF we are editing
     &.editing {
         th .th-title,
@@ -59,22 +74,6 @@ novo-table {
     }
 }
 
-
-/* -- Material Design Table style -------------- */
-
-// Variables
-// ---------------------
-$table-header-font-weight: 400;
-$table-header-font-color: #757575;
-$table-cell-padding: 1.2rem;
-$table-condensed-cell-padding: $table-cell-padding/2;
-$table-bg: #fff;
-$table-bg-accent: #f4f4f4;
-$table-bg-hover: rgba(0, 0, 0, .12);
-$table-bg-active: $table-bg-hover;
-$table-border-color: #f5f5f5; // Tables
-//
-// -----------------
 // Baseline styles
 .table {
     width: 100%;

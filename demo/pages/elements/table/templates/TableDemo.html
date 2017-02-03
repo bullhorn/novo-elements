@@ -1,17 +1,11 @@
-<novo-table [theme]="theme" [dataProvider]="editable.rows" [columns]="editable.columns" [config]="editable.config" #table>
+<novo-table [theme]="theme" [dataProvider]="basic.rows" [columns]="basic.columns" [config]="basic.config">
     <novo-table-header class="demo-custom-header">
-        <h4>Editable Table</h4>
+        TEST :)
         <div>
-            <input type="text" placeholder="row" #row/>
-            <input type="text" placeholder="column" #column/>
-            <button theme="secondary" (click)="table.setTableEdit(row.value, column.value)" *ngIf="!table.editing">Add/Edit</button>
-            <button theme="primary" (click)="save(table)" *ngIf="table.editing">Save</button>
+            <button theme="secondary" (click)="reload()">Reload Data</button>
+            <button theme="secondary" (click)="changeTheme()">Change Theme!</button>
         </div>
     </novo-table-header>
-    <novo-table-footer class="demo-custom-footer" [class.editing]="table.editing">
-        <button theme="dialogue" icon="addcard" side="left" *ngIf="table.editing" (click)="table.addEditableRow(editableNewRowDefault)">Add Row</button>
-    </novo-table-footer>
     <div classs="table-message" table-empty-message><i class="bhi-search-question"></i> Custom Empty State Template! Click RELOAD to get Data!</div>
     <div classs="table-message" table-no-matching-records-message><i class="bhi-search-question"></i> Custom No Matched Records</div>
 </novo-table>
-<div class="final-value">Table Value: {{table.formValue | json}}</div>

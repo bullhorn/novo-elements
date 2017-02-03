@@ -1,14 +1,15 @@
 // Vendor
-import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, Directive, AfterViewInit, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, Directive, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 // APP
 import { NovoLabelService } from './../../services/novo-label-service';
 import { Helpers } from './../../utils/Helpers';
-import { FormUtils } from './../form/FormUtils';
+import { FormUtils, NovoFormControl } from './../form/FormUtils';
 import { CollectionEvent } from './../../services/data-provider/CollectionEvent';
 import { PagedArrayCollection } from './../../services/data-provider/PagedArrayCollection';
 import { PagedCollection } from './../../services/data-provider/PagedCollection';
 
+// TODO - support (1) clicking cell to edit, (2) clicking row to edit, (3) button to trigger full table to edit
 export enum NovoTableMode {
     VIEW = 1,
     EDIT = 2
@@ -66,6 +67,7 @@ export class NovoTableFooterElement {
                 <ng-content select="novo-table-actions"></ng-content>
             </div>
         </header>
+        <novo-toast *ngIf="toast" [theme]="toast.theme" [icon]="toast.icon" [message]="toast.message"></novo-toast>
         <div class="table-container">
             <novo-form hideHeader="true" [form]="tableForm">
                 <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
@@ -209,11 +211,16 @@ export class NovoTableFooterElement {
                         </td>
                     </tr>
                 </tbody>
-                <tfoot>
+                <tfoot *ngIf="!config.footer">
                     <tr>
                         <td colspan="100%">
                             <ng-content select="novo-table-footer"></ng-content>
                         </td>
+                    </tr>
+                </tfoot>
+                <tfoot *ngIf="config.footer && totalFooter" class="novo-table-total-footer">
+                    <tr>
+                        <td *ngFor="let column of columns" [attr.data-automation-id]="(column.id || column.name) + '-total'">{{ totalFooter[column.name] }}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -221,7 +228,28 @@ export class NovoTableFooterElement {
     </div>
     `
 })
-export class NovoTableElement implements DoCheck, OnInit {
+export class NovoTableElement implements DoCheck {
+    // Config object for the table, handles global paging/filtering/sorting/ordering/footer
+    // Sample Object
+    // config = {
+    //     paging: {
+    //         current: 1,
+    //         itemsPerPage: 10,
+    //         onPageChange: event => {
+    //             this.basic.config.paging.current = event.page;
+    //             this.basic.config.paging.itemsPerPage = event.itemsPerPage;
+    //         }
+    //     },
+    //     footer: {
+    //         totalColumns: ['count1', 'count2', 'count3'],
+    //         labelColumn: 'name',
+    //         label: 'Total'
+    //     },
+    //     filtering: true,
+    //     sorting: true,
+    //     ordering: true,
+    //     resizing: true
+    // };
     @Input() config: any = {};
     @Input() columns: Array<any>;
     @Input() theme: string;
@@ -250,6 +278,8 @@ export class NovoTableElement implements DoCheck, OnInit {
     toggledDropdownMap: any = {};
     public NovoTableMode = NovoTableMode;
     public tableForm: FormGroup = new FormGroup({});
+    public toast: { theme: string, icon: string, message: string };
+    public totalFooter: any;
 
     @Input()
     set rows(rows: Array<any>) {
@@ -257,11 +287,12 @@ export class NovoTableElement implements DoCheck, OnInit {
         if (rows && rows.length > 0) {
             this.setupColumnDefaults();
         }
-        //this is a temporary/hacky fix until async dataloading is handled within the table
+        // this is a temporary/hacky fix until async dataloading is handled within the table
         if (!this.skipSortAndFilterClear) {
             this.clearAllSortAndFilters();
         }
     }
+
     get rows() {
         return this._rows;
     }
@@ -273,6 +304,10 @@ export class NovoTableElement implements DoCheck, OnInit {
             switch (event.type) {
                 case CollectionEvent.CHANGE:
                     this._rows = event.data;
+                    // Setup form
+                    this.tableForm = this.builder.group({
+                        rows: this.builder.array([])
+                    });
                     // Remove all selection on sort change if selection is on
                     if (this.config.rowSelectionStyle === 'checkbox') {
                         this.pagedData = event.data;
@@ -293,7 +328,29 @@ export class NovoTableElement implements DoCheck, OnInit {
                         }
                         this.formUtils.setInitialValues(rowControls, row, false);
                         tableFormRows.push(this.formUtils.toFormGroup(rowControls));
+                        // Setup the total footer if configured
+                        // Array of keys to total
+                        if (this.config.footer && this.config.footer.totalColumns) {
+                            if (!Array.isArray(this.config.footer.totalColumns)) {
+                                console.warn('Table config for "totalFooter" should be an array of keys to total.. ["key1", "key2"]'); // tslint:disable-line
+                            } else {
+                                // Sum up columns
+                                this.config.footer.totalColumns.forEach(key => {
+                                    if (!this.totalFooter) {
+                                        this.totalFooter = {};
+                                    }
+                                    if (Helpers.isBlank(this.totalFooter[key])) {
+                                        this.totalFooter[key] = 0;
+                                    }
+                                    this.totalFooter[key] += row[key];
+                                });
+                            }
+                        }
                     });
+                    // Set up the label for the total footer
+                    if (this.config.footer && this.config.footer.labelColumn) {
+                        this.totalFooter[this.config.footer.labelColumn] = this.config.footer.label || 'Total';
+                    }
                     break;
                 default:
                     break;
@@ -318,14 +375,6 @@ export class NovoTableElement implements DoCheck, OnInit {
     }
 
     constructor(public labels: NovoLabelService, private formUtils: FormUtils, private builder: FormBuilder) { }
-
-    ngOnInit() {
-        // TODO - clear form contorls when paging!!!
-        // TODO - clear form when cancel!!! -- ADD A WAY TO CANCEL
-        this.tableForm = this.builder.group({
-            rows: this.builder.array([])
-        });
-    }
 
     onDropdownToggled(event, column): void {
         this.toggledDropdownMap[column] = event;
@@ -759,7 +808,17 @@ export class NovoTableElement implements DoCheck, OnInit {
         this.onFilterChange();
     }
 
-    setTableEdit(rowNumber?: number, columnNumber?: number) {
+    /**
+     * @name setTableEdit
+     * @description Sets the Table into EDIT mode, based on the row/column passed you can enter in a few states
+     * (1) setTableEdit() - don't pass any to put the FULL table into edit mode
+     * (2) setTableEdit(1) - pass only row to put that FULL row of the table into edit mode
+     * (3) setTableEdit(1, 1) - pass row and column to put that column of the row of the table into edit mode
+     * @param {number} [rowNumber]
+     * @param {number} [columnNumber]
+     * @memberOf NovoTableElement
+     */
+    setTableEdit(rowNumber?: number, columnNumber?: number): void {
         this.mode = NovoTableMode.EDIT;
         this._rows.forEach((row, rowIndex) => {
             row._editing = row._editing || {};
@@ -777,7 +836,12 @@ export class NovoTableElement implements DoCheck, OnInit {
         });
     }
 
-    setTableView() {
+    /**
+     * @name leaveEditMode
+     * @description Leaves edit mode for the Table and puts everything back to VIEW only
+     * @memberOf NovoTableElement
+     */
+    leaveEditMode(): void {
         this.mode = NovoTableMode.VIEW;
         this._rows.forEach((row, rowIndex) => {
             row._editing = row._editing || {};
@@ -787,9 +851,13 @@ export class NovoTableElement implements DoCheck, OnInit {
         });
     }
 
-    // TODO - pass default object
-    // TODO - save - add to provider
-    addEditableRow(defaultValue: any = {}) {
+    /**
+     * @name addEditableRow
+     * @description Adds a new row into the table to be edited, can be called from a local reference of the table in your template
+     * @param {*} [defaultValue={}]
+     * @memberOf NovoTableElement
+     */
+    addEditableRow(defaultValue: any = {}): void {
         let columnControls = this.columns.filter(column => !Helpers.isBlank(column.editor)).map(column => column.editor);
         let tableFormRows = <FormArray>this.tableForm.controls['rows'];
         let row: any = {};
@@ -807,16 +875,92 @@ export class NovoTableElement implements DoCheck, OnInit {
         this._rows.push(row);
     }
 
-    getDirtyForm() {
-        // VALIDATE - show any errors
-        // RETURN ERRORS
-        // GRAB ROW THAT CHANGE
-        // GRAB COLUMNS THAT CHANGE
-        // RETURN ROWS with ID/KEY and ONLY THINGS THAT ARE DIRTY
-        // return { rows: [{ id, }] };
+    /**
+     * @name validateAndGetUpdatedData
+     * @description Validates the Form inside of the Table, if there are errors it will display/return the errors for each row.
+     * If there are no errors, then it will return ONLY the changed data for each row, the data returned will be in the form:
+     * { id: ID_OF_RECORD, key: value } -- data that was updated
+     * { id: undefined, key: value } -- data that was added
+     * @returns {{ changed?: any[], errors?: { errors: any, row: any, index: number }[] }} - either the changed data or errors!
+     * @memberOf NovoTableElement
+     */
+    validateAndGetUpdatedData(): { changed?: any[], errors?: { errors: any, row: any, index: number }[] } {
+        if (this.tableForm && this.tableForm.controls && this.tableForm.controls['rows']) {
+            let changedRows = [];
+            let errors = [];
+            // Go over the FormArray's controls
+            (this.tableForm.controls['rows'] as FormArray).controls.forEach((formGroup: FormGroup, index: number) => {
+                let changedRow = null;
+                let error = null;
+                // Go over the form group controls
+                Object.keys(formGroup.controls).forEach((key: string) => {
+                    let control = formGroup.controls[key];
+                    // Handle value changing
+                    if (control && control.dirty) {
+                        if (!changedRow) {
+                            // Append the ID, so we have some key to save against
+                            changedRow = {
+                                id: this._rows[index].id
+                            };
+                        }
+                        // If dirty, grab value off the form
+                        changedRow[key] = this.tableForm.value['rows'][index][key];
+                        // Set value back to row (should be already done via the server call, but do it anyway)
+                        this._rows[index][key] = changedRow[key];
+                    } else if (control && control.errors) {
+                        // Handle errors
+                        if (!error) {
+                            error = {};
+                        }
+                        error[key] = control.errors;
+                    }
+                });
+                if (changedRow) {
+                    changedRows.push(changedRow);
+                }
+                if (error) {
+                    errors.push({ errors: error, row: this._rows[index], index: index });
+                }
+            });
+            let ret = {};
+            // Return errors if any, otherwise return the changed rows
+            if (errors.length === 0) {
+                return { changed: changedRows };
+            }
+            return { errors: errors };
+        }
     }
 
-    cancelEdit() {
-        // Put form back!
+    /**
+     * @name cancelEditing
+     * @description Refresh the data provider and leave edit mode
+     * @memberOf NovoTableElement
+     */
+    cancelEditing(): void {
+        this.dataProvider.refresh();
+        this.leaveEditMode();
+    }
+
+    /**
+     * @name displayToastMessage
+     * @description Displays a toast message inside of the table
+     * @param {{ icon: string, theme: string, message: string }} toast
+     * @param {number} [hideDelay]
+     * @memberOf NovoTableElement
+     */
+    displayToastMessage(toast: { icon: string, theme: string, message: string }, hideDelay?: number): void {
+        this.toast = toast;
+        if (hideDelay) {
+            setTimeout(() => this.hideToastMessage(), hideDelay);
+        }
+    }
+
+    /**
+     * @name hideToastMessage
+     * @description Force hide the toast message
+     * @memberOf NovoTableElement
+     */
+    hideToastMessage(): void {
+        this.toast = null;
     }
 }

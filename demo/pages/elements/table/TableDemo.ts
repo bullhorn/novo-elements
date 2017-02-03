@@ -4,9 +4,11 @@ import { Component, OnInit } from '@angular/core';
 import { MovieDataProvider } from './MovieDataProvider';
 import { TableData } from './TableData';
 let TableDemoTpl = require('./templates/TableDemo.html');
+let EditableTableDemoTpl = require('./templates/EditableTableDemo.html');
 let DetailsTableDemoTpl = require('./templates/DetailsTableDemo.html');
 let SelectAllTableDemoTpl = require('./templates/SelectAllTableDemo.html');
 let MovieTableDemoTpl = require('./templates/MovieTableDemo.html');
+let TotalFooterTableDemoTpl = require('./templates/TotalFooterTableDemo.html');
 // Vendor
 import {
     FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
@@ -15,16 +17,43 @@ import {
 } from './../../../../index';
 
 // Vendor
-import { DateCell, BaseRenderer } from './../../../../index';
+import { DateCell, BaseRenderer, NovoTableElement } from './../../../../index';
 
 const template = `
 <div class="container">
+    <h1>Table <small><a target="_blank" href="https://bullhorn.github.io/novo-elements/blob/master/src/elements/table">(source)</a></small></h1>
+    <p>Tables allow users to view date in a tabular format and perform actions such as Sorting and Filtering. Different configuration are possible for pagination or infinite scroll. Feature to be added include: Custom Item Renderers, etc...</p>
+    <h2>Types</h2>
 
     <h5>Basic Table</h5>
     <p>This is the most basic table.</p>
     <div class="example table-demo">${TableDemoTpl}</div>
     <code-snippet [code]="TableDemoTpl"></code-snippet>
 
+    <h5>Details Table</h5>
+    <p>This has a row renderer to show a new details row that is expanded when you click on the action column.</p>
+    <div class="example table-demo">${DetailsTableDemoTpl}</div>
+    <code-snippet [code]="DetailsTableDemoTpl"></code-snippet>
+
+    <h5>Select All Table w/ Custom Actions</h5>
+    <p>This has checkboxes for selection with custom actions.</p>
+    <div class="example table-demo">${SelectAllTableDemoTpl}</div>
+    <code-snippet [code]="SelectAllTableDemoTpl"></code-snippet>
+
+    <h5>Remote Table Provider</h5>
+    <p>This has connects to the OMDB service.</p>
+    <div class="example table-demo">${MovieTableDemoTpl}</div>
+    <code-snippet [code]="MovieTableDemoTpl"></code-snippet>
+
+    <h5>Editable Table</h5>
+    <p>Can be put into edit mode and use editors that are set on the column to modify the data.</p>
+    <div class="example table-demo">${EditableTableDemoTpl}</div>
+    <code-snippet [code]="EditableTableDemoTpl"></code-snippet>
+
+    <h5>Total Footer</h5>
+    <p>If your table has numbered data, you can configure a total footer</p>
+    <div class="example table-demo">${TotalFooterTableDemoTpl}</div>
+    <code-snippet [code]="TotalFooterTableDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -105,6 +134,8 @@ export class TableDemoComponent implements OnInit {
     public DetailsTableDemoTpl: string = DetailsTableDemoTpl;
     public SelectAllTableDemoTpl: string = SelectAllTableDemoTpl;
     public MovieTableDemoTpl: string = MovieTableDemoTpl;
+    public EditableTableDemoTpl: string = EditableTableDemoTpl;
+    public TotalFooterTableDemoTpl: string = TotalFooterTableDemoTpl;
     public customRowOptions: Array<any> = [
         { label: '10', value: 10 },
         { label: '20', value: 20 },
@@ -116,13 +147,14 @@ export class TableDemoComponent implements OnInit {
     public details: any;
     private selectAll: any;
     public remote: any;
+    public totalFooter: any;
     public editable: any;
     public editableNewRowDefault: any = { name: 'Default', jobType: 'Contract' };
 
     constructor() {
         let columns = [
             { title: 'Actions', renderer: ActionsCell },
-            { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true, editor: new TextBoxControl({ key: 'name' }) },
+            { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true },
             { title: 'Position', name: 'position', ordering: true, filtering: true },
             {
                 title: 'Extn.',
@@ -174,7 +206,7 @@ export class TableDemoComponent implements OnInit {
         ];
         this.basic = {
             columns: columns.slice(),
-            rows: TableData.slice(0, 5),
+            rows: [],
             config: {
                 paging: {
                     current: 1,
@@ -284,6 +316,41 @@ export class TableDemoComponent implements OnInit {
                 resizing: true
             }
         };
+
+        this.totalFooter = {
+            columns: [
+                { title: 'Name', name: 'name', ordering: true, filtering: true },
+                { title: 'Count 1', name: 'count1', ordering: true, filtering: true },
+                { title: 'Count 2', name: 'count2', ordering: true, filtering: true },
+                { title: 'Count 3', name: 'count3', ordering: true, filtering: true }
+            ],
+            rows: [
+                { id: 1, name: 'Name 1', count1: 1, count2: 2, count3: 3 },
+                { id: 2, name: 'Name 2', count1: 1, count2: 2, count3: 3 },
+                { id: 3, name: 'Name 3', count1: 1, count2: 2, count3: 3 },
+                { id: 4, name: 'Name 4', count1: 1, count2: 2, count3: 3 },
+                { id: 5, name: 'Name 5', count1: 1, count2: 2, count3: 3 },
+            ],
+            config: {
+                paging: {
+                    current: 1,
+                    itemsPerPage: 10,
+                    onPageChange: event => {
+                        this.basic.config.paging.current = event.page;
+                        this.basic.config.paging.itemsPerPage = event.itemsPerPage;
+                    }
+                },
+                footer: {
+                    totalColumns: ['count1', 'count2', 'count3'],
+                    labelColumn: 'name',
+                    label: 'Mega Total'
+                },
+                filtering: true,
+                sorting: true,
+                ordering: true,
+                resizing: true
+            }
+        };
     }
 
     ngOnInit() {
@@ -310,9 +377,16 @@ export class TableDemoComponent implements OnInit {
         window.alert(`You clicked ${action}!`);
     }
 
-    save(table: any) {
-        // table.commitChanges();
-        console.log('SAVING', table.formValue);
-        table.setTableView();
+    save(table: NovoTableElement) {
+        // Save updated data and get fresh data for the table to reflect the changes!
+        let errorsOrData = table.validateAndGetUpdatedData();
+        if (!errorsOrData.errors) {
+            console.log('SAVING', errorsOrData.changed); // tslint:disable-line
+            table.displayToastMessage({ icon: 'check', theme: 'success', message: 'Saved!' }, 2000);
+        } else {
+            console.log('ERRORS!', errorsOrData.errors); // tslint:disable-line
+            table.displayToastMessage({ icon: 'caution', theme: 'error', message: 'Errors!!' }, 2000);
+        }
+        table.leaveEditMode();
     }
 }

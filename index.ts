@@ -31,7 +31,8 @@ export { NovoFormModule } from './src/elements/form/Form.module';
 export { NovoFormExtrasModule } from './src/elements/form/extras/FormExtras.module';
 export { NovoCategoryDropdownModule } from './src/elements/category-dropdown/CategoryDropdown.module';
 export { NovoMultiPickerModule } from './src/elements/multi-picker/MultiPicker.module';
-
+// Export specific elements that are used in local references and/or view children
+export { NovoTableElement } from './src/elements/table/Table';
 // Export all services
 export { NovoToastService } from './src/elements/toast/ToastService';
 export { NovoModalService } from './src/elements/modal/ModalService';
@@ -42,8 +43,6 @@ export { Collection } from './src/services/data-provider/Collection';
 export { CollectionEvent } from './src/services/data-provider/CollectionEvent';
 export { ArrayCollection } from './src/services/data-provider/ArrayCollection';
 export { PagedArrayCollection } from './src/services/data-provider/PagedArrayCollection';
-//export { DataProvider } from './src/services/data-provider/DataProvider';
-
 // Export classes that will need to be imported
 export { NovoModalParams, NovoModalRef } from './src/elements/modal/Modal';
 export { QuickNoteResults } from './src/elements/quick-note/extras/quick-note-results/QuickNoteResults';
@@ -55,7 +54,6 @@ export { DateCell } from './src/elements/table/extras/date-cell/DateCell';
 export { FormValidators } from './src/elements/form/FormValidators';
 export { FormUtils } from './src/elements/form/FormUtils';
 export * from './src/elements/form/FormControls';
-
 // Utils
 export * from './src/utils/outside-click/OutsideClick';
 export * from './src/utils/key-codes/KeyCodes';
@@ -63,12 +61,9 @@ export * from './src/utils/deferred/Deferred';
 export * from './src/utils/countries/Countries';
 export * from './src/utils/Helpers';
 export * from './src/utils/component-utils/ComponentUtils';
-
 // Providers
 export * from './novo-elements.providers';
-
 // Pipes
 export * from './src/pipes/plural/Plural';
-
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';
