@@ -5,16 +5,15 @@ export interface PagedCollection<T> extends Collection<T> {
     /**
      * The current page number that the paginated collection is "showing".
      */
-    page:number;
+    page: number;
 
     /**
      * The total number of pages in the paginated collection.
      */
-    numberOfPages:number;
+    numberOfPages: number;
 
     /**
-     * The page size to use when paginating the collection. 
+     * The page size to use when paginating the collection.
      */
-    pageSize:number;
-
+    pageSize: number;
 }

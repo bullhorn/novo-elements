@@ -239,7 +239,7 @@ novo-form {
                                     border-bottom: 1px solid #DA4453;
                                 }
                             }
-                            textarea {
+                            textarea:not(.quick-note-textarea) {
                                 overflow-y: hidden !important;
                                 transition: height 0;
                                 background: transparent !important;
@@ -253,20 +253,6 @@ novo-form {
                                 label.input-label {
                                     padding-left: 5px;
                                     color: lighten($dark, 47%);
-                                }
-                            }
-                            >div.novo-control-input-container {
-                                font-size: 1rem;
-                                flex: 1;
-                                position: relative;
-                                >i.bhi-clock,
-                                >i.bhi-search,
-                                >i.bhi-times,
-                                >i.bhi-calendar {
-                                    position: absolute;
-                                    right: 0;
-                                    top: 0;
-                                    font-size: 1.2em;
                                 }
                                 >i.bhi-times {
                                     cursor: pointer;

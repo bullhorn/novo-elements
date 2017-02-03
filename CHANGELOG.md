@@ -1,3 +1,48 @@
+<a name="2.0.113"></a>
+## [2.0.113](https://github.com/bullhorn/novo-elements/compare/v2.0.112...v2.0.113) (2017-02-02)
+
+
+### Bug Fixes
+
+* **table:** fixing default page size of there is no paging ([877e48e](https://github.com/bullhorn/novo-elements/commit/877e48e))
+
+
+
+<a name="2.0.112"></a>
+## [2.0.112](https://github.com/bullhorn/novo-elements/compare/v2.0.111...v2.0.112) (2017-02-02)
+
+
+### Bug Fixes
+
+* **table:** Make sure to refresh when setting a new data provider ([32c751c](https://github.com/bullhorn/novo-elements/commit/32c751c))
+
+
+
+<a name="2.0.111"></a>
+## [2.0.111](https://github.com/bullhorn/novo-elements/compare/v2.0.110...v2.0.111) (2017-02-02)
+
+
+### Features
+
+* **quicknote:** Position picker under mouse caret ([a087717](https://github.com/bullhorn/novo-elements/commit/a087717))
+
+
+
+<a name="2.0.110"></a>
+## [2.0.110](https://github.com/bullhorn/novo-elements/compare/v2.0.109...v2.0.110) (2017-01-31)
+
+
+### Bug Fixes
+
+* **Table:** When paging is false the start and count values are not set on the dataprovider ([#383](https://github.com/bullhorn/novo-elements/issues/383)) ([e126c59](https://github.com/bullhorn/novo-elements/commit/e126c59))
+
+
+### Features
+
+* **quicknote:** Allow for scrolling ([2ba4d9d](https://github.com/bullhorn/novo-elements/commit/2ba4d9d))
+
+
+
 <a name="2.0.109"></a>
 ## [2.0.109](https://github.com/bullhorn/novo-elements/compare/v2.0.108...v2.0.109) (2017-01-31)
 

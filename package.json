@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "2.0.109",
+  "version": "2.0.113",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
     "precommit": "npm run lint",
@@ -139,7 +139,6 @@
     "ts-node": "1.7.0",
     "tslint": "3.15.1",
     "tslint-loader": "2.1.5",
-    "typedoc": "0.5.1",
     "typescript": "2.0.10",
     "url-loader": "0.5.7",
     "webpack": "2.1.0-beta.27",

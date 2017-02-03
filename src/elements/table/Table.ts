@@ -356,11 +356,17 @@ export class NovoTableElement implements DoCheck {
                     break;
             }
         });
-        this._dataProvider.page = this.config.paging ? this.config.paging.current : 0;
-        this._dataProvider.pageSize = this.config.paging ? this.config.paging.itemsPerPage : 0;
+        if (this.config.paging) {
+            this._dataProvider.page = this.config.paging.current;
+            this._dataProvider.pageSize = this.config.paging.itemsPerPage;
+        } else {
+            this._dataProvider.page = 1;
+            this._dataProvider.pageSize = Number.MAX_VALUE;
+        }
         if (dp && dp.length > 0) {
             this.setupColumnDefaults();
         }
+        this._dataProvider.refresh();
     }
     get dataProvider() {
         return this._dataProvider;
