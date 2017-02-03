@@ -17,11 +17,12 @@ export interface NovoTableConfig {
         onPageChange: Function // function to handle page changing
     };
     // Footer config (total footer)
-    footer?: {
-        totalColumns: string[], // string array of columns to total
+    footers?: {
+        columns: string[], // string array of columns to total
+        method: string; // method to use for the footer, SUM | AVG, defaults to SUM
         labelColumn: string, // column to use as the "total" label
         label: string // label to use in the "total" label
-    };
+    }[];
     filtering?: boolean | any; // Turn on filtering for the table, boolean or function for filtering callback
     sorting?: boolean | any; // Turn on sorting for the table, boolean or function for sorting callback
     ordering?: boolean | any; // Turn on ordering for the table, boolean or function for ordering callback
@@ -242,9 +243,9 @@ export class NovoTableFooterElement {
                         </td>
                     </tr>
                 </tfoot>
-                <tfoot *ngIf="config.footer && totalFooter" class="novo-table-total-footer">
+                <tfoot *ngFor="let footer of footers;let i = index;" class="novo-table-total-footer">
                     <tr>
-                        <td *ngFor="let column of columns" [attr.data-automation-id]="(column.id || column.name) + '-total'">{{ totalFooter[column.name] }}</td>
+                        <td *ngFor="let column of columns" [attr.data-automation-id]="(column.id || column.name) + '-total-' + i">{{ footer[column.name] }}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -253,27 +254,6 @@ export class NovoTableFooterElement {
     `
 })
 export class NovoTableElement implements DoCheck {
-    // Config object for the table, handles global paging/filtering/sorting/ordering/footer
-    // Sample Object
-    // config = {
-    //     paging: {
-    //         current: 1,
-    //         itemsPerPage: 10,
-    //         onPageChange: event => {
-    //             this.basic.config.paging.current = event.page;
-    //             this.basic.config.paging.itemsPerPage = event.itemsPerPage;
-    //         }
-    //     },
-    //     footer: {
-    //         totalColumns: ['count1', 'count2', 'count3'],
-    //         labelColumn: 'name',
-    //         label: 'Total'
-    //     },
-    //     filtering: true,
-    //     sorting: true,
-    //     ordering: true,
-    //     resizing: true
-    // };
     @Input() config: NovoTableConfig = {};
     @Input() columns: Array<any>;
     @Input() theme: string;
@@ -303,7 +283,7 @@ export class NovoTableElement implements DoCheck {
     public NovoTableMode = NovoTableMode;
     public tableForm: FormGroup = new FormGroup({});
     public toast: { theme: string, icon: string, message: string };
-    public totalFooter: any;
+    public footers: any[] = [];
 
     @Input()
     set rows(rows: Array<any>) {
@@ -338,6 +318,16 @@ export class NovoTableElement implements DoCheck {
                         this.pageSelected = this.pagedData.filter(r => r._selected);
                         this.rowSelectHandler();
                     }
+                    // Find that columns we might need to sum up via the footer
+                    let columnsToSum = [];
+                    let columnSums = {};
+                    if (this.config.footers) {
+                        this.config.footers.forEach(config => {
+                            columnsToSum.push(...config.columns);
+                        });
+                        // Only have unique columns, filter out duplicates
+                        columnsToSum = columnsToSum.filter((item, index, array) => array.indexOf(item) === index);
+                    }
                     // Make a form for each row
                     let columnControls = this.columns.filter(column => !Helpers.isBlank(column.editor)).map(column => column.editor);
                     let tableFormRows = <FormArray>this.tableForm.controls['rows'];
@@ -354,26 +344,30 @@ export class NovoTableElement implements DoCheck {
                         tableFormRows.push(this.formUtils.toFormGroup(rowControls));
                         // Setup the total footer if configured
                         // Array of keys to total
-                        if (this.config.footer && this.config.footer.totalColumns) {
-                            if (!Array.isArray(this.config.footer.totalColumns)) {
-                                console.warn('Table config for "totalFooter" should be an array of keys to total.. ["key1", "key2"]'); // tslint:disable-line
-                            } else {
-                                // Sum up columns
-                                this.config.footer.totalColumns.forEach(key => {
-                                    if (!this.totalFooter) {
-                                        this.totalFooter = {};
-                                    }
-                                    if (Helpers.isBlank(this.totalFooter[key])) {
-                                        this.totalFooter[key] = 0;
-                                    }
-                                    this.totalFooter[key] += row[key];
-                                });
-                            }
+                        if (columnsToSum.length !== 0) {
+                            columnsToSum.forEach(column => {
+                                if (Helpers.isBlank(columnSums[column])) {
+                                    columnSums[column] = 0;
+                                }
+                                columnSums[column] += row[column];
+                            });
                         }
                     });
-                    // Set up the label for the total footer
-                    if (this.config.footer && this.config.footer.labelColumn) {
-                        this.totalFooter[this.config.footer.labelColumn] = this.config.footer.label || 'Total';
+                    // Setup the footers (if any)
+                    if (this.config.footers) {
+                        this.config.footers.forEach((footerConfig, footerConfigIndex) => {
+                            let footer = {};
+                            columnsToSum.forEach(column => {
+                                footer[column] = columnSums[column];
+                            });
+                            footer[footerConfig.labelColumn] = footerConfig.label;
+                            if (footerConfig.method === 'AVG') {
+                                footerConfig.columns.forEach(column => {
+                                    footer[column] /= this._rows.length;
+                                });
+                            }
+                            this.footers.push(footer);
+                        });
                     }
                     break;
                 default:

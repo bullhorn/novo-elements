@@ -45,7 +45,7 @@ const template = `
     <code-snippet [code]="EditableTableDemoTpl"></code-snippet>
 
     <h5>Total Footer</h5>
-    <p>If your table has numbered data, you can configure a total footer</p>
+    <p>If your table has numbered data, you can configure a total footer the total can either be a SUM or AVG</p>
     <div class="example table-demo">${TotalFooterTableDemoTpl}</div>
     <code-snippet [code]="TotalFooterTableDemoTpl"></code-snippet>
 </div>
@@ -290,6 +290,7 @@ export class TableDemoComponent implements OnInit {
             }
         };
 
+        // For columns that can be edited, pass an editor property
         this.editable = {
             columns: [
                 { title: 'Name', name: 'name', ordering: true, filtering: true, editor: new TextBoxControl({ key: 'name' }) },
@@ -341,11 +342,17 @@ export class TableDemoComponent implements OnInit {
                         this.basic.config.paging.itemsPerPage = event.itemsPerPage;
                     }
                 },
-                footer: {
-                    totalColumns: ['count1', 'count2', 'count3'],
+                footers: [{
+                    columns: ['count1', 'count2', 'count3'],
+                    method: 'SUM',
                     labelColumn: 'name',
                     label: 'Mega Total'
-                },
+                }, {
+                    columns: ['count1', 'count2', 'count3'],
+                    method: 'AVG',
+                    labelColumn: 'name',
+                    label: 'Yep, Average!'
+                }],
                 filtering: true,
                 sorting: true,
                 ordering: true,
