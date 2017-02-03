@@ -13,7 +13,6 @@ novo-card {
         position: relative;
         border-radius: 3px;
         max-height: 550px;
-        overflow: auto;
 
         header {
             display: flex;
@@ -29,6 +28,7 @@ novo-card {
                 i.bhi-move {
                     color: $light;
                     margin-right: 10px;
+                    cursor: pointer;
                 }
 
                 h3 {
@@ -49,6 +49,8 @@ novo-card {
         main {
             padding: 10px 20px 20px;
             background-color: $white;
+            overflow: auto;
+            max-height: 550px;
 
             p.card-message {
                 padding: 20px 0;
