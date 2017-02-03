@@ -165,7 +165,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     get showCount() {
-        return this.control.maxlength &&  (this.control.controlType === 'text-area' || this.control.controlType === 'textbox');
+        return this.control.maxlength && this.focused &&  (this.control.controlType === 'text-area' || this.control.controlType === 'textbox');
     }
 
     ngOnInit() {
