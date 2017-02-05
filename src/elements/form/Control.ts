@@ -55,7 +55,7 @@ import { Helpers } from './../../utils/Helpers';
                     <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)"></novo-tiles>
                     <!--Picker-->
                     <div class="novo-control-input-container" *ngSwitchCase="'picker'">
-                        <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple" (select)="modelChange($event);" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-picker>
+                        <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" [appendToBody]="control.appendToBody" [parentScrollSelector]="control.parentScrollSelector" *ngIf="!control.multiple" (select)="modelChange($event);" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-picker>
                         <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" [closeOnSelect]="control.closeOnSelect" (changed)="modelChange($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></chips>
                     </div>
                     <!--Novo Select-->
@@ -93,6 +93,9 @@ import { Helpers } from './../../utils/Helpers';
                     <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="control.options"></novo-check-list>
                     <!--QuickNote-->
                     <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [placeholder]="control.placeholder" [config]="control.config" (change)="modelChange($event)"></novo-quick-note>
+                    <!--ReadOnly-->
+                    <!--TODO - Handle rendering of different READONLY values-->
+                    <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
                 </div>
             </div>
             <!--Error Message-->

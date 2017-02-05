@@ -11,43 +11,14 @@ let MovieTableDemoTpl = require('./templates/MovieTableDemo.html');
 let TotalFooterTableDemoTpl = require('./templates/TotalFooterTableDemo.html');
 
 // Vendor
-import { DateCell, BaseRenderer, NovoTableElement, NovoTableConfig, TextBoxControl, SelectControl } from './../../../../index';
+import { DateCell, BaseRenderer, NovoTableElement, NovoTableConfig, TextBoxControl, TablePickerControl, SelectControl } from './../../../../index';
 
 const template = `
 <div class="container">
-    <h1>Table <small><a target="_blank" href="https://bullhorn.github.io/novo-elements/blob/master/src/elements/table">(source)</a></small></h1>
-    <p>Tables allow users to view date in a tabular format and perform actions such as Sorting and Filtering. Different configuration are possible for pagination or infinite scroll. Feature to be added include: Custom Item Renderers, etc...</p>
-    <h2>Types</h2>
-
-    <h5>Basic Table</h5>
-    <p>This is the most basic table.</p>
-    <div class="example table-demo">${TableDemoTpl}</div>
-    <code-snippet [code]="TableDemoTpl"></code-snippet>
-
-    <h5>Details Table</h5>
-    <p>This has a row renderer to show a new details row that is expanded when you click on the action column.</p>
-    <div class="example table-demo">${DetailsTableDemoTpl}</div>
-    <code-snippet [code]="DetailsTableDemoTpl"></code-snippet>
-
-    <h5>Select All Table w/ Custom Actions</h5>
-    <p>This has checkboxes for selection with custom actions.</p>
-    <div class="example table-demo">${SelectAllTableDemoTpl}</div>
-    <code-snippet [code]="SelectAllTableDemoTpl"></code-snippet>
-
-    <h5>Remote Table Provider</h5>
-    <p>This has connects to the OMDB service.</p>
-    <div class="example table-demo">${MovieTableDemoTpl}</div>
-    <code-snippet [code]="MovieTableDemoTpl"></code-snippet>
-
     <h5>Editable Table</h5>
     <p>Can be put into edit mode and use editors that are set on the column to modify the data.</p>
     <div class="example table-demo">${EditableTableDemoTpl}</div>
     <code-snippet [code]="EditableTableDemoTpl"></code-snippet>
-
-    <h5>Total Footer</h5>
-    <p>If your table has numbered data, you can configure a total footer the total can either be a SUM or AVG</p>
-    <div class="example table-demo">${TotalFooterTableDemoTpl}</div>
-    <code-snippet [code]="TotalFooterTableDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -291,16 +262,53 @@ export class TableDemoComponent implements OnInit {
         };
 
         // For columns that can be edited, pass an editor property
+        let names = [
+            'Joshua Godi',
+            'Kameron Sween',
+            'Brian Kimball',
+            'Sweeney Todd',
+            'Tom Cruise',
+            'Ed Bailey',
+            'Bo Jackson',
+            'Ernie McDudson'
+        ];
         this.editable = {
             columns: [
-                { title: 'Name', name: 'name', ordering: true, filtering: true, editor: new TextBoxControl({ key: 'name' }) },
+                { title: 'Name', name: 'name', ordering: true, filtering: true, editor: new TablePickerControl({ key: 'name', config: { options: names } }) },
                 { title: 'Job Type', name: 'jobType', ordering: true, filtering: true, editor: new SelectControl({ key: 'jobType', options: ['Freelance', 'Contract', 'Billable'] }) },
-                { title: 'Rate', name: 'rate', ordering: true, filtering: true, editor: new TextBoxControl({ key: 'rate', type: 'currency', required: true }) },
+                {
+                    title: 'Rate',
+                    name: 'rate',
+                    ordering: true,
+                    filtering: true,
+                    editor: new TextBoxControl({
+                        key: 'rate',
+                        type: 'currency',
+                        required: true,
+                        interactions: [
+                            {
+                                event: 'change',
+                                script: (form) => {
+                                    console.log('Form Interaction Called!', form); // tslint:disable-line
+                                    if (form.value.rate) {
+                                        if (Number(form.value.rate) >= 1000) {
+                                            form.controls.rating.setValue('High');
+                                        } else if (Number(form.value.rate) >= 100) {
+                                            form.controls.rating.setValue('Medium');
+                                        } else {
+                                            form.controls.rating.setValue('Low');
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    })
+                },
                 { title: 'Rating', name: 'rating' }
             ],
             rows: [
-                { id: 1, name: 'Joshua Godi', jobType: 'Freelance', rate: null, rating: 'High' },
-                { id: 2, name: 'Brian Kimball', jobType: 'Contact', rate: 100, rating: 'High' },
+                { id: 1, name: 'Joshua Godi', jobType: 'Freelance', rate: null, rating: 'Low' },
+                { id: 2, name: 'Brian Kimball', jobType: 'Contact', rate: 100, rating: 'Medium' },
                 { id: 3, name: 'Kameron Sween', jobType: 'Billable', rate: 1000, rating: 'High' }
             ],
             config: {
@@ -389,12 +397,16 @@ export class TableDemoComponent implements OnInit {
         // Save updated data and get fresh data for the table to reflect the changes!
         let errorsOrData = table.validateAndGetUpdatedData();
         if (!errorsOrData.errors) {
-            console.log('SAVING', errorsOrData.changed); // tslint:disable-line
-            table.displayToastMessage({ icon: 'check', theme: 'success', message: 'Saved!' }, 2000);
+            table.toggleLoading(true);
+            console.log('SAVING', errorsOrData); // tslint:disable-line
+            // TODO - save data - fetch the data
+            setTimeout(() => {
+                table.displayToastMessage({ icon: 'check', theme: 'success', message: 'Saved!' }, 2000);
+                table.leaveEditMode();
+            }, 2000);
         } else {
-            console.log('ERRORS!', errorsOrData.errors); // tslint:disable-line
-            table.displayToastMessage({ icon: 'caution', theme: 'error', message: 'Errors!!' }, 2000);
+            console.log('ERRORS!', errorsOrData); // tslint:disable-line
+            table.displayToastMessage({ icon: 'caution', theme: 'danger', message: 'Errors!!' });
         }
-        table.leaveEditMode();
     }
 }

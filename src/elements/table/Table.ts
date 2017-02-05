@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { NovoLabelService } from './../../services/novo-label-service';
 import { Helpers } from './../../utils/Helpers';
 import { FormUtils, NovoFormControl } from './../form/FormUtils';
+import { ReadOnlyControl } from './../form/FormControls';
 import { CollectionEvent } from './../../services/data-provider/CollectionEvent';
 import { PagedArrayCollection } from './../../services/data-provider/PagedArrayCollection';
 import { PagedCollection } from './../../services/data-provider/PagedCollection';
@@ -76,7 +77,8 @@ export class NovoTableFooterElement {
     selector: 'novo-table',
     host: {
         '[attr.theme]': 'theme',
-        '[class.editing]': 'mode === NovoTableMode.EDIT'
+        '[class.editing]': 'mode === NovoTableMode.EDIT',
+        '[class.novo-table-loading]': 'loading'
     },
     template: `
         <header *ngIf="columns.length">
@@ -92,8 +94,11 @@ export class NovoTableFooterElement {
                 <ng-content select="novo-table-actions"></ng-content>
             </div>
         </header>
-        <novo-toast *ngIf="toast" [theme]="toast.theme" [icon]="toast.icon" [message]="toast.message"></novo-toast>
-        <div class="table-container">
+        <div class="novo-table-loading-overlay" *ngIf="loading">
+            <novo-loading></novo-loading>
+        </div>
+        <novo-toast *ngIf="toast" [theme]="toast?.theme" [icon]="toast?.icon" [message]="toast?.message"></novo-toast>
+        <div class="table-container" *ngIf="!grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast">
             <novo-form hideHeader="true" [form]="tableForm">
                 <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
                 <!-- skipSortAndFilterClear is a hack right now, will be removed once Canvas is refactored -->
@@ -180,8 +185,8 @@ export class NovoTableFooterElement {
                                     <novo-checkbox [(ngModel)]="row._selected" (ngModelChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></novo-checkbox>
                                 </td>
                                 <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name">
-                                    <novo-table-cell *ngIf="!column.editor || !row._editing[column.name]" [hasEditor]="!!column.editor" [column]="column" [row]="row" [form]="tableForm.controls.rows.controls[i]"></novo-table-cell>
-                                    <novo-control *ngIf="column.editor && row._editing[column.name]" condensed="true" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]"></novo-control>
+                                    <novo-table-cell *ngIf="!row._editing[column.name]" [hasEditor]="editable" [column]="column" [row]="row" [form]="tableForm.controls.rows.controls[i]"></novo-table-cell>
+                                    <novo-control *ngIf="row._editing[column.name]" condensed="true" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]"></novo-control>
                                 </td>
                             </tr>
                             <tr class="details-row" *ngIf="config.hasDetails" [hidden]="!row._expanded" [attr.data-automation-id]="'details-row-'+row.id">
@@ -236,7 +241,7 @@ export class NovoTableFooterElement {
                         </td>
                     </tr>
                 </tbody>
-                <tfoot *ngIf="!config.footer">
+                <tfoot *ngIf="!config.footers">
                     <tr>
                         <td colspan="100%">
                             <ng-content select="novo-table-footer"></ng-content>
@@ -259,6 +264,7 @@ export class NovoTableElement implements DoCheck {
     @Input() theme: string;
     @Input() skipSortAndFilterClear: boolean = false;
     @Input() mode: NovoTableMode = NovoTableMode.VIEW;
+    @Input() editable: boolean = false;
 
     @Output() onRowClick: EventEmitter<any> = new EventEmitter();
     @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
@@ -284,6 +290,8 @@ export class NovoTableElement implements DoCheck {
     public tableForm: FormGroup = new FormGroup({});
     public toast: { theme: string, icon: string, message: string };
     public footers: any[] = [];
+    public grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast: boolean = false;
+    public loading: boolean = false;
 
     @Input()
     set rows(rows: Array<any>) {
@@ -329,17 +337,18 @@ export class NovoTableElement implements DoCheck {
                         columnsToSum = columnsToSum.filter((item, index, array) => array.indexOf(item) === index);
                     }
                     // Make a form for each row
-                    let columnControls = this.columns.filter(column => !Helpers.isBlank(column.editor)).map(column => column.editor);
+                    // let columnControls = this.columns.filter(column => !Helpers.isBlank(column.editor)).map(column => column.editor);
                     let tableFormRows = <FormArray>this.tableForm.controls['rows'];
                     this._rows.forEach((row, index) => {
                         let rowControls = [];
                         row.controls = {};
                         row._editing = {};
-                        for (let i = 0; i < columnControls.length; i++) {
-                            let control = Object.assign({}, columnControls[i]);
-                            row.controls[columnControls[i].key] = control;
+                        this.columns.forEach(column => {
+                            // Use the control passed or use a ReadOnlyControl so that the form has the values
+                            let control = column.editor || new ReadOnlyControl({ key: column.name });
+                            row.controls[column.name] = control;
                             rowControls.push(control);
-                        }
+                        });
                         this.formUtils.setInitialValues(rowControls, row, false);
                         tableFormRows.push(this.formUtils.toFormGroup(rowControls));
                         // Setup the total footer if configured
@@ -357,15 +366,14 @@ export class NovoTableElement implements DoCheck {
                     if (this.config.footers) {
                         this.config.footers.forEach((footerConfig, footerConfigIndex) => {
                             let footer = {};
-                            columnsToSum.forEach(column => {
-                                footer[column] = columnSums[column];
-                            });
                             footer[footerConfig.labelColumn] = footerConfig.label;
-                            if (footerConfig.method === 'AVG') {
-                                footerConfig.columns.forEach(column => {
-                                    footer[column] /= this._rows.length;
-                                });
-                            }
+                            footerConfig.columns.forEach(column => {
+                                if (footerConfig.method === 'AVG') {
+                                    footer[column] = columnSums[column] / this._rows.length;
+                                } else {
+                                    footer[column] = columnSums[column];
+                                }
+                            });
                             this.footers.push(footer);
                         });
                     }
@@ -882,18 +890,18 @@ export class NovoTableElement implements DoCheck {
      * @memberOf NovoTableElement
      */
     addEditableRow(defaultValue: any = {}): void {
-        let columnControls = this.columns.filter(column => !Helpers.isBlank(column.editor)).map(column => column.editor);
         let tableFormRows = <FormArray>this.tableForm.controls['rows'];
         let row: any = {};
         let rowControls = [];
         row.controls = {};
         row._editing = {};
-        for (let i = 0; i < columnControls.length; i++) {
-            let control = Object.assign({}, columnControls[i]);
-            row.controls[columnControls[i].key] = control;
-            row._editing[columnControls[i].key] = true;
+        this.columns.forEach(column => {
+            // Use the control passed or use a ReadOnlyControl so that the form has the values
+            let control = column.editor || new ReadOnlyControl({ key: column.name });
+            row.controls[column.name] = control;
+            row._editing[column.name] = true;
             rowControls.push(control);
-        }
+        });
         this.formUtils.setInitialValues(rowControls, defaultValue, false);
         tableFormRows.push(this.formUtils.toFormGroup(rowControls));
         this._rows.push(row);
@@ -920,12 +928,13 @@ export class NovoTableElement implements DoCheck {
                 Object.keys(formGroup.controls).forEach((key: string) => {
                     let control = formGroup.controls[key];
                     // Handle value changing
-                    if (control && control.dirty) {
+                    if (control && control.dirty && !control.errors) {
                         if (!changedRow) {
                             // Append the ID, so we have some key to save against
-                            changedRow = {
-                                id: this._rows[index].id
-                            };
+                            changedRow = {};
+                            if (this._rows[index].id) {
+                                changedRow.id = this._rows[index].id;
+                            }
                         }
                         // If dirty, grab value off the form
                         changedRow[key] = this.tableForm.value['rows'][index][key];
@@ -937,6 +946,8 @@ export class NovoTableElement implements DoCheck {
                             error = {};
                         }
                         error[key] = control.errors;
+                        control.markAsDirty();
+                        control.markAsTouched();
                     }
                 });
                 if (changedRow) {
@@ -973,6 +984,7 @@ export class NovoTableElement implements DoCheck {
      * @memberOf NovoTableElement
      */
     displayToastMessage(toast: { icon: string, theme: string, message: string }, hideDelay?: number): void {
+        this.loading = false;
         this.toast = toast;
         if (hideDelay) {
             setTimeout(() => this.hideToastMessage(), hideDelay);
@@ -986,5 +998,20 @@ export class NovoTableElement implements DoCheck {
      */
     hideToastMessage(): void {
         this.toast = null;
+        // Hack to make the table display properly after hiding the toast
+        this.grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast = true;
+        setTimeout(() => {
+            this.grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast = false;
+        });
+    }
+
+    /**
+     * @name toggleLoading
+     * @description display the loading overlay on the table
+     * @param {boolean} show
+     * @memberOf NovoTableElement
+     */
+    toggleLoading(show: boolean): void {
+        this.loading = show;
     }
 }
