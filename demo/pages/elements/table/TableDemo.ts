@@ -9,7 +9,6 @@ let DetailsTableDemoTpl = require('./templates/DetailsTableDemo.html');
 let SelectAllTableDemoTpl = require('./templates/SelectAllTableDemo.html');
 let MovieTableDemoTpl = require('./templates/MovieTableDemo.html');
 let TotalFooterTableDemoTpl = require('./templates/TotalFooterTableDemo.html');
-
 // Vendor
 import { DateCell, BaseRenderer, NovoTableElement, NovoTableConfig, TextBoxControl, TablePickerControl, SelectControl } from './../../../../index';
 
