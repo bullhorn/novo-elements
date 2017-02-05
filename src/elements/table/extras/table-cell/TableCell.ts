@@ -1,5 +1,6 @@
 // NG2
-import { Component, ElementRef, ViewChild, ViewContainerRef, OnInit, Input } from '@angular/core';
+import { Component, ElementRef, ViewChild, ViewContainerRef, OnInit, Input, OnDestroy } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 // APP
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 import { ComponentUtils } from './../../../../utils/component-utils/ComponentUtils';
@@ -15,15 +16,18 @@ import { ComponentUtils } from './../../../../utils/component-utils/ComponentUti
         </div>
     `
 })
-export class TableCell implements OnInit {
-    @ViewChild('container', { read: ViewContainerRef }) container:ViewContainerRef;
+export class TableCell implements OnInit, OnDestroy {
+    @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
 
-    @Input() column:any;
-    @Input() row:any;
+    @Input() column: any;
+    @Input() row: any;
+    @Input() form: FormGroup;
+    @Input() hasEditor: boolean;
 
-    value:any = '';
+    public value: any = '';
+    private valueChangeSubscription: any;
 
-    constructor(private element:ElementRef, private componentUtils:ComponentUtils) {
+    constructor(private element: ElementRef, private componentUtils: ComponentUtils) {
         this.element = element;
         this.componentUtils = componentUtils;
     }
@@ -36,12 +40,29 @@ export class TableCell implements OnInit {
                 let componentRef = this.componentUtils.appendNextToLocation(this.column.renderer, this.container);
                 componentRef.instance.meta = this.column;
                 componentRef.instance.data = this.row;
-                componentRef.instance.value = this.row[this.column.name];
+                componentRef.instance.value = this.form && this.hasEditor ? this.form.value[this.column.name] : this.row[this.column.name];
+                // TODO - save ref to this and update in the valueChanges below!!
             } else {
+                // TODO - wtf to do here?
                 this.value = this.column.renderer(this.row);
             }
         } else {
-            this.value = this.row[this.column.name];
+            this.value = this.form && this.hasEditor ? this.form.value[this.column.name] : this.row[this.column.name];
+        }
+
+        if (this.form && this.hasEditor) {
+            this.valueChangeSubscription = this.form.valueChanges
+                .debounceTime(300)
+                .distinctUntilChanged()
+                .subscribe((value) => {
+                    this.value = value[this.column.name];
+                });
+        }
+    }
+
+    ngOnDestroy() {
+        if (this.valueChangeSubscription) {
+            this.valueChangeSubscription.unsubscribe();
         }
     }
 

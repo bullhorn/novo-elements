@@ -14,11 +14,11 @@ import { Helpers } from './../../utils/Helpers';
     template: `
         <div class="novo-control-container" [formGroup]="form" [hidden]="form?.controls[control.key]?.hidden || control.type === 'hidden' || control.controlType === 'hidden'">
             <!--Label (for horizontal)-->
-            <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical'">{{control.label}}</label>
+            <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && control.label && !condensed">{{control.label}}</label>
             <div class="novo-control-input-container">
                 <!--Label (for vertical)-->
                 <label
-                    *ngIf="form.layout === 'vertical'"
+                    *ngIf="form.layout === 'vertical' && control.label && !condensed"
                     class="novo-control-label"
                     [attr.for]="control.key"
                     [class.novo-control-empty]="!hasValue"
@@ -29,7 +29,7 @@ import { Helpers } from './../../utils/Helpers';
                     {{control.label}}
                 </label>
                 <!--Required Indicator-->
-                <i [hidden]="!form?.controls[control.key]?.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}"></i>
+                <i [hidden]="!form?.controls[control.key]?.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form?.controls[control.key]?.required"></i>
                 <!--Form Controls-->
                 <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType" [attr.data-automation-id]="control.key">
                     <!--Text-based Inputs-->
@@ -55,7 +55,7 @@ import { Helpers } from './../../utils/Helpers';
                     <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)"></novo-tiles>
                     <!--Picker-->
                     <div class="novo-control-input-container" *ngSwitchCase="'picker'">
-                        <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="!control.multiple" (select)="modelChange($event);" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-picker>
+                        <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" [appendToBody]="control.appendToBody" [parentScrollSelector]="control.parentScrollSelector" *ngIf="!control.multiple" (select)="modelChange($event);" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-picker>
                         <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" [closeOnSelect]="control.closeOnSelect" (changed)="modelChange($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></chips>
                     </div>
                     <!--Novo Select-->
@@ -93,10 +93,13 @@ import { Helpers } from './../../utils/Helpers';
                     <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="control.options"></novo-check-list>
                     <!--QuickNote-->
                     <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [placeholder]="control.placeholder" [config]="control.config" (change)="modelChange($event)"></novo-quick-note>
+                    <!--ReadOnly-->
+                    <!--TODO - Handle rendering of different READONLY values-->
+                    <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
                 </div>
             </div>
             <!--Error Message-->
-            <div class="error-message">
+            <div class="error-message" *ngIf="!condensed">
                 <span class="error-text" *ngIf="noErrors"></span>
                 <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
                 <span class="error-text" *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
@@ -120,6 +123,7 @@ import { Helpers } from './../../utils/Helpers';
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy {
     @Input() control;
     @Input() form: NovoFormGroup;
+    @Input() condensed: boolean = false;
     @Output() change: EventEmitter<any> = new EventEmitter();
 
     valueChangeSubscription: any;
@@ -140,6 +144,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     formattedValue: string = '';
     maxLengthMet: boolean = false;
     characterCount: number = 0;
+    private forceClearSubscription: any;
 
     constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService) {
         super(element);
@@ -148,6 +153,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     get noErrors() {
         return !this.errors && !this.maxLengthMet;
     }
+
     ngOnInit() {
         // Make sure to initially format the time controls
         if (this.control && this.control.value) {
@@ -163,34 +169,34 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
         if (this.control) {
             // Listen to clear events
-            this.control.forceClear.subscribe(() => {
+            this.forceClearSubscription = this.control.forceClear.subscribe(() => {
                 this.clearValue();
             });
-        }
-        // Subscribe to control interactions
-        if (this.control.interactions) {
-            for (let interaction of this.control.interactions) {
-                switch (interaction.event) {
-                    case 'blur':
-                        this.valueChangeSubscription = this.onBlur.subscribe(() => {
-                            this.executeInteraction(interaction);
-                        });
-                        break;
-                    case 'focus':
-                        this.valueChangeSubscription = this.onFocus.subscribe(() => {
-                            this.executeInteraction(interaction);
-                        });
-                        break;
-                    case 'change':
-                        this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
-                            this.executeInteraction(interaction);
-                        });
-                        break;
-                    default:
-                        break;
-                }
-                if (interaction.invokeOnInit) {
-                    this.executeInteraction(interaction);
+            // Subscribe to control interactions
+            if (this.control.interactions) {
+                for (let interaction of this.control.interactions) {
+                    switch (interaction.event) {
+                        case 'blur':
+                            this.valueChangeSubscription = this.onBlur.subscribe(() => {
+                                this.executeInteraction(interaction);
+                            });
+                            break;
+                        case 'focus':
+                            this.valueChangeSubscription = this.onFocus.subscribe(() => {
+                                this.executeInteraction(interaction);
+                            });
+                            break;
+                        case 'change':
+                            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
+                                this.executeInteraction(interaction);
+                            });
+                            break;
+                        default:
+                            break;
+                    }
+                    if (interaction.invokeOnInit) {
+                        this.executeInteraction(interaction);
+                    }
                 }
             }
         }
@@ -209,11 +215,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         if (this.valueChangeSubscription) {
             this.valueChangeSubscription.unsubscribe();
         }
-        super.ngOnDestroy();
-        if (this.control) {
+        if (this.forceClearSubscription) {
             // Un-listen for clear events
-            this.control.forceClear.unsubscribe();
+            this.forceClearSubscription.unsubscribe();
         }
+        super.ngOnDestroy();
     }
 
     get errors() {
