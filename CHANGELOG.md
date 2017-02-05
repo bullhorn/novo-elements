@@ -1,3 +1,13 @@
+<a name="2.0.115"></a>
+## [2.0.115](https://github.com/bullhorn/novo-elements/compare/v2.0.114...v2.0.115) (2017-02-05)
+
+
+### Features
+
+* **table:** Make the table have an editable version ([15da5d1](https://github.com/bullhorn/novo-elements/commit/15da5d1))
+
+
+
 <a name="2.0.114"></a>
 ## [2.0.114](https://github.com/bullhorn/novo-elements/compare/v2.0.113...v2.0.114) (2017-02-03)
 
