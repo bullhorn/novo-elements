@@ -101,7 +101,7 @@ import { Helpers } from './../../utils/Helpers';
                         </div>
                     </div>
                     <!--Error Message-->
-                    <div class="field-message" *ngIf="errors || showCount || control.description || !condensed">
+                    <div class="field-message *ngIf="errors || showCount || control.description || !condensed">
                         <div class="messages">
                             <span class="error-text" *ngIf="showFieldMessage"></span>
                             <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>

@@ -593,29 +593,24 @@ novo-form {
                             position: relative;
                             margin-top: 16px;
                             .novo-control-outer-container {
-                                // display: flex;
-                                // align-items: center;
                                 max-width: 550px;
                                 width: 100%;
-                                // flex-direction: column;
-                                // position: relative;
-                                label {
-                                  // bottom: 20px;
-                                }
                                 .novo-control-inner-container {
                                     position: relative;
                                     .novo-control-inner-input-container {
-                                        align-items: flex-start;
+                                        align-items: center;
                                         position: relative;
                                         i.required-indicator {
-                                            padding-top: 10px;
+                                            &.bhi-circle {
+                                                padding-top: 2px;
+                                            }
+                                            &.bhi-check {
+                                                margin-top: -4px;
+                                            }
                                         }
                                         .novo-control-input-container.novo-control-input-with-label {
                                             flex-direction: row;
                                             display: flex;
-                                            input {
-                                                // height: 1.5rem;
-                                            }
                                         }
                                     }
                                 }
@@ -652,7 +647,6 @@ novo-form {
                                     &.novo-control-focused,
                                     &.novo-control-filled {
                                         display: block;
-                                        padding-bottom: 5px;
                                         transform: translateY(-100%) scale(0.9);
                                         height: 1.5em;
                                         top: 0;
@@ -668,10 +662,13 @@ novo-form {
                                 }
                             }
                             .field-message {
-                                    justify-content: space-between;
-                                    display: flex;
-                                    margin-left: 22px;
-                                    padding-left: 0;
+                                justify-content: space-between;
+                                display: flex;
+                                margin-left: 22px;
+                                padding-left: 0;
+                                .messages {
+                                    min-height: 10px;
+                                }
                             }
                         }
                     }
