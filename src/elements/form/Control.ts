@@ -15,7 +15,7 @@ import { Helpers } from './../../utils/Helpers';
         <div class="novo-control-container" [formGroup]="form" [hidden]="form?.controls[control.key]?.hidden || control.type === 'hidden' || control.controlType === 'hidden'">
             <!--Label (for horizontal)-->
             <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && control.label && !condensed">{{control.label}}</label>
-            <div class="novo-control-input-container">
+            <div class="novo-control-outer-container">
                 <!--Label (for vertical)-->
                 <label
                     *ngIf="form.layout === 'vertical' && control.label && !condensed"
@@ -28,89 +28,102 @@ import { Helpers } from './../../utils/Helpers';
                     [class.novo-control-extra-spacing]="requiresExtraSpacing">
                     {{control.label}}
                 </label>
-                <!--Required Indicator-->
-                <i [hidden]="!form?.controls[control.key]?.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form?.controls[control.key]?.required"></i>
-                <!--Form Controls-->
-                <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType" [attr.data-automation-id]="control.key">
-                    <!--Text-based Inputs-->
-                    <!--TODO prefix/suffix on the control-->
-                    <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'">
-                        <input *ngIf="control.type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)">
-                        <input *ngIf="control.type === 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (keypress)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any">
-                        <label class="input-label" *ngIf="control.subType === 'currency'">{{control.currencyFormat}}</label>
-                        <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
+                <div class="novo-control-inner-container">
+                    <div class="novo-control-inner-input-container">
+                        <!--Required Indicator-->
+                        <i [hidden]="!form?.controls[control.key]?.required" 
+                            class="required-indicator" 
+                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form?.controls[control.key]?.required">
+                        </i>
+                        <!--Form Controls-->
+                        <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType" [attr.data-automation-id]="control.key">
+                            <!--Text-based Inputs-->
+                            <!--TODO prefix/suffix on the control-->
+                            <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'">
+                                <input *ngIf="control.type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)">
+                                <input *ngIf="control.type === 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (keypress)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any">
+                                <label class="input-label" *ngIf="control.subType === 'currency'">{{control.currencyFormat}}</label>
+                                <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
+                            </div>
+                            <!--TextArea-->
+                            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength"></textarea>
+                            <!--Editor-->
+                            <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
+                            <!--HTML5 Select-->
+                            <select [id]="control.key" *ngSwitchCase="'native-select'" [formControlName]="control.key">
+                                <option *ngIf="control.placeholder" value="" disabled selected hidden>{{control.placeholder}}</option>
+                                <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>
+                            </select>
+                            <!--File-->
+                            <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="control.placeholder" [multiple]="control.multiple"></novo-file-input>
+                            <!--Tiles-->
+                            <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)"></novo-tiles>
+                            <!--Picker-->
+                            <div class="novo-control-input-container" *ngSwitchCase="'picker'">
+                                <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" [appendToBody]="control.appendToBody" [parentScrollSelector]="control.parentScrollSelector" *ngIf="!control.multiple" (select)="modelChange($event);" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-picker>
+                                <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" [closeOnSelect]="control.closeOnSelect" (changed)="modelChange($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></chips>
+                            </div>
+                            <!--Novo Select-->
+                            <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key"></novo-select>
+                            <!--Radio-->
+                            <div class="novo-control-input-container" *ngSwitchCase="'radio'">
+                                <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of control.options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]"></novo-radio>
+                            </div>
+                            <!--Time-->
+                            <div class="novo-control-input-container" *ngSwitchCase="'time'">
+                                <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
+                                <i (click)="toggleActive($event)" class="bhi-clock" *ngIf="!hasValue"></i>
+                                <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
+                                <novo-time-picker [hidden]="!active" (onSelect)="formatTimeValue($event);" [formControlName]="control.key"></novo-time-picker>
+                            </div>
+                            <!--Date-->
+                            <div class="novo-control-input-container" *ngSwitchCase="'date'">
+                                <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
+                                <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
+                                <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
+                                <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateValue($event);" [formControlName]="control.key"></novo-date-picker>
+                            </div>
+                            <!--Date and Time-->
+                            <div class="novo-control-input-container" *ngSwitchCase="'date-time'">
+                                <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
+                                <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
+                                <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
+                                <novo-date-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event);" [formControlName]="control.key"></novo-date-time-picker>
+                            </div>
+                            <!--Address-->
+                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key"></novo-address>
+                            <!--Checkbox-->
+                            <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key"></novo-checkbox>
+                            <!--Checklist-->
+                            <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="control.options"></novo-check-list>
+                            <!--QuickNote-->
+                            <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [placeholder]="control.placeholder" [config]="control.config" (change)="modelChange($event)"></novo-quick-note>
+                             <!--ReadOnly-->
+                            <!--TODO - Handle rendering of different READONLY values-->
+                            <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
+                        </div>
                     </div>
-                    <!--TextArea-->
-                    <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" (input)="resizeTextArea($event)" (input)="emitChange($event)" [maxlength]="control.maxlength"></textarea>
-                    <!--Editor-->
-                    <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
-                    <!--HTML5 Select-->
-                    <select [id]="control.key" *ngSwitchCase="'native-select'" [formControlName]="control.key">
-                        <option *ngIf="control.placeholder" value="" disabled selected hidden>{{control.placeholder}}</option>
-                        <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>
-                    </select>
-                    <!--File-->
-                    <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="control.placeholder" [multiple]="control.multiple"></novo-file-input>
-                    <!--Tiles-->
-                    <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)"></novo-tiles>
-                    <!--Picker-->
-                    <div class="novo-control-input-container" *ngSwitchCase="'picker'">
-                        <novo-picker [config]="control.config" [formControlName]="control.key" [placeholder]="control.placeholder" [appendToBody]="control.appendToBody" [parentScrollSelector]="control.parentScrollSelector" *ngIf="!control.multiple" (select)="modelChange($event);" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-picker>
-                        <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" [closeOnSelect]="control.closeOnSelect" (changed)="modelChange($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></chips>
+                    <!--Error Message-->
+                    <div class="field-message" *ngIf="!condensed">
+                        <div class="messages">
+                            <span class="error-text" *ngIf="showFieldMessage"></span>
+                            <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
+                            <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
+                            <span class="error-text" *ngIf="errors?.maxlength">Sorry, you have exceeded the maximum character count of {{ control.maxlength }} for this field</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
+                            <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
+                            <span *ngIf="isDirty && errors?.minYear">{{control.label | uppercase}} is not a valid year</span>
+                            <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
+                            <!--Field Hint-->
+                            <span class="description" *ngIf="control.description">
+                                {{ control.description }}
+                            </span>
+                        </div>
+                        <span class="character-count" [class.error]="errors?.maxlength" *ngIf="showCount">{{ characterCount }}/{{ control.maxlength }}</span>
                     </div>
-                    <!--Novo Select-->
-                    <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key"></novo-select>
-                    <!--Radio-->
-                    <div class="novo-control-input-container" *ngSwitchCase="'radio'">
-                        <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of control.options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]"></novo-radio>
-                    </div>
-                    <!--Time-->
-                    <div class="novo-control-input-container" *ngSwitchCase="'time'">
-                        <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
-                        <i (click)="toggleActive($event)" class="bhi-clock" *ngIf="!hasValue"></i>
-                        <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
-                        <novo-time-picker [hidden]="!active" (onSelect)="formatTimeValue($event);" [formControlName]="control.key"></novo-time-picker>
-                    </div>
-                    <!--Date-->
-                    <div class="novo-control-input-container" *ngSwitchCase="'date'">
-                        <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
-                        <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
-                        <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
-                        <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateValue($event);" [formControlName]="control.key"></novo-date-picker>
-                    </div>
-                    <!--Date and Time-->
-                    <div class="novo-control-input-container" *ngSwitchCase="'date-time'">
-                        <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
-                        <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
-                        <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
-                        <novo-date-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event);" [formControlName]="control.key"></novo-date-time-picker>
-                    </div>
-                    <!--Address-->
-                    <novo-address *ngSwitchCase="'address'" [formControlName]="control.key"></novo-address>
-                    <!--Checkbox-->
-                    <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key"></novo-checkbox>
-                    <!--Checklist-->
-                    <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="control.options"></novo-check-list>
-                    <!--QuickNote-->
-                    <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [placeholder]="control.placeholder" [config]="control.config" (change)="modelChange($event)"></novo-quick-note>
-                    <!--ReadOnly-->
-                    <!--TODO - Handle rendering of different READONLY values-->
-                    <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
                 </div>
-            </div>
-            <!--Error Message-->
-            <div class="error-message" *ngIf="!condensed">
-                <span class="error-text" *ngIf="noErrors"></span>
-                <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
-                <span class="error-text" *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
-                <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
-                <span class="error-text" *ngIf="errors?.maxlength">Sorry, you have exceeded the maximum character count of {{ control.maxlength }} for this field</span>
-                <span class="character-count" [class.error]="errors?.maxlength" *ngIf="control.maxlength && focused && (control.controlType=='text-area' || control.controlType=='textbox')">{{ characterCount }}/{{ control.maxlength }}</span>
-                <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
-                <span class="error-text" *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
-                <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
-                <span *ngIf="isDirty && errors?.minYear">{{control.label | uppercase}} is not a valid year</span>
-                <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
             </div>
         </div>
     `,
@@ -150,8 +163,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         super(element);
     }
 
-    get noErrors() {
-        return !this.errors && !this.maxLengthMet;
+    get showFieldMessage() {
+        return !this.errors && !this.maxLengthMet && Helpers.isBlank(this.control.description);
+    }
+
+    get showCount() {
+        return this.control.maxlength && this.focused &&  (this.control.controlType === 'text-area' || this.control.controlType === 'textbox');
     }
 
     ngOnInit() {
@@ -292,6 +309,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         // Reset the heighte
         event.target.style.height = 'auto';
         event.target.style.height = event.target.value.length > 0 ? `${event.target.scrollHeight - 14}px` : '2rem';
+    }
+
+    handleTextAreaInput(event) {
+        this.resizeTextArea(event);
+        this.emitChange(event);
+        this.restrictKeys(event);
     }
 
     checkMaxLength(event) {

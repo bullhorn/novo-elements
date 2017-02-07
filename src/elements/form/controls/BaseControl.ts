@@ -35,6 +35,7 @@ export interface NovoControlConfig {
     dataSpecialization?: string;
     appendToBody?: boolean;
     parentScrollSelector?: string;
+    description?: string;
 }
 
 export class BaseControl {
@@ -68,6 +69,7 @@ export class BaseControl {
     dataSpecialization: string;
     appendToBody: boolean;
     parentScrollSelector: string;
+    description?: string;
 
     constructor(config: NovoControlConfig) {
         this.validators = config.validators || [];
@@ -107,5 +109,6 @@ export class BaseControl {
         this.dataSpecialization = config.dataSpecialization;
         this.appendToBody = !!config.appendToBody;
         this.parentScrollSelector = config.parentScrollSelector;
+        this.description = config.description;
     }
 }
