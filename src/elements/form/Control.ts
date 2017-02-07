@@ -31,7 +31,10 @@ import { Helpers } from './../../utils/Helpers';
                 <div class="novo-control-inner-container">
                     <div class="novo-control-inner-input-container">
                         <!--Required Indicator-->
-                        <i [hidden]="!form?.controls[control.key]?.required" class="required-indicator" [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form?.controls[control.key]?.required"></i>
+                        <i [hidden]="!form?.controls[control.key]?.required" 
+                            class="required-indicator" 
+                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form?.controls[control.key]?.required">
+                        </i>
                         <!--Form Controls-->
                         <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType" [attr.data-automation-id]="control.key">
                             <!--Text-based Inputs-->
@@ -101,7 +104,7 @@ import { Helpers } from './../../utils/Helpers';
                         </div>
                     </div>
                     <!--Error Message-->
-                    <div class="field-message *ngIf="errors || showCount || control.description || !condensed">
+                    <div class="field-message" *ngIf="errors || showCount || control.description || !condensed">
                         <div class="messages">
                             <span class="error-text" *ngIf="showFieldMessage"></span>
                             <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
