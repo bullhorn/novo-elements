@@ -36,7 +36,7 @@ import { Helpers } from './../../utils/Helpers';
                 </novo-nav-content>
             </novo-nav-outlet>
             <footer *ngIf="footer" class="novo-category-dropdown-footer-align-{{ footer.align || 'right' }}">
-                <a *ngFor="let link of footer.links" (click)="link.callback($event)">{{ link.label }}</a>
+                <a *ngFor="let link of footer.links" (click)="link.callback($event, this)">{{ link.label }}</a>
             </footer>
         </div>
     `,
