@@ -34,20 +34,18 @@ novo-picker {
         font-size: 1em;
     }
     .picker-results-container {
-        position: absolute !important;
-        top: 100% !important;
-        width: 100% !important;
-        margin-top: 0.5em !important;
+        position: absolute;
+        top: 100%;
+        width: 100%;
         entity-picker-results,
         picker-results.active {
-            margin-bottom: 100px !important;
+            margin-bottom: 100px;
         }
     }
 }
 
 .picker-results-container {
     position: absolute;
-    margin-top: 0.5em;
     z-index: 1000;
     min-width: 180px;
     entity-picker-results,

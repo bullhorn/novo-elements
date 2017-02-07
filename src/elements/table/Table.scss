@@ -87,6 +87,12 @@ novo-table {
         align-items: center;
         justify-content: center;
     }
+    novo-form {
+        max-width: inherit;
+        td.novo-form-row {
+            width: inherit !important;
+        }
+    }
 }
 
 // Baseline styles
