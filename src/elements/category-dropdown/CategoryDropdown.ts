@@ -36,7 +36,7 @@ import { Helpers } from './../../utils/Helpers';
                 </novo-nav-content>
             </novo-nav-outlet>
             <footer *ngIf="footer" class="novo-category-dropdown-footer-align-{{ footer.align || 'right' }}">
-                <a *ngFor="let link of footer.links" (click)="link.callback($event, this)">{{ link.label }}</a>
+                <a *ngFor="let link of footer.links" (click)="executeClickCallback($event, link)">{{ link.label }}</a>
             </footer>
         </div>
     `,
@@ -150,5 +150,13 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
                 }
             });
         }, this.search.debounce || 300);
+    }
+
+    executeClickCallback(event, link) {
+        link.callback(event);
+        // Close, if input is set
+        if (this.closeOnSelect) {
+            this.toggleActive();
+        }
     }
 }
