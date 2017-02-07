@@ -1,3 +1,18 @@
+<a name="2.0.119"></a>
+## [2.0.119](https://github.com/bullhorn/novo-elements/compare/v2.0.118...v2.0.119) (2017-02-07)
+
+
+### Bug Fixes
+
+* **Table:** Table filtering should be disabled for all columns if set in config ([#394](https://github.com/bullhorn/novo-elements/issues/394)) ([eaf8bce](https://github.com/bullhorn/novo-elements/commit/eaf8bce))
+
+
+### Features
+
+* **form:** Adding a description field ([595d24b](https://github.com/bullhorn/novo-elements/commit/595d24b))
+
+
+
 <a name="2.0.118"></a>
 ## [2.0.118](https://github.com/bullhorn/novo-elements/compare/v2.0.117...v2.0.118) (2017-02-07)
 
