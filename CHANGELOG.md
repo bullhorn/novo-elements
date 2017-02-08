@@ -1,3 +1,13 @@
+<a name="2.0.120"></a>
+## [2.0.120](https://github.com/bullhorn/novo-elements/compare/v2.0.119...v2.0.120) (2017-02-08)
+
+
+### Bug Fixes
+
+* **table:** Fixing the sum/avg table footers ([0dede6b](https://github.com/bullhorn/novo-elements/commit/0dede6b))
+
+
+
 <a name="2.0.119"></a>
 ## [2.0.119](https://github.com/bullhorn/novo-elements/compare/v2.0.118...v2.0.119) (2017-02-07)
 
