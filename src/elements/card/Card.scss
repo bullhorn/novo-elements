@@ -25,19 +25,26 @@ novo-card {
             .title {
                 display: flex;
                 align-items: center;
+                height: 1.75em;
+                overflow: hidden;
 
                 i.bhi-move {
                     color: $light;
                     margin-right: 10px;
+                    height: 1.3em
                 }
 
                 h3 {
                     padding: 0;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
                 }
             }
 
             .actions {
                 color: darken($light, 35%);
+                display: flex;
 
                 button {
                     font-size: 1.2em;
