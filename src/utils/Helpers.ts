@@ -183,7 +183,7 @@ export class Helpers {
         };
     }
 
-    static calcPositionOffset(position: ClientRect, element: Element, side: string): { top: string, left: string } {
+    static calcPositionOffset(position: ClientRect, element: Element, side: string): { top: string, left: string, width: string } {
         if (!position) {
             return;
         }
@@ -204,6 +204,7 @@ export class Helpers {
 
         let top = `${position.top + y + position.height + 10}px`;
         let left = `${position.left + x + sideOffset}px`;
+        let width = `${position.width}px`;
 
         const clientWidth = element.clientWidth,
             clientHeight = element.clientHeight,
@@ -234,7 +235,7 @@ export class Helpers {
             left = `${parseInt(left.replace('px', '')) + (clientWidth / 2) + (position.width * 2) - 4}px`;
         }
 
-        return { top, left };
+        return { top, left, width };
     }
 
     static findAncestor(element: Element, selector: string): Element {

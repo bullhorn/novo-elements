@@ -1,3 +1,13 @@
+// Variables
+$table-header-font-weight: 400;
+$table-header-font-color: #757575;
+$table-cell-padding: 1.2rem;
+$table-condensed-cell-padding: $table-cell-padding/2;
+$table-bg: #fff;
+$table-bg-accent: #f4f4f4;
+$table-bg-hover: rgba(0, 0, 0, .12);
+$table-bg-active: $table-bg-hover;
+$table-border-color: #f5f5f5; // Tables
 novo-table {
     width: 100%;
     display: block;
@@ -40,32 +50,58 @@ novo-table {
         width: 100%;
         display: block;
     }
+    novo-table-footer {
+        display: flex;
+    }
+    tfoot.novo-table-total-footer {
+        td {
+            padding: $table-cell-padding;
+        }
+    }
+    // Disable all filtering/sorting/pagination IF we are editing
+    &.editing {
+        th .th-title,
+        th novo-dropdown,
+        novo-pagination h5,
+        novo-pagination novo-select,
+        novo-pagination ul.pager {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        novo-control {
+            margin-top: 0 !important;
+        }
+    }
+    &.novo-table-loading {
+        position: relative;
+    }
+    div.novo-table-loading-overlay {
+        background: rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    novo-form {
+        max-width: inherit;
+        td.novo-form-row {
+            width: inherit !important;
+        }
+    }
 }
 
-
-/* -- Material Design Table style -------------- */
-
-// Variables
-// ---------------------
-$table-header-font-weight: 400;
-$table-header-font-color: #757575;
-$table-cell-padding: 1.2rem;
-$table-condensed-cell-padding: $table-cell-padding/2;
-$table-bg: #fff;
-$table-bg-accent: #f4f4f4;
-$table-bg-hover: rgba(0, 0, 0, .12);
-$table-bg-active: $table-bg-hover;
-$table-border-color: #f5f5f5; // Tables
-//
-// -----------------
 // Baseline styles
 .table {
     width: 100%;
     max-width: 100%;
     background-color: $table-bg;
     >tbody,
-    >thead,
-    >tfoot {
+    >thead {
         >tr {
             >td,
             >th {

@@ -1,3 +1,63 @@
+<a name="2.0.121"></a>
+## [2.0.121](https://github.com/bullhorn/novo-elements/compare/v2.0.120...v2.0.121) (2017-02-08)
+
+
+### Features
+
+* **categoryDropdown:** Adding better callback for clicks ([841af55](https://github.com/bullhorn/novo-elements/commit/841af55))
+
+
+
+<a name="2.0.120"></a>
+## [2.0.120](https://github.com/bullhorn/novo-elements/compare/v2.0.119...v2.0.120) (2017-02-08)
+
+
+### Bug Fixes
+
+* **table:** Fixing the sum/avg table footers ([0dede6b](https://github.com/bullhorn/novo-elements/commit/0dede6b))
+
+
+
+<a name="2.0.119"></a>
+## [2.0.119](https://github.com/bullhorn/novo-elements/compare/v2.0.118...v2.0.119) (2017-02-07)
+
+
+### Bug Fixes
+
+* **Table:** Table filtering should be disabled for all columns if set in config ([#394](https://github.com/bullhorn/novo-elements/issues/394)) ([eaf8bce](https://github.com/bullhorn/novo-elements/commit/eaf8bce))
+
+
+### Features
+
+* **form:** Adding a description field ([595d24b](https://github.com/bullhorn/novo-elements/commit/595d24b))
+
+
+
+<a name="2.0.118"></a>
+## [2.0.118](https://github.com/bullhorn/novo-elements/compare/v2.0.117...v2.0.118) (2017-02-07)
+
+
+
+<a name="2.0.117"></a>
+## [2.0.117](https://github.com/bullhorn/novo-elements/compare/v2.0.116...v2.0.117) (2017-02-06)
+
+
+
+<a name="2.0.116"></a>
+## [2.0.116](https://github.com/bullhorn/novo-elements/compare/v2.0.115...v2.0.116) (2017-02-06)
+
+
+
+<a name="2.0.115"></a>
+## [2.0.115](https://github.com/bullhorn/novo-elements/compare/v2.0.114...v2.0.115) (2017-02-05)
+
+
+### Features
+
+* **table:** Make the table have an editable version ([15da5d1](https://github.com/bullhorn/novo-elements/commit/15da5d1))
+
+
+
 <a name="2.0.114"></a>
 ## [2.0.114](https://github.com/bullhorn/novo-elements/compare/v2.0.113...v2.0.114) (2017-02-03)
 

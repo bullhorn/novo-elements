@@ -7,7 +7,7 @@ import { NovoFormGroup } from './DynamicForm';
     selector: 'novo-form',
     template: `
         <div class="novo-form-container">
-            <header>
+            <header *ngIf="!hideHeader">
                 <ng-content select="form-title"></ng-content>
                 <ng-content select="form-subtitle"></ng-content>
             </header>
@@ -18,11 +18,14 @@ import { NovoFormGroup } from './DynamicForm';
     `
 })
 export class NovoFormElement implements OnInit {
-    @Input() form:NovoFormGroup;
-    @Input() layout:string;
+    @Input() form: NovoFormGroup;
+    @Input() layout: string;
+    @Input() hideHeader: boolean = false;
 
     ngOnInit() {
-        this.form.layout = this.layout;
+        if (this.form) {
+            this.form.layout = this.layout;
+        }
     }
 
     get value() {

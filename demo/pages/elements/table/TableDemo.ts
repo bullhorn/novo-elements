@@ -4,24 +4,25 @@ import { Component, OnInit } from '@angular/core';
 import { MovieDataProvider } from './MovieDataProvider';
 import { TableData } from './TableData';
 let TableDemoTpl = require('./templates/TableDemo.html');
+let EditableTableDemoTpl = require('./templates/EditableTableDemo.html');
 let DetailsTableDemoTpl = require('./templates/DetailsTableDemo.html');
 let SelectAllTableDemoTpl = require('./templates/SelectAllTableDemo.html');
 let MovieTableDemoTpl = require('./templates/MovieTableDemo.html');
-
+let TotalFooterTableDemoTpl = require('./templates/TotalFooterTableDemo.html');
 // Vendor
-import { DateCell, BaseRenderer } from './../../../../index';
+import { DateCell, BaseRenderer, NovoTableElement, NovoTableConfig, TextBoxControl, TablePickerControl, SelectControl } from './../../../../index';
 
 const template = `
 <div class="container">
     <h1>Table <small><a target="_blank" href="https://bullhorn.github.io/novo-elements/blob/master/src/elements/table">(source)</a></small></h1>
     <p>Tables allow users to view date in a tabular format and perform actions such as Sorting and Filtering. Different configuration are possible for pagination or infinite scroll. Feature to be added include: Custom Item Renderers, etc...</p>
-
     <h2>Types</h2>
 
     <h5>Basic Table</h5>
     <p>This is the most basic table.</p>
     <div class="example table-demo">${TableDemoTpl}</div>
     <code-snippet [code]="TableDemoTpl"></code-snippet>
+
     <h5>Details Table</h5>
     <p>This has a row renderer to show a new details row that is expanded when you click on the action column.</p>
     <div class="example table-demo">${DetailsTableDemoTpl}</div>
@@ -36,6 +37,16 @@ const template = `
     <p>This has connects to the OMDB service.</p>
     <div class="example table-demo">${MovieTableDemoTpl}</div>
     <code-snippet [code]="MovieTableDemoTpl"></code-snippet>
+
+    <h5>Editable Table</h5>
+    <p>Can be put into edit mode and use editors that are set on the column to modify the data.</p>
+    <div class="example table-demo">${EditableTableDemoTpl}</div>
+    <code-snippet [code]="EditableTableDemoTpl"></code-snippet>
+
+    <h5>Total/Average Footer</h5>
+    <p>Easily configure a footer to sum or average up columns.</p>
+    <div class="example table-demo">${TotalFooterTableDemoTpl}</div>
+    <code-snippet [code]="TotalFooterTableDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -107,26 +118,38 @@ export class ActionsCell extends BaseRenderer {
     }
 }
 
+interface TableDemoConfig {
+    rows?: any[];
+    dataProvider?: any;
+    columns: any[];
+    config: NovoTableConfig;
+}
+
 @Component({
     selector: 'table-demo',
     template: template
 })
 export class TableDemoComponent implements OnInit {
-    private TableDemoTpl: string = TableDemoTpl;
-    private DetailsTableDemoTpl: string = DetailsTableDemoTpl;
-    private SelectAllTableDemoTpl: string = SelectAllTableDemoTpl;
-    private MovieTableDemoTpl: string = MovieTableDemoTpl;
-    private customRowOptions: Array<any> = [
+    public TableDemoTpl: string = TableDemoTpl;
+    public DetailsTableDemoTpl: string = DetailsTableDemoTpl;
+    public SelectAllTableDemoTpl: string = SelectAllTableDemoTpl;
+    public MovieTableDemoTpl: string = MovieTableDemoTpl;
+    public EditableTableDemoTpl: string = EditableTableDemoTpl;
+    public TotalFooterTableDemoTpl: string = TotalFooterTableDemoTpl;
+    public customRowOptions: Array<any> = [
         { label: '10', value: 10 },
         { label: '20', value: 20 },
         { label: '30', value: 30 },
         { label: '40', value: 40 }
     ];
-    private theme: string;
-    private basic: any;
-    private details: any;
-    private selectAll: any;
-    private remote: any;
+    public theme: string;
+    public basic: TableDemoConfig;
+    public details: TableDemoConfig;
+    private selectAll: TableDemoConfig;
+    public remote: TableDemoConfig;
+    public totalFooter: TableDemoConfig;
+    public editable: TableDemoConfig;
+    public editableNewRowDefault: any = { name: 'Default', jobType: 'Contract' };
 
     constructor() {
         let columns = [
@@ -265,6 +288,113 @@ export class TableDemoComponent implements OnInit {
                 resizing: true
             }
         };
+
+        // For columns that can be edited, pass an editor property
+        let names = [
+            'Joshua Godi',
+            'Kameron Sween',
+            'Brian Kimball',
+            'Sweeney Todd',
+            'Tom Cruise',
+            'Ed Bailey',
+            'Bo Jackson',
+            'Ernie McDudson'
+        ];
+        this.editable = {
+            columns: [
+                { title: 'Name', name: 'name', ordering: true, filtering: true, editor: new TablePickerControl({ key: 'name', config: { options: names } }) },
+                { title: 'Job Type', name: 'jobType', ordering: true, filtering: true, editor: new SelectControl({ key: 'jobType', options: ['Freelance', 'Contract', 'Billable'] }) },
+                {
+                    title: 'Rate',
+                    name: 'rate',
+                    ordering: true,
+                    filtering: true,
+                    editor: new TextBoxControl({
+                        key: 'rate',
+                        type: 'currency',
+                        required: true,
+                        interactions: [
+                            {
+                                event: 'change',
+                                script: (form) => {
+                                    console.log('Form Interaction Called!', form); // tslint:disable-line
+                                    if (form.value.rate) {
+                                        if (Number(form.value.rate) >= 1000) {
+                                            form.controls.rating.setValue('High');
+                                        } else if (Number(form.value.rate) >= 100) {
+                                            form.controls.rating.setValue('Medium');
+                                        } else {
+                                            form.controls.rating.setValue('Low');
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    })
+                },
+                { title: 'Rating', name: 'rating' }
+            ],
+            rows: [
+                { id: 1, name: 'Joshua Godi', jobType: 'Freelance', rate: null, rating: 'Low' },
+                { id: 2, name: 'Brian Kimball', jobType: 'Contact', rate: 100, rating: 'Medium' },
+                { id: 3, name: 'Kameron Sween', jobType: 'Billable', rate: 1000, rating: 'High' }
+            ],
+            config: {
+                paging: {
+                    current: 1,
+                    itemsPerPage: 10,
+                    onPageChange: event => {
+                        this.basic.config.paging.current = event.page;
+                        this.basic.config.paging.itemsPerPage = event.itemsPerPage;
+                    }
+                },
+                filtering: true,
+                sorting: true,
+                ordering: true,
+                resizing: true
+            }
+        };
+
+        this.totalFooter = {
+            columns: [
+                { title: 'Name', name: 'name', ordering: true, filtering: true },
+                { title: 'Count 1', name: 'count1', ordering: true, filtering: true },
+                { title: 'Count 2', name: 'count2', ordering: true, filtering: true },
+                { title: 'Count 3', name: 'count3', ordering: true, filtering: true }
+            ],
+            rows: [
+                { id: 1, name: 'Name 1', count1: 1, count2: 2, count3: 3 },
+                { id: 2, name: 'Name 2', count1: 1, count2: 2, count3: 3 },
+                { id: 3, name: 'Name 3', count1: 1, count2: 2, count3: 3 },
+                { id: 4, name: 'Name 4', count1: 1, count2: 2, count3: 3 },
+                { id: 5, name: 'Name 5', count1: 1, count2: 2, count3: 3 },
+            ],
+            config: {
+                paging: {
+                    current: 1,
+                    itemsPerPage: 10,
+                    onPageChange: event => {
+                        this.basic.config.paging.current = event.page;
+                        this.basic.config.paging.itemsPerPage = event.itemsPerPage;
+                    }
+                },
+                footers: [{
+                    columns: ['count1', 'count2', 'count3'],
+                    method: 'SUM',
+                    labelColumn: 'name',
+                    label: 'Mega Total'
+                }, {
+                    columns: ['count1', 'count2', 'count3'],
+                    method: 'AVG',
+                    labelColumn: 'name',
+                    label: 'Yep, Average!'
+                }],
+                filtering: true,
+                sorting: true,
+                ordering: true,
+                resizing: true
+            }
+        };
     }
 
     ngOnInit() {
@@ -289,5 +419,22 @@ export class TableDemoComponent implements OnInit {
 
     selectedAction(action) {
         window.alert(`You clicked ${action}!`);
+    }
+
+    save(table: NovoTableElement) {
+        // Save updated data and get fresh data for the table to reflect the changes!
+        let errorsOrData = table.validateAndGetUpdatedData();
+        if (!errorsOrData.errors) {
+            table.toggleLoading(true);
+            console.log('SAVING', errorsOrData); // tslint:disable-line
+            // TODO - save data - fetch the data
+            setTimeout(() => {
+                table.displayToastMessage({ icon: 'check', theme: 'success', message: 'Saved!' }, 2000);
+                table.leaveEditMode();
+            }, 2000);
+        } else {
+            console.log('ERRORS!', errorsOrData); // tslint:disable-line
+            table.displayToastMessage({ icon: 'caution', theme: 'danger', message: 'Errors!!' });
+        }
     }
 }
