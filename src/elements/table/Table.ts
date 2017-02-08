@@ -364,11 +364,12 @@ export class NovoTableElement implements DoCheck {
                     });
                     // Setup the footers (if any)
                     if (this.config.footers) {
+                        this.footers = [];
                         this.config.footers.forEach((footerConfig, footerConfigIndex) => {
                             let footer = {};
                             footer[footerConfig.labelColumn] = footerConfig.label;
                             footerConfig.columns.forEach(column => {
-                                if (footerConfig.method === 'AVG') {
+                                if (footerConfig.method === 'AVG' && this._rows.length !== 0) {
                                     footer[column] = columnSums[column] / this._rows.length;
                                 } else {
                                     footer[column] = columnSums[column];
