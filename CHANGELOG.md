@@ -1,3 +1,13 @@
+<a name="2.0.121"></a>
+## [2.0.121](https://github.com/bullhorn/novo-elements/compare/v2.0.120...v2.0.121) (2017-02-08)
+
+
+### Features
+
+* **categoryDropdown:** Adding better callback for clicks ([841af55](https://github.com/bullhorn/novo-elements/commit/841af55))
+
+
+
 <a name="2.0.120"></a>
 ## [2.0.120](https://github.com/bullhorn/novo-elements/compare/v2.0.119...v2.0.120) (2017-02-08)
 
