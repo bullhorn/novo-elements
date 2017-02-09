@@ -15,3 +15,4 @@ export * from './controls/text-area/TextAreaControl';
 export * from './controls/textbox/TextBoxControl';
 export * from './controls/tiles/TilesControl';
 export * from './controls/time/TimeControl';
+export * from './controls/read-only/ReadOnlyControl';

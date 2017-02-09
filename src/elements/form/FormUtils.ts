@@ -69,6 +69,7 @@ export class NovoFormControl extends FormControl {
             this.hasRequiredValidator = this.required;
         } else if (!this.required && this.hasRequiredValidator) {
             let validators: any = [...this.validators];
+            validators = validators.filter(val => val !== Validators.required);
             this.setValidators(validators);
             this.updateValueAndValidity();
             this.hasRequiredValidator = this.required;
@@ -107,6 +108,14 @@ export class FormUtils {
             group[control.key] = formControl;
         });
         return new FormGroup(group);
+    }
+
+    addControls(formGroup: FormGroup, controls: NovoControlConfig[]) {
+        controls.forEach(control => {
+            let value = Helpers.isBlank(control.value) ? '' : control.value;
+            let formControl = new NovoFormControl(value, control);
+            formGroup.addControl(control.key, formControl);
+        });
     }
 
     toFormGroupFromFieldset(fieldsets: Array<NovoFieldset>) {
@@ -186,7 +195,8 @@ export class FormUtils {
             config: null,
             options: null,
             interactions: field.interactions,
-            dataSpecialization: field.dataSpecialization
+            dataSpecialization: field.dataSpecialization,
+            description: field.description || ''
         };
         let optionsConfig = this.getControlOptions(field, http, config);
 
@@ -406,10 +416,11 @@ export class FormUtils {
         return null;
     }
 
-    setInitialValues(controls: Array<NovoControlConfig>, values, keepClean = false) {
+    setInitialValues(controls: Array<NovoControlConfig>, values, keepClean = false, keyOverride?: string) {
         for (let i = 0; i < controls.length; i++) {
             let control = controls[i];
-            let value = values[control.key];
+            let key = keyOverride ? control.key.replace(keyOverride, '') : control.key;
+            let value = values[key];
 
             if (Helpers.isBlank(value)) {
                 continue;

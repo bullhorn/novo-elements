@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild, Input, Output, OnInit, DoCheck, Renderer, HostListener } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -16,6 +16,75 @@ const PICKER_VALUE_ACCESSOR = {
     useExisting: forwardRef(() => NovoPickerElement),
     multi: true
 };
+
+// TODO - very similar with Dropdown.ts - need to extract to something!
+@Component({
+    selector: 'novo-picker-container',
+    template: '<ng-content></ng-content>'
+})
+export class NovoPickerContainer implements DoCheck {
+    private position: ClientRect;
+    private isVisible: boolean;
+    private relativeElement: Element;
+    private scrollHandler: any;
+    private side: string;
+    private appendToBody: boolean;
+    public parent: NovoPickerElement;
+
+    constructor(public element: ElementRef, private renderer: Renderer) {
+        this.scrollHandler = this.handleScroll.bind(this);
+    }
+
+    ngDoCheck() {
+        if (this.isVisible && this.position) {
+            const element = this.element.nativeElement;
+            const position = Helpers.calcPositionOffset(this.position, element, this.side);
+            if (position) {
+                this.renderer.setElementStyle(element, 'top', position.top);
+                this.renderer.setElementStyle(element, 'left', position.left);
+                this.renderer.setElementStyle(element, 'width', position.width);
+            }
+        }
+    }
+
+    private handleScroll(): void {
+        // On scroll, don't force the position to update (jump from top/middle/bottom/right)
+        this.updatePosition(this.relativeElement, this.side);
+    }
+
+    public show(appendToBody: boolean): void {
+        this.appendToBody = appendToBody;
+        this.renderer.setElementStyle(this.element.nativeElement, 'display', 'block');
+        this.renderer.setElementStyle(this.element.nativeElement, 'visibility', 'visible');
+        this.isVisible = true;
+        if (appendToBody) {
+            window.addEventListener('scroll', this.scrollHandler);
+        }
+    }
+
+    public hide(): void {
+        this.isVisible = false;
+        this.renderer.setElementStyle(this.element.nativeElement, 'visibility', 'hidden');
+        if (this.appendToBody) {
+            window.removeEventListener('scroll', this.scrollHandler);
+        }
+    }
+
+    public updatePosition(element: Element, side: string): void {
+        this.relativeElement = element;
+        this.side = side;
+        this.position = element.getBoundingClientRect();
+        this.ngDoCheck();
+    }
+
+    @HostListener('keydown', ['$event'])
+    public onKeyDown(event: KeyboardEvent): void {
+        // Close with ESC/Enter
+        if (this.isVisible && (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER)) {
+            this.parent.toggleActive(null, false);
+        }
+    }
+}
 
 /**
  * @name Picker
@@ -41,10 +110,13 @@ const PICKER_VALUE_ACCESSOR = {
             autocomplete="off" />
         <i class="bhi-search" *ngIf="!_value"></i>
         <i class="bhi-times" *ngIf="_value" (click)="clearValue(true)"></i>
-        <div class="picker-results-container">
+        <novo-picker-container class="picker-results-container">
             <span #results></span>
-        </div>
-    `
+        </novo-picker-container>
+    `,
+    host: {
+        '[class.append-to-body]': 'appendToBody'
+    }
 })
 export class NovoPickerElement extends OutsideClick implements OnInit {
     // Container for the results
@@ -55,6 +127,17 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     @Input() clearValueOnSelect: boolean;
     @Input() closeOnSelect: boolean = true;
     @Input() selected: Array<any> = [];
+    // Append the dropdown container to the body
+    @Input() appendToBody: boolean = false;
+    // Listen for scroll on a parent selector, so we can close the dropdown
+    @Input() parentScrollSelector: string;
+    // What action to perform when we recieve scroll from parent selector
+    // TODO - handle "move"
+    @Input() parentScrollAction: string = 'close';
+    // Custom class for the dropdown container
+    @Input() containerClass: string;
+    // Side the dropdown will open
+    @Input() side: string = 'left';
 
     // Emitter for selects
     @Output() select: EventEmitter<any> = new EventEmitter();
@@ -62,6 +145,10 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     @Output() blur: EventEmitter<any> = new EventEmitter();
     @Output() typing: EventEmitter<any> = new EventEmitter();
 
+    @ViewChild(NovoPickerContainer) public container: NovoPickerContainer;
+
+    parentScrollElement: Element;
+    closeHandler: any;
     isStatic: boolean = true;
     term: string = '';
     resultsComponent: any;
@@ -74,13 +161,15 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
 
     constructor(element: ElementRef, private componentUtils: ComponentUtils) {
         super(element);
-        // Bind to the active change event from the OutsideClick
-        this.onActiveChange.subscribe(active => {
-            if (!active) {
-                setTimeout(() => {
-                    this.hideResults();
-                    this.blur.emit();
-                });
+        // Setup handlers
+        this.closeHandler = this.toggleActive.bind(this);
+        // Listen for active change to hide/show results
+        this.onActiveChange.subscribe((active) => {
+            if (active) {
+                this.show();
+            } else {
+                this.hideResults();
+                this.blur.emit();
             }
         });
     }
@@ -88,6 +177,10 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     ngOnInit() {
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || PickerResults;
+        // Find parent
+        if (this.parentScrollSelector) {
+            this.parentScrollElement = Helpers.findAncestor(this.element.nativeElement, this.parentScrollSelector);
+        }
         // Get all distinct key up events from the input and only fire if long enough and distinct
         let input = this.element.nativeElement.querySelector('input');
         const observer = Observable.fromEvent(input, 'keyup')
@@ -95,8 +188,45 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
             .debounceTime(250)
             .distinctUntilChanged();
         observer.subscribe(
-            term => this.showResults(term),
+            term => this.show(term),
             err => this.hideResults(err));
+    }
+
+    private show(term?: string): void {
+        this.container.parent = this;
+        this.container.show(this.appendToBody);
+        this.otherElement = this.container.element;
+        if (this.appendToBody) {
+            this.container.updatePosition(this.element.nativeElement.children[0], this.side);
+            // If append to body then rip it out of here and put on body
+            window.document.body.appendChild(this.container.element.nativeElement);
+            window.addEventListener('resize', this.closeHandler);
+        }
+        // Listen for scroll on a parent to force close
+        if (this.parentScrollElement) {
+            if (this.parentScrollAction === 'close') {
+                this.parentScrollElement.addEventListener('scroll', this.closeHandler);
+            }
+        }
+        // Show the results inside
+        this.showResults(term);
+    }
+
+    private hide(): void {
+        this.container.hide();
+        // If append to body then rip it out of here and put on body
+        if (this.appendToBody) {
+            let elm = this.container.element.nativeElement;
+            if (elm.parentNode) {
+                elm.parentNode.removeChild(elm);
+            }
+            window.removeEventListener('resize', this.closeHandler);
+        }
+        if (this.parentScrollElement) {
+            if (this.parentScrollAction === 'close') {
+                this.parentScrollElement.removeEventListener('scroll', this.closeHandler);
+            }
+        }
     }
 
     /**
@@ -132,7 +262,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
 
             if (event.keyCode === KeyCodes.BACKSPACE && !Helpers.isBlank(this._value)) {
                 this.clearValue(false);
-                this.showResults();
+                this.toggleActive(null, true);
             }
         }
     }
@@ -154,7 +284,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
      * results.
      */
     onFocus(event) {
-        this.showResults();
+        this.toggleActive(null, true);
         this.focus.emit(event);
     }
 
@@ -165,7 +295,6 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
      * instance.
      */
     showResults(term?: any) {
-        this.toggleActive(null, true);
         // Update Matches
         if (this.popup) {
             // Update existing list or create the DOM element
@@ -190,6 +319,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
             this.popup.destroy();
             this.popup = null;
         }
+        this.hide();
     }
 
     // get accessor

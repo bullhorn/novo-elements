@@ -1,10 +1,31 @@
 .demo-custom-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    input {
+        width: 70px;
+        color: $dark;
+        padding: 0.6em;
+    }
+}
+
+.demo-custom-footer {
+    &.editing {
+        padding: 1.2em;
+    }
 }
 
 image-cell {
     img {
         height: 100px;
+    }
+}
+
+.table-demo {
+    .final-value {
+        color: #afafaf;
+        padding: 10px;
+        background: #f4f4f4;
+        border-top: 1px solid #E9EAEA;
     }
 }

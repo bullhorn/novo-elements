@@ -33,6 +33,9 @@ export interface NovoControlConfig {
     closeOnSelect?: boolean;
     interactions?: Array<Object>;
     dataSpecialization?: string;
+    appendToBody?: boolean;
+    parentScrollSelector?: string;
+    description?: string;
 }
 
 export class BaseControl {
@@ -64,6 +67,9 @@ export class BaseControl {
     closeOnSelect: boolean;
     interactions: Array<Object>;
     dataSpecialization: string;
+    appendToBody: boolean;
+    parentScrollSelector: string;
+    description?: string;
 
     constructor(config: NovoControlConfig) {
         this.validators = config.validators || [];
@@ -101,5 +107,8 @@ export class BaseControl {
         this.closeOnSelect = !!config.closeOnSelect;
         this.interactions = config.interactions;
         this.dataSpecialization = config.dataSpecialization;
+        this.appendToBody = !!config.appendToBody;
+        this.parentScrollSelector = config.parentScrollSelector;
+        this.description = config.description;
     }
 }

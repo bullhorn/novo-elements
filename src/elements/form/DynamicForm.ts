@@ -1,7 +1,7 @@
 // NG2
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 // APP
-import { Helpers } from './../../utils/Helpers.js';
+import { Helpers } from './../../utils/Helpers';
 
 export interface NovoFormGroup {
     layout?: any;

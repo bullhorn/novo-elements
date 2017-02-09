@@ -33,15 +33,24 @@ novo-picker {
         cursor: pointer;
         font-size: 1em;
     }
-    div.picker-results-container {
+    .picker-results-container {
         position: absolute;
         top: 100%;
         width: 100%;
-        margin-top: 0.5em;
         entity-picker-results,
         picker-results.active {
             margin-bottom: 100px;
         }
+    }
+}
+
+.picker-results-container {
+    position: absolute;
+    z-index: 1000;
+    min-width: 180px;
+    entity-picker-results,
+    picker-results.active {
+        margin-bottom: 100px;
     }
 }
 

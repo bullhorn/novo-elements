@@ -9,12 +9,15 @@ export const MockMeta = {
             label: 'First Name',
             required: true,
             sortOrder: 10,
-            maxLength: 10
+            maxLength: 10,
+            description: 'First Name, Yo!'
         },
         {
             name: 'lastName',
             type: 'text',
             label: 'Last Name',
+            hint: 'Last Name, Yo!',
+            description: 'Last Name, Yo!',
             sortOrder: 20
         },
         {
@@ -30,7 +33,8 @@ export const MockMeta = {
             type: 'number',
             label: 'Date Founded',
             dataSpecialization: 'YEAR',
-            sortOrder: 40
+            sortOrder: 40,
+            description: 'Year when this company was founded',
         },
         {
             name: 'float',
@@ -388,6 +392,14 @@ export const MockMeta = {
             ],
             required: true,
             sortOrder: 9000
+        }, {
+            name: 'comments',
+            type: 'textarea',
+            label: 'Comments',
+            required: true,
+            sortOrder: 9010,
+            maxLength: 150,
+            description: 'Comments, Please'
         }
     ]
 };
