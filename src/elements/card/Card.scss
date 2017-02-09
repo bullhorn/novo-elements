@@ -20,25 +20,26 @@ novo-card {
             align-items: center;
             justify-content: space-between;
             padding: 20px;
-
             .title {
                 display: flex;
                 align-items: center;
-
+                min-width: 0;
                 i.bhi-move {
                     color: $light;
                     margin-right: 10px;
                     cursor: pointer;
+                    height: 1.3em
                 }
-
                 h3 {
                     padding: 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
             }
-
             .actions {
                 color: darken($light, 35%);
-
+                white-space: nowrap;
                 button {
                     font-size: 1.2em;
                     text-transform: none;
