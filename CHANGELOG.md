@@ -1,3 +1,13 @@
+<a name="2.0.123"></a>
+## [2.0.123](https://github.com/bullhorn/novo-elements/compare/v2.0.122...v2.0.123) (2017-02-09)
+
+
+### Bug Fixes
+
+* **picker:** paging correctly ([#397](https://github.com/bullhorn/novo-elements/issues/397)) ([0870e55](https://github.com/bullhorn/novo-elements/commit/0870e55))
+
+
+
 <a name="2.0.122"></a>
 ## [2.0.122](https://github.com/bullhorn/novo-elements/compare/v2.0.121...v2.0.122) (2017-02-09)
 
