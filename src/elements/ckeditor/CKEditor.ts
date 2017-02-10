@@ -116,7 +116,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
         this.instance.on('focus', (event) => {
             this.focus.emit(event);
         });
-        this.instance.on('focus', (event) => {
+        this.instance.on('paste', (event) => {
             this.paste.emit(event);
         });
         this.instance.on('loaded', (event) => {

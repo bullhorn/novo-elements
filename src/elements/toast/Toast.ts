@@ -17,6 +17,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
         <div class="toast-content">
             <h5 *ngIf="title">{{title}}</h5>
             <p *ngIf="message" [class.message-only]="!title">{{message}}</p>
+            <ng-content></ng-content>
         </div>
     `
 })
