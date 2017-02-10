@@ -201,6 +201,10 @@ novo-notification {
 novo-notification {
     & > section {
         padding: 0 20px;
-        margin-bottom: 25px;
+        margin: 15px 0 55px;
+
+        h1 {
+            margin: 10px auto 0;
+        }
     }
 }
