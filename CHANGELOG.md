@@ -1,3 +1,13 @@
+<a name="2.0.124"></a>
+## [2.0.124](https://github.com/bullhorn/novo-elements/compare/v2.0.123...v2.0.124) (2017-02-10)
+
+
+### Features
+
+* **ckeditor:** Add paste and loaded events ([#398](https://github.com/bullhorn/novo-elements/issues/398)) ([3c2016f](https://github.com/bullhorn/novo-elements/commit/3c2016f))
+
+
+
 <a name="2.0.123"></a>
 ## [2.0.123](https://github.com/bullhorn/novo-elements/compare/v2.0.122...v2.0.123) (2017-02-09)
 
