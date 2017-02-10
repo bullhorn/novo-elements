@@ -1,3 +1,13 @@
+<a name="2.0.125"></a>
+## [2.0.125](https://github.com/bullhorn/novo-elements/compare/v2.0.124...v2.0.125) (2017-02-10)
+
+
+### Features
+
+* **toast:** Transcluding content ([a31de4f](https://github.com/bullhorn/novo-elements/commit/a31de4f))
+
+
+
 <a name="2.0.124"></a>
 ## [2.0.124](https://github.com/bullhorn/novo-elements/compare/v2.0.123...v2.0.124) (2017-02-10)
 
