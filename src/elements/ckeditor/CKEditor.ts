@@ -28,6 +28,8 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
     @Output() ready = new EventEmitter();
     @Output() blur = new EventEmitter();
     @Output() focus = new EventEmitter();
+    @Output() paste = new EventEmitter();
+    @Output() loaded = new EventEmitter();
     @ViewChild('host') host;
 
     _value: string = '';
@@ -113,6 +115,12 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
         });
         this.instance.on('focus', (event) => {
             this.focus.emit(event);
+        });
+        this.instance.on('focus', (event) => {
+            this.paste.emit(event);
+        });
+        this.instance.on('loaded', (event) => {
+            this.loaded.emit(event);
         });
     }
 
