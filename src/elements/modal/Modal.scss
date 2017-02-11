@@ -21,26 +21,32 @@ novo-modal {
     & > header {
         border-top-left-radius: 3px;
         border-top-right-radius: 3px;
+
         h2 {
-            padding: .75em;
+            padding: 0.75em;
         }
     }
+
     & > section {
         padding: 1em 3em;
         max-height: 500px;
         overflow: auto;
     }
+
     & > footer {
         display: flex;
         align-items: center;
-        padding: .5em;
+        padding: 0.5em;
+
         button {
             width: 50%;
+
             &:first-of-type {
-                margin: 0 .5% 0 0;
+                margin: 0 0.5% 0 0;
             }
+
             &:last-of-type {
-                margin: 0 0 0 .5%;
+                margin: 0 0 0 0.5%;
             }
         }
     }
@@ -48,7 +54,8 @@ novo-modal {
 
 novo-notification {
     text-align: center;
-    padding: .5em;
+    padding: 0.5em;
+
     & > section {
         text-align: center;
     }
@@ -63,6 +70,7 @@ novo-notification {
     box-shadow: 0 1px 7px rgba(0, 0, 0, .09), 0 1px 3px rgba(0, 0, 0, .20);
     z-index: 1000;
     position: relative;
+    min-width: 330px;
 
     & > button.modal-close {
         position: absolute;
@@ -75,6 +83,7 @@ novo-notification {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+
         h1 {
             margin: 0;
             text-align: left;
@@ -84,22 +93,30 @@ novo-notification {
     & > section {
         display: flex;
         flex-direction: column;
+
         & > img {
             width: 100%;
         }
+
         h1 {
+            font-size: 1.8em;
             color: darken($light, 45%);
             margin: 0 auto;
         }
+
+        h2,
         h4 {
+            font-size: 1.3em;
             color: darken($light, 15%);
-            margin: 0 auto 25px auto;
+            margin: 0 auto;
+            padding: 0;
         }
+
         i.indicator {
             color: darken($light, 10%);
             font-size: 1.7em;
             border-radius: 50%;
-            padding: .5em;
+            padding: 7.5px;
             border: 2px solid darken($light, 10%);
             width: 50px;
             height: 50px;
@@ -121,7 +138,6 @@ novo-notification {
             }
 
             &[theme="primary"] {
-
                 .flex-wrapper {
                     justify-content: center !important;
                 }
@@ -136,40 +152,59 @@ novo-notification {
                 border-color: $success;
             }
         }
+
         button[theme="primary"] {
             width: 100%;
+
             .flex-wrapper {
                 justify-content: center;
             }
         }
     }
+
     &[type="warning"] {
         footer {
             display: flex;
+
             .flex-wrapper {
                 justify-content: center;
-            }
-        }
-        button {
-            width: 50%;
-            justify-content: center;
-            &:first-of-type {
-                margin: 0 .5% 0 0;
-            }
-            &:last-of-type {
-                margin: 0 0 0 .5%;
             }
         }
 
-    }
-    &[type="error"] {
-        & > section {
+        button {
+            width: 50%;
+            justify-content: center;
+
+            &:first-of-type {
+                margin: 0 0.5% 0 0;
+            }
+
+            &:last-of-type {
+                margin: 0 0 0 0.5%;
+            }
         }
+    }
+
+    &[type="error"] {
+        & > section {}
+
         button[theme="primary"].primary {
             width: 100%;
+
             .flex-wrapper {
                 justify-content: center;
             }
+        }
+    }
+}
+
+novo-notification {
+    & > section {
+        padding: 0 20px;
+        margin: 15px 0 55px;
+
+        h1 {
+            margin: 10px auto 0;
         }
     }
 }
