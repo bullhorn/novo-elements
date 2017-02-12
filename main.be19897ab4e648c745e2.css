@@ -4069,7 +4069,7 @@ novo-modal > header {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px; }
   novo-modal > header h2 {
-    padding: .75em; }
+    padding: 0.75em; }
 
 novo-modal > section {
   padding: 1em 3em;
@@ -4081,17 +4081,17 @@ novo-modal > footer {
   display: flex;
   -ms-flex-align: center;
       align-items: center;
-  padding: .5em; }
+  padding: 0.5em; }
   novo-modal > footer button {
     width: 50%; }
     novo-modal > footer button:first-of-type {
-      margin: 0 .5% 0 0; }
+      margin: 0 0.5% 0 0; }
     novo-modal > footer button:last-of-type {
-      margin: 0 0 0 .5%; }
+      margin: 0 0 0 0.5%; }
 
 novo-notification {
   text-align: center;
-  padding: .5em; }
+  padding: 0.5em; }
   novo-notification > section {
     text-align: center; }
 
@@ -4103,7 +4103,8 @@ novo-notification {
   border-radius: 4px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  position: relative; }
+  position: relative;
+  min-width: 330px; }
   novo-modal > button.modal-close,
   novo-notification > button.modal-close {
     position: absolute;
@@ -4133,18 +4134,23 @@ novo-notification {
       width: 100%; }
     novo-modal > section h1,
     novo-notification > section h1 {
+      font-size: 1.8em;
       color: #63666c;
       margin: 0 auto; }
+    novo-modal > section h2,
     novo-modal > section h4,
+    novo-notification > section h2,
     novo-notification > section h4 {
+      font-size: 1.3em;
       color: #b1b3b7;
-      margin: 0 auto 25px auto; }
+      margin: 0 auto;
+      padding: 0; }
     novo-modal > section i.indicator,
     novo-notification > section i.indicator {
       color: #bec0c4;
       font-size: 1.7em;
       border-radius: 50%;
-      padding: .5em;
+      padding: 7.5px;
       border: 2px solid #bec0c4;
       width: 50px;
       height: 50px;
@@ -4197,10 +4203,10 @@ novo-notification {
         justify-content: center; }
     novo-modal[type="warning"] button:first-of-type,
     novo-notification[type="warning"] button:first-of-type {
-      margin: 0 .5% 0 0; }
+      margin: 0 0.5% 0 0; }
     novo-modal[type="warning"] button:last-of-type,
     novo-notification[type="warning"] button:last-of-type {
-      margin: 0 0 0 .5%; }
+      margin: 0 0 0 0.5%; }
   novo-modal[type="error"] button[theme="primary"].primary,
   novo-notification[type="error"] button[theme="primary"].primary {
     width: 100%; }
@@ -4208,6 +4214,12 @@ novo-notification {
     novo-notification[type="error"] button[theme="primary"].primary .flex-wrapper {
       -ms-flex-pack: center;
           justify-content: center; }
+
+novo-notification > section {
+  padding: 0 20px;
+  margin: 15px 0 55px; }
+  novo-notification > section h1 {
+    margin: 10px auto 0; }
 
 novo-card-best-time label {
   text-transform: uppercase;
@@ -11985,88 +11997,88 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 41px;
-      height: 41px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 37px;
-      height: 37px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 32px;
-      height: 32px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 34px;
-      height: 34px; }
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 32px;
-      height: 32px; }
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 26px;
-      height: 26px; }
+      width: 30px;
+      height: 30px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
-      width: 41px;
-      height: 41px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-submission {
+      background: #747884;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 44px;
+      height: 44px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-note {
       background: #747884;
       width: 30px;
       height: 30px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 43px;
-      height: 43px; }
     color header .background-boxes .bb-task {
       background: #747884;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-distributionList {
-      background: #747884;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
       width: 38px;
       height: 38px; }
+    color header .background-boxes .bb-distributionList {
+      background: #747884;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 44px;
+      height: 44px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
       width: 44px;
       height: 44px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 31px;
-      height: 31px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
       width: 40px;
@@ -13013,4 +13025,4 @@ popover-demo .example.popover-demo {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.2283b930f122dc787d63.bundle.map*/
+/*# sourceMappingURL=main.be19897ab4e648c745e2.bundle.map*/
