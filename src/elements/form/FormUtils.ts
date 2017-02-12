@@ -196,7 +196,9 @@ export class FormUtils {
             options: null,
             interactions: field.interactions,
             dataSpecialization: field.dataSpecialization,
-            description: field.description || ''
+            description: field.description || '',
+            tooltip: field.tooltip,
+            tooltipPosition: field.tooltipPosition
         };
         let optionsConfig = this.getControlOptions(field, http, config);
 

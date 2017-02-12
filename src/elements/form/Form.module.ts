@@ -20,6 +20,7 @@ import { NovoFormElement } from './Form';
 import { NovoControlElement } from './Control';
 import { NovoFormExtrasModule } from './extras/FormExtras.module';
 import { NovoHeaderModule } from './../header/Header.module';
+import { NovoTooltipModule } from './../tooltip/Tooltip.module';
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import { NovoHeaderModule } from './../header/Header.module';
         NovoFormExtrasModule,
         NovoQuickNoteModule,
         NovoDateTimePickerModule,
-        NovoHeaderModule
+        NovoHeaderModule,
+        NovoTooltipModule
     ],
     declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement],
     exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement]
