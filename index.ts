@@ -55,15 +55,15 @@ export { FormValidators } from './src/elements/form/FormValidators';
 export { FormUtils } from './src/elements/form/FormUtils';
 export * from './src/elements/form/FormControls';
 // Utils
-export * from './src/utils/outside-click/OutsideClick';
-export * from './src/utils/key-codes/KeyCodes';
-export * from './src/utils/deferred/Deferred';
-export * from './src/utils/countries/Countries';
-export * from './src/utils/Helpers';
-export * from './src/utils/component-utils/ComponentUtils';
+export { OutsideClick } from './src/utils/outside-click/OutsideClick';
+export { KeyCodes } from './src/utils/key-codes/KeyCodes';
+export { Deferred } from './src/utils/deferred/Deferred';
+export { COUNTRIES, getCountries, getStateObjects, getStates, findByCountryCode, findByCountryId, findByCountryName } from './src/utils/countries/Countries';
+export { Helpers } from './src/utils/Helpers';
+export { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
 // Providers
-export * from './novo-elements.providers';
+export { NovoElementProviders } from './novo-elements.providers';
 // Pipes
-export * from './src/pipes/plural/Plural';
+export { PluralPipe } from './src/pipes/plural/Plural';
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';
