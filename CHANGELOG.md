@@ -1,3 +1,13 @@
+<a name="2.0.127"></a>
+## [2.0.127](https://github.com/bullhorn/novo-elements/compare/v2.0.126...v2.0.127) (2017-02-13)
+
+
+### Features
+
+* **form:** Adding tooltip support ([cd0c221](https://github.com/bullhorn/novo-elements/commit/cd0c221))
+
+
+
 <a name="2.0.126"></a>
 ## [2.0.126](https://github.com/bullhorn/novo-elements/compare/v2.0.125...v2.0.126) (2017-02-12)
 
