@@ -1,6 +1,8 @@
 // NG2
 import { Component, EventEmitter, forwardRef, ElementRef, ViewChild, ViewContainerRef, Input, Output, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+// Vendor
+import { Observable } from 'rxjs/Rx';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
@@ -96,6 +98,15 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
         }
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || QuickNoteResults;
+        // Get all distinct key up events from the input and only fire if long enough and distinct
+        let input = this.element.nativeElement.querySelector('textarea');
+        const observer = Observable.fromEvent(input, 'keyup')
+            .map((e: any) => e.target.value)
+            .debounceTime(250)
+            .distinctUntilChanged();
+        observer.subscribe(
+            term => this.showResults(term),
+            err => this.hideResults());
     }
 
     onKeyPress(event) {
@@ -148,22 +159,6 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
                 this.quickNoteResults.instance.selectActiveMatch();
                 return false;
             }
-        }
-
-        let timer = null;
-        clearTimeout(timer);
-        if (this.isTagging) {
-            timer = setTimeout(() => {
-                let searchQuery;
-                searchQuery = this.extractSearchQuery();
-                if (searchQuery.length) {
-                    this.searchTerm = searchQuery;
-                    this.showResults();
-                } else {
-                    this.searchTerm = null;
-                    this.hideResults();
-                }
-            }, 250);
         }
         return true;
     }
@@ -256,19 +251,28 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
      * @description This method creates an instance of the results (called popup) and adds all the bindings to that
      * instance.
      */
-    showResults() {
-        this.toggleActive(null, true);
-        // Update Matches
-        if (this.quickNoteResults) {
-            // Update existing list or create the DOM element
-            this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
-        } else {
-            this.quickNoteResults = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
-            this.quickNoteResults.instance.parent = this;
-            this.quickNoteResults.instance.config = this.config;
-            this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
+    showResults(term: string) {
+        if (this.isTagging) {
+            let searchQuery;
+            searchQuery = this.extractSearchQuery();
+            if (searchQuery.length) {
+                this.searchTerm = searchQuery;
+                // Update Matches
+                if (this.quickNoteResults) {
+                    // Update existing list or create the DOM element
+                    this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
+                } else {
+                    this.quickNoteResults = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
+                    this.quickNoteResults.instance.parent = this;
+                    this.quickNoteResults.instance.config = this.config;
+                    this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
+                }
+                this.positionResultsDropdown();
+            } else {
+                this.hideResults();
+            }
+            this.toggleActive(null, true);
         }
-        this.positionResultsDropdown();
     }
 
     /**
@@ -278,6 +282,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
      */
     hideResults() {
         this.isTagging = false;
+        this.searchTerm = null;
         if (this.quickNoteResults) {
             this.quickNoteResults.destroy();
             this.quickNoteResults = null;
