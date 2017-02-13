@@ -116,7 +116,7 @@ export class BaseControl {
         this.description = config.description;
         if (config.tooltip) {
             this.tooltip = config.tooltip;
-            this.tooltipPosition = config.tooltipPosition || 'right';
+            this.tooltipPosition = config.tooltipPosition;
         }
     }
 }

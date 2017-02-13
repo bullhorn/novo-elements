@@ -31,6 +31,8 @@ export class NovoFormControl extends FormControl {
     readOnly: boolean;
     validators: any;
     hasRequiredValidator: boolean;
+    tooltip: string;
+    tooltipPosition: string;
 
     constructor(value: any, control: NovoControlConfig) {
         super(value, control.validators, control.asyncValidators);
@@ -44,6 +46,8 @@ export class NovoFormControl extends FormControl {
         // Set required
         this.required = control.required;
         this.hasRequiredValidator = this.required;
+        this.tooltip = control.tooltip;
+        this.tooltipPosition = control.tooltipPosition;
     }
 
     hide(clearValue: true): void {
