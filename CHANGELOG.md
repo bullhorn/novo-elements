@@ -1,3 +1,13 @@
+<a name="2.0.128"></a>
+## [2.0.128](https://github.com/bullhorn/novo-elements/compare/v2.0.127...v2.0.128) (2017-02-13)
+
+
+### Bug Fixes
+
+* **quicknote:** Debouncing input to avoid crazy amounts of calls ([ec0f7a5](https://github.com/bullhorn/novo-elements/commit/ec0f7a5))
+
+
+
 <a name="2.0.127"></a>
 ## [2.0.127](https://github.com/bullhorn/novo-elements/compare/v2.0.126...v2.0.127) (2017-02-13)
 
