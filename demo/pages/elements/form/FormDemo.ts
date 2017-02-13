@@ -153,19 +153,19 @@ export class FormDemoComponent {
             }
         };
         // Text-based Controls
-        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box' });
-        this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email' });
+        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box' , tooltip: 'Textbox'});
+        this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email', tooltip: 'Email' });
         this.numberControl = new TextBoxControl({ type: 'number', key: 'number', label: 'Number' });
         this.currencyControl = new TextBoxControl({ type: 'currency', key: 'currency', label: 'Currency', currencyFormat: '$ USD' });
         this.floatControl = new TextBoxControl({ type: 'float', key: 'float', label: 'Float' });
         this.percentageControl = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent' });
-        this.quickNoteControl = new QuickNoteControl({ key: 'note', label: 'Note', config: this.quickNoteConfig, required: true });
+        this.quickNoteControl = new QuickNoteControl({ key: 'note', label: 'Note', config: this.quickNoteConfig, required: true, tooltip: 'Quicknote' });
         this.textForm = formUtils.toFormGroup([this.textControl, this.emailControl, this.numberControl, this.currencyControl, this.floatControl, this.percentageControl, this.quickNoteControl]);
 
         // Check box controls
         this.checkControl = new CheckboxControl({ key: 'check', label: 'Checkbox' });
-        this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'] });
-        this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }] });
+        this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'], tooltip: 'CheckList', tooltipPosition: 'Top'});
+        this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }], tooltip: 'Tiles' });
         this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl]);
 
         // Picker controls
@@ -174,13 +174,13 @@ export class FormDemoComponent {
         this.pickerForm = formUtils.toFormGroup([this.singlePickerControl, this.multiPickerControl]);
 
         // File input controls
-        this.fileControl = new FileControl({ key: 'file', name: 'myfile', label: 'File' });
+        this.fileControl = new FileControl({ key: 'file', name: 'myfile', label: 'File', tooltip: 'Files Control' });
         this.multiFileControl = new FileControl({ key: 'files', name: 'myfiles', label: 'Multiple Files', multiple: true });
         this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
 
         // Calendar input controls
-        this.dateControl = new DateControl({ key: 'date', label: 'Date' });
-        this.timeControl = new TimeControl({ key: 'time', label: 'Time' });
+        this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
+        this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time'  });
         this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time' });
         this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
 

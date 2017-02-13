@@ -230,6 +230,7 @@ export const MockMeta = {
             readOnly: false,
             multiValue: false,
             hideFromSearch: true,
+            tooltip: 'Address Block',
             fields: [
                 {
                     name: 'address1',
