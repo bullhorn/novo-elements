@@ -510,8 +510,11 @@ export class NovoTableElement implements DoCheck {
     onFilterClear(column) {
         setTimeout(() => {
             column.filter = null;
-            column.freeTextFilter = null;
+            column.freetextFilter = null;
             this.onFilterChange();
+            if (column.originalOptions) {
+                column.options = column.originalOptions;
+            }
         });
     }
 
@@ -831,11 +834,7 @@ export class NovoTableElement implements DoCheck {
                 return false;
             });
             config.filtering.options = newOptions;
-            // if (config.filtering.originalOptions[0].label) {
-            //     config.filtering.filter = [{ label: config.filtering.freetextFilter, value: config.filtering.freetextFilter }];
-            // } else {
             config.filtering.filter = config.filtering.freetextFilter;
-            // }
         } else {
             config.filtering.options = config.filtering.originalOptions;
         }
