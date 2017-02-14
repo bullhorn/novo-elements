@@ -1,3 +1,13 @@
+<a name="2.0.129"></a>
+## [2.0.129](https://github.com/bullhorn/novo-elements/compare/v2.0.128...v2.0.129) (2017-02-14)
+
+
+### Bug Fixes
+
+* **table:** Fixing freetext filter clear ([10b8f58](https://github.com/bullhorn/novo-elements/commit/10b8f58))
+
+
+
 <a name="2.0.128"></a>
 ## [2.0.128](https://github.com/bullhorn/novo-elements/compare/v2.0.127...v2.0.128) (2017-02-13)
 
