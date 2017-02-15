@@ -275,6 +275,22 @@ novo-toast:not(.launched) {
     animation: embedded-slide-in 200ms ease-in-out;
 }
 
+novo-toast.dialogue {
+    .toast-content {
+        display: flex;
+        flex-direction: row !important;
+        align-items: center;
+    }
+
+    p.message-only {
+        flex: 3 0 0;
+    }
+
+    .dialogue {
+        display: inherit;
+    }
+}
+
 @keyframes embedded-slide-in {
     from {
         transform: translateY(-100%);
