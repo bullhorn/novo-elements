@@ -1472,6 +1472,9 @@ i {
     i[theme][theme="contained"].distributionList {
       color: #ffffff;
       background: #747884; }
+    i[theme][theme="contained"].credential {
+      color: #ffffff;
+      background: #747884; }
     i[theme][theme="contained"].aqua {
       color: #ffffff;
       background: #3BAFDA; }
@@ -1536,6 +1539,9 @@ i {
     color: #747884;
     background: transparent; }
   i[theme][theme="entity"].distributionList {
+    color: #747884;
+    background: transparent; }
+  i[theme][theme="entity"].credential {
     color: #747884;
     background: transparent; }
 
@@ -2536,6 +2542,9 @@ novo-toast.task {
   background: #747884; }
 
 novo-toast.distributionList {
+  background: #747884; }
+
+novo-toast.credential {
   background: #747884; }
 
 novo-toast.text {
@@ -4018,6 +4027,21 @@ novo-toast.embedded.fixedTop {
 
 novo-toast:not(.launched) {
   animation: embedded-slide-in 200ms ease-in-out; }
+
+novo-toast.dialogue .toast-content {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row !important;
+      flex-direction: row !important;
+  -ms-flex-align: center;
+      align-items: center; }
+
+novo-toast.dialogue p.message-only {
+  -ms-flex: 3 0 0;
+      flex: 3 0 0; }
+
+novo-toast.dialogue .dialogue {
+  display: inherit; }
 
 @keyframes embedded-slide-in {
   from {
@@ -7609,6 +7633,12 @@ header.novo-header[theme="distributionList"] {
   header.novo-header[theme="distributionList"] > section.primary {
     background: #747884; }
 
+header.novo-header[theme="credential"] {
+  background: #747884;
+  color: #fff; }
+  header.novo-header[theme="credential"] > section.primary {
+    background: #747884; }
+
 header.novo-header[theme="positive"] {
   background: #4A89DC;
   color: #fff; }
@@ -7829,6 +7859,16 @@ novo-list {
       color: #fff; }
     novo-list[theme="distributionList"] novo-list-item item-content > * {
       color: rgba(255, 255, 255, 0.65); }
+  novo-list[theme="credential"] novo-list-item {
+    background: #747884;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    novo-list[theme="credential"] novo-list-item i {
+      color: #fff; }
+    novo-list[theme="credential"] novo-list-item item-title h6 {
+      color: #fff; }
+    novo-list[theme="credential"] novo-list-item item-content > * {
+      color: rgba(255, 255, 255, 0.65); }
   novo-list[theme="positive"] novo-list-item {
     background: #4A89DC;
     color: #fff;
@@ -8011,6 +8051,8 @@ novo-list-item {
         background: #747884; }
       novo-list-item item-header item-avatar i.distributionList {
         background: #747884; }
+      novo-list-item item-header item-avatar i.credential {
+        background: #747884; }
     novo-list-item item-header item-title {
       -ms-flex: 2 0 0;
           flex: 2 0 0; }
@@ -8077,6 +8119,8 @@ novo-list-item {
     novo-list-item item-content i.task {
       color: #747884; }
     novo-list-item item-content i.distributionList {
+      color: #747884; }
+    novo-list-item item-content i.credential {
       color: #747884; }
     novo-list-item item-content.vertical-list {
       -ms-flex-direction: column;
@@ -8820,6 +8864,24 @@ novo-table[theme="distributionList"] > header {
       color: #ffffff;
       border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
       novo-table[theme="distributionList"] > header novo-pagination novo-select div[type="button"] i {
+        color: #ffffff !important; }
+
+novo-table[theme="credential"] > header {
+  background: #747884;
+  color: #fff; }
+  novo-table[theme="credential"] > header novo-pagination {
+    background: rgba(0, 0, 0, 0.15); }
+    novo-table[theme="credential"] > header novo-pagination > * {
+      color: #ffffff;
+      opacity: 1; }
+    novo-table[theme="credential"] > header novo-pagination .page {
+      color: #ffffff; }
+    novo-table[theme="credential"] > header novo-pagination h5.rows {
+      opacity: 0.75; }
+    novo-table[theme="credential"] > header novo-pagination novo-select div[type="button"] {
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+      novo-table[theme="credential"] > header novo-pagination novo-select div[type="button"] i {
         color: #ffffff !important; }
 
 novo-table[theme="positive"] > header {
@@ -11997,92 +12059,96 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 27px;
-      height: 27px; }
+      width: 28px;
+      height: 28px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 44px;
-      height: 44px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
       width: 34px;
       height: 34px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 33px;
-      height: 33px; }
+      width: 39px;
+      height: 39px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 35px;
-      height: 35px; }
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-submission {
-      background: #747884;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-task {
-      background: #747884;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-distributionList {
-      background: #747884;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-carnation {
-      background: #D770AD;
-      width: 37px;
-      height: 37px; }
-    color header .background-boxes .bb-lavender {
-      background: #967ADC;
       width: 28px;
       height: 28px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-submission {
+      background: #747884;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-task {
+      background: #747884;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-distributionList {
+      background: #747884;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-credential {
+      background: #747884;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-carnation {
+      background: #D770AD;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-lavender {
+      background: #967ADC;
+      width: 44px;
+      height: 44px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -12197,6 +12263,8 @@ color article.color-blocks {
     color article.color-blocks .block.task-cb .color-square {
       background: #747884; }
     color article.color-blocks .block.distributionList-cb .color-square {
+      background: #747884; }
+    color article.color-blocks .block.credential-cb .color-square {
       background: #747884; }
     color article.color-blocks .block.aqua-cb .color-square {
       background: #3BAFDA; }
@@ -12413,6 +12481,15 @@ color > header.distributionList {
   color > header.distributionList p {
     color: #fff; }
   color > header.distributionList .background-boxes {
+    background: #747884 !important; }
+
+color > header.credential {
+  background: #747884 !important; }
+  color > header.credential h1,
+  color > header.credential h2,
+  color > header.credential p {
+    color: #fff; }
+  color > header.credential .background-boxes {
     background: #747884 !important; }
 
 color > header.background {
@@ -13025,4 +13102,4 @@ popover-demo .example.popover-demo {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.ec4c43915ee488e5f1ad.bundle.map*/
+/*# sourceMappingURL=main.6bd99ef57d2ca35e3161.bundle.map*/
