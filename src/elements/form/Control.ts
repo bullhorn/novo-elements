@@ -154,6 +154,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private _blurEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
     private _focusEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
     private _focused: boolean = false;
+    private _enteredText: string = '';
     formattedValue: string = '';
     maxLengthMet: boolean = false;
     characterCount: number = 0;
@@ -271,6 +272,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     get alwaysActive() {
+        // Controls that have the label active if there is any user entered text in the field
+        if (this.control.controlType === 'picker' && this._enteredText.length) {
+            return true;
+        }
+
         // Controls that always have the label active
         return ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'quick-note'].indexOf(this.control.controlType) !== -1;
     }
@@ -285,6 +291,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     handleTyping(event: any) {
         this._focused = event && event.length;
+        this._enteredText = event;
     }
 
     handleFocus(event: FocusEvent) {
@@ -336,8 +343,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     modelChange(value) {
-        if (!value) {
+        if (Helpers.isEmpty(value)) {
             this._focused = false;
+            this._enteredText = '';
         }
         this.change.emit(value);
     }
