@@ -1,3 +1,13 @@
+<a name="2.0.130"></a>
+## [2.0.130](https://github.com/bullhorn/novo-elements/compare/v2.0.129...v2.0.130) (2017-02-16)
+
+
+### Features
+
+* **toast:** add dialogue styling to toast ([#405](https://github.com/bullhorn/novo-elements/issues/405)) ([143cc9b](https://github.com/bullhorn/novo-elements/commit/143cc9b))
+
+
+
 <a name="2.0.129"></a>
 ## [2.0.129](https://github.com/bullhorn/novo-elements/compare/v2.0.128...v2.0.129) (2017-02-14)
 
