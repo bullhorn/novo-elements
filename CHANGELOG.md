@@ -1,3 +1,13 @@
+<a name="2.0.131"></a>
+## [2.0.131](https://github.com/bullhorn/novo-elements/compare/v2.0.130...v2.0.131) (2017-02-17)
+
+
+### Bug Fixes
+
+* **control:** Making the label animate up/down properly for chips/picker ([adf4d6e](https://github.com/bullhorn/novo-elements/commit/adf4d6e))
+
+
+
 <a name="2.0.130"></a>
 ## [2.0.130](https://github.com/bullhorn/novo-elements/compare/v2.0.129...v2.0.130) (2017-02-16)
 
