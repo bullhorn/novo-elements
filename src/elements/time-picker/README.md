@@ -10,4 +10,4 @@
 ##### Properties
 - `'onSelect'`
     * Fired when a new value is selected
-    * `{ hours, minutes, meridian, date, moment, text }`
+    * `{ hours, minutes, meridian, date, text }`

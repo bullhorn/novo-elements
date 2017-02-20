@@ -57,7 +57,7 @@ export const TableData = [
         'startDate': new Date('2016/06/17'),
         'salary': 666259,
         'status': 'New Lead',
-        'description': 'It’s been a long time coming, but tonight, because of what we did on this day, in this election, at this defining moment, change has come to America.',
+        'description': 'It’s been a long time coming, but tonight, because of what we did on this day, in this election, at this defining time, change has come to America.',
         'categories': ['Temporary', 'Developer']
     }, {
         'name': 'Barry Moss',

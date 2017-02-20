@@ -29,7 +29,6 @@ input[type=calendar] {
     box-shadow: 0 1px 3px rgba(0, 0, 0, .15), 0 2px 7px rgba(0, 0, 0, .1);
     z-index: 999;
     position: relative;
-
     .calendar-top {
         display: flex;
         flex-flow: column;
@@ -38,7 +37,6 @@ input[type=calendar] {
         font-size: 14px;
         border-top-right-radius: 4px;
         border-top-left-radius: 4px;
-
         h1 {
             font-weight: 600;
             font-size: 4.2em;
@@ -46,21 +44,18 @@ input[type=calendar] {
             margin: 0;
             padding: 0;
         }
-
         h2 {
             font-weight: 300;
             opacity: 1;
             margin: 10px auto;
             padding: 0;
         }
-
         h3 {
             font-weight: 400;
             opacity: 0.4;
             margin: 15px auto;
             padding: 0;
         }
-
         h4 {
             background: rgba(0, 0, 0, .15);
             font-size: 1em;
@@ -68,7 +63,6 @@ input[type=calendar] {
             padding: 10px;
         }
     }
-
     .date-range-tabs {
         border-bottom: 1px solid #e0e0e0;
         display: flex;
@@ -76,20 +70,17 @@ input[type=calendar] {
         justify-content: space-between;
         position: relative;
         height: 45px;
-
-        & > span {
+        &>span {
             color: $positive;
             text-align: center;
             flex: 1;
             cursor: pointer;
             transition: opacity 200ms ease-in-out;
             opacity: 0.6;
-
             &:hover {
                 opacity: 1 !important;
             }
         }
-
         .indicator {
             position: absolute;
             width: 50%;
@@ -100,7 +91,6 @@ input[type=calendar] {
             transition: transform 200ms ease-in-out;
         }
     }
-
     .calendar-header {
         width: 100%;
         border-collapse: collapse;
@@ -108,13 +98,11 @@ input[type=calendar] {
         -webkit-user-select: none;
         cursor: default;
         border-bottom: 1px solid #F0F0F0;
-
         .previous {
             width: 30px;
             height: 15px;
             display: inline-block;
             cursor: pointer;
-
             &:after {
                 content: '';
                 border-bottom: 4px solid transparent;
@@ -125,35 +113,29 @@ input[type=calendar] {
                 vertical-align: middle;
                 width: 0;
             }
-
             &:hover:after {
                 border-right: 4px solid $positive;
                 cursor: pointer;
             }
         }
-
         .heading {
             width: calc(100% - 70px);
             display: inline-block;
             vertical-align: middle;
             color: $positive;
             font-weight: 600;
-
             .month {
                 border-radius: 2px;
                 padding: 3px 8px;
-
                 &:hover {
                     background: $positive;
                     color: #fff;
                     cursor: pointer;
                 }
             }
-
             .year {
                 border-radius: 2px;
                 padding: 3px 8px;
-
                 &:hover {
                     background: $positive;
                     color: #fff;
@@ -161,13 +143,11 @@ input[type=calendar] {
                 }
             }
         }
-
         .next {
             width: 30px;
             height: 15px;
             display: inline-block;
             cursor: pointer;
-
             &:before {
                 content: '';
                 border-bottom: 4px solid transparent;
@@ -178,7 +158,6 @@ input[type=calendar] {
                 vertical-align: middle;
                 width: 0;
             }
-
             &:hover:before {
                 opacity: 1;
                 border-left: 4px solid $positive;
@@ -186,7 +165,6 @@ input[type=calendar] {
             }
         }
     }
-
     .calendar-content {
         background: #fff;
         width: 100%;
@@ -198,20 +176,16 @@ input[type=calendar] {
         -webkit-padding-start: 0;
         -webkit-transform-origin: 209px 26px;
         -webkit-transform: scale(1);
-
         thead {
             background: #fff;
-
             th {
                 width: 30px;
                 padding: 10px 0;
             }
         }
-
         tbody {
             font-size: 0.9em;
         }
-
         .month,
         .year {
             text-align: center;
@@ -222,19 +196,16 @@ input[type=calendar] {
             margin: 5px;
             font-weight: normal;
             border-radius: 3px;
-
             &.selected {
                 background-color: $positive;
                 color: #fff;
             }
-
             &:hover {
                 cursor: pointer;
                 background-color: $positive;
                 color: #fff;
             }
         }
-
         .day {
             height: 30px;
             width: 30px;
@@ -246,32 +217,26 @@ input[type=calendar] {
             box-shadow: inset 0 0 0 2px transparent;
             transition: box-shadow 140ms ease-in-out;
             position: relative;
-
             &:focus {
                 outline: none;
             }
-
             &:disabled {
                 color: #D7D9E4;
                 cursor: not-allowed !important;
                 box-shadow: none !important;
             }
         }
-
         td {
             cursor: pointer;
-
             &.notinmonth {
-                //color: #D7D9E4;
+                color: #D7D9E4;
             }
-
             &:hover {
                 .day {
                     cursor: pointer;
                     box-shadow: inset 0 0 0 2px $positive;
                 }
             }
-
             &.filler button {
                 background: $positive;
                 color: #fff;
@@ -279,10 +244,8 @@ input[type=calendar] {
                 width: 100%;
                 border-radius: 0;
             }
-
             &.selecting-range button {
                 position: relative;
-
                 &:before {
                     content: '';
                     background: rgba($positive, .2);
@@ -296,25 +259,21 @@ input[type=calendar] {
                     border-radius: 50%;
                 }
             }
-
-            &.filler + .selected button,
-            &.startfill + .selected button,
+            &.filler+.selected button,
+            &.startfill+.selected button,
             &.startfill button {
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
-
                 .day {
                     box-shadow: 0;
                 }
             }
-
             &.startfill button {
                 border-radius: 50%;
                 border-top-right-radius: 0;
                 border-bottom-right-radius: 0;
                 box-shadow: none !important;
                 position: relative;
-
                 &:before {
                     content: '';
                     position: absolute;
@@ -326,14 +285,12 @@ input[type=calendar] {
                     z-index: -1;
                 }
             }
-
             &.endfill button {
                 border-radius: 50%;
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
                 box-shadow: none !important;
                 position: relative;
-
                 &:before {
                     content: '';
                     position: absolute;
@@ -345,14 +302,12 @@ input[type=calendar] {
                     z-index: -1;
                 }
             }
-
             &.selected {
                 .day {
                     background: $positive;
                     color: #fff;
                 }
             }
-
             &.today {
                 .day:after {
                     content: '';
@@ -367,7 +322,6 @@ input[type=calendar] {
                     margin: 0 auto;
                     box-shadow: inset 0 0 0 2px $light;
                 }
-
                 &.filler,
                 &.selected {
                     .day:after {
@@ -377,24 +331,22 @@ input[type=calendar] {
             }
         }
     }
-
     .calendar-footer {
         width: 100%;
         padding: 15px 10px;
         text-align: left;
-
         .today {
             cursor: pointer;
             color: $positive;
         }
     }
 }
+
 @keyframes select {
     from {
         opacity: 0.8;
         transform: scale(1);
     }
-
     to {
         opacity: 0;
         transform: scale(1.6);
