@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 // Vendor
 // APP
 import { BasePickerResults } from './../picker-results/PickerResults';
@@ -9,11 +9,29 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
     selector: 'entity-picker-results',
     template: `
         <novo-list *ngIf="matches.length > 0" direction="vertical">
-            <novo-list-item *ngFor="let match of matches"
-            (click)="selectMatch($event)"
-            [ngClass]="{active: isActive(match)}"
-            (mouseenter)="selectActive(match)"
-            [class.disabled]="preselected(match)">
+            <entity-picker-result *ngFor="let match of matches"
+           (click)="selectMatch($event)"
+           [ngClass]="{active: isActive(match)}"
+           (mouseenter)="selectActive(match)"
+           [class.disabled]="preselected(match)"
+           [match]="match"></entity-picker-result>
+            <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
+        </novo-list>
+    `,
+    host: {
+        '[hidden]': 'matches.length === 0'
+    }
+})
+export class EntityPickerResults extends BasePickerResults {
+    constructor(element: ElementRef, public labels: NovoLabelService) {
+        super(element);
+    }
+}
+
+@Component({
+    selector: 'entity-picker-result',
+    template: `
+            <novo-list-item>
                 <item-header>
                     <item-avatar [icon]="getIconForResult(match.data)"></item-avatar>
                     <item-title>
@@ -65,16 +83,12 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                     </p>
                 </item-content>
             </novo-list-item>
-            <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>            
-        </novo-list>
-    `,
-    host: {
-        '[hidden]': 'matches.length === 0'
-    }
+    `
 })
-export class EntityPickerResults extends BasePickerResults {
+export class EntityPickerResult extends EntityPickerResults {
+  @Input() match:any = [];
     constructor(element: ElementRef, public labels: NovoLabelService) {
-        super(element);
+        super(element, labels);
     }
 
     getIconForResult(result?: any) {

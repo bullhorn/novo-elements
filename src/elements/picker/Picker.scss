@@ -71,6 +71,7 @@ picker-loader,
 picker-null-recent-results,
 picker-null-results,
 picker-results,
+add-new-picker-results,
 quick-note-results {
     background-color: white;
     cursor: default;
@@ -134,7 +135,8 @@ quick-note-results {
     }
 }
 
-entity-picker-results {
+entity-picker-results,
+add-new-picker-results {
     novo-list {
         background: $white;
         novo-list-item.disabled {
@@ -151,6 +153,14 @@ entity-picker-results {
                 padding-right: 1em;
             }
         }
+
+    }
+
+    .create-as-new {
+      height: 28px;
+      text-align: center;
+      color: $positive;
+      border-top: 1px solid rgba(#fff, .1);
     }
 }
 
