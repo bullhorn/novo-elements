@@ -1,3 +1,14 @@
+<a name="2.0.135"></a>
+## [2.0.135](https://github.com/bullhorn/novo-elements/compare/v2.0.134...v2.0.135) (2017-02-21)
+
+
+### Features
+
+* **chips:** Added a preview on hover of the entity chip ([#413](https://github.com/bullhorn/novo-elements/issues/413)) ([ddaeb87](https://github.com/bullhorn/novo-elements/commit/ddaeb87))
+* **forms:** Adding way to pass a pickerCallback for custom control on the PickerResults ([bef69a5](https://github.com/bullhorn/novo-elements/commit/bef69a5))
+
+
+
 <a name="2.0.134"></a>
 ## [2.0.134](https://github.com/bullhorn/novo-elements/compare/v2.0.133...v2.0.134) (2017-02-21)
 
