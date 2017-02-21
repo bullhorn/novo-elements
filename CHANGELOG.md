@@ -1,3 +1,14 @@
+<a name="2.0.133"></a>
+## [2.0.133](https://github.com/bullhorn/novo-elements/compare/v2.0.132...v2.0.133) (2017-02-21)
+
+
+### Features
+
+* **form:** Add ability to set overrides when creating field sets ([#411](https://github.com/bullhorn/novo-elements/issues/411)) ([06dd84c](https://github.com/bullhorn/novo-elements/commit/06dd84c))
+* **form:** Allowing to override the templates of form controls ([95d8e54](https://github.com/bullhorn/novo-elements/commit/95d8e54))
+
+
+
 <a name="2.0.132"></a>
 ## [2.0.132](https://github.com/bullhorn/novo-elements/compare/v2.0.131...v2.0.132) (2017-02-21)
 
