@@ -216,14 +216,20 @@ export class FormUtils {
             controlConfig.config = optionsConfig;
         }
 
+        let overrideTemplate;
         if (overrides && overrides[field.name]) {
+            if (overrides[field.name].resultsTemplate) {
+                overrideTemplate = overrides[field.name].resultsTemplate;
+                controlConfig.config.resultsTemplate = overrideTemplate;
+                delete overrides[field.name].resultsTemplate;
+            }
             Object.assign(controlConfig, overrides[field.name]);
         }
 
         switch (type) {
             case 'entitychips':
                 controlConfig.multiple = true;
-                controlConfig.config.resultsTemplate = EntityPickerResults;
+                controlConfig.config.resultsTemplate = overrideTemplate || EntityPickerResults;
                 control = new PickerControl(controlConfig);
                 break;
             case 'chips':
@@ -231,7 +237,7 @@ export class FormUtils {
                 control = new PickerControl(controlConfig);
                 break;
             case 'entitypicker':
-                controlConfig.config.resultsTemplate = EntityPickerResults;
+                controlConfig.config.resultsTemplate = overrideTemplate || EntityPickerResults;
                 control = new PickerControl(controlConfig);
                 break;
             case 'picker':
