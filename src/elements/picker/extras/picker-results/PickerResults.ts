@@ -32,15 +32,15 @@ export class BasePickerResults {
     @HostListener('scroll', ['$event.target'])
     onScrollDown(target) {
         if (target) {
-                let offset = target.offsetHeight + target.scrollTop,
-                    bottom = target.scrollHeight;
-                if (offset >= bottom) {
-                    event.stopPropagation();
-                    if (!this.lastPage) {
-                        this.processSearch();
-                    }
+            let offset = target.offsetHeight + target.scrollTop,
+                bottom = target.scrollHeight;
+            if (offset >= bottom) {
+                event.stopPropagation();
+                if (!this.lastPage) {
+                    this.processSearch();
                 }
             }
+        }
     }
 
     get term() {
@@ -313,7 +313,7 @@ export class BasePickerResults {
                 [class.disabled]="preselected(match)">
                 <span [innerHtml]="highlight(match.label, term)"></span>
             </li>
-            <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>            
+            <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
         </ul>
         <p class="picker-error" *ngIf="hasError">{{labels.pickerError}}</p>
         <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{labels.pickerEmpty}}</p>

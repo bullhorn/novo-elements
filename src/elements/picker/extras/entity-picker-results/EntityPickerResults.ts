@@ -12,19 +12,19 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
             <item-header>
                 <item-avatar [icon]="getIconForResult(match.data)"></item-avatar>
                 <item-title>
-                    <span [innerHtml]="highlight(getNameForResult(match.data), query)"></span>
+                    <span [innerHtml]="highlight(getNameForResult(match.data), term)"></span>
                 </item-title>
             </item-header>
             <item-content direction="horizontal">
                 <!-- COMPANY 1 -->
                 <p class="company" *ngIf="match.data.companyName || match.data?.clientCorporation?.name">
                     <i class="bhi-company"></i>
-                    <span [innerHtml]="highlight(match.data.companyName || match.data?.clientCorporation?.name, query)"></span>
+                    <span [innerHtml]="highlight(match.data.companyName || match.data?.clientCorporation?.name, term)"></span>
                 </p>
                 <!-- CLIENT CONTACT -->
                 <p class="contact" *ngIf="match.data?.clientContact?.firstName">
                     <i class="bhi-person contact person"></i>
-                    <span [innerHtml]="highlight(match.data.clientContact.firstName + ' ' + match.data.clientContact.lastName, query)"></span>
+                    <span [innerHtml]="highlight(match.data.clientContact.firstName + ' ' + match.data.clientContact.lastName, term)"></span>
                 </p>
                 <!-- CANDIDATE -->
                 <p class="candidate" *ngIf="match.data.candidate && match.data.searchEntity === 'Placement'">
@@ -39,24 +39,24 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                 <!-- EMAIL -->
                 <p class="email" *ngIf="match.data.email">
                     <i class="bhi-email"></i>
-                    <span [innerHtml]="highlight(match.data.email, query)"></span>
+                    <span [innerHtml]="highlight(match.data.email, term)"></span>
                 </p>
                 <!-- PHONE -->
                 <p class="phone" *ngIf="match.data.phone">
                     <i class="bhi-phone"></i>
-                    <span [innerHtml]="highlight(match.data.phone, query)"></span>
+                    <span [innerHtml]="highlight(match.data.phone, term)"></span>
                 </p>
                 <!-- ADDRESS -->
                 <p class="location" *ngIf="match.data.address && (match.data.address.city || match.data.address.state)">
                     <i class="bhi-location"></i>
-                    <span *ngIf="match.data.address.city" [innerHtml]="highlight(match.data.address.city, query)"></span>
+                    <span *ngIf="match.data.address.city" [innerHtml]="highlight(match.data.address.city, term)"></span>
                     <span *ngIf="match.data.address.city && match.data.address.state">, </span>
-                    <span *ngIf="match.data.address.state" [innerHtml]="highlight(match.data.address.state, query)"></span>
+                    <span *ngIf="match.data.address.state" [innerHtml]="highlight(match.data.address.state, term)"></span>
                 </p>
                 <!-- STATUS -->
                 <p class="status" *ngIf="match.data.status">
                     <i class="bhi-info"></i>
-                    <span [innerHtml]="highlight(match.data.status, query)"></span>
+                    <span [innerHtml]="highlight(match.data.status, term)"></span>
                 </p>
             </item-content>
         </novo-list-item>
@@ -64,6 +64,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
 })
 export class EntityPickerResult {
     @Input() match: any;
+    @Input() term: any;
 
     constructor(public labels: NovoLabelService) {
     }
@@ -164,12 +165,13 @@ export class EntityPickerResult {
         <novo-list *ngIf="matches.length > 0" direction="vertical">
             <entity-picker-result *ngFor="let match of matches"
                     [match]="match"
+                    [term]="term"
                     (click)="selectMatch($event)"
                     [ngClass]="{active: isActive(match)}"
                     (mouseenter)="selectActive(match)"
                     [class.disabled]="preselected(match)">
             </entity-picker-result>
-            <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>            
+            <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
         </novo-list>
     `,
     host: {
