@@ -16,7 +16,7 @@ import { MockMeta, MockMetaHeaders } from './MockMeta';
 import {
     FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
     QuickNoteControl, TilesControl, DateControl, TimeControl, DateTimeControl,
-    PickerControl
+    PickerControl, EntityPickerResult, EntityPickerResults
 } from './../../../../index';
 
 const template = `
@@ -121,6 +121,7 @@ export class FormDemoComponent {
     private fieldsetsForm: any;
     private singlePickerControl: any;
     private multiPickerControl: any;
+    private entityMultiPickerControl: any;
     private pickerForm: any;
     private updatingForm: any;
     private updatingFormControls: [any];
@@ -171,7 +172,25 @@ export class FormDemoComponent {
         // Picker controls
         this.singlePickerControl = new PickerControl({ key: 'singlePicker', label: 'Single', config: { options: ['One', 'Two', 'Three'] } });
         this.multiPickerControl = new PickerControl({ key: 'multiPicker', label: 'Multiple', multiple: true, config: { options: ['One', 'Two', 'Three'], type: 'candidate' } });
-        this.pickerForm = formUtils.toFormGroup([this.singlePickerControl, this.multiPickerControl]);
+        this.entityMultiPickerControl = new PickerControl({
+            key: 'entityMultiPicker',
+            label: 'Entities',
+            required: false,
+            multiple: true,
+            config: {
+                resultsTemplate: EntityPickerResults,
+                previewTemplate: EntityPickerResult,
+                format: '$title',
+                options: [
+                    {title: 'Central Bank', name: 'Central Bank', email: 'new-bank-inquiries@centralbank.com', phone: '(651) 555-1234', address: {city: 'Washington', state: 'DC'}, searchEntity: 'ClientCorporation'},
+                    {title: 'Federal Bank', name: 'Federal Bank', email: 'info@federalbank.com', phone: '(545) 555-1212', address: {city: 'Arlington', state: 'VA'}, searchEntity: 'ClientCorporation'},
+                    {title: 'Aaron Burr', firstName: 'Aaron', lastName: 'Burr', name: 'Aaron Burr', companyName: 'Central Bank', email: 'aburr@centralbank.com', phone: '(333) 555-3434', address: {city: 'Washington', state: 'DC'}, status: 'Hold', searchEntity: 'ClientContact'},
+                    {title: 'Alexander Hamilton', firstName: 'Alexander', lastName: 'Hamilton', name: 'Alexander Hamilton', companyName: 'Federal Bank', email: 'ahamilton@federalbank.com', phone: '(333) 555-2222', address: {city: 'Arlington', state: 'VA'}, status: 'Active', searchEntity: 'ClientContact'},
+                    {title: 'Ben Franklin', firstName: 'Ben', lastName: 'Franklin', name: 'Ben Franklin', email: 'bfranklin@gmail.com', phone: '(654) 525-2222', address: {city: 'Boston', state: 'MA'}, status: 'Interviewing', searchEntity: 'Candidate'},
+                    {title: 'Thomas Jefferson', firstName: 'Thomas', lastName: 'Jefferson', name: 'Thomas Jefferson', email: 'tjefferson@usa.com', phone: '(123) 542-1234', address: {city: 'Arlington', state: 'VA'}, status: 'New Lead', searchEntity: 'Candidate'}]
+            }
+        });
+        this.pickerForm = formUtils.toFormGroup([this.singlePickerControl, this.multiPickerControl, this.entityMultiPickerControl]);
 
         // File input controls
         this.fileControl = new FileControl({ key: 'file', name: 'myfile', label: 'File', tooltip: 'Files Control' });

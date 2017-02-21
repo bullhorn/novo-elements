@@ -47,7 +47,7 @@ export { PagedArrayCollection } from './src/services/data-provider/PagedArrayCol
 export { NovoModalParams, NovoModalRef } from './src/elements/modal/Modal';
 export { QuickNoteResults } from './src/elements/quick-note/extras/quick-note-results/QuickNoteResults';
 export { PickerResults, BasePickerResults } from './src/elements/picker/extras/picker-results/PickerResults';
-export { EntityPickerResults } from './src/elements/picker/extras/entity-picker-results/EntityPickerResults';
+export { EntityPickerResult, EntityPickerResults } from './src/elements/picker/extras/entity-picker-results/EntityPickerResults';
 export { ChecklistPickerResults } from './src/elements/picker/extras/checklist-picker-results/ChecklistPickerResults';
 export { BaseRenderer } from './src/elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './src/elements/table/extras/date-cell/DateCell';

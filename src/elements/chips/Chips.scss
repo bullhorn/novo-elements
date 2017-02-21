@@ -37,11 +37,12 @@ entity-chips {
         border: 1px solid transparent;
         transition: all 200ms ease-in-out;
         span {
-            color: darken(#eee, 45%);
             vertical-align: middle;
             display: flex;
             align-items: center;
             span {
+                color: $ocean;
+                cursor: pointer;
                 max-width: 115px;
                 overflow: hidden;
                 white-space: nowrap;
@@ -230,6 +231,43 @@ entity-chips {
             width: 100%;
             background-color: white;
             color: black;
+        }
+    }
+    .preview-container {
+        entity-picker-result {
+            background: $white;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            min-width: 180px;
+            max-height: 600px;
+            overflow: auto;
+            z-index: 900;
+            border: 1px solid #4A89DC;
+            transition: all 200ms ease-in-out;
+
+            novo-list-item {
+                flex: 0 0;
+                &>div {
+                    width: 100%;
+                }
+                item-content {
+                    flex-flow: row wrap;
+                    &>* {
+                        flex: 0 0 33%;
+                        white-space: nowrap;
+                    }
+                    >p {
+                        min-width: 15em;
+                        font-size: .9em;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        padding-right: 1em;
+                    }
+                }
+            }
         }
     }
 }

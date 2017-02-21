@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
@@ -7,6 +7,7 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { Helpers } from './../../utils/Helpers';
 // Vendor
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -18,12 +19,12 @@ const CHIPS_VALUE_ACCESSOR = {
 @Component({
     selector: 'chip',
     template: `
-        <span (click)="onSelect($event)" [ngClass]="_type">
+        <span (click)="onSelect($event)" (mouseover)="onSelect($event)" [ngClass]="_type">
             <i *ngIf="_type" class="bhi-circle"></i>
             <span><ng-content></ng-content></span>
         </span>
         <i class="bhi-close" (click)="onRemove($event)"></i>
-  `
+    `
 })
 export class NovoChipElement {
     @Input()
@@ -83,6 +84,9 @@ export class NovoChipElement {
                 [selected]="items">
             </novo-picker>
         </div>
+        <div class="preview-container">
+            <span #preview></span>
+        </div>
         <i class="bhi-search"></i>
         <label class="clear-all" *ngIf="items.length" (click)="clearValue()">CLEAR ALL <i class="bhi-times"></i></label>
    `,
@@ -101,11 +105,14 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
     @Output() blur: EventEmitter<any> = new EventEmitter();
     @Output() typing: EventEmitter<any> = new EventEmitter();
 
+    @ViewChild('preview', { read: ViewContainerRef }) preview: ViewContainerRef;
+
     items: Array<any> = [];
     selected: any = null;
-    config: Object = {};
+    config: any = {};
     model: any;
     itemToAdd: any;
+    popup: any;
     // private data model
     _value: any = '';
     _items = new ReplaySubject(1);
@@ -115,9 +122,17 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
     onModelTouched: Function = () => {
     };
 
-    constructor(element: ElementRef) {
+    constructor(element: ElementRef, private componentUtils: ComponentUtils) {
         super(element);
         this.element = element;
+
+        // Listen for an outside click to hide the preview
+        this.onActiveChange.subscribe((active) => {
+            if (!active) {
+                this.blur.emit();
+                this.deselectAll();
+            }
+        });
     }
 
     ngOnInit() {
@@ -203,12 +218,16 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
 
     deselectAll(event?) {
         this.selected = null;
+        this.hidePreview();
     }
 
     select(event?, item?) {
         this.blur.emit(event);
         this.deselectAll();
         this.selected = item;
+        this.showPreview();
+        // Start listening for an outside click to hide the preview
+        this.toggleActive(null, true);
     }
 
     onTyping(event?) {
@@ -262,14 +281,6 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
         }
     }
 
-    handleOutsideClick(event?) {
-        // If the elements doesn't contain the target element, it is an outside click
-        if (!this.element.nativeElement.contains(event.target)) {
-            this.blur.emit(event);
-            this.deselectAll(event);
-        }
-    }
-
     // Set touched on blur
     onTouched(e) {
         this.element.nativeElement.classList.remove('selected');
@@ -288,5 +299,33 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
 
     registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
+    }
+
+    /**
+     * @name showPreview
+     *
+     * @description This method creates an instance of the preview (called popup) and adds all the bindings to that
+     * instance. Will reuse the popup or create a new one if it does not already exist. Will only work if there is
+     * a previewTemplate given in the config.
+     */
+    showPreview() {
+        if (this.source.previewTemplate) {
+            if (!this.popup) {
+                this.popup = this.componentUtils.appendNextToLocation(this.source.previewTemplate, this.preview);
+            }
+            this.popup.instance.match = this.selected;
+        }
+    }
+
+    /**
+     * @name hidePreview
+     *
+     * @description - This method deletes the preview popup from the DOM.
+     */
+    hidePreview() {
+        if (this.popup) {
+            this.popup.destroy();
+            this.popup = null;
+        }
     }
 }
