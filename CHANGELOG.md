@@ -1,3 +1,13 @@
+<a name="2.0.136"></a>
+## [2.0.136](https://github.com/bullhorn/novo-elements/compare/v2.0.135...v2.0.136) (2017-02-21)
+
+
+### Bug Fixes
+
+* **picker:** Fixing picker for AOT, missing property ([8f80519](https://github.com/bullhorn/novo-elements/commit/8f80519))
+
+
+
 <a name="2.0.135"></a>
 ## [2.0.135](https://github.com/bullhorn/novo-elements/compare/v2.0.134...v2.0.135) (2017-02-21)
 
