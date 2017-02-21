@@ -31,8 +31,8 @@ import { Helpers } from './../../utils/Helpers';
                 <div class="novo-control-inner-container">
                     <div class="novo-control-inner-input-container">
                         <!--Required Indicator-->
-                        <i [hidden]="!form?.controls[control.key]?.required" 
-                            class="required-indicator" 
+                        <i [hidden]="!form?.controls[control.key]?.required"
+                            class="required-indicator"
                             [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form?.controls[control.key]?.required">
                         </i>
                         <!--Form Controls-->
@@ -169,7 +169,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     get showCount() {
-        return this.control.maxlength && this.focused &&  (this.control.controlType === 'text-area' || this.control.controlType === 'textbox');
+        return this.control.maxlength && this.focused && (this.control.controlType === 'text-area' || this.control.controlType === 'textbox');
     }
 
     ngOnInit() {
@@ -310,16 +310,29 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     formatDateValue(event) {
-        this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.dateFormat);
+        this.formattedValue = this.labels.formatDateWithFormat(new Date(event.date), {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+        });
         this.toggleActive(null, false);
     }
 
     formatTimeValue(event) {
-        this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.timeFormat);
+        this.formattedValue = this.labels.formatDateWithFormat(new Date(event.date), {
+            hour: 'numeric',
+            minute: 'numeric'
+        });
     }
 
     formatDateTimeValue(event) {
-        this.formattedValue = this.labels.formatDateWithFormat(event.date, this.labels.dateTimeFormat);
+        this.formattedValue = this.labels.formatDateWithFormat(new Date(event.date), {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric'
+        });
     }
 
 

@@ -5,8 +5,6 @@ let CalendarDemoTpl = require('./templates/CalendarDemo.html');
 let TimeDemoTpl = require('./templates/TimeDemo.html');
 let RangeDemoTpl = require('./templates/RangeDemo.html');
 let DateTimeDemoTpl = require('./templates/DateTimeDemo.html');
-// Vendor
-import * as moment from 'moment';
 
 const template = `
 <div class="container">
@@ -42,18 +40,18 @@ const template = `
     template: template
 })
 export class CalendarDemoComponent {
-    CalendarDemoTpl:string = CalendarDemoTpl;
-    TimeDemoTpl:string = TimeDemoTpl;
-    RangeDemoTpl:string = RangeDemoTpl;
-    DateTimeDemoTpl:string = DateTimeDemoTpl;
+    CalendarDemoTpl: string = CalendarDemoTpl;
+    TimeDemoTpl: string = TimeDemoTpl;
+    RangeDemoTpl: string = RangeDemoTpl;
+    DateTimeDemoTpl: string = DateTimeDemoTpl;
 
-    time:Date = new Date();
-    dateOne:Date = new Date();
-    dateTwo:Date = new Date();
-    dateTime:Date = new Date();
-    start:any = moment().subtract(1, 'months');
-    end:any = moment().add(1, 'months');
-    value:any = {
+    time: Date = new Date();
+    dateOne: Date = new Date();
+    dateTwo: Date = new Date();
+    dateTime: Date = new Date();
+    start: any = new Date().setMonth(new Date().getMonth() - 1);
+    end: any = new Date().setMonth(new Date().getMonth() + 1);
+    value: any = {
         startDate: null,
         endDate: null
     };

@@ -3,8 +3,6 @@ import { Component, EventEmitter, forwardRef, Input, Output, OnInit, OnChanges, 
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
-// Vendor
-import * as moment from 'moment';
 
 // Value accessor for the component (supports ngModel)
 const TIME_PICKER_VALUE_ACCESSOR = {
@@ -84,14 +82,14 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
         if (this.model) {
             this.init(this.model, false);
         } else {
-            this.init(moment(), false);
+            this.init(new Date(), false);
         }
     }
 
     init(value, dispatch) {
-        let momentValue = moment(value);
-        let hours: string | number = momentValue.hours();
-        let minutes: string | number = momentValue.minutes();
+        let _value = new Date(value);
+        let hours: string | number = _value.getHours();
+        let minutes: string | number = _value.getMinutes();
 
         if (!this.military) {
             this.meridian = hours >= 12 ? 'pm' : 'am';
@@ -155,22 +153,24 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
             }
         }
 
-        let value = moment().hours(hours).minutes(this.minutes).seconds(0);
+        let value = new Date();
+        value.setHours(hours);
+        value.setMinutes(this.minutes);
+        value.setSeconds(0);
         this.onSelect.next({
             hours: hours,
             minutes: this.minutes,
             meridian: this.meridian,
-            date: value.toDate(),
-            moment: value,
+            date: value,
             text: `${this.hours}:${this.minutes} ${this.meridian}`
         });
-        this.onModelChange(value.toDate());
+        this.onModelChange(value);
     }
 
     // ValueAccessor Functions
     writeValue(model: any): void {
         this.model = model;
-        if (model) {
+        if (Helpers.isDate(model)) {
             this.init(model, false);
         }
     }
