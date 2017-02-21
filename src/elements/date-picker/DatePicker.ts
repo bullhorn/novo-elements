@@ -259,14 +259,14 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
 
     setMonth(month: number): void {
         let tmp = this.selected ? Helpers.modifyDate({ month }, this.selected) : Helpers.newDate({ month });
-        this.updateView(tmp, true, true);
+        this.updateView(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
     }
 
     setYear(year: number): void {
         let tmp = this.selected ? Helpers.modifyDate({ year }, this.selected) : Helpers.newDate({ year });
-        this.updateView(tmp, true, true);
+        this.updateView(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
     }
