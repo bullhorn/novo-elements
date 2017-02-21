@@ -229,6 +229,9 @@ export class FormUtils {
                 controlConfig.config.overridePreviewTemplate = overrideResultsTemplate;
                 delete overrides[field.name].overridePreviewTemplate;
             }
+            if (overrides[field.name].pickerCallback) {
+                controlConfig.config.callback = overrides[field.name].pickerCallback;
+            }
             Object.assign(controlConfig, overrides[field.name]);
         }
 
