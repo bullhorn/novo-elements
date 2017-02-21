@@ -179,7 +179,7 @@ export class FormUtils {
         return type;
     }
 
-    getControlForField(field, http, config) {
+    getControlForField(field, http, config, overrides?) {
         let type = this.determineInputType(field) || field.type;
         let control;
         let controlConfig: NovoControlConfig = {
@@ -214,6 +214,10 @@ export class FormUtils {
             };
         } else if (optionsConfig) {
             controlConfig.config = optionsConfig;
+        }
+
+        if (overrides && overrides[field.name]) {
+            Object.assign(controlConfig, overrides[field.name]);
         }
 
         switch (type) {
@@ -294,13 +298,13 @@ export class FormUtils {
         return control;
     }
 
-    toControls(meta, currencyFormat, http, config) {
+    toControls(meta, currencyFormat, http, config, overrides?) {
         let controls = [];
         if (meta && meta.fields) {
             let fields = meta.fields;
             fields.forEach(field => {
                 if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
-                    let control = this.getControlForField(field, http, config);
+                    let control = this.getControlForField(field, http, config, overrides);
                     // Set currency format
                     if (control.subType === 'currency') {
                         control.currencyFormat = currencyFormat;
@@ -313,7 +317,7 @@ export class FormUtils {
         return controls;
     }
 
-    toFieldSets(meta, currencyFormat, http, config) {
+    toFieldSets(meta, currencyFormat, http, config, overrides?) {
         let fieldsets: Array<NovoFieldset> = [];
         let ranges = [];
         if (meta && meta.fields) {
@@ -363,7 +367,7 @@ export class FormUtils {
             }
             fields.forEach(field => {
                 if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
-                    let control = this.getControlForField(field, http, config);
+                    let control = this.getControlForField(field, http, config, overrides);
                     // Set currency format
                     if (control.subType === 'currency') {
                         control.currencyFormat = currencyFormat;
