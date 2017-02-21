@@ -7,14 +7,14 @@ import { NovoListModule } from './../list/List.module';
 import { NovoLoadingModule } from './../loading/Loading.module';
 import { NovoPickerElement, NovoPickerContainer } from './Picker';
 import { PickerResults } from './extras/picker-results/PickerResults';
-import { EntityPickerResults } from './extras/entity-picker-results/EntityPickerResults';
+import { EntityPickerResult, EntityPickerResults } from './extras/entity-picker-results/EntityPickerResults';
 import { ChecklistPickerResults } from './extras/checklist-picker-results/ChecklistPickerResults';
 
 @NgModule({
     imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule],
-    declarations: [NovoPickerElement, NovoPickerContainer, PickerResults, EntityPickerResults, ChecklistPickerResults],
-    exports: [NovoPickerElement, NovoPickerContainer, PickerResults, EntityPickerResults, ChecklistPickerResults],
-    entryComponents: [PickerResults, EntityPickerResults, ChecklistPickerResults]
+    declarations: [NovoPickerElement, NovoPickerContainer, PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults],
+    exports: [NovoPickerElement, NovoPickerContainer, PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults],
+    entryComponents: [PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults]
 })
 export class NovoPickerModule {
 }

@@ -19,7 +19,7 @@ import {
     TimeControl,
     NovoControlConfig
 } from './FormControls';
-import { EntityPickerResults } from './../picker/extras/entity-picker-results/EntityPickerResults';
+import { EntityPickerResult, EntityPickerResults } from './../picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from './../../utils/Helpers';
 import { NovoFieldset } from './DynamicForm';
 
@@ -216,12 +216,18 @@ export class FormUtils {
             controlConfig.config = optionsConfig;
         }
 
-        let overrideTemplate;
+        let overrideResultsTemplate;
+        let overridePreviewTemplate;
         if (overrides && overrides[field.name]) {
             if (overrides[field.name].resultsTemplate) {
-                overrideTemplate = overrides[field.name].resultsTemplate;
-                controlConfig.config.resultsTemplate = overrideTemplate;
+                overrideResultsTemplate = overrides[field.name].resultsTemplate;
+                controlConfig.config.resultsTemplate = overrideResultsTemplate;
                 delete overrides[field.name].resultsTemplate;
+            }
+            if (overrides[field.name].overridePreviewTemplate) {
+                overrideResultsTemplate = overrides[field.name].overridePreviewTemplate;
+                controlConfig.config.overridePreviewTemplate = overrideResultsTemplate;
+                delete overrides[field.name].overridePreviewTemplate;
             }
             Object.assign(controlConfig, overrides[field.name]);
         }
@@ -229,7 +235,8 @@ export class FormUtils {
         switch (type) {
             case 'entitychips':
                 controlConfig.multiple = true;
-                controlConfig.config.resultsTemplate = overrideTemplate || EntityPickerResults;
+                controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
+                controlConfig.config.previewTemplate = overridePreviewTemplate || EntityPickerResult;
                 control = new PickerControl(controlConfig);
                 break;
             case 'chips':
@@ -237,7 +244,7 @@ export class FormUtils {
                 control = new PickerControl(controlConfig);
                 break;
             case 'entitypicker':
-                controlConfig.config.resultsTemplate = overrideTemplate || EntityPickerResults;
+                controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
                 control = new PickerControl(controlConfig);
                 break;
             case 'picker':
