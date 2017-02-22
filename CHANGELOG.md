@@ -1,3 +1,13 @@
+<a name="2.0.138"></a>
+## [2.0.138](https://github.com/bullhorn/novo-elements/compare/v2.0.137...v2.0.138) (2017-02-22)
+
+
+### Features
+
+* **Form:** Add ability to have custom components used with the dynamic form ([#414](https://github.com/bullhorn/novo-elements/issues/414)) ([b47f934](https://github.com/bullhorn/novo-elements/commit/b47f934))
+
+
+
 <a name="2.0.137"></a>
 ## [2.0.137](https://github.com/bullhorn/novo-elements/compare/v2.0.136...v2.0.137) (2017-02-22)
 
