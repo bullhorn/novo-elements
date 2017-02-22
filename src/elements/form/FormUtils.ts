@@ -202,7 +202,9 @@ export class FormUtils {
             dataSpecialization: field.dataSpecialization,
             description: field.description || '',
             tooltip: field.tooltip,
-            tooltipPosition: field.tooltipPosition
+            tooltipPosition: field.tooltipPosition,
+            customControl: field.customControl,
+            customControlConfig: field.customControlConfig
         };
         let optionsConfig = this.getControlOptions(field, http, config);
 

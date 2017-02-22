@@ -38,7 +38,8 @@ import {
     TipWellDemoComponent,
     CategoryDropdownDemoComponent,
     MultiPickerDemoComponent,
-    PopOverDemoComponent
+    PopOverDemoComponent,
+    CustomDemoComponent
 } from './pages/elements';
 import { UtilsDemoComponent } from './pages/utils/utils/UtilsDemo';
 import { PipesDemoComponent } from './pages/utils/pipes/PipesDemo';
@@ -99,7 +100,8 @@ import './demo.scss';
         CustomPickerResults,
         CategoryDropdownDemoComponent,
         MultiPickerDemoComponent,
-        PopOverDemoComponent
+        PopOverDemoComponent,
+        CustomDemoComponent
     ],
     imports: [
         // NG2
@@ -129,7 +131,8 @@ import './demo.scss';
         ExtraDetails,
         ImageCell,
         ActionsCell,
-        CustomPickerResults
+        CustomPickerResults,
+        CustomDemoComponent
     ],
     bootstrap: [DemoComponent]
 })

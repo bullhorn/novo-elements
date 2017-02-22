@@ -401,6 +401,11 @@ export const MockMeta = {
             sortOrder: 9010,
             maxLength: 150,
             description: 'Comments, Please'
+        }, {
+            name: 'customfield',
+            label: 'Custom Component',
+            required: true,
+            description: 'This is a custom component you can use instead'
         }
     ]
 };

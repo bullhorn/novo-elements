@@ -1,5 +1,5 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 // APP
 let DynamicFormDemoTpl = require('./templates/DynamicForm.html');
 let VerticalDynamicFormDemoTpl = require('./templates/VerticalDynamicForm.html');
@@ -71,6 +71,18 @@ const template = `
     <code-snippet [code]="FieldInteractionTpl"></code-snippet>
 </div>
 `;
+
+@Component({
+    selector: 'custom-demo-component',
+    template: `<novo-custom-control-container [formGroup]="form" [form]="form" [control]="control">
+        My Custom Input <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder">
+    </novo-custom-control-container>`
+})
+
+export class CustomDemoComponent {
+    @Input() control;
+    @Input() form: any;
+}
 
 @Component({
     selector: 'form-demo',
@@ -154,7 +166,7 @@ export class FormDemoComponent {
             }
         };
         // Text-based Controls
-        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box' , tooltip: 'Textbox'});
+        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox' });
         this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email', tooltip: 'Email' });
         this.numberControl = new TextBoxControl({ type: 'number', key: 'number', label: 'Number' });
         this.currencyControl = new TextBoxControl({ type: 'currency', key: 'currency', label: 'Currency', currencyFormat: '$ USD' });
@@ -165,7 +177,7 @@ export class FormDemoComponent {
 
         // Check box controls
         this.checkControl = new CheckboxControl({ key: 'check', label: 'Checkbox' });
-        this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'], tooltip: 'CheckList', tooltipPosition: 'Top'});
+        this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'], tooltip: 'CheckList', tooltipPosition: 'Top' });
         this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }], tooltip: 'Tiles' });
         this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl]);
 
@@ -199,7 +211,7 @@ export class FormDemoComponent {
 
         // Calendar input controls
         this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
-        this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time'  });
+        this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
         this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time' });
         this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
 
@@ -233,7 +245,11 @@ export class FormDemoComponent {
         this.fieldInteractionForm = formUtils.toFormGroup([this.salesTaxControl, this.itemValueControl, this.totalValueControl, this.hasCommentsControl, this.commentsControl]);
 
         // Dynamic
-        this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, 'TOKEN');
+        this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, 'TOKEN', {
+            customfield: {
+                customControl: CustomDemoComponent
+            }
+        });
         formUtils.setInitialValuesFieldsets(this.dynamic, { firstName: 'Initial F Name', number: 12 });
         this.dynamicForm = formUtils.toFormGroupFromFieldset(this.dynamic);
 
@@ -242,7 +258,11 @@ export class FormDemoComponent {
         this.dynamicVerticalForm = formUtils.toFormGroup(this.dynamicVertical);
 
         // Dynamic + Fieldsets
-        this.fieldsets = formUtils.toFieldSets(MockMetaHeaders, '$ USD', {}, 'TOKEN');
+        this.fieldsets = formUtils.toFieldSets(MockMetaHeaders, '$ USD', {}, 'TOKEN', {
+            customfield: {
+                customControl: CustomDemoComponent
+            }
+        });
         formUtils.setInitialValuesFieldsets(this.fieldsets, { firstName: 'Initial F Name', number: 12 });
         this.fieldsetsForm = formUtils.toFormGroupFromFieldset(this.fieldsets);
 

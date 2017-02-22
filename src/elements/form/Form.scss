@@ -36,11 +36,11 @@ novo-form {
             td.novo-form-row {
                 width: 100%;
                 &:first-child {
-                    >novo-control {
+                    >novo-control, >novo-custom-control-container {
                         margin-top: 0;
                     }
                 }
-                novo-control {
+                novo-control, novo-custom-control-container {
                     margin-top: 1rem;
                     display: flex;
                     flex-direction: row;
@@ -531,7 +531,7 @@ novo-form {
         .novo-form-container {
             form {
                 div.novo-form-row {
-                    novo-control {
+                    novo-control, novo-custom-control-container {
                         margin-top: 0;
                         &.disabled {
                             pointer-events: none;
