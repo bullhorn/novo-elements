@@ -248,30 +248,15 @@ export class Helpers {
         return Math.round(Math.abs((start.getTime() - finish.getTime()) / (MILLIS_IN_DAY)));
     }
 
-    static modifyDate(config: { year?: number, month?: number, days?: number, hours?: number, minutes?: number, seconds?: number, milliseconds?: number }, baseValue?: any): Date {
-        let ret = new Date(baseValue);
-        if (!Helpers.isBlank(config.year)) {
-            ret.setFullYear(config.year);
-        }
-        if (!Helpers.isBlank(config.month)) {
-            ret.setMonth(config.month);
-        }
-        if (!Helpers.isBlank(config.days)) {
-            ret.setDate(config.days);
-        }
-        if (!Helpers.isBlank(config.hours)) {
-            ret.setHours(config.hours);
-        }
-        if (!Helpers.isBlank(config.minutes)) {
-            ret.setMinutes(config.minutes);
-        }
-        if (!Helpers.isBlank(config.seconds)) {
-            ret.setSeconds(config.seconds);
-        }
-        if (!Helpers.isBlank(config.milliseconds)) {
-            ret.setMilliseconds(config.milliseconds);
-        }
-        return ret;
+    static modifyDate(config: { year?: number, month?: number, day?: number, hours?: number, minutes?: number, seconds?: number, milliseconds?: number } = {}, baseValue: Date = new Date()): Date {
+        let year = config.year || baseValue.getFullYear();
+        let month = config.month || baseValue.getMonth();
+        let day = config.day || baseValue.getDate();
+        let hours = config.hours || baseValue.getHours();
+        let minutes = config.minutes || baseValue.getMinutes();
+        let seconds = config.seconds || baseValue.getSeconds();
+        let milliseconds = config.milliseconds || baseValue.getMilliseconds();
+        return new Date(year, month, day, hours, minutes, seconds, milliseconds);
     }
 
     static newDate(config: { year?: number, month?: number, day?: number, hours?: number, minutes?: number, seconds?: number, milliseconds?: number }): Date {

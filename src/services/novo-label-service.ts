@@ -37,10 +37,11 @@ export class NovoLabelService {
     }
 
     formatDateWithFormat(value: any, format: Intl.DateTimeFormatOptions) {
-        if (value === 'Invalid Date') {
-            return '';
+        let date = value instanceof Date ? value : new Date(value);
+        if (date.getTime() !== date.getTime()) {
+            return value;
         }
-        return new Intl.DateTimeFormat('en-US', format).format(new Date(value));
+        return new Intl.DateTimeFormat('en-US', format).format(date);
     }
 
     getWeekdays(): string[] {

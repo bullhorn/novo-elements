@@ -85,7 +85,7 @@ export type componentTabStates = 'date' | 'time';
                             <tr *ngFor="let week of weeks">
                                 <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday,
                                     'notinmonth': !day.isCurrentMonth,
-                                    selected: day.date.getDate() === selected.getDate() && day.date.getMonth() === selected.getMonth()
+                                    selected: day.date.getDate() === selected.getDate() && day.date.getMonth() === selected.getMonth() && day.date.getFullYear() === selected.getFullYear()
                                 }">
                                     <button class="day" (click)="select($event, day, true); toggleTimePicker('time')" [attr.data-automation-id]="day.number" [disabled]="isDisabled(day.date, start, end)">{{day.number}}</button>
                                 </td>
@@ -259,15 +259,15 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     }
 
     setMonth(month: number): void {
-        let tmp = this.selected ? Helpers.modifyDate({ month }, this.selected) : Helpers.newDate({ month });
-        this.updateCal(tmp, true, true);
+        let tmp = this.month ? Helpers.modifyDate({ month }, this.month) : Helpers.newDate({ month });
+        this.updateCal(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
     }
 
     setYear(year: number): void {
-        let tmp = this.selected ? Helpers.modifyDate({ year }, this.selected) : Helpers.newDate({ year });
-        this.updateCal(tmp, true, true);
+        let tmp = this.month ? Helpers.modifyDate({ year }, this.month) : Helpers.newDate({ year });
+        this.updateCal(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
     }
@@ -366,7 +366,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
             count = 0;
 
         if (date.getDay() !== 0) {
-            date = Helpers.modifyDate({ days: date.getDate() - date.getDay() }, date);
+            date = Helpers.modifyDate({ day: date.getDate() - date.getDay() }, date);
         }
 
         while (!done) {
@@ -374,7 +374,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
             this.weeks.push({ days: this.buildWeek(new Date(date.getTime()), month) });
 
             // Increment variables for the next iteration
-            date = Helpers.modifyDate({ days: date.getDate() + 7 }, date);
+            date = Helpers.modifyDate({ day: date.getDate() + 7 }, date);
             done = count++ > 2 && monthIndex !== date.getMonth();
             monthIndex = date.getMonth();
         }
@@ -396,7 +396,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
             });
 
             // Increment for the next iteration
-            date = Helpers.modifyDate({ days: date.getDate() + 1 }, date);
+            date = Helpers.modifyDate({ day: date.getDate() + 1 }, date);
         }
 
         return days;
@@ -450,11 +450,9 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         }
 
         let value = Helpers.modifyDate({ hours: hours, minutes: this.minutes, seconds: 0 });
-
         if (this.model) {
             value = Helpers.modifyDate({ hours: hours, minutes: this.minutes, seconds: 0 }, this.model);
         }
-
         this.onSelect.next({
             hours: hours,
             minutes: this.minutes,

@@ -359,7 +359,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     formatDateValue(event) {
-        this.formattedValue = this.labels.formatDateWithFormat(new Date(event.date), {
+        this.formattedValue = this.labels.formatDateWithFormat(event.date, {
             month: 'long',
             day: 'numeric',
             year: 'numeric'
@@ -368,20 +368,21 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     formatTimeValue(event) {
-        this.formattedValue = this.labels.formatDateWithFormat(new Date(event.date), {
+        this.formattedValue = this.labels.formatDateWithFormat(event.date, {
             hour: 'numeric',
             minute: 'numeric'
         });
     }
 
     formatDateTimeValue(event) {
-        this.formattedValue = this.labels.formatDateWithFormat(new Date(event.date), {
+        let value = this.labels.formatDateWithFormat(event.date, {
             month: 'long',
             day: 'numeric',
             year: 'numeric',
             hour: 'numeric',
             minute: 'numeric'
         });
+        this.formattedValue = value;
     }
 
 

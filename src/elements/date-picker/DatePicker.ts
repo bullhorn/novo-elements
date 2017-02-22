@@ -210,9 +210,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
 
     isSelected(range, day, selected, selected2) {
         if (range) {
-            return day && (selected && (day.getDate() === selected.getDate() && day.getMonth() === selected.getMonth()) || (selected2 && (day.getDate() === selected2.getDate() && day.getMonth() === selected2.getMonth())));
+            return day && (selected && (day.getDate() === selected.getDate() && day.getMonth() === selected.getMonth() && day.getFullYear() === selected.getFullYear()) || (selected2 && (day.getDate() === selected2.getDate() && day.getMonth() === selected2.getMonth() && day.getFullYear() === selected2.getFullYear())));
         }
-        return day.getDate() === selected.getDate() && day.getMonth() === selected.getMonth();
+        return day.getDate() === selected.getDate() && day.getMonth() === selected.getMonth() && day.getFullYear() === selected.getFullYear();
     }
 
     isDisabled(day, start, end) {
@@ -445,7 +445,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
             count = 0;
 
         if (date.getDay() !== 0) {
-            date = Helpers.modifyDate({ days: date.getDate() - date.getDay() }, date);
+            date = Helpers.modifyDate({ day: date.getDate() - date.getDay() }, date);
         }
 
         while (!done) {
@@ -453,7 +453,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
             this.weeks.push({ days: this.buildWeek(new Date(date.getTime()), month) });
 
             // Increment variables for the next iteration
-            date = Helpers.modifyDate({ days: date.getDate() + 7 }, date);
+            date = Helpers.modifyDate({ day: date.getDate() + 7 }, date);
             done = count++ > 2 && monthIndex !== date.getMonth();
             monthIndex = date.getMonth();
         }
@@ -475,7 +475,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
             });
 
             // Increment for the next iteration
-            date = Helpers.modifyDate({ days: date.getDate() + 1 }, date);
+            date = Helpers.modifyDate({ day: date.getDate() + 1 }, date);
         }
 
         return days;
