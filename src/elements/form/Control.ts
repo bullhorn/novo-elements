@@ -39,8 +39,8 @@ import { Helpers } from './../../utils/Helpers';
                     <!--Error Message-->
                     <div class="field-message">
                         <div class="messages">
-                            <span class="error-text" *ngIf="(form.controls[control.key].dirty || control.dirty) && errors?.required">{{control.label | uppercase}} is required</span>
-                            <span class="error-text" *ngIf="(form.controls[control.key].dirty || control.dirty) && (errors?.custom)">{{ errors.custom }}</span>
+                            <span class="error-text" *ngIf="(form.controls[control.key].dirty || control.dirty) && form.controls[control.key].errors?.required">{{control.label | uppercase}} is required</span>
+                            <span class="error-text" *ngIf="(form.controls[control.key].dirty || control.dirty) && (form.controls[control.key].errors?.custom)">{{ form.controls[control.key].errors.custom }}</span>
                             <!--Field Hint-->
                             <span class="description" *ngIf="control.description">
                                 {{ control.description }}
