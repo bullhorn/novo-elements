@@ -239,7 +239,11 @@ export class FormDemoComponent {
         this.dynamicVerticalForm = formUtils.toFormGroup(this.dynamicVertical);
 
         // Dynamic + Fieldsets
-        this.fieldsets = formUtils.toFieldSets(MockMetaHeaders, '$ USD', {}, 'TOKEN');
+        this.fieldsets = formUtils.toFieldSets(MockMetaHeaders, '$ USD', {}, 'TOKEN', {
+            customfield: {
+                customControl: CustomDemoComponent
+            }
+        });
         formUtils.setInitialValuesFieldsets(this.fieldsets, { firstName: 'Initial F Name', number: 12 });
         this.fieldsetsForm = formUtils.toFormGroupFromFieldset(this.fieldsets);
 

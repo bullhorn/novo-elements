@@ -46,6 +46,9 @@ export class NovoControlCustom implements OnInit {
         this.controlComponent = this.componentUtils.appendNextToLocation(this.control.customControl, this.referencePoint);
         this.controlComponent.instance.control = this.control;
         this.controlComponent.instance.form = this.form;
+        if (this.control.customControlConfig) {
+            this.controlComponent.instance.config = this.control.customControlConfig;
+        }
     }
 }
 

@@ -405,7 +405,7 @@ export const MockMeta = {
             name: 'customfield',
             label: 'Custom Component',
             required: true,
-            description: 'This is a cusom component you can use instead'
+            description: 'This is a custom component you can use instead'
         }
     ]
 };

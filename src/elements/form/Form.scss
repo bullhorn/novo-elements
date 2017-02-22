@@ -531,7 +531,7 @@ novo-form {
         .novo-form-container {
             form {
                 div.novo-form-row {
-                    novo-control {
+                    novo-control, novo-custom-control-container {
                         margin-top: 0;
                         &.disabled {
                             pointer-events: none;
