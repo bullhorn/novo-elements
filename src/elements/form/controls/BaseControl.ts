@@ -38,6 +38,7 @@ export interface NovoControlConfig {
     description?: string;
     tooltip?: string;
     tooltipPosition?: string;
+    customControl?: any;
 }
 
 export class BaseControl {
@@ -74,6 +75,7 @@ export class BaseControl {
     description?: string;
     tooltip?: string;
     tooltipPosition?: string;
+    customControl?: any;
 
     constructor(config: NovoControlConfig) {
         this.validators = config.validators || [];
@@ -118,5 +120,6 @@ export class BaseControl {
             this.tooltip = config.tooltip;
             this.tooltipPosition = config.tooltipPosition;
         }
+        this.customControl = config.customControl;
     }
 }

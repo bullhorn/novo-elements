@@ -1,5 +1,5 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 // APP
 let DynamicFormDemoTpl = require('./templates/DynamicForm.html');
 let VerticalDynamicFormDemoTpl = require('./templates/VerticalDynamicForm.html');
@@ -21,31 +21,6 @@ import {
 
 const template = `
 <div class="container">
-    <h1>Forms <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/form">(source)</a></small></h1>
-    <p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'</p>
-
-    <h2>Static Form</h2>
-    <p>Static forms <code>&lt;novo-form /&gt;</code>.
-
-    <h5>Textbox Based Controls</h5>
-    <div class="example form-demo">${TextBasedControlsDemoTpl}</div>
-    <code-snippet [code]="TextBasedControlsDemoTpl"></code-snippet>
-
-    <h5>Checkbox Controls</h5>
-    <div class="example form-demo">${CheckBoxControlsDemoTpl}</div>
-    <code-snippet [code]="CheckBoxControlsDemoTpl"></code-snippet>
-
-    <h5>File Input Controls</h5>
-    <div class="example form-demo">${FileInputControlsDemoTpl}</div>
-    <code-snippet [code]="FileInputControlsDemoTpl"></code-snippet>
-
-    <h5>Calendar Controls</h5>
-    <div class="example form-demo">${CalendarControlsDemoTpl}</div>
-    <code-snippet [code]="CalendarControlsDemoTpl"></code-snippet>
-
-    <h5>Picker Controls</h5>
-    <div class="example form-demo">${PickerControlsDemoTpl}</div>
-    <code-snippet [code]="PickerControlsDemoTpl"></code-snippet>
 
     <h2>Dynamic Form</h2>
     <p>Dynamic forms are composed of one element, <code>&lt;novo-dynamic-form [controls]="controls"/&gt;</code> and allow you to pass in the controls and form and it will create the form for you.</p>
@@ -53,24 +28,20 @@ const template = `
     <h5>Basic</h5>
     <div class="example form-demo dynamic">${DynamicFormDemoTpl}</div>
     <code-snippet [code]="DynamicFormDemoTpl"></code-snippet>
-
-    <h5>Vertical</h5>
-    <div class="example form-demo dynamic">${VerticalDynamicFormDemoTpl}</div>
-    <code-snippet [code]="VerticalDynamicFormDemoTpl"></code-snippet>
-
-    <h5>Fieldsets</h5>
-    <div class="example form-demo fieldsets">${FieldsetsFormDemoTpl}</div>
-    <code-snippet [code]="FieldsetsFormDemoTpl"></code-snippet>
-
-    <h5>Updating Fields/Status</h5>
-    <div class="example form-demo updating">${UpdatingFormDemoTpl}</div>
-    <code-snippet [code]="UpdatingFormDemoTpl"></code-snippet>
-
-    <h5>Field Interactions</h5>
-    <div class="example form-demo field-interactions">${FieldInteractionTpl}</div>
-    <code-snippet [code]="FieldInteractionTpl"></code-snippet>
 </div>
 `;
+
+@Component({
+    selector: 'custom-demo-component',
+    template: `<novo-custom-control-container [formGroup]="form" [form]="form" [control]="control">
+        My Custom Input <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder">
+    </novo-custom-control-container>`
+})
+
+export class CustomDemoComponent {
+    @Input() control;
+    @Input() form: any;
+}
 
 @Component({
     selector: 'form-demo',
@@ -153,7 +124,7 @@ export class FormDemoComponent {
             }
         };
         // Text-based Controls
-        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box' , tooltip: 'Textbox'});
+        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox' });
         this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email', tooltip: 'Email' });
         this.numberControl = new TextBoxControl({ type: 'number', key: 'number', label: 'Number' });
         this.currencyControl = new TextBoxControl({ type: 'currency', key: 'currency', label: 'Currency', currencyFormat: '$ USD' });
@@ -164,7 +135,7 @@ export class FormDemoComponent {
 
         // Check box controls
         this.checkControl = new CheckboxControl({ key: 'check', label: 'Checkbox' });
-        this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'], tooltip: 'CheckList', tooltipPosition: 'Top'});
+        this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'], tooltip: 'CheckList', tooltipPosition: 'Top' });
         this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }], tooltip: 'Tiles' });
         this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl]);
 
@@ -180,7 +151,7 @@ export class FormDemoComponent {
 
         // Calendar input controls
         this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
-        this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time'  });
+        this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
         this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time' });
         this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
 
@@ -214,7 +185,11 @@ export class FormDemoComponent {
         this.fieldInteractionForm = formUtils.toFormGroup([this.salesTaxControl, this.itemValueControl, this.totalValueControl, this.hasCommentsControl, this.commentsControl]);
 
         // Dynamic
-        this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, 'TOKEN');
+        this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, 'TOKEN', {
+            customfield: {
+                customControl: CustomDemoComponent
+            }
+        });
         formUtils.setInitialValuesFieldsets(this.dynamic, { firstName: 'Initial F Name', number: 12 });
         this.dynamicForm = formUtils.toFormGroupFromFieldset(this.dynamic);
 

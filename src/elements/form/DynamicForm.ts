@@ -1,7 +1,8 @@
 // NG2
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 // APP
 import { Helpers } from './../../utils/Helpers';
+import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 export interface NovoFormGroup {
     layout?: any;
@@ -26,12 +27,36 @@ export class NovoFieldsetHeaderElement {
 }
 
 @Component({
+    selector: 'novo-control-custom',
+    template: `
+        <span #ref></span>
+    `
+})
+export class NovoControlCustom implements OnInit {
+    @Input() control: any;
+    @Input() form: any;
+
+    @ViewChild('ref', { read: ViewContainerRef }) referencePoint: ViewContainerRef;
+
+    controlComponent: any;
+
+    constructor(private componentUtils: ComponentUtils) { }
+
+    ngOnInit() {
+        this.controlComponent = this.componentUtils.appendNextToLocation(this.control.customControl, this.referencePoint);
+        this.controlComponent.instance.control = this.control;
+        this.controlComponent.instance.form = this.form;
+    }
+}
+
+@Component({
     selector: 'novo-fieldset',
     template: `
         <div class="novo-fieldset-container">
             <novo-fieldset-header [title]="title" *ngIf="title"></novo-fieldset-header>
             <div *ngFor="let control of controls" class="novo-form-row" [class.disabled]="control.disabled">
-                <novo-control [control]="control" [form]="form"></novo-control>
+                <novo-control *ngIf="!control.customControl" [control]="control" [form]="form"></novo-control>
+                <novo-control-custom *ngIf="control.customControl" [control]="control" [form]="form"></novo-control-custom>
             </div>
         </div>
     `
@@ -51,8 +76,9 @@ export class NovoFieldsetElement {
                 <ng-content select="form-subtitle"></ng-content>
             </header>
             <form class="novo-form" [formGroup]="form" autocomplete="off">
-                <span *ngFor="let fieldset of fieldsets"><novo-fieldset *ngIf="fieldset.controls.length" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form">
-                </novo-fieldset></span>
+                <span *ngFor="let fieldset of fieldsets">
+                    <novo-fieldset *ngIf="fieldset.controls.length" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
+                </span>
             </form>
         </div>
     `
