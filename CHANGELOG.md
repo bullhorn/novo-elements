@@ -1,3 +1,13 @@
+<a name="2.0.137"></a>
+## [2.0.137](https://github.com/bullhorn/novo-elements/compare/v2.0.136...v2.0.137) (2017-02-22)
+
+
+### Bug Fixes
+
+* **datepicker:** Fixing the date picker selection ([350044a](https://github.com/bullhorn/novo-elements/commit/350044a))
+
+
+
 <a name="2.0.136"></a>
 ## [2.0.136](https://github.com/bullhorn/novo-elements/compare/v2.0.135...v2.0.136) (2017-02-21)
 
