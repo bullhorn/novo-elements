@@ -1,3 +1,13 @@
+<a name="2.0.140"></a>
+## [2.0.140](https://github.com/bullhorn/novo-elements/compare/v2.0.139...v2.0.140) (2017-02-22)
+
+
+### Bug Fixes
+
+* **Control:** Errors is an unknown property on NovoCustomControlContainerElement ([#415](https://github.com/bullhorn/novo-elements/issues/415)) ([c74c8af](https://github.com/bullhorn/novo-elements/commit/c74c8af))
+
+
+
 <a name="2.0.139"></a>
 ## [2.0.139](https://github.com/bullhorn/novo-elements/compare/v2.0.138...v2.0.139) (2017-02-22)
 
