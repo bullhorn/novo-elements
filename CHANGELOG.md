@@ -1,3 +1,13 @@
+<a name="2.0.139"></a>
+## [2.0.139](https://github.com/bullhorn/novo-elements/compare/v2.0.138...v2.0.139) (2017-02-22)
+
+
+### Bug Fixes
+
+* **dates:** Fixing some actions with DateTimePickers ([c5ded16](https://github.com/bullhorn/novo-elements/commit/c5ded16))
+
+
+
 <a name="2.0.138"></a>
 ## [2.0.138](https://github.com/bullhorn/novo-elements/compare/v2.0.137...v2.0.138) (2017-02-22)
 
