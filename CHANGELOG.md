@@ -1,3 +1,13 @@
+<a name="2.0.142"></a>
+## [2.0.142](https://github.com/bullhorn/novo-elements/compare/v2.0.141...v2.0.142) (2017-02-23)
+
+
+### Bug Fixes
+
+* **chips:** Fixed the preview on hover of the entity chip when data is not present ([#416](https://github.com/bullhorn/novo-elements/issues/416)) ([0cc6fd0](https://github.com/bullhorn/novo-elements/commit/0cc6fd0))
+
+
+
 <a name="2.0.141"></a>
 ## [2.0.141](https://github.com/bullhorn/novo-elements/compare/v2.0.140...v2.0.141) (2017-02-23)
 
