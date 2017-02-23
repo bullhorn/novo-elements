@@ -8,7 +8,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
 @Component({
     selector: 'entity-picker-result',
     template: `
-        <novo-list-item>
+        <novo-list-item *ngIf="match.data">
             <item-header>
                 <item-avatar [icon]="getIconForResult(match.data)"></item-avatar>
                 <item-title>
