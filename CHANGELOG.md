@@ -1,3 +1,13 @@
+<a name="2.0.141"></a>
+## [2.0.141](https://github.com/bullhorn/novo-elements/compare/v2.0.140...v2.0.141) (2017-02-23)
+
+
+### Bug Fixes
+
+* **localization:** Fixing a lot of places were there were hard-coded strings ([b41848d](https://github.com/bullhorn/novo-elements/commit/b41848d))
+
+
+
 <a name="2.0.140"></a>
 ## [2.0.140](https://github.com/bullhorn/novo-elements/compare/v2.0.139...v2.0.140) (2017-02-22)
 
