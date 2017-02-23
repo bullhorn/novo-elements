@@ -21,13 +21,13 @@ import { Helpers } from '../../utils/Helpers';
  *  myList.dataProvider = dp;
  */
 export class ArrayCollection<T> implements Collection<T> {
-    dataChange:EventEmitter<CollectionEvent> = new EventEmitter<CollectionEvent>();
-    source:Array<T> = [];
-    filterData:Array<T> = [];
-    _filter:any = {};
-    _sort:Array<any> = [];
+    dataChange: EventEmitter<CollectionEvent> = new EventEmitter<CollectionEvent>();
+    source: Array<T> = [];
+    filterData: Array<T> = [];
+    _filter: any = {};
+    _sort: Array<any> = [];
 
-    constructor(source:Array<T> = []) {
+    constructor(source: Array<T> = []) {
         this.source = source;
         this.filterData = source.slice();
     }
@@ -40,23 +40,23 @@ export class ArrayCollection<T> implements Collection<T> {
         return this.filterData.length;
     }
 
-    get list():Array<T> {
+    get list(): Array<T> {
         return this.filterData;
     }
 
-    isEmpty():boolean {
+    isEmpty(): boolean {
         return this.length <= 0 && !this.isLoading() && !this.hasErrors();
     }
 
-    hasErrors():boolean {
+    hasErrors(): boolean {
         return false;
     }
 
-    isLoading():boolean {
+    isLoading(): boolean {
         return false;
     }
 
-    isFiltered():boolean {
+    isFiltered(): boolean {
         return (Object.keys(this._filter).length > 0);
     }
 
@@ -67,7 +67,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    addItem(item:T):void {
+    addItem(item: T): void {
         this.source.push(item);
         this.onDataChange(new CollectionEvent(CollectionEvent.ADD, [item]));
         this.refresh();
@@ -81,7 +81,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    addItemAt(item:T, index:number):void {
+    addItemAt(item: T, index: number): void {
         this.source.splice(index, 0, item);
         this.onDataChange(new CollectionEvent(CollectionEvent.ADD, [item]));
         this.refresh();
@@ -94,7 +94,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    addItems(items:Array<T>):void {
+    addItems(items: Array<T>): void {
         this.source.push(...items);
         this.onDataChange(new CollectionEvent(CollectionEvent.ADD, items));
         this.refresh();
@@ -108,7 +108,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    addItemsAt(items:Array<T>, index:number):void {
+    addItemsAt(items: Array<T>, index: number): void {
         this.source.splice(index, 0, ...items);
     }
 
@@ -119,7 +119,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    clone():ArrayCollection<T> {
+    clone(): ArrayCollection<T> {
         return new ArrayCollection(this.source.slice());
     }
 
@@ -130,7 +130,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    concat(items:Array<T>):void {
+    concat(items: Array<T>): void {
         this.addItems(items);
     }
 
@@ -142,7 +142,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    getItemAt(index:number):any {
+    getItemAt(index: number): any {
         return this.source[index];
     }
 
@@ -154,7 +154,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    getItemIndex(item:T):number {
+    getItemIndex(item: T): number {
         return this.source.indexOf(item);
     }
 
@@ -163,7 +163,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    invalidate():void {
+    invalidate(): void {
         this.onDataChange(new CollectionEvent(CollectionEvent.INVALIDATE_ALL));
     }
 
@@ -192,7 +192,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    merge(newData:Array<T>):void {
+    merge(newData: Array<T>): void {
         for (let obj of newData) {
             let existing = ~this.getItemIndex(obj);
             if (existing) {
@@ -208,7 +208,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    removeAll():void {
+    removeAll(): void {
         //let oldData = this.filterData.slice();
         this.source = [];
         this.filterData = [];
@@ -225,7 +225,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    removeItem(item:T):boolean {
+    removeItem(item: T): boolean {
         let index = this.getItemIndex(item);
         return this.removeItemAt(index);
     }
@@ -238,7 +238,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    removeItemAt(index:number):boolean {
+    removeItemAt(index: number): boolean {
         return !!(this.filterData.splice(index, 1));
     }
 
@@ -251,7 +251,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    replaceItem(newItem:any, oldItem:any):any {
+    replaceItem(newItem: any, oldItem: any): any {
         let index = this.getItemIndex(oldItem);
         if (index >= 0) {
             this.replaceItemAt(newItem, index);
@@ -267,7 +267,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    replaceItemAt(newItem:any, index:number):any {
+    replaceItemAt(newItem: any, index: number): any {
         this.filterData.splice(index, 1, newItem);
     }
 
@@ -279,11 +279,11 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    get sort():Array<any> {
+    get sort(): Array<any> {
         return this._sort;
     }
 
-    set sort(value:Array<any>) {
+    set sort(value: Array<any>) {
         this._sort = value;
         this.refresh();
     }
@@ -297,31 +297,31 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    sortOn(fieldName:any, reverse = false):Array<T> {
+    sortOn(fieldName: any, reverse = false): Array<T> {
         this.filterData = this.filterData.sort(Helpers.sortByField(fieldName, reverse));
         this.onDataChange(new CollectionEvent(CollectionEvent.SORT));
         return this.filterData;
     }
 
-    get filter():any {
+    get filter(): any {
         return this._filter;
     }
 
-    set filter(value:any) {
+    set filter(value: any) {
         this._filter = value;
         this.refresh();
     }
 
-    filterOn(fieldName:any, value:any = null):Array<T> {
+    filterOn(fieldName: any, value: any = null): Array<T> {
         this.filterData = this.filterData.filter(Helpers.filterByField(fieldName, value));
         return this.filterData;
     }
 
-    onDataChange(event:CollectionEvent):void {
+    onDataChange(event: CollectionEvent): void {
         this.dataChange.emit(event);
     }
 
-    refresh():void {
+    refresh(): void {
         this.filterData = this.source.slice();
         for (let item of this._sort.reverse()) {
             this.sortOn(item.field, item.reverse);
@@ -341,7 +341,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    toArray():Array<T> {
+    toArray(): Array<T> {
         return this.source;
     }
 

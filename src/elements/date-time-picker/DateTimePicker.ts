@@ -103,7 +103,7 @@ export type componentTabStates = 'date' | 'time';
                         </li>
                     </ul>
                     <div class="calendar-footer">
-                        <span (click)="setToday()" class="today" data-automation-id="calendar-today">Today</span>
+                        <span (click)="setToday()" class="today" data-automation-id="calendar-today">{{ labels.today }}</span>
                     </div>
                 </div>
                 <div class="time-picker">
@@ -130,7 +130,7 @@ export type componentTabStates = 'date' | 'time';
                         </div>
                     </div>
                     <div class="time-footer">
-                        <span class="now" (click)="clearTime()">Now</span>
+                        <span class="now" (click)="clearTime()">{{ labels.now }}</span>
                     </div>
                 </div>
             </div>
@@ -183,7 +183,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     onModelChange: Function = () => { };
     onModelTouched: Function = () => { };
 
-    constructor(private labels: NovoLabelService, private element: ElementRef) { }
+    constructor(public labels: NovoLabelService, private element: ElementRef) { }
 
     ngOnInit() {
         // Determine the year array

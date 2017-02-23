@@ -66,8 +66,7 @@ export class EntityPickerResult {
     @Input() match: any;
     @Input() term: any;
 
-    constructor(public labels: NovoLabelService) {
-    }
+    constructor(public labels: NovoLabelService) { }
 
     /**
      * @name escapeRegexp

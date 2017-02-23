@@ -114,7 +114,7 @@ export type rangeSelectModes = 'startDate' | 'endDate';
                 </li>
             </ul>
             <div class="calendar-footer">
-                <span (click)="setToday()" class="today" title="Today" data-automation-id="calendar-today">Today</span>
+                <span (click)="setToday()" class="today" data-automation-id="calendar-today">{{ labels.today }}</span>
             </div>
         </div>
     `
@@ -153,7 +153,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     onModelChange: Function = () => { };
     onModelTouched: Function = () => { };
 
-    constructor(private labels: NovoLabelService, private element: ElementRef) { }
+    constructor(public labels: NovoLabelService, private element: ElementRef) { }
 
     ngOnInit() {
         // Determine the year array

@@ -159,7 +159,7 @@ export class NovoTableFooterElement {
                                             {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
                                         </item>
                                         <div class="calender-container" [hidden]="!column.calenderShow">
-                                            <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>Back to Preset Filters</div>
+                                            <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
                                             <novo-date-picker #rangePicker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column.filter" range="true"></novo-date-picker>
                                         </div>
                                     </list>
@@ -788,21 +788,21 @@ export class NovoTableElement implements DoCheck {
     getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
         let opts: Array<any> = [
-            { label: 'Past 1 Day', min: -1, max: 0 },
-            { label: 'Past 7 Days', min: -7, max: 0 },
-            { label: 'Past 30 Days', min: -30, max: 0 },
-            { label: 'Past 90 Days', min: -90, max: 0 },
-            { label: 'Past 1 Year', min: -366, max: 0 },
-            { label: 'Next 1 Day', min: 0, max: 1 },
-            { label: 'Next 7 Days', min: 0, max: 7 },
-            { label: 'Next 30 Days', min: 0, max: 30 },
-            { label: 'Next 90 Days', min: 0, max: 90 },
-            { label: 'Next 1 Year', min: 0, max: 366 }
+            { label: this.labels.past1Day, min: -1, max: 0 },
+            { label: this.labels.past7Days, min: -7, max: 0 },
+            { label: this.labels.past30Days, min: -30, max: 0 },
+            { label: this.labels.past90Days, min: -90, max: 0 },
+            { label: this.labels.past1Year, min: -366, max: 0 },
+            { label: this.labels.next1Day, min: 0, max: 1 },
+            { label: this.labels.next7Days, min: 0, max: 7 },
+            { label: this.labels.next30Days, min: 0, max: 30 },
+            { label: this.labels.next90Days, min: 0, max: 90 },
+            { label: this.labels.next1Year, min: 0, max: 366 }
         ];
 
         if (column && column.range) {
             opts.push({
-                label: 'Custom Date Range',
+                label: this.labels.customDateRange,
                 range: true
             });
         }

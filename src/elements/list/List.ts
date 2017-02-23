@@ -13,8 +13,8 @@ import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '
     `
 })
 export class NovoListElement {
-    @Input() theme:string;
-    @Input() direction:string;
+    @Input() theme: string;
+    @Input() direction: string;
 }
 
 @Component({
@@ -28,9 +28,9 @@ export class NovoListElement {
     `
 })
 export class NovoListItemElement implements OnInit {
-    avatar:boolean = false;
+    avatar: boolean = false;
 
-    constructor(private element:ElementRef) {
+    constructor(private element: ElementRef) {
     }
 
     ngOnInit() {
@@ -45,12 +45,12 @@ export class NovoListItemElement implements OnInit {
     `
 })
 export class NovoItemAvatarElement implements OnChanges, OnInit {
-    @Input() icon:string;
+    @Input() icon: string;
 
-    iconClass:string;
-    classMap:any;
+    iconClass: string;
+    classMap: any;
 
-    ngOnChanges(changes?:SimpleChanges) {
+    ngOnChanges(changes?: SimpleChanges) {
         this.iconClass = (this.icon) ? `bhi-${this.icon}` : null;
         this.classMap = [this.iconClass, this.icon];
     }
@@ -72,9 +72,9 @@ export class NovoItemTitleElement {
 @Component({
     selector: 'item-header',
     template: `
-            <ng-content select="item-avatar"></ng-content>
-            <ng-content select="item-title"></ng-content>
-            <ng-content select="item-header-end"></ng-content>
+        <ng-content select="item-avatar"></ng-content>
+        <ng-content select="item-title"></ng-content>
+        <ng-content select="item-header-end"></ng-content>
     `
 })
 export class NovoItemHeaderElement {
@@ -100,7 +100,7 @@ export class NovoItemDateElement {
     `
 })
 export class NovoItemContentElement {
-    @Input() direction:string;
+    @Input() direction: string;
 }
 
 @Component({

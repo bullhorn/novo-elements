@@ -34,14 +34,14 @@ const SWITCH_VALUE_ACCESSOR = {
     }
 })
 export class NovoSwitchElement implements ControlValueAccessor {
-    @Input() theme:string;
-    @Output() onChange:EventEmitter<any> = new EventEmitter();
+    @Input() theme: string;
+    @Output() onChange: EventEmitter<any> = new EventEmitter();
 
-    _disabled:boolean = false;
-    model:any;
-    onModelChange:Function = () => {
+    _disabled: boolean = false;
+    model: any;
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
     get disabled() {
@@ -75,15 +75,15 @@ export class NovoSwitchElement implements ControlValueAccessor {
         this.onModelChange(this.model);
     }
 
-    writeValue(model:any):void {
+    writeValue(model: any): void {
         this.model = model;
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 }

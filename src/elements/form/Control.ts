@@ -156,14 +156,14 @@ export class NovoCustomControlContainerElement {
                     <div class="field-message" *ngIf="!condensed">
                         <div class="messages">
                             <span class="error-text" *ngIf="showFieldMessage"></span>
-                            <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} is required</span>
-                            <span class="error-text" *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} is required to be a minimum of {{ control.minlength }} characters</span>
-                            <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">Sorry, you have reached the maximum character count of {{ control.maxlength }} for this field</span>
-                            <span class="error-text" *ngIf="errors?.maxlength">Sorry, you have exceeded the maximum character count of {{ control.maxlength }} for this field</span>
-                            <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} requires a valid email (ex. abc@123.com)</span>
-                            <span class="error-text" *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} requires all fields filled out</span>
-                            <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} is too large</span>
-                            <span *ngIf="isDirty && errors?.minYear">{{control.label | uppercase}} is not a valid year</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.required">{{control.label | uppercase}} {{ labels.isRequired }}</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.minlength">{{control.label | uppercase}} {{ labels.minLength }} {{ control.minlength }}</span>
+                            <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">{{ labels.maxLengthMet }}({{ control.maxlength }})</span>
+                            <span class="error-text" *ngIf="errors?.maxlength">{{ labels.invalidMaxLength }}({{ control.maxlength }})</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{control.label | uppercase}} {{ labels.invalidEmail }}</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.invalidAddress">{{control.label | uppercase}} {{ labels.invalidAddress }}</span>
+                            <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{control.label | uppercase}} {{ labels.isTooLarge }}</span>
+                            <span *ngIf="isDirty && errors?.minYear">{{control.label | uppercase}} {{ labels.notValidYear }}</span>
                             <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
                             <!--Field Hint-->
                             <span class="description" *ngIf="control.description">

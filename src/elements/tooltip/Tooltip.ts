@@ -25,20 +25,20 @@ import { Directive, Input } from '@angular/core';
     }
 })
 export class TooltipDirective {
-    @Input() tooltip:string;
-    @Input('tooltipPosition') position:string = 'top';
-    @Input('tooltipType') type:string;
-    @Input('tooltipBounce') bounce:string;
-    @Input('tooltipNoAnimate') noAnimate:boolean;
-    @Input('tooltipRounded') rounded:boolean;
-    @Input('tooltipAlways') always:boolean;
-    @Input('tooltipActive') active:boolean;
+    @Input() tooltip: string;
+    @Input('tooltipPosition') position: string = 'top';
+    @Input('tooltipType') type: string;
+    @Input('tooltipBounce') bounce: string;
+    @Input('tooltipNoAnimate') noAnimate: boolean;
+    @Input('tooltipRounded') rounded: boolean;
+    @Input('tooltipAlways') always: boolean;
+    @Input('tooltipActive') active: boolean;
 
-    isPosition(position:string):boolean {
+    isPosition(position: string): boolean {
         return position.toLowerCase() === (this.position || '').toLowerCase();
     }
 
-    isType(type:string):boolean {
+    isType(type: string): boolean {
         return type.toLowerCase() === (this.type || '').toLowerCase();
     }
 }

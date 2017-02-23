@@ -157,7 +157,7 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
                 }
 
                 // Hide required fields that have been successfully filled out
-                if (hideRequiredWithValue && this.form.value[control.key]) {
+                if (hideRequiredWithValue && !Helpers.isBlank(this.form.value[control.key])) {
                     this.form.controls[control.key].hidden = true;
                 }
 

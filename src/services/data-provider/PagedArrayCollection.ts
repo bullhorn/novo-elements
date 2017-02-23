@@ -73,12 +73,11 @@ export class PagedArrayCollection<T> extends ArrayCollection<T> implements Paged
         }
         if (this.page >= 0) {
             let start = (this.page - 1) * this.pageSize;
-            let end = start + this.pageSize; ;
+            let end = start + this.pageSize;
             let result = this.filterData.slice(start, end);
             this.onDataChange(new CollectionEvent(CollectionEvent.CHANGE, result));
         } else {
             this.onDataChange(new CollectionEvent(CollectionEvent.CHANGE, this.filterData));
         }
     }
-
 }

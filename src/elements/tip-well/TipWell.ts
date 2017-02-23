@@ -1,5 +1,7 @@
 // NG2
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+// APP
+import { NovoLabelService } from './../../services/novo-label-service';
 
 @Component({
     selector: 'novo-tip-well',
@@ -14,18 +16,18 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
     `
 })
 export class NovoTipWellElement implements OnInit {
-    @Input() name:string|number;
-    @Input() tip:string;
-    @Input() buttonText:string;
-    @Input() button:string;
-    @Input() icon:string;
+    @Input() name: string | number;
+    @Input() tip: string;
+    @Input() buttonText: string;
+    @Input() button: string;
+    @Input() icon: string;
     @Output() confirmed = new EventEmitter();
 
-    isActive:boolean = true;
-    isLocalStorageEnabled:any;
-    localStorageKey:string;
+    isActive: boolean = true;
+    isLocalStorageEnabled: any;
+    localStorageKey: string;
 
-    constructor() {
+    constructor(private labels: NovoLabelService) {
         this.isActive = true;
         // Check if localStorage is enabled
         this.isLocalStorageEnabled = (() => {
@@ -45,7 +47,7 @@ export class NovoTipWellElement implements OnInit {
 
     ngOnInit() {
         this.tip = this.tip || '';
-        this.buttonText = this.buttonText || 'Ok, Got it';
+        this.buttonText = this.buttonText || this.labels.okGotIt;
         this.button = this.button || 'true';
         this.icon = this.icon || null;
         // Set a (semi) unique name for the tip-well

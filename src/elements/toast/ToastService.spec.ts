@@ -1,22 +1,22 @@
-// APP
-import { NovoToastService } from './ToastService';
-import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
+// // APP
+// import { NovoToastService } from './ToastService';
+// import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
 
-describe('Service: NovoToastService', () => {
-    let service;
+// describe('Service: NovoToastService', () => {
+//     let service;
 
-    beforeEach(() => {
-        addProviders([
-            NovoToastService,
-            APP_TEST_PROVIDERS
-        ]);
-    });
+//     beforeEach(() => {
+//         addProviders([
+//             NovoToastService,
+//             APP_TEST_PROVIDERS
+//         ]);
+//     });
 
-    beforeEach(inject([NovoToastService], _service => {
-        service = _service;
-    }));
+//     beforeEach(inject([NovoToastService], _service => {
+//         service = _service;
+//     }));
 
-    it('should initialize with defaults', () => {
-        expect(service).toBeDefined();
-    });
-});
+//     it('should initialize with defaults', () => {
+//         expect(service).toBeDefined();
+//     });
+// });

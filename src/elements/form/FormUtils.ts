@@ -22,6 +22,7 @@ import {
 import { EntityPickerResult, EntityPickerResults } from './../picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from './../../utils/Helpers';
 import { NovoFieldset } from './DynamicForm';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 export class NovoFormControl extends FormControl {
     hidden: boolean;

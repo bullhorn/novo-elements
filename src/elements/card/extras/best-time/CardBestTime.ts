@@ -23,17 +23,17 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
     `
 })
 export class CardBestTimeElement implements OnChanges {
-    @Input() label:string;
-    @Input() time:string;
-    @Input() day:string;
-    @Input() hideLabel:boolean;
+    @Input() label: string;
+    @Input() time: string;
+    @Input() day: string;
+    @Input() hideLabel: boolean;
 
-    timeIcon:string;
-    timeStyle:string;
-    dayLowerCase:string;
-    dataAutomationId:string;
+    timeIcon: string;
+    timeStyle: string;
+    dayLowerCase: string;
+    dataAutomationId: string;
 
-    ngOnChanges(changes?:SimpleChanges) {
+    ngOnChanges(changes?: SimpleChanges) {
         if (this.time) {
             let timeIconAndStyle = this.getTimeOfDayStyleAndIcon(this.time);
             this.timeIcon = timeIconAndStyle.icon;

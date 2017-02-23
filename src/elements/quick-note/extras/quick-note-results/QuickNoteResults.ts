@@ -23,15 +23,15 @@ import { Observable } from 'rxjs/Rx';
                 <span [innerHtml]="highlight(match.label, term)"></span>
             </li>
         </ul>
-        <p class="picker-error" *ngIf="hasError">{{labels.quickNoteError}}</p>
-        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{labels.quickNoteEmpty}}</p>
+        <p class="picker-error" *ngIf="hasError">{{ labels.quickNoteError }}</p>
+        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.quickNoteEmpty }}</p>
     `
 })
 export class QuickNoteResults extends PickerResults {
     // Mode that the quick note is in for tagging
-    taggingMode:string = '';
+    taggingMode: string = '';
 
-    constructor(element:ElementRef, labels:NovoLabelService) {
+    constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element, labels);
     }
 
@@ -42,14 +42,14 @@ export class QuickNoteResults extends PickerResults {
         this.isLoading = true;
         this.search(value, this.taggingMode)
             .subscribe(
-                results => {
-                    this.matches = this.isStatic ? this.filterData(results) : results;
-                    this.isLoading = false;
-                },
-                () => {
-                    this.hasError = true;
-                    this.isLoading = false;
-                });
+            results => {
+                this.matches = this.isStatic ? this.filterData(results) : results;
+                this.isLoading = false;
+            },
+            () => {
+                this.hasError = true;
+                this.isLoading = false;
+            });
     }
 
     search(term, taggingMode) {

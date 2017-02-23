@@ -4,7 +4,8 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { Helpers } from './../../utils/Helpers';
+import { Helpers } from './../../utils/Helpers'; //APP
+import { NovoLabelService } from './../../services/novo-label-service';
 // Vendor
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
@@ -88,7 +89,7 @@ export class NovoChipElement {
             <span #preview></span>
         </div>
         <i class="bhi-search"></i>
-        <label class="clear-all" *ngIf="items.length" (click)="clearValue()">CLEAR ALL <i class="bhi-times"></i></label>
+        <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
    `,
     host: {
         '[class.with-value]': 'items.length > 0'
@@ -122,7 +123,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
     onModelTouched: Function = () => {
     };
 
-    constructor(element: ElementRef, private componentUtils: ComponentUtils) {
+    constructor(element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {
         super(element);
         this.element = element;
 
