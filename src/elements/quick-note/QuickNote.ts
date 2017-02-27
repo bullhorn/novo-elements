@@ -344,10 +344,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
                 references: {}
             };
         }
-        // Update formatted note for the initial value
-        if (!this.basicNote) {
-            this.updateFormattedNote(this.model.note);
-        }
+        this.updateFormattedNote(this.model.note);
     }
 
     registerOnChange(fn: Function): void {
