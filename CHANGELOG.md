@@ -1,3 +1,13 @@
+<a name="2.0.144"></a>
+## [2.0.144](https://github.com/bullhorn/novo-elements/compare/v2.0.143...v2.0.144) (2017-02-27)
+
+
+### Bug Fixes
+
+* **table:** Fixing css around the footer ([6bfca6e](https://github.com/bullhorn/novo-elements/commit/6bfca6e))
+
+
+
 <a name="2.0.143"></a>
 ## [2.0.143](https://github.com/bullhorn/novo-elements/compare/v2.0.142...v2.0.143) (2017-02-27)
 
