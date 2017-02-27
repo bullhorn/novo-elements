@@ -241,7 +241,7 @@ export class NovoTableFooterElement {
                         </td>
                     </tr>
                 </tbody>
-                <tfoot *ngIf="!config.footers">
+                <tfoot *ngIf="!config.footers" [ngClass]="dataProvider.length % 2 == 0 ? 'odd' : 'even'">
                     <tr>
                         <td colspan="100%">
                             <ng-content select="novo-table-footer"></ng-content>
