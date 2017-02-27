@@ -196,7 +196,6 @@ export class NovoTableFooterElement {
                                 </td>
                             </tr>
                     </template>
-                    <tr class=""
                 </tbody>
                 <!-- NO TABLE DATA PLACEHOLDER -->
                 <tbody class="table-message" *ngIf="dataProvider.isEmpty() && !dataProvider.isFiltered()" data-automation-id="empty-table">
