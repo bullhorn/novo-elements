@@ -1,3 +1,13 @@
+<a name="2.0.143"></a>
+## [2.0.143](https://github.com/bullhorn/novo-elements/compare/v2.0.142...v2.0.143) (2017-02-27)
+
+
+### Bug Fixes
+
+* **QuickNote:** Quick Note does not create the formatted object on writeValue. ([#417](https://github.com/bullhorn/novo-elements/issues/417)) ([2fda393](https://github.com/bullhorn/novo-elements/commit/2fda393))
+
+
+
 <a name="2.0.142"></a>
 ## [2.0.142](https://github.com/bullhorn/novo-elements/compare/v2.0.141...v2.0.142) (2017-02-23)
 
