@@ -16,6 +16,10 @@ novo-tiles {
         cursor: pointer;
         align-items: center;
 
+        &.disabled {
+            opacity: .5;
+        }
+
         .tile {
             padding: 10px 15px;
             line-height: 1.5em;
