@@ -1,3 +1,13 @@
+<a name="2.0.145"></a>
+## [2.0.145](https://github.com/bullhorn/novo-elements/compare/v2.0.144...v2.0.145) (2017-03-01)
+
+
+### Features
+
+* **tiles:** Adding ability to disable the tiles and get an event when its clicked ([0e440cb](https://github.com/bullhorn/novo-elements/commit/0e440cb))
+
+
+
 <a name="2.0.144"></a>
 ## [2.0.144](https://github.com/bullhorn/novo-elements/compare/v2.0.143...v2.0.144) (2017-02-27)
 
