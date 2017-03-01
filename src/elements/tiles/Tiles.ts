@@ -3,6 +3,7 @@ import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
+import { NovoToastService } from "../toast/ToastService";
 
 // Value accessor for the component (supports ngModel)
 const TILES_VALUE_ACCESSOR = {
@@ -42,8 +43,9 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
     @Input() name: String;
     @Input() options: any;
     @Input() required: boolean;
-    @Output() onChange: EventEmitter<any> = new EventEmitter();
     @Input() disabled: boolean = false;
+    @Input() toastOptions:any = null;
+    @Output() onChange: EventEmitter<any> = new EventEmitter();
 
     _options: Array<any> = [];
     activeTile: any = null;
@@ -55,7 +57,7 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
     onModelTouched: Function = () => {
     };
 
-    constructor(private element: ElementRef) {
+    constructor(private element:ElementRef, private toaster: NovoToastService) {
     }
 
     ngOnInit() {
@@ -87,8 +89,9 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
         }
 
         if (this.disabled){
-            this.onChange.emit(item.value);
-            this.onModelChange(item.value);
+            if (this.toastOptions) {
+                this.toaster.alert(this.toastOptions);
+            }
             return;
         }
 
