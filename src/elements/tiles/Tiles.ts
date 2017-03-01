@@ -16,7 +16,7 @@ const TILES_VALUE_ACCESSOR = {
     providers: [TILES_VALUE_ACCESSOR],
     template: `
         <div class="tile-container">
-            <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked}" (click)="select($event, option, i)">
+            <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked, disabled: option.disabled}" (click)="select($event, option, i)">
                 <label [attr.for]="name + i">
                     {{ option.label || option}}
                 </label>
@@ -43,6 +43,7 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
     @Input() options: any;
     @Input() required: boolean;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
+    @Output() onDisabledOptionClick: EventEmitter<any> = new EventEmitter();
 
     _options: Array<any> = [];
     activeTile: any = null;
@@ -85,14 +86,18 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
             event.preventDefault();
         }
 
-        for (let option of this._options) {
-            option.checked = false;
-        }
+        if (!item.disabled) {
+            for (let option of this._options) {
+                option.checked = false;
+            }
 
-        item.checked = !item.checked;
-        this.onChange.emit(item.value);
-        this.onModelChange(item.value);
-        this.setTile(item);
+            item.checked = !item.checked;
+            this.onChange.emit(item.value);
+            this.onModelChange(item.value);
+            this.setTile(item);
+        } else {
+            this.onDisabledOptionClick.emit(item);
+        }
     }
 
     setTile(item) {
