@@ -44,7 +44,7 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
     @Input() options: any;
     @Input() required: boolean;
     @Input() disabled: boolean = false;
-    @Input() toastOptions:any = null;
+    @Input() toastOptions: any = null;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
 
     _options: Array<any> = [];
@@ -57,7 +57,7 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
     onModelTouched: Function = () => {
     };
 
-    constructor(private element:ElementRef, private toaster: NovoToastService) {
+    constructor(private element: ElementRef, private toaster: NovoToastService) {
     }
 
     ngOnInit() {
@@ -88,7 +88,7 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
             event.preventDefault();
         }
 
-        if (this.disabled){
+        if (this.disabled) {
             if (this.toastOptions) {
                 this.toaster.alert(this.toastOptions);
             }
