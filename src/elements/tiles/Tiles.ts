@@ -3,7 +3,6 @@ import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from './../../utils/Helpers';
-import { NovoToastService } from "../toast/ToastService";
 
 // Value accessor for the component (supports ngModel)
 const TILES_VALUE_ACCESSOR = {
@@ -16,8 +15,8 @@ const TILES_VALUE_ACCESSOR = {
     selector: 'novo-tiles',
     providers: [TILES_VALUE_ACCESSOR],
     template: `
-        <div class="tile-container" [class.disabled]="this.disabled">
-            <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked}" (click)="select($event, option, i)">
+        <div class="tile-container">
+            <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked, disabled: option.disabled}" (click)="select($event, option, i)">
                 <label [attr.for]="name + i">
                     {{ option.label || option}}
                 </label>
@@ -43,9 +42,8 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
     @Input() name: String;
     @Input() options: any;
     @Input() required: boolean;
-    @Input() disabled: boolean = false;
-    @Input() toastOptions: any = null;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
+    @Output() onDisabledOptionClick: EventEmitter<any> = new EventEmitter();
 
     _options: Array<any> = [];
     activeTile: any = null;
@@ -57,7 +55,7 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
     onModelTouched: Function = () => {
     };
 
-    constructor(private element: ElementRef, private toaster: NovoToastService) {
+    constructor(private element: ElementRef) {
     }
 
     ngOnInit() {
@@ -88,21 +86,18 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
             event.preventDefault();
         }
 
-        if (this.disabled) {
-            if (this.toastOptions) {
-                this.toaster.alert(this.toastOptions);
+        if (!item.disabled) {
+            for (let option of this._options) {
+                option.checked = false;
             }
-            return;
-        }
 
-        for (let option of this._options) {
-            option.checked = false;
+            item.checked = !item.checked;
+            this.onChange.emit(item.value);
+            this.onModelChange(item.value);
+            this.setTile(item);
+        } else {
+            this.onDisabledOptionClick.emit(item);
         }
-
-        item.checked = !item.checked;
-        this.onChange.emit(item.value);
-        this.onModelChange(item.value);
-        this.setTile(item);
     }
 
     setTile(item) {
