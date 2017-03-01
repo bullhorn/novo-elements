@@ -12909,96 +12909,96 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 32px;
-      height: 32px; }
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 28px;
-      height: 28px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 30px;
-      height: 30px; }
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
       width: 31px;
       height: 31px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 26px;
-      height: 26px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 40px;
-      height: 40px; }
+      width: 28px;
+      height: 28px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-submission {
+      background: #747884;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 26px;
+      height: 26px; }
+    color header .background-boxes .bb-task {
+      background: #747884;
       width: 43px;
       height: 43px; }
-    color header .background-boxes .bb-submission {
+    color header .background-boxes .bb-distributionList {
+      background: #747884;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-credential {
       background: #747884;
       width: 39px;
       height: 39px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-task {
-      background: #747884;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-distributionList {
-      background: #747884;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-credential {
-      background: #747884;
-      width: 43px;
-      height: 43px; }
     color header .background-boxes .bb-aqua {
       background: #3BAFDA;
-      width: 34px;
-      height: 34px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-ocean {
       background: #4A89DC;
-      width: 31px;
-      height: 31px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-mint {
       background: #37BC9B;
-      width: 45px;
-      height: 45px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-grass {
       background: #8CC152;
-      width: 41px;
-      height: 41px; }
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-sunflower {
       background: #F6B042;
-      width: 27px;
-      height: 27px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
-      width: 27px;
-      height: 27px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
-      width: 34px;
-      height: 34px; }
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 34px;
-      height: 34px; }
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 26px;
-      height: 26px; }
+      width: 43px;
+      height: 43px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -13952,4 +13952,4 @@ popover-demo .example.popover-demo {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.f91b30aa3c6d0de9bc6f.bundle.map*/
+/*# sourceMappingURL=main.49b13439c458f9c5c1d4.bundle.map*/
