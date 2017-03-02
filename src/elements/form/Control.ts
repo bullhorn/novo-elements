@@ -111,7 +111,7 @@ export class NovoCustomControlContainerElement {
                                 <chips [source]="control.config" [type]="control.config.type" [formControlName]="control.key" [placeholder]="control.placeholder" *ngIf="control.multiple" [closeOnSelect]="control.closeOnSelect" (changed)="modelChange($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></chips>
                             </div>
                             <!--Novo Select-->
-                            <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-select>
+                            <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (onSelect)="modelChange($event)"></novo-select>
                             <!--Radio-->
                             <div class="novo-control-input-container" *ngSwitchCase="'radio'">
                                 <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of control.options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-radio>
@@ -135,14 +135,14 @@ export class NovoCustomControlContainerElement {
                                 <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
                                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue()" class="bhi-times" *ngIf="hasValue"></i>
-                                <novo-date-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event);" [formControlName]="control.key"></novo-date-time-picker>
+                                <novo-date-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event); modelChange($event);" [formControlName]="control.key"></novo-date-time-picker>
                             </div>
                             <!--Address-->
                             <novo-address *ngSwitchCase="'address'" [formControlName]="control.key"></novo-address>
                             <!--Checkbox-->
                             <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-checkbox>
                             <!--Checklist-->
-                            <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="control.options" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-check-list>
+                            <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="control.options" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (onSelect)="modelChange($event)"></novo-check-list>
                             <!--QuickNote-->
                             <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [placeholder]="control.placeholder" [config]="control.config" (change)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-quick-note>
                              <!--ReadOnly-->
