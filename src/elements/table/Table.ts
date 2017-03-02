@@ -169,7 +169,7 @@ export class NovoTableFooterElement {
                     </tr>
                 </thead>
                 <!-- TABLE DATA -->
-                <tbody *ngIf="!dataProvider.isEmpty()">
+                <tbody *ngIf="!dataProvider.isEmpty() || editing">
                     <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage && config.selectAllEnabled" data-automation-id="table-selection-row">
                         <td colspan="100%">
                             {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(dataProvider.total)}}</a>
@@ -186,7 +186,7 @@ export class NovoTableFooterElement {
                                 </td>
                                 <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name" [class.novo-form-row]="editable">
                                     <novo-table-cell *ngIf="!row._editing[column.name]" [hasEditor]="editable" [column]="column" [row]="row" [form]="tableForm.controls.rows.controls[i]"></novo-table-cell>
-                                    <novo-control *ngIf="row._editing[column.name]" condensed="true" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]"></novo-control>
+                                    <novo-control *ngIf="row._editing[column.name]" condensed="true" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]" [hidden]="column.hiddenOnEdit"></novo-control>
                                 </td>
                             </tr>
                             <tr class="details-row" *ngIf="config.hasDetails" [hidden]="!row._expanded" [attr.data-automation-id]="'details-row-'+row.id">
@@ -198,7 +198,7 @@ export class NovoTableFooterElement {
                     </template>
                 </tbody>
                 <!-- NO TABLE DATA PLACEHOLDER -->
-                <tbody class="table-message" *ngIf="dataProvider.isEmpty() && !dataProvider.isFiltered()" data-automation-id="empty-table">
+                <tbody class="table-message" *ngIf="dataProvider.isEmpty() && !dataProvider.isFiltered() && !editing" data-automation-id="empty-table">
                     <tr>
                         <td colspan="100%">
                             <div #emptymessage><ng-content select="[table-empty-message]"></ng-content></div>
@@ -899,6 +899,7 @@ export class NovoTableElement implements DoCheck {
         this.columns.forEach(column => {
             // Use the control passed or use a ReadOnlyControl so that the form has the values
             let control = column.editor || new ReadOnlyControl({ key: column.name });
+            control.value = null; //remove copied column value
             row.controls[column.name] = control;
             row._editing[column.name] = true;
             rowControls.push(control);
