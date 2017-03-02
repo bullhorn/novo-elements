@@ -28,8 +28,7 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },
@@ -68,7 +67,6 @@
     "@types/ckeditor": "*",
     "@types/dragula": "*",
     "core-js": "*",
-    "ie-shim": "*",
     "rxjs": "*",
     "zone.js": "*"
   },

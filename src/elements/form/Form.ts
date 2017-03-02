@@ -1,7 +1,7 @@
 // NG2
 import { Component, Input, OnInit } from '@angular/core';
 // APP
-import { NovoFormGroup } from './DynamicForm';
+import { NovoFormGroup } from './FormInterfaces';
 
 @Component({
     selector: 'novo-form',

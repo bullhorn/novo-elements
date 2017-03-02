@@ -21,7 +21,7 @@ import {
 } from './FormControls';
 import { EntityPickerResult, EntityPickerResults } from './../picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from './../../utils/Helpers';
-import { NovoFieldset } from './DynamicForm';
+import { NovoFieldset } from './FormInterfaces';
 import { NovoLabelService } from '../../services/novo-label-service';
 
 export class NovoFormControl extends FormControl {

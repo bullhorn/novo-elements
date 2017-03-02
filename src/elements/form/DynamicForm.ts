@@ -3,18 +3,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ViewCont
 // APP
 import { Helpers } from './../../utils/Helpers';
 import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
-
-export interface NovoFormGroup {
-    layout?: any;
-    controls?: any;
-    value?: any;
-    valid?: boolean;
-}
-
-export interface NovoFieldset {
-    title?: string;
-    controls: Array<any>;
-}
+import { NovoFieldset, NovoFormGroup } from './FormInterfaces';
 
 @Component({
     selector: 'novo-fieldset-header',

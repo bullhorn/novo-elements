@@ -397,18 +397,6 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         this.updateView(tmp, false, false);
     }
 
-    checkSelected(item: string, format: string) {
-        let selected = true;
-
-        if (this.rangeSelectMode === 'endDate') {
-            selected = this.selected2 ? item === this.selected2.format(format) : false;
-        } else {
-            selected = this.selected ? item === this.selected.format(format) : false;
-        }
-
-        return selected;
-    }
-
     updateHeading() {
         if (!this.selected) {
             return;

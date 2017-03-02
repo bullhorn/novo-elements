@@ -9,6 +9,8 @@ const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
     multi: true
 };
 
+declare var CKEDITOR: any;
+
 /**
  * CKEditor component
  * Usage :

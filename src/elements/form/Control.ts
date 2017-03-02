@@ -4,7 +4,7 @@ import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy }
 import { Observable } from 'rxjs/Observable';
 import { NovoToastService } from '../../elements/toast/ToastService';
 // APP
-import { NovoFormGroup } from './DynamicForm';
+import { NovoFormGroup } from './FormInterfaces';
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { NovoLabelService } from './../../services/novo-label-service';
 import { Helpers } from './../../utils/Helpers';
@@ -56,8 +56,6 @@ export class NovoCustomControlContainerElement {
     @Input() control;
     @Input() form: NovoFormGroup;
 }
-
-
 @Component({
     selector: 'novo-control',
     template: `
