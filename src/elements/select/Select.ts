@@ -104,8 +104,8 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         this.selected = option;
         this.selected.active = true;
         this.empty = false;
-        this.onSelect.emit({ selected: this.selected.value });
         this.onModelChange(this.selected.value);
+        this.onSelect.emit({ selected: this.selected.value });
     }
 
     clear() {
