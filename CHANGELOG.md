@@ -1,3 +1,18 @@
+<a name="2.0.147"></a>
+## [2.0.147](https://github.com/bullhorn/novo-elements/compare/v2.0.146...v2.0.147) (2017-03-03)
+
+
+### Bug Fixes
+
+* **control:** Adding missing model change events ([1ec470e](https://github.com/bullhorn/novo-elements/commit/1ec470e))
+
+
+### Features
+
+* **table:** Edit table improvements and fixes ([#424](https://github.com/bullhorn/novo-elements/issues/424)) ([8187fdb](https://github.com/bullhorn/novo-elements/commit/8187fdb))
+
+
+
 <a name="2.0.146"></a>
 ## [2.0.146](https://github.com/bullhorn/novo-elements/compare/v2.0.145...v2.0.146) (2017-03-02)
 
