@@ -284,6 +284,10 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.updateHeading();
 
         if (fireEvents && this.selected) {
+            // Also, update the ngModel
+            this.onModelChange(this.selected);
+            this.model = this.selected;
+
             // Emit our output
             this.onSelect.next({
                 month: this.labels.formatDateWithFormat(this.selected, { month: 'long' }),
@@ -291,10 +295,6 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
                 day: this.labels.formatDateWithFormat(this.selected, { weekday: 'long' }),
                 date: this.selected
             });
-
-            // Also, update the ngModel
-            this.onModelChange(this.selected);
-            this.model = this.selected;
             this.dispatchChange();
         }
     }
@@ -453,6 +453,10 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         if (this.model) {
             value = Helpers.modifyDate({ hours: hours, minutes: this.minutes, seconds: 0 }, this.model);
         }
+        this.onModelChange(value);
+        this.model = value;
+
+        //onSelect needs to be fired after the model has been changed
         this.onSelect.next({
             hours: hours,
             minutes: this.minutes,
@@ -460,13 +464,11 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
             date: value,
             text: `${this.hours}:${this.minutes} ${this.meridian}`
         });
-
-        this.onModelChange(value);
-        this.model = value;
     }
 
     clearTime(): void {
         this.updateTime(null, true);
+        this.dispatchChange();
     }
 
     toggleTimePicker(tab: componentTabStates): void {
