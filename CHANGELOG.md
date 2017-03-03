@@ -1,3 +1,13 @@
+<a name="2.0.148"></a>
+## [2.0.148](https://github.com/bullhorn/novo-elements/compare/v2.0.147...v2.0.148) (2017-03-03)
+
+
+### Bug Fixes
+
+* **control:** Moving Model change events to be fired after model is updated ([#425](https://github.com/bullhorn/novo-elements/issues/425)) ([2edf333](https://github.com/bullhorn/novo-elements/commit/2edf333))
+
+
+
 <a name="2.0.147"></a>
 ## [2.0.147](https://github.com/bullhorn/novo-elements/compare/v2.0.146...v2.0.147) (2017-03-03)
 
