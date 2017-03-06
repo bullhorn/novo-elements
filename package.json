@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "2.0.148",
+  "version": "2.0.149",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
     "precommit": "npm run lint",
