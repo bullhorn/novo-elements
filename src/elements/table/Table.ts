@@ -102,7 +102,7 @@ export class NovoTableFooterElement {
             <novo-form hideHeader="true" [form]="tableForm">
                 <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
                 <!-- skipSortAndFilterClear is a hack right now, will be removed once Canvas is refactored -->
-                <thead *ngIf="columns.length && (!dataProvider.isEmpty() || dataProvider.isFiltered() || skipSortAndFilterClear)">
+                <thead *ngIf="columns.length && (!dataProvider.isEmpty() || dataProvider.isFiltered() || skipSortAndFilterClear || editing)">
                     <tr role="row">
                         <!-- DETAILS -->
                         <th class="row-actions" *ngIf="config.hasDetails"></th>
@@ -882,6 +882,7 @@ export class NovoTableElement implements DoCheck {
                 row._editing[column.name] = false;
             });
         });
+        this.hideToastMessage();
     }
 
     /**
