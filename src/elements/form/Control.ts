@@ -128,7 +128,7 @@ export class NovoCustomControlContainerElement {
                                 <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
                                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
-                                <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateValue($event);" [formControlName]="control.key"></novo-date-picker>
+                                <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateValue($event); modelChange($event);" [formControlName]="control.key"></novo-date-picker>
                             </div>
                             <!--Date and Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date-time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
