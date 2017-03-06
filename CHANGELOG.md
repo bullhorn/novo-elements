@@ -1,3 +1,13 @@
+<a name="2.0.150"></a>
+## [2.0.150](https://github.com/bullhorn/novo-elements/compare/v2.0.149...v2.0.150) (2017-03-06)
+
+
+### Features
+
+* **Table:** Column headers should show in edit mode even if no data. Toasts should be removed on cancel ([#427](https://github.com/bullhorn/novo-elements/issues/427)) ([39e159e](https://github.com/bullhorn/novo-elements/commit/39e159e))
+
+
+
 <a name="2.0.149"></a>
 ## [2.0.149](https://github.com/bullhorn/novo-elements/compare/v2.0.148...v2.0.149) (2017-03-06)
 
