@@ -456,7 +456,6 @@ novo-form {
                                                     >h4 {
                                                         font-weight: 500;
                                                     }
-                                                    >p {}
                                                 }
                                                 section {
                                                     box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
@@ -467,7 +466,9 @@ novo-form {
                                                     color: black;
                                                 }
                                             }
-                                            >p {}
+                                            entity-picker-results {
+                                                min-width: 250px;
+                                            }
                                         }
                                     }
                                     i.required-indicator {
