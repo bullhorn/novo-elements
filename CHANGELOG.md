@@ -1,3 +1,13 @@
+<a name="2.0.151"></a>
+## [2.0.151](https://github.com/bullhorn/novo-elements/compare/v2.0.150...v2.0.151) (2017-03-08)
+
+
+### Features
+
+* **Table:** Adding margin for table header buttons and increasing min-width for entity-picker ([#428](https://github.com/bullhorn/novo-elements/issues/428)) ([97bb742](https://github.com/bullhorn/novo-elements/commit/97bb742))
+
+
+
 <a name="2.0.150"></a>
 ## [2.0.150](https://github.com/bullhorn/novo-elements/compare/v2.0.149...v2.0.150) (2017-03-06)
 
