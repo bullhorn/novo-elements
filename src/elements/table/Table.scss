@@ -14,6 +14,13 @@ novo-table {
     >header {
         novo-table-header {
             padding: 10px;
+            button {
+                height: 39px;
+                margin-right: 10px;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
         }
         div.header-actions {
             display: flex;
