@@ -1,9 +1,8 @@
 // NG2
-import { Component, ViewContainerRef, ViewChild, AfterViewInit, Input, Output, OnInit } from '@angular/core';
+import { Component, ViewContainerRef, ViewChild, AfterViewInit, Input, Output, EventEmitter, OnInit } from '@angular/core';
 // APP
 import { Deferred } from './../../utils/deferred/Deferred';
 import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
-import { EventEmitter } from '@angular/common/src/facade/async';
 
 /**
  * Params that can be passed to the Modal
