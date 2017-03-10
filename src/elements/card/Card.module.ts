@@ -2,9 +2,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // APP
-import { NovoLoadingModule } from './../loading/Loading.module';
-import { NovoButtonModule } from './../button/Button.module';
-import { NovoTooltipModule } from './../tooltip/Tooltip.module';
+import { NovoLoadingModule } from '../loading/Loading.module';
+import { NovoButtonModule } from '../button/Button.module';
+import { NovoTooltipModule } from '../tooltip/Tooltip.module';
 import { CardElement, CardActionsElement } from './Card';
 import { CardBestTimeElement } from './extras/best-time/CardBestTime';
 import { CardDonutChartElement } from './extras/donut-chart/CardDonutChart';

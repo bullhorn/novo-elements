@@ -20,7 +20,7 @@
 //         expect(comp).toBeDefined();
 //     });
 
-//     describe('Function: getIconForResult(result)', () => {
+//     describe('Method: getIconForResult(result)', () => {
 //         it('should return the right icon name for ClientContact', () => {
 //             expect(comp.getIconForResult({ searchEntity: 'ClientContact' })).toBe('person contact');
 //         });
@@ -47,7 +47,7 @@
 //         });
 //     });
 
-//     describe('Function: getNameForResult(result)', () => {
+//     describe('Method: getNameForResult(result)', () => {
 //         it('should return a correctly formatted name for ClientContact', () => {
 //             let input = {
 //                 searchEntity: 'ClientContact',

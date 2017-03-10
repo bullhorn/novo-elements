@@ -2,8 +2,8 @@
 import { ElementRef, Component, EventEmitter, forwardRef, trigger, state, style, transition, animate, Input, Output, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { Helpers } from './../../utils/Helpers';
-import { NovoLabelService } from './../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 // Value accessor for the component (supports ngModel)
 const DATE_PICKER_VALUE_ACCESSOR = {

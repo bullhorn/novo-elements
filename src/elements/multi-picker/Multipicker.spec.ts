@@ -20,7 +20,7 @@
 //         component._options = [{ type: 'cats', data: cats, originalData: cats }];
 //     }));
 
-//     describe('Function: ngOnInit()', () => {
+//     describe('Method: ngOnInit()', () => {
 //         it('should initialize properly', () => {
 //             expect(component.ngOnInit).toBeDefined();
 //             expect(component.clearValue).toBeDefined();
@@ -28,7 +28,7 @@
 //         });
 //     });
 
-//     describe('Function: clearValue()', () => {
+//     describe('Method: clearValue()', () => {
 //         it('should clear items, uncheck options, and reset value', () => {
 //             component.types = [{ value: 'numbers' }];
 //             component.items = [1, 2];
@@ -44,7 +44,7 @@
 //         });
 //     });
 
-//     describe('Function: setupOptions()', () => {
+//     describe('Method: setupOptions()', () => {
 //         it('should correctly setup options', () => {
 //             component.source = { options: [{ type: 'numbers', data: [1] }] };
 //             component.setupOptions();
@@ -55,7 +55,7 @@
 //         });
 //     });
 
-//     describe('Function: formatOption(section)', () => {
+//     describe('Method: formatOption(section)', () => {
 //         it('should correctly format a parent option', () => {
 //             let section = { type: 'cats', isParentOf: 'kittens' };
 //             let item = { value: 1 };
@@ -101,7 +101,7 @@
 //         });
 //     });
 
-//     describe('Function: createSelectAllOption(section, item)', () => {
+//     describe('Method: createSelectAllOption(section, item)', () => {
 //         it('should correctly create a select all option for a child type', () => {
 //             let section = { type: 'kittens', isChildOf: 'cats', data: [{ cats: [{ id: 1 }, { id: 2 }] }] };
 //             let expected = {
@@ -131,7 +131,7 @@
 //         });
 //     });
 
-//     describe('Function: setupOptionByType(section)', () => {
+//     describe('Method: setupOptionByType(section)', () => {
 //         it('should correctly format a section of options', () => {
 //             let section = { type: 'cats', data: ['Kitty'] };
 //             let data = [{ value: 'ALL', label: 'All cats', type: 'cats', checked: undefined, isParentOf: undefined, isChildOf: undefined }, { value: 'Kitty', label: 'Kitty', type: 'cats', checked: undefined, isParentOf: undefined, isChildOf: undefined }];
@@ -141,7 +141,7 @@
 //         });
 //     });
 
-//     describe('Function: deselectAll()', () => {
+//     describe('Method: deselectAll()', () => {
 //         it('should remove selection', () => {
 //             component.selected = 'test';
 //             component.deselectAll();
@@ -149,7 +149,7 @@
 //         });
 //     });
 
-//     describe('Function: select(event, item)', () => {
+//     describe('Method: select(event, item)', () => {
 //         it('should select item', () => {
 //             component.selected = 'before';
 //             component.select(null, 'after');
@@ -157,7 +157,7 @@
 //         });
 //     });
 
-//     describe('Function: clickOption(event)', () => {
+//     describe('Method: clickOption(event)', () => {
 //         it('should remove item if checked is false', () => {
 //             let item = { checked: false };
 //             spyOn(component, 'remove');
@@ -177,7 +177,7 @@
 //         });
 //     });
 
-//     describe('Function: updateDisplayItems(item, action)', () => {
+//     describe('Method: updateDisplayItems(item, action)', () => {
 //         it('should update items if adding', () => {
 //             component.items = [];
 //             let item = { value: 'Cat', label: 'Cat' };
@@ -193,7 +193,7 @@
 //         });
 //     });
 
-//     describe('Function: remove(event, item)', () => {
+//     describe('Method: remove(event, item)', () => {
 //         it('should remove ALL item correctly', () => {
 //             let item = { value: 'ALL' };
 //             spyOn(component, 'modifyAllOfType');
@@ -222,7 +222,7 @@
 //         });
 //     });
 
-//     describe('Function: add(event)', () => {
+//     describe('Method: add(event)', () => {
 //         it('should add ALL item correctly', () => {
 //             let item = { value: 'ALL' };
 //             spyOn(component, 'modifyAllOfType');
@@ -246,7 +246,7 @@
 //         });
 //     });
 
-//     describe('Function: removeItem(item)', () => {
+//     describe('Method: removeItem(item)', () => {
 //         it('should handle removing item correctly from value and items and update checked state', () => {
 //             let item = { value: 'Cat', checked: true, type: 'cats' };
 //             spyOn(component, 'removeValue');
@@ -258,7 +258,7 @@
 //         });
 //     });
 
-//     describe('Function: removeValue(item)', () => {
+//     describe('Method: removeValue(item)', () => {
 //         it('should handle removing item correctly from value', () => {
 //             let item = { value: 'Cat', type: 'cats' };
 //             component.types = [{ value: 'cats' }];
@@ -273,7 +273,7 @@
 //         });
 //     });
 
-//     describe('Function: updateDisplayText(items)', () => {
+//     describe('Method: updateDisplayText(items)', () => {
 //         it('should create an object with correct type and count when count is above 2', () => {
 //             let items = [{ value: 1, type: 'numbers' }, { value: 2, type: 'numbers' }, { value: 3, type: 'numbers' }, { value: 4, type: 'numbers' }, { value: 5, type: 'numbers' }, { value: 6, type: 'numbers' }];
 //             component.types = [{ value: 'numbers' }];
@@ -299,7 +299,7 @@
 //         });
 //     });
 
-//     describe('Function: allOfTypeSelected(type)', () => {
+//     describe('Method: allOfTypeSelected(type)', () => {
 //         it('should return true if ALL of type is selected', () => {
 //             let item = { value: 'ALL', checked: true, type: 'cats' };
 //             component.items = [item];
@@ -313,7 +313,7 @@
 //         });
 //     });
 
-//     describe('Function: modifyAllOfType(type, action)', () => {
+//     describe('Method: modifyAllOfType(type, action)', () => {
 //         it('should select all if selecting', () => {
 //             component.types = [{ value: 'cats' }];
 //             let kitty = { value: 'Kitty', checked: true, type: 'cats' };
@@ -340,7 +340,7 @@
 //         });
 //     });
 
-//     describe('Function: selectAll(type,)', () => {
+//     describe('Method: selectAll(type,)', () => {
 //         it('should correctly update value and items when selecting all', () => {
 //             component.types = [{ value: 'cats' }];
 //             let kitty = { value: 'Kitty', checked: false, type: 'cats' };
@@ -355,7 +355,7 @@
 //         });
 //     });
 
-//     describe('Function: handleRemoveItemIfAllSelected(item)', () => {
+//     describe('Method: handleRemoveItemIfAllSelected(item)', () => {
 //         it('should correctly update value and items when removing an item AND ALL is currently selected', () => {
 //             component.types = [{ value: 'cats' }];
 //             let kitty = { value: 'Kitty', checked: false, type: 'cats' };
@@ -372,7 +372,7 @@
 //         });
 //     });
 
-//     describe('Function: setInitialValue(model)', () => {
+//     describe('Method: setInitialValue(model)', () => {
 //         it('should correctly set intial value and items if a model is passed in to start', () => {
 //             let model = { cats: ['Kitty'] };
 //             component.types = [{ value: 'cats' }];
@@ -393,7 +393,7 @@
 //         });
 //     });
 
-//     describe('Function: setIndeterminateState(type, status)', () => {
+//     describe('Method: setIndeterminateState(type, status)', () => {
 //         it('should correctly set "ALL [type]" to true', () => {
 //             component.types = [{ value: 'cats' }];
 //             let allOfType = [{ value: 'ALL', checked: false, type: 'cats', indeterminate: undefined }];
@@ -408,7 +408,7 @@
 //         });
 //     });
 
-//     describe('Function: getAllOfType(type)', () => {
+//     describe('Method: getAllOfType(type)', () => {
 //         it('should get all of type', () => {
 //             component.types = [{ value: 'cats' }];
 //             component._options = [{ type: 'cats', originalData: [1, 2, 3, 4] }];
@@ -416,7 +416,7 @@
 //             expect(result.length).toBe(4);
 //         });
 //     });
-//     describe('Function: allItemsSelected(optionsByType, type)', () => {
+//     describe('Method: allItemsSelected(optionsByType, type)', () => {
 //         it('should return true if all individual items are selected', () => {
 //             component.types = [{ value: 'cats' }];
 //             let options = ['All', 'Kitty', 'Tiger'];
@@ -430,7 +430,7 @@
 //             expect(component.allItemsSelected(options, 'cats')).toBeFalsy();
 //         });
 //     });
-//     describe('Function: addIndividualChildren(parent, checked)', () => {
+//     describe('Method: addIndividualChildren(parent, checked)', () => {
 //         it('should add an item', () => {
 //             component.value = { cats: [1] };
 //             let item = { type: 'cats', value: 2 };
@@ -446,7 +446,7 @@
 //             expect(component.add).not.toHaveBeenCalled();
 //         });
 //     });
-//     describe('Function: updateParentOrChildren(item, action)', () => {
+//     describe('Method: updateParentOrChildren(item, action)', () => {
 //         it('should call updateChildrenValue if item isParentOf', () => {
 //             let item = { isParentOf: true };
 //             spyOn(component, 'updateChildrenValue');
@@ -464,7 +464,7 @@
 //             expect(component.updateChildrenValue).not.toHaveBeenCalled();
 //         });
 //     });
-//     describe('Function: updateParentOrChildren(item, action)', () => {
+//     describe('Method: updateParentOrChildren(item, action)', () => {
 //         it('should call updateChildrenValue if item isParentOf', () => {
 //             let item = { isParentOf: true };
 //             spyOn(component, 'updateChildrenValue');
@@ -482,7 +482,7 @@
 //             expect(component.updateChildrenValue).not.toHaveBeenCalled();
 //         });
 //     });
-//     describe('Function: updateAllParentsOrChildren(item, action)', () => {
+//     describe('Method: updateAllParentsOrChildren(item, action)', () => {
 //         it('should call updateChildrenValue if item isParentOf', () => {
 //             let item = { isParentOf: true };
 //             spyOn(component, 'updateAllChildrenValue');
@@ -500,7 +500,7 @@
 //             expect(component.updateAllChildrenValue).not.toHaveBeenCalled();
 //         });
 //     });
-//     describe('Function: updateParentValue(item, action)', () => {
+//     describe('Method: updateParentValue(item, action)', () => {
 //         it('should handle removing item while all parents selected', () => {
 //             component._options = [{ type: 'cats', data: [{ checked: true, type: 'cats' }], originalData: [{ checked: true, type: 'cats' }] }];
 //             spyOn(component, 'handleRemoveItemIfAllSelected');
@@ -508,7 +508,7 @@
 //             expect(component.handleRemoveItemIfAllSelected).toHaveBeenCalled();
 //         });
 //     });
-//     describe('Function: updateAllParentValue(item, action)', () => {
+//     describe('Method: updateAllParentValue(item, action)', () => {
 //         it('should set all parents to indeterminate if not already checked', () => {
 //             let cat = { checked: false, type: 'cats', indeterminate: false };
 //             component._options = [{ type: 'cats', data: [cat], originalData: [cat] }];
@@ -516,7 +516,7 @@
 //             expect(component._options[0].data[0].indeterminate).toBeTruthy();
 //         });
 //     });
-//     describe('Function: updateChildrenValue(parent, action)', () => {
+//     describe('Method: updateChildrenValue(parent, action)', () => {
 //         it('should set children to checked if selecting', () => {
 //             let cat = { checked: false, type: 'cats', indeterminate: false, cats: [1] };
 //             component._options = [{ type: 'kittens', data: [cat], originalData: [cat] }];
@@ -524,7 +524,7 @@
 //             expect(component._options[0].data[0].checked).toBeTruthy();
 //         });
 //     });
-//     describe('Function: onKeyDown(selecting, itemChanged)', () => {
+//     describe('Method: onKeyDown(selecting, itemChanged)', () => {
 //         it('remove item if selected', () => {
 //             let event = {
 //                 keyCode: KeyCodes.BACKSPACE, target: { value: [] }, stopPropagation: () => {
@@ -550,7 +550,7 @@
 //             expect(component.select).toHaveBeenCalled();
 //         });
 //     });
-//     describe('Function: modifyAffectedParentsOrChildren(selecting, itemChanged)', () => {
+//     describe('Method: modifyAffectedParentsOrChildren(selecting, itemChanged)', () => {
 //         it('should update indeterminate states for parent and child type', () => {
 //             let kitty = { value: 'Kitty', checked: false, type: 'cats', isParentOf: 'kittens' };
 //             let allCat = { value: 'ALL', checked: true, type: 'cats', isParentOf: 'kittens' };

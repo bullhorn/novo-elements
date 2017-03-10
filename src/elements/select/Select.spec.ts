@@ -37,7 +37,7 @@
 //         ];
 //     }));
 
-//     describe('Function: ngOnInit()', () => {
+//     describe('Method: ngOnInit()', () => {
 //         it('should reformat array options to an object', () => {
 //             expect(component.ngOnInit).toBeDefined();
 //             component.options = ['1', '2', '3'];
@@ -48,7 +48,7 @@
 //         });
 //     });
 
-//     describe('Function: select(option, i)', () => {
+//     describe('Method: select(option, i)', () => {
 //         it('should be defined.', () => {
 //             expect(component.select).toBeDefined();
 //         });
@@ -62,7 +62,7 @@
 //         });
 //     });
 
-//     describe('Function: clear()', () => {
+//     describe('Method: clear()', () => {
 //         it('should be defined.', () => {
 //             expect(component.clear).toBeDefined();
 //         });
@@ -80,7 +80,7 @@
 //         });
 //     });
 
-//     describe('Function: onKeyDown(event)', () => {
+//     describe('Method: onKeyDown(event)', () => {
 //         it('should be defined.', () => {
 //             expect(component.onKeyDown).toBeDefined();
 //         });
@@ -129,7 +129,7 @@
 //         });
 //     });
 
-//     describe('Function: writeValue()', () => {
+//     describe('Method: writeValue()', () => {
 //         it('should be defined.', () => {
 //             expect(component.writeValue).toBeDefined();
 //         });
@@ -140,13 +140,13 @@
 //         });
 //     });
 
-//     describe('Function: registerOnChange()', () => {
+//     describe('Method: registerOnChange()', () => {
 //         it('should be defined.', () => {
 //             expect(component.registerOnChange).toBeDefined();
 //         });
 //     });
 
-//     describe('Function: registerOnTouched()', () => {
+//     describe('Method: registerOnTouched()', () => {
 //         it('should be defined.', () => {
 //             expect(component.registerOnTouched).toBeDefined();
 //         });

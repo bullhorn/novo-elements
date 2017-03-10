@@ -49,7 +49,7 @@
 //             expect(comp).toBeDefined();
 //         });
 //
-//         describe('Function: click', () => {
+//         describe('Method: click', () => {
 //             beforeEach(() => {
 //                 spyOn(comp.action, 'emit');
 //             });

@@ -58,7 +58,7 @@
 //         expect(comp.lastPage).toBeDefined();
 //     });
 //
-//     describe('Function: ngOnChanges()', () => {
+//     describe('Method: ngOnChanges()', () => {
 //         it('should set originalRows.', () => {
 //             expect(comp.ngOnChanges).toBeDefined();
 //             comp.rows = [];
@@ -67,37 +67,37 @@
 //         });
 //     });
 //
-//     describe('Function: ngDoCheck()', () => {
+//     describe('Method: ngDoCheck()', () => {
 //         it('should .', () => {
 //             expect(comp.ngDoCheck).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: getPageStart()', () => {
+//     describe('Method: getPageStart()', () => {
 //         it('should .', () => {
 //             expect(comp.getPageStart).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: getPageEnd()', () => {
+//     describe('Method: getPageEnd()', () => {
 //         it('should .', () => {
 //             expect(comp.getPageEnd).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: onPageChange()', () => {
+//     describe('Method: onPageChange()', () => {
 //         it('should .', () => {
 //             expect(comp.onPageChange).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: focusInput()', () => {
+//     describe('Method: focusInput()', () => {
 //         it('should .', () => {
 //             expect(comp.focusInput).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: onFilterClick()', () => {
+//     describe('Method: onFilterClick()', () => {
 //         beforeEach(() => {
 //             comp.columns = [
 //                 {
@@ -161,13 +161,13 @@
 //         });
 //     });
 //
-//     describe('Function: onFilterClear()', () => {
+//     describe('Method: onFilterClear()', () => {
 //         it('should .', () => {
 //             expect(comp.onFilterClear).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: onFilterChange()', () => {
+//     describe('Method: onFilterChange()', () => {
 //         beforeEach(() => {
 //             comp.columns = [
 //                 {
@@ -247,7 +247,7 @@
 //         });
 //     });
 //
-//     describe('Function: isFilterActive(columnFilters, filter)', () => {
+//     describe('Method: isFilterActive(columnFilters, filter)', () => {
 //         it('should return true when the filter is active and false when it is not.', () => {
 //             expect(comp.isFilterActive).toBeDefined();
 //             let mockColumnFilters = {
@@ -266,61 +266,61 @@
 //         });
 //     });
 //
-//     describe('Function: onSortChange(newSortColumn)', () => {
+//     describe('Method: onSortChange(newSortColumn)', () => {
 //         it('should .', () => {
 //             expect(comp.onSortChange).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: fireTableChangeEvent()', () => {
+//     describe('Method: fireTableChangeEvent()', () => {
 //         it('should .', () => {
 //             expect(comp.fireTableChangeEvent).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: findColumnIndex(value)', () => {
+//     describe('Method: findColumnIndex(value)', () => {
 //         it('should .', () => {
 //             expect(comp.findColumnIndex).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: onOrderChange(event)', () => {
+//     describe('Method: onOrderChange(event)', () => {
 //         it('should .', () => {
 //             expect(comp.onOrderChange).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: selectAll()', () => {
+//     describe('Method: selectAll()', () => {
 //         it('should .', () => {
 //             expect(comp.selectAll).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: selectPage()', () => {
+//     describe('Method: selectPage()', () => {
 //         it('should .', () => {
 //             expect(comp.selectPage).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: rowSelectHandler()', () => {
+//     describe('Method: rowSelectHandler()', () => {
 //         it('should .', () => {
 //             expect(comp.rowSelectHandler).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: emitSelected()', () => {
+//     describe('Method: emitSelected()', () => {
 //         it('should .', () => {
 //             expect(comp.emitSelected).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: rowClickHandler()', () => {
+//     describe('Method: rowClickHandler()', () => {
 //         it('should .', () => {
 //             expect(comp.rowClickHandler).toBeDefined();
 //         });
 //     });
 //
-//     describe('Function: getDefaultOptions()', () => {
+//     describe('Method: getDefaultOptions()', () => {
 //         it('should return a subset of options when the data dates cover a small range.', () => {
 //             expect(comp.getDefaultOptions).toBeDefined();
 //             let mockOptions = comp.getDefaultOptions();

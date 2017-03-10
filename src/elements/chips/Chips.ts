@@ -1,14 +1,14 @@
 // NG2
 import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-// APP
-import { OutsideClick } from './../../utils/outside-click/OutsideClick';
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { Helpers } from './../../utils/Helpers'; //APP
-import { NovoLabelService } from './../../services/novo-label-service';
 // Vendor
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+// APP
+import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
