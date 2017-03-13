@@ -2,6 +2,9 @@
 import { TestBed, async } from '@angular/core/testing';
 // App
 import { NovoCategoryDropdownElement } from './CategoryDropdown';
+import { NovoNavElement, NovoTabElement, NovoNavContentElement, NovoNavOutletElement } from '../tabs/Tabs';
+import { NovoListElement, NovoListItemElement, NovoItemEndElement, NovoItemContentElement } from '../list/List';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 describe('Elements: NovoCategoryDropdownElement', () => {
     let fixture;
@@ -10,7 +13,18 @@ describe('Elements: NovoCategoryDropdownElement', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                NovoCategoryDropdownElement
+                NovoCategoryDropdownElement,
+                NovoTabElement,
+                NovoNavElement,
+                NovoListElement,
+                NovoListItemElement,
+                NovoItemEndElement,
+                NovoItemContentElement,
+                NovoNavContentElement,
+                NovoNavOutletElement
+            ],
+            providers: [
+                { provide: NovoLabelService, useClass: NovoLabelService }
             ]
         }).compileComponents();
         fixture = TestBed.createComponent(NovoCategoryDropdownElement);

@@ -1,22 +1,23 @@
-// // APP
-// import { NovoTimePickerElement } from './TimePicker';
-// import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
+// NG2
+import { TestBed, async } from '@angular/core/testing';
+// App
+import { NovoTimePickerElement } from './TimePicker';
 
-// describe('Component: TimePicker', () => {
-//     let comp;
+describe('Elements: NovoTimePickerElement', () => {
+    let fixture;
+    let component;
 
-//     beforeEach(() => {
-//         addProviders([
-//             NovoTimePickerElement,
-//             APP_TEST_PROVIDERS
-//         ]);
-//     });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                NovoTimePickerElement
+            ]
+        }).compileComponents();
+        fixture = TestBed.createComponent(NovoTimePickerElement);
+        component = fixture.debugElement.componentInstance;
+    }));
 
-//     beforeEach(inject([NovoTimePickerElement], _comp => {
-//         comp = _comp;
-//     }));
-
-//     it('should initialize with defaults', () => {
-//         expect(comp).toBeDefined();
-//     });
-// });
+    it('should initialize correctly', () => {
+        expect(component).toBeTruthy();
+    });
+});

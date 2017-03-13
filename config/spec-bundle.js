@@ -15,7 +15,6 @@ require('zone.js/dist/jasmine-patch');
 // RXJS
 require('rxjs/Rx');
 // NG2
-// import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@';
 var testing = require('@angular/core/testing');
 var browser = require('@angular/platform-browser-dynamic/testing');
 

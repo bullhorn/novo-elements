@@ -1,22 +1,16 @@
-// // APP
-// import { NovoToastService } from './ToastService';
-// import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
+// App
+import { NovoToastService } from './ToastService';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 
-// describe('Service: NovoToastService', () => {
-//     let service;
+describe('Elements: NovoToastService', () => {
+    describe('Service: ', () => {
+        let resolver: any = null;
+        let utils = new ComponentUtils(resolver);
+        let service = new NovoToastService(utils);
 
-//     beforeEach(() => {
-//         addProviders([
-//             NovoToastService,
-//             APP_TEST_PROVIDERS
-//         ]);
-//     });
+        it('should be defined.', () => {
+            expect(service).toBeDefined();
+        });
 
-//     beforeEach(inject([NovoToastService], _service => {
-//         service = _service;
-//     }));
-
-//     it('should initialize with defaults', () => {
-//         expect(service).toBeDefined();
-//     });
-// });
+    });
+});

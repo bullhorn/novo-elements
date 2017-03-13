@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 // APP
 import { NovoToastElement } from './Toast';
-import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 
 @Injectable()
 export class NovoToastService {

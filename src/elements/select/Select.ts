@@ -2,10 +2,10 @@
 import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
-import { OutsideClick } from './../../utils/outside-click/OutsideClick'; // TODO - change imports
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { NovoLabelService } from './../../services/novo-label-service';
-import { Helpers } from './../../utils/Helpers';
+import { OutsideClick } from '../../utils/outside-click/OutsideClick'; // TODO - change imports
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const SELECT_VALUE_ACCESSOR = {

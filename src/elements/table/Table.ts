@@ -2,13 +2,13 @@
 import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, Directive, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 // APP
-import { NovoLabelService } from './../../services/novo-label-service';
-import { Helpers } from './../../utils/Helpers';
-import { FormUtils, NovoFormControl } from './../form/FormUtils';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
+import { FormUtils } from '../form/FormUtils';
 import { ReadOnlyControl } from './../form/FormControls';
-import { CollectionEvent } from './../../services/data-provider/CollectionEvent';
-import { PagedArrayCollection } from './../../services/data-provider/PagedArrayCollection';
-import { PagedCollection } from './../../services/data-provider/PagedCollection';
+import { CollectionEvent } from '../../services/data-provider/CollectionEvent';
+import { PagedArrayCollection } from '../../services/data-provider/PagedArrayCollection';
+import { PagedCollection } from '../../services/data-provider/PagedCollection';
 
 export interface NovoTableConfig {
     // Paging config
