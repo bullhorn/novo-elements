@@ -4,16 +4,20 @@ node_js:
   - "6"
 
 cache:
+  yarn: true
   directories:
     - node_modules
 
-before_install:
-  - npm install -g npm@latest
-
 script:
-  - npm install
-  - npm run lint
-  - npm run compile
+  - yarn lint
+  - yarn compile
+  - yarn test
+
+after_script:
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+
+after_success:
+  - test $TRAVIS_BRANCH = "master" && npm run galaxy -- $FIREBASE_URL $SLACK_WEB_HOOK $SLACK_CHANNEL
 
 notifications:
   slack:
