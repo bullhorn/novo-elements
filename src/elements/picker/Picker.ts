@@ -163,20 +163,18 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         super(element);
         // Setup handlers
         this.closeHandler = this.toggleActive.bind(this);
-        // Listen for active change to hide/show results
-        if (this.onActiveChange) {
-            this.onActiveChange.subscribe((active) => {
-                if (active) {
-                    this.show();
-                } else {
-                    this.hideResults();
-                    this.blur.emit();
-                }
-            });
-        }
     }
 
     ngOnInit() {
+        // Listen for active change to hide/show results
+        this.onActiveChange.subscribe((active) => {
+            if (active) {
+                this.show();
+            } else {
+                this.hideResults();
+                this.blur.emit();
+            }
+        });
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || PickerResults;
         // Find parent
