@@ -364,7 +364,7 @@ describe('Elements: NovoTableElement', () => {
         });
     });
 
-    describe('Method: isFilterActive(columnFilters, filter)', () => {
+    xdescribe('Method: isFilterActive(columnFilters, filter)', () => {
         it('should return true when the filter is active and false when it is not.', () => {
             expect(component.isFilterActive).toBeDefined();
             let mockColumnFilters = {
