@@ -1,9 +1,9 @@
 // NG2
 import { Component, ElementRef, EventEmitter, Input, Output, OnDestroy, OnInit } from '@angular/core';
 // APP
-import { OutsideClick } from './../../utils/outside-click/OutsideClick';
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { Helpers } from './../../utils/Helpers';
+import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 
 @Component({
@@ -93,7 +93,9 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
 
     ngOnDestroy() {
         let button = this.element.nativeElement.querySelector('button');
-        button.removeEventListener('click', this.clickHandler);
+        if (button) {
+            button.removeEventListener('click', this.clickHandler);
+        }
     }
 
     onKeyDown(event) {

@@ -1,9 +1,9 @@
 // NG2
 import { Component, ElementRef } from '@angular/core';
 // APP
-import { Helpers } from './../../../../utils/Helpers';
-import { PickerResults } from './../../../picker/extras/picker-results/PickerResults';
-import { NovoLabelService } from './../../../../services/novo-label-service';
+import { Helpers } from '../../../../utils/Helpers';
+import { PickerResults } from '../../../picker/extras/picker-results/PickerResults';
+import { NovoLabelService } from '../../../../services/novo-label-service';
 // Vendor
 import { Observable } from 'rxjs/Rx';
 

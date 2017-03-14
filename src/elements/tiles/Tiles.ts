@@ -2,7 +2,7 @@
 import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { Helpers } from './../../utils/Helpers';
+import { Helpers } from '../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const TILES_VALUE_ACCESSOR = {

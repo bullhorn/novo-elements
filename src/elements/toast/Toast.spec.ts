@@ -1,22 +1,27 @@
-// // APP
-// import { NovoToastElement } from './Toast';
-// import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
+// NG2
+import { TestBed, async } from '@angular/core/testing';
+// App
+import { NovoToastElement } from './Toast';
+import { NovoLabelService } from '../../services/novo-label-service';
 
-// describe('Component: Toast', () => {
-//     let comp;
+describe('Elements: NovoToastElement', () => {
+    let fixture;
+    let component;
 
-//     beforeEach(() => {
-//         addProviders([
-//             NovoToastElement,
-//             APP_TEST_PROVIDERS
-//         ]);
-//     });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                NovoToastElement
+            ],
+            providers: [
+                { provide: NovoLabelService, useClass: NovoLabelService }
+            ]
+        }).compileComponents();
+        fixture = TestBed.createComponent(NovoToastElement);
+        component = fixture.debugElement.componentInstance;
+    }));
 
-//     beforeEach(inject([NovoToastElement], _comp => {
-//         comp = _comp;
-//     }));
-
-//     it('should initialize with defaults', () => {
-//         expect(comp).toBeDefined();
-//     });
-// });
+    it('should initialize correctly', () => {
+        expect(component).toBeTruthy();
+    });
+});

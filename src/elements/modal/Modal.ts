@@ -1,8 +1,8 @@
 // NG2
-import { Component, ViewContainerRef, ViewChild, AfterViewInit, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, ViewContainerRef, ViewChild, AfterViewInit, Input, Output, EventEmitter, OnInit, Injectable } from '@angular/core';
 // APP
 import { Deferred } from './../../utils/deferred/Deferred';
-import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 
 /**
  * Params that can be passed to the Modal
@@ -17,6 +17,7 @@ export class NovoModalParams implements ModalParams {
 /**
  * Reference to an opened dialog.
  */
+@Injectable()
 export class NovoModalRef {
     component: any = null;
     contentRef: any = null;
@@ -55,8 +56,7 @@ export class NovoModalRef {
 export class NovoModalContainerElement implements AfterViewInit {
     @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
 
-    constructor(private modalRef: NovoModalRef, private componentUtils: ComponentUtils) {
-    }
+    constructor(private modalRef: NovoModalRef, private componentUtils: ComponentUtils) {}
 
     ngAfterViewInit() {
         setTimeout(() => {

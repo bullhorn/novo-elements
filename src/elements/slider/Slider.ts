@@ -1,7 +1,7 @@
 // NG2
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 // APP
-import { NovoLabelService } from './../../services/novo-label-service';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 @Component({
     selector: 'novo-slider',

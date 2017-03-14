@@ -1,11 +1,11 @@
 // APP
-import { CollectionEvent } from './CollectionEvent';
+import { ComponentUtils } from './ComponentUtils';
 
-describe('Service: CollectionEvent', () => {
+describe('Utils: ComponentUtils', () => {
     let service;
 
     beforeEach(() => {
-        service = new CollectionEvent();
+        service = new ComponentUtils(null);
     });
 
     it('should be defined.', () => {

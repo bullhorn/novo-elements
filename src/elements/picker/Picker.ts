@@ -2,11 +2,11 @@
 import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild, Input, Output, OnInit, DoCheck, Renderer, HostListener } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
-import { OutsideClick } from './../../utils/outside-click/OutsideClick';
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
+import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { PickerResults } from './extras/picker-results/PickerResults';
-import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
-import { Helpers } from './../../utils/Helpers';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { Helpers } from '../../utils/Helpers';
 // Vendor
 import { Observable } from 'rxjs/Rx';
 
@@ -164,14 +164,16 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         // Setup handlers
         this.closeHandler = this.toggleActive.bind(this);
         // Listen for active change to hide/show results
-        this.onActiveChange.subscribe((active) => {
-            if (active) {
-                this.show();
-            } else {
-                this.hideResults();
-                this.blur.emit();
-            }
-        });
+        if (this.onActiveChange) {
+            this.onActiveChange.subscribe((active) => {
+                if (active) {
+                    this.show();
+                } else {
+                    this.hideResults();
+                    this.blur.emit();
+                }
+            });
+        }
     }
 
     ngOnInit() {
