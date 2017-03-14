@@ -81,7 +81,7 @@ export class NovoTableFooterElement {
         '[class.novo-table-loading]': 'loading'
     },
     template: `
-        <header *ngIf="columns.length">
+        <header *ngIf="columns.length && !(dataProvider.isEmpty() && !dataProvider.isFiltered())">
             <ng-content select="novo-table-header"></ng-content>
             <div class="header-actions">
                 <novo-pagination *ngIf="config.paging"
