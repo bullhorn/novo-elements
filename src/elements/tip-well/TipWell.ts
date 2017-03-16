@@ -1,7 +1,7 @@
 // NG2
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 // APP
-import { NovoLabelService } from './../../services/novo-label-service';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 @Component({
     selector: 'novo-tip-well',

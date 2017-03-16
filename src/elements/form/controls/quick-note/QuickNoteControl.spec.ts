@@ -5,7 +5,7 @@ describe('Control: QuickNoteControl', () => {
     let control;
 
     beforeEach(() => {
-        control = new QuickNoteControl();
+        control = new QuickNoteControl({});
     });
 
     it('should have the right control type', () => {

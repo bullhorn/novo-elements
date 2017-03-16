@@ -6,7 +6,7 @@ describe('Control: BaseControl', () => {
 
     describe('Base Config', () => {
         beforeEach(() => {
-            control = new BaseControl();
+            control = new BaseControl({});
         });
 
         it('should set the validators', () => {
@@ -82,7 +82,7 @@ describe('Control: BaseControl', () => {
         });
 
         it('should set the validators', () => {
-            expect(control.validators.length).toBe(2);
+            expect(control.validators.length).toBe(3);
         });
         it('should set the value', () => {
             expect(control.value).toEqual('TEST_VALUE');

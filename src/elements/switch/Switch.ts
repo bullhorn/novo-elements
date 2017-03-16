@@ -2,7 +2,7 @@
 import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 
 // Value accessor for the component (supports ngModel)
 const SWITCH_VALUE_ACCESSOR = {

@@ -1,39 +1,23 @@
-// TODO
-// import { Radio } from './Radio';
-//
-// describe('Element: Radio', () => {
-//     let comp;
-//
-//     beforeEachProviders(() => [
-//         Radio
-//     ]);
-//
-//     beforeEach(inject([Radio], _comp => {
-//         comp = _comp;
-//     }));
-//
-//     it('should initialize correctly', () => {
-//         expect(comp).toBeDefined();
-//     });
-//
-//     describe('Method: select(event, radio)', () => {
-//         it('should modify the radio checked state if it was false', () => {
-//             spyOn(comp.change, 'emit');
-//
-//             let radio = { checked: false };
-//             comp.value = 'test';
-//             comp.select(null, radio);
-//             expect(radio.checked).toBe(true);
-//             expect(comp.change.emit).toHaveBeenCalledWith('test');
-//         });
-//
-//         it('should not modify the radio checked state if it was true', () => {
-//             spyOn(comp.change, 'emit');
-//
-//             let radio = { checked: true };
-//             comp.select(null, radio);
-//             expect(radio.checked).toBe(true);
-//             expect(comp.change.emit).not.toHaveBeenCalled();
-//         });
-//     });
-// });
+// NG2
+import { TestBed, async } from '@angular/core/testing';
+// App
+import { NovoRadioElement } from './Radio';
+
+describe('Elements: NovoRadioElement', () => {
+    let fixture;
+    let component;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                NovoRadioElement
+            ]
+        }).compileComponents();
+        fixture = TestBed.createComponent(NovoRadioElement);
+        component = fixture.debugElement.componentInstance;
+    }));
+
+    it('should initialize correctly', () => {
+        expect(component).toBeTruthy();
+    });
+});

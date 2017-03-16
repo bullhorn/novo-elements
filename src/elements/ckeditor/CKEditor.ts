@@ -38,8 +38,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
     instance;
     debounceTimeout;
 
-    constructor(private zone: NgZone) {
-    }
+    constructor(private zone: NgZone) {}
 
     get value() {
         return this._value;

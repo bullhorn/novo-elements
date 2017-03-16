@@ -5,7 +5,7 @@ describe('Control: SelectControl', () => {
     let control;
 
     beforeEach(() => {
-        control = new SelectControl();
+        control = new SelectControl({});
     });
 
     it('should have the right control type', () => {

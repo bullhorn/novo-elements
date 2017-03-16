@@ -1,34 +1,34 @@
-// // APP
-// import { Deferred } from './Deferred';
+// APP
+import { Deferred } from './Deferred';
 
-// describe('Service: Deferred', () => {
-//     let deferred;
+describe('Utils: Deferred', () => {
+    let deferred;
 
-//     beforeEach(() => {
-//         deferred = new Deferred();
-//     });
+    beforeEach(() => {
+        deferred = Deferred();
+    });
 
-//     it('should be defined', () => {
-//         expect(deferred).toBeDefined();
-//     });
+    it('should be defined', () => {
+        expect(deferred).toBeDefined();
+    });
 
-//     it('should be able to resolved later', (done) => {
-//         deferred.then((result) => {
-//             expect(result).toBe('Resolved');
-//             done();
-//         });
+    it('should be able to resolved later', (done) => {
+        deferred.then((result) => {
+            expect(result).toBe('Resolved');
+            done();
+        });
 
-//         deferred.resolve('Resolved');
-//     });
+        deferred.resolve('Resolved');
+    });
 
-//     it('should be able to reject later', (done) => {
-//         deferred.then(() => {
-//             // Should not enter this block
-//         }).catch((err) => {
-//             expect(err).toBe('Rejected');
-//             done();
-//         });
+    it('should be able to reject later', (done) => {
+        deferred.then(() => {
+            // Should not enter this block
+        }).catch((err) => {
+            expect(err).toBe('Rejected');
+            done();
+        });
 
-//         deferred.reject('Rejected');
-//     });
-// });
+        deferred.reject('Rejected');
+    });
+});

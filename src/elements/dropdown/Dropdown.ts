@@ -1,9 +1,9 @@
 // NG2
 import { Component, ElementRef, EventEmitter, OnInit, OnDestroy, Input, Output, ViewChild, DoCheck, Renderer, HostListener } from '@angular/core';
 // APP
-import { OutsideClick } from './../../utils/outside-click/OutsideClick';
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { Helpers } from './../../utils/Helpers';
+import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { Helpers } from '../../utils/Helpers';
 
 @Component({
     selector: 'novo-dropdown-container',
@@ -131,7 +131,9 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
     ngOnDestroy() {
         // Remove listener
         let button = this.element.nativeElement.querySelector('button');
-        button.removeEventListener('click', this.clickHandler);
+        if (button) {
+            button.removeEventListener('click', this.clickHandler);
+        }
     }
 
     private show(): void {

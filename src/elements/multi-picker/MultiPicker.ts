@@ -2,10 +2,10 @@
 import { Component, OnInit, EventEmitter, forwardRef, ElementRef, Input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
-import { OutsideClick } from './../../utils/outside-click/OutsideClick';
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { Helpers } from './../../utils/Helpers';
-import { NovoLabelService } from './../../services/novo-label-service';
+import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 // Vendor
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 

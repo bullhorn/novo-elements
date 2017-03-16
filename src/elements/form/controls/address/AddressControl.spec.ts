@@ -1,11 +1,11 @@
 // APP
 import { AddressControl } from './AddressControl';
 
-describe('Control: EditorControl', () => {
+describe('Control: AddressControl', () => {
     let control;
 
     beforeEach(() => {
-        control = new AddressControl();
+        control = new AddressControl({});
     });
 
     it('should have the right control type', () => {

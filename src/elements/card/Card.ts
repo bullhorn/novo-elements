@@ -1,7 +1,7 @@
 // NG2
 import { Component, EventEmitter, Input, Output, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 // APP
-import { NovoLabelService } from './../../services/novo-label-service';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 @Component({
     selector: 'novo-card-actions',
@@ -44,7 +44,6 @@ export class CardActionsElement {
     `
 })
 export class CardElement implements OnChanges, OnInit {
-
     @Input() padding: boolean = true;
     @Input() config: any = {};
     @Input() title: string;

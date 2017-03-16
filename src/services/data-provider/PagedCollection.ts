@@ -1,4 +1,3 @@
-import { EventEmitter } from '@angular/core';
 import { Collection } from './Collection';
 
 export interface PagedCollection<T> extends Collection<T> {

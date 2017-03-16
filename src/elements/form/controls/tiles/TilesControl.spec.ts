@@ -5,7 +5,7 @@ describe('Control: TilesControl', () => {
     let control;
 
     beforeEach(() => {
-        control = new TilesControl();
+        control = new TilesControl({});
     });
 
     it('should have the right control type', () => {

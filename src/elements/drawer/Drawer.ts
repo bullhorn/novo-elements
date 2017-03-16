@@ -60,6 +60,7 @@ class DrawerService {
         this.openScope.isOpen = false;
     }
 }
+
 const drawerService = new DrawerService();
 
 @Directive({

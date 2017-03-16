@@ -5,7 +5,7 @@ describe('Control: RadioControl', () => {
     let control;
 
     beforeEach(() => {
-        control = new RadioControl();
+        control = new RadioControl({});
     });
 
     it('should have the right control type', () => {

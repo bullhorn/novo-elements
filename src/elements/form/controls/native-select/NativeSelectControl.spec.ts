@@ -5,7 +5,7 @@ describe('Control: NativeSelectControl', () => {
     let control;
 
     beforeEach(() => {
-        control = new NativeSelectControl();
+        control = new NativeSelectControl({});
     });
 
     it('should have the right control type', () => {
