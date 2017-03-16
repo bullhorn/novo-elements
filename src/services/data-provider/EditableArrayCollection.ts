@@ -30,14 +30,23 @@ export class EditableArrayCollection<T> extends ArrayCollection<T> implements Co
         this.sourceCache = this.source;
     }
 
+    /**
+     * Method to switch the data source to this.sourceCache
+     */
     enterEditMode() {
         this.isEditing = true;
     }
 
+    /**
+     * Method to switch the data source to this.source
+     */
     leaveEditMode() {
         this.isEditing = false;
     }
 
+    /**
+     * Method to leave edit mode and reset source
+     */
     cancelEditMode() {
         this.leaveEditMode();
         this.source = this.sourceCache;

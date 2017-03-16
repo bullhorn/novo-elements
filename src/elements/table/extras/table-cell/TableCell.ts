@@ -49,6 +49,7 @@ export class TableCell implements OnInit, OnDestroy {
         } else {
             this.value = this.form && this.hasEditor ? this.form.value[this.column.name] : this.row[this.column.name];
         }
+
         if (this.form && this.hasEditor) {
             this.valueChangeSubscription = this.form.valueChanges
                 .debounceTime(300)
