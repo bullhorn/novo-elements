@@ -1,3 +1,13 @@
+<a name="2.0.154"></a>
+## [2.0.154](https://github.com/bullhorn/novo-elements/compare/v2.0.153...v2.0.154) (2017-03-16)
+
+
+### Bug Fixes
+
+* **table:** Only hide pagination when empty and not filtered ([b5d75ef](https://github.com/bullhorn/novo-elements/commit/b5d75ef))
+
+
+
 <a name="2.0.153"></a>
 ## [2.0.153](https://github.com/bullhorn/novo-elements/compare/v2.0.152...v2.0.153) (2017-03-14)
 
