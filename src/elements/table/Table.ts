@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
-import { FormUtils } from '../form/FormUtils';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { ReadOnlyControl } from './../form/FormControls';
 import { CollectionEvent } from '../../services/data-provider/CollectionEvent';
 import { PagedArrayCollection } from '../../services/data-provider/PagedArrayCollection';

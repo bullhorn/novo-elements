@@ -52,7 +52,7 @@ export { ChecklistPickerResults } from './src/elements/picker/extras/checklist-p
 export { BaseRenderer } from './src/elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './src/elements/table/extras/date-cell/DateCell';
 export { FormValidators } from './src/elements/form/FormValidators';
-export { FormUtils } from './src/elements/form/FormUtils';
+export { FormUtils } from './src/utils/form-utils/FormUtils';
 export * from './src/elements/form/FormControls';
 // Utils
 export { OutsideClick } from './src/utils/outside-click/OutsideClick';

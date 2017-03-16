@@ -27,7 +27,7 @@ import { TooltipDirective } from '../tooltip/Tooltip';
 import { NovoSelectElement } from '../select/Select';
 
 import { NovoLabelService } from '../../services/novo-label-service';
-import { FormUtils } from '../form/FormUtils';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
 
 // describe('Elements: NovoTableKeepFilterFocus', () => {
 //     let fixture;

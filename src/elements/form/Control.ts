@@ -2,12 +2,12 @@
 import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
-import { NovoToastService } from '../../elements/toast/ToastService';
+import { NovoToastService } from '../toast/ToastService';
 // APP
 import { NovoFormGroup } from './FormInterfaces';
-import { OutsideClick } from './../../utils/outside-click/OutsideClick';
-import { NovoLabelService } from './../../services/novo-label-service';
-import { Helpers } from './../../utils/Helpers';
+import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
 
 @Component({
     selector: 'novo-custom-control-container',
@@ -56,6 +56,7 @@ export class NovoCustomControlContainerElement {
     @Input() control;
     @Input() form: NovoFormGroup;
 }
+
 @Component({
     selector: 'novo-control',
     template: `
