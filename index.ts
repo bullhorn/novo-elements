@@ -42,6 +42,7 @@ export { NovoDragulaService } from './src/elements/dragula/DragulaService';
 export { Collection } from './src/services/data-provider/Collection';
 export { CollectionEvent } from './src/services/data-provider/CollectionEvent';
 export { ArrayCollection } from './src/services/data-provider/ArrayCollection';
+export { EditableArrayCollection } from './src/services/data-provider/EditableArrayCollection';
 export { PagedArrayCollection } from './src/services/data-provider/PagedArrayCollection';
 // Export classes that will need to be imported
 export { NovoModalParams, NovoModalRef } from './src/elements/modal/Modal';
