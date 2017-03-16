@@ -151,7 +151,6 @@ export class EditableArrayCollection<T> extends ArrayCollection<T> implements Co
                 this.filterOn(key, this._filter[key]);
             }
         }
-        console.log('refreshing with', this.filterData);
         this.onDataChange(new CollectionEvent(CollectionEvent.CHANGE, this.filterData));
     }
 
