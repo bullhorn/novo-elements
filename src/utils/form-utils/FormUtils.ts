@@ -27,37 +27,40 @@ import { NovoFormControl } from '../../elements/form/NovoFormControl';
 // TODO: http doesn't need to be injected in getControlForField, toControls, toFieldSets, or getControlOptions;
 // TODO: (cont.) we should just use NG2's http provider for the http request at this level
 
-interface Field {
-    value?: any;
-    defaultValue?: any;
-    customControl?: any;
-    customControlConfig?: any;
-    interactions?: any;
+// TODO: while using this interface would be prohibitive, the lack of standardization it exposes calls into question
+// TODO: (cont.) how we are passing this data around.
 
-    options?: Array<any>;
-
-    required?: boolean;
-    multiValue?: boolean;
-
-    sortOrder?: number;
-    maxLength?: number;
-
-    name?: string;
-    type?: string;
-    label?: string;
-    disabled?: string;
-    readOnly?: string;
-    hint?: string;
-    associatedEntity?: string;
-    optionsType?: string;
-    dataSpecialization?: string;
-    description?: string;
-    tooltip?: string;
-    tooltipPosition?: string;
-    dataType?: string;
-    inputType?: string;
-    optionsUrl?: string;
-}
+// interface Field {
+//     value?: any;
+//     defaultValue?: any;
+//     customControl?: any;
+//     customControlConfig?: any;
+//     interactions?: any;
+//
+//     options?: Array<any>;
+//
+//     required?: boolean;
+//     multiValue?: boolean;
+//
+//     sortOrder?: number;
+//     maxLength?: number;
+//
+//     name?: string;
+//     type?: string;
+//     label?: string;
+//     disabled?: string;
+//     readOnly?: string;
+//     hint?: string;
+//     associatedEntity?: string;
+//     optionsType?: string;
+//     dataSpecialization?: string;
+//     description?: string;
+//     tooltip?: string;
+//     tooltipPosition?: string;
+//     dataType?: string;
+//     inputType?: string;
+//     optionsUrl?: string;
+// }
 
 @Injectable()
 export class FormUtils {
@@ -107,7 +110,7 @@ export class FormUtils {
      * @param field
      * @returns {string}
      */
-    determineInputType(field: Field): string {
+    determineInputType(field: { dataSpecialization: string, inputType: string, options: string, multiValue: boolean, dataType: string, type: string }): string {
         let type: string;
         if (field.dataSpecialization === 'DATETIME') {
             type = 'datetime';
@@ -151,7 +154,7 @@ export class FormUtils {
         return type;
     }
 
-    getControlForField(field: Field, http, config: { token: string }, overrides?) {
+    getControlForField(field: any, http, config: { token: string }, overrides?) {
         // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
         // TODO: (cont.) as the setter of the field argument
         let type: string = this.determineInputType(field) || field.type;
@@ -386,7 +389,7 @@ export class FormUtils {
         }
     }
 
-    getControlOptions(field: Field, http, config: { token: string }): any {
+    getControlOptions(field: any, http, config: { token: string }): any {
         // TODO: The token property of config is the only property used; just pass in `token: string`
         if (field.dataType === 'Boolean' && !field.options) {
             // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
