@@ -1,5 +1,7 @@
 // NG2
 import { Directive, EventEmitter, ElementRef, OnInit, Input, Output } from '@angular/core';
+// App
+import { Helpers } from '../../../../utils/Helpers';
 
 @Directive({
     selector: '[novoThOrderable]',
@@ -97,18 +99,12 @@ export class ThOrderable implements OnInit {
     }
 
     onDrag(event?: any) {
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+        Helpers.swallowEvent(event);
         return false;
     }
 
     onDragEnd(event?: any) {
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+        Helpers.swallowEvent(event);
         this.element.nativeElement.classList.remove('over');
         this.element.nativeElement.classList.remove('dragging');
         document.body.removeChild(this.clone);
@@ -116,11 +112,7 @@ export class ThOrderable implements OnInit {
     }
 
     onDrop(event?: any) {
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
+        Helpers.swallowEvent(event);
         this.element.nativeElement.classList.remove('over');
         const data = JSON.parse(event.dataTransfer.getData('text/plain'));
 
@@ -137,10 +129,8 @@ export class ThOrderable implements OnInit {
      * @param event
      * @returns {boolean}
      */
-    onDragOver(event: { preventDefault: Function, dataTransfer: { dropEffect: string } }): false {
-        if (event) {
-            event.preventDefault();
-        }
+    onDragOver(event: { preventDefault: Function, dataTransfer: { dropEffect: string }, stopPropagation: Function }): false {
+        Helpers.swallowEvent(event);
         event.dataTransfer.dropEffect = 'move';
         return false;
     }

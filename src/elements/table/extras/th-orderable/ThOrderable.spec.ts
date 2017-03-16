@@ -108,7 +108,7 @@ describe('Elements: ThOrderable', () => {
         describe('Method: onDragOver()', () => {
             it('should be defined', () => {
                 expect(subject.onDragOver).toBeDefined();
-                subject.onDragOver({ dataTransfer: { dropEffect: '' }, preventDefault: () => {} });
+                subject.onDragOver({ dataTransfer: { dropEffect: '' }, preventDefault: () => {}, stopPropagation: () => {} });
             });
         });
 
