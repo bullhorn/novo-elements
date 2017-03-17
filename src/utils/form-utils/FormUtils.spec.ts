@@ -266,9 +266,9 @@ describe('Utils: FormUtils', () => {
         it('should return an object with a function that returns a promise when there\'s an optionsUrl that calls an API', () => {
             expect(formUtils.getControlOptions).toBeDefined();
             let mockHttp = {
-                get: Observable.from([])
+                get: () => { return Observable.from([]); }
             };
-            let result = formUtils.getControlOptions({ optionsUrl: 'TEST' }, mockHttp);
+            let result = formUtils.getControlOptions({ optionsUrl: 'TEST' }, mockHttp, { token: '1' });
             expect(result.field).toBe('value');
             expect(result.format).toBe('$label');
             expect(result.options('') instanceof Promise).toBe(true);
