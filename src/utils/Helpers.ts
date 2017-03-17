@@ -249,13 +249,13 @@ export class Helpers {
     }
 
     static modifyDate(config: { year?: number, month?: number, day?: number, hours?: number, minutes?: number, seconds?: number, milliseconds?: number } = {}, baseValue: Date = new Date()): Date {
-        let year = config.year || baseValue.getFullYear();
-        let month = config.month || baseValue.getMonth();
-        let day = config.day || baseValue.getDate();
-        let hours = config.hours || baseValue.getHours();
-        let minutes = config.minutes || baseValue.getMinutes();
-        let seconds = config.seconds || baseValue.getSeconds();
-        let milliseconds = config.milliseconds || baseValue.getMilliseconds();
+        let year = Helpers.isBlank(config.year) ? baseValue.getFullYear() : config.year;
+        let month = Helpers.isBlank(config.month) ? baseValue.getMonth() : config.month;
+        let day = Helpers.isBlank(config.day) ? baseValue.getDate() : config.day;
+        let hours = Helpers.isBlank(config.hours) ? baseValue.getHours() : config.hours;
+        let minutes = Helpers.isBlank(config.minutes) ? baseValue.getMinutes() : config.minutes;
+        let seconds = Helpers.isBlank(config.seconds) ? baseValue.getSeconds() : config.seconds;
+        let milliseconds = Helpers.isBlank(config.milliseconds) ? baseValue.getMilliseconds() : config.milliseconds;
         return new Date(year, month, day, hours, minutes, seconds, milliseconds);
     }
 
