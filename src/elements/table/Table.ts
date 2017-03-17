@@ -111,7 +111,7 @@ export class NovoTableFooterElement {
                             <novo-checkbox [(ngModel)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < pagedData.length" (ngModelChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></novo-checkbox>
                         </th>
                         <!-- TABLE HEADERS -->
-                        <th *ngFor="let column of columns" [ngClass]="{ 'mass-action': config?.rowSelectionStyle === 'checkbox', 'actions': column?.actions?.items?.length > 0, 'preview': column?.name === 'preview' }" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
+                        <th *ngFor="let column of columns" [ngClass]="{ 'mass-action': config?.rowSelectionStyle === 'checkbox', 'actions': column?.actions?.items?.length > 0, 'preview': column?.name === 'preview' }" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)" [hidden]="isColumnHidden(column)">
                             <div class="th-group" [attr.data-automation-id]="column.id || column.name" *ngIf="!column.hideHeader">
                                 <!-- LABEL & SORT ARROWS -->
                                 <div class="th-title" [ngClass]="(config.sorting !== false && column.sorting !== false) ? 'sortable' : ''" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
@@ -184,9 +184,9 @@ export class NovoTableFooterElement {
                                 <td class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
                                     <novo-checkbox [(ngModel)]="row._selected" (ngModelChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></novo-checkbox>
                                 </td>
-                                <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name" [class.novo-form-row]="editable">
+                                <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name" [class.novo-form-row]="editable" [hidden]="isColumnHidden(column)">
                                     <novo-table-cell *ngIf="!row._editing[column.name]" [hasEditor]="editable" [column]="column" [row]="row" [form]="tableForm.controls.rows.controls[i]"></novo-table-cell>
-                                    <novo-control *ngIf="row._editing[column.name]" condensed="true" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]" [hidden]="column.hiddenOnEdit"></novo-control>
+                                    <novo-control *ngIf="row._editing[column.name]" condensed="true" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]"></novo-control>
                                 </td>
                             </tr>
                             <tr class="details-row" *ngIf="config.hasDetails" [hidden]="!row._expanded" [attr.data-automation-id]="'details-row-'+row.id">
@@ -270,7 +270,7 @@ export class NovoTableElement implements DoCheck {
     @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
     @Output() onTableChange: EventEmitter<any> = new EventEmitter();
 
-    _dataProvider: PagedCollection<any>;
+    _dataProvider: PagedArrayCollection<any>;
     _rows: Array<any> = [];
     selected: Array<any> = [];
     activeId: number = 0;
@@ -343,6 +343,7 @@ export class NovoTableElement implements DoCheck {
                         let rowControls = [];
                         row.controls = {};
                         row._editing = {};
+                        row.rowId = this._rows.length;
                         this.columns.forEach(column => {
                             // Use the control passed or use a ReadOnlyControl so that the form has the values
                             let control = column.editor || new ReadOnlyControl({ key: column.name });
@@ -853,10 +854,13 @@ export class NovoTableElement implements DoCheck {
      */
     setTableEdit(rowNumber?: number, columnNumber?: number): void {
         this.mode = NovoTableMode.EDIT;
+        this._dataProvider.edit();
         this._rows.forEach((row, rowIndex) => {
             row._editing = row._editing || {};
             this.columns.forEach((column, columnIndex) => {
-                if (Helpers.isEmpty(rowNumber) && Helpers.isEmpty(columnNumber)) {
+                if (column.viewOnly) {
+                    row._editing[column.name] = false;
+                } else if (Helpers.isEmpty(rowNumber) && Helpers.isEmpty(columnNumber)) {
                     row._editing[column.name] = true;
                 } else if (!Helpers.isEmpty(rowNumber) && rowIndex === Number(rowNumber) && Helpers.isEmpty(columnNumber)) {
                     row._editing[column.name] = true;
@@ -882,6 +886,7 @@ export class NovoTableElement implements DoCheck {
                 row._editing[column.name] = false;
             });
         });
+        this._dataProvider.undo();
         this.hideToastMessage();
     }
 
@@ -897,6 +902,7 @@ export class NovoTableElement implements DoCheck {
         let rowControls = [];
         row.controls = {};
         row._editing = {};
+        row.rowId = this._rows.length + 1;
         this.columns.forEach(column => {
             // Use the control passed or use a ReadOnlyControl so that the form has the values
             let control = column.editor || new ReadOnlyControl({ key: column.name });
@@ -975,7 +981,7 @@ export class NovoTableElement implements DoCheck {
      * @memberOf NovoTableElement
      */
     cancelEditing(): void {
-        this.dataProvider.refresh();
+        this.dataProvider.undo();
         this.leaveEditMode();
     }
 
@@ -1016,5 +1022,16 @@ export class NovoTableElement implements DoCheck {
      */
     toggleLoading(show: boolean): void {
         this.loading = show;
+    }
+
+    /**
+     * @name isColumnHidden
+     * @description hide a column in edit or view mode
+     * @param {column meta} column
+     * @returns {boolean}
+     * @memberOf NovoTableElement
+     */
+    isColumnHidden(column: any): boolean {
+        return this.editing ? column.hideColumnOnEdit : column.hideColumnOnView;
     }
 }

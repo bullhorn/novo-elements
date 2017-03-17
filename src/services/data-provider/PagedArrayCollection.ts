@@ -62,7 +62,7 @@ export class PagedArrayCollection<T> extends ArrayCollection<T> implements Paged
     }
 
     refresh(): void {
-        this.filterData = this.source.slice();
+        this.filterData = this.isEditing ? this.editData.slice() : this.source.slice();
         for (let item of this._sort.reverse()) {
             this.sortOn(item.field, item.reverse);
         }
