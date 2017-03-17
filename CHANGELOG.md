@@ -1,3 +1,18 @@
+<a name="2.0.155"></a>
+## [2.0.155](https://github.com/bullhorn/novo-elements/compare/v2.0.154...v2.0.155) (2017-03-17)
+
+
+### Bug Fixes
+
+* **datepicker:** Fixing selecting January in date pickers, 0 index.. ([beace3d](https://github.com/bullhorn/novo-elements/commit/beace3d))
+
+
+### Features
+
+* **Table:** Added ability to hide columns and new Editable collection ([#437](https://github.com/bullhorn/novo-elements/issues/437)) ([5aaf678](https://github.com/bullhorn/novo-elements/commit/5aaf678))
+
+
+
 <a name="2.0.154"></a>
 ## [2.0.154](https://github.com/bullhorn/novo-elements/compare/v2.0.153...v2.0.154) (2017-03-16)
 
