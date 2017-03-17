@@ -46,7 +46,8 @@ export { PagedArrayCollection } from './src/services/data-provider/PagedArrayCol
 // Export classes that will need to be imported
 export { NovoModalParams, NovoModalRef } from './src/elements/modal/Modal';
 export { QuickNoteResults } from './src/elements/quick-note/extras/quick-note-results/QuickNoteResults';
-export { PickerResults, BasePickerResults } from './src/elements/picker/extras/picker-results/PickerResults';
+export { PickerResults } from './src/elements/picker/extras/picker-results/PickerResults';
+export { BasePickerResults } from './src/elements/picker/extras/base-picker-results/BasePickerResults';
 export { EntityPickerResult, EntityPickerResults } from './src/elements/picker/extras/entity-picker-results/EntityPickerResults';
 export { ChecklistPickerResults } from './src/elements/picker/extras/checklist-picker-results/ChecklistPickerResults';
 export { BaseRenderer } from './src/elements/table/extras/base-renderer/BaseRenderer';
