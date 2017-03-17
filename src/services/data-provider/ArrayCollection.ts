@@ -138,7 +138,7 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     addItemsAt(items: Array<T>, index: number): void {
-        this.useCache ? this.source.splice(index, 0, ...items) : this.source.splice(index, 0, ...items);
+        this.useCache ? this.sourceCache.splice(index, 0, ...items) : this.source.splice(index, 0, ...items);
     }
 
     /**
