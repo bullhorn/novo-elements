@@ -854,7 +854,7 @@ export class NovoTableElement implements DoCheck {
      */
     setTableEdit(rowNumber?: number, columnNumber?: number): void {
         this.mode = NovoTableMode.EDIT;
-        this._dataProvider.changeSource();
+        this._dataProvider.edit();
         this._rows.forEach((row, rowIndex) => {
             row._editing = row._editing || {};
             this.columns.forEach((column, columnIndex) => {
