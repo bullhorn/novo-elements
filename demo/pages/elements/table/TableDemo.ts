@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // APP
 import { MovieDataProvider } from './MovieDataProvider';
 import { TableData } from './TableData';
-import { EditableArrayCollection } from './../../../../src/services/data-provider/EditableArrayCollection';
+import { ArrayCollection } from './../../../../src/services/data-provider/ArrayCollection';
 let TableDemoTpl = require('./templates/TableDemo.html');
 let EditableTableDemoTpl = require('./templates/EditableTableDemo.html');
 let DetailsTableDemoTpl = require('./templates/DetailsTableDemo.html');
@@ -335,7 +335,7 @@ export class TableDemoComponent implements OnInit {
                 },
                 { title: 'Rating', name: 'rating' }
             ],
-            rows: new EditableArrayCollection([
+            rows: new ArrayCollection([
                 { id: 1, name: 'Joshua Godi', jobType: 'Freelance', rate: null, rating: 'Low' },
                 { id: 2, name: 'Brian Kimball', jobType: 'Contact', rate: 100, rating: 'Medium' },
                 { id: 3, name: 'Kameron Sween', jobType: 'Billable', rate: 1000, rating: 'High' }

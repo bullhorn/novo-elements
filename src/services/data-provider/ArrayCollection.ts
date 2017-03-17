@@ -23,12 +23,15 @@ import { Helpers } from '../../utils/Helpers';
 export class ArrayCollection<T> implements Collection<T> {
     dataChange: EventEmitter<CollectionEvent> = new EventEmitter<CollectionEvent>();
     source: Array<T> = [];
+    sourceCache: Array<T> = [];
+    useCache: boolean = false;
     filterData: Array<T> = [];
     _filter: any = {};
     _sort: Array<any> = [];
 
     constructor(source: Array<T> = []) {
         this.source = source;
+        this.sourceCache = this.source.slice();
         this.filterData = source.slice();
     }
 
@@ -61,6 +64,32 @@ export class ArrayCollection<T> implements Collection<T> {
     }
 
     /**
+     * Method to switch the useCacheflag for the data source
+     */
+    changeSource() {
+        this.useCache = true;
+        this.sourceCache = this.source.slice();
+    }
+
+    /**
+     * Method to leave edit mode and reset source
+     */
+    undo() {
+        this.useCache = false;
+        this.source = this.sourceCache.slice();
+        this.refresh();
+    }
+
+    /**
+     * Method to leave edit mode and save sourceCache
+     */
+    commit() {
+        this.useCache = false;
+        this.sourceCache = this.source.slice();
+        this.refresh();
+    }
+
+    /**
      * Appends an item to the end of the data provider.
      *
      * @param {any} item
@@ -68,7 +97,7 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     addItem(item: T): void {
-        this.source.push(item);
+        this.useCache ? this.sourceCache.push(item) : this.source.push(item);
         this.onDataChange(new CollectionEvent(CollectionEvent.ADD, [item]));
         this.refresh();
     }
@@ -82,7 +111,7 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     addItemAt(item: T, index: number): void {
-        this.source.splice(index, 0, item);
+        this.useCache ? this.sourceCache.splice(index, 0, item) : this.source.splice(index, 0, item);
         this.onDataChange(new CollectionEvent(CollectionEvent.ADD, [item]));
         this.refresh();
     }
@@ -95,7 +124,7 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     addItems(items: Array<T>): void {
-        this.source.push(...items);
+        this.useCache ? this.sourceCache.push(...items) : this.source.push(...items);
         this.onDataChange(new CollectionEvent(CollectionEvent.ADD, items));
         this.refresh();
     }
@@ -109,7 +138,7 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     addItemsAt(items: Array<T>, index: number): void {
-        this.source.splice(index, 0, ...items);
+        this.useCache ? this.source.splice(index, 0, ...items) : this.source.splice(index, 0, ...items);
     }
 
     /**
@@ -120,7 +149,7 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     clone(): ArrayCollection<T> {
-        return new ArrayCollection(this.source.slice());
+        return new ArrayCollection(this.useCache ? this.sourceCache.slice() : this.source.slice());
     }
 
     /**
@@ -143,7 +172,7 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     getItemAt(index: number): any {
-        return this.source[index];
+        return this.useCache ? this.sourceCache[index] : this.source[index];
     }
 
     /**
@@ -155,7 +184,7 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     getItemIndex(item: T): number {
-        return this.source.indexOf(item);
+        return this.useCache ? this.sourceCache.indexOf(item) : this.source.indexOf(item);
     }
 
     /**
@@ -211,6 +240,7 @@ export class ArrayCollection<T> implements Collection<T> {
     removeAll(): void {
         //let oldData = this.filterData.slice();
         this.source = [];
+        this.sourceCache = [];
         this.filterData = [];
         this.onDataChange(new CollectionEvent(CollectionEvent.REMOVE_ALL, []));
         this.refresh();
@@ -322,7 +352,7 @@ export class ArrayCollection<T> implements Collection<T> {
     }
 
     refresh(): void {
-        this.filterData = this.source.slice();
+        this.filterData = this.useCache ? this.sourceCache.slice() : this.source.slice();
         for (let item of this._sort.reverse()) {
             this.sortOn(item.field, item.reverse);
         }
@@ -342,10 +372,10 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     toArray(): Array<T> {
-        return this.source;
+        return this.useCache ? this.sourceCache : this.source;
     }
 
     toJSON() {
-        return this.source;
+        return this.useCache ? this.sourceCache : this.source;
     }
 }
