@@ -17,7 +17,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
                 <i class="bhi-times" *ngIf="_query" (click)="clearQuery($event)"></i>
             </div>
             <novo-nav theme="white" [outlet]="novoCategoryDropdownOutlet" direction="vertical">
-                <novo-tab *ngFor="let category of _categories" [attr.data-automation-id]="category">
+                <novo-tab *ngFor="let category of _categories" [attr.data-automation-id]="category" (activeChange)="onCategorySelected(category)">
                     <span>{{ category }} ({{ _categoryMap[category].length }})</span>
                 </novo-tab>
             </novo-nav>
@@ -73,6 +73,8 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
     @Input() footer: any;
     // Event that is emitted whenever an item is selected
     @Output('itemSelected') _select: EventEmitter<any> = new EventEmitter();
+    // Event that is emitted whenever a category is selected
+    @Output() categorySelected: EventEmitter<any> = new EventEmitter<any>();
 
     @Input()
     set categories(categories: any) {
@@ -125,6 +127,10 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
         if (this.closeOnSelect) {
             this.toggleActive();
         }
+    }
+
+    onCategorySelected(category) {
+        this.categorySelected.emit(category);
     }
 
     clearQuery(event) {
