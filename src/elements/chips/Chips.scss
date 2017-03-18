@@ -177,6 +177,13 @@ entity-chips {
                     color: $lead;
                 }
             }
+            &.user,
+            &.corporateuser {
+                color: $positive;
+                i {
+                    color: $neutral;
+                }
+            }
         }
     }
     picker-results {

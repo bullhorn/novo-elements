@@ -109,6 +109,8 @@ export class EntityPickerResult {
                     return 'job';
                 case 'Placement':
                     return 'star placement';
+                case 'CorporateUser':
+                    return 'user';
                 default:
                     return '';
             }

@@ -1,4 +1,4 @@
-// Colors
+ // Colors
 // --------------------------------------------------
 $black: #000000;
 $white: #ffffff;
@@ -8,7 +8,6 @@ $dark: #3D464D;
 $light: #D9DADC;
 $navy: #0D2D42;
 $pulse: #3BAFDA;
-
 // Analytics Colors
 $aqua: #3BAFDA;
 $ocean: #4A89DC;
@@ -19,7 +18,6 @@ $bittersweet: #EB6845;
 $grapefruit: #DA4453;
 $carnation: #D770AD;
 $lavender: #967ADC;
-
 // Entity Colors
 $company: #3399DD;
 $candidate: #44BB77;
@@ -32,7 +30,6 @@ $submission: #747884;
 $sendout: #747884;
 $placement: #0B344F;
 $note: #747884;
-
 // Color Applications
 $positive: $ocean;
 $success: $grass;
@@ -50,70 +47,24 @@ $empty: #CCCDCC;
 */
 
 // Analytics Color Map
-$analytics-colors: (
-    aqua: $aqua,
-    ocean: $ocean,
-    mint: $mint,
-    grass: $grass,
-    sunflower: $sunflower,
-    bittersweet: $bittersweet,
-    grapefruit: $grapefruit,
-    carnation: $carnation,
-    lavender: $lavender
-);
-
+$analytics-colors: ( aqua: $aqua, ocean: $ocean, mint: $mint, grass: $grass, sunflower: $sunflower, bittersweet: $bittersweet, grapefruit: $grapefruit, carnation: $carnation, lavender: $lavender);
 // Entity Color Map
-$entity-colors: (
-    company: $company,
-    candidate: $candidate,
-    navigation: $navigation,
-    lead: $lead,
-    contact: $contact,
-    opportunity: $opportunity,
-    job: $job,
-    submission: $submission,
-    sendout: $sendout,
-    placement: $placement,
-    note: $note,
-    task: $neutral,
-    distributionList: $neutral,
-    credential: $neutral
-);
-
+$entity-colors: ( company: $company, candidate: $candidate, navigation: $navigation, lead: $lead, contact: $contact, opportunity: $opportunity, job: $job, submission: $submission, sendout: $sendout, placement: $placement, note: $note, task: $neutral, distributionList: $neutral, credential: $neutral, user: $neutral, corporateuser: $neutral);
 // Generic Color Map
-$colors: (
-    positive: $ocean,
-    success: $grass,
-    negative: $grapefruit,
-    warning: $sunflower,
-    background: $off-white,
-    black: $black,
-    white: $white,
-    grey: $grey,
-    off-white: $off-white,
-    dark: $dark,
-    light: $light,
-    pulse: $pulse,
-    neutral: $neutral
-);
-
+$colors: ( positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, background: $off-white, black: $black, white: $white, grey: $grey, off-white: $off-white, dark: $dark, light: $light, pulse: $pulse, neutral: $neutral);
 // Loading Dot Color Map
-$dot-colors: (
-    ocean: $ocean,
-    lavender: $lavender,
-    grapefruit: $grapefruit,
-    sunflower: $sunflower,
-    mint: $mint
-);
-
+$dot-colors: ( ocean: $ocean, lavender: $lavender, grapefruit: $grapefruit, sunflower: $sunflower, mint: $mint);
 // Typography
 // -------------------------
 $base-font-size: 13px;
-$base-font-family: "Roboto", sans-serif;
+$base-font-family: "Roboto",
+sans-serif;
 $base-font-color: $dark;
 $base-line-height: 24px;
-$alt-font-family: Georgia, "Times New Roman", Times, serif;
-
+$alt-font-family: Georgia,
+"Times New Roman",
+Times,
+serif;
 // Whiteframes
 // -------------------------
 $whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
@@ -126,60 +77,26 @@ $whiteframe-shadow-z4: 0px 16px 28px 0 rgba(0, 0, 0, 0.22) !default;
 $whiteframe-zindex-z4: 4 !default;
 $whiteframe-shadow-z5: 0px 27px 24px 0 rgba(0, 0, 0, 0.2) !default;
 $whiteframe-zindex-z5: 5 !default;
-
 // Z-indexes
 // -------------------------
-
 // Function to call z-indexes.
 // Usage: z-index: z('modal');
-
 @function z($layer) {
-    $z-layers: (
-        "goku": 9001,
-        "modal": 500,
-        "tooltip": 100,
-        "toast": 90,
-        "dialogue": 80,
-        "bottom-sheet": 70,
-        "sidenav": 60,
-        "backdrop": 50,
-        "fab": 20,
-        "default": 1,
-        "below": -1,
-        "bottomless-pit": -9000
-    );
-
+    $z-layers: ( "goku": 9001, "modal": 500, "tooltip": 100, "toast": 90, "dialogue": 80, "bottom-sheet": 70, "sidenav": 60, "backdrop": 50, "fab": 20, "default": 1, "below": -1, "bottomless-pit": -9000);
     @if not map-has-key($z-layers, $layer) {
         @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted.";
     }
-
     @return map-get($z-layers, $layer);
 }
 
 // Easing Curves
 // -------------------------
 // Usage: html-tag { @include ease('all', 'swift-ease-in-out'); }
-
-$easing-curves: (
-    "swift-ease-out":(
-        "duration": 400ms,
-        "curve": "cubic-bezier(0.25, 0.8, 0.25, 1)"
-    ),
-    "swift-ease-in": (
-        "duration": 300ms,
-        "curve": "cubic-bezier(0.55, 0, 0.55, 0.2)"
-    ),
-    "swift-ease-in-out": (
-        "duration": 500ms,
-        "curve": "cubic-bezier(0.35, 0, 0.25, 1)"
-    )
-);
-
+$easing-curves: ( "swift-ease-out":( "duration": 400ms, "curve": "cubic-bezier(0.25, 0.8, 0.25, 1)"), "swift-ease-in": ( "duration": 300ms, "curve": "cubic-bezier(0.55, 0, 0.55, 0.2)"), "swift-ease-in-out": ( "duration": 500ms, "curve": "cubic-bezier(0.35, 0, 0.25, 1)"));
 @function map-deep-get($map, $keys...) {
     @each $key in $keys {
         $map: map-get($map, $key);
     }
-
     @return $map;
 }
 
