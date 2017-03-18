@@ -22,12 +22,14 @@ describe('Elements: CardElement', () => {
             it('should initialize correctly', () => {
                 expect(component).toBeTruthy();
                 expect(component.ngOnChanges).toBeDefined();
+                component.ngOnChanges();
             });
         });
 
         describe('Method: getTimeOfDayStyleAndIcon()', () => {
             it('should be defined.', () => {
                 expect(component.getTimeOfDayStyleAndIcon).toBeDefined();
+                component.getTimeOfDayStyleAndIcon('2-PM');
             });
         });
     });
