@@ -113,6 +113,9 @@ entity-chips {
         bottom: 8px;
         right: 0;
         font-size: 1.2em;
+        &.has-value {
+            bottom: 20px;
+        }
     }
 }
 
@@ -246,7 +249,6 @@ entity-chips {
             z-index: 900;
             border: 1px solid #4A89DC;
             transition: all 200ms ease-in-out;
-
             novo-list-item {
                 flex: 0 0;
                 &>div {

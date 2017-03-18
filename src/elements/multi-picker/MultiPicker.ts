@@ -45,7 +45,7 @@ const CHIPS_VALUE_ACCESSOR = {
                 (blur)="onTouched($event)">
             </novo-picker>
         </div>
-        <i class="bhi-search"></i>
+        <i class="bhi-search" [class.has-value]="items.length"></i>
         <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
    `,
     host: {
