@@ -79,4 +79,10 @@ describe('Elements: NovoCategoryDropdownElement', () => {
             expect(component.executeClickCallback).toBeDefined();
         });
     });
+
+    describe('Method: onCategorySelected()', () => {
+        it('should be defined.', () => {
+            expect(component.onCategorySelected).toBeDefined();
+        });
+    });
 });
