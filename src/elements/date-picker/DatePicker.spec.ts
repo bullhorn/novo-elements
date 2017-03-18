@@ -119,10 +119,10 @@ describe('Elements: NovoDatePickerElement', () => {
         });
     });
 
-    xdescribe('Method: prevMonth()', () => {
+    xdescribe('Method: previousMonth()', () => {
         it('should be defined.', () => {
-            expect(component.prevMonth).toBeTruthy();
-            component.prevMonth();
+            expect(component.previousMonth).toBeTruthy();
+            component.previousMonth();
         });
     });
 

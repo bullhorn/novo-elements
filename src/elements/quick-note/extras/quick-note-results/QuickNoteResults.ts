@@ -1,11 +1,11 @@
 // NG2
 import { Component, ElementRef } from '@angular/core';
+// Vendor
+import { Observable } from 'rxjs/Rx';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 import { PickerResults } from '../../../picker/extras/picker-results/PickerResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
-// Vendor
-import { Observable } from 'rxjs/Rx';
 
 @Component({
     selector: 'quick-note-results',
@@ -52,7 +52,7 @@ export class QuickNoteResults extends PickerResults {
             });
     }
 
-    search(term, taggingMode) {
+    search(term: string, taggingMode) {
         let searchCall = this.config.options[taggingMode];
         return Observable.fromPromise(new Promise((resolve, reject) => {
             // Check if there is match data
@@ -94,7 +94,7 @@ export class QuickNoteResults extends PickerResults {
      * @description This function structures an array of nodes into an array of objects with a
      * 'name' field by default.
      */
-    structureArray(collection) {
+    structureArray(collection: Array<any>) {
         if (collection && (typeof collection[0] === 'string' || typeof collection[0] === 'number')) {
             return collection.map((item) => {
                 return {
@@ -117,7 +117,7 @@ export class QuickNoteResults extends PickerResults {
      *
      * @description
      */
-    selectMatch(event) {
+    selectMatch(event: KeyboardEvent) {
         if (event) {
             event.stopPropagation();
             event.preventDefault();
