@@ -5,7 +5,8 @@ import { TestBed, async } from '@angular/core/testing';
 import { NovoMultiPickerElement } from './MultiPicker';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoChipElement } from '../chips/Chips';
-import { NovoPickerElement, NovoPickerContainer } from '../picker/Picker';
+import { NovoPickerElement } from '../picker/Picker';
+import { NovoPickerContainer } from '../picker/extras/picker-container/PickerContainer';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 

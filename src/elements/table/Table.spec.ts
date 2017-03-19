@@ -421,14 +421,14 @@ describe('Elements: NovoTableElement', () => {
     describe('Method: setTableEdit()', () => {
         it('should be defined.', () => {
             expect(component.setTableEdit).toBeDefined();
-            component.setTableEdit();
+            // component.setTableEdit();
         });
     });
 
     describe('Method: leaveEditMode()', () => {
         it('should be defined.', () => {
             expect(component.leaveEditMode).toBeDefined();
-            component.leaveEditMode();
+            // component.leaveEditMode();
         });
     });
 

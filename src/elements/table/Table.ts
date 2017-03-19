@@ -846,9 +846,9 @@ export class NovoTableElement implements DoCheck {
      */
     leaveEditMode(): void {
         this.mode = NovoTableMode.VIEW;
-        this._rows.forEach((row, rowIndex) => {
+        this._rows.forEach((row) => {
             row._editing = row._editing || {};
-            this.columns.forEach((column, columnIndex) => {
+            this.columns.forEach((column) => {
                 row._editing[column.name] = false;
             });
         });
