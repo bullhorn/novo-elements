@@ -2,15 +2,16 @@
 import { Component, ElementRef } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 // App
-import { NovoDrawerElement } from './Drawer';
+import { NovoDrawerElement } from '../../Drawer';
+import { NovoDrawerToggleElement } from './DrawerToggle';
 
 @Component({
     selector: 'test-component',
-    template: `<div drawer=""></div>`
+    template: `<div drawerToggle=""></div>`
 })
 class TestComponent {}
 
-describe('Elements: NovoDrawerElement', () => {
+describe('Elements: NovoDrawerToggleElement', () => {
     let fixture;
     let directive;
 
@@ -18,6 +19,8 @@ describe('Elements: NovoDrawerElement', () => {
         TestBed.configureTestingModule({
             declarations: [
                 NovoDrawerElement,
+                NovoDrawerToggleElement,
+                // NovoDrawerContentElement,
                 TestComponent
             ],
             providers: [
@@ -29,38 +32,36 @@ describe('Elements: NovoDrawerElement', () => {
         directive = fixture.debugElement.componentInstance;
     }));
 
-    it('should be defined', () => {
+    it('should initialize.', () => {
         expect(directive).toBeDefined();
     });
 
     describe('Class: ', () => {
         let mockElement: ElementRef = new ElementRef(document.createElement('div'));
-        let component: NovoDrawerElement = new NovoDrawerElement(mockElement);
+        let mockDrawer: NovoDrawerElement = new NovoDrawerElement(mockElement);
+        let component: NovoDrawerToggleElement = new NovoDrawerToggleElement(mockDrawer);
+
         describe('Method: ngOnInit()', () => {
             it('should initialize properly', () => {
                 expect(component.ngOnInit).toBeDefined();
-                expect(component.onDrawerToggle).toBeDefined();
-                component.ngOnInit();
-                expect(component.autoClose).toBe('outsideClick');
-                expect(component.position).toBe('left');
+                expect(component.disabled).toBeFalsy();
             });
         });
 
-        describe('Method: toggle(open)', () => {
-            it('should open or close the drawer', () => {
-                //expect(component.toggle).toBeDefined();
-                let test = component.toggle(false);
-                expect(test).toBeTruthy();
-                test = component.toggle();
+        describe('Method: toggleDrawer(event)', () => {
+            it('should toggle drawer', () => {
+                expect(component.toggleDrawer).toBeDefined();
+                spyOn(component.drawer, 'toggle').and.callFake(() => {});
+                component.toggleDrawer(new KeyboardEvent('2'));
+                expect(component.drawer.toggle).toHaveBeenCalled();
+            });
+        });
+
+        describe('Getter: isOpen()', () => {
+            it('should toggle isOpen value', () => {
+                let test = component.isOpen;
                 expect(test).toBeFalsy();
-            });
-        });
-
-        describe('Method: focusToggleElement()', () => {
-            it('should be defined.', () => {
-                expect(component.focusToggleElement).toBeDefined();
             });
         });
     });
 });
-

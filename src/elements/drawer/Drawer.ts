@@ -1,65 +1,7 @@
 // NG2
 import { Directive, OnInit, EventEmitter, ElementRef, Input, Output } from '@angular/core';
-
-export const ALWAYS = 'always';
-export const DISABLED = 'disabled';
-export const OUTSIDE_CLICK = 'outsideClick';
-
-export const POSITION_LEFT = 'left';
-export const POSITION_RIGHT = 'right';
-export const POSITION_TOP = 'top';
-export const POSITION_BOTTOM = 'bottom';
-
-class DrawerService {
-    closeDrawerBind: any;
-    openScope: any;
-    scope: any;
-
-    constructor() {
-        this.closeDrawerBind = this.closeDrawer.bind(this);
-    }
-
-    open(scope) {
-        if (!this.openScope) {
-            window.document.addEventListener('click', this.closeDrawerBind);
-        }
-
-        if (this.openScope && this.openScope !== this.scope) {
-            this.openScope.isOpen = false;
-        }
-
-        this.openScope = scope;
-    }
-
-    close(scope) {
-        if (this.openScope !== scope) {
-            return;
-        }
-
-        this.openScope = null;
-        window.document.removeEventListener('click', this.closeDrawerBind);
-    }
-
-    closeDrawer(event) {
-        if (!this.openScope) {
-            return;
-        }
-
-        if (event && this.openScope.autoClose === DISABLED) {
-            return;
-        }
-
-        if (event && this.openScope.toggleEl && this.openScope.toggleEl.nativeElement === event.target) {
-            return;
-        }
-
-        if (event && this.openScope.autoClose === OUTSIDE_CLICK && this.openScope.drawerEl && this.openScope.drawerEl.nativeElement === event.target) {
-            return;
-        }
-
-        this.openScope.isOpen = false;
-    }
-}
+// App
+import { DrawerService, OUTSIDE_CLICK, POSITION_LEFT } from './extras/drawer-service/DrawerService';
 
 const drawerService = new DrawerService();
 
@@ -128,46 +70,5 @@ export class NovoDrawerElement implements OnInit {
     }
 }
 
-@Directive({
-    selector: '[drawerContent]'
-})
-export class NovoDrawerContentElement implements OnInit {
-    constructor(private drawer: NovoDrawerElement, private el: ElementRef) {
-    }
 
-    ngOnInit() {
-        this.drawer.drawer = this;
-    }
-}
 
-@Directive({
-    selector: '[drawerToggle]',
-    host: {
-        '(click)': 'toggleDrawer($event)',
-        '[class.drawer-toggle]': 'true',
-        '[class.disabled]': 'disabled'
-    }
-})
-export class NovoDrawerToggleElement implements OnInit {
-    @Input() disabled: boolean = false;
-
-    constructor(private drawer: NovoDrawerElement, private el: ElementRef) {
-    }
-
-    ngOnInit() {
-        this.drawer.drawerToggle = this;
-    }
-
-    get isOpen() {
-        return this.drawer.isOpen;
-    }
-
-    toggleDrawer(event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (!this.disabled) {
-            this.drawer.toggle();
-        }
-    }
-}
