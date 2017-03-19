@@ -1,10 +1,10 @@
 // Vendor
-import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, Directive, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
-import { FormUtils } from '../form/FormUtils';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { ReadOnlyControl } from './../form/FormControls';
 import { CollectionEvent } from '../../services/data-provider/CollectionEvent';
 import { PagedArrayCollection } from '../../services/data-provider/PagedArrayCollection';
@@ -13,64 +13,33 @@ import { PagedCollection } from '../../services/data-provider/PagedCollection';
 export interface NovoTableConfig {
     // Paging config
     paging?: {
-        current: number, // current page
-        itemsPerPage: number, // items per page
-        onPageChange: Function // function to handle page changing
+        current: number,                // current page
+        itemsPerPage: number,           // items per page
+        onPageChange: Function          // function to handle page changing
     };
     // Footer config (total footer)
-    footers?: {
-        columns: string[], // string array of columns to total
-        method: string; // method to use for the footer, SUM | AVG, defaults to SUM
-        labelColumn: string, // column to use as the "total" label
-        label: string // label to use in the "total" label
-    }[];
-    filtering?: boolean | any; // Turn on filtering for the table, boolean or function for filtering callback
-    sorting?: boolean | any; // Turn on sorting for the table, boolean or function for sorting callback
-    ordering?: boolean | any; // Turn on ordering for the table, boolean or function for ordering callback
-    resizing?: boolean | any; // Turn on resizing for the table, boolean or function for resizing callback
-    rowSelectionStyle?: string; // Row selection style, checkbox or row
-    rowSelect?: boolean; // Turn on row selection
-    hasDetails?: boolean; // Turn on details row for the table
-    detailsRenderer?: any; // Renderer/component for the details row
-    selectAllEnabled?: boolean; // Allows the table, while in selection mode to have a select all at the top
+    footers?: Array<{
+        columns: Array<string>,         // string array of columns to total
+        method: string;                 // method to use for the footer, SUM | AVG, defaults to SUM
+        labelColumn: string,            // column to use as the "total" label
+        label: string                   // label to use in the "total" label
+    }>;
+    // TODO: When these types are enforced as `boolean | Function`, there's a lint error. That's a bug.
+    filtering?: boolean | any;          // Turn on filtering for the table, boolean or function for filtering callback
+    sorting?: boolean | any;            // Turn on sorting for the table, boolean or function for sorting callback
+    ordering?: boolean | Function;      // Turn on ordering for the table, boolean or function for ordering callback
+    resizing?: boolean | Function;      // Turn on resizing for the table, boolean or function for resizing callback
+    rowSelectionStyle?: string;         // Row selection style, checkbox or row
+    rowSelect?: boolean;                // Turn on row selection
+    hasDetails?: boolean;               // Turn on details row for the table
+    detailsRenderer?: any;              // Renderer/component for the details row
+    selectAllEnabled?: boolean;         // Allows the table, while in selection mode to have a select all at the top
 }
 
 // TODO - support (1) clicking cell to edit, (2) clicking row to edit, (3) button to trigger full table to edit
 export enum NovoTableMode {
     VIEW = 1,
     EDIT = 2
-}
-
-@Directive({
-    selector: '[keepFilterFocused]'
-})
-export class NovoTableKeepFilterFocus implements AfterViewInit {
-    constructor(private element: ElementRef) { }
-
-    ngAfterViewInit() {
-        this.element.nativeElement.focus();
-    }
-}
-
-@Component({
-    selector: 'novo-table-actions',
-    template: '<ng-content></ng-content>'
-})
-export class NovoTableActionsElement {
-}
-
-@Component({
-    selector: 'novo-table-header',
-    template: '<ng-content></ng-content>'
-})
-export class NovoTableHeaderElement {
-}
-
-@Component({
-    selector: 'novo-table-footer',
-    template: '<ng-content></ng-content>'
-})
-export class NovoTableFooterElement {
 }
 
 @Component({
@@ -80,6 +49,7 @@ export class NovoTableFooterElement {
         '[class.editing]': 'mode === NovoTableMode.EDIT',
         '[class.novo-table-loading]': 'loading'
     },
+    // directives: [],
     template: `
         <header *ngIf="columns.length">
             <ng-content select="novo-table-header"></ng-content>
@@ -428,7 +398,7 @@ export class NovoTableElement implements DoCheck {
     }
 
     /**
-     * @name buildDateRange
+     * @name setupColumnDefaults
      */
     setupColumnDefaults() {
         // Check columns for cell option types
@@ -508,7 +478,7 @@ export class NovoTableElement implements DoCheck {
      * @name onFilterClear
      * @param column
      */
-    onFilterClear(column) {
+    onFilterClear(column: any): void {
         setTimeout(() => {
             column.filter = null;
             column.freetextFilter = null;
@@ -594,7 +564,7 @@ export class NovoTableElement implements DoCheck {
 
     /**
      * @name isFilterActive
-     * @param columnFilters
+     * @param column
      * @param filter
      * @returns {boolean}
      *
@@ -810,7 +780,7 @@ export class NovoTableElement implements DoCheck {
         return opts;
     }
 
-    onCalenderSelect(column, event) {
+    onCalenderSelect(column, event): void {
         setTimeout(() => {
             if (event.startDate && event.endDate) {
                 this.onFilterChange();
@@ -880,9 +850,9 @@ export class NovoTableElement implements DoCheck {
      */
     leaveEditMode(): void {
         this.mode = NovoTableMode.VIEW;
-        this._rows.forEach((row, rowIndex) => {
+        this._rows.forEach((row) => {
             row._editing = row._editing || {};
-            this.columns.forEach((column, columnIndex) => {
+            this.columns.forEach((column) => {
                 row._editing[column.name] = false;
             });
         });

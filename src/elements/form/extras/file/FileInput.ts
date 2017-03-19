@@ -3,6 +3,7 @@ import { Component, Input, ElementRef, forwardRef, OnInit, OnDestroy } from '@an
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoFile } from './extras/file/File';
 
 // Value accessor for the component (supports ngModel)
 const FILE_VALUE_ACCESSOR = {
@@ -17,7 +18,7 @@ const FILE_VALUE_ACCESSOR = {
     template: `
         <div class="file-output-group">
             <div class="file-item" *ngFor="let file of files">
-                <label>{{file.name}}</label>
+                <label>{{ file.name }}</label>
                 <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
                     <button theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'"></button>
                     <button theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'"></button>
@@ -146,50 +147,5 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
 
     readFile(file) {
         return new NovoFile(file).read();
-    }
-}
-
-
-export class NovoFile {
-    name: string = '';
-    file: any;
-    type: any;
-    contentType: string = '';
-    lastModified: number = 0;
-    size: number = 0;
-    loaded: boolean = false;
-    fileContents: string;
-    dataURL: string;
-    reader: FileReader = new FileReader();
-
-    constructor(file) {
-        this.name = file.name;
-        this.contentType = file.type;
-        this.lastModified = file.lastModified;
-        this.size = file.size;
-        this.file = file;
-        this.reader.onload = (event: any) => {
-            this.fileContents = event.target.result.split(',')[1];
-            this.dataURL = event.target.result;
-            this.loaded = true;
-        };
-    }
-
-    read() {
-        return new Promise((resolve) => {
-            resolve(this);
-            // when the file is read it triggers the onload event above.
-            this.reader.readAsDataURL(this.file);
-        });
-    }
-
-    toJSON() {
-        return {
-            name: this.name,
-            contentType: this.type,
-            lastModified: this.lastModified,
-            size: this.size,
-            fileContents: this.fileContents
-        };
     }
 }

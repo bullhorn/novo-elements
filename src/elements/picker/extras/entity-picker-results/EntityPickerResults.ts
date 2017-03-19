@@ -2,7 +2,7 @@
 import { Component, ElementRef, Input } from '@angular/core';
 // Vendor
 // APP
-import { BasePickerResults } from './../picker-results/PickerResults';
+import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 
 @Component({

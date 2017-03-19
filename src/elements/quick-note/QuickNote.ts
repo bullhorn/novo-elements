@@ -109,7 +109,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
             err => this.hideResults());
     }
 
-    onKeyPress(event) {
+    onKeyPress(event: KeyboardEvent) {
         // Go over all defined triggers
         let triggers = this.config.triggers || {};
         Object.keys(triggers).forEach(key => {
@@ -137,7 +137,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
      * It made sense to filter these out in the controller instead of using multiple listeners on the HTML element
      * because the quantity of different behaviors would make a messy element.
      */
-    onKeyUp(event) {
+    onKeyUp(event: KeyboardEvent) {
         // Navigation inside the results
         if (this.quickNoteResults) {
             if (event.keyCode === KeyCodes.ESC) {
@@ -356,27 +356,6 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
     }
 
     /**
-     * Positions the results dropdown based on the location of the cursor in the text field
-     */
-    private positionResultsDropdown(): void {
-        const DROPDOWN_OFFSET: number = 30; // The distance between the cursor and the dropdown
-        const MIN_MARGIN_TOP: number = DROPDOWN_OFFSET;
-        const MAX_MARGIN_TOP: number = this.overlay.nativeElement.clientHeight;
-
-        let textAreaCoordinates = this.getCaretCoordinates(this.textArea.nativeElement);
-
-        // Take out the scroll so that the dropdown operates properly even if the text area is scrolled down
-        let marginTop: number = textAreaCoordinates.top - this.overlay.nativeElement.scrollTop + DROPDOWN_OFFSET;
-
-        // Check that the margin is within the visible bounds
-        marginTop = Math.max(marginTop, MIN_MARGIN_TOP);
-        marginTop = Math.min(marginTop, MAX_MARGIN_TOP);
-
-        // Set the margin-top of the dropdown
-        this.quickNoteResults.instance.element.nativeElement.style.setProperty('margin-top', marginTop + 'px');
-    }
-
-    /**
      * Started with: https://github.com/component/textarea-caret-position and modified to fit our framework
      *
      * @param element
@@ -475,5 +454,26 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
         document.body.removeChild(div);
 
         return coordinates;
+    }
+
+    /**
+     * Positions the results dropdown based on the location of the cursor in the text field
+     */
+    private positionResultsDropdown(): void {
+        const DROPDOWN_OFFSET: number = 30; // The distance between the cursor and the dropdown
+        const MIN_MARGIN_TOP: number = DROPDOWN_OFFSET;
+        const MAX_MARGIN_TOP: number = this.overlay.nativeElement.clientHeight;
+
+        let textAreaCoordinates = this.getCaretCoordinates(this.textArea.nativeElement);
+
+        // Take out the scroll so that the dropdown operates properly even if the text area is scrolled down
+        let marginTop: number = textAreaCoordinates.top - this.overlay.nativeElement.scrollTop + DROPDOWN_OFFSET;
+
+        // Check that the margin is within the visible bounds
+        marginTop = Math.max(marginTop, MIN_MARGIN_TOP);
+        marginTop = Math.min(marginTop, MAX_MARGIN_TOP);
+
+        // Set the margin-top of the dropdown
+        this.quickNoteResults.instance.element.nativeElement.style.setProperty('margin-top', marginTop + 'px');
     }
 }

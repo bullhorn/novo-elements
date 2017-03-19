@@ -39,7 +39,7 @@ import { NovoPopOverModule } from './src/elements/popover/PopOver.module';
 import { NovoLabelService } from './src/services/novo-label-service';
 import { NovoDragulaService } from './src/elements/dragula/DragulaService';
 import { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
-import { FormUtils } from './src/elements/form/FormUtils';
+import { FormUtils } from './src/utils/form-utils/FormUtils';
 
 @NgModule({
     imports: [

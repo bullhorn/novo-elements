@@ -46,13 +46,14 @@ export { PagedArrayCollection } from './src/services/data-provider/PagedArrayCol
 // Export classes that will need to be imported
 export { NovoModalParams, NovoModalRef } from './src/elements/modal/Modal';
 export { QuickNoteResults } from './src/elements/quick-note/extras/quick-note-results/QuickNoteResults';
-export { PickerResults, BasePickerResults } from './src/elements/picker/extras/picker-results/PickerResults';
+export { PickerResults } from './src/elements/picker/extras/picker-results/PickerResults';
+export { BasePickerResults } from './src/elements/picker/extras/base-picker-results/BasePickerResults';
 export { EntityPickerResult, EntityPickerResults } from './src/elements/picker/extras/entity-picker-results/EntityPickerResults';
 export { ChecklistPickerResults } from './src/elements/picker/extras/checklist-picker-results/ChecklistPickerResults';
 export { BaseRenderer } from './src/elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './src/elements/table/extras/date-cell/DateCell';
 export { FormValidators } from './src/elements/form/FormValidators';
-export { FormUtils } from './src/elements/form/FormUtils';
+export { FormUtils } from './src/utils/form-utils/FormUtils';
 export * from './src/elements/form/FormControls';
 // Utils
 export { OutsideClick } from './src/utils/outside-click/OutsideClick';

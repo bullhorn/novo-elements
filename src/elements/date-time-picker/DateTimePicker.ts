@@ -2,8 +2,8 @@
 import { ElementRef, Component, EventEmitter, Input, Output, forwardRef, trigger, state, style, transition, animate, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { Helpers } from './../../utils/Helpers';
-import { NovoLabelService } from './../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 // Value accessor for the component (supports ngModel)
 const DATE_TIME_PICKER_VALUE_ACCESSOR = {
@@ -60,7 +60,8 @@ export type componentTabStates = 'date' | 'time';
             <div class="date-time-tabs">
                 <span class="date-tab" (click)="toggleTimePicker('date')" [@dateTextState]="componentTabState">{{selectedLabel}}</span>
                 <span class="time-tab" (click)="toggleTimePicker('time')" [@timeTextState]="componentTabState">
-                    <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
+                    <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span
+                    class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
                     <span *ngIf="!military" class="meridian">{{meridian}}</span>
                 </span>
                 <i class="date-time-indicator" [@indicatorState]="componentTabState"></i>
@@ -68,47 +69,62 @@ export type componentTabStates = 'date' | 'time';
             <div class="view-container" [@containerState]="componentTabState">
                 <div class="calendar">
                     <div class="calendar-header">
-                        <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
+                        <span class="previous" (click)="previousMonth($event)"
+                              data-automation-id="calendar-previous"></span>
                         <span class="heading">
-                            <span class="month" (click)="open($event, 'months')" [attr.data-automation-id]="heading?.month">{{monthLabel}}</span>
-                            <span class="year" (click)="open($event, 'years')" [attr.data-automation-id]="heading?.year">{{month?.getFullYear()}}</span>
+                            <span class="month" (click)="open($event, 'months')"
+                                  [attr.data-automation-id]="heading?.month">{{monthLabel}}</span>
+                            <span class="year" (click)="open($event, 'years')"
+                                  [attr.data-automation-id]="heading?.year">{{month?.getFullYear()}}</span>
                         </span>
                         <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
                     </div>
                     <table class="calendar-content days" cellspacing="0" cellpadding="0" [hidden]="!(view=='days')">
                         <thead>
-                            <tr>
-                                <th *ngFor="let day of weekdays" title="{{day}}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">{{day.substr(0, 2)}}</th>
-                            </tr>
+                        <tr>
+                            <th *ngFor="let day of weekdays" title="{{day}}" class="weekday"
+                                [attr.data-automation-id]="day.substr(0, 2)">{{day.substr(0, 2)}}
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let week of weeks">
-                                <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday,
+                        <tr *ngFor="let week of weeks">
+                            <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday,
                                     'notinmonth': !day.isCurrentMonth,
                                     selected: day.date.getDate() === selected.getDate() && day.date.getMonth() === selected.getMonth() && day.date.getFullYear() === selected.getFullYear()
                                 }">
-                                    <button class="day" (click)="select($event, day, true); toggleTimePicker('time')" [attr.data-automation-id]="day.number" [disabled]="isDisabled(day.date, start, end)">{{day.number}}</button>
-                                </td>
-                            </tr>
+                                <button class="day" (click)="select($event, day, true); toggleTimePicker('time')"
+                                        [attr.data-automation-id]="day.number"
+                                        [disabled]="isDisabled(day.date, start, end)">{{day.number}}
+                                </button>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                     <ul class="calendar-content months" [hidden]="view !== 'months'">
                         <li *ngFor="let month of months;let i = index" (click)="setMonth(i)">
-                            <div class="month" [ngClass]="{selected: i === selected.getMonth()}" [attr.data-automation-id]="month">{{month}}</div>
+                            <div class="month" [ngClass]="{selected: i === selected.getMonth()}"
+                                 [attr.data-automation-id]="month">{{month}}
+                            </div>
                         </li>
                     </ul>
                     <ul class="calendar-content years" [hidden]="view !== 'years'">
                         <li *ngFor="let year of years" (click)="setYear(year)">
-                            <div class="year" [ngClass]="{selected: year == selected?.getFullYear()}" [attr.data-automation-id]="year">{{year}}</div>
+                            <div class="year" [ngClass]="{selected: year == selected?.getFullYear()}"
+                                 [attr.data-automation-id]="year">{{year}}
+                            </div>
                         </li>
                     </ul>
                     <div class="calendar-footer">
-                        <span (click)="setToday()" class="today" data-automation-id="calendar-today">{{ labels.today }}</span>
+                        <span (click)="setToday()" class="today" data-automation-id="calendar-today">{{ labels.today
+                            }}</span>
                     </div>
                 </div>
                 <div class="time-picker">
                     <div class="meridian-control-block" *ngIf="!military">
-                        <span *ngFor="let period of MERIDIANS" class="digital--period" [class.active]="meridian==period" (click)="setPeriod($event, period, true)" [attr.data-automation-id]="period">{{period}}</span>
+                        <span *ngFor="let period of MERIDIANS" class="digital--period" [class.active]="meridian==period"
+                              (click)="setPeriod($event, period, true)"
+                              [attr.data-automation-id]="period">{{period}}</span>
                     </div>
                     <div class="analog">
                         <div class="analog--inner">
@@ -122,10 +138,14 @@ export type componentTabStates = 'date' | 'time';
                                 </span>
                             </div>
                             <div class="analog--hours">
-                                <span *ngFor="let hour of HOURS" class="analog--hour" [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour, true)" [attr.data-automation-id]="hour">{{hour}}</span>
+                                <span *ngFor="let hour of HOURS" class="analog--hour"
+                                      [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour, true)"
+                                      [attr.data-automation-id]="hour">{{hour}}</span>
                             </div>
                             <div class="analog--minutes">
-                                <span *ngFor="let minute of MINUTES" class="analog--minute" [ngClass]="{active: activeMinute == minute}" (click)="setMinutes($event, minute, true)" [attr.data-automation-id]="minute">{{minute}}</span>
+                                <span *ngFor="let minute of MINUTES" class="analog--minute"
+                                      [ngClass]="{active: activeMinute == minute}"
+                                      (click)="setMinutes($event, minute, true)" [attr.data-automation-id]="minute">{{minute}}</span>
                             </div>
                         </div>
                     </div>
@@ -323,7 +343,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.updateHeading();
     }
 
-    prevMonth(event: Event): void {
+    previousMonth(event: Event): void {
         Helpers.swallowEvent(event);
         let tmp = Helpers.modifyDate({ month: this.month.getMonth() - 1 }, this.month);
         this.updateCal(tmp, false, false);

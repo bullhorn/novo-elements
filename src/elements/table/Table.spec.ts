@@ -3,13 +3,17 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { FormsModule, FormGroupDirective, NgControl, FormControlName, FormBuilder } from '@angular/forms';
 // App
-import { NovoTableElement, NovoTableActionsElement, NovoTableHeaderElement, NovoTableFooterElement } from './Table';
+import { NovoTableElement } from './Table';
 import { Pagination } from './extras/pagination/Pagination';
 import { RowDetails } from './extras/row-details/RowDetails';
 import { TableCell } from './extras/table-cell/TableCell';
 import { TableFilter } from './extras/table-filter/TableFilter';
 import { ThOrderable } from './extras/th-orderable/ThOrderable';
 import { ThSortable } from './extras/th-sortable/ThSortable';
+import { NovoTableKeepFilterFocus } from './extras/keep-filter-focus/KeepFilterFocus';
+import { NovoTableActionsElement } from './extras/table-actions/TableActions';
+import { NovoTableFooterElement } from './extras/table-footer/TableFooter';
+import { NovoTableHeaderElement } from './extras/table-header/TableHeader';
 
 import { NovoFormElement } from '../form/Form';
 import { NovoControlElement } from '../form/Control';
@@ -27,83 +31,7 @@ import { TooltipDirective } from '../tooltip/Tooltip';
 import { NovoSelectElement } from '../select/Select';
 
 import { NovoLabelService } from '../../services/novo-label-service';
-import { FormUtils } from '../form/FormUtils';
-
-// describe('Elements: NovoTableKeepFilterFocus', () => {
-//     let fixture;
-//     let component;
-//
-//     beforeEach(async(() => {
-//         TestBed.configureTestingModule({
-//             declarations: [
-//                 NovoTableKeepFilterFocus
-//             ]
-//         }).compileComponents();
-//         fixture = TestBed.createComponent(NovoTableKeepFilterFocus);
-//         component = fixture.debugElement.componentInstance;
-//     }));
-//
-//     it('should initialize correctly', () => {
-//         expect(component).toBeTruthy();
-//     });
-// });
-
-describe('Elements: NovoTableActionsElement', () => {
-    let fixture;
-    let component;
-
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                NovoTableActionsElement
-            ]
-        }).compileComponents();
-        fixture = TestBed.createComponent(NovoTableActionsElement);
-        component = fixture.debugElement.componentInstance;
-    }));
-
-    it('should initialize correctly', () => {
-        expect(component).toBeTruthy();
-    });
-});
-
-describe('Elements: NovoTableHeaderElement', () => {
-    let fixture;
-    let component;
-
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                NovoTableHeaderElement
-            ]
-        }).compileComponents();
-        fixture = TestBed.createComponent(NovoTableHeaderElement);
-        component = fixture.debugElement.componentInstance;
-    }));
-
-    it('should initialize correctly', () => {
-        expect(component).toBeTruthy();
-    });
-});
-
-describe('Elements: NovoTableFooterElement', () => {
-    let fixture;
-    let component;
-
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                NovoTableFooterElement
-            ]
-        }).compileComponents();
-        fixture = TestBed.createComponent(NovoTableFooterElement);
-        component = fixture.debugElement.componentInstance;
-    }));
-
-    it('should initialize correctly', () => {
-        expect(component).toBeTruthy();
-    });
-});
+import { FormUtils } from '../../utils/form-utils/FormUtils';
 
 describe('Elements: NovoTableElement', () => {
     let fixture;
@@ -120,6 +48,10 @@ describe('Elements: NovoTableElement', () => {
                 TableFilter,
                 ThOrderable,
                 ThSortable,
+                NovoTableKeepFilterFocus,
+                NovoTableActionsElement,
+                NovoTableFooterElement,
+                NovoTableHeaderElement,
                 // Form:
                 NovoFormElement,
                 NovoControlElement,
@@ -161,38 +93,70 @@ describe('Elements: NovoTableElement', () => {
 
     it('should initialize with all of its defaults.', () => {
         expect(component).toBeDefined();
+        component._rows = [];
+        component.mode = 'TEST';
         // NG2
         expect(component.onRowClick).toBeDefined();
         expect(component.onRowSelect).toBeDefined();
         expect(component.onTableChange).toBeDefined();
-        // App
-        // expect(component.labels).toBeDefined();
         // Vars
-
         expect(component.activeId).toBeDefined();
         expect(component.master).toBeDefined();
         expect(component.indeterminate).toBeDefined();
         expect(component.lastPage).toBeDefined();
+        expect(component.rows).toBeDefined();
+        // Setters
+        component.rows = [];
+        component.dataProvider = [];
+        // Getters
+        expect(component.dataProvider).toBeDefined();
+        expect(component.editing).toBeDefined();
+        expect(component.formValue).toBeDefined();
     });
 
-    xdescribe('Method: ngOnChanges()', () => {
-        it('should set originalRows.', () => {
-            expect(component.ngOnChanges).toBeDefined();
-            component.rows = [];
-            component.ngOnChanges();
-            expect(component.originalRows.length).toBe(0);
+
+    describe('Method: onDropdownToggled()', () => {
+        it('should be defined.', () => {
+            expect(component.onDropdownToggled).toBeDefined();
+            component.onDropdownToggled();
+        });
+    });
+
+    describe('Method: onPageChange()', () => {
+        it('should be defined.', () => {
+            expect(component.onPageChange).toBeDefined();
+            component.onPageChange();
+        });
+    });
+
+    describe('Method: getOptionDataAutomationId()', () => {
+        it('should be defined.', () => {
+            expect(component.getOptionDataAutomationId).toBeDefined();
+            component.getOptionDataAutomationId({ value: 2 });
+        });
+    });
+
+    describe('Method: setupColumnDefaults()', () => {
+        it('should be defined.', () => {
+            expect(component.setupColumnDefaults).toBeDefined();
+            component.columns = [
+                { type: 'misc' }
+            ];
+            component.setupColumnDefaults();
         });
     });
 
     describe('Method: ngDoCheck()', () => {
         it('should be defined.', () => {
             expect(component.ngDoCheck).toBeDefined();
+            component.ngDoCheck();
         });
     });
 
     describe('Method: getPageStart()', () => {
         it('should be defined.', () => {
             expect(component.getPageStart).toBeDefined();
+            component.getPageStart();
         });
     });
 
@@ -202,85 +166,80 @@ describe('Elements: NovoTableElement', () => {
         });
     });
 
-    describe('Method: onPageChange()', () => {
-        it('should be defined.', () => {
-            expect(component.onPageChange).toBeDefined();
+    describe('Method: onFilterClick(column, filter)', () => {
+        beforeEach(() => {
+            component.columns = [
+                {
+                    filtering: true,
+                    name: 'date',
+                    type: 'date'
+                }
+            ];
+            component.originalRows = [
+                {
+                    id: 1,
+                    date: new Date()
+                },
+                {
+                    id: 2,
+                    date: new Date()
+                }
+            ];
+            component.config = {
+                filtering: true
+            };
+        });
+
+        xit('should allow multiple date selections if multiple=true/false', () => {
+            expect(component.onFilterClick).toBeDefined();
+            component.columns[0].multiple = true;
+            component.setupColumnDefaults();
+            // Select 4 rows
+            component.onFilterClick(component.columns[0], component.columns[0].options[0]);
+            component.onFilterClick(component.columns[0], component.columns[0].options[1]);
+            component.onFilterClick(component.columns[0], component.columns[0].options[2]);
+            component.onFilterClick(component.columns[0], component.columns[0].options[3]);
+            expect(component.columns[0].filter.length).toBe(4);
+            // deselect 4 rows
+            component.onFilterClick(component.columns[0], component.columns[0].options[0]);
+            component.onFilterClick(component.columns[0], component.columns[0].options[1]);
+            component.onFilterClick(component.columns[0], component.columns[0].options[2]);
+            component.onFilterClick(component.columns[0], component.columns[0].options[3]);
+            expect(component.columns[0].filter).toBe(null);
+            // set multiple to false and try and click 2 rows
+            component.columns[0].multiple = false;
+            component.onFilterClick(component.columns[0], component.columns[0].options[1]);
+            component.onFilterClick(component.columns[0], component.columns[0].options[2]);
+            expect(component.columns[0].filter.length).toBe(1);
+        });
+
+        it('should add range to options (11 total) if range is set', () => {
+            expect(component.onFilterClick).toBeDefined();
+            component.columns[0].range = true;
+            component.setupColumnDefaults();
+            expect(component.columns[0].options.length).toBe(11);
+        });
+
+        it('should add calenderShow if range is set', () => {
+            expect(component.onFilterClick).toBeDefined();
+            component.columns[0].range = true;
+            component.setupColumnDefaults();
+            component.onFilterClick(component.columns[0], component.columns[0].options[component.columns[0].options.length - 1]);
+            expect(component.columns[0].calenderShow).toBeTruthy();
         });
     });
 
-    xdescribe('Method: focusInput()', () => {
+    describe('Method: onFilterClear(column)', () => {
         it('should be defined.', () => {
-            expect(component.focusInput).toBeDefined();
-        });
-    });
-
-    // describe('Method: onFilterClick()', () => {
-    //     beforeEach(() => {
-    //         component.columns = [
-    //             {
-    //                 filtering: true,
-    //                 name: 'date',
-    //                 type: 'date'
-    //             }
-    //         ];
-    //         component.originalRows = [
-    //             {
-    //                 id: 1,
-    //                 date: new Date().timestamp
-    //             },
-    //             {
-    //                 id: 2,
-    //                 date: new Date().timestamp
-    //             }
-    //         ];
-    //         component.config = {
-    //             filtering: true
-    //         };
-    //     });
-    //
-    //     it('should .', () => {
-    //         expect(component.onFilterClick).toBeDefined();
-    //     });
-    //
-    //     it('should allow multiple date selections if multiple=true/false', () => {
-    //         component.columns[0].multiple = true;
-    //         component.setupColumnDefaults();
-    //         // Select 4 rows
-    //         component.onFilterClick(component.columns[0], component.columns[0].options[0]);
-    //         component.onFilterClick(component.columns[0], component.columns[0].options[1]);
-    //         component.onFilterClick(component.columns[0], component.columns[0].options[2]);
-    //         component.onFilterClick(component.columns[0], component.columns[0].options[3]);
-    //         expect(component.columns[0].filter.length).toBe(4);
-    //         // deselect 4 rows
-    //         component.onFilterClick(component.columns[0], component.columns[0].options[0]);
-    //         component.onFilterClick(component.columns[0], component.columns[0].options[1]);
-    //         component.onFilterClick(component.columns[0], component.columns[0].options[2]);
-    //         component.onFilterClick(component.columns[0], component.columns[0].options[3]);
-    //         expect(component.columns[0].filter).toBe(null);
-    //         // set multiple to false and try and click 2 rows
-    //         component.columns[0].multiple = false;
-    //         component.onFilterClick(component.columns[0], component.columns[0].options[1]);
-    //         component.onFilterClick(component.columns[0], component.columns[0].options[2]);
-    //         expect(component.columns[0].filter.length).toBe(1);
-    //     });
-    //
-    //     it('should add range to options (11 total) if range is set', () => {
-    //         component.columns[0].range = true;
-    //         component.setupColumnDefaults();
-    //         expect(component.columns[0].options.length).toBe(11);
-    //     });
-    //
-    //     it('should add calenderShow if range is set', () => {
-    //         component.columns[0].range = true;
-    //         component.setupColumnDefaults();
-    //         component.onFilterClick(component.columns[0], component.columns[0].options[component.columns[0].options.length - 1]);
-    //         expect(component.columns[0].calenderShow).toBeTruthy();
-    //     });
-    // });
-
-    describe('Method: onFilterClear()', () => {
-        it('should .', () => {
             expect(component.onFilterClear).toBeDefined();
+            component.onFilterClear({ filer: true, freetextFilter: true });
+        });
+    });
+
+    describe('Method: clearAllSortAndFilters()', () => {
+        it('should be defined.', () => {
+            expect(component.clearAllSortAndFilters).toBeDefined();
+            component.clearAllSortAndFilters();
         });
     });
 
@@ -407,15 +366,15 @@ describe('Elements: NovoTableElement', () => {
         });
     });
 
-    describe('Method: selectAll()', () => {
-        it('should be defined.', () => {
-            expect(component.selectAll).toBeDefined();
-        });
-    });
-
     describe('Method: selectPage()', () => {
         it('should be defined.', () => {
             expect(component.selectPage).toBeDefined();
+        });
+    });
+
+    describe('Method: selectAll()', () => {
+        it('should be defined.', () => {
+            expect(component.selectAll).toBeDefined();
         });
     });
 
@@ -442,6 +401,76 @@ describe('Elements: NovoTableElement', () => {
             expect(component.getDefaultOptions).toBeDefined();
             let mockOptions = component.getDefaultOptions();
             expect(mockOptions.length).toBe(10);
+        });
+    });
+
+    describe('Method: onCalenderSelect(column, event)', () => {
+        it('should be defined.', () => {
+            expect(component.onCalenderSelect).toBeDefined();
+            component.onCalenderSelect(null, { startDate: new Date(), endDate: new Date() });
+        });
+    });
+
+    describe('Method: onFilterKeywords()', () => {
+        it('should be defined.', () => {
+            expect(component.onFilterKeywords).toBeDefined();
+            // component.onFilterKeywords();
+        });
+    });
+
+    describe('Method: setTableEdit()', () => {
+        it('should be defined.', () => {
+            expect(component.setTableEdit).toBeDefined();
+            // component.setTableEdit();
+        });
+    });
+
+    describe('Method: leaveEditMode()', () => {
+        it('should be defined.', () => {
+            expect(component.leaveEditMode).toBeDefined();
+            // component.leaveEditMode();
+        });
+    });
+
+    describe('Method: addEditableRow()', () => {
+        it('should be defined.', () => {
+            expect(component.addEditableRow).toBeDefined();
+            // component.addEditableRow();
+        });
+    });
+
+    describe('Method: validateAndGetUpdatedData()', () => {
+        it('should be defined.', () => {
+            expect(component.validateAndGetUpdatedData).toBeDefined();
+            component.validateAndGetUpdatedData();
+        });
+    });
+
+    describe('Method: cancelEditing()', () => {
+        it('should be defined.', () => {
+            expect(component.cancelEditing).toBeDefined();
+            // component.cancelEditing();
+        });
+    });
+
+    describe('Method: displayToastMessage()', () => {
+        it('should be defined.', () => {
+            expect(component.displayToastMessage).toBeDefined();
+            component.displayToastMessage();
+        });
+    });
+
+    describe('Method: hideToastMessage()', () => {
+        it('should be defined.', () => {
+            expect(component.hideToastMessage).toBeDefined();
+            component.hideToastMessage();
+        });
+    });
+
+    describe('Method: toggleLoading()', () => {
+        it('should be defined.', () => {
+            expect(component.toggleLoading).toBeDefined();
+            component.toggleLoading();
         });
     });
 });

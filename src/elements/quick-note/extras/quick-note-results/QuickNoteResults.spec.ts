@@ -27,5 +27,26 @@ describe('Elements: QuickNoteResults', () => {
         it('should initialize correctly', () => {
             expect(component).toBeTruthy();
         });
+
+        describe('Method: search()', () => {
+            it('should be defined.', () => {
+                expect(component.search).toBeDefined();
+                // component.search();
+            });
+        });
+
+        describe('Method: structureArray()', () => {
+            it('should be defined.', () => {
+                expect(component.structureArray).toBeDefined();
+                component.structureArray([1]);
+            });
+        });
+
+        describe('Method: selectMatch()', () => {
+            it('should be defined.', () => {
+                expect(component.selectMatch).toBeDefined();
+                component.selectMatch();
+            });
+        });
     });
 });

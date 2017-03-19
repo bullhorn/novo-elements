@@ -3,7 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { TestBed, async } from '@angular/core/testing';
 // App
 import { NovoChipElement, NovoChipsElement } from './Chips';
-import { NovoPickerElement, NovoPickerContainer } from '../picker/Picker';
+import { NovoPickerElement } from '../picker/Picker';
+import { NovoPickerContainer } from '../picker/extras/picker-container/PickerContainer';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
 

@@ -1,6 +1,6 @@
 // NG2
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 // APP
 import {
     AddressControl,
@@ -18,122 +18,100 @@ import {
     TilesControl,
     TimeControl,
     NovoControlConfig
-} from './FormControls';
-import { EntityPickerResult, EntityPickerResults } from './../picker/extras/entity-picker-results/EntityPickerResults';
-import { Helpers } from './../../utils/Helpers';
-import { NovoFieldset } from './FormInterfaces';
-import { NovoLabelService } from '../../services/novo-label-service';
+} from '../../elements/form/FormControls';
+import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
+import { Helpers } from '../Helpers';
+import { NovoFieldset } from '../../elements/form/FormInterfaces';
+import { NovoFormControl } from '../../elements/form/NovoFormControl';
 
-export class NovoFormControl extends FormControl {
-    hidden: boolean;
-    required: boolean;
-    initialValue: any;
-    label: string;
-    readOnly: boolean;
-    validators: any;
-    hasRequiredValidator: boolean;
-    tooltip: string;
-    tooltipPosition: string;
+// TODO: http doesn't need to be injected in getControlForField, toControls, toFieldSets, or getControlOptions;
+// TODO: (cont.) we should just use NG2's http provider for the http request at this level
 
-    constructor(value: any, control: NovoControlConfig) {
-        super(value, control.validators, control.asyncValidators);
-        this.validators = control.validators;
-        this.initialValue = value;
-        this.label = control.label;
-        // Setting read only
-        this.readOnly = control.readOnly;
-        // Set hidden
-        this.hidden = control.hidden;
-        // Set required
-        this.required = control.required;
-        this.hasRequiredValidator = this.required;
-        this.tooltip = control.tooltip;
-        this.tooltipPosition = control.tooltipPosition;
-    }
+// TODO: while using this interface would be prohibitive, the lack of standardization it exposes calls into question
+// TODO: (cont.) how we are passing this data around.
 
-    hide(clearValue: true): void {
-        this.hidden = true;
-        if (clearValue) {
-            this.setValue(null);
-        }
-    }
-
-    show(): void {
-        this.hidden = false;
-    }
-
-    setRequired(req: boolean) {
-        this.required = req;
-
-        // Update validators to have the required
-        if (this.required && !this.hasRequiredValidator) {
-            let validators: any = [...this.validators];
-            validators.push(Validators.required);
-            this.setValidators(validators);
-            this.updateValueAndValidity();
-            this.hasRequiredValidator = this.required;
-        } else if (!this.required && this.hasRequiredValidator) {
-            let validators: any = [...this.validators];
-            validators = validators.filter(val => val !== Validators.required);
-            this.setValidators(validators);
-            this.updateValueAndValidity();
-            this.hasRequiredValidator = this.required;
-        }
-    }
-
-    setValue(value: any, {onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange}: {
-        onlySelf?: boolean,
-        emitEvent?: boolean,
-        emitModelToViewChange?: boolean,
-        emitViewToModelChange?: boolean
-    } = {}) {
-        this.markAsDirty();
-        this.markAsTouched();
-        super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
-    }
-
-    setReadOnly(read: boolean) {
-        this.readOnly = read;
-    }
-
-    markAsInvalid(message: string): void {
-        this.markAsDirty();
-        this.markAsTouched();
-        this.setErrors(Object.assign({}, this.errors, { custom: message }));
-    }
-}
+// interface Field {
+//     value?: any;
+//     defaultValue?: any;
+//     customControl?: any;
+//     customControlConfig?: any;
+//     interactions?: any;
+//
+//     options?: Array<any>;
+//
+//     required?: boolean;
+//     multiValue?: boolean;
+//
+//     sortOrder?: number;
+//     maxLength?: number;
+//
+//     name?: string;
+//     type?: string;
+//     label?: string;
+//     disabled?: string;
+//     readOnly?: string;
+//     hint?: string;
+//     associatedEntity?: string;
+//     optionsType?: string;
+//     dataSpecialization?: string;
+//     description?: string;
+//     tooltip?: string;
+//     tooltipPosition?: string;
+//     dataType?: string;
+//     inputType?: string;
+//     optionsUrl?: string;
+// }
 
 @Injectable()
 export class FormUtils {
-    toFormGroup(controls) {
+    /**
+     * @name toFormGroup
+     * @param controls
+     * @returns { FormGroup }
+     */
+    toFormGroup(controls: Array<any>): FormGroup {
         let group: any = {};
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
-            let formControl = new NovoFormControl(value, control);
-            group[control.key] = formControl;
+            group[control.key] = new NovoFormControl(value, control);
         });
         return new FormGroup(group);
     }
 
-    addControls(formGroup: FormGroup, controls: NovoControlConfig[]) {
+    /**
+     * @name addControls
+     * @param formGroup
+     * @param controls
+     */
+    addControls(formGroup: FormGroup, controls: Array<NovoControlConfig>): void {
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
             let formControl = new NovoFormControl(value, control);
+            // TODO: This should return these controls?
             formGroup.addControl(control.key, formControl);
         });
     }
 
+    /**
+     * @name toFormGroupFromFieldset
+     * @param fieldsets
+     * @returns {FormGroup}
+     */
     toFormGroupFromFieldset(fieldsets: Array<NovoFieldset>) {
-        let controls = [];
+        let controls: Array<NovoFormControl> = [];
         fieldsets.forEach(fieldset => {
             controls.push(...fieldset.controls);
         });
         return this.toFormGroup(controls);
     }
 
-    determineInputType(field) {
+    /**
+     * @name determineInputType
+     * @param field
+     * @returns {string}
+     */
+    determineInputType(field: { dataSpecialization: string, inputType: string, options: string, multiValue: boolean, dataType: string, type: string }): string {
         let type: string;
-        // Determine TYPE because its not just 1 value that determines this.
         if (field.dataSpecialization === 'DATETIME') {
             type = 'datetime';
         } else if (field.dataSpecialization === 'TIME') {
@@ -170,19 +148,17 @@ export class FormUtils {
             type = 'number';
         } else if (field.type === 'file') {
             type = 'file';
-        }
-        // Overrides
-        if (type === 'picker' && field.multiValue) {
-            type = 'chips';
-        } else if (type === 'entitypicker' && field.multiValue) {
-            type = 'entitychips';
-        }
+        }/* else {
+            throw new Error('FormUtils: This field type is unsupported.');
+        }*/
         return type;
     }
 
-    getControlForField(field, http, config, overrides?) {
-        let type = this.determineInputType(field) || field.type;
-        let control;
+    getControlForField(field: any, http, config: { token: string }, overrides?) {
+        // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
+        // TODO: (cont.) as the setter of the field argument
+        let type: string = this.determineInputType(field) || field.type;
+        let control: any;
         let controlConfig: NovoControlConfig = {
             type: type,
             key: field.name,
@@ -197,8 +173,6 @@ export class FormUtils {
             multiple: field.multiValue,
             readOnly: !!field.disabled || !!field.readOnly,
             maxlength: field.maxLength,
-            config: null,
-            options: null,
             interactions: field.interactions,
             dataSpecialization: field.dataSpecialization,
             description: field.description || '',
@@ -207,8 +181,8 @@ export class FormUtils {
             customControl: field.customControl,
             customControlConfig: field.customControlConfig
         };
+        // TODO: getControlOptions should always return the correct format
         let optionsConfig = this.getControlOptions(field, http, config);
-
         if (Array.isArray(optionsConfig) && !(type === 'chips' || type === 'picker')) {
             controlConfig.options = optionsConfig;
         } else if (Array.isArray(optionsConfig) && (type === 'chips' || type === 'picker')) {
@@ -219,6 +193,10 @@ export class FormUtils {
             controlConfig.config = optionsConfig;
         }
 
+        if (type === 'year') {
+            controlConfig.maxlength = 4;
+        }
+        // TODO: Overrides should be an iterable of all properties (potentially a private method)
         let overrideResultsTemplate;
         let overridePreviewTemplate;
         if (overrides && overrides[field.name]) {
@@ -240,6 +218,7 @@ export class FormUtils {
 
         switch (type) {
             case 'entitychips':
+                // TODO: This doesn't belong in this codebase
                 controlConfig.multiple = true;
                 controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
                 controlConfig.config.previewTemplate = overridePreviewTemplate || EntityPickerResult;
@@ -250,6 +229,7 @@ export class FormUtils {
                 control = new PickerControl(controlConfig);
                 break;
             case 'entitypicker':
+                // TODO: This doesn't belong in this codebase
                 controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
                 control = new PickerControl(controlConfig);
                 break;
@@ -272,10 +252,9 @@ export class FormUtils {
             case 'float':
             case 'number':
             case 'year':
+                // TODO: Only types from `determineInputType` should be used in this class
                 if (type === 'money') {
                     type = 'currency';
-                } else if (type === 'year') {
-                    controlConfig.maxlength = 4;
                 }
                 controlConfig.type = type;
                 control = new TextBoxControl(controlConfig);
@@ -317,7 +296,7 @@ export class FormUtils {
         return control;
     }
 
-    toControls(meta, currencyFormat, http, config, overrides?) {
+    toControls(meta, currencyFormat, http, config: { token: string }, overrides?) {
         let controls = [];
         if (meta && meta.fields) {
             let fields = meta.fields;
@@ -336,7 +315,7 @@ export class FormUtils {
         return controls;
     }
 
-    toFieldSets(meta, currencyFormat, http, config, overrides?) {
+    toFieldSets(meta, currencyFormat, http, config: { token: string }, overrides?) {
         let fieldsets: Array<NovoFieldset> = [];
         let ranges = [];
         if (meta && meta.fields) {
@@ -410,8 +389,11 @@ export class FormUtils {
         }
     }
 
-    getControlOptions(field, http, config) {
+    getControlOptions(field: any, http, config: { token: string }): any {
+        // TODO: The token property of config is the only property used; just pass in `token: string`
         if (field.dataType === 'Boolean' && !field.options) {
+            // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
+            // TODO: (cont.) returns `tiles`
             return [
                 { value: false, label: 'No' },
                 { value: true, label: 'Yes' }
@@ -421,6 +403,7 @@ export class FormUtils {
                 field: 'value',
                 format: '$label',
                 options: (query) => {
+                    // TODO: should return Observable
                     return new Promise((resolve, reject) => {
                         if (query && query.length) {
                             http.get(`${field.optionsUrl}?filter=${query || ''}&BhRestToken=${config.token}`)
