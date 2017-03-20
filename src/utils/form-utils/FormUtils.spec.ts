@@ -230,7 +230,7 @@ describe('Utils: FormUtils', () => {
             });
             it('should set the right defaults for address sub-fields', () => {
                 expect(formUtils.getControlForField).toBeDefined();
-                let result = formUtils.getControlForField({ 
+                let result = formUtils.getControlForField({
                     type: 'address',
                     fields: [{
                         name: 'address1',
