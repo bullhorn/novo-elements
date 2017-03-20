@@ -66,5 +66,6 @@ export { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
 export { NovoElementProviders } from './novo-elements.providers';
 // Pipes
 export { PluralPipe } from './src/pipes/plural/Plural';
+export { DecodeURIPipe } from './src/pipes/decode-uri/DecodeURI';
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';
