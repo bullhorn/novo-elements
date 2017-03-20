@@ -1,3 +1,13 @@
+<a name="2.0.160"></a>
+## [2.0.160](https://github.com/bullhorn/novo-elements/compare/v2.0.159...v2.0.160) (2017-03-20)
+
+
+### Features
+
+* **pipe:** Added new pipe for displaying encoded string ([#444](https://github.com/bullhorn/novo-elements/issues/444)) ([df6679f](https://github.com/bullhorn/novo-elements/commit/df6679f))
+
+
+
 <a name="2.0.159"></a>
 ## [2.0.159](https://github.com/bullhorn/novo-elements/compare/v2.0.158...v2.0.159) (2017-03-20)
 
