@@ -2,7 +2,7 @@
 
 ## Usage
 ```
-export { PluralPipe } from 'novo-elements';
+import { PluralPipe } from 'novo-elements';
 ``` 
 ```
 @Component({
