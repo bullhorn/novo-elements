@@ -1,3 +1,19 @@
+<a name="2.0.156"></a>
+## [2.0.156](https://github.com/bullhorn/novo-elements/compare/v2.0.155...v2.0.156) (2017-03-20)
+
+
+### Bug Fixes
+
+* **table:** viewOnly was not being respected for new table rows. Also adding unit tests ([#439](https://github.com/bullhorn/novo-elements/issues/439)) ([6ff3c04](https://github.com/bullhorn/novo-elements/commit/6ff3c04))
+
+
+### Features
+
+* **categorydropdown:** Adding event for category selection, fixes [#420](https://github.com/bullhorn/novo-elements/issues/420) ([253a01c](https://github.com/bullhorn/novo-elements/commit/253a01c))
+* **chips:** Adding styles for corp user chips, fixes [#431](https://github.com/bullhorn/novo-elements/issues/431) ([28c651f](https://github.com/bullhorn/novo-elements/commit/28c651f))
+
+
+
 <a name="2.0.155"></a>
 ## [2.0.155](https://github.com/bullhorn/novo-elements/compare/v2.0.154...v2.0.155) (2017-03-17)
 
