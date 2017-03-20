@@ -4,18 +4,20 @@ import { TestBed, async } from '@angular/core/testing';
 import { NovoFileInputElement } from './FileInput';
 import { NovoLoadingElement } from '../../../loading/Loading';
 import { NovoLabelService } from '../../../../services/novo-label-service';
+import { DecodeURIPipe } from '../../../../pipes/decode-uri/DecodeURI';
 
 describe('Elements: NovoFileInputElement', () => {
     let fixture;
     let component;
 
-    let FakeEvent = () => {};
+    let FakeEvent = () => { };
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 NovoFileInputElement,
-                NovoLoadingElement
+                NovoLoadingElement,
+                DecodeURIPipe
             ],
             providers: [
                 { provide: NovoLabelService, useClass: NovoLabelService }
