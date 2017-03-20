@@ -34,7 +34,7 @@ export class NovoLabelService {
     isRequired = 'is required';
     notValidYear = 'is not a valid year';
     isTooLarge = 'is too large';
-    invalidAddress = 'requires all fields filled out';
+    invalidAddress = 'requires at least one field filled out';
     invalidEmail = 'requires a valid email (ex. abc@123.com)';
     invalidMaxLength = 'Sorry, you have exceeded the maximum character count of for this field';
     maxLengthMet = 'Sorry, you have reached the maximum character count of for this field';
