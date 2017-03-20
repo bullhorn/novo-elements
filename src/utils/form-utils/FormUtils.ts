@@ -154,7 +154,7 @@ export class FormUtils {
         return type;
     }
 
-    getControlForField(field: any, http, config: { token: string }, overrides?) {
+    getControlForField(field: any, http, config: { token?: string, restUrl?: string }, overrides?) {
         // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
         // TODO: (cont.) as the setter of the field argument
         let type: string = this.determineInputType(field) || field.type;
@@ -296,7 +296,7 @@ export class FormUtils {
         return control;
     }
 
-    toControls(meta, currencyFormat, http, config: { token: string }, overrides?) {
+    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string }, overrides?) {
         let controls = [];
         if (meta && meta.fields) {
             let fields = meta.fields;
@@ -315,7 +315,7 @@ export class FormUtils {
         return controls;
     }
 
-    toFieldSets(meta, currencyFormat, http, config: { token: string }, overrides?) {
+    toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string }, overrides?) {
         let fieldsets: Array<NovoFieldset> = [];
         let ranges = [];
         if (meta && meta.fields) {
@@ -389,7 +389,7 @@ export class FormUtils {
         }
     }
 
-    getControlOptions(field: any, http, config: { token: string }): any {
+    getControlOptions(field: any, http, config: { token?: string, restUrl?: string }): any {
         // TODO: The token property of config is the only property used; just pass in `token: string`
         if (field.dataType === 'Boolean' && !field.options) {
             // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
