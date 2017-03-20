@@ -419,16 +419,117 @@ describe('Elements: NovoTableElement', () => {
     });
 
     describe('Method: setTableEdit()', () => {
+        beforeEach(() => {
+            component._dataProvider = {
+                edit: () => {}
+            };
+            component.columns = [
+                {
+                    name: 'name'
+                },
+                {
+                    name: 'id'
+                }
+            ];
+            component._rows = [
+                {
+                    id: 1,
+                    name: 'Jane'
+                },
+                {
+                    id: 2,
+                    name: 'John'
+                }
+            ];
+        });
+
         it('should be defined.', () => {
             expect(component.setTableEdit).toBeDefined();
-            // component.setTableEdit();
+        });
+
+        it('should set the table to edit mode', () => {
+            component.setTableEdit();
+            expect(component.mode).toBe(2);
+        });
+
+        it('should set columns with viewOnly to editing false', () => {
+            component.columns[0].viewOnly = true;
+            component.setTableEdit();
+            expect(component._rows).toEqual([
+                {
+                    id: 1,
+                    name: 'Jane',
+                    _editing: {
+                        id: true,
+                        name: false
+                    }
+                },
+                {
+                    id: 2,
+                    name: 'John',
+                    _editing: {
+                        id: true,
+                        name: false
+                    }
+                }
+            ]);
         });
     });
 
     describe('Method: leaveEditMode()', () => {
+        beforeEach(() => {
+            component._dataProvider = {
+                undo: () => {}
+            };
+            component.columns = [
+                {
+                    name: 'name'
+                },
+                {
+                    name: 'id'
+                }
+            ];
+            component._rows = [
+                {
+                    id: 1,
+                    name: 'Jane'
+                },
+                {
+                    id: 2,
+                    name: 'John'
+                }
+            ];
+        });
+
         it('should be defined.', () => {
             expect(component.leaveEditMode).toBeDefined();
-            // component.leaveEditMode();
+        });
+
+        it('should set the table to view mode', () => {
+            component.leaveEditMode();
+            expect(component.mode).toBe(1);
+        });
+
+        it('should set the table colums editing to false', () => {
+            component.leaveEditMode();
+            expect(component._rows).toEqual([
+                {
+                    id: 1,
+                    name: 'Jane',
+                    _editing: {
+                        id: false,
+                        name: false
+                    }
+                },
+                {
+                    id: 2,
+                    name: 'John',
+                    _editing: {
+                        id: false,
+                        name: false
+                    }
+                }
+            ]);
         });
     });
 
@@ -447,9 +548,18 @@ describe('Elements: NovoTableElement', () => {
     });
 
     describe('Method: cancelEditing()', () => {
+        beforeEach(() => {
+            component._dataProvider = {
+                undo: () => {}
+            };
+        });
         it('should be defined.', () => {
             expect(component.cancelEditing).toBeDefined();
-            // component.cancelEditing();
+        });
+
+        it('should set the table to view mode', () => {
+            component.leaveEditMode();
+            expect(component.mode).toBe(1);
         });
     });
 
@@ -470,7 +580,70 @@ describe('Elements: NovoTableElement', () => {
     describe('Method: toggleLoading()', () => {
         it('should be defined.', () => {
             expect(component.toggleLoading).toBeDefined();
-            component.toggleLoading();
+        });
+
+        it('should set loading to true', () => {
+            component.toggleLoading(true);
+            expect(component.loading).toBe(true);
+        });
+
+        it('should set loading to false', () => {
+            component.toggleLoading(false);
+            expect(component.loading).toBe(false);
+        });
+    });
+
+    describe('Method: isColumnHidden()', () => {
+        it('should be defined.', () => {
+            expect(component.isColumnHidden).toBeDefined();
+        });
+
+        it('should return true if column has hideColumnOnEdit and in editing mode', () => {
+            let column = {name: 'name', hideColumnOnEdit: true};
+            component.mode = 2;
+            expect(component.isColumnHidden(column)).toBe(true);
+        });
+
+        it('should return false if column does not have hideColumnOnEdit and in editing mode', () => {
+            let column = {name: 'name'};
+            component.mode = 2;
+            expect(component.isColumnHidden(column)).toBe(false);
+        });
+
+        it('should return false if column does not have hideColumnOnEdit and not in editing mode', () => {
+            let column = {name: 'name'};
+            component.mode = 1;
+            expect(component.isColumnHidden(column)).toBe(false);
+        });
+
+        it('should return false if column has hideColumnOnEdit and not in editing mode', () => {
+            let column = {name: 'name', hideColumnOnEdit: true};
+            component.mode = 1;
+            expect(component.isColumnHidden(column)).toBe(false);
+        });
+
+        it('should return false if column has hideColumnOnView and in editing mode', () => {
+            let column = {name: 'name', hideColumnOnView: true};
+            component.mode = 2;
+            expect(component.isColumnHidden(column)).toBe(false);
+        });
+
+        it('should return false if column does not have hideColumnOnView and in editing mode', () => {
+            let column = {name: 'name'};
+            component.mode = 2;
+            expect(component.isColumnHidden(column)).toBe(false);
+        });
+
+        it('should return false if column does not have hideColumnOnView and not in editing mode', () => {
+            let column = {name: 'name'};
+            component.mode = 1;
+            expect(component.isColumnHidden(column)).toBe(false);
+        });
+
+        it('should return false if column has hideColumnOnView and not in editing mode', () => {
+            let column = {name: 'name', hideColumnOnView: true};
+            component.mode = 1;
+            expect(component.isColumnHidden(column)).toBe(true);
         });
     });
 });
