@@ -11,7 +11,7 @@ export class NovoFile {
     reader: FileReader = new FileReader();
 
     constructor(file) {
-        this.name = file.name;
+        this.name = `${ encodeURIComponent(file.name || '') }`;
         this.contentType = file.type;
         this.lastModified = file.lastModified;
         this.size = file.size;

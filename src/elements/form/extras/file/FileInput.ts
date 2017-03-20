@@ -18,7 +18,7 @@ const FILE_VALUE_ACCESSOR = {
     template: `
         <div class="file-output-group">
             <div class="file-item" *ngFor="let file of files">
-                <label>{{ file.name }}</label>
+                <label>{{ file.name | decodeURI }}</label>
                 <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
                     <button theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'"></button>
                     <button theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'"></button>
