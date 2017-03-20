@@ -878,7 +878,7 @@ export class NovoTableElement implements DoCheck {
             let control = column.editor || new ReadOnlyControl({ key: column.name });
             control.value = null; //remove copied column value
             row.controls[column.name] = control;
-            row._editing[column.name] = true;
+            row._editing[column.name] = !column.viewOnly;
             rowControls.push(control);
         });
         this.formUtils.setInitialValues(rowControls, defaultValue, false);
@@ -1002,6 +1002,6 @@ export class NovoTableElement implements DoCheck {
      * @memberOf NovoTableElement
      */
     isColumnHidden(column: any): boolean {
-        return this.editing ? column.hideColumnOnEdit : column.hideColumnOnView;
+        return this.editing ? !!column.hideColumnOnEdit : !!column.hideColumnOnView;
     }
 }
