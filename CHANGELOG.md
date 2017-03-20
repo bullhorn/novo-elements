@@ -1,3 +1,13 @@
+<a name="2.0.158"></a>
+## [2.0.158](https://github.com/bullhorn/novo-elements/compare/v2.0.157...v2.0.158) (2017-03-20)
+
+
+### Bug Fixes
+
+* **formutils:** Optional types ([89e5715](https://github.com/bullhorn/novo-elements/commit/89e5715))
+
+
+
 <a name="2.0.157"></a>
 ## [2.0.157](https://github.com/bullhorn/novo-elements/compare/v2.0.156...v2.0.157) (2017-03-20)
 
