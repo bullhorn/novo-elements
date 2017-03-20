@@ -222,10 +222,50 @@ describe('Utils: FormUtils', () => {
             let result = formUtils.getControlForField({ type: 'select' });
             expect(result instanceof SelectControl).toBe(true);
         });
-        it('should return the right component for address', () => {
-            expect(formUtils.getControlForField).toBeDefined();
-            let result = formUtils.getControlForField({ type: 'address' });
-            expect(result instanceof AddressControl).toBe(true);
+        describe('with type: address', () => {
+            it('should return the right component for address', () => {
+                expect(formUtils.getControlForField).toBeDefined();
+                let result = formUtils.getControlForField({ type: 'address' });
+                expect(result instanceof AddressControl).toBe(true);
+            });
+            it('should set the right defaults for address sub-fields', () => {
+                expect(formUtils.getControlForField).toBeDefined();
+                let result = formUtils.getControlForField({ 
+                    type: 'address',
+                    fields: [{
+                        name: 'address1',
+                        defaultValue: '100 Summer St'
+                    },
+                    {
+                        name: 'address2',
+                        defaultValue: 'apt 25'
+                    },
+                    {
+                        name: 'city',
+                        defaultValue: 'Boston'
+                    },
+                    {
+                        name: 'state',
+                        defaultValue: 'MA'
+                    },
+                    {
+                        name: 'zip',
+                        defaultValue: '2222'
+                    },
+                    {
+                        name: 'countryID',
+                        defaultValue: 2260
+                    }]
+                });
+                expect(result.value).toEqual({
+                    address1: '100 Summer St',
+                    address2: 'apt 25',
+                    city: 'Boston',
+                    state: 'MA',
+                    zip: '2222',
+                    countryID: 2260
+                });
+            });
         });
         it('should return the right component for file', () => {
             expect(formUtils.getControlForField).toBeDefined();
