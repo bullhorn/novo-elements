@@ -45,6 +45,21 @@ novo-toast.toast-container > .toast-icon {
     }
 }
 
+novo-toast.toast-container > .close-icon {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 110px;
+    i {
+        display: flex;
+        position: relative;
+        top: 0;
+        font-size: 16px;
+        line-height: 16px;
+    }
+}
+
 novo-toast.toast-container .toast-content {
     float: left;
     width: calc(100% - 47px);

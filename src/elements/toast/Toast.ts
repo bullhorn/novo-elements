@@ -21,6 +21,9 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
                 <ng-content></ng-content>
             </div>
         </div>
+        <div class="close-icon" onclick="close()">
+            <i class="bhi-times"></i>
+        </div>
     `
 })
 export class NovoToastElement implements OnInit, OnChanges {
@@ -29,6 +32,8 @@ export class NovoToastElement implements OnInit, OnChanges {
     @Input() title: string;
     @Input() message: string;
     @Input() hasDialogue: boolean = false;
+    @Input() link: string;
+    @Input() isCloseable: boolean = false;
 
     show: boolean = false;
     animate: boolean = false;
