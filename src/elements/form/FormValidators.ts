@@ -31,21 +31,12 @@ export class FormValidators {
         if (control.value && control.dirty) {
             let valid = true;
             // Address
-            if (!control.value.address1 || control.value.address1.length === 0) {
-                valid = false;
-            }
-            // City
-            if (!control.value.city || control.value.city.length === 0) {
-                valid = false;
-            }
-            // State - No Longer a Required Field
-            // Zip
-            // TODO: may need to change this depending on localization
-            if (!control.value.zip || control.value.zip.length < 5) {
-                valid = false;
-            }
-            // Country
-            if (!control.value.countryName || control.value.countryName.length === 0) {
+            if ((!control.value.address1 || control.value.address1.length === 0) &&
+               (!control.value.city || control.value.city.length === 0) &&
+               (!control.value.state || control.value.state.length === 0) &&
+               (!control.value.address2 || control.value.address2.length === 0) &&
+               (!control.value.zip || control.value.zip.length === 0) &&
+                (!control.value.countryName || control.value.countryName.length === 0))  {
                 valid = false;
             }
             return valid ? null : { 'invalidAddress': true };

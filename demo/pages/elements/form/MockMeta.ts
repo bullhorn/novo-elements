@@ -243,7 +243,8 @@ export const MockMeta = {
                     required: false,
                     readOnly: false,
                     multiValue: false,
-                    hideFromSearch: false
+                    hideFromSearch: false,
+                    defaultValue: '100 Summer St'
                 },
                 {
                     name: 'address2',
@@ -256,7 +257,8 @@ export const MockMeta = {
                     required: false,
                     readOnly: false,
                     multiValue: false,
-                    hideFromSearch: false
+                    hideFromSearch: false,
+                    defaultValue: 'apt 25'
                 },
                 {
                     name: 'city',

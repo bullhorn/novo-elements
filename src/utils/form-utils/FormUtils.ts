@@ -284,6 +284,21 @@ export class FormUtils {
                 control = new SelectControl(controlConfig);
                 break;
             case 'address':
+                if (field.fields && field.fields.length) {
+                    for (let subfield of field.fields) {
+                        if (subfield.defaultValue) {
+                            if (Helpers.isBlank(controlConfig.value)) {
+                                controlConfig.value = {};
+                            }
+                            controlConfig.value[subfield.name] = subfield.defaultValue;
+                        } else if (subfield.name === 'countryID') {
+                            if (Helpers.isBlank(controlConfig.value)) {
+                                controlConfig.value = {};
+                            }
+                            controlConfig.value[subfield.name] = 1;
+                        }
+                    }
+                }
                 control = new AddressControl(controlConfig);
                 break;
             case 'file':
