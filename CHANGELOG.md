@@ -1,3 +1,13 @@
+<a name="2.0.159"></a>
+## [2.0.159](https://github.com/bullhorn/novo-elements/compare/v2.0.158...v2.0.159) (2017-03-20)
+
+
+### Bug Fixes
+
+* **table:** fix for property of undefined on _editing ([#442](https://github.com/bullhorn/novo-elements/issues/442)) ([c0b6e84](https://github.com/bullhorn/novo-elements/commit/c0b6e84))
+
+
+
 <a name="2.0.158"></a>
 ## [2.0.158](https://github.com/bullhorn/novo-elements/compare/v2.0.157...v2.0.158) (2017-03-20)
 
