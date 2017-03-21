@@ -30,6 +30,7 @@ $submission: #747884;
 $sendout: #747884;
 $placement: #0B344F;
 $note: #747884;
+$canvas: #bbbbbb;
 // Color Applications
 $positive: $ocean;
 $success: $grass;
@@ -49,7 +50,7 @@ $empty: #CCCDCC;
 // Analytics Color Map
 $analytics-colors: ( aqua: $aqua, ocean: $ocean, mint: $mint, grass: $grass, sunflower: $sunflower, bittersweet: $bittersweet, grapefruit: $grapefruit, carnation: $carnation, lavender: $lavender);
 // Entity Color Map
-$entity-colors: ( company: $company, candidate: $candidate, navigation: $navigation, lead: $lead, contact: $contact, opportunity: $opportunity, job: $job, submission: $submission, sendout: $sendout, placement: $placement, note: $note, task: $neutral, distributionList: $neutral, credential: $neutral, user: $neutral, corporateuser: $neutral);
+$entity-colors: ( canvas: $canvas, company: $company, candidate: $candidate, navigation: $navigation, lead: $lead, contact: $contact, opportunity: $opportunity, job: $job, submission: $submission, sendout: $sendout, placement: $placement, note: $note, task: $neutral, distributionList: $neutral, credential: $neutral, user: $neutral, corporateuser: $neutral);
 // Generic Color Map
 $colors: ( positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, background: $off-white, black: $black, white: $white, grey: $grey, off-white: $off-white, dark: $dark, light: $light, pulse: $pulse, neutral: $neutral);
 // Loading Dot Color Map
