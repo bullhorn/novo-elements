@@ -33,7 +33,7 @@ export class ColorComponent {
         {
             name: 'neutral',
             variables: ['neutral'],
-            hex: '747884'
+            hex: '4F5361'
         }
     ];
     entityColors:Array<any> = [
@@ -70,7 +70,7 @@ export class ColorComponent {
         {
             name: 'submission',
             variables: ['submission'],
-            hex: '778899'
+            hex: 'A9ADBB'
         },
         {
             name: 'placement',
