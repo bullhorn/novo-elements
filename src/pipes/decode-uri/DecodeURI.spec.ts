@@ -1,7 +1,7 @@
 // APP
 import { DecodeURIPipe } from './DecodeURI';
 
-fdescribe('Pipe: DecodeURIPipe', () => {
+describe('Pipe: DecodeURIPipe', () => {
     let pipe;
 
     beforeEach(() => {
