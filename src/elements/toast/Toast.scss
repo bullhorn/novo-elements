@@ -50,7 +50,7 @@ novo-toast.toast-container > .close-icon {
     justify-content: center;
     align-content: center;
     align-items: center;
-    margin-bottom: 110px;
+    margin-bottom: 75px;
     cursor: pointer;
     i {
         display: flex;
@@ -78,7 +78,6 @@ novo-toast.toast-container .toast-content {
 
     .link-generated {
       width: 100%;
-      padding: 5px;
       position: relative;
       input {
           font-size: 1em;
@@ -95,6 +94,7 @@ novo-toast.toast-container .toast-content {
           box-sizing: content-box;
           transition: all 300ms;
           color: $white;
+          text-overflow: ellipsis;
           &:focus {
               background-color: $positive;
           }
