@@ -24,4 +24,23 @@ describe('Elements: NovoToastElement', () => {
     it('should initialize correctly', () => {
         expect(component).toBeTruthy();
     });
+
+    describe('oninit: ', () => {
+        it('should be defined.', () => {
+            expect(component.ngOnInit).toBeDefined();
+        });
+
+        it('should defaulr.', () => {
+            component.launched = false;
+            component.ngOnInit();
+            expect(component.iconClass).toBeDefined();
+        });
+
+    });
+
+    describe('close: ', () => {
+        it('should be defined.', () => {
+            expect(component.close).toBeDefined();
+        });
+    });
 });
