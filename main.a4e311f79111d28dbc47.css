@@ -1456,7 +1456,7 @@ i {
       background: #BB5566; }
     i[theme][theme="contained"].submission {
       color: #ffffff;
-      background: #747884; }
+      background: #a9adbb; }
     i[theme][theme="contained"].sendout {
       color: #ffffff;
       background: #747884; }
@@ -1468,19 +1468,19 @@ i {
       background: #747884; }
     i[theme][theme="contained"].task {
       color: #ffffff;
-      background: #747884; }
+      background: #4f5361; }
     i[theme][theme="contained"].distributionList {
       color: #ffffff;
-      background: #747884; }
+      background: #4f5361; }
     i[theme][theme="contained"].credential {
       color: #ffffff;
-      background: #747884; }
+      background: #4f5361; }
     i[theme][theme="contained"].user {
       color: #ffffff;
-      background: #747884; }
+      background: #4f5361; }
     i[theme][theme="contained"].corporateuser {
       color: #ffffff;
-      background: #747884; }
+      background: #4f5361; }
     i[theme][theme="contained"].aqua {
       color: #ffffff;
       background: #3BAFDA; }
@@ -1530,7 +1530,7 @@ i {
     color: #BB5566;
     background: transparent; }
   i[theme][theme="entity"].submission {
-    color: #747884;
+    color: #a9adbb;
     background: transparent; }
   i[theme][theme="entity"].sendout {
     color: #747884;
@@ -1542,19 +1542,19 @@ i {
     color: #747884;
     background: transparent; }
   i[theme][theme="entity"].task {
-    color: #747884;
+    color: #4f5361;
     background: transparent; }
   i[theme][theme="entity"].distributionList {
-    color: #747884;
+    color: #4f5361;
     background: transparent; }
   i[theme][theme="entity"].credential {
-    color: #747884;
+    color: #4f5361;
     background: transparent; }
   i[theme][theme="entity"].user {
-    color: #747884;
+    color: #4f5361;
     background: transparent; }
   i[theme][theme="entity"].corporateuser {
-    color: #747884;
+    color: #4f5361;
     background: transparent; }
 
 figcaption i,
@@ -1964,11 +1964,11 @@ button[theme] {
       button[theme][theme="primary"][color="pulse"]:active {
         background: #28a5d4; }
     button[theme][theme="primary"][color="neutral"] {
-      background: #747884; }
+      background: #4f5361; }
       button[theme][theme="primary"][color="neutral"]:hover {
-        background: #8f929c; }
+        background: #666b7d; }
       button[theme][theme="primary"][color="neutral"]:active {
-        background: #686c76; }
+        background: #444753; }
     button[theme][theme="primary"][color="white"] {
       background: #ffffff;
       color: #4A89DC; }
@@ -2207,13 +2207,13 @@ button[theme] {
           button[theme][theme="dialogue"][color="pulse"] i.loading svg .spinner {
             fill: #3BAFDA; }
     button[theme][theme="dialogue"][color="neutral"] {
-      color: #747884; }
+      color: #4f5361; }
       button[theme][theme="dialogue"][color="neutral"] i {
-        color: #747884; }
+        color: #4f5361; }
         button[theme][theme="dialogue"][color="neutral"] i.loading {
           margin-left: 10px; }
           button[theme][theme="dialogue"][color="neutral"] i.loading svg .spinner {
-            fill: #747884; }
+            fill: #4f5361; }
     button[theme][theme="dialogue"][color="aqua"] {
       color: #3BAFDA; }
       button[theme][theme="dialogue"][color="aqua"] i {
@@ -2334,7 +2334,7 @@ button[theme] {
       background: #3BAFDA; }
     button[theme][theme="standard"][color="neutral"] {
       color: #ffffff;
-      background: #747884; }
+      background: #4f5361; }
     button[theme][theme="standard"][color="aqua"] {
       color: #ffffff;
       background: #3BAFDA; }
@@ -2435,6 +2435,25 @@ novo-toast.toast-container > .toast-icon {
     font-size: 16px;
     line-height: 16px; }
 
+novo-toast.toast-container > .close-icon {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  margin-bottom: 75px;
+  cursor: pointer; }
+  novo-toast.toast-container > .close-icon i {
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    top: 0;
+    font-size: 16px;
+    line-height: 16px; }
+
 novo-toast.toast-container .toast-content {
   float: left;
   width: calc(100% - 47px);
@@ -2447,6 +2466,27 @@ novo-toast.toast-container .toast-content {
   novo-toast.toast-container .toast-content p {
     position: relative;
     top: -1px; }
+  novo-toast.toast-container .toast-content .link-generated {
+    width: 100%;
+    position: relative; }
+    novo-toast.toast-container .toast-content .link-generated input {
+      font-size: 1em;
+      background: transparent !important;
+      border: none;
+      border-bottom: 1px solid #EAEAEA;
+      border-radius: 0;
+      outline: none;
+      height: 2rem;
+      width: 95%;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+      box-sizing: content-box;
+      transition: all 300ms;
+      color: #ffffff;
+      text-overflow: ellipsis; }
+      novo-toast.toast-container .toast-content .link-generated input:focus {
+        background-color: #4A89DC; }
 
 novo-toast .toast-content > h5 {
   display: block;
@@ -2539,7 +2579,7 @@ novo-toast.job {
   background: #BB5566; }
 
 novo-toast.submission {
-  background: #747884; }
+  background: #a9adbb; }
 
 novo-toast.sendout {
   background: #747884; }
@@ -2551,25 +2591,25 @@ novo-toast.note {
   background: #747884; }
 
 novo-toast.task {
-  background: #747884; }
+  background: #4f5361; }
 
 novo-toast.distributionList {
-  background: #747884; }
+  background: #4f5361; }
 
 novo-toast.credential {
-  background: #747884; }
+  background: #4f5361; }
 
 novo-toast.user {
-  background: #747884; }
+  background: #4f5361; }
 
 novo-toast.corporateuser {
-  background: #747884; }
+  background: #4f5361; }
 
 novo-toast.text {
   background: #3D464D; }
 
 novo-toast.neutral {
-  background: #747884; }
+  background: #4f5361; }
 
 novo-toast.background {
   background: #f4f4f4; }
@@ -5356,7 +5396,7 @@ entity-chips chip span.corporateuser {
   chips chip span.user i, multi-picker chip span.user i, chips chip span.corporateuser i, multi-picker chip span.corporateuser i,
   entity-chips chip span.user i,
   entity-chips chip span.corporateuser i {
-    color: #747884; }
+    color: #4f5361; }
 
 chips picker-results, multi-picker picker-results,
 entity-chips picker-results {
@@ -7674,10 +7714,10 @@ header.novo-header[theme="job"] {
     background: #BB5566; }
 
 header.novo-header[theme="submission"] {
-  background: #747884;
+  background: #a9adbb;
   color: #fff; }
   header.novo-header[theme="submission"] > section.primary {
-    background: #747884; }
+    background: #a9adbb; }
 
 header.novo-header[theme="sendout"] {
   background: #747884;
@@ -7698,34 +7738,34 @@ header.novo-header[theme="note"] {
     background: #747884; }
 
 header.novo-header[theme="task"] {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   header.novo-header[theme="task"] > section.primary {
-    background: #747884; }
+    background: #4f5361; }
 
 header.novo-header[theme="distributionList"] {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   header.novo-header[theme="distributionList"] > section.primary {
-    background: #747884; }
+    background: #4f5361; }
 
 header.novo-header[theme="credential"] {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   header.novo-header[theme="credential"] > section.primary {
-    background: #747884; }
+    background: #4f5361; }
 
 header.novo-header[theme="user"] {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   header.novo-header[theme="user"] > section.primary {
-    background: #747884; }
+    background: #4f5361; }
 
 header.novo-header[theme="corporateuser"] {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   header.novo-header[theme="corporateuser"] > section.primary {
-    background: #747884; }
+    background: #4f5361; }
 
 header.novo-header[theme="positive"] {
   background: #4A89DC;
@@ -7800,10 +7840,10 @@ header.novo-header[theme="pulse"] {
     background: #3BAFDA; }
 
 header.novo-header[theme="neutral"] {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   header.novo-header[theme="neutral"] > section.primary {
-    background: #747884; }
+    background: #4f5361; }
 
 header.novo-header[theme="light"], header.novo-header[theme="off-white"], header.novo-header[theme="white"] {
   color: #3D464D; }
@@ -7888,7 +7928,7 @@ novo-list {
     novo-list[theme="job"] novo-list-item item-content > * {
       color: rgba(255, 255, 255, 0.65); }
   novo-list[theme="submission"] novo-list-item {
-    background: #747884;
+    background: #a9adbb;
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     novo-list[theme="submission"] novo-list-item i {
@@ -7928,7 +7968,7 @@ novo-list {
     novo-list[theme="note"] novo-list-item item-content > * {
       color: rgba(255, 255, 255, 0.65); }
   novo-list[theme="task"] novo-list-item {
-    background: #747884;
+    background: #4f5361;
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     novo-list[theme="task"] novo-list-item i {
@@ -7938,7 +7978,7 @@ novo-list {
     novo-list[theme="task"] novo-list-item item-content > * {
       color: rgba(255, 255, 255, 0.65); }
   novo-list[theme="distributionList"] novo-list-item {
-    background: #747884;
+    background: #4f5361;
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     novo-list[theme="distributionList"] novo-list-item i {
@@ -7948,7 +7988,7 @@ novo-list {
     novo-list[theme="distributionList"] novo-list-item item-content > * {
       color: rgba(255, 255, 255, 0.65); }
   novo-list[theme="credential"] novo-list-item {
-    background: #747884;
+    background: #4f5361;
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     novo-list[theme="credential"] novo-list-item i {
@@ -7958,7 +7998,7 @@ novo-list {
     novo-list[theme="credential"] novo-list-item item-content > * {
       color: rgba(255, 255, 255, 0.65); }
   novo-list[theme="user"] novo-list-item {
-    background: #747884;
+    background: #4f5361;
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     novo-list[theme="user"] novo-list-item i {
@@ -7968,7 +8008,7 @@ novo-list {
     novo-list[theme="user"] novo-list-item item-content > * {
       color: rgba(255, 255, 255, 0.65); }
   novo-list[theme="corporateuser"] novo-list-item {
-    background: #747884;
+    background: #4f5361;
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     novo-list[theme="corporateuser"] novo-list-item i {
@@ -8098,7 +8138,7 @@ novo-list {
     novo-list[theme="pulse"] novo-list-item item-content > * {
       color: rgba(255, 255, 255, 0.65); }
   novo-list[theme="neutral"] novo-list-item {
-    background: #747884;
+    background: #4f5361;
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     novo-list[theme="neutral"] novo-list-item i {
@@ -8148,7 +8188,7 @@ novo-list-item {
       novo-list-item item-header item-avatar i.job {
         background: #BB5566; }
       novo-list-item item-header item-avatar i.submission {
-        background: #747884; }
+        background: #a9adbb; }
       novo-list-item item-header item-avatar i.sendout {
         background: #747884; }
       novo-list-item item-header item-avatar i.placement {
@@ -8156,15 +8196,15 @@ novo-list-item {
       novo-list-item item-header item-avatar i.note {
         background: #747884; }
       novo-list-item item-header item-avatar i.task {
-        background: #747884; }
+        background: #4f5361; }
       novo-list-item item-header item-avatar i.distributionList {
-        background: #747884; }
+        background: #4f5361; }
       novo-list-item item-header item-avatar i.credential {
-        background: #747884; }
+        background: #4f5361; }
       novo-list-item item-header item-avatar i.user {
-        background: #747884; }
+        background: #4f5361; }
       novo-list-item item-header item-avatar i.corporateuser {
-        background: #747884; }
+        background: #4f5361; }
     novo-list-item item-header item-title {
       -ms-flex: 2 0 0;
           flex: 2 0 0; }
@@ -8221,7 +8261,7 @@ novo-list-item {
     novo-list-item item-content i.job {
       color: #BB5566; }
     novo-list-item item-content i.submission {
-      color: #747884; }
+      color: #a9adbb; }
     novo-list-item item-content i.sendout {
       color: #747884; }
     novo-list-item item-content i.placement {
@@ -8229,15 +8269,15 @@ novo-list-item {
     novo-list-item item-content i.note {
       color: #747884; }
     novo-list-item item-content i.task {
-      color: #747884; }
+      color: #4f5361; }
     novo-list-item item-content i.distributionList {
-      color: #747884; }
+      color: #4f5361; }
     novo-list-item item-content i.credential {
-      color: #747884; }
+      color: #4f5361; }
     novo-list-item item-content i.user {
-      color: #747884; }
+      color: #4f5361; }
     novo-list-item item-content i.corporateuser {
-      color: #747884; }
+      color: #4f5361; }
     novo-list-item item-content.vertical-list {
       -ms-flex-direction: column;
           flex-direction: column; }
@@ -8880,7 +8920,7 @@ novo-table[theme="job"] > header {
         color: #ffffff !important; }
 
 novo-table[theme="submission"] > header {
-  background: #747884;
+  background: #a9adbb;
   color: #fff; }
   novo-table[theme="submission"] > header novo-pagination {
     background: rgba(0, 0, 0, 0.15); }
@@ -8952,7 +8992,7 @@ novo-table[theme="note"] > header {
         color: #ffffff !important; }
 
 novo-table[theme="task"] > header {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   novo-table[theme="task"] > header novo-pagination {
     background: rgba(0, 0, 0, 0.15); }
@@ -8970,7 +9010,7 @@ novo-table[theme="task"] > header {
         color: #ffffff !important; }
 
 novo-table[theme="distributionList"] > header {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   novo-table[theme="distributionList"] > header novo-pagination {
     background: rgba(0, 0, 0, 0.15); }
@@ -8988,7 +9028,7 @@ novo-table[theme="distributionList"] > header {
         color: #ffffff !important; }
 
 novo-table[theme="credential"] > header {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   novo-table[theme="credential"] > header novo-pagination {
     background: rgba(0, 0, 0, 0.15); }
@@ -9006,7 +9046,7 @@ novo-table[theme="credential"] > header {
         color: #ffffff !important; }
 
 novo-table[theme="user"] > header {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   novo-table[theme="user"] > header novo-pagination {
     background: rgba(0, 0, 0, 0.15); }
@@ -9024,7 +9064,7 @@ novo-table[theme="user"] > header {
         color: #ffffff !important; }
 
 novo-table[theme="corporateuser"] > header {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   novo-table[theme="corporateuser"] > header novo-pagination {
     background: rgba(0, 0, 0, 0.15); }
@@ -9258,7 +9298,7 @@ novo-table[theme="pulse"] > header {
         color: #ffffff !important; }
 
 novo-table[theme="neutral"] > header {
-  background: #747884;
+  background: #4f5361;
   color: #fff; }
   novo-table[theme="neutral"] > header novo-pagination {
     background: rgba(0, 0, 0, 0.15); }
@@ -13030,104 +13070,104 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 38px;
-      height: 38px; }
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 28px;
-      height: 28px; }
+      width: 36px;
+      height: 36px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
       width: 40px;
       height: 40px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 34px;
-      height: 34px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 26px;
-      height: 26px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 36px;
-      height: 36px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
-      width: 31px;
-      height: 31px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-submission {
-      background: #747884;
+      background: #a9adbb;
       width: 44px;
       height: 44px; }
     color header .background-boxes .bb-sendout {
       background: #747884;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-task {
-      background: #747884;
-      width: 26px;
-      height: 26px; }
-    color header .background-boxes .bb-distributionList {
-      background: #747884;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-credential {
-      background: #747884;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-user {
-      background: #747884;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-corporateuser {
-      background: #747884;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 36px;
-      height: 36px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-carnation {
-      background: #D770AD;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-lavender {
-      background: #967ADC;
       width: 32px;
       height: 32px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-task {
+      background: #4f5361;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-distributionList {
+      background: #4f5361;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-credential {
+      background: #4f5361;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-user {
+      background: #4f5361;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-corporateuser {
+      background: #4f5361;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 26px;
+      height: 26px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-carnation {
+      background: #D770AD;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-lavender {
+      background: #967ADC;
+      width: 36px;
+      height: 36px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -13200,7 +13240,7 @@ color article.color-blocks {
     color article.color-blocks .block.text-cb .color-square {
       background: #3D464D; }
     color article.color-blocks .block.neutral-cb .color-square {
-      background: #747884; }
+      background: #4f5361; }
     color article.color-blocks .block.background-cb {
       color: #3D464D; }
       color article.color-blocks .block.background-cb h3:after {
@@ -13232,7 +13272,7 @@ color article.color-blocks {
     color article.color-blocks .block.job-cb .color-square {
       background: #BB5566; }
     color article.color-blocks .block.submission-cb .color-square {
-      background: #747884; }
+      background: #a9adbb; }
     color article.color-blocks .block.sendout-cb .color-square {
       background: #747884; }
     color article.color-blocks .block.placement-cb .color-square {
@@ -13240,15 +13280,15 @@ color article.color-blocks {
     color article.color-blocks .block.note-cb .color-square {
       background: #747884; }
     color article.color-blocks .block.task-cb .color-square {
-      background: #747884; }
+      background: #4f5361; }
     color article.color-blocks .block.distributionList-cb .color-square {
-      background: #747884; }
+      background: #4f5361; }
     color article.color-blocks .block.credential-cb .color-square {
-      background: #747884; }
+      background: #4f5361; }
     color article.color-blocks .block.user-cb .color-square {
-      background: #747884; }
+      background: #4f5361; }
     color article.color-blocks .block.corporateuser-cb .color-square {
-      background: #747884; }
+      background: #4f5361; }
     color article.color-blocks .block.aqua-cb .color-square {
       background: #3BAFDA; }
     color article.color-blocks .block.ocean-cb .color-square {
@@ -13413,13 +13453,13 @@ color > header.job {
     background: #BB5566 !important; }
 
 color > header.submission {
-  background: #747884 !important; }
+  background: #a9adbb !important; }
   color > header.submission h1,
   color > header.submission h2,
   color > header.submission p {
     color: #fff; }
   color > header.submission .background-boxes {
-    background: #747884 !important; }
+    background: #a9adbb !important; }
 
 color > header.sendout {
   background: #747884 !important; }
@@ -13449,49 +13489,49 @@ color > header.note {
     background: #747884 !important; }
 
 color > header.task {
-  background: #747884 !important; }
+  background: #4f5361 !important; }
   color > header.task h1,
   color > header.task h2,
   color > header.task p {
     color: #fff; }
   color > header.task .background-boxes {
-    background: #747884 !important; }
+    background: #4f5361 !important; }
 
 color > header.distributionList {
-  background: #747884 !important; }
+  background: #4f5361 !important; }
   color > header.distributionList h1,
   color > header.distributionList h2,
   color > header.distributionList p {
     color: #fff; }
   color > header.distributionList .background-boxes {
-    background: #747884 !important; }
+    background: #4f5361 !important; }
 
 color > header.credential {
-  background: #747884 !important; }
+  background: #4f5361 !important; }
   color > header.credential h1,
   color > header.credential h2,
   color > header.credential p {
     color: #fff; }
   color > header.credential .background-boxes {
-    background: #747884 !important; }
+    background: #4f5361 !important; }
 
 color > header.user {
-  background: #747884 !important; }
+  background: #4f5361 !important; }
   color > header.user h1,
   color > header.user h2,
   color > header.user p {
     color: #fff; }
   color > header.user .background-boxes {
-    background: #747884 !important; }
+    background: #4f5361 !important; }
 
 color > header.corporateuser {
-  background: #747884 !important; }
+  background: #4f5361 !important; }
   color > header.corporateuser h1,
   color > header.corporateuser h2,
   color > header.corporateuser p {
     color: #fff; }
   color > header.corporateuser .background-boxes {
-    background: #747884 !important; }
+    background: #4f5361 !important; }
 
 color > header.background {
   background: #f4f4f4; }
@@ -14103,4 +14143,4 @@ popover-demo .example.popover-demo {
 .pipes-demo {
   padding-left: 5px; }
 
-/*# sourceMappingURL=main.7201aff7c5531a63dec9.bundle.map*/
+/*# sourceMappingURL=main.a4e311f79111d28dbc47.bundle.map*/
