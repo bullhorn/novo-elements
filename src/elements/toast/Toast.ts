@@ -8,7 +8,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
         '[class.show]': 'show',
         '[class.animate]': 'animate',
         '[class.embedded]': 'embedded',
-        '(click)': 'clickHandler($event)'
+        '(click)': '!isCloseable && clickHandler($event)'
     },
     template: `
         <div class="toast-icon">
@@ -17,14 +17,14 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
         <div class="toast-content">
             <h5 *ngIf="title">{{title}}</h5>
             <p *ngIf="message" [class.message-only]="!title">{{message}}</p>
-            <div class="link-generated">
-                <input *ngIf="link" type="text" [value]="link" onfocus="this.select();"/>
+            <div *ngIf="link" class="link-generated">
+                <input type="text" [value]="link" onfocus="this.select();"/>
             </div>
             <div class="dialogue">
                 <ng-content></ng-content>
             </div>
         </div>
-        <div class="close-icon" onclick="close()">
+        <div class="close-icon" *ngIf="isCloseable" (click)="close($event)">
             <i class="bhi-times"></i>
         </div>
     `
@@ -69,12 +69,22 @@ export class NovoToastElement implements OnInit, OnChanges {
     }
 
     clickHandler(event) {
+        if (!this.isCloseable) {
         if (event) {
             event.stopPropagation();
             event.preventDefault();
         }
-        if (this.parent && !this.isCloseable) {
+        if (this.parent) {
             this.parent.hide(this);
         }
+      }
+    }
+
+    close(event) {
+      if (event) {
+          event.stopPropagation();
+          event.preventDefault();
+      }
+          this.parent.hide(this);
     }
 }
