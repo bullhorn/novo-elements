@@ -17,6 +17,9 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
         <div class="toast-content">
             <h5 *ngIf="title">{{title}}</h5>
             <p *ngIf="message" [class.message-only]="!title">{{message}}</p>
+            <div class="link-generated">
+                <input *ngIf="link" type="text" [value]="link" onfocus="this.select();"/>
+            </div>
             <div class="dialogue">
                 <ng-content></ng-content>
             </div>
@@ -70,7 +73,7 @@ export class NovoToastElement implements OnInit, OnChanges {
             event.stopPropagation();
             event.preventDefault();
         }
-        if (this.parent) {
+        if (this.parent && !this.isCloseable) {
             this.parent.hide(this);
         }
     }
