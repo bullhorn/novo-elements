@@ -1,21 +1,31 @@
+// NG2
+import { TestBed, async } from '@angular/core/testing';
+// App
 import { CardElement } from './Card';
-import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
+import { NovoLoadingElement } from '../loading/Loading';
+import { TooltipDirective } from '../tooltip/Tooltip';
+import { NovoLabelService } from '../../services/novo-label-service';
 
-describe('Element: Card', () => {
+describe('Elements: CardElement', () => {
+    let fixture;
     let component;
 
-    beforeEach(() => {
-        addProviders([
-            CardElement,
-            APP_TEST_PROVIDERS
-        ]);
-    });
-
-    beforeEach(inject([CardElement], _component => {
-        component = _component;
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                CardElement,
+                NovoLoadingElement,
+                TooltipDirective
+            ],
+            providers: [
+                { provide: NovoLabelService, useClass: NovoLabelService }
+            ]
+        }).compileComponents();
+        fixture = TestBed.createComponent(CardElement);
+        component = fixture.debugElement.componentInstance;
     }));
 
-    describe('Function: ngOnInit()', () => {
+    describe('Method: ngOnInit()', () => {
         it('should initialize correctly', () => {
             expect(component).toBeTruthy();
             expect(component.ngOnInit).toBeDefined();
@@ -25,7 +35,7 @@ describe('Element: Card', () => {
         });
     });
 
-    describe('Function: ngOnChanges()', () => {
+    describe('Method: ngOnChanges()', () => {
         it('should be defined', () => {
             expect(component.ngOnChanges).toBeDefined();
         });
@@ -61,7 +71,7 @@ describe('Element: Card', () => {
         });
     });
 
-    describe('Function: toggleClose()', () => {
+    describe('Method: toggleClose()', () => {
         it('should emit close event', () => {
             spyOn(component.onClose, 'next');
             component.toggleClose();
@@ -79,7 +89,7 @@ describe('Element: Card', () => {
         });
     });
 
-    describe('Function: toggleRefresh()', () => {
+    describe('Method: toggleRefresh()', () => {
         it('should emit close event', () => {
             spyOn(component.onRefresh, 'next');
             component.toggleRefresh();

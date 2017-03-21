@@ -1,6 +1,8 @@
 // NG2
 import { Component, EventEmitter, forwardRef, ElementRef, ViewChild, ViewContainerRef, Input, Output, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+// Vendor
+import { Observable } from 'rxjs/Rx';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { KeyCodes } from './../../utils/key-codes/KeyCodes';
@@ -96,9 +98,18 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
         }
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || QuickNoteResults;
+        // Get all distinct key up events from the input and only fire if long enough and distinct
+        let input = this.element.nativeElement.querySelector('textarea');
+        const observer = Observable.fromEvent(input, 'keyup')
+            .map((e: any) => e.target.value)
+            .debounceTime(250)
+            .distinctUntilChanged();
+        observer.subscribe(
+            term => this.showResults(term),
+            err => this.hideResults());
     }
 
-    onKeyPress(event) {
+    onKeyPress(event: KeyboardEvent) {
         // Go over all defined triggers
         let triggers = this.config.triggers || {};
         Object.keys(triggers).forEach(key => {
@@ -126,7 +137,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
      * It made sense to filter these out in the controller instead of using multiple listeners on the HTML element
      * because the quantity of different behaviors would make a messy element.
      */
-    onKeyUp(event) {
+    onKeyUp(event: KeyboardEvent) {
         // Navigation inside the results
         if (this.quickNoteResults) {
             if (event.keyCode === KeyCodes.ESC) {
@@ -148,22 +159,6 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
                 this.quickNoteResults.instance.selectActiveMatch();
                 return false;
             }
-        }
-
-        let timer = null;
-        clearTimeout(timer);
-        if (this.isTagging) {
-            timer = setTimeout(() => {
-                let searchQuery;
-                searchQuery = this.extractSearchQuery();
-                if (searchQuery.length) {
-                    this.searchTerm = searchQuery;
-                    this.showResults();
-                } else {
-                    this.searchTerm = null;
-                    this.hideResults();
-                }
-            }, 250);
         }
         return true;
     }
@@ -256,19 +251,28 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
      * @description This method creates an instance of the results (called popup) and adds all the bindings to that
      * instance.
      */
-    showResults() {
-        this.toggleActive(null, true);
-        // Update Matches
-        if (this.quickNoteResults) {
-            // Update existing list or create the DOM element
-            this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
-        } else {
-            this.quickNoteResults = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
-            this.quickNoteResults.instance.parent = this;
-            this.quickNoteResults.instance.config = this.config;
-            this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
+    showResults(term: string) {
+        if (this.isTagging) {
+            let searchQuery;
+            searchQuery = this.extractSearchQuery();
+            if (searchQuery.length) {
+                this.searchTerm = searchQuery;
+                // Update Matches
+                if (this.quickNoteResults) {
+                    // Update existing list or create the DOM element
+                    this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
+                } else {
+                    this.quickNoteResults = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
+                    this.quickNoteResults.instance.parent = this;
+                    this.quickNoteResults.instance.config = this.config;
+                    this.quickNoteResults.instance.term = { searchTerm: this.searchTerm, taggingMode: this.taggingMode };
+                }
+                this.positionResultsDropdown();
+            } else {
+                this.hideResults();
+            }
+            this.toggleActive(null, true);
         }
-        this.positionResultsDropdown();
     }
 
     /**
@@ -278,6 +282,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
      */
     hideResults() {
         this.isTagging = false;
+        this.searchTerm = null;
         if (this.quickNoteResults) {
             this.quickNoteResults.destroy();
             this.quickNoteResults = null;
@@ -339,10 +344,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
                 references: {}
             };
         }
-        // Update formatted note for the initial value
-        if (!this.basicNote) {
-            this.updateFormattedNote(this.model.note);
-        }
+        this.updateFormattedNote(this.model.note);
     }
 
     registerOnChange(fn: Function): void {
@@ -351,27 +353,6 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
 
     registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
-    }
-
-    /**
-     * Positions the results dropdown based on the location of the cursor in the text field
-     */
-    private positionResultsDropdown(): void {
-        const DROPDOWN_OFFSET: number = 30; // The distance between the cursor and the dropdown
-        const MIN_MARGIN_TOP: number = DROPDOWN_OFFSET;
-        const MAX_MARGIN_TOP: number = this.overlay.nativeElement.clientHeight;
-
-        let textAreaCoordinates = this.getCaretCoordinates(this.textArea.nativeElement);
-
-        // Take out the scroll so that the dropdown operates properly even if the text area is scrolled down
-        let marginTop: number = textAreaCoordinates.top - this.overlay.nativeElement.scrollTop + DROPDOWN_OFFSET;
-
-        // Check that the margin is within the visible bounds
-        marginTop = Math.max(marginTop, MIN_MARGIN_TOP);
-        marginTop = Math.min(marginTop, MAX_MARGIN_TOP);
-
-        // Set the margin-top of the dropdown
-        this.quickNoteResults.instance.element.nativeElement.style.setProperty('margin-top', marginTop + 'px');
     }
 
     /**
@@ -473,5 +454,26 @@ export class QuickNoteElement extends OutsideClick implements OnInit {
         document.body.removeChild(div);
 
         return coordinates;
+    }
+
+    /**
+     * Positions the results dropdown based on the location of the cursor in the text field
+     */
+    private positionResultsDropdown(): void {
+        const DROPDOWN_OFFSET: number = 30; // The distance between the cursor and the dropdown
+        const MIN_MARGIN_TOP: number = DROPDOWN_OFFSET;
+        const MAX_MARGIN_TOP: number = this.overlay.nativeElement.clientHeight;
+
+        let textAreaCoordinates = this.getCaretCoordinates(this.textArea.nativeElement);
+
+        // Take out the scroll so that the dropdown operates properly even if the text area is scrolled down
+        let marginTop: number = textAreaCoordinates.top - this.overlay.nativeElement.scrollTop + DROPDOWN_OFFSET;
+
+        // Check that the margin is within the visible bounds
+        marginTop = Math.max(marginTop, MIN_MARGIN_TOP);
+        marginTop = Math.min(marginTop, MAX_MARGIN_TOP);
+
+        // Set the margin-top of the dropdown
+        this.quickNoteResults.instance.element.nativeElement.style.setProperty('margin-top', marginTop + 'px');
     }
 }

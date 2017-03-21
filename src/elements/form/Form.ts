@@ -1,7 +1,7 @@
 // NG2
 import { Component, Input, OnInit } from '@angular/core';
 // APP
-import { NovoFormGroup } from './DynamicForm';
+import { NovoFormGroup } from './FormInterfaces';
 
 @Component({
     selector: 'novo-form',
@@ -18,14 +18,12 @@ import { NovoFormGroup } from './DynamicForm';
     `
 })
 export class NovoFormElement implements OnInit {
-    @Input() form: NovoFormGroup;
+    @Input() form: NovoFormGroup = {};
     @Input() layout: string;
     @Input() hideHeader: boolean = false;
 
     ngOnInit() {
-        if (this.form) {
-            this.form.layout = this.layout;
-        }
+        this.form.layout = this.layout;
     }
 
     get value() {

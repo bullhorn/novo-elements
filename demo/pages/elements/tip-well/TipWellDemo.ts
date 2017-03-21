@@ -40,10 +40,10 @@ const template = `
     template: template
 })
 export class TipWellDemoComponent {
-    private TipWellDemoTpl:string = TipWellDemoTpl;
-    private TipWellNoButtonDemoTpl:string = TipWellNoButtonDemoTpl;
-    private TipWellIconDemoTpl:string = TipWellIconDemoTpl;
-    private demoTip:string = 'Sed sodales ligula et fermentum bibendum. Aliquam tincidunt sagittis leo eget auctor. Fusce eu sagittis metus, ut viverra magna. Mauris mollis nisl nec libero tincidunt posuere.';
+    private TipWellDemoTpl: string = TipWellDemoTpl;
+    private TipWellNoButtonDemoTpl: string = TipWellNoButtonDemoTpl;
+    private TipWellIconDemoTpl: string = TipWellIconDemoTpl;
+    private demoTip: string = 'Sed sodales ligula et fermentum bibendum. Aliquam tincidunt sagittis leo eget auctor. Fusce eu sagittis metus, ut viverra magna. Mauris mollis nisl nec libero tincidunt posuere.';
 
     clearLocalStorage() {
         localStorage.removeItem('novo-tw_Demo');

@@ -230,6 +230,7 @@ export const MockMeta = {
             readOnly: false,
             multiValue: false,
             hideFromSearch: true,
+            tooltip: 'Address Block',
             fields: [
                 {
                     name: 'address1',
@@ -242,7 +243,8 @@ export const MockMeta = {
                     required: false,
                     readOnly: false,
                     multiValue: false,
-                    hideFromSearch: false
+                    hideFromSearch: false,
+                    defaultValue: '100 Summer St'
                 },
                 {
                     name: 'address2',
@@ -255,7 +257,8 @@ export const MockMeta = {
                     required: false,
                     readOnly: false,
                     multiValue: false,
-                    hideFromSearch: false
+                    hideFromSearch: false,
+                    defaultValue: 'apt 25'
                 },
                 {
                     name: 'city',
@@ -400,6 +403,11 @@ export const MockMeta = {
             sortOrder: 9010,
             maxLength: 150,
             description: 'Comments, Please'
+        }, {
+            name: 'customfield',
+            label: 'Custom Component',
+            required: true,
+            description: 'This is a custom component you can use instead'
         }
     ]
 };

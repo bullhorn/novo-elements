@@ -1,34 +1,34 @@
 <div drawer [position]="'left'" (onDrawerToggle)="drawerToggled($event)">
     <button theme="secondary" drawerToggle [disabled]="disabled">Show Left</button>
-    <div class="drawer-content">
+    <div class="drawer-content" drawerContent>
         <h4>I am a left drawer!</h4>
     </div>
 </div>
 
 <div drawer [position]="'right'" (onDrawerToggle)="drawerToggled($event)">
     <button theme="secondary" drawerToggle [disabled]="disabled">Show Right</button>
-    <div class="drawer-content">
+    <div class="drawer-content" drawerContent>
         <h4>I am a right drawer!</h4>
     </div>
 </div>
 
 <div drawer [position]="'right'" (onDrawerToggle)="drawerToggled($event)">
     <button theme="secondary" drawerToggle [disabled]="disabled">Show Right <strong>*Two*</strong></button>
-    <div class="drawer-content">
+    <div class="drawer-content" drawerContent>
         <h4>I am *another* right drawer!</h4>
     </div>
 </div>
 
 <div drawer [position]="'top'" (onDrawerToggle)="drawerToggled($event)">
     <button theme="secondary" drawerToggle [disabled]="disabled">Show Top</button>
-    <div class="drawer-content">
+    <div class="drawer-content" drawerContent>
         <h4>I am a top drawer!</h4>
     </div>
 </div>
 
 <div drawer [position]="'bottom'" (onDrawerToggle)="drawerToggled($event)">
     <button theme="secondary" drawerToggle [disabled]="disabled">Show Bottom</button>
-    <div class="drawer-content">
-        <h4>I am a bottom drawer!</h4>
+    <div class="drawer-content" drawerContent>
+        <h4>I am a bottom draw drawerContenter!</h4>
     </div>
 </div>

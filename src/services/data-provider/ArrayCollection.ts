@@ -21,14 +21,17 @@ import { Helpers } from '../../utils/Helpers';
  *  myList.dataProvider = dp;
  */
 export class ArrayCollection<T> implements Collection<T> {
-    dataChange:EventEmitter<CollectionEvent> = new EventEmitter<CollectionEvent>();
-    source:Array<T> = [];
-    filterData:Array<T> = [];
-    _filter:any = {};
-    _sort:Array<any> = [];
+    dataChange: EventEmitter<CollectionEvent> = new EventEmitter<CollectionEvent>();
+    source: Array<T> = [];
+    editData: Array<T> = [];
+    isEditing: boolean = false;
+    filterData: Array<T> = [];
+    _filter: any = {};
+    _sort: Array<any> = [];
 
-    constructor(source:Array<T> = []) {
+    constructor(source: Array<T> = []) {
         this.source = source;
+        this.editData = this.source.slice();
         this.filterData = source.slice();
     }
 
@@ -40,24 +43,50 @@ export class ArrayCollection<T> implements Collection<T> {
         return this.filterData.length;
     }
 
-    get list():Array<T> {
+    get list(): Array<T> {
         return this.filterData;
     }
 
-    isEmpty():boolean {
+    isEmpty(): boolean {
         return this.length <= 0 && !this.isLoading() && !this.hasErrors();
     }
 
-    hasErrors():boolean {
+    hasErrors(): boolean {
         return false;
     }
 
-    isLoading():boolean {
+    isLoading(): boolean {
         return false;
     }
 
-    isFiltered():boolean {
+    isFiltered(): boolean {
         return (Object.keys(this._filter).length > 0);
+    }
+
+    /**
+     * Method to switch the isEditingflag for the data source
+     */
+    edit() {
+        this.isEditing = true;
+        this.editData = this.source.slice();
+    }
+
+    /**
+     * Method to leave edit mode and reset source
+     */
+    undo() {
+        this.isEditing = false;
+        this.source = this.editData.slice();
+        this.refresh();
+    }
+
+    /**
+     * Method to leave edit mode and save editData
+     */
+    commit() {
+        this.isEditing = false;
+        this.editData = this.source.slice();
+        this.refresh();
     }
 
     /**
@@ -67,8 +96,8 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    addItem(item:T):void {
-        this.source.push(item);
+    addItem(item: T): void {
+        this.isEditing ? this.editData.push(item) : this.source.push(item);
         this.onDataChange(new CollectionEvent(CollectionEvent.ADD, [item]));
         this.refresh();
     }
@@ -81,8 +110,8 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    addItemAt(item:T, index:number):void {
-        this.source.splice(index, 0, item);
+    addItemAt(item: T, index: number): void {
+        this.isEditing ? this.editData.splice(index, 0, item) : this.source.splice(index, 0, item);
         this.onDataChange(new CollectionEvent(CollectionEvent.ADD, [item]));
         this.refresh();
     }
@@ -94,8 +123,8 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    addItems(items:Array<T>):void {
-        this.source.push(...items);
+    addItems(items: Array<T>): void {
+        this.isEditing ? this.editData.push(...items) : this.source.push(...items);
         this.onDataChange(new CollectionEvent(CollectionEvent.ADD, items));
         this.refresh();
     }
@@ -108,8 +137,8 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    addItemsAt(items:Array<T>, index:number):void {
-        this.source.splice(index, 0, ...items);
+    addItemsAt(items: Array<T>, index: number): void {
+        this.isEditing ? this.editData.splice(index, 0, ...items) : this.source.splice(index, 0, ...items);
     }
 
     /**
@@ -119,8 +148,8 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    clone():ArrayCollection<T> {
-        return new ArrayCollection(this.source.slice());
+    clone(): ArrayCollection<T> {
+        return new ArrayCollection(this.isEditing ? this.editData.slice() : this.source.slice());
     }
 
     /**
@@ -130,7 +159,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    concat(items:Array<T>):void {
+    concat(items: Array<T>): void {
         this.addItems(items);
     }
 
@@ -142,8 +171,8 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    getItemAt(index:number):any {
-        return this.source[index];
+    getItemAt(index: number): any {
+        return this.isEditing ? this.editData[index] : this.source[index];
     }
 
     /**
@@ -154,8 +183,8 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    getItemIndex(item:T):number {
-        return this.source.indexOf(item);
+    getItemIndex(item: T): number {
+        return this.isEditing ? this.editData.indexOf(item) : this.source.indexOf(item);
     }
 
     /**
@@ -163,7 +192,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    invalidate():void {
+    invalidate(): void {
         this.onDataChange(new CollectionEvent(CollectionEvent.INVALIDATE_ALL));
     }
 
@@ -192,7 +221,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    merge(newData:Array<T>):void {
+    merge(newData: Array<T>): void {
         for (let obj of newData) {
             let existing = ~this.getItemIndex(obj);
             if (existing) {
@@ -208,9 +237,10 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    removeAll():void {
+    removeAll(): void {
         //let oldData = this.filterData.slice();
         this.source = [];
+        this.editData = [];
         this.filterData = [];
         this.onDataChange(new CollectionEvent(CollectionEvent.REMOVE_ALL, []));
         this.refresh();
@@ -225,7 +255,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    removeItem(item:T):boolean {
+    removeItem(item: T): boolean {
         let index = this.getItemIndex(item);
         return this.removeItemAt(index);
     }
@@ -238,7 +268,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    removeItemAt(index:number):boolean {
+    removeItemAt(index: number): boolean {
         return !!(this.filterData.splice(index, 1));
     }
 
@@ -251,7 +281,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    replaceItem(newItem:any, oldItem:any):any {
+    replaceItem(newItem: any, oldItem: any): any {
         let index = this.getItemIndex(oldItem);
         if (index >= 0) {
             this.replaceItemAt(newItem, index);
@@ -267,7 +297,7 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    replaceItemAt(newItem:any, index:number):any {
+    replaceItemAt(newItem: any, index: number): any {
         this.filterData.splice(index, 1, newItem);
     }
 
@@ -279,11 +309,11 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    get sort():Array<any> {
+    get sort(): Array<any> {
         return this._sort;
     }
 
-    set sort(value:Array<any>) {
+    set sort(value: Array<any>) {
         this._sort = value;
         this.refresh();
     }
@@ -297,32 +327,32 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    sortOn(fieldName:any, reverse = false):Array<T> {
+    sortOn(fieldName: any, reverse = false): Array<T> {
         this.filterData = this.filterData.sort(Helpers.sortByField(fieldName, reverse));
         this.onDataChange(new CollectionEvent(CollectionEvent.SORT));
         return this.filterData;
     }
 
-    get filter():any {
+    get filter(): any {
         return this._filter;
     }
 
-    set filter(value:any) {
+    set filter(value: any) {
         this._filter = value;
         this.refresh();
     }
 
-    filterOn(fieldName:any, value:any = null):Array<T> {
+    filterOn(fieldName: any, value: any = null): Array<T> {
         this.filterData = this.filterData.filter(Helpers.filterByField(fieldName, value));
         return this.filterData;
     }
 
-    onDataChange(event:CollectionEvent):void {
+    onDataChange(event: CollectionEvent): void {
         this.dataChange.emit(event);
     }
 
-    refresh():void {
-        this.filterData = this.source.slice();
+    refresh(): void {
+        this.filterData = this.isEditing ? this.editData.slice() : this.source.slice();
         for (let item of this._sort.reverse()) {
             this.sortOn(item.field, item.reverse);
         }
@@ -341,11 +371,11 @@ export class ArrayCollection<T> implements Collection<T> {
      *
      * @memberOf ArrayCollection
      */
-    toArray():Array<T> {
-        return this.source;
+    toArray(): Array<T> {
+        return this.isEditing ? this.editData : this.source;
     }
 
     toJSON() {
-        return this.source;
+        return this.isEditing ? this.editData : this.source;
     }
 }

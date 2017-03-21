@@ -242,6 +242,49 @@ export class Helpers {
         while ((element = element.parentElement) && !(element.matches.call(element, selector))); // tslint:disable-line
         return element;
     }
+
+    static getNumberDaysBetween(start: Date, finish: Date): number {
+        const MILLIS_IN_DAY = 24 * 60 * 60 * 1000;
+        return Math.round(Math.abs((start.getTime() - finish.getTime()) / (MILLIS_IN_DAY)));
+    }
+
+    static modifyDate(config: { year?: number, month?: number, day?: number, hours?: number, minutes?: number, seconds?: number, milliseconds?: number } = {}, baseValue: Date = new Date()): Date {
+        let year = Helpers.isBlank(config.year) ? baseValue.getFullYear() : config.year;
+        let month = Helpers.isBlank(config.month) ? baseValue.getMonth() : config.month;
+        let day = Helpers.isBlank(config.day) ? baseValue.getDate() : config.day;
+        let hours = Helpers.isBlank(config.hours) ? baseValue.getHours() : config.hours;
+        let minutes = Helpers.isBlank(config.minutes) ? baseValue.getMinutes() : config.minutes;
+        let seconds = Helpers.isBlank(config.seconds) ? baseValue.getSeconds() : config.seconds;
+        let milliseconds = Helpers.isBlank(config.milliseconds) ? baseValue.getMilliseconds() : config.milliseconds;
+        return new Date(year, month, day, hours, minutes, seconds, milliseconds);
+    }
+
+    static newDate(config: { year?: number, month?: number, day?: number, hours?: number, minutes?: number, seconds?: number, milliseconds?: number }): Date {
+        return Helpers.modifyDate(config, new Date());
+    }
+
+    static isDateBefore(one: any, two: any): boolean {
+        if (!one || !two) {
+            return false;
+        }
+        return new Date(one) < new Date(two);
+    }
+
+    static isDateAfter(one: any, two: any): boolean {
+        if (!one || !two) {
+            return false;
+        }
+        return new Date(one) > new Date(two);
+    }
+
+    static isDateSame(one: any, two: any): boolean {
+        if (!one || !two) {
+            return false;
+        }
+        let dateOne = new Date(one);
+        let dateTwo = new Date(two);
+        return (dateOne.getDate() === dateTwo.getDate()) && (dateOne.getMonth() === dateTwo.getMonth());
+    }
 }
 class Can {
     obj: Object;

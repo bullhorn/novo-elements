@@ -1,19 +1,9 @@
 // NG2
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 // APP
 import { Helpers } from './../../utils/Helpers';
-
-export interface NovoFormGroup {
-    layout?: any;
-    controls?: any;
-    value?: any;
-    valid?: boolean;
-}
-
-export interface NovoFieldset {
-    title?: string;
-    controls: Array<any>;
-}
+import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
+import { NovoFieldset, NovoFormGroup } from './FormInterfaces';
 
 @Component({
     selector: 'novo-fieldset-header',
@@ -26,12 +16,39 @@ export class NovoFieldsetHeaderElement {
 }
 
 @Component({
+    selector: 'novo-control-custom',
+    template: `
+        <span #ref></span>
+    `
+})
+export class NovoControlCustom implements OnInit {
+    @Input() control: any;
+    @Input() form: any;
+
+    @ViewChild('ref', { read: ViewContainerRef }) referencePoint: ViewContainerRef;
+
+    controlComponent: any;
+
+    constructor(private componentUtils: ComponentUtils) { }
+
+    ngOnInit() {
+        this.controlComponent = this.componentUtils.appendNextToLocation(this.control.customControl, this.referencePoint);
+        this.controlComponent.instance.control = this.control;
+        this.controlComponent.instance.form = this.form;
+        if (this.control.customControlConfig) {
+            this.controlComponent.instance.config = this.control.customControlConfig;
+        }
+    }
+}
+
+@Component({
     selector: 'novo-fieldset',
     template: `
         <div class="novo-fieldset-container">
             <novo-fieldset-header [title]="title" *ngIf="title"></novo-fieldset-header>
             <div *ngFor="let control of controls" class="novo-form-row" [class.disabled]="control.disabled">
-                <novo-control [control]="control" [form]="form"></novo-control>
+                <novo-control *ngIf="!control.customControl" [control]="control" [form]="form"></novo-control>
+                <novo-control-custom *ngIf="control.customControl" [control]="control" [form]="form"></novo-control-custom>
             </div>
         </div>
     `
@@ -51,8 +68,9 @@ export class NovoFieldsetElement {
                 <ng-content select="form-subtitle"></ng-content>
             </header>
             <form class="novo-form" [formGroup]="form" autocomplete="off">
-                <span *ngFor="let fieldset of fieldsets"><novo-fieldset *ngIf="fieldset.controls.length" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form">
-                </novo-fieldset></span>
+                <span *ngFor="let fieldset of fieldsets">
+                    <novo-fieldset *ngIf="fieldset.controls.length" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
+                </span>
             </form>
         </div>
     `
@@ -128,7 +146,7 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
                 }
 
                 // Hide required fields that have been successfully filled out
-                if (hideRequiredWithValue && this.form.value[control.key]) {
+                if (hideRequiredWithValue && !Helpers.isBlank(this.form.value[control.key])) {
                     this.form.controls[control.key].hidden = true;
                 }
 

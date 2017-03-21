@@ -2,7 +2,7 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { Helpers } from './../../utils/Helpers';
+import { Helpers } from '../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const RADIO_VALUE_ACCESSOR = {
@@ -27,18 +27,18 @@ const RADIO_VALUE_ACCESSOR = {
     }
 })
 export class NovoRadioElement implements ControlValueAccessor {
-    @Input() name:string;
-    @Input() value:any;
-    @Input() checked:boolean;
-    @Input() vertical:boolean;
-    @Input() label:string;
+    @Input() name: string;
+    @Input() value: any;
+    @Input() checked: boolean;
+    @Input() vertical: boolean;
+    @Input() label: string;
 
-    @Output() change:EventEmitter<any> = new EventEmitter();
+    @Output() change: EventEmitter<any> = new EventEmitter();
 
-    model:any;
-    onModelChange:Function = () => {
+    model: any;
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
     /**
@@ -56,15 +56,15 @@ export class NovoRadioElement implements ControlValueAccessor {
         }
     }
 
-    writeValue(model:any):void {
+    writeValue(model: any): void {
         this.model = model;
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 }

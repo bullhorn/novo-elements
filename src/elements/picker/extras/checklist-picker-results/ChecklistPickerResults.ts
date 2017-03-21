@@ -1,9 +1,9 @@
 // NG2
 import { Component, ElementRef } from '@angular/core';
 // APP
-import { BasePickerResults } from './../picker-results/PickerResults';
-import { Helpers } from './../../../../utils/Helpers';
-import { NovoLabelService } from './../../../../services/novo-label-service';
+import { BasePickerResults } from '../base-picker-results/BasePickerResults';
+import { Helpers } from '../../../../utils/Helpers';
+import { NovoLabelService } from '../../../../services/novo-label-service';
 // Vendor
 import { Observable } from 'rxjs/Rx';
 
@@ -34,14 +34,14 @@ import { Observable } from 'rxjs/Rx';
                 </li>
             </span>
         </ul>
-        <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
-        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
+        <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
+        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
     `
 })
 export class ChecklistPickerResults extends BasePickerResults {
-    filteredMatches:any;
+    filteredMatches: any;
 
-    constructor(element:ElementRef, public labels:NovoLabelService) {
+    constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
     }
 
@@ -75,7 +75,7 @@ export class ChecklistPickerResults extends BasePickerResults {
      * @description This function loops through the picker options and creates a filtered list of objects that contain
      * the newSearch.
      */
-    filterData(matches):any {
+    filterData(matches): any {
         if (this.term && matches) {
             this.filteredMatches = matches.map(section => {
                 let items = section.originalData.filter((match) => {

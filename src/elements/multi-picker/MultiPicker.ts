@@ -2,9 +2,10 @@
 import { Component, OnInit, EventEmitter, forwardRef, ElementRef, Input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
-import { OutsideClick } from './../../utils/outside-click/OutsideClick';
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { Helpers } from './../../utils/Helpers';
+import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 // Vendor
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
@@ -29,7 +30,7 @@ const CHIPS_VALUE_ACCESSOR = {
         </chip>
         <div *ngIf="items.length > chipsCount">
             <ul class="summary">
-                <li *ngFor="let type of notShown">+ {{type.count}} more {{type.type}}</li>
+                <li *ngFor="let type of notShown">+ {{type.count}} {{ labels.more }} {{type.type}}</li>
             </ul>
         </div>
         <div class="chip-input-container">
@@ -44,20 +45,20 @@ const CHIPS_VALUE_ACCESSOR = {
                 (blur)="onTouched($event)">
             </novo-picker>
         </div>
-        <i class="bhi-search"></i>
-        <label class="clear-all" *ngIf="items.length" (click)="clearValue()">CLEAR ALL <i class="bhi-times"></i></label>
+        <i class="bhi-search" [class.has-value]="items.length"></i>
+        <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
    `,
     host: {
         '[class.with-value]': 'items.length > 0'
     }
 })
 export class NovoMultiPickerElement extends OutsideClick implements OnInit {
-    @Input() source:any;
-    @Input() placeholder:any = '';
-    @Input() types:any;
-    @Output() changed:EventEmitter<any> = new EventEmitter();
-    @Output() focus:EventEmitter<any> = new EventEmitter();
-    @Output() blur:EventEmitter<any> = new EventEmitter();
+    @Input() source: any;
+    @Input() placeholder: any = '';
+    @Input() types: any;
+    @Output() changed: EventEmitter<any> = new EventEmitter();
+    @Output() focus: EventEmitter<any> = new EventEmitter();
+    @Output() blur: EventEmitter<any> = new EventEmitter();
 
     get value() {
         return this._value;
@@ -75,26 +76,26 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
         this.onModelChange(selectedItems);
     }
 
-    items:any = [];
+    items: any = [];
     _items = new ReplaySubject(1);
-    options:any;
-    _options:any;
-    selected:any = null;
-    config:any = {};
-    chipsCount:number;
-    selectAllOption:boolean;
-    strictRelationship:boolean;
+    options: any;
+    _options: any;
+    selected: any = null;
+    config: any = {};
+    chipsCount: number;
+    selectAllOption: boolean;
+    strictRelationship: boolean;
     // private data model
-    _value:any = {};
-    notShown:any = {};
+    _value: any = {};
+    notShown: any = {};
     // Placeholders for the callbacks
-    model:any;
-    onModelChange:Function = () => {
+    model: any;
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
-    constructor(element:ElementRef) {
+    constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
         this.element = element;
         this.chipsCount = 4;
@@ -133,7 +134,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
     }
 
     setupOptionsByType(section) {
-        let formattedSection:any = {
+        let formattedSection: any = {
             type: section.type
         };
         formattedSection.data = section.data.map(item => {
@@ -287,7 +288,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
         this.removeItem(item, triggeredByEvent);
     }
 
-    removeItem(item, triggeredByEvent?:any) {
+    removeItem(item, triggeredByEvent?: any) {
         item.checked = false;
         this.deselectAll();
         this.removeValue(item);
@@ -603,16 +604,16 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
         this.blur.emit(e);
     }
 
-    writeValue(model:any):void {
+    writeValue(model: any): void {
         this.model = model;
         this.setInitialValue(model);
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 }

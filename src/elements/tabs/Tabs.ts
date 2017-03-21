@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'novo-nav',
@@ -66,6 +66,7 @@ export class NovoNavElement {
 })
 export class NovoTabElement {
     @Input() active: boolean = false;
+    @Output() activeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     nav: any;
 
@@ -75,6 +76,7 @@ export class NovoTabElement {
     }
 
     select() {
+        this.activeChange.emit(true);
         this.nav.select(this);
     }
 }

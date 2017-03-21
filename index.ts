@@ -46,24 +46,26 @@ export { PagedArrayCollection } from './src/services/data-provider/PagedArrayCol
 // Export classes that will need to be imported
 export { NovoModalParams, NovoModalRef } from './src/elements/modal/Modal';
 export { QuickNoteResults } from './src/elements/quick-note/extras/quick-note-results/QuickNoteResults';
-export { PickerResults, BasePickerResults } from './src/elements/picker/extras/picker-results/PickerResults';
-export { EntityPickerResults } from './src/elements/picker/extras/entity-picker-results/EntityPickerResults';
+export { PickerResults } from './src/elements/picker/extras/picker-results/PickerResults';
+export { BasePickerResults } from './src/elements/picker/extras/base-picker-results/BasePickerResults';
+export { EntityPickerResult, EntityPickerResults } from './src/elements/picker/extras/entity-picker-results/EntityPickerResults';
 export { ChecklistPickerResults } from './src/elements/picker/extras/checklist-picker-results/ChecklistPickerResults';
 export { BaseRenderer } from './src/elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './src/elements/table/extras/date-cell/DateCell';
 export { FormValidators } from './src/elements/form/FormValidators';
-export { FormUtils } from './src/elements/form/FormUtils';
+export { FormUtils } from './src/utils/form-utils/FormUtils';
 export * from './src/elements/form/FormControls';
 // Utils
-export * from './src/utils/outside-click/OutsideClick';
-export * from './src/utils/key-codes/KeyCodes';
-export * from './src/utils/deferred/Deferred';
-export * from './src/utils/countries/Countries';
-export * from './src/utils/Helpers';
-export * from './src/utils/component-utils/ComponentUtils';
+export { OutsideClick } from './src/utils/outside-click/OutsideClick';
+export { KeyCodes } from './src/utils/key-codes/KeyCodes';
+export { Deferred } from './src/utils/deferred/Deferred';
+export { COUNTRIES, getCountries, getStateObjects, getStates, findByCountryCode, findByCountryId, findByCountryName } from './src/utils/countries/Countries';
+export { Helpers } from './src/utils/Helpers';
+export { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
 // Providers
-export * from './novo-elements.providers';
+export { NovoElementProviders } from './novo-elements.providers';
 // Pipes
-export * from './src/pipes/plural/Plural';
+export { PluralPipe } from './src/pipes/plural/Plural';
+export { DecodeURIPipe } from './src/pipes/decode-uri/DecodeURI';
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';

@@ -1,11 +1,11 @@
 // NG2
 import { Component, ElementRef } from '@angular/core';
-// APP
-import { Helpers } from './../../../../utils/Helpers';
-import { PickerResults } from './../../../picker/extras/picker-results/PickerResults';
-import { NovoLabelService } from './../../../../services/novo-label-service';
 // Vendor
 import { Observable } from 'rxjs/Rx';
+// APP
+import { Helpers } from '../../../../utils/Helpers';
+import { PickerResults } from '../../../picker/extras/picker-results/PickerResults';
+import { NovoLabelService } from '../../../../services/novo-label-service';
 
 @Component({
     selector: 'quick-note-results',
@@ -23,15 +23,15 @@ import { Observable } from 'rxjs/Rx';
                 <span [innerHtml]="highlight(match.label, term)"></span>
             </li>
         </ul>
-        <p class="picker-error" *ngIf="hasError">{{labels.quickNoteError}}</p>
-        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{labels.quickNoteEmpty}}</p>
+        <p class="picker-error" *ngIf="hasError">{{ labels.quickNoteError }}</p>
+        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.quickNoteEmpty }}</p>
     `
 })
 export class QuickNoteResults extends PickerResults {
     // Mode that the quick note is in for tagging
-    taggingMode:string = '';
+    taggingMode: string = '';
 
-    constructor(element:ElementRef, labels:NovoLabelService) {
+    constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element, labels);
     }
 
@@ -42,17 +42,17 @@ export class QuickNoteResults extends PickerResults {
         this.isLoading = true;
         this.search(value, this.taggingMode)
             .subscribe(
-                results => {
-                    this.matches = this.isStatic ? this.filterData(results) : results;
-                    this.isLoading = false;
-                },
-                () => {
-                    this.hasError = true;
-                    this.isLoading = false;
-                });
+            results => {
+                this.matches = this.isStatic ? this.filterData(results) : results;
+                this.isLoading = false;
+            },
+            () => {
+                this.hasError = true;
+                this.isLoading = false;
+            });
     }
 
-    search(term, taggingMode) {
+    search(term: string, taggingMode) {
         let searchCall = this.config.options[taggingMode];
         return Observable.fromPromise(new Promise((resolve, reject) => {
             // Check if there is match data
@@ -94,7 +94,7 @@ export class QuickNoteResults extends PickerResults {
      * @description This function structures an array of nodes into an array of objects with a
      * 'name' field by default.
      */
-    structureArray(collection) {
+    structureArray(collection: Array<any>) {
         if (collection && (typeof collection[0] === 'string' || typeof collection[0] === 'number')) {
             return collection.map((item) => {
                 return {
@@ -117,7 +117,7 @@ export class QuickNoteResults extends PickerResults {
      *
      * @description
      */
-    selectMatch(event) {
+    selectMatch(event: KeyboardEvent) {
         if (event) {
             event.stopPropagation();
             event.preventDefault();

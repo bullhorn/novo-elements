@@ -30,17 +30,24 @@ novo-form {
                 h6 {
                     font-weight: 400;
                     padding: 0;
+                    display: flex;
+                    >i {
+                        display: flex;
+                        margin-top: -3px; // Icon itself is not centered in the SVG
+                    }
                 }
             }
             div.novo-form-row,
             td.novo-form-row {
                 width: 100%;
                 &:first-child {
-                    >novo-control {
+                    >novo-control,
+                    >novo-custom-control-container {
                         margin-top: 0;
                     }
                 }
-                novo-control {
+                novo-control,
+                novo-custom-control-container {
                     margin-top: 1rem;
                     display: flex;
                     flex-direction: row;
@@ -74,20 +81,54 @@ novo-form {
                         pointer-events: none;
                         input {
                             &::-webkit-input-placeholder {
-                                color: $light !important;
+                                color: darken($light, 10%) !important;
                             }
                             border-bottom-style: dashed !important;
-                            color: #D9DADC !important;
+                            color: darken(#D9DADC, 10%) !important;
                         }
                         div[type="button"] {
-                            color: $light !important;
+                            color: darken($light, 10%) !important;
                             border-bottom-style: dashed !important;
                         }
                         label {
-                            color: $light !important;
+                            color: darken($light, 10%) !important;
                             &.clear-all {
                                 display: none;
                             }
+                        }
+                        chips {
+                            border-bottom: 1px dashed darken($light, 10%) !important;
+                            input {
+                                border: none !important;
+                            }
+                            chip {
+                                opacity: 0.4;
+                                padding: 10px;
+                                .bhi-close {
+                                    display: none;
+                                }
+                            }
+                        }
+                        novo-tiles {
+                            opacity: .4 !important;
+                            label {
+                                color: inherit !important;
+                            }
+                        }
+                        .bhi-search,
+                        .bhi-times {
+                            display: none;
+                        }
+                        i.bhi-clock,
+                        i.bhi-collapse,
+                        i.bhi-search,
+                        i.bhi-radio-filled,
+                        i.bhi-radio-empty,
+                        i.bhi-checkbox-filled,
+                        i.bhi-checkbox-empty,
+                        i.bhi-calendar {
+                            color: darken($light, 10%) !important;
+                            top: -5px;
                         }
                     }
                     .field-message {
@@ -122,7 +163,7 @@ novo-form {
                             .description {
                                 display: flex;
                                 padding-bottom: 5px;
-                                flex:1;
+                                flex: 1;
                             }
                         }
                     }
@@ -415,7 +456,6 @@ novo-form {
                                                     >h4 {
                                                         font-weight: 500;
                                                     }
-                                                    >p {}
                                                 }
                                                 section {
                                                     box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
@@ -426,7 +466,9 @@ novo-form {
                                                     color: black;
                                                 }
                                             }
-                                            >p {}
+                                            entity-picker-results {
+                                                min-width: 250px;
+                                            }
                                         }
                                     }
                                     i.required-indicator {
@@ -531,34 +573,35 @@ novo-form {
         .novo-form-container {
             form {
                 div.novo-form-row {
-                    novo-control {
+                    novo-control,
+                    novo-custom-control-container {
                         margin-top: 0;
                         &.disabled {
                             pointer-events: none;
                             input {
                                 &::-webkit-input-placeholder {
-                                    color: $light !important;
+                                    color: darken($light, 10%) !important;
                                 }
                                 border-bottom-style: dashed !important;
-                                color: #D9DADC !important;
+                                color: darken(#D9DADC, 10%) !important;
                             }
                             div[type="button"] {
-                                color: $light !important;
+                                color: darken($light, 10%) !important;
                                 border-bottom-style: dashed !important;
                             }
                             label {
-                                color: $light !important;
+                                color: darken($light, 10%) !important;
                                 &.clear-all {
                                     display: none;
                                 }
                             }
                             chips {
-                                border-bottom: 1px dashed $light !important;
+                                border-bottom: 1px dashed darken($light, 10%) !important;
                                 input {
                                     border: none !important;
                                 }
                                 chip {
-                                    opacity: 0.5;
+                                    opacity: 0.4;
                                     padding: 10px;
                                     .bhi-close {
                                         display: none;
@@ -566,7 +609,7 @@ novo-form {
                                 }
                             }
                             novo-tiles {
-                                opacity: .5 !important;
+                                opacity: .4 !important;
                                 label {
                                     color: inherit !important;
                                 }
@@ -583,7 +626,7 @@ novo-form {
                             i.bhi-checkbox-filled,
                             i.bhi-checkbox-empty,
                             i.bhi-calendar {
-                                color: $light !important;
+                                color: darken($light, 10%) !important;
                                 top: -5px;
                             }
                         }

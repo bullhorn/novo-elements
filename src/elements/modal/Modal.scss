@@ -71,6 +71,7 @@ novo-notification {
     z-index: 1000;
     position: relative;
     min-width: 330px;
+    max-width: 600px;
 
     & > button.modal-close {
         position: absolute;

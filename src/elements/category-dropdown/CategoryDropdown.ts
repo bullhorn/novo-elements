@@ -1,9 +1,10 @@
 // NG2
 import { Component, ElementRef, EventEmitter, Input, Output, OnDestroy, OnInit } from '@angular/core';
 // APP
-import { OutsideClick } from './../../utils/outside-click/OutsideClick';
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
-import { Helpers } from './../../utils/Helpers';
+import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 @Component({
     selector: 'novo-category-dropdown',
@@ -11,12 +12,12 @@ import { Helpers } from './../../utils/Helpers';
         <ng-content select="button"></ng-content>
         <div class="dropdown-container" *ngIf="active">
             <div class="novo-category-dropdown-search" *ngIf="search" data-automation-id="novo-category-dropdown-search">
-                <input type="text" [placeholder]="search.placeholder || 'SEARCH'" [value]="_query" (input)="queryCategories($event.target.value)"/>
+                <input type="text" [placeholder]="search.placeholder || labels.search" [value]="_query" (input)="queryCategories($event.target.value)"/>
                 <i class="bhi-search" *ngIf="!_query"></i>
                 <i class="bhi-times" *ngIf="_query" (click)="clearQuery($event)"></i>
             </div>
             <novo-nav theme="white" [outlet]="novoCategoryDropdownOutlet" direction="vertical">
-                <novo-tab *ngFor="let category of _categories" [attr.data-automation-id]="category">
+                <novo-tab *ngFor="let category of _categories" [attr.data-automation-id]="category" (activeChange)="onCategorySelected(category)">
                     <span>{{ category }} ({{ _categoryMap[category].length }})</span>
                 </novo-tab>
             </novo-nav>
@@ -30,7 +31,7 @@ import { Helpers } from './../../utils/Helpers';
                             <item-end *ngIf="item.selected"><i class="bhi-check"></i></item-end>
                         </novo-list-item>
                         <novo-list-item *ngIf="_categoryMap[category].length === 0 && search" class="novo-category-dropdown-empty-item">
-                            <item-content>{{ search.emptyMessage || 'There are no items.' }}</item-content>
+                            <item-content>{{ search.emptyMessage || labels.noItems }}</item-content>
                         </novo-list-item>
                     </novo-list>
                 </novo-nav-content>
@@ -46,16 +47,16 @@ import { Helpers } from './../../utils/Helpers';
     }
 })
 export class NovoCategoryDropdownElement extends OutsideClick implements OnInit, OnDestroy {
-    _query:string = '';
-    _categoryMap:any = {};
-    _categories:string[] = [];
-    clickHandler:Function;
-    _masterCategoryMap:any;
-    _queryTimeout:any;
+    _query: string = '';
+    _categoryMap: any = {};
+    _categories: string[] = [];
+    clickHandler: Function;
+    _masterCategoryMap: any;
+    _queryTimeout: any;
     // Boolean to keep the selection persist when closing the dropdown
-    @Input() persistSelection:boolean = false;
+    @Input() persistSelection: boolean = false;
     // Boolean to close the dropdown on selection
-    @Input() closeOnSelect:boolean = false;
+    @Input() closeOnSelect: boolean = false;
     // Search Config
     // {
     //   placeholder: 'STRING' // defaults to "SEARCH" - placeholder for search input
@@ -63,24 +64,26 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
     //   debounce: 'NUMBER (in MS)' // defaults to 300ms - debounce time for the search
     //   compare: 'FUNCTION' // default to simple indexOf - compare function for category search, should accept (query, item) and return true/false
     // }
-    @Input() search:any;
+    @Input() search: any;
     // Footer config
     // {
     //   align: 'STRING' // defaults to "right" - alignment of the links
     //   links: 'ARRAY' // array of links to go into the footer, be away of spacing - { label, callback } for the object inside
     // }
-    @Input() footer:any;
+    @Input() footer: any;
     // Event that is emitted whenever an item is selected
-    @Output('itemSelected') _select:EventEmitter<any> = new EventEmitter();
+    @Output('itemSelected') _select: EventEmitter<any> = new EventEmitter();
+    // Event that is emitted whenever a category is selected
+    @Output() categorySelected: EventEmitter<any> = new EventEmitter<any>();
 
     @Input()
-    set categories(categories:any) {
+    set categories(categories: any) {
         this._masterCategoryMap = Object.assign({}, categories);
         this._categoryMap = Object.assign({}, categories);
         this._categories = Object.keys(categories);
     }
 
-    constructor(element:ElementRef) {
+    constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
         this.clickHandler = this.toggleActive.bind(this);
     }
@@ -92,7 +95,9 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
 
     ngOnDestroy() {
         let button = this.element.nativeElement.querySelector('button');
-        button.removeEventListener('click', this.clickHandler);
+        if (button) {
+            button.removeEventListener('click', this.clickHandler);
+        }
     }
 
     onKeyDown(event) {
@@ -122,6 +127,10 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
         if (this.closeOnSelect) {
             this.toggleActive();
         }
+    }
+
+    onCategorySelected(category) {
+        this.categorySelected.emit(category);
     }
 
     clearQuery(event) {

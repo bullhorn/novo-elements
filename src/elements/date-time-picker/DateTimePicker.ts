@@ -1,10 +1,9 @@
 // NG2
-import { Component, EventEmitter, Input, Output, forwardRef, trigger, state, style, transition, animate, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { ElementRef, Component, EventEmitter, Input, Output, forwardRef, trigger, state, style, transition, animate, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { Helpers } from './../../utils/Helpers';
-// Vendor
-import * as moment from 'moment';
+import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 // Value accessor for the component (supports ngModel)
 const DATE_TIME_PICKER_VALUE_ACCESSOR = {
@@ -59,9 +58,10 @@ export type componentTabStates = 'date' | 'time';
     template: `
         <div class="date-time-container">
             <div class="date-time-tabs">
-                <span class="date-tab" (click)="toggleTimePicker('date')" [@dateTextState]="componentTabState">{{(selected?.format('MMM D, YYYY') ) || 'Date'}}</span>
+                <span class="date-tab" (click)="toggleTimePicker('date')" [@dateTextState]="componentTabState">{{selectedLabel}}</span>
                 <span class="time-tab" (click)="toggleTimePicker('time')" [@timeTextState]="componentTabState">
-                    <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
+                    <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span
+                    class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
                     <span *ngIf="!military" class="meridian">{{meridian}}</span>
                 </span>
                 <i class="date-time-indicator" [@indicatorState]="componentTabState"></i>
@@ -69,47 +69,62 @@ export type componentTabStates = 'date' | 'time';
             <div class="view-container" [@containerState]="componentTabState">
                 <div class="calendar">
                     <div class="calendar-header">
-                        <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
+                        <span class="previous" (click)="previousMonth($event)"
+                              data-automation-id="calendar-previous"></span>
                         <span class="heading">
-                            <span class="month" (click)="open($event, 'months')" [attr.data-automation-id]="heading?.month">{{month?.format('MMM')}}</span>
-                            <span class="year" (click)="open($event, 'years')" [attr.data-automation-id]="heading?.year">{{month?.format('YYYY')}}</span>
+                            <span class="month" (click)="open($event, 'months')"
+                                  [attr.data-automation-id]="heading?.month">{{monthLabel}}</span>
+                            <span class="year" (click)="open($event, 'years')"
+                                  [attr.data-automation-id]="heading?.year">{{month?.getFullYear()}}</span>
                         </span>
                         <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
                     </div>
                     <table class="calendar-content days" cellspacing="0" cellpadding="0" [hidden]="!(view=='days')">
                         <thead>
-                            <tr>
-                                <th *ngFor="let day of weekday" title="{{day}}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">{{day.substr(0, 2)}}</th>
-                            </tr>
+                        <tr>
+                            <th *ngFor="let day of weekdays" title="{{day}}" class="weekday"
+                                [attr.data-automation-id]="day.substr(0, 2)">{{day.substr(0, 2)}}
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let week of weeks">
-                                <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday,
+                        <tr *ngFor="let week of weeks">
+                            <td *ngFor="let day of week.days" [ngClass]="{ today: day.isToday,
                                     'notinmonth': !day.isCurrentMonth,
-                                    selected: day.date.isSame(selected)
+                                    selected: day.date.getDate() === selected.getDate() && day.date.getMonth() === selected.getMonth() && day.date.getFullYear() === selected.getFullYear()
                                 }">
-                                    <button class="day" (click)="select($event, day, true); toggleTimePicker('time')" [attr.data-automation-id]="day.number" [disabled]="(start && day.date.isBefore(start)) || (end && day.date.isAfter(end))">{{day.number}}</button>
-                                </td>
-                            </tr>
+                                <button class="day" (click)="select($event, day, true); toggleTimePicker('time')"
+                                        [attr.data-automation-id]="day.number"
+                                        [disabled]="isDisabled(day.date, start, end)">{{day.number}}
+                                </button>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
-                    <ul class="calendar-content months" [hidden]="!(view == 'months')">
-                        <li *ngFor="let month of months" (click)="setMonth(month)">
-                            <div class="month" [ngClass]="{selected: month == selected?.format('MMM')}" [attr.data-automation-id]="month">{{month}}</div>
+                    <ul class="calendar-content months" [hidden]="view !== 'months'">
+                        <li *ngFor="let month of months;let i = index" (click)="setMonth(i)">
+                            <div class="month" [ngClass]="{selected: i === selected.getMonth()}"
+                                 [attr.data-automation-id]="month">{{month}}
+                            </div>
                         </li>
                     </ul>
-                    <ul class="calendar-content years" [hidden]="!(view == 'years')">
+                    <ul class="calendar-content years" [hidden]="view !== 'years'">
                         <li *ngFor="let year of years" (click)="setYear(year)">
-                            <div class="year" [ngClass]="{selected: year == selected?.format('YYYY')}" [attr.data-automation-id]="year">{{year}}</div>
+                            <div class="year" [ngClass]="{selected: year == selected?.getFullYear()}"
+                                 [attr.data-automation-id]="year">{{year}}
+                            </div>
                         </li>
                     </ul>
                     <div class="calendar-footer">
-                        <span (click)="setToday()" class="today" data-automation-id="calendar-today">Today</span>
+                        <span (click)="setToday()" class="today" data-automation-id="calendar-today">{{ labels.today
+                            }}</span>
                     </div>
                 </div>
                 <div class="time-picker">
                     <div class="meridian-control-block" *ngIf="!military">
-                        <span *ngFor="let period of MERIDIANS" class="digital--period" [class.active]="meridian==period" (click)="setPeriod($event, period, true)" [attr.data-automation-id]="period">{{period}}</span>
+                        <span *ngFor="let period of MERIDIANS" class="digital--period" [class.active]="meridian==period"
+                              (click)="setPeriod($event, period, true)"
+                              [attr.data-automation-id]="period">{{period}}</span>
                     </div>
                     <div class="analog">
                         <div class="analog--inner">
@@ -123,15 +138,19 @@ export type componentTabStates = 'date' | 'time';
                                 </span>
                             </div>
                             <div class="analog--hours">
-                                <span *ngFor="let hour of HOURS" class="analog--hour" [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour, true)" [attr.data-automation-id]="hour">{{hour}}</span>
+                                <span *ngFor="let hour of HOURS" class="analog--hour"
+                                      [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour, true)"
+                                      [attr.data-automation-id]="hour">{{hour}}</span>
                             </div>
                             <div class="analog--minutes">
-                                <span *ngFor="let minute of MINUTES" class="analog--minute" [ngClass]="{active: activeMinute == minute}" (click)="setMinutes($event, minute, true)" [attr.data-automation-id]="minute">{{minute}}</span>
+                                <span *ngFor="let minute of MINUTES" class="analog--minute"
+                                      [ngClass]="{active: activeMinute == minute}"
+                                      (click)="setMinutes($event, minute, true)" [attr.data-automation-id]="minute">{{minute}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="time-footer">
-                        <span class="now" (click)="clearTime()">Now</span>
+                        <span class="now" (click)="clearTime()">{{ labels.now }}</span>
                     </div>
                 </div>
             </div>
@@ -148,12 +167,12 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     // Select callback for output
     @Output() onSelect: EventEmitter<any> = new EventEmitter(false);
 
-    // List of all the weekdays (use moment to localize)
-    weekday = moment.weekdays();
-    // List of all months (use moment to localize)
-    months = moment.months();
+    // List of all the weekdays
+    weekdays: string[] = [];
+    // List of all months
+    months: string[] = [];
     // List of all years (generated in ngOnInit)
-    years: Array<number> = [];
+    years: number[] = [];
     // Default view mode (select days)
     view: string = 'days';
 
@@ -166,9 +185,11 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     MINUTES: Array<string> = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
 
     model: any;
-    month: any;
+    month: Date;
+    monthLabel: string;
     weeks: any;
-    selected: any;
+    selected: Date;
+    selectedLabel: string = 'Date';
     meridian: any;
     heading: any;
     hoursClass: string;
@@ -179,14 +200,16 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     showClock: boolean = false;
     componentTabState: componentTabStates = 'date';
 
-    onModelChange: Function = () => {};
-    onModelTouched: Function = () => {};
+    onModelChange: Function = () => { };
+    onModelTouched: Function = () => { };
+
+    constructor(public labels: NovoLabelService, private element: ElementRef) { }
 
     ngOnInit() {
         // Determine the year array
-        let now = moment();
-        let start = this.minYear ? Number(this.minYear) : now.year() - 100;
-        let end = this.maxYear ? Number(this.maxYear) : now.year() + 10;
+        let now = new Date();
+        let start = this.minYear ? Number(this.minYear) : now.getFullYear() - 100;
+        let end = this.maxYear ? Number(this.maxYear) : now.getFullYear() + 10;
 
         for (let i = start; i <= end; i++) {
             this.years.push(i);
@@ -197,6 +220,10 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
             this.HOURS = ['0', ...this.HOURS, '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
         }
 
+        // Set weekdays / months
+        this.weekdays = this.labels.getWeekdays();
+        this.months = this.labels.getMonths();
+
         this.ngOnChanges();
     }
 
@@ -205,10 +232,14 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         this.updateTime(this.model, false);
     }
 
+    isDisabled(day, start, end) {
+        return Helpers.isDateBefore(day, start) || Helpers.isDateAfter(day, end);
+    }
+
     updateTime(time: any, fireEvents: boolean): void {
-        let momentValue = time ? moment(time) : moment();
-        let hours = momentValue.hours();
-        let minutes: any = momentValue.minutes();
+        let value = time ? new Date(time) : new Date();
+        let hours = value.getHours();
+        let minutes: any = value.getMinutes();
 
         if (!this.military) {
             this.meridian = hours >= 12 ? 'pm' : 'am';
@@ -224,13 +255,14 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     }
 
     updateCal(date: any, fireEvents: boolean, markedSelected: boolean): void {
-        let value = date ? moment(date) : moment();
+        let value: Date = !Helpers.isBlank(date) ? new Date(date) : new Date();
         value = this.removeTime(value);
-        this.month = value.clone();
+        this.month = new Date(value.getTime());
+        this.monthLabel = this.labels.formatDateWithFormat(this.month, { month: 'short' });
 
-        let start = value.clone();
-        start.date(1);
-        this.removeTime(start.day(0));
+        let start = new Date(value.getTime());
+        start.setDate(1);
+        this.removeTime(start.setDate(1));
 
         this.buildMonth(start, this.month);
 
@@ -240,22 +272,22 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     }
 
     setToday(): void {
-        let tmp = moment();
+        let tmp = new Date();
         this.updateCal(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
     }
 
-    setMonth(month: string): void {
-        let tmp = this.selected ? this.selected.clone().month(month) : moment().month(month);
-        this.updateCal(tmp, true, true);
+    setMonth(month: number): void {
+        let tmp = this.month ? Helpers.modifyDate({ month }, this.month) : Helpers.newDate({ month });
+        this.updateCal(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
     }
 
     setYear(year: number): void {
-        let tmp = this.selected ? this.selected.clone().year(year) : moment().year(year);
-        this.updateCal(tmp, true, true);
+        let tmp = this.month ? Helpers.modifyDate({ year }, this.month) : Helpers.newDate({ year });
+        this.updateCal(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
     }
@@ -264,20 +296,25 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         Helpers.swallowEvent(event);
 
         this.selected = day.date;
+        this.selectedLabel = this.labels.formatDateWithFormat(this.selected, {
+            month: 'short',
+            day: '2-digit',
+            year: 'numeric'
+        });
         this.updateHeading();
 
         if (fireEvents && this.selected) {
+            // Also, update the ngModel
+            this.onModelChange(this.selected);
+            this.model = this.selected;
+
             // Emit our output
             this.onSelect.next({
-                year: this.selected.format('YYYY'),
-                month: this.selected.format('MM'),
-                day: this.selected.format('DD'),
-                date: this.selected.toDate()
+                month: this.labels.formatDateWithFormat(this.selected, { month: 'long' }),
+                year: this.selected.getFullYear(),
+                day: this.labels.formatDateWithFormat(this.selected, { weekday: 'long' }),
+                date: this.selected
             });
-
-            // Also, update the ngModel
-            this.onModelChange(this.selected.toDate());
-            this.model = this.selected.toDate();
             this.dispatchChange();
         }
     }
@@ -292,20 +329,29 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
             this.view = type;
         }
 
+        // Make sure to scroll the selected one into view
+        if (this.view === 'years' || this.view === 'months') {
+            setTimeout(() => {
+                let container = this.element.nativeElement.querySelector(`.calendar-content.${this.view}`);
+                let selectedItem = this.element.nativeElement.querySelector(`.calendar-content.${this.view} .${this.view === 'years' ? 'year' : 'month'}.selected`);
+                if (container && selectedItem) {
+                    container.scrollTop = selectedItem.offsetTop - 100;
+                }
+            });
+        }
+
         this.updateHeading();
     }
 
-    prevMonth(event: Event): void {
+    previousMonth(event: Event): void {
         Helpers.swallowEvent(event);
-        let tmp = this.month.clone();
-        tmp = tmp.subtract(1, 'months');
+        let tmp = Helpers.modifyDate({ month: this.month.getMonth() - 1 }, this.month);
         this.updateCal(tmp, false, false);
     }
 
     nextMonth(event: Event): void {
         Helpers.swallowEvent(event);
-        let tmp = this.month.clone();
-        tmp = tmp.add(1, 'months');
+        let tmp = Helpers.modifyDate({ month: this.month.getMonth() + 1 }, this.month);
         this.updateCal(tmp, false, false);
     }
 
@@ -314,44 +360,47 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
             return;
         }
         this.heading = {
-            month: this.selected.format('MMMM'),
-            year: this.selected.format('YYYY'),
-            date: this.selected.format('DD'),
-            day: this.selected.format('dddd')
+            month: this.labels.formatDateWithFormat(this.selected, { month: 'long' }),
+            year: this.selected.getFullYear(),
+            day: this.labels.formatDateWithFormat(this.selected, { weekday: 'long' }),
+            date: this.selected
         };
     }
 
-    /**
-     * Remove the time aspect of the date
-     * @param date
-     * @returns {Moment} with time stripped out
-     */
     removeTime(date: any) {
-        return date.hour(0).minute(0).second(0).millisecond(0);
+        let ret = new Date(date);
+        ret.setHours(0);
+        ret.setSeconds(0);
+        ret.setMilliseconds(0);
+        return ret;
     }
 
-    buildMonth(start: any, month: any) {
+    buildMonth(start: Date, month: Date) {
         // Reset the weeks
         this.weeks = [];
 
         // House keeping variables to know when we are done building the month
         let done = false,
-            date = start.clone(),
-            monthIndex = date.month(),
+            date = new Date(start.getTime()),
+            monthIndex = date.getMonth(),
             count = 0;
+
+        if (date.getDay() !== 0) {
+            date = Helpers.modifyDate({ day: date.getDate() - date.getDay() }, date);
+        }
 
         while (!done) {
             // Build the days for the weeks
-            this.weeks.push({ days: this.buildWeek(date.clone(), month) });
+            this.weeks.push({ days: this.buildWeek(new Date(date.getTime()), month) });
 
             // Increment variables for the next iteration
-            date.add(1, 'w');
-            done = count++ > 2 && monthIndex !== date.month();
-            monthIndex = date.month();
+            date = Helpers.modifyDate({ day: date.getDate() + 7 }, date);
+            done = count++ > 2 && monthIndex !== date.getMonth();
+            monthIndex = date.getMonth();
         }
     }
 
-    buildWeek(date: any, month: any): Array<Object> {
+    buildWeek(date: Date, month: Date): Array<Object> {
         // Build out of the days of the week
         let days = [];
 
@@ -359,16 +408,15 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
         for (let i = 0; i < 7; i++) {
             // Push a variable on the day array with lots of helpers to make the template easier
             days.push({
-                name: date.format('dd').substring(0, 1),
-                number: date.date(),
-                isCurrentMonth: date.month() === month.month(),
-                isToday: date.isSame(new Date(), 'day'),
+                name: this.weekdays[i],
+                number: date.getDate(),
+                isCurrentMonth: date.getMonth() === month.getMonth(),
+                isToday: date.getDate() === new Date().getDate(),
                 date: date
             });
 
             // Increment for the next iteration
-            date = date.clone(); // eslint-disable-line
-            date.add(1, 'd');
+            date = Helpers.modifyDate({ day: date.getDate() + 1 }, date);
         }
 
         return days;
@@ -421,27 +469,26 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
             }
         }
 
-        let value = moment().hours(hours).minutes(this.minutes).seconds(0);
-
+        let value = Helpers.modifyDate({ hours: hours, minutes: this.minutes, seconds: 0 });
         if (this.model) {
-            value = moment(this.model).hours(hours).minutes(this.minutes).seconds(0);
+            value = Helpers.modifyDate({ hours: hours, minutes: this.minutes, seconds: 0 }, this.model);
         }
+        this.onModelChange(value);
+        this.model = value;
 
+        //onSelect needs to be fired after the model has been changed
         this.onSelect.next({
             hours: hours,
             minutes: this.minutes,
             meridian: this.meridian,
-            date: value.toDate(),
-            moment: value,
+            date: value,
             text: `${this.hours}:${this.minutes} ${this.meridian}`
         });
-
-        this.onModelChange(value.toDate());
-        this.model = value.toDate();
     }
 
     clearTime(): void {
         this.updateTime(null, true);
+        this.dispatchChange();
     }
 
     toggleTimePicker(tab: componentTabStates): void {
@@ -452,8 +499,10 @@ export class NovoDateTimePickerElement implements ControlValueAccessor, OnInit, 
     // ValueAccessor Functions
     writeValue(model: any): void {
         this.model = model;
-        this.updateCal(model, false, true);
-        this.updateTime(model, false);
+        if (Helpers.isDate(model)) {
+            this.updateCal(model, false, true);
+            this.updateTime(model, false);
+        }
     }
 
     registerOnChange(fn: Function): void {

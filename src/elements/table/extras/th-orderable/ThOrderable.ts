@@ -1,5 +1,7 @@
 // NG2
 import { Directive, EventEmitter, ElementRef, OnInit, Input, Output } from '@angular/core';
+// App
+import { Helpers } from '../../../../utils/Helpers';
 
 @Directive({
     selector: '[novoThOrderable]',
@@ -24,6 +26,15 @@ export class ThOrderable implements OnInit {
         this.element = element;
     }
 
+    get index() {
+        let index: number = null;
+        if (this.element.nativeElement && this.element.nativeElement.parentNode) {
+            let children: Array<any> = Array.prototype.slice.call(this.element.nativeElement.parentNode.children);
+            index = children.indexOf(this.element.nativeElement);
+        }
+        return index;
+    }
+
     ngOnInit() {
         if (this.column.ordering) {
             this.element.nativeElement.setAttribute('draggable', true);
@@ -31,6 +42,10 @@ export class ThOrderable implements OnInit {
         }
     }
 
+    /**
+     * @name onDragStart
+     * @param event
+     */
     onDragStart(event?: any) {
         if (this.column.ordering) {
             this.element.nativeElement.classList.add('dragging');
@@ -47,23 +62,25 @@ export class ThOrderable implements OnInit {
         }
     }
 
-    get index() {
-        const children = Array.prototype.slice.call(this.element.nativeElement.parentNode.children);
-        return children.indexOf(this.element.nativeElement);
-    }
-
-    deleteColumns(tbl) {
-        const allRows = tbl.rows;
-        for (let i = 0; i < allRows.length; i++) {
-            if (i > 10) {
-                tbl.deleteRow(-1);
-            } else {
-                const cellLength = allRows[i].cells.length;
-                for (let c = 0; c < cellLength; c++) {
-                    if (c < this.index) {
-                        allRows[i].deleteCell(0);
-                    } else if (c > this.index) {
-                        allRows[i].deleteCell(-1);
+    /**
+     * @name deleteColumns
+     * @param table
+     */
+    deleteColumns(table: { rows: Array<any>; deleteRow: Function }) {
+        // TODO: `table` should be immutable and this method should return the modified data to its caller
+        if (table.rows.length > 0) {
+            const allRows = table.rows;
+            for (let i = 0; i < allRows.length; i++) {
+                if (i > 10) {
+                    table.deleteRow(-1);
+                } else {
+                    const cellLength = allRows[i].cells.length;
+                    for (let c = 0; c < cellLength; c++) {
+                        if (c < this.index) {
+                            allRows[i].deleteCell(0);
+                        } else if (c > this.index) {
+                            allRows[i].deleteCell(-1);
+                        }
                     }
                 }
             }
@@ -74,7 +91,7 @@ export class ThOrderable implements OnInit {
         let htmlElementNode = start;
         while (htmlElementNode) {
             htmlElementNode = htmlElementNode.parentNode;
-            if (htmlElementNode.tagName.toLowerCase() === 'table') {
+            if (htmlElementNode && htmlElementNode.tagName.toLowerCase() === 'table') {
                 return htmlElementNode;
             }
         }
@@ -82,18 +99,12 @@ export class ThOrderable implements OnInit {
     }
 
     onDrag(event?: any) {
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+        Helpers.swallowEvent(event);
         return false;
     }
 
     onDragEnd(event?: any) {
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+        Helpers.swallowEvent(event);
         this.element.nativeElement.classList.remove('over');
         this.element.nativeElement.classList.remove('dragging');
         document.body.removeChild(this.clone);
@@ -101,11 +112,7 @@ export class ThOrderable implements OnInit {
     }
 
     onDrop(event?: any) {
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
+        Helpers.swallowEvent(event);
         this.element.nativeElement.classList.remove('over');
         const data = JSON.parse(event.dataTransfer.getData('text/plain'));
 
@@ -117,16 +124,18 @@ export class ThOrderable implements OnInit {
         return false;
     }
 
-    onDragOver(event?: any) {
-        if (event.preventDefault) {
-            event.preventDefault();
-        }
-
+    /**
+     * @name onDragOver
+     * @param event
+     * @returns {boolean}
+     */
+    onDragOver(event: { preventDefault: Function, dataTransfer: { dropEffect: string }, stopPropagation: Function }): false {
+        Helpers.swallowEvent(event);
         event.dataTransfer.dropEffect = 'move';
         return false;
     }
 
-    onDragEnter(event?: any) {
+    onDragEnter(event: any) {
         this.element.nativeElement.classList.add('over');
         this.target = event.target;
     }

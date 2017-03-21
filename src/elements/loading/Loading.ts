@@ -15,7 +15,7 @@ import { Component, Input } from '@angular/core';
     `
 })
 export class NovoLoadingElement {
-    @Input() theme:string;
+    @Input() theme: string;
 }
 
 @Component({
@@ -98,7 +98,7 @@ export class NovoLoadingElement {
     `
 })
 export class NovoSpinnerElement {
-    @Input() theme:string;
-    @Input() inverse:boolean;
-    @Input() baseHref:string;
+    @Input() theme: string;
+    @Input() inverse: boolean;
+    @Input() baseHref: string;
 }

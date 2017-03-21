@@ -24,14 +24,14 @@ import { Component, ElementRef, Input, OnInit, OnChanges, SimpleChanges } from '
     `
 })
 export class CardDonutChartElement implements OnInit, OnChanges {
-    @Input() value:number;
+    @Input() value: number;
     @Input() label;
     @Input() color;
     chartFillMax;
     uid;
     isChartDrawing;
 
-    constructor(private element:ElementRef) {
+    constructor(private element: ElementRef) {
         // Geometric number that represents 100% of the chart area
         this.chartFillMax = 629;
         // Unique ID for instance
@@ -40,7 +40,7 @@ export class CardDonutChartElement implements OnInit, OnChanges {
         this.isChartDrawing = false;
     }
 
-    ngOnChanges(changes?:SimpleChanges) {
+    ngOnChanges(changes?: SimpleChanges) {
         if (!this.isChartDrawing) {
             this.drawChart();
         }

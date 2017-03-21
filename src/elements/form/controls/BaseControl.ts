@@ -36,6 +36,10 @@ export interface NovoControlConfig {
     appendToBody?: boolean;
     parentScrollSelector?: string;
     description?: string;
+    tooltip?: string;
+    tooltipPosition?: string;
+    customControl?: any;
+    customControlConfig?: any;
 }
 
 export class BaseControl {
@@ -70,6 +74,10 @@ export class BaseControl {
     appendToBody: boolean;
     parentScrollSelector: string;
     description?: string;
+    tooltip?: string;
+    tooltipPosition?: string;
+    customControl?: any;
+    customControlConfig?: any;
 
     constructor(config: NovoControlConfig) {
         this.validators = config.validators || [];
@@ -110,5 +118,11 @@ export class BaseControl {
         this.appendToBody = !!config.appendToBody;
         this.parentScrollSelector = config.parentScrollSelector;
         this.description = config.description;
+        if (config.tooltip) {
+            this.tooltip = config.tooltip;
+            this.tooltipPosition = config.tooltipPosition;
+        }
+        this.customControl = config.customControl;
+        this.customControlConfig = config.customControlConfig;
     }
 }

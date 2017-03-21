@@ -20,37 +20,37 @@ const template = `
     <p>This is a simple implementation.</p>
     <div class="example dropdown-demo">${BasicDemoTpl}</div>
     <multi-code-snippet [code]="basicCodeSnippet"></multi-code-snippet>
-    
+
     <br/>
     <h5>Hover Text/Icons on Items</h5>
     <p>You can set a hover text or icons for each item to appear as the user hovers over an item.</p>
     <div class="example dropdown-demo">${HoverItemLabelsDemoTpl}</div>
     <multi-code-snippet [code]="hoverCodeSnippet"></multi-code-snippet>
-    
+
     <br/>
     <h5>Persisting Selection</h5>
     <p>If you need to show what item is selected, you can persist the selection via a property.</p>
     <div class="example dropdown-demo">${PersistSelectionDemoTpl}</div>
     <multi-code-snippet [code]="persistCodeSnippet"></multi-code-snippet>
-    
+
     <br/>
     <h5>Close on Select</h5>
     <p>By default, the dropdown will stay open upon selecting an item. You can set a property to force close on selection.</p>
     <div class="example dropdown-demo">${CloseOnSelectDemoTpl}</div>
     <multi-code-snippet [code]="closeCodeSnippet"></multi-code-snippet>
-    
+
     <br/>
     <h5>Searchable (basic)</h5>
     <p>The dropdown can be configured to provide a way to search all the different categories.</p>
     <div class="example dropdown-demo">${BasicSearchDemoTpl}</div>
     <multi-code-snippet [code]="basicSearchCodeSnippet"></multi-code-snippet>
-    
+
     <br/>
     <h5>Searchable (custom)</h5>
     <p>Every aspect of the search can be customized, refer to the README or JS for more information.</p>
     <div class="example dropdown-demo">${CustomSearchDemoTpl}</div>
     <multi-code-snippet [code]="customSearchCodeSnippet"></multi-code-snippet>
-    
+
     <br/>
     <h5>Footer</h5>
     <p>The dropdown has a customizable footer for additional configuration over the categories and items.</p>
@@ -196,7 +196,7 @@ export class CategoryDropdownDemoComponent {
         'Other Inputs': JSON.stringify(this.footerConfig)
     };
 
-    constructor(private toaster:NovoToastService) {
+    constructor(private toaster: NovoToastService) {
         this.toaster = toaster;
     }
 
@@ -213,6 +213,16 @@ export class CategoryDropdownDemoComponent {
     onSelect(item) {
         this.toaster.alert({
             title: `Selected ${item.label}!`,
+            icon: 'star',
+            theme: 'ocean',
+            position: 'growlTopRight',
+            hideDelay: 2000
+        });
+    }
+
+    onCategorySelect(category) {
+        this.toaster.alert({
+            title: `Selected the category: ${category}!`,
             icon: 'star',
             theme: 'ocean',
             position: 'growlTopRight',

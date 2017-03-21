@@ -35,18 +35,18 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
     `
 })
 export class NovoButtonElement implements OnChanges {
-    @Input() icon:string;
-    @Input() color:string;
-    @Input() side:string;
-    @Input() theme:string;
-    @Input() loading:boolean;
+    @Input() icon: string;
+    @Input() color: string;
+    @Input() side: string;
+    @Input() theme: string;
+    @Input() loading: boolean;
 
-    leftSide:boolean = false;
-    rightSide:boolean = true;
-    iconClass:string;
-    flex:string;
+    leftSide: boolean = false;
+    rightSide: boolean = true;
+    iconClass: string;
+    flex: string;
 
-    ngOnChanges(changes?:SimpleChanges) {
+    ngOnChanges(changes?: SimpleChanges) {
         this.iconClass = (this.icon && !this.loading) ? `bhi-${this.icon}` : '';
         this.flex = this.theme ? 'flex-wrapper' : '';
         if (this.side !== null && this.theme !== 'primary') {

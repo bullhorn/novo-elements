@@ -5,7 +5,7 @@ describe('Control: TextBoxControl', () => {
     let control;
 
     beforeEach(() => {
-        control = new TextBoxControl();
+        control = new TextBoxControl({});
     });
 
     it('should have the right control type', () => {

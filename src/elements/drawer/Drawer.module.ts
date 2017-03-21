@@ -1,7 +1,9 @@
 // NG2
 import { NgModule } from '@angular/core';
 // APP
-import { NovoDrawerElement, NovoDrawerContentElement, NovoDrawerToggleElement } from './Drawer';
+import { NovoDrawerElement } from './Drawer';
+import { NovoDrawerContentElement } from './extras/drawer-content/DrawerContent';
+import { NovoDrawerToggleElement } from './extras/drawer-toggle/DrawerToggle';
 
 @NgModule({
     declarations: [NovoDrawerElement, NovoDrawerContentElement, NovoDrawerToggleElement],

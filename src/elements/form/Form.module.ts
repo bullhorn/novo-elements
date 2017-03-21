@@ -13,13 +13,12 @@ import { NovoTimePickerModule } from './../time-picker/TimePicker.module';
 import { NovoDateTimePickerModule } from './../date-time-picker/DateTimePicker.module';
 import { NovoNovoCKEditorModule } from './../ckeditor/CKEditor.module';
 import { NovoQuickNoteModule } from './../quick-note/QuickNote.module';
-import { NovoDynamicFormElement } from './DynamicForm';
-import { NovoFieldsetElement } from './DynamicForm';
-import { NovoFieldsetHeaderElement } from './DynamicForm';
+import { NovoDynamicFormElement, NovoControlCustom, NovoFieldsetElement, NovoFieldsetHeaderElement } from './DynamicForm';
 import { NovoFormElement } from './Form';
-import { NovoControlElement } from './Control';
+import { NovoControlElement, NovoCustomControlContainerElement } from './Control';
 import { NovoFormExtrasModule } from './extras/FormExtras.module';
 import { NovoHeaderModule } from './../header/Header.module';
+import { NovoTooltipModule } from './../tooltip/Tooltip.module';
 
 @NgModule({
     imports: [
@@ -36,10 +35,11 @@ import { NovoHeaderModule } from './../header/Header.module';
         NovoFormExtrasModule,
         NovoQuickNoteModule,
         NovoDateTimePickerModule,
-        NovoHeaderModule
+        NovoHeaderModule,
+        NovoTooltipModule
     ],
-    declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement],
-    exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement]
+    declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement],
+    exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement]
 })
 export class NovoFormModule {
 }

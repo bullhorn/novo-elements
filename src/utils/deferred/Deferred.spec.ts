@@ -1,11 +1,11 @@
 // APP
 import { Deferred } from './Deferred';
 
-describe('Service: Deferred', () => {
+describe('Utils: Deferred', () => {
     let deferred;
 
     beforeEach(() => {
-        deferred = new Deferred();
+        deferred = Deferred();
     });
 
     it('should be defined', () => {

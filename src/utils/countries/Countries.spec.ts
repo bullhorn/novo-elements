@@ -1,8 +1,8 @@
 // APP
 import { getCountries, getStates, getStateObjects } from './Countries';
 
-describe('Util: Countries', () => {
-    describe('Function: getCountries()', () => {
+describe('Utils: Countries', () => {
+    describe('Method: getCountries()', () => {
         it('should be defined', () => {
             expect(getCountries).toBeDefined();
         });
@@ -12,7 +12,7 @@ describe('Util: Countries', () => {
         });
     });
 
-    describe('Function: getStates(country)', () => {
+    describe('Method: getStates(country)', () => {
         it('should be defined', () => {
             expect(getStates).toBeDefined();
         });
@@ -22,7 +22,7 @@ describe('Util: Countries', () => {
         });
     });
 
-    describe('Function: getStateObjects(countryName)', () => {
+    describe('Method: getStateObjects(countryName)', () => {
         it('should be defined', () => {
             expect(getStateObjects).toBeDefined();
         });

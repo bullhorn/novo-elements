@@ -5,7 +5,7 @@ describe('Control: PickerControl', () => {
     let control;
 
     beforeEach(() => {
-        control = new PickerControl();
+        control = new PickerControl({});
     });
 
     it('should have the right control type', () => {

@@ -5,7 +5,7 @@ describe('Control: CheckListControl', () => {
     let control;
 
     beforeEach(() => {
-        control = new CheckListControl();
+        control = new CheckListControl({});
     });
 
     it('should have the right control type', () => {

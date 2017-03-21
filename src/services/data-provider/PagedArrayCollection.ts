@@ -62,7 +62,7 @@ export class PagedArrayCollection<T> extends ArrayCollection<T> implements Paged
     }
 
     refresh(): void {
-        this.filterData = this.source.slice();
+        this.filterData = this.isEditing ? this.editData.slice() : this.source.slice();
         for (let item of this._sort.reverse()) {
             this.sortOn(item.field, item.reverse);
         }
@@ -73,12 +73,11 @@ export class PagedArrayCollection<T> extends ArrayCollection<T> implements Paged
         }
         if (this.page >= 0) {
             let start = (this.page - 1) * this.pageSize;
-            let end = start + this.pageSize; ;
+            let end = start + this.pageSize;
             let result = this.filterData.slice(start, end);
             this.onDataChange(new CollectionEvent(CollectionEvent.CHANGE, result));
         } else {
             this.onDataChange(new CollectionEvent(CollectionEvent.CHANGE, this.filterData));
         }
     }
-
 }

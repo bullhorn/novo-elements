@@ -25,7 +25,7 @@ novo-picker {
     i.bhi-search,
     i.bhi-times {
         position: absolute;
-        top: 0;
+        top: 9px;
         right: 0;
         font-size: 1.2em;
     }
@@ -36,6 +36,7 @@ novo-picker {
     .picker-results-container {
         position: absolute;
         top: 100%;
+        left: 0;
         width: 100%;
         entity-picker-results,
         picker-results.active {
@@ -137,7 +138,8 @@ quick-note-results {
 entity-picker-results {
     novo-list {
         background: $white;
-        novo-list-item.disabled {
+        novo-list-item.disabled,
+        entity-picker-result.disabled {
             opacity: 0.5;
             pointer-events: none;
         }

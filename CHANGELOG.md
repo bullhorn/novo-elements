@@ -1,3 +1,391 @@
+<a name="2.0.161"></a>
+## [2.0.161](https://github.com/bullhorn/novo-elements/compare/v2.0.160...v2.0.161) (2017-03-21)
+
+
+### Bug Fixes
+
+* **form:** Fixing display of address blocks and validation ([3007cad](https://github.com/bullhorn/novo-elements/commit/3007cad))
+
+
+
+<a name="2.0.160"></a>
+## [2.0.160](https://github.com/bullhorn/novo-elements/compare/v2.0.159...v2.0.160) (2017-03-20)
+
+
+### Features
+
+* **pipe:** Added new pipe for displaying encoded string ([#444](https://github.com/bullhorn/novo-elements/issues/444)) ([df6679f](https://github.com/bullhorn/novo-elements/commit/df6679f))
+
+
+
+<a name="2.0.159"></a>
+## [2.0.159](https://github.com/bullhorn/novo-elements/compare/v2.0.158...v2.0.159) (2017-03-20)
+
+
+### Bug Fixes
+
+* **table:** fix for property of undefined on _editing ([#442](https://github.com/bullhorn/novo-elements/issues/442)) ([c0b6e84](https://github.com/bullhorn/novo-elements/commit/c0b6e84))
+
+
+
+<a name="2.0.158"></a>
+## [2.0.158](https://github.com/bullhorn/novo-elements/compare/v2.0.157...v2.0.158) (2017-03-20)
+
+
+### Bug Fixes
+
+* **formutils:** Optional types ([89e5715](https://github.com/bullhorn/novo-elements/commit/89e5715))
+
+
+
+<a name="2.0.157"></a>
+## [2.0.157](https://github.com/bullhorn/novo-elements/compare/v2.0.156...v2.0.157) (2017-03-20)
+
+
+
+<a name="2.0.156"></a>
+## [2.0.156](https://github.com/bullhorn/novo-elements/compare/v2.0.155...v2.0.156) (2017-03-20)
+
+
+### Bug Fixes
+
+* **table:** viewOnly was not being respected for new table rows. Also adding unit tests ([#439](https://github.com/bullhorn/novo-elements/issues/439)) ([6ff3c04](https://github.com/bullhorn/novo-elements/commit/6ff3c04))
+
+
+### Features
+
+* **categorydropdown:** Adding event for category selection, fixes [#420](https://github.com/bullhorn/novo-elements/issues/420) ([253a01c](https://github.com/bullhorn/novo-elements/commit/253a01c))
+* **chips:** Adding styles for corp user chips, fixes [#431](https://github.com/bullhorn/novo-elements/issues/431) ([28c651f](https://github.com/bullhorn/novo-elements/commit/28c651f))
+
+
+
+<a name="2.0.155"></a>
+## [2.0.155](https://github.com/bullhorn/novo-elements/compare/v2.0.154...v2.0.155) (2017-03-17)
+
+
+### Bug Fixes
+
+* **datepicker:** Fixing selecting January in date pickers, 0 index.. ([beace3d](https://github.com/bullhorn/novo-elements/commit/beace3d))
+
+
+### Features
+
+* **Table:** Added ability to hide columns and new Editable collection ([#437](https://github.com/bullhorn/novo-elements/issues/437)) ([5aaf678](https://github.com/bullhorn/novo-elements/commit/5aaf678))
+
+
+
+<a name="2.0.154"></a>
+## [2.0.154](https://github.com/bullhorn/novo-elements/compare/v2.0.153...v2.0.154) (2017-03-16)
+
+
+### Bug Fixes
+
+* **table:** Only hide pagination when empty and not filtered ([b5d75ef](https://github.com/bullhorn/novo-elements/commit/b5d75ef))
+
+
+
+<a name="2.0.153"></a>
+## [2.0.153](https://github.com/bullhorn/novo-elements/compare/v2.0.152...v2.0.153) (2017-03-14)
+
+
+### Bug Fixes
+
+* **table:** Hiding pagination when the table is empty and not being filtered ([4c2f07f](https://github.com/bullhorn/novo-elements/commit/4c2f07f))
+
+
+
+<a name="2.0.152"></a>
+## [2.0.152](https://github.com/bullhorn/novo-elements/compare/v2.0.151...v2.0.152) (2017-03-09)
+
+
+### Features
+
+* **modal:** Added cancel event to the Notification Model ([#432](https://github.com/bullhorn/novo-elements/issues/432)) ([8a6269e](https://github.com/bullhorn/novo-elements/commit/8a6269e))
+
+
+
+<a name="2.0.151"></a>
+## [2.0.151](https://github.com/bullhorn/novo-elements/compare/v2.0.150...v2.0.151) (2017-03-08)
+
+
+### Features
+
+* **Table:** Adding margin for table header buttons and increasing min-width for entity-picker ([#428](https://github.com/bullhorn/novo-elements/issues/428)) ([97bb742](https://github.com/bullhorn/novo-elements/commit/97bb742))
+
+
+
+<a name="2.0.150"></a>
+## [2.0.150](https://github.com/bullhorn/novo-elements/compare/v2.0.149...v2.0.150) (2017-03-06)
+
+
+### Features
+
+* **Table:** Column headers should show in edit mode even if no data. Toasts should be removed on cancel ([#427](https://github.com/bullhorn/novo-elements/issues/427)) ([39e159e](https://github.com/bullhorn/novo-elements/commit/39e159e))
+
+
+
+<a name="2.0.149"></a>
+## [2.0.149](https://github.com/bullhorn/novo-elements/compare/v2.0.148...v2.0.149) (2017-03-06)
+
+
+
+<a name="2.0.148"></a>
+## [2.0.148](https://github.com/bullhorn/novo-elements/compare/v2.0.147...v2.0.148) (2017-03-03)
+
+
+### Bug Fixes
+
+* **control:** Moving Model change events to be fired after model is updated ([#425](https://github.com/bullhorn/novo-elements/issues/425)) ([2edf333](https://github.com/bullhorn/novo-elements/commit/2edf333))
+
+
+
+<a name="2.0.147"></a>
+## [2.0.147](https://github.com/bullhorn/novo-elements/compare/v2.0.146...v2.0.147) (2017-03-03)
+
+
+### Bug Fixes
+
+* **control:** Adding missing model change events ([1ec470e](https://github.com/bullhorn/novo-elements/commit/1ec470e))
+
+
+### Features
+
+* **table:** Edit table improvements and fixes ([#424](https://github.com/bullhorn/novo-elements/issues/424)) ([8187fdb](https://github.com/bullhorn/novo-elements/commit/8187fdb))
+
+
+
+<a name="2.0.146"></a>
+## [2.0.146](https://github.com/bullhorn/novo-elements/compare/v2.0.145...v2.0.146) (2017-03-02)
+
+
+
+<a name="2.0.145"></a>
+## [2.0.145](https://github.com/bullhorn/novo-elements/compare/v2.0.144...v2.0.145) (2017-03-01)
+
+
+### Features
+
+* **tiles:** Adding ability to disable the tiles and get an event when its clicked ([0e440cb](https://github.com/bullhorn/novo-elements/commit/0e440cb))
+
+
+
+<a name="2.0.144"></a>
+## [2.0.144](https://github.com/bullhorn/novo-elements/compare/v2.0.143...v2.0.144) (2017-02-27)
+
+
+### Bug Fixes
+
+* **table:** Fixing css around the footer ([6bfca6e](https://github.com/bullhorn/novo-elements/commit/6bfca6e))
+
+
+
+<a name="2.0.143"></a>
+## [2.0.143](https://github.com/bullhorn/novo-elements/compare/v2.0.142...v2.0.143) (2017-02-27)
+
+
+### Bug Fixes
+
+* **QuickNote:** Quick Note does not create the formatted object on writeValue. ([#417](https://github.com/bullhorn/novo-elements/issues/417)) ([2fda393](https://github.com/bullhorn/novo-elements/commit/2fda393))
+
+
+
+<a name="2.0.142"></a>
+## [2.0.142](https://github.com/bullhorn/novo-elements/compare/v2.0.141...v2.0.142) (2017-02-23)
+
+
+### Bug Fixes
+
+* **chips:** Fixed the preview on hover of the entity chip when data is not present ([#416](https://github.com/bullhorn/novo-elements/issues/416)) ([0cc6fd0](https://github.com/bullhorn/novo-elements/commit/0cc6fd0))
+
+
+
+<a name="2.0.141"></a>
+## [2.0.141](https://github.com/bullhorn/novo-elements/compare/v2.0.140...v2.0.141) (2017-02-23)
+
+
+### Bug Fixes
+
+* **localization:** Fixing a lot of places were there were hard-coded strings ([b41848d](https://github.com/bullhorn/novo-elements/commit/b41848d))
+
+
+
+<a name="2.0.140"></a>
+## [2.0.140](https://github.com/bullhorn/novo-elements/compare/v2.0.139...v2.0.140) (2017-02-22)
+
+
+### Bug Fixes
+
+* **Control:** Errors is an unknown property on NovoCustomControlContainerElement ([#415](https://github.com/bullhorn/novo-elements/issues/415)) ([c74c8af](https://github.com/bullhorn/novo-elements/commit/c74c8af))
+
+
+
+<a name="2.0.139"></a>
+## [2.0.139](https://github.com/bullhorn/novo-elements/compare/v2.0.138...v2.0.139) (2017-02-22)
+
+
+### Bug Fixes
+
+* **dates:** Fixing some actions with DateTimePickers ([c5ded16](https://github.com/bullhorn/novo-elements/commit/c5ded16))
+
+
+
+<a name="2.0.138"></a>
+## [2.0.138](https://github.com/bullhorn/novo-elements/compare/v2.0.137...v2.0.138) (2017-02-22)
+
+
+### Features
+
+* **Form:** Add ability to have custom components used with the dynamic form ([#414](https://github.com/bullhorn/novo-elements/issues/414)) ([b47f934](https://github.com/bullhorn/novo-elements/commit/b47f934))
+
+
+
+<a name="2.0.137"></a>
+## [2.0.137](https://github.com/bullhorn/novo-elements/compare/v2.0.136...v2.0.137) (2017-02-22)
+
+
+### Bug Fixes
+
+* **datepicker:** Fixing the date picker selection ([350044a](https://github.com/bullhorn/novo-elements/commit/350044a))
+
+
+
+<a name="2.0.136"></a>
+## [2.0.136](https://github.com/bullhorn/novo-elements/compare/v2.0.135...v2.0.136) (2017-02-21)
+
+
+### Bug Fixes
+
+* **picker:** Fixing picker for AOT, missing property ([8f80519](https://github.com/bullhorn/novo-elements/commit/8f80519))
+
+
+
+<a name="2.0.135"></a>
+## [2.0.135](https://github.com/bullhorn/novo-elements/compare/v2.0.134...v2.0.135) (2017-02-21)
+
+
+### Features
+
+* **chips:** Added a preview on hover of the entity chip ([#413](https://github.com/bullhorn/novo-elements/issues/413)) ([ddaeb87](https://github.com/bullhorn/novo-elements/commit/ddaeb87))
+* **forms:** Adding way to pass a pickerCallback for custom control on the PickerResults ([bef69a5](https://github.com/bullhorn/novo-elements/commit/bef69a5))
+
+
+
+<a name="2.0.134"></a>
+## [2.0.134](https://github.com/bullhorn/novo-elements/compare/v2.0.133...v2.0.134) (2017-02-21)
+
+
+### Bug Fixes
+
+* **datepicker:** Fixing date picker opening/closing ([d7b32bb](https://github.com/bullhorn/novo-elements/commit/d7b32bb))
+
+
+
+<a name="2.0.133"></a>
+## [2.0.133](https://github.com/bullhorn/novo-elements/compare/v2.0.132...v2.0.133) (2017-02-21)
+
+
+### Features
+
+* **form:** Add ability to set overrides when creating field sets ([#411](https://github.com/bullhorn/novo-elements/issues/411)) ([06dd84c](https://github.com/bullhorn/novo-elements/commit/06dd84c))
+* **form:** Allowing to override the templates of form controls ([95d8e54](https://github.com/bullhorn/novo-elements/commit/95d8e54))
+
+
+
+<a name="2.0.132"></a>
+## [2.0.132](https://github.com/bullhorn/novo-elements/compare/v2.0.131...v2.0.132) (2017-02-21)
+
+
+
+<a name="2.0.131"></a>
+## [2.0.131](https://github.com/bullhorn/novo-elements/compare/v2.0.130...v2.0.131) (2017-02-17)
+
+
+### Bug Fixes
+
+* **control:** Making the label animate up/down properly for chips/picker ([adf4d6e](https://github.com/bullhorn/novo-elements/commit/adf4d6e))
+
+
+
+<a name="2.0.130"></a>
+## [2.0.130](https://github.com/bullhorn/novo-elements/compare/v2.0.129...v2.0.130) (2017-02-16)
+
+
+### Features
+
+* **toast:** add dialogue styling to toast ([#405](https://github.com/bullhorn/novo-elements/issues/405)) ([143cc9b](https://github.com/bullhorn/novo-elements/commit/143cc9b))
+
+
+
+<a name="2.0.129"></a>
+## [2.0.129](https://github.com/bullhorn/novo-elements/compare/v2.0.128...v2.0.129) (2017-02-14)
+
+
+### Bug Fixes
+
+* **table:** Fixing freetext filter clear ([10b8f58](https://github.com/bullhorn/novo-elements/commit/10b8f58))
+
+
+
+<a name="2.0.128"></a>
+## [2.0.128](https://github.com/bullhorn/novo-elements/compare/v2.0.127...v2.0.128) (2017-02-13)
+
+
+### Bug Fixes
+
+* **quicknote:** Debouncing input to avoid crazy amounts of calls ([ec0f7a5](https://github.com/bullhorn/novo-elements/commit/ec0f7a5))
+
+
+
+<a name="2.0.127"></a>
+## [2.0.127](https://github.com/bullhorn/novo-elements/compare/v2.0.126...v2.0.127) (2017-02-13)
+
+
+### Features
+
+* **form:** Adding tooltip support ([cd0c221](https://github.com/bullhorn/novo-elements/commit/cd0c221))
+
+
+
+<a name="2.0.126"></a>
+## [2.0.126](https://github.com/bullhorn/novo-elements/compare/v2.0.125...v2.0.126) (2017-02-12)
+
+
+
+<a name="2.0.125"></a>
+## [2.0.125](https://github.com/bullhorn/novo-elements/compare/v2.0.124...v2.0.125) (2017-02-10)
+
+
+### Features
+
+* **toast:** Transcluding content ([a31de4f](https://github.com/bullhorn/novo-elements/commit/a31de4f))
+
+
+
+<a name="2.0.124"></a>
+## [2.0.124](https://github.com/bullhorn/novo-elements/compare/v2.0.123...v2.0.124) (2017-02-10)
+
+
+### Features
+
+* **ckeditor:** Add paste and loaded events ([#398](https://github.com/bullhorn/novo-elements/issues/398)) ([3c2016f](https://github.com/bullhorn/novo-elements/commit/3c2016f))
+
+
+
+<a name="2.0.123"></a>
+## [2.0.123](https://github.com/bullhorn/novo-elements/compare/v2.0.122...v2.0.123) (2017-02-09)
+
+
+### Bug Fixes
+
+* **picker:** paging correctly ([#397](https://github.com/bullhorn/novo-elements/issues/397)) ([0870e55](https://github.com/bullhorn/novo-elements/commit/0870e55))
+
+
+
+<a name="2.0.122"></a>
+## [2.0.122](https://github.com/bullhorn/novo-elements/compare/v2.0.121...v2.0.122) (2017-02-09)
+
+
+
 <a name="2.0.121"></a>
 ## [2.0.121](https://github.com/bullhorn/novo-elements/compare/v2.0.120...v2.0.121) (2017-02-08)
 

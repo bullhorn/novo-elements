@@ -1,32 +1,29 @@
+// NG2
+import { TestBed, async } from '@angular/core/testing';
 // APP
 import { NovoButtonElement } from './Button';
-import { APP_TEST_PROVIDERS } from './../../testing/test-providers';
 
-describe('Element: NovoButtonElement', () => {
+describe('Elements: NovoButtonElement', () => {
+    let fixture;
     let component;
 
-    beforeEach(() => {
-        addProviders([
-            NovoButtonElement,
-            APP_TEST_PROVIDERS
-        ]);
-    });
-
-    beforeEach(inject([NovoButtonElement], _component => {
-        component = _component;
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                NovoButtonElement
+            ],
+        }).compileComponents();
+        fixture = TestBed.createComponent(NovoButtonElement);
+        component = fixture.debugElement.componentInstance;
     }));
 
-    describe('Function: ngOnChanges()', () => {
+    describe('Method: ngOnChanges()', () => {
         it('should initialize correctly', () => {
             expect(component).toBeTruthy();
         });
     });
 
-    describe('Function: ngOnChanges()', () => {
-        it('should initialize correctly', () => {
-            expect(component).toBeTruthy();
-            expect(component.ngOnChanges).toBeDefined();
-        });
+    describe('Method: ngOnChanges()', () => {
 
         it('should setup the iconClass if icon is passed', () => {
             component.icon = 'test';

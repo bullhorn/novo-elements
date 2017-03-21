@@ -1,7 +1,7 @@
 // APP
 import { KeyCodes } from './KeyCodes';
 
-describe('Util: KeyCodes', () => {
+describe('Utils: KeyCodes', () => {
     it('Should have all key codes', () => {
         expect(KeyCodes.BACKSPACE).toEqual(8);
         expect(KeyCodes.TAB).toEqual(9);

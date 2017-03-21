@@ -1,8 +1,8 @@
 // NG2
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { Helpers } from './../../../../utils/Helpers';
+import { Helpers } from '../../../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const CHECKLIST_VALUE_ACCESSOR = {
@@ -27,6 +27,7 @@ const CHECKLIST_VALUE_ACCESSOR = {
 export class NovoCheckListElement implements ControlValueAccessor, OnInit {
     @Input() name:string;
     @Input() options:Array<any>;
+    @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
     _options:Array<any>;
     model:any;
@@ -44,6 +45,7 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
         item.checked = !item.checked;
         this.model = this._options.filter(checkBox => checkBox.checked).map(x => x.value);
         this.onModelChange(this.model.length > 0 ? this.model : '');
+        this.onSelect.emit({ selected: this.model });
     }
 
     setupOptions() {

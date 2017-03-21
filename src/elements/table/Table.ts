@@ -1,76 +1,45 @@
 // Vendor
-import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, Directive, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 // APP
-import { NovoLabelService } from './../../services/novo-label-service';
-import { Helpers } from './../../utils/Helpers';
-import { FormUtils, NovoFormControl } from './../form/FormUtils';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { ReadOnlyControl } from './../form/FormControls';
-import { CollectionEvent } from './../../services/data-provider/CollectionEvent';
-import { PagedArrayCollection } from './../../services/data-provider/PagedArrayCollection';
-import { PagedCollection } from './../../services/data-provider/PagedCollection';
+import { CollectionEvent } from '../../services/data-provider/CollectionEvent';
+import { PagedArrayCollection } from '../../services/data-provider/PagedArrayCollection';
+import { PagedCollection } from '../../services/data-provider/PagedCollection';
 
 export interface NovoTableConfig {
     // Paging config
     paging?: {
-        current: number, // current page
-        itemsPerPage: number, // items per page
-        onPageChange: Function // function to handle page changing
+        current: number,                // current page
+        itemsPerPage: number,           // items per page
+        onPageChange: Function          // function to handle page changing
     };
     // Footer config (total footer)
-    footers?: {
-        columns: string[], // string array of columns to total
-        method: string; // method to use for the footer, SUM | AVG, defaults to SUM
-        labelColumn: string, // column to use as the "total" label
-        label: string // label to use in the "total" label
-    }[];
-    filtering?: boolean | any; // Turn on filtering for the table, boolean or function for filtering callback
-    sorting?: boolean | any; // Turn on sorting for the table, boolean or function for sorting callback
-    ordering?: boolean | any; // Turn on ordering for the table, boolean or function for ordering callback
-    resizing?: boolean | any; // Turn on resizing for the table, boolean or function for resizing callback
-    rowSelectionStyle?: string; // Row selection style, checkbox or row
-    rowSelect?: boolean; // Turn on row selection
-    hasDetails?: boolean; // Turn on details row for the table
-    detailsRenderer?: any; // Renderer/component for the details row
-    selectAllEnabled?: boolean; // Allows the table, while in selection mode to have a select all at the top
+    footers?: Array<{
+        columns: Array<string>,         // string array of columns to total
+        method: string;                 // method to use for the footer, SUM | AVG, defaults to SUM
+        labelColumn: string,            // column to use as the "total" label
+        label: string                   // label to use in the "total" label
+    }>;
+    // TODO: When these types are enforced as `boolean | Function`, there's a lint error. That's a bug.
+    filtering?: boolean | any;          // Turn on filtering for the table, boolean or function for filtering callback
+    sorting?: boolean | any;            // Turn on sorting for the table, boolean or function for sorting callback
+    ordering?: boolean | Function;      // Turn on ordering for the table, boolean or function for ordering callback
+    resizing?: boolean | Function;      // Turn on resizing for the table, boolean or function for resizing callback
+    rowSelectionStyle?: string;         // Row selection style, checkbox or row
+    rowSelect?: boolean;                // Turn on row selection
+    hasDetails?: boolean;               // Turn on details row for the table
+    detailsRenderer?: any;              // Renderer/component for the details row
+    selectAllEnabled?: boolean;         // Allows the table, while in selection mode to have a select all at the top
 }
 
 // TODO - support (1) clicking cell to edit, (2) clicking row to edit, (3) button to trigger full table to edit
 export enum NovoTableMode {
     VIEW = 1,
     EDIT = 2
-}
-
-@Directive({
-    selector: '[keepFilterFocused]'
-})
-export class NovoTableKeepFilterFocus implements AfterViewInit {
-    constructor(private element: ElementRef) { }
-
-    ngAfterViewInit() {
-        this.element.nativeElement.focus();
-    }
-}
-
-@Component({
-    selector: 'novo-table-actions',
-    template: '<ng-content></ng-content>'
-})
-export class NovoTableActionsElement {
-}
-
-@Component({
-    selector: 'novo-table-header',
-    template: '<ng-content></ng-content>'
-})
-export class NovoTableHeaderElement {
-}
-
-@Component({
-    selector: 'novo-table-footer',
-    template: '<ng-content></ng-content>'
-})
-export class NovoTableFooterElement {
 }
 
 @Component({
@@ -80,11 +49,12 @@ export class NovoTableFooterElement {
         '[class.editing]': 'mode === NovoTableMode.EDIT',
         '[class.novo-table-loading]': 'loading'
     },
+    // directives: [],
     template: `
         <header *ngIf="columns.length">
             <ng-content select="novo-table-header"></ng-content>
             <div class="header-actions">
-                <novo-pagination *ngIf="config.paging"
+                <novo-pagination *ngIf="config.paging && !(dataProvider.isEmpty() && !dataProvider.isFiltered())"
                                  [rowOptions]="config.customRowOptions"
                                  [(page)]="dataProvider.page"
                                  [(itemsPerPage)]="dataProvider.pageSize"
@@ -102,7 +72,7 @@ export class NovoTableFooterElement {
             <novo-form hideHeader="true" [form]="tableForm">
                 <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
                 <!-- skipSortAndFilterClear is a hack right now, will be removed once Canvas is refactored -->
-                <thead *ngIf="columns.length && (!dataProvider.isEmpty() || dataProvider.isFiltered() || skipSortAndFilterClear)">
+                <thead *ngIf="columns.length && (!dataProvider.isEmpty() || dataProvider.isFiltered() || skipSortAndFilterClear || editing)">
                     <tr role="row">
                         <!-- DETAILS -->
                         <th class="row-actions" *ngIf="config.hasDetails"></th>
@@ -111,7 +81,7 @@ export class NovoTableFooterElement {
                             <novo-checkbox [(ngModel)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < pagedData.length" (ngModelChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></novo-checkbox>
                         </th>
                         <!-- TABLE HEADERS -->
-                        <th *ngFor="let column of columns" [ngClass]="{ 'mass-action': config?.rowSelectionStyle === 'checkbox', 'actions': column?.actions?.items?.length > 0, 'preview': column?.name === 'preview' }" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)">
+                        <th *ngFor="let column of columns" [ngClass]="{ 'mass-action': config?.rowSelectionStyle === 'checkbox', 'actions': column?.actions?.items?.length > 0, 'preview': column?.name === 'preview' }" [novoThOrderable]="column" (onOrderChange)="onOrderChange($event)" [hidden]="isColumnHidden(column)">
                             <div class="th-group" [attr.data-automation-id]="column.id || column.name" *ngIf="!column.hideHeader">
                                 <!-- LABEL & SORT ARROWS -->
                                 <div class="th-title" [ngClass]="(config.sorting !== false && column.sorting !== false) ? 'sortable' : ''" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
@@ -159,7 +129,7 @@ export class NovoTableFooterElement {
                                             {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
                                         </item>
                                         <div class="calender-container" [hidden]="!column.calenderShow">
-                                            <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>Back to Preset Filters</div>
+                                            <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
                                             <novo-date-picker #rangePicker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column.filter" range="true"></novo-date-picker>
                                         </div>
                                     </list>
@@ -169,7 +139,7 @@ export class NovoTableFooterElement {
                     </tr>
                 </thead>
                 <!-- TABLE DATA -->
-                <tbody *ngIf="!dataProvider.isEmpty()">
+                <tbody *ngIf="!dataProvider.isEmpty() || editing">
                     <tr class="table-selection-row" *ngIf="config.rowSelectionStyle === 'checkbox' && showSelectAllMessage && config.selectAllEnabled" data-automation-id="table-selection-row">
                         <td colspan="100%">
                             {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(dataProvider.total)}}</a>
@@ -184,9 +154,9 @@ export class NovoTableFooterElement {
                                 <td class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
                                     <novo-checkbox [(ngModel)]="row._selected" (ngModelChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></novo-checkbox>
                                 </td>
-                                <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name" [class.novo-form-row]="editable">
-                                    <novo-table-cell *ngIf="!row._editing[column.name]" [hasEditor]="editable" [column]="column" [row]="row" [form]="tableForm.controls.rows.controls[i]"></novo-table-cell>
-                                    <novo-control *ngIf="row._editing[column.name]" condensed="true" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]"></novo-control>
+                                <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name" [class.novo-form-row]="editable" [hidden]="isColumnHidden(column)">
+                                    <novo-table-cell *ngIf="row._editing && !row._editing[column.name]" [hasEditor]="editable" [column]="column" [row]="row" [form]="tableForm.controls.rows.controls[i]"></novo-table-cell>
+                                    <novo-control *ngIf="row._editing && row._editing[column.name]" condensed="true" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]"></novo-control>
                                 </td>
                             </tr>
                             <tr class="details-row" *ngIf="config.hasDetails" [hidden]="!row._expanded" [attr.data-automation-id]="'details-row-'+row.id">
@@ -198,7 +168,7 @@ export class NovoTableFooterElement {
                     </template>
                 </tbody>
                 <!-- NO TABLE DATA PLACEHOLDER -->
-                <tbody class="table-message" *ngIf="dataProvider.isEmpty() && !dataProvider.isFiltered()" data-automation-id="empty-table">
+                <tbody class="table-message" *ngIf="dataProvider.isEmpty() && !dataProvider.isFiltered() && !editing" data-automation-id="empty-table">
                     <tr>
                         <td colspan="100%">
                             <div #emptymessage><ng-content select="[table-empty-message]"></ng-content></div>
@@ -241,7 +211,7 @@ export class NovoTableFooterElement {
                         </td>
                     </tr>
                 </tbody>
-                <tfoot *ngIf="!config.footers">
+                <tfoot *ngIf="!config.footers" [ngClass]="dataProvider.length % 2 == 0 ? 'odd' : 'even'">
                     <tr>
                         <td colspan="100%">
                             <ng-content select="novo-table-footer"></ng-content>
@@ -270,7 +240,7 @@ export class NovoTableElement implements DoCheck {
     @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
     @Output() onTableChange: EventEmitter<any> = new EventEmitter();
 
-    _dataProvider: PagedCollection<any>;
+    _dataProvider: PagedArrayCollection<any>;
     _rows: Array<any> = [];
     selected: Array<any> = [];
     activeId: number = 0;
@@ -343,6 +313,7 @@ export class NovoTableElement implements DoCheck {
                         let rowControls = [];
                         row.controls = {};
                         row._editing = {};
+                        row.rowId = this._rows.length;
                         this.columns.forEach(column => {
                             // Use the control passed or use a ReadOnlyControl so that the form has the values
                             let control = column.editor || new ReadOnlyControl({ key: column.name });
@@ -427,7 +398,7 @@ export class NovoTableElement implements DoCheck {
     }
 
     /**
-     * @name buildDateRange
+     * @name setupColumnDefaults
      */
     setupColumnDefaults() {
         // Check columns for cell option types
@@ -507,11 +478,14 @@ export class NovoTableElement implements DoCheck {
      * @name onFilterClear
      * @param column
      */
-    onFilterClear(column) {
+    onFilterClear(column: any): void {
         setTimeout(() => {
             column.filter = null;
-            column.freeTextFilter = null;
+            column.freetextFilter = null;
             this.onFilterChange();
+            if (column.originalOptions) {
+                column.options = column.originalOptions;
+            }
         });
     }
 
@@ -590,7 +564,7 @@ export class NovoTableElement implements DoCheck {
 
     /**
      * @name isFilterActive
-     * @param columnFilters
+     * @param column
      * @param filter
      * @returns {boolean}
      *
@@ -785,28 +759,28 @@ export class NovoTableElement implements DoCheck {
     getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
         let opts: Array<any> = [
-            { label: 'Past 1 Day', min: -1, max: 0 },
-            { label: 'Past 7 Days', min: -7, max: 0 },
-            { label: 'Past 30 Days', min: -30, max: 0 },
-            { label: 'Past 90 Days', min: -90, max: 0 },
-            { label: 'Past 1 Year', min: -366, max: 0 },
-            { label: 'Next 1 Day', min: 0, max: 1 },
-            { label: 'Next 7 Days', min: 0, max: 7 },
-            { label: 'Next 30 Days', min: 0, max: 30 },
-            { label: 'Next 90 Days', min: 0, max: 90 },
-            { label: 'Next 1 Year', min: 0, max: 366 }
+            { label: this.labels.past1Day, min: -1, max: 0 },
+            { label: this.labels.past7Days, min: -7, max: 0 },
+            { label: this.labels.past30Days, min: -30, max: 0 },
+            { label: this.labels.past90Days, min: -90, max: 0 },
+            { label: this.labels.past1Year, min: -366, max: 0 },
+            { label: this.labels.next1Day, min: 0, max: 1 },
+            { label: this.labels.next7Days, min: 0, max: 7 },
+            { label: this.labels.next30Days, min: 0, max: 30 },
+            { label: this.labels.next90Days, min: 0, max: 90 },
+            { label: this.labels.next1Year, min: 0, max: 366 }
         ];
 
         if (column && column.range) {
             opts.push({
-                label: 'Custom Date Range',
+                label: this.labels.customDateRange,
                 range: true
             });
         }
         return opts;
     }
 
-    onCalenderSelect(column, event) {
+    onCalenderSelect(column, event): void {
         setTimeout(() => {
             if (event.startDate && event.endDate) {
                 this.onFilterChange();
@@ -831,11 +805,7 @@ export class NovoTableElement implements DoCheck {
                 return false;
             });
             config.filtering.options = newOptions;
-            // if (config.filtering.originalOptions[0].label) {
-            //     config.filtering.filter = [{ label: config.filtering.freetextFilter, value: config.filtering.freetextFilter }];
-            // } else {
             config.filtering.filter = config.filtering.freetextFilter;
-            // }
         } else {
             config.filtering.options = config.filtering.originalOptions;
         }
@@ -854,10 +824,13 @@ export class NovoTableElement implements DoCheck {
      */
     setTableEdit(rowNumber?: number, columnNumber?: number): void {
         this.mode = NovoTableMode.EDIT;
+        this._dataProvider.edit();
         this._rows.forEach((row, rowIndex) => {
             row._editing = row._editing || {};
             this.columns.forEach((column, columnIndex) => {
-                if (Helpers.isEmpty(rowNumber) && Helpers.isEmpty(columnNumber)) {
+                if (column.viewOnly) {
+                    row._editing[column.name] = false;
+                } else if (Helpers.isEmpty(rowNumber) && Helpers.isEmpty(columnNumber)) {
                     row._editing[column.name] = true;
                 } else if (!Helpers.isEmpty(rowNumber) && rowIndex === Number(rowNumber) && Helpers.isEmpty(columnNumber)) {
                     row._editing[column.name] = true;
@@ -877,12 +850,14 @@ export class NovoTableElement implements DoCheck {
      */
     leaveEditMode(): void {
         this.mode = NovoTableMode.VIEW;
-        this._rows.forEach((row, rowIndex) => {
+        this._rows.forEach((row) => {
             row._editing = row._editing || {};
-            this.columns.forEach((column, columnIndex) => {
+            this.columns.forEach((column) => {
                 row._editing[column.name] = false;
             });
         });
+        this._dataProvider.undo();
+        this.hideToastMessage();
     }
 
     /**
@@ -897,11 +872,13 @@ export class NovoTableElement implements DoCheck {
         let rowControls = [];
         row.controls = {};
         row._editing = {};
+        row.rowId = this._rows.length + 1;
         this.columns.forEach(column => {
             // Use the control passed or use a ReadOnlyControl so that the form has the values
             let control = column.editor || new ReadOnlyControl({ key: column.name });
+            control.value = null; //remove copied column value
             row.controls[column.name] = control;
-            row._editing[column.name] = true;
+            row._editing[column.name] = !column.viewOnly;
             rowControls.push(control);
         });
         this.formUtils.setInitialValues(rowControls, defaultValue, false);
@@ -974,7 +951,7 @@ export class NovoTableElement implements DoCheck {
      * @memberOf NovoTableElement
      */
     cancelEditing(): void {
-        this.dataProvider.refresh();
+        this.dataProvider.undo();
         this.leaveEditMode();
     }
 
@@ -1015,5 +992,16 @@ export class NovoTableElement implements DoCheck {
      */
     toggleLoading(show: boolean): void {
         this.loading = show;
+    }
+
+    /**
+     * @name isColumnHidden
+     * @description hide a column in edit or view mode
+     * @param {column meta} column
+     * @returns {boolean}
+     * @memberOf NovoTableElement
+     */
+    isColumnHidden(column: any): boolean {
+        return this.editing ? !!column.hideColumnOnEdit : !!column.hideColumnOnView;
     }
 }

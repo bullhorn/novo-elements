@@ -2,7 +2,7 @@
 import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { Helpers } from './../../utils/Helpers';
+import { Helpers } from '../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const TILES_VALUE_ACCESSOR = {
@@ -16,7 +16,7 @@ const TILES_VALUE_ACCESSOR = {
     providers: [TILES_VALUE_ACCESSOR],
     template: `
         <div class="tile-container">
-            <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked}" (click)="select($event, option, i)">
+            <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked, disabled: option.disabled}" (click)="select($event, option, i)">
                 <label [attr.for]="name + i">
                     {{ option.label || option}}
                 </label>
@@ -39,22 +39,23 @@ const TILES_VALUE_ACCESSOR = {
     ]
 })
 export class NovoTilesElement implements ControlValueAccessor, OnInit {
-    @Input() name:String;
-    @Input() options:any;
-    @Input() required:boolean;
-    @Output() onChange:EventEmitter<any> = new EventEmitter();
+    @Input() name: String;
+    @Input() options: any;
+    @Input() required: boolean;
+    @Output() onChange: EventEmitter<any> = new EventEmitter();
+    @Output() onDisabledOptionClick: EventEmitter<any> = new EventEmitter();
 
-    _options:Array<any> = [];
-    activeTile:any = null;
-    state:String = 'inactive';
+    _options: Array<any> = [];
+    activeTile: any = null;
+    state: String = 'inactive';
 
-    model:any;
-    onModelChange:Function = () => {
+    model: any;
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
-    constructor(private element:ElementRef) {
+    constructor(private element: ElementRef) {
     }
 
     ngOnInit() {
@@ -85,14 +86,18 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
             event.preventDefault();
         }
 
-        for (let option of this._options) {
-            option.checked = false;
-        }
+        if (!item.disabled) {
+            for (let option of this._options) {
+                option.checked = false;
+            }
 
-        item.checked = !item.checked;
-        this.onChange.emit(item.value);
-        this.onModelChange(item.value);
-        this.setTile(item);
+            item.checked = !item.checked;
+            this.onChange.emit(item.value);
+            this.onModelChange(item.value);
+            this.setTile(item);
+        } else {
+            this.onDisabledOptionClick.emit(item);
+        }
     }
 
     setTile(item) {
@@ -122,18 +127,18 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
         });
     }
 
-    writeValue(model:any):void {
+    writeValue(model: any): void {
         this.model = model;
         if (!Helpers.isBlank(model)) {
             this.setupOptions();
         }
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 }

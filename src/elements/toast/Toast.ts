@@ -17,6 +17,9 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
         <div class="toast-content">
             <h5 *ngIf="title">{{title}}</h5>
             <p *ngIf="message" [class.message-only]="!title">{{message}}</p>
+            <div class="dialogue">
+                <ng-content></ng-content>
+            </div>
         </div>
     `
 })
@@ -25,6 +28,7 @@ export class NovoToastElement implements OnInit, OnChanges {
     @Input() icon: string = 'caution';
     @Input() title: string;
     @Input() message: string;
+    @Input() hasDialogue: boolean = false;
 
     show: boolean = false;
     animate: boolean = false;
@@ -45,6 +49,7 @@ export class NovoToastElement implements OnInit, OnChanges {
             // set icon and styling
             this.iconClass = `bhi-${this.icon}`;
             this.alertTheme = `${this.theme} toast-container embedded`;
+            if (this.hasDialogue) { this.alertTheme += ' dialogue'; }
         }
     }
 
@@ -52,6 +57,7 @@ export class NovoToastElement implements OnInit, OnChanges {
         // set icon and styling
         this.iconClass = `bhi-${this.icon}`;
         this.alertTheme = `${this.theme} toast-container embedded`;
+        if (this.hasDialogue) { this.alertTheme += ' dialogue'; }
     }
 
     clickHandler(event) {
