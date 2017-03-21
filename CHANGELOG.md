@@ -1,3 +1,13 @@
+<a name="2.0.161"></a>
+## [2.0.161](https://github.com/bullhorn/novo-elements/compare/v2.0.160...v2.0.161) (2017-03-21)
+
+
+### Bug Fixes
+
+* **form:** Fixing display of address blocks and validation ([3007cad](https://github.com/bullhorn/novo-elements/commit/3007cad))
+
+
+
 <a name="2.0.160"></a>
 ## [2.0.160](https://github.com/bullhorn/novo-elements/compare/v2.0.159...v2.0.160) (2017-03-20)
 
