@@ -1,3 +1,13 @@
+<a name="2.0.162"></a>
+## [2.0.162](https://github.com/bullhorn/novo-elements/compare/v2.0.161...v2.0.162) (2017-03-21)
+
+
+### Features
+
+* **toast:** Ability to have a link inside Toast ([f9d6452](https://github.com/bullhorn/novo-elements/commit/f9d6452))
+
+
+
 <a name="2.0.161"></a>
 ## [2.0.161](https://github.com/bullhorn/novo-elements/compare/v2.0.160...v2.0.161) (2017-03-21)
 
