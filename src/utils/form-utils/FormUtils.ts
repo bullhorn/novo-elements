@@ -443,7 +443,7 @@ export class FormUtils {
         return null;
     }
 
-    setInitialValues(controls: Array<NovoControlConfig>, values, keepClean = false, keyOverride?: string) {
+    setInitialValues(controls: Array<NovoControlConfig>, values: any, keepClean?: boolean, keyOverride?: string) {
         for (let i = 0; i < controls.length; i++) {
             let control = controls[i];
             let key = keyOverride ? control.key.replace(keyOverride, '') : control.key;
@@ -473,11 +473,12 @@ export class FormUtils {
             }
 
             control.value = value;
+            // TODO: keepClean is not required, but is always used. It should default (to true?)
             control.dirty = !keepClean;
         }
     }
 
-    setInitialValuesFieldsets(fieldsets: Array<NovoFieldset>, values, keepClean = false) {
+    setInitialValuesFieldsets(fieldsets: Array<NovoFieldset>, values, keepClean?: boolean) {
         fieldsets.forEach(fieldset => {
             this.setInitialValues(fieldset.controls, values, keepClean);
         });
