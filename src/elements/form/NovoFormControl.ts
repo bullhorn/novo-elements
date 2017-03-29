@@ -51,27 +51,44 @@ export class NovoFormControl extends FormControl {
      */
     public setRequired(isRequired: boolean): void {
         this.required = isRequired;
-        let validators: any = [...this.validators];
         // Update validators to have the required
         if (this.required && !this.hasRequiredValidator) {
+            let validators: any = [...this.validators];
             validators.push(Validators.required);
+            // TODO: duplicated below
+            this.setValidators(validators);
+            this.updateValueAndValidity();
+            this.hasRequiredValidator = this.required;
         } else if (!this.required && this.hasRequiredValidator) {
+            let validators: any = [...this.validators];
             validators = validators.filter(val => val !== Validators.required);
+            // TODO: duplicated above
+            this.setValidators(validators);
+            this.updateValueAndValidity();
+            this.hasRequiredValidator = this.required;
         }
-        this.setValidators(validators);
-        this.updateValueAndValidity();
-        this.hasRequiredValidator = this.required;
     }
 
     /**
+     * @name setValue
      *
      * @param value
-     * @param config
+     * @param onlySelf
+     * @param emitEvent
+     * @param emitModelToViewChange
+     * @param emitViewToModelChange
+     *
      */
-    public setValue(value: any, config: { onlySelf?: boolean, emitEvent?: boolean, emitModelToViewChange?: boolean, emitViewToModelChange?: boolean } = {}): void {
+    public setValue(value: any, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange }: {
+                        onlySelf?: boolean,
+                        emitEvent?: boolean,
+                        emitModelToViewChange?: boolean,
+                        emitViewToModelChange?: boolean
+                    } = {}) {
         this.markAsDirty();
         this.markAsTouched();
-        super.setValue(value, config);
+        // TODO: Should we set defaults on these?
+        super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
     }
 
     /**
@@ -92,3 +109,4 @@ export class NovoFormControl extends FormControl {
         this.setErrors(Object.assign({}, this.errors, { custom: message }));
     }
 }
+
