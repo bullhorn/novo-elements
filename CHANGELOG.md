@@ -1,3 +1,13 @@
+<a name="2.0.165"></a>
+## [2.0.165](https://github.com/bullhorn/novo-elements/compare/v2.0.164...v2.0.165) (2017-03-29)
+
+
+### Bug Fixes
+
+* **FormUtils:** Overrides for setValue calls are now outside of config ([#453](https://github.com/bullhorn/novo-elements/issues/453)) ([c2ee046](https://github.com/bullhorn/novo-elements/commit/c2ee046))
+
+
+
 <a name="2.0.164"></a>
 ## [2.0.164](https://github.com/bullhorn/novo-elements/compare/v2.0.163...v2.0.164) (2017-03-27)
 
