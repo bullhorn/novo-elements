@@ -6,6 +6,7 @@ import { NovoPipesModule } from './src/pipes/Pipes.module';
 import { NovoButtonModule } from './src/elements/button/Button.module';
 import { NovoLoadingModule } from './src/elements/loading/Loading.module';
 import { NovoCardModule } from './src/elements/card/Card.module';
+import { NovoCalendarModule } from './src/elements/calendar/Calendar.module';
 import { NovoToastModule } from './src/elements/toast/Toast.module';
 import { NovoTooltipModule } from './src/elements/tooltip/Tooltip.module';
 import { NovoHeaderModule } from './src/elements/header/Header.module';
@@ -50,6 +51,7 @@ import { FormUtils } from './src/utils/form-utils/FormUtils';
         NovoButtonModule,
         NovoLoadingModule,
         NovoCardModule,
+        NovoCalendarModule,
         NovoToastModule,
         NovoTooltipModule,
         NovoHeaderModule,

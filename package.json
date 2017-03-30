@@ -57,6 +57,7 @@
   "dependencies": {
     "@types/ckeditor": "0.0.34",
     "@types/dragula": "2.1.29",
+    "date-fns": "^1.28.2",
     "dragula": "3.7.2",
     "hint.css": "2.4.1"
   },

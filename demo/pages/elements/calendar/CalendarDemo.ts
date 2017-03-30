@@ -1,6 +1,8 @@
 // NG2
 import { Component } from '@angular/core';
+import { CalendarEvent } from './../../../../index';
 // APP
+let BigCalendarDemoTpl = require('./templates/BigCalendarDemo.html');
 let CalendarDemoTpl = require('./templates/CalendarDemo.html');
 let TimeDemoTpl = require('./templates/TimeDemo.html');
 let RangeDemoTpl = require('./templates/RangeDemo.html');
@@ -13,6 +15,10 @@ const template = `
 
     <h2>Calendar Picker  <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/date-picker">(source)</a></small></h2>
     <p>The calendar picker is used to select a date. It appears in all date picker fields.</p>
+
+    <h5>Big Calendar Picker</h5>
+    <div class="example demo">${BigCalendarDemoTpl}</div>
+    <code-snippet [code]="BigCalendarDemoTpl"></code-snippet>
 
     <h5>Full Calendar Picker</h5>
     <div class="example demo">${CalendarDemoTpl}</div>
@@ -40,6 +46,7 @@ const template = `
     template: template
 })
 export class CalendarDemoComponent {
+    BigCalendarDemoTpl: string = BigCalendarDemoTpl;
     CalendarDemoTpl: string = CalendarDemoTpl;
     TimeDemoTpl: string = TimeDemoTpl;
     RangeDemoTpl: string = RangeDemoTpl;
@@ -55,4 +62,16 @@ export class CalendarDemoComponent {
         startDate: null,
         endDate: null
     };
+
+    viewDate: Date = new Date();
+
+    events: CalendarEvent[] = [{
+        title: 'Has custom class',
+        color: {
+            primary: '#e3bc08',
+            secondary: '#FDF1BA'
+        },
+        start: new Date(),
+        cssClass: 'my-custom-class'
+    }];
 }
