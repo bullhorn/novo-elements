@@ -69,7 +69,10 @@ export class NovoToastService {
         setTimeout(() => {
             this.show(toast);
         }, 20);
-        this.toastTimer(toast);
+        if (!toast.isCloseable) {
+          this.toastTimer(toast);
+        }
+
     }
 
     setToastOnSession(toast, opts) {
@@ -79,6 +82,8 @@ export class NovoToastService {
         toast.title = OPTIONS.title || '';
         toast.message = OPTIONS.message || '';
         toast.hideDelay = OPTIONS.hideDelay || this.defaults.hideDelay;
+        toast.link = OPTIONS.link || '';
+        toast.isCloseable = OPTIONS.isCloseable || false;
 
         const CUSTOM_CLASS = OPTIONS.customClass || '';
         const ALERT_STYLE = OPTIONS.theme || this.defaults.theme;
