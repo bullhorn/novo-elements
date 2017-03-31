@@ -1,3 +1,13 @@
+<a name="2.0.166"></a>
+## [2.0.166](https://github.com/bullhorn/novo-elements/compare/v2.0.165...v2.0.166) (2017-03-31)
+
+
+### Bug Fixes
+
+* **calendar:** setting the month based on the first of the month ([edf062f](https://github.com/bullhorn/novo-elements/commit/edf062f))
+
+
+
 <a name="2.0.165"></a>
 ## [2.0.165](https://github.com/bullhorn/novo-elements/compare/v2.0.164...v2.0.165) (2017-03-29)
 
