@@ -515,7 +515,7 @@ export class NovoTableElement implements DoCheck {
                             return column.match(record, column.filter);
                         };
                     } else if (column.preFilter && Helpers.isFunction(column.preFilter)) {
-                        query = Object.assign({}, query, column.preFilter(column.filter));
+                        query = Object.assign({}, query, column.preFilter(this.escapeCharacters(column.filter)));
                     } else if (Array.isArray(column.filter)) {
                         // The filters are an array (multi-select), check value
                         let options = column.filter;
@@ -560,6 +560,12 @@ export class NovoTableElement implements DoCheck {
                 this.selectAll(false);
             }
         }
+    }
+
+    escapeCharacters(filter) {
+        if (typeof (filter) === 'string') {
+            return filter.replace(/'/g, '\'\'');
+        } return filter;
     }
 
     /**
