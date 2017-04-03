@@ -4,7 +4,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { EntityPickerResult } from './EntityPickerResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoLoadingElement } from '../../../loading/Loading';
-import {NovoListElement, NovoListItemElement, NovoItemAvatarElement, NovoItemHeaderElement, NovoItemTitleElement, NovoItemContentElement} from '../../../list/List';
+import { NovoListElement, NovoListItemElement, NovoItemAvatarElement, NovoItemHeaderElement, NovoItemTitleElement, NovoItemContentElement } from '../../../list/List';
 
 describe('Elements: EntityPickerResult', () => {
     let fixture;
