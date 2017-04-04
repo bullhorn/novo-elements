@@ -1,6 +1,6 @@
 import { BaseRenderer } from './BaseRenderer';
 
-fdescribe('Element: BaseRenderer', () => {
+describe('Element: BaseRenderer', () => {
     let renderer;
 
     beforeEach(() => {
