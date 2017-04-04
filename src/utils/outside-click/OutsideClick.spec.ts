@@ -3,7 +3,7 @@ import { ElementRef } from '@angular/core';
 // APP
 import { OutsideClick } from './OutsideClick';
 
-fdescribe('Util: OutsideClick', () => {
+describe('Util: OutsideClick', () => {
     let outsideClick;
     let mockElement: ElementRef = new ElementRef(document.createElement('div'));
     let mockEvent;
