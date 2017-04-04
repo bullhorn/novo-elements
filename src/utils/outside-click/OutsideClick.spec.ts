@@ -1,20 +1,46 @@
-// // APP
-// import { OutsideClick } from './OutsideClick';
+// NG2
+import { ElementRef } from '@angular/core';
+// APP
+import { OutsideClick } from './OutsideClick';
 
-// describe('Util: OutsideClick', () => {
-//     let instance;
+fdescribe('Util: OutsideClick', () => {
+    let outsideClick;
+    let mockElement: ElementRef = new ElementRef(document.createElement('div'));
+    let mockEvent;
 
-//     beforeEach(() => {
-//         instance = new OutsideClick({});
-//     });
+    beforeEach(() => {
+        outsideClick = new OutsideClick(mockElement);
+        mockEvent = new Event('click');
+    });
 
-//     describe('Initialization', () => {
-//         it('should all be defined', () => {
-//             expect(instance).toBeDefined();
-//         });
+    it('should has default values', () => {
+        expect(outsideClick.active).toEqual(false);
+        expect(outsideClick.element).toEqual(mockElement);
+    });
 
-//         it('should default with the right variables', () => {
-//             expect(instance.active).toEqual(false);
-//         });
-//     });
-// });
+    describe('Method: toggleActive(event,forceValue)', () => {
+        it('should be defined', () => {
+            expect(outsideClick.toggleActive).toBeDefined();
+        });
+
+        it('should toggle the active property of outsideClick', () => {
+            outsideClick.toggleActive(mockEvent);
+            expect(outsideClick.active).toBe(true);
+            outsideClick.toggleActive(mockEvent);
+            expect(outsideClick.active).toBe(false);
+        });
+
+        it('should set active to force value if passed', () => {
+            outsideClick.toggleActive(mockEvent, false);
+            expect(outsideClick.active).toBe(false);
+            outsideClick.toggleActive(mockEvent, true);
+            expect(outsideClick.active).toBe(true);
+        });
+    });
+
+    describe('Method: handleOutsideClick(event)', () => {
+        it('should be defined', () => {
+            expect(outsideClick.handleOutsideClick).toBeDefined();
+        });
+    });
+});
