@@ -1,3 +1,13 @@
+<a name="2.0.168"></a>
+## [2.0.168](https://github.com/bullhorn/novo-elements/compare/v2.0.167...v2.0.168) (2017-04-04)
+
+
+### Bug Fixes
+
+* **Table:** Escape apostrophes in onFilterChange ([#454](https://github.com/bullhorn/novo-elements/issues/454)) ([ab11988](https://github.com/bullhorn/novo-elements/commit/ab11988))
+
+
+
 <a name="2.0.167"></a>
 ## [2.0.167](https://github.com/bullhorn/novo-elements/compare/v2.0.166...v2.0.167) (2017-03-31)
 
