@@ -1,6 +1,6 @@
 // NG2
 import { Component } from '@angular/core';
-import { CalendarEvent } from './../../../../index';
+import { CalendarEvent, CalendarEventResponse } from './../../../../index';
 // APP
 let BigCalendarDemoTpl = require('./templates/BigCalendarDemo.html');
 let CalendarDemoTpl = require('./templates/CalendarDemo.html');
@@ -41,6 +41,25 @@ const template = `
 </div>
 `;
 
+export const colors: any = {
+  red: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+  },
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA'
+  },
+  green: {
+    primary: '#8CC152',
+    secondary: '#37BC9B'
+  }
+};
+
 @Component({
     selector: 'calendar-demo',
     template: template
@@ -64,14 +83,54 @@ export class CalendarDemoComponent {
     };
 
     viewDate: Date = new Date();
-
     events: CalendarEvent[] = [{
         title: 'Has custom class',
-        color: {
-            primary: '#e3bc08',
-            secondary: '#FDF1BA'
-        },
+        color: colors.red,
         start: new Date(),
-        cssClass: 'my-custom-class'
+        response: CalendarEventResponse.Rejected
     }];
+
+    getNewEvent(date, color, type):CalendarEvent {
+        let evt:CalendarEvent = {
+            title: 'Has custom class',
+            color: color,
+            start: date,
+            response: type
+        };
+        return evt;
+    }
+
+    dayClicked(event) {
+        let evt:CalendarEvent = this.getNewEvent( event.day.date, colors.blue, CalendarEventResponse.Maybe );
+        event.day.events.push(evt);
+    }
+
+    addShift(event) {
+        let evt:CalendarEvent = this.getNewEvent( event.day.date, colors.blue, CalendarEventResponse.Maybe);
+        event.day.events.push(evt);
+    }
+
+    removeShift(event) {
+        event.day.events.splice(event.day.events.indexOf(event.event), 1);
+    }
+
+    toggleAvailable(event) {
+        let evt:CalendarEvent;
+        if (!event.day.events.length) {
+            evt = this.getNewEvent( event.day.date, colors.green, CalendarEventResponse.Accepted);
+            event.day.events.push(evt);
+        } else {
+            evt = event.day.events[0];
+            switch (evt.response) {
+                case CalendarEventResponse.Accepted:
+                    evt.response = CalendarEventResponse.Rejected;
+                    break;
+                case CalendarEventResponse.Rejected:
+                    event.day.events = [];
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
