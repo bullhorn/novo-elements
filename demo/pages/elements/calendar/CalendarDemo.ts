@@ -102,23 +102,23 @@ export class CalendarDemoComponent {
 
     dayClicked(event) {
         let evt:CalendarEvent = this.getNewEvent( event.day.date, colors.blue, CalendarEventResponse.Maybe );
-        event.day.events.push(evt);
+        this.events.push(evt);
     }
 
     addShift(event) {
         let evt:CalendarEvent = this.getNewEvent( event.day.date, colors.blue, CalendarEventResponse.Maybe);
-        event.day.events.push(evt);
+        this.events.push(evt);
     }
 
     removeShift(event) {
-        event.day.events.splice(event.day.events.indexOf(event.event), 1);
+        this.events.splice(event.day.events.indexOf(event.event), 1);
     }
 
     toggleAvailable(event) {
         let evt:CalendarEvent;
         if (!event.day.events.length) {
             evt = this.getNewEvent( event.day.date, colors.green, CalendarEventResponse.Accepted);
-            event.day.events.push(evt);
+            this.events.push(evt);
         } else {
             evt = event.day.events[0];
             switch (evt.response) {
