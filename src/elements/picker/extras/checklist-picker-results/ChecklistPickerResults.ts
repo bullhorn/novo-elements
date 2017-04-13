@@ -21,7 +21,7 @@ import { Observable } from 'rxjs/Rx';
         <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
         <ul *ngIf="matches.length > 0">
             <span *ngFor="let section of matches; let i = index">
-                <li class="header caption" *ngIf="section.data.length > 0">{{section.type}}</li>
+                <li class="header caption" *ngIf="section.data.length > 0">{{section.label}}</li>
                 <li
                     *ngFor="let match of section.data; let i = index" [ngClass]="{checked: match.checked}"
                     (click)="selectMatch($event, match)"
