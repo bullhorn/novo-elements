@@ -1,3 +1,13 @@
+<a name="2.0.169"></a>
+## [2.0.169](https://github.com/bullhorn/novo-elements/compare/v2.0.168...v2.0.169) (2017-04-14)
+
+
+### Bug Fixes
+
+* **multipicker:** Values in multipicker can now be localized ([#458](https://github.com/bullhorn/novo-elements/issues/458)) ([60611f0](https://github.com/bullhorn/novo-elements/commit/60611f0))
+
+
+
 <a name="2.0.168"></a>
 ## [2.0.168](https://github.com/bullhorn/novo-elements/compare/v2.0.167...v2.0.168) (2017-04-04)
 
