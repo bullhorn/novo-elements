@@ -145,11 +145,20 @@ describe('Element: NovoMultiPickerElement', () => {
         });
     });
 
-    xdescribe('Method: setupOptionByType(section)', () => {
-        it('should correctly format a section of options', () => {
-            let section = { type: 'cats', data: ['Kitty'] };
+    describe('Method: setupOptionByType(section)', () => {
+        it('should correctly format a section of options without the ALL section', () => {
+            component.selectAllOption = false;
+            let section = { type: 'cats', label:'cats', data: ['Kitty'] };
+            let data = [{ value: 'Kitty', label: 'Kitty', type: 'cats', checked: undefined, isParentOf: undefined, isChildOf: undefined }];
+            let expected = { type: 'cats', label: 'cats', data: data, originalData: data };
+            let actualResult = component.setupOptionsByType(section);
+            expect(actualResult).toEqual(expected);
+        });
+        it('should correctly format a section of options with the ALL section', () => {
+            component.selectAllOption = true;
+            let section = { type: 'cats', label:'cats', data: ['Kitty'] };
             let data = [{ value: 'ALL', label: 'All cats', type: 'cats', checked: undefined, isParentOf: undefined, isChildOf: undefined }, { value: 'Kitty', label: 'Kitty', type: 'cats', checked: undefined, isParentOf: undefined, isChildOf: undefined }];
-            let expected = { type: 'cats', data: data, originalData: data };
+            let expected = { type: 'cats', label: 'cats', data: data, originalData: data };
             let actualResult = component.setupOptionsByType(section);
             expect(actualResult).toEqual(expected);
         });
@@ -310,6 +319,24 @@ describe('Element: NovoMultiPickerElement', () => {
             expect(component.notShown.length).toBe(1);
             expect(component.notShown[0].type).toBe('cats');
             expect(component.notShown[0].count).toBe(7);
+        });
+        it('should create an object with correct type, count, and singular label when count is 1 above chipsCount', () => {
+            let items = [{ value: 1, type: 'numbers' }, { value: 2, type: 'numbers' }, { value: 3, type: 'numbers' }, { value: 4, type: 'numbers' }, { value: 5, type: 'numbers' }];
+            component.chipsCount = 4;
+            component.types = [{ value: 'numbers', singular: 'singularnumber', plural: 'pluralnumbers' }];
+            component.updateDisplayText(items);
+            expect(component.notShown.length).toBe(1);
+            expect(component.notShown[0].type).toBe('singularnumber');
+            expect(component.notShown[0].count).toBe(1);
+        });
+        it('should create an object with correct type, count, and plural label when count is 2+ above chipsCount', () => {
+            let items = [{ value: 1, type: 'numbers' }, { value: 2, type: 'numbers' }, { value: 3, type: 'numbers' }, { value: 4, type: 'numbers' }, { value: 5, type: 'numbers' }, { value: 6, type: 'numbers' }];
+            component.chipsCount = 2;
+            component.types = [{ value: 'numbers', singular: 'singularnumber', plural: 'pluralnumbers' }];
+            component.updateDisplayText(items);
+            expect(component.notShown.length).toBe(1);
+            expect(component.notShown[0].type).toBe('pluralnumbers');
+            expect(component.notShown[0].count).toBe(4);
         });
     });
 
