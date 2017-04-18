@@ -19,8 +19,8 @@
     "postversion": "git push origin master && git push --tags && npm run github-release && npm publish",
     "build:prod": "webpack --config config/webpack.prod.js --progress --profile --colors --display-error-details --display-cached --bail",
     "lint:save": "tslint -t json \"src/**/*.ts\" \"demo/**/*.ts\"",
-    "loc": "sloc src/ --format json > ./coverage/sloc.json",
-    "pregalaxy": "npm run lint:save && npm run loc",
+    "loc": "node_modules/sloc/bin/sloc src/ --format json > ./coverage/sloc.json",
+    "pregalaxy": "npm run loc",
     "galaxy": "galaxy analyze"
   },
   "main": "index.js",
@@ -28,8 +28,7 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },
@@ -105,6 +104,7 @@
     "extract-text-webpack-plugin": "2.0.0-beta.4",
     "file-loader": "0.9.0",
     "gh-pages": "0.12.0",
+    "galaxy-parser": "^1.0.5",
     "html-webpack-plugin": "2.24.1",
     "husky": "0.11.9",
     "ie-shim": "0.1.0",
@@ -149,5 +149,16 @@
   "engines": {
     "node": ">= 6.0.0",
     "npm": ">= 3"
+  },
+  "galaxy": {
+    "display": "Novo Elements",
+    "type": "javascript",
+    "goal": 80,
+    "public": true,
+    "threshold": 0.01,
+    "locations": {
+      "sloc": "/coverage/sloc.json",
+      "lcov": "/coverage/lcov.info"
+    }
   }
 }
