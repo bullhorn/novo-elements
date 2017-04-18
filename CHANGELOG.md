@@ -1,3 +1,13 @@
+<a name="2.0.170"></a>
+## [2.0.170](https://github.com/bullhorn/novo-elements/compare/v2.0.169...v2.0.170) (2017-04-18)
+
+
+### Features
+
+* **checklist:** set initial model up based on options ([#459](https://github.com/bullhorn/novo-elements/issues/459)) ([a963b16](https://github.com/bullhorn/novo-elements/commit/a963b16))
+
+
+
 <a name="2.0.169"></a>
 ## [2.0.169](https://github.com/bullhorn/novo-elements/compare/v2.0.168...v2.0.169) (2017-04-14)
 
