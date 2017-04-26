@@ -37,6 +37,7 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
     };
 
     ngOnInit() {
+        this.setModel();
         this.setupOptions();
     }
 
@@ -67,6 +68,11 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
                 this._options.push(formattedOption);
             });
         }
+    }
+
+    setModel():void {
+        let checkedOptions = this.options.filter(checkBox => checkBox.checked).map(x => x.value);
+        this.writeValue(checkedOptions);
     }
 
     writeValue(model:any):void {

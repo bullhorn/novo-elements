@@ -1,3 +1,48 @@
+<a name="2.0.170"></a>
+## [2.0.170](https://github.com/bullhorn/novo-elements/compare/v2.0.169...v2.0.170) (2017-04-18)
+
+
+### Features
+
+* **checklist:** set initial model up based on options ([#459](https://github.com/bullhorn/novo-elements/issues/459)) ([a963b16](https://github.com/bullhorn/novo-elements/commit/a963b16))
+
+
+
+<a name="2.0.169"></a>
+## [2.0.169](https://github.com/bullhorn/novo-elements/compare/v2.0.168...v2.0.169) (2017-04-14)
+
+
+### Bug Fixes
+
+* **multipicker:** Values in multipicker can now be localized ([#458](https://github.com/bullhorn/novo-elements/issues/458)) ([60611f0](https://github.com/bullhorn/novo-elements/commit/60611f0))
+
+
+
+<a name="2.0.168"></a>
+## [2.0.168](https://github.com/bullhorn/novo-elements/compare/v2.0.167...v2.0.168) (2017-04-04)
+
+
+### Bug Fixes
+
+* **Table:** Escape apostrophes in onFilterChange ([#454](https://github.com/bullhorn/novo-elements/issues/454)) ([ab11988](https://github.com/bullhorn/novo-elements/commit/ab11988))
+
+
+
+<a name="2.0.167"></a>
+## [2.0.167](https://github.com/bullhorn/novo-elements/compare/v2.0.166...v2.0.167) (2017-03-31)
+
+
+
+<a name="2.0.166"></a>
+## [2.0.166](https://github.com/bullhorn/novo-elements/compare/v2.0.165...v2.0.166) (2017-03-31)
+
+
+### Bug Fixes
+
+* **calendar:** setting the month based on the first of the month ([edf062f](https://github.com/bullhorn/novo-elements/commit/edf062f))
+
+
+
 <a name="2.0.165"></a>
 ## [2.0.165](https://github.com/bullhorn/novo-elements/compare/v2.0.164...v2.0.165) (2017-03-29)
 

@@ -98,7 +98,7 @@ export class NovoLabelService {
     getMonths(): string[] {
         function getMonth(month) {
             let dt = new Date();
-            return dt.setMonth(month);
+            return dt.setMonth(month, 1);
         };
 
         return [getMonth(0), getMonth(1), getMonth(2), getMonth(3), getMonth(4), getMonth(5), getMonth(6),

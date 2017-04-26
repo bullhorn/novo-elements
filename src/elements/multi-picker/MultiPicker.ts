@@ -135,7 +135,8 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
 
     setupOptionsByType(section) {
         let formattedSection: any = {
-            type: section.type
+            type: section.type,
+            label: section.label || section.type
         };
         formattedSection.data = section.data.map(item => {
             return this.formatOption(section, item);
@@ -265,7 +266,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
                 } else {
                     count = selectedOfType.length;
                 }
-                let displayType = count === 1 ? type.singular : type.value;
+                let displayType = count === 1 ? type.singular : type.plural || type.value;
                 if (count > 0) {
                     this.notShown.push({ type: displayType, count: count });
                 }
