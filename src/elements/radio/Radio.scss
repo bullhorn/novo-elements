@@ -1,28 +1,52 @@
+novo-radio-group {
+    display: flex;
+    >novo-radio {
+        margin: 0;
+        button {
+            border-radius: 0 !important;
+            &.unchecked {
+                opacity: .5;
+            }
+        }
+        &:first-child {
+            button {
+                border-top-left-radius: 3px;
+                border-bottom-left-radius: 3px;
+            }
+        }
+        &:last-child {
+            button {
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
+                border-right-width: 1px !important;
+                border-right-style: solid !important;
+            }
+        }
+    }
+}
+
 novo-radio {
     margin-right: 10px;
-
     &.vertical {
         display: block;
     }
-
-    > input {
+    >input {
         position: absolute;
         z-index: -1;
         opacity: 0;
     }
-
-    > label {
+    >label {
         cursor: pointer;
-
+        >div {
+            display: inline;
+        }
         i {
             margin-right: 5px;
             transition: all 200ms ease-in-out;
-
             &.bhi-checkbox-empty,
             &.bhi-radio-empty {
                 color: #D2D2D2;
             }
-
             &.bhi-checkbox-filled,
             &.bhi-radio-filled {
                 color: $positive;

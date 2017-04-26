@@ -28,8 +28,7 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },
@@ -156,7 +155,6 @@
     "type": "javascript",
     "goal": 80,
     "public": true,
-    "threshold": 0.01,
     "locations": {
       "sloc": "/coverage/sloc.json",
       "lcov": "/coverage/lcov.info"

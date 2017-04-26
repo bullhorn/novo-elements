@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 // APP
 let BasicRadioTpl = require('./templates/BasicRadio.html');
 let VerticalRadioTpl = require('./templates/VerticalRadio.html');
+let ButtonRadioTpl = require('./templates/ButtonRadio.html');
 
 const template = `
 <div class="container">
@@ -16,6 +17,10 @@ const template = `
     <h5>Vertical</h5>
     <div class="example radio-demo">${VerticalRadioTpl}</div>
     <code-snippet [code]="VerticalRadioTpl"></code-snippet>
+
+    <h5>Button Radio</h5>
+    <div class="example radio-demo">${ButtonRadioTpl}</div>
+    <code-snippet [code]="ButtonRadioTpl"></code-snippet>
 </div>
 `;
 
@@ -26,6 +31,7 @@ const template = `
 export class RadioDemoComponent {
     BasicRadioTpl: string = BasicRadioTpl;
     VerticalRadioTpl: string = VerticalRadioTpl;
+    ButtonRadioTpl: string = ButtonRadioTpl;
 
     onChangeVertical(change) {
         console.log('Vertical Radio Change:', change); // tslint:disable-line
@@ -33,5 +39,9 @@ export class RadioDemoComponent {
 
     onChangeBasic(change) {
         console.log('Basic Radio Change:', change); // tslint:disable-line
+    }
+
+    onChangeButton(change) {
+        console.log('Button Radio Change:', change); // tslint:disable-line
     }
 }
