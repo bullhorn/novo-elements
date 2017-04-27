@@ -1,3 +1,18 @@
+<a name="2.0.172"></a>
+## [2.0.172](https://github.com/bullhorn/novo-elements/compare/v2.0.171...v2.0.172) (2017-04-26)
+
+
+
+<a name="2.0.171"></a>
+## [2.0.171](https://github.com/bullhorn/novo-elements/compare/v2.0.170...v2.0.171) (2017-04-26)
+
+
+### Features
+
+* **radio:** Adding in a button radio option and group ([8121b8a](https://github.com/bullhorn/novo-elements/commit/8121b8a))
+
+
+
 <a name="2.0.170"></a>
 ## [2.0.170](https://github.com/bullhorn/novo-elements/compare/v2.0.169...v2.0.170) (2017-04-18)
 

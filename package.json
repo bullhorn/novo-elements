@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "2.0.170",
+  "version": "2.0.172",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
     "precommit": "npm run lint",
@@ -158,7 +158,6 @@
     "type": "javascript",
     "goal": 80,
     "public": true,
-    "threshold": 0.01,
     "locations": {
       "sloc": "/coverage/sloc.json",
       "lcov": "/coverage/lcov.info"
