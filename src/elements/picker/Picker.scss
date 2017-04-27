@@ -25,11 +25,14 @@ novo-picker {
     i.bhi-search,
     i.bhi-times {
         position: absolute;
-        top: 9px;
         right: 0;
         font-size: 1.2em;
     }
+    i.bhi-search {
+        top: 0;
+    }
     i.bhi-times {
+        top: 6px;
         cursor: pointer;
         font-size: 1em;
     }
