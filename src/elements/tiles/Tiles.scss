@@ -42,5 +42,6 @@ novo-tiles {
         border: 1px solid $positive;
         border-radius: 3px;
         transition: all 140ms ease-in-out;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     }
 }

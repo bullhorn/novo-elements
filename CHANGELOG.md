@@ -1,3 +1,23 @@
+<a name="2.0.175"></a>
+## [2.0.175](https://github.com/bullhorn/novo-elements/compare/v2.0.174...v2.0.175) (2017-04-28)
+
+
+### Bug Fixes
+
+* **table:** Making it so that options in filters truncate when too long ([cf26f66](https://github.com/bullhorn/novo-elements/commit/cf26f66))
+
+
+
+<a name="2.0.174"></a>
+## [2.0.174](https://github.com/bullhorn/novo-elements/compare/v2.0.173...v2.0.174) (2017-04-27)
+
+
+
+<a name="2.0.173"></a>
+## [2.0.173](https://github.com/bullhorn/novo-elements/compare/v2.0.172...v2.0.173) (2017-04-27)
+
+
+
 <a name="2.0.172"></a>
 ## [2.0.172](https://github.com/bullhorn/novo-elements/compare/v2.0.171...v2.0.172) (2017-04-26)
 
