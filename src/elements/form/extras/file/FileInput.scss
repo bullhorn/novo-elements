@@ -2,8 +2,13 @@ novo-file-input {
     display: flex;
     flex-flow: row wrap;
 
+    .files-below {
+        padding-top: 10px;
+    }
+
     .file-output-group {
         width: 100%;
+        margin-top: 15px;
         .file-item {
             background-color: $white;
             box-shadow: 0 1px 4px rgba(#000, .15), 0 2px 10px rgba(#000, .09);
@@ -50,7 +55,7 @@ novo-file-input {
 
         &:hover,
         &.active {
-            label {
+            label.boxed {
                 border: 2px dashed $positive;
             }
         }
@@ -68,7 +73,6 @@ novo-file-input {
             flex-flow: column;
             align-items: center;
             position: relative;
-            border: 2px dashed $grey;
             padding: 15px;
             cursor: pointer;
             pointer-events: none; /*This for FF*/
@@ -77,6 +81,13 @@ novo-file-input {
             }
             small {
                 margin-top: 7px;
+            }
+            &.boxed {
+                border: 2px dashed $grey;
+            }
+
+            i {
+                font-size: 3em;
             }
         }
     }

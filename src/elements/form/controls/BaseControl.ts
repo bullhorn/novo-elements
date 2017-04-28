@@ -38,6 +38,7 @@ export interface NovoControlConfig {
     description?: string;
     tooltip?: string;
     tooltipPosition?: string;
+    layoutOptions?: any;
     customControl?: any;
     customControlConfig?: any;
 }
@@ -76,6 +77,7 @@ export class BaseControl {
     description?: string;
     tooltip?: string;
     tooltipPosition?: string;
+    layoutOptions?: any;
     customControl?: any;
     customControlConfig?: any;
 
@@ -101,6 +103,8 @@ export class BaseControl {
         this.forceClear = new EventEmitter();
         this.readOnly = !!config.readOnly || !!config.disabled;
         this.disabled = !!config.disabled;
+        this.layoutOptions = config.layoutOptions || {};
+
         if (this.required) {
             this.validators.push(Validators.required);
         }
