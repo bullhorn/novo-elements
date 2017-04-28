@@ -36,8 +36,10 @@ export class AppBridge {
 
     constructor(name?: string) {
         this.name = name;
-        postRobot.CONFIG.LOG_LEVEL = 'error';
-        this._setupHandlers();
+        if (postRobot) {
+            postRobot.CONFIG.LOG_LEVEL = 'error';
+            this._setupHandlers();
+        }
     }
 
     set tracing(tracing: boolean) {
