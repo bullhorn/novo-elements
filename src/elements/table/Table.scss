@@ -64,7 +64,6 @@ novo-table {
             padding: $table-cell-padding;
         }
     }
-    // Disable all filtering/sorting/pagination IF we are editing
     &.editing {
         th .th-title,
         th novo-dropdown,
@@ -259,7 +258,6 @@ novo-table {
             background-color: $white !important;
         }
     }
-    // Nesting
     .table {
         background-color: $table-bg;
     }
@@ -271,7 +269,6 @@ novo-table {
             padding-top: 0 !important;
         }
     }
-    // Remove border
     .no-border {
         border: 0;
     }
@@ -357,6 +354,13 @@ novo-dropdown-container.table-dropdown {
                     border-bottom: 2px solid $ocean;
                 }
             }
+        }
+        item>span {
+            display: inline-block;
+            max-width: calc(100% - 20px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
     .calender-container {
