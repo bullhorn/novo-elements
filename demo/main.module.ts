@@ -41,8 +41,7 @@ import {
     PopOverDemoComponent,
     CustomDemoComponent
 } from './pages/elements';
-import { UtilsDemoComponent } from './pages/utils/utils/UtilsDemo';
-import { PipesDemoComponent } from './pages/utils/pipes/PipesDemo';
+import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
 import { StatusCell, ExtraDetails, ImageCell, ActionsCell } from './pages/elements/table/TableDemo';
 import { CustomPickerResults } from './pages/elements/picker/PickerDemo';
@@ -101,7 +100,8 @@ import './demo.scss';
         CategoryDropdownDemoComponent,
         MultiPickerDemoComponent,
         PopOverDemoComponent,
-        CustomDemoComponent
+        CustomDemoComponent,
+        AppBridgeDemoComponent
     ],
     imports: [
         // NG2

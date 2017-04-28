@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 // APP
 import { Home } from './../pages/home/Home';
 import { ColorComponent, TypographyComponent, CompositionComponent, IconographyComponent } from './../pages/design';
-import { PipesDemoComponent, UtilsDemoComponent } from './../pages/utils';
+import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './../pages/utils';
 import {
     ButtonDemoComponent,
     LoadingDemoComponent,
@@ -35,7 +35,7 @@ import {
     PopOverDemoComponent
 } from './../pages/elements';
 
-export const routes:any = [
+export const routes: any = [
     { path: '', component: Home },
     { path: 'home', component: Home },
 
@@ -78,6 +78,7 @@ export const routes:any = [
     // Utils
     { path: 'utils', component: UtilsDemoComponent, title: 'Utils', section: 'utils' },
     { path: 'pipes', component: PipesDemoComponent, title: 'Pipes', section: 'utils' },
+    { path: 'app-bridge', component: AppBridgeDemoComponent, title: 'App Bridge', section: 'utils' },
 
     // Catch All
     { path: '**', redirectTo: '/' }

@@ -2,8 +2,8 @@ import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/co
 import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../utils/calendar-utils/CalendarUtils';
 
 @Component({
-  selector: 'novo-calendar-month-day',
-  template: `
+    selector: 'novo-calendar-month-day',
+    template: `
     <template #defaultTemplate>
       <div class="calendar-day-top">
         <span class="calendar-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
@@ -33,56 +33,56 @@ import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../utils/
       }">
     </template>
   `,
-  host: {
-    '[class]': '"calendar-cell calendar-day-cell " + day?.cssClass',
-    '[class.calendar-day-accepted]': 'accepted.length',
-    '[class.calendar-day-rejected]': 'rejected.length',
-    '[class.calendar-past]': 'day.isPast',
-    '[class.calendar-today]': 'day.isToday',
-    '[class.calendar-future]': 'day.isFuture',
-    '[class.calendar-weekend]': 'day.isWeekend',
-    '[class.calendar-in-month]': 'day.inMonth',
-    '[class.calendar-out-month]': '!day.inMonth',
-    '[class.calendar-has-events]': 'day.events.length > 0',
-    '[style.backgroundColor]': 'day.backgroundColor'
-  }
+    host: {
+        '[class]': '"calendar-cell calendar-day-cell " + day?.cssClass',
+        '[class.calendar-day-accepted]': 'accepted.length',
+        '[class.calendar-day-rejected]': 'rejected.length',
+        '[class.calendar-past]': 'day.isPast',
+        '[class.calendar-today]': 'day.isToday',
+        '[class.calendar-future]': 'day.isFuture',
+        '[class.calendar-weekend]': 'day.isWeekend',
+        '[class.calendar-in-month]': 'day.inMonth',
+        '[class.calendar-out-month]': '!day.inMonth',
+        '[class.calendar-has-events]': 'day.events.length > 0',
+        '[style.backgroundColor]': 'day.backgroundColor'
+    }
 })
 export class CalendarMonthDayElement {
 
-  @Input() day: MonthViewDay;
+    @Input() day: MonthViewDay;
 
-  @Input() locale: string;
+    @Input() locale: string;
 
-  @Input() tooltipPlacement: string;
+    @Input() tooltipPlacement: string;
 
-  @Input() customTemplate: TemplateRef<any>;
+    @Input() customTemplate: TemplateRef<any>;
 
-  @Output() eventClicked: EventEmitter<{ event: CalendarEvent }> = new EventEmitter<{ event: CalendarEvent }>();
+    @Output() eventClicked: EventEmitter<{ event: CalendarEvent }> = new EventEmitter<{ event: CalendarEvent }>();
 
-  get accepted(): Array<CalendarEvent> {
-    if (!this.day) {
-      return [];
+    get accepted(): Array<CalendarEvent> {
+        if (!this.day) {
+            return [];
+        }
+        return this.day.events.filter((evt) => {
+            return (evt.response === CalendarEventResponse.Accepted);
+        });
     }
-    return this.day.events.filter((evt) => {
-      return (evt.response === CalendarEventResponse.Accepted);
-    });
-  }
 
-  get rejected(): Array<CalendarEvent> {
-    if (!this.day) {
-      return [];
+    get rejected(): Array<CalendarEvent> {
+        if (!this.day) {
+            return [];
+        }
+        return this.day.events.filter((evt) => {
+            return (evt.response === CalendarEventResponse.Rejected);
+        });
     }
-    return this.day.events.filter((evt) => {
-      return (evt.response === CalendarEventResponse.Rejected);
-    });
-  }
 
-  get maybes(): Array<CalendarEvent> {
-    if (!this.day) {
-      return [];
+    get maybes(): Array<CalendarEvent> {
+        if (!this.day) {
+            return [];
+        }
+        return this.day.events.filter((evt) => {
+            return (evt.response === CalendarEventResponse.Maybe);
+        });
     }
-    return this.day.events.filter((evt) => {
-      return (evt.response === CalendarEventResponse.Maybe);
-    });
-  }
 }

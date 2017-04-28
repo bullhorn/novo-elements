@@ -2,15 +2,7 @@ import { Component, OnChanges, Input, Output, EventEmitter, ChangeDetectorRef, O
 import { CalendarEvent, WeekDay, MonthView, getWeekViewHeader, getMonthView, MonthViewDay, CalendarEventTimesChangedEvent } from '../../utils/calendar-utils/CalendarUtils';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import isSameDay from 'date-fns/is_same_day';
-import setDate from 'date-fns/set_date';
-import setMonth from 'date-fns/set_month';
-import setYear from 'date-fns/set_year';
-import getDate from 'date-fns/get_date';
-import getMonth from 'date-fns/get_month';
-import getYear from 'date-fns/get_year';
-import differenceInSeconds from 'date-fns/difference_in_seconds';
-import addSeconds from 'date-fns/add_seconds';
+import * as dateFns from 'date-fns';
 
 /**
  * Shows all events on a given month. Example usage:
@@ -23,8 +15,8 @@ import addSeconds from 'date-fns/add_seconds';
  * ```
  */
 @Component({
-  selector: 'novo-calendar-month',
-  template: `
+    selector: 'novo-calendar-month',
+    template: `
     <div class="calendar-month-view">
       <novo-calendar-month-header
         [(viewDate)]="viewDate"
@@ -52,168 +44,167 @@ import addSeconds from 'date-fns/add_seconds';
 })
 export class CalendarMonthElement implements OnChanges, OnInit, OnDestroy {
 
-  /**
-   * The current view date
-   */
-  @Input() viewDate: Date;
+    /**
+     * The current view date
+     */
+    @Input() viewDate: Date;
 
-  /**
-   * An array of events to display on view
-   */
-  @Input() events: CalendarEvent[] = [];
+    /**
+     * An array of events to display on view
+     */
+    @Input() events: CalendarEvent[] = [];
 
-  /**
-   * An array of day indexes (0 = sunday, 1 = monday etc) that will be hidden on the view
-   */
-  @Input() excludeDays: number[] = [];
+    /**
+     * An array of day indexes (0 = sunday, 1 = monday etc) that will be hidden on the view
+     */
+    @Input() excludeDays: number[] = [];
 
-  /**
-   * A function that will be called before each cell is rendered. The first argument will contain the calendar cell.
-   * If you add the `cssClass` property to the cell it will add that class to the cell in the template
-   */
-  @Input() dayModifier: Function;
+    /**
+     * A function that will be called before each cell is rendered. The first argument will contain the calendar cell.
+     * If you add the `cssClass` property to the cell it will add that class to the cell in the template
+     */
+    @Input() dayModifier: Function;
 
-  /**
-   * An observable that when emitted on will re-render the current view
-   */
-  @Input() refresh: Subject<any>;
+    /**
+     * An observable that when emitted on will re-render the current view
+     */
+    @Input() refresh: Subject<any>;
 
-  /**
-   * The locale used to format dates
-   */
-  @Input() locale: string = 'en-US';
+    /**
+     * The locale used to format dates
+     */
+    @Input() locale: string = 'en-US';
 
-  /**
-   * The placement of the event tooltip
-   */
-  @Input() tooltipPlacement: string = 'top';
+    /**
+     * The placement of the event tooltip
+     */
+    @Input() tooltipPlacement: string = 'top';
 
-  /**
-   * The start number of the week
-   */
-  @Input() weekStartsOn: number;
+    /**
+     * The start number of the week
+     */
+    @Input() weekStartsOn: number;
 
-  /**
-   * A custom template to use to replace the header
-   */
-  @Input() headerTemplate: TemplateRef<any>;
+    /**
+     * A custom template to use to replace the header
+     */
+    @Input() headerTemplate: TemplateRef<any>;
 
-  /**
-   * A custom template to use to replace the day cell
-   */
-  @Input() cellTemplate: TemplateRef<any>;
+    /**
+     * A custom template to use to replace the day cell
+     */
+    @Input() cellTemplate: TemplateRef<any>;
 
-  /**
-   * Called when the day cell is clicked
-   */
-  @Output() dayClicked: EventEmitter<{day: MonthViewDay}> = new EventEmitter<{day: MonthViewDay}>();
+    /**
+     * Called when the day cell is clicked
+     */
+    @Output() dayClicked: EventEmitter<{ day: MonthViewDay }> = new EventEmitter<{ day: MonthViewDay }>();
 
-  /**
-   * Called when the event title is clicked
-   */
-  @Output() eventClicked: EventEmitter<{event: CalendarEvent}> = new EventEmitter<{event: CalendarEvent}>();
+    /**
+     * Called when the event title is clicked
+     */
+    @Output() eventClicked: EventEmitter<{ event: CalendarEvent }> = new EventEmitter<{ event: CalendarEvent }>();
 
-  /**
-   * Called when an event is dragged and dropped
-   */
-  @Output() eventTimesChanged: EventEmitter<CalendarEventTimesChangedEvent> = new EventEmitter<CalendarEventTimesChangedEvent>();
+    /**
+     * Called when an event is dragged and dropped
+     */
+    @Output() eventTimesChanged: EventEmitter<CalendarEventTimesChangedEvent> = new EventEmitter<CalendarEventTimesChangedEvent>();
 
-  /**
-   * @hidden
-   */
-  columnHeaders: WeekDay[];
+    /**
+     * @hidden
+     */
+    columnHeaders: WeekDay[];
 
-  /**
-   * @hidden
-   */
-  view: MonthView;
+    /**
+     * @hidden
+     */
+    view: MonthView;
 
-  /**
-   * @hidden
-   */
-  refreshSubscription: Subscription;
+    /**
+     * @hidden
+     */
+    refreshSubscription: Subscription;
 
-  /**
-   * @hidden
-   */
-  constructor(private cdr: ChangeDetectorRef, @Inject(LOCALE_ID) locale: string) {
-    this.locale = locale;
-  }
-
-  /**
-   * @hidden
-   */
-  ngOnInit(): void {
-    if (this.refresh) {
-      this.refreshSubscription = this.refresh.subscribe(() => {
-        this.refreshAll();
-        this.cdr.markForCheck();
-      });
-    }
-  }
-
-  /**
-   * @hidden
-   */
-  ngOnChanges(changes: any): void {
-    console.log('Got Change');
-    if (changes.viewDate || changes.excludeDays) {
-      this.refreshHeader();
+    /**
+     * @hidden
+     */
+    constructor(private cdr: ChangeDetectorRef, @Inject(LOCALE_ID) locale: string) {
+        this.locale = locale;
     }
 
-    if (changes.viewDate || changes.events || changes.excludeDays) {
-      this.refreshBody();
+    /**
+     * @hidden
+     */
+    ngOnInit(): void {
+        if (this.refresh) {
+            this.refreshSubscription = this.refresh.subscribe(() => {
+                this.refreshAll();
+                this.cdr.markForCheck();
+            });
+        }
     }
-  }
 
-  /**
-   * @hidden
-   */
-  ngOnDestroy(): void {
-    if (this.refreshSubscription) {
-      this.refreshSubscription.unsubscribe();
+    /**
+     * @hidden
+     */
+    ngOnChanges(changes: any): void {
+        if (changes.viewDate || changes.excludeDays) {
+            this.refreshHeader();
+        }
+
+        if (changes.viewDate || changes.events || changes.excludeDays) {
+            this.refreshBody();
+        }
     }
-  }
 
-  /**
-   * @hidden
-   */
-  eventDropped(day: MonthViewDay, event: CalendarEvent): void {
-    const year: number = getYear(day.date);
-    const month: number = getMonth(day.date);
-    const date: number = getDate(day.date);
-    const newStart: Date = setYear(setMonth(setDate(event.start, date), month), year);
-    let newEnd: Date;
-    if (event.end) {
-      const secondsDiff: number = differenceInSeconds(newStart, event.start);
-      newEnd = addSeconds(event.end, secondsDiff);
+    /**
+     * @hidden
+     */
+    ngOnDestroy(): void {
+        if (this.refreshSubscription) {
+            this.refreshSubscription.unsubscribe();
+        }
     }
-    this.eventTimesChanged.emit({event, newStart, newEnd});
-  }
 
-  private refreshHeader(): void {
-    this.columnHeaders = getWeekViewHeader({
-      viewDate: this.viewDate,
-      weekStartsOn: this.weekStartsOn,
-      excluded: this.excludeDays
-    });
-  }
-
-  private refreshBody(): void {
-    this.view = getMonthView({
-      events: this.events,
-      viewDate: this.viewDate,
-      weekStartsOn: this.weekStartsOn,
-      excluded: this.excludeDays
-    });
-    if (this.dayModifier) {
-      this.view.days.forEach(day => this.dayModifier(day));
+    /**
+     * @hidden
+     */
+    eventDropped(day: MonthViewDay, event: CalendarEvent): void {
+        const year: number = dateFns.getYear(day.date);
+        const month: number = dateFns.getMonth(day.date);
+        const date: number = dateFns.getDate(day.date);
+        const newStart: Date = dateFns.setYear(dateFns.setMonth(dateFns.setDate(event.start, date), month), year);
+        let newEnd: Date;
+        if (event.end) {
+            const secondsDiff: number = dateFns.differenceInSeconds(newStart, event.start);
+            newEnd = dateFns.addSeconds(event.end, secondsDiff);
+        }
+        this.eventTimesChanged.emit({ event, newStart, newEnd });
     }
-  }
 
-  private refreshAll(): void {
-    this.refreshHeader();
-    this.refreshBody();
-  }
+    private refreshHeader(): void {
+        this.columnHeaders = getWeekViewHeader({
+            viewDate: this.viewDate,
+            weekStartsOn: this.weekStartsOn,
+            excluded: this.excludeDays
+        });
+    }
+
+    private refreshBody(): void {
+        this.view = getMonthView({
+            events: this.events,
+            viewDate: this.viewDate,
+            weekStartsOn: this.weekStartsOn,
+            excluded: this.excludeDays
+        });
+        if (this.dayModifier) {
+            this.view.days.forEach(day => this.dayModifier(day));
+        }
+    }
+
+    private refreshAll(): void {
+        this.refreshHeader();
+        this.refreshBody();
+    }
 
 }

@@ -3,8 +3,8 @@ import { trigger, style, transition, animate } from '@angular/animations';
 import { CalendarEvent } from '../../utils/calendar-utils/CalendarUtils';
 
 @Component({
-  selector: 'novo-calendar-month-events',
-  template: `
+    selector: 'novo-calendar-month-events',
+    template: `
     <template #defaultTemplate>
       <div
         *ngFor="let event of events"
@@ -23,27 +23,27 @@ import { CalendarEvent } from '../../utils/calendar-utils/CalendarUtils';
       </template>
     </div>
   `,
-  animations: [
-    trigger('collapse', [
-      transition('void => *', [
-        style({height: 0}),
-        animate('150ms linear', style({height: '*'}))
-      ]),
-      transition('* => void', [
-        style({height: '*'}),
-        animate('150ms linear', style({height: 0}))
-      ])
-    ])
-  ]
+    animations: [
+        trigger('collapse', [
+            transition('void => *', [
+                style({ height: 0 }),
+                animate('150ms linear', style({ height: '*' }))
+            ]),
+            transition('* => void', [
+                style({ height: '*' }),
+                animate('150ms linear', style({ height: 0 }))
+            ])
+        ])
+    ]
 })
 export class CalendarMonthEventsElement {
 
-  @Input() isOpen: boolean = false;
+    @Input() isOpen: boolean = false;
 
-  @Input() events: CalendarEvent[];
+    @Input() events: CalendarEvent[];
 
-  @Input() customTemplate: TemplateRef<any>;
+    @Input() customTemplate: TemplateRef<any>;
 
-  @Output() eventClicked: EventEmitter<{event: CalendarEvent}> = new EventEmitter<{event: CalendarEvent}>();
+    @Output() eventClicked: EventEmitter<{ event: CalendarEvent }> = new EventEmitter<{ event: CalendarEvent }>();
 
 }

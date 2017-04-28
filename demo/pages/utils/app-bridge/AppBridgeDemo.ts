@@ -1,0 +1,31 @@
+// NG2
+import { Component, OnInit } from '@angular/core';
+// Vendor
+import { AppBridge } from './../../../../index';
+
+@Component({
+    selector: 'app-bridge-demo',
+    template: require('./AppBridgeDemo.html')
+})
+export class AppBridgeDemoComponent implements OnInit {
+    appBridge: AppBridge;
+
+    public ngOnInit(): void {
+        // This is how to setup a parent, if you are a third-party developer then
+        // you will not have to do these steps, look in the Bullhorn starter repositories
+        // for how to setup this on your custom components
+        this.appBridge = new AppBridge('NovoElements(Parent)');
+        this.appBridge.register();
+        this.appBridge.tracing = true;
+
+        // Handle things
+        this.appBridge.openHandler = (packet, callback) => {
+            console.log('[NovoElements(Parent)] - Received open handler', packet); // tslint:disable-line
+            callback(true);
+        };
+        this.appBridge.httpHandler = (verb, relativeURL, callback) => {
+            console.log('[NovoElements(Parent)] - Received http handler', relativeURL); // tslint:disable-line
+            callback([1, 2, 3, 4, 5]);
+        };
+    }
+}

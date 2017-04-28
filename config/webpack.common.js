@@ -7,7 +7,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const FixDefaultImportPlugin = require('webpack-fix-default-import-plugin');
 
 const {
     ForkCheckerPlugin
@@ -74,7 +73,6 @@ module.exports = function (options) {
             }, {
                 from: 'demo/favicon.ico'
             }]),
-            new FixDefaultImportPlugin(),
             new HtmlWebpackPlugin({
                 template: 'demo/index.html',
                 chunksSortMode: 'dependency',
