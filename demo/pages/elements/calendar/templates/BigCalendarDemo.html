@@ -1,0 +1,49 @@
+ <template #jobTemplate let-day="day" let-locale="locale" let-accepted="accepted" let-maybes="maybes" let-eventClicked="eventClicked">
+    <div class="calendar-day-top">
+        <span class="calendar-day-badge" *ngIf="accepted.length">{{ accepted.length }}</span>
+        <span class="calendar-day-number">{{ day.date | dayofmonth:locale }}</span>
+    </div>
+    <div class="calendar-events">
+        <div
+          class="calendar-event"
+          *ngFor="let event of maybes"
+          [style.backgroundColor]="event.color.primary"
+          [ngClass]="event?.cssClass"
+          (click)="$event.stopPropagation(); eventClicked.emit({event:event})">
+        </div>
+    </div>
+</template>
+
+ <template #availTemplate let-day="day" let-locale="locale" let-accepted="accepted" let-rejected="rejected">
+  <div class="calendar-day-top">
+    <span class="calendar-day-number">{{ day.date | dayofmonth:locale }}</span>
+  </div>
+  <div class="calendar-day-available" *ngIf="accepted.length">
+    <i class="bhi-check"></i>
+  </div>
+  <div class="calendar-day-not-available" *ngIf="rejected.length">
+    <i class="bhi-times"></i>
+  </div>
+</template>
+
+<novo-calendar-month
+  [viewDate]="viewDate"
+  [events]="events"
+  (dayClicked)="dayClicked($event)">
+</novo-calendar-month>
+
+<novo-calendar-month
+  class="availability"
+  [viewDate]="viewDate"
+  [events]="events"
+  [cellTemplate]="availTemplate"
+  (dayClicked)="toggleAvailable($event)">
+</novo-calendar-month>
+
+<novo-calendar-month
+  [viewDate]="viewDate"
+  [events]="events"
+  [cellTemplate]="jobTemplate"
+  (dayClicked)="addShift($event)"
+  (eventClicked)="removeShift($event)">
+</novo-calendar-month>

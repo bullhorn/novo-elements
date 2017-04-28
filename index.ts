@@ -3,6 +3,7 @@ export { NovoPipesModule } from './src/pipes/Pipes.module';
 export { NovoButtonModule } from './src/elements/button/Button.module';
 export { NovoLoadingModule } from './src/elements/loading/Loading.module';
 export { NovoCardModule } from './src/elements/card/Card.module';
+export { NovoCalendarModule } from './src/elements/calendar/Calendar.module';
 export { NovoToastModule } from './src/elements/toast/Toast.module';
 export { NovoTooltipModule } from './src/elements/tooltip/Tooltip.module';
 export { NovoHeaderModule } from './src/elements/header/Header.module';
@@ -62,6 +63,7 @@ export { Deferred } from './src/utils/deferred/Deferred';
 export { COUNTRIES, getCountries, getStateObjects, getStates, findByCountryCode, findByCountryId, findByCountryName } from './src/utils/countries/Countries';
 export { Helpers } from './src/utils/Helpers';
 export { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
+export * from './src/utils/calendar-utils/CalendarUtils';
 // Providers
 export { NovoElementProviders } from './novo-elements.providers';
 // Pipes

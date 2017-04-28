@@ -12,6 +12,7 @@
     "pretty": true,
     "sourceMap": true,
     "strictNullChecks": false,
+    "allowSyntheticDefaultImports": true,
     "typeRoots": [
       "node_modules/@types"
     ]

@@ -59,3 +59,25 @@ calendar-demo {
         }
     }
 }
+
+.availability {
+    .calendar-cell.calendar-day-accepted {
+        background: $success !important;
+        i, .calendar-day-number {
+            color: $white;
+        }
+    }
+
+    .calendar-cell.calendar-day-rejected {
+        background: $negative !important;
+        i, .calendar-day-number {
+            color: $white !important;
+        }
+    }
+}
+
+.calendar-day-available,
+.calendar-day-not-available {
+    text-align: center;
+}
+

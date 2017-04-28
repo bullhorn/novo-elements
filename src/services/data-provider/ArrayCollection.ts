@@ -269,7 +269,9 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     removeItemAt(index: number): boolean {
-        return !!(this.filterData.splice(index, 1));
+        let success = !!(this.source.splice(index, 1));
+        this.refresh();
+        return success;
     }
 
     /**

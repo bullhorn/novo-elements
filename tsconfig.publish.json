@@ -13,6 +13,7 @@
     "stripInternal": true,
     "strictNullChecks": false,
     "skipDefaultLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "dom",
       "es5"
