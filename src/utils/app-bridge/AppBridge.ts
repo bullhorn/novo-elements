@@ -21,6 +21,8 @@ export const MESSAGE_TYPES = {
     CUSTOM_EVENT: 'customEvent'
 };
 
+declare var postRobot: any;
+
 @Injectable()
 export class AppBridge {
     public id: string = `${Date.now()}`;
