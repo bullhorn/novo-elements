@@ -1,3 +1,13 @@
+<a name="2.0.177"></a>
+## [2.0.177](https://github.com/bullhorn/novo-elements/compare/v2.0.176...v2.0.177) (2017-04-28)
+
+
+### Bug Fixes
+
+* **appbridge:** Checking for postRobot before instantiating ([7531688](https://github.com/bullhorn/novo-elements/commit/7531688))
+
+
+
 <a name="2.0.176"></a>
 ## [2.0.176](https://github.com/bullhorn/novo-elements/compare/v2.0.175...v2.0.176) (2017-04-28)
 
