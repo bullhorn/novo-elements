@@ -1,3 +1,14 @@
+<a name="2.0.176"></a>
+## [2.0.176](https://github.com/bullhorn/novo-elements/compare/v2.0.175...v2.0.176) (2017-04-28)
+
+
+### Features
+
+* **appbridge:** Adding an AppBridge for third party custom components/cards to communicate with Novo ([93465b4](https://github.com/bullhorn/novo-elements/commit/93465b4))
+* **bigcalendar:** Adding a full calendar component ([689d812](https://github.com/bullhorn/novo-elements/commit/689d812))
+
+
+
 <a name="2.0.175"></a>
 ## [2.0.175](https://github.com/bullhorn/novo-elements/compare/v2.0.174...v2.0.175) (2017-04-28)
 
