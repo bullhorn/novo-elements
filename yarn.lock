@@ -2278,10 +2278,6 @@ esprima@2.7.x, esprima@^2.6.0, esprima@^2.7.1:
   version "2.7.3"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-2.7.3.tgz#96e3b70d5779f6ad49cd032673d1c312767ba581"
 
-esprima@^3.1.1:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/esprima/-/esprima-3.1.3.tgz#fdca51cee6133895e3c88d535ce49dbff62a4633"
-
 estraverse@^1.9.1:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-1.9.3.tgz#af67f2dc922582415950926091a4005d29c9bb44"
@@ -2570,8 +2566,8 @@ function-bind@^1.0.2:
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.0.tgz#16176714c801798e4e8f2cf7f7529467bb4a5771"
 
 galaxy-parser@^1.0.5:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/galaxy-parser/-/galaxy-parser-1.0.7.tgz#8ae68c7a54a88c85931f3a4f48b1a8932891c2c6"
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/galaxy-parser/-/galaxy-parser-1.0.10.tgz#1b19d299daa9fe7cc6694747b8b4d187d51b8af6"
   dependencies:
     async "^2.0.1"
     babel-cli "^6.14.0"
@@ -2580,7 +2576,6 @@ galaxy-parser@^1.0.5:
     babel-preset-stage-0 "^6.5.0"
     commander "^2.9.0"
     easy-table "^1.0.0"
-    jsonfile "^2.3.1"
     lcov-parse "0.0.10"
     request "^2.74.0"
     simple-git "^1.48.0"
@@ -3376,19 +3371,12 @@ js-tokens@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
 
-js-yaml@3.6.1:
+js-yaml@3.6.1, js-yaml@3.x, js-yaml@^3.4.3:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.6.1.tgz#6e5fe67d8b205ce4d22fad05b7781e8dadcc4b30"
   dependencies:
     argparse "^1.0.7"
     esprima "^2.6.0"
-
-js-yaml@3.x, js-yaml@^3.4.3:
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.8.3.tgz#33a05ec481c850c8875929166fe1beb61c728766"
-  dependencies:
-    argparse "^1.0.7"
-    esprima "^3.1.1"
 
 js-yaml@~3.7.0:
   version "3.7.0"
@@ -3439,7 +3427,7 @@ json5@^0.5.0:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
-jsonfile@^2.1.0, jsonfile@^2.3.1:
+jsonfile@^2.1.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-2.4.0.tgz#3736a2b428b87bbda0cc83b53fa3d633a35c2ae8"
   optionalDependencies:
@@ -3906,7 +3894,11 @@ lower-case@^1.1.1:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-1.1.4.tgz#9a2cabd1b9e8e0ae993a4bf7d5875c39c42e8eac"
 
-lru-cache@2, lru-cache@2.2.x:
+lru-cache@2:
+  version "2.7.3"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
+
+lru-cache@2.2.x:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.2.4.tgz#6c658619becf14031d0d0b594b16042ce4dc063d"
 
