@@ -23,7 +23,6 @@ import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../utils/
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
       [ngOutletContext]="{
         day: day,
-        actions: actions,
         locale: locale,
         tooltipPlacement: tooltipPlacement,
         eventClicked: eventClicked,

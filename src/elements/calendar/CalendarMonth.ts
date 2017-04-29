@@ -23,7 +23,7 @@ import * as dateFns from 'date-fns';
         [days]="columnHeaders"
         [locale]="locale"
         [customTemplate]="headerTemplate"
-        (viewDateChange)="refreshAll($event)">
+        (viewDateChange)="refreshAll()">
       </novo-calendar-month-header>
       <div class="calendar-days">
         <div *ngFor="let rowIndex of view.rowOffsets">
@@ -202,9 +202,8 @@ export class CalendarMonthElement implements OnChanges, OnInit, OnDestroy {
         }
     }
 
-    private refreshAll(): void {
+    public refreshAll(): void {
         this.refreshHeader();
         this.refreshBody();
     }
-
 }
