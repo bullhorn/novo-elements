@@ -1,3 +1,13 @@
+<a name="2.0.179"></a>
+## [2.0.179](https://github.com/bullhorn/novo-elements/compare/v2.0.178...v2.0.179) (2017-04-29)
+
+
+### Bug Fixes
+
+* **multipicker:** Fixing error when building for AOT ([4b80547](https://github.com/bullhorn/novo-elements/commit/4b80547))
+
+
+
 <a name="2.0.178"></a>
 ## [2.0.178](https://github.com/bullhorn/novo-elements/compare/v2.0.177...v2.0.178) (2017-04-28)
 
