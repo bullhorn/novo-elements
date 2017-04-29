@@ -38,7 +38,6 @@ const CHIPS_VALUE_ACCESSOR = {
                 clearValueOnSelect="true"
                 [config]="source"
                 [placeholder]="placeholder"
-                [(ngModel)]="itemToAdd"
                 (select)="clickOption($event)"
                 (keydown)="onKeyDown($event)"
                 (focus)="onFocus($event)"
