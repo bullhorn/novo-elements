@@ -6,7 +6,7 @@
 
 ## Dependencies
 
-- [NodeJS v6.0+](https://nodejs.org/en/)
+- [NodeJS v6.9+](https://nodejs.org/en/)
 - [NPM v3.0+](https://github.com/npm/npm)
 
 ## Quick Start
