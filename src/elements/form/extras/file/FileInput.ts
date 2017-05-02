@@ -12,7 +12,7 @@ const FILE_VALUE_ACCESSOR = {
     multi: true
 };
 
-const LAYOUT_DEFAULTS = { order: 'default', download: true, boxedLabel: true };
+const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default' };
 
 @Component({
     selector: 'novo-file-input',
@@ -22,13 +22,15 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, boxedLabel: true };
         <template #fileInput>
             <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
                 <input type="file" [name]="name" [attr.id]="name" (change)="check($event)" [attr.multiple]="multiple"/>
-                <label [attr.for]="name" *ngIf="layoutOptions.boxedLabel" class="boxed">
-                        <span>{{ placeholder || labels.chooseAFile }}</span>
-                        <small>{{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></small>
-                </label>
-                <label [attr.for]="name" *ngIf="!layoutOptions?.boxedLabel">
-                        <span> <i class="bhi-dropzone"></i>{{ placeholder || labels.chooseAFile }} {{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></span>
-                </label>
+                <section [ngSwitch]="layoutOptions.labelStyle">
+                    <label *ngSwitchCase="'no-box'" [attr.for]="name">
+                            <span> <i class="bhi-dropzone"></i>{{ placeholder || labels.chooseAFile }} {{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></span>
+                    </label>
+                    <label *ngSwitchDefault [attr.for]="name" class="boxed">
+                            <span>{{ placeholder || labels.chooseAFile }}</span>
+                            <small>{{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></small>
+                    </label>
+                </section>
             </div>
         </template>
         <template #fileOutput>
@@ -57,7 +59,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     @Input() multiple: boolean = false;
     @Input() disabled: boolean = false;
     @Input() placeholder: string;
-    @Input() layoutOptions: any;
+    @Input() layoutOptions: { order?: string, download?: boolean, labelStyle?: string };
     @Input() value: Array<any> = [];
 
     elements: Array<any> = [];
@@ -113,6 +115,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
         order.forEach((template) => {
             this.container.createEmbeddedView(this[template], 0);
         });
+        return order;
     }
 
     setInitialFileList() {
