@@ -1,3 +1,20 @@
+<a name="2.0.181"></a>
+## [2.0.181](https://github.com/bullhorn/novo-elements/compare/v2.0.180...v2.0.181) (2017-05-02)
+
+
+### Bug Fixes
+
+* **calendar:** Fixing calendar to use dateFns and not our terrible helpers and fixing the setting of today ([4b521f4](https://github.com/bullhorn/novo-elements/commit/4b521f4))
+* **calendar:** Fixing range selection mode, fixes [#464](https://github.com/bullhorn/novo-elements/issues/464) ([71f6abd](https://github.com/bullhorn/novo-elements/commit/71f6abd))
+* **form:** Ignoring scrolling on number fields ([27bf499](https://github.com/bullhorn/novo-elements/commit/27bf499))
+
+
+### Features
+
+* **editor:** Adding basic insert tools for image/table/rule ([74153b0](https://github.com/bullhorn/novo-elements/commit/74153b0))
+
+
+
 <a name="2.0.180"></a>
 ## [2.0.180](https://github.com/bullhorn/novo-elements/compare/v2.0.179...v2.0.180) (2017-04-29)
 
