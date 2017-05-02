@@ -1,3 +1,13 @@
+<a name="2.0.182"></a>
+## [2.0.182](https://github.com/bullhorn/novo-elements/compare/v2.0.181...v2.0.182) (2017-05-02)
+
+
+### Features
+
+* **editor:** Always enabling spell checking by default ([fb16ef1](https://github.com/bullhorn/novo-elements/commit/fb16ef1))
+
+
+
 <a name="2.0.181"></a>
 ## [2.0.181](https://github.com/bullhorn/novo-elements/compare/v2.0.180...v2.0.181) (2017-05-02)
 
