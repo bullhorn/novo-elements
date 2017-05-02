@@ -38,7 +38,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
     instance;
     debounceTimeout;
 
-    constructor(private zone: NgZone) {}
+    constructor(private zone: NgZone) { }
 
     get value() {
         return this._value;
@@ -131,6 +131,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
                 { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo', 'Scayt'] },
                 { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
                 { name: 'links', items: ['Link'] },
+                { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
                 { name: 'tools', items: ['Maximize', 'Source'] },
                 '/',
                 { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },

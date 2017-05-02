@@ -28,8 +28,7 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },
