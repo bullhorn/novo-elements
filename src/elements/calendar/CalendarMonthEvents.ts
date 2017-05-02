@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
-import { trigger, style, transition, animate } from '@angular/animations';
+import { Component, Input, Output, EventEmitter, TemplateRef, trigger, style, transition, animate } from '@angular/core';
+// import { trigger, style, transition, animate } from '@angular/animations';
 import { CalendarEvent } from '../../utils/calendar-utils/CalendarUtils';
 
 @Component({

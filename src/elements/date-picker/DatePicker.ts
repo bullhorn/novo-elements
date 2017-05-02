@@ -1,6 +1,8 @@
 // NG2
 import { ElementRef, Component, EventEmitter, forwardRef, trigger, state, style, transition, animate, Input, Output, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+// Vendor
+import * as dateFns from 'date-fns';
 // APP
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -189,14 +191,14 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
 
     isEndFill(range, day, selected, selected2) {
         if (range && selected2) {
-            return Helpers.isDateSame(day, selected2) && Helpers.isDateAfter(day, selected);
+            return Helpers.isDateSame(day, selected2) && dateFns.isAfter(day, selected);
         }
         return false;
     }
 
     isStartFill(range, day, selected, selected2) {
         if (range && selected2) {
-            return Helpers.isDateSame(day, selected) && Helpers.isDateBefore(day, selected2);
+            return Helpers.isDateSame(day, selected) && dateFns.isBefore(day, selected2);
         }
         return false;
     }
@@ -275,7 +277,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         Helpers.swallowEvent(event);
         if (this.range) {
             if (this.rangeSelectMode === 'startDate') {
-                if (this.selected2 && day.date.getDate() > this.selected2.getDate()) {
+                if (this.selected2 && dateFns.isAfter(day.date, this.selected2)) {
                     // CLEAR END DATE
                     this.selected2 = null;
                     this.selected2Label = this.labels.endDate;
@@ -291,7 +293,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
                     this.rangeSelectMode = 'endDate';
                 }
             } else {
-                if (this.selected && day.date.getDate() < this.selected.getDate()) {
+                if (this.selected && dateFns.isBefore(day.date, this.selected2)) {
                     // CLEAR START DATE
                     this.selected = null;
                     this.selectedLabel = this.labels.startDate;
