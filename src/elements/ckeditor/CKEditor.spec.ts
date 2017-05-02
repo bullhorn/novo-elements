@@ -172,6 +172,7 @@ describe('Elements: NovoCKEditorElement', () => {
         it('should work', () => {
             let config = component.getBaseConfig();
             expect(config).toEqual({
+                scayt_autoStartup: true,
                 toolbar: [
                     { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo', 'Scayt'] },
                     { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },

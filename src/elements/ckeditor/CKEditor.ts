@@ -127,6 +127,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
 
     getBaseConfig() {
         return {
+            scayt_autoStartup: true,
             toolbar: [
                 { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo', 'Scayt'] },
                 { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
