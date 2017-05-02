@@ -52,30 +52,6 @@ describe('Utils: Helpers', () => {
         });
     });
 
-    describe('Method: today()', () => {
-        it('should be defined.', () => {
-            expect(Helpers.today()).toBeDefined();
-        });
-    });
-
-    describe('Method: tomorrow(value)', () => {
-        it('should be defined.', () => {
-            expect(Helpers.tomorrow(1)).toBeDefined();
-        });
-    });
-
-    describe('Method: clearTime(value)', () => {
-        it('should be defined.', () => {
-            expect(Helpers.clearTime(1)).toBeDefined();
-        });
-    });
-
-    describe('Method: addDays(value, num)', () => {
-        it('should be defined.', () => {
-            expect(Helpers.addDays(1, 2)).toBeDefined();
-        });
-    });
-
     describe('Method: sortByField(fields, reverse)', () => {
         it('should be defined.', () => {
             expect(Helpers.sortByField(1, false)).toBeDefined();
@@ -99,42 +75,6 @@ describe('Utils: Helpers', () => {
         it('should be defined.', () => {
             let element = new Element();
             expect(Helpers.findAncestor(element, '1')).toBeDefined();
-        });
-    });
-
-    describe('Method: getNumberDaysBetween(start, finish)', () => {
-        it('should be defined.', () => {
-            expect(Helpers.getNumberDaysBetween(new Date(), new Date(1))).toBeDefined();
-        });
-    });
-
-    describe('Method: modifyDate(config)', () => {
-        it('should be defined.', () => {
-            expect(Helpers.modifyDate({})).toBeDefined();
-        });
-    });
-
-    describe('Method: newDate(config)', () => {
-        it('should be defined.', () => {
-            expect(Helpers.newDate).toBeDefined();
-        });
-    });
-
-    describe('Method: isDateBefore(one, two)', () => {
-        it('should be defined.', () => {
-            expect(Helpers.isDateBefore(1, 2)).toBeDefined();
-        });
-    });
-
-    describe('Method: isDateAfter(one, two)', () => {
-        it('should be defined.', () => {
-            expect(Helpers.isDateAfter(1, 2)).toBeDefined();
-        });
-    });
-
-    describe('Method: isDateSame(one, two)', () => {
-        it('should be defined.', () => {
-            expect(Helpers.isDateSame(1, 2)).toBeDefined();
         });
     });
 });

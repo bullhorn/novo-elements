@@ -77,26 +77,6 @@ export class Helpers {
         return obj instanceof Date;
     }
 
-    static today(): Date {
-        return Helpers.clearTime(new Date());
-    }
-
-    static tomorrow(value?: any): Date {
-        let dt = (value) ? Helpers.clearTime(value) : Helpers.today();
-        return Helpers.addDays(dt, 1);
-    }
-
-    static clearTime(value: any): Date {
-        let dt = Helpers.isDate(value) ? value : new Date(value);
-        return new Date(dt.setHours(0, 0, 0, 0));
-    }
-
-    static addDays(value: any, num = 1): Date {
-        let dt = Helpers.isDate(value) ? value : new Date(value);
-        let aDay: number = (24 * 60 * 60 * 1000);
-        return new Date(dt.getTime() + (aDay * num));
-    }
-
     static sortByField(fields: any, reverse = false) {
         return (previous: any, current: any) => {
             //return (a[field] < b[field]) ? -1 : (a[field] > b[field]) ? 1 : 0; // eslint-disable-line
@@ -241,49 +221,6 @@ export class Helpers {
     static findAncestor(element: Element, selector: string): Element {
         while ((element = element.parentElement) && !(element.matches.call(element, selector))); // tslint:disable-line
         return element;
-    }
-
-    static getNumberDaysBetween(start: Date, finish: Date): number {
-        const MILLIS_IN_DAY = 24 * 60 * 60 * 1000;
-        return Math.round(Math.abs((start.getTime() - finish.getTime()) / (MILLIS_IN_DAY)));
-    }
-
-    static modifyDate(config: { year?: number, month?: number, day?: number, hours?: number, minutes?: number, seconds?: number, milliseconds?: number } = {}, baseValue: Date = new Date()): Date {
-        let year = Helpers.isBlank(config.year) ? baseValue.getFullYear() : config.year;
-        let month = Helpers.isBlank(config.month) ? baseValue.getMonth() : config.month;
-        let day = Helpers.isBlank(config.day) ? baseValue.getDate() : config.day;
-        let hours = Helpers.isBlank(config.hours) ? baseValue.getHours() : config.hours;
-        let minutes = Helpers.isBlank(config.minutes) ? baseValue.getMinutes() : config.minutes;
-        let seconds = Helpers.isBlank(config.seconds) ? baseValue.getSeconds() : config.seconds;
-        let milliseconds = Helpers.isBlank(config.milliseconds) ? baseValue.getMilliseconds() : config.milliseconds;
-        return new Date(year, month, day, hours, minutes, seconds, milliseconds);
-    }
-
-    static newDate(config: { year?: number, month?: number, day?: number, hours?: number, minutes?: number, seconds?: number, milliseconds?: number }): Date {
-        return Helpers.modifyDate(config, new Date());
-    }
-
-    static isDateBefore(one: any, two: any): boolean {
-        if (!one || !two) {
-            return false;
-        }
-        return new Date(one) < new Date(two);
-    }
-
-    static isDateAfter(one: any, two: any): boolean {
-        if (!one || !two) {
-            return false;
-        }
-        return new Date(one) > new Date(two);
-    }
-
-    static isDateSame(one: any, two: any): boolean {
-        if (!one || !two) {
-            return false;
-        }
-        let dateOne = new Date(one);
-        let dateTwo = new Date(two);
-        return (dateOne.getDate() === dateTwo.getDate()) && (dateOne.getMonth() === dateTwo.getMonth());
     }
 }
 class Can {

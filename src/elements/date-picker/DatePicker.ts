@@ -93,7 +93,7 @@ export type rangeSelectModes = 'startDate' | 'endDate';
                     <tr *ngFor="let week of weeks">
                         <td *ngFor="let day of week.days" [ngClass]="{
                             today: day.isToday,
-                            'notinmonth': !day.isCurrentMonth,
+                            'notinmonth': day.date.getMonth() !== this.month.getMonth(),
                             selected: isSelected(range, day.date, selected, selected2),
                             filler: isFiller(range, day.date, selected, selected2),
                             startfill: isStartFill(range, day.date, selected, selected2),
@@ -180,10 +180,10 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
 
     isSelectingRange(range, day, selected, selected2, hoverDay, rangeSelectMode) {
         if (range) {
-            let isRangeModeEndDate = rangeSelectMode === 'endDate' && (selected && selected2 && Helpers.isDateAfter(day, selected2) && Helpers.isDateBefore(day, hoverDay));
-            let isRangeModeStartDate = rangeSelectMode === 'startDate' && (selected && selected2 && Helpers.isDateBefore(day, selected) && Helpers.isDateAfter(day, hoverDay));
-            let isNotSelected = !selected && selected2 && Helpers.isDateBefore(day, selected2) && Helpers.isDateAfter(day, hoverDay);
-            let isNotSelected2 = selected && !selected2 && Helpers.isDateAfter(day, selected) && Helpers.isDateBefore(day, hoverDay);
+            let isRangeModeEndDate = rangeSelectMode === 'endDate' && (selected && selected2 && dateFns.isAfter(day, selected2) && dateFns.isBefore(day, hoverDay));
+            let isRangeModeStartDate = rangeSelectMode === 'startDate' && (selected && selected2 && dateFns.isBefore(day, selected) && dateFns.isAfter(day, hoverDay));
+            let isNotSelected = !selected && selected2 && dateFns.isBefore(day, selected2) && dateFns.isAfter(day, hoverDay);
+            let isNotSelected2 = selected && !selected2 && dateFns.isAfter(day, selected) && dateFns.isBefore(day, hoverDay);
             return isNotSelected2 || isNotSelected || isRangeModeStartDate || isRangeModeEndDate;
         }
         return false;
@@ -191,21 +191,21 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
 
     isEndFill(range, day, selected, selected2) {
         if (range && selected2) {
-            return Helpers.isDateSame(day, selected2) && dateFns.isAfter(day, selected);
+            return dateFns.isSameDay(day, selected2) && dateFns.isAfter(day, selected);
         }
         return false;
     }
 
     isStartFill(range, day, selected, selected2) {
         if (range && selected2) {
-            return Helpers.isDateSame(day, selected) && dateFns.isBefore(day, selected2);
+            return dateFns.isSameDay(day, selected) && dateFns.isBefore(day, selected2);
         }
         return false;
     }
 
     isFiller(range, day, selected, selected2) {
         if (range && selected2) {
-            return Helpers.isDateAfter(day, selected) && Helpers.isDateBefore(day, selected2);
+            return dateFns.isAfter(day, selected) && dateFns.isBefore(day, selected2);
         }
         return false;
     }
@@ -218,7 +218,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     }
 
     isDisabled(day, start, end) {
-        return Helpers.isDateBefore(day, start) || Helpers.isDateAfter(day, end);
+        return dateFns.isBefore(day, start) || dateFns.isAfter(day, end);
     }
 
     updateView(date, fireEvents: boolean, markedSelected: boolean) {
@@ -260,14 +260,16 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     }
 
     setMonth(month: number): void {
-        let tmp = this.month ? Helpers.modifyDate({ month }, this.month) : Helpers.newDate({ month });
+        let date = this.month ? this.month : new Date();
+        let tmp = dateFns.setMonth(date, month);
         this.updateView(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
     }
 
     setYear(year: number): void {
-        let tmp = this.month ? Helpers.modifyDate({ year }, this.month) : Helpers.newDate({ year });
+        let date = this.month ? this.month : new Date();
+        let tmp = dateFns.setYear(date, year);
         this.updateView(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
@@ -299,7 +301,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
                     this.selectedLabel = this.labels.startDate;
                 }
                 // SET END DATE
-                this.selected2 = Helpers.modifyDate({ hours: 23, minutes: 59, seconds: 59, milliseconds: 999 }, day.date);
+                this.selected2 = dateFns.endOfDay(day.date);
                 this.selected2Label = this.labels.formatDateWithFormat(this.selected2, {
                     month: 'short',
                     day: '2-digit',
@@ -389,13 +391,13 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
 
     prevMonth(event: Event): void {
         Helpers.swallowEvent(event);
-        let tmp = Helpers.modifyDate({ month: this.month.getMonth() - 1 }, this.month);
+        let tmp = dateFns.subMonths(this.month, 1);
         this.updateView(tmp, false, false);
     }
 
     nextMonth(event: Event): void {
         Helpers.swallowEvent(event);
-        let tmp = Helpers.modifyDate({ month: this.month.getMonth() + 1 }, this.month);
+        let tmp = dateFns.addMonths(this.month, 1);
         this.updateView(tmp, false, false);
     }
 
@@ -435,7 +437,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
             count = 0;
 
         if (date.getDay() !== 0) {
-            date = Helpers.modifyDate({ day: date.getDate() - date.getDay() }, date);
+            date = dateFns.subDays(date, date.getDate() - date.getDay());
         }
 
         while (!done) {
@@ -443,7 +445,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
             this.weeks.push({ days: this.buildWeek(new Date(date.getTime()), month) });
 
             // Increment variables for the next iteration
-            date = Helpers.modifyDate({ day: date.getDate() + 7 }, date);
+            date = dateFns.addDays(date, 7);
             done = count++ > 2 && monthIndex !== date.getMonth();
             monthIndex = date.getMonth();
         }
@@ -459,13 +461,12 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
             days.push({
                 name: this.weekdays[i],
                 number: date.getDate(),
-                isCurrentMonth: date.getMonth() === month.getMonth(),
-                isToday: date.getDate() === new Date().getDate(),
+                isToday: dateFns.isToday(date),
                 date: date
             });
 
             // Increment for the next iteration
-            date = Helpers.modifyDate({ day: date.getDate() + 1 }, date);
+            date = dateFns.addDays(date, 1);
         }
 
         return days;

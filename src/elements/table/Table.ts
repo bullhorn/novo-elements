@@ -1,6 +1,8 @@
-// Vendor
+// NG2
 import { Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+// Vendor
+import * as dateFns from 'date-fns';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
@@ -527,13 +529,13 @@ export class NovoTableElement implements DoCheck {
                     } else if (column.type && column.type === 'date') {
                         if (column.filter.startDate && column.filter.endDate) {
                             query[column.name] = {
-                                min: Helpers.clearTime(column.filter.startDate),
-                                max: Helpers.tomorrow(column.filter.endDate)
+                                min: dateFns.startOfDay(column.filter.startDate),
+                                max: dateFns.startOfDay(dateFns.addDays(dateFns.startOfDay(column.filter.endDate), 1))
                             };
                         } else {
                             query[column.name] = {
-                                min: column.filter.min ? Helpers.addDays(Helpers.today(), column.filter.min) : Helpers.today(),
-                                max: column.filter.max ? Helpers.addDays(Helpers.tomorrow(), column.filter.max) : Helpers.tomorrow()
+                                min: column.filter.min ? dateFns.addDays(dateFns.startOfToday(), column.filter.min) : dateFns.startOfToday(),
+                                max: column.filter.max ? dateFns.addDays(dateFns.startOfTomorrow(), column.filter.max) : dateFns.startOfTomorrow()
                             };
                         }
                     } else {

@@ -10,22 +10,9 @@ let DateTimeDemoTpl = require('./templates/DateTimeDemo.html');
 
 const template = `
 <div class="container">
-    <h1>Date and Time Pickers</h1>
-    <p>These allow users to easily select a time and date. It comes in a handful of varieties based on the content of the field.</p>
-
-    <h2>Calendar Picker  <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/date-picker">(source)</a></small></h2>
-    <p>The calendar picker is used to select a date. It appears in all date picker fields.</p>
-
-    <h5>Big Calendar Picker</h5>
-    <div class="example demo">${BigCalendarDemoTpl}</div>
-    <code-snippet [code]="BigCalendarDemoTpl"></code-snippet>
-
     <h5>Full Calendar Picker</h5>
     <div class="example demo">${CalendarDemoTpl}</div>
     <code-snippet [code]="CalendarDemoTpl"></code-snippet>
-
-    <h2>Time Picker  <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/time-picker">(source)</a></small></h2>
-    <p>Time pickers come in 12 hour or 24 hour style.</p>
 
     <h5>Standalone Time Picker</h5>
     <div class="example demo">${TimeDemoTpl}</div>
@@ -42,22 +29,22 @@ const template = `
 `;
 
 export const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  },
-  green: {
-    primary: '#8CC152',
-    secondary: '#37BC9B'
-  }
+    red: {
+        primary: '#ad2121',
+        secondary: '#FAE3E3'
+    },
+    blue: {
+        primary: '#1e90ff',
+        secondary: '#D1E8FF'
+    },
+    yellow: {
+        primary: '#e3bc08',
+        secondary: '#FDF1BA'
+    },
+    green: {
+        primary: '#8CC152',
+        secondary: '#37BC9B'
+    }
 };
 
 @Component({
@@ -71,10 +58,10 @@ export class CalendarDemoComponent {
     RangeDemoTpl: string = RangeDemoTpl;
     DateTimeDemoTpl: string = DateTimeDemoTpl;
 
-    time: Date = new Date();
-    dateOne: Date = new Date();
-    dateTwo: Date = new Date();
-    dateTime: Date = new Date();
+    time: Date = new Date(1493096913317);
+    dateOne: Date = new Date(1493096913317);
+    dateTwo: Date = new Date(1493096913317);
+    dateTime: Date = new Date(1493096913317);
     start: any = new Date().setMonth(new Date().getMonth() - 1);
     end: any = new Date().setMonth(new Date().getMonth() + 1);
     value: any = {
@@ -90,8 +77,8 @@ export class CalendarDemoComponent {
         response: CalendarEventResponse.Rejected
     }];
 
-    getNewEvent(date, color, type):CalendarEvent {
-        let evt:CalendarEvent = {
+    getNewEvent(date, color, type): CalendarEvent {
+        let evt: CalendarEvent = {
             title: 'Has custom class',
             color: color,
             start: date,
@@ -101,12 +88,12 @@ export class CalendarDemoComponent {
     }
 
     dayClicked(event) {
-        let evt:CalendarEvent = this.getNewEvent( event.day.date, colors.blue, CalendarEventResponse.Maybe );
+        let evt: CalendarEvent = this.getNewEvent(event.day.date, colors.blue, CalendarEventResponse.Maybe);
         this.events.push(evt);
     }
 
     addShift(event) {
-        let evt:CalendarEvent = this.getNewEvent( event.day.date, colors.blue, CalendarEventResponse.Maybe);
+        let evt: CalendarEvent = this.getNewEvent(event.day.date, colors.blue, CalendarEventResponse.Maybe);
         this.events.push(evt);
     }
 
@@ -115,9 +102,9 @@ export class CalendarDemoComponent {
     }
 
     toggleAvailable(event) {
-        let evt:CalendarEvent;
+        let evt: CalendarEvent;
         if (!event.day.events.length) {
-            evt = this.getNewEvent( event.day.date, colors.green, CalendarEventResponse.Accepted);
+            evt = this.getNewEvent(event.day.date, colors.green, CalendarEventResponse.Accepted);
             this.events.push(evt);
         } else {
             evt = event.day.events[0];
