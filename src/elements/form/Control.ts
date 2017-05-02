@@ -103,7 +103,7 @@ export class NovoCustomControlContainerElement {
                                 <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>
                             </select>
                             <!--File-->
-                            <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="control.placeholder" [multiple]="control.multiple" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-file-input>
+                            <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="control.placeholder" [value]="control.value" [multiple]="control.multiple" [layoutOptions]="control.layoutOptions" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-file-input>
                             <!--Tiles-->
                             <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-tiles>
                             <!--Picker-->

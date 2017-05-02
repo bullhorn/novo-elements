@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, ElementRef, forwardRef, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, ElementRef, forwardRef, OnInit, OnDestroy, ViewChild, ViewChildren, ViewContainerRef, TemplateRef, QueryList, Pipe } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
@@ -12,36 +12,57 @@ const FILE_VALUE_ACCESSOR = {
     multi: true
 };
 
+const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default' };
+
 @Component({
     selector: 'novo-file-input',
     providers: [FILE_VALUE_ACCESSOR],
     template: `
-        <div class="file-output-group">
-            <div class="file-item" *ngFor="let file of files">
-                <label>{{ file.name | decodeURI }}</label>
-                <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
-                    <button theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'"></button>
-                    <button theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'"></button>
-                </div>
-                <novo-loading *ngIf="!file.loaded"></novo-loading>
+        <div #container></div>
+        <template #fileInput>
+            <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
+                <input type="file" [name]="name" [attr.id]="name" (change)="check($event)" [attr.multiple]="multiple"/>
+                <section [ngSwitch]="layoutOptions.labelStyle">
+                    <label *ngSwitchCase="'no-box'" [attr.for]="name">
+                            <span> <i class="bhi-dropzone"></i>{{ placeholder || labels.chooseAFile }} {{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></span>
+                    </label>
+                    <label *ngSwitchDefault [attr.for]="name" class="boxed">
+                            <span>{{ placeholder || labels.chooseAFile }}</span>
+                            <small>{{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></small>
+                    </label>
+                </section>
             </div>
-        </div>
-        <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
-            <input type="file" [name]="name" [attr.id]="name" (change)="check($event)" [attr.multiple]="multiple"/>
-            <label [attr.for]="name">
-                <span>{{ placeholder || labels.chooseAFile }}</span>
-                <small>{{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></small>
-            </label>
-        </div>
-    `
+        </template>
+        <template #fileOutput>
+            <div class="file-output-group">
+                <div class="file-item" *ngFor="let file of files">
+                    <label>{{ file.name | decodeURI }}</label>
+                    <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
+                        <button *ngIf="layoutOptions.download" theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'"></button>
+                        <button theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'"></button>
+                    </div>
+                    <novo-loading *ngIf="!file.loaded"></novo-loading>
+                </div>
+            </div>
+        </template>`
 })
 export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDestroy {
+    @ViewChild('fileInput')
+    fileInput: TemplateRef<any>;
+    @ViewChild('fileOutput')
+    fileOutput: TemplateRef<any>;
+    @ViewChild('container', { read: ViewContainerRef })
+    container: ViewContainerRef;
+
+
     @Input() name: string;
     @Input() multiple: boolean = false;
     @Input() disabled: boolean = false;
     @Input() placeholder: string;
+    @Input() layoutOptions: { order?: string, download?: boolean, labelStyle?: string };
+    @Input() value: Array<any> = [];
 
-    value: Array<any> = [];
+    elements: Array<any> = [];
     files: Array<any> = [];
     model: any;
     active: boolean = false;
@@ -67,12 +88,40 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
         ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(type => {
             this.element.nativeElement.addEventListener(type, this.commands[type]);
         });
+        this.updateLayout();
+        this.setInitialFileList();
     }
 
     ngOnDestroy() {
         ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(type => {
             this.element.nativeElement.removeEventListener(type, this.commands[type]);
         });
+    }
+
+    updateLayout() {
+        this.layoutOptions = Object.assign({}, LAYOUT_DEFAULTS, this.layoutOptions);
+        this.insertTemplatesBasedOnLayout();
+    }
+
+    insertTemplatesBasedOnLayout() {
+        let order;
+        switch (this.layoutOptions['order']) {
+            case 'displayFilesBelow':
+                order = ['fileInput', 'fileOutput'];
+                break;
+            default:
+                order = ['fileOutput', 'fileInput'];
+        }
+        order.forEach((template) => {
+            this.container.createEmbeddedView(this[template], 0);
+        });
+        return order;
+    }
+
+    setInitialFileList() {
+        if (this.value && this.value.length > 0) {
+            this.files = this.value;
+        }
     }
 
     dragEnterHandler(event) {

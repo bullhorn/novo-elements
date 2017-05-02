@@ -37,6 +37,50 @@ describe('Elements: NovoFileInputElement', () => {
             component.ngOnInit();
             expect(component.element.nativeElement.addEventListener).toHaveBeenCalled();
         });
+        it('should update layout', () => {
+            expect(component.ngOnInit).toBeDefined();
+            spyOn(component, 'updateLayout');
+            component.ngOnInit();
+            expect(component.updateLayout).toHaveBeenCalled();
+        });
+        it('should setup initial files list', () => {
+            expect(component.ngOnInit).toBeDefined();
+            spyOn(component, 'setInitialFileList');
+            component.ngOnInit();
+            expect(component.setInitialFileList).toHaveBeenCalled();
+        });
+    });
+    describe('Method: updateLayout()', () => {
+        it('should set layoutOptions and call insertTemplatesBasedOnLayout', () => {
+            expect(component.updateLayout).toBeDefined();
+            expect(component.layoutOptions).not.toBeDefined();
+            spyOn(component, 'insertTemplatesBasedOnLayout');
+            component.updateLayout();
+            expect(component.layoutOptions).toBeDefined();
+            expect(component.insertTemplatesBasedOnLayout).toHaveBeenCalled();
+        });
+    });
+    describe('Method: insertTemplatesBasedOnLayout()', () => {
+        beforeEach(() => {
+            component.layoutOptions = { order: 'default', download: true, labelStyle: 'default' };
+        });
+        it('should correctly insert templates by default', () => {
+            expect(component.insertTemplatesBasedOnLayout).toBeDefined();
+            spyOn(component.container, 'createEmbeddedView');
+            let expected = ['fileOutput', 'fileInput'];
+            let insertedOrder = component.insertTemplatesBasedOnLayout();
+            expect(component.container.createEmbeddedView).toHaveBeenCalled();
+            expect(insertedOrder).toEqual(expected);
+        });
+        it('should correctly insert template if order is displayFilesBelow', () => {
+            component.layoutOptions.order = 'displayFilesBelow';
+            expect(component.insertTemplatesBasedOnLayout).toBeDefined();
+            spyOn(component.container, 'createEmbeddedView');
+            let expected = ['fileInput', 'fileOutput'];
+            let insertedOrder = component.insertTemplatesBasedOnLayout();
+            expect(component.container.createEmbeddedView).toHaveBeenCalled();
+            expect(insertedOrder).toEqual(expected);
+        });
     });
     //
     // describe('Method: ngOnDestroy()', () => {
