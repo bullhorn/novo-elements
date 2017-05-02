@@ -2570,8 +2570,8 @@ function-bind@^1.0.2:
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.0.tgz#16176714c801798e4e8f2cf7f7529467bb4a5771"
 
 galaxy-parser@^1.0.5:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/galaxy-parser/-/galaxy-parser-1.0.11.tgz#e7307ff39cbd68d099101ad10aff2934f9c1defa"
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/galaxy-parser/-/galaxy-parser-1.0.13.tgz#ae69b4a0adbbe74dfd145b4f0e319cf2f5ee703d"
   dependencies:
     async "^2.0.1"
     babel-cli "^6.14.0"
@@ -4115,8 +4115,8 @@ node-dir@^0.1.10:
     minimatch "^3.0.2"
 
 node-gyp@^3.3.1:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-3.6.0.tgz#7474f63a3a0501161dda0b6341f022f14c423fa6"
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-3.6.1.tgz#19561067ff185464aded478212681f47fd578cbc"
   dependencies:
     fstream "^1.0.0"
     glob "^7.0.3"
@@ -5811,8 +5811,8 @@ to-arraybuffer@^1.0.0:
   resolved "https://registry.yarnpkg.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"
 
 to-fast-properties@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.2.tgz#f3f5c0c3ba7299a7ef99427e44633257ade43320"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
 
 to-string-loader@1.1.5:
   version "1.1.5"
