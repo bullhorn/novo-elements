@@ -1,3 +1,13 @@
+<a name="2.0.183"></a>
+## [2.0.183](https://github.com/bullhorn/novo-elements/compare/v2.0.182...v2.0.183) (2017-05-02)
+
+
+### Features
+
+* **file input:** Add layout options that allow different configurati… ([#465](https://github.com/bullhorn/novo-elements/issues/465)) ([67469d6](https://github.com/bullhorn/novo-elements/commit/67469d6))
+
+
+
 <a name="2.0.182"></a>
 ## [2.0.182](https://github.com/bullhorn/novo-elements/compare/v2.0.181...v2.0.182) (2017-05-02)
 
