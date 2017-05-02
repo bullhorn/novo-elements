@@ -9655,8 +9655,11 @@ novo-file-input {
   display: flex;
   -ms-flex-flow: row wrap;
       flex-flow: row wrap; }
+  novo-file-input .files-below {
+    padding-top: 10px; }
   novo-file-input .file-output-group {
-    width: 100%; }
+    width: 100%;
+    margin-top: 15px; }
     novo-file-input .file-output-group .file-item {
       background-color: #ffffff;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15), 0 2px 10px rgba(0, 0, 0, 0.09);
@@ -9693,7 +9696,7 @@ novo-file-input {
       width: 100% !important;
       height: 100% !important;
       cursor: pointer; }
-    novo-file-input .file-input-group:hover label, novo-file-input .file-input-group.active label {
+    novo-file-input .file-input-group:hover label.boxed, novo-file-input .file-input-group.active label.boxed {
       border: 2px dashed #4A89DC; }
     novo-file-input .file-input-group.disabled {
       opacity: 0.3;
@@ -9709,7 +9712,6 @@ novo-file-input {
       -ms-flex-align: center;
           align-items: center;
       position: relative;
-      border: 2px dashed #999999;
       padding: 15px;
       cursor: pointer;
       pointer-events: none;
@@ -9718,6 +9720,10 @@ novo-file-input {
         color: #4A89DC; }
       novo-file-input .file-input-group label small {
         margin-top: 7px; }
+      novo-file-input .file-input-group label.boxed {
+        border: 2px dashed #999999; }
+      novo-file-input .file-input-group label i {
+        font-size: 3em; }
   novo-file-input novo-loading {
     padding: 10px;
     transform: scale(0.8, 0.8); }
@@ -13236,104 +13242,104 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 38px;
-      height: 38px; }
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 32px;
-      height: 32px; }
+      width: 28px;
+      height: 28px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 30px;
-      height: 30px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 26px;
-      height: 26px; }
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 33px;
-      height: 33px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-submission {
-      background: #a9adbb;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
       width: 31px;
       height: 31px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-submission {
+      background: #a9adbb;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 36px;
+      height: 36px; }
     color header .background-boxes .bb-note {
       background: #747884;
       width: 37px;
       height: 37px; }
     color header .background-boxes .bb-task {
       background: #4f5361;
-      width: 38px;
-      height: 38px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-distributionList {
       background: #4f5361;
-      width: 29px;
-      height: 29px; }
+      width: 28px;
+      height: 28px; }
     color header .background-boxes .bb-credential {
       background: #4f5361;
-      width: 45px;
-      height: 45px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-user {
+      background: #4f5361;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-corporateuser {
       background: #4f5361;
       width: 37px;
       height: 37px; }
-    color header .background-boxes .bb-corporateuser {
-      background: #4f5361;
-      width: 35px;
-      height: 35px; }
     color header .background-boxes .bb-aqua {
       background: #3BAFDA;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
       width: 28px;
       height: 28px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 31px;
+      height: 31px; }
     color header .background-boxes .bb-mint {
       background: #37BC9B;
-      width: 40px;
-      height: 40px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-grass {
       background: #8CC152;
-      width: 29px;
-      height: 29px; }
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-sunflower {
       background: #F6B042;
       width: 30px;
       height: 30px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
-      width: 27px;
-      height: 27px; }
+      width: 41px;
+      height: 41px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
       width: 39px;
       height: 39px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 35px;
-      height: 35px; }
+      width: 26px;
+      height: 26px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 34px;
-      height: 34px; }
+      width: 30px;
+      height: 30px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -14326,4 +14332,4 @@ popover-demo .example.popover-demo {
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.15d0dce439b3245417da.bundle.map*/
+/*# sourceMappingURL=main.2cd59ecd6e54fb002dfb.bundle.map*/
