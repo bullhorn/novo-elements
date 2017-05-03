@@ -9,6 +9,7 @@ novo-nav {
 
     novo-tab,
     novo-tab-link {
+        font-size: 14px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -19,7 +20,7 @@ novo-nav {
         .novo-tab-link {
             padding: 10px 20px;
             color: #fff;
-            opacity: 0.65;
+            opacity: 0.7;
             font-weight: 400;
             cursor: pointer;
             text-transform: uppercase;
@@ -29,7 +30,7 @@ novo-nav {
             position: absolute;
             bottom: 0;
             width: 0;
-            height: 2px;
+            height: 3px;
             display: block;
             background: transparent;
             transition: all 220ms ease-in-out;
@@ -39,6 +40,7 @@ novo-nav {
         &.router-link-active {
             .novo-tab-link {
                 opacity: 1;
+                font-weight: 500;
             }
 
             .indicator {
