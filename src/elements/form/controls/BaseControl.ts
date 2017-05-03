@@ -38,7 +38,7 @@ export interface NovoControlConfig {
     description?: string;
     tooltip?: string;
     tooltipPosition?: string;
-    layoutOptions?: { order?: string, download?:boolean, labelStyle?: string };
+    layoutOptions?: { order?: string, download?:boolean, labelStyle?: string, draggable?: boolean };
     customControl?: any;
     customControlConfig?: any;
 }
@@ -77,7 +77,7 @@ export class BaseControl {
     description?: string;
     tooltip?: string;
     tooltipPosition?: string;
-    layoutOptions?: { order?: string, download?:boolean, labelStyle?: string };
+    layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean };
     customControl?: any;
     customControlConfig?: any;
 

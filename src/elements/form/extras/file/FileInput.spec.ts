@@ -4,6 +4,8 @@ import { TestBed, async } from '@angular/core/testing';
 import { NovoFileInputElement } from './FileInput';
 import { NovoLoadingElement } from '../../../loading/Loading';
 import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoDragulaElement } from '../../../../elements/dragula/Dragula';
+import { NovoDragulaService } from '../../../../elements/dragula/DragulaService';
 import { DecodeURIPipe } from '../../../../pipes/decode-uri/DecodeURI';
 
 describe('Elements: NovoFileInputElement', () => {
@@ -17,10 +19,12 @@ describe('Elements: NovoFileInputElement', () => {
             declarations: [
                 NovoFileInputElement,
                 NovoLoadingElement,
+                NovoDragulaElement,
                 DecodeURIPipe
             ],
             providers: [
-                { provide: NovoLabelService, useClass: NovoLabelService }
+                { provide: NovoLabelService, useClass: NovoLabelService },
+                { provide: NovoDragulaService, useClass: NovoDragulaService }
             ]
         }).compileComponents();
         fixture = TestBed.createComponent(NovoFileInputElement);
@@ -49,6 +53,12 @@ describe('Elements: NovoFileInputElement', () => {
             component.ngOnInit();
             expect(component.setInitialFileList).toHaveBeenCalled();
         });
+        it('should initialize dragula', () => {
+            expect(component.ngOnInit).toBeDefined();
+            spyOn(component, 'initializeDragula');
+            component.ngOnInit();
+            expect(component.initializeDragula).toHaveBeenCalled();
+        });
     });
     describe('Method: updateLayout()', () => {
         it('should set layoutOptions and call insertTemplatesBasedOnLayout', () => {
@@ -58,6 +68,21 @@ describe('Elements: NovoFileInputElement', () => {
             component.updateLayout();
             expect(component.layoutOptions).toBeDefined();
             expect(component.insertTemplatesBasedOnLayout).toHaveBeenCalled();
+        });
+    });
+    describe('Method: initializeDragula()', () => {
+        it('should correctly initialize dragula', () => {
+            let expectedBag = 'file-output-1';
+            component.dragula = {
+                bags: [{name: 'TEST', drake: {}}],
+                setOptions: () => {}
+            };
+            expect(component.initializeDragula).toBeDefined();
+            expect(component.fileOutputBag).not.toBeDefined();
+            spyOn(component.dragula, 'setOptions');
+            component.initializeDragula();
+            expect(component.fileOutputBag).toBe(expectedBag);
+            expect(component.dragula.setOptions).toHaveBeenCalled();
         });
     });
     describe('Method: insertTemplatesBasedOnLayout()', () => {
@@ -82,15 +107,15 @@ describe('Elements: NovoFileInputElement', () => {
             expect(insertedOrder).toEqual(expected);
         });
     });
-    //
-    // describe('Method: ngOnDestroy()', () => {
-    //     it('should destroy events.', () => {
-    //         expect(component.ngOnDestroy).toBeDefined();
-    //         spyOn(component.element.nativeElement, 'removeEventListener');
-    //         component.ngOnDestroy();
-    //         expect(component.element.nativeElement.removeEventListener).toHaveBeenCalled();
-    //     });
-    // });
+
+    describe('Method: ngOnDestroy()', () => {
+        it('should destroy events.', () => {
+            expect(component.ngOnDestroy).toBeDefined();
+            spyOn(component.element.nativeElement, 'removeEventListener');
+            component.ngOnDestroy();
+            expect(component.element.nativeElement.removeEventListener).toHaveBeenCalled();
+        });
+    });
     //
     // describe('Method: dragEnterHandler(event)', () => {
     //     it('should set active to true.', () => {
