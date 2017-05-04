@@ -1,3 +1,14 @@
+<a name="2.0.185"></a>
+## [2.0.185](https://github.com/bullhorn/novo-elements/compare/v2.0.184...v2.0.185) (2017-05-04)
+
+
+### Bug Fixes
+
+* **calendar:** Fixing the building of the months ([934d245](https://github.com/bullhorn/novo-elements/commit/934d245))
+* **quicknote:** Forcing scroll to keep textarea/div aligned properly ([c38e5e4](https://github.com/bullhorn/novo-elements/commit/c38e5e4))
+
+
+
 <a name="2.0.184"></a>
 ## [2.0.184](https://github.com/bullhorn/novo-elements/compare/v2.0.183...v2.0.184) (2017-05-04)
 
