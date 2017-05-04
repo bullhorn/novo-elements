@@ -54,7 +54,7 @@ export { EntityPickerResult, EntityPickerResults } from './src/elements/picker/e
 export { ChecklistPickerResults } from './src/elements/picker/extras/checklist-picker-results/ChecklistPickerResults';
 export { BaseRenderer } from './src/elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './src/elements/table/extras/date-cell/DateCell';
-export { NovoDropdownCell } from './src/elements/table/extras/dropdown-cell/DropdownCell';
+export { NovoDropdownCell, INovoDropdownCellConfig } from './src/elements/table/extras/dropdown-cell/DropdownCell';
 export { FormValidators } from './src/elements/form/FormValidators';
 export { FormUtils } from './src/utils/form-utils/FormUtils';
 export * from './src/elements/form/FormControls';

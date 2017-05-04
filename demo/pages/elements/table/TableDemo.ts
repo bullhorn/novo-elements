@@ -211,10 +211,11 @@ export class TableDemoComponent implements OnInit {
                     {
                         category: 'Move',
                         callback: this.move.bind(this),
-                        options: [
-                            { label: 'Kitten', value: 'new' },
-                            { label: 'Kitty', value: 'kitty' }
-                        ]
+                        options: ['Kitten', 'Kitty']
+                    },
+                    {
+                        callback: this.move.bind(this),
+                        options: ['Meow', 'Kitty']
                     }
                 ]
             }

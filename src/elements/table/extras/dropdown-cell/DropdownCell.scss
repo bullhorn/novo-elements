@@ -10,6 +10,7 @@ novo-dropdown-cell,
         border-bottom: 1px solid #DEDEDE;
         padding: 0;
         width: 100%;
+        max-width: 200px;
         i {
             font-size: 10px;
             margin-right: -5px;
@@ -20,11 +21,19 @@ novo-dropdown-cell,
             background: inherit;
             box-shadow: none;
         }
+        span {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: inline-block;
+            max-width: 80%;
+        }
     }
     list {
         max-height: 400px;
         display: block;
         overflow: auto;
+        padding: 5px 0;
     }
     item {
         height: 30px !important;
@@ -36,17 +45,11 @@ novo-dropdown-cell,
             display: inline-block;
             max-width: 80%;
         }
-        &:last-of-type {
-            margin-bottom: 5px;
-        }
         &.active {
             font-weight: 500;
         }
     }
     dropdown-item-header {
         padding: 0 10px !important;
-        &:first-of-type {
-            padding-top: 5px !important;
-        }
     }
 }
