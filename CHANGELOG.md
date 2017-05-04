@@ -1,3 +1,14 @@
+<a name="2.0.184"></a>
+## [2.0.184](https://github.com/bullhorn/novo-elements/compare/v2.0.183...v2.0.184) (2017-05-04)
+
+
+### Features
+
+* **table:** Adding a dropdown cell ([30a96fa](https://github.com/bullhorn/novo-elements/commit/30a96fa))
+* **table:** Adding a dropdown cell ([ef5a7b7](https://github.com/bullhorn/novo-elements/commit/ef5a7b7))
+
+
+
 <a name="2.0.183"></a>
 ## [2.0.183](https://github.com/bullhorn/novo-elements/compare/v2.0.182...v2.0.183) (2017-05-02)
 
