@@ -19,6 +19,7 @@ novo-quick-note,
         word-wrap: break-word;
         background-color: rgba(0, 0, 0, 0);
         pointer-events: none;
+        overflow-y: scroll;
         top: 0;
         right: 0;
         bottom: 0;
@@ -36,7 +37,7 @@ novo-quick-note,
         max-height: $quick-note-height;
         width: 100%;
         border: none;
-        overflow: auto;
+        overflow-y: scroll;
         &:focus {
             outline: none;
         }
