@@ -437,7 +437,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
             count = 0;
 
         if (date.getDay() !== 0) {
-            date = dateFns.subDays(date, date.getDate() - date.getDay());
+            date = dateFns.subDays(date, date.getDay());
         }
 
         while (!done) {

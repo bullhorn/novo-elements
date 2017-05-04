@@ -16,10 +16,6 @@ const template = `
     <h2>Calendar Picker  <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/date-picker">(source)</a></small></h2>
     <p>The calendar picker is used to select a date. It appears in all date picker fields.</p>
 
-    <h5>Big Calendar Picker</h5>
-    <div class="example demo">${BigCalendarDemoTpl}</div>
-    <code-snippet [code]="BigCalendarDemoTpl"></code-snippet>
-
     <h5>Full Calendar Picker</h5>
     <div class="example demo">${CalendarDemoTpl}</div>
     <code-snippet [code]="CalendarDemoTpl"></code-snippet>
@@ -38,6 +34,10 @@ const template = `
     <h5>Date Time Picker</h5>
     <div class="example demo">${DateTimeDemoTpl}</div>
     <code-snippet [code]="DateTimeDemoTpl"></code-snippet>
+
+    <h5>Big Calendar Picker</h5>
+    <div class="example demo">${BigCalendarDemoTpl}</div>
+    <code-snippet [code]="BigCalendarDemoTpl"></code-snippet>
 </div>
 `;
 
