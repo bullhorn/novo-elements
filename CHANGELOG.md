@@ -1,3 +1,13 @@
+<a name="2.0.186"></a>
+## [2.0.186](https://github.com/bullhorn/novo-elements/compare/v2.0.185...v2.0.186) (2017-05-04)
+
+
+### Bug Fixes
+
+* **table:** Fixing some issues with dropdown cell ([cd3f9cf](https://github.com/bullhorn/novo-elements/commit/cd3f9cf))
+
+
+
 <a name="2.0.185"></a>
 ## [2.0.185](https://github.com/bullhorn/novo-elements/compare/v2.0.184...v2.0.185) (2017-05-04)
 
