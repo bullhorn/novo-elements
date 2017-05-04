@@ -82,6 +82,10 @@ novo-file-input {
             small {
                 margin-top: 7px;
             }
+            i.bhi-dropzone {
+                float: left;
+                margin: -17px .25em 0 0;
+            }
             &.boxed {
                 border: 2px dashed $grey;
             }

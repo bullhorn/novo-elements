@@ -23,8 +23,8 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
             <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
                 <input type="file" [name]="name" [attr.id]="name" (change)="check($event)" [attr.multiple]="multiple"/>
                 <section [ngSwitch]="layoutOptions.labelStyle">
-                    <label *ngSwitchCase="'no-box'" [attr.for]="name">
-                            <span> <i class="bhi-dropzone"></i>{{ placeholder || labels.chooseAFile }} {{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></span>
+                    <label *ngSwitchCase="'no-box'" [attr.for]="name" class="no-box">
+                            <div><i class="bhi-dropzone"></i>{{ placeholder || labels.chooseAFile }} {{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></div>
                     </label>
                     <label *ngSwitchDefault [attr.for]="name" class="boxed">
                             <span>{{ placeholder || labels.chooseAFile }}</span>
