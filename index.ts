@@ -27,6 +27,7 @@ export { NovoDateTimePickerModule } from './src/elements/date-time-picker/DateTi
 export { NovoNovoCKEditorModule } from './src/elements/ckeditor/CKEditor.module';
 export { NovoTipWellModule } from './src/elements/tip-well/TipWell.module';
 export { NovoTableModule } from './src/elements/table/Table.module';
+export { NovoTableMode } from './src/elements/table/Table';
 export { NovoTableExtrasModule } from './src/elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './src/elements/form/Form.module';
 export { NovoFormExtrasModule } from './src/elements/form/extras/FormExtras.module';
@@ -53,6 +54,7 @@ export { EntityPickerResult, EntityPickerResults } from './src/elements/picker/e
 export { ChecklistPickerResults } from './src/elements/picker/extras/checklist-picker-results/ChecklistPickerResults';
 export { BaseRenderer } from './src/elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './src/elements/table/extras/date-cell/DateCell';
+export { NovoDropdownCell } from './src/elements/table/extras/dropdown-cell/DropdownCell';
 export { FormValidators } from './src/elements/form/FormValidators';
 export { FormUtils } from './src/utils/form-utils/FormUtils';
 export * from './src/elements/form/FormControls';

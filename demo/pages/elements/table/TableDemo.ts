@@ -11,7 +11,7 @@ let SelectAllTableDemoTpl = require('./templates/SelectAllTableDemo.html');
 let MovieTableDemoTpl = require('./templates/MovieTableDemo.html');
 let TotalFooterTableDemoTpl = require('./templates/TotalFooterTableDemo.html');
 // Vendor
-import { DateCell, BaseRenderer, NovoTableElement, NovoTableConfig, TextBoxControl, TablePickerControl, SelectControl } from './../../../../index';
+import { DateCell, BaseRenderer, NovoTableElement, NovoTableConfig, TextBoxControl, TablePickerControl, SelectControl, NovoDropdownCell } from './../../../../index';
 
 const template = `
 <div class="container">
@@ -197,12 +197,26 @@ export class TableDemoComponent implements OnInit {
             {
                 title: 'Status',
                 name: 'status',
-                options: ['New Lead', 'Active', 'Archived'],
-                ordering: true,
-                multiple: true,
-                renderer: StatusCell,
-                allowCustomTextOption: true,
-                filtering: true
+                renderer: NovoDropdownCell,
+                dropdownCellConfig: [
+                    {
+                        category: 'Update Status',
+                        callback: this.updateStatus.bind(this),
+                        options: [
+                            { label: 'New Lead', value: 'New Lead' },
+                            { label: 'Active', value: 'Active' },
+                            { label: 'Archived', value: 'Archived', }
+                        ]
+                    },
+                    {
+                        category: 'Move',
+                        callback: this.move.bind(this),
+                        options: [
+                            { label: 'Kitten', value: 'new' },
+                            { label: 'Kitty', value: 'kitty' }
+                        ]
+                    }
+                ]
             }
         ];
         this.basic = {
@@ -437,5 +451,13 @@ export class TableDemoComponent implements OnInit {
             console.log('ERRORS!', errorsOrData); // tslint:disable-line
             table.displayToastMessage({ icon: 'caution', theme: 'danger', message: 'Errors!!' });
         }
+    }
+
+    public updateStatus(data: any, status: string): void {
+        console.log('Update Status', data, status); // tslint:disable-line
+    }
+
+    public move(data: any, status: string): void {
+        console.log('Move', data, status); // tslint:disable-line
     }
 }

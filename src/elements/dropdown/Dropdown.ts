@@ -212,3 +212,10 @@ export class NovoItemElement {
         }
     }
 }
+
+@Component({
+    selector: 'dropdown-item-header',
+    template: '<ng-content></ng-content>',
+})
+export class NovoItemHeaderElement {
+}

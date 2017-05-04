@@ -1,9 +1,14 @@
 <novo-dropdown>
     <button type="button" theme="secondary" icon="collapse" inverse>Actions</button>
     <list>
+        <dropdown-item-header>Section 1</dropdown-item-header>
         <item (action)="clickMe('Hello!')">Action 1</item>
         <item (action)="clickMe('Another!')">Action 2</item>
         <item tooltip="Test tooltip :)" tooltipPosition="right" [disabled]="true" (action)="clickMe()">Action 3</item>
+        <dropdown-item-header>Section 2</dropdown-item-header>
+        <item (action)="clickMe('Hello!')">Action 4</item>
+        <item (action)="clickMe('Another!')">Action 5</item>
+        <item tooltip="Test tooltip :)" tooltipPosition="right" [disabled]="true" (action)="clickMe()">Action 6</item>
     </list>
 </novo-dropdown>
 <novo-dropdown side="right">

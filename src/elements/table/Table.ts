@@ -335,6 +335,9 @@ export class NovoTableElement implements DoCheck {
                             });
                         }
                     });
+                    if (this.mode === NovoTableMode.EDIT) {
+                        this.setTableEdit();
+                    }
                     // Setup the footers (if any)
                     if (this.config.footers) {
                         this.footers = [];
