@@ -21,6 +21,15 @@ novo-file-input {
             padding: 4px 12px;
             width: 100%;
 
+            i.bhi-move {
+                color: $grey;
+                padding-right: .75em;
+                padding-bottom: 4px;
+                font-size: 2em;
+                cursor: -webkit-grab;
+                cursor: grab;
+            }
+
             label {
                 flex: 1;
             }

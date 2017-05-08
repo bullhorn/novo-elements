@@ -1,8 +1,9 @@
 // NG2
-import { Component, Input, ElementRef, forwardRef, OnInit, OnDestroy, ViewChild, ViewChildren, ViewContainerRef, TemplateRef, QueryList, Pipe } from '@angular/core';
+import { Component, Input, ElementRef, forwardRef, OnInit, OnDestroy, OnChanges, ViewChild, ViewContainerRef, TemplateRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoDragulaService } from '../../../../elements/dragula/DragulaService';
 import { NovoFile } from './extras/file/File';
 
 // Value accessor for the component (supports ngModel)
@@ -12,7 +13,7 @@ const FILE_VALUE_ACCESSOR = {
     multi: true
 };
 
-const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default' };
+const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default', draggable: true };
 
 @Component({
     selector: 'novo-file-input',
@@ -34,8 +35,9 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
             </div>
         </template>
         <template #fileOutput>
-            <div class="file-output-group">
+            <div class="file-output-group" [dragula]="fileOutputBag" [dragulaModel]="files">
                 <div class="file-item" *ngFor="let file of files">
+                    <i *ngIf="layoutOptions.draggable" class="bhi-move"></i>
                     <label>{{ file.name | decodeURI }}</label>
                     <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
                         <button *ngIf="layoutOptions.download" theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'"></button>
@@ -46,7 +48,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
             </div>
         </template>`
 })
-export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDestroy {
+export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
     @ViewChild('fileInput')
     fileInput: TemplateRef<any>;
     @ViewChild('fileOutput')
@@ -59,7 +61,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     @Input() multiple: boolean = false;
     @Input() disabled: boolean = false;
     @Input() placeholder: string;
-    @Input() layoutOptions: { order?: string, download?: boolean, labelStyle?: string };
+    @Input() layoutOptions: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean };
     @Input() value: Array<any> = [];
 
     elements: Array<any> = [];
@@ -69,13 +71,14 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     commands: any;
     visible: boolean;
     target: any;
+    fileOutputBag: string;
 
     onModelChange: Function = () => {
     };
     onModelTouched: Function = () => {
     };
 
-    constructor(private element: ElementRef, public labels: NovoLabelService) {
+    constructor(private element: ElementRef, public labels: NovoLabelService, private dragula:NovoDragulaService) {
         this.commands = {
             dragenter: this.dragEnterHandler.bind(this),
             dragleave: this.dragLeaveHandler.bind(this),
@@ -89,6 +92,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
             this.element.nativeElement.addEventListener(type, this.commands[type]);
         });
         this.updateLayout();
+        this.initializeDragula();
         this.setInitialFileList();
     }
 
@@ -96,6 +100,14 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
         ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(type => {
             this.element.nativeElement.removeEventListener(type, this.commands[type]);
         });
+        let dragulaHasFileOutputBag = this.dragula.bags.length > 0 && this.dragula.bags.filter(x => x.name === this.fileOutputBag).length > 0;
+        if (dragulaHasFileOutputBag) {
+            this.dragula.destroy(this.fileOutputBag);
+        }
+    }
+
+    ngOnChanges() {
+        this.onModelChange(this.model);
     }
 
     updateLayout() {
@@ -116,6 +128,15 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
             this.container.createEmbeddedView(this[template], 0);
         });
         return order;
+    }
+
+    initializeDragula() {
+        this.fileOutputBag = `file-output-${this.dragula.bags.length}`;
+        this.dragula.setOptions(this.fileOutputBag, {
+            moves: (el, container, handle) => {
+                return this.layoutOptions.draggable;
+            }
+        });
     }
 
     setInitialFileList() {
