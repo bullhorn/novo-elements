@@ -1,3 +1,13 @@
+<a name="2.0.189"></a>
+## [2.0.189](https://github.com/bullhorn/novo-elements/compare/v2.0.188...v2.0.189) (2017-05-08)
+
+
+### Features
+
+* **fileInput:** make file chips draggable ([#471](https://github.com/bullhorn/novo-elements/issues/471)) ([80f98cf](https://github.com/bullhorn/novo-elements/commit/80f98cf))
+
+
+
 <a name="2.0.188"></a>
 ## [2.0.188](https://github.com/bullhorn/novo-elements/compare/v2.0.187...v2.0.188) (2017-05-08)
 
