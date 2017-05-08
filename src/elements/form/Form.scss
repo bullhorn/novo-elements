@@ -210,6 +210,8 @@ novo-form {
                             margin-right: 35px;
                             text-transform: uppercase;
                             padding-top: 8px;
+                            word-break: word-break;
+                            overflow-wrap: break-word;
                         }
                         >div.novo-control-outer-container {
                             display: flex;
