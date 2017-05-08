@@ -17,6 +17,18 @@ novo-nav {
         height: 100%;
         position: relative;
 
+        &.disabled {
+            .novo-tab-link {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+            &:hover {
+                .novo-tab-link {
+                    opacity: 0.5;
+                }
+            }
+        }
+
         .novo-tab-link {
             padding: 10px 20px;
             color: #fff;
@@ -24,6 +36,7 @@ novo-nav {
             font-weight: 400;
             cursor: pointer;
             text-transform: uppercase;
+            
         }
 
         .indicator {
@@ -65,6 +78,13 @@ novo-nav {
             padding: 15px 20px;
             cursor: pointer;
             transition: all 120ms ease-in-out;
+            &.disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+                &:hover {
+                    opacity: 0.5;
+                }
+            }
         }
     }
 
@@ -83,6 +103,17 @@ novo-nav {
                     background: #fff;
                 }
             }
+            &.disabled {
+                .novo-tab-link {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+                &:hover {
+                    .novo-tab-link {
+                        opacity: 0.5;
+                    }
+                }
+            }
         }
 
         &[type="button-bar"] {
@@ -99,6 +130,14 @@ novo-nav {
                 &:hover {
                     background: rgba(0, 0, 0, .1);
                 }
+
+                &.disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                    &:hover {
+                        opacity: 0.5;
+                    }
+                }
             }
         }
     }
@@ -112,6 +151,17 @@ novo-nav {
 
         novo-tab,
         novo-tab-link {
+             &.disabled {
+                .novo-tab-link {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+                &:hover {
+                    .novo-tab-link {
+                        opacity: 0.5;
+                    }
+                }
+            }   
             .novo-tab-link {
                 color: $dark;
                 opacity: 0.75;
@@ -147,6 +197,13 @@ novo-nav {
 
                 &:hover {
                     opacity: 1;
+                }
+                &.disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                    &:hover {
+                        opacity: 0.5;
+                    }
                 }
             }
         }
@@ -211,6 +268,17 @@ novo-nav {
             &:hover {
                 .novo-tab-link {
                     opacity: 1;
+                }
+            }
+             &.disabled {
+                .novo-tab-link {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+                &:hover {
+                    .novo-tab-link {
+                        opacity: 0.5;
+                    }
                 }
             }
         }
