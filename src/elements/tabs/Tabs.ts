@@ -55,7 +55,8 @@ export class NovoNavElement {
     selector: 'novo-tab',
     host: {
         '(click)': 'select()',
-        '[class.active]': 'active'
+        '[class.active]': 'active',
+        '[class.disabled]': 'disabled'
     },
     template: `
         <div class="novo-tab-link">
@@ -66,6 +67,7 @@ export class NovoNavElement {
 })
 export class NovoTabElement {
     @Input() active: boolean = false;
+    @Input() disabled: boolean = false;
     @Output() activeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     nav: any;
@@ -76,8 +78,10 @@ export class NovoTabElement {
     }
 
     select() {
-        this.activeChange.emit(true);
-        this.nav.select(this);
+        if (!this.disabled) {
+            this.activeChange.emit(true);
+            this.nav.select(this);
+        }
     }
 }
 
@@ -85,12 +89,14 @@ export class NovoTabElement {
     selector: 'novo-tab-button',
     host: {
         '(click)': 'select()',
-        '[class.active]': 'active'
+        '[class.active]': 'active',
+        '[class.disabled]': 'disabled'
     },
     template: '<ng-content></ng-content>'
 })
 export class NovoTabButtonElement {
     @Input() active: boolean = false;
+    @Input() disabled: boolean = false;
 
     nav: any;
 
@@ -100,7 +106,9 @@ export class NovoTabButtonElement {
     }
 
     select() {
-        this.nav.select(this);
+        if (!this.disabled) {
+            this.nav.select(this);
+        }
     }
 }
 
@@ -108,7 +116,8 @@ export class NovoTabButtonElement {
     selector: 'novo-tab-link',
     host: {
         '(click)': 'select()',
-        '[class.active]': 'active'
+        '[class.active]': 'active',
+        '[class.disabled]': 'disabled'
     },
     template: `
         <div class="novo-tab-link">
@@ -119,6 +128,7 @@ export class NovoTabButtonElement {
 })
 export class NovoTabLinkElement {
     @Input() active: boolean = false;
+    @Input() disabled: boolean = false;
 
     nav: any;
 
@@ -128,7 +138,9 @@ export class NovoTabLinkElement {
     }
 
     select() {
-        this.nav.select(this);
+        if (!this.disabled) {
+            this.nav.select(this);
+        }
     }
 }
 
