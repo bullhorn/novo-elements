@@ -6,7 +6,6 @@ novo-select {
     min-width: 180px;
     cursor: pointer;
     font-size: 1rem;
-
     &.active {
         .novo-select-list {
             position: absolute;
@@ -20,7 +19,6 @@ novo-select {
             opacity: 1;
         }
     }
-
     div[type="button"] {
         display: flex;
         justify-content: space-between;
@@ -39,28 +37,22 @@ novo-select {
         text-transform: none;
         padding: 0 10px 0 0;
         font-size: 1rem;
-
         &.empty {
             color: #A9A9A9;
         }
-
         &:focus,
         &:hover {
             outline: none;
         }
-
         &:hover {
             border-bottom: 1px solid lighten($dark, 45%);
         }
-
         &:focus {
             border-bottom: 1px solid $positive;
-
             i {
                 color: rgba(0, 0, 0, 0.73);
             }
         }
-
         i {
             font-size: 0.8em;
             color: #A9A9A9;
@@ -68,7 +60,6 @@ novo-select {
             right: 10px;
         }
     }
-
     .novo-select-list {
         background-color: white;
         cursor: default;
@@ -86,23 +77,20 @@ novo-select {
         font-size: 1rem;
         z-index: -1;
         opacity: 0;
-
         li {
             cursor: pointer;
-            height: 48px;
+            height: 30px;
             margin: 0;
-            padding: 10px 16px;
+            padding: 5px 16px;
             box-sizing: border-box;
             display: flex;
             align-items: center;
             justify-content: space-between;
             color: darken($light, 45%);
             font-size: 1rem;
-
             span {
                 display: inline-block;
             }
-
             i {
                 height: 30px !important;
                 width: 15px !important;
@@ -110,18 +98,15 @@ novo-select {
                 margin: 0 !important;
                 color: $positive;
             }
-
             &:focus,
             &:hover {
                 background: lighten($light, 10%);
                 color: darken($light, 55%);
             }
-
             &.active {
                 color: darken($light, 55%);
                 font-weight: 500;
             }
-
             &.open.select-header {
                 background: lighten($light, 10%);
                 padding: 10px 0 0;
@@ -130,70 +115,58 @@ novo-select {
                 border-bottom: 1px solid #e9e9e9;
             }
         }
-
         &:focus {
             outline: none;
         }
-
         &.header {
             max-height: 240px;
             min-width: 200px;
             padding: 0;
         }
     }
-
     &[disabled] {
         pointer-events: none;
-
         div[type="button"] {
             color: $grey;
         }
     }
-
     .select-header {
         button {
             text-transform: uppercase;
-
             &.header {
                 color: $positive;
                 position: relative;
                 text-align: left;
                 cursor: pointer;
-                height: 48px;
+                height: 30px;
                 margin: 0;
-                padding: 10px 16px 0 0;
+                padding: 5px 16px 0 0;
                 box-sizing: border-box;
                 border: none;
                 display: block;
                 align-items: center;
                 justify-content: space-between;
                 font-size: 1rem;
-
                 &:focus,
                 &:hover {
                     color: darken($light, 55%);
                 }
-
                 i {
                     color: $positive;
                     padding-right: 10px;
                 }
-
                 span {
                     text-align: left;
                 }
             }
         }
-
         div.active {
             width: 100%;
             float: right;
             padding: 5px;
-
             footer {
                 float: right;
             }
-
             button {
                 display: inline-block;
                 border: none;
@@ -202,20 +175,16 @@ novo-select {
                 font-weight: 500;
                 font-size: 0.8rem;
                 color: #ACACAC;
-
                 &:hover {
                     color: darken(#ACACAC, 15%);
                 }
             }
-
             button.primary {
                 color: $positive;
-
                 &:hover {
                     color: darken($positive, 15%);
                 }
             }
-
             input {
                 display: flex;
                 justify-content: space-between;
@@ -234,19 +203,15 @@ novo-select {
                 text-transform: none;
                 padding-top: 10px;
                 font-size: 1rem;
-
                 &.empty {
                     color: #A9A9A9;
                 }
-
                 &:focus {
                     outline: none;
                 }
-
                 &:hover {
                     border-bottom: 1px solid $positive;
                 }
-
                 &.invalid {
                     border-bottom: 1px solid #DA4453;
                 }

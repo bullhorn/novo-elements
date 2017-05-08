@@ -38,12 +38,12 @@ novo-dropdown-container {
     list {
         item {
             cursor: pointer;
-            height: 48px;
+            height: 30px;
             width: 100%;
             margin: 0;
-            padding: 10px 16px;
+            padding: 5px 16px;
             box-sizing: border-box;
-            display: flex;
+            display: flex !important;
             align-items: center;
             justify-content: space-between;
             color: darken($light, 45%);
