@@ -13,7 +13,7 @@ const FILE_VALUE_ACCESSOR = {
     multi: true
 };
 
-const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default', draggable: true };
+const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default', draggable: false };
 
 @Component({
     selector: 'novo-file-input',
