@@ -110,3 +110,11 @@ novo-file-input {
         transform: scale(.8, .8);
     }
 }
+
+.gu-mirror {
+    .actions{
+        button {
+            display: none;
+        }
+    }
+}
