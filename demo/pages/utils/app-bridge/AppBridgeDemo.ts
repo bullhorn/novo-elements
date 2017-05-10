@@ -23,8 +23,11 @@ export class AppBridgeDemoComponent implements OnInit {
             console.log('[NovoElements(Parent)] - Received open handler', packet); // tslint:disable-line
             callback(true);
         };
-        this.appBridge.httpHandler = (verb, relativeURL, callback) => {
-            console.log('[NovoElements(Parent)] - Received http handler', relativeURL); // tslint:disable-line
+        this.appBridge.httpHandler = (event, callback) => {
+            console.log('[NovoElements(Parent)] - Received http handler', event); // tslint:disable-line
+            if (event.data) {
+                console.log('[NovoElements(Parent)] - Data', event.data); // tslint:disable-line
+            }
             callback([1, 2, 3, 4, 5]);
         };
     }
