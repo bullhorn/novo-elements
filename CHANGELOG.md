@@ -1,3 +1,18 @@
+<a name="2.0.191"></a>
+## [2.0.191](https://github.com/bullhorn/novo-elements/compare/v2.0.190...v2.0.191) (2017-05-10)
+
+
+### Bug Fixes
+
+* **fileInput:** draggable should default to false ([#474](https://github.com/bullhorn/novo-elements/issues/474)) ([3324f7e](https://github.com/bullhorn/novo-elements/commit/3324f7e))
+
+
+### Features
+
+* **appbridge:** Supporting POST/PUT with data ([be7817b](https://github.com/bullhorn/novo-elements/commit/be7817b))
+
+
+
 <a name="2.0.190"></a>
 ## [2.0.190](https://github.com/bullhorn/novo-elements/compare/v2.0.189...v2.0.190) (2017-05-09)
 
