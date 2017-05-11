@@ -50,8 +50,19 @@ novo-check-list {
                 transition: all 200ms ease-in-out;
 
                 &.bhi-checkbox-empty,
-                &.bhi-radio-empty {
+                &.bhi-radio-empty,
+                &.bhi-circle-o {
                     color: #D2D2D2;
+                }
+
+                &.bhi-check {
+                    background: #D2D2D2;
+                    color: #FFF;
+                    padding: .15em 0 0 .3em;
+                    font-size: 1em;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
                 }
 
                 &.bhi-checkbox-filled,
