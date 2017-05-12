@@ -1,3 +1,13 @@
+<a name="2.0.193"></a>
+## [2.0.193](https://github.com/bullhorn/novo-elements/compare/v2.0.192...v2.0.193) (2017-05-12)
+
+
+### Bug Fixes
+
+* **appbridge:** Fixing HTTP calls via app bridge ([26cabd5](https://github.com/bullhorn/novo-elements/commit/26cabd5))
+
+
+
 <a name="2.0.192"></a>
 ## [2.0.192](https://github.com/bullhorn/novo-elements/compare/v2.0.191...v2.0.192) (2017-05-12)
 
