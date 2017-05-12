@@ -1,3 +1,13 @@
+<a name="2.0.192"></a>
+## [2.0.192](https://github.com/bullhorn/novo-elements/compare/v2.0.191...v2.0.192) (2017-05-12)
+
+
+### Bug Fixes
+
+* **table:** Fix instance where selectAll was not showing ([e7a6b7c](https://github.com/bullhorn/novo-elements/commit/e7a6b7c))
+
+
+
 <a name="2.0.191"></a>
 ## [2.0.191](https://github.com/bullhorn/novo-elements/compare/v2.0.190...v2.0.191) (2017-05-10)
 
