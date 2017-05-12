@@ -701,7 +701,7 @@ export class NovoTableElement implements DoCheck {
             this.emitSelected(this.selected);
             // Only show the select all message when there is only one new page selected at a time
             this.selectedPageCount++;
-            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.dataProvider.length;
+            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.dataProvider.total;
         }
     }
 
