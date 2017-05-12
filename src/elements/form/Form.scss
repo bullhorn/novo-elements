@@ -202,7 +202,7 @@ novo-form {
                         width: 100%;
                         >label {
                             color: #9e9e9e;
-                            font-size: 0.8em;
+                            font-size: 0.9em;
                             flex: 1;
                             max-width: 130px;
                             font-weight: 500;
@@ -692,7 +692,7 @@ novo-form {
                                     &.novo-control-focused,
                                     &.novo-control-filled {
                                         display: block;
-                                        transform: translateY(-100%) scale(0.9);
+                                        transform: translateY(-100%);
                                         height: 1.5em;
                                         top: 0;
                                     }

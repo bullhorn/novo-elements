@@ -3,6 +3,19 @@ import { Injectable } from '@angular/core';
 // Vendor
 import { Subject } from 'rxjs/Subject';
 
+// let bridge = new AppBridge();
+// bridge.on(LISTENERS.OPEN, (event) => {
+// });
+
+// TYPES FOR ALL EVENTS
+
+// enum LISTENERS {
+//     HTTP,
+//     OPEN,
+//     CLOSE,
+//     REFRESH
+// }
+
 const HTTP_VERBS = {
     GET: 'get',
     POST: 'post',
@@ -36,6 +49,7 @@ export class AppBridge {
     private _tracing: boolean = false;
     private _eventListeners: any = {};
 
+    // Type?
     constructor(name?: string) {
         this.name = name;
         if (postRobot) {
