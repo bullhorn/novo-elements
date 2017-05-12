@@ -106,29 +106,29 @@ export class AppBridge {
         // HTTP-GET
         postRobot.on(MESSAGE_TYPES.HTTP_GET, (event) => {
             this._trace(MESSAGE_TYPES.HTTP_GET, event);
-            return this.httpGET(event.data.relativeURL).then(data => {
-                return { data };
+            return this.httpGET(event.data.relativeURL).then(result => {
+                return { data: result.data, error: result.error };
             });
         });
         // HTTP-POST
         postRobot.on(MESSAGE_TYPES.HTTP_POST, (event) => {
             this._trace(MESSAGE_TYPES.HTTP_POST, event);
-            return this.httpPOST(event.data.relativeURL, event.data.data).then(data => {
-                return { data };
+            return this.httpPOST(event.data.relativeURL, event.data.data).then(result => {
+                return { data: result.data, error: result.error };
             });
         });
         // HTTP-PUT
         postRobot.on(MESSAGE_TYPES.HTTP_PUT, (event) => {
             this._trace(MESSAGE_TYPES.HTTP_PUT, event);
-            return this.httpPUT(event.data.relativeURL, event.data.data).then(data => {
-                return { data };
+            return this.httpPUT(event.data.relativeURL, event.data.data).then((result) => {
+                return { data: result.data, error: result.error };
             });
         });
         // HTTP-DELETE
         postRobot.on(MESSAGE_TYPES.HTTP_DELETE, (event) => {
             this._trace(MESSAGE_TYPES.HTTP_DELETE, event);
-            return this.httpDELETE(event.data.relativeURL).then(data => {
-                return { data };
+            return this.httpDELETE(event.data.relativeURL).then(result => {
+                return { data: result.data, error: result.error };
             });
         });
         // Custom Events
@@ -208,14 +208,14 @@ export class AppBridge {
      * @param packet any - packet of data to send with the event
      */
     public httpGET(relativeURL: string): Promise<any> {
-        return new Promise<boolean>((resolve, reject) => {
+        return new Promise<any>((resolve, reject) => {
             if (this._httpHandler) {
-                this._httpHandler({ verb: HTTP_VERBS.GET, relativeURL: relativeURL }, (data: any) => {
-                    resolve(data);
+                this._httpHandler({ verb: HTTP_VERBS.GET, relativeURL: relativeURL }, (data: any, error: any) => {
+                    resolve({ data, error });
                 });
             } else {
                 postRobot.sendToParent(MESSAGE_TYPES.HTTP_GET, { relativeURL }).then((event: any) => {
-                    resolve(event.data.data);
+                    resolve({ data: event.data.data, error: event.data.error });
                 }).catch((err) => {
                     reject(null);
                 });
@@ -228,14 +228,14 @@ export class AppBridge {
      * @param packet any - packet of data to send with the event
      */
     public httpPOST(relativeURL: string, postData: any): Promise<any> {
-        return new Promise<boolean>((resolve, reject) => {
+        return new Promise<any>((resolve, reject) => {
             if (this._httpHandler) {
-                this._httpHandler({ verb: HTTP_VERBS.POST, relativeURL: relativeURL, data: postData }, (data: any) => {
-                    resolve(data);
+                this._httpHandler({ verb: HTTP_VERBS.POST, relativeURL: relativeURL, data: postData }, (data: any, error: any) => {
+                    resolve({ data, error });
                 });
             } else {
                 postRobot.sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL: relativeURL, data: postData }).then((event: any) => {
-                    resolve(event.data.data);
+                    resolve({ data: event.data.data, error: event.data.error });
                 }).catch((err) => {
                     reject(null);
                 });
@@ -248,14 +248,14 @@ export class AppBridge {
      * @param packet any - packet of data to send with the event
      */
     public httpPUT(relativeURL: string, putData: any): Promise<any> {
-        return new Promise<boolean>((resolve, reject) => {
+        return new Promise<any>((resolve, reject) => {
             if (this._httpHandler) {
-                this._httpHandler({ verb: HTTP_VERBS.PUT, relativeURL: relativeURL, data: putData }, (data: any) => {
-                    resolve(data);
+                this._httpHandler({ verb: HTTP_VERBS.PUT, relativeURL: relativeURL, data: putData }, (data: any, error: any) => {
+                    resolve({ data, error });
                 });
             } else {
                 postRobot.sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL: relativeURL, data: putData }).then((event: any) => {
-                    resolve(event.data.data);
+                    resolve({ data: event.data.data, error: event.data.error });
                 }).catch((err) => {
                     reject(null);
                 });
@@ -268,14 +268,14 @@ export class AppBridge {
      * @param packet any - packet of data to send with the event
      */
     public httpDELETE(relativeURL: string): Promise<any> {
-        return new Promise<boolean>((resolve, reject) => {
+        return new Promise<any>((resolve, reject) => {
             if (this._httpHandler) {
-                this._httpHandler({ verb: HTTP_VERBS.DELETE, relativeURL: relativeURL }, (data: any) => {
-                    resolve(data);
+                this._httpHandler({ verb: HTTP_VERBS.DELETE, relativeURL: relativeURL }, (data: any, error: any) => {
+                    resolve({ data, error });
                 });
             } else {
                 postRobot.sendToParent(MESSAGE_TYPES.HTTP_DELETE, { relativeURL }).then((event: any) => {
-                    resolve(event.data.data);
+                    resolve({ data: event.data.data, error: event.data.error });
                 }).catch((err) => {
                     reject(null);
                 });
