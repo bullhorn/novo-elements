@@ -3,18 +3,66 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // APP
 import { NovoButtonModule } from '../button/Button.module';
-import { CalendarMonthElement } from './CalendarMonth';
-import { CalendarMonthHeaderElement } from './CalendarMonthHeader';
-import { CalendarMonthDayElement } from './CalendarMonthDay';
-import { WeekdayPipe } from './Weekday.pipe';
-import { MonthPipe } from './Month.pipe';
-import { YearPipe } from './Year.pipe';
-import { DayOfMonthPipe } from './DayOfMonth.pipe';
+import { NovoTooltipModule } from '../tooltip/Tooltip.module';
+// Month View
+import { NovoCalendarMonthViewElement } from './month/CalendarMonthView';
+import { NovoCalendarMonthHeaderElement } from './month/CalendarMonthHeader';
+import { NovoCalendarMonthDayElement } from './month/CalendarMonthDay';
+// Week View
+import { NovoCalendarWeekViewElement } from './week/CalendarWeekView';
+import { NovoCalendarWeekHeaderElement } from './week/CalendarWeekHeader';
+import { NovoCalendarWeekEventElement } from './week/CalendarWeekEvent';
+// Day View
+import { NovoCalendarDayViewElement } from './day/CalendarDayView';
+import { NovoCalendarDayEventElement } from './day/CalendarDayEvent';
+import { NovoCalendarHourSegmentElement } from './day/CalendarHourSegment';
+import { NovoCalendarAllDayEventElement } from './day/CalendarAllDayEvent';
+// Common
+import { WeekdayPipe } from './pipe/Weekday.pipe';
+import { MonthPipe } from './pipe/Month.pipe';
+import { MonthDayPipe } from './pipe/MonthDay.pipe';
+import { YearPipe } from './pipe/Year.pipe';
+import { HoursPipe } from './pipe/Hours.pipe';
+import { DayOfMonthPipe } from './pipe/DayOfMonth.pipe';
 
 @NgModule({
-    imports: [CommonModule, NovoButtonModule],
-    declarations: [CalendarMonthElement, CalendarMonthHeaderElement, CalendarMonthDayElement, WeekdayPipe, DayOfMonthPipe, MonthPipe, YearPipe],
-    exports: [CalendarMonthElement, CalendarMonthHeaderElement, CalendarMonthDayElement, WeekdayPipe, DayOfMonthPipe, MonthPipe, YearPipe]
+    imports: [CommonModule, NovoButtonModule, NovoTooltipModule],
+    declarations: [
+        NovoCalendarMonthViewElement,
+        NovoCalendarMonthHeaderElement,
+        NovoCalendarMonthDayElement,
+        NovoCalendarWeekViewElement,
+        NovoCalendarWeekHeaderElement,
+        NovoCalendarWeekEventElement,
+        NovoCalendarDayViewElement,
+        NovoCalendarDayEventElement,
+        NovoCalendarHourSegmentElement,
+        NovoCalendarAllDayEventElement,
+        WeekdayPipe,
+        DayOfMonthPipe,
+        MonthPipe,
+        MonthDayPipe,
+        YearPipe,
+        HoursPipe
+    ],
+    exports: [
+        NovoCalendarMonthViewElement,
+        NovoCalendarMonthHeaderElement,
+        NovoCalendarMonthDayElement,
+        NovoCalendarWeekViewElement,
+        NovoCalendarWeekHeaderElement,
+        NovoCalendarWeekEventElement,
+        NovoCalendarDayViewElement,
+        NovoCalendarDayEventElement,
+        NovoCalendarHourSegmentElement,
+        NovoCalendarAllDayEventElement,
+        WeekdayPipe,
+        DayOfMonthPipe,
+        MonthPipe,
+        MonthDayPipe,
+        YearPipe,
+        HoursPipe
+    ]
 })
 export class NovoCalendarModule {
 }

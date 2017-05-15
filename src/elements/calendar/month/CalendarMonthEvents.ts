@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, TemplateRef, trigger, style, transition, animate } from '@angular/core';
 // import { trigger, style, transition, animate } from '@angular/animations';
-import { CalendarEvent } from '../../utils/calendar-utils/CalendarUtils';
+import { CalendarEvent } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
     selector: 'novo-calendar-month-events',
@@ -36,7 +36,7 @@ import { CalendarEvent } from '../../utils/calendar-utils/CalendarUtils';
         ])
     ]
 })
-export class CalendarMonthEventsElement {
+export class NovoCalendarMonthEventsElement {
 
     @Input() isOpen: boolean = false;
 
