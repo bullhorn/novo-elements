@@ -1,5 +1,5 @@
 // NG2
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
@@ -11,6 +11,8 @@ const CHECKBOX_VALUE_ACCESSOR = {
     multi: true
 };
 
+const LAYOUT_DEFAULTS = { iconStyle: 'box' };
+
 @Component({
     selector: 'novo-checkbox',
     providers: [CHECKBOX_VALUE_ACCESSOR],
@@ -18,26 +20,37 @@ const CHECKBOX_VALUE_ACCESSOR = {
         <div class="check-box-group" [class.checked]="model" [class.disabled]="disabled">
             <input hidden="true" [name]="name" type="checkbox" [(ngModel)]="model" [attr.id]="name">
             <label [attr.for]="name" (click)="select($event)">
-              <i [class.bhi-checkbox-empty]="!model && !indeterminate"
-                 [class.bhi-checkbox-filled]="model && !indeterminate"
-                 [class.bhi-checkbox-indeterminate]="indeterminate"></i>
+              <i [class.bhi-checkbox-empty]="!model && !indeterminate && boxIcon"
+                 [class.bhi-checkbox-filled]="model && !indeterminate && boxIcon"
+                 [class.bhi-checkbox-indeterminate]="indeterminate && boxIcon"
+                 [class.bhi-circle-o]="!model && !indeterminate && !boxIcon"
+                 [class.bhi-check]="model && !indeterminate && !boxIcon"
+                 [class.bhi-circle]="indeterminate && !boxIcon"></i>
               <span>{{label}}</span>
             </label>
         </div>
     `
 })
-export class NovoCheckboxElement implements ControlValueAccessor {
+export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     @Input() name:string;
     @Input() label:string;
     @Input() indeterminate:boolean = false;
     @Input() disabled:boolean;
+    @Input() layoutOptions: { iconStyle?: string };
     value:boolean = false;
+    boxIcon:boolean = true;
 
     model;
+
     onModelChange:Function = () => {
     };
     onModelTouched:Function = () => {
     };
+
+    ngOnInit() {
+        this.layoutOptions = Object.assign({}, LAYOUT_DEFAULTS, this.layoutOptions);
+        this.boxIcon = this.layoutOptions.iconStyle === 'box';
+    }
 
     select(event) {
         Helpers.swallowEvent(event);
