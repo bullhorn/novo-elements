@@ -1,3 +1,14 @@
+<a name="2.0.194"></a>
+## [2.0.194](https://github.com/bullhorn/novo-elements/compare/v2.0.193...v2.0.194) (2017-05-16)
+
+
+### Features
+
+* **checkbox:** make icon optional - style can be box or circle ([#476](https://github.com/bullhorn/novo-elements/issues/476)) ([f6dd554](https://github.com/bullhorn/novo-elements/commit/f6dd554))
+* **Table:** Added Expand all details feature ([#477](https://github.com/bullhorn/novo-elements/issues/477)) ([6a933a8](https://github.com/bullhorn/novo-elements/commit/6a933a8))
+
+
+
 <a name="2.0.193"></a>
 ## [2.0.193](https://github.com/bullhorn/novo-elements/compare/v2.0.192...v2.0.193) (2017-05-12)
 
