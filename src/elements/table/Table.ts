@@ -35,6 +35,7 @@ export interface NovoTableConfig {
     rowSelect?: boolean;                // Turn on row selection
     hasDetails?: boolean;               // Turn on details row for the table
     detailsRenderer?: any;              // Renderer/component for the details row
+    expandAll?: boolean;                // should All Rows be expanded by default
     selectAllEnabled?: boolean;         // Allows the table, while in selection mode to have a select all at the top
 }
 
@@ -77,7 +78,10 @@ export enum NovoTableMode {
                 <thead *ngIf="columns.length && (!dataProvider.isEmpty() || dataProvider.isFiltered() || skipSortAndFilterClear || editing)">
                     <tr role="row">
                         <!-- DETAILS -->
-                        <th class="row-actions" *ngIf="config.hasDetails"></th>
+                        <th class="row-actions" *ngIf="config.hasDetails">
+                            <button theme="icon" icon="next" (click)="expandAllOnPage(config.expandAll)" *ngIf="!config.expandAll" data-automation-id="expand-all"></button>
+                            <button theme="icon" icon="sort-desc" (click)="expandAllOnPage(config.expandAll)" *ngIf="config.expandAll" data-automation-id="collapse-all"></button>
+                        </th>
                         <!-- CHECKBOX -->
                         <th class="row-actions checkbox mass-action" *ngIf="config.rowSelectionStyle === 'checkbox'">
                             <novo-checkbox [(ngModel)]="master" [indeterminate]="pageSelected.length > 0 && pageSelected.length < pagedData.length" (ngModelChange)="selectPage($event)" data-automation-id="select-all-checkbox" [tooltip]="master ? labels.deselectAll : labels.selectAllOnPage" tooltipPosition="right"></novo-checkbox>
@@ -247,6 +251,7 @@ export class NovoTableElement implements DoCheck {
     selected: Array<any> = [];
     activeId: number = 0;
     master: boolean = false;
+    expandAll: boolean = false;
     indeterminate: boolean = false;
     lastPage: number = 0;
     selectedPageCount: number = 0;
@@ -315,6 +320,7 @@ export class NovoTableElement implements DoCheck {
                         let rowControls = [];
                         row.controls = {};
                         row._editing = {};
+                        row._expanded = this.config.expandAll;
                         row.rowId = this._rows.length;
                         this.columns.forEach(column => {
                             // Use the control passed or use a ReadOnlyControl so that the form has the values
@@ -684,6 +690,16 @@ export class NovoTableElement implements DoCheck {
     /**
      * @name selectPage
      */
+    expandAllOnPage(expanded) {
+        this.config.expandAll = !expanded;
+        for (let row of this.dataProvider.list) {
+            row._expanded = this.config.expandAll;
+        }
+    }
+
+    /**
+     * @name selectPage
+     */
     selectPage() {
         if (!this.master) {
             this.selectAll(false);
@@ -701,7 +717,7 @@ export class NovoTableElement implements DoCheck {
             this.emitSelected(this.selected);
             // Only show the select all message when there is only one new page selected at a time
             this.selectedPageCount++;
-            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.dataProvider.length;
+            this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.dataProvider.total;
         }
     }
 

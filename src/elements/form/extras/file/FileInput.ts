@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, ElementRef, forwardRef, OnInit, OnDestroy, OnChanges, ViewChild, ViewContainerRef, TemplateRef } from '@angular/core';
+import { Component, Input, ElementRef, forwardRef, OnInit, OnDestroy, OnChanges, ViewChild, ViewContainerRef, TemplateRef, SimpleChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
@@ -78,7 +78,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     onModelTouched: Function = () => {
     };
 
-    constructor(private element: ElementRef, public labels: NovoLabelService, private dragula:NovoDragulaService) {
+    constructor(private element: ElementRef, public labels: NovoLabelService, private dragula: NovoDragulaService) {
         this.commands = {
             dragenter: this.dragEnterHandler.bind(this),
             dragleave: this.dragLeaveHandler.bind(this),
@@ -106,7 +106,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
         }
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes?: SimpleChanges) {
         this.onModelChange(this.model);
     }
 
