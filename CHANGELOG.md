@@ -1,3 +1,13 @@
+<a name="2.0.195"></a>
+## [2.0.195](https://github.com/bullhorn/novo-elements/compare/v2.0.194...v2.0.195) (2017-05-16)
+
+
+### Bug Fixes
+
+* **aot:** Fixing AOT build for FileInput ([c05a149](https://github.com/bullhorn/novo-elements/commit/c05a149))
+
+
+
 <a name="2.0.194"></a>
 ## [2.0.194](https://github.com/bullhorn/novo-elements/compare/v2.0.193...v2.0.194) (2017-05-16)
 
