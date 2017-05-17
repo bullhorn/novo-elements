@@ -13382,104 +13382,104 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 29px;
-      height: 29px; }
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-navigation {
-      background: #2F384F;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-lead {
-      background: #AA6699;
-      width: 36px;
-      height: 36px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
-      width: 36px;
-      height: 36px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-submission {
-      background: #a9adbb;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 26px;
-      height: 26px; }
-    color header .background-boxes .bb-task {
-      background: #4f5361;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-distributionList {
-      background: #4f5361;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-credential {
-      background: #4f5361;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-user {
-      background: #4f5361;
       width: 37px;
       height: 37px; }
-    color header .background-boxes .bb-corporateuser {
-      background: #4f5361;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
+    color header .background-boxes .bb-navigation {
+      background: #2F384F;
+      width: 44px;
+      height: 44px; }
+    color header .background-boxes .bb-lead {
+      background: #AA6699;
       width: 27px;
       height: 27px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 26px;
-      height: 26px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
       width: 42px;
       height: 42px; }
-    color header .background-boxes .bb-carnation {
-      background: #D770AD;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-lavender {
-      background: #967ADC;
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-submission {
+      background: #a9adbb;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
       width: 33px;
       height: 33px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-task {
+      background: #4f5361;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-distributionList {
+      background: #4f5361;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-credential {
+      background: #4f5361;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-user {
+      background: #4f5361;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-corporateuser {
+      background: #4f5361;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 44px;
+      height: 44px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-carnation {
+      background: #D770AD;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-lavender {
+      background: #967ADC;
+      width: 39px;
+      height: 39px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -14472,4 +14472,4 @@ popover-demo .example.popover-demo {
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.4ba583c112b06dd828eb.bundle.map*/
+/*# sourceMappingURL=main.6cf04b4ace5b80725620.bundle.map*/
