@@ -16,3 +16,9 @@ export class TablePickerControl extends PickerControl {
         super(Object.assign(config, { appendToBody: true, parentScrollSelector: '.table-container' }));
     }
 }
+
+export class AppendToBodyPickerControl extends PickerControl {
+    constructor(config: NovoControlConfig) {
+        super(Object.assign(config, { appendToBody: true, parentScrollSelector: '.table-container' }));
+    }
+}
