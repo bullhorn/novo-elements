@@ -20,6 +20,8 @@ import { NovoFormExtrasModule } from './extras/FormExtras.module';
 import { NovoHeaderModule } from './../header/Header.module';
 import { NovoTooltipModule } from './../tooltip/Tooltip.module';
 import { NovoDragulaModule } from './../dragula/Dragula.module';
+import { NovoTabModule } from './../tabs/Tabs.module';
+import { ScrollToModule } from 'ng2-scroll-to';
 
 @NgModule({
     imports: [
@@ -38,7 +40,9 @@ import { NovoDragulaModule } from './../dragula/Dragula.module';
         NovoDateTimePickerModule,
         NovoHeaderModule,
         NovoTooltipModule,
-        NovoDragulaModule
+        NovoDragulaModule,
+        NovoTabModule,
+        ScrollToModule.forRoot()
     ],
     declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement],
     exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement]

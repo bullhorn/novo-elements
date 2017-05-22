@@ -45,7 +45,7 @@ export class NovoControlCustom implements OnInit {
     selector: 'novo-fieldset',
     template: `
         <div class="novo-fieldset-container">
-            <novo-fieldset-header [title]="title" *ngIf="title"></novo-fieldset-header>
+            <novo-fieldset-header [title]="title" *ngIf="title" [id]="id"></novo-fieldset-header>
             <div *ngFor="let control of controls" class="novo-form-row" [class.disabled]="control.disabled">
                 <novo-control *ngIf="!control.customControl" [control]="control" [form]="form"></novo-control>
                 <novo-control-custom *ngIf="control.customControl" [control]="control" [form]="form"></novo-control-custom>
@@ -57,6 +57,7 @@ export class NovoFieldsetElement {
     @Input() controls: Array<any> = [];
     @Input() form: any;
     @Input() title: string;
+    @Input() id: string;
 }
 
 @Component({
@@ -67,9 +68,16 @@ export class NovoFieldsetElement {
                 <ng-content select="form-title"></ng-content>
                 <ng-content select="form-subtitle"></ng-content>
             </header>
-            <form class="novo-form" [formGroup]="form" autocomplete="off">
+            <novo-nav id="FormSections" theme="white">
                 <span *ngFor="let fieldset of fieldsets">
-                    <novo-fieldset *ngIf="fieldset.controls.length" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
+                    <novo-tab *ngIf="fieldset.sectionHeaderId" scrollTo [scrollTargetSelector]="getId(fieldset)">
+                            {{fieldset.title || 'Top'}}
+                    </novo-tab>
+                </span>
+            </novo-nav>
+            <form class="novo-form" [formGroup]="form" autocomplete="off" id="formTop">
+                <span *ngFor="let fieldset of fieldsets">
+                    <novo-fieldset *ngIf="fieldset.controls.length" [controls]="fieldset.controls" [title]="fieldset.title" [id]="fieldset.sectionHeaderId" [form]="form"></novo-fieldset>
                 </span>
             </form>
         </div>
@@ -100,6 +108,10 @@ export class NovoDynamicFormElement implements OnInit, OnChanges {
             });
         }
         this.ngOnChanges();
+    }
+
+    getId(fieldset) {
+        return `#${fieldset.sectionHeaderId}`;
     }
 
     ngOnChanges(changes?: SimpleChanges) {

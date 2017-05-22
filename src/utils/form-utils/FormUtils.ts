@@ -346,6 +346,7 @@ export class FormUtils {
                     if (item.enabled) {
                         if (item.sortOrder > 0 && fieldsets.length === 0) {
                             fieldsets.push({
+                                sectionHeaderId: `formTop`,
                                 controls: []
                             });
                             ranges.push({
@@ -355,6 +356,7 @@ export class FormUtils {
                             });
                         }
                         fieldsets.push({
+                            sectionHeaderId: `sectionHeader${i}`,
                             title: item.label,
                             controls: []
                         });
