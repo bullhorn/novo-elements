@@ -1,3 +1,23 @@
+<a name="2.0.198"></a>
+## [2.0.198](https://github.com/bullhorn/novo-elements/compare/v2.0.197...v2.0.198) (2017-05-22)
+
+
+
+<a name="2.0.197"></a>
+## [2.0.197](https://github.com/bullhorn/novo-elements/compare/v2.0.196...v2.0.197) (2017-05-18)
+
+
+### Features
+
+* **toast:** Adding outlined toasts ([a7c82e1](https://github.com/bullhorn/novo-elements/commit/a7c82e1))
+
+
+
+<a name="2.0.196"></a>
+## [2.0.196](https://github.com/bullhorn/novo-elements/compare/v2.0.195...v2.0.196) (2017-05-17)
+
+
+
 <a name="2.0.195"></a>
 ## [2.0.195](https://github.com/bullhorn/novo-elements/compare/v2.0.194...v2.0.195) (2017-05-16)
 
