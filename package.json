@@ -28,8 +28,7 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },
@@ -55,7 +54,6 @@
   },
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "dependencies": {
-    "@types/ckeditor": "0.0.34",
     "@types/dragula": "2.1.29",
     "date-fns": "^1.28.2",
     "dragula": "3.7.2",

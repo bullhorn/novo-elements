@@ -36,7 +36,6 @@ export const MESSAGE_TYPES = {
 
 declare var postRobot: any;
 
-@Injectable()
 export class AppBridge {
     public id: string = `${Date.now()}`;
     public name: string;
