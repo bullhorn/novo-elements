@@ -65,6 +65,24 @@ export { Deferred } from './src/utils/deferred/Deferred';
 export { COUNTRIES, getCountries, getStateObjects, getStates, findByCountryCode, findByCountryId, findByCountryName } from './src/utils/countries/Countries';
 export { Helpers } from './src/utils/Helpers';
 export { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
+export {
+    CalendarEventTimesChangedEvent,
+    WeekDay,
+    EventColor,
+    EventAction,
+    CalendarEvent,
+    WeekViewEvent,
+    WeekViewEventRow,
+    MonthViewDay,
+    MonthView,
+    DayViewEvent,
+    DayView,
+    DayViewHourSegment,
+    DayViewHour,
+    IsEventInPeriodArgs,
+    GetEventsInPeriodArgs,
+    GetDayViewArgs
+} from './src/utils/calendar-utils/CalendarUtils';
 export * from './src/utils/calendar-utils/CalendarUtils';
 export { AppBridge } from './src/utils/app-bridge/AppBridge';
 // Providers

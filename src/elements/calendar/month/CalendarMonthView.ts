@@ -1,5 +1,5 @@
 import { Component, OnChanges, Input, Output, EventEmitter, ChangeDetectorRef, OnInit, OnDestroy, LOCALE_ID, Inject, TemplateRef } from '@angular/core';
-import { CalendarEvent, WeekDay, MonthView, getWeekViewHeader, getMonthView, MonthViewDay, CalendarEventTimesChangedEvent } from '../../../utils/calendar-utils/CalendarUtils';
+import { CalendarEvent, WeekDay, MonthView, MonthViewDay, CalendarEventTimesChangedEvent, getWeekViewHeader, getMonthView } from '../../../utils/calendar-utils/CalendarUtils';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import * as dateFns from 'date-fns';

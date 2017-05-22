@@ -12,14 +12,14 @@ import {
   TemplateRef
 } from '@angular/core';
 import {
-  getDayView,
-  getDayViewHourGrid,
   CalendarEvent,
   DayView,
   DayViewHour,
   DayViewHourSegment,
   DayViewEvent,
-  CalendarEventTimesChangedEvent
+  CalendarEventTimesChangedEvent,
+  getDayView,
+  getDayViewHourGrid
 } from '../../../utils/calendar-utils/CalendarUtils';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';

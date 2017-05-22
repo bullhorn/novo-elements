@@ -18,11 +18,11 @@ import {
   CalendarEvent,
   WeekViewEvent,
   WeekViewEventRow,
+  DayViewHour,
+  CalendarEventTimesChangedEvent,
   getWeekViewHeader,
   getWeekView,
-  getDayViewHourGrid,
-  DayViewHour,
-  CalendarEventTimesChangedEvent
+  getDayViewHourGrid
 } from '../../../utils/calendar-utils/CalendarUtils';
 //import * as dateFns from 'date-fns';
 import addDays from 'date-fns/add_days';
