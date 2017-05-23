@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 // APP
 let HeaderDemoTpl = require('./templates/HeaderDemo.html');
+let SubTitleDemoTpl = require('./templates/SubTitle.html');
 // Vendor
 import { NovoToastService } from './../../../../index';
 
@@ -16,6 +17,12 @@ const template = `
     <p>Record headers have details about the entity record and tabbed navigation.</p>
     <div class="example header-demo">${HeaderDemoTpl}</div>
     <code-snippet [code]="HeaderDemoTpl"></code-snippet>
+
+    <h2>Options</h2>
+
+    <h5>SubTitle</h5>
+    <div class="example header-demo">${SubTitleDemoTpl}</div>
+    <code-snippet [code]="SubTitleDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -24,11 +31,12 @@ const template = `
     template: template
 })
 export class HeaderDemoComponent {
-    private HeaderDemoTpl:string = HeaderDemoTpl;
-    private entity:string;
-    private options:any;
+    private HeaderDemoTpl: string = HeaderDemoTpl;
+    private SubTitleDemoTpl: string = SubTitleDemoTpl;
+    private entity: string;
+    private options: any;
 
-    constructor(private toaster:NovoToastService) {
+    constructor(private toaster: NovoToastService) {
         this.toaster = toaster;
         this.entity = 'company';
         this.options = {

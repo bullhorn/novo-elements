@@ -28,8 +28,7 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },
@@ -66,7 +65,6 @@
     "@angular/compiler": "*",
     "@angular/core": "*",
     "@angular/forms": "*",
-    "@types/ckeditor": "*",
     "@types/dragula": "*",
     "core-js": "*",
     "rxjs": "*",
