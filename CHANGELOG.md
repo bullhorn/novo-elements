@@ -1,3 +1,13 @@
+<a name="2.0.199"></a>
+## [2.0.199](https://github.com/bullhorn/novo-elements/compare/v2.0.198...v2.0.199) (2017-05-23)
+
+
+### Features
+
+* **header/tab:** Adding subtitle to header and fixing some styling for tabs ([0c3fb8e](https://github.com/bullhorn/novo-elements/commit/0c3fb8e))
+
+
+
 <a name="2.0.198"></a>
 ## [2.0.198](https://github.com/bullhorn/novo-elements/compare/v2.0.197...v2.0.198) (2017-05-22)
 
