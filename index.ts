@@ -57,6 +57,7 @@ export { DateCell } from './src/elements/table/extras/date-cell/DateCell';
 export { NovoDropdownCell, INovoDropdownCellConfig } from './src/elements/table/extras/dropdown-cell/DropdownCell';
 export { FormValidators } from './src/elements/form/FormValidators';
 export { FormUtils } from './src/utils/form-utils/FormUtils';
+export { NovoFile } from './src/elements/form/extras/file/extras/file/File';
 export * from './src/elements/form/FormControls';
 // Utils
 export { OutsideClick } from './src/utils/outside-click/OutsideClick';
