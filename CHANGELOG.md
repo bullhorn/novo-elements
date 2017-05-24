@@ -1,3 +1,13 @@
+<a name="2.0.200"></a>
+## [2.0.200](https://github.com/bullhorn/novo-elements/compare/v2.0.199...v2.0.200) (2017-05-24)
+
+
+### Features
+
+* **appbridge:** Adding more events to AppBridge ([c44c426](https://github.com/bullhorn/novo-elements/commit/c44c426))
+
+
+
 <a name="2.0.199"></a>
 ## [2.0.199](https://github.com/bullhorn/novo-elements/compare/v2.0.198...v2.0.199) (2017-05-23)
 
