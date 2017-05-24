@@ -1,7 +1,7 @@
 // NG2
 import { Component, OnInit } from '@angular/core';
 // Vendor
-import { AppBridge } from './../../../../index';
+import { AppBridge, AppBridgeHandler } from './../../../../index';
 
 @Component({
     selector: 'app-bridge-demo',
@@ -19,16 +19,16 @@ export class AppBridgeDemoComponent implements OnInit {
         this.appBridge.tracing = true;
 
         // Handle things
-        this.appBridge.openHandler = (packet, callback) => {
+        this.appBridge.handle(AppBridgeHandler.OPEN, (packet, callback) => {
             console.log('[NovoElements(Parent)] - Received open handler', packet); // tslint:disable-line
             callback(true);
-        };
-        this.appBridge.httpHandler = (event, callback) => {
+        });
+        this.appBridge.handle(AppBridgeHandler.HTTP, (event, callback) => {
             console.log('[NovoElements(Parent)] - Received http handler', event); // tslint:disable-line
             if (event.data) {
                 console.log('[NovoElements(Parent)] - Data', event.data); // tslint:disable-line
             }
             callback([1, 2, 3, 4, 5]);
-        };
+        });
     }
 }

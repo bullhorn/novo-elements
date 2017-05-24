@@ -66,7 +66,7 @@ export { COUNTRIES, getCountries, getStateObjects, getStates, findByCountryCode,
 export { Helpers } from './src/utils/Helpers';
 export { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
 export * from './src/utils/calendar-utils/CalendarUtils';
-export { AppBridge } from './src/utils/app-bridge/AppBridge';
+export { AppBridge, AppBridgeHandler, IAppBridgeOpenEvent } from './src/utils/app-bridge/AppBridge';
 // Providers
 export { NovoElementProviders } from './novo-elements.providers';
 // Pipes
