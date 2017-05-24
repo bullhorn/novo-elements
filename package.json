@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "2.0.198",
+  "version": "2.0.200",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
     "precommit": "npm run lint",
@@ -66,7 +66,6 @@
     "@angular/compiler": "*",
     "@angular/core": "*",
     "@angular/forms": "*",
-    "@types/ckeditor": "*",
     "@types/dragula": "*",
     "core-js": "*",
     "rxjs": "*",
