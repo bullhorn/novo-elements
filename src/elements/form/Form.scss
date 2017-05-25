@@ -23,9 +23,28 @@ novo-form {
             margin-left: -1.5em;
             margin-right: -1.5em;
             margin-left: -1.5em;
-            padding: .5em 2em;
+            padding: .5em 1em;
             box-sizing: content-box;
             z-index: 999;
+            novo-tab {
+                .novo-tab-link {
+                    color: $positive;
+                    text-transform: none;
+                     .bhi-section {
+                        display: none;
+                    }
+                    ~.indicator {
+                        background: none;
+                    }
+                }
+                &.active .novo-tab-link .bhi-section {
+                    display: inline-block;
+                    font-size: 1.2em;
+                    &:before{
+                        margin-top:-.1em;
+                    }
+                }
+            }
         }
         form {
             width: 100%;
