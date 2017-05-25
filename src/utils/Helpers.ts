@@ -223,7 +223,7 @@ export class Helpers {
         return element;
     }
 }
-class Can {
+export class Can {
     obj: Object;
     constructor(obj: Object) {
         this.obj = obj;
