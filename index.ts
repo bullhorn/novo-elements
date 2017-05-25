@@ -91,5 +91,6 @@ export { NovoElementProviders } from './novo-elements.providers';
 // Pipes
 export { PluralPipe } from './src/pipes/plural/Plural';
 export { DecodeURIPipe } from './src/pipes/decode-uri/DecodeURI';
+export { GroupByPipe } from './src/pipes/group-by/GroupBy';
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';

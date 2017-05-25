@@ -12,10 +12,11 @@ import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../../uti
       <div class="calendar-events">
         <div
           class="calendar-event"
-          *ngFor="let event of day.events"
-          [style.backgroundColor]="event.color.primary"
-          [ngClass]="event?.cssClass"
-          (click)="$event.stopPropagation(); eventClicked.emit({event:event})">
+          *ngFor="let type of day.events | groupBy : 'type'"
+          [style.backgroundColor]="type?.value[0]?.color.primary"
+          [ngClass]="type?.value[0]?.cssClass"
+          (click)="$event.stopPropagation(); eventClicked.emit({event:type?.value[0]})">
+          {{type?.value.length}}
         </div>
       </div>
     </template>

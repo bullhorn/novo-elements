@@ -39,6 +39,7 @@ export interface CalendarEvent {
     start: Date;
     end?: Date;
     title: string;
+    description?: string;
     color: EventColor;
     type?: string;
     response?: CalendarEventResponse;
@@ -58,6 +59,7 @@ export interface WeekViewEvent {
     span: number;
     startsBeforeWeek: boolean;
     endsAfterWeek: boolean;
+    top?: number;
 }
 
 export interface WeekViewEventRow {
@@ -232,7 +234,7 @@ export function getWeekViewHeader({ viewDate, weekStartsOn, excluded = [] }:
 
 }
 
-export function getWeekView({ events = [], viewDate, weekStartsOn, excluded = [] }: { events?: CalendarEvent[], viewDate: Date, weekStartsOn: number, excluded?: number[] }): WeekViewEventRow[] {
+export function getWeekView({ events = [], viewDate, weekStartsOn, excluded = [], hourSegments, segmentHeight, dayStart, dayEnd }: { events?: CalendarEvent[], viewDate: Date, weekStartsOn: number, excluded?: number[], hourSegments:number, segmentHeight:number, dayStart:any, dayEnd:any }): WeekViewEventRow[] {
     if (!events) {
         events = [];
     }
@@ -250,13 +252,23 @@ export function getWeekView({ events = [], viewDate, weekStartsOn, excluded = []
         offset: entry.offset,
         span: entry.span,
         startsBeforeWeek: entry.event.start < startOfViewWeek,
-        endsAfterWeek: (entry.event.end || entry.event.start) > endOfViewWeek
+        endsAfterWeek: (entry.event.end || entry.event.start) > endOfViewWeek,
+        top: 0
     })).sort((itemA, itemB): number => {
         const startSecondsDiff: number = dateFns.differenceInSeconds(itemA.event.start, itemB.event.start);
         if (startSecondsDiff === 0) {
             return dateFns.differenceInSeconds(itemB.event.end || itemB.event.start, itemA.event.end || itemA.event.start);
         }
         return startSecondsDiff;
+    }).map((entry: WeekViewEvent) => {
+        const startOfView: Date = dateFns.setMinutes(dateFns.setHours(dateFns.startOfDay(viewDate), dayStart.hour), dayStart.minute);
+        const eventStart: Date = entry.event.start;
+        const hourHeightModifier: number = (hourSegments * segmentHeight) / MINUTES_IN_HOUR;
+        if (eventStart > startOfView) {
+            entry.top += dateFns.differenceInMinutes(eventStart, startOfView);
+        }
+        entry.top *= hourHeightModifier;
+        return entry;
     });
 
     const eventRows: WeekViewEventRow[] = [];

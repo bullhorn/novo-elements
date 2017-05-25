@@ -7,14 +7,17 @@ import { DayViewEvent } from '../../../utils/calendar-utils/CalendarUtils';
     <template #defaultTemplate>
       <div
         class="cal-event"
-        [style.backgroundColor]="dayEvent.event.color.secondary"
-        [style.borderColor]="dayEvent.event.color.primary"
+        [style.borderColor]="dayEvent.event.color.secondary"
         [class.cal-starts-within-day]="!dayEvent.startsBeforeDay"
         [class.cal-ends-within-day]="!dayEvent.endsAfterDay"
         [ngClass]="dayEvent.event.cssClass"
         [tooltip]="dayEvent.event.title"
         [tooltipPosition]="tooltipPosition">
-          {{dayEvent.event.title}}
+          <div class="cal-event-ribbon" [style.backgroundColor]="dayEvent.event.color.primary"></div>
+          <div class="cal-event-group">
+            <div class="cal-event-title">{{dayEvent.event.title}}</div>
+            <div class="cal-event-description">{{dayEvent.event?.description}}</div>
+          </div>
       </div>
     </template>
     <template

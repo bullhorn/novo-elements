@@ -249,6 +249,6 @@ class Can {
  * @param {any} obj
  * @returns
  */
-function can(obj) {
+export function can(obj) {
     return new Can(obj);
 }

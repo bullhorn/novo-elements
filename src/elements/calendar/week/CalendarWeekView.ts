@@ -31,6 +31,15 @@ import addDays from 'date-fns/add_days';
 // import { CalendarResizeHelper } from '../../providers/calendarResizeHelper.provider';
 
 /**
+ * @hidden
+ */
+const SEGMENT_HEIGHT: number = 30;
+
+/**
+ * @hidden
+ */
+const MINUTES_IN_HOUR: number = 60;
+/**
  * Shows all events on a given week. Example usage:
  *
  * ```typescript
@@ -56,6 +65,7 @@ import addDays from 'date-fns/add_days';
           #event
           *ngFor="let weekEvent of eventRow.row"
           [style.width]="((100 / days.length) * weekEvent.span) + '%'"
+          [style.marginTop.px]="weekEvent.top"
           [style.marginLeft]="((100 / days.length) * weekEvent.offset) + '%'">
           <novo-calendar-week-event
             [weekEvent]="weekEvent"
@@ -352,7 +362,17 @@ export class NovoCalendarWeekViewElement implements OnChanges, OnInit, OnDestroy
       events: this.events,
       viewDate: this.viewDate,
       weekStartsOn: this.weekStartsOn,
-      excluded: this.excludeDays
+      excluded: this.excludeDays,
+      hourSegments: this.hourSegments,
+      segmentHeight: SEGMENT_HEIGHT,
+      dayStart: {
+        hour: this.dayStartHour,
+        minute: this.dayStartMinute
+      },
+      dayEnd: {
+        hour: this.dayEndHour,
+        minute: this.dayEndMinute
+      },
       //precision: this.precision
     });
   }

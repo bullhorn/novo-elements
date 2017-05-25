@@ -151,7 +151,6 @@ export class NovoCalendarMonthViewElement implements OnChanges, OnInit, OnDestro
         if (changes.viewDate || changes.excludeDays) {
             this.refreshHeader();
         }
-
         if (changes.viewDate || changes.events || changes.excludeDays) {
             this.refreshBody();
         }

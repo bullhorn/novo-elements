@@ -4,6 +4,10 @@ import { CommonModule } from '@angular/common';
 // APP
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoTooltipModule } from '../tooltip/Tooltip.module';
+import { NovoPipesModule } from '../../pipes/Pipes.module';
+// Common Elements
+import { NovoEventTypeLegendElement } from './common/EventTypeLegend';
+
 // Month View
 import { NovoCalendarMonthViewElement } from './month/CalendarMonthView';
 import { NovoCalendarMonthHeaderElement } from './month/CalendarMonthHeader';
@@ -26,8 +30,9 @@ import { HoursPipe } from './pipe/Hours.pipe';
 import { DayOfMonthPipe } from './pipe/DayOfMonth.pipe';
 
 @NgModule({
-    imports: [CommonModule, NovoButtonModule, NovoTooltipModule],
+    imports: [CommonModule, NovoButtonModule, NovoTooltipModule, NovoPipesModule],
     declarations: [
+        NovoEventTypeLegendElement,
         NovoCalendarMonthViewElement,
         NovoCalendarMonthHeaderElement,
         NovoCalendarMonthDayElement,
@@ -46,6 +51,7 @@ import { DayOfMonthPipe } from './pipe/DayOfMonth.pipe';
         HoursPipe
     ],
     exports: [
+        NovoEventTypeLegendElement,
         NovoCalendarMonthViewElement,
         NovoCalendarMonthHeaderElement,
         NovoCalendarMonthDayElement,

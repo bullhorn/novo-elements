@@ -1,16 +1,16 @@
 .cal-week-view {
+  position: relative;
+  
   .cal-day-headers {
     display: flex;
-    margin-bottom: 3px;
     border: 1px solid #e1e1e1;
-    margin-left: 2px;
-    margin-right: 2px;
   }
 
   .cal-day-headers .cal-header {
     flex: 1;
     text-align: center;
     padding: 5px;
+    background-color: $off-white;
   }
 
   .cal-day-headers .cal-header:not(:last-child) {
@@ -27,31 +27,39 @@
     opacity: 0.5;
   }
 
+  // .cal-event-container {
+  //   display: inline-block;
+  // }
   .cal-event-container {
-    display: inline-block;
+    position: absolute;
   }
-
   .cal-event {
-    padding: 0 10px;
     font-size: 12px;
     margin-left: 2px;
     margin-right: 2px;
-    height: 30px;
-    line-height: 30px;
+    min-height: 30px;
+    display: flex;
+    flex-flow: column;
+    background-color: $off-white;
+
+    .cal-event-ribbon {
+      min-height:4px;
+      width: 100%;
+    }
+    .cal-event-title {
+        padding: 0px 10px;
+        line-height: 26px;
+        flex: 1;
+    }
+    .cal-event-description {
+      font-size: 10px;
+      line-height: 13px;
+      padding: 0px 10px;
+    }
   }
 
   .cal-draggable {
     cursor: move;
-  }
-
-  .cal-event.cal-starts-within-week {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-  }
-
-  .cal-event.cal-ends-within-week {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
   }
 
   .cal-header.cal-today {

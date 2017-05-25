@@ -13,13 +13,17 @@
     *ngSwitchCase="'week'"
     [viewDate]="viewDate"
     [events]="events"
-    (eventClicked)="dayClicked($event)">
+    (eventClicked)="dayClicked($event)"
+    [dayStartHour]="7"
+    [dayEndHour]="19">
     </novo-calendar-week>
 
     <novo-calendar-day
     *ngSwitchCase="'day'"
     [viewDate]="viewDate"
     [events]="events"
-    (eventClicked)="dayClicked($event)">
+    (eventClicked)="dayClicked($event)"
+    [dayStartHour]="7"
+    [dayEndHour]="19">
     </novo-calendar-day>
 </div>
