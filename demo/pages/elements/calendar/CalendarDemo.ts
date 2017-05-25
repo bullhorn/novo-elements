@@ -105,7 +105,6 @@ export class CalendarDemoComponent {
     }
 
     dayClicked(event) {
-        console.log('clicked', event);
         let evt: CalendarEvent = this.getNewEvent(event.day.date, colors.blue, CalendarEventResponse.Maybe);
         this.events.push(evt);
         this.events = [...this.events];

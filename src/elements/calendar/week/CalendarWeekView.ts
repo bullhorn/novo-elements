@@ -276,7 +276,7 @@ export class NovoCalendarWeekViewElement implements OnChanges, OnInit, OnDestroy
       this.refreshSubscription.unsubscribe();
     }
   }
-  
+
   /*
   resizeStarted(weekViewContainer: HTMLElement, weekEvent: WeekViewEvent, resizeEvent: ResizeEvent): void {
     this.currentResize = {
@@ -402,5 +402,4 @@ export class NovoCalendarWeekViewElement implements OnChanges, OnInit, OnDestroy
     this.refreshHourGrid();
     this.refreshBody();
   }
-
 }
