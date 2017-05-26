@@ -1,5 +1,5 @@
 import { Component, OnChanges, Input, Output, EventEmitter, ChangeDetectorRef, OnInit, OnDestroy, LOCALE_ID, Inject, TemplateRef } from '@angular/core';
-import { CalendarEvent, WeekDay, MonthView, getWeekViewHeader, getMonthView, MonthViewDay, CalendarEventTimesChangedEvent } from '../../utils/calendar-utils/CalendarUtils';
+import { CalendarEvent, WeekDay, MonthView, MonthViewDay, CalendarEventTimesChangedEvent, getWeekViewHeader, getMonthView } from '../../../utils/calendar-utils/CalendarUtils';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import * as dateFns from 'date-fns';
@@ -42,7 +42,7 @@ import * as dateFns from 'date-fns';
     </div>
   `
 })
-export class CalendarMonthElement implements OnChanges, OnInit, OnDestroy {
+export class NovoCalendarMonthViewElement implements OnChanges, OnInit, OnDestroy {
 
     /**
      * The current view date
@@ -78,7 +78,7 @@ export class CalendarMonthElement implements OnChanges, OnInit, OnDestroy {
     /**
      * The placement of the event tooltip
      */
-    @Input() tooltipPlacement: string = 'top';
+    @Input() tooltipPosition: string = 'top';
 
     /**
      * The start number of the week
@@ -151,7 +151,6 @@ export class CalendarMonthElement implements OnChanges, OnInit, OnDestroy {
         if (changes.viewDate || changes.excludeDays) {
             this.refreshHeader();
         }
-
         if (changes.viewDate || changes.events || changes.excludeDays) {
             this.refreshBody();
         }

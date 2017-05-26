@@ -55,7 +55,7 @@
   .calendar-day-top {
     display:flex;
     flex-flow: row nowrap;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
   }
   .calendar-cell:hover {
@@ -70,6 +70,7 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    position: relative;
   }
 
   .calendar-day-cell {
@@ -85,8 +86,6 @@
   }
 
   .calendar-day-badge {
-    margin-top: 18px;
-    margin-left: 10px;
     background-color: #b94a48;
     display: inline-block;
     min-width: 10px;
@@ -111,18 +110,25 @@
   .calendar-events {
     flex: 1;
     align-items: flex-end;
-    margin: 3px;
-    line-height: 10px;
     display: flex;
     flex-wrap: wrap;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
   }
 
   .calendar-event {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 2px;
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      display: inline-block;
+      margin: 2px;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 22px;
+      font-size: 12px;
+      color: $white;
   }
 
   .calendar-day-cell.calendar-in-month.calendar-has-events {
