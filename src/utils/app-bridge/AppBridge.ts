@@ -60,7 +60,11 @@ export class AppBridge {
         this.traceName = traceName;
         if (postRobot) {
             postRobot.CONFIG.LOG_LEVEL = 'error';
-            this._setupHandlers();
+            try {
+                this._setupHandlers();
+            } catch (error) {
+                // No op
+            }
         }
     }
 
