@@ -1,3 +1,18 @@
+<a name="2.0.201"></a>
+## [2.0.201](https://github.com/bullhorn/novo-elements/compare/v2.0.200...v2.0.201) (2017-05-26)
+
+
+### Bug Fixes
+
+* **appbridge:** catching register errors ([3287244](https://github.com/bullhorn/novo-elements/commit/3287244))
+
+
+### Features
+
+* **Calendar:** Added Week and Day views ([#479](https://github.com/bullhorn/novo-elements/issues/479)) ([d28a35c](https://github.com/bullhorn/novo-elements/commit/d28a35c))
+
+
+
 <a name="2.0.200"></a>
 ## [2.0.200](https://github.com/bullhorn/novo-elements/compare/v2.0.199...v2.0.200) (2017-05-24)
 
