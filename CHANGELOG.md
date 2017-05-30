@@ -1,3 +1,13 @@
+<a name="2.0.202"></a>
+## [2.0.202](https://github.com/bullhorn/novo-elements/compare/v2.0.201...v2.0.202) (2017-05-30)
+
+
+### Bug Fixes
+
+* **Calendar:** Fixing bad imports ([43944f8](https://github.com/bullhorn/novo-elements/commit/43944f8))
+
+
+
 <a name="2.0.201"></a>
 ## [2.0.201](https://github.com/bullhorn/novo-elements/compare/v2.0.200...v2.0.201) (2017-05-26)
 
