@@ -54,7 +54,7 @@ button {
                     height: 100%;
 
                     .spinner {
-                        fill: white;
+                         fill: white;
                     }
                 }
             }
@@ -79,7 +79,9 @@ button {
                     border-radius: 50%;
                     height: 25px;
                     width: 25px;
-                    display: inline-block;
+                       display: flex;
+                    align-items: center;
+                    justify-content: center;
                     margin-left: 10px;
                     line-height: 16px;
 
@@ -211,7 +213,9 @@ button {
                     border-radius: 50%;
                     height: 25px;
                     width: 25px;
-                    display: inline-block;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     margin-left: 10px;
                     line-height: 16px;
 
@@ -252,7 +256,9 @@ button {
                     border-radius: 50%;
                     height: 25px;
                     width: 25px;
-                    display: inline-block;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     line-height: 16px;
 
                     &:before {
