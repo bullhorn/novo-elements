@@ -174,13 +174,12 @@ export class EntityPickerResult {
             </entity-picker-result>
             <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
         </novo-list>
-    `,
-    host: {
-        '[hidden]': 'matches.length === 0'
-    }
+        <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
+        <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
+    `
 })
 export class EntityPickerResults extends BasePickerResults {
-    constructor(element: ElementRef) {
+    constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
     }
 }

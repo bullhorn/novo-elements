@@ -7,8 +7,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 @Component({
     selector: 'picker-results',
     host: {
-        'class': 'active',
-        '[hidden]': 'matches.length === 0'
+        'class': 'active'
     },
     template: `
         <novo-loading theme="line" *ngIf="isLoading && matches.length === 0"></novo-loading>
@@ -24,7 +23,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
             <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
         </ul>
         <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
-        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
+        <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
     `
 })
 export class PickerResults extends BasePickerResults {
