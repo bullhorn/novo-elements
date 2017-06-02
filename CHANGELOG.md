@@ -1,3 +1,19 @@
+<a name="2.0.206"></a>
+## [2.0.206](https://github.com/bullhorn/novo-elements/compare/v2.0.205...v2.0.206) (2017-06-02)
+
+
+### Bug Fixes
+
+* **filepicker:** fix bug where most immediate button submits on key enter ([#481](https://github.com/bullhorn/novo-elements/issues/481)) ([599acd1](https://github.com/bullhorn/novo-elements/commit/599acd1))
+* **pickers:** Fixing empty results not displaying ([#480](https://github.com/bullhorn/novo-elements/issues/480)) ([8af7941](https://github.com/bullhorn/novo-elements/commit/8af7941))
+
+
+### Features
+
+* **table:** Adding tooltips to filter/sort ([a01ac4a](https://github.com/bullhorn/novo-elements/commit/a01ac4a))
+
+
+
 <a name="2.0.205"></a>
 ## [2.0.205](https://github.com/bullhorn/novo-elements/compare/v2.0.204...v2.0.205) (2017-06-01)
 
