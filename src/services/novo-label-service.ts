@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 export class NovoLabelService {
     filters = 'Filter';
     clear = 'Clear';
+    sort = 'Sort';
     emptyTableMessage = 'No Records to display...';
     noMatchingRecordsMessage = 'No Matching Records';
     erroredTableMessage = 'Oops! An error occurred.';

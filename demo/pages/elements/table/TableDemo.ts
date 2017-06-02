@@ -1,7 +1,7 @@
 // NG2
 import { Component, OnInit } from '@angular/core';
 // APP
-import { MovieDataProvider } from './MovieDataProvider';
+// import { MovieDataProvider } from './MovieDataProvider';
 import { TableData } from './TableData';
 import { ArrayCollection } from './../../../../src/services/data-provider/ArrayCollection';
 let TableDemoTpl = require('./templates/TableDemo.html');
@@ -286,24 +286,24 @@ export class TableDemoComponent implements OnInit {
             { title: 'Poster', name: 'Poster', ordering: false, filtering: false, renderer: ImageCell }
         ];
 
-        this.remote = {
-            columns: imdbColumns.slice(),
-            dataProvider: new MovieDataProvider(),
-            config: {
-                paging: {
-                    current: 1,
-                    itemsPerPage: 10,
-                    onPageChange: event => {
-                        this.basic.config.paging.current = event.page;
-                        this.basic.config.paging.itemsPerPage = event.itemsPerPage;
-                    }
-                },
-                filtering: true,
-                sorting: true,
-                ordering: true,
-                resizing: true
-            }
-        };
+        // this.remote = {
+        //     columns: imdbColumns.slice(),
+        //     dataProvider: new MovieDataProvider(),
+        //     config: {
+        //         paging: {
+        //             current: 1,
+        //             itemsPerPage: 10,
+        //             onPageChange: event => {
+        //                 this.basic.config.paging.current = event.page;
+        //                 this.basic.config.paging.itemsPerPage = event.itemsPerPage;
+        //             }
+        //         },
+        //         filtering: true,
+        //         sorting: true,
+        //         ordering: true,
+        //         resizing: true
+        //     }
+        // };
 
         // For columns that can be edited, pass an editor property
         let names = [
