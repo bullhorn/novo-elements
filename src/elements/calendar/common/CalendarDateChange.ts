@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Inject, Input, LOCALE_ID, Output} from "@angular/core";
+import { Component, EventEmitter, Inject, Input, LOCALE_ID, Output } from '@angular/core';
 
-import * as dateFns from "date-fns";
+import * as dateFns from 'date-fns';
 
 @Component({
     selector: 'novo-calendar-date-change',
@@ -18,54 +18,54 @@ import * as dateFns from "date-fns";
 })
 export class NovoCalendarDateChangeElement {
 
-  /**
-   * The current view
-   */
-  @Input() view: string;
+    /**
+     * The current view
+     */
+    @Input() view: string;
 
-  /**
-   * The current view date
-   */
-  @Input() viewDate: Date;
+    /**
+     * The current view date
+     */
+    @Input() viewDate: Date;
 
-  @Input() locale: string;
+    @Input() locale: string;
 
-  /**
-   * Called when the view date is changed
-   */
-  @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
+    /**
+     * Called when the view date is changed
+     */
+    @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
 
-  constructor(@Inject(LOCALE_ID) locale: string) {
-      this.locale = locale;
-  }
+    constructor( @Inject(LOCALE_ID) locale: string) {
+        this.locale = locale;
+    }
 
-  /**
-   * @hidden
-   */
-  subtractDate(): void {
-      this.changeDate(-1);
-  }
+    /**
+     * @hidden
+     */
+    subtractDate(): void {
+        this.changeDate(-1);
+    }
 
-  addDate(): void {
-      this.changeDate(1);
-  }
+    addDate(): void {
+        this.changeDate(1);
+    }
 
-  changeDate(unit: number): void {
-      const addFn: any = {
-          day: dateFns.addDays,
-          week: dateFns.addWeeks,
-          month: dateFns.addMonths
-      }[this.view];
+    changeDate(unit: number): void {
+        const addFn: any = {
+            day: dateFns.addDays,
+            week: dateFns.addWeeks,
+            month: dateFns.addMonths
+        }[this.view];
 
-      this.viewDateChange.emit(addFn(this.viewDate, unit));
-  }
+        this.viewDateChange.emit(addFn(this.viewDate, unit));
+    }
 
-  get startOfWeek() {
-      return dateFns.startOfWeek(this.viewDate);
-  }
+    get startOfWeek() {
+        return dateFns.startOfWeek(this.viewDate);
+    }
 
-  get endOfWeek() {
-      return dateFns.endOfWeek(this.viewDate);
-  }
+    get endOfWeek() {
+        return dateFns.endOfWeek(this.viewDate);
+    }
 
 }
