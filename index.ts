@@ -57,6 +57,7 @@ export { DateCell } from './src/elements/table/extras/date-cell/DateCell';
 export { NovoDropdownCell, INovoDropdownCellConfig } from './src/elements/table/extras/dropdown-cell/DropdownCell';
 export { FormValidators } from './src/elements/form/FormValidators';
 export { FormUtils } from './src/utils/form-utils/FormUtils';
+export { NovoFile } from './src/elements/form/extras/file/extras/file/File';
 export * from './src/elements/form/FormControls';
 // Utils
 export { OutsideClick } from './src/utils/outside-click/OutsideClick';
@@ -65,12 +66,31 @@ export { Deferred } from './src/utils/deferred/Deferred';
 export { COUNTRIES, getCountries, getStateObjects, getStates, findByCountryCode, findByCountryId, findByCountryName } from './src/utils/countries/Countries';
 export { Helpers } from './src/utils/Helpers';
 export { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
+export {
+    CalendarEventTimesChangedEvent,
+    WeekDay,
+    EventColor,
+    EventAction,
+    CalendarEvent,
+    WeekViewEvent,
+    WeekViewEventRow,
+    MonthViewDay,
+    MonthView,
+    DayViewEvent,
+    DayView,
+    DayViewHourSegment,
+    DayViewHour,
+    IsEventInPeriodArgs,
+    GetEventsInPeriodArgs,
+    GetDayViewArgs
+} from './src/utils/calendar-utils/CalendarUtils';
 export * from './src/utils/calendar-utils/CalendarUtils';
-export { AppBridge } from './src/utils/app-bridge/AppBridge';
+export { AppBridge, AppBridgeHandler, IAppBridgeOpenEvent } from './src/utils/app-bridge/AppBridge';
 // Providers
 export { NovoElementProviders } from './novo-elements.providers';
 // Pipes
 export { PluralPipe } from './src/pipes/plural/Plural';
 export { DecodeURIPipe } from './src/pipes/decode-uri/DecodeURI';
+export { GroupByPipe } from './src/pipes/group-by/GroupBy';
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';

@@ -223,7 +223,7 @@ export class Helpers {
         return element;
     }
 }
-class Can {
+export class Can {
     obj: Object;
     constructor(obj: Object) {
         this.obj = obj;
@@ -249,6 +249,6 @@ class Can {
  * @param {any} obj
  * @returns
  */
-function can(obj) {
+export function can(obj) {
     return new Can(obj);
 }

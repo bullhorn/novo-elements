@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
-import { WeekDay } from '../../utils/calendar-utils/CalendarUtils';
+import { WeekDay } from '../../../utils/calendar-utils/CalendarUtils';
 import * as dateFns from 'date-fns';
 
 @Component({
@@ -32,7 +32,7 @@ import * as dateFns from 'date-fns';
     </template>
   `
 })
-export class CalendarMonthHeaderElement {
+export class NovoCalendarMonthHeaderElement {
     @Input() viewDate: Date;
 
     @Input() days: WeekDay[];

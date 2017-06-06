@@ -39,7 +39,8 @@ import {
     CategoryDropdownDemoComponent,
     MultiPickerDemoComponent,
     PopOverDemoComponent,
-    CustomDemoComponent
+    CustomDemoComponent,
+    DatePickerDemoComponent
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
@@ -79,6 +80,7 @@ import './demo.scss';
         SwitchDemoComponent,
         DrawerDemoComponent,
         CalendarDemoComponent,
+        DatePickerDemoComponent,
         DragulaDemoComponent,
         TilesDemoComponent,
         SlidesDemoComponent,

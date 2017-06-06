@@ -40,8 +40,8 @@ const PICKER_VALUE_ACCESSOR = {
             (click)="onFocus($event)"
             (blur)="onTouched($event)"
             autocomplete="off" />
-        <i class="bhi-search" *ngIf="!_value"></i>
-        <i class="bhi-times" *ngIf="_value" (click)="clearValue(true)"></i>
+        <i class="bhi-search" *ngIf="!_value || clearValueOnSelect"></i>
+        <i class="bhi-times" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
         <novo-picker-container class="picker-results-container">
             <span #results></span>
         </novo-picker-container>

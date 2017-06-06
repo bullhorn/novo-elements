@@ -92,14 +92,14 @@ export enum NovoTableMode {
                                 <!-- LABEL & SORT ARROWS -->
                                 <div class="th-title" [ngClass]="(config.sorting !== false && column.sorting !== false) ? 'sortable' : ''" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
                                     <label>{{ column.title }}</label>
-                                    <div class="table-sort-icons" [ngClass]="column.sort || ''" *ngIf="config.sorting !== false && column.sorting !== false">
+                                    <div class="table-sort-icons" tooltipPosition="bottom" [tooltip]="labels.sort" [ngClass]="column.sort || ''" *ngIf="config.sorting !== false && column.sorting !== false">
                                         <i class="bhi-arrow-up"></i>
                                         <i class="bhi-arrow-down"></i>
                                     </div>
                                 </div>
                                 <!-- FILTER DROP-DOWN -->
                                 <novo-dropdown side="right" *ngIf="config.filtering !== false && column.filtering !== false" class="column-filters" (toggled)="onDropdownToggled($event, column.name)" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
-                                    <button type="button" theme="icon" icon="filter" [class.filtered]="column.filter || column.filter===false"></button>
+                                    <button type="button" theme="icon" icon="filter" tooltipPosition="bottom" [tooltip]="labels.filters" [class.filtered]="column.filter || column.filter===false"></button>
                                     <!-- FILTER OPTIONS LIST -->
                                     <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type !== 'date' && toggledDropdownMap[column.name]">
                                         <item class="filter-search">

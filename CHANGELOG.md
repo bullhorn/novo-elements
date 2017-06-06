@@ -1,3 +1,94 @@
+<a name="2.0.206"></a>
+## [2.0.206](https://github.com/bullhorn/novo-elements/compare/v2.0.205...v2.0.206) (2017-06-02)
+
+
+### Bug Fixes
+
+* **filepicker:** fix bug where most immediate button submits on key enter ([#481](https://github.com/bullhorn/novo-elements/issues/481)) ([599acd1](https://github.com/bullhorn/novo-elements/commit/599acd1))
+* **pickers:** Fixing empty results not displaying ([#480](https://github.com/bullhorn/novo-elements/issues/480)) ([8af7941](https://github.com/bullhorn/novo-elements/commit/8af7941))
+
+
+### Features
+
+* **table:** Adding tooltips to filter/sort ([a01ac4a](https://github.com/bullhorn/novo-elements/commit/a01ac4a))
+
+
+
+<a name="2.0.205"></a>
+## [2.0.205](https://github.com/bullhorn/novo-elements/compare/v2.0.204...v2.0.205) (2017-06-01)
+
+
+
+<a name="2.0.204"></a>
+## [2.0.204](https://github.com/bullhorn/novo-elements/compare/v2.0.203...v2.0.204) (2017-06-01)
+
+
+
+<a name="2.0.203"></a>
+## [2.0.203](https://github.com/bullhorn/novo-elements/compare/v2.0.202...v2.0.203) (2017-05-31)
+
+
+
+<a name="2.0.202"></a>
+## [2.0.202](https://github.com/bullhorn/novo-elements/compare/v2.0.201...v2.0.202) (2017-05-30)
+
+
+### Bug Fixes
+
+* **Calendar:** Fixing bad imports ([43944f8](https://github.com/bullhorn/novo-elements/commit/43944f8))
+
+
+
+<a name="2.0.201"></a>
+## [2.0.201](https://github.com/bullhorn/novo-elements/compare/v2.0.200...v2.0.201) (2017-05-26)
+
+
+### Bug Fixes
+
+* **appbridge:** catching register errors ([3287244](https://github.com/bullhorn/novo-elements/commit/3287244))
+
+
+### Features
+
+* **Calendar:** Added Week and Day views ([#479](https://github.com/bullhorn/novo-elements/issues/479)) ([d28a35c](https://github.com/bullhorn/novo-elements/commit/d28a35c))
+
+
+
+<a name="2.0.200"></a>
+## [2.0.200](https://github.com/bullhorn/novo-elements/compare/v2.0.199...v2.0.200) (2017-05-24)
+
+
+### Features
+
+* **appbridge:** Adding more events to AppBridge ([c44c426](https://github.com/bullhorn/novo-elements/commit/c44c426))
+
+
+
+<a name="2.0.199"></a>
+## [2.0.199](https://github.com/bullhorn/novo-elements/compare/v2.0.198...v2.0.199) (2017-05-23)
+
+
+### Features
+
+* **header/tab:** Adding subtitle to header and fixing some styling for tabs ([0c3fb8e](https://github.com/bullhorn/novo-elements/commit/0c3fb8e))
+
+
+
+<a name="2.0.198"></a>
+## [2.0.198](https://github.com/bullhorn/novo-elements/compare/v2.0.197...v2.0.198) (2017-05-22)
+
+
+
+<a name="2.0.197"></a>
+## [2.0.197](https://github.com/bullhorn/novo-elements/compare/v2.0.196...v2.0.197) (2017-05-18)
+
+
+### Features
+
+* **toast:** Adding outlined toasts ([a7c82e1](https://github.com/bullhorn/novo-elements/commit/a7c82e1))
+
+
+
 <a name="2.0.196"></a>
 ## [2.0.196](https://github.com/bullhorn/novo-elements/compare/v2.0.195...v2.0.196) (2017-05-17)
 

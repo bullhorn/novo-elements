@@ -35,7 +35,7 @@ import { Observable } from 'rxjs/Rx';
             </span>
         </ul>
         <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
-        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
+        <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
     `
 })
 export class ChecklistPickerResults extends BasePickerResults {

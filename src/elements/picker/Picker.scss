@@ -139,6 +139,8 @@ quick-note-results {
 }
 
 entity-picker-results {
+    background: $white;
+    width: 100%;
     novo-list {
         background: $white;
         novo-list-item.disabled,
@@ -162,12 +164,25 @@ entity-picker-results {
 picker-error,
 picker-loader,
 picker-null-recent-results,
-picker-null-results {
+picker-null-results,
+.picker-error,
+.picker-loader,
+.picker-null-recent-results,
+.picker-null-results {
     text-align: center;
     color: darken($light, 15%);
 }
 
-picker-loader {
+p.picker-error,
+p.picker-loader,
+p.picker-null-recent-results,
+p.picker-null-results {
+    max-width: inherit;
+    padding: 5px;
+}
+
+picker-loader,
+.picker-loader {
     display: flex;
     align-items: center;
     flex-direction: column;
