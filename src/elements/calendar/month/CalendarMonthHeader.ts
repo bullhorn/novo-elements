@@ -10,7 +10,6 @@ import * as dateFns from 'date-fns';
         <div class="calendar-header-top">
           <button theme="icon" icon="previous" (click)="prevMonth($event)"></button>
           <div class="calendar-month">{{ viewDate | month:locale }}</div>
-          <!--<div class="calendar-year">{{ viewDate | year:locale }}</div>-->
           <button theme="icon" icon="next" (click)="nextMonth($event)"></button>
         </div>
         <div class="calendar-weekdays">
