@@ -7,6 +7,7 @@ import { NovoTooltipModule } from '../tooltip/Tooltip.module';
 import { NovoPipesModule } from '../../pipes/Pipes.module';
 // Common Elements
 import { NovoEventTypeLegendElement } from './common/EventTypeLegend';
+import { NovoCalendarDateChangeElement } from './common/CalendarDateChange';
 
 // Month View
 import { NovoCalendarMonthViewElement } from './month/CalendarMonthView';
@@ -28,6 +29,7 @@ import { MonthDayPipe } from './pipe/MonthDay.pipe';
 import { YearPipe } from './pipe/Year.pipe';
 import { HoursPipe } from './pipe/Hours.pipe';
 import { DayOfMonthPipe } from './pipe/DayOfMonth.pipe';
+import { EndOfWeekDisplayPipe } from './pipe/EndOfWeekDisplayPipe.pipe';
 
 @NgModule({
     imports: [CommonModule, NovoButtonModule, NovoTooltipModule, NovoPipesModule],
@@ -43,12 +45,14 @@ import { DayOfMonthPipe } from './pipe/DayOfMonth.pipe';
         NovoCalendarDayEventElement,
         NovoCalendarHourSegmentElement,
         NovoCalendarAllDayEventElement,
+        NovoCalendarDateChangeElement,
         WeekdayPipe,
         DayOfMonthPipe,
         MonthPipe,
         MonthDayPipe,
         YearPipe,
-        HoursPipe
+        HoursPipe,
+        EndOfWeekDisplayPipe
     ],
     exports: [
         NovoEventTypeLegendElement,
@@ -62,12 +66,14 @@ import { DayOfMonthPipe } from './pipe/DayOfMonth.pipe';
         NovoCalendarDayEventElement,
         NovoCalendarHourSegmentElement,
         NovoCalendarAllDayEventElement,
+        NovoCalendarDateChangeElement,
         WeekdayPipe,
         DayOfMonthPipe,
         MonthPipe,
         MonthDayPipe,
         YearPipe,
-        HoursPipe
+        HoursPipe,
+        EndOfWeekDisplayPipe
     ]
 })
 export class NovoCalendarModule {
