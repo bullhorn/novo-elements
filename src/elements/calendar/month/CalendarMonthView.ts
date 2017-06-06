@@ -18,13 +18,13 @@ import * as dateFns from 'date-fns';
     selector: 'novo-calendar-month',
     template: `
     <div class="calendar-month-view">
-      <novo-calendar-month-header
-        [(viewDate)]="viewDate"
-        [days]="columnHeaders"
-        [locale]="locale"
-        [customTemplate]="headerTemplate"
-        (viewDateChange)="refreshAll()">
-      </novo-calendar-month-header>
+       <novo-calendar-month-header
+         [(viewDate)]="viewDate"
+         [days]="columnHeaders"
+         [locale]="locale"
+         [customTemplate]="headerTemplate"
+         (viewDateChange)="refreshAll()">
+       </novo-calendar-month-header>
       <div class="calendar-days">
         <div *ngFor="let rowIndex of view.rowOffsets">
           <div class="calendar-cell-row">
@@ -109,6 +109,8 @@ export class NovoCalendarMonthViewElement implements OnChanges, OnInit, OnDestro
      * Called when an event is dragged and dropped
      */
     @Output() eventTimesChanged: EventEmitter<CalendarEventTimesChangedEvent> = new EventEmitter<CalendarEventTimesChangedEvent>();
+
+    @Output() viewDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
     /**
      * @hidden
@@ -204,5 +206,6 @@ export class NovoCalendarMonthViewElement implements OnChanges, OnInit, OnDestro
     public refreshAll(): void {
         this.refreshHeader();
         this.refreshBody();
+        this.viewDateChange.emit(this.viewDate);
     }
 }

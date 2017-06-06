@@ -1,3 +1,18 @@
+<a name="2.0.207"></a>
+## [2.0.207](https://github.com/bullhorn/novo-elements/compare/v2.0.206...v2.0.207) (2017-06-06)
+
+
+### Bug Fixes
+
+* **picker:** Clear value properly ([453b514](https://github.com/bullhorn/novo-elements/commit/453b514))
+
+
+### Features
+
+* **calendar:** Adding ability to change and display current selected date ([#482](https://github.com/bullhorn/novo-elements/issues/482)) ([91ce6d2](https://github.com/bullhorn/novo-elements/commit/91ce6d2))
+
+
+
 <a name="2.0.206"></a>
 ## [2.0.206](https://github.com/bullhorn/novo-elements/compare/v2.0.205...v2.0.206) (2017-06-02)
 

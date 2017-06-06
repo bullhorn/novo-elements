@@ -47,7 +47,6 @@ declare const postRobot: any;
 export class AppBridge {
     public id: string = `${Date.now()}`;
     public traceName: string;
-    public isMaster: boolean = false;
     public windowName: string;
 
     private _registeredFrames: any[] = [];
@@ -86,9 +85,7 @@ export class AppBridge {
         // Register
         postRobot.on(MESSAGE_TYPES.REGISTER, (event) => {
             this._trace(MESSAGE_TYPES.REGISTER, event);
-            if (this.isMaster) {
-                this._registeredFrames.push(event);
-            }
+            this._registeredFrames.push(event);
             return this.register(event.data).then(windowName => {
                 this.windowName = windowName;
                 return { windowName };
@@ -111,11 +108,9 @@ export class AppBridge {
         // Close
         postRobot.on(MESSAGE_TYPES.CLOSE, (event) => {
             this._trace(MESSAGE_TYPES.CLOSE, event);
-            if (this.isMaster) {
-                const index = this._registeredFrames.findIndex(frame => frame.data.id === event.data.id);
-                if (index !== -1) {
-                    this._registeredFrames.splice(index, 1);
-                }
+            const index = this._registeredFrames.findIndex(frame => frame.data.id === event.data.id);
+            if (index !== -1) {
+                this._registeredFrames.splice(index, 1);
             }
             return this.close(event.data).then(success => {
                 return { success };
@@ -354,7 +349,6 @@ export class AppBridge {
                         resolve(null);
                     }
                 }).catch((err) => {
-                    this.isMaster = true;
                     this._trace(`${MESSAGE_TYPES.REGISTER} - FAILED - (no parent)`, err);
                     resolve(null);
                 });
