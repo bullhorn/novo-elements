@@ -1,11 +1,6 @@
-import { Component, Input, Output, EventEmitter, Inject, LOCALE_ID } from '@angular/core';
+import {Component, EventEmitter, Inject, Input, LOCALE_ID, Output} from "@angular/core";
 
-import * as addDays from 'date-fns/add_days';
-import * as addWeeks from 'date-fns/add_weeks';
-import * as addMonths from 'date-fns/add_months';
-
-import * as startOfWeek from 'date-fns/start_of_week';
-import * as endOfWeek from 'date-fns/end_of_week';
+import * as dateFns from "date-fns";
 
 @Component({
     selector: 'novo-calendar-date-change',
@@ -57,20 +52,20 @@ export class NovoCalendarDateChangeElement {
 
   changeDate(unit: number): void {
       const addFn: any = {
-          day: addDays,
-          week: addWeeks,
-          month: addMonths
+          day: dateFns.addDays,
+          week: dateFns.addWeeks,
+          month: dateFns.addMonths
       }[this.view];
 
       this.viewDateChange.emit(addFn(this.viewDate, unit));
   }
 
   get startOfWeek() {
-      return startOfWeek(this.viewDate);
+      return dateFns.startOfWeek(this.viewDate);
   }
 
   get endOfWeek() {
-      return endOfWeek(this.viewDate);
+      return dateFns.endOfWeek(this.viewDate);
   }
 
 }
