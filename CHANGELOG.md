@@ -1,3 +1,15 @@
+<a name="2.0.208"></a>
+## [2.0.208](https://github.com/bullhorn/novo-elements/compare/v2.0.207...v2.0.208) (2017-06-07)
+
+
+### Bug Fixes
+
+* **appbridge:** Fixing window callbacks ([7f9aa06](https://github.com/bullhorn/novo-elements/commit/7f9aa06))
+* **pickers:** Adding flag to disable infinite scroll ([17a6b90](https://github.com/bullhorn/novo-elements/commit/17a6b90))
+* **pickers:** Adding flag to disable infinite scroll ([3c9a99e](https://github.com/bullhorn/novo-elements/commit/3c9a99e))
+
+
+
 <a name="2.0.207"></a>
 ## [2.0.207](https://github.com/bullhorn/novo-elements/compare/v2.0.206...v2.0.207) (2017-06-06)
 
