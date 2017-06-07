@@ -77,7 +77,6 @@ export class BasePickerResults {
     }
 
     search(term, mode?) {
-        console.log('S', term);
         let options = this.config.options;
         return Observable.fromPromise(new Promise((resolve, reject) => {
             // Check if there is match data
