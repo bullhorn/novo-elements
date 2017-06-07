@@ -170,30 +170,32 @@ export class PickerDemoComponent {
 
         this.defaultArrayConfig = {
             defaultOptions: [
-                abbrieviated[0],
-                abbrieviated[1]
+                states[0],
+                states[1]
             ],
             minSearchLength: 2,
+            disableInfiniteScroll: true,
             options: () => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
-                        resolve(abbrieviated);
+                        resolve(states);
                     }, 300);
                 });
             }
         };
         this.defaultFunctionConfig = {
             minSearchLength: 2,
+            disableInfiniteScroll: true,
             defaultOptions: () => {
                 return [
-                    abbrieviated[2],
-                    abbrieviated[3]
+                    states[2],
+                    states[3]
                 ];
             },
             options: () => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
-                        resolve(abbrieviated);
+                        resolve(states);
                     }, 300);
                 });
             }

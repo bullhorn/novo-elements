@@ -35,7 +35,7 @@ export class BasePickerResults {
                 bottom = target.scrollHeight;
             if (offset >= bottom) {
                 event.stopPropagation();
-                if (!this.lastPage) {
+                if (!this.lastPage && !this.config.disableInfiniteScroll) {
                     this.processSearch();
                 }
             }
@@ -60,23 +60,24 @@ export class BasePickerResults {
         this.isLoading = true;
         this.search(this.term)
             .subscribe(
-                (results: any) => {
-                    if (this.isStatic) {
-                        this.matches = this.filterData(results);
-                    } else {
-                        this.matches = this.matches.concat(results);
-                        this.lastPage = (results && !results.length);
-                    }
-                    this.isLoading = false;
-                },
-                () => {
-                    this.hasError = this.term && this.term.length !== 0;
-                    this.isLoading = false;
-                    this.lastPage = true;
-                });
+            (results: any) => {
+                if (this.isStatic) {
+                    this.matches = this.filterData(results);
+                } else {
+                    this.matches = this.matches.concat(results);
+                    this.lastPage = (results && !results.length);
+                }
+                this.isLoading = false;
+            },
+            () => {
+                this.hasError = this.term && this.term.length !== 0;
+                this.isLoading = false;
+                this.lastPage = true;
+            });
     }
 
     search(term, mode?) {
+        console.log('S', term);
         let options = this.config.options;
         return Observable.fromPromise(new Promise((resolve, reject) => {
             // Check if there is match data
@@ -277,15 +278,15 @@ export class BasePickerResults {
 
     preselected(match) {
         return this.selected.findIndex(item => {
-                let isPreselected = false;
-                if (item && item.value && match && match.value) {
-                    if (item.value.id && match.value.id) {
-                        isPreselected = item.value.id === match.value.id;
-                    } else {
-                        isPreselected = item.value === match.value;
-                    }
+            let isPreselected = false;
+            if (item && item.value && match && match.value) {
+                if (item.value.id && match.value.id) {
+                    isPreselected = item.value.id === match.value.id;
+                } else {
+                    isPreselected = item.value === match.value;
                 }
-                return isPreselected;
-            }) !== -1;
+            }
+            return isPreselected;
+        }) !== -1;
     }
 }
