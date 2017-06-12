@@ -148,6 +148,12 @@ entity-picker-results {
             opacity: 0.5;
             pointer-events: none;
         }
+        entity-picker-result.active {
+            >novo-list-item {
+                background: lighten($light, 10%);
+                color: darken($light, 45%);
+            }
+        }
         item-content {
             >p {
                 min-width: 15em;
