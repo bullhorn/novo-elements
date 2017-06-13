@@ -9,6 +9,19 @@ describe('Elements: QuickNoteElement', () => {
     let fixture;
     let component;
 
+    class MockComponentUtils {
+        appendNextToLocation() {
+            return {
+                instance: {
+                    prevActiveMatch: () => {},
+                    nextActiveMatch: () => {},
+                    selectActiveMatch: () => {}
+                },
+                destroy: () => {}
+            };
+        }
+    }
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
@@ -18,145 +31,114 @@ describe('Elements: QuickNoteElement', () => {
                 FormsModule
             ],
             providers: [
-                { provide: ComponentUtils, useClass: ComponentUtils }
+                { provide: ComponentUtils, useClass: MockComponentUtils }
             ]
         }).compileComponents();
         fixture = TestBed.createComponent(QuickNoteElement);
         component = fixture.debugElement.componentInstance;
 
         component.config = {
-            triggers: {},
-            options: {}
+            triggers: {
+                person: '@'
+            },
+            options: {
+                person: ['John Bullhorn', 'TEST_LABEL_2']
+            },
+            renderer: {
+                person: (symbol, item) => {
+                    return `<a href="http://www.bullhorn.com">${symbol}${item.label}</a>`;
+                }
+            }
         };
+
+        // Mock out CKEDITOR global variable
+        window['CKEDITOR'] = { NODE_TEXT: 3 };
+
+        // Mock out the necessary CKEditor instance calls
+        component.instance = {
+            getSelection: () => {
+                return {
+                    getRanges: () => {
+                        return [{
+                            startContainer: {
+                                getText: () => '@john',
+                                type: 3 // CKEDITOR.NODE_TEXT
+                            },
+                            startOffset: 5
+                        }];
+                    }
+                };
+            },
+            getData: () => '<p>Note about: @john</p>',
+            setData: (model) => {
+                component.writeValue(model);
+            },
+            removeAllListeners: () => {
+            },
+            destroy: () => {
+            }
+        };
+
+        // Initialize to an empty model
+        component.writeValue('');
+
+        // Initialize the state of the keyboard entry to match the range returned by CKEditor
+        component.onKey({ key: '@' });
+        component.onKey({ key: 'j' });
+        component.onKey({ key: 'o' });
+        component.onKey({ key: 'h' });
+        component.onKey({ key: 'n' });
+        component.onValueChange();
     }));
 
     it('should initialize correctly', () => {
         expect(component).toBeTruthy();
     });
 
-    xdescribe('Method: ngOnInit(event)', () => {
-        it('should be defined.', () => {
-            expect(component.ngOnInit).toBeDefined();
-            component.ngOnInit();
-        });
-    });
-
-    describe('Method: onKeyPress(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onKeyPress).toBeDefined();
-            component.onKeyPress();
-        });
-    });
-
-    xdescribe('Method: onChange(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onChange).toBeDefined();
-            component.onChange();
-        });
-    });
-
-    describe('Method: onKeyUp(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onKeyUp).toBeDefined();
-            component.onKeyUp();
-        });
-    });
-
-    xdescribe('Method: onScroll(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onScroll).toBeDefined();
-            component.onScroll();
-        });
-    });
-
-    xdescribe('Method: updateFormattedNote(event)', () => {
-        it('should be defined.', () => {
-            expect(component.updateFormattedNote).toBeDefined();
-            component.updateFormattedNote();
-        });
-    });
-
-    xdescribe('Method: renderLink(event)', () => {
-        it('should be defined.', () => {
-            expect(component.renderLink).toBeDefined();
-            component.renderLink();
-        });
-    });
-
-    xdescribe('Method: extractSearchQuery(event)', () => {
-        it('should be defined.', () => {
-            expect(component.extractSearchQuery).toBeDefined();
-            component.extractSearchQuery();
-        });
-    });
-
-    describe('Method: onFocus(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onFocus).toBeDefined();
-            component.onFocus();
-        });
-    });
-
-    describe('Method: showResults(event)', () => {
+    describe('Method: showResults()', () => {
         it('should be defined.', () => {
             expect(component.showResults).toBeDefined();
             component.showResults();
         });
     });
 
-    describe('Method: hideResults(event)', () => {
+    describe('Method: hideResults()', () => {
         it('should be defined.', () => {
             expect(component.hideResults).toBeDefined();
             component.hideResults();
         });
     });
 
-    xdescribe('Method: onSelected(event)', () => {
-        it('should be defined.', () => {
+    describe('Method: onSelected(taggingMode, selected)', () => {
+        let taggingMode = 'person';
+        let selected = { value: 'j.bullhorn', label: 'John Bullhorn' };
+
+        it('should add the selected item to the list of references and populate note.', () => {
             expect(component.onSelected).toBeDefined();
-            component.onSelected();
+            component.onSelected(taggingMode, selected);
+            expect(component.model).toEqual({
+                note: '<p>Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a></p>',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
         });
     });
 
-    xdescribe('Method: replaceLastOccurrence(event)', () => {
-        it('should be defined.', () => {
-            expect(component.replaceLastOccurrence).toBeDefined();
-            component.replaceLastOccurrence();
+    describe('Method: get searchTerm()', () => {
+        it('should return the current word minus the tag.', () => {
+            expect(component.searchTerm).toBeDefined();
+            expect(component.searchTerm).toEqual('john');
         });
     });
 
-    describe('Method: onTouched(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onTouched).toBeDefined();
-            component.onTouched();
-        });
-    });
-
-    describe('Method: writeValue(event)', () => {
-        it('should be defined.', () => {
-            expect(component.writeValue).toBeDefined();
-            component.writeValue();
-        });
-    });
-
-    describe('Method: registerOnChange(event)', () => {
-        it('should be defined.', () => {
-            expect(component.registerOnChange).toBeDefined();
-            component.registerOnChange();
-        });
-    });
-
-    describe('Method: registerOnTouched(event)', () => {
-        it('should be defined.', () => {
-            expect(component.registerOnTouched).toBeDefined();
-            component.registerOnTouched();
-        });
-    });
-
-    xdescribe('Method: getCaretCoordinates(event)', () => {
-        it('should be defined.', () => {
-            expect(component.getCaretCoordinates).toBeDefined();
-            component.getCaretCoordinates();
+    describe('Method: getWordAtCursor()', () => {
+        it('should return the word at the cursor.', () => {
+            expect(component.getWordAtCursor).toBeDefined();
+            expect(component.getWordAtCursor()).toEqual('@john');
         });
     });
 });
