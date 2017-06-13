@@ -82,10 +82,10 @@ export class QuickNoteDemoComponent {
             },
             renderer: {
                 tags: (symbol, item) => {
-                    return `<a class="tag">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com">${symbol}${item.label}</a>`;
                 },
                 references: (symbol, item) => {
-                    return `<a class="tag">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com">${symbol}${item.label}</a>`;
                 },
                 boos: (symbol, item) => {
                     return `<strong>${symbol}${item.label}</strong>`;
@@ -119,10 +119,10 @@ export class QuickNoteDemoComponent {
             },
             renderer: {
                 whos: (symbol, item) => {
-                    return `<a class="WHOS">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com" class="WHOS">${symbol}${item.label}</a>`;
                 },
                 whats: (symbol, item) => {
-                    return `<a class="tag">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com" class="tag">${symbol}${item.label}</a>`;
                 }
             }
         };
@@ -154,10 +154,10 @@ export class QuickNoteDemoComponent {
             },
             renderer: {
                 names: (symbol, item) => {
-                    return `<a class="names">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com" class="names">${symbol}${item.label}</a>`;
                 },
                 tags: (symbol, item) => {
-                    return `<a class="tags">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com" class="tags">${symbol}${item.label}</a>`;
                 }
             }
         };
