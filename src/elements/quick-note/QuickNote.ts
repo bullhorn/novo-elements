@@ -20,13 +20,16 @@ declare var CKEDITOR: any;
     selector: 'novo-quick-note',
     providers: [QUICK_NOTE_VALUE_ACCESSOR],
     template: `
-        <div class="quick-note-wrapper">
+        <div class="quick-note-wrapper" #wrapper>
             <textarea #host></textarea>
             <span #results></span>
         </div>
     `
 })
 export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
+    // The quick-note-wrapper that contains the text area and results
+    @ViewChild('wrapper') public wrapper: ElementRef;
+
     // The textarea host for CKEditor
     @ViewChild('host') public host: ElementRef;
 
@@ -68,16 +71,6 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
                 });
             }
         });
-    }
-
-    static getCKEditorConfig(): any {
-        return {
-            scayt_autoStartup: true,
-            toolbar: [{
-                name: 'basicstyles',
-                items: ['Styles', 'FontSize', 'Bold', 'Italic', 'Underline', 'TextColor', '-', 'NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Link']
-            }]
-        };
     }
 
     /**
@@ -125,7 +118,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         }
 
         // Replace the textarea with an instance of CKEditor
-        this.instance = CKEDITOR.replace(this.host.nativeElement, QuickNoteElement.getCKEditorConfig());
+        this.instance = CKEDITOR.replace(this.host.nativeElement, this.getCKEditorConfig());
 
         // Connect to the key event in CKEditor for showing results dropdown
         this.instance.on('key', (event: any) => {
@@ -398,5 +391,27 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
     registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
+    }
+
+    /**
+     * Configures the CKEditor for QuickNote functionality.
+     *
+     * Sets the height of the CKEditor dynamically to the height of the wrapper upon initialization.
+     * Removes the toolbar on the bottom and configures a slimmed down version of the toolbar.
+     */
+    getCKEditorConfig(): any {
+        let toolbarHeight = 40; // in pixels - configured by stylesheet
+        let editorHeight = this.wrapper.nativeElement.clientHeight - toolbarHeight;
+
+        return {
+            scayt_autoStartup: true,
+            height: editorHeight,
+            removePlugins: 'elementspath', // removes the html tags in status bar
+            resize_enabled: false, // hides the status bar
+            toolbar: [{
+                name: 'basicstyles',
+                items: ['Styles', 'FontSize', 'Bold', 'Italic', 'Underline', 'TextColor', '-', 'NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Link']
+            }]
+        };
     }
 }

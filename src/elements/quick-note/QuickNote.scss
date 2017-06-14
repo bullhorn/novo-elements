@@ -1,12 +1,12 @@
-$quick-note-height: 200px;
 novo-quick-note,
 .quick-note-wrapper {
     width: 100%;
-    min-height: $quick-note-height;
-    max-height: $quick-note-height;
+    height: 200px;
     position: relative;
-    // Remove any extra possible width from the CKEditor toolbar
+    // Remove any unnecessary padding from the CKEditor toolbar
     .cke_top {
+        padding-top: 4px;
+        padding-bottom: 0;
         padding-left: 3px;
         padding-right: 3px;
         .cke_toolbar {

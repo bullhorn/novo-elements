@@ -38,15 +38,15 @@ const template = `
     <br/>
 
     <h5>Basic Examples</h5>
-    <div class="example quick-note-demo">${BasicQuickNoteDemoTpl}</div>
+    <div class="example quick-note-demo basic">${BasicQuickNoteDemoTpl}</div>
     <code-snippet [code]="BasicQuickNoteDemoTpl"></code-snippet>
     
     <h5>Custom Triggers</h5>
-    <div class="example quick-note-demo">${CustomQuickNoteDemoTpl}</div>
+    <div class="example quick-note-demo custom">${CustomQuickNoteDemoTpl}</div>
     <code-snippet [code]="CustomQuickNoteDemoTpl"></code-snippet>
     
     <h5>Custom Results Template</h5>
-    <div class="example quick-note-demo">${CustomQuickNoteResultsDemoTpl}</div>
+    <div class="example quick-note-demo custom-results">${CustomQuickNoteResultsDemoTpl}</div>
     <code-snippet [code]="CustomQuickNoteResultsDemoTpl"></code-snippet>
 </div>
 `;
