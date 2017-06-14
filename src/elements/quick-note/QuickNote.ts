@@ -73,20 +73,10 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     static getCKEditorConfig(): any {
         return {
             scayt_autoStartup: true,
-            toolbar: [
-                { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo', 'Scayt'] },
-                {
-                    name: 'paragraph',
-                    items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl']
-                },
-                { name: 'links', items: ['Link'] },
-                { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
-                { name: 'tools', items: ['Maximize', 'Source'] },
-                '/',
-                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
-                { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
-                { name: 'colors', items: ['TextColor', 'BGColor'] }
-            ]
+            toolbar: [{
+                name: 'basicstyles',
+                items: ['Styles', 'FontSize', 'Bold', 'Italic', 'Underline', 'TextColor', '-', 'NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Link']
+            }]
         };
     }
 

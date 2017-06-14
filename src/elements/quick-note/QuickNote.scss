@@ -5,46 +5,25 @@ novo-quick-note,
     min-height: $quick-note-height;
     max-height: $quick-note-height;
     position: relative;
-    a {
-        font-weight: normal;
-    }
-    textarea {
-        resize: none !important;
-        -webkit-text-fill-color: transparent;
-        padding: 0 !important;
-    }
-    .quick-note-overlay {
-        position: absolute;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        background-color: rgba(0, 0, 0, 0);
-        pointer-events: none;
-        overflow-y: scroll;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        padding: 0 0 40px !important;
-        &:empty:before {
-            content: attr(placeholder);
-            display: block;
-            color: $grey;
-        }
-    }
-    .quick-note-overlay,
-    textarea {
-        min-height: $quick-note-height;
-        max-height: $quick-note-height;
-        width: 100%;
-        border: none;
-        overflow-y: scroll;
-        &:focus {
-            outline: none;
+    // Remove any extra possible width from the CKEditor toolbar
+    .cke_top {
+        padding-left: 3px;
+        padding-right: 3px;
+        .cke_toolbar {
+            .cke_combo_text {
+                padding-left: 7px;
+            }
+            .cke_combo_open {
+                margin-left: 4px;
+            }
+            .cke_combo__fontsize .cke_combo_text {
+                width: 24px;
+            }
         }
     }
     quick-note-results,
     .quick-note-results {
-        top: 0;
+        bottom: 0;
         left: 0;
         right: 0;
         max-width: 100%;
