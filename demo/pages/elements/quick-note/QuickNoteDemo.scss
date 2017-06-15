@@ -2,4 +2,10 @@
     div.data {
         padding: 10px;
     }
+    &.custom-results {
+        .quick-note-wrapper {
+            // Tests the dynamic sizing of the CKEditor
+            height: 300px;
+        }
+    }
 }

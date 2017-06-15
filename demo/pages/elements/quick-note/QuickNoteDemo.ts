@@ -38,15 +38,15 @@ const template = `
     <br/>
 
     <h5>Basic Examples</h5>
-    <div class="example quick-note-demo">${BasicQuickNoteDemoTpl}</div>
+    <div class="example quick-note-demo basic">${BasicQuickNoteDemoTpl}</div>
     <code-snippet [code]="BasicQuickNoteDemoTpl"></code-snippet>
     
     <h5>Custom Triggers</h5>
-    <div class="example quick-note-demo">${CustomQuickNoteDemoTpl}</div>
+    <div class="example quick-note-demo custom">${CustomQuickNoteDemoTpl}</div>
     <code-snippet [code]="CustomQuickNoteDemoTpl"></code-snippet>
     
     <h5>Custom Results Template</h5>
-    <div class="example quick-note-demo">${CustomQuickNoteResultsDemoTpl}</div>
+    <div class="example quick-note-demo custom-results">${CustomQuickNoteResultsDemoTpl}</div>
     <code-snippet [code]="CustomQuickNoteResultsDemoTpl"></code-snippet>
 </div>
 `;
@@ -82,10 +82,10 @@ export class QuickNoteDemoComponent {
             },
             renderer: {
                 tags: (symbol, item) => {
-                    return `<a class="tag">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com">${symbol}${item.label}</a>`;
                 },
                 references: (symbol, item) => {
-                    return `<a class="tag">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com">${symbol}${item.label}</a>`;
                 },
                 boos: (symbol, item) => {
                     return `<strong>${symbol}${item.label}</strong>`;
@@ -119,10 +119,10 @@ export class QuickNoteDemoComponent {
             },
             renderer: {
                 whos: (symbol, item) => {
-                    return `<a class="WHOS">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com" class="WHOS">${symbol}${item.label}</a>`;
                 },
                 whats: (symbol, item) => {
-                    return `<a class="tag">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com" class="tag">${symbol}${item.label}</a>`;
                 }
             }
         };
@@ -154,10 +154,10 @@ export class QuickNoteDemoComponent {
             },
             renderer: {
                 names: (symbol, item) => {
-                    return `<a class="names">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com" class="names">${symbol}${item.label}</a>`;
                 },
                 tags: (symbol, item) => {
-                    return `<a class="tags">${symbol}${item.label}</a>`;
+                    return `<a href="http://www.bullhorn.com" class="tags">${symbol}${item.label}</a>`;
                 }
             }
         };
