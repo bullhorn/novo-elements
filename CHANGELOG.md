@@ -1,3 +1,14 @@
+<a name="2.0.211"></a>
+## [2.0.211](https://github.com/bullhorn/novo-elements/compare/v2.0.210...v2.0.211) (2017-06-15)
+
+
+### Bug Fixes
+
+* **date/timepickers:** will not be added to the dom until needed ([#485](https://github.com/bullhorn/novo-elements/issues/485)) ([b4a4b92](https://github.com/bullhorn/novo-elements/commit/b4a4b92))
+* **pickers:** fixing keyboard control and highlighting ([593ab19](https://github.com/bullhorn/novo-elements/commit/593ab19))
+
+
+
 <a name="2.0.210"></a>
 ## [2.0.210](https://github.com/bullhorn/novo-elements/compare/v2.0.209...v2.0.210) (2017-06-12)
 
