@@ -5452,122 +5452,374 @@ picker-null-recent-results,
 picker-null-results,
 picker-results,
 quick-note-results {
-  background-color: white;
+  background-color: #ffffff;
   cursor: default;
   line-height: 26px;
-  overflow: hidden;
   max-height: 0;
   position: absolute;
-  transform: translateY(0%);
-  transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
-  width: 100%;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  border: 1px solid #4A89DC; }
+  width: 100%; }
+  .picker-results novo-list,
   .picker-results ul,
+  .quick-note-results novo-list,
   .quick-note-results ul,
+  picker-error novo-list,
   picker-error ul,
+  picker-loader novo-list,
   picker-loader ul,
+  picker-null-recent-results novo-list,
   picker-null-recent-results ul,
+  picker-null-results novo-list,
   picker-null-results ul,
+  picker-results novo-list,
   picker-results ul,
+  quick-note-results novo-list,
   quick-note-results ul {
+    background-color: #ffffff;
+    max-height: 200px;
+    overflow: auto;
     list-style: none;
     padding: 0;
-    margin: 0; }
+    margin: 0;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: 1px solid #4A89DC;
+    transform: translateY(0%);
+    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+    display: block; }
+    .picker-results novo-list novo-list-item,
+    .picker-results novo-list li,
+    .picker-results ul novo-list-item,
     .picker-results ul li,
+    .quick-note-results novo-list novo-list-item,
+    .quick-note-results novo-list li,
+    .quick-note-results ul novo-list-item,
     .quick-note-results ul li,
+    picker-error novo-list novo-list-item,
+    picker-error novo-list li,
+    picker-error ul novo-list-item,
     picker-error ul li,
+    picker-loader novo-list novo-list-item,
+    picker-loader novo-list li,
+    picker-loader ul novo-list-item,
     picker-loader ul li,
+    picker-null-recent-results novo-list novo-list-item,
+    picker-null-recent-results novo-list li,
+    picker-null-recent-results ul novo-list-item,
     picker-null-recent-results ul li,
+    picker-null-results novo-list novo-list-item,
+    picker-null-results novo-list li,
+    picker-null-results ul novo-list-item,
     picker-null-results ul li,
+    picker-results novo-list novo-list-item,
+    picker-results novo-list li,
+    picker-results ul novo-list-item,
     picker-results ul li,
+    quick-note-results novo-list novo-list-item,
+    quick-note-results novo-list li,
+    quick-note-results ul novo-list-item,
     quick-note-results ul li {
       cursor: pointer;
-      padding: 10px 16px;
-      box-sizing: border-box;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      padding: 5px 16px;
       font-size: 0.9em; }
+      .picker-results novo-list novo-list-item span,
+      .picker-results novo-list li span,
+      .picker-results ul novo-list-item span,
       .picker-results ul li span,
+      .quick-note-results novo-list novo-list-item span,
+      .quick-note-results novo-list li span,
+      .quick-note-results ul novo-list-item span,
       .quick-note-results ul li span,
+      picker-error novo-list novo-list-item span,
+      picker-error novo-list li span,
+      picker-error ul novo-list-item span,
       picker-error ul li span,
+      picker-loader novo-list novo-list-item span,
+      picker-loader novo-list li span,
+      picker-loader ul novo-list-item span,
       picker-loader ul li span,
+      picker-null-recent-results novo-list novo-list-item span,
+      picker-null-recent-results novo-list li span,
+      picker-null-recent-results ul novo-list-item span,
       picker-null-recent-results ul li span,
+      picker-null-results novo-list novo-list-item span,
+      picker-null-results novo-list li span,
+      picker-null-results ul novo-list-item span,
       picker-null-results ul li span,
+      picker-results novo-list novo-list-item span,
+      picker-results novo-list li span,
+      picker-results ul novo-list-item span,
       picker-results ul li span,
+      quick-note-results novo-list novo-list-item span,
+      quick-note-results novo-list li span,
+      quick-note-results ul novo-list-item span,
       quick-note-results ul li span {
         display: inline-block;
         min-width: 100px;
         margin: 2px 0; }
+      .picker-results novo-list novo-list-item h6,
+      .picker-results novo-list li h6,
+      .picker-results ul novo-list-item h6,
       .picker-results ul li h6,
+      .quick-note-results novo-list novo-list-item h6,
+      .quick-note-results novo-list li h6,
+      .quick-note-results ul novo-list-item h6,
       .quick-note-results ul li h6,
+      picker-error novo-list novo-list-item h6,
+      picker-error novo-list li h6,
+      picker-error ul novo-list-item h6,
       picker-error ul li h6,
+      picker-loader novo-list novo-list-item h6,
+      picker-loader novo-list li h6,
+      picker-loader ul novo-list-item h6,
       picker-loader ul li h6,
+      picker-null-recent-results novo-list novo-list-item h6,
+      picker-null-recent-results novo-list li h6,
+      picker-null-recent-results ul novo-list-item h6,
       picker-null-recent-results ul li h6,
+      picker-null-results novo-list novo-list-item h6,
+      picker-null-results novo-list li h6,
+      picker-null-results ul novo-list-item h6,
       picker-null-results ul li h6,
+      picker-results novo-list novo-list-item h6,
+      picker-results novo-list li h6,
+      picker-results ul novo-list-item h6,
       picker-results ul li h6,
+      quick-note-results novo-list novo-list-item h6,
+      quick-note-results novo-list li h6,
+      quick-note-results ul novo-list-item h6,
       quick-note-results ul li h6 {
         padding-top: 0;
         font-weight: 400;
         color: #93a0a9; }
+        .picker-results novo-list novo-list-item h6 strong,
+        .picker-results novo-list li h6 strong,
+        .picker-results ul novo-list-item h6 strong,
         .picker-results ul li h6 strong,
+        .quick-note-results novo-list novo-list-item h6 strong,
+        .quick-note-results novo-list li h6 strong,
+        .quick-note-results ul novo-list-item h6 strong,
         .quick-note-results ul li h6 strong,
+        picker-error novo-list novo-list-item h6 strong,
+        picker-error novo-list li h6 strong,
+        picker-error ul novo-list-item h6 strong,
         picker-error ul li h6 strong,
+        picker-loader novo-list novo-list-item h6 strong,
+        picker-loader novo-list li h6 strong,
+        picker-loader ul novo-list-item h6 strong,
         picker-loader ul li h6 strong,
+        picker-null-recent-results novo-list novo-list-item h6 strong,
+        picker-null-recent-results novo-list li h6 strong,
+        picker-null-recent-results ul novo-list-item h6 strong,
         picker-null-recent-results ul li h6 strong,
+        picker-null-results novo-list novo-list-item h6 strong,
+        picker-null-results novo-list li h6 strong,
+        picker-null-results ul novo-list-item h6 strong,
         picker-null-results ul li h6 strong,
+        picker-results novo-list novo-list-item h6 strong,
+        picker-results novo-list li h6 strong,
+        picker-results ul novo-list-item h6 strong,
         picker-results ul li h6 strong,
+        quick-note-results novo-list novo-list-item h6 strong,
+        quick-note-results novo-list li h6 strong,
+        quick-note-results ul novo-list-item h6 strong,
         quick-note-results ul li h6 strong {
           font-weight: 400;
           color: #3D464D; }
-      .picker-results ul li.active, .picker-results ul li:focus, .picker-results ul li:hover,
+      .picker-results novo-list novo-list-item.active, .picker-results novo-list novo-list-item:focus, .picker-results novo-list novo-list-item:hover,
+      .picker-results novo-list li.active,
+      .picker-results novo-list li:focus,
+      .picker-results novo-list li:hover,
+      .picker-results ul novo-list-item.active,
+      .picker-results ul novo-list-item:focus,
+      .picker-results ul novo-list-item:hover,
+      .picker-results ul li.active,
+      .picker-results ul li:focus,
+      .picker-results ul li:hover,
+      .quick-note-results novo-list novo-list-item.active,
+      .quick-note-results novo-list novo-list-item:focus,
+      .quick-note-results novo-list novo-list-item:hover,
+      .quick-note-results novo-list li.active,
+      .quick-note-results novo-list li:focus,
+      .quick-note-results novo-list li:hover,
+      .quick-note-results ul novo-list-item.active,
+      .quick-note-results ul novo-list-item:focus,
+      .quick-note-results ul novo-list-item:hover,
       .quick-note-results ul li.active,
       .quick-note-results ul li:focus,
       .quick-note-results ul li:hover,
+      picker-error novo-list novo-list-item.active,
+      picker-error novo-list novo-list-item:focus,
+      picker-error novo-list novo-list-item:hover,
+      picker-error novo-list li.active,
+      picker-error novo-list li:focus,
+      picker-error novo-list li:hover,
+      picker-error ul novo-list-item.active,
+      picker-error ul novo-list-item:focus,
+      picker-error ul novo-list-item:hover,
       picker-error ul li.active,
       picker-error ul li:focus,
       picker-error ul li:hover,
+      picker-loader novo-list novo-list-item.active,
+      picker-loader novo-list novo-list-item:focus,
+      picker-loader novo-list novo-list-item:hover,
+      picker-loader novo-list li.active,
+      picker-loader novo-list li:focus,
+      picker-loader novo-list li:hover,
+      picker-loader ul novo-list-item.active,
+      picker-loader ul novo-list-item:focus,
+      picker-loader ul novo-list-item:hover,
       picker-loader ul li.active,
       picker-loader ul li:focus,
       picker-loader ul li:hover,
+      picker-null-recent-results novo-list novo-list-item.active,
+      picker-null-recent-results novo-list novo-list-item:focus,
+      picker-null-recent-results novo-list novo-list-item:hover,
+      picker-null-recent-results novo-list li.active,
+      picker-null-recent-results novo-list li:focus,
+      picker-null-recent-results novo-list li:hover,
+      picker-null-recent-results ul novo-list-item.active,
+      picker-null-recent-results ul novo-list-item:focus,
+      picker-null-recent-results ul novo-list-item:hover,
       picker-null-recent-results ul li.active,
       picker-null-recent-results ul li:focus,
       picker-null-recent-results ul li:hover,
+      picker-null-results novo-list novo-list-item.active,
+      picker-null-results novo-list novo-list-item:focus,
+      picker-null-results novo-list novo-list-item:hover,
+      picker-null-results novo-list li.active,
+      picker-null-results novo-list li:focus,
+      picker-null-results novo-list li:hover,
+      picker-null-results ul novo-list-item.active,
+      picker-null-results ul novo-list-item:focus,
+      picker-null-results ul novo-list-item:hover,
       picker-null-results ul li.active,
       picker-null-results ul li:focus,
       picker-null-results ul li:hover,
+      picker-results novo-list novo-list-item.active,
+      picker-results novo-list novo-list-item:focus,
+      picker-results novo-list novo-list-item:hover,
+      picker-results novo-list li.active,
+      picker-results novo-list li:focus,
+      picker-results novo-list li:hover,
+      picker-results ul novo-list-item.active,
+      picker-results ul novo-list-item:focus,
+      picker-results ul novo-list-item:hover,
       picker-results ul li.active,
       picker-results ul li:focus,
       picker-results ul li:hover,
+      quick-note-results novo-list novo-list-item.active,
+      quick-note-results novo-list novo-list-item:focus,
+      quick-note-results novo-list novo-list-item:hover,
+      quick-note-results novo-list li.active,
+      quick-note-results novo-list li:focus,
+      quick-note-results novo-list li:hover,
+      quick-note-results ul novo-list-item.active,
+      quick-note-results ul novo-list-item:focus,
+      quick-note-results ul novo-list-item:hover,
       quick-note-results ul li.active,
       quick-note-results ul li:focus,
       quick-note-results ul li:hover {
-        background: #f4f4f4;
-        color: #63666c; }
+        background-color: #e0ebf9; }
+      .picker-results novo-list novo-list-item.disabled,
+      .picker-results novo-list li.disabled,
+      .picker-results ul novo-list-item.disabled,
       .picker-results ul li.disabled,
+      .quick-note-results novo-list novo-list-item.disabled,
+      .quick-note-results novo-list li.disabled,
+      .quick-note-results ul novo-list-item.disabled,
       .quick-note-results ul li.disabled,
+      picker-error novo-list novo-list-item.disabled,
+      picker-error novo-list li.disabled,
+      picker-error ul novo-list-item.disabled,
       picker-error ul li.disabled,
+      picker-loader novo-list novo-list-item.disabled,
+      picker-loader novo-list li.disabled,
+      picker-loader ul novo-list-item.disabled,
       picker-loader ul li.disabled,
+      picker-null-recent-results novo-list novo-list-item.disabled,
+      picker-null-recent-results novo-list li.disabled,
+      picker-null-recent-results ul novo-list-item.disabled,
       picker-null-recent-results ul li.disabled,
+      picker-null-results novo-list novo-list-item.disabled,
+      picker-null-results novo-list li.disabled,
+      picker-null-results ul novo-list-item.disabled,
       picker-null-results ul li.disabled,
+      picker-results novo-list novo-list-item.disabled,
+      picker-results novo-list li.disabled,
+      picker-results ul novo-list-item.disabled,
       picker-results ul li.disabled,
+      quick-note-results novo-list novo-list-item.disabled,
+      quick-note-results novo-list li.disabled,
+      quick-note-results ul novo-list-item.disabled,
       quick-note-results ul li.disabled {
         opacity: 0.5;
         pointer-events: none; }
+      .picker-results novo-list novo-list-item item-content,
+      .picker-results novo-list li item-content,
+      .picker-results ul novo-list-item item-content,
+      .picker-results ul li item-content,
+      .quick-note-results novo-list novo-list-item item-content,
+      .quick-note-results novo-list li item-content,
+      .quick-note-results ul novo-list-item item-content,
+      .quick-note-results ul li item-content,
+      picker-error novo-list novo-list-item item-content,
+      picker-error novo-list li item-content,
+      picker-error ul novo-list-item item-content,
+      picker-error ul li item-content,
+      picker-loader novo-list novo-list-item item-content,
+      picker-loader novo-list li item-content,
+      picker-loader ul novo-list-item item-content,
+      picker-loader ul li item-content,
+      picker-null-recent-results novo-list novo-list-item item-content,
+      picker-null-recent-results novo-list li item-content,
+      picker-null-recent-results ul novo-list-item item-content,
+      picker-null-recent-results ul li item-content,
+      picker-null-results novo-list novo-list-item item-content,
+      picker-null-results novo-list li item-content,
+      picker-null-results ul novo-list-item item-content,
+      picker-null-results ul li item-content,
+      picker-results novo-list novo-list-item item-content,
+      picker-results novo-list li item-content,
+      picker-results ul novo-list-item item-content,
+      picker-results ul li item-content,
+      quick-note-results novo-list novo-list-item item-content,
+      quick-note-results novo-list li item-content,
+      quick-note-results ul novo-list-item item-content,
+      quick-note-results ul li item-content {
+        display: block; }
+    .picker-results novo-list novo-loading,
     .picker-results ul novo-loading,
+    .quick-note-results novo-list novo-loading,
     .quick-note-results ul novo-loading,
+    picker-error novo-list novo-loading,
     picker-error ul novo-loading,
+    picker-loader novo-list novo-loading,
     picker-loader ul novo-loading,
+    picker-null-recent-results novo-list novo-loading,
     picker-null-recent-results ul novo-loading,
+    picker-null-results novo-list novo-loading,
     picker-null-results ul novo-loading,
+    picker-results novo-list novo-loading,
     picker-results ul novo-loading,
+    quick-note-results novo-list novo-loading,
     quick-note-results ul novo-loading {
       -ms-flex-pack: center;
           justify-content: center; }
+  .picker-results ul li,
+  .quick-note-results ul li,
+  picker-error ul li,
+  picker-loader ul li,
+  picker-null-recent-results ul li,
+  picker-null-results ul li,
+  picker-results ul li,
+  quick-note-results ul li {
+    padding: 10px 16px;
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-direction: column;
+        flex-direction: column; }
   .picker-results.active,
   .quick-note-results.active,
   picker-error.active,
@@ -5576,8 +5828,6 @@ quick-note-results {
   picker-null-results.active,
   picker-results.active,
   quick-note-results.active {
-    max-height: 200px;
-    overflow: auto;
     z-index: 1000; }
   .picker-results:focus,
   .quick-note-results:focus,
@@ -5589,18 +5839,19 @@ quick-note-results {
   quick-note-results:focus {
     outline: none; }
 
+novo-list-item.disabled,
+entity-picker-result.disabled {
+  opacity: 0.5;
+  pointer-events: none; }
+
+entity-picker-result.active > novo-list-item {
+  background-color: #e0ebf9; }
+
 entity-picker-results {
   background: #ffffff;
   width: 100%; }
   entity-picker-results novo-list {
     background: #ffffff; }
-    entity-picker-results novo-list novo-list-item.disabled,
-    entity-picker-results novo-list entity-picker-result.disabled {
-      opacity: 0.5;
-      pointer-events: none; }
-    entity-picker-results novo-list entity-picker-result.active > novo-list-item {
-      background: #f4f4f4;
-      color: #63666c; }
     entity-picker-results novo-list item-content > p {
       min-width: 15em;
       font-size: .9em;
@@ -5617,8 +5868,13 @@ picker-null-results,
 .picker-loader,
 .picker-null-recent-results,
 .picker-null-results {
+  background-color: #ffffff;
   text-align: center;
-  color: #b1b3b7; }
+  color: #b1b3b7;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  border: 1px solid #4A89DC;
+  transform: translateY(0%);
+  transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1); }
 
 p.picker-error,
 p.picker-loader,
@@ -5629,12 +5885,17 @@ p.picker-null-results {
 
 picker-loader,
 .picker-loader {
+  background-color: #ffffff;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
       align-items: center;
   -ms-flex-direction: column;
-      flex-direction: column; }
+      flex-direction: column;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  border: 1px solid #4A89DC;
+  transform: translateY(0%);
+  transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1); }
 
 chips, multi-picker,
 entity-chips {
@@ -5847,7 +6108,7 @@ entity-chips picker-results {
   color: black; }
   chips picker-results novo-list, multi-picker picker-results novo-list,
   entity-chips picker-results novo-list {
-    max-height: 600px;
+    max-height: 450px;
     overflow: auto; }
     chips picker-results novo-list novo-list-item, multi-picker picker-results novo-list novo-list-item,
     entity-chips picker-results novo-list novo-list-item {
@@ -5862,7 +6123,7 @@ entity-chips picker-results {
         background-color: #e0ebf9; }
       chips picker-results novo-list novo-list-item:hover, multi-picker picker-results novo-list novo-list-item:hover,
       entity-chips picker-results novo-list novo-list-item:hover {
-        background-color: #f1f6fc; }
+        background-color: #e0ebf9; }
       chips picker-results novo-list novo-list-item item-content, multi-picker picker-results novo-list novo-list-item item-content,
       entity-chips picker-results novo-list novo-list-item item-content {
         -ms-flex-flow: row wrap;
@@ -5928,7 +6189,7 @@ entity-chips .preview-container entity-picker-result {
   left: 0;
   width: 100%;
   min-width: 180px;
-  max-height: 600px;
+  max-height: 450px;
   overflow: auto;
   z-index: 900;
   border: 1px solid #4A89DC;
@@ -11161,6 +11422,16 @@ novo-form {
                         novo-form .novo-form-container form td.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container > chips.with-value,
                         novo-form .novo-form-container form td.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container > multi-picker.with-value {
                           margin-bottom: 0; }
+                      novo-dynamic-form .novo-form-container form div.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list,
+                      novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list,
+                      novo-dynamic-form .novo-form-container form td.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list,
+                      novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list,
+                      novo-form .novo-form-container form div.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list,
+                      novo-form .novo-form-container form div.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list,
+                      novo-form .novo-form-container form td.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list,
+                      novo-form .novo-form-container form td.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list {
+                        max-height: 450px;
+                        overflow: auto; }
                       novo-dynamic-form .novo-form-container form div.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results,
                       novo-dynamic-form .novo-form-container form div.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container picker-results,
                       novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results,
@@ -11182,8 +11453,7 @@ novo-form {
                         min-width: 100%;
                         max-width: 100%;
                         z-index: 10;
-                        top: 100%;
-                        border: 1px solid #4A89DC; }
+                        top: 100%; }
                         novo-dynamic-form .novo-form-container form div.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list,
                         novo-dynamic-form .novo-form-container form div.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container picker-results novo-list,
                         novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list,
@@ -11200,8 +11470,7 @@ novo-form {
                         novo-form .novo-form-container form td.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container picker-results novo-list,
                         novo-form .novo-form-container form td.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list,
                         novo-form .novo-form-container form td.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container picker-results novo-list {
-                          max-height: 600px;
-                          overflow: auto; }
+                          border: 1px solid #4A89DC; }
                           novo-dynamic-form .novo-form-container form div.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list novo-list-item,
                           novo-dynamic-form .novo-form-container form div.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container picker-results novo-list novo-list-item,
                           novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input > div.novo-control-input-container entity-picker-results novo-list novo-list-item,
@@ -13649,104 +13918,104 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 27px;
-      height: 27px; }
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 33px;
-      height: 33px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 29px;
-      height: 29px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
       width: 29px;
       height: 29px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-submission {
-      background: #a9adbb;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-task {
-      background: #4f5361;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-distributionList {
-      background: #4f5361;
       width: 26px;
       height: 26px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-submission {
+      background: #a9adbb;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-task {
+      background: #4f5361;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-distributionList {
+      background: #4f5361;
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-credential {
       background: #4f5361;
       width: 39px;
       height: 39px; }
     color header .background-boxes .bb-user {
       background: #4f5361;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-corporateuser {
-      background: #4f5361;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 37px;
-      height: 37px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-carnation {
-      background: #D770AD;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-lavender {
-      background: #967ADC;
       width: 35px;
       height: 35px; }
+    color header .background-boxes .bb-corporateuser {
+      background: #4f5361;
+      width: 44px;
+      height: 44px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-carnation {
+      background: #D770AD;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-lavender {
+      background: #967ADC;
+      width: 42px;
+      height: 42px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -14746,4 +15015,4 @@ popover-demo .example.popover-demo {
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.7f65f5998d01ddb0b966.bundle.map*/
+/*# sourceMappingURL=main.2287546de3bd5c4e70e2.bundle.map*/
