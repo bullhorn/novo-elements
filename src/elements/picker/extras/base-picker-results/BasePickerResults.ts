@@ -24,6 +24,7 @@ export class BasePickerResults {
     element: ElementRef;
     page: number = 0;
     lastPage: boolean = false;
+
     constructor(element: ElementRef) {
         this.element = element;
     }
@@ -200,11 +201,25 @@ export class BasePickerResults {
         this.scrollToActive();
     }
 
+    getListElement() {
+        return this.element.nativeElement;
+    }
+
+    getChildenOfListElement() {
+        let list = this.getListElement();
+        return list.children;
+    }
+
     scrollToActive() {
-        let list = this.element.nativeElement;
-        // let list = element.querySelector('ul');
+        let list = this.getListElement();
+        let items = this.getChildenOfListElement();
         let index = this.matches.indexOf(this.activeMatch);
-        list.scrollTop = 65 * (index - 1);
+        let item = items[index];
+        if (item) {
+            list.scrollTop = item.offsetTop;
+        } else {
+            console.warn('BasePickerResults - could not find result item to scroll to, try overriding getListElement() or getChildenOfListElement() in your PickerResults Component'); // tslint: disable-line
+        }
     }
 
     /**

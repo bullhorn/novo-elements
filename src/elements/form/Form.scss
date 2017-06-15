@@ -405,6 +405,12 @@ novo-form {
                                                     margin-bottom: 0;
                                                 }
                                             }
+                                            entity-picker-results {
+                                                novo-list {
+                                                    max-height: 450px;
+                                                    overflow: auto;
+                                                }
+                                            }
                                             entity-picker-results,
                                             picker-results {
                                                 position: absolute;
@@ -413,10 +419,8 @@ novo-form {
                                                 max-width: 100%;
                                                 z-index: 10;
                                                 top: 100%;
-                                                border: 1px solid #4A89DC;
                                                 novo-list {
-                                                    max-height: 600px;
-                                                    overflow: auto;
+                                                    border: 1px solid #4A89DC;
                                                     novo-list-item {
                                                         cursor: pointer;
                                                         flex: 0 0;

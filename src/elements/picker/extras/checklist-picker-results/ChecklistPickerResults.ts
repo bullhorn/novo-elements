@@ -25,7 +25,7 @@ import { Observable } from 'rxjs/Rx';
                 <li
                     *ngFor="let match of section.data; let i = index" [ngClass]="{checked: match.checked}"
                     (click)="selectMatch($event, match)"
-                    [class.active]="match===activeMatch"
+                    [class.active]="match === activeMatch"
                     (mouseenter)="selectActive(match)">
                     <label>
                         <i [ngClass]="{'bhi-checkbox-empty': !match.checked, 'bhi-checkbox-filled': match.checked, 'bhi-checkbox-indeterminate': match.indeterminate }"></i>

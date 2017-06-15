@@ -190,7 +190,7 @@ entity-chips {
         position: absolute;
         color: black;
         novo-list {
-            max-height: 600px;
+            max-height: 450px;
             overflow: auto;
             novo-list-item {
                 flex: 0 0;
@@ -202,7 +202,7 @@ entity-chips {
                     background-color: lighten($positive, 35%);
                 }
                 &:hover {
-                    background-color: lighten($positive, 39%);
+                    background-color: lighten($positive, 35%);
                 }
                 item-content {
                     flex-flow: row wrap;
@@ -251,7 +251,7 @@ entity-chips {
             left: 0;
             width: 100%;
             min-width: 180px;
-            max-height: 600px;
+            max-height: 450px;
             overflow: auto;
             z-index: 900;
             border: 1px solid #4A89DC;

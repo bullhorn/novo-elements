@@ -182,4 +182,8 @@ export class EntityPickerResults extends BasePickerResults {
     constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
     }
+
+    getListElement() {
+        return this.element.nativeElement.querySelector('novo-list');
+    }
 }
