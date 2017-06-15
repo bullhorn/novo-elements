@@ -120,6 +120,9 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         // Replace the textarea with an instance of CKEditor
         this.instance = CKEDITOR.replace(this.host.nativeElement, this.getCKEditorConfig());
 
+        // Set initial value of the note in the editor
+        this.writeValue(this.model);
+
         // Connect to the key event in CKEditor for showing results dropdown
         this.instance.on('key', (event: any) => {
             if (!this.onKey(event.data.domEvent.$)) {
@@ -128,7 +131,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         });
 
         // Connect to the change event in CKEditor for debouncing user modifications
-        this.instance.on('change', (event: any) => {
+        this.instance.on('change', () => {
             // Debounce update
             if (this.debounceTimeout) {
                 clearTimeout(this.debounceTimeout);
@@ -221,12 +224,13 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         // Possibly show results if the user has entered a search term
         this.showResults();
 
-        // Propagate change to ngModel
-        let newModel = { note: (value || ''), references: this.model.references };
-
-        // If no note or references, delete the model (form validation)
-        if (newModel.note === '' && Object.keys(newModel.references).length === 0) {
-            newModel = null;
+        // Propagate change to ngModel for form validation, and send null if the note is empty
+        let newModel = null;
+        if (value) {
+            newModel = {
+                note: value,
+                references: this.model.references
+            };
         }
 
         // Inform listeners to the ngModel change event that something has changed
@@ -357,7 +361,12 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
         if (index >= 0) {
             let newContent = content.substring(0, index) + newWord + content.substring(index + originalWord.length);
-            this.instance.setData(newContent);
+
+            // Just update the note, keep the same references. We can safely assume here that the model is filled out
+            this.writeValue({
+                note: newContent,
+                references: this.model.references
+            });
         }
     }
 
@@ -367,11 +376,12 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     }
 
     /**
-     * Handles setting the model data from the caller
+     * Handles setting the model and the view from the outside caller or the user's typing
      *
      * @param model A model that has a note (HTML content) and references (array of objects)
      */
     writeValue(model: any): void {
+        // Set value of the model
         if (model && (model.references || model.note)) {
             this.model = {
                 note: model.note || '',
@@ -382,6 +392,11 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
                 note: model,
                 references: {}
             };
+        }
+
+        // Set the note HTML value in the editor
+        if (this.instance) {
+            this.instance.setData(this.model.note);
         }
     }
 
