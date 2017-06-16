@@ -12,41 +12,61 @@ describe('Elements: QuickNoteElement', () => {
     let component;
     let parentForm;
     let ckEditorInstance;
+    let mockResults;
 
-    // Variables used in the mocks
-    let resultsComponentShown = false;
-    let resultsDropdownSelectedIndex = 0; // 0 = nothing is selected
-    let taggingMode = 'person';
-    let selected = { value: 'j.bullhorn', label: 'John Bullhorn' };
+    class MockQuickNoteResults {
+        public instance: any = this;
+        public element: any = null;
+        public parentComponent: any = null;
+        public visible: boolean = false;
+        public taggingMode: string = 'person';
+        public selectedIndex: number = 0; // 0 = nothing is selected
+        public selectedValue: any = { value: 'j.bullhorn', label: 'John Bullhorn' };
+        public nativeElementProperties: any = {};
 
-    // QuickNoteResults Mock
-    class MockComponentUtils {
-        appendNextToLocation() {
-            resultsComponentShown = true;
-            return {
-                instance: {
-                    prevActiveMatch: (): void => {
-                        resultsDropdownSelectedIndex--;
-                    },
-                    nextActiveMatch: (): void => {
-                        resultsDropdownSelectedIndex++;
-                    },
-                    selectActiveMatch: (): void => {
-                        // Call onSelected and hideResults on the parent, if a match is selected,
-                        // just like the real QuickNoteResults
-                        if (resultsDropdownSelectedIndex) {
-                            component.onSelected(taggingMode, selected);
-                            component.hideResults();
+        constructor(parentComponent: any) {
+            this.parentComponent = parentComponent;
+
+            // Mock out the native element
+            this.element = {
+                nativeElement: {
+                    style: {
+                        setProperty: (property: string, value: string): void => {
+                            this.nativeElementProperties[property] = value;
                         }
-
-                        component.hideResults();
                     }
-                },
-                destroy: (): void => {
-                    resultsComponentShown = false;
-                    resultsDropdownSelectedIndex = 0;
                 }
             };
+        }
+
+        prevActiveMatch(): void {
+            this.selectedIndex--;
+        }
+
+        nextActiveMatch(): void {
+            this.selectedIndex++;
+        }
+
+        selectActiveMatch(): void {
+            // Call onSelected and hideResults on the parent, if a match is selected,
+            // just like the real QuickNoteResults
+            if (this.selectedIndex) {
+                this.parentComponent.onSelected(this.taggingMode, this.selectedValue);
+                this.parentComponent.hideResults();
+            }
+            component.hideResults();
+        }
+
+        destroy(): void {
+            this.visible = false;
+            this.selectedIndex = 0;
+        }
+    }
+
+    class MockComponentUtils {
+        appendNextToLocation() {
+            mockResults.visible = true;
+            return mockResults;
         }
     }
 
@@ -80,6 +100,9 @@ describe('Elements: QuickNoteElement', () => {
             }
         };
 
+        // Create the mock results dropdown
+        mockResults = new MockQuickNoteResults(component);
+
         /**
          * CKEditor mock instance.
          *
@@ -88,6 +111,9 @@ describe('Elements: QuickNoteElement', () => {
          * Call userPausedAfterEntry to simulate a user waiting for the keystrokes to be picked up.
          */
         ckEditorInstance = {
+            config: {
+                height: 200
+            },
             keyEnteredByUser: (key: string, keyCode: number): void => {
                 // Add the character to the editorValue if it's a character
                 if (key.length === 1) {
@@ -97,7 +123,7 @@ describe('Elements: QuickNoteElement', () => {
                 this.keyEvent({
                     data: {
                         domEvent: {
-                            $: {
+                            $: { // The native element
                                 key: key,
                                 keyCode: keyCode
                             }
@@ -135,10 +161,24 @@ describe('Elements: QuickNoteElement', () => {
                         return [{
                             startContainer: {
                                 getText: () => '@john',
-                                type: 3 // CKEDITOR.NODE_TEXT
+                                type: 3, // CKEDITOR.NODE_TEXT
+                                $: { // The native element
+                                    parentElement: {
+                                        offsetTop: 100,
+                                        offsetLeft: 0
+                                    }
+                                }
                             },
                             startOffset: 5
                         }];
+                    }
+                };
+            },
+            editable: (): any => {
+                return {
+                    $: { // The native element
+                        scrollTop: 50,
+                        scrollLeft: 0
                     }
                 };
             },
@@ -190,11 +230,13 @@ describe('Elements: QuickNoteElement', () => {
             ckEditorInstance.keyEnteredByUser('h');
             ckEditorInstance.keyEnteredByUser('n');
 
-            expect(resultsComponentShown).toBe(false);
+            expect(mockResults.visible).toBe(false);
+            expect(mockResults.nativeElementProperties).toEqual({});
 
             ckEditorInstance.userPausedAfterEntry();
 
-            expect(resultsComponentShown).toBe(true);
+            expect(mockResults.visible).toBe(true);
+            expect(mockResults.nativeElementProperties).toEqual({'margin-top': '120px'});
             expect(parentForm.getValue()).toEqual({
                 note: 'Note about: @john',
                 references: {}
@@ -223,33 +265,33 @@ describe('Elements: QuickNoteElement', () => {
             ckEditorInstance.keyEnteredByUser('@');
             ckEditorInstance.userPausedAfterEntry();
 
-            expect(resultsComponentShown).toBe(true);
-            expect(resultsDropdownSelectedIndex).toBe(0);
+            expect(mockResults.visible).toBe(true);
+            expect(mockResults.selectedIndex).toBe(0);
 
             ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
             ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
 
-            expect(resultsComponentShown).toBe(true);
-            expect(resultsDropdownSelectedIndex).toBe(2);
+            expect(mockResults.visible).toBe(true);
+            expect(mockResults.selectedIndex).toBe(2);
 
             ckEditorInstance.keyEnteredByUser('UpArrow', KeyCodes.UP);
 
-            expect(resultsComponentShown).toBe(true);
-            expect(resultsDropdownSelectedIndex).toBe(1);
+            expect(mockResults.visible).toBe(true);
+            expect(mockResults.selectedIndex).toBe(1);
 
             ckEditorInstance.keyEnteredByUser('Escape', KeyCodes.ESC);
 
-            expect(resultsComponentShown).toBe(false);
+            expect(mockResults.visible).toBe(false);
 
             ckEditorInstance.keyEnteredByUser('@');
             ckEditorInstance.userPausedAfterEntry();
 
-            expect(resultsComponentShown).toBe(true);
-            expect(resultsDropdownSelectedIndex).toBe(0);
+            expect(mockResults.visible).toBe(true);
+            expect(mockResults.selectedIndex).toBe(0);
 
             ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
 
-            expect(resultsComponentShown).toBe(false);
+            expect(mockResults.visible).toBe(false);
         }));
     });
 });

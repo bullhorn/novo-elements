@@ -53,8 +53,10 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     isTagging: boolean;
     taggingMode: string;
     model: any;
-    instance: any;
+    ckeInstance: any;
     debounceTimeout: any;
+
+    static TOOLBAR_HEIGHT = 40; // in pixels - configured by stylesheet
 
     onModelChange: Function = () => {
     };
@@ -99,11 +101,11 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
     ngOnDestroy(): void {
         // Tear down the CKEditor instance
-        if (this.instance) {
+        if (this.ckeInstance) {
             setTimeout(() => {
-                this.instance.removeAllListeners();
-                this.instance.destroy();
-                this.instance = null;
+                this.ckeInstance.removeAllListeners();
+                this.ckeInstance.destroy();
+                this.ckeInstance = null;
             });
         }
     }
@@ -118,20 +120,20 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         }
 
         // Replace the textarea with an instance of CKEditor
-        this.instance = CKEDITOR.replace(this.host.nativeElement, this.getCKEditorConfig());
+        this.ckeInstance = CKEDITOR.replace(this.host.nativeElement, this.getCKEditorConfig());
 
         // Set initial value of the note in the editor
         this.writeValue(this.model);
 
         // Connect to the key event in CKEditor for showing results dropdown
-        this.instance.on('key', (event: any) => {
+        this.ckeInstance.on('key', (event: any) => {
             if (!this.onKey(event.data.domEvent.$)) {
                 event.cancel();
             }
         });
 
         // Connect to the change event in CKEditor for debouncing user modifications
-        this.instance.on('change', () => {
+        this.ckeInstance.on('change', () => {
             // Debounce update
             if (this.debounceTimeout) {
                 clearTimeout(this.debounceTimeout);
@@ -146,12 +148,12 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         });
 
         // Propagate blur events from CKEditor to the Element's listeners
-        this.instance.on('blur', (event: any) => {
+        this.ckeInstance.on('blur', (event: any) => {
             this.blur.emit(event);
         });
 
         // Propagate blur events from CKEditor to the Element's listeners
-        this.instance.on('focus', (event: any) => {
+        this.ckeInstance.on('focus', (event: any) => {
             this.focus.emit(event);
         });
     }
@@ -219,7 +221,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      */
     onValueChange(): void {
         // Get the HTML text in CKEditor
-        let value = this.instance.getData();
+        let value = this.ckeInstance.getData();
 
         // Possibly show results if the user has entered a search term
         this.showResults();
@@ -265,6 +267,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
                         searchTerm: this.searchTerm,
                         taggingMode: this.taggingMode
                     };
+                    this.positionResultsDropdown();
                 }
             } else if (this.quickNoteResults) {
                 this.quickNoteResults.destroy();
@@ -330,7 +333,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * Gets the current word that the cursor is on CKEditor
      */
     getWordAtCursor(): string {
-        let range = this.instance.getSelection().getRanges()[0];
+        let range = this.ckeInstance.getSelection().getRanges()[0];
         let start = range.startContainer;
 
         if (start.type === CKEDITOR.NODE_TEXT && range.startOffset) {
@@ -355,7 +358,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * Replaces the word that the user is on with the given HTML
      */
     replaceWordAtCursor(newWord: string): void {
-        let content = this.instance.getData();
+        let content = this.ckeInstance.getData();
         let originalWord = this.getWordAtCursor();
         let index = content.lastIndexOf(originalWord);
 
@@ -395,8 +398,8 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         }
 
         // Set the note HTML value in the editor
-        if (this.instance) {
-            this.instance.setData(this.model.note);
+        if (this.ckeInstance) {
+            this.ckeInstance.setData(this.model.note);
         }
     }
 
@@ -415,8 +418,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * Removes the toolbar on the bottom and configures a slimmed down version of the toolbar.
      */
     getCKEditorConfig(): any {
-        let toolbarHeight = 40; // in pixels - configured by stylesheet
-        let editorHeight = this.wrapper.nativeElement.clientHeight - toolbarHeight;
+        let editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
 
         return {
             scayt_autoStartup: true,
@@ -428,5 +430,40 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
                 items: ['Styles', 'FontSize', 'Bold', 'Italic', 'Underline', 'TextColor', '-', 'NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Link']
             }]
         };
+    }
+
+    /**
+     * Returns the current screen position of the cursor in CKEditor, accounting for any scrolling in the editor.
+     *
+     * @returns {{top: number, left: number}}
+     */
+    getCursorPosition(): any {
+        let range = this.ckeInstance.getSelection().getRanges()[0];
+        let cursorEl = range.startContainer.$.parentElement;
+        let editorEl = this.ckeInstance.editable().$;
+
+        return {
+            top: cursorEl.offsetTop - editorEl.scrollTop,
+            left: cursorEl.offsetLeft - editorEl.scrollLeft
+        };
+    }
+
+    /**
+     * Positions the results dropdown based on the location of the cursor in the text field
+     */
+    private positionResultsDropdown(): void {
+        const DROPDOWN_OFFSET: number = 30; // The distance between the cursor and the dropdown
+        const MIN_MARGIN_TOP: number = DROPDOWN_OFFSET;
+        const MAX_MARGIN_TOP: number = this.ckeInstance.config.height + QuickNoteElement.TOOLBAR_HEIGHT;
+
+        let cursorPosition = this.getCursorPosition();
+        let marginTop: number = cursorPosition.top + QuickNoteElement.TOOLBAR_HEIGHT + DROPDOWN_OFFSET;
+
+        // Check that the margin is within the visible bounds
+        marginTop = Math.max(marginTop, MIN_MARGIN_TOP);
+        marginTop = Math.min(marginTop, MAX_MARGIN_TOP);
+
+        // Set the margin-top of the dropdown
+        this.quickNoteResults.instance.element.nativeElement.style.setProperty('margin-top', marginTop + 'px');
     }
 }
