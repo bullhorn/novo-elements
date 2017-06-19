@@ -150,7 +150,7 @@ export class FormDemoComponent {
             },
             options: {
                 tags: ['First', 'Second'],
-                references: ['Third', 'Forth'],
+                references: ['Third', 'Fourth'],
                 boos: ['Test']
             },
             renderer: {

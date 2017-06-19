@@ -14,15 +14,17 @@ import { QuickNoteResults } from './../../../../index';
     },
     template: `
         <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
-        <ul *ngIf="matches.length > 0">
-            <li
+        <novo-list *ngIf="matches.length > 0">
+            <novo-list-item
                 *ngFor="let match of matches"
                 (click)="selectMatch($event)"
                 [class.active]="match===activeMatch"
                 (mouseenter)="selectActive(match)">
-                **CUSTOM** <b [innerHtml]="highlight(match.label, term)"></b>
-            </li>
-        </ul>
+                <item-content>
+                    **CUSTOM** <b [innerHtml]="highlight(match.label, term)"></b>
+                </item-content>
+            </novo-list-item>
+        </novo-list>
         <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
         <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
     `
@@ -60,16 +62,16 @@ export class QuickNoteDemoComponent {
     private CustomQuickNoteDemoTpl:string = CustomQuickNoteDemoTpl;
     private CustomQuickNoteResultsDemoTpl:string = CustomQuickNoteResultsDemoTpl;
     private placeholder:string = 'Enter your note text here. Reference people and distribution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
-    private config:any;
+    private basic:any;
     private custom:any;
-    private custom2:any;
+    private customResults:any;
 
     constructor() {
         let customData = {
             tags: [{ id: 1, name: 'OH YA!', test: 'TWO' }, { id: 2, name: 'TAGGING!', test: 'ONE' }],
             references: [{ id: 1, title: 'Awesome Reference' }, { id: 2, title: 'Angular2' }]
         };
-        this.config = {
+        this.basic = {
             triggers: {
                 tags: '@',
                 references: '#',
@@ -77,7 +79,7 @@ export class QuickNoteDemoComponent {
             },
             options: {
                 tags: ['First', 'Second'],
-                references: ['Third', 'Forth'],
+                references: ['Third', 'Fourth'],
                 boos: ['Test']
             },
             renderer: {
@@ -126,7 +128,7 @@ export class QuickNoteDemoComponent {
                 }
             }
         };
-        this.custom2 = {
+        this.customResults = {
             resultsTemplate: CustomQuickNoteResults,
             triggers: {
                 names: '@',
