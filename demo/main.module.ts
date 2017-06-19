@@ -13,6 +13,7 @@ import { ColorComponent, CompositionComponent, TypographyComponent, IconographyC
 import {
     ButtonDemoComponent,
     RadioDemoComponent,
+    CustomQuickNoteResults,
     QuickNoteDemoComponent,
     ModalDemoComponent,
     FormDemoComponent,
@@ -62,6 +63,7 @@ import './demo.scss';
         IconographyComponent,
         ButtonDemoComponent,
         RadioDemoComponent,
+        CustomQuickNoteResults,
         QuickNoteDemoComponent,
         ModalDemoComponent,
         FormDemoComponent,
@@ -134,6 +136,7 @@ import './demo.scss';
         ImageCell,
         ActionsCell,
         CustomPickerResults,
+        CustomQuickNoteResults,
         CustomDemoComponent
     ],
     bootstrap: [DemoComponent]
