@@ -205,20 +205,23 @@ export class BasePickerResults {
         return this.element.nativeElement;
     }
 
-    getChildenOfListElement() {
-        let list = this.getListElement();
-        return list.children;
+    getChildrenOfListElement() {
+        let children = [];
+        if (this.getListElement()) {
+            children = this.getListElement().children;
+        }
+        return children;
     }
 
     scrollToActive() {
         let list = this.getListElement();
-        let items = this.getChildenOfListElement();
+        let items = this.getChildrenOfListElement();
         let index = this.matches.indexOf(this.activeMatch);
         let item = items[index];
         if (item) {
             list.scrollTop = item.offsetTop;
         } else {
-            console.warn('BasePickerResults - could not find result item to scroll to, try overriding getListElement() or getChildenOfListElement() in your PickerResults Component'); // tslint: disable-line
+            console.warn('BasePickerResults - could not find result item to scroll to, try overriding getListElement() or getChildrenOfListElement() in your PickerResults Component'); // tslint: disable-line
         }
     }
 
