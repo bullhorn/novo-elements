@@ -218,6 +218,13 @@ describe('Elements: QuickNoteElement', () => {
                     }
                 };
             },
+            document: {
+                getBody: (): any => {
+                    return {
+                        getHtml: (): string => this.editorValue
+                    };
+                }
+            },
             removeAllListeners: (): void => {
             },
             destroy: (): void => {
@@ -294,6 +301,35 @@ describe('Elements: QuickNoteElement', () => {
             ckEditorInstance.valueSetByUser('');
 
             expect(parentForm.getValue()).toEqual(null);
+        }));
+
+        it('should remove references from the model when their rendered text is removed from the note.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+
+            ckEditorInstance.valueSetByUser('Note about: ');
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: ',
+                references: {}
+            });
 
             // Make sure that the model is set properly on the second time through
             ckEditorInstance.valueSetByUser('Note about: ');
@@ -308,6 +344,47 @@ describe('Elements: QuickNoteElement', () => {
 
             expect(parentForm.getValue()).toEqual({
                 note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+        }));
+
+        it('should not add duplicate references to the model.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
                 references: {
                     person: [{
                         value: 'j.bullhorn',

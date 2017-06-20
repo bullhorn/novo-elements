@@ -206,6 +206,13 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     }
 
     /**
+     * Returns the renderer for a given tagging mode if it exists in the config, otherwise the default.
+     */
+    private getRenderer(taggingMode: string): any {
+        return this.config.renderer ? this.config.renderer[taggingMode] : QuickNoteElement.defaultRenderer;
+    }
+
+    /**
      * Called every time a keystroke is made in the editor. Listens for particular keys (e.g. UP arrow, ESC, etc.)
      * to handle certain behaviors of the picker.
      *
@@ -270,6 +277,9 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         // Get the html text in CKEditor
         let value = this.ckeInstance.getData();
 
+        // Make sure that any references in the model are still valid
+        this.validateReferences();
+
         // Possibly show results if the user has entered a search term
         this.showResults();
 
@@ -280,9 +290,6 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
                 note: value,
                 references: this.model.references
             };
-        } else {
-            // Note is empty, so remove all references
-            this.model.references = {};
         }
 
         // Inform listeners to the ngModel change event that something has changed
@@ -353,15 +360,18 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
         // Replace searchTerm with link
         let symbol = this.config.triggers[taggingMode];
-        let renderer = this.config.renderer ? this.config.renderer[taggingMode] : QuickNoteElement.defaultRenderer;
-        let link = renderer(symbol, selected);
+        let renderer = this.getRenderer(taggingMode);
+        let renderedText = renderer(symbol, selected);
 
-        this.replaceWordAtCursor(link);
+        this.replaceWordAtCursor(renderedText);
 
-        // Add the references
+        // Add the new reference, if it doesn't already exist
         this.model.references = this.model.references || {};
         this.model.references[taggingMode] = this.model.references[taggingMode] || [];
-        this.model.references[taggingMode].push(selected);
+        let matchingItems = this.model.references[taggingMode].filter(item => JSON.stringify(item) === JSON.stringify(selected));
+        if (matchingItems.length === 0) {
+            this.model.references[taggingMode].push(selected);
+        }
 
         // Update the quick note with the changes due to the user's selection of an item in the dropdown
         this.onValueChange();
@@ -432,6 +442,29 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
                 this.ckeInstance.getSelection().selectRanges( [ range ] );
             }
         }
+    }
+
+    /**
+     * Returns current references, minus any from the model that have been removed from the editor.
+     */
+    private validateReferences(): void {
+        let html = this.ckeInstance.document.getBody().getHtml();
+
+        Object.keys(this.model.references).forEach(taggingMode => {
+            let array = this.model.references[taggingMode] || [];
+            let symbol = this.config.triggers[taggingMode];
+            let renderer = this.getRenderer(taggingMode);
+
+            this.model.references[taggingMode] = array.filter(item => {
+                let renderedText = renderer(symbol, item);
+                return html.includes(renderedText);
+            });
+
+            // If no references, then delete the key
+            if (this.model.references[taggingMode].length === 0) {
+                delete this.model.references[taggingMode];
+            }
+        });
     }
 
     /**
