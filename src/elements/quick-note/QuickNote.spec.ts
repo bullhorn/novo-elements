@@ -160,6 +160,14 @@ describe('Elements: QuickNoteElement', () => {
                     getRanges: () => {
                         return [{
                             startContainer: {
+                                getParent: () => {
+                                    return {
+                                        getHtml: () => this.editorValue,
+                                        setHtml: (html) => {
+                                            this.editorValue = html;
+                                        }
+                                    };
+                                },
                                 getText: () => '@john',
                                 type: 3, // CKEDITOR.NODE_TEXT
                                 $: { // The native element
@@ -169,9 +177,11 @@ describe('Elements: QuickNoteElement', () => {
                                     }
                                 }
                             },
-                            startOffset: 5
+                            startOffset: 5,
+                            moveToPosition: () => {}
                         }];
-                    }
+                    },
+                    selectRanges: () => {}
                 };
             },
             editable: (): any => {
@@ -246,7 +256,7 @@ describe('Elements: QuickNoteElement', () => {
             ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
 
             expect(parentForm.getValue()).toEqual({
-                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a>',
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
                 references: {
                     person: [{
                         value: 'j.bullhorn',

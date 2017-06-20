@@ -220,7 +220,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * After the value has been updated in CKEditor, this will propagate that change to the model and listeners.
      */
     onValueChange(): void {
-        // Get the HTML text in CKEditor
+        // Get the html text in CKEditor
         let value = this.ckeInstance.getData();
 
         // Possibly show results if the user has entered a search term
@@ -330,24 +330,26 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     }
 
     /**
-     * Gets the current word that the cursor is on CKEditor
+     * Gets the current word that the cursor is on CKEditor.
+     * @returns plain text string (removes all html formatting)
      */
     getWordAtCursor(): string {
         let range = this.ckeInstance.getSelection().getRanges()[0];
         let start = range.startContainer;
 
         if (start.type === CKEDITOR.NODE_TEXT && range.startOffset) {
-            let previousSpace = start.getText().lastIndexOf(' ', range.startOffset) + 1;
-            let nextSpace = start.getText().indexOf(' ', range.startOffset);
+            let text = start.getText();
+            let previousSpace = text.lastIndexOf(' ', range.startOffset - 1) + 1;
+            let nextSpace = text.indexOf(' ', range.startOffset);
             if (previousSpace === -1) {
                 previousSpace = 0;
             }
             if (nextSpace === -1) {
-                nextSpace = start.getText().length;
+                nextSpace = text.length;
             }
 
             // Range at the non-zero position of a text node
-            return start.getText().substring(previousSpace, nextSpace);
+            return text.substring(previousSpace, nextSpace);
         }
 
         // Selection starts at the 0 index of the text node or there's no previous text node in contents
@@ -355,21 +357,30 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     }
 
     /**
-     * Replaces the word that the user is on with the given HTML
+     * Replaces the word that the user is on with the given html.
+     *
+     * CKEditor gives us access to the current line of html in the editor, so we replace the content of
+     * the line, replacing only the current word.
      */
     replaceWordAtCursor(newWord: string): void {
-        let content = this.ckeInstance.getData();
-        let originalWord = this.getWordAtCursor();
-        let index = content.lastIndexOf(originalWord);
+        let originalWord = this.getWordAtCursor().trim();
+        let range = this.ckeInstance.getSelection().getRanges()[0];
+        let start = range.startContainer;
+        let parentNode = start.getParent();
 
-        if (index >= 0) {
-            let newContent = content.substring(0, index) + newWord + content.substring(index + originalWord.length);
+        if (start.type === CKEDITOR.NODE_TEXT && parentNode) {
+            let line = parentNode.getHtml();
+            let index = line.lastIndexOf(originalWord);
 
-            // Just update the note, keep the same references. We can safely assume here that the model is filled out
-            this.writeValue({
-                note: newContent,
-                references: this.model.references
-            });
+            if (index >= 0) {
+                // Add a space after the replaced word so that multiple references can be added back to back
+                let newLine = line.substring(0, index) + newWord + ' ' + line.substring(index + originalWord.length);
+                parentNode.setHtml(newLine);
+
+                // Place selection at the end of the line
+                range.moveToPosition(parentNode, CKEDITOR.POSITION_BEFORE_END);
+                this.ckeInstance.getSelection().selectRanges( [ range ] );
+            }
         }
     }
 
@@ -381,7 +392,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     /**
      * Handles setting the model and the view from the outside caller or the user's typing
      *
-     * @param model A model that has a note (HTML content) and references (array of objects)
+     * @param model A model that has a note (html content) and references (array of objects)
      */
     writeValue(model: any): void {
         // Set value of the model
@@ -397,7 +408,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
             };
         }
 
-        // Set the note HTML value in the editor
+        // Set the note html value in the editor
         if (this.ckeInstance) {
             this.ckeInstance.setData(this.model.note);
         }
