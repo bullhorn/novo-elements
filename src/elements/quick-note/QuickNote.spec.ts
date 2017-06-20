@@ -111,6 +111,7 @@ describe('Elements: QuickNoteElement', () => {
          * Call userPausedAfterEntry to simulate a user waiting for the keystrokes to be picked up.
          */
         ckEditorInstance = {
+            isPlaceholderVisible: () => this.placeholderVisible,
             config: {
                 height: 200
             },
@@ -132,6 +133,12 @@ describe('Elements: QuickNoteElement', () => {
                     cancel: () => {}
                 });
             },
+            blurByUser: (): void => {
+                this.blurEvent({});
+            },
+            focusByUser: (): void => {
+                this.focusEvent({});
+            },
             valueSetByUser: (value: string): void => {
                 // Call the changeEvent callback and simulate enough time for the debounce to occur
                 this.editorValue = value;
@@ -147,6 +154,13 @@ describe('Elements: QuickNoteElement', () => {
                     this.keyEvent = callback;
                 } else if (name === 'change') {
                     this.changeEvent = callback;
+                } else if (name === 'blur') {
+                    this.blurEvent = callback;
+                } else if (name === 'focus') {
+                    this.focusEvent = callback;
+                } else if (name === 'instanceReady') {
+                    // Immediately invoke the instanceReady callback
+                    callback({});
                 }
             },
             getData: (): any => {
@@ -189,6 +203,18 @@ describe('Elements: QuickNoteElement', () => {
                     $: { // The native element
                         scrollTop: 50,
                         scrollLeft: 0
+                    },
+                    getParent: (): any => {
+                        return {
+                            $: { // The native element
+                                appendChild: (node) => {
+                                    this.placeholderVisible = true;
+                                },
+                                removeChild: (node) => {
+                                    this.placeholderVisible = false;
+                                }
+                            },
+                        };
                     }
                 };
             },
@@ -302,6 +328,32 @@ describe('Elements: QuickNoteElement', () => {
             ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
 
             expect(mockResults.visible).toBe(false);
+        }));
+
+        it('should show/hide placeholder text properly.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('');
+
+            expect(ckEditorInstance.isPlaceholderVisible()).toBe(true);
+
+            ckEditorInstance.focusByUser();
+
+            expect(ckEditorInstance.isPlaceholderVisible()).toBe(false);
+
+            ckEditorInstance.blurByUser();
+
+            expect(ckEditorInstance.isPlaceholderVisible()).toBe(true);
+
+            ckEditorInstance.focusByUser();
+            ckEditorInstance.valueSetByUser('.');
+            ckEditorInstance.blurByUser();
+
+            expect(ckEditorInstance.isPlaceholderVisible()).toBe(false);
+
+            ckEditorInstance.focusByUser();
+            ckEditorInstance.valueSetByUser('');
+            ckEditorInstance.blurByUser();
+
+            expect(ckEditorInstance.isPlaceholderVisible()).toBe(true);
         }));
     });
 });

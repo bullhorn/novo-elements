@@ -48,19 +48,21 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     @Output() change: EventEmitter<any> = new EventEmitter();
 
     // The characters that the user enters in order to search for a person/thing to tag
-    resultsComponent: any;
-    quickNoteResults: any;
-    isTagging: boolean;
-    taggingMode: string;
-    model: any;
-    ckeInstance: any;
-    debounceTimeout: any;
+    private resultsComponent: any;
+    private quickNoteResults: any;
+    private isTagging: boolean;
+    private taggingMode: string;
+    private model: any;
+    private ckeInstance: any;
+    private debounceTimeout: any;
+    private placeholderVisible: boolean = false;
+    private _placeholderElement: any = null;
 
-    static TOOLBAR_HEIGHT = 40; // in pixels - configured by stylesheet
+    private static TOOLBAR_HEIGHT = 40; // in pixels - configured by stylesheet
 
-    onModelChange: Function = () => {
+    private onModelChange: Function = () => {
     };
-    onModelTouched: Function = () => {
+    private onModelTouched: Function = () => {
     };
 
     constructor(private zone: NgZone, element: ElementRef, private componentUtils: ComponentUtils) {
@@ -75,14 +77,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         });
     }
 
-    /**
-     * If a renderer is not provided, the QuickNote will default to using this one, an anchor tag with no href
-     */
-    static defaultRenderer(symbol: string, item: any): string {
-        return `<a>${symbol}${item.label}</a>`;
-    }
-
-    ngOnInit(): void {
+    public ngOnInit(): void {
         // Make sure we have a proper config
         if (!this.config) {
             throw new Error('No config set for QuickNote!');
@@ -99,7 +94,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         this.resultsComponent = this.config.resultsTemplate || QuickNoteResults;
     }
 
-    ngOnDestroy(): void {
+    public ngOnDestroy(): void {
         // Tear down the CKEditor instance
         if (this.ckeInstance) {
             setTimeout(() => {
@@ -113,7 +108,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     /**
      * Connect to key/mouse events from CKEditor after the editor has been initialized
      */
-    ngAfterViewInit(): void {
+    public ngAfterViewInit(): void {
         if (!CKEDITOR) {
             console.error('Make sure to include CKEditor sources in your dependencies!');
             return;
@@ -149,13 +144,65 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
         // Propagate blur events from CKEditor to the Element's listeners
         this.ckeInstance.on('blur', (event: any) => {
+            this.showPlaceholder();
             this.blur.emit(event);
         });
 
         // Propagate blur events from CKEditor to the Element's listeners
         this.ckeInstance.on('focus', (event: any) => {
+            this.hidePlaceholder();
             this.focus.emit(event);
         });
+
+        // Show placeholder if the note is empty, after the editor is instantiated
+        this.ckeInstance.on('instanceReady', (event: any) => {
+            this.showPlaceholder();
+        });
+    }
+
+    // Set touched on blur
+    public onTouched(event?: any) {
+        this.onModelTouched();
+    }
+
+    /**
+     * Handles setting the model and the view from the outside caller or the user's typing
+     *
+     * @param model A model that has a note (html content) and references (array of objects)
+     */
+    public writeValue(model: any): void {
+        // Set value of the model
+        if (model && (model.references || model.note)) {
+            this.model = {
+                note: model.note || '',
+                references: model.references || {}
+            };
+        } else {
+            this.model = {
+                note: model,
+                references: {}
+            };
+        }
+
+        // Set the note html value in the editor
+        if (this.ckeInstance) {
+            this.ckeInstance.setData(this.model.note);
+        }
+    }
+
+    public registerOnChange(fn: Function): void {
+        this.onModelChange = fn;
+    }
+
+    public registerOnTouched(fn: Function): void {
+        this.onModelTouched = fn;
+    }
+
+    /**
+     * If a renderer is not provided, the QuickNote will default to using this one, an anchor tag with no href
+     */
+    private static defaultRenderer(symbol: string, item: any): string {
+        return `<a>${symbol}${item.label}</a>`;
     }
 
     /**
@@ -168,7 +215,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * @param event The key press event
      * @return true to allow the event to occur, false to cancel the event
      */
-    onKey(event: KeyboardEvent): boolean {
+    private onKey(event: KeyboardEvent): boolean {
         if (event.key) {
             if (this.quickNoteResults) {
                 // Hide results on escape key
@@ -219,7 +266,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * Debounced method that is run in the proper Angular context when the user has modified the CKEditor.
      * After the value has been updated in CKEditor, this will propagate that change to the model and listeners.
      */
-    onValueChange(): void {
+    private onValueChange(): void {
         // Get the html text in CKEditor
         let value = this.ckeInstance.getData();
 
@@ -248,7 +295,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     /**
      * Creates an instance of the results (called popup) and adds all the bindings to that instance.
      */
-    showResults(): void {
+    private showResults(): void {
         if (this.isTagging) {
             if (this.searchTerm.length) {
                 // Update Matches
@@ -282,7 +329,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     /**
      * Deletes the picker results from the DOM.
      */
-    hideResults(): void {
+    private hideResults(): void {
         this.isTagging = false;
         if (this.quickNoteResults) {
             this.quickNoteResults.destroy();
@@ -297,7 +344,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * @param taggingMode - type of tags we are looking for
      * @param selected - selected object from the picker that has a label and value
      */
-    onSelected(taggingMode: string, selected: any): void {
+    private onSelected(taggingMode: string, selected: any): void {
         // Turn off tagging
         this.isTagging = false;
 
@@ -320,7 +367,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     /**
      * Convenience method that gets the current word that the cursor is on, minus the tag.
      */
-    get searchTerm(): string {
+    private get searchTerm(): string {
         let word = this.getWordAtCursor();
         if (this.isTagging) {
             let symbol = this.config.triggers[this.taggingMode];
@@ -333,7 +380,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * Gets the current word that the cursor is on CKEditor.
      * @returns plain text string (removes all html formatting)
      */
-    getWordAtCursor(): string {
+    private getWordAtCursor(): string {
         let range = this.ckeInstance.getSelection().getRanges()[0];
         let start = range.startContainer;
 
@@ -362,7 +409,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * CKEditor gives us access to the current line of html in the editor, so we replace the content of
      * the line, replacing only the current word.
      */
-    replaceWordAtCursor(newWord: string): void {
+    private replaceWordAtCursor(newWord: string): void {
         let originalWord = this.getWordAtCursor().trim();
         let range = this.ckeInstance.getSelection().getRanges()[0];
         let start = range.startContainer;
@@ -384,51 +431,13 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         }
     }
 
-    // Set touched on blur
-    onTouched(event?: any) {
-        this.onModelTouched();
-    }
-
-    /**
-     * Handles setting the model and the view from the outside caller or the user's typing
-     *
-     * @param model A model that has a note (html content) and references (array of objects)
-     */
-    writeValue(model: any): void {
-        // Set value of the model
-        if (model && (model.references || model.note)) {
-            this.model = {
-                note: model.note || '',
-                references: model.references || {}
-            };
-        } else {
-            this.model = {
-                note: model,
-                references: {}
-            };
-        }
-
-        // Set the note html value in the editor
-        if (this.ckeInstance) {
-            this.ckeInstance.setData(this.model.note);
-        }
-    }
-
-    registerOnChange(fn: Function): void {
-        this.onModelChange = fn;
-    }
-
-    registerOnTouched(fn: Function): void {
-        this.onModelTouched = fn;
-    }
-
     /**
      * Configures the CKEditor for QuickNote functionality.
      *
      * Sets the height of the CKEditor dynamically to the height of the wrapper upon initialization.
      * Removes the toolbar on the bottom and configures a slimmed down version of the toolbar.
      */
-    getCKEditorConfig(): any {
+    private getCKEditorConfig(): any {
         let editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
 
         return {
@@ -448,7 +457,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      *
      * @returns {{top: number, left: number}}
      */
-    getCursorPosition(): any {
+    private getCursorPosition(): any {
         let range = this.ckeInstance.getSelection().getRanges()[0];
         let cursorEl = range.startContainer.$.parentElement;
         let editorEl = this.ckeInstance.editable().$;
@@ -476,5 +485,38 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
         // Set the margin-top of the dropdown
         this.quickNoteResults.instance.element.nativeElement.style.setProperty('margin-top', marginTop + 'px');
+    }
+
+    /**
+     * Show the placeholder text if the editor is empty
+     */
+    private showPlaceholder(): void {
+        if (!this.ckeInstance.getData()) {
+            this.ckeInstance.editable().getParent().$.appendChild(this.placeholderElement);
+            this.placeholderVisible = true;
+        }
+    }
+
+    /**
+     * Hide the placeholder text by removing the placeholder element from the DOM
+     */
+    private hidePlaceholder(): void {
+        if (this.placeholderVisible) {
+            this.ckeInstance.editable().getParent().$.removeChild(this.placeholderElement);
+            this.placeholderVisible = false;
+        }
+    }
+
+    /**
+     * Get or create the single placeholder object that is constructed only when needed.
+     */
+    private get placeholderElement(): any {
+        if (!this._placeholderElement) {
+            this._placeholderElement = document.createElement('div');
+            this._placeholderElement.className = 'placeholder';
+            this._placeholderElement.style.cssText = 'margin: 20px; color: #AAAAAA; font-family: sans-serif; font-size: 13px; line-height: 20px; position: absolute; top: 0';
+            this._placeholderElement.textContent = this.placeholder;
+        }
+        return this._placeholderElement;
     }
 }
