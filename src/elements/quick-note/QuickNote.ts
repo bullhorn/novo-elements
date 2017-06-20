@@ -280,6 +280,9 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
                 note: value,
                 references: this.model.references
             };
+        } else {
+            // Note is empty, so remove all references
+            this.model.references = {};
         }
 
         // Inform listeners to the ngModel change event that something has changed
