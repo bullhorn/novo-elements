@@ -37,6 +37,10 @@ export class QuickNoteResults extends PickerResults {
         super(element, labels);
     }
 
+    get term() {
+        return this._term;
+    }
+
     set term(value) {
         this._term = value.searchTerm;
         this.taggingMode = value.taggingMode;
