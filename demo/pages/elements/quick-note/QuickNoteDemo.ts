@@ -78,7 +78,7 @@ export class QuickNoteDemoComponent {
                 boos: '^'
             },
             options: {
-                tags: ['First', 'Second'],
+                tags: ['First', 'Second', 'Space Between'],
                 references: ['Third', 'Fourth'],
                 boos: ['Test']
             },

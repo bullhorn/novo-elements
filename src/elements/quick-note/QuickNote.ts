@@ -307,12 +307,13 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      */
     private showResults(): void {
         if (this.isTagging) {
-            if (this.searchTerm.length) {
+            let searchTerm = this.getSearchTerm();
+            if (searchTerm.length) {
                 // Update Matches
                 if (this.quickNoteResults) {
                     // Update existing list
                     this.quickNoteResults.instance.term = {
-                        searchTerm: this.searchTerm,
+                        searchTerm: searchTerm,
                         taggingMode: this.taggingMode
                     };
                 } else {
@@ -321,7 +322,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
                     this.quickNoteResults.instance.parent = this;
                     this.quickNoteResults.instance.config = this.config;
                     this.quickNoteResults.instance.term = {
-                        searchTerm: this.searchTerm,
+                        searchTerm: searchTerm,
                         taggingMode: this.taggingMode
                     };
                     this.positionResultsDropdown();
@@ -379,18 +380,21 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
     /**
      * Convenience method that gets the current word that the cursor is on, minus the tag.
+     * Also, trims any whitespace before/after the term to aid in searching.
      */
-    private get searchTerm(): string {
-        let word = this.getWordAtCursor();
+    private getSearchTerm(): string {
+        let word = this.getWordAtCursor().trim();
         if (this.isTagging) {
             let symbol = this.config.triggers[this.taggingMode];
-            return word.slice(word.indexOf(symbol) + symbol.length);
+            word = word.slice(word.indexOf(symbol) + symbol.length);
         }
         return word;
     }
 
     /**
-     * Gets the current word that the cursor is on CKEditor.
+     * Gets the current word that the cursor is on CKEditor. Current word starts at the beginning of the line or a
+     * tag character if we are in tagging mode. Current word ends at the end of the line or an empty space.
+     *
      * @returns plain text string (removes all html formatting)
      */
     private getWordAtCursor(): string {
@@ -399,17 +403,17 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
         if (start.type === CKEDITOR.NODE_TEXT && range.startOffset) {
             let text = start.getText();
-            let previousSpace = text.lastIndexOf(' ', range.startOffset - 1) + 1;
-            let nextSpace = text.indexOf(' ', range.startOffset);
-            if (previousSpace === -1) {
-                previousSpace = 0;
+            let symbol = this.config.triggers[this.taggingMode];
+            let wordStart = text.lastIndexOf(symbol, range.startOffset - 1);
+            let wordEnd = text.indexOf(' ', range.startOffset + 1);
+            if (wordStart === -1) {
+                wordStart = 0;
             }
-            if (nextSpace === -1) {
-                nextSpace = text.length;
+            if (wordEnd === -1) {
+                wordEnd = text.length;
             }
 
-            // Range at the non-zero position of a text node
-            return text.substring(previousSpace, nextSpace);
+            return text.substring(wordStart, wordEnd);
         }
 
         // Selection starts at the 0 index of the text node or there's no previous text node in contents

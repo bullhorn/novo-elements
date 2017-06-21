@@ -119,6 +119,7 @@ describe('Elements: QuickNoteElement', () => {
                 // Add the character to the editorValue if it's a character
                 if (key.length === 1) {
                     this.editorValue += key;
+                    this.currentWord += key;
                 }
                 // Return the CKEditor key event object
                 this.keyEvent({
@@ -142,6 +143,7 @@ describe('Elements: QuickNoteElement', () => {
             valueSetByUser: (value: string): void => {
                 // Call the changeEvent callback and simulate enough time for the debounce to occur
                 this.editorValue = value;
+                this.currentWord = '';
                 this.changeEvent();
                 tick(251);
             },
@@ -182,7 +184,7 @@ describe('Elements: QuickNoteElement', () => {
                                         }
                                     };
                                 },
-                                getText: () => '@john',
+                                getText: () => this.currentWord,
                                 type: 3, // CKEDITOR.NODE_TEXT
                                 $: { // The native element
                                     parentElement: {
@@ -191,7 +193,7 @@ describe('Elements: QuickNoteElement', () => {
                                     }
                                 }
                             },
-                            startOffset: 5,
+                            startOffset: this.currentWord.length,
                             moveToPosition: () => {}
                         }];
                     },
@@ -397,6 +399,7 @@ describe('Elements: QuickNoteElement', () => {
         it('should handle some keyboard events within resultsComponent.', fakeAsync(() => {
             ckEditorInstance.valueSetByUser('Note about: ');
             ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
             ckEditorInstance.userPausedAfterEntry();
 
             expect(mockResults.visible).toBe(true);
@@ -418,6 +421,7 @@ describe('Elements: QuickNoteElement', () => {
             expect(mockResults.visible).toBe(false);
 
             ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
             ckEditorInstance.userPausedAfterEntry();
 
             expect(mockResults.visible).toBe(true);
@@ -426,6 +430,54 @@ describe('Elements: QuickNoteElement', () => {
             ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
 
             expect(mockResults.visible).toBe(false);
+        }));
+
+        it('should handle searching with spaces.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.keyEnteredByUser(' ');
+            ckEditorInstance.keyEnteredByUser('b');
+            ckEditorInstance.keyEnteredByUser('u');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+        }));
+
+        it('should handle searching with a space afterwards.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.keyEnteredByUser(' ');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a>  ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
         }));
 
         it('should show/hide placeholder text properly.', fakeAsync(() => {
