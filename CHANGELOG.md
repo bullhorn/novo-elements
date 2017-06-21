@@ -1,3 +1,13 @@
+<a name="2.0.213"></a>
+## [2.0.213](https://github.com/bullhorn/novo-elements/compare/v2.0.212...v2.0.213) (2017-06-21)
+
+
+### Bug Fixes
+
+* **dropdown:** starts with search and clear active when hiding ([191204c](https://github.com/bullhorn/novo-elements/commit/191204c))
+
+
+
 <a name="2.0.212"></a>
 ## [2.0.212](https://github.com/bullhorn/novo-elements/compare/v2.0.211...v2.0.212) (2017-06-21)
 
