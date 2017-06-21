@@ -140,7 +140,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     }
 
     setInitialFileList() {
-        if (this.value && this.value.length > 0) {
+        if (this.value) {
             this.files = this.value;
         }
     }
