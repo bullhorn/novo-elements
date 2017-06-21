@@ -180,6 +180,11 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
                 this.parentScrollElement.removeEventListener('scroll', this.closeHandler);
             }
         }
+        // Clear active index
+        if (this.activeIndex !== -1) {
+            this._items.toArray()[this.activeIndex].active = false;
+        }
+        this.activeIndex = -1;
     }
 
     @HostListener('keydown', ['$event'])
@@ -234,7 +239,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
             let char = String.fromCharCode(event.keyCode);
             this.filterTerm = this.filterTerm.concat(char);
             let index = this._textItems.findIndex((value: string) => {
-                return value.toLocaleLowerCase().indexOf(this.filterTerm.toLowerCase()) !== -1;
+                return new RegExp(`^${this.filterTerm.toLowerCase()}`).test(value.toLocaleLowerCase());
             });
             if (index !== -1) {
                 if (this.activeIndex !== -1) {
