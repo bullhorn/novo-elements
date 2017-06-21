@@ -1,3 +1,19 @@
+<a name="2.0.212"></a>
+## [2.0.212](https://github.com/bullhorn/novo-elements/compare/v2.0.211...v2.0.212) (2017-06-21)
+
+
+### Bug Fixes
+
+* **pickers:** fixing keyboard control and highlighting ([da09b47](https://github.com/bullhorn/novo-elements/commit/da09b47))
+* **quicknote:** Fixing quick note demo and clean up ([305550a](https://github.com/bullhorn/novo-elements/commit/305550a))
+
+
+### Features
+
+* **dropdown:** keyboard navigation & support ([8fb2def](https://github.com/bullhorn/novo-elements/commit/8fb2def))
+
+
+
 <a name="2.0.211"></a>
 ## [2.0.211](https://github.com/bullhorn/novo-elements/compare/v2.0.210...v2.0.211) (2017-06-15)
 
