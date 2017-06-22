@@ -227,6 +227,9 @@ describe('Elements: QuickNoteElement', () => {
                     };
                 }
             },
+            focusManager: {
+                blur: (): void => {}
+            },
             removeAllListeners: (): void => {
             },
             destroy: (): void => {
