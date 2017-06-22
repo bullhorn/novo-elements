@@ -97,8 +97,10 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     public ngOnDestroy(): void {
         // Tear down the CKEditor instance
         if (this.ckeInstance) {
+            this.ckeInstance.focusManager.blur(true); // Remove focus from editor
             setTimeout(() => {
                 this.ckeInstance.removeAllListeners();
+                CKEDITOR.instances[this.ckeInstance.name].destroy();
                 this.ckeInstance.destroy();
                 this.ckeInstance = null;
             });
