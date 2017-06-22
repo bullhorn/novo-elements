@@ -29,9 +29,9 @@ describe('Elements: NovoDateTimePickerElement', () => {
         component = fixture.debugElement.componentInstance;
     }));
 
-    describe('Method: toggleTimePicker()', () => {
+    describe('Method: toggleView()', () => {
         it('should set the componentTabState', () => {
-            component.toggleTimePicker('TEST');
+            component.toggleView('TEST');
             expect(component.componentTabState).toEqual('TEST');
         });
     });

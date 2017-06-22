@@ -58,8 +58,8 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
     template: `
         <div class="date-time-container">
             <div class="date-time-tabs">
-                <span class="date-tab" (click)="toggleTimePicker('date')" [@dateTextState]="componentTabState">{{selectedLabel}}</span>
-                <span class="time-tab" (click)="toggleTimePicker('time')" [@timeTextState]="componentTabState">
+                <span class="date-tab" (click)="toggleView('date')" [@dateTextState]="componentTabState">{{selectedLabel}}</span>
+                <span class="time-tab" (click)="toggleView('time')" [@timeTextState]="componentTabState">
                     <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span
                     class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
                     <span *ngIf="!military" class="meridian">{{meridian}}</span>
@@ -101,7 +101,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
 
     constructor(public labels: NovoLabelService, private element: ElementRef) { }
 
-    toggleTimePicker(tab: string): void {
+    toggleView(tab: string): void {
         this.componentTabState = tab;
     }
 
@@ -140,6 +140,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
         this.setDateLabels(this.model);
         this.onModelChange(this.model);
         this.onSelect.emit({ date: this.model });
+        this.toggleView('time');
     }
 
     onTimeSelected(event: { hours?: number, minutes?: number, meridian?: string, date?: Date, text?: string }) {
@@ -159,6 +160,8 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
         this.model = model;
         if (Helpers.isEmpty(model)) {
             this.model = new Date();
+        } else if (!isNaN(model)) {
+            this.model = new Date(model);
         }
         this.datePickerValue = this.model;
         this.timePickerValue = this.model;
