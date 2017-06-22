@@ -277,6 +277,10 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         // Get the html text in CKEditor
         let value = this.ckeInstance.getData();
 
+        // Remove empty 'ZERO WIDTH SPACE' characters that can get added erroneously by the editor
+        let regex = new RegExp(String.fromCharCode(8203), 'g');
+        value = value.replace(regex, '');
+
         // Make sure that any references in the model are still valid
         if (!this.config.keepReferences) {
             this.validateReferences();
