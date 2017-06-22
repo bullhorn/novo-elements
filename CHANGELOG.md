@@ -1,3 +1,13 @@
+<a name="2.0.217"></a>
+## [2.0.217](https://github.com/bullhorn/novo-elements/compare/v2.0.216...v2.0.217) (2017-06-22)
+
+
+### Features
+
+* **quicknote:** CK editor implementation of quick note ([f9f7942](https://github.com/bullhorn/novo-elements/commit/f9f7942))
+
+
+
 <a name="2.0.216"></a>
 ## [2.0.216](https://github.com/bullhorn/novo-elements/compare/v2.0.215...v2.0.216) (2017-06-22)
 
