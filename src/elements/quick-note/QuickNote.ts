@@ -454,6 +454,10 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     private validateReferences(): void {
         let html = this.ckeInstance.document.getBody().getHtml();
 
+        // CKEditor stopped supporting the config.forceSimpleAmpersand setting, so we have to convert '&amp;' to '&'
+        // when we pull html from the editor - see: https://dev.ckeditor.com/ticket/13723
+        html = html.replace('&amp;', '&');
+
         Object.keys(this.model.references).forEach(taggingMode => {
             let array = this.model.references[taggingMode] || [];
             let symbol = this.config.triggers[taggingMode];
@@ -481,7 +485,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         let editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
 
         return {
-            scayt_autoStartup: true,
+            scayt_autoStartup: true, // turns on Spell Checking As You Type
             height: editorHeight,
             removePlugins: 'elementspath', // removes the html tags in status bar
             resize_enabled: false, // hides the status bar

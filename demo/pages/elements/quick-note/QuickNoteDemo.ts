@@ -84,10 +84,10 @@ export class QuickNoteDemoComponent {
             },
             renderer: {
                 tags: (symbol, item) => {
-                    return `<a href="http://www.bullhorn.com">${symbol}${item.label}</a>`;
+                    return `<a href="https://www.google.com/search?q=bullhorn&oq=bullhorn">${symbol}${item.label}</a>`;
                 },
                 references: (symbol, item) => {
-                    return `<a href="http://www.bullhorn.com">${symbol}${item.label}</a>`;
+                    return `<a href="https://www.google.com/search?q=bullhorn&oq=bullhorn">${symbol}${item.label}</a>`;
                 },
                 boos: (symbol, item) => {
                     return `<strong>${symbol}${item.label}</strong>`;
