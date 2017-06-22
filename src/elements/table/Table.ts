@@ -866,8 +866,26 @@ export class NovoTableElement implements DoCheck {
                 } else {
                     row._editing[column.name] = false;
                 }
+                row = this.specialtyRenderers(column, row);
             });
         });
+        this._dataProvider.refresh();
+    }
+
+    specialtyRenderers(control, row): Object {
+        if (control.dataSpecialization === 'PERCENTAGE') {
+            let value = row[control.name];
+            row[control.name] = value % 1 === 0 ? value : value * 100;
+        }
+        return row;
+    }
+
+    undoSpecialtyRenderers(control, row): Object {
+        if (control.dataSpecialization === 'PERCENTAGE') {
+            let value = row[control.name];
+            row[control.name] = value % 1 === 0 ? value / 100 : value;
+        }
+        return row;
     }
 
     /**
@@ -881,9 +899,9 @@ export class NovoTableElement implements DoCheck {
             row._editing = row._editing || {};
             this.columns.forEach((column) => {
                 row._editing[column.name] = false;
+                row = this.undoSpecialtyRenderers(column, row);
             });
         });
-        this._dataProvider.undo();
         this.hideToastMessage();
     }
 
