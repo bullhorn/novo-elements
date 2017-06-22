@@ -92,6 +92,8 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     hours: string;
     minutes: string;
     meridian: string;
+    datePickerValue: Date = new Date();
+    timePickerValue: Date = new Date();
 
     model: any;
     onModelChange: Function = () => { };
@@ -133,17 +135,23 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     }
 
     onDateSelected(event: { month?: any, year?: any, day?: any, date?: Date }) {
-        this.model = event.date;
-        this.setDateLabels(event.date);
-        this.onModelChange(event.date);
-        this.onSelect.emit(event);
+        this.datePickerValue = event.date;
+        this.model = this.createFullDateValue(this.datePickerValue, this.timePickerValue);
+        this.setDateLabels(this.model);
+        this.onModelChange(this.model);
+        this.onSelect.emit({ date: this.model });
     }
 
     onTimeSelected(event: { hours?: number, minutes?: number, meridian?: string, date?: Date, text?: string }) {
-        this.model = event.date;
-        this.setTimeLabels(event.date);
-        this.onModelChange(event.date);
-        this.onSelect.emit(event);
+        this.timePickerValue = event.date;
+        this.model = this.createFullDateValue(this.datePickerValue, this.timePickerValue);
+        this.setTimeLabels(this.model);
+        this.onModelChange(this.model);
+        this.onSelect.emit({ date: this.model });
+    }
+
+    createFullDateValue(datePickerValue: Date, timePickerValue: Date) {
+        return dateFns.setMilliseconds(dateFns.setSeconds(dateFns.setMinutes(dateFns.setHours(datePickerValue, dateFns.getHours(timePickerValue)), dateFns.getMinutes(timePickerValue)), dateFns.getSeconds(timePickerValue)), dateFns.getMilliseconds(timePickerValue));
     }
 
     // ValueAccessor Functions
@@ -152,6 +160,8 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
         if (Helpers.isEmpty(model)) {
             this.model = new Date();
         }
+        this.datePickerValue = this.model;
+        this.timePickerValue = this.model;
         if (Helpers.isDate(this.model)) {
             this.setDateLabels(this.model);
             this.setTimeLabels(this.model);

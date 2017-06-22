@@ -83,13 +83,14 @@ describe('Elements: NovoDateTimePickerElement', () => {
     });
 
     describe('Method: onDateSelected()', () => {
+        let now = new Date();
         beforeEach(() => {
             spyOn(component, 'setDateLabels');
             spyOn(component, 'onModelChange');
             spyOn(component.onSelect, 'emit');
+            spyOn(component, 'createFullDateValue').and.returnValue(now);
         });
         it('should call and set everything right', () => {
-            let now = new Date();
             component.onDateSelected({ date: now });
             expect(component.model).toEqual(now);
             expect(component.setDateLabels).toHaveBeenCalledWith(now);
@@ -99,13 +100,14 @@ describe('Elements: NovoDateTimePickerElement', () => {
     });
 
     describe('Method: onTimeSelected()', () => {
+        let now = new Date();
         beforeEach(() => {
             spyOn(component, 'onModelChange');
             spyOn(component, 'setTimeLabels');
             spyOn(component.onSelect, 'emit');
+            spyOn(component, 'createFullDateValue').and.returnValue(now);
         });
         it('should call and set everything right', () => {
-            let now = new Date();
             component.onTimeSelected({ date: now });
             expect(component.model).toEqual(now);
             expect(component.onModelChange).toHaveBeenCalledWith(now);
@@ -123,6 +125,8 @@ describe('Elements: NovoDateTimePickerElement', () => {
             let now = new Date();
             component.writeValue(now);
             expect(component.model).toEqual(now);
+            expect(component.timePickerValue).toEqual(now);
+            expect(component.datePickerValue).toEqual(now);
             expect(component.setDateLabels).toHaveBeenCalled();
             expect(component.setTimeLabels).toHaveBeenCalled();
         });
