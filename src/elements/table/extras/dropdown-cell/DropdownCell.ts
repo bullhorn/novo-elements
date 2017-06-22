@@ -20,7 +20,7 @@ export interface INovoDropdownCellConfig {
             <list>
                 <ng-container *ngFor="let config of meta.dropdownCellConfig; let i = index">
                     <dropdown-item-header *ngIf="config.category">{{ config.category }}</dropdown-item-header>
-                    <item *ngFor="let option of config.options" (click)="onClick(config, option, option.value)" [class.active]="(option || option.value) === value">
+                    <item *ngFor="let option of config.options" (action)="onClick(config, option, option.value)" [class.active]="(option || option.value) === value">
                         <span [attr.data-automation-id]="option.label || option">{{ option.label || option }}</span> <i *ngIf="(option || option.value) === value" class="bhi-check"></i>
                     </item>
                     <hr *ngIf="i < meta.dropdownCellConfig.length - 1"/>

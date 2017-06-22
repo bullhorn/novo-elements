@@ -81,8 +81,8 @@ novo-dropdown-container {
                 color: darken($light, 55%);
             }
             &.active {
+                background: lighten($light, 10%);
                 color: darken($light, 55%);
-                font-weight: 500;
             }
             &.disabled {
                 color: $light;

@@ -50,7 +50,7 @@ export class DatePickerDemoComponent {
     time: Date = new Date();
     dateOne: Date = new Date();
     dateTwo: Date = new Date();
-    dateTime: Date = new Date();
+    dateTime: Date = new Date('12/04/1987');
     start: any = new Date().setMonth(new Date().getMonth() - 1);
     end: any = new Date().setMonth(new Date().getMonth() + 1);
     value: any = {

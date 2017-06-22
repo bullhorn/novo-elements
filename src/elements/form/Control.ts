@@ -122,7 +122,7 @@ export class NovoCustomControlContainerElement {
                                 <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
                                 <i (click)="toggleActive($event)" class="bhi-clock" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
-                                <novo-time-picker *ngIf="active" (onSelect)="formatTimeValue($event);" [formControlName]="control.key"></novo-time-picker>
+                                <novo-time-picker *ngIf="active" (onSelect)="formatTimeValue($event);" [formControlName]="control.key" [military]="control.military"></novo-time-picker>
                             </div>
                             <!--Date-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
@@ -136,7 +136,7 @@ export class NovoCustomControlContainerElement {
                                 <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
                                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
-                                <novo-date-time-picker *ngIf="active" (onSelect)="formatDateTimeValue($event); modelChange($event);" [formControlName]="control.key"></novo-date-time-picker>
+                                <novo-date-time-picker *ngIf="active" (onSelect)="formatDateTimeValue($event); modelChange($event);" [formControlName]="control.key" [military]="control.military"></novo-date-time-picker>
                             </div>
                             <!--Address-->
                             <novo-address *ngSwitchCase="'address'" [formControlName]="control.key"></novo-address>

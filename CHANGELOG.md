@@ -1,3 +1,64 @@
+<a name="2.0.216"></a>
+## [2.0.216](https://github.com/bullhorn/novo-elements/compare/v2.0.215...v2.0.216) (2017-06-22)
+
+
+### Bug Fixes
+
+* **datetimepicker:** Fixing the initial rendering ([4294c80](https://github.com/bullhorn/novo-elements/commit/4294c80))
+
+
+
+<a name="2.0.215"></a>
+## [2.0.215](https://github.com/bullhorn/novo-elements/compare/v2.0.214...v2.0.215) (2017-06-22)
+
+
+### Bug Fixes
+
+* **datetimepicker:** Fixing the value being emitted on the model to respect the date/time values together ([ae02471](https://github.com/bullhorn/novo-elements/commit/ae02471))
+
+
+
+<a name="2.0.214"></a>
+## [2.0.214](https://github.com/bullhorn/novo-elements/compare/v2.0.213...v2.0.214) (2017-06-22)
+
+
+### Bug Fixes
+
+* **FileInput:** files should be set to value, even if an empty array is provided ([#489](https://github.com/bullhorn/novo-elements/issues/489)) ([757dfab](https://github.com/bullhorn/novo-elements/commit/757dfab))
+
+
+### Features
+
+* **datetimepicker:** Refactoring the date time picker to avoid duplicate code and properly support military ([1b827ae](https://github.com/bullhorn/novo-elements/commit/1b827ae))
+
+
+
+<a name="2.0.213"></a>
+## [2.0.213](https://github.com/bullhorn/novo-elements/compare/v2.0.212...v2.0.213) (2017-06-21)
+
+
+### Bug Fixes
+
+* **dropdown:** starts with search and clear active when hiding ([191204c](https://github.com/bullhorn/novo-elements/commit/191204c))
+
+
+
+<a name="2.0.212"></a>
+## [2.0.212](https://github.com/bullhorn/novo-elements/compare/v2.0.211...v2.0.212) (2017-06-21)
+
+
+### Bug Fixes
+
+* **pickers:** fixing keyboard control and highlighting ([da09b47](https://github.com/bullhorn/novo-elements/commit/da09b47))
+* **quicknote:** Fixing quick note demo and clean up ([305550a](https://github.com/bullhorn/novo-elements/commit/305550a))
+
+
+### Features
+
+* **dropdown:** keyboard navigation & support ([8fb2def](https://github.com/bullhorn/novo-elements/commit/8fb2def))
+
+
+
 <a name="2.0.211"></a>
 ## [2.0.211](https://github.com/bullhorn/novo-elements/compare/v2.0.210...v2.0.211) (2017-06-15)
 
