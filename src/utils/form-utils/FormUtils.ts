@@ -237,15 +237,15 @@ export class FormUtils {
                 control = new PickerControl(controlConfig);
                 break;
             case 'datetime':
-                controlConfig.military = !!config.military;
+                controlConfig.military = config ? !!config.military : false;
                 control = new DateTimeControl(controlConfig);
                 break;
             case 'date':
-                controlConfig.military = !!config.military;
+                controlConfig.military = config ? !!config.military : false;
                 control = new DateControl(controlConfig);
                 break;
             case 'time':
-                controlConfig.military = !!config.military;
+                controlConfig.military = config ? !!config.military : false;
                 control = new TimeControl(controlConfig);
                 break;
             case 'currency':
