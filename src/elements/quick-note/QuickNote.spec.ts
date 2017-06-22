@@ -233,7 +233,8 @@ describe('Elements: QuickNoteElement', () => {
             removeAllListeners: (): void => {
             },
             destroy: (): void => {
-            }
+            },
+            name: 'instance'
         };
 
         // Mock out CKEDITOR global object that returns the CKEditor test instance
@@ -241,6 +242,11 @@ describe('Elements: QuickNoteElement', () => {
             NODE_TEXT: 3,
             replace: () => {
                 return ckEditorInstance;
+            },
+            instances: {
+                'instance': {
+                    destroy: () => {}
+                }
             }
         };
 
