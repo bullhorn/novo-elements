@@ -1,3 +1,13 @@
+<a name="2.0.215"></a>
+## [2.0.215](https://github.com/bullhorn/novo-elements/compare/v2.0.214...v2.0.215) (2017-06-22)
+
+
+### Bug Fixes
+
+* **datetimepicker:** Fixing the value being emitted on the model to respect the date/time values together ([ae02471](https://github.com/bullhorn/novo-elements/commit/ae02471))
+
+
+
 <a name="2.0.214"></a>
 ## [2.0.214](https://github.com/bullhorn/novo-elements/compare/v2.0.213...v2.0.214) (2017-06-22)
 
