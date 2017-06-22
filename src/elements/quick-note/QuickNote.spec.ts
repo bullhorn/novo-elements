@@ -355,6 +355,41 @@ describe('Elements: QuickNoteElement', () => {
             });
         }));
 
+        it('should leave references in the model when keepReferences is true.', fakeAsync(() => {
+            component.config.keepReferences = true;
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+
+            ckEditorInstance.valueSetByUser('Note about: ');
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+        }));
+
         it('should not add duplicate references to the model.', fakeAsync(() => {
             ckEditorInstance.valueSetByUser('Note about: ');
             ckEditorInstance.keyEnteredByUser('@');

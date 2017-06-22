@@ -278,7 +278,9 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         let value = this.ckeInstance.getData();
 
         // Make sure that any references in the model are still valid
-        this.validateReferences();
+        if (!this.config.keepReferences) {
+            this.validateReferences();
+        }
 
         // Possibly show results if the user has entered a search term
         this.showResults();
