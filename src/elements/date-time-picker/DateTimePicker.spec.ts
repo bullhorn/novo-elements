@@ -1,12 +1,15 @@
 // NG2
 import { TestBed, async } from '@angular/core/testing';
-// App
+import { FormsModule } from '@angular/forms';
+// APP
 import { NovoDateTimePickerElement } from './DateTimePicker';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
+import { NovoTimePickerModule } from '../time-picker/TimePicker.module';
 
 describe('Elements: NovoDateTimePickerElement', () => {
     let fixture;
-    let component;
+    let component: NovoDateTimePickerElement;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -15,191 +18,134 @@ describe('Elements: NovoDateTimePickerElement', () => {
             ],
             providers: [
                 { provide: NovoLabelService, useClass: NovoLabelService }
+            ],
+            imports: [
+                FormsModule,
+                NovoDatePickerModule,
+                NovoTimePickerModule
             ]
         }).compileComponents();
         fixture = TestBed.createComponent(NovoDateTimePickerElement);
         component = fixture.debugElement.componentInstance;
     }));
 
-    describe('Method: ngOnInit()', () => {
-        it('should initialize correctly', () => {
-            expect(component.ngOnInit).toBeTruthy();
-            component.ngOnInit();
-        });
-    });
-
-    describe('Method: ngOnChanges()', () => {
-        it('should initialize correctly', () => {
-            expect(component.ngOnChanges).toBeTruthy();
-            component.ngOnChanges();
-        });
-    });
-
-    describe('Method: isDisabled()', () => {
-        it('should initialize correctly', () => {
-            expect(component.isDisabled).toBeTruthy();
-            component.isDisabled();
-        });
-    });
-
-    describe('Method: updateTime()', () => {
-        it('should be defined.', () => {
-            expect(component.updateTime).toBeTruthy();
-            component.updateTime();
-        });
-    });
-
-    describe('Method: updateCal()', () => {
-        it('should be defined.', () => {
-            expect(component.updateCal).toBeTruthy();
-            component.updateCal();
-        });
-    });
-
-    describe('Method: setToday()', () => {
-        it('should be defined.', () => {
-            expect(component.setToday).toBeTruthy();
-            component.setToday();
-        });
-    });
-
-    describe('Method: setMonth()', () => {
-        it('should be defined.', () => {
-            expect(component.setMonth).toBeTruthy();
-            component.setMonth();
-        });
-    });
-
-    describe('Method: setYear()', () => {
-        it('should be defined.', () => {
-            expect(component.setYear).toBeTruthy();
-            component.setYear();
-        });
-    });
-
-    describe('Method: select()', () => {
-        it('should be defined.', () => {
-            expect(component.select).toBeTruthy();
-            // component.select();
-        });
-    });
-
-    describe('Method: open()', () => {
-        it('should be defined.', () => {
-            expect(component.open).toBeTruthy();
-            component.open();
-        });
-    });
-
-    describe('Method: previousMonth()', () => {
-        it('should be defined.', () => {
-            expect(component.previousMonth).toBeTruthy();
-            // component.previousMonth();
-        });
-    });
-
-    describe('Method: nextMonth()', () => {
-        it('should be defined.', () => {
-            expect(component.nextMonth).toBeTruthy();
-            // component.nextMonth();
-        });
-    });
-
-    describe('Method: updateHeading()', () => {
-        it('should be defined.', () => {
-            expect(component.updateHeading).toBeTruthy();
-            component.updateHeading();
-        });
-    });
-
-    describe('Method: removeTime()', () => {
-        it('should be defined.', () => {
-            expect(component.removeTime).toBeTruthy();
-            component.removeTime();
-        });
-    });
-
-    describe('Method: buildMonth()', () => {
-        it('should be defined.', () => {
-            expect(component.buildMonth).toBeTruthy();
-            // component.buildMonth();
-        });
-    });
-
-    describe('Method: buildWeek()', () => {
-        it('should be defined.', () => {
-            expect(component.buildWeek).toBeTruthy();
-            // component.buildWeek();
-        });
-    });
-
-    describe('Method: setHours()', () => {
-        it('should be defined.', () => {
-            expect(component.setHours).toBeTruthy();
-            component.setHours();
-        });
-    });
-
-    describe('Method: setMinutes()', () => {
-        it('should be defined.', () => {
-            expect(component.setMinutes).toBeTruthy();
-            component.setMinutes();
-        });
-    });
-
-    describe('Method: setPeriod()', () => {
-        it('should be defined.', () => {
-            expect(component.setPeriod).toBeTruthy();
-            component.setPeriod();
-        });
-    });
-
-    describe('Method: dispatchChange()', () => {
-        it('should be defined.', () => {
-            expect(component.dispatchChange).toBeTruthy();
-            component.dispatchChange();
-        });
-    });
-
-    describe('Method: clearTime()', () => {
-        it('should be defined.', () => {
-            expect(component.clearTime).toBeTruthy();
-            component.clearTime();
-        });
-    });
-
     describe('Method: toggleTimePicker()', () => {
-        it('should be defined.', () => {
-            expect(component.toggleTimePicker).toBeTruthy();
-            component.toggleTimePicker();
+        it('should set the componentTabState', () => {
+            component.toggleTimePicker('TEST');
+            expect(component.componentTabState).toEqual('TEST');
+        });
+    });
+
+    describe('Method: setTimeLabels()', () => {
+        it('should set the meridian correctly (PM)', () => {
+            component.setTimeLabels(new Date('12/04/1987 1:00 PM'));
+            expect(component.meridian).toEqual('PM');
+        });
+        it('should set the meridian correctly (AM)', () => {
+            component.setTimeLabels(new Date('12/04/1987 1:00 AM'));
+            expect(component.meridian).toEqual('AM');
+        });
+        it('should set the hours correctly (12hr + single digit)', () => {
+            component.setTimeLabels(new Date('12/04/1987 1:00 PM'));
+            expect(component.hours).toEqual('01');
+        });
+        it('should set the hours correctly (24hr)', () => {
+            component.military = true;
+            component.setTimeLabels(new Date('12/04/1987 1:00 PM'));
+            expect(component.hours).toEqual('13');
+            component.military = false;
+        }); it('should set the hours correctly (12hr + @12PM)', () => {
+            component.setTimeLabels(new Date('12/04/1987 12:00 PM'));
+            expect(component.hours).toEqual('12');
+        });
+        it('should set the hours correctly (12hr + @12AM)', () => {
+            component.setTimeLabels(new Date('12/04/1987 12:00 AM'));
+            expect(component.hours).toEqual('12');
+        });
+        it('should set the minutes correctly (single digit)', () => {
+            component.setTimeLabels(new Date('12/04/1987 1:05 PM'));
+            expect(component.minutes).toEqual('05');
+        });
+        it('should set the minutes correctly (double digit)', () => {
+            component.setTimeLabels(new Date('12/04/1987 1:20 PM'));
+            expect(component.minutes).toEqual('20');
+        });
+    });
+
+    describe('Method: setDateLabels()', () => {
+        beforeEach(() => {
+            spyOn(component.labels, 'formatDateWithFormat').and.returnValue('LABEL');
+        });
+        it('should set the selectedLabel', () => {
+            component.setDateLabels(new Date());
+            expect(component.selectedLabel).toEqual('LABEL');
+        });
+    });
+
+    describe('Method: onDateSelected()', () => {
+        beforeEach(() => {
+            spyOn(component, 'setDateLabels');
+            spyOn(component, 'onModelChange');
+            spyOn(component.onSelect, 'emit');
+        });
+        it('should call and set everything right', () => {
+            let now = new Date();
+            component.onDateSelected({ date: now });
+            expect(component.model).toEqual(now);
+            expect(component.setDateLabels).toHaveBeenCalledWith(now);
+            expect(component.onModelChange).toHaveBeenCalledWith(now);
+            expect(component.onSelect.emit).toHaveBeenCalledWith({ date: now });
+        });
+    });
+
+    describe('Method: onTimeSelected()', () => {
+        beforeEach(() => {
+            spyOn(component, 'onModelChange');
+            spyOn(component, 'setTimeLabels');
+            spyOn(component.onSelect, 'emit');
+        });
+        it('should call and set everything right', () => {
+            let now = new Date();
+            component.onTimeSelected({ date: now });
+            expect(component.model).toEqual(now);
+            expect(component.onModelChange).toHaveBeenCalledWith(now);
+            expect(component.setTimeLabels).toHaveBeenCalledWith(now);
+            expect(component.onSelect.emit).toHaveBeenCalledWith({ date: now });
         });
     });
 
     describe('Method: writeValue()', () => {
-        it('should be defined.', () => {
-            expect(component.writeValue).toBeTruthy();
-            component.writeValue();
+        beforeEach(() => {
+            spyOn(component, 'setDateLabels');
+            spyOn(component, 'setTimeLabels');
+        });
+        it('set the model and labels with correct date', () => {
+            let now = new Date();
+            component.writeValue(now);
+            expect(component.model).toEqual(now);
+            expect(component.setDateLabels).toHaveBeenCalled();
+            expect(component.setTimeLabels).toHaveBeenCalled();
+        });
+        it('set the model and labels with nothing passed', () => {
+            component.writeValue(undefined);
+            expect(component.setDateLabels).toHaveBeenCalled();
+            expect(component.setTimeLabels).toHaveBeenCalled();
         });
     });
 
     describe('Method: registerOnChange()', () => {
-        it('should be defined.', () => {
-            expect(component.registerOnChange).toBeTruthy();
-            component.registerOnChange();
+        it('should set the fn', () => {
+            let test = () => { };
+            component.registerOnChange(test);
+            expect(component.onModelChange).toEqual(test);
         });
     });
 
     describe('Method: registerOnTouched()', () => {
-        it('should be defined.', () => {
-            expect(component.registerOnTouched).toBeTruthy();
-            component.registerOnTouched();
-        });
-    });
-
-    describe('Method: checkBetween()', () => {
-        it('should be defined.', () => {
-            expect(component.checkBetween).toBeTruthy();
-            component.checkBetween();
+        it('should set the fn', () => {
+            let test = () => { };
+            component.registerOnTouched(test);
+            expect(component.onModelTouched).toEqual(test);
         });
     });
 });

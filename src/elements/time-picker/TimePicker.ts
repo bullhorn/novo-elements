@@ -15,9 +15,9 @@ const TIME_PICKER_VALUE_ACCESSOR = {
     selector: 'novo-time-picker',
     providers: [TIME_PICKER_VALUE_ACCESSOR],
     template: `
-        <div class="digital">
+        <div class="digital" [class.inline]="inline" [class.military]="military">
             <div class="digital--inner">
-                <span class="digital--clock">
+                <span class="digital--clock" *ngIf="!inline">
                     <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
                 </span>
                 <div class="control-block" *ngIf="!military">
@@ -51,6 +51,7 @@ const TIME_PICKER_VALUE_ACCESSOR = {
 })
 export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
     @Input() military: boolean = false;
+    @Input() inline: boolean = false;
     @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
     hours: number = 12;

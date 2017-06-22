@@ -212,7 +212,7 @@ export class FormDemoComponent {
         // Calendar input controls
         this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
         this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
-        this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time' });
+        this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time', military: true });
         this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
 
         let calculateTaxes = (form) => {
@@ -245,7 +245,7 @@ export class FormDemoComponent {
         this.fieldInteractionForm = formUtils.toFormGroup([this.salesTaxControl, this.itemValueControl, this.totalValueControl, this.hasCommentsControl, this.commentsControl]);
 
         // Dynamic
-        this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, { token: 'TOKEN' }, {
+        this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, { token: 'TOKEN', military: true }, {
             customfield: {
                 customControl: CustomDemoComponent
             }
@@ -253,7 +253,7 @@ export class FormDemoComponent {
         formUtils.setInitialValuesFieldsets(this.dynamic, { firstName: 'Initial F Name', number: 12 });
         this.dynamicForm = formUtils.toFormGroupFromFieldset(this.dynamic);
 
-        this.dynamicVertical = formUtils.toControls(MockMeta, '$ USD', {}, { token: 'TOKEN' });
+        this.dynamicVertical = formUtils.toControls(MockMeta, '$ USD', {}, { token: 'TOKEN', military: true });
         formUtils.setInitialValues(this.dynamicVertical, { number: 0, firstName: 'Bobby Flay' });
         this.dynamicVerticalForm = formUtils.toFormGroup(this.dynamicVertical);
 

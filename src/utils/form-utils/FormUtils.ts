@@ -154,7 +154,7 @@ export class FormUtils {
         return type;
     }
 
-    getControlForField(field: any, http, config: { token?: string, restUrl?: string }, overrides?) {
+    getControlForField(field: any, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {
         // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
         // TODO: (cont.) as the setter of the field argument
         let type: string = this.determineInputType(field) || field.type;
@@ -237,12 +237,15 @@ export class FormUtils {
                 control = new PickerControl(controlConfig);
                 break;
             case 'datetime':
+                controlConfig.military = !!config.military;
                 control = new DateTimeControl(controlConfig);
                 break;
             case 'date':
+                controlConfig.military = !!config.military;
                 control = new DateControl(controlConfig);
                 break;
             case 'time':
+                controlConfig.military = !!config.military;
                 control = new TimeControl(controlConfig);
                 break;
             case 'currency':
@@ -311,7 +314,7 @@ export class FormUtils {
         return control;
     }
 
-    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string }, overrides?) {
+    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {
         let controls = [];
         if (meta && meta.fields) {
             let fields = meta.fields;
@@ -330,7 +333,7 @@ export class FormUtils {
         return controls;
     }
 
-    toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string }, overrides?) {
+    toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {
         let fieldsets: Array<NovoFieldset> = [];
         let ranges = [];
         if (meta && meta.fields) {
@@ -404,7 +407,7 @@ export class FormUtils {
         }
     }
 
-    getControlOptions(field: any, http, config: { token?: string, restUrl?: string }): any {
+    getControlOptions(field: any, http, config: { token?: string, restUrl?: string, military?: boolean }): any {
         // TODO: The token property of config is the only property used; just pass in `token: string`
         if (field.dataType === 'Boolean' && !field.options) {
             // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
