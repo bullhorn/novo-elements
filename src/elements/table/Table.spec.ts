@@ -421,7 +421,8 @@ describe('Elements: NovoTableElement', () => {
     describe('Method: setTableEdit()', () => {
         beforeEach(() => {
             component._dataProvider = {
-                edit: () => {}
+                edit: () => { },
+                refresh: () => { }
             };
             component.columns = [
                 {
@@ -473,6 +474,58 @@ describe('Elements: NovoTableElement', () => {
                     }
                 }
             ]);
+        });
+    });
+
+    describe('Method: specialtyRenderers(control, row)', () => {
+        let row, control;
+        beforeEach(() => {
+            row = {
+                percentage: 0.22
+            };
+
+            control = {
+                name: 'percentage',
+                dataSpecialization: 'PERCENTAGE'
+            };
+        });
+
+        it('should be defined.', () => {
+            expect(component.specialtyRenderers).toBeDefined();
+        });
+
+        it('should render percentage cell value 0.22 to 22', () => {
+            component.specialtyRenderers(control, row);
+            expect(row.percentage).toBe(22);
+        });
+
+        it('should not manipulate whole numbers', () => {
+            row.percentage = 60;
+            component.specialtyRenderers(control, row);
+            expect(row.percentage).toBe(60);
+        });
+    });
+
+    describe('Method: undoSpecialtyRenderers(control, row)', () => {
+        let row, control;
+        beforeEach(() => {
+            row = {
+                percentage: 22
+            };
+
+            control = {
+                name: 'percentage',
+                dataSpecialization: 'PERCENTAGE'
+            };
+        });
+
+        it('should be defined.', () => {
+            expect(component.undoSpecialtyRenderers).toBeDefined();
+        });
+
+        it('should render percentage cell value 22 to 0.22', () => {
+            component.undoSpecialtyRenderers(control, row);
+            expect(row.percentage).toBe(0.22);
         });
     });
 
