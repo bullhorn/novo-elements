@@ -1,3 +1,13 @@
+<a name="2.0.216"></a>
+## [2.0.216](https://github.com/bullhorn/novo-elements/compare/v2.0.215...v2.0.216) (2017-06-22)
+
+
+### Bug Fixes
+
+* **datetimepicker:** Fixing the initial rendering ([4294c80](https://github.com/bullhorn/novo-elements/commit/4294c80))
+
+
+
 <a name="2.0.215"></a>
 ## [2.0.215](https://github.com/bullhorn/novo-elements/compare/v2.0.214...v2.0.215) (2017-06-22)
 
