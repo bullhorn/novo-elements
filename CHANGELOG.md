@@ -1,3 +1,18 @@
+<a name="2.0.214"></a>
+## [2.0.214](https://github.com/bullhorn/novo-elements/compare/v2.0.213...v2.0.214) (2017-06-22)
+
+
+### Bug Fixes
+
+* **FileInput:** files should be set to value, even if an empty array is provided ([#489](https://github.com/bullhorn/novo-elements/issues/489)) ([757dfab](https://github.com/bullhorn/novo-elements/commit/757dfab))
+
+
+### Features
+
+* **datetimepicker:** Refactoring the date time picker to avoid duplicate code and properly support military ([1b827ae](https://github.com/bullhorn/novo-elements/commit/1b827ae))
+
+
+
 <a name="2.0.213"></a>
 ## [2.0.213](https://github.com/bullhorn/novo-elements/compare/v2.0.212...v2.0.213) (2017-06-21)
 
