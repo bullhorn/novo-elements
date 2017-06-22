@@ -2,6 +2,12 @@
     div.data {
         padding: 10px;
     }
+    &.custom-results {
+        .quick-note-wrapper {
+            // Tests the dynamic sizing of the CKEditor
+            height: 300px;
+        }
+    }
     quick-note-results,
     .quick-note-results {
         novo-list {

@@ -53,8 +53,10 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
 
     ngOnDestroy() {
         if (this.instance) {
+            this.instance.focusManager.blur(true); // Remove focus from editor
             setTimeout(() => {
                 this.instance.removeAllListeners();
+                CKEDITOR.instances[this.instance.name].destroy();
                 this.instance.destroy();
                 this.instance = null;
             });

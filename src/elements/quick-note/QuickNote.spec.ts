@@ -1,15 +1,76 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 // App
 import { QuickNoteElement } from './QuickNote';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 
 describe('Elements: QuickNoteElement', () => {
+    // Mocks used in the tests
     let fixture;
     let component;
+    let parentForm;
+    let ckEditorInstance;
+    let mockResults;
 
-    beforeEach(async(() => {
+    class MockQuickNoteResults {
+        public instance: any = this;
+        public element: any = null;
+        public parentComponent: any = null;
+        public visible: boolean = false;
+        public taggingMode: string = 'person';
+        public selectedIndex: number = 0; // 0 = nothing is selected
+        public selectedValue: any = { value: 'j.bullhorn', label: 'John Bullhorn' };
+        public nativeElementProperties: any = {};
+
+        constructor(parentComponent: any) {
+            this.parentComponent = parentComponent;
+
+            // Mock out the native element
+            this.element = {
+                nativeElement: {
+                    style: {
+                        setProperty: (property: string, value: string): void => {
+                            this.nativeElementProperties[property] = value;
+                        }
+                    }
+                }
+            };
+        }
+
+        prevActiveMatch(): void {
+            this.selectedIndex--;
+        }
+
+        nextActiveMatch(): void {
+            this.selectedIndex++;
+        }
+
+        selectActiveMatch(): void {
+            // Call onSelected and hideResults on the parent, if a match is selected,
+            // just like the real QuickNoteResults
+            if (this.selectedIndex) {
+                this.parentComponent.onSelected(this.taggingMode, this.selectedValue);
+                this.parentComponent.hideResults();
+            }
+            component.hideResults();
+        }
+
+        destroy(): void {
+            this.visible = false;
+            this.selectedIndex = 0;
+        }
+    }
+
+    class MockComponentUtils {
+        appendNextToLocation() {
+            mockResults.visible = true;
+            return mockResults;
+        }
+    }
+
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
                 QuickNoteElement
@@ -18,145 +79,475 @@ describe('Elements: QuickNoteElement', () => {
                 FormsModule
             ],
             providers: [
-                { provide: ComponentUtils, useClass: ComponentUtils }
+                { provide: ComponentUtils, useClass: MockComponentUtils }
             ]
         }).compileComponents();
         fixture = TestBed.createComponent(QuickNoteElement);
         component = fixture.debugElement.componentInstance;
 
+        // Create a config for tagging persons using '@'
         component.config = {
-            triggers: {},
-            options: {}
+            triggers: {
+                person: '@'
+            },
+            options: {
+                person: ['John Bullhorn', 'Jane Bullhorn', 'Bob Bullhorn']
+            },
+            renderer: {
+                person: (symbol: string, item: any): string => {
+                    return `<a href="http://www.bullhorn.com">${symbol}${item.label}</a>`;
+                }
+            }
         };
+
+        // Create the mock results dropdown
+        mockResults = new MockQuickNoteResults(component);
+
+        /**
+         * CKEditor mock instance.
+         *
+         * Call valueSetByUser to simulate a user pasting text into the CKEditor and replacing all the existing text.
+         * Call keyEnteredByUser to simulate a user pressing a key in CKEditor.
+         * Call userPausedAfterEntry to simulate a user waiting for the keystrokes to be picked up.
+         */
+        ckEditorInstance = {
+            isPlaceholderVisible: () => this.placeholderVisible,
+            config: {
+                height: 200
+            },
+            keyEnteredByUser: (key: string, keyCode: number): void => {
+                // Add the character to the editorValue if it's a character
+                if (key.length === 1) {
+                    this.editorValue += key;
+                    this.currentWord += key;
+                }
+                // Return the CKEditor key event object
+                this.keyEvent({
+                    data: {
+                        domEvent: {
+                            $: { // The native element
+                                key: key,
+                                keyCode: keyCode
+                            }
+                        }
+                    },
+                    cancel: () => {}
+                });
+            },
+            blurByUser: (): void => {
+                this.blurEvent({});
+            },
+            focusByUser: (): void => {
+                this.focusEvent({});
+            },
+            valueSetByUser: (value: string): void => {
+                // Call the changeEvent callback and simulate enough time for the debounce to occur
+                this.editorValue = value;
+                this.currentWord = '';
+                this.changeEvent();
+                tick(251);
+            },
+            userPausedAfterEntry: (): void => {
+                this.changeEvent();
+                tick(251);
+            },
+            on: (name: string, callback: any): void => {
+                if (name === 'key') {
+                    this.keyEvent = callback;
+                } else if (name === 'change') {
+                    this.changeEvent = callback;
+                } else if (name === 'blur') {
+                    this.blurEvent = callback;
+                } else if (name === 'focus') {
+                    this.focusEvent = callback;
+                } else if (name === 'instanceReady') {
+                    // Immediately invoke the instanceReady callback
+                    callback({});
+                }
+            },
+            getData: (): any => {
+                return this.editorValue;
+            },
+            setData: (model: any): void => {
+                this.editorValue = model;
+            },
+            getSelection: (): any => {
+                return {
+                    getRanges: () => {
+                        return [{
+                            startContainer: {
+                                getParent: () => {
+                                    return {
+                                        getHtml: () => this.editorValue,
+                                        setHtml: (html) => {
+                                            this.editorValue = html;
+                                        }
+                                    };
+                                },
+                                getText: () => this.currentWord,
+                                type: 3, // CKEDITOR.NODE_TEXT
+                                $: { // The native element
+                                    parentElement: {
+                                        offsetTop: 100,
+                                        offsetLeft: 0
+                                    }
+                                }
+                            },
+                            startOffset: this.currentWord.length,
+                            moveToPosition: () => {}
+                        }];
+                    },
+                    selectRanges: () => {}
+                };
+            },
+            editable: (): any => {
+                return {
+                    $: { // The native element
+                        scrollTop: 50,
+                        scrollLeft: 0
+                    },
+                    getParent: (): any => {
+                        return {
+                            $: { // The native element
+                                appendChild: (node) => {
+                                    this.placeholderVisible = true;
+                                },
+                                removeChild: (node) => {
+                                    this.placeholderVisible = false;
+                                }
+                            },
+                        };
+                    }
+                };
+            },
+            document: {
+                getBody: (): any => {
+                    return {
+                        getHtml: (): string => this.editorValue
+                    };
+                }
+            },
+            focusManager: {
+                blur: (): void => {}
+            },
+            removeAllListeners: (): void => {
+            },
+            destroy: (): void => {
+            },
+            name: 'instance'
+        };
+
+        // Mock out CKEDITOR global object that returns the CKEditor test instance
+        window['CKEDITOR'] = {
+            NODE_TEXT: 3,
+            replace: () => {
+                return ckEditorInstance;
+            },
+            instances: {
+                'instance': {
+                    destroy: () => {}
+                }
+            }
+        };
+
+        // Mock out the form that this element is a part of - forms use ngModel
+        parentForm = {
+            getValue: (): any => this.value,
+            onModelChange: (value: any): void => {
+                this.value = value;
+            },
+            onModelTouched: (): void => {
+                this.touchCount = this.touchCount ? this.touchCount++ : 0;
+            }
+        };
+
+        // Initialize the component
+        component.ngOnInit();
+        component.ngAfterViewInit();
+
+        // Initialize the component within the mock parent form
+        component.registerOnChange(parentForm.onModelChange);
+        component.registerOnTouched(parentForm.onModelTouched);
+    });
+
+    afterAll(fakeAsync(() => {
+        component.ngOnDestroy();
     }));
 
-    it('should initialize correctly', () => {
-        expect(component).toBeTruthy();
-    });
+    describe('QuickNote Functionality', () => {
 
-    xdescribe('Method: ngOnInit(event)', () => {
-        it('should be defined.', () => {
-            expect(component.ngOnInit).toBeDefined();
-            component.ngOnInit();
-        });
-    });
+        it('should add the selected item to the list of references and populate note.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
 
-    describe('Method: onKeyPress(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onKeyPress).toBeDefined();
-            component.onKeyPress();
-        });
-    });
+            expect(mockResults.visible).toBe(false);
+            expect(mockResults.nativeElementProperties).toEqual({});
 
-    xdescribe('Method: onChange(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onChange).toBeDefined();
-            component.onChange();
-        });
-    });
+            ckEditorInstance.userPausedAfterEntry();
 
-    describe('Method: onKeyUp(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onKeyUp).toBeDefined();
-            component.onKeyUp();
-        });
-    });
+            expect(mockResults.visible).toBe(true);
+            expect(mockResults.nativeElementProperties).toEqual({'margin-top': '120px'});
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: @john',
+                references: {}
+            });
 
-    xdescribe('Method: onScroll(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onScroll).toBeDefined();
-            component.onScroll();
-        });
-    });
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
 
-    xdescribe('Method: updateFormattedNote(event)', () => {
-        it('should be defined.', () => {
-            expect(component.updateFormattedNote).toBeDefined();
-            component.updateFormattedNote();
-        });
-    });
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
 
-    xdescribe('Method: renderLink(event)', () => {
-        it('should be defined.', () => {
-            expect(component.renderLink).toBeDefined();
-            component.renderLink();
-        });
-    });
+            ckEditorInstance.valueSetByUser('');
 
-    xdescribe('Method: extractSearchQuery(event)', () => {
-        it('should be defined.', () => {
-            expect(component.extractSearchQuery).toBeDefined();
-            component.extractSearchQuery();
-        });
-    });
+            expect(parentForm.getValue()).toEqual(null);
+        }));
 
-    describe('Method: onFocus(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onFocus).toBeDefined();
-            component.onFocus();
-        });
-    });
+        it('should remove references from the model when their rendered text is removed from the note.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
 
-    describe('Method: showResults(event)', () => {
-        it('should be defined.', () => {
-            expect(component.showResults).toBeDefined();
-            component.showResults();
-        });
-    });
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
 
-    describe('Method: hideResults(event)', () => {
-        it('should be defined.', () => {
-            expect(component.hideResults).toBeDefined();
-            component.hideResults();
-        });
-    });
+            ckEditorInstance.valueSetByUser('Note about: ');
 
-    xdescribe('Method: onSelected(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onSelected).toBeDefined();
-            component.onSelected();
-        });
-    });
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: ',
+                references: {}
+            });
 
-    xdescribe('Method: replaceLastOccurrence(event)', () => {
-        it('should be defined.', () => {
-            expect(component.replaceLastOccurrence).toBeDefined();
-            component.replaceLastOccurrence();
-        });
-    });
+            // Make sure that the model is set properly on the second time through
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
 
-    describe('Method: onTouched(event)', () => {
-        it('should be defined.', () => {
-            expect(component.onTouched).toBeDefined();
-            component.onTouched();
-        });
-    });
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+        }));
 
-    describe('Method: writeValue(event)', () => {
-        it('should be defined.', () => {
-            expect(component.writeValue).toBeDefined();
-            component.writeValue();
-        });
-    });
+        it('should leave references in the model when keepReferences is true.', fakeAsync(() => {
+            component.config.keepReferences = true;
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
 
-    describe('Method: registerOnChange(event)', () => {
-        it('should be defined.', () => {
-            expect(component.registerOnChange).toBeDefined();
-            component.registerOnChange();
-        });
-    });
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
 
-    describe('Method: registerOnTouched(event)', () => {
-        it('should be defined.', () => {
-            expect(component.registerOnTouched).toBeDefined();
-            component.registerOnTouched();
-        });
-    });
+            ckEditorInstance.valueSetByUser('Note about: ');
 
-    xdescribe('Method: getCaretCoordinates(event)', () => {
-        it('should be defined.', () => {
-            expect(component.getCaretCoordinates).toBeDefined();
-            component.getCaretCoordinates();
-        });
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+        }));
+
+        it('should not add duplicate references to the model.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+        }));
+
+        it('should handle some keyboard events within resultsComponent.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.userPausedAfterEntry();
+
+            expect(mockResults.visible).toBe(true);
+            expect(mockResults.selectedIndex).toBe(0);
+
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+
+            expect(mockResults.visible).toBe(true);
+            expect(mockResults.selectedIndex).toBe(2);
+
+            ckEditorInstance.keyEnteredByUser('UpArrow', KeyCodes.UP);
+
+            expect(mockResults.visible).toBe(true);
+            expect(mockResults.selectedIndex).toBe(1);
+
+            ckEditorInstance.keyEnteredByUser('Escape', KeyCodes.ESC);
+
+            expect(mockResults.visible).toBe(false);
+
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.userPausedAfterEntry();
+
+            expect(mockResults.visible).toBe(true);
+            expect(mockResults.selectedIndex).toBe(0);
+
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+
+            expect(mockResults.visible).toBe(false);
+        }));
+
+        it('should handle searching with spaces.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.keyEnteredByUser(' ');
+            ckEditorInstance.keyEnteredByUser('b');
+            ckEditorInstance.keyEnteredByUser('u');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+        }));
+
+        it('should handle searching with a space afterwards.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.keyEnteredByUser('o');
+            ckEditorInstance.keyEnteredByUser('h');
+            ckEditorInstance.keyEnteredByUser('n');
+            ckEditorInstance.keyEnteredByUser(' ');
+            ckEditorInstance.userPausedAfterEntry();
+            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+
+            expect(parentForm.getValue()).toEqual({
+                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a>  ',
+                references: {
+                    person: [{
+                        value: 'j.bullhorn',
+                        label: 'John Bullhorn'
+                    }]
+                }
+            });
+        }));
+
+        it('should show/hide placeholder text properly.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('');
+
+            expect(ckEditorInstance.isPlaceholderVisible()).toBe(true);
+
+            ckEditorInstance.focusByUser();
+
+            expect(ckEditorInstance.isPlaceholderVisible()).toBe(false);
+
+            ckEditorInstance.blurByUser();
+
+            expect(ckEditorInstance.isPlaceholderVisible()).toBe(true);
+
+            ckEditorInstance.focusByUser();
+            ckEditorInstance.valueSetByUser('.');
+            ckEditorInstance.blurByUser();
+
+            expect(ckEditorInstance.isPlaceholderVisible()).toBe(false);
+
+            ckEditorInstance.focusByUser();
+            ckEditorInstance.valueSetByUser('');
+            ckEditorInstance.blurByUser();
+
+            expect(ckEditorInstance.isPlaceholderVisible()).toBe(true);
+        }));
     });
 });
