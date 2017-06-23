@@ -417,8 +417,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     restrictKeys(event) {
-        const NUMBERS_ONLY = /[0-9]/;
-        const NUMBERS_WITH_DECIMAL = /[0-9\.]/;
+        const NUMBERS_ONLY = /[0-9\-]/;
+        const NUMBERS_WITH_DECIMAL = /[0-9\.\-]/;
         let key = String.fromCharCode(event.charCode);
         //Types
         if (this.control.subType === 'number' && !NUMBERS_ONLY.test(key)) {
