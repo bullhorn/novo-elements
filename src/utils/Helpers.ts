@@ -226,7 +226,7 @@ export class Helpers {
     static deepClone(item: any): any {
         if (Array.isArray(item)) {
             let newArr = [];
-            for (let i = item.length; i-- > 0; ) { // tslint:disable-line`
+            for (let i = item.length; i-- > 0;) { // tslint:disable-line
                 newArr[i] = Helpers.deepClone(item[i]);
             }
             return newArr;

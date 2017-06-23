@@ -31,7 +31,7 @@ export class ArrayCollection<T> implements Collection<T> {
 
     constructor(source: Array<T> = []) {
         this.source = source;
-        this.editData = Helpers.deepClone(this.source);
+        this.editData = this.copy(this.source);
         this.filterData = this.source.slice();
     }
 
@@ -68,7 +68,7 @@ export class ArrayCollection<T> implements Collection<T> {
      */
     edit() {
         this.isEditing = true;
-        this.editData = Helpers.deepClone(this.source);
+        this.editData = this.copy(this.source);
     }
 
     /**
@@ -76,7 +76,7 @@ export class ArrayCollection<T> implements Collection<T> {
      */
     undo() {
         this.isEditing = false;
-        this.source = Helpers.deepClone(this.editData);
+        this.source = this.copy(this.editData);
         this.refresh();
     }
 
@@ -149,7 +149,18 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     clone(): ArrayCollection<T> {
-        return new ArrayCollection(this.isEditing ? (Helpers.deepClone(this.editData) as any[]) : (Helpers.deepClone(this.source) as any[]));
+        return new ArrayCollection(this.isEditing ? this.copy(this.editData) : this.copy(this.source));
+    }
+
+    /**
+    * Creates a copy of the current ArrayCollection any.
+    *
+    * @returns {Array}
+    *
+    * @memberOf ArrayCollection
+    */
+    copy(array: any[]): any[] {
+        return Helpers.deepClone(array);
     }
 
     /**
