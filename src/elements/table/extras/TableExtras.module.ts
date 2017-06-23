@@ -13,6 +13,7 @@ import { TableFilter } from './table-filter/TableFilter';
 import { ThOrderable } from './th-orderable/ThOrderable';
 import { ThSortable } from './th-sortable/ThSortable';
 import { DateCell } from './date-cell/DateCell';
+import { PercentageCell } from './percentage-cell/PercentageCell';
 import { NovoDropdownCell } from './dropdown-cell/DropdownCell';
 import { NovoTableKeepFilterFocus } from './keep-filter-focus/KeepFilterFocus';
 import { NovoTableActionsElement } from './table-actions/TableActions';
@@ -39,6 +40,7 @@ import { NovoTableHeaderElement } from './table-header/TableHeader';
         ThOrderable,
         ThSortable,
         DateCell,
+        PercentageCell,
         NovoDropdownCell
     ],
     exports: [
@@ -53,10 +55,12 @@ import { NovoTableHeaderElement } from './table-header/TableHeader';
         ThOrderable,
         ThSortable,
         DateCell,
+        PercentageCell,
         NovoDropdownCell
     ],
     entryComponents: [
         DateCell,
+        PercentageCell,
         NovoDropdownCell
     ]
 })

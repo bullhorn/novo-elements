@@ -31,8 +31,8 @@ export class ArrayCollection<T> implements Collection<T> {
 
     constructor(source: Array<T> = []) {
         this.source = source;
-        this.editData = this.source.slice();
-        this.filterData = source.slice();
+        this.editData = Helpers.deepClone(this.source);
+        this.filterData = this.source.slice();
     }
 
     get length() {
@@ -68,7 +68,7 @@ export class ArrayCollection<T> implements Collection<T> {
      */
     edit() {
         this.isEditing = true;
-        this.editData = this.source.slice();
+        this.editData = Helpers.deepClone(this.source);
     }
 
     /**
@@ -76,7 +76,7 @@ export class ArrayCollection<T> implements Collection<T> {
      */
     undo() {
         this.isEditing = false;
-        this.source = this.editData.slice();
+        this.source = Helpers.deepClone(this.editData);
         this.refresh();
     }
 
@@ -85,7 +85,7 @@ export class ArrayCollection<T> implements Collection<T> {
      */
     commit() {
         this.isEditing = false;
-        this.editData = this.source.slice();
+        this.source = this.filterData.slice();
         this.refresh();
     }
 
@@ -149,7 +149,7 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     clone(): ArrayCollection<T> {
-        return new ArrayCollection(this.isEditing ? this.editData.slice() : this.source.slice());
+        return new ArrayCollection(this.isEditing ? (Helpers.deepClone(this.editData) as any[]) : (Helpers.deepClone(this.source) as any[]));
     }
 
     /**
@@ -238,13 +238,11 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     removeAll(): void {
-        //let oldData = this.filterData.slice();
         this.source = [];
         this.editData = [];
         this.filterData = [];
         this.onDataChange(new CollectionEvent(CollectionEvent.REMOVE_ALL, []));
         this.refresh();
-        //this.onDataChange(new CollectionEvent(CollectionEvent.REMOVE_ALL, oldData));
     }
 
     /**

@@ -82,8 +82,11 @@ export class BaseControl {
     customControl?: any;
     customControlConfig?: any;
     military?: boolean;
+    // Keep track of the original config used to create this object
+    originalConfig: NovoControlConfig;
 
     constructor(config: NovoControlConfig) {
+        this.originalConfig = config;
         this.validators = config.validators || [];
         this.asyncValidators = config.asyncValidators || [];
         this.value = config.value;

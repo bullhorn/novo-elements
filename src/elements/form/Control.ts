@@ -89,7 +89,8 @@ export class NovoCustomControlContainerElement {
                             <!--TODO prefix/suffix on the control-->
                             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
                                 <input *ngIf="control.type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)">
-                                <input *ngIf="control.type === 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (keypress)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="numberInput.blur()" #numberInput>
+                                <input *ngIf="control.type === 'number' && control.subType !== 'percentage'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (keypress)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="numberInput.blur()" #numberInput>
+                                <input *ngIf="control.type === 'number' && control.subType === 'percentage'" [type]="control.type" [placeholder]="control.placeholder" (keypress)="restrictKeys($event)" [value]="percentValue" (input)="handlePercentChange($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="percentInput.blur()" #percentInput>
                                 <label class="input-label" *ngIf="control.subType === 'currency'">{{control.currencyFormat}}</label>
                                 <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
                             </div>
@@ -204,6 +205,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private _focused: boolean = false;
     private _enteredText: string = '';
     formattedValue: string = '';
+    percentValue: number;
     maxLengthMet: boolean = false;
     characterCount: number = 0;
     private forceClearSubscription: any;
@@ -265,6 +267,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                     }
                 }
             }
+        }
+        if (this.control && this.control.subType === 'percentage') {
+            this.percentValue = this.control.value * 100;
         }
     }
 
@@ -425,6 +430,13 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         if (this.control.maxlength && event.target.value.length >= this.control.maxlength) {
             event.preventDefault();
         }
+    }
+
+    handlePercentChange(event: KeyboardEvent) {
+        let value = event.target['value'];
+        let percent = Helpers.isEmpty(value) ? null : Number(value) / 100;
+        this.change.emit(percent);
+        this.form.controls[this.control.key].setValue(percent);
     }
 
     emitChange(value) {
