@@ -86,7 +86,7 @@ export class BaseControl {
     customControlConfig?: any;
     military?: boolean;
 
-    constructor(type: string, config: NovoControlConfig) {
+    constructor(type: string = 'BaseControl', config: NovoControlConfig = {}) {
         this.__type = type;
         this.__config = config;
         this.validators = config.validators || [];
