@@ -5,8 +5,8 @@ export class RadioControl extends BaseControl {
     controlType = 'radio';
     options = [];
 
-    constructor(config:NovoControlConfig) {
-        super(config);
+    constructor(config: NovoControlConfig) {
+        super('RadioControl', config);
         this.options = config.options || [];
     }
 }

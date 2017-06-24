@@ -48,7 +48,7 @@ export class ControlFactory {
             case 'TimeControl':
                 return new TimeControl(config);
             default:
-                console.warn('[BaseControl] - unable to find control for type. Make sure to set "editorType" and "editorConfig" on your column', type);
+                console.warn('[ControlFactory] - unable to find control for type. Make sure to set "editorType" and "editorConfig" on your column', type);
                 return null;
         }
     }

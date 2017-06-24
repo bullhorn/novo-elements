@@ -8,7 +8,7 @@ export class TextBoxControl extends BaseControl {
     subType: string;
 
     constructor(config: NovoControlConfig) {
-        super(config);
+        super('TextBoxControl', config);
         this.type = this.getTextboxType(config.type) || '';
         this.subType = config.type || '';
         this.setValidators(this.subType);

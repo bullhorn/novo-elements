@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 // APP
 import {
+    BaseControl,
     AddressControl,
     CheckListControl,
     CheckboxControl,
@@ -17,7 +18,8 @@ import {
     TextBoxControl,
     TilesControl,
     TimeControl,
-    NovoControlConfig
+    NovoControlConfig,
+    TablePickerControl
 } from '../../elements/form/FormControls';
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from '../Helpers';
@@ -154,7 +156,7 @@ export class FormUtils {
         return type;
     }
 
-    getControlForField(field: any, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {
+    getControlForField(field: any, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any, forTable: boolean = false) {
         // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
         // TODO: (cont.) as the setter of the field argument
         let type: string = this.determineInputType(field) || field.type;
@@ -222,19 +224,19 @@ export class FormUtils {
                 controlConfig.multiple = true;
                 controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
                 controlConfig.config.previewTemplate = overridePreviewTemplate || EntityPickerResult;
-                control = new PickerControl(controlConfig);
+                control = forTable ? new TablePickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'chips':
                 controlConfig.multiple = true;
-                control = new PickerControl(controlConfig);
+                control = forTable ? new TablePickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'entitypicker':
                 // TODO: This doesn't belong in this codebase
                 controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
-                control = new PickerControl(controlConfig);
+                control = forTable ? new TablePickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'picker':
-                control = new PickerControl(controlConfig);
+                control = forTable ? new TablePickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'datetime':
                 controlConfig.military = config ? !!config.military : false;
@@ -314,7 +316,7 @@ export class FormUtils {
         return control;
     }
 
-    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {
+    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any, forTable: boolean = false) {
         let controls = [];
         if (meta && meta.fields) {
             let fields = meta.fields;
@@ -331,6 +333,18 @@ export class FormUtils {
             });
         }
         return controls;
+    }
+
+    toTableControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any) {
+        let controls = this.toControls(meta, currencyFormat, http, config, overrides, true);
+        let ret = {};
+        controls.forEach((control: BaseControl) => {
+            ret[control.key] = {
+                editorType: control.__type,
+                editorConfig: control.__config
+            };
+        });
+        return ret;
     }
 
     toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {
