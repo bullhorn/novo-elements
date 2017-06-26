@@ -322,7 +322,7 @@ export class FormUtils {
             let fields = meta.fields;
             fields.forEach(field => {
                 if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
-                    let control = this.getControlForField(field, http, config, overrides);
+                    let control = this.getControlForField(field, http, config, overrides, forTable);
                     // Set currency format
                     if (control.subType === 'currency') {
                         control.currencyFormat = currencyFormat;
