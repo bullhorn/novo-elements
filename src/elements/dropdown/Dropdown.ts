@@ -239,7 +239,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
             let char = String.fromCharCode(event.keyCode);
             this.filterTerm = this.filterTerm.concat(char);
             let index = this._textItems.findIndex((value: string) => {
-                return new RegExp(`^${this.filterTerm.toLowerCase()}`).test(value.toLocaleLowerCase());
+                return new RegExp(`^${this.filterTerm.toLowerCase()}`).test(value.trim().toLowerCase());
             });
             if (index !== -1) {
                 if (this.activeIndex !== -1) {
