@@ -1,3 +1,13 @@
+<a name="2.0.218"></a>
+## [2.0.218](https://github.com/bullhorn/novo-elements/compare/v2.0.217...v2.0.218) (2017-06-27)
+
+
+### Bug Fixes
+
+* **dropdown:** Searching fix ([fbc0b94](https://github.com/bullhorn/novo-elements/commit/fbc0b94))
+
+
+
 <a name="2.0.217"></a>
 ## [2.0.217](https://github.com/bullhorn/novo-elements/compare/v2.0.216...v2.0.217) (2017-06-22)
 
