@@ -188,8 +188,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     @Input() condensed: boolean = false;
     @Output() change: EventEmitter<any> = new EventEmitter();
 
-    valueChangeSubscription: any;
-
     @Output('blur')
     get onBlur(): Observable<FocusEvent> {
         return this._blurEmitter.asObservable();
@@ -209,6 +207,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     maxLengthMet: boolean = false;
     characterCount: number = 0;
     private forceClearSubscription: any;
+    private percentChangeSubscription: any;
+    private valueChangeSubscription: any;
 
     constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService) {
         super(element);
@@ -270,6 +270,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
         if (this.control && this.control.subType === 'percentage') {
             this.percentValue = this.control.value * 100;
+             this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.debounceTime(300).subscribe(value => {
+                 this.percentValue = value * 100;
+            });
         }
     }
 
@@ -289,6 +292,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         if (this.forceClearSubscription) {
             // Un-listen for clear events
             this.forceClearSubscription.unsubscribe();
+        }
+        if (this.percentChangeSubscription) {
+            // Un-listen for clear events
+            this.percentChangeSubscription.unsubscribe();
         }
         super.ngOnDestroy();
     }
