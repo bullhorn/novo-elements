@@ -394,10 +394,9 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         let word = this.getWordAtCursor().trim();
         if (this.isTagging) {
             let symbol = this.config.triggers[this.taggingMode];
-            if (word.indexOf(symbol) === -1) {
-                this.zone.run(() => {
-                    this.hideResults();
-                });
+            if (!word.includes(symbol)) {
+                this.hideResults();
+                return '';
             }
             word = word.slice(word.indexOf(symbol) + symbol.length);
         }
