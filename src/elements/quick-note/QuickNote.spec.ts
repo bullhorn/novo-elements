@@ -6,7 +6,7 @@ import { QuickNoteElement } from './QuickNote';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 
-fdescribe('Elements: QuickNoteElement', () => {
+describe('Elements: QuickNoteElement', () => {
     // Mocks used in the tests
     let fixture;
     let component;
