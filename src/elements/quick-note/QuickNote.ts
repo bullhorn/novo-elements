@@ -284,9 +284,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         value = value.replace(regex, '');
 
         // Make sure that any references in the model are still valid
-        if (!this.config.keepReferences) {
-            this.validateReferences();
-        }
+        this.validateReferences();
 
         // Possibly show results if the user has entered a search term
         this.showResults();
@@ -464,7 +462,8 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
         // CKEditor stopped supporting the config.forceSimpleAmpersand setting, so we have to convert '&amp;' to '&'
         // when we pull html from the editor - see: https://dev.ckeditor.com/ticket/13723
-        html = html.replace('&amp;', '&');
+        let ampRegex = new RegExp('&amp;', 'g');
+        html = html.replace(ampRegex, '&');
 
         Object.keys(this.model.references).forEach(taggingMode => {
             let array = this.model.references[taggingMode] || [];
