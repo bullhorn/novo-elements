@@ -269,9 +269,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
             }
         }
         if (this.control && this.control.subType === 'percentage') {
-            this.percentValue = this.control.value * 100;
-             this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.debounceTime(300).subscribe(value => {
-                 this.percentValue = value * 100;
+            this.percentValue = Number((this.control.value * 100).toFixed(6).replace(/\.?0*$/, ''));
+            this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe(value => {
+                 this.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
             });
         }
     }
@@ -441,9 +441,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     handlePercentChange(event: KeyboardEvent) {
         let value = event.target['value'];
-        let percent = Helpers.isEmpty(value) ? null : Number(value) / 100;
-        this.change.emit(percent);
-        this.form.controls[this.control.key].setValue(percent);
+        let percent = Helpers.isEmpty(value) ? null : Number((value / 100).toFixed(6).replace(/\.?0*$/, ''));
+        if (percent) {
+            this.change.emit(percent);
+            this.form.controls[this.control.key].setValue(percent);
+        }
     }
 
     emitChange(value) {
