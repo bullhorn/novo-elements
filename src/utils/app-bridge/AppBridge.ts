@@ -13,7 +13,7 @@ export enum AppBridgeHandler {
     UPDATE
 }
 
-export type NovoApps = 'record' | 'add';
+export type NovoApps = 'record' | 'add' | 'fast-add';
 export interface IAppBridgeOpenEvent {
     type: NovoApps;
     entityType: string;
