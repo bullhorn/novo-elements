@@ -42,7 +42,6 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
     }
 
     select(event, item) {
-        console.log('SELECT', item);
         Helpers.swallowEvent(event);
         item.checked = !item.checked;
         this.model = this._options.filter(checkBox => checkBox.checked).map(x => x.value);
