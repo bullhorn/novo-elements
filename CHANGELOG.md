@@ -1,3 +1,21 @@
+<a name="2.0.219"></a>
+## [2.0.219](https://github.com/bullhorn/novo-elements/compare/v2.0.218...v2.0.219) (2017-06-29)
+
+
+### Bug Fixes
+
+* **quicknote:** Fixing the rendered note, global replace of & ([d711a1d](https://github.com/bullhorn/novo-elements/commit/d711a1d))
+* **quicknote:** Hide results dropdown when deleting the search symbol ([16f1957](https://github.com/bullhorn/novo-elements/commit/16f1957))
+
+
+### Features
+
+* **app-bridge:** adding ability to open a fast-add page as well as an… ([#495](https://github.com/bullhorn/novo-elements/issues/495)) ([673edcb](https://github.com/bullhorn/novo-elements/commit/673edcb))
+* **app-bridge:** Fixing interface ([d97e241](https://github.com/bullhorn/novo-elements/commit/d97e241))
+* **Radio:** Adding ability to have icon only button radio groups ([#493](https://github.com/bullhorn/novo-elements/issues/493)) ([9c058ee](https://github.com/bullhorn/novo-elements/commit/9c058ee))
+
+
+
 <a name="2.0.218"></a>
 ## [2.0.218](https://github.com/bullhorn/novo-elements/compare/v2.0.217...v2.0.218) (2017-06-27)
 
