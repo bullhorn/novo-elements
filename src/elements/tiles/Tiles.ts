@@ -15,12 +15,12 @@ const TILES_VALUE_ACCESSOR = {
     selector: 'novo-tiles',
     providers: [TILES_VALUE_ACCESSOR],
     template: `
-        <div class="tile-container">
+        <div class="tile-container" [class.active]="focused">
             <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked, disabled: option.disabled}" (click)="select($event, option, i)" [attr.data-automation-id]="option.label || option">
+                <input [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i" (change)="select($event, option, i)" (focus)="setFocus(true)" (blur)="setFocus(false)">
                 <label [attr.for]="name + i" [attr.data-automation-id]="option.label || option">
                     {{ option.label || option}}
                 </label>
-                <input [hidden]="true" [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i">
             </div>
             <span class="active-indicator" [@tileState]="state" [hidden]="(activeTile === undefined || activeTile === null)"></span>
         </div>
@@ -39,15 +39,16 @@ const TILES_VALUE_ACCESSOR = {
     ]
 })
 export class NovoTilesElement implements ControlValueAccessor, OnInit {
-    @Input() name: String;
+    @Input() name: string;
     @Input() options: any;
     @Input() required: boolean;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
     @Output() onDisabledOptionClick: EventEmitter<any> = new EventEmitter();
 
     _options: Array<any> = [];
-    activeTile: any = null;
-    state: String = 'inactive';
+    public activeTile: any = null;
+    public state: String = 'inactive';
+    public focused: boolean = false;
 
     model: any;
     onModelChange: Function = () => {
@@ -56,6 +57,10 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
     };
 
     constructor(private element: ElementRef) {
+    }
+
+    public setFocus(focus: boolean): void {
+        this.focused = focus;
     }
 
     ngOnInit() {

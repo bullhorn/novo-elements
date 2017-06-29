@@ -21,7 +21,7 @@ export class NovoRadioGroup { }
     selector: 'novo-radio',
     providers: [RADIO_VALUE_ACCESSOR],
     template: `
-        <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" #radio>
+        <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" #radio (change)="select($event, radio)">
         <label [attr.for]="name" (click)="select($event, radio)">
             <button *ngIf="button" [ngClass]="{'unchecked': !radio.checked, 'checked': radio.checked}" [theme]="theme" [icon]="icon">{{ label }}</button>
             <div *ngIf="!button">

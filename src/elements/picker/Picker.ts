@@ -124,7 +124,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     }
 
     private onDebounedKeyup(event: KeyboardEvent) {
-        if ([KeyCodes.ESC, KeyCodes.UP, KeyCodes.DOWN, KeyCodes.ENTER].includes(event.keyCode)) {
+        if ([KeyCodes.ESC, KeyCodes.UP, KeyCodes.DOWN, KeyCodes.ENTER, KeyCodes.TAB].includes(event.keyCode)) {
             return;
         }
         this.show((event.target as any).value);
@@ -285,6 +285,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     onTouched(event?: Event) {
         this.onModelTouched();
         this.blur.emit(event);
+        this.toggleActive(null, false);
     }
 
     // From ControlValueAccessor interface
