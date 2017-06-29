@@ -19,6 +19,7 @@ export interface IAppBridgeOpenEvent {
     entityType: string;
     entityId?: string;
     data?: any;
+    passthrough?: string;
 }
 
 const HTTP_VERBS = {
