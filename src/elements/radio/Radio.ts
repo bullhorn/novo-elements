@@ -23,7 +23,7 @@ export class NovoRadioGroup { }
     template: `
         <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" #radio>
         <label [attr.for]="name" (click)="select($event, radio)">
-            <button *ngIf="button" [ngClass]="{'unchecked': !radio.checked, 'checked': radio.checked}" theme="secondary">{{ label }}</button>
+            <button *ngIf="button" [ngClass]="{'unchecked': !radio.checked, 'checked': radio.checked}" [theme]="theme" [icon]="icon">{{ label }}</button>
             <div *ngIf="!button">
                 <i [ngClass]="{'bhi-radio-empty': !radio.checked, 'bhi-radio-filled': radio.checked}"></i>
                 {{ label }}
@@ -42,6 +42,8 @@ export class NovoRadioElement implements ControlValueAccessor {
     @Input() vertical: boolean;
     @Input() label: string;
     @Input() button: boolean = false;
+    @Input() theme: string = 'secondary';
+    @Input() icon: string;
 
     @Output() change: EventEmitter<any> = new EventEmitter();
 

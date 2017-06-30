@@ -2,6 +2,7 @@
 import { TestBed, async } from '@angular/core/testing';
 // App
 import { NovoRadioElement } from './Radio';
+import { NovoButtonModule } from '../button/Button.module';
 
 describe('Elements: NovoRadioElement', () => {
     let fixture;
@@ -11,6 +12,9 @@ describe('Elements: NovoRadioElement', () => {
         TestBed.configureTestingModule({
             declarations: [
                 NovoRadioElement
+            ],
+            imports: [
+                NovoButtonModule
             ]
         }).compileComponents();
         fixture = TestBed.createComponent(NovoRadioElement);

@@ -116,6 +116,10 @@ describe('Elements: QuickNoteElement', () => {
                 height: 200
             },
             keyEnteredByUser: (key: string, keyCode: number): void => {
+                if (key === 'Backspace') {
+                    this.editorValue = this.editorValue.slice(0, -1);
+                    this.currentWord = this.currentWord.slice(0, -1);
+                }
                 // Add the character to the editorValue if it's a character
                 if (key.length === 1) {
                     this.editorValue += key;
@@ -364,41 +368,6 @@ describe('Elements: QuickNoteElement', () => {
             });
         }));
 
-        it('should leave references in the model when keepReferences is true.', fakeAsync(() => {
-            component.config.keepReferences = true;
-            ckEditorInstance.valueSetByUser('Note about: ');
-            ckEditorInstance.keyEnteredByUser('@');
-            ckEditorInstance.keyEnteredByUser('j');
-            ckEditorInstance.keyEnteredByUser('o');
-            ckEditorInstance.keyEnteredByUser('h');
-            ckEditorInstance.keyEnteredByUser('n');
-            ckEditorInstance.userPausedAfterEntry();
-            ckEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
-            ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
-
-            expect(parentForm.getValue()).toEqual({
-                note: 'Note about: <a href=\"http://www.bullhorn.com\">@John Bullhorn</a> ',
-                references: {
-                    person: [{
-                        value: 'j.bullhorn',
-                        label: 'John Bullhorn'
-                    }]
-                }
-            });
-
-            ckEditorInstance.valueSetByUser('Note about: ');
-
-            expect(parentForm.getValue()).toEqual({
-                note: 'Note about: ',
-                references: {
-                    person: [{
-                        value: 'j.bullhorn',
-                        label: 'John Bullhorn'
-                    }]
-                }
-            });
-        }));
-
         it('should not add duplicate references to the model.', fakeAsync(() => {
             ckEditorInstance.valueSetByUser('Note about: ');
             ckEditorInstance.keyEnteredByUser('@');
@@ -474,6 +443,27 @@ describe('Elements: QuickNoteElement', () => {
             ckEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
 
             expect(mockResults.visible).toBe(false);
+        }));
+
+        it('should hide resultsComponent when @ is backspaced over.', fakeAsync(() => {
+            ckEditorInstance.valueSetByUser('Note about: ');
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.userPausedAfterEntry();
+
+            expect(mockResults.visible).toBe(true);
+
+            ckEditorInstance.keyEnteredByUser('Backspace', KeyCodes.BACKSPACE);
+            ckEditorInstance.keyEnteredByUser('Backspace', KeyCodes.BACKSPACE);
+            ckEditorInstance.userPausedAfterEntry();
+
+            expect(mockResults.visible).toBe(false);
+
+            ckEditorInstance.keyEnteredByUser('@');
+            ckEditorInstance.keyEnteredByUser('j');
+            ckEditorInstance.userPausedAfterEntry();
+
+            expect(mockResults.visible).toBe(true);
         }));
 
         it('should handle searching with spaces.', fakeAsync(() => {

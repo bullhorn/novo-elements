@@ -27,6 +27,7 @@ before_script:
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH = "master" && npm run galaxy -- $FIREBASE_URL $SLACK_WEB_HOOK $SLACK_CHANNEL
+  - test $TRAVIS_PULL_REQUEST == "true" && npm run analyze-mr -- $TRAVIS_BRANCH $FIREBASE_URL $SLACK_WEB_HOOK $SLACK_CHANNEL $GITHUB_API_KEY
 
 notifications:
   slack:
