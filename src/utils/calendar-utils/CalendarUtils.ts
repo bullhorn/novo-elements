@@ -261,7 +261,7 @@ export function getWeekView({ events = [], viewDate, weekStartsOn, excluded = []
         }
         return startSecondsDiff;
     }).map((entry: WeekViewEvent) => {
-        const startOfView: Date = dateFns.setMinutes(dateFns.setHours(dateFns.startOfDay(viewDate), dayStart.hour), dayStart.minute);
+        const startOfView: Date = dateFns.setMinutes(dateFns.setHours(dateFns.startOfDay(entry.event.start), dayStart.hour), dayStart.minute);
         const eventStart: Date = entry.event.start;
         const hourHeightModifier: number = (hourSegments * segmentHeight) / MINUTES_IN_HOUR;
         if (eventStart > startOfView) {
@@ -284,7 +284,6 @@ export function getWeekView({ events = [], viewDate, weekStartsOn, excluded = []
                     rowSpan + nextEvent.span <= DAYS_IN_WEEK &&
                     allocatedEvents.indexOf(nextEvent) === -1
                 ) {
-                    nextEvent.offset -= rowSpan;
                     rowSpan += nextEvent.span + nextEvent.offset;
                     allocatedEvents.push(nextEvent);
                     return true;

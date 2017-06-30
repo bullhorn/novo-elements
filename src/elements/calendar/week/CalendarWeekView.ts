@@ -71,7 +71,7 @@ const MINUTES_IN_HOUR: number = 60;
             [weekEvent]="weekEvent"
             [tooltipPosition]="tooltipPosition"
             [customTemplate]="eventTemplate"
-            (eventClicked)="eventClicked.emit({event: weekEvent.event})">
+            (eventClicked)="eventClicked.emit($event)">
           </novo-calendar-week-event>
         </div>
       </div>

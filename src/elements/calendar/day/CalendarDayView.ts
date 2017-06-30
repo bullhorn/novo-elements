@@ -73,7 +73,7 @@ const MINUTES_IN_HOUR: number = 60;
               [dayEvent]="dayEvent"
               [tooltipPosition]="tooltipPosition"
               [customTemplate]="eventTemplate"
-              (eventClicked)="eventClicked.emit({event: dayEvent.event})">
+              (eventClicked)="eventClicked.emit($event)">
             </novo-calendar-day-event>
           </div>
         </div>
@@ -290,7 +290,7 @@ export class NovoCalendarDayViewElement implements OnChanges, OnInit, OnDestroy 
         this.eventTimesChanged.emit({event: dropEvent.dropData.event, newStart: segment.date});
       }
     }
-  
+
     resizeStarted(event: DayViewEvent, resizeEvent: ResizeEvent, dayViewContainer: HTMLElement): void {
       this.currentResize = {
         originalTop: event.top,
@@ -301,7 +301,7 @@ export class NovoCalendarDayViewElement implements OnChanges, OnInit, OnDestroy 
       this.validateResize = ({rectangle}) => resizeHelper.validateResize({rectangle});
       this.cdr.detectChanges();
     }
-  
+
     resizing(event: DayViewEvent, resizeEvent: ResizeEvent): void {
       if (resizeEvent.edges.top) {
         event.top = this.currentResize.originalTop + +resizeEvent.edges.top;
@@ -310,19 +310,19 @@ export class NovoCalendarDayViewElement implements OnChanges, OnInit, OnDestroy 
         event.height = this.currentResize.originalHeight + +resizeEvent.edges.bottom;
       }
     }
-  
+
     resizeEnded(dayEvent: DayViewEvent): void {
-  
+
       let pixelsMoved: number;
       if (this.currentResize.edge === 'top') {
         pixelsMoved = (dayEvent.top - this.currentResize.originalTop);
       } else {
         pixelsMoved = (dayEvent.height - this.currentResize.originalHeight);
       }
-  
+
       dayEvent.top = this.currentResize.originalTop;
       dayEvent.height = this.currentResize.originalHeight;
-  
+
       const pixelAmountInMinutes: number = MINUTES_IN_HOUR / (this.hourSegments * SEGMENT_HEIGHT);
       const minutesMoved: number = pixelsMoved * pixelAmountInMinutes;
       let newStart: Date = dayEvent.event.start;
@@ -332,18 +332,18 @@ export class NovoCalendarDayViewElement implements OnChanges, OnInit, OnDestroy 
       } else if (newEnd) {
         newEnd = addMinutes(newEnd, minutesMoved);
       }
-  
+
       this.eventTimesChanged.emit({newStart, newEnd, event: dayEvent.event});
       this.currentResize = null;
-  
+
     }
-  
+
     dragStart(event: HTMLElement, dayViewContainer: HTMLElement): void {
       const dragHelper: CalendarDragHelper = new CalendarDragHelper(dayViewContainer, event);
       this.validateDrag = ({x, y}) => !this.currentResize && dragHelper.validateDrag({x, y});
       this.cdr.detectChanges();
     }
-  
+
     eventDragged(dayEvent: DayViewEvent, draggedInPixels: number): void {
       const pixelAmountInMinutes: number = MINUTES_IN_HOUR / (this.hourSegments * SEGMENT_HEIGHT);
       const minutesMoved: number = draggedInPixels * pixelAmountInMinutes;

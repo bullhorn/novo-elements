@@ -1,3 +1,33 @@
+<a name="2.0.222"></a>
+## [2.0.222](https://github.com/bullhorn/novo-elements/compare/v2.0.221...v2.0.222) (2017-06-30)
+
+
+### Bug Fixes
+
+* **calendar:** fixing calendar events ([a64c2d0](https://github.com/bullhorn/novo-elements/commit/a64c2d0))
+
+
+
+<a name="2.0.221"></a>
+## [2.0.221](https://github.com/bullhorn/novo-elements/compare/v2.0.220...v2.0.221) (2017-06-30)
+
+
+
+<a name="2.0.220"></a>
+## [2.0.220](https://github.com/bullhorn/novo-elements/compare/v2.0.219...v2.0.220) (2017-06-30)
+
+
+### Bug Fixes
+
+* **calendar:** Fixing some calendar bugs ([7c6e926](https://github.com/bullhorn/novo-elements/commit/7c6e926))
+
+
+### Features
+
+* **table:** Enhancing editable tables ([fe0fe73](https://github.com/bullhorn/novo-elements/commit/fe0fe73))
+
+
+
 <a name="2.0.219"></a>
 ## [2.0.219](https://github.com/bullhorn/novo-elements/compare/v2.0.218...v2.0.219) (2017-06-29)
 

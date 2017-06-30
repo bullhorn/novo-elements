@@ -5,8 +5,8 @@ export class TilesControl extends BaseControl {
     controlType = 'tiles';
     options = [];
 
-    constructor(config:NovoControlConfig) {
-        super(config);
+    constructor(config: NovoControlConfig) {
+        super('TilesControl', config);
         this.options = config.options || [];
     }
 }
