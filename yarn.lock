@@ -2602,7 +2602,7 @@ function-bind@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.0.tgz#16176714c801798e4e8f2cf7f7529467bb4a5771"
 
-galaxy-parser@^1.0.14:
+galaxy-parser@^1.0.22:
   version "1.0.22"
   resolved "https://registry.yarnpkg.com/galaxy-parser/-/galaxy-parser-1.0.22.tgz#bc48fe82031c46fb7b1e31627e810b469f434d46"
   dependencies:
