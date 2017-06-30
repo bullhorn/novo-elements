@@ -21,15 +21,15 @@
     "lint:save": "tslint -t json \"src/**/*.ts\" \"demo/**/*.ts\"",
     "loc": "node_modules/sloc/bin/sloc src/ --format json > ./coverage/sloc.json",
     "pregalaxy": "npm run loc",
-    "galaxy": "galaxy analyze"
+    "galaxy": "galaxy analyze",
+    "analyze-mr": "galaxy analyze-mr"
   },
   "main": "index.js",
   "keywords": [
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },
@@ -105,7 +105,7 @@
     "extract-text-webpack-plugin": "2.0.0-beta.4",
     "file-loader": "0.9.0",
     "gh-pages": "0.12.0",
-    "galaxy-parser": "^1.0.5",
+    "galaxy-parser": "^1.0.14",
     "html-webpack-plugin": "2.24.1",
     "husky": "0.11.9",
     "ie-shim": "0.1.0",
@@ -154,9 +154,13 @@
   "galaxy": {
     "display": "Novo Elements",
     "type": "javascript",
+    "api": "github",
+    "owner": "bullhorn",
+    "repo": "novo-elements",
     "goal": 80,
     "public": true,
     "threshold": 0.05,
+    "defaultBranch": "master",
     "locations": {
       "sloc": "/coverage/sloc.json",
       "lcov": "/coverage/lcov.info"
