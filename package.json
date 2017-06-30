@@ -13,10 +13,9 @@
     "test": "cross-env NODE_ENV=test node_modules/.bin/karma start",
     "test:watch": "cross-env NODE_ENV=test node_modules/.bin/karma start --single-run false --auto-watch true",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -p angular -v",
-    "github-release": "conventional-github-releaser -p angular",
     "deploy:gh-pages": "npm run build:prod && ./node_modules/.bin/gh-pages -d dist",
     "version": "npm run changelog && git add -A",
-    "postversion": "git push origin master && git push --tags && npm run github-release && npm publish",
+    "postversion": "git push origin master && git push --tags && npm publish",
     "build:prod": "webpack --config config/webpack.prod.js --progress --profile --colors --display-error-details --display-cached --bail",
     "lint:save": "tslint -t json \"src/**/*.ts\" \"demo/**/*.ts\"",
     "loc": "node_modules/sloc/bin/sloc src/ --format json > ./coverage/sloc.json",
@@ -30,8 +29,7 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },
