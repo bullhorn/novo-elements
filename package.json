@@ -21,6 +21,7 @@
     "lint:save": "tslint -t json \"src/**/*.ts\" \"demo/**/*.ts\"",
     "loc": "node_modules/sloc/bin/sloc src/ --format json > ./coverage/sloc.json",
     "pregalaxy": "npm run loc",
+    "preanalyze-mr": "npm run loc",
     "galaxy": "galaxy analyze",
     "analyze-mr": "galaxy analyze-mr"
   },
