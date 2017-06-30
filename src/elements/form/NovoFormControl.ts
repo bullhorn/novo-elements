@@ -1,9 +1,12 @@
 // NG2
 import { FormControl, Validators } from '@angular/forms';
+import { EventEmitter } from '@angular/core';
 // APP
 import { NovoControlConfig } from './FormControls';
+import { Helpers } from '../../utils/Helpers';
 
 export class NovoFormControl extends FormControl {
+    displayValueChanges: EventEmitter<any> = new EventEmitter<any>();
     hidden: boolean;
     required: boolean;
     readOnly: boolean;
@@ -88,6 +91,7 @@ export class NovoFormControl extends FormControl {
         this.markAsDirty();
         this.markAsTouched();
         // TODO: Should we set defaults on these?
+        this.displayValueChanges.emit(value);
         super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
     }
 

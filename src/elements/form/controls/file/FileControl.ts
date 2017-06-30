@@ -5,7 +5,7 @@ export class FileControl extends BaseControl {
     controlType = 'file';
 
     constructor(config: NovoControlConfig) {
-        super(config);
+        super('FileControl', config);
         // TODO - translate
         this.placeholder = config.placeholder;
         this.multiple = config.multiple;

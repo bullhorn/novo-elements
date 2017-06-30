@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 // APP
 import {
+    BaseControl,
     AddressControl,
     CheckListControl,
     CheckboxControl,
@@ -154,7 +155,7 @@ export class FormUtils {
         return type;
     }
 
-    getControlForField(field: any, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {
+    getControlForField(field: any, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any, forTable: boolean = false) {
         // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
         // TODO: (cont.) as the setter of the field argument
         let type: string = this.determineInputType(field) || field.type;
@@ -222,19 +223,23 @@ export class FormUtils {
                 controlConfig.multiple = true;
                 controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
                 controlConfig.config.previewTemplate = overridePreviewTemplate || EntityPickerResult;
-                control = new PickerControl(controlConfig);
+                // TODO: When appendToBody picker works better in table/form
+                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'chips':
                 controlConfig.multiple = true;
-                control = new PickerControl(controlConfig);
+                // TODO: When appendToBody picker works better in table/form
+                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'entitypicker':
                 // TODO: This doesn't belong in this codebase
                 controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
-                control = new PickerControl(controlConfig);
+                // TODO: When appendToBody picker works better in table/form
+                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'picker':
-                control = new PickerControl(controlConfig);
+                // TODO: When appendToBody picker works better in table/form
+                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'datetime':
                 controlConfig.military = config ? !!config.military : false;
@@ -314,13 +319,13 @@ export class FormUtils {
         return control;
     }
 
-    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {
+    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any, forTable: boolean = false) {
         let controls = [];
         if (meta && meta.fields) {
             let fields = meta.fields;
             fields.forEach(field => {
                 if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
-                    let control = this.getControlForField(field, http, config, overrides);
+                    let control = this.getControlForField(field, http, config, overrides, forTable);
                     // Set currency format
                     if (control.subType === 'currency') {
                         control.currencyFormat = currencyFormat;
@@ -331,6 +336,18 @@ export class FormUtils {
             });
         }
         return controls;
+    }
+
+    toTableControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any) {
+        let controls = this.toControls(meta, currencyFormat, http, config, overrides, true);
+        let ret = {};
+        controls.forEach((control: BaseControl) => {
+            ret[control.key] = {
+                editorType: control.__type,
+                editorConfig: control.__config
+            };
+        });
+        return ret;
     }
 
     toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {

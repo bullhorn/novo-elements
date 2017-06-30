@@ -6,7 +6,7 @@ export class PickerControl extends BaseControl {
     options = [];
 
     constructor(config: NovoControlConfig) {
-        super(config);
+        super('PickerControl', config);
         this.options = config.options || [];
     }
 }
@@ -14,11 +14,13 @@ export class PickerControl extends BaseControl {
 export class TablePickerControl extends PickerControl {
     constructor(config: NovoControlConfig) {
         super(Object.assign(config, { appendToBody: true, parentScrollSelector: '.table-container' }));
+        this.__type = 'TablePickerControl';
     }
 }
 
 export class AppendToBodyPickerControl extends PickerControl {
     constructor(config: NovoControlConfig) {
         super(Object.assign(config, { appendToBody: true, parentScrollSelector: '.table-container' }));
+        this.__type = 'AppendToBodyPickerControl';
     }
 }

@@ -7,7 +7,7 @@ import * as dateFns from 'date-fns';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { ReadOnlyControl } from './../form/FormControls';
+import { ReadOnlyControl, ControlFactory } from './../form/FormControls';
 import { CollectionEvent } from '../../services/data-provider/CollectionEvent';
 import { PagedArrayCollection } from '../../services/data-provider/PagedArrayCollection';
 import { PagedCollection } from '../../services/data-provider/PagedCollection';
@@ -314,7 +314,6 @@ export class NovoTableElement implements DoCheck {
                         columnsToSum = columnsToSum.filter((item, index, array) => array.indexOf(item) === index);
                     }
                     // Make a form for each row
-                    // let columnControls = this.columns.filter(column => !Helpers.isBlank(column.editor)).map(column => column.editor);
                     let tableFormRows = <FormArray>this.tableForm.controls['rows'];
                     this._rows.forEach((row, index) => {
                         let rowControls = [];
@@ -324,7 +323,7 @@ export class NovoTableElement implements DoCheck {
                         row.rowId = this._rows.length;
                         this.columns.forEach(column => {
                             // Use the control passed or use a ReadOnlyControl so that the form has the values
-                            let control = column.editor || new ReadOnlyControl({ key: column.name });
+                            let control = column.editorConfig ? ControlFactory.create(column.editorType, column.editorConfig) : new ReadOnlyControl({ key: column.name });
                             row.controls[column.name] = control;
                             rowControls.push(control);
                         });
@@ -874,8 +873,9 @@ export class NovoTableElement implements DoCheck {
      * @name leaveEditMode
      * @description Leaves edit mode for the Table and puts everything back to VIEW only
      * @memberOf NovoTableElement
+     * @param {cancel} [boolean] - whether or not to save data or undo
      */
-    leaveEditMode(): void {
+    private leaveEditMode(cancel: boolean): void {
         this.mode = NovoTableMode.VIEW;
         this._rows.forEach((row) => {
             row._editing = row._editing || {};
@@ -883,7 +883,11 @@ export class NovoTableElement implements DoCheck {
                 row._editing[column.name] = false;
             });
         });
-        this._dataProvider.undo();
+        if (cancel) {
+            this._dataProvider.undo();
+        } else {
+            this._dataProvider.commit();
+        }
         this.hideToastMessage();
     }
 
@@ -902,7 +906,7 @@ export class NovoTableElement implements DoCheck {
         row.rowId = this._rows.length + 1;
         this.columns.forEach(column => {
             // Use the control passed or use a ReadOnlyControl so that the form has the values
-            let control = column.editor || new ReadOnlyControl({ key: column.name });
+            let control = column.editorConfig ? ControlFactory.create(column.editorType, column.editorConfig) : new ReadOnlyControl({ key: column.name });
             control.value = null; //remove copied column value
             row.controls[column.name] = control;
             row._editing[column.name] = !column.viewOnly;
@@ -978,8 +982,16 @@ export class NovoTableElement implements DoCheck {
      * @memberOf NovoTableElement
      */
     cancelEditing(): void {
-        this.dataProvider.undo();
-        this.leaveEditMode();
+        this.leaveEditMode(true);
+    }
+
+    /**
+     * @name saveChanges
+     * @description Refresh the data provider and leave edit mode
+     * @memberOf NovoTableElement
+     */
+    saveChanges(): void {
+        this.leaveEditMode(false);
     }
 
     /**
