@@ -6,7 +6,7 @@ describe('Control: BaseControl', () => {
 
     describe('Base Config', () => {
         beforeEach(() => {
-            control = new BaseControl({});
+            control = new BaseControl();
         });
 
         it('should set the validators', () => {
@@ -61,7 +61,7 @@ describe('Control: BaseControl', () => {
 
     describe('With Config', () => {
         beforeEach(() => {
-            control = new BaseControl({
+            control = new BaseControl('BaseControl', {
                 validators: ['TEST_VALIDATORS'],
                 value: 'TEST_VALUE',
                 key: 'TEST_KEY',

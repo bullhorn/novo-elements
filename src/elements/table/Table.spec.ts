@@ -421,7 +421,7 @@ describe('Elements: NovoTableElement', () => {
     describe('Method: setTableEdit()', () => {
         beforeEach(() => {
             component._dataProvider = {
-                edit: () => {}
+                edit: () => { }
             };
             component.columns = [
                 {
@@ -479,7 +479,8 @@ describe('Elements: NovoTableElement', () => {
     describe('Method: leaveEditMode()', () => {
         beforeEach(() => {
             component._dataProvider = {
-                undo: () => {}
+                undo: () => { },
+                commit: () => { }
             };
             component.columns = [
                 {
@@ -550,7 +551,8 @@ describe('Elements: NovoTableElement', () => {
     describe('Method: cancelEditing()', () => {
         beforeEach(() => {
             component._dataProvider = {
-                undo: () => {}
+                undo: () => { },
+                commit: () => { }
             };
         });
         it('should be defined.', () => {
@@ -599,49 +601,49 @@ describe('Elements: NovoTableElement', () => {
         });
 
         it('should return true if column has hideColumnOnEdit and in editing mode', () => {
-            let column = {name: 'name', hideColumnOnEdit: true};
+            let column = { name: 'name', hideColumnOnEdit: true };
             component.mode = 2;
             expect(component.isColumnHidden(column)).toBe(true);
         });
 
         it('should return false if column does not have hideColumnOnEdit and in editing mode', () => {
-            let column = {name: 'name'};
+            let column = { name: 'name' };
             component.mode = 2;
             expect(component.isColumnHidden(column)).toBe(false);
         });
 
         it('should return false if column does not have hideColumnOnEdit and not in editing mode', () => {
-            let column = {name: 'name'};
+            let column = { name: 'name' };
             component.mode = 1;
             expect(component.isColumnHidden(column)).toBe(false);
         });
 
         it('should return false if column has hideColumnOnEdit and not in editing mode', () => {
-            let column = {name: 'name', hideColumnOnEdit: true};
+            let column = { name: 'name', hideColumnOnEdit: true };
             component.mode = 1;
             expect(component.isColumnHidden(column)).toBe(false);
         });
 
         it('should return false if column has hideColumnOnView and in editing mode', () => {
-            let column = {name: 'name', hideColumnOnView: true};
+            let column = { name: 'name', hideColumnOnView: true };
             component.mode = 2;
             expect(component.isColumnHidden(column)).toBe(false);
         });
 
         it('should return false if column does not have hideColumnOnView and in editing mode', () => {
-            let column = {name: 'name'};
+            let column = { name: 'name' };
             component.mode = 2;
             expect(component.isColumnHidden(column)).toBe(false);
         });
 
         it('should return false if column does not have hideColumnOnView and not in editing mode', () => {
-            let column = {name: 'name'};
+            let column = { name: 'name' };
             component.mode = 1;
             expect(component.isColumnHidden(column)).toBe(false);
         });
 
         it('should return false if column has hideColumnOnView and not in editing mode', () => {
-            let column = {name: 'name', hideColumnOnView: true};
+            let column = { name: 'name', hideColumnOnView: true };
             component.mode = 1;
             expect(component.isColumnHidden(column)).toBe(true);
         });

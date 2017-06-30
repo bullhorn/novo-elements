@@ -11,11 +11,11 @@ let SelectAllTableDemoTpl = require('./templates/SelectAllTableDemo.html');
 let MovieTableDemoTpl = require('./templates/MovieTableDemo.html');
 let TotalFooterTableDemoTpl = require('./templates/TotalFooterTableDemo.html');
 // Vendor
-import { DateCell, BaseRenderer, NovoTableElement, NovoTableConfig, TextBoxControl, TablePickerControl, SelectControl, NovoDropdownCell } from './../../../../index';
+import { DateCell, PercentageCell, BaseRenderer, NovoTableElement, NovoTableConfig, TextBoxControl, TablePickerControl, SelectControl, NovoDropdownCell } from './../../../../index';
 
 const template = `
 <div class="container">
-    <h1>Table <small><a target="_blank" href="https://bullhorn.github.io/novo-elements/blob/master/src/elements/table">(source)</a></small></h1>
+ <h1>Table <small><a target="_blank" href="https://bullhorn.github.io/novo-elements/blob/master/src/elements/table">(source)</a></small></h1>
     <p>Tables allow users to view date in a tabular format and perform actions such as Sorting and Filtering. Different configuration are possible for pagination or infinite scroll. Feature to be added include: Custom Item Renderers, etc...</p>
     <h2>Types</h2>
 
@@ -187,6 +187,12 @@ export class TableDemoComponent implements OnInit {
                 range: true
             },
             {
+                title: '%',
+                name: 'percent',
+                ordering: true,
+                renderer: PercentageCell
+            },
+            {
                 title: 'Salary',
                 name: 'salary',
                 ordering: true,
@@ -318,16 +324,22 @@ export class TableDemoComponent implements OnInit {
         ];
         this.editable = {
             columns: [
-                { title: 'Name', name: 'name', ordering: true, filtering: true, editor: new TablePickerControl({ key: 'name', config: { options: names } }) },
-                { title: 'Job Type', name: 'jobType', ordering: true, filtering: true, editor: new SelectControl({ key: 'jobType', options: ['Freelance', 'Contract', 'Billable'] }) },
+                {
+                    title: 'Name', name: 'name', ordering: true, filtering: true, editorType: 'TablePickerControl', editorConfig: { key: 'name', config: { options: names } }
+                },
+                {
+                    title: 'Job Type', name: 'jobType', ordering: true, filtering: true, editorType: 'SelectControl', editorConfig: { key: 'jobType', options: ['Freelance', 'Contract', 'Billable'] }
+                },
                 {
                     title: 'Rate',
                     name: 'rate',
                     ordering: true,
                     filtering: true,
-                    editor: new TextBoxControl({
+                    renderer: PercentageCell,
+                    editorType: 'TextBoxControl',
+                    editorConfig: {
                         key: 'rate',
-                        type: 'currency',
+                        type: 'percentage',
                         required: true,
                         interactions: [
                             {
@@ -335,9 +347,9 @@ export class TableDemoComponent implements OnInit {
                                 script: (form) => {
                                     console.log('Form Interaction Called!', form); // tslint:disable-line
                                     if (form.value.rate) {
-                                        if (Number(form.value.rate) >= 1000) {
+                                        if (Number(form.value.rate) >= .75) {
                                             form.controls.rating.setValue('High');
-                                        } else if (Number(form.value.rate) >= 100) {
+                                        } else if (Number(form.value.rate) >= .50) {
                                             form.controls.rating.setValue('Medium');
                                         } else {
                                             form.controls.rating.setValue('Low');
@@ -346,14 +358,14 @@ export class TableDemoComponent implements OnInit {
                                 }
                             }
                         ]
-                    })
+                    }
                 },
                 { title: 'Rating', name: 'rating' }
             ],
             rows: new ArrayCollection([
                 { id: 1, name: 'Joshua Godi', jobType: 'Freelance', rate: null, rating: 'Low' },
-                { id: 2, name: 'Brian Kimball', jobType: 'Contact', rate: 100, rating: 'Medium' },
-                { id: 3, name: 'Kameron Sween', jobType: 'Billable', rate: 1000, rating: 'High' }
+                { id: 2, name: 'Brian Kimball', jobType: 'Contact', rate: .50, rating: 'Medium' },
+                { id: 3, name: 'Kameron Sween', jobType: 'Billable', rate: 1.00, rating: 'High' }
             ]),
             config: {
                 paging: {
@@ -446,7 +458,7 @@ export class TableDemoComponent implements OnInit {
             // TODO - save data - fetch the data
             setTimeout(() => {
                 table.displayToastMessage({ icon: 'check', theme: 'success', message: 'Saved!' }, 2000);
-                table.leaveEditMode();
+                table.saveChanges();
             }, 2000);
         } else {
             console.log('ERRORS!', errorsOrData); // tslint:disable-line

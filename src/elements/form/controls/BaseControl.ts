@@ -45,6 +45,9 @@ export interface NovoControlConfig {
 }
 
 export class BaseControl {
+    __type: string = 'BaseControl';
+    __config: NovoControlConfig;
+
     validators: Array<any>;
     asyncValidators?: Array<any>;
     value: any;
@@ -83,7 +86,9 @@ export class BaseControl {
     customControlConfig?: any;
     military?: boolean;
 
-    constructor(config: NovoControlConfig) {
+    constructor(type: string = 'BaseControl', config: NovoControlConfig = {}) {
+        this.__type = type;
+        this.__config = config;
         this.validators = config.validators || [];
         this.asyncValidators = config.asyncValidators || [];
         this.value = config.value;

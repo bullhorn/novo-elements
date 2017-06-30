@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "2.0.219",
+  "version": "2.0.221",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
     "precommit": "npm run lint",
@@ -30,7 +30,8 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },
@@ -105,8 +106,8 @@
     "expose-loader": "0.7.1",
     "extract-text-webpack-plugin": "2.0.0-beta.4",
     "file-loader": "0.9.0",
-    "gh-pages": "0.12.0",
     "galaxy-parser": "^1.0.14",
+    "gh-pages": "0.12.0",
     "html-webpack-plugin": "2.24.1",
     "husky": "0.11.9",
     "ie-shim": "0.1.0",
