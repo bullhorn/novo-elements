@@ -9,14 +9,14 @@
     *ngSwitchCase="'month'"
     [(viewDate)]="viewDate"
     [events]="events"
-    (dayClicked)="dayClicked($event)">
+    (dayClicked)="dayClicked($event.day.date)">
     </novo-calendar-month>
 
     <novo-calendar-week
     *ngSwitchCase="'week'"
     [(viewDate)]="viewDate"
     [events]="events"
-    (eventClicked)="dayClicked($event)"
+    (dayClicked)="dayClicked($event.date)"
     [dayStartHour]="0"
     [dayEndHour]="24">
     </novo-calendar-week>
@@ -25,7 +25,6 @@
     *ngSwitchCase="'day'"
     [(viewDate)]="viewDate"
     [events]="events"
-    (eventClicked)="dayClicked($event)"
     [dayStartHour]="0"
     [dayEndHour]="24">
     </novo-calendar-day>
