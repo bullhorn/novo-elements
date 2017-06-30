@@ -1,3 +1,13 @@
+<a name="2.0.223"></a>
+## [2.0.223](https://github.com/bullhorn/novo-elements/compare/v2.0.222...v2.0.223) (2017-06-30)
+
+
+### Bug Fixes
+
+* **control:** Fixing percentage render ([f674055](https://github.com/bullhorn/novo-elements/commit/f674055))
+
+
+
 <a name="2.0.222"></a>
 ## [2.0.222](https://github.com/bullhorn/novo-elements/compare/v2.0.221...v2.0.222) (2017-06-30)
 
