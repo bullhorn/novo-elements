@@ -1,3 +1,14 @@
+<a name="2.0.227"></a>
+## [2.0.227](https://github.com/bullhorn/novo-elements/compare/v2.0.226...v2.0.227) (2017-07-03)
+
+
+### Bug Fixes
+
+* **form:** Fixing value of forms with required and readonly ([e8ba56f](https://github.com/bullhorn/novo-elements/commit/e8ba56f))
+* **form:** Fixing value of forms with required and readonly ([7fd704b](https://github.com/bullhorn/novo-elements/commit/7fd704b))
+
+
+
 <a name="2.0.226"></a>
 ## [2.0.226](https://github.com/bullhorn/novo-elements/compare/v2.0.225...v2.0.226) (2017-07-03)
 
