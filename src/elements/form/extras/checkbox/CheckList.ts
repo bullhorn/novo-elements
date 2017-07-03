@@ -16,7 +16,7 @@ const CHECKLIST_VALUE_ACCESSOR = {
     providers: [CHECKLIST_VALUE_ACCESSOR],
     template: `
         <div class="check-box-group" *ngFor="let option of _options; let i = index" [ngClass]="{checked: option.checked}" >
-            <input [hidden]="true" [name]="name" type="checkbox" [ngModel]="option.checked" [attr.id]="name+i" [value]="option.checked">
+            <input [name]="name" type="checkbox" [ngModel]="option.checked" [attr.id]="name+i" [value]="option.checked" (change)="select($event, option)">
             <label [attr.for]="name+i" (click)="select($event, option)">
               <i [ngClass]="{'bhi-checkbox-empty': !option.checked, 'bhi-checkbox-filled': option.checked }"></i>
               <span>{{option.label}}</span>
@@ -25,15 +25,15 @@ const CHECKLIST_VALUE_ACCESSOR = {
     `
 })
 export class NovoCheckListElement implements ControlValueAccessor, OnInit {
-    @Input() name:string;
-    @Input() options:Array<any>;
+    @Input() name: string;
+    @Input() options: Array<any>;
     @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
-    _options:Array<any>;
-    model:any;
-    onModelChange:Function = () => {
+    _options: Array<any>;
+    model: any;
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
     ngOnInit() {
@@ -70,23 +70,23 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
         }
     }
 
-    setModel():void {
+    setModel(): void {
         let checkedOptions = this.options.filter(checkBox => checkBox.checked).map(x => x.value);
         this.writeValue(checkedOptions);
     }
 
-    writeValue(model:any):void {
+    writeValue(model: any): void {
         this.model = model || [];
         if (model) {
             this.setupOptions();
         }
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 }

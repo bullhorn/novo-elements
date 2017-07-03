@@ -18,7 +18,7 @@ const LAYOUT_DEFAULTS = { iconStyle: 'box' };
     providers: [CHECKBOX_VALUE_ACCESSOR],
     template: `
         <div class="check-box-group" [class.checked]="model" [class.disabled]="disabled">
-            <input hidden="true" [name]="name" type="checkbox" [(ngModel)]="model" [attr.id]="name">
+            <input [name]="name" type="checkbox" [(ngModel)]="model" [attr.id]="name">
             <label [attr.for]="name" (click)="select($event)">
               <i [class.bhi-checkbox-empty]="!model && !indeterminate && boxIcon"
                  [class.bhi-checkbox-filled]="model && !indeterminate && boxIcon"
@@ -32,19 +32,19 @@ const LAYOUT_DEFAULTS = { iconStyle: 'box' };
     `
 })
 export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
-    @Input() name:string;
-    @Input() label:string;
-    @Input() indeterminate:boolean = false;
-    @Input() disabled:boolean;
+    @Input() name: string;
+    @Input() label: string;
+    @Input() indeterminate: boolean = false;
+    @Input() disabled: boolean;
     @Input() layoutOptions: { iconStyle?: string };
-    value:boolean = false;
-    boxIcon:boolean = true;
+    value: boolean = false;
+    boxIcon: boolean = true;
 
     model;
 
-    onModelChange:Function = () => {
+    onModelChange: Function = () => {
     };
-    onModelTouched:Function = () => {
+    onModelTouched: Function = () => {
     };
 
     ngOnInit() {
@@ -58,15 +58,15 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
         this.onModelChange(this.model);
     }
 
-    writeValue(model:any):void {
+    writeValue(model: any): void {
         this.model = model;
     }
 
-    registerOnChange(fn:Function):void {
+    registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
 
-    registerOnTouched(fn:Function):void {
+    registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
 }

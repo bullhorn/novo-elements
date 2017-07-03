@@ -28,6 +28,13 @@ export class NovoFormControl extends FormControl {
         this.hasRequiredValidator = this.required;
         this.tooltip = control.tooltip;
         this.tooltipPosition = control.tooltipPosition;
+
+        // Reactive Form, need to enable/disable, can't bind to [disabled]
+        if (this.readOnly) {
+            this.disable();
+        } else {
+            this.enable();
+        }
     }
 
     /**
@@ -83,11 +90,11 @@ export class NovoFormControl extends FormControl {
      *
      */
     public setValue(value: any, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange }: {
-                        onlySelf?: boolean,
-                        emitEvent?: boolean,
-                        emitModelToViewChange?: boolean,
-                        emitViewToModelChange?: boolean
-                    } = {}) {
+        onlySelf?: boolean,
+        emitEvent?: boolean,
+        emitModelToViewChange?: boolean,
+        emitViewToModelChange?: boolean
+    } = {}) {
         this.markAsDirty();
         this.markAsTouched();
         // TODO: Should we set defaults on these?
@@ -101,6 +108,11 @@ export class NovoFormControl extends FormControl {
      */
     public setReadOnly(isReadOnly: boolean): void {
         this.readOnly = isReadOnly;
+        if (this.readOnly) {
+            this.enable();
+        } else {
+            this.disable();
+        }
     }
 
     /**

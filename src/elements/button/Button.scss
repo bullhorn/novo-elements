@@ -87,7 +87,8 @@ button {
                     }
                 }
             }
-            &:hover {
+            &:hover,
+            &:focus {
                 background: lighten($positive, 10%);
             }
             &:active {
@@ -97,7 +98,8 @@ button {
             $color in $colors {
                 &[color="#{$button}"] {
                     background: $color;
-                    &:hover {
+                    &:hover,
+                    &:focus {
                         background: lighten($color, 10%);
                     }
                     &:active {
@@ -108,7 +110,8 @@ button {
             &[color="white"] {
                 background: $white;
                 color: $ocean;
-                &:hover {
+                &:hover,
+                &:focus {
                     background: $background;
                 }
                 &:active {
@@ -122,7 +125,8 @@ button {
             $color in $analytics-colors {
                 &[color="#{$analytics}"] {
                     background: $color;
-                    &:hover {
+                    &:hover,
+                    &:focus {
                         background: lighten($color, 10%);
                     }
                     &:active {
@@ -148,7 +152,8 @@ button {
                     }
                 }
             }
-            &:hover {
+            &:hover,
+            &:focus {
                 box-shadow: 0 3px 7px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .15);
             }
             &:active {
@@ -158,7 +163,8 @@ button {
                 background: rgba(0, 0, 0, .25);
                 color: #fff;
                 border: 1px solid #fff;
-                &:hover {
+                &:hover,
+                &:focus {
                     background: rgba(0, 0, 0, .35);
                 }
                 &:active {
@@ -236,14 +242,16 @@ button {
                     }
                 }
             }
-            &:hover {
+            &:hover,
+            &:focus {
                 background: lighten($light, 7%);
             }
             &:active {
                 background: lighten($light, 2%);
             }
             &[inverse] {
-                &:hover {
+                &:hover,
+                &:focus {
                     background: rgba(0, 0, 0, .2);
                 }
                 &:active {
@@ -291,7 +299,8 @@ button {
             .flex-wrapper {
                 justify-content: center;
             }
-            &:hover {
+            &:hover,
+            &:focus {
                 box-shadow: 0 3px 7px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .15);
             }
             &:active {

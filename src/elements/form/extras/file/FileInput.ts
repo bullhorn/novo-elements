@@ -22,14 +22,14 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
         <div #container></div>
         <template #fileInput>
             <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
-                <input type="file" [name]="name" [attr.id]="name" (change)="check($event)" [attr.multiple]="multiple"/>
+                <input type="file" [name]="name" [attr.id]="name" (change)="check($event)" [attr.multiple]="multiple" tabindex="-1"/>
                 <section [ngSwitch]="layoutOptions.labelStyle">
                     <label *ngSwitchCase="'no-box'" [attr.for]="name" class="no-box">
-                            <div><i class="bhi-dropzone"></i>{{ placeholder || labels.chooseAFile }} {{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></div>
+                        <div><i class="bhi-dropzone"></i>{{ placeholder || labels.chooseAFile }} {{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></div>
                     </label>
                     <label *ngSwitchDefault [attr.for]="name" class="boxed">
-                            <span>{{ placeholder || labels.chooseAFile }}</span>
-                            <small>{{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></small>
+                        <span>{{ placeholder || labels.chooseAFile }}</span>
+                        <small>{{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></small>
                     </label>
                 </section>
             </div>
@@ -40,8 +40,8 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
                     <i *ngIf="layoutOptions.draggable" class="bhi-move"></i>
                     <label>{{ file.name | decodeURI }}</label>
                     <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
-                        <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'"></button>
-                        <button type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'"></button>
+                        <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
+                        <button type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
                     </div>
                     <novo-loading *ngIf="!file.loaded"></novo-loading>
                 </div>
@@ -49,13 +49,9 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
         </template>`
 })
 export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
-    @ViewChild('fileInput')
-    fileInput: TemplateRef<any>;
-    @ViewChild('fileOutput')
-    fileOutput: TemplateRef<any>;
-    @ViewChild('container', { read: ViewContainerRef })
-    container: ViewContainerRef;
-
+    @ViewChild('fileInput') fileInput: TemplateRef<any>;
+    @ViewChild('fileOutput') fileOutput: TemplateRef<any>;
+    @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
 
     @Input() name: string;
     @Input() multiple: boolean = false;

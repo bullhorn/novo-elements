@@ -1,8 +1,15 @@
 novo-tiles {
     display: inline-block;
+    position: relative;
     color: $grey;
     $border-width: 1px;
     $border-properties: solid $border-width lighten($grey, 20%);
+    input {
+        appearance: none !important;
+        height: 0 !important;
+        border: none !important;
+        position: absolute;
+    }
     &>.tile-container {
         display: inline-block; //height: calc(2.5em + 4px);
         text-align: center;
@@ -28,6 +35,10 @@ novo-tiles {
                 z-index: 1;
                 position: relative;
             }
+        }
+        &.active {
+            border-color: $positive;
+            box-shadow: 0px 0px 15px 3px rgba(74, 137, 220, 0.25);
         }
     }
     span.active-indicator {

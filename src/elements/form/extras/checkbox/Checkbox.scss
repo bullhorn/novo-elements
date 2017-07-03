@@ -2,14 +2,16 @@ novo-checkbox,
 novo-check-list {
     display: flex;
     flex-flow: row wrap;
-
     [class*="-group"] {
         margin-right: 15px;
         cursor: pointer;
-
+        position: relative;
         &:hover {
             label {
                 i {
+                    &:before {
+                        box-shadow: 0px 0px 15px 3px rgba(74, 137, 220, 0.25);
+                    }
                     &.bhi-checkbox-empty,
                     &.bhi-radio-empty {
                         color: $positive;
@@ -17,26 +19,38 @@ novo-check-list {
                 }
             }
         }
-
         &.checked {
             label {
                 color: darken(#D2D2D2, 60%);
-
                 i {
                     animation: iconEnter 160ms ease-in-out;
                 }
             }
         }
-
         &.disabled {
             opacity: 0.3;
             pointer-events: none;
-
             label {
                 opacity: 1;
             }
         }
-
+        input {
+            appearance: none !important;
+            height: 0 !important;
+            border: none !important;
+            position: absolute;
+            &:focus+label {
+                i {
+                    &:before {
+                        text-shadow: 0px 0px 20px rgba(74, 137, 220, 0.50);
+                    }
+                    &.bhi-checkbox-empty,
+                    &.bhi-checkbox-filled {
+                        color: $positive;
+                    }
+                }
+            }
+        }
         label {
             color: darken(#D2D2D2, 30%);
             margin-left: 0;
@@ -44,17 +58,14 @@ novo-check-list {
             transition: all 200ms ease-in-out;
             display: flex;
             align-items: baseline;
-
             i {
                 margin-right: 5px;
                 transition: all 200ms ease-in-out;
-
                 &.bhi-checkbox-empty,
                 &.bhi-radio-empty,
                 &.bhi-circle-o {
                     color: #D2D2D2;
                 }
-
                 &.bhi-check {
                     background: #D2D2D2;
                     color: #FFF;
@@ -64,13 +75,11 @@ novo-check-list {
                     height: 20px;
                     border-radius: 50%;
                 }
-
                 &.bhi-checkbox-filled,
                 &.bhi-radio-filled {
                     color: $positive;
                 }
             }
-
             span {
                 display: inline-block;
             }

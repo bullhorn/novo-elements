@@ -18,7 +18,7 @@ const SELECT_VALUE_ACCESSOR = {
     selector: 'novo-select',
     providers: [SELECT_VALUE_ACCESSOR],
     template: `
-        <div (click)="toggleActive($event)" tabIndex="-1" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></div>
+        <div (click)="toggleActive($event)" tabIndex="0" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></div>
         <ul class="novo-select-list" tabIndex="-1" [ngClass]="{header: headerConfig}">
             <ng-content></ng-content>
             <li *ngIf="headerConfig" class="select-header" [ngClass]="{open: header.open}">
@@ -177,13 +177,21 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
                 this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 2000);
                 this.filterTerm = this.filterTerm.slice(0, -1);
             }
+        } else {
+            if ([KeyCodes.DOWN, KeyCodes.UP].includes(event.keyCode)) {
+                this.toggleActive(event, true);
+            }
         }
     }
 
     scrollToSelected() {
         let element = this.element.nativeElement;
         let list = element.querySelector('.novo-select-list');
-        list.scrollTop = 48 * (this.selectedIndex - 1);
+        let items = list.querySelectorAll('li');
+        let item = items[this.headerConfig ? this.selectedIndex + 1 : this.selectedIndex];
+        if (item) {
+            list.scrollTop = item.offsetTop;
+        }
     }
 
     toggleHeader(event, forceValue) {
