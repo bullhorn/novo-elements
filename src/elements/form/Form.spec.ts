@@ -20,7 +20,10 @@ describe('Elements: NovoFormElement', () => {
         // Mock @Input
         component.form = {
             value: 'TEST',
-            valid: false
+            valid: false,
+            getRawValue: () => {
+                return 'TEST';
+            }
         };
         component.layout = 'vertical';
     }));
