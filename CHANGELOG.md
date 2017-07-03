@@ -1,3 +1,13 @@
+<a name="2.0.225"></a>
+## [2.0.225](https://github.com/bullhorn/novo-elements/compare/v2.0.224...v2.0.225) (2017-07-03)
+
+
+### Features
+
+* **form:** Keyboard support ([3968dc2](https://github.com/bullhorn/novo-elements/commit/3968dc2))
+
+
+
 <a name="2.0.224"></a>
 ## [2.0.224](https://github.com/bullhorn/novo-elements/compare/v2.0.223...v2.0.224) (2017-06-30)
 
