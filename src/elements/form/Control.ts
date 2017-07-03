@@ -27,7 +27,7 @@ import { Helpers } from '../../utils/Helpers';
                 <div class="novo-control-inner-container">
                     <div class="novo-control-inner-input-container">
                         <!--Required Indicator-->
-                        <i [hidden]="!form?.controls[control.key]?.required"
+                        <i [hidden]="!form?.controls[control.key]?.required || form?.controls[control.key]?.readOnly"
                             class="required-indicator"
                             [ngClass]="{'bhi-circle': !form.controls[control.key].valid, 'bhi-check': form.controls[control.key].valid}" *ngIf="form?.controls[control.key]?.required">
                         </i>
@@ -79,7 +79,7 @@ export class NovoCustomControlContainerElement {
                 <div class="novo-control-inner-container">
                     <div class="novo-control-inner-input-container">
                         <!--Required Indicator-->
-                        <i [hidden]="!form?.controls[control.key]?.required"
+                        <i [hidden]="!form?.controls[control.key]?.required || form?.controls[control.key]?.readOnly"
                             class="required-indicator"
                             [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form?.controls[control.key]?.required">
                         </i>

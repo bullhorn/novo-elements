@@ -1,5 +1,5 @@
 // NG2
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 // APP
 import { NovoControlConfig } from './FormControls';
@@ -126,3 +126,8 @@ export class NovoFormControl extends FormControl {
     }
 }
 
+export class NovoFormGroup extends FormGroup {
+    get value() {
+        return this.getRawValue();
+    }
+}

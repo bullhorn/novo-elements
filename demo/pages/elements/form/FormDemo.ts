@@ -166,7 +166,7 @@ export class FormDemoComponent {
             }
         };
         // Text-based Controls
-        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox' });
+        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox', readOnly: true, value: 'HI', required: true });
         this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email', tooltip: 'Email' });
         this.numberControl = new TextBoxControl({ type: 'number', key: 'number', label: 'Number' });
         this.currencyControl = new TextBoxControl({ type: 'currency', key: 'currency', label: 'Currency', currencyFormat: '$ USD' });
@@ -187,7 +187,8 @@ export class FormDemoComponent {
         this.entityMultiPickerControl = new PickerControl({
             key: 'entityMultiPicker',
             label: 'Entities',
-            required: false,
+            required: true,
+            readOnly: true,
             multiple: true,
             config: {
                 resultsTemplate: EntityPickerResults,
@@ -202,7 +203,11 @@ export class FormDemoComponent {
                     { title: 'Thomas Jefferson', firstName: 'Thomas', lastName: 'Jefferson', name: 'Thomas Jefferson', email: 'tjefferson@usa.com', phone: '(123) 542-1234', address: { city: 'Arlington', state: 'VA' }, status: 'New Lead', searchEntity: 'Candidate' }]
             }
         });
-        this.pickerForm = formUtils.toFormGroup([this.singlePickerControl, this.multiPickerControl, this.entityMultiPickerControl]);
+        let controls = [this.singlePickerControl, this.multiPickerControl, this.entityMultiPickerControl];
+        formUtils.setInitialValues(controls, {
+            entityMultiPicker: [{ 'title': 'Federal Bank', 'name': 'Federal Bank', 'email': 'info@federalbank.com', 'phone': '(545) 555-1212', 'address': { 'city': 'Arlington', 'state': 'VA' }, 'searchEntity': 'ClientCorporation' }]
+        });
+        this.pickerForm = formUtils.toFormGroup(controls);
 
         // File input controls
         this.fileControl = new FileControl({ key: 'file', name: 'myfile', label: 'File', tooltip: 'Files Control' });

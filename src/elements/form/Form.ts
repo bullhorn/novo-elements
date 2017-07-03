@@ -27,7 +27,7 @@ export class NovoFormElement implements OnInit {
     }
 
     get value() {
-        return this.form.value;
+        return this.form.getRawValue();
     }
 
     get isValid() {

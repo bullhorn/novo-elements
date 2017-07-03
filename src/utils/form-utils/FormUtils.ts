@@ -23,7 +23,7 @@ import {
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from '../Helpers';
 import { NovoFieldset } from '../../elements/form/FormInterfaces';
-import { NovoFormControl } from '../../elements/form/NovoFormControl';
+import { NovoFormControl, NovoFormGroup } from '../../elements/form/NovoFormControl';
 
 // TODO: http doesn't need to be injected in getControlForField, toControls, toFieldSets, or getControlOptions;
 // TODO: (cont.) we should just use NG2's http provider for the http request at this level
@@ -70,13 +70,13 @@ export class FormUtils {
      * @param controls
      * @returns { FormGroup }
      */
-    toFormGroup(controls: Array<any>): FormGroup {
+    toFormGroup(controls: Array<any>): NovoFormGroup {
         let group: any = {};
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
             group[control.key] = new NovoFormControl(value, control);
         });
-        return new FormGroup(group);
+        return new NovoFormGroup(group);
     }
 
     /**
@@ -84,7 +84,7 @@ export class FormUtils {
      * @param formGroup
      * @param controls
      */
-    addControls(formGroup: FormGroup, controls: Array<NovoControlConfig>): void {
+    addControls(formGroup: NovoFormGroup, controls: Array<NovoControlConfig>): void {
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
             let formControl = new NovoFormControl(value, control);
@@ -96,7 +96,7 @@ export class FormUtils {
     /**
      * @name toFormGroupFromFieldset
      * @param fieldsets
-     * @returns {FormGroup}
+     * @returns {NovoFormGroup}
      */
     toFormGroupFromFieldset(fieldsets: Array<NovoFieldset>) {
         let controls: Array<NovoFormControl> = [];
@@ -518,7 +518,7 @@ export class FormUtils {
         });
     }
 
-    forceValidation(form: FormGroup): void {
+    forceValidation(form: NovoFormGroup): void {
         Object.keys(form.controls).forEach((key: string) => {
             let control: any = form.controls[key];
             if (control.required && Helpers.isBlank(form.value[control.key])) {

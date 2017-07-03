@@ -3,6 +3,7 @@ export interface NovoFormGroup {
     controls?: any;
     value?: any;
     valid?: boolean;
+    getRawValue?: any;
 }
 
 export interface NovoFieldset {
