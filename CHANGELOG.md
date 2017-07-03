@@ -1,3 +1,13 @@
+<a name="2.0.226"></a>
+## [2.0.226](https://github.com/bullhorn/novo-elements/compare/v2.0.225...v2.0.226) (2017-07-03)
+
+
+### Bug Fixes
+
+* **picker:** Fixing tab/focus behavior ([d8a80c0](https://github.com/bullhorn/novo-elements/commit/d8a80c0))
+
+
+
 <a name="2.0.225"></a>
 ## [2.0.225](https://github.com/bullhorn/novo-elements/compare/v2.0.224...v2.0.225) (2017-07-03)
 
