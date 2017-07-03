@@ -1882,6 +1882,10 @@ novo-radio {
     position: absolute;
     z-index: -1;
     opacity: 0; }
+    novo-radio > input:focus + label i:before {
+      text-shadow: 0px 0px 20px rgba(74, 137, 220, 0.5); }
+    novo-radio > input:focus + label i.bhi-radio-empty, novo-radio > input:focus + label i.bhi-radio-filled {
+      color: #4A89DC; }
   novo-radio > label {
     cursor: pointer; }
     novo-radio > label > div {
@@ -1971,92 +1975,92 @@ button[theme] {
       button[theme][theme="primary"][icon][icon="send"] i:before {
         margin-top: 1px;
         margin-left: -2px; }
-    button[theme][theme="primary"]:hover {
+    button[theme][theme="primary"]:hover, button[theme][theme="primary"]:focus {
       background: #75a5e4; }
     button[theme][theme="primary"]:active {
       background: #357bd8; }
     button[theme][theme="primary"][color="positive"] {
       background: #4A89DC; }
-      button[theme][theme="primary"][color="positive"]:hover {
+      button[theme][theme="primary"][color="positive"]:hover, button[theme][theme="primary"][color="positive"]:focus {
         background: #75a5e4; }
       button[theme][theme="primary"][color="positive"]:active {
         background: #357bd8; }
     button[theme][theme="primary"][color="success"] {
       background: #8CC152; }
-      button[theme][theme="primary"][color="success"]:hover {
+      button[theme][theme="primary"][color="success"]:hover, button[theme][theme="primary"][color="success"]:focus {
         background: #a5ce78; }
       button[theme][theme="primary"][color="success"]:active {
         background: #7fb842; }
     button[theme][theme="primary"][color="negative"] {
       background: #DA4453; }
-      button[theme][theme="primary"][color="negative"]:hover {
+      button[theme][theme="primary"][color="negative"]:hover, button[theme][theme="primary"][color="negative"]:focus {
         background: #e26f7a; }
       button[theme][theme="primary"][color="negative"]:active {
         background: #d62f3f; }
     button[theme][theme="primary"][color="warning"] {
       background: #F6B042; }
-      button[theme][theme="primary"][color="warning"]:hover {
+      button[theme][theme="primary"][color="warning"]:hover, button[theme][theme="primary"][color="warning"]:focus {
         background: #f8c473; }
       button[theme][theme="primary"][color="warning"]:active {
         background: #f5a62a; }
     button[theme][theme="primary"][color="background"] {
       background: #f4f4f4; }
-      button[theme][theme="primary"][color="background"]:hover {
+      button[theme][theme="primary"][color="background"]:hover, button[theme][theme="primary"][color="background"]:focus {
         background: white; }
       button[theme][theme="primary"][color="background"]:active {
         background: #e7e7e7; }
     button[theme][theme="primary"][color="black"] {
       background: #000000; }
-      button[theme][theme="primary"][color="black"]:hover {
+      button[theme][theme="primary"][color="black"]:hover, button[theme][theme="primary"][color="black"]:focus {
         background: #1a1a1a; }
       button[theme][theme="primary"][color="black"]:active {
         background: black; }
     button[theme][theme="primary"][color="white"] {
       background: #ffffff; }
-      button[theme][theme="primary"][color="white"]:hover {
+      button[theme][theme="primary"][color="white"]:hover, button[theme][theme="primary"][color="white"]:focus {
         background: white; }
       button[theme][theme="primary"][color="white"]:active {
         background: #f2f2f2; }
     button[theme][theme="primary"][color="grey"] {
       background: #999999; }
-      button[theme][theme="primary"][color="grey"]:hover {
+      button[theme][theme="primary"][color="grey"]:hover, button[theme][theme="primary"][color="grey"]:focus {
         background: #b3b3b3; }
       button[theme][theme="primary"][color="grey"]:active {
         background: #8c8c8c; }
     button[theme][theme="primary"][color="off-white"] {
       background: #f4f4f4; }
-      button[theme][theme="primary"][color="off-white"]:hover {
+      button[theme][theme="primary"][color="off-white"]:hover, button[theme][theme="primary"][color="off-white"]:focus {
         background: white; }
       button[theme][theme="primary"][color="off-white"]:active {
         background: #e7e7e7; }
     button[theme][theme="primary"][color="dark"] {
       background: #3D464D; }
-      button[theme][theme="primary"][color="dark"]:hover {
+      button[theme][theme="primary"][color="dark"]:hover, button[theme][theme="primary"][color="dark"]:focus {
         background: #546069; }
       button[theme][theme="primary"][color="dark"]:active {
         background: #32393f; }
     button[theme][theme="primary"][color="light"] {
       background: #D9DADC; }
-      button[theme][theme="primary"][color="light"]:hover {
+      button[theme][theme="primary"][color="light"]:hover, button[theme][theme="primary"][color="light"]:focus {
         background: #f4f4f4; }
       button[theme][theme="primary"][color="light"]:active {
         background: #cccdd0; }
     button[theme][theme="primary"][color="pulse"] {
       background: #3BAFDA; }
-      button[theme][theme="primary"][color="pulse"]:hover {
+      button[theme][theme="primary"][color="pulse"]:hover, button[theme][theme="primary"][color="pulse"]:focus {
         background: #66c1e2; }
       button[theme][theme="primary"][color="pulse"]:active {
         background: #28a5d4; }
     button[theme][theme="primary"][color="neutral"] {
       background: #4f5361; }
-      button[theme][theme="primary"][color="neutral"]:hover {
+      button[theme][theme="primary"][color="neutral"]:hover, button[theme][theme="primary"][color="neutral"]:focus {
         background: #666b7d; }
       button[theme][theme="primary"][color="neutral"]:active {
         background: #444753; }
     button[theme][theme="primary"][color="white"] {
       background: #ffffff;
       color: #4A89DC; }
-      button[theme][theme="primary"][color="white"]:hover {
+      button[theme][theme="primary"][color="white"]:hover, button[theme][theme="primary"][color="white"]:focus {
         background: #f4f4f4; }
       button[theme][theme="primary"][color="white"]:active {
         background: #e7e7e7; }
@@ -2064,55 +2068,55 @@ button[theme] {
         background: rgba(0, 0, 0, 0.05); }
     button[theme][theme="primary"][color="aqua"] {
       background: #3BAFDA; }
-      button[theme][theme="primary"][color="aqua"]:hover {
+      button[theme][theme="primary"][color="aqua"]:hover, button[theme][theme="primary"][color="aqua"]:focus {
         background: #66c1e2; }
       button[theme][theme="primary"][color="aqua"]:active {
         background: #28a5d4; }
     button[theme][theme="primary"][color="ocean"] {
       background: #4A89DC; }
-      button[theme][theme="primary"][color="ocean"]:hover {
+      button[theme][theme="primary"][color="ocean"]:hover, button[theme][theme="primary"][color="ocean"]:focus {
         background: #75a5e4; }
       button[theme][theme="primary"][color="ocean"]:active {
         background: #357bd8; }
     button[theme][theme="primary"][color="mint"] {
       background: #37BC9B; }
-      button[theme][theme="primary"][color="mint"]:hover {
+      button[theme][theme="primary"][color="mint"]:hover, button[theme][theme="primary"][color="mint"]:focus {
         background: #58ceb1; }
       button[theme][theme="primary"][color="mint"]:active {
         background: #31a88b; }
     button[theme][theme="primary"][color="grass"] {
       background: #8CC152; }
-      button[theme][theme="primary"][color="grass"]:hover {
+      button[theme][theme="primary"][color="grass"]:hover, button[theme][theme="primary"][color="grass"]:focus {
         background: #a5ce78; }
       button[theme][theme="primary"][color="grass"]:active {
         background: #7fb842; }
     button[theme][theme="primary"][color="sunflower"] {
       background: #F6B042; }
-      button[theme][theme="primary"][color="sunflower"]:hover {
+      button[theme][theme="primary"][color="sunflower"]:hover, button[theme][theme="primary"][color="sunflower"]:focus {
         background: #f8c473; }
       button[theme][theme="primary"][color="sunflower"]:active {
         background: #f5a62a; }
     button[theme][theme="primary"][color="bittersweet"] {
       background: #EB6845; }
-      button[theme][theme="primary"][color="bittersweet"]:hover {
+      button[theme][theme="primary"][color="bittersweet"]:hover, button[theme][theme="primary"][color="bittersweet"]:focus {
         background: #f08d73; }
       button[theme][theme="primary"][color="bittersweet"]:active {
         background: #e9552e; }
     button[theme][theme="primary"][color="grapefruit"] {
       background: #DA4453; }
-      button[theme][theme="primary"][color="grapefruit"]:hover {
+      button[theme][theme="primary"][color="grapefruit"]:hover, button[theme][theme="primary"][color="grapefruit"]:focus {
         background: #e26f7a; }
       button[theme][theme="primary"][color="grapefruit"]:active {
         background: #d62f3f; }
     button[theme][theme="primary"][color="carnation"] {
       background: #D770AD; }
-      button[theme][theme="primary"][color="carnation"]:hover {
+      button[theme][theme="primary"][color="carnation"]:hover, button[theme][theme="primary"][color="carnation"]:focus {
         background: #e298c4; }
       button[theme][theme="primary"][color="carnation"]:active {
         background: #d15ca2; }
     button[theme][theme="primary"][color="lavender"] {
       background: #967ADC; }
-      button[theme][theme="primary"][color="lavender"]:hover {
+      button[theme][theme="primary"][color="lavender"]:hover, button[theme][theme="primary"][color="lavender"]:focus {
         background: #b6a2e7; }
       button[theme][theme="primary"][color="lavender"]:active {
         background: #8666d7; }
@@ -2130,7 +2134,7 @@ button[theme] {
       margin-left: 10px; }
       button[theme][theme="secondary"] i.loading svg .spinner {
         fill: #4A89DC; }
-    button[theme][theme="secondary"]:hover {
+    button[theme][theme="secondary"]:hover, button[theme][theme="secondary"]:focus {
       box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.15); }
     button[theme][theme="secondary"]:active {
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
@@ -2138,7 +2142,7 @@ button[theme] {
       background: rgba(0, 0, 0, 0.25);
       color: #fff;
       border: 1px solid #fff; }
-      button[theme][theme="secondary"][inverse]:hover {
+      button[theme][theme="secondary"][inverse]:hover, button[theme][theme="secondary"][inverse]:focus {
         background: rgba(0, 0, 0, 0.35); }
       button[theme][theme="secondary"][inverse]:active {
         background: rgba(0, 0, 0, 0.45); }
@@ -2196,11 +2200,11 @@ button[theme] {
         padding: 5px 5px 5px 15px; }
         button[theme][theme="dialogue"][icon][side="right"] i {
           margin-left: 5px; }
-    button[theme][theme="dialogue"]:hover {
+    button[theme][theme="dialogue"]:hover, button[theme][theme="dialogue"]:focus {
       background: #ececed; }
     button[theme][theme="dialogue"]:active {
       background: #dedfe1; }
-    button[theme][theme="dialogue"][inverse]:hover {
+    button[theme][theme="dialogue"][inverse]:hover, button[theme][theme="dialogue"][inverse]:focus {
       background: rgba(0, 0, 0, 0.2); }
     button[theme][theme="dialogue"][inverse]:active {
       background: rgba(0, 0, 0, 0.35); }
@@ -2386,7 +2390,7 @@ button[theme] {
     button[theme][theme="standard"] .flex-wrapper {
       -ms-flex-pack: center;
           justify-content: center; }
-    button[theme][theme="standard"]:hover {
+    button[theme][theme="standard"]:hover, button[theme][theme="standard"]:focus {
       box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.15); }
     button[theme][theme="standard"]:active {
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
@@ -9401,7 +9405,11 @@ novo-check-list {
   novo-checkbox [class*="-group"], multi-picker [class*="-group"],
   novo-check-list [class*="-group"] {
     margin-right: 15px;
-    cursor: pointer; }
+    cursor: pointer;
+    position: relative; }
+    novo-checkbox [class*="-group"]:hover label i:before, multi-picker [class*="-group"]:hover label i:before,
+    novo-check-list [class*="-group"]:hover label i:before {
+      box-shadow: 0px 0px 15px 3px rgba(74, 137, 220, 0.25); }
     novo-checkbox [class*="-group"]:hover label i.bhi-checkbox-empty, multi-picker [class*="-group"]:hover label i.bhi-checkbox-empty, novo-checkbox [class*="-group"]:hover label i.bhi-radio-empty, multi-picker [class*="-group"]:hover label i.bhi-radio-empty,
     novo-check-list [class*="-group"]:hover label i.bhi-checkbox-empty,
     novo-check-list [class*="-group"]:hover label i.bhi-radio-empty {
@@ -9419,6 +9427,21 @@ novo-check-list {
       novo-checkbox [class*="-group"].disabled label, multi-picker [class*="-group"].disabled label,
       novo-check-list [class*="-group"].disabled label {
         opacity: 1; }
+    novo-checkbox [class*="-group"] input, multi-picker [class*="-group"] input,
+    novo-check-list [class*="-group"] input {
+      -webkit-appearance: none !important;
+         -moz-appearance: none !important;
+              appearance: none !important;
+      height: 0 !important;
+      border: none !important;
+      position: absolute; }
+      novo-checkbox [class*="-group"] input:focus + label i:before, multi-picker [class*="-group"] input:focus + label i:before,
+      novo-check-list [class*="-group"] input:focus + label i:before {
+        text-shadow: 0px 0px 20px rgba(74, 137, 220, 0.5); }
+      novo-checkbox [class*="-group"] input:focus + label i.bhi-checkbox-empty, multi-picker [class*="-group"] input:focus + label i.bhi-checkbox-empty, novo-checkbox [class*="-group"] input:focus + label i.bhi-checkbox-filled, multi-picker [class*="-group"] input:focus + label i.bhi-checkbox-filled,
+      novo-check-list [class*="-group"] input:focus + label i.bhi-checkbox-empty,
+      novo-check-list [class*="-group"] input:focus + label i.bhi-checkbox-filled {
+        color: #4A89DC; }
     novo-checkbox [class*="-group"] label, multi-picker [class*="-group"] label,
     novo-check-list [class*="-group"] label {
       color: #868686;
@@ -11582,7 +11605,15 @@ novo-quick-note,
 
 novo-tiles {
   display: inline-block;
+  position: relative;
   color: #999999; }
+  novo-tiles input {
+    -webkit-appearance: none !important;
+       -moz-appearance: none !important;
+            appearance: none !important;
+    height: 0 !important;
+    border: none !important;
+    position: absolute; }
   novo-tiles > .tile-container {
     display: inline-block;
     text-align: center;
@@ -11608,6 +11639,9 @@ novo-tiles {
         cursor: pointer;
         z-index: 1;
         position: relative; }
+    novo-tiles > .tile-container.active {
+      border-color: #4A89DC;
+      box-shadow: 0px 0px 15px 3px rgba(74, 137, 220, 0.25); }
   novo-tiles span.active-indicator {
     position: absolute;
     top: -1px;
@@ -13101,104 +13135,104 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-candidate {
-      background: #44BB77;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-navigation {
-      background: #2F384F;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-lead {
-      background: #AA6699;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-submission {
-      background: #a9adbb;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
       width: 38px;
       height: 38px; }
+    color header .background-boxes .bb-candidate {
+      background: #44BB77;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-navigation {
+      background: #2F384F;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-lead {
+      background: #AA6699;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-submission {
+      background: #a9adbb;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
-      width: 27px;
-      height: 27px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-note {
       background: #747884;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-task {
-      background: #4f5361;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-distributionList {
-      background: #4f5361;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-credential {
-      background: #4f5361;
-      width: 36px;
-      height: 36px; }
-    color header .background-boxes .bb-user {
-      background: #4f5361;
       width: 28px;
       height: 28px; }
-    color header .background-boxes .bb-corporateuser {
+    color header .background-boxes .bb-task {
       background: #4f5361;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-distributionList {
+      background: #4f5361;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-credential {
+      background: #4f5361;
       width: 40px;
       height: 40px; }
+    color header .background-boxes .bb-user {
+      background: #4f5361;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-corporateuser {
+      background: #4f5361;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 30px;
+      height: 30px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 35px;
-      height: 35px; }
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 34px;
-      height: 34px; }
+      width: 31px;
+      height: 31px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -14258,4 +14292,4 @@ date-picker-demo .example.side-by-side-demo {
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.f592e81e2c0c90560346.bundle.map*/
+/*# sourceMappingURL=main.646eee7a98e90b35d155.bundle.map*/
