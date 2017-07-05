@@ -105,6 +105,9 @@ i {
                     background: $color;
                 }
             }
+            &.large {
+                font-size: 1.2em;
+            }
         }
         &[theme="entity"] {
             @each $entity,

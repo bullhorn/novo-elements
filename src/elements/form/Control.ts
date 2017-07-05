@@ -30,10 +30,10 @@ import { KeyCodes } from '../../utils/key-codes/KeyCodes';
                         <!--Required Indicator-->
                         <i [hidden]="!form?.controls[control.key]?.required || form?.controls[control.key]?.readOnly"
                             class="required-indicator"
-                            [ngClass]="{'bhi-circle': !form.controls[control.key].valid, 'bhi-check': form.controls[control.key].valid}" *ngIf="form?.controls[control.key]?.required">
+                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form?.controls[control.key]?.required">
                         </i>
                         <!--Form Controls-->
-                        <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType" [attr.data-automation-id]="control.key">
+                        <div class="novo-control-input {{control.controlType}}" [attr.data-automation-id]="control.key">
                             <ng-content></ng-content>
                         </div>
                     </div>
@@ -456,8 +456,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
     }
 
-    handleTabForPickers(event: any):void {
-         if (this.active && event && event.keyCode) {
+    handleTabForPickers(event: any): void {
+        if (this.active && event && event.keyCode) {
             if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB) {
                 this.toggleActive(event, false);
             }

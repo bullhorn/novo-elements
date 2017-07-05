@@ -1,31 +1,9 @@
-<div>
-    <novo-calendar-date-change [view]="view" [(viewDate)]="viewDate">
-    </novo-calendar-date-change>
+<div class="calendar-demo-side-by-side">
+    <p>
+        <label>Value One</label> {{(dateOne | date) || 'N/A'}}
 
-    <novo-tiles [options]="views" [(ngModel)]="view"></novo-tiles>
-</div>
-<div [ngSwitch]="view" class="cal-demo-content">
-    <novo-calendar-month
-    *ngSwitchCase="'month'"
-    [(viewDate)]="viewDate"
-    [events]="events"
-    (dayClicked)="dayClicked($event.day.date)">
-    </novo-calendar-month>
-
-    <novo-calendar-week
-    *ngSwitchCase="'week'"
-    [(viewDate)]="viewDate"
-    [events]="events"
-    (dayClicked)="dayClicked($event.date)"
-    [dayStartHour]="0"
-    [dayEndHour]="24">
-    </novo-calendar-week>
-
-    <novo-calendar-day
-    *ngSwitchCase="'day'"
-    [(viewDate)]="viewDate"
-    [events]="events"
-    [dayStartHour]="0"
-    [dayEndHour]="24">
-    </novo-calendar-day>
+        <label>Value Two</label> {{(dateTwo | date) || 'N/A'}}
+    </p>
+    <novo-date-picker [(ngModel)]="dateOne" minYear="2000" maxYear="2020" [start]="start" [end]="end"></novo-date-picker>
+    <novo-date-picker [(ngModel)]="dateTwo"></novo-date-picker>
 </div>
