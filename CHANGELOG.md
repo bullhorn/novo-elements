@@ -1,3 +1,13 @@
+<a name="2.0.228"></a>
+## [2.0.228](https://github.com/bullhorn/novo-elements/compare/v2.0.227...v2.0.228) (2017-07-05)
+
+
+### Bug Fixes
+
+* **form:** Fixing date picker clicking ([50e41d9](https://github.com/bullhorn/novo-elements/commit/50e41d9))
+
+
+
 <a name="2.0.227"></a>
 ## [2.0.227](https://github.com/bullhorn/novo-elements/compare/v2.0.226...v2.0.227) (2017-07-03)
 
