@@ -1,0 +1,7 @@
+<div class="calendar-demo-side-by-side">
+    <p>
+        <label>Value</label> {{(time | date:'mediumTime') || 'N/A'}}
+    </p>
+    <novo-time-picker [(ngModel)]="time"></novo-time-picker>
+    <novo-time-picker [(ngModel)]="time" military="true"></novo-time-picker>
+</div>
