@@ -30,7 +30,7 @@ import { KeyCodes } from '../../utils/key-codes/KeyCodes';
                         <!--Required Indicator-->
                         <i [hidden]="!form?.controls[control.key]?.required || form?.controls[control.key]?.readOnly"
                             class="required-indicator"
-                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form?.controls[control.key]?.required">
+                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="form?.controls[control.key]?.required">
                         </i>
                         <!--Form Controls-->
                         <div class="novo-control-input {{control.controlType}}" [attr.data-automation-id]="control.key">
