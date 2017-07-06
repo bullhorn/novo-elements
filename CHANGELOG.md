@@ -1,3 +1,13 @@
+<a name="2.0.231"></a>
+## [2.0.231](https://github.com/bullhorn/novo-elements/compare/v2.0.230...v2.0.231) (2017-07-06)
+
+
+### Bug Fixes
+
+* **Form:** fix empty percentage field interactions ([#501](https://github.com/bullhorn/novo-elements/issues/501)) ([fa3929c](https://github.com/bullhorn/novo-elements/commit/fa3929c))
+
+
+
 <a name="2.0.230"></a>
 ## [2.0.230](https://github.com/bullhorn/novo-elements/compare/v2.0.229...v2.0.230) (2017-07-05)
 
