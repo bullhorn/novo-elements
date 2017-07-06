@@ -272,12 +272,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         if (this.control && this.control.subType === 'percentage') {
             if (!Helpers.isEmpty(this.control.value)) {
                 this.percentValue = Number((this.control.value * 100).toFixed(6).replace(/\.?0*$/, ''));
-                this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe(value => {
-                    if (!Helpers.isEmpty(value)) {
-                        this.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
-                    }
-                });
             }
+            this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe(value => {
+                if (!Helpers.isEmpty(value)) {
+                    this.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
+                }
+            });
         }
     }
 
