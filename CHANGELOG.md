@@ -1,3 +1,13 @@
+<a name="2.0.232"></a>
+## [2.0.232](https://github.com/bullhorn/novo-elements/compare/v2.0.231...v2.0.232) (2017-07-09)
+
+
+### Bug Fixes
+
+* **form:** keyboard control in firefox, fixes [#502](https://github.com/bullhorn/novo-elements/issues/502) ([73de5ba](https://github.com/bullhorn/novo-elements/commit/73de5ba))
+
+
+
 <a name="2.0.231"></a>
 ## [2.0.231](https://github.com/bullhorn/novo-elements/compare/v2.0.230...v2.0.231) (2017-07-06)
 
