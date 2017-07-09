@@ -90,8 +90,8 @@ export class NovoCustomControlContainerElement {
                             <!--TODO prefix/suffix on the control-->
                             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
                                 <input *ngIf="control.type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)">
-                                <input *ngIf="control.type === 'number' && control.subType !== 'percentage'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (keypress)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="numberInput.blur()" #numberInput>
-                                <input *ngIf="control.type === 'number' && control.subType === 'percentage'" [type]="control.type" [placeholder]="control.placeholder" (keypress)="restrictKeys($event)" [value]="percentValue" (input)="handlePercentChange($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="percentInput.blur()" #percentInput>
+                                <input *ngIf="control.type === 'number' && control.subType !== 'percentage'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (keydown)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="numberInput.blur()" #numberInput>
+                                <input *ngIf="control.type === 'number' && control.subType === 'percentage'" [type]="control.type" [placeholder]="control.placeholder" (keydown)="restrictKeys($event)" [value]="percentValue" (input)="handlePercentChange($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="percentInput.blur()" #percentInput>
                                 <label class="input-label" *ngIf="control.subType === 'currency'">{{control.currencyFormat}}</label>
                                 <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
                             </div>
@@ -431,14 +431,15 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     restrictKeys(event) {
         const NUMBERS_ONLY = /[0-9\-]/;
         const NUMBERS_WITH_DECIMAL = /[0-9\.\-]/;
-        let key = String.fromCharCode(event.charCode);
-        //Types
-        if (this.control.subType === 'number' && !NUMBERS_ONLY.test(key)) {
+        const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+        let key = event.key;
+        // Types
+        if (this.control.subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
             event.preventDefault();
-        } else if (~['currency', 'float', 'percentage'].indexOf(this.control.subType) && !NUMBERS_WITH_DECIMAL.test(key)) {
+        } else if (~['currency', 'float', 'percentage'].indexOf(this.control.subType) && !(NUMBERS_WITH_DECIMAL.test(key) || UTILITY_KEYS.includes(key))) {
             event.preventDefault();
         }
-        //Max Length
+        // Max Length
         if (this.control.maxlength && event.target.value.length >= this.control.maxlength) {
             event.preventDefault();
         }
