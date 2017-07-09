@@ -79,7 +79,7 @@ novo-form {
                     }
                     &.disabled {
                         pointer-events: none;
-                        input {
+                        input:not('.tiles-input') {
                             &::-webkit-input-placeholder {
                                 color: darken($light, 10%) !important;
                             }
@@ -584,7 +584,7 @@ novo-form {
                         margin-top: 0;
                         &.disabled {
                             pointer-events: none;
-                            input {
+                            input:not('.tiles-input') {
                                 &::-webkit-input-placeholder {
                                     color: darken($light, 10%) !important;
                                 }
