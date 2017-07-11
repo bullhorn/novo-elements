@@ -119,18 +119,18 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
             .debounceTime(250)
             .distinctUntilChanged();
         pasteObserver.subscribe(
-            (event: ClipboardEvent) => this.onDebounedKeyup(event),
+            (event: ClipboardEvent) => this.onDebouncedKeyup(event),
             err => this.hideResults(err));
         const keyboardObserver = Observable.fromEvent(input, 'keyup')
             .debounceTime(250)
             .distinctUntilChanged();
         keyboardObserver.subscribe(
-            (event: KeyboardEvent) => this.onDebounedKeyup(event),
+            (event: KeyboardEvent) => this.onDebouncedKeyup(event),
             err => this.hideResults(err));
     }
 
-    private onDebounedKeyup(event: any) {
-        if ([KeyCodes.ESC, KeyCodes.UP, KeyCodes.DOWN, KeyCodes.ENTER, KeyCodes.TAB].includes(event.keyCode)) {
+    private onDebouncedKeyup(event: Event) {
+        if ([KeyCodes.ESC, KeyCodes.UP, KeyCodes.DOWN, KeyCodes.ENTER, KeyCodes.TAB].includes(event['keyCode'])) {
             return;
         }
         this.show((event.target as any).value);
