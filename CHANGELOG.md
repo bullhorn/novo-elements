@@ -1,3 +1,13 @@
+<a name="2.0.233"></a>
+## [2.0.233](https://github.com/bullhorn/novo-elements/compare/v2.0.232...v2.0.233) (2017-07-12)
+
+
+### Bug Fixes
+
+* **picker:** Fixing picker to accept right click paste values ([#504](https://github.com/bullhorn/novo-elements/issues/504)) ([5b3866c](https://github.com/bullhorn/novo-elements/commit/5b3866c))
+
+
+
 <a name="2.0.232"></a>
 ## [2.0.232](https://github.com/bullhorn/novo-elements/compare/v2.0.231...v2.0.232) (2017-07-09)
 
