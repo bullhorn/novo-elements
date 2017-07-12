@@ -2,6 +2,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+// Vendor
+import { TextMaskModule } from 'angular2-text-mask';
 // APP
 import { NovoRadioModule } from './../radio/Radio.module';
 import { NovoTilesModule } from './../tiles/Tiles.module';
@@ -20,7 +22,6 @@ import { NovoFormExtrasModule } from './extras/FormExtras.module';
 import { NovoHeaderModule } from './../header/Header.module';
 import { NovoTooltipModule } from './../tooltip/Tooltip.module';
 import { NovoDragulaModule } from './../dragula/Dragula.module';
-import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
     imports: [
