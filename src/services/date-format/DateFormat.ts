@@ -107,7 +107,7 @@ export class DateFormatService {
     }
 
     parseString(dateTimeString: string, militaryTime: boolean, type: string) {
-        switch(type) {
+        switch (type) {
             case 'date':
                 return this.parseDateString(dateTimeString);
             case 'time':
