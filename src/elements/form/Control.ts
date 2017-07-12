@@ -9,6 +9,13 @@ import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { DateFormatService } from '../../services/date-format/DateFormat';
+
+export interface IMaskOptions {
+    mask: any;
+    keepCharPositions: boolean;
+    guide: boolean;
+};
 
 @Component({
     selector: 'novo-custom-control-container',
@@ -121,21 +128,21 @@ export class NovoCustomControlContainerElement {
                             </div>
                             <!--Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleTabForPickers($event)" [value]="formattedValue" readonly/>
+                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleTabForPickers($event)" [value]="formattedValue" [textMask]="maskOptions" (input)="selectDateTimeValue($event)" />
                                 <i (click)="toggleActive($event)" class="bhi-clock" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
                                 <novo-time-picker *ngIf="active" (onSelect)="formatTimeValue($event);" [formControlName]="control.key" [military]="control.military"></novo-time-picker>
                             </div>
                             <!--Date-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleTabForPickers($event)" [value]="formattedValue" readonly/>
+                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleTabForPickers($event)" [value]="formattedValue" [textMask]="maskOptions" (input)="selectDateTimeValue($event)" />
                                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
                                 <novo-date-picker inline="true" *ngIf="active" (onSelect)="formatDateValue($event); modelChange($event);" [formControlName]="control.key"></novo-date-picker>
                             </div>
                             <!--Date and Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date-time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleTabForPickers($event)" [value]="formattedValue" readonly/>
+                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleTabForPickers($event)" [value]="formattedValue" [textMask]="maskOptions" (input)="selectDateTimeValue($event)" />
                                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
                                 <novo-date-time-picker *ngIf="active" (onSelect)="formatDateTimeValue($event); modelChange($event);" [formControlName]="control.key" [military]="control.military"></novo-date-time-picker>
@@ -211,7 +218,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private percentChangeSubscription: any;
     private valueChangeSubscription: any;
 
-    constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService) {
+    maskOptions: IMaskOptions;
+
+    constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService, private dateFormatService: DateFormatService) {
         super(element);
     }
 
@@ -278,6 +287,32 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                     this.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
                 }
             });
+        }
+        this.maskOptions = {
+            mask: [],
+            keepCharPositions: false,
+            guide: false
+        };
+        if (this.control.controlType === 'date' && Helpers.isEmpty(this.control.placeholder)) {
+            this.control.placeholder = this.labels.dateFormatPlaceholder;
+            this.maskOptions.mask = this.dateFormatService.getDateMask();
+        } else if (this.control.controlType === 'time' && Helpers.isEmpty(this.control.placeholder)) {
+            this.control.placeholder = this.dateFormatService.getTimePlaceHolder(this.control.military);
+            this.maskOptions.mask = this.dateFormatService.getTimeMask();
+        } else if (this.control.controlType === 'date-time' && Helpers.isEmpty(this.control.placeholder)) {
+            this.control.placeholder = `${this.labels.dateFormatPlaceholder}, ${this.dateFormatService.getTimePlaceHolder(this.control.military)}`;
+            this.maskOptions.mask = this.dateFormatService.getDateTimeMask();
+        }
+    }
+
+    selectDateTimeValue(event) {
+        let dateTimeValue;
+        if (event && event.target && event.target.value) {
+            dateTimeValue = this.dateFormatService.parseString(event.target.value, this.control.military, this.control.controlType);
+            if (dateTimeValue && dateTimeValue > 0) {
+                this.change.emit(dateTimeValue);
+                this.form.controls[this.control.key].setValue(dateTimeValue);
+            }
         }
     }
 
@@ -376,7 +411,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     formatDateValue(event) {
         this.formattedValue = this.labels.formatDateWithFormat(event.date, {
-            month: 'long',
+            month: 'numeric',
             day: 'numeric',
             year: 'numeric'
         });
@@ -392,7 +427,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     formatDateTimeValue(event) {
         let value = this.labels.formatDateWithFormat(event.date, {
-            month: 'long',
+            month: 'numeric',
             day: 'numeric',
             year: 'numeric',
             hour: 'numeric',
