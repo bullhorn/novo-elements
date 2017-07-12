@@ -115,16 +115,22 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         }
         // Get all distinct key up events from the input and only fire if long enough and distinct
         let input = this.element.nativeElement.querySelector('input');
-        const observer = Observable.fromEvent(input, 'keyup')
+        const pasteObserver = Observable.fromEvent(input, 'paste')
             .debounceTime(250)
             .distinctUntilChanged();
-        observer.subscribe(
-            (event: KeyboardEvent) => this.onDebounedKeyup(event),
+        pasteObserver.subscribe(
+            (event: ClipboardEvent) => this.onDebouncedKeyup(event),
+            err => this.hideResults(err));
+        const keyboardObserver = Observable.fromEvent(input, 'keyup')
+            .debounceTime(250)
+            .distinctUntilChanged();
+        keyboardObserver.subscribe(
+            (event: KeyboardEvent) => this.onDebouncedKeyup(event),
             err => this.hideResults(err));
     }
 
-    private onDebounedKeyup(event: KeyboardEvent) {
-        if ([KeyCodes.ESC, KeyCodes.UP, KeyCodes.DOWN, KeyCodes.ENTER, KeyCodes.TAB].includes(event.keyCode)) {
+    private onDebouncedKeyup(event: Event) {
+        if ([KeyCodes.ESC, KeyCodes.UP, KeyCodes.DOWN, KeyCodes.ENTER, KeyCodes.TAB].includes(event['keyCode'])) {
             return;
         }
         this.show((event.target as any).value);
