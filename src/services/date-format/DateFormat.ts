@@ -8,14 +8,33 @@ import { NovoLabelService } from '../../services/novo-label-service';
 export class DateFormatService {
     constructor (private labels: NovoLabelService) {}
 
-    getTimeMask(): Array<RegExp> {
-        return [ /\d/, /\d/, /\:/, /\d/, /\d/]; // TODO (arajiv): account for am/pm
+    getTimeMask(militaryTime: boolean): Array<RegExp> {
+        let mask: Array<RegExp> = [/\d/, /\d/, /:/, /\d/, /\d/], timeFormatArray: Array<string> = [], timeFormatPartsArray: Array<string> = [];
+        let timeFormat: string = this.labels.timeFormatAM.toLowerCase();
+        if (militaryTime) {
+            return mask;
+        } else {
+            timeFormatArray = timeFormat.split('hh:mm');
+            if (timeFormatArray && timeFormatArray.length) {
+                mask = [];
+                for (let timeFormatPart of timeFormatArray) {
+                    if (timeFormatPart === '') {
+                        mask = mask.concat([/\d/, /\d|:/, /:|\d/, /\d|\w|\s/, /\d|\s|\w/]);
+                    } else if (timeFormatPart.length) {
+                        for (let i = 0; i < timeFormatPart.length; i++) {
+                            mask.push(/\s|\w|\d/);
+                        }
+                    }
+                }
+            }
+        }
+        return mask;
     }
 
-    getDateTimeMask(): Array<RegExp> {
+    getDateTimeMask(militaryTime: boolean): Array<RegExp> {
         let dateMask: Array<RegExp>, timeMask: Array<RegExp>;
         dateMask = this.getDateMask();
-        timeMask = this.getTimeMask();
+        timeMask = this.getTimeMask(militaryTime);
         return dateMask.concat([/\,/]).concat(timeMask);
     }
 
@@ -45,11 +64,10 @@ export class DateFormatService {
     }
 
     getTimePlaceHolder(militaryTime: boolean): string {
-        return this.labels.formatDateWithFormat(new Date(2017, 1, 1, 0, 0, 0), {
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: !militaryTime
-        });
+        if (militaryTime) {
+            return this.labels.timeFormatPlaceholder24Hour;
+        }
+        return this.labels.timeFormatPlaceholderAM;
     }
 
     parseDateString(dateString: string): Date {
@@ -83,21 +101,41 @@ export class DateFormatService {
     }
 
     parseTimeString(timeString: string, militaryTime: boolean): Date {
-        //implement
-        let value: Date = new Date(),
-            hours: number, minutes: number, timeStringParts: Array<string>, timeFormat: string;
-        if (timeStringParts instanceof String) {
-            timeStringParts.split(':'); // TODO (arajiv): account for am/pm
-            value.setHours(hours);
-            value.setMinutes(minutes);
-            value.setSeconds(0);
+        let value: Date = new Date(), timeStringParts: Array<string>, timeFormat: string;
+        let amPrefixRegex: RegExp = /[\w\s]{0,3}(\d{1,2}):(\d{1,2})/;
+        let amSuffixRegex: RegExp = /(\d{1,2}):(\d{1,2})[\w\s]{0,3}/;
+        if (!(timeString && timeString.includes(':'))) {
+            return value;
+        }
+        if (!militaryTime) { //TODO: (arajiv) account for am/pm!!!! pm = +12 hours :(), account for A.M/P.M
+            timeFormat = this.labels.timeFormatAM.toLowerCase();
+            if (timeFormat.match(/hh:mm[\w\s]{0,3}/ig)) {
+                timeStringParts = amSuffixRegex.exec(timeString);
+            } else {
+                timeStringParts = amPrefixRegex.exec(timeString);
+            }
+            if (timeStringParts && timeStringParts.length && timeStringParts.length === 3) {
+                value.setHours(parseInt(timeStringParts[1]));
+                value.setMinutes(parseInt(timeStringParts[2]));
+                value.setSeconds(0);
+            }
+        } else {
+            timeStringParts = /(\d{1,2}):(\d{2})/.exec(timeString);
+            if (timeStringParts && timeStringParts.length && timeStringParts.length === 3) {
+                value.setHours(parseInt(timeStringParts[1]));
+                value.setMinutes(parseInt(timeStringParts[2]));
+                value.setSeconds(0);
+            }
         }
         return value;
     }
 
     parseDateTimeString(dateTimeString: string, militaryTime: boolean): Date {
         let dateString: string, timeString: string, dateTimevalue: Date, timeValue: Date;
-        [dateString, timeString] = dateTimeString.split(', ');
+        [dateString, timeString] = dateTimeString.split(','); //TODO: trim spaces
+        if (!dateString || !timeString) {
+            return;
+        }
         dateTimevalue = this.parseDateString(dateString);
         timeValue = this.parseTimeString(timeString, militaryTime);
         dateTimevalue.setMinutes(timeValue.getMinutes());

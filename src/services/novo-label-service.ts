@@ -68,6 +68,9 @@ export class NovoLabelService {
     noItems = 'There are no items';
     dateFormat = 'MM/dd/yyyy';
     dateFormatPlaceholder = 'MM/DD/YYYY';
+    timeFormatPlaceholderAM = 'hh:mm AM';
+    timeFormatPlaceholder24Hour = 'HH:mm';
+    timeFormatAM = 'HH:mm AM';
 
     selectedRecords(selected: number) {
         return `Only ${selected} records selected.`;

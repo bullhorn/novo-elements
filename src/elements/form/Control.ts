@@ -298,10 +298,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
             this.maskOptions.mask = this.dateFormatService.getDateMask();
         } else if (this.control.controlType === 'time' && Helpers.isEmpty(this.control.placeholder)) {
             this.control.placeholder = this.dateFormatService.getTimePlaceHolder(this.control.military);
-            this.maskOptions.mask = this.dateFormatService.getTimeMask();
+            this.maskOptions.mask = this.dateFormatService.getTimeMask(this.control.military);
         } else if (this.control.controlType === 'date-time' && Helpers.isEmpty(this.control.placeholder)) {
             this.control.placeholder = `${this.labels.dateFormatPlaceholder}, ${this.dateFormatService.getTimePlaceHolder(this.control.military)}`;
-            this.maskOptions.mask = this.dateFormatService.getDateTimeMask();
+            this.maskOptions.mask = this.dateFormatService.getDateTimeMask(this.control.military);
         }
     }
 
