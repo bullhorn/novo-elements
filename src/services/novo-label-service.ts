@@ -72,7 +72,6 @@ export class NovoLabelService {
     timeFormatPlaceholder24Hour = 'HH:mm';
     timeFormatAM = 'AM';
     timeFormatPM = 'PM';
-    timeFormatPlaceholder12Hour = 'hh:mm'; // is this needed?
 
     selectedRecords(selected: number) {
         return `Only ${selected} records selected.`;

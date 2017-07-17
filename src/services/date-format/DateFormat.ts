@@ -104,12 +104,10 @@ export class DateFormatService {
         let value: Date = new Date(), timeStringParts: Array<string>, timeFormat: string;
         let amFormat = this.labels.timeFormatAM;
         let pmFormat = this.labels.timeFormatPM;
-        // let amPrefixRegex: RegExp = /[\w\s]{0,3}(\d{1,2}):(\d{1,2})/;
-        // let amSuffixRegex: RegExp = /(\d{1,2}):(\d{1,2})[\w\s]{0,3}/;
         if (!(timeString && timeString.includes(':'))) {
             return value;
         }
-        if (!militaryTime && amFormat && pmFormat) { //TODO: (arajiv) account for am/pm!!!! pm = +12 hours :(), account for A.M/P.M
+        if (!militaryTime && amFormat && pmFormat) {
             let splits: Array<string> = [], pm: boolean = false;
             amFormat = this.labels.timeFormatAM.toLowerCase();
             pmFormat = this.labels.timeFormatPM.toLowerCase();
@@ -138,9 +136,9 @@ export class DateFormatService {
             }
         } else {
             timeStringParts = /(\d{1,2}):(\d{2})/.exec(timeString);
-            if (timeStringParts && timeStringParts.length && timeStringParts.length === 2) {
-                value.setHours(parseInt(timeStringParts[0]));
-                value.setMinutes(parseInt(timeStringParts[1]));
+            if (timeStringParts && timeStringParts.length && timeStringParts.length === 3) {
+                value.setHours(parseInt(timeStringParts[1]));
+                value.setMinutes(parseInt(timeStringParts[2]));
                 value.setSeconds(0);
             }
         }
@@ -149,12 +147,12 @@ export class DateFormatService {
 
     parseDateTimeString(dateTimeString: string, militaryTime: boolean): Date {
         let dateString: string, timeString: string, dateTimevalue: Date, timeValue: Date;
-        [dateString, timeString] = dateTimeString.split(','); //TODO: trim spaces
+        [dateString, timeString] = dateTimeString.split(',');
         if (!dateString || !timeString) {
             return;
         }
-        dateTimevalue = this.parseDateString(dateString);
-        timeValue = this.parseTimeString(timeString, militaryTime);
+        dateTimevalue = this.parseDateString(dateString.trim());
+        timeValue = this.parseTimeString(timeString.trim(), militaryTime);
         dateTimevalue.setMinutes(timeValue.getMinutes());
         dateTimevalue.setHours(timeValue.getHours());
         dateTimevalue.setSeconds(0);
