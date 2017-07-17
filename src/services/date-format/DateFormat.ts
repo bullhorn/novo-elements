@@ -10,7 +10,7 @@ export class DateFormatService {
 
     getTimeMask(militaryTime: boolean): Array<RegExp> {
         let mask: Array<RegExp> = [/\d/, /\d/, /:/, /\d/, /\d/], timeFormatArray: Array<string> = [], timeFormatPartsArray: Array<string> = [];
-        let timeFormat: string = this.labels.timeFormatAM.toLowerCase();
+        let timeFormat: string = this.labels.timeFormatPlaceholderAM.toLowerCase();
         if (militaryTime) {
             return mask;
         } else {
@@ -100,30 +100,47 @@ export class DateFormatService {
         return date;
     }
 
-    parseTimeString(timeString: string, militaryTime: boolean): Date {
+    parseTimeString (timeString: string, militaryTime: boolean): Date {
         let value: Date = new Date(), timeStringParts: Array<string>, timeFormat: string;
-        let amPrefixRegex: RegExp = /[\w\s]{0,3}(\d{1,2}):(\d{1,2})/;
-        let amSuffixRegex: RegExp = /(\d{1,2}):(\d{1,2})[\w\s]{0,3}/;
+        let amFormat = this.labels.timeFormatAM;
+        let pmFormat = this.labels.timeFormatPM;
+        // let amPrefixRegex: RegExp = /[\w\s]{0,3}(\d{1,2}):(\d{1,2})/;
+        // let amSuffixRegex: RegExp = /(\d{1,2}):(\d{1,2})[\w\s]{0,3}/;
         if (!(timeString && timeString.includes(':'))) {
             return value;
         }
-        if (!militaryTime) { //TODO: (arajiv) account for am/pm!!!! pm = +12 hours :(), account for A.M/P.M
-            timeFormat = this.labels.timeFormatAM.toLowerCase();
-            if (timeFormat.match(/hh:mm[\w\s]{0,3}/ig)) {
-                timeStringParts = amSuffixRegex.exec(timeString);
-            } else {
-                timeStringParts = amPrefixRegex.exec(timeString);
+        if (!militaryTime && amFormat && pmFormat) { //TODO: (arajiv) account for am/pm!!!! pm = +12 hours :(), account for A.M/P.M
+            let splits: Array<string> = [], pm: boolean = false;
+            amFormat = this.labels.timeFormatAM.toLowerCase();
+            pmFormat = this.labels.timeFormatPM.toLowerCase();
+            timeString = timeString.toLowerCase();
+            if (timeString.includes(amFormat)) {
+                splits = timeString.split(amFormat);
+            } else if (timeString.includes(pmFormat)) {
+                splits = timeString.split(pmFormat);
+                pm = true;
             }
-            if (timeStringParts && timeStringParts.length && timeStringParts.length === 3) {
-                value.setHours(parseInt(timeStringParts[1]));
-                value.setMinutes(parseInt(timeStringParts[2]));
+            if (splits && splits.length) {
+                for (let item of splits) {
+                    if (item && item.trim().includes(':')) {
+                        timeStringParts = item.trim().split(':');
+                    }
+                }
+            }
+            if (timeStringParts && timeStringParts.length && timeStringParts.length === 2) {
+                let hours: number = parseInt(timeStringParts[0]);
+                if (pm) {
+                    hours = hours + 12;
+                }
+                value.setHours(hours);
+                value.setMinutes(parseInt(timeStringParts[1]));
                 value.setSeconds(0);
             }
         } else {
             timeStringParts = /(\d{1,2}):(\d{2})/.exec(timeString);
-            if (timeStringParts && timeStringParts.length && timeStringParts.length === 3) {
-                value.setHours(parseInt(timeStringParts[1]));
-                value.setMinutes(parseInt(timeStringParts[2]));
+            if (timeStringParts && timeStringParts.length && timeStringParts.length === 2) {
+                value.setHours(parseInt(timeStringParts[0]));
+                value.setMinutes(parseInt(timeStringParts[1]));
                 value.setSeconds(0);
             }
         }
