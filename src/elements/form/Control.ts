@@ -142,7 +142,7 @@ export class NovoCustomControlContainerElement {
                             </div>
                             <!--Date and Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date-time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleTabForPickers($event)" [value]="formattedValue" [textMask]="maskOptions" (input)="selectDateTimeValue($event)" />
+                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleTabForPickers($event)" [value]="formattedValue" readOnly/>
                                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
                                 <novo-date-time-picker *ngIf="active" (onSelect)="formatDateTimeValue($event); modelChange($event);" [formControlName]="control.key" [military]="control.military"></novo-date-time-picker>
@@ -290,7 +290,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
         this.maskOptions = {
             mask: [],
-            keepCharPositions: false,
+            keepCharPositions: true,
             guide: false
         };
         if (this.control.controlType === 'date' && Helpers.isEmpty(this.control.placeholder)) {
@@ -299,9 +299,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         } else if (this.control.controlType === 'time' && Helpers.isEmpty(this.control.placeholder)) {
             this.control.placeholder = this.dateFormatService.getTimePlaceHolder(this.control.military);
             this.maskOptions.mask = this.dateFormatService.getTimeMask(this.control.military);
-        } else if (this.control.controlType === 'date-time' && Helpers.isEmpty(this.control.placeholder)) {
-            this.control.placeholder = `${this.labels.dateFormatPlaceholder}, ${this.dateFormatService.getTimePlaceHolder(this.control.military)}`;
-            this.maskOptions.mask = this.dateFormatService.getDateTimeMask(this.control.military);
         }
     }
 

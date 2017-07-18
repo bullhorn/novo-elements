@@ -129,6 +129,8 @@ export class DateFormatService {
                 let hours: number = parseInt(timeStringParts[0]);
                 if (pm) {
                     hours = hours + 12;
+                } else if (hours === 12) {
+                    hours = 0;
                 }
                 value.setHours(hours);
                 value.setMinutes(parseInt(timeStringParts[1]));
