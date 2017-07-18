@@ -10,7 +10,7 @@ import { WeekViewEvent } from '../../../utils/calendar-utils/CalendarUtils';
         [class.cal-starts-within-week]="!weekEvent.startsBeforeWeek"
         [class.cal-ends-within-week]="!weekEvent.endsAfterWeek"
         [ngClass]="weekEvent.event?.cssClass"
-        [tooltip]="weekEvent.event.title"
+        [tooltip]="weekEvent.event.description"
         [tooltipPosition]="tooltipPosition"
         (click)="eventClicked.emit({event: weekEvent.event})">
         <div class="cal-event-ribbon" [style.backgroundColor]="weekEvent.event.color.primary"></div>

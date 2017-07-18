@@ -60,6 +60,7 @@ export interface WeekViewEvent {
     startsBeforeWeek: boolean;
     endsAfterWeek: boolean;
     top?: number;
+    height?: number;
 }
 
 export interface WeekViewEventRow {
@@ -262,12 +263,35 @@ export function getWeekView({ events = [], viewDate, weekStartsOn, excluded = []
         return startSecondsDiff;
     }).map((entry: WeekViewEvent) => {
         const startOfView: Date = dateFns.setMinutes(dateFns.setHours(dateFns.startOfDay(entry.event.start), dayStart.hour), dayStart.minute);
+        const endOfView: Date = dateFns.setMinutes(dateFns.setHours(dateFns.startOfMinute(dateFns.endOfDay(entry.event.end)), dayEnd.hour), dayEnd.minute);
+
         const eventStart: Date = entry.event.start;
+        const eventEnd: Date = entry.event.end || eventStart;
+
         const hourHeightModifier: number = (hourSegments * segmentHeight) / MINUTES_IN_HOUR;
+
         if (eventStart > startOfView) {
             entry.top += dateFns.differenceInMinutes(eventStart, startOfView);
         }
+
         entry.top *= hourHeightModifier;
+
+        const startsBeforeDay: boolean = eventStart < startOfView;
+        const endsAfterDay: boolean = eventEnd > endOfView;
+
+        const startDate: Date = startsBeforeDay ? startOfView : eventStart;
+        const endDate: Date = endsAfterDay ? endOfView : eventEnd;
+
+        let height: number = dateFns.differenceInMinutes(endDate, startDate);
+
+        if (!entry.event.end) {
+            height = segmentHeight;
+        } else {
+            height *= hourHeightModifier;
+        }
+
+        entry.height = height;
+
         return entry;
     });
 
@@ -277,18 +301,28 @@ export function getWeekView({ events = [], viewDate, weekStartsOn, excluded = []
     eventsMapped.forEach((event: WeekViewEvent, index: number) => {
         if (allocatedEvents.indexOf(event) === -1) {
             allocatedEvents.push(event);
-            let rowSpan: number = event.span + event.offset;
+
             const otherRowEvents: WeekViewEvent[] = eventsMapped.slice(index + 1).filter(nextEvent => {
-                if (
-                    nextEvent.offset >= rowSpan &&
-                    rowSpan + nextEvent.span <= DAYS_IN_WEEK &&
-                    allocatedEvents.indexOf(nextEvent) === -1
-                ) {
-                    rowSpan += nextEvent.span + nextEvent.offset;
-                    allocatedEvents.push(nextEvent);
-                    return true;
-                }
+                return nextEvent.top === event.top && nextEvent.offset === event.offset;
             });
+
+            if (otherRowEvents.length > 0) {
+                let totalEventsForRow = otherRowEvents.length + 1;
+
+                event.span = ( 1 / totalEventsForRow );
+
+                let nextOffset = event.span + event.offset;
+
+                otherRowEvents.forEach( (nextEvent:WeekViewEvent, index: number) => {
+                    nextEvent.offset = nextOffset;
+                    nextEvent.span = event.span;
+
+                    nextOffset = nextEvent.span + nextEvent.offset;
+                });
+
+                allocatedEvents.push(...otherRowEvents);
+            }
+
             eventRows.push({
                 row: [
                     event,

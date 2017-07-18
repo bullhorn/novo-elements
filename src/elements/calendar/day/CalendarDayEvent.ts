@@ -11,7 +11,7 @@ import { DayViewEvent } from '../../../utils/calendar-utils/CalendarUtils';
         [class.cal-starts-within-day]="!dayEvent.startsBeforeDay"
         [class.cal-ends-within-day]="!dayEvent.endsAfterDay"
         [ngClass]="dayEvent.event.cssClass"
-        [tooltip]="dayEvent.event.title"
+        [tooltip]="dayEvent.event.description"
         [tooltipPosition]="tooltipPosition"
         (click)="eventClicked.emit({event: dayEvent.event})">
           <div class="cal-event-ribbon" [style.backgroundColor]="dayEvent.event.color.primary"></div>
