@@ -1,3 +1,13 @@
+<a name="2.0.234"></a>
+## [2.0.234](https://github.com/bullhorn/novo-elements/compare/v2.0.233...v2.0.234) (2017-07-18)
+
+
+### Bug Fixes
+
+* **EntityPickerResults:** EntityPicker was using bad value for date f… ([#507](https://github.com/bullhorn/novo-elements/issues/507)) ([c1d93e1](https://github.com/bullhorn/novo-elements/commit/c1d93e1))
+
+
+
 <a name="2.0.233"></a>
 ## [2.0.233](https://github.com/bullhorn/novo-elements/compare/v2.0.232...v2.0.233) (2017-07-12)
 
