@@ -109,6 +109,110 @@ export class CalendarDemoComponent {
         start: new Date(Date.now() + (60000 * 90)),
         response: CalendarEventResponse.Accepted,
         type: 'Interview'
+    }, {
+        title: 'Phone Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 90)),
+        end: new Date(Date.now() + (60000 * 180)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 90)),
+        end: new Date(Date.now() + (60000 * 150)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Final Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 90)),
+        end: new Date(Date.now() + (60000 * 120)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Phone Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 90)),
+        end: new Date(Date.now() + (60000 * 180)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 90)),
+        end: new Date(Date.now() + (60000 * 150)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Final Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 90)),
+        end: new Date(Date.now() + (60000 * 120)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Phone Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 90)),
+        end: new Date(Date.now() + (60000 * 180)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 90)),
+        end: new Date(Date.now() + (60000 * 150)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Final Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 90)),
+        end: new Date(Date.now() + (60000 * 120)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Phone Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 75)),
+        end: new Date(Date.now() + (60000 * 120)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Phone Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 75)),
+        end: new Date(Date.now() + (60000 * 150)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 270)),
+        end: new Date(Date.now() + (60000 * 300)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
+    }, {
+        title: 'Final Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 270)),
+        end: new Date(Date.now() + (60000 * 360)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
     }];
 
     getNewEvent(date, color, type): CalendarEvent {

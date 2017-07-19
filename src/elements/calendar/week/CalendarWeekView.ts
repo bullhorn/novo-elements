@@ -1,34 +1,28 @@
 import {
-    Component,
-    Input,
-    Output,
-    EventEmitter,
     ChangeDetectorRef,
-    OnChanges,
-    OnInit,
-    OnDestroy,
-    LOCALE_ID,
+    Component,
+    EventEmitter,
     Inject,
+    Input,
+    LOCALE_ID,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
     TemplateRef
 } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import {Subject} from 'rxjs/Subject';
+import {Subscription} from 'rxjs/Subscription';
 import {
-    WeekDay,
     CalendarEvent,
-    WeekViewEvent,
-    WeekViewEventRow,
-    DayViewHour,
     CalendarEventTimesChangedEvent,
-    getWeekViewHeader,
+    DayViewHour,
+    getDayViewHourGrid,
     getWeekView,
-    getDayViewHourGrid
+    getWeekViewHeader,
+    WeekDay,
+    WeekViewEventRow
 } from '../../../utils/calendar-utils/CalendarUtils';
-//import * as dateFns from 'date-fns';
-// import addDays from 'date-fns/add_days';
-// import { ResizeEvent } from 'angular-resizable-element';
-// import { CalendarDragHelper } from '../../providers/calendarDragHelper.provider';
-// import { CalendarResizeHelper } from '../../providers/calendarResizeHelper.provider';
 
 /**
  * @hidden
@@ -66,6 +60,7 @@ const MINUTES_IN_HOUR: number = 60;
           *ngFor="let weekEvent of eventRow.row"
           [style.width]="((100 / days.length) * weekEvent.span) + '%'"
           [style.marginTop.px]="weekEvent.top"
+          [style.height.px]="weekEvent.height"
           [style.marginLeft]="((100 / days.length) * weekEvent.offset) + '%'">
           <novo-calendar-week-event
             [weekEvent]="weekEvent"
