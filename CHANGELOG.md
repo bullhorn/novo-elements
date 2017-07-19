@@ -1,3 +1,13 @@
+<a name="2.0.235"></a>
+## [2.0.235](https://github.com/bullhorn/novo-elements/compare/v2.0.234...v2.0.235) (2017-07-19)
+
+
+### Bug Fixes
+
+* **calendar:** Fixing some styles around calendar events and having m… ([#508](https://github.com/bullhorn/novo-elements/issues/508)) ([3b6f5dd](https://github.com/bullhorn/novo-elements/commit/3b6f5dd))
+
+
+
 <a name="2.0.234"></a>
 ## [2.0.234](https://github.com/bullhorn/novo-elements/compare/v2.0.233...v2.0.234) (2017-07-18)
 
