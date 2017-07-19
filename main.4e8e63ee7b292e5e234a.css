@@ -4812,28 +4812,33 @@ novo-card .novo-card {
     opacity: 0.5; }
   .cal-week-view .cal-event-container {
     position: absolute; }
-  .cal-week-view .cal-event {
-    font-size: 12px;
-    margin-left: 2px;
-    margin-right: 2px;
-    min-height: 30px;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-flow: column;
-        flex-flow: column;
-    background-color: #f4f4f4; }
-    .cal-week-view .cal-event .cal-event-ribbon {
-      min-height: 4px;
-      width: 100%; }
-    .cal-week-view .cal-event .cal-event-title {
-      padding: 0px 10px;
-      line-height: 26px;
-      -ms-flex: 1;
-          flex: 1; }
-    .cal-week-view .cal-event .cal-event-description {
-      font-size: 10px;
-      line-height: 13px;
-      padding: 0px 10px; }
+    .cal-week-view .cal-event-container:nth-child(n + 2) {
+      border-left: 1px solid #3D464D; }
+    .cal-week-view .cal-event-container novo-calendar-week-event {
+      height: inherit; }
+      .cal-week-view .cal-event-container novo-calendar-week-event .cal-event {
+        height: inherit;
+        font-size: 12px;
+        min-height: 30px;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-flow: column;
+            flex-flow: column;
+        background-color: #f4f4f4; }
+        .cal-week-view .cal-event-container novo-calendar-week-event .cal-event .cal-event-ribbon {
+          min-height: 4px;
+          width: 100%; }
+        .cal-week-view .cal-event-container novo-calendar-week-event .cal-event .cal-event-title {
+          padding: 0px 0px 0px 10px;
+          line-height: 26px;
+          overflow: hidden;
+          text-overflow: ellipsis; }
+        .cal-week-view .cal-event-container novo-calendar-week-event .cal-event .cal-event-description {
+          font-size: 10px;
+          line-height: 13px;
+          padding: 0px 0px 0px 10px;
+          overflow: hidden;
+          text-overflow: ellipsis; }
   .cal-week-view .cal-draggable {
     cursor: move; }
   .cal-week-view .cal-header.cal-today {
@@ -4842,7 +4847,6 @@ novo-card .novo-card {
     color: #8b0000; }
   .cal-week-view .cal-event,
   .cal-week-view .cal-header {
-    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; }
 
@@ -4896,32 +4900,36 @@ novo-card .novo-card {
 .cal-day-view .cal-event-container {
   position: absolute; }
 
-.cal-day-view .cal-event {
-  font-size: 12px;
-  margin-left: 2px;
-  margin-right: 2px;
-  min-height: 30px;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-flow: row nowrap;
-      flex-flow: row nowrap;
-  background-color: #f4f4f4; }
-  .cal-day-view .cal-event .cal-event-ribbon {
-    width: 4px;
-    min-height: 100%; }
-  .cal-day-view .cal-event .cal-event-group {
-    -ms-flex: 1;
-        flex: 1;
-    padding: 2px 10px;
+.cal-day-view novo-calendar-day-event {
+  height: inherit; }
+  .cal-day-view novo-calendar-day-event .cal-event {
+    height: inherit;
+    font-size: 12px;
+    margin-left: 2px;
+    margin-right: 2px;
+    min-height: 30px;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-flow: column;
-        flex-flow: column; }
-  .cal-day-view .cal-event .cal-event-title {
-    line-height: 26px; }
-  .cal-day-view .cal-event .cal-event-description {
-    font-size: 10px;
-    line-height: 13px; }
+    -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+    background-color: #f4f4f4; }
+    .cal-day-view novo-calendar-day-event .cal-event .cal-event-ribbon {
+      width: 4px;
+      min-height: 100%; }
+    .cal-day-view novo-calendar-day-event .cal-event .cal-event-group {
+      overflow: hidden;
+      -ms-flex: 1;
+          flex: 1;
+      padding: 2px 10px;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: column;
+          flex-flow: column; }
+    .cal-day-view novo-calendar-day-event .cal-event .cal-event-title {
+      line-height: 26px; }
+    .cal-day-view novo-calendar-day-event .cal-event .cal-event-description {
+      font-size: 10px;
+      line-height: 13px; }
 
 .cal-day-view .cal-draggable {
   cursor: move; }
@@ -13137,104 +13145,104 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 35px;
-      height: 35px; }
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 29px;
-      height: 29px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 43px;
-      height: 43px; }
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 37px;
-      height: 37px; }
-    color header .background-boxes .bb-contact {
-      background: #FFAA44;
       width: 27px;
       height: 27px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 33px;
-      height: 33px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
-      width: 26px;
-      height: 26px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-submission {
       background: #a9adbb;
       width: 36px;
       height: 36px; }
     color header .background-boxes .bb-sendout {
       background: #747884;
-      width: 41px;
-      height: 41px; }
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
-      width: 29px;
-      height: 29px; }
+      width: 31px;
+      height: 31px; }
     color header .background-boxes .bb-note {
       background: #747884;
-      width: 44px;
-      height: 44px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-task {
       background: #4f5361;
-      width: 34px;
-      height: 34px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-distributionList {
       background: #4f5361;
-      width: 37px;
-      height: 37px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-credential {
       background: #4f5361;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-user {
-      background: #4f5361;
-      width: 37px;
-      height: 37px; }
-    color header .background-boxes .bb-corporateuser {
-      background: #4f5361;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
       width: 36px;
       height: 36px; }
+    color header .background-boxes .bb-user {
+      background: #4f5361;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-corporateuser {
+      background: #4f5361;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-ocean {
       background: #4A89DC;
       width: 35px;
       height: 35px; }
     color header .background-boxes .bb-mint {
       background: #37BC9B;
-      width: 34px;
-      height: 34px; }
+      width: 41px;
+      height: 41px; }
     color header .background-boxes .bb-grass {
       background: #8CC152;
-      width: 45px;
-      height: 45px; }
+      width: 39px;
+      height: 39px; }
     color header .background-boxes .bb-sunflower {
       background: #F6B042;
-      width: 40px;
-      height: 40px; }
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
-      width: 29px;
-      height: 29px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
-      width: 29px;
-      height: 29px; }
+      width: 26px;
+      height: 26px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 28px;
-      height: 28px; }
+      width: 26px;
+      height: 26px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 36px;
-      height: 36px; }
+      width: 27px;
+      height: 27px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -14294,4 +14302,4 @@ date-picker-demo .example.side-by-side-demo {
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.845a5939b5762dd583d8.bundle.map*/
+/*# sourceMappingURL=main.4e8e63ee7b292e5e234a.bundle.map*/
