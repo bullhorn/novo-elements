@@ -121,7 +121,7 @@ export class EntityPickerResult {
     renderTimestamp(date?: any) {
         let timestamp = '';
         if (date) {
-            timestamp = this.labels.formatDateWithFormat(date, 'L');
+            timestamp = this.labels.formatDateWithFormat(date, {year: 'numeric', month: 'numeric', day: 'numeric'});
         }
         return timestamp;
     }
