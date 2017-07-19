@@ -213,6 +213,14 @@ export class CalendarDemoComponent {
         end: new Date(Date.now() + (60000 * 360)),
         response: CalendarEventResponse.Accepted,
         type: 'Interview'
+    }, {
+        title: 'Final Interview',
+        description: 'with @johnsully83',
+        color: colors.green,
+        start: new Date(Date.now() + (60000 * 270)),
+        end: new Date(Date.now() + (60000 * 2880000)),
+        response: CalendarEventResponse.Accepted,
+        type: 'Interview'
     }];
 
     getNewEvent(date, color, type): CalendarEvent {
