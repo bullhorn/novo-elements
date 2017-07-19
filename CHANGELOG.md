@@ -1,3 +1,13 @@
+<a name="2.0.236"></a>
+## [2.0.236](https://github.com/bullhorn/novo-elements/compare/v2.0.235...v2.0.236) (2017-07-19)
+
+
+### Bug Fixes
+
+* **calendar:** Fixing events that start before beginning of view and end after end of view ([#509](https://github.com/bullhorn/novo-elements/issues/509)) ([482d361](https://github.com/bullhorn/novo-elements/commit/482d361))
+
+
+
 <a name="2.0.235"></a>
 ## [2.0.235](https://github.com/bullhorn/novo-elements/compare/v2.0.234...v2.0.235) (2017-07-19)
 
