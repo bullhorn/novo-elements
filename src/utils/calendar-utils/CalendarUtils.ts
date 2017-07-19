@@ -214,8 +214,8 @@ function getEventsInTimeRange(events: CalendarEvent[], dayStart: any, dayEnd: an
         const eventStart: Date = event.start;
         const eventEnd: Date = event.end || eventStart;
 
-        const startOfView: Date = dateFns.setMinutes(dateFns.setHours(dateFns.startOfDay(event.start), dayStart.hour), dayStart.minute);
-        const endOfView: Date = dateFns.setMinutes(dateFns.setHours(dateFns.startOfMinute(dateFns.endOfDay(event.end)), dayEnd.hour), dayEnd.minute);
+        const startOfView: Date = dateFns.setMinutes(dateFns.setHours(dateFns.startOfDay(eventStart), dayStart.hour), dayStart.minute);
+        const endOfView: Date = dateFns.setMinutes(dateFns.setHours(dateFns.startOfMinute(eventStart), dayEnd.hour), dayEnd.minute);
 
         return dateFns.isAfter(eventEnd, startOfView)
             && dateFns.isBefore(eventStart, endOfView);
@@ -257,7 +257,7 @@ export function getWeekView({ events = [], viewDate, weekStartsOn, excluded = []
     const endOfViewWeek: Date = dateFns.endOfWeek(viewDate, { weekStartsOn });
     const maxRange: number = DAYS_IN_WEEK - excluded.length;
 
-    const eventsMapped: WeekViewEvent[] = getEventsInPeriod({ events, periodStart: startOfViewWeek, periodEnd: endOfViewWeek }).map(event => {
+    const eventsMapped: WeekViewEvent[] = getEventsInTimeRange(getEventsInPeriod({ events, periodStart: startOfViewWeek, periodEnd: endOfViewWeek }), dayStart, dayEnd).map(event => {
         const offset: number = getWeekViewEventOffset({ event, startOfWeek: startOfViewWeek, excluded });
         const span: number = 1; //getWeekViewEventSpan({ event, offset, startOfWeek: startOfViewWeek, excluded });
         return { event, offset, span };
@@ -400,11 +400,11 @@ export function getDayView({ events = [], viewDate, hourSegments, dayStart, dayE
     const endOfView: Date = dateFns.setMinutes(dateFns.setHours(dateFns.startOfMinute(dateFns.endOfDay(viewDate)), dayEnd.hour), dayEnd.minute);
     const previousDayEvents: DayViewEvent[] = [];
 
-    const dayViewEvents: DayViewEvent[] = getEventsInPeriod({
+    const dayViewEvents: DayViewEvent[] = getEventsInTimeRange(getEventsInPeriod({
         events: events.filter((event: CalendarEvent) => !event.allDay),
         periodStart: startOfView,
         periodEnd: endOfView
-    }).sort((eventA: CalendarEvent, eventB: CalendarEvent) => {
+    }), dayStart, dayEnd).sort((eventA: CalendarEvent, eventB: CalendarEvent) => {
         return eventA.start.valueOf() - eventB.start.valueOf();
     }).map((event: CalendarEvent) => {
         const eventStart: Date = event.start;
