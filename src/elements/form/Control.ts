@@ -128,21 +128,21 @@ export class NovoCustomControlContainerElement {
                             </div>
                             <!--Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleTabForPickers($event)" [value]="formattedValue" [textMask]="maskOptions" (input)="selectDateTimeValue($event)" />
+                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleKeyPressForDateTime($event)" [value]="formattedValue" [textMask]="maskOptions" (input)="selectDateTimeValue($event)" />
                                 <i (click)="toggleActive($event)" class="bhi-clock" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
                                 <novo-time-picker *ngIf="active" (onSelect)="formatTimeValue($event);" [formControlName]="control.key" [military]="control.military"></novo-time-picker>
                             </div>
                             <!--Date-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleTabForPickers($event)" [value]="formattedValue" [textMask]="maskOptions" (input)="selectDateTimeValue($event)" />
+                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleKeyPressForDateTime($event)" [value]="formattedValue" [textMask]="maskOptions" (input)="selectDateTimeValue($event)" />
                                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
                                 <novo-date-picker inline="true" *ngIf="active" (onSelect)="formatDateValue($event); modelChange($event);" [formControlName]="control.key"></novo-date-picker>
                             </div>
                             <!--Date and Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date-time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleTabForPickers($event)" [value]="formattedValue" readOnly/>
+                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleKeyPressForDateTime($event)" [value]="formattedValue" readOnly/>
                                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
                                 <novo-date-time-picker *ngIf="active" (onSelect)="formatDateTimeValue($event); modelChange($event);" [formControlName]="control.key" [military]="control.military"></novo-date-time-picker>
@@ -486,6 +486,14 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         } else {
             this.change.emit(null);
             this.form.controls[this.control.key].setValue(null);
+        }
+    }
+
+    handleKeyPressForDateTime(event: any): void {
+       if (this.active && event && event.keyCode) {
+            if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB || event.keyCode === KeyCodes.ENTER) {
+                this.toggleActive(event, false);
+            }
         }
     }
 

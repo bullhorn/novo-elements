@@ -174,7 +174,6 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         // Set labels
         this.selectedLabel = this.labels.startDate;
         this.selected2Label = this.labels.endDate;
-
         this.updateView(this.model, false, true);
     }
 
