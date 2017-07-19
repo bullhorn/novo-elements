@@ -259,7 +259,7 @@ export function getWeekView({ events = [], viewDate, weekStartsOn, excluded = []
 
     const eventsMapped: WeekViewEvent[] = getEventsInPeriod({ events, periodStart: startOfViewWeek, periodEnd: endOfViewWeek }).map(event => {
         const offset: number = getWeekViewEventOffset({ event, startOfWeek: startOfViewWeek, excluded });
-        const span: number = 1;//getWeekViewEventSpan({ event, offset, startOfWeek: startOfViewWeek, excluded });
+        const span: number = 1; //getWeekViewEventSpan({ event, offset, startOfWeek: startOfViewWeek, excluded });
         return { event, offset, span };
     }).filter(e => e.offset < maxRange).filter(e => e.span > 0).map(entry => ({
         event: entry.event,
@@ -425,10 +425,6 @@ export function getDayView({ events = [], viewDate, hourSegments, dayStart, dayE
         const endDate: Date = endsAfterDay ? endOfView : eventEnd;
 
         let height: number = dateFns.differenceInMinutes(endDate, startDate);
-
-        console.log(height);
-        console.log(endDate);
-        console.log(startDate);
 
         if (!event.end) {
             height = segmentHeight;
