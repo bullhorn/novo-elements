@@ -313,7 +313,7 @@ export function getWeekView({ events = [], viewDate, weekStartsOn, excluded = []
 
                 let nextOffset = event.span + event.offset;
 
-                otherRowEvents.forEach( (nextEvent:WeekViewEvent, index: number) => {
+                otherRowEvents.forEach( (nextEvent:WeekViewEvent) => {
                     nextEvent.offset = nextOffset;
                     nextEvent.span = event.span;
 
