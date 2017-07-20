@@ -62,7 +62,8 @@ export const MockMeta = {
             type: 'date',
             label: 'Date',
             required: true,
-            sortOrder: 90
+            sortOrder: 90,
+            defaultValue: new Date(2016, 1, 1)
         },
         {
             name: 'time',

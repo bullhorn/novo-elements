@@ -2,6 +2,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { FormsModule, FormGroupDirective, NgControl, FormControlName, FormBuilder } from '@angular/forms';
+// Vendor
+import { TextMaskModule } from 'angular2-text-mask';
 // App
 import { NovoTableElement } from './Table';
 import { Pagination } from './extras/pagination/Pagination';
@@ -32,6 +34,7 @@ import { NovoSelectElement } from '../select/Select';
 
 import { NovoLabelService } from '../../services/novo-label-service';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
+import { DateFormatService } from '../../services/date-format/DateFormat';
 
 describe('Elements: NovoTableElement', () => {
     let fixture;
@@ -72,16 +75,19 @@ describe('Elements: NovoTableElement', () => {
                 NovoSelectElement,
                 // NG2
                 FormGroupDirective,
-                FormControlName
+                FormControlName,
             ],
             imports: [
-                FormsModule
+                FormsModule,
+                //Vendor
+                TextMaskModule
             ],
             providers: [
                 { provide: NovoLabelService, useClass: NovoLabelService },
                 { provide: FormUtils, useClass: FormUtils },
                 NgControl,
-                FormBuilder
+                FormBuilder,
+                DateFormatService
             ],
             schemas: [
                 CUSTOM_ELEMENTS_SCHEMA

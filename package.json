@@ -57,6 +57,7 @@
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "dependencies": {
     "@types/dragula": "2.1.29",
+    "angular2-text-mask": "^8.0.2",
     "date-fns": "^1.28.2",
     "dragula": "3.7.2",
     "hint.css": "2.4.1",
