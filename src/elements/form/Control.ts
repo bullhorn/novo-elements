@@ -305,7 +305,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     selectDateTimeValue(event) {
         let dateTimeValue;
         if (event && event.target && event.target.value) {
-            dateTimeValue = this.dateFormatService.parseString(event.target.value, this.control.military, this.control.controlType);
+            [dateTimeValue, this.formattedValue] = this.dateFormatService.parseString(event.target.value, this.control.military, this.control.controlType);
             if (dateTimeValue && dateTimeValue > 0) {
                 this.change.emit(dateTimeValue);
                 this.form.controls[this.control.key].setValue(dateTimeValue);
