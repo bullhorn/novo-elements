@@ -20,26 +20,48 @@ xdescribe('Service: DateFormatService', () => {
             expect(actual.length).toBeGreaterThan(0);
         });
         it('should return a mask that supports a date with format dd-MM-yyyy', () => {
-            service.labels.dateFormat = 'dd-MM-yyyy';
-            expect(service.getDateMask()).toEqual([ /\d/, /\d/, /-/, /\d/, /\d/, /-/, /\d/, /\d/, /\d/, /\d/ ]);
+            let value = '11-02-2017';
+            let dateMask = service.getDateMask();
+            for (let i in dateMask) {
+                if (dateMask[i]) {
+                    expect(dateMask[i].match(value[i])).toBeTruthy();
+                }
+            }
         });
         it('should return a mask that supports dd.MM.yyyy', () => {
-            service.labels.dateFormat = 'dd.MM.yyyy';
-            expect(service.getDateMask()).toEqual([ /\d/, /\d/, /./, /\d/, /\d/, /./, /\d/, /\d/, /\d/, /\d/]);
+            let value = '11.02.2017';
+            let dateMask = service.getDateMask();
+            for (let i in dateMask) {
+                if (dateMask[i]) {
+                    expect(dateMask[i].match(value[i])).toBeTruthy();
+                }
+            }
         });
         it('should return a mask that supports d/M/yyyy', () => {
-            service.labels.dateFormat = 'd/M/yyyy';
-            expect(service.getDateMask()).toEqual([ /\d/, /\d/, /\//, /\d/, /\d/, /\//, /\d/, /\d/, /\d/, /\d/]);
+            let value = '1/2/2017';
+            let dateMask = service.getDateMask();
+            for (let i in dateMask) {
+                if (dateMask[i]) {
+                    expect(dateMask[i].match(value[i])).toBeTruthy();
+                }
+            }
         });
         it('should return a mask that supports M/d/yyyy', () => {
-            service.labels.dateFormat = 'M/d/yyyy';
-            expect(service.getDateMask()).toEqual([ /\d/, /\d/, /\//, /\d/, /\d/, /\//, /\d/, /\d/, /\d/, /\d/]);
+            let value = '2/1/2017';
+            let dateMask = service.getDateMask();
+            for (let i in dateMask) {
+                if (dateMask[i]) {
+                    expect(dateMask[i].match(value[i])).toBeTruthy();
+                }
+            }
         });
     });
 
     describe('Function: getTimeMask()', () => {
         it('should be defined', () => {
             expect(service.getTimeMask).toBeDefined();
+        });
+        it('should work for militaryTime', () => {
         });
     });
 
@@ -48,10 +70,12 @@ xdescribe('Service: DateFormatService', () => {
             expect(service.getTimePlaceHolder).toBeDefined();
         });
         it('should get the right placeholder for 24 hour time', () => {
-            expect(service.getTimePlaceHolder).toBeDefined();
+            service.labels.timeFormatPlaceholder24Hour = 'stuff';
+            expect(service.getTimePlaceHolder()).toEqual(service.labels.timeFormatPlaceholder24Hour);
         });
         it('should get the right placeholder for 12 hour time', () => {
-            expect(service.getTimePlaceHolder).toBeDefined();
+            service.labels.timeFormatPlaceholderAM = 'stuff';
+            expect(service.getTimePlaceHolder()).toEqual(service.labels.timeFormatPlaceholderAM);
         });
     });
 

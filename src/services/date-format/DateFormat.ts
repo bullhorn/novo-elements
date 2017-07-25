@@ -32,7 +32,7 @@ export class DateFormatService {
     }
 
     getDateMask(): Array<RegExp> {
-        return [ /\d/, /\d|\/|\.|\-/, /\/|\.|\-|\d/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|./, /\d|./];
+        return [ /\d/, /\d|\/|\.|\-/, /\/|\.|\-|\d/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d/, /\d/];
     }
 
     getTimePlaceHolder(militaryTime: boolean): string {
@@ -69,8 +69,8 @@ export class DateFormatService {
                 date = new Date(year, month, day);
             }
         } else if (dateFormatTokens && dateFormatTokens.length === 4 && dateString.length >= 1) {
-            let twoTokens = /\d+(\/|\.|\-)(\d+)/.exec(dateString);
-            let oneToken = /^(\d)$/.exec(dateString);
+            let twoTokens = /\d{1,2}(\/|\.|\-)(\d{1,2})/.exec(dateString);
+            let oneToken = /^(\d{1,2})$/.exec(dateString);
             let delimiter = /\w+(\/|\.|\-)\w+[\/|\.|\-]\w+/gi.exec(dateFormat);
             let dateStringWithDelimiter = dateString[dateString.length - 1].match(/\/|\.|\-/);
             if (twoTokens && twoTokens.length === 3 && this.isValidDatePart(twoTokens[2], dateFormatTokens[2]) && !dateStringWithDelimiter) {
@@ -142,9 +142,9 @@ export class DateFormatService {
 
     isValidDatePart(value: string, format: string): boolean {
         let datePart = parseInt(value);
-        if (format.includes('m') && datePart >= 2) {
+        if (format.includes('m') && (datePart >= 2 || value.length === 2)) {
             return true;
-        } else if (format.includes('d') && datePart >= 4) {
+        } else if (format.includes('d') && (datePart >= 4 || value.length === 2)) {
             return true;
         } else if (format.includes('y') && datePart >= 1000) {
             return true;
