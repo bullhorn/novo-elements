@@ -69,8 +69,8 @@ export class DateFormatService {
                 date = new Date(year, month, day);
             }
         } else if (dateFormatTokens && dateFormatTokens.length === 4 && dateString.length >= 1) {
-            let twoTokens = /\d{1,2}(\/|\.|\-)(\d{1,2})/.exec(dateString);
-            let oneToken = /^(\d{1,2})$/.exec(dateString);
+            let twoTokens = /\d{1,4}(\/|\.|\-)(\d{1,2})/.exec(dateString);
+            let oneToken = /^(\d{1,4})$/.exec(dateString);
             let delimiter = /\w+(\/|\.|\-)\w+[\/|\.|\-]\w+/gi.exec(dateFormat);
             let dateStringWithDelimiter = dateString[dateString.length - 1].match(/\/|\.|\-/);
             if (twoTokens && twoTokens.length === 3 && this.isValidDatePart(twoTokens[2], dateFormatTokens[2]) && !dateStringWithDelimiter) {
