@@ -57,7 +57,81 @@ describe('Service: DateFormatService', () => {
         it('should be defined', () => {
             expect(service.getTimeMask).toBeDefined();
         });
-        it('should work for militaryTime', () => {
+        describe('For Military Time', () => {
+            let militaryTimeMask;
+            beforeEach(() => {
+                militaryTimeMask = service.getTimeMask(true);
+            });
+            it('should work for 1:23', () => {
+                let timeString = '01:23'.split('');
+                timeString.forEach((v, i) => {
+                    expect(v.match(militaryTimeMask[i])).toBeTruthy();
+                });
+            });
+            it('should work for 12:23', () => {
+                let timeString = '12:23'.split('');
+                timeString.forEach((v, i) => {
+                    expect(v.match(militaryTimeMask[i])).toBeTruthy();
+                });
+            });
+            it('should work for 00:23', () => {
+                let timeString = '00:23'.split('');
+                timeString.forEach((v, i) => {
+                    expect(v.match(militaryTimeMask[i])).toBeTruthy();
+                });
+            });
+            it('should work for 23:23', () => {
+                let timeString = '23:23'.split('');
+                timeString.forEach((v, i) => {
+                    expect(v.match(militaryTimeMask[i])).toBeTruthy();
+                });
+            });
+        });
+        describe('For 12hour time', () => {
+            it('should work for 12:23am', () => {
+                let timeMask = service.getTimeMask(false);
+                let timeString = '12:23am'.split('');
+                timeString.forEach((v, i) => {
+                    expect(v.match(timeMask[i])).toBeTruthy();
+                });
+            });
+            it('should work for 12:23pm', () => {
+                let timeMask = service.getTimeMask(false);
+                let timeString = '12:23pm'.split('');
+                timeString.forEach((v, i) => {
+                    expect(v.match(timeMask[i])).toBeTruthy();
+                });
+            });
+            it('should work for 1:23pm', () => {
+                let timeMask = service.getTimeMask(false);
+                let timeString = '1:23pm'.split('');
+                timeString.forEach((v, i) => {
+                    expect(v.match(timeMask[i])).toBeTruthy();
+                });
+            });
+            it('should work for 1:23am', () => {
+                let timeMask = service.getTimeMask(false);
+                let timeString = '1:23am'.split('');
+                timeString.forEach((v, i) => {
+                    expect(v.match(timeMask[i])).toBeTruthy();
+                });
+            });
+            it('should work for 1:23 A.M.', () => {
+                service.labels.timeFormatPlaceholderAM = 'hh:mm A.M.';
+                let timeMask = service.getTimeMask(false);
+                let timeString = '1:23 A.M.'.split('');
+                timeString.forEach((v, i) => {
+                    expect(v.match(timeMask[i])).toBeTruthy();
+                });
+            });
+            it('should work for 1:23 P.M.', () => {
+                service.labels.timeFormatPlaceholderAM = 'hh:mm A.M.';
+                let timeMask = service.getTimeMask(false);
+                let timeString = '1:23 P.M.'.split('');
+                timeString.forEach((v, i) => {
+                    expect(v.match(timeMask[i])).toBeTruthy();
+                });
+            });
         });
     });
 
@@ -80,35 +154,109 @@ describe('Service: DateFormatService', () => {
             expect(service.parseDateString).toBeDefined();
         });
         describe('when dateFormat is not defined', () => {
-            it('should parse the date string using mm/dd/yyyy', () => {
-                expect(service.parseDateString).toBeDefined();
+            beforeEach(() => {
+                service.labels.dateFormat = '';
             });
-            it('should accommodate for error states when dateString in an unsupported format ', () => {
-                expect(service.parseDateString).toBeDefined();
+            it('should parse the date string using mm/dd/yyyy', () => {
+                let dateString = '1/22/2017', dateValue;
+                [dateValue, dateString] = service.parseDateString(dateString);
+                expect(dateValue.getMonth()).toEqual(0);
+                expect(dateValue.getDate()).toEqual(22);
+                expect(dateValue.getFullYear()).toEqual(2017);
+            });
+            it('should default to current date when dateString in an unsupported format ', () => {
+                let dateString = '22-22-2017', dateValue, expectedDateValue = new Date();
+                [dateValue, dateString] = service.parseDateString(dateString);
+                expect(dateValue.getMonth()).toEqual(expectedDateValue.getMonth());
+                expect(dateValue.getDate()).toEqual(expectedDateValue.getDate());
+                expect(dateValue.getFullYear()).toEqual(expectedDateValue.getFullYear());
             });
         });
-        describe('when dateString is a complete date value ', () => {
-            it('should parse date correctly when format is dd-MM-yyyy', () => {
-
+        describe('when dateFormat is defined', () => {
+            it('should parse the date string using dd/mm/yyyy', () => {
+                let dateString = '11/2/2017', dateValue;
+                service.labels.dateFormat = 'dd/mm/yyyy';
+                [dateValue, dateString] = service.parseDateString(dateString);
+                expect(dateValue.getMonth()).toEqual(1);
+                expect(dateValue.getDate()).toEqual(11);
+                expect(dateValue.getFullYear()).toEqual(2017);
             });
-            it('should parse date correctly when format is dd.MM.yyyy', () => {
+            it('should parse the date string using M-d-yyyy', () => {
+                let dateString = '2-11-2017', dateValue;
+                service.labels.dateFormat = 'M-d-yyyy';
+                [dateValue, dateString] = service.parseDateString(dateString);
+                expect(dateValue.getMonth()).toEqual(1);
+                expect(dateValue.getDate()).toEqual(11);
+                expect(dateValue.getFullYear()).toEqual(2017);
             });
-            it('should parse date correctly when format is  d/M/yyyy', () => {
+            it('should parse the date string using dd.MM.yyyy', () => {
+                let dateString = '22.01.2017', dateValue;
+                service.labels.dateFormat = 'dd.MM.yyyy';
+                [dateValue, dateString] = service.parseDateString(dateString);
+                expect(dateValue.getMonth()).toEqual(0);
+                expect(dateValue.getDate()).toEqual(22);
+                expect(dateValue.getFullYear()).toEqual(2017);
             });
-            it('should parse date correctly when format is  M/d/yyyy', () => {
+            it('should parse the date string using yyyy-MM-dd', () => {
+                let dateString = '2017-01-22', dateValue;
+                service.labels.dateFormat = 'yyyy-MM-dd';
+                [dateValue, dateString] = service.parseDateString(dateString);
+                expect(dateValue.getMonth()).toEqual(0);
+                expect(dateValue.getDate()).toEqual(22);
+                expect(dateValue.getFullYear()).toEqual(2017);
             });
         });
         describe('when dateString is an incomplete date value ', () => {
             describe('and only 1 digit is filled in', () => {
-                it('should fill in the right delimiter for dd-MM-yyyy', () => {
+                it('should not append delimiter for dd-MM-yyyy when value = 1', () => {
+                    let dateString = '1', dateValue;
+                    service.labels.dateFormat = 'dd-MM-yyyy';
+                    [dateValue, dateString] = service.parseDateString(dateString);
+                    expect(dateString).toEqual('1');
                 });
-                it('should fill in the right delimiter for dd.MM.yyyy', () => {
+                it('should append delimiter for dd-MM-yyyy when value = 4', () => {
+                    let dateString = '4', dateValue;
+                    service.labels.dateFormat = 'dd-MM-yyyy';
+                    [dateValue, dateString] = service.parseDateString(dateString);
+                    expect(dateString).toEqual('4-');
+                });
+                it('should append delimiter for dd-MM-yyyy when value = 21', () => {
+                    let dateString = '21', dateValue;
+                    service.labels.dateFormat = 'dd-MM-yyyy';
+                    [dateValue, dateString] = service.parseDateString(dateString);
+                    expect(dateString).toEqual('21-');
+                });
+                it('should fill in the right delimiter for dd.MM.yyyy when value = 5', () => {
+                    let dateString = '5', dateValue;
+                    service.labels.dateFormat = 'dd.MM.yyyy';
+                    [dateValue, dateString] = service.parseDateString(dateString);
+                    expect(dateString).toEqual('5.');
                 });
             });
             describe('when 2 date-part digits are filled in', () => {
-                it('should fill in the right delimiter for d/M/yyyy', () => {
+                it('should append the right delimiter for d/M/yyyy', () => {
+                    let dateString = '4/11', dateValue;
+                    service.labels.dateFormat = 'd/M/yyyy';
+                    [dateValue, dateString] = service.parseDateString(dateString);
+                    expect(dateString).toEqual('4/11/');
                 });
-                it('should fill in the right delimiter for M/d/yyyy', () => {
+                it('should not append the right delimiter for d/M/yyyy when value = 2/1', () => {
+                    let dateString = '2/1', dateValue;
+                    service.labels.dateFormat = 'd/M/yyyy';
+                    [dateValue, dateString] = service.parseDateString(dateString);
+                    expect(dateString).toEqual('2/1');
+                });
+                it('should not append the right delimiter for M/d/yyyy when value = 4/3', () => {
+                    let dateString = '4/3', dateValue;
+                    service.labels.dateFormat = 'M/d/yyyy';
+                    [dateValue, dateString] = service.parseDateString(dateString);
+                    expect(dateString).toEqual('4/3');
+                });
+                it('should append the right delimiter for M/d/yyyy when value = 4/30', () => {
+                    let dateString = '4/30', dateValue;
+                    service.labels.dateFormat = 'M/d/yyyy';
+                    [dateValue, dateString] = service.parseDateString(dateString);
+                    expect(dateString).toEqual('4/30/');
                 });
             });
         });
@@ -124,25 +272,54 @@ describe('Service: DateFormatService', () => {
         });
         describe('for 24hour time', () => {
             it('should parse 1:45', () => {
+                let [value, timeString] = service.parseTimeString('1:45', true);
+                expect(value.getHours()).toEqual(1);
+                expect(value.getMinutes()).toEqual(45);
             });
             it('should parse 07:45', () => {
+                let [value, timeString] = service.parseTimeString('07:45', true);
+                expect(value.getHours()).toEqual(7);
+                expect(value.getMinutes()).toEqual(45);
+            });
+            it('should parse 12:45', () => {
+                let [value, timeString] = service.parseTimeString('12:45', true);
+                expect(value.getHours()).toEqual(12);
+                expect(value.getMinutes()).toEqual(45);
             });
         });
         describe('for 12hour time', () => {
             describe('when timeString has an AM value', () => {
-                it('should convert 12:45AM to 00:45', () => {
-
+                beforeEach(() => {
+                    service.labels.timeFormatPlaceholderAM = 'hh:mm AM';
+                    service.labels.timeFormatAM = 'AM';
+                    service.labels.timeFormatPM = 'PM';
                 });
-                it('should convert 1:45A.M. to 1:45', () => {
-
+                it('should convert 12:45 AM to 00:45', () => {
+                    let [value, timeString] = service.parseTimeString('12:45AM', false);
+                    expect(value.getHours()).toEqual(0);
+                    expect(value.getMinutes()).toEqual(45);
+                });
+                it('should convert 1:45 AM to 1:45', () => {
+                    let [value, timeString] = service.parseTimeString('12:45AM', false);
+                    expect(value.getHours()).toEqual(0);
+                    expect(value.getMinutes()).toEqual(45);
                 });
             });
-            describe('when timeString has a PM value', () => {
-                it('should convert 1:45PM to 13:45', () => {
-
+            describe('when timeString has a P.M. value', () => {
+                beforeEach(() => {
+                    service.labels.timeFormatPlaceholderAM = 'hh:mm A.M.';
+                    service.labels.timeFormatAM = 'A.M.';
+                    service.labels.timeFormatPM = 'P.M.';
                 });
-                it('should convert 1:45P.M. to 13:45', () => {
-
+                it('should convert 1:45 P.M. to 13:45', () => {
+                    let [value, timeString] = service.parseTimeString('1:45 P.M.', false);
+                    expect(value.getHours()).toEqual(13);
+                    expect(value.getMinutes()).toEqual(45);
+                });
+                it('should convert 12:45 P.M. to 12:45', () => {
+                    let [value, timeString] = service.parseTimeString('12:45 P.M.', false);
+                    expect(value.getHours()).toEqual(12);
+                    expect(value.getMinutes()).toEqual(45);
                 });
             });
         });

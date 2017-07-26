@@ -22,7 +22,7 @@ export class DateFormatService {
                         mask = mask.concat([/\d/, /\d|:/, /:|\d/, /\d|\w|\s/, /\d|\s|\w/]);
                     } else if (timeFormatPart.length) {
                         for (let i = 0; i < timeFormatPart.length; i++) {
-                            mask.push(/\s|\w|\d/);
+                            mask.push(/\s|\w|\d|\./);
                         }
                     }
                 }
@@ -46,7 +46,7 @@ export class DateFormatService {
         let dateFormat: string = this.labels.dateFormat,
             dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi,
             dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi,
-            dateFormatTokens: Array<string>, dateValueTokens: Array<string>, year: number, month: number, day: number, date: Date;
+            dateFormatTokens: Array<string>, dateValueTokens: Array<string>, year: number, month: number, day: number, date: Date = new Date();
         if (Helpers.isEmpty(dateFormat)) {
             // Default to MM/dd/yyyy
             dateFormat = 'mm/dd/yyyy';
@@ -65,7 +65,7 @@ export class DateFormatService {
                     year = parseInt(dateValueTokens[i]);
                 }
             }
-            if (month >= 0 && year > 0 && day > 0) {
+            if (month >= 0 && month <= 11 && year > 1900 && day > 0 && day <= 31) {
                 date = new Date(year, month, day);
             }
         } else if (dateFormatTokens && dateFormatTokens.length === 4 && dateString.length >= 1) {
@@ -109,7 +109,9 @@ export class DateFormatService {
             }
             if (timeStringParts && timeStringParts.length && timeStringParts.length === 2) {
                 let hours: number = parseInt(timeStringParts[0]);
-                if (pm) {
+                if (hours === 12 && pm) {
+                    hours = 12;
+                } else if (pm) {
                     hours = hours + 12;
                 } else if (hours === 12) {
                     hours = 0;

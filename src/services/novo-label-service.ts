@@ -66,8 +66,8 @@ export class NovoLabelService {
     yes = 'Yes';
     search = 'SEARCH';
     noItems = 'There are no items';
-    dateFormat = 'mm-dd-yyyy';
-    dateFormatPlaceholder = 'mm-dd-yyyy';
+    dateFormat = 'MM/dd/yyyy';
+    dateFormatPlaceholder = 'MM/DD/YYYY';
     timeFormatPlaceholderAM = 'hh:mm AM';
     timeFormatPlaceholder24Hour = 'HH:mm';
     timeFormatAM = 'AM';
