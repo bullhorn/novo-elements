@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, OnInit, OnChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
@@ -38,7 +38,7 @@ const TILES_VALUE_ACCESSOR = {
         ])
     ]
 })
-export class NovoTilesElement implements ControlValueAccessor, OnInit {
+export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges {
     @Input() name: string;
     @Input() options: any;
     @Input() required: boolean;
@@ -66,6 +66,13 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit {
     ngOnInit() {
         this.name = this.name || '';
         this.setupOptions();
+    }
+
+    ngOnChanges(change) {
+        if (change.options && change.options.previousValue.length > 0) {
+            this._options = [];
+            this.setupOptions();
+        }
     }
 
     setupOptions() {
