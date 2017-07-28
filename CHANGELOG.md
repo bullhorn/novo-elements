@@ -1,3 +1,13 @@
+<a name="2.0.241"></a>
+## [2.0.241](https://github.com/bullhorn/novo-elements/compare/v2.0.240...v2.0.241) (2017-07-28)
+
+
+### Features
+
+* **tiles:** Add ability to change options array ([#516](https://github.com/bullhorn/novo-elements/issues/516)) ([d2f52c8](https://github.com/bullhorn/novo-elements/commit/d2f52c8))
+
+
+
 <a name="2.0.240"></a>
 ## [2.0.240](https://github.com/bullhorn/novo-elements/compare/v2.0.239...v2.0.240) (2017-07-28)
 
