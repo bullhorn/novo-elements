@@ -22,7 +22,7 @@ export class DateFormatService {
                         mask = mask.concat([/\d/, /\d|:/, /:|\d/, /\d|\w|\s/, /\d|\s|\w/]);
                     } else if (timeFormatPart.length) {
                         for (let i = 0; i < timeFormatPart.length; i++) {
-                            mask.push(/\s|\w|\d/);
+                            mask.push(/\s|\w|\d|\./);
                         }
                     }
                 }
@@ -31,36 +31,8 @@ export class DateFormatService {
         return mask;
     }
 
-    getDateTimeMask(militaryTime: boolean): Array<RegExp> {
-        let dateMask: Array<RegExp>, timeMask: Array<RegExp>;
-        dateMask = this.getDateMask();
-        timeMask = this.getTimeMask(militaryTime);
-        return dateMask.concat([/\,/]).concat(timeMask);
-    }
-
     getDateMask(): Array<RegExp> {
-        let mask: Array<RegExp> = [], dateFormatArray: Array<string> = [];
-        let dateFormat: string = this.labels.dateFormat;
-        if (Helpers.isEmpty(dateFormat)) {
-            // Default mask for dd/MM/yyyy or MM/dd/yyyy
-            return [ /\d/, /\d/, /\//, /\d/, /\d/, /\//, /\d/, /\d/, /\d/, /\d/];
-        }
-        dateFormat = dateFormat.toLowerCase();
-        if (!dateFormat.match('mm') && dateFormat.includes('m')) {
-            dateFormat = dateFormat.replace('m', 'mm');
-        }
-        if (!dateFormat.match('dd') && dateFormat.includes('d')) {
-            dateFormat = dateFormat.replace('d', 'dd');
-        }
-        dateFormatArray = dateFormat.split('');
-        for (let char of dateFormatArray) {
-            if (['m', 'd', 'y'].includes(char)) {
-                mask.push(/\d/);
-            } else {
-                mask.push(new RegExp(char));
-            }
-        }
-        return mask;
+        return [ /\d/, /\d|\/|\.|\-/, /\/|\.|\-|\d/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d/, /\d/];
     }
 
     getTimePlaceHolder(militaryTime: boolean): string {
@@ -70,11 +42,11 @@ export class DateFormatService {
         return this.labels.timeFormatPlaceholderAM;
     }
 
-    parseDateString(dateString: string): Date {
+    parseDateString(dateString: string): [Date, string] {
         let dateFormat: string = this.labels.dateFormat,
             dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi,
             dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi,
-            dateFormatTokens: Array<string>, dateValueTokens: Array<string>, year: number, month: number, day: number, date: Date;
+            dateFormatTokens: Array<string>, dateValueTokens: Array<string>, year: number, month: number, day: number, date: Date = new Date();
         if (Helpers.isEmpty(dateFormat)) {
             // Default to MM/dd/yyyy
             dateFormat = 'mm/dd/yyyy';
@@ -93,19 +65,29 @@ export class DateFormatService {
                     year = parseInt(dateValueTokens[i]);
                 }
             }
-            if (month >= 0 && year > 0 && day > 0) {
+            if (month >= 0 && month <= 11 && year > 1900 && day > 0 && day <= 31) {
                 date = new Date(year, month, day);
             }
+        } else if (dateFormatTokens && dateFormatTokens.length === 4 && dateString.length >= 1) {
+            let twoTokens = /\d{1,4}(\/|\.|\-)(\d{1,2})/.exec(dateString);
+            let oneToken = /^(\d{1,4})$/.exec(dateString);
+            let delimiter = /\w+(\/|\.|\-)\w+[\/|\.|\-]\w+/gi.exec(dateFormat);
+            let dateStringWithDelimiter = dateString[dateString.length - 1].match(/\/|\.|\-/);
+            if (twoTokens && twoTokens.length === 3 && this.isValidDatePart(twoTokens[2], dateFormatTokens[2]) && !dateStringWithDelimiter) {
+                dateString = `${dateString}${delimiter[1]}`;
+            } else if (oneToken && oneToken.length === 2 && this.isValidDatePart(oneToken[1], dateFormatTokens[1]) && !dateStringWithDelimiter) {
+                dateString = `${dateString}${delimiter[1]}`;
+            }
         }
-        return date;
+        return [date, dateString];
     }
 
-    parseTimeString (timeString: string, militaryTime: boolean): Date {
+    parseTimeString (timeString: string, militaryTime: boolean): [Date, string] {
         let value: Date = new Date(), timeStringParts: Array<string>, timeFormat: string;
         let amFormat = this.labels.timeFormatAM;
         let pmFormat = this.labels.timeFormatPM;
         if (!(timeString && timeString.includes(':'))) {
-            return value;
+            return [value, timeString];
         }
         if (!militaryTime && amFormat && pmFormat) {
             let splits: Array<string> = [], pm: boolean = false;
@@ -127,7 +109,9 @@ export class DateFormatService {
             }
             if (timeStringParts && timeStringParts.length && timeStringParts.length === 2) {
                 let hours: number = parseInt(timeStringParts[0]);
-                if (pm) {
+                if (hours === 12 && pm) {
+                    hours = 12;
+                } else if (pm) {
                     hours = hours + 12;
                 } else if (hours === 12) {
                     hours = 0;
@@ -144,21 +128,7 @@ export class DateFormatService {
                 value.setSeconds(0);
             }
         }
-        return value;
-    }
-
-    parseDateTimeString(dateTimeString: string, militaryTime: boolean): Date {
-        let dateString: string, timeString: string, dateTimevalue: Date, timeValue: Date;
-        [dateString, timeString] = dateTimeString.split(',');
-        if (!dateString || !timeString) {
-            return;
-        }
-        dateTimevalue = this.parseDateString(dateString.trim());
-        timeValue = this.parseTimeString(timeString.trim(), militaryTime);
-        dateTimevalue.setMinutes(timeValue.getMinutes());
-        dateTimevalue.setHours(timeValue.getHours());
-        dateTimevalue.setSeconds(0);
-        return dateTimevalue;
+        return [value, timeString];
     }
 
     parseString(dateTimeString: string, militaryTime: boolean, type: string) {
@@ -167,11 +137,21 @@ export class DateFormatService {
                 return this.parseDateString(dateTimeString);
             case 'time':
                 return this.parseTimeString(dateTimeString, militaryTime);
-            case 'date-time':
-                return this.parseDateTimeString(dateTimeString, militaryTime);
             default:
                 return;
         }
+    }
+
+    isValidDatePart(value: string, format: string): boolean {
+        let datePart = parseInt(value);
+        if (format.includes('m') && (datePart >= 2 || value.length === 2)) {
+            return true;
+        } else if (format.includes('d') && (datePart >= 4 || value.length === 2)) {
+            return true;
+        } else if (format.includes('y') && datePart >= 1000) {
+            return true;
+        }
+        return false;
     }
 
 }
