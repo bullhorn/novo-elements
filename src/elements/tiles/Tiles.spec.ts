@@ -33,6 +33,38 @@ describe('Elements: NovoTilesElement', () => {
         });
     });
 
+    describe('Method: ngOnChanges()', () => {
+        it('should be defined', () => {
+            expect(component.ngOnChanges).toBeDefined();
+        });
+
+        it('should change the options array if changes exist', () => {
+            spyOn(component, 'setupOptions');
+            component._options = [1, 2, 3, 4, 5];
+            let changeSet = {
+                options: {
+                    previousValue: [1, 2, 3, 4, 5],
+                    currentValue: [5, 4, 3, 2, 1]
+                }
+            };
+            component.ngOnChanges(changeSet);
+            expect(component.setupOptions).toHaveBeenCalled();
+        });
+
+        it('should NOT change the options array there is not previous values', () => {
+            spyOn(component, 'setupOptions');
+            component._options = [1, 2, 3, 4, 5];
+            let changeSet = {
+                options: {
+                    previousValue: {},
+                    currentValue: [5, 4, 3, 2, 1]
+                }
+            };
+            component.ngOnChanges(changeSet);
+            expect(component.setupOptions).not.toHaveBeenCalled();
+        });
+    });
+
     xdescribe('Method: select(event, item)', () => {
         it('should be defined.', () => {
             expect(component.select).toBeDefined();
