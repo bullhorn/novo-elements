@@ -419,7 +419,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
      */
     removeTime(date: any): Date {
         let ret = new Date(date);
-        ret.setHours(1);
+        ret.setHours(0);
         ret.setSeconds(0);
         ret.setMilliseconds(0);
         return ret;
