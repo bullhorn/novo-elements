@@ -1,0 +1,48 @@
+<!--<novo-stepwise-form class="stepwise" (stepChanged)="activeStep($event)" #stepwiseForm>
+    <novo-form-step [valid]="isValidStep(1)">
+        Stuff in Step 1
+        //this can be a form
+    </novo-form-step>
+    <novo-form-step [valid]="isValidStep(2)">
+        Stuff in Step 2
+    </novo-form-step>
+    <novo-form-step [valid]="isValidStep(3)">
+        Stuff in Step 3
+    </novo-form-step>
+    <footer>
+        <!--<button (click)="nextStep(stepwiseForm)" *ngIf="stepwiseForm.currentStep !== stepwiseForm.FinalStep">Next Step</button>
+        <button (click)="save(stepWiseForm)" *ngIf="stepwiseForm.currentStep === stepwiseForm.FinalStep">Save</button>-->
+    <!---</footer>
+</novo-stepwise-form>-->
+
+<novo-nav theme="white" [outlet]="colorVert" direction="vertical">
+    <novo-tab>
+        <span>
+            <i class="bhi-bot"></i>WHAT</span>
+    </novo-tab>
+    <novo-tab>
+        <span>
+            <i class="bhi-next"></i>WHEN</span>
+    </novo-tab>
+    <novo-tab>
+        <span>
+            <i class="bhi-configure-o"></i>SETTINGS</span>
+    </novo-tab>
+</novo-nav>
+
+<novo-nav-outlet #colorVert>
+    <novo-nav-content>
+        <h1>BOT NAME</h1>
+    </novo-nav-content>
+    <novo-nav-content>
+        <h1>WHEN</h1>
+    </novo-nav-content>
+     <novo-nav-content>
+        <h1>SETTINGS</h1>
+    </novo-nav-content>
+    <footer>
+        <button theme="primary" icon="check" [class.valid-form]="form.isValid" (click)="nextStep(stepwiseForm)">Next Step</button>
+
+        <!--<button (click)="save(stepWiseForm)">Save</button>-->
+    </footer>
+</novo-nav-outlet>

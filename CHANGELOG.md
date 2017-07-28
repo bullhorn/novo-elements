@@ -1,3 +1,13 @@
+<a name="2.0.239"></a>
+## [2.0.239](https://github.com/bullhorn/novo-elements/compare/v2.0.238...v2.0.239) (2017-07-28)
+
+
+### Bug Fixes
+
+* **datepicker:** Fixing initial time ([07d8478](https://github.com/bullhorn/novo-elements/commit/07d8478))
+
+
+
 <a name="2.0.238"></a>
 ## [2.0.238](https://github.com/bullhorn/novo-elements/compare/v2.0.237...v2.0.238) (2017-07-20)
 
