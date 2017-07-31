@@ -1,3 +1,13 @@
+<a name="2.0.242"></a>
+## [2.0.242](https://github.com/bullhorn/novo-elements/compare/v2.0.241...v2.0.242) (2017-07-31)
+
+
+### Bug Fixes
+
+* **Tiles:** Fix check for undefined array ([#517](https://github.com/bullhorn/novo-elements/issues/517)) ([2d16b98](https://github.com/bullhorn/novo-elements/commit/2d16b98))
+
+
+
 <a name="2.0.241"></a>
 ## [2.0.241](https://github.com/bullhorn/novo-elements/compare/v2.0.240...v2.0.241) (2017-07-28)
 
