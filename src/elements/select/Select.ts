@@ -31,7 +31,7 @@ const SELECT_VALUE_ACCESSOR = {
                     </footer>
                 </div>
             </li>
-            <li *ngFor="let option of options; let i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
+            <li *ngFor="let option of _options; let i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
               <span [innerHtml]="highlight(option.label, filterTerm)"></span>
               <i *ngIf="option.active" class="bhi-check"></i>
             </li>
@@ -58,6 +58,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     };
     createdItem: any;
     selected: any;
+    _options: any;
     model: any;
     onModelChange: Function = () => {
     };
@@ -76,9 +77,14 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
 
     ngOnChanges(changes?: SimpleChanges) {
         this.readonly = this.readonly === true;
+
         if (this.options && this.options.length && typeof this.options[0] === 'string') {
-            this.options = this.options.map((item) => {
+            this._options = this.options.map((item) => {
                 return { value: item, label: item };
+            });
+        } else {
+            this._options = this.options.filter((item) => {
+                return !item.readOnly;
             });
         }
 
@@ -249,7 +255,9 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
                     label: model,
                     value: model
                 };
-                this.options.unshift(item);
+                if (!item.readOnly) {
+                    this.options.unshift(item);
+                }
             }
             if (item) {
                 this.empty = false;
