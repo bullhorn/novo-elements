@@ -1,3 +1,8 @@
+<a name="2.0.244"></a>
+## [2.0.244](https://github.com/bullhorn/novo-elements/compare/v2.0.243...v2.0.244) (2017-08-02)
+
+
+
 <a name="2.0.243"></a>
 ## [2.0.243](https://github.com/bullhorn/novo-elements/compare/v2.0.242...v2.0.243) (2017-08-02)
 
