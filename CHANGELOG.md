@@ -1,3 +1,13 @@
+<a name="2.0.245"></a>
+## [2.0.245](https://github.com/bullhorn/novo-elements/compare/v2.0.244...v2.0.245) (2017-08-02)
+
+
+### Bug Fixes
+
+* **select:** Fixing select for ones without hidden values ([70b1828](https://github.com/bullhorn/novo-elements/commit/70b1828))
+
+
+
 <a name="2.0.244"></a>
 ## [2.0.244](https://github.com/bullhorn/novo-elements/compare/v2.0.243...v2.0.244) (2017-08-02)
 
