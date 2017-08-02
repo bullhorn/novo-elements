@@ -4,6 +4,7 @@ button {
     &[class*="hint--"]:before,
     &[class*="hint--"]:after {
         text-transform: initial;
+        word-wrap: break-word;
     }
     &[theme] {
         font-size: 1rem;

@@ -21,6 +21,9 @@ import { Directive, Input } from '@angular/core';
         '[class.hint--no-animate]': 'tooltip && noAnimate',
         '[class.hint--bounce]': 'tooltip && bounce',
         '[class.hint--hidden]': 'active === false',
+        '[class.hint--small]': 'tooltip && isSize("small")',
+        '[class.hint--medium]': 'tooltip && isSize("medium")',
+        '[class.hint--large]': 'tooltip && isSize("large")',
         '[attr.data-hint]': 'tooltip'
     }
 })
@@ -28,6 +31,7 @@ export class TooltipDirective {
     @Input() tooltip: string;
     @Input('tooltipPosition') position: string = 'top';
     @Input('tooltipType') type: string;
+    @Input('tooltipSize') size: string;
     @Input('tooltipBounce') bounce: string;
     @Input('tooltipNoAnimate') noAnimate: boolean;
     @Input('tooltipRounded') rounded: boolean;
@@ -40,5 +44,9 @@ export class TooltipDirective {
 
     isType(type: string): boolean {
         return type.toLowerCase() === (this.type || '').toLowerCase();
+    }
+
+    isSize(size: string): boolean {
+        return size.toLowerCase() === (this.size || '').toLowerCase();
     }
 }
