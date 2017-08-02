@@ -1,3 +1,13 @@
+<a name="2.0.243"></a>
+## [2.0.243](https://github.com/bullhorn/novo-elements/compare/v2.0.242...v2.0.243) (2017-08-02)
+
+
+### Bug Fixes
+
+* **select:** Fixing select to hide readOnly options ([6f0decd](https://github.com/bullhorn/novo-elements/commit/6f0decd))
+
+
+
 <a name="2.0.242"></a>
 ## [2.0.242](https://github.com/bullhorn/novo-elements/compare/v2.0.241...v2.0.242) (2017-07-31)
 
