@@ -31,7 +31,7 @@ const SELECT_VALUE_ACCESSOR = {
                     </footer>
                 </div>
             </li>
-            <li *ngFor="let option of _options; let i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
+            <li *ngFor="let option of filteredOptions; let i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
               <span [innerHtml]="highlight(option.label, filterTerm)"></span>
               <i *ngIf="option.active" class="bhi-check"></i>
             </li>
@@ -58,7 +58,6 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     };
     createdItem: any;
     selected: any;
-    _options: any;
     model: any;
     onModelChange: Function = () => {
     };
@@ -66,6 +65,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     };
     filterTerm: string = '';
     filterTermTimeout;
+    filteredOptions: any;
 
     constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
@@ -79,11 +79,11 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         this.readonly = this.readonly === true;
 
         if (this.options && this.options.length && typeof this.options[0] === 'string') {
-            this._options = this.options.map((item) => {
+            this.filteredOptions = this.options.map((item) => {
                 return { value: item, label: item };
             });
         } else {
-            this._options = this.options.filter((item) => {
+            this.filteredOptions = this.options.filter((item) => {
                 return !item.readOnly;
             });
         }
@@ -249,7 +249,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     writeValue(model: any): void {
         this.model = model;
         if (this.options) {
-            let item = this.options.find(i => i.value === model);
+            let item = this.filteredOptions.find(i => i.value === model);
             if (!item && !Helpers.isEmpty(model)) {
                 item = {
                     label: model,
