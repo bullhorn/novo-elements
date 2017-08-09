@@ -2,14 +2,12 @@
 html {
     margin: 0;
     padding: 0;
-
     body {
         margin: 0;
         padding: 0;
         position: relative;
-        overflow: scroll;
+        overflow: auto;
         background: $white;
-
         demo-app {
             height: 100%;
             width: 100%;
@@ -17,4 +15,9 @@ html {
             display: block;
         }
     }
+}
+
+code-snippet,
+multi-code-snippet {
+    margin-bottom: 20px;
 }

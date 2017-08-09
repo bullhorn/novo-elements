@@ -10,6 +10,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { DateFormatService } from '../../services/date-format/DateFormat';
+import { FieldInteractionApi } from './FieldInteractionApi';
 
 export interface IMaskOptions {
     mask: any;
@@ -187,7 +188,8 @@ export class NovoCustomControlContainerElement {
     host: {
         '[class]': 'control.controlType',
         '[class.disabled]': 'form?.controls[control.key]?.readOnly',
-        '[class.hidden]': 'form?.controls[control.key]?.hidden'
+        '[class.hidden]': 'form?.controls[control.key]?.hidden',
+        '[attr.data-control-key]': 'control.key',
     }
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy {
@@ -220,7 +222,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     maskOptions: IMaskOptions;
 
-    constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService, private dateFormatService: DateFormatService) {
+    constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService,
+        private dateFormatService: DateFormatService, private fieldInteractionApi: FieldInteractionApi) {
         super(element);
     }
 
@@ -316,7 +319,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     executeInteraction(interaction) {
         if (interaction.script) {
             setTimeout(() => {
-                interaction.script(this.form, this.form.controls[this.control.key], this.toast);
+                this.fieldInteractionApi.form = this.form;
+                this.fieldInteractionApi.currentKey = this.control.key;
+                interaction.script(this.fieldInteractionApi, this.control.key);
             });
         }
     }
@@ -490,7 +495,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     handleKeyPressForDateTime(event: any): void {
-       if (this.active && event && event.keyCode) {
+        if (this.active && event && event.keyCode) {
             if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB || event.keyCode === KeyCodes.ENTER) {
                 this.toggleActive(event, false);
             }

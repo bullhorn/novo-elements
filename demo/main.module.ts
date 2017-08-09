@@ -41,7 +41,8 @@ import {
     MultiPickerDemoComponent,
     PopOverDemoComponent,
     CustomDemoComponent,
-    DatePickerDemoComponent
+    DatePickerDemoComponent,
+    FieldInteractionsDemoComponent
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
@@ -105,7 +106,8 @@ import './demo.scss';
         MultiPickerDemoComponent,
         PopOverDemoComponent,
         CustomDemoComponent,
-        AppBridgeDemoComponent
+        AppBridgeDemoComponent,
+        FieldInteractionsDemoComponent
     ],
     imports: [
         // NG2

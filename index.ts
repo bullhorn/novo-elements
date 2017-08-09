@@ -61,6 +61,7 @@ export { FormUtils } from './src/utils/form-utils/FormUtils';
 export { NovoFile } from './src/elements/form/extras/file/extras/file/File';
 export * from './src/elements/form/FormControls';
 export { NovoFormControl, NovoFormGroup } from './src/elements/form/NovoFormControl';
+export * from './src/elements/form/FieldInteractionApi';
 // Utils
 export { OutsideClick } from './src/utils/outside-click/OutsideClick';
 export { KeyCodes } from './src/utils/key-codes/KeyCodes';
