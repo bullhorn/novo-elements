@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { NovoFormGroup } from './FormInterfaces';
 import { NovoFormControl } from './NovoFormControl';
 import { NovoToastService } from '../toast/ToastService';
+import { Helpers } from '../../utils/Helpers';
 
 @Injectable()
 export class FieldInteractionApi {
@@ -53,6 +54,10 @@ export class FieldInteractionApi {
         return this.getValue(this.currentKey);
     }
 
+    public getActiveInitialValue(): any {
+        return this.getInitialValue(this.currentKey);
+    }
+
     public getControl(key: string): NovoFormControl {
         if (!key) {
             console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
@@ -71,6 +76,11 @@ export class FieldInteractionApi {
     public getValue(key: string): any {
         let control = this.getControl(key);
         return control.value;
+    }
+
+    public getInitialValue(key: string): any {
+        let control = this.getControl(key);
+        return control.initialValue;
     }
 
     public setValue(key: string, value: any, options?: {
@@ -198,5 +208,19 @@ export class FieldInteractionApi {
     public getProperty(key: string, prop: string): any {
         let control = this.getControl(key);
         return control[prop];
+    }
+
+    public isValueEmpty(key: string) {
+        let value = this.getValue(key);
+        return Helpers.isEmpty(value);
+    }
+
+    public isValueBlank(key: string) {
+        let value = this.getValue(key);
+        return Helpers.isBlank(value);
+    }
+
+    public hasField(key: string) {
+        return !!this.form.controls[key];
     }
 }
