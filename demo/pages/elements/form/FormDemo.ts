@@ -188,7 +188,7 @@ export class FormDemoComponent {
             key: 'entityMultiPicker',
             label: 'Entities',
             required: true,
-            readOnly: true,
+            readOnly: false,
             multiple: true,
             config: {
                 resultsTemplate: EntityPickerResults,
