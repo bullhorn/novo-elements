@@ -172,9 +172,10 @@ describe('Elements: NovoCKEditorElement', () => {
         it('should work', () => {
             let config = component.getBaseConfig();
             expect(config).toEqual({
-                scayt_autoStartup: true,
+                disableNativeSpellChecker: false,
+                removePlugins: 'liststyle,tabletools,contextmenu',
                 toolbar: [
-                    { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo', 'Scayt'] },
+                    { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'] },
                     { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
                     { name: 'links', items: ['Link'] },
                     { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
