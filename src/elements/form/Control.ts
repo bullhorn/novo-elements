@@ -2,7 +2,6 @@
 import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
-import { NovoToastService } from '../toast/ToastService';
 // APP
 import { NovoFormGroup } from './FormInterfaces';
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
@@ -222,8 +221,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     maskOptions: IMaskOptions;
 
-    constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService,
-        private dateFormatService: DateFormatService, private fieldInteractionApi: FieldInteractionApi) {
+    constructor(element: ElementRef, public labels: NovoLabelService, private dateFormatService: DateFormatService, private fieldInteractionApi: FieldInteractionApi) {
         super(element);
     }
 
