@@ -1,7 +1,7 @@
 import {
     AddressControl, CheckboxControl, CheckListControl, DateControl, DateTimeControl, EditorControl,
     FileControl, NativeSelectControl, PickerControl, AppendToBodyPickerControl, TablePickerControl,
-    QuickNoteControl, RadioControl, ReadOnlyControl, TextAreaControl, TextBoxControl, SelectControl,
+    QuickNoteControl, RadioControl, RadioLargeIconControl, ReadOnlyControl, TextAreaControl, TextBoxControl, SelectControl,
     TilesControl, TimeControl
 } from './index';
 import { BaseControl } from './BaseControl';
@@ -35,6 +35,8 @@ export class ControlFactory {
                 return new QuickNoteControl(config);
             case 'RadioControl':
                 return new RadioControl(config);
+            case 'RadioLargeIconControl':
+                return new RadioLargeIconControl(config);
             case 'ReadOnlyControl':
                 return new ReadOnlyControl(config);
             case 'TextAreaControl':

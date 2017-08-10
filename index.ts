@@ -12,6 +12,7 @@ export { NovoTilesModule } from './src/elements/tiles/Tiles.module';
 export { NovoModalModule } from './src/elements/modal/Modal.module';
 export { NovoQuickNoteModule } from './src/elements/quick-note/QuickNote.module';
 export { NovoRadioModule } from './src/elements/radio/Radio.module';
+export { NovoRadioLargeIconModule } from './src/elements/radio-large-icon/RadioLargeIcon.module';
 export { NovoDropdownModule } from './src/elements/dropdown/Dropdown.module';
 export { NovoSelectModule } from './src/elements/select/Select.module';
 export { NovoListModule } from './src/elements/list/List.module';

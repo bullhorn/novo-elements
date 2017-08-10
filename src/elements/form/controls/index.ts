@@ -9,6 +9,7 @@ export * from './native-select/NativeSelectControl';
 export * from './picker/PickerControl';
 export * from './quick-note/QuickNoteControl';
 export * from './radio/RadioControl';
+export * from './radio-large-icon/RadioLargeIconControl';
 export * from './read-only/ReadOnlyControl';
 export * from './select/SelectControl';
 export * from './text-area/TextAreaControl';
