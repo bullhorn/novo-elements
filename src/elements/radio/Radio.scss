@@ -70,4 +70,16 @@ novo-radio {
             }
         }
     }
+    button[theme].has-icon {
+        opacity: .5;
+        transition: all 100ms ease-in-out;
+        &:hover {
+            opacity: 1;
+        }
+        &.checked {
+            color: $white;
+            background: $positive;
+            opacity: 1;
+        }
+    }
 }

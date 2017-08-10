@@ -397,6 +397,27 @@ export const MockMeta = {
             required: true,
             sortOrder: 9000
         }, {
+            inputType: 'RADIO',
+            label: 'Like?',
+            maxLength: 100,
+            multiValue: false,
+            name: 'like',
+            optional: true,
+            options: [
+                {
+                    value: 'Yes',
+                    label: 'Yes',
+                    icon: 'check'
+                },
+                {
+                    value: 'No',
+                    label: 'No',
+                    icon: 'times'
+                }
+            ],
+            required: true,
+            sortOrder: 9000
+        }, {
             name: 'comments',
             type: 'textarea',
             label: 'Comments',
