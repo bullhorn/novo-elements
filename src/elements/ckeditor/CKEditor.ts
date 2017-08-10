@@ -129,6 +129,8 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
 
     getBaseConfig() {
         return {
+            enterMode : CKEDITOR.ENTER_BR,
+            shiftEnterMode: CKEDITOR.ENTER_P,
             disableNativeSpellChecker: false,
             removePlugins: 'liststyle,tabletools,contextmenu', // allows browser based spell checking
             toolbar: [
