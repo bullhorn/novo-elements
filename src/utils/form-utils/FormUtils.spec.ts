@@ -13,6 +13,7 @@ import {
     FileControl,
     PickerControl,
     RadioControl,
+    RadioLargeIconControl,
     SelectControl,
     TextAreaControl,
     TextBoxControl,
@@ -216,6 +217,11 @@ describe('Utils: FormUtils', () => {
             expect(formUtils.getControlForField).toBeDefined();
             let result = formUtils.getControlForField({ type: 'radio' });
             expect(result instanceof RadioControl).toBe(true);
+        });
+        it('should return the right component for radio-large-icon', () => {
+            expect(formUtils.getControlForField).toBeDefined();
+            let result = formUtils.getControlForField({ type: 'radio-large-icon' });
+            expect(result instanceof RadioLargeIconControl).toBe(true);
         });
         it('should return the right component for select', () => {
             expect(formUtils.getControlForField).toBeDefined();

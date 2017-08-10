@@ -15,6 +15,7 @@ import { NovoTilesModule } from './src/elements/tiles/Tiles.module';
 import { NovoModalModule } from './src/elements/modal/Modal.module';
 import { NovoQuickNoteModule } from './src/elements/quick-note/QuickNote.module';
 import { NovoRadioModule } from './src/elements/radio/Radio.module';
+import { NovoRadioLargeIconModule } from './src/elements/radio-large-icon/RadioLargeIcon.module';
 import { NovoDropdownModule } from './src/elements/dropdown/Dropdown.module';
 import { NovoSelectModule } from './src/elements/select/Select.module';
 import { NovoListModule } from './src/elements/list/List.module';
@@ -60,6 +61,7 @@ import { FormUtils } from './src/utils/form-utils/FormUtils';
         NovoModalModule,
         NovoQuickNoteModule,
         NovoRadioModule,
+        NovoRadioLargeIconModule,
         NovoDropdownModule,
         NovoSelectModule,
         NovoListModule,

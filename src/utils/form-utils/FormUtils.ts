@@ -13,6 +13,7 @@ import {
     FileControl,
     PickerControl,
     RadioControl,
+    RadioLargeIconControl,
     SelectControl,
     TextAreaControl,
     TextBoxControl,
@@ -127,6 +128,8 @@ export class FormUtils {
             type = 'year';
         } else if (field.dataType === 'Timestamp') {
             type = 'date';
+        } else if (field.dataType === 'Boolean' && field.type === 'largeradio') {
+            type = 'radio-large-icon';
         } else if (field.dataType === 'Boolean') {
             type = 'tiles';
         } else if (field.inputType === 'TEXTAREA') {
@@ -287,6 +290,9 @@ export class FormUtils {
                 break;
             case 'radio':
                 control = new RadioControl(controlConfig);
+                break;
+            case 'radio-large-icon':
+                control = new RadioLargeIconControl(controlConfig);
                 break;
             case 'select':
                 control = new SelectControl(controlConfig);

@@ -11,6 +11,7 @@ export * from './controls/native-select/NativeSelectControl';
 export * from './controls/picker/PickerControl';
 export * from './controls/quick-note/QuickNoteControl';
 export * from './controls/radio/RadioControl';
+export * from './controls/radio-large-icon/RadioLargeIconControl';
 export * from './controls/select/SelectControl';
 export * from './controls/text-area/TextAreaControl';
 export * from './controls/textbox/TextBoxControl';

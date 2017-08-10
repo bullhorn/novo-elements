@@ -126,6 +126,10 @@ export class NovoCustomControlContainerElement {
                             <div class="novo-control-input-container" *ngSwitchCase="'radio'">
                                 <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of control.options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-radio>
                             </div>
+                            <!--RadioLargeIcon-->
+                            <div class="novo-control-input-container" *ngSwitchCase="'radio-large-icon'">
+                                <novo-radio-large-icon [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of control.options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [icon]="option.icon" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-radio-large-icon>
+                            </div>
                             <!--Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
                                 <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleKeyPressForDateTime($event)" [value]="formattedValue" [textMask]="maskOptions" (input)="selectDateTimeValue($event)" />
@@ -375,7 +379,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
 
         // Controls that always have the label active
-        return ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'text-area', 'quick-note'].indexOf(this.control.controlType) !== -1;
+        return ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'radio', 'radio-large-icon', 'text-area', 'quick-note'].indexOf(this.control.controlType) !== -1;
     }
 
     get requiresExtraSpacing() {

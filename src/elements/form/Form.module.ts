@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 // APP
 import { NovoRadioModule } from './../radio/Radio.module';
+import { NovoRadioLargeIconModule } from './../radio-large-icon/RadioLargeIcon.module';
 import { NovoTilesModule } from './../tiles/Tiles.module';
 import { NovoSelectModule } from './../select/Select.module';
 import { NovoPickerModule } from './../picker/Picker.module';
@@ -28,6 +29,7 @@ import { NovoDragulaModule } from './../dragula/Dragula.module';
         CommonModule,
         ReactiveFormsModule,
         NovoRadioModule,
+        NovoRadioLargeIconModule,
         NovoTilesModule,
         NovoSelectModule,
         NovoPickerModule,
