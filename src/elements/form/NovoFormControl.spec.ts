@@ -76,15 +76,19 @@ describe('Elements: NovoFormControl', () => {
 
     describe('Method: setReadOnly(isReadOnly)', () => {
         it('should set readOnly to true when called with true.', () => {
+            spyOn(component, 'disable');
             expect(component.setReadOnly).toBeDefined();
             component.setReadOnly(true);
             expect(component.readOnly).toBe(true);
+            expect(component.disable).toHaveBeenCalled();
         });
 
         it('should set readOnly to true when called with false.', () => {
+            spyOn(component, 'enable');
             expect(component.setReadOnly).toBeDefined();
             component.setReadOnly(false);
             expect(component.readOnly).toBe(false);
+            expect(component.enable).toHaveBeenCalled();
         });
     });
 
