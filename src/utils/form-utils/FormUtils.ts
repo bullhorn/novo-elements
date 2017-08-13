@@ -88,7 +88,6 @@ export class FormUtils {
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
             let formControl = new NovoFormControl(value, control);
-            // TODO: This should return these controls?
             formGroup.addControl(control.key, formControl);
         });
     }

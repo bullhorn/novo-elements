@@ -16,6 +16,26 @@ export class NovoFormControl extends FormControl {
     tooltipPosition: string;
     initialValue: any;
     validators: any;
+    config: any;
+    sortOrder: number;
+    controlType: string;
+    placeholder: string;
+    multiple: boolean;
+    headerConfig: any;
+    optionsType: string;
+    maxlength: number;
+    minlength: number;
+    options: Array<any>;
+    type: string;
+    subType: string;
+    name: string;
+    closeOnSelect: boolean;
+    interactions: Array<Object>;
+    appendToBody: boolean;
+    parentScrollSelector: string;
+    description?: string;
+    layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
+    military?: boolean;
 
     constructor(value: any, control: NovoControlConfig) {
         super(value, control.validators, control.asyncValidators);
@@ -24,10 +44,34 @@ export class NovoFormControl extends FormControl {
         this.label = control.label;
         this.readOnly = control.readOnly;
         this.hidden = control.hidden;
+        this.config = control.config;
+        this.type = control.type;
+        this.subType = control.subType;
         this.required = control.required;
         this.hasRequiredValidator = this.required;
         this.tooltip = control.tooltip;
         this.tooltipPosition = control.tooltipPosition;
+        this.label = control.label;
+        this.name = control.name;
+        this.required = control.required;
+        this.hidden = control.hidden;
+        this.sortOrder = control.sortOrder;
+        this.controlType = control.controlType;
+        this.placeholder = control.placeholder;
+        this.multiple = control.multiple;
+        this.headerConfig = control.headerConfig;
+        this.optionsType = control.optionsType;
+        this.readOnly = control.readOnly;
+        this.layoutOptions = control.layoutOptions;
+        this.military = control.military;
+        this.maxlength = control.maxlength;
+        this.minlength = control.minlength;
+        this.closeOnSelect = control.closeOnSelect;
+        this.interactions = control.interactions;
+        this.appendToBody = control.appendToBody;
+        this.parentScrollSelector = control.parentScrollSelector;
+        this.description = control.description;
+        this.options = control.options;
 
         // Reactive Form, need to enable/disable, can't bind to [disabled]
         if (this.readOnly) {
@@ -97,7 +141,6 @@ export class NovoFormControl extends FormControl {
     } = {}) {
         this.markAsDirty();
         this.markAsTouched();
-        // TODO: Should we set defaults on these?
         this.displayValueChanges.emit(value);
         super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
     }

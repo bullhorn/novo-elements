@@ -1,10 +1,10 @@
 // NG2
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Vendor
-import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService } from './../index';
+import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService, FieldInteractionApi, NovoToastService } from './../index';
 // APP
 import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
 import { MultiCodeSnippet } from './elements/codesnippet/MultiCodeSnippet';
@@ -51,6 +51,14 @@ import { CustomPickerResults } from './pages/elements/picker/PickerDemo';
 import { DemoComponent } from './app/App';
 import { routing } from './app/App.routes';
 import './demo.scss';
+
+export function provideFieldInteractionAPI(toast, formUtils, http) {
+    const fieldInteractionApi = new FieldInteractionApi(toast, formUtils, http);
+    fieldInteractionApi.globals = {
+        TEST: 'I AM A GLOBAL!'
+    };
+    return fieldInteractionApi;
+}
 
 @NgModule({
     declarations: [
@@ -123,7 +131,12 @@ import './demo.scss';
     ],
     providers: [
         FormUtils,
-        NovoLabelService
+        NovoLabelService,
+        {
+            provide: FieldInteractionApi,
+            useFactory: provideFieldInteractionAPI,
+            deps: [NovoToastService, FormUtils, Http]
+        }
     ],
     entryComponents: [
         DemoComponent,

@@ -1,7 +1,7 @@
 export interface NovoFormGroup {
     layout?: any;
-    controls?: any;
-    value?: any;
+    controls: any;
+    value: any;
     valid?: boolean;
     getRawValue?: any;
 }

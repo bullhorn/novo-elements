@@ -14,4 +14,29 @@ field-interactions-demo {
     pre.field-config {
         margin-bottom: 0;
     }
+    main.tabs {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        novo-nav {
+            background: rgba(0, 0, 0, 0.03) !important;
+            .novo-tab-link {
+                padding: 0;
+                font-size: 12px;
+                white-space: normal;
+            }
+        }
+        novo-nav-outlet {
+            padding: 0 25px;
+            h5 {
+                padding-top: 0 !important;
+            }
+            multi-code-snippet {
+                margin-bottom: 0 !important;
+            }
+            novo-form {
+                border-bottom: 1px solid #E9EAEA;
+            }
+        }
+    }
 }

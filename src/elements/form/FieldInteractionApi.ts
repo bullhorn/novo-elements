@@ -1,24 +1,24 @@
 // NG2
-import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 // APP
-import { NovoFormGroup } from './FormInterfaces';
 import { NovoFormControl } from './NovoFormControl';
+import { NovoControlConfig } from './FormControls';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoToastService } from '../toast/ToastService';
 import { Helpers } from '../../utils/Helpers';
 
-@Injectable()
 export class FieldInteractionApi {
     private _globals: any;
-    private _form: NovoFormGroup;
+    private _form: any;
     private _currentKey: string;
 
-    constructor(private toaster: NovoToastService) { }
+    constructor(private toaster: NovoToastService, private formUtils: FormUtils, private http: Http) { }
 
-    set form(form: NovoFormGroup) {
+    set form(form: any) {
         this._form = form;
     }
 
-    get form() {
+    get form(): any {
         return this._form;
     }
 
@@ -26,7 +26,7 @@ export class FieldInteractionApi {
         this._globals = globals;
     }
 
-    get globals() {
+    get globals(): any {
         return this._globals;
     }
 
@@ -34,7 +34,7 @@ export class FieldInteractionApi {
         this._currentKey = key;
     }
 
-    get currentKey() {
+    get currentKey(): string {
         return this._currentKey;
     }
 
@@ -70,7 +70,7 @@ export class FieldInteractionApi {
             return null;
         }
 
-        return control;
+        return (control as NovoFormControl);
     }
 
     public getValue(key: string): any {
@@ -222,5 +222,69 @@ export class FieldInteractionApi {
 
     public hasField(key: string) {
         return !!this.form.controls[key];
+    }
+
+    public addControl(control: NovoControlConfig) {
+        this.formUtils.addControls(this.form, [control]);
+    }
+
+    public addStaticOption(key: string, newOption: any): void {
+        let currentOptions = this.getProperty(key, 'options');
+        if (!currentOptions || !currentOptions.length) {
+            let config = this.getProperty(key, 'config');
+            if (config) {
+                currentOptions = config.options;
+                config.options = [...currentOptions, newOption];
+                this.setProperty(key, 'config', config);
+            }
+        } else {
+            this.setProperty(key, 'options', [...currentOptions, newOption]);
+        }
+    }
+
+    public removeStaticOption(key: string, optionToRemove: any): void {
+        let currentOptions = this.getProperty(key, 'options');
+        if (!currentOptions || !currentOptions.length) {
+            let config = this.getProperty(key, 'config');
+            if (config) {
+                currentOptions = config.options;
+                let index = currentOptions.indexOf(optionToRemove);
+                if (index !== -1) {
+                    currentOptions.splice(index, 1);
+                }
+                config.options = [...currentOptions];
+                this.setProperty(key, 'config', config);
+            }
+        } else {
+            let index = currentOptions.indexOf(optionToRemove);
+            if (index !== -1) {
+                currentOptions.splice(index, 1);
+            }
+            this.setProperty(key, 'options', [...currentOptions]);
+        }
+    }
+
+    public modifyPickerConfig(key: string, config: { format?: string, optionsUrl?: string, options?: any[] }) {
+        let control = this.getControl(key);
+        if (config.optionsUrl) {
+            let c = {
+                format: config.format,
+                options: (query) => {
+                    return new Promise((resolve, reject) => {
+                        if (query && query.length) {
+                            this.http
+                                .get(`${config.optionsUrl}?filter=${query || ''}`)
+                                .map(res => res.json())
+                                .subscribe(resolve, reject);
+                        } else {
+                            resolve([]);
+                        }
+                    });
+                }
+            };
+            this.setProperty(key, 'config', c);
+        } else {
+            control.config.options = [...config.options];
+        }
     }
 }

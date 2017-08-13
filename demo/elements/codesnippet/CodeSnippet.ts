@@ -1,10 +1,11 @@
 // NG2
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
     selector: 'code-snippet',
-    template: '<pre><code [innerHtml]="highlight"></code></pre>'
+    template: '<pre><code [innerHtml]="highlight"></code></pre>',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CodeSnippet implements OnInit {
     @Input() code;

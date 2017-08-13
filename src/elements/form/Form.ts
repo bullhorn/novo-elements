@@ -18,7 +18,7 @@ import { NovoFormGroup } from './FormInterfaces';
     `
 })
 export class NovoFormElement implements OnInit {
-    @Input() form: NovoFormGroup = {};
+    @Input() form: NovoFormGroup;
     @Input() layout: string;
     @Input() hideHeader: boolean = false;
 

@@ -28,6 +28,7 @@ export interface NovoControlConfig {
     minlength?: number;
     options?: Array<any>;
     type?: string;
+    subType?: string;
     name?: string;
     readOnly?: boolean;
     closeOnSelect?: boolean;
@@ -70,6 +71,7 @@ export class BaseControl {
     minlength: number;
     options: Array<any>;
     type: string;
+    subType?: string;
     name: string;
     disabled: boolean;
     readOnly: boolean; // "disabled", so it appears in the model still
