@@ -15,7 +15,7 @@ import { NovoModalRef, NovoModalParams } from '../modal/Modal';
     `
 })
 export class ControlConfirmModal {
-    constructor(private modalRef: NovoModalRef, private params: NovoModalParams) {
+    constructor(private modalRef: NovoModalRef, public params: NovoModalParams) {
     }
 
     public close(result: boolean): void {
