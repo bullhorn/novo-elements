@@ -217,6 +217,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private forceClearSubscription: any;
     private percentChangeSubscription: any;
     private valueChangeSubscription: any;
+    private dateChangeSubscription: any;
 
     maskOptions: IMaskOptions;
 
@@ -287,6 +288,16 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                     this.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
                 }
             });
+        } else if (['date', 'time', 'date-time'].includes(this.control.controlType)) {
+            this.dateChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe(value => {
+                if (this.control.controlType === 'date') {
+                    this.formatDateValue({ date: value });
+                } else if (this.control.controlType === 'time') {
+                    this.formatTimeValue({ date: value });
+                } else if (this.control.controlType === 'date-time') {
+                    this.formatDateTimeValue({ date: value });
+                }
+            });
         }
         this.maskOptions = {
             mask: [],
@@ -325,6 +336,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         // Unsubscribe from control interactions
         if (this.valueChangeSubscription) {
             this.valueChangeSubscription.unsubscribe();
+        }
+        if (this.dateChangeSubscription) {
+            this.dateChangeSubscription.unsubscribe();
         }
         if (this.forceClearSubscription) {
             // Un-listen for clear events
@@ -490,7 +504,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     handleKeyPressForDateTime(event: any): void {
-       if (this.active && event && event.keyCode) {
+        if (this.active && event && event.keyCode) {
             if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB || event.keyCode === KeyCodes.ENTER) {
                 this.toggleActive(event, false);
             }
