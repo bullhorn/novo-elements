@@ -15,6 +15,7 @@ export class NovoFormControl extends FormControl {
     tooltip: string;
     tooltipPosition: string;
     initialValue: any;
+    valueHistory: any[] = [];
     validators: any;
     config: any;
     sortOrder: number;
@@ -36,11 +37,19 @@ export class NovoFormControl extends FormControl {
     description?: string;
     layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
     military?: boolean;
+    tipWell?: {
+        tip: string,
+        icon?: string,
+        button?: boolean;
+    };
+
+    private historyTimeout: any;
 
     constructor(value: any, control: NovoControlConfig) {
         super(value, control.validators, control.asyncValidators);
         this.validators = control.validators;
         this.initialValue = value;
+        this.valueHistory.push(value);
         this.label = control.label;
         this.readOnly = control.readOnly;
         this.hidden = control.hidden;
@@ -72,6 +81,7 @@ export class NovoFormControl extends FormControl {
         this.parentScrollSelector = control.parentScrollSelector;
         this.description = control.description;
         this.options = control.options;
+        this.tipWell = control.tipWell;
 
         // Reactive Form, need to enable/disable, can't bind to [disabled]
         if (this.readOnly) {
@@ -143,6 +153,12 @@ export class NovoFormControl extends FormControl {
         this.markAsTouched();
         this.displayValueChanges.emit(value);
         super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
+
+        // History
+        clearTimeout(this.historyTimeout);
+        this.historyTimeout = setTimeout(() => {
+            this.valueHistory.push(value);
+        }, 300);
     }
 
     /**

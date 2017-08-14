@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 // APP
 import { NovoRadioModule } from './../radio/Radio.module';
+import { NovoButtonModule } from './../button/Button.module';
 import { NovoTilesModule } from './../tiles/Tiles.module';
 import { NovoSelectModule } from './../select/Select.module';
 import { NovoPickerModule } from './../picker/Picker.module';
@@ -22,6 +23,9 @@ import { NovoFormExtrasModule } from './extras/FormExtras.module';
 import { NovoHeaderModule } from './../header/Header.module';
 import { NovoTooltipModule } from './../tooltip/Tooltip.module';
 import { NovoDragulaModule } from './../dragula/Dragula.module';
+import { NovoTipWellModule } from './../tip-well/TipWell.module';
+import { NovoModalModule } from './../modal/Modal.module';
+import { ControlConfirmModal } from './ControlConfirmModal';
 
 @NgModule({
     imports: [
@@ -41,10 +45,14 @@ import { NovoDragulaModule } from './../dragula/Dragula.module';
         NovoHeaderModule,
         NovoTooltipModule,
         NovoDragulaModule,
-        TextMaskModule
+        TextMaskModule,
+        NovoTipWellModule,
+        NovoModalModule,
+        NovoButtonModule
     ],
-    declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement],
-    exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement]
+    declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement, ControlConfirmModal],
+    exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement],
+    entryComponents: [ControlConfirmModal]
 })
 export class NovoFormModule {
 }

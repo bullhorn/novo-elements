@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 // Vendor
 import {
     FormUtils, NovoFormGroup, TextBoxControl, CheckboxControl, FieldInteractionApi,
-    SelectControl, PickerControl
+    SelectControl, PickerControl, DateTimeControl
 } from './../../../../index';
 // APP
 let ValidationTpl = require('./templates/Validation.html');
@@ -14,6 +14,8 @@ let EnableDisableTpl = require('./templates/EnableDisable.html');
 let MessagingTpl = require('./templates/Messaging.html');
 let ModifyOptionsTpl = require('./templates/ModifyOptions.html');
 let GlobalsTpl = require('./templates/Globals.html');
+let AsyncTpl = require('./templates/Async.html');
+let ConfirmTpl = require('./templates/Confirm.html');
 
 const template = `
 <div class="container">
@@ -74,6 +76,8 @@ const template = `
             <novo-tab><span>Messaging / Notifications</span></novo-tab>
             <novo-tab><span>Modifying Options on Static Pickers / Selects</span></novo-tab>
             <novo-tab><span>Using Globals</span></novo-tab>
+            <novo-tab><span>Async Interactions</span></novo-tab>
+            <novo-tab><span>Confirm Changes</span></novo-tab>
         </novo-nav>
 
         <novo-nav-outlet #api>
@@ -121,9 +125,21 @@ const template = `
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Using Globals</h5>
-                <p>Using the config from above, you can figure the API to have a set of global variables that you can key off of inside your field interactions.</p>
+                <p>Using the config from above, you can figure the API to have a set of global variables that you can key off of inside your field interactions</p>
                 <div class="example field-interaction-demo">${GlobalsTpl}</div>
                 <multi-code-snippet [code]="snippets.globals"></multi-code-snippet>
+            </novo-nav-content>
+            <novo-nav-content>
+                <h5>Async Interactions</h5>
+                <p>You can perform async interactions and keep the form from saving by setting a loading state</p>
+                <div class="example field-interaction-demo">${AsyncTpl}</div>
+                <multi-code-snippet [code]="snippets.async"></multi-code-snippet>
+            </novo-nav-content>
+            <novo-nav-content>
+                <h5>Confirm Changes</h5>
+                <p>You can prompt the user if they want to update the field or not too!</p>
+                <div class="example field-interaction-demo">${ConfirmTpl}</div>
+                <multi-code-snippet [code]="snippets.confirm"></multi-code-snippet>
             </novo-nav-content>
         </novo-nav-outlet>
     </main>
@@ -144,6 +160,8 @@ export class FieldInteractionsDemoComponent {
     public MessagingTpl: any = MessagingTpl;
     public ModifyOptionsTpl: any = ModifyOptionsTpl;
     public GlobalsTpl: any = GlobalsTpl;
+    public AsyncTpl: any = AsyncTpl;
+    public ConfirmTpl: any = ConfirmTpl;
 
     public forms: any = {};
     public controls: any = {
@@ -154,7 +172,9 @@ export class FieldInteractionsDemoComponent {
         enableDisable: {},
         messaging: {},
         modifyOptions: {},
-        globals: {}
+        globals: {},
+        async: {},
+        confirm: {}
     };
     public snippets: any = {
         validation: {},
@@ -164,7 +184,9 @@ export class FieldInteractionsDemoComponent {
         enableDisable: {},
         messaging: {},
         modifyOptions: {},
-        globals: {}
+        globals: {},
+        async: {},
+        confirm: {}
     };
 
     constructor(private formUtils: FormUtils) {
@@ -176,7 +198,7 @@ export class FieldInteractionsDemoComponent {
             }
         };
         let requiredFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - validationFunction'); // tslint:disable-line
+            console.log('[FieldInteractionDemo] - requiredFunction'); // tslint:disable-line
             let activeValue = API.getActiveValue();
             if (activeValue) {
                 API.setRequired('required', true);
@@ -189,6 +211,7 @@ export class FieldInteractionsDemoComponent {
             let a = Number(API.getValue('a'));
             let b = Number(API.getValue('b'));
             API.setValue('sum', a + b);
+            API.setValue('date', new Date());
         };
         let hideShowFunction = (API: FieldInteractionApi) => {
             console.log('[FieldInteractionDemo] - hideShowFunction'); // tslint:disable-line
@@ -215,6 +238,8 @@ export class FieldInteractionsDemoComponent {
                     title: 'New Value',
                     message: API.getActiveValue()
                 });
+            } else if (API.getActiveKey() === 'tip') {
+                API.displayTip(API.getActiveKey(), API.getActiveValue(), 'info', true);
             }
         };
         let modifyOptionsAddFunction = (API: FieldInteractionApi) => {
@@ -234,9 +259,9 @@ export class FieldInteractionsDemoComponent {
             if (currentValue) {
                 API.setProperty('picker', 'label', 'Async Picker');
                 API.modifyPickerConfig('picker', {
-                    format: '$name',
+                    format: '$name $test',
                     optionsUrl: 'http://novo-elements-mock.getsandbox.com/users'
-                });
+                }, (result) => { result.test = 'MAPPED!'; return result; });
             } else {
                 API.setProperty('picker', 'label', 'Static Picker');
                 API.modifyPickerConfig('picker', {
@@ -247,6 +272,18 @@ export class FieldInteractionsDemoComponent {
         let globalsFunction = (API: FieldInteractionApi) => {
             console.log('[FieldInteractionDemo] - globalsFunction'); // tslint:disable-line
             API.setProperty(API.getActiveKey(), 'label', `${API.getProperty(API.getActiveKey(), 'label')} -- ${API.globals.TEST}`);
+        };
+        let asyncFunction = (API: FieldInteractionApi) => {
+            console.log('[FieldInteractionDemo] - asyncFunction'); // tslint:disable-line
+            API.setLoading(API.getActiveKey(), true);
+            setTimeout(() => {
+                API.setLoading(API.getActiveKey(), false);
+            }, 3000);
+        };
+        let confirmFunction = (API: FieldInteractionApi) => {
+            console.log('[FieldInteractionDemo] - confirmFunction'); // tslint:disable-line
+            let activeValue = API.getActiveValue();
+            API.confirmChanges(API.getActiveKey());
         };
 
         // Validation Field Interactions
@@ -307,10 +344,15 @@ export class FieldInteractionsDemoComponent {
             description: 'I am automatically set when you type in the boxes above me!',
             readOnly: true
         });
+        this.controls.calculation.dateModifiedControl = new DateTimeControl({
+            key: 'date',
+            label: 'Date Last Modified'
+        });
         this.forms.calculation = formUtils.toFormGroup([
             this.controls.calculation.aControl,
             this.controls.calculation.bControl,
-            this.controls.calculation.sumControl
+            this.controls.calculation.sumControl,
+            this.controls.calculation.dateModifiedControl
         ]);
 
         // Hide/Show Field Interactions
@@ -361,8 +403,18 @@ export class FieldInteractionsDemoComponent {
                 { event: 'change', script: messagingFunction }
             ]
         });
+        this.controls.messaging.tipControl = new TextBoxControl({
+            type: 'text',
+            key: 'tip',
+            label: 'Tip',
+            description: 'I will trigger a tip well as you change the value!',
+            interactions: [
+                { event: 'change', script: messagingFunction }
+            ]
+        });
         this.forms.messaging = formUtils.toFormGroup([
-            this.controls.messaging.toastControl
+            this.controls.messaging.toastControl,
+            this.controls.messaging.tipControl
         ]);
 
         // Modify Options Field Interactions
@@ -414,6 +466,32 @@ export class FieldInteractionsDemoComponent {
         });
         this.forms.globals = formUtils.toFormGroup([this.controls.globals.globalControl]);
 
+        // Async Interactions
+        this.controls.async.textControl = new TextBoxControl({
+            type: 'text',
+            key: 'text',
+            value: 5,
+            label: 'Async Validation',
+            description: 'As you finish typing, the async check will mark the form as invalid',
+            interactions: [
+                { event: 'change', script: asyncFunction }
+            ]
+        });
+        this.forms.async = formUtils.toFormGroup([this.controls.async.textControl]);
+
+        // Confirm Interactions
+        this.controls.confirm.confirmControl = new TextBoxControl({
+            type: 'text',
+            key: 'prompt',
+            value: 'Hello!',
+            label: 'Prompt!',
+            description: 'As you change this field you will be prompted for changes!',
+            interactions: [
+                { event: 'change', script: confirmFunction }
+            ]
+        });
+        this.forms.confirm = formUtils.toFormGroup([this.controls.confirm.confirmControl]);
+
         // Snippets
         this.snippets.validation = {
             'Template': ValidationTpl,
@@ -447,6 +525,14 @@ export class FieldInteractionsDemoComponent {
         this.snippets.globals = {
             'Template': GlobalsTpl,
             'Field Interaction Script': globalsFunction.toString()
+        };
+        this.snippets.async = {
+            'Template': AsyncTpl,
+            'Field Interaction Script': asyncFunction.toString()
+        };
+        this.snippets.confirm = {
+            'Template': ConfirmTpl,
+            'Field Interaction Script': confirmFunction.toString()
         };
     }
 }

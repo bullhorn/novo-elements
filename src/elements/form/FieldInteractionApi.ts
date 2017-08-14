@@ -1,18 +1,24 @@
 // NG2
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 // APP
 import { NovoFormControl } from './NovoFormControl';
 import { NovoControlConfig } from './FormControls';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoToastService } from '../toast/ToastService';
+import { NovoModalService } from '../modal/ModalService';
+import { ControlConfirmModal } from './ControlConfirmModal';
 import { Helpers } from '../../utils/Helpers';
+import { AppBridge } from '../../utils/app-bridge/AppBridge';
 
+@Injectable()
 export class FieldInteractionApi {
     private _globals: any;
     private _form: any;
     private _currentKey: string;
+    private _appBridge: AppBridge;
 
-    constructor(private toaster: NovoToastService, private formUtils: FormUtils, private http: Http) { }
+    constructor(private toaster: NovoToastService, private modalService: NovoModalService, private formUtils: FormUtils, private http: Http) { }
 
     set form(form: any) {
         this._form = form;
@@ -36,6 +42,14 @@ export class FieldInteractionApi {
 
     get currentKey(): string {
         return this._currentKey;
+    }
+
+    set appBridge(appBridge: AppBridge) {
+        this._appBridge = appBridge;
+    }
+
+    get appBridge(): AppBridge {
+        return this._appBridge;
     }
 
     public isActiveControlValid(): boolean {
@@ -200,6 +214,27 @@ export class FieldInteractionApi {
         this.toaster.alert(toastConfig);
     }
 
+    public displayTip(key: string, tip: string, icon?: string, allowDismiss?: boolean): void {
+        let control = this.getControl(key);
+        control.tipWell = {
+            tip: tip,
+            icon: icon,
+            button: allowDismiss
+        };
+    }
+
+    public confirmChanges(key: string): Promise<boolean> {
+        let history = this.getProperty(key, 'valueHistory');
+        let oldValue = history[history.length - 2];
+        let newValue = this.getValue(key);
+        let label = this.getProperty(key, 'label');
+        return this.modalService.open(ControlConfirmModal, { oldValue, newValue, label }).onClosed.then(result => {
+            if (!result) {
+                this.setValue(key, oldValue, { emitEvent: false });
+            }
+        });
+    }
+
     public setProperty(key: string, prop: string, value: any): void {
         let control = this.getControl(key);
         control[prop] = value;
@@ -210,17 +245,17 @@ export class FieldInteractionApi {
         return control[prop];
     }
 
-    public isValueEmpty(key: string) {
+    public isValueEmpty(key: string): boolean {
         let value = this.getValue(key);
         return Helpers.isEmpty(value);
     }
 
-    public isValueBlank(key: string) {
+    public isValueBlank(key: string): boolean {
         let value = this.getValue(key);
         return Helpers.isBlank(value);
     }
 
-    public hasField(key: string) {
+    public hasField(key: string): boolean {
         return !!this.form.controls[key];
     }
 
@@ -264,7 +299,7 @@ export class FieldInteractionApi {
         }
     }
 
-    public modifyPickerConfig(key: string, config: { format?: string, optionsUrl?: string, options?: any[] }) {
+    public modifyPickerConfig(key: string, config: { format?: string, optionsUrl?: string, options?: any[] }, mapper?: Function): void {
         let control = this.getControl(key);
         if (config.optionsUrl) {
             let c = {
@@ -275,6 +310,12 @@ export class FieldInteractionApi {
                             this.http
                                 .get(`${config.optionsUrl}?filter=${query || ''}`)
                                 .map(res => res.json())
+                                .map(results => {
+                                    if (mapper) {
+                                        return results.map(mapper);
+                                    }
+                                    return results;
+                                })
                                 .subscribe(resolve, reject);
                         } else {
                             resolve([]);
@@ -285,6 +326,16 @@ export class FieldInteractionApi {
             this.setProperty(key, 'config', c);
         } else {
             control.config.options = [...config.options];
+        }
+    }
+
+    public setLoading(key: string, loading: boolean) {
+        let control = this.getControl(key);
+        if (loading) {
+            control.setErrors({ 'loading': true });
+        } else {
+            control.setErrors({ 'loading': null });
+            control.updateValueAndValidity({ emitEvent: false, onlySelf: true });
         }
     }
 }

@@ -11,25 +11,13 @@ import { FormUtils } from './src/utils/form-utils/FormUtils';
 import { DateFormatService } from './src/services/date-format/DateFormat';
 import { FieldInteractionApi } from './src/elements/form/FieldInteractionApi';
 
-export function provideFieldInteractionAPI(toast, formUtils, http) {
-    const fieldInteractionApi = new FieldInteractionApi(toast, formUtils, http);
-    fieldInteractionApi.globals = {
-        TEST: 'I AM A GLOBAL!'
-    };
-    return fieldInteractionApi;
-}
-
 const NOVO_ELEMENTS_PROVIDERS = [
     { provide: NovoDragulaService, useClass: NovoDragulaService },
     { provide: NovoModalRef, useClass: NovoModalRef },
     { provide: NovoModalService, useClass: NovoModalService },
     { provide: NovoToastService, useClass: NovoToastService },
     { provide: ComponentUtils, useClass: ComponentUtils },
-    {
-        provide: FieldInteractionApi,
-        useFactory: provideFieldInteractionAPI,
-        deps: [NovoToastService, FormUtils, Http]
-    },
+    FieldInteractionApi,
     DateFormatService
 ];
 

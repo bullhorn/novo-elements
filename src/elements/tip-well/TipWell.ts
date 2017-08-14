@@ -11,15 +11,18 @@ import { NovoLabelService } from '../../services/novo-label-service';
                 <i class="bhi-{{ icon }}" *ngIf="icon"></i>
                 <p>{{ tip }}</p>
             </div>
-            <button theme="dialogue" (click)="hideTip()" *ngIf="button==='true'">{{ buttonText }}</button>
+            <button theme="dialogue" (click)="hideTip()" *ngIf="button">{{ buttonText }}</button>
         </div>
-    `
+    `,
+    host: {
+        '[class.active]': 'isActive'
+    }
 })
 export class NovoTipWellElement implements OnInit {
     @Input() name: string | number;
     @Input() tip: string;
     @Input() buttonText: string;
-    @Input() button: string;
+    @Input() button: boolean = true;
     @Input() icon: string;
     @Output() confirmed = new EventEmitter();
 
@@ -48,7 +51,7 @@ export class NovoTipWellElement implements OnInit {
     ngOnInit() {
         this.tip = this.tip || '';
         this.buttonText = this.buttonText || this.labels.okGotIt;
-        this.button = this.button || 'true';
+        this.button = typeof this.button === 'string' ? this.button === 'true' : this.button;
         this.icon = this.icon || null;
         // Set a (semi) unique name for the tip-well
         this.name = this.name || Math.round(Math.random() * 100);

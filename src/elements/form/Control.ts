@@ -161,7 +161,7 @@ export class NovoCustomControlContainerElement {
                         </div>
                     </div>
                     <!--Error Message-->
-                    <div class="field-message" *ngIf="!condensed">
+                    <div class="field-message" *ngIf="!condensed" [class.has-tip]="form.controls[control.key].tipWell">
                         <div class="messages">
                             <span class="error-text" *ngIf="showFieldMessage"></span>
                             <span class="error-text" *ngIf="isDirty && errors?.required">{{ form.controls[control.key].label | uppercase }} {{ labels.isRequired }}</span>
@@ -180,6 +180,8 @@ export class NovoCustomControlContainerElement {
                         </div>
                         <span class="character-count" [class.error]="errors?.maxlength" *ngIf="showCount">{{ characterCount }}/{{ form.controls[control.key].maxlength }}</span>
                     </div>
+                    <!--Tip Wel-->
+                    <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
                 </div>
             </div>
         </div>
@@ -267,7 +269,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                             });
                             break;
                         case 'change':
-                            this.valueChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe(() => {
+                            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
                                 this.executeInteraction(interaction);
                             });
                             break;
@@ -290,7 +292,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 }
             });
         } else if (['date', 'time', 'date-time'].includes(this.form.controls[this.control.key].controlType)) {
-            this.dateChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe(value => {
+            this.dateChangeSubscription = this.form.controls[this.control.key].displayValueChanges.debounceTime(300).subscribe(value => {
                 this.formatDateTimeValue({ date: value });
             });
         }

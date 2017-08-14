@@ -1,5 +1,8 @@
 <novo-form [form]="forms.messaging" layout="vertical">
     <div class="novo-form-row">
+        <novo-control [form]="forms.messaging" [control]="controls.messaging.tipControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
         <novo-control [form]="forms.messaging" [control]="controls.messaging.toastControl"></novo-control>
     </div>
 </novo-form>

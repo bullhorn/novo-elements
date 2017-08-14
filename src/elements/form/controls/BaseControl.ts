@@ -43,6 +43,11 @@ export interface NovoControlConfig {
     customControl?: any;
     customControlConfig?: any;
     military?: boolean;
+    tipWell?: {
+        tip: string,
+        icon?: string,
+        button?: boolean;
+    };
 }
 
 export class BaseControl {
@@ -87,6 +92,11 @@ export class BaseControl {
     customControl?: any;
     customControlConfig?: any;
     military?: boolean;
+    tipWell?: {
+        tip: string,
+        icon?: string,
+        button?: boolean;
+    };
 
     constructor(type: string = 'BaseControl', config: NovoControlConfig = {}) {
         this.__type = type;
@@ -138,5 +148,6 @@ export class BaseControl {
         }
         this.customControl = config.customControl;
         this.customControlConfig = config.customControlConfig;
+        this.tipWell = config.tipWell;
     }
 }

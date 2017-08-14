@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Vendor
-import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService, FieldInteractionApi, NovoToastService } from './../index';
+import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService, FieldInteractionApi, NovoToastService, NovoModalService } from './../index';
 // APP
 import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
 import { MultiCodeSnippet } from './elements/codesnippet/MultiCodeSnippet';
@@ -52,8 +52,8 @@ import { DemoComponent } from './app/App';
 import { routing } from './app/App.routes';
 import './demo.scss';
 
-export function provideFieldInteractionAPI(toast, formUtils, http) {
-    const fieldInteractionApi = new FieldInteractionApi(toast, formUtils, http);
+export function provideFieldInteractionAPI(toast, modal, formUtils, http) {
+    const fieldInteractionApi = new FieldInteractionApi(toast, modal, formUtils, http);
     fieldInteractionApi.globals = {
         TEST: 'I AM A GLOBAL!'
     };
@@ -135,7 +135,7 @@ export function provideFieldInteractionAPI(toast, formUtils, http) {
         {
             provide: FieldInteractionApi,
             useFactory: provideFieldInteractionAPI,
-            deps: [NovoToastService, FormUtils, Http]
+            deps: [NovoToastService, NovoModalService, FormUtils, Http]
         }
     ],
     entryComponents: [
