@@ -1,3 +1,28 @@
+<a name="2.0.247"></a>
+## [2.0.247](https://github.com/bullhorn/novo-elements/compare/v2.0.246...v2.0.247) (2017-08-14)
+
+
+### Bug Fixes
+
+* **form:** Fixing form control to set date value when the value changes ([8f4909a](https://github.com/bullhorn/novo-elements/commit/8f4909a))
+
+
+
+<a name="2.0.246"></a>
+## [2.0.246](https://github.com/bullhorn/novo-elements/compare/v2.0.245...v2.0.246) (2017-08-11)
+
+
+### Bug Fixes
+
+* **form:** fix the setting of readOnly ([036a556](https://github.com/bullhorn/novo-elements/commit/036a556))
+
+
+### Features
+
+* **Radio:** adding support for buttons with icons as radio buttons. ([#525](https://github.com/bullhorn/novo-elements/issues/525)) ([232cfd7](https://github.com/bullhorn/novo-elements/commit/232cfd7))
+
+
+
 <a name="2.0.245"></a>
 ## [2.0.245](https://github.com/bullhorn/novo-elements/compare/v2.0.244...v2.0.245) (2017-08-02)
 

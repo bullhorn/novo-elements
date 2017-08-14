@@ -124,7 +124,7 @@ export class NovoCustomControlContainerElement {
                             <novo-select *ngSwitchCase="'select'" [options]="form.controls[control.key].options" [headerConfig]="form.controls[control.key].headerConfig" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (onSelect)="modelChange($event)"></novo-select>
                             <!--Radio-->
                             <div class="novo-control-input-container" *ngSwitchCase="'radio'">
-                                <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of form.controls[control.key].options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-radio>
+                                <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of form.controls[control.key].options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [button]="!!option.icon" [icon]="option.icon"></novo-radio>
                             </div>
                             <!--Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
@@ -292,8 +292,14 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 }
             });
         } else if (['date', 'time', 'date-time'].includes(this.form.controls[this.control.key].controlType)) {
-            this.dateChangeSubscription = this.form.controls[this.control.key].displayValueChanges.debounceTime(300).subscribe(value => {
-                this.formatDateTimeValue({ date: value });
+            this.dateChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe(value => {
+                if (this.form.controls[this.control.key].controlType === 'date') {
+                    this.formatDateValue({ date: value });
+                } else if (this.form.controls[this.control.key].controlType === 'time') {
+                    this.formatTimeValue({ date: value });
+                } else if (this.form.controls[this.control.key].controlType === 'date-time') {
+                    this.formatDateTimeValue({ date: value });
+                }
             });
         }
         this.maskOptions = {
@@ -335,6 +341,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         // Unsubscribe from control interactions
         if (this.valueChangeSubscription) {
             this.valueChangeSubscription.unsubscribe();
+        }
+        if (this.dateChangeSubscription) {
+            this.dateChangeSubscription.unsubscribe();
         }
         if (this.forceClearSubscription) {
             // Un-listen for clear events
