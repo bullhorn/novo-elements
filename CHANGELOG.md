@@ -1,3 +1,13 @@
+<a name="2.0.247"></a>
+## [2.0.247](https://github.com/bullhorn/novo-elements/compare/v2.0.246...v2.0.247) (2017-08-14)
+
+
+### Bug Fixes
+
+* **form:** Fixing form control to set date value when the value changes ([8f4909a](https://github.com/bullhorn/novo-elements/commit/8f4909a))
+
+
+
 <a name="2.0.246"></a>
 ## [2.0.246](https://github.com/bullhorn/novo-elements/compare/v2.0.245...v2.0.246) (2017-08-11)
 
