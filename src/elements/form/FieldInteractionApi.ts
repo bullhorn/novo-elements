@@ -223,12 +223,12 @@ export class FieldInteractionApi {
         };
     }
 
-    public confirmChanges(key: string): Promise<boolean> {
+    public confirmChanges(key: string, message?: string): Promise<boolean> {
         let history = this.getProperty(key, 'valueHistory');
         let oldValue = history[history.length - 2];
         let newValue = this.getValue(key);
         let label = this.getProperty(key, 'label');
-        return this.modalService.open(ControlConfirmModal, { oldValue, newValue, label }).onClosed.then(result => {
+        return this.modalService.open(ControlConfirmModal, { oldValue, newValue, label, message }).onClosed.then(result => {
             if (!result) {
                 this.setValue(key, oldValue, { emitEvent: false });
             }
@@ -305,6 +305,7 @@ export class FieldInteractionApi {
             let c = {
                 format: config.format,
                 options: (query) => {
+                    // TODO - how to make this more flexible (options, query, etc)
                     return new Promise((resolve, reject) => {
                         if (query && query.length) {
                             this.http
@@ -329,6 +330,7 @@ export class FieldInteractionApi {
         }
     }
 
+    // TODO - timeout - if timeout happens and its not false, display error
     public setLoading(key: string, loading: boolean) {
         let control = this.getControl(key);
         if (loading) {

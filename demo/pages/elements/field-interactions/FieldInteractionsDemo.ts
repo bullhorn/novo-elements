@@ -45,9 +45,9 @@ const template = `
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Configuration on Field</h5>
-                <pre class="field-config"><code>event: 'change|focus|blur', script: Function, invokeOnInit?: boolean</code></pre>
+                <pre class="field-config"><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean</code></pre>
                 <p>The Field Interactions are configured on a per control basis. There are three scenarios in which they will be fired: "change", "focus" and "blur".</p>
-                <p><label>init</label> -- gets fired only when the form is initialized</p>
+                <p><label>init</label> -- gets fired only when the form is initialized (make sure to use invokeOnInit!)</p>
                 <p><label>change</label> -- gets fired when the value of the form control changes</p>
                 <p><label>focus</label> -- gets fired when the field gets focused</p>
                 <p><label>blue</label> -- gets fired when the field loses focus</p>
