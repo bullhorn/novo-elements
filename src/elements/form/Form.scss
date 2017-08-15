@@ -63,6 +63,7 @@ novo-form {
                     }
                     &.checklist,
                     &.file,
+                    &.radio,
                     &.address {
                         .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
                             border-bottom: none !important;
