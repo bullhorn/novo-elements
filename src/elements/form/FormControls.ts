@@ -1,4 +1,5 @@
 export * from './controls/BaseControl';
+export * from './controls/ControlFactory';
 export * from './controls/address/AddressControl';
 export * from './controls/check-list/CheckListControl';
 export * from './controls/checkbox/CheckboxControl';

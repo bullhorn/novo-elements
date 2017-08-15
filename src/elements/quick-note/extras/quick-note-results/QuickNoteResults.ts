@@ -14,15 +14,17 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
     },
     template: `
         <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
-        <ul *ngIf="matches.length > 0">
-            <li
+        <novo-list *ngIf="matches.length > 0">
+            <novo-list-item
                 *ngFor="let match of matches"
                 (click)="selectMatch($event)"
                 [class.active]="match===activeMatch"
                 (mouseenter)="selectActive(match)">
-                <span [innerHtml]="highlight(match.label, term)"></span>
-            </li>
-        </ul>
+                <item-content>
+                    <p [innerHtml]="highlight(match.label, term)"></p>
+                </item-content>
+            </novo-list-item>
+        </novo-list>
         <p class="picker-error" *ngIf="hasError">{{ labels.quickNoteError }}</p>
         <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.quickNoteEmpty }}</p>
     `
@@ -35,7 +37,11 @@ export class QuickNoteResults extends PickerResults {
         super(element, labels);
     }
 
-    set term(value) {
+    get term() {
+        return this._term;
+    }
+
+    set term(value: any) {
         this._term = value.searchTerm;
         this.taggingMode = value.taggingMode;
         this.hasError = false;
@@ -109,7 +115,6 @@ export class QuickNoteResults extends PickerResults {
             return { value, label, data };
         });
     }
-
 
     /**
      * @name selectMatch

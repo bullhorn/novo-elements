@@ -25,7 +25,7 @@ import { Observable } from 'rxjs/Rx';
                 <li
                     *ngFor="let match of section.data; let i = index" [ngClass]="{checked: match.checked}"
                     (click)="selectMatch($event, match)"
-                    [class.active]="match===activeMatch"
+                    [class.active]="match === activeMatch"
                     (mouseenter)="selectActive(match)">
                     <label>
                         <i [ngClass]="{'bhi-checkbox-empty': !match.checked, 'bhi-checkbox-filled': match.checked, 'bhi-checkbox-indeterminate': match.indeterminate }"></i>
@@ -35,7 +35,7 @@ import { Observable } from 'rxjs/Rx';
             </span>
         </ul>
         <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
-        <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
+        <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
     `
 })
 export class ChecklistPickerResults extends BasePickerResults {

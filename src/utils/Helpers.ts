@@ -222,8 +222,38 @@ export class Helpers {
         while ((element = element.parentElement) && !(element.matches.call(element, selector))); // tslint:disable-line
         return element;
     }
+
+    static deepClone(item: any): any {
+        if (Array.isArray(item)) {
+            let newArr = [];
+            for (let i = item.length; i-- > 0;) { // tslint:disable-line
+                newArr[i] = Helpers.deepClone(item[i]);
+            }
+            return newArr;
+        }
+        if (typeof item === 'function' && !(/\(\) \{ \[native/).test(item.toString())) {
+            let obj;
+            eval('obj = ' + item.toString()); // tslint:disable-line
+            for (let k in item) {
+                if (k in item) {
+                    obj[k] = Helpers.deepClone(item[k]);
+                }
+            }
+            return obj;
+        }
+        if (item && typeof item === 'object') {
+            let obj = {};
+            for (let k in item) {
+                if (k in item) {
+                    obj[k] = Helpers.deepClone(item[k]);
+                }
+            }
+            return obj;
+        }
+        return item;
+    }
 }
-class Can {
+export class Can {
     obj: Object;
     constructor(obj: Object) {
         this.obj = obj;
@@ -249,6 +279,6 @@ class Can {
  * @param {any} obj
  * @returns
  */
-function can(obj) {
+export function can(obj) {
     return new Can(obj);
 }

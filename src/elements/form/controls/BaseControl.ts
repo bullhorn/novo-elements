@@ -38,12 +38,16 @@ export interface NovoControlConfig {
     description?: string;
     tooltip?: string;
     tooltipPosition?: string;
-    layoutOptions?: { order?: string, download?:boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
+    layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
     customControl?: any;
     customControlConfig?: any;
+    military?: boolean;
 }
 
 export class BaseControl {
+    __type: string = 'BaseControl';
+    __config: NovoControlConfig;
+
     validators: Array<any>;
     asyncValidators?: Array<any>;
     value: any;
@@ -80,8 +84,11 @@ export class BaseControl {
     layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
     customControl?: any;
     customControlConfig?: any;
+    military?: boolean;
 
-    constructor(config: NovoControlConfig) {
+    constructor(type: string = 'BaseControl', config: NovoControlConfig = {}) {
+        this.__type = type;
+        this.__config = config;
         this.validators = config.validators || [];
         this.asyncValidators = config.asyncValidators || [];
         this.value = config.value;
@@ -104,6 +111,7 @@ export class BaseControl {
         this.readOnly = !!config.readOnly || !!config.disabled;
         this.disabled = !!config.disabled;
         this.layoutOptions = config.layoutOptions || {};
+        this.military = !!config.military;
 
         if (this.required) {
             this.validators.push(Validators.required);

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
-import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../utils/calendar-utils/CalendarUtils';
+import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
     selector: 'novo-calendar-month-day',
@@ -12,10 +12,11 @@ import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../utils/
       <div class="calendar-events">
         <div
           class="calendar-event"
-          *ngFor="let event of day.events"
-          [style.backgroundColor]="event.color.primary"
-          [ngClass]="event?.cssClass"
-          (click)="$event.stopPropagation(); eventClicked.emit({event:event})">
+          *ngFor="let type of day.events | groupBy : 'type'"
+          [style.backgroundColor]="type?.value[0]?.color.primary"
+          [ngClass]="type?.value[0]?.cssClass"
+          (click)="$event.stopPropagation(); eventClicked.emit({event:type?.value[0]})">
+          {{type?.value.length}}
         </div>
       </div>
     </template>
@@ -24,7 +25,7 @@ import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../utils/
       [ngOutletContext]="{
         day: day,
         locale: locale,
-        tooltipPlacement: tooltipPlacement,
+        tooltipPosition: tooltipPosition,
         eventClicked: eventClicked,
         accepted: accepted,
         rejected: rejected,
@@ -46,13 +47,13 @@ import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../utils/
         '[style.backgroundColor]': 'day.backgroundColor'
     }
 })
-export class CalendarMonthDayElement {
+export class NovoCalendarMonthDayElement {
 
     @Input() day: MonthViewDay;
 
     @Input() locale: string;
 
-    @Input() tooltipPlacement: string;
+    @Input() tooltipPosition: string;
 
     @Input() customTemplate: TemplateRef<any>;
 

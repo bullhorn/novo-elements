@@ -31,8 +31,8 @@ export class ArrayCollection<T> implements Collection<T> {
 
     constructor(source: Array<T> = []) {
         this.source = source;
-        this.editData = this.source.slice();
-        this.filterData = source.slice();
+        this.editData = this.copy(this.source);
+        this.filterData = this.source.slice();
     }
 
     get length() {
@@ -68,7 +68,7 @@ export class ArrayCollection<T> implements Collection<T> {
      */
     edit() {
         this.isEditing = true;
-        this.editData = this.source.slice();
+        this.editData = this.copy(this.source);
     }
 
     /**
@@ -76,7 +76,7 @@ export class ArrayCollection<T> implements Collection<T> {
      */
     undo() {
         this.isEditing = false;
-        this.source = this.editData.slice();
+        this.source = this.copy(this.editData);
         this.refresh();
     }
 
@@ -85,7 +85,7 @@ export class ArrayCollection<T> implements Collection<T> {
      */
     commit() {
         this.isEditing = false;
-        this.editData = this.source.slice();
+        this.source = this.filterData.slice();
         this.refresh();
     }
 
@@ -149,7 +149,18 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     clone(): ArrayCollection<T> {
-        return new ArrayCollection(this.isEditing ? this.editData.slice() : this.source.slice());
+        return new ArrayCollection(this.isEditing ? this.copy(this.editData) : this.copy(this.source));
+    }
+
+    /**
+    * Creates a copy of the current ArrayCollection any.
+    *
+    * @returns {Array}
+    *
+    * @memberOf ArrayCollection
+    */
+    copy(array: any[]): any[] {
+        return Helpers.deepClone(array);
     }
 
     /**
@@ -238,13 +249,11 @@ export class ArrayCollection<T> implements Collection<T> {
      * @memberOf ArrayCollection
      */
     removeAll(): void {
-        //let oldData = this.filterData.slice();
         this.source = [];
         this.editData = [];
         this.filterData = [];
         this.onDataChange(new CollectionEvent(CollectionEvent.REMOVE_ALL, []));
         this.refresh();
-        //this.onDataChange(new CollectionEvent(CollectionEvent.REMOVE_ALL, oldData));
     }
 
     /**

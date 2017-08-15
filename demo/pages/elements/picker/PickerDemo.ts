@@ -16,15 +16,17 @@ import { PickerResults } from './../../../../index';
     },
     template: `
         <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
-        <ul *ngIf="matches.length > 0">
-            <li
+        <novo-list *ngIf="matches.length > 0" direction="vertical">
+            <novo-list-item
                 *ngFor="let match of matches"
                 (click)="selectMatch($event)"
-                [class.active]="match===activeMatch"
+                [class.active]="match === activeMatch"
                 (mouseenter)="selectActive(match)">
-                **CUSTOM** <b [innerHtml]="highlight(match.label, term)"></b>
-            </li>
-        </ul>
+                <item-content>
+                    **CUSTOM** <b [innerHtml]="highlight(match.label, term)"></b>
+                </item-content>
+            </novo-list-item>
+        </novo-list>
         <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
         <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
     `
@@ -153,7 +155,7 @@ export class PickerDemoComponent {
             options: collaborators
         };
 
-        this.value = 'Alabama';
+        this.value = null;
         this.async = {
             options: (term, page) => {
                 return new Promise((resolve) => {
@@ -163,37 +165,39 @@ export class PickerDemoComponent {
                         } else {
                             resolve(abbrieviated);
                         }
-                    }, 300);
+                    }, 1000);
                 });
             }
         };
 
         this.defaultArrayConfig = {
             defaultOptions: [
-                abbrieviated[0],
-                abbrieviated[1]
+                states[0],
+                states[1]
             ],
             minSearchLength: 2,
+            disableInfiniteScroll: true,
             options: () => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
-                        resolve(abbrieviated);
+                        resolve(states);
                     }, 300);
                 });
             }
         };
         this.defaultFunctionConfig = {
             minSearchLength: 2,
+            disableInfiniteScroll: true,
             defaultOptions: () => {
                 return [
-                    abbrieviated[2],
-                    abbrieviated[3]
+                    states[2],
+                    states[3]
                 ];
             },
             options: () => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
-                        resolve(abbrieviated);
+                        resolve(states);
                     }, 300);
                 });
             }

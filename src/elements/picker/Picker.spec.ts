@@ -38,10 +38,10 @@ describe('Elements: NovoPickerElement', () => {
         });
     });
 
-    describe('Method: onKeyUp()', () => {
+    describe('Method: onKeyDown()', () => {
         it('should be defined.', () => {
-            expect(component.onKeyUp).toBeDefined();
-            component.onKeyUp();
+            expect(component.onKeyDown).toBeDefined();
+            component.onKeyDown();
         });
     });
 

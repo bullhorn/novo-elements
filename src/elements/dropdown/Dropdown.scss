@@ -52,6 +52,22 @@ novo-dropdown-container {
             span {
                 display: inline-block;
             }
+            a {
+                color: inherit;
+                font-weight: inherit;
+                cursor: pointer;
+                flex: 1;
+                display: flex;
+                align-items: center;
+                height: 48px;
+                &:focus,
+                &:visited,
+                &:active,
+                &:hover {
+                    color: inherit;
+                    font-weight: inherit;
+                }
+            }
             i {
                 height: 30px !important;
                 width: 15px !important;
@@ -65,8 +81,8 @@ novo-dropdown-container {
                 color: darken($light, 55%);
             }
             &.active {
+                background: lighten($light, 10%);
                 color: darken($light, 55%);
-                font-weight: 500;
             }
             &.disabled {
                 color: $light;

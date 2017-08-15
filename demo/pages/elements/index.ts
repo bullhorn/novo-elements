@@ -25,4 +25,5 @@ export * from './tip-well/TipWellDemo';
 export * from './table/TableDemo';
 export * from './form/FormDemo';
 export * from './category-dropdown/CategoryDropdownDemo';
-export * from './popover/PopOverDemo';
+export * from './popover/PopoverDemo';
+export * from './date-picker/DatePickerDemo';

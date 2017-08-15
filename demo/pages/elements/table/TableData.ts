@@ -6,6 +6,7 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/08/19'),
         'salary': 208178,
+        'percent': .50,
         'status': 'New Lead',
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
@@ -16,7 +17,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/10/08'),
         'salary': 114367,
-        'status': 'Active',
+        'percent': .50,
+        'status': 'New Lead',
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -26,7 +28,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/07/19'),
         'salary': 721473,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': 1,
         'description': 'To my campaign manager David Plouffe, my chief strategist David Axelrod, and the best campaign team ever assembled in the history of politics – you made this happen, and I am forever grateful for what you’ve sacrificed to get it done.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -36,6 +39,7 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/04/20'),
         'salary': 264620,
+        'percent': 1,
         'status': 'New Lead',
         'description': 'And to all those watching tonight from beyond our shores, from parliaments and palaces to those who are huddled around radios in the forgotten corners of our world – our stories are singular, but our destiny is shared, and a new dawn of American leadership is at hand. To those who would tear this world down – we will defeat you. To those who seek peace and security – we support you. And to all those who have wondered if America’s beacon still burns as bright – tonight we proved once more that the true strength of our nation comes not from our the might of our arms or the scale of our wealth, but from the enduring power of our ideals: democracy, liberty, opportunity, and unyielding hope.',
         'categories': ['Temporary', 'Developer']
@@ -47,6 +51,7 @@ export const TableData = [
         'startDate': new Date('2016/03/04'),
         'salary': 651350,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'I want to thank my partner in this journey, a man who campaigned from his heart and spoke for the men and women he grew up with on the streets of Scranton and rode with on that train home to Delaware, the Vice President-elect of the United States, Joe Biden.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -57,6 +62,7 @@ export const TableData = [
         'startDate': new Date('2016/06/17'),
         'salary': 666259,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'It’s been a long time coming, but tonight, because of what we did on this day, in this election, at this defining time, change has come to America.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -67,6 +73,7 @@ export const TableData = [
         'startDate': new Date('2016/08/13'),
         'salary': 541631,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'To my campaign manager David Plouffe, my chief strategist David Axelrod, and the best campaign team ever assembled in the history of politics – you made this happen, and I am forever grateful for what you’ve sacrificed to get it done.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -77,6 +84,7 @@ export const TableData = [
         'startDate': new Date('2016/10/02'),
         'salary': 182294,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'To my campaign manager David Plouffe, my chief strategist David Axelrod, and the best campaign team ever assembled in the history of politics – you made this happen, and I am forever grateful for what you’ve sacrificed to get it done.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -86,6 +94,7 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/08/01'),
         'salary': 218597,
+        'percent': .33,
         'status': 'New Lead',
         'description': 'To my campaign manager David Plouffe, my chief strategist David Axelrod, and the best campaign team ever assembled in the history of politics – you made this happen, and I am forever grateful for what you’ve sacrificed to get it done.',
         'categories': ['Temporary', 'Developer']
@@ -97,6 +106,7 @@ export const TableData = [
         'startDate': new Date('2016/01/04'),
         'salary': 861632,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'To my campaign manager David Plouffe, my chief strategist David Axelrod, and the best campaign team ever assembled in the history of politics – you made this happen, and I am forever grateful for what you’ve sacrificed to get it done.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -107,6 +117,7 @@ export const TableData = [
         'startDate': new Date('2016/06/02'),
         'salary': 413568,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'To my campaign manager David Plouffe, my chief strategist David Axelrod, and the best campaign team ever assembled in the history of politics – you made this happen, and I am forever grateful for what you’ve sacrificed to get it done.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -117,6 +128,7 @@ export const TableData = [
         'startDate': new Date('2016/12/04'),
         'salary': 121831,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'To my campaign manager David Plouffe, my chief strategist David Axelrod, and the best campaign team ever assembled in the history of politics – you made this happen, and I am forever grateful for what you’ve sacrificed to get it done.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -126,7 +138,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/12'),
         'salary': 62243,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'To my campaign manager David Plouffe, my chief strategist David Axelrod, and the best campaign team ever assembled in the history of politics – you made this happen, and I am forever grateful for what you’ve sacrificed to get it done.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -136,7 +149,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/09/14'),
         'salary': 200854,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'To my campaign manager David Plouffe, my chief strategist David Axelrod, and the best campaign team ever assembled in the history of politics – you made this happen, and I am forever grateful for what you’ve sacrificed to get it done.',
         'categories': ['Temporary', 'Finance']
     }, {
@@ -146,7 +160,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/06/07'),
         'salary': 581193,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'To my campaign manager David Plouffe, my chief strategist David Axelrod, and the best campaign team ever assembled in the history of politics – you made this happen, and I am forever grateful for what you’ve sacrificed to get it done.',
         'categories': ['Temporary', 'Finance']
     }, {
@@ -156,7 +171,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/12/03'),
         'salary': 418115,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'And to all those watching tonight from beyond our shores, from parliaments and palaces to those who are huddled around radios in the forgotten corners of our world – our stories are singular, but our destiny is shared, and a new dawn of American leadership is at hand. To those who would tear this world down – we will defeat you. To those who seek peace and security – we support you. And to all those who have wondered if America’s beacon still burns as bright – tonight we proved once more that the true strength of our nation comes not from our the might of our arms or the scale of our wealth, but from the enduring power of our ideals: democracy, liberty, opportunity, and unyielding hope.',
         'categories': ['Temporary', 'Finance']
     }, {
@@ -166,7 +182,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/05/29'),
         'salary': 466201,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'And to all those watching tonight from beyond our shores, from parliaments and palaces to those who are huddled around radios in the forgotten corners of our world – our stories are singular, but our destiny is shared, and a new dawn of American leadership is at hand. To those who would tear this world down – we will defeat you. To those who seek peace and security – we support you. And to all those who have wondered if America’s beacon still burns as bright – tonight we proved once more that the true strength of our nation comes not from our the might of our arms or the scale of our wealth, but from the enduring power of our ideals: democracy, liberty, opportunity, and unyielding hope.',
         'categories': ['Temporary', 'Finance']
     }, {
@@ -176,7 +193,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/22'),
         'salary': 800011,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'And to all those watching tonight from beyond our shores, from parliaments and palaces to those who are huddled around radios in the forgotten corners of our world – our stories are singular, but our destiny is shared, and a new dawn of American leadership is at hand. To those who would tear this world down – we will defeat you. To those who seek peace and security – we support you. And to all those who have wondered if America’s beacon still burns as bright – tonight we proved once more that the true strength of our nation comes not from our the might of our arms or the scale of our wealth, but from the enduring power of our ideals: democracy, liberty, opportunity, and unyielding hope.',
         'categories': ['Temporary', 'Finance']
     }, {
@@ -186,7 +204,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/05/18'),
         'salary': 564245,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'And to all those watching tonight from beyond our shores, from parliaments and palaces to those who are huddled around radios in the forgotten corners of our world – our stories are singular, but our destiny is shared, and a new dawn of American leadership is at hand. To those who would tear this world down – we will defeat you. To those who seek peace and security – we support you. And to all those who have wondered if America’s beacon still burns as bright – tonight we proved once more that the true strength of our nation comes not from our the might of our arms or the scale of our wealth, but from the enduring power of our ideals: democracy, liberty, opportunity, and unyielding hope.',
         'categories': ['Permenant', 'Finance']
     }, {
@@ -196,7 +215,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/07/23'),
         'salary': 357222,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'And to all those watching tonight from beyond our shores, from parliaments and palaces to those who are huddled around radios in the forgotten corners of our world – our stories are singular, but our destiny is shared, and a new dawn of American leadership is at hand. To those who would tear this world down – we will defeat you. To those who seek peace and security – we support you. And to all those who have wondered if America’s beacon still burns as bright – tonight we proved once more that the true strength of our nation comes not from our the might of our arms or the scale of our wealth, but from the enduring power of our ideals: democracy, liberty, opportunity, and unyielding hope.',
         'categories': ['Permenant', 'Finance']
     }, {
@@ -206,7 +226,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/06/18'),
         'salary': 554375,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'And to all those watching tonight from beyond our shores, from parliaments and palaces to those who are huddled around radios in the forgotten corners of our world – our stories are singular, but our destiny is shared, and a new dawn of American leadership is at hand. To those who would tear this world down – we will defeat you. To those who seek peace and security – we support you. And to all those who have wondered if America’s beacon still burns as bright – tonight we proved once more that the true strength of our nation comes not from our the might of our arms or the scale of our wealth, but from the enduring power of our ideals: democracy, liberty, opportunity, and unyielding hope.',
         'categories': ['Permenant', 'Developer']
     }, {
@@ -216,7 +237,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/03/20'),
         'salary': 90417,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'And to all those watching tonight from beyond our shores, from parliaments and palaces to those who are huddled around radios in the forgotten corners of our world – our stories are singular, but our destiny is shared, and a new dawn of American leadership is at hand. To those who would tear this world down – we will defeat you. To those who seek peace and security – we support you. And to all those who have wondered if America’s beacon still burns as bright – tonight we proved once more that the true strength of our nation comes not from our the might of our arms or the scale of our wealth, but from the enduring power of our ideals: democracy, liberty, opportunity, and unyielding hope.',
         'categories': ['Permenant', 'Developer']
     }, {
@@ -226,7 +248,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/03/26'),
         'salary': 598915,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'And to all those watching tonight from beyond our shores, from parliaments and palaces to those who are huddled around radios in the forgotten corners of our world – our stories are singular, but our destiny is shared, and a new dawn of American leadership is at hand. To those who would tear this world down – we will defeat you. To those who seek peace and security – we support you. And to all those who have wondered if America’s beacon still burns as bright – tonight we proved once more that the true strength of our nation comes not from our the might of our arms or the scale of our wealth, but from the enduring power of our ideals: democracy, liberty, opportunity, and unyielding hope.',
         'categories': ['Permenant', 'Developer']
     }, {
@@ -236,7 +259,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/08/18'),
         'salary': 201680,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'And to all those watching tonight from beyond our shores, from parliaments and palaces to those who are huddled around radios in the forgotten corners of our world – our stories are singular, but our destiny is shared, and a new dawn of American leadership is at hand. To those who would tear this world down – we will defeat you. To those who seek peace and security – we support you. And to all those who have wondered if America’s beacon still burns as bright – tonight we proved once more that the true strength of our nation comes not from our the might of our arms or the scale of our wealth, but from the enduring power of our ideals: democracy, liberty, opportunity, and unyielding hope.',
         'categories': ['Permenant', 'Developer']
     }, {
@@ -246,7 +270,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/03/06'),
         'salary': 220187,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Permenant', 'Developer']
     }, {
@@ -256,7 +281,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/04/19'),
         'salary': 324588,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Permenant', 'Developer']
     }, {
@@ -266,7 +292,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/19'),
         'salary': 351108,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -276,7 +303,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/06'),
         'salary': 230072,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Marketing']
     }, {
@@ -287,6 +315,7 @@ export const TableData = [
         'startDate': new Date('2016/11/02'),
         'salary': 853413,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Marketing']
     }, {
@@ -296,7 +325,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/05/16'),
         'salary': 401970,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Marketing']
     }, {
@@ -307,6 +337,7 @@ export const TableData = [
         'startDate': new Date('2016/05/17'),
         'salary': 79193,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Marketing']
     }, {
@@ -317,6 +348,7 @@ export const TableData = [
         'startDate': new Date('2016/03/20'),
         'salary': 484299,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Marketing']
     }, {
@@ -327,6 +359,7 @@ export const TableData = [
         'startDate': new Date('2016/02/21'),
         'salary': 333518,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Contractor', 'Marketing']
     }, {
@@ -337,6 +370,7 @@ export const TableData = [
         'startDate': new Date('2016/05/27'),
         'salary': 651761,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Contractor', 'Marketing']
     }, {
@@ -346,7 +380,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/04/01'),
         'salary': 627095,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Contractor', 'Developer']
     }, {
@@ -357,6 +392,7 @@ export const TableData = [
         'startDate': new Date('2016/01/12'),
         'salary': 742247,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Contractor', 'Developer']
     }, {
@@ -367,6 +403,7 @@ export const TableData = [
         'startDate': new Date('2016/08/12'),
         'salary': 591588,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Contractor', 'Developer']
     }, {
@@ -376,7 +413,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/04/04'),
         'salary': 791408,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Contractor', 'Developer']
     }, {
@@ -386,7 +424,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/06/24'),
         'salary': 142906,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Contractor', 'Developer']
     }, {
@@ -396,7 +435,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/11/21'),
         'salary': 226591,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -406,7 +446,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/18'),
         'salary': 234196,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'I want to thank my partner in this journey, a man who campaigned from his heart and spoke for the men and women he grew up with on the streets of Scranton and rode with on that train home to Delaware, the Vice President-elect of the United States, Joe Biden.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -416,7 +457,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/02/28'),
         'salary': 655052,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'I want to thank my partner in this journey, a man who campaigned from his heart and spoke for the men and women he grew up with on the streets of Scranton and rode with on that train home to Delaware, the Vice President-elect of the United States, Joe Biden.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -426,7 +468,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/08/08'),
         'salary': 222946,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'I want to thank my partner in this journey, a man who campaigned from his heart and spoke for the men and women he grew up with on the streets of Scranton and rode with on that train home to Delaware, the Vice President-elect of the United States, Joe Biden.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -436,7 +479,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/02/12'),
         'salary': 562194,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'I want to thank my partner in this journey, a man who campaigned from his heart and spoke for the men and women he grew up with on the streets of Scranton and rode with on that train home to Delaware, the Vice President-elect of the United States, Joe Biden.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -446,7 +490,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/10'),
         'salary': 629925,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'I want to thank my partner in this journey, a man who campaigned from his heart and spoke for the men and women he grew up with on the streets of Scranton and rode with on that train home to Delaware, the Vice President-elect of the United States, Joe Biden.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -456,7 +501,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/30'),
         'salary': 343476,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'I want to thank my partner in this journey, a man who campaigned from his heart and spoke for the men and women he grew up with on the streets of Scranton and rode with on that train home to Delaware, the Vice President-elect of the United States, Joe Biden.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -466,7 +512,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/10/11'),
         'salary': 469305,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'I want to thank my partner in this journey, a man who campaigned from his heart and spoke for the men and women he grew up with on the streets of Scranton and rode with on that train home to Delaware, the Vice President-elect of the United States, Joe Biden.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -476,7 +523,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/11/22'),
         'salary': 56606,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'I want to thank my partner in this journey, a man who campaigned from his heart and spoke for the men and women he grew up with on the streets of Scranton and rode with on that train home to Delaware, the Vice President-elect of the United States, Joe Biden.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -486,7 +534,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/03/26'),
         'salary': 314260,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'I want to thank my partner in this journey, a man who campaigned from his heart and spoke for the men and women he grew up with on the streets of Scranton and rode with on that train home to Delaware, the Vice President-elect of the United States, Joe Biden.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -496,7 +545,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/07'),
         'salary': 106335,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -506,7 +556,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/08/25'),
         'salary': 515671,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -516,7 +567,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/06/30'),
         'salary': 72295,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -526,7 +578,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/12/22'),
         'salary': 694656,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -537,6 +590,7 @@ export const TableData = [
         'startDate': new Date('2016/11/22'),
         'salary': 363743,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -546,7 +600,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/07/29'),
         'salary': 606004,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -556,7 +611,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/09/03'),
         'salary': 745500,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -566,7 +622,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/03/06'),
         'salary': 582265,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -576,7 +633,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/10/21'),
         'salary': 416958,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -586,7 +644,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/07/12'),
         'salary': 540999,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Developer']
     }, {
@@ -596,7 +655,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/23'),
         'salary': 480067,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Human Resources']
     }, {
@@ -606,7 +666,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/05/28'),
         'salary': 257937,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Human Resources']
     }, {
@@ -616,7 +677,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/06'),
         'salary': 359737,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Human Resources']
     }, {
@@ -626,7 +688,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/03/09'),
         'salary': 99718,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Human Resources']
     }, {
@@ -636,7 +699,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/08/24'),
         'salary': 480718,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Communications', 'Human Resources']
     }, {
@@ -646,7 +710,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/06/19'),
         'salary': 253772,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -656,7 +721,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/06/16'),
         'salary': 388879,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -666,7 +732,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/11/12'),
         'salary': 747310,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -676,7 +743,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/09/24'),
         'salary': 803037,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -686,7 +754,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/12/21'),
         'salary': 674379,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -696,7 +765,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/06/03'),
         'salary': 625147,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -706,7 +776,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/18'),
         'salary': 208100,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -716,7 +787,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/04/09'),
         'salary': 104063,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -726,7 +798,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/07/04'),
         'salary': 673556,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -736,7 +809,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/08/15'),
         'salary': 737284,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -747,6 +821,7 @@ export const TableData = [
         'startDate': new Date('2016/08/24'),
         'salary': 90195,
         'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -756,7 +831,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/10/28'),
         'salary': 140767,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -766,7 +842,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/03/16'),
         'salary': 70536,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -776,7 +853,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/28'),
         'salary': 75501,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -786,7 +864,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/12/11'),
         'salary': 754967,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -796,7 +875,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/07/02'),
         'salary': 842050,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -806,7 +886,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/05/07'),
         'salary': 263629,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'Labore sit nulla amet enim reprehenderit esse laborum Lorem quis in eu.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -816,7 +897,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/17'),
         'salary': 74292,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'Labore sit nulla amet enim reprehenderit esse laborum Lorem quis in eu.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -826,7 +908,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/12/28'),
         'salary': 108632,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'Labore sit nulla amet enim reprehenderit esse laborum Lorem quis in eu.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -836,7 +919,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/07/11'),
         'salary': 34244,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'Labore sit nulla amet enim reprehenderit esse laborum Lorem quis in eu.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -846,7 +930,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/09/30'),
         'salary': 690834,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'Labore sit nulla amet enim reprehenderit esse laborum Lorem quis in eu.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -856,7 +941,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/12/01'),
         'salary': 603498,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'Labore sit nulla amet enim reprehenderit esse laborum Lorem quis in eu.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -866,7 +952,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/02/04'),
         'salary': 125165,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'Labore sit nulla amet enim reprehenderit esse laborum Lorem quis in eu.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -876,7 +963,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/01/31'),
         'salary': 268509,
-        'status': 'Archived',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'Labore sit nulla amet enim reprehenderit esse laborum Lorem quis in eu.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -886,7 +974,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/09/23'),
         'salary': 214381,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'There was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -896,7 +985,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/06/17'),
         'salary': 137423,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Temporary', 'Developer']
     }, {
@@ -906,7 +996,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/10/17'),
         'salary': 612184,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Office Skills']
     }, {
@@ -916,7 +1007,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/10/18'),
         'salary': 327367,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Office Skills']
     }, {
@@ -926,7 +1018,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/05/27'),
         'salary': 743493,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Office Skills']
     }, {
@@ -936,7 +1029,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/05/21'),
         'salary': 496067,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Office Skills']
     }, {
@@ -946,7 +1040,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/03/13'),
         'salary': 178782,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Office Skills']
     }, {
@@ -956,7 +1051,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/12/05'),
         'salary': 37441,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Office Skills']
     }, {
@@ -966,7 +1062,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/11/13'),
         'salary': 152980,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Office Skills']
     }, {
@@ -976,7 +1073,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/03/06'),
         'salary': 409463,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Office Skills']
     }, {
@@ -986,7 +1084,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/05/22'),
         'salary': 51155,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Office Skills']
     }, {
@@ -996,7 +1095,8 @@ export const TableData = [
         'ext': { 'obj': '8262' },
         'startDate': new Date('2016/12/01'),
         'salary': 223227,
-        'status': 'Active',
+        'status': 'New Lead',
+        'percent': .25,
         'description': 'When there was despair in the dust bowl and depression across the land, she saw a nation conquer fear itself with a New Deal, new jobs and a new sense of common purpose. Yes we can.',
         'categories': ['Office Skills']
     }];

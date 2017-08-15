@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, EventEmitter, OnInit, OnDestroy, Input, Output, ViewChild, DoCheck, Renderer, HostListener } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, AfterContentInit, OnDestroy, Input, Output, ViewChild, DoCheck, Renderer, HostListener, ContentChildren, QueryList } from '@angular/core';
 // APP
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
@@ -102,6 +102,11 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
     clickHandler: any;
     closeHandler: any;
     parentScrollElement: Element;
+    private _items: QueryList<NovoItemElement>;
+    private _textItems: string[];
+    private activeIndex: number = -1;
+    private filterTerm: string = '';
+    private filterTermTimeout: any;
 
     constructor(element: ElementRef) {
         super(element);
@@ -119,7 +124,15 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
         });
     }
 
-    ngOnInit() {
+    public set items(items: QueryList<NovoItemElement>) {
+        this._items = items;
+        // Get the innertext of all the items to allow for searching
+        this._textItems = items.map((item: NovoItemElement) => {
+            return item.element.nativeElement.innerText;
+        });
+    }
+
+    public ngOnInit(): void {
         // Add a click handler to the button to toggle the menu
         let button = this.element.nativeElement.querySelector('button');
         button.addEventListener('click', this.clickHandler);
@@ -128,7 +141,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
         }
     }
 
-    ngOnDestroy() {
+    public ngOnDestroy(): void {
         // Remove listener
         let button = this.element.nativeElement.querySelector('button');
         if (button) {
@@ -167,40 +180,117 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
                 this.parentScrollElement.removeEventListener('scroll', this.closeHandler);
             }
         }
+        // Clear active index
+        if (this.activeIndex !== -1) {
+            this._items.toArray()[this.activeIndex].active = false;
+        }
+        this.activeIndex = -1;
     }
 
     @HostListener('keydown', ['$event'])
     public onKeyDown(event: KeyboardEvent): void {
-        // Close with ESC/Enter
-        if (this.active && (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER)) {
+        Helpers.swallowEvent(event);
+
+        if (this.active && event.keyCode === KeyCodes.ESC) {
+            // active & esc hit -- close
             this.toggleActive();
+        } else if (event.keyCode === KeyCodes.ENTER) {
+            // enter -- perform the "click"
+            this._items.toArray()[this.activeIndex].onClick();
+        } else if (event.keyCode === KeyCodes.DOWN) {
+            // down - navigate through the list ignoring disabled ones
+            if (this.activeIndex !== -1) {
+                this._items.toArray()[this.activeIndex].active = false;
+            }
+            this.activeIndex++;
+            if (this.activeIndex === this._items.length) {
+                this.activeIndex = 0;
+            }
+            while (this._items.toArray()[this.activeIndex].disabled) {
+                this.activeIndex++;
+                if (this.activeIndex === this._items.length) {
+                    this.activeIndex = 0;
+                }
+            }
+            this._items.toArray()[this.activeIndex].active = true;
+            this.scrollToActive();
+        } else if (event.keyCode === KeyCodes.UP) {
+            // up -- navigate through the list ignoring disabled ones
+            if (this.activeIndex !== -1) {
+                this._items.toArray()[this.activeIndex].active = false;
+            }
+            this.activeIndex--;
+            if (this.activeIndex < 0) {
+                this.activeIndex = this._items.length - 1;
+            }
+            while (this._items.toArray()[this.activeIndex].disabled) {
+                this.activeIndex--;
+                if (this.activeIndex < 0) {
+                    this.activeIndex = this._items.length - 1;
+                }
+            }
+            this._items.toArray()[this.activeIndex].active = true;
+            this.scrollToActive();
+        } else if ((event.keyCode >= 65 && event.keyCode <= 90) || (event.keyCode >= 96 && event.keyCode <= 105) || (event.keyCode >= 48 && event.keyCode <= 57) || event.keyCode === KeyCodes.SPACE) {
+            // A-Z, 0-9, space -- filter the list and scroll to active filter
+            // filter has hard reset after 2s
+            clearTimeout(this.filterTermTimeout);
+            this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 2000);
+            let char = String.fromCharCode(event.keyCode);
+            this.filterTerm = this.filterTerm.concat(char);
+            let index = this._textItems.findIndex((value: string) => {
+                return new RegExp(`^${this.filterTerm.toLowerCase()}`).test(value.trim().toLowerCase());
+            });
+            if (index !== -1) {
+                if (this.activeIndex !== -1) {
+                    this._items.toArray()[this.activeIndex].active = false;
+                }
+                this.activeIndex = index;
+                this._items.toArray()[this.activeIndex].active = true;
+                this.scrollToActive();
+            }
+        } else if ([KeyCodes.BACKSPACE, KeyCodes.DELETE].includes(event.keyCode)) {
+            // backspace, delete -- remove partial filters
+            clearTimeout(this.filterTermTimeout);
+            this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 2000);
+            this.filterTerm = this.filterTerm.slice(0, -1);
         }
     }
-}
 
-@Component({
-    selector: 'list',
-    template: '<ng-content></ng-content>'
-})
-export class NovoListElement {
+    private scrollToActive(): void {
+        let container = this.element.nativeElement.querySelector('novo-dropdown-container');
+        let item = this._items.toArray()[this.activeIndex];
+        if (container && item) {
+            container.scrollTop = item.element.nativeElement.offsetTop;
+        } else {
+            // Append to body
+            container = document.querySelector('body > novo-dropdown-container');
+            if (container && item) {
+                container.scrollTop = item.element.nativeElement.offsetTop;
+            }
+        }
+    }
 }
 
 @Component({
     selector: 'item',
     template: '<ng-content></ng-content>',
     host: {
-        '[class.disabled]': 'disabled'
+        '[class.disabled]': 'disabled',
+        '[class.active]': 'active'
     }
 })
 export class NovoItemElement {
-    @Input() disabled: boolean;
-    @Input() keepOpen: boolean = false;
-    @Output() action: EventEmitter<any> = new EventEmitter();
+    @Input() public disabled: boolean;
+    @Input() public keepOpen: boolean = false;
+    @Output() public action: EventEmitter<any> = new EventEmitter();
 
-    constructor(private dropdown: NovoDropdownElement) { }
+    public active: boolean = false;
 
-    @HostListener('click', ['$event'])
-    public onClick(event: MouseEvent): void {
+    constructor(private dropdown: NovoDropdownElement, public element: ElementRef) { }
+
+    @HostListener('click', [])
+    public onClick(): void {
         // Poor man's disable
         if (!this.disabled) {
             // Close if keepOpen is false
@@ -210,6 +300,20 @@ export class NovoItemElement {
             // Emit the action
             this.action.emit();
         }
+    }
+}
+
+@Component({
+    selector: 'list',
+    template: '<ng-content></ng-content>'
+})
+export class NovoListElement implements AfterContentInit {
+    @ContentChildren(NovoItemElement) public items: QueryList<NovoItemElement>;
+
+    constructor(private dropdown: NovoDropdownElement) { }
+
+    public ngAfterContentInit(): void {
+        this.dropdown.items = this.items;
     }
 }
 

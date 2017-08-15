@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "2.0.196",
+  "version": "2.0.249",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
     "precommit": "npm run lint",
@@ -13,15 +13,16 @@
     "test": "cross-env NODE_ENV=test node_modules/.bin/karma start",
     "test:watch": "cross-env NODE_ENV=test node_modules/.bin/karma start --single-run false --auto-watch true",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -p angular -v",
-    "github-release": "conventional-github-releaser -p angular",
     "deploy:gh-pages": "npm run build:prod && ./node_modules/.bin/gh-pages -d dist",
     "version": "npm run changelog && git add -A",
-    "postversion": "git push origin master && git push --tags && npm run github-release && npm publish",
+    "postversion": "git push origin master && git push --tags && npm publish",
     "build:prod": "webpack --config config/webpack.prod.js --progress --profile --colors --display-error-details --display-cached --bail",
     "lint:save": "tslint -t json \"src/**/*.ts\" \"demo/**/*.ts\"",
     "loc": "node_modules/sloc/bin/sloc src/ --format json > ./coverage/sloc.json",
     "pregalaxy": "npm run loc",
-    "galaxy": "galaxy analyze"
+    "preanalyze-mr": "npm run loc",
+    "galaxy": "galaxy analyze",
+    "analyze-mr": "galaxy analyze-mr"
   },
   "main": "index.js",
   "keywords": [
@@ -55,8 +56,8 @@
   },
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "dependencies": {
-    "@types/ckeditor": "0.0.34",
     "@types/dragula": "2.1.29",
+    "angular2-text-mask": "^8.0.2",
     "date-fns": "^1.28.2",
     "dragula": "3.7.2",
     "hint.css": "2.4.1",
@@ -67,7 +68,6 @@
     "@angular/compiler": "*",
     "@angular/core": "*",
     "@angular/forms": "*",
-    "@types/ckeditor": "*",
     "@types/dragula": "*",
     "core-js": "*",
     "rxjs": "*",
@@ -106,8 +106,8 @@
     "expose-loader": "0.7.1",
     "extract-text-webpack-plugin": "2.0.0-beta.4",
     "file-loader": "0.9.0",
+    "galaxy-parser": "^1.0.22",
     "gh-pages": "0.12.0",
-    "galaxy-parser": "^1.0.5",
     "html-webpack-plugin": "2.24.1",
     "husky": "0.11.9",
     "ie-shim": "0.1.0",
@@ -156,9 +156,13 @@
   "galaxy": {
     "display": "Novo Elements",
     "type": "javascript",
+    "api": "github",
+    "owner": "bullhorn",
+    "repo": "novo-elements",
     "goal": 80,
     "public": true,
     "threshold": 0.05,
+    "defaultBranch": "master",
     "locations": {
       "sloc": "/coverage/sloc.json",
       "lcov": "/coverage/lcov.info"

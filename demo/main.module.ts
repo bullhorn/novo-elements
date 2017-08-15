@@ -13,6 +13,7 @@ import { ColorComponent, CompositionComponent, TypographyComponent, IconographyC
 import {
     ButtonDemoComponent,
     RadioDemoComponent,
+    CustomQuickNoteResults,
     QuickNoteDemoComponent,
     ModalDemoComponent,
     FormDemoComponent,
@@ -39,7 +40,8 @@ import {
     CategoryDropdownDemoComponent,
     MultiPickerDemoComponent,
     PopOverDemoComponent,
-    CustomDemoComponent
+    CustomDemoComponent,
+    DatePickerDemoComponent
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
@@ -61,6 +63,7 @@ import './demo.scss';
         IconographyComponent,
         ButtonDemoComponent,
         RadioDemoComponent,
+        CustomQuickNoteResults,
         QuickNoteDemoComponent,
         ModalDemoComponent,
         FormDemoComponent,
@@ -79,6 +82,7 @@ import './demo.scss';
         SwitchDemoComponent,
         DrawerDemoComponent,
         CalendarDemoComponent,
+        DatePickerDemoComponent,
         DragulaDemoComponent,
         TilesDemoComponent,
         SlidesDemoComponent,
@@ -132,6 +136,7 @@ import './demo.scss';
         ImageCell,
         ActionsCell,
         CustomPickerResults,
+        CustomQuickNoteResults,
         CustomDemoComponent
     ],
     bootstrap: [DemoComponent]

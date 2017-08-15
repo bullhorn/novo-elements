@@ -53,8 +53,10 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
 
     ngOnDestroy() {
         if (this.instance) {
+            this.instance.focusManager.blur(true); // Remove focus from editor
             setTimeout(() => {
                 this.instance.removeAllListeners();
+                CKEDITOR.instances[this.instance.name].destroy();
                 this.instance.destroy();
                 this.instance = null;
             });
@@ -127,9 +129,10 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
 
     getBaseConfig() {
         return {
-            scayt_autoStartup: true,
+            disableNativeSpellChecker: false,
+            removePlugins: 'liststyle,tabletools,contextmenu', // allows browser based spell checking
             toolbar: [
-                { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo', 'Scayt'] },
+                { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'] },
                 { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
                 { name: 'links', items: ['Link'] },
                 { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },

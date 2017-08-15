@@ -8,6 +8,14 @@ import { NovoFormGroup } from './FormInterfaces';
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { DateFormatService } from '../../services/date-format/DateFormat';
+
+export interface IMaskOptions {
+    mask: any;
+    keepCharPositions: boolean;
+    guide: boolean;
+};
 
 @Component({
     selector: 'novo-custom-control-container',
@@ -27,12 +35,12 @@ import { Helpers } from '../../utils/Helpers';
                 <div class="novo-control-inner-container">
                     <div class="novo-control-inner-input-container">
                         <!--Required Indicator-->
-                        <i [hidden]="!form?.controls[control.key]?.required"
+                        <i [hidden]="!form?.controls[control.key]?.required || form?.controls[control.key]?.readOnly"
                             class="required-indicator"
-                            [ngClass]="{'bhi-circle': !form.controls[control.key].valid, 'bhi-check': form.controls[control.key].valid}" *ngIf="form?.controls[control.key]?.required">
+                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="form?.controls[control.key]?.required">
                         </i>
                         <!--Form Controls-->
-                        <div class="novo-control-input {{control.controlType}}" [ngSwitch]="control.controlType" [attr.data-automation-id]="control.key">
+                        <div class="novo-control-input {{control.controlType}}" [attr.data-automation-id]="control.key">
                             <ng-content></ng-content>
                         </div>
                     </div>
@@ -79,7 +87,7 @@ export class NovoCustomControlContainerElement {
                 <div class="novo-control-inner-container">
                     <div class="novo-control-inner-input-container">
                         <!--Required Indicator-->
-                        <i [hidden]="!form?.controls[control.key]?.required"
+                        <i [hidden]="!form?.controls[control.key]?.required || form?.controls[control.key]?.readOnly"
                             class="required-indicator"
                             [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form?.controls[control.key]?.required">
                         </i>
@@ -89,7 +97,8 @@ export class NovoCustomControlContainerElement {
                             <!--TODO prefix/suffix on the control-->
                             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
                                 <input *ngIf="control.type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)">
-                                <input *ngIf="control.type === 'number'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (keypress)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="numberInput.blur()" #numberInput>
+                                <input *ngIf="control.type === 'number' && control.subType !== 'percentage'" [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" (keydown)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="control.maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="numberInput.blur()" #numberInput>
+                                <input *ngIf="control.type === 'number' && control.subType === 'percentage'" [type]="control.type" [placeholder]="control.placeholder" (keydown)="restrictKeys($event)" [value]="percentValue" (input)="handlePercentChange($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="percentInput.blur()" #percentInput>
                                 <label class="input-label" *ngIf="control.subType === 'currency'">{{control.currencyFormat}}</label>
                                 <label class="input-label" *ngIf="control.subType === 'percentage'">%</label>
                             </div>
@@ -115,28 +124,28 @@ export class NovoCustomControlContainerElement {
                             <novo-select *ngSwitchCase="'select'" [options]="control.options" [headerConfig]="control.headerConfig" [placeholder]="control.placeholder" [formControlName]="control.key" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (onSelect)="modelChange($event)"></novo-select>
                             <!--Radio-->
                             <div class="novo-control-input-container" *ngSwitchCase="'radio'">
-                                <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of control.options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-radio>
+                                <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of control.options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [button]="!!option.icon" [icon]="option.icon" [attr.data-automation-id]="control.key + '-' + control.label"></novo-radio>
                             </div>
                             <!--Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
+                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleKeyPressForDateTime($event)" [value]="formattedValue" [textMask]="maskOptions" (input)="selectDateTimeValue($event)" />
                                 <i (click)="toggleActive($event)" class="bhi-clock" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
-                                <novo-time-picker [hidden]="!active" (onSelect)="formatTimeValue($event);" [formControlName]="control.key"></novo-time-picker>
+                                <novo-time-picker *ngIf="active" (onSelect)="formatTimeValue($event);" [formControlName]="control.key" [military]="control.military"></novo-time-picker>
                             </div>
                             <!--Date-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
+                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleKeyPressForDateTime($event)" [value]="formattedValue" [textMask]="maskOptions" (input)="selectDateTimeValue($event)" />
                                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
-                                <novo-date-picker inline="true" [hidden]="!active" (onSelect)="formatDateValue($event); modelChange($event);" [formControlName]="control.key"></novo-date-picker>
+                                <novo-date-picker inline="true" *ngIf="active" (onSelect)="formatDateValue($event); modelChange($event);" [formControlName]="control.key"></novo-date-picker>
                             </div>
                             <!--Date and Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date-time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input [formControlName]="control.key" [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (click)="toggleActive($event);" [value]="formattedValue" readonly/>
+                                <input [name]="control.key" type="text" [attr.id]="control.key" [placeholder]="control.placeholder" (focus)="toggleActive($event, true);" (keydown)="handleKeyPressForDateTime($event)" [value]="formattedValue" readOnly/>
                                 <i (click)="toggleActive($event)" class="bhi-calendar" *ngIf="!hasValue"></i>
                                 <i (click)="clearValue(); modelChange($event);" class="bhi-times" *ngIf="hasValue"></i>
-                                <novo-date-time-picker [hidden]="!active" (onSelect)="formatDateTimeValue($event); modelChange($event);" [formControlName]="control.key"></novo-date-time-picker>
+                                <novo-date-time-picker *ngIf="active" (onSelect)="formatDateTimeValue($event); modelChange($event);" [formControlName]="control.key" [military]="control.military"></novo-date-time-picker>
                             </div>
                             <!--Address-->
                             <novo-address *ngSwitchCase="'address'" [formControlName]="control.key"></novo-address>
@@ -187,8 +196,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     @Input() condensed: boolean = false;
     @Output() change: EventEmitter<any> = new EventEmitter();
 
-    valueChangeSubscription: any;
-
     @Output('blur')
     get onBlur(): Observable<FocusEvent> {
         return this._blurEmitter.asObservable();
@@ -204,11 +211,17 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private _focused: boolean = false;
     private _enteredText: string = '';
     formattedValue: string = '';
+    percentValue: number;
     maxLengthMet: boolean = false;
     characterCount: number = 0;
     private forceClearSubscription: any;
+    private percentChangeSubscription: any;
+    private valueChangeSubscription: any;
+    private dateChangeSubscription: any;
 
-    constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService) {
+    maskOptions: IMaskOptions;
+
+    constructor(element: ElementRef, public labels: NovoLabelService, private toast: NovoToastService, private dateFormatService: DateFormatService) {
         super(element);
     }
 
@@ -266,6 +279,49 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 }
             }
         }
+        if (this.control && this.control.subType === 'percentage') {
+            if (!Helpers.isEmpty(this.control.value)) {
+                this.percentValue = Number((this.control.value * 100).toFixed(6).replace(/\.?0*$/, ''));
+            }
+            this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe(value => {
+                if (!Helpers.isEmpty(value)) {
+                    this.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
+                }
+            });
+        } else if (['date', 'time', 'date-time'].includes(this.control.controlType)) {
+            this.dateChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe(value => {
+                if (this.control.controlType === 'date') {
+                    this.formatDateValue({ date: value });
+                } else if (this.control.controlType === 'time') {
+                    this.formatTimeValue({ date: value });
+                } else if (this.control.controlType === 'date-time') {
+                    this.formatDateTimeValue({ date: value });
+                }
+            });
+        }
+        this.maskOptions = {
+            mask: [],
+            keepCharPositions: true,
+            guide: false
+        };
+        if (this.control.controlType === 'date' && Helpers.isEmpty(this.control.placeholder)) {
+            this.control.placeholder = this.labels.dateFormatPlaceholder;
+            this.maskOptions.mask = this.dateFormatService.getDateMask();
+        } else if (this.control.controlType === 'time' && Helpers.isEmpty(this.control.placeholder)) {
+            this.control.placeholder = this.dateFormatService.getTimePlaceHolder(this.control.military);
+            this.maskOptions.mask = this.dateFormatService.getTimeMask(this.control.military);
+        }
+    }
+
+    selectDateTimeValue(event) {
+        let dateTimeValue;
+        if (event && event.target && event.target.value) {
+            [dateTimeValue, this.formattedValue] = this.dateFormatService.parseString(event.target.value, this.control.military, this.control.controlType);
+            if (dateTimeValue && dateTimeValue > 0) {
+                this.change.emit(dateTimeValue);
+                this.form.controls[this.control.key].setValue(dateTimeValue);
+            }
+        }
     }
 
     executeInteraction(interaction) {
@@ -281,9 +337,16 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         if (this.valueChangeSubscription) {
             this.valueChangeSubscription.unsubscribe();
         }
+        if (this.dateChangeSubscription) {
+            this.dateChangeSubscription.unsubscribe();
+        }
         if (this.forceClearSubscription) {
             // Un-listen for clear events
             this.forceClearSubscription.unsubscribe();
+        }
+        if (this.percentChangeSubscription) {
+            // Un-listen for clear events
+            this.percentChangeSubscription.unsubscribe();
         }
         super.ngOnDestroy();
     }
@@ -359,7 +422,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     formatDateValue(event) {
         this.formattedValue = this.labels.formatDateWithFormat(event.date, {
-            month: 'long',
+            month: 'numeric',
             day: 'numeric',
             year: 'numeric'
         });
@@ -375,7 +438,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     formatDateTimeValue(event) {
         let value = this.labels.formatDateWithFormat(event.date, {
-            month: 'long',
+            month: 'numeric',
             day: 'numeric',
             year: 'numeric',
             hour: 'numeric',
@@ -412,18 +475,47 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     restrictKeys(event) {
-        const NUMBERS_ONLY = /[0-9]/;
-        const NUMBERS_WITH_DECIMAL = /[0-9\.]/;
-        let key = String.fromCharCode(event.charCode);
-        //Types
-        if (this.control.subType === 'number' && !NUMBERS_ONLY.test(key)) {
+        const NUMBERS_ONLY = /[0-9\-]/;
+        const NUMBERS_WITH_DECIMAL = /[0-9\.\-]/;
+        const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+        let key = event.key;
+        // Types
+        if (this.control.subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
             event.preventDefault();
-        } else if (~['currency', 'float', 'percentage'].indexOf(this.control.subType) && !NUMBERS_WITH_DECIMAL.test(key)) {
+        } else if (~['currency', 'float', 'percentage'].indexOf(this.control.subType) && !(NUMBERS_WITH_DECIMAL.test(key) || UTILITY_KEYS.includes(key))) {
             event.preventDefault();
         }
-        //Max Length
+        // Max Length
         if (this.control.maxlength && event.target.value.length >= this.control.maxlength) {
             event.preventDefault();
+        }
+    }
+
+    handlePercentChange(event: KeyboardEvent) {
+        let value = event.target['value'];
+        let percent = Helpers.isEmpty(value) ? null : Number((value / 100).toFixed(6).replace(/\.?0*$/, ''));
+        if (!Helpers.isEmpty(percent)) {
+            this.change.emit(percent);
+            this.form.controls[this.control.key].setValue(percent);
+        } else {
+            this.change.emit(null);
+            this.form.controls[this.control.key].setValue(null);
+        }
+    }
+
+    handleKeyPressForDateTime(event: any): void {
+        if (this.active && event && event.keyCode) {
+            if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB || event.keyCode === KeyCodes.ENTER) {
+                this.toggleActive(event, false);
+            }
+        }
+    }
+
+    handleTabForPickers(event: any): void {
+        if (this.active && event && event.keyCode) {
+            if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB) {
+                this.toggleActive(event, false);
+            }
         }
     }
 

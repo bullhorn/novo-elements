@@ -41,9 +41,9 @@ describe('Elements: NovoSelectElement', () => {
             expect(component.ngOnInit).toBeDefined();
             component.options = ['1', '2', '3'];
             component.ngOnInit();
-            expect(component.options).toBeDefined();
-            expect(component.options[0].value).toBe('1');
-            expect(component.options[0].label).toBe('1');
+            expect(component.filteredOptions).toBeDefined();
+            expect(component.filteredOptions[0].value).toBe('1');
+            expect(component.filteredOptions[0].label).toBe('1');
         });
     });
 

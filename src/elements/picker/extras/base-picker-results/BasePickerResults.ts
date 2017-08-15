@@ -24,6 +24,7 @@ export class BasePickerResults {
     element: ElementRef;
     page: number = 0;
     lastPage: boolean = false;
+
     constructor(element: ElementRef) {
         this.element = element;
     }
@@ -35,7 +36,7 @@ export class BasePickerResults {
                 bottom = target.scrollHeight;
             if (offset >= bottom) {
                 event.stopPropagation();
-                if (!this.lastPage) {
+                if (!this.lastPage && !this.config.disableInfiniteScroll) {
                     this.processSearch();
                 }
             }
@@ -60,20 +61,23 @@ export class BasePickerResults {
         this.isLoading = true;
         this.search(this.term)
             .subscribe(
-                (results: any) => {
-                    if (this.isStatic) {
-                        this.matches = this.filterData(results);
-                    } else {
-                        this.matches = this.matches.concat(results);
-                        this.lastPage = (results && !results.length);
-                    }
-                    this.isLoading = false;
-                },
-                () => {
-                    this.hasError = this.term && this.term.length !== 0;
-                    this.isLoading = false;
-                    this.lastPage = true;
-                });
+            (results: any) => {
+                if (this.isStatic) {
+                    this.matches = this.filterData(results);
+                } else {
+                    this.matches = this.matches.concat(results);
+                    this.lastPage = (results && !results.length);
+                }
+                if (this.matches.length > 0) {
+                    this.nextActiveMatch();
+                }
+                this.isLoading = false;
+            },
+            () => {
+                this.hasError = this.term && this.term.length !== 0;
+                this.isLoading = false;
+                this.lastPage = true;
+            });
     }
 
     search(term, mode?) {
@@ -200,11 +204,28 @@ export class BasePickerResults {
         this.scrollToActive();
     }
 
+    getListElement() {
+        return this.element.nativeElement;
+    }
+
+    getChildrenOfListElement() {
+        let children = [];
+        if (this.getListElement()) {
+            children = this.getListElement().children;
+        }
+        return children;
+    }
+
     scrollToActive() {
-        let list = this.element.nativeElement;
-        // let list = element.querySelector('ul');
+        let list = this.getListElement();
+        let items = this.getChildrenOfListElement();
         let index = this.matches.indexOf(this.activeMatch);
-        list.scrollTop = 65 * (index - 1);
+        let item = items[index];
+        if (item) {
+            list.scrollTop = item.offsetTop;
+        } else {
+            console.warn('BasePickerResults - could not find result item to scroll to, try overriding getListElement() or getChildrenOfListElement() in your PickerResults Component'); // tslint: disable-line
+        }
     }
 
     /**
@@ -277,15 +298,15 @@ export class BasePickerResults {
 
     preselected(match) {
         return this.selected.findIndex(item => {
-                let isPreselected = false;
-                if (item && item.value && match && match.value) {
-                    if (item.value.id && match.value.id) {
-                        isPreselected = item.value.id === match.value.id;
-                    } else {
-                        isPreselected = item.value === match.value;
-                    }
+            let isPreselected = false;
+            if (item && item.value && match && match.value) {
+                if (item.value.id && match.value.id) {
+                    isPreselected = item.value.id === match.value.id;
+                } else {
+                    isPreselected = item.value === match.value;
                 }
-                return isPreselected;
-            }) !== -1;
+            }
+            return isPreselected;
+        }) !== -1;
     }
 }

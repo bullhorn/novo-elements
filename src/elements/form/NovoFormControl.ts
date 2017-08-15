@@ -1,9 +1,12 @@
 // NG2
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { EventEmitter } from '@angular/core';
 // APP
 import { NovoControlConfig } from './FormControls';
+import { Helpers } from '../../utils/Helpers';
 
 export class NovoFormControl extends FormControl {
+    displayValueChanges: EventEmitter<any> = new EventEmitter<any>();
     hidden: boolean;
     required: boolean;
     readOnly: boolean;
@@ -25,6 +28,13 @@ export class NovoFormControl extends FormControl {
         this.hasRequiredValidator = this.required;
         this.tooltip = control.tooltip;
         this.tooltipPosition = control.tooltipPosition;
+
+        // Reactive Form, need to enable/disable, can't bind to [disabled]
+        if (this.readOnly) {
+            this.disable();
+        } else {
+            this.enable();
+        }
     }
 
     /**
@@ -80,14 +90,15 @@ export class NovoFormControl extends FormControl {
      *
      */
     public setValue(value: any, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange }: {
-                        onlySelf?: boolean,
-                        emitEvent?: boolean,
-                        emitModelToViewChange?: boolean,
-                        emitViewToModelChange?: boolean
-                    } = {}) {
+        onlySelf?: boolean,
+        emitEvent?: boolean,
+        emitModelToViewChange?: boolean,
+        emitViewToModelChange?: boolean
+    } = {}) {
         this.markAsDirty();
         this.markAsTouched();
         // TODO: Should we set defaults on these?
+        this.displayValueChanges.emit(value);
         super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
     }
 
@@ -97,6 +108,11 @@ export class NovoFormControl extends FormControl {
      */
     public setReadOnly(isReadOnly: boolean): void {
         this.readOnly = isReadOnly;
+        if (this.readOnly) {
+            this.disable();
+        } else {
+            this.enable();
+        }
     }
 
     /**
@@ -110,3 +126,8 @@ export class NovoFormControl extends FormControl {
     }
 }
 
+export class NovoFormGroup extends FormGroup {
+    get value() {
+        return this.getRawValue();
+    }
+}

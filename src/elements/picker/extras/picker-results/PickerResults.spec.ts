@@ -4,6 +4,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { PickerResults } from './PickerResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoLoadingElement } from '../../../loading/Loading';
+import { NovoListModule } from '../../../list/List.module';
 
 describe('Elements: PickerResults', () => {
     let fixture;
@@ -11,6 +12,9 @@ describe('Elements: PickerResults', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [
+                NovoListModule
+            ],
             declarations: [
                 PickerResults,
                 NovoLoadingElement

@@ -1,3 +1,513 @@
+<a name="2.0.249"></a>
+## [2.0.249](https://github.com/bullhorn/novo-elements/compare/v2.0.248...v2.0.249) (2017-08-15)
+
+
+### Bug Fixes
+
+* **ckeditor:** Use built in spell checker ([f26428e](https://github.com/bullhorn/novo-elements/commit/f26428e))
+* **picker:** Fixing autoselect when there is one record ([6a33a0e](https://github.com/bullhorn/novo-elements/commit/6a33a0e))
+
+
+
+<a name="2.0.248"></a>
+## [2.0.248](https://github.com/bullhorn/novo-elements/compare/v2.0.247...v2.0.248) (2017-08-15)
+
+
+### Features
+
+* **picker:** Making pickers autoselect the first value in the list ([118a046](https://github.com/bullhorn/novo-elements/commit/118a046))
+
+
+
+<a name="2.0.247"></a>
+## [2.0.247](https://github.com/bullhorn/novo-elements/compare/v2.0.246...v2.0.247) (2017-08-14)
+
+
+### Bug Fixes
+
+* **form:** Fixing form control to set date value when the value changes ([8f4909a](https://github.com/bullhorn/novo-elements/commit/8f4909a))
+
+
+
+<a name="2.0.246"></a>
+## [2.0.246](https://github.com/bullhorn/novo-elements/compare/v2.0.245...v2.0.246) (2017-08-11)
+
+
+### Bug Fixes
+
+* **form:** fix the setting of readOnly ([036a556](https://github.com/bullhorn/novo-elements/commit/036a556))
+
+
+### Features
+
+* **Radio:** adding support for buttons with icons as radio buttons. ([#525](https://github.com/bullhorn/novo-elements/issues/525)) ([232cfd7](https://github.com/bullhorn/novo-elements/commit/232cfd7))
+
+
+
+<a name="2.0.245"></a>
+## [2.0.245](https://github.com/bullhorn/novo-elements/compare/v2.0.244...v2.0.245) (2017-08-02)
+
+
+### Bug Fixes
+
+* **select:** Fixing select for ones without hidden values ([70b1828](https://github.com/bullhorn/novo-elements/commit/70b1828))
+
+
+
+<a name="2.0.244"></a>
+## [2.0.244](https://github.com/bullhorn/novo-elements/compare/v2.0.243...v2.0.244) (2017-08-02)
+
+
+
+<a name="2.0.243"></a>
+## [2.0.243](https://github.com/bullhorn/novo-elements/compare/v2.0.242...v2.0.243) (2017-08-02)
+
+
+### Bug Fixes
+
+* **select:** Fixing select to hide readOnly options ([6f0decd](https://github.com/bullhorn/novo-elements/commit/6f0decd))
+
+
+
+<a name="2.0.242"></a>
+## [2.0.242](https://github.com/bullhorn/novo-elements/compare/v2.0.241...v2.0.242) (2017-07-31)
+
+
+### Bug Fixes
+
+* **Tiles:** Fix check for undefined array ([#517](https://github.com/bullhorn/novo-elements/issues/517)) ([2d16b98](https://github.com/bullhorn/novo-elements/commit/2d16b98))
+
+
+
+<a name="2.0.241"></a>
+## [2.0.241](https://github.com/bullhorn/novo-elements/compare/v2.0.240...v2.0.241) (2017-07-28)
+
+
+### Features
+
+* **tiles:** Add ability to change options array ([#516](https://github.com/bullhorn/novo-elements/issues/516)) ([d2f52c8](https://github.com/bullhorn/novo-elements/commit/d2f52c8))
+
+
+
+<a name="2.0.240"></a>
+## [2.0.240](https://github.com/bullhorn/novo-elements/compare/v2.0.239...v2.0.240) (2017-07-28)
+
+
+
+<a name="2.0.239"></a>
+## [2.0.239](https://github.com/bullhorn/novo-elements/compare/v2.0.238...v2.0.239) (2017-07-28)
+
+
+### Bug Fixes
+
+* **datepicker:** Fixing initial time ([07d8478](https://github.com/bullhorn/novo-elements/commit/07d8478))
+
+
+
+<a name="2.0.238"></a>
+## [2.0.238](https://github.com/bullhorn/novo-elements/compare/v2.0.237...v2.0.238) (2017-07-20)
+
+
+
+<a name="2.0.237"></a>
+## [2.0.237](https://github.com/bullhorn/novo-elements/compare/v2.0.236...v2.0.237) (2017-07-20)
+
+
+
+<a name="2.0.236"></a>
+## [2.0.236](https://github.com/bullhorn/novo-elements/compare/v2.0.235...v2.0.236) (2017-07-19)
+
+
+### Bug Fixes
+
+* **calendar:** Fixing events that start before beginning of view and end after end of view ([#509](https://github.com/bullhorn/novo-elements/issues/509)) ([482d361](https://github.com/bullhorn/novo-elements/commit/482d361))
+
+
+
+<a name="2.0.235"></a>
+## [2.0.235](https://github.com/bullhorn/novo-elements/compare/v2.0.234...v2.0.235) (2017-07-19)
+
+
+### Bug Fixes
+
+* **calendar:** Fixing some styles around calendar events and having m… ([#508](https://github.com/bullhorn/novo-elements/issues/508)) ([3b6f5dd](https://github.com/bullhorn/novo-elements/commit/3b6f5dd))
+
+
+
+<a name="2.0.234"></a>
+## [2.0.234](https://github.com/bullhorn/novo-elements/compare/v2.0.233...v2.0.234) (2017-07-18)
+
+
+### Bug Fixes
+
+* **EntityPickerResults:** EntityPicker was using bad value for date f… ([#507](https://github.com/bullhorn/novo-elements/issues/507)) ([c1d93e1](https://github.com/bullhorn/novo-elements/commit/c1d93e1))
+
+
+
+<a name="2.0.233"></a>
+## [2.0.233](https://github.com/bullhorn/novo-elements/compare/v2.0.232...v2.0.233) (2017-07-12)
+
+
+### Bug Fixes
+
+* **picker:** Fixing picker to accept right click paste values ([#504](https://github.com/bullhorn/novo-elements/issues/504)) ([5b3866c](https://github.com/bullhorn/novo-elements/commit/5b3866c))
+
+
+
+<a name="2.0.232"></a>
+## [2.0.232](https://github.com/bullhorn/novo-elements/compare/v2.0.231...v2.0.232) (2017-07-09)
+
+
+### Bug Fixes
+
+* **form:** keyboard control in firefox, fixes [#502](https://github.com/bullhorn/novo-elements/issues/502) ([73de5ba](https://github.com/bullhorn/novo-elements/commit/73de5ba))
+
+
+
+<a name="2.0.231"></a>
+## [2.0.231](https://github.com/bullhorn/novo-elements/compare/v2.0.230...v2.0.231) (2017-07-06)
+
+
+### Bug Fixes
+
+* **Form:** fix empty percentage field interactions ([#501](https://github.com/bullhorn/novo-elements/issues/501)) ([fa3929c](https://github.com/bullhorn/novo-elements/commit/fa3929c))
+
+
+
+<a name="2.0.230"></a>
+## [2.0.230](https://github.com/bullhorn/novo-elements/compare/v2.0.229...v2.0.230) (2017-07-05)
+
+
+
+<a name="2.0.229"></a>
+## [2.0.229](https://github.com/bullhorn/novo-elements/compare/v2.0.228...v2.0.229) (2017-07-05)
+
+
+
+<a name="2.0.228"></a>
+## [2.0.228](https://github.com/bullhorn/novo-elements/compare/v2.0.227...v2.0.228) (2017-07-05)
+
+
+### Bug Fixes
+
+* **form:** Fixing date picker clicking ([50e41d9](https://github.com/bullhorn/novo-elements/commit/50e41d9))
+
+
+
+<a name="2.0.227"></a>
+## [2.0.227](https://github.com/bullhorn/novo-elements/compare/v2.0.226...v2.0.227) (2017-07-03)
+
+
+### Bug Fixes
+
+* **form:** Fixing value of forms with required and readonly ([e8ba56f](https://github.com/bullhorn/novo-elements/commit/e8ba56f))
+* **form:** Fixing value of forms with required and readonly ([7fd704b](https://github.com/bullhorn/novo-elements/commit/7fd704b))
+
+
+
+<a name="2.0.226"></a>
+## [2.0.226](https://github.com/bullhorn/novo-elements/compare/v2.0.225...v2.0.226) (2017-07-03)
+
+
+### Bug Fixes
+
+* **picker:** Fixing tab/focus behavior ([d8a80c0](https://github.com/bullhorn/novo-elements/commit/d8a80c0))
+
+
+
+<a name="2.0.225"></a>
+## [2.0.225](https://github.com/bullhorn/novo-elements/compare/v2.0.224...v2.0.225) (2017-07-03)
+
+
+### Features
+
+* **form:** Keyboard support ([3968dc2](https://github.com/bullhorn/novo-elements/commit/3968dc2))
+
+
+
+<a name="2.0.224"></a>
+## [2.0.224](https://github.com/bullhorn/novo-elements/compare/v2.0.223...v2.0.224) (2017-06-30)
+
+
+
+<a name="2.0.223"></a>
+## [2.0.223](https://github.com/bullhorn/novo-elements/compare/v2.0.222...v2.0.223) (2017-06-30)
+
+
+### Bug Fixes
+
+* **control:** Fixing percentage render ([f674055](https://github.com/bullhorn/novo-elements/commit/f674055))
+
+
+
+<a name="2.0.222"></a>
+## [2.0.222](https://github.com/bullhorn/novo-elements/compare/v2.0.221...v2.0.222) (2017-06-30)
+
+
+### Bug Fixes
+
+* **calendar:** fixing calendar events ([a64c2d0](https://github.com/bullhorn/novo-elements/commit/a64c2d0))
+
+
+
+<a name="2.0.221"></a>
+## [2.0.221](https://github.com/bullhorn/novo-elements/compare/v2.0.220...v2.0.221) (2017-06-30)
+
+
+
+<a name="2.0.220"></a>
+## [2.0.220](https://github.com/bullhorn/novo-elements/compare/v2.0.219...v2.0.220) (2017-06-30)
+
+
+### Bug Fixes
+
+* **calendar:** Fixing some calendar bugs ([7c6e926](https://github.com/bullhorn/novo-elements/commit/7c6e926))
+
+
+### Features
+
+* **table:** Enhancing editable tables ([fe0fe73](https://github.com/bullhorn/novo-elements/commit/fe0fe73))
+
+
+
+<a name="2.0.219"></a>
+## [2.0.219](https://github.com/bullhorn/novo-elements/compare/v2.0.218...v2.0.219) (2017-06-29)
+
+
+### Bug Fixes
+
+* **quicknote:** Fixing the rendered note, global replace of & ([d711a1d](https://github.com/bullhorn/novo-elements/commit/d711a1d))
+* **quicknote:** Hide results dropdown when deleting the search symbol ([16f1957](https://github.com/bullhorn/novo-elements/commit/16f1957))
+
+
+### Features
+
+* **app-bridge:** adding ability to open a fast-add page as well as an… ([#495](https://github.com/bullhorn/novo-elements/issues/495)) ([673edcb](https://github.com/bullhorn/novo-elements/commit/673edcb))
+* **app-bridge:** Fixing interface ([d97e241](https://github.com/bullhorn/novo-elements/commit/d97e241))
+* **Radio:** Adding ability to have icon only button radio groups ([#493](https://github.com/bullhorn/novo-elements/issues/493)) ([9c058ee](https://github.com/bullhorn/novo-elements/commit/9c058ee))
+
+
+
+<a name="2.0.218"></a>
+## [2.0.218](https://github.com/bullhorn/novo-elements/compare/v2.0.217...v2.0.218) (2017-06-27)
+
+
+### Bug Fixes
+
+* **dropdown:** Searching fix ([fbc0b94](https://github.com/bullhorn/novo-elements/commit/fbc0b94))
+
+
+
+<a name="2.0.217"></a>
+## [2.0.217](https://github.com/bullhorn/novo-elements/compare/v2.0.216...v2.0.217) (2017-06-22)
+
+
+### Features
+
+* **quicknote:** CK editor implementation of quick note ([f9f7942](https://github.com/bullhorn/novo-elements/commit/f9f7942))
+
+
+
+<a name="2.0.216"></a>
+## [2.0.216](https://github.com/bullhorn/novo-elements/compare/v2.0.215...v2.0.216) (2017-06-22)
+
+
+### Bug Fixes
+
+* **datetimepicker:** Fixing the initial rendering ([4294c80](https://github.com/bullhorn/novo-elements/commit/4294c80))
+
+
+
+<a name="2.0.215"></a>
+## [2.0.215](https://github.com/bullhorn/novo-elements/compare/v2.0.214...v2.0.215) (2017-06-22)
+
+
+### Bug Fixes
+
+* **datetimepicker:** Fixing the value being emitted on the model to respect the date/time values together ([ae02471](https://github.com/bullhorn/novo-elements/commit/ae02471))
+
+
+
+<a name="2.0.214"></a>
+## [2.0.214](https://github.com/bullhorn/novo-elements/compare/v2.0.213...v2.0.214) (2017-06-22)
+
+
+### Bug Fixes
+
+* **FileInput:** files should be set to value, even if an empty array is provided ([#489](https://github.com/bullhorn/novo-elements/issues/489)) ([757dfab](https://github.com/bullhorn/novo-elements/commit/757dfab))
+
+
+### Features
+
+* **datetimepicker:** Refactoring the date time picker to avoid duplicate code and properly support military ([1b827ae](https://github.com/bullhorn/novo-elements/commit/1b827ae))
+
+
+
+<a name="2.0.213"></a>
+## [2.0.213](https://github.com/bullhorn/novo-elements/compare/v2.0.212...v2.0.213) (2017-06-21)
+
+
+### Bug Fixes
+
+* **dropdown:** starts with search and clear active when hiding ([191204c](https://github.com/bullhorn/novo-elements/commit/191204c))
+
+
+
+<a name="2.0.212"></a>
+## [2.0.212](https://github.com/bullhorn/novo-elements/compare/v2.0.211...v2.0.212) (2017-06-21)
+
+
+### Bug Fixes
+
+* **pickers:** fixing keyboard control and highlighting ([da09b47](https://github.com/bullhorn/novo-elements/commit/da09b47))
+* **quicknote:** Fixing quick note demo and clean up ([305550a](https://github.com/bullhorn/novo-elements/commit/305550a))
+
+
+### Features
+
+* **dropdown:** keyboard navigation & support ([8fb2def](https://github.com/bullhorn/novo-elements/commit/8fb2def))
+
+
+
+<a name="2.0.211"></a>
+## [2.0.211](https://github.com/bullhorn/novo-elements/compare/v2.0.210...v2.0.211) (2017-06-15)
+
+
+### Bug Fixes
+
+* **date/timepickers:** will not be added to the dom until needed ([#485](https://github.com/bullhorn/novo-elements/issues/485)) ([b4a4b92](https://github.com/bullhorn/novo-elements/commit/b4a4b92))
+* **pickers:** fixing keyboard control and highlighting ([593ab19](https://github.com/bullhorn/novo-elements/commit/593ab19))
+
+
+
+<a name="2.0.210"></a>
+## [2.0.210](https://github.com/bullhorn/novo-elements/compare/v2.0.209...v2.0.210) (2017-06-12)
+
+
+
+<a name="2.0.209"></a>
+## [2.0.209](https://github.com/bullhorn/novo-elements/compare/v2.0.208...v2.0.209) (2017-06-12)
+
+
+
+<a name="2.0.208"></a>
+## [2.0.208](https://github.com/bullhorn/novo-elements/compare/v2.0.207...v2.0.208) (2017-06-07)
+
+
+### Bug Fixes
+
+* **appbridge:** Fixing window callbacks ([7f9aa06](https://github.com/bullhorn/novo-elements/commit/7f9aa06))
+* **pickers:** Adding flag to disable infinite scroll ([17a6b90](https://github.com/bullhorn/novo-elements/commit/17a6b90))
+* **pickers:** Adding flag to disable infinite scroll ([3c9a99e](https://github.com/bullhorn/novo-elements/commit/3c9a99e))
+
+
+
+<a name="2.0.207"></a>
+## [2.0.207](https://github.com/bullhorn/novo-elements/compare/v2.0.206...v2.0.207) (2017-06-06)
+
+
+### Bug Fixes
+
+* **picker:** Clear value properly ([453b514](https://github.com/bullhorn/novo-elements/commit/453b514))
+
+
+### Features
+
+* **calendar:** Adding ability to change and display current selected date ([#482](https://github.com/bullhorn/novo-elements/issues/482)) ([91ce6d2](https://github.com/bullhorn/novo-elements/commit/91ce6d2))
+
+
+
+<a name="2.0.206"></a>
+## [2.0.206](https://github.com/bullhorn/novo-elements/compare/v2.0.205...v2.0.206) (2017-06-02)
+
+
+### Bug Fixes
+
+* **filepicker:** fix bug where most immediate button submits on key enter ([#481](https://github.com/bullhorn/novo-elements/issues/481)) ([599acd1](https://github.com/bullhorn/novo-elements/commit/599acd1))
+* **pickers:** Fixing empty results not displaying ([#480](https://github.com/bullhorn/novo-elements/issues/480)) ([8af7941](https://github.com/bullhorn/novo-elements/commit/8af7941))
+
+
+### Features
+
+* **table:** Adding tooltips to filter/sort ([a01ac4a](https://github.com/bullhorn/novo-elements/commit/a01ac4a))
+
+
+
+<a name="2.0.205"></a>
+## [2.0.205](https://github.com/bullhorn/novo-elements/compare/v2.0.204...v2.0.205) (2017-06-01)
+
+
+
+<a name="2.0.204"></a>
+## [2.0.204](https://github.com/bullhorn/novo-elements/compare/v2.0.203...v2.0.204) (2017-06-01)
+
+
+
+<a name="2.0.203"></a>
+## [2.0.203](https://github.com/bullhorn/novo-elements/compare/v2.0.202...v2.0.203) (2017-05-31)
+
+
+
+<a name="2.0.202"></a>
+## [2.0.202](https://github.com/bullhorn/novo-elements/compare/v2.0.201...v2.0.202) (2017-05-30)
+
+
+### Bug Fixes
+
+* **Calendar:** Fixing bad imports ([43944f8](https://github.com/bullhorn/novo-elements/commit/43944f8))
+
+
+
+<a name="2.0.201"></a>
+## [2.0.201](https://github.com/bullhorn/novo-elements/compare/v2.0.200...v2.0.201) (2017-05-26)
+
+
+### Bug Fixes
+
+* **appbridge:** catching register errors ([3287244](https://github.com/bullhorn/novo-elements/commit/3287244))
+
+
+### Features
+
+* **Calendar:** Added Week and Day views ([#479](https://github.com/bullhorn/novo-elements/issues/479)) ([d28a35c](https://github.com/bullhorn/novo-elements/commit/d28a35c))
+
+
+
+<a name="2.0.200"></a>
+## [2.0.200](https://github.com/bullhorn/novo-elements/compare/v2.0.199...v2.0.200) (2017-05-24)
+
+
+### Features
+
+* **appbridge:** Adding more events to AppBridge ([c44c426](https://github.com/bullhorn/novo-elements/commit/c44c426))
+
+
+
+<a name="2.0.199"></a>
+## [2.0.199](https://github.com/bullhorn/novo-elements/compare/v2.0.198...v2.0.199) (2017-05-23)
+
+
+### Features
+
+* **header/tab:** Adding subtitle to header and fixing some styling for tabs ([0c3fb8e](https://github.com/bullhorn/novo-elements/commit/0c3fb8e))
+
+
+
+<a name="2.0.198"></a>
+## [2.0.198](https://github.com/bullhorn/novo-elements/compare/v2.0.197...v2.0.198) (2017-05-22)
+
+
+
+<a name="2.0.197"></a>
+## [2.0.197](https://github.com/bullhorn/novo-elements/compare/v2.0.196...v2.0.197) (2017-05-18)
+
+
+### Features
+
+* **toast:** Adding outlined toasts ([a7c82e1](https://github.com/bullhorn/novo-elements/commit/a7c82e1))
+
+
+
 <a name="2.0.196"></a>
 ## [2.0.196](https://github.com/bullhorn/novo-elements/compare/v2.0.195...v2.0.196) (2017-05-17)
 

@@ -35,7 +35,7 @@ const PICKER_VALUE_ACCESSOR = {
             [(ngModel)]="term"
             (ngModelChange)="checkTerm($event)"
             [placeholder]="placeholder"
-            (keyup)="onKeyUp($event)"
+            (keydown)="onKeyDown($event)"
             (focus)="onFocus($event)"
             (click)="onFocus($event)"
             (blur)="onTouched($event)"
@@ -115,13 +115,25 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         }
         // Get all distinct key up events from the input and only fire if long enough and distinct
         let input = this.element.nativeElement.querySelector('input');
-        const observer = Observable.fromEvent(input, 'keyup')
-            .map((e: any) => e.target.value)
+        const pasteObserver = Observable.fromEvent(input, 'paste')
             .debounceTime(250)
             .distinctUntilChanged();
-        observer.subscribe(
-            term => this.show(term),
+        pasteObserver.subscribe(
+            (event: ClipboardEvent) => this.onDebouncedKeyup(event),
             err => this.hideResults(err));
+        const keyboardObserver = Observable.fromEvent(input, 'keyup')
+            .debounceTime(250)
+            .distinctUntilChanged();
+        keyboardObserver.subscribe(
+            (event: KeyboardEvent) => this.onDebouncedKeyup(event),
+            err => this.hideResults(err));
+    }
+
+    private onDebouncedKeyup(event: Event) {
+        if ([KeyCodes.ESC, KeyCodes.UP, KeyCodes.DOWN, KeyCodes.ENTER, KeyCodes.TAB].includes(event['keyCode'])) {
+            return;
+        }
+        this.show((event.target as any).value);
     }
 
     private show(term?: string): void {
@@ -161,18 +173,9 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         }
     }
 
-    /**
-     * @name onKeyUp
-     * @param event - A keyboard event
-     *
-     * @description This function is called every time the input value changes. We listen for particular keys (e.g. UP
-     * arrow, ESC, etc.) to handle certain behaviors of the picker.
-     * It made sense to filter these out in the controller instead of using multiple listeners on the HTML element
-     * because the quantity of different behaviors would make a messy element.
-     */
-    onKeyUp(event) {
+    onKeyDown(event: KeyboardEvent) {
         if (this.popup) {
-            if (event.keyCode === KeyCodes.ESC) {
+            if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB) {
                 this.hideResults();
                 return;
             }

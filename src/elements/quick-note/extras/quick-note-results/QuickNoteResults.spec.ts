@@ -4,6 +4,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { QuickNoteResults } from './QuickNoteResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoLoadingElement } from '../../../loading/Loading';
+import { NovoListElement, NovoListItemElement, NovoItemContentElement } from '../../../list/List';
 
 describe('Elements: QuickNoteResults', () => {
     describe('Extras: ', () => {
@@ -14,7 +15,10 @@ describe('Elements: QuickNoteResults', () => {
             TestBed.configureTestingModule({
                 declarations: [
                     QuickNoteResults,
-                    NovoLoadingElement
+                    NovoLoadingElement,
+                    NovoListElement,
+                    NovoListItemElement,
+                    NovoItemContentElement
                 ],
                 providers: [
                     { provide: NovoLabelService, useClass: NovoLabelService }

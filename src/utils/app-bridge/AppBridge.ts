@@ -3,18 +3,24 @@ import { Injectable } from '@angular/core';
 // Vendor
 import { Subject } from 'rxjs/Subject';
 
-// let bridge = new AppBridge();
-// bridge.on(LISTENERS.OPEN, (event) => {
-// });
+export enum AppBridgeHandler {
+    HTTP,
+    OPEN,
+    CLOSE,
+    REFRESH,
+    PIN,
+    REGISTER,
+    UPDATE
+}
 
-// TYPES FOR ALL EVENTS
-
-// enum LISTENERS {
-//     HTTP,
-//     OPEN,
-//     CLOSE,
-//     REFRESH
-// }
+export type NovoApps = 'record' | 'add' | 'fast-add';
+export interface IAppBridgeOpenEvent {
+    type: NovoApps;
+    entityType: string;
+    entityId?: string;
+    data?: any;
+    passthrough?: string;
+}
 
 const HTTP_VERBS = {
     GET: 'get',
@@ -23,10 +29,13 @@ const HTTP_VERBS = {
     DELETE: 'delete'
 };
 
-export const MESSAGE_TYPES = {
+const MESSAGE_TYPES = {
     REGISTER: 'register',
-    UNREGISTER: 'unregister',
     OPEN: 'open',
+    CLOSE: 'close',
+    REFRESH: 'refresh',
+    PIN: 'pin',
+    UPDATE: 'update',
     HTTP_GET: 'httpGET',
     HTTP_POST: 'httpPOST',
     HTTP_PUT: 'httpPUT',
@@ -34,27 +43,28 @@ export const MESSAGE_TYPES = {
     CUSTOM_EVENT: 'customEvent'
 };
 
-declare var postRobot: any;
+declare const postRobot: any;
 
-@Injectable()
 export class AppBridge {
     public id: string = `${Date.now()}`;
-    public name: string;
-    public registeredFrameHandler: Subject<any[]> = new Subject<any[]>();
-    public isMaster: boolean = false;
+    public traceName: string;
+    public windowName: string;
 
     private _registeredFrames: any[] = [];
-    private _openHandler: Function;
-    private _httpHandler: Function;
+    private _handlers = {};
     private _tracing: boolean = false;
     private _eventListeners: any = {};
 
     // Type?
-    constructor(name?: string) {
-        this.name = name;
+    constructor(traceName?: string) {
+        this.traceName = traceName;
         if (postRobot) {
             postRobot.CONFIG.LOG_LEVEL = 'error';
-            this._setupHandlers();
+            try {
+                this._setupHandlers();
+            } catch (error) {
+                // No op
+            }
         }
     }
 
@@ -62,17 +72,13 @@ export class AppBridge {
         this._tracing = tracing;
     }
 
-    set openHandler(handler: Function) {
-        this._openHandler = handler;
-    }
-
-    set httpHandler(handler: Function) {
-        this._httpHandler = handler;
+    public handle(type: AppBridgeHandler, handler: Function) {
+        this._handlers[type] = handler;
     }
 
     private _trace(eventType, event) {
         if (this._tracing) {
-            console.log(`[${this.name || this.id}] "${eventType}"`, event); // tslint:disable-line
+            console.log(`[${this.traceName || this.id}] "${eventType}"`, event); // tslint:disable-line
         }
     }
 
@@ -81,25 +87,47 @@ export class AppBridge {
         postRobot.on(MESSAGE_TYPES.REGISTER, (event) => {
             this._trace(MESSAGE_TYPES.REGISTER, event);
             this._registeredFrames.push(event);
-            this.registeredFrameHandler.next(this._registeredFrames);
-            return {
-                store: {}
-            };
+            return this.register(event.data).then(windowName => {
+                this.windowName = windowName;
+                return { windowName };
+            });
         });
-        // Un-Register
-        postRobot.on(MESSAGE_TYPES.UNREGISTER, (event) => {
-            this._trace(MESSAGE_TYPES.UNREGISTER, event);
-            const index = this._registeredFrames.findIndex(frame => frame.data.id === event.data.id);
-            if (index !== -1) {
-                this._registeredFrames.splice(index, 1);
-                this.registeredFrameHandler.next(this._registeredFrames);
-            }
-            return true;
+        // Update
+        postRobot.on(MESSAGE_TYPES.UPDATE, (event) => {
+            this._trace(MESSAGE_TYPES.UPDATE, event);
+            return this.update(event.data).then(success => {
+                return { success };
+            });
         });
         // Open
         postRobot.on(MESSAGE_TYPES.OPEN, (event) => {
             this._trace(MESSAGE_TYPES.OPEN, event);
             return this.open(event.data).then(success => {
+                return { success };
+            });
+        });
+        // Close
+        postRobot.on(MESSAGE_TYPES.CLOSE, (event) => {
+            this._trace(MESSAGE_TYPES.CLOSE, event);
+            const index = this._registeredFrames.findIndex(frame => frame.data.id === event.data.id);
+            if (index !== -1) {
+                this._registeredFrames.splice(index, 1);
+            }
+            return this.close(event.data).then(success => {
+                return { success };
+            });
+        });
+        // Refresh
+        postRobot.on(MESSAGE_TYPES.REFRESH, (event) => {
+            this._trace(MESSAGE_TYPES.REFRESH, event);
+            return this.refresh(event.data).then(success => {
+                return { success };
+            });
+        });
+        // PIN
+        postRobot.on(MESSAGE_TYPES.PIN, (event) => {
+            this._trace(MESSAGE_TYPES.PIN, event);
+            return this.pin(event.data).then(success => {
                 return { success };
             });
         });
@@ -151,10 +179,11 @@ export class AppBridge {
      * Fires or responds to an open event
      * @param packet any - packet of data to send with the open event
      */
-    public open(packet: any): Promise<boolean> {
+    public open(packet: IAppBridgeOpenEvent): Promise<boolean> {
+        Object.assign(packet, { id: this.id, windowName: this.windowName });
         return new Promise<boolean>((resolve, reject) => {
-            if (this._openHandler) {
-                this._openHandler(packet, (success: boolean) => {
+            if (this._handlers[AppBridgeHandler.OPEN]) {
+                this._handlers[AppBridgeHandler.OPEN](packet, (success: boolean) => {
                     if (success) {
                         resolve(true);
                     } else {
@@ -177,29 +206,154 @@ export class AppBridge {
     }
 
     /**
-     * Fires or responds to an register event
-     * @param packet any - packet of data to send with the event
+     * Fires or responds to an close event
+     * @param packet any - packet of data to send with the close event
      */
-    public register(packet: any = {}): void {
-        Object.assign(packet, { id: this.id });
-        postRobot.sendToParent(MESSAGE_TYPES.REGISTER, packet).then((event) => {
-            this._trace(`${MESSAGE_TYPES.REGISTER} (callback)`, event);
-        }).catch((err) => {
-            this.isMaster = true;
-            this._trace(`${MESSAGE_TYPES.REGISTER} - FAILED - (no parent)`, err);
+    public update(packet: any): Promise<boolean> {
+        Object.assign(packet, { id: this.id, windowName: this.windowName });
+        return new Promise<boolean>((resolve, reject) => {
+            if (this._handlers[AppBridgeHandler.UPDATE]) {
+                this._handlers[AppBridgeHandler.UPDATE](packet, (success: boolean) => {
+                    if (success) {
+                        resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                });
+            } else {
+                postRobot.sendToParent(MESSAGE_TYPES.UPDATE, packet).then((event) => {
+                    this._trace(`${MESSAGE_TYPES.UPDATE} (callback)`, event);
+                    if (event.data) {
+                        resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                }).catch((err) => {
+                    reject(false);
+                });
+            }
         });
     }
 
     /**
-     * Fires or responds to an unregister event
+     * Fires or responds to an close event
+     * @param packet any - packet of data to send with the close event
+     */
+    public close(packet: any): Promise<boolean> {
+        Object.assign(packet, { id: this.id, windowName: this.windowName });
+        return new Promise<boolean>((resolve, reject) => {
+            if (this._handlers[AppBridgeHandler.CLOSE]) {
+                this._handlers[AppBridgeHandler.CLOSE](packet, (success: boolean) => {
+                    if (success) {
+                        resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                });
+            } else {
+                postRobot.sendToParent(MESSAGE_TYPES.CLOSE, packet).then((event) => {
+                    this._trace(`${MESSAGE_TYPES.CLOSE} (callback)`, event);
+                    if (event.data) {
+                        resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                }).catch((err) => {
+                    reject(false);
+                });
+            }
+        });
+    }
+
+    /**
+     * Fires or responds to an close event
+     * @param packet any - packet of data to send with the close event
+     */
+    public refresh(packet: any): Promise<boolean> {
+        Object.assign(packet, { id: this.id, windowName: this.windowName });
+        return new Promise<boolean>((resolve, reject) => {
+            if (this._handlers[AppBridgeHandler.REFRESH]) {
+                this._handlers[AppBridgeHandler.REFRESH](packet, (success: boolean) => {
+                    if (success) {
+                        resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                });
+            } else {
+                postRobot.sendToParent(MESSAGE_TYPES.REFRESH, packet).then((event) => {
+                    this._trace(`${MESSAGE_TYPES.REFRESH} (callback)`, event);
+                    if (event.data) {
+                        resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                }).catch((err) => {
+                    reject(false);
+                });
+            }
+        });
+    }
+
+    /**
+     * Fires or responds to an close event
+     * @param packet any - packet of data to send with the close event
+     */
+    public pin(packet: any): Promise<boolean> {
+        Object.assign(packet, { id: this.id, windowName: this.windowName });
+        return new Promise<boolean>((resolve, reject) => {
+            if (this._handlers[AppBridgeHandler.PIN]) {
+                this._handlers[AppBridgeHandler.PIN](packet, (success: boolean) => {
+                    if (success) {
+                        resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                });
+            } else {
+                postRobot.sendToParent(MESSAGE_TYPES.PIN, packet).then((event) => {
+                    this._trace(`${MESSAGE_TYPES.PIN} (callback)`, event);
+                    if (event.data) {
+                        resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                }).catch((err) => {
+                    reject(false);
+                });
+            }
+        });
+    }
+
+    /**
+     * Fires or responds to an register event
      * @param packet any - packet of data to send with the event
      */
-    public unregister(): void {
-        const packet: any = { id: this.id };
-        postRobot.sendToParent(MESSAGE_TYPES.UNREGISTER, packet).then((event: any) => {
-            this._trace(`${MESSAGE_TYPES.UNREGISTER} (callback)`, event);
-        }).catch((err: any) => {
-            this._trace(`${MESSAGE_TYPES.UNREGISTER} - FAILED - (no parent)`, err);
+    public register(packet: { title?: string, url?: string, color?: string } = {}): Promise<string> {
+        Object.assign(packet, { id: this.id, windowName: this.windowName });
+        return new Promise<string>((resolve, reject) => {
+            if (this._handlers[AppBridgeHandler.REGISTER]) {
+                this._handlers[AppBridgeHandler.REGISTER](packet, (windowName: string) => {
+                    if (windowName) {
+                        resolve(windowName);
+                    } else {
+                        resolve(null);
+                    }
+                });
+            } else {
+                postRobot.sendToParent(MESSAGE_TYPES.REGISTER, packet).then((event) => {
+                    this._trace(`${MESSAGE_TYPES.REGISTER} (callback)`, event);
+                    if (event.data) {
+                        this.windowName = event.data.windowName;
+                        resolve(event.data.windowName);
+                    } else {
+                        resolve(null);
+                    }
+                }).catch((err) => {
+                    this._trace(`${MESSAGE_TYPES.REGISTER} - FAILED - (no parent)`, err);
+                    resolve(null);
+                });
+            }
         });
     }
 
@@ -209,8 +363,8 @@ export class AppBridge {
      */
     public httpGET(relativeURL: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            if (this._httpHandler) {
-                this._httpHandler({ verb: HTTP_VERBS.GET, relativeURL: relativeURL }, (data: any, error: any) => {
+            if (this._handlers[AppBridgeHandler.HTTP]) {
+                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.GET, relativeURL: relativeURL }, (data: any, error: any) => {
                     resolve({ data, error });
                 });
             } else {
@@ -229,8 +383,8 @@ export class AppBridge {
      */
     public httpPOST(relativeURL: string, postData: any): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            if (this._httpHandler) {
-                this._httpHandler({ verb: HTTP_VERBS.POST, relativeURL: relativeURL, data: postData }, (data: any, error: any) => {
+            if (this._handlers[AppBridgeHandler.HTTP]) {
+                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.POST, relativeURL: relativeURL, data: postData }, (data: any, error: any) => {
                     resolve({ data, error });
                 });
             } else {
@@ -249,8 +403,8 @@ export class AppBridge {
      */
     public httpPUT(relativeURL: string, putData: any): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            if (this._httpHandler) {
-                this._httpHandler({ verb: HTTP_VERBS.PUT, relativeURL: relativeURL, data: putData }, (data: any, error: any) => {
+            if (this._handlers[AppBridgeHandler.HTTP]) {
+                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL: relativeURL, data: putData }, (data: any, error: any) => {
                     resolve({ data, error });
                 });
             } else {
@@ -269,8 +423,8 @@ export class AppBridge {
      */
     public httpDELETE(relativeURL: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            if (this._httpHandler) {
-                this._httpHandler({ verb: HTTP_VERBS.DELETE, relativeURL: relativeURL }, (data: any, error: any) => {
+            if (this._handlers[AppBridgeHandler.HTTP]) {
+                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.DELETE, relativeURL: relativeURL }, (data: any, error: any) => {
                     resolve({ data, error });
                 });
             } else {

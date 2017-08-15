@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 // APP
 import {
+    BaseControl,
     AddressControl,
     CheckListControl,
     CheckboxControl,
@@ -22,7 +23,7 @@ import {
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from '../Helpers';
 import { NovoFieldset } from '../../elements/form/FormInterfaces';
-import { NovoFormControl } from '../../elements/form/NovoFormControl';
+import { NovoFormControl, NovoFormGroup } from '../../elements/form/NovoFormControl';
 
 // TODO: http doesn't need to be injected in getControlForField, toControls, toFieldSets, or getControlOptions;
 // TODO: (cont.) we should just use NG2's http provider for the http request at this level
@@ -69,13 +70,13 @@ export class FormUtils {
      * @param controls
      * @returns { FormGroup }
      */
-    toFormGroup(controls: Array<any>): FormGroup {
+    toFormGroup(controls: Array<any>): NovoFormGroup {
         let group: any = {};
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
             group[control.key] = new NovoFormControl(value, control);
         });
-        return new FormGroup(group);
+        return new NovoFormGroup(group);
     }
 
     /**
@@ -83,7 +84,7 @@ export class FormUtils {
      * @param formGroup
      * @param controls
      */
-    addControls(formGroup: FormGroup, controls: Array<NovoControlConfig>): void {
+    addControls(formGroup: NovoFormGroup, controls: Array<NovoControlConfig>): void {
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
             let formControl = new NovoFormControl(value, control);
@@ -95,7 +96,7 @@ export class FormUtils {
     /**
      * @name toFormGroupFromFieldset
      * @param fieldsets
-     * @returns {FormGroup}
+     * @returns {NovoFormGroup}
      */
     toFormGroupFromFieldset(fieldsets: Array<NovoFieldset>) {
         let controls: Array<NovoFormControl> = [];
@@ -154,7 +155,7 @@ export class FormUtils {
         return type;
     }
 
-    getControlForField(field: any, http, config: { token?: string, restUrl?: string }, overrides?) {
+    getControlForField(field: any, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any, forTable: boolean = false) {
         // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
         // TODO: (cont.) as the setter of the field argument
         let type: string = this.determineInputType(field) || field.type;
@@ -222,27 +223,34 @@ export class FormUtils {
                 controlConfig.multiple = true;
                 controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
                 controlConfig.config.previewTemplate = overridePreviewTemplate || EntityPickerResult;
-                control = new PickerControl(controlConfig);
+                // TODO: When appendToBody picker works better in table/form
+                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'chips':
                 controlConfig.multiple = true;
-                control = new PickerControl(controlConfig);
+                // TODO: When appendToBody picker works better in table/form
+                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'entitypicker':
                 // TODO: This doesn't belong in this codebase
                 controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
-                control = new PickerControl(controlConfig);
+                // TODO: When appendToBody picker works better in table/form
+                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'picker':
-                control = new PickerControl(controlConfig);
+                // TODO: When appendToBody picker works better in table/form
+                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
                 break;
             case 'datetime':
+                controlConfig.military = config ? !!config.military : false;
                 control = new DateTimeControl(controlConfig);
                 break;
             case 'date':
+                controlConfig.military = config ? !!config.military : false;
                 control = new DateControl(controlConfig);
                 break;
             case 'time':
+                controlConfig.military = config ? !!config.military : false;
                 control = new TimeControl(controlConfig);
                 break;
             case 'currency':
@@ -311,13 +319,13 @@ export class FormUtils {
         return control;
     }
 
-    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string }, overrides?) {
+    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any, forTable: boolean = false) {
         let controls = [];
         if (meta && meta.fields) {
             let fields = meta.fields;
             fields.forEach(field => {
                 if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
-                    let control = this.getControlForField(field, http, config, overrides);
+                    let control = this.getControlForField(field, http, config, overrides, forTable);
                     // Set currency format
                     if (control.subType === 'currency') {
                         control.currencyFormat = currencyFormat;
@@ -330,7 +338,19 @@ export class FormUtils {
         return controls;
     }
 
-    toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string }, overrides?) {
+    toTableControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any) {
+        let controls = this.toControls(meta, currencyFormat, http, config, overrides, true);
+        let ret = {};
+        controls.forEach((control: BaseControl) => {
+            ret[control.key] = {
+                editorType: control.__type,
+                editorConfig: control.__config
+            };
+        });
+        return ret;
+    }
+
+    toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {
         let fieldsets: Array<NovoFieldset> = [];
         let ranges = [];
         if (meta && meta.fields) {
@@ -404,7 +424,7 @@ export class FormUtils {
         }
     }
 
-    getControlOptions(field: any, http, config: { token?: string, restUrl?: string }): any {
+    getControlOptions(field: any, http, config: { token?: string, restUrl?: string, military?: boolean }): any {
         // TODO: The token property of config is the only property used; just pass in `token: string`
         if (field.dataType === 'Boolean' && !field.options) {
             // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
@@ -498,7 +518,7 @@ export class FormUtils {
         });
     }
 
-    forceValidation(form: FormGroup): void {
+    forceValidation(form: NovoFormGroup): void {
         Object.keys(form.controls).forEach((key: string) => {
             let control: any = form.controls[key];
             if (control.required && Helpers.isBlank(form.value[control.key])) {

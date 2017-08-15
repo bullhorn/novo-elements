@@ -25,6 +25,19 @@ calendar-demo {
         timeselect {
             margin: 0 auto;
         }
+
+        novo-calendar-date-change {
+            padding: 1px;
+        }
+
+        novo-tiles {
+            float: right;
+        }
+
+        .cal-demo-content {
+            max-height: 400px;
+            overflow-y: scroll;
+        }
     }
 
     .example.side-by-side-demo {

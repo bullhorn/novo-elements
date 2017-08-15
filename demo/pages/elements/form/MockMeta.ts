@@ -62,7 +62,8 @@ export const MockMeta = {
             type: 'date',
             label: 'Date',
             required: true,
-            sortOrder: 90
+            sortOrder: 90,
+            defaultValue: new Date(2016, 1, 1)
         },
         {
             name: 'time',
@@ -391,6 +392,27 @@ export const MockMeta = {
                 {
                     value: 'Eh...',
                     label: 'Eh...'
+                }
+            ],
+            required: true,
+            sortOrder: 9000
+        }, {
+            inputType: 'RADIO',
+            label: 'Like?',
+            maxLength: 100,
+            multiValue: false,
+            name: 'like',
+            optional: true,
+            options: [
+                {
+                    value: 'Yes',
+                    label: 'Yes',
+                    icon: 'check'
+                },
+                {
+                    value: 'No',
+                    label: 'No',
+                    icon: 'times'
                 }
             ],
             required: true,

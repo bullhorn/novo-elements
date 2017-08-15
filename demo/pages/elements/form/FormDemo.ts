@@ -150,7 +150,7 @@ export class FormDemoComponent {
             },
             options: {
                 tags: ['First', 'Second'],
-                references: ['Third', 'Forth'],
+                references: ['Third', 'Fourth'],
                 boos: ['Test']
             },
             renderer: {
@@ -166,12 +166,12 @@ export class FormDemoComponent {
             }
         };
         // Text-based Controls
-        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox' });
+        this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox', readOnly: true, value: 'HI', required: true });
         this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email', tooltip: 'Email' });
         this.numberControl = new TextBoxControl({ type: 'number', key: 'number', label: 'Number' });
         this.currencyControl = new TextBoxControl({ type: 'currency', key: 'currency', label: 'Currency', currencyFormat: '$ USD' });
         this.floatControl = new TextBoxControl({ type: 'float', key: 'float', label: 'Float' });
-        this.percentageControl = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent' });
+        this.percentageControl = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
         this.quickNoteControl = new QuickNoteControl({ key: 'note', label: 'Note', config: this.quickNoteConfig, required: true, tooltip: 'Quicknote' });
         this.textForm = formUtils.toFormGroup([this.textControl, this.emailControl, this.numberControl, this.currencyControl, this.floatControl, this.percentageControl, this.quickNoteControl]);
 
@@ -187,7 +187,8 @@ export class FormDemoComponent {
         this.entityMultiPickerControl = new PickerControl({
             key: 'entityMultiPicker',
             label: 'Entities',
-            required: false,
+            required: true,
+            readOnly: true,
             multiple: true,
             config: {
                 resultsTemplate: EntityPickerResults,
@@ -202,7 +203,11 @@ export class FormDemoComponent {
                     { title: 'Thomas Jefferson', firstName: 'Thomas', lastName: 'Jefferson', name: 'Thomas Jefferson', email: 'tjefferson@usa.com', phone: '(123) 542-1234', address: { city: 'Arlington', state: 'VA' }, status: 'New Lead', searchEntity: 'Candidate' }]
             }
         });
-        this.pickerForm = formUtils.toFormGroup([this.singlePickerControl, this.multiPickerControl, this.entityMultiPickerControl]);
+        let controls = [this.singlePickerControl, this.multiPickerControl, this.entityMultiPickerControl];
+        formUtils.setInitialValues(controls, {
+            entityMultiPicker: [{ 'title': 'Federal Bank', 'name': 'Federal Bank', 'email': 'info@federalbank.com', 'phone': '(545) 555-1212', 'address': { 'city': 'Arlington', 'state': 'VA' }, 'searchEntity': 'ClientCorporation' }]
+        });
+        this.pickerForm = formUtils.toFormGroup(controls);
 
         // File input controls
         this.fileControl = new FileControl({ key: 'file', name: 'myfile', label: 'File', tooltip: 'Files Control' });
@@ -212,7 +217,7 @@ export class FormDemoComponent {
         // Calendar input controls
         this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
         this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
-        this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time' });
+        this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time', military: true });
         this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
 
         let calculateTaxes = (form) => {
@@ -245,7 +250,7 @@ export class FormDemoComponent {
         this.fieldInteractionForm = formUtils.toFormGroup([this.salesTaxControl, this.itemValueControl, this.totalValueControl, this.hasCommentsControl, this.commentsControl]);
 
         // Dynamic
-        this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, { token: 'TOKEN' }, {
+        this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, { token: 'TOKEN', military: true }, {
             customfield: {
                 customControl: CustomDemoComponent
             }
@@ -253,7 +258,7 @@ export class FormDemoComponent {
         formUtils.setInitialValuesFieldsets(this.dynamic, { firstName: 'Initial F Name', number: 12 });
         this.dynamicForm = formUtils.toFormGroupFromFieldset(this.dynamic);
 
-        this.dynamicVertical = formUtils.toControls(MockMeta, '$ USD', {}, { token: 'TOKEN' });
+        this.dynamicVertical = formUtils.toControls(MockMeta, '$ USD', {}, { token: 'TOKEN', military: true });
         formUtils.setInitialValues(this.dynamicVertical, { number: 0, firstName: 'Bobby Flay' });
         this.dynamicVerticalForm = formUtils.toFormGroup(this.dynamicVertical);
 

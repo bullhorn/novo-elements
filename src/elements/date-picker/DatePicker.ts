@@ -174,7 +174,6 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         // Set labels
         this.selectedLabel = this.labels.startDate;
         this.selected2Label = this.labels.endDate;
-
         this.updateView(this.model, false, true);
     }
 
@@ -420,7 +419,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
      */
     removeTime(date: any): Date {
         let ret = new Date(date);
-        ret.setHours(0);
+        ret.setHours(12);
         ret.setSeconds(0);
         ret.setMilliseconds(0);
         return ret;

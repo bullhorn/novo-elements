@@ -27,7 +27,7 @@ module.exports = function (config) {
         webpackMiddleware: {
             stats: 'errors-only'
         },
-        reporters: ['mocha', 'coverage', 'remap-coverage'],
+        reporters: ['dots', 'coverage', 'remap-coverage'],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,

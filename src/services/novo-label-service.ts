@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 export class NovoLabelService {
     filters = 'Filter';
     clear = 'Clear';
+    sort = 'Sort';
     emptyTableMessage = 'No Records to display...';
     noMatchingRecordsMessage = 'No Matching Records';
     erroredTableMessage = 'Oops! An error occurred.';
@@ -65,6 +66,12 @@ export class NovoLabelService {
     yes = 'Yes';
     search = 'SEARCH';
     noItems = 'There are no items';
+    dateFormat = 'MM/dd/yyyy';
+    dateFormatPlaceholder = 'MM/DD/YYYY';
+    timeFormatPlaceholderAM = 'hh:mm AM';
+    timeFormatPlaceholder24Hour = 'HH:mm';
+    timeFormatAM = 'AM';
+    timeFormatPM = 'PM';
 
     selectedRecords(selected: number) {
         return `Only ${selected} records selected.`;

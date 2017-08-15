@@ -76,28 +76,29 @@ picker-null-recent-results,
 picker-null-results,
 picker-results,
 quick-note-results {
-    background-color: white;
+    background-color: $white;
     cursor: default;
     line-height: 26px;
-    overflow: hidden;
     max-height: 0;
     position: absolute;
-    transform: translateY(0%);
-    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
     width: 100%;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
-    border: 1px solid $positive;
+    novo-list,
     ul {
+        background-color: $white;
+        max-height: 200px;
+        overflow: auto;
         list-style: none;
         padding: 0;
         margin: 0;
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+        border: 1px solid $positive;
+        transform: translateY(0%);
+        transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+        display: block;
+        novo-list-item,
         li {
             cursor: pointer;
-            padding: 10px 16px;
-            box-sizing: border-box;
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
+            padding: 5px 16px;
             font-size: 0.9em;
             span {
                 display: inline-block;
@@ -116,21 +117,30 @@ quick-note-results {
             &.active,
             &:focus,
             &:hover {
-                background: lighten($light, 10%);
-                color: darken($light, 45%);
+                background-color: lighten($positive, 35%);
             }
             &.disabled {
                 opacity: 0.5;
                 pointer-events: none;
+            }
+            item-content {
+                display: block;
             }
         }
         novo-loading {
             justify-content: center;
         }
     }
+    ul {
+        li {
+            padding: 10px 16px;
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+    }
     &.active {
-        max-height: 200px;
-        overflow: auto;
         z-index: 1000;
     }
     &:focus {
@@ -138,14 +148,23 @@ quick-note-results {
     }
 }
 
+novo-list-item.disabled,
+entity-picker-result.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+entity-picker-result.active {
+    >novo-list-item {
+        background-color: lighten($positive, 35%);
+    }
+}
+
 entity-picker-results {
+    background: $white;
+    width: 100%;
     novo-list {
         background: $white;
-        novo-list-item.disabled,
-        entity-picker-result.disabled {
-            opacity: 0.5;
-            pointer-events: none;
-        }
         item-content {
             >p {
                 min-width: 15em;
@@ -162,13 +181,36 @@ entity-picker-results {
 picker-error,
 picker-loader,
 picker-null-recent-results,
-picker-null-results {
+picker-null-results,
+.picker-error,
+.picker-loader,
+.picker-null-recent-results,
+.picker-null-results {
+    background-color: $white;
     text-align: center;
     color: darken($light, 15%);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    border: 1px solid $positive;
+    transform: translateY(0%);
+    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
 }
 
-picker-loader {
+p.picker-error,
+p.picker-loader,
+p.picker-null-recent-results,
+p.picker-null-results {
+    max-width: inherit;
+    padding: 5px;
+}
+
+picker-loader,
+.picker-loader {
+    background-color: $white;
     display: flex;
     align-items: center;
     flex-direction: column;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    border: 1px solid $positive;
+    transform: translateY(0%);
+    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
 }

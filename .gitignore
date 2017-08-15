@@ -31,6 +31,7 @@ novo-elements.providers.d.ts
 # IDEs and editors
 /.idea
 /.vscode
+/.history
 .project
 .classpath
 *.launch

@@ -1,5 +1,5 @@
 import { Component, OnChanges, Input, Output, EventEmitter, ChangeDetectorRef, OnInit, OnDestroy, LOCALE_ID, Inject, TemplateRef } from '@angular/core';
-import { CalendarEvent, WeekDay, MonthView, getWeekViewHeader, getMonthView, MonthViewDay, CalendarEventTimesChangedEvent } from '../../utils/calendar-utils/CalendarUtils';
+import { CalendarEvent, WeekDay, MonthView, MonthViewDay, CalendarEventTimesChangedEvent, getWeekViewHeader, getMonthView } from '../../../utils/calendar-utils/CalendarUtils';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import * as dateFns from 'date-fns';
@@ -18,13 +18,13 @@ import * as dateFns from 'date-fns';
     selector: 'novo-calendar-month',
     template: `
     <div class="calendar-month-view">
-      <novo-calendar-month-header
-        [(viewDate)]="viewDate"
-        [days]="columnHeaders"
-        [locale]="locale"
-        [customTemplate]="headerTemplate"
-        (viewDateChange)="refreshAll()">
-      </novo-calendar-month-header>
+       <novo-calendar-month-header
+         [(viewDate)]="viewDate"
+         [days]="columnHeaders"
+         [locale]="locale"
+         [customTemplate]="headerTemplate"
+         (viewDateChange)="refreshAll()">
+       </novo-calendar-month-header>
       <div class="calendar-days">
         <div *ngFor="let rowIndex of view.rowOffsets">
           <div class="calendar-cell-row">
@@ -42,7 +42,7 @@ import * as dateFns from 'date-fns';
     </div>
   `
 })
-export class CalendarMonthElement implements OnChanges, OnInit, OnDestroy {
+export class NovoCalendarMonthViewElement implements OnChanges, OnInit, OnDestroy {
 
     /**
      * The current view date
@@ -78,7 +78,7 @@ export class CalendarMonthElement implements OnChanges, OnInit, OnDestroy {
     /**
      * The placement of the event tooltip
      */
-    @Input() tooltipPlacement: string = 'top';
+    @Input() tooltipPosition: string = 'top';
 
     /**
      * The start number of the week
@@ -109,6 +109,8 @@ export class CalendarMonthElement implements OnChanges, OnInit, OnDestroy {
      * Called when an event is dragged and dropped
      */
     @Output() eventTimesChanged: EventEmitter<CalendarEventTimesChangedEvent> = new EventEmitter<CalendarEventTimesChangedEvent>();
+
+    @Output() viewDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
     /**
      * @hidden
@@ -151,7 +153,6 @@ export class CalendarMonthElement implements OnChanges, OnInit, OnDestroy {
         if (changes.viewDate || changes.excludeDays) {
             this.refreshHeader();
         }
-
         if (changes.viewDate || changes.events || changes.excludeDays) {
             this.refreshBody();
         }
@@ -205,5 +206,6 @@ export class CalendarMonthElement implements OnChanges, OnInit, OnDestroy {
     public refreshAll(): void {
         this.refreshHeader();
         this.refreshBody();
+        this.viewDateChange.emit(this.viewDate);
     }
 }

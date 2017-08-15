@@ -18,7 +18,7 @@ const SELECT_VALUE_ACCESSOR = {
     selector: 'novo-select',
     providers: [SELECT_VALUE_ACCESSOR],
     template: `
-        <div (click)="toggleActive($event)" tabIndex="-1" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></div>
+        <div (click)="toggleActive($event)" tabIndex="0" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></div>
         <ul class="novo-select-list" tabIndex="-1" [ngClass]="{header: headerConfig}">
             <ng-content></ng-content>
             <li *ngIf="headerConfig" class="select-header" [ngClass]="{open: header.open}">
@@ -31,7 +31,7 @@ const SELECT_VALUE_ACCESSOR = {
                     </footer>
                 </div>
             </li>
-            <li *ngFor="let option of options; let i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
+            <li *ngFor="let option of filteredOptions; let i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
               <span [innerHtml]="highlight(option.label, filterTerm)"></span>
               <i *ngIf="option.active" class="bhi-check"></i>
             </li>
@@ -65,6 +65,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     };
     filterTerm: string = '';
     filterTermTimeout;
+    filteredOptions: any;
 
     constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
@@ -76,9 +77,14 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
 
     ngOnChanges(changes?: SimpleChanges) {
         this.readonly = this.readonly === true;
+
         if (this.options && this.options.length && typeof this.options[0] === 'string') {
-            this.options = this.options.map((item) => {
+            this.filteredOptions = this.options.map((item) => {
                 return { value: item, label: item };
+            });
+        } else {
+            this.filteredOptions = this.options.filter((item) => {
+                return !item.readOnly;
             });
         }
 
@@ -177,13 +183,21 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
                 this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 2000);
                 this.filterTerm = this.filterTerm.slice(0, -1);
             }
+        } else {
+            if ([KeyCodes.DOWN, KeyCodes.UP].includes(event.keyCode)) {
+                this.toggleActive(event, true);
+            }
         }
     }
 
     scrollToSelected() {
         let element = this.element.nativeElement;
         let list = element.querySelector('.novo-select-list');
-        list.scrollTop = 48 * (this.selectedIndex - 1);
+        let items = list.querySelectorAll('li');
+        let item = items[this.headerConfig ? this.selectedIndex + 1 : this.selectedIndex];
+        if (item) {
+            list.scrollTop = item.offsetTop;
+        }
     }
 
     toggleHeader(event, forceValue) {
@@ -235,13 +249,15 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     writeValue(model: any): void {
         this.model = model;
         if (this.options) {
-            let item = this.options.find(i => i.value === model);
+            let item = this.filteredOptions.find(i => i.value === model);
             if (!item && !Helpers.isEmpty(model)) {
                 item = {
                     label: model,
                     value: model
                 };
-                this.options.unshift(item);
+                if (!item.readOnly) {
+                    this.options.unshift(item);
+                }
             }
             if (item) {
                 this.empty = false;
