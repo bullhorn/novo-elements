@@ -1,3 +1,13 @@
+<a name="2.0.248"></a>
+## [2.0.248](https://github.com/bullhorn/novo-elements/compare/v2.0.247...v2.0.248) (2017-08-15)
+
+
+### Features
+
+* **picker:** Making pickers autoselect the first value in the list ([118a046](https://github.com/bullhorn/novo-elements/commit/118a046))
+
+
+
 <a name="2.0.247"></a>
 ## [2.0.247](https://github.com/bullhorn/novo-elements/compare/v2.0.246...v2.0.247) (2017-08-14)
 
