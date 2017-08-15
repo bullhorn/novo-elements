@@ -491,14 +491,15 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      *
      * Sets the height of the CKEditor dynamically to the height of the wrapper upon initialization.
      * Removes the toolbar on the bottom and configures a slimmed down version of the toolbar.
+     * Removes plugins and turns off setting to allow browser based spell checking.
      */
     private getCKEditorConfig(): any {
         let editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
 
         return {
-            scayt_autoStartup: true, // turns on Spell Checking As You Type
+            disableNativeSpellChecker: false,
             height: editorHeight,
-            removePlugins: 'elementspath', // removes the html tags in status bar
+            removePlugins: 'elementspath,liststyle,tabletools,contextmenu',
             resize_enabled: false, // hides the status bar
             toolbar: [{
                 name: 'basicstyles',
