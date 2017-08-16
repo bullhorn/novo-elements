@@ -281,7 +281,7 @@ export class FieldInteractionApi {
         let oldValue = history[history.length - 2];
         let newValue = this.getValue(key);
         let label = this.getProperty(key, 'label');
-        return this.modalService.open(ControlConfirmModal, { oldValue, newValue, label, message }).onClosed.then(result => {
+        return this.modalService.open(ControlConfirmModal, { oldValue, newValue, label, message, key }).onClosed.then(result => {
             if (!result) {
                 this.setValue(key, oldValue, { emitEvent: false });
             }

@@ -7,7 +7,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 @Component({
     selector: 'control-confirm-modal',
     template: `
-        <novo-notification type="warning">
+        <novo-notification type="warning" [attr.data-automation-id]="'field-interaction-modal-' + params['key']">
             <h1>{{ labels.confirmChangesModalMessage }}</h1>
             <h2 *ngIf="!params['message']"><label>{{ params['label'] }}:</label> {{ params['oldValue'] }} <i class="bhi-arrow-right"></i> {{ params['newValue'] }}</h2>
             <h2 *ngIf="params['message']">{{ params['message'] }}</h2>
