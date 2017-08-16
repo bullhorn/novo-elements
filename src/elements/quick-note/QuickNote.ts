@@ -497,6 +497,8 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         let editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
 
         return {
+            enterMode : CKEDITOR.ENTER_BR,
+            shiftEnterMode: CKEDITOR.ENTER_P,
             disableNativeSpellChecker: false,
             height: editorHeight,
             removePlugins: 'elementspath,liststyle,tabletools,contextmenu',
