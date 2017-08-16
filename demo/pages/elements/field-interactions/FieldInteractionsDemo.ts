@@ -267,17 +267,59 @@ export class FieldInteractionsDemoComponent {
         let modifyOptionsAsyncFunction = (API: FieldInteractionApi) => {
             console.log('[FieldInteractionDemo] - modifyOptionsAsyncFunction'); // tslint:disable-line
             let currentValue = API.getActiveValue();
-            if (currentValue) {
-                API.setProperty('picker', 'label', 'Async Picker');
-                API.modifyPickerConfig('picker', {
-                    format: '$name $test',
-                    optionsUrl: 'http://novo-elements-mock.getsandbox.com/users'
-                }, (result) => { result.test = 'MAPPED!'; return result; });
-            } else {
-                API.setProperty('picker', 'label', 'Static Picker');
-                API.modifyPickerConfig('picker', {
-                    options: ['A', 'B', 'C']
-                });
+            switch (currentValue) {
+                case 1:
+                    // Static
+                    API.setProperty('picker', 'label', 'Static Picker');
+                    API.modifyPickerConfig('picker', {
+                        options: ['A', 'B', 'C']
+                    });
+                    break;
+                case 2:
+                    // Async with Options URL
+                    API.setProperty('picker', 'label', 'Async Picker (with options url)');
+                    API.modifyPickerConfig('picker', {
+                        format: '$name $test',
+                        optionsUrl: 'http://novo-elements-mock.getsandbox.com/users'
+                    }, (result) => { result.test = 'Built with Options URL!'; return result; });
+                    break;
+                case 3:
+                    // Async with Options URL Builder
+                    API.setProperty('picker', 'label', 'Async Picker (with options url builder)');
+                    API.modifyPickerConfig('picker', {
+                        format: '$name $test',
+                        optionsUrlBuilder: (query) => {
+                            return 'http://novo-elements-mock.getsandbox.com/users';
+                        }
+                    }, (result) => { result.test = 'Built with Options URL Builder!'; return result; });
+                    break;
+                case 4:
+                    // Async with Options Promise
+                    API.setProperty('picker', 'label', 'Async Picker (with options promise)');
+                    API.modifyPickerConfig('picker', {
+                        format: '$name $test',
+                        optionsPromise: (query, http) => {
+                            return new Promise((resolve, reject) => {
+                                if (query && query.length) {
+                                    http
+                                        .get('http://novo-elements-mock.getsandbox.com/users')
+                                        .map(res => res.json())
+                                        .map(results => {
+                                            return results.map(result => {
+                                                result.test = 'Built with Options Promise';
+                                                return result;
+                                            });
+                                        })
+                                        .subscribe(resolve, reject);
+                                } else {
+                                    resolve(['DEFAULT']);
+                                }
+                            });
+                        }
+                    });
+                    break;
+                default:
+                    break;
             }
         };
         let globalsFunction = (API: FieldInteractionApi) => {
@@ -488,10 +530,17 @@ export class FieldInteractionsDemoComponent {
                 { event: 'change', script: modifyOptionsAddFunction }
             ]
         });
-        this.controls.modifyOptions.makePickerAsyncControl = new CheckboxControl({
+        this.controls.modifyOptions.makePickerAsyncControl = new SelectControl({
             key: 'async',
             label: 'Async Picker?',
             description: 'I will make the picker now hit a service!',
+            value: 1,
+            options: [
+                { label: 'Not Async', value: 1 },
+                { label: 'Async With Options URL', value: 2 },
+                { label: 'Async With Options URL Builder', value: 3 },
+                { label: 'Async With Options Promise', value: 4 },
+            ],
             interactions: [
                 { event: 'change', script: modifyOptionsAsyncFunction }
             ]

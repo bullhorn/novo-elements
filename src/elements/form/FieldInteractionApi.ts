@@ -325,8 +325,10 @@ export class FieldInteractionApi {
                 let config = this.getProperty(key, 'config');
                 if (config) {
                     currentOptions = config.options;
-                    config.options = [...currentOptions, newOption];
-                    this.setProperty(key, 'config', config);
+                    if (currentOptions && Array.isArray(currentOptions)) {
+                        config.options = [...currentOptions, newOption];
+                        this.setProperty(key, 'config', config);
+                    }
                 }
             } else {
                 this.setProperty(key, 'options', [...currentOptions, newOption]);
@@ -342,12 +344,14 @@ export class FieldInteractionApi {
                 let config = this.getProperty(key, 'config');
                 if (config) {
                     currentOptions = config.options;
-                    let index = currentOptions.indexOf(optionToRemove);
-                    if (index !== -1) {
-                        currentOptions.splice(index, 1);
+                    if (currentOptions && Array.isArray(currentOptions)) {
+                        let index = currentOptions.indexOf(optionToRemove);
+                        if (index !== -1) {
+                            currentOptions.splice(index, 1);
+                        }
+                        config.options = [...currentOptions];
+                        this.setProperty(key, 'config', config);
                     }
-                    config.options = [...currentOptions];
-                    this.setProperty(key, 'config', config);
                 }
             } else {
                 let index = currentOptions.indexOf(optionToRemove);
@@ -359,18 +363,21 @@ export class FieldInteractionApi {
         }
     }
 
-    public modifyPickerConfig(key: string, config: { format?: string, optionsUrl?: string, options?: any[] }, mapper?: Function): void {
+    public modifyPickerConfig(key: string, config: { format?: string, optionsUrl?: string, optionsUrlBuilder?: Function, optionsPromise?: any, options?: any[] }, mapper?: Function): void {
         let control = this.getControl(key);
         if (control) {
-            if (config.optionsUrl) {
+            if (config.optionsUrl || config.optionsUrlBuilder || config.optionsPromise) {
                 let c = {
                     format: config.format,
                     options: (query) => {
-                        // TODO - how to make this more flexible (options, query, etc)
+                        if (config.optionsPromise) {
+                            return config.optionsPromise(query, this.http);
+                        }
                         return new Promise((resolve, reject) => {
+                            let url = config.optionsUrlBuilder ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
                             if (query && query.length) {
                                 this.http
-                                    .get(`${config.optionsUrl}?filter=${query || ''}`)
+                                    .get(url)
                                     .map(res => {
                                         if (res.json) {
                                             return res.json();
