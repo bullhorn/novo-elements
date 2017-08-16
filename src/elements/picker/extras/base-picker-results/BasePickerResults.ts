@@ -24,6 +24,7 @@ export class BasePickerResults {
     element: ElementRef;
     page: number = 0;
     lastPage: boolean = false;
+    autoSelectFirstOption: boolean = true;
 
     constructor(element: ElementRef) {
         this.element = element;
@@ -68,7 +69,7 @@ export class BasePickerResults {
                     this.matches = this.matches.concat(results);
                     this.lastPage = (results && !results.length);
                 }
-                if (this.matches.length > 0) {
+                if (this.matches.length > 0 && this.autoSelectFirstOption) {
                     this.nextActiveMatch();
                 }
                 this.isLoading = false;
