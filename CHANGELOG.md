@@ -1,3 +1,13 @@
+<a name="2.0.251"></a>
+## [2.0.251](https://github.com/bullhorn/novo-elements/compare/v2.0.250...v2.0.251) (2017-08-16)
+
+
+### Bug Fixes
+
+* **picker:** Putting the autoselect first item as an input, so it can be disabled ([1b3e63a](https://github.com/bullhorn/novo-elements/commit/1b3e63a))
+
+
+
 <a name="2.0.250"></a>
 ## [2.0.250](https://github.com/bullhorn/novo-elements/compare/v2.0.249...v2.0.250) (2017-08-16)
 
