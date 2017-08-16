@@ -67,7 +67,7 @@ export class Helpers {
      * Checks to see if the object is a function
      */
     static isFunction(obj: any): boolean {
-        return typeof obj === 'function';
+        return !!(obj && obj.constructor && obj.call && obj.apply);
     }
 
     /**
