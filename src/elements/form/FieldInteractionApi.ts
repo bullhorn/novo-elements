@@ -319,6 +319,7 @@ export class FieldInteractionApi {
 
     public addStaticOption(key: string, newOption: any): void {
         let control = this.getControl(key);
+        let optionToAdd = newOption;
         if (control) {
             let currentOptions = this.getProperty(key, 'options');
             if (!currentOptions || !currentOptions.length) {
@@ -326,17 +327,23 @@ export class FieldInteractionApi {
                 if (config) {
                     currentOptions = config.options;
                     if (currentOptions && Array.isArray(currentOptions)) {
-                        config.options = [...currentOptions, newOption];
+                        if (currentOptions[0].value && !optionToAdd.value) {
+                            optionToAdd = { value: newOption, label: newOption };
+                        }
+                        config.options = [...currentOptions, optionToAdd];
                         this.setProperty(key, 'config', config);
                     }
                 }
             } else {
-                this.setProperty(key, 'options', [...currentOptions, newOption]);
+                if (currentOptions[0].value && !optionToAdd.value) {
+                    optionToAdd = { value: newOption, label: newOption };
+                }
+                this.setProperty(key, 'options', [...currentOptions, optionToAdd]);
             }
         }
     }
 
-    public removeStaticOption(key: string, optionToRemove: any): void {
+    public removeStaticOption(key: string, optionToRemove: string): void {
         let control = this.getControl(key);
         if (control) {
             let currentOptions = this.getProperty(key, 'options');
@@ -345,7 +352,18 @@ export class FieldInteractionApi {
                 if (config) {
                     currentOptions = config.options;
                     if (currentOptions && Array.isArray(currentOptions)) {
-                        let index = currentOptions.indexOf(optionToRemove);
+                        let index = -1;
+                        currentOptions.forEach((opt, i) => {
+                            if (opt.value || opt.label) {
+                                if (opt.value === optionToRemove || opt.label === optionToRemove) {
+                                    index = i;
+                                }
+                            } else {
+                                if (opt === optionToRemove) {
+                                    index = i;
+                                }
+                            }
+                        });
                         if (index !== -1) {
                             currentOptions.splice(index, 1);
                         }
@@ -354,7 +372,18 @@ export class FieldInteractionApi {
                     }
                 }
             } else {
-                let index = currentOptions.indexOf(optionToRemove);
+                let index = -1;
+                currentOptions.forEach((opt, i) => {
+                    if (opt.value || opt.label) {
+                        if (opt.value === optionToRemove || opt.label === optionToRemove) {
+                            index = i;
+                        }
+                    } else {
+                        if (opt === optionToRemove) {
+                            index = i;
+                        }
+                    }
+                });
                 if (index !== -1) {
                     currentOptions.splice(index, 1);
                 }
