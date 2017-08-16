@@ -165,7 +165,7 @@ export class PickerDemoComponent {
                         } else {
                             resolve(abbrieviated);
                         }
-                    }, 100000);
+                    }, 1000);
                 });
             }
         };

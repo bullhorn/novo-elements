@@ -59,6 +59,12 @@ main.main-content {
             >* {
                 width: 50%;
             }
+
+            img {
+                max-height: 250px;
+                margin-top: auto;
+                margin-bottom: auto;
+            }
         }
     }
     section {

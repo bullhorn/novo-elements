@@ -70,6 +70,8 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     @Input() containerClass: string;
     // Side the dropdown will open
     @Input() side: string = 'left';
+    // Autoselects the first option in the results
+    @Input() autoSelectFirstOption: boolean = true;
 
     // Emitter for selects
     @Output() select: EventEmitter<any> = new EventEmitter();
@@ -235,12 +237,14 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
             // Update existing list or create the DOM element
             this.popup.instance.term = this.term;
             this.popup.instance.selected = this.selected;
+            this.popup.instance.autoSelectFirstOption = this.autoSelectFirstOption;
         } else {
             this.popup = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
             this.popup.instance.parent = this;
             this.popup.instance.config = this.config;
             this.popup.instance.term = this.term;
             this.popup.instance.selected = this.selected;
+            this.popup.instance.autoSelectFirstOption = this.autoSelectFirstOption;
         }
     }
 

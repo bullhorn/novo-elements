@@ -31,7 +31,7 @@ export class NovoDrawerElement implements OnInit {
 
     set drawer(drawer) {
         // init drop down menu
-        this.drawerEl = drawer.el;
+        this.drawerEl = drawer.drawer.el;
 
         // add class name for the position
         this.drawerEl.nativeElement.classList.add(this.position);

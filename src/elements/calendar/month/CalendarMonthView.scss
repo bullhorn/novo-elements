@@ -1,6 +1,6 @@
 .calendar-month-view {
-  background-color: $white;  
-  
+  background-color: $white;
+
   .calendar-header {
      display: flex;
      flex-flow: column;
@@ -34,7 +34,7 @@
       }
     }
   }
-  
+
   .calendar-cell-row {
     display: flex;
     &:hover {
@@ -75,7 +75,7 @@
 
   .calendar-day-cell {
     min-height: 56px;
-    
+
     &:not(:last-child) {
       border-right: 1px solid #e1e1e1;
     }
@@ -105,17 +105,6 @@
     font-weight: 400;
     opacity: 0.5;
     padding:4px;
-  }
-
-  .calendar-events {
-    flex: 1;
-    align-items: flex-end;
-    display: flex;
-    flex-wrap: wrap;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    padding: 2px;
   }
 
   .calendar-event {

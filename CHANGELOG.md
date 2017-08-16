@@ -1,3 +1,50 @@
+<a name="2.0.251"></a>
+## [2.0.251](https://github.com/bullhorn/novo-elements/compare/v2.0.250...v2.0.251) (2017-08-16)
+
+
+### Bug Fixes
+
+* **picker:** Putting the autoselect first item as an input, so it can be disabled ([1b3e63a](https://github.com/bullhorn/novo-elements/commit/1b3e63a))
+
+
+
+<a name="2.0.250"></a>
+## [2.0.250](https://github.com/bullhorn/novo-elements/compare/v2.0.249...v2.0.250) (2017-08-16)
+
+
+### Bug Fixes
+
+* **ckeditor:** Fixing formatting ([fc095ce](https://github.com/bullhorn/novo-elements/commit/fc095ce))
+* **radio:** fixing data-automation-id ([ac8d87f](https://github.com/bullhorn/novo-elements/commit/ac8d87f))
+
+
+### Features
+
+* **browser:** Safari support ([a356869](https://github.com/bullhorn/novo-elements/commit/a356869))
+
+
+
+<a name="2.0.249"></a>
+## [2.0.249](https://github.com/bullhorn/novo-elements/compare/v2.0.248...v2.0.249) (2017-08-15)
+
+
+### Bug Fixes
+
+* **ckeditor:** Use built in spell checker ([f26428e](https://github.com/bullhorn/novo-elements/commit/f26428e))
+* **picker:** Fixing autoselect when there is one record ([6a33a0e](https://github.com/bullhorn/novo-elements/commit/6a33a0e))
+
+
+
+<a name="2.0.248"></a>
+## [2.0.248](https://github.com/bullhorn/novo-elements/compare/v2.0.247...v2.0.248) (2017-08-15)
+
+
+### Features
+
+* **picker:** Making pickers autoselect the first value in the list ([118a046](https://github.com/bullhorn/novo-elements/commit/118a046))
+
+
+
 <a name="2.0.247"></a>
 ## [2.0.247](https://github.com/bullhorn/novo-elements/compare/v2.0.246...v2.0.247) (2017-08-14)
 
