@@ -52,8 +52,8 @@ import { DemoComponent } from './app/App';
 import { routing } from './app/App.routes';
 import './demo.scss';
 
-export function provideFieldInteractionAPI(toast, modal, formUtils, http) {
-    const fieldInteractionApi = new FieldInteractionApi(toast, modal, formUtils, http);
+export function provideFieldInteractionAPI(toast, modal, formUtils, http, labels) {
+    const fieldInteractionApi = new FieldInteractionApi(toast, modal, formUtils, http, labels);
     fieldInteractionApi.globals = {
         TEST: 'I AM A GLOBAL!'
     };
@@ -135,7 +135,7 @@ export function provideFieldInteractionAPI(toast, modal, formUtils, http) {
         {
             provide: FieldInteractionApi,
             useFactory: provideFieldInteractionAPI,
-            deps: [NovoToastService, NovoModalService, FormUtils, Http]
+            deps: [NovoToastService, NovoModalService, FormUtils, Http, NovoLabelService]
         }
     ],
     entryComponents: [

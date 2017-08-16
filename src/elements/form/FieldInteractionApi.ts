@@ -10,6 +10,7 @@ import { NovoModalService } from '../modal/ModalService';
 import { ControlConfirmModal } from './ControlConfirmModal';
 import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 @Injectable()
 export class FieldInteractionApi {
@@ -17,8 +18,18 @@ export class FieldInteractionApi {
     private _form: any;
     private _currentKey: string;
     private _appBridge: AppBridge;
+    private asyncBlockTimeout: any;
 
-    constructor(private toaster: NovoToastService, private modalService: NovoModalService, private formUtils: FormUtils, private http: Http) { }
+    public static FIELD_POSITIONS = {
+        ABOVE_FIELD: 'ABOVE_FIELD',
+        BELOW_FIELD: 'BELOW_FIELD',
+        TOP_OF_FORM: 'TOP_OF_FORM',
+        BOTTOM_OF_FORM: 'BOTTOM_OF_FORM'
+    };
+
+    constructor(private toaster: NovoToastService, private modalService: NovoModalService,
+        private formUtils: FormUtils, private http: Http, private labels: NovoLabelService) {
+    }
 
     set form(form: any) {
         this._form = form;
@@ -80,7 +91,7 @@ export class FieldInteractionApi {
 
         let control = this.form.controls[key];
         if (!control) {
-            console.error(`[FieldInteractionAPI] - could not find a control in the form by the key -- ${key}`); // tslint:disable-line
+            console.error('[FieldInteractionAPI] - could not find a control in the form by the key --', key); // tslint:disable-line
             return null;
         }
 
@@ -89,12 +100,18 @@ export class FieldInteractionApi {
 
     public getValue(key: string): any {
         let control = this.getControl(key);
-        return control.value;
+        if (control) {
+            return control.value;
+        }
+        return null;
     }
 
     public getInitialValue(key: string): any {
         let control = this.getControl(key);
-        return control.initialValue;
+        if (control) {
+            return control.initialValue;
+        }
+        return null;
     }
 
     public setValue(key: string, value: any, options?: {
@@ -104,7 +121,9 @@ export class FieldInteractionApi {
         emitViewToModelChange?: boolean
     }): void {
         let control = this.getControl(key);
-        control.setValue(value, options);
+        if (control) {
+            control.setValue(value, options);
+        }
     }
 
     public patchValue(key: string, value: any, options?: {
@@ -114,27 +133,37 @@ export class FieldInteractionApi {
         emitViewToModelChange?: boolean
     }): void {
         let control = this.getControl(key);
-        control.setValue(value, options);
+        if (control) {
+            control.setValue(value, options);
+        }
     }
 
     public setReadOnly(key: string, isReadOnly: boolean): void {
         let control = this.getControl(key);
-        control.setReadOnly(isReadOnly);
+        if (control) {
+            control.setReadOnly(isReadOnly);
+        }
     }
 
     public setRequired(key: string, required: boolean): void {
         let control = this.getControl(key);
-        control.setRequired(required);
+        if (control) {
+            control.setRequired(required);
+        }
     }
 
     public hide(key: string, clearValue: boolean = true): void {
         let control = this.getControl(key);
-        control.hide(clearValue);
+        if (control) {
+            control.hide(clearValue);
+        }
     }
 
     public show(key: string): void {
         let control = this.getControl(key);
-        control.show();
+        if (control) {
+            control.show();
+        }
     }
 
     public disable(key: string, options?: {
@@ -142,7 +171,9 @@ export class FieldInteractionApi {
         emitEvent?: boolean;
     }): void {
         let control = this.getControl(key);
-        control.disable(options);
+        if (control) {
+            control.disable(options);
+        }
     }
 
     public enable(key: string, options?: {
@@ -150,47 +181,63 @@ export class FieldInteractionApi {
         emitEvent?: boolean;
     }): void {
         let control = this.getControl(key);
-        control.enable(options);
+        if (control) {
+            control.enable(options);
+        }
     }
 
     public markAsInvalid(key: string, validationMessage?: string): void {
         let control = this.getControl(key);
-        control.markAsInvalid(validationMessage);
+        if (control) {
+            if (control) {
+                control.markAsInvalid(validationMessage);
+            }
+        }
     }
 
     public markAsDirty(key: string, options?: {
         onlySelf?: boolean;
     }): void {
         let control = this.getControl(key);
-        control.markAsDirty(options);
+        if (control) {
+            control.markAsDirty(options);
+        }
     }
 
     public markAsPending(key: string, options?: {
         onlySelf?: boolean;
     }): void {
         let control = this.getControl(key);
-        control.markAsPending(options);
+        if (control) {
+            control.markAsPending(options);
+        }
     }
 
     public markAsPristine(key: string, options?: {
         onlySelf?: boolean;
     }): void {
         let control = this.getControl(key);
-        control.markAsPristine(options);
+        if (control) {
+            control.markAsPristine(options);
+        }
     }
 
     public markAsTouched(key: string, options?: {
         onlySelf?: boolean;
     }): void {
         let control = this.getControl(key);
-        control.markAsTouched(options);
+        if (control) {
+            control.markAsTouched(options);
+        }
     }
 
     public markAsUntouched(key: string, options?: {
         onlySelf?: boolean;
     }): void {
         let control = this.getControl(key);
-        control.markAsUntouched(options);
+        if (control) {
+            control.markAsUntouched(options);
+        }
     }
 
     public updateValueAndValidity(key: string, options?: {
@@ -198,7 +245,9 @@ export class FieldInteractionApi {
         emitEvent?: boolean;
     }): void {
         let control = this.getControl(key);
-        control.updateValueAndValidity(options);
+        if (control) {
+            control.updateValueAndValidity(options);
+        }
     }
 
     public displayToast(toastConfig: {
@@ -211,16 +260,20 @@ export class FieldInteractionApi {
         isCloseable?: boolean,
         customClass?: string
     }): void {
-        this.toaster.alert(toastConfig);
+        if (this.toaster) {
+            this.toaster.alert(toastConfig);
+        }
     }
 
     public displayTip(key: string, tip: string, icon?: string, allowDismiss?: boolean): void {
         let control = this.getControl(key);
-        control.tipWell = {
-            tip: tip,
-            icon: icon,
-            button: allowDismiss
-        };
+        if (control) {
+            control.tipWell = {
+                tip: tip,
+                icon: icon,
+                button: allowDismiss
+            };
+        }
     }
 
     public confirmChanges(key: string, message?: string): Promise<boolean> {
@@ -237,12 +290,17 @@ export class FieldInteractionApi {
 
     public setProperty(key: string, prop: string, value: any): void {
         let control = this.getControl(key);
-        control[prop] = value;
+        if (control) {
+            control[prop] = value;
+        }
     }
 
     public getProperty(key: string, prop: string): any {
         let control = this.getControl(key);
-        return control[prop];
+        if (control) {
+            return control[prop];
+        }
+        return null;
     }
 
     public isValueEmpty(key: string): boolean {
@@ -259,85 +317,177 @@ export class FieldInteractionApi {
         return !!this.form.controls[key];
     }
 
-    public addControl(control: NovoControlConfig) {
-        this.formUtils.addControls(this.form, [control]);
-    }
-
     public addStaticOption(key: string, newOption: any): void {
-        let currentOptions = this.getProperty(key, 'options');
-        if (!currentOptions || !currentOptions.length) {
-            let config = this.getProperty(key, 'config');
-            if (config) {
-                currentOptions = config.options;
-                config.options = [...currentOptions, newOption];
-                this.setProperty(key, 'config', config);
+        let control = this.getControl(key);
+        if (control) {
+            let currentOptions = this.getProperty(key, 'options');
+            if (!currentOptions || !currentOptions.length) {
+                let config = this.getProperty(key, 'config');
+                if (config) {
+                    currentOptions = config.options;
+                    config.options = [...currentOptions, newOption];
+                    this.setProperty(key, 'config', config);
+                }
+            } else {
+                this.setProperty(key, 'options', [...currentOptions, newOption]);
             }
-        } else {
-            this.setProperty(key, 'options', [...currentOptions, newOption]);
         }
     }
 
     public removeStaticOption(key: string, optionToRemove: any): void {
-        let currentOptions = this.getProperty(key, 'options');
-        if (!currentOptions || !currentOptions.length) {
-            let config = this.getProperty(key, 'config');
-            if (config) {
-                currentOptions = config.options;
+        let control = this.getControl(key);
+        if (control) {
+            let currentOptions = this.getProperty(key, 'options');
+            if (!currentOptions || !currentOptions.length) {
+                let config = this.getProperty(key, 'config');
+                if (config) {
+                    currentOptions = config.options;
+                    let index = currentOptions.indexOf(optionToRemove);
+                    if (index !== -1) {
+                        currentOptions.splice(index, 1);
+                    }
+                    config.options = [...currentOptions];
+                    this.setProperty(key, 'config', config);
+                }
+            } else {
                 let index = currentOptions.indexOf(optionToRemove);
                 if (index !== -1) {
                     currentOptions.splice(index, 1);
                 }
-                config.options = [...currentOptions];
-                this.setProperty(key, 'config', config);
+                this.setProperty(key, 'options', [...currentOptions]);
             }
-        } else {
-            let index = currentOptions.indexOf(optionToRemove);
-            if (index !== -1) {
-                currentOptions.splice(index, 1);
-            }
-            this.setProperty(key, 'options', [...currentOptions]);
         }
     }
 
     public modifyPickerConfig(key: string, config: { format?: string, optionsUrl?: string, options?: any[] }, mapper?: Function): void {
         let control = this.getControl(key);
-        if (config.optionsUrl) {
-            let c = {
-                format: config.format,
-                options: (query) => {
-                    // TODO - how to make this more flexible (options, query, etc)
-                    return new Promise((resolve, reject) => {
-                        if (query && query.length) {
-                            this.http
-                                .get(`${config.optionsUrl}?filter=${query || ''}`)
-                                .map(res => res.json())
-                                .map(results => {
-                                    if (mapper) {
-                                        return results.map(mapper);
-                                    }
-                                    return results;
-                                })
-                                .subscribe(resolve, reject);
-                        } else {
-                            resolve([]);
-                        }
-                    });
-                }
-            };
-            this.setProperty(key, 'config', c);
-        } else {
-            control.config.options = [...config.options];
+        if (control) {
+            if (config.optionsUrl) {
+                let c = {
+                    format: config.format,
+                    options: (query) => {
+                        // TODO - how to make this more flexible (options, query, etc)
+                        return new Promise((resolve, reject) => {
+                            if (query && query.length) {
+                                this.http
+                                    .get(`${config.optionsUrl}?filter=${query || ''}`)
+                                    .map(res => {
+                                        if (res.json) {
+                                            return res.json();
+                                        }
+                                        return res;
+                                    })
+                                    .map(results => {
+                                        if (mapper) {
+                                            return results.map(mapper);
+                                        }
+                                        return results;
+                                    })
+                                    .subscribe(resolve, reject);
+                            } else {
+                                resolve([]);
+                            }
+                        });
+                    }
+                };
+                this.setProperty(key, 'config', c);
+            } else {
+                control.config.options = [...config.options];
+            }
         }
     }
 
-    // TODO - timeout - if timeout happens and its not false, display error
     public setLoading(key: string, loading: boolean) {
         let control = this.getControl(key);
-        if (loading) {
-            control.setErrors({ 'loading': true });
-        } else {
-            control.setErrors({ 'loading': null });
-            control.updateValueAndValidity({ emitEvent: false, onlySelf: true });
+        if (control) {
+            if (loading) {
+                control.setErrors({ 'loading': true });
+                // History
+                clearTimeout(this.asyncBlockTimeout);
+                this.asyncBlockTimeout = setTimeout(() => {
+                    this.setLoading(key, false);
+                    this.displayTip(key, this.labels.asyncFailure, 'info', false);
+                    this.setProperty(key, '_displayedAsyncFailure', true);
+                }, 10000);
+            } else {
+                clearTimeout(this.asyncBlockTimeout);
+                control.setErrors({ 'loading': null });
+                control.updateValueAndValidity({ emitEvent: false });
+                if (this.getProperty(key, '_displayedAsyncFailure')) {
+                    this.setProperty(key, 'tipWell', null);
+                }
+            }
+        }
+    }
+
+    public addControl(key: string, metaForNewField: any, position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD, initialValue?: any): void {
+        let control = this.getControl(key);
+        if (control) {
+            let fieldsetIndex = -1;
+            let controlIndex = -1;
+
+            this.form.fieldsets.forEach((fieldset, fi) => {
+                fieldset.controls.forEach((fieldsetControl, ci) => {
+                    if (fieldsetControl.key === key) {
+                        fieldsetIndex = fi;
+                        controlIndex = ci;
+                    }
+                });
+            });
+
+            // Change the position of the newly added field
+            switch (position) {
+                case FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD:
+                    // Adding field above active field
+                    // index can stay the same
+                    break;
+                case FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD:
+                    // Adding field below active field
+                    controlIndex += 1;
+                    break;
+                case FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM:
+                    // Adding field to the top of the form
+                    controlIndex = 0;
+                    fieldsetIndex = 0;
+                    break;
+                case FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM:
+                    // Adding field to the bottom of the form
+                    fieldsetIndex = this.form.fieldsets.length - 1;
+                    controlIndex = this.form.fieldsets[fieldsetIndex].controls.length;
+                    break;
+                default:
+                    break;
+            }
+
+            if (fieldsetIndex !== -1 && controlIndex !== -1) {
+                let novoControl = this.formUtils.getControlForField(metaForNewField, this.http, {});
+                novoControl.hidden = false;
+                let formControl = new NovoFormControl(initialValue, novoControl);
+                this.form.addControl(novoControl.key, formControl);
+                this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 0, novoControl);
+            }
+        }
+    }
+
+    public removeControl(key: string): void {
+        let control = this.getControl(key);
+        if (control) {
+            let fieldsetIndex = -1;
+            let controlIndex = -1;
+
+            this.form.fieldsets.forEach((fieldset, fi) => {
+                fieldset.controls.forEach((fieldsetControl, ci) => {
+                    if (fieldsetControl.key === key) {
+                        fieldsetIndex = fi;
+                        controlIndex = ci;
+                    }
+                });
+            });
+
+            if (fieldsetIndex !== -1 && controlIndex !== -1) {
+                this.form.removeControl(key);
+                this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 1);
+            }
         }
     }
 }

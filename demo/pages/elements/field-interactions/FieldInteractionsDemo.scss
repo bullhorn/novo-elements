@@ -1,6 +1,14 @@
 field-interactions-demo {
-    .example.field-interaction-demo>novo-form {
+    .example.field-interaction-demo>novo-form,
+    .example.field-interaction-demo>novo-dynamic-form {
         margin-top: 20px;
+    }
+    .example.field-interaction-demo>novo-dynamic-form {
+        max-width: 100%;
+        novo-fieldset-header {
+            margin-left: 0;
+            margin-right: 0;
+        }
     }
     .final-value {
         color: #afafaf;

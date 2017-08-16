@@ -1,7 +1,7 @@
 export const MockMeta = {
-    entity: 'Opportunity',
-    entityMetaUrl: 'http://develop-backend.bh-bos2.bullhorn.com:8181/rest-services/1yg8p/meta/Opportunity?fields=*',
-    label: 'Opportunity',
+    entity: 'ENTITY_NAME',
+    entityMetaUrl: '',
+    label: 'ENTITY_LABEL',
     fields: [
         {
             name: 'firstName',

@@ -55,6 +55,8 @@ export interface IMaskOptions {
                             </span>
                         </div>
                     </div>
+                    <!--Tip Wel-->
+                    <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
                 </div>
             </div>
         </div>
@@ -259,12 +261,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 for (let interaction of this.control.interactions) {
                     switch (interaction.event) {
                         case 'blur':
-                            this.valueChangeSubscription = this.onBlur.subscribe(() => {
+                            this.valueChangeSubscription = this.onBlur.debounceTime(300).subscribe(() => {
                                 this.executeInteraction(interaction);
                             });
                             break;
                         case 'focus':
-                            this.valueChangeSubscription = this.onFocus.subscribe(() => {
+                            this.valueChangeSubscription = this.onFocus.debounceTime(300).subscribe(() => {
                                 this.executeInteraction(interaction);
                             });
                             break;
@@ -272,6 +274,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                             this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
                                 this.executeInteraction(interaction);
                             });
+                            break;
+                        case 'init':
+                            interaction.invokeOnInit = true;
                             break;
                         default:
                             break;

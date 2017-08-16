@@ -65,6 +65,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
 
     ngAfterViewInit() {
         let config = this.config || this.getBaseConfig();
+        config.extraPlugins = 'divarea'; // Plugin to use div to edit instead of iFrames (less overhead)
         this.ckeditorInit(config);
     }
 

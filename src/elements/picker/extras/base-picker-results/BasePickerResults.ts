@@ -70,10 +70,13 @@ export class BasePickerResults {
                 }
                 this.isLoading = false;
             },
-            () => {
+            (err) => {
                 this.hasError = this.term && this.term.length !== 0;
                 this.isLoading = false;
                 this.lastPage = true;
+                if (this.term && this.term.length !== 0) {
+                    console.error(err); // tslint:disable-lineno
+                }
             });
     }
 

@@ -16,6 +16,8 @@ let ModifyOptionsTpl = require('./templates/ModifyOptions.html');
 let GlobalsTpl = require('./templates/Globals.html');
 let AsyncTpl = require('./templates/Async.html');
 let ConfirmTpl = require('./templates/Confirm.html');
+let AddingRemovingTpl = require('./templates/AddingRemoving.html');
+import { MockMeta, MockMetaHeaders } from './MockMeta';
 
 const template = `
 <div class="container">
@@ -28,7 +30,6 @@ const template = `
 
     <main class="tabs">
         <novo-nav theme="white" [outlet]="config" direction="vertical">
-            <novo-tab><span>Setup</span></novo-tab>
             <novo-tab><span>Inspect Form</span></novo-tab>
             <novo-tab><span>Configuration on Field</span></novo-tab>
             <novo-tab><span>Write Field Interaction</span></novo-tab>
@@ -36,27 +37,25 @@ const template = `
 
         <novo-nav-outlet #config>
             <novo-nav-content>
-                <h5>Setup</h5>
-                <p>TODO - How to setup providers in module -- how to setup for custom globals</p>
-            </novo-nav-content>
-            <novo-nav-content>
                 <h5>Inspect Form</h5>
-                <p>TODO - GIF to show how to grab the field name</p>
+                <p>There is a special <code>data-control-key</code> property added to the <code>novo-control</code> element.</p>
+                <p>You can inspec the DOM at the input and see the property to know what "key" to use in the API</p>
+                <p>By default, if you are writing a Field Interaction for the active field you can use <code>API.getActiveKey()</code></p>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Configuration on Field</h5>
                 <pre class="field-config"><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean</code></pre>
                 <p>The Field Interactions are configured on a per control basis. There are three scenarios in which they will be fired: "change", "focus" and "blur".</p>
-                <p><label>init</label> -- gets fired only when the form is initialized (make sure to use invokeOnInit!)</p>
+                <p><label>init</label> -- gets fired only when the form is initialized</p>
                 <p><label>change</label> -- gets fired when the value of the form control changes</p>
                 <p><label>focus</label> -- gets fired when the field gets focused</p>
                 <p><label>blue</label> -- gets fired when the field loses focus</p>
                 <p>The script function represents the function that will be fired for the event, you can see examples of these below.</p>
-                <p>Lastly, "invokeOnInit" will just trigger the Field Interaction when the form is created as well.</p>
+                <p>Lastly, "invokeOnInit" will also trigger the Field Interaction when the form is created as well.</p>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Write Field Interaction</h5>
-                <p>TODO - write field interactions like below!</p>
+                <p>Writing Field Interactions is very simple. You can refer to all the examples below. If you ever get stuck, you can always open a <a href="https://github.com/bullhorn/novo-elements/issues">Github Issue</a> as well!</p>
             </novo-nav-content>
         </novo-nav-outlet>
     </main>
@@ -78,6 +77,7 @@ const template = `
             <novo-tab><span>Using Globals</span></novo-tab>
             <novo-tab><span>Async Interactions</span></novo-tab>
             <novo-tab><span>Confirm Changes</span></novo-tab>
+            <novo-tab><span>Adding / Removing Fields</span></novo-tab>
         </novo-nav>
 
         <novo-nav-outlet #api>
@@ -141,6 +141,14 @@ const template = `
                 <div class="example field-interaction-demo">${ConfirmTpl}</div>
                 <multi-code-snippet [code]="snippets.confirm"></multi-code-snippet>
             </novo-nav-content>
+            <novo-nav-content>
+                <h5>Adding / Removing Fields</h5>
+                <p>With the API you can quickly add/remove fields into the form.</p>
+                <p><b>ONLY WORKS WITH DYNAMIC FORMS</b></p>
+                <p><b>ALSO ONLY USE WITH <code>init</code> SCRIPTS!</b></p>
+                <div class="example field-interaction-demo">${AddingRemovingTpl}</div>
+                <multi-code-snippet [code]="snippets.addingRemoving"></multi-code-snippet>
+            </novo-nav-content>
         </novo-nav-outlet>
     </main>
 </div>
@@ -162,6 +170,7 @@ export class FieldInteractionsDemoComponent {
     public GlobalsTpl: any = GlobalsTpl;
     public AsyncTpl: any = AsyncTpl;
     public ConfirmTpl: any = ConfirmTpl;
+    public AddingRemovingTpl: any = AddingRemovingTpl;
 
     public forms: any = {};
     public controls: any = {
@@ -174,7 +183,8 @@ export class FieldInteractionsDemoComponent {
         modifyOptions: {},
         globals: {},
         async: {},
-        confirm: {}
+        confirm: {},
+        addingRemoving: {}
     };
     public snippets: any = {
         validation: {},
@@ -186,7 +196,8 @@ export class FieldInteractionsDemoComponent {
         modifyOptions: {},
         globals: {},
         async: {},
-        confirm: {}
+        confirm: {},
+        addingRemoving: {}
     };
 
     constructor(private formUtils: FormUtils) {
@@ -275,15 +286,54 @@ export class FieldInteractionsDemoComponent {
         };
         let asyncFunction = (API: FieldInteractionApi) => {
             console.log('[FieldInteractionDemo] - asyncFunction'); // tslint:disable-line
-            API.setLoading(API.getActiveKey(), true);
-            setTimeout(() => {
-                API.setLoading(API.getActiveKey(), false);
-            }, 3000);
+            if (API.getActiveKey() === 'async1') {
+                API.setLoading(API.getActiveKey(), true);
+                setTimeout(() => {
+                    API.setLoading(API.getActiveKey(), false);
+                }, 3000);
+            } else {
+                API.setLoading(API.getActiveKey(), true);
+                setTimeout(() => {
+                    API.setLoading(API.getActiveKey(), false);
+                }, 15000);
+            }
         };
         let confirmFunction = (API: FieldInteractionApi) => {
             console.log('[FieldInteractionDemo] - confirmFunction'); // tslint:disable-line
-            let activeValue = API.getActiveValue();
-            API.confirmChanges(API.getActiveKey());
+            if (API.getActiveKey() === 'confirm1') {
+                API.confirmChanges(API.getActiveKey());
+            } else {
+                API.confirmChanges(API.getActiveKey(), 'This is VERY serious!');
+            }
+        };
+        let addingRemovingFunction = (API: FieldInteractionApi) => {
+            console.log('[FieldInteractionDemo] - addingRemovingFunction'); // tslint:disable-line
+            // Control above field
+            API.addControl('cat', {
+                name: 'fieldAbove',
+                type: 'text',
+                label: 'Added Above Cat'
+            }, FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD, 'DEFAULT');
+            // Control below field
+            API.addControl('name', {
+                name: 'fieldBelow',
+                type: 'text',
+                label: 'Added Below Name'
+            }, FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD, ':)');
+            // Control at the top of the form
+            API.addControl('name', {
+                name: 'top',
+                type: 'text',
+                label: 'Added To The Very Top'
+            }, FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM, 'HIGHEST');
+            // Control at the bottom of the form
+            API.addControl('name', {
+                name: 'bottom',
+                type: 'text',
+                label: 'Added To The Very Bottom'
+            }, FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM, 'LOWEST');
+            // Remove the jersey color field
+            API.removeControl('jersey-color');
         };
 
         // Validation Field Interactions
@@ -467,9 +517,9 @@ export class FieldInteractionsDemoComponent {
         this.forms.globals = formUtils.toFormGroup([this.controls.globals.globalControl]);
 
         // Async Interactions
-        this.controls.async.textControl = new TextBoxControl({
+        this.controls.async.async1Control = new TextBoxControl({
             type: 'text',
-            key: 'text',
+            key: 'async1',
             value: 5,
             label: 'Async Validation',
             description: 'As you finish typing, the async check will mark the form as invalid',
@@ -477,20 +527,54 @@ export class FieldInteractionsDemoComponent {
                 { event: 'change', script: asyncFunction }
             ]
         });
-        this.forms.async = formUtils.toFormGroup([this.controls.async.textControl]);
+        this.controls.async.async2Control = new TextBoxControl({
+            type: 'text',
+            key: 'async2',
+            value: 5,
+            label: 'Async Validation (takes too long)',
+            description: 'This one will take too long and trigger the default timeout (10s)',
+            interactions: [
+                { event: 'change', script: asyncFunction }
+            ]
+        });
+        this.forms.async = formUtils.toFormGroup([
+            this.controls.async.async1Control,
+            this.controls.async.async2Control
+        ]);
 
         // Confirm Interactions
-        this.controls.confirm.confirmControl = new TextBoxControl({
+        this.controls.confirm.confirm1Control = new TextBoxControl({
             type: 'text',
-            key: 'prompt',
+            key: 'confirm1',
             value: 'Hello!',
             label: 'Prompt!',
-            description: 'As you change this field you will be prompted for changes!',
+            description: 'As you take focus out of this field you will be prompted for changes!',
             interactions: [
                 { event: 'change', script: confirmFunction }
             ]
         });
-        this.forms.confirm = formUtils.toFormGroup([this.controls.confirm.confirmControl]);
+        this.controls.confirm.confirm2Control = new TextBoxControl({
+            type: 'text',
+            key: 'confirm2',
+            value: 'Another!',
+            label: 'Custom Promp!',
+            description: 'You can provide a custom message!',
+            interactions: [
+                { event: 'change', script: confirmFunction }
+            ]
+        });
+        this.forms.confirm = formUtils.toFormGroup([
+            this.controls.confirm.confirm1Control,
+            this.controls.confirm.confirm2Control
+        ]);
+
+        // Adding / Removing Interactions
+        this.controls.addingRemoving = formUtils.toFieldSets(MockMetaHeaders, '$ USD', {}, { token: 'TOKEN', military: true });
+        this.controls.addingRemoving[0].controls[0].interactions = [
+            { event: 'init', script: addingRemovingFunction }
+        ];
+        this.forms.addingRemoving = formUtils.toFormGroupFromFieldset(this.controls.addingRemoving);
+
 
         // Snippets
         this.snippets.validation = {
@@ -533,6 +617,10 @@ export class FieldInteractionsDemoComponent {
         this.snippets.confirm = {
             'Template': ConfirmTpl,
             'Field Interaction Script': confirmFunction.toString()
+        };
+        this.snippets.addingRemoving = {
+            'Template': AddingRemovingTpl,
+            'Field Interaction Script': addingRemovingFunction.toString()
         };
     }
 }
