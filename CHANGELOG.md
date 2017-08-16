@@ -1,3 +1,14 @@
+<a name="2.0.249"></a>
+## [2.0.249](https://github.com/bullhorn/novo-elements/compare/v2.0.248...v2.0.249) (2017-08-15)
+
+
+### Bug Fixes
+
+* **ckeditor:** Use built in spell checker ([f26428e](https://github.com/bullhorn/novo-elements/commit/f26428e))
+* **picker:** Fixing autoselect when there is one record ([6a33a0e](https://github.com/bullhorn/novo-elements/commit/6a33a0e))
+
+
+
 <a name="2.0.248"></a>
 ## [2.0.248](https://github.com/bullhorn/novo-elements/compare/v2.0.247...v2.0.248) (2017-08-15)
 

@@ -5,24 +5,6 @@ import { TestBed, async } from '@angular/core/testing';
 import { NovoCKEditorElement } from './CKEditor';
 
 describe('Elements: NovoCKEditorElement', () => {
-    // let component;
-    //
-    // beforeEachProviders(() => [
-    //     CKEditor,
-    //     { provide: Renderer, useClass: MockRenderer }
-    // ]);
-    //
-    // beforeEach(inject([CKEditor], _comp => {
-    //     component = _comp;
-    //     component.instance = new MockInstance();
-    //     component.host = {
-    //         nativeElement: {
-    //             value: 'INITIAL VALUE'
-    //         }
-    //     };
-    //
-    // }));
-
     let fixture;
     let component;
 
@@ -37,11 +19,11 @@ describe('Elements: NovoCKEditorElement', () => {
         }).compileComponents();
         fixture = TestBed.createComponent(NovoCKEditorElement);
         component = fixture.debugElement.componentInstance;
-        // spyOn(component.instance, 'removeAllListeners');
-        // spyOn(component.instance, 'destroy');
-        // spyOn(component.instance, 'setData');
-        // spyOn(component.instance, 'on');
-        // spyOn(component.change, 'emit');
+
+        window['CKEDITOR'] = {
+            ENTER_P: 1,
+            ENTER_BR: 2
+        };
     }));
 
     describe('Method: ngOnDestroy()', () => {
@@ -82,48 +64,6 @@ describe('Elements: NovoCKEditorElement', () => {
             expect(component.change.emit).toHaveBeenCalledWith('INITIAL VALUE');
         });
     });
-
-    // xdescribe('Method: ckeditorInit()', () => {
-    //     beforeEach(() => {
-    //         spyOn(console, 'error');
-    //     });
-    //
-    //     it('should be defined', () => {
-    //         expect(component.ckeditorInit).toBeDefined();
-    //     });
-    //
-    //     it('should throw error if the CKEDITOR is not present', () => {
-    //         window.CKEDITOR = null;
-    //         component.ckeditorInit({});
-    //         expect(console.error).toHaveBeenCalled();
-    //     });
-    //
-    //     describe('with CKEDITOR added', () => {
-    //         beforeEach(() => {
-    //             window.CKEDITOR = new MockInstance();
-    //
-    //             spyOn(window.CKEDITOR, 'removeAllListeners');
-    //             spyOn(window.CKEDITOR, 'destroy');
-    //             spyOn(window.CKEDITOR, 'setData');
-    //             spyOn(window.CKEDITOR, 'on');
-    //         });
-    //
-    //         it('should create the instance', () => {
-    //             component.ckeditorInit({});
-    //             expect(component.instance).toBeDefined();
-    //         });
-    //
-    //         it('should set the data on the instance', () => {
-    //             component.ckeditorInit({});
-    //             expect(component.instance.setData).toHaveBeenCalled();
-    //         });
-    //
-    //         it('should setup the handlers', () => {
-    //             component.ckeditorInit({});
-    //             expect(component.instance.on).toHaveBeenCalled();
-    //         });
-    //     });
-    // });
 
     describe('Method: writeValue()', () => {
         it('should be defined', () => {
@@ -172,9 +112,12 @@ describe('Elements: NovoCKEditorElement', () => {
         it('should work', () => {
             let config = component.getBaseConfig();
             expect(config).toEqual({
-                scayt_autoStartup: true,
+                enterMode : window['CKEDITOR'].ENTER_BR,
+                shiftEnterMode: window['CKEDITOR'].ENTER_P,
+                disableNativeSpellChecker: false,
+                removePlugins: 'liststyle,tabletools,contextmenu',
                 toolbar: [
-                    { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo', 'Scayt'] },
+                    { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'] },
                     { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
                     { name: 'links', items: ['Link'] },
                     { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },

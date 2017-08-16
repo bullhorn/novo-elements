@@ -68,7 +68,7 @@ export class BasePickerResults {
                     this.matches = this.matches.concat(results);
                     this.lastPage = (results && !results.length);
                 }
-                if (this.matches.length > 1) {
+                if (this.matches.length > 0) {
                     this.nextActiveMatch();
                 }
                 this.isLoading = false;
