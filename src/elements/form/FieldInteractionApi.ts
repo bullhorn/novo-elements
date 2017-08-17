@@ -392,11 +392,12 @@ export class FieldInteractionApi {
         }
     }
 
-    public modifyPickerConfig(key: string, config: { format?: string, optionsUrl?: string, optionsUrlBuilder?: Function, optionsPromise?: any, options?: any[] }, mapper?: Function): void {
+    public modifyPickerConfig(key: string, config: { format?: string, optionsUrl?: string, optionsUrlBuilder?: Function, optionsPromise?: any, options?: any[], overrideTemplate?: string }, mapper?: Function): void {
         let control = this.getControl(key);
         if (control) {
+            let newConfig: any = Object.assign({}, control.config);;
             if (config.optionsUrl || config.optionsUrlBuilder || config.optionsPromise) {
-                let c = {
+                newConfig = {
                     format: config.format,
                     options: (query) => {
                         if (config.optionsPromise) {
@@ -426,10 +427,11 @@ export class FieldInteractionApi {
                         });
                     }
                 };
-                this.setProperty(key, 'config', c);
-            } else {
-                control.config.options = [...config.options];
+            } else if (config.options) {
+                newConfig.options = [...config.options];
             }
+            newConfig.overrideTemplate = config.overrideTemplate;
+            this.setProperty(key, 'config', newConfig);
         }
     }
 

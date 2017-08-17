@@ -121,7 +121,7 @@ export class EntityPickerResult {
     renderTimestamp(date?: any) {
         let timestamp = '';
         if (date) {
-            timestamp = this.labels.formatDateWithFormat(date, {year: 'numeric', month: 'numeric', day: 'numeric'});
+            timestamp = this.labels.formatDateWithFormat(date, { year: 'numeric', month: 'numeric', day: 'numeric' });
         }
         return timestamp;
     }
@@ -163,7 +163,7 @@ export class EntityPickerResult {
 @Component({
     selector: 'entity-picker-results',
     template: `
-        <novo-list *ngIf="matches.length > 0" direction="vertical">
+        <novo-list *ngIf="matches.length > 0 && !config.overrideTemplate" direction="vertical">
             <entity-picker-result *ngFor="let match of matches"
                     [match]="match"
                     [term]="term"
@@ -172,6 +172,16 @@ export class EntityPickerResult {
                     (mouseenter)="selectActive(match)"
                     [class.disabled]="preselected(match)">
             </entity-picker-result>
+            <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
+        </novo-list>
+        <novo-list *ngIf="matches.length > 0 && config.overrideTemplate" direction="vertical">
+            <novo-list-item *ngFor="let match of matches"
+                    (click)="selectMatch($event)"
+                    [ngClass]="{active: isActive(match)}"
+                    (mouseenter)="selectActive(match)"
+                    [class.disabled]="preselected(match)">
+                <custom-picker-result [match]="match" [template]="config.overrideTemplate"></custom-picker-result>
+            </novo-list-item>
             <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
         </novo-list>
         <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>

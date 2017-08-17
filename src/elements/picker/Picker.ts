@@ -235,6 +235,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         // Update Matches
         if (this.popup) {
             // Update existing list or create the DOM element
+            this.popup.instance.config = this.config;
             this.popup.instance.term = this.term;
             this.popup.instance.selected = this.selected;
             this.popup.instance.autoSelectFirstOption = this.autoSelectFirstOption;

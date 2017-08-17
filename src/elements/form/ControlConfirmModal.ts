@@ -11,8 +11,8 @@ import { NovoLabelService } from '../../services/novo-label-service';
             <h1>{{ labels.confirmChangesModalMessage }}</h1>
             <h2 *ngIf="!params['message']"><label>{{ params['label'] }}:</label> {{ params['oldValue'] }} <i class="bhi-arrow-right"></i> {{ params['newValue'] }}</h2>
             <h2 *ngIf="params['message']">{{ params['message'] }}</h2>
-            <button theme="standard" (click)="close(false)">{{ labels.cancel }}</button>
-            <button theme="primary" icon="check" (click)="close(true)" autofocus>{{ labels.save }}</button>
+            <button theme="standard" (click)="close(false)" [attr.data-automation-id]="'field-interaction-modal-cancel' + params['key']">{{ labels.cancel }}</button>
+            <button theme="primary" icon="check" (click)="close(true)" autofocus [attr.data-automation-id]="'field-interaction-modal-save-' + params['key']">{{ labels.save }}</button>
         </novo-notification>
     `
 })

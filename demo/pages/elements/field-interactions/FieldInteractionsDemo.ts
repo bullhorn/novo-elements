@@ -73,7 +73,7 @@ const template = `
             <novo-tab><span>Hide / Show Fields</span></novo-tab>
             <novo-tab><span>Enable / Disable Fields</span></novo-tab>
             <novo-tab><span>Messaging / Notifications</span></novo-tab>
-            <novo-tab><span>Modifying Options on Static Pickers / Selects</span></novo-tab>
+            <novo-tab><span>Modifying Config on Static Pickers / Selects</span></novo-tab>
             <novo-tab><span>Using Globals</span></novo-tab>
             <novo-tab><span>Async Interactions</span></novo-tab>
             <novo-tab><span>Confirm Changes</span></novo-tab>
@@ -118,7 +118,7 @@ const template = `
                 <multi-code-snippet [code]="snippets.messaging"></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
-                <h5>Modifying Options on Static Pickers / Selects</h5>
+                <h5>Modifying Config on Static Pickers / Selects</h5>
                 <p>You have full control over the control, you can modify the options array of static pickers and select controls!</p>
                 <div class="example field-interaction-demo">${ModifyOptionsTpl}</div>
                 <multi-code-snippet [code]="snippets.modifyOptions"></multi-code-snippet>
@@ -262,6 +262,15 @@ export class FieldInteractionsDemoComponent {
             } else {
                 API.addStaticOption('select', 'NEW');
                 API.addStaticOption('picker', 'NEW');
+            }
+        };
+        let modifyOptionsTemplateFunction = (API: FieldInteractionApi) => {
+            console.log('[FieldInteractionDemo] - modifyOptionsTemplateFunction'); // tslint:disable-line
+            let currentValue = API.getActiveValue();
+            if (!currentValue) {
+                API.modifyPickerConfig('pickerTemplate', { overrideTemplate: null });
+            } else {
+                API.modifyPickerConfig('pickerTemplate', { overrideTemplate: '<h1>{{ match | json }}</h1>' });
             }
         };
         let modifyOptionsAsyncFunction = (API: FieldInteractionApi) => {
@@ -522,6 +531,21 @@ export class FieldInteractionsDemoComponent {
                 options: ['A', 'B', 'C']
             }
         });
+        this.controls.modifyOptions.customPickerControl = new PickerControl({
+            key: 'pickerTemplate',
+            label: 'Standard Picker',
+            config: {
+                options: ['A', 'B', 'C']
+            }
+        });
+        this.controls.modifyOptions.toggleOverrideTemplate = new CheckboxControl({
+            key: 'toggleTemplate',
+            label: 'Custom Picker Results?',
+            description: 'I will provide an "overrideTemplate" to the picker above!',
+            interactions: [
+                { event: 'change', script: modifyOptionsTemplateFunction }
+            ]
+        });
         this.controls.modifyOptions.toggleControl = new CheckboxControl({
             key: 'toggle',
             label: 'Add Option?',
@@ -549,6 +573,8 @@ export class FieldInteractionsDemoComponent {
             this.controls.modifyOptions.selectControl,
             this.controls.modifyOptions.pickerControl,
             this.controls.modifyOptions.toggleControl,
+            this.controls.modifyOptions.toggleOverrideTemplate,
+            this.controls.modifyOptions.customPickerControl,
             this.controls.modifyOptions.makePickerAsyncControl
         ]);
 
@@ -653,7 +679,8 @@ export class FieldInteractionsDemoComponent {
         this.snippets.modifyOptions = {
             'Template': ModifyOptionsTpl,
             'Field Interaction Script (add)': modifyOptionsAddFunction.toString(),
-            'Field Interaction Script (async)': modifyOptionsAsyncFunction.toString()
+            'Field Interaction Script (async)': modifyOptionsAsyncFunction.toString(),
+            'Field Interaction Script (override template)': modifyOptionsTemplateFunction.toString(),
         };
         this.snippets.globals = {
             'Template': GlobalsTpl,

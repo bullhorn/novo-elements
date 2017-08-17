@@ -5,6 +5,7 @@ import { EntityPickerResult } from './EntityPickerResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoLoadingElement } from '../../../loading/Loading';
 import { NovoListElement, NovoListItemElement, NovoItemAvatarElement, NovoItemHeaderElement, NovoItemTitleElement, NovoItemContentElement } from '../../../list/List';
+import { CustomPickerResult } from '../custom-picker-result/CustomPickerResult';
 
 describe('Elements: EntityPickerResult', () => {
     let fixture;
@@ -20,7 +21,8 @@ describe('Elements: EntityPickerResult', () => {
                 NovoItemAvatarElement,
                 NovoItemContentElement,
                 NovoItemHeaderElement,
-                NovoItemTitleElement
+                NovoItemTitleElement,
+                CustomPickerResult
             ],
             providers: [
                 { provide: NovoLabelService, useClass: NovoLabelService }

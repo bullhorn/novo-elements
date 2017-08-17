@@ -227,8 +227,6 @@ export class BasePickerResults {
         let item = items[index];
         if (item) {
             list.scrollTop = item.offsetTop;
-        } else {
-            console.warn('BasePickerResults - could not find result item to scroll to, try overriding getListElement() or getChildrenOfListElement() in your PickerResults Component'); // tslint: disable-line
         }
     }
 
