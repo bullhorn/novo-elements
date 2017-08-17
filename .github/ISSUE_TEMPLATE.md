@@ -1,8 +1,10 @@
 _**Note: for support questions, please use one of these channels:**_ [Chat: BullhornOSS Gitter](https://gitter.im/bullhorn/Open-Source)
 
-##### **I'm submitting a [BUG REPORT | FEATURE REQUEST | QUESTION]**
+##### **I'm submitting a...**
 
-
+- [ ] Bug Report
+- [ ] Feature Request
+- [ ] General Question
 
 ##### **What is the current behavior?**
 
@@ -18,10 +20,6 @@ _**Note: for support questions, please use one of these channels:**_ [Chat: Bull
 
 ##### **Please tell us about your environment:**
 
-- Angular version: 2.0.0-RC.X
-- Browser: [all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView ]
-
-
-
-##### **Other information**
-_(e.g. detailed explanation, screenshots, stacktraces, related issues, suggestions how to fix, links for us to have context, eg. stackoverflow, gitter, etc)_
+- Angular version: <INSERT_VERSION_HERE>
+- Browser: <INSERT_BROWSER_HERE>
+- NodeJS: <INSERT_NODEJS_VERSION_HERE>
