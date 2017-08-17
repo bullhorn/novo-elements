@@ -18,8 +18,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
                 (mouseenter)="selectActive(match)"
                 [class.disabled]="preselected(match)">
                 <item-content>
-                    <span *ngIf="!config.overrideTemplate" [innerHtml]="highlight(match.label, term)"></span>
-                    <custom-picker-result *ngIf="config.overrideTemplate" [match]="match" [template]="config.overrideTemplate"></custom-picker-result>
+                    <span [innerHtml]="highlight(match.label, term)"></span>
                 </item-content>
             </novo-list-item>
         </novo-list>

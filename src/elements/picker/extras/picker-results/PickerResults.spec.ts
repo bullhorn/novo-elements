@@ -5,7 +5,6 @@ import { PickerResults } from './PickerResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoLoadingElement } from '../../../loading/Loading';
 import { NovoListModule } from '../../../list/List.module';
-import { CustomPickerResult } from '../custom-picker-result/CustomPickerResult';
 
 describe('Elements: PickerResults', () => {
     let fixture;
@@ -18,8 +17,7 @@ describe('Elements: PickerResults', () => {
             ],
             declarations: [
                 PickerResults,
-                NovoLoadingElement,
-                CustomPickerResult
+                NovoLoadingElement
             ],
             providers: [
                 { provide: NovoLabelService, useClass: NovoLabelService }

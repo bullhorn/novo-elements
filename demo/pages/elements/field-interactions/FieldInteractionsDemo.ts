@@ -264,15 +264,6 @@ export class FieldInteractionsDemoComponent {
                 API.addStaticOption('picker', 'NEW');
             }
         };
-        let modifyOptionsTemplateFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - modifyOptionsTemplateFunction'); // tslint:disable-line
-            let currentValue = API.getActiveValue();
-            if (!currentValue) {
-                API.modifyPickerConfig('pickerTemplate', { overrideTemplate: null });
-            } else {
-                API.modifyPickerConfig('pickerTemplate', { overrideTemplate: '<h1>{{ match | json }}</h1>' });
-            }
-        };
         let modifyOptionsAsyncFunction = (API: FieldInteractionApi) => {
             console.log('[FieldInteractionDemo] - modifyOptionsAsyncFunction'); // tslint:disable-line
             let currentValue = API.getActiveValue();
@@ -531,21 +522,6 @@ export class FieldInteractionsDemoComponent {
                 options: ['A', 'B', 'C']
             }
         });
-        this.controls.modifyOptions.customPickerControl = new PickerControl({
-            key: 'pickerTemplate',
-            label: 'Standard Picker',
-            config: {
-                options: ['A', 'B', 'C']
-            }
-        });
-        this.controls.modifyOptions.toggleOverrideTemplate = new CheckboxControl({
-            key: 'toggleTemplate',
-            label: 'Custom Picker Results?',
-            description: 'I will provide an "overrideTemplate" to the picker above!',
-            interactions: [
-                { event: 'change', script: modifyOptionsTemplateFunction }
-            ]
-        });
         this.controls.modifyOptions.toggleControl = new CheckboxControl({
             key: 'toggle',
             label: 'Add Option?',
@@ -573,8 +549,6 @@ export class FieldInteractionsDemoComponent {
             this.controls.modifyOptions.selectControl,
             this.controls.modifyOptions.pickerControl,
             this.controls.modifyOptions.toggleControl,
-            this.controls.modifyOptions.toggleOverrideTemplate,
-            this.controls.modifyOptions.customPickerControl,
             this.controls.modifyOptions.makePickerAsyncControl
         ]);
 
@@ -679,8 +653,7 @@ export class FieldInteractionsDemoComponent {
         this.snippets.modifyOptions = {
             'Template': ModifyOptionsTpl,
             'Field Interaction Script (add)': modifyOptionsAddFunction.toString(),
-            'Field Interaction Script (async)': modifyOptionsAsyncFunction.toString(),
-            'Field Interaction Script (override template)': modifyOptionsTemplateFunction.toString(),
+            'Field Interaction Script (async)': modifyOptionsAsyncFunction.toString()
         };
         this.snippets.globals = {
             'Template': GlobalsTpl,
