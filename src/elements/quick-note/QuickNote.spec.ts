@@ -198,8 +198,7 @@ describe('Elements: QuickNoteElement', () => {
                                 type: 3, // CKEDITOR.NODE_TEXT
                                 $: { // The native element
                                     parentElement: {
-                                        offsetTop: 100,
-                                        offsetLeft: 0
+                                        appendChild: () => {}
                                     }
                                 }
                             },
@@ -300,7 +299,7 @@ describe('Elements: QuickNoteElement', () => {
             fakeCkEditorInstance.userPausedAfterEntry();
 
             expect(fakeResultsDropdown.visible).toBe(true);
-            expect(fakeResultsDropdown.nativeElementProperties).toEqual({'margin-top': '120px'});
+            expect(fakeResultsDropdown.nativeElementProperties).toEqual({'margin-top': '30px'});
             expect(fakeParentForm.getValue()).toEqual({
                 note: 'Note about: @john',
                 references: {}
