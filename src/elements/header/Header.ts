@@ -43,6 +43,7 @@ export class UtilActionElement {
                     </span>
                 </ng-container>
             </h1>
+            <ng-content select="section"></ng-content>
             <ng-content select="utils"></ng-content>
         </section>
         <ng-content></ng-content>

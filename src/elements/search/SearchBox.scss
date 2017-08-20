@@ -1,0 +1,67 @@
+novo-search {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    
+    novo-picker {
+        //display: none;
+        padding-bottom: 0;
+        height: 100%;
+        width: 0px;
+        > input {
+            height: 100%;
+            width: 0;
+            display: block;
+            background: rgba(0,0,0,.2);
+            color: white;
+            padding-left: 2.2em;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            position: relative;
+            border: none;
+            font-size: 1.4em;
+            z-index: 12;
+            opacity: 0;
+            transition: background-color 250ms ease-in-out, opacity 150ms ease-in-out, 250ms width ease-in-out;
+            &:focus,
+            &:active {
+                outline: none;
+            }
+            $placeholder-color: rgba(255, 255, 255, 0.5);
+            &::-webkit-input-placeholder {
+                color: $placeholder-color !important;
+            }
+        }
+        > i {
+            display: none;
+        }
+        >div.picker-results-container {
+            margin-top: 0;
+        }
+    }
+    &:hover {
+        >span {
+            color: darken(white, 10%);
+        }
+    }
+    &.active {
+        width: 400px;
+        min-width: 250px;
+        z-index: 1000;
+        > novo-picker {
+            width: inherit;
+            > i {
+                color: white;
+                display: block;
+                z-index: 12;
+                left: 15px;
+                top: 16px;
+                width: 12px;
+            }
+            > input  {     
+                opacity: 1;
+                width: 100%;
+            }
+        }
+    }
+}
