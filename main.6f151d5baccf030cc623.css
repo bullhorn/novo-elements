@@ -9974,14 +9974,41 @@ novo-form {
             novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.disabled i.bhi-calendar {
               color: #bec0c4 !important;
               top: -5px; }
+          novo-dynamic-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active,
+          novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active,
+          novo-dynamic-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active,
+          novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active,
+          novo-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active,
+          novo-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active,
+          novo-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active,
+          novo-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active {
+            margin-bottom: 5px;
+            font-size: 1em !important; }
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active > div,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active > div,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active > div,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active > div,
+            novo-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active > div,
+            novo-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active > div,
+            novo-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active > div,
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active > div {
+              width: 100%; }
           novo-dynamic-form .novo-form-container form div.novo-form-row novo-control .field-message,
+          novo-dynamic-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active,
           novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message,
+          novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active,
           novo-dynamic-form .novo-form-container form td.novo-form-row novo-control .field-message,
+          novo-dynamic-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active,
           novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message,
+          novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active,
           novo-form .novo-form-container form div.novo-form-row novo-control .field-message,
+          novo-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active,
           novo-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message,
+          novo-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active,
           novo-form .novo-form-container form td.novo-form-row novo-control .field-message,
-          novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message {
+          novo-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active,
+          novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message,
+          novo-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active {
             font-size: 0.8em;
             padding: 5px 0;
             -ms-flex-preferred-size: 100%;
@@ -9994,52 +10021,109 @@ novo-form {
             -ms-flex-pack: justify;
                 justify-content: space-between; }
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control .field-message[hidden],
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active[hidden],
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message[hidden],
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active[hidden],
             novo-dynamic-form .novo-form-container form td.novo-form-row novo-control .field-message[hidden],
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active[hidden],
             novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message[hidden],
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active[hidden],
             novo-form .novo-form-container form div.novo-form-row novo-control .field-message[hidden],
+            novo-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active[hidden],
             novo-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message[hidden],
+            novo-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active[hidden],
             novo-form .novo-form-container form td.novo-form-row novo-control .field-message[hidden],
-            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message[hidden] {
+            novo-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active[hidden],
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message[hidden],
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active[hidden] {
               display: block !important;
               visibility: hidden; }
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-control .field-message.has-tip,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active.has-tip,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message.has-tip,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active.has-tip,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-control .field-message.has-tip,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active.has-tip,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message.has-tip,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active.has-tip,
+            novo-form .novo-form-container form div.novo-form-row novo-control .field-message.has-tip,
+            novo-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active.has-tip,
+            novo-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message.has-tip,
+            novo-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active.has-tip,
+            novo-form .novo-form-container form td.novo-form-row novo-control .field-message.has-tip,
+            novo-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active.has-tip,
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message.has-tip,
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active.has-tip {
+              margin-bottom: 0; }
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control .field-message .character-count,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active .character-count,
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message .character-count,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active .character-count,
             novo-dynamic-form .novo-form-container form td.novo-form-row novo-control .field-message .character-count,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active .character-count,
             novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .character-count,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active .character-count,
             novo-form .novo-form-container form div.novo-form-row novo-control .field-message .character-count,
+            novo-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active .character-count,
             novo-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message .character-count,
+            novo-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active .character-count,
             novo-form .novo-form-container form td.novo-form-row novo-control .field-message .character-count,
-            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .character-count {
+            novo-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active .character-count,
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .character-count,
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active .character-count {
               font-size: 12px;
               color: #999999; }
               novo-dynamic-form .novo-form-container form div.novo-form-row novo-control .field-message .character-count.error,
+              novo-dynamic-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active .character-count.error,
               novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message .character-count.error,
+              novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active .character-count.error,
               novo-dynamic-form .novo-form-container form td.novo-form-row novo-control .field-message .character-count.error,
+              novo-dynamic-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active .character-count.error,
               novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .character-count.error,
+              novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active .character-count.error,
               novo-form .novo-form-container form div.novo-form-row novo-control .field-message .character-count.error,
+              novo-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active .character-count.error,
               novo-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message .character-count.error,
+              novo-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active .character-count.error,
               novo-form .novo-form-container form td.novo-form-row novo-control .field-message .character-count.error,
-              novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .character-count.error {
+              novo-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active .character-count.error,
+              novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .character-count.error,
+              novo-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active .character-count.error {
                 color: #DA4453; }
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-control .field-message .messages,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active .messages,
             novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message .messages,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active .messages,
             novo-dynamic-form .novo-form-container form td.novo-form-row novo-control .field-message .messages,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active .messages,
             novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .messages,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active .messages,
             novo-form .novo-form-container form div.novo-form-row novo-control .field-message .messages,
+            novo-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active .messages,
             novo-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message .messages,
+            novo-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active .messages,
             novo-form .novo-form-container form td.novo-form-row novo-control .field-message .messages,
-            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .messages {
+            novo-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active .messages,
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .messages,
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active .messages {
               -ms-flex: 1;
                   flex: 1; }
               novo-dynamic-form .novo-form-container form div.novo-form-row novo-control .field-message .messages span.error-text,
+              novo-dynamic-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active .messages span.error-text,
               novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message .messages span.error-text,
+              novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active .messages span.error-text,
               novo-dynamic-form .novo-form-container form td.novo-form-row novo-control .field-message .messages span.error-text,
+              novo-dynamic-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active .messages span.error-text,
               novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .messages span.error-text,
+              novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active .messages span.error-text,
               novo-form .novo-form-container form div.novo-form-row novo-control .field-message .messages span.error-text,
+              novo-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active .messages span.error-text,
               novo-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message .messages span.error-text,
+              novo-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active .messages span.error-text,
               novo-form .novo-form-container form td.novo-form-row novo-control .field-message .messages span.error-text,
-              novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .messages span.error-text {
+              novo-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active .messages span.error-text,
+              novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .messages span.error-text,
+              novo-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active .messages span.error-text {
                 color: #DA4453;
                 padding-bottom: 5px;
                 padding-right: 5px;
@@ -10048,13 +10132,21 @@ novo-form {
                 display: -ms-flexbox;
                 display: flex; }
               novo-dynamic-form .novo-form-container form div.novo-form-row novo-control .field-message .messages .description,
+              novo-dynamic-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active .messages .description,
               novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message .messages .description,
+              novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active .messages .description,
               novo-dynamic-form .novo-form-container form td.novo-form-row novo-control .field-message .messages .description,
+              novo-dynamic-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active .messages .description,
               novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .messages .description,
+              novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active .messages .description,
               novo-form .novo-form-container form div.novo-form-row novo-control .field-message .messages .description,
+              novo-form .novo-form-container form div.novo-form-row novo-control novo-tip-well.active .messages .description,
               novo-form .novo-form-container form div.novo-form-row novo-custom-control-container .field-message .messages .description,
+              novo-form .novo-form-container form div.novo-form-row novo-custom-control-container novo-tip-well.active .messages .description,
               novo-form .novo-form-container form td.novo-form-row novo-control .field-message .messages .description,
-              novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .messages .description {
+              novo-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active .messages .description,
+              novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .messages .description,
+              novo-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active .messages .description {
                 display: -ms-flexbox;
                 display: flex;
                 padding-bottom: 5px;
@@ -11554,10 +11646,25 @@ novo-form {
         novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container .novo-control-outer-container .select,
         novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container .novo-control-outer-container .tiles {
           margin-top: 0.5em; }
+      novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container novo-tip-well.active,
+      novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container novo-tip-well.active,
+      novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container novo-tip-well.active,
+      novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container novo-tip-well.active {
+        margin-bottom: 5px;
+        font-size: 1em !important; }
+        novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container novo-tip-well.active > div,
+        novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container novo-tip-well.active > div,
+        novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container novo-tip-well.active > div,
+        novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container novo-tip-well.active > div {
+          width: 100%; }
       novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container .field-message,
+      novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container novo-tip-well.active,
       novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container .field-message,
+      novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container novo-tip-well.active,
       novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container .field-message,
-      novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container .field-message {
+      novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container novo-tip-well.active,
+      novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container .field-message,
+      novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container novo-tip-well.active {
         -ms-flex-pack: justify;
             justify-content: space-between;
         display: -ms-flexbox;
@@ -11565,10 +11672,36 @@ novo-form {
         margin-left: 22px;
         padding-left: 0; }
         novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container .field-message .messages,
+        novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container novo-tip-well.active .messages,
         novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container .field-message .messages,
+        novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container novo-tip-well.active .messages,
         novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container .field-message .messages,
-        novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container .field-message .messages {
+        novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container novo-tip-well.active .messages,
+        novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container .field-message .messages,
+        novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container novo-tip-well.active .messages {
           min-height: 10px; }
+        novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container .field-message.has-tip,
+        novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container novo-tip-well.active.has-tip,
+        novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container .field-message.has-tip,
+        novo-dynamic-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container novo-tip-well.active.has-tip,
+        novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container .field-message.has-tip,
+        novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-control .novo-control-container novo-tip-well.active.has-tip,
+        novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container .field-message.has-tip,
+        novo-form[layout="vertical"] .novo-form-container form div.novo-form-row novo-custom-control-container .novo-control-container novo-tip-well.active.has-tip {
+          margin-bottom: 0; }
+
+control-confirm-modal h2 {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center; }
+  control-confirm-modal h2 i {
+    font-size: 0.8em;
+    margin: 0 0.5em; }
+  control-confirm-modal h2 label {
+    margin-right: 10px; }
 
 @keyframes iconEnter {
   0% {
@@ -12155,31 +12288,32 @@ novo-slider {
       novo-slider .indicators .indicator-circle.active {
         opacity: 1; }
 
-novo-tip-well {
+novo-tip-well.active {
   display: inline-block;
   margin-bottom: 1em; }
-  novo-tip-well > div {
-    display: inline-block;
-    border-radius: .25em;
-    background-color: #f4f4f4;
-    color: #3D464D;
-    padding: 1em;
-    text-align: right; }
-    novo-tip-well > div > div {
-      display: -ms-flexbox;
-      display: flex; }
-      novo-tip-well > div > div > i {
-        -ms-flex-negative: 0;
-            flex-shrink: 0;
-        text-align: center;
-        margin-top: .3em;
-        margin-right: 10px;
-        color: #aaaaaa; }
-      novo-tip-well > div > div > p {
-        width: 100%;
-        max-width: 33em;
-        text-align: left;
-        padding-top: 6px; }
+
+novo-tip-well > div {
+  display: inline-block;
+  border-radius: .25em;
+  background-color: #f4f4f4;
+  color: #3D464D;
+  padding: 1em;
+  text-align: right; }
+  novo-tip-well > div > div {
+    display: -ms-flexbox;
+    display: flex; }
+    novo-tip-well > div > div > i {
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
+      text-align: center;
+      margin-top: .3em;
+      margin-right: 10px;
+      color: #aaaaaa; }
+    novo-tip-well > div > div > p {
+      width: 100%;
+      max-width: 33em;
+      text-align: left;
+      padding-top: 6px; }
 
 novo-editor .cke {
   font: inherit !important;
@@ -12586,7 +12720,9 @@ html {
       height: 100%;
       width: 100%; }
 
-*, *:after, *:before {
+*,
+*:after,
+*:before {
   box-sizing: border-box; }
 
 html {
@@ -12596,13 +12732,17 @@ html {
     margin: 0;
     padding: 0;
     position: relative;
-    overflow: scroll;
+    overflow: auto;
     background: #ffffff; }
     html body demo-app {
       height: 100%;
       width: 100%;
       box-sizing: border-box;
       display: block; }
+
+code-snippet,
+multi-code-snippet {
+  margin-bottom: 20px; }
 
 /* Contains all Design Page /Component Demo Page SCSS imports
 starting at line 82. >>
@@ -12619,7 +12759,7 @@ main.main-content {
       font-size: 14px;
       vertical-align: middle; }
   main.main-content .example {
-    margin-top: 25px;
+    margin-top: 10px;
     border: 1px solid #E9EAEA;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
@@ -12758,7 +12898,8 @@ nav.main-nav {
   height: 100vh;
   color: #ffffff;
   background-color: #1B2127;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  z-index: 1000; }
   nav.main-nav .fork-me {
     width: 80%;
     margin: 20px auto 40px;
@@ -12949,15 +13090,10 @@ nav.main-nav {
   nav.main-nav .menu-item:nth-child(40).current ~ .menu-line {
     transform: translate3d(0, 3900%, 0); }
 
-/* Base16 Atelier Plateau Light - Theme */
-/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/plateau) */
-/* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
-/* Atelier-Plateau Comment */
 .hljs-comment,
 .hljs-quote {
   color: #655d5d; }
 
-/* Atelier-Plateau Red */
 .hljs-variable,
 .hljs-template-variable,
 .hljs-attribute,
@@ -12970,7 +13106,6 @@ nav.main-nav {
 .hljs-selector-class {
   color: #ca4949; }
 
-/* Atelier-Plateau Orange */
 .hljs-number,
 .hljs-meta,
 .hljs-built_in,
@@ -12980,18 +13115,15 @@ nav.main-nav {
 .hljs-params {
   color: #b45a3c; }
 
-/* Atelier-Plateau Green */
 .hljs-string,
 .hljs-symbol,
 .hljs-bullet {
   color: #4b8b8b; }
 
-/* Atelier-Plateau Blue */
 .hljs-title,
 .hljs-section {
   color: #7272ca; }
 
-/* Atelier-Plateau Purple */
 .hljs-keyword,
 .hljs-selector-tag {
   color: #8464c4; }
@@ -13169,100 +13301,100 @@ color header {
       height: 32px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 33px;
-      height: 33px; }
+      width: 26px;
+      height: 26px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 29px;
-      height: 29px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 37px;
-      height: 37px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 33px;
-      height: 33px; }
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
       width: 44px;
       height: 44px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
-      width: 26px;
-      height: 26px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-submission {
       background: #a9adbb;
-      width: 30px;
-      height: 30px; }
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-sendout {
       background: #747884;
-      width: 33px;
-      height: 33px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
-      width: 37px;
-      height: 37px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 37px;
-      height: 37px; }
-    color header .background-boxes .bb-task {
-      background: #4f5361;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-distributionList {
-      background: #4f5361;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-credential {
-      background: #4f5361;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-user {
-      background: #4f5361;
       width: 43px;
       height: 43px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 35px;
+      height: 35px; }
+    color header .background-boxes .bb-task {
+      background: #4f5361;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-distributionList {
+      background: #4f5361;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-credential {
+      background: #4f5361;
+      width: 36px;
+      height: 36px; }
+    color header .background-boxes .bb-user {
+      background: #4f5361;
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-corporateuser {
       background: #4f5361;
       width: 39px;
       height: 39px; }
     color header .background-boxes .bb-aqua {
       background: #3BAFDA;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-carnation {
-      background: #D770AD;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-lavender {
-      background: #967ADC;
       width: 29px;
       height: 29px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 44px;
+      height: 44px; }
+    color header .background-boxes .bb-carnation {
+      background: #D770AD;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-lavender {
+      background: #967ADC;
+      width: 39px;
+      height: 39px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -14316,10 +14448,54 @@ date-picker-demo .example.side-by-side-demo {
     .date-picker-demo-side-by-side > novo-date-picker:last-child {
       margin-right: 0; }
 
+field-interactions-demo .example.field-interaction-demo > novo-form,
+field-interactions-demo .example.field-interaction-demo > novo-dynamic-form {
+  margin-top: 20px; }
+
+field-interactions-demo .example.field-interaction-demo > novo-dynamic-form {
+  max-width: 100%; }
+  field-interactions-demo .example.field-interaction-demo > novo-dynamic-form novo-fieldset-header {
+    margin-left: 0;
+    margin-right: 0; }
+
+field-interactions-demo .final-value {
+  color: #afafaf;
+  padding: 10px;
+  background: #f4f4f4; }
+
+field-interactions-demo label {
+  font-weight: bold;
+  font-style: italic; }
+
+field-interactions-demo pre.field-config {
+  margin-bottom: 0; }
+
+field-interactions-demo main.tabs {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap; }
+  field-interactions-demo main.tabs novo-nav {
+    background: rgba(0, 0, 0, 0.03) !important; }
+    field-interactions-demo main.tabs novo-nav .novo-tab-link {
+      padding: 0;
+      font-size: 12px;
+      white-space: normal; }
+  field-interactions-demo main.tabs novo-nav-outlet {
+    padding: 0 25px; }
+    field-interactions-demo main.tabs novo-nav-outlet h5 {
+      padding-top: 0 !important; }
+    field-interactions-demo main.tabs novo-nav-outlet multi-code-snippet {
+      margin-bottom: 0 !important; }
+    field-interactions-demo main.tabs novo-nav-outlet novo-form {
+      border-bottom: 1px solid #E9EAEA; }
+
 .pipes-demo {
   padding-left: 5px; }
 
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.1903502ff66610b1198f.bundle.map*/
+/*# sourceMappingURL=main.6f151d5baccf030cc623.bundle.map*/
