@@ -4,7 +4,7 @@ import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../../uti
 @Component({
     selector: 'novo-calendar-month-day',
     template: `
-    <template #defaultTemplate>
+    <ng-template #defaultTemplate>
       <div class="calendar-day-top">
         <span class="calendar-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
         <span class="calendar-day-number">{{ day.date | dayofmonth:locale }}</span>
@@ -19,8 +19,8 @@ import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../../uti
           {{type?.value.length}}
         </div>
       </div>
-    </template>
-    <template
+    </ng-template>
+    <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
       [ngOutletContext]="{
         day: day,
@@ -31,7 +31,7 @@ import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../../uti
         rejected: rejected,
         maybes: maybes
       }">
-    </template>
+    </ng-template>
   `,
     host: {
         '[class]': '"calendar-cell calendar-day-cell " + day?.cssClass',

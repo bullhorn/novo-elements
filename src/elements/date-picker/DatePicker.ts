@@ -1,6 +1,7 @@
 // NG2
-import { ElementRef, Component, EventEmitter, forwardRef, trigger, state, style, transition, animate, Input, Output, OnInit } from '@angular/core';
+import { ElementRef, Component, EventEmitter, forwardRef, Input, Output, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 // Vendor
 import * as dateFns from 'date-fns';
 // APP

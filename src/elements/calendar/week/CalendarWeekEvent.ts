@@ -2,9 +2,9 @@ import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/co
 import { WeekViewEvent } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
-  selector: 'novo-calendar-week-event',
-  template: `
-    <template #defaultTemplate>
+    selector: 'novo-calendar-week-event',
+    template: `
+    <ng-template #defaultTemplate>
       <div
         class="cal-event"
         [class.cal-starts-within-week]="!weekEvent.startsBeforeWeek"
@@ -17,21 +17,21 @@ import { WeekViewEvent } from '../../../utils/calendar-utils/CalendarUtils';
         <div class="cal-event-title">{{weekEvent.event?.title}}</div>
         <div class="cal-event-description">{{weekEvent.event?.description}}</div>
       </div>
-    </template>
-    <template
+    </ng-template>
+    <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
       [ngOutletContext]="{weekEvent: weekEvent, tooltipPosition: tooltipPosition, eventClicked: eventClicked}">
-    </template>
+    </ng-template>
   `
 })
 export class NovoCalendarWeekEventElement {
 
-  @Input() weekEvent: WeekViewEvent;
+    @Input() weekEvent: WeekViewEvent;
 
-  @Input() tooltipPosition: string;
+    @Input() tooltipPosition: string;
 
-  @Input() customTemplate: TemplateRef<any>;
+    @Input() customTemplate: TemplateRef<any>;
 
-  @Output() eventClicked: EventEmitter<any> = new EventEmitter();
+    @Output() eventClicked: EventEmitter<any> = new EventEmitter();
 
 }

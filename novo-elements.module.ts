@@ -1,6 +1,7 @@
 // NG2
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // APP
 import { NovoPipesModule } from './src/pipes/Pipes.module';
 import { NovoButtonModule } from './src/elements/button/Button.module';
@@ -43,7 +44,8 @@ import { FormUtils } from './src/utils/form-utils/FormUtils';
 
 @NgModule({
     imports: [
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BrowserAnimationsModule
     ],
     exports: [
         NovoPipesModule,

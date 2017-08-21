@@ -4,14 +4,14 @@ export class MovieDataProvider extends PagedArrayCollection<any> {
     // http://www.omdbapi.com/?s=Star&y=2016&plot=short&r=json&page=2
     totalResults = 0;
     pagesLoaded = 0;
-    loading:boolean = false;
+    loading: boolean = false;
 
-    constructor(source:Array<any> = []) {
+    constructor(source: Array<any> = []) {
         super(source);
         this.refresh();
     }
 
-    isLoading():boolean {
+    isLoading(): boolean {
         return this.loading;
     }
 
@@ -19,22 +19,22 @@ export class MovieDataProvider extends PagedArrayCollection<any> {
         return this.totalResults;
     }
 
-    get filter():any {
+    get filter(): any {
         return this._filter;
     }
 
-    set filter(value:any) {
+    set filter(value: any) {
         this._filter = value;
         this.pagesLoaded = 0;
         this.removeAll();
         this.refresh();
     }
 
-    get sort():Array<any> {
+    get sort(): Array<any> {
         return this._sort;
     }
 
-    set sort(value:Array<any>) {
+    set sort(value: Array<any>) {
         this._sort = value;
         this.pagesLoaded = 0;
         this.removeAll();
@@ -49,20 +49,20 @@ export class MovieDataProvider extends PagedArrayCollection<any> {
             let type = (this.filter.Type) ? this.filter.Type : '';
             return fetch(`http://www.omdbapi.com/?s=${search}&y=${year}&type=${type}&plot=short&r=json&page=${this.pagesLoaded}`)
                 .then(response => response.json())
-                .then((result:any) => {
-                    this.addItems(result.Search);
-                    this.totalResults = result.totalResults;
+                .then((r: any) => {
+                    this.addItems(r.Search);
+                    this.totalResults = r.totalResults;
                     return this.loadMore();
                 });
         }
         let start = (this.page - 1) * this.pageSize;
-        let end = start + this.pageSize; ;
+        let end = start + this.pageSize;
         let result = this.source.slice(start, end);
         this.loading = false;
         return Promise.resolve(result);
     }
 
-    needMore():boolean {
+    needMore(): boolean {
         let recordsNeeded = this.page * this.pageSize;
         return (this.source.length < recordsNeeded);
     }
@@ -71,7 +71,7 @@ export class MovieDataProvider extends PagedArrayCollection<any> {
         this.loading = true;
         this.filterData = this.source.slice();
         setTimeout(() => {
-            this.loadMore().then((results:Array<any>) => {
+            this.loadMore().then((results: Array<any>) => {
                 this.onDataChange(new CollectionEvent(CollectionEvent.CHANGE, results));
             });
         }, 1000);

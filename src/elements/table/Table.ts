@@ -151,27 +151,27 @@ export enum NovoTableMode {
                             {{labels.selectedRecords(selected.length)}} <a (click)="selectAll(true)" data-automation-id="all-matching-records">{{labels.totalRecords(dataProvider.total)}}</a>
                         </td>
                     </tr>
-                    <template ngFor let-row="$implicit" let-i="index" [ngForOf]="rows">
-                           <tr class="table-row" [ngClass]="row.customClass || ''" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
-                                <td class="row-actions" *ngIf="config.hasDetails">
-                                    <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
-                                    <button theme="icon" icon="sort-desc" (click)="row._expanded=!row._expanded" *ngIf="row._expanded"></button>
-                                </td>
-                                <td class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
-                                    <novo-checkbox [(ngModel)]="row._selected" (ngModelChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></novo-checkbox>
-                                </td>
-                                <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name" [class.novo-form-row]="editable" [hidden]="isColumnHidden(column)">
-                                    <novo-table-cell *ngIf="row._editing && !row._editing[column.name]" [hasEditor]="editable" [column]="column" [row]="row" [form]="tableForm.controls.rows.controls[i]"></novo-table-cell>
-                                    <novo-control *ngIf="row._editing && row._editing[column.name]" condensed="true" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]"></novo-control>
-                                </td>
-                            </tr>
-                            <tr class="details-row" *ngIf="config.hasDetails" [hidden]="!row._expanded" [attr.data-automation-id]="'details-row-'+row.id">
-                                <td class="row-actions"></td>
-                                <td [attr.colspan]="columns.length">
-                                    <novo-row-details [data]="row" [renderer]="config.detailsRenderer"></novo-row-details>
-                                </td>
-                            </tr>
-                    </template>
+                    <ng-template ngFor let-row="$implicit" let-i="index" [ngForOf]="rows">
+                        <tr class="table-row" [ngClass]="row.customClass || ''" [attr.data-automation-id]="row.id" (click)="rowClickHandler(row)" [class.active]="row.id === activeId">
+                            <td class="row-actions" *ngIf="config.hasDetails">
+                                <button theme="icon" icon="next" (click)="row._expanded=!row._expanded" *ngIf="!row._expanded"></button>
+                                <button theme="icon" icon="sort-desc" (click)="row._expanded=!row._expanded" *ngIf="row._expanded"></button>
+                            </td>
+                            <td class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
+                                <novo-checkbox [(ngModel)]="row._selected" (ngModelChange)="rowSelectHandler(row)" data-automation-id="select-row-checkbox"></novo-checkbox>
+                            </td>
+                            <td *ngFor="let column of columns" [attr.data-automation-id]="column.id || column.name" [class.novo-form-row]="editable" [hidden]="isColumnHidden(column)">
+                                <novo-table-cell *ngIf="row._editing && !row._editing[column.name]" [hasEditor]="editable" [column]="column" [row]="row" [form]="tableForm.controls.rows.controls[i]"></novo-table-cell>
+                                <novo-control *ngIf="row._editing && row._editing[column.name]" condensed="true" [form]="tableForm.controls.rows.controls[i]" [control]="row.controls[column.name]"></novo-control>
+                            </td>
+                        </tr>
+                        <tr class="details-row" *ngIf="config.hasDetails" [hidden]="!row._expanded" [attr.data-automation-id]="'details-row-'+row.id">
+                            <td class="row-actions"></td>
+                            <td [attr.colspan]="columns.length">
+                                <novo-row-details [data]="row" [renderer]="config.detailsRenderer"></novo-row-details>
+                            </td>
+                        </tr>
+                    </ng-template>
                 </tbody>
                 <!-- NO TABLE DATA PLACEHOLDER -->
                 <tbody class="table-message" *ngIf="dataProvider.isEmpty() && !dataProvider.isFiltered() && !editing" data-automation-id="empty-table">
