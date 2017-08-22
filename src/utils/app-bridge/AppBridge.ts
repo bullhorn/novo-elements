@@ -10,16 +10,22 @@ export enum AppBridgeHandler {
     REFRESH,
     PIN,
     REGISTER,
-    UPDATE
+    UPDATE,
+    REQUEST_DATA
 }
 
-export type NovoApps = 'record' | 'add' | 'fast-add';
+export type NovoApps = 'record' | 'add' | 'fast-add' | 'custom';
 export interface IAppBridgeOpenEvent {
     type: NovoApps;
     entityType: string;
     entityId?: string;
     data?: any;
     passthrough?: string;
+}
+
+export type NovoDataType = 'entitlements' | 'settings' | 'user';
+export interface IAppBridgeRequestDataEvent {
+    type: NovoDataType
 }
 
 const HTTP_VERBS = {
@@ -40,7 +46,8 @@ const MESSAGE_TYPES = {
     HTTP_POST: 'httpPOST',
     HTTP_PUT: 'httpPUT',
     HTTP_DELETE: 'httpDELETE',
-    CUSTOM_EVENT: 'customEvent'
+    CUSTOM_EVENT: 'customEvent',
+    REQUEST_DATA: 'requestData'
 };
 
 declare const postRobot: any;
@@ -128,6 +135,13 @@ export class AppBridge {
         postRobot.on(MESSAGE_TYPES.PIN, (event) => {
             this._trace(MESSAGE_TYPES.PIN, event);
             return this.pin(event.data).then(success => {
+                return { success };
+            });
+        });
+        // REQUEST_DATA
+        postRobot.on(MESSAGE_TYPES.REQUEST_DATA, (event) => {
+            this._trace(MESSAGE_TYPES.REQUEST_DATA, event);
+            return this.requestData(event.data).then(success => {
                 return { success };
             });
         });
@@ -296,8 +310,8 @@ export class AppBridge {
     }
 
     /**
-     * Fires or responds to an close event
-     * @param packet any - packet of data to send with the close event
+     * Fires or responds to a pin event
+     * @param packet any - packet of data to send with the pin event
      */
     public pin(packet: any): Promise<boolean> {
         Object.assign(packet, { id: this.id, windowName: this.windowName });
@@ -315,6 +329,36 @@ export class AppBridge {
                     this._trace(`${MESSAGE_TYPES.PIN} (callback)`, event);
                     if (event.data) {
                         resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                }).catch((err) => {
+                    reject(false);
+                });
+            }
+        });
+    }
+
+     /**
+     * Fires or responds to a requestData event
+     * @param packet any - packet of data to send with the requestData event
+     */
+    public requestData(packet: any): Promise<any> {
+        Object.assign(packet, { id: this.id, windowName: this.windowName });
+        return new Promise<any>((resolve, reject) => {
+            if (this._handlers[AppBridgeHandler.REQUEST_DATA]) {
+                this._handlers[AppBridgeHandler.REQUEST_DATA](packet, (data: any) => {
+                    if (data) {
+                        resolve({ data });
+                    } else {
+                        reject(false);
+                    }
+                });
+            } else {
+                postRobot.sendToParent(MESSAGE_TYPES.REQUEST_DATA, packet).then((event) => {
+                    this._trace(`${MESSAGE_TYPES.REQUEST_DATA} (callback)`, event);
+                    if (event.data) {
+                        resolve({ data: event.data.data });
                     } else {
                         reject(false);
                     }
