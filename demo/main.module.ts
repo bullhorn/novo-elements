@@ -1,6 +1,7 @@
 // NG2
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule, Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Vendor
@@ -119,6 +120,7 @@ export function provideFieldInteractionAPI(toast, modal, formUtils, http, labels
     ],
     imports: [
         // NG2
+        BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
         HttpModule,
