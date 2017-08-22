@@ -1,5 +1,5 @@
 // NG2
-import { ElementRef, Component, EventEmitter, forwardRef, Input, Output, OnInit } from '@angular/core';
+import { ElementRef, Component, EventEmitter, forwardRef, Input, Output, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 // Vendor
@@ -132,6 +132,8 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     @Input() range: any;
     // Select callback for output
     @Output() onSelect: EventEmitter<any> = new EventEmitter(false);
+    @ViewChild(TemplateRef) template: TemplateRef<any>;
+
     // List of all the weekdays
     weekdays: string[] = [];
     // List of all months
