@@ -25,7 +25,7 @@ export interface IAppBridgeOpenEvent {
 
 export type NovoDataType = 'entitlements' | 'settings' | 'user';
 export interface IAppBridgeRequestDataEvent {
-    type: NovoDataType
+    type: NovoDataType;
 }
 
 const HTTP_VERBS = {
@@ -339,10 +339,10 @@ export class AppBridge {
         });
     }
 
-     /**
-     * Fires or responds to a requestData event
-     * @param packet any - packet of data to send with the requestData event
-     */
+    /**
+    * Fires or responds to a requestData event
+    * @param packet any - packet of data to send with the requestData event
+    */
     public requestData(packet: any): Promise<any> {
         Object.assign(packet, { id: this.id, windowName: this.windowName });
         return new Promise<any>((resolve, reject) => {
