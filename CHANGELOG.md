@@ -1,3 +1,13 @@
+<a name="2.0.254"></a>
+## [2.0.254](https://github.com/bullhorn/novo-elements/compare/v2.0.253...v2.0.254) (2017-08-22)
+
+
+### Bug Fixes
+
+* **appbridge:** linting issue ([53d39a7](https://github.com/bullhorn/novo-elements/commit/53d39a7))
+
+
+
 <a name="2.0.253"></a>
 ## [2.0.253](https://github.com/bullhorn/novo-elements/compare/v2.0.252...v2.0.253) (2017-08-21)
 
