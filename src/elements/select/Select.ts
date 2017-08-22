@@ -145,18 +145,18 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
                     this.saveHeader();
                     return;
                 }
-                this.select(this.options[this.selectedIndex], this.selectedIndex);
+                this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
                 this.toggleActive();
                 return;
             }
 
             if (event.keyCode === KeyCodes.UP && this.selectedIndex > 0) {
                 this.selectedIndex--;
-                this.select(this.options[this.selectedIndex], this.selectedIndex);
+                this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
                 this.scrollToSelected();
             } else if (event.keyCode === KeyCodes.DOWN && this.selectedIndex < this.options.length - 1) {
                 this.selectedIndex++;
-                this.select(this.options[this.selectedIndex], this.selectedIndex);
+                this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
                 this.scrollToSelected();
                 if (this.header.open) {
                     this.toggleHeader(null, false);
