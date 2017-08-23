@@ -1,3 +1,13 @@
+<a name="2.0.255"></a>
+## [2.0.255](https://github.com/bullhorn/novo-elements/compare/v2.0.254...v2.0.255) (2017-08-23)
+
+
+### Bug Fixes
+
+* **select:** Fixing select searching and selecting ([#535](https://github.com/bullhorn/novo-elements/issues/535)) ([382c970](https://github.com/bullhorn/novo-elements/commit/382c970))
+
+
+
 <a name="2.0.254"></a>
 ## [2.0.254](https://github.com/bullhorn/novo-elements/compare/v2.0.253...v2.0.254) (2017-08-22)
 
