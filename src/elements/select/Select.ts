@@ -174,11 +174,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
                 let item = element.querySelector(`[data-automation-value^="${this.filterTerm}" i]`);
                 if (item) {
                     list.scrollTop = item.offsetTop;
-<<<<<<< HEAD
-                    let listItems = Array.from(list.querySelectorAll('li')).map((e: any) => e.getAttribute('data-automation-value'));
-=======
-                    let listItems = Array.from(list.querySelectorAll('li')).map((element: any) => element.getAttribute('data-automation-value')).filter(value => value);
->>>>>>> 382c970bc4e010b23ed616f78bfbd1d3e8f8fa65
+                    let listItems = Array.from(list.querySelectorAll('li')).map((e: any) => e.getAttribute('data-automation-value')).filter(value => value);
                     this.selectedIndex = listItems.indexOf(item.getAttribute('data-automation-value'));
                     this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
                 }
