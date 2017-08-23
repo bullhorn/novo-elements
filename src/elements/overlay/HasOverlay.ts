@@ -36,7 +36,7 @@ import { of as observableOf } from 'rxjs/observable/of';
 export class HasOverlay {
 
     protected _overlayRef: OverlayRef | null;
-    protected _portal: TemplatePortal;
+    protected _portal: any; // TODO - type me!
     protected _panelOpen: boolean = false;
 
     /** Strategy that is used to position the panel. */
@@ -100,7 +100,7 @@ export class HasOverlay {
         }
     }
 
-    onClosingAction(event:any): void {
+    onClosingAction(event: any): void {
         this.closePanel();
     }
 
