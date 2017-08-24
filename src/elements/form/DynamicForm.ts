@@ -8,7 +8,7 @@ import { NovoFieldset, NovoFormGroup } from './FormInterfaces';
 @Component({
     selector: 'novo-fieldset-header',
     template: `
-        <h6><i [class]="icon"></i>{{title}}</h6>
+        <h6><i [class]="icon || 'bhi-section'"></i>{{title}}</h6>
     `
 })
 export class NovoFieldsetHeaderElement {
