@@ -375,7 +375,7 @@ export class FormUtils {
                         }
                         fieldsets.push({
                             title: item.label,
-                            icon: (item.icon) ? item.icon : 'bhi-section',
+                            icon: item.icon || 'bhi-section',
                             controls: []
                         });
                         ranges.push({
