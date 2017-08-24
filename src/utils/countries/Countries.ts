@@ -9791,10 +9791,7 @@ export const COUNTRIES = [
         id: 2447,
         code: 'SS',
         name: 'South Sudan',
-        states: {
-            total: 10,
-            data: []
-        }
+        states: []
     }
 ];
 
