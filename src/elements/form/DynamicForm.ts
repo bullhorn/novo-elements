@@ -8,11 +8,12 @@ import { NovoFieldset, NovoFormGroup } from './FormInterfaces';
 @Component({
     selector: 'novo-fieldset-header',
     template: `
-        <h6><i class="bhi-section"></i>{{title}}</h6>
+        <h6><i [class]="icon || 'bhi-section'"></i>{{title}}</h6>
     `
 })
 export class NovoFieldsetHeaderElement {
     @Input() title: string;
+    @Input() icon: string;
 }
 
 @Component({
@@ -45,7 +46,7 @@ export class NovoControlCustom implements OnInit {
     selector: 'novo-fieldset',
     template: `
         <div class="novo-fieldset-container">
-            <novo-fieldset-header [title]="title" *ngIf="title"></novo-fieldset-header>
+            <novo-fieldset-header [icon]="icon" [title]="title" *ngIf="title"></novo-fieldset-header>
             <div *ngFor="let control of controls" class="novo-form-row" [class.disabled]="control.disabled">
                 <novo-control *ngIf="!control.customControl" [control]="control" [form]="form"></novo-control>
                 <novo-control-custom *ngIf="control.customControl" [control]="control" [form]="form"></novo-control-custom>
@@ -57,6 +58,7 @@ export class NovoFieldsetElement {
     @Input() controls: Array<any> = [];
     @Input() form: any;
     @Input() title: string;
+    @Input() icon: string;
 }
 
 @Component({
@@ -69,7 +71,7 @@ export class NovoFieldsetElement {
             </header>
             <form class="novo-form" [formGroup]="form" autocomplete="off">
                 <span *ngFor="let fieldset of form.fieldsets">
-                    <novo-fieldset *ngIf="fieldset.controls.length" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
+                    <novo-fieldset *ngIf="fieldset.controls.length" [icon]="fieldset.icon" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
                 </span>
             </form>
         </div>

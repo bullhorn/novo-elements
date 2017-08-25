@@ -10,5 +10,6 @@ export interface NovoFormGroup {
 
 export interface NovoFieldset {
     title?: string;
+    icon?: string;
     controls: any[];
 }
