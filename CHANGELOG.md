@@ -1,3 +1,14 @@
+<a name="2.0.258"></a>
+## [2.0.258](https://github.com/bullhorn/novo-elements/compare/v2.0.257...v2.0.258) (2017-08-25)
+
+
+### Features
+
+* **forms:** Custom section header icons for dynamic forms ([#538](https://github.com/bullhorn/novo-elements/issues/538)) ([5ef07b5](https://github.com/bullhorn/novo-elements/commit/5ef07b5))
+* **forms:** Updating the county/state data ([b60549a](https://github.com/bullhorn/novo-elements/commit/b60549a))
+
+
+
 <a name="2.0.257"></a>
 ## [2.0.257](https://github.com/bullhorn/novo-elements/compare/v2.0.256...v2.0.257) (2017-08-23)
 
