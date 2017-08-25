@@ -55,7 +55,7 @@
   },
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "dependencies": {
-    "@angular/cdk": "git+ssh://git@github.com:angular/cdk-builds.git",
+    "@angular/cdk": "http://git@github.com:angular/cdk-builds.git",
     "@types/dragula": "2.1.29",
     "angular2-text-mask": "^8.0.2",
     "date-fns": "^1.28.2",
