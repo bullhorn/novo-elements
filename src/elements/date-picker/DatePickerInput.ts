@@ -174,6 +174,9 @@ export class NovoDatePickerInputElement extends HasOverlay implements OnDestroy,
     }
 
     public formatDateValue(value) {
+        if (!value) {
+            return '';
+        }
         return this.labels.formatDateWithFormat(value, {
             month: 'numeric',
             day: 'numeric',

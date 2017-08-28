@@ -173,6 +173,9 @@ export class NovoTimePickerInputElement extends HasOverlay implements OnDestroy,
     }
 
     public formatDateValue(value) {
+        if (!value) {
+            return '';
+        }
         return this.labels.formatDateWithFormat(value, {
             hour: 'numeric',
             minute: 'numeric'

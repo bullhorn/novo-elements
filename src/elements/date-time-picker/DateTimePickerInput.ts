@@ -173,7 +173,10 @@ export class NovoDateTimePickerInputElement extends HasOverlay implements OnDest
     }
 
     public formatDateValue(value) {
-       return this.labels.formatDateWithFormat(value, {
+        if (!value) {
+            return '';
+        }
+        return this.labels.formatDateWithFormat(value, {
             month: 'numeric',
             day: 'numeric',
             year: 'numeric',
