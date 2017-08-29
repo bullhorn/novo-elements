@@ -252,6 +252,23 @@ export class Helpers {
         }
         return item;
     }
+
+    /**
+     * Workaround for Edge browser since Element:nextElementSibling is undefined inside of template directives
+     * @param element any document element
+     * @returns the next sibling node that is of type: Element
+     */
+    static getNextElementSibling(element: Element): Node {
+        if (element.nextElementSibling) {
+            return element.nextElementSibling;
+        } else {
+            let e = element.nextSibling;
+            while (e && 1 !== e.nodeType) {
+                e = e.nextSibling;
+            }
+            return e;
+        }
+    }
 }
 export class Can {
     obj: Object;

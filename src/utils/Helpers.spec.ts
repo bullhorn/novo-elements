@@ -64,6 +64,12 @@ describe('Utils: Helpers', () => {
         });
     });
 
+    describe('Method: getNextElementSibling(element)', () => {
+        it('should be defined.', () => {
+            expect(Helpers.getNextElementSibling).toBeDefined();
+        });
+    });
+
     xdescribe('Method: calcPositionOffset(position, element, side)', () => {
         it('should be defined.', () => {
             let element = new Element();
