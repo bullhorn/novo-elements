@@ -170,6 +170,7 @@ export class NovoDateTimePickerInputElement extends HasOverlay implements OnDest
      */
     public clearValue(skip: any) {
         this.writeValue(null);
+        this._onChange(null);
     }
 
     public formatDateValue(value) {
