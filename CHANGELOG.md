@@ -1,3 +1,13 @@
+<a name="2.0.259"></a>
+## [2.0.259](https://github.com/bullhorn/novo-elements/compare/v2.0.258...v2.0.259) (2017-08-30)
+
+
+### Features
+
+* **helpers:** Adding helper to get next sibling ([d559ec4](https://github.com/bullhorn/novo-elements/commit/d559ec4))
+
+
+
 <a name="2.0.258"></a>
 ## [2.0.258](https://github.com/bullhorn/novo-elements/compare/v2.0.257...v2.0.258) (2017-08-25)
 
