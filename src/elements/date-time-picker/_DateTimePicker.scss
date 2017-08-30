@@ -3,6 +3,8 @@ $time-select-height: 45px;
 novo-date-time-picker-input {
     flex: 1;
     position: relative;
+    display: block;
+    
     input {
         font-size: 1em;
         border: none;
