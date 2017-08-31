@@ -148,6 +148,7 @@ export class NovoDatePickerInputElement extends HasOverlay implements OnDestroy,
 
         this.value = inputValue;
         this.formattedValue = this.formatDateValue(inputValue);
+        this._changeDetectorRef.markForCheck();
     }
 
     /**
