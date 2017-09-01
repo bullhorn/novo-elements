@@ -12,6 +12,7 @@ input[type=calendar] {
 novo-date-picker-input {
     flex: 1;
     position: relative;
+    display: block;
     
     input {
         font-size: 1em;

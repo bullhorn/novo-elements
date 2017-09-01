@@ -151,6 +151,7 @@ export class NovoTimePickerInputElement extends HasOverlay implements OnDestroy,
         //this._element.nativeElement.value = inputValue;
         this.value = inputValue;
         this.formattedValue = this.formatDateValue(inputValue);
+        this._changeDetectorRef.markForCheck();
     }
 
     public setValue(event: any | null): void {
@@ -170,6 +171,7 @@ export class NovoTimePickerInputElement extends HasOverlay implements OnDestroy,
      */
     public clearValue(skip: any) {
         this.writeValue(null);
+        this._onChange(null);
     }
 
     public formatDateValue(value) {

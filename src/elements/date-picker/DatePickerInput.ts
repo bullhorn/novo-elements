@@ -146,11 +146,9 @@ export class NovoDatePickerInputElement extends HasOverlay implements OnDestroy,
         // The display value can also be the number zero and shouldn't fall back to an empty string.
         const inputValue = toDisplay != null ? toDisplay : '';
 
-        // If it's used within a `MdFormField`, we should set it through the property so it can go
-        // through change detection.
-        //this._element.nativeElement.value = inputValue;
         this.value = inputValue;
         this.formattedValue = this.formatDateValue(inputValue);
+        this._changeDetectorRef.markForCheck();
     }
 
     /**
@@ -171,6 +169,7 @@ export class NovoDatePickerInputElement extends HasOverlay implements OnDestroy,
      */
     public clearValue(skip: any) {
         this.writeValue(null);
+        this._onChange(null);
     }
 
     public formatDateValue(value) {
