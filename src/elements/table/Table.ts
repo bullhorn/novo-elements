@@ -17,7 +17,8 @@ export interface NovoTableConfig {
     paging?: {
         current: number,                // current page
         itemsPerPage: number,           // items per page
-        onPageChange: Function          // function to handle page changing
+        onPageChange: Function,          // function to handle page changing
+        rowOptions: { value: number, label: string }[] // page options
     };
     // Footer config (total footer)
     footers?: Array<{
@@ -91,7 +92,7 @@ export enum NovoTableMode {
                             <div class="th-group" [attr.data-automation-id]="column.id || column.name" *ngIf="!column.hideHeader">
                                 <!-- LABEL & SORT ARROWS -->
                                 <div class="th-title" [ngClass]="(config.sorting !== false && column.sorting !== false) ? 'sortable' : ''" [novoThSortable]="config" [column]="column" (onSortChange)="onSortChange($event)">
-                                    <label>{{ column.title }}</label>
+                                    <label>{{ column.title || column.label }}</label>
                                     <div class="table-sort-icons" tooltipPosition="bottom" [tooltip]="labels.sort" [ngClass]="column.sort || ''" *ngIf="config.sorting !== false && column.sorting !== false">
                                         <i class="bhi-arrow-up"></i>
                                         <i class="bhi-arrow-down"></i>
