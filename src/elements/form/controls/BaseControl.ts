@@ -64,7 +64,7 @@ export class BaseControl {
     sortOrder: number;
     controlType: string;
     placeholder: string;
-    config: NovoControlConfig;
+    config: any;
     dirty: boolean;
     multiple: boolean;
     headerConfig: any;

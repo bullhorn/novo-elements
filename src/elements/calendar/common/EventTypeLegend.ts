@@ -2,9 +2,9 @@ import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/co
 import { CalendarEvent } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
-  selector: 'novo-event-type-legend',
-  template: `
-    <template #defaultTemplate>
+    selector: 'novo-event-type-legend',
+    template: `
+    <ng-template #defaultTemplate>
       <div class="cal-event-legend">
         <div class="cal-event-type"
           *ngFor="let type of events | groupBy : 'type'"
@@ -12,19 +12,19 @@ import { CalendarEvent } from '../../../utils/calendar-utils/CalendarUtils';
           <div class="cal-event-type-swatch"></div><div>{{type?.key}}</div>
         </div>
       </div>
-    </template>
-    <template
+    </ng-template>
+    <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
       [ngOutletContext]="{events: events, eventTypeClicked: eventTypeClicked}">
-    </template>
+    </ng-template>
   `
 })
 export class NovoEventTypeLegendElement {
 
-  @Input() events: CalendarEvent[];
+    @Input() events: CalendarEvent[];
 
-  @Input() customTemplate: TemplateRef<any>;
+    @Input() customTemplate: TemplateRef<any>;
 
-  @Output() eventTypeClicked: EventEmitter<any> = new EventEmitter();
+    @Output() eventTypeClicked: EventEmitter<any> = new EventEmitter();
 
 }

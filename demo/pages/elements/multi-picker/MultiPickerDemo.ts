@@ -21,7 +21,7 @@ const template = `
     </p>
     <div class="example chips-demo">${BasicMultiPicker}</div>
     <code-snippet [code]="BasicMultiPicker"></code-snippet>
-    
+
     <h5>Nested Example</h5>
     <p>
         The multipicker can also support a parent-child relationship between the types, such as the relationship between a state with many cities or a department with users.
@@ -36,17 +36,17 @@ const template = `
     template: template
 })
 export class MultiPickerDemoComponent {
-    BasicMultiPicker:string = BasicMultiPicker;
-    NestedMultiPicker:string = NestedMultiPicker;
+    BasicMultiPicker: string = BasicMultiPicker;
+    NestedMultiPicker: string = NestedMultiPicker;
 
-    placeholder:string = 'Select...';
-    value:any = { states: ['Alabama'], collaborators: [1, 2, 3, 4] };
-    types:any = [{ value: 'states', singular: 'state' }, { value: 'collaborators', singular: 'collaborator' }];
-    staticDemo:any;
-    parentChild:any;
-    parentChildTypes:any;
-    formatted:any;
-    parentChildValue:any;
+    placeholder: string = 'Select...';
+    value: any = { states: ['Alabama'], collaborators: [1, 2, 3, 4] };
+    types: any = [{ value: 'states', singular: 'state' }, { value: 'collaborators', singular: 'collaborator' }];
+    staticDemo: any;
+    parentChild: any;
+    parentChildTypes: any;
+    formatted: any;
+    parentChildValue: any;
 
     constructor() {
         let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
@@ -126,7 +126,7 @@ export class MultiPickerDemoComponent {
             strictRelationship: false,
             chipsCount: 6
         };
-        this.parentChildTypes = [{ value: 'departments', isParentOf: true, singular: 'department'}, { value: 'users', isChildOf: true, singular: 'user' }];
+        this.parentChildTypes = [{ value: 'departments', isParentOf: true, singular: 'department' }, { value: 'users', isChildOf: true, singular: 'user' }];
         this.formatted = {
             format: '$firstName $lastName',
             options: collaborators
