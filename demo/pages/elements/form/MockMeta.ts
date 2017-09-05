@@ -435,13 +435,19 @@ export const MockMeta = {
 };
 export const MockMetaHeaders = {
     sectionHeaders: [{
+        'label': 'Section With Custom Icon',
+        'name': 'sectionHeader3',
+        'sortOrder': 600,
+        'enabled': true,
+        'icon': 'bhi-certification'
+    }, {
         'label': 'Section 2',
-        'name': 'sectionHeader1',
+        'name': 'sectionHeader2',
         'sortOrder': 500,
         'enabled': true
     }, {
         'label': 'Section 1',
-        'name': 'sectionHeader2',
+        'name': 'sectionHeader1',
         'sortOrder': 45,
         'enabled': true
     }],
