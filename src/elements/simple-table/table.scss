@@ -1,0 +1,32 @@
+$novo-row-height: 48px;
+$novo-row-horizontal-padding: 24px;
+.novo-table {
+    display: block;
+}
+
+.novo-row,
+.novo-header-row {
+    display: flex;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    align-items: center;
+    min-height: $novo-row-height;
+    padding: 0 $novo-row-horizontal-padding;
+}
+
+.novo-cell,
+.novo-header-cell {
+    flex: 1;
+    novo-dropdown {
+        display: inline-block;
+    }
+    button.active {
+        color: $positive;
+    }
+}
+
+.novo-checkbox-header-cell,
+.novo-checkbox-cell {
+    max-width: 30px;
+    margin-top: -5px;
+}

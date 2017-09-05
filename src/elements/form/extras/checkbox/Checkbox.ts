@@ -1,5 +1,5 @@
 // NG2
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
@@ -26,10 +26,11 @@ const LAYOUT_DEFAULTS = { iconStyle: 'box' };
                  [class.bhi-circle-o]="!model && !indeterminate && !boxIcon"
                  [class.bhi-check]="model && !indeterminate && !boxIcon"
                  [class.bhi-circle]="indeterminate && !boxIcon"></i>
-              <span>{{label}}</span>
+              <span *ngIf="label">{{ label }}</span>
             </label>
         </div>
-    `
+    `,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     @Input() name: string;
@@ -37,15 +38,16 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     @Input() indeterminate: boolean = false;
     @Input() disabled: boolean;
     @Input() layoutOptions: { iconStyle?: string };
-    value: boolean = false;
-    boxIcon: boolean = true;
 
+    boxIcon: boolean = true;
     model;
 
     onModelChange: Function = () => {
     };
     onModelTouched: Function = () => {
     };
+
+    constructor(private ref: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.layoutOptions = Object.assign({}, LAYOUT_DEFAULTS, this.layoutOptions);
@@ -60,6 +62,7 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
 
     writeValue(model: any): void {
         this.model = model;
+        this.ref.markForCheck();
     }
 
     registerOnChange(fn: Function): void {

@@ -43,7 +43,8 @@ import {
     PopOverDemoComponent,
     CustomDemoComponent,
     DatePickerDemoComponent,
-    FieldInteractionsDemoComponent
+    FieldInteractionsDemoComponent,
+    SimpleTableDemoComponent
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
@@ -116,7 +117,8 @@ export function provideFieldInteractionAPI(toast, modal, formUtils, http, labels
         PopOverDemoComponent,
         CustomDemoComponent,
         AppBridgeDemoComponent,
-        FieldInteractionsDemoComponent
+        FieldInteractionsDemoComponent,
+        SimpleTableDemoComponent
     ],
     imports: [
         // NG2

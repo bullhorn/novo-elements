@@ -28,3 +28,4 @@ export * from './category-dropdown/CategoryDropdownDemo';
 export * from './popover/PopoverDemo';
 export * from './date-picker/DatePickerDemo';
 export * from './field-interactions/FieldInteractionsDemo';
+export * from './simple-table/SimpleTableDemo';
