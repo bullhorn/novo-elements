@@ -18,7 +18,7 @@ export interface NovoTableConfig {
         current: number,                // current page
         itemsPerPage: number,           // items per page
         onPageChange: Function,          // function to handle page changing
-        rowOptions: { value: number, label: string }[] // page options
+        rowOptions?: { value: number, label: string }[] // page options
     };
     // Footer config (total footer)
     footers?: Array<{

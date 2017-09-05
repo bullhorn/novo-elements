@@ -1,5 +1,6 @@
 // NG2
 import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
 
@@ -22,6 +23,7 @@ export class Pagination implements OnInit, OnChanges {
     @Input() itemsPerPage: number = 10;
     @Input() rowOptions: any;
     @Input() label: string;
+    @Input() displayPages: boolean = true;
     @Output() pageChange: EventEmitter<any> = new EventEmitter();
     @Output() itemsPerPageChange: EventEmitter<any> = new EventEmitter();
     @Output() onPageChange: EventEmitter<any> = new EventEmitter();
@@ -99,31 +101,31 @@ export class Pagination implements OnInit, OnChanges {
 
     getPages(currentPage, totalPages) {
         let pages = [];
+        if (coerceBooleanProperty(this.displayPages)) {
+            // Default page limits
+            let startPage = 1;
+            let endPage = totalPages;
+            const isMaxSized = this.maxPagesDisplayed < totalPages;
 
-        // Default page limits
-        let startPage = 1;
-        let endPage = totalPages;
-        const isMaxSized = this.maxPagesDisplayed < totalPages;
+            // recompute if maxPagesDisplayed
+            if (isMaxSized) {
+                // Current page is displayed in the middle of the visible ones
+                startPage = Math.max(currentPage - Math.floor(this.maxPagesDisplayed / 2), 1);
+                endPage = startPage + this.maxPagesDisplayed - 1;
 
-        // recompute if maxPagesDisplayed
-        if (isMaxSized) {
-            // Current page is displayed in the middle of the visible ones
-            startPage = Math.max(currentPage - Math.floor(this.maxPagesDisplayed / 2), 1);
-            endPage = startPage + this.maxPagesDisplayed - 1;
+                // Adjust if limit is exceeded
+                if (endPage > totalPages) {
+                    endPage = totalPages;
+                    startPage = endPage - this.maxPagesDisplayed + 1;
+                }
+            }
 
-            // Adjust if limit is exceeded
-            if (endPage > totalPages) {
-                endPage = totalPages;
-                startPage = endPage - this.maxPagesDisplayed + 1;
+            // Add page number links
+            for (let number = startPage; number <= endPage; number++) {
+                const page = this.makePage(number, number.toString(), number === currentPage);
+                pages.push(page);
             }
         }
-
-        // Add page number links
-        for (let number = startPage; number <= endPage; number++) {
-            const page = this.makePage(number, number.toString(), number === currentPage);
-            pages.push(page);
-        }
-
         return pages;
     }
 

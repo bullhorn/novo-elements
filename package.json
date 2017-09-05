@@ -36,10 +36,6 @@
     {
       "name": "Alec Sibilia",
       "email": "asibilia@bullhorn.com"
-    },
-    {
-      "name": "Kameron Sween",
-      "email": "ksween@bullhorn.com"
     }
   ],
   "license": "MIT",
@@ -55,7 +51,7 @@
   },
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "dependencies": {
-    "@angular/cdk": "http://git@github.com:angular/cdk-builds.git",
+    "@angular/cdk": "2.0.0-beta.10",
     "@types/dragula": "2.1.29",
     "angular2-text-mask": "^8.0.2",
     "date-fns": "^1.28.2",
