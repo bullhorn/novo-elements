@@ -1,3 +1,13 @@
+<a name="2.0.260"></a>
+## [2.0.260](https://github.com/bullhorn/novo-elements/compare/v2.0.259...v2.0.260) (2017-09-05)
+
+
+### Features
+
+* **datepicker:** Allow append to body for all date pickers ([2f29784](https://github.com/bullhorn/novo-elements/commit/2f29784))
+
+
+
 <a name="2.0.259"></a>
 ## [2.0.259](https://github.com/bullhorn/novo-elements/compare/v2.0.258...v2.0.259) (2017-08-30)
 
