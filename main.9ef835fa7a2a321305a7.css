@@ -805,6 +805,54 @@ th {
 [hidden] {
   display: none !important; }
 
+.cdk-overlay-container, .cdk-global-overlay-wrapper {
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%; }
+
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 1000; }
+
+.cdk-global-overlay-wrapper {
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  z-index: 1000; }
+
+.cdk-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 1000; }
+
+.cdk-overlay-backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0; }
+  .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0.48; }
+
+.cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.6); }
+
+.cdk-overlay-transparent-backdrop {
+  background: none; }
+
+.cdk-global-scrollblock {
+  position: fixed;
+  width: 100%;
+  overflow-y: scroll; }
+
 /*-------------------------------------*	HINT.css - A CSS tooltip library
 \*-------------------------------------*/
 /**
@@ -6628,6 +6676,40 @@ input[type=calendar] {
   border: 2px solid #ddd;
   border-radius: 4px; }
 
+novo-date-picker-input {
+  -ms-flex: 1;
+      flex: 1;
+  position: relative;
+  display: block; }
+  novo-date-picker-input input {
+    font-size: 1em;
+    border: none;
+    border-bottom: 1px solid rgba(88, 101, 111, 0.25);
+    background: transparent !important;
+    border-radius: 0;
+    outline: none;
+    height: 2rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 300ms;
+    color: #D9DADC; }
+    novo-date-picker-input input:focus {
+      border-bottom: 1px solid #4A89DC; }
+  novo-date-picker-input > i.bhi-clock,
+  novo-date-picker-input > i.bhi-search,
+  novo-date-picker-input > i.bhi-times,
+  novo-date-picker-input > i.bhi-calendar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.2em; }
+  novo-date-picker-input > i.bhi-times {
+    cursor: pointer;
+    font-size: 1.1em; }
+
 .calendar.popup {
   display: none;
   position: absolute;
@@ -6918,6 +7000,40 @@ input[type=calendar] {
   to {
     opacity: 0;
     transform: scale(1.6); } }
+
+novo-time-picker-input {
+  -ms-flex: 1;
+      flex: 1;
+  position: relative;
+  display: block; }
+  novo-time-picker-input input {
+    font-size: 1em;
+    border: none;
+    border-bottom: 1px solid rgba(88, 101, 111, 0.25);
+    background: transparent !important;
+    border-radius: 0;
+    outline: none;
+    height: 2rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 300ms;
+    color: #D9DADC; }
+    novo-time-picker-input input:focus {
+      border-bottom: 1px solid #4A89DC; }
+  novo-time-picker-input > i.bhi-clock,
+  novo-time-picker-input > i.bhi-search,
+  novo-time-picker-input > i.bhi-times,
+  novo-time-picker-input > i.bhi-calendar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.2em; }
+  novo-time-picker-input > i.bhi-times {
+    cursor: pointer;
+    font-size: 1.1em; }
 
 novo-time-picker {
   display: block;
@@ -7488,6 +7604,40 @@ novo-time-picker {
     width: 28px;
     right: 13px;
     margin-top: -14px; }
+
+novo-date-time-picker-input {
+  -ms-flex: 1;
+      flex: 1;
+  position: relative;
+  display: block; }
+  novo-date-time-picker-input input {
+    font-size: 1em;
+    border: none;
+    border-bottom: 1px solid rgba(88, 101, 111, 0.25);
+    background: transparent !important;
+    border-radius: 0;
+    outline: none;
+    height: 2rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 300ms;
+    color: #D9DADC; }
+    novo-date-time-picker-input input:focus {
+      border-bottom: 1px solid #4A89DC; }
+  novo-date-time-picker-input > i.bhi-clock,
+  novo-date-time-picker-input > i.bhi-search,
+  novo-date-time-picker-input > i.bhi-times,
+  novo-date-time-picker-input > i.bhi-calendar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.2em; }
+  novo-date-time-picker-input > i.bhi-times {
+    cursor: pointer;
+    font-size: 1.1em; }
 
 novo-date-time-picker {
   display: block;
@@ -9740,6 +9890,52 @@ novo-form {
             novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.radio .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container).valid-number,
             novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.address .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container).valid-number {
               border-bottom: none !important; }
+          novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container), novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container), novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-dynamic-form .novo-form-container form td.novo-form-row novo-control.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-dynamic-form .novo-form-container form td.novo-form-row novo-control.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-dynamic-form .novo-form-container form td.novo-form-row novo-control.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form div.novo-form-row novo-control.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form div.novo-form-row novo-control.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form div.novo-form-row novo-control.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form div.novo-form-row novo-custom-control-container.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form div.novo-form-row novo-custom-control-container.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form div.novo-form-row novo-custom-control-container.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form td.novo-form-row novo-control.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form td.novo-form-row novo-control.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form td.novo-form-row novo-control.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+          novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+            border-bottom: none !important; }
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input, novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input, novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-control.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-control.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-control.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form div.novo-form-row novo-control.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form div.novo-form-row novo-control.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form div.novo-form-row novo-control.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form div.novo-form-row novo-custom-control-container.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form div.novo-form-row novo-custom-control-container.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form div.novo-form-row novo-custom-control-container.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form td.novo-form-row novo-control.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form td.novo-form-row novo-control.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form td.novo-form-row novo-control.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.date .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input,
+            novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.date-time .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) > input {
+              border-bottom: 1px solid #DA4453 !important; }
           novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.hidden,
           novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container.hidden,
           novo-dynamic-form .novo-form-container form td.novo-form-row novo-control.hidden,
@@ -13297,104 +13493,104 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 38px;
-      height: 38px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 44px;
-      height: 44px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 40px;
-      height: 40px; }
+      width: 31px;
+      height: 31px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
       width: 38px;
       height: 38px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 34px;
-      height: 34px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 42px;
-      height: 42px; }
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
       width: 43px;
       height: 43px; }
     color header .background-boxes .bb-submission {
       background: #a9adbb;
-      width: 32px;
-      height: 32px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-sendout {
       background: #747884;
-      width: 32px;
-      height: 32px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
-      width: 36px;
-      height: 36px; }
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-note {
       background: #747884;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-task {
-      background: #4f5361;
-      width: 26px;
-      height: 26px; }
-    color header .background-boxes .bb-distributionList {
-      background: #4f5361;
       width: 38px;
       height: 38px; }
-    color header .background-boxes .bb-credential {
-      background: #4f5361;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-user {
-      background: #4f5361;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-corporateuser {
+    color header .background-boxes .bb-task {
       background: #4f5361;
       width: 37px;
       height: 37px; }
+    color header .background-boxes .bb-distributionList {
+      background: #4f5361;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-credential {
+      background: #4f5361;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-user {
+      background: #4f5361;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-corporateuser {
+      background: #4f5361;
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-aqua {
       background: #3BAFDA;
       width: 28px;
       height: 28px; }
     color header .background-boxes .bb-ocean {
       background: #4A89DC;
-      width: 27px;
-      height: 27px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-mint {
       background: #37BC9B;
-      width: 43px;
-      height: 43px; }
+      width: 39px;
+      height: 39px; }
     color header .background-boxes .bb-grass {
       background: #8CC152;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
       width: 30px;
       height: 30px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 28px;
-      height: 28px; }
+      width: 31px;
+      height: 31px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 36px;
-      height: 36px; }
+      width: 44px;
+      height: 44px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -14498,4 +14694,4 @@ field-interactions-demo main.tabs {
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.c72fa97d107c9deefef2.bundle.map*/
+/*# sourceMappingURL=main.9ef835fa7a2a321305a7.bundle.map*/
