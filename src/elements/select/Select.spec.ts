@@ -79,7 +79,7 @@ describe('Elements: NovoSelectElement', () => {
         });
     });
 
-    xdescribe('Method: onKeyDown(event)', () => {
+    describe('Method: onKeyDown(event)', () => {
         it('should be defined.', () => {
             expect(component.onKeyDown).toBeDefined();
         });
@@ -98,7 +98,7 @@ describe('Elements: NovoSelectElement', () => {
             expect(component.toggleActive).toHaveBeenCalled();
         });
 
-        it('should select a value and close when ENTER is pressed', () => {
+        xit('should select a value and close when ENTER is pressed', () => {
             component.active = true;
             component.selectedIndex = 1;
             spyOn(component, 'toggleActive');
@@ -111,7 +111,7 @@ describe('Elements: NovoSelectElement', () => {
             }, 1);
         });
 
-        it('should increment selected index when DOWN is pressed', () => {
+        xit('should increment selected index when DOWN is pressed', () => {
             component.active = true;
             component.selectedIndex = 1;
             spyOn(component, 'select');
@@ -119,12 +119,34 @@ describe('Elements: NovoSelectElement', () => {
             expect(component.selectedIndex).toBe(2);
         });
 
-        it('should decrement selected index when UP is pressed', () => {
+        xit('should decrement selected index when UP is pressed', () => {
             component.active = true;
             component.selectedIndex = 2;
             spyOn(component, 'select');
             component.onKeyDown(KeyEvent(KeyCodes.UP));
             expect(component.selectedIndex).toBe(1);
+        });
+
+        it('should select a value and close when any letter key is pressed', () => {
+            component.active = true;
+            component.selectedIndex = 1;
+            component.options = [ { value: 1, label: 'One' }, { value: 2, label: 'two' }];
+            component.filteredOptions = [ { value: 1, label: 'One' }, { value: 2, label: 'two' }];
+            component.element = {
+                nativeElement: {
+                    querySelector: () => {}
+                }
+            };
+            spyOn(component, 'toggleActive');
+            spyOn(component, 'select');
+            let params = {
+                '.novo-select-list': { querySelectorAll: () => { return [ { getAttribute: () => { return [ { getAttribute: () => {} }, { getAttribute: () => {} }]; } }]; } },
+                '[data-automation-value^="C" i]': { getAttribute: () => {} }
+            };
+            spyOn(component.element.nativeElement, 'querySelector').and.callFake(param => { return params[param]; });
+            component.onKeyDown(KeyEvent(KeyCodes.C));
+            spyOn(Array, 'from').and.callFake(param => { return [ { getAttribute: () => {} }, { getAttribute: () => {} }]; });
+            expect(component.select).toHaveBeenCalled();
         });
     });
 

@@ -70,7 +70,7 @@ export class NovoToastService {
             this.show(toast);
         }, 20);
         if (!toast.isCloseable) {
-          this.toastTimer(toast);
+            this.toastTimer(toast);
         }
 
     }

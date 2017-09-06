@@ -6,6 +6,7 @@ let AsyncPickerDemoTpl = require('./templates/AsyncPickerDemo.html');
 let FormattedPickerDemoTpl = require('./templates/FormattedPickerDemo.html');
 let CustomPickerResultsDemoTpl = require('./templates/CustomPickerResultsDemo.html');
 let DefaultOptionsDemoTpl = require('./templates/DefaultOptionsPickerDemo.html');
+let OverrideTemplateDemoTpl = require('./templates/OverrideTemplateDemo.html');
 // Vendor
 import { PickerResults } from './../../../../index';
 
@@ -75,6 +76,13 @@ const template = `
     <div class="example picker-demo">${CustomPickerResultsDemoTpl}</div>
     <code-snippet [code]="CustomPickerResultsDemoTpl"></code-snippet>
 
+    <h5>Overriding the Result Template</h5>
+    <p>
+        You can provide a string to override the base result template. You have access to <code>match</code> which is the data to be displayed.
+    </p>
+    <div class="example picker-demo">${OverrideTemplateDemoTpl}</div>
+    <code-snippet [code]="OverrideTemplateDemoTpl"></code-snippet>
+
     <h5>Default Options</h5>
     <p>
         You can set a function or array for the default options on the config, for these options to appear when the user
@@ -95,6 +103,7 @@ export class PickerDemoComponent {
     private FormattedPickerDemoTpl: string = FormattedPickerDemoTpl;
     private CustomPickerResultsDemoTpl: string = CustomPickerResultsDemoTpl;
     private DefaultOptionsDemoTpl: string = DefaultOptionsDemoTpl;
+    private OverrideTemplateDemoTpl: string = OverrideTemplateDemoTpl;
     private placeholder: string = 'Select...';
     private staticDemo: any;
     private formatted: any;
@@ -104,6 +113,8 @@ export class PickerDemoComponent {
     private defaultArrayValue: string;
     private defaultFunctionValue: string;
     private value: string;
+    private overrideValue: any;
+    private overrideDemo: any;
     private async: any;
 
     constructor() {
@@ -142,6 +153,11 @@ export class PickerDemoComponent {
         }];
 
         this.staticDemo = { options: states };
+
+        this.overrideDemo = {
+            options: states,
+            overrideTemplate: '<h1>{{ match | json }}</h1>'
+        };
 
         this.formatted = {
             // field: 'id',

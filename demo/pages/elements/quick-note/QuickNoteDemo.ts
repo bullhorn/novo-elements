@@ -42,11 +42,11 @@ const template = `
     <h5>Basic Examples</h5>
     <div class="example quick-note-demo basic">${BasicQuickNoteDemoTpl}</div>
     <code-snippet [code]="BasicQuickNoteDemoTpl"></code-snippet>
-    
+
     <h5>Custom Triggers</h5>
     <div class="example quick-note-demo custom">${CustomQuickNoteDemoTpl}</div>
     <code-snippet [code]="CustomQuickNoteDemoTpl"></code-snippet>
-    
+
     <h5>Custom Results Template</h5>
     <div class="example quick-note-demo custom-results">${CustomQuickNoteResultsDemoTpl}</div>
     <code-snippet [code]="CustomQuickNoteResultsDemoTpl"></code-snippet>
@@ -58,13 +58,13 @@ const template = `
     template: template
 })
 export class QuickNoteDemoComponent {
-    private BasicQuickNoteDemoTpl:string = BasicQuickNoteDemoTpl;
-    private CustomQuickNoteDemoTpl:string = CustomQuickNoteDemoTpl;
-    private CustomQuickNoteResultsDemoTpl:string = CustomQuickNoteResultsDemoTpl;
-    private placeholder:string = 'Enter your note text here. Reference people and distribution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
-    private basic:any;
-    private custom:any;
-    private customResults:any;
+    private BasicQuickNoteDemoTpl: string = BasicQuickNoteDemoTpl;
+    private CustomQuickNoteDemoTpl: string = CustomQuickNoteDemoTpl;
+    private CustomQuickNoteResultsDemoTpl: string = CustomQuickNoteResultsDemoTpl;
+    private placeholder: string = 'Enter your note text here. Reference people and distribution lists using @ (eg. @John Smith). Reference other records using # (e.g. #Project Manager)';
+    private basic: any;
+    private custom: any;
+    private customResults: any;
 
     constructor() {
         let customData = {

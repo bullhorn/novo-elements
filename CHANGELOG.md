@@ -1,3 +1,115 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/bullhorn/novo-elements/compare/v2.1.261...v2.1.0) (2017-09-05)
+
+
+
+<a name="2.1.261"></a>
+## [2.1.261](https://github.com/bullhorn/novo-elements/compare/v2.0.260...v2.1.261) (2017-09-05)
+
+
+
+<a name="2.0.260"></a>
+## [2.0.260](https://github.com/bullhorn/novo-elements/compare/v2.0.259...v2.0.260) (2017-09-05)
+
+
+### Features
+
+* **datepicker:** Allow append to body for all date pickers ([2f29784](https://github.com/bullhorn/novo-elements/commit/2f29784))
+
+
+
+<a name="2.0.259"></a>
+## [2.0.259](https://github.com/bullhorn/novo-elements/compare/v2.0.258...v2.0.259) (2017-08-30)
+
+
+### Features
+
+* **helpers:** Adding helper to get next sibling ([d559ec4](https://github.com/bullhorn/novo-elements/commit/d559ec4))
+
+
+
+<a name="2.0.258"></a>
+## [2.0.258](https://github.com/bullhorn/novo-elements/compare/v2.0.257...v2.0.258) (2017-08-25)
+
+
+### Features
+
+* **forms:** Custom section header icons for dynamic forms ([#538](https://github.com/bullhorn/novo-elements/issues/538)) ([5ef07b5](https://github.com/bullhorn/novo-elements/commit/5ef07b5))
+* **forms:** Updating the county/state data ([b60549a](https://github.com/bullhorn/novo-elements/commit/b60549a))
+
+
+
+<a name="2.0.257"></a>
+## [2.0.257](https://github.com/bullhorn/novo-elements/compare/v2.0.256...v2.0.257) (2017-08-23)
+
+
+
+<a name="2.0.256"></a>
+## [2.0.256](https://github.com/bullhorn/novo-elements/compare/v2.0.255...v2.0.256) (2017-08-23)
+
+
+
+<a name="2.0.255"></a>
+## [2.0.255](https://github.com/bullhorn/novo-elements/compare/v2.0.254...v2.0.255) (2017-08-23)
+
+
+### Bug Fixes
+
+* **select:** Fixing select searching and selecting ([#535](https://github.com/bullhorn/novo-elements/issues/535)) ([382c970](https://github.com/bullhorn/novo-elements/commit/382c970))
+
+
+
+<a name="2.0.254"></a>
+## [2.0.254](https://github.com/bullhorn/novo-elements/compare/v2.0.253...v2.0.254) (2017-08-22)
+
+
+### Bug Fixes
+
+* **appbridge:** linting issue ([53d39a7](https://github.com/bullhorn/novo-elements/commit/53d39a7))
+
+
+
+<a name="2.0.253"></a>
+## [2.0.253](https://github.com/bullhorn/novo-elements/compare/v2.0.252...v2.0.253) (2017-08-21)
+
+
+### Features
+
+* **form:** Adding a Field Interation API ([2dea55e](https://github.com/bullhorn/novo-elements/commit/2dea55e))
+
+
+
+<a name="2.0.252"></a>
+## [2.0.252](https://github.com/bullhorn/novo-elements/compare/v2.0.251...v2.0.252) (2017-08-18)
+
+
+
+<a name="2.0.251"></a>
+## [2.0.251](https://github.com/bullhorn/novo-elements/compare/v2.0.250...v2.0.251) (2017-08-16)
+
+
+### Bug Fixes
+
+* **picker:** Putting the autoselect first item as an input, so it can be disabled ([1b3e63a](https://github.com/bullhorn/novo-elements/commit/1b3e63a))
+
+
+
+<a name="2.0.250"></a>
+## [2.0.250](https://github.com/bullhorn/novo-elements/compare/v2.0.249...v2.0.250) (2017-08-16)
+
+
+### Bug Fixes
+
+* **ckeditor:** Fixing formatting ([fc095ce](https://github.com/bullhorn/novo-elements/commit/fc095ce))
+* **radio:** fixing data-automation-id ([ac8d87f](https://github.com/bullhorn/novo-elements/commit/ac8d87f))
+
+
+### Features
+
+* **browser:** Safari support ([a356869](https://github.com/bullhorn/novo-elements/commit/a356869))
+
+
+
 <a name="2.0.249"></a>
 ## [2.0.249](https://github.com/bullhorn/novo-elements/compare/v2.0.248...v2.0.249) (2017-08-15)
 

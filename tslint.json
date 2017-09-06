@@ -34,8 +34,6 @@
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
-    "no-unreachable": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [
@@ -44,10 +42,6 @@
       "check-catch",
       "check-else",
       "check-whitespace"
-    ],
-    "quotemark": [
-      true,
-      "single"
     ],
     "radix": false,
     "semicolon": [
@@ -74,10 +68,6 @@
       "check-decl",
       "check-operator",
       "check-separator"
-    ],
-    "directive-selector-name": [
-      true,
-      "camelCase"
     ],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,

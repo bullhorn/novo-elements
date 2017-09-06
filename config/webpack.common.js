@@ -7,10 +7,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-
 const {
-    ForkCheckerPlugin
-} = require('awesome-typescript-loader');
+    CheckerPlugin
+} = require('awesome-typescript-loader')
 
 module.exports = function (options) {
     isProd = options.env === 'production';
@@ -58,13 +57,13 @@ module.exports = function (options) {
                 filename: 'webpack-assets.json',
                 prettyPrint: true
             }),
-            new ForkCheckerPlugin(),
+            new CheckerPlugin(),
             new CommonsChunkPlugin({
                 name: ['polyfills', 'vendor'].reverse()
             }),
             new ContextReplacementPlugin(
                 // The (\\|\/) piece accounts for path separators in *nix and Windows
-                /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+                /angular(\\|\/)core(\\|\/)@angular/,
                 helpers.root('demo') // location of your src
             ),
             new CopyWebpackPlugin([{

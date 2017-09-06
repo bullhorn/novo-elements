@@ -64,6 +64,33 @@ describe('Utils: Helpers', () => {
         });
     });
 
+    describe('Method: getNextElementSibling(element)', () => {
+        it('should return nextElementSibling if present.', () => {
+            let parent = document.createElement('div');
+            let origin = document.createElement('h1');
+            let sibling = document.createElement('h2');
+            parent.appendChild(origin);
+            parent.appendChild(sibling);
+            expect(Helpers.getNextElementSibling(origin)).toEqual(sibling);
+        });
+        it('should skip over non-element sibling nodes.', () => {
+            let parent = document.createElement('div');
+            let origin = document.createElement('h1');
+            let textNode = document.createTextNode('Some Text');
+            let sibling = document.createElement('h2');
+            parent.appendChild(origin);
+            parent.appendChild(textNode);
+            parent.appendChild(sibling);
+            expect(Helpers.getNextElementSibling(origin)).toEqual(sibling);
+        });
+        it('should return null if sibling is not present.', () => {
+            let parent = document.createElement('div');
+            let origin = document.createElement('h1');
+            parent.appendChild(origin);
+            expect(Helpers.getNextElementSibling(origin)).toEqual(null);
+        });
+    });
+
     xdescribe('Method: calcPositionOffset(position, element, side)', () => {
         it('should be defined.', () => {
             let element = new Element();

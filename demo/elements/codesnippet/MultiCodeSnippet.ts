@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -10,13 +10,14 @@ import { DomSanitizer } from '@angular/platform-browser';
             <label>{{ section }}</label>
             <pre><code [innerHtml]="getHighlight(_map[section])"></code></pre>
         </div>
-    `
+    `,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiCodeSnippet {
-    _sections:string[] = [];
-    _map:any = {};
+    _sections: string[] = [];
+    _map: any = {};
 
-    constructor(private sanitizer:DomSanitizer) {
+    constructor(private sanitizer: DomSanitizer) {
     }
 
     @Input()

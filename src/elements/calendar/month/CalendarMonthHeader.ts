@@ -5,7 +5,7 @@ import * as dateFns from 'date-fns';
 @Component({
     selector: 'novo-calendar-month-header',
     template: `
-    <template #defaultTemplate>
+    <ng-template #defaultTemplate>
       <div class="calendar-header">
         <div class="calendar-header-top">
           <button theme="icon" icon="previous" (click)="prevMonth($event)"></button>
@@ -24,11 +24,11 @@ import * as dateFns from 'date-fns';
           </div>
         </div>
       </div>
-    </template>
-    <template
+    </ng-template>
+    <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
       [ngOutletContext]="{days: days, locale: locale, viewDate: viewDate}">
-    </template>
+    </ng-template>
   `
 })
 export class NovoCalendarMonthHeaderElement {

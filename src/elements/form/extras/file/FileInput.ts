@@ -20,7 +20,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
     providers: [FILE_VALUE_ACCESSOR],
     template: `
         <div #container></div>
-        <template #fileInput>
+        <ng-template #fileInput>
             <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
                 <input type="file" [name]="name" [attr.id]="name" (change)="check($event)" [attr.multiple]="multiple" tabindex="-1"/>
                 <section [ngSwitch]="layoutOptions.labelStyle">
@@ -33,8 +33,8 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
                     </label>
                 </section>
             </div>
-        </template>
-        <template #fileOutput>
+        </ng-template>
+        <ng-template #fileOutput>
             <div class="file-output-group" [dragula]="fileOutputBag" [dragulaModel]="files">
                 <div class="file-item" *ngFor="let file of files">
                     <i *ngIf="layoutOptions.draggable" class="bhi-move"></i>
@@ -46,7 +46,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
                     <novo-loading *ngIf="!file.loaded"></novo-loading>
                 </div>
             </div>
-        </template>`
+        </ng-template>`
 })
 export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
     @ViewChild('fileInput') fileInput: TemplateRef<any>;

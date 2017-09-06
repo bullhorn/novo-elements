@@ -497,6 +497,8 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         let editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
 
         return {
+            enterMode: CKEDITOR.ENTER_BR,
+            shiftEnterMode: CKEDITOR.ENTER_P,
             disableNativeSpellChecker: false,
             height: editorHeight,
             removePlugins: 'elementspath,liststyle,tabletools,contextmenu',
@@ -515,13 +517,24 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      */
     private getCursorPosition(): any {
         let range = this.ckeInstance.getSelection().getRanges()[0];
-        let cursorEl = range.startContainer.$.parentElement;
-        let editorEl = this.ckeInstance.editable().$;
+        let parentElement = range.startContainer.$.parentElement;
+        let editorElement = this.ckeInstance.editable().$;
 
-        return {
-            top: cursorEl.offsetTop - editorEl.scrollTop,
-            left: cursorEl.offsetLeft - editorEl.scrollLeft
+        // Since the editor is a text node in the DOM that does not know about it's position, a temporary element has to
+        // be inserted in order to locate the cursor position.
+        let cursorElement = document.createElement('img');
+        cursorElement.setAttribute('src', 'null');
+        cursorElement.setAttribute('width', '0');
+        cursorElement.setAttribute('height', '0');
+
+        parentElement.appendChild(cursorElement);
+        let cursorPosition = {
+            top: cursorElement.offsetTop - editorElement.scrollTop,
+            left: cursorElement.offsetLeft - editorElement.scrollLeft
         };
+        cursorElement.remove();
+
+        return cursorPosition;
     }
 
     /**

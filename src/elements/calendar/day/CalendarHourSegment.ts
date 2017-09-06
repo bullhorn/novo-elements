@@ -2,9 +2,9 @@ import { Component, Input, TemplateRef } from '@angular/core';
 import { DayViewHourSegment } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
-  selector: 'novo-calendar-day-hour-segment',
-  template: `
-    <template #defaultTemplate>
+    selector: 'novo-calendar-day-hour-segment',
+    template: `
+    <ng-template #defaultTemplate>
       <div
         class="cal-hour-segment"
         [class.cal-hour-start]="segment.isStart"
@@ -14,22 +14,22 @@ import { DayViewHourSegment } from '../../../utils/calendar-utils/CalendarUtils'
           {{ segment.date | hours:locale }}
         </div>
       </div>
-    </template>
-    <template
+    </ng-template>
+    <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
       [ngOutletContext]="{
         segment: segment,
         locale: locale
       }">
-    </template>
+    </ng-template>
   `
 })
 export class NovoCalendarHourSegmentElement {
 
-  @Input() segment: DayViewHourSegment;
+    @Input() segment: DayViewHourSegment;
 
-  @Input() locale: string;
+    @Input() locale: string;
 
-  @Input() customTemplate: TemplateRef<any>;
+    @Input() customTemplate: TemplateRef<any>;
 
 }
