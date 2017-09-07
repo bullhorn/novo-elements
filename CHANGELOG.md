@@ -1,3 +1,13 @@
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/bullhorn/novo-elements/compare/v2.1.261...v2.1.1) (2017-09-07)
+
+
+### Features
+
+* **table|pagination|form:** Fixing tooltips / pagination settings / adding methods to simple forms ([1359cc7](https://github.com/bullhorn/novo-elements/commit/1359cc7))
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/bullhorn/novo-elements/compare/v2.1.261...v2.1.0) (2017-09-05)
 
