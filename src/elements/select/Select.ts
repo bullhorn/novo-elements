@@ -1,8 +1,13 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, Inject, Optional, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, ViewContainerRef, ChangeDetectorRef, NgZone } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Overlay } from '@angular/cdk/overlay';
+import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
+import { DOCUMENT } from '@angular/platform-browser';
 // APP
-import { OutsideClick } from '../../utils/outside-click/OutsideClick'; // TODO - change imports
+import { HasOverlay } from '../overlay/HasOverlay';
+import { DEFAULT_OVERLAY_SCROLL_STRATEGY } from '../overlay/Overlay';
+
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
@@ -18,31 +23,33 @@ const SELECT_VALUE_ACCESSOR = {
     selector: 'novo-select',
     providers: [SELECT_VALUE_ACCESSOR],
     template: `
-        <div (click)="toggleActive($event)" tabIndex="0" type="button" [ngClass]="{empty: empty}">{{selected.label}}<i class="bhi-collapse"></i></div>
-        <ul class="novo-select-list" tabIndex="-1" [ngClass]="{header: headerConfig}">
-            <ng-content></ng-content>
-            <li *ngIf="headerConfig" class="select-header" [ngClass]="{open: header.open}">
-                <button  *ngIf="!header.open" (click)="toggleHeader($event); false" tabIndex="-1" type="button" class="header"><i class="bhi-add-thin"></i>&nbsp;{{headerConfig.label}}</button>
-                <div *ngIf="header.open" [ngClass]="{active: header.open}">
-                    <input autofocus type="text" [placeholder]="headerConfig.placeholder" [attr.id]="name" autocomplete="false" [(ngModel)]="header.value" [ngClass]="{invalid: !header.valid}"/>
-                    <footer>
-                        <button (click)="toggleHeader($event, false)">{{labels.cancel}}</button>
-                        <button (click)="saveHeader()" class="primary">{{labels.save}}</button>
-                    </footer>
-                </div>
-            </li>
-            <li *ngFor="let option of filteredOptions; let i = index" [ngClass]="{active: option.active}" (click)="onClickOption(option, i)" [attr.data-automation-value]="option.label">
-              <span [innerHtml]="highlight(option.label, filterTerm)"></span>
-              <i *ngIf="option.active" class="bhi-check"></i>
-            </li>
-        </ul>
+        <div (click)="openPanel($event)" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
+        <novo-overlay-template #overlay>
+            <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
+                <ng-content></ng-content>
+                <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">
+                    <button  *ngIf="!header.open" (click)="toggleHeader($event); false" tabIndex="-1" type="button" class="header"><i class="bhi-add-thin"></i>&nbsp;{{headerConfig.label}}</button>
+                    <div *ngIf="header.open" [ngClass]="{active: header.open}">
+                        <input autofocus type="text" [placeholder]="headerConfig.placeholder" [attr.id]="name" autocomplete="false" [(ngModel)]="header.value" [ngClass]="{invalid: !header.valid}"/>
+                        <footer>
+                            <button (click)="toggleHeader($event, false)">{{labels.cancel}}</button>
+                            <button (click)="saveHeader()" class="primary">{{labels.save}}</button>
+                        </footer>
+                    </div>
+                </li>
+                <li *ngFor="let option of filteredOptions; let i = index" [ngClass]="{active: option.active}" (click)="setValueAndClose({value: option, index: i})" [attr.data-automation-value]="option.label">
+                    <span [innerHtml]="highlight(option.label, filterTerm)"></span>
+                    <i *ngIf="option.active" class="bhi-check"></i>
+                </li>
+            </ul>
+        </novo-overlay-template>
     `,
     host: {
-        '(keydown)': 'onKeyDown($event)',
-        '[class.active]': 'active'
+        '(keydown)': 'onKeyDown($event)'
     }
 })
-export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges {
+export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
+    @Input() name: string;
     @Input() options: Array<any>;
     @Input() placeholder: string = 'Select...';
     @Input() readonly: boolean;
@@ -59,16 +66,26 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     createdItem: any;
     selected: any;
     model: any;
-    onModelChange: Function = () => {
-    };
-    onModelTouched: Function = () => {
-    };
+    onModelChange: Function = () => {};
+    onModelTouched: Function = () => {};
     filterTerm: string = '';
     filterTermTimeout;
     filteredOptions: any;
 
-    constructor(element: ElementRef, public labels: NovoLabelService) {
-        super(element);
+    /** Element for the panel containing the autocomplete options. */
+    @ViewChild('overlay') list: any;
+
+    constructor(
+        private element: ElementRef,
+        public labels: NovoLabelService,
+        protected _viewContainerRef: ViewContainerRef,
+        protected _zone: NgZone,
+        protected _changeDetectorRef: ChangeDetectorRef,
+        protected _overlay: Overlay,
+        @Inject(DEFAULT_OVERLAY_SCROLL_STRATEGY) protected _scrollStrategy,
+        @Optional() @Inject(DOCUMENT) protected _document: any,
+    ) {
+        super(element, _overlay, _viewContainerRef, _zone, _changeDetectorRef, _scrollStrategy, _document);
     }
 
     ngOnInit() {
@@ -77,7 +94,6 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
 
     ngOnChanges(changes?: SimpleChanges) {
         this.readonly = this.readonly === true;
-
         if (this.options && this.options.length && typeof this.options[0] === 'string') {
             this.filteredOptions = this.options.map((item) => {
                 return { value: item, label: item };
@@ -99,9 +115,22 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         }
     }
 
-    onClickOption(option, i) {
-        this.select(option, i);
-        this.toggleActive();
+     // /** Opens the overlay panel. */
+    openPanel(): void {
+        super.openPanel(this.list.template);
+        this.scrollToSelected();
+    }
+
+    /**
+    * This method closes the panel, and if a value is specified, also sets the associated
+    * control to that value. It will also mark the control as dirty if this interaction
+    * stemmed from the user.
+    */
+    public setValueAndClose(event: any | null): void {
+        if (event.value && event.index >= 0) {
+            this.select(event.value, event.index);
+        }
+        this.closePanel();
     }
 
     select(option, i) {
@@ -130,14 +159,14 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     }
 
     onKeyDown(event: KeyboardEvent): void {
-        if (this.active) {
+        if (this.panelOpen) {
             if (!this.header.open) {
                 // Prevent Scrolling
                 event.preventDefault();
             }
             // Close popup on escape key
             if (event.keyCode === KeyCodes.ESC) {
-                this.toggleActive();
+                this.closePanel();
                 return;
             }
             if (event.keyCode === KeyCodes.ENTER) {
@@ -145,8 +174,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
                     this.saveHeader();
                     return;
                 }
-                this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
-                this.toggleActive();
+                this.setValueAndClose({value: this.filteredOptions[this.selectedIndex], index: this.selectedIndex});
                 return;
             }
 
@@ -185,13 +213,13 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
             }
         } else {
             if ([KeyCodes.DOWN, KeyCodes.UP].includes(event.keyCode)) {
-                this.toggleActive(event, true);
+                this.panelOpen ? this.closePanel() : this.openPanel();
             }
         }
     }
 
     scrollToSelected() {
-        let element = this.element.nativeElement;
+        let element = this._overlayRef.overlayElement;
         let list = element.querySelector('.novo-select-list');
         let items = list.querySelectorAll('li');
         let item = items[this.headerConfig ? this.selectedIndex + 1 : this.selectedIndex];
@@ -213,19 +241,6 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         };
     }
 
-    toggleActive(event?, forceValue?) {
-        // Reverse the active property (if forceValue, use that)
-        this.active = forceValue || !this.active;
-        // Bind window click events to hide on outside click
-        if (this.active) {
-            window.addEventListener('click', this.onOutsideClick);
-        } else {
-            window.removeEventListener('click', this.onOutsideClick);
-        }
-        // If closing select, also close header
-        this.toggleHeader(event, false);
-    }
-
     highlight(match, query) {
         // Replaces the capture string with a the same string inside of a "strong" tag
         return query ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
@@ -240,7 +255,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         if (this.header.value) {
             this.headerConfig.onSave(this.header.value);
             this.createdItem = this.header.value;
-            this.toggleActive();
+            this.closePanel();
         } else {
             this.header.valid = false;
         }
@@ -263,7 +278,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
                 this.empty = false;
                 this.selected = item;
                 this.selected.active = true;
-                this.selectedIndex = this.options.indexOf(item);
+                this.selectedIndex = this.filteredOptions.indexOf(item);
             } else {
                 this.clear();
             }
