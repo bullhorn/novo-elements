@@ -438,6 +438,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             if (loading) {
+                this.form.controls[key].fieldInteractionloading = true;
                 control.setErrors({ 'loading': true });
                 // History
                 clearTimeout(this.asyncBlockTimeout);
@@ -447,6 +448,7 @@ export class FieldInteractionApi {
                     this.setProperty(key, '_displayedAsyncFailure', true);
                 }, 10000);
             } else {
+                this.form.controls[key].fieldInteractionloading = false;
                 clearTimeout(this.asyncBlockTimeout);
                 control.setErrors({ 'loading': null });
                 control.updateValueAndValidity({ emitEvent: false });
