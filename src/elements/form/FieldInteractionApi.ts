@@ -460,10 +460,21 @@ export class FieldInteractionApi {
     }
 
     public addControl(key: string, metaForNewField: any, position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD, initialValue?: any): void {
-        let control = this.getControl(key);
+        if (!metaForNewField.key) {
+            console.error('[FieldInteractionAPI] - missing "key" in meta for new field'); // tslint:disable-line
+            return null;
+        }
+
+        if (this.form.controls[metaForNewField.key]) {
+            // Field is already on the form
+            return null;
+        }
+
+        let control = this.form.controls[key];
+        let fieldsetIndex, controlIndex;
         if (control) {
-            let fieldsetIndex = -1;
-            let controlIndex = -1;
+            fieldsetIndex = -1;
+            controlIndex = -1;
 
             this.form.fieldsets.forEach((fieldset, fi) => {
                 fieldset.controls.forEach((fieldsetControl, ci) => {
@@ -509,6 +520,10 @@ export class FieldInteractionApi {
     }
 
     public removeControl(key: string): void {
+        if (!this.form.controls[key]) {
+            // Field is not on the form
+            return null;
+        }
         let control = this.getControl(key);
         if (control) {
             let fieldsetIndex = -1;

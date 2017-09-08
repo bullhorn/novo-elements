@@ -28,6 +28,19 @@ export const MockMeta = {
             type: 'text',
             label: 'Favorite Cat',
             sortOrder: 550
+        },
+        {
+            name: 'remove-select',
+            type: 'select',
+            label: 'Remove the field below?',
+            options: ['Yes', 'No'],
+            sortOrder: 301
+        },
+        {
+            name: 'to-be-removed',
+            type: 'text',
+            label: 'This field will be removed',
+            sortOrder: 302
         }
     ]
 };
@@ -41,6 +54,11 @@ export const MockMetaHeaders = {
         'label': 'Important',
         'name': 'sectionHeader2',
         'sortOrder': 45,
+        'enabled': true
+    }, {
+        'label': 'Remove field on change',
+        'name': 'sectionHeader3',
+        'sortOrder': 300,
         'enabled': true
     }],
 };
