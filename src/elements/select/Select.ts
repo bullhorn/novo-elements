@@ -197,14 +197,13 @@ export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
                 this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 2000);
                 let char = String.fromCharCode(event.keyCode);
                 this.filterTerm = this.filterTerm.concat(char);
-                let element = this.element.nativeElement;
-                let list = element.querySelector('.novo-select-list');
-                let item = element.querySelector(`[data-automation-value^="${this.filterTerm}" i]`);
+                // let element = this.element.nativeElement;
+                // let list = element.querySelector('.novo-select-list');
+                // let item = element.querySelector(`[data-automation-value^="${this.filterTerm}" i]`);
+                let item = this.filteredOptions.find(i => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
                 if (item) {
-                    list.scrollTop = item.offsetTop;
-                    let listItems = Array.from(list.querySelectorAll('li')).map((e: any) => e.getAttribute('data-automation-value')).filter(value => value);
-                    this.selectedIndex = listItems.indexOf(item.getAttribute('data-automation-value'));
-                    this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
+                    this.select(item, this.filteredOptions.indexOf(item));
+                    this.scrollToSelected();
                 }
             } else if ([KeyCodes.BACKSPACE, KeyCodes.DELETE].includes(event.keyCode)) {
                 clearTimeout(this.filterTermTimeout);
@@ -219,10 +218,14 @@ export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
     }
 
     scrollToSelected() {
+        this.scrollToIndex(this.selectedIndex);
+    }
+
+    scrollToIndex(index: number) {
         let element = this._overlayRef.overlayElement;
         let list = element.querySelector('.novo-select-list');
         let items = list.querySelectorAll('li');
-        let item = items[this.headerConfig ? this.selectedIndex + 1 : this.selectedIndex];
+        let item = items[this.headerConfig ? index + 1 : index];
         if (item) {
             list.scrollTop = item.offsetTop;
         }
