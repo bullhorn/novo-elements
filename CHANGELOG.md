@@ -1,3 +1,18 @@
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/bullhorn/novo-elements/compare/v2.1.1...v2.1.2) (2017-09-08)
+
+
+### Bug Fixes
+
+* **address:** Fixing flex box for Firefox ([f2887c4](https://github.com/bullhorn/novo-elements/commit/f2887c4))
+
+
+### Features
+
+* **picker:** make defaultOptions handle promise ([#544](https://github.com/bullhorn/novo-elements/issues/544)) ([9b91eca](https://github.com/bullhorn/novo-elements/commit/9b91eca))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/bullhorn/novo-elements/compare/v2.1.261...v2.1.1) (2017-09-07)
 
