@@ -115,8 +115,15 @@ export class BasePickerResults {
                 } else {
                     if (this.config.defaultOptions) {
                         this.isStatic = false;
-                        if (this.config.defaultOptions instanceof Function) {
-                            resolve(this.structureArray(this.config.defaultOptions()));
+                        if (typeof this.config.defaultOptions === 'function') {
+                            let defaultOptions = this.config.defaultOptions(term, ++this.page);
+                            if (Object.getPrototypeOf(defaultOptions).hasOwnProperty('then')) {
+                                defaultOptions
+                                .then(this.structureArray.bind(this))
+                                .then(resolve, reject);
+                            } else {
+                                resolve(this.structureArray(defaultOptions));
+                            }
                         } else {
                             resolve(this.structureArray(this.config.defaultOptions));
                         }
