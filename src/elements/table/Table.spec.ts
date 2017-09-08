@@ -4,7 +4,9 @@ import { TestBed, async } from '@angular/core/testing';
 import { FormsModule, FormGroupDirective, NgControl, FormControlName, FormBuilder } from '@angular/forms';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
+import { OverlayModule } from '@angular/cdk/overlay';
 // App
+import { NovoOverlayModule } from '../overlay/Overlay.module';
 import { NovoTableElement } from './Table';
 import { Pagination } from './extras/pagination/Pagination';
 import { RowDetails } from './extras/row-details/RowDetails';
@@ -80,7 +82,9 @@ describe('Elements: NovoTableElement', () => {
             imports: [
                 FormsModule,
                 //Vendor
-                TextMaskModule
+                TextMaskModule,
+                OverlayModule,
+                NovoOverlayModule
             ],
             providers: [
                 { provide: NovoLabelService, useClass: NovoLabelService },
