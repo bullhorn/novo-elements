@@ -72,6 +72,8 @@ export class NovoLabelService {
     timeFormatPlaceholder24Hour = 'HH:mm';
     timeFormatAM = 'AM';
     timeFormatPM = 'PM';
+    confirmChangesModalMessage = 'Are you sure you want to change this field?';
+    asyncFailure = 'Async validation was not called within the 10s threshold, you might want to reload the page to try again';
 
     selectedRecords(selected: number) {
         return `Only ${selected} records selected.`;

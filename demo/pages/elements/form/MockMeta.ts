@@ -1,7 +1,7 @@
 export const MockMeta = {
-    entity: 'Opportunity',
-    entityMetaUrl: 'http://develop-backend.bh-bos2.bullhorn.com:8181/rest-services/1yg8p/meta/Opportunity?fields=*',
-    label: 'Opportunity',
+    entity: 'ENTITY_NAME',
+    entityMetaUrl: '',
+    label: 'ENTITY_LABEL',
     fields: [
         {
             name: 'firstName',
@@ -435,13 +435,19 @@ export const MockMeta = {
 };
 export const MockMetaHeaders = {
     sectionHeaders: [{
+        'label': 'Section With Custom Icon',
+        'name': 'sectionHeader3',
+        'sortOrder': 600,
+        'enabled': true,
+        'icon': 'bhi-certification'
+    }, {
         'label': 'Section 2',
-        'name': 'sectionHeader1',
+        'name': 'sectionHeader2',
         'sortOrder': 500,
         'enabled': true
     }, {
         'label': 'Section 1',
-        'name': 'sectionHeader2',
+        'name': 'sectionHeader1',
         'sortOrder': 45,
         'enabled': true
     }],

@@ -181,7 +181,111 @@ export const COUNTRIES = [
         id: 2185,
         code: 'AF',
         name: 'Afghanistan',
-        states: []
+        states: [
+            {
+                code: 'AF01',
+                name: 'Badakhshan'
+            }, {
+                code: 'AF02',
+                name: 'Badghis'
+            }, {
+                code: 'AF03',
+                name: 'Baghlan'
+            }, {
+                code: 'AF30',
+                name: 'Balkh'
+            }, {
+                code: 'AF05',
+                name: 'Bamian'
+            }, {
+                code: 'AF41',
+                name: 'Daikondi'
+            }, {
+                code: 'AF06',
+                name: 'Farah'
+            }, {
+                code: 'AF07',
+                name: 'Faryab'
+            }, {
+                code: 'AF08',
+                name: 'Ghazni'
+            }, {
+                code: 'AF09',
+                name: 'Ghowr'
+            }, {
+                code: 'AF10',
+                name: 'Helmand'
+            }, {
+                code: 'AF11',
+                name: 'Herat'
+            }, {
+                code: 'AF31',
+                name: 'Jowzjan'
+            }, {
+                code: 'AF13',
+                name: 'Kabul'
+            }, {
+                code: 'AF23',
+                name: 'Kandahar'
+            }, {
+                code: 'AF14',
+                name: 'Kapisa'
+            }, {
+                code: 'AF37',
+                name: 'Khowst'
+            }, {
+                code: 'AF34',
+                name: 'Konar'
+            }, {
+                code: 'AF24',
+                name: 'Kondoz'
+            }, {
+                code: 'AF35',
+                name: 'Laghman'
+            }, {
+                code: 'AF17',
+                name: 'Lowgar'
+            }, {
+                code: 'AF18',
+                name: 'Nangarhar'
+            }, {
+                code: 'AF19',
+                name: 'Nimruz'
+            }, {
+                code: 'AF38',
+                name: 'Nurestan'
+            }, {
+                code: 'AF39',
+                name: 'Oruzgan'
+            }, {
+                code: 'AF36',
+                name: 'Paktia'
+            }, {
+                code: 'AF29',
+                name: 'Paktika'
+            }, {
+                code: 'AF42',
+                name: 'Panjshir'
+            }, {
+                code: 'AF40',
+                name: 'Parvan'
+            }, {
+                code: 'AF32',
+                name: 'Samangan'
+            }, {
+                code: 'AF33',
+                name: 'Sar-e Pol'
+            }, {
+                code: 'AF26',
+                name: 'Takhar'
+            }, {
+                code: 'AF27',
+                name: 'Vardak'
+            }, {
+                code: 'AF28',
+                name: 'Zabol'
+            }
+        ]
     }, {
         id: 2186,
         code: 'AL',
@@ -201,7 +305,63 @@ export const COUNTRIES = [
         id: 2189,
         code: 'AO',
         name: 'Angola',
-        states: []
+        states: [
+            {
+                code: 'AO19',
+                name: 'Bengo'
+            }, {
+                code: 'AO01',
+                name: 'Benguela'
+            }, {
+                code: 'AO02',
+                name: 'Bié'
+            }, {
+                code: 'AO03',
+                name: 'Cabinda'
+            }, {
+                code: 'AO04',
+                name: 'Cuando Cubango'
+            }, {
+                code: 'AO05',
+                name: 'Cuanza Norte'
+            }, {
+                code: 'AO06',
+                name: 'Cuanza Sul'
+            }, {
+                code: 'AO07',
+                name: 'Cunene'
+            }, {
+                code: 'AO08',
+                name: 'Huambo'
+            }, {
+                code: 'AO09',
+                name: 'Huíla'
+            }, {
+                code: 'AO20',
+                name: 'Luanda'
+            }, {
+                code: 'AO17',
+                name: 'Lunda Norte'
+            }, {
+                code: 'AO18',
+                name: 'Lunda Sul'
+            }, {
+                code: 'AO12',
+                name: 'Malanje'
+            }, {
+                code: 'AO14',
+                name: 'Moxico'
+            }, {
+                code: 'AO13',
+                name: 'Namibe'
+            }, {
+                code: 'AO15',
+                name: 'Uíge'
+            }, {
+                code: 'AO16',
+                name: 'Zaire'
+            }
+        ]
     }, {
         id: 2190,
         code: 'AQ',
@@ -216,7 +376,81 @@ export const COUNTRIES = [
         id: 2192,
         code: 'AR',
         name: 'Argentina',
-        states: []
+        states: [
+            {
+                code: 'AR01',
+                name: 'Buenos Aires'
+            }, {
+                code: 'AR02',
+                name: 'Catamarca'
+            }, {
+                code: 'AR03',
+                name: 'Chaco'
+            }, {
+                code: 'AR04',
+                name: 'Chubut'
+            }, {
+                code: 'AR07',
+                name: 'Ciudad de Buenos Aires'
+            }, {
+                code: 'AR06',
+                name: 'Corrientes'
+            }, {
+                code: 'AR05',
+                name: 'Córdoba'
+            }, {
+                code: 'AR08',
+                name: 'Entre Ríos'
+            }, {
+                code: 'AR09',
+                name: 'Formosa'
+            }, {
+                code: 'AR10',
+                name: 'Jujuy'
+            }, {
+                code: 'AR11',
+                name: 'La Pampa'
+            }, {
+                code: 'AR12',
+                name: 'La Rioja'
+            }, {
+                code: 'AR13',
+                name: 'Mendoza'
+            }, {
+                code: 'AR14',
+                name: 'Misiones'
+            }, {
+                code: 'AR15',
+                name: 'Neuquén'
+            }, {
+                code: 'AR16',
+                name: 'Río Negro'
+            }, {
+                code: 'AR17',
+                name: 'Salta'
+            }, {
+                code: 'AR18',
+                name: 'San Juan'
+            }, {
+                code: 'AR19',
+                name: 'San Luis'
+            }, {
+                code: 'AR20',
+                name: 'Santa Cruz'
+            }, {
+                code: 'AR21',
+                name: 'Santa Fe'
+            }, {
+                code: 'AR22',
+                name: 'Santiago del Estero'
+            }, {
+                code: 'AR23',
+                name: 'Tierra del Fuego'
+            }, {
+                code: 'AR24',
+                name: 'Tucumán'
+            }
+        ]
     }, {
         id: 2193,
         code: 'AM',
@@ -422,10 +656,10 @@ export const COUNTRIES = [
                 code: 'AZ-LAC',
                 name: 'Lachin'
             }, {
-                code: 'AZ-LA',
+                code: 'AZ-LAN',
                 name: 'Lenkaran'
             }, {
-                code: 'AZ-LAN',
+                code: 'AZ-LA',
                 name: 'Lenkaran'
             }, {
                 code: 'AZ-LER',
@@ -476,10 +710,10 @@ export const COUNTRIES = [
                 code: 'AZ-SKR',
                 name: 'Shamkir'
             }, {
-                code: 'AZ-SA',
+                code: 'AZ-SAK',
                 name: 'Sheki'
             }, {
-                code: 'AZ-SAK',
+                code: 'AZ-SA',
                 name: 'Sheki'
             }, {
                 code: 'AZ-SAR',
@@ -534,12 +768,55 @@ export const COUNTRIES = [
         id: 2198,
         code: 'BH',
         name: 'Bahrain',
-        states: []
+        states: [
+            {
+                code: 'BA16',
+                name: 'Capital'
+            }, {
+                code: 'BA19',
+                name: 'Central'
+            }, {
+                code: 'BA15',
+                name: 'Muharraq'
+            }, {
+                code: 'BA18',
+                name: 'Northern'
+            }, {
+                code: 'BA17',
+                name: 'Southern'
+            }
+        ]
     }, {
         id: 2199,
         code: 'BD',
         name: 'Bangladesh',
-        states: []
+        states: [
+            {
+                code: 'BG85',
+                name: 'Barisal'
+            }, {
+                code: 'BG84',
+                name: 'Chittagong'
+            }, {
+                code: 'BG81',
+                name: 'Dhaka'
+            }, {
+                code: 'BG82',
+                name: 'Khulna'
+            }, {
+                code: 'BG81',
+                name: 'Mymensingh'
+            }, {
+                code: 'BG83',
+                name: 'Rajshahi'
+            }, {
+                code: 'BG87',
+                name: 'Rangpur'
+            }, {
+                code: 'BG86',
+                name: 'Sylhet'
+            }
+        ]
     }, {
         id: 2200,
         code: 'BB',
@@ -549,7 +826,30 @@ export const COUNTRIES = [
         id: 2201,
         code: 'BY',
         name: 'Belarus',
-        states: []
+        states: [
+            {
+                code: 'BO01',
+                name: 'Brest'
+            }, {
+                code: 'BO02',
+                name: 'Gomel'
+            }, {
+                code: 'BO03',
+                name: 'Grodno'
+            }, {
+                code: 'BO05',
+                name: 'Minsk'
+            }, {
+                code: 'BO04',
+                name: 'Minsk City'
+            }, {
+                code: 'BO06',
+                name: 'Mogilev'
+            }, {
+                code: 'BO07',
+                name: 'Vitebsk'
+            }
+        ]
     }, {
         id: 2202,
         code: 'BE',
@@ -652,8 +952,8 @@ export const COUNTRIES = [
                 code: 'BA-08',
                 name: 'Zapadnohercegovacki kanton'
             }, {
-                code: 'BA-04\\u0013',
-                name: 'Zenicko-dobojski kanton\\u0013  '
+                code: 'BA-04',
+                name: 'Zenicko-dobojski kanton'
             }
         ]
     }, {
@@ -706,14 +1006,14 @@ export const COUNTRIES = [
                 code: 'MG',
                 name: 'Minas Gerais'
             }, {
-                code: 'PA',
-                name: 'Pará'
+                code: 'PR',
+                name: 'Paraná'
             }, {
                 code: 'PB',
                 name: 'Paraíba'
             }, {
-                code: 'PR',
-                name: 'Paraná'
+                code: 'PA',
+                name: 'Pará'
             }, {
                 code: 'PE',
                 name: 'Pernambuco'
@@ -721,14 +1021,14 @@ export const COUNTRIES = [
                 code: 'PI',
                 name: 'Piauí'
             }, {
-                code: 'RJ',
-                name: 'Rio de Janeiro'
-            }, {
                 code: 'RN',
                 name: 'Rio Grande do Norte'
             }, {
                 code: 'RS',
                 name: 'Rio Grande do Sul'
+            }, {
+                code: 'RJ',
+                name: 'Rio de Janeiro'
             }, {
                 code: 'RO',
                 name: 'Rondônia'
@@ -739,11 +1039,11 @@ export const COUNTRIES = [
                 code: 'SC',
                 name: 'Santa Catarina'
             }, {
-                code: 'SP',
-                name: 'São Paulo'
-            }, {
                 code: 'SE',
                 name: 'Sergipe'
+            }, {
+                code: 'SP',
+                name: 'São Paulo'
             }, {
                 code: 'TO',
                 name: 'Tocantins'
@@ -753,12 +1053,214 @@ export const COUNTRIES = [
         id: 2210,
         code: 'BN',
         name: 'Brunei Darussalam',
-        states: []
+        states: [
+            {
+                code: 'BX01',
+                name: 'Amo'
+            }, {
+                code: 'BX02',
+                name: 'Bandar Seri Begawan'
+            }, {
+                code: 'BX03',
+                name: 'Bangar'
+            }, {
+                code: 'BX04',
+                name: 'Batu Apoi'
+            }, {
+                code: 'BX05',
+                name: 'Berakas'
+            }, {
+                code: 'BX06',
+                name: 'Bokok'
+            }, {
+                code: 'BX07',
+                name: 'Bukit Sawat'
+            }, {
+                code: 'BX08',
+                name: 'Burong Pinggai Ayer'
+            }, {
+                code: 'BX09',
+                name: 'Gadong'
+            }, {
+                code: 'BX10',
+                name: 'Keriam'
+            }, {
+                code: 'BX11',
+                name: 'Kianggeh'
+            }, {
+                code: 'BX12',
+                name: 'Kilanas'
+            }, {
+                code: 'BX13',
+                name: 'Kiudang'
+            }, {
+                code: 'BX14',
+                name: 'Kota Batu'
+            }, {
+                code: 'BX15',
+                name: 'Kuala Balai'
+            }, {
+                code: 'BX16',
+                name: 'Kuala Belait'
+            }, {
+                code: 'BX17',
+                name: 'Labi'
+            }, {
+                code: 'BX18',
+                name: 'Labu'
+            }, {
+                code: 'BX19',
+                name: 'Lamunin'
+            }, {
+                code: 'BX20',
+                name: 'Liang'
+            }, {
+                code: 'BX21',
+                name: 'Lumapas'
+            }, {
+                code: 'BX22',
+                name: 'Melilas'
+            }, {
+                code: 'BX23',
+                name: 'Mentiri'
+            }, {
+                code: 'BX24',
+                name: 'Pekan Tutong'
+            }, {
+                code: 'BX25',
+                name: 'Pengkalan Batu'
+            }, {
+                code: 'BX26',
+                name: 'Peramu'
+            }, {
+                code: 'BX27',
+                name: 'Rambai'
+            }, {
+                code: 'BX28',
+                name: 'Saba'
+            }, {
+                code: 'BX29',
+                name: 'Sengkurong'
+            }, {
+                code: 'BX30',
+                name: 'Serasa'
+            }, {
+                code: 'BX31',
+                name: 'Seria'
+            }, {
+                code: 'BX32',
+                name: 'Sukang'
+            }, {
+                code: 'BX33',
+                name: 'Sungai Kebun'
+            }, {
+                code: 'BX34',
+                name: 'Sungai Kedayan'
+            }, {
+                code: 'BX35',
+                name: 'Tamoi'
+            }, {
+                code: 'BX36',
+                name: 'Tanjong Maya'
+            }, {
+                code: 'BX37',
+                name: 'Telisai'
+            }, {
+                code: 'BX38',
+                name: 'Ukong'
+            }
+        ]
     }, {
         id: 2211,
         code: 'BG',
         name: 'Bulgaria',
-        states: []
+        states: [
+            {
+                code: 'BU38',
+                name: 'Blagoevgrad'
+            }, {
+                code: 'BU39',
+                name: 'Burgas'
+            }, {
+                code: 'BU40',
+                name: 'Dobrich'
+            }, {
+                code: 'BU41',
+                name: 'Gabrovo'
+            }, {
+                code: 'BU42',
+                name: 'Grad Sofiya'
+            }, {
+                code: 'BU43',
+                name: 'Khaskovo'
+            }, {
+                code: 'BU44',
+                name: 'Kurdzhali'
+            }, {
+                code: 'BU45',
+                name: 'Kyustendil'
+            }, {
+                code: 'BU46',
+                name: 'Lovech'
+            }, {
+                code: 'BU47',
+                name: 'Montana'
+            }, {
+                code: 'BU48',
+                name: 'Pazardzhik'
+            }, {
+                code: 'BU49',
+                name: 'Pernik'
+            }, {
+                code: 'BU50',
+                name: 'Pleven'
+            }, {
+                code: 'BU51',
+                name: 'Plovdiv'
+            }, {
+                code: 'BU52',
+                name: 'Razgrad'
+            }, {
+                code: 'BU53',
+                name: 'Ruse'
+            }, {
+                code: 'BU54',
+                name: 'Shumen'
+            }, {
+                code: 'BU55',
+                name: 'Silistra'
+            }, {
+                code: 'BU56',
+                name: 'Sliven'
+            }, {
+                code: 'BU57',
+                name: 'Smolyan'
+            }, {
+                code: 'BU58',
+                name: 'Sofiya'
+            }, {
+                code: 'BU59',
+                name: 'Stara Zagora'
+            }, {
+                code: 'BU60',
+                name: 'Turgovishte'
+            }, {
+                code: 'BU61',
+                name: 'Varna'
+            }, {
+                code: 'BU62',
+                name: 'Veliko Turnovo'
+            }, {
+                code: 'BU63',
+                name: 'Vidin'
+            }, {
+                code: 'BU64',
+                name: 'Vratsa'
+            }, {
+                code: 'BU65',
+                name: 'Yambol'
+            }
+        ]
     }, {
         id: 2212,
         code: 'BF',
@@ -773,7 +1275,84 @@ export const COUNTRIES = [
         id: 2214,
         code: 'KH',
         name: 'Cambodia',
-        states: []
+        states: [
+            {
+                code: 'CB29',
+                name: 'Batdâmbâng'
+            }, {
+                code: 'CB25',
+                name: 'Bântéay Méanchey'
+            }, {
+                code: 'CB08',
+                name: 'Kaôh Kong'
+            }, {
+                code: 'CB26',
+                name: 'Krong Keb'
+            }, {
+                code: 'CB30',
+                name: 'Krong Pailin'
+            }, {
+                code: 'CB28',
+                name: 'Krong Preah Sihanouk'
+            }, {
+                code: 'CB09',
+                name: 'Krâchéh'
+            }, {
+                code: 'CB02',
+                name: 'Kâmpóng Cham'
+            }, {
+                code: 'CB03',
+                name: 'Kâmpóng Chhnang'
+            }, {
+                code: 'CB04',
+                name: 'Kâmpóng Spœ'
+            }, {
+                code: 'CB05',
+                name: 'Kâmpóng Thum'
+            }, {
+                code: 'CB21',
+                name: 'Kâmpôt'
+            }, {
+                code: 'CB07',
+                name: 'Kândal'
+            }, {
+                code: 'CB10',
+                name: 'Môndól Kiri'
+            }, {
+                code: 'CB27',
+                name: 'Otdâr Méanchey'
+            }, {
+                code: 'CB22',
+                name: 'Phnom Penh'
+            }, {
+                code: 'CB12',
+                name: 'Pouthisat'
+            }, {
+                code: 'CB13',
+                name: 'Preah Vihéar'
+            }, {
+                code: 'CB14',
+                name: 'Prey Vêng'
+            }, {
+                code: 'CB23',
+                name: 'Rôtânôkiri'
+            }, {
+                code: 'CB24',
+                name: 'Siemréab'
+            }, {
+                code: 'CB17',
+                name: 'Stœ?ng Trêng'
+            }, {
+                code: 'CB18',
+                name: 'Svay Rieng'
+            }, {
+                code: 'CB19',
+                name: 'Takêv'
+            }, {
+                code: 'CB31',
+                name: 'Tbong Khmum'
+            }
+        ]
     }, {
         id: 2215,
         code: 'CM',
@@ -844,7 +1423,54 @@ export const COUNTRIES = [
         id: 2220,
         code: 'CL',
         name: 'Chile',
-        states: []
+        states: [
+            {
+                code: 'CL.AI',
+                name: 'Aisén del General Carlos Ibáñez del Campo'
+            }, {
+                code: 'CL.AN',
+                name: 'Antofagasta'
+            }, {
+                code: 'CL.AR',
+                name: 'Araucanía'
+            }, {
+                code: 'CL.AP',
+                name: 'Arica and Parinacota'
+            }, {
+                code: 'CL.AT',
+                name: 'Atacama'
+            }, {
+                code: 'CL.BI',
+                name: 'Bío-Bío'
+            }, {
+                code: 'CL.CO',
+                name: 'Coquimbo'
+            }, {
+                code: 'CL.LI',
+                name: 'Libertador General Bernardo O\'Higgins'
+            }, {
+                code: 'CL.LG',
+                name: 'Los Lagos'
+            }, {
+                code: 'CL.LR',
+                name: 'Los Ríos'
+            }, {
+                code: 'CL.MA',
+                name: 'Magallanes y Antártica Chilena'
+            }, {
+                code: 'CL.ML',
+                name: 'Maule'
+            }, {
+                code: 'CL.RM',
+                name: 'Región Metropolitana de Santiago'
+            }, {
+                code: 'CL.TP',
+                name: 'Tarapacá'
+            }, {
+                code: 'CL.VS',
+                name: 'Valparaíso'
+            }
+        ]
     }, {
         id: 2221,
         code: 'CN',
@@ -889,6 +1515,9 @@ export const COUNTRIES = [
             }, {
                 code: 'CH09',
                 name: 'Henan'
+            }, {
+                code: 'CH34',
+                name: 'Hong Kong'
             }, {
                 code: 'CH12',
                 name: 'Hubei'
@@ -955,7 +1584,108 @@ export const COUNTRIES = [
         id: 2222,
         code: 'CO',
         name: 'Colombia',
-        states: []
+        states: [
+            {
+                code: 'CO01',
+                name: 'Amazonas'
+            }, {
+                code: 'CO02',
+                name: 'Antioquia'
+            }, {
+                code: 'CO03',
+                name: 'Arauca'
+            }, {
+                code: 'CO04',
+                name: 'Atlántico'
+            }, {
+                code: 'CO35',
+                name: 'Bolívar'
+            }, {
+                code: 'CO36',
+                name: 'Boyacá'
+            }, {
+                code: 'CO37',
+                name: 'Caldas'
+            }, {
+                code: 'CO08',
+                name: 'Caquetá'
+            }, {
+                code: 'CO32',
+                name: 'Casanare'
+            }, {
+                code: 'CO09',
+                name: 'Cauca'
+            }, {
+                code: 'CO10',
+                name: 'Cesar'
+            }, {
+                code: 'CO11',
+                name: 'Chocó'
+            }, {
+                code: 'CO33',
+                name: 'Cundinamarca'
+            }, {
+                code: 'CO12',
+                name: 'Córdoba'
+            }, {
+                code: 'CO34',
+                name: 'Distrito Capital'
+            }, {
+                code: 'CO15',
+                name: 'Guainía'
+            }, {
+                code: 'CO14',
+                name: 'Guaviare'
+            }, {
+                code: 'CO16',
+                name: 'Huila'
+            }, {
+                code: 'CO17',
+                name: 'La Guajira'
+            }, {
+                code: 'CO38',
+                name: 'Magdalena'
+            }, {
+                code: 'CO19',
+                name: 'Meta'
+            }, {
+                code: 'CO20',
+                name: 'Nariño'
+            }, {
+                code: 'CO21',
+                name: 'Norte de Santander'
+            }, {
+                code: 'CO22',
+                name: 'Putumayo'
+            }, {
+                code: 'CO23',
+                name: 'Quindío'
+            }, {
+                code: 'CO24',
+                name: 'Risaralda'
+            }, {
+                code: 'CO25',
+                name: 'San Andrés y Providencia'
+            }, {
+                code: 'CO26',
+                name: 'Santander'
+            }, {
+                code: 'CO27',
+                name: 'Sucre'
+            }, {
+                code: 'CO28',
+                name: 'Tolima'
+            }, {
+                code: 'CO29',
+                name: 'Valle del Cauca'
+            }, {
+                code: 'CO30',
+                name: 'Vaupés'
+            }, {
+                code: 'CO31',
+                name: 'Vichada'
+            }
+        ]
     }, {
         id: 2223,
         code: 'KM',
@@ -965,7 +1695,30 @@ export const COUNTRIES = [
         id: 2226,
         code: 'CR',
         name: 'Costa Rica',
-        states: []
+        states: [
+            {
+                code: 'CS01',
+                name: 'Alajuela'
+            }, {
+                code: 'CS02',
+                name: 'Cartago'
+            }, {
+                code: 'CS03',
+                name: 'Guanacaste'
+            }, {
+                code: 'CS04',
+                name: 'Heredia'
+            }, {
+                code: 'CS06',
+                name: 'Limón'
+            }, {
+                code: 'CS07',
+                name: 'Puntarenas'
+            }, {
+                code: 'CS08',
+                name: 'San José'
+            }
+        ]
     }, {
         id: 2227,
         code: 'CI',
@@ -977,9 +1730,6 @@ export const COUNTRIES = [
         name: 'Croatia',
         states: [
             {
-                code: 'HR15',
-                name: 'Šibensko-kninska'
-            }, {
                 code: 'HR07',
                 name: 'Bjelovarsko-bilogorska'
             }, {
@@ -1039,18 +1789,91 @@ export const COUNTRIES = [
             }, {
                 code: 'HR01',
                 name: 'Zagrebacka'
+            }, {
+                code: 'HR15',
+                name: 'Šibensko-kninska'
             }
         ]
     }, {
         id: 2229,
         code: 'CU',
         name: 'Cuba',
-        states: []
+        states: [
+            {
+                code: 'CU17',
+                name: 'Artemisa'
+            }, {
+                code: 'CU05',
+                name: 'Camagüey'
+            }, {
+                code: 'CU07',
+                name: 'Ciego de Ávila'
+            }, {
+                code: 'CU08',
+                name: 'Cienfuegos'
+            }, {
+                code: 'CU09',
+                name: 'Granma'
+            }, {
+                code: 'CU10',
+                name: 'Guantánamo'
+            }, {
+                code: 'CU12',
+                name: 'Holguín'
+            }, {
+                code: 'CU04',
+                name: 'Isla de la Juventud'
+            }, {
+                code: 'CU02',
+                name: 'La Habana'
+            }, {
+                code: 'CU13',
+                name: 'Las Tunas'
+            }, {
+                code: 'CU03',
+                name: 'Matanzas'
+            }, {
+                code: 'CU18',
+                name: 'Mayabeque'
+            }, {
+                code: 'CU01',
+                name: 'Pinar del Río'
+            }, {
+                code: 'CU14',
+                name: 'Sancti Spíritus'
+            }, {
+                code: 'CU15',
+                name: 'Santiago de Cuba'
+            }, {
+                code: 'CU16',
+                name: 'Villa Clara'
+            }
+        ]
     }, {
         id: 2230,
         code: 'CY',
         name: 'Cyprus',
-        states: []
+        states: [
+            {
+                code: 'CY01',
+                name: 'Famagusta'
+            }, {
+                code: 'CY02',
+                name: 'Kyrenia'
+            }, {
+                code: 'CY03',
+                name: 'Larnaca'
+            }, {
+                code: 'CY05',
+                name: 'Limassol'
+            }, {
+                code: 'CY04',
+                name: 'Nicosia'
+            }, {
+                code: 'CY06',
+                name: 'Paphos'
+            }
+        ]
     }, {
         id: 2231,
         code: 'CZ',
@@ -1090,14 +1913,14 @@ export const COUNTRIES = [
                 code: 'ST',
                 name: 'Stredoceský kraj'
             }, {
-                code: 'US',
-                name: 'Ústecký kraj'
-            }, {
                 code: 'VY',
                 name: 'Vysocina'
             }, {
                 code: 'ZL',
                 name: 'Zlínský kraj'
+            }, {
+                code: 'US',
+                name: 'Ústecký kraj'
             }
         ]
     }, {
@@ -1189,17 +2012,172 @@ export const COUNTRIES = [
         id: 2236,
         code: 'EC',
         name: 'Ecuador',
-        states: []
+        states: [
+            {
+                code: 'EC02',
+                name: 'Azuay'
+            }, {
+                code: 'EC02',
+                name: 'Azuay'
+            }, {
+                code: 'EC03',
+                name: 'Bolívar'
+            }, {
+                code: 'EC05',
+                name: 'Carchi'
+            }, {
+                code: 'EC04',
+                name: 'Cañar'
+            }, {
+                code: 'EC06',
+                name: 'Chimborazo'
+            }, {
+                code: 'EC07',
+                name: 'Cotopaxi'
+            }, {
+                code: 'EC08',
+                name: 'El Oro'
+            }, {
+                code: 'EC09',
+                name: 'Esmeraldas'
+            }, {
+                code: 'EC01',
+                name: 'Galápagos'
+            }, {
+                code: 'EC10',
+                name: 'Guayas'
+            }, {
+                code: 'EC11',
+                name: 'Imbabura'
+            }, {
+                code: 'EC12',
+                name: 'Loja'
+            }, {
+                code: 'EC13',
+                name: 'Los Ríos'
+            }, {
+                code: 'EC14',
+                name: 'Manabí'
+            }, {
+                code: 'EC15',
+                name: 'Morona-Santiago'
+            }, {
+                code: 'EC23',
+                name: 'Napo'
+            }, {
+                code: 'EC24',
+                name: 'Orellana'
+            }, {
+                code: 'EC17',
+                name: 'Pastaza'
+            }, {
+                code: 'EC18',
+                name: 'Pichincha'
+            }, {
+                code: 'EC25',
+                name: 'Santa Elena'
+            }, {
+                code: 'EC26',
+                name: 'Santo Domingo de los Tsáchilas'
+            }, {
+                code: 'EC22',
+                name: 'Sucumbíos'
+            }, {
+                code: 'EC19',
+                name: 'Tungurahua'
+            }, {
+                code: 'EC20',
+                name: 'Zamora-Chinchipe'
+            }
+        ]
     }, {
         id: 2237,
         code: 'EG',
         name: 'Egypt',
-        states: []
-    }, {
-        id: 2238,
-        code: 'SV',
-        name: 'El Salvador',
-        states: []
+        states: [
+            {
+                code: 'EG01',
+                name: 'Ad Daqahliyah'
+            }, {
+                code: 'EG02',
+                name: 'Al Bahr al Ahmar'
+            }, {
+                code: 'EG03',
+                name: 'Al Buhayrah'
+            }, {
+                code: 'EG04',
+                name: 'Al Fayyum'
+            }, {
+                code: 'EG05',
+                name: 'Al Gharbiyah'
+            }, {
+                code: 'EG06',
+                name: 'Al Iskandariyah'
+            }, {
+                code: 'EG07',
+                name: 'Al Isma`iliyah'
+            }, {
+                code: 'EG08',
+                name: 'Al Jizah'
+            }, {
+                code: 'EG09',
+                name: 'Al Minufiyah'
+            }, {
+                code: 'EG10',
+                name: 'Al Minya'
+            }, {
+                code: 'EG11',
+                name: 'Al Qahirah'
+            }, {
+                code: 'EG12',
+                name: 'Al Qalyubiyah'
+            }, {
+                code: 'EG28',
+                name: 'Al Uqsur'
+            }, {
+                code: 'EG13',
+                name: 'Al Wadi al Jadid'
+            }, {
+                code: 'EG15',
+                name: 'As Suways'
+            }, {
+                code: 'EG14',
+                name: 'Ash Sharqiyah'
+            }, {
+                code: 'EG16',
+                name: 'Aswan'
+            }, {
+                code: 'EG17',
+                name: 'Asyut'
+            }, {
+                code: 'EG18',
+                name: 'Bani Suwayf'
+            }, {
+                code: 'EG19',
+                name: 'Bur Sa`id'
+            }, {
+                code: 'EG20',
+                name: 'Dumyat'
+            }, {
+                code: 'EG26',
+                name: 'Janub Sina'
+            }, {
+                code: 'EG21',
+                name: 'Kafr ash Shaykh'
+            }, {
+                code: 'EG22',
+                name: 'Matruh'
+            }, {
+                code: 'EG23',
+                name: 'Qina'
+            }, {
+                code: 'EG27',
+                name: 'Shamal Sina'
+            }, {
+                code: 'EG24',
+                name: 'Suhaj'
+            }
+        ]
     }, {
         id: 2239,
         code: 'GQ',
@@ -1214,12 +2192,94 @@ export const COUNTRIES = [
         id: 2241,
         code: 'EE',
         name: 'Estonia',
-        states: []
+        states: [
+            {
+                code: 'EN01',
+                name: 'Harju'
+            }, {
+                code: 'EN02',
+                name: 'Hiiu'
+            }, {
+                code: 'EN03',
+                name: 'Ida-Viru'
+            }, {
+                code: 'EN04',
+                name: 'Järva'
+            }, {
+                code: 'EN05',
+                name: 'Jõgeva'
+            }, {
+                code: 'EN07',
+                name: 'Lääne'
+            }, {
+                code: 'EN08',
+                name: 'Lääne-Viru'
+            }, {
+                code: 'EN11',
+                name: 'Pärnu'
+            }, {
+                code: 'EN12',
+                name: 'Põlva'
+            }, {
+                code: 'EN13',
+                name: 'Rapla'
+            }, {
+                code: 'EN14',
+                name: 'Saare'
+            }, {
+                code: 'EN18',
+                name: 'Tartu'
+            }, {
+                code: 'EN19',
+                name: 'Valga'
+            }, {
+                code: 'EN20',
+                name: 'Viljandi'
+            }, {
+                code: 'EN21',
+                name: 'Võru'
+            }
+        ]
     }, {
         id: 2242,
         code: 'ET',
         name: 'Ethiopia',
-        states: []
+        states: [
+            {
+                code: 'ET44',
+                name: 'Addis Ababa'
+            }, {
+                code: 'ET45',
+                name: 'Afar'
+            }, {
+                code: 'ET46',
+                name: 'Amhara'
+            }, {
+                code: 'ET47',
+                name: 'Benshangul-Gumaz'
+            }, {
+                code: 'ET48',
+                name: 'Dire Dawa'
+            }, {
+                code: 'ET49',
+                name: 'Gambela Peoples'
+            }, {
+                code: 'ET50',
+                name: 'Harari People'
+            }, {
+                code: 'ET51',
+                name: 'Oromia'
+            }, {
+                code: 'ET52',
+                name: 'Somali'
+            }, {
+                code: 'ET54',
+                name: 'Southern Nations, Nationalities and Peoples'
+            }, {
+                code: 'ET53',
+                name: 'Tigray'
+            }
+        ]
     }, {
         id: 2243,
         code: 'FJ',
@@ -1240,11 +2300,11 @@ export const COUNTRIES = [
                 code: 'FI-IS',
                 name: 'Itä-Suomen lääni'
             }, {
-                code: 'FI-LS',
-                name: 'Länsi-Suomen lääni'
-            }, {
                 code: 'FI-LL',
                 name: 'Lapin lääni'
+            }, {
+                code: 'FI-LS',
+                name: 'Länsi-Suomen lääni'
             }, {
                 code: 'FI-OL',
                 name: 'Oulun lääni'
@@ -1265,11 +2325,11 @@ export const COUNTRIES = [
                 code: 'FRC4',
                 name: 'Allier'
             }, {
-                code: 'FRC5',
-                name: 'Alpes-de-Haute-Provence'
-            }, {
                 code: 'FRC6',
                 name: 'Alpes-Maritimes'
+            }, {
+                code: 'FRC5',
+                name: 'Alpes-de-Haute-Provence'
             }, {
                 code: 'FRC1',
                 name: 'Alsace'
@@ -1277,11 +2337,11 @@ export const COUNTRIES = [
                 code: 'FR97',
                 name: 'Aquitaine'
             }, {
-                code: 'FRC7',
-                name: 'Ardèche'
-            }, {
                 code: 'FRC8',
                 name: 'Ardennes'
+            }, {
+                code: 'FRC7',
+                name: 'Ardèche'
             }, {
                 code: 'FRC9',
                 name: 'Ariège'
@@ -1340,14 +2400,14 @@ export const COUNTRIES = [
                 code: 'FRE5',
                 name: 'Corse-du-Sud'
             }, {
+                code: 'FRE6',
+                name: 'Creuse'
+            }, {
                 code: 'FRD6',
                 name: 'Côte-d\'Or'
             }, {
                 code: 'FRD7',
                 name: 'Côtes-d\'Armor'
-            }, {
-                code: 'FRE6',
-                name: 'Creuse'
             }, {
                 code: 'FRE7',
                 name: 'Deux-Sèvres'
@@ -1403,11 +2463,11 @@ export const COUNTRIES = [
                 code: 'FRA7',
                 name: 'Haute-Normandie'
             }, {
-                code: 'FRG6',
-                name: 'Haute-Saône'
-            }, {
                 code: 'FRG7',
                 name: 'Haute-Savoie'
+            }, {
+                code: 'FRG6',
+                name: 'Haute-Saône'
             }, {
                 code: 'FRG8',
                 name: 'Haute-Vienne'
@@ -1544,23 +2604,23 @@ export const COUNTRIES = [
                 code: 'FRB9',
                 name: 'Rhône'
             }, {
-                code: 'FRK5',
-                name: 'Saône-et-Loire'
-            }, {
                 code: 'FRK6',
                 name: 'Sarthe'
             }, {
                 code: 'FRK7',
                 name: 'Savoie'
             }, {
-                code: 'FRK8',
-                name: 'Seine-et-Marne'
+                code: 'FRK5',
+                name: 'Saône-et-Loire'
             }, {
                 code: 'FRK9',
                 name: 'Seine-Maritime'
             }, {
                 code: 'FRL1',
                 name: 'Seine-Saint-Denis'
+            }, {
+                code: 'FRK8',
+                name: 'Seine-et-Marne'
             }, {
                 code: 'FRL2',
                 name: 'Somme'
@@ -1671,7 +2731,39 @@ export const COUNTRIES = [
         id: 2250,
         code: 'GH',
         name: 'Ghana',
-        states: []
+        states: [
+            {
+                code: 'GH02',
+                name: 'Ashanti'
+            }, {
+                code: 'GH03',
+                name: 'Brong-Ahafo'
+            }, {
+                code: 'GH04',
+                name: 'Central'
+            }, {
+                code: 'GH05',
+                name: 'Eastern'
+            }, {
+                code: 'GH01',
+                name: 'Greater Accra'
+            }, {
+                code: 'GH06',
+                name: 'Northern'
+            }, {
+                code: 'GH10',
+                name: 'Upper East'
+            }, {
+                code: 'GH11',
+                name: 'Upper West'
+            }, {
+                code: 'GH08',
+                name: 'Volta'
+            }, {
+                code: 'GH09',
+                name: 'Western'
+            }
+        ]
     }, {
         id: 2251,
         code: 'GR',
@@ -1869,30 +2961,86 @@ export const COUNTRIES = [
         id: 2259,
         code: 'HN',
         name: 'Honduras',
-        states: []
+        states: [
+            {
+                code: 'HO01',
+                name: 'Atlántida'
+            }, {
+                code: 'HO02',
+                name: 'Choluteca'
+            }, {
+                code: 'HO03',
+                name: 'Colón'
+            }, {
+                code: 'HO04',
+                name: 'Comayagua'
+            }, {
+                code: 'HO05',
+                name: 'Copán'
+            }, {
+                code: 'HO06',
+                name: 'Cortés'
+            }, {
+                code: 'HO07',
+                name: 'El Paraíso'
+            }, {
+                code: 'HO08',
+                name: 'Francisco Morazán'
+            }, {
+                code: 'HO09',
+                name: 'Gracias a Dios'
+            }, {
+                code: 'HO10',
+                name: 'Intibucá'
+            }, {
+                code: 'HO11',
+                name: 'Islas de la Bahía'
+            }, {
+                code: 'HO12',
+                name: 'La Paz'
+            }, {
+                code: 'HO13',
+                name: 'Lempira'
+            }, {
+                code: 'HO14',
+                name: 'Ocotepeque'
+            }, {
+                code: 'HO15',
+                name: 'Olancho'
+            }, {
+                code: 'HO16',
+                name: 'Santa Bárbara'
+            }, {
+                code: 'HO17',
+                name: 'Valle'
+            }, {
+                code: 'HO18',
+                name: 'Yoro'
+            }
+        ]
     }, {
         id: 2260,
         code: 'HU',
         name: 'Hungary',
         states: [
             {
-                code: 'BK',
-                name: 'Bács-Kiskun'
-            }, {
                 code: 'BA',
                 name: 'Baranya'
-            }, {
-                code: 'BE',
-                name: 'Békés'
-            }, {
-                code: 'BC',
-                name: 'Békéscsaba'
             }, {
                 code: 'BZ',
                 name: 'Borsod-Abaúj-Zemplén'
             }, {
                 code: 'BU',
                 name: 'Budapest'
+            }, {
+                code: 'BK',
+                name: 'Bács-Kiskun'
+            }, {
+                code: 'BE',
+                name: 'Békés'
+            }, {
+                code: 'BC',
+                name: 'Békéscsaba'
             }, {
                 code: 'CS',
                 name: 'Csongrád'
@@ -1945,17 +3093,17 @@ export const COUNTRIES = [
                 code: 'NK',
                 name: 'Nagykanizsa'
             }, {
-                code: 'NO',
-                name: 'Nógrád'
-            }, {
                 code: 'NY',
                 name: 'Nyíregyháza'
             }, {
-                code: 'PS',
-                name: 'Pécs'
+                code: 'NO',
+                name: 'Nógrád'
             }, {
                 code: 'PE',
                 name: 'Pest'
+            }, {
+                code: 'PS',
+                name: 'Pécs'
             }, {
                 code: 'ST',
                 name: 'Salgótarján'
@@ -1972,9 +3120,6 @@ export const COUNTRIES = [
                 code: 'SD',
                 name: 'Szeged'
             }, {
-                code: 'SF',
-                name: 'Székesfehérvár'
-            }, {
                 code: 'SS',
                 name: 'Szekszárd'
             }, {
@@ -1983,6 +3128,9 @@ export const COUNTRIES = [
             }, {
                 code: 'SH',
                 name: 'Szombathely'
+            }, {
+                code: 'SF',
+                name: 'Székesfehérvár'
             }, {
                 code: 'TB',
                 name: 'Tatabánya'
@@ -2262,12 +3410,163 @@ export const COUNTRIES = [
         id: 2264,
         code: 'IR',
         name: 'Iran; Islamic Republic of',
-        states: []
+        states: [
+            {
+                code: 'IR44',
+                name: 'Alborz'
+            }, {
+                code: 'IR32',
+                name: 'Ardebil'
+            }, {
+                code: 'IR22',
+                name: 'Bushehr'
+            }, {
+                code: 'IR03',
+                name: 'Chahar Mahall and Bakhtiari'
+            }, {
+                code: 'IR33',
+                name: 'East Azarbaijan'
+            }, {
+                code: 'IR28',
+                name: 'Esfahan'
+            }, {
+                code: 'IR07',
+                name: 'Fars'
+            }, {
+                code: 'IR08',
+                name: 'Gilan'
+            }, {
+                code: 'IR37',
+                name: 'Golestan'
+            }, {
+                code: 'IR09',
+                name: 'Hamadan'
+            }, {
+                code: 'IR11',
+                name: 'Hormozgan'
+            }, {
+                code: 'IR42',
+                name: 'IRazavi Khorasan'
+            }, {
+                code: 'IR10',
+                name: 'Ilam'
+            }, {
+                code: 'IR29',
+                name: 'Kerman'
+            }, {
+                code: 'IR13',
+                name: 'Kermanshah'
+            }, {
+                code: 'IR15',
+                name: 'Khuzestan'
+            }, {
+                code: 'IR05',
+                name: 'Kohgiluyeh and Buyer Ahmad'
+            }, {
+                code: 'IR16',
+                name: 'Kordestan'
+            }, {
+                code: 'IR23',
+                name: 'Lorestan'
+            }, {
+                code: 'IR34',
+                name: 'Markazi'
+            }, {
+                code: 'IR35',
+                name: 'Mazandaran'
+            }, {
+                code: 'IR43',
+                name: 'North Khorasan'
+            }, {
+                code: 'IR38',
+                name: 'Qazvin'
+            }, {
+                code: 'IR39',
+                name: 'Qom'
+            }, {
+                code: 'IR25',
+                name: 'Semnan'
+            }, {
+                code: 'IR04',
+                name: 'Sistan and Baluchestan'
+            }, {
+                code: 'IR41',
+                name: 'South Khorasan'
+            }, {
+                code: 'IR26',
+                name: 'Tehran'
+            }, {
+                code: 'IR01',
+                name: 'West Azarbaijan'
+            }, {
+                code: 'IR40',
+                name: 'Yazd'
+            }, {
+                code: 'IR36',
+                name: 'Zanjan'
+            }
+        ]
     }, {
         id: 2265,
         code: 'IQ',
         name: 'Iraq',
-        states: []
+        states: [
+            {
+                code: 'IZ01',
+                name: 'Al-Anbar'
+            }, {
+                code: 'IZ02',
+                name: 'Al-Basrah'
+            }, {
+                code: 'IZ03',
+                name: 'Al-Muthanna'
+            }, {
+                code: 'IZ04',
+                name: 'Al-Qadisiyah'
+            }, {
+                code: 'IZ17',
+                name: 'An-Najaf'
+            }, {
+                code: 'IZ11',
+                name: 'Arbil'
+            }, {
+                code: 'IZ05',
+                name: 'As-Sulaymaniyah'
+            }, {
+                code: 'IZ13',
+                name: 'At-Ta\'mim'
+            }, {
+                code: 'IZ06',
+                name: 'Babil'
+            }, {
+                code: 'IZ07',
+                name: 'Baghdad'
+            }, {
+                code: 'IZ08',
+                name: 'Dahuk'
+            }, {
+                code: 'IZ09',
+                name: 'Dhi Qar'
+            }, {
+                code: 'IZ10',
+                name: 'Diyala'
+            }, {
+                code: 'IZ12',
+                name: 'Karbala'
+            }, {
+                code: 'IZ14',
+                name: 'Maysan'
+            }, {
+                code: 'IZ15',
+                name: 'Ninawa'
+            }, {
+                code: 'IZ18',
+                name: 'Salah ad-Din'
+            }, {
+                code: 'IZ16',
+                name: 'Wasit'
+            }
+        ]
     }, {
         id: 2266,
         code: 'IE',
@@ -2357,7 +3656,27 @@ export const COUNTRIES = [
         id: 2267,
         code: 'IL',
         name: 'Israel',
-        states: []
+        states: [
+            {
+                code: 'IS01',
+                name: 'HaDarom'
+            }, {
+                code: 'IS02',
+                name: 'HaMerkaz'
+            }, {
+                code: 'IS03',
+                name: 'HaZafon'
+            }, {
+                code: 'IS04',
+                name: 'Haifa'
+            }, {
+                code: 'IS06',
+                name: 'Jerusalem'
+            }, {
+                code: 'IS05',
+                name: 'Tel Aviv'
+            }
+        ]
     }, {
         id: 2268,
         code: 'IT',
@@ -2922,22 +4241,273 @@ export const COUNTRIES = [
         id: 2273,
         code: 'KE',
         name: 'Kenya',
-        states: []
+        states: [
+            {
+                code: 'KE10',
+                name: 'Baringo'
+            }, {
+                code: 'KE11',
+                name: 'Bomet'
+            }, {
+                code: 'KE12',
+                name: 'Bungoma'
+            }, {
+                code: 'KE13',
+                name: 'Busia'
+            }, {
+                code: 'KE14',
+                name: 'Elgeyo Marakwet'
+            }, {
+                code: 'KE15',
+                name: 'Embu'
+            }, {
+                code: 'KE16',
+                name: 'Garissa'
+            }, {
+                code: 'KE17',
+                name: 'Homa Bay'
+            }, {
+                code: 'KE18',
+                name: 'Isiolo'
+            }, {
+                code: 'KE19',
+                name: 'Kajiado'
+            }, {
+                code: 'KE20',
+                name: 'Kakamega'
+            }, {
+                code: 'KE21',
+                name: 'Kericho'
+            }, {
+                code: 'KE22',
+                name: 'Kiambu'
+            }, {
+                code: 'KE23',
+                name: 'Kilifi'
+            }, {
+                code: 'KE24',
+                name: 'Kirinyaga'
+            }, {
+                code: 'KE25',
+                name: 'Kisii'
+            }, {
+                code: 'KE26',
+                name: 'Kisumu'
+            }, {
+                code: 'KE27',
+                name: 'Kitui'
+            }, {
+                code: 'KE28',
+                name: 'Kwale'
+            }, {
+                code: 'KE29',
+                name: 'Laikipia'
+            }, {
+                code: 'KE30',
+                name: 'Lamu'
+            }, {
+                code: 'KE31',
+                name: 'Machakos'
+            }, {
+                code: 'KE32',
+                name: 'Makueni'
+            }, {
+                code: 'KE33',
+                name: 'Mandera'
+            }, {
+                code: 'KE34',
+                name: 'Marsabit'
+            }, {
+                code: 'KE35',
+                name: 'Meru'
+            }, {
+                code: 'KE36',
+                name: 'Migori'
+            }, {
+                code: 'KE37',
+                name: 'Mombasa'
+            }, {
+                code: 'KE38',
+                name: 'Murang'
+            }, {
+                code: 'KE05',
+                name: 'Nairobi'
+            }, {
+                code: 'KE39',
+                name: 'Nakuru'
+            }, {
+                code: 'KE40',
+                name: 'Nandi'
+            }, {
+                code: 'KE41',
+                name: 'Narok'
+            }, {
+                code: 'KE42',
+                name: 'Nyamira'
+            }, {
+                code: 'KE43',
+                name: 'Nyandarua'
+            }, {
+                code: 'KE44',
+                name: 'Nyeri'
+            }, {
+                code: 'KE45',
+                name: 'Samburu'
+            }, {
+                code: 'KE46',
+                name: 'Siaya'
+            }, {
+                code: 'KE47',
+                name: 'Taita Taveta'
+            }, {
+                code: 'KE48',
+                name: 'Tana River'
+            }, {
+                code: 'KE49',
+                name: 'Tharaka Nithi'
+            }, {
+                code: 'KE50',
+                name: 'Trans Nzoia'
+            }, {
+                code: 'KE51',
+                name: 'Turkana'
+            }, {
+                code: 'KE52',
+                name: 'Uasin Gishu'
+            }, {
+                code: 'KE53',
+                name: 'Vihiga'
+            }, {
+                code: 'KE54',
+                name: 'Wajir'
+            }, {
+                code: 'KE55',
+                name: 'West Pokot'
+            }
+        ]
     }, {
         id: 2274,
         code: 'KP',
         name: 'Korea; Democratic People\'s Republic Of (North)',
-        states: []
+        states: [
+            {
+                code: 'KN01',
+                name: 'Chagang-do'
+            }, {
+                code: 'KN17',
+                name: 'Hamgyong-bukto'
+            }, {
+                code: 'KN03',
+                name: 'Hamgyong-namdo'
+            }, {
+                code: 'KN07',
+                name: 'Hwanghae-bukto'
+            }, {
+                code: 'KN06',
+                name: 'Hwanghae-namdo'
+            }, {
+                code: 'KN09',
+                name: 'Kangwon-do'
+            }, {
+                code: 'KN18',
+                name: 'Najin Sonbong-si'
+            }, {
+                code: 'KN11',
+                name: 'P\'yongan-bukto'
+            }, {
+                code: 'KN15',
+                name: 'P\'yongan-namdo'
+            }, {
+                code: 'KN12',
+                name: 'P\'yongyang-si'
+            }, {
+                code: 'KN13',
+                name: 'Yanggang-do'
+            }
+        ]
     }, {
         id: 2275,
         code: 'KR',
         name: 'Korea; Republic Of (South)',
-        states: []
+        states: [
+            {
+                code: 'KS10',
+                name: 'Busan'
+            }, {
+                code: 'KS05',
+                name: 'Chungcheongbuk-do'
+            }, {
+                code: 'KS17',
+                name: 'Chungcheongnam-do'
+            }, {
+                code: 'KS15',
+                name: 'Daegu'
+            }, {
+                code: 'KS19',
+                name: 'Daejeon'
+            }, {
+                code: 'KS06',
+                name: 'Gangwon-do'
+            }, {
+                code: 'KS18',
+                name: 'Gwangju'
+            }, {
+                code: 'KS13',
+                name: 'Gyeonggi-do'
+            }, {
+                code: 'KS14',
+                name: 'Gyeongsangbuk-do'
+            }, {
+                code: 'KS20',
+                name: 'Gyeongsangnam-do'
+            }, {
+                code: 'KS12',
+                name: 'Incheon'
+            }, {
+                code: 'KS01',
+                name: 'Jeju-do'
+            }, {
+                code: 'KS03',
+                name: 'Jeollabuk-do'
+            }, {
+                code: 'KS16',
+                name: 'Jeollanam-do'
+            }, {
+                code: 'KS22',
+                name: 'Sejong'
+            }, {
+                code: 'KS11',
+                name: 'Seoul'
+            }, {
+                code: 'KS21',
+                name: 'Ulsan'
+            }
+        ]
     }, {
         id: 2276,
         code: 'KW',
         name: 'Kuwait',
-        states: []
+        states: [
+            {
+                code: 'KU04',
+                name: 'Al Ahmadi'
+            }, {
+                code: 'KU07',
+                name: 'Al Farwaniyah'
+            }, {
+                code: 'KU05',
+                name: 'Al Jahrah'
+            }, {
+                code: 'KU02',
+                name: 'Al Kuwayt'
+            }, {
+                code: 'KU08',
+                name: 'Hawalli'
+            }, {
+                code: 'KU09',
+                name: 'Mubarak Al-Kabir'
+            }
+        ]
     }, {
         id: 2277,
         code: 'KG',
@@ -2957,7 +4527,33 @@ export const COUNTRIES = [
         id: 2280,
         code: 'LB',
         name: 'Lebanon',
-        states: []
+        states: [
+            {
+                code: 'LE10',
+                name: 'Aakkar'
+            }, {
+                code: 'LE07',
+                name: 'An Nabatiyah'
+            }, {
+                code: 'LE11',
+                name: 'Baalbek-Hermel'
+            }, {
+                code: 'LE04',
+                name: 'Beirut'
+            }, {
+                code: 'LE08',
+                name: 'Beqaa'
+            }, {
+                code: 'LE05',
+                name: 'Mount Lebanon'
+            }, {
+                code: 'LE09',
+                name: 'North Lebanon'
+            }, {
+                code: 'LE06',
+                name: 'South Lebanon'
+            }
+        ]
     }, {
         id: 2281,
         code: 'LS',
@@ -2977,12 +4573,55 @@ export const COUNTRIES = [
         id: 2285,
         code: 'LT',
         name: 'Lithuania',
-        states: []
+        states: [
+            {
+                code: 'LH56',
+                name: 'Alytus'
+            }, {
+                code: 'LH57',
+                name: 'Kaunas'
+            }, {
+                code: 'LH58',
+                name: 'Klaipeda'
+            }, {
+                code: 'LH59',
+                name: 'Marijampole'
+            }, {
+                code: 'LH60',
+                name: 'Panevežys'
+            }, {
+                code: 'LH61',
+                name: 'Siauliai'
+            }, {
+                code: 'LH62',
+                name: 'Taurage'
+            }, {
+                code: 'LH63',
+                name: 'Telšiai'
+            }, {
+                code: 'LH64',
+                name: 'Utena'
+            }, {
+                code: 'LH65',
+                name: 'Vilnius'
+            }
+        ]
     }, {
         id: 2286,
         code: 'LU',
         name: 'Luxembourg',
-        states: []
+        states: [
+            {
+                code: 'LU01',
+                name: 'Diekirch'
+            }, {
+                code: 'LU02',
+                name: 'Grevenmacher'
+            }, {
+                code: 'LU03',
+                name: 'Luxembourg'
+            }
+        ]
     }, {
         id: 2287,
         code: 'MO',
@@ -3049,13 +4688,13 @@ export const COUNTRIES = [
                 name: 'Terengganu'
             }, {
                 code: 'MY14',
-                name: 'Wilayah Persekutuan Kuala Lumpur'
+                name: 'W.P. Kuala Lumpur'
             }, {
                 code: 'MY15',
-                name: 'Wilayah Persekutuan Labuan'
+                name: 'W.P. Labuan'
             }, {
                 code: 'MY16',
-                name: 'Wilayah Persekutuan Putrajaya'
+                name: 'W.P. Putrajaya'
             }
         ]
     }, {
@@ -3126,14 +4765,14 @@ export const COUNTRIES = [
                 code: 'JAL',
                 name: 'Jalisco'
             }, {
-                code: 'MEX',
-                name: 'México'
-            }, {
                 code: 'MIC',
                 name: 'Michoacán'
             }, {
                 code: 'MOR',
                 name: 'Morelos'
+            }, {
+                code: 'MEX',
+                name: 'México'
             }, {
                 code: 'NAY',
                 name: 'Nayarit'
@@ -3200,17 +4839,137 @@ export const COUNTRIES = [
         id: 2301,
         code: 'MA',
         name: 'Morocco',
-        states: []
+        states: [
+            {
+                code: 'MA.BK',
+                name: 'Béni Mellal-Khénifra'
+            }, {
+                code: 'MA.CS',
+                name: 'Casablanca-Settat'
+            }, {
+                code: 'MA.OL',
+                name: 'Dakhla-Oued Ed-Dahab'
+            }, {
+                code: 'MA.DT',
+                name: 'Drâa-Tafilalet'
+            }, {
+                code: 'MA.FK',
+                name: 'Fès-Meknès'
+            }, {
+                code: 'MA.GN',
+                name: 'Guelmim-Oued Noun'
+            }, {
+                code: 'MA.OF',
+                name: 'L\'oriental'
+            }, {
+                code: 'MA.LS',
+                name: 'Laâyoune-Sakia al Hamra'
+            }, {
+                code: 'MA.MS',
+                name: 'Marrakech-Safi'
+            }, {
+                code: 'MA.RK',
+                name: 'Rabat-Salé-Kénitra'
+            }, {
+                code: 'MA.SS',
+                name: 'Souss-Massa'
+            }, {
+                code: 'MA.TC',
+                name: 'Tanger-Tétouan-Al Hoceima'
+            }
+        ]
     }, {
         id: 2302,
         code: 'MZ',
         name: 'Mozambique',
-        states: []
+        states: [
+            {
+                code: 'MZ01',
+                name: 'Cabo Delgado'
+            }, {
+                code: 'MZ02',
+                name: 'Gaza'
+            }, {
+                code: 'MZ03',
+                name: 'Inhambane'
+            }, {
+                code: 'MZ10',
+                name: 'Manica'
+            }, {
+                code: 'MZ04',
+                name: 'Maputo'
+            }, {
+                code: 'MZ11',
+                name: 'Maputo [city]'
+            }, {
+                code: 'MZ06',
+                name: 'Nampula'
+            }, {
+                code: 'MZ07',
+                name: 'Niassa'
+            }, {
+                code: 'MZ05',
+                name: 'Sofala'
+            }, {
+                code: 'MZ08',
+                name: 'Tete'
+            }, {
+                code: 'MZ09',
+                name: 'Zambézia'
+            }
+        ]
     }, {
         id: 2303,
         code: 'MM',
         name: 'Myanmar',
-        states: []
+        states: [
+            {
+                code: 'MM.AY',
+                name: 'Ayeyarwady'
+            }, {
+                code: 'MM.BA',
+                name: 'Bago'
+            }, {
+                code: 'MM.CH',
+                name: 'Chin'
+            }, {
+                code: 'MM.KC',
+                name: 'Kachin'
+            }, {
+                code: 'MM.KH',
+                name: 'Kayah'
+            }, {
+                code: 'MM.KN',
+                name: 'Kayin'
+            }, {
+                code: 'MM.MG',
+                name: 'Magway'
+            }, {
+                code: 'MM.ML',
+                name: 'Mandalay'
+            }, {
+                code: 'MM.MO',
+                name: 'Mon'
+            }, {
+                code: 'MM.NY',
+                name: 'Naypyidaw'
+            }, {
+                code: 'MM.RA',
+                name: 'Rakhine'
+            }, {
+                code: 'MM.SA',
+                name: 'Sagaing'
+            }, {
+                code: 'MM.SH',
+                name: 'Shan'
+            }, {
+                code: 'MM.TN',
+                name: 'Tanintharyi'
+            }, {
+                code: 'MM.YA',
+                name: 'Yangon'
+            }
+        ]
     }, {
         id: 2304,
         code: 'NA',
@@ -3283,19 +5042,19 @@ export const COUNTRIES = [
                 name: 'Chatham Islands Territory'
             }, {
                 code: 'GIS',
-                name: 'Gisborne District'
+                name: 'Gisborne'
             }, {
                 code: 'HKB',
-                name: 'Hawkes\'s Bay'
+                name: 'Hawke\'s Bay'
             }, {
                 code: 'MWT',
                 name: 'Manawatu-Wanganui'
             }, {
                 code: 'MBH',
-                name: 'Marlborough District'
+                name: 'Marlborough'
             }, {
                 code: 'NSN',
-                name: 'Nelson City'
+                name: 'Nelson'
             }, {
                 code: 'N',
                 name: 'North Island'
@@ -3342,7 +5101,120 @@ export const COUNTRIES = [
         id: 2310,
         code: 'NG',
         name: 'Nigeria',
-        states: []
+        states: [
+            {
+                code: 'NI45',
+                name: 'Abia'
+            }, {
+                code: 'NI35',
+                name: 'Adamawa'
+            }, {
+                code: 'NI21',
+                name: 'Akwa Ibom'
+            }, {
+                code: 'NI25',
+                name: 'Anambra'
+            }, {
+                code: 'NI46',
+                name: 'Bauchi'
+            }, {
+                code: 'NI52',
+                name: 'Bayelsa'
+            }, {
+                code: 'NI26',
+                name: 'Benue'
+            }, {
+                code: 'NI27',
+                name: 'Borno'
+            }, {
+                code: 'NI22',
+                name: 'Cross River'
+            }, {
+                code: 'NI36',
+                name: 'Delta'
+            }, {
+                code: 'NI53',
+                name: 'Ebonyi'
+            }, {
+                code: 'NI37',
+                name: 'Edo'
+            }, {
+                code: 'NI54',
+                name: 'Ekiti'
+            }, {
+                code: 'NI47',
+                name: 'Enugu'
+            }, {
+                code: 'NI11',
+                name: 'Federal Capital Territory'
+            }, {
+                code: 'NI55',
+                name: 'Gombe'
+            }, {
+                code: 'NI28',
+                name: 'Imo'
+            }, {
+                code: 'NI39',
+                name: 'Jigawa'
+            }, {
+                code: 'NI23',
+                name: 'Kaduna'
+            }, {
+                code: 'NI29',
+                name: 'Kano'
+            }, {
+                code: 'NI24',
+                name: 'Katsina'
+            }, {
+                code: 'NI40',
+                name: 'Kebbi'
+            }, {
+                code: 'NI41',
+                name: 'Kogi'
+            }, {
+                code: 'NI30',
+                name: 'Kwara'
+            }, {
+                code: 'NI05',
+                name: 'Lagos'
+            }, {
+                code: 'NI56',
+                name: 'Nassarawa'
+            }, {
+                code: 'NI31',
+                name: 'Niger'
+            }, {
+                code: 'NI16',
+                name: 'Ogun'
+            }, {
+                code: 'NI48',
+                name: 'Ondo'
+            }, {
+                code: 'NI42',
+                name: 'Osun'
+            }, {
+                code: 'NI32',
+                name: 'Oyo'
+            }, {
+                code: 'NI49',
+                name: 'Plateau'
+            }, {
+                code: 'NI50',
+                name: 'Rivers'
+            }, {
+                code: 'NI51',
+                name: 'Sokoto'
+            }, {
+                code: 'NI43',
+                name: 'Taraba'
+            }, {
+                code: 'NI44',
+                name: 'Yobe'
+            }, {
+                code: 'NI57',
+                name: 'Zamfara'
+            }
+        ]
     }, {
         id: 2311,
         code: 'NO',
@@ -3385,20 +5257,17 @@ export const COUNTRIES = [
                 code: 'NO03',
                 name: 'Oslo'
             }, {
-                code: 'NO01',
-                name: 'Østfold'
-            }, {
                 code: 'NO11',
                 name: 'Rogaland'
             }, {
                 code: 'NO14',
                 name: 'Sogn og Fjordane'
             }, {
-                code: 'NO16',
-                name: 'Sør-Trøndelag'
-            }, {
                 code: 'NO21',
                 name: 'Svalbard (Arctic Region) '
+            }, {
+                code: 'NO16',
+                name: 'Sør-Trøndelag'
             }, {
                 code: 'NO08',
                 name: 'Telemark'
@@ -3411,18 +5280,82 @@ export const COUNTRIES = [
             }, {
                 code: 'NO07',
                 name: 'Vestfold'
+            }, {
+                code: 'NO01',
+                name: 'Østfold'
             }
         ]
     }, {
         id: 2312,
         code: 'OM',
         name: 'Oman',
-        states: []
+        states: [
+            {
+                code: 'MU01',
+                name: 'Ad Dakhliyah'
+            }, {
+                code: 'MU09',
+                name: 'Adh Dhahirah'
+            }, {
+                code: 'MU11',
+                name: 'Al Batinah North'
+            }, {
+                code: 'MU02',
+                name: 'Al Batinah South'
+            }, {
+                code: 'MU10',
+                name: 'Al Buraymi'
+            }, {
+                code: 'MU03',
+                name: 'Al Wusta'
+            }, {
+                code: 'MU12',
+                name: 'Ash Sharqiyah North'
+            }, {
+                code: 'MU04',
+                name: 'Ash Sharqiyah South'
+            }, {
+                code: 'MU08',
+                name: 'Dhofar'
+            }, {
+                code: 'MU07',
+                name: 'Musandam'
+            }, {
+                code: 'MU06',
+                name: 'Muscat'
+            }
+        ]
     }, {
         id: 2313,
         code: 'PK',
         name: 'Pakistan',
-        states: []
+        states: [
+            {
+                code: 'PK06',
+                name: 'Azad Kashmir'
+            }, {
+                code: 'PK02',
+                name: 'Balochistan'
+            }, {
+                code: 'PK01',
+                name: 'Federally Administered Tribal Areas'
+            }, {
+                code: 'PK07',
+                name: 'Gilgit-Baltistan'
+            }, {
+                code: 'PK08',
+                name: 'Islamabad'
+            }, {
+                code: 'PK03',
+                name: 'Khyber-Pakhtunkhwa'
+            }, {
+                code: 'PK04',
+                name: 'Punjab'
+            }, {
+                code: 'PK05',
+                name: 'Sindh'
+            }
+        ]
     }, {
         id: 2314,
         code: 'PW',
@@ -3437,7 +5370,75 @@ export const COUNTRIES = [
         id: 2316,
         code: 'PG',
         name: 'Papua New Guinea',
-        states: []
+        states: [
+            {
+                code: 'PP07',
+                name: 'Bougainville'
+            }, {
+                code: 'PP01',
+                name: 'Central'
+            }, {
+                code: 'PP08',
+                name: 'Chimbu'
+            }, {
+                code: 'PP10',
+                name: 'East New Britain'
+            }, {
+                code: 'PP11',
+                name: 'East Sepik'
+            }, {
+                code: 'PP09',
+                name: 'Eastern Highlands'
+            }, {
+                code: 'PP19',
+                name: 'Enga'
+            }, {
+                code: 'PP02',
+                name: 'Gulf'
+            }, {
+                code: 'PP21',
+                name: 'Hela'
+            }, {
+                code: 'PP22',
+                name: 'Jiwaka'
+            }, {
+                code: 'PP12',
+                name: 'Madang'
+            }, {
+                code: 'PP13',
+                name: 'Manus'
+            }, {
+                code: 'PP03',
+                name: 'Milne Bay'
+            }, {
+                code: 'PP14',
+                name: 'Morobe'
+            }, {
+                code: 'PP20',
+                name: 'National Capital District'
+            }, {
+                code: 'PP15',
+                name: 'New Ireland'
+            }, {
+                code: 'PP04',
+                name: 'Northern'
+            }, {
+                code: 'PP18',
+                name: 'Sandaun'
+            }, {
+                code: 'PP05',
+                name: 'Southern Highlands'
+            }, {
+                code: 'PP17',
+                name: 'West New Britain'
+            }, {
+                code: 'PP06',
+                name: 'Western'
+            }, {
+                code: 'PP16',
+                name: 'Western Highlands'
+            }
+        ]
     }, {
         id: 2317,
         code: 'PY',
@@ -3447,7 +5448,87 @@ export const COUNTRIES = [
         id: 2318,
         code: 'PE',
         name: 'Peru',
-        states: []
+        states: [
+            {
+                code: 'PE01',
+                name: 'Amazonas'
+            }, {
+                code: 'PE02',
+                name: 'Ancash'
+            }, {
+                code: 'PE03',
+                name: 'Apurímac'
+            }, {
+                code: 'PE04',
+                name: 'Arequipa'
+            }, {
+                code: 'PE05',
+                name: 'Ayacucho'
+            }, {
+                code: 'PE06',
+                name: 'Cajamarca'
+            }, {
+                code: 'PE07',
+                name: 'Callao'
+            }, {
+                code: 'PE08',
+                name: 'Cusco'
+            }, {
+                code: 'PE09',
+                name: 'Huancavelica'
+            }, {
+                code: 'PE10',
+                name: 'Huánuco'
+            }, {
+                code: 'PE11',
+                name: 'Ica'
+            }, {
+                code: 'PE12',
+                name: 'Junín'
+            }, {
+                code: 'PE13',
+                name: 'La Libertad'
+            }, {
+                code: 'PE14',
+                name: 'Lambayeque'
+            }, {
+                code: 'PE15',
+                name: 'Lima'
+            }, {
+                code: 'PE26',
+                name: 'Lima [Province]'
+            }, {
+                code: 'PE16',
+                name: 'Loreto'
+            }, {
+                code: 'PE17',
+                name: 'Madre de Dios'
+            }, {
+                code: 'PE18',
+                name: 'Moquegua'
+            }, {
+                code: 'PE19',
+                name: 'Pasco'
+            }, {
+                code: 'PE20',
+                name: 'Piura'
+            }, {
+                code: 'PE21',
+                name: 'Puno'
+            }, {
+                code: 'PE22',
+                name: 'San Martín'
+            }, {
+                code: 'PE23',
+                name: 'Tacna'
+            }, {
+                code: 'PE24',
+                name: 'Tumbes'
+            }, {
+                code: 'PE25',
+                name: 'Ucayali'
+            }
+        ]
     }, {
         id: 2319,
         code: 'PH',
@@ -3535,14 +5616,14 @@ export const COUNTRIES = [
                 code: 'RP57',
                 name: 'Cotabato'
             }, {
+                code: 'RP26',
+                name: 'Davao Oriental'
+            }, {
                 code: 'RPI7',
                 name: 'Davao del Norte'
             }, {
                 code: 'RP25',
                 name: 'Davao del Sur'
-            }, {
-                code: 'RP26',
-                name: 'Davao Oriental'
             }, {
                 code: 'RPI9',
                 name: 'Dinagat Islands'
@@ -3710,14 +5791,14 @@ export const COUNTRIES = [
                 code: 'PL-KP',
                 name: 'Kujawsko-pomorskie'
             }, {
-                code: 'PL-LD',
-                name: 'Lódzkie'
-            }, {
                 code: 'PL-LU',
                 name: 'Lubelskie'
             }, {
                 code: 'PL-LB',
                 name: 'Lubuskie'
+            }, {
+                code: 'PL-LD',
+                name: 'Lódzkie'
             }, {
                 code: 'PL-MA',
                 name: 'Malopolskie'
@@ -3821,7 +5902,30 @@ export const COUNTRIES = [
         id: 2322,
         code: 'QA',
         name: 'Qatar',
-        states: []
+        states: [
+            {
+                code: 'QA01',
+                name: 'Ad Dawhah'
+            }, {
+                code: 'QA13',
+                name: 'Al Daayen'
+            }, {
+                code: 'QA04',
+                name: 'Al Khawr'
+            }, {
+                code: 'QA10',
+                name: 'Al Wakrah'
+            }, {
+                code: 'QA06',
+                name: 'Ar Rayyan'
+            }, {
+                code: 'QA08',
+                name: 'Madinat ach Shamal'
+            }, {
+                code: 'QA09',
+                name: 'Umm Salal'
+            }
+        ]
     }, {
         id: 2323,
         code: 'RO',
@@ -3876,11 +5980,11 @@ export const COUNTRIES = [
                 code: 'RO-CV',
                 name: 'Covasna'
             }, {
-                code: 'RO-DB',
-                name: 'Dâmbovita'
-            }, {
                 code: 'RO-DJ',
                 name: 'Dolj'
+            }, {
+                code: 'RO-DB',
+                name: 'Dâmbovita'
             }, {
                 code: 'RO-GL',
                 name: 'Galati'
@@ -3945,14 +6049,14 @@ export const COUNTRIES = [
                 code: 'RO-TL',
                 name: 'Tulcea'
             }, {
-                code: 'RO-VL',
-                name: 'Vâlcea'
-            }, {
                 code: 'RO-VS',
                 name: 'Vaslui'
             }, {
                 code: 'RO-VN',
                 name: 'Vrancea'
+            }, {
+                code: 'RO-VL',
+                name: 'Vâlcea'
             }
         ]
     }, {
@@ -4242,7 +6346,48 @@ export const COUNTRIES = [
         id: 2328,
         code: 'SA',
         name: 'Saudi Arabia',
-        states: []
+        states: [
+            {
+                code: 'SA02',
+                name: 'Al Bahah'
+            }, {
+                code: 'SA15',
+                name: 'Al Hudud ash Shamaliyah'
+            }, {
+                code: 'SA20',
+                name: 'Al Jawf'
+            }, {
+                code: 'SA05',
+                name: 'Al Madinah'
+            }, {
+                code: 'SA08',
+                name: 'Al Qasim'
+            }, {
+                code: 'SA10',
+                name: 'Ar Riyad'
+            }, {
+                code: 'SA06',
+                name: 'Ash Sharqiyah'
+            }, {
+                code: 'SA11',
+                name: 'Asir'
+            }, {
+                code: 'SA13',
+                name: 'Ha\'il'
+            }, {
+                code: 'SA17',
+                name: 'Jizan'
+            }, {
+                code: 'SA14',
+                name: 'Makkah'
+            }, {
+                code: 'SA16',
+                name: 'Najran'
+            }, {
+                code: 'SA19',
+                name: 'Tabuk'
+            }
+        ]
     }, {
         id: 2329,
         code: 'SN',
@@ -4286,9 +6431,6 @@ export const COUNTRIES = [
         name: 'Slovakia',
         states: [
             {
-                code: 'SK-ZI',
-                name: 'Žilinský kraj'
-            }, {
                 code: 'SK-BC',
                 name: 'Banskobystrický kraj'
             }, {
@@ -4309,6 +6451,9 @@ export const COUNTRIES = [
             }, {
                 code: 'SK-TA',
                 name: 'Trnavský kraj'
+            }, {
+                code: 'SK-ZI',
+                name: 'Žilinský kraj'
             }
         ]
     }, {
@@ -4317,116 +6462,14 @@ export const COUNTRIES = [
         name: 'Slovenia',
         states: [
             {
-                code: 'SI-033',
-                name: 'Šalovci'
-            }, {
-                code: 'SI-183',
-                name: 'Šempeter-Vrtojba'
-            }, {
-                code: 'SI-117',
-                name: 'Šencur'
-            }, {
-                code: 'SI-118',
-                name: 'Šentilj'
-            }, {
-                code: 'SI-119',
-                name: 'Šentjernej'
-            }, {
-                code: 'SI-120',
-                name: 'Šentjur pri Celju'
-            }, {
-                code: 'SI-211',
-                name: 'Šentrupert'
-            }, {
-                code: 'SI-121',
-                name: 'Škocjan'
-            }, {
-                code: 'SI-122',
-                name: 'Škofja Loka'
-            }, {
-                code: 'SI-123',
-                name: 'Škofljica'
-            }, {
-                code: 'SI-124',
-                name: 'Šmarje pri Jelšah'
-            }, {
-                code: 'SI-206',
-                name: 'Šmarješke Toplice'
-            }, {
-                code: 'SI-125',
-                name: 'Šmartno ob Paki'
-            }, {
-                code: 'SI-194',
-                name: 'Šmartno pri Litiji'
-            }, {
-                code: 'SI-194',
-                name: 'Šmartno pri Litiji'
-            }, {
-                code: 'SI-126',
-                name: 'Šoštanj'
-            }, {
-                code: 'SI-127',
-                name: 'Štore'
-            }, {
-                code: 'SI-190',
-                name: 'Žalec'
-            }, {
-                code: 'SI-146',
-                name: 'Železniki'
-            }, {
-                code: 'SI-191',
-                name: 'Žetale'
-            }, {
-                code: 'SI-147',
-                name: 'Žiri'
-            }, {
-                code: 'SI-192',
-                name: 'Žirovnica'
-            }, {
-                code: 'SI-193',
-                name: 'Žužemberk'
-            }, {
-                code: 'SI-001',
-                name: 'Ajdovšcina'
-            }, {
-                code: 'SI-195',
-                name: 'Apace'
-            }, {
-                code: 'SI-002',
-                name: 'Beltinci'
-            }, {
-                code: 'SI-148',
-                name: 'Benedikt'
-            }, {
-                code: 'SI-149',
-                name: 'Bistrica ob Sotli'
-            }, {
-                code: 'SI-003',
-                name: 'Bled'
-            }, {
-                code: 'SI-150',
-                name: 'Bloke'
-            }, {
-                code: 'SI-004',
-                name: 'Bohinj'
-            }, {
-                code: 'SI-005',
-                name: 'Borovnica'
-            }, {
-                code: 'SI-006',
-                name: 'Bovec'
-            }, {
-                code: 'SI-151',
-                name: 'Braslovce'
-            }, {
                 code: 'SI-007',
                 name: 'Brda'
             }, {
-                code: 'SI-009',
-                name: 'Brežice'
-            }, {
                 code: 'SI-008',
                 name: 'Brezovica'
+            }, {
+                code: 'SI-009',
+                name: 'Brežice'
             }, {
                 code: 'SI-152',
                 name: 'Cankova'
@@ -4599,9 +6642,6 @@ export const COUNTRIES = [
                 code: 'SI-051',
                 name: 'Kozje'
             }, {
-                code: 'SI-054',
-                name: 'Krško'
-            }, {
                 code: 'SI-052',
                 name: 'Kranj'
             }, {
@@ -4610,6 +6650,9 @@ export const COUNTRIES = [
             }, {
                 code: 'SI-166',
                 name: 'Križevci'
+            }, {
+                code: 'SI-054',
+                name: 'Krško'
             }, {
                 code: 'SI-055',
                 name: 'Kungota'
@@ -4638,12 +6681,6 @@ export const COUNTRIES = [
                 code: 'SI-063',
                 name: 'Ljutomer'
             }, {
-                code: 'SI-065',
-                name: 'Loška dolina'
-            }, {
-                code: 'SI-066',
-                name: 'Loški Potok'
-            }, {
                 code: 'SI-208',
                 name: 'Log-Dragomer'
             }, {
@@ -4652,6 +6689,12 @@ export const COUNTRIES = [
             }, {
                 code: 'SI-167',
                 name: 'Lovrenc na Pohorju'
+            }, {
+                code: 'SI-065',
+                name: 'Loška dolina'
+            }, {
+                code: 'SI-066',
+                name: 'Loški Potok'
             }, {
                 code: 'SI-067',
                 name: 'Luce'
@@ -4671,9 +6714,6 @@ export const COUNTRIES = [
                 code: 'SI-168',
                 name: 'Markovci'
             }, {
-                code: 'SI-074',
-                name: 'Mežica'
-            }, {
                 code: 'SI-071',
                 name: 'Medvode'
             }, {
@@ -4682,6 +6722,9 @@ export const COUNTRIES = [
             }, {
                 code: 'SI-073',
                 name: 'Metlika'
+            }, {
+                code: 'SI-074',
+                name: 'Mežica'
             }, {
                 code: 'SI-169',
                 name: 'Miklavž na Dravskem polju'
@@ -4812,20 +6855,17 @@ export const COUNTRIES = [
                 code: 'SI-177',
                 name: 'Ribnica na Pohorju'
             }, {
+                code: 'SI-107',
+                name: 'Rogatec'
+            }, {
                 code: 'SI-106',
                 name: 'Rogaška Slatina'
             }, {
                 code: 'SI-105',
                 name: 'Rogašovci'
             }, {
-                code: 'SI-107',
-                name: 'Rogatec'
-            }, {
                 code: 'SI-108',
                 name: 'Ruše'
-            }, {
-                code: 'SI-111',
-                name: 'Sežana'
             }, {
                 code: 'SI-178',
                 name: 'Selnica ob Dravi'
@@ -4835,6 +6875,9 @@ export const COUNTRIES = [
             }, {
                 code: 'SI-110',
                 name: 'Sevnica'
+            }, {
+                code: 'SI-111',
+                name: 'Sežana'
             }, {
                 code: 'SI-112',
                 name: 'Slovenj Gradec'
@@ -4887,9 +6930,6 @@ export const COUNTRIES = [
                 code: 'SI-128',
                 name: 'Tolmin'
             }, {
-                code: 'SI-131',
-                name: 'Tržic'
-            }, {
                 code: 'SI-129',
                 name: 'Trbovlje'
             }, {
@@ -4901,6 +6941,9 @@ export const COUNTRIES = [
             }, {
                 code: 'SI-186',
                 name: 'Trzin'
+            }, {
+                code: 'SI-131',
+                name: 'Tržic'
             }, {
                 code: 'SI-132',
                 name: 'Turnišce'
@@ -4949,6 +6992,75 @@ export const COUNTRIES = [
             }, {
                 code: 'SI-144',
                 name: 'Zrece'
+            }, {
+                code: 'SI-033',
+                name: 'Šalovci'
+            }, {
+                code: 'SI-183',
+                name: 'Šempeter-Vrtojba'
+            }, {
+                code: 'SI-117',
+                name: 'Šencur'
+            }, {
+                code: 'SI-118',
+                name: 'Šentilj'
+            }, {
+                code: 'SI-119',
+                name: 'Šentjernej'
+            }, {
+                code: 'SI-120',
+                name: 'Šentjur pri Celju'
+            }, {
+                code: 'SI-211',
+                name: 'Šentrupert'
+            }, {
+                code: 'SI-121',
+                name: 'Škocjan'
+            }, {
+                code: 'SI-122',
+                name: 'Škofja Loka'
+            }, {
+                code: 'SI-123',
+                name: 'Škofljica'
+            }, {
+                code: 'SI-124',
+                name: 'Šmarje pri Jelšah'
+            }, {
+                code: 'SI-206',
+                name: 'Šmarješke Toplice'
+            }, {
+                code: 'SI-125',
+                name: 'Šmartno ob Paki'
+            }, {
+                code: 'SI-194',
+                name: 'Šmartno pri Litiji'
+            }, {
+                code: 'SI-194',
+                name: 'Šmartno pri Litiji'
+            }, {
+                code: 'SI-126',
+                name: 'Šoštanj'
+            }, {
+                code: 'SI-127',
+                name: 'Štore'
+            }, {
+                code: 'SI-190',
+                name: 'Žalec'
+            }, {
+                code: 'SI-146',
+                name: 'Železniki'
+            }, {
+                code: 'SI-191',
+                name: 'Žetale'
+            }, {
+                code: 'SI-147',
+                name: 'Žiri'
+            }, {
+                code: 'SI-192',
+                name: 'Žirovnica'
+            }, {
+                code: 'SI-193',
+                name: 'Žužemberk'
             }
         ]
     }, {
@@ -5007,7 +7119,7 @@ export const COUNTRIES = [
         name: 'Spain',
         states: [
             {
-                code: 'C',
+                code: 'SP23',
                 name: 'A Coruña'
             }, {
                 code: 'SP01',
@@ -5223,11 +7335,11 @@ export const COUNTRIES = [
                 code: 'SE-W',
                 name: 'Dalarnas län'
             }, {
-                code: 'SE-X',
-                name: 'Gävleborgs län'
-            }, {
                 code: 'SE-I',
                 name: 'Gotlands län'
+            }, {
+                code: 'SE-X',
+                name: 'Gävleborgs län'
             }, {
                 code: 'SE-N',
                 name: 'Hallands län'
@@ -5247,20 +7359,14 @@ export const COUNTRIES = [
                 code: 'SE-BD',
                 name: 'Norrbottens län'
             }, {
-                code: 'SE-T',
-                name: 'Örebro län'
-            }, {
-                code: 'SE-E',
-                name: 'Östergötlands län'
-            }, {
                 code: 'SE-M',
                 name: 'Skåne län '
             }, {
-                code: 'SE-D',
-                name: 'Södermanlands län'
-            }, {
                 code: 'SE-AB',
                 name: 'Stockholms län'
+            }, {
+                code: 'SE-D',
+                name: 'Södermanlands län'
             }, {
                 code: 'SE-C',
                 name: 'Uppsala län'
@@ -5279,6 +7385,12 @@ export const COUNTRIES = [
             }, {
                 code: 'SE-O',
                 name: 'Västra Götalands län'
+            }, {
+                code: 'SE-T',
+                name: 'Örebro län'
+            }, {
+                code: 'SE-E',
+                name: 'Östergötlands län'
             }
         ]
     }, {
@@ -5288,82 +7400,82 @@ export const COUNTRIES = [
         states: [
             {
                 code: 'AG',
-                name: 'Aargau (de)'
+                name: 'Aargau '
             }, {
                 code: 'AR',
-                name: 'Appenzell Ausserrhoden (de)'
+                name: 'Appenzell Ausserrhoden '
             }, {
                 code: 'AI',
-                name: 'Appenzell Innerrhoden (de)'
+                name: 'Appenzell Innerrhoden '
             }, {
                 code: 'BL',
-                name: 'Basel-Landschaft (de)'
+                name: 'Basel-Landschaft '
             }, {
                 code: 'BS',
-                name: 'Basel-Stadt (de)'
+                name: 'Basel-Stadt '
             }, {
                 code: 'BE',
-                name: 'Bern (de)'
+                name: 'Bern '
             }, {
                 code: 'FR',
-                name: 'Fribourg (fr)'
+                name: 'Fribourg '
             }, {
                 code: 'GE',
-                name: 'Genève (fr)'
+                name: 'Genève '
             }, {
                 code: 'GL',
-                name: 'Glarus (de)'
+                name: 'Glarus '
             }, {
                 code: 'GR',
-                name: 'Graubünden (de)'
+                name: 'Graubünden '
             }, {
                 code: 'JU',
-                name: 'Jura (fr)'
+                name: 'Jura '
             }, {
                 code: 'LU',
-                name: 'Luzern (de)'
+                name: 'Luzern '
             }, {
                 code: 'NE',
-                name: 'Neuchâtel (fr)'
+                name: 'Neuchâtel '
             }, {
                 code: 'NW',
-                name: 'Nidwalden (de)'
+                name: 'Nidwalden '
             }, {
                 code: 'OW',
-                name: 'Obwalden (de)'
+                name: 'Obwalden '
             }, {
                 code: 'SG',
-                name: 'Sankt Gallen (de)'
+                name: 'Sankt Gallen '
             }, {
                 code: 'SH',
-                name: 'Schaffhausen (de)'
+                name: 'Schaffhausen '
             }, {
                 code: 'SZ',
-                name: 'Schwyz (de)'
+                name: 'Schwyz '
             }, {
                 code: 'SO',
-                name: 'Solothurn (de)'
+                name: 'Solothurn '
             }, {
                 code: 'TG',
-                name: 'Thurgau (de)'
+                name: 'Thurgau '
             }, {
                 code: 'TI',
-                name: 'Ticino (it)'
+                name: 'Ticino '
             }, {
                 code: 'UR',
-                name: 'Uri (de)'
+                name: 'Uri '
             }, {
                 code: 'VS',
-                name: 'Valais (fr)'
+                name: 'Valais '
             }, {
                 code: 'VD',
-                name: 'Vaud (fr)'
+                name: 'Vaud '
             }, {
                 code: 'ZG',
-                name: 'Zug (de)'
+                name: 'Zug '
             }, {
                 code: 'ZH',
-                name: 'Zürich (de)'
+                name: 'Zürich '
             }
         ]
     }, {
@@ -5375,7 +7487,99 @@ export const COUNTRIES = [
         id: 2349,
         code: 'TZ',
         name: 'Tanzania',
-        states: []
+        states: [
+            {
+                code: 'TZ26',
+                name: 'Arusha'
+            }, {
+                code: 'TZ23',
+                name: 'Dar es Salaam'
+            }, {
+                code: 'TZ03',
+                name: 'Dodoma'
+            }, {
+                code: 'TZ28',
+                name: 'Geita'
+            }, {
+                code: 'TZ04',
+                name: 'Iringa'
+            }, {
+                code: 'TZ19',
+                name: 'Kagera'
+            }, {
+                code: 'TZ29',
+                name: 'Katavi'
+            }, {
+                code: 'TZ05',
+                name: 'Kigoma'
+            }, {
+                code: 'TZ06',
+                name: 'Kilimanjaro'
+            }, {
+                code: 'TZ07',
+                name: 'Lindi'
+            }, {
+                code: 'TZ27',
+                name: 'Manyara'
+            }, {
+                code: 'TZ08',
+                name: 'Mara'
+            }, {
+                code: 'TZ09',
+                name: 'Mbeya'
+            }, {
+                code: 'TZ10',
+                name: 'Morogoro'
+            }, {
+                code: 'TZ11',
+                name: 'Mtwara'
+            }, {
+                code: 'TZ12',
+                name: 'Mwanza'
+            }, {
+                code: 'TZ30',
+                name: 'Njombe'
+            }, {
+                code: 'TZ13',
+                name: 'Pemba North'
+            }, {
+                code: 'TZ20',
+                name: 'Pemba South'
+            }, {
+                code: 'TZ02',
+                name: 'Pwani'
+            }, {
+                code: 'TZ24',
+                name: 'Rukwa'
+            }, {
+                code: 'TZ14',
+                name: 'Ruvuma'
+            }, {
+                code: 'TZ15',
+                name: 'Shinyanga'
+            }, {
+                code: 'TZ31',
+                name: 'Simiyu'
+            }, {
+                code: 'TZ16',
+                name: 'Singida'
+            }, {
+                code: 'TZ17',
+                name: 'Tabora'
+            }, {
+                code: 'TZ18',
+                name: 'Tanga'
+            }, {
+                code: 'TZ22',
+                name: 'Zanzibar North'
+            }, {
+                code: 'TZ21',
+                name: 'Zanzibar South and Central'
+            }, {
+                code: 'TZ25',
+                name: 'Zanzibar West'
+            }
+        ]
     }, {
         id: 2350,
         code: 'TH',
@@ -5623,7 +7827,57 @@ export const COUNTRIES = [
         id: 2352,
         code: 'TT',
         name: 'Trinidad and Tobago',
-        states: []
+        states: [
+            {
+                code: 'TD01',
+                name: 'Arima'
+            }, {
+                code: 'TD13',
+                name: 'Chaguanas'
+            }, {
+                code: 'TD14',
+                name: 'Couva/Tabaquite/Talparo'
+            }, {
+                code: 'TD15',
+                name: 'Diego Martin'
+            }, {
+                code: 'TD11',
+                name: 'Eastern Tobago'
+            }, {
+                code: 'TD16',
+                name: 'Mayaro/Rio Claro'
+            }, {
+                code: 'TD17',
+                name: 'Penal/Debe'
+            }, {
+                code: 'TD18',
+                name: 'Point Fortin'
+            }, {
+                code: 'TD05',
+                name: 'Port of Spain'
+            }, {
+                code: 'TD19',
+                name: 'Princes Town'
+            }, {
+                code: 'TD10',
+                name: 'San Fernando'
+            }, {
+                code: 'TD20',
+                name: 'San Juan/Laventille'
+            }, {
+                code: 'TD21',
+                name: 'Sangre Grande'
+            }, {
+                code: 'TD22',
+                name: 'Siparia'
+            }, {
+                code: 'TD23',
+                name: 'Tunapuna/Piarco'
+            }, {
+                code: 'TD11',
+                name: 'Western Tobago'
+            }
+        ]
     }, {
         id: 2353,
         code: 'TN',
@@ -5633,7 +7887,252 @@ export const COUNTRIES = [
         id: 2354,
         code: 'TR',
         name: 'Turkey',
-        states: []
+        states: [
+            {
+                code: 'TU81',
+                name: 'Adana'
+            }, {
+                code: 'TU02',
+                name: 'Adiyaman'
+            }, {
+                code: 'TU03',
+                name: 'Afyonkarahisar'
+            }, {
+                code: 'TU04',
+                name: 'Agri'
+            }, {
+                code: 'TU75',
+                name: 'Aksaray'
+            }, {
+                code: 'TU05',
+                name: 'Amasya'
+            }, {
+                code: 'TU68',
+                name: 'Ankara'
+            }, {
+                code: 'TU07',
+                name: 'Antalya'
+            }, {
+                code: 'TU86',
+                name: 'Ardahan'
+            }, {
+                code: 'TU08',
+                name: 'Artvin'
+            }, {
+                code: 'TU09',
+                name: 'Aydin'
+            }, {
+                code: 'TU10',
+                name: 'Balikesir'
+            }, {
+                code: 'TU87',
+                name: 'Bartin'
+            }, {
+                code: 'TU76',
+                name: 'Batman'
+            }, {
+                code: 'TU77',
+                name: 'Bayburt'
+            }, {
+                code: 'TU11',
+                name: 'Bilecik'
+            }, {
+                code: 'TU12',
+                name: 'Bingöl'
+            }, {
+                code: 'TU13',
+                name: 'Bitlis'
+            }, {
+                code: 'TU14',
+                name: 'Bolu'
+            }, {
+                code: 'TU15',
+                name: 'Burdur'
+            }, {
+                code: 'TU16',
+                name: 'Bursa'
+            }, {
+                code: 'TU20',
+                name: 'Denizli'
+            }, {
+                code: 'TU21',
+                name: 'Diyarbakir'
+            }, {
+                code: 'TU93',
+                name: 'Düzce'
+            }, {
+                code: 'TU22',
+                name: 'Edirne'
+            }, {
+                code: 'TU23',
+                name: 'Elazig'
+            }, {
+                code: 'TU24',
+                name: 'Erzincan'
+            }, {
+                code: 'TU25',
+                name: 'Erzurum'
+            }, {
+                code: 'TU26',
+                name: 'Eskisehir'
+            }, {
+                code: 'TU83',
+                name: 'Gaziantep'
+            }, {
+                code: 'TU28',
+                name: 'Giresun'
+            }, {
+                code: 'TU69',
+                name: 'Gümüshane'
+            }, {
+                code: 'TU70',
+                name: 'Hakkari'
+            }, {
+                code: 'TU31',
+                name: 'Hatay'
+            }, {
+                code: 'TU88',
+                name: 'Igdir'
+            }, {
+                code: 'TU33',
+                name: 'Isparta'
+            }, {
+                code: 'TU34',
+                name: 'Istanbul'
+            }, {
+                code: 'TU35',
+                name: 'Izmir'
+            }, {
+                code: 'TU46',
+                name: 'Kahramanmaras'
+            }, {
+                code: 'TU89',
+                name: 'Karabük'
+            }, {
+                code: 'TU78',
+                name: 'Karaman'
+            }, {
+                code: 'TU84',
+                name: 'Kars'
+            }, {
+                code: 'TU37',
+                name: 'Kastamonu'
+            }, {
+                code: 'TU38',
+                name: 'Kayseri'
+            }, {
+                code: 'TU90',
+                name: 'Kilis'
+            }, {
+                code: 'TU79',
+                name: 'Kirikkale'
+            }, {
+                code: 'TU39',
+                name: 'Kirklareli'
+            }, {
+                code: 'TU40',
+                name: 'Kirsehir'
+            }, {
+                code: 'TU41',
+                name: 'Kocaeli'
+            }, {
+                code: 'TU71',
+                name: 'Konya'
+            }, {
+                code: 'TU43',
+                name: 'Kütahya'
+            }, {
+                code: 'TU44',
+                name: 'Malatya'
+            }, {
+                code: 'TU45',
+                name: 'Manisa'
+            }, {
+                code: 'TU72',
+                name: 'Mardin'
+            }, {
+                code: 'TU32',
+                name: 'Mersin'
+            }, {
+                code: 'TU48',
+                name: 'Mugla'
+            }, {
+                code: 'TU49',
+                name: 'Mus'
+            }, {
+                code: 'TU50',
+                name: 'Nevsehir'
+            }, {
+                code: 'TU73',
+                name: 'Nigde'
+            }, {
+                code: 'TU52',
+                name: 'Ordu'
+            }, {
+                code: 'TU91',
+                name: 'Osmaniye'
+            }, {
+                code: 'TU53',
+                name: 'Rize'
+            }, {
+                code: 'TU54',
+                name: 'Sakarya'
+            }, {
+                code: 'TU55',
+                name: 'Samsun'
+            }, {
+                code: 'TU63',
+                name: 'Sanliurfa'
+            }, {
+                code: 'TU74',
+                name: 'Siirt'
+            }, {
+                code: 'TU57',
+                name: 'Sinop'
+            }, {
+                code: 'TU80',
+                name: 'Sirnak'
+            }, {
+                code: 'TU58',
+                name: 'Sivas'
+            }, {
+                code: 'TU59',
+                name: 'Tekirdag'
+            }, {
+                code: 'TU60',
+                name: 'Tokat'
+            }, {
+                code: 'TU61',
+                name: 'Trabzon'
+            }, {
+                code: 'TU62',
+                name: 'Tunceli'
+            }, {
+                code: 'TU64',
+                name: 'Usak'
+            }, {
+                code: 'TU65',
+                name: 'Van'
+            }, {
+                code: 'TU92',
+                name: 'Yalova'
+            }, {
+                code: 'TU66',
+                name: 'Yozgat'
+            }, {
+                code: 'TU85',
+                name: 'Zonguldak'
+            }, {
+                code: 'TU17',
+                name: 'Çanakkale'
+            }, {
+                code: 'TU82',
+                name: 'Çankiri'
+            }, {
+                code: 'TU19',
+                name: 'Çorum'
+            }
+        ]
     }, {
         id: 2355,
         code: 'TM',
@@ -5648,7 +8147,90 @@ export const COUNTRIES = [
         id: 2357,
         code: 'UA',
         name: 'Ukraine',
-        states: []
+        states: [
+            {
+                code: 'UP01',
+                name: 'Cherkasy'
+            }, {
+                code: 'UP02',
+                name: 'Chernihiv'
+            }, {
+                code: 'UP03',
+                name: 'Chernivtsi'
+            }, {
+                code: 'UP11',
+                name: 'Crimea'
+            }, {
+                code: 'UP04',
+                name: 'Dnipropetrovs\'k'
+            }, {
+                code: 'UP05',
+                name: 'Donets\'k'
+            }, {
+                code: 'UP06',
+                name: 'Ivano-Frankivs\'k'
+            }, {
+                code: 'UP07',
+                name: 'Kharkiv'
+            }, {
+                code: 'UP08',
+                name: 'Kherson'
+            }, {
+                code: 'UP09',
+                name: 'Khmel\'nyts\'kyy'
+            }, {
+                code: 'UP13',
+                name: 'Kiev'
+            }, {
+                code: 'UP12',
+                name: 'Kiev City'
+            }, {
+                code: 'UP10',
+                name: 'Kirovohrad'
+            }, {
+                code: 'UP15',
+                name: 'L\'viv'
+            }, {
+                code: 'UP14',
+                name: 'Luhans\'k'
+            }, {
+                code: 'UP16',
+                name: 'Mykolayiv'
+            }, {
+                code: 'UP17',
+                name: 'Odessa'
+            }, {
+                code: 'UP18',
+                name: 'Poltava'
+            }, {
+                code: 'UP19',
+                name: 'Rivne'
+            }, {
+                code: 'UP20',
+                name: 'Sevastopol\' City'
+            }, {
+                code: 'UP21',
+                name: 'Sumy'
+            }, {
+                code: 'UP22',
+                name: 'Ternopil\''
+            }, {
+                code: 'UP25',
+                name: 'Transcarpathia'
+            }, {
+                code: 'UP23',
+                name: 'Vinnytsya'
+            }, {
+                code: 'UP24',
+                name: 'Volyn'
+            }, {
+                code: 'UP26',
+                name: 'Zaporizhzhya'
+            }, {
+                code: 'UP27',
+                name: 'Zhytomyr'
+            }
+        ]
     }, {
         id: 2358,
         code: 'AE',
@@ -5691,9 +8273,6 @@ export const COUNTRIES = [
             }, {
                 code: 'ALD',
                 name: 'Alderney'
-            }, {
-                code: 'AGY',
-                name: 'Anglesey'
             }, {
                 code: 'ANS',
                 name: 'Angus'
@@ -5761,11 +8340,17 @@ export const COUNTRIES = [
                 code: 'CAE',
                 name: 'Caernarvonshire'
             }, {
+                code: 'UKX4',
+                name: 'Caerphilly'
+            }, {
                 code: 'CAI',
                 name: 'Caithness'
             }, {
                 code: 'CAM',
                 name: 'Cambridgeshire'
+            }, {
+                code: 'UKX5',
+                name: 'Cardiff'
             }, {
                 code: 'CGN',
                 name: 'Cardiganshire'
@@ -5782,6 +8367,9 @@ export const COUNTRIES = [
                 code: 'CEN',
                 name: 'Central'
             }, {
+                code: 'UKX6',
+                name: 'Ceredigion'
+            }, {
                 code: 'CHS',
                 name: 'Cheshire'
             }, {
@@ -5796,6 +8384,9 @@ export const COUNTRIES = [
             }, {
                 code: 'COL',
                 name: 'Coleraine'
+            }, {
+                code: 'UKX8',
+                name: 'Conwy'
             }, {
                 code: 'COO',
                 name: 'Cookstown'
@@ -5819,7 +8410,7 @@ export const COUNTRIES = [
                 name: 'Derbyshire'
             }, {
                 code: 'DEV',
-                name: 'Devonshire'
+                name: 'Devon'
             }, {
                 code: 'DOR',
                 name: 'Dorset'
@@ -5923,6 +8514,12 @@ export const COUNTRIES = [
                 code: 'INV',
                 name: 'Inverness-shire'
             }, {
+                code: 'AGY',
+                name: 'Isle of Anglesey'
+            }, {
+                code: 'IOM',
+                name: 'Isle of Man'
+            }, {
                 code: 'IOW',
                 name: 'Isle of Wight'
             }, {
@@ -5977,6 +8574,9 @@ export const COUNTRIES = [
                 code: 'MER',
                 name: 'Merseyside'
             }, {
+                code: 'UKY3',
+                name: 'Merthyr Tydfil'
+            }, {
                 code: 'MGM',
                 name: 'Mid Glamorgan'
             }, {
@@ -6003,6 +8603,9 @@ export const COUNTRIES = [
             }, {
                 code: 'NPT',
                 name: 'Neath Port Talbot'
+            }, {
+                code: 'UKY6',
+                name: 'Newport'
             }, {
                 code: 'NEM',
                 name: 'Newry and Mourne'
@@ -6031,6 +8634,9 @@ export const COUNTRIES = [
                 code: 'OMA',
                 name: 'Omagh'
             }, {
+                code: 'UKV9',
+                name: 'Orkney Islands'
+            }, {
                 code: 'OXF',
                 name: 'Oxfordshire'
             }, {
@@ -6041,7 +8647,7 @@ export const COUNTRIES = [
                 name: 'Pembrokeshire'
             }, {
                 code: 'PER',
-                name: 'Perth'
+                name: 'Perthshire and Kinross'
             }, {
                 code: 'POW',
                 name: 'Powys'
@@ -6095,7 +8701,7 @@ export const COUNTRIES = [
                 name: 'Strabane'
             }, {
                 code: 'STD',
-                name: 'Stratchclyde'
+                name: 'Strathclyde'
             }, {
                 code: 'SFK',
                 name: 'Suffolk'
@@ -6160,6 +8766,9 @@ export const COUNTRIES = [
                 code: 'WOR',
                 name: 'Worcestershire'
             }, {
+                code: 'UKZ4',
+                name: 'Wrexham'
+            }, {
                 code: 'YKS',
                 name: 'Yorkshire'
             }
@@ -6183,11 +8792,88 @@ export const COUNTRIES = [
         id: 2363,
         code: 'VE',
         name: 'Venezuela; Bolivarian Republic of',
-        states: []
+        states: [
+            {
+                code: 'VE01',
+                name: 'Amazonas'
+            }, {
+                code: 'VE02',
+                name: 'Anzoátegui'
+            }, {
+                code: 'VE03',
+                name: 'Apure'
+            }, {
+                code: 'VE04',
+                name: 'Aragua'
+            }, {
+                code: 'VE05',
+                name: 'Barinas'
+            }, {
+                code: 'VE06',
+                name: 'Bolívar'
+            }, {
+                code: 'VE07',
+                name: 'Carabobo'
+            }, {
+                code: 'VE08',
+                name: 'Cojedes'
+            }, {
+                code: 'VE09',
+                name: 'Delta Amacuro'
+            }, {
+                code: 'VE24',
+                name: 'Dependencias Federales'
+            }, {
+                code: 'VE25',
+                name: 'Distrito Capital'
+            }, {
+                code: 'VE11',
+                name: 'Falcón'
+            }, {
+                code: 'VE12',
+                name: 'Guárico'
+            }, {
+                code: 'VE13',
+                name: 'Lara'
+            }, {
+                code: 'VE15',
+                name: 'Miranda'
+            }, {
+                code: 'VE16',
+                name: 'Monagas'
+            }, {
+                code: 'VE14',
+                name: 'Mérida'
+            }, {
+                code: 'VE17',
+                name: 'Nueva Esparta'
+            }, {
+                code: 'VE18',
+                name: 'Portuguesa'
+            }, {
+                code: 'VE19',
+                name: 'Sucre'
+            }, {
+                code: 'VE21',
+                name: 'Trujillo'
+            }, {
+                code: 'VE20',
+                name: 'Táchira'
+            }, {
+                code: 'VE26',
+                name: 'Vargas'
+            }, {
+                code: 'VE22',
+                name: 'Yaracuy'
+            }, {
+                code: 'VE23',
+                name: 'Zulia'
+            }
+        ]
     }, {
         id: 2364,
         code: 'VN',
-        name: 'Viet Nam',
+        name: 'Vietnam',
         states: [
             {
                 code: 'VM01',
@@ -6409,7 +9095,42 @@ export const COUNTRIES = [
         id: 2372,
         code: 'BU',
         name: 'Bermuda',
-        states: []
+        states: [
+            {
+                code: 'BD01',
+                name: 'Devonshire'
+            }, {
+                code: 'BD02',
+                name: 'Hamilton'
+            }, {
+                code: 'BD03',
+                name: 'Hamilton municipality'
+            }, {
+                code: 'BD04',
+                name: 'Paget'
+            }, {
+                code: 'BD05',
+                name: 'Pembroke'
+            }, {
+                code: 'BD06',
+                name: 'Saint George municipality'
+            }, {
+                code: 'BD07',
+                name: 'Saint George\'s'
+            }, {
+                code: 'BD08',
+                name: 'Sandys'
+            }, {
+                code: 'BD09',
+                name: 'Smiths'
+            }, {
+                code: 'BD10',
+                name: 'Southampton'
+            }, {
+                code: 'BD11',
+                name: 'Warwick'
+            }
+        ]
     }, {
         id: 2373,
         code: 'AB',
@@ -6423,8 +9144,16 @@ export const COUNTRIES = [
     }, {
         id: 2375,
         code: 'TW',
-        name: 'Taiwan; Province of China',
-        states: []
+        name: 'Taiwan',
+        states: [
+            {
+                code: 'TW02',
+                name: 'Kaohsiung'
+            }, {
+                code: 'TW03',
+                name: 'Taipei'
+            }
+        ]
     }, {
         id: 2376,
         code: 'GU',
@@ -6434,7 +9163,18 @@ export const COUNTRIES = [
         id: 2377,
         code: 'HK',
         name: 'Hong Kong',
-        states: []
+        states: [
+            {
+                code: 'HK001',
+                name: 'Hong Kong Island'
+            }, {
+                code: 'HK002',
+                name: 'Kowloon'
+            }, {
+                code: 'HK003',
+                name: 'New Territories'
+            }
+        ]
     }, {
         id: 2378,
         code: 'NONE',
@@ -6444,7 +9184,27 @@ export const COUNTRIES = [
         id: 2379,
         code: 'KY',
         name: 'Cayman Islands',
-        states: []
+        states: [
+            {
+                code: 'KY.BT',
+                name: 'Bodden Town'
+            }, {
+                code: 'KY.EE',
+                name: 'East End'
+            }, {
+                code: 'KY.GT',
+                name: 'George Town'
+            }, {
+                code: 'KY.NS',
+                name: 'North Side'
+            }, {
+                code: 'KY.SI',
+                name: 'Sister Islands'
+            }, {
+                code: 'KY.WB',
+                name: 'West Bay'
+            }
+        ]
     }, {
         id: 2380,
         code: 'LY',
@@ -6454,7 +9214,51 @@ export const COUNTRIES = [
         id: 2381,
         code: 'SY',
         name: 'Syrian Arab Republic',
-        states: []
+        states: [
+            {
+                code: 'SY01',
+                name: 'Al Hasakah'
+            }, {
+                code: 'SY09',
+                name: 'Aleppo'
+            }, {
+                code: 'SY04',
+                name: 'Ar Raqqah'
+            }, {
+                code: 'SY05',
+                name: 'As Suwayda\''
+            }, {
+                code: 'SY13',
+                name: 'Damascus'
+            }, {
+                code: 'SY06',
+                name: 'Dar`a'
+            }, {
+                code: 'SY07',
+                name: 'Dayr az Zawr'
+            }, {
+                code: 'SY10',
+                name: 'Hama'
+            }, {
+                code: 'SY11',
+                name: 'Hims'
+            }, {
+                code: 'SY12',
+                name: 'Idlib'
+            }, {
+                code: 'SY02',
+                name: 'Latakia'
+            }, {
+                code: 'SY03',
+                name: 'Quneitra'
+            }, {
+                code: 'SY08',
+                name: 'Rif Dimashq'
+            }, {
+                code: 'SY14',
+                name: 'Tartus'
+            }
+        ]
     }, {
         id: 2382,
         code: 'YE',
@@ -6468,85 +9272,69 @@ export const COUNTRIES = [
     }, {
         id: 2384,
         code: 'MV',
-        name: 'Maldives; Repulic of',
+        name: 'Maldives; Republic of',
         states: []
     }, {
         id: 2385,
-        code: 'IM',
-        name: 'Isle of Man',
-        states: []
-    }, {
-        id: 2386,
-        code: 'VG',
-        name: 'Virgin Islands; British',
-        states: []
-    }, {
-        id: 2387,
         code: 'BM',
         name: 'Burma',
         states: []
     }, {
-        id: 2388,
+        id: 2386,
         code: 'CH99',
         name: 'Channel Islands',
         states: []
     }, {
-        id: 2389,
+        id: 2387,
         code: 'C999',
         name: 'Curacao',
         states: []
     }, {
-        id: 2390,
+        id: 2388,
         code: 'FI99',
         name: 'Faroe Islands',
         states: []
     }, {
-        id: 2391,
-        code: 'GA',
+        id: 2389,
+        code: 'GM',
         name: 'Gambia',
         states: []
     }, {
-        id: 2392,
+        id: 2390,
         code: 'G999',
         name: 'Gibraltar',
         states: []
     }, {
-        id: 2393,
-        code: 'KR',
+        id: 2391,
+        code: 'KI',
         name: 'Kiribati',
         states: []
     }, {
-        id: 2394,
+        id: 2392,
         code: 'KV',
         name: 'Kosovo',
         states: []
     }, {
-        id: 2395,
+        id: 2393,
         code: 'M999',
         name: 'Mayotte',
         states: []
     }, {
-        id: 2396,
+        id: 2394,
         code: 'RM',
         name: 'Marshall Islands',
         states: []
     }, {
-        id: 2397,
+        id: 2395,
         code: 'MD',
         name: 'Moldova; Republic of',
         states: []
     }, {
-        id: 2398,
+        id: 2396,
         code: 'MJ',
         name: 'Montenegro',
         states: [
             {
-                code: 'ME-18',
-                name: 'Šavnik'
-            }, {
-                code: 'ME-21',
-                name: 'Žabljak'
-            }, {
                 code: 'ME-1',
                 name: 'Andrijevica'
             }, {
@@ -6603,42 +9391,80 @@ export const COUNTRIES = [
             }, {
                 code: 'ME-20',
                 name: 'Ulcinj'
+            }, {
+                code: 'ME-18',
+                name: 'Šavnik'
+            }, {
+                code: 'ME-21',
+                name: 'Žabljak'
             }
         ]
     }, {
-        id: 2399,
+        id: 2397,
         code: 'NR',
         name: 'Nauru',
         states: []
     }, {
-        id: 2400,
+        id: 2398,
         code: 'R999',
         name: 'Reunion',
         states: []
     }, {
-        id: 2401,
-        code: 'SC',
+        id: 2399,
+        code: 'KN',
         name: 'Saint Kitts and Nevis',
         states: []
     }, {
-        id: 2402,
+        id: 2400,
         code: 'VC',
         name: 'Saint Vincent and Grenadines',
         states: []
     }, {
-        id: 2403,
+        id: 2401,
         code: 'WS',
         name: 'Samoa',
-        states: []
+        states: [
+            {
+                code: 'WS01',
+                name: 'A\'ana'
+            }, {
+                code: 'WS02',
+                name: 'Aiga-i-le-Tai'
+            }, {
+                code: 'WS03',
+                name: 'Atua'
+            }, {
+                code: 'WS04',
+                name: 'Fa\'asaleleaga'
+            }, {
+                code: 'WS05',
+                name: 'Gaga\'emauga'
+            }, {
+                code: 'WS07',
+                name: 'Gagaifomauga'
+            }, {
+                code: 'WS08',
+                name: 'Palauli'
+            }, {
+                code: 'WS09',
+                name: 'Satupa\'itea'
+            }, {
+                code: 'WS10',
+                name: 'Tuamasaga'
+            }, {
+                code: 'WS06',
+                name: 'Va\'a-o-Fonoti'
+            }, {
+                code: 'WS11',
+                name: 'Vaisigano'
+            }
+        ]
     }, {
-        id: 2404,
+        id: 2402,
         code: 'RI',
         name: 'Serbia',
         states: [
             {
-                code: 'RS-12',
-                name: 'Šumadijski okrug'
-            }, {
                 code: 'RS-00',
                 name: 'Belgrade'
             }, {
@@ -6652,7 +9478,7 @@ export const COUNTRIES = [
                 name: 'Jablanicki okrug'
             }, {
                 code: 'RS-06',
-                name: 'Južnobacki okrug'
+                name: 'Južnobanatski okrug'
             }, {
                 code: 'RS-04',
                 name: 'Južnobanatski okrug'
@@ -6696,11 +9522,11 @@ export const COUNTRIES = [
                 code: 'RS-27',
                 name: 'Prizrenski okrug'
             }, {
-                code: 'RS-18',
-                name: 'Raška okrug'
-            }, {
                 code: 'RS-19',
                 name: 'Rasinski okrug'
+            }, {
+                code: 'RS-18',
+                name: 'Raška okrug'
             }, {
                 code: 'RS-01',
                 name: 'Severnobacki okrug'
@@ -6725,217 +9551,246 @@ export const COUNTRIES = [
             }, {
                 code: 'RS-16',
                 name: 'Zlatiborski okrug'
+            }, {
+                code: 'RS-12',
+                name: 'Šumadijski okrug'
             }
         ]
     }, {
-        id: 2405,
+        id: 2403,
         code: 'TP',
         name: 'Sao Tome and Principe',
         states: []
     }, {
-        id: 2406,
-        code: 'TT',
+        id: 2404,
+        code: 'TL',
         name: 'Timor-Leste',
         states: []
     }, {
-        id: 2407,
-        code: 'TN',
+        id: 2405,
+        code: 'TO',
         name: 'Tonga',
         states: []
     }, {
-        id: 2408,
+        id: 2406,
         code: 'NH',
         name: 'Vanuatu',
         states: []
     }, {
-        id: 2409,
+        id: 2407,
         code: 'AX',
         name: 'Åland Islands',
         states: []
     }, {
-        id: 2410,
+        id: 2408,
         code: 'AS',
         name: 'American Samoa',
         states: []
     }, {
-        id: 2411,
+        id: 2409,
         code: 'AI',
         name: 'Anguilla',
         states: []
     }, {
-        id: 2412,
+        id: 2410,
         code: 'BV',
         name: 'Bouvet Island',
         states: []
     }, {
-        id: 2413,
+        id: 2411,
         code: 'IO',
         name: 'British Indian Ocean Territory',
         states: []
     }, {
-        id: 2414,
+        id: 2412,
         code: 'CX',
         name: 'Christmas Island',
         states: []
     }, {
-        id: 2415,
+        id: 2413,
         code: 'CC',
         name: 'Cocos (Keeling) Islands',
         states: []
     }, {
-        id: 2416,
+        id: 2414,
         code: 'CK',
         name: 'Cook Islands',
         states: []
     }, {
-        id: 2417,
+        id: 2415,
         code: 'FK',
         name: 'Falkland Islands (Malvinas)',
         states: []
     }, {
-        id: 2418,
+        id: 2416,
         code: 'GF',
         name: 'French Guiana',
         states: []
     }, {
-        id: 2419,
+        id: 2417,
         code: 'PF',
         name: 'French Polynesia',
         states: []
     }, {
-        id: 2420,
+        id: 2418,
         code: 'TF',
         name: 'French Southern Territories',
         states: []
     }, {
-        id: 2421,
+        id: 2419,
         code: 'GP',
         name: 'Guadeloupe',
         states: []
     }, {
-        id: 2422,
+        id: 2420,
         code: 'GG',
         name: 'Guernsey',
         states: []
     }, {
-        id: 2423,
-        code: 'HM\\u0013',
-        name: 'Heard and McDonald Islands\\u0013',
+        id: 2421,
+        code: 'HM',
+        name: 'Heard and McDonald Islands',
         states: []
     }, {
-        id: 2424,
+        id: 2422,
         code: 'JE',
         name: 'Jersey',
         states: []
     }, {
-        id: 2425,
+        id: 2423,
         code: 'MQ',
         name: 'Martinique',
         states: []
     }, {
-        id: 2426,
+        id: 2424,
         code: 'MS',
         name: 'Montserrat',
         states: []
     }, {
-        id: 2427,
+        id: 2425,
         code: 'AN',
         name: 'Netherlands Antilles',
         states: []
     }, {
-        id: 2428,
+        id: 2426,
         code: 'NC',
         name: 'New Caledonia',
         states: []
     }, {
-        id: 2429,
+        id: 2427,
         code: 'NU',
         name: 'Niue',
         states: []
     }, {
-        id: 2430,
+        id: 2428,
         code: 'NF',
         name: 'Norfolk Island',
         states: []
     }, {
-        id: 2431,
+        id: 2429,
         code: 'MP',
         name: 'Northern Mariana Islands',
         states: []
     }, {
-        id: 2432,
+        id: 2430,
         code: 'PS',
         name: 'Palestinian Territory; Occupied',
         states: []
     }, {
-        id: 2433,
+        id: 2431,
         code: 'PN',
         name: 'Pitcairn',
         states: []
     }, {
-        id: 2434,
+        id: 2432,
         code: 'BL',
         name: 'Saint Barthélemy',
         states: []
     }, {
-        id: 2435,
+        id: 2433,
         code: 'SH',
         name: 'Saint Helena; Ascension and Tristan Da Cunha',
         states: []
     }, {
-        id: 2436,
+        id: 2434,
         code: 'MF',
         name: 'Saint Martin',
         states: []
     }, {
-        id: 2437,
+        id: 2435,
         code: 'PM',
         name: 'Saint Pierre And Miquelon',
         states: []
     }, {
-        id: 2438,
+        id: 2436,
         code: 'GS',
         name: 'South Georgia and the South Sandwich Islands',
         states: []
     }, {
-        id: 2439,
+        id: 2437,
         code: 'SJ',
         name: 'Svalbard And Jan Mayen',
         states: []
     }, {
-        id: 2440,
+        id: 2438,
         code: 'TK',
         name: 'Tokelau',
         states: []
     }, {
-        id: 2441,
+        id: 2439,
         code: 'TC',
         name: 'Turks and Caicos Islands',
         states: []
     }, {
-        id: 2442,
+        id: 2440,
         code: 'TV',
         name: 'Tuvalu',
         states: []
     }, {
-        id: 2443,
+        id: 2441,
         code: 'UM',
         name: 'United States Minor Outlying Islands',
         states: []
     }, {
-        id: 2444,
+        id: 2442,
         code: 'VI',
         name: 'Virgin Islands; U.S.',
-        states: []
+        states: [
+            {
+                code: '010',
+                name: 'Saint Croix'
+            }, {
+                code: '020',
+                name: 'Saint John'
+            }, {
+                code: '030',
+                name: 'Saint Thomas'
+            }
+        ]
     }, {
-        id: 2445,
+        id: 2443,
         code: 'WF',
         name: 'Wallis and Futuna',
         states: []
     }, {
-        id: 2446,
+        id: 2444,
         code: 'EH',
         name: 'Western Sahara',
+        states: []
+    }, {
+        id: 2445,
+        code: 'IM',
+        name: 'Isle of Man',
+        states: []
+    }, {
+        id: 2446,
+        code: 'VG',
+        name: 'Virgin Islands; British',
+        states: []
+    }, {
+        id: 2447,
+        code: 'SS',
+        name: 'South Sudan',
         states: []
     }
 ];

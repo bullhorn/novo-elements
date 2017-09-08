@@ -38,6 +38,7 @@ import { NovoMultiPickerModule } from './src/elements/multi-picker/MultiPicker.m
 import { NovoPopOverModule } from './src/elements/popover/PopOver.module';
 import { NovoSearchBoxModule } from './src/elements/search/SearchBox.module';
 
+import { NovoOverlayModule } from './src/elements/overlay/Overlay.module';
 import { NovoLabelService } from './src/services/novo-label-service';
 import { NovoDragulaService } from './src/elements/dragula/DragulaService';
 import { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
@@ -82,7 +83,8 @@ import { FormUtils } from './src/utils/form-utils/FormUtils';
         NovoCategoryDropdownModule,
         NovoMultiPickerModule,
         NovoPopOverModule,
-        NovoSearchBoxModule
+        NovoSearchBoxModule,
+        NovoOverlayModule
     ],
     providers: [
         { provide: ComponentUtils, useClass: ComponentUtils },

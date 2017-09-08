@@ -43,5 +43,4 @@ interface Global extends GlobalEnvironment {
 interface Window {
     fetch(url: any, init?: any): Promise<any>;
 }
-declare var fetch: typeof window.fetch;
 declare var postRobot: any;

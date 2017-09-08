@@ -3,6 +3,7 @@ novo-address {
     flex-flow: row wrap;
 
     input {
+        min-width: 10px;
     }
 
     .street-address {

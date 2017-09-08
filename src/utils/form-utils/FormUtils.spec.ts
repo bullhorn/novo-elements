@@ -286,6 +286,35 @@ describe('Utils: FormUtils', () => {
             expect(formUtils.toFieldSets).toBeDefined();
             formUtils.toFieldSets();
         });
+
+        it('should return an array of fieldsets with a title, icon and controls', () => {
+            let meta = {
+                entity: 'ENTITY_NAME',
+                label: 'ENTITY_LABEL',
+                fields: [
+                    {
+                        name: 'firstName',
+                        type: 'text',
+                        label: 'First Name',
+                        required: true,
+                        sortOrder: 10,
+                        maxLength: 10,
+                        description: 'First Name, Yo!'
+                    }
+                ],
+                sectionHeaders: [{
+                    'label': 'Header',
+                    'name': 'header',
+                    'sortOrder': 0,
+                    'enabled': true,
+                    'icon': 'bhi-certification'
+                }]
+            };
+            let fieldset = formUtils.toFieldSets(meta, 'USD', {}, {}, {});
+            expect(fieldset[0].title).toBe('Header');
+            expect(fieldset[0].icon).toBe('bhi-certification');
+            expect(fieldset[0].controls.length).toBe(1);
+        });
     });
 
     describe('Method: getControlOptions(field, http, config)', () => {

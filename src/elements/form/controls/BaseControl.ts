@@ -28,6 +28,7 @@ export interface NovoControlConfig {
     minlength?: number;
     options?: Array<any>;
     type?: string;
+    subType?: string;
     name?: string;
     readOnly?: boolean;
     closeOnSelect?: boolean;
@@ -42,6 +43,11 @@ export interface NovoControlConfig {
     customControl?: any;
     customControlConfig?: any;
     military?: boolean;
+    tipWell?: {
+        tip: string,
+        icon?: string,
+        button?: boolean;
+    };
 }
 
 export class BaseControl {
@@ -58,7 +64,7 @@ export class BaseControl {
     sortOrder: number;
     controlType: string;
     placeholder: string;
-    config: NovoControlConfig;
+    config: any;
     dirty: boolean;
     multiple: boolean;
     headerConfig: any;
@@ -70,6 +76,7 @@ export class BaseControl {
     minlength: number;
     options: Array<any>;
     type: string;
+    subType?: string;
     name: string;
     disabled: boolean;
     readOnly: boolean; // "disabled", so it appears in the model still
@@ -85,6 +92,11 @@ export class BaseControl {
     customControl?: any;
     customControlConfig?: any;
     military?: boolean;
+    tipWell?: {
+        tip: string,
+        icon?: string,
+        button?: boolean;
+    };
 
     constructor(type: string = 'BaseControl', config: NovoControlConfig = {}) {
         this.__type = type;
@@ -136,5 +148,6 @@ export class BaseControl {
         }
         this.customControl = config.customControl;
         this.customControlConfig = config.customControlConfig;
+        this.tipWell = config.tipWell;
     }
 }

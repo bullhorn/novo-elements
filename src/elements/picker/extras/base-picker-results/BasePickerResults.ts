@@ -74,10 +74,13 @@ export class BasePickerResults {
                 }
                 this.isLoading = false;
             },
-            () => {
+            (err) => {
                 this.hasError = this.term && this.term.length !== 0;
                 this.isLoading = false;
                 this.lastPage = true;
+                if (this.term && this.term.length !== 0) {
+                    console.error(err); // tslint:disable-lineno
+                }
             });
     }
 
@@ -112,8 +115,15 @@ export class BasePickerResults {
                 } else {
                     if (this.config.defaultOptions) {
                         this.isStatic = false;
-                        if (this.config.defaultOptions instanceof Function) {
-                            resolve(this.structureArray(this.config.defaultOptions()));
+                        if (typeof this.config.defaultOptions === 'function') {
+                            let defaultOptions = this.config.defaultOptions(term, ++this.page);
+                            if (Object.getPrototypeOf(defaultOptions).hasOwnProperty('then')) {
+                                defaultOptions
+                                .then(this.structureArray.bind(this))
+                                .then(resolve, reject);
+                            } else {
+                                resolve(this.structureArray(defaultOptions));
+                            }
                         } else {
                             resolve(this.structureArray(this.config.defaultOptions));
                         }
@@ -224,8 +234,6 @@ export class BasePickerResults {
         let item = items[index];
         if (item) {
             list.scrollTop = item.offsetTop;
-        } else {
-            console.warn('BasePickerResults - could not find result item to scroll to, try overriding getListElement() or getChildrenOfListElement() in your PickerResults Component'); // tslint: disable-line
         }
     }
 

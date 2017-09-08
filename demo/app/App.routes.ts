@@ -34,7 +34,8 @@ import {
     CategoryDropdownDemoComponent,
     MultiPickerDemoComponent,
     PopOverDemoComponent,
-    SearchDemoComponent
+    SearchDemoComponent,
+    FieldInteractionsDemoComponent
 } from './../pages/elements';
 
 export const routes: any = [
@@ -83,6 +84,7 @@ export const routes: any = [
     { path: 'utils', component: UtilsDemoComponent, title: 'Utils', section: 'utils' },
     { path: 'pipes', component: PipesDemoComponent, title: 'Pipes', section: 'utils' },
     { path: 'app-bridge', component: AppBridgeDemoComponent, title: 'App Bridge', section: 'utils' },
+    { path: 'field-interactions', component: FieldInteractionsDemoComponent, title: 'Field Interactions', section: 'utils' },
 
     // Catch All
     { path: '**', redirectTo: '/' }

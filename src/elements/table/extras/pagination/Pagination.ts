@@ -1,5 +1,6 @@
 // NG2
 import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
 
@@ -11,7 +12,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
         <span class="spacer"></span>
         <ul class="pager" data-automation-id="pager">
             <li class="page" (click)="selectPage(page-1)" [ngClass]="{'disabled': noPrevious()}"><i class="bhi-previous" data-automation-id="pager-previous"></i></li>
-            <li class="page" [ngClass]="{active: p.number==page}" *ngFor="let p of pages" (click)="selectPage(p.number)">{{p.text}}</li>
+            <li class="page" [ngClass]="{active: p.number==page}" [class.disabled]="disablePageSelection" *ngFor="let p of pages" (click)="selectPage(p.number)">{{p.text}}</li>
             <li class="page" (click)="selectPage(page+1)" [ngClass]="{'disabled': noNext()}"><i class="bhi-next" data-automation-id="pager-next"></i></li>
         </ul>
   `
@@ -22,10 +23,16 @@ export class Pagination implements OnInit, OnChanges {
     @Input() itemsPerPage: number = 10;
     @Input() rowOptions: any;
     @Input() label: string;
+    @Input()
+    get disablePageSelection(): boolean { return this.pageSelectDisabled; }
+    set disablePageSelection(val: boolean) {
+        this.pageSelectDisabled = coerceBooleanProperty(val);
+    }
     @Output() pageChange: EventEmitter<any> = new EventEmitter();
     @Output() itemsPerPageChange: EventEmitter<any> = new EventEmitter();
     @Output() onPageChange: EventEmitter<any> = new EventEmitter();
 
+    public pageSelectDisabled: boolean;
     maxPagesDisplayed: number = 5;
     totalPages: number;
     pages: Array<any>;
@@ -99,7 +106,6 @@ export class Pagination implements OnInit, OnChanges {
 
     getPages(currentPage, totalPages) {
         let pages = [];
-
         // Default page limits
         let startPage = 1;
         let endPage = totalPages;
@@ -123,7 +129,6 @@ export class Pagination implements OnInit, OnChanges {
             const page = this.makePage(number, number.toString(), number === currentPage);
             pages.push(page);
         }
-
         return pages;
     }
 

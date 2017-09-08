@@ -73,7 +73,7 @@ module.exports = function () {
             }),
             new ContextReplacementPlugin(
                 // The (\\|\/) piece accounts for path separators in *nix and Windows
-                /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+                /angular(\\|\/)core(\\|\/)@angular/,
                 helpers.root('demo') // location of your src
             ),
             new LoaderOptionsPlugin({

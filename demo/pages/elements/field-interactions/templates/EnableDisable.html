@@ -1,0 +1,10 @@
+<novo-form [form]="forms.enableDisable" layout="vertical">
+    <div class="novo-form-row">
+        <novo-control [form]="forms.enableDisable" [control]="controls.enableDisable.textControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="forms.enableDisable" [control]="controls.enableDisable.toggleControl"></novo-control>
+    </div>
+</novo-form>
+<div class="final-value">Form Value - {{ forms.enableDisable.value | json }}</div>
+<div class="final-value">Is Form Valid? - {{ forms.enableDisable.valid | json }}</div>

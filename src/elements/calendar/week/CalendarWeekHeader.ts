@@ -2,9 +2,9 @@ import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/co
 import { CalendarEvent, WeekDay } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
-  selector: 'novo-calendar-week-header',
-  template: `
-    <template #defaultTemplate>
+    selector: 'novo-calendar-week-header',
+    template: `
+    <ng-template #defaultTemplate>
       <div class="cal-day-headers">
         <div
           class="cal-header"
@@ -23,23 +23,23 @@ import { CalendarEvent, WeekDay } from '../../../utils/calendar-utils/CalendarUt
           <span>{{ day.date | monthday:locale }}</span>
         </div>
       </div>
-    </template>
-    <template
+    </ng-template>
+    <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
       [ngOutletContext]="{days: days, locale: locale, dayClicked: dayClicked, eventDropped: eventDropped}">
-    </template>
+    </ng-template>
   `
 })
 export class NovoCalendarWeekHeaderElement {
 
-  @Input() days: WeekDay[];
+    @Input() days: WeekDay[];
 
-  @Input() locale: string;
+    @Input() locale: string;
 
-  @Input() customTemplate: TemplateRef<any>;
+    @Input() customTemplate: TemplateRef<any>;
 
-  @Output() dayClicked: EventEmitter<{date: Date}> = new EventEmitter<{date: Date}>();
+    @Output() dayClicked: EventEmitter<{ date: Date }> = new EventEmitter<{ date: Date }>();
 
-  @Output() eventDropped: EventEmitter<{event: CalendarEvent, newStart: Date}> = new EventEmitter<{event: CalendarEvent, newStart: Date}>();
+    @Output() eventDropped: EventEmitter<{ event: CalendarEvent, newStart: Date }> = new EventEmitter<{ event: CalendarEvent, newStart: Date }>();
 
 }

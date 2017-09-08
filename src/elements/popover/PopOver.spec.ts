@@ -1,6 +1,6 @@
 // NG2
 import { TestBed, async } from '@angular/core/testing';
-import {Component, ComponentFactory, ComponentFactoryResolver} from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver } from '@angular/core';
 // App
 import { PopOverDirective } from './PopOver';
 
@@ -10,7 +10,7 @@ import { PopOverDirective } from './PopOver';
         <div popover=""></div>
     `
 })
-class TestComponent {}
+class TestComponent { }
 
 describe('Elements: PopOverDirective', () => {
     describe('Directive: ', () => {
@@ -33,14 +33,15 @@ describe('Elements: PopOverDirective', () => {
         });
 
         describe('Class: ', () => {
-            let mockComponentFactoryResolver: ComponentFactoryResolver = { resolveComponentFactory<T>(component: {new (...args: any[]): T}): ComponentFactory<T> {
-                // This was a monster to mock...
-                let a = component;
-                if (a) {
+            let mockComponentFactoryResolver: ComponentFactoryResolver = {
+                resolveComponentFactory<T>(c: { new(...args: any[]): T }): ComponentFactory<T> {
+                    // This was a monster to mock...
+                    if (c) {
+                        return null;
+                    }
                     return null;
                 }
-                return null;
-            }};
+            };
 
             let component = new PopOverDirective(directive, mockComponentFactoryResolver);
             describe('Method: ngOnChanges()', () => {

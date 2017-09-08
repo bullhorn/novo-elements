@@ -72,6 +72,16 @@ novo-form {
                             }
                         }
                     }
+                    &.date,
+                    &.time,
+                    &.date-time {
+                        .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+                            border-bottom: none !important;
+                            > input {
+                                border-bottom: 1px solid $negative !important;
+                            }
+                        }
+                    }
                     &.hidden {
                         height: 0;
                         min-height: 0;
@@ -132,7 +142,15 @@ novo-form {
                             top: -5px;
                         }
                     }
-                    .field-message {
+                    novo-tip-well.active {
+                        margin-bottom: 5px;
+                        font-size: 1em !important;
+                        >div {
+                            width: 100%;
+                        }
+                    }
+                    .field-message,
+                    novo-tip-well.active {
                         font-size: 0.8em;
                         padding: 5px 0;
                         flex-basis: 100%;
@@ -144,6 +162,9 @@ novo-form {
                         &[hidden] {
                             display: block !important;
                             visibility: hidden;
+                        }
+                        &.has-tip {
+                            margin-bottom: 0;
                         }
                         .character-count {
                             font-size: 12px;
@@ -556,7 +577,6 @@ novo-form {
     address-input {
         display: flex;
         flex-flow: row wrap;
-        input {}
         .street-address {
             flex: 3 3 75%;
         }
@@ -711,7 +731,15 @@ novo-form {
                                     margin-top: 0.5em;
                                 }
                             }
-                            .field-message {
+                            novo-tip-well.active {
+                                margin-bottom: 5px;
+                                font-size: 1em !important;
+                                >div {
+                                    width: 100%;
+                                }
+                            }
+                            .field-message,
+                            novo-tip-well.active {
                                 justify-content: space-between;
                                 display: flex;
                                 margin-left: 22px;
@@ -719,11 +747,29 @@ novo-form {
                                 .messages {
                                     min-height: 10px;
                                 }
+                                &.has-tip {
+                                    margin-bottom: 0;
+                                }
                             }
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+control-confirm-modal {
+    h2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        i {
+            font-size: 0.8em;
+            margin: 0 0.5em;
+        }
+        label {
+            margin-right: 10px;
         }
     }
 }

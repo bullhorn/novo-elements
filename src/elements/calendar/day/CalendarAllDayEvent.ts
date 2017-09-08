@@ -2,9 +2,9 @@ import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/co
 import { CalendarEvent } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
-  selector: 'novo-calendar-all-day-event',
-  template: `
-    <template #defaultTemplate>
+    selector: 'novo-calendar-all-day-event',
+    template: `
+    <ng-template #defaultTemplate>
       <div
         class="cal-all-day-event"
         [style.backgroundColor]="event.color.secondary"
@@ -17,22 +17,22 @@ import { CalendarEvent } from '../../../utils/calendar-utils/CalendarUtils';
         </novo-calendar-event-title>
         <novo-calendar-event-actions [event]="event"></novo-calendar-event-actions>-->
       </div>
-    </template>
-    <template
+    </ng-template>
+    <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
       [ngOutletContext]="{
         event: event,
         eventClicked: eventClicked
       }">
-    </template>
+    </ng-template>
   `
 })
 export class NovoCalendarAllDayEventElement {
 
-  @Input() event: CalendarEvent;
+    @Input() event: CalendarEvent;
 
-  @Input() customTemplate: TemplateRef<any>;
+    @Input() customTemplate: TemplateRef<any>;
 
-  @Output() eventClicked: EventEmitter<any> = new EventEmitter();
+    @Output() eventClicked: EventEmitter<any> = new EventEmitter();
 
 }

@@ -1,10 +1,11 @@
 // NG2
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule, Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Vendor
-import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService } from './../index';
+import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService, FieldInteractionApi, NovoToastService, NovoModalService } from './../index';
 // APP
 import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
 import { MultiCodeSnippet } from './elements/codesnippet/MultiCodeSnippet';
@@ -42,7 +43,8 @@ import {
     MultiPickerDemoComponent,
     PopOverDemoComponent,
     CustomDemoComponent,
-    DatePickerDemoComponent
+    DatePickerDemoComponent,
+    FieldInteractionsDemoComponent
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
@@ -51,6 +53,14 @@ import { CustomPickerResults } from './pages/elements/picker/PickerDemo';
 import { DemoComponent } from './app/App';
 import { routing } from './app/App.routes';
 import './demo.scss';
+
+export function provideFieldInteractionAPI(toast, modal, formUtils, http, labels) {
+    const fieldInteractionApi = new FieldInteractionApi(toast, modal, formUtils, http, labels);
+    fieldInteractionApi.globals = {
+        TEST: 'I AM A GLOBAL!'
+    };
+    return fieldInteractionApi;
+}
 
 @NgModule({
     declarations: [
@@ -107,10 +117,12 @@ import './demo.scss';
         MultiPickerDemoComponent,
         PopOverDemoComponent,
         CustomDemoComponent,
-        AppBridgeDemoComponent
+        AppBridgeDemoComponent,
+        FieldInteractionsDemoComponent
     ],
     imports: [
         // NG2
+        BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
         HttpModule,
@@ -123,7 +135,12 @@ import './demo.scss';
     ],
     providers: [
         FormUtils,
-        NovoLabelService
+        NovoLabelService,
+        {
+            provide: FieldInteractionApi,
+            useFactory: provideFieldInteractionAPI,
+            deps: [NovoToastService, NovoModalService, FormUtils, Http, NovoLabelService]
+        }
     ],
     entryComponents: [
         DemoComponent,

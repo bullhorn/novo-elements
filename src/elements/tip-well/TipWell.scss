@@ -1,6 +1,8 @@
 novo-tip-well {
-    display: inline-block;
-    margin-bottom: 1em;
+    &.active {
+        display: inline-block;
+        margin-bottom: 1em;
+    }
     >div {
         display: inline-block;
         border-radius: .25em;
