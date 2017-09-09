@@ -8,7 +8,7 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 
-import { NovoSortFilter, NovoSelection } from "../../../../index";
+import { NovoSortFilter, NovoSelection, NovoActivityTable } from "../../../../index";
 
 @Component({
     selector: 'simple-table-demo',
@@ -27,14 +27,13 @@ export class SimpleTableDemoComponent implements OnInit {
     displayedColumns = ['selection', ...this.columns.map(x => x.id)];
 
     // @ViewChild(MdPaginator) paginator: MdPaginator;
-    @ViewChild(NovoSortFilter) sort: NovoSortFilter;
-    @ViewChild(NovoSelection) selection: NovoSelection;
+    @ViewChild(NovoActivityTable) table: NovoActivityTable;
 
     constructor(private http: Http, private ref: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.exampleDatabase = new ExampleHttpDao(this.http);
-        this.dataSource = new ExampleDataSource(this.exampleDatabase!, this.sort, this.ref);
+        this.dataSource = new ExampleDataSource(this.exampleDatabase!, this.table.sort, this.ref);
     }
 }
 
@@ -43,9 +42,9 @@ export class ExampleHttpDao {
 
     getContacts(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number): Observable<any> {
         console.log('S', sort, 'F', filter);
-        const token = '7d0f35da-839d-4f16-8d67-78cd67a0affa';
+        const token = '4ab022c8-12f1-40a1-9387-44732ba029ca';
         let query = '&query=NOT%20(status%3A%22Archive%22)%20AND%20isDeleted%3Afalse'
-        let url = `http://optimus-backend.bh-bos2.bullhorn.com:8181/rest-services/1hs/search/ClientContact?BhRestToken=${token}&fields=id,name,status&start=0&count=500&showTotalMatched=true`;
+        let url = `http://dschulte-backend.bh-bos2.bullhorn.com:8181/rest-services/1hs/search/ClientContact?BhRestToken=${token}&fields=id,name,status&start=0&count=500&showTotalMatched=true`;
         if (sort) {
             url += `&sort=${sort.value === 'desc' ? '-' : ''}${sort.id}`
         }
@@ -80,6 +79,7 @@ export class ExampleDataSource extends DataSource<any> {
                 return this.exampleDatabase.getContacts(this.sort.currentSortColumn, this.sort.currentFilterColumn, 0);
             })
             .map(data => {
+                console.log('RETURNED', data.length);
                 this.isLoadingResults = false;
                 this.isRateLimitReached = false;
                 this.resultsLength = data.length;

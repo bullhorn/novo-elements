@@ -398,6 +398,14 @@ novo-dropdown-container.table-dropdown {
             >td,
             >th {
                 padding: $table-condensed-cell-padding;
+                button {
+                    padding: 5px !important;
+                    width: inherit !important;
+                    height: inherit !important;
+                }
+                .th-title {
+                    padding: 5px 5px 5px 0;
+                }
             }
         }
     }

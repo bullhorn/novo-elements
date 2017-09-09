@@ -1,4 +1,4 @@
-<div class="example-container">
+<!-- <div class="example-container">
     <div class="example-loading-shade" *ngIf="dataSource.isLoadingResults">
         <novo-loading *ngIf="dataSource.isLoadingResults"></novo-loading>
     </div>
@@ -16,6 +16,5 @@
         <novo-row *novoRowDef="let row; columns: displayedColumns;"></novo-row>
     </novo-simple-table>
 
-    <!-- <novo-paginator [length]="dataSource.resultsLength" [pageSize]="30">
-    </novo-paginator> -->
-</div>
+</div> -->
+<novo-activity-table [dataSource]="dataSource" [columns]="columns" [displayedColumns]="displayedColumns"></novo-activity-table>
