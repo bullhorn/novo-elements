@@ -1,3 +1,13 @@
+<a name="2.1.3"></a>
+## [2.1.3](https://github.com/bullhorn/novo-elements/compare/v2.1.2...v2.1.3) (2017-09-09)
+
+
+### Features
+
+* **tabs:** condensed version ([4a415a4](https://github.com/bullhorn/novo-elements/commit/4a415a4))
+
+
+
 <a name="2.1.2"></a>
 ## [2.1.2](https://github.com/bullhorn/novo-elements/compare/v2.1.1...v2.1.2) (2017-09-08)
 
