@@ -6,6 +6,7 @@ let ColorDemoTpl = require('./templates/ColorDemo.html');
 let RouterDemoTpl = require('./templates/RouterDemo.html');
 let VerticalDemoTpl = require('./templates/VerticalDemo.html');
 let WhiteDemoTpl = require('./templates/WhiteDemo.html');
+let CondensedDemoTpl = require('./templates/CondensedDemo.html');
 
 const template = `
 <div class="container">
@@ -23,6 +24,12 @@ const template = `
     <p>White background tab navigation gets the theme <code>theme="white"</code></p>
     <div class="example transparent-tab-demo">${WhiteDemoTpl}</div>
     <code-snippet [code]="WhiteDemoTpl"></code-snippet>
+
+    <h2>Styles</h2>
+
+    <p>Condensed tabs to help utilize more space with <code>condensed="true"</code></p>
+    <div class="example transparent-tab-demo">${CondensedDemoTpl}</div>
+    <code-snippet [code]="CondensedDemoTpl"></code-snippet>
 
     <h2>Types</h2>
 
@@ -48,11 +55,12 @@ const template = `
     template: template
 })
 export class TabsDemoComponent {
-    private ColorDemoTpl:string = ColorDemoTpl;
-    private WhiteDemoTpl:string = WhiteDemoTpl;
-    private VerticalDemoTpl:string = VerticalDemoTpl;
-    private ButtonTabDemoTpl:string = ButtonTabDemoTpl;
-    private RouterDemoTpl:string = RouterDemoTpl;
+    private ColorDemoTpl: string = ColorDemoTpl;
+    private WhiteDemoTpl: string = WhiteDemoTpl;
+    private VerticalDemoTpl: string = VerticalDemoTpl;
+    private ButtonTabDemoTpl: string = ButtonTabDemoTpl;
+    private RouterDemoTpl: string = RouterDemoTpl;
+    private CondensedDemoTpl: string = CondensedDemoTpl;
 
     tabSelected() {
         console.log('TAB SELECTED'); // tslint:disable-line
