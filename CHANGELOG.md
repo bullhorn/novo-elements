@@ -1,3 +1,13 @@
+<a name="2.1.4"></a>
+## [2.1.4](https://github.com/bullhorn/novo-elements/compare/v2.1.3...v2.1.4) (2017-09-11)
+
+
+### Bug Fixes
+
+* **select:** Fixing select values when re-using a form ([b0c69d2](https://github.com/bullhorn/novo-elements/commit/b0c69d2))
+
+
+
 <a name="2.1.3"></a>
 ## [2.1.3](https://github.com/bullhorn/novo-elements/compare/v2.1.2...v2.1.3) (2017-09-09)
 
