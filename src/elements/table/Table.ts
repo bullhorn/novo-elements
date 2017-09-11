@@ -18,7 +18,8 @@ export interface NovoTableConfig {
         current: number,                // current page
         itemsPerPage: number,           // items per page
         onPageChange: Function,          // function to handle page changing
-        rowOptions?: { value: number, label: string }[] // page options
+        rowOptions?: { value: number, label: string }[], // page options
+        disablePageSelection?: boolean    // disables the pages from being selected
     };
     // Footer config (total footer)
     footers?: Array<{
@@ -59,7 +60,8 @@ export enum NovoTableMode {
             <ng-content select="novo-table-header"></ng-content>
             <div class="header-actions">
                 <novo-pagination *ngIf="config.paging && !(dataProvider.isEmpty() && !dataProvider.isFiltered())"
-                                 [rowOptions]="config.customRowOptions"
+                                 [rowOptions]="config.paging.rowOptions"
+                                 [disablePageSelection]="config.paging.disablePageSelection"
                                  [(page)]="dataProvider.page"
                                  [(itemsPerPage)]="dataProvider.pageSize"
                                  [totalItems]="dataProvider.total"

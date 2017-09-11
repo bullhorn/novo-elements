@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "2.1.0",
+  "version": "2.1.3",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "scripts": {
     "precommit": "npm run lint",
@@ -29,7 +29,8 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },

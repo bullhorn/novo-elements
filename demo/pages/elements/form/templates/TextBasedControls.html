@@ -1,5 +1,9 @@
 <!--Check out the FormDemo.js for more information!-->
-<novo-form [form]="textForm">
+<button theme="secondary" (click)="form.showAllFields()">Show All Fields</button>
+<button theme="secondary" (click)="form.showOnlyRequired()">Show Required Fields</button>
+<br/>
+<br/>
+<novo-form [form]="textForm" #form>
     <div class="novo-form-row">
         <novo-control [form]="textForm" [control]="textControl"></novo-control>
     </div>
