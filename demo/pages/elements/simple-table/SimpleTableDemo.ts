@@ -33,7 +33,7 @@ export class SimpleTableDemoComponent implements OnInit {
 
     ngOnInit() {
         this.exampleDatabase = new ExampleHttpDao(this.http);
-        this.dataSource = new ExampleDataSource(this.exampleDatabase!, this.table.sort, this.ref);
+        this.dataSource = new ExampleDataSource(this.exampleDatabase, this.table.sort, this.ref);
     }
 }
 
@@ -42,7 +42,7 @@ export class ExampleHttpDao {
 
     getContacts(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number): Observable<any> {
         console.log('S', sort, 'F', filter);
-        const token = '4ab022c8-12f1-40a1-9387-44732ba029ca';
+        const token = '2c26efc4-f238-4a31-a254-892cc6a0ee76';
         let query = '&query=NOT%20(status%3A%22Archive%22)%20AND%20isDeleted%3Afalse'
         let url = `http://dschulte-backend.bh-bos2.bullhorn.com:8181/rest-services/1hs/search/ClientContact?BhRestToken=${token}&fields=id,name,status&start=0&count=500&showTotalMatched=true`;
         if (sort) {
@@ -59,9 +59,8 @@ export class ExampleHttpDao {
 }
 
 export class ExampleDataSource extends DataSource<any> {
-    resultsLength = 0;
-    isLoadingResults = false;
-    isRateLimitReached = false;
+    total = 0;
+    loading = false;
 
     constructor(private exampleDatabase: ExampleHttpDao, private sort: NovoSortFilter, private ref: ChangeDetectorRef) {
         super();
@@ -74,21 +73,18 @@ export class ExampleDataSource extends DataSource<any> {
         return Observable.merge(...displayDataChanges)
             .startWith(null)
             .switchMap(() => {
-                this.isLoadingResults = true;
+                this.loading = true;
                 this.ref.markForCheck();
                 return this.exampleDatabase.getContacts(this.sort.currentSortColumn, this.sort.currentFilterColumn, 0);
             })
             .map(data => {
-                console.log('RETURNED', data.length);
-                this.isLoadingResults = false;
-                this.isRateLimitReached = false;
-                this.resultsLength = data.length;
+                this.loading = false;
+                this.total = data.length;
                 this.ref.markForCheck();
                 return data;
             })
             .catch(() => {
-                this.isLoadingResults = false;
-                this.isRateLimitReached = true;
+                this.loading = false;
                 this.ref.markForCheck();
                 return Observable.of(null);
             });

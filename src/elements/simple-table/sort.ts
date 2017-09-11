@@ -55,12 +55,38 @@ export class NovoSelection {
     @Output() novoSelectionChange = new EventEmitter<NovoSelectionChange>();
     @Output() novoSelectAllToggle = new EventEmitter<boolean>();
 
-    toggle(id: string, value: boolean) {
-        console.log('select', id, value);
+    allRows = new Map<string, object>();
+    selectedRows = new Map<string, object>();
+
+    get value() {
+        return Array.from(this.selectedRows.values());
+    }
+
+    register(id, row) {
+        this.allRows.set(id, row);
+    }
+
+    deregister(id) {
+        this.allRows.delete(id);
+    }
+
+    toggle(id: string, selected: boolean, row: any) {
+        if (selected) {
+            this.selectedRows.set(id, row);
+        } else {
+            this.selectedRows.delete(id);
+        }
+        console.log('SELECTED', Array.from(this.selectedRows.values()));
     }
 
     selectAll(value: boolean): void {
         console.log('[NovoSelection] selectAll', value);
         this.novoSelectAllToggle.emit(value);
+        if (value) {
+            this.selectedRows = this.allRows;
+        } else {
+            this.selectedRows.clear();
+        }
+        console.log('SELECTED', Array.from(this.selectedRows.values()));
     }
 }

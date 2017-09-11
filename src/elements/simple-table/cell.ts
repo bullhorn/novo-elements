@@ -91,7 +91,7 @@ export class NovoCell extends _NovoCell {
         <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox>
     `
 })
-export class NovoCheckboxCell extends _NovoCell implements OnDestroy {
+export class NovoCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
     @HostBinding('class') public cellClass = 'novo-checkbox-cell';
     @HostBinding('attr.role') public role = 'gridcell';
 
@@ -110,12 +110,16 @@ export class NovoCheckboxCell extends _NovoCell implements OnDestroy {
         });
     }
 
+    public ngOnInit(): void {
+        this._selection.register(this.row.id || this.index, this.row);
+    }
+
     public ngOnDestroy(): void {
+        this._selection.deregister(this.row.id || this.index);
         this.selectAllSubscription.unsubscribe();
     }
 
     public toggle(value: boolean): void {
-        console.log('WHAT', this.index);
-        this._selection.toggle(this.row, value);
+        this._selection.toggle(this.row.id || this.index, value, this.row);
     }
 }

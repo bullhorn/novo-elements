@@ -1,7 +1,14 @@
+$table-bg-accent: #f4f4f4;
 $novo-row-height: 48px;
 $novo-row-horizontal-padding: 24px;
 .novo-table {
     display: block;
+    >.novo-row:nth-of-type(odd) {
+        background-color: $table-bg-accent;
+        td {
+            background-color: $table-bg-accent;
+        }
+    }
 }
 
 .novo-row,
@@ -17,6 +24,7 @@ $novo-row-horizontal-padding: 24px;
 .novo-cell,
 .novo-header-cell {
     flex: 1;
+    min-width: 200px;
     novo-dropdown {
         display: inline-block;
     }
@@ -29,4 +37,19 @@ $novo-row-horizontal-padding: 24px;
 .novo-checkbox-cell {
     max-width: 30px;
     margin-top: -5px;
+}
+
+novo-activity-table {
+    .novo-activity-table-loading-mask {
+        position: absolute;
+        display: flex;
+        padding-top: 15%;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.07);
+        z-index: 10;
+    }
 }
