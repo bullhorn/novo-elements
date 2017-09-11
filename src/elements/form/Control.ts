@@ -176,9 +176,8 @@ export class NovoCustomControlContainerElement {
                     <!--Tip Wel-->
                     <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
                 </div>
-                <novo-loading *ngIf="form.controls[control.key].fieldInteractionloading && form.layout === 'vertical'" theme="multicolor"></novo-loading>
+                <novo-loading *ngIf="form.controls[control.key].fieldInteractionloading" theme="multicolor"></novo-loading>
             </div>
-            <novo-loading *ngIf="form.controls[control.key].fieldInteractionloading && form.layout !== 'vertical'" theme="multicolor"></novo-loading>
         </div>
     `,
     host: {

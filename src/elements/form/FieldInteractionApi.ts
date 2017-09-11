@@ -437,7 +437,7 @@ export class FieldInteractionApi {
     public setLoading(key: string, loading: boolean) {
         let control = this.getControl(key);
         if (control) {
-            if (loading) {
+            if (loading && control.value) {
                 this.form.controls[key].fieldInteractionloading = true;
                 control.setErrors({ 'loading': true });
                 // History

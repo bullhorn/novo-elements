@@ -239,17 +239,18 @@ novo-form {
                             display: flex;
                             align-items: center;
                             max-width: 550px;
+                            position: relative;
                             novo-loading {
                                 display: flex;
                                 flex-direction: row;
-                                position: relative;
-                                top: -20px;
-                                left: 2em;
+                                position: absolute;
+                                top: 0;
+                                right: 0;
                                 padding: 0;
                                 flex: 1;
                                 span {
-                                    width: 10px;
-                                    height: 10px;
+                                    width: 0.8em;
+                                    height: 0.8em;
                                 }
                             }
                             .novo-control-inner-container {
@@ -532,9 +533,6 @@ novo-form {
                                             font-weight: 500;
                                         }
                                     }
-                                }
-                                novo-loading {
-                                    top: 0;
                                 }
                             }
                         }
