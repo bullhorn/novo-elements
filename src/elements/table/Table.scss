@@ -10,6 +10,9 @@ $table-border-color: #f5f5f5;
 novo-table {
     width: 100%;
     display: block;
+    button.hint--bottom {
+        z-index: 1;
+    }
     >header {
         novo-table-header {
             padding: 10px;
@@ -391,13 +394,18 @@ novo-dropdown-container.table-dropdown {
 
 // Condensed table w/ half padding
 .table-condensed {
-    >tbody,
-    >thead,
-    >tfoot {
-        >tr {
-            >td,
-            >th {
+    tbody,
+    thead,
+    tfoot {
+        tr {
+            td,
+            th {
                 padding: $table-condensed-cell-padding;
+                button {
+                    padding: 5px !important;
+                    width: inherit !important;
+                    height: inherit !important;
+                }
             }
         }
     }
@@ -406,12 +414,12 @@ novo-dropdown-container.table-dropdown {
 // Bordered version
 // Add horizontal borders between columns.
 .table-bordered {
-    >tbody,
-    >thead,
-    >tfoot {
-        >tr {
-            >td,
-            >th {
+    tbody,
+    thead,
+    tfoot {
+        tr {
+            td,
+            th {
                 border-bottom: 1px solid $table-border-color;
             }
         }
