@@ -1,13 +1,15 @@
 // NG2
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
 // APP
+import { NovoOverlayModule } from '../overlay/Overlay.module';
 import { NovoButtonModule } from './../button/Button.module';
 import { NovoPickerModule } from './../picker/Picker.module';
 import { NovoSearchBoxElement } from './SearchBox';
 
 @NgModule({
-    imports: [CommonModule, NovoButtonModule, NovoPickerModule],
+    imports: [CommonModule, NovoButtonModule, NovoPickerModule, OverlayModule, NovoOverlayModule],
     declarations: [NovoSearchBoxElement],
     exports: [NovoSearchBoxElement]
 })

@@ -1,86 +1,76 @@
-header {
-    &.novo-header {
-        &>section.primary {
+header[theme] {
+    & > section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px;
+        i.header-icon {
+            padding: 12px;
+        }
+        .header-titles {
             display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px;
-            > h1 {
+            flex-direction: column;
+            flex: 1 1 100px;
+            padding: 0px 8px;
+            h1 {
                 font-size: 1.7em;
                 margin: 0;
                 padding: 0;
                 display: inline-block;
                 font-weight: 500;
                 max-width: 70%;
-                min-width: 150px;
+                min-width: 100px;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 padding-right: 20px;
-                i {
-                    padding: 12px;
-                }
-            }
-            > section {
-                flex: 1;
-                min-width: 100px;
-                novo-search-box {
-                    max-width: 250px;
-                }
-            }
-            utils {
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
             }
         }
-        @each $analytics,
-        $color in $analytics-colors {
-            &[theme="#{$analytics}"] {
+        > section {
+            flex: 2 2 250px;
+            min-width: 100px;
+        }
+        utils {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    }
+    @each $analytics,
+    $color in $analytics-colors {
+        &[theme="#{$analytics}"] {
+            background: $color;
+            color: #fff;
+            &>section.primary {
                 background: $color;
-                color: #fff;
-                &>section.primary {
-                    background: $color;
-                }
-            }
-        }
-        @each $entity,
-        $color in $entity-colors {
-            &[theme="#{$entity}"] {
-                background: $color;
-                color: #fff;
-                &>section.primary {
-                    background: $color;
-                }
-            }
-        }
-        @each $basic,
-        $color in $colors {
-            &[theme="#{$basic}"] {
-                background: $color;
-                color: #fff;
-                &>section.primary {
-                    background: $color;
-                }
-            }
-        }
-        &[theme="light"],
-        &[theme="off-white"],
-        &[theme="white"] {
-            color: $dark;
-        }
-        &.hasSubTitle {
-            h1 {
-                display: flex !important;
-                >span {
-                    display: flex;
-                    flex-direction: column;
-                }
-                >i {
-                    font-size: 1.6em !important;
-                }
             }
         }
     }
+    @each $entity,
+    $color in $entity-colors {
+        &[theme="#{$entity}"] {
+            background: $color;
+            color: #fff;
+            &>section.primary {
+                background: $color;
+            }
+        }
+    }
+    @each $basic,
+    $color in $colors {
+        &[theme="#{$basic}"] {
+            background: $color;
+            color: #fff;
+            &>section.primary {
+                background: $color;
+            }
+        }
+    }
+    &[theme="light"],
+    &[theme="off-white"],
+    &[theme="white"] {
+        color: $dark;
+    }
+
 }

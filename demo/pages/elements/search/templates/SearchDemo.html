@@ -4,3 +4,18 @@
 <br/>
 
 <novo-search alwaysOpen="true"></novo-search>
+
+<br/>
+
+<novo-search [ngModel]="test" (ngModelChange)="search($event)">
+    <novo-list direction="vertical">
+        <novo-list-item *ngFor="let item of searchResults | async">
+            <item-header>
+                <item-avatar [icon]="item.type"></item-avatar>
+                <item-title>{{item.name}}</item-title>
+            </item-header>
+        </novo-list-item>
+    </novo-list>
+</novo-search>
+
+
