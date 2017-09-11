@@ -23,7 +23,7 @@ const SELECT_VALUE_ACCESSOR = {
     selector: 'novo-select',
     providers: [SELECT_VALUE_ACCESSOR],
     template: `
-        <div (click)="openPanel($event)" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
+        <div (click)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
         <novo-overlay-template #overlay>
             <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
                 <ng-content></ng-content>
