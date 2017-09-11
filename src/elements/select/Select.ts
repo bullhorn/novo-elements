@@ -86,6 +86,9 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
             this.filteredOptions = this.options.filter((item) => {
                 return !item.readOnly;
             });
+            this.filteredOptions.forEach(element => {
+                element.active = false;
+            });
         }
 
         if (!this.model && !this.createdItem) {
@@ -105,7 +108,9 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
     }
 
     select(option, i) {
-        this.selected.active = false;
+        if (this.selected) {
+            this.selected.active = false;
+        }
         this.selectedIndex = i;
         this.selected = option;
         this.selected.active = true;
@@ -260,10 +265,8 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
                 }
             }
             if (item) {
+                this.select(item, this.options.indexOf(item))
                 this.empty = false;
-                this.selected = item;
-                this.selected.active = true;
-                this.selectedIndex = this.options.indexOf(item);
             } else {
                 this.clear();
             }
