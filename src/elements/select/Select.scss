@@ -48,9 +48,13 @@ novo-select {
             right: 10px;
         }
     }
+    &[disabled] {
+        pointer-events: none;
+        div[type="button"] {
+            color: $grey;
+        }
+    }
 }
-
-
 
 
 .novo-select-list {
@@ -128,12 +132,7 @@ novo-select {
         padding: 0;
     }
 }
-&[disabled] {
-    pointer-events: none;
-    div[type="button"] {
-        color: $grey;
-    }
-}
+
 .select-header {
     button {
         text-transform: uppercase;
