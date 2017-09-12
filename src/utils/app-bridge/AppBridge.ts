@@ -30,6 +30,7 @@ export type MosaicLists = 'Candidate' |'ClientContact' | 'ClientCorporation' |
 export interface IAppBridgeOpenListEvent {
     type: MosaicLists;
     keywords?: Array<string>;
+    criteria?: any;
 }
 
 export type NovoDataType = 'entitlements' | 'settings' | 'user';
@@ -241,7 +242,7 @@ export class AppBridge {
      */
     public openList(packet: IAppBridgeOpenListEvent): Promise<boolean> {
         let openListPacket = {};
-        Object.assign(openListPacket, { type: 'List', entityType: packet.type, keywords: packet.keywords });
+        Object.assign(openListPacket, { type: 'List', entityType: packet.type, keywords: packet.keywords, criteria: packet.criteria });
         return new Promise<boolean>((resolve, reject) => {
             if (this._handlers[AppBridgeHandler.OPEN_LIST]) {
                 this._handlers[AppBridgeHandler.OPEN_LIST](packet, (success: boolean) => {
