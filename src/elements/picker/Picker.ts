@@ -10,6 +10,8 @@ import { PickerResults } from './extras/picker-results/PickerResults';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { Helpers } from '../../utils/Helpers';
 import { NovoPickerContainer } from './extras/picker-container/PickerContainer';
+import { NovoOverlayTemplate } from '../overlay/Overlay';
+
 
 // Value accessor for the component (supports ngModel)
 const PICKER_VALUE_ACCESSOR = {
@@ -42,15 +44,13 @@ const PICKER_VALUE_ACCESSOR = {
             autocomplete="off" />
         <i class="bhi-search" *ngIf="!_value || clearValueOnSelect"></i>
         <i class="bhi-times" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
-        <novo-picker-container class="picker-results-container">
+        <novo-overlay-template class="picker-results-container" [parent]="element">
             <span #results></span>
-        </novo-picker-container>
-    `,
-    host: {
-        '[class.append-to-body]': 'appendToBody'
-    }
+            <ng-content></ng-content>
+        </novo-overlay-template>
+    `
 })
-export class NovoPickerElement extends OutsideClick implements OnInit {
+export class NovoPickerElement implements OnInit {
     // Container for the results
     @ViewChild('results', { read: ViewContainerRef }) results: ViewContainerRef;
 
@@ -79,7 +79,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     @Output() blur: EventEmitter<any> = new EventEmitter();
     @Output() typing: EventEmitter<any> = new EventEmitter();
 
-    @ViewChild(NovoPickerContainer) public container: NovoPickerContainer;
+    @ViewChild(NovoOverlayTemplate) public container: NovoOverlayTemplate;
 
     parentScrollElement: Element;
     closeHandler: any;
@@ -88,27 +88,15 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     resultsComponent: any;
     popup: any;
     _value: any;
-    onModelChange: Function = () => {
-    };
-    onModelTouched: Function = () => {
-    };
+    onModelChange: Function = () => {};
+    onModelTouched: Function = () => {};
 
-    constructor(element: ElementRef, private componentUtils: ComponentUtils) {
-        super(element);
+    constructor(public element: ElementRef, private componentUtils: ComponentUtils) {
         // Setup handlers
-        this.closeHandler = this.toggleActive.bind(this);
+        //this.closeHandler = this.toggleActive.bind(this);
     }
 
     ngOnInit() {
-        // Listen for active change to hide/show results
-        this.onActiveChange.subscribe((active) => {
-            if (active) {
-                this.show();
-            } else {
-                this.hideResults();
-                this.blur.emit();
-            }
-        });
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || PickerResults;
         // Find parent
@@ -138,45 +126,30 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         this.show((event.target as any).value);
     }
 
+    /** BEGIN: Convienient Panel Methods. */
+    public openPanel(): void {
+        this.container.openPanel();
+    }
+    public closePanel(): void {
+        this.container.closePanel();
+    }
+    public get panelOpen(): boolean {
+        return this.container && this.container.panelOpen;
+    }
+    /** END: Convienient Panel Methods. */
+
     private show(term?: string): void {
-        this.container.parent = this;
-        this.container.show(this.appendToBody);
-        this.otherElement = this.container.element;
-        if (this.appendToBody) {
-            this.container.updatePosition(this.element.nativeElement.children[0], this.side);
-            // If append to body then rip it out of here and put on body
-            window.document.body.appendChild(this.container.element.nativeElement);
-            window.addEventListener('resize', this.closeHandler);
-        }
-        // Listen for scroll on a parent to force close
-        if (this.parentScrollElement) {
-            if (this.parentScrollAction === 'close') {
-                this.parentScrollElement.addEventListener('scroll', this.closeHandler);
-            }
-        }
+        this.openPanel();
         // Show the results inside
         this.showResults(term);
     }
 
     private hide(): void {
-        this.container.hide();
-        // If append to body then rip it out of here and put on body
-        if (this.appendToBody) {
-            let elm = this.container.element.nativeElement;
-            if (elm.parentNode) {
-                elm.parentNode.removeChild(elm);
-            }
-            window.removeEventListener('resize', this.closeHandler);
-        }
-        if (this.parentScrollElement) {
-            if (this.parentScrollAction === 'close') {
-                this.parentScrollElement.removeEventListener('scroll', this.closeHandler);
-            }
-        }
+        this.closePanel();
     }
 
     onKeyDown(event: KeyboardEvent) {
-        if (this.popup) {
+        if (this.panelOpen) {
             if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB) {
                 this.hideResults();
                 return;
@@ -199,7 +172,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
 
             if (event.keyCode === KeyCodes.BACKSPACE && !Helpers.isBlank(this._value)) {
                 this.clearValue(false);
-                this.toggleActive(null, true);
+                this.closePanel();
             }
         }
     }
@@ -221,7 +194,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
      * results.
      */
     onFocus(event) {
-        this.toggleActive(null, true);
+        this.openPanel();
         this.focus.emit(event);
     }
 

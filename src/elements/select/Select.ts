@@ -1,13 +1,10 @@
 // NG2
-import { Component, Input, Output, EventEmitter, ViewChild, Inject, Optional, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, ViewContainerRef, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Overlay } from '@angular/cdk/overlay';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/platform-browser';
 // APP
-import { HasOverlay } from '../overlay/HasOverlay';
-import { DEFAULT_OVERLAY_SCROLL_STRATEGY } from '../overlay/Overlay';
-
+import { NovoOverlayTemplate } from '../overlay/Overlay';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
@@ -24,7 +21,7 @@ const SELECT_VALUE_ACCESSOR = {
     providers: [SELECT_VALUE_ACCESSOR],
     template: `
         <div (click)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
-        <novo-overlay-template #overlay>
+        <novo-overlay-template [parent]="element">
             <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
                 <ng-content></ng-content>
                 <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">
@@ -48,7 +45,7 @@ const SELECT_VALUE_ACCESSOR = {
         '(keydown)': 'onKeyDown($event)'
     }
 })
-export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
+export class NovoSelectElement implements OnInit, OnChanges {
     @Input() name: string;
     @Input() options: Array<any>;
     @Input() placeholder: string = 'Select...';
@@ -73,20 +70,12 @@ export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
     filteredOptions: any;
 
     /** Element for the panel containing the autocomplete options. */
-    @ViewChild('overlay') list: any;
+    @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
 
     constructor(
-        private element: ElementRef,
-        public labels: NovoLabelService,
-        protected _viewContainerRef: ViewContainerRef,
-        protected _zone: NgZone,
-        protected _changeDetectorRef: ChangeDetectorRef,
-        protected _overlay: Overlay,
-        @Inject(DEFAULT_OVERLAY_SCROLL_STRATEGY) protected _scrollStrategy,
-        @Optional() @Inject(DOCUMENT) protected _document: any,
-    ) {
-        super(element, _overlay, _viewContainerRef, _zone, _changeDetectorRef, _scrollStrategy, _document);
-    }
+        public element: ElementRef,
+        public labels: NovoLabelService
+    ) {}
 
     ngOnInit() {
         this.ngOnChanges();
@@ -115,11 +104,18 @@ export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
         }
     }
 
-     // /** Opens the overlay panel. */
+    /** BEGIN: Convienient Panel Methods. */
     openPanel(): void {
-        super.openPanel(this.list.template);
-        this.scrollToSelected();
+        this.overlay.openPanel();
     }
+    closePanel(): void {
+        this.overlay.closePanel();
+    }
+    get panelOpen(): boolean {
+        return this.overlay && this.overlay.panelOpen;
+    }
+    /** END: Convienient Panel Methods. */
+
 
     /**
     * This method closes the panel, and if a value is specified, also sets the associated
@@ -158,6 +154,7 @@ export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
         this.empty = true;
     }
 
+    @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
         if (this.panelOpen) {
             if (!this.header.open) {
@@ -182,7 +179,7 @@ export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
                 this.selectedIndex--;
                 this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
                 this.scrollToSelected();
-            } else if (event.keyCode === KeyCodes.DOWN && this.selectedIndex < this.options.length - 1) {
+            } else if (event.keyCode === KeyCodes.DOWN && this.selectedIndex < this.filteredOptions.length - 1) {
                 this.selectedIndex++;
                 this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
                 this.scrollToSelected();
@@ -222,7 +219,7 @@ export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
     }
 
     scrollToIndex(index: number) {
-        let element = this._overlayRef.overlayElement;
+        let element = this.overlay._overlayRef.overlayElement;
         let list = element.querySelector('.novo-select-list');
         let items = list.querySelectorAll('li');
         let item = items[this.headerConfig ? index + 1 : index];
