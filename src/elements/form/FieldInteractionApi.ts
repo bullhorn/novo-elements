@@ -156,6 +156,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.hide(clearValue);
+            this.disable(key, { emitEvent: false });
         }
     }
 
@@ -163,6 +164,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.show();
+            this.enable(key, { emitEvent: false });
         }
     }
 

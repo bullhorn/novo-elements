@@ -107,7 +107,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         this.toggleActive();
     }
 
-    select(option, i) {
+    select(option, i, fireEvents: boolean = true) {
         if (this.selected) {
             this.selected.active = false;
         }
@@ -115,8 +115,10 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
         this.selected = option;
         this.selected.active = true;
         this.empty = false;
-        this.onModelChange(this.selected.value);
-        this.onSelect.emit({ selected: this.selected.value });
+        if (fireEvents) {
+            this.onModelChange(this.selected.value);
+            this.onSelect.emit({ selected: this.selected.value });
+        }
     }
 
     clear() {
@@ -265,7 +267,7 @@ export class NovoSelectElement extends OutsideClick implements OnInit, OnChanges
                 }
             }
             if (item) {
-                this.select(item, this.options.indexOf(item))
+                this.select(item, this.options.indexOf(item), false);
                 this.empty = false;
             } else {
                 this.clear();
