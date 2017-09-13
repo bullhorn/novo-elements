@@ -1,26 +1,13 @@
 // NG2
-import { ChangeDetectorRef,
-    Component,
-    ElementRef,
-    forwardRef,
-    Host,
-    HostBinding,
-    Inject,
-    InjectionToken,
-    ViewChild,
-    Input,
-    NgZone,
-    OnDestroy,
-    Optional,
-    ViewContainerRef,
-    TemplateRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOCUMENT } from '@angular/platform-browser';
-import { Overlay } from '@angular/cdk/overlay';
+import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostBinding, HostListener, ChangeDetectorRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
-// App
-import { HasOverlay } from '../overlay/HasOverlay';
-import { DEFAULT_OVERLAY_SCROLL_STRATEGY } from '../overlay/Overlay';
+import { DOCUMENT } from '@angular/platform-browser';
+// APP
+import { NovoOverlayTemplate } from '../overlay/Overlay';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
 
 
 // Value accessor for the component (supports ngModel)
@@ -34,11 +21,11 @@ const SEARCH_VALUE_ACCESSOR = {
     providers: [SEARCH_VALUE_ACCESSOR],
     template: `
         <!-- SEARCH ICON -->
-        <button theme="fab" [color]="theme" icon="search" (click)="showSearch()"></button>
+        <button theme="fab" [color]="theme" [icon]="icon" (click)="showSearch()"></button>
         <!-- SEARCH INPUT -->
         <input type="text" [attr.name]="name" [attr.value]="value" [attr.placeholder]="placeholder" (focus)="onFocus()" (blur)="closePanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input/>
         <!-- SEARCH OVERLAY -->
-        <novo-overlay-template #overlay>
+        <novo-overlay-template [parent]="element">
             <ng-content></ng-content>
         </novo-overlay-template>
     `,
@@ -46,11 +33,12 @@ const SEARCH_VALUE_ACCESSOR = {
         '[class.active]': 'panelOpen || alwaysOpen'
     }
 })
-export class NovoSearchBoxElement extends HasOverlay implements OnDestroy, ControlValueAccessor {
+export class NovoSearchBoxElement implements ControlValueAccessor {
     // The search string
     @HostBinding('class.focused') focused:boolean = false;
     //@HostBinding('class.active') active:boolean = false;
     @Input() name: string;
+    @Input() icon: string = 'search';
     @Input() placeholder: string = 'Search...';
     @Input() alwaysOpen:boolean = false;
     @Input() theme: string = 'positive';
@@ -62,20 +50,14 @@ export class NovoSearchBoxElement extends HasOverlay implements OnDestroy, Contr
     _onTouched = () => { };
 
     /** Element for the panel containing the autocomplete options. */
-    @ViewChild('overlay') autocomplete: any;
+    @ViewChild(NovoOverlayTemplate) overlay: any;
     @ViewChild('input') input: any;
 
     constructor(
-        protected _element: ElementRef,
-        protected _overlay: Overlay,
-        protected _viewContainerRef: ViewContainerRef,
-        protected _zone: NgZone,
-        protected _changeDetectorRef: ChangeDetectorRef,
-        @Inject(DEFAULT_OVERLAY_SCROLL_STRATEGY) protected _scrollStrategy,
-        @Optional() @Inject(DOCUMENT) protected _document: any
-    ) {
-        super(_element, _overlay, _viewContainerRef, _zone, _changeDetectorRef, _scrollStrategy, _document);
-    }
+        public element: ElementRef,
+        public labels: NovoLabelService,
+        private _changeDetectorRef: ChangeDetectorRef
+    ) {}
     /**
      * @name showFasterFind
      * @description This function shows the picker and adds the active class (for animation)
@@ -83,35 +65,33 @@ export class NovoSearchBoxElement extends HasOverlay implements OnDestroy, Contr
     showSearch(event?: any, forceClose: boolean = false) {
         if (!this.panelOpen) {
             // Reset search
-            // Mark as active
-            this.openPanel();
             // Set focus on search
             setTimeout(() => {
                 let element = this.input.nativeElement;
                 if (element) {
                     element.focus();
                 }
-            }, 100);
+            }, 10);
         }
     }
     onFocus() {
         this.focused = true;
-        //this.openPanel();
+        this.openPanel();
     }
-    ngOnDestroy() {
-        this._destroyPanel();
-    }
-    // /** Opens the overlay panel. */
+
+    /** BEGIN: Convienient Panel Methods. */
     openPanel(): void {
-        super.openPanel(this.autocomplete.template);
+        this.overlay.openPanel();
     }
     closePanel(): void {
         this.focused = false;
-        super.closePanel();
+        this.overlay.closePanel();
     }
-    onClosingAction(event): void {
-        this.setValueAndClose(event);
+    get panelOpen(): boolean {
+        return this.overlay && this.overlay.panelOpen;
     }
+    /** END: Convienient Panel Methods. */
+
     _handleKeydown(event: KeyboardEvent): void {
         if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB ) && this.panelOpen) {
             this.closePanel();

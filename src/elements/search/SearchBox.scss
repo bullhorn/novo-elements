@@ -48,7 +48,7 @@ novo-search {
     }
     &.focused {
         > button {
-            color: $dark !important;
+            color: $positive !important;
             border: 1px solid $positive;
             border-right: none;
             background: $white !important;
@@ -57,7 +57,13 @@ novo-search {
                 box-shadow: none !important;
             }
         }
-    
+        @each $key, $color in $all-colors {
+            &[theme="#{$key}"] {
+                > button {
+                    color: $color !important;
+                }
+            }
+        }
     }
         
 }

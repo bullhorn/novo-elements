@@ -8,8 +8,10 @@ import { NovoModalRef } from './src/elements/modal/Modal';
 import { NovoToastService } from './src/elements/toast/ToastService';
 import { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
 import { FormUtils } from './src/utils/form-utils/FormUtils';
-import { DateFormatService } from './src/services/date-format/DateFormat';
 import { FieldInteractionApi } from './src/elements/form/FieldInteractionApi';
+import { DateFormatService } from './src/services/date-format/DateFormat';
+import { GlobalRef, BrowserGlobalRef } from './src/services/global/global.service';
+import { LocalStorageService } from './src/services/storage/storage.service';
 
 const NOVO_ELEMENTS_PROVIDERS = [
     { provide: NovoDragulaService, useClass: NovoDragulaService },
@@ -17,6 +19,8 @@ const NOVO_ELEMENTS_PROVIDERS = [
     { provide: NovoModalService, useClass: NovoModalService },
     { provide: NovoToastService, useClass: NovoToastService },
     { provide: ComponentUtils, useClass: ComponentUtils },
+    { provide: GlobalRef, useClass: BrowserGlobalRef },
+    { provide: LocalStorageService, useClass: LocalStorageService },
     FieldInteractionApi,
     DateFormatService
 ];

@@ -18,4 +18,8 @@
     </novo-list>
 </novo-search>
 
+<br/>
 
+<novo-search icon="location" theme="grapefruit" alwaysOpen="true" [(ngModel)]="geo">
+    <google-places-list [term]="geo" (select)="onSelect($event)"></google-places-list>
+</novo-search>

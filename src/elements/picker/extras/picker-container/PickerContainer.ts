@@ -67,7 +67,7 @@ export class NovoPickerContainer implements DoCheck {
     public onKeyDown(event: KeyboardEvent): void {
         // Close with ESC/Enter
         if (this.isVisible && (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER)) {
-            this.parent.toggleActive(null, false);
+            //this.parent.toggleActive(null, false);
         }
     }
 }

@@ -54,6 +54,8 @@ $entity-colors: ( company: $company, candidate: $candidate, navigation: $navigat
 $colors: ( positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, background: $off-white, black: $black, white: $white, grey: $grey, off-white: $off-white, dark: $dark, light: $light, pulse: $pulse, neutral: $neutral);
 // Loading Dot Color Map
 $dot-colors: ( ocean: $ocean, lavender: $lavender, grapefruit: $grapefruit, sunflower: $sunflower, mint: $mint);
+// All Colors
+$all-colors: ( company: $company, candidate: $candidate, navigation: $navigation, lead: $lead, contact: $contact, opportunity: $opportunity, job: $job, submission: $submission, sendout: $sendout, placement: $placement, note: $note, task: $neutral, distributionList: $neutral, credential: $neutral, user: $neutral, corporateuser: $neutral, aqua: $aqua, ocean: $ocean, mint: $mint, grass: $grass, sunflower: $sunflower, bittersweet: $bittersweet, grapefruit: $grapefruit, carnation: $carnation, lavender: $lavender, positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, background: $off-white, black: $black, white: $white, grey: $grey, off-white: $off-white, dark: $dark, light: $light, pulse: $pulse, neutral: $neutral);
 // Typography
 // -------------------------
 $base-font-size: 13px;
