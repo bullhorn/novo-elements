@@ -437,7 +437,7 @@ export class FieldInteractionApi {
     public setLoading(key: string, loading: boolean) {
         let control = this.getControl(key);
         if (control) {
-            if (loading && control.value) {
+            if (loading) {
                 this.form.controls[key].fieldInteractionloading = true;
                 control.setErrors({ 'loading': true });
                 // History
@@ -460,9 +460,14 @@ export class FieldInteractionApi {
     }
 
     public addControl(key: string, metaForNewField: any, position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD, initialValue?: any): void {
-        if (!metaForNewField.key) {
+        if (!metaForNewField.key && !metaForNewField.name) {
             console.error('[FieldInteractionAPI] - missing "key" in meta for new field'); // tslint:disable-line
             return null;
+        }
+
+        if (!metaForNewField.key) {
+            // If key is not explicitly declared, use name as key
+            metaForNewField.key = metaForNewField.name;
         }
 
         if (this.form.controls[metaForNewField.key]) {

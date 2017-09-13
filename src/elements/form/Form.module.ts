@@ -26,8 +26,6 @@ import { NovoDragulaModule } from './../dragula/Dragula.module';
 import { NovoTipWellModule } from './../tip-well/TipWell.module';
 import { NovoModalModule } from './../modal/Modal.module';
 import { ControlConfirmModal } from './ControlConfirmModal';
-import { NovoLoadingModule } from '../loading/Loading.module';
-
 
 @NgModule({
     imports: [
@@ -50,8 +48,7 @@ import { NovoLoadingModule } from '../loading/Loading.module';
         TextMaskModule,
         NovoTipWellModule,
         NovoModalModule,
-        NovoButtonModule,
-        NovoLoadingModule
+        NovoButtonModule
     ],
     declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement, ControlConfirmModal],
     exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement],
