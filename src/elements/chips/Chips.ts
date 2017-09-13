@@ -18,7 +18,7 @@ const CHIPS_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'chip',
+    selector: 'chip,novo-chip',
     template: `
         <span (click)="onSelect($event)" (mouseover)="onSelect($event)" [ngClass]="_type">
             <i *ngIf="_type" class="bhi-circle"></i>
@@ -59,7 +59,7 @@ export class NovoChipElement {
 }
 
 @Component({
-    selector: 'chips',
+    selector: 'chips,novo-chips',
     providers: [CHIPS_VALUE_ACCESSOR],
     template: `
         <chip
@@ -82,7 +82,8 @@ export class NovoChipElement {
                 (focus)="onFocus($event)"
                 (typing)="onTyping($event)"
                 (blur)="onTouched($event)"
-                [selected]="items">
+                [selected]="items"
+                [overrideElement]="element">
             </novo-picker>
         </div>
         <div class="preview-container">
@@ -95,7 +96,7 @@ export class NovoChipElement {
         '[class.with-value]': 'items.length > 0'
     }
 })
-export class NovoChipsElement extends OutsideClick implements OnInit {
+export class NovoChipsElement implements OnInit {
     @Input() closeOnSelect: boolean = false;
     @Input() placeholder: string = '';
     @Input() source: any;
@@ -123,17 +124,14 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
     onModelTouched: Function = () => {
     };
 
-    constructor(element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {
-        super(element);
-        this.element = element;
-
-        // Listen for an outside click to hide the preview
-        this.onActiveChange.subscribe((active) => {
-            if (!active) {
-                this.blur.emit();
-                this.deselectAll();
-            }
-        });
+    constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {
+        // // Listen for an outside click to hide the preview
+        // this.onActiveChange.subscribe((active) => {
+        //     if (!active) {
+        //         this.blur.emit();
+        //         this.deselectAll();
+        //     }
+        // });
     }
 
     ngOnInit() {
@@ -228,7 +226,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
         this.selected = item;
         this.showPreview();
         // Start listening for an outside click to hide the preview
-        this.toggleActive(null, true);
+        //this.toggleActive(null, true);
     }
 
     onTyping(event?) {
