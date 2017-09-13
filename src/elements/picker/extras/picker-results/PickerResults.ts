@@ -5,7 +5,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 @Component({
-    selector: 'picker-results',
+    selector: q',
     host: {
         'class': 'active'
     },
