@@ -1,3 +1,13 @@
+<a name="2.1.6"></a>
+## [2.1.6](https://github.com/bullhorn/novo-elements/compare/v2.1.5...v2.1.6) (2017-09-13)
+
+
+### Features
+
+* **Select:** Select now Appends to Body ([ee20da8](https://github.com/bullhorn/novo-elements/commit/ee20da8))
+
+
+
 <a name="2.1.5"></a>
 ## [2.1.5](https://github.com/bullhorn/novo-elements/compare/v2.1.4...v2.1.5) (2017-09-13)
 
