@@ -102,6 +102,9 @@ export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
             this.filteredOptions = this.options.filter((item) => {
                 return !item.readOnly;
             });
+            this.filteredOptions.forEach(element => {
+                element.active = false;
+            });
         }
 
         if (!this.model && !this.createdItem) {
@@ -133,14 +136,18 @@ export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
         this.closePanel();
     }
 
-    select(option, i) {
-        this.selected.active = false;
+    select(option, i, fireEvents: boolean = true) {
+        if (this.selected) {
+            this.selected.active = false;
+        }
         this.selectedIndex = i;
         this.selected = option;
         this.selected.active = true;
         this.empty = false;
-        this.onModelChange(this.selected.value);
-        this.onSelect.emit({ selected: this.selected.value });
+        if (fireEvents) {
+            this.onModelChange(this.selected.value);
+            this.onSelect.emit({ selected: this.selected.value });
+        }
     }
 
     clear() {
@@ -278,10 +285,8 @@ export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
                 }
             }
             if (item) {
+                this.select(item, this.options.indexOf(item), false);
                 this.empty = false;
-                this.selected = item;
-                this.selected.active = true;
-                this.selectedIndex = this.filteredOptions.indexOf(item);
             } else {
                 this.clear();
             }

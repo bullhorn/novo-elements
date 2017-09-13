@@ -417,7 +417,7 @@ export class FieldInteractionsDemoComponent {
             label: 'A',
             value: 1,
             interactions: [
-                { event: 'change', invokeOnInit: true, script: calculationFunction }
+                { event: 'change', invokeOnInit: false, script: calculationFunction }
             ]
         });
         this.controls.calculation.bControl = new TextBoxControl({
@@ -426,7 +426,7 @@ export class FieldInteractionsDemoComponent {
             label: 'B',
             value: 1,
             interactions: [
-                { event: 'change', invokeOnInit: true, script: calculationFunction }
+                { event: 'change', invokeOnInit: false, script: calculationFunction }
             ]
         });
         this.controls.calculation.sumControl = new TextBoxControl({
@@ -438,7 +438,8 @@ export class FieldInteractionsDemoComponent {
         });
         this.controls.calculation.dateModifiedControl = new DateTimeControl({
             key: 'date',
-            label: 'Date Last Modified'
+            label: 'Date Last Modified',
+            value: new Date()
         });
         this.forms.calculation = formUtils.toFormGroup([
             this.controls.calculation.aControl,
@@ -451,6 +452,12 @@ export class FieldInteractionsDemoComponent {
         this.controls.hideShow.textControl = new TextBoxControl({
             type: 'text',
             key: 'text',
+            required: true,
+            label: 'MyField'
+        });
+        this.controls.hideShow.text2Control = new TextBoxControl({
+            type: 'text',
+            key: 'text2',
             label: 'MyField'
         });
         this.controls.hideShow.toggleControl = new CheckboxControl({
@@ -463,6 +470,7 @@ export class FieldInteractionsDemoComponent {
         });
         this.forms.hideShow = formUtils.toFormGroup([
             this.controls.hideShow.textControl,
+            this.controls.hideShow.text2Control,
             this.controls.hideShow.toggleControl
         ]);
 
