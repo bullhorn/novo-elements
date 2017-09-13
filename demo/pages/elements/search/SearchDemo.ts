@@ -43,6 +43,6 @@ export class SearchDemoComponent {
 
     public onSelect(item) {
         //this.test = item;
-        //console.log(item);
+        console.log(item);
     }
 }

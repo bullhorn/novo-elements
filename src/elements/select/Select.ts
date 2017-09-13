@@ -282,9 +282,6 @@ export class NovoSelectElement implements OnInit, OnChanges {
             if (item) {
                 this.select(item, this.filteredOptions.indexOf(item))
                 this.empty = false;
-                // this.selected = item;
-                // this.selected.active = true;
-                // this.selectedIndex = this.filteredOptions.indexOf(item);
             } else {
                 this.clear();
             }

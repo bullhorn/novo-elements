@@ -33,12 +33,12 @@ export interface Settings {
     selector: 'google-places-list',
     template: `
         <novo-list direction="vertical">
-            <novo-list-item *ngFor="let data of queryItems;let $index = index" (click)="selectedListNode($index)">
+            <novo-list-item *ngFor="let data of queryItems;let $index = index" (click)="selectedListNode($event, $index)">
                 <item-header>
                     <item-avatar icon="location"></item-avatar>
                     <item-title>{{data.structured_formatting?.main_text ? data.structured_formatting.main_text : data.description}}</item-title>
                 </item-header>
-                <item-content>{{data.structured_formatting.secondary_text}}</item-content>
+                <item-content>{{data.structured_formatting?.secondary_text}}</item-content>
             </novo-list-item>
         </novo-list>
 
@@ -143,7 +143,13 @@ export class PlacesListComponent implements OnInit, OnChanges {
     }
 
     //function to execute when user select the autocomplete list.(binded with view)
-    selectedListNode(index: number): any {
+    selectedListNode(event: MouseEvent, index: number): any {
+        console.log('SELECT', event);
+        if (event){
+            event.stopImmediatePropagation();
+            event.stopPropagation();
+            event.preventDefault();
+        }
         this.dropdownOpen = false;
         if (this.recentDropdownOpen) {
             this.setRecentLocation(this.queryItems[index]);
@@ -228,9 +234,9 @@ export class PlacesListComponent implements OnInit, OnChanges {
     private processSearchQuery(): any {
         if (this.queryItems.length) {
             if (this.selectedDataIndex > -1) {
-                this.selectedListNode(this.selectedDataIndex);
+                this.selectedListNode(null, this.selectedDataIndex);
             } else {
-                this.selectedListNode(0);
+                this.selectedListNode(null, 0);
             }
         }
     }
