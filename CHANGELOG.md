@@ -1,3 +1,15 @@
+<a name="2.1.5"></a>
+## [2.1.5](https://github.com/bullhorn/novo-elements/compare/v2.1.4...v2.1.5) (2017-09-13)
+
+
+### Bug Fixes
+
+* **select:** Fixing select where it was marking the form as dirty ([fb1ec2a](https://github.com/bullhorn/novo-elements/commit/fb1ec2a))
+* **select:** Fixing select where it was marking the form as dirty ([189a4d1](https://github.com/bullhorn/novo-elements/commit/189a4d1))
+* **select:** Fixing select where it was marking the form as dirty ([8178707](https://github.com/bullhorn/novo-elements/commit/8178707))
+
+
+
 <a name="2.1.4"></a>
 ## [2.1.4](https://github.com/bullhorn/novo-elements/compare/v2.1.3...v2.1.4) (2017-09-11)
 
