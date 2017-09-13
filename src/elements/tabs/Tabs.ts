@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'novo-nav',
@@ -10,6 +10,7 @@ export class NovoNavElement {
     @Input() direction: string = '';
     @Input() outlet: any;
     @Input() router: string;
+    @HostBinding('class.condensed') @Input() condensed: boolean = false;
 
     items: Array<any> = [];
 
