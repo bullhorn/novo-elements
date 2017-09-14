@@ -9,7 +9,7 @@
 
 <novo-search [ngModel]="test" (ngModelChange)="search($event)">
     <novo-list direction="vertical">
-        <novo-list-item *ngFor="let item of searchResults | async">
+        <novo-list-item *ngFor="let item of searchResults | async" (click)="onSelectMatch(item)">
             <item-header>
                 <item-avatar [icon]="item.type"></item-avatar>
                 <item-title>{{item.name}}</item-title>
@@ -20,6 +20,12 @@
 
 <br/>
 
-<novo-search icon="location" theme="grapefruit" alwaysOpen="true" [(ngModel)]="geo">
-    <google-places-list [term]="geo" (select)="onSelect($event)"></google-places-list>
+<novo-search icon="location" theme="grapefruit" alwaysOpen="true" [(ngModel)]="geo" [closeOnSelect]="false">
+    <google-places-list [term]="geo" (select)="onSelectAddress($event)"></google-places-list>
+</novo-search>
+
+<br/>
+
+<novo-search icon="candidate" theme="candidate" alwaysOpen="true" [(ngModel)]="entity">
+    <entity-picker-results [matches]="searchData" (select)="onSelectEntity($event)"></entity-picker-results>
 </novo-search>

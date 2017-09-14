@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, Input } from '@angular/core';
+import { Component, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 // Vendor
 // APP
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
@@ -167,7 +167,7 @@ export class EntityPickerResult {
             <entity-picker-result *ngFor="let match of matches"
                     [match]="match"
                     [term]="term"
-                    (click)="selectMatch($event)"
+                    (click)="selectMatch($event, match)"
                     [ngClass]="{active: isActive(match)}"
                     (mouseenter)="selectActive(match)"
                     [class.disabled]="preselected(match)">
@@ -179,11 +179,16 @@ export class EntityPickerResult {
     `
 })
 export class EntityPickerResults extends BasePickerResults {
+    @Output() select: EventEmitter<any> = new EventEmitter()
     constructor(element: ElementRef, public labels: NovoLabelService) {
         super(element);
     }
 
     getListElement() {
         return this.element.nativeElement.querySelector('novo-list');
+    }
+    selectMatch(event?: any, item?: any) {
+        this.select.next(item);
+        return super.selectMatch(event, item);
     }
 }

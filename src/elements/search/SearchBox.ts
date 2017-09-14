@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostBinding, HostListener, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostBinding, HostListener, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/platform-browser';
@@ -19,29 +19,26 @@ const SEARCH_VALUE_ACCESSOR = {
 @Component({
     selector: 'novo-search',
     providers: [SEARCH_VALUE_ACCESSOR],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <!-- SEARCH ICON -->
         <button theme="fab" [color]="theme" [icon]="icon" (click)="showSearch()"></button>
         <!-- SEARCH INPUT -->
-        <input type="text" [attr.name]="name" [attr.value]="value" [attr.placeholder]="placeholder" (focus)="onFocus()" (blur)="closePanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input/>
+        <input type="text" [attr.name]="name" [attr.value]="value" [attr.placeholder]="placeholder" (focus)="onFocus()" (blur)="onBlur()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input/>
         <!-- SEARCH OVERLAY -->
-        <novo-overlay-template [parent]="element">
+        <novo-overlay-template [parent]="element" [closeOnSelect]="closeOnSelect" (select)="closePanel()" (closing)="onBlur()">
             <ng-content></ng-content>
         </novo-overlay-template>
-    `,
-    host: {
-        '[class.active]': 'panelOpen || alwaysOpen'
-    }
+    `
 })
 export class NovoSearchBoxElement implements ControlValueAccessor {
-    // The search string
+    @Input() public name: string;
+    @Input() public icon: string = 'search';
+    @Input() public placeholder: string = 'Search...';
+    @Input() public alwaysOpen:boolean = false;
+    @Input() public theme: string = 'positive';
+    @Input() public closeOnSelect: boolean = true;
     @HostBinding('class.focused') focused:boolean = false;
-    //@HostBinding('class.active') active:boolean = false;
-    @Input() name: string;
-    @Input() icon: string = 'search';
-    @Input() placeholder: string = 'Search...';
-    @Input() alwaysOpen:boolean = false;
-    @Input() theme: string = 'positive';
     public value: any;
 
     /** View -> model callback called when value changes */
@@ -56,7 +53,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     constructor(
         public element: ElementRef,
         public labels: NovoLabelService,
-        private _changeDetectorRef: ChangeDetectorRef
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _zone: NgZone
     ) {}
     /**
      * @name showFasterFind
@@ -75,20 +73,27 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
         }
     }
     onFocus() {
-        this.focused = true;
-        this.openPanel();
+        this._zone.run(() => {
+            this.focused = true;
+            this.openPanel();
+        });
     }
-
+    onBlur() {
+        this.focused = false;
+    }
     /** BEGIN: Convienient Panel Methods. */
     openPanel(): void {
         this.overlay.openPanel();
     }
     closePanel(): void {
-        this.focused = false;
         this.overlay.closePanel();
     }
     get panelOpen(): boolean {
         return this.overlay && this.overlay.panelOpen;
+    }
+    @HostBinding('class.active')
+    get active(): boolean {
+        return this.panelOpen || this.alwaysOpen;
     }
     /** END: Convienient Panel Methods. */
 
@@ -105,7 +110,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
         }
     }
     writeValue(value: any): void {
-        Promise.resolve(null).then(() => this._setValue(value));
+        this._setValue(value);
     }
     registerOnChange(fn: (value: any) => {}): void {
         this._onChange = fn;
@@ -119,6 +124,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
         // The display value can also be the number zero and shouldn't fall back to an empty string.
         const inputValue = toDisplay ? toDisplay : '';
         this.value = inputValue;
+        this.input.nativeElement.value = inputValue;
         this._changeDetectorRef.markForCheck();
     }
 

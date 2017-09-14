@@ -1,5 +1,5 @@
 // NG2
-import { ElementRef, HostListener } from '@angular/core';
+import { ElementRef, HostListener, Input } from '@angular/core';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 // Vendor
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Rx';
 export class BasePickerResults {
     _term: string = '';
     selected: Array<any> = [];
-    matches: any = [];
+    @Input() matches: any = [];
     hasError: boolean = false;
     isLoading: boolean = false;
     isStatic: boolean = true;
@@ -271,7 +271,7 @@ export class BasePickerResults {
         }
 
         let selected = this.activeMatch;
-        if (selected) {
+        if (selected && this.parent) {
             this.parent.value = selected;
 
             if (this.parent.closeOnSelect) {

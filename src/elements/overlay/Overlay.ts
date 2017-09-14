@@ -64,6 +64,9 @@ export class NovoOverlayTemplate implements OnDestroy {
     /** Element for the panel containing the autocomplete options. */
     @ViewChild('panel') panel: ElementRef;
     @Input() public parent: ElementRef;
+    @Input() public closeOnSelect: boolean = true;
+    @Output() public select: EventEmitter<any> = new EventEmitter();
+    @Output() public closing: EventEmitter<any> = new EventEmitter();
 
     public _overlayRef: OverlayRef | null;
     public _portal: any; // TODO - type me!
@@ -119,20 +122,21 @@ export class NovoOverlayTemplate implements OnDestroy {
 
     /** Closes the autocomplete suggestion panel. */
     closePanel(): void {
-        if (this._overlayRef && this._overlayRef.hasAttached()) {
-            this._overlayRef.detach();
-            this._closingActionsSubscription.unsubscribe();
-        }
-
-        if (this._panelOpen) {
-            this._panelOpen = false;
-
-            // We need to trigger change detection manually, because
-            // `fromEvent` doesn't seem to do it at the proper time.
-            // This ensures that the placeholder is reset when the
-            // user clicks outside.
-            this._changeDetectorRef.detectChanges();
-        }
+        this._zone.run(() => {
+            if (this._overlayRef && this._overlayRef.hasAttached()) {
+                this._overlayRef.detach();
+                this._closingActionsSubscription.unsubscribe();
+            }
+            this.closing.emit(event);
+            if (this._panelOpen) {
+                this._panelOpen = false;
+                // We need to trigger change detection manually, because
+                // `fromEvent` doesn't seem to do it at the proper time.
+                // This ensures that the placeholder is reset when the
+                // user clicks outside.
+                this._changeDetectorRef.detectChanges();
+            }
+        });
     }
 
     onClosingAction(event: any): void {
@@ -166,10 +170,9 @@ export class NovoOverlayTemplate implements OnDestroy {
                 clickTarget !== this._getConnectedElement().nativeElement &&
                 (!this._getConnectedElement().nativeElement.contains(clickTarget)) &&
                 (!!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget));
-                console.log('Native', clickTarget !== this._getConnectedElement().nativeElement);
-                console.log('Inside Natvie', !this._getConnectedElement().nativeElement.contains(clickTarget));
-                console.log('Inside Overlay', !!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget));
-                console.log('CLICKED', clicked, clickTarget);
+            if (this._panelOpen && !!this._overlayRef && this._overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
+                this.select.emit(event);
+            }
             return clicked;
         }).result();
     }
@@ -206,6 +209,7 @@ export class NovoOverlayTemplate implements OnDestroy {
     protected _createOverlay(template: TemplateRef<any>): void {
         this._portal = new TemplatePortal(template, this._viewContainerRef);
         this._overlayRef = this._overlay.create(this._getOverlayConfig());
+        this._overlayRef.getState().width = this._getHostWidth();
     }
 
     protected _getOverlayConfig(): OverlayState {

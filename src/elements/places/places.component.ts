@@ -144,12 +144,6 @@ export class PlacesListComponent implements OnInit, OnChanges {
 
     //function to execute when user select the autocomplete list.(binded with view)
     selectedListNode(event: MouseEvent, index: number): any {
-        console.log('SELECT', event);
-        if (event){
-            event.stopImmediatePropagation();
-            event.stopPropagation();
-            event.preventDefault();
-        }
         this.dropdownOpen = false;
         if (this.recentDropdownOpen) {
             this.setRecentLocation(this.queryItems[index]);
