@@ -1,3 +1,13 @@
+<a name="2.1.7"></a>
+## [2.1.7](https://github.com/bullhorn/novo-elements/compare/v2.1.6...v2.1.7) (2017-09-14)
+
+
+### Features
+
+* **fieldinteractions:** Adding more API docs ([cb4706e](https://github.com/bullhorn/novo-elements/commit/cb4706e))
+
+
+
 <a name="2.1.6"></a>
 ## [2.1.6](https://github.com/bullhorn/novo-elements/compare/v2.1.5...v2.1.6) (2017-09-13)
 
