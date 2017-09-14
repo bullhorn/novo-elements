@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 export enum AppBridgeHandler {
     HTTP,
     OPEN,
+    OPEN_LIST,
     CLOSE,
     REFRESH,
     PIN,
@@ -23,6 +24,15 @@ export interface IAppBridgeOpenEvent {
     passthrough?: string;
 }
 
+export type MosaicLists = 'Candidate' |'ClientContact' | 'ClientCorporation' |
+    'JobOrder' | 'JobSubmission' | 'JobPosting' | 'Placement' | 'Lead' |
+    'Opportunity';
+export interface IAppBridgeOpenListEvent {
+    type: MosaicLists;
+    keywords?: Array<string>;
+    criteria?: any;
+}
+
 export type NovoDataType = 'entitlements' | 'settings' | 'user';
 export interface IAppBridgeRequestDataEvent {
     type: NovoDataType;
@@ -38,6 +48,7 @@ const HTTP_VERBS = {
 const MESSAGE_TYPES = {
     REGISTER: 'register',
     OPEN: 'open',
+    OPEN_LIST: 'openList',
     CLOSE: 'close',
     REFRESH: 'refresh',
     PIN: 'pin',
@@ -110,6 +121,12 @@ export class AppBridge {
         postRobot.on(MESSAGE_TYPES.OPEN, (event) => {
             this._trace(MESSAGE_TYPES.OPEN, event);
             return this.open(event.data).then(success => {
+                return { success };
+            });
+        });
+        postRobot.on(MESSAGE_TYPES.OPEN_LIST, (event) => {
+            this._trace(MESSAGE_TYPES.OPEN_LIST, event);
+            return this.openList(event.data).then(success => {
                 return { success };
             });
         });
@@ -218,6 +235,38 @@ export class AppBridge {
             }
         });
     }
+
+    /**
+     * Fires or responds to an openList event
+     * @param packet any - packet of data to send with the open event
+     */
+    public openList(packet: IAppBridgeOpenListEvent): Promise<boolean> {
+        let openListPacket = {};
+        Object.assign(openListPacket, { type: 'List', entityType: packet.type, keywords: packet.keywords, criteria: packet.criteria });
+        return new Promise<boolean>((resolve, reject) => {
+            if (this._handlers[AppBridgeHandler.OPEN_LIST]) {
+                this._handlers[AppBridgeHandler.OPEN_LIST](packet, (success: boolean) => {
+                    if (success) {
+                        resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                });
+            } else {
+                postRobot.sendToParent(MESSAGE_TYPES.OPEN_LIST, packet).then((event) => {
+                    this._trace(`${MESSAGE_TYPES.OPEN_LIST} (callback)`, event);
+                    if (event.data) {
+                        resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                }).catch((err) => {
+                    reject(false);
+                });
+            }
+        });
+    }
+
 
     /**
      * Fires or responds to an close event

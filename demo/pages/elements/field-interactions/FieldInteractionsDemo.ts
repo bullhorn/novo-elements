@@ -49,7 +49,7 @@ const template = `
                 <p><label>init</label> -- gets fired only when the form is initialized</p>
                 <p><label>change</label> -- gets fired when the value of the form control changes</p>
                 <p><label>focus</label> -- gets fired when the field gets focused</p>
-                <p><label>blue</label> -- gets fired when the field loses focus</p>
+                <p><label>blur</label> -- gets fired when the field loses focus</p>
                 <p>The script function represents the function that will be fired for the event, you can see examples of these below.</p>
                 <p>Lastly, "invokeOnInit" will also trigger the Field Interaction when the form is created as well.</p>
             </novo-nav-content>
@@ -143,9 +143,8 @@ const template = `
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Adding / Removing Fields</h5>
-                <p>With the API you can quickly add/remove fields into the form.</p>
+                <p>With the API you can quickly add and remove fields on the form.</p>
                 <p><b>ONLY WORKS WITH DYNAMIC FORMS</b></p>
-                <p><b>ALSO ONLY USE WITH <code>init</code> SCRIPTS!</b></p>
                 <div class="example field-interaction-demo">${AddingRemovingTpl}</div>
                 <multi-code-snippet [code]="snippets.addingRemoving"></multi-code-snippet>
             </novo-nav-content>
@@ -352,31 +351,47 @@ export class FieldInteractionsDemoComponent {
             console.log('[FieldInteractionDemo] - addingRemovingFunction'); // tslint:disable-line
             // Control above field
             API.addControl('cat', {
-                name: 'fieldAbove',
+                key: 'fieldAbove',
                 type: 'text',
                 label: 'Added Above Cat'
             }, FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD, 'DEFAULT');
             // Control below field
             API.addControl('name', {
-                name: 'fieldBelow',
+                key: 'fieldBelow',
                 type: 'text',
                 label: 'Added Below Name'
             }, FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD, ':)');
             // Control at the top of the form
             API.addControl('name', {
-                name: 'top',
+                key: 'top',
                 type: 'text',
                 label: 'Added To The Very Top'
             }, FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM, 'HIGHEST');
             // Control at the bottom of the form
             API.addControl('name', {
-                name: 'bottom',
+                key: 'bottom',
                 type: 'text',
                 label: 'Added To The Very Bottom'
             }, FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM, 'LOWEST');
             // Remove the jersey color field
             API.removeControl('jersey-color');
         };
+
+        let removeAddOnChangeFunction = (API: FieldInteractionApi) => {
+            console.log('[FieldInteractionDemo] - removeAddOnChangeFunction'); // tslint:disable-line
+            // Select control with a field interaction on change event
+            let currentValue = API.getActiveValue();
+            if (currentValue === 'Yes') {
+                API.removeControl('to-be-removed');
+            } else {
+                API.addControl('remove-select', {
+                    key: 'to-be-removed',
+                    name: 'to-be-removed',
+                    type: 'text',
+                    label: 'This field will be removed'
+                }, FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD);
+            }
+        }
 
         // Validation Field Interactions
         this.controls.validation.validationControl = new TextBoxControl({
@@ -627,6 +642,9 @@ export class FieldInteractionsDemoComponent {
 
         // Adding / Removing Interactions
         this.controls.addingRemoving = formUtils.toFieldSets(MockMetaHeaders, '$ USD', {}, { token: 'TOKEN', military: true });
+        this.controls.addingRemoving[2].controls[0].interactions = [
+            { event: 'change', script: removeAddOnChangeFunction }
+        ]
         this.controls.addingRemoving[0].controls[0].interactions = [
             { event: 'init', script: addingRemovingFunction }
         ];
@@ -677,7 +695,8 @@ export class FieldInteractionsDemoComponent {
         };
         this.snippets.addingRemoving = {
             'Template': AddingRemovingTpl,
-            'Field Interaction Script': addingRemovingFunction.toString()
+            'Field Interaction Script (init)': addingRemovingFunction.toString(),
+            'Field Interaction Script (change)': removeAddOnChangeFunction.toString()
         };
     }
 }
