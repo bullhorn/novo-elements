@@ -24,7 +24,7 @@ export interface IAppBridgeOpenEvent {
     passthrough?: string;
 }
 
-export type MosaicLists = 'Candidate' |'ClientContact' | 'ClientCorporation' |
+export type MosaicLists = 'Candidate' | 'ClientContact' | 'ClientCorporation' |
     'JobOrder' | 'JobSubmission' | 'JobPosting' | 'Placement' | 'Lead' |
     'Opportunity';
 export interface IAppBridgeOpenListEvent {
@@ -543,6 +543,22 @@ export class AppBridge {
                 reject(null);
             });
         });
+    }
+
+    /**
+     * Fires a custom event to all registered frames
+     * @param event string - event name to fire
+     * @param data any - data to be sent along with the event
+     */
+    public fireEventToChildren(event: string, data: any): void {
+        if (this._registeredFrames.length > 0) {
+            this._registeredFrames.forEach(frame => {
+                postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, {
+                    eventType: event,
+                    data: data
+                });
+            });
+        }
     }
 
     /**
