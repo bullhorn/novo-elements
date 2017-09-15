@@ -20,10 +20,10 @@
 
 <br/>
 
-<novo-search icon="location" theme="grapefruit" alwaysOpen="true" [(ngModel)]="geo" [closeOnSelect]="false">
-    <google-places-list [term]="geo" (select)="onSelectAddress($event)"></google-places-list>
+<novo-search icon="location" theme="grapefruit" alwaysOpen="true" [(ngModel)]="geo" displayField="formatted_address" [closeOnSelect]="false">
+    <google-places-list [(term)]="geo"></google-places-list>
 </novo-search>
-
+<div>Value is: {{geo}}</div>
 <br/>
 
 <novo-search icon="candidate" theme="candidate" alwaysOpen="true" [(ngModel)]="entity">

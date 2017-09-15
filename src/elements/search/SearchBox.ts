@@ -24,7 +24,7 @@ const SEARCH_VALUE_ACCESSOR = {
         <!-- SEARCH ICON -->
         <button theme="fab" [color]="theme" [icon]="icon" (click)="showSearch()"></button>
         <!-- SEARCH INPUT -->
-        <input type="text" [attr.name]="name" [attr.value]="value" [attr.placeholder]="placeholder" (focus)="onFocus()" (blur)="onBlur()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input/>
+        <input type="text" [attr.name]="name" [attr.value]="displayValue" [attr.placeholder]="placeholder" (focus)="onFocus()" (blur)="onBlur()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input/>
         <!-- SEARCH OVERLAY -->
         <novo-overlay-template [parent]="element" [closeOnSelect]="closeOnSelect" (select)="closePanel()" (closing)="onBlur()">
             <ng-content></ng-content>
@@ -38,6 +38,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     @Input() public alwaysOpen:boolean = false;
     @Input() public theme: string = 'positive';
     @Input() public closeOnSelect: boolean = true;
+    @Input() public displayField: string;
+    @Input() public displayValue: string;
     @HostBinding('class.focused') focused:boolean = false;
     public value: any;
 
@@ -119,12 +121,15 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
         this._onTouched = fn;
     }
     private _setValue(value: any): void {
-        const toDisplay = value;
+        this.value = value;
+        let toDisplay = value;
+        if ( value && this.displayField ) {
+            toDisplay = value.hasOwnProperty(this.displayField) ? value[this.displayField] : value;
+        }
         // Simply falling back to an empty string if the display value is falsy does not work properly.
         // The display value can also be the number zero and shouldn't fall back to an empty string.
-        const inputValue = toDisplay ? toDisplay : '';
-        this.value = inputValue;
-        this.input.nativeElement.value = inputValue;
+        this.displayValue = toDisplay ? toDisplay : '';
+        this.input.nativeElement.value = this.displayValue;
         this._changeDetectorRef.markForCheck();
     }
 

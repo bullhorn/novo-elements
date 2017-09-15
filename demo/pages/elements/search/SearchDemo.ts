@@ -45,13 +45,6 @@ export class SearchDemoComponent {
     public search(term: string): void {
         this.searchResults.next(this.searchData.map(x => x.data));
     }
-
-    public onSelectAddress(item) {
-        if (item) {
-            this.geo = item.formatted_address
-        }
-    }
-
     public onSelectMatch(item) {
         this.test = item.name;
     }

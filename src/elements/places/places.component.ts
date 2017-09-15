@@ -1,5 +1,6 @@
 // NG2
-import { Component, PLATFORM_ID, Inject, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
+import { Component, PLATFORM_ID, Inject, Input, Output, Optional, EventEmitter, OnInit, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
+import { NovoSearchBoxElement } from '../search/SearchBox';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { GlobalRef } from '../../services/global/global.service';
 import { GooglePlacesService } from './places.service';
@@ -41,12 +42,12 @@ export interface Settings {
                 <item-content>{{data.structured_formatting?.secondary_text}}</item-content>
             </novo-list-item>
         </novo-list>
-
     `
 })
 export class PlacesListComponent implements OnInit, OnChanges {
-    @Input() term: string = '';
     @Input() userSettings: Settings;
+    @Input() term: string = '';
+    @Output() termChange: EventEmitter<any> = new EventEmitter<any>();
     @Output() select: EventEmitter<any> = new EventEmitter<any>();
 
     public locationInput: string = '';
@@ -88,7 +89,8 @@ export class PlacesListComponent implements OnInit, OnChanges {
 
     constructor( @Inject(PLATFORM_ID) private platformId: Object,
         private _elmRef: ElementRef, private _global: GlobalRef,
-        private _googlePlacesService: GooglePlacesService) {
+        private _googlePlacesService: GooglePlacesService
+    ) {
 
     }
 
@@ -166,7 +168,7 @@ export class PlacesListComponent implements OnInit, OnChanges {
         if (_userOption) {
             this.select.emit(this.userSelectedOption);
         } else {
-            this.select.emit(false);
+            //this.select.emit(false);
         }
     }
 
@@ -379,6 +381,7 @@ export class PlacesListComponent implements OnInit, OnChanges {
         //below code will execute only when user press enter or select any option selection and it emit a callback to the parent component.
         if (!this.settings.resOnSearchButtonClickOnly) {
             this.select.emit(data);
+            this.termChange.emit(data);
         }
     }
 
