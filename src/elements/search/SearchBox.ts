@@ -22,7 +22,7 @@ const SEARCH_VALUE_ACCESSOR = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <!-- SEARCH ICON -->
-        <button theme="fab" [color]="theme" [icon]="icon" (click)="showSearch()"></button>
+        <button theme="fab" [color]="theme" [icon]="icon" (click)="showSearch()" [tooltip]="hint" tooltipPosition="bottom"></button>
         <!-- SEARCH INPUT -->
         <input type="text" [attr.name]="name" [attr.value]="displayValue" [attr.placeholder]="placeholder" (focus)="onFocus()" (blur)="onBlur()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input/>
         <!-- SEARCH OVERLAY -->
@@ -40,6 +40,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     @Input() public closeOnSelect: boolean = true;
     @Input() public displayField: string;
     @Input() public displayValue: string;
+    @Input() public hint: string;
     @HostBinding('class.focused') focused:boolean = false;
     public value: any;
 

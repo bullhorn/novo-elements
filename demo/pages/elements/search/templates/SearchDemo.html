@@ -20,7 +20,7 @@
 
 <br/>
 
-<novo-search icon="location" theme="grapefruit" alwaysOpen="true" [(ngModel)]="geo" displayField="formatted_address" [closeOnSelect]="false">
+<novo-search icon="location" theme="grapefruit" alwaysOpen="true" [(ngModel)]="geo" displayField="formatted_address" [closeOnSelect]="false" hint="Search Google to find your address.">
     <google-places-list [(term)]="geo"></google-places-list>
 </novo-search>
 <div>Value is: {{geo}}</div>
