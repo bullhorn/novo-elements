@@ -1,3 +1,13 @@
+<a name="2.1.8"></a>
+## [2.1.8](https://github.com/bullhorn/novo-elements/compare/v2.1.7...v2.1.8) (2017-09-15)
+
+
+### Features
+
+* **appbridge:** cascade event down ([876f332](https://github.com/bullhorn/novo-elements/commit/876f332))
+
+
+
 <a name="2.1.7"></a>
 ## [2.1.7](https://github.com/bullhorn/novo-elements/compare/v2.1.6...v2.1.7) (2017-09-14)
 
