@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 // App
 import { Pagination } from './Pagination';
 import { NovoLabelService } from '../../../../services/novo-label-service';
-import { NovoSelectElement } from '../../../select/Select';
+import { NovoSelectModule } from '../../../select/Select.module';
+
 
 
 describe('Elements: NovoTableKeepFilterFocus', () => {
@@ -14,11 +15,10 @@ describe('Elements: NovoTableKeepFilterFocus', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                Pagination,
-                NovoSelectElement
+                Pagination
             ],
             imports: [
-                FormsModule
+                FormsModule, NovoSelectModule
             ],
             providers: [
                 { provide: NovoLabelService, useClass: NovoLabelService }

@@ -112,7 +112,7 @@ export class NovoDateTimePickerInputElement extends HasOverlay implements OnDest
     }
 
     _handleKeydown(event: KeyboardEvent): void {
-        if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB ) && this.panelOpen) {
+        if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
             this.closePanel();
             event.stopPropagation();
         }
@@ -151,6 +151,7 @@ export class NovoDateTimePickerInputElement extends HasOverlay implements OnDest
         //this._element.nativeElement.value = inputValue;
         this.value = inputValue;
         this.formattedValue = this.formatDateValue(inputValue);
+        this._changeDetectorRef.markForCheck();
     }
 
     public setValue(event: any | null): void {

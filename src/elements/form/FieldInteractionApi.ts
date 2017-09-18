@@ -156,6 +156,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.hide(clearValue);
+            this.disable(key, { emitEvent: false });
         }
     }
 
@@ -163,6 +164,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.show();
+            this.enable(key, { emitEvent: false });
         }
     }
 
@@ -438,6 +440,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             if (loading) {
+                this.form.controls[key].fieldInteractionloading = true;
                 control.setErrors({ 'loading': true });
                 // History
                 clearTimeout(this.asyncBlockTimeout);
@@ -447,6 +450,7 @@ export class FieldInteractionApi {
                     this.setProperty(key, '_displayedAsyncFailure', true);
                 }, 10000);
             } else {
+                this.form.controls[key].fieldInteractionloading = false;
                 clearTimeout(this.asyncBlockTimeout);
                 control.setErrors({ 'loading': null });
                 control.updateValueAndValidity({ emitEvent: false });
@@ -458,10 +462,26 @@ export class FieldInteractionApi {
     }
 
     public addControl(key: string, metaForNewField: any, position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD, initialValue?: any): void {
-        let control = this.getControl(key);
+        if (!metaForNewField.key && !metaForNewField.name) {
+            console.error('[FieldInteractionAPI] - missing "key" in meta for new field'); // tslint:disable-line
+            return null;
+        }
+
+        if (!metaForNewField.key) {
+            // If key is not explicitly declared, use name as key
+            metaForNewField.key = metaForNewField.name;
+        }
+
+        if (this.form.controls[metaForNewField.key]) {
+            // Field is already on the form
+            return null;
+        }
+
+        let control = this.form.controls[key];
+        let fieldsetIndex, controlIndex;
         if (control) {
-            let fieldsetIndex = -1;
-            let controlIndex = -1;
+            fieldsetIndex = -1;
+            controlIndex = -1;
 
             this.form.fieldsets.forEach((fieldset, fi) => {
                 fieldset.controls.forEach((fieldsetControl, ci) => {
@@ -507,6 +527,10 @@ export class FieldInteractionApi {
     }
 
     public removeControl(key: string): void {
+        if (!this.form.controls[key]) {
+            // Field is not on the form
+            return null;
+        }
         let control = this.getControl(key);
         if (control) {
             let fieldsetIndex = -1;

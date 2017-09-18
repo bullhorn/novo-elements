@@ -6,6 +6,15 @@ novo-nav {
     align-items: center;
     justify-content: flex-start;
     margin: 0;
+    &.condensed {
+        novo-tab,
+        novo-tab-link {
+            font-size: 12px;
+            .novo-tab-link {
+                padding: 8px 12px;
+            }
+        }
+    }
     novo-tab,
     novo-tab-link {
         font-size: 14px;
@@ -131,7 +140,10 @@ novo-nav {
         }
     }
     &[theme="white"] {
-        background: rgba(0, 0, 0, .03);
+        background-color: $white;
+        header & {
+            background: rgba(0, 0, 0, .03);
+        }
         &[direction="vertical"] {
             background: transparent;
         }

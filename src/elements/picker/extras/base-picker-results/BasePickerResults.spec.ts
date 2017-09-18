@@ -47,8 +47,14 @@ describe('Elements: BasePickerResults', () => {
 
     describe('Method: selectActiveMatch()', () => {
         it('should be defined.', () => {
+            spyOn(component, 'selectMatch');
             expect(component.selectActiveMatch).toBeDefined();
             component.selectActiveMatch();
+        });
+        it('should call selectMatch.', () => {
+            spyOn(component, 'selectMatch');
+            component.selectActiveMatch();
+            expect(component.selectMatch).toHaveBeenCalled();
         });
     });
 
@@ -56,6 +62,11 @@ describe('Elements: BasePickerResults', () => {
         it('should be defined.', () => {
             expect(component.prevActiveMatch).toBeDefined();
             component.prevActiveMatch();
+        });
+        it('should scroll to active.', () => {
+            spyOn(component, 'scrollToActive');
+            component.prevActiveMatch();
+            expect(component.scrollToActive).toHaveBeenCalled();
         });
     });
 

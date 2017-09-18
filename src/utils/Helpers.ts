@@ -41,6 +41,10 @@ export class Helpers {
         });
     }
 
+    static isObject(item) {
+        return (item && typeof item === 'object' && !Array.isArray(item) && item !== null);
+    }
+
     /**
      * Checks to see if the object is a string
      */
@@ -251,6 +255,70 @@ export class Helpers {
             return obj;
         }
         return item;
+    }
+
+    static deepAssign(...objs) {
+        if (objs.length < 2) {
+            throw new Error('Need two or more objects to merge');
+        }
+        const target = Object.assign({}, objs[0]);
+        for (let i = 1; i < objs.length; i++) {
+            const source = Object.assign({}, objs[i]);
+            Object.keys(source).forEach(prop => {
+                const value = source[prop];
+                if (Helpers.isObject(value)) {
+                    if (target.hasOwnProperty(prop) && Helpers.isObject(target[prop])) {
+                        target[prop] = Helpers.deepAssign(target[prop], value);
+                    } else {
+                        target[prop] = value;
+                    }
+                } else if (Array.isArray(value)) {
+                    if (target.hasOwnProperty(prop) && Array.isArray(target[prop])) {
+                        const targetArray = target[prop];
+                        value.forEach((sourceItem, itemIndex) => {
+                            if (itemIndex < targetArray.length) {
+                                const targetItem = targetArray[itemIndex];
+                                if (Object.is(targetItem, sourceItem)) {
+                                    return;
+                                }
+                                if (Helpers.isObject(targetItem) && Helpers.isObject(sourceItem)) {
+                                    targetArray[itemIndex] = Helpers.deepAssign(targetItem, sourceItem);
+                                } else if (Array.isArray(targetItem) && Array.isArray(sourceItem)) {
+                                    targetArray[itemIndex] = Helpers.deepAssign(targetItem, sourceItem);
+                                } else {
+                                    targetArray[itemIndex] = sourceItem;
+                                }
+                            } else {
+                                targetArray.push(sourceItem);
+                            }
+                        });
+                    } else {
+                        target[prop] = value;
+                    }
+                } else {
+                    target[prop] = value;
+                }
+            });
+        }
+
+        return target;
+    }
+
+    /**
+     * Workaround for Edge browser since Element:nextElementSibling is undefined inside of template directives
+     * @param element any document element
+     * @returns the next sibling node that is of type: Element
+     */
+    static getNextElementSibling(element: Element): Node {
+        if (element.nextElementSibling) {
+            return element.nextElementSibling;
+        } else {
+            let e = element.nextSibling;
+            while (e && 1 !== e.nodeType) {
+                e = e.nextSibling;
+            }
+            return e;
+        }
     }
 }
 export class Can {

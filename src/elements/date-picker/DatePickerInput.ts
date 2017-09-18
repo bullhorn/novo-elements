@@ -112,7 +112,7 @@ export class NovoDatePickerInputElement extends HasOverlay implements OnDestroy,
     }
 
     _handleKeydown(event: KeyboardEvent): void {
-        if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB ) && this.panelOpen) {
+        if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
             this.closePanel();
             event.stopPropagation();
         }
@@ -148,6 +148,7 @@ export class NovoDatePickerInputElement extends HasOverlay implements OnDestroy,
 
         this.value = inputValue;
         this.formattedValue = this.formatDateValue(inputValue);
+        this._changeDetectorRef.markForCheck();
     }
 
     /**
