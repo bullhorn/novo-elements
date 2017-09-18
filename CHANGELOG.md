@@ -1,3 +1,45 @@
+<a name="2.1.8"></a>
+## [2.1.8](https://github.com/bullhorn/novo-elements/compare/v2.1.7...v2.1.8) (2017-09-15)
+
+
+### Features
+
+* **appbridge:** cascade event down ([876f332](https://github.com/bullhorn/novo-elements/commit/876f332))
+
+
+
+<a name="2.1.7"></a>
+## [2.1.7](https://github.com/bullhorn/novo-elements/compare/v2.1.6...v2.1.7) (2017-09-14)
+
+
+### Features
+
+* **fieldinteractions:** Adding more API docs ([cb4706e](https://github.com/bullhorn/novo-elements/commit/cb4706e))
+
+
+
+<a name="2.1.6"></a>
+## [2.1.6](https://github.com/bullhorn/novo-elements/compare/v2.1.5...v2.1.6) (2017-09-13)
+
+
+### Features
+
+* **Select:** Select now Appends to Body ([ee20da8](https://github.com/bullhorn/novo-elements/commit/ee20da8))
+
+
+
+<a name="2.1.5"></a>
+## [2.1.5](https://github.com/bullhorn/novo-elements/compare/v2.1.4...v2.1.5) (2017-09-13)
+
+
+### Bug Fixes
+
+* **select:** Fixing select where it was marking the form as dirty ([fb1ec2a](https://github.com/bullhorn/novo-elements/commit/fb1ec2a))
+* **select:** Fixing select where it was marking the form as dirty ([189a4d1](https://github.com/bullhorn/novo-elements/commit/189a4d1))
+* **select:** Fixing select where it was marking the form as dirty ([8178707](https://github.com/bullhorn/novo-elements/commit/8178707))
+
+
+
 <a name="2.1.4"></a>
 ## [2.1.4](https://github.com/bullhorn/novo-elements/compare/v2.1.3...v2.1.4) (2017-09-11)
 

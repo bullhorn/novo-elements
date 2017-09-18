@@ -1,10 +1,22 @@
 // NG2
+<<<<<<< HEAD
 import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/platform-browser';
 // APP
 import { NovoOverlayTemplate } from '../overlay/Overlay';
+=======
+import { Component, Input, Output, EventEmitter, ViewChild, Inject, Optional, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, ViewContainerRef, ChangeDetectorRef, NgZone } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Overlay } from '@angular/cdk/overlay';
+import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
+import { DOCUMENT } from '@angular/platform-browser';
+// APP
+import { HasOverlay } from '../overlay/HasOverlay';
+import { DEFAULT_OVERLAY_SCROLL_STRATEGY } from '../overlay/Overlay';
+
+>>>>>>> 1c1f90941b8748d42e52057cb46c263afd18df82
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
@@ -21,7 +33,11 @@ const SELECT_VALUE_ACCESSOR = {
     providers: [SELECT_VALUE_ACCESSOR],
     template: `
         <div (click)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
+<<<<<<< HEAD
         <novo-overlay-template [parent]="element">
+=======
+        <novo-overlay-template #overlay>
+>>>>>>> 1c1f90941b8748d42e52057cb46c263afd18df82
             <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
                 <ng-content></ng-content>
                 <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">
@@ -45,7 +61,11 @@ const SELECT_VALUE_ACCESSOR = {
         '(keydown)': 'onKeyDown($event)'
     }
 })
+<<<<<<< HEAD
 export class NovoSelectElement implements OnInit, OnChanges {
+=======
+export class NovoSelectElement extends HasOverlay implements OnInit, OnChanges {
+>>>>>>> 1c1f90941b8748d42e52057cb46c263afd18df82
     @Input() name: string;
     @Input() options: Array<any>;
     @Input() placeholder: string = 'Select...';
@@ -70,12 +90,29 @@ export class NovoSelectElement implements OnInit, OnChanges {
     filteredOptions: any;
 
     /** Element for the panel containing the autocomplete options. */
+<<<<<<< HEAD
     @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
 
     constructor(
         public element: ElementRef,
         public labels: NovoLabelService
     ) {}
+=======
+    @ViewChild('overlay') list: any;
+
+    constructor(
+        private element: ElementRef,
+        public labels: NovoLabelService,
+        protected _viewContainerRef: ViewContainerRef,
+        protected _zone: NgZone,
+        protected _changeDetectorRef: ChangeDetectorRef,
+        protected _overlay: Overlay,
+        @Inject(DEFAULT_OVERLAY_SCROLL_STRATEGY) protected _scrollStrategy,
+        @Optional() @Inject(DOCUMENT) protected _document: any,
+    ) {
+        super(element, _overlay, _viewContainerRef, _zone, _changeDetectorRef, _scrollStrategy, _document);
+    }
+>>>>>>> 1c1f90941b8748d42e52057cb46c263afd18df82
 
     ngOnInit() {
         this.ngOnChanges();
@@ -107,6 +144,7 @@ export class NovoSelectElement implements OnInit, OnChanges {
         }
     }
 
+<<<<<<< HEAD
     /** BEGIN: Convienient Panel Methods. */
     openPanel(): void {
         this.overlay.openPanel();
@@ -130,9 +168,27 @@ export class NovoSelectElement implements OnInit, OnChanges {
             this.select(event.value, event.index);
         }
         this.closePanel();
+=======
+     // /** Opens the overlay panel. */
+    openPanel(): void {
+        super.openPanel(this.list.template);
+        this.scrollToSelected();
+>>>>>>> 1c1f90941b8748d42e52057cb46c263afd18df82
     }
 
-    select(option, i) {
+    /**
+    * This method closes the panel, and if a value is specified, also sets the associated
+    * control to that value. It will also mark the control as dirty if this interaction
+    * stemmed from the user.
+    */
+    public setValueAndClose(event: any | null): void {
+        if (event.value && event.index >= 0) {
+            this.select(event.value, event.index);
+        }
+        this.closePanel();
+    }
+
+    select(option, i, fireEvents: boolean = true) {
         if (this.selected) {
             this.selected.active = false;
         }
@@ -140,8 +196,10 @@ export class NovoSelectElement implements OnInit, OnChanges {
         this.selected = option;
         this.selected.active = true;
         this.empty = false;
-        this.onModelChange(this.selected.value);
-        this.onSelect.emit({ selected: this.selected.value });
+        if (fireEvents) {
+            this.onModelChange(this.selected.value);
+            this.onSelect.emit({ selected: this.selected.value });
+        }
     }
 
     clear() {
@@ -224,7 +282,11 @@ export class NovoSelectElement implements OnInit, OnChanges {
     }
 
     scrollToIndex(index: number) {
+<<<<<<< HEAD
         let element = this.overlay._overlayRef.overlayElement;
+=======
+        let element = this._overlayRef.overlayElement;
+>>>>>>> 1c1f90941b8748d42e52057cb46c263afd18df82
         let list = element.querySelector('.novo-select-list');
         let items = list.querySelectorAll('li');
         let item = items[this.headerConfig ? index + 1 : index];
@@ -280,7 +342,11 @@ export class NovoSelectElement implements OnInit, OnChanges {
                 }
             }
             if (item) {
+<<<<<<< HEAD
                 this.select(item, this.filteredOptions.indexOf(item))
+=======
+                this.select(item, this.options.indexOf(item), false);
+>>>>>>> 1c1f90941b8748d42e52057cb46c263afd18df82
                 this.empty = false;
             } else {
                 this.clear();

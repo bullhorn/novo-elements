@@ -31,4 +31,8 @@ export class AppBridgeDemoComponent implements OnInit {
             callback([1, 2, 3, 4, 5]);
         });
     }
+
+    public fireEvent() {
+        this.appBridge.fireEventToChildren('SUPER_CUSTOM_EVENT', 'I CAN ALSO PASS DATA');
+    }
 }

@@ -49,7 +49,7 @@ const template = `
                 <p><label>init</label> -- gets fired only when the form is initialized</p>
                 <p><label>change</label> -- gets fired when the value of the form control changes</p>
                 <p><label>focus</label> -- gets fired when the field gets focused</p>
-                <p><label>blue</label> -- gets fired when the field loses focus</p>
+                <p><label>blur</label> -- gets fired when the field loses focus</p>
                 <p>The script function represents the function that will be fired for the event, you can see examples of these below.</p>
                 <p>Lastly, "invokeOnInit" will also trigger the Field Interaction when the form is created as well.</p>
             </novo-nav-content>
@@ -143,9 +143,8 @@ const template = `
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Adding / Removing Fields</h5>
-                <p>With the API you can quickly add/remove fields into the form.</p>
+                <p>With the API you can quickly add and remove fields on the form.</p>
                 <p><b>ONLY WORKS WITH DYNAMIC FORMS</b></p>
-                <p><b>ALSO ONLY USE WITH <code>init</code> SCRIPTS!</b></p>
                 <div class="example field-interaction-demo">${AddingRemovingTpl}</div>
                 <multi-code-snippet [code]="snippets.addingRemoving"></multi-code-snippet>
             </novo-nav-content>
@@ -352,31 +351,47 @@ export class FieldInteractionsDemoComponent {
             console.log('[FieldInteractionDemo] - addingRemovingFunction'); // tslint:disable-line
             // Control above field
             API.addControl('cat', {
-                name: 'fieldAbove',
+                key: 'fieldAbove',
                 type: 'text',
                 label: 'Added Above Cat'
             }, FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD, 'DEFAULT');
             // Control below field
             API.addControl('name', {
-                name: 'fieldBelow',
+                key: 'fieldBelow',
                 type: 'text',
                 label: 'Added Below Name'
             }, FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD, ':)');
             // Control at the top of the form
             API.addControl('name', {
-                name: 'top',
+                key: 'top',
                 type: 'text',
                 label: 'Added To The Very Top'
             }, FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM, 'HIGHEST');
             // Control at the bottom of the form
             API.addControl('name', {
-                name: 'bottom',
+                key: 'bottom',
                 type: 'text',
                 label: 'Added To The Very Bottom'
             }, FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM, 'LOWEST');
             // Remove the jersey color field
             API.removeControl('jersey-color');
         };
+
+        let removeAddOnChangeFunction = (API: FieldInteractionApi) => {
+            console.log('[FieldInteractionDemo] - removeAddOnChangeFunction'); // tslint:disable-line
+            // Select control with a field interaction on change event
+            let currentValue = API.getActiveValue();
+            if (currentValue === 'Yes') {
+                API.removeControl('to-be-removed');
+            } else {
+                API.addControl('remove-select', {
+                    key: 'to-be-removed',
+                    name: 'to-be-removed',
+                    type: 'text',
+                    label: 'This field will be removed'
+                }, FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD);
+            }
+        }
 
         // Validation Field Interactions
         this.controls.validation.validationControl = new TextBoxControl({
@@ -417,7 +432,7 @@ export class FieldInteractionsDemoComponent {
             label: 'A',
             value: 1,
             interactions: [
-                { event: 'change', invokeOnInit: true, script: calculationFunction }
+                { event: 'change', invokeOnInit: false, script: calculationFunction }
             ]
         });
         this.controls.calculation.bControl = new TextBoxControl({
@@ -426,7 +441,7 @@ export class FieldInteractionsDemoComponent {
             label: 'B',
             value: 1,
             interactions: [
-                { event: 'change', invokeOnInit: true, script: calculationFunction }
+                { event: 'change', invokeOnInit: false, script: calculationFunction }
             ]
         });
         this.controls.calculation.sumControl = new TextBoxControl({
@@ -438,7 +453,8 @@ export class FieldInteractionsDemoComponent {
         });
         this.controls.calculation.dateModifiedControl = new DateTimeControl({
             key: 'date',
-            label: 'Date Last Modified'
+            label: 'Date Last Modified',
+            value: new Date()
         });
         this.forms.calculation = formUtils.toFormGroup([
             this.controls.calculation.aControl,
@@ -451,6 +467,12 @@ export class FieldInteractionsDemoComponent {
         this.controls.hideShow.textControl = new TextBoxControl({
             type: 'text',
             key: 'text',
+            required: true,
+            label: 'MyField'
+        });
+        this.controls.hideShow.text2Control = new TextBoxControl({
+            type: 'text',
+            key: 'text2',
             label: 'MyField'
         });
         this.controls.hideShow.toggleControl = new CheckboxControl({
@@ -463,6 +485,7 @@ export class FieldInteractionsDemoComponent {
         });
         this.forms.hideShow = formUtils.toFormGroup([
             this.controls.hideShow.textControl,
+            this.controls.hideShow.text2Control,
             this.controls.hideShow.toggleControl
         ]);
 
@@ -619,6 +642,9 @@ export class FieldInteractionsDemoComponent {
 
         // Adding / Removing Interactions
         this.controls.addingRemoving = formUtils.toFieldSets(MockMetaHeaders, '$ USD', {}, { token: 'TOKEN', military: true });
+        this.controls.addingRemoving[2].controls[0].interactions = [
+            { event: 'change', script: removeAddOnChangeFunction }
+        ]
         this.controls.addingRemoving[0].controls[0].interactions = [
             { event: 'init', script: addingRemovingFunction }
         ];
@@ -628,48 +654,253 @@ export class FieldInteractionsDemoComponent {
         // Snippets
         this.snippets.validation = {
             'Template': ValidationTpl,
-            'Field Interaction Script': validationFunction.toString()
+            'Field Interaction Script': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - validationFunction'); // tslint:disable-line
+    let activeValue = API.getActiveValue();
+    if (activeValue > 10) {
+        API.markAsInvalid(API.getActiveKey(), 'Too high! Make it a lot lower!!');
+    }
+};
+            `
         };
         this.snippets.required = {
             'Template': RequiredTpl,
-            'Field Interaction Script': requiredFunction.toString()
+            'Field Interaction Script': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - requiredFunction'); // tslint:disable-line
+    let activeValue = API.getActiveValue();
+    if (activeValue) {
+        API.setRequired('required', true);
+    } else {
+        API.setRequired('required', false);
+    }
+};
+            `
         };
         this.snippets.calculation = {
             'Template': CalculationTpl,
-            'Field Interaction Script': calculationFunction.toString()
+            'Field Interaction Script': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - calculationFunction'); // tslint:disable-line
+    let a = Number(API.getValue('a'));
+    let b = Number(API.getValue('b'));
+    API.setValue('sum', a + b);
+    API.setValue('date', new Date());
+};
+            `
         };
         this.snippets.hideShow = {
             'Template': HideShowTpl,
-            'Field Interaction Script': hideShowFunction.toString()
+            'Field Interaction Script': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - hideShowFunction'); // tslint:disable-line
+    let activeValue = API.getActiveValue();
+    if (!activeValue) {
+        API.show('text');
+    } else {
+        API.hide('text');
+    }
+};
+            `
         };
         this.snippets.enableDisable = {
             'Template': EnableDisableTpl,
-            'Field Interaction Script': enableDisableFunction.toString()
+            'Field Interaction Script': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - enableDisableFunction'); // tslint:disable-line
+    let currentValue = API.getActiveValue();
+    if (!currentValue) {
+        API.enable('text');
+    } else {
+        API.disable('text');
+    }
+};
+            `
         };
         this.snippets.messaging = {
             'Template': MessagingTpl,
-            'Field Interaction Script': messagingFunction.toString()
+            'Field Interaction Script': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - messagingFunction'); // tslint:disable-line
+    if (API.getActiveKey() === 'toast') {
+        API.displayToast({
+            title: 'New Value',
+            message: API.getActiveValue()
+        });
+    } else if (API.getActiveKey() === 'tip') {
+        API.displayTip(API.getActiveKey(), API.getActiveValue(), 'info', true);
+    }
+};
+            `
         };
         this.snippets.modifyOptions = {
             'Template': ModifyOptionsTpl,
-            'Field Interaction Script (add)': modifyOptionsAddFunction.toString(),
-            'Field Interaction Script (async)': modifyOptionsAsyncFunction.toString()
+            'Field Interaction Script (add)': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - modifyOptionsAddFunction'); // tslint:disable-line
+    let currentValue = API.getActiveValue();
+    if (!currentValue) {
+        API.removeStaticOption('select', 'NEW');
+        API.removeStaticOption('picker', 'NEW');
+    } else {
+        API.addStaticOption('select', 'NEW');
+        API.addStaticOption('picker', 'NEW');
+    }
+};
+            `,
+            'Field Interaction Script (async)': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - modifyOptionsAsyncFunction'); // tslint:disable-line
+    let currentValue = API.getActiveValue();
+    switch (currentValue) {
+        case 1:
+            // Static
+            API.setProperty('picker', 'label', 'Static Picker');
+            API.modifyPickerConfig('picker', {
+                options: ['A', 'B', 'C']
+            });
+            break;
+        case 2:
+            // Async with Options URL
+            API.setProperty('picker', 'label', 'Async Picker (with options url)');
+            API.modifyPickerConfig('picker', {
+                format: '$name $test',
+                optionsUrl: 'http://novo-elements-mock.getsandbox.com/users'
+            }, (result) => { result.test = 'Built with Options URL!'; return result; });
+            break;
+        case 3:
+            // Async with Options URL Builder
+            API.setProperty('picker', 'label', 'Async Picker (with options url builder)');
+            API.modifyPickerConfig('picker', {
+                format: '$name $test',
+                optionsUrlBuilder: (query) => {
+                    return 'http://novo-elements-mock.getsandbox.com/users';
+                }
+            }, (result) => { result.test = 'Built with Options URL Builder!'; return result; });
+            break;
+        case 4:
+            // Async with Options Promise
+            API.setProperty('picker', 'label', 'Async Picker (with options promise)');
+            API.modifyPickerConfig('picker', {
+                format: '$name $test',
+                optionsPromise: (query, http) => {
+                    return new Promise((resolve, reject) => {
+                        if (query && query.length) {
+                            http
+                                .get('http://novo-elements-mock.getsandbox.com/users')
+                                .map(res => res.json())
+                                .map(results => {
+                                    return results.map(result => {
+                                        result.test = 'Built with Options Promise';
+                                        return result;
+                                    });
+                                })
+                                .subscribe(resolve, reject);
+                        } else {
+                            resolve(['DEFAULT']);
+                        }
+                    });
+                }
+            });
+            break;
+        default:
+            break;
+    }
+};
+            `
         };
         this.snippets.globals = {
             'Template': GlobalsTpl,
-            'Field Interaction Script': globalsFunction.toString()
+            'Field Interaction Script': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - globalsFunction'); // tslint:disable-line
+    API.setProperty(API.getActiveKey(), 'label', API.getProperty(API.getActiveKey(), 'label') + API.globals.TEST);
+};
+            `
         };
         this.snippets.async = {
             'Template': AsyncTpl,
-            'Field Interaction Script': asyncFunction.toString()
+            'Field Interaction Script': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - asyncFunction'); // tslint:disable-line
+    if (API.getActiveKey() === 'async1') {
+        API.setLoading(API.getActiveKey(), true);
+        setTimeout(() => {
+            API.setLoading(API.getActiveKey(), false);
+        }, 3000);
+    } else {
+        API.setLoading(API.getActiveKey(), true);
+        setTimeout(() => {
+            API.setLoading(API.getActiveKey(), false);
+        }, 15000);
+    }
+};
+            `
         };
         this.snippets.confirm = {
             'Template': ConfirmTpl,
-            'Field Interaction Script': confirmFunction.toString()
+            'Field Interaction Script': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - confirmFunction'); // tslint:disable-line
+    if (API.getActiveKey() === 'confirm1') {
+        API.confirmChanges(API.getActiveKey());
+    } else {
+        API.confirmChanges(API.getActiveKey(), 'This is VERY serious!');
+    }
+};
+            `
         };
         this.snippets.addingRemoving = {
             'Template': AddingRemovingTpl,
-            'Field Interaction Script': addingRemovingFunction.toString()
+            'Field Interaction Script (init)': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - addingRemovingFunction'); // tslint:disable-line
+    // Control above field
+    API.addControl('cat', {
+        key: 'fieldAbove',
+        type: 'text',
+        label: 'Added Above Cat'
+    }, FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD, 'DEFAULT');
+    // Control below field
+    API.addControl('name', {
+        key: 'fieldBelow',
+        type: 'text',
+        label: 'Added Below Name'
+    }, FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD, ':)');
+    // Control at the top of the form
+    API.addControl('name', {
+        key: 'top',
+        type: 'text',
+        label: 'Added To The Very Top'
+    }, FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM, 'HIGHEST');
+    // Control at the bottom of the form
+    API.addControl('name', {
+        key: 'bottom',
+        type: 'text',
+        label: 'Added To The Very Bottom'
+    }, FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM, 'LOWEST');
+    // Remove the jersey color field
+    API.removeControl('jersey-color');
+};
+            `,
+            'Field Interaction Script (change)': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - removeAddOnChangeFunction'); // tslint:disable-line
+    // Select control with a field interaction on change event
+    let currentValue = API.getActiveValue();
+    if (currentValue === 'Yes') {
+        API.removeControl('to-be-removed');
+    } else {
+        API.addControl('remove-select', {
+            key: 'to-be-removed',
+            name: 'to-be-removed',
+            type: 'text',
+            label: 'This field will be removed'
+        }, FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD);
+    }
+}
+        `
         };
     }
 }
