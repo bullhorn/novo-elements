@@ -222,6 +222,8 @@ export class NovoPickerElement implements OnInit {
             this.popup.instance.selected = this.selected;
             this.popup.instance.autoSelectFirstOption = this.autoSelectFirstOption;
         }
+        // TODO: Not the greatest solution.
+        setTimeout(() => { this.container._overlayRef.updatePosition(); });
     }
 
     /**

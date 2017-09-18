@@ -115,7 +115,6 @@ export class NovoOverlayTemplate implements OnDestroy {
             this._overlayRef.attach(this._portal);
             this._closingActionsSubscription = this._subscribeToClosingActions();
         }
-
         //this.overlayTemplate._setVisibility();
         this._panelOpen = true;
     }
