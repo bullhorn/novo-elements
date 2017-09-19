@@ -27,5 +27,6 @@ export * from './form/FormDemo';
 export * from './category-dropdown/CategoryDropdownDemo';
 export * from './popover/PopoverDemo';
 export * from './date-picker/DatePickerDemo';
+export * from './search/SearchDemo';
 export * from './field-interactions/FieldInteractionsDemo';
 export * from './simple-table/SimpleTableDemo';
