@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, HostBinding, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, HostBinding, Input, ViewChild, Directive, ElementRef } from '@angular/core';
 import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 
-import { NovoSortFilter, NovoSelection } from "./sort";
+import { NovoSortFilter, NovoSelection } from './sort';
+import { SimpleTablePagination } from './pagination';
+import { SimpleTableColumn } from './interfaces';
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoTable = CdkTable;
@@ -17,16 +19,31 @@ export class NovoTable<T> extends _NovoTable<T> {
     @HostBinding('class') public tableClass = 'novo-table';
 }
 
+@Directive({
+    selector: 'novo-activity-table-header'
+})
+export class NovoActivityTableHeader { }
+
+@Directive({
+    selector: 'novo-activity-table-footer'
+})
+export class NovoActivityTableFooter { }
+
 @Component({
     selector: 'novo-activity-table',
     template: `
         <header>
-            Table Header
+            <simple-table-pagination
+                [length]="dataSource.total"
+                [page]="0"
+                [pageSize]="25"
+                [pageSizeOptions]="[5, 10, 25, 100]">
+            </simple-table-pagination>
         </header>
         <div class="novo-activity-table-loading-mask" *ngIf="dataSource.loading">
             <novo-loading></novo-loading>
         </div>
-        <novo-simple-table [dataSource]="dataSource" class="example-table" novoSortFilter novoSelection>
+        <novo-simple-table [dataSource]="dataSource" novoSortFilter novoSelection>
             <ng-content></ng-content>
             <ng-container novoColumnDef="selection">
                 <novo-checkbox-header-cell *novoHeaderCellDef></novo-checkbox-header-cell>
@@ -39,16 +56,14 @@ export class NovoTable<T> extends _NovoTable<T> {
             <novo-header-row *novoHeaderRowDef="displayedColumns"></novo-header-row>
             <novo-row *novoRowDef="let row; columns: displayedColumns;"></novo-row>
         </novo-simple-table>
-        <footer>
-            Table Footer
-        </footer>
     `
 })
-export class NovoActivityTable {
+export class NovoActivityTable<T> {
     @Input() dataSource;
-    @Input() columns;
-    @Input() displayedColumns;
+    @Input() columns: SimpleTableColumn<T>[];
+    @Input() displayedColumns: string[];
 
     @ViewChild(NovoSortFilter) sort: NovoSortFilter;
     @ViewChild(NovoSelection) selection: NovoSelection;
+    @ViewChild(SimpleTablePagination) pagination: SimpleTablePagination;
 }

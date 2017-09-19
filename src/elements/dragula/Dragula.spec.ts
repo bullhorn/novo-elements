@@ -11,7 +11,7 @@ import { NovoDragulaService } from './DragulaService';
         <div dragula=""></div>
     `
 })
-class TestComponent {}
+class TestComponent { }
 
 describe('Elements: NovoDragulaElement', () => {
     describe('Directive: ', () => {
@@ -37,7 +37,7 @@ describe('Elements: NovoDragulaElement', () => {
     });
     describe('Class: ', () => {
         let mockElement = document.createElement('div');
-        let component = new NovoDragulaElement({ nativeElement: mockElement }, new NovoDragulaService);
+        let component = new NovoDragulaElement({ nativeElement: mockElement }, new NovoDragulaService());
 
         describe('Method: ngOnInit()', () => {
             it('should initialize the dragula with the element reference passed into the constructor if the service doesn\'t return any containers.', () => {

@@ -81,12 +81,12 @@ export class NovoSelection {
 
     selectAll(value: boolean): void {
         console.log('[NovoSelection] selectAll', value);
-        this.novoSelectAllToggle.emit(value);
         if (value) {
-            this.selectedRows = this.allRows;
+            this.selectedRows = new Map<string, object>(this.allRows);
         } else {
             this.selectedRows.clear();
         }
+        this.novoSelectAllToggle.emit(value);
         console.log('SELECTED', Array.from(this.selectedRows.values()));
     }
 }

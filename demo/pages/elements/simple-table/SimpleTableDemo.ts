@@ -1,14 +1,20 @@
 // NG2
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { Http } from "@angular/http";
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Http } from '@angular/http';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/map';
 
-import { NovoSortFilter, NovoSelection, NovoActivityTable } from "../../../../index";
+import {
+    NovoSortFilter, NovoSelection, NovoActivityTable, SimpleTableColumn,
+    RemoteSimpleTableService, SimpleTableDataSource, StaticSimpleTableService
+} from '../../../../index';
+
+interface MockData {
+    id: number;
+    name: string;
+    status: string;
+}
 
 @Component({
     selector: 'simple-table-demo',
@@ -16,35 +22,52 @@ import { NovoSortFilter, NovoSelection, NovoActivityTable } from "../../../../in
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleTableDemoComponent implements OnInit {
-    exampleDatabase: ExampleHttpDao | null;
-    dataSource: ExampleDataSource | null;
+    exampleDatabase: StaticSimpleTableService<MockData>;
+    dataSource: SimpleTableDataSource<MockData>;
 
-    columns = [
-        { id: 'id', label: 'ID', renderer: (row: any) => `${row.id}`, config: { sortable: true, filterable: true } },
-        { id: 'name', label: 'Name', renderer: (row: any) => `${row.name}`, config: { sortable: true, filterable: true } },
-        { id: 'status', label: 'Status', renderer: (row: any) => `${row.status}`, config: { sortable: true, filterable: true } }
+    mockData: MockData[] = [];
+
+    // TODO - some generic renderers
+    columns: SimpleTableColumn<MockData>[] = [
+        { id: 'id', label: 'ID', renderer: (row: MockData) => `${row.id}`, config: { sortable: true, filterable: true } },
+        { id: 'name', label: 'Name', renderer: (row: MockData) => `${row.name}`, renderType: 'link', onClick: (row: any) => { console.log('CLICK', row) }, config: { sortable: true, filterable: true } },
+        { id: 'status', label: 'Status', renderer: (row: MockData) => `${row.status}`, renderType: 'link', onClick: (row: any) => { console.log('CLICK', row) }, config: { sortable: true, filterable: true } }
     ];
     displayedColumns = ['selection', ...this.columns.map(x => x.id)];
 
     // @ViewChild(MdPaginator) paginator: MdPaginator;
     @ViewChild(NovoActivityTable) table: NovoActivityTable;
 
-    constructor(private http: Http, private ref: ChangeDetectorRef) { }
+    constructor(private http: Http) {
+        for (let i = 0; i < 100; i++) {
+            this.mockData.push({
+                id: i,
+                name: `Name ${i}`,
+                status: `Status ${i}`
+            });
+        }
+    }
 
     ngOnInit() {
-        this.exampleDatabase = new ExampleHttpDao(this.http);
-        this.dataSource = new ExampleDataSource(this.exampleDatabase, this.table.sort, this.ref);
+        this.exampleDatabase = new StaticSimpleTableService<MockData>(this.mockData);
+        this.dataSource = new SimpleTableDataSource<MockData>(this.exampleDatabase, this.table.sort, this.table.pagination);
     }
 }
 
-export class ExampleHttpDao {
-    constructor(private http: Http) { }
+export class TestDao extends StaticSimpleTableService<MockData> {
 
-    getContacts(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number): Observable<any> {
+}
+
+export class ExampleHttpDao extends RemoteSimpleTableService<MockData> {
+    constructor(private http: Http) {
+        super();
+    }
+
+    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number): Observable<MockData[]> {
         console.log('S', sort, 'F', filter);
-        const token = '2c26efc4-f238-4a31-a254-892cc6a0ee76';
+        const token = 'c4d3d053-295b-4cba-b6d9-a9c7e99fb5ac';
         let query = '&query=NOT%20(status%3A%22Archive%22)%20AND%20isDeleted%3Afalse'
-        let url = `http://dschulte-backend.bh-bos2.bullhorn.com:8181/rest-services/1hs/search/ClientContact?BhRestToken=${token}&fields=id,name,status&start=0&count=500&showTotalMatched=true`;
+        let url = `http://rohit-backend.bh-bos2.bullhorn.com:8181/rest-services/1hs/search/ClientContact?BhRestToken=${token}&fields=id,name,status&start=0&count=500&showTotalMatched=true`;
         if (sort) {
             url += `&sort=${sort.value === 'desc' ? '-' : ''}${sort.id}`
         }
@@ -56,39 +79,4 @@ export class ExampleHttpDao {
             .map(response => response.json() as any)
             .map(result => result.data);
     }
-}
-
-export class ExampleDataSource extends DataSource<any> {
-    total = 0;
-    loading = false;
-
-    constructor(private exampleDatabase: ExampleHttpDao, private sort: NovoSortFilter, private ref: ChangeDetectorRef) {
-        super();
-    }
-
-    connect(): Observable<any[]> {
-        const displayDataChanges = [
-            this.sort.novoTableChange
-        ];
-        return Observable.merge(...displayDataChanges)
-            .startWith(null)
-            .switchMap(() => {
-                this.loading = true;
-                this.ref.markForCheck();
-                return this.exampleDatabase.getContacts(this.sort.currentSortColumn, this.sort.currentFilterColumn, 0);
-            })
-            .map(data => {
-                this.loading = false;
-                this.total = data.length;
-                this.ref.markForCheck();
-                return data;
-            })
-            .catch(() => {
-                this.loading = false;
-                this.ref.markForCheck();
-                return Observable.of(null);
-            });
-    }
-
-    disconnect() { }
 }

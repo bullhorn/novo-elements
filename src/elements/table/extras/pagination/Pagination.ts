@@ -1,6 +1,6 @@
 // NG2
 import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
 

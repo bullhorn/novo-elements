@@ -144,7 +144,7 @@ export class NovoDatePickerInputElement extends HasOverlay implements OnDestroy,
 
         // Simply falling back to an empty string if the display value is falsy does not work properly.
         // The display value can also be the number zero and shouldn't fall back to an empty string.
-        const inputValue = toDisplay != null ? toDisplay : '';
+        const inputValue = toDisplay !== null ? toDisplay : '';
 
         this.value = inputValue;
         this.formattedValue = this.formatDateValue(inputValue);

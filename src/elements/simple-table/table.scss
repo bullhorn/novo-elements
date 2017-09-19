@@ -3,6 +3,7 @@ $novo-row-height: 48px;
 $novo-row-horizontal-padding: 24px;
 .novo-table {
     display: block;
+    min-height: 300px;
     >.novo-row:nth-of-type(odd) {
         background-color: $table-bg-accent;
         td {
@@ -43,7 +44,7 @@ novo-activity-table {
     .novo-activity-table-loading-mask {
         position: absolute;
         display: flex;
-        padding-top: 15%;
+        padding-top: 10%;
         justify-content: center;
         top: 0;
         left: 0;

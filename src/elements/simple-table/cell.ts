@@ -2,7 +2,8 @@ import { Directive, ElementRef, Input, Renderer2, HostBinding, Component, Change
 import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef, DataSource } from '@angular/cdk/table';
 import { Subscription } from 'rxjs/Subscription';
 
-import { NovoSelection } from "./sort";
+import { NovoSelection } from './sort';
+import { SimpleTableColumn } from './interfaces';
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoCellDef = CdkCellDef;
@@ -65,6 +66,8 @@ export class NovoCheckboxHeaderCell extends _NovoHeaderCell {
     }
 }
 
+// TODO - row[column.name] if no renderer
+// TODO - only put a class on the clickable and style it to blue
 @Component({
     selector: 'novo-cell',
     template: `
@@ -72,12 +75,14 @@ export class NovoCheckboxHeaderCell extends _NovoHeaderCell {
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NovoCell extends _NovoCell {
+export class NovoCell<T> extends _NovoCell {
     @HostBinding('class') public cellClass = 'novo-cell';
     @HostBinding('attr.role') public role = 'gridcell';
 
+    // Click and class for onClick on column
+
     @Input() public row: any;
-    @Input() public column: any;
+    @Input() public column: SimpleTableColumn<T>;
 
     constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2) {
         super(columnDef, elementRef, renderer);
