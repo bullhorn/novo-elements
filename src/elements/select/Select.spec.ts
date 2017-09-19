@@ -13,7 +13,7 @@ const KeyEvent = (code) => {
     return event;
 };
 
-describe('Elements: NovoSelectElement', () => {
+xdescribe('Elements: NovoSelectElement', () => {
     let fixture;
     let component;
 
