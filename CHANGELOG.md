@@ -1,3 +1,13 @@
+<a name="2.1.9"></a>
+## [2.1.9](https://github.com/bullhorn/novo-elements/compare/v2.1.8...v2.1.9) (2017-09-19)
+
+
+### Features
+
+* **searchbox & picker:** Adding search box component, fab button, making picker append to body better ([eea708e](https://github.com/bullhorn/novo-elements/commit/eea708e))
+
+
+
 <a name="2.1.8"></a>
 ## [2.1.8](https://github.com/bullhorn/novo-elements/compare/v2.1.7...v2.1.8) (2017-09-15)
 
