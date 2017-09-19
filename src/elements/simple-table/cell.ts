@@ -1,9 +1,10 @@
-import { Directive, ElementRef, Input, Renderer2, HostBinding, Component, ChangeDetectionStrategy, ChangeDetectorRef, Optional, OnInit, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2, HostBinding, Component, ChangeDetectionStrategy, ChangeDetectorRef, Optional, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef, DataSource } from '@angular/cdk/table';
 import { Subscription } from 'rxjs/Subscription';
 
 import { NovoSelection } from './sort';
 import { SimpleTableColumn, SimpleTableButtonColumn } from './interfaces';
+import { Helpers } from '../../utils/Helpers';
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoCellDef = CdkCellDef;
@@ -79,12 +80,10 @@ export class NovoCheckboxHeaderCell extends _NovoHeaderCell {
     }
 }
 
-// TODO - row[column.name] if no renderer
-// TODO - only put a class on the clickable and style it to blue
 @Component({
     selector: 'novo-cell',
     template: `
-        {{ column.renderer(row) }}
+        <span [class.clickable]="!!column.onClick" (click)="onClick($event)">{{ column.renderer(row) }}</span>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -92,14 +91,20 @@ export class NovoCell<T> extends _NovoCell {
     @HostBinding('class') public cellClass = 'novo-cell';
     @HostBinding('attr.role') public role = 'gridcell';
 
-    // Click and class for onClick on column
-
     @Input() public row: any;
     @Input() public column: SimpleTableColumn<T>;
 
     constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2) {
         super(columnDef, elementRef, renderer);
         renderer.addClass(elementRef.nativeElement, `novo-column-${columnDef.cssClassFriendlyName}`);
+    }
+
+    public onClick(event: MouseEvent) {
+        Helpers.swallowEvent(event);
+        if (this.column.onClick) {
+            this.column.onClick(this.row);
+        }
+        return;
     }
 }
 

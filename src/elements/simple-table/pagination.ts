@@ -94,7 +94,7 @@ export class SimpleTablePagination implements OnInit {
     @Output() pageChange = new EventEmitter<PageEvent>();
 
     _displayedPageSizeOptions: number[];
-    _rangeLabel: string = 'RANGE TODO';
+    _rangeLabel: string;
 
     constructor(private _changeDetectorRef: ChangeDetectorRef) {
     }

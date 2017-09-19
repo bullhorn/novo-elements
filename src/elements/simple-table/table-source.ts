@@ -9,22 +9,26 @@ import 'rxjs/add/operator/catch';
 
 import { NovoSortFilter } from './sort';
 import { SimpleTablePagination } from './pagination';
+import { NovoActivityTable } from './table';
 import { Helpers } from '../../utils/Helpers';
 
 export interface SimpleTableService<T> {
-    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number): Observable<{ results: T[], total: number }>;
+    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string): Observable<{ results: T[], total: number }>;
 }
 
 export abstract class RemoteSimpleTableService<T> implements SimpleTableService<T> {
-    abstract getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number): Observable<{ results: T[], total: number }>;
+    abstract getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string): Observable<{ results: T[], total: number }>;
 }
 
 export class StaticSimpleTableService<T> implements SimpleTableService<T> {
     constructor(private data: T[] = []) { }
 
-    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number): Observable<{ results: T[], total: number }> {
-        console.log('S', sort, 'F', filter, 'P', page, pageSize);
+    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string): Observable<{ results: T[], total: number }> {
+        console.log('S', sort, 'F', filter, 'P', page, pageSize, 'GS', globalSearch);
         let ret: T[] = Helpers.deepClone(this.data);
+        if (globalSearch) {
+            console.log('GLOBAL SEARCH', globalSearch);
+        }
         if (filter) {
             ret = ret.filter(Helpers.filterByField(filter.id, filter.value));
         }
@@ -42,20 +46,21 @@ export class SimpleTableDataSource<T> extends DataSource<T> {
     total = 0;
     loading = false;
 
-    constructor(private tableService: SimpleTableService<T>, private sort: NovoSortFilter, private pagination: SimpleTablePagination) {
+    constructor(private tableService: SimpleTableService<T>, private table: NovoActivityTable<T>, private sort: NovoSortFilter, private pagination: SimpleTablePagination) {
         super();
     }
 
     connect(): Observable<any[]> {
         const displayDataChanges = [
             this.sort.novoTableChange,
-            this.pagination.pageChange
+            this.pagination.pageChange,
+            this.table.globalSearchChange
         ];
         return Observable.merge(...displayDataChanges)
             .startWith(null)
             .switchMap(() => {
                 this.loading = true;
-                return this.tableService.getTableResults(this.sort.currentSortColumn, this.sort.currentFilterColumn, this.pagination.page, this.pagination.pageSize);
+                return this.tableService.getTableResults(this.sort.currentSortColumn, this.sort.currentFilterColumn, this.pagination.page, this.pagination.pageSize, this.table.globalSearch);
             })
             .map((data: { results: T[], total: number }) => {
                 this.loading = false;

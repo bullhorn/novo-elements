@@ -32,12 +32,16 @@ $novo-row-horizontal-padding: 20px;
     button.active {
         color: $positive;
     }
+    &.clickable {
+        cursor: pointer;
+        color: $company;
+    }
 }
 
 .novo-header-cell {
-    border-right: 1px solid #F0F0F0;
-    novo-empty-header-cell~& {
-        border-right: none;
+    border-left: 1px solid #F0F0F0;
+    +novo-empty-header-cell {
+        border-left: none;
     }
     >label {
         display: inline-block;
@@ -64,6 +68,18 @@ novo-empty-header-cell {
 novo-activity-table {
     header {
         padding: 5px 0;
+        display: flex;
+        align-items: center;
+        >novo-search {
+            padding-right: 10px;
+            >input {
+                padding: 11.5px;
+                font-size: 1.1em;
+            }
+            &.active>button[theme="fab"] {
+                height: 41px;
+            }
+        }
     }
     button[theme][theme="icon"] {
         height: 30px;

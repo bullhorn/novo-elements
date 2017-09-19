@@ -40,7 +40,6 @@ export class SimpleTableDemoComponent implements OnInit {
     ]
     displayedColumns = ['selection', 'preview', ...this.columns.map(x => x.id), 'edit'];
 
-    // @ViewChild(MdPaginator) paginator: MdPaginator;
     @ViewChild(NovoActivityTable) table: NovoActivityTable<MockData>;
 
     constructor(private http: Http) {
@@ -55,7 +54,7 @@ export class SimpleTableDemoComponent implements OnInit {
 
     ngOnInit() {
         this.exampleDatabase = new StaticSimpleTableService<MockData>(this.mockData);
-        this.dataSource = new SimpleTableDataSource<MockData>(this.exampleDatabase, this.table.sort, this.table.pagination);
+        this.dataSource = new SimpleTableDataSource<MockData>(this.exampleDatabase, this.table, this.table.sort, this.table.pagination);
     }
 }
 

@@ -12,6 +12,7 @@ import { NovoDropdownModule } from '../dropdown/Dropdown.module';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
 import { NovoLoadingModule } from '../loading/Loading.module';
 import { NovoTilesModule } from '../tiles/Tiles.module';
+import { NovoSearchBoxModule } from '../search/SearchBox.module';
 import { SimpleTablePagination } from './pagination';
 
 export * from './cell';
@@ -23,7 +24,7 @@ export * from './interfaces';
 export * from './table-source';
 
 @NgModule({
-    imports: [CdkTableModule, CommonModule, FormsModule, NovoButtonModule, NovoDropdownModule, NovoFormExtrasModule, NovoLoadingModule, NovoTilesModule],
+    imports: [CdkTableModule, CommonModule, FormsModule, NovoButtonModule, NovoDropdownModule, NovoFormExtrasModule, NovoLoadingModule, NovoTilesModule, NovoSearchBoxModule],
     exports: [
         NovoTable, NovoCellDef, NovoHeaderCellDef, NovoColumnDef,
         NovoHeaderRowDef, NovoRowDef, NovoSortHeader, NovoSortFilter, NovoButtonCell, NovoEmptyHeaderCell,

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, HostBinding, Input, ViewChild, Directive, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, HostBinding, Input, ViewChild, Directive, ElementRef, EventEmitter, Output, OnInit } from '@angular/core';
 import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 
 import { NovoSortFilter, NovoSelection } from './sort';
@@ -33,6 +33,7 @@ export class NovoActivityTableFooter { }
     selector: 'novo-activity-table',
     template: `
         <header>
+            <novo-search alwaysOpen="true" [ngModel]="globalSearch" (ngModelChange)="performGlobalSearch($event)"></novo-search>
             <simple-table-pagination
                 [length]="dataSource.total"
                 [page]="0"
@@ -68,7 +69,17 @@ export class NovoActivityTable<T> {
     @Input() displayedColumns: string[];
     @Input() buttonColumns: SimpleTableButtonColumn<T>[];
 
+    @Output() globalSearchChange = new EventEmitter<string>();
+
     @ViewChild(NovoSortFilter) sort: NovoSortFilter;
     @ViewChild(NovoSelection) selection: NovoSelection;
     @ViewChild(SimpleTablePagination) pagination: SimpleTablePagination;
+
+    public globalSearch: string;
+
+    // TODO - gross
+    public performGlobalSearch(term: string): void {
+        this.globalSearch = term;
+        this.globalSearchChange.emit(term);
+    }
 }
