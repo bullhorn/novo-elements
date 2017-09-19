@@ -1,9 +1,10 @@
 // NG2
-import { ElementRef, HostListener } from '@angular/core';
+import { ElementRef, HostListener, Input } from '@angular/core';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 // Vendor
 import { Observable } from 'rxjs/Rx';
+import { OverlayRef } from '@angular/cdk/overlay';
 
 /**
  * @name: PickerResults
@@ -14,7 +15,7 @@ import { Observable } from 'rxjs/Rx';
 export class BasePickerResults {
     _term: string = '';
     selected: Array<any> = [];
-    matches: any = [];
+    @Input() matches: any = [];
     hasError: boolean = false;
     isLoading: boolean = false;
     isStatic: boolean = true;
@@ -25,6 +26,7 @@ export class BasePickerResults {
     page: number = 0;
     lastPage: boolean = false;
     autoSelectFirstOption: boolean = true;
+    overlay: OverlayRef;
 
     constructor(element: ElementRef) {
         this.element = element;
@@ -73,6 +75,7 @@ export class BasePickerResults {
                     this.nextActiveMatch();
                 }
                 this.isLoading = false;
+                setTimeout(() => this.overlay.updatePosition()); // @bkimball: This was added for Dylan Schulte, 9.18.2017 4:14PM EST, you're welcome!
             },
             (err) => {
                 this.hasError = this.term && this.term.length !== 0;
@@ -271,7 +274,7 @@ export class BasePickerResults {
         }
 
         let selected = this.activeMatch;
-        if (selected) {
+        if (selected && this.parent) {
             this.parent.value = selected;
 
             if (this.parent.closeOnSelect) {

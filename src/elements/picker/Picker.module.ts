@@ -2,7 +2,9 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
 // APP
+import { NovoOverlayModule } from '../overlay/Overlay.module';
 import { NovoListModule } from '../list/List.module';
 import { NovoLoadingModule } from '../loading/Loading.module';
 import { NovoPickerElement } from './Picker';
@@ -12,7 +14,7 @@ import { EntityPickerResult, EntityPickerResults } from './extras/entity-picker-
 import { ChecklistPickerResults } from './extras/checklist-picker-results/ChecklistPickerResults';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule],
+    imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule, OverlayModule, NovoOverlayModule],
     declarations: [NovoPickerElement, NovoPickerContainer, PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults],
     exports: [NovoPickerElement, NovoPickerContainer, PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults],
     entryComponents: [PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults]

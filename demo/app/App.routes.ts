@@ -34,6 +34,7 @@ import {
     CategoryDropdownDemoComponent,
     MultiPickerDemoComponent,
     PopOverDemoComponent,
+    SearchDemoComponent,
     FieldInteractionsDemoComponent
 } from './../pages/elements';
 
@@ -67,6 +68,7 @@ export const routes: any = [
     { path: 'list', component: ListDemoComponent, title: 'List', section: 'components' },
     { path: 'header', component: HeaderDemoComponent, title: 'Header', section: 'components' },
     { path: 'switch', component: SwitchDemoComponent, title: 'Switch', section: 'components' },
+    { path: 'search', component: SearchDemoComponent, title: 'Search', section: 'components' },
     { path: 'drawer', component: DrawerDemoComponent, title: 'Drawer', section: 'components' },
     { path: 'calendar', component: CalendarDemoComponent, title: 'Calendar', section: 'components' },
     { path: 'date-picker', component: DatePickerDemoComponent, title: 'Date Picker', section: 'components' },

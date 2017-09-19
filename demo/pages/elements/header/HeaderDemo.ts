@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 // APP
 let HeaderDemoTpl = require('./templates/HeaderDemo.html');
 let SubTitleDemoTpl = require('./templates/SubTitle.html');
+let HeaderWithSearchDemoTpl = require('./templates/HeaderWithSearchDemo.html');
 // Vendor
 import { NovoToastService } from './../../../../index';
 
@@ -23,6 +24,10 @@ const template = `
     <h5>SubTitle</h5>
     <div class="example header-demo">${SubTitleDemoTpl}</div>
     <code-snippet [code]="SubTitleDemoTpl"></code-snippet>
+
+    <h5>With Search</h5>
+    <div class="example header-demo">${HeaderWithSearchDemoTpl}</div>
+    <code-snippet [code]="HeaderWithSearchDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -33,8 +38,10 @@ const template = `
 export class HeaderDemoComponent {
     private HeaderDemoTpl: string = HeaderDemoTpl;
     private SubTitleDemoTpl: string = SubTitleDemoTpl;
+    private HeaderWithSearchDemoTpl: string = HeaderWithSearchDemoTpl;
     private entity: string;
     private options: any;
+    public isChecked: boolean;
 
     constructor(private toaster: NovoToastService) {
         this.toaster = toaster;

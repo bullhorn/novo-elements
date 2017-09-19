@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { TestBed, async } from '@angular/core/testing';
 // App
 import { NovoChipElement, NovoChipsElement } from './Chips';
-import { NovoPickerElement } from '../picker/Picker';
-import { NovoPickerContainer } from '../picker/extras/picker-container/PickerContainer';
+import { NovoChipsModule } from './Chips.module';
+//import { NovoPickerContainer } from '../picker/extras/picker-container/PickerContainer';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
 
@@ -14,14 +14,9 @@ describe('Elements: NovoChipElement', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                NovoChipElement,
-                NovoPickerElement,
-                NovoChipElement,
-                NovoPickerContainer
-            ],
             imports: [
-                FormsModule
+                FormsModule,
+                NovoChipsModule
             ],
         }).compileComponents();
         fixture = TestBed.createComponent(NovoChipElement);
@@ -60,15 +55,9 @@ describe('Elements: NovoChipsElement', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                NovoChipsElement,
-                NovoChipElement,
-                NovoPickerElement,
-                NovoChipElement,
-                NovoPickerContainer
-            ],
             imports: [
-                FormsModule
+                FormsModule,
+                NovoChipsModule
             ],
             providers: [
                 { provide: ComponentUtils, useClass: ComponentUtils },

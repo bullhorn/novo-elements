@@ -5,6 +5,7 @@ let PrimaryButtonDemoTpl = require('./templates/PrimaryButtonDemo.html');
 let DialogueButtonDemoTpl = require('./templates/DialogueButtonDemo.html');
 let HeaderButtonDemoTpl = require('./templates/HeaderButtonDemo.html');
 let IconButtonDemoTpl = require('./templates/IconButtonDemo.html');
+let FabButtonDemoTpl = require('./templates/FabButtonDemo.html');
 let StandardButtonDemoTpl = require('./templates/StandardButtonDemo.html');
 let SecondaryButtonDemoTpl = require('./templates/SecondaryButtonDemo.html');
 let DynamicButtonDemoTpl = require('./templates/DynamicButtonDemo.html');
@@ -97,6 +98,17 @@ const template = `
     <div class="example buttons-demo icons" [ngClass]="color" (click)="changeColor()" tooltip="Click Me!" tooltipPlacement="top">${IconButtonDemoTpl}</div>
     <code-snippet [code]="IconButtonDemoTpl"></code-snippet>
 
+    <h5>Fab</h5>
+    <p>
+        Fab buttons are used to as primary calls-to-action. They should <strong>always</strong>
+         get an <code>icon</code> attribute. Fab buttons with a "success" color
+         <code>color="success"</code> are used for saving and will almost always contain a "check" icon.
+         Negative color primary buttons <code>color="negative"</code> are used to delete,
+         clear, or otherwise remove an extant element. Fab buttons should never have a <code>side</code> attribute.
+    </p>
+    <div class="example buttons-demo">${FabButtonDemoTpl}</div>
+    <code-snippet [code]="FabButtonDemoTpl"></code-snippet>
+
     <h5>Dynamic</h5>
     <p>
         Button parameters can be dynamically set and change at runtime.  The styles should
@@ -135,6 +147,7 @@ export class ButtonDemoComponent {
     NeutralButtonDemoTpl:string = StandardButtonDemoTpl;
     HeaderButtonDemoTpl:string = HeaderButtonDemoTpl;
     IconButtonDemoTpl:string = IconButtonDemoTpl;
+    FabButtonDemoTpl:string = FabButtonDemoTpl;
     DynamicButtonDemoTpl:string = DynamicButtonDemoTpl;
     LoadingButtonDemoTpl:string = LoadingButtonDemoTpl;
 

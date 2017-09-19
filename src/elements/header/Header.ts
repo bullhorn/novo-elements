@@ -25,24 +25,18 @@ export class UtilActionElement {
 @Component({
     selector: 'header[theme]',
     host: {
-        '[class]': 'headerClass',
-        '[attr.theme]': 'theme',
-        '[class.hasSubTitle]': 'subTitle'
+        '[attr.theme]': 'theme'
     },
     template: `
-        <section class="primary" *ngIf="theme || config.theme">
-            <h1>
-                <i *ngIf="icon" [ngClass]="iconClass"></i>
-                <ng-container *ngIf="!subTitle && !config.subTitle">
-                    {{ title || config.title }}
-                </ng-container>
-                <ng-container *ngIf="subTitle || config.subTitle">
-                    <span>
-                        {{ title || config.title }}
-                        <small *ngIf="subTitle">{{ subTitle || config.subTitle }}</small>
-                    </span>
-                </ng-container>
-            </h1>
+        <section>
+            <ng-container>
+                <i *ngIf="icon" class="header-icon" [ngClass]="iconClass"></i>
+                <div class="header-titles">
+                    <h1>{{ title || config.title }}</h1>
+                    <small *ngIf="subTitle">{{ subTitle || config.subTitle }}</small>
+                </div>
+            </ng-container>
+            <ng-content select="section"></ng-content>
             <ng-content select="utils"></ng-content>
         </section>
         <ng-content></ng-content>
@@ -56,7 +50,6 @@ export class NovoHeaderElement implements OnInit {
     @Input() config: any;
 
     inverse: string = 'inverse';
-    headerClass: string = 'novo-header';
     iconClass: string;
 
     ngOnInit() {
