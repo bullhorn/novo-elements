@@ -1,6 +1,5 @@
 $table-bg-accent: #f4f4f4;
-$novo-row-height: 48px;
-$novo-row-horizontal-padding: 24px;
+$novo-row-horizontal-padding: 20px;
 .novo-table {
     display: block;
     min-height: 300px;
@@ -15,17 +14,18 @@ $novo-row-horizontal-padding: 24px;
 .novo-row,
 .novo-header-row {
     display: flex;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
     align-items: center;
-    min-height: $novo-row-height;
-    padding: 0 $novo-row-horizontal-padding;
+}
+
+.novo-header-row {
+    border-top: 1px solid #F0F0F0;
 }
 
 .novo-cell,
 .novo-header-cell {
     flex: 1;
     min-width: 200px;
+    padding: 10px;
     novo-dropdown {
         display: inline-block;
     }
@@ -34,13 +34,42 @@ $novo-row-horizontal-padding: 24px;
     }
 }
 
+.novo-header-cell {
+    border-right: 1px solid #F0F0F0;
+    novo-empty-header-cell~& {
+        border-right: none;
+    }
+    >label {
+        display: inline-block;
+        padding-right: 5px;
+        cursor: pointer;
+    }
+}
+
+novo-empty-header-cell {
+    min-width: 40px;
+}
+
+.novo-button-cell {
+    padding: 0 5px;
+}
+
 .novo-checkbox-header-cell,
 .novo-checkbox-cell {
-    max-width: 30px;
-    margin-top: -5px;
+    max-width: 40px;
+    margin-top: -4px;
+    padding: 0 10px;
 }
 
 novo-activity-table {
+    header {
+        padding: 5px 0;
+    }
+    button[theme][theme="icon"] {
+        height: 30px;
+        width: 30px;
+        padding: 5px;
+    }
     .novo-activity-table-loading-mask {
         position: absolute;
         display: flex;
@@ -52,5 +81,19 @@ novo-activity-table {
         bottom: 0;
         background: rgba(0, 0, 0, 0.07);
         z-index: 10;
+    }
+}
+
+simple-table-pagination {
+    display: flex;
+    align-items: center;
+    >.simple-table-pagination-size {
+        padding-right: 10px;
+    }
+    >.simple-table-rangle-label {
+        padding-right: 10px;
+    }
+    >button:first {
+        padding-right: 5px;
     }
 }

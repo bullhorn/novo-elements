@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CdkTableModule } from '@angular/cdk/table';
 import { NovoTable, NovoActivityTable, NovoActivityTableHeader, NovoActivityTableFooter } from './table';
-import { NovoCell, NovoCheckboxCell, NovoCheckboxHeaderCell, NovoHeaderCell, NovoCellDef, NovoHeaderCellDef, NovoColumnDef } from './cell';
+import { NovoCell, NovoCheckboxCell, NovoCheckboxHeaderCell, NovoHeaderCell, NovoCellDef, NovoHeaderCellDef, NovoColumnDef, NovoButtonCell, NovoEmptyHeaderCell } from './cell';
 import { NovoHeaderRow, NovoRow, NovoHeaderRowDef, NovoRowDef } from './row';
 import { NovoSortHeader, NovoFilterFocus } from './sort-header';
 import { NovoSortFilter, NovoSelection } from './sort';
@@ -26,13 +26,13 @@ export * from './table-source';
     imports: [CdkTableModule, CommonModule, FormsModule, NovoButtonModule, NovoDropdownModule, NovoFormExtrasModule, NovoLoadingModule, NovoTilesModule],
     exports: [
         NovoTable, NovoCellDef, NovoHeaderCellDef, NovoColumnDef,
-        NovoHeaderRowDef, NovoRowDef, NovoSortHeader, NovoSortFilter,
+        NovoHeaderRowDef, NovoRowDef, NovoSortHeader, NovoSortFilter, NovoButtonCell, NovoEmptyHeaderCell,
         NovoHeaderCell, NovoCell, NovoHeaderRow, NovoRow, NovoFilterFocus, SimpleTablePagination,
         NovoCheckboxCell, NovoCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableHeader, NovoActivityTableFooter
     ],
     declarations: [
         NovoTable, NovoCellDef, NovoHeaderCellDef, NovoColumnDef,
-        NovoHeaderRowDef, NovoRowDef, NovoSortHeader, NovoSortFilter,
+        NovoHeaderRowDef, NovoRowDef, NovoSortHeader, NovoSortFilter, NovoButtonCell, NovoEmptyHeaderCell,
         NovoHeaderCell, NovoCell, NovoHeaderRow, NovoRow, NovoFilterFocus, SimpleTablePagination,
         NovoCheckboxCell, NovoCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableHeader, NovoActivityTableFooter
     ],

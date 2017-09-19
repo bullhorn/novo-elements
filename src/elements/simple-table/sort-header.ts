@@ -21,7 +21,7 @@ export class NovoFilterFocus implements AfterViewInit {
     moduleId: module.id,
     selector: '[novo-header-config]',
     template: `
-        <label><ng-content></ng-content></label>
+        <label (click)="sort()"><ng-content></ng-content></label>
         <button *ngIf="config.sortable" theme="icon" [icon]="icon" (click)="sort()" [class.active]="sortActive"></button>
         <novo-dropdown *ngIf="config.filterable" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
             <button type="button" theme="icon" icon="filter" [class.active]="filterActive"></button>
@@ -29,7 +29,7 @@ export class NovoFilterFocus implements AfterViewInit {
                 <item class="filter-search" keepOpen="true">
                     <div class="header">
                         <span>Filter</span>
-                        <button theme="dialogue" color="negative" icon="times" (click)="clearFilter()">Clear</button>
+                        <button theme="dialogue" color="negative" icon="times" (click)="clearFilter()" *ngIf="filter?.length > 0">Clear</button>
                     </div>
                     <input type="text" [(ngModel)]="filter" (ngModelChange)="filterData()" novoFilterFocus/>
                 </item>

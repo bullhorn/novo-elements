@@ -10,3 +10,8 @@ export interface SimpleTableColumn<T> {
         filterable?: boolean;
     }
 }
+
+export interface SimpleTableButtonColumn<T> {
+    icon: string;
+    onClick?(row: T): void;
+}

@@ -7,7 +7,8 @@ import { Observable } from 'rxjs/Observable';
 
 import {
     NovoSortFilter, NovoSelection, NovoActivityTable, SimpleTableColumn,
-    RemoteSimpleTableService, SimpleTableDataSource, StaticSimpleTableService
+    RemoteSimpleTableService, SimpleTableDataSource, StaticSimpleTableService,
+    SimpleTableButtonColumn
 } from '../../../../index';
 
 interface MockData {
@@ -30,13 +31,17 @@ export class SimpleTableDemoComponent implements OnInit {
     // TODO - some generic renderers
     columns: SimpleTableColumn<MockData>[] = [
         { id: 'id', label: 'ID', renderer: (row: MockData) => `${row.id}`, config: { sortable: true, filterable: true } },
-        { id: 'name', label: 'Name', renderer: (row: MockData) => `${row.name}`, renderType: 'link', onClick: (row: any) => { console.log('CLICK', row) }, config: { sortable: true, filterable: true } },
-        { id: 'status', label: 'Status', renderer: (row: MockData) => `${row.status}`, renderType: 'link', onClick: (row: any) => { console.log('CLICK', row) }, config: { sortable: true, filterable: true } }
+        { id: 'name', label: 'Name', renderer: (row: MockData) => `${row.name}`, renderType: 'link', onClick: (row: MockData) => { console.log('CLICK', row) }, config: { sortable: true, filterable: true } },
+        { id: 'status', label: 'Status', renderer: (row: MockData) => `${row.status}`, renderType: 'link', onClick: (row: MockData) => { console.log('CLICK', row) }, config: { sortable: true, filterable: true } }
     ];
-    displayedColumns = ['selection', ...this.columns.map(x => x.id)];
+    buttonColumns: SimpleTableButtonColumn<MockData>[] = [
+        { icon: 'preview', onClick: (row: MockData) => { console.log('CLICK', row); } },
+        { icon: 'edit', onClick: (row: MockData) => { console.log('CLICK', row); } },
+    ]
+    displayedColumns = ['selection', 'preview', ...this.columns.map(x => x.id), 'edit'];
 
     // @ViewChild(MdPaginator) paginator: MdPaginator;
-    @ViewChild(NovoActivityTable) table: NovoActivityTable;
+    @ViewChild(NovoActivityTable) table: NovoActivityTable<MockData>;
 
     constructor(private http: Http) {
         for (let i = 0; i < 100; i++) {
@@ -63,7 +68,7 @@ export class ExampleHttpDao extends RemoteSimpleTableService<MockData> {
         super();
     }
 
-    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number): Observable<MockData[]> {
+    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number): Observable<{ results: MockData[], total: number }> {
         console.log('S', sort, 'F', filter);
         const token = 'c4d3d053-295b-4cba-b6d9-a9c7e99fb5ac';
         let query = '&query=NOT%20(status%3A%22Archive%22)%20AND%20isDeleted%3Afalse'
@@ -77,6 +82,6 @@ export class ExampleHttpDao extends RemoteSimpleTableService<MockData> {
         url += query;
         return this.http.get(url)
             .map(response => response.json() as any)
-            .map(result => result.data);
+            .map(result => { return { results: result.data, total: result.total } });
     }
 }

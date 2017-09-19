@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, OnInit, OnChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
@@ -36,7 +36,8 @@ const TILES_VALUE_ACCESSOR = {
             transition('inactive => active', animate('200ms ease-in')),
             transition('active => inactive', animate('200ms ease-out'))
         ])
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges {
     @Input() name: string;
@@ -56,7 +57,7 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
     onModelTouched: Function = () => {
     };
 
-    constructor(private element: ElementRef) {
+    constructor(private element: ElementRef, private ref: ChangeDetectorRef) {
     }
 
     public setFocus(focus: boolean): void {
@@ -79,6 +80,9 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
         if (this.options && this.options.length && (this.options[0].value === undefined || this.options[0].value === null)) {
             this._options = this.options.map((x) => {
                 let item = { value: x, label: x, checked: this.model === x };
+                if (item.checked) {
+                    this.setTile(item);
+                }
                 return item;
             });
         } else {
@@ -90,6 +94,7 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
                 return x;
             });
         }
+        this.ref.markForCheck();
     }
 
     select(event, item) {
@@ -107,9 +112,11 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
             this.onChange.emit(item.value);
             this.onModelChange(item.value);
             this.setTile(item);
+            this.model = item.value;
         } else {
             this.onDisabledOptionClick.emit(item);
         }
+        this.ref.markForCheck();
     }
 
     setTile(item) {
@@ -133,6 +140,7 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
                     ind.style.transform = `translateX(${left}px)`;
                     setTimeout(() => {
                         this.state = 'active';
+                        this.ref.markForCheck();
                     });
                 });
             });

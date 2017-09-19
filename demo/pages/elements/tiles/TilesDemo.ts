@@ -38,6 +38,7 @@ export class TilesDemoComponent {
         }
     ];
     private currentColor: string;
+    public value: string = 'red';
 
     colorSelect(newColorValue) {
         this.currentColor = newColorValue;

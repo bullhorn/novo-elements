@@ -38,14 +38,16 @@ export class PageEvent {
         <button theme="dialogue" type="button"
                 class="simple-table-pagination-navigation-previous"
                 (click)="previousPage()"
-                icon="bhi-previous"
+                icon="previous"
+                side="left"
                 [disabled]="!hasPreviousPage()">
             Previous
         </button>
         <button theme="dialogue" type="button"
                 class="simple-table-pagination-navigation-next"
                 (click)="nextPage()"
-                icon="bhi-previous"
+                icon="next"
+                side="right"
                 [disabled]="!hasNextPage()">
             Next
         </button>
@@ -60,6 +62,7 @@ export class SimpleTablePagination implements OnInit {
     set page(page: number) {
         this._page = page;
         this._changeDetectorRef.markForCheck();
+        this._rangeLabel = this.getRangeLabel(this.page, this.pageSize, this.length);
     }
     _page: number = 0;
 
@@ -68,6 +71,7 @@ export class SimpleTablePagination implements OnInit {
     set length(length: number) {
         this._length = length;
         this._changeDetectorRef.markForCheck();
+        this._rangeLabel = this.getRangeLabel(this.page, this.pageSize, this.length);
     }
     _length: number = 0;
 
@@ -126,6 +130,7 @@ export class SimpleTablePagination implements OnInit {
         this.page = Math.floor(startIndex / pageSize) || 0;
 
         this.pageSize = pageSize;
+        console.log('PS', this.pageSize);
         this._emitPageEvent();
     }
 
@@ -142,6 +147,7 @@ export class SimpleTablePagination implements OnInit {
         }
         this._displayedPageSizeOptions.sort((a, b) => a - b);
         this._changeDetectorRef.markForCheck();
+        this._rangeLabel = this.getRangeLabel(this.page, this.pageSize, this.length);
     }
 
     private _emitPageEvent() {
@@ -150,5 +156,21 @@ export class SimpleTablePagination implements OnInit {
             pageSize: this.pageSize,
             length: this.length
         });
+        this._rangeLabel = this.getRangeLabel(this.page, this.pageSize, this.length);
+    }
+
+    private getRangeLabel(page: number, pageSize: number, length: number) {
+        if (length === 0 || pageSize === 0) { return `Displaying 0 of ${length}`; }
+
+        length = Math.max(length, 0);
+
+        const startIndex = page * pageSize;
+
+        // If the start index exceeds the list length, do not try and fix the end index to the end.
+        const endIndex = startIndex < length ?
+            Math.min(startIndex + pageSize, length) :
+            startIndex + pageSize;
+
+        return `Displaying ${startIndex + 1} - ${endIndex} of ${length}`;
     }
 }

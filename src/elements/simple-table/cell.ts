@@ -3,7 +3,7 @@ import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef, Dat
 import { Subscription } from 'rxjs/Subscription';
 
 import { NovoSelection } from './sort';
-import { SimpleTableColumn } from './interfaces';
+import { SimpleTableColumn, SimpleTableButtonColumn } from './interfaces';
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoCellDef = CdkCellDef;
@@ -37,6 +37,19 @@ export class NovoColumnDef extends _NovoColumnDef {
 })
 export class NovoHeaderCell extends _NovoHeaderCell {
     @HostBinding('class') public headerCellClass = 'novo-header-cell';
+    @HostBinding('attr.role') public role = 'columnheader';
+
+    constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2) {
+        super(columnDef, elementRef, renderer);
+        renderer.addClass(elementRef.nativeElement, `novo-column-${columnDef.cssClassFriendlyName}`);
+    }
+}
+
+@Directive({
+    selector: 'novo-empty-header-cell'
+})
+export class NovoEmptyHeaderCell extends _NovoHeaderCell {
+    @HostBinding('class') public headerCellClass = 'novo-empty-header-cell';
     @HostBinding('attr.role') public role = 'columnheader';
 
     constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2) {
@@ -127,4 +140,18 @@ export class NovoCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
     public toggle(value: boolean): void {
         this._selection.toggle(this.row.id || this.index, value, this.row);
     }
+}
+
+@Component({
+    selector: 'novo-button-cell',
+    template: `
+        <button theme="icon" [icon]="column.icon" (click)="column.onClick(row)"></button>
+    `
+})
+export class NovoButtonCell<T> extends _NovoCell {
+    @HostBinding('class') public cellClass = 'novo-button-cell';
+    @HostBinding('attr.role') public role = 'gridcell';
+
+    @Input() public row: T;
+    @Input() public column: SimpleTableButtonColumn<T>;
 }
