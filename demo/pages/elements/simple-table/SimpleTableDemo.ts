@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 
 import {
     NovoSortFilter, NovoSelection, NovoActivityTable, SimpleTableColumn,
-    RemoteSimpleTableService, SimpleTableDataSource, StaticSimpleTableService,
+    RemoteActivityTableService, ActivityTableDataSource, StaticActivityTableService,
     SimpleTableButtonColumn
 } from '../../../../index';
 
@@ -23,8 +23,8 @@ interface MockData {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleTableDemoComponent implements OnInit {
-    exampleDatabase: StaticSimpleTableService<MockData>;
-    dataSource: SimpleTableDataSource<MockData>;
+    exampleDatabase: StaticActivityTableService<MockData>;
+    dataSource: ActivityTableDataSource<MockData>;
 
     mockData: MockData[] = [];
 
@@ -53,16 +53,16 @@ export class SimpleTableDemoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.exampleDatabase = new StaticSimpleTableService<MockData>(this.mockData);
-        this.dataSource = new SimpleTableDataSource<MockData>(this.exampleDatabase, this.table, this.table.sort, this.table.pagination);
+        this.exampleDatabase = new StaticActivityTableService<MockData>(this.mockData);
+        this.dataSource = new ActivityTableDataSource<MockData>(this.exampleDatabase, this.table);
     }
 }
 
-export class TestDao extends StaticSimpleTableService<MockData> {
+export class TestDao extends StaticActivityTableService<MockData> {
 
 }
 
-export class ExampleHttpDao extends RemoteSimpleTableService<MockData> {
+export class ExampleHttpDao extends RemoteActivityTableService<MockData> {
     constructor(private http: Http) {
         super();
     }

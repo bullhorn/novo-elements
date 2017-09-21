@@ -3,6 +3,7 @@ $novo-row-horizontal-padding: 20px;
 .novo-table {
     display: block;
     min-height: 300px;
+    overflow-x: auto;
     >.novo-row:nth-of-type(odd) {
         background-color: $table-bg-accent;
         td {
@@ -15,6 +16,8 @@ $novo-row-horizontal-padding: 20px;
 .novo-header-row {
     display: flex;
     align-items: center;
+    width: fit-content;
+    min-width: 100%;
 }
 
 .novo-header-row {

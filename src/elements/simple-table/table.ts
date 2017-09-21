@@ -33,7 +33,7 @@ export class NovoActivityTableFooter { }
     selector: 'novo-activity-table',
     template: `
         <header>
-            <novo-search alwaysOpen="true" [ngModel]="globalSearch" (ngModelChange)="performGlobalSearch($event)"></novo-search>
+            <novo-search alwaysOpen="true" (searchChanged)="onSearchChange($event)"></novo-search>
             <simple-table-pagination
                 [length]="dataSource.total"
                 [page]="0"
@@ -69,17 +69,16 @@ export class NovoActivityTable<T> {
     @Input() displayedColumns: string[];
     @Input() buttonColumns: SimpleTableButtonColumn<T>[];
 
-    @Output() globalSearchChange = new EventEmitter<string>();
+    @Output() globalSearchChange: EventEmitter<string> = new EventEmitter<string>();
 
     @ViewChild(NovoSortFilter) sort: NovoSortFilter;
     @ViewChild(NovoSelection) selection: NovoSelection;
     @ViewChild(SimpleTablePagination) pagination: SimpleTablePagination;
 
-    public globalSearch: string;
+    public currentGlobalSearch: string;
 
-    // TODO - gross
-    public performGlobalSearch(term: string): void {
-        this.globalSearch = term;
+    public onSearchChange(term: string): void {
+        this.currentGlobalSearch = term;
         this.globalSearchChange.emit(term);
     }
 }
