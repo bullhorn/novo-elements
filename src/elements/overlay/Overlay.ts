@@ -14,7 +14,8 @@ import {
     NgZone,
     Optional,
     ViewContainerRef,
-    OnDestroy
+    OnDestroy,
+    ChangeDetectionStrategy
 } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 // CDK
@@ -47,6 +48,7 @@ export const DEFAULT_OVERLAY_SCROLL_STRATEGY_PROVIDER = {
 
 @Component({
     selector: 'novo-overlay-template',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <ng-template>
         <div class="novo-overlay-panel" role="listbox" [id]="id" #panel>
@@ -64,6 +66,7 @@ export class NovoOverlayTemplate implements OnDestroy {
     /** Element for the panel containing the autocomplete options. */
     @ViewChild('panel') panel: ElementRef;
     @Input() public parent: ElementRef;
+    @Input() public position: string = 'default';
     @Input() public closeOnSelect: boolean = true;
     @Output() public select: EventEmitter<any> = new EventEmitter();
     @Output() public closing: EventEmitter<any> = new EventEmitter();
@@ -110,13 +113,15 @@ export class NovoOverlayTemplate implements OnDestroy {
             /** Update the panel width, in case the host width has changed */
             this._overlayRef.getState().width = this._getHostWidth();
             this._overlayRef.updateSize();
+            this._overlayRef.updatePosition();
         }
         if (this._overlayRef && !this._overlayRef.hasAttached()) {
             this._overlayRef.attach(this._portal);
             this._closingActionsSubscription = this._subscribeToClosingActions();
         }
-        //this.overlayTemplate._setVisibility();
         this._panelOpen = true;
+        this._changeDetectorRef.detectChanges();
+        setTimeout(() => this._overlayRef.updatePosition());
     }
 
     /** Closes the autocomplete suggestion panel. */
@@ -221,12 +226,20 @@ export class NovoOverlayTemplate implements OnDestroy {
     }
 
     protected _getOverlayPosition(): PositionStrategy {
-        this._positionStrategy = this._overlay.position().connectedTo(
-            this._getConnectedElement(),
-            { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
-            .withFallbackPosition(
-            { originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }
-            );
+        switch (this.position) {
+            case 'center':
+                this._positionStrategy = this._overlay.position()
+                .connectedTo(this._getConnectedElement(), { originX: 'start', originY: 'center' }, { overlayX: 'start', overlayY: 'center' })
+                .withFallbackPosition( { originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
+                .withFallbackPosition( { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' });
+                break;
+            default:
+                this._positionStrategy = this._overlay.position()
+                .connectedTo(this._getConnectedElement(), { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
+                .withFallbackPosition( { originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' });
+                break;
+        }
+
         return this._positionStrategy;
     }
 
