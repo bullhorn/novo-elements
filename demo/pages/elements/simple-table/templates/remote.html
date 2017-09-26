@@ -1,0 +1,14 @@
+<novo-activity-table [dataSource]="remoteDataSource" [columns]="columns" [actionColumns]="actionColumns" [displayedColumns]="displayedColumns" [paginationOptions]="paginationOptions" #remote>
+    <div novo-activity-table-actions>
+        <button theme="secondary">Add</button>
+        <novo-dropdown side="right">
+            <button theme="primary" icon="collapse" inverse>Actions ({{ remote.selection.selectedRows.size }})</button>
+            <list>
+                <item>Action 1</item>
+                <item>Action 2</item>
+                <item [disabled]="remote.selection.selectedRows.size === 0">Action 3</item>
+            </list>
+        </novo-dropdown>
+        <button theme="icon" icon="refresh"></button>
+    </div>
+</novo-activity-table>
