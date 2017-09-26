@@ -72,7 +72,12 @@ p {
     letter-spacing: 0.1px;
 }
 
-h4.novo-section-header {
+h1.novo-section-header,
+h2.novo-section-header,
+h3.novo-section-header,
+h4.novo-section-header,
+h5.novo-section-header,
+h6.novo-section-header {
     background: $off-white;
     box-sizing: content-box;
     font-weight: 400;
@@ -85,10 +90,12 @@ h4.novo-section-header {
         display: flex;
         margin-right: 10px;
         &.bhi-section {   // Special case for icons that are not vertically centered
-            margin-top: -4px;
+            margin-top: -0.2em;
         }
     }
 }
+
+
 
 // Iconography
 // --------------------------------------------------
