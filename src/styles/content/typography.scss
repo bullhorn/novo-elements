@@ -72,6 +72,24 @@ p {
     letter-spacing: 0.1px;
 }
 
+h4.novo-section-header {
+    background: $off-white;
+    box-sizing: content-box;
+    font-weight: 400;
+    display: flex;
+    width: 100%;
+    padding: 1em 0.5em 1em 1.5em;
+    margin-left: -1.5em;
+    margin-right: -1.5em;
+    >i {
+        display: flex;
+        margin-right: 10px;
+        &.bhi-section {   // Special case for icons that are not vertically centered
+            margin-top: -4px;
+        }
+    }
+}
+
 // Iconography
 // --------------------------------------------------
 $icon-height: 1.7em; // 24px Base background size
