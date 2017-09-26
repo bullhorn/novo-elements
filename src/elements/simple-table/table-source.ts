@@ -8,7 +8,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 
 import { NovoSortFilter } from './sort';
-import { SimpleTablePagination } from './pagination';
+import { NovoSimpleTablePagination } from './pagination';
 import { NovoActivityTable } from './table';
 import { Helpers } from '../../utils/Helpers';
 
@@ -23,8 +23,7 @@ export abstract class RemoteActivityTableService<T> implements ActivityTableServ
 export class StaticActivityTableService<T> implements ActivityTableService<T> {
     constructor(private data: T[] = []) { }
 
-    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string): Observable<{ results: T[], total: number }> {
-        console.log('S', sort, 'F', filter, 'P', page, pageSize, 'GS', globalSearch);
+    public getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string): Observable<{ results: T[], total: number }> {
         let ret: T[] = Helpers.deepClone(this.data);
         if (ret.length !== 0) {
             if (globalSearch) {
@@ -45,19 +44,23 @@ export class StaticActivityTableService<T> implements ActivityTableService<T> {
 }
 
 export class ActivityTableDataSource<T> extends DataSource<T> {
-    total = 0;
-    loading = false;
+    public total = 0;
+    public loading = false;
 
     constructor(private tableService: ActivityTableService<T>, private table: NovoActivityTable<T>) {
         super();
     }
 
-    connect(): Observable<any[]> {
-        const displayDataChanges = [
-            this.table.sort.novoTableChange,
-            this.table.pagination.pageChange,
-            this.table.globalSearchChange
+    public connect(): Observable<any[]> {
+        const displayDataChanges: any = [
+            this.table.sort.novoTableChange
         ];
+        if (this.table.pagination) {
+            displayDataChanges.push(this.table.pagination.pageChange);
+        }
+        if (this.table.globalSearchChange) {
+            displayDataChanges.push(this.table.globalSearchChange);
+        }
         return Observable.merge(...displayDataChanges)
             .startWith(null)
             .switchMap(() => {
@@ -75,5 +78,5 @@ export class ActivityTableDataSource<T> extends DataSource<T> {
             });
     }
 
-    disconnect() { }
+    public disconnect(): void { }
 }

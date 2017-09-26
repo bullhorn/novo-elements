@@ -3,15 +3,71 @@ export interface SimpleTableColumn<T> {
     label: string;
     renderType?: 'text' | 'link';
     filterType?: 'text' | 'options' | 'date' | 'picker';
-    renderer(row: T): string;
-    onClick?(row: T): void;
+    renderer: Function;
+    customClass?: (row?: T) => string;
+    onClick?(row: T): any;
+    width?: number;
     config?: {
         sortable?: boolean;
         filterable?: boolean;
+        filterConfig?: SimpleTableColumnFilterConfig
     }
 }
 
-export interface SimpleTableButtonColumn<T> {
-    icon: string;
+export interface SimpleTablePaginationOptions {
+    page?: number;
+    pageSize?: number;
+    pageSizeOptions?: number[];
+}
+
+export interface SimpleTableColumnFilterConfig {
+    type: 'text' | 'date' | 'select',
+    options?: string[] | SimpleTableColumnFilterOption[];
+    allowCustomRange?: boolean;
+}
+
+export interface SimpleTableColumnFilterOption {
+    label: string;
+    value?: string;
+    min?: number;
+    max?: number;
+}
+
+export interface SimpleTableActionColumnOption<T> {
+    label: string;
+    onClick(row: T): string;
+    disabled?: boolean;
+    disabledCheck?(row: T): boolean;
+}
+
+export interface SimpleTableActionColumn<T> {
+    id: string;
+    icon?: string;
+    label?: string;
+    disabled?: boolean;
+    disabledCheck?(row: T): boolean;
+    options?: SimpleTableActionColumnOption<T>[];
     onClick?(row: T): void;
+}
+
+export interface NovoSimpleSortFilter {
+    id: string;
+    direction?: string
+    active?: boolean;
+    filter?: string;
+}
+
+export interface NovoSimpleTableChange {
+    sort: { id: string, value: string },
+    filter: { id: string, value: string }
+}
+
+export interface NovoSimpleSelectionChange {
+    selected: any[]
+}
+
+export interface NovoSimplePaginationEvent {
+    page: number;
+    pageSize: number;
+    length: number;
 }

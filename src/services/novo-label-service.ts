@@ -74,6 +74,8 @@ export class NovoLabelService {
     timeFormatPM = 'PM';
     confirmChangesModalMessage = 'Are you sure you want to change this field?';
     asyncFailure = 'Async validation was not called within the 10s threshold, you might want to reload the page to try again';
+    previous = 'Previous';
+    actions = 'Actions';
 
     selectedRecords(selected: number) {
         return `Only ${selected} records selected.`;
@@ -120,6 +122,21 @@ export class NovoLabelService {
 
     getProperty(value: string) {
         return this[value];
+    }
+
+    getRangeText(page: number, pageSize: number, length: number, short: boolean): string {
+        if (length === 0 || pageSize === 0) { return `Displaying 0 of ${length}`; }
+
+        length = Math.max(length, 0);
+
+        const startIndex = page * pageSize;
+
+        // If the start index exceeds the list length, do not try and fix the end index to the end.
+        const endIndex = startIndex < length ?
+            Math.min(startIndex + pageSize, length) :
+            startIndex + pageSize;
+
+        return short ? `${startIndex + 1} - ${endIndex}/${length}` : `Displaying ${startIndex + 1} - ${endIndex} of ${length}`;
     }
 }
 

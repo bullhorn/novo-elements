@@ -2,40 +2,51 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CdkTableModule } from '@angular/cdk/table';
-import { NovoTable, NovoActivityTable, NovoActivityTableHeader, NovoActivityTableFooter } from './table';
-import { NovoCell, NovoCheckboxCell, NovoCheckboxHeaderCell, NovoHeaderCell, NovoCellDef, NovoHeaderCellDef, NovoColumnDef, NovoButtonCell, NovoEmptyHeaderCell } from './cell';
-import { NovoHeaderRow, NovoRow, NovoHeaderRowDef, NovoRowDef } from './row';
-import { NovoSortHeader, NovoFilterFocus } from './sort-header';
-import { NovoSortFilter, NovoSelection } from './sort';
+
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoDropdownModule } from '../dropdown/Dropdown.module';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
 import { NovoLoadingModule } from '../loading/Loading.module';
 import { NovoTilesModule } from '../tiles/Tiles.module';
 import { NovoSearchBoxModule } from '../search/SearchBox.module';
-import { SimpleTablePagination } from './pagination';
+import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
+
+import { NovoTable, NovoActivityTable, NovoActivityTableActions } from './table';
+import {
+    NovoSimpleCell, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleHeaderCell,
+    NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell
+} from './cell';
+import { NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleHeaderRowDef, NovoSimpleRowDef } from './row';
+import { NovoSimpleCellHeader, NovoSimpleFilterFocus } from './cell-header';
+import { NovoSortFilter, NovoSelection } from './sort';
+
+import { NovoSimpleTablePagination } from './pagination';
 
 export * from './cell';
 export * from './table';
 export * from './row';
-export * from './sort-header';
+export * from './cell-header';
 export * from './sort';
 export * from './interfaces';
 export * from './table-source';
+export * from './activity-table-renderers';
 
 @NgModule({
-    imports: [CdkTableModule, CommonModule, FormsModule, NovoButtonModule, NovoDropdownModule, NovoFormExtrasModule, NovoLoadingModule, NovoTilesModule, NovoSearchBoxModule],
+    imports: [
+        NovoDatePickerModule, CdkTableModule, CommonModule, FormsModule, NovoButtonModule,
+        NovoDropdownModule, NovoFormExtrasModule, NovoLoadingModule, NovoTilesModule, NovoSearchBoxModule
+    ],
     exports: [
-        NovoTable, NovoCellDef, NovoHeaderCellDef, NovoColumnDef,
-        NovoHeaderRowDef, NovoRowDef, NovoSortHeader, NovoSortFilter, NovoButtonCell, NovoEmptyHeaderCell,
-        NovoHeaderCell, NovoCell, NovoHeaderRow, NovoRow, NovoFilterFocus, SimpleTablePagination,
-        NovoCheckboxCell, NovoCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableHeader, NovoActivityTableFooter
+        NovoTable, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef,
+        NovoSimpleHeaderRowDef, NovoSimpleRowDef, NovoSimpleCellHeader, NovoSortFilter, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell,
+        NovoSimpleHeaderCell, NovoSimpleCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleFilterFocus, NovoSimpleTablePagination,
+        NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableActions
     ],
     declarations: [
-        NovoTable, NovoCellDef, NovoHeaderCellDef, NovoColumnDef,
-        NovoHeaderRowDef, NovoRowDef, NovoSortHeader, NovoSortFilter, NovoButtonCell, NovoEmptyHeaderCell,
-        NovoHeaderCell, NovoCell, NovoHeaderRow, NovoRow, NovoFilterFocus, SimpleTablePagination,
-        NovoCheckboxCell, NovoCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableHeader, NovoActivityTableFooter
+        NovoTable, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef,
+        NovoSimpleHeaderRowDef, NovoSimpleRowDef, NovoSimpleCellHeader, NovoSortFilter, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell,
+        NovoSimpleHeaderCell, NovoSimpleCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleFilterFocus, NovoSimpleTablePagination,
+        NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableActions
     ],
 })
 export class NovoSimpleTableModule { }

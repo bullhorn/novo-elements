@@ -1,10 +1,14 @@
-import { Directive, ElementRef, Input, Renderer2, HostBinding, Component, ChangeDetectionStrategy, ChangeDetectorRef, Optional, OnInit, OnDestroy, HostListener } from '@angular/core';
+import {
+    Directive, ElementRef, Input, Renderer2, HostBinding, Component, ChangeDetectionStrategy,
+    ChangeDetectorRef, Optional, OnInit, OnDestroy, HostListener
+} from '@angular/core';
 import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef, DataSource } from '@angular/cdk/table';
 import { Subscription } from 'rxjs/Subscription';
 
 import { NovoSelection } from './sort';
-import { SimpleTableColumn, SimpleTableButtonColumn } from './interfaces';
+import { SimpleTableColumn, SimpleTableActionColumn, SimpleTableActionColumnOption } from './interfaces';
 import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoCellDef = CdkCellDef;
@@ -14,92 +18,125 @@ export const _NovoHeaderCell = CdkHeaderCell;
 export const _NovoCell = CdkCell;
 
 @Directive({
-    selector: '[novoCellDef]',
-    providers: [{ provide: CdkCellDef, useExisting: NovoCellDef }]
+    selector: '[novoSimpleCellDef]',
+    providers: [{ provide: CdkCellDef, useExisting: NovoSimpleCellDef }]
 })
-export class NovoCellDef extends _NovoCellDef { }
+export class NovoSimpleCellDef extends _NovoCellDef { }
 
 @Directive({
-    selector: '[novoHeaderCellDef]',
-    providers: [{ provide: CdkHeaderCellDef, useExisting: NovoHeaderCellDef }]
+    selector: '[novoSimpleHeaderCellDef]',
+    providers: [{ provide: CdkHeaderCellDef, useExisting: NovoSimpleHeaderCellDef }]
 })
-export class NovoHeaderCellDef extends _NovoHeaderCellDef { }
+export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef { }
 
 @Directive({
-    selector: '[novoColumnDef]',
-    providers: [{ provide: CdkColumnDef, useExisting: NovoColumnDef }],
+    selector: '[novoSimpleColumnDef]',
+    providers: [{ provide: CdkColumnDef, useExisting: NovoSimpleColumnDef }],
 })
-export class NovoColumnDef extends _NovoColumnDef {
-    @Input('novoColumnDef') name: string;
+export class NovoSimpleColumnDef extends _NovoColumnDef {
+    @Input('novoSimpleColumnDef') name: string;
 }
 
 @Directive({
-    selector: 'novo-header-cell'
+    selector: 'novo-simple-header-cell'
 })
-export class NovoHeaderCell extends _NovoHeaderCell {
-    @HostBinding('class') public headerCellClass = 'novo-header-cell';
+export class NovoSimpleHeaderCell<T> extends _NovoHeaderCell implements OnInit {
     @HostBinding('attr.role') public role = 'columnheader';
 
-    constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2) {
+    @Input() public column: SimpleTableColumn<T>;
+
+    constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2) {
         super(columnDef, elementRef, renderer);
+        renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-column-header-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, `novo-column-${columnDef.cssClassFriendlyName}`);
+        renderer.addClass(elementRef.nativeElement, 'novo-simple-header-cell');
+    }
+
+    public ngOnInit(): void {
+        if (this.column.width) {
+            this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${this.column.width}px`);
+            this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${this.column.width}px`);
+            this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${this.column.width}px`);
+        }
     }
 }
 
 @Directive({
-    selector: 'novo-empty-header-cell'
+    selector: 'novo-simple-empty-header-cell'
 })
-export class NovoEmptyHeaderCell extends _NovoHeaderCell {
-    @HostBinding('class') public headerCellClass = 'novo-empty-header-cell';
+export class NovoSimpleEmptyHeaderCell extends _NovoHeaderCell {
     @HostBinding('attr.role') public role = 'columnheader';
 
     constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2) {
         super(columnDef, elementRef, renderer);
+        renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-column-header-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, `novo-column-${columnDef.cssClassFriendlyName}`);
+        renderer.addClass(elementRef.nativeElement, 'novo-simple-empty-header-cell');
     }
 }
 
 @Component({
-    selector: 'novo-checkbox-header-cell',
+    selector: 'novo-simple-checkbox-header-cell',
     template: `<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>`
 })
-export class NovoCheckboxHeaderCell extends _NovoHeaderCell {
-    @HostBinding('class') public headerCellClass = 'novo-checkbox-header-cell';
+export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnDestroy {
     @HostBinding('attr.role') public role = 'columnheader';
 
     public selectAll: boolean = false;
+    private selectAllSubscription: Subscription;
 
-    constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2, @Optional() public _selection: NovoSelection) {
+    constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2, @Optional() private _selection: NovoSelection) {
         super(columnDef, elementRef, renderer);
+        renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-checkbox-column-header-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, `novo-checkbox-column-${columnDef.cssClassFriendlyName}`);
+        renderer.addClass(elementRef.nativeElement, 'novo-simple-checkbox-header-cell');
+
+        this.selectAllSubscription = _selection.novoSelectAllToggle.subscribe((value: boolean) => {
+            this.selectAll = value;
+        });
+    }
+
+    public ngOnDestroy(): void {
+        this.selectAllSubscription.unsubscribe();
     }
 
     public toggle(value: boolean): void {
-        console.log('[NovoCheckboxHeaderCell] toggle', value)
         this._selection.selectAll(value);
     }
 }
 
 @Component({
-    selector: 'novo-cell',
+    selector: 'novo-simple-cell',
     template: `
         <span [class.clickable]="!!column.onClick" (click)="onClick($event)">{{ column.renderer(row) }}</span>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NovoCell<T> extends _NovoCell {
-    @HostBinding('class') public cellClass = 'novo-cell';
+export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
     @HostBinding('attr.role') public role = 'gridcell';
 
     @Input() public row: any;
     @Input() public column: SimpleTableColumn<T>;
 
-    constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2) {
+    constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2) {
         super(columnDef, elementRef, renderer);
+        renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-column-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, `novo-column-${columnDef.cssClassFriendlyName}`);
+        renderer.addClass(elementRef.nativeElement, 'novo-simple-cell');
     }
 
-    public onClick(event: MouseEvent) {
+    public ngOnInit(): void {
+        if (this.column.customClass) {
+            this.renderer.addClass(this.elementRef.nativeElement, this.column.customClass(this.row));
+        }
+        if (this.column.width) {
+            this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${this.column.width}px`);
+            this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${this.column.width}px`);
+            this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${this.column.width}px`);
+        }
+    }
+
+    public onClick(event: MouseEvent): void {
         Helpers.swallowEvent(event);
         if (this.column.onClick) {
             this.column.onClick(this.row);
@@ -109,13 +146,12 @@ export class NovoCell<T> extends _NovoCell {
 }
 
 @Component({
-    selector: 'novo-checkbox-cell',
+    selector: 'novo-simple-checkbox-cell',
     template: `
         <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox>
     `
 })
-export class NovoCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
-    @HostBinding('class') public cellClass = 'novo-checkbox-cell';
+export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
     @HostBinding('attr.role') public role = 'gridcell';
 
     @Input() public row: any;
@@ -126,7 +162,9 @@ export class NovoCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
 
     constructor(public columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2, @Optional() public _selection: NovoSelection) {
         super(columnDef, elementRef, renderer);
+        renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-checkbox-column-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, `novo-checkbox-column-${columnDef.cssClassFriendlyName}`);
+        renderer.addClass(elementRef.nativeElement, 'novo-simple-checkbox-cell');
 
         this.selectAllSubscription = _selection.novoSelectAllToggle.subscribe((value: boolean) => {
             this.selected = value;
@@ -135,6 +173,7 @@ export class NovoCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
 
     public ngOnInit(): void {
         this._selection.register(this.row.id || this.index, this.row);
+        this.selected = this._selection.selectedRows.has(this.row.id || this.index);
     }
 
     public ngOnDestroy(): void {
@@ -148,15 +187,50 @@ export class NovoCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
 }
 
 @Component({
-    selector: 'novo-button-cell',
+    selector: 'novo-simple-action-cell',
     template: `
-        <button theme="icon" [icon]="column.icon" (click)="column.onClick(row)"></button>
-    `
+        <ng-container *ngIf="!column.options">
+            <button theme="icon" [icon]="column.icon" (click)="column.onClick(row)" [disabled]="isDisabled(column, row)"></button>
+        </ng-container>
+        <ng-container *ngIf="column.options">
+            <novo-dropdown appendToBody="true" parentScrollSelector=".novo-simple-table" containerClass="novo-table-dropdown-cell">
+                <button type="button" theme="dialogue" icon="collapse" inverse>{{ column.label || labels.actions }}</button>
+                <list>
+                    <item *ngFor="let option of column.options" (action)="option.onClick(row)" [disabled]="isDisabled(option, row)">
+                        <span [attr.data-automation-id]="option.label">{{ option.label }}</span>
+                    </item>
+                </list>
+            </novo-dropdown>
+        </ng-container>
+    `,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NovoButtonCell<T> extends _NovoCell {
-    @HostBinding('class') public cellClass = 'novo-button-cell';
+export class NovoSimpleActionCell<T> extends _NovoCell implements OnInit {
     @HostBinding('attr.role') public role = 'gridcell';
 
     @Input() public row: T;
-    @Input() public column: SimpleTableButtonColumn<T>;
+    @Input() public column: SimpleTableActionColumn<T>;
+
+    constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2, private labels: NovoLabelService) {
+        super(columnDef, elementRef, renderer);
+        renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-action-column-${columnDef.cssClassFriendlyName}`);
+    }
+
+    public ngOnInit(): void {
+        if (this.column.options) {
+            this.renderer.addClass(this.elementRef.nativeElement, 'novo-simple-dropdown-cell');
+        } else {
+            this.renderer.addClass(this.elementRef.nativeElement, 'novo-simple-button-cell');
+        }
+    }
+
+    public isDisabled(check: SimpleTableActionColumn<T> | SimpleTableActionColumnOption<T>, row: T): boolean {
+        if (check.disabled === true) {
+            return true;
+        }
+        if (check.disabledCheck) {
+            return check.disabledCheck(row);
+        }
+        return false;
+    }
 }

@@ -1,86 +1,177 @@
-// NG2
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Http } from '@angular/http';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
+let StaticDemoTpl = require('./templates/static.html');
+let RemoteDemoTpl = require('./templates/remote.html');
+
 import {
     NovoSortFilter, NovoSelection, NovoActivityTable, SimpleTableColumn,
     RemoteActivityTableService, ActivityTableDataSource, StaticActivityTableService,
-    SimpleTableButtonColumn
+    SimpleTableActionColumn, ActivityTableRenderers, SimpleTablePaginationOptions,
 } from '../../../../index';
+
+const template = `
+<div class="container">
+    <h1>Activity Table <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/simple-table">(source)</a></small></h1>
+    <p>This table is a very opinionated table that has pagination and sorting/filtering a certain way.</p>
+    <p>It is meant to be super easy to use and setup but not that customizable. If you need extra customization then look at Table.</p>
+
+    <h5>Static Data Source</h5>
+    <div class="example activity-table-demo">${StaticDemoTpl}</div>
+    <code-snippet [code]="StaticDemoTpl"></code-snippet>
+
+    <h5>Remote Data Source</h5>
+    <div class="example activity-table-demo">${RemoteDemoTpl}</div>
+    <code-snippet [code]="RemoteDemoTpl"></code-snippet>
+</div>
+`;
 
 interface MockData {
     id: number;
     name: string;
     status: string;
+    date: number;
 }
 
 @Component({
     selector: 'simple-table-demo',
-    template: require('./SimpleTableDemo.html'),
+    template: template,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleTableDemoComponent implements OnInit {
-    exampleDatabase: StaticActivityTableService<MockData>;
-    dataSource: ActivityTableDataSource<MockData>;
+    public StaticDemoTpl: string = StaticDemoTpl;
+    public RemoteDemoTpl: string = RemoteDemoTpl;
 
-    mockData: MockData[] = [];
+    public staticDatabase: StaticActivityTableService<MockData>;
+    public staticDataSource: ActivityTableDataSource<MockData>;
+    public remoteDatabase: RemoteActivityTableService<MockData>;
+    public remoteDataSource: ActivityTableDataSource<MockData>;
 
-    // TODO - some generic renderers
-    columns: SimpleTableColumn<MockData>[] = [
-        { id: 'id', label: 'ID', renderer: (row: MockData) => `${row.id}`, config: { sortable: true, filterable: true } },
-        { id: 'name', label: 'Name', renderer: (row: MockData) => `${row.name}`, renderType: 'link', onClick: (row: MockData) => { console.log('CLICK', row) }, config: { sortable: true, filterable: true } },
-        { id: 'status', label: 'Status', renderer: (row: MockData) => `${row.status}`, renderType: 'link', onClick: (row: MockData) => { console.log('CLICK', row) }, config: { sortable: true, filterable: true } }
+    public columns: SimpleTableColumn<MockData>[] = [
+        {
+            id: 'id',
+            label: 'ID',
+            width: 100,
+            renderer: ActivityTableRenderers.propertyRenderer<MockData>('id'),
+            config: {
+                sortable: true,
+                filterable: true
+            }
+        },
+        {
+            id: 'date',
+            label: 'Date',
+            renderer: ActivityTableRenderers.dateRenderer<MockData>('date'),
+            config: {
+                sortable: true,
+                filterable: true,
+                filterConfig: {
+                    type: 'date'
+                }
+            }
+        },
+        {
+            id: 'name',
+            label: 'Name',
+            renderer: ActivityTableRenderers.propertyRenderer<MockData>('name'),
+            renderType: 'link',
+            onClick: this.log.bind(this),
+            config: {
+                sortable: true,
+                filterable: true
+            }
+        },
+        {
+            id: 'status',
+            label: 'Status',
+            renderer: ActivityTableRenderers.propertyRenderer<MockData>('status'),
+            renderType: 'link',
+            customClass: (row: MockData) => `status-${row.status.toLowerCase()}`,
+            onClick: this.log.bind(this),
+            config: {
+                sortable: true,
+                filterable: true,
+                filterConfig: {
+                    type: 'select',
+                    options: ['New', 'Active', 'Archived']
+                }
+            }
+        }
     ];
-    buttonColumns: SimpleTableButtonColumn<MockData>[] = [
-        { icon: 'preview', onClick: (row: MockData) => { console.log('CLICK', row); } },
-        { icon: 'edit', onClick: (row: MockData) => { console.log('CLICK', row); } },
+    public actionColumns: SimpleTableActionColumn<MockData>[] = [
+        {
+            id: 'preview',
+            icon: 'preview',
+            onClick: this.log.bind(this)
+        },
+        {
+            id: 'edit',
+            icon: 'edit',
+            disabled: true,
+            onClick: this.log.bind(this)
+        },
+        {
+            id: 'actions',
+            options: [
+                { label: 'Action 1', onClick: this.log.bind(this) },
+                { label: 'Action 2', onClick: this.log.bind(this), disabled: true },
+                { label: 'Action 3', onClick: this.log.bind(this), disabledCheck: this.checkDisabled.bind(this) }
+            ]
+        }
     ]
-    displayedColumns = ['selection', 'preview', ...this.columns.map(x => x.id), 'edit'];
+    public displayedColumns = ['selection', 'actions', 'preview', ...this.columns.map(x => x.id), 'edit'];
+    public paginationOptions: SimpleTablePaginationOptions = {
+        pageSize: 10,
+        pageSizeOptions: [10, 50, 100]
+    }
 
-    @ViewChild(NovoActivityTable) table: NovoActivityTable<MockData>;
+
+    private staticData: MockData[] = [];
+
+    @ViewChild('static') private staticTable: NovoActivityTable<MockData>;
+    @ViewChild('remote') private remoteTable: NovoActivityTable<MockData>;
 
     constructor(private http: Http) {
+        let today = new Date();
+        let mockStatuses = ['New', 'Active', 'Archived'];
         for (let i = 0; i < 100; i++) {
-            this.mockData.push({
+            this.staticData.push({
                 id: i,
                 name: `Name ${i}`,
-                status: `Status ${i}`
+                date: today.getTime() - (1000 * 60 * 60 * 24 * i),
+                status: mockStatuses[Math.floor(Math.random() * 3)]
             });
         }
     }
 
-    ngOnInit() {
-        this.exampleDatabase = new StaticActivityTableService<MockData>(this.mockData);
-        this.dataSource = new ActivityTableDataSource<MockData>(this.exampleDatabase, this.table);
+    public ngOnInit(): void {
+        this.staticDatabase = new StaticActivityTableService<MockData>(this.staticData);
+        this.staticDataSource = new ActivityTableDataSource<MockData>(this.staticDatabase, this.staticTable);
+        this.remoteDatabase = new RemoteMockDataService(this.http);
+        this.remoteDataSource = new ActivityTableDataSource(this.remoteDatabase, this.remoteTable);
+    }
+
+    public log(data: MockData): void {
+        console.log('CLICK', data); // tslint:disable-line
+    }
+
+    public checkDisabled(data: MockData): boolean {
+        return data.status === 'New';
     }
 }
 
-export class TestDao extends StaticActivityTableService<MockData> {
-
-}
-
-export class ExampleHttpDao extends RemoteActivityTableService<MockData> {
+export class RemoteMockDataService extends RemoteActivityTableService<MockData> {
     constructor(private http: Http) {
         super();
     }
 
-    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number): Observable<{ results: MockData[], total: number }> {
-        console.log('S', sort, 'F', filter);
-        const token = 'c4d3d053-295b-4cba-b6d9-a9c7e99fb5ac';
-        let query = '&query=NOT%20(status%3A%22Archive%22)%20AND%20isDeleted%3Afalse'
-        let url = `http://rohit-backend.bh-bos2.bullhorn.com:8181/rest-services/1hs/search/ClientContact?BhRestToken=${token}&fields=id,name,status&start=0&count=500&showTotalMatched=true`;
-        if (sort) {
-            url += `&sort=${sort.value === 'desc' ? '-' : ''}${sort.id}`
-        }
-        if (filter) {
-            query += ` AND ${filter.id}:(${filter.value}*)`;
-        }
-        url += query;
-        return this.http.get(url)
+    public getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string): Observable<{ results: MockData[], total: number }> {
+        console.log('S', sort, 'F', filter, 'P', page, pageSize, 'GS', globalSearch); // tslint:disable-line
+        return this.http.get('//novo-elements-mock.getsandbox.com/users')
             .map(response => response.json() as any)
-            .map(result => { return { results: result.data, total: result.total } });
+            .map(results => { return { results: results, total: results.length } });
     }
 }

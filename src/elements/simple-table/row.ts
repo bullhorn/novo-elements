@@ -8,37 +8,37 @@ export const _NovoHeaderRow = CdkHeaderRow;
 export const _NovoRow = CdkRow;
 
 @Directive({
-    selector: '[novoHeaderRowDef]',
-    providers: [{ provide: CdkHeaderRowDef, useExisting: NovoHeaderRowDef }],
+    selector: '[novoSimpleHeaderRowDef]',
+    providers: [{ provide: CdkHeaderRowDef, useExisting: NovoSimpleHeaderRowDef }],
 })
-export class NovoHeaderRowDef extends _NovoHeaderRowDef {
-    @Input('novoHeaderRowDef') columns;
+export class NovoSimpleHeaderRowDef extends _NovoHeaderRowDef {
+    @Input('novoSimpleHeaderRowDef') columns;
 }
 
 @Directive({
-    selector: '[novoRowDef]',
-    providers: [{ provide: CdkRowDef, useExisting: NovoRowDef }]
+    selector: '[novoSimpleRowDef]',
+    providers: [{ provide: CdkRowDef, useExisting: NovoSimpleRowDef }]
 })
-export class NovoRowDef extends _NovoCdkRowDef {
-    @Input('novoRowDefColumns') columns;
+export class NovoSimpleRowDef extends _NovoCdkRowDef {
+    @Input('novoSimpleRowDefColumns') columns;
 }
 
 @Component({
-    selector: 'novo-header-row',
+    selector: 'novo-simple-header-row',
     template: CDK_ROW_TEMPLATE,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NovoHeaderRow extends _NovoHeaderRow {
-    @HostBinding('class') public rowClass = 'novo-header-row';
+export class NovoSimpleHeaderRow extends _NovoHeaderRow {
+    @HostBinding('class') public rowClass = 'novo-simple-header-row';
     @HostBinding('attr.role') public role = 'row';
 }
 
 @Component({
-    selector: 'novo-row',
+    selector: 'novo-simple-row',
     template: CDK_ROW_TEMPLATE,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoRow extends _NovoRow {
-    @HostBinding('class') public rowClass = 'novo-row';
+export class NovoSimpleRow extends _NovoRow {
+    @HostBinding('class') public rowClass = 'novo-simple-row';
     @HostBinding('attr.role') public role = 'row';
 }

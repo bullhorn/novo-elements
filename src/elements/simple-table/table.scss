@@ -1,10 +1,11 @@
 $table-bg-accent: #f4f4f4;
 $novo-row-horizontal-padding: 20px;
-.novo-table {
+$breakpoint: 1200px;
+.novo-simple-table {
     display: block;
     min-height: 300px;
-    overflow-x: auto;
-    >.novo-row:nth-of-type(odd) {
+    overflow: auto;
+    >.novo-simple-row:nth-of-type(odd) {
         background-color: $table-bg-accent;
         td {
             background-color: $table-bg-accent;
@@ -12,20 +13,20 @@ $novo-row-horizontal-padding: 20px;
     }
 }
 
-.novo-row,
-.novo-header-row {
+.novo-simple-row,
+.novo-simple-header-row {
     display: flex;
     align-items: center;
     width: fit-content;
     min-width: 100%;
 }
 
-.novo-header-row {
+.novo-simple-header-row {
     border-top: 1px solid #F0F0F0;
 }
 
-.novo-cell,
-.novo-header-cell {
+.novo-simple-cell,
+.novo-simple-header-cell {
     flex: 1;
     min-width: 200px;
     padding: 10px;
@@ -41,9 +42,10 @@ $novo-row-horizontal-padding: 20px;
     }
 }
 
-.novo-header-cell {
+.novo-simple-header-cell {
     border-left: 1px solid #F0F0F0;
-    +novo-empty-header-cell {
+    white-space: nowrap;
+    +novo-simple-empty-header-cell {
         border-left: none;
     }
     >label {
@@ -53,34 +55,81 @@ $novo-row-horizontal-padding: 20px;
     }
 }
 
-novo-empty-header-cell {
-    min-width: 40px;
+novo-simple-empty-header-cell {
+    &.button-header-cell {
+        min-width: 40px;
+    }
+    &.dropdown-header-cell {
+        min-width: 98px;
+    }
 }
 
-.novo-button-cell {
+.novo-simple-button-cell,
+.novo-simple-dropdown-cell {
     padding: 0 5px;
+    novo-dropdown {
+        button {
+            padding: 5px;
+            &:hover,
+            &:active,
+            &:focus {
+                background: rgba(0, 0, 0, 0.1) !important;
+            }
+        }
+    }
 }
 
-.novo-checkbox-header-cell,
-.novo-checkbox-cell {
+.novo-simple-checkbox-header-cell,
+.novo-simple-checkbox-cell {
     max-width: 40px;
     margin-top: -4px;
     padding: 0 10px;
 }
 
 novo-activity-table {
+    position: relative;
+    display: block;
     header {
-        padding: 5px 0;
+        padding: 5px;
         display: flex;
         align-items: center;
         >novo-search {
             padding-right: 10px;
+            display: none;
+            @media (min-width: $breakpoint) {
+                display: flex;
+            }
             >input {
-                padding: 11.5px;
+                padding: 8.5px;
                 font-size: 1.1em;
             }
             &.active>button[theme="fab"] {
-                height: 41px;
+                height: 35px;
+            }
+        }
+        >div.novo-activity-table-actions {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            >div,
+            >section {
+                display: flex;
+                align-items: center;
+                button {
+                    margin-left: 3px;
+                }
+                button[theme][theme="icon"] {
+                    height: 35px;
+                    width: 35px;
+                    font-size: 1.4em;
+                }
+                novo-dropdown {
+                    button[theme] {
+                        white-space: nowrap;
+                        padding: 6px 5px 6px 15px !important;
+                    }
+                }
             }
         }
     }
@@ -99,20 +148,79 @@ novo-activity-table {
         right: 0;
         bottom: 0;
         background: rgba(0, 0, 0, 0.07);
-        z-index: 10;
+        z-index: 9999;
+    }
+    .clickable {
+        @extend a;
     }
 }
 
-simple-table-pagination {
+novo-simple-table-pagination {
     display: flex;
     align-items: center;
-    >.simple-table-pagination-size {
+    novo-tiles>.tile-container .tile {
+        padding: 7px 10px;
+    }
+    >.novo-simple-table-pagination-size {
         padding-right: 10px;
     }
-    >.simple-table-rangle-label {
+    >.novo-simple-table-range-label-long,
+    >.novo-simple-table-range-label-short {
         padding-right: 10px;
     }
-    >button:first {
-        padding-right: 5px;
+    >.novo-simple-table-range-label-long {
+        display: none;
+        @media (min-width: $breakpoint) {
+            display: block;
+        }
+    }
+    >.novo-simple-table-range-label-short {
+        display: block;
+        @media (min-width: $breakpoint) {
+            display: none;
+        }
+    }
+    >button:first-of-type {
+        margin-right: 5px;
+    }
+    >button {
+        span {
+            display: none;
+            @media (min-width: $breakpoint) {
+                display: block;
+            }
+        }
+    }
+    >button[theme][theme="dialogue"][icon][side="left"] {
+        padding: 5px;
+        @media (min-width: $breakpoint) {
+            padding: 5px 15px 5px 5px;
+        }
+    }
+    >button[theme][theme="dialogue"][icon][side="right"] {
+        padding: 5px;
+        @media (min-width: $breakpoint) {
+            padding: 5px 5px 5px 15px;
+        }
+    }
+}
+
+.simple-table-dropdown {
+    @extend .table-dropdown;
+    .header {
+        padding: 5px 10px 0px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        button {
+            padding: 3px;
+            icon {
+                font-size: 0.8em;
+            }
+        }
+    }
+    list item.active {
+        background: transparent;
+        font-weight: 500;
     }
 }

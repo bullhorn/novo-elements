@@ -1,33 +1,18 @@
-import { Directive, EventEmitter, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, Input, Output, OnDestroy } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { getNovoSortDuplicateNovoSortableIdError, getNovoSortHeaderMissingIdError } from './sort-errors';
 
-export interface NovoSortableFilterable {
-    id: string;
-    direction?: string
-    active?: boolean;
-    filter?: string;
-}
-
-export interface NovoTableChange {
-    sort: { id: string, value: string },
-    filter: { id: string, value: string }
-}
-
-export interface NovoSelectionChange {
-    selected: any[]
-}
+import { NovoSimpleTableChange, NovoSimpleSelectionChange } from './interfaces';
 
 @Directive({
     selector: '[novoSortFilter]',
 })
 export class NovoSortFilter {
-    @Output() novoTableChange = new EventEmitter<NovoTableChange>();
+    @Output() public novoTableChange = new EventEmitter<NovoSimpleTableChange>();
 
-    currentFilterColumn: { id: string, value: string };
-    currentSortColumn: { id: string, value: string };
+    public currentFilterColumn: { id: string, value: string };
+    public currentSortColumn: { id: string, value: string };
 
-    filter(id: string, value: string) {
+    public filter(id: string, value: string): void {
         if (value) {
             this.currentFilterColumn = { id, value };
         } else {
@@ -39,7 +24,7 @@ export class NovoSortFilter {
         });
     }
 
-    sort(id: string, value: string) {
+    public sort(id: string, value: string): void {
         this.currentSortColumn = { id, value };
         this.novoTableChange.next({
             sort: this.currentSortColumn,
@@ -51,42 +36,48 @@ export class NovoSortFilter {
 @Directive({
     selector: '[novoSelection]',
 })
-export class NovoSelection {
-    @Output() novoSelectionChange = new EventEmitter<NovoSelectionChange>();
-    @Output() novoSelectAllToggle = new EventEmitter<boolean>();
+export class NovoSelection implements OnDestroy {
+    @Output() public novoSelectionChange = new EventEmitter<NovoSimpleSelectionChange>();
+    @Output() public novoSelectAllToggle = new EventEmitter<boolean>();
 
-    allRows = new Map<string, object>();
-    selectedRows = new Map<string, object>();
+    public allRows = new Map<string, object>();
+    public selectedRows = new Map<string, object>();
 
     get value() {
         return Array.from(this.selectedRows.values());
     }
 
-    register(id, row) {
+    public register(id, row): void {
         this.allRows.set(id, row);
     }
 
-    deregister(id) {
+    public deregister(id): void {
         this.allRows.delete(id);
+        this.selectedRows.delete(id);
+        if (this.selectedRows.size === 0) {
+            this.novoSelectAllToggle.emit(false);
+        }
     }
 
-    toggle(id: string, selected: boolean, row: any) {
+    public ngOnDestroy(): void {
+        this.allRows.clear();
+        this.selectedRows.clear();
+    }
+
+    public toggle(id: string, selected: boolean, row: any): void {
         if (selected) {
             this.selectedRows.set(id, row);
         } else {
             this.selectedRows.delete(id);
         }
-        console.log('SELECTED', Array.from(this.selectedRows.values()));
     }
 
-    selectAll(value: boolean): void {
-        console.log('[NovoSelection] selectAll', value);
+    public selectAll(value: boolean): void {
         if (value) {
             this.selectedRows = new Map<string, object>(this.allRows);
         } else {
             this.selectedRows.clear();
         }
         this.novoSelectAllToggle.emit(value);
-        console.log('SELECTED', Array.from(this.selectedRows.values()));
     }
 }
