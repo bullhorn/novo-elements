@@ -22,7 +22,7 @@ const TILES_VALUE_ACCESSOR = {
                     {{ option.label || option}}
                 </label>
             </div>
-            <span class="active-indicator" [@tileState]="state" [hidden]="(activeTile === undefined || activeTile === null)"></span>
+            <span class="active-indicator" [@tileState]="state" [hidden]="!activeTile"></span>
         </div>
     `,
     animations: [
@@ -101,6 +101,9 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
         if (event) {
             event.stopPropagation();
             event.preventDefault();
+        }
+        if (item.checked) {
+            return;
         }
 
         if (!item.disabled) {

@@ -12,7 +12,7 @@ const DEFAULT_PAGE_SIZE = 50;
 @Component({
     selector: 'novo-simple-table-pagination',
     template: `
-        <div class="novo-simple-table-pagination-size">
+        <div class="novo-simple-table-pagination-size" *ngIf="!loading">
             <novo-tiles *ngIf="displayedPageSizeOptions.length > 1"
                         [(ngModel)]="pageSize"
                         [options]="displayedPageSizeOptions"
@@ -49,6 +49,8 @@ const DEFAULT_PAGE_SIZE = 50;
 })
 export class NovoSimpleTablePagination implements OnInit {
     private _initialized: boolean;
+
+    @Input() loading: boolean;
 
     @Input()
     get page(): number { return this._page; }
@@ -122,9 +124,7 @@ export class NovoSimpleTablePagination implements OnInit {
     }
 
     public changePageSize(pageSize: number): void {
-        const startIndex = this.page * this.pageSize;
-        this.page = Math.floor(startIndex / pageSize) || 0;
-
+        this.page = 0;
         this.pageSize = pageSize;
         this.emitPageEvent();
     }

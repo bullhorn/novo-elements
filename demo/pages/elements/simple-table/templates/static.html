@@ -1,14 +1,8 @@
-<novo-activity-table [dataSource]="staticDataSource" [columns]="columns" [actionColumns]="actionColumns" [displayedColumns]="displayedColumns" [paginationOptions]="paginationOptions" #static>
+<novo-activity-table [activityService]="staticDatabase" [columns]="columns" [actionColumns]="actionColumns" [displayedColumns]="displayedColumns" [paginationOptions]="paginationOptions" #static>
     <div novo-activity-table-actions>
         <button theme="secondary">Add</button>
-        <novo-dropdown side="right">
-            <button theme="primary" icon="collapse" inverse>Actions ({{ static.selection.selectedRows.size }})</button>
-            <list>
-                <item>Action 1</item>
-                <item>Action 2</item>
-                <item [disabled]="static.selection.selectedRows.size === 0">Action 3</item>
-            </list>
-        </novo-dropdown>
-        <button theme="icon" icon="refresh"></button>
+    </div>
+    <div novo-activity-table-empty-message>
+        CUSTOM EMPTY MESSAGE
     </div>
 </novo-activity-table>

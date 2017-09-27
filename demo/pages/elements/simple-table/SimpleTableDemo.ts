@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Http } from '@angular/http';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -46,9 +46,7 @@ export class SimpleTableDemoComponent implements OnInit {
     public RemoteDemoTpl: string = RemoteDemoTpl;
 
     public staticDatabase: StaticActivityTableService<MockData>;
-    public staticDataSource: ActivityTableDataSource<MockData>;
     public remoteDatabase: RemoteActivityTableService<MockData>;
-    public remoteDataSource: ActivityTableDataSource<MockData>;
 
     public columns: SimpleTableColumn<MockData>[] = [
         {
@@ -128,11 +126,7 @@ export class SimpleTableDemoComponent implements OnInit {
         pageSizeOptions: [10, 50, 100]
     }
 
-
     private staticData: MockData[] = [];
-
-    @ViewChild('static') private staticTable: NovoActivityTable<MockData>;
-    @ViewChild('remote') private remoteTable: NovoActivityTable<MockData>;
 
     constructor(private http: Http) {
         let today = new Date();
@@ -149,9 +143,7 @@ export class SimpleTableDemoComponent implements OnInit {
 
     public ngOnInit(): void {
         this.staticDatabase = new StaticActivityTableService<MockData>(this.staticData);
-        this.staticDataSource = new ActivityTableDataSource<MockData>(this.staticDatabase, this.staticTable);
         this.remoteDatabase = new RemoteMockDataService(this.http);
-        this.remoteDataSource = new ActivityTableDataSource(this.remoteDatabase, this.remoteTable);
     }
 
     public log(data: MockData): void {
@@ -169,7 +161,6 @@ export class RemoteMockDataService extends RemoteActivityTableService<MockData> 
     }
 
     public getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string): Observable<{ results: MockData[], total: number }> {
-        console.log('S', sort, 'F', filter, 'P', page, pageSize, 'GS', globalSearch); // tslint:disable-line
         return this.http.get('//novo-elements-mock.getsandbox.com/users')
             .map(response => response.json() as any)
             .map(results => { return { results: results, total: results.length } });

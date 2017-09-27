@@ -11,7 +11,10 @@ import { NovoTilesModule } from '../tiles/Tiles.module';
 import { NovoSearchBoxModule } from '../search/SearchBox.module';
 import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 
-import { NovoTable, NovoActivityTable, NovoActivityTableActions } from './table';
+import {
+    NovoTable, NovoActivityTable, NovoActivityTableActions,
+    NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage
+} from './table';
 import {
     NovoSimpleCell, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleHeaderCell,
     NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell
@@ -37,13 +40,13 @@ export * from './activity-table-renderers';
         NovoDropdownModule, NovoFormExtrasModule, NovoLoadingModule, NovoTilesModule, NovoSearchBoxModule
     ],
     exports: [
-        NovoTable, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef,
+        NovoTable, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage,
         NovoSimpleHeaderRowDef, NovoSimpleRowDef, NovoSimpleCellHeader, NovoSortFilter, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell,
         NovoSimpleHeaderCell, NovoSimpleCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleFilterFocus, NovoSimpleTablePagination,
         NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableActions
     ],
     declarations: [
-        NovoTable, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef,
+        NovoTable, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage,
         NovoSimpleHeaderRowDef, NovoSimpleRowDef, NovoSimpleCellHeader, NovoSortFilter, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell,
         NovoSimpleHeaderCell, NovoSimpleCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleFilterFocus, NovoSimpleTablePagination,
         NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableActions

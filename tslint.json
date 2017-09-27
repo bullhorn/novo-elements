@@ -74,6 +74,11 @@
       "check-open-brace",
       "check-whitespace"
     ],
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape"
+    ],
     "switch-default": true,
     "triple-equals": true,
     "use-isnan": true,

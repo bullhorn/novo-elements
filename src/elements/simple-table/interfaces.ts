@@ -2,7 +2,6 @@ export interface SimpleTableColumn<T> {
     id: string,
     label: string;
     renderType?: 'text' | 'link';
-    filterType?: 'text' | 'options' | 'date' | 'picker';
     renderer: Function;
     customClass?: (row?: T) => string;
     onClick?(row: T): any;

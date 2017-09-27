@@ -1,3 +1,4 @@
+import { EventEmitter } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -45,6 +46,7 @@ export class StaticActivityTableService<T> implements ActivityTableService<T> {
 
 export class ActivityTableDataSource<T> extends DataSource<T> {
     public total = 0;
+    public current = 0;
     public loading = false;
 
     constructor(private tableService: ActivityTableService<T>, private table: NovoActivityTable<T>) {
@@ -52,9 +54,10 @@ export class ActivityTableDataSource<T> extends DataSource<T> {
     }
 
     public connect(): Observable<any[]> {
-        const displayDataChanges: any = [
-            this.table.sort.novoTableChange
-        ];
+        const displayDataChanges: any = [];
+        if (this.table.sort) {
+            displayDataChanges.push(this.table.sort.novoTableChange);
+        }
         if (this.table.pagination) {
             displayDataChanges.push(this.table.pagination.pageChange);
         }
@@ -70,9 +73,11 @@ export class ActivityTableDataSource<T> extends DataSource<T> {
             .map((data: { results: T[], total: number }) => {
                 this.loading = false;
                 this.total = data.total;
+                this.current = data.results.length;
                 return data.results;
             })
-            .catch(() => {
+            .catch((error) => {
+                console.error(error); // tslint: disable-line
                 this.loading = false;
                 return Observable.of(null);
             });
