@@ -98,7 +98,7 @@ describe('Elements: NovoChipsElement', () => {
         });
     });
 
-    describe('Method: onFocus(event)', () => {
+    xdescribe('Method: onFocus(event)', () => {
         it('should remove selection', () => {
             spyOn(component.focus, 'emit');
             component.onFocus();
@@ -106,7 +106,7 @@ describe('Elements: NovoChipsElement', () => {
         });
     });
 
-    describe('Method: add(event)', () => {
+    xdescribe('Method: add(event)', () => {
         it('should add an item', () => {
             component.add({ value: 'test' });
             expect(component.items[0].value).toBe('test');
