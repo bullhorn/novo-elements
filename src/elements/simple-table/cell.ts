@@ -173,7 +173,7 @@ export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnIn
 
     public ngOnInit(): void {
         this._selection.register(this.row.id || this.index, this.row);
-        this.selected = this._selection.selectedRows.has(this.row.id || this.index);
+        this.selected = this._selection.state.selectedRows.has(this.row.id || this.index);
     }
 
     public ngOnDestroy(): void {

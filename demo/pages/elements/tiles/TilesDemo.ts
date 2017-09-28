@@ -47,4 +47,12 @@ export class TilesDemoComponent {
     toggleShown() {
         this.shown = !this.shown;
     }
+
+    addTile() {
+        this.demoTiles.push({
+            label: 'Blue',
+            value: 'blue'
+        });
+        this.demoTiles = [...this.demoTiles];
+    }
 }

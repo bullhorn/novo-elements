@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, OnInit, OnChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, SimpleChanges, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, AfterContentInit, OnChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
@@ -39,7 +39,7 @@ const TILES_VALUE_ACCESSOR = {
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges {
+export class NovoTilesElement implements ControlValueAccessor, AfterContentInit, OnChanges {
     @Input() name: string;
     @Input() options: any;
     @Input() required: boolean;
@@ -64,13 +64,14 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
         this.focused = focus;
     }
 
-    ngOnInit() {
+    ngAfterContentInit() {
         this.name = this.name || '';
         this.setupOptions();
     }
 
-    ngOnChanges(change) {
-        if (change.options && change.options.previousValue && change.options.previousValue.length > 0) {
+    ngOnChanges(change: SimpleChanges) {
+        if (change['options'] && change['options'].currentValue && !change['options'].firstChange) {
+            this.name = this.name || '';
             this._options = [];
             this.setupOptions();
         }

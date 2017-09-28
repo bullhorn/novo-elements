@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -10,7 +10,7 @@ import 'rxjs/add/operator/catch';
 
 import { NovoSortFilter } from './sort';
 import { NovoSimpleTablePagination } from './pagination';
-import { NovoActivityTable } from './table';
+import { NovoActivityTableState } from './state';
 import { Helpers } from '../../utils/Helpers';
 
 export interface ActivityTableService<T> {
@@ -49,31 +49,33 @@ export class ActivityTableDataSource<T> extends DataSource<T> {
     public current = 0;
     public loading = false;
 
-    constructor(private tableService: ActivityTableService<T>, private table: NovoActivityTable<T>) {
+    get totallyEmpty(): boolean {
+        return this.total === 0;
+    }
+
+    get currentlyEmpty(): boolean {
+        return this.current === 0;
+    }
+
+    constructor(private tableService: ActivityTableService<T>, private state: NovoActivityTableState, private ref: ChangeDetectorRef) {
         super();
     }
 
     public connect(): Observable<any[]> {
-        const displayDataChanges: any = [];
-        if (this.table.sort) {
-            displayDataChanges.push(this.table.sort.novoTableChange);
-        }
-        if (this.table.pagination) {
-            displayDataChanges.push(this.table.pagination.pageChange);
-        }
-        if (this.table.globalSearchChange) {
-            displayDataChanges.push(this.table.globalSearchChange);
-        }
+        const displayDataChanges: any = [
+            this.state.updates
+        ];
         return Observable.merge(...displayDataChanges)
             .startWith(null)
             .switchMap(() => {
                 this.loading = true;
-                return this.tableService.getTableResults(this.table.sort.currentSortColumn, this.table.sort.currentFilterColumn, this.table.pagination.page, this.table.pagination.pageSize, this.table.currentGlobalSearch);
+                return this.tableService.getTableResults(this.state.sort, this.state.filter, this.state.page, this.state.pageSize, this.state.globalSearch);
             })
             .map((data: { results: T[], total: number }) => {
                 this.loading = false;
                 this.total = data.total;
                 this.current = data.results.length;
+                this.ref.markForCheck();
                 return data.results;
             })
             .catch((error) => {

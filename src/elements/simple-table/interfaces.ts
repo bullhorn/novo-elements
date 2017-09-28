@@ -57,8 +57,11 @@ export interface NovoSimpleSortFilter {
 }
 
 export interface NovoSimpleTableChange {
-    sort: { id: string, value: string },
-    filter: { id: string, value: string }
+    sort?: { id: string, value: string },
+    filter?: { id: string, value: string },
+    page?: number;
+    pageSize?: number;
+    globalSearch?: string;
 }
 
 export interface NovoSimpleSelectionChange {

@@ -6,13 +6,14 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { NovoSimplePaginationEvent } from './interfaces';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoActivityTableState } from './state';
 
 const DEFAULT_PAGE_SIZE = 50;
 
 @Component({
     selector: 'novo-simple-table-pagination',
     template: `
-        <div class="novo-simple-table-pagination-size" *ngIf="!loading">
+        <div class="novo-simple-table-pagination-size">
             <novo-tiles *ngIf="displayedPageSizeOptions.length > 1"
                         [(ngModel)]="pageSize"
                         [options]="displayedPageSizeOptions"
@@ -47,10 +48,8 @@ const DEFAULT_PAGE_SIZE = 50;
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoSimpleTablePagination implements OnInit {
+export class NovoSimpleTablePagination implements OnInit, OnDestroy {
     private _initialized: boolean;
-
-    @Input() loading: boolean;
 
     @Input()
     get page(): number { return this._page; }
@@ -59,6 +58,7 @@ export class NovoSimpleTablePagination implements OnInit {
         this.changeDetectorRef.markForCheck();
         this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
         this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
+        this.state.page = this._page;
     }
     _page: number = 0;
 
@@ -77,6 +77,7 @@ export class NovoSimpleTablePagination implements OnInit {
     set pageSize(pageSize: number) {
         this._pageSize = pageSize;
         this.updateDisplayedPageSizeOptions();
+        this.state.pageSize = this._pageSize;
     }
     private _pageSize: number;
 
@@ -94,12 +95,26 @@ export class NovoSimpleTablePagination implements OnInit {
     public longRangeLabel: string;
     public shortRangeLabel: string;
 
-    constructor(private changeDetectorRef: ChangeDetectorRef, public labels: NovoLabelService) {
+    private resetSubscription: Subscription;
+
+    constructor(private changeDetectorRef: ChangeDetectorRef, public labels: NovoLabelService, private state: NovoActivityTableState) {
+        if (state && state.onReset) {
+            this.resetSubscription = this.state.onReset.subscribe((clear: boolean) => {
+                if (clear) {
+                    this.page = 0;
+                    this.changeDetectorRef.detectChanges();
+                }
+            })
+        }
     }
 
     public ngOnInit(): void {
         this._initialized = true;
         this.updateDisplayedPageSizeOptions();
+    }
+
+    public ngOnDestroy(): void {
+        this.resetSubscription.unsubscribe();
     }
 
     public nextPage(): void {
@@ -147,12 +162,16 @@ export class NovoSimpleTablePagination implements OnInit {
     }
 
     private emitPageEvent(): void {
-        this.pageChange.next({
+        let event = {
             page: this.page,
             pageSize: this.pageSize,
             length: this.length
-        });
+        };
+        this.pageChange.next(event);
+        this.state.page = this.page;
+        this.state.pageSize = this.pageSize;
         this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
         this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
+        this.state.updates.next(event)
     }
 }

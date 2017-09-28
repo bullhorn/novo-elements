@@ -1,7 +1,7 @@
 import {
     ChangeDetectionStrategy, Component, ViewEncapsulation, HostBinding,
     Input, ViewChild, Directive, EventEmitter, Output, AfterContentInit,
-    OnChanges, SimpleChanges, ChangeDetectorRef
+    SimpleChanges, ChangeDetectorRef, Injectable, OnChanges
 } from '@angular/core';
 import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -11,6 +11,7 @@ import { NovoSimpleTablePagination } from './pagination';
 import { SimpleTableColumn, SimpleTableActionColumn, SimpleTablePaginationOptions } from './interfaces';
 import { ActivityTableService, ActivityTableDataSource } from './table-source';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoActivityTableState } from './state';
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoTable = CdkTable;
@@ -43,10 +44,18 @@ export class NovoActivityTableNoResultsMessage { }
 @Component({
     selector: 'novo-activity-table',
     template: `
-        <header [hidden]="(dataSource?.total === 0 && !userFiltered) || loading">
-            <novo-search alwaysOpen="true" (searchChanged)="onSearchChange($event)" *ngIf="!hideGlobalSearch"></novo-search>
+        <div *ngIf="debug">
+            <p>Total: {{ dataSource?.total }}</p>
+            <p>Current: {{ dataSource?.current }}</p>
+            <p>Totally Empty: {{ dataSource?.totallyEmpty }}</p>
+            <p>Currently Empty: {{ dataSource?.currentlyEmpty }}</p>
+            <p>Loading (DataSource): {{ dataSource?.loading }}</p>
+            <p>User Filtered: {{ state.userFiltered }}</p>
+            <p>Loading (Table): {{ loading }}</p>
+        </div>
+        <header *ngIf="!(dataSource?.totallyEmpty && !state.userFiltered) && !loading">
+            <novo-search alwaysOpen="true" (searchChanged)="onSearchChange($event)" [(ngModel)]="state.globalSearch" *ngIf="!hideGlobalSearch"></novo-search>
             <novo-simple-table-pagination
-                [loading]="loading"
                 [length]="dataSource?.total"
                 [page]="paginationOptions.page"
                 [pageSize]="paginationOptions.pageSize"
@@ -59,7 +68,7 @@ export class NovoActivityTableNoResultsMessage { }
         <div class="novo-activity-table-loading-mask" *ngIf="dataSource?.loading || loading">
             <novo-loading></novo-loading>
         </div>
-        <novo-simple-table *ngIf="columns?.length > 0" [dataSource]="dataSource" novoSortFilter novoSelection [hidden]="dataSource?.total === 0 && !userFiltered" [class.empty]="dataSource?.current === 0 && userFiltered">
+        <novo-simple-table *ngIf="(columns?.length > 0)" [dataSource]="dataSource" novoSortFilter novoSelection [class.empty]="dataSource?.currentlyEmpty && state.userFiltered" [hidden]="dataSource?.totallyEmpty && !userFiltered">
             <ng-content></ng-content>
             <ng-container novoSimpleColumnDef="selection">
                 <novo-simple-checkbox-header-cell *novoSimpleHeaderCellDef></novo-simple-checkbox-header-cell>
@@ -76,13 +85,13 @@ export class NovoActivityTableNoResultsMessage { }
             <novo-simple-header-row *novoSimpleHeaderRowDef="displayedColumns"></novo-simple-header-row>
             <novo-simple-row *novoSimpleRowDef="let row; columns: displayedColumns;"></novo-simple-row>
         </novo-simple-table>
-        <div class="novo-activity-table-no-results-container" *ngIf="dataSource?.current === 0 && userFiltered && !dataSource?.loading">
+        <div class="novo-activity-table-no-results-container" *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading">
             <div #filtered><ng-content select="[novo-activity-table-no-results-message]"></ng-content></div>
             <div class="novo-activity-table-empty-message" *ngIf="filtered.childNodes.length == 0">
                 <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
             </div>
         </div>
-        <div class="novo-activity-table-empty-container" *ngIf="dataSource?.total === 0 && !dataSource?.loading">
+        <div class="novo-activity-table-empty-container" *ngIf="dataSource?.totallyEmpty && !dataSource?.loading && !loading">
             <div #empty><ng-content select="[novo-activity-table-empty-message]"></ng-content></div>
             <div class="novo-activity-table-empty-message" *ngIf="empty.childNodes.length == 0">
                 <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
@@ -90,10 +99,10 @@ export class NovoActivityTableNoResultsMessage { }
         </div>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [NovoActivityTableState]
 })
 export class NovoActivityTable<T> implements AfterContentInit, OnChanges {
     @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
-    @HostBinding('class.loading') loading: boolean = true;
 
     @Input() activityService: ActivityTableService<T>;
     @Input() columns: SimpleTableColumn<T>[];
@@ -110,39 +119,32 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges {
     }
     private _hideGlobalSearch: boolean;
 
-    @Output() globalSearchChange: EventEmitter<string> = new EventEmitter<string>();
+    @Input() set debug(v: boolean) {
+        this._debug = coerceBooleanProperty(v);
+    }
+    get debug() {
+        return this._debug;
+    }
+    private _debug: boolean;
 
-    @ViewChild(NovoSortFilter) sort: NovoSortFilter;
-    @ViewChild(NovoSelection) selection: NovoSelection;
-    @ViewChild(NovoSimpleTablePagination) pagination: NovoSimpleTablePagination;
-
-    public currentGlobalSearch: string;
     public dataSource: ActivityTableDataSource<T>;
+    public loading: boolean = true;
 
     @HostBinding('class.empty') get empty() {
-        return this.dataSource && this.dataSource.total === 0;
+        return this.dataSource && this.dataSource.totallyEmpty;
     }
 
-    get userFiltered(): boolean {
-        if (!this.sort) {
-            return false;
-        }
-        return !!(this.sort.currentFilterColumn || this.sort.currentSortColumn || this.currentGlobalSearch);
+    @HostBinding('class.loading') get loadingClass() {
+        return this.loading || (this.dataSource && this.dataSource.loading);
     }
 
-    constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef) {
-    }
+    constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: NovoActivityTableState) { }
 
     public ngOnChanges(changes: SimpleChanges): void {
-        if (!this.dataSource) {
-            if (changes.columns.currentValue !== undefined) {
-                // Setup the data source on the NEXT cycle, so that the ViewChilds are working
-                setTimeout(() => {
-                    this.loading = false;
-                    this.dataSource = new ActivityTableDataSource<T>(this.activityService, this);
-                    this.ref.markForCheck();
-                });
-            }
+        if (!this.dataSource && changes['activityService'].currentValue) {
+            this.loading = false;
+            this.dataSource = new ActivityTableDataSource<T>(this.activityService, this.state, this.ref);
+            this.ref.markForCheck();
         }
     }
 
@@ -159,10 +161,14 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges {
         if (!this.paginationOptions.pageSizeOptions) {
             this.paginationOptions.pageSizeOptions = [10, 25, 50, 100];
         }
+        this.state.page = this.paginationOptions.page;
+        this.state.pageSize = this.paginationOptions.pageSize;
+        this.ref.markForCheck();
     }
 
     public onSearchChange(term: string): void {
-        this.currentGlobalSearch = term;
-        this.globalSearchChange.emit(term);
+        this.state.globalSearch = term;
+        this.state.reset(false, true);
+        this.state.updates.next({ globalSearch: term });
     }
 }

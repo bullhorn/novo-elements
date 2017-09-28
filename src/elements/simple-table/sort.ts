@@ -2,34 +2,31 @@ import { Directive, EventEmitter, Input, Output, OnDestroy } from '@angular/core
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { NovoSimpleTableChange, NovoSimpleSelectionChange } from './interfaces';
+import { NovoActivityTableState } from './state';
 
 @Directive({
     selector: '[novoSortFilter]',
 })
 export class NovoSortFilter {
-    @Output() public novoTableChange = new EventEmitter<NovoSimpleTableChange>();
-
-    public currentFilterColumn: { id: string, value: string };
-    public currentSortColumn: { id: string, value: string };
+    constructor(private state: NovoActivityTableState) { }
 
     public filter(id: string, value: string): void {
+        let filter;
         if (value) {
-            this.currentFilterColumn = { id, value };
+            filter = { id, value };
         } else {
-            this.currentFilterColumn = undefined;
+            filter = undefined;
         }
-        this.novoTableChange.next({
-            sort: this.currentSortColumn,
-            filter: this.currentFilterColumn
-        });
+        this.state.filter = filter;
+        this.state.reset(false, true);
+        this.state.updates.next({ filter: filter, sort: this.state.sort });
     }
 
     public sort(id: string, value: string): void {
-        this.currentSortColumn = { id, value };
-        this.novoTableChange.next({
-            sort: this.currentSortColumn,
-            filter: this.currentFilterColumn
-        });
+        let sort = { id, value };
+        this.state.sort = sort;
+        this.state.reset(false, true);
+        this.state.updates.next({ sort: sort, filter: this.state.filter });
     }
 }
 
@@ -37,15 +34,11 @@ export class NovoSortFilter {
     selector: '[novoSelection]',
 })
 export class NovoSelection implements OnDestroy {
-    @Output() public novoSelectionChange = new EventEmitter<NovoSimpleSelectionChange>();
     @Output() public novoSelectAllToggle = new EventEmitter<boolean>();
 
     public allRows = new Map<string, object>();
-    public selectedRows = new Map<string, object>();
 
-    get value() {
-        return Array.from(this.selectedRows.values());
-    }
+    constructor(public state: NovoActivityTableState) { }
 
     public register(id, row): void {
         this.allRows.set(id, row);
@@ -53,30 +46,30 @@ export class NovoSelection implements OnDestroy {
 
     public deregister(id): void {
         this.allRows.delete(id);
-        this.selectedRows.delete(id);
-        if (this.selectedRows.size === 0) {
+        this.state.selectedRows.delete(id);
+        if (this.state.selectedRows.size === 0) {
             this.novoSelectAllToggle.emit(false);
         }
     }
 
     public ngOnDestroy(): void {
         this.allRows.clear();
-        this.selectedRows.clear();
+        this.state.selectedRows.clear();
     }
 
     public toggle(id: string, selected: boolean, row: any): void {
         if (selected) {
-            this.selectedRows.set(id, row);
+            this.state.selectedRows.set(id, row);
         } else {
-            this.selectedRows.delete(id);
+            this.state.selectedRows.delete(id);
         }
     }
 
     public selectAll(value: boolean): void {
         if (value) {
-            this.selectedRows = new Map<string, object>(this.allRows);
+            this.state.selectedRows = new Map<string, object>(this.allRows);
         } else {
-            this.selectedRows.clear();
+            this.state.selectedRows.clear();
         }
         this.novoSelectAllToggle.emit(value);
     }

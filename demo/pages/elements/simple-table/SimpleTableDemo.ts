@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -128,10 +128,10 @@ export class SimpleTableDemoComponent implements OnInit {
 
     private staticData: MockData[] = [];
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private ref: ChangeDetectorRef) {
         let today = new Date();
         let mockStatuses = ['New', 'Active', 'Archived'];
-        for (let i = 0; i < 100; i++) {
+        for (let i = 1; i <= 100; i++) {
             this.staticData.push({
                 id: i,
                 name: `Name ${i}`,
@@ -142,8 +142,11 @@ export class SimpleTableDemoComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.staticDatabase = new StaticActivityTableService<MockData>(this.staticData);
         this.remoteDatabase = new RemoteMockDataService(this.http);
+        setTimeout(() => {
+            this.staticDatabase = new StaticActivityTableService<MockData>(this.staticData);
+            this.ref.markForCheck();
+        }, 3000);
     }
 
     public log(data: MockData): void {
@@ -152,6 +155,10 @@ export class SimpleTableDemoComponent implements OnInit {
 
     public checkDisabled(data: MockData): boolean {
         return data.status === 'New';
+    }
+
+    public refresh(table: NovoActivityTable<MockData>) {
+        table.state.reset();
     }
 }
 

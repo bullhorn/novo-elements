@@ -22,8 +22,8 @@ import {
 import { NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleHeaderRowDef, NovoSimpleRowDef } from './row';
 import { NovoSimpleCellHeader, NovoSimpleFilterFocus } from './cell-header';
 import { NovoSortFilter, NovoSelection } from './sort';
-
 import { NovoSimpleTablePagination } from './pagination';
+import { NovoActivityTableState } from './state';
 
 export * from './cell';
 export * from './table';
@@ -33,6 +33,7 @@ export * from './sort';
 export * from './interfaces';
 export * from './table-source';
 export * from './activity-table-renderers';
+export * from './state';
 
 @NgModule({
     imports: [
@@ -51,5 +52,8 @@ export * from './activity-table-renderers';
         NovoSimpleHeaderCell, NovoSimpleCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleFilterFocus, NovoSimpleTablePagination,
         NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableActions
     ],
+    providers: [
+        NovoActivityTableState
+    ]
 })
 export class NovoSimpleTableModule { }

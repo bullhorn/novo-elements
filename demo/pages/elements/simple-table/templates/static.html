@@ -1,6 +1,7 @@
-<novo-activity-table [activityService]="staticDatabase" [columns]="columns" [actionColumns]="actionColumns" [displayedColumns]="displayedColumns" [paginationOptions]="paginationOptions" #static>
+<novo-activity-table debug="true" [activityService]="staticDatabase" [columns]="columns" [actionColumns]="actionColumns" [displayedColumns]="displayedColumns" [paginationOptions]="paginationOptions" #static>
     <div novo-activity-table-actions>
         <button theme="secondary">Add</button>
+        <button theme="icon" icon="refresh" (click)="refresh(static)"></button>
     </div>
     <div novo-activity-table-empty-message>
         CUSTOM EMPTY MESSAGE

@@ -6,13 +6,13 @@ import {
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { Subscription } from 'rxjs/Subscription';
-import { merge } from 'rxjs/observable/merge';
 import * as dateFns from 'date-fns';
 
 import { NovoSimpleSortFilter, NovoSimpleTableChange } from './interfaces';
 import { NovoSortFilter } from './sort';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { SimpleTableColumnFilterConfig, SimpleTableColumnFilterOption } from './interfaces';
+import { NovoActivityTableState } from './state';
 
 @Directive({
     selector: '[novoSimpleFilterFocus]'
@@ -112,14 +112,11 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
     constructor(
         private changeDetectorRef: ChangeDetectorRef,
         public labels: NovoLabelService,
+        private state: NovoActivityTableState,
         @Optional() public _sort: NovoSortFilter,
         @Optional() public _cdkColumnDef: CdkColumnDef
     ) {
-        if (!_sort) {
-            throw Error(`NovoSortHeader must be placed within a parent element with the NovoSort directive.`);
-        }
-
-        this._rerenderSubscription = merge(_sort.novoTableChange).subscribe((change: NovoSimpleTableChange) => {
+        this._rerenderSubscription = state.updates.subscribe((change: NovoSimpleTableChange) => {
             if (change.sort && change.sort.id === this.id) {
                 this.icon = `sort-${change.sort.value}`;
                 this.sortActive = true;
