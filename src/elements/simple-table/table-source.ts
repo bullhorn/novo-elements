@@ -75,7 +75,9 @@ export class ActivityTableDataSource<T> extends DataSource<T> {
                 this.loading = false;
                 this.total = data.total;
                 this.current = data.results.length;
-                this.ref.markForCheck();
+                setTimeout(() => {
+                    this.ref.markForCheck();
+                });
                 return data.results;
             })
             .catch((error) => {

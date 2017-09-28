@@ -141,7 +141,7 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges {
     constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: NovoActivityTableState) { }
 
     public ngOnChanges(changes: SimpleChanges): void {
-        if (!this.dataSource && changes['activityService'].currentValue) {
+        if (changes['activityService'] && changes['activityService'].currentValue) {
             this.loading = false;
             this.dataSource = new ActivityTableDataSource<T>(this.activityService, this.state, this.ref);
             this.ref.markForCheck();

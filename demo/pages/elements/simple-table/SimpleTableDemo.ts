@@ -47,6 +47,7 @@ export class SimpleTableDemoComponent implements OnInit {
 
     public staticDatabase: StaticActivityTableService<MockData>;
     public remoteDatabase: RemoteActivityTableService<MockData>;
+    public debug: boolean = false;
 
     public columns: SimpleTableColumn<MockData>[] = [
         {
@@ -159,6 +160,26 @@ export class SimpleTableDemoComponent implements OnInit {
 
     public refresh(table: NovoActivityTable<MockData>) {
         table.state.reset();
+    }
+
+    public loadNewData(): void {
+        this.staticData = [];
+        let today = new Date();
+        let mockStatuses = ['New', 'Active', 'Archived'];
+        for (let i = 1; i <= 100; i++) {
+            this.staticData.push({
+                id: i,
+                name: `BOB ${i}`,
+                date: today.getTime() - (1000 * 60 * 60 * 24 * i),
+                status: mockStatuses[Math.floor(Math.random() * 3)]
+            });
+        }
+        this.staticDatabase = new StaticActivityTableService<MockData>(this.staticData);
+        this.ref.markForCheck();
+    }
+
+    public toggleDebug(): void {
+        this.debug = !this.debug;
     }
 }
 
