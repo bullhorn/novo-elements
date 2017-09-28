@@ -21,7 +21,7 @@ const SELECT_VALUE_ACCESSOR = {
     providers: [SELECT_VALUE_ACCESSOR],
     template: `
         <div (click)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
-        <novo-overlay-template [parent]="element">
+        <novo-overlay-template [parent]="element" position="center">
             <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
                 <ng-content></ng-content>
                 <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">
@@ -104,6 +104,10 @@ export class NovoSelectElement implements OnInit, OnChanges {
             this.select(item, index);
         } else {
             this.writeValue(this.model);
+        }
+
+        if ( this.panelOpen ) {
+            this.openPanel();
         }
     }
 

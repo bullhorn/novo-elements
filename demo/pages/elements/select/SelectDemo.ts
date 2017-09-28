@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 let BasicSelectDemoTpl = require('./templates/BasicSelectDemo.html');
 let LongSelectDemoTpl = require('./templates/LongSelectDemo.html');
 
-const template = `
+const template: string = `
 <div class="container">
     <h1>Select <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/select">(source)</a></small></h1>
     <p>The select element (<code>novo-select</code>) represents a control that presents a menu of options. The options

@@ -1,3 +1,28 @@
+<a name="2.1.11"></a>
+## [2.1.11](https://github.com/bullhorn/novo-elements/compare/v2.1.10...v2.1.11) (2017-09-27)
+
+
+
+<a name="2.1.10"></a>
+## [2.1.10](https://github.com/bullhorn/novo-elements/compare/v2.1.9...v2.1.10) (2017-09-21)
+
+
+### Bug Fixes
+
+* **Select:** Styles and timings messed with Append to body ([#549](https://github.com/bullhorn/novo-elements/issues/549)) ([1aff21e](https://github.com/bullhorn/novo-elements/commit/1aff21e))
+
+
+
+<a name="2.1.9"></a>
+## [2.1.9](https://github.com/bullhorn/novo-elements/compare/v2.1.8...v2.1.9) (2017-09-19)
+
+
+### Features
+
+* **searchbox & picker:** Adding search box component, fab button, making picker append to body better ([eea708e](https://github.com/bullhorn/novo-elements/commit/eea708e))
+
+
+
 <a name="2.1.8"></a>
 ## [2.1.8](https://github.com/bullhorn/novo-elements/compare/v2.1.7...v2.1.8) (2017-09-15)
 
