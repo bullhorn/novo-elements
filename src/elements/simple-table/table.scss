@@ -5,6 +5,7 @@ novo-simple-table {
     display: block;
     min-height: 300px;
     overflow: auto;
+    flex: 1;
     &.empty {
         min-height: 40px;
     }
@@ -21,7 +22,6 @@ novo-simple-table {
     display: flex;
     flex-direction: row;
     flex-wrap: no-wrap;
-    align-items: center;
     width: fit-content;
     min-width: 100%;
 }
@@ -33,7 +33,6 @@ novo-simple-table {
 
 .novo-simple-cell,
 .novo-simple-header-cell {
-    flex: 1;
     min-width: 200px;
     padding: 10px;
     >span {
@@ -53,6 +52,13 @@ novo-simple-table {
         cursor: pointer;
         color: $company;
     }
+}
+
+.novo-simple-cell {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .novo-simple-header-cell {
@@ -79,6 +85,10 @@ novo-simple-empty-header-cell {
 
 .novo-simple-button-cell,
 .novo-simple-dropdown-cell {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
     padding: 0 5px;
     novo-dropdown {
         button {
@@ -94,6 +104,10 @@ novo-simple-empty-header-cell {
 
 .novo-simple-checkbox-header-cell,
 .novo-simple-checkbox-cell {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
     max-width: 40px;
     margin-top: -4px;
     padding: 0 10px;
@@ -102,7 +116,9 @@ novo-simple-empty-header-cell {
 novo-activity-table {
     position: relative;
     width: 100%;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     &.loading {
         min-height: 300px;
     }
@@ -110,7 +126,7 @@ novo-activity-table {
         padding: 5px;
         display: flex;
         align-items: center;
-        min-height: 50px;
+        flex-shrink: 0;
         >novo-search {
             padding-right: 10px;
             display: none;

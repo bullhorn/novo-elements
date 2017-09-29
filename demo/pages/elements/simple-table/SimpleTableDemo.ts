@@ -144,7 +144,7 @@ export class SimpleTableDemoComponent implements OnInit {
         for (let i = 1; i <= 100; i++) {
             this.staticData.push({
                 id: i,
-                name: `Name ${i}`,
+                name: `Name akksdkjfhaskdfjhasjkfdhsakjhfkjashdfkjashdfkjashdkfhasdkkfhjasd ${i}`,
                 date: today.getTime() - (1000 * 60 * 60 * 24 * i),
                 status: mockStatuses[Math.floor(Math.random() * 3)]
             });
