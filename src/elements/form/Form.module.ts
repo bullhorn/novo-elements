@@ -18,7 +18,7 @@ import { NovoNovoCKEditorModule } from './../ckeditor/CKEditor.module';
 import { NovoQuickNoteModule } from './../quick-note/QuickNote.module';
 import { NovoDynamicFormElement, NovoControlCustom, NovoFieldsetElement, NovoFieldsetHeaderElement } from './DynamicForm';
 import { NovoFormElement } from './Form';
-import { NovoControlElement, NovoCustomControlContainerElement } from './Control';
+import { NovoControlElement, NovoCustomControlContainerElement, NovoAutoSize } from './Control';
 import { NovoFormExtrasModule } from './extras/FormExtras.module';
 import { NovoHeaderModule } from './../header/Header.module';
 import { NovoTooltipModule } from './../tooltip/Tooltip.module';
@@ -50,8 +50,8 @@ import { ControlConfirmModal } from './ControlConfirmModal';
         NovoModalModule,
         NovoButtonModule
     ],
-    declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement, ControlConfirmModal],
-    exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement],
+    declarations: [NovoAutoSize, NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement, ControlConfirmModal],
+    exports: [NovoAutoSize, NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement],
     entryComponents: [ControlConfirmModal]
 })
 export class NovoFormModule {
