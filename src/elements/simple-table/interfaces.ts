@@ -32,6 +32,11 @@ export interface SimpleTableColumnFilterOption {
     max?: number;
 }
 
+export interface SimpleTableSearchOptions {
+    placeholder?: string;
+    tooltip?: string;
+}
+
 export interface SimpleTableActionColumnOption<T> {
     label: string;
     onClick(row: T): string;

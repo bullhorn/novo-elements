@@ -24,9 +24,9 @@ const SEARCH_VALUE_ACCESSOR = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <!-- SEARCH ICON -->
-        <button theme="fab" [color]="theme" [icon]="icon" (click)="showSearch()" [tooltip]="hint" tooltipPosition="bottom"></button>
+        <button theme="fab" [color]="theme" [icon]="icon" (click)="showSearch()" [tooltip]="hint" tooltipPosition="bottom" data-automation-id="novo-search-fab"></button>
         <!-- SEARCH INPUT -->
-        <input type="text" [attr.name]="name" [attr.value]="displayValue" [attr.placeholder]="placeholder" (focus)="onFocus()" (blur)="onBlur()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input/>
+        <input type="text" [attr.name]="name" [attr.value]="displayValue" [attr.placeholder]="placeholder" (focus)="onFocus()" (blur)="onBlur()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input data-automation-id="novo-search-input"/>
         <!-- SEARCH OVERLAY -->
         <novo-overlay-template [parent]="element" [closeOnSelect]="closeOnSelect" (select)="closePanel()" (closing)="onBlur()">
             <ng-content></ng-content>

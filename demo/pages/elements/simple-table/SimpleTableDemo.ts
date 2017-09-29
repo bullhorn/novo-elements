@@ -11,6 +11,7 @@ import {
     NovoSortFilter, NovoSelection, NovoActivityTable, SimpleTableColumn,
     RemoteActivityTableService, ActivityTableDataSource, StaticActivityTableService,
     SimpleTableActionColumn, ActivityTableRenderers, SimpleTablePaginationOptions,
+    SimpleTableSearchOptions
 } from '../../../../index';
 
 const template = `
@@ -126,6 +127,14 @@ export class SimpleTableDemoComponent implements OnInit {
         pageSize: 10,
         pageSizeOptions: [10, 50, 100]
     }
+    public searchOptions: SimpleTableSearchOptions = {
+        placeholder: 'Search for things...',
+        tooltip: 'HELLO'
+    }
+    public defaultSort: { id: string, value: string } = {
+        id: 'id',
+        value: 'asc'
+    };
 
     private staticData: MockData[] = [];
 

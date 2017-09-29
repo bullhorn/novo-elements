@@ -8,7 +8,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { NovoSortFilter, NovoSelection } from './sort';
 import { NovoSimpleTablePagination } from './pagination';
-import { SimpleTableColumn, SimpleTableActionColumn, SimpleTablePaginationOptions } from './interfaces';
+import { SimpleTableColumn, SimpleTableActionColumn, SimpleTablePaginationOptions, SimpleTableSearchOptions } from './interfaces';
 import { ActivityTableService, ActivityTableDataSource } from './table-source';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoActivityTableState } from './state';
@@ -54,7 +54,14 @@ export class NovoActivityTableNoResultsMessage { }
             <p>Loading (Table): {{ loading }}</p>
         </div>
         <header *ngIf="!(dataSource?.totallyEmpty && !state.userFiltered) && !loading">
-            <novo-search alwaysOpen="true" (searchChanged)="onSearchChange($event)" [(ngModel)]="state.globalSearch" *ngIf="!hideGlobalSearch"></novo-search>
+            <novo-search
+                alwaysOpen="true"
+                (searchChanged)="onSearchChange($event)"
+                [(ngModel)]="state.globalSearch"
+                *ngIf="!hideGlobalSearch"
+                [placeholder]="searchOptions?.placeholder"
+                [hint]="searchOptions?.tooltip">
+            </novo-search>
             <novo-simple-table-pagination
                 [length]="dataSource?.total"
                 [page]="paginationOptions.page"
@@ -79,7 +86,7 @@ export class NovoActivityTableNoResultsMessage { }
                 <novo-simple-action-cell *novoSimpleCellDef="let row; let i = index" [row]="row" [column]="column"></novo-simple-action-cell>
             </ng-container>
             <ng-container *ngFor="let column of columns" [novoSimpleColumnDef]="column.id">
-                <novo-simple-header-cell *novoSimpleHeaderCellDef [column]="column" [novo-simple-cell-config]="column.config">{{ column.label }}</novo-simple-header-cell>
+                <novo-simple-header-cell *novoSimpleHeaderCellDef [column]="column" [novo-simple-cell-config]="column.config" [defaultSort]="defaultSort">{{ column.label }}</novo-simple-header-cell>
                 <novo-simple-cell *novoSimpleCellDef="let row" [column]="column" [row]="row"></novo-simple-cell>
             </ng-container>
             <novo-simple-header-row *novoSimpleHeaderRowDef="displayedColumns"></novo-simple-header-row>
@@ -109,6 +116,8 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges {
     @Input() displayedColumns: string[];
     @Input() actionColumns: SimpleTableActionColumn<T>[];
     @Input() paginationOptions: SimpleTablePaginationOptions;
+    @Input() searchOptions: SimpleTableSearchOptions;
+    @Input() defaultSort: { id: string, value: string };
 
     @Input() set hideGlobalSearch(v: boolean) {
         this._hideGlobalSearch = coerceBooleanProperty(v);

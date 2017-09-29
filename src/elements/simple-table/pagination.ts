@@ -17,15 +17,16 @@ const DEFAULT_PAGE_SIZE = 50;
             <novo-tiles *ngIf="displayedPageSizeOptions.length > 1"
                         [(ngModel)]="pageSize"
                         [options]="displayedPageSizeOptions"
-                        (onChange)="changePageSize($event)">
+                        (onChange)="changePageSize($event)"
+                        data-automation-id="novo-simple-table-pagination-tiles">
             </novo-tiles>
             <div *ngIf="displayedPageSizeOptions.length <= 1">{{ pageSize }}</div>
         </div>
 
-        <div class="novo-simple-table-range-label-long">
+        <div class="novo-simple-table-range-label-long"data-automation-id="novo-simple-table-pagination-range-label-long">
             {{ longRangeLabel }}
         </div>
-        <div class="novo-simple-table-range-label-short">
+        <div class="novo-simple-table-range-label-short"data-automation-id="novo-simple-table-pagination-range-label-short">
             {{ shortRangeLabel }}
         </div>
 
@@ -34,7 +35,8 @@ const DEFAULT_PAGE_SIZE = 50;
                 (click)="previousPage()"
                 icon="previous"
                 side="left"
-                [disabled]="!hasPreviousPage()">
+                [disabled]="!hasPreviousPage()"
+                data-automation-id="novo-simple-table-pagination-previous">
             <span>{{ labels.previous }}</span>
         </button>
         <button theme="dialogue" type="button"
@@ -42,7 +44,8 @@ const DEFAULT_PAGE_SIZE = 50;
                 (click)="nextPage()"
                 icon="next"
                 side="right"
-                [disabled]="!hasNextPage()">
+                [disabled]="!hasNextPage()"
+                data-automation-id="novo-simple-table-pagination-next">
             <span>{{ labels.next }}</span>
         </button>
     `,

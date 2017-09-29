@@ -29,9 +29,9 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
     moduleId: module.id,
     selector: '[novo-simple-cell-config]',
     template: `
-        <label (click)="sort()"><ng-content></ng-content></label>
-        <button *ngIf="config.sortable" theme="icon" [icon]="icon" (click)="sort()" [class.active]="sortActive"></button>
-        <novo-dropdown *ngIf="config.filterable" appendToBody="true" parentScrollSelector=".novo-simple-table" containerClass="simple-table-dropdown">
+        <label (click)="sort()" data-automation-id="novo-activity-table-label"><ng-content></ng-content></label>
+        <button *ngIf="config.sortable" theme="icon" [icon]="icon" (click)="sort()" [class.active]="sortActive" data-automation-id="novo-activity-table-sort"></button>
+        <novo-dropdown *ngIf="config.filterable" appendToBody="true" parentScrollSelector=".novo-simple-table" containerClass="simple-table-dropdown" data-automation-id="novo-activity-table-filter">
             <button type="button" theme="icon" icon="filter" [class.active]="filterActive"></button>
             <div class="header">
                 <span>{{ labels.filters }}</span>
@@ -69,6 +69,8 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDestroy {
+
+    @Input() defaultSort: { id: string, value: string };
 
     @Input('novo-simple-cell-config')
     get config() { return this._config; }
@@ -136,6 +138,11 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
     public ngOnInit(): void {
         if (this._cdkColumnDef) {
             this.id = this._cdkColumnDef.name;
+        }
+        if (this.defaultSort && this.id === this.defaultSort.id) {
+            this.icon = `sort-${this.defaultSort.value}`;
+            this.sortActive = true;
+            this.changeDetectorRef.markForCheck();
         }
     }
 
