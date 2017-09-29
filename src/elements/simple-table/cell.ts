@@ -1,6 +1,6 @@
 import {
     Directive, ElementRef, Input, Renderer2, HostBinding, Component, ChangeDetectionStrategy,
-    ChangeDetectorRef, Optional, OnInit, OnDestroy, HostListener
+    ChangeDetectorRef, Optional, OnInit, OnDestroy, HostListener, ViewChild
 } from '@angular/core';
 import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef, DataSource } from '@angular/cdk/table';
 import { Subscription } from 'rxjs/Subscription';
@@ -108,7 +108,7 @@ export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnD
 @Component({
     selector: 'novo-simple-cell',
     template: `
-        <span [class.clickable]="!!column.onClick" (click)="onClick($event)">{{ column.renderer(row) }}</span>
+        <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -117,6 +117,8 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
 
     @Input() public row: any;
     @Input() public column: SimpleTableColumn<T>;
+
+    @ViewChild('span') private spanElement: ElementRef;
 
     constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2) {
         super(columnDef, elementRef, renderer);
@@ -133,6 +135,15 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
             this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${this.column.width}px`);
             this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${this.column.width}px`);
             this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${this.column.width}px`);
+            // TODO - this inhibits resizing the page after the initial load -- but do we care?!?!
+            this.renderer.setStyle(this.spanElement.nativeElement, 'min-width', `${this.column.width - 20}px`);
+            this.renderer.setStyle(this.spanElement.nativeElement, 'max-width', `${this.column.width - 20}px`);
+            this.renderer.setStyle(this.spanElement.nativeElement, 'width', `${this.column.width - 20}px`);
+        } else {
+            // TODO - this inhibits resizing the page after the initial load -- but do we care?!?!
+            this.renderer.setStyle(this.spanElement.nativeElement, 'min-width', `${this.elementRef.nativeElement.offsetWidth - 20}px`);
+            this.renderer.setStyle(this.spanElement.nativeElement, 'max-width', `${this.elementRef.nativeElement.offsetWidth - 20}px`);
+            this.renderer.setStyle(this.spanElement.nativeElement, 'width', `${this.elementRef.nativeElement.offsetWidth - 20}px`);
         }
     }
 
