@@ -37,6 +37,7 @@ export class NovoSelection implements OnDestroy {
     @Output() public novoSelectAllToggle = new EventEmitter<boolean>();
 
     public allRows = new Map<string, object>();
+    private throttleTimeout: any;
 
     constructor(public state: NovoActivityTableState) { }
 
@@ -47,9 +48,12 @@ export class NovoSelection implements OnDestroy {
     public deregister(id): void {
         this.allRows.delete(id);
         this.state.selectedRows.delete(id);
-        if (this.state.selectedRows.size === 0) {
-            this.novoSelectAllToggle.emit(false);
-        }
+        clearTimeout(this.throttleTimeout);
+        this.throttleTimeout = setTimeout(() => {
+            if (this.state.selectedRows.size === 0) {
+                this.novoSelectAllToggle.emit(false);
+            }
+        });
     }
 
     public ngOnDestroy(): void {

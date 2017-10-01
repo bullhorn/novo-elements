@@ -54,7 +54,6 @@ export class SimpleTableDemoComponent implements OnInit {
         {
             id: 'id',
             label: 'ID',
-            width: 100,
             renderer: ActivityTableRenderers.propertyRenderer<MockData>('id'),
             config: {
                 sortable: true,
