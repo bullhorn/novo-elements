@@ -1,3 +1,18 @@
+<a name="2.1.12"></a>
+## [2.1.12](https://github.com/bullhorn/novo-elements/compare/v2.1.11...v2.1.12) (2017-10-02)
+
+
+### Bug Fixes
+
+* **textarea:** Fixing how text-area resizes ([9fccd7a](https://github.com/bullhorn/novo-elements/commit/9fccd7a))
+
+
+### Features
+
+* **simpletable:** Adding a simpler table to setup that is very opinionated on how to sort/filter/etc" ([0d3b2dd](https://github.com/bullhorn/novo-elements/commit/0d3b2dd))
+
+
+
 <a name="2.1.11"></a>
 ## [2.1.11](https://github.com/bullhorn/novo-elements/compare/v2.1.10...v2.1.11) (2017-09-27)
 
