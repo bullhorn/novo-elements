@@ -26,7 +26,6 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
 }
 
 @Component({
-    moduleId: module.id,
     selector: '[novo-simple-cell-config]',
     template: `
         <label (click)="sort()" data-automation-id="novo-activity-table-label"><ng-content></ng-content></label>

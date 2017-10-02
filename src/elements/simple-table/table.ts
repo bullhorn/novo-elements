@@ -17,7 +17,6 @@ import { NovoActivityTableState } from './state';
 export const _NovoTable = CdkTable;
 
 @Component({
-    moduleId: module.id,
     selector: 'novo-simple-table',
     template: CDK_TABLE_TEMPLATE,
     encapsulation: ViewEncapsulation.None,
