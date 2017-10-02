@@ -34,8 +34,9 @@ import {
     CategoryDropdownDemoComponent,
     MultiPickerDemoComponent,
     PopOverDemoComponent,
-    SearchDemoComponent,
-    FieldInteractionsDemoComponent
+    FieldInteractionsDemoComponent,
+    SimpleTableDemoComponent,
+    SearchDemoComponent
 } from './../pages/elements';
 
 export const routes: any = [
@@ -65,6 +66,7 @@ export const routes: any = [
     { path: 'select', component: SelectDemoComponent, title: 'Select', section: 'components' },
     { path: 'tabs', component: TabsDemoComponent, title: 'Tabs', section: 'components' },
     { path: 'table', component: TableDemoComponent, title: 'Table', section: 'components' },
+    { path: 'simple-table', component: SimpleTableDemoComponent, title: 'Simple Table', section: 'components' },
     { path: 'list', component: ListDemoComponent, title: 'List', section: 'components' },
     { path: 'header', component: HeaderDemoComponent, title: 'Header', section: 'components' },
     { path: 'switch', component: SwitchDemoComponent, title: 'Switch', section: 'components' },

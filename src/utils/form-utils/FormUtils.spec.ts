@@ -1,7 +1,8 @@
 // NG2
-import {FormGroup} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 // Vendor
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/from';
 // APP
 import {
     AddressControl,
@@ -26,7 +27,7 @@ import { NovoFormControl } from '../../elements/form/NovoFormControl';
 describe('Utils: FormUtils', () => {
     let formUtils;
     beforeEach(() => {
-        formUtils = new FormUtils;
+        formUtils = new FormUtils();
     });
     describe('Method: toFormGroup(controls)', () => {
         it('should create a FormGroup from a collection of controls.', () => {

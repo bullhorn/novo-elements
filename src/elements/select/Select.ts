@@ -63,8 +63,8 @@ export class NovoSelectElement implements OnInit, OnChanges {
     createdItem: any;
     selected: any;
     model: any;
-    onModelChange: Function = () => {};
-    onModelTouched: Function = () => {};
+    onModelChange: Function = () => { };
+    onModelTouched: Function = () => { };
     filterTerm: string = '';
     filterTermTimeout;
     filteredOptions: any;
@@ -75,7 +75,7 @@ export class NovoSelectElement implements OnInit, OnChanges {
     constructor(
         public element: ElementRef,
         public labels: NovoLabelService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.ngOnChanges();
@@ -182,7 +182,7 @@ export class NovoSelectElement implements OnInit, OnChanges {
                     this.saveHeader();
                     return;
                 }
-                this.setValueAndClose({value: this.filteredOptions[this.selectedIndex], index: this.selectedIndex});
+                this.setValueAndClose({ value: this.filteredOptions[this.selectedIndex], index: this.selectedIndex });
                 return;
             }
 

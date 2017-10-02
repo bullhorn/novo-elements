@@ -3,7 +3,8 @@ import { ElementRef, HostListener, Input } from '@angular/core';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 // Vendor
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromPromise';
 import { OverlayRef } from '@angular/cdk/overlay';
 
 /**
@@ -122,8 +123,8 @@ export class BasePickerResults {
                             let defaultOptions = this.config.defaultOptions(term, ++this.page);
                             if (Object.getPrototypeOf(defaultOptions).hasOwnProperty('then')) {
                                 defaultOptions
-                                .then(this.structureArray.bind(this))
-                                .then(resolve, reject);
+                                    .then(this.structureArray.bind(this))
+                                    .then(resolve, reject);
                             } else {
                                 resolve(this.structureArray(defaultOptions));
                             }

@@ -1,6 +1,9 @@
 // NG2
 import { Component, ElementRef, ViewChild, ViewContainerRef, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+// Vendor
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 // APP
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 import { ComponentUtils } from './../../../../utils/component-utils/ComponentUtils';

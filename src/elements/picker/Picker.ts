@@ -3,6 +3,9 @@ import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, View
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 // APP
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
@@ -88,8 +91,8 @@ export class NovoPickerElement implements OnInit {
     resultsComponent: any;
     popup: any;
     _value: any;
-    onModelChange: Function = () => {};
-    onModelTouched: Function = () => {};
+    onModelChange: Function = () => { };
+    onModelTouched: Function = () => { };
 
     constructor(public element: ElementRef, private componentUtils: ComponentUtils, private _changeDetectorRef: ChangeDetectorRef) {
         // Setup handlers
@@ -97,10 +100,10 @@ export class NovoPickerElement implements OnInit {
     }
 
     ngOnInit() {
-        if ( this.overrideElement) {
+        if (this.overrideElement) {
             this.element = this.overrideElement;
         }
-        if ( this.appendToBody) {
+        if (this.appendToBody) {
             console.warn(`'appendToBody' has been deprecated. Please remove this attribute.`);
         }
         // Custom results template

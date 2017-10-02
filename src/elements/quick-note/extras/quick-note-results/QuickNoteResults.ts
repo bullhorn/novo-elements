@@ -1,7 +1,8 @@
 // NG2
 import { Component, ElementRef } from '@angular/core';
 // Vendor
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromPromise';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 import { PickerResults } from '../../../picker/extras/picker-results/PickerResults';

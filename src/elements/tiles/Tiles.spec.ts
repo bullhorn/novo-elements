@@ -17,54 +17,6 @@ describe('Elements: NovoTilesElement', () => {
         component = fixture.debugElement.componentInstance;
     }));
 
-    describe('Method: ngOnInit()', () => {
-        it('should reformat array options to an object', () => {
-            expect(component.ngOnInit).toBeDefined();
-            component.options = [1, 2, 3, 4, 5];
-            component.ngOnInit();
-            expect(component._options).toBeDefined();
-            expect(component._options[0].value).toBe(component.options[0]);
-            expect(component._options[0].label).toBe(component.options[0]);
-        });
-
-        xit('should add checked status to options', () => {
-            component.ngOnInit();
-            expect('checked' in component._options[0]).toBeTruthy();
-        });
-    });
-
-    describe('Method: ngOnChanges()', () => {
-        it('should be defined', () => {
-            expect(component.ngOnChanges).toBeDefined();
-        });
-
-        it('should change the options array if changes exist', () => {
-            spyOn(component, 'setupOptions');
-            component._options = [1, 2, 3, 4, 5];
-            let changeSet = {
-                options: {
-                    previousValue: [1, 2, 3, 4, 5],
-                    currentValue: [5, 4, 3, 2, 1]
-                }
-            };
-            component.ngOnChanges(changeSet);
-            expect(component.setupOptions).toHaveBeenCalled();
-        });
-
-        it('should NOT change the options array there is not previous values', () => {
-            spyOn(component, 'setupOptions');
-            component._options = [1, 2, 3, 4, 5];
-            let changeSet = {
-                options: {
-                    previousValue: {},
-                    currentValue: [5, 4, 3, 2, 1]
-                }
-            };
-            component.ngOnChanges(changeSet);
-            expect(component.setupOptions).not.toHaveBeenCalled();
-        });
-    });
-
     xdescribe('Method: select(event, item)', () => {
         it('should be defined.', () => {
             expect(component.select).toBeDefined();

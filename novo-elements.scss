@@ -6,19 +6,21 @@
 @import "./src/styles/global/variables";
 @import "./src/styles/global/include-media";
 @import "./src/styles/global/flex-grid";
-@import "./src/styles/global/layout"; 
+@import "./src/styles/global/layout";
 @import './src/styles/global/cdk';
-
 @include cdk-overlay();
 // --------------------------------------------------
 // Plugins (Third-Party-Libraries)
 // --------------------------------------------------
-@import "hint"; // --------------------------------------------------
+@import "hint";
+// --------------------------------------------------
 // Content
 // --------------------------------------------------
-@import "./src/styles/content/typography"; // --------------------------------------------------
+@import "./src/styles/content/typography";
+// --------------------------------------------------
 // Elements
 // --------------------------------------------------
+@import "./src/elements/simple-table/table";
 @import "./src/elements/tabs/Tabs";
 @import "./src/elements/radio/Radio";
 @import "./src/elements/button/Button";

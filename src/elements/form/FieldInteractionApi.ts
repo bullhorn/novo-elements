@@ -1,6 +1,8 @@
 // NG2
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+// Vendor
+import 'rxjs/add/operator/map';
 // APP
 import { NovoFormControl } from './NovoFormControl';
 import { NovoControlConfig } from './FormControls';

@@ -34,6 +34,7 @@ export { NovoFormModule } from './src/elements/form/Form.module';
 export { NovoFormExtrasModule } from './src/elements/form/extras/FormExtras.module';
 export { NovoCategoryDropdownModule } from './src/elements/category-dropdown/CategoryDropdown.module';
 export { NovoMultiPickerModule } from './src/elements/multi-picker/MultiPicker.module';
+export * from './src/elements/simple-table';
 // Export specific elements that are used in local references and/or view children
 export { NovoTableElement, NovoTableConfig } from './src/elements/table/Table';
 // Export all services

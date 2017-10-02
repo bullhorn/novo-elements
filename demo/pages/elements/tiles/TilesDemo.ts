@@ -38,6 +38,7 @@ export class TilesDemoComponent {
         }
     ];
     private currentColor: string;
+    public value: string = 'red';
 
     colorSelect(newColorValue) {
         this.currentColor = newColorValue;
@@ -45,5 +46,13 @@ export class TilesDemoComponent {
 
     toggleShown() {
         this.shown = !this.shown;
+    }
+
+    addTile() {
+        this.demoTiles.push({
+            label: 'Blue',
+            value: 'blue'
+        });
+        this.demoTiles = [...this.demoTiles];
     }
 }

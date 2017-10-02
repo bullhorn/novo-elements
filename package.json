@@ -8,7 +8,7 @@
     "compile": "ngc -p tsconfig.publish.json",
     "prepublish": "npm run clean && npm run compile",
     "postpublish": "npm run deploy:gh-pages",
-    "lint": "tslint -s node_modules/custom-tslint-formatters/formatters -t grouped \"src/**/*.ts\" \"demo/**/*.ts\"",
+    "lint": "tslint \"src/**/*.ts\" \"demo/**/*.ts\"",
     "start": "webpack-dev-server --config config/webpack.dev.js --progress --profile --watch --content-base demo/",
     "test": "cross-env NODE_ENV=test node_modules/.bin/karma start",
     "test:watch": "cross-env NODE_ENV=test node_modules/.bin/karma start --single-run false --auto-watch true",
@@ -29,8 +29,7 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },
@@ -88,7 +87,7 @@
     "assets-webpack-plugin": "3.5.0",
     "autoprefixer": "6.5.3",
     "awesome-typescript-loader": "3.2.3",
-    "codelyzer": "3.1.1",
+    "codelyzer": "3.2.0",
     "conventional-changelog": "^1.1.0",
     "conventional-changelog-cli": "^1.2.0",
     "conventional-github-releaser": "^1.1.3",
@@ -133,7 +132,7 @@
     "to-string-loader": "1.1.5",
     "ts-helpers": "1.1.2",
     "ts-node": "1.7.0",
-    "tslint": "5.6.0",
+    "tslint": "5.7.0",
     "tslint-loader": "3.5.3",
     "typescript": "~2.3.3",
     "url-loader": "0.5.7",

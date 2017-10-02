@@ -1,14 +1,15 @@
 // NG2
-import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostBinding, HostListener, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnDestroy, AfterContentInit, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostBinding, HostListener, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/platform-browser';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 // APP
 import { NovoOverlayTemplate } from '../overlay/Overlay';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
-
 
 // Value accessor for the component (supports ngModel)
 const SEARCH_VALUE_ACCESSOR = {
@@ -16,32 +17,34 @@ const SEARCH_VALUE_ACCESSOR = {
     useExisting: forwardRef(() => NovoSearchBoxElement),
     multi: true
 };
+
 @Component({
     selector: 'novo-search',
     providers: [SEARCH_VALUE_ACCESSOR],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <!-- SEARCH ICON -->
-        <button theme="fab" [color]="theme" [icon]="icon" (click)="showSearch()" [tooltip]="hint" tooltipPosition="bottom"></button>
+        <button theme="fab" [color]="theme" [icon]="icon" (click)="showSearch()" [tooltip]="hint" tooltipPosition="bottom" data-automation-id="novo-search-fab"></button>
         <!-- SEARCH INPUT -->
-        <input type="text" [attr.name]="name" [attr.value]="displayValue" [attr.placeholder]="placeholder" (focus)="onFocus()" (blur)="onBlur()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input/>
+        <input type="text" [attr.name]="name" [attr.value]="displayValue" [attr.placeholder]="placeholder" (focus)="onFocus()" (blur)="onBlur()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input data-automation-id="novo-search-input"/>
         <!-- SEARCH OVERLAY -->
         <novo-overlay-template [parent]="element" [closeOnSelect]="closeOnSelect" (select)="closePanel()" (closing)="onBlur()">
             <ng-content></ng-content>
         </novo-overlay-template>
     `
 })
-export class NovoSearchBoxElement implements ControlValueAccessor {
+export class NovoSearchBoxElement implements ControlValueAccessor, OnDestroy, AfterContentInit {
     @Input() public name: string;
     @Input() public icon: string = 'search';
     @Input() public placeholder: string = 'Search...';
-    @Input() public alwaysOpen:boolean = false;
+    @Input() public alwaysOpen: boolean = false;
     @Input() public theme: string = 'positive';
     @Input() public closeOnSelect: boolean = true;
     @Input() public displayField: string;
     @Input() public displayValue: string;
     @Input() public hint: string;
-    @HostBinding('class.focused') focused:boolean = false;
+    @Output() public searchChanged: EventEmitter<string> = new EventEmitter<string>();
+    @HostBinding('class.focused') focused: boolean = false;
     public value: any;
 
     /** View -> model callback called when value changes */
@@ -53,12 +56,26 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     @ViewChild(NovoOverlayTemplate) overlay: any;
     @ViewChild('input') input: any;
 
+    private keyboardObserver: Subscription;
+
     constructor(
         public element: ElementRef,
         public labels: NovoLabelService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _zone: NgZone
-    ) {}
+    ) {
+    }
+
+    public ngAfterContentInit(): void {
+        this.keyboardObserver = Observable.fromEvent(this.input.nativeElement, 'keyup')
+            .debounceTime(300)
+            .subscribe((event: KeyboardEvent) => this.searchChanged.emit(this.input.nativeElement.value))
+    }
+
+    public ngOnDestroy(): void {
+        this.keyboardObserver.unsubscribe();
+    }
+
     /**
      * @name showFasterFind
      * @description This function shows the picker and adds the active class (for animation)
@@ -101,7 +118,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     /** END: Convienient Panel Methods. */
 
     _handleKeydown(event: KeyboardEvent): void {
-        if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB ) && this.panelOpen) {
+        if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
             this.closePanel();
             event.stopPropagation();
         }
@@ -124,7 +141,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     private _setValue(value: any): void {
         this.value = value;
         let toDisplay = value;
-        if ( value && this.displayField ) {
+        if (value && this.displayField) {
             toDisplay = value.hasOwnProperty(this.displayField) ? value[this.displayField] : value;
         }
         // Simply falling back to an empty string if the display value is falsy does not work properly.

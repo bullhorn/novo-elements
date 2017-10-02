@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, SimpleChanges, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, AfterContentInit, OnChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
@@ -22,7 +22,7 @@ const TILES_VALUE_ACCESSOR = {
                     {{ option.label || option}}
                 </label>
             </div>
-            <span class="active-indicator" [@tileState]="state" [hidden]="(activeTile === undefined || activeTile === null)"></span>
+            <span class="active-indicator" [@tileState]="state" [hidden]="activeTile === undefined || activeTile === null"></span>
         </div>
     `,
     animations: [
@@ -36,9 +36,10 @@ const TILES_VALUE_ACCESSOR = {
             transition('inactive => active', animate('200ms ease-in')),
             transition('active => inactive', animate('200ms ease-out'))
         ])
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges {
+export class NovoTilesElement implements ControlValueAccessor, AfterContentInit, OnChanges {
     @Input() name: string;
     @Input() options: any;
     @Input() required: boolean;
@@ -56,20 +57,21 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
     onModelTouched: Function = () => {
     };
 
-    constructor(private element: ElementRef) {
+    constructor(private element: ElementRef, private ref: ChangeDetectorRef) {
     }
 
     public setFocus(focus: boolean): void {
         this.focused = focus;
     }
 
-    ngOnInit() {
+    ngAfterContentInit() {
         this.name = this.name || '';
         this.setupOptions();
     }
 
-    ngOnChanges(change) {
-        if (change.options && change.options.previousValue && change.options.previousValue.length > 0) {
+    ngOnChanges(change: SimpleChanges) {
+        if (change['options'] && change['options'].currentValue && !change['options'].firstChange) {
+            this.name = this.name || '';
             this._options = [];
             this.setupOptions();
         }
@@ -79,6 +81,9 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
         if (this.options && this.options.length && (this.options[0].value === undefined || this.options[0].value === null)) {
             this._options = this.options.map((x) => {
                 let item = { value: x, label: x, checked: this.model === x };
+                if (item.checked) {
+                    this.setTile(item);
+                }
                 return item;
             });
         } else {
@@ -90,12 +95,16 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
                 return x;
             });
         }
+        this.ref.markForCheck();
     }
 
     select(event, item) {
         if (event) {
             event.stopPropagation();
             event.preventDefault();
+        }
+        if (item.checked) {
+            return;
         }
 
         if (!item.disabled) {
@@ -107,9 +116,11 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
             this.onChange.emit(item.value);
             this.onModelChange(item.value);
             this.setTile(item);
+            this.model = item.value;
         } else {
             this.onDisabledOptionClick.emit(item);
         }
+        this.ref.markForCheck();
     }
 
     setTile(item) {
@@ -133,6 +144,7 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, OnChanges
                     ind.style.transform = `translateX(${left}px)`;
                     setTimeout(() => {
                         this.state = 'active';
+                        this.ref.markForCheck();
                     });
                 });
             });

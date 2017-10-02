@@ -75,7 +75,7 @@ export class NovoDatePickerInputElement implements ControlValueAccessor {
     /** END: Convienient Panel Methods. */
 
     _handleKeydown(event: KeyboardEvent): void {
-        if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB ) && this.panelOpen) {
+        if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
             this.closePanel();
             event.stopPropagation();
         }
@@ -107,7 +107,7 @@ export class NovoDatePickerInputElement implements ControlValueAccessor {
 
         // Simply falling back to an empty string if the display value is falsy does not work properly.
         // The display value can also be the number zero and shouldn't fall back to an empty string.
-        const inputValue = toDisplay != null ? toDisplay : '';
+        const inputValue = toDisplay !== null ? toDisplay : '';
 
         this.value = inputValue;
         this.formattedValue = this.formatDateValue(inputValue);
