@@ -92,7 +92,7 @@ export class EntityPickerResult {
         return query && match ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
     }
 
-    getIconForResult(result?: any) {
+    getIconForResult(result?: any): string {
         if (result) {
             switch (result.searchEntity) {
                 case 'ClientContact':
