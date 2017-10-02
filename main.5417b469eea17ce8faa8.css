@@ -75,14 +75,15 @@ template {
 /**
  * Remove the gray background color from active links in IE 10.
  */
-a {
+a, novo-activity-table .clickable {
   background-color: transparent; }
 
 /**
  * Improve readability when focused and also mouse hovered in all browsers.
  */
-a:active,
-a:hover {
+a:active, novo-activity-table .clickable:active,
+a:hover,
+novo-activity-table .clickable:hover {
   outline: 0; }
 
 /* Text-level semantics
@@ -1685,15 +1686,15 @@ span i {
       line-height: 1.7em;
       display: block; }
 
-a {
+a, novo-activity-table .clickable {
   color: #4A89DC;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
   transition: color 200ms ease-in-out; }
-  a:visited {
+  a:visited, novo-activity-table .clickable:visited {
     color: #4A89DC; }
-  a:active, a:hover {
+  a:active, novo-activity-table .clickable:active, a:hover, novo-activity-table .clickable:hover {
     color: #276ecc; }
 
 code {
@@ -1702,6 +1703,275 @@ code {
   border: 1px solid #E9EAEA;
   color: #4C545A;
   padding: 2px 4px; }
+
+novo-simple-table {
+  display: block;
+  min-height: 300px;
+  overflow: auto;
+  -ms-flex: 1;
+      flex: 1; }
+  novo-simple-table.empty {
+    min-height: 40px; }
+  novo-simple-table > .novo-simple-row:nth-of-type(odd) .novo-simple-cell,
+  novo-simple-table > .novo-simple-row:nth-of-type(odd) .novo-simple-button-cell,
+  novo-simple-table > .novo-simple-row:nth-of-type(odd) .novo-simple-dropdown-cell,
+  novo-simple-table > .novo-simple-row:nth-of-type(odd) .novo-simple-checkbox-cell {
+    background-color: #f4f4f4; }
+
+.novo-simple-row,
+.novo-simple-header-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: no-wrap;
+      flex-wrap: no-wrap; }
+  .novo-simple-row .novo-simple-header-cell,
+  .novo-simple-row novo-simple-empty-header-cell,
+  .novo-simple-row .novo-simple-checkbox-header-cell,
+  .novo-simple-header-row .novo-simple-header-cell,
+  .novo-simple-header-row novo-simple-empty-header-cell,
+  .novo-simple-header-row .novo-simple-checkbox-header-cell {
+    border-top: 1px solid #F0F0F0;
+    border-bottom: 1px solid #F0F0F0; }
+
+.novo-simple-cell,
+.novo-simple-header-cell {
+  min-width: 200px;
+  padding: 10px;
+  -ms-flex: 1;
+      flex: 1; }
+  .novo-simple-cell > span,
+  .novo-simple-header-cell > span {
+    display: block;
+    min-width: 180px;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .novo-simple-cell novo-dropdown,
+  .novo-simple-header-cell novo-dropdown {
+    display: inline-block; }
+  .novo-simple-cell button.active,
+  .novo-simple-header-cell button.active {
+    color: #4A89DC; }
+  .novo-simple-cell.clickable,
+  .novo-simple-header-cell.clickable {
+    cursor: pointer;
+    color: #3399DD; }
+
+.novo-simple-cell {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+      align-items: flex-start;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-direction: column;
+      flex-direction: column; }
+
+.novo-simple-header-cell {
+  border-left: 1px solid #F0F0F0;
+  white-space: nowrap;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center; }
+  .novo-simple-header-cell + novo-simple-empty-header-cell {
+    border-left: none; }
+  .novo-simple-header-cell > label {
+    display: inline-block;
+    padding-right: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .novo-simple-header-cell > div {
+    width: 60px; }
+
+novo-simple-empty-header-cell.button-header-cell {
+  min-width: 40px; }
+
+novo-simple-empty-header-cell.dropdown-header-cell {
+  min-width: 98px; }
+
+.novo-simple-button-cell,
+.novo-simple-dropdown-cell {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+      align-items: flex-start;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  padding: 0 5px; }
+  .novo-simple-button-cell novo-dropdown button,
+  .novo-simple-dropdown-cell novo-dropdown button {
+    padding: 5px; }
+    .novo-simple-button-cell novo-dropdown button:hover, .novo-simple-button-cell novo-dropdown button:active, .novo-simple-button-cell novo-dropdown button:focus,
+    .novo-simple-dropdown-cell novo-dropdown button:hover,
+    .novo-simple-dropdown-cell novo-dropdown button:active,
+    .novo-simple-dropdown-cell novo-dropdown button:focus {
+      background: rgba(0, 0, 0, 0.1) !important; }
+
+.novo-simple-checkbox-header-cell,
+.novo-simple-checkbox-cell {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+      align-items: flex-start;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  max-width: 40px;
+  padding: 0 10px; }
+  .novo-simple-checkbox-header-cell > novo-checkbox, .novo-simple-checkbox-header-cell > multi-picker,
+  .novo-simple-checkbox-cell > novo-checkbox,
+  .novo-simple-checkbox-cell > multi-picker {
+    margin-top: -4px; }
+
+novo-activity-table {
+  position: relative;
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex: 1;
+      flex: 1; }
+  novo-activity-table.loading {
+    min-height: 300px; }
+  novo-activity-table header {
+    padding: 5px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-negative: 0;
+        flex-shrink: 0; }
+    novo-activity-table header > novo-search {
+      padding-right: 10px;
+      display: none; }
+      @media (min-width: 1000px) {
+        novo-activity-table header > novo-search {
+          display: -ms-flexbox;
+          display: flex; } }
+      novo-activity-table header > novo-search > input {
+        padding: 8.5px;
+        font-size: 1.1em; }
+      novo-activity-table header > novo-search.active > button[theme="fab"] {
+        height: 35px; }
+    novo-activity-table header > div.novo-activity-table-actions {
+      -ms-flex: 1;
+          flex: 1;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+      novo-activity-table header > div.novo-activity-table-actions > div,
+      novo-activity-table header > div.novo-activity-table-actions > section {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+            align-items: center; }
+        novo-activity-table header > div.novo-activity-table-actions > div button,
+        novo-activity-table header > div.novo-activity-table-actions > section button {
+          margin-left: 3px; }
+        novo-activity-table header > div.novo-activity-table-actions > div button[theme][theme="icon"],
+        novo-activity-table header > div.novo-activity-table-actions > section button[theme][theme="icon"] {
+          height: 35px;
+          width: 35px;
+          font-size: 1.4em; }
+        novo-activity-table header > div.novo-activity-table-actions > div novo-dropdown button[theme],
+        novo-activity-table header > div.novo-activity-table-actions > section novo-dropdown button[theme] {
+          white-space: nowrap;
+          padding: 6px 5px 6px 15px !important; }
+  novo-activity-table button[theme][theme="icon"] {
+    height: 30px;
+    width: 30px;
+    padding: 5px; }
+  novo-activity-table .novo-activity-table-loading-mask {
+    position: absolute;
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: 10%;
+    -ms-flex-pack: center;
+        justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.07);
+    z-index: 9999; }
+  novo-activity-table .novo-activity-table-empty-container,
+  novo-activity-table .novo-activity-table-no-results-container {
+    height: 200px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    color: #999999; }
+
+novo-simple-table-pagination {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center; }
+  novo-simple-table-pagination novo-tiles > .tile-container .tile {
+    padding: 7px 10px; }
+  novo-simple-table-pagination > .novo-simple-table-pagination-size {
+    padding-right: 10px; }
+  novo-simple-table-pagination > .novo-simple-table-range-label-long,
+  novo-simple-table-pagination > .novo-simple-table-range-label-short {
+    padding-right: 10px; }
+  novo-simple-table-pagination > .novo-simple-table-range-label-long {
+    display: none; }
+    @media (min-width: 1000px) {
+      novo-simple-table-pagination > .novo-simple-table-range-label-long {
+        display: block; } }
+  novo-simple-table-pagination > .novo-simple-table-range-label-short {
+    display: block; }
+    @media (min-width: 1000px) {
+      novo-simple-table-pagination > .novo-simple-table-range-label-short {
+        display: none; } }
+  novo-simple-table-pagination > button:first-of-type {
+    margin-right: 5px; }
+  novo-simple-table-pagination > button span {
+    display: none; }
+    @media (min-width: 1000px) {
+      novo-simple-table-pagination > button span {
+        display: block; } }
+  novo-simple-table-pagination > button[theme][theme="dialogue"][icon][side="left"] {
+    padding: 5px; }
+    @media (min-width: 1000px) {
+      novo-simple-table-pagination > button[theme][theme="dialogue"][icon][side="left"] {
+        padding: 5px 15px 5px 5px; } }
+  novo-simple-table-pagination > button[theme][theme="dialogue"][icon][side="right"] {
+    padding: 5px; }
+    @media (min-width: 1000px) {
+      novo-simple-table-pagination > button[theme][theme="dialogue"][icon][side="right"] {
+        padding: 5px 5px 5px 15px; } }
+
+.simple-table-dropdown .header {
+  padding: 5px 10px 0px 10px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center; }
+  .simple-table-dropdown .header button {
+    padding: 3px; }
+    .simple-table-dropdown .header button icon {
+      font-size: 0.8em; }
+
+.simple-table-dropdown list item.active {
+  background: transparent;
+  font-weight: 500; }
 
 novo-nav {
   background: rgba(0, 0, 0, 0.15);
@@ -2296,7 +2566,7 @@ button[theme] {
         button[theme][theme="dialogue"][icon] i:before {
           vertical-align: baseline; }
       button[theme][theme="dialogue"][icon][side="left"] {
-        padding: 6px 15px 6px 5px; }
+        padding: 5px 15px 5px 5px; }
         button[theme][theme="dialogue"][icon][side="left"] i {
           margin-right: 5px; }
       button[theme][theme="dialogue"][icon][side="right"] {
@@ -6618,7 +6888,7 @@ novo-dropdown-container {
     text-align: left; }
     novo-dropdown-container list item span {
       display: inline-block; }
-    novo-dropdown-container list item a {
+    novo-dropdown-container list item a, novo-dropdown-container list item novo-activity-table .clickable, novo-activity-table novo-dropdown-container list item .clickable {
       color: inherit;
       font-weight: inherit;
       cursor: pointer;
@@ -6629,7 +6899,7 @@ novo-dropdown-container {
       -ms-flex-align: center;
           align-items: center;
       height: 48px; }
-      novo-dropdown-container list item a:focus, novo-dropdown-container list item a:visited, novo-dropdown-container list item a:active, novo-dropdown-container list item a:hover {
+      novo-dropdown-container list item a:focus, novo-dropdown-container list item novo-activity-table .clickable:focus, novo-activity-table novo-dropdown-container list item .clickable:focus, novo-dropdown-container list item a:visited, novo-dropdown-container list item novo-activity-table .clickable:visited, novo-activity-table novo-dropdown-container list item .clickable:visited, novo-dropdown-container list item a:active, novo-dropdown-container list item novo-activity-table .clickable:active, novo-activity-table novo-dropdown-container list item .clickable:active, novo-dropdown-container list item a:hover, novo-dropdown-container list item novo-activity-table .clickable:hover, novo-activity-table novo-dropdown-container list item .clickable:hover {
         color: inherit;
         font-weight: inherit; }
     novo-dropdown-container list item i {
@@ -8912,14 +9182,21 @@ novo-table {
     .table novo-checkbox .check-box-group .bhi-checkbox-indeterminate, .table multi-picker .check-box-group .bhi-checkbox-indeterminate {
       color: #4A89DC; }
 
-novo-dropdown-container.table-dropdown {
+novo-dropdown-container.table-dropdown, novo-dropdown-container.simple-table-dropdown {
   right: -15px;
   min-width: 230px;
   max-width: 230px;
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: auto; }
-  novo-dropdown-container.table-dropdown list item.filter-search {
+  novo-dropdown-container.table-dropdown button[theme][theme="dialogue"][icon] i, novo-dropdown-container.simple-table-dropdown button[theme][theme="dialogue"][icon] i {
+    padding: inherit;
+    padding-left: 5px;
+    height: inherit;
+    width: inherit;
+    display: inline-block;
+    line-height: inherit; }
+  novo-dropdown-container.table-dropdown list item.filter-search, novo-dropdown-container.simple-table-dropdown list item.filter-search {
     padding: 10px 0;
     width: 100%;
     height: auto;
@@ -8928,9 +9205,9 @@ novo-dropdown-container.table-dropdown {
     -ms-flex-align: start;
         align-items: flex-start;
     cursor: initial; }
-    novo-dropdown-container.table-dropdown list item.filter-search:hover {
+    novo-dropdown-container.table-dropdown list item.filter-search:hover, novo-dropdown-container.simple-table-dropdown list item.filter-search:hover {
       background: transparent; }
-    novo-dropdown-container.table-dropdown list item.filter-search .header {
+    novo-dropdown-container.table-dropdown list item.filter-search .header, novo-dropdown-container.simple-table-dropdown list item.filter-search .header {
       display: -ms-flexbox;
       display: flex;
       -ms-flex-align: center;
@@ -8940,47 +9217,47 @@ novo-dropdown-container.table-dropdown {
       width: 90%;
       font-size: 0.9em;
       margin: 0 auto; }
-      novo-dropdown-container.table-dropdown list item.filter-search .header span {
+      novo-dropdown-container.table-dropdown list item.filter-search .header span, novo-dropdown-container.simple-table-dropdown list item.filter-search .header span {
         text-transform: uppercase;
         font-weight: 400; }
-      novo-dropdown-container.table-dropdown list item.filter-search .header button {
+      novo-dropdown-container.table-dropdown list item.filter-search .header button, novo-dropdown-container.simple-table-dropdown list item.filter-search .header button {
         padding: 0 5px; }
-        novo-dropdown-container.table-dropdown list item.filter-search .header button i {
+        novo-dropdown-container.table-dropdown list item.filter-search .header button i, novo-dropdown-container.simple-table-dropdown list item.filter-search .header button i {
           height: auto !important;
           width: auto !important;
           font-size: 0.9em; }
-    novo-dropdown-container.table-dropdown list item.filter-search input {
+    novo-dropdown-container.table-dropdown list item.filter-search input, novo-dropdown-container.simple-table-dropdown list item.filter-search input {
       border: none;
       border-bottom: 2px solid #BEBEBE;
       width: 90%;
       margin: 0 auto;
       background: transparent; }
-      novo-dropdown-container.table-dropdown list item.filter-search input:focus {
+      novo-dropdown-container.table-dropdown list item.filter-search input:focus, novo-dropdown-container.simple-table-dropdown list item.filter-search input:focus {
         outline: none;
         border-bottom: 2px solid #4A89DC; }
-  novo-dropdown-container.table-dropdown list item > span {
+  novo-dropdown-container.table-dropdown list item > span, novo-dropdown-container.simple-table-dropdown list item > span {
     display: inline-block;
     max-width: calc(100% - 20px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; }
-  novo-dropdown-container.table-dropdown .calender-container {
+  novo-dropdown-container.table-dropdown .calender-container, novo-dropdown-container.simple-table-dropdown .calender-container {
     height: 100%;
     min-height: 200px;
     width: 100%;
     background: #fff; }
-    novo-dropdown-container.table-dropdown .calender-container > div {
+    novo-dropdown-container.table-dropdown .calender-container > div, novo-dropdown-container.simple-table-dropdown .calender-container > div {
       color: #4A89DC;
       line-height: 3em;
       font-size: 0.9em;
       padding-left: 5px;
       cursor: pointer; }
-    novo-dropdown-container.table-dropdown .calender-container novo-date-picker .calendar {
+    novo-dropdown-container.table-dropdown .calender-container novo-date-picker .calendar, novo-dropdown-container.simple-table-dropdown .calender-container novo-date-picker .calendar {
       width: 100%;
       height: 100%;
       box-shadow: none;
       padding: 0 5px 10px; }
-      novo-dropdown-container.table-dropdown .calender-container novo-date-picker .calendar .calendar-top {
+      novo-dropdown-container.table-dropdown .calender-container novo-date-picker .calendar .calendar-top, novo-dropdown-container.simple-table-dropdown .calender-container novo-date-picker .calendar .calendar-top {
         display: none; }
 
 .table-condensed tbody tr td,
@@ -8999,6 +9276,13 @@ novo-dropdown-container.table-dropdown {
     padding: 5px !important;
     width: inherit !important;
     height: inherit !important; }
+  .table-condensed tbody tr td .th-title,
+  .table-condensed tbody tr th .th-title,
+  .table-condensed thead tr td .th-title,
+  .table-condensed thead tr th .th-title,
+  .table-condensed tfoot tr td .th-title,
+  .table-condensed tfoot tr th .th-title {
+    padding: 5px 5px 5px 0; }
 
 .table-bordered tbody tr td,
 .table-bordered tbody tr th,
@@ -10945,6 +11229,7 @@ novo-form {
                       box-shadow: none;
                       box-sizing: content-box;
                       transition: all 300ms;
+                      transition: height 0ms;
                       color: #26282B; }
                       novo-dynamic-form .novo-form-container form div.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input textarea:hover,
                       novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input textarea:hover,
@@ -12403,14 +12688,14 @@ novo-category-dropdown {
       display: flex;
       -ms-flex-pack: end;
           justify-content: flex-end; }
-      novo-category-dropdown .dropdown-container footer > a {
+      novo-category-dropdown .dropdown-container footer > a, novo-category-dropdown .dropdown-container novo-activity-table footer > .clickable, novo-activity-table novo-category-dropdown .dropdown-container footer > .clickable {
         margin-left: 10px;
         margin-right: 0;
         font-weight: 500; }
       novo-category-dropdown .dropdown-container footer.novo-category-dropdown-footer-align-left {
         -ms-flex-pack: start;
             justify-content: flex-start; }
-        novo-category-dropdown .dropdown-container footer.novo-category-dropdown-footer-align-left > a {
+        novo-category-dropdown .dropdown-container footer.novo-category-dropdown-footer-align-left > a, novo-category-dropdown .dropdown-container novo-activity-table footer.novo-category-dropdown-footer-align-left > .clickable, novo-activity-table novo-category-dropdown .dropdown-container footer.novo-category-dropdown-footer-align-left > .clickable {
           margin-right: 10px;
           margin-left: 0; }
     novo-category-dropdown .dropdown-container novo-nav {
@@ -12508,7 +12793,7 @@ popover-content .popover {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1060;
+  z-index: 10000;
   display: none;
   width: 400px;
   padding: 23px 20px 16px 20px;
@@ -13034,7 +13319,7 @@ nav.main-nav {
   color: #ffffff;
   background-color: #1B2127;
   overflow-y: scroll;
-  z-index: 1000; }
+  z-index: 9999; }
   nav.main-nav .fork-me {
     width: 80%;
     margin: 20px auto 40px;
@@ -13432,104 +13717,104 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 34px;
-      height: 34px; }
+      width: 30px;
+      height: 30px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 27px;
-      height: 27px; }
+      width: 31px;
+      height: 31px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 39px;
-      height: 39px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 35px;
-      height: 35px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 44px;
-      height: 44px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 37px;
-      height: 37px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
-      width: 41px;
-      height: 41px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-submission {
       background: #a9adbb;
-      width: 35px;
-      height: 35px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-sendout {
       background: #747884;
-      width: 37px;
-      height: 37px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
       width: 39px;
       height: 39px; }
     color header .background-boxes .bb-note {
       background: #747884;
-      width: 41px;
-      height: 41px; }
+      width: 40px;
+      height: 40px; }
     color header .background-boxes .bb-task {
       background: #4f5361;
-      width: 27px;
-      height: 27px; }
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-distributionList {
       background: #4f5361;
-      width: 36px;
-      height: 36px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-credential {
       background: #4f5361;
-      width: 42px;
-      height: 42px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-user {
       background: #4f5361;
-      width: 35px;
-      height: 35px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-corporateuser {
       background: #4f5361;
       width: 29px;
       height: 29px; }
     color header .background-boxes .bb-aqua {
       background: #3BAFDA;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
       width: 30px;
       height: 30px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-mint {
       background: #37BC9B;
-      width: 35px;
-      height: 35px; }
+      width: 26px;
+      height: 26px; }
     color header .background-boxes .bb-grass {
       background: #8CC152;
-      width: 37px;
-      height: 37px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-sunflower {
       background: #F6B042;
-      width: 36px;
-      height: 36px; }
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
-      width: 41px;
-      height: 41px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
       width: 34px;
       height: 34px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 28px;
+      height: 28px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 45px;
-      height: 45px; }
+      width: 36px;
+      height: 36px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 32px;
-      height: 32px; }
+      width: 42px;
+      height: 42px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -14628,10 +14913,19 @@ field-interactions-demo main.tabs {
     field-interactions-demo main.tabs novo-nav-outlet novo-form {
       border-bottom: 1px solid #E9EAEA; }
 
+.status-new {
+  background-color: #fbd9a3; }
+
+.status-active {
+  background-color: #7fdac3; }
+
+.status-archived {
+  background-color: #f5b3a1; }
+
 .pipes-demo {
   padding-left: 5px; }
 
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.b6de68a81ad0f6134373.bundle.map*/
+/*# sourceMappingURL=main.5417b469eea17ce8faa8.bundle.map*/
