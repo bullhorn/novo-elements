@@ -1,10 +1,5 @@
-//
-// Popovers
-// --------------------------------------------------
-
 @mixin reset-text() {
-    font-family: $base-font-family;
-    // We deliberately do NOT reset font-size.
+    font-family: $base-font-family; // We deliberately do NOT reset font-size.
     font-style: normal;
     font-weight: normal;
     letter-spacing: normal;
@@ -26,19 +21,15 @@ popover-content {
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 1060;
+        z-index: 10000;
         display: none;
         width: 400px;
         padding: 23px 20px 16px 20px;
-        // Our parent element can be arbitrary since popovers are by default inserted as a sibling of their target element.
-        // So reset our font and text properties to avoid inheriting weird values.
         @include reset-text;
         font-size: 14px;
-
         background-color: #fff;
         background-clip: padding-box;
         box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
-
         &.top {
             margin-top: -10px;
             &.virtual-area {
@@ -46,13 +37,13 @@ popover-content {
             }
         }
         &.right {
-            margin-left: 10px; 
+            margin-left: 10px;
             &.virtual-area {
                 left: -11px;
             }
         }
         &.bottom {
-            margin-top: 10px; 
+            margin-top: 10px;
             &.virtual-area {
                 top: -11px;
             }
@@ -67,11 +58,9 @@ popover-content {
             height: 11px;
             width: 100%;
             position: absolute;
-        }
-
-        // Arrows
+        } // Arrows
         // .arrow is outer, .arrow:after is inner
-        &.top > .arrow {
+        &.top>.arrow {
             margin-left: -9px;
             border-bottom-width: 0;
             border-top-color: rgba(0, 0, 0, 0.10);
@@ -93,7 +82,7 @@ popover-content {
                 left: 9%;
             }
         }
-        &.right > .arrow {
+        &.right>.arrow {
             left: -9px;
             margin-top: -9px;
             border-left-width: 0;
@@ -115,7 +104,7 @@ popover-content {
                 top: 9%;
             }
         }
-        &.bottom > .arrow {
+        &.bottom>.arrow {
             margin-left: -9px;
             border-top-width: 0;
             border-bottom-color: rgba(0, 0, 0, 0.10);
@@ -137,7 +126,7 @@ popover-content {
                 left: 9%;
             }
         }
-        &.left > .arrow {
+        &.left>.arrow {
             right: -9px;
             margin-top: -9px;
             border-right-width: 0;
@@ -160,7 +149,7 @@ popover-content {
             }
         }
     }
-    .popover > .arrow {
+    .popover>.arrow {
         border-width: 9px;
         &,
         &:after {

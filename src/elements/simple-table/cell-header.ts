@@ -30,40 +30,42 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
     selector: '[novo-simple-cell-config]',
     template: `
         <label (click)="sort()" data-automation-id="novo-activity-table-label"><ng-content></ng-content></label>
-        <button *ngIf="config.sortable" theme="icon" [icon]="icon" (click)="sort()" [class.active]="sortActive" data-automation-id="novo-activity-table-sort"></button>
-        <novo-dropdown *ngIf="config.filterable" appendToBody="true" parentScrollSelector=".novo-simple-table" containerClass="simple-table-dropdown" data-automation-id="novo-activity-table-filter">
-            <button type="button" theme="icon" icon="filter" [class.active]="filterActive"></button>
-            <div class="header">
-                <span>{{ labels.filters }}</span>
-                <button theme="dialogue" color="negative" icon="times" (click)="clearFilter()" *ngIf="filter">{{ labels.clear }}</button>
-            </div>
-            <ng-container [ngSwitch]="config.filterConfig.type">
-                <list *ngSwitchCase="'date'">
-                    <ng-container *ngIf="!showCustomRange">
-                        <item [class.active]="activeDateFilter === option.label" *ngFor="let option of config.filterConfig.options" (click)="filterData(option)">
-                            {{ option.label }} <i class="bhi-check" *ngIf="activeDateFilter === option.label"></i>
+        <div>
+            <button *ngIf="config.sortable" theme="icon" [icon]="icon" (click)="sort()" [class.active]="sortActive" data-automation-id="novo-activity-table-sort"></button>
+            <novo-dropdown *ngIf="config.filterable" appendToBody="true" parentScrollSelector=".novo-simple-table" containerClass="simple-table-dropdown" data-automation-id="novo-activity-table-filter">
+                <button type="button" theme="icon" icon="filter" [class.active]="filterActive"></button>
+                <div class="header">
+                    <span>{{ labels.filters }}</span>
+                    <button theme="dialogue" color="negative" icon="times" (click)="clearFilter()" *ngIf="filter">{{ labels.clear }}</button>
+                </div>
+                <ng-container [ngSwitch]="config.filterConfig.type">
+                    <list *ngSwitchCase="'date'">
+                        <ng-container *ngIf="!showCustomRange">
+                            <item [class.active]="activeDateFilter === option.label" *ngFor="let option of config.filterConfig.options" (click)="filterData(option)">
+                                {{ option.label }} <i class="bhi-check" *ngIf="activeDateFilter === option.label"></i>
+                            </item>
+                        </ng-container>
+                        <item [class.active]="labels.customDateRange === activeDateFilter" (click)="showCustomRange = true" *ngIf="config.filterConfig.allowCustomRange && !showCustomRange" [keepOpen]="true">
+                            {{ labels.customDateRange }} <i class="bhi-check" *ngIf="labels.customDateRange === activeDateFilter"></i>
                         </item>
-                    </ng-container>
-                    <item [class.active]="labels.customDateRange === activeDateFilter" (click)="showCustomRange = true" *ngIf="config.filterConfig.allowCustomRange && !showCustomRange" [keepOpen]="true">
-                        {{ labels.customDateRange }} <i class="bhi-check" *ngIf="labels.customDateRange === activeDateFilter"></i>
-                    </item>
-                    <div class="calender-container" *ngIf="showCustomRange">
-                        <div (click)="showCustomRange = false"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
-                        <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true"></novo-date-picker>
-                    </div>
-                </list>
-                <list *ngSwitchCase="'select'">
-                    <item [class.active]="filter === option" *ngFor="let option of config.filterConfig.options" (click)="filterData(option)">
-                        <span>{{ option?.label || option }}</span> <i class="bhi-check" *ngIf="filter === option"></i>
-                    </item>
-                </list>
-                <list *ngSwitchDefault>
-                    <item class="filter-search" keepOpen="true">
-                        <input type="text" [(ngModel)]="filter" (ngModelChange)="filterData()" novoSimpleFilterFocus/>
-                    </item>
-                </list>
-            </ng-container>
-        </novo-dropdown>
+                        <div class="calender-container" *ngIf="showCustomRange">
+                            <div (click)="showCustomRange = false"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
+                            <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true"></novo-date-picker>
+                        </div>
+                    </list>
+                    <list *ngSwitchCase="'select'">
+                        <item [class.active]="filter === option" *ngFor="let option of config.filterConfig.options" (click)="filterData(option)">
+                            <span>{{ option?.label || option }}</span> <i class="bhi-check" *ngIf="filter === option"></i>
+                        </item>
+                    </list>
+                    <list *ngSwitchDefault>
+                        <item class="filter-search" keepOpen="true">
+                            <input type="text" [(ngModel)]="filter" (ngModelChange)="filterData()" novoSimpleFilterFocus/>
+                        </item>
+                    </list>
+                </ng-container>
+            </novo-dropdown>
+        </div>
     `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

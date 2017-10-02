@@ -10,8 +10,10 @@ novo-simple-table {
         min-height: 40px;
     }
     >.novo-simple-row:nth-of-type(odd) {
-        background-color: $table-bg-accent;
-        td {
+        .novo-simple-cell,
+        .novo-simple-button-cell,
+        .novo-simple-dropdown-cell,
+        .novo-simple-checkbox-cell {
             background-color: $table-bg-accent;
         }
     }
@@ -22,13 +24,12 @@ novo-simple-table {
     display: flex;
     flex-direction: row;
     flex-wrap: no-wrap;
-    width: fit-content;
-    min-width: 100%;
-}
-
-.novo-simple-header-row {
-    border-top: 1px solid #F0F0F0;
-    border-bottom: 1px solid #F0F0F0;
+    .novo-simple-header-cell,
+    novo-simple-empty-header-cell,
+    .novo-simple-checkbox-header-cell {
+        border-top: 1px solid #F0F0F0;
+        border-bottom: 1px solid #F0F0F0;
+    }
 }
 
 .novo-simple-cell,
@@ -65,13 +66,20 @@ novo-simple-table {
 .novo-simple-header-cell {
     border-left: 1px solid #F0F0F0;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
     +novo-simple-empty-header-cell {
         border-left: none;
     }
     >label {
         display: inline-block;
-        padding-right: 5px;
+        padding-right: 10px;
         cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    >div {
+        width: 60px;
     }
 }
 
@@ -110,8 +118,10 @@ novo-simple-empty-header-cell {
     justify-content: center;
     flex-direction: column;
     max-width: 40px;
-    margin-top: -4px;
     padding: 0 10px;
+    >novo-checkbox {
+        margin-top: -4px;
+    }
 }
 
 novo-activity-table {

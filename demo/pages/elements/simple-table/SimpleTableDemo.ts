@@ -74,7 +74,7 @@ export class SimpleTableDemoComponent implements OnInit {
         },
         {
             id: 'name',
-            label: 'Name',
+            label: 'Name asdfasdf asdfasfdasdfsafdasd',
             renderer: ActivityTableRenderers.propertyRenderer<MockData>('name'),
             renderType: 'link',
             onClick: this.log.bind(this),
