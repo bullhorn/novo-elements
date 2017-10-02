@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy, Directive, HostListener, AfterContentInit } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
 // APP
@@ -16,6 +16,34 @@ export interface IMaskOptions {
     keepCharPositions: boolean;
     guide: boolean;
 };
+
+@Directive({
+    selector: 'textarea[autosize]'
+})
+export class NovoAutoSize implements AfterContentInit {
+    @HostListener('input', ['$event.target'])
+    onInput(textArea: HTMLTextAreaElement): void {
+        this.adjust();
+    }
+
+    constructor(public element: ElementRef) { }
+
+    ngAfterContentInit(): void {
+        setTimeout(() => {
+            this.adjust();
+        });
+    }
+
+    adjust(): void {
+        let hasValue = this.element.nativeElement.value.length !== 0;
+        this.element.nativeElement.style.overflow = 'hidden';
+        if (hasValue) {
+            this.element.nativeElement.style.height = Math.min((this.element.nativeElement.scrollHeight - 11), 300) + 'px';
+        } else {
+            this.element.nativeElement.style.height = '14px';
+        }
+    }
+}
 
 @Component({
     selector: 'novo-custom-control-container',
@@ -105,7 +133,7 @@ export class NovoCustomControlContainerElement {
                                 <label class="input-label" *ngIf="form.controls[control.key].subType === 'percentage'">%</label>
                             </div>
                             <!--TextArea-->
-                            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></textarea>
+                            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" autosize (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></textarea>
                             <!--Editor-->
                             <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
                             <!--HTML5 Select-->
@@ -403,14 +431,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         this.formattedValue = null;
     }
 
-    resizeTextArea(event) {
-        // Reset the heighte
-        event.target.style.height = 'auto';
-        event.target.style.height = event.target.value.length > 0 ? `${event.target.scrollHeight - 14}px` : '2rem';
-    }
-
     handleTextAreaInput(event) {
-        this.resizeTextArea(event);
         this.emitChange(event);
         this.restrictKeys(event);
     }
