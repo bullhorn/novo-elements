@@ -1,3 +1,13 @@
+<a name="2.1.15"></a>
+## [2.1.15](https://github.com/bullhorn/novo-elements/compare/v2.1.14...v2.1.15) (2017-10-03)
+
+
+### Bug Fixes
+
+* **table:** Fixing some state issues with the table ([ad3e423](https://github.com/bullhorn/novo-elements/commit/ad3e423))
+
+
+
 <a name="2.1.14"></a>
 ## [2.1.14](https://github.com/bullhorn/novo-elements/compare/v2.1.13...v2.1.14) (2017-10-03)
 
