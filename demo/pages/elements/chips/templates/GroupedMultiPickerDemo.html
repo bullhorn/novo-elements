@@ -1,0 +1,20 @@
+<h6>Basic Static Example</h6>
+<p>Fully static data, optional "all" category</p>
+<div class="selected-value">Selected Value: {{ groupedMultiPicker1Value }}</div>
+<chips [source]="groupedMultiPicker1" [placeholder]="placeholder" [(ngModel)]="groupedMultiPicker1Value" (changed)="onChanged($event)"></chips>
+
+<br/>
+<br/>
+
+<h6>Custom Static Example</h6>
+<p>Fully static data, all category turned off</p>
+<div class="selected-value">Selected Value: {{ groupedMultiPicker2Value }}</div>
+<chips [source]="groupedMultiPicker2" [placeholder]="placeholder" [(ngModel)]="groupedMultiPicker2Value" (changed)="onChanged($event)"></chips>
+
+<br/>
+<br/>
+
+<h6>Basic Async Example</h6>
+<p>Category list is static (always has to be) with the items fetched via async call</p>
+<div class="selected-value">Selected Value: {{ groupedMultiPicker3Value }}</div>
+<chips [source]="groupedMultiPicker3" [placeholder]="placeholder" [(ngModel)]="groupedMultiPicker3Value" (changed)="onChanged($event)"></chips>
