@@ -6493,8 +6493,110 @@ picker-results {
 entity-picker-results {
   min-width: 250px; }
 
-chips, multi-picker, novo-chips,
-entity-chips, novo-entity-chips {
+grouped-multi-picker-results {
+  background-color: #ffffff;
+  max-height: 300px;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  border: 1px solid #4A89DC;
+  transform: translateY(0%);
+  transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row; }
+  grouped-multi-picker-results novo-list-item {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: none;
+    -ms-flex-negative: 0;
+        flex-shrink: 0; }
+    grouped-multi-picker-results novo-list-item.disabled {
+      pointer-events: none;
+      opacity: 0.75; }
+  grouped-multi-picker-results > .grouped-multi-picker-groups {
+    overflow: auto;
+    -ms-flex: 1;
+        flex: 1;
+    border-right: 1px solid #F0F0F0; }
+    grouped-multi-picker-results > .grouped-multi-picker-groups novo-list-item {
+      font-weight: 500;
+      color: #999999;
+      border-left: 3px solid #ffffff; }
+      grouped-multi-picker-results > .grouped-multi-picker-groups novo-list-item .list-item {
+        -ms-flex-pack: center;
+            justify-content: center; }
+      grouped-multi-picker-results > .grouped-multi-picker-groups novo-list-item item-end {
+        color: #999999; }
+      grouped-multi-picker-results > .grouped-multi-picker-groups novo-list-item.active {
+        color: #4A89DC;
+        border-left-color: #4A89DC;
+        background-color: #E9E9E9; }
+        grouped-multi-picker-results > .grouped-multi-picker-groups novo-list-item.active item-end {
+          color: #4A89DC; }
+        grouped-multi-picker-results > .grouped-multi-picker-groups novo-list-item.active .list-item > item-content > * {
+          color: #4A89DC !important; }
+  grouped-multi-picker-results > .grouped-multi-picker-matches {
+    -ms-flex: 1;
+        flex: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column; }
+    grouped-multi-picker-results > .grouped-multi-picker-matches novo-list {
+      overflow: auto; }
+    grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container {
+      position: relative; }
+      grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container input {
+        font-size: 1em;
+        padding: 0.95em;
+        background: transparent !important;
+        border: none;
+        border-bottom: 1px solid #F0F0F0;
+        border-radius: 0;
+        border-radius: 0;
+        outline: none;
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+        transition: all 300ms;
+        color: #26282B; }
+        grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container input:hover {
+          border-bottom: 1px solid #F0F0F0; }
+        grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container input:focus {
+          border-bottom: 1px solid #4A89DC; }
+        grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container input[disabled] {
+          pointer-events: none;
+          opacity: 0.4; }
+      grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container i.bhi-search,
+      grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container i.bhi-times {
+        position: absolute;
+        right: 10px;
+        top: 14px;
+        font-size: 1.2em; }
+        grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container i.bhi-search.disabled,
+        grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container i.bhi-times.disabled {
+          pointer-events: none;
+          opacity: 0.4; }
+      grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container i.bhi-times {
+        cursor: pointer;
+        top: 13px; }
+    grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-no-results,
+    grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-loading {
+      -ms-flex: 1;
+          flex: 1;
+      -ms-flex-pack: center;
+          justify-content: center;
+      -ms-flex-align: center;
+          align-items: center;
+      display: -ms-flexbox;
+      display: flex; }
+
+chips, multi-picker,
+novo-chips,
+entity-chips,
+novo-entity-chips {
   width: 100%;
   display: -ms-flexbox;
   display: flex;
@@ -6508,22 +6610,36 @@ entity-chips, novo-entity-chips {
   transition: all 200ms ease-in-out;
   position: relative;
   padding: 5px 20px 5px 0; }
-  chips.with-value, multi-picker.with-value, novo-chips.with-value,
-  entity-chips.with-value, novo-entity-chips.with-value {
+  chips.with-value, multi-picker.with-value,
+  novo-chips.with-value,
+  entity-chips.with-value,
+  novo-entity-chips.with-value {
     margin-bottom: 20px; }
-  chips:hover, multi-picker:hover, novo-chips:hover,
-  entity-chips:hover, novo-entity-chips:hover {
+  chips:hover, multi-picker:hover,
+  novo-chips:hover,
+  entity-chips:hover,
+  novo-entity-chips:hover {
     border-bottom: 1px solid #afb9c0; }
-  chips.selected, multi-picker.selected, chips.selected:hover, multi-picker.selected:hover, novo-chips.selected, novo-chips.selected:hover,
+  chips.selected, multi-picker.selected, chips.selected:hover, multi-picker.selected:hover,
+  novo-chips.selected,
+  novo-chips.selected:hover,
   entity-chips.selected,
-  entity-chips.selected:hover, novo-entity-chips.selected, novo-entity-chips.selected:hover {
+  entity-chips.selected:hover,
+  novo-entity-chips.selected,
+  novo-entity-chips.selected:hover {
     border-bottom: 1px solid #4A89DC; }
-    chips.selected + i, multi-picker.selected + i, chips.selected:hover + i, multi-picker.selected:hover + i, novo-chips.selected + i, novo-chips.selected:hover + i,
+    chips.selected + i, multi-picker.selected + i, chips.selected:hover + i, multi-picker.selected:hover + i,
+    novo-chips.selected + i,
+    novo-chips.selected:hover + i,
     entity-chips.selected + i,
-    entity-chips.selected:hover + i, novo-entity-chips.selected + i, novo-entity-chips.selected:hover + i {
+    entity-chips.selected:hover + i,
+    novo-entity-chips.selected + i,
+    novo-entity-chips.selected:hover + i {
       color: #4A89DC; }
-  chips chip, multi-picker chip, novo-chips chip,
-  entity-chips chip, novo-entity-chips chip {
+  chips chip, multi-picker chip,
+  novo-chips chip,
+  entity-chips chip,
+  novo-entity-chips chip {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-positive: inherit;
@@ -6541,15 +6657,19 @@ entity-chips, novo-entity-chips {
     max-width: 180px;
     border: 1px solid transparent;
     transition: all 200ms ease-in-out; }
-    chips chip span, multi-picker chip span, novo-chips chip span,
-    entity-chips chip span, novo-entity-chips chip span {
+    chips chip span, multi-picker chip span,
+    novo-chips chip span,
+    entity-chips chip span,
+    novo-entity-chips chip span {
       vertical-align: middle;
       display: -ms-flexbox;
       display: flex;
       -ms-flex-align: center;
           align-items: center; }
-      chips chip span span, multi-picker chip span span, novo-chips chip span span,
-      entity-chips chip span span, novo-entity-chips chip span span {
+      chips chip span span, multi-picker chip span span,
+      novo-chips chip span span,
+      entity-chips chip span span,
+      novo-entity-chips chip span span {
         color: #4A89DC;
         cursor: pointer;
         max-width: 115px;
@@ -6557,50 +6677,76 @@ entity-chips, novo-entity-chips {
         white-space: nowrap;
         text-overflow: ellipsis;
         display: block; }
-      chips chip span i, multi-picker chip span i, novo-chips chip span i,
-      entity-chips chip span i, novo-entity-chips chip span i {
+      chips chip span i, multi-picker chip span i,
+      novo-chips chip span i,
+      entity-chips chip span i,
+      novo-entity-chips chip span i {
         font-size: 0.8em; }
-        chips chip span i:before, multi-picker chip span i:before, novo-chips chip span i:before,
-        entity-chips chip span i:before, novo-entity-chips chip span i:before {
+        chips chip span i:before, multi-picker chip span i:before,
+        novo-chips chip span i:before,
+        entity-chips chip span i:before,
+        novo-entity-chips chip span i:before {
           vertical-align: baseline !important; }
-    chips chip i.bhi-close, multi-picker chip i.bhi-close, novo-chips chip i.bhi-close,
-    entity-chips chip i.bhi-close, novo-entity-chips chip i.bhi-close {
+    chips chip i.bhi-close, multi-picker chip i.bhi-close,
+    novo-chips chip i.bhi-close,
+    entity-chips chip i.bhi-close,
+    novo-entity-chips chip i.bhi-close {
       margin-left: 10px;
       cursor: pointer;
       color: #c8c8c8; }
-      chips chip i.bhi-close:before, multi-picker chip i.bhi-close:before, novo-chips chip i.bhi-close:before,
-      entity-chips chip i.bhi-close:before, novo-entity-chips chip i.bhi-close:before {
+      chips chip i.bhi-close:before, multi-picker chip i.bhi-close:before,
+      novo-chips chip i.bhi-close:before,
+      entity-chips chip i.bhi-close:before,
+      novo-entity-chips chip i.bhi-close:before {
         vertical-align: baseline; }
-      chips chip i.bhi-close:hover, multi-picker chip i.bhi-close:hover, novo-chips chip i.bhi-close:hover,
-      entity-chips chip i.bhi-close:hover, novo-entity-chips chip i.bhi-close:hover {
+      chips chip i.bhi-close:hover, multi-picker chip i.bhi-close:hover,
+      novo-chips chip i.bhi-close:hover,
+      entity-chips chip i.bhi-close:hover,
+      novo-entity-chips chip i.bhi-close:hover {
         color: #959595; }
-    chips chip.selected, multi-picker chip.selected, novo-chips chip.selected,
-    entity-chips chip.selected, novo-entity-chips chip.selected {
+    chips chip.selected, multi-picker chip.selected,
+    novo-chips chip.selected,
+    entity-chips chip.selected,
+    novo-entity-chips chip.selected {
       border: 1px solid #4A89DC; }
-  chips .chip-input-container, multi-picker .chip-input-container, novo-chips .chip-input-container,
-  entity-chips .chip-input-container, novo-entity-chips .chip-input-container {
+  chips .chip-input-container, multi-picker .chip-input-container,
+  novo-chips .chip-input-container,
+  entity-chips .chip-input-container,
+  novo-entity-chips .chip-input-container {
     -ms-flex-positive: 4;
         flex-grow: 4; }
-    chips .chip-input-container input, multi-picker .chip-input-container input, novo-chips .chip-input-container input,
-    entity-chips .chip-input-container input, novo-entity-chips .chip-input-container input {
+    chips .chip-input-container input, multi-picker .chip-input-container input,
+    novo-chips .chip-input-container input,
+    entity-chips .chip-input-container input,
+    novo-entity-chips .chip-input-container input {
       padding-top: 0;
       border: none;
       background: transparent;
       width: 100%; }
-      chips .chip-input-container input:focus, multi-picker .chip-input-container input:focus, novo-chips .chip-input-container input:focus,
-      entity-chips .chip-input-container input:focus, novo-entity-chips .chip-input-container input:focus {
+      chips .chip-input-container input:focus, multi-picker .chip-input-container input:focus,
+      novo-chips .chip-input-container input:focus,
+      entity-chips .chip-input-container input:focus,
+      novo-entity-chips .chip-input-container input:focus {
         outline: none; }
-  chips novo-picker, multi-picker novo-picker, novo-chips novo-picker,
-  entity-chips novo-picker, novo-entity-chips novo-picker {
+  chips novo-picker, multi-picker novo-picker,
+  novo-chips novo-picker,
+  entity-chips novo-picker,
+  novo-entity-chips novo-picker {
     position: inherit; }
-    chips novo-picker > i, multi-picker novo-picker > i, novo-chips novo-picker > i,
-    entity-chips novo-picker > i, novo-entity-chips novo-picker > i {
+    chips novo-picker > i, multi-picker novo-picker > i,
+    novo-chips novo-picker > i,
+    entity-chips novo-picker > i,
+    novo-entity-chips novo-picker > i {
       display: none; }
-    chips novo-picker div.picker-results-container, multi-picker novo-picker div.picker-results-container, novo-chips novo-picker div.picker-results-container,
-    entity-chips novo-picker div.picker-results-container, novo-entity-chips novo-picker div.picker-results-container {
+    chips novo-picker div.picker-results-container, multi-picker novo-picker div.picker-results-container,
+    novo-chips novo-picker div.picker-results-container,
+    entity-chips novo-picker div.picker-results-container,
+    novo-entity-chips novo-picker div.picker-results-container {
       left: 0; }
-  chips label.clear-all, multi-picker label.clear-all, novo-chips label.clear-all,
-  entity-chips label.clear-all, novo-entity-chips label.clear-all {
+  chips label.clear-all, multi-picker label.clear-all,
+  novo-chips label.clear-all,
+  entity-chips label.clear-all,
+  novo-entity-chips label.clear-all {
     -ms-flex: 1 100%;
         flex: 1 100%;
     position: absolute;
@@ -6613,38 +6759,54 @@ entity-chips, novo-entity-chips {
     display: flex;
     -ms-flex-align: center;
         align-items: center; }
-    chips label.clear-all i, multi-picker label.clear-all i, novo-chips label.clear-all i,
-    entity-chips label.clear-all i, novo-entity-chips label.clear-all i {
+    chips label.clear-all i, multi-picker label.clear-all i,
+    novo-chips label.clear-all i,
+    entity-chips label.clear-all i,
+    novo-entity-chips label.clear-all i {
       font-size: 0.7rem;
       padding-bottom: 2px;
       margin-left: 5px; }
-  chips i.bhi-search, multi-picker i.bhi-search, novo-chips i.bhi-search,
-  entity-chips i.bhi-search, novo-entity-chips i.bhi-search {
+  chips i.bhi-search, multi-picker i.bhi-search,
+  novo-chips i.bhi-search,
+  entity-chips i.bhi-search,
+  novo-entity-chips i.bhi-search {
     position: absolute;
     bottom: 8px;
     right: 0;
     font-size: 1.2em; }
-    chips i.bhi-search.has-value, multi-picker i.bhi-search.has-value, novo-chips i.bhi-search.has-value,
-    entity-chips i.bhi-search.has-value, novo-entity-chips i.bhi-search.has-value {
-      bottom: 20px; }
+    chips i.bhi-search.has-value, multi-picker i.bhi-search.has-value,
+    novo-chips i.bhi-search.has-value,
+    entity-chips i.bhi-search.has-value,
+    novo-entity-chips i.bhi-search.has-value {
+      bottom: 14px; }
 
-chips, multi-picker, novo-chips,
-entity-chips, novo-entity-chips {
+chips, multi-picker,
+novo-chips,
+entity-chips,
+novo-entity-chips {
   padding: 2px 0; }
-  chips + i, multi-picker + i, novo-chips + i,
-  entity-chips + i, novo-entity-chips + i {
+  chips + i, multi-picker + i,
+  novo-chips + i,
+  entity-chips + i,
+  novo-entity-chips + i {
     position: absolute;
     right: 0;
     bottom: 7px; }
-  chips novo-picker, multi-picker novo-picker, novo-chips novo-picker,
-  entity-chips novo-picker, novo-entity-chips novo-picker {
+  chips novo-picker, multi-picker novo-picker,
+  novo-chips novo-picker,
+  entity-chips novo-picker,
+  novo-entity-chips novo-picker {
     padding-bottom: 0; }
-    chips novo-picker > input, multi-picker novo-picker > input, novo-chips novo-picker > input,
-    entity-chips novo-picker > input, novo-entity-chips novo-picker > input {
+    chips novo-picker > input, multi-picker novo-picker > input,
+    novo-chips novo-picker > input,
+    entity-chips novo-picker > input,
+    novo-entity-chips novo-picker > input {
       border: none;
       border-bottom: none !important; }
-  chips.with-value, multi-picker.with-value, novo-chips.with-value,
-  entity-chips.with-value, novo-entity-chips.with-value {
+  chips.with-value, multi-picker.with-value,
+  novo-chips.with-value,
+  entity-chips.with-value,
+  novo-entity-chips.with-value {
     margin-bottom: 0; }
 
 chips chip span.contact, multi-picker chip span.contact, chips chip span.clientcontact, multi-picker chip span.clientcontact,
@@ -13717,104 +13879,104 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 30px;
-      height: 30px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 31px;
-      height: 31px; }
+      width: 30px;
+      height: 30px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 38px;
-      height: 38px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 29px;
-      height: 29px; }
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 32px;
-      height: 32px; }
+      width: 28px;
+      height: 28px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 32px;
-      height: 32px; }
+      width: 30px;
+      height: 30px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
       width: 45px;
       height: 45px; }
     color header .background-boxes .bb-submission {
       background: #a9adbb;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 40px;
-      height: 40px; }
-    color header .background-boxes .bb-task {
-      background: #4f5361;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-distributionList {
-      background: #4f5361;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-credential {
-      background: #4f5361;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-user {
-      background: #4f5361;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-corporateuser {
-      background: #4f5361;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 26px;
-      height: 26px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-carnation {
-      background: #D770AD;
       width: 36px;
       height: 36px; }
-    color header .background-boxes .bb-lavender {
-      background: #967ADC;
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
       width: 42px;
       height: 42px; }
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-task {
+      background: #4f5361;
+      width: 31px;
+      height: 31px; }
+    color header .background-boxes .bb-distributionList {
+      background: #4f5361;
+      width: 30px;
+      height: 30px; }
+    color header .background-boxes .bb-credential {
+      background: #4f5361;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-user {
+      background: #4f5361;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-corporateuser {
+      background: #4f5361;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 43px;
+      height: 43px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-carnation {
+      background: #D770AD;
+      width: 27px;
+      height: 27px; }
+    color header .background-boxes .bb-lavender {
+      background: #967ADC;
+      width: 30px;
+      height: 30px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -14676,7 +14838,8 @@ picker-demo div.selected-value {
   margin-bottom: 10px; }
 
 chips-demo .chips-demo {
-  padding: 10px; }
+  padding: 10px;
+  padding-bottom: 30px; }
 
 chips-demo div.selected-value {
   margin-bottom: 10px; }
@@ -14928,4 +15091,4 @@ field-interactions-demo main.tabs {
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.5417b469eea17ce8faa8.bundle.map*/
+/*# sourceMappingURL=main.2a2b13b47552e9bb9c1e.bundle.map*/
