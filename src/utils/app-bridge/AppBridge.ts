@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 // Vendor
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/toPromise';
 
 export enum AppBridgeHandler {
     HTTP,
@@ -66,14 +67,14 @@ declare const postRobot: any;
 
 export class AppBridgeService {
     create(name: string) {
-        return new AppBridge(name, false);
+        return new AppBridge(name);
     }
 }
 
 export class DevAppBridgeService {
     constructor(private http: Http) { }
     create(name: string) {
-        return new AppBridge(name, true, this.http);
+        return new DevAppBridge(name, this.http);
     }
 }
 
@@ -88,14 +89,12 @@ export class AppBridge {
     private _eventListeners: any = {};
 
     // Type?
-    constructor(traceName?: string, developmentMode?: boolean, http?: Http) {
+    constructor(traceName: string = 'AppBridge') {
         this.traceName = traceName;
         if (postRobot) {
             postRobot.CONFIG.LOG_LEVEL = 'error';
             try {
-                if (!developmentMode) {
-                    this._setupHandlers();
-                }
+                this._setupHandlers();
             } catch (error) {
                 // No op
             }
@@ -116,7 +115,7 @@ export class AppBridge {
         }
     }
 
-    private _setupHandlers(): void {
+    protected _setupHandlers(): void {
         // Register
         postRobot.on(MESSAGE_TYPES.REGISTER, (event) => {
             this._trace(MESSAGE_TYPES.REGISTER, event);
@@ -587,5 +586,74 @@ export class AppBridge {
             this._eventListeners[event] = [];
         }
         this._eventListeners[event].push(callback);
+    }
+}
+
+export class DevAppBridge extends AppBridge {
+    
+    private baseURL: string; 
+    
+    constructor(traceName: string = 'DevAppBridge', private http: Http) {
+        super(traceName);    
+        let cookie = this.getCookie('UlEncodedIdentity');
+        if (cookie && cookie.length) {
+            let identity = JSON.parse(decodeURIComponent(cookie));
+            let endpoints = identity.sessions.reduce((obj, session) => {
+                obj[session.name] = session.value.endpoint;
+                return obj;
+            }, {});
+            this.baseURL = endpoints.rest;
+        } 
+    }
+    protected _setupHandlers(): void {}
+
+     /**
+     * Fires or responds to an HTTP_GET event
+     * @param packet any - packet of data to send with the event
+     */
+    public httpGET(relativeURL: string): Promise<any> {
+        return this.http.get(`${this.baseURL}/${relativeURL}`, { withCredentials: true }).map(res => ({ data: res.json() })).toPromise();
+    }
+     
+
+    /**
+     * Fires or responds to an HTTP_POST event
+     * @param packet any - packet of data to send with the event
+     */
+    public httpPOST(relativeURL: string, postData: any): Promise<any> {
+        return this.http.post(`${this.baseURL}/${relativeURL}`, postData, { withCredentials: true }).map(res => ({ data: res.json() })).toPromise();
+    }
+
+    /**
+     * Fires or responds to an HTTP_PUT event
+     * @param packet any - packet of data to send with the event
+     */
+    public httpPUT(relativeURL: string, putData: any): Promise<any> {
+        return this.http.put(`${this.baseURL}/${relativeURL}`, putData, { withCredentials: true }).map(res => ({ data: res.json() })).toPromise();
+    }
+
+    /**
+     * Fires or responds to an HTTP_DELETE event
+     * @param packet any - packet of data to send with the event
+     */
+    public httpDELETE(relativeURL: string): Promise<any> {
+        return this.http.delete(`${this.baseURL}/${relativeURL}`, { withCredentials: true }).map(res => ({ data: res.json() })).toPromise();
+    }
+
+    private getCookie(cname: string): any {
+        if (document) {
+            let name = `${cname}=`;
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) === 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+        }
+        return false;
     }
 }
