@@ -3,6 +3,7 @@ import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, View
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { Observable } from 'rxjs/Observable';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -75,6 +76,14 @@ export class NovoPickerElement implements OnInit {
     // Autoselects the first option in the results
     @Input() autoSelectFirstOption: boolean = true;
     @Input() overrideElement: ElementRef;
+    // Disable from typing into the picker (result template does everything)
+    @Input() set disablePickerInput(v: boolean) {
+        this._disablePickerInput = coerceBooleanProperty(v);
+    }
+    get disablePickerInput() {
+        return this._disablePickerInput;
+    }
+    private _disablePickerInput: boolean = false;
 
     // Emitter for selects
     @Output() select: EventEmitter<any> = new EventEmitter();
@@ -154,7 +163,10 @@ export class NovoPickerElement implements OnInit {
     }
 
     onKeyDown(event: KeyboardEvent) {
-        if (this.panelOpen) {
+        if (this.disablePickerInput) {
+            Helpers.swallowEvent(event);
+        }
+        if (this.panelOpen && !this.disablePickerInput) {
             if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB) {
                 this.hideResults();
                 return;

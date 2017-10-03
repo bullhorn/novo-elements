@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, OnDestroy, AfterContentInit, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostBinding, HostListener, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostBinding, HostListener, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/platform-browser';
@@ -33,7 +33,7 @@ const SEARCH_VALUE_ACCESSOR = {
         </novo-overlay-template>
     `
 })
-export class NovoSearchBoxElement implements ControlValueAccessor, OnDestroy, AfterContentInit {
+export class NovoSearchBoxElement implements ControlValueAccessor {
     @Input() public name: string;
     @Input() public icon: string = 'search';
     @Input() public placeholder: string = 'Search...';
@@ -56,24 +56,12 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnDestroy, Af
     @ViewChild(NovoOverlayTemplate) overlay: any;
     @ViewChild('input') input: any;
 
-    private keyboardObserver: Subscription;
-
     constructor(
         public element: ElementRef,
         public labels: NovoLabelService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _zone: NgZone
     ) {
-    }
-
-    public ngAfterContentInit(): void {
-        this.keyboardObserver = Observable.fromEvent(this.input.nativeElement, 'keyup')
-            .debounceTime(300)
-            .subscribe((event: KeyboardEvent) => this.searchChanged.emit(this.input.nativeElement.value))
-    }
-
-    public ngOnDestroy(): void {
-        this.keyboardObserver.unsubscribe();
     }
 
     /**
@@ -126,7 +114,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnDestroy, Af
     _handleInput(event: KeyboardEvent): void {
         if (document.activeElement === event.target) {
             this._onChange((event.target as HTMLInputElement).value);
-            //this.openPanel();
+            this.searchChanged.emit((event.target as HTMLInputElement).value)
         }
     }
     writeValue(value: any): void {

@@ -22,7 +22,6 @@ grouped-multi-picker-results {
     >.grouped-multi-picker-groups {
         overflow: auto;
         flex: 1;
-        border-right: 1px solid #F0F0F0;
         novo-list-item {
             font-weight: 500;
             color: #999999;
@@ -61,6 +60,7 @@ grouped-multi-picker-results {
                 background: transparent !important;
                 border: none;
                 border-bottom: 1px solid #F0F0F0;
+                border-left: 1px solid #F0F0F0;
                 border-radius: 0;
                 border-radius: 0;
                 outline: none;
@@ -74,6 +74,7 @@ grouped-multi-picker-results {
                 }
                 &:focus {
                     border-bottom: 1px solid $positive;
+                    border-left: 1px solid $positive;
                 }
                 &[disabled] {
                     pointer-events: none;
@@ -84,7 +85,7 @@ grouped-multi-picker-results {
             i.bhi-times {
                 position: absolute;
                 right: 10px;
-                top: 14px;
+                top: 12px;
                 font-size: 1.2em;
                 &.disabled {
                     pointer-events: none;
@@ -93,9 +94,16 @@ grouped-multi-picker-results {
             }
             i.bhi-times {
                 cursor: pointer;
-                top: 13px;
+                font-size: 1.1em;
             }
         }
+        .grouped-multi-picker-list-container {
+            border-left: 1px solid #F0F0F0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .grouped-multi-picker-no-category,
         .grouped-multi-picker-no-results,
         .grouped-multi-picker-loading {
             flex: 1;

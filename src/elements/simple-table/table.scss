@@ -81,6 +81,9 @@ novo-simple-table {
     >div {
         width: 60px;
     }
+    novo-dropdown[side=right] {
+        display: inline-block;
+    }
 }
 
 novo-simple-empty-header-cell {
@@ -147,6 +150,7 @@ novo-activity-table {
             >input {
                 padding: 8.5px;
                 font-size: 1.1em;
+                height: 35px;
             }
             &.active>button[theme="fab"] {
                 height: 35px;

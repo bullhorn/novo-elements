@@ -78,6 +78,7 @@ export class NovoLabelService {
     actions = 'Actions';
     all = 'All';
     groupedMultiPickerEmpty = 'No items to display';
+    groupedMultiPickerSelectCategory = 'Select a category from the right to get started';
 
     selectedRecords(selected: number) {
         return `Only ${selected} records selected.`;

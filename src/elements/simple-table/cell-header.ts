@@ -31,7 +31,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
         <label (click)="sort()" data-automation-id="novo-activity-table-label"><ng-content></ng-content></label>
         <div>
             <button *ngIf="config.sortable" theme="icon" [icon]="icon" (click)="sort()" [class.active]="sortActive" data-automation-id="novo-activity-table-sort"></button>
-            <novo-dropdown *ngIf="config.filterable" appendToBody="true" parentScrollSelector=".novo-simple-table" containerClass="simple-table-dropdown" data-automation-id="novo-activity-table-filter">
+            <novo-dropdown *ngIf="config.filterable" side="right" appendToBody="true" parentScrollSelector=".novo-simple-table" containerClass="simple-table-dropdown" data-automation-id="novo-activity-table-filter">
                 <button type="button" theme="icon" icon="filter" [class.active]="filterActive"></button>
                 <div class="header">
                     <span>{{ labels.filters }}</span>

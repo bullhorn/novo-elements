@@ -44,24 +44,29 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                 <i class="bhi-search" *ngIf="!searchTerm" [class.disabled]="isLoading"></i>
                 <i class="bhi-times" *ngIf="searchTerm" (click)="clearSearchTerm($event)" [class.disabled]="isLoading"></i>
             </div>
-            <novo-list direction="vertical" #list>
-                <novo-list-item
-                    *ngFor="let match of matches"
-                    (click)="selectMatch($event)"
-                    [class.active]="match === activeMatch"
-                    (mouseenter)="selectActive(match)"
-                    [class.disabled]="preselected(match)"
-                    [class.disabled]="isLoading">
-                    <item-content>
-                        <span>{{ match.label }}</span>
-                    </item-content>
-                </novo-list-item>
-            </novo-list>
-            <div class="grouped-multi-picker-no-results" *ngIf="matches.length === 0 && !isLoading">
-                {{ labels.groupedMultiPickerEmpty }}
-            </div>
-            <div class="grouped-multi-picker-loading" *ngIf="isLoading">
-                <novo-loading theme="line"></novo-loading>
+            <div class="grouped-multi-picker-list-container">
+                <novo-list direction="vertical" #list>
+                    <novo-list-item
+                        *ngFor="let match of matches"
+                        (click)="selectMatch($event)"
+                        [class.active]="match === activeMatch"
+                        (mouseenter)="selectActive(match)"
+                        [class.disabled]="preselected(match)"
+                        [class.disabled]="isLoading">
+                        <item-content>
+                            <span>{{ match.label }}</span>
+                        </item-content>
+                    </novo-list-item>
+                </novo-list>
+                <div class="grouped-multi-picker-no-results" *ngIf="matches.length === 0 && !isLoading && selectedCategory">
+                    {{ labels.groupedMultiPickerEmpty }}
+                </div>
+                <div class="grouped-multi-picker-no-category" *ngIf="matches.length === 0 && !isLoading && !selectedCategory">
+                    {{ labels.groupedMultiPickerSelectCategory }}
+                </div>
+                <div class="grouped-multi-picker-loading" *ngIf="isLoading">
+                    <novo-loading theme="line"></novo-loading>
+                </div>
             </div>
         </div>
     `
@@ -81,13 +86,14 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
         if (this.config.displayAll && this.config.getItemsForCategoryAsync) {
             throw new Error('[NovoChips] - you can only have `displayAll` with a static `categoryMap`. Not available with `getItemsForCategoryAsync`');
         }
+        // Configure ALL
         if (this.config.displayAll) {
-            // Focus
-            setTimeout(() => {
-                this.inputElement.nativeElement.focus();
-            });
             this.setAllCategory();
         }
+        // Focus
+        setTimeout(() => {
+            this.inputElement.nativeElement.focus();
+        });
     }
 
     get categories() {
@@ -151,6 +157,9 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
                     this.internalMap.set(key, { value: category.value, label: category.label, items: items });
                     this.matches = this.filter(items);
                     this.isLoading = false;
+                    setTimeout(() => {
+                        this.inputElement.nativeElement.focus();
+                    });
                 });
             } else {
                 this.matches = this.filter(this.internalMap.get(key).items);
@@ -162,6 +171,12 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
         Helpers.swallowEvent(event);
         this.searchTerm = '';
         this.selectCategory({ value: this.selectedCategory, label: '' });
+    }
+
+    public selectMatch(event?: MouseEvent, item?: { value: string, label: string }): boolean {
+        // Set focus
+        this.inputElement.nativeElement.focus();
+        return super.selectMatch(event, item);
     }
 
     filterData(): { value: string, label: string }[] {

@@ -71,7 +71,7 @@ export class NovoActivityTableNoResultsMessage { }
                 <ng-content select="[novo-activity-table-actions]"></ng-content>
             </div>
         </header>
-        <div class="novo-activity-table-loading-mask" *ngIf="dataSource?.loading || loading">
+        <div class="novo-activity-table-loading-mask" *ngIf="dataSource?.loading || loading" data-automation-id="novo-activity-table-loading">
             <novo-loading></novo-loading>
         </div>
         <novo-simple-table *ngIf="(columns?.length > 0)" [dataSource]="dataSource" novoSortFilter novoSelection [class.empty]="dataSource?.currentlyEmpty && state.userFiltered" [hidden]="dataSource?.totallyEmpty && !userFiltered">

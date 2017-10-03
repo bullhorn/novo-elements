@@ -85,7 +85,7 @@ export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnD
     public selectAll: boolean = false;
     private selectAllSubscription: Subscription;
 
-    constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2, @Optional() private _selection: NovoSelection) {
+    constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2, ref: ChangeDetectorRef, @Optional() private _selection: NovoSelection) {
         super(columnDef, elementRef, renderer);
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-checkbox-column-header-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, `novo-checkbox-column-${columnDef.cssClassFriendlyName}`);
@@ -93,6 +93,7 @@ export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnD
 
         this.selectAllSubscription = _selection.novoSelectAllToggle.subscribe((value: boolean) => {
             this.selectAll = value;
+            ref.markForCheck();
         });
     }
 

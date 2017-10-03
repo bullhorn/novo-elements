@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit,
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 // APP
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
@@ -75,6 +76,7 @@ export class NovoChipElement {
                 clearValueOnSelect="true"
                 [closeOnSelect]="closeOnSelect"
                 [config]="source"
+                [disablePickerInput]="disablePickerInput"
                 [placeholder]="placeholder"
                 [(ngModel)]="itemToAdd"
                 (select)="add($event)"
@@ -101,6 +103,13 @@ export class NovoChipsElement implements OnInit {
     @Input() placeholder: string = '';
     @Input() source: any;
     @Input() type: any;
+    @Input() set disablePickerInput(v: boolean) {
+        this._disablePickerInput = coerceBooleanProperty(v);
+    }
+    get disablePickerInput() {
+        return this._disablePickerInput;
+    }
+    private _disablePickerInput: boolean = false;
 
     @Output() changed: EventEmitter<any> = new EventEmitter();
     @Output() focus: EventEmitter<any> = new EventEmitter();

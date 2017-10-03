@@ -1,11 +1,11 @@
 .status-new {
-    background-color: lighten($sunflower, 20%);
+    background-color: lighten($sunflower, 20%) !important;
 }
 
 .status-active {
-    background-color: lighten($mint, 20%);
+    background-color: lighten($mint, 20%) !important;
 }
 
 .status-archived {
-    background-color: lighten($bittersweet, 20%);
+    background-color: lighten($bittersweet, 20%) !important;
 }
