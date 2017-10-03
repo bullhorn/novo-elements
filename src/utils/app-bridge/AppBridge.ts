@@ -1,5 +1,6 @@
 // NG2
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 // Vendor
 import { Subject } from 'rxjs/Subject';
 
@@ -63,6 +64,19 @@ const MESSAGE_TYPES = {
 
 declare const postRobot: any;
 
+export class AppBridgeService {
+    create(name: string) {
+        return new AppBridge(name, false);
+    }
+}
+
+export class DevAppBridgeService {
+    constructor(private http: Http) { }
+    create(name: string) {
+        return new AppBridge(name, true, this.http);
+    }
+}
+
 export class AppBridge {
     public id: string = `${Date.now()}`;
     public traceName: string;
@@ -74,12 +88,14 @@ export class AppBridge {
     private _eventListeners: any = {};
 
     // Type?
-    constructor(traceName?: string) {
+    constructor(traceName?: string, developmentMode?: boolean, http?: Http) {
         this.traceName = traceName;
         if (postRobot) {
             postRobot.CONFIG.LOG_LEVEL = 'error';
             try {
-                this._setupHandlers();
+                if (!developmentMode) {
+                    this._setupHandlers();
+                }
             } catch (error) {
                 // No op
             }

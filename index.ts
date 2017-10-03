@@ -91,7 +91,7 @@ export {
     GetDayViewArgs
 } from './src/utils/calendar-utils/CalendarUtils';
 export * from './src/utils/calendar-utils/CalendarUtils';
-export { AppBridge, AppBridgeHandler, IAppBridgeOpenEvent } from './src/utils/app-bridge/AppBridge';
+export { AppBridge, AppBridgeHandler, IAppBridgeOpenEvent, AppBridgeService, DevAppBridgeService } from './src/utils/app-bridge/AppBridge';
 // Providers
 export { NovoElementProviders } from './novo-elements.providers';
 // Pipes

@@ -1,7 +1,7 @@
 // NG2
 import { Component, OnInit } from '@angular/core';
 // Vendor
-import { AppBridge, AppBridgeHandler } from './../../../../index';
+import { AppBridge, AppBridgeHandler, AppBridgeService } from './../../../../index';
 
 @Component({
     selector: 'app-bridge-demo',
@@ -10,11 +10,13 @@ import { AppBridge, AppBridgeHandler } from './../../../../index';
 export class AppBridgeDemoComponent implements OnInit {
     appBridge: AppBridge;
 
+    constructor(private appBridgeService: AppBridgeService) { }
+
     public ngOnInit(): void {
         // This is how to setup a parent, if you are a third-party developer then
         // you will not have to do these steps, look in the Bullhorn starter repositories
         // for how to setup this on your custom components
-        this.appBridge = new AppBridge('NovoElements(Parent)');
+        this.appBridge = this.appBridgeService.create('NovoElements(Parent)');
         this.appBridge.register();
         this.appBridge.tracing = true;
 
