@@ -1,3 +1,18 @@
+<a name="2.1.17"></a>
+## [2.1.17](https://github.com/bullhorn/novo-elements/compare/v2.1.16...v2.1.17) (2017-10-03)
+
+
+### Bug Fixes
+
+* **textarea:** Allow for scrolling and resizing ([f379601](https://github.com/bullhorn/novo-elements/commit/f379601))
+
+
+### Features
+
+* **AppBridge:** Added a Developer mode for AppBridge ([#560](https://github.com/bullhorn/novo-elements/issues/560)) ([b53bafa](https://github.com/bullhorn/novo-elements/commit/b53bafa))
+
+
+
 <a name="2.1.16"></a>
 ## [2.1.16](https://github.com/bullhorn/novo-elements/compare/v2.1.15...v2.1.16) (2017-10-03)
 
