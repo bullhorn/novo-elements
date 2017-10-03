@@ -1,3 +1,14 @@
+<a name="2.1.13"></a>
+## [2.1.13](https://github.com/bullhorn/novo-elements/compare/v2.1.12...v2.1.13) (2017-10-03)
+
+
+### Features
+
+* **grouped-multi-picker:** Adding result template for Chips for a category picker ([161ff58](https://github.com/bullhorn/novo-elements/commit/161ff58))
+* **grouped-multi-picker:** Adding result template for Chips for a category picker ([2466bfc](https://github.com/bullhorn/novo-elements/commit/2466bfc))
+
+
+
 <a name="2.1.12"></a>
 ## [2.1.12](https://github.com/bullhorn/novo-elements/compare/v2.1.11...v2.1.12) (2017-10-02)
 
