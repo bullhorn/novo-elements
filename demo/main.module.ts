@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule, Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Vendor
-import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService, FieldInteractionApi, NovoToastService, NovoModalService } from './../index';
+import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService, FieldInteractionApi, NovoToastService, NovoModalService, AppBridgeService, DevAppBridgeService } from './../index';
 // APP
 import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
 import { MultiCodeSnippet } from './elements/codesnippet/MultiCodeSnippet';
@@ -61,6 +61,13 @@ export function provideFieldInteractionAPI(toast, modal, formUtils, http, labels
         TEST: 'I AM A GLOBAL!'
     };
     return fieldInteractionApi;
+}
+
+export function provideAppBridgeService(http) {
+    if (ENV === 'development') {
+        return new DevAppBridgeService(http);
+    }
+    return new AppBridgeService();
 }
 
 @NgModule({
@@ -142,6 +149,11 @@ export function provideFieldInteractionAPI(toast, modal, formUtils, http, labels
             provide: FieldInteractionApi,
             useFactory: provideFieldInteractionAPI,
             deps: [NovoToastService, NovoModalService, FormUtils, Http, NovoLabelService]
+        },
+        {
+            provide: AppBridgeService,
+            useFactory: provideAppBridgeService,
+            deps: [Http]
         }
     ],
     entryComponents: [
