@@ -46,7 +46,7 @@ export class NovoControlCustom implements OnInit {
     selector: 'novo-fieldset',
     template: `
         <div class="novo-fieldset-container">
-            <novo-fieldset-header [icon]="icon" [title]="title" *ngIf="title"></novo-fieldset-header>
+            <novo-fieldset-header [icon]="icon" [title]="title" *ngIf="title" [id]="id"></novo-fieldset-header>
             <div *ngFor="let control of controls" class="novo-form-row" [class.disabled]="control.disabled">
                 <novo-control *ngIf="!control.customControl" [control]="control" [form]="form"></novo-control>
                 <novo-control-custom *ngIf="control.customControl" [control]="control" [form]="form"></novo-control-custom>
@@ -59,6 +59,7 @@ export class NovoFieldsetElement {
     @Input() form: any;
     @Input() title: string;
     @Input() icon: string;
+    @Input() id: string;
 }
 
 @Component({
@@ -69,9 +70,16 @@ export class NovoFieldsetElement {
                 <ng-content select="form-title"></ng-content>
                 <ng-content select="form-subtitle"></ng-content>
             </header>
-            <form class="novo-form" [formGroup]="form" autocomplete="off">
+            <novo-nav id="FormSections" *ngIf="fieldsets && fieldsets.length > 1" theme="white">
+                <span *ngFor="let fieldset of fieldsets">
+                    <novo-tab *ngIf="fieldset.sectionHeaderId" scrollTo [scrollTargetSelector]="getId(fieldset)">
+                            <i class="bhi-section"></i> {{fieldset.title || 'Top'}}
+                    </novo-tab>
+                </span>
+            </novo-nav>
+            <form class="novo-form" [formGroup]="form" autocomplete="off" id="formTop">
                 <span *ngFor="let fieldset of form.fieldsets">
-                    <novo-fieldset *ngIf="fieldset.controls.length" [icon]="fieldset.icon" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
+                    <novo-fieldset *ngIf="fieldset.controls.length" [icon]="fieldset.icon" [controls]="fieldset.controls" [title]="fieldset.title" [id]="fieldset.sectionHeaderId" [form]="form"></novo-fieldset>
                 </span>
             </form>
         </div>
@@ -107,28 +115,10 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
                 this.numControls = this.numControls + fieldset.controls.length;
             });
         }
+    }
 
-        let requiredFields: Array<any> = [];
-        let nonRequiredFields: Array<any> = [];
-        this.fieldsets.forEach(fieldset => {
-            fieldset.controls.forEach(control => {
-                if (control.required) {
-                    requiredFields.push(control);
-                } else {
-                    nonRequiredFields.push(control);
-                }
-            });
-        });
-        this.allFieldsRequired = requiredFields.length === this.numControls;
-        this.allFieldsNotRequired = nonRequiredFields.length === this.numControls;
-        if (this.allFieldsNotRequired && this.hideNonRequiredFields) {
-            this.fieldsets.forEach(fieldset => {
-                fieldset.controls.forEach(control => {
-                    this.form.controls[control.key].hidden = false;
-                });
-            });
-        }
-        this.form.fieldsets = [...this.fieldsets];
+    public getId(fieldset): string {
+        return `#${fieldset.sectionHeaderId}`;
     }
 
     public showAllFields(): void {

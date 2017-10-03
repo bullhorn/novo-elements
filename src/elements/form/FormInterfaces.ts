@@ -9,6 +9,8 @@ export interface NovoFormGroup {
 }
 
 export interface NovoFieldset {
+    sectionHeader?: boolean;
+    sectionHeaderId?: string;
     title?: string;
     icon?: string;
     controls: any[];

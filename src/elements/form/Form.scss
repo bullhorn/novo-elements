@@ -8,12 +8,44 @@ novo-form {
     justify-content: flex-start;
     align-items: flex-start;
     max-width: 715px;
+    novo-nav-outlet {
+        padding-top: 1em;
+    }
     .novo-form-container {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
         width: 100%;
+        > novo-nav {
+            margin-bottom: 2em;
+            width: 100%;
+            margin-left: -1.5em;
+            margin-right: -1.5em;
+            margin-left: -1.5em;
+            padding: .5em 1em;
+            box-sizing: content-box;
+            z-index: 999;
+            novo-tab {
+                .novo-tab-link {
+                    color: $positive;
+                    text-transform: none;
+                     .bhi-section {
+                        display: none;
+                    }
+                    ~.indicator {
+                        background: none;
+                    }
+                }
+                &.active .novo-tab-link .bhi-section {
+                    display: inline-block;
+                    font-size: 1.2em;
+                    &:before{
+                        margin-top:-.1em;
+                    }
+                }
+            }
+        }
         form {
             width: 100%;
             novo-fieldset-header {

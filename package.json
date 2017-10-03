@@ -58,6 +58,7 @@
     "date-fns": "^1.28.2",
     "dragula": "3.7.2",
     "hint.css": "2.4.1",
+    "ng2-scroll-to": "^1.0.7",
     "post-robot": "5.0.5"
   },
   "peerDependencies": {

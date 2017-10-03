@@ -26,6 +26,8 @@ import { NovoDragulaModule } from './../dragula/Dragula.module';
 import { NovoTipWellModule } from './../tip-well/TipWell.module';
 import { NovoModalModule } from './../modal/Modal.module';
 import { ControlConfirmModal } from './ControlConfirmModal';
+import { NovoTabModule } from './../tabs/Tabs.module';
+import { ScrollToModule } from 'ng2-scroll-to';
 
 @NgModule({
     imports: [
@@ -48,7 +50,9 @@ import { ControlConfirmModal } from './ControlConfirmModal';
         TextMaskModule,
         NovoTipWellModule,
         NovoModalModule,
-        NovoButtonModule
+        NovoButtonModule,
+        NovoTabModule,
+        ScrollToModule.forRoot()
     ],
     declarations: [NovoAutoSize, NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement, ControlConfirmModal],
     exports: [NovoAutoSize, NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement],
