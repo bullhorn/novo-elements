@@ -54,6 +54,7 @@ export { PickerResults } from './src/elements/picker/extras/picker-results/Picke
 export { BasePickerResults } from './src/elements/picker/extras/base-picker-results/BasePickerResults';
 export { EntityPickerResult, EntityPickerResults } from './src/elements/picker/extras/entity-picker-results/EntityPickerResults';
 export { ChecklistPickerResults } from './src/elements/picker/extras/checklist-picker-results/ChecklistPickerResults';
+export { GroupedMultiPickerResults } from './src/elements/picker/extras/grouped-multi-picker-results/GroupedMultiPickerResults';
 export { BaseRenderer } from './src/elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './src/elements/table/extras/date-cell/DateCell';
 export { PercentageCell } from './src/elements/table/extras/percentage-cell/PercentageCell';
@@ -99,3 +100,4 @@ export { DecodeURIPipe } from './src/pipes/decode-uri/DecodeURI';
 export { GroupByPipe } from './src/pipes/group-by/GroupBy';
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';
+export { NovoListElement } from './src/elements/list/List';

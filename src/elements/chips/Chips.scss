@@ -1,5 +1,7 @@
-chips, novo-chips,
-entity-chips, novo-entity-chips {
+chips,
+novo-chips,
+entity-chips,
+novo-entity-chips {
     width: 100%;
     display: flex;
     align-items: center;
@@ -114,13 +116,15 @@ entity-chips, novo-entity-chips {
         right: 0;
         font-size: 1.2em;
         &.has-value {
-            bottom: 20px;
+            bottom: 14px;
         }
     }
 }
 
-chips, novo-chips,
-entity-chips, novo-entity-chips {
+chips,
+novo-chips,
+entity-chips,
+novo-entity-chips {
     &+i {
         position: absolute;
         right: 0;
@@ -129,7 +133,7 @@ entity-chips, novo-entity-chips {
     padding: 2px 0;
     novo-picker {
         padding-bottom: 0;
-        > input {
+        >input {
             border: none;
             border-bottom: none !important;
         }

@@ -76,6 +76,8 @@ export class NovoLabelService {
     asyncFailure = 'Async validation was not called within the 10s threshold, you might want to reload the page to try again';
     previous = 'Previous';
     actions = 'Actions';
+    all = 'All';
+    groupedMultiPickerEmpty = 'No items to display';
 
     selectedRecords(selected: number) {
         return `Only ${selected} records selected.`;

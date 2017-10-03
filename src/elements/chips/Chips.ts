@@ -3,12 +3,12 @@ import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit,
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 // APP
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -124,15 +124,7 @@ export class NovoChipsElement implements OnInit {
     onModelTouched: Function = () => {
     };
 
-    constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {
-        // // Listen for an outside click to hide the preview
-        // this.onActiveChange.subscribe((active) => {
-        //     if (!active) {
-        //         this.blur.emit();
-        //         this.deselectAll();
-        //     }
-        // });
-    }
+    constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) { }
 
     ngOnInit() {
         this.setItems();
@@ -225,8 +217,6 @@ export class NovoChipsElement implements OnInit {
         this.deselectAll();
         this.selected = item;
         this.showPreview();
-        // Start listening for an outside click to hide the preview
-        //this.toggleActive(null, true);
     }
 
     onTyping(event?) {
