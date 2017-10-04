@@ -177,6 +177,6 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges {
     public onSearchChange(term: string): void {
         this.state.globalSearch = term;
         this.state.reset(false, true);
-        this.state.updates.next({ globalSearch: term });
+        this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort });
     }
 }
