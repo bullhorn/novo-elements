@@ -328,7 +328,7 @@ export class TableDemoComponent implements OnInit {
                     title: 'Name', name: 'name', ordering: true, filtering: true, editorType: 'TablePickerControl', editorConfig: { key: 'name', config: { options: names } }
                 },
                 {
-                    title: 'Job Type', name: 'jobType', ordering: true, filtering: true, editorType: 'SelectControl', editorConfig: { key: 'jobType', options: ['Freelance', 'Contract', 'Billable'] }
+                    title: 'Job Type', name: 'jobType', ordering: true, filtering: true, editorType: 'SelectControl', editorConfig: { key: 'jobType', options: [{ value: 'Freelance', label: 'Freelance' }, { value: 'Contract', label: 'Contract'}, { value: 'Billable', label: 'Billable'}] }
                 },
                 {
                     title: 'Rate',
