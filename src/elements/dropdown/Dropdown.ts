@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, EventEmitter, OnInit, AfterContentInit, OnDestroy, Input, Output, ViewChild, DoCheck, Renderer, HostListener, ContentChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, ChangeDetectorRef, EventEmitter, OnInit, AfterContentInit, OnDestroy, Input, Output, ViewChild, DoCheck, Renderer, HostListener, ContentChildren, QueryList } from '@angular/core';
 // APP
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
@@ -18,7 +18,7 @@ export class NovoDropdownContainer implements DoCheck {
     private appendToBody: boolean;
     public parent: NovoDropdownElement;
 
-    constructor(public element: ElementRef, private renderer: Renderer) {
+    constructor(public element: ElementRef, private renderer: Renderer, private ref: ChangeDetectorRef) {
         this.scrollHandler = this.handleScroll.bind(this);
     }
 
@@ -46,6 +46,7 @@ export class NovoDropdownContainer implements DoCheck {
         if (appendToBody) {
             window.addEventListener('scroll', this.scrollHandler);
         }
+        this.ref.markForCheck();
     }
 
     public hide(): void {
@@ -54,6 +55,7 @@ export class NovoDropdownContainer implements DoCheck {
         if (this.appendToBody) {
             window.removeEventListener('scroll', this.scrollHandler);
         }
+        this.ref.markForCheck();
     }
 
     public updatePosition(element: Element, side: string): void {
@@ -61,6 +63,7 @@ export class NovoDropdownContainer implements DoCheck {
         this.side = side;
         this.position = element.getBoundingClientRect();
         this.ngDoCheck();
+        this.ref.markForCheck();
     }
 
     @HostListener('keydown', ['$event'])
@@ -108,7 +111,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
     private filterTerm: string = '';
     private filterTermTimeout: any;
 
-    constructor(element: ElementRef) {
+    constructor(element: ElementRef, private ref: ChangeDetectorRef) {
         super(element);
         // Click handler
         this.clickHandler = this.toggleActive.bind(this);
@@ -165,6 +168,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
                 this.parentScrollElement.addEventListener('scroll', this.closeHandler);
             }
         }
+        this.ref.markForCheck();
     }
 
     private hide(): void {
@@ -185,6 +189,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
             this._items.toArray()[this.activeIndex].active = false;
         }
         this.activeIndex = -1;
+        this.ref.markForCheck();
     }
 
     @HostListener('keydown', ['$event'])

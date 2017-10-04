@@ -87,7 +87,7 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
             throw new Error('[NovoChips] - you can only have `displayAll` with a static `categoryMap`. Not available with `getItemsForCategoryAsync`');
         }
         // Configure ALL
-        if (this.config.displayAll) {
+        if (this.config.displayAll && !this.selectedCategory) {
             this.setAllCategory();
         }
         // Focus

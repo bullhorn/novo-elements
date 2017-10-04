@@ -7,7 +7,9 @@ novo-simple-table {
     overflow: auto;
     flex: 1;
     &.empty {
-        min-height: 40px;
+        min-height: 52px;
+        overflow: hidden;
+        max-height: 52px;
     }
     >.novo-simple-row:nth-of-type(odd) {
         .novo-simple-cell,

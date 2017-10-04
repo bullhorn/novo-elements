@@ -105,7 +105,7 @@ export class NovoSimpleTablePagination implements OnInit, OnDestroy {
             this.resetSubscription = this.state.onReset.subscribe((clear: boolean) => {
                 if (clear) {
                     this.page = 0;
-                    this.changeDetectorRef.detectChanges();
+                    this.changeDetectorRef.markForCheck();
                 }
             })
         }
