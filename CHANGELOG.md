@@ -1,3 +1,14 @@
+<a name="2.1.19"></a>
+## [2.1.19](https://github.com/bullhorn/novo-elements/compare/v2.1.18...v2.1.19) (2017-10-04)
+
+
+### Bug Fixes
+
+* **simple-table:** Some minor style and logic fixes ([8d5b3df](https://github.com/bullhorn/novo-elements/commit/8d5b3df))
+* **simpletable:** Fixing sort/filter state ([36f1407](https://github.com/bullhorn/novo-elements/commit/36f1407))
+
+
+
 <a name="2.1.18"></a>
 ## [2.1.18](https://github.com/bullhorn/novo-elements/compare/v2.1.17...v2.1.18) (2017-10-04)
 
