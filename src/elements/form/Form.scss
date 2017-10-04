@@ -332,7 +332,7 @@ novo-form {
                                             }
                                             &:focus {
                                                 border-bottom: 1px solid $positive;
-                                                overflow-y: auto;
+                                                overflow-y: auto !important;
                                             }
                                             &:invalid {
                                                 border-bottom: 1px solid #DA4453;
