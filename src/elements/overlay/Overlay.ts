@@ -131,7 +131,7 @@ export class NovoOverlayTemplate implements OnDestroy {
                 this._overlayRef.detach();
                 this._closingActionsSubscription.unsubscribe();
             }
-            this.closing.emit(event);
+            this.closing.emit(true);
             if (this._panelOpen) {
                 this._panelOpen = false;
                 // We need to trigger change detection manually, because
