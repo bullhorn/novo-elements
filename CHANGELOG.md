@@ -1,3 +1,13 @@
+<a name="2.1.18"></a>
+## [2.1.18](https://github.com/bullhorn/novo-elements/compare/v2.1.17...v2.1.18) (2017-10-04)
+
+
+### Bug Fixes
+
+* **overlay:** event was no longer used but still lingered ([#561](https://github.com/bullhorn/novo-elements/issues/561)) ([6e3d4e3](https://github.com/bullhorn/novo-elements/commit/6e3d4e3))
+
+
+
 <a name="2.1.17"></a>
 ## [2.1.17](https://github.com/bullhorn/novo-elements/compare/v2.1.16...v2.1.17) (2017-10-03)
 
