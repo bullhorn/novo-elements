@@ -1,3 +1,14 @@
+<a name="2.1.21"></a>
+## [2.1.21](https://github.com/bullhorn/novo-elements/compare/v2.1.20...v2.1.21) (2017-10-05)
+
+
+### Bug Fixes
+
+* **picker:** Fixing pickers/results to work with ChangeDetection.OnPush ([5972dfd](https://github.com/bullhorn/novo-elements/commit/5972dfd))
+* **picker:** Fixing pickers/results to work with ChangeDetection.OnPush - tests ([aa71520](https://github.com/bullhorn/novo-elements/commit/aa71520))
+
+
+
 <a name="2.1.20"></a>
 ## [2.1.20](https://github.com/bullhorn/novo-elements/compare/v2.1.19...v2.1.20) (2017-10-04)
 
