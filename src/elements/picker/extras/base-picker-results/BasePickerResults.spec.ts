@@ -1,11 +1,20 @@
 // NG2
-import { ElementRef } from '@angular/core';
+import { ElementRef, ChangeDetectorRef } from '@angular/core';
 // App
 import { BasePickerResults } from './BasePickerResults';
 
+class MockCDR {
+    markForCheck() { }
+    detach() { }
+    detectChanges() { }
+    checkNoChanges() { }
+    reattach() { }
+}
+
 describe('Elements: BasePickerResults', () => {
     let elementRef = new ElementRef(document.createElement('div'));
-    let component = new BasePickerResults(elementRef);
+    let component = new BasePickerResults(elementRef, new MockCDR());
+
     it('should be defined', () => {
         expect(component).toBeDefined();
     });
