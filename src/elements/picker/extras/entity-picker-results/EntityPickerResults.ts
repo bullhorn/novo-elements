@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 // Vendor
 // APP
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
@@ -180,13 +180,14 @@ export class EntityPickerResult {
 })
 export class EntityPickerResults extends BasePickerResults {
     @Output() select: EventEmitter<any> = new EventEmitter()
-    constructor(element: ElementRef, public labels: NovoLabelService) {
-        super(element);
+    constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
+        super(element, ref);
     }
 
     getListElement() {
         return this.element.nativeElement.querySelector('novo-list');
     }
+
     selectMatch(event?: any, item?: any) {
         this.select.next(item);
         return super.selectMatch(event, item);

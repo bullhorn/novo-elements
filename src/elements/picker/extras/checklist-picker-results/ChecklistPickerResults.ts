@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, ChangeDetectorRef } from '@angular/core';
 // APP
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { Helpers } from '../../../../utils/Helpers';
@@ -42,8 +42,8 @@ import 'rxjs/add/observable/fromPromise';
 export class ChecklistPickerResults extends BasePickerResults {
     filteredMatches: any;
 
-    constructor(element: ElementRef, public labels: NovoLabelService) {
-        super(element);
+    constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
+        super(element, ref);
     }
 
     search() {
@@ -116,6 +116,7 @@ export class ChecklistPickerResults extends BasePickerResults {
         if (selected) {
             this.parent.value = selected;
         }
+        this.ref.markForCheck();
         return false;
     }
 }

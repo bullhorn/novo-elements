@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, ChangeDetectorRef } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
@@ -34,8 +34,8 @@ export class QuickNoteResults extends PickerResults {
     // Mode that the quick note is in for tagging
     taggingMode: string = '';
 
-    constructor(element: ElementRef, public labels: NovoLabelService) {
-        super(element, labels);
+    constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
+        super(element, labels, ref);
     }
 
     get term() {

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnInit, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, OnDestroy, Renderer2, ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -103,8 +103,8 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
         return [];
     }
 
-    constructor(element: ElementRef, private renderer: Renderer2, public labels: NovoLabelService) {
-        super(element);
+    constructor(element: ElementRef, private renderer: Renderer2, public labels: NovoLabelService, ref: ChangeDetectorRef) {
+        super(element, ref);
     }
 
     public ngOnInit() {

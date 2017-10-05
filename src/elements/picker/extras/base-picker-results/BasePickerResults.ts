@@ -1,5 +1,5 @@
 // NG2
-import { ElementRef, HostListener, Input } from '@angular/core';
+import { ElementRef, HostListener, Input, ChangeDetectorRef } from '@angular/core';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 // Vendor
@@ -24,13 +24,15 @@ export class BasePickerResults {
     activeMatch: any;
     parent: any;
     element: ElementRef;
+    ref: ChangeDetectorRef;
     page: number = 0;
     lastPage: boolean = false;
     autoSelectFirstOption: boolean = true;
     overlay: OverlayRef;
 
-    constructor(element: ElementRef) {
+    constructor(element: ElementRef, ref: ChangeDetectorRef) {
         this.element = element;
+        this.ref = ref;
     }
 
     @HostListener('scroll', ['$event.target'])
@@ -63,6 +65,7 @@ export class BasePickerResults {
     processSearch() {
         this.hasError = false;
         this.isLoading = true;
+        this.ref.markForCheck();
         this.search(this.term)
             .subscribe(
             (results: any) => {
@@ -76,6 +79,7 @@ export class BasePickerResults {
                     this.nextActiveMatch();
                 }
                 this.isLoading = false;
+                this.ref.markForCheck();
                 setTimeout(() => this.overlay.updatePosition()); // @bkimball: This was added for Dylan Schulte, 9.18.2017 4:14PM EST, you're welcome!
             },
             (err) => {
@@ -85,6 +89,7 @@ export class BasePickerResults {
                 if (this.term && this.term.length !== 0) {
                     console.error(err); // tslint:disable-lineno
                 }
+                this.ref.markForCheck();
             });
     }
 
@@ -206,6 +211,7 @@ export class BasePickerResults {
         let index = this.matches.indexOf(this.activeMatch);
         this.activeMatch = this.matches[index - 1 < 0 ? this.matches.length - 1 : index - 1];
         this.scrollToActive();
+        this.ref.markForCheck();
     }
 
     /**
@@ -217,6 +223,7 @@ export class BasePickerResults {
         let index = this.matches.indexOf(this.activeMatch);
         this.activeMatch = this.matches[index + 1 > this.matches.length - 1 ? 0 : index + 1];
         this.scrollToActive();
+        this.ref.markForCheck();
     }
 
     getListElement() {
@@ -282,6 +289,7 @@ export class BasePickerResults {
                 this.parent.hideResults();
             }
         }
+        this.ref.markForCheck();
         return false;
     }
 

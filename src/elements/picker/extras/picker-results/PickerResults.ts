@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, ChangeDetectorRef } from '@angular/core';
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
@@ -30,8 +30,8 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     `
 })
 export class PickerResults extends BasePickerResults {
-    constructor(element: ElementRef, public labels: NovoLabelService) {
-        super(element);
+    constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
+        super(element, ref);
     }
 
     getListElement() {
