@@ -1,5 +1,5 @@
 header[theme] {
-    & > section {
+    &>section {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -27,7 +27,7 @@ header[theme] {
                 padding-right: 20px;
             }
         }
-        > section {
+        >section {
             flex: 2 2 250px;
             min-width: 100px;
         }
@@ -58,7 +58,7 @@ header[theme] {
         }
     }
     @each $basic,
-    $color in $colors {
+    $color in $app-colors {
         &[theme="#{$basic}"] {
             background: $color;
             color: #fff;
@@ -72,5 +72,4 @@ header[theme] {
     &[theme="white"] {
         color: $dark;
     }
-
 }
