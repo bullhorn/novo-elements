@@ -1,6 +1,7 @@
 @import "./extras/address/Address";
 @import "./extras/checkbox/Checkbox";
 @import "./extras/file/FileInput";
+@import "./ControlGroup";
 novo-dynamic-form,
 novo-form {
     display: flex;
@@ -38,6 +39,7 @@ novo-form {
                 }
             }
             div.novo-form-row,
+            div.novo-control-group-control,
             td.novo-form-row {
                 width: 100%;
                 &:first-child {
@@ -528,7 +530,8 @@ novo-form {
     &[layout="vertical"] {
         .novo-form-container {
             form {
-                div.novo-form-row {
+                div.novo-form-row,
+                div.novo-control-group-control {
                     novo-control,
                     novo-custom-control-container {
                         margin-top: 0;

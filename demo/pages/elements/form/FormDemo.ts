@@ -10,12 +10,14 @@ let CalendarControlsDemoTpl = require('./templates/CalendarInputControls.html');
 let FieldsetsFormDemoTpl = require('./templates/DynamicFormFieldSets.html');
 let PickerControlsDemoTpl = require('./templates/PickerControls.html');
 let UpdatingFormDemoTpl = require('./templates/UpdatingFormDemo.html');
+let GroupedFormDemoTpl = require('./templates/GroupedControls.html');
 import { MockMeta, MockMetaHeaders } from './MockMeta';
 // Vendor
 import {
     FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
     QuickNoteControl, TilesControl, DateControl, TimeControl, DateTimeControl,
-    PickerControl, EntityPickerResult, EntityPickerResults, TextAreaControl
+    PickerControl, EntityPickerResult, EntityPickerResults, TextAreaControl,
+    NovoFormGroup, BaseControl
 } from './../../../../index';
 
 const template = `
@@ -64,6 +66,10 @@ const template = `
     <h5>Updating Fields/Status</h5>
     <div class="example form-demo updating">${UpdatingFormDemoTpl}</div>
     <code-snippet [code]="UpdatingFormDemoTpl"></code-snippet>
+
+    <h5>Grouped Form Controls</h5>
+    <div class="example form-demo">${GroupedFormDemoTpl}</div>
+    <code-snippet [code]="GroupedFormDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -93,6 +99,7 @@ export class FormDemoComponent {
     private FieldsetsFormDemoTpl: string = FieldsetsFormDemoTpl;
     private PickerControlsDemoTpl: string = PickerControlsDemoTpl;
     private UpdatingFormDemoTpl: string = UpdatingFormDemoTpl;
+    private GroupedFormDemoTpl: string = GroupedFormDemoTpl;
     private quickNoteConfig: any;
     private textControl: any;
     private emailControl: any;
@@ -128,6 +135,9 @@ export class FormDemoComponent {
     private updatingFormControls: [any];
     private required: boolean = false;
     private disabled: boolean = true;
+    public groupForm: NovoFormGroup;
+    public controls: BaseControl[] = [];
+    public initialValue: {}[] = [];
 
     constructor(private formUtils: FormUtils) {
         // Quick note config
@@ -235,6 +245,22 @@ export class FormDemoComponent {
         // Updating form
         this.updatingFormControls = [this.textControl, this.percentageControl, this.checkControl, this.singlePickerControl, this.fileControl];
         this.updatingForm = formUtils.toFormGroup(this.updatingFormControls);
+
+        // Grouped form demo
+        this.setupGroupedFormDemo();
+    }
+
+    setupGroupedFormDemo() {
+        this.groupForm = this.formUtils.emptyFormGroup();
+
+        let c1 = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox', value: 'HI', required: true });
+        let c2 = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
+        let c3 = new CheckboxControl({ key: 'checkbox', label: 'Check Me!' });
+        let c4 = new TextBoxControl({ key: 'test4', label: 'TEST4' });
+        this.controls.push(c1);
+        this.controls.push(c2);
+        this.controls.push(c3);
+        this.controls.push(c4);
     }
 
     toggleEnabled() {

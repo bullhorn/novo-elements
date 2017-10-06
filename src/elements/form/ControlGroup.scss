@@ -1,0 +1,85 @@
+novo-control-group {
+    .novo-section-header {
+        box-sizing: border-box;
+        margin: 0;
+        align-items: center;
+        justify-content: space-between;
+        button {
+            padding: 3px 15px;
+        }
+    }
+    .novo-control-group-controls {
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 1em;
+        flex-direction: column;
+        &.horizontal {
+            novo-control {
+                margin: 0.5em 0;
+                padding: 0 0.5em 0 0.5em;
+                .novo-control-outer-container {
+                    max-width: 100% !important;
+                }
+                &:first-of-type {
+                    padding-left: 0;
+                }
+                &:last-of-type {
+                    padding-right: 0;
+                }
+            }
+        }
+        &.vertical {
+            .novo-control-group-control {
+                flex-direction: column;
+            }
+            .novo-control-group-row {
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid darken(#EAEAEA, 10%);
+                margin-bottom: 1em;
+                padding-bottom: 1em;
+                &:last-of-type {
+                    border-bottom: none;
+                }
+            }
+        }
+        >.novo-control-group-labels {
+            display: flex;
+            .novo-control-group-control-button-label {
+                min-width: 30px;
+                max-width: 30px;
+            }
+            >.novo-control-group-control-label {
+                flex: 1;
+                padding: 0 0.5em 0 0.5em;
+                >span {
+                    color: #9e9e9e;
+                    font-size: 0.9em;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                &:first-of-type {
+                    padding-left: 0;
+                }
+                &:last-of-type {
+                    padding-right: 0;
+                }
+            }
+        }
+        >.novo-control-group-row {
+            .novo-control-group-control {
+                display: flex;
+            }
+            button[theme="icon"] {
+                padding: 3px;
+                height: 30px;
+                width: 30px;
+                min-height: 30px;
+                min-width: 30px;
+                margin-left: 10px;
+            }
+        }
+    }
+}
