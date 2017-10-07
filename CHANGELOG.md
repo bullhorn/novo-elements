@@ -1,3 +1,13 @@
+<a name="2.1.26"></a>
+## [2.1.26](https://github.com/bullhorn/novo-elements/compare/v2.1.25...v2.1.26) (2017-10-07)
+
+
+### Bug Fixes
+
+* **searchbox:** fixing debounce of output ([0642ee4](https://github.com/bullhorn/novo-elements/commit/0642ee4))
+
+
+
 <a name="2.1.25"></a>
 ## [2.1.25](https://github.com/bullhorn/novo-elements/compare/v2.1.24...v2.1.25) (2017-10-07)
 
