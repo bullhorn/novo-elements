@@ -56,6 +56,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     @ViewChild(NovoOverlayTemplate) overlay: any;
     @ViewChild('input') input: any;
 
+    private debounceSearchChange: any;
+
     constructor(
         public element: ElementRef,
         public labels: NovoLabelService,
@@ -114,7 +116,13 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     _handleInput(event: KeyboardEvent): void {
         if (document.activeElement === event.target) {
             this._onChange((event.target as HTMLInputElement).value);
-            this.searchChanged.emit((event.target as HTMLInputElement).value)
+
+            if (this.debounceSearchChange) {
+                clearTimeout(this.debounceSearchChange);
+            }
+            this.debounceSearchChange = setTimeout(() => {
+                this.searchChanged.emit((event.target as HTMLInputElement).value)
+            }, 400);
         }
     }
     writeValue(value: any): void {
