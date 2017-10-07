@@ -14,17 +14,17 @@ import { NovoActivityTableState } from './state';
 import { Helpers } from '../../utils/Helpers';
 
 export interface ActivityTableService<T> {
-    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string): Observable<{ results: T[], total: number }>;
+    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string, outsideFilter?: any): Observable<{ results: T[], total: number }>;
 }
 
 export abstract class RemoteActivityTableService<T> implements ActivityTableService<T> {
-    abstract getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string): Observable<{ results: T[], total: number }>;
+    abstract getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string, outsideFilter?: any): Observable<{ results: T[], total: number }>;
 }
 
 export class StaticActivityTableService<T> implements ActivityTableService<T> {
     constructor(private data: T[] = []) { }
 
-    public getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string): Observable<{ results: T[], total: number }> {
+    public getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string, outsideFilter?: any): Observable<{ results: T[], total: number }> {
         let ret: T[] = Helpers.deepClone(this.data);
         if (ret.length !== 0) {
             if (globalSearch) {
@@ -69,7 +69,7 @@ export class ActivityTableDataSource<T> extends DataSource<T> {
             .startWith(null)
             .switchMap(() => {
                 this.loading = true;
-                return this.tableService.getTableResults(this.state.sort, this.state.filter, this.state.page, this.state.pageSize, this.state.globalSearch);
+                return this.tableService.getTableResults(this.state.sort, this.state.filter, this.state.page, this.state.pageSize, this.state.globalSearch, this.state.outsideFilter);
             })
             .map((data: { results: T[], total: number }) => {
                 this.loading = false;

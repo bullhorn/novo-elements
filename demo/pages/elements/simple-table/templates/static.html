@@ -2,7 +2,7 @@
 <button theme="primary" (click)="toggleDebug()">Debug</button>
 <br/>
 <br/>
-<novo-activity-table [defaultSort]="defaultSort" [searchOptions]="searchOptions" [debug]="debug" [activityService]="staticDatabase" [columns]="columns" [actionColumns]="actionColumns" [displayedColumns]="displayedColumns" [paginationOptions]="paginationOptions" #static>
+<novo-activity-table [defaultSort]="defaultSort" [searchOptions]="searchOptions" [debug]="debug" [activityService]="staticDatabase" [columns]="columns" [actionColumns]="actionColumns" [displayedColumns]="displayedColumns" [paginationOptions]="paginationOptions" [outsideFilter]="outsideFilter" #static>
     <div novo-activity-table-actions>
         <button theme="secondary">Add</button>
         <button theme="icon" icon="refresh" (click)="refresh(static)"></button>
