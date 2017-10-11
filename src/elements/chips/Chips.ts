@@ -150,7 +150,7 @@ export class NovoChipsElement implements OnInit {
         this.itemToAdd = '';
         if (selected !== this._value) {
             this._value = selected;
-            this.changed.emit(selected);
+            this.changed.emit({value: selected, rawValue: this.items});
             this.onModelChange(selected);
         }
     }
@@ -159,6 +159,7 @@ export class NovoChipsElement implements OnInit {
         this.items = [];
         this._items.next(this.items);
         this.value = null;
+        this.changed.emit({value: this.value, rawValue: this.items});
         this.onModelChange(this.value);
     }
 
@@ -259,6 +260,7 @@ export class NovoChipsElement implements OnInit {
         this.items.splice(this.items.indexOf(item), 1);
         this.deselectAll();
         this.value = this.items.map(i => i.value);
+        this.changed.emit({value: this.value.length ? this.value : '', rawValue: this.items});        
         this.onModelChange(this.value.length ? this.value : '');
         this._items.next(this.items);
     }

@@ -41,6 +41,14 @@ export class FieldInteractionApi {
         return this._form;
     }
 
+    get isEdit(): boolean {
+        return this.form.hasOwnProperty('edit') ? this.form.edit : false;
+    }
+
+    get isAdd(): boolean {
+        return this.form.hasOwnProperty('edit') ? !this.form.edit : false;
+    }
+
     set globals(globals: any) {
         this._globals = globals;
     }
@@ -104,6 +112,14 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             return control.value;
+        }
+        return null;
+    }
+
+    public getRawValue(key: string): any {
+        let control = this.getControl(key);
+        if (control) {
+            return control.rawValue;
         }
         return null;
     }
