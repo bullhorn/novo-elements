@@ -86,6 +86,7 @@ export class NovoPickerElement implements OnInit {
     private _disablePickerInput: boolean = false;
 
     // Emitter for selects
+    @Output() changed: EventEmitter<any> = new EventEmitter();
     @Output() select: EventEmitter<any> = new EventEmitter();
     @Output() focus: EventEmitter<any> = new EventEmitter();
     @Output() blur: EventEmitter<any> = new EventEmitter();
@@ -197,6 +198,7 @@ export class NovoPickerElement implements OnInit {
     clearValue(wipeTerm) {
         this._value = null;
         this.select.emit(this._value);
+        this.changed.emit({ value: this._value, rawValue: { label: '', value: this._value } });
         this.onModelChange(this._value);
 
         if (wipeTerm) {
@@ -267,9 +269,11 @@ export class NovoPickerElement implements OnInit {
         } else if (selected.value !== this._value) {
             this.term = this.clearValueOnSelect ? '' : selected.label;
             this._value = selected.value;
+            this.changed.emit({ value: selected.value, rawValue: { label: this.term, value: selected.value } })
             this.select.emit(selected);
             this.onModelChange(selected.value);
         } else {
+            this.changed.emit({ value: selected.value, rawValue: { label: this.term, value: this._value } });
             this.select.emit(selected);
         }
     }
