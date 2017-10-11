@@ -206,6 +206,7 @@ export class NovoChipsElement implements OnInit {
                 });
             }
         }
+        this.changed.emit({value: this.model, rawValue: this.items});
         this._items.next(this.items);
     }
 
