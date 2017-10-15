@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { Http } from '@angular/http';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -49,6 +49,8 @@ export class SimpleTableDemoComponent implements OnInit {
     public staticDatabase: StaticActivityTableService<MockData>;
     public remoteDatabase: RemoteActivityTableService<MockData>;
     public debug: boolean = false;
+
+    public outsideFilter: EventEmitter<{ date: string, type: string }> = new EventEmitter<{ date: string, type: string }>()
 
     public columns: SimpleTableColumn<MockData>[] = [
         {
@@ -148,6 +150,9 @@ export class SimpleTableDemoComponent implements OnInit {
                 status: mockStatuses[Math.floor(Math.random() * 3)]
             });
         }
+        setTimeout(() => {
+            this.outsideFilter.emit({ date: '12/04/1987', type: 'week' });
+        }, 5000);
     }
 
     public ngOnInit(): void {

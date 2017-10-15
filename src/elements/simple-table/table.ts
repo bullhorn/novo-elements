@@ -1,10 +1,11 @@
 import {
     ChangeDetectionStrategy, Component, ViewEncapsulation, HostBinding,
     Input, ViewChild, Directive, EventEmitter, Output, AfterContentInit,
-    SimpleChanges, ChangeDetectorRef, Injectable, OnChanges
+    SimpleChanges, ChangeDetectorRef, Injectable, OnChanges, OnDestroy
 } from '@angular/core';
 import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Subscription } from 'rxjs/Subscription';
 
 import { NovoSortFilter, NovoSelection } from './sort';
 import { NovoSimpleTablePagination } from './pagination';
@@ -107,7 +108,7 @@ export class NovoActivityTableNoResultsMessage { }
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [NovoActivityTableState]
 })
-export class NovoActivityTable<T> implements AfterContentInit, OnChanges {
+export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDestroy {
     @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
 
     @Input() activityService: ActivityTableService<T>;
@@ -117,6 +118,7 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges {
     @Input() paginationOptions: SimpleTablePaginationOptions;
     @Input() searchOptions: SimpleTableSearchOptions;
     @Input() defaultSort: { id: string, value: string };
+    @Input() outsideFilter: EventEmitter<any>;
 
     @Input() set hideGlobalSearch(v: boolean) {
         this._hideGlobalSearch = coerceBooleanProperty(v);
@@ -138,6 +140,8 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges {
     public dataSource: ActivityTableDataSource<T>;
     public loading: boolean = true;
 
+    private outsideFilterSubscription: Subscription;
+
     @HostBinding('class.empty') get empty() {
         return this.dataSource && this.dataSource.totallyEmpty;
     }
@@ -153,6 +157,20 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges {
             this.loading = false;
             this.dataSource = new ActivityTableDataSource<T>(this.activityService, this.state, this.ref);
             this.ref.markForCheck();
+        } else if (changes['outsideFilter'] && changes['outsideFilter'].currentValue) {
+            if (!this.outsideFilterSubscription) {
+                this.outsideFilterSubscription = this.outsideFilter.subscribe((filter: any) => {
+                    this.state.outsideFilter = filter;
+                    this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort });
+                    this.ref.markForCheck();
+                });
+            }
+        }
+    }
+
+    public ngOnDestroy(): void {
+        if (this.outsideFilterSubscription) {
+            this.outsideFilterSubscription.unsubscribe();
         }
     }
 

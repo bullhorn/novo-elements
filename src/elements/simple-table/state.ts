@@ -10,6 +10,7 @@ export class NovoActivityTableState {
     pageSize: number = undefined;
     globalSearch: string = undefined;
     selectedRows: Map<string, object> = new Map<string, object>();
+    outsideFilter: any;
 
     updates: EventEmitter<NovoSimpleTableChange> = new EventEmitter<NovoSimpleTableChange>();
     onReset: EventEmitter<boolean> = new EventEmitter<boolean>();

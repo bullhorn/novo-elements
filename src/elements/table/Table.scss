@@ -561,7 +561,7 @@ novo-table {
         }
     }
     @each $basic,
-    $color in $colors {
+    $color in $app-colors {
         &[theme="#{$basic}"] {
             >header {
                 background: $color;
