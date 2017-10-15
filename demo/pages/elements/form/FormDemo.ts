@@ -15,7 +15,8 @@ import { MockMeta, MockMetaHeaders } from './MockMeta';
 import {
     FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
     QuickNoteControl, TilesControl, DateControl, TimeControl, DateTimeControl,
-    PickerControl, EntityPickerResult, EntityPickerResults, TextAreaControl
+    PickerControl, EntityPickerResult, EntityPickerResults, TextAreaControl,
+    NovoFormGroup, BaseControl
 } from './../../../../index';
 
 const template = `
@@ -73,7 +74,6 @@ const template = `
         My Custom Input <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder">
     </novo-custom-control-container>`
 })
-
 export class CustomDemoComponent {
     @Input() control;
     @Input() form: any;

@@ -8,6 +8,7 @@ import { Helpers } from '../../utils/Helpers';
 export class NovoFormControl extends FormControl {
     displayValueChanges: EventEmitter<any> = new EventEmitter<any>();
     hidden: boolean;
+    key: string;
     required: boolean;
     readOnly: boolean;
     hasRequiredValidator: boolean;
@@ -50,6 +51,7 @@ export class NovoFormControl extends FormControl {
         this.validators = control.validators;
         this.initialValue = value;
         this.valueHistory.push(value);
+        this.key = control.key;
         this.label = control.label;
         this.readOnly = control.readOnly;
         this.hidden = control.hidden;
@@ -186,6 +188,7 @@ export class NovoFormControl extends FormControl {
 }
 
 export class NovoFormGroup extends FormGroup {
+    public layout: string;
     get value() {
         return this.getRawValue();
     }

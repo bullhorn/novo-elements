@@ -45,7 +45,8 @@ import {
     CustomDemoComponent,
     DatePickerDemoComponent,
     FieldInteractionsDemoComponent,
-    SimpleTableDemoComponent
+    SimpleTableDemoComponent,
+    FormGroupedDemoComponent
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
@@ -127,7 +128,8 @@ export function provideAppBridgeService(http) {
         CustomDemoComponent,
         AppBridgeDemoComponent,
         FieldInteractionsDemoComponent,
-        SimpleTableDemoComponent
+        SimpleTableDemoComponent,
+        FormGroupedDemoComponent
     ],
     imports: [
         // NG2

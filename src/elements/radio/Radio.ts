@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
@@ -33,7 +33,8 @@ export class NovoRadioGroup { }
     `,
     host: {
         '[class.vertical]': 'vertical'
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NovoRadioElement implements ControlValueAccessor {
     @Input() name: string;
@@ -53,6 +54,8 @@ export class NovoRadioElement implements ControlValueAccessor {
     onModelTouched: Function = () => {
     };
 
+    constructor(private ref: ChangeDetectorRef) { }
+
     /**
      * Handles the select of the radio button, will only change if a new radio is selected
      * @param event
@@ -65,11 +68,13 @@ export class NovoRadioElement implements ControlValueAccessor {
             radio.checked = !radio.checked;
             this.change.emit(this.value);
             this.onModelChange(this.value);
+            this.ref.markForCheck();
         }
     }
 
     writeValue(model: any): void {
         this.model = model;
+        this.ref.markForCheck();
     }
 
     registerOnChange(fn: Function): void {

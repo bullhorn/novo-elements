@@ -440,6 +440,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         if (this.control && this.form.controls[this.control.key].maxlength) {
             this.characterCount = event.target.value.length;
             this.maxLengthMet = event.target.value.length >= this.form.controls[this.control.key].maxlength;
+
         }
     }
 

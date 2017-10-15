@@ -1,0 +1,5 @@
+<novo-form [form]="horizontal">
+    <novo-control-group [initialValue]="initialValue" [add]="topAddConfig" remove="true" label="Horizontal" key="horizontal" [form]="horizontal" [controls]="controls"></novo-control-group>
+</novo-form>
+<div class="final-value">Initial Value: {{ initialValue| json }}</div>
+<div class="final-value">Value: {{ horizontal.value | json }}</div>

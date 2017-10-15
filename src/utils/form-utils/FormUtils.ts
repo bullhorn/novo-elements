@@ -25,51 +25,8 @@ import { Helpers } from '../Helpers';
 import { NovoFieldset } from '../../elements/form/FormInterfaces';
 import { NovoFormControl, NovoFormGroup } from '../../elements/form/NovoFormControl';
 
-// TODO: http doesn't need to be injected in getControlForField, toControls, toFieldSets, or getControlOptions;
-// TODO: (cont.) we should just use NG2's http provider for the http request at this level
-
-// TODO: while using this interface would be prohibitive, the lack of standardization it exposes calls into question
-// TODO: (cont.) how we are passing this data around.
-
-// interface Field {
-//     value?: any;
-//     defaultValue?: any;
-//     customControl?: any;
-//     customControlConfig?: any;
-//     interactions?: any;
-//
-//     options?: Array<any>;
-//
-//     required?: boolean;
-//     multiValue?: boolean;
-//
-//     sortOrder?: number;
-//     maxLength?: number;
-//
-//     name?: string;
-//     type?: string;
-//     label?: string;
-//     disabled?: string;
-//     readOnly?: string;
-//     hint?: string;
-//     associatedEntity?: string;
-//     optionsType?: string;
-//     dataSpecialization?: string;
-//     description?: string;
-//     tooltip?: string;
-//     tooltipPosition?: string;
-//     dataType?: string;
-//     inputType?: string;
-//     optionsUrl?: string;
-// }
-
 @Injectable()
 export class FormUtils {
-    /**
-     * @name toFormGroup
-     * @param controls
-     * @returns { FormGroup }
-     */
     toFormGroup(controls: Array<any>): NovoFormGroup {
         let group: any = {};
         controls.forEach(control => {
@@ -79,11 +36,10 @@ export class FormUtils {
         return new NovoFormGroup(group);
     }
 
-    /**
-     * @name addControls
-     * @param formGroup
-     * @param controls
-     */
+    emptyFormGroup(): NovoFormGroup {
+        return new NovoFormGroup({});
+    }
+
     addControls(formGroup: NovoFormGroup, controls: Array<NovoControlConfig>): void {
         controls.forEach(control => {
             let value = Helpers.isBlank(control.value) ? '' : control.value;
