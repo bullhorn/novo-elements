@@ -3,11 +3,12 @@ import { Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 // APP
 import { Helpers } from '../../../utils/Helpers';
+import { NovoControlGroupAddConfig } from '../ControlGroup';
 
 export interface NovoGroupedControlConfig {
     label?: string;
     icon?: string;
-    add?: boolean;
+    add?: NovoControlGroupAddConfig;
     remove?: boolean;
     key: string;
     initialValue?: {}[];

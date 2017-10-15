@@ -36,7 +36,8 @@ import {
     PopOverDemoComponent,
     FieldInteractionsDemoComponent,
     SimpleTableDemoComponent,
-    SearchDemoComponent
+    SearchDemoComponent,
+    FormGroupedDemoComponent
 } from './../pages/elements';
 
 export const routes: any = [
@@ -55,6 +56,7 @@ export const routes: any = [
     { path: 'quick-note', component: QuickNoteDemoComponent, title: 'Quick Note', section: 'components' },
     { path: 'modal', component: ModalDemoComponent, title: 'Modal', section: 'components' },
     { path: 'form', component: FormDemoComponent, title: 'Form', section: 'components' },
+    { path: 'form-grouped', component: FormGroupedDemoComponent, title: 'Form Groups', section: 'components' },
     { path: 'toast', component: ToastDemoComponent, title: 'Toast', section: 'components' },
     { path: 'tooltip', component: TooltipDemoComponent, title: 'Tooltip', section: 'components' },
     { path: 'cards', component: CardDemoComponent, title: 'Cards', section: 'components' },
