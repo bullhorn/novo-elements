@@ -1,3 +1,13 @@
+<a name="2.1.27"></a>
+## [2.1.27](https://github.com/bullhorn/novo-elements/compare/v2.1.26...v2.1.27) (2017-10-15)
+
+
+### Features
+
+* **control-group:** Added a new control for Forms with grouped sections ([a51ab3a](https://github.com/bullhorn/novo-elements/commit/a51ab3a))
+
+
+
 <a name="2.1.26"></a>
 ## [2.1.26](https://github.com/bullhorn/novo-elements/compare/v2.1.25...v2.1.26) (2017-10-07)
 
