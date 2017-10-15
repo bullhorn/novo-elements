@@ -1,5 +1,5 @@
 // NG2
-import { NgZone, Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy, Directive, HostListener, AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy, Directive, HostListener, AfterContentInit } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
 // APP
@@ -225,8 +225,7 @@ export class NovoCustomControlContainerElement {
         '[class.disabled]': 'form.controls[control.key].readOnly',
         '[class.hidden]': 'form.controls[control.key].hidden',
         '[attr.data-control-key]': 'control.key',
-    },
-    changeDetection: ChangeDetectionStrategy.Default
+    }
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy {
     @Input() control;
@@ -259,8 +258,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     maskOptions: IMaskOptions;
 
-    constructor(element: ElementRef, public labels: NovoLabelService, private dateFormatService: DateFormatService,
-        private fieldInteractionApi: FieldInteractionApi, private ref: ChangeDetectorRef, private zone: NgZone) {
+    constructor(element: ElementRef, public labels: NovoLabelService, private dateFormatService: DateFormatService, private fieldInteractionApi: FieldInteractionApi) {
         super(element);
     }
 
@@ -325,7 +323,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 }
             });
         }
-        this.ref.markForCheck();
     }
 
     executeInteraction(interaction) {
@@ -333,7 +330,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
             setTimeout(() => {
                 this.fieldInteractionApi.form = this.form;
                 this.fieldInteractionApi.currentKey = this.control.key;
-                this.ref.markForCheck();
                 try {
                     interaction.script(this.fieldInteractionApi, this.control.key);
                 } catch (err) {
@@ -418,38 +414,33 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     handleTyping(event: any) {
         this._focused = event && event.length;
         this._enteredText = event;
-        this.ref.markForCheck();
     }
 
     handleFocus(event: FocusEvent) {
         this._focused = true;
         this._focusEmitter.emit(event);
-        this.ref.markForCheck();
     }
 
     handleBlur(event: FocusEvent) {
         this._focused = false;
         this._blurEmitter.emit(event);
-        this.ref.markForCheck();
     }
 
     clearValue() {
         this.form.controls[this.control.key].setValue(null);
         this.formattedValue = null;
-        this.ref.markForCheck();
     }
 
     handleTextAreaInput(event) {
         this.emitChange(event);
         this.restrictKeys(event);
-        this.ref.markForCheck();
     }
 
     checkMaxLength(event) {
         if (this.control && this.form.controls[this.control.key].maxlength) {
             this.characterCount = event.target.value.length;
             this.maxLengthMet = event.target.value.length >= this.form.controls[this.control.key].maxlength;
-            this.ref.markForCheck();
+
         }
     }
 
@@ -458,7 +449,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
             this._focused = false;
             this._enteredText = '';
         }
-        this.ref.markForCheck();
         this.change.emit(value);
     }
 
@@ -477,7 +467,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         if (this.form.controls[this.control.key].maxlength && event.target.value.length >= this.form.controls[this.control.key].maxlength) {
             event.preventDefault();
         }
-        this.ref.markForCheck();
     }
 
     handlePercentChange(event: KeyboardEvent) {
@@ -490,7 +479,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
             this.change.emit(null);
             this.form.controls[this.control.key].setValue(null);
         }
-        this.ref.markForCheck();
     }
 
     handleTabForPickers(event: any): void {
@@ -499,12 +487,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 this.toggleActive(event, false);
             }
         }
-        this.ref.markForCheck();
     }
 
     emitChange(value) {
         this.change.emit(value);
         this.checkMaxLength(value);
-        this.ref.markForCheck();
     }
 }

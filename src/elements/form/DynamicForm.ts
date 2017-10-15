@@ -52,7 +52,7 @@ export class NovoControlCustom implements OnInit {
                     <novo-control *ngIf="!control.customControl" [control]="control" [form]="form"></novo-control>
                     <novo-control-custom *ngIf="control.customControl" [control]="control" [form]="form"></novo-control-custom>
                 </div>
-                <div *ngIf="control.__type === 'GroupedControl'">GROUPED CONTROL!!!</div>
+                <div *ngIf="control.__type === 'GroupedControl'">TODO - GroupedControl</div>
             </ng-container>
         </div>
     `
