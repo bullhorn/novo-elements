@@ -43,6 +43,7 @@ export class NovoFormControl extends FormControl {
         icon?: string,
         button?: boolean;
     };
+    rawValue?: any;
 
     private historyTimeout: any;
 
