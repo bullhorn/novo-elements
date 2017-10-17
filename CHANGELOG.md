@@ -1,3 +1,13 @@
+<a name="2.1.28"></a>
+## [2.1.28](https://github.com/bullhorn/novo-elements/compare/v2.1.27...v2.1.28) (2017-10-17)
+
+
+### Features
+
+* **forms:** Adding additional methods into FieldInteractionAPI ([34f3502](https://github.com/bullhorn/novo-elements/commit/34f3502))
+
+
+
 <a name="2.1.27"></a>
 ## [2.1.27](https://github.com/bullhorn/novo-elements/compare/v2.1.26...v2.1.27) (2017-10-15)
 
