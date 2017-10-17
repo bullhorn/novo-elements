@@ -1,3 +1,13 @@
+<a name="2.1.29"></a>
+## [2.1.29](https://github.com/bullhorn/novo-elements/compare/v2.1.28...v2.1.29) (2017-10-17)
+
+
+### Features
+
+* **tooltip,tipwell,toast:** Allowing multi-line, fixes [#564](https://github.com/bullhorn/novo-elements/issues/564) ([e0705cb](https://github.com/bullhorn/novo-elements/commit/e0705cb))
+
+
+
 <a name="2.1.28"></a>
 ## [2.1.28](https://github.com/bullhorn/novo-elements/compare/v2.1.27...v2.1.28) (2017-10-17)
 
