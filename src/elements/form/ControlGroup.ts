@@ -26,20 +26,20 @@ export interface NovoControlGroupAddConfig {
             <button *ngIf="add?.position === 'top' && !description" theme="dialogue" icon="add-thin" (click)="addNewControl()" [attr.data-automation-id]="'novo-control-group-top-add-' + key">{{ add?.label }}</button>
         </h6>
         <div class="novo-control-group-controls" [class.vertical]="vertical" [class.horizontal]="!vertical" [class.hidden]="collapsible && !toggled">
-            <div class="novo-control-group-labels" *ngIf="!vertical && form?.controls[key]?.controls.length !== 0">
+            <div class="novo-control-group-labels" *ngIf="!vertical && form?.controls[key]['controls'].length !== 0">
                 <div class="novo-control-group-control-label" *ngFor="let label of controlLabels">
                     <span [attr.data-automation-id]="'novo-control-group-label-' + label">{{ label }}</span>
                 </div>
                 <div class="novo-control-group-control-button-label" *ngIf="remove" [attr.data-automation-id]="'novo-control-group-delete-' + key"></div>
             </div>
-            <div class="novo-control-group-row" *ngFor="let control of form?.controls[key]?.controls; let i = index;">
+            <div class="novo-control-group-row" *ngFor="let control of form?.controls[key]['controls']; let i = index;">
                 <div class="novo-control-group-control">
-                    <novo-control *ngFor="let c of controls" [form]="form?.controls[key]?.controls[i]" [control]="c" [condensed]="!vertical"></novo-control>
+                    <novo-control *ngFor="let c of controls" [form]="form?.controls[key]['controls'][i]" [control]="c" [condensed]="!vertical"></novo-control>
                     <button *ngIf="remove && !vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key"></button>
                 </div>
                 <button *ngIf="remove && vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key"></button>
             </div>
-            <div class="novo-control-group-empty" *ngIf="form?.controls[key]?.controls.length === 0" [attr.data-automation-id]="'novo-control-group-empty-' + key">
+            <div class="novo-control-group-empty" *ngIf="form?.controls[key]['controls'].length === 0" [attr.data-automation-id]="'novo-control-group-empty-' + key">
                 {{ emptyMessage }}
             </div>
             <p *ngIf="add?.position === 'bottom'">
