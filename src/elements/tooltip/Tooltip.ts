@@ -21,6 +21,7 @@ import { Directive, Input } from '@angular/core';
         '[class.hint--no-animate]': 'tooltip && noAnimate',
         '[class.hint--bounce]': 'tooltip && bounce',
         '[class.hint--hidden]': 'active === false',
+        '[class.hint--preline]': 'preline',
         '[class.hint--small]': 'tooltip && isSize("small")',
         '[class.hint--medium]': 'tooltip && isSize("medium")',
         '[class.hint--large]': 'tooltip && isSize("large")',
@@ -37,6 +38,7 @@ export class TooltipDirective {
     @Input('tooltipRounded') rounded: boolean;
     @Input('tooltipAlways') always: boolean;
     @Input('tooltipActive') active: boolean;
+    @Input('tooltipPreline') preline: boolean;
 
     isPosition(position: string): boolean {
         return position.toLowerCase() === (this.position || '').toLowerCase();

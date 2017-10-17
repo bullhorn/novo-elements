@@ -8,6 +8,9 @@ novo-toast {
     &.show {
         display: block;
     }
+    p {
+        white-space: pre-line;
+    }
 }
 
 novo-toast.launched {
