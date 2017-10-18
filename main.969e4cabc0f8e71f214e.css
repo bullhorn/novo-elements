@@ -10494,9 +10494,17 @@ novo-control-group .novo-section-header {
       justify-content: space-between; }
   novo-control-group .novo-section-header button {
     padding: 3px 15px; }
+  novo-control-group .novo-section-header > span {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center; }
   novo-control-group .novo-section-header label.novo-control-group-description {
     font-size: 0.8em;
-    font-weight: 500; }
+    font-weight: 500;
+    padding-right: 10px; }
+  novo-control-group .novo-section-header i.bhi-section {
+    margin-top: -10px; }
   novo-control-group .novo-section-header i.bhi-next {
     cursor: pointer;
     transform: rotate(0deg);
@@ -10543,13 +10551,9 @@ novo-control-group .novo-control-group-controls {
   novo-control-group .novo-control-group-controls > .novo-control-group-labels {
     display: -ms-flexbox;
     display: flex; }
-    novo-control-group .novo-control-group-controls > .novo-control-group-labels .novo-control-group-control-button-label {
-      min-width: 30px;
-      max-width: 30px; }
     novo-control-group .novo-control-group-controls > .novo-control-group-labels > .novo-control-group-control-label {
       -ms-flex: 1;
-          flex: 1;
-      padding: 0 0.5em 0 0.5em; }
+          flex: 1; }
       novo-control-group .novo-control-group-controls > .novo-control-group-labels > .novo-control-group-control-label > span {
         color: #9e9e9e;
         font-size: 0.9em;
@@ -10557,13 +10561,30 @@ novo-control-group .novo-control-group-controls {
         text-transform: uppercase;
         overflow: hidden;
         text-overflow: ellipsis; }
-      novo-control-group .novo-control-group-controls > .novo-control-group-labels > .novo-control-group-control-label:first-of-type {
-        padding-left: 0; }
-      novo-control-group .novo-control-group-controls > .novo-control-group-labels > .novo-control-group-control-label:last-of-type {
-        padding-right: 0; }
+      novo-control-group .novo-control-group-controls > .novo-control-group-labels > .novo-control-group-control-label.last {
+        min-width: 40px;
+        max-width: 40px; }
   novo-control-group .novo-control-group-controls > .novo-control-group-row .novo-control-group-control {
     display: -ms-flexbox;
     display: flex; }
+  novo-control-group .novo-control-group-controls > .novo-control-group-row div.novo-control-container {
+    -ms-flex: 1;
+        flex: 1; }
+    novo-control-group .novo-control-group-controls > .novo-control-group-row div.novo-control-container .novo-control-inner-container {
+      margin-right: 1em; }
+    novo-control-group .novo-control-group-controls > .novo-control-group-row div.novo-control-container.is-label {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center; }
+    novo-control-group .novo-control-group-controls > .novo-control-group-row div.novo-control-container.last {
+      min-width: 40px;
+      max-width: 40px;
+      margin-right: 0;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center; }
   novo-control-group .novo-control-group-controls > .novo-control-group-row button[theme="icon"] {
     padding: 3px;
     height: 30px;
@@ -14683,104 +14704,104 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 28px;
-      height: 28px; }
+      width: 26px;
+      height: 26px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 37px;
-      height: 37px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
       width: 38px;
       height: 38px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 41px;
-      height: 41px; }
+      width: 30px;
+      height: 30px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 38px;
-      height: 38px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-opportunity {
       background: #662255;
-      width: 36px;
-      height: 36px; }
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-job {
       background: #BB5566;
-      width: 27px;
-      height: 27px; }
+      width: 33px;
+      height: 33px; }
     color header .background-boxes .bb-submission {
       background: #a9adbb;
-      width: 41px;
-      height: 41px; }
+      width: 28px;
+      height: 28px; }
     color header .background-boxes .bb-sendout {
       background: #747884;
-      width: 28px;
-      height: 28px; }
+      width: 38px;
+      height: 38px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
-      width: 28px;
-      height: 28px; }
-    color header .background-boxes .bb-note {
-      background: #747884;
-      width: 34px;
-      height: 34px; }
-    color header .background-boxes .bb-task {
-      background: #4f5361;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-distributionList {
-      background: #4f5361;
       width: 35px;
       height: 35px; }
-    color header .background-boxes .bb-credential {
+    color header .background-boxes .bb-note {
+      background: #747884;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-task {
       background: #4f5361;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-user {
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-distributionList {
       background: #4f5361;
       width: 33px;
       height: 33px; }
-    color header .background-boxes .bb-corporateuser {
+    color header .background-boxes .bb-credential {
+      background: #4f5361;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-user {
       background: #4f5361;
       width: 45px;
       height: 45px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
+    color header .background-boxes .bb-corporateuser {
+      background: #4f5361;
       width: 38px;
       height: 38px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 26px;
+      height: 26px; }
     color header .background-boxes .bb-ocean {
       background: #4A89DC;
-      width: 44px;
-      height: 44px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
       width: 45px;
       height: 45px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 39px;
+      height: 39px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 28px;
+      height: 28px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
-      width: 30px;
-      height: 30px; }
+      width: 31px;
+      height: 31px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
       width: 31px;
       height: 31px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 27px;
-      height: 27px; }
+      width: 42px;
+      height: 42px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 27px;
-      height: 27px; }
+      width: 43px;
+      height: 43px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -15895,4 +15916,4 @@ field-interactions-demo main.tabs {
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.8bc87aee78d255cec218.bundle.map*/
+/*# sourceMappingURL=main.969e4cabc0f8e71f214e.bundle.map*/
