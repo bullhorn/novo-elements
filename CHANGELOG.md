@@ -1,3 +1,18 @@
+<a name="2.1.31"></a>
+## [2.1.31](https://github.com/bullhorn/novo-elements/compare/v2.1.30...v2.1.31) (2017-10-18)
+
+
+### Bug Fixes
+
+* **simple-table:** Fixing filter state and filter ids ([1cca4b1](https://github.com/bullhorn/novo-elements/commit/1cca4b1))
+
+
+### Features
+
+* **control:** Allowing for checkbox control to allow for inline label ([7ce0114](https://github.com/bullhorn/novo-elements/commit/7ce0114))
+
+
+
 <a name="2.1.30"></a>
 ## [2.1.30](https://github.com/bullhorn/novo-elements/compare/v2.1.29...v2.1.30) (2017-10-18)
 
