@@ -7,9 +7,17 @@ novo-control-group {
         button {
             padding: 3px 15px;
         }
+        >span {
+            display: flex;
+            align-items: center;
+        }
         label.novo-control-group-description {
             font-size: 0.8em;
             font-weight: 500;
+            padding-right: 10px;
+        }
+        i.bhi-section {
+            margin-top: -10px;
         }
         i.bhi-next {
             cursor: pointer;
@@ -65,13 +73,8 @@ novo-control-group {
         }
         >.novo-control-group-labels {
             display: flex;
-            .novo-control-group-control-button-label {
-                min-width: 30px;
-                max-width: 30px;
-            }
             >.novo-control-group-control-label {
                 flex: 1;
-                padding: 0 0.5em 0 0.5em;
                 >span {
                     color: #9e9e9e;
                     font-size: 0.9em;
@@ -80,17 +83,32 @@ novo-control-group {
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
-                &:first-of-type {
-                    padding-left: 0;
-                }
-                &:last-of-type {
-                    padding-right: 0;
+                &.last {
+                    min-width: 40px;
+                    max-width: 40px;
                 }
             }
         }
         >.novo-control-group-row {
             .novo-control-group-control {
                 display: flex;
+            }
+            div.novo-control-container {
+                flex: 1;
+                .novo-control-inner-container {
+                    margin-right: 1em;
+                }
+                &.is-label {
+                    display: flex;
+                    align-items: center;
+                }
+                &.last {
+                    min-width: 40px;
+                    max-width: 40px;
+                    margin-right: 0;
+                    display: flex;
+                    align-items: center;
+                }
             }
             button[theme="icon"] {
                 padding: 3px;

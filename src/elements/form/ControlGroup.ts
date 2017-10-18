@@ -23,27 +23,31 @@ export interface NovoControlGroupAddConfig {
                 <span [attr.data-automation-id]="'novo-control-group-label-' + key">{{ label }}</span>
             </span>
             <label class="novo-control-group-description" *ngIf="description" [attr.data-automation-id]="'novo-control-group-description-' + key">{{ description }}</label>
-            <button *ngIf="add?.position === 'top' && !description" theme="dialogue" icon="add-thin" (click)="addNewControl()" [attr.data-automation-id]="'novo-control-group-top-add-' + key">{{ add?.label }}</button>
+            <button type="button" *ngIf="add?.position === 'top' && !description" theme="dialogue" icon="add-thin" (click)="addNewControl()" [attr.data-automation-id]="'novo-control-group-top-add-' + key" index="-1">{{ add?.label }}</button>
         </h6>
         <div class="novo-control-group-controls" [class.vertical]="vertical" [class.horizontal]="!vertical" [class.hidden]="collapsible && !toggled">
             <div class="novo-control-group-labels" *ngIf="!vertical && form?.controls[key]['controls'].length !== 0">
                 <div class="novo-control-group-control-label" *ngFor="let label of controlLabels">
                     <span [attr.data-automation-id]="'novo-control-group-label-' + label">{{ label }}</span>
                 </div>
-                <div class="novo-control-group-control-button-label" *ngIf="remove" [attr.data-automation-id]="'novo-control-group-delete-' + key"></div>
+                <div class="novo-control-group-control-label last" *ngIf="remove" [attr.data-automation-id]="'novo-control-group-delete-' + key"></div>
             </div>
             <div class="novo-control-group-row" *ngFor="let control of form?.controls[key]['controls']; let i = index;">
                 <div class="novo-control-group-control">
-                    <novo-control *ngFor="let c of controls" [form]="form?.controls[key]['controls'][i]" [control]="c" [condensed]="!vertical"></novo-control>
-                    <button *ngIf="remove && !vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key"></button>
+                    <div *ngFor="let c of controls" class="novo-control-container" [class.is-label]="c.controlType === 'read-only'">
+                        <novo-control [form]="form?.controls[key]['controls'][i]" [control]="c" [condensed]="!vertical"></novo-control>
+                    </div>
+                    <div class="novo-control-container last">
+                        <button type="button" *ngIf="remove && !vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
+                    </div>
                 </div>
-                <button *ngIf="remove && vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key"></button>
+                <button type="button" *ngIf="remove && vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
             </div>
             <div class="novo-control-group-empty" *ngIf="form?.controls[key]['controls'].length === 0" [attr.data-automation-id]="'novo-control-group-empty-' + key">
                 {{ emptyMessage }}
             </div>
             <p *ngIf="add?.position === 'bottom'">
-                <button *ngIf="add?.position === 'bottom'" theme="dialogue" icon="add-thin" (click)="addNewControl()" [attr.data-automation-id]="'novo-control-group-bottom-add-' + key">{{ add?.label }}</button>
+                <button type="button" *ngIf="add?.position === 'bottom'" theme="dialogue" icon="add-thin" (click)="addNewControl()" [attr.data-automation-id]="'novo-control-group-bottom-add-' + key" index="-1">{{ add?.label }}</button>
             </p>
         </div>
    `,
@@ -109,6 +113,9 @@ export class NovoControlGroup implements AfterContentInit {
     constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef, private labels: NovoLabelService) { }
 
     public ngAfterContentInit(): void {
+        if (!this.key) {
+            throw new Error('novo-control-group must have the [key] attribute provided!');
+        }
         if (!this.initialValue) {
             // Add one control by default
             this.addNewControl();
@@ -144,11 +151,11 @@ export class NovoControlGroup implements AfterContentInit {
     }
 
     public buildControl(value?: {}): NovoFormGroup {
-        const newControls = [...this.controls];
-        const ctrl: NovoFormGroup = this.formUtils.toFormGroup(newControls);
+        const newControls = this.getNewControls(this.controls);
         if (value) {
             this.formUtils.setInitialValues(newControls, value);
         }
+        const ctrl: NovoFormGroup = this.formUtils.toFormGroup(newControls);
         return ctrl;
     }
 
@@ -164,5 +171,13 @@ export class NovoControlGroup implements AfterContentInit {
             this.toggled = !this.toggled;
             this.ref.markForCheck();
         }
+    }
+
+    private getNewControls(controls: BaseControl[]) {
+        let ret: BaseControl[] = [];
+        this.controls.forEach((control: BaseControl) => {
+            ret.push(new BaseControl(control.__type, control));
+        });
+        return ret;
     }
 }
