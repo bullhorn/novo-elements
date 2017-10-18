@@ -20,6 +20,7 @@ export interface NovoControlConfig {
     value?: any;
     key?: string;
     label?: string;
+    checkboxLabel?: string;
     required?: boolean;
     hidden?: boolean;
     sortOrder?: number;
@@ -69,6 +70,7 @@ export class BaseControl {
     value: any;
     key: string;
     label: string;
+    checkboxLabel: string;
     required: boolean;
     hidden: boolean;
     sortOrder: number;
@@ -116,6 +118,7 @@ export class BaseControl {
         this.value = config.value;
         this.key = config.key || '';
         this.label = config.label || '';
+        this.checkboxLabel = config.checkboxLabel;
         this.name = config.name || '';
         this.required = !!config.required;
         this.hidden = !!config.hidden;
