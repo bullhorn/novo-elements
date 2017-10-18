@@ -1,3 +1,13 @@
+<a name="2.1.32"></a>
+## [2.1.32](https://github.com/bullhorn/novo-elements/compare/v2.1.31...v2.1.32) (2017-10-18)
+
+
+### Bug Fixes
+
+* **controlgroup:** Fixing labels position ([afe1096](https://github.com/bullhorn/novo-elements/commit/afe1096))
+
+
+
 <a name="2.1.31"></a>
 ## [2.1.31](https://github.com/bullhorn/novo-elements/compare/v2.1.30...v2.1.31) (2017-10-18)
 
