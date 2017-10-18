@@ -37,7 +37,7 @@ export interface NovoControlGroupAddConfig {
                     <div *ngFor="let c of controls" class="novo-control-container" [class.is-label]="c.controlType === 'read-only'">
                         <novo-control [form]="form?.controls[key]['controls'][i]" [control]="c" [condensed]="!vertical"></novo-control>
                     </div>
-                    <div class="novo-control-container last">
+                    <div class="novo-control-container last" *ngIf="remove && !vertical">
                         <button type="button" *ngIf="remove && !vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
                     </div>
                 </div>
