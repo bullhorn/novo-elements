@@ -1,3 +1,13 @@
+<a name="2.1.30"></a>
+## [2.1.30](https://github.com/bullhorn/novo-elements/compare/v2.1.29...v2.1.30) (2017-10-18)
+
+
+### Bug Fixes
+
+* **grouped-control:** Fixing styling and functionality of grouped control ([b499702](https://github.com/bullhorn/novo-elements/commit/b499702))
+
+
+
 <a name="2.1.29"></a>
 ## [2.1.29](https://github.com/bullhorn/novo-elements/compare/v2.1.28...v2.1.29) (2017-10-17)
 
