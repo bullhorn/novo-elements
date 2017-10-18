@@ -53,7 +53,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
                         </div>
                     </list>
                     <list *ngSwitchCase="'select'">
-                        <item [class.active]="filter === option" *ngFor="let option of config.filterConfig.options" (click)="filterData(option)" [attr.data-automation-id]="'novo-activity-table-filter-' + option?.label || option">
+                        <item [class.active]="filter === option" *ngFor="let option of config.filterConfig.options" (click)="filterData(option)" [attr.data-automation-id]="'novo-activity-table-filter-' + (option?.label || option)">
                             <span>{{ option?.label || option }}</span> <i class="bhi-check" *ngIf="filter === option"></i>
                         </item>
                     </list>
@@ -129,8 +129,10 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
             }
             if (change.filter && change.filter.id === this.id) {
                 this.filterActive = true;
+                this.filter = change.filter.value;
             } else {
                 this.filterActive = false;
+                this.filter = undefined;
             }
             changeDetectorRef.markForCheck();
         });

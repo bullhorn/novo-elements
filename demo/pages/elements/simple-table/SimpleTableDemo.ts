@@ -76,7 +76,7 @@ export class SimpleTableDemoComponent implements OnInit {
         },
         {
             id: 'name',
-            label: 'Name asdfasdf asdfasfdasdfsafdasd',
+            label: 'Name',
             renderer: ActivityTableRenderers.propertyRenderer<MockData>('name'),
             renderType: 'link',
             onClick: this.log.bind(this),
@@ -145,7 +145,7 @@ export class SimpleTableDemoComponent implements OnInit {
         for (let i = 1; i <= 100; i++) {
             this.staticData.push({
                 id: i,
-                name: `Name akksdkjfhaskdfjhasjkfdhsakjhfkjashdfkjashdfkjashdkfhasdkkfhjasd ${i}`,
+                name: `Name ${i}`,
                 date: today.getTime() - (1000 * 60 * 60 * 24 * i),
                 status: mockStatuses[Math.floor(Math.random() * 3)]
             });
