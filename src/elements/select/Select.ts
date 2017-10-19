@@ -106,7 +106,7 @@ export class NovoSelectElement implements OnInit, OnChanges {
             this.writeValue(this.model);
         }
 
-        if ( this.panelOpen ) {
+        if (this.panelOpen) {
             this.openPanel();
         }
     }
@@ -286,7 +286,7 @@ export class NovoSelectElement implements OnInit, OnChanges {
                 }
             }
             if (item) {
-                this.select(item, this.filteredOptions.indexOf(item))
+                this.select(item, this.filteredOptions.indexOf(item), false)
                 this.empty = false;
             } else {
                 this.clear();
