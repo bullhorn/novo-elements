@@ -1,3 +1,14 @@
+<a name="2.1.34"></a>
+## [2.1.34](https://github.com/bullhorn/novo-elements/compare/v2.1.33...v2.1.34) (2017-10-22)
+
+
+### Features
+
+* **fieldinteractions:** Adding current entity/id, toast cascading, prompt user ([1f3e070](https://github.com/bullhorn/novo-elements/commit/1f3e070))
+* **fieldinteractions:** Adding current entity/id, toast cascading, prompt user-n ([e9d89fd](https://github.com/bullhorn/novo-elements/commit/e9d89fd))
+
+
+
 <a name="2.1.33"></a>
 ## [2.1.33](https://github.com/bullhorn/novo-elements/compare/v2.1.32...v2.1.33) (2017-10-19)
 
