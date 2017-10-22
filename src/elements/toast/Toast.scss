@@ -288,14 +288,34 @@ novo-toast.growlTopRight {
     }
 }
 
+novo-toast.fixedTop {
+    @for $i from 2 through 100 {
+        &:nth-last-of-type(#{$i}) {
+            top: (25px * ($i - 1));
+            z-index: 9999 - $i;
+            filter: brightness(1-(1/7));
+        }
+    }
+}
+
+novo-toast.fixedBottom {
+    @for $i from 2 through 100 {
+        &:nth-last-of-type(#{$i}) {
+            bottom: (25px * ($i - 1));
+            z-index: 9999 - $i;
+            filter: brightness(1-(1/7));
+        }
+    }
+}
+
 novo-toast.growlTopLeft,
 novo-toast.growlTopRight {
     @for $i from 2 through 100 {
         &:nth-last-of-type(#{$i}) {
             top: (25px * $i);
             transform: scale(1-(1/25));
-            z-index: 100 - $i;
-            filter: brightness(1+(1/7));
+            z-index: 9999 - $i;
+            filter: brightness(1-(1/7));
         }
     }
 }
@@ -306,8 +326,8 @@ novo-toast.growlBottomRight {
         &:nth-last-of-type(#{$i}) {
             bottom: (25px * $i);
             transform: scale(1-(1/25));
-            z-index: 100 - $i;
-            filter: brightness(1+(1/7));
+            z-index: 9999 - $i;
+            filter: brightness(1-(1/7));
         }
     }
 }
@@ -362,9 +382,6 @@ novo-toast.dialogue {
     }
 }
 
-//novo-toast + *:not(.toast-container) {
-//    margin-top: 60px;
-//}
 @media screen and (min-width: 350px) {
     novo-toast[class*="growl-"] {
         min-width: 350px;

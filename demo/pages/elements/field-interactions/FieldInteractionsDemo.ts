@@ -32,6 +32,7 @@ const template = `
         <novo-nav theme="white" [outlet]="config" direction="vertical">
             <novo-tab><span>Inspect Form</span></novo-tab>
             <novo-tab><span>Configuration on Field</span></novo-tab>
+            <novo-tab><span>Getting Current Context</span></novo-tab>
             <novo-tab><span>Write Field Interaction</span></novo-tab>
         </novo-nav>
 
@@ -52,6 +53,13 @@ const template = `
                 <p><label>blur</label> -- gets fired when the field loses focus</p>
                 <p>The script function represents the function that will be fired for the event, you can see examples of these below.</p>
                 <p>Lastly, "invokeOnInit" will also trigger the Field Interaction when the form is created as well.</p>
+            </novo-nav-content>
+            <novo-nav-content>
+                <h5>Getting Current Context</h5>
+                <p>If you need to write Field Interaction based on if you are on an add or edit page, or you need to know the current entity type and ID then you can get those via:</p>
+                <p><label>edit</label>: "API.isEdit"</p>
+                <p><label>entity</label>: "API.currentEntity"</p>
+                <p><label>id</label>: "API.currentEntityId"</p>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Write Field Interaction</h5>
@@ -250,6 +258,15 @@ export class FieldInteractionsDemoComponent {
                 });
             } else if (API.getActiveKey() === 'tip') {
                 API.displayTip(API.getActiveKey(), API.getActiveValue(), 'info', true);
+            } else if (API.getActiveKey() === 'prompt') {
+                API.promptUser(API.getActiveKey(), ['Update Fee Arrangement from Selected Company', 'Update DateLastModified to right now!'])
+                    .then((result: boolean) => {
+                        if (result) {
+                            console.log('PERFORM'); // tslint:disable-line
+                        } else {
+                            console.log('DON\'T PERFORM'); // tslint:disable-line
+                        }
+                    })
             }
         };
         let modifyOptionsAddFunction = (API: FieldInteractionApi) => {
@@ -527,9 +544,18 @@ export class FieldInteractionsDemoComponent {
                 { event: 'change', script: messagingFunction }
             ]
         });
+        this.controls.messaging.promptControl = new TextBoxControl({
+            type: 'text',
+            key: 'prompt',
+            label: 'Prompt User of Downstream Changes',
+            interactions: [
+                { event: 'change', script: messagingFunction }
+            ]
+        });
         this.forms.messaging = formUtils.toFormGroup([
             this.controls.messaging.toastControl,
-            this.controls.messaging.tipControl
+            this.controls.messaging.tipControl,
+            this.controls.messaging.promptControl
         ]);
 
         // Modify Options Field Interactions

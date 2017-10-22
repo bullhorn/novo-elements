@@ -25,7 +25,7 @@ import { NovoTooltipModule } from './../tooltip/Tooltip.module';
 import { NovoDragulaModule } from './../dragula/Dragula.module';
 import { NovoTipWellModule } from './../tip-well/TipWell.module';
 import { NovoModalModule } from './../modal/Modal.module';
-import { ControlConfirmModal } from './ControlConfirmModal';
+import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoControlGroup } from './ControlGroup';
 
 @NgModule({
@@ -54,14 +54,14 @@ import { NovoControlGroup } from './ControlGroup';
     declarations: [
         NovoAutoSize, NovoControlElement, NovoDynamicFormElement, NovoFormElement,
         NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom,
-        NovoCustomControlContainerElement, ControlConfirmModal, NovoControlGroup
+        NovoCustomControlContainerElement, ControlConfirmModal, ControlPromptModal, NovoControlGroup
     ],
     exports: [
         NovoAutoSize, NovoDynamicFormElement, NovoControlElement, NovoFormElement,
         NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement,
         NovoControlGroup
     ],
-    entryComponents: [ControlConfirmModal]
+    entryComponents: [ControlConfirmModal, ControlPromptModal]
 })
 export class NovoFormModule {
 }

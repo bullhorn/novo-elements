@@ -73,6 +73,7 @@ export class NovoLabelService {
     timeFormatAM = 'AM';
     timeFormatPM = 'PM';
     confirmChangesModalMessage = 'Are you sure you want to change this field?';
+    promptModalMessage = 'Do you want to perform the following changes?';
     asyncFailure = 'Async validation was not called within the 10s threshold, you might want to reload the page to try again';
     previous = 'Previous';
     actions = 'Actions';

@@ -9,7 +9,7 @@ import { NovoControlConfig } from './FormControls';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoToastService } from '../toast/ToastService';
 import { NovoModalService } from '../modal/ModalService';
-import { ControlConfirmModal } from './ControlConfirmModal';
+import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -39,6 +39,14 @@ export class FieldInteractionApi {
 
     get form(): any {
         return this._form;
+    }
+
+    get currentEntity(): string {
+        return this.form.hasOwnProperty('currentEntity') ? this.form.currentEntity : undefined;
+    }
+
+    get currentEntityId(): string {
+        return this.form.hasOwnProperty('currentEntityId') ? this.form.currentEntityId : undefined;
     }
 
     get isEdit(): boolean {
@@ -306,6 +314,11 @@ export class FieldInteractionApi {
                 this.setValue(key, oldValue, { emitEvent: false });
             }
         });
+    }
+
+    public promptUser(key: string, changes: string[]): Promise<boolean> {
+        let showYes: boolean = true;
+        return this.modalService.open(ControlPromptModal, { changes }).onClosed;
     }
 
     public setProperty(key: string, prop: string, value: any): void {

@@ -122,7 +122,7 @@ export class NovoCustomControlContainerElement {
                             [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form.controls[control.key].required">
                         </i>
                         <!--Form Controls-->
-                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [ngSwitch]="form.controls[control.key].controlType" [attr.data-automation-id]="control.key">
+                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [ngSwitch]="form.controls[control.key].controlType" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
                             <!--Text-based Inputs-->
                             <!--TODO prefix/suffix on the control-->
                             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">

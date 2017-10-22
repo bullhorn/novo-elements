@@ -272,6 +272,9 @@ novo-form {
                                     >div.novo-control-input {
                                         width: 100%;
                                         position: relative;
+                                        &.control-disabled {
+                                            pointer-events: none;
+                                        }
                                         &[type="picker"] {
                                             align-self: auto;
                                         }
@@ -691,7 +694,11 @@ novo-form {
     }
 }
 
-control-confirm-modal {
+control-confirm-modal,
+control-prompt-modal {
+    p {
+        max-width: 100%;
+    }
     h2 {
         display: flex;
         align-items: center;

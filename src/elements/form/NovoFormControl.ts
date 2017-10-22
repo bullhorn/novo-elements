@@ -190,6 +190,9 @@ export class NovoFormControl extends FormControl {
 
 export class NovoFormGroup extends FormGroup {
     public layout: string;
+    public edit: boolean;
+    public currentEntity: string;
+    public currentEntityId: string;
     get value() {
         return this.getRawValue();
     }
