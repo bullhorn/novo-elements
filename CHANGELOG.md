@@ -1,3 +1,13 @@
+<a name="2.1.35"></a>
+## [2.1.35](https://github.com/bullhorn/novo-elements/compare/v2.1.34...v2.1.35) (2017-10-24)
+
+
+### Features
+
+* **controlgroup:** Minor fixes to UX/styles ([4586b52](https://github.com/bullhorn/novo-elements/commit/4586b52))
+
+
+
 <a name="2.1.34"></a>
 ## [2.1.34](https://github.com/bullhorn/novo-elements/compare/v2.1.33...v2.1.34) (2017-10-22)
 
