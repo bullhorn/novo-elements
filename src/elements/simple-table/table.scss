@@ -18,6 +18,30 @@ novo-simple-table {
         .novo-simple-checkbox-cell {
             background-color: $table-bg-accent;
         }
+        &.active {
+            .novo-simple-cell,
+            .novo-simple-button-cell,
+            .novo-simple-dropdown-cell,
+            .novo-simple-checkbox-cell {
+                background-color: rgba($ocean, .15);
+            }
+        }
+    }
+    >.novo-simple-row:nth-of-type(even) {
+        .novo-simple-cell,
+        .novo-simple-button-cell,
+        .novo-simple-dropdown-cell,
+        .novo-simple-checkbox-cell {
+            background-color: $white;
+        }
+        &.active {
+            .novo-simple-cell,
+            .novo-simple-button-cell,
+            .novo-simple-dropdown-cell,
+            .novo-simple-checkbox-cell {
+                background-color: rgba($ocean, .15);
+            }
+        }
     }
 }
 
@@ -29,8 +53,8 @@ novo-simple-table {
     .novo-simple-header-cell,
     novo-simple-empty-header-cell,
     .novo-simple-checkbox-header-cell {
-        border-top: 1px solid #F0F0F0;
-        border-bottom: 1px solid #F0F0F0;
+        border-top: 1px solid $off-white;
+        border-bottom: 1px solid $off-white;
     }
 }
 
@@ -66,7 +90,7 @@ novo-simple-table {
 }
 
 .novo-simple-header-cell {
-    border-left: 1px solid #F0F0F0;
+    border-left: 1px solid $off-white;
     white-space: nowrap;
     display: flex;
     align-items: center;

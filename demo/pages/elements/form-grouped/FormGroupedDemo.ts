@@ -54,11 +54,9 @@ export class FormGroupedDemoComponent {
     public initialValue: {}[] = [];
 
     public topAddConfig: NovoControlGroupAddConfig = {
-        position: 'top',
         label: 'Add'
     };
     public bottomAddConfig: NovoControlGroupAddConfig = {
-        position: 'bottom',
         label: 'Add a new fancy thing!'
     };
 
@@ -76,7 +74,7 @@ export class FormGroupedDemoComponent {
         let label = new ReadOnlyControl({ key: 'label', value: 'Label :)' });
         let c1 = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox', value: 'HI', required: true });
         let c2 = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
-        let c3 = new CheckboxControl({ key: 'checkbox', label: 'Check Me!' });
+        let c3 = new CheckboxControl({ key: 'checkbox', label: 'Check Me!', width: 100 });
         let c4 = new TextBoxControl({ key: 'test4', label: 'TEST4' });
         this.controls.push(label);
         this.controls.push(c1);

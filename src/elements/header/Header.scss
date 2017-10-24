@@ -5,30 +5,35 @@ header[theme] {
         align-items: center;
         justify-content: space-between;
         padding: 8px;
-        i.header-icon {
-            padding: 12px;
-        }
-        .header-titles {
+        >div {
+            flex: 1;
             display: flex;
-            flex-direction: column;
-            flex: 1 1 100px;
-            padding: 0px 8px;
-            h1 {
-                font-size: 1.7em;
-                margin: 0;
-                padding: 0;
-                display: inline-block;
-                font-weight: 500;
-                max-width: 70%;
-                min-width: 100px;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                padding-right: 20px;
+            align-items: center;
+            i.header-icon {
+                padding: 12px;
+            }
+            .header-titles {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                padding: 0px 8px;
+                h1 {
+                    font-size: 1.7em;
+                    margin: 0;
+                    padding: 0;
+                    display: inline-block;
+                    font-weight: 500;
+                    max-width: 70%;
+                    min-width: 100px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    padding-right: 20px;
+                }
             }
         }
         >section {
-            flex: 2 2 250px;
+            flex: 1;
             min-width: 100px;
         }
         utils {

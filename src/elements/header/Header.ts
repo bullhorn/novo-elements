@@ -29,13 +29,13 @@ export class UtilActionElement {
     },
     template: `
         <section>
-            <ng-container>
+            <div>
                 <i *ngIf="icon" class="header-icon" [ngClass]="iconClass"></i>
                 <div class="header-titles">
                     <h1>{{ title || config.title }}</h1>
                     <small *ngIf="subTitle">{{ subTitle || config.subTitle }}</small>
                 </div>
-            </ng-container>
+            </div>
             <ng-content select="section"></ng-content>
             <ng-content select="utils"></ng-content>
         </section>

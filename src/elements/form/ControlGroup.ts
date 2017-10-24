@@ -9,7 +9,6 @@ import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 
 export interface NovoControlGroupAddConfig {
-    position: 'top' | 'bottom';
     label: string;
 }
 
@@ -23,19 +22,18 @@ export interface NovoControlGroupAddConfig {
                 <span [attr.data-automation-id]="'novo-control-group-label-' + key">{{ label }}</span>
             </span>
             <label class="novo-control-group-description" *ngIf="description" [attr.data-automation-id]="'novo-control-group-description-' + key">{{ description }}</label>
-            <button type="button" *ngIf="add?.position === 'top' && !description" theme="dialogue" icon="add-thin" (click)="addNewControl()" [attr.data-automation-id]="'novo-control-group-top-add-' + key" index="-1">{{ add?.label }}</button>
         </h6>
         <div class="novo-control-group-controls" [class.vertical]="vertical" [class.horizontal]="!vertical" [class.hidden]="collapsible && !toggled">
             <div class="novo-control-group-labels" *ngIf="!vertical && form?.controls[key]['controls'].length !== 0">
-                <div class="novo-control-group-control-label" *ngFor="let label of controlLabels">
-                    <span [attr.data-automation-id]="'novo-control-group-label-' + label">{{ label }}</span>
+                <div class="novo-control-group-control-label" *ngFor="let label of controlLabels" [style.max-width.px]="label.width">
+                    <span [attr.data-automation-id]="'novo-control-group-label-' + label.value">{{ label.value }}</span>
                 </div>
                 <div class="novo-control-group-control-label last" *ngIf="remove" [attr.data-automation-id]="'novo-control-group-delete-' + key"></div>
             </div>
             <div class="novo-control-group-row" *ngFor="let control of form?.controls[key]['controls']; let i = index;">
                 <div class="novo-control-group-control">
-                    <div *ngFor="let c of controls" class="novo-control-container" [class.is-label]="c.controlType === 'read-only'">
-                        <novo-control [form]="form?.controls[key]['controls'][i]" [control]="c" [condensed]="!vertical"></novo-control>
+                    <div *ngFor="let c of controls" class="novo-control-container" [class.is-label]="c.controlType === 'read-only'" [style.max-width.px]="c.width">
+                        <novo-control [form]="form?.controls[key]['controls'][i]" [control]="c" [condensed]="!vertical || c.controlType === 'read-only'"></novo-control>
                     </div>
                     <div class="novo-control-container last" *ngIf="remove && !vertical">
                         <button type="button" *ngIf="remove && !vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
@@ -46,8 +44,8 @@ export interface NovoControlGroupAddConfig {
             <div class="novo-control-group-empty" *ngIf="form?.controls[key]['controls'].length === 0" [attr.data-automation-id]="'novo-control-group-empty-' + key">
                 {{ emptyMessage }}
             </div>
-            <p *ngIf="add?.position === 'bottom'">
-                <button type="button" *ngIf="add?.position === 'bottom'" theme="dialogue" icon="add-thin" (click)="addNewControl()" [attr.data-automation-id]="'novo-control-group-bottom-add-' + key" index="-1">{{ add?.label }}</button>
+            <p *ngIf="add">
+                <button type="button" theme="dialogue" icon="add-thin" (click)="addNewControl()" [attr.data-automation-id]="'novo-control-group-bottom-add-' + key" index="-1">{{ add?.label }}</button>
             </p>
         </div>
    `,
@@ -107,7 +105,7 @@ export class NovoControlGroup implements AfterContentInit {
     // The initial value object, will create the form rows off of
     @Input() initialValue: {}[];
 
-    public controlLabels: string[] = [];
+    public controlLabels: { value: string, width: number }[] = [];
     public toggled: boolean = false;
 
     constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef, private labels: NovoLabelService) { }
@@ -134,7 +132,12 @@ export class NovoControlGroup implements AfterContentInit {
         }
         // If we are horizontal, grab the labels to help with layout
         if (!this.vertical) {
-            this.controlLabels = this.controls.map((control: BaseControl) => control.label);
+            this.controlLabels = this.controls.map((control: BaseControl) => {
+                return {
+                    value: control.label,
+                    width: control.width
+                };
+            });
             this.ref.markForCheck();
         }
     }

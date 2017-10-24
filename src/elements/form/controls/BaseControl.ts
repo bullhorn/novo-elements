@@ -59,6 +59,7 @@ export interface NovoControlConfig {
         icon?: string,
         button?: boolean;
     };
+    width?: number;
 }
 
 export class BaseControl {
@@ -109,6 +110,7 @@ export class BaseControl {
         icon?: string,
         button?: boolean;
     };
+    width: number;
 
     constructor(type: string = 'BaseControl', config: NovoControlConfig = {}) {
         this.__type = type;
@@ -162,5 +164,6 @@ export class BaseControl {
         this.customControl = config.customControl;
         this.customControlConfig = config.customControlConfig;
         this.tipWell = config.tipWell;
+        this.width = config.width;
     }
 }
