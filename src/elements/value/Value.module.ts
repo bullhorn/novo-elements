@@ -1,11 +1,11 @@
 // NG2
 import { NgModule } from '@angular/core';
 // APP
-import { ValueDirective } from './Value';
+import { ValueElement } from './Value';
 
 @NgModule({
-    declarations: [ValueDirective],
-    exports: [ValueDirective]
+    declarations: [ValueElement],
+    exports: [ValueElement]
 })
 export class NovoValueModule {
 }

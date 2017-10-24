@@ -1,11 +1,16 @@
 // NG2
-import { Directive, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-@Directive({
+@Component({
     selector: 'novo-value',
-    host: {
-    },
-    template:``
+    template:`<div class="label" [innerHTML]="data.label"></div>
+    <div class="value" [innerHTML]="data.value" *ngSwitchDefault></div>
+    `
 })
-export class ValueDirective {
+export class ValueElement implements OnInit {
+  @Input() data: any;
+  @Input() meta: any;
+
+  ngOnInit() {
+  }
 }

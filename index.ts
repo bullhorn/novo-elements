@@ -28,6 +28,7 @@ export { NovoDateTimePickerModule } from './src/elements/date-time-picker/DateTi
 export { NovoNovoCKEditorModule } from './src/elements/ckeditor/CKEditor.module';
 export { NovoTipWellModule } from './src/elements/tip-well/TipWell.module';
 export { NovoTableModule } from './src/elements/table/Table.module';
+export { NovoValueModule } from './src/elements/value/Value.module';
 export { NovoTableMode } from './src/elements/table/Table';
 export { NovoTableExtrasModule } from './src/elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './src/elements/form/Form.module';
