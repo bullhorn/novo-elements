@@ -1,3 +1,13 @@
+<a name="2.1.37"></a>
+## [2.1.37](https://github.com/bullhorn/novo-elements/compare/v2.1.36...v2.1.37) (2017-10-25)
+
+
+### Features
+
+* **datepicker:** Adding in a week range selector ([8ca5942](https://github.com/bullhorn/novo-elements/commit/8ca5942))
+
+
+
 <a name="2.1.36"></a>
 ## [2.1.36](https://github.com/bullhorn/novo-elements/compare/v2.1.35...v2.1.36) (2017-10-24)
 

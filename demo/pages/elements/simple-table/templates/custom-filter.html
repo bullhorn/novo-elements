@@ -1,0 +1,16 @@
+<novo-activity-table customFilter="true" [defaultSort]="defaultSort" [searchOptions]="searchOptions" [debug]="debug" [activityService]="staticDatabase" [columns]="columns" [actionColumns]="actionColumns" [displayedColumns]="displayedColumns" [paginationOptions]="paginationOptions" [outsideFilter]="outsideFilter" #static>
+    <div novo-activity-table-actions>
+        <button theme="secondary">Add</button>
+        <button theme="icon" icon="refresh" (click)="refresh(static)"></button>
+    </div>
+    <div novo-activity-table-empty-message>
+        CUSTOM EMPTY MESSAGE
+    </div>
+    <div novo-activity-table-custom-filter>
+        <novo-date-picker [(ngModel)]="value" range="true" [weekRangeSelect]="timePeriod === 'week'" (onSelect)="onRangeSelect($event)"></novo-date-picker>
+        <div class="period-selector">
+            <label class="novo-form-control-label">Select Time Period By</label>
+            <novo-tiles [options]="timePeriods" [(ngModel)]="timePeriod"></novo-tiles>
+        </div>
+    </div>
+</novo-activity-table>
