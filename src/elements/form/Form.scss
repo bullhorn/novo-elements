@@ -2,6 +2,21 @@
 @import "./extras/checkbox/Checkbox";
 @import "./extras/file/FileInput";
 @import "./ControlGroup";
+.novo-form-control-label {
+    color: #9e9e9e;
+    font-size: 0.9em;
+    flex: 1;
+    max-width: 130px;
+    min-width: 130px;
+    font-weight: 500;
+    transition: 200ms ease-out;
+    margin-right: 35px;
+    text-transform: uppercase;
+    padding-top: 8px;
+    word-break: word-break;
+    overflow-wrap: break-word;
+}
+
 novo-dynamic-form,
 novo-form {
     display: flex;
@@ -224,18 +239,7 @@ novo-form {
                         align-items: flex-start;
                         width: 100%;
                         >label {
-                            color: #9e9e9e;
-                            font-size: 0.9em;
-                            flex: 1;
-                            max-width: 130px;
-                            min-width: 130px;
-                            font-weight: 500;
-                            transition: 200ms ease-out;
-                            margin-right: 35px;
-                            text-transform: uppercase;
-                            padding-top: 8px;
-                            word-break: word-break;
-                            overflow-wrap: break-word;
+                            @extend .novo-form-control-label;
                         }
                         >div.novo-control-outer-container {
                             display: flex;

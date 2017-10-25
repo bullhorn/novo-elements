@@ -57,4 +57,8 @@ export class DatePickerDemoComponent {
         startDate: null,
         endDate: null
     };
+    value2: any = {
+        startDate: null,
+        endDate: null
+    };
 }

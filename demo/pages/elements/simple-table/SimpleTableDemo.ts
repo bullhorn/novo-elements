@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 let StaticDemoTpl = require('./templates/static.html');
 let RemoteDemoTpl = require('./templates/remote.html');
+let CustomFilterDemoTPl = require('./templates/custom-filter.html');
 
 import {
     NovoSortFilter, NovoSelection, NovoActivityTable, SimpleTableColumn,
@@ -27,6 +28,10 @@ const template = `
     <h5>Remote Data Source</h5>
     <div class="example activity-table-demo">${RemoteDemoTpl}</div>
     <code-snippet [code]="RemoteDemoTpl"></code-snippet>
+
+    <h5>Custom Filter</h5>
+    <div class="example activity-table-demo">${CustomFilterDemoTPl}</div>
+    <code-snippet [code]="CustomFilterDemoTPl"></code-snippet>
 </div>
 `;
 
@@ -45,10 +50,16 @@ interface MockData {
 export class SimpleTableDemoComponent implements OnInit {
     public StaticDemoTpl: string = StaticDemoTpl;
     public RemoteDemoTpl: string = RemoteDemoTpl;
+    public CustomFilterDemoTPl: string = CustomFilterDemoTPl;
 
     public staticDatabase: StaticActivityTableService<MockData>;
     public remoteDatabase: RemoteActivityTableService<MockData>;
     public debug: boolean = false;
+    public timePeriods = [
+        { value: 'week', label: 'Week' },
+        { value: 'custom', label: 'Custom Range' },
+    ]
+    public timePeriod: string = 'week';
 
     public outsideFilter: EventEmitter<{ date: string, type: string }> = new EventEmitter<{ date: string, type: string }>()
 
@@ -193,6 +204,10 @@ export class SimpleTableDemoComponent implements OnInit {
 
     public toggleDebug(): void {
         this.debug = !this.debug;
+    }
+
+    public onRangeSelect(event): void {
+        console.log('Date Filter:', event); // tslint:disable-line
     }
 }
 

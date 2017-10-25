@@ -12,7 +12,7 @@ import { NovoSearchBoxModule } from '../search/SearchBox.module';
 import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 
 import {
-    NovoTable, NovoActivityTable, NovoActivityTableActions,
+    NovoTable, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter,
     NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage
 } from './table';
 import {
@@ -44,13 +44,13 @@ export * from './state';
         NovoTable, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage,
         NovoSimpleHeaderRowDef, NovoSimpleRowDef, NovoSimpleCellHeader, NovoSortFilter, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell,
         NovoSimpleHeaderCell, NovoSimpleCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleFilterFocus, NovoSimpleTablePagination,
-        NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableActions
+        NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter
     ],
     declarations: [
         NovoTable, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage,
         NovoSimpleHeaderRowDef, NovoSimpleRowDef, NovoSimpleCellHeader, NovoSortFilter, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell,
         NovoSimpleHeaderCell, NovoSimpleCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleFilterFocus, NovoSimpleTablePagination,
-        NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableActions
+        NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter
     ],
     providers: [
         NovoActivityTableState
