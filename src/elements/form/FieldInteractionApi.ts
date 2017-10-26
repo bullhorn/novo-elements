@@ -309,6 +309,7 @@ export class FieldInteractionApi {
         let oldValue = history[history.length - 2];
         let newValue = this.getValue(key);
         let label = this.getProperty(key, 'label');
+        (document.activeElement as any).blur()
         return this.modalService.open(ControlConfirmModal, { oldValue, newValue, label, message, key }).onClosed.then(result => {
             if (!result) {
                 this.setValue(key, oldValue, { emitEvent: false });
@@ -318,6 +319,7 @@ export class FieldInteractionApi {
 
     public promptUser(key: string, changes: string[]): Promise<boolean> {
         let showYes: boolean = true;
+        (document.activeElement as any).blur()
         return this.modalService.open(ControlPromptModal, { changes }).onClosed;
     }
 
@@ -581,5 +583,11 @@ export class FieldInteractionApi {
                 this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 1);
             }
         }
+    }
+
+    public debounce(func: () => void, wait = 50) {
+        let h: any;
+        clearTimeout(h);
+        h = setTimeout(() => func(), wait);
     }
 }
