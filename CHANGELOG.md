@@ -1,3 +1,13 @@
+<a name="2.1.38"></a>
+## [2.1.38](https://github.com/bullhorn/novo-elements/compare/v2.1.37...v2.1.38) (2017-10-26)
+
+
+### Features
+
+* **controlgroup:** Allowing control over edit/delete buttons ([7128a76](https://github.com/bullhorn/novo-elements/commit/7128a76))
+
+
+
 <a name="2.1.37"></a>
 ## [2.1.37](https://github.com/bullhorn/novo-elements/compare/v2.1.36...v2.1.37) (2017-10-25)
 
