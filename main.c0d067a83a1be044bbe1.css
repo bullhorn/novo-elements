@@ -1801,6 +1801,8 @@ novo-simple-table {
     cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis; }
+    .novo-simple-header-cell > label.sort-disabled {
+      cursor: default; }
   .novo-simple-header-cell > div {
     width: 60px; }
   .novo-simple-header-cell novo-dropdown[side=right] {
@@ -11588,6 +11590,9 @@ novo-control-group .novo-control-group-controls {
       flex-direction: column; }
   novo-control-group .novo-control-group-controls.hidden {
     display: none !important; }
+  novo-control-group .novo-control-group-controls novo-control novo-select {
+    min-width: 100%;
+    max-width: 100%; }
   novo-control-group .novo-control-group-controls.horizontal novo-control {
     margin: 0.5em 0;
     padding: 0 0.5em 0.5em 0; }
@@ -15790,104 +15795,104 @@ color header {
         border-radius: 50%; }
     color header .background-boxes .bb-company {
       background: #3399DD;
-      width: 45px;
-      height: 45px; }
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-candidate {
       background: #44BB77;
-      width: 45px;
-      height: 45px; }
+      width: 32px;
+      height: 32px; }
     color header .background-boxes .bb-navigation {
       background: #2F384F;
-      width: 35px;
-      height: 35px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-lead {
       background: #AA6699;
-      width: 26px;
-      height: 26px; }
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-contact {
       background: #FFAA44;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 36px;
-      height: 36px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
       width: 26px;
       height: 26px; }
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 34px;
+      height: 34px; }
     color header .background-boxes .bb-submission {
       background: #a9adbb;
-      width: 29px;
-      height: 29px; }
+      width: 37px;
+      height: 37px; }
     color header .background-boxes .bb-sendout {
       background: #747884;
-      width: 30px;
-      height: 30px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-placement {
       background: #0B344F;
-      width: 33px;
-      height: 33px; }
+      width: 29px;
+      height: 29px; }
     color header .background-boxes .bb-note {
       background: #747884;
-      width: 42px;
-      height: 42px; }
+      width: 27px;
+      height: 27px; }
     color header .background-boxes .bb-task {
       background: #4f5361;
-      width: 39px;
-      height: 39px; }
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-distributionList {
       background: #4f5361;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-credential {
-      background: #4f5361;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-user {
-      background: #4f5361;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-corporateuser {
-      background: #4f5361;
-      width: 42px;
-      height: 42px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 39px;
-      height: 39px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-sunflower {
-      background: #F6B042;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-bittersweet {
-      background: #EB6845;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-grapefruit {
-      background: #DA4453;
       width: 41px;
       height: 41px; }
-    color header .background-boxes .bb-carnation {
-      background: #D770AD;
-      width: 35px;
-      height: 35px; }
-    color header .background-boxes .bb-lavender {
-      background: #967ADC;
+    color header .background-boxes .bb-credential {
+      background: #4f5361;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-user {
+      background: #4f5361;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-corporateuser {
+      background: #4f5361;
+      width: 33px;
+      height: 33px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
       width: 43px;
       height: 43px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 45px;
+      height: 45px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-sunflower {
+      background: #F6B042;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-bittersweet {
+      background: #EB6845;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-grapefruit {
+      background: #DA4453;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-carnation {
+      background: #D770AD;
+      width: 40px;
+      height: 40px; }
+    color header .background-boxes .bb-lavender {
+      background: #967ADC;
+      width: 42px;
+      height: 42px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -17002,4 +17007,4 @@ field-interactions-demo main.tabs {
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.7ae2f769fb90f27c9da8.bundle.map*/
+/*# sourceMappingURL=main.c0d067a83a1be044bbe1.bundle.map*/
