@@ -134,6 +134,7 @@ export class BaseControl {
         this.currencyFormat = config.currencyFormat || null;
         this.associatedEntity = config.associatedEntity || null;
         this.optionsType = config.optionsType || null;
+        this.options = config.options || [];
         this.forceClear = new EventEmitter();
         this.readOnly = !!config.readOnly || !!config.disabled;
         this.disabled = !!config.disabled;

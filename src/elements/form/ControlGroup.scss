@@ -39,6 +39,12 @@ novo-control-group {
         &.hidden {
             display: none !important;
         }
+        novo-control {
+            novo-select {
+                min-width: 100%;
+                max-width: 100%;
+            }
+        }
         &.horizontal {
             novo-control {
                 margin: 0.5em 0;

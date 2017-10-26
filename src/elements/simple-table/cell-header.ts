@@ -28,7 +28,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
 @Component({
     selector: '[novo-simple-cell-config]',
     template: `
-        <label (click)="sort()" data-automation-id="novo-activity-table-label"><ng-content></ng-content></label>
+        <label (click)="sort()" data-automation-id="novo-activity-table-label" [class.sort-disabled]="!config.sortable"><ng-content></ng-content></label>
         <div>
             <button *ngIf="config.sortable" theme="icon" [icon]="icon" (click)="sort()" [class.active]="sortActive" data-automation-id="novo-activity-table-sort"></button>
             <novo-dropdown *ngIf="config.filterable" side="right" appendToBody="true" parentScrollSelector=".novo-simple-table" containerClass="simple-table-dropdown" data-automation-id="novo-activity-table-filter">

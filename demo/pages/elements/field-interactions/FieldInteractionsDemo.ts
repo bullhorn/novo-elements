@@ -64,6 +64,9 @@ const template = `
             <novo-nav-content>
                 <h5>Write Field Interaction</h5>
                 <p>Writing Field Interactions is very simple. You can refer to all the examples below. If you ever get stuck, you can always open a <a href="https://github.com/bullhorn/novo-elements/issues">Github Issue</a> as well!</p>
+                <p><b>IMPORTANT</b></p>
+                <p>When writing field interactions, you will be writing everything only the contents of the function. <b>You do not</b> write the surrounding function.</p>
+                <p><b>All field interactions must be written in vanilla ES5 as well!</b></p>
             </novo-nav-content>
         </novo-nav-outlet>
     </main>
@@ -260,7 +263,7 @@ export class FieldInteractionsDemoComponent {
                 API.displayTip(API.getActiveKey(), API.getActiveValue(), 'info', true);
             } else if (API.getActiveKey() === 'prompt') {
                 API.promptUser(API.getActiveKey(), ['Update Fee Arrangement from Selected Company', 'Update DateLastModified to right now!'])
-                    .then((result: boolean) => {
+                    .then(function (result) {
                         if (result) {
                             console.log('PERFORM'); // tslint:disable-line
                         } else {
@@ -297,7 +300,7 @@ export class FieldInteractionsDemoComponent {
                     API.modifyPickerConfig('picker', {
                         format: '$name $test',
                         optionsUrl: 'http://novo-elements-mock.getsandbox.com/users'
-                    }, (result) => { result.test = 'Built with Options URL!'; return result; });
+                    }, function (result) { result.test = 'Built with Options URL!'; return result; });
                     break;
                 case 3:
                     // Async with Options URL Builder
@@ -307,20 +310,20 @@ export class FieldInteractionsDemoComponent {
                         optionsUrlBuilder: (query) => {
                             return 'http://novo-elements-mock.getsandbox.com/users';
                         }
-                    }, (result) => { result.test = 'Built with Options URL Builder!'; return result; });
+                    }, function (result) { result.test = 'Built with Options URL Builder!'; return result; });
                     break;
                 case 4:
                     // Async with Options Promise
                     API.setProperty('picker', 'label', 'Async Picker (with options promise)');
                     API.modifyPickerConfig('picker', {
                         format: '$name $test',
-                        optionsPromise: (query, http) => {
-                            return new Promise((resolve, reject) => {
+                        optionsPromise: function (query, http) {
+                            return new Promise(function (resolve, reject) {
                                 if (query && query.length) {
                                     http
                                         .get('http://novo-elements-mock.getsandbox.com/users')
-                                        .map(res => res.json())
-                                        .map(results => {
+                                        .map(function (res) { return res.json() })
+                                        .map(function (results) {
                                             return results.map(result => {
                                                 result.test = 'Built with Options Promise';
                                                 return result;
@@ -346,12 +349,12 @@ export class FieldInteractionsDemoComponent {
             console.log('[FieldInteractionDemo] - asyncFunction'); // tslint:disable-line
             if (API.getActiveKey() === 'async1') {
                 API.setLoading(API.getActiveKey(), true);
-                setTimeout(() => {
+                setTimeout(function () {
                     API.setLoading(API.getActiveKey(), false);
                 }, 3000);
             } else {
                 API.setLoading(API.getActiveKey(), true);
-                setTimeout(() => {
+                setTimeout(function () {
                     API.setLoading(API.getActiveKey(), false);
                 }, 15000);
             }

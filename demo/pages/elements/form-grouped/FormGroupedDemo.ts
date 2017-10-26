@@ -10,7 +10,7 @@ import {
     FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
     QuickNoteControl, TilesControl, DateControl, TimeControl, DateTimeControl,
     PickerControl, EntityPickerResult, EntityPickerResults, TextAreaControl,
-    NovoFormGroup, BaseControl, NovoControlGroupAddConfig, ReadOnlyControl
+    NovoFormGroup, BaseControl, NovoControlGroupAddConfig, ReadOnlyControl, SelectControl
 } from './../../../../index';
 
 const template = `
@@ -60,19 +60,43 @@ export class FormGroupedDemoComponent {
         label: 'Add a new fancy thing!'
     };
 
+    public emptyMessage: string = 'There are no items...';
+    public canEditFunction: Function;
+    public canRemoveFunction: Function;
+
     constructor(private formUtils: FormUtils) {
         // Grouped form demo
         this.setupGroupedFormDemo();
+        // Setup function
+        this.canEditFunction = this.canEdit.bind(this);
+        this.canRemoveFunction = this.canRemove.bind(this);
     }
 
-    setupGroupedFormDemo() {
+    public onRemove(value: any) {
+        console.log('REMOVING', value); // tslint:disable-line
+    }
+
+    public onEdit(value: any) {
+        console.log('EDITING', value); // tslint:disable-line
+    }
+
+    public canEdit(value: any, index: number) {
+        console.log('canEdit', value, index); // tslint:disable-line
+        return index > 0;
+    }
+    public canRemove(value: any, index: number) {
+        console.log('canRemove', value, index); // tslint:disable-line
+        return index === 0;
+    }
+
+    private setupGroupedFormDemo() {
         this.horizontal = this.formUtils.emptyFormGroup();
         this.vertical = this.formUtils.emptyFormGroup();
         this.horizontalOptions = this.formUtils.emptyFormGroup();
         this.verticalOptions = this.formUtils.emptyFormGroup();
 
         let label = new ReadOnlyControl({ key: 'label', value: 'Label :)' });
-        let c1 = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox', value: 'HI', required: true });
+        let c1 = new SelectControl({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
         let c2 = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
         let c3 = new CheckboxControl({ key: 'checkbox', label: 'Check Me!', width: 100 });
         let c4 = new TextBoxControl({ key: 'test4', label: 'TEST4' });

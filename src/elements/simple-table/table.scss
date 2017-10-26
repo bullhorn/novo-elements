@@ -103,6 +103,9 @@ novo-simple-table {
         cursor: pointer;
         overflow: hidden;
         text-overflow: ellipsis;
+        &.sort-disabled {
+            cursor: default;
+        }
     }
     >div {
         width: 60px;

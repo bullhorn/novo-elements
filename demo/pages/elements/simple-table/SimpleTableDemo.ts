@@ -69,7 +69,7 @@ export class SimpleTableDemoComponent implements OnInit {
             label: 'ID',
             renderer: ActivityTableRenderers.propertyRenderer<MockData>('id'),
             config: {
-                sortable: true,
+                sortable: false,
                 filterable: true
             }
         },
