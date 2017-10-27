@@ -138,7 +138,11 @@ export class NovoOverlayTemplate implements OnDestroy {
                 // `fromEvent` doesn't seem to do it at the proper time.
                 // This ensures that the placeholder is reset when the
                 // user clicks outside.
-                this._changeDetectorRef.detectChanges();
+                try {
+                    this._changeDetectorRef.detectChanges();
+                } catch (error) {
+                    // no op
+                }
             }
         });
     }
