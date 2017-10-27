@@ -1,3 +1,14 @@
+<a name="2.1.39"></a>
+## [2.1.39](https://github.com/bullhorn/novo-elements/compare/v2.1.38...v2.1.39) (2017-10-27)
+
+
+### Bug Fixes
+
+* **datepicker/table:** Fixing date picker month/year pickers and table styling ([f954b1d](https://github.com/bullhorn/novo-elements/commit/f954b1d))
+* **fieldinteractions:** Fixing confirm/prompt from popping up a lot ([15aebea](https://github.com/bullhorn/novo-elements/commit/15aebea))
+
+
+
 <a name="2.1.38"></a>
 ## [2.1.38](https://github.com/bullhorn/novo-elements/compare/v2.1.37...v2.1.38) (2017-10-26)
 
