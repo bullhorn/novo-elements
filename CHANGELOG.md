@@ -1,3 +1,13 @@
+<a name="2.1.40"></a>
+## [2.1.40](https://github.com/bullhorn/novo-elements/compare/v2.1.39...v2.1.40) (2017-10-27)
+
+
+### Bug Fixes
+
+* **overlay:** Safe check ([ef4aa67](https://github.com/bullhorn/novo-elements/commit/ef4aa67))
+
+
+
 <a name="2.1.39"></a>
 ## [2.1.39](https://github.com/bullhorn/novo-elements/compare/v2.1.38...v2.1.39) (2017-10-27)
 
