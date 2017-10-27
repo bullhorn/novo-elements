@@ -53,7 +53,6 @@ novo-simple-table {
     .novo-simple-header-cell,
     novo-simple-empty-header-cell,
     .novo-simple-checkbox-header-cell {
-        border-top: 1px solid $off-white;
         border-bottom: 1px solid $off-white;
     }
 }
@@ -170,6 +169,7 @@ novo-activity-table {
         display: flex;
         align-items: center;
         flex-shrink: 0;
+        border-bottom: 1px solid $off-white;
         >novo-search {
             padding-right: 10px;
             display: none;
@@ -241,9 +241,9 @@ novo-activity-table {
     }
     .novo-activity-table-filter-container {
         display: flex;
+        flex: 1;
         .novo-activity-table-custom-filter {
             border-right: 1px solid $off-white;
-            border-top: 1px solid $off-white;
             novo-date-picker {
                 .calendar {
                     box-shadow: none;

@@ -215,6 +215,13 @@ novo-date-picker-input {
             }
         }
     }
+    section.calendar-content {
+        display: flex;
+        flex-direction: column;
+        span {
+            display: block;
+        }
+    }
     .calendar-content {
         background: #fff;
         width: 100%;

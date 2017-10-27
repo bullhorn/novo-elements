@@ -106,16 +106,16 @@ export type rangeSelectModes = 'startDate' | 'endDate';
                     </tr>
                 </tbody>
             </table>
-            <ul class="calendar-content months" [hidden]="view !== 'months'">
-                <li *ngFor="let month of months;let i = index" (click)="setMonth(i)">
-                    <div class="month" [ngClass]="{selected: i === selected?.getMonth()}" [attr.data-automation-id]="month">{{month}}</div>
-                </li>
-            </ul>
-            <ul class="calendar-content years" [hidden]="view !== 'years'">
-                <li *ngFor="let year of years" (click)="setYear(year)">
-                    <div class="year" [ngClass]="{selected: year == selected?.getFullYear()}" [attr.data-automation-id]="year">{{year}}</div>
-                </li>
-            </ul>
+            <section class="calendar-content months" [hidden]="view !== 'months'">
+                <div *ngFor="let month of months;let i = index" (click)="setMonth(i)">
+                    <span class="month" [ngClass]="{selected: i === selected?.getMonth()}" [attr.data-automation-id]="month">{{month}}</span>
+                </div>
+            </section>
+            <section class="calendar-content years" [hidden]="view !== 'years'">
+                <div *ngFor="let year of years" (click)="setYear(year)">
+                    <span class="year" [ngClass]="{selected: year == selected?.getFullYear()}" [attr.data-automation-id]="year">{{year}}</span>
+                </div>
+            </section>
             <div class="calendar-footer">
                 <span (click)="setToday()" class="today" data-automation-id="calendar-today">{{ labels.today }}</span>
             </div>

@@ -102,13 +102,13 @@ export class NovoActivityTableNoResultsMessage { }
                     <novo-simple-header-row *novoSimpleHeaderRowDef="displayedColumns"></novo-simple-header-row>
                     <novo-simple-row *novoSimpleRowDef="let row; columns: displayedColumns;"></novo-simple-row>
                 </novo-simple-table>
-                <div class="novo-activity-table-no-results-container" *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading">
+                <div class="novo-activity-table-no-results-container" *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine">
                     <div #filtered><ng-content select="[novo-activity-table-no-results-message]"></ng-content></div>
                     <div class="novo-activity-table-empty-message" *ngIf="filtered.childNodes.length == 0">
                         <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
                     </div>
                 </div>
-                <div class="novo-activity-table-empty-container" *ngIf="dataSource?.totallyEmpty && !dataSource?.loading && !loading">
+                <div class="novo-activity-table-empty-container" *ngIf="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine">
                     <div #empty><ng-content select="[novo-activity-table-empty-message]"></ng-content></div>
                     <div class="novo-activity-table-empty-message" *ngIf="empty.childNodes.length == 0">
                         <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
@@ -177,7 +177,8 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDest
             this.loading = false;
             this.dataSource = new ActivityTableDataSource<T>(this.activityService, this.state, this.ref);
             this.ref.markForCheck();
-        } else if (changes['outsideFilter'] && changes['outsideFilter'].currentValue) {
+        }
+        if (changes['outsideFilter'] && changes['outsideFilter'].currentValue) {
             if (!this.outsideFilterSubscription) {
                 this.outsideFilterSubscription = this.outsideFilter.subscribe((filter: any) => {
                     this.state.outsideFilter = filter;

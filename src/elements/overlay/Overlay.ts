@@ -229,14 +229,14 @@ export class NovoOverlayTemplate implements OnDestroy {
         switch (this.position) {
             case 'center':
                 this._positionStrategy = this._overlay.position()
-                .connectedTo(this._getConnectedElement(), { originX: 'start', originY: 'center' }, { overlayX: 'start', overlayY: 'center' })
-                .withFallbackPosition( { originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
-                .withFallbackPosition( { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' });
+                    .connectedTo(this._getConnectedElement(), { originX: 'start', originY: 'center' }, { overlayX: 'start', overlayY: 'center' })
+                    .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
+                    .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' });
                 break;
             default:
                 this._positionStrategy = this._overlay.position()
-                .connectedTo(this._getConnectedElement(), { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
-                .withFallbackPosition( { originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' });
+                    .connectedTo(this._getConnectedElement(), { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
+                    .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' });
                 break;
         }
 

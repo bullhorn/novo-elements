@@ -16,7 +16,7 @@ export class NovoActivityTableState {
     onReset: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     get userFiltered(): boolean {
-        return !!(this.filter || this.sort || this.globalSearch);
+        return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter);
     }
 
     public reset(fireUpdate: boolean = true, persistUserFilters?: boolean): void {

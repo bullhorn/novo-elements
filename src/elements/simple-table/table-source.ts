@@ -48,6 +48,7 @@ export class ActivityTableDataSource<T> extends DataSource<T> {
     public total = 0;
     public current = 0;
     public loading = false;
+    public pristine = true;
 
     get totallyEmpty(): boolean {
         return this.total === 0;
@@ -68,6 +69,7 @@ export class ActivityTableDataSource<T> extends DataSource<T> {
         return Observable.merge(...displayDataChanges)
             .startWith(null)
             .switchMap(() => {
+                this.pristine = false;
                 this.loading = true;
                 return this.tableService.getTableResults(this.state.sort, this.state.filter, this.state.page, this.state.pageSize, this.state.globalSearch, this.state.outsideFilter);
             })
