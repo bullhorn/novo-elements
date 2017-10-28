@@ -1,3 +1,13 @@
+<a name="2.1.42"></a>
+## [2.1.42](https://github.com/bullhorn/novo-elements/compare/v2.1.41...v2.1.42) (2017-10-28)
+
+
+### Features
+
+* **datepicker:** Adding weekstart input ([aa98122](https://github.com/bullhorn/novo-elements/commit/aa98122))
+
+
+
 <a name="2.1.41"></a>
 ## [2.1.41](https://github.com/bullhorn/novo-elements/compare/v2.1.40...v2.1.41) (2017-10-28)
 

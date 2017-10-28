@@ -1,0 +1,15 @@
+<button [theme]="weekStart === 0 ? 'primary' : 'secondary'" (click)="setWeekStart(0)">Sunday</button>
+<button [theme]="weekStart === 1 ? 'primary' : 'secondary'" (click)="setWeekStart(1)">Monday</button>
+<button [theme]="weekStart === 2 ? 'primary' : 'secondary'" (click)="setWeekStart(2)">Tuesday</button>
+<button [theme]="weekStart === 3 ? 'primary' : 'secondary'" (click)="setWeekStart(3)">Wednesday</button>
+<button [theme]="weekStart === 4 ? 'primary' : 'secondary'" (click)="setWeekStart(4)">Thursday</button>
+<button [theme]="weekStart === 5 ? 'primary' : 'secondary'" (click)="setWeekStart(5)">Friday</button>
+<button [theme]="weekStart === 6 ? 'primary' : 'secondary'" (click)="setWeekStart(6)">Saturday</button>
+<br/>
+<br/>
+<div class="date-picker-demo-side-by-side">
+    <p>
+        <label>Value</label> {{(weekStartDate | date) || 'N/A'}}
+    </p>
+    <novo-date-picker [(ngModel)]="weekStartDate" [weekStart]="weekStart"></novo-date-picker>
+</div>
