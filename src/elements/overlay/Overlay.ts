@@ -120,7 +120,7 @@ export class NovoOverlayTemplate implements OnDestroy {
             this._closingActionsSubscription = this._subscribeToClosingActions();
         }
         this._panelOpen = true;
-        this._changeDetectorRef.detectChanges();
+        this._changeDetectorRef.markForCheck();
         setTimeout(() => this._overlayRef.updatePosition());
     }
 
@@ -138,11 +138,7 @@ export class NovoOverlayTemplate implements OnDestroy {
                 // `fromEvent` doesn't seem to do it at the proper time.
                 // This ensures that the placeholder is reset when the
                 // user clicks outside.
-                try {
-                    this._changeDetectorRef.detectChanges();
-                } catch (error) {
-                    // no op
-                }
+                this._changeDetectorRef.markForCheck();
             }
         });
     }
