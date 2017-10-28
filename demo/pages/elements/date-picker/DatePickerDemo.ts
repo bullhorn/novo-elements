@@ -6,6 +6,7 @@ let DateDemoTpl = require('./templates/DateDemo.html');
 let TimeDemoTpl = require('./templates/TimeDemo.html');
 let RangeDemoTpl = require('./templates/RangeDemo.html');
 let DateTimeDemoTpl = require('./templates/DateTimeDemo.html');
+let WeekStartDemoTpl = require('./templates/WeekStartDemo.html');
 
 const template = `
 <div class="container">
@@ -34,6 +35,9 @@ const template = `
     <div class="example demo">${DateTimeDemoTpl}</div>
     <code-snippet [code]="DateTimeDemoTpl"></code-snippet>
 
+    <h5>Customizing Week Start</h5>
+    <div class="example demo">${WeekStartDemoTpl}</div>
+    <code-snippet [code]="WeekStartDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -46,10 +50,12 @@ export class DatePickerDemoComponent {
     TimeDemoTpl: string = TimeDemoTpl;
     RangeDemoTpl: string = RangeDemoTpl;
     DateTimeDemoTpl: string = DateTimeDemoTpl;
+    WeekStartDemoTpl: string = WeekStartDemoTpl;
 
     time: Date = new Date();
     dateOne: Date = new Date();
     dateTwo: Date = new Date();
+    weekStartDate: Date = new Date();
     dateTime: Date = new Date('12/04/1987');
     start: any = new Date().setMonth(new Date().getMonth() - 1);
     end: any = new Date().setMonth(new Date().getMonth() + 1);
@@ -61,4 +67,9 @@ export class DatePickerDemoComponent {
         startDate: null,
         endDate: null
     };
+    weekStart: number = 0;
+
+    setWeekStart(num: number): void {
+        this.weekStart = num;
+    }
 }

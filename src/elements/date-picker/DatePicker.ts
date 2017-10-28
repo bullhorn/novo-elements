@@ -131,6 +131,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
     @Input() inline: boolean;
     @Input() range: boolean;
     @Input() weekRangeSelect: boolean;
+    @Input() weekStart: number = 0;
     // Select callback for output
     @Output() onSelect: EventEmitter<any> = new EventEmitter(false);
     @ViewChild(TemplateRef) template: TemplateRef<any>;
@@ -172,7 +173,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
         }
 
         // Set weekdays / months
-        this.weekdays = this.labels.getWeekdays();
+        this.weekdays = this.setupWeekdays();
         this.months = this.labels.getMonths();
 
         // Set labels
@@ -186,6 +187,21 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
         if (weekRangeSelectChange && weekRangeSelectChange.currentValue !== weekRangeSelectChange.previousValue && !weekRangeSelectChange.firstChange) {
             this.clearRange();
         }
+        let weekStartChanges: SimpleChange = changes['weekStart'];
+        if (weekStartChanges && weekStartChanges.currentValue !== weekStartChanges.previousValue && !weekStartChanges.firstChange) {
+            this.weekdays = this.setupWeekdays();
+            this.updateView(this.model, false, false);
+        }
+    }
+
+    setupWeekdays(): string[] {
+        let weekdays = this.labels.getWeekdays();
+        // Weekstart must be 0-6 (Sunday - Saturday)
+        if (!Helpers.isBlank(this.weekStart) && this.weekStart > 0 && this.weekStart <= 6) {
+            let newStart = weekdays.splice(this.weekStart);
+            weekdays = [...newStart, ...weekdays];
+        }
+        return weekdays;
     }
 
     isSelectingRange(range, day, selected, selected2, hoverDay, rangeSelectMode, weekRangeSelect) {
@@ -464,13 +480,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
 
         // House keeping variables to know when we are done building the month
         let done = false,
-            date = new Date(start.getTime()),
+            date = dateFns.startOfWeek(start, { weekStartsOn: this.weekStart }),
             monthIndex = date.getMonth(),
             count = 0;
-
-        if (date.getDay() !== 0) {
-            date = dateFns.subDays(date, date.getDay());
-        }
 
         while (!done) {
             // Build the days for the weeks
