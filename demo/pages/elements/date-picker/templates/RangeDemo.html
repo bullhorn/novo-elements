@@ -9,5 +9,5 @@
         <br/> {{(value2?.endDate | date) || 'N/A'}}
     </p>
     <novo-date-picker [(ngModel)]="value" range="true" (onSelect)="range"></novo-date-picker>
-    <novo-date-picker [(ngModel)]="value2" range="true" weekRangeSelect="true" (onSelect)="range"></novo-date-picker>
+    <novo-date-picker [(ngModel)]="value2" range="true" weekRangeSelect="true" weekStart="1" (onSelect)="range"></novo-date-picker>
 </div>

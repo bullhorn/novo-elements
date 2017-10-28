@@ -305,8 +305,8 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
         Helpers.swallowEvent(event);
         if (this.range) {
             if (this.weekRangeSelect) {
-                this.selected = dateFns.startOfWeek(day.date);
-                this.selected2 = dateFns.endOfWeek(day.date);
+                this.selected = dateFns.startOfWeek(day.date, { weekStartsOn: this.weekStart });
+                this.selected2 = dateFns.endOfWeek(day.date, { weekStartsOn: this.weekStart });
                 this.selectedLabel = this.labels.formatDateWithFormat(this.selected, {
                     month: 'short',
                     day: '2-digit',
