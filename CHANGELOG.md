@@ -1,3 +1,13 @@
+<a name="2.1.41"></a>
+## [2.1.41](https://github.com/bullhorn/novo-elements/compare/v2.1.40...v2.1.41) (2017-10-28)
+
+
+### Bug Fixes
+
+* **overlay:** using markForCheck, not detectChanges ([ee226f0](https://github.com/bullhorn/novo-elements/commit/ee226f0))
+
+
+
 <a name="2.1.40"></a>
 ## [2.1.40](https://github.com/bullhorn/novo-elements/compare/v2.1.39...v2.1.40) (2017-10-27)
 
