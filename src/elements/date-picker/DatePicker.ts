@@ -108,12 +108,12 @@ export type rangeSelectModes = 'startDate' | 'endDate';
             </table>
             <section class="calendar-content months" [hidden]="view !== 'months'">
                 <div *ngFor="let month of months;let i = index" (click)="setMonth(i)">
-                    <span class="month" [ngClass]="{selected: i === selected?.getMonth()}" [attr.data-automation-id]="month">{{month}}</span>
+                    <div class="month" [ngClass]="{selected: i === selected?.getMonth()}" [attr.data-automation-id]="month">{{month}}</div>
                 </div>
             </section>
             <section class="calendar-content years" [hidden]="view !== 'years'">
                 <div *ngFor="let year of years" (click)="setYear(year)">
-                    <span class="year" [ngClass]="{selected: year == selected?.getFullYear()}" [attr.data-automation-id]="year">{{year}}</span>
+                    <div class="year" [ngClass]="{selected: year == selected?.getFullYear()}" [attr.data-automation-id]="year">{{year}}</div>
                 </div>
             </section>
             <div class="calendar-footer">

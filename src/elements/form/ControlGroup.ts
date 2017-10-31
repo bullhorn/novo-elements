@@ -38,14 +38,14 @@ export interface NovoControlGroupAddConfig {
                             <novo-control [form]="form?.controls[key]['controls'][i]" [control]="c" [condensed]="!vertical || c.controlType === 'read-only'"></novo-control>
                         </div>
                         <div class="novo-control-container last" *ngIf="edit && !vertical">
-                            <button [disabled]="disabledArray[i].edit" type="button" *ngIf="edit && !vertical" theme="icon" icon="edit" (click)="editControl(i)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
+                            <button [disabled]="!disabledArray[i].edit" type="button" *ngIf="edit && !vertical" theme="icon" icon="edit" (click)="editControl(i)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
                         </div>
                         <div class="novo-control-container last" *ngIf="remove && !vertical">
-                            <button [disabled]="disabledArray[i].remove" type="button" *ngIf="remove && !vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
+                            <button [disabled]="!disabledArray[i].remove" type="button" *ngIf="remove && !vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
                         </div>
                     </div>
-                    <button [disabled]="disabledArray[i].edit" type="button" *ngIf="edit && vertical" theme="icon" icon="edit" (click)="editControl(i)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
-                    <button [disabled]="disabledArray[i].remove" type="button" *ngIf="remove && vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
+                    <button [disabled]="!disabledArray[i].edit" type="button" *ngIf="edit && vertical" theme="icon" icon="edit" (click)="editControl(i)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
+                    <button [disabled]="!disabledArray[i].remove" type="button" *ngIf="remove && vertical" theme="icon" icon="delete-o" (click)="removeControl(i)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
                 </div>
             </ng-container>
             <div class="novo-control-group-empty" *ngIf="form?.controls[key] && form?.controls[key]['controls'].length === 0" [attr.data-automation-id]="'novo-control-group-empty-' + key">
@@ -194,14 +194,14 @@ export class NovoControlGroup implements AfterContentInit {
 
     public removeControl(index: number): void {
         const control: FormArray = <FormArray>this.form.controls[this.key];
-        this.onRemove.emit(control.at(index).value);
+        this.onRemove.emit({ value: control.at(index).value, index: index });
         control.removeAt(index);
         this.ref.markForCheck();
     }
 
     public editControl(index: number): void {
         const control: FormArray = <FormArray>this.form.controls[this.key];
-        this.onEdit.emit(control.at(index).value);
+        this.onEdit.emit({ value: control.at(index).value, index: index });
     }
 
     public toggle(event: MouseEvent) {

@@ -4,7 +4,6 @@ $breakpoint: 1000px;
 novo-simple-table {
     display: block;
     min-height: 300px;
-    overflow: auto;
     flex: 1;
     &.empty {
         min-height: 52px;
@@ -170,6 +169,9 @@ novo-activity-table {
         align-items: center;
         flex-shrink: 0;
         border-bottom: 1px solid $off-white;
+        >[novo-activity-table-custom-header] {
+            flex: 1;
+        }
         >novo-search {
             padding-right: 10px;
             display: none;
