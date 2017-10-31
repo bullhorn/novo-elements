@@ -1,3 +1,13 @@
+<a name="2.1.44"></a>
+## [2.1.44](https://github.com/bullhorn/novo-elements/compare/v2.1.43...v2.1.44) (2017-10-31)
+
+
+### Bug Fixes
+
+* **datepicker,controlgroup,simpletable:** Misc fixes ([affd868](https://github.com/bullhorn/novo-elements/commit/affd868))
+
+
+
 <a name="2.1.43"></a>
 ## [2.1.43](https://github.com/bullhorn/novo-elements/compare/v2.1.42...v2.1.43) (2017-10-28)
 
