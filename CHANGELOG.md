@@ -1,3 +1,13 @@
+<a name="2.1.45"></a>
+## [2.1.45](https://github.com/bullhorn/novo-elements/compare/v2.1.44...v2.1.45) (2017-11-01)
+
+
+### Features
+
+* **picker:** Entity picker & grouped results with selection ([b9c9db7](https://github.com/bullhorn/novo-elements/commit/b9c9db7))
+
+
+
 <a name="2.1.44"></a>
 ## [2.1.44](https://github.com/bullhorn/novo-elements/compare/v2.1.43...v2.1.44) (2017-10-31)
 
