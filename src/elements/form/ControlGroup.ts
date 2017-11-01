@@ -7,7 +7,6 @@ import { BaseControl } from './controls/BaseControl';
 import { FormUtils } from './../../utils/form-utils/FormUtils';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { emit } from 'cluster';
 
 export interface NovoControlGroupAddConfig {
     label: string;
