@@ -52,6 +52,9 @@ export class FormGroupedDemoComponent {
     public verticalOptions: NovoFormGroup;
     public controls: BaseControl[] = [];
     public initialValue: {}[] = [];
+    public initValue: {}[] = [
+        { text: 'TEXT', percentage: 12, checkbox: true, test4: 'TEST' },
+    ];
 
     public topAddConfig: NovoControlGroupAddConfig = {
         label: 'Add'
@@ -87,6 +90,14 @@ export class FormGroupedDemoComponent {
     public canRemove(value: any, index: number) {
         console.log('canRemove', value, index); // tslint:disable-line
         return index === 0;
+    }
+
+    public updateInitialValue() {
+        this.initValue = [
+            { text: 'TEXT 111', percentage: 100, checkbox: false, test4: 'TEST 111' },
+            { text: 'TEXT 222', percentage: 5, checkbox: false, test4: 'TEST 222' },
+            { text: 'TEXT 333', percentage: 60, checkbox: true, test4: 'TEST 333' },
+        ];
     }
 
     private setupGroupedFormDemo() {

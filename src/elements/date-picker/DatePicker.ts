@@ -72,8 +72,8 @@ export type rangeSelectModes = 'startDate' | 'endDate';
                 <h3 class="year" [attr.data-automation-id]="heading?.year">{{heading?.year}}</h3>
             </div>
             <div class="date-range-tabs" *ngIf="range" [class.week-select-mode]="weekRangeSelect">
-                <span class="range-tab" (click)="toggleRangeSelect('startDate')" [@startDateTextState]="rangeSelectMode">{{selectedLabel}}</span>
-                <span class="range-tab" (click)="toggleRangeSelect('endDate')" [@endDateTextState]="rangeSelectMode">{{selected2Label}}</span>
+                <span class="range-tab" (click)="toggleRangeSelect('startDate')" [@startDateTextState]="rangeSelectMode" data-automation-id="calendar-start-date">{{selectedLabel}}</span>
+                <span class="range-tab" (click)="toggleRangeSelect('endDate')" [@endDateTextState]="rangeSelectMode" data-automation-id="calendar-end-date">{{selected2Label}}</span>
                 <i class="indicator" [@indicatorState]="rangeSelectMode"></i>
             </div>
             <div class="calendar-header">

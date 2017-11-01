@@ -13,7 +13,7 @@ import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 
 import {
     NovoTable, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter,
-    NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage
+    NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage, NovoActivityTableCustomHeader
 } from './table';
 import {
     NovoSimpleCell, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleHeaderCell,
@@ -43,13 +43,13 @@ export * from './state';
     exports: [
         NovoTable, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage,
         NovoSimpleHeaderRowDef, NovoSimpleRowDef, NovoSimpleCellHeader, NovoSortFilter, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell,
-        NovoSimpleHeaderCell, NovoSimpleCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleFilterFocus, NovoSimpleTablePagination,
+        NovoSimpleHeaderCell, NovoSimpleCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleFilterFocus, NovoSimpleTablePagination, NovoActivityTableCustomHeader,
         NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter
     ],
     declarations: [
         NovoTable, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage,
         NovoSimpleHeaderRowDef, NovoSimpleRowDef, NovoSimpleCellHeader, NovoSortFilter, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell,
-        NovoSimpleHeaderCell, NovoSimpleCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleFilterFocus, NovoSimpleTablePagination,
+        NovoSimpleHeaderCell, NovoSimpleCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleFilterFocus, NovoSimpleTablePagination, NovoActivityTableCustomHeader,
         NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSelection, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter
     ],
     providers: [

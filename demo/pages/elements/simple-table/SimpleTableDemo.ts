@@ -12,7 +12,7 @@ import {
     NovoSortFilter, NovoSelection, NovoActivityTable, SimpleTableColumn,
     RemoteActivityTableService, ActivityTableDataSource, StaticActivityTableService,
     SimpleTableActionColumn, ActivityTableRenderers, SimpleTablePaginationOptions,
-    SimpleTableSearchOptions
+    SimpleTableSearchOptions, GroupedMultiPickerResults
 } from '../../../../index';
 
 const template = `
@@ -40,6 +40,7 @@ interface MockData {
     name: string;
     status: string;
     date: number;
+    money: string;
 }
 
 @Component({
@@ -54,12 +55,16 @@ export class SimpleTableDemoComponent implements OnInit {
 
     public staticDatabase: StaticActivityTableService<MockData>;
     public remoteDatabase: RemoteActivityTableService<MockData>;
+    public customFilterDatabase: RemoteActivityTableService<MockData>;
     public debug: boolean = false;
     public timePeriods = [
         { value: 'week', label: 'Week' },
         { value: 'custom', label: 'Custom Range' },
     ]
     public timePeriod: string = 'week';
+    public pickerConfig: any;
+    public pickerValue: any;
+    public placeholder: string = 'Select something';
 
     public outsideFilter: EventEmitter<{ date: string, type: string }> = new EventEmitter<{ date: string, type: string }>()
 
@@ -83,6 +88,15 @@ export class SimpleTableDemoComponent implements OnInit {
                 filterConfig: {
                     type: 'date'
                 }
+            }
+        },
+        {
+            id: 'money',
+            label: 'Money',
+            renderer: ActivityTableRenderers.propertyRenderer<MockData>('money'),
+            config: {
+                sortable: true,
+                filterable: true,
             }
         },
         {
@@ -138,40 +152,66 @@ export class SimpleTableDemoComponent implements OnInit {
     public paginationOptions: SimpleTablePaginationOptions = {
         pageSize: 10,
         pageSizeOptions: [10, 50, 100]
-    }
+    };
     public searchOptions: SimpleTableSearchOptions = {
         placeholder: 'Search for things...',
         tooltip: 'HELLO'
-    }
+    };
     public defaultSort: { id: string, value: string } = {
         id: 'id',
         value: 'asc'
     };
 
     private staticData: MockData[] = [];
+    private selectedPicker: any;
+    private selectedRange: any;
 
     constructor(private http: Http, private ref: ChangeDetectorRef) {
         let today = new Date();
         let mockStatuses = ['New', 'Active', 'Archived'];
-        for (let i = 1; i <= 100; i++) {
+        for (let i = 1; i <= 10; i++) {
             this.staticData.push({
                 id: i,
                 name: `Name ${i}`,
                 date: today.getTime() - (1000 * 60 * 60 * 24 * i),
-                status: mockStatuses[Math.floor(Math.random() * 3)]
+                status: mockStatuses[Math.floor(Math.random() * 3)],
+                money: `$${Math.floor(Math.random() * 100)}`,
             });
         }
         setTimeout(() => {
             this.outsideFilter.emit({ date: '12/04/1987', type: 'week' });
         }, 5000);
+
+        // Setup picker filter
+        let categoryMap = new Map<string, { value: string, label: string, items: { value: string, label: string, filterValue: any }[] }>();
+        for (let i = 0; i < 10; i++) {
+            let items = [];
+            for (let j = 0; j < 30; j++) {
+                let filter = Math.random() >= 0.5;
+                items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j} - Filter ${filter}`, filterValue: filter });
+            }
+            categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items: items });
+        }
+        this.pickerConfig = {
+            entityIcon: 'company',
+            categoryMap: categoryMap,
+            displayAll: true,
+            customFilter: {
+                field: 'filterValue',
+                value: true,
+                label: 'Custom Filter!'
+            },
+            resultsTemplate: GroupedMultiPickerResults
+        };
     }
 
     public ngOnInit(): void {
         this.remoteDatabase = new RemoteMockDataService(this.http);
+        this.customFilterDatabase = new StaticActivityTableService<MockData>([]);
         setTimeout(() => {
             this.staticDatabase = new StaticActivityTableService<MockData>(this.staticData);
             this.ref.markForCheck();
-        }, 3000);
+        }, 1000);
     }
 
     public log(data: MockData): void {
@@ -195,7 +235,8 @@ export class SimpleTableDemoComponent implements OnInit {
                 id: i,
                 name: `BOB ${i}`,
                 date: today.getTime() - (1000 * 60 * 60 * 24 * i),
-                status: mockStatuses[Math.floor(Math.random() * 3)]
+                status: mockStatuses[Math.floor(Math.random() * 3)],
+                money: `$${Math.floor(Math.random() * 100)}`,
             });
         }
         this.staticDatabase = new StaticActivityTableService<MockData>(this.staticData);
@@ -207,7 +248,29 @@ export class SimpleTableDemoComponent implements OnInit {
     }
 
     public onRangeSelect(event): void {
+        this.selectedRange = event;
         console.log('Date Filter:', event); // tslint:disable-line
+        this.loadCustomFilterData();
+    }
+
+    public onPickerSelect(event: any): void {
+        this.selectedPicker = event;
+        console.log('Picker Filter:', event); // tslint:disable-line
+        this.loadCustomFilterData();
+    }
+
+    private loadCustomFilterData() {
+        console.log('LOADING DATA', this.selectedPicker, this.selectedRange); // tslint:disable-line
+        if (this.selectedPicker && this.selectedPicker.value && this.selectedRange) {
+            this.customFilterDatabase = undefined;
+            setTimeout(() => {
+                this.customFilterDatabase = new StaticActivityTableService<MockData>(this.staticData);
+                this.ref.markForCheck();
+            }, 3000);
+        } else {
+            this.customFilterDatabase = new StaticActivityTableService<MockData>([]);
+            this.ref.markForCheck();
+        }
     }
 }
 

@@ -1,13 +1,1 @@
-<button theme="primary" (click)="loadNewData()">Load New Data</button>
-<button theme="primary" (click)="toggleDebug()">Debug</button>
-<br/>
-<br/>
-<novo-activity-table [defaultSort]="defaultSort" [searchOptions]="searchOptions" [debug]="debug" [activityService]="staticDatabase" [columns]="columns" [actionColumns]="actionColumns" [displayedColumns]="displayedColumns" [paginationOptions]="paginationOptions" [outsideFilter]="outsideFilter" #static>
-    <div novo-activity-table-actions>
-        <button theme="secondary">Add</button>
-        <button theme="icon" icon="refresh" (click)="refresh(static)"></button>
-    </div>
-    <div novo-activity-table-empty-message>
-        CUSTOM EMPTY MESSAGE
-    </div>
-</novo-activity-table>
+

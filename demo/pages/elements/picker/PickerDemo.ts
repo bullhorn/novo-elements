@@ -7,8 +7,10 @@ let FormattedPickerDemoTpl = require('./templates/FormattedPickerDemo.html');
 let CustomPickerResultsDemoTpl = require('./templates/CustomPickerResultsDemo.html');
 let DefaultOptionsDemoTpl = require('./templates/DefaultOptionsPickerDemo.html');
 let OverrideTemplateDemoTpl = require('./templates/OverrideTemplateDemo.html');
+let GroupedPickerDemoTpl = require('./templates/GroupedPickerDemo.html');
+let EntityPickerDemoTpl = require('./templates/EntityPickerDemo.html');
 // Vendor
-import { PickerResults } from './../../../../index';
+import { PickerResults, GroupedMultiPickerResults } from './../../../../index';
 
 @Component({
     selector: 'custom-picker-results',
@@ -90,6 +92,18 @@ const template = `
     </p>
     <div class="example picker-demo">${DefaultOptionsDemoTpl}</div>
     <code-snippet [code]="DefaultOptionsDemoTpl"></code-snippet>
+
+    <h5>Entity Single Picker</h5>
+    <p>
+        You can provide custom config to style the picker to select entities too!
+    </p>
+    <div class="example picker-demo">${EntityPickerDemoTpl}</div>
+    <code-snippet [code]="EntityPickerDemoTpl"></code-snippet>
+
+    <h5>Grouped Multi Picker (categories) with Picker</h5>
+    <p>Having custom templates makes it easy to customize the functionality of the picker, here is an example of a category selector</p>
+    <div class="example picker-demo">${GroupedPickerDemoTpl}</div>
+    <code-snippet [code]="GroupedPickerDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -104,6 +118,8 @@ export class PickerDemoComponent {
     private CustomPickerResultsDemoTpl: string = CustomPickerResultsDemoTpl;
     private DefaultOptionsDemoTpl: string = DefaultOptionsDemoTpl;
     private OverrideTemplateDemoTpl: string = OverrideTemplateDemoTpl;
+    private GroupedPickerDemoTpl: string = GroupedPickerDemoTpl;
+    private EntityPickerDemoTpl: string = EntityPickerDemoTpl;
     private placeholder: string = 'Select...';
     private staticDemo: any;
     private formatted: any;
@@ -116,6 +132,17 @@ export class PickerDemoComponent {
     private overrideValue: any;
     private overrideDemo: any;
     private async: any;
+    private entityDemo: any;
+    private entity: any;
+
+    private groupedPicker1: any;
+    private groupedPicker2: any;
+    private groupedPicker3: any;
+    private groupedPicker4: any;
+    private groupedPicker1Value: any;
+    private groupedPicker2Value: any;
+    private groupedPicker3Value: any;
+    private groupedPicker4Value: any;
 
     constructor() {
         let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
@@ -218,5 +245,90 @@ export class PickerDemoComponent {
                 });
             }
         };
+
+        this.entityDemo = {
+            options: collaborators,
+            format: '$firstName $lastName',
+            entityIcon: 'person'
+        };
+
+        this.setupGroupedPickerDemo();
+    }
+
+    setupGroupedPickerDemo() {
+        let categoryMap = new Map<string, { value: string, label: string, items: { value: string, label: string }[] }>();
+        for (let i = 0; i < 10; i++) {
+            let items = [];
+            for (let j = 0; j < 10; j++) {
+                items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j}` });
+            }
+            categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items: items });
+        }
+        this.groupedPicker1 = {
+            categoryMap: categoryMap,
+            resultsTemplate: GroupedMultiPickerResults,
+            displayAll: true
+        };
+        this.groupedPicker2 = {
+            categoryMap: categoryMap,
+            resultsTemplate: GroupedMultiPickerResults
+        };
+        this.groupedPicker3 = {
+            categories: [
+                { value: 'C1', label: 'Category 1' },
+                { value: 'C2', label: 'Category 2' },
+                { value: 'C3', label: 'Category 3' },
+                { value: 'C4', label: 'Category 4' },
+                { value: 'C5', label: 'Category 5' },
+            ],
+            getItemsForCategoryAsync: (category, customFilter) => {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve([
+                            { value: 'A1', label: 'Async 1' },
+                            { value: 'A2', label: 'Async 2' },
+                            { value: 'A3', label: 'Async 3' },
+                            { value: 'A4', label: 'Async 4' },
+                            { value: 'A5', label: 'Async 5' },
+                        ]);
+                    }, 1000);
+                });
+            },
+            resultsTemplate: GroupedMultiPickerResults
+        };
+        this.groupedPicker4 = {
+            entityIcon: 'company',
+            categories: [
+                { value: 'C1', label: 'Category 1' },
+                { value: 'C2', label: 'Category 2' },
+                { value: 'C3', label: 'Category 3' },
+                { value: 'C4', label: 'Category 4' },
+                { value: 'C5', label: 'Category 5' },
+            ],
+            getItemsForCategoryAsync: (category, customFilter) => {
+                console.log('GET ITEMS', category, customFilter); // tslint:disable-line
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve([
+                            { value: 'A1', label: 'Async 1' },
+                            { value: 'A2', label: 'Async 2' },
+                            { value: 'A3', label: 'Async 3' },
+                            { value: 'A4', label: 'Async 4' },
+                            { value: 'A5', label: 'Async 5' },
+                        ]);
+                    }, 1000);
+                });
+            },
+            customFilter: {
+                field: 'testField',
+                value: true,
+                label: 'Custom Filter!'
+            },
+            resultsTemplate: GroupedMultiPickerResults
+        };
+    }
+
+    onChanged(event) {
+        console.log('EVENT', event); // tslint:disable-line
     }
 }

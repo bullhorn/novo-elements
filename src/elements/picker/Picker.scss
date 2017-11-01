@@ -37,15 +37,49 @@ novo-picker {
         &:invalid {
             border-bottom: 1px solid #DA4453;
         }
+        &.entity-picker {
+            padding-left: 2em;
+        }
+        &.entity-selected {
+            padding-left: 2.5em;
+            background: $off-white !important;
+        }
+    }
+    i.bhi-more {
+        position: absolute;
+        left: 0;
+        top: 2px;
+        background: $off-white;
+        font-size: 1em;
+        border-radius: 3px;
+        padding: 3px;
+    }
+    i.entity-icon {
+        position: absolute;
+        left: 5px;
+        top: 3px;
+        font-size: 1em;
+        border-radius: 3px;
+        padding: 3px;
+        color: $white;
+        @each $entity,
+        $color in $entity-colors {
+            &.#{$entity} {
+                background: $color;
+            }
+        }
     }
     i.bhi-search,
     i.bhi-times {
         position: absolute;
         right: 0;
-        font-size: 1.2em;
+        &.entity-selected {
+            right: 5px;
+        }
     }
     i.bhi-search {
-        top: 0;
+        top: 6px;
+        font-size: 1.1em;
     }
     i.bhi-times {
         top: 6px;
@@ -208,7 +242,6 @@ picker-loader,
     transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
 }
 
-
 novo-picker {
     padding-bottom: 0;
     &.ng-touched.ng-invalid:not(.ng-pristine) {
@@ -226,6 +259,7 @@ entity-picker-results {
         overflow: auto;
     }
 }
+
 entity-picker-results,
 picker-results {
     color: black;

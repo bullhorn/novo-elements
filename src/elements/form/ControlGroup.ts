@@ -1,4 +1,4 @@
-import { Component, Input, Output, AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter } from '@angular/core';
+import { Component, Input, Output, AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import { FormBuilder, FormArray } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
@@ -7,6 +7,7 @@ import { BaseControl } from './controls/BaseControl';
 import { FormUtils } from './../../utils/form-utils/FormUtils';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { emit } from 'cluster';
 
 export interface NovoControlGroupAddConfig {
     label: string;
@@ -58,7 +59,7 @@ export interface NovoControlGroupAddConfig {
    `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NovoControlGroup implements AfterContentInit {
+export class NovoControlGroup implements AfterContentInit, OnChanges {
     // Sets the display of the group to either be row (default) or vertical via flex-box
     @Input()
     set vertical(v: boolean) {
@@ -139,6 +140,16 @@ export class NovoControlGroup implements AfterContentInit {
         if (!this.key) {
             throw new Error('novo-control-group must have the [key] attribute provided!');
         }
+    }
+
+    public ngOnChanges(changes: SimpleChanges) {
+        let initialValueChange: SimpleChange = changes['initialValue'];
+
+        // If intitial value changes, clear the controls
+        if (initialValueChange.currentValue !== initialValueChange.previousValue && !initialValueChange.firstChange) {
+            this.clearControls();
+        }
+
         if (!this.initialValue) {
             // Add one control by default
             this.addNewControl();
@@ -192,9 +203,11 @@ export class NovoControlGroup implements AfterContentInit {
         return ctrl;
     }
 
-    public removeControl(index: number): void {
+    public removeControl(index: number, emitEvent: boolean = true): void {
         const control: FormArray = <FormArray>this.form.controls[this.key];
-        this.onRemove.emit({ value: control.at(index).value, index: index });
+        if (emitEvent) {
+            this.onRemove.emit({ value: control.at(index).value, index: index });
+        }
         control.removeAt(index);
         this.ref.markForCheck();
     }
@@ -209,6 +222,16 @@ export class NovoControlGroup implements AfterContentInit {
         if (this.collapsible) {
             this.toggled = !this.toggled;
             this.ref.markForCheck();
+        }
+    }
+
+    private clearControls() {
+        const control: FormArray = <FormArray>this.form.controls[this.key];
+        if (control) {
+            for (let i: number = control.controls.length; i >= 0; i--) {
+                this.removeControl(i, false);
+            }
+            this.currentIndex = 0;
         }
     }
 

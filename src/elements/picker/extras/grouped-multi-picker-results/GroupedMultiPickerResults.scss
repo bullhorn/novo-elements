@@ -20,8 +20,27 @@ grouped-multi-picker-results {
         }
     }
     >.grouped-multi-picker-groups {
-        overflow: auto;
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        novo-list {
+            overflow: auto;
+        }
+        footer {
+            flex-basis: 50px;
+            min-height: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid $off-white;
+            label {
+                font-weight: 500;
+            }
+            &.disabled {
+                pointer-events: none;
+                opacity: 0.75;
+            }
+        }
         novo-list-item {
             font-weight: 500;
             color: #999999;
@@ -59,8 +78,8 @@ grouped-multi-picker-results {
                 padding: 0.95em;
                 background: transparent !important;
                 border: none;
-                border-bottom: 1px solid #F0F0F0;
-                border-left: 1px solid #F0F0F0;
+                border-bottom: 1px solid $off-white;
+                border-left: 1px solid $off-white;
                 border-radius: 0;
                 border-radius: 0;
                 outline: none;
@@ -70,7 +89,7 @@ grouped-multi-picker-results {
                 transition: all 300ms;
                 color: #26282B;
                 &:hover {
-                    border-bottom: 1px solid #F0F0F0;
+                    border-bottom: 1px solid $off-white;
                 }
                 &:focus {
                     border-bottom: 1px solid $positive;
@@ -98,7 +117,7 @@ grouped-multi-picker-results {
             }
         }
         .grouped-multi-picker-list-container {
-            border-left: 1px solid #F0F0F0;
+            border-left: 1px solid $off-white;
             flex: 1;
             display: flex;
             flex-direction: column;

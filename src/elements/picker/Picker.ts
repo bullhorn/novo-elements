@@ -36,9 +36,13 @@ const PICKER_VALUE_ACCESSOR = {
     selector: 'novo-picker',
     providers: [PICKER_VALUE_ACCESSOR],
     template: `
+        <i class="bhi-more" *ngIf="config?.entityIcon && !_value"></i>
+        <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
         <input
             type="text"
             [(ngModel)]="term"
+            [class.entity-picker]="config.entityIcon"
+            [class.entity-selected]="config?.entityIcon && _value"
             (ngModelChange)="checkTerm($event)"
             [placeholder]="placeholder"
             (keydown)="onKeyDown($event)"
@@ -47,7 +51,7 @@ const PICKER_VALUE_ACCESSOR = {
             (blur)="onTouched($event)"
             autocomplete="off" #input />
         <i class="bhi-search" *ngIf="!_value || clearValueOnSelect"></i>
-        <i class="bhi-times" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
+        <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
         <novo-overlay-template class="picker-results-container" [parent]="element">
             <span #results></span>
             <ng-content></ng-content>
@@ -104,10 +108,7 @@ export class NovoPickerElement implements OnInit {
     onModelChange: Function = () => { };
     onModelTouched: Function = () => { };
 
-    constructor(public element: ElementRef, private componentUtils: ComponentUtils, private _changeDetectorRef: ChangeDetectorRef) {
-        // Setup handlers
-        //this.closeHandler = this.toggleActive.bind(this);
-    }
+    constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) { }
 
     ngOnInit() {
         if (this.overrideElement) {
@@ -161,6 +162,7 @@ export class NovoPickerElement implements OnInit {
 
     private hide(): void {
         this.closePanel();
+        this.ref.markForCheck();
     }
 
     onKeyDown(event: KeyboardEvent) {
@@ -175,16 +177,19 @@ export class NovoPickerElement implements OnInit {
 
             if (event.keyCode === KeyCodes.UP) {
                 this.popup.instance.prevActiveMatch();
+                this.ref.markForCheck();
                 return;
             }
 
             if (event.keyCode === KeyCodes.DOWN) {
                 this.popup.instance.nextActiveMatch();
+                this.ref.markForCheck();
                 return;
             }
 
             if (event.keyCode === KeyCodes.ENTER) {
                 this.popup.instance.selectActiveMatch();
+                this.ref.markForCheck();
                 return;
             }
 
@@ -205,6 +210,7 @@ export class NovoPickerElement implements OnInit {
             this.term = null;
             this.hideResults();
         }
+        this.ref.markForCheck();
     }
 
     /**
@@ -231,6 +237,7 @@ export class NovoPickerElement implements OnInit {
             this.popup.instance.term = this.term;
             this.popup.instance.selected = this.selected;
             this.popup.instance.autoSelectFirstOption = this.autoSelectFirstOption;
+            this.ref.markForCheck();
         } else {
             this.popup = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
             this.popup.instance.parent = this;
@@ -239,6 +246,7 @@ export class NovoPickerElement implements OnInit {
             this.popup.instance.selected = this.selected;
             this.popup.instance.autoSelectFirstOption = this.autoSelectFirstOption;
             this.popup.instance.overlay = this.container._overlayRef;
+            this.ref.markForCheck();
         }
     }
 
@@ -276,6 +284,7 @@ export class NovoPickerElement implements OnInit {
             this.changed.emit({ value: selected.value, rawValue: { label: this.term, value: this._value } });
             this.select.emit(selected);
         }
+        this.ref.markForCheck();
     }
 
     // Makes sure to clear the model if the user clears the text box
@@ -285,6 +294,7 @@ export class NovoPickerElement implements OnInit {
             this._value = null;
             this.onModelChange(this._value);
         }
+        this.ref.markForCheck();
     }
 
     // Set touched on blur
@@ -315,10 +325,11 @@ export class NovoPickerElement implements OnInit {
                     }
                 });
             } else {
-                this.term = value;
+                this.term = value || '';
             }
         }
         this._value = value;
+        this.ref.markForCheck();
     }
 
     registerOnChange(fn: Function): void {

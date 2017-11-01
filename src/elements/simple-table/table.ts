@@ -32,6 +32,11 @@ export class NovoTable<T> extends _NovoTable<T> {
 export class NovoActivityTableActions { }
 
 @Directive({
+    selector: 'novo-activity-table-custom-header'
+})
+export class NovoActivityTableCustomHeader { }
+
+@Directive({
     selector: 'novo-activity-table-custom-filter'
 })
 export class NovoActivityTableCustomFilter { }
@@ -58,7 +63,8 @@ export class NovoActivityTableNoResultsMessage { }
             <p>User Filtered: {{ state.userFiltered }}</p>
             <p>Loading (Table): {{ loading }}</p>
         </div>
-        <header *ngIf="!(dataSource?.totallyEmpty && !state.userFiltered) && !loading">
+        <header *ngIf="(!(dataSource?.totallyEmpty && !state.userFiltered) && !loading) || forceShowHeader">
+            <ng-content select="[novo-activity-table-custom-header]"></ng-content>
             <novo-search
                 alwaysOpen="true"
                 (searchChanged)="onSearchChange($event)"
@@ -68,6 +74,7 @@ export class NovoActivityTableNoResultsMessage { }
                 [hint]="searchOptions?.tooltip">
             </novo-search>
             <novo-simple-table-pagination
+                *ngIf="paginationOptions"
                 [length]="dataSource?.total"
                 [page]="paginationOptions.page"
                 [pageSize]="paginationOptions.pageSize"
@@ -140,6 +147,14 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDest
     }
     private _customFilter: boolean;
 
+    @Input() set forceShowHeader(v: boolean) {
+        this._forceShowHeader = coerceBooleanProperty(v);
+    }
+    get forceShowHeader() {
+        return this._forceShowHeader;
+    }
+    private _forceShowHeader: boolean;
+
     @Input() set hideGlobalSearch(v: boolean) {
         this._hideGlobalSearch = coerceBooleanProperty(v);
         this.globalSearchHiddenClassToggle = this._hideGlobalSearch;
@@ -173,6 +188,7 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDest
     constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: NovoActivityTableState) { }
 
     public ngOnChanges(changes: SimpleChanges): void {
+        this.loading = changes['activityService'] && !changes['activityService'].currentValue;
         if (changes['activityService'] && changes['activityService'].currentValue) {
             this.loading = false;
             this.dataSource = new ActivityTableDataSource<T>(this.activityService, this.state, this.ref);
@@ -196,20 +212,17 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDest
     }
 
     public ngAfterContentInit(): void {
-        if (!this.paginationOptions) {
-            this.paginationOptions = {}
-        }
-        if (!this.paginationOptions.page) {
+        if (this.paginationOptions && !this.paginationOptions.page) {
             this.paginationOptions.page = 0;
         }
-        if (!this.paginationOptions.pageSize) {
+        if (this.paginationOptions && !this.paginationOptions.pageSize) {
             this.paginationOptions.pageSize = 50;
         }
-        if (!this.paginationOptions.pageSizeOptions) {
+        if (this.paginationOptions && !this.paginationOptions.pageSizeOptions) {
             this.paginationOptions.pageSizeOptions = [10, 25, 50, 100];
         }
-        this.state.page = this.paginationOptions.page;
-        this.state.pageSize = this.paginationOptions.pageSize;
+        this.state.page = this.paginationOptions ? this.paginationOptions.page : undefined;
+        this.state.pageSize = this.paginationOptions ? this.paginationOptions.pageSize : undefined;
         this.ref.markForCheck();
     }
 
