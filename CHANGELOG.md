@@ -1,3 +1,13 @@
+<a name="2.1.46"></a>
+## [2.1.46](https://github.com/bullhorn/novo-elements/compare/v2.1.45...v2.1.46) (2017-11-01)
+
+
+### Bug Fixes
+
+* **controlgroup:** Fixing bad import ([1d5be2a](https://github.com/bullhorn/novo-elements/commit/1d5be2a))
+
+
+
 <a name="2.1.45"></a>
 ## [2.1.45](https://github.com/bullhorn/novo-elements/compare/v2.1.44...v2.1.45) (2017-11-01)
 
