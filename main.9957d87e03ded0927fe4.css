@@ -1515,6 +1515,12 @@ i {
     i[theme][theme="contained"]:before {
       vertical-align: baseline;
       line-height: 1.8; }
+    i[theme][theme="contained"].star {
+      color: #ffffff;
+      background: #0B344F; }
+    i[theme][theme="contained"].person {
+      color: #ffffff;
+      background: #FFAA44; }
     i[theme][theme="contained"].company {
       color: #ffffff;
       background: #3399DD; }
@@ -1592,6 +1598,12 @@ i {
       background: #967ADC; }
     i[theme][theme="contained"].large {
       font-size: 1.2em; }
+  i[theme][theme="entity"].star {
+    color: #0B344F;
+    background: transparent; }
+  i[theme][theme="entity"].person {
+    color: #FFAA44;
+    background: transparent; }
   i[theme][theme="entity"].company {
     color: #3399DD;
     background: transparent; }
@@ -3260,6 +3272,12 @@ novo-toast.carnation {
 
 novo-toast.lavender {
   background: #967ADC; }
+
+novo-toast.star {
+  background: #0B344F; }
+
+novo-toast.person {
+  background: #FFAA44; }
 
 novo-toast.company {
   background: #3399DD; }
@@ -6987,13 +7005,73 @@ novo-picker {
       border-bottom: 1px solid #4A89DC; }
     novo-picker input:invalid {
       border-bottom: 1px solid #DA4453; }
+    novo-picker input.entity-picker {
+      padding-left: 2em; }
+    novo-picker input.entity-selected {
+      padding-left: 2.5em;
+      background: #f4f4f4 !important; }
+  novo-picker i.bhi-more {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    background: #f4f4f4;
+    font-size: 1em;
+    border-radius: 3px;
+    padding: 3px; }
+  novo-picker i.entity-icon {
+    position: absolute;
+    left: 5px;
+    top: 3px;
+    font-size: 1em;
+    border-radius: 3px;
+    padding: 3px;
+    color: #ffffff; }
+    novo-picker i.entity-icon.star {
+      background: #0B344F; }
+    novo-picker i.entity-icon.person {
+      background: #FFAA44; }
+    novo-picker i.entity-icon.company {
+      background: #3399DD; }
+    novo-picker i.entity-icon.candidate {
+      background: #44BB77; }
+    novo-picker i.entity-icon.navigation {
+      background: #2F384F; }
+    novo-picker i.entity-icon.lead {
+      background: #AA6699; }
+    novo-picker i.entity-icon.contact {
+      background: #FFAA44; }
+    novo-picker i.entity-icon.opportunity {
+      background: #662255; }
+    novo-picker i.entity-icon.job {
+      background: #BB5566; }
+    novo-picker i.entity-icon.submission {
+      background: #a9adbb; }
+    novo-picker i.entity-icon.sendout {
+      background: #747884; }
+    novo-picker i.entity-icon.placement {
+      background: #0B344F; }
+    novo-picker i.entity-icon.note {
+      background: #747884; }
+    novo-picker i.entity-icon.task {
+      background: #4f5361; }
+    novo-picker i.entity-icon.distributionList {
+      background: #4f5361; }
+    novo-picker i.entity-icon.credential {
+      background: #4f5361; }
+    novo-picker i.entity-icon.user {
+      background: #4f5361; }
+    novo-picker i.entity-icon.corporateuser {
+      background: #4f5361; }
   novo-picker i.bhi-search,
   novo-picker i.bhi-times {
     position: absolute;
-    right: 0;
-    font-size: 1.2em; }
+    right: 0; }
+    novo-picker i.bhi-search.entity-selected,
+    novo-picker i.bhi-times.entity-selected {
+      right: 5px; }
   novo-picker i.bhi-search {
-    top: 0; }
+    top: 6px;
+    font-size: 1.1em; }
   novo-picker i.bhi-times {
     top: 6px;
     cursor: pointer;
@@ -7577,9 +7655,29 @@ grouped-multi-picker-results {
       pointer-events: none;
       opacity: 0.75; }
   grouped-multi-picker-results > .grouped-multi-picker-groups {
-    overflow: auto;
     -ms-flex: 1;
-        flex: 1; }
+        flex: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column; }
+    grouped-multi-picker-results > .grouped-multi-picker-groups novo-list {
+      overflow: auto; }
+    grouped-multi-picker-results > .grouped-multi-picker-groups footer {
+      -ms-flex-preferred-size: 50px;
+          flex-basis: 50px;
+      min-height: 50px;
+      height: 50px;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center;
+      border-top: 1px solid #f4f4f4; }
+      grouped-multi-picker-results > .grouped-multi-picker-groups footer label {
+        font-weight: 500; }
+      grouped-multi-picker-results > .grouped-multi-picker-groups footer.disabled {
+        pointer-events: none;
+        opacity: 0.75; }
     grouped-multi-picker-results > .grouped-multi-picker-groups novo-list-item {
       font-weight: 500;
       color: #999999;
@@ -7613,8 +7711,8 @@ grouped-multi-picker-results {
         padding: 0.95em;
         background: transparent !important;
         border: none;
-        border-bottom: 1px solid #F0F0F0;
-        border-left: 1px solid #F0F0F0;
+        border-bottom: 1px solid #f4f4f4;
+        border-left: 1px solid #f4f4f4;
         border-radius: 0;
         border-radius: 0;
         outline: none;
@@ -7624,7 +7722,7 @@ grouped-multi-picker-results {
         transition: all 300ms;
         color: #26282B; }
         grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container input:hover {
-          border-bottom: 1px solid #F0F0F0; }
+          border-bottom: 1px solid #f4f4f4; }
         grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-input-container input:focus {
           border-bottom: 1px solid #4A89DC;
           border-left: 1px solid #4A89DC; }
@@ -7645,7 +7743,7 @@ grouped-multi-picker-results {
         cursor: pointer;
         font-size: 1.1em; }
     grouped-multi-picker-results > .grouped-multi-picker-matches .grouped-multi-picker-list-container {
-      border-left: 1px solid #F0F0F0;
+      border-left: 1px solid #f4f4f4;
       -ms-flex: 1;
           flex: 1;
       display: -ms-flexbox;
@@ -9595,6 +9693,18 @@ header[theme][theme="lavender"] {
   header[theme][theme="lavender"] > section.primary {
     background: #967ADC; }
 
+header[theme][theme="star"] {
+  background: #0B344F;
+  color: #fff; }
+  header[theme][theme="star"] > section.primary {
+    background: #0B344F; }
+
+header[theme][theme="person"] {
+  background: #FFAA44;
+  color: #fff; }
+  header[theme][theme="person"] > section.primary {
+    background: #FFAA44; }
+
 header[theme][theme="company"] {
   background: #3399DD;
   color: #fff; }
@@ -9781,6 +9891,26 @@ novo-list {
   novo-list.horizontal-list {
     -ms-flex-direction: row;
         flex-direction: row; }
+  novo-list[theme="star"] novo-list-item {
+    background: #0B344F;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    novo-list[theme="star"] novo-list-item i {
+      color: #fff; }
+    novo-list[theme="star"] novo-list-item item-title h6 {
+      color: #fff; }
+    novo-list[theme="star"] novo-list-item item-content > * {
+      color: rgba(255, 255, 255, 0.65); }
+  novo-list[theme="person"] novo-list-item {
+    background: #FFAA44;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    novo-list[theme="person"] novo-list-item i {
+      color: #fff; }
+    novo-list[theme="person"] novo-list-item item-title h6 {
+      color: #fff; }
+    novo-list[theme="person"] novo-list-item item-content > * {
+      color: rgba(255, 255, 255, 0.65); }
   novo-list[theme="company"] novo-list-item {
     background: #3399DD;
     color: #fff;
@@ -10097,6 +10227,10 @@ novo-list-item {
     novo-list-item item-header item-avatar {
       margin-right: 0.5em;
       font-size: 20px; }
+      novo-list-item item-header item-avatar i.star {
+        background: #0B344F; }
+      novo-list-item item-header item-avatar i.person {
+        background: #FFAA44; }
       novo-list-item item-header item-avatar i.company {
         background: #3399DD; }
       novo-list-item item-header item-avatar i.candidate {
@@ -10170,6 +10304,10 @@ novo-list-item {
       color: #D770AD; }
     novo-list-item item-content i.lavender {
       color: #967ADC; }
+    novo-list-item item-content i.star {
+      color: #0B344F; }
+    novo-list-item item-content i.person {
+      color: #FFAA44; }
     novo-list-item item-content i.company {
       color: #3399DD; }
     novo-list-item item-content i.candidate {
@@ -10744,6 +10882,42 @@ novo-table[theme="lavender"] > header {
       color: #ffffff;
       border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
       novo-table[theme="lavender"] > header novo-pagination novo-select div[type="button"] i {
+        color: #ffffff !important; }
+
+novo-table[theme="star"] > header {
+  background: #0B344F;
+  color: #fff; }
+  novo-table[theme="star"] > header novo-pagination {
+    background: rgba(0, 0, 0, 0.15); }
+    novo-table[theme="star"] > header novo-pagination > * {
+      color: #ffffff;
+      opacity: 1; }
+    novo-table[theme="star"] > header novo-pagination .page {
+      color: #ffffff; }
+    novo-table[theme="star"] > header novo-pagination h5.rows {
+      opacity: 0.75; }
+    novo-table[theme="star"] > header novo-pagination novo-select div[type="button"] {
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+      novo-table[theme="star"] > header novo-pagination novo-select div[type="button"] i {
+        color: #ffffff !important; }
+
+novo-table[theme="person"] > header {
+  background: #FFAA44;
+  color: #fff; }
+  novo-table[theme="person"] > header novo-pagination {
+    background: rgba(0, 0, 0, 0.15); }
+    novo-table[theme="person"] > header novo-pagination > * {
+      color: #ffffff;
+      opacity: 1; }
+    novo-table[theme="person"] > header novo-pagination .page {
+      color: #ffffff; }
+    novo-table[theme="person"] > header novo-pagination h5.rows {
+      opacity: 0.75; }
+    novo-table[theme="person"] > header novo-pagination novo-select div[type="button"] {
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+      novo-table[theme="person"] > header novo-pagination novo-select div[type="button"] i {
         color: #ffffff !important; }
 
 novo-table[theme="company"] > header {
@@ -15803,106 +15977,114 @@ color header {
       color header .background-boxes > *:hover {
         transform: scale(1.7);
         border-radius: 50%; }
-    color header .background-boxes .bb-company {
-      background: #3399DD;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-candidate {
-      background: #44BB77;
-      width: 32px;
-      height: 32px; }
-    color header .background-boxes .bb-navigation {
-      background: #2F384F;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-lead {
-      background: #AA6699;
-      width: 45px;
-      height: 45px; }
-    color header .background-boxes .bb-contact {
+    color header .background-boxes .bb-star {
+      background: #0B344F;
+      width: 29px;
+      height: 29px; }
+    color header .background-boxes .bb-person {
       background: #FFAA44;
-      width: 27px;
-      height: 27px; }
-    color header .background-boxes .bb-opportunity {
-      background: #662255;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-job {
-      background: #BB5566;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-submission {
-      background: #a9adbb;
       width: 37px;
       height: 37px; }
-    color header .background-boxes .bb-sendout {
-      background: #747884;
-      width: 43px;
-      height: 43px; }
-    color header .background-boxes .bb-placement {
-      background: #0B344F;
+    color header .background-boxes .bb-company {
+      background: #3399DD;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-candidate {
+      background: #44BB77;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-navigation {
+      background: #2F384F;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-lead {
+      background: #AA6699;
+      width: 42px;
+      height: 42px; }
+    color header .background-boxes .bb-contact {
+      background: #FFAA44;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-opportunity {
+      background: #662255;
+      width: 41px;
+      height: 41px; }
+    color header .background-boxes .bb-job {
+      background: #BB5566;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-submission {
+      background: #a9adbb;
       width: 32px;
       height: 32px; }
+    color header .background-boxes .bb-sendout {
+      background: #747884;
+      width: 38px;
+      height: 38px; }
+    color header .background-boxes .bb-placement {
+      background: #0B344F;
+      width: 31px;
+      height: 31px; }
     color header .background-boxes .bb-note {
       background: #747884;
       width: 43px;
       height: 43px; }
     color header .background-boxes .bb-task {
       background: #4f5361;
-      width: 29px;
-      height: 29px; }
-    color header .background-boxes .bb-distributionList {
-      background: #4f5361;
-      width: 31px;
-      height: 31px; }
-    color header .background-boxes .bb-credential {
-      background: #4f5361;
       width: 41px;
       height: 41px; }
-    color header .background-boxes .bb-user {
+    color header .background-boxes .bb-distributionList {
       background: #4f5361;
-      width: 30px;
-      height: 30px; }
-    color header .background-boxes .bb-corporateuser {
-      background: #4f5361;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-aqua {
-      background: #3BAFDA;
-      width: 33px;
-      height: 33px; }
-    color header .background-boxes .bb-ocean {
-      background: #4A89DC;
       width: 26px;
       height: 26px; }
-    color header .background-boxes .bb-mint {
-      background: #37BC9B;
-      width: 38px;
-      height: 38px; }
-    color header .background-boxes .bb-grass {
-      background: #8CC152;
+    color header .background-boxes .bb-credential {
+      background: #4f5361;
+      width: 34px;
+      height: 34px; }
+    color header .background-boxes .bb-user {
+      background: #4f5361;
+      width: 26px;
+      height: 26px; }
+    color header .background-boxes .bb-corporateuser {
+      background: #4f5361;
       width: 45px;
       height: 45px; }
+    color header .background-boxes .bb-aqua {
+      background: #3BAFDA;
+      width: 37px;
+      height: 37px; }
+    color header .background-boxes .bb-ocean {
+      background: #4A89DC;
+      width: 28px;
+      height: 28px; }
+    color header .background-boxes .bb-mint {
+      background: #37BC9B;
+      width: 32px;
+      height: 32px; }
+    color header .background-boxes .bb-grass {
+      background: #8CC152;
+      width: 43px;
+      height: 43px; }
     color header .background-boxes .bb-sunflower {
       background: #F6B042;
       width: 27px;
       height: 27px; }
     color header .background-boxes .bb-bittersweet {
       background: #EB6845;
-      width: 28px;
-      height: 28px; }
+      width: 45px;
+      height: 45px; }
     color header .background-boxes .bb-grapefruit {
       background: #DA4453;
-      width: 30px;
-      height: 30px; }
+      width: 35px;
+      height: 35px; }
     color header .background-boxes .bb-carnation {
       background: #D770AD;
-      width: 27px;
-      height: 27px; }
+      width: 44px;
+      height: 44px; }
     color header .background-boxes .bb-lavender {
       background: #967ADC;
-      width: 27px;
-      height: 27px; }
+      width: 37px;
+      height: 37px; }
 
 color article.color-blocks {
   display: -ms-flexbox;
@@ -15992,6 +16174,10 @@ color article.color-blocks {
         color: #3D464D; }
       color article.color-blocks .block.background-cb .color-square {
         background: #f4f4f4; }
+    color article.color-blocks .block.star-cb .color-square {
+      background: #0B344F; }
+    color article.color-blocks .block.person-cb .color-square {
+      background: #FFAA44; }
     color article.color-blocks .block.company-cb .color-square {
       background: #3399DD; }
     color article.color-blocks .block.candidate-cb .color-square {
@@ -16123,6 +16309,24 @@ color > header.lavender {
     color: #fff; }
   color > header.lavender .background-boxes {
     background: #967ADC !important; }
+
+color > header.star {
+  background: #0B344F !important; }
+  color > header.star h1,
+  color > header.star h2,
+  color > header.star p {
+    color: #fff; }
+  color > header.star .background-boxes {
+    background: #0B344F !important; }
+
+color > header.person {
+  background: #FFAA44 !important; }
+  color > header.person h1,
+  color > header.person h2,
+  color > header.person p {
+    color: #fff; }
+  color > header.person .background-boxes {
+    background: #FFAA44 !important; }
 
 color > header.company {
   background: #3399DD !important; }
@@ -17017,4 +17221,4 @@ field-interactions-demo main.tabs {
 app-bridge-demo iframe {
   height: 300px; }
 
-/*# sourceMappingURL=main.d265d2a628fa62449991.bundle.map*/
+/*# sourceMappingURL=main.9957d87e03ded0927fe4.bundle.map*/
