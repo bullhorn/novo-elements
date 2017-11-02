@@ -1,6 +1,6 @@
 <novo-activity-table forceShowHeader="true" hideGlobalSearch="true" customFilter="true" [defaultSort]="defaultSort" [debug]="debug" [activityService]="customFilterDatabase" [columns]="columns" [actionColumns]="actionColumns" [displayedColumns]="displayedColumns" [outsideFilter]="outsideFilter" #custom>
     <div novo-activity-table-custom-header>
-        <novo-picker [disablePickerInput]="true" [config]="pickerConfig" [(ngModel)]="pickerValue" [placeholder]="placeholder" appendToBody="true" (changed)="onPickerSelect($event)"></novo-picker>
+        <novo-picker [disablePickerInput]="true" [config]="pickerConfig" [(ngModel)]="pickerValue" [placeholder]="placeholder" (changed)="onPickerSelect($event)"></novo-picker>
     </div>
     <div novo-activity-table-actions>
         <button theme="secondary">Add</button>
