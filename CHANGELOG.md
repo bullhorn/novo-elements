@@ -1,3 +1,13 @@
+<a name="2.1.48"></a>
+## [2.1.48](https://github.com/bullhorn/novo-elements/compare/v2.1.47...v2.1.48) (2017-11-02)
+
+
+### Bug Fixes
+
+* **simple-table:** Fixing date filters ([2a9848d](https://github.com/bullhorn/novo-elements/commit/2a9848d))
+
+
+
 <a name="2.1.47"></a>
 ## [2.1.47](https://github.com/bullhorn/novo-elements/compare/v2.1.46...v2.1.47) (2017-11-02)
 
