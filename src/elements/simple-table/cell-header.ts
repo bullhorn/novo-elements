@@ -170,12 +170,12 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
             if (filter.startDate && filter.endDate) {
                 filter = {
                     min: dateFns.startOfDay(filter.startDate),
-                    max: dateFns.startOfDay(dateFns.addDays(dateFns.startOfDay(filter.endDate), 1))
+                    max: dateFns.endOfDay(filter.endDate),
                 };
             } else {
                 filter = {
-                    min: filter.min ? dateFns.addDays(dateFns.startOfToday(), filter.min) : dateFns.startOfToday(),
-                    max: filter.max ? dateFns.addDays(dateFns.startOfTomorrow(), filter.max) : dateFns.startOfTomorrow()
+                    min: dateFns.startOfDay(dateFns.addDays(dateFns.startOfToday(), filter.min)),
+                    max: dateFns.endOfDay(dateFns.addDays(dateFns.startOfToday(), filter.max)),
                 };
             }
         }

@@ -310,7 +310,6 @@ export class PickerDemoComponent {
             categoryMap: filterCategoryMap,
             displayAll: true,
             customFilter: {
-                field: 'testField',
                 matchFunction: (item, value) => {
                     if (value) {
                         return item.data.filter === value;
