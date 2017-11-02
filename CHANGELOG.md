@@ -1,3 +1,13 @@
+<a name="2.1.47"></a>
+## [2.1.47](https://github.com/bullhorn/novo-elements/compare/v2.1.46...v2.1.47) (2017-11-02)
+
+
+### Bug Fixes
+
+* **groupedpicker:** Fixing up the way the matching works, allowing the user to override ([c537cc0](https://github.com/bullhorn/novo-elements/commit/c537cc0))
+
+
+
 <a name="2.1.46"></a>
 ## [2.1.46](https://github.com/bullhorn/novo-elements/compare/v2.1.45...v2.1.46) (2017-11-01)
 
