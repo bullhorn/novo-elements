@@ -1,3 +1,13 @@
+<a name="2.1.49"></a>
+## [2.1.49](https://github.com/bullhorn/novo-elements/compare/v2.1.48...v2.1.49) (2017-11-03)
+
+
+### Bug Fixes
+
+* **controlgroup:** Fixing initial value / dfault items ([2609a49](https://github.com/bullhorn/novo-elements/commit/2609a49))
+
+
+
 <a name="2.1.48"></a>
 ## [2.1.48](https://github.com/bullhorn/novo-elements/compare/v2.1.47...v2.1.48) (2017-11-02)
 
