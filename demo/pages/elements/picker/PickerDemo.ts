@@ -264,6 +264,15 @@ export class PickerDemoComponent {
             }
             categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items: items });
         }
+        let filterCategoryMap = new Map<string, { value: string, label: string, items: { value: string, label: string, data: any }[] }>();
+        for (let i = 0; i < 10; i++) {
+            let items = [];
+            for (let j = 0; j < 10; j++) {
+                let filter = Math.random() >= 0.5;
+                items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j} - Data - ${filter}`, data: { filter: filter } });
+            }
+            filterCategoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items: items });
+        }
         this.groupedPicker1 = {
             categoryMap: categoryMap,
             resultsTemplate: GroupedMultiPickerResults,
@@ -298,30 +307,17 @@ export class PickerDemoComponent {
         };
         this.groupedPicker4 = {
             entityIcon: 'company',
-            categories: [
-                { value: 'C1', label: 'Category 1' },
-                { value: 'C2', label: 'Category 2' },
-                { value: 'C3', label: 'Category 3' },
-                { value: 'C4', label: 'Category 4' },
-                { value: 'C5', label: 'Category 5' },
-            ],
-            getItemsForCategoryAsync: (category, customFilter) => {
-                console.log('GET ITEMS', category, customFilter); // tslint:disable-line
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve([
-                            { value: 'A1', label: 'Async 1' },
-                            { value: 'A2', label: 'Async 2' },
-                            { value: 'A3', label: 'Async 3' },
-                            { value: 'A4', label: 'Async 4' },
-                            { value: 'A5', label: 'Async 5' },
-                        ]);
-                    }, 1000);
-                });
-            },
+            categoryMap: filterCategoryMap,
+            displayAll: true,
+            placeholder: 'Filter things...',
             customFilter: {
-                field: 'testField',
-                value: true,
+                matchFunction: (item, value) => {
+                    if (value) {
+                        return item.data.filter === value;
+                    }
+                    return true;
+                },
+                defaultFilterValue: false,
                 label: 'Custom Filter!'
             },
             resultsTemplate: GroupedMultiPickerResults

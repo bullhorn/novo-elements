@@ -46,7 +46,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
         </div>
         <div class="grouped-multi-picker-matches">
             <div class="grouped-multi-picker-input-container" [hidden]="!selectedCategory" data-automation-id="input-container">
-                <input autofocus #input [(ngModel)]="searchTerm" [disabled]="isLoading" data-automation-id="input"/>
+                <input autofocus #input [(ngModel)]="searchTerm" [disabled]="isLoading" data-automation-id="input" [placeholder]="placeholder"/>
                 <i class="bhi-search" *ngIf="!searchTerm" [class.disabled]="isLoading" data-automation-id="seach-icon"></i>
                 <i class="bhi-times" *ngIf="searchTerm" (click)="clearSearchTerm($event)" [class.disabled]="isLoading" data-automation-id="remove-icon"></i>
             </div>
@@ -85,12 +85,12 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
     public selectedCategory: { value: string, label: string };
     public searchTerm: string;
     public customFilterEnabled: boolean = false;
-    public customFilterValue: boolean = false;
     public customFilterLabel: string;
-    public customFilterField: string;
+    public placeholder: string = '';
 
     private keyboardSubscription: Subscription;
     private internalMap: Map<string, { value: string, label: string, items: { value: string, label: string }[] }> = new Map<string, { value: string, label: string, items: { value: string, label: string }[] }>();
+    public customFilterValue: any;
 
     set term(value) {
         // Display all only will work for static categories
@@ -101,11 +101,10 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
         if (this.config.customFilter) {
             this.customFilterEnabled = true;
             this.customFilterLabel = this.config.customFilter.label;
-            this.customFilterValue = !!this.config.customFilter.value;
-            this.customFilterField = this.config.customFilter.field;
+            this.customFilterValue = !!this.config.customFilter.defaultFilterValue;
             this.ref.markForCheck();
-            if (!this.customFilterField || !this.customFilterLabel) {
-                throw new Error('[GroupedMultiPickerResults] - custom filter set but label/field/value were not all provided!');
+            if (!this.customFilterLabel || !this.config.customFilter.matchFunction) {
+                throw new Error('[GroupedMultiPickerResults] - custom filter/matchFunction set no label was provided!');
             }
         } else {
             this.customFilterEnabled = false;
@@ -113,6 +112,10 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
         // Configure ALL
         if (this.config.displayAll && !this.selectedCategory) {
             this.setAllCategory();
+        }
+        // Placeholder
+        if (this.config.placeholder) {
+            this.placeholder = this.config.placeholder;
         }
         // Focus
         setTimeout(() => {
@@ -200,6 +203,10 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
             this.getNewMatches(this.selectedCategory, key);
             this.ref.markForCheck();
         }
+        // Focus
+        setTimeout(() => {
+            this.inputElement.nativeElement.focus();
+        });
     }
 
     filterData(): { value: string, label: string }[] {
@@ -224,7 +231,7 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
             }
             if (!this.internalMap.get(key)) {
                 this.isLoading = true;
-                this.config.getItemsForCategoryAsync(key, { field: this.customFilterField, value: this.customFilterValue }).then((items: { value: string, label: string }[]) => {
+                this.config.getItemsForCategoryAsync(key, this.customFilterValue).then((items: { value: string, label: string }[]) => {
                     this.internalMap.set(key, { value: category.value, label: category.label, items: items });
                     this.matches = this.filter(items, true);
                     this.isLoading = false;
@@ -241,17 +248,17 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
     }
 
     private filter(array: { value: string, label: string, filterValue?: any }[], ignoreCustomFilter: boolean = false): { value: string, label: string }[] {
+        let matches: { value: string, label: string, filterValue?: any }[] = array;
         if (this.searchTerm && this.searchTerm.length !== 0 && this.selectedCategory) {
-            return array.filter((match) => {
-                let labelMatch = ~String(match.label).toLowerCase().indexOf(this.searchTerm.toLowerCase());
-                let customFilterMatch = this.customFilterEnabled ? match.filterValue === this.customFilterValue : true;
-                return labelMatch && customFilterMatch;
-            });
-        } else if (this.customFilterEnabled && !ignoreCustomFilter) {
-            return array.filter((match) => {
-                return this.customFilterEnabled ? match.filterValue === this.customFilterValue : true;
+            matches = matches.filter((match) => {
+                return ~String(match.label).toLowerCase().indexOf(this.searchTerm.toLowerCase());
             });
         }
-        return array;
+        if (this.customFilterEnabled && this.config.customFilter.matchFunction && !ignoreCustomFilter) {
+            matches = matches.filter((match) => {
+                return this.config.customFilter.matchFunction(match, this.customFilterValue);
+            });
+        }
+        return matches;
     }
 }
