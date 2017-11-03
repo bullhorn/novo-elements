@@ -309,6 +309,7 @@ export class PickerDemoComponent {
             entityIcon: 'company',
             categoryMap: filterCategoryMap,
             displayAll: true,
+            placeholder: 'Filter things...',
             customFilter: {
                 matchFunction: (item, value) => {
                     if (value) {

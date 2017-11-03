@@ -149,21 +149,14 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
             this.clearControls();
         }
 
-        if (!this.initialValue) {
-            // Add one control by default
-            this.addNewControl();
-        } else {
-            // Check for array, add a control for each value, otherwise add just one control
-            if (Array.isArray(this.initialValue)) {
-                if (this.initialValue.length !== 0) {
-                    this.initialValue.forEach(value => this.addNewControl(value));
-                } else {
-                    this.addNewControl();
-                }
-            } else {
-                // If value is an object, just add one control
-                this.addNewControl(this.initialValue);
+        // Check for array, add a control for each value
+        if (this.initialValue && Array.isArray(this.initialValue)) {
+            if (this.initialValue.length !== 0) {
+                this.initialValue.forEach(value => this.addNewControl(value));
             }
+        } else if (this.initialValue) {
+            // If value is an object, just add one control
+            this.addNewControl(this.initialValue);
         }
         // If we are horizontal, grab the labels to help with layout
         if (!this.vertical) {

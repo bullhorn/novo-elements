@@ -33,8 +33,7 @@ export class NovoRadioGroup { }
     `,
     host: {
         '[class.vertical]': 'vertical'
-    },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    }
 })
 export class NovoRadioElement implements ControlValueAccessor {
     @Input() name: string;

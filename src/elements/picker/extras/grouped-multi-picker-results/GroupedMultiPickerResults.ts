@@ -46,7 +46,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
         </div>
         <div class="grouped-multi-picker-matches">
             <div class="grouped-multi-picker-input-container" [hidden]="!selectedCategory" data-automation-id="input-container">
-                <input autofocus #input [(ngModel)]="searchTerm" [disabled]="isLoading" data-automation-id="input"/>
+                <input autofocus #input [(ngModel)]="searchTerm" [disabled]="isLoading" data-automation-id="input" [placeholder]="placeholder"/>
                 <i class="bhi-search" *ngIf="!searchTerm" [class.disabled]="isLoading" data-automation-id="seach-icon"></i>
                 <i class="bhi-times" *ngIf="searchTerm" (click)="clearSearchTerm($event)" [class.disabled]="isLoading" data-automation-id="remove-icon"></i>
             </div>
@@ -86,6 +86,7 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
     public searchTerm: string;
     public customFilterEnabled: boolean = false;
     public customFilterLabel: string;
+    public placeholder: string = '';
 
     private keyboardSubscription: Subscription;
     private internalMap: Map<string, { value: string, label: string, items: { value: string, label: string }[] }> = new Map<string, { value: string, label: string, items: { value: string, label: string }[] }>();
@@ -111,6 +112,10 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
         // Configure ALL
         if (this.config.displayAll && !this.selectedCategory) {
             this.setAllCategory();
+        }
+        // Placeholder
+        if (this.config.placeholder) {
+            this.placeholder = this.config.placeholder;
         }
         // Focus
         setTimeout(() => {
@@ -198,6 +203,10 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
             this.getNewMatches(this.selectedCategory, key);
             this.ref.markForCheck();
         }
+        // Focus
+        setTimeout(() => {
+            this.inputElement.nativeElement.focus();
+        });
     }
 
     filterData(): { value: string, label: string }[] {
@@ -241,12 +250,12 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
     private filter(array: { value: string, label: string, filterValue?: any }[], ignoreCustomFilter: boolean = false): { value: string, label: string }[] {
         let matches: { value: string, label: string, filterValue?: any }[] = array;
         if (this.searchTerm && this.searchTerm.length !== 0 && this.selectedCategory) {
-            matches = array.filter((match) => {
+            matches = matches.filter((match) => {
                 return ~String(match.label).toLowerCase().indexOf(this.searchTerm.toLowerCase());
             });
         }
         if (this.customFilterEnabled && this.config.customFilter.matchFunction && !ignoreCustomFilter) {
-            matches = array.filter((match) => {
+            matches = matches.filter((match) => {
                 return this.config.customFilter.matchFunction(match, this.customFilterValue);
             });
         }
