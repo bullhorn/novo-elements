@@ -173,8 +173,8 @@ export class AppBridge {
         // REQUEST_DATA
         postRobot.on(MESSAGE_TYPES.REQUEST_DATA, (event) => {
             this._trace(MESSAGE_TYPES.REQUEST_DATA, event);
-            return this.requestData(event.data).then(success => {
-                return { success };
+            return this.requestData(event.data).then(result => {
+                return { data: result.data, error: result.error };
             });
         });
         // HTTP-GET
