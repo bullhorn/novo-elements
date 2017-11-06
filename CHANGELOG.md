@@ -1,3 +1,14 @@
+<a name="2.1.50"></a>
+## [2.1.50](https://github.com/bullhorn/novo-elements/compare/v2.1.49...v2.1.50) (2017-11-06)
+
+
+### Bug Fixes
+
+* **appbridge:** Minor improvements to app bridge ([71469f9](https://github.com/bullhorn/novo-elements/commit/71469f9))
+* **AppBridge:** Request Data didn't process the results data correctly ([#568](https://github.com/bullhorn/novo-elements/issues/568)) ([480a0eb](https://github.com/bullhorn/novo-elements/commit/480a0eb))
+
+
+
 <a name="2.1.49"></a>
 ## [2.1.49](https://github.com/bullhorn/novo-elements/compare/v2.1.48...v2.1.49) (2017-11-03)
 
