@@ -15,7 +15,7 @@ export interface NovoControlGroupAddConfig {
 @Component({
     selector: 'novo-control-group',
     template: `
-        <h6 class="novo-section-header">
+        <h6 class="novo-section-header" *ngIf="label">
             <span (click)="toggle($event)" [class.clickable]="collapsible">
                 <i *ngIf="icon && !collapsible" [ngClass]="icon" [attr.data-automation-id]="'novo-control-group-icon-' + key"></i>
                 <i *ngIf="collapsible" class="bhi-next" [class.toggled]="toggled" [attr.data-automation-id]="'novo-control-group-collapse-' + key"></i>
