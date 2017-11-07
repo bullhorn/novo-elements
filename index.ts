@@ -100,6 +100,10 @@ export { NovoElementProviders } from './novo-elements.providers';
 export { PluralPipe } from './src/pipes/plural/Plural';
 export { DecodeURIPipe } from './src/pipes/decode-uri/DecodeURI';
 export { GroupByPipe } from './src/pipes/group-by/GroupBy';
+export { RenderPipe } from './src/elements/value/Render';
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';
 export { NovoListElement } from './src/elements/list/List';
+// interfaces
+export { NOVO_VALUE_TYPE } from './src/elements/value/Value';
+export { NOVO_VALUE_THEME } from './src/elements/value/Value';

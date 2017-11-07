@@ -1,0 +1,16 @@
+ValueTodo
+----------
+1. allow for users to configure formatting function
+2. SUB translate function usage
+3. Fix special types: phone, select, entity-list, email, link, file attachments, date, opt out
+(read only first)
+only worry about phone, email, link, entity-list
+<a *ngIf="!isMobile && type === NOVO_VALUE_TYPE.PHONE" class="value" href="tel:{{data}}" target="_parent">
+                {{ data | render: meta }}
+            </a>
+            <span *ngIf="isMobile && type === NOVO_VALUE_TYPE.PHONE" class="value">
+                <span>{{ data | render: meta }}</span>
+                <a href="tel:{{data}}"><i class="bhi-phone"></i></a>
+                <a href="sms:{{data}}"><i class="bhi-sms"></i></a>
+            </span>
+4. Demos and what not

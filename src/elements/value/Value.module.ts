@@ -1,11 +1,14 @@
 // NG2
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 // APP
-import { ValueElement } from './Value';
+import { ValueElement, NovoValueItemRightElement } from './Value';
+import { RenderPipe } from './Render';
 
 @NgModule({
-    declarations: [ValueElement],
-    exports: [ValueElement]
+    imports: [CommonModule],
+    declarations: [ValueElement, NovoValueItemRightElement, RenderPipe],
+    exports: [ValueElement, NovoValueItemRightElement, RenderPipe]
 })
 export class NovoValueModule {
 }
