@@ -38,13 +38,13 @@ import { EntityUtils } from '../../utils/entity-utils/EntityUtils';
     pure: false,
 })
 @Injectable()
-export class RenderPipe implements OnDestroy, PipeTransform {
+export class RenderPipe implements PipeTransform {
     onLangChange: any;
     value: any;
     lastValue: any;
     lastArgs: any;
 
-    constructor(private changeDetector: ChangeDetectorRef, private sanitizationService: DomSanitizer) {
+    constructor(private changeDetector: ChangeDetectorRef, private sanitizationService: DomSanitizer, private labels: NovoLabelService) {
         this.onLangChange = null;
     }
 
@@ -124,6 +124,10 @@ export class RenderPipe implements OnDestroy, PipeTransform {
         if (value === undefined || value === null || !args) {
             return text;
         }
+
+        if (args.formatter && (typeof args.formatter === 'function')) {
+            return args.formatter(value, args);
+        }
         // Determine TYPE because its not just 1 value that determines this.
         if (args.type === 'TO_MANY') {
             type = 'ToMany';
@@ -167,22 +171,10 @@ export class RenderPipe implements OnDestroy, PipeTransform {
                 `;
                 text = text.trim();
                 break;
-            // case 'DateTime':
-            //     if (args.optionsType === 'skipConversion') {
-            //         rezonedTime = value;
-            //     } else {
-            //         rezonedTime = DateTimeFixer.convertDateEST(value);
-            //     }
-            //     text = TranslateService.formatDate(rezonedTime, 'short');
-            //     break;
-            // case 'Timestamp':
-            //     if (args.optionsType === 'skipConversion') {
-            //         rezonedTime = value;
-            //     } else {
-            //         rezonedTime = DateTimeFixer.convertDateEST(value);
-            //     }
-            //     text = TranslateService.formatDate(rezonedTime, 'dateShort');
-            //     break;
+            case 'DateTime':
+            case 'Timestamp':
+                text = this.labels.formatDateShort(value);
+                break;
             case 'Year':
                 text = new Date(value).getFullYear();
                 break;
@@ -190,16 +182,16 @@ export class RenderPipe implements OnDestroy, PipeTransform {
             case 'Email':
                 text = value;
                 break;
-            // case 'Money':
-            //     text = TranslateService.formatCurrency(value);
-            //     break;
-            // case 'Percentage':
-            //     text = TranslateService.formatNumber((parseFloat(value)).toString(), { style: 'percent', minimumFractionDigits: 2 });
-            //     break;
-            // case 'Double':
-            // case 'BigDecimal':
-            //     text = TranslateService.formatNumber(value, { minimumFractionDigits: this.getNumberDecimalPlaces(value) });
-            //     break;
+            case 'Money':
+                text = this.labels.formatCurrency(value);
+                break;
+            case 'Percentage':
+                text = this.labels.formatNumber((parseFloat(value)).toString(), { style: 'percent', minimumFractionDigits: 2 });
+                break;
+            case 'Double':
+            case 'BigDecimal':
+                text = this.labels.formatNumber(value, { minimumFractionDigits: this.getNumberDecimalPlaces(value) });
+                break;
             case 'Integer':
                 text = value;
                 break;
@@ -238,23 +230,23 @@ export class RenderPipe implements OnDestroy, PipeTransform {
             case 'Options':
                 text = this.options(value, args.options);
                 break;
-            // case 'ToMany':
-            //     if (['Candidate', 'CorporateUser', 'Person'].indexOf(args.associatedEntity.entity) > -1) {
-            //         text = this.concat(value.data, 'firstName', 'lastName');
-            //         if (value.data.length < value.total) {
-            //             text = text + ', ' + TranslateService.translate('TABLE_CELL.TO_MANY.PLUS_MORE', { quantity: value.total - value.data.length });
-            //         }
-            //     } else if (['Category', 'BusinessSector', 'Skill', 'Specialty', 'ClientCorporation', 'CorporationDepartment'].indexOf(args.associatedEntity.entity) > -1) {
-            //         text = this.concat(value.data, 'name');
-            //         if (value.data.length < value.total) {
-            //             text = text + ', ' + TranslateService.translate('TABLE_CELL.TO_MANY.PLUS_MORE', { quantity: value.total - value.data.length });
-            //         }
-            //     } else if (args.associatedEntity.entity === 'MailListPushHistoryDetail') {
-            //         text = this.concat(value.data, 'externalListName');
-            //     } else {
-            //         text = `${value.total || ''}`;
-            //     }
-            //     break;
+            case 'ToMany':
+                if (['Candidate', 'CorporateUser', 'Person'].indexOf(args.associatedEntity.entity) > -1) {
+                    text = this.concat(value.data, 'firstName', 'lastName');
+                    if (value.data.length < value.total) {
+                        text = text + ', ' + this.labels.getToManyPlusMore({ quantity: value.total - value.data.length });
+                    }
+                } else if (['Category', 'BusinessSector', 'Skill', 'Specialty', 'ClientCorporation', 'CorporationDepartment'].indexOf(args.associatedEntity.entity) > -1) {
+                    text = this.concat(value.data, 'name');
+                    if (value.data.length < value.total) {
+                        text = text + ', ' + this.labels.getToManyPlusMore({ quantity: value.total - value.data.length });
+                    }
+                } else if (args.associatedEntity.entity === 'MailListPushHistoryDetail') {
+                    text = this.concat(value.data, 'externalListName');
+                } else {
+                    text = `${value.total || ''}`;
+                }
+                break;
             case 'Country':
                 let countryObj: any = findByCountryId(Number(value));
                 text = countryObj ? countryObj.name : value;
@@ -265,18 +257,14 @@ export class RenderPipe implements OnDestroy, PipeTransform {
                 }
                 text = this.sanitizationService.bypassSecurityTrustHtml(value.replace(/\<a/gi, '<a target="_blank"'));
                 break;
-            // case 'CandidateComment':
-            //     text = value.comments ? `${TranslateService.formatDate(value.dateLastModified, 'short')} (${value.name}) - ${value.comments}` : '';
-            //     break;
+            case 'CandidateComment':
+                text = value.comments ? `${this.labels.formatDateShort(value.dateLastModified)} (${value.name}) - ${value.comments}` : '';
+                break;
             default:
                 text = value.trim ? value.trim() : value;
                 break;
         }
         return text;
-    }
-
-    ngOnDestroy(): any {
-        this.unsubscribe();
     }
 
     updateValue(value: any, args: any): any {
@@ -298,20 +286,7 @@ export class RenderPipe implements OnDestroy, PipeTransform {
 
         this.updateValue(this.lastValue, this.lastArgs);
 
-        this.unsubscribe();
-
-        // this.onLangChange = TranslateService.onLocaleChange.subscribe(() => {
-        //     this.updateValue(this.lastValue, this.lastArgs);
-        // });
-
         return this.value;
-    }
-
-    unsubscribe(): any {
-        if (this.onLangChange) {
-            this.onLangChange.unsubscribe();
-            this.onLangChange = undefined;
-        }
     }
 
     /**

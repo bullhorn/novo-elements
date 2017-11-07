@@ -1,7 +1,6 @@
 ValueTodo
 ----------
-1. allow for users to configure formatting function
-2. SUB translate function usage
+1a.allow for users to configure formatting function
 3. Fix special types: phone, select, entity-list, email, link, file attachments, date, opt out
 (read only first)
 only worry about phone, email, link, entity-list
