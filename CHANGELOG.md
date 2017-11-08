@@ -1,3 +1,13 @@
+<a name="2.1.51"></a>
+## [2.1.51](https://github.com/bullhorn/novo-elements/compare/v2.1.50...v2.1.51) (2017-11-08)
+
+
+### Bug Fixes
+
+* **controlgroup:** Fixing logic for Control group ([5e659c2](https://github.com/bullhorn/novo-elements/commit/5e659c2))
+
+
+
 <a name="2.1.50"></a>
 ## [2.1.50](https://github.com/bullhorn/novo-elements/compare/v2.1.49...v2.1.50) (2017-11-06)
 
