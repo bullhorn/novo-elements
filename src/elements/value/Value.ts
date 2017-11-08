@@ -50,7 +50,6 @@ export class NovoValueEmail {
     }
     
     openEmail(data: any): void {
-        console.log('data', data);
         if (this.meta && this.meta.openEmail && typeof this.meta.openEmail === 'function') {
             this.meta.openEmail(data);
         } else {
@@ -169,7 +168,6 @@ export class ValueElement implements OnInit, OnChanges {
                     break;
             }
         }
-        console.log('type: ', this.type)
     }
 
     isEmailField(fieldName: string): boolean {
