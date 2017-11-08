@@ -15,7 +15,7 @@ export interface NovoControlGroupAddConfig {
 @Component({
     selector: 'novo-control-group',
     template: `
-        <h6 class="novo-section-header">
+        <h6 class="novo-section-header" *ngIf="label">
             <span (click)="toggle($event)" [class.clickable]="collapsible">
                 <i *ngIf="icon && !collapsible" [ngClass]="icon" [attr.data-automation-id]="'novo-control-group-icon-' + key"></i>
                 <i *ngIf="collapsible" class="bhi-next" [class.toggled]="toggled" [attr.data-automation-id]="'novo-control-group-collapse-' + key"></i>
@@ -144,14 +144,15 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     public ngOnChanges(changes: SimpleChanges) {
         let initialValueChange: SimpleChange = changes['initialValue'];
 
-        // If intitial value changes, clear the controls
-        if (initialValueChange.currentValue !== initialValueChange.previousValue && !initialValueChange.firstChange) {
+        // If initial value changes, clear the controls
+        if (initialValueChange && initialValueChange.currentValue !== initialValueChange.previousValue && !initialValueChange.firstChange) {
             this.clearControls();
         }
 
         // Check for array, add a control for each value
         if (this.initialValue && Array.isArray(this.initialValue)) {
             if (this.initialValue.length !== 0) {
+                this.currentIndex = 0;
                 this.initialValue.forEach(value => this.addNewControl(value));
             }
         } else if (this.initialValue) {

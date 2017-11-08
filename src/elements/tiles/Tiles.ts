@@ -134,20 +134,22 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
         setTimeout(() => {
             let ind = this.element.nativeElement.querySelector('.active-indicator');
             let el = this.element.nativeElement.querySelector('.tile.active');
-            let w = el.clientWidth;
-            let left = el.offsetLeft;
+            if (ind && el) {
+                let w = el.clientWidth;
+                let left = el.offsetLeft;
 
-            // These style adjustments need to occur in this order.
-            setTimeout(() => {
-                ind.style.width = `${w + 4}px`;
+                // These style adjustments need to occur in this order.
                 setTimeout(() => {
-                    ind.style.transform = `translateX(${left}px)`;
+                    ind.style.width = `${w + 4}px`;
                     setTimeout(() => {
-                        this.state = 'active';
-                        this.ref.markForCheck();
+                        ind.style.transform = `translateX(${left}px)`;
+                        setTimeout(() => {
+                            this.state = 'active';
+                            this.ref.markForCheck();
+                        });
                     });
                 });
-            });
+            }
         });
     }
 
