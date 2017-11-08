@@ -99,6 +99,10 @@ export class NovoCustomControlContainerElement {
     selector: 'novo-control',
     template: `
         <div class="novo-control-container" [formGroup]="form" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
+            <!--Encrypted Field-->
+            <i [hidden]="!isFieldEncrypted(control)"
+               class="bhi-lock">
+            </i>
             <!--Label (for horizontal)-->
             <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && form.controls[control.key].label && !condensed">{{ form.controls[control.key].label }}</label>
             <div class="novo-control-outer-container">
@@ -323,6 +327,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
                 }
             });
         }
+    }
+
+    isFieldEncrypted(control: any): boolean {
+        return control.key.indexOf('customEncrypted') > -1;
     }
 
     executeInteraction(interaction) {
