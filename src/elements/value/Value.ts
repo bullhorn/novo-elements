@@ -10,13 +10,13 @@ export enum NOVO_VALUE_THEME { DEFAULT, MOBILE };
     selector: 'novo-value-phone',
     template: `
         <div class="value-outer">
-            <label>{{ meta.label }}</label>        
+            <label>{{ meta.label }}</label>
             <a *ngIf="!isMobile" class="value" href="tel:{{data}}" target="_parent">
                 {{ data }}
             </a>
             <div *ngIf="isMobile" class="value">{{ data }}</div>
         </div>
-        <div class="actions">
+        <div class="actions" *ngIf="data !== ''">
             <a href="tel:{{data}}"><i class="bhi-phone"></i></a>
             <a href="sms:{{data}}"><i class="bhi-sms"></i></a>
         </div>
@@ -39,9 +39,9 @@ export class NovoValuePhone {
         <div class="value-outer">
             <label>{{ meta.label }}</label>
             <a *ngIf="!isMobile"  class="value" (click)="openEmail(data)"> {{ email }}</a>
-            <div *ngIf="isMobile" class="value">{{ data.email }}</div>
+            <div *ngIf="isMobile" class="value">{{ data }}</div>
         </div>
-        <i class="bhi-email actions" (click)="openEmail(data)"></i>
+        <i class="bhi-email actions" *ngIf="data !== ''" (click)="openEmail(data)"></i>
     `
 })
 export class NovoValueEmail {
@@ -52,7 +52,7 @@ export class NovoValueEmail {
     public get isMobile(): boolean {
         return this.theme === NOVO_VALUE_THEME.MOBILE;
     }
-    
+
     openEmail(data: any): void {
         if (this.meta && this.meta.openEmail && typeof this.meta.openEmail === 'function') {
             this.meta.openEmail(data);
@@ -84,19 +84,19 @@ export class NovoValueEmail {
     template:`
         <ng-container [ngSwitch]="type">
             <div class="value-outer" *ngIf="showLabel">
-                <label>{{ meta.label }}</label>            
+                <label>{{ meta.label }}</label>
                 <a *ngSwitchCase="NOVO_VALUE_TYPE.INTERNAL_LINK" class="value" (click)="openLink()" [innerHTML]="data | render : meta"></a>
                 <a *ngSwitchCase="NOVO_VALUE_TYPE.LINK" class="value" [href]="url" target="_blank" [innerHTML]="data | render : meta"></a>
             </div>
-            
+
             <novo-value-phone *ngSwitchCase="NOVO_VALUE_TYPE.PHONE" [data]="data" [theme]="theme" [meta]="meta"></novo-value-phone>
             <novo-value-email *ngSwitchCase="NOVO_VALUE_TYPE.EMAIL" [data]="data" [theme]="theme" [meta]="meta"></novo-value-email>
-            
+
             <div *ngSwitchDefault class="value-outer">
                 <label>{{ meta.label }}</label>
                 <div *ngIf="isDefault" class="value" [innerHTML]="data | render : meta"></div>
             </div>
-            <i *ngIf="showIcon" [class]="iconClass" (click)="onValueClick()"></i>            
+            <i *ngIf="showIcon" [class]="iconClass" (click)="onValueClick()"></i>
         </ng-container>
     `
 })
