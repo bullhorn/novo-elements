@@ -38,7 +38,7 @@ export class NovoValuePhone {
     template: `
         <div class="value-outer">
             <label>{{ meta.label }}</label>
-            <a *ngIf="!isMobile"  class="value" (click)="openEmail(data)"> {{ email }}</a>
+            <a *ngIf="!isMobile"  class="value" (click)="openEmail(data)"> {{ data }}</a>
             <div *ngIf="isMobile" class="value">{{ data }}</div>
         </div>
         <i class="bhi-email actions" *ngIf="data !== ''" (click)="openEmail(data)"></i>
@@ -59,7 +59,7 @@ export class NovoValueEmail {
         } else {
             let newTab: any = window.open('', '_blank', '', true);
             if (newTab) {
-                newTab.location.replace(`mailto:${encodeURIComponent(data.email)}`);
+                newTab.location.replace(`mailto:${encodeURIComponent(data)}`);
                 // Self close for desktop clients
                 setTimeout(() => {
                     try {
@@ -73,7 +73,7 @@ export class NovoValueEmail {
             }
         }
         if (Helpers.isEmpty(this.theme)) {
-             this.theme = NOVO_VALUE_THEME.DEFAULT;
+            this.theme = NOVO_VALUE_THEME.DEFAULT;
         }
     }
 }
@@ -81,7 +81,7 @@ export class NovoValueEmail {
 
 @Component({
     selector: 'novo-value',
-    template:`
+    template: `
         <ng-container [ngSwitch]="type">
             <div class="value-outer" *ngIf="showLabel">
                 <label>{{ meta.label }}</label>
@@ -143,7 +143,7 @@ export class NovoValueElement implements OnInit, OnChanges {
     }
 
     onValueClick(): void {
-        if (this.meta && this.meta.onIconClick && typeof this.meta.onIconClick === 'function' ) {
+        if (this.meta && this.meta.onIconClick && typeof this.meta.onIconClick === 'function') {
             this.meta.onIconClick(this.data, this.meta);
         }
     }
@@ -155,11 +155,6 @@ export class NovoValueElement implements OnInit, OnChanges {
 
     ngOnChanges(changes?: SimpleChanges): any {
         if (this.meta && this.isEmailField(this.meta)) {
-            if (!this.data || typeof this.data === 'string') {
-                this.data = {
-                    email: this.data,
-                };
-            }
             this.type = NOVO_VALUE_TYPE.EMAIL;
         } else if (this.meta && this.isPhoneField(this.meta)) {
             this.type = NOVO_VALUE_TYPE.PHONE;
@@ -187,17 +182,17 @@ export class NovoValueElement implements OnInit, OnChanges {
         }
     }
 
-    isEmailField(field: { name? : string, type?: NOVO_VALUE_TYPE }): boolean {
+    isEmailField(field: { name?: string, type?: NOVO_VALUE_TYPE }): boolean {
         const emailFields: any = ['email', 'email2', 'email3'];
         return emailFields.indexOf(field.name) > -1 || field.type === NOVO_VALUE_TYPE.EMAIL;
     }
 
-    isPhoneField(field: { name? : string, type?: NOVO_VALUE_TYPE }): boolean {
+    isPhoneField(field: { name?: string, type?: NOVO_VALUE_TYPE }): boolean {
         let phoneFields: any = ['phone', 'phone2', 'phone3', 'pager', 'mobile', 'workPhone', 'billingPhone'];
         return phoneFields.indexOf(field.name) > -1 || field.type === NOVO_VALUE_TYPE.PHONE;
     }
 
-    isLinkField(field: { name? : string, type?: NOVO_VALUE_TYPE }, data: any): boolean {
+    isLinkField(field: { name?: string, type?: NOVO_VALUE_TYPE }, data: any): boolean {
         let linkFields: any = ['companyURL', 'clientCorporationCompanyURL'];
         let regex: any = new RegExp('^(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})$', 'gi');
         let isURL: any = Helpers.isString(data) && regex.exec(data.trim());

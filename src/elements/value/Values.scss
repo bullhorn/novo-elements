@@ -30,7 +30,18 @@ novo-value {
         i {
             cursor: pointer;
             color: $ocean;
+            margin-left: 15px;
         }
     }
 
+}
+novo-value-phone, novo-value-email {
+    display: flex;
+    flex-direction: row;
+    max-width: 500px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-left: 10px;
+    padding-bottom: 10px;
 }
