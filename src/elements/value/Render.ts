@@ -162,13 +162,13 @@ export class RenderPipe implements PipeTransform {
                 let country: any = findByCountryId(Number(value.countryName));
                 text = `
                     ${value.address1 || ''}
-                    ${value.address2 || ''}
+                    ${value.address2 || ''}<br />
                 `.trim();
                 text += `
-                    ${value.city || ''} ${value.state || ''} ${value.zip || ''}
-                    ${country ? country.name : (value.countryName || '')}
+                    ${value.city || ''} ${value.state || ''} ${value.zip || ''}<br />
+                    ${country ? country.name : (value.countryName || '')}<br />
                 `;
-                text = text.trim();
+                text = this.sanitizationService.bypassSecurityTrustHtml(text.trim());
                 break;
             case 'DateTime':
             case 'Timestamp':

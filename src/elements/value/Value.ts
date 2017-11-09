@@ -94,9 +94,9 @@ export class NovoValueEmail {
             
             <div *ngSwitchDefault class="value-outer">
                 <label>{{ meta.label }}</label>
-                <div *ngIf="isDefault" class="value">{{ data | render: meta }}</div>
+                <div *ngIf="isDefault" class="value" [innerHTML]="data | render : meta"></div>
             </div>
-            <i *ngIf="meta.icon" [class]="iconClass" (click)="onValueClick()"></i>            
+            <i *ngIf="showIcon" [class]="iconClass" (click)="onValueClick()"></i>            
         </ng-container>
     `
 })
@@ -136,6 +136,10 @@ export class NovoValueElement implements OnInit, OnChanges {
 
     public get showLabel(): boolean {
         return this.type === NOVO_VALUE_TYPE.INTERNAL_LINK || this.type === NOVO_VALUE_TYPE.LINK;
+    }
+
+    public get showIcon(): boolean {
+        return this.meta && this.meta.icon && !Helpers.isEmpty(this.data);
     }
 
     onValueClick(): void {
