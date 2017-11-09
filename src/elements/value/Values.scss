@@ -23,16 +23,14 @@ novo-value, novo-value-phone, novo-value-email {
         }
     }
     .actions {
-        color: $grey;        
-        margin-right: 15px;
+        color: $ocean;
         &.i {
             cursor: pointer;
         }
         i {
             cursor: pointer;
-            color: $grey;        
-            margin: 0 10px;
+            color: $ocean;
         }
     }
-    
+
 }
