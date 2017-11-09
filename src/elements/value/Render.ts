@@ -165,8 +165,8 @@ export class RenderPipe implements PipeTransform {
                     ${value.address2 || ''}<br />
                 `.trim();
                 text += `
-                    ${value.city || ''} ${value.state || ''} ${value.zip || ''}<br />
-                    ${country ? country.name : (value.countryName || '')}<br />
+                    ${value.city || ''} ${value.state || ''} ${value.zip || ''}${value.city || value.state || value.zip ? '<br />' : ''}
+                    ${country ? country.name : (value.countryName || '')}${country || value.countryName ? '<br />' : ''}
                 `;
                 text = this.sanitizationService.bypassSecurityTrustHtml(text.trim());
                 break;
