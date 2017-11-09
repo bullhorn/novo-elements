@@ -39,13 +39,11 @@ import { EntityUtils } from '../../utils/entity-utils/EntityUtils';
 })
 @Injectable()
 export class RenderPipe implements PipeTransform {
-    onLangChange: any;
     value: any;
     lastValue: any;
     lastArgs: any;
 
     constructor(private changeDetector: ChangeDetectorRef, private sanitizationService: DomSanitizer, private labels: NovoLabelService) {
-        this.onLangChange = null;
     }
 
     equals(objectOne: any, objectTwo: any): any {
@@ -128,6 +126,7 @@ export class RenderPipe implements PipeTransform {
         if (args.formatter && (typeof args.formatter === 'function')) {
             return args.formatter(value, args);
         }
+        // TODO move this to a service
         // Determine TYPE because its not just 1 value that determines this.
         if (args.type === 'TO_MANY') {
             type = 'ToMany';
