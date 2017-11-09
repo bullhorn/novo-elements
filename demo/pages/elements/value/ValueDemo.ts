@@ -71,19 +71,19 @@ const template = `
     template: template
 })
 export class ValueDemoComponent {
-    private SimpleValueDemoTpl:string = SimpleValueDemoTpl;
-    private CategoryValueDemoTpl:string = CategoryValueDemoTpl;
-    private IconRightValueDemoTpl:string = IconRightValueDemoTpl;
-    private CorporateUserValueDemoTpl:string = CorporateUserValueDemoTpl;
-    private FormatterValueDemoTpl:string = FormatterValueDemoTpl;
-    private PhoneValueDemoTpl:string = PhoneValueDemoTpl;
-    private EmailValueDemoTpl:string = EmailValueDemoTpl;
-    private ExternalLinkValueDemoTpl:string = ExternalLinkValueDemoTpl;
-    private DateTimeValueDemoTpl:string = DateTimeValueDemoTpl;
-    private AddressValueDemoTpl:string = AddressValueDemoTpl;
-    private AssociatedValueDemoTpl:string = AssociatedValueDemoTpl;
-    private toggleCount:number = 0;
-    private checked:boolean = true;
+    private SimpleValueDemoTpl: string = SimpleValueDemoTpl;
+    private CategoryValueDemoTpl: string = CategoryValueDemoTpl;
+    private IconRightValueDemoTpl: string = IconRightValueDemoTpl;
+    private CorporateUserValueDemoTpl: string = CorporateUserValueDemoTpl;
+    private FormatterValueDemoTpl: string = FormatterValueDemoTpl;
+    private PhoneValueDemoTpl: string = PhoneValueDemoTpl;
+    private EmailValueDemoTpl: string = EmailValueDemoTpl;
+    private ExternalLinkValueDemoTpl: string = ExternalLinkValueDemoTpl;
+    private DateTimeValueDemoTpl: string = DateTimeValueDemoTpl;
+    private AddressValueDemoTpl: string = AddressValueDemoTpl;
+    private AssociatedValueDemoTpl: string = AssociatedValueDemoTpl;
+    private toggleCount: number = 0;
+    private checked: boolean = true;
     simpleData = 1234567890;
     simpleMeta = {
         type: 'SCALAR',

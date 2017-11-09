@@ -11,3 +11,4 @@ ValueTodo
 - users to configure a novo-value of a certain type
 - specs
  - values.scss should be value
+ - have a baseclass for novovaluecustom

@@ -16,7 +16,7 @@ export enum NOVO_VALUE_THEME { DEFAULT, MOBILE };
             </a>
             <div *ngIf="isMobile" class="value">{{ data }}</div>
         </div>
-        <div class="actions" *ngIf="data !== ''">
+        <div class="actions" *ngIf="showIcon">
             <a href="tel:{{data}}"><i class="bhi-phone"></i></a>
             <a href="sms:{{data}}"><i class="bhi-sms"></i></a>
         </div>
@@ -31,6 +31,10 @@ export class NovoValuePhone {
     public get isMobile(): boolean {
         return this.theme === NOVO_VALUE_THEME.MOBILE;
     }
+
+    public get showIcon(): boolean {
+        return !Helpers.isEmpty(this.data);
+    }
 }
 
 @Component({
@@ -41,7 +45,7 @@ export class NovoValuePhone {
             <a *ngIf="!isMobile"  class="value" (click)="openEmail(data)"> {{ data }}</a>
             <div *ngIf="isMobile" class="value">{{ data }}</div>
         </div>
-        <i class="bhi-email actions" *ngIf="data !== ''" (click)="openEmail(data)"></i>
+        <i class="bhi-email actions" *ngIf="showIcon" (click)="openEmail(data)"></i>
     `
 })
 export class NovoValueEmail {
@@ -75,6 +79,10 @@ export class NovoValueEmail {
         if (Helpers.isEmpty(this.theme)) {
             this.theme = NOVO_VALUE_THEME.DEFAULT;
         }
+    }
+
+    public get showIcon(): boolean {
+        return !Helpers.isEmpty(this.data);
     }
 }
 
