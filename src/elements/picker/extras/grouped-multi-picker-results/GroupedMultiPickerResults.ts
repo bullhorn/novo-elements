@@ -29,7 +29,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                     *ngFor="let category of categories"
                     (click)="selectCategory(category)"
                     [class.active]="selectedCategory?.value === category.value"
-                    [attr.data-automation-id]="category.value"
+                    [attr.data-automation-id]="category.label"
                     [class.disabled]="isLoading">
                     <item-content>
                         <span data-automation-id="label">{{ category.label }}</span>
@@ -125,7 +125,9 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
 
     get categories() {
         if (this.config.categories || this.config.categoryMap) {
-            return this.config.categories || Array.from(this.config.categoryMap.values());
+            return this.config.categories || Array.from(this.config.categoryMap.values()).filter((category: { value: string }) => {
+                return category.value !== 'all';
+            });
         }
         return [];
     }
@@ -156,7 +158,11 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
         if (this.config.displayAll) {
             this.selectedCategory = { value: 'all', label: 'all' };
             let allItems = [];
-            Array.from(this.config.categoryMap.values()).forEach((v: { value: string, label: string, items: any[] }) => allItems.push(...v.items));
+            Array.from(this.config.categoryMap.values())
+                .filter((category: { value: string }) => {
+                    return category.value !== 'all';
+                })
+                .forEach((v: { value: string, label: string, items: any[] }) => allItems.push(...v.items));
             this.matches = this.filter(allItems);
             this.config.categoryMap.set('all', { value: 'all', label: 'All', items: allItems });
             this.ref.markForCheck();

@@ -79,8 +79,8 @@ export type rangeSelectModes = 'startDate' | 'endDate';
             <div class="calendar-header">
                 <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
                 <span class="heading">
-                    <span class="month" (click)="open($event, 'months')" [attr.data-automation-id]="heading?.month">{{monthLabel}}</span>
-                    <span class="year" (click)="open($event, 'years')" [attr.data-automation-id]="heading?.year">{{month?.getFullYear()}}</span>
+                    <span class="month" (click)="open($event, 'months')" data-automation-id="header-month">{{monthLabel}}</span>
+                    <span class="year" (click)="open($event, 'years')" data-automation-id="header-year">{{month?.getFullYear()}}</span>
                 </span>
                 <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
             </div>
@@ -100,7 +100,7 @@ export type rangeSelectModes = 'startDate' | 'endDate';
                             startfill: isStartFill(range, day.date, selected, selected2),
                             endfill: isEndFill(range, day.date, selected, selected2),
                             'selecting-range': isSelectingRange(range, day.date, selected, selected2, hoverDay, rangeSelectMode, weekRangeSelect)
-                           }" (click)="select($event, day, true)" (mouseover)="rangeHover($event, day)">
+                           }" (click)="select($event, day, true)" (mouseover)="rangeHover($event, day)" [attr.data-automation-id]="day.number">
                             <button class="day" [attr.data-automation-id]="day.number" [disabled]="isDisabled(day.date, start, end)">{{day.number}}</button>
                         </td>
                     </tr>
@@ -231,7 +231,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
 
     isFiller(range, day, selected, selected2) {
         if (range && selected2 && selected) {
-            return dateFns.isAfter(day, selected) && dateFns.isBefore(day, selected2);
+            return (dateFns.isAfter(day, selected) && dateFns.isBefore(day, selected2)) || dateFns.isSameDay(day, selected) || dateFns.isSameDay(day, selected2);
         }
         return false;
     }
