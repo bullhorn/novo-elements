@@ -1,3 +1,13 @@
+<a name="2.1.53"></a>
+## [2.1.53](https://github.com/bullhorn/novo-elements/compare/v2.1.52...v2.1.53) (2017-11-10)
+
+
+### Bug Fixes
+
+* **automation:** adding data-automation-ids properly ([a073402](https://github.com/bullhorn/novo-elements/commit/a073402))
+
+
+
 <a name="2.1.52"></a>
 ## [2.1.52](https://github.com/bullhorn/novo-elements/compare/v2.1.51...v2.1.52) (2017-11-08)
 
