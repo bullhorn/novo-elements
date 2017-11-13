@@ -2,7 +2,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
-import { DOCUMENT } from '@angular/platform-browser';
 // APP
 import { NovoOverlayTemplate } from '../overlay/Overlay';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';

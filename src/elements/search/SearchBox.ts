@@ -2,7 +2,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostBinding, HostListener, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
-import { DOCUMENT } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 // APP

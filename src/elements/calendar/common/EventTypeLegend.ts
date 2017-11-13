@@ -15,7 +15,7 @@ import { CalendarEvent } from '../../../utils/calendar-utils/CalendarUtils';
     </ng-template>
     <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
-      [ngOutletContext]="{events: events, eventTypeClicked: eventTypeClicked}">
+      [ngTemplateOutletContext]="{events: events, eventTypeClicked: eventTypeClicked}">
     </ng-template>
   `
 })

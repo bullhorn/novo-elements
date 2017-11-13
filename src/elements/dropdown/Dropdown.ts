@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, ChangeDetectorRef, EventEmitter, OnInit, AfterContentInit, OnDestroy, Input, Output, ViewChild, DoCheck, Renderer, HostListener, ContentChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, ChangeDetectorRef, EventEmitter, OnInit, AfterContentInit, OnDestroy, Input, Output, ViewChild, DoCheck, Renderer2, HostListener, ContentChildren, QueryList } from '@angular/core';
 // APP
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
@@ -18,7 +18,7 @@ export class NovoDropdownContainer implements DoCheck {
     private appendToBody: boolean;
     public parent: NovoDropdownElement;
 
-    constructor(public element: ElementRef, private renderer: Renderer, private ref: ChangeDetectorRef) {
+    constructor(public element: ElementRef, private renderer: Renderer2, private ref: ChangeDetectorRef) {
         this.scrollHandler = this.handleScroll.bind(this);
     }
 
@@ -27,8 +27,8 @@ export class NovoDropdownContainer implements DoCheck {
             const element = this.element.nativeElement;
             const position = Helpers.calcPositionOffset(this.position, element, this.side);
             if (position) {
-                this.renderer.setElementStyle(element, 'top', position.top);
-                this.renderer.setElementStyle(element, 'left', position.left);
+                this.renderer.setStyle(element, 'top', position.top);
+                this.renderer.setStyle(element, 'left', position.left);
             }
         }
     }
@@ -40,8 +40,8 @@ export class NovoDropdownContainer implements DoCheck {
 
     public show(appendToBody: boolean): void {
         this.appendToBody = appendToBody;
-        this.renderer.setElementStyle(this.element.nativeElement, 'display', 'block');
-        this.renderer.setElementStyle(this.element.nativeElement, 'visibility', 'visible');
+        this.renderer.setStyle(this.element.nativeElement, 'display', 'block');
+        this.renderer.setStyle(this.element.nativeElement, 'visibility', 'visible');
         this.isVisible = true;
         if (appendToBody) {
             window.addEventListener('scroll', this.scrollHandler);
@@ -51,7 +51,7 @@ export class NovoDropdownContainer implements DoCheck {
 
     public hide(): void {
         this.isVisible = false;
-        this.renderer.setElementStyle(this.element.nativeElement, 'visibility', 'hidden');
+        this.renderer.setStyle(this.element.nativeElement, 'visibility', 'hidden');
         if (this.appendToBody) {
             window.removeEventListener('scroll', this.scrollHandler);
         }

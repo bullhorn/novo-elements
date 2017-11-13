@@ -12,15 +12,20 @@ lib
 /src/**/*.js
 /src/**/*.js.map
 /src/**/*.d.ts
+/src/**/*.ngsummary.json
 index.js
+index.*.json
+/demo/custom-typing.*.json
 index.js.map
 index.d.ts
 novo-elements.js
 novo-elements.d.ts
-novo-elements.module.js
-novo-elements.module.js.map
-novo-elements.module.d.ts
+novo-elements.*.js
+novo-elements.*.json
+novo-elements.*.js.map
+novo-elements.*.d.ts
 novo-elements.providers.js
+novo-elements.providers.json
 novo-elements.providers.js.map
 novo-elements.providers.d.ts
 

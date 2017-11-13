@@ -24,7 +24,7 @@ module.exports = function () {
     return webpackMerge(commonConfig({
         env: ENV
     }), {
-        devtool: 'cheap-module-source-map',
+        devtool: 'source-map',
         output: {
             path: helpers.root('dist'),
             filename: '[name].bundle.js',

@@ -19,7 +19,7 @@ export class NovoSimpleHeaderRowDef extends _NovoHeaderRowDef {
     selector: '[novoSimpleRowDef]',
     providers: [{ provide: CdkRowDef, useExisting: NovoSimpleRowDef }]
 })
-export class NovoSimpleRowDef extends _NovoCdkRowDef {
+export class NovoSimpleRowDef<T> extends _NovoCdkRowDef<T> {
     @Input('novoSimpleRowDefColumns') columns;
 }
 

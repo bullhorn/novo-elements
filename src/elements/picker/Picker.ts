@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild, Input, Output, OnInit, DoCheck, Renderer, HostListener, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild, Input, Output, OnInit, DoCheck, HostListener, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { Observable } from 'rxjs/Observable';

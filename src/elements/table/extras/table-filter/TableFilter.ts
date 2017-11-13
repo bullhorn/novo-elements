@@ -1,5 +1,5 @@
 // NG2
-import { Directive, EventEmitter, ElementRef, Renderer, OnChanges, OnInit, Input, Output, SimpleChanges, HostListener } from '@angular/core';
+import { Directive, EventEmitter, ElementRef, Renderer2, OnChanges, OnInit, Input, Output, SimpleChanges, HostListener } from '@angular/core';
 // APP
 import { KeyCodes } from './../../../../utils/key-codes/KeyCodes';
 import { Helpers } from './../../../../utils/Helpers';
@@ -13,7 +13,7 @@ export class TableFilter implements OnInit, OnChanges {
 
     filterThrottle: any;
 
-    constructor(private element: ElementRef, private renderer: Renderer) {
+    constructor(private element: ElementRef, private renderer: Renderer2) {
         this.element = element;
         this.renderer = renderer;
     }
@@ -29,7 +29,7 @@ export class TableFilter implements OnInit, OnChanges {
         } else if (this.config.filter) {
             label = this.config.filter;
         }
-        this.renderer.setElementProperty(this.element, 'value', label);
+        this.renderer.setProperty(this.element, 'value', label);
     }
 
     @HostListener('keydown', ['$event'])

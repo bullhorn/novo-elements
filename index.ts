@@ -17,7 +17,6 @@ export { NovoSelectModule } from './src/elements/select/Select.module';
 export { NovoListModule } from './src/elements/list/List.module';
 export { NovoSwitchModule } from './src/elements/switch/Switch.module';
 export { NovoSearchBoxModule } from './src/elements/search/SearchBox.module';
-export { NovoDrawerModule } from './src/elements/drawer/Drawer.module';
 export { NovoDragulaModule } from './src/elements/dragula/Dragula.module';
 export { NovoSliderModule } from './src/elements/slider/Slider.module';
 export { NovoPickerModule } from './src/elements/picker/Picker.module';
