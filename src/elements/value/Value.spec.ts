@@ -2,19 +2,17 @@
 import { TestBed, async } from '@angular/core/testing';
 // App
 import { NovoValueElement, NOVO_VALUE_THEME, NOVO_VALUE_TYPE } from './Value';
-import { NovoLabelService } from '../../services/novo-label-service';
+// import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoValueModule } from './Value.module';
 // TODO fix specs
-xdescribe('Elements: NovoValueElement', () => {
+describe('Elements: NovoValueElement', () => {
     let fixture;
     let component;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                NovoValueElement
-            ],
-            providers: [
-                { provide: NovoLabelService, useClass: NovoLabelService }
+            imports: [
+                NovoValueModule
             ]
         }).compileComponents();
         fixture = TestBed.createComponent(NovoValueElement);
@@ -25,22 +23,99 @@ xdescribe('Elements: NovoValueElement', () => {
         expect(component).toBeTruthy();
     });
 
-    describe('oninit: ', () => {
-        it('should be defined.', () => {
-            expect(component.ngOnInit).toBeDefined();
-        });
-
-        it('should defaulr.', () => {
-            component.launched = false;
+    describe('oninit ', () => {
+        it('should default meta.lable if no meta is defined.', () => {
             component.ngOnInit();
-            expect(component.iconClass).toBeDefined();
+            expect(component.meta.label).toBe('');
         });
-
     });
 
-    describe('close: ', () => {
-        it('should be defined.', () => {
-            expect(component.close).toBeDefined();
+    describe('oninit: iconClass ', () => {
+        it('should set iconClass to meta icon', () => {
+            component.launched = false;
+            component.meta = {
+              icon: 'test',
+            };
+            component.ngOnInit();
+            expect(component.iconClass).toBe('bhi-test actions');
+        });
+
+        it('should set iconClass to empty if no icon defined', () => {
+            component.ngOnInit();
+            expect(component.iconClass).toBe('');
+        });
+    });
+
+    describe('oninit: isMobile: ', () => {
+        it('should return true if theme is mobile.', () => {
+            component.theme = NOVO_VALUE_THEME.MOBILE;
+            component.ngOnInit();
+            expect(component.isMobile).toBeTruthy();
+        });
+
+        it('should return false if theme is not mobile.', () => {
+            component.theme = NOVO_VALUE_THEME.DEFAULT;
+            component.ngOnInit();
+            expect(component.isMobile).toBeFalsy();
+        });
+    });
+
+    describe('oninit: showLabel: ', () => {
+        it('should return true if type is valid', () => {
+            component.type= NOVO_VALUE_TYPE.INTERNAL_LINK;
+            component.ngOnInit();
+            expect(component.showLabel).toBeTruthy();
+        });
+
+        it('should return true if type is valid', () => {
+            component.type= NOVO_VALUE_TYPE.LINK;
+            component.ngOnInit();
+            expect(component.showLabel).toBeTruthy();
+        });
+
+        it('should return false if type is not correct.', () => {
+            component.ngOnInit();
+            expect(component.showLabel).toBeFalsy();
+        });
+    });
+
+    describe('oninit: showIcon ', () => {
+        it('should return true if icon is defined and not emoty', () => {
+            component.meta = {
+                icon: 'test',
+            };
+            component.data = 'test';
+            component.ngOnInit();
+            expect(component.showIcon).toBeTruthy();
+        });
+
+        it('should return false if type is not correct.', () => {
+            component.ngOnInit();
+            expect(component.showIcon).toBeFalsy();
+        });
+    });
+
+    describe('onValueClick ', () => {
+        it('should return true if icon is defined and not emoty', () => {
+            component.meta = {
+                onIconClick: function() { },
+            };
+            component.data = 'test';
+            spyOn(component.meta, 'onIconClick');
+            component.onValueClick();
+            expect(component.meta.onIconClick).toHaveBeenCalledWith(component.data, component.meta);
+        });
+    });
+
+    describe('openLink ', () => {
+        it('should return true if icon is defined and not emoty', () => {
+            component.meta = {
+                openLink: function() { },
+            };
+            component.data = 'test';
+            spyOn(component.meta, 'openLink');
+            component.openLink();
+            expect(component.meta.openLink).toHaveBeenCalledWith(component.data, component.meta);
         });
     });
 
@@ -62,11 +137,6 @@ xdescribe('Elements: NovoValueElement', () => {
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.INTERNAL_LINK);
         });
-        it('should not set type to internalLink for any entity other than ClientCorporation or ClientContact', () => {
-            component.meta.associatedEntity.entity = 'NotEntity';
-            component.ngOnChanges();
-            expect(component.type).toEqual(NOVO_VALUE_TYPE.DEFAULT);
-        });
         it('should set type to email for an email', () => {
             component.meta.name = 'email';
             component.ngOnChanges();
@@ -82,11 +152,6 @@ xdescribe('Elements: NovoValueElement', () => {
             component.data = '';
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.LINK);
-        });
-        it('should filter options if meta has readOnly options', () => {
-            component.meta.options = [{ label: 1, readOnly: true }, { label: 2 }];
-            component.ngOnChanges();
-            expect(component.filteredOptions).toEqual([{ label: 2 }]);
         });
     });
     describe('Function: isEmailField', () => {
