@@ -1,3 +1,13 @@
+<a name="2.1.56"></a>
+## [2.1.56](https://github.com/bullhorn/novo-elements/compare/v2.1.55...v2.1.56) (2017-11-13)
+
+
+### Features
+
+* **form:** Adding encrypted field icon ([2e3f243](https://github.com/bullhorn/novo-elements/commit/2e3f243))
+
+
+
 <a name="2.1.55"></a>
 ## [2.1.55](https://github.com/bullhorn/novo-elements/compare/v2.1.54...v2.1.55) (2017-11-13)
 
