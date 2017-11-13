@@ -1,3 +1,13 @@
+<a name="2.1.54"></a>
+## [2.1.54](https://github.com/bullhorn/novo-elements/compare/v2.1.53...v2.1.54) (2017-11-13)
+
+
+### Features
+
+* **value&renderer:** Adding elements to render values based on meta ([75b864c](https://github.com/bullhorn/novo-elements/commit/75b864c))
+
+
+
 <a name="2.1.53"></a>
 ## [2.1.53](https://github.com/bullhorn/novo-elements/compare/v2.1.52...v2.1.53) (2017-11-10)
 

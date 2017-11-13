@@ -1,0 +1,1 @@
+{"moduleName":null,"summaries":[{"symbol":{"__symbol":0,"members":[]},"metadata":{"__symbolic":"class","members":{"transform":[{"__symbolic":"method"}]}},"type":{"summaryKind":0,"type":{"reference":{"__symbol":0,"members":[]},"diDeps":[],"lifecycleHooks":[]},"name":"groupBy","pure":true}}],"symbols":[{"__symbol":0,"name":"GroupByPipe","filePath":"./GroupBy"}]}
