@@ -110,6 +110,10 @@ export class FormUtils {
         return type;
     }
 
+    isFieldEncrypted(key: string): boolean {
+        return key.indexOf('customEncrypted') > -1;
+    }
+
     getControlForField(field: any, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any, forTable: boolean = false) {
         // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
         // TODO: (cont.) as the setter of the field argument
@@ -122,6 +126,7 @@ export class FormUtils {
             placeholder: field.hint || '',
             required: field.required,
             hidden: !field.required,
+            encrypted: this.isFieldEncrypted(field.name ? field.name : ''),
             value: field.value || field.defaultValue,
             sortOrder: field.sortOrder,
             associatedEntity: field.associatedEntity,

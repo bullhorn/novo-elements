@@ -23,6 +23,7 @@ export interface NovoControlConfig {
     checkboxLabel?: string;
     required?: boolean;
     hidden?: boolean;
+    encrypted?: boolean;
     sortOrder?: number;
     controlType?: string;
     placeholder?: string;
@@ -74,6 +75,7 @@ export class BaseControl {
     checkboxLabel: string;
     required: boolean;
     hidden: boolean;
+    encrypted: boolean;
     sortOrder: number;
     controlType: string;
     placeholder: string;
@@ -124,6 +126,7 @@ export class BaseControl {
         this.name = config.name || '';
         this.required = !!config.required;
         this.hidden = !!config.hidden;
+        this.encrypted = !!config.encrypted;
         this.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;
         this.controlType = config.controlType || '';
         this.placeholder = config.placeholder || '';
