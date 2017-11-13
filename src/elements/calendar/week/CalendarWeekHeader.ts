@@ -26,7 +26,7 @@ import { CalendarEvent, WeekDay } from '../../../utils/calendar-utils/CalendarUt
     </ng-template>
     <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
-      [ngOutletContext]="{days: days, locale: locale, dayClicked: dayClicked, eventDropped: eventDropped}">
+      [ngTemplateOutletContext]="{days: days, locale: locale, dayClicked: dayClicked, eventDropped: eventDropped}">
     </ng-template>
   `
 })

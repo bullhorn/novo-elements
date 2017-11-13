@@ -19,7 +19,6 @@ import { NovoDropdownModule } from './src/elements/dropdown/Dropdown.module';
 import { NovoSelectModule } from './src/elements/select/Select.module';
 import { NovoListModule } from './src/elements/list/List.module';
 import { NovoSwitchModule } from './src/elements/switch/Switch.module';
-import { NovoDrawerModule } from './src/elements/drawer/Drawer.module';
 import { NovoDragulaModule } from './src/elements/dragula/Dragula.module';
 import { NovoSliderModule } from './src/elements/slider/Slider.module';
 import { NovoPickerModule } from './src/elements/picker/Picker.module';
@@ -69,7 +68,6 @@ import { NovoSimpleTableModule } from './src/elements/simple-table';
         NovoSelectModule,
         NovoListModule,
         NovoSwitchModule,
-        NovoDrawerModule,
         NovoDragulaModule,
         NovoSliderModule,
         NovoPickerModule,

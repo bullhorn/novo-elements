@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, DoCheck, Renderer, HostListener } from '@angular/core';
+import { Component, ElementRef, DoCheck, Renderer2, HostListener } from '@angular/core';
 // APP
 import { KeyCodes } from '../../../../utils/key-codes/KeyCodes';
 import { Helpers } from '../../../../utils/Helpers';
@@ -17,7 +17,7 @@ export class NovoPickerContainer implements DoCheck {
     private appendToBody: boolean;
     public parent: NovoPickerElement;
 
-    constructor(public element: ElementRef, private renderer: Renderer) {
+    constructor(public element: ElementRef, private renderer: Renderer2) {
         this.scrollHandler = this.handleScroll.bind(this);
     }
 
@@ -26,9 +26,9 @@ export class NovoPickerContainer implements DoCheck {
             const element = this.element.nativeElement;
             const position = Helpers.calcPositionOffset(this.position, element, this.side);
             if (position) {
-                this.renderer.setElementStyle(element, 'top', position.top);
-                this.renderer.setElementStyle(element, 'left', position.left);
-                this.renderer.setElementStyle(element, 'width', position.width);
+                this.renderer.setStyle(element, 'top', position.top);
+                this.renderer.setStyle(element, 'left', position.left);
+                this.renderer.setStyle(element, 'width', position.width);
             }
         }
     }
@@ -40,8 +40,8 @@ export class NovoPickerContainer implements DoCheck {
 
     public show(appendToBody: boolean): void {
         this.appendToBody = appendToBody;
-        this.renderer.setElementStyle(this.element.nativeElement, 'display', 'block');
-        this.renderer.setElementStyle(this.element.nativeElement, 'visibility', 'visible');
+        this.renderer.setStyle(this.element.nativeElement, 'display', 'block');
+        this.renderer.setStyle(this.element.nativeElement, 'visibility', 'visible');
         this.isVisible = true;
         if (appendToBody) {
             window.addEventListener('scroll', this.scrollHandler);
@@ -50,7 +50,7 @@ export class NovoPickerContainer implements DoCheck {
 
     public hide(): void {
         this.isVisible = false;
-        this.renderer.setElementStyle(this.element.nativeElement, 'visibility', 'hidden');
+        this.renderer.setStyle(this.element.nativeElement, 'visibility', 'hidden');
         if (this.appendToBody) {
             window.removeEventListener('scroll', this.scrollHandler);
         }

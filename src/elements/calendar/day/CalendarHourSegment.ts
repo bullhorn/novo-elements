@@ -17,7 +17,7 @@ import { DayViewHourSegment } from '../../../utils/calendar-utils/CalendarUtils'
     </ng-template>
     <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
-      [ngOutletContext]="{
+      [ngTemplateOutletContext]="{
         segment: segment,
         locale: locale
       }">

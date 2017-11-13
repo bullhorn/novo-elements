@@ -13,7 +13,6 @@ export * from './dropdown/DropdownDemo';
 export * from './select/SelectDemo';
 export * from './list/ListDemo';
 export * from './switch/SwitchDemo';
-export * from './drawer/DrawerDemo';
 export * from './dragula/DragulaDemo';
 export * from './slides/SlidesDemo';
 export * from './picker/PickerDemo';

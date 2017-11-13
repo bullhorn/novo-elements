@@ -1,5 +1,5 @@
 // NG2
-import { Renderer } from '@angular/core';
+import { Renderer2 } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 // App
 import { NovoCKEditorElement } from './CKEditor';
@@ -14,7 +14,7 @@ describe('Elements: NovoCKEditorElement', () => {
                 NovoCKEditorElement
             ],
             providers: [
-                { provide: Renderer, useClass: Renderer }
+                { provide: Renderer2, useClass: Renderer2 }
             ]
         }).compileComponents();
         fixture = TestBed.createComponent(NovoCKEditorElement);
@@ -112,7 +112,7 @@ describe('Elements: NovoCKEditorElement', () => {
         it('should work', () => {
             let config = component.getBaseConfig();
             expect(config).toEqual({
-                enterMode : window['CKEDITOR'].ENTER_BR,
+                enterMode: window['CKEDITOR'].ENTER_BR,
                 shiftEnterMode: window['CKEDITOR'].ENTER_P,
                 disableNativeSpellChecker: false,
                 removePlugins: 'liststyle,tabletools,contextmenu',

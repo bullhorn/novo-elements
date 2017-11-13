@@ -124,14 +124,14 @@ export class NovoFormControl extends FormControl {
             validators.push(Validators.required);
             // TODO: duplicated below
             this.setValidators(validators);
-            this.updateValueAndValidity();
+            // this.updateValueAndValidity();
             this.hasRequiredValidator = this.required;
         } else if (!this.required && this.hasRequiredValidator) {
             let validators: any = [...this.validators];
             validators = validators.filter(val => val !== Validators.required);
             // TODO: duplicated above
             this.setValidators(validators);
-            this.updateValueAndValidity();
+            // this.updateValueAndValidity();
             this.hasRequiredValidator = this.required;
         }
     }
@@ -193,7 +193,11 @@ export class NovoFormGroup extends FormGroup {
     public edit: boolean;
     public currentEntity: string;
     public currentEntityId: string;
+    _value: any;
     get value() {
         return this.getRawValue();
+    }
+    set value(v: any) {
+        this._value = v;
     }
 }

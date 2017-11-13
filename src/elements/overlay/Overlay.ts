@@ -1,5 +1,3 @@
-
-
 import {
     Component,
     ElementRef,
@@ -17,18 +15,21 @@ import {
     OnDestroy,
     ChangeDetectionStrategy
 } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 // CDK
-import { ConnectedPositionStrategy, Overlay, OverlayRef, OverlayState, PositionStrategy, RepositionScrollStrategy, ScrollStrategy } from '@angular/cdk/overlay';
+import { ConnectedPositionStrategy, Overlay, OverlayRef, OverlayConfig, PositionStrategy, RepositionScrollStrategy, ScrollStrategy } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { filter, first, map, RxChain, switchMap } from '@angular/cdk/rxjs';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { merge } from 'rxjs/observable/merge';
+import { filter } from 'rxjs/operators/filter';
+import { first } from 'rxjs/operators/first';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { of as observableOf } from 'rxjs/observable/of';
+import { } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators/switchMap';
 
 /** Injection token that determines the scroll handling while the autocomplete panel is open. */
 export const DEFAULT_OVERLAY_SCROLL_STRATEGY = new InjectionToken<() => ScrollStrategy>('novo-overlay-scroll-strategy');
@@ -111,7 +112,7 @@ export class NovoOverlayTemplate implements OnDestroy {
             this._createOverlay(this.template);
         } else {
             /** Update the panel width, in case the host width has changed */
-            this._overlayRef.getState().width = this._getHostWidth();
+            this._overlayRef.getConfig().width = this._getHostWidth();
             this._overlayRef.updateSize();
             this._overlayRef.updatePosition();
         }
@@ -165,20 +166,21 @@ export class NovoOverlayTemplate implements OnDestroy {
             return observableOf(null);
         }
 
-        return RxChain.from(merge(
+        return merge(
             fromEvent(this._document, 'click'),
             fromEvent(this._document, 'touchend')
-        )).call(filter, (event: MouseEvent | TouchEvent) => {
-            const clickTarget = event.target as HTMLElement;
-            const clicked = this._panelOpen &&
-                clickTarget !== this._getConnectedElement().nativeElement &&
-                (!this._getConnectedElement().nativeElement.contains(clickTarget)) &&
-                (!!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget));
-            if (this._panelOpen && !!this._overlayRef && this._overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
-                this.select.emit(event);
-            }
-            return clicked;
-        }).result();
+        )
+            .pipe(filter((event: MouseEvent | TouchEvent) => {
+                const clickTarget = event.target as HTMLElement;
+                const clicked = this._panelOpen &&
+                    clickTarget !== this._getConnectedElement().nativeElement &&
+                    (!this._getConnectedElement().nativeElement.contains(clickTarget)) &&
+                    (!!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget));
+                if (this._panelOpen && !!this._overlayRef && this._overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
+                    this.select.emit(event);
+                }
+                return clicked;
+            }));
     }
 
     /**
@@ -186,17 +188,19 @@ export class NovoOverlayTemplate implements OnDestroy {
      * stream every time the option list changes.
      */
     protected _subscribeToClosingActions(): Subscription {
-        const firstStable = first.call(this._zone.onStable);
+        const firstStable = this._zone.onStable.asObservable().pipe(first());
         //const valueChanges = Observable.from(this.value);
         // When the zone is stable initially, and when the option list changes...
-        return RxChain.from(merge(firstStable))
+        return merge(firstStable)
+            .pipe(
             // create a new stream of panelClosingActions, replacing any previous streams
             // that were created, and flatten it so our stream only emits closing events...
-            .call(switchMap, () => {
+            switchMap(() => {
                 return this.panelClosingActions;
-            })
+            }),
             // when the first closing event occurs...
-            .call(first)
+            first()
+            )
             // set the value, close the panel, and complete.
             .subscribe(event => this.onClosingAction(event));
     }
@@ -213,11 +217,11 @@ export class NovoOverlayTemplate implements OnDestroy {
     protected _createOverlay(template: TemplateRef<any>): void {
         this._portal = new TemplatePortal(template, this._viewContainerRef);
         this._overlayRef = this._overlay.create(this._getOverlayConfig());
-        this._overlayRef.getState().width = this._getHostWidth();
+        this._overlayRef.getConfig().width = this._getHostWidth();
     }
 
-    protected _getOverlayConfig(): OverlayState {
-        const overlayState = new OverlayState();
+    protected _getOverlayConfig(): OverlayConfig {
+        const overlayState = new OverlayConfig();
         overlayState.positionStrategy = this._getOverlayPosition();
         //overlayState.width = this._getHostWidth();
         overlayState.direction = 'ltr';

@@ -27,7 +27,7 @@ import * as dateFns from 'date-fns';
     </ng-template>
     <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
-      [ngOutletContext]="{days: days, locale: locale, viewDate: viewDate}">
+      [ngTemplateOutletContext]="{days: days, locale: locale, viewDate: viewDate}">
     </ng-template>
   `
 })
