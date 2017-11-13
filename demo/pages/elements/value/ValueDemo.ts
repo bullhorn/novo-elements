@@ -17,50 +17,52 @@ let PhoneValueDemoTpl = require('./templates/PhoneValueDemo.html');
 const template = `
 <div class="container">
     <h1>Value/Details/Summary <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/value">(source)</a></small></h1>
-    <p>Update component descriptions</p>
-
+    <p>Used to render data based on its field type provided in meta.
+    It has two themes, DEFAULT - horizontal view and MOBILE - vertical view</p>
+    <h2>Mobile Theme</h2>
     <h5>Value/Details/Summary</h5>
-    <p>Explain - TODO!!!</p>
+    <p>Render SCALAR fields </p>
     <div class="example value-demo">${SimpleValueDemoTpl}</div>
     <code-snippet [code]="SimpleValueDemoTpl"></code-snippet>
     <h5>Category Value</h5>
-    <p>Explain - TODO!!!</p>
+    <p>Render TO_ONE fields </p>
     <div class="example value-demo">${CategoryValueDemoTpl}</div>
     <code-snippet [code]="CategoryValueDemoTpl"></code-snippet>
     <h5>Icon Right</h5>
-    <p>Explain - TODO!!!</p>
+    <p>Render fields with an icon on the right with an onclick event
+    that calls a function on the meta object</p>
     <div class="example value-demo">${IconRightValueDemoTpl}</div>
     <code-snippet [code]="IconRightValueDemoTpl"></code-snippet>
     <h5>CorporateUser</h5>
-    <p>Explain - TODO!!!</p>
+    <p>Render TO_ONE fields with CorporateUser as an Associated Entity</p>
     <div class="example value-demo">${CorporateUserValueDemoTpl}</div>
     <code-snippet [code]="CorporateUserValueDemoTpl"></code-snippet>
     <h5>Custom Formatter</h5>
-    <p>Explain - TODO!!!</p>
+    <p>Render Entity TO_ONE fields as links</p>
     <div class="example value-demo">${FormatterValueDemoTpl}</div>
     <code-snippet [code]="FormatterValueDemoTpl"></code-snippet>
     <h5>Phone Value</h5>
-    <p>Explain - TODO!!!</p>
+    <p>Render Phone fields with Call and Message functionality for mobile theme</p>
     <div class="example value-demo">${PhoneValueDemoTpl}</div>
     <code-snippet [code]="PhoneValueDemoTpl"></code-snippet>
     <h5>Email Value</h5>
-    <p>Explain - TODO!!!</p>
+    <p>Render Email fields with email functionality for mobile theme</p>
     <div class="example value-demo">${EmailValueDemoTpl}</div>
     <code-snippet [code]="EmailValueDemoTpl"></code-snippet>
     <h5>External Links</h5>
-    <p>Explain - TODO!!!</p>
+    <p>Render external links</p>
     <div class="example value-demo">${ExternalLinkValueDemoTpl}</div>
     <code-snippet [code]="ExternalLinkValueDemoTpl"></code-snippet>
     <h5>DateTime</h5>
-    <p>Explain - TODO!!!</p>
+    <p>Render DateTime and Timestamp fields in the localized Date format</p>
     <div class="example value-demo">${DateTimeValueDemoTpl}</div>
     <code-snippet [code]="DateTimeValueDemoTpl"></code-snippet>
     <h5>Address</h5>
-    <p>Explain - TODO!!!</p>
+    <p>Render Address fields</p>
     <div class="example value-demo">${AddressValueDemoTpl}</div>
     <code-snippet [code]="AddressValueDemoTpl"></code-snippet>
     <h5>Associated Entities</h5>
-    <p>Explain - TODO!!!</p>
+    <p>Render associated fields</p>
     <div class="example value-demo">${AssociatedValueDemoTpl}</div>
     <code-snippet [code]="AssociatedValueDemoTpl"></code-snippet>
 </div>
