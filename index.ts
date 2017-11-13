@@ -27,6 +27,7 @@ export { NovoDateTimePickerModule } from './src/elements/date-time-picker/DateTi
 export { NovoNovoCKEditorModule } from './src/elements/ckeditor/CKEditor.module';
 export { NovoTipWellModule } from './src/elements/tip-well/TipWell.module';
 export { NovoTableModule } from './src/elements/table/Table.module';
+export { NovoValueModule } from './src/elements/value/Value.module';
 export { NovoTableMode } from './src/elements/table/Table';
 export { NovoTableExtrasModule } from './src/elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './src/elements/form/Form.module';
@@ -98,6 +99,10 @@ export { NovoElementProviders } from './novo-elements.providers';
 export { PluralPipe } from './src/pipes/plural/Plural';
 export { DecodeURIPipe } from './src/pipes/decode-uri/DecodeURI';
 export { GroupByPipe } from './src/pipes/group-by/GroupBy';
+export { RenderPipe } from './src/elements/value/Render';
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';
 export { NovoListElement } from './src/elements/list/List';
+// interfaces
+export { NOVO_VALUE_TYPE } from './src/elements/value/Value';
+export { NOVO_VALUE_THEME } from './src/elements/value/Value';

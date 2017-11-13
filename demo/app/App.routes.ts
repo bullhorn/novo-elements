@@ -36,7 +36,8 @@ import {
     FieldInteractionsDemoComponent,
     SimpleTableDemoComponent,
     SearchDemoComponent,
-    FormGroupedDemoComponent
+    FormGroupedDemoComponent,
+    ValueDemoComponent
 } from './../pages/elements';
 
 export const routes: any = [
@@ -81,6 +82,7 @@ export const routes: any = [
     { path: 'tipwell', component: TipWellDemoComponent, title: 'Tip Well', section: 'components' },
     { path: 'category-dropdown', component: CategoryDropdownDemoComponent, title: 'Category Dropdown', section: 'components' },
     { path: 'popover', component: PopOverDemoComponent, title: 'PopOver', section: 'components' },
+    { path: 'value', component: ValueDemoComponent, title: 'Value', section: 'components' },
 
     // Utils
     { path: 'utils', component: UtilsDemoComponent, title: 'Utils', section: 'utils' },
