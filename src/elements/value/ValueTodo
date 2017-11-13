@@ -1,0 +1,14 @@
+ValueTodo
+----------
+- Special Types
+    - MOVE type checking to service??
+- Demos and what not for 
+    - phone (non-mobile)
+    - email (non-mobile)
+    - internal links
+    - can the them be passed in as a string and still be an enum?
+    - fix mobile class hostbinding in novo-value
+- users to configure a novo-value of a certain type
+- specs
+ - values.scss should be value
+ - have a baseclass for novovaluecustom
