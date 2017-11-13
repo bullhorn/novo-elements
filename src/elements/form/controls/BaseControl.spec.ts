@@ -30,6 +30,9 @@ describe('Control: BaseControl', () => {
         it('should set the hidden', () => {
             expect(control.hidden).toBe(false);
         });
+        it('should set the encrypted', () => {
+            expect(control.encrypted).toBe(false);
+        });
         it('should set the multiple', () => {
             expect(control.multiple).toBe(false);
         });
@@ -68,6 +71,7 @@ describe('Control: BaseControl', () => {
                 label: 'TEST_LABEL',
                 required: true,
                 hidden: false,
+                encrypted: true,
                 sortOrder: 2,
                 placeholder: 'TEST_PLACEHOLDER',
                 config: { test: 'TEST_CONFIG' },
@@ -98,6 +102,9 @@ describe('Control: BaseControl', () => {
         });
         it('should set the hidden', () => {
             expect(control.hidden).toBe(false);
+        });
+        it('should set the encrypted', () => {
+            expect(control.encrypted).toBe(true);
         });
         it('should set the multiple', () => {
             expect(control.multiple).toBe(true);

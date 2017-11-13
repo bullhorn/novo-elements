@@ -100,7 +100,13 @@ export class NovoCustomControlContainerElement {
     template: `
         <div class="novo-control-container" [formGroup]="form" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
             <!--Label (for horizontal)-->
-            <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && form.controls[control.key].label && !condensed">{{ form.controls[control.key].label }}</label>
+            <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && form.controls[control.key].label && !condensed">
+                <!--Encrypted Field-->
+                <i [hidden]="!form.controls[control.key].encrypted"
+                class="bhi-lock">
+                </i>
+                {{ form.controls[control.key].label }}
+            </label>
             <div class="novo-control-outer-container">
                 <!--Label (for vertical)-->
                 <label

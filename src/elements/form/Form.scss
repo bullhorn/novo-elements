@@ -238,6 +238,11 @@ novo-form {
                         flex-wrap: nowrap;
                         align-items: flex-start;
                         width: 100%;
+                        i.bhi-lock {
+                            color: $grey;
+                            font-weight: 500;
+                            padding-right: 5px;
+                        }
                         >label {
                             @extend .novo-form-control-label;
                         }
