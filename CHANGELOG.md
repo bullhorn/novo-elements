@@ -1,3 +1,13 @@
+<a name="2.1.58"></a>
+## [2.1.58](https://github.com/bullhorn/novo-elements/compare/v2.1.57...v2.1.58) (2017-11-14)
+
+
+### Features
+
+* **groupcontrol:** Adding way to provide custom row for the controls ([dcd535a](https://github.com/bullhorn/novo-elements/commit/dcd535a))
+
+
+
 <a name="2.1.57"></a>
 ## [2.1.57](https://github.com/bullhorn/novo-elements/compare/v2.1.56...v2.1.57) (2017-11-14)
 
