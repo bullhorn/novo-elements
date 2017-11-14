@@ -1,3 +1,13 @@
+<a name="2.1.59"></a>
+## [2.1.59](https://github.com/bullhorn/novo-elements/compare/v2.1.58...v2.1.59) (2017-11-14)
+
+
+### Bug Fixes
+
+* **groupcontrol:** Remove duplicate key ([ac19828](https://github.com/bullhorn/novo-elements/commit/ac19828))
+
+
+
 <a name="2.1.58"></a>
 ## [2.1.58](https://github.com/bullhorn/novo-elements/compare/v2.1.57...v2.1.58) (2017-11-14)
 
