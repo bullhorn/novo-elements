@@ -1,10 +1,12 @@
 // NG2
 import { Component, Input } from '@angular/core';
+import { FormArray } from '@angular/forms';
 // APP
 let VerticalDemoTpl = require('./templates/VerticalDemo.html');
 let HorizontalDemoTpl = require('./templates/HorizontalDemo.html');
 let VerticalOptionsDemoTpl = require('./templates/VerticalOptionsDemo.html');
 let HorizontalOptionsDemoTpl = require('./templates/HorizontalOptionsDemo.html');
+let CustomTemplateDemoTpl = require('./templates/CustomTemplateDemo.html');
 // Vendor
 import {
     FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
@@ -33,6 +35,10 @@ const template = `
     <h5>Horizontal (options)</h5>
     <div class="example form-demo">${VerticalOptionsDemoTpl}</div>
     <code-snippet [code]="VerticalOptionsDemoTpl"></code-snippet>
+
+    <h5>Custom Template (you control everything!)</h5>
+    <div class="example form-demo">${CustomTemplateDemoTpl}</div>
+    <code-snippet [code]="CustomTemplateDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -45,7 +51,9 @@ export class FormGroupedDemoComponent {
     private VerticalDemoTpl: string = VerticalDemoTpl;
     private HorizontalOptionsDemoTpl: string = HorizontalOptionsDemoTpl;
     private VerticalOptionsDemoTpl: string = VerticalOptionsDemoTpl;
+    private CustomTemplateDemoTpl: string = CustomTemplateDemoTpl;
 
+    public custom: NovoFormGroup;
     public horizontal: NovoFormGroup;
     public horizontalOptions: NovoFormGroup;
     public vertical: NovoFormGroup;
@@ -56,10 +64,10 @@ export class FormGroupedDemoComponent {
         { text: 'TEXT', percentage: 12, checkbox: true, test4: 'TEST' },
     ];
 
-    public topAddConfig: NovoControlGroupAddConfig = {
+    public simpleAddConfig: NovoControlGroupAddConfig = {
         label: 'Add'
     };
-    public bottomAddConfig: NovoControlGroupAddConfig = {
+    public anotherAddConfig: NovoControlGroupAddConfig = {
         label: 'Add a new fancy thing!'
     };
 
@@ -100,7 +108,18 @@ export class FormGroupedDemoComponent {
         ];
     }
 
+    public customDelete(form: NovoFormGroup, key: string, index: number) {
+        console.log('DELETE', form, key, index); // tslint:disable-line
+        const control: FormArray = <FormArray>form.controls[key];
+        control.removeAt(index);
+    }
+
+    public customEdit(form: NovoFormGroup, key: string, index: number) {
+        console.log('EDIT', form, key, index); // tslint:disable-line
+    }
+
     private setupGroupedFormDemo() {
+        this.custom = this.formUtils.emptyFormGroup();
         this.horizontal = this.formUtils.emptyFormGroup();
         this.vertical = this.formUtils.emptyFormGroup();
         this.horizontalOptions = this.formUtils.emptyFormGroup();
