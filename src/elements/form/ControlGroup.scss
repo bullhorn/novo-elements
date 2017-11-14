@@ -109,6 +109,16 @@ novo-control-group {
                     display: flex;
                     align-items: center;
                 }
+                &.first {
+                    > span i {
+                        margin: 0;
+                    }
+                    min-width: 40px;
+                    max-width: 40px;
+                    margin-left: 0;
+                    display: flex;
+                    align-items: center;
+                }
                 &.last {
                     min-width: 40px;
                     max-width: 40px;
