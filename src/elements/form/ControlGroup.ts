@@ -53,7 +53,7 @@ export interface NovoControlGroupAddConfig {
                 <div class="novo-control-group-row" *ngFor="let control of form?.controls[key]['controls']; let index = index;">
                     <ng-template
                         [ngTemplateOutlet]="rowTemplate || defaultTemplate"
-                        [ngTemplateOutletContext]="{form: form, index: index, key: key, controls: controls, key: key}">
+                        [ngTemplateOutletContext]="{form: form, index: index, key: key, controls: controls}">
                     </ng-template>
                 </div>
             </ng-container>
