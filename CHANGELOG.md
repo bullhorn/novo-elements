@@ -1,3 +1,13 @@
+<a name="2.1.57"></a>
+## [2.1.57](https://github.com/bullhorn/novo-elements/compare/v2.1.56...v2.1.57) (2017-11-14)
+
+
+### Bug Fixes
+
+* **value:** Fixing value file name ([8c8b697](https://github.com/bullhorn/novo-elements/commit/8c8b697))
+
+
+
 <a name="2.1.56"></a>
 ## [2.1.56](https://github.com/bullhorn/novo-elements/compare/v2.1.55...v2.1.56) (2017-11-13)
 
