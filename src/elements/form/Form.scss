@@ -15,6 +15,10 @@
     padding-top: 8px;
     word-break: word-break;
     overflow-wrap: break-word;
+    &.encrypted{
+        max-width: 110px;
+        min-width: 110px;
+    }
 }
 
 novo-dynamic-form,
@@ -239,9 +243,11 @@ novo-form {
                         align-items: flex-start;
                         width: 100%;
                         i.bhi-lock {
+                            width: 20px;
                             color: $grey;
                             font-weight: 500;
-                            padding-right: 5px;
+                            font-size: 1.2em;
+                            padding-top: 6px;
                         }
                         >label {
                             @extend .novo-form-control-label;
