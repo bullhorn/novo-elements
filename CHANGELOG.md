@@ -1,3 +1,13 @@
+<a name="2.1.61"></a>
+## [2.1.61](https://github.com/bullhorn/novo-elements/compare/v2.1.60...v2.1.61) (2017-11-15)
+
+
+### Bug Fixes
+
+* **control:** move lock outside of label to better handle multi-line label ([#579](https://github.com/bullhorn/novo-elements/issues/579)) ([ab2409f](https://github.com/bullhorn/novo-elements/commit/ab2409f))
+
+
+
 <a name="2.1.60"></a>
 ## [2.1.60](https://github.com/bullhorn/novo-elements/compare/v2.1.59...v2.1.60) (2017-11-15)
 
