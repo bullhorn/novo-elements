@@ -228,6 +228,7 @@ export class NovoCustomControlContainerElement {
     `,
     host: {
         '[class]': 'form.controls[control.key].controlType',
+        '[attr.data-control-type]': 'form.controls[control.key].controlType',
         '[class.disabled]': 'form.controls[control.key].readOnly',
         '[class.hidden]': 'form.controls[control.key].hidden',
         '[attr.data-control-key]': 'control.key',
