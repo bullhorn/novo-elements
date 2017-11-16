@@ -1,3 +1,13 @@
+<a name="2.1.62"></a>
+## [2.1.62](https://github.com/bullhorn/novo-elements/compare/v2.1.61...v2.1.62) (2017-11-16)
+
+
+### Features
+
+* **control-group:** Added an onAdd output ([e586aaa](https://github.com/bullhorn/novo-elements/commit/e586aaa))
+
+
+
 <a name="2.1.61"></a>
 ## [2.1.61](https://github.com/bullhorn/novo-elements/compare/v2.1.60...v2.1.61) (2017-11-15)
 
