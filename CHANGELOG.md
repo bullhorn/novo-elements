@@ -1,3 +1,13 @@
+<a name="2.1.63"></a>
+## [2.1.63](https://github.com/bullhorn/novo-elements/compare/v2.1.62...v2.1.63) (2017-11-17)
+
+
+### Bug Fixes
+
+* **form:** converting toString for integer values  ([41f8ebb](https://github.com/bullhorn/novo-elements/commit/41f8ebb))
+
+
+
 <a name="2.1.62"></a>
 ## [2.1.62](https://github.com/bullhorn/novo-elements/compare/v2.1.61...v2.1.62) (2017-11-16)
 
