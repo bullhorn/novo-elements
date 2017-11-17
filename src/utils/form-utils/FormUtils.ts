@@ -126,7 +126,7 @@ export class FormUtils {
             placeholder: field.hint || '',
             required: field.required,
             hidden: !field.required,
-            encrypted: this.isFieldEncrypted(field.name ? field.name : ''),
+            encrypted: this.isFieldEncrypted(field.name ? field.name.toString() : ''),
             value: field.value || field.defaultValue,
             sortOrder: field.sortOrder,
             associatedEntity: field.associatedEntity,
