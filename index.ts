@@ -43,6 +43,7 @@ export { NovoToastService } from './src/elements/toast/ToastService';
 export { NovoModalService } from './src/elements/modal/ModalService';
 export { NovoLabelService } from './src/services/novo-label-service';
 export { NovoDragulaService } from './src/elements/dragula/DragulaService';
+export { GooglePlacesService } from './src/elements/places/places.service';
 // Export all data services
 export { Collection } from './src/services/data-provider/Collection';
 export { CollectionEvent } from './src/services/data-provider/CollectionEvent';

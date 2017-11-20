@@ -43,6 +43,7 @@ import { NovoValueModule } from './src/elements/value/Value.module';
 import { NovoOverlayModule } from './src/elements/overlay/Overlay.module';
 import { NovoLabelService } from './src/services/novo-label-service';
 import { NovoDragulaService } from './src/elements/dragula/DragulaService';
+import { GooglePlacesService } from './src/elements/places/places.service';
 import { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
 import { FormUtils } from './src/utils/form-utils/FormUtils';
 import { NovoSimpleTableModule } from './src/elements/simple-table';
@@ -96,6 +97,7 @@ import { NovoSimpleTableModule } from './src/elements/simple-table';
         { provide: ComponentUtils, useClass: ComponentUtils },
         { provide: NovoLabelService, useClass: NovoLabelService },
         { provide: NovoDragulaService, useClass: NovoDragulaService },
+        { provide: GooglePlacesService, useClass: GooglePlacesService },
         { provide: FormUtils, useClass: FormUtils }
     ]
 })
