@@ -1,35 +1,14 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    forwardRef,
-    Host,
-    Inject,
-    InjectionToken,
-    ViewChild,
-    Input,
-    NgZone,
-    OnDestroy,
-    Optional,
-    ViewContainerRef,
-    TemplateRef
-} from '@angular/core';
+// NG
+import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Inject, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOCUMENT } from '@angular/platform-browser';
-import { Overlay } from '@angular/cdk/overlay';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
-
+// Vendor
 import { TextMaskModule } from 'angular2-text-mask';
-import { Observable } from 'rxjs/Observable';
-import { merge } from 'rxjs/observable/merge';
-import { of as observableOf } from 'rxjs/observable/of';
-
-import { HasOverlay } from '../overlay/HasOverlay';
-import { DEFAULT_OVERLAY_SCROLL_STRATEGY } from '../overlay/Overlay';
+// App
+import { NovoOverlayTemplate } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 import { Helpers } from '../../utils/Helpers';
-
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -46,12 +25,12 @@ const DATE_VALUE_ACCESSOR = {
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
 
-        <novo-overlay-template #overlay>
+        <novo-overlay-template [parent]="element">
             <novo-time-picker inline="true" (onSelect)="setValue($event)" [ngModel]="value"></novo-time-picker>
         </novo-overlay-template>
   `
 })
-export class NovoTimePickerInputElement extends HasOverlay implements OnDestroy, ControlValueAccessor {
+export class NovoTimePickerInputElement implements ControlValueAccessor {
     public value: any;
     public formattedValue: any;
 
@@ -66,20 +45,14 @@ export class NovoTimePickerInputElement extends HasOverlay implements OnDestroy,
     @Input() military: boolean = false;
     @Input() maskOptions: any;
     /** Element for the panel containing the autocomplete options. */
-    @ViewChild('overlay') datepicker: any;
+    @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
 
     constructor(
-        protected _element: ElementRef,
-        protected _overlay: Overlay,
-        protected _viewContainerRef: ViewContainerRef,
-        protected _zone: NgZone,
-        protected _changeDetectorRef: ChangeDetectorRef,
-        @Inject(DEFAULT_OVERLAY_SCROLL_STRATEGY) protected _scrollStrategy,
-        @Optional() @Inject(DOCUMENT) protected _document: any,
+        public element: ElementRef,
         public labels: NovoLabelService,
-        private dateFormatService: DateFormatService
+        private dateFormatService: DateFormatService,
+        protected _changeDetectorRef: ChangeDetectorRef,
     ) {
-        super(_element, _overlay, _viewContainerRef, _zone, _changeDetectorRef, _scrollStrategy, _document);
         this.maskOptions = {
             mask: this.dateFormatService.getTimeMask(this.military),
             keepCharPositions: true,
@@ -88,28 +61,17 @@ export class NovoTimePickerInputElement extends HasOverlay implements OnDestroy,
         this.placeholder = this.labels.dateFormatPlaceholder;
     }
 
-    ngOnDestroy() {
-        this._destroyPanel();
-    }
-
-    // /** Opens the overlay panel. */
+    /** BEGIN: Convienient Panel Methods. */
     openPanel(): void {
-        super.openPanel(this.datepicker.template);
+        this.overlay.openPanel();
     }
-
-    onClosingAction(event): void {
-        this.setValueAndClose(event);
+    closePanel(): void {
+        this.overlay.closePanel();
     }
-
-    /**
-     * A stream of actions that should close the autocomplete panel, including
-     * when an option is selected, on blur, and when TAB is pressed.
-     */
-    get panelClosingActions(): Observable<any> {
-        return merge(
-            this._outsideClickStream
-        );
+    get panelOpen(): boolean {
+        return this.overlay && this.overlay.panelOpen;
     }
+    /** END: Convienient Panel Methods. */
 
     _handleKeydown(event: KeyboardEvent): void {
         if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
@@ -144,7 +106,7 @@ export class NovoTimePickerInputElement extends HasOverlay implements OnDestroy,
 
         // Simply falling back to an empty string if the display value is falsy does not work properly.
         // The display value can also be the number zero and shouldn't fall back to an empty string.
-        const inputValue = toDisplay != null ? toDisplay : '';
+        const inputValue = toDisplay !== null ? toDisplay : '';
 
         // If it's used within a `MdFormField`, we should set it through the property so it can go
         // through change detection.

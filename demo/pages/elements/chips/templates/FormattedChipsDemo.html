@@ -1,7 +1,2 @@
 <div class="selected-value">Selected Value: {{fvalue}}</div>
-<chips
-    [source]="formatted"
-    [placeholder]="placeholder"
-    [(ngModel)]="fvalue"
-    (changed)="onChanged($event)">
-</chips>
+<chips [source]="formatted" [placeholder]="placeholder" [(ngModel)]="fvalue" (changed)="onChanged($event)"></chips>

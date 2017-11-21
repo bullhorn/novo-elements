@@ -36,11 +36,17 @@ import { NovoFormExtrasModule } from './src/elements/form/extras/FormExtras.modu
 import { NovoCategoryDropdownModule } from './src/elements/category-dropdown/CategoryDropdown.module';
 import { NovoMultiPickerModule } from './src/elements/multi-picker/MultiPicker.module';
 import { NovoPopOverModule } from './src/elements/popover/PopOver.module';
+import { NovoSearchBoxModule } from './src/elements/search/SearchBox.module';
+import { GooglePlacesModule } from './src/elements/places/places.module';
+import { NovoValueModule } from './src/elements/value/Value.module';
+
 import { NovoOverlayModule } from './src/elements/overlay/Overlay.module';
 import { NovoLabelService } from './src/services/novo-label-service';
 import { NovoDragulaService } from './src/elements/dragula/DragulaService';
+import { GooglePlacesService } from './src/elements/places/places.service';
 import { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
 import { FormUtils } from './src/utils/form-utils/FormUtils';
+import { NovoSimpleTableModule } from './src/elements/simple-table';
 
 @NgModule({
     imports: [
@@ -81,12 +87,17 @@ import { FormUtils } from './src/utils/form-utils/FormUtils';
         NovoCategoryDropdownModule,
         NovoMultiPickerModule,
         NovoPopOverModule,
-        NovoOverlayModule
+        NovoSimpleTableModule,
+        NovoSearchBoxModule,
+        NovoOverlayModule,
+        GooglePlacesModule,
+        NovoValueModule
     ],
     providers: [
         { provide: ComponentUtils, useClass: ComponentUtils },
         { provide: NovoLabelService, useClass: NovoLabelService },
         { provide: NovoDragulaService, useClass: NovoDragulaService },
+        { provide: GooglePlacesService, useClass: GooglePlacesService },
         { provide: FormUtils, useClass: FormUtils }
     ]
 })

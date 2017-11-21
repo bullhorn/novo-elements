@@ -24,3 +24,23 @@ export class ControlConfirmModal {
         this.modalRef.close(result);
     }
 }
+
+@Component({
+    selector: 'control-prompt-modal',
+    template: `
+        <novo-notification type="warning" [attr.data-automation-id]="'field-interaction-modal-' + params['key']">
+            <h1>{{ labels.promptModalMessage }}</h1>
+            <p *ngFor="let change of params['changes']">{{ change }}</p>
+            <button theme="standard" (click)="close(false)" [attr.data-automation-id]="'field-interaction-modal-cancel' + params['key']">{{ labels.cancel }}</button>
+            <button theme="primary" icon="check" (click)="close(true)" autofocus [attr.data-automation-id]="'field-interaction-modal-yes-' + params['key']">{{ labels.yes }}</button>
+        </novo-notification>
+    `
+})
+export class ControlPromptModal {
+    constructor(private modalRef: NovoModalRef, public params: NovoModalParams, public labels: NovoLabelService) {
+    }
+
+    public close(result: boolean): void {
+        this.modalRef.close(result);
+    }
+}

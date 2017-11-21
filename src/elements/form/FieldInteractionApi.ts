@@ -1,13 +1,15 @@
 // NG2
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+// Vendor
+import 'rxjs/add/operator/map';
 // APP
 import { NovoFormControl } from './NovoFormControl';
 import { NovoControlConfig } from './FormControls';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoToastService } from '../toast/ToastService';
 import { NovoModalService } from '../modal/ModalService';
-import { ControlConfirmModal } from './ControlConfirmModal';
+import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -37,6 +39,22 @@ export class FieldInteractionApi {
 
     get form(): any {
         return this._form;
+    }
+
+    get currentEntity(): string {
+        return this.form.hasOwnProperty('currentEntity') ? this.form.currentEntity : undefined;
+    }
+
+    get currentEntityId(): string {
+        return this.form.hasOwnProperty('currentEntityId') ? this.form.currentEntityId : undefined;
+    }
+
+    get isEdit(): boolean {
+        return this.form.hasOwnProperty('edit') ? this.form.edit : false;
+    }
+
+    get isAdd(): boolean {
+        return this.form.hasOwnProperty('edit') ? !this.form.edit : false;
     }
 
     set globals(globals: any) {
@@ -106,6 +124,14 @@ export class FieldInteractionApi {
         return null;
     }
 
+    public getRawValue(key: string): any {
+        let control = this.getControl(key);
+        if (control) {
+            return control.rawValue;
+        }
+        return null;
+    }
+
     public getInitialValue(key: string): any {
         let control = this.getControl(key);
         if (control) {
@@ -156,6 +182,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.hide(clearValue);
+            this.disable(key, { emitEvent: false });
         }
     }
 
@@ -163,6 +190,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.show();
+            this.enable(key, { emitEvent: false });
         }
     }
 
@@ -281,11 +309,18 @@ export class FieldInteractionApi {
         let oldValue = history[history.length - 2];
         let newValue = this.getValue(key);
         let label = this.getProperty(key, 'label');
+        (document.activeElement as any).blur()
         return this.modalService.open(ControlConfirmModal, { oldValue, newValue, label, message, key }).onClosed.then(result => {
             if (!result) {
                 this.setValue(key, oldValue, { emitEvent: false });
             }
         });
+    }
+
+    public promptUser(key: string, changes: string[]): Promise<boolean> {
+        let showYes: boolean = true;
+        (document.activeElement as any).blur()
+        return this.modalService.open(ControlPromptModal, { changes }).onClosed;
     }
 
     public setProperty(key: string, prop: string, value: any): void {
@@ -438,6 +473,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             if (loading) {
+                this.form.controls[key].fieldInteractionloading = true;
                 control.setErrors({ 'loading': true });
                 // History
                 clearTimeout(this.asyncBlockTimeout);
@@ -447,6 +483,7 @@ export class FieldInteractionApi {
                     this.setProperty(key, '_displayedAsyncFailure', true);
                 }, 10000);
             } else {
+                this.form.controls[key].fieldInteractionloading = false;
                 clearTimeout(this.asyncBlockTimeout);
                 control.setErrors({ 'loading': null });
                 control.updateValueAndValidity({ emitEvent: false });
@@ -458,10 +495,26 @@ export class FieldInteractionApi {
     }
 
     public addControl(key: string, metaForNewField: any, position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD, initialValue?: any): void {
-        let control = this.getControl(key);
+        if (!metaForNewField.key && !metaForNewField.name) {
+            console.error('[FieldInteractionAPI] - missing "key" in meta for new field'); // tslint:disable-line
+            return null;
+        }
+
+        if (!metaForNewField.key) {
+            // If key is not explicitly declared, use name as key
+            metaForNewField.key = metaForNewField.name;
+        }
+
+        if (this.form.controls[metaForNewField.key]) {
+            // Field is already on the form
+            return null;
+        }
+
+        let control = this.form.controls[key];
+        let fieldsetIndex, controlIndex;
         if (control) {
-            let fieldsetIndex = -1;
-            let controlIndex = -1;
+            fieldsetIndex = -1;
+            controlIndex = -1;
 
             this.form.fieldsets.forEach((fieldset, fi) => {
                 fieldset.controls.forEach((fieldsetControl, ci) => {
@@ -507,6 +560,10 @@ export class FieldInteractionApi {
     }
 
     public removeControl(key: string): void {
+        if (!this.form.controls[key]) {
+            // Field is not on the form
+            return null;
+        }
         let control = this.getControl(key);
         if (control) {
             let fieldsetIndex = -1;
@@ -526,5 +583,11 @@ export class FieldInteractionApi {
                 this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 1);
             }
         }
+    }
+
+    public debounce(func: () => void, wait = 50) {
+        let h: any;
+        clearTimeout(h);
+        h = setTimeout(() => func(), wait);
     }
 }

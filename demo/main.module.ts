@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule, Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Vendor
-import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService, FieldInteractionApi, NovoToastService, NovoModalService } from './../index';
+import { NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService, FieldInteractionApi, NovoToastService, NovoModalService, AppBridgeService, DevAppBridgeService } from './../index';
 // APP
 import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
 import { MultiCodeSnippet } from './elements/codesnippet/MultiCodeSnippet';
@@ -31,6 +31,7 @@ import {
     ListDemoComponent,
     HeaderDemoComponent,
     SwitchDemoComponent,
+    SearchDemoComponent,
     DrawerDemoComponent,
     CalendarDemoComponent,
     DragulaDemoComponent,
@@ -43,7 +44,10 @@ import {
     PopOverDemoComponent,
     CustomDemoComponent,
     DatePickerDemoComponent,
-    FieldInteractionsDemoComponent
+    FieldInteractionsDemoComponent,
+    SimpleTableDemoComponent,
+    FormGroupedDemoComponent,
+    ValueDemoComponent
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
@@ -59,6 +63,13 @@ export function provideFieldInteractionAPI(toast, modal, formUtils, http, labels
         TEST: 'I AM A GLOBAL!'
     };
     return fieldInteractionApi;
+}
+
+export function provideAppBridgeService(http) {
+    if (ENV === 'development') {
+        return new DevAppBridgeService(http);
+    }
+    return new AppBridgeService();
 }
 
 @NgModule({
@@ -90,6 +101,7 @@ export function provideFieldInteractionAPI(toast, modal, formUtils, http, labels
         ListDemoComponent,
         HeaderDemoComponent,
         SwitchDemoComponent,
+        SearchDemoComponent,
         DrawerDemoComponent,
         CalendarDemoComponent,
         DatePickerDemoComponent,
@@ -116,7 +128,10 @@ export function provideFieldInteractionAPI(toast, modal, formUtils, http, labels
         PopOverDemoComponent,
         CustomDemoComponent,
         AppBridgeDemoComponent,
-        FieldInteractionsDemoComponent
+        FieldInteractionsDemoComponent,
+        SimpleTableDemoComponent,
+        FormGroupedDemoComponent,
+        ValueDemoComponent
     ],
     imports: [
         // NG2
@@ -138,6 +153,11 @@ export function provideFieldInteractionAPI(toast, modal, formUtils, http, labels
             provide: FieldInteractionApi,
             useFactory: provideFieldInteractionAPI,
             deps: [NovoToastService, NovoModalService, FormUtils, Http, NovoLabelService]
+        },
+        {
+            provide: AppBridgeService,
+            useFactory: provideAppBridgeService,
+            deps: [Http]
         }
     ],
     entryComponents: [

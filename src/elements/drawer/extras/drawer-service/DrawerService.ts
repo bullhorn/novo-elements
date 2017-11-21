@@ -1,11 +1,11 @@
-export const ALWAYS = 'always';
-export const DISABLED = 'disabled';
-export const OUTSIDE_CLICK = 'outsideClick';
+export const ALWAYS: string = 'always';
+export const DISABLED: string = 'disabled';
+export const OUTSIDE_CLICK: string = 'outsideClick';
 
-export const POSITION_LEFT = 'left';
-export const POSITION_RIGHT = 'right';
-export const POSITION_TOP = 'top';
-export const POSITION_BOTTOM = 'bottom';
+export const POSITION_LEFT: string = 'left';
+export const POSITION_RIGHT: string = 'right';
+export const POSITION_TOP: string = 'top';
+export const POSITION_BOTTOM: string = 'bottom';
 
 export class DrawerService {
     closeDrawerBind: any;

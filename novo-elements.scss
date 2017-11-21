@@ -6,19 +6,21 @@
 @import "./src/styles/global/variables";
 @import "./src/styles/global/include-media";
 @import "./src/styles/global/flex-grid";
-@import "./src/styles/global/layout"; 
+@import "./src/styles/global/layout";
 @import './src/styles/global/cdk';
-
 @include cdk-overlay();
 // --------------------------------------------------
 // Plugins (Third-Party-Libraries)
 // --------------------------------------------------
-@import "hint"; // --------------------------------------------------
+@import "hint";
+// --------------------------------------------------
 // Content
 // --------------------------------------------------
-@import "./src/styles/content/typography"; // --------------------------------------------------
+@import "./src/styles/content/typography";
+// --------------------------------------------------
 // Elements
 // --------------------------------------------------
+@import "./src/elements/simple-table/table";
 @import "./src/elements/tabs/Tabs";
 @import "./src/elements/radio/Radio";
 @import "./src/elements/button/Button";
@@ -33,6 +35,7 @@
 @import "./src/elements/loading/NovoSpinner";
 @import "./src/elements/select/Select";
 @import "./src/elements/picker/Picker";
+@import "./src/elements/picker/extras/grouped-multi-picker-results/GroupedMultiPickerResults";
 @import "./src/elements/chips/Chips";
 @import "./src/elements/dropdown/Dropdown";
 @import "./src/elements/drawer/Drawer";
@@ -56,3 +59,6 @@
 @import "./src/elements/multi-picker/MultiPicker";
 @import "./src/elements/popover/PopOver";
 @import "./src/elements/table/extras/dropdown-cell/DropdownCell";
+@import "./src/elements/search/SearchBox";
+@import "./src/elements/places/places.component";
+@import "./src/elements/value/Values";

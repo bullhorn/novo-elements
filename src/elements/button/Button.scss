@@ -98,7 +98,7 @@ button {
                 background: darken($positive, 5%);
             } // Loop Generic Colors (Primary, Success, Negative, Etc.)
             @each $button,
-            $color in $colors {
+            $color in $app-colors {
                 &[color="#{$button}"] {
                     background: $color;
                     &:hover,
@@ -233,7 +233,7 @@ button {
                     }
                 }
                 &[side="left"] {
-                    padding: ($padding-top - 4px) $padding-side ($padding-top - 4px) ($padding-side - 10px);
+                    padding: ($padding-top - 5px) $padding-side ($padding-top - 5px) ($padding-side - 10px);
                     i {
                         margin-right: 5px;
                     }
@@ -262,7 +262,7 @@ button {
                 }
             } // Loop Generic Colors (Primary, Success, Negative, Etc.)
             @each $button,
-            $color in $colors {
+            $color in $app-colors {
                 &[color="#{$button}"] {
                     color: $color;
                     i {
@@ -310,7 +310,7 @@ button {
                 box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
             } // Loop Generic Colors (Primary, Success, Negative, Etc.)
             @each $button,
-            $color in $colors {
+            $color in $app-colors {
                 &[color="#{$button}"] {
                     color: $white;
                     background: $color;
@@ -350,6 +350,35 @@ button {
             }
             &:active {
                 background: rgba(0, 0, 0, .25);
+            }
+        }
+        &[theme="fab"] {
+            .flex-wrapper {
+                text-align: center;
+                i {
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+            &[inverse] {
+                color: #fff;
+            }
+            width: 40px;
+            height: 40px;
+            padding: 10px;
+            border-radius: 50% !important;
+            @each $button,
+            $color in $all-colors {
+                &[color="#{$button}"] {
+                    color: $white;
+                    background: $color;
+                }
+            }
+            &:hover {
+                box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+            }
+            &:active {
+                box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
             }
         }
     }

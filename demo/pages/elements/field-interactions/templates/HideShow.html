@@ -3,8 +3,12 @@
         <novo-control [form]="forms.hideShow" [control]="controls.hideShow.textControl"></novo-control>
     </div>
     <div class="novo-form-row">
+        <novo-control [form]="forms.hideShow" [control]="controls.hideShow.text2Control"></novo-control>
+    </div>
+    <div class="novo-form-row">
         <novo-control [form]="forms.hideShow" [control]="controls.hideShow.toggleControl"></novo-control>
     </div>
 </novo-form>
 <div class="final-value">Form Value - {{ forms.hideShow.value | json }}</div>
+<div class="final-value">Form Dirty - {{ forms.hideShow.dirty | json }}</div>
 <div class="final-value">Is Form Valid? - {{ forms.hideShow.valid | json }}</div>

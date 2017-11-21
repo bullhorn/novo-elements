@@ -1,8 +1,12 @@
 // NG2
-import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild, Input, Output, OnInit, DoCheck, Renderer, HostListener } from '@angular/core';
+import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild, Input, Output, OnInit, DoCheck, Renderer, HostListener, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 // APP
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
@@ -10,6 +14,8 @@ import { PickerResults } from './extras/picker-results/PickerResults';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { Helpers } from '../../utils/Helpers';
 import { NovoPickerContainer } from './extras/picker-container/PickerContainer';
+import { NovoOverlayTemplate } from '../overlay/Overlay';
+
 
 // Value accessor for the component (supports ngModel)
 const PICKER_VALUE_ACCESSOR = {
@@ -30,27 +36,29 @@ const PICKER_VALUE_ACCESSOR = {
     selector: 'novo-picker',
     providers: [PICKER_VALUE_ACCESSOR],
     template: `
+        <i class="bhi-more" *ngIf="config?.entityIcon && !_value"></i>
+        <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
         <input
             type="text"
             [(ngModel)]="term"
+            [class.entity-picker]="config.entityIcon"
+            [class.entity-selected]="config?.entityIcon && _value"
             (ngModelChange)="checkTerm($event)"
             [placeholder]="placeholder"
             (keydown)="onKeyDown($event)"
             (focus)="onFocus($event)"
             (click)="onFocus($event)"
             (blur)="onTouched($event)"
-            autocomplete="off" />
+            autocomplete="off" #input />
         <i class="bhi-search" *ngIf="!_value || clearValueOnSelect"></i>
-        <i class="bhi-times" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
-        <novo-picker-container class="picker-results-container">
+        <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
+        <novo-overlay-template class="picker-results-container" [parent]="element">
             <span #results></span>
-        </novo-picker-container>
-    `,
-    host: {
-        '[class.append-to-body]': 'appendToBody'
-    }
+            <ng-content></ng-content>
+        </novo-overlay-template>
+    `
 })
-export class NovoPickerElement extends OutsideClick implements OnInit {
+export class NovoPickerElement implements OnInit {
     // Container for the results
     @ViewChild('results', { read: ViewContainerRef }) results: ViewContainerRef;
 
@@ -59,12 +67,11 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     @Input() clearValueOnSelect: boolean;
     @Input() closeOnSelect: boolean = true;
     @Input() selected: Array<any> = [];
-    // Append the dropdown container to the body
+    // Deprecated
     @Input() appendToBody: boolean = false;
-    // Listen for scroll on a parent selector, so we can close the dropdown
+    // Deprecated
     @Input() parentScrollSelector: string;
-    // What action to perform when we recieve scroll from parent selector
-    // TODO - handle "move"
+    // Deprecated
     @Input() parentScrollAction: string = 'close';
     // Custom class for the dropdown container
     @Input() containerClass: string;
@@ -72,58 +79,55 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     @Input() side: string = 'left';
     // Autoselects the first option in the results
     @Input() autoSelectFirstOption: boolean = true;
+    @Input() overrideElement: ElementRef;
+    // Disable from typing into the picker (result template does everything)
+    @Input() set disablePickerInput(v: boolean) {
+        this._disablePickerInput = coerceBooleanProperty(v);
+    }
+    get disablePickerInput() {
+        return this._disablePickerInput;
+    }
+    private _disablePickerInput: boolean = false;
 
     // Emitter for selects
+    @Output() changed: EventEmitter<any> = new EventEmitter();
     @Output() select: EventEmitter<any> = new EventEmitter();
     @Output() focus: EventEmitter<any> = new EventEmitter();
     @Output() blur: EventEmitter<any> = new EventEmitter();
     @Output() typing: EventEmitter<any> = new EventEmitter();
 
-    @ViewChild(NovoPickerContainer) public container: NovoPickerContainer;
+    @ViewChild(NovoOverlayTemplate) public container: NovoOverlayTemplate;
+    @ViewChild('input') private input: ElementRef;
 
-    parentScrollElement: Element;
     closeHandler: any;
     isStatic: boolean = true;
     term: string = '';
     resultsComponent: any;
     popup: any;
     _value: any;
-    onModelChange: Function = () => {
-    };
-    onModelTouched: Function = () => {
-    };
+    onModelChange: Function = () => { };
+    onModelTouched: Function = () => { };
 
-    constructor(element: ElementRef, private componentUtils: ComponentUtils) {
-        super(element);
-        // Setup handlers
-        this.closeHandler = this.toggleActive.bind(this);
-    }
+    constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) { }
 
     ngOnInit() {
-        // Listen for active change to hide/show results
-        this.onActiveChange.subscribe((active) => {
-            if (active) {
-                this.show();
-            } else {
-                this.hideResults();
-                this.blur.emit();
-            }
-        });
+        if (this.overrideElement) {
+            this.element = this.overrideElement;
+        }
+        if (this.appendToBody) {
+            console.warn(`'appendToBody' has been deprecated. Please remove this attribute.`);
+        }
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || PickerResults;
-        // Find parent
-        if (this.parentScrollSelector) {
-            this.parentScrollElement = Helpers.findAncestor(this.element.nativeElement, this.parentScrollSelector);
-        }
         // Get all distinct key up events from the input and only fire if long enough and distinct
-        let input = this.element.nativeElement.querySelector('input');
-        const pasteObserver = Observable.fromEvent(input, 'paste')
+        //let input = this.element.nativeElement.querySelector('input');
+        const pasteObserver = Observable.fromEvent(this.input.nativeElement, 'paste')
             .debounceTime(250)
             .distinctUntilChanged();
         pasteObserver.subscribe(
             (event: ClipboardEvent) => this.onDebouncedKeyup(event),
             err => this.hideResults(err));
-        const keyboardObserver = Observable.fromEvent(input, 'keyup')
+        const keyboardObserver = Observable.fromEvent(this.input.nativeElement, 'keyup')
             .debounceTime(250)
             .distinctUntilChanged();
         keyboardObserver.subscribe(
@@ -138,45 +142,34 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         this.show((event.target as any).value);
     }
 
+    /** BEGIN: Convienient Panel Methods. */
+    public openPanel(): void {
+        this.container.openPanel();
+    }
+    public closePanel(): void {
+        this.container.closePanel();
+    }
+    public get panelOpen(): boolean {
+        return this.container && this.container.panelOpen;
+    }
+    /** END: Convienient Panel Methods. */
+
     private show(term?: string): void {
-        this.container.parent = this;
-        this.container.show(this.appendToBody);
-        this.otherElement = this.container.element;
-        if (this.appendToBody) {
-            this.container.updatePosition(this.element.nativeElement.children[0], this.side);
-            // If append to body then rip it out of here and put on body
-            window.document.body.appendChild(this.container.element.nativeElement);
-            window.addEventListener('resize', this.closeHandler);
-        }
-        // Listen for scroll on a parent to force close
-        if (this.parentScrollElement) {
-            if (this.parentScrollAction === 'close') {
-                this.parentScrollElement.addEventListener('scroll', this.closeHandler);
-            }
-        }
+        this.openPanel();
         // Show the results inside
         this.showResults(term);
     }
 
     private hide(): void {
-        this.container.hide();
-        // If append to body then rip it out of here and put on body
-        if (this.appendToBody) {
-            let elm = this.container.element.nativeElement;
-            if (elm.parentNode) {
-                elm.parentNode.removeChild(elm);
-            }
-            window.removeEventListener('resize', this.closeHandler);
-        }
-        if (this.parentScrollElement) {
-            if (this.parentScrollAction === 'close') {
-                this.parentScrollElement.removeEventListener('scroll', this.closeHandler);
-            }
-        }
+        this.closePanel();
+        this.ref.markForCheck();
     }
 
     onKeyDown(event: KeyboardEvent) {
-        if (this.popup) {
+        if (this.disablePickerInput) {
+            Helpers.swallowEvent(event);
+        }
+        if (this.panelOpen && !this.disablePickerInput) {
             if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB) {
                 this.hideResults();
                 return;
@@ -184,22 +177,25 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
 
             if (event.keyCode === KeyCodes.UP) {
                 this.popup.instance.prevActiveMatch();
+                this.ref.markForCheck();
                 return;
             }
 
             if (event.keyCode === KeyCodes.DOWN) {
                 this.popup.instance.nextActiveMatch();
+                this.ref.markForCheck();
                 return;
             }
 
             if (event.keyCode === KeyCodes.ENTER) {
                 this.popup.instance.selectActiveMatch();
+                this.ref.markForCheck();
                 return;
             }
 
             if (event.keyCode === KeyCodes.BACKSPACE && !Helpers.isBlank(this._value)) {
                 this.clearValue(false);
-                this.toggleActive(null, true);
+                this.closePanel();
             }
         }
     }
@@ -207,12 +203,14 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
     clearValue(wipeTerm) {
         this._value = null;
         this.select.emit(this._value);
+        this.changed.emit({ value: this._value, rawValue: { label: '', value: this._value } });
         this.onModelChange(this._value);
 
         if (wipeTerm) {
             this.term = null;
             this.hideResults();
         }
+        this.ref.markForCheck();
     }
 
     /**
@@ -221,7 +219,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
      * results.
      */
     onFocus(event) {
-        this.toggleActive(null, true);
+        this.show();
         this.focus.emit(event);
     }
 
@@ -239,6 +237,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
             this.popup.instance.term = this.term;
             this.popup.instance.selected = this.selected;
             this.popup.instance.autoSelectFirstOption = this.autoSelectFirstOption;
+            this.ref.markForCheck();
         } else {
             this.popup = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
             this.popup.instance.parent = this;
@@ -246,6 +245,8 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
             this.popup.instance.term = this.term;
             this.popup.instance.selected = this.selected;
             this.popup.instance.autoSelectFirstOption = this.autoSelectFirstOption;
+            this.popup.instance.overlay = this.container._overlayRef;
+            this.ref.markForCheck();
         }
     }
 
@@ -276,11 +277,14 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
         } else if (selected.value !== this._value) {
             this.term = this.clearValueOnSelect ? '' : selected.label;
             this._value = selected.value;
+            this.changed.emit({ value: selected.value, rawValue: { label: this.term, value: selected.value } })
             this.select.emit(selected);
             this.onModelChange(selected.value);
         } else {
+            this.changed.emit({ value: selected.value, rawValue: { label: this.term, value: this._value } });
             this.select.emit(selected);
         }
+        this.ref.markForCheck();
     }
 
     // Makes sure to clear the model if the user clears the text box
@@ -290,6 +294,7 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
             this._value = null;
             this.onModelChange(this._value);
         }
+        this.ref.markForCheck();
     }
 
     // Set touched on blur
@@ -320,10 +325,11 @@ export class NovoPickerElement extends OutsideClick implements OnInit {
                     }
                 });
             } else {
-                this.term = value;
+                this.term = value || '';
             }
         }
         this._value = value;
+        this.ref.markForCheck();
     }
 
     registerOnChange(fn: Function): void {

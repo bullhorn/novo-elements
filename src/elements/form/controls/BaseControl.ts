@@ -3,6 +3,16 @@ import { Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 // APP
 import { Helpers } from '../../../utils/Helpers';
+import { NovoControlGroupAddConfig } from '../ControlGroup';
+
+export interface NovoGroupedControlConfig {
+    label?: string;
+    icon?: string;
+    add?: NovoControlGroupAddConfig;
+    remove?: boolean;
+    key: string;
+    initialValue?: {}[];
+}
 
 export interface NovoControlConfig {
     validators?: Array<any>;
@@ -10,8 +20,10 @@ export interface NovoControlConfig {
     value?: any;
     key?: string;
     label?: string;
+    checkboxLabel?: string;
     required?: boolean;
     hidden?: boolean;
+    encrypted?: boolean;
     sortOrder?: number;
     controlType?: string;
     placeholder?: string;
@@ -48,6 +60,7 @@ export interface NovoControlConfig {
         icon?: string,
         button?: boolean;
     };
+    width?: number;
 }
 
 export class BaseControl {
@@ -59,8 +72,10 @@ export class BaseControl {
     value: any;
     key: string;
     label: string;
+    checkboxLabel: string;
     required: boolean;
     hidden: boolean;
+    encrypted: boolean;
     sortOrder: number;
     controlType: string;
     placeholder: string;
@@ -97,6 +112,7 @@ export class BaseControl {
         icon?: string,
         button?: boolean;
     };
+    width: number;
 
     constructor(type: string = 'BaseControl', config: NovoControlConfig = {}) {
         this.__type = type;
@@ -106,9 +122,11 @@ export class BaseControl {
         this.value = config.value;
         this.key = config.key || '';
         this.label = config.label || '';
+        this.checkboxLabel = config.checkboxLabel;
         this.name = config.name || '';
         this.required = !!config.required;
         this.hidden = !!config.hidden;
+        this.encrypted = !!config.encrypted;
         this.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;
         this.controlType = config.controlType || '';
         this.placeholder = config.placeholder || '';
@@ -119,6 +137,7 @@ export class BaseControl {
         this.currencyFormat = config.currencyFormat || null;
         this.associatedEntity = config.associatedEntity || null;
         this.optionsType = config.optionsType || null;
+        this.options = config.options || [];
         this.forceClear = new EventEmitter();
         this.readOnly = !!config.readOnly || !!config.disabled;
         this.disabled = !!config.disabled;
@@ -149,5 +168,6 @@ export class BaseControl {
         this.customControl = config.customControl;
         this.customControlConfig = config.customControlConfig;
         this.tipWell = config.tipWell;
+        this.width = config.width;
     }
 }

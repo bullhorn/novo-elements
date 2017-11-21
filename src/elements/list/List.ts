@@ -15,6 +15,8 @@ import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '
 export class NovoListElement {
     @Input() theme: string;
     @Input() direction: string;
+
+    constructor(public element: ElementRef) { }
 }
 
 @Component({

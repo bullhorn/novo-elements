@@ -3,12 +3,13 @@ import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit,
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 // APP
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -18,7 +19,7 @@ const CHIPS_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'chip',
+    selector: 'chip,novo-chip',
     template: `
         <span (click)="onSelect($event)" (mouseover)="onSelect($event)" [ngClass]="_type">
             <i *ngIf="_type" class="bhi-circle"></i>
@@ -59,7 +60,7 @@ export class NovoChipElement {
 }
 
 @Component({
-    selector: 'chips',
+    selector: 'chips,novo-chips',
     providers: [CHIPS_VALUE_ACCESSOR],
     template: `
         <chip
@@ -75,6 +76,7 @@ export class NovoChipElement {
                 clearValueOnSelect="true"
                 [closeOnSelect]="closeOnSelect"
                 [config]="source"
+                [disablePickerInput]="disablePickerInput"
                 [placeholder]="placeholder"
                 [(ngModel)]="itemToAdd"
                 (select)="add($event)"
@@ -82,7 +84,8 @@ export class NovoChipElement {
                 (focus)="onFocus($event)"
                 (typing)="onTyping($event)"
                 (blur)="onTouched($event)"
-                [selected]="items">
+                [selected]="items"
+                [overrideElement]="element">
             </novo-picker>
         </div>
         <div class="preview-container">
@@ -95,11 +98,18 @@ export class NovoChipElement {
         '[class.with-value]': 'items.length > 0'
     }
 })
-export class NovoChipsElement extends OutsideClick implements OnInit {
+export class NovoChipsElement implements OnInit {
     @Input() closeOnSelect: boolean = false;
     @Input() placeholder: string = '';
     @Input() source: any;
     @Input() type: any;
+    @Input() set disablePickerInput(v: boolean) {
+        this._disablePickerInput = coerceBooleanProperty(v);
+    }
+    get disablePickerInput() {
+        return this._disablePickerInput;
+    }
+    private _disablePickerInput: boolean = false;
 
     @Output() changed: EventEmitter<any> = new EventEmitter();
     @Output() focus: EventEmitter<any> = new EventEmitter();
@@ -123,18 +133,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
     onModelTouched: Function = () => {
     };
 
-    constructor(element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {
-        super(element);
-        this.element = element;
-
-        // Listen for an outside click to hide the preview
-        this.onActiveChange.subscribe((active) => {
-            if (!active) {
-                this.blur.emit();
-                this.deselectAll();
-            }
-        });
-    }
+    constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) { }
 
     ngOnInit() {
         this.setItems();
@@ -151,7 +150,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
         this.itemToAdd = '';
         if (selected !== this._value) {
             this._value = selected;
-            this.changed.emit(selected);
+            this.changed.emit({value: selected, rawValue: this.items});
             this.onModelChange(selected);
         }
     }
@@ -160,6 +159,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
         this.items = [];
         this._items.next(this.items);
         this.value = null;
+        this.changed.emit({value: this.value, rawValue: this.items});
         this.onModelChange(this.value);
     }
 
@@ -206,6 +206,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
                 });
             }
         }
+        this.changed.emit({value: this.model, rawValue: this.items});
         this._items.next(this.items);
     }
 
@@ -227,8 +228,6 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
         this.deselectAll();
         this.selected = item;
         this.showPreview();
-        // Start listening for an outside click to hide the preview
-        this.toggleActive(null, true);
     }
 
     onTyping(event?) {
@@ -262,6 +261,7 @@ export class NovoChipsElement extends OutsideClick implements OnInit {
         this.items.splice(this.items.indexOf(item), 1);
         this.deselectAll();
         this.value = this.items.map(i => i.value);
+        this.changed.emit({value: this.value.length ? this.value : '', rawValue: this.items});        
         this.onModelChange(this.value.length ? this.value : '');
         this._items.next(this.items);
     }

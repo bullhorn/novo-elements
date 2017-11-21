@@ -1,5 +1,7 @@
 chips,
-entity-chips {
+novo-chips,
+entity-chips,
+novo-entity-chips {
     width: 100%;
     display: flex;
     align-items: center;
@@ -114,17 +116,30 @@ entity-chips {
         right: 0;
         font-size: 1.2em;
         &.has-value {
-            bottom: 20px;
+            bottom: 14px;
         }
     }
 }
 
 chips,
-entity-chips {
+novo-chips,
+entity-chips,
+novo-entity-chips {
     &+i {
         position: absolute;
         right: 0;
         bottom: 7px;
+    }
+    padding: 2px 0;
+    novo-picker {
+        padding-bottom: 0;
+        >input {
+            border: none;
+            border-bottom: none !important;
+        }
+    }
+    &.with-value {
+        margin-bottom: 0;
     }
 }
 

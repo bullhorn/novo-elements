@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
@@ -38,7 +38,7 @@ export class NovoSwitchElement implements ControlValueAccessor {
     @Output() onChange: EventEmitter<any> = new EventEmitter();
 
     _disabled: boolean = false;
-    model: any;
+    model: boolean;
     onModelChange: Function = () => {
     };
     onModelTouched: Function = () => {
@@ -52,6 +52,8 @@ export class NovoSwitchElement implements ControlValueAccessor {
     set disabled(value) {
         this._disabled = (!value);
     }
+
+    constructor(private ref: ChangeDetectorRef) { }
 
     onKeydown(event) {
         if (event.keyCode === KeyCodes.SPACE) {
@@ -73,10 +75,12 @@ export class NovoSwitchElement implements ControlValueAccessor {
         this.model = !this.model;
         this.onChange.next(this.model);
         this.onModelChange(this.model);
+        this.ref.markForCheck();
     }
 
-    writeValue(model: any): void {
+    writeValue(model: boolean): void {
         this.model = model;
+        this.ref.markForCheck();
     }
 
     registerOnChange(fn: Function): void {

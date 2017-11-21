@@ -13,6 +13,28 @@ export const MockMeta = {
             description: 'First Name, Yo!'
         },
         {
+            name: 'groupedItems',
+            type: 'group',
+            label: 'Groupd Items',
+            sortOrder: 11,
+            icon: 'section',
+            fields: [
+                {
+                    name: 'label',
+                    type: 'text',
+                    label: 'Label',
+                    sortOrder: 10,
+                    maxLength: 10
+                },
+                {
+                    name: 'description',
+                    type: 'text',
+                    label: 'Description',
+                    sortOrder: 20
+                }
+            ]
+        },
+        {
             name: 'lastName',
             type: 'text',
             label: 'Last Name',

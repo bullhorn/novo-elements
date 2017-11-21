@@ -41,7 +41,8 @@ const CHIPS_VALUE_ACCESSOR = {
                 (select)="clickOption($event)"
                 (keydown)="onKeyDown($event)"
                 (focus)="onFocus($event)"
-                (blur)="onTouched($event)">
+                (blur)="onTouched($event)"
+                [overrideElement]="element">
             </novo-picker>
         </div>
         <i class="bhi-search" [class.has-value]="items.length"></i>
@@ -51,7 +52,7 @@ const CHIPS_VALUE_ACCESSOR = {
         '[class.with-value]': 'items.length > 0'
     }
 })
-export class NovoMultiPickerElement extends OutsideClick implements OnInit {
+export class NovoMultiPickerElement implements OnInit {
     @Input() source: any;
     @Input() placeholder: any = '';
     @Input() types: any;
@@ -94,9 +95,7 @@ export class NovoMultiPickerElement extends OutsideClick implements OnInit {
     onModelTouched: Function = () => {
     };
 
-    constructor(element: ElementRef, public labels: NovoLabelService) {
-        super(element);
-        this.element = element;
+    constructor(public element: ElementRef, public labels: NovoLabelService) {
         this.chipsCount = 4;
     }
 

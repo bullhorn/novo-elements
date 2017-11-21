@@ -70,7 +70,7 @@ export enum NovoTableMode {
                 <ng-content select="novo-table-actions"></ng-content>
             </div>
         </header>
-        <div class="novo-table-loading-overlay" *ngIf="loading">
+        <div class="novo-table-loading-overlay" *ngIf="loading || dataProvider.isLoading()">
             <novo-loading></novo-loading>
         </div>
         <novo-toast *ngIf="toast" [theme]="toast?.theme" [icon]="toast?.icon" [message]="toast?.message"></novo-toast>
@@ -205,17 +205,6 @@ export enum NovoTableMode {
                             <div #errormessage><ng-content select="[table-error-message]"></ng-content></div>
                             <div class="table-error-message" *ngIf="errormessage.childNodes.length == 0">
                                 <h4><i class="bhi-caution"></i> {{ labels.erroredTableMessage }}</h4>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                <!-- TABLE LOADING PLACEHOLDER -->
-                <tbody class="table-message" *ngIf="dataProvider.isLoading()" data-automation-id="table-loading">
-                    <tr>
-                        <td colspan="100%">
-                            <div #loader><ng-content select="[table-loader]"></ng-content></div>
-                            <div class="table-loading" *ngIf="loader.childNodes.length == 0">
-                                <novo-loading></novo-loading>
                             </div>
                         </td>
                     </tr>
@@ -595,7 +584,7 @@ export class NovoTableElement implements DoCheck {
         if (column && !Helpers.isBlank(column.filter) && !Helpers.isBlank(filter)) {
             if (Array.isArray(column.filter)) {
                 if (typeof (filter) !== 'string') {
-                    isActive = column.filter.some(item => {
+                    isActive = column.filter.some((item) => {
                         return item.label === filter.label;
                     });
                 } else {
@@ -714,8 +703,8 @@ export class NovoTableElement implements DoCheck {
             for (let row of this.pagedData) {
                 row._selected = this.master;
             }
-            this.selected = this.dataProvider.list.filter(r => r._selected);
-            this.pageSelected = this.pagedData.filter(r => r._selected);
+            this.selected = this.dataProvider.list.filter((r) => r._selected);
+            this.pageSelected = this.pagedData.filter((r) => r._selected);
             this.emitSelected(this.selected);
             // Only show the select all message when there is only one new page selected at a time
             this.selectedPageCount++;
@@ -742,9 +731,9 @@ export class NovoTableElement implements DoCheck {
      * @name rowSelectHandler
      */
     rowSelectHandler() {
-        //this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-        this.pageSelected = this.pagedData.filter(r => r._selected);
-        this.selected = this.dataProvider.list.filter(r => r._selected);
+        // this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+        this.pageSelected = this.pagedData.filter((r) => r._selected);
+        this.selected = this.dataProvider.list.filter((r) => r._selected);
         if (this.pageSelected.length === 0) {
             this.master = false;
             this.indeterminate = false;
@@ -787,7 +776,7 @@ export class NovoTableElement implements DoCheck {
      */
     getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
-        let opts: Array<any> = [
+        let opts: any[] = [
             { label: this.labels.past1Day, min: -1, max: 0 },
             { label: this.labels.past7Days, min: -7, max: 0 },
             { label: this.labels.past30Days, min: -30, max: 0 },
@@ -797,13 +786,13 @@ export class NovoTableElement implements DoCheck {
             { label: this.labels.next7Days, min: 0, max: 7 },
             { label: this.labels.next30Days, min: 0, max: 30 },
             { label: this.labels.next90Days, min: 0, max: 90 },
-            { label: this.labels.next1Year, min: 0, max: 366 }
+            { label: this.labels.next1Year, min: 0, max: 366 },
         ];
 
         if (column && column.range) {
             opts.push({
                 label: this.labels.customDateRange,
-                range: true
+                range: true,
             });
         }
         return opts;
@@ -823,7 +812,7 @@ export class NovoTableElement implements DoCheck {
             if (!config.filtering.originalOptions) {
                 config.filtering.originalOptions = config.filtering.options;
             }
-            let newOptions = config.filtering.originalOptions.filter(option => {
+            let newOptions = config.filtering.originalOptions.filter((option) => {
                 let value = option && option.label ? option.label : option;
                 value = value.toLowerCase() ? value.toLowerCase() : value;
                 if (value === filterKeywords) {
@@ -907,10 +896,10 @@ export class NovoTableElement implements DoCheck {
         row.controls = {};
         row._editing = {};
         row.rowId = this._rows.length + 1;
-        this.columns.forEach(column => {
+        this.columns.forEach((column) => {
             // Use the control passed or use a ReadOnlyControl so that the form has the values
             let control = column.editorConfig ? ControlFactory.create(column.editorType, column.editorConfig) : new ReadOnlyControl({ key: column.name });
-            control.value = null; //remove copied column value
+            control.value = null; // remove copied column value
             row.controls[column.name] = control;
             row._editing[column.name] = !column.viewOnly;
             rowControls.push(control);

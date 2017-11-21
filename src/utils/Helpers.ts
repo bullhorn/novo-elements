@@ -83,8 +83,6 @@ export class Helpers {
 
     static sortByField(fields: any, reverse = false) {
         return (previous: any, current: any) => {
-            //return (a[field] < b[field]) ? -1 : (a[field] > b[field]) ? 1 : 0; // eslint-disable-line
-            // Custom compare function on the column
             if (Helpers.isFunction(fields)) {
                 return fields((reverse) ? 'desc' : 'asc', previous, current);
             }
@@ -121,9 +119,7 @@ export class Helpers {
     }
 
     static filterByField(key, value) {
-        //TODO: Handle dates, min, max, options, etc...
         return (item) => {
-            //return item[field] === options.value;
             let results = [];
             let field = can(item).have(key);
             if (value instanceof Function) {
@@ -132,7 +128,7 @@ export class Helpers {
                 results.push(value.includes(field));
             } else if (value instanceof Object) {
                 if (field instanceof Date) {
-                    field = field.getTime(); //Math.round((field.getTime() - Date.now()) / (24 * 60 * 60 * 1000));
+                    field = field.getTime();
                 }
                 if (value.min) {
                     results.push(field > value.min);

@@ -34,7 +34,11 @@ import {
     CategoryDropdownDemoComponent,
     MultiPickerDemoComponent,
     PopOverDemoComponent,
-    FieldInteractionsDemoComponent
+    FieldInteractionsDemoComponent,
+    SimpleTableDemoComponent,
+    SearchDemoComponent,
+    FormGroupedDemoComponent,
+    ValueDemoComponent
 } from './../pages/elements';
 
 export const routes: any = [
@@ -53,6 +57,7 @@ export const routes: any = [
     { path: 'quick-note', component: QuickNoteDemoComponent, title: 'Quick Note', section: 'components' },
     { path: 'modal', component: ModalDemoComponent, title: 'Modal', section: 'components' },
     { path: 'form', component: FormDemoComponent, title: 'Form', section: 'components' },
+    { path: 'form-grouped', component: FormGroupedDemoComponent, title: 'Form Groups', section: 'components' },
     { path: 'toast', component: ToastDemoComponent, title: 'Toast', section: 'components' },
     { path: 'tooltip', component: TooltipDemoComponent, title: 'Tooltip', section: 'components' },
     { path: 'cards', component: CardDemoComponent, title: 'Cards', section: 'components' },
@@ -64,9 +69,11 @@ export const routes: any = [
     { path: 'select', component: SelectDemoComponent, title: 'Select', section: 'components' },
     { path: 'tabs', component: TabsDemoComponent, title: 'Tabs', section: 'components' },
     { path: 'table', component: TableDemoComponent, title: 'Table', section: 'components' },
+    { path: 'simple-table', component: SimpleTableDemoComponent, title: 'Simple Table', section: 'components' },
     { path: 'list', component: ListDemoComponent, title: 'List', section: 'components' },
     { path: 'header', component: HeaderDemoComponent, title: 'Header', section: 'components' },
     { path: 'switch', component: SwitchDemoComponent, title: 'Switch', section: 'components' },
+    { path: 'search', component: SearchDemoComponent, title: 'Search', section: 'components' },
     { path: 'drawer', component: DrawerDemoComponent, title: 'Drawer', section: 'components' },
     { path: 'calendar', component: CalendarDemoComponent, title: 'Calendar', section: 'components' },
     { path: 'date-picker', component: DatePickerDemoComponent, title: 'Date Picker', section: 'components' },
@@ -77,6 +84,7 @@ export const routes: any = [
     { path: 'tipwell', component: TipWellDemoComponent, title: 'Tip Well', section: 'components' },
     { path: 'category-dropdown', component: CategoryDropdownDemoComponent, title: 'Category Dropdown', section: 'components' },
     { path: 'popover', component: PopOverDemoComponent, title: 'PopOver', section: 'components' },
+    { path: 'value', component: ValueDemoComponent, title: 'Value', section: 'components' },
 
     // Utils
     { path: 'utils', component: UtilsDemoComponent, title: 'Utils', section: 'utils' },

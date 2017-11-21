@@ -6,5 +6,6 @@ export class ReadOnlyControl extends BaseControl {
 
     constructor(config: NovoControlConfig) {
         super('ReadOnlyControl', config);
+        config.readOnly = true;
     }
 }

@@ -16,6 +16,7 @@ export { NovoDropdownModule } from './src/elements/dropdown/Dropdown.module';
 export { NovoSelectModule } from './src/elements/select/Select.module';
 export { NovoListModule } from './src/elements/list/List.module';
 export { NovoSwitchModule } from './src/elements/switch/Switch.module';
+export { NovoSearchBoxModule } from './src/elements/search/SearchBox.module';
 export { NovoDrawerModule } from './src/elements/drawer/Drawer.module';
 export { NovoDragulaModule } from './src/elements/dragula/Dragula.module';
 export { NovoSliderModule } from './src/elements/slider/Slider.module';
@@ -27,12 +28,14 @@ export { NovoDateTimePickerModule } from './src/elements/date-time-picker/DateTi
 export { NovoNovoCKEditorModule } from './src/elements/ckeditor/CKEditor.module';
 export { NovoTipWellModule } from './src/elements/tip-well/TipWell.module';
 export { NovoTableModule } from './src/elements/table/Table.module';
+export { NovoValueModule } from './src/elements/value/Value.module';
 export { NovoTableMode } from './src/elements/table/Table';
 export { NovoTableExtrasModule } from './src/elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './src/elements/form/Form.module';
 export { NovoFormExtrasModule } from './src/elements/form/extras/FormExtras.module';
 export { NovoCategoryDropdownModule } from './src/elements/category-dropdown/CategoryDropdown.module';
 export { NovoMultiPickerModule } from './src/elements/multi-picker/MultiPicker.module';
+export * from './src/elements/simple-table';
 // Export specific elements that are used in local references and/or view children
 export { NovoTableElement, NovoTableConfig } from './src/elements/table/Table';
 // Export all services
@@ -40,6 +43,7 @@ export { NovoToastService } from './src/elements/toast/ToastService';
 export { NovoModalService } from './src/elements/modal/ModalService';
 export { NovoLabelService } from './src/services/novo-label-service';
 export { NovoDragulaService } from './src/elements/dragula/DragulaService';
+export { GooglePlacesService } from './src/elements/places/places.service';
 // Export all data services
 export { Collection } from './src/services/data-provider/Collection';
 export { CollectionEvent } from './src/services/data-provider/CollectionEvent';
@@ -52,6 +56,7 @@ export { PickerResults } from './src/elements/picker/extras/picker-results/Picke
 export { BasePickerResults } from './src/elements/picker/extras/base-picker-results/BasePickerResults';
 export { EntityPickerResult, EntityPickerResults } from './src/elements/picker/extras/entity-picker-results/EntityPickerResults';
 export { ChecklistPickerResults } from './src/elements/picker/extras/checklist-picker-results/ChecklistPickerResults';
+export { GroupedMultiPickerResults } from './src/elements/picker/extras/grouped-multi-picker-results/GroupedMultiPickerResults';
 export { BaseRenderer } from './src/elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './src/elements/table/extras/date-cell/DateCell';
 export { PercentageCell } from './src/elements/table/extras/percentage-cell/PercentageCell';
@@ -61,6 +66,7 @@ export { FormUtils } from './src/utils/form-utils/FormUtils';
 export { NovoFile } from './src/elements/form/extras/file/extras/file/File';
 export * from './src/elements/form/FormControls';
 export { NovoFormControl, NovoFormGroup } from './src/elements/form/NovoFormControl';
+export { NovoControlGroup, NovoControlGroupAddConfig } from './src/elements/form/ControlGroup';
 export { FieldInteractionApi } from './src/elements/form/FieldInteractionApi';
 // Utils
 export { OutsideClick } from './src/utils/outside-click/OutsideClick';
@@ -88,12 +94,17 @@ export {
     GetDayViewArgs
 } from './src/utils/calendar-utils/CalendarUtils';
 export * from './src/utils/calendar-utils/CalendarUtils';
-export { AppBridge, AppBridgeHandler, IAppBridgeOpenEvent } from './src/utils/app-bridge/AppBridge';
+export { AppBridge, AppBridgeHandler, IAppBridgeOpenEvent, AppBridgeService, DevAppBridge, DevAppBridgeService } from './src/utils/app-bridge/AppBridge';
 // Providers
 export { NovoElementProviders } from './novo-elements.providers';
 // Pipes
 export { PluralPipe } from './src/pipes/plural/Plural';
 export { DecodeURIPipe } from './src/pipes/decode-uri/DecodeURI';
 export { GroupByPipe } from './src/pipes/group-by/GroupBy';
+export { RenderPipe } from './src/elements/value/Render';
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';
+export { NovoListElement } from './src/elements/list/List';
+// interfaces
+export { NOVO_VALUE_TYPE } from './src/elements/value/Value';
+export { NOVO_VALUE_THEME } from './src/elements/value/Value';

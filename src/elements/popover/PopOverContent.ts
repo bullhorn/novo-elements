@@ -11,7 +11,6 @@ import { PopOverDirective } from './PopOver';
             [class.fade]="animation"
             style="display: block"
             role="popover">
-            <div class="virtual-area"></div>
             <div class="arrow {{effectiveAlignment}}"></div>
             <h4 class="popover-title" [hidden]="!title">{{ title }}</h4>
             <div class="popover-content">

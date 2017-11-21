@@ -47,10 +47,13 @@ export class NovoControlCustom implements OnInit {
     template: `
         <div class="novo-fieldset-container">
             <novo-fieldset-header [icon]="icon" [title]="title" *ngIf="title"></novo-fieldset-header>
-            <div *ngFor="let control of controls" class="novo-form-row" [class.disabled]="control.disabled">
-                <novo-control *ngIf="!control.customControl" [control]="control" [form]="form"></novo-control>
-                <novo-control-custom *ngIf="control.customControl" [control]="control" [form]="form"></novo-control-custom>
-            </div>
+            <ng-container *ngFor="let control of controls">
+                <div class="novo-form-row" [class.disabled]="control.disabled" *ngIf="control.__type !== 'GroupedControl'">
+                    <novo-control *ngIf="!control.customControl" [control]="control" [form]="form"></novo-control>
+                    <novo-control-custom *ngIf="control.customControl" [control]="control" [form]="form"></novo-control-custom>
+                </div>
+                <div *ngIf="control.__type === 'GroupedControl'">TODO - GroupedControl</div>
+            </ng-container>
         </div>
     `
 })
@@ -70,9 +73,9 @@ export class NovoFieldsetElement {
                 <ng-content select="form-subtitle"></ng-content>
             </header>
             <form class="novo-form" [formGroup]="form" autocomplete="off">
-                <span *ngFor="let fieldset of form.fieldsets">
+                <ng-container *ngFor="let fieldset of form.fieldsets">
                     <novo-fieldset *ngIf="fieldset.controls.length" [icon]="fieldset.icon" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
-                </span>
+                </ng-container>
             </form>
         </div>
     `

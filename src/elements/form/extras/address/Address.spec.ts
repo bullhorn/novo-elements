@@ -3,7 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 // App
 import { NovoAddressElement } from './Address';
-import { NovoSelectElement } from '../../../select/Select';
+import { NovoSelectModule } from '../../../select/Select.module';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 
 describe('Elements: NovoAddressElement', () => {
@@ -13,11 +13,11 @@ describe('Elements: NovoAddressElement', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                NovoAddressElement,
-                NovoSelectElement
+                NovoAddressElement
             ],
             imports: [
-                FormsModule
+                FormsModule,
+                NovoSelectModule
             ],
             providers: [
                 { provide: NovoLabelService, useClass: NovoLabelService }

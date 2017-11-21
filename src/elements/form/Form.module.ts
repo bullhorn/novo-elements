@@ -18,14 +18,15 @@ import { NovoNovoCKEditorModule } from './../ckeditor/CKEditor.module';
 import { NovoQuickNoteModule } from './../quick-note/QuickNote.module';
 import { NovoDynamicFormElement, NovoControlCustom, NovoFieldsetElement, NovoFieldsetHeaderElement } from './DynamicForm';
 import { NovoFormElement } from './Form';
-import { NovoControlElement, NovoCustomControlContainerElement } from './Control';
+import { NovoControlElement, NovoCustomControlContainerElement, NovoAutoSize } from './Control';
 import { NovoFormExtrasModule } from './extras/FormExtras.module';
 import { NovoHeaderModule } from './../header/Header.module';
 import { NovoTooltipModule } from './../tooltip/Tooltip.module';
 import { NovoDragulaModule } from './../dragula/Dragula.module';
 import { NovoTipWellModule } from './../tip-well/TipWell.module';
 import { NovoModalModule } from './../modal/Modal.module';
-import { ControlConfirmModal } from './ControlConfirmModal';
+import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
+import { NovoControlGroup } from './ControlGroup';
 
 @NgModule({
     imports: [
@@ -50,9 +51,17 @@ import { ControlConfirmModal } from './ControlConfirmModal';
         NovoModalModule,
         NovoButtonModule
     ],
-    declarations: [NovoControlElement, NovoDynamicFormElement, NovoFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement, ControlConfirmModal],
-    exports: [NovoDynamicFormElement, NovoControlElement, NovoFormElement, NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement],
-    entryComponents: [ControlConfirmModal]
+    declarations: [
+        NovoAutoSize, NovoControlElement, NovoDynamicFormElement, NovoFormElement,
+        NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom,
+        NovoCustomControlContainerElement, ControlConfirmModal, ControlPromptModal, NovoControlGroup
+    ],
+    exports: [
+        NovoAutoSize, NovoDynamicFormElement, NovoControlElement, NovoFormElement,
+        NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement,
+        NovoControlGroup
+    ],
+    entryComponents: [ControlConfirmModal, ControlPromptModal]
 })
 export class NovoFormModule {
 }

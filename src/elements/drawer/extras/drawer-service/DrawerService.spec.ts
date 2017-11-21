@@ -1,7 +1,7 @@
 import { DrawerService } from './DrawerService';
 
 describe('Elements: DrawerService', () => {
-    let component = new DrawerService;
+    let component = new DrawerService();
 
     it('should be defined.', () => {
         expect(component).toBeDefined();

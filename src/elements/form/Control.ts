@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy, Directive, HostListener, AfterContentInit } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
 // APP
@@ -16,6 +16,34 @@ export interface IMaskOptions {
     keepCharPositions: boolean;
     guide: boolean;
 };
+
+@Directive({
+    selector: 'textarea[autosize]'
+})
+export class NovoAutoSize implements AfterContentInit {
+    @HostListener('input', ['$event.target'])
+    onInput(textArea: HTMLTextAreaElement): void {
+        this.adjust();
+    }
+
+    constructor(public element: ElementRef) { }
+
+    ngAfterContentInit(): void {
+        setTimeout(() => {
+            this.adjust();
+        });
+    }
+
+    adjust(): void {
+        let hasValue = this.element.nativeElement.value.length !== 0;
+        this.element.nativeElement.style.overflow = 'hidden';
+        if (hasValue) {
+            this.element.nativeElement.style.height = Math.min((this.element.nativeElement.scrollHeight - 11), 300) + 'px';
+        } else {
+            this.element.nativeElement.style.height = '14px';
+        }
+    }
+}
 
 @Component({
     selector: 'novo-custom-control-container',
@@ -71,8 +99,14 @@ export class NovoCustomControlContainerElement {
     selector: 'novo-control',
     template: `
         <div class="novo-control-container" [formGroup]="form" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
+            <!--Encrypted Field-->
+            <i [hidden]="!form.controls[control.key].encrypted"
+            class="bhi-lock">
+            </i>
             <!--Label (for horizontal)-->
-            <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && form.controls[control.key].label && !condensed">{{ form.controls[control.key].label }}</label>
+            <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && form.controls[control.key].label && !condensed" [ngClass]="{'encrypted': form.controls[control.key].encrypted }">
+                {{ form.controls[control.key].label }}
+            </label>
             <div class="novo-control-outer-container">
                 <!--Label (for vertical)-->
                 <label
@@ -94,7 +128,7 @@ export class NovoCustomControlContainerElement {
                             [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form.controls[control.key].required">
                         </i>
                         <!--Form Controls-->
-                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [ngSwitch]="form.controls[control.key].controlType" [attr.data-automation-id]="control.key">
+                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [ngSwitch]="form.controls[control.key].controlType" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
                             <!--Text-based Inputs-->
                             <!--TODO prefix/suffix on the control-->
                             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
@@ -105,7 +139,7 @@ export class NovoCustomControlContainerElement {
                                 <label class="input-label" *ngIf="form.controls[control.key].subType === 'percentage'">%</label>
                             </div>
                             <!--TextArea-->
-                            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></textarea>
+                            <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" autosize (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></textarea>
                             <!--Editor-->
                             <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
                             <!--HTML5 Select-->
@@ -119,8 +153,8 @@ export class NovoCustomControlContainerElement {
                             <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-tiles>
                             <!--Picker-->
                             <div class="novo-control-input-container" *ngSwitchCase="'picker'">
-                                <novo-picker [config]="form.controls[control.key].config" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [appendToBody]="form.controls[control.key].appendToBody" [parentScrollSelector]="form.controls[control.key].parentScrollSelector" *ngIf="!form.controls[control.key].multiple" (select)="modelChange($event);" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-picker>
-                                <chips [source]="form.controls[control.key].config" [type]="form.controls[control.key].config.type" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" *ngIf="control.multiple" [closeOnSelect]="form.controls[control.key].closeOnSelect" (changed)="modelChange($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></chips>
+                                <novo-picker [config]="form.controls[control.key].config" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [parentScrollSelector]="form.controls[control.key].parentScrollSelector" *ngIf="!form.controls[control.key].multiple" (select)="modelChange($event);" (changed)="modelChangeWithRaw($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-picker>
+                                <chips [source]="form.controls[control.key].config" [type]="form.controls[control.key].config.type" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" *ngIf="control.multiple" [closeOnSelect]="form.controls[control.key].closeOnSelect" (changed)="modelChangeWithRaw($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></chips>
                             </div>
                             <!--Novo Select-->
                             <novo-select *ngSwitchCase="'select'" [options]="form.controls[control.key].options" [headerConfig]="form.controls[control.key].headerConfig" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (onSelect)="modelChange($event)"></novo-select>
@@ -143,7 +177,7 @@ export class NovoCustomControlContainerElement {
                             <!--Address-->
                             <novo-address *ngSwitchCase="'address'" [formControlName]="control.key"></novo-address>
                             <!--Checkbox-->
-                            <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [layoutOptions]="layoutOptions"></novo-checkbox>
+                            <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [label]="control.checkboxLabel" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [layoutOptions]="layoutOptions"></novo-checkbox>
                             <!--Checklist-->
                             <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="form.controls[control.key].options" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (onSelect)="modelChange($event)"></novo-check-list>
                             <!--QuickNote-->
@@ -176,11 +210,25 @@ export class NovoCustomControlContainerElement {
                     <!--Tip Wel-->
                     <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
                 </div>
+                <i *ngIf="form.controls[control.key].fieldInteractionloading" class="loading">
+                    <svg version="1.1"
+                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                     x="0px" y="0px" width="18.2px" height="18.5px" viewBox="0 0 18.2 18.5" style="enable-background:new 0 0 18.2 18.5;"
+                     xml:space="preserve">
+                    <style type="text/css">
+                        .spinner { fill:#FFFFFF; }
+                    </style>
+                        <path class="spinner" d="M9.2,18.5C4.1,18.5,0,14.4,0,9.2S4.1,0,9.2,0c0.9,0,1.9,0.1,2.7,0.4c0.8,0.2,1.2,1.1,1,1.9
+                            c-0.2,0.8-1.1,1.2-1.9,1C10.5,3.1,9.9,3,9.2,3C5.8,3,3,5.8,3,9.2s2.8,6.2,6.2,6.2c2.8,0,5.3-1.9,6-4.7c0.2-0.8,1-1.3,1.8-1.1
+                            c0.8,0.2,1.3,1,1.1,1.8C17.1,15.7,13.4,18.5,9.2,18.5z"/>
+                    </svg>
+                </i>
             </div>
         </div>
     `,
     host: {
         '[class]': 'form.controls[control.key].controlType',
+        '[attr.data-control-type]': 'form.controls[control.key].controlType',
         '[class.disabled]': 'form.controls[control.key].readOnly',
         '[class.hidden]': 'form.controls[control.key].hidden',
         '[attr.data-control-key]': 'control.key',
@@ -390,14 +438,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         this.formattedValue = null;
     }
 
-    resizeTextArea(event) {
-        // Reset the heighte
-        event.target.style.height = 'auto';
-        event.target.style.height = event.target.value.length > 0 ? `${event.target.scrollHeight - 14}px` : '2rem';
-    }
-
     handleTextAreaInput(event) {
-        this.resizeTextArea(event);
         this.emitChange(event);
         this.restrictKeys(event);
     }
@@ -406,7 +447,17 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         if (this.control && this.form.controls[this.control.key].maxlength) {
             this.characterCount = event.target.value.length;
             this.maxLengthMet = event.target.value.length >= this.form.controls[this.control.key].maxlength;
+
         }
+    }
+
+    modelChangeWithRaw(event) {
+        if (Helpers.isEmpty(event.value)) {
+            this._focused = false;
+            this._enteredText = '';
+        }
+        this.form.controls[this.control.key].rawValue = event.rawValue;
+        this.change.emit(event.value);
     }
 
     modelChange(value) {
