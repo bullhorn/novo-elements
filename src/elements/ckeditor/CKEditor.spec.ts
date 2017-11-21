@@ -32,7 +32,7 @@ describe('Elements: NovoCKEditorElement', () => {
         });
     });
 
-    xdescribe('Method: ngAfterViewInit()', () => {
+    describe('Method: ngAfterViewInit()', () => {
         beforeEach(() => {
             spyOn(component, 'ckeditorInit');
         });
@@ -42,26 +42,16 @@ describe('Elements: NovoCKEditorElement', () => {
         });
 
         it('should set the base config', () => {
-            component.config = {};
+            spyOn(component, 'getBaseConfig').and.returnValue({ test: true });
             component.ngAfterViewInit();
-            expect(component.ckeditorInit).toHaveBeenCalledWith({});
+            expect(component.ckeditorInit).toHaveBeenCalledWith({ test: true });
         });
 
         it('should set with passed config', () => {
-            component.config = { test: 123 };
+            spyOn(component, 'getBaseConfig').and.returnValue({ test: false });
+            component.config = { test: true };
             component.ngAfterViewInit();
-            expect(component.ckeditorInit).toHaveBeenCalledWith({ test: 123 });
-        });
-    });
-
-    xdescribe('Method: onValueChange()', () => {
-        it('should be defined', () => {
-            expect(component.onValueChange).toBeDefined();
-        });
-
-        it('should emit the change', () => {
-            component.onValueChange();
-            expect(component.change.emit).toHaveBeenCalledWith('INITIAL VALUE');
+            expect(component.ckeditorInit).toHaveBeenCalledWith({ test: true });
         });
     });
 
@@ -109,12 +99,12 @@ describe('Elements: NovoCKEditorElement', () => {
             expect(component.getBaseConfig).toBeDefined();
         });
 
-        it('should work', () => {
-            let config = component.getBaseConfig();
-            expect(config).toEqual({
-                enterMode : window['CKEDITOR'].ENTER_BR,
+        it('should return extended config object', () => {
+            expect(component.getBaseConfig()).toEqual({
+                enterMode: window['CKEDITOR'].ENTER_BR,
                 shiftEnterMode: window['CKEDITOR'].ENTER_P,
                 disableNativeSpellChecker: false,
+                resize_enabled: true,
                 removePlugins: 'liststyle,tabletools,contextmenu',
                 toolbar: [
                     { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'] },
@@ -127,6 +117,21 @@ describe('Elements: NovoCKEditorElement', () => {
                     { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
                     { name: 'colors', items: ['TextColor', 'BGColor'] }
                 ]
+            });
+        });
+
+        it('should return minimal config object', () => {
+            component.minimal = true;
+            expect(component.getBaseConfig()).toEqual({
+                enterMode: window['CKEDITOR'].ENTER_BR,
+                shiftEnterMode: window['CKEDITOR'].ENTER_P,
+                disableNativeSpellChecker: false,
+                resize_enabled: true,
+                removePlugins: 'liststyle,tabletools,contextmenu',
+                toolbar: [{
+                    name: 'basicstyles',
+                    items: ['Styles', 'FontSize', 'Bold', 'Italic', 'Underline', 'TextColor', '-', 'NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Link']
+                }]
             });
         });
     });

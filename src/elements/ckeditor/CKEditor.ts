@@ -25,6 +25,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
     @Input() config;
     @Input() debounce;
     @Input() name;
+    @Input() minimal;
 
     @Output() change = new EventEmitter();
     @Output() ready = new EventEmitter();
@@ -128,11 +129,22 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
     }
 
     getBaseConfig() {
-        return {
-            enterMode : CKEDITOR.ENTER_BR,
+        const baseConfig = {
+            enterMode: CKEDITOR.ENTER_BR,
             shiftEnterMode: CKEDITOR.ENTER_P,
             disableNativeSpellChecker: false,
-            removePlugins: 'liststyle,tabletools,contextmenu', // allows browser based spell checking
+            resize_enabled: true,
+            removePlugins: 'liststyle,tabletools,contextmenu'
+        };
+
+        const minimalConfig = {
+            toolbar: [{
+                name: 'basicstyles',
+                items: ['Styles', 'FontSize', 'Bold', 'Italic', 'Underline', 'TextColor', '-', 'NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Link']
+            }]
+        };
+
+        const extendedConfig = {
             toolbar: [
                 { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'] },
                 { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
@@ -145,6 +157,8 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
                 { name: 'colors', items: ['TextColor', 'BGColor'] }
             ]
         };
+
+        return Object.assign(baseConfig, this.minimal ? minimalConfig : extendedConfig);
     }
 
     writeValue(value) {
