@@ -78,6 +78,8 @@ export class FormUtils {
             type = 'percentage';
         } else if (field.dataSpecialization === 'HTML') {
             type = 'editor';
+        } else if (field.dataSpecialization === 'HTML-MINIMAL') {
+            type = 'editor-minimal';
         } else if (field.dataSpecialization === 'YEAR') {
             type = 'year';
         } else if (field.dataType === 'Timestamp') {
@@ -235,6 +237,10 @@ export class FormUtils {
                 break;
             case 'editor':
                 control = new EditorControl(controlConfig);
+                break;
+            case 'editor-minimal':
+                control = new EditorControl(controlConfig);
+                control.minimal = true;
                 break;
             case 'tiles':
                 control = new TilesControl(controlConfig);

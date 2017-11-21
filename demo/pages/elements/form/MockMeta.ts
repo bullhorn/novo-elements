@@ -452,6 +452,22 @@ export const MockMeta = {
             label: 'Custom Component',
             required: true,
             description: 'This is a custom component you can use instead'
+        }, {
+            name: 'htmlFieldFullEditor',
+            label: 'CK Editor - Full',
+            required: true,
+            sortOrder: 9011,
+            dataSpecialization: 'HTML',
+            type: 'SCALAR',
+            dataType: 'String'
+        }, {
+            name: 'htmlFieldMinimalEditor',
+            label: 'CK Editor - Minimal',
+            required: true,
+            sortOrder: 9012,
+            dataSpecialization: 'HTML-MINIMAL',
+            type: 'SCALAR',
+            dataType: 'String'
         }
     ]
 };

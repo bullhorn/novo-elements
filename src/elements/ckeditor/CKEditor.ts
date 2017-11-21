@@ -133,8 +133,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
             enterMode: CKEDITOR.ENTER_BR,
             shiftEnterMode: CKEDITOR.ENTER_P,
             disableNativeSpellChecker: false,
-            resize_enabled: true,
-            removePlugins: 'liststyle,tabletools,contextmenu'
+            removePlugins: 'liststyle,tabletools,contextmenu' // allows browser based spell checking
         };
 
         const minimalConfig = {
@@ -151,7 +150,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
                 { name: 'links', items: ['Link'] },
                 { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
                 { name: 'tools', items: ['Maximize', 'Source'] },
-                '/',
+                '/', // line break
                 { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
                 { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
                 { name: 'colors', items: ['TextColor', 'BGColor'] }

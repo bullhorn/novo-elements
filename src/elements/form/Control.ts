@@ -141,7 +141,7 @@ export class NovoCustomControlContainerElement {
                             <!--TextArea-->
                             <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" autosize (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></textarea>
                             <!--Editor-->
-                            <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
+                            <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" [minimal]="control.minimal" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
                             <!--HTML5 Select-->
                             <select [id]="control.key" *ngSwitchCase="'native-select'" [formControlName]="control.key" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
                                 <option *ngIf="form.controls[control.key].placeholder" value="" disabled selected hidden>{{ form.controls[control.key].placeholder }}</option>
