@@ -91,7 +91,7 @@ describe('Utils: FormUtils', () => {
             expect(formUtils.determineInputType({ dataSpecialization: 'YEAR' })).toBe('year');
         });
         it('should return the type of editor minimal correctly', () => {
-            expect(formUtils.determineInputType({ dataSpecialization: 'HTML-MINIMAL' })).toEqual('html-minimal');
+            expect(formUtils.determineInputType({ dataSpecialization: 'HTML-MINIMAL' })).toEqual('editor-minimal');
         });
         it('should return the type of timestamps correctly.', () => {
             expect(formUtils.determineInputType).toBeDefined();
