@@ -81,6 +81,7 @@ export class NovoLabelService {
     groupedMultiPickerEmpty = 'No items to display';
     groupedMultiPickerSelectCategory = 'Select a category from the right to get started';
     add = 'Add';
+    encryptedFieldTooltip = "This data has been stored at the highest level of security";
 
     getToManyPlusMore(toMany: { quantity: number }): string {
         return `+${toMany.quantity} more`;
@@ -122,7 +123,7 @@ export class NovoLabelService {
         };
 
         return [getMonth(0), getMonth(1), getMonth(2), getMonth(3), getMonth(4), getMonth(5), getMonth(6),
-        getMonth(7), getMonth(8), getMonth(9), getMonth(10), getMonth(11)]
+            getMonth(7), getMonth(8), getMonth(9), getMonth(10), getMonth(11)]
             .reduce((months, dt) => {
                 months.push(new Intl.DateTimeFormat('en-US', { month: 'long' }).format(dt));
                 return months;
