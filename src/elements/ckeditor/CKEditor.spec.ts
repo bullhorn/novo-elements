@@ -104,7 +104,6 @@ describe('Elements: NovoCKEditorElement', () => {
                 enterMode: window['CKEDITOR'].ENTER_BR,
                 shiftEnterMode: window['CKEDITOR'].ENTER_P,
                 disableNativeSpellChecker: false,
-                resize_enabled: true,
                 removePlugins: 'liststyle,tabletools,contextmenu',
                 toolbar: [
                     { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'] },
@@ -126,7 +125,6 @@ describe('Elements: NovoCKEditorElement', () => {
                 enterMode: window['CKEDITOR'].ENTER_BR,
                 shiftEnterMode: window['CKEDITOR'].ENTER_P,
                 disableNativeSpellChecker: false,
-                resize_enabled: true,
                 removePlugins: 'liststyle,tabletools,contextmenu',
                 toolbar: [{
                     name: 'basicstyles',
