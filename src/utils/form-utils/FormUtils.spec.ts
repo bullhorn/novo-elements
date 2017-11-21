@@ -90,6 +90,9 @@ describe('Utils: FormUtils', () => {
             expect(formUtils.determineInputType).toBeDefined();
             expect(formUtils.determineInputType({ dataSpecialization: 'YEAR' })).toBe('year');
         });
+        it('should return the type of editor minimal correctly', () => {
+            expect(formUtils.determineInputType({ dataSpecialization: 'HTML-MINIMAL' })).toEqual('html-minimal');
+        });
         it('should return the type of timestamps correctly.', () => {
             expect(formUtils.determineInputType).toBeDefined();
             expect(formUtils.determineInputType({ dataType: 'Timestamp' })).toBe('date');
@@ -222,6 +225,10 @@ describe('Utils: FormUtils', () => {
             expect(formUtils.getControlForField).toBeDefined();
             let result = formUtils.getControlForField({ type: 'select' });
             expect(result instanceof SelectControl).toBe(true);
+        });
+        it('should return the right component for editor minimal', () => {
+            let result = formUtils.getControlForField({ type: 'editor-minimal' });
+            expect(result instanceof EditorControl).toBeTruthy();
         });
         describe('with type: address', () => {
             it('should return the right component for address', () => {
