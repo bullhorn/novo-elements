@@ -9792,6 +9792,26 @@ export const COUNTRIES = [
         code: 'SS',
         name: 'South Sudan',
         states: []
+    }, {
+        id: 2238,
+        code: 'ES',
+        name: 'El Salvador',
+        states: [
+            { code: 'ES01', name: 'Ahuachapán' },
+            { code: 'ES02', name: 'Cabañas' },
+            { code: 'ES03', name: 'Chalatenango' },
+            { code: 'ES04', name: 'Cuscatlán' },
+            { code: 'ES05', name: 'La Libertad' },
+            { code: 'ES06', name: 'La Paz' },
+            { code: 'ES07', name: 'La Unión' },
+            { code: 'ES08', name: 'Morazán' },
+            { code: 'ES09', name: 'San Miguel' },
+            { code: 'ES10', name: 'San Salvador' },
+            { code: 'ES11', name: 'Santa Ana' },
+            { code: 'ES12', name: 'San Vicente' },
+            { code: 'ES13', name: 'Sonsonate' },
+            { code: 'ES14', name: 'Usulután' }
+        ]
     }
 ];
 
