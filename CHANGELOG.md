@@ -1,3 +1,20 @@
+<a name="2.1.64"></a>
+## [2.1.64](https://github.com/bullhorn/novo-elements/compare/v2.1.63...v2.1.64) (2017-11-22)
+
+
+### Bug Fixes
+
+* **simpletable:** Fixing pagination to display current filter size ([c78e0a3](https://github.com/bullhorn/novo-elements/commit/c78e0a3))
+
+
+### Features
+
+* **ckeditor:** Adding minimal flag and options to Forms ([57c03c0](https://github.com/bullhorn/novo-elements/commit/57c03c0))
+* **Places:** exporting the GoogleServiceService ([#582](https://github.com/bullhorn/novo-elements/issues/582)) ([7be6555](https://github.com/bullhorn/novo-elements/commit/7be6555))
+* **Places:** exporting the GoogleServiceService missing dependencies ([#583](https://github.com/bullhorn/novo-elements/issues/583)) ([f2367da](https://github.com/bullhorn/novo-elements/commit/f2367da))
+
+
+
 <a name="2.1.63"></a>
 ## [2.1.63](https://github.com/bullhorn/novo-elements/compare/v2.1.62...v2.1.63) (2017-11-17)
 
