@@ -1,3 +1,13 @@
+<a name="2.1.65"></a>
+## [2.1.65](https://github.com/bullhorn/novo-elements/compare/v2.1.64...v2.1.65) (2017-11-22)
+
+
+### Features
+
+* **appbridge:** Adding callbacks ([940edfa](https://github.com/bullhorn/novo-elements/commit/940edfa))
+
+
+
 <a name="2.1.64"></a>
 ## [2.1.64](https://github.com/bullhorn/novo-elements/compare/v2.1.63...v2.1.64) (2017-11-22)
 
