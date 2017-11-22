@@ -75,7 +75,7 @@ export class NovoActivityTableNoResultsMessage { }
             </novo-search>
             <novo-simple-table-pagination
                 *ngIf="paginationOptions"
-                [length]="dataSource?.total"
+                [length]="dataSource?.current"
                 [page]="paginationOptions.page"
                 [pageSize]="paginationOptions.pageSize"
                 [pageSizeOptions]="paginationOptions.pageSizeOptions">
