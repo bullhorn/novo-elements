@@ -44,6 +44,8 @@ import { NovoOverlayModule } from './src/elements/overlay/Overlay.module';
 import { NovoLabelService } from './src/services/novo-label-service';
 import { NovoDragulaService } from './src/elements/dragula/DragulaService';
 import { GooglePlacesService } from './src/elements/places/places.service';
+import { GlobalRef, BrowserGlobalRef } from './src/services/global/global.service';
+import { LocalStorageService } from './src/services/storage/storage.service';
 import { ComponentUtils } from './src/utils/component-utils/ComponentUtils';
 import { FormUtils } from './src/utils/form-utils/FormUtils';
 import { NovoSimpleTableModule } from './src/elements/simple-table';
@@ -98,6 +100,8 @@ import { NovoSimpleTableModule } from './src/elements/simple-table';
         { provide: NovoLabelService, useClass: NovoLabelService },
         { provide: NovoDragulaService, useClass: NovoDragulaService },
         { provide: GooglePlacesService, useClass: GooglePlacesService },
+        { provide: GlobalRef, useClass: BrowserGlobalRef },
+        { provide: LocalStorageService, useClass: LocalStorageService },
         { provide: FormUtils, useClass: FormUtils }
     ]
 })
