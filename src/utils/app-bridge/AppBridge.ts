@@ -14,7 +14,8 @@ export enum AppBridgeHandler {
     PIN,
     REGISTER,
     UPDATE,
-    REQUEST_DATA
+    REQUEST_DATA,
+    CALLBACK
 }
 
 export type NovoApps = 'record' | 'add' | 'fast-add' | 'custom';
@@ -64,7 +65,8 @@ const MESSAGE_TYPES = {
     HTTP_PUT: 'httpPUT',
     HTTP_DELETE: 'httpDELETE',
     CUSTOM_EVENT: 'customEvent',
-    REQUEST_DATA: 'requestData'
+    REQUEST_DATA: 'requestData',
+    CALLBACK: 'callback'
 };
 
 declare const postRobot: any;
@@ -179,6 +181,13 @@ export class AppBridge {
             this._trace(MESSAGE_TYPES.REQUEST_DATA, event);
             return this.requestData(event.data).then(result => {
                 return { data: result.data, error: result.error };
+            });
+        });
+        // CALLBACKS
+        postRobot.on(MESSAGE_TYPES.CALLBACK, (event) => {
+            this._trace(MESSAGE_TYPES.CALLBACK, event);
+            return this.callback(event.data).then(success => {
+                return { success };
             });
         });
         // HTTP-GET
@@ -433,6 +442,36 @@ export class AppBridge {
                     this._trace(`${MESSAGE_TYPES.REQUEST_DATA} (callback)`, event);
                     if (event.data) {
                         resolve({ data: event.data.data });
+                    } else {
+                        reject(false);
+                    }
+                }).catch((err) => {
+                    reject(false);
+                });
+            }
+        });
+    }
+
+    /**
+     * Fires a generic callback command
+     * @param packet string - key: string, generic: boolean
+     */
+    public callback(packet: { key: string, generic: boolean, options: object }): Promise<any> {
+        Object.assign(packet, { id: this.id, windowName: this.windowName });
+        return new Promise<any>((resolve, reject) => {
+            if (this._handlers[AppBridgeHandler.CALLBACK]) {
+                this._handlers[AppBridgeHandler.CALLBACK](packet, (success: boolean) => {
+                    if (success) {
+                        resolve(true);
+                    } else {
+                        reject(false);
+                    }
+                });
+            } else {
+                postRobot.sendToParent(MESSAGE_TYPES.CALLBACK, packet).then((event) => {
+                    this._trace(`${MESSAGE_TYPES.CALLBACK} (callback)`, event);
+                    if (event.data) {
+                        resolve(true);
                     } else {
                         reject(false);
                     }
