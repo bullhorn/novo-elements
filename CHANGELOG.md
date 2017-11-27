@@ -1,3 +1,13 @@
+<a name="2.1.66"></a>
+## [2.1.66](https://github.com/bullhorn/novo-elements/compare/v2.1.65...v2.1.66) (2017-11-27)
+
+
+### Bug Fixes
+
+* **simpletable:** Fixing simple table filters with value/label ([ad81494](https://github.com/bullhorn/novo-elements/commit/ad81494))
+
+
+
 <a name="2.1.65"></a>
 ## [2.1.65](https://github.com/bullhorn/novo-elements/compare/v2.1.64...v2.1.65) (2017-11-22)
 
