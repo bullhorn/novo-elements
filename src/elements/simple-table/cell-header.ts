@@ -53,8 +53,8 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
                         </div>
                     </list>
                     <list *ngSwitchCase="'select'">
-                        <item [class.active]="filter === option" *ngFor="let option of config.filterConfig.options" (click)="filterData(option)" [attr.data-automation-id]="'novo-activity-table-filter-' + (option?.label || option)">
-                            <span>{{ option?.label || option }}</span> <i class="bhi-check" *ngIf="filter === option"></i>
+                        <item [class.active]="filter === option" *ngFor="let option of config.filterConfig.options" (click)="filterData(option.value || option)" [attr.data-automation-id]="'novo-activity-table-filter-' + (option?.label || option)">
+                            <span>{{ option?.label || option }}</span> <i class="bhi-check" *ngIf="filter === (option.value || option)"></i>
                         </item>
                     </list>
                     <list *ngSwitchDefault>
