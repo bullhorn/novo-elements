@@ -1,3 +1,14 @@
+<a name="2.1.67"></a>
+## [2.1.67](https://github.com/bullhorn/novo-elements/compare/v2.1.66...v2.1.67) (2017-11-28)
+
+
+### Features
+
+* **counties:** Adding more countries/states ([3d8c737](https://github.com/bullhorn/novo-elements/commit/3d8c737))
+* **form:** Adding tooltip to encrypted form control ([302e68e](https://github.com/bullhorn/novo-elements/commit/302e68e))
+
+
+
 <a name="2.1.66"></a>
 ## [2.1.66](https://github.com/bullhorn/novo-elements/compare/v2.1.65...v2.1.66) (2017-11-27)
 
