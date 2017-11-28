@@ -81,7 +81,7 @@ export class NovoLabelService {
     groupedMultiPickerEmpty = 'No items to display';
     groupedMultiPickerSelectCategory = 'Select a category from the right to get started';
     add = 'Add';
-    encryptedFieldTooltip = "This data has been stored at the highest level of security";
+    encryptedFieldTooltip = 'This data has been stored at the highest level of security';
 
     getToManyPlusMore(toMany: { quantity: number }): string {
         return `+${toMany.quantity} more`;
