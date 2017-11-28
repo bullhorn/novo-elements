@@ -41,6 +41,10 @@ export class FieldInteractionApi {
         return this._form;
     }
 
+    get associations(): object {
+        return this.form.hasOwnProperty('associations') ? this.form.associations : {};
+    }
+
     get currentEntity(): string {
         return this.form.hasOwnProperty('currentEntity') ? this.form.currentEntity : undefined;
     }

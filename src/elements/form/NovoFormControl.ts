@@ -194,6 +194,7 @@ export class NovoFormGroup extends FormGroup {
     public edit: boolean;
     public currentEntity: string;
     public currentEntityId: string;
+    public associations: object;
     get value() {
         return this.getRawValue();
     }
