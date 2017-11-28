@@ -1,28 +1,28 @@
-.idea
-logs
+# Node generated files
+node_modules
+npm-debug.log
 
-# typings
-typings
+# OS generated files
+Thumbs.db
+.DS_Store
 
-# testing
+# Build files
 karma.conf.js
 test.bundle.js
 coverage
-
-# dev stuff
 config
 .github
 .editorconfig
-.npmignore
 .travis.yml
-spec-bundle.js
 tslint.json
 typedoc.json
-yarn.lock
-
-# demo build
-doc
+webpack.config.js
+demo
 dist
-.awcache
-.history
 .vscode
+tsconfig.json
+tsconfig.publish.json
+
+# Ignored files
+*.ts
+!*.d.ts
