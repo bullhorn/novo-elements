@@ -471,7 +471,8 @@ export class NovoTableElement implements DoCheck {
                 column.filter.push(filter);
             }
         } else {
-            column.filter = Helpers.isBlank(filter.value) ? filter : filter.value;
+            column.filter = new Array();
+            column.filter.push(Helpers.isBlank(filter.value) ? filter : filter.value);
         }
         this.onFilterChange();
     }
