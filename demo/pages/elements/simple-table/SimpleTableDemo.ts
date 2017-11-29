@@ -169,7 +169,7 @@ export class SimpleTableDemoComponent implements OnInit {
     constructor(private http: Http, private ref: ChangeDetectorRef) {
         let today = new Date();
         let mockStatuses = ['New', 'Active', 'Archived'];
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= 50; i++) {
             this.staticData.push({
                 id: i,
                 name: `Name ${i}`,
