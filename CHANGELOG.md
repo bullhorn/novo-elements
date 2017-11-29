@@ -1,3 +1,13 @@
+<a name="2.1.68"></a>
+## [2.1.68](https://github.com/bullhorn/novo-elements/compare/v2.1.67...v2.1.68) (2017-11-29)
+
+
+### Features
+
+* **field-interaction-api:** Adding way to get associations via FAPI ([0c964cf](https://github.com/bullhorn/novo-elements/commit/0c964cf))
+
+
+
 <a name="2.1.67"></a>
 ## [2.1.67](https://github.com/bullhorn/novo-elements/compare/v2.1.66...v2.1.67) (2017-11-28)
 
