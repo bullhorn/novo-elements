@@ -1,3 +1,13 @@
+<a name="2.1.70"></a>
+## [2.1.70](https://github.com/bullhorn/novo-elements/compare/v2.1.69...v2.1.70) (2017-11-30)
+
+
+### Bug Fixes
+
+* **simple-table:** Fixing pagination when filtering ([d8c97cb](https://github.com/bullhorn/novo-elements/commit/d8c97cb))
+
+
+
 <a name="2.1.69"></a>
 ## [2.1.69](https://github.com/bullhorn/novo-elements/compare/v2.1.68...v2.1.69) (2017-11-29)
 
