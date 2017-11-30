@@ -88,6 +88,7 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
             this._config = {
                 sortable: coerceBooleanProperty(v.sortable),
                 filterable: coerceBooleanProperty(v.filterable),
+                transforms: v.transforms || {},
                 filterConfig: v.filterConfig || {
                     type: 'text'
                 }
@@ -98,7 +99,7 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
             }
         }
     }
-    private _config: { sortable: boolean, filterable: boolean, filterConfig: SimpleTableColumnFilterConfig };
+    private _config: { sortable: boolean, filterable: boolean, transforms?: { filter?: Function, sort?: Function }, filterConfig: SimpleTableColumnFilterConfig };
 
     private _rerenderSubscription: Subscription;
     private changeTimeout: any;
@@ -159,7 +160,7 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
         }
         this.changeTimeout = setTimeout(() => {
             this.direction = this.getNextSortDirection(this.direction);
-            this._sort.sort(this.id, this.direction);
+            this._sort.sort(this.id, this.direction, this._config.transforms.sort);
             this.changeDetectorRef.markForCheck();
         }, 300);
     }
@@ -189,7 +190,7 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
             if (this.filter === '') {
                 this.filter = undefined;
             }
-            this._sort.filter(this.id, this.filter);
+            this._sort.filter(this.id, this.filter, this._config.transforms.filter);
             this.changeDetectorRef.markForCheck();
         }, 300);
     }

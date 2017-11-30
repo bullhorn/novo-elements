@@ -9,6 +9,11 @@ export interface SimpleTableColumn<T> {
     config?: {
         sortable?: boolean;
         filterable?: boolean;
+        transforms?: {
+            filter?: Function,
+            sort?: Function,
+        };
+        sortTransform?: Function;
         filterConfig?: SimpleTableColumnFilterConfig
     }
 }
@@ -27,7 +32,7 @@ export interface SimpleTableColumnFilterConfig {
 
 export interface SimpleTableColumnFilterOption {
     label: string;
-    value?: string;
+    value?: any;
     min?: number;
     max?: number;
 }

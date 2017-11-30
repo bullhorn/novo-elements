@@ -10,10 +10,10 @@ import { NovoActivityTableState } from './state';
 export class NovoSortFilter {
     constructor(private state: NovoActivityTableState) { }
 
-    public filter(id: string, value: string): void {
+    public filter(id: string, value: string, transform: Function): void {
         let filter;
         if (value) {
-            filter = { id, value };
+            filter = { id, value, transform };
         } else {
             filter = undefined;
         }
@@ -22,8 +22,8 @@ export class NovoSortFilter {
         this.state.updates.next({ filter: filter, sort: this.state.sort });
     }
 
-    public sort(id: string, value: string): void {
-        let sort = { id, value };
+    public sort(id: string, value: string, transform: Function): void {
+        let sort = { id, value, transform };
         this.state.sort = sort;
         this.state.reset(false, true);
         this.state.updates.next({ sort: sort, filter: this.state.filter });

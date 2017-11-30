@@ -14,17 +14,17 @@ import { NovoActivityTableState } from './state';
 import { Helpers } from '../../utils/Helpers';
 
 export interface ActivityTableService<T> {
-    getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string, outsideFilter?: any): Observable<{ results: T[], total: number }>;
+    getTableResults(sort: { id: string, value: string, transform?: Function }, filter: { id: string, value: string, transform?: Function }, page: number, pageSize: number, globalSearch?: string, outsideFilter?: any): Observable<{ results: T[], total: number }>;
 }
 
 export abstract class RemoteActivityTableService<T> implements ActivityTableService<T> {
-    abstract getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string, outsideFilter?: any): Observable<{ results: T[], total: number }>;
+    abstract getTableResults(sort: { id: string, value: string, transform?: Function }, filter: { id: string, value: string, transform?: Function }, page: number, pageSize: number, globalSearch?: string, outsideFilter?: any): Observable<{ results: T[], total: number }>;
 }
 
 export class StaticActivityTableService<T> implements ActivityTableService<T> {
     constructor(private data: T[] = []) { }
 
-    public getTableResults(sort: { id: string, value: string }, filter: { id: string, value: string }, page: number, pageSize: number, globalSearch?: string, outsideFilter?: any): Observable<{ results: T[], total: number }> {
+    public getTableResults(sort: { id: string, value: string, transform?: Function }, filter: { id: string, value: string, transform?: Function }, page: number = 0, pageSize: number, globalSearch?: string, outsideFilter?: any): Observable<{ results: T[], total: number }> {
         let ret: T[] = Helpers.deepClone(this.data);
         if (ret.length !== 0) {
             if (globalSearch) {
