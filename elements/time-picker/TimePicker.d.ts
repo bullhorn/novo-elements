@@ -1,0 +1,33 @@
+import { EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
+export declare class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
+    military: boolean;
+    inline: boolean;
+    onSelect: EventEmitter<any>;
+    hours: number;
+    minutes: number;
+    value: any;
+    meridian: string;
+    inBetween: boolean;
+    hoursClass: string;
+    activeHour: any;
+    minutesClass: string;
+    activeMinute: any;
+    MERIDIANS: Array<string>;
+    MINUTES: Array<string>;
+    HOURS: Array<string>;
+    model: any;
+    onModelChange: Function;
+    onModelTouched: Function;
+    ngOnInit(): void;
+    ngOnChanges(changes?: SimpleChanges): void;
+    init(value: any, dispatch: any): void;
+    checkBetween(value: any): void;
+    setHours(event: any, hours: any, dispatch: any): void;
+    setMinutes(event: any, minutes: any, dispatch: any): void;
+    setPeriod(event: any, period: any, dispatch: any): void;
+    dispatchChange(): void;
+    writeValue(model: any): void;
+    registerOnChange(fn: Function): void;
+    registerOnTouched(fn: Function): void;
+}
