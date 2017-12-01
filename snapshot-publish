@@ -10,7 +10,7 @@ commitAuthorEmail=$(git --no-pager show -s --format='%ae' HEAD)
 commitMessage=$(git log --oneline -n 1)
 
 repoName="novo-elements-snapshot"
-repoUrl="https://github.com/bullhorn/novo-elements.git"
+repoUrl="https://github.com/bullhorn/novo-elements-snapshot.git"
 repoDir="snapshot"
 
 echo "Cloning $repoUrl into $repoDir"

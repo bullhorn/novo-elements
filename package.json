@@ -19,7 +19,7 @@
     "analyze-mr": "galaxy analyze-mr",
     "release": "standard-version",
     "postrelease": "git push --follow-tags origin master; npm run build; cd dist && npm publish",
-    "snapshot-publish": "npm run build && bash snapshot-publish"
+    "snapshot-publish": "bash snapshot-publish"
   },
   "pre-commit": [
     "precommit-msg",
