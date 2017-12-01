@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>App Bridge</h1>
+    <p>
+        When writing third-party integrations into Bullhorn it is helpful to have a mechanism to tie into the currently logged in users context. We achieve that with this AppBridge. With this, as a developer, you will be able to open record, execute REST calls and bind/fire custom events that will directly interact with the currently logged in user's session.
+    </p>
+
+    <h5>Example</h5>
+    <button theme="primary" (click)="fireEvent()">Fire Custom Event Down</button>
+    <br/>
+    <h6>Within NG Applications w/ NovoElements</h6>
+    <div class="row">
+        <div class="col-xs-6">
+            <iframe src="https://bullhorn.github.io/app-bridge-demo/#/card1"></iframe>
+        </div>
+        <div class="col-xs-6">
+            <iframe src="https://bullhorn.github.io/app-bridge-demo/#/card2"></iframe>
+        </div>
+    </div>
+    <br/>
+    <h6>Within any random application (html/javascript) with no framework</h6>
+    <div class="row">
+        <div class="col-xs-12">
+            <iframe src="https://bullhorn.github.io/app-bridge-demo/no-app.html"></iframe>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<novo-form [form]="forms.confirm" layout="vertical">
+    <div class="novo-form-row">
+        <novo-control [form]="forms.confirm" [control]="controls.confirm.confirm1Control"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="forms.confirm" [control]="controls.confirm.confirm2Control"></novo-control>
+    </div>
+</novo-form>
+<div class="final-value">Form Value - {{ forms.confirm.value | json }}</div>
+<div class="final-value">Form Dirty - {{ forms.confirm.dirty | json }}</div>
+<div class="final-value">Is Form Valid? - {{ forms.confirm.valid | json }}</div>

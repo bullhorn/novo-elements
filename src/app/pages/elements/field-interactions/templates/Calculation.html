@@ -1,0 +1,18 @@
+<novo-form [form]="forms.calculation" layout="vertical">
+    <div class="novo-form-row">
+        <novo-control [form]="forms.calculation" [control]="controls.calculation.aControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="forms.calculation" [control]="controls.calculation.bControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="forms.calculation" [control]="controls.calculation.sumControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="forms.calculation" [control]="controls.calculation.dateModifiedControl"></novo-control>
+    </div>
+</novo-form>
+<div class="final-value">Form Value - {{ forms.calculation.value | json }}</div>
+<div class="final-value">
+    Form Dirty - {{ forms.calculation.dirty | json }}</div>
+<div class="final-value">Is Form Valid? - {{ forms.calculation.valid | json }}</div>

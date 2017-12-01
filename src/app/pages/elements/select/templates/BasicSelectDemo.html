@@ -1,0 +1,24 @@
+<div>
+    <label>
+        <span class="caption">Selected Value:</span> {{value}}
+    </label>
+    <novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value"></novo-select>
+</div>
+<div>
+    <label>
+        <span class="caption">Selected Value:</span> {{withNumbersValue}}
+    </label>
+    <novo-select [options]="withNumbers" [(ngModel)]="withNumbersValue"></novo-select>
+</div>
+<div>
+    <label>
+        <span class="caption">Disabled State</span>
+    </label>
+    <novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value" disabled></novo-select>
+</div>
+<div>
+    <label>
+        <span class="caption">No Model With Header</span>
+    </label>
+    <novo-select [options]="options" [placeholder]="placeholder" [headerConfig]="headerConfig"></novo-select>
+</div>

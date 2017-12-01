@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="74px" height="76px" viewBox="0 0 74 76" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Iconography - Padding - Do</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Iconography---Padding---Do" sketch:type="MSArtboardGroup">
+            <g id="Rectangle-138-Copy-10-+-Imported-Layers-Copy" sketch:type="MSLayerGroup"
+               transform="translate(7.000000, 8.000000)">
+                <rect id="Rectangle-138-Copy-10" fill="#F6B042" sketch:type="MSShapeGroup" x="0" y="0" width="60"
+                      height="60.4878049" rx="15"></rect>
+                <g id="Imported-Layers-Copy" transform="translate(12.000000, 12.000000)" fill="#FFFFFF"
+                   sketch:type="MSShapeGroup">
+                    <path
+                        d="M13.1574375,18.9002967 L2.826125,23.9811463 C0.6856875,25.3955528 -0.3866875,28.3924715 0.428375,30.6778394 L0.8495625,31.8502317 L14.084625,31.8748679 L13.1574375,18.9002967"
+                        id="Fill-1"></path>
+                    <path
+                        d="M21.40725,18.9002967 L31.737125,23.9811463 C33.879,25.3955528 34.9499375,28.3924715 34.134875,30.6778394 L33.7136875,31.8502317 L20.478625,31.8748679 L21.40725,18.9002967"
+                        id="Fill-2"></path>
+                    <path
+                        d="M18.333875,18.7133516 L18.333875,32.7182947 L17.264375,33.7964898 L16.194875,32.7182947 L16.194875,18.7133516 L18.333875,18.7133516"
+                        id="Fill-3"></path>
+                    <path
+                        d="M17.4440625,16.4091443 C21.6329375,16.4091443 25.061375,12.9542825 25.061375,8.73135163 C25.061375,4.50842073 21.6329375,1.05210976 17.4440625,1.05210976 C13.2551875,1.05210976 9.8281875,4.50842073 9.8281875,8.73135163 C9.8281875,12.9542825 13.2551875,16.4091443 17.4440625,16.4091443"
+                        id="Fill-4"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

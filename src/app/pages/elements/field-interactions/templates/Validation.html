@@ -1,0 +1,8 @@
+<novo-form [form]="forms.validation" layout="vertical">
+    <div class="novo-form-row">
+        <novo-control [form]="forms.validation" [control]="controls.validation.validationControl"></novo-control>
+    </div>
+</novo-form>
+<div class="final-value">Form Value - {{ forms.validation.value | json }}</div>
+<div class="final-value">Form Dirty - {{ forms.validation.dirty | json }}</div>
+<div class="final-value">Is Form Valid? - {{ forms.validation.valid | json }}</div>

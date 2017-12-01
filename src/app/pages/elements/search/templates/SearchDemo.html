@@ -1,0 +1,31 @@
+
+<novo-search></novo-search>
+
+<br/>
+
+<novo-search alwaysOpen="true"></novo-search>
+
+<br/>
+
+<novo-search [ngModel]="test" (ngModelChange)="search($event)">
+    <novo-list direction="vertical">
+        <novo-list-item *ngFor="let item of searchResults | async" (click)="onSelectMatch(item)">
+            <item-header>
+                <item-avatar [icon]="item.type"></item-avatar>
+                <item-title>{{item.name}}</item-title>
+            </item-header>
+        </novo-list-item>
+    </novo-list>
+</novo-search>
+
+<br/>
+
+<novo-search icon="location" theme="grapefruit" alwaysOpen="true" [(ngModel)]="geo" displayField="formatted_address" [closeOnSelect]="false" hint="Search Google to find your address.">
+    <google-places-list [(term)]="geo"></google-places-list>
+</novo-search>
+<div>Value is: {{geo}}</div>
+<br/>
+
+<novo-search icon="candidate" theme="candidate" alwaysOpen="true" [(ngModel)]="entity">
+    <entity-picker-results [matches]="searchData" (select)="onSelectEntity($event)"></entity-picker-results>
+</novo-search>

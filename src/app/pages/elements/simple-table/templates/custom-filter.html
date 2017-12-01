@@ -1,0 +1,23 @@
+<novo-activity-table forceShowHeader="true" hideGlobalSearch="true" customFilter="true" [defaultSort]="defaultSort" [debug]="debug" [activityService]="customFilterDatabase" [columns]="columns" [actionColumns]="actionColumns" [displayedColumns]="displayedColumns" [outsideFilter]="outsideFilter" #custom>
+    <div novo-activity-table-custom-header>
+        <novo-picker [disablePickerInput]="true" [config]="pickerConfig" [(ngModel)]="pickerValue" [placeholder]="placeholder" (changed)="onPickerSelect($event)"></novo-picker>
+    </div>
+    <div novo-activity-table-actions>
+        <button theme="secondary">Add</button>
+        <button theme="primary" *ngIf="!custom.dataSource.totallyEmpty">Actions!</button>
+        <button theme="icon" icon="refresh" (click)="refresh(custom)"></button>
+    </div>
+    <div novo-activity-table-empty-message>
+        Select something and a date range!
+    </div>
+    <div novo-activity-table-no-results-message>
+        Select something and a date range!
+    </div>
+    <div novo-activity-table-custom-filter>
+        <novo-date-picker [(ngModel)]="value" range="true" [weekRangeSelect]="timePeriod === 'week'" (onSelect)="onRangeSelect($event)"></novo-date-picker>
+        <div class="period-selector">
+            <label class="novo-form-control-label">Select Time Period By</label>
+            <novo-tiles [options]="timePeriods" [(ngModel)]="timePeriod"></novo-tiles>
+        </div>
+    </div>
+</novo-activity-table>

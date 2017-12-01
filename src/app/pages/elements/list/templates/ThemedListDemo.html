@@ -1,0 +1,23 @@
+<header>
+    <novo-list theme="navigation" direction="vertical">
+        <novo-list-item *ngFor="let item of pulseItems">
+            <item-header>
+                <item-avatar [icon]="item.type"></item-avatar>
+                <item-title>{{item.name}}</item-title>
+            </item-header>
+            <item-content direction="vertical">
+                <p>
+                    <i *ngIf="item.icon.name" class="{{item.icon.name}} {{item.icon.sentiment}}"></i>
+                    {{item.comment}}
+                </p>
+                <span>
+                    <i class="bhi-clock"></i>
+                    {{item.timeAgo | date: 'shortTime'}}
+                </span>
+            </item-content>
+            <item-end>
+                <i class="bhi-next"></i>
+            </item-end>
+        </novo-list-item>
+    </novo-list>
+</header>

@@ -1,0 +1,9 @@
+<div class="selected-value">Selected States: <span *ngFor="let item of value.states">{{item}} </span>
+    Selected Collaborators: <span *ngFor="let item of value.collaborators">{{item}} </span></div>
+<multi-picker
+    [source]="staticDemo"
+    [placeholder]="placeholder"
+    [types]="types"
+    [(ngModel)]="value"
+    (changed)="onChanged($event)">
+</multi-picker>

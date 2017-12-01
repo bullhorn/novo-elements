@@ -1,0 +1,3 @@
+<button [theme]="theme" [icon]="isChecked ? 'check' : 'times'" (click)="changeTheme()">Change Theme</button>
+<novo-checkbox label="Checked?" [(ngModel)]="isChecked"></novo-checkbox>
+<button [theme]="theme" [icon]="isChecked ? 'check' : 'times'" (click)="changeTheme()" [disabled]="isChecked">Change Theme</button>

@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "lib": {
+    "entryFile": "src/platform/index.ts",
+    "externals": {
+      "date-fns": "date-fns"
+    }
+  }
+}

@@ -1,0 +1,2 @@
+<div class="selected-value">Selected Value: {{cvalue}}</div>
+<chips [closeOnSelect]="true" [source]="formatted" [placeholder]="placeholder" [(ngModel)]="cvalue" (changed)="onChanged($event)"></chips>

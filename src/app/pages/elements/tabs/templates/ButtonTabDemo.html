@@ -1,0 +1,40 @@
+<header class="color">
+    <novo-nav theme="color" [outlet]="buttonTab" type="button-bar">
+        <novo-tab-button>Button 1</novo-tab-button>
+        <novo-tab-button>Button 2</novo-tab-button>
+        <novo-tab-button>Button 3</novo-tab-button>
+        <novo-tab-button [disabled]="true">(Disabled) Button 4</novo-tab-button>
+    </novo-nav>
+</header>
+
+<novo-nav-outlet #buttonTab>
+    <novo-nav-content>
+        <h1>Tab 1 Content</h1>
+    </novo-nav-content>
+    <novo-nav-content>
+        <h1>Tab 2 Content</h1>
+    </novo-nav-content>
+    <novo-nav-content>
+        <h1>Tab 3 Content</h1>
+    </novo-nav-content>
+</novo-nav-outlet>
+
+<header>
+    <novo-nav theme="white" [outlet]="buttonTabWhite" type="button-bar">
+        <novo-tab-button>Button 1</novo-tab-button>
+        <novo-tab-button>Button 2</novo-tab-button>
+        <novo-tab-button>Button 3</novo-tab-button>
+    </novo-nav>
+</header>
+
+<novo-nav-outlet #buttonTabWhite>
+    <novo-nav-content>
+        <h1>Tab 1 Content</h1>
+    </novo-nav-content>
+    <novo-nav-content>
+        <h1>Tab 2 Content</h1>
+    </novo-nav-content>
+    <novo-nav-content>
+        <h1>Tab 3 Content</h1>
+    </novo-nav-content>
+</novo-nav-outlet>

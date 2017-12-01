@@ -1,0 +1,213 @@
+<header class="design container">
+    <div>
+        <h1 class="title">Typography</h1>
+        <h2 class="sub-title">Roboto, not robotic.</h2>
+
+        <p class="description">
+            Roboto's refined letterforms combine geometry with open, rounded features to create a structured, yet friendly typeface. It maintains a human-like quality while expressing a clean and modern aesthetic.
+        </p>
+        <a href="https://www.google.com/fonts/specimen/Roboto" target="_blank"><i class="bhi-link"></i> Roboto Typeface on Google Fonts</a>
+    </div>
+    <img src="assets/images/TypographyPageIcon.svg" alt=""/>
+</header>
+
+<section class="design container">
+    <aside class="design-principle">
+        <h6>Design Principle: <span>Clarity</span></h6>
+        <p>Proper line length, adequate white space, and appropriate line breaks
+            are necessary to preserve readability, rhythm, and overall clarity.</p>
+    </aside>
+
+    <article class="line-height">
+        <h5>Line Height</h5>
+
+        <div>
+            <p style="line-height: 1em;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor.
+            </p>
+
+            <p class="not-accepted">
+                <i class="bhi-close-o"></i>These lines are too close for comfort
+            </p>
+        </div>
+        <div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor.
+            </p>
+
+            <p class="accepted">
+                <i class="bhi-check"></i>Thumbs up for great readability
+            </p>
+        </div>
+        <div>
+            <p style="line-height: 2.8em;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor.
+            </p>
+
+            <p class="not-accepted">
+                <i class="bhi-close-o"></i>I'm losing focus with all this space
+            </p>
+        </div>
+    </article>
+
+    <aside class="design-principle">
+        <h6>Design Principle: <span>Balance</span></h6>
+        <p>Typographic balance is critical to readability and understanding
+            information hierarchy. The weight and size of the font helps determine
+            which element on a page receives a user’s attention first.</p>
+    </aside>
+
+    <article class="line-length">
+        <h5>Line Length</h5>
+
+        <div class="too-short">
+            <div class="ruler">
+                <hr>
+                <span>30</span>
+
+                <p class="not-accepted">
+                    <i class="bhi-close-o"></i>Short lines interrupt the reader's rhythm
+                </p>
+            </div>
+            <p style="width: 15em;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor.
+            </p>
+        </div>
+        <div class="just-right">
+            <div class="ruler">
+                <hr>
+                <span>55-75</span>
+
+                <p class="accepted">
+                    <i class="bhi-check"></i>Optimal line length for readability
+                </p>
+            </div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor.
+            </p>
+        </div>
+        <div class="too-long">
+            <div class="ruler">
+                <hr>
+                <span>100</span>
+
+                <p class="not-accepted">
+                    <i class="bhi-close-o"></i>Difficult to jump to the next line
+                </p>
+            </div>
+            <p style="width: 55em; max-width: 100%;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor.
+            </p>
+        </div>
+    </article>
+
+    <aside class="imp-note">
+        <h6><i class="bhi-mobile"></i>How does this work with responsive design?</h6>
+        <p>
+            Line length is always relative to its font-size. This means that if a
+            font scales up or down in sizing (relative to its device's screen size) the
+            line length will automatically scale with it. Line length is about maintaining
+            a comfortable reading flow and rhythm from line to line.
+            <br><br>
+            <strong>When implementing</strong>, native line length will always be secondary to the width of
+            the text's container. This means that if a screen's width is smaller than
+            the text's native line length, the text will wrap early.
+        </p>
+    </aside>
+
+    <h2>Styles</h2>
+    <p>There a number of general styles that are present throughout the application. To maintain consistency, these styles should be adhered to as much as possible.</p>
+
+    <div class="example">
+        <div class="type-group">
+            <h1>Header 1</h1>
+            <span>Roboto</span>
+            <span><strong>Size: </strong>2.5em (35px)</span>
+            <span><strong>Weight: </strong>400</span>
+            <span><strong>Margin: </strong>0</span>
+            <span><strong>Padding: </strong>0.45em 0 0.35em</span>
+        </div>
+        <div class="type-group">
+            <h2>Header 2</h2>
+            <span>Roboto</span>
+            <span><strong>Size: </strong>2em (28px)</span>
+            <span><strong>Weight: </strong>500</span>
+            <span><strong>Margin: </strong>0</span>
+            <span><strong>Padding: </strong>0.75em 0 0.3em</span>
+        </div>
+        <div class="type-group">
+            <h3>Header 3</h3>
+            <span>Roboto</span>
+            <span><strong>Size: </strong>1.75em (24px)</span>
+            <span><strong>Weight: </strong>300</span>
+            <span><strong>Margin: </strong>0</span>
+            <span><strong>Padding: </strong>0.6em 0 0.4em</span>
+        </div>
+        <div class="type-group">
+            <h4>Header 4</h4>
+            <span>Roboto</span>
+            <span><strong>Size: </strong>1.375em (19.25px)</span>
+            <span><strong>Weight: </strong>400</span>
+            <span><strong>Margin: </strong>0</span>
+            <span><strong>Padding: </strong>0.75em 0 0.5em</span>
+        </div>
+        <div class="type-group">
+            <h5>Header 5</h5>
+            <span>Roboto</span>
+            <span><strong>Size: </strong>1.125em (15.75px)</span>
+            <span><strong>Weight: </strong>700</span>
+            <span><strong>Margin: </strong>0</span>
+            <span><strong>Padding: </strong>0.75em 0 0.25em</span>
+            <span><strong>Transform: </strong>UPPERCASE</span>
+        </div>
+        <div class="type-group">
+            <h6>Header 6</h6>
+            <span>Roboto</span>
+            <span><strong>Size: </strong>1.125em (15.75px)</span>
+            <span><strong>Weight: </strong>500</span>
+            <span><strong>Margin: </strong>0</span>
+            <span><strong>Padding: </strong>0.75em 0 0.25em</span>
+        </div>
+        <div class="type-group">
+            <span class="caption">Caption</span>
+        </div>
+        <div class="type-group">
+            <h4 class="novo-section-header">Section Header</h4>
+        </div>
+        <div class="type-group">
+            <h2 class="novo-section-header">
+              <i class="bhi-section"></i>
+              Large Section Header with Icon
+            </h2>
+        </div>
+        <div class="type-group">
+            <h6 class="novo-section-header">
+              <i class="bhi-idea"></i>
+              Small Section Header with Icon
+            </h6>
+        </div>
+    </div>
+    <pre><code>
+        &lt;h1&gt;Heading 1&lt;/h1&gt;
+        &lt;h2&gt;Heading 2&lt;/h2&gt;
+        &lt;h3&gt;Heading 3&lt;/h3&gt;
+        &lt;h4&gt;Heading 4&lt;/h4&gt;
+        &lt;h5&gt;Heading 5&lt;/h5&gt;
+        &lt;h6&gt;Heading 6&lt;/h6&gt;
+        &lt;p&gt;
+        Body
+        &lt;/p&gt;
+        &lt;hr&gt;
+        &lt;span class="caption"&gt;Caption&lt;/span&gt;
+        &lt;h4 class="novo-section-header"&gt;Section Header&lt;/h4&gt;
+        &lt;h2 class="novo-section-header"&gt;
+          &lt;i class="bhi-section"&gt;
+          Large Section Header with Icon
+        &lt;/h2&gt;
+        &lt;h6 class="novo-section-header"&gt;
+          &lt;i class="bhi-idea"&gt;
+          Small Section Header with Icon
+        &lt;/h6&gt;
+      </code>
+    </pre>
+</section>

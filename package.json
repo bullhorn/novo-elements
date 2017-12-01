@@ -1,0 +1,121 @@
+{
+  "name": "novo-elements",
+  "version": "2.2.0-rc.3",
+  "description": "Bullhorn's NOVO Element Repository for Angular 2",
+  "license": "MIT",
+  "scripts": {
+    "start": "ng serve",
+    "build": "copyfiles tsconfig.ngc.json node_modules/ng-packagr/lib/conf && ng-packagr -p ng-package.json && node copy-scss.js",
+    "build-ghpages": "ng build --output-path \"dist-ghpages\"",
+    "test": "ng test -cc --watch false --reporters text-summary",
+    "test-watch": "ng test",
+    "e2e": "ng e2e",
+    "lint": "ng lint && tslint \"src/**/*.ts\"",
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
+    "loc": "node_modules/sloc/bin/sloc src/platform --format json > ./coverage/sloc.json",
+    "pregalaxy": "npm run loc",
+    "preanalyze-mr": "npm run loc",
+    "galaxy": "galaxy analyze",
+    "analyze-mr": "galaxy analyze-mr",
+    "release": "standard-version",
+    "postrelease": "git push --follow-tags origin master; npm run build; cd dist && npm publish",
+    "snapshot-publish": "npm run build && bash snapshot-publish"
+  },
+  "pre-commit": [
+    "precommit-msg",
+    "lint"
+  ],
+  "keywords": [
+    "angular2"
+  ],
+  "author": "Joshua Godi <joshuagodi@gmail.com>",
+  "contributors": [{
+      "name": "Brian Kimball",
+      "email": "bkimball@bullhorn.com"
+    },
+    {
+      "name": "Alec Sibilia",
+      "email": "asibilia@bullhorn.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bullhorn/novo-elements.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bullhorn/novo-elements/issues"
+  },
+  "homepage": "https://github.com/bullhorn/novo-elements#readme",
+  "private": false,
+  "peerDependencies": {
+    "@angular/common": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0"
+  },
+  "dependencies": {
+    "@angular/cdk": "5.0.0-rc0",
+    "@types/dragula": "2.1.29",
+    "angular2-text-mask": "^8.0.2",
+    "date-fns": "^1.28.2",
+    "dragula": "3.7.2",
+    "hint.css": "2.4.1",
+    "post-robot": "5.0.5"
+  },
+  "devDependencies": {
+    "@angular/animations": "^5.0.0",
+    "@angular/cli": "1.5.4",
+    "@angular/common": "^5.0.0",
+    "@angular/compiler": "^5.0.0",
+    "@angular/compiler-cli": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@angular/http": "^5.0.0",
+    "@angular/language-service": "^5.0.0",
+    "@angular/platform-browser": "^5.0.0",
+    "@angular/platform-browser-dynamic": "^5.0.0",
+    "@angular/router": "^5.0.0",
+    "@types/jasmine": "~2.5.53",
+    "@types/jasminewd2": "~2.0.2",
+    "@types/node": "~6.0.60",
+    "classlist.js": "^1.1.20150312",
+    "codelyzer": "^4.0.1",
+    "copyfiles": "^1.2.0",
+    "core-js": "^2.4.1",
+    "coveralls": "^3.0.0",
+    "galaxy-parser": "^1.0.45",
+    "glob": "^7.1.2",
+    "jasmine-core": "~2.6.2",
+    "jasmine-spec-reporter": "~4.1.0",
+    "karma": "~1.7.0",
+    "karma-chrome-launcher": "~2.1.1",
+    "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^1.2.1",
+    "karma-jasmine": "~1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^1.5.0-rc.1",
+    "pre-commit": "^1.2.2",
+    "rxjs": "^5.5.2",
+    "standard-version": "^4.2.0",
+    "tslint": "~5.7.0",
+    "typescript": "~2.4.2",
+    "zone.js": "^0.8.14"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "galaxy": {
+    "display": "Novo Elements",
+    "type": "javascript",
+    "api": "github",
+    "owner": "bullhorn",
+    "repo": "novo-elements",
+    "goal": 80,
+    "public": true,
+    "threshold": 0.05,
+    "defaultBranch": "master",
+    "locations": {
+      "sloc": "/coverage/sloc.json",
+      "lcov": "/coverage/lcov.info"
+    }
+  }
+}

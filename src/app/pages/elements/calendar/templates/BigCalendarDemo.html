@@ -1,0 +1,16 @@
+<div>
+    <novo-calendar-date-change [view]="view" [(viewDate)]="viewDate">
+    </novo-calendar-date-change>
+
+    <novo-tiles [options]="views" [(ngModel)]="view"></novo-tiles>
+</div>
+<div [ngSwitch]="view" class="cal-demo-content">
+    <novo-calendar-month *ngSwitchCase="'month'" [(viewDate)]="viewDate" [events]="events" (dayClicked)="dayClicked($event.day.date)">
+    </novo-calendar-month>
+
+    <novo-calendar-week *ngSwitchCase="'week'" [(viewDate)]="viewDate" [events]="events" (dayClicked)="dayClicked($event.date)" [dayStartHour]="0" [dayEndHour]="23">
+    </novo-calendar-week>
+
+    <novo-calendar-day *ngSwitchCase="'day'" [(viewDate)]="viewDate" [events]="events" [dayStartHour]="0" [dayEndHour]="23">
+    </novo-calendar-day>
+</div>
