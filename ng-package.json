@@ -3,7 +3,8 @@
   "lib": {
     "entryFile": "src/platform/index.ts",
     "externals": {
-      "date-fns": "date-fns"
+      "date-fns": "date-fns",
+      "angular2-text-mask": "angular2-text-mask"
     }
   }
 }
