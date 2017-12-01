@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ng serve",
     "build": "copyfiles tsconfig.ngc.json node_modules/ng-packagr/lib/conf && ng-packagr -p ng-package.json && node copy-scss.js",
-    "build-ghpages": "ng build --output-path \"dist-ghpages\"",
+    "build-ghpages": "ng build -prod -aot false --output-path \"dist-ghpages\"",
     "test": "ng test -cc --watch false",
     "test-watch": "ng test",
     "e2e": "ng e2e",
