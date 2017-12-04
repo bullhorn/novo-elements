@@ -34,7 +34,28 @@ export { NovoFormModule } from './elements/form/Form.module';
 export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
 export { NovoCategoryDropdownModule } from './elements/category-dropdown/CategoryDropdown.module';
 export { NovoMultiPickerModule } from './elements/multi-picker/MultiPicker.module';
-export * from './elements/simple-table';
+export {
+    NovoTable, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter,
+    NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage, NovoActivityTableCustomHeader
+} from './elements/simple-table/table';
+export {
+    NovoSimpleCell, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleHeaderCell,
+    NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell
+} from './elements/simple-table/cell';
+export { NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleHeaderRowDef, NovoSimpleRowDef } from './elements/simple-table/row';
+export { NovoSimpleCellHeader, NovoSimpleFilterFocus } from './elements/simple-table/cell-header';
+export { NovoSortFilter, NovoSelection } from './elements/simple-table/sort';
+export { NovoSimpleTablePagination } from './elements/simple-table/pagination';
+export {
+    SimpleTableColumn, SimpleTablePaginationOptions, SimpleTableColumnFilterConfig,
+    SimpleTableColumnFilterOption, SimpleTableSearchOptions, SimpleTableActionColumnOption,
+    SimpleTableActionColumn, NovoSimpleSortFilter, NovoSimpleTableChange, NovoSimpleSelectionChange,
+    NovoSimplePaginationEvent
+} from './elements/simple-table/interfaces';
+export { ActivityTableDataSource, ActivityTableService, RemoteActivityTableService, StaticActivityTableService } from './elements/simple-table/table-source';
+export { ActivityTableRenderers } from './elements/simple-table/activity-table-renderers';
+export { NovoActivityTableState } from './elements/simple-table/state';
+export { NovoSimpleTableModule } from './elements/simple-table/simple-table.module'
 // Export specific elements that are used in local references and/or view children
 export { NovoTableElement, NovoTableConfig } from './elements/table/Table';
 // Export all services
@@ -65,7 +86,26 @@ export { NovoDropdownCell, INovoDropdownCellConfig } from './elements/table/extr
 export { FormValidators } from './elements/form/FormValidators';
 export { FormUtils } from './utils/form-utils/FormUtils';
 export { NovoFile } from './elements/form/extras/file/extras/file/File';
-export * from './elements/form/FormControls';
+export { BaseControl, NovoControlConfig, NovoGroupedControlConfig } from './elements/form/controls/BaseControl';
+export { ControlFactory } from './elements/form/controls/ControlFactory';
+export { AddressControl } from './elements/form/controls/address/AddressControl';
+export { CheckListControl } from './elements/form/controls/check-list/CheckListControl';
+export { CheckboxControl } from './elements/form/controls/checkbox/CheckboxControl';
+export { DateControl } from './elements/form/controls/date/DateControl';
+export { DateTimeControl } from './elements/form/controls/date-time/DateTimeControl';
+export { EditorControl } from './elements/form/controls/editor/EditorControl';
+export { FileControl } from './elements/form/controls/file/FileControl';
+export { NativeSelectControl } from './elements/form/controls/native-select/NativeSelectControl';
+export { PickerControl, AppendToBodyPickerControl, TablePickerControl } from './elements/form/controls/picker/PickerControl';
+export { QuickNoteControl } from './elements/form/controls/quick-note/QuickNoteControl';
+export { RadioControl } from './elements/form/controls/radio/RadioControl';
+export { ReadOnlyControl } from './elements/form/controls/read-only/ReadOnlyControl';
+export { SelectControl } from './elements/form/controls/select/SelectControl';
+export { TextAreaControl } from './elements/form/controls/text-area/TextAreaControl';
+export { TextBoxControl } from './elements/form/controls/textbox/TextBoxControl';
+export { TilesControl } from './elements/form/controls/tiles/TilesControl';
+export { TimeControl } from './elements/form/controls/time/TimeControl';
+export { GroupedControl } from './elements/form/controls/grouped/GroupedControl';
 export { NovoFormControl, NovoFormGroup } from './elements/form/NovoFormControl';
 export { NovoControlGroup, NovoControlGroupAddConfig } from './elements/form/ControlGroup';
 export { FieldInteractionApi } from './elements/form/FieldInteractionApi';
@@ -77,22 +117,22 @@ export { COUNTRIES, getCountries, getStateObjects, getStates, findByCountryCode,
 export { Helpers } from './utils/Helpers';
 export { ComponentUtils } from './utils/component-utils/ComponentUtils';
 export {
-  CalendarEventTimesChangedEvent,
-  WeekDay,
-  EventColor,
-  EventAction,
-  CalendarEvent,
-  WeekViewEvent,
-  WeekViewEventRow,
-  MonthViewDay,
-  MonthView,
-  DayViewEvent,
-  DayView,
-  DayViewHourSegment,
-  DayViewHour,
-  IsEventInPeriodArgs,
-  GetEventsInPeriodArgs,
-  GetDayViewArgs
+    CalendarEventTimesChangedEvent,
+    WeekDay,
+    EventColor,
+    EventAction,
+    CalendarEvent,
+    WeekViewEvent,
+    WeekViewEventRow,
+    MonthViewDay,
+    MonthView,
+    DayViewEvent,
+    DayView,
+    DayViewHourSegment,
+    DayViewHour,
+    IsEventInPeriodArgs,
+    GetEventsInPeriodArgs,
+    GetDayViewArgs
 } from './utils/calendar-utils/CalendarUtils';
 export * from './utils/calendar-utils/CalendarUtils';
 export { AppBridge, AppBridgeHandler, IAppBridgeOpenEvent, AppBridgeService, DevAppBridge, DevAppBridgeService } from './utils/app-bridge/AppBridge';

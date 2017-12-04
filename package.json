@@ -96,11 +96,11 @@
     "ng-packagr": "^1.5.0-rc.1",
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.2",
-    "rxjs": "^5.5.2",
+    "rxjs": "5.5.2",
     "standard-version": "^4.2.0",
     "tslint": "~5.7.0",
     "typescript": "~2.4.2",
-    "zone.js": "^0.8.14"
+    "zone.js": "0.8.14"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

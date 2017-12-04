@@ -38,6 +38,7 @@ import { NovoPopOverModule } from './elements/popover/PopOver.module';
 import { NovoSearchBoxModule } from './elements/search/SearchBox.module';
 import { GooglePlacesModule } from './elements/places/places.module';
 import { NovoValueModule } from './elements/value/Value.module';
+import { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
 
 import { NovoOverlayModule } from './elements/overlay/Overlay.module';
 import { NovoLabelService } from './services/novo-label-service';
@@ -47,7 +48,6 @@ import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
-import { NovoSimpleTableModule } from './elements/simple-table';
 
 @NgModule({
     imports: [

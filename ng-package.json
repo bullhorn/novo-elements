@@ -37,7 +37,8 @@
       "rxjs/operators/skip": "Rx.Observable",
       "rxjs/Observable": "Rx",
       "angular2-text-mask": "ng.text",
-      "date-fns": "DateFNS"
+      "date-fns": "DateFNS",
+      "dragula": "dragula"
     }
   }
 }
