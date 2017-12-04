@@ -141,7 +141,7 @@ describe('Elements: QuickNoteElement', () => {
                             }
                         }
                     },
-                    cancel: () => {}
+                    cancel: () => { }
                 });
             },
             blurByUser: (): void => {
@@ -198,15 +198,15 @@ describe('Elements: QuickNoteElement', () => {
                                 type: 3, // CKEDITOR.NODE_TEXT
                                 $: { // The native element
                                     parentElement: {
-                                        appendChild: () => {}
+                                        appendChild: () => { }
                                     }
                                 }
                             },
                             startOffset: this.currentWord.length,
-                            moveToPosition: () => {}
+                            moveToPosition: () => { }
                         }];
                     },
-                    selectRanges: () => {}
+                    selectRanges: () => { }
                 };
             },
             editable: (): any => {
@@ -237,7 +237,7 @@ describe('Elements: QuickNoteElement', () => {
                 }
             },
             focusManager: {
-                blur: (): void => {}
+                blur: (): void => { }
             },
             removeAllListeners: (): void => {
             },
@@ -254,7 +254,7 @@ describe('Elements: QuickNoteElement', () => {
             },
             instances: {
                 'instance': {
-                    destroy: () => {}
+                    destroy: () => { }
                 }
             }
         };
@@ -279,10 +279,6 @@ describe('Elements: QuickNoteElement', () => {
         component.registerOnTouched(fakeParentForm.onModelTouched);
     });
 
-    afterAll(fakeAsync(() => {
-        component.ngOnDestroy();
-    }));
-
     describe('QuickNote Functionality', () => {
 
         it('should add the selected item to the list of references and populate note.', fakeAsync(() => {
@@ -299,7 +295,7 @@ describe('Elements: QuickNoteElement', () => {
             fakeCkEditorInstance.userPausedAfterEntry();
 
             expect(fakeResultsDropdown.visible).toBe(true);
-            expect(fakeResultsDropdown.nativeElementProperties).toEqual({'margin-top': '30px'});
+            expect(fakeResultsDropdown.nativeElementProperties).toEqual({ 'margin-top': '30px' });
             expect(fakeParentForm.getValue()).toEqual({
                 note: 'Note about: @john',
                 references: {}
