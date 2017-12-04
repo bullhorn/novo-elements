@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "2.2.0-rc.6",
+  "version": "2.2.0-rc.7",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "license": "MIT",
   "scripts": {
@@ -11,7 +11,7 @@
     "build-ghpages": "ng build -prod -aot false --output-path \"dist-ghpages\"",
     "test": "ng test -cc --watch false",
     "test-watch": "ng test",
-    "lint": "tslint --format codeFrame -c ./tslint.json \"./src/**/*.ts\" -e \"./src/**/typings.d.ts\" -e \"./src/environments/**\"",
+    "lint": "tslint --format codeFrame -c ./tslint.json \"./src/app/**/*.ts\" \"./src/platform/**/*.ts\" --type-check --project tsconfig.json",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "loc": "node_modules/sloc/bin/sloc src/platform --format json > ./coverage/sloc.json",
     "pregalaxy": "npm run loc",
