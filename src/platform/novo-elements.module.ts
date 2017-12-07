@@ -41,6 +41,7 @@ import { NovoValueModule } from './elements/value/Value.module';
 import { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
 
 import { NovoOverlayModule } from './elements/overlay/Overlay.module';
+import { DateFormatService } from './services/date-format/DateFormat';
 import { NovoLabelService } from './services/novo-label-service';
 import { NovoDragulaService } from './elements/dragula/DragulaService';
 import { GooglePlacesService } from './elements/places/places.service';
@@ -95,6 +96,7 @@ import { FormUtils } from './utils/form-utils/FormUtils';
     ],
     providers: [
         { provide: ComponentUtils, useClass: ComponentUtils },
+        { provide: DateFormatService, useClass: DateFormatService },
         { provide: NovoLabelService, useClass: NovoLabelService },
         { provide: NovoDragulaService, useClass: NovoDragulaService },
         { provide: GooglePlacesService, useClass: GooglePlacesService },
