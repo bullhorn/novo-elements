@@ -35,7 +35,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
                 <button type="button" theme="icon" icon="filter" [class.active]="filterActive"></button>
                 <div class="header">
                     <span>{{ labels.filters }}</span>
-                    <button theme="dialogue" color="negative" icon="times" (click)="clearFilter()" *ngIf="filter" data-automation-id="novo-activity-table-filter-clear">{{ labels.clear }}</button>
+                    <button theme="dialogue" color="negative" icon="times" (click)="clearFilter()" *ngIf="filter !== null && filter !== undefined && filter !== ''" data-automation-id="novo-activity-table-filter-clear">{{ labels.clear }}</button>
                 </div>
                 <ng-container [ngSwitch]="config.filterConfig.type">
                     <list *ngSwitchCase="'date'">
@@ -53,8 +53,8 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
                         </div>
                     </list>
                     <list *ngSwitchCase="'select'">
-                        <item [class.active]="filter === option" *ngFor="let option of config.filterConfig.options" (click)="filterData(option.value || option)" [attr.data-automation-id]="'novo-activity-table-filter-' + (option?.label || option)">
-                            <span>{{ option?.label || option }}</span> <i class="bhi-check" *ngIf="filter === (option.value || option)"></i>
+                        <item [class.active]="filter === option" *ngFor="let option of config.filterConfig.options" (click)="filterData(option)" [attr.data-automation-id]="'novo-activity-table-filter-' + (option?.label || option)">
+                            <span>{{ option?.label || option }}</span> <i class="bhi-check" *ngIf="option.hasOwnProperty('value') ? filter === option.value : filter === option"></i>
                         </item>
                     </list>
                     <list *ngSwitchDefault>
@@ -106,7 +106,7 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
 
     public icon: string = 'sortable';
     public id: string;
-    public filter: string;
+    public filter: string | boolean;
     public direction: string;
     public filterActive: boolean = false;
     public sortActive: boolean = false;
@@ -181,7 +181,11 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
             }
         }
         if (filter) {
-            this.filter = filter;
+            if (filter.hasOwnProperty('value')) {
+                this.filter = filter.value;
+            } else {
+                this.filter = filter;
+            }
         }
         if (this.changeTimeout) {
             clearTimeout(this.changeTimeout);

@@ -39,6 +39,7 @@ interface MockData {
     id: number;
     name: string;
     status: string;
+    enabled: boolean;
     date: number;
     money: string;
 }
@@ -76,6 +77,22 @@ export class SimpleTableDemoComponent implements OnInit {
             config: {
                 sortable: false,
                 filterable: true
+            }
+        },
+        {
+            id: 'enabled',
+            label: 'Enabled',
+            renderer: ActivityTableRenderers.propertyRenderer<MockData>('enabled'),
+            config: {
+                sortable: true,
+                filterable: true,
+                filterConfig: {
+                    type: 'select',
+                    options: [
+                        { value: true, label: 'True' },
+                        { value: false, label: 'False' },
+                    ],
+                },
             }
         },
         {
@@ -173,6 +190,7 @@ export class SimpleTableDemoComponent implements OnInit {
             this.staticData.push({
                 id: i,
                 name: `Name ${i}`,
+                enabled: i % 2 === 0,
                 date: today.getTime() - (1000 * 60 * 60 * 24 * i),
                 status: mockStatuses[Math.floor(Math.random() * 3)],
                 money: `$${Math.floor(Math.random() * 100)}`,
@@ -234,6 +252,7 @@ export class SimpleTableDemoComponent implements OnInit {
             this.staticData.push({
                 id: i,
                 name: `BOB ${i}`,
+                enabled: i % 2 === 0,
                 date: today.getTime() - (1000 * 60 * 60 * 24 * i),
                 status: mockStatuses[Math.floor(Math.random() * 3)],
                 money: `$${Math.floor(Math.random() * 100)}`,

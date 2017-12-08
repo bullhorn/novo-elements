@@ -3,6 +3,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { NovoSimpleTableChange, NovoSimpleSelectionChange } from './interfaces';
 import { NovoActivityTableState } from './state';
+import { Helpers } from '../../utils/Helpers';
 
 @Directive({
     selector: '[novoSortFilter]',
@@ -10,9 +11,9 @@ import { NovoActivityTableState } from './state';
 export class NovoSortFilter {
     constructor(private state: NovoActivityTableState) { }
 
-    public filter(id: string, value: string, transform: Function): void {
+    public filter(id: string, value: any, transform: Function): void {
         let filter;
-        if (value) {
+        if (!Helpers.isBlank(value)) {
             filter = { id, value, transform };
         } else {
             filter = undefined;
