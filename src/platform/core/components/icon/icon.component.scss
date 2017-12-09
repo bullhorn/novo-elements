@@ -1,0 +1,44 @@
+$icon-size: 2em; // 24px Base background size
+$base-icon-size: 1.4em; //18px Base font-size
+$icon-border-radius: .55em; //18px Base font-size
+
+novo-icon {
+    i {
+        width: $base-icon-size;
+        height: $base-icon-size;
+        text-align: center;
+
+        * {
+            display: none;
+        }
+    }
+
+    @each $basic,
+    $color in $all-colors {
+        &[theme="#{$basic}"] {
+            i {
+                color: #fff;
+                font-size: 1em;
+                background: $color;
+                border-radius: $icon-border-radius;
+                height: $icon-size;
+                width: $icon-size;
+                &:before {
+                    line-height: $icon-size;
+                }
+            }
+        }
+    }
+
+    @each $basic,
+    $color in $all-colors {
+        &[color="#{$basic}"] {
+            i {
+                color: $color;
+                &:before {
+                    color: $color;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+<div class="demo-section">
+  <div class="demo-title">
+    <label routerLink="." [attr.fragment]="name" [id]="name">{{ label }}</label>
+    <i class="bhi-sortable" (click)="toggleCode()" [class.code-shown]="showCode"></i>
+  </div>
+  <div class="demo-sample">
+    <ng-content></ng-content>
+  </div>
+  <div class="code-blocks" [class.active]="showCode">
+    <div class="code-tab-labels">
+      <label for="ts" *ngIf="ts" [class.active]="activeTab === 'ts'" (click)="changeTab('ts')">Typescript</label>
+      <label for="html" *ngIf="html" [class.active]="activeTab === 'html'" (click)="changeTab('html')">HTML</label>
+      <label for="style" *ngIf="style" [class.active]="activeTab === 'style'" (click)="changeTab('style')">SCSS</label>
+    </div>
+    <section class="code-tab-content" *ngIf="ts" [class.active]="activeTab === 'ts'">
+      <pre class="prettyprint linenums lang-js">{{ ts }}</pre>
+    </section>
+    <section class="code-tab-content" *ngIf="html" [class.active]="activeTab === 'html'">
+      <pre class="prettyprint linenums lang-html">{{ html }}</pre>
+    </section>
+    <section class="code-tab-content" *ngIf="style" [class.active]="activeTab === 'style'">
+      <pre class="prettyprint linenums lang-css">{{ style }}</pre>
+    </section>
+  </div>
+</div>

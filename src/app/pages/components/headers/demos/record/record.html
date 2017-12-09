@@ -1,0 +1,47 @@
+<header [theme]="entity ">
+  <novo-icon>company</novo-icon>
+  <h1>Acme Corporation</h1>
+  <small>Imports/Exports</small>
+  <novo-action icon="flag "></novo-action>
+  <novo-action icon="refresh "></novo-action>
+  <novo-action icon="times "></novo-action>
+  <main layout="row" layout-align="start start">
+    <novo-value [data]="categoryData" [meta]="categoryMeta"></novo-value>
+    <novo-value [data]="corporateUserData" [meta]="corporateUserMeta"></novo-value>
+    <novo-value [data]="dateTimeValueData" [meta]="dateTimeValueMeta"></novo-value>
+    <span flex></span>
+    <button theme="icon" icon="google" inverse></button>
+    <button theme="icon" icon="twitter" inverse></button>
+    <button theme="icon" icon="facebook" inverse></button>
+    <novo-menu>
+      <button theme="secondary" icon="collapse" inverse>Actions</button>
+      <novo-list>
+        <novo-list-item> Action 1 </novo-list-item>
+        <novo-list-item> Action 2 </novo-list-item>
+        <novo-list-item> Action 3 </novo-list-item>
+      </novo-list>
+    </novo-menu>
+  </main>
+  <novo-nav theme="color" [outlet]="colornav" direction="horizontal">
+    <novo-tab>
+      <span>
+        <i class="bhi-person"></i>Tab 1</span>
+    </novo-tab>
+    <novo-tab>
+      <span>
+        <i class="bhi-person"></i>Tab 2</span>
+    </novo-tab>
+    <novo-tab [disabled]="true">
+      <span>
+        <i class="bhi-person"></i>Tab 3</span>
+    </novo-tab>
+  </novo-nav>
+</header>
+<novo-nav-outlet #colornav>
+  <novo-nav-content>
+    <h1>Tab 1 Content</h1>
+  </novo-nav-content>
+  <novo-nav-content>
+    <h1>Tab 2 Content</h1>
+  </novo-nav-content>
+</novo-nav-outlet>

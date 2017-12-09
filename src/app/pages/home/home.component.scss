@@ -1,0 +1,108 @@
+@import "../../../platform/styles/global/variables.scss";
+:host {
+  background-color: lighten($dark, 50%);
+}
+
+div.banner {
+  color: $white;
+  background-color: lighten($dark, 15%);
+  padding: $large*2;
+  h2,
+  h5 {
+    color: $white;
+  }
+  h2 {
+    padding-top: 0;
+  }
+  h5 {
+    padding-bottom: 25px;
+  }
+  >div {
+    padding: $large;
+  }
+  a.fork-me {
+    color: $white;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8em;
+  }
+}
+
+div.spacer {
+  height: 40px;
+  background-color: lighten($dark, 10%);
+}
+
+div.callout {
+  background-color: $off-white;
+  padding: $large;
+  >div {
+    padding: $small;
+    >h5 {
+      color: $bittersweet;
+    }
+  }
+}
+
+div.built-with {
+  background-color: lighten($dark, 50%);
+  padding: $large*2 $large;
+  p {
+    max-width: 100%;
+  }
+  img {
+    height: 200px;
+  }
+}
+
+.jump-to {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: 2px solid rgba($mint, 0.25);
+  padding: 10px;
+  max-width: 30em;
+  border-radius: 3px;
+  margin: 25px 0;
+  &:last-child {
+    margin-top: $medium;
+  }
+  &:first-child {
+    margin-bottom: $medium;
+  }
+  i {
+    flex-shrink: 0;
+    font-size: 1em;
+    color: $mint;
+    width: 30px;
+    height: 30px;
+    line-height: 26px;
+    border-radius: 50%;
+    border: 2px solid $mint;
+    display: inline-block;
+    margin-right: 15px;
+    text-align: center;
+  }
+  &.brand {
+    border: 2px solid rgba($bittersweet, 0.25);
+    i {
+      color: $bittersweet;
+      border: 2px solid $bittersweet;
+    }
+  }
+  &.angular {
+    border: 2px solid rgba(#DD0330, 0.25);
+    i {
+      color: #DD0330;
+      border: 2px solid #DD0330;
+    }
+  }
+  >span>a {
+    display: block;
+    padding-top: 3px;
+  }
+}

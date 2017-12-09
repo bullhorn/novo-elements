@@ -1,0 +1,27 @@
+<demo-section [name]="name" [src]="src">
+    
+      <h3>Contents</h3>
+    
+      <ul class="demo-nav">
+        <li><a routerLink="." fragment="usage">Usage</a></li>
+        <li><a routerLink="." fragment="examples">Examples</a>
+          <ul>
+            <li><a routerLink="." fragment="basic">Basic</a></li>
+            <li><a routerLink="." fragment="timer">Auto Timer</a></li>
+          </ul>
+        </li>
+      </ul>
+    
+      <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
+      <div class="usage-doc" [innerHtml]="usageDoc"></div>
+    
+      <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
+    
+      <demo-box class="slides-demo" [ts]="demos.basic.ts" [html]="demos.basic.html" name="basic" label="slides: Basic">
+        <demo-slides-basic></demo-slides-basic>
+      </demo-box>
+      <demo-box class="slides-demo" [ts]="demos.timer.ts" [html]="demos.timer.html" name="timer" label="Auto Timer">
+        <demo-slides-timer></demo-slides-timer>
+      </demo-box>
+  </demo-section>
+    

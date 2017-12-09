@@ -1,63 +1,39 @@
-// --------------------------------------------------
-// Global
-// --------------------------------------------------
+// Global Styles
 @import "./styles/global/reset";
 @import "./styles/global/functions";
 @import "./styles/global/variables";
 @import "./styles/global/include-media";
-@import "./styles/global/flex-grid";
 @import "./styles/global/layout";
-@import './styles/global/cdk';
-@include cdk-overlay();
-// --------------------------------------------------
-// Plugins (Third-Party-Libraries)
-// --------------------------------------------------
-@import "hint";
-// --------------------------------------------------
-// Content
-// --------------------------------------------------
+@import "./styles/global/cdk";
 @import "./styles/content/typography";
-// --------------------------------------------------
-// Elements
-// --------------------------------------------------
-@import "./elements/simple-table/table";
-@import "./elements/tabs/Tabs";
-@import "./elements/radio/Radio";
-@import "./elements/button/Button";
-@import "./elements/toast/Toast";
-@import "./elements/modal/Modal";
-@import "./elements/card/Card";
-@import "./elements/calendar/month/CalendarMonthView";
-@import "./elements/calendar/week/CalendarWeekView";
-@import "./elements/calendar/day/CalendarDayView";
-@import "./elements/calendar/common/CalendarDateChange";
-@import "./elements/loading/Loading";
-@import "./elements/loading/NovoSpinner";
-@import "./elements/select/Select";
-@import "./elements/picker/Picker";
-@import "./elements/picker/extras/grouped-multi-picker-results/GroupedMultiPickerResults";
-@import "./elements/chips/Chips";
-@import "./elements/dropdown/Dropdown";
-@import "./elements/switch/Switch";
-@import "./elements/date-picker/DatePicker";
-@import "./elements/time-picker/TimePicker";
-@import "./elements/date-time-picker/DateTimePicker";
-@import "./elements/header/Header";
-@import "./elements/list/List";
-@import "./elements/table/Table";
-@import "./elements/table/extras/pagination/Pagination";
-@import "./elements/dragula/Dragula";
-@import "./elements/form/Form";
-@import "./elements/quick-note/QuickNote";
-@import "./elements/tiles/Tiles";
-@import "./elements/tooltip/Tooltip";
-@import "./elements/slider/Slider";
-@import "./elements/tip-well/TipWell";
-@import "./elements/ckeditor/CKEditor";
-@import "./elements/category-dropdown/CategoryDropdown";
-@import "./elements/multi-picker/MultiPicker";
-@import "./elements/popover/PopOver";
-@import "./elements/table/extras/dropdown-cell/DropdownCell";
-@import "./elements/search/SearchBox";
-@import "./elements/places/places.component";
-@import "./elements/value/Values";
+@include cdk-overlay();
+@include bullhorn-layout();
+// Components
+@import "./core/components/button/button.component";
+@import "./core/components/header/header.component";
+@import "./core/components/loading/loading.component";
+@import "./core/components/list/list.component";
+@import "./core/components/tiles/tiles.component";
+@import "./core/components/icon/icon.component";
+@import "./core/components/menu/menu.component";
+@import "./core/components/card/card.component";
+@import "./core/components/dialog/dialog-container.component";
+@import "./core/components/tabs/tabs.component";
+@import "./core/components/value/value.component";
+    
+[hidden] {
+    display: none !important;
+}
+
+.novo-overlay-panel {
+    & > * {
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+}
+
+@each $background,
+$color in $base-colors {
+    .#{$background} {
+        background-color: $color;
+    }
+}

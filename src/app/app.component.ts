@@ -1,48 +1,54 @@
-// NG2
-import { Component, ViewContainerRef } from '@angular/core';
-import { Router } from '@angular/router';
-// Vendor
-import { NovoToastService, NovoModalService } from './../platform/index';
+import { Component, AfterContentInit, Inject, ElementRef, ViewChild } from '@angular/core';
+import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
+import { DOCUMENT } from '@angular/platform-browser';
+import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
+
+PageScrollConfig.defaultDuration = 11;
+PageScrollConfig.defaultScrollOffset = 70;
 
 @Component({
-    selector: 'demo-app',
-    templateUrl: './app.component.html',
+  selector: 'demo-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-    menuOpen: boolean = false;
-    version: string;
-    designRoutes: Array<any>;
-    componentRoutes: Array<any>;
-    utilRoutes: Array<any>;
+export class AppComponent implements AfterContentInit {
+  @ViewChild('main') private main: ElementRef;
 
-    constructor(router: Router, private viewContainerRef: ViewContainerRef, toaster: NovoToastService, modalService: NovoModalService) {
-        toaster.parentViewContainer = viewContainerRef;
-        modalService.parentViewContainer = viewContainerRef;
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private pageScrollService: PageScrollService,
+    @Inject(DOCUMENT) private document: any) {
+  }
 
-        this.menuOpen = false;
-        this.version = 'VERSION';
+  public ngAfterContentInit(): any {
+    const getUrl: Function = (router: Router) => router.routerState.snapshot.url.slice(0, router.routerState.snapshot.url.indexOf('#'));
+    let previousURL: string = getUrl(this.router);
 
-        this.designRoutes = router.config.filter((r: any) => r.data.section === 'design').sort(this.sortMenu);
-        this.componentRoutes = router.config.filter((r: any) => r.data.section === 'components').sort(this.sortMenu);
-        this.utilRoutes = router.config.filter((r: any) => r.data.section === 'utils').sort(this.sortMenu);
+    const scrollAndPrettyPrint: Function = (event: any): void => {
+      if (!(event instanceof NavigationEnd)) {
+        return;
+      }
 
-        router.events.subscribe(() => {
-            window.scrollTo(0, 0);
-            this.menuOpen = false;
+      let currentURL: string = getUrl(this.router);
+
+      if (typeof PR !== 'undefined' && previousURL !== currentURL) {
+        previousURL = currentURL;
+        PR.prettyPrint();
+      }
+
+      let hash: string = this.route.snapshot.fragment;
+      if (hash) {
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+          document: this.document,
+          scrollTarget: `#${hash}`,
+          scrollingViews: [
+            (this.main.nativeElement.querySelector('#main') || {}),
+          ],
         });
-    }
+        this.pageScrollService.start(pageScrollInstance);
+      }
+    };
 
-    sortMenu(a, b) {
-        if (a.data.title < b.data.title) {
-            return -1;
-        }
-        if (a.data.title > b.data.title) {
-            return 1;
-        }
-        return 0;
-    }
-
-    toggleMenu() {
-        this.menuOpen = !this.menuOpen;
-    }
+    this.router.events.subscribe((event: any) => setTimeout(() => scrollAndPrettyPrint(event), 50));
+  }
 }

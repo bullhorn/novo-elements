@@ -4,12 +4,12 @@
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
     "module": "es2015",
-    "types": [
-      "node"
-    ]
+    "types": []
   },
   "exclude": [
-    "test.ts",
+    "jest.ts",
+    "jest-mocks.ts",
+    "jest-global-mocks.ts",
     "**/*.spec.ts"
   ]
 }

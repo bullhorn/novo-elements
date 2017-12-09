@@ -1,0 +1,32 @@
+<novo-list>
+  <h3 novo-subheader>Folders</h3>
+  <novo-list-item *ngFor="let folder of folders">
+    <novo-icon>file</novo-icon>
+    <h4 novo-line>{{ folder.name }}</h4>
+    <p novo-line> {{ folder.updated | date }} </p>
+  </novo-list-item>
+
+  <novo-divider></novo-divider>
+  <h3 novo-subheader>Folders 2</h3>
+  <novo-list-item *ngFor="let folder of folders">
+    <novo-icon>file</novo-icon>
+    <div novo-line>
+      <h4>{{ folder.name }}</h4>
+      <span flex></span>
+      <span>
+        <novo-icon>clock</novo-icon>{{folder.updated | date: 'shortTime'}}</span>
+    </div>
+    <p novo-line>Some description about the file or folder. </p>
+  </novo-list-item>
+
+  <novo-divider></novo-divider>
+  <h3 novo-subheader>Notes</h3>
+  <novo-list-item *ngFor="let note of notes">
+    <novo-icon>note</novo-icon>
+    <h4 novo-line>{{ note.name }}</h4>
+    <p novo-line> {{ note.updated | date }} </p>
+    <button theme="dialogue">
+      <novo-icon>next</novo-icon>
+    </button>
+  </novo-list-item>
+</novo-list>

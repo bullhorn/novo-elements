@@ -1,13 +1,6 @@
 sudo: required
 dist: trusty
 
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
-
 language: node_js
 node_js:
   - 8
@@ -23,10 +16,12 @@ before_script:
 install:
   - npm install
   - npm install -g angular-cli-ghpages
+  - npm install -g cypress-cli
 
 script:
   - npm run lint
   - npm run test
+  # - cypress run --record --key 8f5264fd-be28-4fdf-bbc3-16102b8b0739 --env host=https://bullhorn.github.io/novo-elements
   - npm run build
   - npm run build-ghpages
 

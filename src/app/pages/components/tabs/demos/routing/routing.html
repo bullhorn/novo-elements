@@ -1,0 +1,9 @@
+<header theme="light">
+  <novo-nav theme="white" router>
+    <novo-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive"
+      [disabled]="link.disabled">
+      <span>
+        <novo-icon>{{link.icon}}</novo-icon>{{link.label}}</span>
+    </novo-tab-link>
+  </novo-nav>
+</header>

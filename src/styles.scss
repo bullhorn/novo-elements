@@ -1,55 +1,133 @@
-// --------------------------------------------------
-// Plugins (Third-Party-Libraries)
-// --------------------------------------------------
 @import "./platform/novo-elements";
-// --------------------------------------------------
-// Global
-// --------------------------------------------------
-@import "assets/styles/reset";
-@import "assets/styles/general";
-@import "assets/styles/main";
-@import "assets/styles/sidenav";
-@import "assets/styles/highlight";
-@import "assets/styles/media";
-// --------------------------------------------------
-// Pages
-// --------------------------------------------------
-// Design
-@import "app/pages/home/Home";
-@import "app/pages/design/color/Color";
-@import "app/pages/design/composition/Composition";
-@import "app/pages/design/iconography/Iconography";
-@import "app/pages/design/typography/Typography";
-// Elements
-@import "app/pages/elements/button/ButtonDemo";
-@import "app/pages/elements/loading/LoadingDemo";
-@import "app/pages/elements/card/CardDemo";
-@import "app/pages/elements/toast/ToastDemo";
-@import "app/pages/elements/tooltip/TooltipDemo";
-@import "app/pages/elements/header/HeaderDemo";
-@import "app/pages/elements/tabs/TabsDemo";
-@import "app/pages/elements/tiles/TilesDemo";
-@import "app/pages/elements/modal/ModalDemo";
-@import "app/pages/elements/quick-note/QuickNoteDemo";
-@import "app/pages/elements/radio/RadioDemo";
-@import "app/pages/elements/dropdown/DropdownDemo";
-@import "app/pages/elements/select/SelectDemo";
-@import "app/pages/elements/list/ListDemo";
-@import "app/pages/elements/switch/SwitchDemo";
-@import "app/pages/elements/dragula/DragulaDemo";
-@import "app/pages/elements/slides/SlidesDemo";
-@import "app/pages/elements/picker/PickerDemo";
-@import "app/pages/elements/chips/ChipsDemo";
-@import "app/pages/elements/calendar/CalendarDemo";
-@import "app/pages/elements/editor/EditorDemo";
-@import "app/pages/elements/tip-well/TipWellDemo";
-@import "app/pages/elements/table/TableDemo";
-@import "app/pages/elements/form/FormDemo";
-@import "app/pages/elements/category-dropdown/CategoryDropdownDemo";
-@import "app/pages/elements/popover/PopoverDemo";
-@import "app/pages/elements/date-picker/DatePickerDemo";
-@import "app/pages/elements/field-interactions/FieldInteractionsDemo";
-@import "app/pages/elements/simple-table/SimpleTableDemo";
-// Utils
-@import "app/pages/utils/pipes/PipesDemo";
-@import "app/pages/utils/app-bridge/AppBridgeDemo";
+@import "./app/pages/components/components.component";
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.demo-route-animation {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+main.demo-pages {
+    position: relative;
+    flex: 1;
+    background-color: $off-white;
+    overflow: auto;
+}
+
+section.demo-section {
+    height: 100%;
+    >nav {
+        overflow: auto;
+        min-width: 150px;
+        max-width: 150px;
+        height: 100%;
+        background-color: lighten($dark, 15%);
+        >a {
+            font-size: 0.9em;
+            width: 100%;
+            padding: $medium;
+            color: $white;
+            border-bottom: 1px solid lighten($dark, 25%);
+            transition: background-color 500ms;
+            &.active {
+                background-color: lighten($dark, 25%);
+            }
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+    >div {
+        position: relative;
+        height: 100%;
+        overflow: auto;
+    }
+}
+
+ul.demo-nav {
+    padding-left: $large*1.5;
+    font-size: 1.1em;
+    ul {
+        padding-left: $large;
+    }
+}
+
+div.usage-doc {
+    pre {
+        background: darken($background, 3%);
+        padding: $small;
+        code {
+            font-size: 12px;
+            font-family: "Roboto", sans-serif, monospace;
+            background: inherit;
+            color: inherit;
+            border: none;
+            padding: 0;
+        }
+    }
+}
+
+div.demo-box-section {
+    label {
+        display: block;
+        text-transform: capitalize;
+        font-weight: 400;
+        font-style: italic;
+        margin-bottom: $small/2;
+    }
+}
+
+div.demo-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: $dark;
+}
+
+svg.demo-logo {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    height: 250px;
+    display: block;
+    .center-dot {
+        fill: $white;
+    }
+    .outer-ring {
+        fill: $bittersweet;
+        transform-origin: 50% 50%;
+        animation-duration: 20000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-name: rotate-back;
+    }
+    .inner-ring {
+        fill: $bittersweet;
+        transform-origin: 50% 50%;
+        animation-duration: 20000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-name: rotate;
+    }
+    &.fast {
+        max-width: 100px;
+        height: inherit;
+        .outer-ring,
+        .inner-ring {
+            animation-duration: 1000ms;
+            animation-name: rotate;
+        }
+    }
+}

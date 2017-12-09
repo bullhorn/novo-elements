@@ -9,8 +9,8 @@
     "copy-scss": "node copy-scss.js",
     "cleanup-dist": "rimraf dist/src",
     "build-ghpages": "ng build -prod -aot false --output-path \"dist-ghpages\"",
-    "test": "ng test -cc --watch false",
-    "test-watch": "ng test",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "lint": "tslint --format codeFrame -c ./tslint.json \"./src/app/**/*.ts\" \"./src/platform/**/*.ts\" --type-check --project tsconfig.json",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "loc": "node_modules/sloc/bin/sloc src/platform --format json > ./coverage/sloc.json",
@@ -21,6 +21,25 @@
     "release": "standard-version",
     "postrelease": "git push --follow-tags origin master; npm run build; cd dist && npm publish",
     "snapshot-publish": "bash snapshot-publish"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupTestFrameworkScriptFile": "<rootDir>/src/jest.ts",
+    "testRegex": "src/platform/.*\\.spec\\.(ts|js)$",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "html"
+    ],
+    "collectCoverageFrom": [
+      "src/platform/**/*.ts",
+      "!src/platform/**/index.ts",
+      "!src/platform/**/*.module.ts",
+      "!src/platform/**/*.d.ts",
+      "!**/node_modules/**"
+    ]
   },
   "pre-commit": [
     "precommit-msg",

@@ -1,0 +1,12 @@
+<div class="header buttons-demo" [ngClass]="color" (click)="changeColor()">
+  <button theme="icon" icon="print" inverse></button>
+  <button theme="icon" icon="print" inverse disabled></button>
+</div>
+
+<ng-container *ngFor="let color of colors;let i = index;">
+  <button theme="icon" [color]="color" icon="person">{{ color }}</button>
+</ng-container>
+<br/>
+<ng-container *ngFor="let color of colors;let i = index;">
+  <button theme="icon" [color]="color" icon="person" disabled="true">{{ color }}</button>
+</ng-container>

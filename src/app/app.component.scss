@@ -1,0 +1,43 @@
+@import "../platform/styles/global/variables";
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+nav {
+  color: $white;
+  background: $dark;
+  padding: $small/2 $small;
+  min-height: 50px;
+  a.brand {
+    min-width: 150px;
+    color: $white;
+    border-bottom: 2px solid transparent;
+    border-top: 2px solid transparent;
+    padding: $small/2 0;
+    font-size: 1.2em;
+    img {
+      height: 25px;
+      padding-right: $small;
+    }
+  }
+  div.links {
+    a {
+      margin: 0 $small;
+      padding: $small/2 0;
+      color: $white;
+      border-bottom: 2px solid transparent;
+      border-top: 2px solid transparent;
+      transition: all 500ms;
+      &.active {
+        color: $bittersweet;
+        border-bottom-color: $bittersweet;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

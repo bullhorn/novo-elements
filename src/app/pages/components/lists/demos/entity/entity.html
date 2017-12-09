@@ -1,0 +1,55 @@
+<novo-list>
+  <h3 novo-subheader>Entity List</h3>
+  <ng-container *ngFor="let entity of entities">
+    <ng-container [ngSwitch]="entity?._subtype">
+      <ng-container *ngSwitchCase="'Candidate'">
+        <novo-list-item>
+          <novo-icon theme="candidate">candidate</novo-icon>
+          <h4 novo-line>{{ entity.name }}</h4>
+          <p novo-line class="company" *ngIf="entity.companyName">
+            <novo-icon color="company">company</novo-icon>
+            <span>{{ entity.companyName }}</span>
+          </p>
+          <p novo-line *ngIf="entity.email">
+            <novo-icon>email</novo-icon>
+            <a href="mailto:{{entity.email}}">{{entity.email}}</a>
+          </p>
+          <p novo-line *ngIf="entity.phone">
+            <novo-icon>phone</novo-icon>
+            <a href="tel:{{entity.phone}}">{{entity.phone}}</a>
+          </p>
+          <p novo-line class="location" *ngIf="entity.address && (entity.address.city || entity.address.state)">
+            <novo-icon>location</novo-icon>
+            <span *ngIf="entity.address.city">{{ entity.address.city }}</span>
+            <span *ngIf="entity.address.city && entity.address.state">, </span>
+            <span *ngIf="entity.address.state">{{ entity.address.state }}</span>
+          </p>
+        </novo-list-item>
+      </ng-container>
+      <ng-container *ngSwitchCase="'ClientContact'">
+        <novo-list-item>
+          <novo-icon theme="contact">person</novo-icon>
+          <h4 novo-line>{{ entity.name }}</h4>
+          <p novo-line class="company" *ngIf="entity.clientCorporation">
+            <novo-icon color="company">company</novo-icon>
+            <span>{{ entity.clientCorporation?.name }}</span>
+          </p>
+          <p novo-line *ngIf="entity.email">
+            <novo-icon>email</novo-icon>
+            <a href="mailto:{{entity.email}}">{{entity.email}}</a>
+          </p>
+          <p novo-line *ngIf="entity.phone">
+            <novo-icon>phone</novo-icon>
+            <a href="tel:{{entity.phone}}">{{entity.phone}}</a>
+          </p>
+          <p novo-line class="location" *ngIf="entity.address && (entity.address.city || entity.address.state)">
+            <novo-icon>location</novo-icon>
+            <span *ngIf="entity.address.city">{{ entity.address.city }}</span>
+            <span *ngIf="entity.address.city && entity.address.state">, </span>
+            <span *ngIf="entity.address.state">{{ entity.address.state }}</span>
+          </p>
+        </novo-list-item>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</novo-list>

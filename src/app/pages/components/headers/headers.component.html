@@ -1,0 +1,51 @@
+<demo-section [name]="name" [src]="src">
+
+  <h3>Contents</h3>
+
+  <ul class="demo-nav">
+    <li>
+      <a routerLink="." fragment="usage">Usage</a>
+    </li>
+    <li>
+      <a routerLink="." fragment="themes">Themes</a>
+      <ul>
+        <li>
+          <a routerLink="." fragment="theme-standard">Standard</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a routerLink="." fragment="examples">Examples</a>
+      <ul>
+        <li>
+          <a routerLink="." fragment="example-subtitle">Subtitles</a>
+        </li>
+        <li>
+          <a routerLink="." fragment="example-mainframe">Mainframe</a>
+        </li>
+        <li>
+          <a routerLink="." fragment="example-record">Records</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
+  <div class="usage-doc" [innerHtml]="usageDoc"></div>
+
+  <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
+
+  <demo-box class="header-demo" [ts]="demos.standard.ts" [html]="demos.standard.html" name="theme-standard" label="Theme: Standard">
+    <demo-header-standard></demo-header-standard>
+  </demo-box>
+  <demo-box class="header-demo" [ts]="demos.subtitle.ts" [html]="demos.subtitle.html" name="example-subtitle" label="Examples: Subtitle">
+    <demo-header-subtitle></demo-header-subtitle>
+  </demo-box>
+  <demo-box class="header-demo" [ts]="demos.mainframe.ts" [html]="demos.mainframe.html" name="example-mainframe" label="Examples: Record">
+    <demo-header-mainframe></demo-header-mainframe>
+  </demo-box>
+  <demo-box class="header-demo" [ts]="demos.record.ts" [html]="demos.record.html" name="example-record" label="Examples: Record">
+    <demo-header-record></demo-header-record>
+  </demo-box>
+
+</demo-section>

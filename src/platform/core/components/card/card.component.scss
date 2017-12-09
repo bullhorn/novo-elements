@@ -1,0 +1,111 @@
+// --------------------------------------------------
+// Extras
+// --------------------------------------------------
+// @import "./extras/best-time/CardBestTime";
+// @import "./extras/timeline/CardTimeline";
+// @import "./extras/donut-chart/CardDonutChart";
+
+novo-card {
+    display: flex;
+    flex-flow: column;
+    background-color: $white;
+    box-shadow: 0 1px 4px rgba(#000, .15), 0 2px 10px rgba(#000, .09);
+    margin-bottom: 20px;
+    position: relative;
+    border-radius: 3px;
+    // max-height: 550px;
+    
+    > img {
+        width: 100%;
+    }
+    > main {
+        display: flex;
+        flex-flow: column;
+        padding: 1em;
+    }
+    > footer { 
+        display: flex;
+        flex-flow: row nowrap;
+        padding: 1em;
+    }
+    
+
+    // header {
+    //     display: flex;
+    //     flex-flow: row nowrap;
+    //     align-items: center;
+    //     justify-content: space-between;
+    //     padding: 20px;
+    //     .title {
+    //         display: flex;
+    //         align-items: center;
+    //         min-width: 0;
+    //         i.bhi-move {
+    //             color: $light;
+    //             margin-right: 10px;
+    //             cursor: pointer;
+    //             height: 1.3em
+    //         }
+    //         h3 {
+    //             padding: 0;
+    //             white-space: nowrap;
+    //             overflow: hidden;
+    //             text-overflow: ellipsis;
+    //         }
+    //     }
+    //     .actions {
+    //         color: darken($light, 35%);
+    //         white-space: nowrap;
+    //         button {
+    //             font-size: 1.2em;
+    //             text-transform: none;
+    //         }
+    //     }
+    // }
+
+    // main {
+    //     padding: 10px 20px 20px;
+    //     background-color: $white;
+    //     overflow: auto;
+    //     max-height: 550px;
+
+    //     p.card-message {
+    //         padding: 20px 0;
+    //         max-width: inherit;
+    //         text-align: center;
+    //         line-height: 25px;
+    //         color: lighten($grey, 10%);
+
+    //         i {
+    //             display: block;
+    //             font-size: 24px;
+    //             margin: 0 0 15px;
+    //             color: lighten($grey, 20%);
+    //         }
+    //     }
+
+    //     novo-loading {
+    //         display: flex;
+    //         justify-content: center;
+    //         min-height: 80px;
+    //     }
+    // }
+
+    // &.no-padding {
+    //     main {
+    //         padding: 0;
+    //     }
+    // }
+
+    // article.time-intervals {
+    //     .interval {
+    //         text-transform: capitalize;
+    //     }
+    // }
+
+    // footer {
+    //     padding: 10px 20px;
+    //     border-top: 1px solid lighten($grey, 20%);
+    // }
+    
+}

@@ -1,0 +1,7 @@
+<ng-container *ngFor="let color of colors;let i = index;">
+  <button theme="standard" [color]="color">{{ color }}</button>
+</ng-container>
+<br/>
+<ng-container *ngFor="let color of colors;let i = index;">
+  <button theme="standard" [color]="color" disabled="true">{{ color }}</button>
+</ng-container>
