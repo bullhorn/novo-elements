@@ -12,5 +12,4 @@ export class LoadingComponent {
   public src: string = 'https://github.com/bullhorn/novo-elements-3.0/tree/master/src/platform/core/components/loading';
   public usageDoc: string = usageDoc;
   public demos: DEMOS = LOADING_DEMOS;
-
 }

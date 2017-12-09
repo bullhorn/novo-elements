@@ -26,29 +26,29 @@ import { NovoAlertDialogComponent, NovoConfirmDialogComponent, NovoNotificationD
 // } from './dialog-content-directives';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        OverlayModule,
-        PortalModule,
-        A11yModule,
-        NovoCardModule,
-        NovoButtonModule,
-        NovoHeaderModule,
-        NovoIconModule,
-    ],
-    exports: [
-        NovoDialogContainerComponent,
-    ],
-    declarations: [
-        NovoDialogContainerComponent,
-        NovoAlertDialogComponent,
-        NovoConfirmDialogComponent,
-        NovoNotificationDialogComponent,
-    ],
-    providers: [
-        NovoDialog,
-        NOVO_DIALOG_SCROLL_STRATEGY_PROVIDER,
-    ],
-    entryComponents: [NovoDialogContainerComponent, NovoAlertDialogComponent, NovoConfirmDialogComponent, NovoNotificationDialogComponent],
+  imports: [
+    CommonModule,
+    OverlayModule,
+    PortalModule,
+    A11yModule,
+    NovoCardModule,
+    NovoButtonModule,
+    NovoHeaderModule,
+    NovoIconModule,
+  ],
+  exports: [
+    NovoDialogContainerComponent,
+  ],
+  declarations: [
+    NovoDialogContainerComponent,
+    NovoAlertDialogComponent,
+    NovoConfirmDialogComponent,
+    NovoNotificationDialogComponent,
+  ],
+  providers: [
+    NovoDialog,
+    NOVO_DIALOG_SCROLL_STRATEGY_PROVIDER,
+  ],
+  entryComponents: [NovoDialogContainerComponent, NovoAlertDialogComponent, NovoConfirmDialogComponent, NovoNotificationDialogComponent],
 })
 export class NovoDialogModule { }

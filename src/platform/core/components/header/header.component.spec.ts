@@ -1,6 +1,5 @@
-// NG2
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-// APP
+
 import { NovoHeaderComponent } from './header.component';
 import { NovoHeaderModule } from './header.module';
 

@@ -21,7 +21,7 @@ install:
 script:
   - npm run lint
   - npm run test
-  # - cypress run --record --key 8f5264fd-be28-4fdf-bbc3-16102b8b0739 --env host=https://bullhorn.github.io/novo-elements
+  # - cypress run --record --key f50830ba-dbec-4bb8-8d5d-acd240422b1c --env host=https://bullhorn.github.io/novo-elements
   - npm run build
   - npm run build-ghpages
 

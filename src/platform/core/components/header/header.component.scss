@@ -1,61 +1,61 @@
 header[theme] {
-    &>section {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 8px;
-        i.header-icon {
-            padding: 12px;
-        }
-        .header-titles {
-            display: flex;
-            flex-direction: column;
-            flex: 1 1 100px;
-            padding: 0px 8px;
-            h1 {
-                font-size: 1.7em;
-                margin: 0;
-                padding: 0;
-                display: inline-block;
-                font-weight: 500;
-                max-width: 70%;
-                min-width: 100px;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                padding-right: 20px;
-            }
-        }
-        >section {
-            flex: 2 2 250px;
-            min-width: 100px;
-        }
-        utils {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
+  &>section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    i.header-icon {
+      padding: 12px;
     }
-    @each $basic,
-    $color in $all-colors {
-        &[theme="#{$basic}"] {
-            background: $color;
-            color: #fff;
-            &>section.primary {
-                background: $color;
-            }
-        }
+    .header-titles {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 100px;
+      padding: 0px 8px;
+      h1 {
+        font-size: 1.7em;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        font-weight: 500;
+        max-width: 70%;
+        min-width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-right: 20px;
+      }
     }
-    &[theme="light"],
-    &[theme="off-white"],
-    &[theme="white"] {
-        color: $dark;
+    >section {
+      flex: 2 2 250px;
+      min-width: 100px;
     }
-    & > main {
-        padding: 4px 16px 4px 32px;
+    utils {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
-    & > novo-nav {
-        padding-left: 16px;
+  }
+  @each $basic,
+  $color in $all-colors {
+    &[theme="#{$basic}"] {
+      background: $color;
+      color: #fff;
+      &>section.primary {
+        background: $color;
+      }
     }
+  }
+  &[theme="light"],
+  &[theme="off-white"],
+  &[theme="white"] {
+    color: $dark;
+  }
+  &>main {
+    padding: 4px 16px 4px 32px;
+  }
+  &>novo-nav {
+    padding-left: 16px;
+  }
 }

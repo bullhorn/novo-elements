@@ -1,25 +1,24 @@
-// NG2
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-// APP
+
 import { NovoCardComponent } from './card.component';
 import { NovoCardModule } from './card.module';
 
 describe('Component: NovoCardComponent', () => {
-    let fixture: ComponentFixture<NovoCardComponent>;
-    let component: NovoCardComponent;
+  let fixture: ComponentFixture<NovoCardComponent>;
+  let component: NovoCardComponent;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            imports: [
-                NovoCardModule,
-            ],
-        }).compileComponents();
-        fixture = TestBed.createComponent(NovoCardComponent);
-        component = fixture.debugElement.componentInstance;
-    }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        NovoCardModule,
+      ],
+    }).compileComponents();
+    fixture = TestBed.createComponent(NovoCardComponent);
+    component = fixture.debugElement.componentInstance;
+  }));
 
-    it('should create component', () => {
-        expect(component).toBeDefined();
-        expect(component._useClassName).toBeTruthy();
-    });
+  it('should create component', () => {
+    expect(component).toBeDefined();
+    expect(component._useClassName).toBeTruthy();
+  });
 });
