@@ -35,7 +35,7 @@ after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH = "master" && npm run galaxy -- $FIREBASE_URL $SLACK_WEB_HOOK $SLACK_CHANNEL
   - test $TRAVIS_PULL_REQUEST = "false" && echo "not a pull request" || npm run analyze-mr -- $TRAVIS_PULL_REQUEST_BRANCH $FIREBASE_URL $SLACK_WEB_HOOK $SLACK_CHANNEL $GITHUB_API_KEY
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && npm run snapshot-publish
+  - test $TRAVIS_PULL_REQUEST == "false" && npm run snapshot-publish
 
 notifications:
   slack:
