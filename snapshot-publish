@@ -17,13 +17,13 @@ repoDir="snapshot"
 echo "Cloning $repoUrl into $repoDir"
 git clone $repoUrl $repoDir
 
-echo "Changing branch to $branch"
-git checkout -B $branch
-
 echo "Cleaning snapshot repo and moving build files into it"
 rm -rf $repoDir/*
 cp -r $buildDir/* $repoDir
 cd $repoDir
+
+echo "Changing branch to $branch"
+git checkout -B $branch
 
 # Prepare Git for pushing the artifacts to the repository.
 git config user.name "$commitAuthorName"
@@ -41,7 +41,7 @@ if [ "$branch" == "master" ]; then
     git push origin master --tags
 else
     echo "Committing and pushing to $branch"
-    git push -u origin $branch
+    git push -u origin $branch --force
 fi
 
 echo "Finished publishing snapshot build to $branch"
