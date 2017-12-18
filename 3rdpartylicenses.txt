@@ -1,4 +1,4 @@
-core-js@2.5.1
+core-js@2.5.3
 MIT
 Copyright (c) 2014-2017 Denis Pushkarev
 
@@ -74,7 +74,7 @@ MIT
 date-fns is licensed under the [MIT license](http://kossnocorp.mit-license.org).
 Read more about MIT at [TLDRLegal](https://tldrlegal.com/license/mit-license).
 
-@angular/forms@5.1.0
+@angular/forms@5.1.1
 MIT
 MIT
 
@@ -148,23 +148,23 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@angular/core@5.1.0
+@angular/core@5.1.1
 MIT
 MIT
 
-@angular/platform-browser@5.1.0
+@angular/platform-browser@5.1.1
 MIT
 MIT
 
-@angular/http@5.1.0
+@angular/http@5.1.1
 MIT
 MIT
 
-@angular/router@5.1.0
+@angular/router@5.1.1
 MIT
 MIT
 
-@angular/common@5.1.0
+@angular/common@5.1.1
 MIT
 MIT
 
@@ -191,7 +191,7 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@angular/animations@5.1.0
+@angular/animations@5.1.1
 MIT
 MIT
 
@@ -245,6 +245,6 @@ custom-event@1.0.0
 MIT
 MIT
 
-@angular/platform-browser-dynamic@5.1.0
+@angular/platform-browser-dynamic@5.1.1
 MIT
 MIT
