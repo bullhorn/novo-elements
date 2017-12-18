@@ -10,6 +10,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
         '[attr.loading]': 'loading'
     },
     template: `
+    BOOO
         <!--Flex wrapper for cross-browser support-->
         <div [class]="flex">
             <!--Left Icon-->
@@ -47,6 +48,7 @@ export class NovoButtonElement implements OnChanges {
     flex: string;
 
     ngOnChanges(changes?: SimpleChanges) {
+        console.log('MATBE');
         this.iconClass = (this.icon && !this.loading) ? `bhi-${this.icon}` : '';
         this.flex = this.theme ? 'flex-wrapper' : '';
         if (this.side !== null && this.theme !== 'primary') {
