@@ -8,7 +8,7 @@ commitSha=$(git rev-parse --short HEAD)
 commitAuthorName=$(git --no-pager show -s --format='%an' HEAD)
 commitAuthorEmail=$(git --no-pager show -s --format='%ae' HEAD)
 commitMessage=$(git log --oneline -n 1)
-branch=$(git rev-parse --abbrev-ref HEAD)
+branch=$TRAVIS_BRANCH
 
 repoName="novo-elements-snapshot"
 repoUrl="https://github.com/bullhorn/novo-elements-snapshot.git"
