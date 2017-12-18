@@ -8,6 +8,7 @@ commitSha=$(git rev-parse --short HEAD)
 commitAuthorName=$(git --no-pager show -s --format='%an' HEAD)
 commitAuthorEmail=$(git --no-pager show -s --format='%ae' HEAD)
 commitMessage=$(git log --oneline -n 1)
+branch=$(git rev-parse --abbrev-ref HEAD)
 
 repoName="novo-elements-snapshot"
 repoUrl="https://github.com/bullhorn/novo-elements-snapshot.git"
@@ -15,6 +16,9 @@ repoDir="snapshot"
 
 echo "Cloning $repoUrl into $repoDir"
 git clone $repoUrl $repoDir
+
+echo "Changing branch to $branch"
+git checkout -B $branch
 
 echo "Cleaning snapshot repo and moving build files into it"
 rm -rf $repoDir/*
@@ -30,7 +34,12 @@ echo "https://${SNAPSHOT_GIT_TOKEN}:@github.com" > .git/credentials
 
 git add -A
 git commit -m "$commitMessage"
-git tag "$commitSha"
-git push origin master --tags
 
-echo "Finished publishing snapshot build"
+if [ "$branch" == "master" ]; then
+    git tag "$commitSha"
+    git push origin master --tags
+else
+    git push -u origin $branch
+fi
+
+echo "Finished publishing snapshot build to $branch"
