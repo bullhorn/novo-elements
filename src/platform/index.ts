@@ -6,7 +6,7 @@ export {
   NovoIconComponent, NovoIconModule,
   NovoOverlayTemplateComponent, NovoOverlayModule,
   NovoMenuComponent, NovoMenuModule,
-  NovoCardComponent, NovoCardModule,
+  NovoCardComponent, NovoCardModule, NovoRadioModule,
   NovoDialog, NovoDialogModule, NovoDialogContainerComponent, NOVO_DIALOG_DATA, NovoDialogRef, NovoDialogConfig, NovoAlertDialogComponent, NovoConfirmDialogComponent, IAlertConfig, IConfirmConfig,
   NovoTabsModule, NovoNavComponent, NovoTabComponent, NovoTabLinkComponent,
   NovoValueModule, NovoValueComponent, RenderPipe,
