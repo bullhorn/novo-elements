@@ -355,6 +355,13 @@ export class FormUtils {
                         }
                     }
                 });
+                if (!ranges.length) {
+                    ranges.push({
+                        min: 0,
+                        max: Number.MAX_SAFE_INTEGER,
+                        fieldsetIdx: 0,
+                    });
+                }
             } else {
                 fieldsets.push({
                     controls: []
