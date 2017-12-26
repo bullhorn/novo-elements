@@ -50,7 +50,8 @@ import {
     FieldInteractionsDemoComponent,
     SimpleTableDemoComponent,
     FormGroupedDemoComponent,
-    ValueDemoComponent
+    ValueDemoComponent,
+    AceEditorDemoComponent
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
@@ -133,7 +134,8 @@ export function provideAppBridgeService(http) {
         FieldInteractionsDemoComponent,
         SimpleTableDemoComponent,
         FormGroupedDemoComponent,
-        ValueDemoComponent
+        ValueDemoComponent,
+        AceEditorDemoComponent
     ],
     imports: [
         // NG2

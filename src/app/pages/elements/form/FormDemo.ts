@@ -16,7 +16,7 @@ import {
     FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
     QuickNoteControl, TilesControl, DateControl, TimeControl, DateTimeControl,
     PickerControl, EntityPickerResult, EntityPickerResults, TextAreaControl,
-    NovoFormGroup, BaseControl
+    NovoFormGroup, BaseControl, AceEditorControl
 } from './../../../../platform/index';
 
 const template = `
@@ -98,6 +98,7 @@ export class FormDemoComponent {
     private emailControl: any;
     private numberControl: any;
     private currencyControl: any;
+    private aceEditorControl: any;
     private floatControl: any;
     private percentageControl: any;
     private quickNoteControl: any;
@@ -163,7 +164,8 @@ export class FormDemoComponent {
         this.floatControl = new TextBoxControl({ type: 'float', key: 'float', label: 'Float' });
         this.percentageControl = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
         this.quickNoteControl = new QuickNoteControl({ key: 'note', label: 'Note', config: this.quickNoteConfig, required: true, tooltip: 'Quicknote' });
-        this.textForm = formUtils.toFormGroup([this.textControl, this.emailControl, this.textAreaControl, this.numberControl, this.currencyControl, this.floatControl, this.percentageControl, this.quickNoteControl]);
+        this.aceEditorControl = new AceEditorControl({ key: 'ace', label: 'CODE', value: 'var i = 0;' });
+        this.textForm = formUtils.toFormGroup([this.textControl, this.emailControl, this.textAreaControl, this.numberControl, this.currencyControl, this.floatControl, this.percentageControl, this.quickNoteControl, this.aceEditorControl]);
 
         // Check box controls
         this.checkControl = new CheckboxControl({ key: 'check', label: 'Checkbox' });

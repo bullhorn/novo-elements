@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 // APP
 import { NovoPipesModule } from './pipes/Pipes.module';
 import { NovoButtonModule } from './elements/button/Button.module';
+import { NovoAceEditorModule } from './elements/ace-editor/AceEditor.module';
 import { NovoLoadingModule } from './elements/loading/Loading.module';
 import { NovoCardModule } from './elements/card/Card.module';
 import { NovoCalendarModule } from './elements/calendar/Calendar.module';
@@ -92,7 +93,8 @@ import { FormUtils } from './utils/form-utils/FormUtils';
         NovoSearchBoxModule,
         NovoOverlayModule,
         GooglePlacesModule,
-        NovoValueModule
+        NovoValueModule,
+        NovoAceEditorModule,
     ],
     providers: [
         { provide: ComponentUtils, useClass: ComponentUtils },

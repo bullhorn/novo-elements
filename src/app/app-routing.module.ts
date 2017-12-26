@@ -6,6 +6,7 @@ import { Home } from './pages/home/Home';
 import { ColorComponent, TypographyComponent, CompositionComponent, IconographyComponent } from './pages/design';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
 import {
+    AceEditorDemoComponent,
     ButtonDemoComponent,
     LoadingDemoComponent,
     CardDemoComponent,
@@ -52,6 +53,7 @@ const routes: Routes = [
     { path: 'icons', component: IconographyComponent, data: { title: 'Iconography', section: 'design' } },
 
     // Element/Component/Service/etc.. Demos
+    { path: 'ace-editor', component: AceEditorDemoComponent, data: { title: 'Ace Editor', section: 'components' } },
     { path: 'button', component: ButtonDemoComponent, data: { title: 'Buttons', section: 'components' } },
     { path: 'radio', component: RadioDemoComponent, data: { title: 'Radio', section: 'components' } },
     { path: 'quick-note', component: QuickNoteDemoComponent, data: { title: 'Quick Note', section: 'components' } },

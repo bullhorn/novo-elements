@@ -38,7 +38,11 @@
       "rxjs/Observable": "Rx",
       "angular2-text-mask": "ng.text",
       "date-fns": "DateFNS",
-      "dragula": "dragula"
+      "dragula": "dragula",
+      "brace/index": "Brace.Core",
+      "brace/theme/chrome": "Brace.Chrome",
+      "brace/mode/javascript": "Brace.JS",
+      "brace/ext/language_tools.js": "Brace.Tools"
     }
   }
 }

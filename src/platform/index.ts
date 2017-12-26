@@ -1,4 +1,5 @@
 // Export all modules
+export { NovoAceEditorModule } from './elements/ace-editor/AceEditor.module';
 export { NovoPipesModule } from './pipes/Pipes.module';
 export { NovoButtonModule } from './elements/button/Button.module';
 export { NovoLoadingModule } from './elements/loading/Loading.module';
@@ -94,6 +95,7 @@ export { CheckboxControl } from './elements/form/controls/checkbox/CheckboxContr
 export { DateControl } from './elements/form/controls/date/DateControl';
 export { DateTimeControl } from './elements/form/controls/date-time/DateTimeControl';
 export { EditorControl } from './elements/form/controls/editor/EditorControl';
+export { AceEditorControl } from './elements/form/controls/ace-editor/AceEditorControl';
 export { FileControl } from './elements/form/controls/file/FileControl';
 export { NativeSelectControl } from './elements/form/controls/native-select/NativeSelectControl';
 export { PickerControl, AppendToBodyPickerControl, TablePickerControl } from './elements/form/controls/picker/PickerControl';
