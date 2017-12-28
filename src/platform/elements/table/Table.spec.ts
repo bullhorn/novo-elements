@@ -178,21 +178,31 @@ describe('Elements: NovoTableElement', () => {
 
     describe('Method: onFilterClick(column, filter)', () => {
         beforeEach(() => {
+            component._dataProvider = {
+                edit: () => { }
+            };
             component.columns = [
                 {
                     filtering: true,
                     name: 'date',
                     type: 'date'
+                },
+                {
+                    filtering: true,
+                    name: 'type',
+                    options: ['Lead', 'Contact']
                 }
             ];
             component.originalRows = [
                 {
                     id: 1,
-                    date: new Date()
+                    date: new Date(),
+                    type: 'Lead'
                 },
                 {
                     id: 2,
-                    date: new Date()
+                    date: new Date(),
+                    type: 'Contact'
                 }
             ];
             component.config = {
@@ -200,7 +210,7 @@ describe('Elements: NovoTableElement', () => {
             };
         });
 
-        xit('should allow multiple date selections if multiple=true/false', () => {
+        fit('should allow multiple date selections if multiple=true/false', () => {
             expect(component.onFilterClick).toBeDefined();
             component.columns[0].multiple = true;
             component.setupColumnDefaults();
@@ -220,7 +230,29 @@ describe('Elements: NovoTableElement', () => {
             component.columns[0].multiple = false;
             component.onFilterClick(component.columns[0], component.columns[0].options[1]);
             component.onFilterClick(component.columns[0], component.columns[0].options[2]);
-            expect(component.columns[0].filter.length).toBe(1);
+            expect(component.columns[0].filter.length).toBeUndefined();
+            expect(component.columns[0].filter).toBeTruthy();
+        });
+
+        fit('should allow multiple text selections if multiple=true/false', () => {
+            expect(component.onFilterClick).toBeDefined();
+            component.columns[1].multiple = true;
+            component.setupColumnDefaults();
+            // Select 2 rows
+            component.onFilterClick(component.columns[1], component.columns[1].options[0]);
+            component.onFilterClick(component.columns[1], component.columns[1].options[1]);
+            expect(component.columns[1].filter.length).toBe(2);
+            // deselect 2 rows
+            component.onFilterClick(component.columns[1], component.columns[1].options[0]);
+            component.onFilterClick(component.columns[1], component.columns[1].options[1]);
+            expect(component.columns[1].filter).toBe(null);
+
+            // set multiple to false and try and click 2 rows
+            component.columns[1].multiple = false;
+            component.onFilterClick(component.columns[1], component.columns[1].options[0]);
+            component.onFilterClick(component.columns[1], component.columns[1].options[1]);
+            expect(component.columns[1].filter.length).toBe(7);
+            expect(component.columns[1].filter).toBeTruthy();
         });
 
         it('should add range to options (11 total) if range is set', () => {

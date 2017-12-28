@@ -454,7 +454,7 @@ export class NovoTableElement implements DoCheck {
         if (filter.range && !column.calendarShow) {
             column.calenderShow = true;
             return;
-        }
+        }        
         if (Array.isArray(column.filter) && column.multiple) {
             if (~column.filter.indexOf(filter)) {
                 // Remove filter
@@ -470,6 +470,9 @@ export class NovoTableElement implements DoCheck {
                 // Add filter
                 column.filter.push(filter);
             }
+        } else if (column.multiple) {
+            column.filter = new Array();
+            column.filter.push(Helpers.isBlank(filter.value) ? filter : filter.value);
         } else {
             column.filter = Helpers.isBlank(filter.value) ? filter : filter.value;
         }
