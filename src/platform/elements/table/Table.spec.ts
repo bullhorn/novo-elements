@@ -210,7 +210,7 @@ describe('Elements: NovoTableElement', () => {
             };
         });
 
-        fit('should allow multiple date selections if multiple=true/false', () => {
+        it('should allow multiple date selections if multiple=true/false', () => {
             expect(component.onFilterClick).toBeDefined();
             component.columns[0].multiple = true;
             component.setupColumnDefaults();
@@ -234,7 +234,7 @@ describe('Elements: NovoTableElement', () => {
             expect(component.columns[0].filter).toBeTruthy();
         });
 
-        fit('should allow multiple text selections if multiple=true/false', () => {
+        it('should allow multiple text selections if multiple=true/false', () => {
             expect(component.onFilterClick).toBeDefined();
             component.columns[1].multiple = true;
             component.setupColumnDefaults();
