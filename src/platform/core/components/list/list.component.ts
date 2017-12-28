@@ -26,10 +26,13 @@ export class NovoListItemComponent implements FocusableOption, OnDestroy {
   @HostBinding('attr.disabled') public _disabled: boolean;
   /** Stream that emits when the menu item is hovered. */
   @Output() public hovered: EventEmitter<any> = new EventEmitter();
+  @Output() public select: EventEmitter<any> = new EventEmitter();
 
   /** Whether the menu item is highlighted. */
   @HostBinding('class.focused')
   public focused: boolean = false;
+
+  @Input() public value: any;
 
   @Input()
   public get disabled(): boolean {
@@ -90,6 +93,8 @@ export class NovoListItemComponent implements FocusableOption, OnDestroy {
     if (this.disabled) {
       event.preventDefault();
       event.stopPropagation();
+    } else {
+      this.select.emit({ source: this });
     }
   }
 
@@ -120,6 +125,12 @@ export class NovoListItemComponent implements FocusableOption, OnDestroy {
     }
     return output.trim();
   }
+
+  /** Applies the styles for an active item to this item. */
+  public setActiveStyles(): void { }
+
+  /** Applies the styles for an inactive item to this item. */
+  public setInactiveStyles(): void { }
 }
 
 @Component({

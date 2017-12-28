@@ -1,0 +1,13 @@
+<novo-search [ngModel]="test" (ngModelChange)="search($event)" [alwaysOpen]="alwaysOpen">
+  <novo-list direction="vertical">
+    <novo-list-item *ngFor="let item of searchResults | async" (click)="onSelectMatch(item)">
+      <novo-icon>{{item.type}}</novo-icon>
+      <h4 novo-line>{{item.name}}</h4>
+    </novo-list-item>
+  </novo-list>
+</novo-search>
+
+<div layout="row" layout-align="start center">
+  <label>Always Open?</label>
+  <novo-switch [(ngModel)]="alwaysOpen"></novo-switch>
+</div>

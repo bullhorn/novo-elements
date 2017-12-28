@@ -50,7 +50,8 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Brian Kimball",
       "email": "bkimball@bullhorn.com"
     },
@@ -77,6 +78,7 @@
     "@angular/cdk": "5.0.0-rc0",
     "@angular/flex-layout": "2.0.0-beta.10-4905443",
     "@bullhorn/bullhorn-icons": "^2.1.1",
+    "faker": "^4.1.0",
     "roboto-fontface": "^0.8.0"
   },
   "devDependencies": {
@@ -93,6 +95,7 @@
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
     "@types/cypress": "^0.1.1",
+    "@types/faker": "^4.1.2",
     "@types/jest": "^20.0.6",
     "@types/node": "~6.0.60",
     "classlist.js": "^1.1.20150312",

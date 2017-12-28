@@ -13,7 +13,8 @@
     ],
     "arrow-parens": true,
     "ban": [
-      true, []
+      true,
+      []
     ],
     "class-name": true,
     "comment-format": [
@@ -50,19 +51,11 @@
       true,
       {
         "order": [
-          "public-static-field",
-          "private-static-field",
-          "protected-static-field",
-          "public-instance-field",
-          "private-instance-field",
-          "protected-instance-field",
+          "static-field",
+          "instance-field",
           "constructor",
-          "public-static-method",
-          "protected-static-method",
-          "private-static-method",
-          "public-instance-method",
-          "protected-instance-method",
-          "private-instance-method"
+          "static-method",
+          "instance-method"
         ]
       }
     ],

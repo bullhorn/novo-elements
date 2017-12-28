@@ -395,7 +395,7 @@ button {
     border-radius: 50% !important;
     @each $button,
     $color in $all-colors {
-        &[color="#{$button}"] {
+        &.#{$button} {
             color: $white;
             background: $color;
         }

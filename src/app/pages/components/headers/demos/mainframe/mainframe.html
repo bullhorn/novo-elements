@@ -3,9 +3,19 @@
   <h1>
     <img src="/assets/bh-logo-full.svg" height="32" />
   </h1>
-  <section>
-    <button theme="fab" color="positive" icon="search"></button>
-    <button theme="fab" color="positive" icon="add-thin"></button>
+  <section layout="row" layout-align="start center">
+    <novo-search></novo-search>
+    <novo-menu novo-action>
+      <button theme="fab" icon="add-thin" color="positive"></button>
+      <novo-list>
+        <novo-list-item> Candidate </novo-list-item>
+        <novo-list-item> Contact </novo-list-item>
+        <novo-list-item> Company </novo-list-item>
+        <novo-list-item> Job </novo-list-item>
+        <novo-list-item> Note </novo-list-item>
+        <novo-list-item> Appointment </novo-list-item>
+      </novo-list>
+    </novo-menu>
   </section>
   <button novo-action theme="dialogue" inverse>Privacy</button>
   <button novo-action theme="dialogue" icon="question" side="left" inverse>Help</button>

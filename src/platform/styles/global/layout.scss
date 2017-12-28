@@ -217,6 +217,7 @@ $layout-breakpoint-lg: 1920px !default;
     }
 
     [layout="row"] > [#{$flexName}="#{$i * 5}"],
+    [layout="row nowrap"] > [#{$flexName}="#{$i * 5}"],
     [layout#{$name}="row"] > [#{$flexName}="#{$i * 5}"] {
       flex: 1 1 #{$value};
       max-width: #{$value};
@@ -233,7 +234,7 @@ $layout-breakpoint-lg: 1920px !default;
     }
   }
 
-  [layout="row"], [layout#{$name}="row"] {
+  [layout="row"], [layout="row nowrap"], [layout#{$name}="row"] {
     > [#{$flexName}="33"], > [#{$flexName}="33"] {
       flex: 1 1 33%;
       max-width: calc(100% / 3);
@@ -455,7 +456,8 @@ $layout-breakpoint-lg: 1920px !default;
     flex-wrap: wrap;
   }
 
-  [layout-nowrap] {
+  [layout-nowrap],
+  [layout="row nowrap"] {
     flex-wrap: nowrap;
   }
 

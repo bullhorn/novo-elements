@@ -14,8 +14,17 @@ import { NovoCardModule } from './components/card';
 import { NovoDialogModule } from './components/dialog';
 import { NovoTabsModule } from './components/tabs';
 import { NovoValueModule } from './components/value';
+import { NovoSwitchModule } from './components/switch';
+import { NovoSearchModule } from './components/search';
+import { GooglePlacesModule } from './components/places';
+import { NovoAutocompleteModule } from './components/autocomplete';
+import { NovoSelectModule } from './components/select';
+import { NovoOptionModule } from './components/option';
 
 import { GroupByPipe, DecodeURIPipe } from './pipes';
+
+import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
+import { LocalStorageService } from './services/storage/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -37,12 +46,20 @@ import { GroupByPipe, DecodeURIPipe } from './pipes';
     NovoDialogModule,
     NovoTabsModule,
     NovoValueModule,
+    NovoSwitchModule,
+    NovoSearchModule,
+    NovoAutocompleteModule,
+    GooglePlacesModule,
+    NovoSelectModule,
+    NovoOptionModule,
     // Pipes
     GroupByPipe,
     DecodeURIPipe,
   ],
   providers: [
     NovoLabelService,
+    LocalStorageService,
+    { provide: GlobalRef, useClass: BrowserGlobalRef },
   ],
 })
 export class NovoElementsModule {

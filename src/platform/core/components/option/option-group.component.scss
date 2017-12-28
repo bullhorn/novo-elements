@@ -1,0 +1,13 @@
+@import "../../../styles/global/functions";
+@import "../../../styles/global/variables";
+
+:host {
+    .novo-optgroup-label {
+        font-size: 1em;
+        font-weight: 700;
+        text-transform: uppercase;
+        opacity: 0.55;
+        letter-spacing: 0.1px;
+        padding: 5px 10px;
+    }
+}

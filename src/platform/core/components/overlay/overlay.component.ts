@@ -64,8 +64,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   /** Element for the panel containing the autocomplete options. */
   @ViewChild('panel') public panel: ElementRef;
-  @Input() public parent: ElementRef;
   @Input() public position: string = 'default';
+  @Input() public size: string = 'none';
   @Input() public closeOnSelect: boolean = true;
   @Output() public select: EventEmitter<any> = new EventEmitter();
   @Output() public closing: EventEmitter<any> = new EventEmitter();
@@ -79,6 +79,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   /** The subscription for closing actions (some are bound to document). */
   public _closingActionsSubscription: Subscription;
+  private _parent: ElementRef;
 
   constructor(
     protected _overlay: Overlay,
@@ -98,19 +99,23 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     return this._panelOpen;
   }
 
+  @Input()
+  public set parent(value: ElementRef) {
+    this._parent = value;
+    this._checkSizes();
+  }
+
+  public get parent(): ElementRef {
+    return this._parent;
+  }
+
   /** Opens the autocomplete suggestion panel. */
   public openPanel(): void {
-    // if (!this.overlayTemplate) {
-    // throw getMdAutocompleteMissingPanelError();
-    // }
 
     if (!this._overlayRef) {
       this._createOverlay(this.template);
     } else {
-      /** Update the panel width, in case the host width has changed */
-      // this._overlayRef.getConfig().width = this._getHostWidth();
-      this._overlayRef.updateSize();
-      this._overlayRef.updatePosition();
+      this._checkSizes();
     }
     if (this._overlayRef && !this._overlayRef.hasAttached()) {
       this._overlayRef.attach(this._portal);
@@ -131,10 +136,6 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       this.closing.emit(true);
       if (this._panelOpen) {
         this._panelOpen = false;
-        // We need to trigger change detection manually, because
-        // `fromEvent` doesn't seem to do it at the proper time.
-        // This ensures that the placeholder is reset when the
-        // user clicks outside.
         this._changeDetectorRef.markForCheck();
       }
     });
@@ -211,13 +212,14 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   protected _createOverlay(template: TemplateRef<any>): void {
     this._portal = new TemplatePortal(template, this._viewContainerRef);
     this._overlayRef = this._overlay.create(this._getOverlayConfig());
-    // this._overlayRef.getConfig().width = this._getHostWidth();
   }
 
   protected _getOverlayConfig(): OverlayConfig {
     const overlayState: OverlayConfig = new OverlayConfig();
     overlayState.positionStrategy = this._getOverlayPosition();
-    // overlayState.width = this._getHostWidth();
+    if (this.size === 'inherit') {
+      overlayState.width = this._getHostWidth();
+    }
     overlayState.direction = 'ltr';
     overlayState.scrollStrategy = this._scrollStrategy();
     return overlayState;
@@ -246,6 +248,17 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     }
 
     return this._positionStrategy;
+  }
+
+  protected _checkSizes(): void {
+    if (this._overlayRef) {
+      if (this.size === 'inherit') {
+        this._overlayRef.getConfig().width = this._getHostWidth();
+      }
+      this._overlayRef.updateSize();
+      this._overlayRef.updatePosition();
+      this._changeDetectorRef.markForCheck();
+    }
   }
 
   protected _getConnectedElement(): ElementRef {
