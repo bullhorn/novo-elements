@@ -1,1 +1,0 @@
-{"version":3,"sources":["ReadOnlyControl.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,MAAM;AACN,gDAAkE;AAElE;IAAqC,mCAAW;IAG5C,yBAAY,MAAyB;QAArC,YACI,kBAAM,iBAAiB,EAAE,MAAM,CAAC,SAEnC;QALD,iBAAW,GAAG,WAAW,CAAC;QAItB,MAAM,CAAC,QAAQ,GAAG,IAAI,CAAC;;IAC3B,CAAC;IACL,sBAAC;AAAD,CAPA,AAOC,CAPoC,yBAAW,GAO/C;AAPY,0CAAe","file":"ReadOnlyControl.js","sourceRoot":""}
