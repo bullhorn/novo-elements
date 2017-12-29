@@ -106,19 +106,3 @@ export class NovoCardImage {
 export class NovoCardComponent {
   @HostBinding('class.novo-card') public _useClassName: boolean = true;
 }
-
-/**
- * Component intended to be used within the `<novo-card>` component. It adds styles for a
- * preset header section (i.e. a title, subtitle, and avatar layout).
- * @docs-private
- */
-// @Component({
-//     selector: 'novo-card-header',
-//     templateUrl: 'card-header.html',
-//     encapsulation: ViewEncapsulation.None,
-//     preserveWhitespaces: false,
-//     changeDetection: ChangeDetectionStrategy.OnPush,
-// })
-// export class NovoCardHeader {
-//     @HostBinding('class.novo-card-header') public _useClassName: boolean = true;
-// }

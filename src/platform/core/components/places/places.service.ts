@@ -3,6 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Http } from '@angular/http';
 import { GlobalRef } from '../../services/global/global.service';
 import { LocalStorageService } from '../../services/storage/local-storage.service';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class GooglePlacesService {
