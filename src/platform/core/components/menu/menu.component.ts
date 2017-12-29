@@ -28,8 +28,7 @@ export class NovoMenuComponent implements OnInit, OnChanges {
 
   public ngOnInit(): void {
     this.ngOnChanges();
-    let button: HTMLElement = this.element.nativeElement.querySelector('button');
-    button.addEventListener('click', () => this.openPanel());
+    this._addButtonListener(this.element.nativeElement);
   }
 
   public ngOnChanges(changes?: SimpleChanges): void {
@@ -50,6 +49,12 @@ export class NovoMenuComponent implements OnInit, OnChanges {
   }
   /** END: Convienient Panel Methods. */
 
+  protected _addButtonListener(element: HTMLElement): void {
+    if (element) {
+      let button: HTMLElement = this.element.nativeElement.querySelector('button');
+      button.addEventListener('click', () => this.openPanel());
+    }
+  }
   /** Handle a keyboard event from the menu, delegating to the appropriate action. */
   @HostListener('keydown', ['$event'])
   protected _handleKeydown(event: KeyboardEvent): void {

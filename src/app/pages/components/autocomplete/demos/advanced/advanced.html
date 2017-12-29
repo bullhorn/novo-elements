@@ -1,0 +1,20 @@
+<div layout="row">
+  <form class="example-form">
+    <input type="text" placeholder="Pick one" [formControl]="myControl" [novoAutocomplete]="auto">
+    <novo-autocomplete #auto [displayWith]="displayFn">
+      <novo-list>
+        <novo-list-item *ngFor="let option of options" [value]="option">
+          <novo-icon>person</novo-icon>
+          <div novo-line>
+            <h4>{{ option.name }}</h4>
+            <span flex></span>
+            <span>
+              <novo-icon>clock</novo-icon>{{ option.updated | date: 'shortTime' }}</span>
+          </div>
+          <p novo-line>{{ option.summary }}</p>
+        </novo-list-item>
+      </novo-list>
+    </novo-autocomplete>
+
+  </form>
+</div>

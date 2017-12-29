@@ -10,6 +10,11 @@ export {
   NovoDialog, NovoDialogModule, NovoDialogContainerComponent, NOVO_DIALOG_DATA, NovoDialogRef, NovoDialogConfig, NovoAlertDialogComponent, NovoConfirmDialogComponent, IAlertConfig, IConfirmConfig,
   NovoTabsModule, NovoNavComponent, NovoTabComponent, NovoTabLinkComponent,
   NovoValueModule, NovoValueComponent, RenderPipe,
+  NovoSwitchModule, NovoSwitchComponent,
+  NovoSearchModule, NovoSearchComponent,
+  NovoAutocompleteModule, NovoAutocompleteComponent, NovoAutocompleteDirective,
+  NovoSelectModule, NovoSelectComponent,
+  NovoOptionModule, NovoOptionComponent, NovoSelectionEvent, NovoOptionGroupComponent,
 } from './core/components';
 
 export {

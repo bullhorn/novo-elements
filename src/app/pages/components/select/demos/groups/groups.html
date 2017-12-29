@@ -1,0 +1,16 @@
+<div layout="row">
+  <div>
+    <div>
+      <label class="caption">Selected Value:</label>
+      <span>{{ value }}</span>
+    </div>
+    <novo-select>
+      <novo-option>-- None --</novo-option>
+      <novo-option-group *ngFor="let company of companies" [label]="company.name">
+        <novo-option *ngFor="let employee of company.employees" [value]="employee.name">
+          {{ employee.name }}
+        </novo-option>
+      </novo-option-group>
+    </novo-select>
+  </div>
+</div>

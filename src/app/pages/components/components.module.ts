@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NovoElementsModule } from '../../../platform';
 
@@ -21,6 +21,10 @@ import { CardsComponent } from './cards/cards.component';
 import { DialogsComponent } from './dialogs/dialogs.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ValuesComponent } from './values/values.component';
+import { SwitchesComponent } from './switches/switches.component';
+import { SearchesComponent } from './searches/searches.component';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { SelectComponent } from './select/select.component';
 
 import { BUTTON_DEMO_COMPONENTS } from './buttons/demos';
 import { HEADER_DEMO_COMPONENTS } from './headers/demos';
@@ -33,6 +37,10 @@ import { CARDS_DEMO_COMPONENTS } from './cards/demos';
 import { DIALOGS_DEMO_COMPONENTS, DIALOGS_DEMO_ENTRY_COMPONENTS } from './dialogs/demos';
 import { TABS_DEMO_COMPONENTS } from './tabs/demos';
 import { VALUES_DEMO_COMPONENTS } from './values/demos';
+import { SWITCH_DEMO_COMPONENTS } from './switches/demos';
+import { SEARCH_DEMO_COMPONENTS } from './searches/demos';
+import { AUTOCOMPLETE_DEMO_COMPONENTS } from './autocomplete/demos';
+import { SELECT_DEMO_COMPONENTS } from './select/demos';
 
 @NgModule({
   declarations: [
@@ -48,6 +56,10 @@ import { VALUES_DEMO_COMPONENTS } from './values/demos';
     DialogsComponent,
     TabsComponent,
     ValuesComponent,
+    SwitchesComponent,
+    SearchesComponent,
+    AutocompleteComponent,
+    SelectComponent,
     ...BUTTON_DEMO_COMPONENTS,
     ...HEADER_DEMO_COMPONENTS,
     ...LOADING_DEMO_COMPONENTS,
@@ -59,6 +71,10 @@ import { VALUES_DEMO_COMPONENTS } from './values/demos';
     ...DIALOGS_DEMO_COMPONENTS,
     ...TABS_DEMO_COMPONENTS,
     ...VALUES_DEMO_COMPONENTS,
+    ...SWITCH_DEMO_COMPONENTS,
+    ...SEARCH_DEMO_COMPONENTS,
+    ...AUTOCOMPLETE_DEMO_COMPONENTS,
+    ...SELECT_DEMO_COMPONENTS,
   ],
   entryComponents: [
     ...DIALOGS_DEMO_ENTRY_COMPONENTS,
@@ -68,6 +84,7 @@ import { VALUES_DEMO_COMPONENTS } from './values/demos';
     CommonModule,
     FlexLayoutModule,
     FormsModule,
+    ReactiveFormsModule,
     // NovoElements
     NovoElementsModule,
     // APP

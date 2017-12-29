@@ -1,0 +1,41 @@
+@import "../../../styles/global/functions";
+@import "../../../styles/global/variables";
+
+:host {
+    cursor: pointer;
+    height: 30px;
+    margin: 0;
+    padding: 5px 16px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: darken($light, 45%);
+    font-size: 1rem;
+    span {
+        display: inline-block;
+    }
+    i {
+        height: 30px !important;
+        width: 15px !important;
+        border-radius: 0;
+        margin: 0 !important;
+        color: $positive;
+    }
+    &:focus,
+    &:hover {
+        background: lighten($light, 10%);
+        color: darken($light, 55%);
+    }
+    &.active {
+        color: darken($light, 55%);
+        font-weight: 500;
+    }
+    &.open.select-header {
+        background: lighten($light, 10%);
+        padding: 10px 0 0;
+        line-height: 28px;
+        height: 60px;
+        border-bottom: 1px solid #e9e9e9;
+    }
+}
