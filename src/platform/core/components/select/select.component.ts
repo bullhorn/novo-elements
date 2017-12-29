@@ -1,11 +1,10 @@
 // NG2
 import { Component, Input, Output, EventEmitter, ViewChild, ViewChildren, ContentChildren, forwardRef, ElementRef, OnInit, OnChanges, OnDestroy, AfterViewInit, SimpleChanges, HostListener, QueryList } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TAB, ENTER, ESCAPE, SPACE, BACKSPACE, DELETE, UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
+import { ENTER, ESCAPE, SPACE, BACKSPACE, DELETE, UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
 // APP
 import { NovoOverlayTemplateComponent } from '../overlay';
 import { NovoOptionComponent, NovoSelectionEvent } from '../option';
-import { NovoLabelService } from '../../services/label/label.service';
 import { Helpers } from '../../utils/helpers/helpers.service';
 // RXJS
 import { Observable } from 'rxjs/Observable';
@@ -48,8 +47,8 @@ export class NovoSelectOptionComponent {
                     <div *ngIf="header.open" [ngClass]="{active: header.open}">
                         <input autofocus type="text" [placeholder]="headerConfig.placeholder" [attr.id]="name" autocomplete="false" [(ngModel)]="header.value" [ngClass]="{invalid: !header.valid}"/>
                         <footer>
-                            <button (click)="toggleHeader($event, false)">{{ labels.cancel }}</button>
-                            <button (click)="saveHeader()" class="primary">{{ labels.save }}</button>
+                            <button (click)="toggleHeader($event, false)">Cancel</button>
+                            <button (click)="saveHeader()" class="primary">Save</button>
                         </footer>
                     </div>
                 </li>
@@ -89,10 +88,7 @@ export class NovoSelectComponent implements OnInit, OnChanges, OnDestroy, AfterV
 
     private _selectionSubscription: Subscription;
 
-    constructor(
-        public element: ElementRef,
-        public labels: NovoLabelService,
-    ) { }
+    constructor(public element: ElementRef) { }
 
     @Input()
     public set options(value: any[]) {

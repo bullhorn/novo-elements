@@ -5,8 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './standard.html',
 })
 export class DemoSwitchStandardComponent {
-  private toggleCount: number = 0;
-  private checked: boolean = true;
+  public toggleCount: number = 0;
+  public checked: boolean = true;
 
   public increment(): void {
     this.toggleCount++;

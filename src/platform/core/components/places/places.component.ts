@@ -1,7 +1,7 @@
 // NG2
-import { Component, PLATFORM_ID, Inject, Input, Output, Optional, EventEmitter, OnInit, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { GlobalRef } from '../../services/global/global.service';
+import { Component, PLATFORM_ID, Inject, Input, Output, EventEmitter, OnInit, OnChanges, ElementRef } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+// import { GlobalRef } from '../../services/global/global.service';
 import { GooglePlacesService } from './places.service';
 
 // tslint:disable-next-line:interface-name
@@ -89,7 +89,7 @@ export class PlacesListComponent implements OnInit, OnChanges {
     constructor(
         @Inject(PLATFORM_ID) private platformId: Object,
         private _elmRef: ElementRef,
-        private _global: GlobalRef,
+        // private _global: GlobalRef,
         private _googlePlacesService: GooglePlacesService,
     ) {
 
@@ -227,15 +227,15 @@ export class PlacesListComponent implements OnInit, OnChanges {
     }
 
     // function to process the search query when pressed enter.
-    private processSearchQuery(): any {
-        if (this.queryItems.length) {
-            if (this.selectedDataIndex > -1) {
-                this.selectedListNode(undefined, this.selectedDataIndex);
-            } else {
-                this.selectedListNode(undefined, 0);
-            }
-        }
-    }
+    // private processSearchQuery(): any {
+    //     if (this.queryItems.length) {
+    //         if (this.selectedDataIndex > -1) {
+    //             this.selectedListNode(undefined, this.selectedDataIndex);
+    //         } else {
+    //             this.selectedListNode(undefined, 0);
+    //         }
+    //     }
+    // }
 
     // function to set user settings if it is available.
     private setUserSettings(): Settings {

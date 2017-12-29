@@ -1,5 +1,5 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { Http } from '@angular/http';
 import { GlobalRef } from '../../services/global/global.service';
 import { LocalStorageService } from '../../services/storage/local-storage.service';
@@ -16,7 +16,7 @@ export class GooglePlacesService {
     public getPredictions(url: string, query: string): Promise<any> {
         return new Promise((resolve: any) => {
             this._http.get(url + '?query=' + query,
-            ).map((res) => res.json())
+            ).map((res: any) => res.json())
                 .subscribe((data: any) => {
                     if (data) {
                         resolve(data);
@@ -30,7 +30,7 @@ export class GooglePlacesService {
     public getLatLngDetail(url: string, lat: number, lng: number): Promise<any> {
         return new Promise((resolve: any) => {
             this._http.get(url + '?lat=' + lat + '&lng=' + lng,
-            ).map((res) => res.json())
+            ).map((res: any) => res.json())
                 .subscribe((data: any) => {
                     if (data) {
                         resolve(data);
@@ -44,7 +44,7 @@ export class GooglePlacesService {
     public getPlaceDetails(url: string, placeId: string): Promise<any> {
         return new Promise((resolve: any) => {
             this._http.get(url + '?query=' + placeId,
-            ).map((res) => res.json())
+            ).map((res: any) => res.json())
                 .subscribe((data: any) => {
                     if (data) {
                         resolve(data);
@@ -60,7 +60,7 @@ export class GooglePlacesService {
             if (isPlatformBrowser(this.platformId)) {
                 let _window: any = this._global.nativeGlobal;
                 if (_window.navigator.geolocation) {
-                    _window.navigator.geolocation.getCurrentPosition((pos) => {
+                    _window.navigator.geolocation.getCurrentPosition((pos: any) => {
                         let latlng: any = { lat: parseFloat(pos.coords.latitude + ''), lng: parseFloat(pos.coords.longitude + '') };
                         resolve(latlng);
                     });
@@ -78,9 +78,9 @@ export class GooglePlacesService {
             if (isPlatformBrowser(this.platformId)) {
                 let _window: any = this._global.nativeGlobal;
                 let geocoder: any = new _window.google.maps.Geocoder();
-                geocoder.geocode({ 'location': latlng }, (results, status) => {
+                geocoder.geocode({ 'location': latlng }, (results: any, status: any) => {
                     if (status === 'OK') {
-                        this.getGeoPlaceDetail(results[0].place_id).then((result) => {
+                        this.getGeoPlaceDetail(results[0].place_id).then((result: any) => {
                             if (result) {
                                 resolve(result);
                             } else {
@@ -128,7 +128,7 @@ export class GooglePlacesService {
                     promiseArr.push(this.geoPredictionCall(placesService, queryInput));
                 }
 
-                Promise.all(promiseArr).then((values) => {
+                Promise.all(promiseArr).then((values: any) => {
                     let val: any = values;
                     if (val.length > 1) {
                         let _tempArr: any = [];

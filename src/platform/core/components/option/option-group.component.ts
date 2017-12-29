@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, Input, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 
 /**
  * Component that is used to group instances of `novo-option`.

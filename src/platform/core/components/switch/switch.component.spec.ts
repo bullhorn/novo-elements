@@ -16,7 +16,7 @@ describe('NovoSwitchComponent', () => {
             imports: [NovoSwitchModule],
             schemas: [NO_ERRORS_SCHEMA],
             providers: [
-                { provide: ChangeDetectorRef, useValue: changeDetectorRefStub }
+                { provide: ChangeDetectorRef, useValue: changeDetectorRefStub },
             ],
         });
         fixture = TestBed.createComponent(NovoSwitchComponent);

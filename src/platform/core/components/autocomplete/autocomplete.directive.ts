@@ -1,33 +1,20 @@
 // NG
 import {
-    ChangeDetectorRef,
     Directive,
     ElementRef,
     forwardRef,
-    Host,
     HostBinding,
     HostListener,
     Inject,
-    InjectionToken,
     Input,
     NgZone,
     OnDestroy,
     Optional,
-    ViewContainerRef,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // CDK 
 import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW, TAB } from '@angular/cdk/keycodes';
-import {
-    ConnectedPositionStrategy,
-    Overlay,
-    OverlayRef,
-    OverlayConfig,
-    PositionStrategy,
-    ScrollStrategy,
-} from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
 // RXJS
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -37,7 +24,7 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { filter } from 'rxjs/operators/filter';
 import { take } from 'rxjs/operators/take';
 import { switchMap } from 'rxjs/operators/switchMap';
-import { tap } from 'rxjs/operators/tap';
+// import { tap } from 'rxjs/operators/tap';
 import { delay } from 'rxjs/operators/delay';
 import { Subscription } from 'rxjs/Subscription';
 // App
@@ -72,13 +59,6 @@ export class NovoAutocompleteDirective implements ControlValueAccessor, OnDestro
     @HostBinding('attr.disabled') public _disabled: boolean;
     @HostBinding('attr.autocomplete') public _autocompleteAttr: string = 'off';
 
-    private _overlayRef: OverlayRef | null;
-    private _portal: TemplatePortal<any>;
-    private _panelOpen: boolean = false;
-
-    /** Whether or not the label state is being overridden. */
-    private _manuallyFloatingLabel: boolean = false;
-
     /** The subscription for closing actions (some are bound to document). */
     private _closingActionsSubscription: Subscription;
 
@@ -87,9 +67,7 @@ export class NovoAutocompleteDirective implements ControlValueAccessor, OnDestro
     private _autocompleteRef: NovoAutocompleteComponent;
 
     constructor(private _element: ElementRef,
-        private _viewContainerRef: ViewContainerRef,
         private _zone: NgZone,
-        private _changeDetectorRef: ChangeDetectorRef,
         @Optional() @Inject(DOCUMENT) private _document: any) { }
 
     public ngOnDestroy(): void {
@@ -144,8 +122,8 @@ export class NovoAutocompleteDirective implements ControlValueAccessor, OnDestro
             this.autocomplete._keyManager.tabOut.pipe(filter(() => this.autocomplete.panelOpen)),
             this._escapeEventStream,
             this._outsideClickStream,
-            this._overlayRef ?
-                this._overlayRef.detachments().pipe(filter(() => this.autocomplete.panelOpen)) :
+            this.autocomplete ?
+                this.autocomplete.overlay._overlayRef.detachments().pipe(filter(() => this.autocomplete.panelOpen)) :
                 observableOf(),
         );
     }
@@ -177,9 +155,9 @@ export class NovoAutocompleteDirective implements ControlValueAccessor, OnDestro
             .pipe(filter((event: MouseEvent | TouchEvent) => {
                 const clickTarget: HTMLElement = event.target as HTMLElement;
 
-                return this._panelOpen &&
+                return this.panelOpen &&
                     clickTarget !== this._element.nativeElement &&
-                    (!!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget));
+                    (!!this.autocomplete && !this.autocomplete.panel.nativeElement.contains(clickTarget));
             }));
     }
 

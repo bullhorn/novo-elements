@@ -1,12 +1,9 @@
 // NG2
-import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostBinding, HostListener, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, HostBinding, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 // APP
 import { NovoOverlayTemplateComponent } from '../overlay';
-import { Helpers } from '../../utils/helpers/helpers.service';
 // import { NovoLabelService } from '../../services/novo-label-service';
 
 // Value accessor for the component (supports ngModel)
@@ -69,7 +66,7 @@ export class NovoSearchComponent implements ControlValueAccessor {
             // Reset search
             // Set focus on search
             setTimeout(() => {
-                let element = this.input.nativeElement;
+                let element: HTMLElement = this.input.nativeElement;
                 if (element) {
                     element.focus();
                 }
@@ -130,10 +127,10 @@ export class NovoSearchComponent implements ControlValueAccessor {
     }
 
     /**
-    * This method closes the panel, and if a value is specified, also sets the associated
-    * control to that value. It will also mark the control as dirty if this interaction
-    * stemmed from the user.
-    */
+     * This method closes the panel, and if a value is specified, also sets the associated
+     * control to that value. It will also mark the control as dirty if this interaction
+     * stemmed from the user.
+     */
     public setValueAndClose(event: any | null): void {
         if (event && event.value) {
             this._setValue(event.value);
@@ -145,9 +142,9 @@ export class NovoSearchComponent implements ControlValueAccessor {
     /**
      * Clear any previous selected option and emit a selection change event for this option
      */
-    public clearValue(skip: any) {
-        this.writeValue(null);
-        this._onChange(null);
+    public clearValue(skip: any): void {
+        this.writeValue(undefined);
+        this._onChange(undefined);
     }
 
     /** View -> model callback called when value changes */
@@ -157,7 +154,7 @@ export class NovoSearchComponent implements ControlValueAccessor {
 
     private _setValue(value: any): void {
         this.value = value;
-        let toDisplay = value;
+        let toDisplay: any = value;
         if (value && this.displayField) {
             toDisplay = value.hasOwnProperty(this.displayField) ? value[this.displayField] : value;
         }

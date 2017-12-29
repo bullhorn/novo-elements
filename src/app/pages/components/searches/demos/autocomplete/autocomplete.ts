@@ -19,7 +19,7 @@ export class DemoSearchAutoCompleteComponent {
   ];
 
   public search(term: string): void {
-    this.searchResults.next(this.searchData.map((x) => x.data));
+    this.searchResults.next(this.searchData.map((x: any) => x.data));
   }
   public onSelectMatch(item: any): void {
     this.test = item.name;

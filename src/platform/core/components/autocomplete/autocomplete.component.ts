@@ -10,7 +10,6 @@ import {
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
-    ChangeDetectorRef,
     ChangeDetectionStrategy,
     EventEmitter,
     Output,
@@ -101,7 +100,7 @@ export class NovoAutocompleteComponent implements AfterContentInit {
     /** Unique ID to be used by autocomplete trigger's "aria-owns" property. */
     public id: string = `novo-autocomplete-${_uniqueAutocompleteIdCounter++}`;
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef, public element: ElementRef) { }
+    constructor(public element: ElementRef) { }
 
     public ngAfterContentInit(): void {
         this._keyManager = new ActiveDescendantKeyManager<NovoListItemComponent>(this.options).withWrap();
