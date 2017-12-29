@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, ViewChild, ViewChildren, ContentChildren, forwardRef, ElementRef, OnInit, OnChanges, OnDestroy, AfterViewInit, SimpleChanges, HostListener, QueryList } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ViewChildren, ContentChildren, forwardRef, ElementRef, OnInit, OnChanges, OnDestroy, AfterViewInit, SimpleChanges, HostListener, QueryList, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ENTER, ESCAPE, SPACE, BACKSPACE, DELETE, UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
 // APP
@@ -35,6 +35,7 @@ export class NovoSelectOptionComponent {
 @Component({
     selector: 'novo-select',
     styleUrls: ['./select.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [SELECT_VALUE_ACCESSOR],
     template: `
         <div (click)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{ selected?.viewValue }}<i class="bhi-collapse"></i></div>
@@ -62,7 +63,7 @@ export class NovoSelectOptionComponent {
 })
 export class NovoSelectComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
     @Input() public name: string;
-    @Input() public placeholder: string = 'Select...';
+    @Input() public placeholder: string;
     @Input() public readonly: boolean;
     @Input() public headerConfig: any;
     @Output() public onSelect: EventEmitter<any> = new EventEmitter();
@@ -88,24 +89,33 @@ export class NovoSelectComponent implements OnInit, OnChanges, OnDestroy, AfterV
 
     private _selectionSubscription: Subscription;
 
-    constructor(public element: ElementRef) { }
+    constructor(public element: ElementRef, private _cdr: ChangeDetectorRef) { }
 
     @Input()
     public set options(value: any[]) {
+        let newOptions: any[] = [];
         if (value && value.length && typeof value[0] === 'string') {
-            this.filteredOptions = value.map((item: string) => {
+            newOptions = value.map((item: string) => {
                 return { value: item, label: item };
             });
         } else {
-            this.filteredOptions = value;
+            newOptions = value;
         }
 
-        this.filteredOptions = this.filteredOptions.filter((item: any) => {
+        newOptions = newOptions.filter((item: any) => {
             return !item.readOnly;
         });
-        this.filteredOptions.forEach((element: any) => {
+        newOptions.forEach((element: any) => {
             element.active = false;
         });
+        if (this.placeholder) {
+            newOptions.unshift({
+                label: this.placeholder,
+                value: undefined,
+                active: false,
+            });
+        }
+        this.filteredOptions = [...newOptions];
     }
 
     public get options(): any[] {
@@ -136,8 +146,13 @@ export class NovoSelectComponent implements OnInit, OnChanges, OnDestroy, AfterV
             this.setupSelectionSubscription();
             if (this.model) {
                 Promise.resolve().then(() => this.writeValue(this.model));
+            } else {
+                this.clear();
             }
         });
+        if (!this.model) {
+            this.clear();
+        }
     }
 
     public destroySelectionSubscription(): void {
@@ -181,7 +196,7 @@ export class NovoSelectComponent implements OnInit, OnChanges, OnDestroy, AfterV
     }
 
     public setValue(option: NovoOptionComponent): void {
-        if (option.value) {
+        if (option) {
             let index: number = this.options.findIndex((i: any) => i.value === option.value);
             this.select(option, index);
         }
@@ -199,21 +214,22 @@ export class NovoSelectComponent implements OnInit, OnChanges, OnDestroy, AfterV
             this.onModelChange(this.selected.value);
             this.onSelect.emit({ selected: this.selected.value });
         }
+        this._cdr.markForCheck();
     }
 
     public clear(): void {
-        this.selected = {
-            label: this.placeholder,
-            value: undefined,
-            active: false,
-        };
+        this.setValue(this.options.find((i: NovoOptionComponent) => i.value === undefined));
         this.header = {
             open: false,
             valid: true,
             value: '',
         };
+        if (this.selected) {
+            this.selected.active = false;
+        }
         this.selectedIndex = -1;
         this.empty = true;
+        this._cdr.markForCheck();
     }
 
     @HostListener('keydown', ['$event'])
@@ -341,11 +357,11 @@ export class NovoSelectComponent implements OnInit, OnChanges, OnDestroy, AfterV
                     value: model,
                 };
                 this.addOption(option);
+            } else {
+                this.clear();
             }
-            //  else {
-            //     this.clear();
-            // }
         }
+        this._cdr.markForCheck();
     }
 
     public onModelChange: Function = () => { };

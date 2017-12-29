@@ -1,11 +1,13 @@
 import { DemoSelectStandardComponent } from './standard/standard';
-// import { DemoListAdvancedComponent } from './advanced/advanced';
-// import { DemoListEntityComponent } from './entity/entity';
+import { DemoSelectDataComponent } from './data/data';
+import { DemoSelectGroupsComponent } from './groups/groups';
+import { DemoSelectHeaderComponent } from './header/header';
 
 export const SELECT_DEMO_COMPONENTS: any[] = [
   DemoSelectStandardComponent,
-  // DemoListAdvancedComponent,
-  // DemoListEntityComponent,
+  DemoSelectDataComponent,
+  DemoSelectGroupsComponent,
+  DemoSelectHeaderComponent,
 ];
 
 export const SELECT_DEMOS: DEMOS = {
@@ -13,12 +15,17 @@ export const SELECT_DEMOS: DEMOS = {
     ts: require('!!raw-loader?lang=typescript!./standard/standard.ts'),
     html: require('!!raw-loader?lang=markup!./standard/standard.html'),
   },
-  // advanced: {
-  //   ts: require('!!raw-loader?lang=typescript!./advanced/advanced.ts'),
-  //   html: require('!!raw-loader?lang=markup!./advanced/advanced.html'),
-  // },
-  // entity: {
-  //   ts: require('!!raw-loader?lang=typescript!./entity/entity.ts'),
-  //   html: require('!!raw-loader?lang=markup!./entity/entity.html'),
-  // },
+  data: {
+    ts: require('!!raw-loader?lang=typescript!./data/data.ts'),
+    html: require('!!raw-loader?lang=markup!./data/data.html'),
+  },
+  groups: {
+    ts: require('!!raw-loader?lang=typescript!./groups/groups.ts'),
+    html: require('!!raw-loader?lang=markup!./groups/groups.html'),
+  },
+  header: {
+    ts: require('!!raw-loader?lang=typescript!./header/header.ts'),
+    html: require('!!raw-loader?lang=markup!./header/header.html'),
+  },
+
 };

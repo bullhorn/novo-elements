@@ -55,6 +55,7 @@
         pointer-events: none;
         div[type="button"] {
             color: $grey;
+            border-bottom: 1px dotted rgba(0, 0, 0, 0.12);
         }
     }
 }
@@ -136,7 +137,6 @@
         button {
             display: inline-block;
             border: none;
-            float: left;
             width: auto;
             font-weight: 500;
             font-size: 0.8rem;

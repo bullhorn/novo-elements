@@ -12,12 +12,15 @@
         <li>
           <a routerLink="." fragment="select-standard">Standard</a>
         </li>
-        <!-- <li>
-          <a routerLink="." fragment="select-advanced">Advanced</a>
+        <li>
+          <a routerLink="." fragment="select-groups">With Groups</a>
         </li>
         <li>
-          <a routerLink="." fragment="select-entity">Entity List</a>
-        </li> -->
+          <a routerLink="." fragment="select-data">Select w/ Data</a>
+        </li>
+        <li>
+          <a routerLink="." fragment="select-header">Select w/ Header</a>
+        </li>
       </ul>
     </li>
   </ul>
@@ -30,11 +33,14 @@
   <demo-box class="select-demo" [ts]="demos.standard.ts" [html]="demos.standard.html" name="select-standard" label="Select: Standard">
     <demo-select-standard></demo-select-standard>
   </demo-box>
-  <!-- <demo-box class="select-demo" [ts]="demos.advanced.ts" [html]="demos.advanced.html" name="select-advanced" label="List: Advanced">
-    <demo-select-advanced></demo-select-advanced>
+  <demo-box class="select-demo" [ts]="demos.groups.ts" [html]="demos.groups.html" name="select-groups" label="Select: Groups">
+    <demo-select-groups></demo-select-groups>
   </demo-box>
-  <demo-box class="select-demo" [ts]="demos.entity.ts" [html]="demos.entity.html" name="select-entity" label="List: Entity">
-    <demo-select-entity></demo-select-entity>
-  </demo-box> -->
+  <demo-box class="select-demo" [ts]="demos.data.ts" [html]="demos.data.html" name="select-data" label="Select: Data">
+    <demo-select-data></demo-select-data>
+  </demo-box>
+  <demo-box class="select-demo" [ts]="demos.header.ts" [html]="demos.header.html" name="select-header" label="Select: Header">
+    <demo-select-header></demo-select-header>
+  </demo-box>
 
 </demo-section>
