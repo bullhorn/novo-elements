@@ -220,9 +220,11 @@ export class RenderPipe implements PipeTransform {
                 text = value.label || value.title || '';
                 break;
             case 'Placement':
-                text = `${value.candidate.firstNames || ''} ${value.candidate.lastName || ''}`;
+                if (value.candidate) {
+                    text = `${value.candidate.firstName || ''} ${value.candidate.lastName || ''}`;
+                }
                 if (value.jobOrder) {
-                    text = `${text} - ${value.jobOrder.title}`;
+                    text = value.candidate ? `${text} - ${value.jobOrder.title || ''}` : `${value.jobOrder.title || ''}`;
                 }
                 break;
             case 'JobSubmission':
