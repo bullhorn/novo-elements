@@ -98,10 +98,10 @@ export class NovoCardImage {
   selector: 'novo-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-        <ng-content select="header"></ng-content>
-        <ng-content></ng-content>
-        <ng-content select="footer"></ng-content>
-    `,
+      <ng-content select="header"></ng-content>
+      <ng-content></ng-content>
+      <ng-content select="footer"></ng-content>
+  `,
 })
 export class NovoCardComponent {
   @HostBinding('class.novo-card') public _useClassName: boolean = true;
