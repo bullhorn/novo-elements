@@ -20,6 +20,7 @@ import { GooglePlacesModule } from './components/places';
 import { NovoAutocompleteModule } from './components/autocomplete';
 import { NovoSelectModule } from './components/select';
 import { NovoOptionModule } from './components/option';
+import { NovoRadioModule } from './components/radio';
 
 import { GroupByPipe, DecodeURIPipe } from './pipes';
 
@@ -52,6 +53,7 @@ import { LocalStorageService } from './services/storage/local-storage.service';
     GooglePlacesModule,
     NovoSelectModule,
     NovoOptionModule,
+    NovoRadioModule,
     // Pipes
     GroupByPipe,
     DecodeURIPipe,

@@ -35,6 +35,7 @@ export class NovoButtonComponent implements OnChanges {
   @Input() public side: string;
   @Input() public theme: string;
   @Input() public loading: boolean;
+  @Input() public state: string;
 
   @HostBinding('class') public buttonClasses: string;
 
@@ -68,6 +69,9 @@ export class NovoButtonComponent implements OnChanges {
     }
     if (this.color) {
       clazzes.push(this.color);
+    }
+    if (this.state) {
+      clazzes.push(this.state);
     }
     this.buttonClasses = clazzes.join(' ');
   }

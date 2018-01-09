@@ -25,6 +25,7 @@ import { SwitchesComponent } from './switches/switches.component';
 import { SearchesComponent } from './searches/searches.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { SelectComponent } from './select/select.component';
+import { RadioComponent } from './radio/radio.component';
 
 import { BUTTON_DEMO_COMPONENTS } from './buttons/demos';
 import { HEADER_DEMO_COMPONENTS } from './headers/demos';
@@ -41,6 +42,7 @@ import { SWITCH_DEMO_COMPONENTS } from './switches/demos';
 import { SEARCH_DEMO_COMPONENTS } from './searches/demos';
 import { AUTOCOMPLETE_DEMO_COMPONENTS } from './autocomplete/demos';
 import { SELECT_DEMO_COMPONENTS } from './select/demos';
+import { RADIO_DEMO_COMPONENTS } from './radio/demos';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import { SELECT_DEMO_COMPONENTS } from './select/demos';
     SearchesComponent,
     AutocompleteComponent,
     SelectComponent,
+    RadioComponent,
     ...BUTTON_DEMO_COMPONENTS,
     ...HEADER_DEMO_COMPONENTS,
     ...LOADING_DEMO_COMPONENTS,
@@ -75,6 +78,7 @@ import { SELECT_DEMO_COMPONENTS } from './select/demos';
     ...SEARCH_DEMO_COMPONENTS,
     ...AUTOCOMPLETE_DEMO_COMPONENTS,
     ...SELECT_DEMO_COMPONENTS,
+    ...RADIO_DEMO_COMPONENTS,
   ],
   entryComponents: [
     ...DIALOGS_DEMO_ENTRY_COMPONENTS,

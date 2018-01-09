@@ -16,6 +16,7 @@ import { SwitchesComponent } from './switches/switches.component';
 import { SearchesComponent } from './searches/searches.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { SelectComponent } from './select/select.component';
+import { RadioComponent } from './radio/radio.component';
 
 const routes: Routes = [{
   path: '',
@@ -36,6 +37,7 @@ const routes: Routes = [{
     { path: 'searches', component: SearchesComponent },
     { path: 'autocomplete', component: AutocompleteComponent },
     { path: 'select', component: SelectComponent },
+    { path: 'radio', component: RadioComponent },
     { path: '', redirectTo: 'buttons', pathMatch: 'full' },
   ],
 }];
