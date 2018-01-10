@@ -56,6 +56,7 @@ export class EntityUtils {
             submission: 'JobSubmission',
             references: 'CandidateReference',
             appointment: 'Appointment',
+            tearsheet: 'Tearsheet',
         };
     }
 
