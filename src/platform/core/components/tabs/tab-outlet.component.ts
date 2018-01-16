@@ -2,6 +2,7 @@ import { Component, Input, HostBinding, AfterContentInit, QueryList, ContentChil
 
 @Component({
   selector: 'novo-nav-content',
+  styleUrls: ['./tab-outlet.component.scss'],
   template: '<ng-content></ng-content>',
 })
 export class NovoNavContentComponent {
@@ -19,6 +20,11 @@ export class NovoNavContentComponent {
 @Component({
   selector: 'novo-nav-outlet, novo-tab-outlet',
   template: '<ng-content></ng-content>',
+  styles: [`
+      :host {
+        display: block;
+      }
+  `],
 })
 export class NovoNavOutletComponent implements AfterContentInit {
   @ContentChildren(NovoNavContentComponent) public contents: QueryList<NovoNavContentComponent>;

@@ -255,7 +255,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       if (this.size === 'inherit') {
         this._overlayRef.getConfig().width = this._getHostWidth();
       }
-      this._overlayRef.updateSize();
+      this._overlayRef.updateSize(this._overlayRef.getConfig());
       this._overlayRef.updatePosition();
       this._changeDetectorRef.markForCheck();
     }

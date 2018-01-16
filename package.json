@@ -50,10 +50,12 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [{
-    "name": "Brian Kimball",
-    "email": "bkimball@bullhorn.com"
-  }],
+  "contributors": [
+    {
+      "name": "Brian Kimball",
+      "email": "bkimball@bullhorn.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/bullhorn/novo-elements.git"
@@ -64,29 +66,28 @@
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "private": false,
   "peerDependencies": {
-    "@angular/common": "^5.0.0",
-    "@angular/core": "^5.0.0",
-    "@angular/forms": "^5.0.0"
+    "@angular/common": "~5.0.0",
+    "@angular/core": "~5.0.0",
+    "@angular/forms": "~5.0.0"
   },
   "dependencies": {
-    "@angular/cdk": "5.0.0-rc0",
-    "@angular/flex-layout": "2.0.0-beta.10-4905443",
     "@bullhorn/bullhorn-icons": "^2.1.1",
     "roboto-fontface": "^0.8.0"
   },
   "devDependencies": {
-    "@angular/animations": "^5.0.0",
+    "@angular/animations": "~5.0.0",
     "@angular/cli": "1.5.4",
-    "@angular/common": "^5.0.0",
-    "@angular/compiler": "^5.0.0",
-    "@angular/compiler-cli": "^5.0.0",
-    "@angular/core": "^5.0.0",
-    "@angular/forms": "^5.0.0",
-    "@angular/http": "^5.0.0",
-    "@angular/language-service": "^5.0.0",
-    "@angular/platform-browser": "^5.0.0",
-    "@angular/platform-browser-dynamic": "^5.0.0",
-    "@angular/router": "^5.0.0",
+    "@angular/cdk": "~5.0.0",
+    "@angular/common": "~5.0.0",
+    "@angular/compiler": "~5.0.0",
+    "@angular/compiler-cli": "~5.0.0",
+    "@angular/core": "~5.0.0",
+    "@angular/forms": "~5.0.0",
+    "@angular/http": "~5.0.0",
+    "@angular/language-service": "~5.0.0",
+    "@angular/platform-browser": "~5.0.0",
+    "@angular/platform-browser-dynamic": "~5.0.0",
+    "@angular/router": "~5.0.0",
     "@types/cypress": "^0.1.1",
     "@types/faker": "^4.1.2",
     "@types/jest": "^20.0.6",

@@ -4,13 +4,14 @@ import { NovoNavOutletComponent } from './tab-outlet.component';
 
 @Component({
   selector: 'novo-nav, novo-tab-group',
+  styleUrls: ['./tabs.component.scss'],
   template: '<ng-content></ng-content>',
 })
 export class NovoNavComponent implements AfterContentInit {
   @HostBinding('class.condensed') @Input() public condensed: boolean = false;
   @HostBinding('class.block') @Input() public block: boolean = false;
-  @Input() public theme: string = '';
-  @Input() public direction: string = '';
+  @HostBinding('attr.theme') @Input() public theme: string = '';
+  @HostBinding('attr.direction') @Input() public direction: string = 'horizontal';
   @Input() public router: string;
   @Input() public outlet: NovoNavOutletComponent;
   @ContentChildren(NovoTabComponent) public tabs: QueryList<NovoTabComponent>;

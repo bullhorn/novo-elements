@@ -61,7 +61,7 @@ import { LocalStorageService } from './services/storage/local-storage.service';
   providers: [
     NovoLabelService,
     LocalStorageService,
-    { provide: GlobalRef, useClass: BrowserGlobalRef }
+    { provide: GlobalRef, useClass: BrowserGlobalRef },
   ],
 })
 export class NovoElementsModule { }

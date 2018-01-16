@@ -1,18 +1,16 @@
-<novo-nav theme="white"
-          [outlet]="colorVert"
-          direction="vertical">
-  <novo-tab>
-    <span>
-      <i class="bhi-person"></i>Tab 1</span>
-  </novo-tab>
-  <novo-tab>
-    <span>
-      <i class="bhi-person"></i>Tab 2</span>
-  </novo-tab>
-  <novo-tab [disabled]="true">
-    <span>
-      <i class="bhi-person"></i>Tab 3</span>
-  </novo-tab>
+<novo-nav theme="white" color="ocean" [outlet]="colorVert" direction="vertical">
+    <novo-tab>
+        <novo-icon color="contact">person</novo-icon>
+        <span>Tab 1</span>
+      </novo-tab>
+      <novo-tab>
+          <novo-icon theme="candidate">person</novo-icon>
+          <span>Tab 2</span>
+      </novo-tab>
+      <novo-tab [disabled]="true">
+          <novo-icon>person</novo-icon>
+          <span>Tab 3</span>
+      </novo-tab>
 </novo-nav>
 
 <novo-nav-outlet #colorVert>

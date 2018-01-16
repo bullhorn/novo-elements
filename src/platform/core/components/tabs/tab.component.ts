@@ -2,6 +2,7 @@ import { Component, Input, EventEmitter, Output, HostBinding, HostListener } fro
 
 @Component({
   selector: 'novo-tab',
+  styleUrls: ['./tab.component.scss'],
   template: `
         <div class="novo-tab-link">
             <ng-content></ng-content>

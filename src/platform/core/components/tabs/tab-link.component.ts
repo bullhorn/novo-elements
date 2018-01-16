@@ -2,6 +2,7 @@ import { Component, Input, HostBinding, HostListener } from '@angular/core';
 
 @Component({
   selector: 'novo-tab-link, novo-nav-link, [tab-link]',
+  styleUrls: ['./tab.component.scss'],
   template: `
         <div class="novo-tab-link" (click)="_checkDisabled($event)">
             <ng-content></ng-content>

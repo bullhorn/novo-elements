@@ -59,12 +59,19 @@
         box-shadow: none !important;
       }
     }
-    @each $key,
-    $color in $all-colors {
-      &[theme="#{$key}"] {
-        >button {
-          color: $color !important;
-        }
+  }
+
+  @each $key,
+  $color in $all-colors {
+    &[theme="#{$key}"] {
+      input:focus,
+      input:active {
+        border-color: $color;
+      }
+      
+      &.focused > button {
+        color: $color !important;
+        border-color: $color;
       }
     }
   }
