@@ -6,10 +6,14 @@
   .demo-box-content {
     padding: $medium;
   }
+  .demo-box-code {
+    padding: 0 $medium;
+  }
   .demo-box-inner-nav {
     border-bottom: 1px solid $grey;
   }
   pre.prettyprint {
     margin-top: 0;
+    margin-bottom: 0;
   }
 }

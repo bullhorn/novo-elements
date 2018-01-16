@@ -1,7 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { IDEAL_COLORS } from '../../consts';
-
 @Component({
   selector: 'demo-box',
   styleUrls: ['./demo-box.component.scss'],
@@ -15,7 +13,9 @@ export class DemoBoxComponent {
   @Input() public name: string;
   @Input() public label: string;
 
-  public activeTab: string = 'ts';
   public showCode: boolean = false;
-  public randColor: string = IDEAL_COLORS[Math.floor(Math.random() * IDEAL_COLORS.length)];
+
+  public toggleCode(): void {
+    this.showCode = !this.showCode;
+  }
 }
