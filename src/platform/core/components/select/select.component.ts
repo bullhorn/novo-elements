@@ -38,7 +38,7 @@ export class NovoSelectOptionComponent {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [SELECT_VALUE_ACCESSOR],
     template: `
-        <div (click)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{ selected?.viewValue }}<i class="bhi-collapse"></i></div>
+        <div class="select-input" (click)="openPanel()" tabIndex="0" [class.empty]="empty">{{ selected?.viewValue }}<i class="bhi-collapse"></i></div>
         <novo-overlay-template [parent]="element" position="center">
             <div class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
                 <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">
