@@ -24,9 +24,9 @@ const NOVO_ELEMENTS_PROVIDERS = [
     { provide: ComponentUtils, useClass: ComponentUtils },
     { provide: GlobalRef, useClass: BrowserGlobalRef },
     { provide: LocalStorageService, useClass: LocalStorageService },
+    { provide: Security, useClass: Security },
     FieldInteractionApi,
     DateFormatService,
-    Security,
 ];
 
 @NgModule({

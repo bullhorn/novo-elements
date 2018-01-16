@@ -67,6 +67,7 @@ export { NovoDragulaService } from './elements/dragula/DragulaService';
 export { GooglePlacesService } from './elements/places/places.service';
 import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
+export { Security } from './services/security/Security';
 // Export all data services
 export { Collection } from './services/data-provider/Collection';
 export { CollectionEvent } from './services/data-provider/CollectionEvent';
@@ -86,6 +87,7 @@ export { PercentageCell } from './elements/table/extras/percentage-cell/Percenta
 export { NovoDropdownCell, INovoDropdownCellConfig } from './elements/table/extras/dropdown-cell/DropdownCell';
 export { FormValidators } from './elements/form/FormValidators';
 export { FormUtils } from './utils/form-utils/FormUtils';
+export { EntityUtils } from './utils/entity-utils/EntityUtils';
 export { NovoFile } from './elements/form/extras/file/extras/file/File';
 export { BaseControl, NovoControlConfig, NovoGroupedControlConfig } from './elements/form/controls/BaseControl';
 export { ControlFactory } from './elements/form/controls/ControlFactory';
