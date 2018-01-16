@@ -50,7 +50,8 @@ import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
-
+import { EntityUtils } from './utils/entity-utils/EntityUtils';
+import { Security } from './services/security/Security';
 @NgModule({
     imports: [
         ReactiveFormsModule
@@ -104,7 +105,9 @@ import { FormUtils } from './utils/form-utils/FormUtils';
         { provide: GooglePlacesService, useClass: GooglePlacesService },
         { provide: GlobalRef, useClass: BrowserGlobalRef },
         { provide: LocalStorageService, useClass: LocalStorageService },
-        { provide: FormUtils, useClass: FormUtils }
+        { provide: FormUtils, useClass: FormUtils },
+        { provide: EntityUtils, useClass: EntityUtils },
+        { provide: Security, useClass: Security }
     ]
 })
 export class NovoElementsModule {
