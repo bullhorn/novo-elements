@@ -1,4 +1,5 @@
-<div class="demo-group" layout="row">
+<div class="demo-group"
+     layout="row">
   <label>
     Count
     <span>{{ toggleCount }}</span>
@@ -7,7 +8,8 @@
     Toggled
     <span>{{ checked }}</span>
   </label>
-  <novo-switch [(ngModel)]="checked" (onChange)="increment()"></novo-switch>
+  <novo-switch [(ngModel)]="checked"
+               (onChange)="increment()"></novo-switch>
   <novo-switch theme="grapefruit"></novo-switch>
   <novo-switch disabled></novo-switch>
 </div>

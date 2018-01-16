@@ -1,7 +1,14 @@
 <ng-container *ngFor="let color of colors;let i = index;">
-  <button theme="dialogue" [color]="color">{{ color }}</button>
+  <!-- color property will be the label of the button -->
+  <button theme="dialogue"
+          [color]="color">{{ color }}</button>
 </ng-container>
+
 <br/>
+
 <ng-container *ngFor="let color of colors;let i = index;">
-  <button theme="dialogue" [color]="color" disabled="true">{{ color }}</button>
+  <!-- color property will be the label of the button -->
+  <button theme="dialogue"
+          [color]="color"
+          disabled="true">{{ color }}</button>
 </ng-container>

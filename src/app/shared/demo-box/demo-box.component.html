@@ -1,25 +1,47 @@
 <div class="demo-section">
-  <div class="demo-title">
-    <label routerLink="." [attr.fragment]="name" [id]="name">{{ label }}</label>
-    <i class="bhi-sortable" (click)="toggleCode()" [class.code-shown]="showCode"></i>
-  </div>
-  <div class="demo-sample">
-    <ng-content></ng-content>
-  </div>
-  <div class="code-blocks" [class.active]="showCode">
-    <div class="code-tab-labels">
-      <label for="ts" *ngIf="ts" [class.active]="activeTab === 'ts'" (click)="changeTab('ts')">Typescript</label>
-      <label for="html" *ngIf="html" [class.active]="activeTab === 'html'" (click)="changeTab('html')">HTML</label>
-      <label for="style" *ngIf="style" [class.active]="activeTab === 'style'" (click)="changeTab('style')">SCSS</label>
-    </div>
-    <section class="code-tab-content" *ngIf="ts" [class.active]="activeTab === 'ts'">
-      <pre class="prettyprint linenums lang-js">{{ ts }}</pre>
-    </section>
-    <section class="code-tab-content" *ngIf="html" [class.active]="activeTab === 'html'">
-      <pre class="prettyprint linenums lang-html">{{ html }}</pre>
-    </section>
-    <section class="code-tab-content" *ngIf="style" [class.active]="activeTab === 'style'">
-      <pre class="prettyprint linenums lang-css">{{ style }}</pre>
-    </section>
-  </div>
+  <header [theme]="randColor">
+    <h2 routerLink="."
+        [attr.fragment]="name"
+        [id]="name"
+        novo-title>{{ label }}</h2>
+    <novo-nav theme="color"
+              [outlet]="demoNavOutlet"
+              [block]="true"
+              direction="horizontal">
+      <novo-tab [block]="true">Demo</novo-tab>
+      <novo-tab *ngIf="ts || html || style"
+                [block]="true">Code</novo-tab>
+    </novo-nav>
+  </header>
+
+  <novo-nav-outlet #demoNavOutlet>
+    <novo-nav-content class="demo-box-content">
+      <ng-content></ng-content>
+    </novo-nav-content>
+    <novo-nav-content *ngIf="ts || html || style">
+      <novo-nav class="demo-box-inner-nav"
+                theme="white"
+                [block]="true"
+                [outlet]="codeNavOutlet"
+                direction="horizontal">
+        <novo-tab *ngIf="ts"
+                  [block]="true">Typescript</novo-tab>
+        <novo-tab *ngIf="html"
+                  [block]="true">HTML</novo-tab>
+        <novo-tab *ngIf="style"
+                  [block]="true">SCSS</novo-tab>
+      </novo-nav>
+      <novo-nav-outlet #codeNavOutlet>
+        <novo-nav-content *ngIf="ts">
+          <pre class="prettyprint linenums lang-js">{{ ts }}</pre>
+        </novo-nav-content>
+        <novo-nav-content *ngIf="html">
+          <pre class="prettyprint linenums lang-html">{{ html }}</pre>
+        </novo-nav-content>
+        <novo-nav-content *ngIf="style">
+          <pre class="prettyprint linenums lang-css">{{ style }}</pre>
+        </novo-nav-content>
+      </novo-nav-outlet>
+    </novo-nav-content>
+  </novo-nav-outlet>
 </div>

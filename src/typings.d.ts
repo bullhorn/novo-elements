@@ -5,7 +5,7 @@ declare var module: NodeModule;
 declare const PR: any;
 
 interface NodeModule {
-    id: string;
+  id: string;
 }
 
-type DEMOS = { [key: string]: { ts: string, html: string } };
+type DEMOS = { [key: string]: { ts: string; html: string } };

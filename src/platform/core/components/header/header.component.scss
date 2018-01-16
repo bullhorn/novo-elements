@@ -54,5 +54,8 @@ header[theme] {
   }
   &>novo-nav {
     padding-left: 16px;
+    &.block {
+      padding-left: 0;
+    }
   }
 }

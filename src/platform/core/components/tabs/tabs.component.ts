@@ -8,6 +8,7 @@ import { NovoNavOutletComponent } from './tab-outlet.component';
 })
 export class NovoNavComponent implements AfterContentInit {
   @HostBinding('class.condensed') @Input() public condensed: boolean = false;
+  @HostBinding('class.block') @Input() public block: boolean = false;
   @Input() public theme: string = '';
   @Input() public direction: string = '';
   @Input() public router: string;

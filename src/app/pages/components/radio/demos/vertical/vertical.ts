@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 })
 export class DemoRadioVerticalComponent {
   public onChangeVertical(change: Event): void {
-      console.log('Vertical Radio Change:', change); // tslint:disable-line
+    console.log('Vertical Radio Change:', change); // tslint:disable-line
   }
 }

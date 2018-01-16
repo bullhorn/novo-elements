@@ -50,16 +50,10 @@
     "angular2"
   ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
-  "contributors": [
-    {
-      "name": "Brian Kimball",
-      "email": "bkimball@bullhorn.com"
-    },
-    {
-      "name": "Alec Sibilia",
-      "email": "asibilia@bullhorn.com"
-    }
-  ],
+  "contributors": [{
+    "name": "Brian Kimball",
+    "email": "bkimball@bullhorn.com"
+  }],
   "repository": {
     "type": "git",
     "url": "https://github.com/bullhorn/novo-elements.git"

@@ -1,53 +1,93 @@
-<demo-section [name]="name" [src]="src">
+<demo-section [name]="name"
+              [src]="src">
 
   <h3>Contents</h3>
 
   <ul class="demo-nav">
-    <li><a routerLink="." fragment="usage">Usage</a></li>
-    <li><a routerLink="." fragment="examples">Examples</a>
+    <li><a routerLink="."
+         fragment="usage">Usage</a></li>
+    <li><a routerLink="."
+         fragment="examples">Examples</a>
       <ul>
-        <li><a routerLink="." fragment="themes">Themes</a></li>
+        <li><a routerLink="."
+             fragment="themes">Themes</a></li>
         <ul>
-          <li><a routerLink="." fragment="theme-primary">Primary</a></li>
-          <li><a routerLink="." fragment="theme-secondary">Secondary</a></li>
-          <li><a routerLink="." fragment="theme-dialogue">Dialogue</a></li>
-          <li><a routerLink="." fragment="theme-standard">Standard</a></li>
-          <li><a routerLink="." fragment="theme-icon">Icon</a></li>
+          <li><a routerLink="."
+               fragment="theme-primary">Primary</a></li>
+          <li><a routerLink="."
+               fragment="theme-secondary">Secondary</a></li>
+          <li><a routerLink="."
+               fragment="theme-dialogue">Dialogue</a></li>
+          <li><a routerLink="."
+               fragment="theme-standard">Standard</a></li>
+          <li><a routerLink="."
+               fragment="theme-icon">Icon</a></li>
         </ul>
-        <li><a routerLink="." fragment="states">States</a></li>
+        <li><a routerLink="."
+             fragment="states">States</a></li>
         <ul>
-          <li><a routerLink="." fragment="states-loading">Loading</a></li>
+          <li><a routerLink="."
+               fragment="states-loading">Loading</a></li>
         </ul>
       </ul>
     </li>
   </ul>
 
-  <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
-  <div class="usage-doc" [innerHtml]="usageDoc"></div>
+  <h3 routerLink="."
+      fragment="usage"
+      id="usage">Usage</h3>
+  <div class="usage-doc"
+       [innerHtml]="usageDoc"></div>
 
-  <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
+  <h3 routerLink="."
+      fragment="examples"
+      id="examples">Examples</h3>
 
-  <demo-box class="button-demo" [ts]="demos.primary.ts" [html]="demos.primary.html" name="theme-primary" label="Theme: Primary">
+  <demo-box class="button-demo"
+            [ts]="demos.primary.ts"
+            [html]="demos.primary.html"
+            name="theme-primary"
+            label="Theme: Primary">
     <demo-buttons-primary></demo-buttons-primary>
   </demo-box>
 
-  <demo-box class="button-demo" [ts]="demos.secondary.ts" [html]="demos.secondary.html" name="theme-secondary" label="Theme: Secondary">
+  <demo-box class="button-demo"
+            [ts]="demos.secondary.ts"
+            [html]="demos.secondary.html"
+            name="theme-secondary"
+            label="Theme: Secondary">
     <demo-buttons-secondary></demo-buttons-secondary>
   </demo-box>
 
-  <demo-box class="button-demo" [ts]="demos.dialogue.ts" [html]="demos.dialogue.html" name="theme-dialogue" label="Theme: Dialogue">
+  <demo-box class="button-demo"
+            [ts]="demos.dialogue.ts"
+            [html]="demos.dialogue.html"
+            name="theme-dialogue"
+            label="Theme: Dialogue">
     <demo-buttons-dialogue></demo-buttons-dialogue>
   </demo-box>
 
-  <demo-box class="button-demo" [ts]="demos.standard.ts" [html]="demos.standard.html" name="theme-standard" label="Theme: Standard">
+  <demo-box class="button-demo"
+            [ts]="demos.standard.ts"
+            [html]="demos.standard.html"
+            name="theme-standard"
+            label="Theme: Standard">
     <demo-buttons-standard></demo-buttons-standard>
   </demo-box>
 
-  <demo-box class="button-demo" [ts]="demos.icon.ts" [html]="demos.icon.html" name="theme-icon" label="Theme: Icon">
+  <demo-box class="button-demo"
+            [ts]="demos.icon.ts"
+            [html]="demos.icon.html"
+            name="theme-icon"
+            label="Theme: Icon">
     <demo-buttons-icon></demo-buttons-icon>
   </demo-box>
 
-  <demo-box class="button-demo" [ts]="demos.loading.ts" [html]="demos.loading.html" name="states-loading" label="State: Loading">
+  <demo-box class="button-demo"
+            [ts]="demos.loading.ts"
+            [html]="demos.loading.html"
+            name="states-loading"
+            label="State: Loading">
     <demo-buttons-loading></demo-buttons-loading>
   </demo-box>
 </demo-section>

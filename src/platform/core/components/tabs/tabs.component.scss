@@ -25,6 +25,10 @@ novo-nav {
     height: 100%;
     min-height: 45px;
     position: relative;
+    cursor: pointer;
+    &.block {
+      flex: 1;
+    }
     &.disabled {
       .novo-tab-link {
         opacity: 0.5;

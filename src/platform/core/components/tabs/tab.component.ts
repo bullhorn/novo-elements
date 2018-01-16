@@ -12,6 +12,7 @@ import { Component, Input, EventEmitter, Output, HostBinding, HostListener } fro
 export class NovoTabComponent {
   @HostBinding('class.active') @Input() public active: boolean = false;
   @HostBinding('class.disabled') @Input() public disabled: boolean = false;
+  @HostBinding('class.block') @Input() public block: boolean = false;
   @Output() public select: EventEmitter<NovoTabComponent> = new EventEmitter<NovoTabComponent>();
 
   @HostListener('click')

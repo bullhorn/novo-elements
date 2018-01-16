@@ -1,7 +1,16 @@
 <ng-container *ngFor="let color of colors;let i = index;">
-  <button theme="primary" [color]="color" icon="check">{{ color }}</button>
+  <!-- color property will be the label of the button -->
+  <button theme="primary"
+          [color]="color"
+          icon="check">{{ color }}</button>
 </ng-container>
+
 <br/>
+
 <ng-container *ngFor="let color of colors;let i = index;">
-  <button theme="primary" [color]="color" icon="check" disabled="true">{{ color }}</button>
+  <!-- color property will be the label of the button -->
+  <button theme="primary"
+          [color]="color"
+          icon="check"
+          disabled="true">{{ color }}</button>
 </ng-container>

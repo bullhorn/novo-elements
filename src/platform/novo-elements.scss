@@ -22,20 +22,19 @@
 @import "./core/components/tabs/tabs.component";
 @import "./core/components/value/value.component";
 // @import "./core/components/switch/switch.component";
-    
 [hidden] {
-    display: none !important;
+  display: none !important;
 }
 
 .novo-overlay-panel {
-    & > * {
-        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-    }
+  &>* {
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  }
 }
 
 @each $background,
-$color in $base-colors {
-    .#{$background} {
-        background-color: $color;
-    }
+$color in $all-colors {
+  .#{$background} {
+    background-color: $color;
+  }
 }

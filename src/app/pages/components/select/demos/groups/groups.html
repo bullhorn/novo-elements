@@ -6,8 +6,10 @@
     </div>
     <novo-select>
       <novo-option>-- None --</novo-option>
-      <novo-option-group *ngFor="let company of companies" [label]="company.name">
-        <novo-option *ngFor="let employee of company.employees" [value]="employee.name">
+      <novo-option-group *ngFor="let company of companies"
+                         [label]="company.name">
+        <novo-option *ngFor="let employee of company.employees"
+                     [value]="employee.name">
           {{ employee.name }}
         </novo-option>
       </novo-option-group>

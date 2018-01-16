@@ -1,46 +1,72 @@
-<demo-section [name]="name" [src]="src">
+<demo-section [name]="name"
+              [src]="src">
 
   <h3>Contents</h3>
 
   <ul class="demo-nav">
     <li>
-      <a routerLink="." fragment="description">Description</a>
+      <a routerLink="."
+         fragment="description">Description</a>
     </li>
     <li>
-      <a routerLink="." fragment="usage">Usage</a>
+      <a routerLink="."
+         fragment="usage">Usage</a>
     </li>
     <li>
-      <a routerLink="." fragment="examples">Examples</a>
+      <a routerLink="."
+         fragment="examples">Examples</a>
       <ul>
         <li>
-          <a routerLink="." fragment="tabs-standard">Standard</a>
+          <a routerLink="."
+             fragment="tabs-standard">Standard</a>
         </li>
         <li>
-          <a routerLink="." fragment="tabs-vertical">Vertical</a>
+          <a routerLink="."
+             fragment="tabs-vertical">Vertical</a>
         </li>
         <li>
-          <a routerLink="." fragment="tabs-routing">Routing</a>
+          <a routerLink="."
+             fragment="tabs-routing">Routing</a>
         </li>
       </ul>
     </li>
   </ul>
 
-  <h3 routerLink="." fragment="description" id="description">Description</h3>
+  <h3 routerLink="."
+      fragment="description"
+      id="description">Description</h3>
   <p>Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets. Tabs in Bullhorn have two different themes; A 'color' theme for tabbed navigation on a colored background, and a 'white' theme for tabs on a white background.</p>
 
-  <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
-  <div class="usage-doc" [innerHtml]="usageDoc"></div>
+  <h3 routerLink="."
+      fragment="usage"
+      id="usage">Usage</h3>
+  <div class="usage-doc"
+       [innerHtml]="usageDoc"></div>
 
-  <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
+  <h3 routerLink="."
+      fragment="examples"
+      id="examples">Examples</h3>
 
-  <demo-box class="tabs-demo" [ts]="demos.standard.ts" [html]="demos.standard.html" name="tabs-standard" label="Tabs: Standard">
+  <demo-box class="tabs-demo"
+            [ts]="demos.standard.ts"
+            [html]="demos.standard.html"
+            name="tabs-standard"
+            label="Tabs: Standard">
     <demo-tabs-standard></demo-tabs-standard>
   </demo-box>
-  <demo-box class="tabs-demo" [ts]="demos.vertical.ts" [html]="demos.vertical.html" name="tabs-vertical" label="Tabs: Vertical">
+  <demo-box class="tabs-demo"
+            [ts]="demos.vertical.ts"
+            [html]="demos.vertical.html"
+            name="tabs-vertical"
+            label="Tabs: Vertical">
     <p>Vertical tabs get a direction attribute direction="vertical"</p>
     <demo-tabs-vertical></demo-tabs-vertical>
   </demo-box>
-  <demo-box class="tabs-demo" [ts]="demos.routing.ts" [html]="demos.routing.html" name="tabs-routing" label="Tabs: With RouterLinks">
+  <demo-box class="tabs-demo"
+            [ts]="demos.routing.ts"
+            [html]="demos.routing.html"
+            name="tabs-routing"
+            label="Tabs: With RouterLinks">
     <demo-tabs-routing></demo-tabs-routing>
     <p>Follows the same color/white theme as above, but doesn't use the "novo-tabs" tag and you have to add the classes and html accordingly. The header will now control and route your application and put the content in the "router-outlet" and look/feel like our tabs component</p>
   </demo-box>

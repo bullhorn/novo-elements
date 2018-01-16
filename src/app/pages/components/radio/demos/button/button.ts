@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 })
 export class DemoRadioButtonComponent {
   public onChangeButton(change: Event): void {
-      console.log('Button Radio Change:', change); // tslint:disable-line
+    console.log('Button Radio Change:', change); // tslint:disable-line
   }
 }

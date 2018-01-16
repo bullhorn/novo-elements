@@ -13,7 +13,6 @@
 
 // Layout
 // ------------------------------
-
 $baseline-grid: 8px !default;
 $layout-gutter-width: ($baseline-grid * 2) !default;
 
@@ -32,7 +31,7 @@ $layout-breakpoint-lg: 1920px !default;
 }
 
 @mixin flex-order-for-name($sizes:null) {
-  @if $sizes == null {
+  @if $sizes==null {
     $sizes: '';
 
     [flex-order] {
@@ -45,9 +44,10 @@ $layout-breakpoint-lg: 1920px !default;
     $suffix: '';
 
     @each $s in $sizes {
-      @if $s != '' {
+      @if $s !='' {
         $suffix: '-#{$s}="#{$i}"';
-      } @else {
+      }
+      @else {
         $suffix: '="#{$i}"';
       }
 
@@ -61,7 +61,7 @@ $layout-breakpoint-lg: 1920px !default;
 }
 
 @mixin offset-for-name($sizes:null) {
-  @if $sizes == null {
+  @if $sizes==null {
     $sizes: '';
   }
 
@@ -70,13 +70,14 @@ $layout-breakpoint-lg: 1920px !default;
     $suffix: '';
 
     @each $s in $sizes {
-      @if $s != '' {
+      @if $s !='' {
         $suffix: '-#{$s}="#{$i * 5}"';
-      } @else {
+      }
+      @else {
         $suffix: '="#{$i * 5}"';
       }
 
-      $offsets: $offsets + '[flex-offset#{$suffix}], ';
+      $offsets: $offsets+'[flex-offset#{$suffix}], ';
     }
 
     #{$offsets} {
@@ -89,9 +90,10 @@ $layout-breakpoint-lg: 1920px !default;
     $suffix: '';
 
     @each $s in $sizes {
-      @if $s != '' {
+      @if $s !='' {
         $suffix: '-#{$s}="#{$i}"';
-      } @else {
+      }
+      @else {
         $suffix: '="#{$i}"';
       }
 
@@ -108,9 +110,10 @@ $layout-breakpoint-lg: 1920px !default;
     $suffix: '';
 
     @each $s in $sizes {
-      @if $s != '' {
+      @if $s !='' {
         $suffix: '-#{$s}="#{$i}"';
-      } @else {
+      }
+      @else {
         $suffix: '="#{$i}"';
       }
 
@@ -124,14 +127,16 @@ $layout-breakpoint-lg: 1920px !default;
 }
 
 @mixin layout-for-name($name: null) {
-  @if $name == null {
+  @if $name==null {
     $name: '';
   }
-  @if $name != '' {
+  @if $name !='' {
     $name: '-#{$name}';
   }
 
-  [layout#{$name}], [layout#{$name}="column"], [layout#{$name}="row"] {
+  [layout#{$name}],
+  [layout#{$name}="column"],
+  [layout#{$name}="row"] {
     box-sizing: border-box;
     display: -webkit-box;
     display: -webkit-flex;
@@ -149,26 +154,24 @@ $layout-breakpoint-lg: 1920px !default;
 
 @mixin flex-properties-for-name($name: null) {
   $flexName: 'flex';
-  @if $name != null {
+  @if $name !=null {
     $flexName: 'flex-#{$name}';
     $name: '-#{$name}';
-  } @else {
+  }
+  @else {
     $name: '';
   }
 
   [#{$flexName}] {
     flex: 1;
     box-sizing: border-box;
-  }
-  // === flex: 1 1 0%;
-
+  } // === flex: 1 1 0%;
   // IE mediaQuery hack for 8,9,10 to set the flex-basis properly for 'flex' values
   // Details:
   // Do not use unitless flex-basis values in the flex shorthand because IE 10-11 will error.
   // Also use 0% instead of 0px since minifiers will often convert 0px to 0 (which is unitless and will have the same problem).
   // Safari, however, fails with flex-basis : 0% and requires flex-basis : 0px
-  @media screen\0
-  {
+  @media screen\0 {
     [#{$flexName}] {
       flex: 1 1 0%;
     }
@@ -203,9 +206,7 @@ $layout-breakpoint-lg: 1920px !default;
   [#{$flexName}-nogrow] {
     flex: 0 1 auto;
     box-sizing: border-box;
-  }
-
-  // (1-20) * 5 = 0-100%
+  } // (1-20) * 5 = 0-100%
   @for $i from 0 through 20 {
     $value: #{$i * 5 + '%'};
 
@@ -216,17 +217,17 @@ $layout-breakpoint-lg: 1920px !default;
       box-sizing: border-box;
     }
 
-    [layout="row"] > [#{$flexName}="#{$i * 5}"],
-    [layout="row nowrap"] > [#{$flexName}="#{$i * 5}"],
-    [layout#{$name}="row"] > [#{$flexName}="#{$i * 5}"] {
+    [layout="row"]>[#{$flexName}="#{$i * 5}"],
+    [layout="row nowrap"]>[#{$flexName}="#{$i * 5}"],
+    [layout#{$name}="row"]>[#{$flexName}="#{$i * 5}"] {
       flex: 1 1 #{$value};
       max-width: #{$value};
       max-height: 100%;
       box-sizing: border-box;
     }
 
-    [layout="column"] > [#{$flexName}="#{$i * 5}"],
-    [layout#{$name}="column"] > [#{$flexName}="#{$i * 5}"] {
+    [layout="column"]>[#{$flexName}="#{$i * 5}"],
+    [layout#{$name}="column"]>[#{$flexName}="#{$i * 5}"] {
       flex: 1 1 #{$value};
       max-width: 100%;
       max-height: #{$value};
@@ -234,59 +235,69 @@ $layout-breakpoint-lg: 1920px !default;
     }
   }
 
-  [layout="row"], [layout="row nowrap"], [layout#{$name}="row"] {
-    > [#{$flexName}="33"], > [#{$flexName}="33"] {
+  [layout="row"],
+  [layout="row nowrap"],
+  [layout#{$name}="row"] {
+    >[#{$flexName}="33"],
+    >[#{$flexName}="33"] {
       flex: 1 1 33%;
       max-width: calc(100% / 3);
       max-height: 100%;
       box-sizing: border-box;
     }
-    > [#{$flexName}="34"], > [#{$flexName}="34"] {
+    >[#{$flexName}="34"],
+    >[#{$flexName}="34"] {
       flex: 1 1 34%;
       max-width: 34%;
       max-height: 100%;
       box-sizing: border-box;
     }
-    > [#{$flexName}="66"], > [#{$flexName}="66"] {
+    >[#{$flexName}="66"],
+    >[#{$flexName}="66"] {
       flex: 1 1 66%;
       max-width: calc(200% / 3);
       max-height: 100%;
       box-sizing: border-box;
     }
-    > [#{$flexName}="67"], > [#{$flexName}="67"] {
+    >[#{$flexName}="67"],
+    >[#{$flexName}="67"] {
       flex: 1 1 67%;
       max-width: 67%;
       max-height: 100%;
       box-sizing: border-box;
     }
   }
-  [layout="column"], [layout#{$name}="column"] {
-    > [#{$flexName}="33"], > [#{$flexName}="33"] {
+  [layout="column"],
+  [layout#{$name}="column"] {
+    >[#{$flexName}="33"],
+    >[#{$flexName}="33"] {
       flex: 1 1 33%;
       max-width: 100%;
       max-height: calc(100% / 3);
       box-sizing: border-box;
     }
-    > [#{$flexName}="34"], > [#{$flexName}="34"] {
+    >[#{$flexName}="34"],
+    >[#{$flexName}="34"] {
       flex: 1 1 34%;
       max-width: 100%;
       max-height: 34%;
       box-sizing: border-box;
     }
-    > [#{$flexName}="66"], > [#{$flexName}="66"] {
+    >[#{$flexName}="66"],
+    >[#{$flexName}="66"] {
       flex: 1 1 66%;
       max-width: 100%;
       max-height: calc(200% / 3);
       box-sizing: border-box;
     }
-    > [#{$flexName}="67"], > [#{$flexName}="67"] {
+    >[#{$flexName}="67"],
+    >[#{$flexName}="67"] {
       flex: 1 1 67%;
       max-width: 100%;
       max-height: 67%;
       box-sizing: border-box;
     }
   }
-
 }
 
 @mixin layout-align-for-name($suffix: null) {
@@ -296,9 +307,8 @@ $layout-breakpoint-lg: 1920px !default;
   // center, start, end, space-between, space-around
   // flex-start is the default for justify-content
   // ------------------------------
-
   $name: 'layout-align';
-  @if $suffix != null {
+  @if $suffix !=null {
     $name: 'layout-align-#{$suffix}';
   }
 
@@ -308,57 +318,45 @@ $layout-breakpoint-lg: 1920px !default;
     justify-content: flex-start;
     align-content: stretch;
     align-items: stretch;
-  }
-  // Main Axis Center
+  } // Main Axis Center
   [#{$name}="start"],
   [#{$name}="start start"],
   [#{$name}="start center"],
   [#{$name}="start end"],
   [#{$name}="start stretch"] {
     justify-content: start;
-  }
-
-  // Main Axis Center
+  } // Main Axis Center
   [#{$name}="center"],
   [#{$name}="center start"],
   [#{$name}="center center"],
   [#{$name}="center end"],
   [#{$name}="center stretch"] {
     justify-content: center;
-  }
-
-  // Main Axis End
+  } // Main Axis End
   [#{$name}="end"], //stretch
   [#{$name}="end center"],
   [#{$name}="end start"],
   [#{$name}="end end"],
   [#{$name}="end stretch"] {
     justify-content: flex-end;
-  }
-
-  // Main Axis Space Around
+  } // Main Axis Space Around
   [#{$name}="space-around"], //stretch
   [#{$name}="space-around center"],
   [#{$name}="space-around start"],
   [#{$name}="space-around end"],
   [#{$name}="space-around stretch"] {
     justify-content: space-around;
-  }
-
-  // Main Axis Space Between
+  } // Main Axis Space Between
   [#{$name}="space-between"], //stretch
   [#{$name}="space-between center"],
   [#{$name}="space-between start"],
   [#{$name}="space-between end"],
   [#{$name}="space-between stretch"] {
     justify-content: space-between;
-  }
-
-  // Arrange on the Cross Axis
+  } // Arrange on the Cross Axis
   // center, start, end
   // stretch is the default for align-items
   // ------------------------------
-
   // Cross Axis Start
   [#{$name}="start start"],
   [#{$name}="center start"],
@@ -367,9 +365,7 @@ $layout-breakpoint-lg: 1920px !default;
   [#{$name}="space-around start"] {
     align-items: flex-start;
     align-content: flex-start;
-  }
-
-  // Cross Axis Center
+  } // Cross Axis Center
   [#{$name}="start center"],
   [#{$name}="center center"],
   [#{$name}="end center"],
@@ -377,26 +373,20 @@ $layout-breakpoint-lg: 1920px !default;
   [#{$name}="space-around center"] {
     align-items: center;
     align-content: center;
-    max-width: 100%;
-
-    // IE11 overflow https://github.com/philipwalton/flexbugs#2-column-flex-items-set-to-align-itemscenter-overflow-their-container
-    & > * {
+    max-width: 100%; // IE11 overflow https://github.com/philipwalton/flexbugs#2-column-flex-items-set-to-align-itemscenter-overflow-their-container
+    &>* {
       max-width: 100%;
       box-sizing: border-box;
     }
-  }
-
-  // Cross Axis Center IE overflow fix
-  [#{$name}="start center"] > *,
-  [#{$name}="center center"] > *,
-  [#{$name}="end center"] > *,
-  [#{$name}="space-between center"] > *,
-  [#{$name}="space-around center"] > * {
+  } // Cross Axis Center IE overflow fix
+  [#{$name}="start center"]>*,
+  [#{$name}="center center"]>*,
+  [#{$name}="end center"]>*,
+  [#{$name}="space-between center"]>*,
+  [#{$name}="space-around center"]>* {
     max-width: 100%;
     box-sizing: border-box;
-  }
-
-  // Cross Axis End
+  } // Cross Axis End
   [#{$name}="start end"],
   [#{$name}="center end"],
   [#{$name}="end end"],
@@ -404,9 +394,7 @@ $layout-breakpoint-lg: 1920px !default;
   [#{$name}="space-around end"] {
     align-items: flex-end;
     align-content: flex-end;
-  }
-
-  // Cross Axis  stretch
+  } // Cross Axis  stretch
   [#{$name}="start stretch"],
   [#{$name}="center stretch"],
   [#{$name}="end stretch"],
@@ -419,36 +407,37 @@ $layout-breakpoint-lg: 1920px !default;
 
 @mixin layout-padding-margin() {
 
-  [layout-padding] > [flex-sm], [layout-padding] > [flex-lt-md] {
+  [layout-padding]>[flex-sm],
+  [layout-padding]>[flex-lt-md] {
     padding: $layout-gutter-width / 4;
   }
   [layout-padding],
-  [layout-padding] > [flex],
-  [layout-padding] > [flex-gt-sm],
-  [layout-padding] > [flex-md],
-  [layout-padding] > [flex-lt-lg] {
+  [layout-padding]>[flex],
+  [layout-padding]>[flex-gt-sm],
+  [layout-padding]>[flex-md],
+  [layout-padding]>[flex-lt-lg] {
     padding: $layout-gutter-width / 2;
   }
-  [layout-padding] > [flex-gt-md],
-  [layout-padding] > [flex-lg] {
+  [layout-padding]>[flex-gt-md],
+  [layout-padding]>[flex-lg] {
     padding: $layout-gutter-width / 1;
   }
 
-  [layout-margin] > [flex-sm],
-  [layout-margin] > [flex-lt-md] {
+  [layout-margin]>[flex-sm],
+  [layout-margin]>[flex-lt-md] {
     margin: $layout-gutter-width / 4;
   }
 
   [layout-margin],
-  [layout-margin] > [flex],
-  [layout-margin] > [flex-gt-sm],
-  [layout-margin] > [flex-md],
-  [layout-margin] > [flex-lt-lg] {
+  [layout-margin]>[flex],
+  [layout-margin]>[flex-gt-sm],
+  [layout-margin]>[flex-md],
+  [layout-margin]>[flex-lt-lg] {
     margin: $layout-gutter-width / 2;
   }
 
-  [layout-margin] > [flex-gt-md],
-  [layout-margin] > [flex-lg] {
+  [layout-margin]>[flex-gt-md],
+  [layout-margin]>[flex-lg] {
     margin: $layout-gutter-width / 1;
   }
 
@@ -483,7 +472,6 @@ $layout-breakpoint-lg: 1920px !default;
   *  Apply Mixins to create Layout/Flexbox styles
   *
   */
-
   @include layouts_for_breakpoint();
   @include layout-padding-margin();
 
@@ -499,7 +487,6 @@ $layout-breakpoint-lg: 1920px !default;
   *         $layout-breakpoint-md:     1280px !default;
   *         $layout-breakpoint-lg:     1920px !default;
   */
-
   @media (max-width: $layout-breakpoint-xs - 1) {
     // Xtra-SMALL  SCREEN
     [hide-xs], [hide] {
@@ -513,12 +500,12 @@ $layout-breakpoint-lg: 1920px !default;
   @media (min-width: $layout-breakpoint-xs) {
     // BIGGER THAN Xtra-SMALL SCREEN
     @include layouts_for_breakpoint(gt-xs);
-
   }
 
   @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm - 1) {
     // SMALL SCREEN
-    [hide-sm], [hide-gt-xs] {
+    [hide-sm],
+    [hide-gt-xs] {
       &:not([show-gt-xs]):not([show-sm]):not([show]) {
         display: none;
       }
@@ -532,12 +519,13 @@ $layout-breakpoint-lg: 1920px !default;
   @media (min-width: $layout-breakpoint-sm) {
     // BIGGER THAN SMALL SCREEN
     @include layouts_for_breakpoint(gt-sm);
-
   }
 
   @media (min-width: $layout-breakpoint-sm) and (max-width: $layout-breakpoint-md - 1) {
     // MEDIUM SCREEN
-    [hide], [hide-gt-xs], [hide-gt-sm] {
+    [hide],
+    [hide-gt-xs],
+    [hide-gt-sm] {
       &:not([show-gt-xs]):not([show-gt-sm]):not([show-md]):not([show]) {
         display: none;
       }
@@ -555,7 +543,10 @@ $layout-breakpoint-lg: 1920px !default;
 
   @media (min-width: $layout-breakpoint-md) and (max-width: $layout-breakpoint-lg - 1) {
     // LARGE SCREEN
-    [hide], [hide-gt-xs], [hide-gt-sm], [hide-gt-md] {
+    [hide],
+    [hide-gt-xs],
+    [hide-gt-sm],
+    [hide-gt-md] {
       &:not([show-gt-xs]):not([show-gt-sm]):not([show-gt-md]):not([show-lg]):not([show]) {
         display: none;
       }
@@ -570,10 +561,12 @@ $layout-breakpoint-lg: 1920px !default;
   @media (min-width: $layout-breakpoint-lg) {
     // BIGGER THAN LARGE SCREEN
     @include layouts_for_breakpoint(gt-lg);
-    @include layouts_for_breakpoint(xl);
-
-    // BIGGER THAN LARGE SCREEN
-    [hide], [hide-gt-xs], [hide-gt-sm], [hide-gt-md], [hide-gt-lg] {
+    @include layouts_for_breakpoint(xl); // BIGGER THAN LARGE SCREEN
+    [hide],
+    [hide-gt-xs],
+    [hide-gt-sm],
+    [hide-gt-md],
+    [hide-gt-lg] {
       &:not([show-gt-xs]):not([show-gt-sm]):not([show-gt-md]):not([show-gt-lg]):not([show-xl]):not([show]) {
         display: none;
       }

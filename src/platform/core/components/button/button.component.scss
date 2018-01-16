@@ -1,9 +1,6 @@
-button {
-  &[class*="hint--"]:before,
-  &[class*="hint--"]:after {
-    text-transform: initial;
-    word-wrap: break-word;
-  }
+$button-height: 39px;
+
+button[theme] {
   font-size: 1rem;
   border: none;
   background: transparent;
@@ -11,6 +8,8 @@ button {
   padding: $small $medium;
   text-transform: uppercase;
   transition: all 200ms ease-in-out;
+  cursor: pointer;
+  height: $button-height;
   div.flex-wrapper {
     display: flex;
     flex-direction: row;
@@ -23,7 +22,8 @@ button {
   &:focus {
     outline: none;
   }
-  &[disabled] {
+  &[disabled],
+  .disabled {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
@@ -67,8 +67,8 @@ button {
         background: rgba(0, 0, 0, .15);
         padding: 5px;
         border-radius: 50%;
-        height: 25px;
-        width: 25px;
+        height: 15px;
+        width: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -95,7 +95,7 @@ button {
       background: darken($positive, 5%);
     }
     @each $button,
-    $color in $colors {
+    $color in $all-colors {
       &.#{$button} {
         background: $color;
         &:hover,
@@ -119,19 +119,6 @@ button {
       }
       i {
         background: rgba(0, 0, 0, .05);
-      }
-    }
-    @each $analytics,
-    $color in $analytics-colors {
-      &.#{$analytics} {
-        background: $color;
-        &:hover,
-        &:focus {
-          background: lighten($color, 10%);
-        }
-        &:active {
-          background: darken($color, 5%);
-        }
       }
     }
   }
@@ -183,8 +170,8 @@ button {
       i {
         padding: 5px;
         border-radius: 50%;
-        height: 25px;
-        width: 25px;
+        height: 15px;
+        width: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -196,15 +183,8 @@ button {
       }
     }
     @each $button,
-    $color in $colors {
+    $color in $dark-colors {
       &.#{$button} {
-        border-color: $color;
-        color: $color;
-      }
-    }
-    @each $analytics,
-    $color in $analytics-colors {
-      &.#{$analytics} {
         border-color: $color;
         color: $color;
       }
@@ -220,8 +200,8 @@ button {
       i {
         padding: 5px;
         border-radius: 50%;
-        height: 25px;
-        width: 25px;
+        height: 15px;
+        width: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -260,25 +240,8 @@ button {
       }
     }
     @each $button,
-    $color in $colors {
+    $color in $all-colors {
       &.#{$button} {
-        color: $color;
-        i {
-          color: $color;
-          &.loading {
-            margin-left: 10px;
-            svg {
-              .spinner {
-                fill: $color;
-              }
-            }
-          }
-        }
-      }
-    }
-    @each $analytics,
-    $color in $analytics-colors {
-      &.#{$analytics} {
         color: $color;
         i {
           color: $color;
@@ -308,25 +271,11 @@ button {
       box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     }
     @each $button,
-    $color in $colors {
+    $color in $all-colors {
       &.#{$button} {
         color: $white;
         background: $color;
       }
-    }
-    @each $analytics,
-    $color in $analytics-colors {
-      &.#{$analytics} {
-        color: $white;
-        background: $color;
-      }
-    }
-    &.background,
-    &.gray,
-    &.light,
-    &.off-white,
-    &.white {
-      color: $dark;
     }
   }
   &.icon {
@@ -350,22 +299,8 @@ button {
       background: rgba(0, 0, 0, .25);
     }
     @each $button,
-    $color in $colors {
+    $color in $all-colors {
       &.#{$button} {
-        background: $color;
-        color: $white;
-        &:hover,
-        &:focus {
-          background: lighten($color, 10%);
-        }
-        &:active {
-          background: darken($color, 5%);
-        }
-      }
-    }
-    @each $analytics,
-    $color in $analytics-colors {
-      &.#{$analytics} {
         background: $color;
         color: $white;
         &:hover,
@@ -380,14 +315,14 @@ button {
   }
   &.fab {
     .flex-wrapper {
+      text-align: center;
+      i {
+        width: 100%;
         text-align: center;
-        i {
-            width: 100%;
-            text-align: center;
-        }
+      }
     }
     &[inverse] {
-        color: #fff;
+      color: #fff;
     }
     width: 40px;
     height: 40px;
@@ -395,16 +330,16 @@ button {
     border-radius: 50% !important;
     @each $button,
     $color in $all-colors {
-        &.#{$button} {
-            color: $white;
-            background: $color;
-        }
+      &.#{$button} {
+        color: $white;
+        background: $color;
+      }
     }
     &:hover {
-        box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
     }
     &:active {
-        box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
     }
   }
 }

@@ -16,7 +16,7 @@ novo-list {
     flex-direction: row;
   }
   @each $entity,
-  $color in $entity-colors {
+  $color in $all-colors {
     &[theme="#{$entity}"] {
       novo-list-item {
         background: $color;
@@ -37,7 +37,7 @@ novo-list {
     }
   }
   @each $basic,
-  $color in $app-colors {
+  $color in $all-colors {
     &[theme="#{$basic}"] {
       novo-list-item {
         background: $color;
@@ -110,7 +110,7 @@ novo-list-item {
       font-size: 20px;
       i {
         @each $entity,
-        $color in $entity-colors {
+        $color in $all-colors {
           &.#{$entity} {
             background: $color;
           }
@@ -152,19 +152,13 @@ novo-list-item {
     padding: 0 16px;
     i {
       &.positive {
-        color: map-get($analytics-colors, 'grass');
+        color: map-get($all-colors, 'grass');
       }
       &.negative {
-        color: map-get($analytics-colors, 'grapefruit');
-      }
-      @each $analytic,
-      $color in $analytics-colors {
-        &.#{$analytic} {
-          color: $color;
-        }
+        color: map-get($all-colors, 'grapefruit');
       }
       @each $entity,
-      $color in $entity-colors {
+      $color in $all-colors {
         &.#{$entity} {
           color: $color;
         }

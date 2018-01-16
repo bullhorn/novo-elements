@@ -38,15 +38,11 @@ $background: $off-white;
 $background-dark: #E2E2E2;
 $neutral: #4f5361;
 $empty: #CCCDCC;
-// Analytics Color Map
-$base-colors: (blue: $ocean, green: $grass, yellow: $sunflower, orange: $bittersweet, red: $grapefruit, purple: $lavender);
-$analytics-colors: ( aqua: $aqua, ocean: $ocean, mint: $mint, grass: $grass, sunflower: $sunflower, bittersweet: $bittersweet, grapefruit: $grapefruit, carnation: $carnation, lavender: $lavender); // Entity Color Map
-$entity-colors: ( company: $company, candidate: $candidate, navigation: $navigation, lead: $lead, contact: $contact, opportunity: $opportunity, job: $job, submission: $submission, sendout: $sendout, placement: $placement, note: $note, task: $neutral, distributionList: $neutral, credential: $neutral, user: $neutral, corporateuser: $neutral); // Generic Color Map
-$colors: ( positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, background: $off-white, black: $black, white: $white, grey: $grey, off-white: $off-white, dark: $dark, light: $light, pulse: $pulse, neutral: $neutral); // Loading Dot Color Map
-$dot-colors: ( ocean: $ocean, lavender: $lavender, grapefruit: $grapefruit, sunflower: $sunflower, mint: $mint);
-$app-colors: ( positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, background: $off-white, black: $black, white: $white, grey: $grey, off-white: $off-white, dark: $dark, light: $light, pulse: $pulse, neutral: $neutral);
-$all-colors: ( company: $company, candidate: $candidate, navigation: $navigation, lead: $lead, contact: $contact, opportunity: $opportunity, job: $job, submission: $submission, sendout: $sendout, placement: $placement, note: $note, task: $neutral, distributionList: $neutral, credential: $neutral, user: $neutral, corporateuser: $neutral, aqua: $aqua, ocean: $ocean, mint: $mint, grass: $grass, sunflower: $sunflower, bittersweet: $bittersweet, grapefruit: $grapefruit, carnation: $carnation, lavender: $lavender, positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, background: $off-white, black: $black, white: $white, grey: $grey, off-white: $off-white, dark: $dark, light: $light, pulse: $pulse, neutral: $neutral);
-
+// Color Maps
+$loading-dot-colors: (ocean: $ocean, lavender: $lavender, grapefruit: $grapefruit, sunflower: $sunflower, mint: $mint);
+$dark-colors: (company: $company, candidate: $candidate, navigation: $navigation, lead: $lead, contact: $contact, opportunity: $opportunity, job: $job, sendout: $sendout, placement: $placement, task: $neutral, distributionList: $neutral, credential: $neutral, user: $neutral, corporateuser: $neutral, aqua: $aqua, ocean: $ocean, mint: $mint, grass: $grass, sunflower: $sunflower, bittersweet: $bittersweet, grapefruit: $grapefruit, carnation: $carnation, lavender: $lavender, positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, black: $black, dark: $dark, pulse: $pulse, neutral: $neutral, navy: $navy);
+$light-colors: (submission: $submission, note: $note, background: $off-white, white: $white, grey: $grey, off-white: $off-white, light: $light);
+$all-colors: map-merge($dark-colors, $light-colors);
 // Typography
 $base-font-size: 13px;
 $base-font-family: "Roboto",

@@ -1,21 +1,21 @@
 :host /deep/ {
-    .demo-group {
-        label {
-            line-height: 5em;
-            padding: 0 20px;
+  .demo-group {
+    label {
+      line-height: 5em;
+      padding: 0 20px;
 
-            span {
-                padding: 5px 8px;
-                background: #f4f4f4;
-                border-radius: 3px;
-                color: rgba(#333, 0.4);
-                min-width: 80px;
-                text-align: center;
-                display: inline-block;
-                margin-left: 10px;
-                vertical-align: middle;
-                line-height: 25px;
-            }
-        }
+      span {
+        padding: 5px 8px;
+        background: #f4f4f4;
+        border-radius: 3px;
+        color: rgba(#333, 0.4);
+        min-width: 80px;
+        text-align: center;
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: middle;
+        line-height: 25px;
+      }
     }
+  }
 }

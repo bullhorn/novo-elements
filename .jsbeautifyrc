@@ -1,0 +1,30 @@
+{
+  "brace_style": "collapse",
+  "indent_char": " ",
+  "indent_scripts": "keep",
+  "indent_size": 2,
+  "max_preserve_newlines": 10,
+  "preserve_newlines": true,
+  "unformatted": [
+    "a",
+    "b",
+    "big",
+    "br",
+    "cite",
+    "code",
+    "em",
+    "i",
+    "img",
+    "input",
+    "label",
+    "select",
+    "small",
+    "span",
+    "strong",
+    "sub",
+    "sup",
+    "textarea"
+  ],
+  "wrap_line_length": 0,
+  "wrap_attributes": "force-aligned"
+}

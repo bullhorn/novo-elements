@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 
-import { COLORS } from '../consts';
-
-const HEADER_COLORS: string[] = ['blue', 'green', 'yellow', 'orange', 'red', 'purple'];
+import { IDEAL_COLORS, COLORS } from '../../../../../consts';
 
 @Component({
   selector: 'demo-buttons-icon',
@@ -10,10 +8,9 @@ const HEADER_COLORS: string[] = ['blue', 'green', 'yellow', 'orange', 'red', 'pu
 })
 export class DemoButtonsIconComponent {
   public colors: string[] = COLORS;
-  public color: string = 'blue';
+  public color: string = IDEAL_COLORS[0];
 
   public changeColor(): void {
-    let idx: number = HEADER_COLORS.indexOf(this.color);
-    this.color = HEADER_COLORS[idx + 1];
+    this.color = IDEAL_COLORS[Math.floor(Math.random() * IDEAL_COLORS.length)];
   }
 }

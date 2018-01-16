@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { COLORS } from '../consts';
+import { COLORS } from '../../../../../consts';
 
 @Component({
   selector: 'demo-buttons-standard',

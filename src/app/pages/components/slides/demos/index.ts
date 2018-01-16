@@ -2,8 +2,8 @@ import { DemoSlidesComponent } from './basic/basic';
 import { DemoSlidesTimerComponent } from './auto-timer/auto-timer';
 
 export const SLIDES_DEMO_COMPONENTS: any[] = [
-    DemoSlidesComponent,
-    DemoSlidesTimerComponent,
+  DemoSlidesComponent,
+  DemoSlidesTimerComponent,
 ];
 
 export const SLIDES_DEMOS: DEMOS = {

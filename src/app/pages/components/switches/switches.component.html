@@ -1,16 +1,20 @@
-<demo-section [name]="name" [src]="src">
+<demo-section [name]="name"
+              [src]="src">
 
   <h3>Contents</h3>
 
   <ul class="demo-nav">
     <li>
-      <a routerLink="." fragment="usage">Usage</a>
+      <a routerLink="."
+         fragment="usage">Usage</a>
     </li>
     <li>
-      <a routerLink="." fragment="examples">Examples</a>
+      <a routerLink="."
+         fragment="examples">Examples</a>
       <ul>
         <li>
-          <a routerLink="." fragment="switch-standard">Standard</a>
+          <a routerLink="."
+             fragment="switch-standard">Standard</a>
         </li>
         <!-- <li>
           <a routerLink="." fragment="list-advanced">Advanced</a>
@@ -22,12 +26,21 @@
     </li>
   </ul>
 
-  <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
-  <div class="usage-doc" [innerHtml]="usageDoc"></div>
+  <h3 routerLink="."
+      fragment="usage"
+      id="usage">Usage</h3>
+  <div class="usage-doc"
+       [innerHtml]="usageDoc"></div>
 
-  <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
+  <h3 routerLink="."
+      fragment="examples"
+      id="examples">Examples</h3>
 
-  <demo-box class="switches-demo" [ts]="demos.standard.ts" [html]="demos.standard.html" name="switch-standard" label="Switch: Standard">
+  <demo-box class="switches-demo"
+            [ts]="demos.standard.ts"
+            [html]="demos.standard.html"
+            name="switch-standard"
+            label="Switch: Standard">
     <demo-switch-standard></demo-switch-standard>
   </demo-box>
   <!-- <demo-box class="list-demo" [ts]="demos.advanced.ts" [html]="demos.advanced.html" name="list-advanced" label="List: Advanced">

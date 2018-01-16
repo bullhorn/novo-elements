@@ -1,46 +1,73 @@
-<demo-section [name]="name" [src]="src">
-    
-      <h3>Contents</h3>
-    
-      <ul class="demo-nav">
+<demo-section [name]="name"
+              [src]="src">
+
+  <h3>Contents</h3>
+
+  <ul class="demo-nav">
+    <li>
+      <a routerLink="."
+         fragment="usage">Usage</a>
+    </li>
+    <li>
+      <a routerLink="."
+         fragment="examples">Examples</a>
+      <ul>
         <li>
-          <a routerLink="." fragment="usage">Usage</a>
+          <a routerLink="."
+             fragment="radio-basic">Basic</a>
         </li>
         <li>
-          <a routerLink="." fragment="examples">Examples</a>
-          <ul>
-            <li>
-              <a routerLink="." fragment="radio-basic">Basic</a>
-            </li>
-            <li>
-              <a routerLink="." fragment="radio-button">Button</a>
-            </li>
-            <li>
-              <a routerLink="." fragment="radio-icon">Icon</a>
-            </li>
-            <li>
-                <a routerLink="." fragment="radio-vertical">Vertical</a>
-              </li>
-          </ul>
+          <a routerLink="."
+             fragment="radio-button">Button</a>
+        </li>
+        <li>
+          <a routerLink="."
+             fragment="radio-icon">Icon</a>
+        </li>
+        <li>
+          <a routerLink="."
+             fragment="radio-vertical">Vertical</a>
         </li>
       </ul>
-    
-      <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
-      <div class="usage-doc" [innerHtml]="usageDoc"></div>
-    
-      <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
-    
-      <demo-box class="radio-demo" [ts]="demos.basic.ts" [html]="demos.basic.html" name="radio-basic" label="Basic">
-        <demo-radio-basic></demo-radio-basic>
-      </demo-box>
-      <demo-box class="radio-demo" [ts]="demos.button.ts" [html]="demos.button.html" name="radio-button" label="Button">
-        <demo-radio-button></demo-radio-button>
-      </demo-box>
-      <demo-box class="radio-demo" [ts]="demos.icon.ts" [html]="demos.icon.html" name="radio-icon" label="Icon">
-        <demo-radio-icon></demo-radio-icon>
-      </demo-box>
-      <demo-box class="radio-demo" [ts]="demos.vertical.ts" [html]="demos.vertical.html" name="radio-vertical" label="Vertical">
-        <demo-radio-vertical></demo-radio-vertical>
-      </demo-box>
-    </demo-section>
-    
+    </li>
+  </ul>
+
+  <h3 routerLink="."
+      fragment="usage"
+      id="usage">Usage</h3>
+  <div class="usage-doc"
+       [innerHtml]="usageDoc"></div>
+
+  <h3 routerLink="."
+      fragment="examples"
+      id="examples">Examples</h3>
+
+  <demo-box class="radio-demo"
+            [ts]="demos.basic.ts"
+            [html]="demos.basic.html"
+            name="radio-basic"
+            label="Basic">
+    <demo-radio-basic></demo-radio-basic>
+  </demo-box>
+  <demo-box class="radio-demo"
+            [ts]="demos.button.ts"
+            [html]="demos.button.html"
+            name="radio-button"
+            label="Button">
+    <demo-radio-button></demo-radio-button>
+  </demo-box>
+  <demo-box class="radio-demo"
+            [ts]="demos.icon.ts"
+            [html]="demos.icon.html"
+            name="radio-icon"
+            label="Icon">
+    <demo-radio-icon></demo-radio-icon>
+  </demo-box>
+  <demo-box class="radio-demo"
+            [ts]="demos.vertical.ts"
+            [html]="demos.vertical.html"
+            name="radio-vertical"
+            label="Vertical">
+    <demo-radio-vertical></demo-radio-vertical>
+  </demo-box>
+</demo-section>

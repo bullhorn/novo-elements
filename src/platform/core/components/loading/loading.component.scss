@@ -9,11 +9,11 @@ novo-loading {
     margin: 3px;
     height: 13px;
     width: 13px;
-    @include enumerate($dot-colors, 'background-color', 'map-val', '');
-    @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, '', '');
+    @include enumerate($loading-dot-colors, 'background-color', 'map-val', '');
+    @include animationMapDelay($loading-dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, '', '');
   }
   @each $analytics,
-  $color in $analytics-colors {
+  $color in $all-colors {
     &.#{$analytics} {
       span.dot {
         background-color: $color;
@@ -56,7 +56,7 @@ novo-spinner {
     transform-origin: center center;
     animation: spin 3400ms infinite;
     @each $analytics,
-    $color in $analytics-colors {
+    $color in $all-colors {
       &.#{$analytics} {
         .circleGroup circle {
           fill: $color;
@@ -84,7 +84,7 @@ novo-spinner {
     }
     &.multicolor {
       .circleGroup circle {
-        @include enumerate($dot-colors, 'fill', 'map-val', '');
+        @include enumerate($loading-dot-colors, 'fill', 'map-val', '');
       }
     }
     &.white,

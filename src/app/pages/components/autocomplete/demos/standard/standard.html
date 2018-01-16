@@ -1,9 +1,13 @@
 <div layout="row">
   <form class="example-form">
-    <input type="text" placeholder="Pick one" [formControl]="myControl" [novoAutocomplete]="auto">
+    <input type="text"
+           placeholder="Pick one"
+           [formControl]="myControl"
+           [novoAutocomplete]="auto">
     <novo-autocomplete #auto>
       <novo-list>
-        <novo-list-item *ngFor="let option of options" [value]="option">
+        <novo-list-item *ngFor="let option of options"
+                        [value]="option">
           {{ option }}
         </novo-list-item>
       </novo-list>

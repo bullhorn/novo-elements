@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 })
 export class DemoRadioIconComponent {
   public onChangeIcon(change: Event): void {
-      console.log('Icon Radio Change:', change); // tslint:disable-line
+    console.log('Icon Radio Change:', change); // tslint:disable-line
   }
 }

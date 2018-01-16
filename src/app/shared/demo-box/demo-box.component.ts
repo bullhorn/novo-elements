@@ -1,4 +1,6 @@
-import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+
+import { IDEAL_COLORS } from '../../consts';
 
 @Component({
   selector: 'demo-box',
@@ -6,7 +8,7 @@ import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } f
   templateUrl: './demo-box.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DemoBoxComponent implements OnChanges {
+export class DemoBoxComponent {
   @Input() public ts: string;
   @Input() public html: string;
   @Input() public style: string;
@@ -15,16 +17,5 @@ export class DemoBoxComponent implements OnChanges {
 
   public activeTab: string = 'ts';
   public showCode: boolean = false;
-
-  public ngOnChanges(changes?: SimpleChanges): void {
-    this.activeTab = this.ts ? 'ts' : this.html ? 'html' : 'style';
-  }
-
-  public changeTab(tab: string): void {
-    this.activeTab = tab;
-  }
-
-  public toggleCode(): void {
-    this.showCode = !this.showCode;
-  }
+  public randColor: string = IDEAL_COLORS[Math.floor(Math.random() * IDEAL_COLORS.length)];
 }

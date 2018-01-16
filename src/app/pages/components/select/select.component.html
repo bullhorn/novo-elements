@@ -1,45 +1,73 @@
-<demo-section [name]="name" [src]="src">
+<demo-section [name]="name"
+              [src]="src">
 
   <h3>Contents</h3>
 
   <ul class="demo-nav">
     <li>
-      <a routerLink="." fragment="usage">Usage</a>
+      <a routerLink="."
+         fragment="usage">Usage</a>
     </li>
     <li>
-      <a routerLink="." fragment="examples">Examples</a>
+      <a routerLink="."
+         fragment="examples">Examples</a>
       <ul>
         <li>
-          <a routerLink="." fragment="select-standard">Standard</a>
+          <a routerLink="."
+             fragment="select-standard">Standard</a>
         </li>
         <li>
-          <a routerLink="." fragment="select-groups">With Groups</a>
+          <a routerLink="."
+             fragment="select-groups">With Groups</a>
         </li>
         <li>
-          <a routerLink="." fragment="select-data">Select w/ Data</a>
+          <a routerLink="."
+             fragment="select-data">Select w/ Data</a>
         </li>
         <li>
-          <a routerLink="." fragment="select-header">Select w/ Header</a>
+          <a routerLink="."
+             fragment="select-header">Select w/ Header</a>
         </li>
       </ul>
     </li>
   </ul>
 
-  <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
-  <div class="usage-doc" [innerHtml]="usageDoc"></div>
+  <h3 routerLink="."
+      fragment="usage"
+      id="usage">Usage</h3>
+  <div class="usage-doc"
+       [innerHtml]="usageDoc"></div>
 
-  <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
+  <h3 routerLink="."
+      fragment="examples"
+      id="examples">Examples</h3>
 
-  <demo-box class="select-demo" [ts]="demos.standard.ts" [html]="demos.standard.html" name="select-standard" label="Select: Standard">
+  <demo-box class="select-demo"
+            [ts]="demos.standard.ts"
+            [html]="demos.standard.html"
+            name="select-standard"
+            label="Select: Standard">
     <demo-select-standard></demo-select-standard>
   </demo-box>
-  <demo-box class="select-demo" [ts]="demos.groups.ts" [html]="demos.groups.html" name="select-groups" label="Select: Groups">
+  <demo-box class="select-demo"
+            [ts]="demos.groups.ts"
+            [html]="demos.groups.html"
+            name="select-groups"
+            label="Select: Groups">
     <demo-select-groups></demo-select-groups>
   </demo-box>
-  <demo-box class="select-demo" [ts]="demos.data.ts" [html]="demos.data.html" name="select-data" label="Select: Data">
+  <demo-box class="select-demo"
+            [ts]="demos.data.ts"
+            [html]="demos.data.html"
+            name="select-data"
+            label="Select: Data">
     <demo-select-data></demo-select-data>
   </demo-box>
-  <demo-box class="select-demo" [ts]="demos.header.ts" [html]="demos.header.html" name="select-header" label="Select: Header">
+  <demo-box class="select-demo"
+            [ts]="demos.header.ts"
+            [html]="demos.header.html"
+            name="select-header"
+            label="Select: Header">
     <demo-select-header></demo-select-header>
   </demo-box>
 

@@ -6,16 +6,19 @@
     </div>
     <novo-select [ngModel]="value">
       <novo-option>-- None --</novo-option>
-      <novo-option *ngFor="let person of people" [value]="person.name">
+      <novo-option *ngFor="let person of people"
+                   [value]="person.name">
         {{ person.name }}
       </novo-option>
     </novo-select>
   </div>
   <div>
     <label class="caption">Disabled State</label>
-    <novo-select [ngModel]="value" disabled>
+    <novo-select [ngModel]="value"
+                 disabled>
       <novo-option>-- None --</novo-option>
-      <novo-option *ngFor="let person of people" [value]="person.name">
+      <novo-option *ngFor="let person of people"
+                   [value]="person.name">
         {{ person.name }}
       </novo-option>
     </novo-select>

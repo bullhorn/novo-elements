@@ -4,10 +4,10 @@ import { DemoRadioIconComponent } from './icon/icon';
 import { DemoRadioVerticalComponent } from './vertical/vertical';
 
 export const RADIO_DEMO_COMPONENTS: any[] = [
-    DemoRadioComponent,
-    DemoRadioButtonComponent,
-    DemoRadioIconComponent,
-    DemoRadioVerticalComponent,
+  DemoRadioComponent,
+  DemoRadioButtonComponent,
+  DemoRadioIconComponent,
+  DemoRadioVerticalComponent,
 ];
 
 export const RADIO_DEMOS: DEMOS = {
