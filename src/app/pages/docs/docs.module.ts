@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { DocsComponent } from './docs.component';
 import { GettingStartedComponent } from './getting-started/getting-started.component';
@@ -19,7 +18,6 @@ import { docsRoutes } from './docs.routes';
   imports: [
     // NG2
     CommonModule,
-    FlexLayoutModule,
     // APP
     docsRoutes,
   ],

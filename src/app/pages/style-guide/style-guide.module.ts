@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { StyleGuideComponent } from './style-guide.component';
 import { ColorComponent } from './color/color.component';
@@ -21,7 +20,6 @@ import { styleGuideRoutes } from './style-guide.routes';
   imports: [
     // NG2
     CommonModule,
-    FlexLayoutModule,
     // APP
     styleGuideRoutes,
   ],

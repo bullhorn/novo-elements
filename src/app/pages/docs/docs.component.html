@@ -1,10 +1,10 @@
-<section class="demo-section" fxLayout="row nowrap" fxLayoutAlign="start start">
-  <nav fxLayout="column nowrap">
+<section class="demo-section" layout="row" layout-align="start start">
+  <nav layout="column">
     <a routerLink="." routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Getting Started</a>
     <a routerLink="angular" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Angular</a>
     <a routerLink="customize" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Customize</a>
   </nav>
-  <div id="main" fxFlex="*">
+  <div id="main" flex="*">
     <router-outlet></router-outlet>
   </div>
 </section>

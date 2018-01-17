@@ -1,11 +1,11 @@
-<section class="demo-section" fxLayout="row nowrap" fxLayoutAlign="start start">
-  <nav fxLayout="column nowrap">
+<section class="demo-section" layout="row" layout-align="start start">
+  <nav layout="column">
     <a routerLink="." routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Color</a>
     <a routerLink="composition" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Composition</a>
     <a routerLink="iconography" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Iconography</a>
     <a routerLink="typography" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Typography</a>
   </nav>
-  <div id="main" fxFlex="*">
+  <div id="main" flex="*">
     <router-outlet></router-outlet>
   </div>
 </section>

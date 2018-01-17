@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NovoElementsModule } from '../../../platform';
@@ -87,7 +86,6 @@ import { RADIO_DEMO_COMPONENTS } from './radio/demos';
   imports: [
     // NG2
     CommonModule,
-    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     // NovoElements

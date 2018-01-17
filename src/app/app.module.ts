@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 import { NovoElementsModule } from '../platform';
@@ -17,7 +16,6 @@ import { HomeComponent } from './pages/home/home.component';
     // NG2
     BrowserAnimationsModule,
     BrowserModule,
-    FlexLayoutModule,
     // Vendor
     Ng2PageScrollModule,
     // NovoElements
