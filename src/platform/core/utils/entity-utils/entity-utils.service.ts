@@ -15,12 +15,7 @@ export class EntityUtils {
   }
 
   static get PERSON_SUBTYPES(): string[] {
-    return [
-      'Lead',
-      'ClientContact',
-      'Candidate',
-      'CorporateUser',
-    ];
+    return ['Lead', 'ClientContact', 'Candidate', 'CorporateUser'];
   }
 
   static get ENTITY_SHORT_NAMES(): any {
@@ -129,14 +124,14 @@ export class EntityUtils {
 
   static get ENTITY_ICONS_FROM_PATH(): any {
     return {
-      'activity': 'activity',
-      'email': 'email',
+      activity: 'activity',
+      email: 'email',
       'work-history': 'clock-arrow',
-      'education': 'education',
-      'references': 'users',
-      'notes': 'note',
-      'files': 'file',
-      'linkedin': 'linkedin-f',
+      education: 'education',
+      references: 'users',
+      notes: 'note',
+      files: 'file',
+      linkedin: 'linkedin-f',
     };
   }
 
@@ -180,7 +175,9 @@ export class EntityUtils {
       case 'Placement':
         let label: string = '';
         if (item.candidate) {
-          label = `${item.candidate.firstName} ${item.candidate.lastName}`.trim();
+          label = `${item.candidate.firstName} ${
+            item.candidate.lastName
+          }`.trim();
         }
         if (item.jobOrder) {
           label = `${label} - ${item.jobOrder.title}`.trim();

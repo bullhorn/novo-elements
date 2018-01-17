@@ -13,7 +13,8 @@
     "test:watch": "jest --watch",
     "lint": "ng lint --typeCheck --format codeFrame",
     "lint:fix": "ng lint --typeCheck --format codeFrame --fix",
-    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
+    "precommit": "lint-staged",
+    "format-code": "prettier --config ./.prettierrc --write '*.{ts,js,scss,css}'",
     "loc": "node_modules/sloc/bin/sloc src/platform --format json > ./coverage/sloc.json",
     "pregalaxy": "npm run loc",
     "preanalyze-mr": "npm run loc",
@@ -23,17 +24,16 @@
     "postrelease": "git push --follow-tags origin master; npm run build; cd dist && npm publish",
     "snapshot-publish": "bash snapshot-publish"
   },
+  "lint-staged": {
+    "*.ts": ["tslint"],
+    "*.{js,json,css,md,ts}": ["prettier --write", "git add"]
+  },
   "jest": {
     "preset": "jest-preset-angular",
     "setupTestFrameworkScriptFile": "<rootDir>/src/jest.ts",
     "testRegex": "src/platform/.*\\.spec\\.(ts|js)$",
     "collectCoverage": true,
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "html"
-    ],
+    "coverageReporters": ["json", "lcov", "text", "text-summary", "html"],
     "collectCoverageFrom": [
       "src/platform/**/*.ts",
       "!src/platform/**/index.ts",
@@ -42,13 +42,7 @@
       "!**/node_modules/**"
     ]
   },
-  "pre-commit": [
-    "precommit-msg",
-    "lint"
-  ],
-  "keywords": [
-    "angular2"
-  ],
+  "keywords": ["angular2"],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
   "contributors": [
     {
@@ -66,28 +60,29 @@
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "private": false,
   "peerDependencies": {
-    "@angular/common": "~5.0.0",
-    "@angular/core": "~5.0.0",
-    "@angular/forms": "~5.0.0"
+    "@angular/common": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0"
   },
   "dependencies": {
     "@bullhorn/bullhorn-icons": "^2.1.1",
+    "pretty-quick": "^1.2.2",
     "roboto-fontface": "^0.8.0"
   },
   "devDependencies": {
-    "@angular/animations": "~5.0.0",
+    "@angular/animations": "^5.0.0",
+    "@angular/cdk": "^5.0.0",
     "@angular/cli": "1.5.4",
-    "@angular/cdk": "~5.0.0",
-    "@angular/common": "~5.0.0",
-    "@angular/compiler": "~5.0.0",
-    "@angular/compiler-cli": "~5.0.0",
-    "@angular/core": "~5.0.0",
-    "@angular/forms": "~5.0.0",
-    "@angular/http": "~5.0.0",
-    "@angular/language-service": "~5.0.0",
-    "@angular/platform-browser": "~5.0.0",
-    "@angular/platform-browser-dynamic": "~5.0.0",
-    "@angular/router": "~5.0.0",
+    "@angular/common": "^5.0.0",
+    "@angular/compiler": "^5.0.0",
+    "@angular/compiler-cli": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@angular/http": "^5.0.0",
+    "@angular/language-service": "^5.0.0",
+    "@angular/platform-browser": "^5.0.0",
+    "@angular/platform-browser-dynamic": "^5.0.0",
+    "@angular/router": "^5.0.0",
     "@types/cypress": "^0.1.1",
     "@types/faker": "^4.1.2",
     "@types/jest": "^20.0.6",
@@ -101,12 +96,14 @@
     "galaxy-parser": "^1.0.45",
     "glob": "^7.1.2",
     "html-loader": "^0.5.1",
+    "husky": "^0.14.3",
     "jest": "^20.0.4",
     "jest-preset-angular": "^2.0.5",
+    "lint-staged": "^6.0.0",
     "markdown-loader": "^2.0.1",
     "ng-packagr": "^1.5.0-rc.1",
     "ng2-page-scroll": "^4.0.0-beta.12",
-    "pre-commit": "^1.2.2",
+    "prettier": "^1.10.2",
     "rimraf": "^2.6.2",
     "rxjs": "5.5.2",
     "standard-version": "^4.2.0",

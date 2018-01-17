@@ -15,7 +15,6 @@
     @if $target=='transform' {
       &:nth-of-type(#{$idx}) {
         #{$target}: #{'#{$prop}(#{$val * $idx})'};
-
       }
     }
   }
@@ -38,7 +37,10 @@
   @each $item in $keys {
     $idx: index($keys, $item);
     &:nth-of-type(#{$idx}) {
-      animation: $animation-name $animation-duration $animation-timing-function ($delay-base-speed * $idx) $animation-direction $animation-iterate-count $animation-fill-mode $animation-play-state;
+      animation: $animation-name $animation-duration $animation-timing-function
+        (
+          $delay-base-speed * $idx
+        ) $animation-direction $animation-iterate-count $animation-fill-mode $animation-play-state;
       animation-name: $animation-name;
       animation-duration: $animation-duration;
       animation-timing-function: $animation-timing-function;

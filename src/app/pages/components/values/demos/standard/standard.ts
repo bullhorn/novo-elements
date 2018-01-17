@@ -28,18 +28,22 @@ export class DemoValueStandardComponent {
   public iconRightData: any = 'Approved';
   public iconRightMeta: any = {
     type: 'SCALAR',
-    options: [{
-      value: 'Approved',
-      label: 'Approved',
-    }],
+    options: [
+      {
+        value: 'Approved',
+        label: 'Approved',
+      },
+    ],
     name: 'status',
     label: 'Status',
-    actions: [{
-      icon: 'next',
-      onClick: (event: Event, data: string, meta: any) => {
-        window.alert('hey there');
+    actions: [
+      {
+        icon: 'next',
+        onClick: (event: Event, data: string, meta: any) => {
+          window.alert('hey there');
+        },
       },
-    }],
+    ],
   };
   public corporateUserData: any = {
     id: 123,
@@ -64,30 +68,36 @@ export class DemoValueStandardComponent {
       entity: 'Placement',
     },
     formatter: (value: any, args: any) => {
-      return `${args.label} #${value && value.id || ''}`;
+      return `${args.label} #${(value && value.id) || ''}`;
     },
-    onClick: (event: Event, data: any) => alert(`Opening Placement Id: ${data.id}`),
+    onClick: (event: Event, data: any) =>
+      alert(`Opening Placement Id: ${data.id}`),
   };
   public phoneValueData: any = '2222222222';
   public phoneValueMeta: any = {
     name: 'phone1',
     label: 'Mobile Phone #',
-    links: [{
-      icon: 'phone',
-      href: (data: string) => `tel:${data}`,
-    }, {
-      icon: 'sms',
-      href: (data: string) => `sms:${data}`,
-    }],
+    links: [
+      {
+        icon: 'phone',
+        href: (data: string) => `tel:${data}`,
+      },
+      {
+        icon: 'sms',
+        href: (data: string) => `sms:${data}`,
+      },
+    ],
   };
   public emailValueData: any = 'amrutha@example.com';
   public emailValueMeta: any = {
     name: 'email',
     label: 'Email Address',
-    links: [{
-      icon: 'email',
-      href: (data: string) => `mailto:${data}`,
-    }],
+    links: [
+      {
+        icon: 'email',
+        href: (data: string) => `mailto:${data}`,
+      },
+    ],
   };
   public externalLinkData: any = 'www.bullhorn.com';
   public externalLinkMeta: any = {
@@ -95,7 +105,7 @@ export class DemoValueStandardComponent {
     label: 'Company URL',
     onClick: (event: Event, data: string) => window.open(data),
   };
-  public dateTimeValueData: any = (new Date()).getTime();
+  public dateTimeValueData: any = new Date().getTime();
   public dateTimeValueMeta: any = {
     dataSpecialization: 'DATETIME',
     label: 'Date',
@@ -114,10 +124,12 @@ export class DemoValueStandardComponent {
     type: 'Address',
     label: 'Address',
     name: 'address',
-    links: [{
-      icon: 'location',
-      href: (data: any) => `map:${data.city},+${data.state}`,
-    }],
+    links: [
+      {
+        icon: 'location',
+        href: (data: any) => `map:${data.city},+${data.state}`,
+      },
+    ],
   };
   public associatedValueData: any = {
     id: 1,
@@ -136,5 +148,4 @@ export class DemoValueStandardComponent {
   public increment(): void {
     this.toggleCount++;
   }
-
 }

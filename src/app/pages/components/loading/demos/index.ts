@@ -4,7 +4,6 @@ import { DemoLineComponent } from './line/line';
 export const LOADING_DEMO_COMPONENTS: any[] = [
   DemoSpinnerComponent,
   DemoLineComponent,
-
 ];
 
 export const LOADING_DEMOS: DEMOS = {

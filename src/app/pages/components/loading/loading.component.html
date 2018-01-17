@@ -1,56 +1,39 @@
-<demo-section [name]="name"
-              [src]="src">
+<demo-section [name]="name" [src]="src">
 
   <h3>Contents</h3>
 
   <ul class="demo-nav">
     <li>
-      <a routerLink="."
-         fragment="usage">Usage</a>
+      <a routerLink="." fragment="usage">Usage</a>
     </li>
     <li>
-      <a routerLink="."
-         fragment="examples">Examples</a>
+      <a routerLink="." fragment="examples">Examples</a>
       <ul>
         <li>
-          <a routerLink="."
-             fragment="themes">Themes</a>
+          <a routerLink="." fragment="themes">Themes</a>
         </li>
         <ul>
           <li>
-            <a routerLink="."
-               fragment="loading-line">Line</a>
+            <a routerLink="." fragment="loading-line">Line</a>
           </li>
           <li>
-            <a routerLink="."
-               fragment="loading-spinner">Spinner</a>
+            <a routerLink="." fragment="loading-spinner">Spinner</a>
           </li>
         </ul>
       </ul>
     </li>
   </ul>
 
-  <h3 routerLink="."
-      fragment="usage"
-      id="usage"> Usage</h3>
-  <div class="usage-doc"
-       [innerHtml]="usageDoc"></div>
+  <h3 routerLink="." fragment="usage" id="usage"> Usage</h3>
+  <div class="usage-doc" [innerHtml]="usageDoc"></div>
 
-  <h3 routerLink="."
-      fragment="examples"
-      id="examples">Examples</h3>
+  <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
 
-  <demo-box [ts]="demos.line.ts"
-            [html]="demos.line.html"
-            name="loading-line"
-            label="Line">
+  <demo-box [ts]="demos.line.ts" [html]="demos.line.html" name="loading-line" label="Line">
     <demo-loading-line class="loading-demo demo-loading-line"></demo-loading-line>
   </demo-box>
 
-  <demo-box [ts]="demos.spinner.ts"
-            [html]="demos.spinner.html"
-            name="loading-spinner"
-            label="Spinner">
+  <demo-box [ts]="demos.spinner.ts" [html]="demos.spinner.html" name="loading-spinner" label="Spinner">
     <demo-loading-spinner class="loading-demo demo-loading-spinner"></demo-loading-spinner>
   </demo-box>
 

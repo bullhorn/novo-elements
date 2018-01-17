@@ -1,4 +1,19 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  forwardRef,
+  ElementRef,
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { Helpers } from '../../utils/helpers/helpers.service';
@@ -12,11 +27,13 @@ export interface IItem {
 
 @Component({
   selector: 'novo-tiles',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NovoTilesComponent),
-    multi: true,
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NovoTilesComponent),
+      multi: true,
+    },
+  ],
   template: `
         <div class="tile-container" [class.active]="focused">
             <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked, disabled: option.disabled}" (click)="select($event, option, i)" [attr.data-automation-id]="option.label || option">
@@ -30,23 +47,31 @@ export interface IItem {
     `,
   animations: [
     trigger('tileState', [
-      state('inactive', style({
-        opacity: '0',
-      })),
-      state('active', style({
-        opacity: '1',
-      })),
+      state(
+        'inactive',
+        style({
+          opacity: '0',
+        }),
+      ),
+      state(
+        'active',
+        style({
+          opacity: '1',
+        }),
+      ),
       transition('inactive => active', animate('200ms ease-in')),
       transition('active => inactive', animate('200ms ease-out')),
     ]),
   ],
 })
-export class NovoTilesComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class NovoTilesComponent
+  implements ControlValueAccessor, OnInit, OnChanges {
   @Input() public name: string;
   @Input() public options: IItem[] | string[];
   @Input() public required: boolean;
   @Output() public onChange: EventEmitter<any> = new EventEmitter();
-  @Output() public onDisabledOptionClick: EventEmitter<any> = new EventEmitter();
+  @Output()
+  public onDisabledOptionClick: EventEmitter<any> = new EventEmitter();
 
   public _options: IItem[] = [];
   public activeTile: any = undefined;
@@ -54,13 +79,10 @@ export class NovoTilesComponent implements ControlValueAccessor, OnInit, OnChang
   public focused: boolean = false;
 
   public model: any;
-  constructor(public element: ElementRef) {
-  }
+  constructor(public element: ElementRef) {}
 
-  public onModelChange: Function = () => {
-  }
-  public onModelTouched: Function = () => {
-  }
+  public onModelChange: Function = () => {};
+  public onModelTouched: Function = () => {};
 
   public setFocus(focus: boolean): void {
     this.focused = focus;
@@ -72,7 +94,11 @@ export class NovoTilesComponent implements ControlValueAccessor, OnInit, OnChang
   }
 
   public ngOnChanges(change?: SimpleChanges): void {
-    if (change.options && change.options.previousValue && change.options.previousValue.length > 0) {
+    if (
+      change.options &&
+      change.options.previousValue &&
+      change.options.previousValue.length > 0
+    ) {
       this._options = [];
       this.setupOptions();
     }
@@ -94,7 +120,11 @@ export class NovoTilesComponent implements ControlValueAccessor, OnInit, OnChang
   }
 
   public setupOptions(): void {
-    if (this.options && this.options.length && (typeof this.options[0] === 'string')) {
+    if (
+      this.options &&
+      this.options.length &&
+      typeof this.options[0] === 'string'
+    ) {
       this._options = (this.options as (string)[]).map((x: string) => {
         let item: IItem = { value: x, label: x, checked: this.model === x };
         return item;
@@ -137,8 +167,12 @@ export class NovoTilesComponent implements ControlValueAccessor, OnInit, OnChang
 
   public moveTile(): void {
     setTimeout(() => {
-      let ind: HTMLElement = this.element.nativeElement.querySelector('.active-indicator');
-      let el: HTMLElement = this.element.nativeElement.querySelector('.tile.active');
+      let ind: HTMLElement = this.element.nativeElement.querySelector(
+        '.active-indicator',
+      );
+      let el: HTMLElement = this.element.nativeElement.querySelector(
+        '.tile.active',
+      );
       let w: number = el.clientWidth;
       let left: number = el.offsetLeft;
 

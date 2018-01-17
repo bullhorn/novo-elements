@@ -10,5 +10,6 @@ import { fadeAnimation } from '../../../app.animations';
 })
 export class IconographyComponent {
   @HostBinding('@routeAnimation') public routeAnimation: boolean = true;
-  @HostBinding('class.demo-route-animation') public classAnimation: boolean = true;
+  @HostBinding('class.demo-route-animation')
+  public classAnimation: boolean = true;
 }

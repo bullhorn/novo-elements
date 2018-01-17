@@ -1,4 +1,4 @@
-@import "../../../platform/styles/global/variables.scss";
+@import '../../../platform/styles/global/variables.scss';
 :host {
   background-color: lighten($dark, 50%);
 }
@@ -17,7 +17,7 @@ div.banner {
   h5 {
     padding-bottom: 25px;
   }
-  >div {
+  > div {
     padding: $large;
   }
   a.fork-me {
@@ -39,9 +39,9 @@ div.spacer {
 div.callout {
   background-color: $off-white;
   padding: $large;
-  >div {
+  > div {
     padding: $small;
-    >h5 {
+    > h5 {
       color: $bittersweet;
     }
   }
@@ -95,13 +95,13 @@ div.built-with {
     }
   }
   &.angular {
-    border: 2px solid rgba(#DD0330, 0.25);
+    border: 2px solid rgba(#dd0330, 0.25);
     i {
-      color: #DD0330;
-      border: 2px solid #DD0330;
+      color: #dd0330;
+      border: 2px solid #dd0330;
     }
   }
-  >span>a {
+  > span > a {
     display: block;
     padding-top: 3px;
   }

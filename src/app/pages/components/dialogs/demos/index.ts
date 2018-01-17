@@ -1,4 +1,7 @@
-import { DemoDialogStandardComponent, ExampleDialogComponent } from './standard/standard';
+import {
+  DemoDialogStandardComponent,
+  ExampleDialogComponent,
+} from './standard/standard';
 // import { DemoListAdvancedComponent } from './advanced/advanced';
 // import { DemoListEntityComponent } from './entity/entity';
 

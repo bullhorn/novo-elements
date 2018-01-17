@@ -8,4 +8,15 @@ import { COLORS } from '../../../../../consts';
 })
 export class DemoButtonsPrimaryComponent {
   public colors: string[] = COLORS;
+  public disabled: boolean = false;
+  public tiles: any[] = [
+    {
+      label: 'Enabled',
+      value: false,
+    },
+    {
+      label: 'Disabled',
+      value: true,
+    },
+  ];
 }

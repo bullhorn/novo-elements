@@ -4,22 +4,17 @@
       <label class="caption">Selected Value:</label>
       <span>{{ value }}</span>
     </div>
-    <novo-select [options]="options"
-                 [placeholder]="placeholder"
-                 [(ngModel)]="value"></novo-select>
+    <novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value"></novo-select>
   </div>
   <div>
     <div>
       <label class="caption">Selected Value:</label>
       <span>{{ withNumbersValue }}</span>
     </div>
-    <novo-select [options]="withNumbers"
-                 [(ngModel)]="withNumbersValue"></novo-select>
+    <novo-select [options]="withNumbers" [(ngModel)]="withNumbersValue"></novo-select>
   </div>
   <div>
     <label class="caption">Lots of Options</label>
-    <novo-select [options]="states"
-                 [placeholder]="placeholder"
-                 [(ngModel)]="state"></novo-select>
+    <novo-select [options]="states" [placeholder]="placeholder" [(ngModel)]="state"></novo-select>
   </div>
 </div>

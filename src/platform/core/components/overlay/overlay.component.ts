@@ -17,7 +17,15 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
-import { ConnectedPositionStrategy, Overlay, OverlayRef, OverlayConfig, PositionStrategy, RepositionScrollStrategy, ScrollStrategy } from '@angular/cdk/overlay';
+import {
+  ConnectedPositionStrategy,
+  Overlay,
+  OverlayRef,
+  OverlayConfig,
+  PositionStrategy,
+  RepositionScrollStrategy,
+  ScrollStrategy,
+} from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 
 import { Observable } from 'rxjs/Observable';
@@ -30,11 +38,14 @@ import { first } from 'rxjs/operators/first';
 import { switchMap } from 'rxjs/operators/switchMap';
 
 /** Injection token that determines the scroll handling while the autocomplete panel is open. */
-export const DEFAULT_OVERLAY_SCROLL_STRATEGY: InjectionToken<ScrollStrategy> = new InjectionToken<() => ScrollStrategy>('novo-overlay-scroll-strategy');
+export const DEFAULT_OVERLAY_SCROLL_STRATEGY: InjectionToken<
+  ScrollStrategy
+> = new InjectionToken<() => ScrollStrategy>('novo-overlay-scroll-strategy');
 
 /** @docs-private */
-export function DEFAULT_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY(overlay: Overlay):
-  () => RepositionScrollStrategy {
+export function DEFAULT_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY(
+  overlay: Overlay,
+): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
 }
 
@@ -87,8 +98,10 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     protected _zone: NgZone,
     protected _changeDetectorRef: ChangeDetectorRef,
     @Inject(DEFAULT_OVERLAY_SCROLL_STRATEGY) protected _scrollStrategy: any,
-    @Optional() @Inject(DOCUMENT) protected _document: any,
-  ) { }
+    @Optional()
+    @Inject(DOCUMENT)
+    protected _document: any,
+  ) {}
 
   public ngOnDestroy(): void {
     this._destroyPanel();
@@ -111,7 +124,6 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   /** Opens the autocomplete suggestion panel. */
   public openPanel(): void {
-
     if (!this._overlayRef) {
       this._createOverlay(this.template);
     } else {
@@ -165,17 +177,26 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     return merge(
       fromEvent(this._document, 'click'),
       fromEvent(this._document, 'touchend'),
-    ).pipe(filter((event: MouseEvent | TouchEvent) => {
-      const clickTarget: HTMLElement = event.target as HTMLElement;
-      const clicked: boolean = this._panelOpen &&
-        clickTarget !== this._getConnectedElement().nativeElement &&
-        (!this._getConnectedElement().nativeElement.contains(clickTarget)) &&
-        (!!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget));
-      if (this._panelOpen && !!this._overlayRef && this._overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
-        this.select.emit(event);
-      }
-      return clicked;
-    }));
+    ).pipe(
+      filter((event: MouseEvent | TouchEvent) => {
+        const clickTarget: HTMLElement = event.target as HTMLElement;
+        const clicked: boolean =
+          this._panelOpen &&
+          clickTarget !== this._getConnectedElement().nativeElement &&
+          !this._getConnectedElement().nativeElement.contains(clickTarget) &&
+          (!!this._overlayRef &&
+            !this._overlayRef.overlayElement.contains(clickTarget));
+        if (
+          this._panelOpen &&
+          !!this._overlayRef &&
+          this._overlayRef.overlayElement.contains(clickTarget) &&
+          this.closeOnSelect
+        ) {
+          this.select.emit(event);
+        }
+        return clicked;
+      }),
+    );
   }
 
   /**
@@ -183,21 +204,25 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
    * stream every time the option list changes.
    */
   protected _subscribeToClosingActions(): Subscription {
-    const firstStable: Observable<any> = this._zone.onStable.asObservable().pipe(first());
+    const firstStable: Observable<
+      any
+    > = this._zone.onStable.asObservable().pipe(first());
     // const valueChanges = Observable.from(this.value);
     // When the zone is stable initially, and when the option list changes...
-    return merge(firstStable)
-      .pipe(
-      // create a new stream of panelClosingActions, replacing any previous streams
-      // that were created, and flatten it so our stream only emits closing events...
-      switchMap(() => {
-        return this.panelClosingActions;
-      }),
-      // when the first closing event occurs...
-      first(),
-    )
-      // set the value, close the panel, and complete.
-      .subscribe((event: any) => this.onClosingAction(event));
+    return (
+      merge(firstStable)
+        .pipe(
+          // create a new stream of panelClosingActions, replacing any previous streams
+          // that were created, and flatten it so our stream only emits closing events...
+          switchMap(() => {
+            return this.panelClosingActions;
+          }),
+          // when the first closing event occurs...
+          first(),
+        )
+        // set the value, close the panel, and complete.
+        .subscribe((event: any) => this.onClosingAction(event))
+    );
   }
 
   /** Destroys the autocomplete suggestion panel. */
@@ -228,22 +253,55 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   protected _getOverlayPosition(): PositionStrategy {
     switch (this.position) {
       case 'center':
-        this._positionStrategy = this._overlay.position()
-          .connectedTo(this._getConnectedElement(), { originX: 'start', originY: 'center' }, { overlayX: 'start', overlayY: 'center' })
-          .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
-          .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' });
+        this._positionStrategy = this._overlay
+          .position()
+          .connectedTo(
+            this._getConnectedElement(),
+            { originX: 'start', originY: 'center' },
+            { overlayX: 'start', overlayY: 'center' },
+          )
+          .withFallbackPosition(
+            { originX: 'start', originY: 'top' },
+            { overlayX: 'start', overlayY: 'top' },
+          )
+          .withFallbackPosition(
+            { originX: 'start', originY: 'bottom' },
+            { overlayX: 'start', overlayY: 'bottom' },
+          );
         break;
       case 'right':
-        this._positionStrategy = this._overlay.position()
-          .connectedTo(this._getConnectedElement(), { originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' })
-          .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
-          .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' })
-          .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' });
+        this._positionStrategy = this._overlay
+          .position()
+          .connectedTo(
+            this._getConnectedElement(),
+            { originX: 'end', originY: 'bottom' },
+            { overlayX: 'end', overlayY: 'top' },
+          )
+          .withFallbackPosition(
+            { originX: 'start', originY: 'bottom' },
+            { overlayX: 'start', overlayY: 'top' },
+          )
+          .withFallbackPosition(
+            { originX: 'end', originY: 'top' },
+            { overlayX: 'end', overlayY: 'bottom' },
+          )
+          .withFallbackPosition(
+            { originX: 'start', originY: 'top' },
+            { overlayX: 'start', overlayY: 'bottom' },
+          );
         break;
       default:
-        this._positionStrategy = this._overlay.position()
-          .connectedTo(this._getConnectedElement(), { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
-          .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' });
+        this._positionStrategy = this._overlay
+          .position()
+          .connectedTo(
+            this._getConnectedElement(),
+            { originX: 'start', originY: 'bottom' },
+            { overlayX: 'start', overlayY: 'top' },
+          )
+          .withFallbackPosition(
+            { originX: 'start', originY: 'top' },
+            { overlayX: 'start', overlayY: 'bottom' },
+          );
         break;
     }
 
@@ -267,7 +325,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   /** Returns the width of the input element, so the panel width can match it. */
   protected _getHostWidth(): number {
-    return this._getConnectedElement().nativeElement.getBoundingClientRect().width;
+    return this._getConnectedElement().nativeElement.getBoundingClientRect()
+      .width;
   }
-
 }

@@ -6,4 +6,4 @@ import { NovoIconComponent } from './icon.component';
   exports: [NovoIconComponent],
   declarations: [NovoIconComponent],
 })
-export class NovoIconModule { }
+export class NovoIconModule {}

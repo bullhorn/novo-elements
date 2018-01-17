@@ -6,12 +6,20 @@ import { OverlayModule } from '@angular/cdk/overlay';
 // APP
 import { NovoOverlayModule } from '../overlay';
 import { NovoOptionModule } from '../option';
-import { NovoSelectComponent, NovoSelectOptionComponent } from './select.component';
+import {
+  NovoSelectComponent,
+  NovoSelectOptionComponent,
+} from './select.component';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, OverlayModule, NovoOverlayModule, NovoOptionModule],
-    declarations: [NovoSelectComponent, NovoSelectOptionComponent],
-    exports: [NovoSelectComponent, NovoSelectOptionComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    OverlayModule,
+    NovoOverlayModule,
+    NovoOptionModule,
+  ],
+  declarations: [NovoSelectComponent, NovoSelectOptionComponent],
+  exports: [NovoSelectComponent, NovoSelectOptionComponent],
 })
-export class NovoSelectModule {
-}
+export class NovoSelectModule {}

@@ -11,5 +11,4 @@ import { RenderPipe } from './render.pipe';
   declarations: [NovoValueComponent, RenderPipe],
   exports: [NovoValueComponent, RenderPipe],
 })
-export class NovoValueModule {
-}
+export class NovoValueModule {}

@@ -24,4 +24,4 @@ import { docsRoutes } from './docs.routes';
     docsRoutes,
   ],
 })
-export class DocsModule { }
+export class DocsModule {}

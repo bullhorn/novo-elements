@@ -20,7 +20,12 @@ describe('Pipe: GroupByPipe', () => {
   });
 
   it('group on discriminator', () => {
-    const arrayWithDiscriminator: any[] = [{ key: 'foo' }, { key: 'bar' }, { key: 'foo' }, { key: 'bar' }];
+    const arrayWithDiscriminator: any[] = [
+      { key: 'foo' },
+      { key: 'bar' },
+      { key: 'foo' },
+      { key: 'bar' },
+    ];
     const result: any = pipe.transform(arrayWithDiscriminator, 'key');
     expect(result).toEqual({
       foo: [{ key: 'foo' }, { key: 'foo' }],
@@ -29,8 +34,16 @@ describe('Pipe: GroupByPipe', () => {
   });
 
   it('allow function to be used as discriminator', () => {
-    const arrayWithDiscriminator: any[] = [{ key: 'foo' }, { key: 'bar' }, { key: 'foo' }, { key: 'bar' }];
-    const result: any = pipe.transform(arrayWithDiscriminator, (_: any) => _.key);
+    const arrayWithDiscriminator: any[] = [
+      { key: 'foo' },
+      { key: 'bar' },
+      { key: 'foo' },
+      { key: 'bar' },
+    ];
+    const result: any = pipe.transform(
+      arrayWithDiscriminator,
+      (_: any) => _.key,
+    );
     expect(result).toEqual({
       foo: [{ key: 'foo' }, { key: 'foo' }],
       bar: [{ key: 'bar' }, { key: 'bar' }],
@@ -44,7 +57,11 @@ describe('Pipe: GroupByPipe', () => {
       { id: 3, key: 'foo', type: 1 },
       { id: 4, key: 'foo', type: 2 },
     ];
-    const result: any = pipe.transform(arrayWithDiscriminator, ['key', 'type'], '_');
+    const result: any = pipe.transform(
+      arrayWithDiscriminator,
+      ['key', 'type'],
+      '_',
+    );
     expect(result).toEqual({
       foo_1: [{ id: 1, key: 'foo', type: 1 }, { id: 3, key: 'foo', type: 1 }],
       foo_2: [{ id: 2, key: 'foo', type: 2 }, { id: 4, key: 'foo', type: 2 }],
@@ -86,10 +103,19 @@ describe('Pipe: GroupByPipe', () => {
       { id: 3, prop: { deep: 'foo', type: 1 } },
       { id: 4, prop: { deep: 'foo', type: 2 } },
     ];
-    const result: any = pipe.transform(arrayWithDiscriminator, ['prop.deep', 'prop.type']);
+    const result: any = pipe.transform(arrayWithDiscriminator, [
+      'prop.deep',
+      'prop.type',
+    ]);
     expect(result).toEqual({
-      'foo|1': [{ id: 1, prop: { deep: 'foo', type: 1 } }, { id: 3, prop: { deep: 'foo', type: 1 } }],
-      'foo|2': [{ id: 2, prop: { deep: 'foo', type: 2 } }, { id: 4, prop: { deep: 'foo', type: 2 } }],
+      'foo|1': [
+        { id: 1, prop: { deep: 'foo', type: 1 } },
+        { id: 3, prop: { deep: 'foo', type: 1 } },
+      ],
+      'foo|2': [
+        { id: 2, prop: { deep: 'foo', type: 2 } },
+        { id: 4, prop: { deep: 'foo', type: 2 } },
+      ],
     });
   });
 });

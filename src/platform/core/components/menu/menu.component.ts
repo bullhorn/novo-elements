@@ -1,4 +1,14 @@
-import { Component, Input, ViewChild, ElementRef, OnInit, OnChanges, SimpleChanges, HostBinding, HostListener } from '@angular/core';
+import {
+  Component,
+  Input,
+  ViewChild,
+  ElementRef,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  HostBinding,
+  HostListener,
+} from '@angular/core';
 import { ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { NovoOverlayTemplateComponent } from '../overlay';
@@ -20,11 +30,10 @@ export class NovoMenuComponent implements OnInit, OnChanges {
   @Input() public align: string = 'left';
   // @Output() onSelect: EventEmitter<any> = new EventEmitter();
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplateComponent) public overlay: NovoOverlayTemplateComponent;
+  @ViewChild(NovoOverlayTemplateComponent)
+  public overlay: NovoOverlayTemplateComponent;
 
-  constructor(
-    public element: ElementRef,
-  ) { }
+  constructor(public element: ElementRef) {}
 
   public ngOnInit(): void {
     this.ngOnChanges();
@@ -51,7 +60,9 @@ export class NovoMenuComponent implements OnInit, OnChanges {
 
   protected _addButtonListener(element: HTMLElement): void {
     if (element) {
-      let button: HTMLElement = this.element.nativeElement.querySelector('button');
+      let button: HTMLElement = this.element.nativeElement.querySelector(
+        'button',
+      );
       button.addEventListener('click', () => this.openPanel());
     }
   }

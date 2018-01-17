@@ -1,7 +1,7 @@
-@import "../../../platform/styles/global/variables";
+@import '../../../platform/styles/global/variables';
 .demo-section {
   background-color: $white;
-  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
   margin-bottom: $large;
   .demo-box-content {
     padding: $medium;

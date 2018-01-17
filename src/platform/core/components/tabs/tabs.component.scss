@@ -1,32 +1,29 @@
-@import "../../../styles/global/functions";
-@import "../../../styles/global/variables";
+@import '../../../styles/global/functions';
+@import '../../../styles/global/variables';
 
 :host {
-    background: rgba(0, 0, 0, 0.15);
-    padding: 0;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 0;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
 
-    &[type="button-bar"] {
-        display: inline-flex;
-        border-radius: 3px;
-        border: 2px solid #fff;
-    }
-   
-    &[direction="vertical"] {
-        flex-direction: column;
-        width: auto;
-    }
+  &[type='button-bar'] {
+    display: inline-flex;
+    border-radius: 3px;
+    border: 2px solid #fff;
+  }
 
-    @each $theme,
-    $color in $all-colors {
-        &[theme="#{$theme}"] {
-            background: rgba($color, .85);
-        }
-    }
+  &[direction='vertical'] {
+    flex-direction: column;
+    width: auto;
+  }
 
+  @each $theme, $color in $all-colors {
+    &[theme='#{$theme}'] {
+      background: rgba($color, 0.85);
+    }
+  }
 }
-

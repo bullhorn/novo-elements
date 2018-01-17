@@ -7,11 +7,7 @@ class Person {
 
 class Company {
   public name: string = faker.company.companyName();
-  public employees: Person[] = [
-    new Person(),
-    new Person(),
-    new Person(),
-  ];
+  public employees: Person[] = [new Person(), new Person(), new Person()];
 }
 
 @Component({
@@ -19,9 +15,5 @@ class Company {
   templateUrl: './groups.html',
 })
 export class DemoSelectGroupsComponent {
-  public companies: any[] = [
-    new Company(),
-    new Company(),
-    new Company(),
-  ];
+  public companies: any[] = [new Company(), new Company(), new Company()];
 }

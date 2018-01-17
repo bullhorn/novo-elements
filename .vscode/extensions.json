@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "EditorConfig.editorconfig",
+    "christian-kohler.path-intellisense",
+    "eg2.tslint",
+    "wayou.vscode-todo-highlight"
+  ]
+}

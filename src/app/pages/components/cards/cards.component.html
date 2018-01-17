@@ -1,24 +1,19 @@
-<demo-section [name]="name"
-              [src]="src">
+<demo-section [name]="name" [src]="src">
 
   <h3>Contents</h3>
 
   <ul class="demo-nav">
     <li>
-      <a routerLink="."
-         fragment="usage">Usage</a>
+      <a routerLink="." fragment="usage">Usage</a>
     </li>
     <li>
-      <a routerLink="."
-         fragment="examples">Examples</a>
+      <a routerLink="." fragment="examples">Examples</a>
       <ul>
         <li>
-          <a routerLink="."
-             fragment="card-standard">Standard</a>
+          <a routerLink="." fragment="card-standard">Standard</a>
         </li>
         <li>
-          <a routerLink="."
-             fragment="card-advanced">Advanced</a>
+          <a routerLink="." fragment="card-advanced">Advanced</a>
         </li>
         <!-- <li>
           <a routerLink="." fragment="card-entity">Entity Card</a>
@@ -27,31 +22,16 @@
     </li>
   </ul>
 
-  <h3 routerLink="."
-      fragment="usage"
-      id="usage">Usage</h3>
-  <div class="usage-doc"
-       [innerHtml]="usageDoc"></div>
+  <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
+  <div class="usage-doc" [innerHtml]="usageDoc"></div>
 
-  <h3 routerLink="."
-      fragment="examples"
-      id="examples">Examples</h3>
+  <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
 
-  <demo-box class="card-demo"
-            [ts]="demos.standard.ts"
-            [html]="demos.standard.html"
-            name="card-standard"
-            label="Card: Standard">
-    <demo-card-standard layout="row nowrap"
-                        layout-align="space-between start"></demo-card-standard>
+  <demo-box class="card-demo" [ts]="demos.standard.ts" [html]="demos.standard.html" name="card-standard" label="Card: Standard">
+    <demo-card-standard layout="row nowrap" layout-align="space-between start"></demo-card-standard>
   </demo-box>
-  <demo-box class="card-demo"
-            [ts]="demos.advanced.ts"
-            [html]="demos.advanced.html"
-            name="card-advanced"
-            label="Card: Advanced">
-    <demo-card-advanced layout="row"
-                        layout-align="space-around start"></demo-card-advanced>
+  <demo-box class="card-demo" [ts]="demos.advanced.ts" [html]="demos.advanced.html" name="card-advanced" label="Card: Advanced">
+    <demo-card-advanced layout="row" layout-align="space-around start"></demo-card-advanced>
   </demo-box>
   <!-- <demo-box class="card-demo" [ts]="demos.entity.ts" [html]="demos.entity.html" name="card-entity" label="Card: Entity">
     <demo-card-entity></demo-card-entity>

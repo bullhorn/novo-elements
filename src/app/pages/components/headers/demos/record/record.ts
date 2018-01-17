@@ -34,7 +34,7 @@ export class DemoHeaderRecordComponent {
       entity: 'CorporateUser',
     },
   };
-  public dateTimeValueData: any = (new Date()).getTime();
+  public dateTimeValueData: any = new Date().getTime();
   public dateTimeValueMeta: any = {
     dataSpecialization: 'DATETIME',
     label: 'Date',

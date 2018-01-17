@@ -8,22 +8,15 @@ import { NovoIconModule } from '../icon/icon.module';
 import { NovoListModule } from '../list/list.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        HttpModule,
-        FormsModule,
-        NovoIconModule,
-        NovoListModule,
-    ],
-    declarations: [
-        PlacesListComponent,
-    ],
-    exports: [
-        PlacesListComponent,
-    ],
-    providers: [
-        { provide: GooglePlacesService, useClass: GooglePlacesService },
-    ],
+  imports: [
+    CommonModule,
+    HttpModule,
+    FormsModule,
+    NovoIconModule,
+    NovoListModule,
+  ],
+  declarations: [PlacesListComponent],
+  exports: [PlacesListComponent],
+  providers: [{ provide: GooglePlacesService, useClass: GooglePlacesService }],
 })
-export class GooglePlacesModule {
-}
+export class GooglePlacesModule {}

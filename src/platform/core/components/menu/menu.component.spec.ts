@@ -6,40 +6,39 @@ import { NovoMenuModule } from './menu.module';
 import { NovoMenuComponent } from './menu.component';
 
 describe('NovoMenuComponent', () => {
-    let comp: NovoMenuComponent;
-    let fixture: ComponentFixture<NovoMenuComponent>;
+  let comp: NovoMenuComponent;
+  let fixture: ComponentFixture<NovoMenuComponent>;
 
-    beforeEach(() => {
-        const elementRefStub: any = {
-            nativeElement: {
-                querySelector: () => ({
-                    addEventListener: () => ({}),
-                }),
-            },
-        };
-        const simpleChangesStub: any = {};
-        TestBed.configureTestingModule({
-            imports: [NovoMenuModule],
-            schemas: [NO_ERRORS_SCHEMA],
-            providers: [
-                { provide: ElementRef, useValue: elementRefStub },
-                { provide: SimpleChanges, useValue: simpleChangesStub },
-            ],
-        });
-        fixture = TestBed.createComponent(NovoMenuComponent);
-        comp = fixture.componentInstance;
+  beforeEach(() => {
+    const elementRefStub: any = {
+      nativeElement: {
+        querySelector: () => ({
+          addEventListener: () => ({}),
+        }),
+      },
+    };
+    const simpleChangesStub: any = {};
+    TestBed.configureTestingModule({
+      imports: [NovoMenuModule],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        { provide: ElementRef, useValue: elementRefStub },
+        { provide: SimpleChanges, useValue: simpleChangesStub },
+      ],
     });
+    fixture = TestBed.createComponent(NovoMenuComponent);
+    comp = fixture.componentInstance;
+  });
 
-    it('can load instance', () => {
-        expect(comp).toBeTruthy();
-    });
+  it('can load instance', () => {
+    expect(comp).toBeTruthy();
+  });
 
-    it('role defaults to: menu', () => {
-        expect(comp.role).toEqual('menu');
-    });
+  it('role defaults to: menu', () => {
+    expect(comp.role).toEqual('menu');
+  });
 
-    it('align defaults to: left', () => {
-        expect(comp.align).toEqual('left');
-    });
-
+  it('align defaults to: left', () => {
+    expect(comp.align).toEqual('left');
+  });
 });

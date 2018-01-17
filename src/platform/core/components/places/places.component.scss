@@ -1,14 +1,14 @@
-@import "../../../styles/global/functions";
-@import "../../../styles/global/variables";
+@import '../../../styles/global/functions';
+@import '../../../styles/global/variables';
 
 :host /deep/ {
   novo-list {
-    border: 1px solid #4A89DC;
+    border: 1px solid #4a89dc;
     novo-list-item {
       cursor: pointer;
       flex: 0 0;
       transition: background-color 250ms;
-      &>div {
+      & > div {
         width: 100%;
       }
       &.active {
@@ -19,7 +19,7 @@
       }
       item-content {
         flex-flow: row wrap;
-        &>* {
+        & > * {
           flex: 0 0 33%;
           white-space: nowrap;
         }

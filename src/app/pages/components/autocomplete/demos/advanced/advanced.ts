@@ -7,7 +7,7 @@ import * as faker from 'faker';
 export class User {
   public updated: Date = new Date();
   public summary: string = faker.lorem.sentence();
-  constructor(public name: string) { }
+  constructor(public name: string) {}
 }
 
 @Component({
@@ -28,8 +28,10 @@ export class DemoAutocompleteAdvancedComponent implements OnInit {
   public ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges
       .startWith(undefined)
-      .map((user: User) => user && typeof user === 'object' ? user.name : user)
-      .map((name: string) => name ? this.filter(name) : this.options.slice());
+      .map(
+        (user: User) => (user && typeof user === 'object' ? user.name : user),
+      )
+      .map((name: string) => (name ? this.filter(name) : this.options.slice()));
   }
 
   public filter(name: string): User[] {
@@ -41,5 +43,4 @@ export class DemoAutocompleteAdvancedComponent implements OnInit {
   public displayFn(item: User): string | User {
     return item ? item.name : item;
   }
-
 }

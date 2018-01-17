@@ -1,7 +1,7 @@
 context('Demo: Headers', () => {
   beforeEach(() => {
     let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/headers')
+    cy.visit(baseURL + '/#/components/headers');
   });
 
   context('standard', () => {

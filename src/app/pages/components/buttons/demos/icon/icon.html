@@ -1,29 +1,14 @@
-<div class="header buttons-demo"
-     [ngClass]="color"
-     (click)="changeColor()">
+<div class="header buttons-demo" [ngClass]="color" (click)="changeColor()">
   <!-- color property will be the label of the button -->
-  <button theme="icon"
-          icon="print"
-          inverse></button>
-  <button theme="icon"
-          icon="print"
-          inverse
-          disabled></button>
+  <button theme="icon" icon="print" inverse></button>
+  <button theme="icon" icon="print" inverse disabled></button>
 </div>
 
-<ng-container *ngFor="let color of colors;let i = index;">
-  <!-- color property will be the label of the button -->
-  <button theme="icon"
-          [color]="color"
-          icon="person">{{ color }}</button>
-</ng-container>
+<novo-tiles [options]="tiles" [(ngModel)]="disabled"></novo-tiles>
 
 <br/>
 
 <ng-container *ngFor="let color of colors;let i = index;">
   <!-- color property will be the label of the button -->
-  <button theme="icon"
-          [color]="color"
-          icon="person"
-          disabled="true">{{ color }}</button>
+  <button theme="icon" [color]="color" [disabled]="disabled" icon="person">{{ color }}</button>
 </ng-container>

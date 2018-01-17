@@ -57,7 +57,10 @@ export class NovoCardSubtitle {
 export class NovoCardActions {
   /** Position of the actions inside the card. */
   @Input() public align: 'start' | 'end' = 'start';
-  @HostBinding('class.novo-card-actions-align-end') public get isAlignEnd(): boolean { return this.align === 'end'; }
+  @HostBinding('class.novo-card-actions-align-end')
+  public get isAlignEnd(): boolean {
+    return this.align === 'end';
+  }
   @HostBinding('class.novo-card-actions') public _useClassName: boolean = true;
 }
 

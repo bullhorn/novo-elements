@@ -1,51 +1,23 @@
 {
-  "rulesDirectory": [
-    "./node_modules/codelyzer"
-  ],
+  "rulesDirectory": ["./node_modules/codelyzer"],
   "rules": {
-    "align": [
-      true,
-      "statements"
-    ],
-    "array-type": [
-      true,
-      "array"
-    ],
+    "align": [true, "statements"],
+    "array-type": [true, "array"],
     "arrow-parens": true,
-    "ban": [
-      true, []
-    ],
+    "ban": [true, []],
     "class-name": true,
-    "comment-format": [
-      true,
-      "check-space"
-    ],
+    "comment-format": [true, "check-space"],
     "curly": true,
     "eofline": true,
     "forin": false,
-    "indent": [
-      true,
-      "spaces"
-    ],
-    "interface-name": [
-      true,
-      "always-prefix"
-    ],
-    "import-blacklist": [
-      true,
-      "rxjs",
-      "rxjs/Rx"
-    ],
+    "indent": [true, "spaces"],
+    "interface-name": [true, "always-prefix"],
+    "import-blacklist": [true, "rxjs", "rxjs/Rx"],
     "import-spacing": true,
     "jsdoc-format": true,
     "label-position": true,
-    "max-line-length": [
-      true,
-      500
-    ],
-    "member-access": [
-      true
-    ],
+    "max-line-length": [true, 500],
+    "member-access": [true],
     "member-ordering": [
       true,
       {
@@ -64,9 +36,7 @@
     "no-arg": true,
     "no-bitwise": true,
     "no-conditional-assignment": true,
-    "no-consecutive-blank-lines": [
-      true
-    ],
+    "no-consecutive-blank-lines": [true],
     "no-console": [
       true,
       "assert",
@@ -95,10 +65,7 @@
     "no-duplicate-variable": true,
     "no-empty-interface": false,
     "no-eval": true,
-    "no-inferrable-types": [
-      false,
-      "ignore-params"
-    ],
+    "no-inferrable-types": [false, "ignore-params"],
     "no-internal-module": true,
     "no-invalid-this": true,
     "no-magic-numbers": false,
@@ -123,20 +90,10 @@
       "check-open-brace",
       "check-whitespace"
     ],
-    "one-variable-per-declaration": [
-      true,
-      "ignore-for-loop"
-    ],
-    "quotemark": [
-      true,
-      "single",
-      "avoid-escape"
-    ],
+    "one-variable-per-declaration": [true, "ignore-for-loop"],
+    "quotemark": [true, "single", "avoid-escape"],
     "radix": true,
-    "semicolon": [
-      true,
-      "always"
-    ],
+    "semicolon": [true, "always"],
     "switch-default": true,
     "trailing-comma": [
       true,
@@ -189,18 +146,8 @@
       "check-type"
     ],
     // ANGULAR Rules
-    "directive-selector": [
-      false,
-      "attribute",
-      "td",
-      "camelCase"
-    ],
-    "component-selector": [
-      false,
-      "element",
-      "td",
-      "kebab-case"
-    ],
+    "directive-selector": [false, "attribute", "td", "camelCase"],
+    "component-selector": [false, "element", "td", "kebab-case"],
     "component-class-suffix": true,
     "directive-class-suffix": false,
     "use-input-property-decorator": true,
@@ -212,15 +159,8 @@
     "no-forward-ref": false,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
-    "pipe-naming": [
-      true,
-      "camelCase"
-    ],
-    "angular-whitespace": [
-      true,
-      "check-interpolation",
-      "check-pipe"
-    ],
+    "pipe-naming": [true, "camelCase"],
+    "angular-whitespace": [true, "check-interpolation", "check-pipe"],
     "banana-in-box": true,
     "templates-no-negated-async": true
   }

@@ -1,4 +1,19 @@
-import { Component, OnDestroy, AfterContentInit, ElementRef, Input, Output, HostBinding, HostListener, EventEmitter, ContentChildren, QueryList, Optional, Inject, forwardRef } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  AfterContentInit,
+  ElementRef,
+  Input,
+  Output,
+  HostBinding,
+  HostListener,
+  EventEmitter,
+  ContentChildren,
+  QueryList,
+  Optional,
+  Inject,
+  forwardRef,
+} from '@angular/core';
 import { FocusKeyManager, FocusableOption } from '@angular/cdk/a11y';
 import { ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
@@ -29,8 +44,7 @@ export class NovoListItemComponent implements FocusableOption, OnDestroy {
   @Output() public select: EventEmitter<any> = new EventEmitter();
 
   /** Whether the menu item is highlighted. */
-  @HostBinding('class.focused')
-  public focused: boolean = false;
+  @HostBinding('class.focused') public focused: boolean = false;
 
   @Input() public value: any;
 
@@ -51,8 +65,10 @@ export class NovoListItemComponent implements FocusableOption, OnDestroy {
   constructor(
     private element: ElementRef,
     // tslint:disable-next-line:no-use-before-declare
-    @Optional() @Inject(forwardRef(() => NovoListComponent)) public parent: NovoListComponent,
-  ) { }
+    @Optional()
+    @Inject(forwardRef(() => NovoListComponent))
+    public parent: NovoListComponent,
+  ) {}
 
   /** Life Cycle Events. */
   public ngOnDestroy(): void {
@@ -127,10 +143,10 @@ export class NovoListItemComponent implements FocusableOption, OnDestroy {
   }
 
   /** Applies the styles for an active item to this item. */
-  public setActiveStyles(): void { }
+  public setActiveStyles(): void {}
 
   /** Applies the styles for an inactive item to this item. */
-  public setInactiveStyles(): void { }
+  public setInactiveStyles(): void {}
 }
 
 @Component({
@@ -140,7 +156,9 @@ export class NovoListItemComponent implements FocusableOption, OnDestroy {
     `,
 })
 export class NovoItemContentComponent {
-  @HostBinding('class') @Input() public direction: string = 'vertical';
+  @HostBinding('class')
+  @Input()
+  public direction: string = 'vertical';
 }
 
 @Component({
@@ -151,18 +169,25 @@ export class NovoItemContentComponent {
 })
 export class NovoListComponent implements AfterContentInit {
   @HostBinding('attr.role') public role: string = 'list';
-  @HostBinding('class') @Input() public direction: string = 'vertical';
-  @HostBinding('attr.theme') @Input() public theme: string;
+  @HostBinding('class')
+  @Input()
+  public direction: string = 'vertical';
+  @HostBinding('attr.theme')
+  @Input()
+  public theme: string;
 
   /** List of the items inside of a menu. */
-  @ContentChildren(NovoListItemComponent) public items: QueryList<NovoListItemComponent>;
+  @ContentChildren(NovoListItemComponent)
+  public items: QueryList<NovoListItemComponent>;
   private _keyManager: FocusKeyManager<NovoListItemComponent>;
 
-  constructor(public element: ElementRef) { }
+  constructor(public element: ElementRef) {}
 
   /** Life Cycle Events. */
   public ngAfterContentInit(): void {
-    this._keyManager = new FocusKeyManager<NovoListItemComponent>(this.items).withWrap().withTypeAhead();
+    this._keyManager = new FocusKeyManager<NovoListItemComponent>(this.items)
+      .withWrap()
+      .withTypeAhead();
     // this._tabSubscription = this._keyManager.tabOut.subscribe(() => this.close.emit('keydown'));
   }
 

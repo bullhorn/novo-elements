@@ -20,9 +20,21 @@ import {
   HostBinding,
   HostListener,
 } from '@angular/core';
-import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  AnimationEvent,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { DOCUMENT } from '@angular/platform-browser';
-import { BasePortalOutlet, ComponentPortal, CdkPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
+import {
+  BasePortalOutlet,
+  ComponentPortal,
+  CdkPortalOutlet,
+  TemplatePortal,
+} from '@angular/cdk/portal';
 import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 import { NovoDialogConfig } from './dialog-config';
 
@@ -32,7 +44,9 @@ import { NovoDialogConfig } from './dialog-config';
  * @docs-private
  */
 export function throwNovoDialogContentAlreadyAttachedError(): Error {
-  throw Error('Attempting to attach dialog content after content is already attached');
+  throw Error(
+    'Attempting to attach dialog content after content is already attached',
+  );
 }
 
 /**
@@ -51,14 +65,18 @@ export function throwNovoDialogContentAlreadyAttachedError(): Error {
       // to blur the dialog content and decimate the animation performance. Leaving it as `none`
       // solves both issues.
       state('enter', style({ transform: 'none', opacity: 1 })),
-      state('void', style({ transform: 'translate3d(0, 25%, 0) scale(0.9)', opacity: 0 })),
+      state(
+        'void',
+        style({ transform: 'translate3d(0, 25%, 0) scale(0.9)', opacity: 0 }),
+      ),
       state('exit', style({ transform: 'translate3d(0, 25%, 0)', opacity: 0 })),
       transition('* => *', animate('400ms cubic-bezier(0.25, 0.8, 0.25, 1)')),
     ]),
   ],
 })
 export class NovoDialogContainerComponent extends BasePortalOutlet {
-  @HostBinding('class.novo-dialog-container') public _useClassName: boolean = true;
+  @HostBinding('class.novo-dialog-container')
+  public _useClassName: boolean = true;
   @HostBinding('attr.tabindex') public tabIndex: number = -1;
   @HostBinding('attr.role') public role: string = 'dialog';
 
@@ -73,11 +91,12 @@ export class NovoDialogContainerComponent extends BasePortalOutlet {
   public _state: 'void' | 'enter' | 'exit' = 'enter';
 
   /** Emits when an animation state changes. */
-  public _animationStateChanged: EventEmitter<AnimationEvent> = new EventEmitter<AnimationEvent>();
+  public _animationStateChanged: EventEmitter<
+    AnimationEvent
+  > = new EventEmitter<AnimationEvent>();
 
   /** ID of the element that should be considered as the dialog's label. */
-  @HostBinding('attr.aria-labelledby')
-  public _ariaLabelledBy: string;
+  @HostBinding('attr.aria-labelledby') public _ariaLabelledBy: string;
 
   /** The class that traps and manages focus within the dialog. */
   private _focusTrap: FocusTrap;
@@ -89,8 +108,10 @@ export class NovoDialogContainerComponent extends BasePortalOutlet {
     private _elementRef: ElementRef,
     private _focusTrapFactory: FocusTrapFactory,
     private _changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(DOCUMENT) private _document: any) {
-
+    @Optional()
+    @Inject(DOCUMENT)
+    private _document: any,
+  ) {
     super();
   }
 
@@ -111,7 +132,9 @@ export class NovoDialogContainerComponent extends BasePortalOutlet {
    * Attach a TemplatePortal as content to this dialog container.
    * @param portal Portal to be attached as the dialog content.
    */
-  public attachTemplatePortal<C>(portal: TemplatePortal<C>): EmbeddedViewRef<C> {
+  public attachTemplatePortal<C>(
+    portal: TemplatePortal<C>,
+  ): EmbeddedViewRef<C> {
     if (this._portalOutlet.hasAttached()) {
       throwNovoDialogContentAlreadyAttachedError();
     }
@@ -150,7 +173,9 @@ export class NovoDialogContainerComponent extends BasePortalOutlet {
   /** Moves the focus inside the focus trap. */
   private _trapFocus(): void {
     if (!this._focusTrap) {
-      this._focusTrap = this._focusTrapFactory.create(this._elementRef.nativeElement);
+      this._focusTrap = this._focusTrapFactory.create(
+        this._elementRef.nativeElement,
+      );
     }
 
     // If were to attempt to focus immediately, then the content of the dialog would not yet be
@@ -176,7 +201,8 @@ export class NovoDialogContainerComponent extends BasePortalOutlet {
   /** Saves a reference to the element that was focused before the dialog was opened. */
   private _savePreviouslyFocusedElement(): void {
     if (this._document) {
-      this._elementFocusedBeforeDialogWasOpened = this._document.activeElement as HTMLElement;
+      this._elementFocusedBeforeDialogWasOpened = this._document
+        .activeElement as HTMLElement;
 
       // Move focus onto the dialog immediately in order to prevent the user from accidentally
       // opening multiple dialogs at the same time. Needs to be async, because the element
@@ -184,5 +210,4 @@ export class NovoDialogContainerComponent extends BasePortalOutlet {
       Promise.resolve().then(() => this._elementRef.nativeElement.focus());
     }
   }
-
 }

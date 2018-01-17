@@ -1,5 +1,5 @@
 header[theme] {
-  &>section {
+  & > section {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -24,7 +24,7 @@ header[theme] {
         padding-right: 20px;
       }
     }
-    >section {
+    > section {
       flex: 2 2 250px;
       min-width: 100px;
     }
@@ -34,25 +34,24 @@ header[theme] {
       justify-content: flex-start;
     }
   }
-  @each $basic,
-  $color in $all-colors {
-    &[theme="#{$basic}"] {
+  @each $basic, $color in $all-colors {
+    &[theme='#{$basic}'] {
       background: $color;
       color: #fff;
-      &>section.primary {
+      & > section.primary {
         background: $color;
       }
     }
   }
-  &[theme="light"],
-  &[theme="off-white"],
-  &[theme="white"] {
+  &[theme='light'],
+  &[theme='off-white'],
+  &[theme='white'] {
     color: $dark;
   }
-  &>main {
+  & > main {
     padding: 4px 16px 4px 32px;
   }
-  &>novo-nav {
+  & > novo-nav {
     padding-left: 16px;
     &.block {
       padding-left: 0;

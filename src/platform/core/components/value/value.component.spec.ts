@@ -9,18 +9,17 @@ describe('Elements: NovoValueComponent', () => {
   let fixture: ComponentFixture<NovoValueComponent>;
   let component: NovoValueComponent;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        NovoValueModule,
-      ],
-    }).compileComponents();
-    fixture = TestBed.createComponent(NovoValueComponent);
-    component = fixture.debugElement.componentInstance;
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [NovoValueModule],
+      }).compileComponents();
+      fixture = TestBed.createComponent(NovoValueComponent);
+      component = fixture.debugElement.componentInstance;
+    }),
+  );
 
   it('should initialize correctly', () => {
     expect(component).toBeTruthy();
   });
-
 });

@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, HostBinding, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  HostBinding,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 
 @Component({
   selector: 'novo-icon',
@@ -8,8 +16,12 @@ import { Component, ElementRef, Input, HostBinding, AfterViewInit, ChangeDetecti
     `,
 })
 export class NovoIconComponent implements AfterViewInit {
-  @HostBinding('attr.theme') @Input() public theme: string;
-  @HostBinding('attr.color') @Input() public color: string;
+  @HostBinding('attr.theme')
+  @Input()
+  public theme: string;
+  @HostBinding('attr.color')
+  @Input()
+  public color: string;
   @HostBinding('attr.role') public role: string = 'img';
   @HostBinding('attr.aria-label') public ariaLabel: string;
 
@@ -33,8 +45,7 @@ export class NovoIconComponent implements AfterViewInit {
 
   public iconName: string;
 
-  constructor(public element: ElementRef, private cdr: ChangeDetectorRef) {
-  }
+  constructor(public element: ElementRef, private cdr: ChangeDetectorRef) {}
 
   public ngAfterViewInit(): void {
     if (this.element.nativeElement.textContent.trim()) {

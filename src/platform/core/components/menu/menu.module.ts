@@ -9,5 +9,4 @@ import { NovoMenuComponent } from './menu.component';
   declarations: [NovoMenuComponent],
   exports: [NovoMenuComponent],
 })
-export class NovoMenuModule {
-}
+export class NovoMenuModule {}

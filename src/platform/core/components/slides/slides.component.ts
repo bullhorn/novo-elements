@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, HostBinding } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  HostBinding,
+} from '@angular/core';
 
 import { NovoLabelService } from '../../services/';
 
@@ -36,17 +43,23 @@ export class NovoSlidesComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     for (let i: number = 0; i < this.slides; i++) {
-      this.currSlides[i] = (i > 0) ? 'inactive' : 'active';
+      this.currSlides[i] = i > 0 ? 'inactive' : 'active';
     }
     // Catch Tab Events
-    this.element.nativeElement.addEventListener('keydown', this.handleKeyDownFunc);
+    this.element.nativeElement.addEventListener(
+      'keydown',
+      this.handleKeyDownFunc,
+    );
     if (this.auto) {
       this.initSlides();
     }
   }
 
   public ngOnDestroy(): void {
-    this.element.nativeElement.removeEventListener('keydown', this.handleKeyDownFunc);
+    this.element.nativeElement.removeEventListener(
+      'keydown',
+      this.handleKeyDownFunc,
+    );
   }
 
   public handleKeyDown(event: KeyboardEvent): void {
@@ -91,8 +104,8 @@ export class NovoSlidesComponent implements OnInit, OnDestroy {
       this.currSlides[i] = 'inactive';
     }
     this.currSlides[this.currentSlide] = 'active';
-    this.start = (this.currentSlide === 0);
-    this.end = (this.currentSlide === this.slides - 1);
+    this.start = this.currentSlide === 0;
+    this.end = this.currentSlide === this.slides - 1;
     this.currentClass = `slide-${this.currentSlide}`;
   }
 }

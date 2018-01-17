@@ -8,9 +8,5 @@ import { FormControl } from '@angular/forms';
 export class DemoAutocompleteStandardComponent {
   public myControl: FormControl = new FormControl();
 
-  public options: string[] = [
-    'One',
-    'Two',
-    'Three',
-  ];
+  public options: string[] = ['One', 'Two', 'Three'];
 }

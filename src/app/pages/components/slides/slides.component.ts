@@ -12,7 +12,8 @@ let usageDoc: string = require('html-loader!markdown-loader!./docs/usage.md');
 })
 export class SlidesComponent {
   @HostBinding('@routeAnimation') public routeAnimation: boolean = true;
-  @HostBinding('class.demo-route-animation') public classAnimation: boolean = true;
+  @HostBinding('class.demo-route-animation')
+  public classAnimation: boolean = true;
 
   public name: string = 'slides';
   public src: string = 'https://github.com/bullhorn/novo-elements-3.0/tree/master/src/platform/core/components/slides';

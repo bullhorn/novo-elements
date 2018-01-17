@@ -1,23 +1,13 @@
 <nav fxLayout="row nowrap">
-  <a class="brand"
-     routerLink="/"
-     fxLayout="row nowrap"
-     fxLayoutAlign="start center">
+  <a class="brand" routerLink="/" fxLayout="row nowrap" fxLayoutAlign="start center">
     <img src="assets/bh-logo.png" /> Novo Elements
   </a>
-  <div class="links"
-       fxFlex="*"
-       fxLayout="row"
-       fxLayoutAlign="end center">
-    <a routerLink="/docs"
-       routerLinkActive="active">Docs</a>
-    <a routerLink="/components"
-       routerLinkActive="active">Components</a>
-    <a routerLink="/style-guide"
-       routerLinkActive="active">Style Guide</a>
+  <div class="links" fxFlex="*" fxLayout="row" fxLayoutAlign="end center">
+    <a routerLink="/docs" routerLinkActive="active">Docs</a>
+    <a routerLink="/components" routerLinkActive="active">Components</a>
+    <a routerLink="/style-guide" routerLinkActive="active">Style Guide</a>
   </div>
 </nav>
-<main class="demo-pages"
-      #main>
+<main class="demo-pages" #main>
   <router-outlet></router-outlet>
 </main>

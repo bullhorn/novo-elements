@@ -1,39 +1,39 @@
 // Global Styles
-@import "./styles/global/reset";
-@import "./styles/global/functions";
-@import "./styles/global/variables";
-@import "./styles/global/include-media";
-@import "./styles/global/layout";
-@import "./styles/global/cdk";
-@import "./styles/content/typography";
+@import './styles/global/reset';
+@import './styles/global/functions';
+@import './styles/global/variables';
+@import './styles/global/include-media';
+@import './styles/global/layout';
+@import './styles/global/cdk';
+@import './styles/content/typography';
 @include cdk-overlay();
 @include bullhorn-layout();
 // Components
-@import "./core/components/button/button.component";
-@import "./core/components/header/header.component";
-@import "./core/components/loading/loading.component";
-@import "./core/components/list/list.component";
-@import "./core/components/tiles/tiles.component";
-@import "./core/components/icon/icon.component";
-@import "./core/components/menu/menu.component";
-@import "./core/components/radio/radio.component";
-@import "./core/components/card/card.component";
-@import "./core/components/dialog/dialog-container.component";
+@import './core/components/button/button.component';
+@import './core/components/header/header.component';
+@import './core/components/loading/loading.component';
+@import './core/components/list/list.component';
+@import './core/components/tiles/tiles.component';
+@import './core/components/icon/icon.component';
+@import './core/components/menu/menu.component';
+@import './core/components/radio/radio.component';
+@import './core/components/card/card.component';
+@import './core/components/dialog/dialog-container.component';
 // @import "./core/components/tabs/tabs.component";
-@import "./core/components/value/value.component";
+@import './core/components/value/value.component';
 // @import "./core/components/switch/switch.component";
 [hidden] {
   display: none !important;
 }
 
 .novo-overlay-panel {
-  &>* {
-    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  & > * {
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+      0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   }
 }
 
-@each $background,
-$color in $all-colors {
+@each $background, $color in $all-colors {
   .#{$background} {
     background-color: $color;
   }

@@ -9,5 +9,4 @@ import { NovoTilesComponent } from './tiles.component';
   declarations: [NovoTilesComponent],
   exports: [NovoTilesComponent],
 })
-export class NovoTilesModule {
-}
+export class NovoTilesModule {}

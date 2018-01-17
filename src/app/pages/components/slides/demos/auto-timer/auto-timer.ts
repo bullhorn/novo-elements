@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
   selector: 'demo-slides-timer',
   templateUrl: './auto-timer.html',
 })
-export class DemoSlidesTimerComponent {
-}
+export class DemoSlidesTimerComponent {}

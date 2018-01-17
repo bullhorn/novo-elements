@@ -1,4 +1,11 @@
-import { Component, Input, HostBinding, AfterContentInit, QueryList, ContentChildren } from '@angular/core';
+import {
+  Component,
+  Input,
+  HostBinding,
+  AfterContentInit,
+  QueryList,
+  ContentChildren,
+} from '@angular/core';
 
 @Component({
   selector: 'novo-nav-content',
@@ -6,7 +13,9 @@ import { Component, Input, HostBinding, AfterContentInit, QueryList, ContentChil
   template: '<ng-content></ng-content>',
 })
 export class NovoNavContentComponent {
-  @HostBinding('class.active') @Input() public active: boolean = false;
+  @HostBinding('class.active')
+  @Input()
+  public active: boolean = false;
 
   public deactivate(): void {
     this.active = false;
@@ -20,14 +29,17 @@ export class NovoNavContentComponent {
 @Component({
   selector: 'novo-nav-outlet, novo-tab-outlet',
   template: '<ng-content></ng-content>',
-  styles: [`
+  styles: [
+    `
       :host {
         display: block;
       }
-  `],
+  `,
+  ],
 })
 export class NovoNavOutletComponent implements AfterContentInit {
-  @ContentChildren(NovoNavContentComponent) public contents: QueryList<NovoNavContentComponent>;
+  @ContentChildren(NovoNavContentComponent)
+  public contents: QueryList<NovoNavContentComponent>;
 
   public ngAfterContentInit(): void {
     // this.contents.forEach((content: NovoNavContentComponent) => {
@@ -40,6 +52,5 @@ export class NovoNavOutletComponent implements AfterContentInit {
 
     this.contents.forEach((t: NovoNavContentComponent) => t.deactivate());
     item.activate();
-
   }
 }

@@ -12,7 +12,6 @@ $cdk-overlay-dark-backdrop-background: rgba(0, 0, 0, 0.6);
 $backdrop-animation-duration: 400ms !default;
 $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
 
-
 @mixin cdk-overlay() {
   .cdk-overlay-container,
   .cdk-global-overlay-wrapper {
@@ -53,7 +52,8 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
     z-index: $cdk-z-index-overlay-backdrop;
     pointer-events: auto;
     -webkit-tap-highlight-color: transparent;
-    transition: opacity $backdrop-animation-duration $backdrop-animation-timing-function;
+    transition: opacity $backdrop-animation-duration
+      $backdrop-animation-timing-function;
     opacity: 0;
 
     &.cdk-overlay-backdrop-showing {

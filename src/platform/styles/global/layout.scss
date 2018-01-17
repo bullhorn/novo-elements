@@ -46,8 +46,7 @@ $layout-breakpoint-lg: 1920px !default;
     @each $s in $sizes {
       @if $s !='' {
         $suffix: '-#{$s}="#{$i}"';
-      }
-      @else {
+      } @else {
         $suffix: '="#{$i}"';
       }
 
@@ -72,8 +71,7 @@ $layout-breakpoint-lg: 1920px !default;
     @each $s in $sizes {
       @if $s !='' {
         $suffix: '-#{$s}="#{$i * 5}"';
-      }
-      @else {
+      } @else {
         $suffix: '="#{$i * 5}"';
       }
 
@@ -92,8 +90,7 @@ $layout-breakpoint-lg: 1920px !default;
     @each $s in $sizes {
       @if $s !='' {
         $suffix: '-#{$s}="#{$i}"';
-      }
-      @else {
+      } @else {
         $suffix: '="#{$i}"';
       }
 
@@ -112,8 +109,7 @@ $layout-breakpoint-lg: 1920px !default;
     @each $s in $sizes {
       @if $s !='' {
         $suffix: '-#{$s}="#{$i}"';
-      }
-      @else {
+      } @else {
         $suffix: '="#{$i}"';
       }
 
@@ -135,8 +131,8 @@ $layout-breakpoint-lg: 1920px !default;
   }
 
   [layout#{$name}],
-  [layout#{$name}="column"],
-  [layout#{$name}="row"] {
+  [layout#{$name}='column'],
+  [layout#{$name}='row'] {
     box-sizing: border-box;
     display: -webkit-box;
     display: -webkit-flex;
@@ -144,10 +140,10 @@ $layout-breakpoint-lg: 1920px !default;
     display: -ms-flexbox;
     display: flex;
   }
-  [layout#{$name}="column"] {
+  [layout#{$name}='column'] {
     flex-direction: column;
   }
-  [layout#{$name}="row"] {
+  [layout#{$name}='row'] {
     flex-direction: row;
   }
 }
@@ -157,8 +153,7 @@ $layout-breakpoint-lg: 1920px !default;
   @if $name !=null {
     $flexName: 'flex-#{$name}';
     $name: '-#{$name}';
-  }
-  @else {
+  } @else {
     $name: '';
   }
 
@@ -177,32 +172,32 @@ $layout-breakpoint-lg: 1920px !default;
     }
   }
 
-  [#{$flexName}="grow"],
+  [#{$flexName}='grow'],
   [#{$flexName}-grow] {
     flex: 1 1 100%;
     box-sizing: border-box;
   }
-  [#{$flexName}="initial"],
+  [#{$flexName}='initial'],
   [#{$flexName}-initial] {
     flex: 0 1 auto;
     box-sizing: border-box;
   }
-  [#{$flexName}="auto"],
+  [#{$flexName}='auto'],
   [#{$flexName}-auto] {
     flex: 1 1 auto;
     box-sizing: border-box;
   }
-  [#{$flexName}="none"],
+  [#{$flexName}='none'],
   [#{$flexName}-none] {
     flex: 0 0 auto;
     box-sizing: border-box;
   }
-  [#{$flexName}="noshrink"],
+  [#{$flexName}='noshrink'],
   [#{$flexName}-noshrink] {
     flex: 1 0 auto;
     box-sizing: border-box;
   }
-  [#{$flexName}="nogrow"],
+  [#{$flexName}='nogrow'],
   [#{$flexName}-nogrow] {
     flex: 0 1 auto;
     box-sizing: border-box;
@@ -210,24 +205,24 @@ $layout-breakpoint-lg: 1920px !default;
   @for $i from 0 through 20 {
     $value: #{$i * 5 + '%'};
 
-    [#{$flexName}="#{$i * 5}"] {
+    [#{$flexName}='#{$i * 5}'] {
       flex: 1 1 #{$value};
       max-width: #{$value};
       max-height: 100%;
       box-sizing: border-box;
     }
 
-    [layout="row"]>[#{$flexName}="#{$i * 5}"],
-    [layout="row nowrap"]>[#{$flexName}="#{$i * 5}"],
-    [layout#{$name}="row"]>[#{$flexName}="#{$i * 5}"] {
+    [layout='row'] > [#{$flexName}='#{$i * 5}'],
+    [layout='row nowrap'] > [#{$flexName}='#{$i * 5}'],
+    [layout#{$name}='row'] > [#{$flexName}='#{$i * 5}'] {
       flex: 1 1 #{$value};
       max-width: #{$value};
       max-height: 100%;
       box-sizing: border-box;
     }
 
-    [layout="column"]>[#{$flexName}="#{$i * 5}"],
-    [layout#{$name}="column"]>[#{$flexName}="#{$i * 5}"] {
+    [layout='column'] > [#{$flexName}='#{$i * 5}'],
+    [layout#{$name}='column'] > [#{$flexName}='#{$i * 5}'] {
       flex: 1 1 #{$value};
       max-width: 100%;
       max-height: #{$value};
@@ -235,63 +230,63 @@ $layout-breakpoint-lg: 1920px !default;
     }
   }
 
-  [layout="row"],
-  [layout="row nowrap"],
-  [layout#{$name}="row"] {
-    >[#{$flexName}="33"],
-    >[#{$flexName}="33"] {
+  [layout='row'],
+  [layout='row nowrap'],
+  [layout#{$name}='row'] {
+    > [#{$flexName}='33'],
+    > [#{$flexName}='33'] {
       flex: 1 1 33%;
       max-width: calc(100% / 3);
       max-height: 100%;
       box-sizing: border-box;
     }
-    >[#{$flexName}="34"],
-    >[#{$flexName}="34"] {
+    > [#{$flexName}='34'],
+    > [#{$flexName}='34'] {
       flex: 1 1 34%;
       max-width: 34%;
       max-height: 100%;
       box-sizing: border-box;
     }
-    >[#{$flexName}="66"],
-    >[#{$flexName}="66"] {
+    > [#{$flexName}='66'],
+    > [#{$flexName}='66'] {
       flex: 1 1 66%;
       max-width: calc(200% / 3);
       max-height: 100%;
       box-sizing: border-box;
     }
-    >[#{$flexName}="67"],
-    >[#{$flexName}="67"] {
+    > [#{$flexName}='67'],
+    > [#{$flexName}='67'] {
       flex: 1 1 67%;
       max-width: 67%;
       max-height: 100%;
       box-sizing: border-box;
     }
   }
-  [layout="column"],
-  [layout#{$name}="column"] {
-    >[#{$flexName}="33"],
-    >[#{$flexName}="33"] {
+  [layout='column'],
+  [layout#{$name}='column'] {
+    > [#{$flexName}='33'],
+    > [#{$flexName}='33'] {
       flex: 1 1 33%;
       max-width: 100%;
       max-height: calc(100% / 3);
       box-sizing: border-box;
     }
-    >[#{$flexName}="34"],
-    >[#{$flexName}="34"] {
+    > [#{$flexName}='34'],
+    > [#{$flexName}='34'] {
       flex: 1 1 34%;
       max-width: 100%;
       max-height: 34%;
       box-sizing: border-box;
     }
-    >[#{$flexName}="66"],
-    >[#{$flexName}="66"] {
+    > [#{$flexName}='66'],
+    > [#{$flexName}='66'] {
       flex: 1 1 66%;
       max-width: 100%;
       max-height: calc(200% / 3);
       box-sizing: border-box;
     }
-    >[#{$flexName}="67"],
-    >[#{$flexName}="67"] {
+    > [#{$flexName}='67'],
+    > [#{$flexName}='67'] {
       flex: 1 1 67%;
       max-width: 100%;
       max-height: 67%;
@@ -301,7 +296,6 @@ $layout-breakpoint-lg: 1920px !default;
 }
 
 @mixin layout-align-for-name($suffix: null) {
-
   // Alignment attributes for layout containers' children
   // Arrange on the Main Axis
   // center, start, end, space-between, space-around
@@ -313,24 +307,23 @@ $layout-breakpoint-lg: 1920px !default;
   }
 
   [#{$name}],
-  [#{$name}="start stretch"] // defaults
-  {
+  [#{$name}='start stretch'] {
     justify-content: flex-start;
     align-content: stretch;
     align-items: stretch;
   } // Main Axis Center
-  [#{$name}="start"],
-  [#{$name}="start start"],
-  [#{$name}="start center"],
-  [#{$name}="start end"],
-  [#{$name}="start stretch"] {
+  [#{$name}='start'],
+  [#{$name}='start start'],
+  [#{$name}='start center'],
+  [#{$name}='start end'],
+  [#{$name}='start stretch'] {
     justify-content: start;
   } // Main Axis Center
-  [#{$name}="center"],
-  [#{$name}="center start"],
-  [#{$name}="center center"],
-  [#{$name}="center end"],
-  [#{$name}="center stretch"] {
+  [#{$name}='center'],
+  [#{$name}='center start'],
+  [#{$name}='center center'],
+  [#{$name}='center end'],
+  [#{$name}='center stretch'] {
     justify-content: center;
   } // Main Axis End
   [#{$name}="end"], //stretch
@@ -358,86 +351,85 @@ $layout-breakpoint-lg: 1920px !default;
   // stretch is the default for align-items
   // ------------------------------
   // Cross Axis Start
-  [#{$name}="start start"],
-  [#{$name}="center start"],
-  [#{$name}="end start"],
-  [#{$name}="space-between start"],
-  [#{$name}="space-around start"] {
+  [#{$name}='start start'],
+  [#{$name}='center start'],
+  [#{$name}='end start'],
+  [#{$name}='space-between start'],
+  [#{$name}='space-around start'] {
     align-items: flex-start;
     align-content: flex-start;
   } // Cross Axis Center
-  [#{$name}="start center"],
-  [#{$name}="center center"],
-  [#{$name}="end center"],
-  [#{$name}="space-between center"],
-  [#{$name}="space-around center"] {
+  [#{$name}='start center'],
+  [#{$name}='center center'],
+  [#{$name}='end center'],
+  [#{$name}='space-between center'],
+  [#{$name}='space-around center'] {
     align-items: center;
     align-content: center;
     max-width: 100%; // IE11 overflow https://github.com/philipwalton/flexbugs#2-column-flex-items-set-to-align-itemscenter-overflow-their-container
-    &>* {
+    & > * {
       max-width: 100%;
       box-sizing: border-box;
     }
   } // Cross Axis Center IE overflow fix
-  [#{$name}="start center"]>*,
-  [#{$name}="center center"]>*,
-  [#{$name}="end center"]>*,
-  [#{$name}="space-between center"]>*,
-  [#{$name}="space-around center"]>* {
+  [#{$name}='start center'] > *,
+  [#{$name}='center center'] > *,
+  [#{$name}='end center'] > *,
+  [#{$name}='space-between center'] > *,
+  [#{$name}='space-around center'] > * {
     max-width: 100%;
     box-sizing: border-box;
   } // Cross Axis End
-  [#{$name}="start end"],
-  [#{$name}="center end"],
-  [#{$name}="end end"],
-  [#{$name}="space-between end"],
-  [#{$name}="space-around end"] {
+  [#{$name}='start end'],
+  [#{$name}='center end'],
+  [#{$name}='end end'],
+  [#{$name}='space-between end'],
+  [#{$name}='space-around end'] {
     align-items: flex-end;
     align-content: flex-end;
   } // Cross Axis  stretch
-  [#{$name}="start stretch"],
-  [#{$name}="center stretch"],
-  [#{$name}="end stretch"],
-  [#{$name}="space-between stretch"],
-  [#{$name}="space-around stretch"] {
+  [#{$name}='start stretch'],
+  [#{$name}='center stretch'],
+  [#{$name}='end stretch'],
+  [#{$name}='space-between stretch'],
+  [#{$name}='space-around stretch'] {
     align-items: stretch;
     align-content: stretch;
   }
 }
 
 @mixin layout-padding-margin() {
-
-  [layout-padding]>[flex-sm],
-  [layout-padding]>[flex-lt-md] {
+  [layout-padding] > [flex-sm],
+  [layout-padding] > [flex-lt-md] {
     padding: $layout-gutter-width / 4;
   }
   [layout-padding],
-  [layout-padding]>[flex],
-  [layout-padding]>[flex-gt-sm],
-  [layout-padding]>[flex-md],
-  [layout-padding]>[flex-lt-lg] {
+  [layout-padding] > [flex],
+  [layout-padding] > [flex-gt-sm],
+  [layout-padding] > [flex-md],
+  [layout-padding] > [flex-lt-lg] {
     padding: $layout-gutter-width / 2;
   }
-  [layout-padding]>[flex-gt-md],
-  [layout-padding]>[flex-lg] {
+  [layout-padding] > [flex-gt-md],
+  [layout-padding] > [flex-lg] {
     padding: $layout-gutter-width / 1;
   }
 
-  [layout-margin]>[flex-sm],
-  [layout-margin]>[flex-lt-md] {
+  [layout-margin] > [flex-sm],
+  [layout-margin] > [flex-lt-md] {
     margin: $layout-gutter-width / 4;
   }
 
   [layout-margin],
-  [layout-margin]>[flex],
-  [layout-margin]>[flex-gt-sm],
-  [layout-margin]>[flex-md],
-  [layout-margin]>[flex-lt-lg] {
+  [layout-margin] > [flex],
+  [layout-margin] > [flex-gt-sm],
+  [layout-margin] > [flex-md],
+  [layout-margin] > [flex-lt-lg] {
     margin: $layout-gutter-width / 2;
   }
 
-  [layout-margin]>[flex-gt-md],
-  [layout-margin]>[flex-lg] {
+  [layout-margin] > [flex-gt-md],
+  [layout-margin] > [flex-lg] {
     margin: $layout-gutter-width / 1;
   }
 
@@ -446,7 +438,7 @@ $layout-breakpoint-lg: 1920px !default;
   }
 
   [layout-nowrap],
-  [layout="row nowrap"] {
+  [layout='row nowrap'] {
     flex-wrap: nowrap;
   }
 
@@ -489,7 +481,8 @@ $layout-breakpoint-lg: 1920px !default;
   */
   @media (max-width: $layout-breakpoint-xs - 1) {
     // Xtra-SMALL  SCREEN
-    [hide-xs], [hide] {
+    [hide-xs],
+    [hide] {
       &:not([show-xs]):not([show]) {
         display: none;
       }

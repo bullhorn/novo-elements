@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges, HostBinding } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  HostBinding,
+} from '@angular/core';
 
 @Component({
   selector: 'button[theme]',
@@ -6,9 +12,13 @@ import { Component, Input, OnChanges, SimpleChanges, HostBinding } from '@angula
 })
 export class NovoButtonComponent implements OnChanges {
   @Input() public icon: string;
-  @HostBinding('attr.color') @Input() public color: string;
+  @HostBinding('attr.color')
+  @Input()
+  public color: string;
   @Input() public side: string;
-  @HostBinding('attr.theme') @Input() public theme: string;
+  @HostBinding('attr.theme')
+  @Input()
+  public theme: string;
   @Input() public loading: boolean;
   @Input() public state: string;
 
@@ -27,11 +37,11 @@ export class NovoButtonComponent implements OnChanges {
       this.icon = undefined;
     }
 
-    this.iconClass = (this.icon && !this.loading) ? `bhi-${this.icon}` : '';
+    this.iconClass = this.icon && !this.loading ? `bhi-${this.icon}` : '';
     this.flex = this.theme ? 'flex-wrapper' : '';
 
     if (this.side !== undefined && this.theme !== 'primary') {
-      this.leftSide = (this.side === 'left');
+      this.leftSide = this.side === 'left';
       this.rightSide = !this.leftSide;
     }
 

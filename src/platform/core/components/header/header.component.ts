@@ -6,8 +6,7 @@ import { Component, Input, OnInit, HostBinding } from '@angular/core';
         <ng-content></ng-content>
     `,
 })
-export class NovoUtilsComponent {
-}
+export class NovoUtilsComponent {}
 
 @Component({
   selector: 'util-action, novo-action',
@@ -50,7 +49,9 @@ export class NovoHeaderComponent implements OnInit {
   @Input() public title: string;
   @Input() public subTitle: string;
   @HostBinding('class') public headerClass: string = 'novo-header';
-  @HostBinding('attr.theme') @Input() public theme: string;
+  @HostBinding('attr.theme')
+  @Input()
+  public theme: string;
   @Input() public icon: string;
   @Input() public config: any;
 
@@ -60,6 +61,11 @@ export class NovoHeaderComponent implements OnInit {
   public ngOnInit(): void {
     this.iconClass = `bhi-${this.icon}`;
     this.config = this.config || {};
-    this.inverse = (this.theme === 'white' || this.theme === 'off-white' || this.theme === 'light') ? undefined : 'inverse';
+    this.inverse =
+      this.theme === 'white' ||
+      this.theme === 'off-white' ||
+      this.theme === 'light'
+        ? undefined
+        : 'inverse';
   }
 }

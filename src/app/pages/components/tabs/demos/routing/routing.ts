@@ -10,11 +10,13 @@ export class DemoTabsRoutingComponent {
       label: 'Tab 1',
       icon: 'person',
       path: '.',
-    }, {
+    },
+    {
       label: 'Tab 2',
       icon: 'company',
       path: 'menus',
-    }, {
+    },
+    {
       label: 'Tab 3',
       icon: 'caution',
       path: 'cards',

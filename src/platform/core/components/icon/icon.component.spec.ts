@@ -7,15 +7,15 @@ describe('Component: NovoIconComponent', () => {
   let fixture: ComponentFixture<NovoIconComponent>;
   let component: NovoIconComponent;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        NovoIconModule,
-      ],
-    }).compileComponents();
-    fixture = TestBed.createComponent(NovoIconComponent);
-    component = fixture.debugElement.componentInstance;
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [NovoIconModule],
+      }).compileComponents();
+      fixture = TestBed.createComponent(NovoIconComponent);
+      component = fixture.debugElement.componentInstance;
+    }),
+  );
 
   describe('Method: ngAfterViewInit()', () => {
     it('should setup the iconClass if icon is passed as attribute', () => {

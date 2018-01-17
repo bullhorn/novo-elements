@@ -7,15 +7,15 @@ describe('Component: NovoHeaderComponent', () => {
   let fixture: ComponentFixture<NovoHeaderComponent>;
   let component: NovoHeaderComponent;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        NovoHeaderModule,
-      ],
-    }).compileComponents();
-    fixture = TestBed.createComponent(NovoHeaderComponent);
-    component = fixture.debugElement.componentInstance;
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [NovoHeaderModule],
+      }).compileComponents();
+      fixture = TestBed.createComponent(NovoHeaderComponent);
+      component = fixture.debugElement.componentInstance;
+    }),
+  );
 
   describe('Method: ngOnInit()', () => {
     it('should setup the iconClass if icon is passed', () => {

@@ -10,9 +10,8 @@ import { NovoButtonModule } from './../button/button.module';
 import { NovoSearchComponent } from './search.component';
 
 @NgModule({
-    imports: [CommonModule, NovoButtonModule, OverlayModule, NovoOverlayModule],
-    declarations: [NovoSearchComponent],
-    exports: [NovoSearchComponent],
+  imports: [CommonModule, NovoButtonModule, OverlayModule, NovoOverlayModule],
+  declarations: [NovoSearchComponent],
+  exports: [NovoSearchComponent],
 })
-export class NovoSearchModule {
-}
+export class NovoSearchModule {}

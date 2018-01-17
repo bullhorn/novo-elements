@@ -8,7 +8,7 @@ novo-slides {
   @for $i from 0 through 100 {
     $offset: (#{$i*100%});
     $dist: (#{$i*-100%});
-    &>[slide="#{$i}"] {
+    & > [slide='#{$i}'] {
       left: $offset;
     }
     &.slide-#{$i} {
@@ -23,7 +23,7 @@ novo-slides {
     width: 100%;
     display: flex;
     flex: 1 0 100%;
-    &>[slide] {
+    & > [slide] {
       display: flex;
       flex: 1 0 100%;
       justify-content: center;
@@ -44,11 +44,11 @@ novo-slides {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      &[icon="previous"] {
+      &[icon='previous'] {
         left: 10px;
       }
-      &[icon="next"],
-      &[icon="check"] {
+      &[icon='next'],
+      &[icon='check'] {
         right: 10px;
       }
     }
@@ -59,15 +59,15 @@ novo-slides {
     align-items: center;
     justify-content: center;
     width: 100%;
-    background: rgba(#fff, .05);
+    background: rgba(#fff, 0.05);
     padding: 20px;
     .indicator-circle {
       width: 8px;
       height: 8px;
       margin: 0 5px;
       border-radius: 50%;
-      background: #D8D8D8;
-      opacity: .2;
+      background: #d8d8d8;
+      opacity: 0.2;
       transition: all 200ms ease-in-out;
       &.active {
         opacity: 1;

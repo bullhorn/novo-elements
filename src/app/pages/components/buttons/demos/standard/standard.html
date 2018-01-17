@@ -1,14 +1,8 @@
-<ng-container *ngFor="let color of colors;let i = index;">
-  <!-- color property will be the label of the button -->
-  <button theme="standard"
-          [color]="color">{{ color }}</button>
-</ng-container>
+<novo-tiles [options]="tiles" [(ngModel)]="disabled"></novo-tiles>
 
 <br/>
 
 <ng-container *ngFor="let color of colors;let i = index;">
   <!-- color property will be the label of the button -->
-  <button theme="standard"
-          [color]="color"
-          disabled="true">{{ color }}</button>
+  <button theme="standard" [disabled]="disabled" [color]="color">{{ color }}</button>
 </ng-container>

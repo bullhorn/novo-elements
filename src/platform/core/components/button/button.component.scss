@@ -28,7 +28,7 @@ button[theme] {
     cursor: not-allowed;
     pointer-events: none;
   }
-  &[disabled="false"] {
+  &[disabled='false'] {
     opacity: 1;
     cursor: pointer;
     pointer-events: auto;
@@ -64,7 +64,7 @@ button[theme] {
     &.has-icon {
       padding: ($small - 3px) ($medium - 10px) ($small - 3px) $medium;
       i {
-        background: rgba(0, 0, 0, .15);
+        background: rgba(0, 0, 0, 0.15);
         padding: 5px;
         border-radius: 50%;
         height: 15px;
@@ -78,7 +78,7 @@ button[theme] {
           vertical-align: baseline;
         }
       }
-      &[icon="send"] {
+      &[icon='send'] {
         i {
           &:before {
             margin-top: 1px;
@@ -94,8 +94,7 @@ button[theme] {
     &:active {
       background: darken($positive, 5%);
     }
-    @each $button,
-    $color in $all-colors {
+    @each $button, $color in $all-colors {
       &.#{$button} {
         background: $color;
         &:hover,
@@ -118,7 +117,7 @@ button[theme] {
         background: darken($background, 5%);
       }
       i {
-        background: rgba(0, 0, 0, .05);
+        background: rgba(0, 0, 0, 0.05);
       }
     }
   }
@@ -141,21 +140,21 @@ button[theme] {
     }
     &:hover,
     &:focus {
-      box-shadow: 0 3px 7px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .15);
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.15);
     }
     &:active {
-      box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     }
     &[inverse] {
-      background: rgba(0, 0, 0, .25);
+      background: rgba(0, 0, 0, 0.25);
       color: #fff;
       border: 1px solid #fff;
       &:hover,
       &:focus {
-        background: rgba(0, 0, 0, .35);
+        background: rgba(0, 0, 0, 0.35);
       }
       &:active {
-        background: rgba(0, 0, 0, .45);
+        background: rgba(0, 0, 0, 0.45);
       }
       i.loading {
         svg {
@@ -182,8 +181,7 @@ button[theme] {
         }
       }
     }
-    @each $button,
-    $color in $dark-colors {
+    @each $button, $color in $dark-colors {
       &.#{$button} {
         border-color: $color;
         color: $color;
@@ -210,13 +208,13 @@ button[theme] {
           vertical-align: baseline;
         }
       }
-      &[side="left"] {
+      &[side='left'] {
         padding: ($small - 4px) $medium ($small - 4px) ($medium - 10px);
         i {
           margin-right: 5px;
         }
       }
-      &[side="right"] {
+      &[side='right'] {
         padding: ($small - 5px) ($medium - 10px) ($small - 5px) $medium;
         i {
           margin-left: 5px;
@@ -233,14 +231,13 @@ button[theme] {
     &[inverse] {
       &:hover,
       &:focus {
-        background: rgba(0, 0, 0, .2);
+        background: rgba(0, 0, 0, 0.2);
       }
       &:active {
-        background: rgba(0, 0, 0, .35);
+        background: rgba(0, 0, 0, 0.35);
       }
     }
-    @each $button,
-    $color in $all-colors {
+    @each $button, $color in $all-colors {
       &.#{$button} {
         color: $color;
         i {
@@ -265,13 +262,12 @@ button[theme] {
     }
     &:hover,
     &:focus {
-      box-shadow: 0 3px 7px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .15);
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.15);
     }
     &:active {
-      box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     }
-    @each $button,
-    $color in $all-colors {
+    @each $button, $color in $all-colors {
       &.#{$button} {
         color: $white;
         background: $color;
@@ -293,13 +289,12 @@ button[theme] {
     height: 40px;
     padding: 10px;
     &:hover {
-      background: rgba(0, 0, 0, .1);
+      background: rgba(0, 0, 0, 0.1);
     }
     &:active {
-      background: rgba(0, 0, 0, .25);
+      background: rgba(0, 0, 0, 0.25);
     }
-    @each $button,
-    $color in $all-colors {
+    @each $button, $color in $all-colors {
       &.#{$button} {
         background: $color;
         color: $white;
@@ -328,18 +323,19 @@ button[theme] {
     height: 40px;
     padding: 10px;
     border-radius: 50% !important;
-    @each $button,
-    $color in $all-colors {
+    @each $button, $color in $all-colors {
       &.#{$button} {
         color: $white;
         background: $color;
       }
     }
     &:hover {
-      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2),
+        0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
     }
     &:active {
-      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2),
+        0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
     }
   }
 }

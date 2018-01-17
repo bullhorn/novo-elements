@@ -83,7 +83,10 @@ export class NovoLabelService {
     return `Select all ${total} matching records.`;
   }
 
-  public formatDateWithFormat(value: any, format: Intl.DateTimeFormatOptions): string {
+  public formatDateWithFormat(
+    value: any,
+    format: Intl.DateTimeFormatOptions,
+  ): string {
     let date: Date = value instanceof Date ? value : new Date(value);
     if (date.getTime() !== date.getTime()) {
       return value;
@@ -97,11 +100,20 @@ export class NovoLabelService {
       return dt.setDate(dt.getDate() - dt.getDay() + dayOfWeek);
     }
 
-    return [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)]
-      .reduce((weekdays: string[], dt: number) => {
-        weekdays.push(new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(dt));
-        return weekdays;
-      }, []);
+    return [
+      getDay(0),
+      getDay(1),
+      getDay(2),
+      getDay(3),
+      getDay(4),
+      getDay(5),
+      getDay(6),
+    ].reduce((weekdays: string[], dt: number) => {
+      weekdays.push(
+        new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(dt),
+      );
+      return weekdays;
+    }, []);
   }
 
   public getMonths(): string[] {
@@ -110,12 +122,25 @@ export class NovoLabelService {
       return dt.setMonth(month, 1);
     }
 
-    return [getMonth(0), getMonth(1), getMonth(2), getMonth(3), getMonth(4), getMonth(5), getMonth(6),
-    getMonth(7), getMonth(8), getMonth(9), getMonth(10), getMonth(11)]
-      .reduce((months: string[], dt: number) => {
-        months.push(new Intl.DateTimeFormat('en-US', { month: 'long' }).format(dt));
-        return months;
-      }, []);
+    return [
+      getMonth(0),
+      getMonth(1),
+      getMonth(2),
+      getMonth(3),
+      getMonth(4),
+      getMonth(5),
+      getMonth(6),
+      getMonth(7),
+      getMonth(8),
+      getMonth(9),
+      getMonth(10),
+      getMonth(11),
+    ].reduce((months: string[], dt: number) => {
+      months.push(
+        new Intl.DateTimeFormat('en-US', { month: 'long' }).format(dt),
+      );
+      return months;
+    }, []);
   }
 
   public getProperty(value: string): string {
@@ -131,29 +156,38 @@ export class NovoLabelService {
     return new Intl.NumberFormat('en-US', options).format(value);
   }
 
-  public formatNumber(value: any, options: Intl.NumberFormatOptions): string { // TODO use interface for options
+  public formatNumber(value: any, options: Intl.NumberFormatOptions): string {
+    // TODO use interface for options
     return new Intl.NumberFormat('en-US', options).format(value);
   }
 
   public formatDateShort(value: any): string {
-    let options: Intl.DateTimeFormatOptions = { // DD/MM/YYYY, HH:MM A - 02/14/2017, 1:17 PM
+    let options: Intl.DateTimeFormatOptions = {
+      // DD/MM/YYYY, HH:MM A - 02/14/2017, 1:17 PM
       month: '2-digit',
       day: '2-digit',
       year: 'numeric',
     };
-    let _value: Date = value === null || value === undefined || value === '' ? new Date() : new Date(value);
+    let _value: Date =
+      value === null || value === undefined || value === ''
+        ? new Date()
+        : new Date(value);
     return new Intl.DateTimeFormat('en-US', options).format(_value);
   }
 
   public formatDateTime(value: any): string {
-    let options: Intl.DateTimeFormatOptions = { // DD/MM/YYYY, HH:MM A - 02/14/2017, 1:17 PM
+    let options: Intl.DateTimeFormatOptions = {
+      // DD/MM/YYYY, HH:MM A - 02/14/2017, 1:17 PM
       month: '2-digit',
       day: '2-digit',
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
     };
-    let _value: Date = value === null || value === undefined || value === '' ? new Date() : new Date(value);
+    let _value: Date =
+      value === null || value === undefined || value === ''
+        ? new Date()
+        : new Date(value);
     return new Intl.DateTimeFormat('en-US', options).format(_value);
   }
 }

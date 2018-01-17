@@ -1,62 +1,39 @@
-<demo-section [name]="name"
-              [src]="src">
+<demo-section [name]="name" [src]="src">
 
   <h3>Contents</h3>
 
   <ul class="demo-nav">
     <li>
-      <a routerLink="."
-         fragment="usage">Usage</a>
+      <a routerLink="." fragment="usage">Usage</a>
     </li>
     <li>
-      <a routerLink="."
-         fragment="examples">Examples</a>
+      <a routerLink="." fragment="examples">Examples</a>
       <ul>
         <li>
-          <a routerLink="."
-             fragment="autocomplete-standard">Standard</a>
+          <a routerLink="." fragment="autocomplete-standard">Standard</a>
         </li>
         <li>
-          <a routerLink="."
-             fragment="autocomplete-advanced">Advanced</a>
+          <a routerLink="." fragment="autocomplete-advanced">Advanced</a>
         </li>
         <li>
-          <a routerLink="."
-             fragment="autocomplete-entity">Entity List</a>
+          <a routerLink="." fragment="autocomplete-entity">Entity List</a>
         </li>
       </ul>
     </li>
   </ul>
 
-  <h3 routerLink="."
-      fragment="usage"
-      id="usage">Usage</h3>
-  <div class="usage-doc"
-       [innerHtml]="usageDoc"></div>
+  <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
+  <div class="usage-doc" [innerHtml]="usageDoc"></div>
 
-  <h3 routerLink="."
-      fragment="examples"
-      id="examples">Examples</h3>
+  <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
 
-  <demo-box class="autocomplete-demo"
-            [ts]="demos.standard.ts"
-            [html]="demos.standard.html"
-            name="autocomplete-standard"
-            label="Autocomplete: Standard">
+  <demo-box class="autocomplete-demo" [ts]="demos.standard.ts" [html]="demos.standard.html" name="autocomplete-standard" label="Autocomplete: Standard">
     <demo-autocomplete-standard></demo-autocomplete-standard>
   </demo-box>
-  <demo-box class="autocomplete-demo"
-            [ts]="demos.advanced.ts"
-            [html]="demos.advanced.html"
-            name="autocomplete-advanced"
-            label="Autocomplete: Advanced">
+  <demo-box class="autocomplete-demo" [ts]="demos.advanced.ts" [html]="demos.advanced.html" name="autocomplete-advanced" label="Autocomplete: Advanced">
     <demo-autocomplete-advanced></demo-autocomplete-advanced>
   </demo-box>
-  <demo-box class="autocomplete-demo"
-            [ts]="demos.entity.ts"
-            [html]="demos.entity.html"
-            name="autocomplete-entity"
-            label="Autocomplete: Entity">
+  <demo-box class="autocomplete-demo" [ts]="demos.entity.ts" [html]="demos.entity.html" name="autocomplete-entity" label="Autocomplete: Entity">
     <demo-autocomplete-entity></demo-autocomplete-entity>
   </demo-box>
 

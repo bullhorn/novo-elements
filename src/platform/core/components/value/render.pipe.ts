@@ -1,4 +1,9 @@
-import { Injectable, Pipe, ChangeDetectorRef, PipeTransform } from '@angular/core';
+import {
+  Injectable,
+  Pipe,
+  ChangeDetectorRef,
+  PipeTransform,
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { NovoLabelService } from '../../services/label/label.service';
@@ -42,8 +47,11 @@ export class RenderPipe implements PipeTransform {
   public lastValue: any;
   public lastArgs: any;
 
-  constructor(private changeDetector: ChangeDetectorRef, private sanitizationService: DomSanitizer, private labels: NovoLabelService) {
-  }
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+    private sanitizationService: DomSanitizer,
+    private labels: NovoLabelService,
+  ) {}
 
   public equals(objectOne: any, objectTwo: any): any {
     if (objectOne === objectTwo) {
@@ -121,7 +129,7 @@ export class RenderPipe implements PipeTransform {
       return text;
     }
 
-    if (args.formatter && (typeof args.formatter === 'function')) {
+    if (args.formatter && typeof args.formatter === 'function') {
       return args.formatter(value, args);
     }
     // TODO move this to a service
@@ -136,17 +144,27 @@ export class RenderPipe implements PipeTransform {
       type = 'Year';
     } else if (args.dataType === 'Timestamp') {
       type = 'Timestamp';
-    } else if (['mobile', 'phone', 'phone1', 'phone2', 'phone3', 'workPhone'].indexOf(args.name) > -1) {
+    } else if (
+      ['mobile', 'phone', 'phone1', 'phone2', 'phone3', 'workPhone'].indexOf(
+        args.name,
+      ) > -1
+    ) {
       type = 'Phone';
     } else if (args.name && args.name.substring(0, 5) === 'email') {
       type = 'Email';
-    } else if (args.name && args.name === 'address.countryID' || args.optionsType === 'Country') {
+    } else if (
+      (args.name && args.name === 'address.countryID') ||
+      args.optionsType === 'Country'
+    ) {
       type = 'Country';
     } else if (args.optionsType === 'SkillText') {
       type = 'SkillText';
     } else if (args.options || args.inputType === 'SELECT') {
       type = 'Options';
-    } else if (['MONEY', 'PERCENTAGE', 'HTML', 'SSN'].indexOf(args.dataSpecialization) > -1) {
+    } else if (
+      ['MONEY', 'PERCENTAGE', 'HTML', 'SSN'].indexOf(args.dataSpecialization) >
+      -1
+    ) {
       type = this.capitalize(args.dataSpecialization.toLowerCase());
     } else {
       type = args.dataType || 'default';
@@ -163,8 +181,11 @@ export class RenderPipe implements PipeTransform {
                     ${value.address2 || ''}<br />
                 `.trim();
         text += `
-                    ${value.city || ''} ${value.state || ''} ${value.zip || ''}${value.city || value.state || value.zip ? '<br />' : ''}
-                    ${country ? country.name : (value.countryName || '')}${country || value.countryName ? '<br />' : ''}
+                    ${value.city || ''} ${value.state || ''} ${value.zip ||
+          ''}${value.city || value.state || value.zip ? '<br />' : ''}
+                    ${country ? country.name : value.countryName || ''}${
+          country || value.countryName ? '<br />' : ''
+        }
                 `;
         text = this.sanitizationService.bypassSecurityTrustHtml(text.trim());
         break;
@@ -185,11 +206,16 @@ export class RenderPipe implements PipeTransform {
         text = this.labels.formatCurrency(value);
         break;
       case 'Percentage':
-        text = this.labels.formatNumber((parseFloat(value)).toString(), { style: 'percent', minimumFractionDigits: 2 });
+        text = this.labels.formatNumber(parseFloat(value).toString(), {
+          style: 'percent',
+          minimumFractionDigits: 2,
+        });
         break;
       case 'Double':
       case 'BigDecimal':
-        text = this.labels.formatNumber(value, { minimumFractionDigits: this.getNumberDecimalPlaces(value) });
+        text = this.labels.formatNumber(value, {
+          minimumFractionDigits: this.getNumberDecimalPlaces(value),
+        });
         break;
       case 'Integer':
         text = value;
@@ -213,7 +239,8 @@ export class RenderPipe implements PipeTransform {
       case 'ClientContact':
       case 'CorporateUser':
       case 'Person':
-        text = value.label || `${value.firstName || ''} ${value.lastName || ''}`;
+        text =
+          value.label || `${value.firstName || ''} ${value.lastName || ''}`;
         break;
       case 'Opportunity':
       case 'JobOrder':
@@ -221,26 +248,57 @@ export class RenderPipe implements PipeTransform {
         text = value.label || value.title || '';
         break;
       case 'JobSubmission':
-        text = value.label || `${value.jobOrder ? `${value.jobOrder.title} - ` : ''} ${value.candidate ? value.candidate.firstName : ''} ${value.candidate ? value.candidate.lastName : ''}`;
+        text =
+          value.label ||
+          `${value.jobOrder ? `${value.jobOrder.title} - ` : ''} ${
+            value.candidate ? value.candidate.firstName : ''
+          } ${value.candidate ? value.candidate.lastName : ''}`;
         break;
       case 'WorkersCompensationRate':
-        text = `${value.compensation ? `${value.compensation.code} - ` : ''} ${value.compensation ? value.compensation.name : ''}`;
+        text = `${value.compensation ? `${value.compensation.code} - ` : ''} ${
+          value.compensation ? value.compensation.name : ''
+        }`;
         break;
       case 'Options':
         text = this.options(value, args.options);
         break;
       case 'ToMany':
-        if (['Candidate', 'CorporateUser', 'Person'].indexOf(args.associatedEntity.entity) > -1) {
+        if (
+          ['Candidate', 'CorporateUser', 'Person'].indexOf(
+            args.associatedEntity.entity,
+          ) > -1
+        ) {
           text = this.concat(value.data, 'firstName', 'lastName');
           if (value.data.length < value.total) {
-            text = text + ', ' + this.labels.getToManyPlusMore({ quantity: value.total - value.data.length });
+            text =
+              text +
+              ', ' +
+              this.labels.getToManyPlusMore({
+                quantity: value.total - value.data.length,
+              });
           }
-        } else if (['Category', 'BusinessSector', 'Skill', 'Specialty', 'ClientCorporation', 'CorporationDepartment'].indexOf(args.associatedEntity.entity) > -1) {
+        } else if (
+          [
+            'Category',
+            'BusinessSector',
+            'Skill',
+            'Specialty',
+            'ClientCorporation',
+            'CorporationDepartment',
+          ].indexOf(args.associatedEntity.entity) > -1
+        ) {
           text = this.concat(value.data, 'name');
           if (value.data.length < value.total) {
-            text = text + ', ' + this.labels.getToManyPlusMore({ quantity: value.total - value.data.length });
+            text =
+              text +
+              ', ' +
+              this.labels.getToManyPlusMore({
+                quantity: value.total - value.data.length,
+              });
           }
-        } else if (args.associatedEntity.entity === 'MailListPushHistoryDetail') {
+        } else if (
+          args.associatedEntity.entity === 'MailListPushHistoryDetail'
+        ) {
           text = this.concat(value.data, 'externalListName');
         } else {
           text = `${value.total || ''}`;
@@ -254,10 +312,16 @@ export class RenderPipe implements PipeTransform {
         if (Array.isArray(value)) {
           value = value.join(' ');
         }
-        text = this.sanitizationService.bypassSecurityTrustHtml(value.replace(/\<a/gi, '<a target="_blank"'));
+        text = this.sanitizationService.bypassSecurityTrustHtml(
+          value.replace(/\<a/gi, '<a target="_blank"'),
+        );
         break;
       case 'CandidateComment':
-        text = value.comments ? `${this.labels.formatDateShort(value.dateLastModified)} (${value.name}) - ${value.comments}` : '';
+        text = value.comments
+          ? `${this.labels.formatDateShort(value.dateLastModified)} (${
+              value.name
+            }) - ${value.comments}`
+          : '';
         break;
       default:
         text = value.trim ? value.trim() : value;
@@ -276,7 +340,10 @@ export class RenderPipe implements PipeTransform {
       return '';
     }
 
-    if (this.equals(value, this.lastValue) && this.equals(args, this.lastArgs)) {
+    if (
+      this.equals(value, this.lastValue) &&
+      this.equals(args, this.lastArgs)
+    ) {
       return this.value;
     }
 

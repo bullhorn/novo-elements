@@ -1,62 +1,39 @@
-<demo-section [name]="name"
-              [src]="src">
+<demo-section [name]="name" [src]="src">
 
   <h3>Contents</h3>
 
   <ul class="demo-nav">
     <li>
-      <a routerLink="."
-         fragment="usage">Usage</a>
+      <a routerLink="." fragment="usage">Usage</a>
     </li>
     <li>
-      <a routerLink="."
-         fragment="examples">Examples</a>
+      <a routerLink="." fragment="examples">Examples</a>
       <ul>
         <li>
-          <a routerLink="."
-             fragment="search-standard">Standard</a>
+          <a routerLink="." fragment="search-standard">Standard</a>
         </li>
         <li>
-          <a routerLink="."
-             fragment="search-autocomplete">Auto-Complete</a>
+          <a routerLink="." fragment="search-autocomplete">Auto-Complete</a>
         </li>
         <li>
-          <a routerLink="."
-             fragment="search-google">Google Places</a>
+          <a routerLink="." fragment="search-google">Google Places</a>
         </li>
       </ul>
     </li>
   </ul>
 
-  <h3 routerLink="."
-      fragment="usage"
-      id="usage">Usage</h3>
-  <div class="usage-doc"
-       [innerHtml]="usageDoc"></div>
+  <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
+  <div class="usage-doc" [innerHtml]="usageDoc"></div>
 
-  <h3 routerLink="."
-      fragment="examples"
-      id="examples">Examples</h3>
+  <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
 
-  <demo-box class="search-demo"
-            [ts]="demos.standard.ts"
-            [html]="demos.standard.html"
-            name="search-standard"
-            label="Search: Standard">
+  <demo-box class="search-demo" [ts]="demos.standard.ts" [html]="demos.standard.html" name="search-standard" label="Search: Standard">
     <demo-search-standard></demo-search-standard>
   </demo-box>
-  <demo-box class="search-demo"
-            [ts]="demos.autocomplete.ts"
-            [html]="demos.autocomplete.html"
-            name="search-autocomplete"
-            label="Search: Autocomplete">
+  <demo-box class="search-demo" [ts]="demos.autocomplete.ts" [html]="demos.autocomplete.html" name="search-autocomplete" label="Search: Autocomplete">
     <demo-search-autocomplete></demo-search-autocomplete>
   </demo-box>
-  <demo-box class="search-demo"
-            [ts]="demos.google.ts"
-            [html]="demos.google.html"
-            name="search-google"
-            label="Search: Google Places">
+  <demo-box class="search-demo" [ts]="demos.google.ts" [html]="demos.google.html" name="search-google" label="Search: Google Places">
     <demo-search-google></demo-search-google>
   </demo-box>
 

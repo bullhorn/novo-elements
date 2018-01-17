@@ -6,9 +6,8 @@ import { NovoOptionComponent } from './option.component';
 import { NovoOptionGroupComponent } from './option-group.component';
 
 @NgModule({
-    imports: [CommonModule],
-    declarations: [NovoOptionComponent, NovoOptionGroupComponent],
-    exports: [NovoOptionComponent, NovoOptionGroupComponent],
+  imports: [CommonModule],
+  declarations: [NovoOptionComponent, NovoOptionGroupComponent],
+  exports: [NovoOptionComponent, NovoOptionGroupComponent],
 })
-export class NovoOptionModule {
-}
+export class NovoOptionModule {}

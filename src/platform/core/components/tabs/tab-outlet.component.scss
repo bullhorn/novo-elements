@@ -1,11 +1,11 @@
-@import "../../../styles/global/functions";
-@import "../../../styles/global/variables";
+@import '../../../styles/global/functions';
+@import '../../../styles/global/variables';
 
 // Outlets
 :host {
-    display: none;
+  display: none;
 
-    &.active {
-        display: block;
-    }
+  &.active {
+    display: block;
+  }
 }

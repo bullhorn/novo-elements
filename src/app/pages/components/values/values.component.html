@@ -1,40 +1,27 @@
-<demo-section [name]="name"
-              [src]="src">
+<demo-section [name]="name" [src]="src">
 
   <h3>Contents</h3>
 
   <ul class="demo-nav">
     <li>
-      <a routerLink="."
-         fragment="usage">Usage</a>
+      <a routerLink="." fragment="usage">Usage</a>
     </li>
     <li>
-      <a routerLink="."
-         fragment="examples">Examples</a>
+      <a routerLink="." fragment="examples">Examples</a>
       <ul>
         <li>
-          <a routerLink="."
-             fragment="value-standard">Standard</a>
+          <a routerLink="." fragment="value-standard">Standard</a>
         </li>
       </ul>
     </li>
   </ul>
 
-  <h3 routerLink="."
-      fragment="usage"
-      id="usage">Usage</h3>
-  <div class="usage-doc"
-       [innerHtml]="usageDoc"></div>
+  <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
+  <div class="usage-doc" [innerHtml]="usageDoc"></div>
 
-  <h3 routerLink="."
-      fragment="examples"
-      id="examples">Examples</h3>
+  <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
 
-  <demo-box class="value-demo"
-            [ts]="demos.standard.ts"
-            [html]="demos.standard.html"
-            name="value-standard"
-            label="Value: Standard">
+  <demo-box class="value-demo" [ts]="demos.standard.ts" [html]="demos.standard.html" name="value-standard" label="Value: Standard">
     <demo-value-standard></demo-value-standard>
   </demo-box>
 

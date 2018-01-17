@@ -7,18 +7,16 @@ describe('Elements: NovoSlidesComponent', () => {
   let fixture: ComponentFixture<NovoSlidesComponent>;
   let component: NovoSlidesComponent;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        NovoSlidesComponent,
-      ],
-      providers: [
-        { provide: NovoLabelService, useClass: NovoLabelService },
-      ],
-    }).compileComponents();
-    fixture = TestBed.createComponent(NovoSlidesComponent);
-    component = fixture.debugElement.componentInstance;
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [NovoSlidesComponent],
+        providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
+      }).compileComponents();
+      fixture = TestBed.createComponent(NovoSlidesComponent);
+      component = fixture.debugElement.componentInstance;
+    }),
+  );
 
   it('should initialize correctly', () => {
     expect(component).toBeTruthy();
@@ -33,11 +31,13 @@ describe('Elements: NovoSlidesComponent', () => {
     it('should add event listener to keydown', () => {
       spyOn(component.element.nativeElement, 'addEventListener');
       component.ngOnInit();
-      expect(component.element.nativeElement.addEventListener).toHaveBeenCalled();
+      expect(
+        component.element.nativeElement.addEventListener,
+      ).toHaveBeenCalled();
     });
     it('should initSlides if set to auto', () => {
       component.auto = true;
-      spyOn(component, 'initSlides').and.callFake(() => { });
+      spyOn(component, 'initSlides').and.callFake(() => {});
       component.ngOnInit();
       expect(component.initSlides).toHaveBeenCalled();
     });
@@ -46,12 +46,16 @@ describe('Elements: NovoSlidesComponent', () => {
     it('should add event listener to keydown', () => {
       spyOn(component.element.nativeElement, 'removeEventListener');
       component.ngOnDestroy();
-      expect(component.element.nativeElement.removeEventListener).toHaveBeenCalled();
+      expect(
+        component.element.nativeElement.removeEventListener,
+      ).toHaveBeenCalled();
     });
   });
   describe('Method: handleKeyDown()', () => {
     it('should stop event for keycode 9', () => {
-      let event: KeyboardEvent = new KeyboardEvent('keypress', { code: 'enter' });
+      let event: KeyboardEvent = new KeyboardEvent('keypress', {
+        code: 'enter',
+      });
       spyOn(event, 'stopImmediatePropagation');
       spyOn(event, 'preventDefault');
       component.handleKeyDown(event);

@@ -15,9 +15,16 @@ import { NovoCardModule } from './../card/card.module';
 import { NovoIconModule } from './../icon/icon.module';
 import { NovoButtonModule } from './../button/button.module';
 import { NovoHeaderModule } from './../header/header.module';
-import { NovoDialog, NOVO_DIALOG_SCROLL_STRATEGY_PROVIDER } from './dialog.service';
+import {
+  NovoDialog,
+  NOVO_DIALOG_SCROLL_STRATEGY_PROVIDER,
+} from './dialog.service';
 import { NovoDialogContainerComponent } from './dialog-container.component';
-import { NovoAlertDialogComponent, NovoConfirmDialogComponent, NovoNotificationDialogComponent } from './dialog.component';
+import {
+  NovoAlertDialogComponent,
+  NovoConfirmDialogComponent,
+  NovoNotificationDialogComponent,
+} from './dialog.component';
 // import {
 //     NovoDialogClose,
 //     NovoDialogContent,
@@ -36,19 +43,19 @@ import { NovoAlertDialogComponent, NovoConfirmDialogComponent, NovoNotificationD
     NovoHeaderModule,
     NovoIconModule,
   ],
-  exports: [
-    NovoDialogContainerComponent,
-  ],
+  exports: [NovoDialogContainerComponent],
   declarations: [
     NovoDialogContainerComponent,
     NovoAlertDialogComponent,
     NovoConfirmDialogComponent,
     NovoNotificationDialogComponent,
   ],
-  providers: [
-    NovoDialog,
-    NOVO_DIALOG_SCROLL_STRATEGY_PROVIDER,
+  providers: [NovoDialog, NOVO_DIALOG_SCROLL_STRATEGY_PROVIDER],
+  entryComponents: [
+    NovoDialogContainerComponent,
+    NovoAlertDialogComponent,
+    NovoConfirmDialogComponent,
+    NovoNotificationDialogComponent,
   ],
-  entryComponents: [NovoDialogContainerComponent, NovoAlertDialogComponent, NovoConfirmDialogComponent, NovoNotificationDialogComponent],
 })
-export class NovoDialogModule { }
+export class NovoDialogModule {}

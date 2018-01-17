@@ -44,23 +44,31 @@ export class NovoDialogRef<T> {
   constructor(
     private _overlayRef: OverlayRef,
     private _containerInstance: NovoDialogContainerComponent,
-    readonly id: string = `novo-dialog-${uniqueId++}`) {
-
+    readonly id: string = `novo-dialog-${uniqueId++}`,
+  ) {
     // Emit when opening animation completes
-    _containerInstance._animationStateChanged.pipe(
-      filter((event: any) => event && event.phaseName === 'done' && event.toState === 'enter'),
-      first(),
-    )
+    _containerInstance._animationStateChanged
+      .pipe(
+        filter(
+          (event: any) =>
+            event && event.phaseName === 'done' && event.toState === 'enter',
+        ),
+        first(),
+      )
       .subscribe(() => {
         this._afterOpen.next();
         this._afterOpen.complete();
       });
 
     // Dispose overlay when closing animation is complete
-    _containerInstance._animationStateChanged.pipe(
-      filter((event: any) => event && event.phaseName === 'done' && event.toState === 'exit'),
-      first(),
-    )
+    _containerInstance._animationStateChanged
+      .pipe(
+        filter(
+          (event: any) =>
+            event && event.phaseName === 'done' && event.toState === 'exit',
+        ),
+        first(),
+      )
       .subscribe(() => {
         this._overlayRef.dispose();
         this._afterClosed.next(this._result);
@@ -77,10 +85,11 @@ export class NovoDialogRef<T> {
     this._result = dialogResult;
 
     // Transition the backdrop in parallel to the dialog.
-    this._containerInstance._animationStateChanged.pipe(
-      filter((event: any) => event && event.phaseName === 'start'),
-      first(),
-    )
+    this._containerInstance._animationStateChanged
+      .pipe(
+        filter((event: any) => event && event.phaseName === 'start'),
+        first(),
+      )
       .subscribe(() => {
         this._beforeClose.next(dialogResult);
         this._beforeClose.complete();
@@ -133,13 +142,17 @@ export class NovoDialogRef<T> {
     let strategy: GlobalPositionStrategy = this._getPositionStrategy();
 
     if (position && (position.left || position.right)) {
-      position.left ? strategy.left(position.left) : strategy.right(position.right);
+      position.left
+        ? strategy.left(position.left)
+        : strategy.right(position.right);
     } else {
       strategy.centerHorizontally();
     }
 
     if (position && (position.top || position.bottom)) {
-      position.top ? strategy.top(position.top) : strategy.bottom(position.bottom);
+      position.top
+        ? strategy.top(position.top)
+        : strategy.bottom(position.bottom);
     } else {
       strategy.centerVertically();
     }
@@ -155,13 +168,16 @@ export class NovoDialogRef<T> {
    * @param height New height of the dialog.
    */
   public updateSize(width: string = 'auto', height: string = 'auto'): this {
-    this._getPositionStrategy().width(width).height(height);
+    this._getPositionStrategy()
+      .width(width)
+      .height(height);
     this._overlayRef.updatePosition();
     return this;
   }
 
   /** Fetches the position strategy object from the overlay ref. */
   private _getPositionStrategy(): GlobalPositionStrategy {
-    return this._overlayRef.getConfig().positionStrategy as GlobalPositionStrategy;
+    return this._overlayRef.getConfig()
+      .positionStrategy as GlobalPositionStrategy;
   }
 }

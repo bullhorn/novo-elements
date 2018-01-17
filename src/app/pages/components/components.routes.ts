@@ -18,28 +18,30 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { SelectComponent } from './select/select.component';
 import { RadioComponent } from './radio/radio.component';
 
-const routes: Routes = [{
-  path: '',
-  component: ComponentsComponent,
-  children: [
-    { path: 'buttons', component: ButtonsComponent },
-    { path: 'headers', component: HeadersComponent },
-    { path: 'loading', component: LoadingComponent },
-    { path: 'lists', component: ListsComponent },
-    { path: 'slides', component: SlidesComponent },
-    { path: 'tiles', component: TilesComponent },
-    { path: 'menus', component: MenusComponent },
-    { path: 'cards', component: CardsComponent },
-    { path: 'dialogs', component: DialogsComponent },
-    { path: 'tabs', component: TabsComponent },
-    { path: 'values', component: ValuesComponent },
-    { path: 'switches', component: SwitchesComponent },
-    { path: 'searches', component: SearchesComponent },
-    { path: 'autocomplete', component: AutocompleteComponent },
-    { path: 'select', component: SelectComponent },
-    { path: 'radio', component: RadioComponent },
-    { path: '', redirectTo: 'buttons', pathMatch: 'full' },
-  ],
-}];
+const routes: Routes = [
+  {
+    path: '',
+    component: ComponentsComponent,
+    children: [
+      { path: 'buttons', component: ButtonsComponent },
+      { path: 'headers', component: HeadersComponent },
+      { path: 'loading', component: LoadingComponent },
+      { path: 'lists', component: ListsComponent },
+      { path: 'slides', component: SlidesComponent },
+      { path: 'tiles', component: TilesComponent },
+      { path: 'menus', component: MenusComponent },
+      { path: 'cards', component: CardsComponent },
+      { path: 'dialogs', component: DialogsComponent },
+      { path: 'tabs', component: TabsComponent },
+      { path: 'values', component: ValuesComponent },
+      { path: 'switches', component: SwitchesComponent },
+      { path: 'searches', component: SearchesComponent },
+      { path: 'autocomplete', component: AutocompleteComponent },
+      { path: 'select', component: SelectComponent },
+      { path: 'radio', component: RadioComponent },
+      { path: '', redirectTo: 'buttons', pathMatch: 'full' },
+    ],
+  },
+];
 
 export const componentsRoutes: any = RouterModule.forChild(routes);

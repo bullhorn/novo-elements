@@ -11,8 +11,12 @@ import { Component, Input, HostBinding, HostListener } from '@angular/core';
     `,
 })
 export class NovoTabLinkComponent {
-  @HostBinding('class.active') @Input() public active: boolean = false;
-  @HostBinding('class.disabled') @Input() public disabled: boolean = false;
+  @HostBinding('class.active')
+  @Input()
+  public active: boolean = false;
+  @HostBinding('class.disabled')
+  @Input()
+  public disabled: boolean = false;
   /** Prevents the default element actions if it is disabled. */
   @HostListener('click', ['$event'])
   public _checkDisabled(event: Event): boolean {

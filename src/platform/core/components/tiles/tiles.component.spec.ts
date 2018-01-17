@@ -9,15 +9,15 @@ describe('Elements: NovoTilesComponent', () => {
   let fixture: ComponentFixture<NovoTilesComponent>;
   let component: NovoTilesComponent;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        NovoTilesModule,
-      ],
-    }).compileComponents();
-    fixture = TestBed.createComponent(NovoTilesComponent);
-    component = fixture.debugElement.componentInstance;
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [NovoTilesModule],
+      }).compileComponents();
+      fixture = TestBed.createComponent(NovoTilesComponent);
+      component = fixture.debugElement.componentInstance;
+    }),
+  );
 
   describe('Method: ngOnInit()', () => {
     it('should reformat array options to an object', () => {
@@ -43,7 +43,9 @@ describe('Elements: NovoTilesComponent', () => {
     it('should change the options array if changes exist', () => {
       spyOn(component, 'setupOptions');
       component._options = [1, 2, 3, 4, 5];
-      let changeSet: SimpleChanges = { options: new SimpleChange([1, 2, 3, 4, 5], [5, 4, 3, 2, 1], false) };
+      let changeSet: SimpleChanges = {
+        options: new SimpleChange([1, 2, 3, 4, 5], [5, 4, 3, 2, 1], false),
+      };
       component.ngOnChanges(changeSet);
       expect(component.setupOptions).toHaveBeenCalled();
     });
@@ -51,7 +53,9 @@ describe('Elements: NovoTilesComponent', () => {
     it('should NOT change the options array there is not previous values', () => {
       spyOn(component, 'setupOptions');
       component._options = [1, 2, 3, 4, 5];
-      let changeSet: SimpleChanges = { options: new SimpleChange({}, [5, 4, 3, 2, 1], true) };
+      let changeSet: SimpleChanges = {
+        options: new SimpleChange({}, [5, 4, 3, 2, 1], true),
+      };
       component.ngOnChanges(changeSet);
       expect(component.setupOptions).not.toHaveBeenCalled();
     });
@@ -126,7 +130,9 @@ describe('Elements: NovoTilesComponent', () => {
       expect(component.registerOnChange).toBeDefined();
     });
     it('should set onModelChange.', () => {
-      let testFn: Function = () => { return 'novo novo'; };
+      let testFn: Function = () => {
+        return 'novo novo';
+      };
       component.registerOnChange(testFn);
       expect(component.onModelChange).toEqual(testFn);
     });
@@ -137,7 +143,9 @@ describe('Elements: NovoTilesComponent', () => {
       expect(component.registerOnTouched).toBeDefined();
     });
     it('should set onModelChange.', () => {
-      let testFn: Function = () => { return 'novo novo'; };
+      let testFn: Function = () => {
+        return 'novo novo';
+      };
       component.registerOnTouched(testFn);
       expect(component.onModelTouched).toEqual(testFn);
     });
@@ -210,7 +218,12 @@ describe('Elements: NovoTilesComponent', () => {
       expect(component.select).toBeDefined();
     });
     it('should select a non-disabled item.', () => {
-      let item: IItem = { value: 'item1', label: 'item1', checked: false, disabled: false };
+      let item: IItem = {
+        value: 'item1',
+        label: 'item1',
+        checked: false,
+        disabled: false,
+      };
       let event: Event = new Event('type');
       component._options = [
         item,
@@ -231,7 +244,12 @@ describe('Elements: NovoTilesComponent', () => {
       expect(component.setTile).toHaveBeenCalledWith(item);
     });
     it('should handle a disabled item.', () => {
-      let item: IItem = { value: 'item1', label: 'item1', checked: false, disabled: true };
+      let item: IItem = {
+        value: 'item1',
+        label: 'item1',
+        checked: false,
+        disabled: true,
+      };
       let event: Event = new Event('type');
       spyOn(component.onDisabledOptionClick, 'emit');
       component.select(event, item);
@@ -253,7 +271,9 @@ describe('Elements: NovoTilesComponent', () => {
           return el;
         }
       };
-      spyOn(component.element.nativeElement, 'querySelector').and.callFake(fakeQuerySelector);
+      spyOn(component.element.nativeElement, 'querySelector').and.callFake(
+        fakeQuerySelector,
+      );
       component.moveTile();
       jest.runAllTimers();
       expect(component.state).toEqual('active');

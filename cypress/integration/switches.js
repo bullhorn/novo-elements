@@ -1,13 +1,14 @@
 context('Demo: Switches', () => {
   beforeEach(() => {
     let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/switches')
+    cy.visit(baseURL + '/#/components/switches');
   });
 
   context('standard', () => {
     it('toggles on click', () => {
       let element = 'novo-switch';
-      cy.get(`demo-switch-standard ${element}`)
+      cy
+        .get(`demo-switch-standard ${element}`)
         .eq(0)
         .should('have.attr', 'aria-checked', 'true')
         .click()
@@ -16,7 +17,8 @@ context('Demo: Switches', () => {
 
     it('toggles on click', () => {
       let element = 'novo-switch';
-      cy.get(`demo-switch-standard ${element}`)
+      cy
+        .get(`demo-switch-standard ${element}`)
         .eq(1)
         .click()
         .should('have.attr', 'aria-checked', 'true');

@@ -8,21 +8,15 @@ const COLORS = [
   'dark',
   'light',
   'pulse',
-  'neutral'
+  'neutral',
 ];
 
-const THEMES = [
-  'primary',
-  'secondary',
-  'dialogue',
-  'standard',
-  'icon'
-];
+const THEMES = ['primary', 'secondary', 'dialogue', 'standard', 'icon'];
 
 context('Demo: Buttons', () => {
   beforeEach(() => {
     let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/buttons')
+    cy.visit(baseURL + '/#/components/buttons');
   });
 
   context('themes', () => {
@@ -31,13 +25,25 @@ context('Demo: Buttons', () => {
         let selector = `demo-buttons-${theme} > button`;
         let i = 0;
         COLORS.forEach(color => {
-          cy.get(selector).eq(i).should('have.class', theme);
-          cy.get(selector).eq(i).should('have.class', COLORS[i]);
+          cy
+            .get(selector)
+            .eq(i)
+            .should('have.class', theme);
+          cy
+            .get(selector)
+            .eq(i)
+            .should('have.class', COLORS[i]);
           i++;
         });
         COLORS.forEach(color => {
-          cy.get(selector).eq(i).should('have.class', theme);
-          cy.get(selector).eq(i).should('have.attr', 'disabled');
+          cy
+            .get(selector)
+            .eq(i)
+            .should('have.class', theme);
+          cy
+            .get(selector)
+            .eq(i)
+            .should('have.attr', 'disabled');
           i++;
         });
       });
@@ -46,7 +52,8 @@ context('Demo: Buttons', () => {
 
   context('other', () => {
     it('loading', () => {
-      cy.get('demo-buttons-loading > button')
+      cy
+        .get('demo-buttons-loading > button')
         .eq(0)
         .should('have.class', 'primary')
         .click()

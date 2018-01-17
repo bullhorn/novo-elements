@@ -5,14 +5,16 @@ import { GettingStartedComponent } from './getting-started/getting-started.compo
 import { AngularComponent } from './angular/angular.component';
 import { CustomizingComponent } from './customizing/customizing.component';
 
-const routes: Routes = [{
-  path: '',
-  component: DocsComponent,
-  children: [
-    { path: '', component: GettingStartedComponent },
-    { path: 'angular', component: AngularComponent },
-    { path: 'customize', component: CustomizingComponent },
-  ],
-}];
+const routes: Routes = [
+  {
+    path: '',
+    component: DocsComponent,
+    children: [
+      { path: '', component: GettingStartedComponent },
+      { path: 'angular', component: AngularComponent },
+      { path: 'customize', component: CustomizingComponent },
+    ],
+  },
+];
 
 export const docsRoutes: any = RouterModule.forChild(routes);

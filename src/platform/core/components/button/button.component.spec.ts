@@ -8,15 +8,15 @@ describe('Component: NovoButtonComponent', () => {
   let fixture: ComponentFixture<NovoButtonComponent>;
   let component: NovoButtonComponent;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        NovoButtonModule,
-      ],
-    }).compileComponents();
-    fixture = TestBed.createComponent(NovoButtonComponent);
-    component = fixture.debugElement.componentInstance;
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [NovoButtonModule],
+      }).compileComponents();
+      fixture = TestBed.createComponent(NovoButtonComponent);
+      component = fixture.debugElement.componentInstance;
+    }),
+  );
 
   describe('Method: ngOnChanges()', () => {
     it('should setup the iconClass if icon is passed', () => {

@@ -1,4 +1,9 @@
-import { getCountries, getStates, getStateObjects, findByCountryCode } from './countries.service';
+import {
+  getCountries,
+  getStates,
+  getStateObjects,
+  findByCountryCode,
+} from './countries.service';
 
 describe('Utils: Countries', () => {
   describe('Method: getCountries()', () => {
@@ -27,7 +32,10 @@ describe('Utils: Countries', () => {
     });
 
     it('should get states for US', () => {
-      expect(getStateObjects('United States')[0]).toEqual({ code: 'AL', name: 'Alabama' });
+      expect(getStateObjects('United States')[0]).toEqual({
+        code: 'AL',
+        name: 'Alabama',
+      });
     });
   });
 

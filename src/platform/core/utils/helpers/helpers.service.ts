@@ -3,7 +3,9 @@ export class Helpers {
    * Swallows an event to stop further execution
    * @param event
    */
-  public static swallowEvent(event: MouseEvent | KeyboardEvent | MouseWheelEvent): void {
+  public static swallowEvent(
+    event: MouseEvent | KeyboardEvent | MouseWheelEvent,
+  ): void {
     if (event) {
       event.stopPropagation();
       event.preventDefault();
@@ -34,7 +36,10 @@ export class Helpers {
    * @param  {Object} props The params to replace in string.
    * @return {Boolean}
    */
-  public static validateInterpolationProps(str: string, props: Object): boolean {
+  public static validateInterpolationProps(
+    str: string,
+    props: Object,
+  ): boolean {
     let keys: string[] = str.match(/\$([\w\.]+)/g);
     return keys.every((key: string) => {
       return props.hasOwnProperty(key.substr(1));
@@ -67,7 +72,11 @@ export class Helpers {
    * Checks to see if the object is a undefined or null
    */
   public static isEmpty(obj: any): boolean {
-    return Helpers.isBlank(obj) || obj === '' || (Array.isArray(obj) && obj.length === 0);
+    return (
+      Helpers.isBlank(obj) ||
+      obj === '' ||
+      (Array.isArray(obj) && obj.length === 0)
+    );
   }
 
   /**
@@ -108,10 +117,22 @@ export class Helpers {
                 if (Object.is(targetItem, sourceItem)) {
                   return;
                 }
-                if (Helpers.isObject(targetItem) && Helpers.isObject(sourceItem)) {
-                  targetArray[itemIndex] = Helpers.deepAssign(targetItem, sourceItem);
-                } else if (Array.isArray(targetItem) && Array.isArray(sourceItem)) {
-                  targetArray[itemIndex] = Helpers.deepAssign(targetItem, sourceItem);
+                if (
+                  Helpers.isObject(targetItem) &&
+                  Helpers.isObject(sourceItem)
+                ) {
+                  targetArray[itemIndex] = Helpers.deepAssign(
+                    targetItem,
+                    sourceItem,
+                  );
+                } else if (
+                  Array.isArray(targetItem) &&
+                  Array.isArray(sourceItem)
+                ) {
+                  targetArray[itemIndex] = Helpers.deepAssign(
+                    targetItem,
+                    sourceItem,
+                  );
                 } else {
                   targetArray[itemIndex] = sourceItem;
                 }
@@ -160,8 +181,10 @@ export class Helpers {
   }
 
   public static getKeysTwoObjects(obj: any, other: any): any {
-    return [...Object.keys(obj), ...Object.keys(other)]
-      .filter((key: string, index: number, array: any[]) => array.indexOf(key) === index);
+    return [...Object.keys(obj), ...Object.keys(other)].filter(
+      (key: string, index: number, array: any[]) =>
+        array.indexOf(key) === index,
+    );
   }
 
   public static isDeepEqual(obj: any, other: any): any {

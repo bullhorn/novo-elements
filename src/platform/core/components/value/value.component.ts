@@ -36,6 +36,10 @@ export class NovoValueComponent {
   @Input() public data: any; // TODO use interface
   @Input() public meta: INovoValueMeta = { label: '' }; // TODO use interface
 
-  @HostBinding('attr.layout') @Input() public layout: string = 'row';
-  @HostBinding('attr.layout-align') @Input() public layoutAlign: string = 'start center';
+  @HostBinding('attr.layout')
+  @Input()
+  public layout: string = 'row';
+  @HostBinding('attr.layout-align')
+  @Input()
+  public layoutAlign: string = 'start center';
 }

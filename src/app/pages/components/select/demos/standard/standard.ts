@@ -12,10 +12,5 @@ class Person {
 export class DemoSelectStandardComponent {
   public value: string;
 
-  public people: any[] = [
-    new Person(),
-    new Person(),
-    new Person(),
-  ];
-
+  public people: any[] = [new Person(), new Person(), new Person()];
 }

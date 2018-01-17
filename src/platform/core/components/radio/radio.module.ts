@@ -7,9 +7,8 @@ import { NovoButtonModule } from './../button/button.module';
 import { NovoRadioComponent, NovoRadioGroupComponent } from './radio.component';
 
 @NgModule({
-    imports: [CommonModule, NovoButtonModule],
-    declarations: [NovoRadioComponent, NovoRadioGroupComponent],
-    exports: [NovoRadioComponent, NovoRadioGroupComponent],
+  imports: [CommonModule, NovoButtonModule],
+  declarations: [NovoRadioComponent, NovoRadioGroupComponent],
+  exports: [NovoRadioComponent, NovoRadioGroupComponent],
 })
-export class NovoRadioModule {
-}
+export class NovoRadioModule {}

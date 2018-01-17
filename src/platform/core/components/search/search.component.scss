@@ -1,12 +1,12 @@
-@import "../../../styles/global/functions";
-@import "../../../styles/global/variables";
+@import '../../../styles/global/functions';
+@import '../../../styles/global/variables';
 
 :host {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
 
-  >input {
+  > input {
     height: 100%;
     width: 0;
     display: block;
@@ -20,7 +20,8 @@
     color: $dark;
     z-index: 12;
     opacity: 0;
-    transition: background-color 250ms ease-in-out, opacity 150ms ease-in-out, 250ms width ease-in-out;
+    transition: background-color 250ms ease-in-out, opacity 150ms ease-in-out,
+      250ms width ease-in-out;
     &:focus,
     &:active {
       outline: none;
@@ -36,20 +37,20 @@
     min-width: 250px;
     z-index: 1000;
 
-    >button[theme="fab"] {
+    > button[theme='fab'] {
       border-radius: 2px 0 0 2px !important;
       width: 47px;
       height: 47px;
       box-shadow: none;
     }
 
-    >input {
+    > input {
       opacity: 1;
       width: 100%;
     }
   }
   &.focused {
-    >button {
+    > button {
       color: $positive !important;
       border: 1px solid $positive;
       border-right: none;
@@ -61,14 +62,13 @@
     }
   }
 
-  @each $key,
-  $color in $all-colors {
-    &[theme="#{$key}"] {
+  @each $key, $color in $all-colors {
+    &[theme='#{$key}'] {
       input:focus,
       input:active {
         border-color: $color;
       }
-      
+
       &.focused > button {
         color: $color !important;
         border-color: $color;

@@ -26,15 +26,8 @@ import { HomeComponent } from './pages/home/home.component';
     appRoutingModule,
     SharedModule,
   ],
-  providers: [
-    PreloadSelectModulesStrategy,
-  ],
-  declarations: [
-    AppComponent,
-    HomeComponent,
-  ],
-  bootstrap: [
-    AppComponent,
-  ],
+  providers: [PreloadSelectModulesStrategy],
+  declarations: [AppComponent, HomeComponent],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

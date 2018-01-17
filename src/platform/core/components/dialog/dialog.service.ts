@@ -14,7 +14,12 @@ import {
   OverlayConfig,
   ScrollStrategy,
 } from '@angular/cdk/overlay';
-import { ComponentPortal, ComponentType, PortalInjector, TemplatePortal } from '@angular/cdk/portal';
+import {
+  ComponentPortal,
+  ComponentType,
+  PortalInjector,
+  TemplatePortal,
+} from '@angular/cdk/portal';
 import { filter } from 'rxjs/operators/filter';
 import { startWith } from 'rxjs/operators/startWith';
 import { Location } from '@angular/common';
@@ -34,20 +39,33 @@ import { Observable } from 'rxjs/Observable';
 import { defer } from 'rxjs/observable/defer';
 import { Subject } from 'rxjs/Subject';
 import { of as observableOf } from 'rxjs/observable/of';
-import { NovoDialogConfig, IAlertConfig, IConfirmConfig, INotificationConfig } from './dialog-config';
+import {
+  NovoDialogConfig,
+  IAlertConfig,
+  IConfirmConfig,
+  INotificationConfig,
+} from './dialog-config';
 import { NovoDialogRef } from './dialog-ref';
 import { NovoDialogContainerComponent } from './dialog-container.component';
-import { NovoAlertDialogComponent, NovoConfirmDialogComponent, NovoNotificationDialogComponent } from './dialog.component';
+import {
+  NovoAlertDialogComponent,
+  NovoConfirmDialogComponent,
+  NovoNotificationDialogComponent,
+} from './dialog.component';
 
-export const NOVO_DIALOG_DATA: InjectionToken<any> = new InjectionToken<any>('NovoDialogData');
+export const NOVO_DIALOG_DATA: InjectionToken<any> = new InjectionToken<any>(
+  'NovoDialogData',
+);
 
 /** Injection token that determines the scroll handling while the dialog is open. */
-export const NOVO_DIALOG_SCROLL_STRATEGY: InjectionToken<any> =
-  new InjectionToken<() => ScrollStrategy>('novo-dialog-scroll-strategy');
+export const NOVO_DIALOG_SCROLL_STRATEGY: InjectionToken<
+  any
+> = new InjectionToken<() => ScrollStrategy>('novo-dialog-scroll-strategy');
 
 /** @docs-private */
-export function NOVO_DIALOG_SCROLL_STRATEGY_PROVIDER_FACTORY(overlay: Overlay):
-  () => BlockScrollStrategy {
+export function NOVO_DIALOG_SCROLL_STRATEGY_PROVIDER_FACTORY(
+  overlay: Overlay,
+): () => BlockScrollStrategy {
   return () => overlay.scrollStrategies.block();
 }
 
@@ -65,12 +83,16 @@ export const NOVO_DIALOG_SCROLL_STRATEGY_PROVIDER: Provider = {
 export class NovoDialog {
   /** Keeps track of the currently-open dialogs. */
   get openDialogs(): NovoDialogRef<any>[] {
-    return this._parentDialog ? this._parentDialog.openDialogs : this._openDialogsAtThisLevel;
+    return this._parentDialog
+      ? this._parentDialog.openDialogs
+      : this._openDialogsAtThisLevel;
   }
 
   /** Stream that emits when a dialog has been opened. */
   get afterOpen(): Subject<NovoDialogRef<any>> {
-    return this._parentDialog ? this._parentDialog.afterOpen : this._afterOpenAtThisLevel;
+    return this._parentDialog
+      ? this._parentDialog.afterOpen
+      : this._afterOpenAtThisLevel;
   }
 
   get _afterAllClosed(): Subject<any> {
@@ -82,21 +104,28 @@ export class NovoDialog {
    * Stream that emits when all open dialog have finished closing.
    * Will emit on subscribe if there are no open dialogs to begin with.
    */
-  public afterAllClosed: Observable<void> = defer<void>(() => this.openDialogs.length ?
-    this._afterAllClosed :
-    this._afterAllClosed.pipe(startWith(undefined)));
+  public afterAllClosed: Observable<void> = defer<void>(
+    () =>
+      this.openDialogs.length
+        ? this._afterAllClosed
+        : this._afterAllClosed.pipe(startWith(undefined)),
+  );
 
   private _openDialogsAtThisLevel: NovoDialogRef<any>[] = [];
   private _afterAllClosedAtThisLevel: Subject<void> = new Subject<void>();
-  private _afterOpenAtThisLevel: Subject<NovoDialogRef<any>> = new Subject<NovoDialogRef<any>>();
+  private _afterOpenAtThisLevel: Subject<NovoDialogRef<any>> = new Subject<
+    NovoDialogRef<any>
+  >();
 
   constructor(
     private _overlay: Overlay,
     private _injector: Injector,
     @Optional() location: Location,
     @Inject(NOVO_DIALOG_SCROLL_STRATEGY) private _scrollStrategy: any,
-    @Optional() @SkipSelf() private _parentDialog: NovoDialog) {
-
+    @Optional()
+    @SkipSelf()
+    private _parentDialog: NovoDialog,
+  ) {
     // Close all of the dialogs when the user goes forwards/backwards in history or when the
     // location hash changes. Note that this usually doesn't include clicking on links (unless
     // the user is using the `HashLocationStrategy`).
@@ -112,19 +141,31 @@ export class NovoDialog {
    * @param config Extra configuration options.
    * @returns Reference to the newly-opened dialog.
    */
-  public open<T, D = any>(componentOrTemplateRef: ComponentType<T> | TemplateRef<T>,
-    config?: NovoDialogConfig<D>): NovoDialogRef<T> {
-
+  public open<T, D = any>(
+    componentOrTemplateRef: ComponentType<T> | TemplateRef<T>,
+    config?: NovoDialogConfig<D>,
+  ): NovoDialogRef<T> {
     config = _applyConfigDefaults(config);
 
     if (config.id && this.getDialogById(config.id)) {
-      throw Error(`Dialog with id "${config.id}" exists already. The dialog id must be unique.`);
+      throw Error(
+        `Dialog with id "${
+          config.id
+        }" exists already. The dialog id must be unique.`,
+      );
     }
 
     const overlayRef: OverlayRef = this._createOverlay(config);
-    const dialogContainer: NovoDialogContainerComponent = this._attachDialogContainer(overlayRef, config);
-    const dialogRef: NovoDialogRef<T> =
-      this._attachDialogContent<T>(componentOrTemplateRef, dialogContainer, overlayRef, config);
+    const dialogContainer: NovoDialogContainerComponent = this._attachDialogContainer(
+      overlayRef,
+      config,
+    );
+    const dialogRef: NovoDialogRef<T> = this._attachDialogContent<T>(
+      componentOrTemplateRef,
+      dialogContainer,
+      overlayRef,
+      config,
+    );
 
     this.openDialogs.push(dialogRef);
     dialogRef.afterClosed().subscribe(() => this._removeOpenDialog(dialogRef));
@@ -145,11 +186,16 @@ export class NovoDialog {
    * Opens an alert dialog with the provided config.
    * Returns an NovoDialogRef<TdAlertDialogComponent> object.
    */
-  public openAlert(config: IAlertConfig): NovoDialogRef<NovoAlertDialogComponent> {
+  public openAlert(
+    config: IAlertConfig,
+  ): NovoDialogRef<NovoAlertDialogComponent> {
     let dialogConfig: NovoDialogConfig = this._createConfig(config);
-    let dialogRef: NovoDialogRef<NovoAlertDialogComponent> =
-      this.open(NovoAlertDialogComponent, dialogConfig);
-    let alertDialogComponent: NovoAlertDialogComponent = dialogRef.componentInstance;
+    let dialogRef: NovoDialogRef<NovoAlertDialogComponent> = this.open(
+      NovoAlertDialogComponent,
+      dialogConfig,
+    );
+    let alertDialogComponent: NovoAlertDialogComponent =
+      dialogRef.componentInstance;
     alertDialogComponent.title = config.title;
     alertDialogComponent.message = config.message;
     if (config.closeButton) {
@@ -171,11 +217,16 @@ export class NovoDialog {
    * Opens a confirm dialog with the provided config.
    * Returns an NovoDialogRef<TdConfirmDialogComponent> object.
    */
-  public openConfirm(config: IConfirmConfig): NovoDialogRef<NovoConfirmDialogComponent> {
+  public openConfirm(
+    config: IConfirmConfig,
+  ): NovoDialogRef<NovoConfirmDialogComponent> {
     let dialogConfig: NovoDialogConfig = this._createConfig(config);
-    let dialogRef: NovoDialogRef<NovoConfirmDialogComponent> =
-      this.open(NovoConfirmDialogComponent, dialogConfig);
-    let confirmDialogComponent: NovoConfirmDialogComponent = dialogRef.componentInstance;
+    let dialogRef: NovoDialogRef<NovoConfirmDialogComponent> = this.open(
+      NovoConfirmDialogComponent,
+      dialogConfig,
+    );
+    let confirmDialogComponent: NovoConfirmDialogComponent =
+      dialogRef.componentInstance;
     confirmDialogComponent.title = config.title;
     confirmDialogComponent.message = config.message;
     if (config.acceptButton) {
@@ -199,10 +250,16 @@ export class NovoDialog {
    * Opens a confirm dialog with the provided config.
    * Returns an NovoDialogRef<TdConfirmDialogComponent> object.
    */
-  public openNotification(config: INotificationConfig): NovoDialogRef<NovoNotificationDialogComponent> {
+  public openNotification(
+    config: INotificationConfig,
+  ): NovoDialogRef<NovoNotificationDialogComponent> {
     let dialogConfig: NovoDialogConfig = this._createConfig(config);
-    let dialogRef: NovoDialogRef<NovoNotificationDialogComponent> = this.open(NovoNotificationDialogComponent, dialogConfig);
-    let dialogComponent: NovoNotificationDialogComponent = dialogRef.componentInstance;
+    let dialogRef: NovoDialogRef<NovoNotificationDialogComponent> = this.open(
+      NovoNotificationDialogComponent,
+      dialogConfig,
+    );
+    let dialogComponent: NovoNotificationDialogComponent =
+      dialogRef.componentInstance;
     dialogComponent.title = config.title;
     dialogComponent.message = config.message;
     if (config.type) {
@@ -234,7 +291,9 @@ export class NovoDialog {
    * @param id ID to use when looking up the dialog.
    */
   public getDialogById(id: string): NovoDialogRef<any> | undefined {
-    return this.openDialogs.find((dialog: NovoDialogRef<any>) => dialog.id === id);
+    return this.openDialogs.find(
+      (dialog: NovoDialogRef<any>) => dialog.id === id,
+    );
   }
 
   /**
@@ -278,9 +337,19 @@ export class NovoDialog {
    * @param config The dialog configuration.
    * @returns A promise resolving to a ComponentRef for the attached container.
    */
-  private _attachDialogContainer(overlay: OverlayRef, config: NovoDialogConfig): NovoDialogContainerComponent {
-    let containerPortal: ComponentPortal<NovoDialogContainerComponent> = new ComponentPortal(NovoDialogContainerComponent, config.viewContainerRef);
-    let containerRef: ComponentRef<NovoDialogContainerComponent> = overlay.attach(containerPortal);
+  private _attachDialogContainer(
+    overlay: OverlayRef,
+    config: NovoDialogConfig,
+  ): NovoDialogContainerComponent {
+    let containerPortal: ComponentPortal<
+      NovoDialogContainerComponent
+    > = new ComponentPortal(
+      NovoDialogContainerComponent,
+      config.viewContainerRef,
+    );
+    let containerRef: ComponentRef<
+      NovoDialogContainerComponent
+    > = overlay.attach(containerPortal);
     containerRef.instance._config = config;
 
     return containerRef.instance;
@@ -299,11 +368,15 @@ export class NovoDialog {
     componentOrTemplateRef: ComponentType<T> | TemplateRef<T>,
     dialogContainer: NovoDialogContainerComponent,
     overlayRef: OverlayRef,
-    config: NovoDialogConfig): NovoDialogRef<T> {
-
+    config: NovoDialogConfig,
+  ): NovoDialogRef<T> {
     // Create a reference to the dialog we're creating in order to give the user a handle
     // to modify and close it.
-    const dialogRef: NovoDialogRef<T> = new NovoDialogRef<T>(overlayRef, dialogContainer, config.id);
+    const dialogRef: NovoDialogRef<T> = new NovoDialogRef<T>(
+      overlayRef,
+      dialogContainer,
+      config.id,
+    );
 
     // When the dialog backdrop is clicked, we want to close it.
     if (config.hasBackdrop) {
@@ -315,15 +388,31 @@ export class NovoDialog {
     }
 
     // Close when escape keydown event occurs
-    overlayRef.keydownEvents().pipe(
-      filter((event: any) => event.keyCode === ESCAPE && !dialogRef.disableClose),
-    ).subscribe(() => dialogRef.close());
+    overlayRef
+      .keydownEvents()
+      .pipe(
+        filter(
+          (event: any) => event.keyCode === ESCAPE && !dialogRef.disableClose,
+        ),
+      )
+      .subscribe(() => dialogRef.close());
 
     if (componentOrTemplateRef instanceof TemplateRef) {
-      dialogContainer.attachTemplatePortal(new TemplatePortal<T>(componentOrTemplateRef, undefined, <any>{ $implicit: config.data, dialogRef }));
+      dialogContainer.attachTemplatePortal(
+        new TemplatePortal<T>(componentOrTemplateRef, undefined, <any>{
+          $implicit: config.data,
+          dialogRef,
+        }),
+      );
     } else {
-      const injector: Injector = this._createInjector<T>(config, dialogRef, dialogContainer);
-      const contentRef: ComponentRef<T> = dialogContainer.attachComponentPortal<T>(new ComponentPortal(componentOrTemplateRef, undefined, injector));
+      const injector: Injector = this._createInjector<T>(
+        config,
+        dialogRef,
+        dialogContainer,
+      );
+      const contentRef: ComponentRef<T> = dialogContainer.attachComponentPortal<
+        T
+      >(new ComponentPortal(componentOrTemplateRef, undefined, injector));
       dialogRef.componentInstance = contentRef.instance;
     }
 
@@ -345,9 +434,10 @@ export class NovoDialog {
   private _createInjector<T>(
     config: NovoDialogConfig,
     dialogRef: NovoDialogRef<T>,
-    dialogContainer: NovoDialogContainerComponent): PortalInjector {
-
-    const userInjector: Injector = config && config.viewContainerRef && config.viewContainerRef.injector;
+    dialogContainer: NovoDialogContainerComponent,
+  ): PortalInjector {
+    const userInjector: Injector =
+      config && config.viewContainerRef && config.viewContainerRef.injector;
     const injectionTokens: WeakMap<any, any> = new WeakMap();
 
     injectionTokens.set(NovoDialogRef, dialogRef);

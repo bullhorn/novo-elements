@@ -27,5 +27,4 @@ export const SELECT_DEMOS: DEMOS = {
     ts: require('!!raw-loader?lang=typescript!./header/header.ts'),
     html: require('!!raw-loader?lang=markup!./header/header.html'),
   },
-
 };

@@ -26,4 +26,4 @@ import { styleGuideRoutes } from './style-guide.routes';
     styleGuideRoutes,
   ],
 })
-export class StyleGuideModule { }
+export class StyleGuideModule {}

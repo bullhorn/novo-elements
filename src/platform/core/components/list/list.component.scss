@@ -15,13 +15,12 @@ novo-list {
   &.horizontal {
     flex-direction: row;
   }
-  @each $entity,
-  $color in $all-colors {
-    &[theme="#{$entity}"] {
+  @each $entity, $color in $all-colors {
+    &[theme='#{$entity}'] {
       novo-list-item {
         background: $color;
         color: #fff;
-        border-bottom: 1px solid rgba(#fff, .1);
+        border-bottom: 1px solid rgba(#fff, 0.1);
         i {
           color: #fff;
         }
@@ -29,20 +28,19 @@ novo-list {
           color: #fff;
         }
         item-content {
-          >* {
-            color: rgba(#fff, .65);
+          > * {
+            color: rgba(#fff, 0.65);
           }
         }
       }
     }
   }
-  @each $basic,
-  $color in $all-colors {
-    &[theme="#{$basic}"] {
+  @each $basic, $color in $all-colors {
+    &[theme='#{$basic}'] {
       novo-list-item {
         background: $color;
         color: #fff;
-        border-bottom: 1px solid rgba(#fff, .1);
+        border-bottom: 1px solid rgba(#fff, 0.1);
         i {
           color: #fff;
         }
@@ -50,8 +48,8 @@ novo-list {
           color: #fff;
         }
         item-content {
-          >* {
-            color: rgba(#fff, .65);
+          > * {
+            color: rgba(#fff, 0.65);
           }
         }
       }
@@ -71,10 +69,10 @@ novo-list-item {
   &:focus {
     outline: none;
     border: 1px solid $positive;
-    background: rgba($positive, .2);
+    background: rgba($positive, 0.2);
   }
   &:hover {
-    background: rgba($positive, .1);
+    background: rgba($positive, 0.1);
   }
   &[disabled],
   .disabled {
@@ -109,8 +107,7 @@ novo-list-item {
       margin-right: 0.5em;
       font-size: 20px;
       i {
-        @each $entity,
-        $color in $all-colors {
+        @each $entity, $color in $all-colors {
           &.#{$entity} {
             background: $color;
           }
@@ -157,8 +154,7 @@ novo-list-item {
       &.negative {
         color: map-get($all-colors, 'grapefruit');
       }
-      @each $entity,
-      $color in $all-colors {
+      @each $entity, $color in $all-colors {
         &.#{$entity} {
           color: $color;
         }

@@ -4,7 +4,9 @@ import { NovoLabelService } from '../../services/label/label.service';
 describe('Pipe: RenderPipe', () => {
   let pipe: RenderPipe;
   let changeDetectorRef: any = { markForCheck: jest.fn() };
-  let sanitizer: any = { bypassSecurityTrustHtml: jest.fn((arg: string) => arg) };
+  let sanitizer: any = {
+    bypassSecurityTrustHtml: jest.fn((arg: string) => arg),
+  };
 
   beforeEach(() => {
     pipe = new RenderPipe(changeDetectorRef, sanitizer, new NovoLabelService());
@@ -58,10 +60,14 @@ describe('Pipe: RenderPipe', () => {
       expect(pipe.equals(['stuff', 'thing'], ['bears'])).toBeFalsy();
     });
     it('should return false when two arrays are the same length with different objects.', () => {
-      expect(pipe.equals([{ bacon: 'burger' }], [{ bacon: 'buck' }])).toBeFalsy();
+      expect(
+        pipe.equals([{ bacon: 'burger' }], [{ bacon: 'buck' }]),
+      ).toBeFalsy();
     });
     it('should return true when two arrays are the same.', () => {
-      expect(pipe.equals([{ bacon: 'burger' }], [{ bacon: 'burger' }])).toBeTruthy();
+      expect(
+        pipe.equals([{ bacon: 'burger' }], [{ bacon: 'burger' }]),
+      ).toBeTruthy();
     });
     it('should return false object one is not an array, but object two is.', () => {
       expect(pipe.equals({}, [])).toBeFalsy();
@@ -353,7 +359,9 @@ describe('Pipe: RenderPipe', () => {
         dateLastModified: 1500999002330,
       };
       let result: any = pipe.render(mockValue, mockArgs);
-      expect(result).toBe('07/25/2017 (David S. Pumpkins) - I am so in the weeds with David Pumpkins!');
+      expect(result).toBe(
+        '07/25/2017 (David S. Pumpkins) - I am so in the weeds with David Pumpkins!',
+      );
     });
     it('should render a CandidateComment.', () => {
       expect(pipe.render).toBeDefined();
@@ -410,7 +418,11 @@ describe('Pipe: RenderPipe', () => {
   describe('Function: concat(list, ...fields)', () => {
     it('should concatenate properties of the object being passed in.', () => {
       expect(pipe.concat).toBeDefined();
-      let result: any = pipe.concat([{ firstName: 'Jane', lastName: 'Smith' }], 'firstName', 'lastName');
+      let result: any = pipe.concat(
+        [{ firstName: 'Jane', lastName: 'Smith' }],
+        'firstName',
+        'lastName',
+      );
       expect(result).toBe('Jane Smith');
     });
   });

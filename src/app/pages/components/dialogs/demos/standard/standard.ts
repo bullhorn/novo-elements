@@ -1,5 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { NovoDialog, NovoDialogRef, NOVO_DIALOG_DATA } from '../../../../../../platform';
+import {
+  NovoDialog,
+  NovoDialogRef,
+  NOVO_DIALOG_DATA,
+} from '../../../../../../platform';
 
 @Component({
   selector: 'dialog-data-example-dialog',
@@ -38,7 +42,10 @@ import { NovoDialog, NovoDialogRef, NOVO_DIALOG_DATA } from '../../../../../../p
   `,
 })
 export class ExampleDialogComponent {
-  constructor(public dialogRef: NovoDialogRef<ExampleDialogComponent>, @Inject(NOVO_DIALOG_DATA) public data: any) { }
+  constructor(
+    public dialogRef: NovoDialogRef<ExampleDialogComponent>,
+    @Inject(NOVO_DIALOG_DATA) public data: any,
+  ) {}
 
   public close(): void {
     this.dialogRef.close();
@@ -50,7 +57,7 @@ export class ExampleDialogComponent {
   templateUrl: './standard.html',
 })
 export class DemoDialogStandardComponent {
-  constructor(public dialog: NovoDialog) { }
+  constructor(public dialog: NovoDialog) {}
 
   public openDialog(): void {
     this.dialog.open(ExampleDialogComponent, {
@@ -62,7 +69,8 @@ export class DemoDialogStandardComponent {
 
   public openAlert(): void {
     this.dialog.openAlert({
-      message: 'This is how simple it is to create an alert with this wrapper service.',
+      message:
+        'This is how simple it is to create an alert with this wrapper service.',
       // disableClose: true | false, // defaults to false
       title: 'Alert', // OPTIONAL, hides if not provided
       closeButton: 'Close', // OPTIONAL, defaults to 'CLOSE'
@@ -70,31 +78,38 @@ export class DemoDialogStandardComponent {
   }
 
   public openConfirm(): void {
-    this.dialog.openConfirm({
-      title: 'Confirm', // OPTIONAL, hides if not provided
-      message: 'This is how simple it is to create a confirm with this wrapper service. Do you agree?',
-      // disableClose: true | false, // defaults to false
-      cancelButton: 'Disagree', // OPTIONAL, defaults to 'CANCEL'
-      acceptButton: 'Agree', // OPTIONAL, defaults to 'ACCEPT'
-    }).afterClosed().subscribe((accept: boolean) => {
-      if (accept) {
-        // DO SOMETHING
-      } else {
-        // DO SOMETHING ELSE
-      }
-    });
+    this.dialog
+      .openConfirm({
+        title: 'Confirm', // OPTIONAL, hides if not provided
+        message:
+          'This is how simple it is to create a confirm with this wrapper service. Do you agree?',
+        // disableClose: true | false, // defaults to false
+        cancelButton: 'Disagree', // OPTIONAL, defaults to 'CANCEL'
+        acceptButton: 'Agree', // OPTIONAL, defaults to 'ACCEPT'
+      })
+      .afterClosed()
+      .subscribe((accept: boolean) => {
+        if (accept) {
+          // DO SOMETHING
+        } else {
+          // DO SOMETHING ELSE
+        }
+      });
   }
   public openNotification(): void {
-    this.dialog.openNotification({
-      type: 'warning',
-      title: 'This action will delete 25 records.', // OPTIONAL, hides if not provided
-      message: 'Are you sure you wish to continue?',
-      // disableClose: true | false, // defaults to false
-      buttons: ['Disagree', 'Agree'], // OPTIONAL, defaults to 'CANCEL'
-    }).afterClosed().subscribe((choice: string) => {
-      if (choice) {
-        alert(`You chose: ${choice}`);
-      }
-    });
+    this.dialog
+      .openNotification({
+        type: 'warning',
+        title: 'This action will delete 25 records.', // OPTIONAL, hides if not provided
+        message: 'Are you sure you wish to continue?',
+        // disableClose: true | false, // defaults to false
+        buttons: ['Disagree', 'Agree'], // OPTIONAL, defaults to 'CANCEL'
+      })
+      .afterClosed()
+      .subscribe((choice: string) => {
+        if (choice) {
+          alert(`You chose: ${choice}`);
+        }
+      });
   }
 }

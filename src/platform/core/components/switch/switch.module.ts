@@ -6,9 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { NovoSwitchComponent } from './switch.component';
 
 @NgModule({
-    imports: [CommonModule, FormsModule],
-    declarations: [NovoSwitchComponent],
-    exports: [NovoSwitchComponent],
+  imports: [CommonModule, FormsModule],
+  declarations: [NovoSwitchComponent],
+  exports: [NovoSwitchComponent],
 })
-export class NovoSwitchModule {
-}
+export class NovoSwitchModule {}

@@ -12,8 +12,7 @@ novo-loading {
     @include enumerate($loading-dot-colors, 'background-color', 'map-val', '');
     @include animationMapDelay($loading-dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, '', '');
   }
-  @each $analytics,
-  $color in $all-colors {
+  @each $analytics, $color in $all-colors {
     &.#{$analytics} {
       span.dot {
         background-color: $color;
@@ -41,7 +40,7 @@ novo-loading {
     opacity: 0.5;
   }
   60% {
-    transform: translateY(.8em);
+    transform: translateY(0.8em);
     opacity: 0.95;
   }
   100% {
@@ -55,8 +54,7 @@ novo-spinner {
   svg.bullhornSpinner {
     transform-origin: center center;
     animation: spin 3400ms infinite;
-    @each $analytics,
-    $color in $all-colors {
+    @each $analytics, $color in $all-colors {
       &.#{$analytics} {
         .circleGroup circle {
           fill: $color;

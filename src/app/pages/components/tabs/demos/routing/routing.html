@@ -1,12 +1,7 @@
 <header theme="placement">
   <h4>Routing</h4>
   <novo-nav theme="light" router>
-    <novo-tab-link *ngFor="let link of navLinks"
-                   [routerLink]="link.path"
-                   routerLinkActive
-                   #rla="routerLinkActive"
-                   [active]="rla.isActive"
-                   [disabled]="link.disabled">
+    <novo-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive" [disabled]="link.disabled">
       <novo-icon>{{ link.icon }}</novo-icon>
       <span>{{ link.label }}</span>
     </novo-tab-link>

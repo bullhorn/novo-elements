@@ -5,13 +5,13 @@
   demo-loading-spinner {
     flex-direction: column;
   }
-  >section {
+  > section {
     display: flex;
     flex: 1;
     flex-direction: row;
     align-items: center;
     width: 100%;
-    &>div {
+    & > div {
       width: 50%;
       display: flex;
       align-items: center;
@@ -22,10 +22,10 @@
         color: #fff;
         font-weight: bold;
         &.black {
-          color: #3D464D;
+          color: #3d464d;
         }
         &.orange {
-          color: #EB6845;
+          color: #eb6845;
         }
       }
     }

@@ -3,33 +3,33 @@ $black: #000000;
 $white: #ffffff;
 $grey: #999999;
 $off-white: #f4f4f4;
-$dark: #3D464D;
-$light: #D9DADC;
-$navy: #0D2D42;
-$pulse: #3BAFDA;
+$dark: #3d464d;
+$light: #d9dadc;
+$navy: #0d2d42;
+$pulse: #3bafda;
 
 // Analytics Colors
-$aqua: #3BAFDA;
-$ocean: #4A89DC;
-$mint: #37BC9B;
-$grass: #8CC152;
-$sunflower: #F6B042;
-$bittersweet: #EB6845;
-$grapefruit: #DA4453;
-$carnation: #D770AD;
-$lavender: #967ADC;
+$aqua: #3bafda;
+$ocean: #4a89dc;
+$mint: #37bc9b;
+$grass: #8cc152;
+$sunflower: #f6b042;
+$bittersweet: #eb6845;
+$grapefruit: #da4453;
+$carnation: #d770ad;
+$lavender: #967adc;
 
 // Entity Colors
-$company: #3399DD;
-$candidate: #44BB77;
-$navigation: #2F384F;
-$lead: #AA6699;
-$contact: #FFAA44;
+$company: #3399dd;
+$candidate: #44bb77;
+$navigation: #2f384f;
+$lead: #aa6699;
+$contact: #ffaa44;
 $opportunity: #662255;
-$job: #BB5566;
+$job: #bb5566;
 $submission: #a9adbb;
 $sendout: #747884;
-$placement: #0B344F;
+$placement: #0b344f;
 $note: #747884;
 
 // Color Applications
@@ -38,32 +38,78 @@ $success: $grass;
 $negative: $grapefruit;
 $warning: $sunflower;
 $background: $off-white;
-$background-dark: #E2E2E2;
+$background-dark: #e2e2e2;
 $neutral: #4f5361;
-$empty: #CCCDCC;
+$empty: #cccdcc;
 
 // Color Maps
-$loading-dot-colors: (ocean: $ocean, lavender: $lavender, grapefruit: $grapefruit, sunflower: $sunflower, mint: $mint);
-$dark-colors: (company: $company, candidate: $candidate, navigation: $navigation, lead: $lead, contact: $contact, opportunity: $opportunity, job: $job, sendout: $sendout, placement: $placement, task: $neutral, distributionList: $neutral, credential: $neutral, user: $neutral, corporateuser: $neutral, aqua: $aqua, ocean: $ocean, mint: $mint, grass: $grass, sunflower: $sunflower, bittersweet: $bittersweet, grapefruit: $grapefruit, carnation: $carnation, lavender: $lavender, positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, black: $black, dark: $dark, pulse: $pulse, neutral: $neutral, navy: $navy);
-$light-colors: (submission: $submission, note: $note, background: $off-white, white: $white, grey: $grey, off-white: $off-white, light: $light);
+$loading-dot-colors: (
+  ocean: $ocean,
+  lavender: $lavender,
+  grapefruit: $grapefruit,
+  sunflower: $sunflower,
+  mint: $mint
+);
+$dark-colors: (
+  company: $company,
+  candidate: $candidate,
+  navigation: $navigation,
+  lead: $lead,
+  contact: $contact,
+  opportunity: $opportunity,
+  job: $job,
+  sendout: $sendout,
+  placement: $placement,
+  task: $neutral,
+  distributionList: $neutral,
+  credential: $neutral,
+  user: $neutral,
+  corporateuser: $neutral,
+  aqua: $aqua,
+  ocean: $ocean,
+  mint: $mint,
+  grass: $grass,
+  sunflower: $sunflower,
+  bittersweet: $bittersweet,
+  grapefruit: $grapefruit,
+  carnation: $carnation,
+  lavender: $lavender,
+  positive: $ocean,
+  success: $grass,
+  negative: $grapefruit,
+  warning: $sunflower,
+  black: $black,
+  dark: $dark,
+  pulse: $pulse,
+  neutral: $neutral,
+  navy: $navy
+);
+$light-colors: (
+  submission: $submission,
+  note: $note,
+  background: $off-white,
+  white: $white,
+  grey: $grey,
+  off-white: $off-white,
+  light: $light
+);
 $all-colors: map-merge($dark-colors, $light-colors);
 
 @function text-color-for-theme($theme) {
-    @if map-has-key($dark-colors, $theme) {
-        @return $white;
-    }
-    @else {
-        @return $dark;
-    }
+  @if map-has-key($dark-colors, $theme) {
+    @return $white;
+  } @else {
+    @return $dark;
+  }
 }
 
 // Typography
 $base-font-size: 13px;
-$base-font-family: "Roboto", sans-serif;
+$base-font-family: 'Roboto', sans-serif;
 
 $base-font-color: $dark;
 $base-line-height: 24px;
-$alt-font-family: Georgia, "Times New Roman", Times, serif;
+$alt-font-family: Georgia, 'Times New Roman', Times, serif;
 
 // Padding & Margin Sizes
 $small: 10px;
@@ -86,87 +132,116 @@ $whiteframe-zindex-z5: 5 !default;
 // Function to call z-indexes.
 // Usage: z-index: z('modal');
 @function z($layer) {
-    $z-layers: ("goku": 9001, "modal": 500, "tooltip": 100, "toast": 90, "dialogue": 80, "bottom-sheet": 70, "sidenav": 60, "backdrop": 50, "fab": 20, "default": 1, "below": -1, "bottomless-pit": -9000);
+  $z-layers: (
+    'goku': 9001,
+    'modal': 500,
+    'tooltip': 100,
+    'toast': 90,
+    'dialogue': 80,
+    'bottom-sheet': 70,
+    'sidenav': 60,
+    'backdrop': 50,
+    'fab': 20,
+    'default': 1,
+    'below': -1,
+    'bottomless-pit': -9000
+  );
 
-    @if not map-has-key($z-layers, $layer) {
-        @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted.";
-    }
+  @if not map-has-key($z-layers, $layer) {
+    @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted.";
+  }
 
-    @return map-get($z-layers, $layer);
+  @return map-get($z-layers, $layer);
 }
 
 // Easing Curves
 // -------------------------
 // Usage: html-tag { @include ease('all', 'swift-ease-in-out'); }
-$easing-curves: ("swift-ease-out": ("duration": 400ms, "curve": "cubic-bezier(0.25, 0.8, 0.25, 1)"), "swift-ease-in": ("duration": 300ms, "curve": "cubic-bezier(0.55, 0, 0.55, 0.2)"), "swift-ease-in-out": ("duration": 500ms, "curve": "cubic-bezier(0.35, 0, 0.25, 1)"));
+$easing-curves: (
+  'swift-ease-out':
+    (
+      'duration': 400ms,
+      'curve': 'cubic-bezier(0.25, 0.8, 0.25, 1)'
+    ),
+  'swift-ease-in':
+    (
+      'duration': 300ms,
+      'curve': 'cubic-bezier(0.55, 0, 0.55, 0.2)'
+    ),
+  'swift-ease-in-out':
+    (
+      'duration': 500ms,
+      'curve': 'cubic-bezier(0.35, 0, 0.25, 1)'
+    )
+);
 
 @function map-deep-get($map, $keys...) {
-    @each $key in $keys {
-        $map: map-get($map, $key);
-    }
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
 
-    @return $map;
+  @return $map;
 }
 
 @mixin ease($target, $curve-name) {
-    $duration: map-deep-get($easing-curves, $curve-name, "duration");
-    $curve: map-deep-get($easing-curves, $curve-name, "curve");
+  $duration: map-deep-get($easing-curves, $curve-name, 'duration');
+  $curve: map-deep-get($easing-curves, $curve-name, 'curve');
 
-    transition: #{$target $duration $curve};
+  transition: #{$target $duration $curve};
 }
 
 // Animations
 // -------------------------
 @keyframes rotate {
-    0% {
-        transform: rotateZ(0deg);
-    }
+  0% {
+    transform: rotateZ(0deg);
+  }
 
-    75% {
-        transform: rotateZ(200deg);
-    }
+  75% {
+    transform: rotateZ(200deg);
+  }
 
-    100% {
-        transform: rotateZ(180deg);
-    }
+  100% {
+    transform: rotateZ(180deg);
+  }
 }
 
 @keyframes half-rotate {
-    0% {
-        transform: rotateZ(45deg);
-    }
+  0% {
+    transform: rotateZ(45deg);
+  }
 
-    75% {
-        transform: rotateZ(100deg);
-    }
+  75% {
+    transform: rotateZ(100deg);
+  }
 
-    100% {
-        transform: rotateZ(90deg);
-    }
+  100% {
+    transform: rotateZ(90deg);
+  }
 }
 
 @keyframes rotateBack {
-    0% {
-        transform: rotateZ(90deg);
-    }
+  0% {
+    transform: rotateZ(90deg);
+  }
 
-    100% {
-        transform: rotateZ(0deg);
-    }
+  100% {
+    transform: rotateZ(0deg);
+  }
 }
 
 @keyframes show {
-    0% {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
 
-    75% {
-        transform: translateX(0px);
-    }
+  75% {
+    transform: translateX(0px);
+  }
 
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

@@ -1,7 +1,7 @@
 demo-card-standard {
   display: flex;
   flex-flow: row wrap; //justify-content: space-between;
-  &>* {
+  & > * {
     margin: 5px;
     flex: 1 1 40%;
     height: fit-content;

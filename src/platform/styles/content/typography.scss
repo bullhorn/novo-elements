@@ -51,7 +51,7 @@ h5 {
   margin: 0;
   padding: 0.5em;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, .45);
+  color: rgba(0, 0, 0, 0.45);
 }
 
 h6 {
@@ -88,7 +88,7 @@ i {
   font-size: $base-icon-size;
   display: inline-block;
   &[theme] {
-    &[theme="contained"] {
+    &[theme='contained'] {
       font-size: 0.8em;
       border-radius: 0.55em;
       height: $icon-height;
@@ -98,8 +98,7 @@ i {
         vertical-align: baseline;
         line-height: 1.8;
       }
-      @each $entity,
-      $color in $all-colors {
+      @each $entity, $color in $all-colors {
         &.#{$entity} {
           color: $white;
           background: $color;
@@ -109,9 +108,8 @@ i {
         font-size: 1.2em;
       }
     }
-    &[theme="entity"] {
-      @each $entity,
-      $color in $all-colors {
+    &[theme='entity'] {
+      @each $entity, $color in $all-colors {
         &.#{$entity} {
           color: $color;
           background: transparent;
@@ -138,7 +136,7 @@ span {
       vertical-align: middle !important;
     }
     &[theme] {
-      &[theme="contained"] {
+      &[theme='contained'] {
         font-size: 0.8em;
         vertical-align: 0.1em;
         &:before {
@@ -170,8 +168,8 @@ a {
 // Code
 code {
   font-size: 0.8em;
-  background: #F8F8F8;
-  border: 1px solid #E9EAEA;
-  color: #4C545A;
+  background: #f8f8f8;
+  border: 1px solid #e9eaea;
+  color: #4c545a;
   padding: 2px 4px;
 }

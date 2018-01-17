@@ -8,5 +8,4 @@ import { NovoCardComponent } from './card.component';
   declarations: [NovoCardComponent],
   exports: [NovoCardComponent],
 })
-export class NovoCardModule {
-}
+export class NovoCardModule {}

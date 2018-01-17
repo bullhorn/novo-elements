@@ -7,10 +7,7 @@ import { DemoBoxComponent } from './demo-box/demo-box.component';
 import { DemoSectionComponent } from './demo-section/demo-section.component';
 
 @NgModule({
-  declarations: [
-    DemoBoxComponent,
-    DemoSectionComponent,
-  ],
+  declarations: [DemoBoxComponent, DemoSectionComponent],
   imports: [
     // NG2
     CommonModule,
@@ -18,10 +15,6 @@ import { DemoSectionComponent } from './demo-section/demo-section.component';
     NovoTabsModule,
     NovoHeaderModule,
   ],
-  exports: [
-    DemoBoxComponent,
-    DemoSectionComponent,
-  ],
+  exports: [DemoBoxComponent, DemoSectionComponent],
 })
-export class SharedModule {
-}
+export class SharedModule {}

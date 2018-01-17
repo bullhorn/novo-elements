@@ -4,28 +4,27 @@ import { NovoTabComponent } from './tab.component';
 import { NovoTabsModule } from './tabs.module';
 
 describe('NovoTabComponent', () => {
-    let comp: NovoTabComponent;
-    let fixture: ComponentFixture<NovoTabComponent>;
+  let comp: NovoTabComponent;
+  let fixture: ComponentFixture<NovoTabComponent>;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [NovoTabsModule],
-            schemas: [NO_ERRORS_SCHEMA],
-        });
-        fixture = TestBed.createComponent(NovoTabComponent);
-        comp = fixture.componentInstance;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [NovoTabsModule],
+      schemas: [NO_ERRORS_SCHEMA],
     });
+    fixture = TestBed.createComponent(NovoTabComponent);
+    comp = fixture.componentInstance;
+  });
 
-    it('can load instance', () => {
-        expect(comp).toBeTruthy();
-    });
+  it('can load instance', () => {
+    expect(comp).toBeTruthy();
+  });
 
-    it('active defaults to: false', () => {
-        expect(comp.active).toEqual(false);
-    });
+  it('active defaults to: false', () => {
+    expect(comp.active).toEqual(false);
+  });
 
-    it('disabled defaults to: false', () => {
-        expect(comp.disabled).toEqual(false);
-    });
-
+  it('disabled defaults to: false', () => {
+    expect(comp.disabled).toEqual(false);
+  });
 });

@@ -1,29 +1,19 @@
 <div class="demo-section">
   <header [theme]="'white'">
-    <h2 routerLink="."
-        [attr.fragment]="name"
-        [id]="name"
-        novo-title>{{ label }}</h2>
-    <button novo-action
-            (click)="toggleCode()"
-            theme="dialogue">
+    <h2 routerLink="." [attr.fragment]="name" [id]="name" novo-title>{{ label }}</h2>
+    <button novo-action (click)="toggleCode()" theme="dialogue">
       <span *ngIf="!showCode">Show</span>
       <span *ngIf="showCode">Hide</span> Code
     </button>
   </header>
-  <div class="demo-box-code"
-       [hidden]="!showCode">
-    <novo-nav theme="light"
-              [outlet]="codeOutlet"
-              direction="horizontal">
-      <novo-tab *ngIf="ts"
-                active="true">Typescript</novo-tab>
+  <div class="demo-box-code" [hidden]="!showCode">
+    <novo-nav theme="light" [outlet]="codeOutlet" direction="horizontal">
+      <novo-tab *ngIf="ts" active="true">Typescript</novo-tab>
       <novo-tab *ngIf="html">HTML</novo-tab>
       <novo-tab *ngIf="style">SCSS</novo-tab>
     </novo-nav>
     <novo-nav-outlet #codeOutlet>
-      <novo-nav-content *ngIf="ts"
-                        active="true">
+      <novo-nav-content *ngIf="ts" active="true">
         <pre class="prettyprint linenums lang-js">{{ ts }}</pre>
       </novo-nav-content>
       <novo-nav-content *ngIf="html">

@@ -1,10 +1,4 @@
-<novo-search icon="location"
-             theme="grapefruit"
-             alwaysOpen="true"
-             [(ngModel)]="geo"
-             displayField="formatted_address"
-             [closeOnSelect]="false"
-             hint="Search Google to find your address.">
+<novo-search icon="location" theme="grapefruit" alwaysOpen="true" [(ngModel)]="geo" displayField="formatted_address" [closeOnSelect]="false" hint="Search Google to find your address.">
   <google-places-list [(term)]="geo"></google-places-list>
 </novo-search>
 

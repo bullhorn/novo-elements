@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
   selector: 'demo-tabs-standard',
   templateUrl: './standard.html',
 })
-export class DemoTabsStandardComponent {
-}
+export class DemoTabsStandardComponent {}

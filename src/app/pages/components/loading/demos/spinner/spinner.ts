@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
   selector: 'demo-loading-spinner',
   templateUrl: './spinner.html',
 })
-export class DemoSpinnerComponent {
-
-}
+export class DemoSpinnerComponent {}

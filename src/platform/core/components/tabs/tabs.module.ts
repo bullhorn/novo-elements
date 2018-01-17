@@ -4,7 +4,10 @@ import { CommonModule } from '@angular/common';
 import { NovoNavComponent } from './tabs.component';
 import { NovoTabComponent } from './tab.component';
 import { NovoTabLinkComponent } from './tab-link.component';
-import { NovoNavOutletComponent, NovoNavContentComponent } from './tab-outlet.component';
+import {
+  NovoNavOutletComponent,
+  NovoNavContentComponent,
+} from './tab-outlet.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -23,5 +26,4 @@ import { NovoNavOutletComponent, NovoNavContentComponent } from './tab-outlet.co
     NovoNavContentComponent,
   ],
 })
-export class NovoTabsModule {
-}
+export class NovoTabsModule {}

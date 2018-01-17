@@ -28,10 +28,7 @@ import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/local-storage.service';
 
 @NgModule({
-  declarations: [
-    GroupByPipe,
-    DecodeURIPipe,
-  ],
+  declarations: [GroupByPipe, DecodeURIPipe],
   exports: [
     // Modules
     NovoButtonModule,
@@ -64,4 +61,4 @@ import { LocalStorageService } from './services/storage/local-storage.service';
     { provide: GlobalRef, useClass: BrowserGlobalRef },
   ],
 })
-export class NovoElementsModule { }
+export class NovoElementsModule {}

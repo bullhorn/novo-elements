@@ -1,5 +1,5 @@
-@import "./platform/novo-elements";
-@import "./app/pages/components/components.component";
+@import './platform/novo-elements';
+@import './app/pages/components/components.component';
 html,
 body {
   height: 100%;
@@ -23,13 +23,13 @@ main.demo-pages {
 
 section.demo-section {
   height: 100%;
-  >nav {
+  > nav {
     overflow: auto;
     min-width: 150px;
     max-width: 150px;
     height: 100%;
     background-color: lighten($dark, 15%);
-    >a {
+    > a {
       font-size: 0.9em;
       width: 100%;
       padding: $medium;
@@ -44,7 +44,7 @@ section.demo-section {
       }
     }
   }
-  >div {
+  > div {
     position: relative;
     height: 100%;
     overflow: auto;
@@ -65,7 +65,7 @@ div.usage-doc {
     padding: $small;
     code {
       font-size: 12px;
-      font-family: "Roboto", sans-serif, monospace;
+      font-family: 'Roboto', sans-serif, monospace;
       background: inherit;
       color: inherit;
       border: none;

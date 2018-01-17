@@ -22,7 +22,7 @@ export class NovoAlertDialogComponent {
   public message: string;
   public closeButton: string = 'CLOSE';
 
-  constructor(private _dialogRef: NovoDialogRef<NovoAlertDialogComponent>) { }
+  constructor(private _dialogRef: NovoDialogRef<NovoAlertDialogComponent>) {}
 
   public close(): void {
     this._dialogRef.close();
@@ -52,7 +52,7 @@ export class NovoConfirmDialogComponent {
   public cancelButton: string = 'CANCEL';
   public acceptButton: string = 'ACCEPT';
 
-  constructor(private _dialogRef: NovoDialogRef<NovoConfirmDialogComponent>) { }
+  constructor(private _dialogRef: NovoDialogRef<NovoConfirmDialogComponent>) {}
 
   public cancel(): void {
     this._dialogRef.close(false);
@@ -112,7 +112,7 @@ export class NovoNotificationDialogComponent {
     }
   }
 
-  constructor(private _dialogRef: NovoDialogRef<NovoConfirmDialogComponent>) { }
+  constructor(private _dialogRef: NovoDialogRef<NovoConfirmDialogComponent>) {}
 
   public submit(value: string): void {
     this._dialogRef.close(value);

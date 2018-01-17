@@ -8,5 +8,4 @@ import { NovoButtonComponent } from './button.component';
   declarations: [NovoButtonComponent],
   exports: [NovoButtonComponent],
 })
-export class NovoButtonModule {
-}
+export class NovoButtonModule {}

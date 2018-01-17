@@ -44,7 +44,6 @@ export interface INotificationConfig extends IDialogConfig {
  * Configuration for opening a modal dialog with the NovoDialog service.
  */
 export class NovoDialogConfig<D = any> {
-
   /**
    * Where the attached component should live in Angular's *logical* component tree.
    * This affects what is available for injection and the change detection order for the

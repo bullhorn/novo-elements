@@ -71,7 +71,6 @@ describe('Service: NovoLabelService', () => {
 
   it('should initialize with all its label values.', () => {
     expect(service).toBeDefined();
-
   });
 
   describe('Method: selectedRecords()', () => {
@@ -101,11 +100,13 @@ describe('Service: NovoLabelService', () => {
     it('should return correct value.', () => {
       let sampleDate: Date = new Date('January 1, 2017');
       let value: string = '1/1/2017';
-      expect(service.formatDateWithFormat(sampleDate, {
-        month: 'numeric',
-        day: 'numeric',
-        year: 'numeric',
-      })).toEqual(value);
+      expect(
+        service.formatDateWithFormat(sampleDate, {
+          month: 'numeric',
+          day: 'numeric',
+          year: 'numeric',
+        }),
+      ).toEqual(value);
     });
   });
 
@@ -114,7 +115,15 @@ describe('Service: NovoLabelService', () => {
       expect(service.getWeekdays).toBeDefined();
     });
     it('should return correct value.', () => {
-      let value: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      let value: string[] = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ];
       expect(service.getWeekdays()).toEqual(value);
     });
   });
@@ -124,7 +133,20 @@ describe('Service: NovoLabelService', () => {
       expect(service.getMonths).toBeDefined();
     });
     it('should return correct value.', () => {
-      let value: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      let value: string[] = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
       expect(service.getMonths()).toEqual(value);
     });
   });

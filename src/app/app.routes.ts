@@ -5,9 +5,21 @@ import { PreloadSelectModulesStrategy } from './services';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'docs', data: { preload: false }, loadChildren: './pages/docs/docs.module#DocsModule' },
-  { path: 'components', data: { preload: false }, loadChildren: './pages/components/components.module#ComponentsModule' },
-  { path: 'style-guide', data: { preload: false }, loadChildren: './pages/style-guide/style-guide.module#StyleGuideModule' },
+  {
+    path: 'docs',
+    data: { preload: false },
+    loadChildren: './pages/docs/docs.module#DocsModule',
+  },
+  {
+    path: 'components',
+    data: { preload: false },
+    loadChildren: './pages/components/components.module#ComponentsModule',
+  },
+  {
+    path: 'style-guide',
+    data: { preload: false },
+    loadChildren: './pages/style-guide/style-guide.module#StyleGuideModule',
+  },
   { path: '**', redirectTo: '/' },
 ];
 

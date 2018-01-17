@@ -8,5 +8,4 @@ import { NovoSlidesComponent } from './slides.component';
   declarations: [NovoSlidesComponent],
   exports: [NovoSlidesComponent],
 })
-export class NovoSlidesModule {
-}
+export class NovoSlidesModule {}

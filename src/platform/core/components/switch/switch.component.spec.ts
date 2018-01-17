@@ -5,30 +5,29 @@ import { NovoSwitchComponent } from './switch.component';
 import { NovoSwitchModule } from './switch.module';
 
 describe('NovoSwitchComponent', () => {
-    let comp: NovoSwitchComponent;
-    let fixture: ComponentFixture<NovoSwitchComponent>;
+  let comp: NovoSwitchComponent;
+  let fixture: ComponentFixture<NovoSwitchComponent>;
 
-    beforeEach(() => {
-        const changeDetectorRefStub: any = {
-            markForCheck: () => ({}),
-        };
-        TestBed.configureTestingModule({
-            imports: [NovoSwitchModule],
-            schemas: [NO_ERRORS_SCHEMA],
-            providers: [
-                { provide: ChangeDetectorRef, useValue: changeDetectorRefStub },
-            ],
-        });
-        fixture = TestBed.createComponent(NovoSwitchComponent);
-        comp = fixture.componentInstance;
+  beforeEach(() => {
+    const changeDetectorRefStub: any = {
+      markForCheck: () => ({}),
+    };
+    TestBed.configureTestingModule({
+      imports: [NovoSwitchModule],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        { provide: ChangeDetectorRef, useValue: changeDetectorRefStub },
+      ],
     });
+    fixture = TestBed.createComponent(NovoSwitchComponent);
+    comp = fixture.componentInstance;
+  });
 
-    it('can load instance', () => {
-        expect(comp).toBeTruthy();
-    });
+  it('can load instance', () => {
+    expect(comp).toBeTruthy();
+  });
 
-    it('role defaults to: checkbox', () => {
-        expect(comp.role).toEqual('checkbox');
-    });
-
+  it('role defaults to: checkbox', () => {
+    expect(comp.role).toEqual('checkbox');
+  });
 });

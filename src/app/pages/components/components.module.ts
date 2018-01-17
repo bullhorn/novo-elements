@@ -35,7 +35,10 @@ import { TILES_DEMO_COMPONENTS } from './tiles/demos';
 import { LISTS_DEMO_COMPONENTS } from './lists/demos';
 import { MENUS_DEMO_COMPONENTS } from './menus/demos';
 import { CARDS_DEMO_COMPONENTS } from './cards/demos';
-import { DIALOGS_DEMO_COMPONENTS, DIALOGS_DEMO_ENTRY_COMPONENTS } from './dialogs/demos';
+import {
+  DIALOGS_DEMO_COMPONENTS,
+  DIALOGS_DEMO_ENTRY_COMPONENTS,
+} from './dialogs/demos';
 import { TABS_DEMO_COMPONENTS } from './tabs/demos';
 import { VALUES_DEMO_COMPONENTS } from './values/demos';
 import { SWITCH_DEMO_COMPONENTS } from './switches/demos';
@@ -80,9 +83,7 @@ import { RADIO_DEMO_COMPONENTS } from './radio/demos';
     ...SELECT_DEMO_COMPONENTS,
     ...RADIO_DEMO_COMPONENTS,
   ],
-  entryComponents: [
-    ...DIALOGS_DEMO_ENTRY_COMPONENTS,
-  ],
+  entryComponents: [...DIALOGS_DEMO_ENTRY_COMPONENTS],
   imports: [
     // NG2
     CommonModule,
@@ -96,4 +97,4 @@ import { RADIO_DEMO_COMPONENTS } from './radio/demos';
     SharedModule,
   ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

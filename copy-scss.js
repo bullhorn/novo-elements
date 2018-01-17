@@ -12,29 +12,32 @@ return Promise.resolve()
   .then(() => _relativeCopy('**/*.scss', srcFolder, distFolder))
   .then(() => console.log('SCSS files copy succeeded.'))
   .catch(e => {
-    console.error('\Build failed. See below for errors.\n');
+    console.error('Build failed. See below for errors.\n');
     console.error(e);
     process.exit(1);
   });
 
-
 // Copy files maintaining relative paths.
 function _relativeCopy(fileGlob, from, to) {
   return new Promise((resolve, reject) => {
-    glob(fileGlob, {
-      cwd: from,
-      nodir: true
-    }, (err, files) => {
-      if (err) reject(err);
-      files.forEach(file => {
-        const origin = path.join(from, file);
-        const dest = path.join(to, file);
-        const data = fs.readFileSync(origin, 'utf-8');
-        _recursiveMkDir(path.dirname(dest));
-        fs.writeFileSync(dest, data);
-        resolve();
-      })
-    })
+    glob(
+      fileGlob,
+      {
+        cwd: from,
+        nodir: true,
+      },
+      (err, files) => {
+        if (err) reject(err);
+        files.forEach(file => {
+          const origin = path.join(from, file);
+          const dest = path.join(to, file);
+          const data = fs.readFileSync(origin, 'utf-8');
+          _recursiveMkDir(path.dirname(dest));
+          fs.writeFileSync(dest, data);
+          resolve();
+        });
+      },
+    );
   });
 }
 

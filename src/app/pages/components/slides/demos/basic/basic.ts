@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
   selector: 'demo-slides-basic',
   templateUrl: './basic.html',
 })
-export class DemoSlidesComponent {
-}
+export class DemoSlidesComponent {}

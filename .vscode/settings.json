@@ -1,2 +1,31 @@
 {
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "files.autoSave": "onFocusChange",
+  "tslint.autoFixOnSave": true,
+  "tslint.rulesDirectory": "./node_modules/codelyzer",
+  "todohighlight.keywords": [
+    {
+      "text": "TODO",
+      "color": "#fff",
+      "backgroundColor": "#E9BB58",
+      "overviewRulerColor": "rgba(255, 189, 42, 0.8)",
+      "isWholeLine": true
+    },
+    {
+      "text": "FIXME",
+      "color": "#fff",
+      "backgroundColor": "#F06292",
+      "overviewRulerColor": "rgba(255, 189, 42, 0.8)",
+      "isWholeLine": true
+    },
+    {
+      "text": "FIX",
+      "color": "#fff",
+      "backgroundColor": "#F06292",
+      "overviewRulerColor": "rgba(255, 189, 42, 0.8)",
+      "isWholeLine": true
+    }
+  ]
 }

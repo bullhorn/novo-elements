@@ -1,4 +1,11 @@
-import { Component, Input, AfterContentInit, HostBinding, ContentChildren, QueryList } from '@angular/core';
+import {
+  Component,
+  Input,
+  AfterContentInit,
+  HostBinding,
+  ContentChildren,
+  QueryList,
+} from '@angular/core';
 import { NovoTabComponent } from './tab.component';
 import { NovoNavOutletComponent } from './tab-outlet.component';
 
@@ -8,10 +15,18 @@ import { NovoNavOutletComponent } from './tab-outlet.component';
   template: '<ng-content></ng-content>',
 })
 export class NovoNavComponent implements AfterContentInit {
-  @HostBinding('class.condensed') @Input() public condensed: boolean = false;
-  @HostBinding('class.block') @Input() public block: boolean = false;
-  @HostBinding('attr.theme') @Input() public theme: string = '';
-  @HostBinding('attr.direction') @Input() public direction: string = 'horizontal';
+  @HostBinding('class.condensed')
+  @Input()
+  public condensed: boolean = false;
+  @HostBinding('class.block')
+  @Input()
+  public block: boolean = false;
+  @HostBinding('attr.theme')
+  @Input()
+  public theme: string = '';
+  @HostBinding('attr.direction')
+  @Input()
+  public direction: string = 'horizontal';
   @Input() public router: string;
   @Input() public outlet: NovoNavOutletComponent;
   @ContentChildren(NovoTabComponent) public tabs: QueryList<NovoTabComponent>;
@@ -23,7 +38,9 @@ export class NovoNavComponent implements AfterContentInit {
       this.onSelect(this.tabs.toArray()[this.selectedIndex]);
     }
   }
-  public get selectedIndex(): number { return this._selectedIndex; }
+  public get selectedIndex(): number {
+    return this._selectedIndex;
+  }
   private _selectedIndex: number = 0;
 
   public ngAfterContentInit(): void {
