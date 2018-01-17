@@ -12,20 +12,16 @@ env:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - npm start
-
-before_install:
-  - npm install -g cypress-cli
 
 install:
   - npm install
   - npm install -g angular-cli-ghpages
-  - npm install -g cypress-cli
+  # - npm install -g cypress-cli
 
 script:
   - npm run lint
   - npm run test
-  - cypress run --record --key f50830ba-dbec-4bb8-8d5d-acd240422b1c
+  # - cypress run --record --key f50830ba-dbec-4bb8-8d5d-acd240422b1c
   - npm run build
   - npm run build-ghpages
 
