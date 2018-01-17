@@ -1,12 +1,11 @@
+import { navigateTo } from '../support/po';
+
 context('Demo: Tabs', () => {
-  beforeEach(() => {
-    let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/tabs');
-  });
+  beforeEach(navigateTo('/#/components/tabs'));
 
   context('standard', () => {
     it('switches tabs', () => {
-      let element = 'novo-tab';
+      let element: string = 'novo-tab';
       cy
         .get(`demo-tabs-standard ${element}`)
         .eq(1)

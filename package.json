@@ -25,15 +25,26 @@
     "snapshot-publish": "bash snapshot-publish"
   },
   "lint-staged": {
-    "*.ts": ["tslint"],
-    "*.{js,json,css,md,ts}": ["prettier --write", "git add"]
+    "*.ts": [
+      "tslint"
+    ],
+    "*.{js,json,css,md,ts}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "jest": {
     "preset": "jest-preset-angular",
     "setupTestFrameworkScriptFile": "<rootDir>/src/jest.ts",
     "testRegex": "src/platform/.*\\.spec\\.(ts|js)$",
     "collectCoverage": true,
-    "coverageReporters": ["json", "lcov", "text", "text-summary", "html"],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "text-summary",
+      "html"
+    ],
     "collectCoverageFrom": [
       "src/platform/**/*.ts",
       "!src/platform/**/index.ts",
@@ -42,7 +53,9 @@
       "!**/node_modules/**"
     ]
   },
-  "keywords": ["angular2"],
+  "keywords": [
+    "angular2"
+  ],
   "author": "Joshua Godi <joshuagodi@gmail.com>",
   "contributors": [
     {
@@ -60,9 +73,9 @@
   "homepage": "https://github.com/bullhorn/novo-elements#readme",
   "private": false,
   "peerDependencies": {
-    "@angular/common": "^5.0.0",
-    "@angular/core": "^5.0.0",
-    "@angular/forms": "^5.0.0"
+    "@angular/common": "^5.2.0",
+    "@angular/core": "^5.2.0",
+    "@angular/forms": "^5.2.0"
   },
   "dependencies": {
     "@bullhorn/bullhorn-icons": "^2.1.1",
@@ -70,46 +83,47 @@
     "roboto-fontface": "^0.8.0"
   },
   "devDependencies": {
-    "@angular/animations": "^5.0.0",
+    "@angular/animations": "^5.2.0",
     "@angular/cdk": "^5.0.0",
-    "@angular/cli": "1.5.4",
-    "@angular/common": "^5.0.0",
-    "@angular/compiler": "^5.0.0",
-    "@angular/compiler-cli": "^5.0.0",
-    "@angular/core": "^5.0.0",
-    "@angular/forms": "^5.0.0",
-    "@angular/http": "^5.0.0",
-    "@angular/language-service": "^5.0.0",
-    "@angular/platform-browser": "^5.0.0",
-    "@angular/platform-browser-dynamic": "^5.0.0",
-    "@angular/router": "^5.0.0",
-    "@types/cypress": "^0.1.1",
+    "@angular/cli": "1.6.4",
+    "@angular/common": "^5.2.0",
+    "@angular/compiler": "^5.2.0",
+    "@angular/compiler-cli": "^5.2.0",
+    "@angular/core": "^5.2.0",
+    "@angular/forms": "^5.2.0",
+    "@angular/http": "^5.2.0",
+    "@angular/language-service": "^5.2.0",
+    "@angular/platform-browser": "^5.2.0",
+    "@angular/platform-browser-dynamic": "^5.2.0",
+    "@angular/router": "^5.2.0",
+    "@bahmutov/add-typescript-to-cypress": "^1.1.1",
     "@types/faker": "^4.1.2",
-    "@types/jest": "^20.0.6",
+    "@types/jest": "^22.0.1",
     "@types/node": "~6.0.60",
     "classlist.js": "^1.1.20150312",
     "codelyzer": "^4.0.1",
     "copyfiles": "^1.2.0",
     "core-js": "^2.4.1",
     "coveralls": "^3.0.0",
+    "cypress": "^1.4.1",
     "faker": "^4.1.0",
     "galaxy-parser": "^1.0.45",
     "glob": "^7.1.2",
     "html-loader": "^0.5.1",
     "husky": "^0.14.3",
-    "jest": "^20.0.4",
-    "jest-preset-angular": "^2.0.5",
+    "jest": "^22.1.2",
+    "jest-preset-angular": "^5.0.0",
     "lint-staged": "^6.0.0",
     "markdown-loader": "^2.0.1",
     "ng-packagr": "^1.5.0-rc.1",
     "ng2-page-scroll": "^4.0.0-beta.12",
     "prettier": "^1.10.2",
     "rimraf": "^2.6.2",
-    "rxjs": "5.5.2",
+    "rxjs": "5.5.6",
     "standard-version": "^4.2.0",
-    "tslint": "~5.7.0",
+    "tslint": "~5.9.1",
     "typescript": "~2.4.2",
-    "zone.js": "0.8.14"
+    "zone.js": "0.8.20"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

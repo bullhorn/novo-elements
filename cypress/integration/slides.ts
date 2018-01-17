@@ -1,8 +1,7 @@
+import { navigateTo } from '../support/po';
+
 context('Demo: slides', () => {
-  beforeEach(() => {
-    let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/slides');
-  });
+  beforeEach(navigateTo('/#/components/slides'));
 
   context('basic slides', () => {
     context('buttons', () => {

@@ -1,8 +1,7 @@
+import { navigateTo } from '../support/po';
+
 context('Demo: Tiles', () => {
-  beforeEach(() => {
-    let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/tiles');
-  });
+  beforeEach(navigateTo('/#/components/tiles'));
 
   context('basic', () => {
     it('moves active tile', () => {

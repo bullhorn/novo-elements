@@ -1,12 +1,11 @@
+import { navigateTo } from '../support/po';
+
 context('Demo: Switches', () => {
-  beforeEach(() => {
-    let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/switches');
-  });
+  beforeEach(navigateTo('/#/components/switches'));
 
   context('standard', () => {
     it('toggles on click', () => {
-      let element = 'novo-switch';
+      let element: string = 'novo-switch';
       cy
         .get(`demo-switch-standard ${element}`)
         .eq(0)
@@ -16,7 +15,7 @@ context('Demo: Switches', () => {
     });
 
     it('toggles on click', () => {
-      let element = 'novo-switch';
+      let element: string = 'novo-switch';
       cy
         .get(`demo-switch-standard ${element}`)
         .eq(1)

@@ -1,8 +1,7 @@
+import { navigateTo } from '../support/po';
+
 context('Demo: Search', () => {
-  before(() => {
-    let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/searches');
-  });
+  beforeEach(navigateTo('/#/components/searches'));
 
   context('standard', () => {
     it('should open on click', () => {

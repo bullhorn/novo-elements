@@ -1,15 +1,14 @@
+import { navigateTo } from '../support/po';
+
 context('Demo: Radio', () => {
-  beforeEach(() => {
-    let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/radio');
-  });
+  beforeEach(navigateTo('/#/components/radio'));
 
-  const BUTTON_THEMES = ['button', 'icon'];
+  const BUTTON_THEMES: string[] = ['button', 'icon'];
 
-  const THEMES = ['basic', 'vertical'];
+  const THEMES: string[] = ['basic', 'vertical'];
 
   context('moves active tile', () => {
-    THEMES.forEach(theme => {
+    THEMES.forEach((theme: string) => {
       it(theme, () => {
         cy
           .get(`demo-radio-${theme} > novo-radio > label > div > i`)
@@ -21,7 +20,7 @@ context('Demo: Radio', () => {
     });
 
     context('moves active tile', () => {
-      BUTTON_THEMES.forEach(theme => {
+      BUTTON_THEMES.forEach((theme: string) => {
         it(theme, () => {
           cy
             .get(

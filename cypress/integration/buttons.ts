@@ -1,4 +1,6 @@
-const COLORS = [
+import { navigateTo } from '../support/po';
+
+const COLORS: string[] = [
   'positive',
   'success',
   'negative',
@@ -11,20 +13,23 @@ const COLORS = [
   'neutral',
 ];
 
-const THEMES = ['primary', 'secondary', 'dialogue', 'standard', 'icon'];
+const THEMES: string[] = [
+  'primary',
+  'secondary',
+  'dialogue',
+  'standard',
+  'icon',
+];
 
 context('Demo: Buttons', () => {
-  beforeEach(() => {
-    let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/buttons');
-  });
+  beforeEach(navigateTo('/#/components/buttons'));
 
   context('themes', () => {
-    THEMES.forEach(theme => {
+    THEMES.forEach((theme: string) => {
       it(theme, () => {
-        let selector = `demo-buttons-${theme} > button`;
-        let i = 0;
-        COLORS.forEach(color => {
+        let selector: string = `demo-buttons-${theme} > button`;
+        let i: number = 0;
+        COLORS.forEach((color: string) => {
           cy
             .get(selector)
             .eq(i)
@@ -35,7 +40,7 @@ context('Demo: Buttons', () => {
             .should('have.class', COLORS[i]);
           i++;
         });
-        COLORS.forEach(color => {
+        COLORS.forEach((color: string) => {
           cy
             .get(selector)
             .eq(i)

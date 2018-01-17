@@ -1,12 +1,11 @@
+import { navigateTo } from '../support/po';
+
 context('Demo: Lists', () => {
-  beforeEach(() => {
-    let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/lists');
-  });
+  beforeEach(navigateTo('/#/components/lists'));
 
   context('standard', () => {
     it('focus on click', () => {
-      let element = 'novo-list-item';
+      let element: string = 'novo-list-item';
       cy
         .get(`demo-list-standard ${element}`)
         .eq(0)
@@ -25,7 +24,7 @@ context('Demo: Lists', () => {
 
   context('advanced', () => {
     it('focus on click', () => {
-      let element = 'novo-list-item';
+      let element: string = 'novo-list-item';
       cy
         .get(`demo-list-advanced ${element}`)
         .eq(0)
@@ -50,7 +49,7 @@ context('Demo: Lists', () => {
 
   context('entity', () => {
     it('should work the same for entities', () => {
-      let element = 'novo-list-item';
+      let element: string = 'novo-list-item';
       cy
         .get(`demo-list-entity ${element}`)
         .eq(0)

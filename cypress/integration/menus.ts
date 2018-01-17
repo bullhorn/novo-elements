@@ -1,8 +1,7 @@
+import { navigateTo } from '../support/po';
+
 context('Demo: Menu', () => {
-  beforeEach(() => {
-    let baseURL = Cypress.env('host') || 'http://localhost:4200';
-    cy.visit(baseURL + '/#/components/menus');
-  });
+  beforeEach(navigateTo('/#/components/menus'));
 
   context('standard', () => {
     it('opens on click', () => {
