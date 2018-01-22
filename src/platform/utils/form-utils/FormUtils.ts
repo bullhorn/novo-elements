@@ -152,7 +152,7 @@ export class FormUtils {
         return key.indexOf('customEncrypted') > -1;
     }
 
-    getControlForField(field: any, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any, forTable: boolean = false) {
+    getControlForField(field: any, http, config: { token?: string, restUrl?: string, military?: boolean, settings?: any }, overrides?: any, forTable: boolean = false) {
         // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
         // TODO: (cont.) as the setter of the field argument
         let type: string = this.determineInputType(field) || field.type;
@@ -352,7 +352,7 @@ export class FormUtils {
         return ret;
     }
 
-    toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {
+    toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean, settings?: any }, overrides?) {
         let fieldsets: Array<NovoFieldset> = [];
         let ranges = [];
         if (meta && meta.fields) {
@@ -437,7 +437,8 @@ export class FormUtils {
         }
     }
 
-    getControlOptions(field: any, http: Http, config: { token?: string, restUrl?: string, military?: boolean }, settings: any = {}): any {
+    getControlOptions(field: any, http: Http, config: { token?: string, restUrl?: string, military?: boolean, settings?: any }): any {
+        let settings: any = config.settings || {};
         // TODO: The token property of config is the only property used; just pass in `token: string`
         if (field.dataType === 'Boolean' && !field.options) {
             // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it

@@ -281,7 +281,7 @@ export class OptionsService {
             case 'BusinessSector':
             case 'Certification':
             case 'CertificationGroup':
-                cache = (Cache as any).get(`options/${entity}`);
+                cache = (Cache as any).get(`options/${entity}`); //FIXME - Cache was from symphony-staffing
                 options = cache ? cache.data : (query) => {
                     return new Promise((resolve, reject) => {
                         if (query && query.length) {
