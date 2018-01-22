@@ -25,6 +25,7 @@ import { SearchesComponent } from './searches/searches.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { SelectComponent } from './select/select.component';
 import { RadioComponent } from './radio/radio.component';
+import { TipwellComponent } from './tipwell/tipwell.component';
 
 import { BUTTON_DEMO_COMPONENTS } from './buttons/demos';
 import { HEADER_DEMO_COMPONENTS } from './headers/demos';
@@ -45,6 +46,7 @@ import { SEARCH_DEMO_COMPONENTS } from './searches/demos';
 import { AUTOCOMPLETE_DEMO_COMPONENTS } from './autocomplete/demos';
 import { SELECT_DEMO_COMPONENTS } from './select/demos';
 import { RADIO_DEMO_COMPONENTS } from './radio/demos';
+import { TIPWELL_DEMO_COMPONENTS } from './tipwell/demos';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { RADIO_DEMO_COMPONENTS } from './radio/demos';
     AutocompleteComponent,
     SelectComponent,
     RadioComponent,
+    TipwellComponent,
     ...BUTTON_DEMO_COMPONENTS,
     ...HEADER_DEMO_COMPONENTS,
     ...LOADING_DEMO_COMPONENTS,
@@ -81,6 +84,7 @@ import { RADIO_DEMO_COMPONENTS } from './radio/demos';
     ...AUTOCOMPLETE_DEMO_COMPONENTS,
     ...SELECT_DEMO_COMPONENTS,
     ...RADIO_DEMO_COMPONENTS,
+    ...TIPWELL_DEMO_COMPONENTS,
   ],
   entryComponents: [...DIALOGS_DEMO_ENTRY_COMPONENTS],
   imports: [

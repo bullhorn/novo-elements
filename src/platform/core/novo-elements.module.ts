@@ -21,6 +21,7 @@ import { NovoAutocompleteModule } from './components/autocomplete';
 import { NovoSelectModule } from './components/select';
 import { NovoOptionModule } from './components/option';
 import { NovoRadioModule } from './components/radio';
+import { NovoTipwellModule } from './components/tipwell';
 
 import { GroupByPipe, DecodeURIPipe } from './pipes';
 
@@ -51,6 +52,7 @@ import { LocalStorageService } from './services/storage/local-storage.service';
     NovoSelectModule,
     NovoOptionModule,
     NovoRadioModule,
+    NovoTipwellModule,
     // Pipes
     GroupByPipe,
     DecodeURIPipe,
