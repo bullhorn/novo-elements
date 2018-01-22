@@ -30,7 +30,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
         <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
     `,
 })
-export class SkillSpecialtyPickerResults extends BasePickerResults {
+export class SkillsSpecialtyPickerResults extends BasePickerResults {
     @HostBinding('class.active') active: boolean = true;
 
     constructor(public element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {

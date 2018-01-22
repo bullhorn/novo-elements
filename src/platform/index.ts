@@ -79,6 +79,8 @@ export { QuickNoteResults } from './elements/quick-note/extras/quick-note-result
 export { PickerResults } from './elements/picker/extras/picker-results/PickerResults';
 export { BasePickerResults } from './elements/picker/extras/base-picker-results/BasePickerResults';
 export { EntityPickerResult, EntityPickerResults } from './elements/picker/extras/entity-picker-results/EntityPickerResults';
+export { DistributionListPickerResults } from './elements/picker/extras/distributionlist-picker-results/DistributionListPickerResults';
+export { SkillsSpecialtyPickerResults } from './elements/picker/extras/skills-picker-results/SkillsSpecialtyPickerResults';
 export { ChecklistPickerResults } from './elements/picker/extras/checklist-picker-results/ChecklistPickerResults';
 export { GroupedMultiPickerResults } from './elements/picker/extras/grouped-multi-picker-results/GroupedMultiPickerResults';
 export { BaseRenderer } from './elements/table/extras/base-renderer/BaseRenderer';

@@ -14,7 +14,7 @@ import { NovoPickerContainer } from './extras/picker-container/PickerContainer';
 import { EntityPickerResult, EntityPickerResults } from './extras/entity-picker-results/EntityPickerResults';
 import { ChecklistPickerResults } from './extras/checklist-picker-results/ChecklistPickerResults';
 import { GroupedMultiPickerResults } from './extras/grouped-multi-picker-results/GroupedMultiPickerResults';
-import { SkillSpecialtyPickerResults } from './extras/skills-picker-results/SkillsSpecialtyPickerResults';
+import { SkillsSpecialtyPickerResults } from './extras/skills-picker-results/SkillsSpecialtyPickerResults';
 import { DistributionListPickerResults } from './extras/distributionlist-picker-results/DistributionListPickerResults';
 
 @NgModule({
@@ -28,7 +28,7 @@ import { DistributionListPickerResults } from './extras/distributionlist-picker-
         ChecklistPickerResults,
         GroupedMultiPickerResults,
         DistributionListPickerResults,
-        SkillSpecialtyPickerResults
+        SkillsSpecialtyPickerResults
     ],
     exports: [
         NovoPickerElement,
@@ -39,7 +39,7 @@ import { DistributionListPickerResults } from './extras/distributionlist-picker-
         ChecklistPickerResults,
         GroupedMultiPickerResults,
         DistributionListPickerResults,
-        SkillSpecialtyPickerResults
+        SkillsSpecialtyPickerResults
     ],
     entryComponents: [
         PickerResults,
@@ -48,7 +48,7 @@ import { DistributionListPickerResults } from './extras/distributionlist-picker-
         ChecklistPickerResults,
         GroupedMultiPickerResults,
         DistributionListPickerResults,
-        SkillSpecialtyPickerResults
+        SkillsSpecialtyPickerResults
     ]
 })
 export class NovoPickerModule {

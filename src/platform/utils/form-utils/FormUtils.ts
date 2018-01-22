@@ -321,7 +321,7 @@ export class FormUtils {
         return control;
     }
 
-    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any, forTable: boolean = false) {
+    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean, }, overrides?: any, forTable: boolean = false) {
         let controls = [];
         if (meta && meta.fields) {
             let fields = meta.fields;
