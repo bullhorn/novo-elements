@@ -9,7 +9,7 @@
     "copy-scss": "node copy-scss.js",
     "cleanup-dist": "rimraf dist/src",
     "build-ghpages": "ng build -prod -aot false --output-path \"dist-ghpages\"",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watch",
     "lint": "ng lint --typeCheck --format codeFrame",
     "lint:fix": "ng lint --typeCheck --format codeFrame --fix",

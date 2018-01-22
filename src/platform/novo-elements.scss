@@ -9,18 +9,18 @@
 @include cdk-overlay();
 @include bullhorn-layout();
 // Components
-@import './core/components/button/button.component';
-@import './core/components/header/header.component';
-@import './core/components/loading/loading.component';
-@import './core/components/list/list.component';
-@import './core/components/tiles/tiles.component';
-@import './core/components/icon/icon.component';
-@import './core/components/menu/menu.component';
-@import './core/components/radio/radio.component';
-@import './core/components/card/card.component';
-@import './core/components/dialog/dialog-container.component';
-// @import "./core/components/tabs/tabs.component";
-@import './core/components/value/value.component';
+@import "./core/components/button/button.component";
+@import "./core/components/header/header.component";
+@import "./core/components/loading/loading.component";
+@import "./core/components/list/list.component";
+@import "./core/components/tiles/tiles.component";
+@import "./core/components/icon/icon.component";
+@import "./core/components/menu/menu.component";
+@import "./core/components/radio/radio.component";
+@import "./core/components/card/card.component";
+@import "./core/components/dialog/dialog-container.component";
+@import "./core/components/tabs/tabs.component";
+@import "./core/components/value/value.component";
 // @import "./core/components/switch/switch.component";
 [hidden] {
   display: none !important;

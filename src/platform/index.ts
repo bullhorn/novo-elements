@@ -47,6 +47,7 @@ export {
   NovoSelectionEvent,
   NovoOptionGroupComponent,
   NovoHeaderModule,
+  NovoTipwellModule,
 } from './core/components';
 
 export { GroupByPipe, DecodeURIPipe } from './core/pipes';

@@ -12,6 +12,7 @@ export {
 } from './loading';
 export { NovoSlidesComponent, NovoSlidesModule } from './slides';
 export { NovoTilesComponent, NovoTilesModule } from './tiles';
+export { NovoTipwellComponent, NovoTipwellModule } from './tipwell';
 export {
   NovoListModule,
   NovoListComponent,

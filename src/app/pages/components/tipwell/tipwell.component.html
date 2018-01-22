@@ -1,0 +1,44 @@
+<demo-section [name]="name" [src]="src">
+    
+    <h3>Contents</h3>
+  
+    <ul class="demo-nav">
+      <li>
+        <a routerLink="." fragment="usage">Usage</a>
+      </li>
+      <li>
+        <a routerLink="." fragment="examples">Examples</a>
+        <ul>
+          <li>
+            <a routerLink="." fragment="tipwell-basic">Basic</a>
+          </li>
+          <li>
+            <a routerLink="." fragment="tipwell-buttonless">Buttonless</a>
+          </li>
+          <li>
+            <a routerLink="." fragment="tipwell-icon">Icon</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  
+    <h3 routerLink="." fragment="usage" id="usage">Usage</h3>
+    <div class="usage-doc" [innerHtml]="usageDoc"></div>
+  
+    <h3 routerLink="." fragment="examples" id="examples">Examples</h3>
+  
+    <demo-box class="tipwell-demo" [ts]="demos.basic.ts" [html]="demos.basic.html" name="tipwell-basic" label="Basic">
+      <demo-tipwell-basic></demo-tipwell-basic>
+      <br />
+      <p>Did you hide the TipWell?</p>
+      <button theme="primary" color="success" icon="refresh" (click)="clearLocalStorage()">Reset localStorage and Reload</button>
+      <br />
+    </demo-box>
+    <demo-box class="tipwell-demo" [ts]="demos.buttonless.ts" [html]="demos.buttonless.html" name="tipwell-buttonless" label="Buttonless">
+      <demo-tipwell-buttonless></demo-tipwell-buttonless>
+    </demo-box>
+    <demo-box class="tipwell-demo" [ts]="demos.icon.ts" [html]="demos.icon.html" name="tipwell-icon" label="Icon">
+      <demo-tipwell-icon></demo-tipwell-icon>
+    </demo-box>
+  </demo-section>
+  
