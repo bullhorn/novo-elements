@@ -186,22 +186,22 @@ export class FormUtils {
                 controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
                 controlConfig.config.previewTemplate = overridePreviewTemplate || EntityPickerResult;
                 // TODO: When appendToBody picker works better in table/form
-                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
+                control = new PickerControl(controlConfig);
                 break;
             case 'chips':
                 controlConfig.multiple = true;
                 // TODO: When appendToBody picker works better in table/form
-                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
+                control = new PickerControl(controlConfig);
                 break;
             case 'entitypicker':
                 // TODO: This doesn't belong in this codebase
                 controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
                 // TODO: When appendToBody picker works better in table/form
-                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
+                control = new PickerControl(controlConfig);
                 break;
             case 'picker':
                 // TODO: When appendToBody picker works better in table/form
-                control = forTable ? new PickerControl(controlConfig) : new PickerControl(controlConfig);
+                control = new PickerControl(controlConfig);
                 break;
             case 'datetime':
                 controlConfig.military = config ? !!config.military : false;

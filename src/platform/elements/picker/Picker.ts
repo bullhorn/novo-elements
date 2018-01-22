@@ -304,26 +304,33 @@ export class NovoPickerElement implements OnInit {
     }
 
     // From ControlValueAccessor interface
-    writeValue(value) {
+    writeValue(value: any) {
         if (this.clearValueOnSelect) {
             this.term = '';
         } else {
-            if (typeof value === 'string') {
-                this.term = value;
-            } else if (value && value.label) {
-                this.term = value.label;
-            } else if (value && value.firstName) {
-                this.term = `${value.firstName} ${value.lastName}`;
-            } else if (value && value.name) {
-                this.term = value.name;
-            } else if (this.config.getLabels && typeof this.config.getLabels === 'function') {
-                this.config.getLabels(value).then(result => {
-                    if (result) {
-                        this.term = result.label || '';
-                    } else {
-                        this.term = value;
-                    }
-                });
+            if (typeof value === 'string' || Array.isArray(value)) {
+                const val = typeof value === 'string' ? value : value[0];
+                if (parseInt(val) > 0 && typeof this.config.getLabels === 'function') {
+                    this.config.getLabels(val).then((result) => {
+                        if (result) {
+                            this.term = Array.isArray(result) ? result[0].label : result.label || '';
+                        } else {
+                            this.term = val;
+                        }
+                    });
+                } else {
+                    this.term = val;
+                }
+            } else if (value === Object(value)) {
+                if (value.hasOwnProperty('label')) {
+                    this.term = value.label;
+                } else if (value.hasOwnProperty('firstName')) {
+                    this.term = value.firstName + ' ' + value.lastName;
+                } else if (value.hasOwnProperty('name')) {
+                    this.term = value.name;
+                } else {
+                    this.term = value || '';
+                }
             } else {
                 this.term = value || '';
             }
