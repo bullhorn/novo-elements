@@ -14,7 +14,7 @@ import { FieldInteractionApi } from './elements/form/FieldInteractionApi';
 import { DateFormatService } from './services/date-format/DateFormat';
 import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
-import { Security } from './services/security/Security';
+
 const NOVO_ELEMENTS_PROVIDERS = [
     { provide: NovoDragulaService, useClass: NovoDragulaService },
     { provide: NovoModalRef, useClass: NovoModalRef },
@@ -24,7 +24,6 @@ const NOVO_ELEMENTS_PROVIDERS = [
     { provide: ComponentUtils, useClass: ComponentUtils },
     { provide: GlobalRef, useClass: BrowserGlobalRef },
     { provide: LocalStorageService, useClass: LocalStorageService },
-    { provide: Security, useClass: Security },
     FieldInteractionApi,
     DateFormatService,
 ];

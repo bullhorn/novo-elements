@@ -53,7 +53,7 @@ import {
     ValueDemoComponent,
     AceEditorDemoComponent
 } from './pages/elements';
-import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
+import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent, SecurityDemoComponent } from './pages/utils';
 import { ModalSuccessDemo, ModalWarningDemo, ModalErrorDemo, ModalCustomDemo, ModalAddDemo, ModalEditDemo } from './pages/elements/modal/ModalDemo';
 import { StatusCell, ExtraDetails, ImageCell, ActionsCell } from './pages/elements/table/TableDemo';
 import { CustomPickerResults } from './pages/elements/picker/PickerDemo';
@@ -135,7 +135,8 @@ export function provideAppBridgeService(http) {
         SimpleTableDemoComponent,
         FormGroupedDemoComponent,
         ValueDemoComponent,
-        AceEditorDemoComponent
+        AceEditorDemoComponent,
+        SecurityDemoComponent
     ],
     imports: [
         // NG2

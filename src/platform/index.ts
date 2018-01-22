@@ -35,6 +35,7 @@ export { NovoFormModule } from './elements/form/Form.module';
 export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
 export { NovoCategoryDropdownModule } from './elements/category-dropdown/CategoryDropdown.module';
 export { NovoMultiPickerModule } from './elements/multi-picker/MultiPicker.module';
+export { UnlessModule } from './elements/unless/Unless.module';
 export {
     NovoTable, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter,
     NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage, NovoActivityTableCustomHeader
@@ -67,7 +68,6 @@ export { NovoDragulaService } from './elements/dragula/DragulaService';
 export { GooglePlacesService } from './elements/places/places.service';
 import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
-export { Security } from './services/security/Security';
 // Export all data services
 export { Collection } from './services/data-provider/Collection';
 export { CollectionEvent } from './services/data-provider/CollectionEvent';
@@ -88,6 +88,9 @@ export { NovoDropdownCell, INovoDropdownCellConfig } from './elements/table/extr
 export { FormValidators } from './elements/form/FormValidators';
 export { FormUtils } from './utils/form-utils/FormUtils';
 export { EntityUtils } from './utils/entity-utils/EntityUtils';
+export { Security } from './services/security/Security';
+export { EntityLabelService } from './services/entity-label/EntityLabelService';
+export { OptionsService } from './services/options/OptionsService';
 export { NovoFile } from './elements/form/extras/file/extras/file/File';
 export { BaseControl, NovoControlConfig, NovoGroupedControlConfig } from './elements/form/controls/BaseControl';
 export { ControlFactory } from './elements/form/controls/ControlFactory';
