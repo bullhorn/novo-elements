@@ -91,7 +91,7 @@ describe('Elements: NovoPickerElement', () => {
         });
     });
 
-    fdescribe('Method: writeValue()', () => {
+    describe('Method: writeValue()', () => {
         beforeEach(() => {
             component.clearValueOnSelect = false;
             component.config = {};
