@@ -90,9 +90,8 @@ export class OptionsService {
         };
     }
 
-    getOptionsConfig(http: Http, field: any, config: { token?: string, restUrl?: string, military?: boolean }, settings: any): any { // TODO: Use OptionConfig and field interace and settings interface (??)
+    getOptionsConfig(http: any, field: any, config: { token?: string, restUrl?: string, military?: boolean }, settings: any): any { // TODO: Use OptionConfig and field interace and settings interface (??)
         let entityType: string, entityList: string;
-        let cache: any;
         let options: any;
         let entity: string = this.getOptionEntity(field);
         let shortName: string = EntityUtils.getShortName(entity);
@@ -281,8 +280,7 @@ export class OptionsService {
             case 'BusinessSector':
             case 'Certification':
             case 'CertificationGroup':
-                cache = (Cache as any).get(`options/${entity}`); //FIXME - Cache was from symphony-staffing
-                options = cache ? cache.data : (query) => {
+                options = (query) => {
                     return new Promise((resolve, reject) => {
                         if (query && query.length) {
                             http
@@ -313,22 +311,28 @@ export class OptionsService {
             case 'SkillText':
             case 'Specialty':
                 let optionsEntity: string = entity === 'SkillText' ? 'Skill' : entity;
-                cache = (Cache as any).get(`all${optionsEntity}`);
                 options = (query) => {
-                    return new Promise((resolve) => {
-                        let data: any = cache.data.filter((option) => {
-                            let nameMatches: any = option.name.toLowerCase().includes(query.toLowerCase());
-                            let categoryMatches: any = option.categories ? option.categories.toLowerCase().includes(query.toLowerCase()) : option.parentCategory.name.toLowerCase().includes(query.toLowerCase());
-                            return nameMatches || categoryMatches;
-                        });
-                        resolve(data);
+                    return new Promise((resolve, reject) => {
+                        if (query && query.length) {
+                            http
+                                .get(`all${optionsEntity}?filter=${query || ''}`)
+                                .subscribe((items: any) => {
+                                    items = items.filter((option: any) => {
+                                        let nameMatches: any = option.name.toLowerCase().includes(query.toLowerCase());
+                                        let categoryMatches: any = option.categories ? option.categories.toLowerCase().includes(query.toLowerCase()) : option.parentCategory.name.toLowerCase().includes(query.toLowerCase());
+                                        return nameMatches || categoryMatches;
+                                    });
+                                    resolve(items);
+                                }, reject);
+                        } else {
+                            resolve([]);
+                        }
                     });
                 };
                 return {
                     field: entity === 'SkillText' ? 'name' : 'id',
                     format: '$name',
                     options: options,
-                    defaultOptions: cache.data,
                     resultsTemplate: SkillsSpecialtyPickerResults,
                     disableInfiniteScroll: true,
                     getLabels: this.getLabels,
@@ -358,12 +362,11 @@ export class OptionsService {
             case 'BusinessSectorText':
                 entityType = field.optionsType.replace('Text', '');
                 field.optionsUrl.replace('Text', '');
-                cache = (Cache as any).get(`options/${entityType}`);
-                options = cache ? cache.data : (query) => {
+                options = (query) => {
                     return new Promise((resolve, reject) => {
                         if (query && query.length) {
                             http
-                                .get(`${field.optionsUrl}?filter=${query || ''}`)
+                                .get(`options/${entityType}?filter=${query || ''}`)
                                 .subscribe(resolve, reject);
                         } else {
                             resolve([]);

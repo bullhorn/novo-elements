@@ -437,7 +437,7 @@ export class FormUtils {
         }
     }
 
-    getControlOptions(field: any, http: Http, config: { token?: string, restUrl?: string, military?: boolean, settings?: any }): any {
+    getControlOptions(field: any, http: any, config: { token?: string, restUrl?: string, military?: boolean, settings?: any }): any {
         let settings: any = config.settings || {};
         // TODO: The token property of config is the only property used; just pass in `token: string`
         if (field.dataType === 'Boolean' && !field.options) {
