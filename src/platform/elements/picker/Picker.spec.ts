@@ -1,13 +1,13 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 // App
 import { NovoPickerElement } from './Picker';
 import { NovoPickerModule } from './Picker.module';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { NovoPickerContainer } from './extras/picker-container/PickerContainer';
+import { PickerResults } from './extras/picker-results/PickerResults';
 
-xdescribe('Elements: NovoPickerElement', () => {
+describe('Elements: NovoPickerElement', () => {
     let fixture;
     let component;
 
@@ -27,12 +27,18 @@ xdescribe('Elements: NovoPickerElement', () => {
 
     it('should initialize correctly', () => {
         expect(component).toBeTruthy();
+        expect(component.closeOnSelect).toBe(true);
+        expect(component.selected).toEqual([]);
+        expect(component.appendToBody).toBe(false);
+        expect(component.side).toBe('left');
+        expect(component.autoSelectFirstOption).toBe(true);
     });
 
     describe('Method: ngOnInit()', () => {
-        it('should be defined.', () => {
-            expect(component.ngOnInit).toBeDefined();
-            // component.ngOnInit();
+        it('should set the PickerResults as the default resultsComponent.', () => {
+            component.config = {};
+            component.ngOnInit();
+            expect(component.resultsComponent).toEqual(PickerResults);
         });
     });
 
@@ -53,7 +59,7 @@ xdescribe('Elements: NovoPickerElement', () => {
     describe('Method: onFocus()', () => {
         it('should be defined.', () => {
             expect(component.onFocus).toBeDefined();
-            component.onFocus();
+            // component.onFocus();
         });
     });
 
@@ -85,11 +91,165 @@ xdescribe('Elements: NovoPickerElement', () => {
         });
     });
 
-    describe('Method: writeValue()', () => {
-        it('should be defined.', () => {
-            expect(component.writeValue).toBeDefined();
-            // component.writeValue();
+    fdescribe('Method: writeValue()', () => {
+        beforeEach(() => {
+            component.clearValueOnSelect = false;
+            component.config = {};
         });
+        it('should clear out the term if clearValueOnSelect is set.', () => {
+            component.clearValueOnSelect = true;
+            component.writeValue('New Value');
+            expect(component.term).toEqual('');
+            expect(component.value).toEqual('New Value');
+        });
+        it('should handle empty object.', () => {
+            component.writeValue({});
+            expect(component.term).toEqual({});
+        });
+        it('should handle null.', () => {
+            component.writeValue(null);
+            expect(component.term).toEqual('');
+        });
+        it('should handle string values.', () => {
+            component.writeValue('String Value');
+            expect(component.term).toEqual('String Value');
+        });
+        it('should handle string arrays of length 1.', () => {
+            component.writeValue(['ONE']);
+            expect(component.term).toEqual(['ONE']);
+        });
+        it('should handle string arrays of length > 1.', () => {
+            component.writeValue(['ONE', 'TWO', 'THREE']);
+            expect(component.term).toEqual(['ONE', 'TWO', 'THREE']);
+        });
+        it('should handle empty array.', () => {
+            component.writeValue([]);
+            expect(component.term).toEqual([]);
+        });
+        it('should handle number values.', () => {
+            component.writeValue(123);
+            expect(component.term).toEqual(123);
+        });
+        it('should handle number arrays of length 1.', () => {
+            component.writeValue([1]);
+            expect(component.term).toEqual([1]);
+        });
+        it('should handle number arrays of length > 1.', () => {
+            component.writeValue([1, 2, 3]);
+            expect(component.term).toEqual([1, 2, 3]);
+        });
+        it('should use label for a complex object if present.', () => {
+            component.writeValue({ label: 'LABEL' });
+            expect(component.term).toEqual('LABEL');
+        });
+        it('should use first and last name for a complex object if present.', () => {
+            component.writeValue({ firstName: 'FIRST', lastName: 'LAST' });
+            expect(component.term).toEqual('FIRST LAST');
+        });
+        it('should use name for a complex object if present.', () => {
+            component.writeValue({ name: 'NAME' });
+            expect(component.term).toEqual('NAME');
+        });
+        it('should use getLabels for a complex object if present.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve({ label: 'DYNAMIC_LABEL' })
+                })
+            };
+            component.writeValue({ id: 123 });
+            tick();
+            expect(component.term).toEqual('DYNAMIC_LABEL');
+        }));
+        it('should use getLabels for a complex object if present - default value.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve({})
+                })
+            };
+            component.writeValue({ id: 123 });
+            tick();
+            expect(component.term).toEqual('');
+        }));
+        it('should use getLabels for a complex object if present - missing value.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve(null)
+                })
+            };
+            component.writeValue({ id: 123 });
+            tick();
+            expect(component.term).toEqual({ id: 123 });
+        }));
+        it('should use getLabels for a complex object if present - missing value.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve(null)
+                })
+            };
+            component.writeValue({ id: 123 });
+            tick();
+            expect(component.term).toEqual({ id: 123 });
+        }));
+        it('should not call getLabels for string values that do not parse to integers even if getLabels is present.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve({ label: 'DYNAMIC LABEL' })
+                })
+            };
+            component.writeValue('John Smith');
+            tick();
+            expect(component.term).toEqual('John Smith');
+        }));
+        it('should call getLabels for string values that parse to integers if getLabels is present.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve({ label: 'DYNAMIC LABEL' })
+                })
+            };
+            component.writeValue('123');
+            tick();
+            expect(component.term).toEqual('DYNAMIC LABEL');
+        }));
+        it('should call getLabels for string values that parse to integers if getLabels is present - empty object.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve({})
+                })
+            };
+            component.writeValue('123');
+            tick();
+            expect(component.term).toEqual('');
+        }));
+        it('should call getLabels for string values that parse to integers if getLabels is present - null value.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve(null)
+                })
+            };
+            component.writeValue('123');
+            tick();
+            expect(component.term).toEqual('123');
+        }));
+        it('should call getLabels for array values that parse to integers if getLabels is present.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve({ label: 'DYNAMIC LABEL' })
+                })
+            };
+            component.writeValue(['123']);
+            tick();
+            expect(component.term).toEqual('DYNAMIC LABEL');
+        }));
+        it('should call getLabels for multiple array values that parse to integers if getLabels is present.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve({ label: 'DYNAMIC LABEL' })
+                })
+            };
+            component.writeValue(['123', '345', '678']);
+            tick();
+            expect(component.term).toEqual('DYNAMIC LABEL');
+        }));
     });
 
     describe('Method: registerOnChange()', () => {

@@ -306,29 +306,32 @@ export class NovoPickerElement implements OnInit {
         if (this.clearValueOnSelect) {
             this.term = '';
         } else {
-            if (typeof value === 'string' || Array.isArray(value)) {
+            if (typeof this.config.getLabels === 'function' &&
+                (typeof value === 'string' && parseInt(value) || Array.isArray(value) && value.length && parseInt(value[0]))) {
                 const val = typeof value === 'string' ? value : value[0];
-                if (parseInt(val) > 0 && typeof this.config.getLabels === 'function') {
-                    this.config.getLabels(val).then((result) => {
-                        if (result) {
-                            this.term = Array.isArray(result) ? result[0].label : result.label || '';
-                        } else {
-                            this.term = val;
-                        }
-                    });
-                } else {
-                    this.term = val;
-                }
-            } else if (value === Object(value)) {
-                if (value.hasOwnProperty('label')) {
-                    this.term = value.label;
-                } else if (value.hasOwnProperty('firstName')) {
-                    this.term = value.firstName + ' ' + value.lastName;
-                } else if (value.hasOwnProperty('name')) {
-                    this.term = value.name;
-                } else {
-                    this.term = value || '';
-                }
+                this.config.getLabels(val).then(result => {
+                    if (result) {
+                        this.term = Array.isArray(result) ? result[0].label : result.label || '';
+                    } else {
+                        this.term = val;
+                    }
+                });
+            } else if (typeof value === 'string') {
+                this.term = value;
+            } else if (value && value.label) {
+                this.term = value.label;
+            } else if (value && value.firstName) {
+                this.term = `${value.firstName} ${value.lastName}`;
+            } else if (value && value.name) {
+                this.term = value.name;
+            } else if (typeof this.config.getLabels === 'function') {
+                this.config.getLabels(value).then(result => {
+                    if (result) {
+                        this.term = result.label || '';
+                    } else {
+                        this.term = value;
+                    }
+                });
             } else {
                 this.term = value || '';
             }
