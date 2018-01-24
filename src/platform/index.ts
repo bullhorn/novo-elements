@@ -91,7 +91,6 @@ export { FormValidators } from './elements/form/FormValidators';
 export { FormUtils } from './utils/form-utils/FormUtils';
 export { EntityUtils } from './utils/entity-utils/EntityUtils';
 export { Security } from './services/security/Security';
-export { EntityLabelService } from './services/entity-label/EntityLabelService';
 export { OptionsService } from './services/options/OptionsService';
 export { NovoFile } from './elements/form/extras/file/extras/file/File';
 export { BaseControl, NovoControlConfig, NovoGroupedControlConfig } from './elements/form/controls/BaseControl';

@@ -53,7 +53,6 @@ import { FormUtils } from './utils/form-utils/FormUtils';
 import { EntityUtils } from './utils/entity-utils/EntityUtils';
 import { Security } from './services/security/Security';
 import { OptionsService } from './services/options/OptionsService';
-import { EntityLabelService } from './services/entity-label/EntityLabelService';
 @NgModule({
     imports: [
         ReactiveFormsModule
@@ -111,8 +110,7 @@ import { EntityLabelService } from './services/entity-label/EntityLabelService';
         { provide: FormUtils, useClass: FormUtils },
         { provide: EntityUtils, useClass: EntityUtils },
         { provide: Security, useClass: Security },
-        { provide: OptionsService, useClass: OptionsService },
-        { provide: EntityLabelService, useClass: EntityLabelService }
+        { provide: OptionsService, useClass: OptionsService }
     ]
 })
 export class NovoElementsModule {

@@ -38,7 +38,6 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 import { OptionsService } from '../../services/options/OptionsService';
-import { EntityLabelService } from '../../services/entity-label/EntityLabelService';
 
 describe('Elements: NovoTableElement', () => {
     let fixture;
@@ -92,7 +91,6 @@ describe('Elements: NovoTableElement', () => {
                 { provide: NovoLabelService, useClass: NovoLabelService },
                 { provide: FormUtils, useClass: FormUtils },
                 OptionsService,
-                EntityLabelService,
                 NgControl,
                 FormBuilder,
                 DateFormatService
