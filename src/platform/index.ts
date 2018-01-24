@@ -89,7 +89,6 @@ export { PercentageCell } from './elements/table/extras/percentage-cell/Percenta
 export { NovoDropdownCell, INovoDropdownCellConfig } from './elements/table/extras/dropdown-cell/DropdownCell';
 export { FormValidators } from './elements/form/FormValidators';
 export { FormUtils } from './utils/form-utils/FormUtils';
-export { EntityUtils } from './utils/entity-utils/EntityUtils';
 export { Security } from './services/security/Security';
 export { OptionsService } from './services/options/OptionsService';
 export { NovoFile } from './elements/form/extras/file/extras/file/File';
