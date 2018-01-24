@@ -92,7 +92,6 @@ export class FormUtils {
             'Boolean': 'tiles',
         };
         let inputTypeToTypeMap = {
-            'TEXTAREA': 'textarea',
             'CHECKBOX': 'radio',
             'RADIO': 'radio',
             'SELECT': 'select',
@@ -134,6 +133,8 @@ export class FormUtils {
             type = dataSpecializationTypeMap[field.dataSpecialization];
         } else if (Object.keys(dataTypeToTypeMap).indexOf(field.dataType) > -1) {
             type = dataTypeToTypeMap[field.dataType];
+        } else if (field.inputType === 'TEXTAREA') {
+            type = 'textarea';
         } else if (field.options && Object.keys(inputTypeToTypeMap).indexOf(field.inputType) > -1 && !field.multiValue) {
             type = inputTypeToTypeMap[field.inputType];
         } else if (field.options && Object.keys(inputTypeMultiToTypeMap).indexOf(field.inputType) > -1 && field.multiValue) {
