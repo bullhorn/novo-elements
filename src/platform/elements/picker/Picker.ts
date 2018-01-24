@@ -306,17 +306,7 @@ export class NovoPickerElement implements OnInit {
         if (this.clearValueOnSelect) {
             this.term = '';
         } else {
-            if (typeof this.config.getLabels === 'function' &&
-                (typeof value === 'string' && parseInt(value) || Array.isArray(value) && value.length && parseInt(value[0]))) {
-                const val = typeof value === 'string' ? value : value[0];
-                this.config.getLabels(val).then(result => {
-                    if (result) {
-                        this.term = Array.isArray(result) ? result[0].label : result.label || '';
-                    } else {
-                        this.term = val;
-                    }
-                });
-            } else if (typeof value === 'string') {
+            if (typeof value === 'string') {
                 this.term = value;
             } else if (value && value.label) {
                 this.term = value.label;

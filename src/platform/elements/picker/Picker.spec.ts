@@ -150,6 +150,16 @@ describe('Elements: NovoPickerElement', () => {
             component.writeValue({ name: 'NAME' });
             expect(component.term).toEqual('NAME');
         });
+        it('should use getLabels for a number if present.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve({ label: 'DYNAMIC_LABEL' })
+                })
+            };
+            component.writeValue(123);
+            tick();
+            expect(component.term).toEqual('DYNAMIC_LABEL');
+        }));
         it('should use getLabels for a complex object if present.', fakeAsync(() => {
             component.config = {
                 getLabels: () => new Promise(resolve => {
@@ -189,46 +199,6 @@ describe('Elements: NovoPickerElement', () => {
             component.writeValue({ id: 123 });
             tick();
             expect(component.term).toEqual({ id: 123 });
-        }));
-        it('should not call getLabels for string values that do not parse to integers even if getLabels is present.', fakeAsync(() => {
-            component.config = {
-                getLabels: () => new Promise(resolve => {
-                    resolve({ label: 'DYNAMIC LABEL' })
-                })
-            };
-            component.writeValue('John Smith');
-            tick();
-            expect(component.term).toEqual('John Smith');
-        }));
-        it('should call getLabels for string values that parse to integers if getLabels is present.', fakeAsync(() => {
-            component.config = {
-                getLabels: () => new Promise(resolve => {
-                    resolve({ label: 'DYNAMIC LABEL' })
-                })
-            };
-            component.writeValue('123');
-            tick();
-            expect(component.term).toEqual('DYNAMIC LABEL');
-        }));
-        it('should call getLabels for string values that parse to integers if getLabels is present - empty object.', fakeAsync(() => {
-            component.config = {
-                getLabels: () => new Promise(resolve => {
-                    resolve({})
-                })
-            };
-            component.writeValue('123');
-            tick();
-            expect(component.term).toEqual('');
-        }));
-        it('should call getLabels for string values that parse to integers if getLabels is present - null value.', fakeAsync(() => {
-            component.config = {
-                getLabels: () => new Promise(resolve => {
-                    resolve(null)
-                })
-            };
-            component.writeValue('123');
-            tick();
-            expect(component.term).toEqual('123');
         }));
         it('should call getLabels for array values that parse to integers if getLabels is present.', fakeAsync(() => {
             component.config = {
