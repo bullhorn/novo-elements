@@ -160,6 +160,16 @@ describe('Elements: NovoPickerElement', () => {
             tick();
             expect(component.term).toEqual('DYNAMIC_LABEL');
         }));
+        it('should use getLabels for a number array if present.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve({ label: 'DYNAMIC_LABEL' })
+                })
+            };
+            component.writeValue([123, 456, 789]);
+            tick();
+            expect(component.term).toEqual('DYNAMIC_LABEL');
+        }));
         it('should use getLabels for a complex object if present.', fakeAsync(() => {
             component.config = {
                 getLabels: () => new Promise(resolve => {
@@ -219,6 +229,26 @@ describe('Elements: NovoPickerElement', () => {
             component.writeValue(['123', '345', '678']);
             tick();
             expect(component.term).toEqual('DYNAMIC LABEL');
+        }));
+        it('should handle getLabels that returns an array by using the first array element.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve([{ label: 'DYNAMIC LABEL' }])
+                })
+            };
+            component.writeValue(123);
+            tick();
+            expect(component.term).toEqual('DYNAMIC LABEL');
+        }));
+        it('should handle getLabels that returns an array by using the first array element - empty string case.', fakeAsync(() => {
+            component.config = {
+                getLabels: () => new Promise(resolve => {
+                    resolve([{ notALabel: 'NOT_A_LABEL' }])
+                })
+            };
+            component.writeValue(123);
+            tick();
+            expect(component.term).toEqual('');
         }));
     });
 

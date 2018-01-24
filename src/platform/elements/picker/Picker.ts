@@ -317,7 +317,7 @@ export class NovoPickerElement implements OnInit {
             } else if (typeof this.config.getLabels === 'function') {
                 this.config.getLabels(value).then(result => {
                     if (result) {
-                        this.term = result.label || '';
+                        this.term = result.length ? result[0].label || '' : result.label || '';
                     } else {
                         this.term = value;
                     }
