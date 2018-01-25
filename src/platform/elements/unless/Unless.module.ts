@@ -7,7 +7,7 @@ import { Unless } from './Unless';
 @NgModule({
     imports: [CommonModule],
     declarations: [Unless],
-    exports: [Unless],
+    exports: [Unless]
 })
 export class UnlessModule {
 }
