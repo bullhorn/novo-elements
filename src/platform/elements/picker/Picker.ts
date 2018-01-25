@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild, Input, Output, OnInit, DoCheck, HostListener, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, ElementRef, ViewContainerRef, forwardRef, ViewChild, Input, Output, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { Observable } from 'rxjs/Observable';
@@ -8,12 +8,10 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 // APP
-import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { PickerResults } from './extras/picker-results/PickerResults';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { Helpers } from '../../utils/Helpers';
-import { NovoPickerContainer } from './extras/picker-container/PickerContainer';
 import { NovoOverlayTemplate } from '../overlay/Overlay';
 
 
@@ -304,7 +302,7 @@ export class NovoPickerElement implements OnInit {
     }
 
     // From ControlValueAccessor interface
-    writeValue(value) {
+    writeValue(value: any) {
         if (this.clearValueOnSelect) {
             this.term = '';
         } else {
@@ -316,10 +314,10 @@ export class NovoPickerElement implements OnInit {
                 this.term = `${value.firstName} ${value.lastName}`;
             } else if (value && value.name) {
                 this.term = value.name;
-            } else if (this.config.getLabels && typeof this.config.getLabels === 'function') {
+            } else if (typeof this.config.getLabels === 'function') {
                 this.config.getLabels(value).then(result => {
                     if (result) {
-                        this.term = result.label || '';
+                        this.term = result.length ? result[0].label || '' : result.label || '';
                     } else {
                         this.term = value;
                     }
