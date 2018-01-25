@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.4.0"></a>
+# [2.4.0](https://github.com/bullhorn/novo-elements/compare/v2.3.0...v2.4.0) (2018-01-25)
+
+
+### Bug Fixes
+
+* **counties:** Reorder the countries file ([d760383](https://github.com/bullhorn/novo-elements/commit/d760383))
+* **table:** multi select filter ([1a08f3a](https://github.com/bullhorn/novo-elements/commit/1a08f3a))
+* **value:** Fixing display for value component ([d4d8a6b](https://github.com/bullhorn/novo-elements/commit/d4d8a6b))
+
+
+### Features
+
+* **EntityUtils:** Adding Tearsheet to entity names ([6f58902](https://github.com/bullhorn/novo-elements/commit/6f58902))
+* **pickers:** Added support for array in getLabels for Picker Element, unit tests and code cleanup ([#635](https://github.com/bullhorn/novo-elements/issues/635)) ([196a3bb](https://github.com/bullhorn/novo-elements/commit/196a3bb))
+
+
+
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/bullhorn/novo-elements/compare/v2.2.0...v2.3.0) (2017-12-27)
 
