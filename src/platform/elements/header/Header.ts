@@ -32,23 +32,25 @@ export class NovoUtilActionComponent {
     selector: 'header[theme]',
     template: `
         <section>
-            <ng-container *ngIf="title">
-                <i *ngIf="icon" class="header-icon" [ngClass]="iconClass"></i>
-                <div class="header-titles">
-                    <h1>{{ title }}</h1>
-                    <small *ngIf="subTitle">{{ subTitle }}</small>
-                </div>
-            </ng-container>
-            <ng-container *ngIf="!title">
-                <ng-content select="novo-icon, [novo-icon]"></ng-content>
-                <div class="header-titles">
-                    <ng-content select="h1, h2, h3, h4, h5, h6, small, [novo-title], [novo-subtitle]"></ng-content>
-                </div>
-            </ng-container>
+            <div class="header-title">
+                <ng-container *ngIf="title">
+                    <i *ngIf="icon" class="header-icon" [ngClass]="iconClass"></i>
+                    <div class="header-titles">
+                        <h1>{{ title }}</h1>
+                        <small *ngIf="subTitle">{{ subTitle }}</small>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!title">
+                    <ng-content select="novo-icon, [novo-icon]"></ng-content>
+                    <div class="header-titles">
+                        <ng-content select="h1, h2, h3, h4, h5, h6, small, [novo-title], [novo-subtitle]"></ng-content>
+                    </div>
+                </ng-container>
+            </div>
             <ng-content select="section"></ng-content>
             <span flex></span>
             <ng-content select="utils"></ng-content>
-            <div class="novo-actions"><ng-content select="novo-action,[novo-action]"></ng-content></div>
+            <!--<div class="novo-actions"><ng-content select="novo-action,[novo-action]"></ng-content></div>-->
         </section>
         <ng-content></ng-content>
     `,

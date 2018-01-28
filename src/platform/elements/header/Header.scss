@@ -8,6 +8,10 @@ header[theme] {
         i.header-icon {
             padding: 12px;
         }
+        div.header-title {
+            display: flex;
+            align-items: center;
+        }
         .header-titles {
             display: flex;
             flex-direction: column;
