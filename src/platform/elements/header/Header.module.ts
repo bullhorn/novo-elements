@@ -1,14 +1,28 @@
-// NG2
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// APP
+
 import { NovoButtonModule } from './../button/Button.module';
-import { NovoHeaderElement, UtilActionElement, UtilsElement } from './Header';
+import {
+    NovoHeaderComponent, NovoUtilActionComponent,
+    NovoUtilsComponent, NovoHeaderSpacer,
+} from './Header';
 
 @NgModule({
-    imports: [CommonModule, NovoButtonModule],
-    declarations: [NovoHeaderElement, UtilActionElement, UtilsElement],
-    exports: [NovoHeaderElement, UtilActionElement, UtilsElement]
+    imports: [
+        CommonModule,
+        NovoButtonModule,
+    ],
+    declarations: [
+        NovoHeaderComponent,
+        NovoUtilActionComponent,
+        NovoUtilsComponent,
+        NovoHeaderSpacer
+    ],
+    exports: [
+        NovoHeaderComponent,
+        NovoUtilActionComponent,
+        NovoUtilsComponent,
+        NovoHeaderSpacer,
+    ],
 })
-export class NovoHeaderModule {
-}
+export class NovoHeaderModule { }

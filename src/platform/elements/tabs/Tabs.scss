@@ -141,9 +141,6 @@ novo-nav {
     }
     &[theme="white"] {
         background-color: $white;
-        header & {
-            background: rgba(0, 0, 0, .03);
-        }
         &[direction="vertical"] {
             background: transparent;
         }

@@ -1,60 +1,78 @@
-// NG2
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, HostBinding } from '@angular/core';
+
+@Component({
+    selector: 'header-spacer',
+    template: `
+        <ng-content></ng-content>
+    `,
+})
+export class NovoHeaderSpacer { }
 
 @Component({
     selector: 'utils',
     template: `
         <ng-content></ng-content>
-    `
+    `,
 })
-export class UtilsElement {
-}
+export class NovoUtilsComponent { }
 
 @Component({
-    selector: 'util-action',
+    selector: 'util-action, novo-action',
     template: `
-        <button theme="icon" [icon]="icon" [attr.inverse]="inverse" [disabled]="disabled"></button>
-    `
+        <button theme="icon" [icon]="icon" [attr.inverse]="inverse" [disabled]="disabled"><ng-content></ng-content></button>
+    `,
 })
-export class UtilActionElement {
-    @Input() icon: string;
-    @Input() inverse: boolean;
-    @Input() disabled: boolean;
+export class NovoUtilActionComponent {
+    @Input() public icon: string;
+    @Input() public inverse: boolean;
+    @Input() public disabled: boolean;
 }
 
 @Component({
     selector: 'header[theme]',
-    host: {
-        '[attr.theme]': 'theme'
-    },
     template: `
         <section>
-            <div>
+            <ng-container *ngIf="title">
                 <i *ngIf="icon" class="header-icon" [ngClass]="iconClass"></i>
                 <div class="header-titles">
-                    <h1>{{ title || config.title }}</h1>
-                    <small *ngIf="subTitle">{{ subTitle || config.subTitle }}</small>
+                    <h1>{{ title }}</h1>
+                    <small *ngIf="subTitle">{{ subTitle }}</small>
                 </div>
-            </div>
+            </ng-container>
+            <ng-container *ngIf="!title">
+                <ng-content select="novo-icon, [novo-icon]"></ng-content>
+                <div class="header-titles">
+                    <ng-content select="h1, h2, h3, h4, h5, h6, small, [novo-title], [novo-subtitle]"></ng-content>
+                </div>
+            </ng-container>
             <ng-content select="section"></ng-content>
+            <span flex></span>
             <ng-content select="utils"></ng-content>
+            <div class="novo-actions"><ng-content select="novo-action,[novo-action]"></ng-content></div>
         </section>
         <ng-content></ng-content>
-    `
+    `,
 })
-export class NovoHeaderElement implements OnInit {
-    @Input() title: string;
-    @Input() subTitle: string;
-    @Input() theme: string;
-    @Input() icon: string;
-    @Input() config: any;
+export class NovoHeaderComponent implements OnInit {
+    @Input() public title: string;
+    @Input() public subTitle: string;
+    @HostBinding('class') public headerClass: string = 'novo-header';
+    @HostBinding('attr.theme')
+    @Input()
+    public theme: string;
+    @Input() public icon: string;
+    @HostBinding('class.condensed') @Input() public condensed: boolean = false;
 
-    inverse: string = 'inverse';
-    iconClass: string;
+    public inverse: string = 'inverse';
+    public iconClass: string;
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.iconClass = `bhi-${this.icon}`;
-        this.config = this.config || {};
-        this.inverse = (this.theme === 'white' || this.theme === 'off-white' || this.theme === 'light') ? null : 'inverse';
+        this.inverse =
+            this.theme === 'white' ||
+                this.theme === 'off-white' ||
+                this.theme === 'light'
+                ? undefined
+                : 'inverse';
     }
 }

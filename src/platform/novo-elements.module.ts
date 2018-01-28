@@ -40,6 +40,7 @@ import { NovoSearchBoxModule } from './elements/search/SearchBox.module';
 import { GooglePlacesModule } from './elements/places/places.module';
 import { NovoValueModule } from './elements/value/Value.module';
 import { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
+import { NovoIconModule } from './elements/icon/Icon.module';
 
 import { NovoOverlayModule } from './elements/overlay/Overlay.module';
 import { DateFormatService } from './services/date-format/DateFormat';
@@ -95,6 +96,7 @@ import { FormUtils } from './utils/form-utils/FormUtils';
         GooglePlacesModule,
         NovoValueModule,
         NovoAceEditorModule,
+        NovoIconModule,
     ],
     providers: [
         { provide: ComponentUtils, useClass: ComponentUtils },

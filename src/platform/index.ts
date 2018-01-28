@@ -30,6 +30,7 @@ export { NovoTipWellModule } from './elements/tip-well/TipWell.module';
 export { NovoTableModule } from './elements/table/Table.module';
 export { NovoValueModule } from './elements/value/Value.module';
 export { NovoTableMode } from './elements/table/Table';
+export { NovoIconModule } from './elements/icon/Icon.module';
 export { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './elements/form/Form.module';
 export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';

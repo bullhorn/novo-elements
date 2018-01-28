@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 // APP
 let HeaderDemoTpl = require('./templates/HeaderDemo.html');
+let HeaderCondensedTpl = require('./templates/HeaderCondensed.html');
 let SubTitleDemoTpl = require('./templates/SubTitle.html');
 let HeaderWithSearchDemoTpl = require('./templates/HeaderWithSearchDemo.html');
 // Vendor
@@ -18,6 +19,10 @@ const template = `
     <p>Record headers have details about the entity record and tabbed navigation.</p>
     <div class="example header-demo">${HeaderDemoTpl}</div>
     <code-snippet [code]="HeaderDemoTpl"></code-snippet>
+
+    <h5>Condensed</h5>
+    <div class="example header-demo">${HeaderCondensedTpl}</div>
+    <code-snippet [code]="HeaderCondensedTpl"></code-snippet>
 
     <h2>Options</h2>
 
@@ -39,6 +44,7 @@ export class HeaderDemoComponent {
     private HeaderDemoTpl: string = HeaderDemoTpl;
     private SubTitleDemoTpl: string = SubTitleDemoTpl;
     private HeaderWithSearchDemoTpl: string = HeaderWithSearchDemoTpl;
+    private HeaderCondensedTpl: string = HeaderCondensedTpl;
     private entity: string;
     private options: any;
     public isChecked: boolean;

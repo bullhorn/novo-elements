@@ -13,7 +13,11 @@ export class CardActionsElement {
 @Component({
     selector: 'novo-card',
     template: `
-        <div class="novo-card" [attr.data-automation-id]="cardAutomationId" [ngClass]="{'no-padding': !padding}">
+        <div class="novo-card" [attr.data-automation-id]="cardAutomationId" [ngClass]="{'no-padding': !padding}" [class.loading]="loading || config.loading">
+            <!--Loading-->
+            <div class="card-loading-container" *ngIf="loading || config.loading">
+                <novo-loading theme="line"  [attr.data-automation-id]="cardAutomationId + '-loading'"></novo-loading>
+            </div>
             <!--Card Header-->
             <header>
                 <div class="title">
@@ -35,8 +39,6 @@ export class CardActionsElement {
                 <ng-content *ngIf="!(loading || config.loading) && !(message || config.message)"></ng-content>
                 <!--Error/Empty Message-->
                 <p class="card-message" *ngIf="!(loading || config.loading) && (message || config.message)" [attr.data-automation-id]="cardAutomationId + '-message'"><i *ngIf="messageIconClass" [ngClass]="messageIconClass"></i> <span [innerHtml]="message || config.message"></span></p>
-                <!--Loading-->
-                <novo-loading *ngIf="loading || config.loading" theme="line"  [attr.data-automation-id]="cardAutomationId + '-loading'"></novo-loading>
             </main>
             <!--Card Footer-->
             <ng-content *ngIf="!(loading || config.loading) && !(message || config.message)" select="footer"></ng-content>
