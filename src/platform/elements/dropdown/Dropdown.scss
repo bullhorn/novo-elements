@@ -40,10 +40,9 @@ novo-dropdown-container {
     list {
         item {
             cursor: pointer;
-            height: 48px;
             width: 100%;
             margin: 0;
-            padding: 10px 16px;
+            padding: 0.5em 1em;
             box-sizing: border-box;
             display: flex !important;
             align-items: center;
