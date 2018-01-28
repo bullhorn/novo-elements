@@ -68,7 +68,9 @@ header[theme] {
         }
     }
     &.condensed {
-        font-size: 1.2em;
+        i {
+            font-size: 1.2em;
+        }
         button[theme][theme="icon"] {
             width: 25px !important;
             height: 30px !important;
