@@ -1,5 +1,5 @@
 // NG2
-import { TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 // App
 import { QuickNoteElement } from './QuickNote';
@@ -118,9 +118,7 @@ describe('Elements: QuickNoteElement', () => {
          */
         fakeCkEditorInstance = {
             isPlaceholderVisible: () => this.placeholderVisible,
-            config: {
-                height: 200
-            },
+            ui: { contentsElement: { $: { style: { cssText: 'height: 200px;' } } } },
             keyEnteredByUser: (key: string, keyCode: number): void => {
                 if (key === 'Backspace') {
                     this.editorValue = this.editorValue.slice(0, -1);
@@ -295,7 +293,7 @@ describe('Elements: QuickNoteElement', () => {
             fakeCkEditorInstance.userPausedAfterEntry();
 
             expect(fakeResultsDropdown.visible).toBe(true);
-            expect(fakeResultsDropdown.nativeElementProperties).toEqual({ 'margin-top': '30px' });
+            expect(fakeResultsDropdown.nativeElementProperties).toEqual({ 'margin-top': '80px' });
             expect(fakeParentForm.getValue()).toEqual({
                 note: 'Note about: @john',
                 references: {}

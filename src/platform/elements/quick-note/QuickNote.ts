@@ -494,15 +494,17 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * Removes plugins and turns off setting to allow browser based spell checking.
      */
     private getCKEditorConfig(): any {
+        // Use the height of the wrapper element to set the initial height of the editor, then
+        // set it to 100% to allow the editor to resize using the grippy.
         let editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
+        this.wrapper.nativeElement.style.setProperty('height', '100%');
 
         return {
             enterMode: CKEDITOR.ENTER_BR,
             shiftEnterMode: CKEDITOR.ENTER_P,
             disableNativeSpellChecker: false,
             height: editorHeight,
-            removePlugins: 'elementspath,liststyle,tabletools,contextmenu',
-            resize_enabled: false, // hides the status bar
+            removePlugins: 'liststyle,tabletools,contextmenu', // allows browser based spell checking
             toolbar: [{
                 name: 'basicstyles',
                 items: ['Styles', 'FontSize', 'Bold', 'Italic', 'Underline', 'TextColor', '-', 'NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Link']
@@ -541,12 +543,11 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * Positions the results dropdown based on the location of the cursor in the text field
      */
     private positionResultsDropdown(): void {
-        const DROPDOWN_OFFSET: number = 30; // The distance between the cursor and the dropdown
-        const MIN_MARGIN_TOP: number = DROPDOWN_OFFSET;
-        const MAX_MARGIN_TOP: number = this.ckeInstance.config.height + QuickNoteElement.TOOLBAR_HEIGHT;
+        const MIN_MARGIN_TOP: number = QuickNoteElement.TOOLBAR_HEIGHT * 2;
+        const MAX_MARGIN_TOP: number = this.getContentHeight() + QuickNoteElement.TOOLBAR_HEIGHT;
 
         let cursorPosition = this.getCursorPosition();
-        let marginTop: number = cursorPosition.top + QuickNoteElement.TOOLBAR_HEIGHT + DROPDOWN_OFFSET;
+        let marginTop: number = cursorPosition.top + QuickNoteElement.TOOLBAR_HEIGHT;
 
         // Check that the margin is within the visible bounds
         marginTop = Math.max(marginTop, MIN_MARGIN_TOP);
@@ -554,6 +555,19 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
         // Set the margin-top of the dropdown
         this.quickNoteResults.instance.element.nativeElement.style.setProperty('margin-top', marginTop + 'px');
+    }
+
+    private getContentHeight(): number {
+        let contentHeight: number = 0;
+        if (this.ckeInstance.ui && this.ckeInstance.ui.contentsElement && this.ckeInstance.ui.contentsElement.$ && this.ckeInstance.ui.contentsElement.$.style) {
+            let cssText: string = this.ckeInstance.ui.contentsElement.$.style.cssText;
+            if (cssText.indexOf('height: ') !== -1) {
+                let height: string = cssText.split('height: ')[1];
+                height = height.split('px')[0];
+                contentHeight = parseInt(height);
+            }
+        }
+        return contentHeight;
     }
 
     /**
