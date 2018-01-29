@@ -557,6 +557,9 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         this.quickNoteResults.instance.element.nativeElement.style.setProperty('margin-top', marginTop + 'px');
     }
 
+    /**
+     * Returns the height in pixels of the content area - the text that the user has entered.
+     */
     private getContentHeight(): number {
         let contentHeight: number = 0;
         if (this.ckeInstance.ui && this.ckeInstance.ui.contentsElement && this.ckeInstance.ui.contentsElement.$ && this.ckeInstance.ui.contentsElement.$.style) {
