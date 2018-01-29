@@ -107,7 +107,6 @@ import { OptionsService } from './services/options/OptionsService';
         { provide: GlobalRef, useClass: BrowserGlobalRef },
         { provide: LocalStorageService, useClass: LocalStorageService },
         { provide: FormUtils, useClass: FormUtils },
-        { provide: Security, useClass: Security },
         { provide: OptionsService, useClass: OptionsService }
     ]
 })
