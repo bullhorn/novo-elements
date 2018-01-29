@@ -7,7 +7,7 @@ import { Http } from '@angular/http';
 export class OptionsService {
     constructor() { }
 
-    getOptionsConfig(http: any, field: any, config: { token?: string, restUrl?: string, military?: boolean }, settings: any): any {
+    getOptionsConfig(http: any, field: any, config: { token?: string, restUrl?: string, military?: boolean }): any {
         return {
             field: 'value',
             format: '$label',
