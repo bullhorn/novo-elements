@@ -45,7 +45,7 @@ novo-icon {
             }
             &[raised] {
                 i {
-                    background: darken($color, 10%);
+                    background-color: rgba(0, 0, 0, .1);
                 }
             }
         }
@@ -77,11 +77,6 @@ novo-icon {
         i {
             width: $large-icon-size;
             height: $large-icon-size;
-        }
-    }
-    &[raised] {
-        i {
-            box-shadow: $whiteframe-shadow-z2;
         }
     }
 }

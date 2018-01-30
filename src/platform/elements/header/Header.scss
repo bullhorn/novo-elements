@@ -32,6 +32,7 @@ header[theme] {
                 height: 1.8em;
                 width: 2px;
                 margin: 0 0.6em;
+                background-color: rgba(0, 0, 0, 0.1);
             }
         }
         >section {
@@ -52,9 +53,6 @@ header[theme] {
             &>section.primary {
                 background: $color;
             }
-            header-spacer {
-                background: darken($color, 10%);
-            }
         }
     }
     &[theme='light'],
@@ -72,6 +70,9 @@ header[theme] {
         }
     }
     &.condensed {
+        >section {
+            padding: 1em;
+        }
         i {
             font-size: 1.2em;
         }
