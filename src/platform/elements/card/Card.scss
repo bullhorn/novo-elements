@@ -4,6 +4,7 @@ novo-card {
         box-shadow: $whiteframe-shadow-z3;
         border-radius: 0.4em;
         position: relative;
+        overflow-x: hidden;
         &.loading {
             min-height: 200px;
         }
