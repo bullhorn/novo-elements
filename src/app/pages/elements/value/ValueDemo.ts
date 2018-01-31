@@ -11,7 +11,6 @@ let AddressValueDemoTpl = require('./templates/AddressValueDemo.html');
 let FormatterValueDemoTpl = require('./templates/FormatterValueDemo.html');
 let AssociatedValueDemoTpl = require('./templates/AssociatedValueDemo.html');
 let DateTimeValueDemoTpl = require('./templates/DateTimeValueDemo.html');
-let EmailValueDemoTpl = require('./templates/EmailValueDemo.html');
 let ExternalLinkValueDemoTpl = require('./templates/ExternalLinkValueDemo.html');
 const template = `
 <div class="container">
@@ -28,7 +27,7 @@ const template = `
     <div class="example value-demo">${CategoryValueDemoTpl}</div>
     <code-snippet [code]="CategoryValueDemoTpl"></code-snippet>
     <h5>Icon Right</h5>
-    <p>Render fields with an icon on the right with an onclick event
+    <p>Render fields with one or multiple icons on the right with an onclick event
     that calls a function on the meta object</p>
     <div class="example value-demo">${IconRightValueDemoTpl}</div>
     <code-snippet [code]="IconRightValueDemoTpl"></code-snippet>
@@ -40,10 +39,6 @@ const template = `
     <p>Render Entity TO_ONE fields as links</p>
     <div class="example value-demo">${FormatterValueDemoTpl}</div>
     <code-snippet [code]="FormatterValueDemoTpl"></code-snippet>
-    <h5>Email Value</h5>
-    <p>Render Email fields with email functionality for mobile theme</p>
-    <div class="example value-demo">${EmailValueDemoTpl}</div>
-    <code-snippet [code]="EmailValueDemoTpl"></code-snippet>
     <h5>External Links</h5>
     <p>Render external links</p>
     <div class="example value-demo">${ExternalLinkValueDemoTpl}</div>
@@ -73,7 +68,6 @@ export class ValueDemoComponent {
     private IconRightValueDemoTpl: string = IconRightValueDemoTpl;
     private CorporateUserValueDemoTpl: string = CorporateUserValueDemoTpl;
     private FormatterValueDemoTpl: string = FormatterValueDemoTpl;
-    private EmailValueDemoTpl: string = EmailValueDemoTpl;
     private ExternalLinkValueDemoTpl: string = ExternalLinkValueDemoTpl;
     private DateTimeValueDemoTpl: string = DateTimeValueDemoTpl;
     private AddressValueDemoTpl: string = AddressValueDemoTpl;
@@ -144,12 +138,6 @@ export class ValueDemoComponent {
             return `${args.label} #${value && value.id || ''}`
         }
     };
-    emailValueData = 'amrutha@example.com';
-    emailValueMeta = {
-        name: 'email',
-        label: 'Email Address'
-    };
-    emailValueTheme = NOVO_VALUE_THEME.MOBILE;
     externalLinkData = 'www.bullhorn.com';
     externalLinkMeta = {
         name: 'companyUrl',

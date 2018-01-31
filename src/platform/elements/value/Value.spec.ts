@@ -142,24 +142,11 @@ describe('Elements: NovoValueElement', () => {
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.INTERNAL_LINK);
         });
-        it('should set type to email for an email', () => {
-            component.meta.name = 'email';
-            component.ngOnChanges();
-            expect(component.type).toEqual(NOVO_VALUE_TYPE.EMAIL);
-        });
         it('should set type to link for a link', () => {
             component.meta.name = 'companyURL';
             component.data = '';
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.LINK);
-        });
-    });
-    describe('Function: isEmailField', () => {
-        it('should return true for email fields and false if not email field', () => {
-            expect(component.isEmailField({ name: 'email' })).toBeTruthy();
-            expect(component.isEmailField({ name: 'email2' })).toBeTruthy();
-            expect(component.isEmailField({ name: 'email3' })).toBeTruthy();
-            expect(component.isEmailField({ name: 'cat' })).toBeFalsy();
         });
     });
     describe('Function: isLinkField', () => {

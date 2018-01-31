@@ -2,58 +2,8 @@
 import { Component, Input, OnInit, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
 //APP
 import { Helpers } from '../../utils/Helpers';
-export enum NOVO_VALUE_TYPE { DEFAULT, EMAIL, ENTITY_LIST, LINK, INTERNAL_LINK };
+export enum NOVO_VALUE_TYPE { DEFAULT, ENTITY_LIST, LINK, INTERNAL_LINK };
 export enum NOVO_VALUE_THEME { DEFAULT, MOBILE };
-
-@Component({
-    selector: 'novo-value-email',
-    template: `
-        <div class="value-outer">
-            <label>{{ meta.label }}</label>
-            <a *ngIf="!isMobile"  class="value" (click)="openEmail(data)"> {{ data }}</a>
-            <div *ngIf="isMobile" class="value">{{ data }}</div>
-        </div>
-        <i class="bhi-email actions" *ngIf="showIcon" (click)="openEmail(data)"></i>
-    `
-})
-export class NovoValueEmail {
-    @Input() data: any; //use interface
-    @Input() meta: any; //use interface
-    @Input() theme: NOVO_VALUE_THEME;
-    @HostBinding('class.mobile')
-    public get isMobile(): boolean {
-        return this.theme === NOVO_VALUE_THEME.MOBILE;
-    }
-
-    openEmail(data: any): void {
-        if (this.meta && this.meta.openEmail && typeof this.meta.openEmail === 'function') {
-            this.meta.openEmail(data);
-        } else {
-            let newTab: any = window.open('', '_blank', '', true);
-            if (newTab) {
-                newTab.location.replace(`mailto:${encodeURIComponent(data)}`);
-                // Self close for desktop clients
-                setTimeout(() => {
-                    try {
-                        if (newTab.location.href === 'about:blank') {
-                            newTab.close();
-                        }
-                    } catch (error) {
-                        // No op, browser handled the mailto link
-                    }
-                });
-            }
-        }
-        if (Helpers.isEmpty(this.theme)) {
-            this.theme = NOVO_VALUE_THEME.DEFAULT;
-        }
-    }
-
-    public get showIcon(): boolean {
-        return !Helpers.isEmpty(this.data);
-    }
-}
-
 
 @Component({
     selector: 'novo-value',
@@ -64,8 +14,6 @@ export class NovoValueEmail {
                 <a *ngSwitchCase="NOVO_VALUE_TYPE.INTERNAL_LINK" class="value" (click)="openLink()" [innerHTML]="data | render : meta"></a>
                 <a *ngSwitchCase="NOVO_VALUE_TYPE.LINK" class="value" [href]="url" target="_blank" [innerHTML]="data | render : meta"></a>
             </div>
-
-            <novo-value-email *ngSwitchCase="NOVO_VALUE_TYPE.EMAIL" [data]="data" [theme]="theme" [meta]="meta"></novo-value-email>
 
             <div *ngSwitchDefault class="value-outer">
                 <label>{{ meta.label }}</label>
@@ -136,9 +84,7 @@ export class NovoValueElement implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes?: SimpleChanges): any {
-        if (this.meta && this.isEmailField(this.meta)) {
-            this.type = NOVO_VALUE_TYPE.EMAIL;
-        } else if (this.meta && this.isLinkField(this.meta, this.data)) {
+        if (this.meta && this.isLinkField(this.meta, this.data)) {
             this.type = NOVO_VALUE_TYPE.LINK;
             // Make sure the value has a protocol, otherwise the URL will be relative
             let hasProtocol: any = new RegExp('^(http|https)://', 'i');
@@ -160,11 +106,6 @@ export class NovoValueElement implements OnInit, OnChanges {
                     break;
             }
         }
-    }
-
-    isEmailField(field: { name?: string, type?: NOVO_VALUE_TYPE }): boolean {
-        const emailFields: any = ['email', 'email2', 'email3'];
-        return emailFields.indexOf(field.name) > -1 || field.type === NOVO_VALUE_TYPE.EMAIL;
     }
 
     isLinkField(field: { name?: string, type?: NOVO_VALUE_TYPE }, data: any): boolean {
