@@ -11,9 +11,7 @@ let AddressValueDemoTpl = require('./templates/AddressValueDemo.html');
 let FormatterValueDemoTpl = require('./templates/FormatterValueDemo.html');
 let AssociatedValueDemoTpl = require('./templates/AssociatedValueDemo.html');
 let DateTimeValueDemoTpl = require('./templates/DateTimeValueDemo.html');
-let EmailValueDemoTpl = require('./templates/EmailValueDemo.html');
 let ExternalLinkValueDemoTpl = require('./templates/ExternalLinkValueDemo.html');
-let PhoneValueDemoTpl = require('./templates/PhoneValueDemo.html');
 const template = `
 <div class="container">
     <h1>Value/Details/Summary <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/value">(source)</a></small></h1>
@@ -29,7 +27,7 @@ const template = `
     <div class="example value-demo">${CategoryValueDemoTpl}</div>
     <code-snippet [code]="CategoryValueDemoTpl"></code-snippet>
     <h5>Icon Right</h5>
-    <p>Render fields with an icon on the right with an onclick event
+    <p>Render fields with one or multiple icons on the right with an onclick event
     that calls a function on the meta object</p>
     <div class="example value-demo">${IconRightValueDemoTpl}</div>
     <code-snippet [code]="IconRightValueDemoTpl"></code-snippet>
@@ -41,14 +39,6 @@ const template = `
     <p>Render Entity TO_ONE fields as links</p>
     <div class="example value-demo">${FormatterValueDemoTpl}</div>
     <code-snippet [code]="FormatterValueDemoTpl"></code-snippet>
-    <h5>Phone Value</h5>
-    <p>Render Phone fields with Call and Message functionality for mobile theme</p>
-    <div class="example value-demo">${PhoneValueDemoTpl}</div>
-    <code-snippet [code]="PhoneValueDemoTpl"></code-snippet>
-    <h5>Email Value</h5>
-    <p>Render Email fields with email functionality for mobile theme</p>
-    <div class="example value-demo">${EmailValueDemoTpl}</div>
-    <code-snippet [code]="EmailValueDemoTpl"></code-snippet>
     <h5>External Links</h5>
     <p>Render external links</p>
     <div class="example value-demo">${ExternalLinkValueDemoTpl}</div>
@@ -78,8 +68,6 @@ export class ValueDemoComponent {
     private IconRightValueDemoTpl: string = IconRightValueDemoTpl;
     private CorporateUserValueDemoTpl: string = CorporateUserValueDemoTpl;
     private FormatterValueDemoTpl: string = FormatterValueDemoTpl;
-    private PhoneValueDemoTpl: string = PhoneValueDemoTpl;
-    private EmailValueDemoTpl: string = EmailValueDemoTpl;
     private ExternalLinkValueDemoTpl: string = ExternalLinkValueDemoTpl;
     private DateTimeValueDemoTpl: string = DateTimeValueDemoTpl;
     private AddressValueDemoTpl: string = AddressValueDemoTpl;
@@ -114,10 +102,15 @@ export class ValueDemoComponent {
         }],
         name: 'status',
         label: 'Status',
-        icon: 'next',
-        onIconClick: (data, meta) => {
-            window.alert('hey there');
-        }
+        icons: [{
+            iconCls: 'next',
+            onIconClick: (data, meta) => {
+                window.alert('hey there');
+            }
+            }, {
+            iconCls: 'close',
+            onIconClick: '',
+        }]
     };
     corporateUserData = {
         id: 123,
@@ -145,19 +138,6 @@ export class ValueDemoComponent {
             return `${args.label} #${value && value.id || ''}`
         }
     };
-    phoneValueData = '2222222222';
-    phoneValueMeta = {
-        name: 'phone1',
-        type: NOVO_VALUE_TYPE.PHONE,
-        label: 'Mobile Phone #'
-    };
-    phoneValueTheme = NOVO_VALUE_THEME.MOBILE;
-    emailValueData = 'amrutha@example.com';
-    emailValueMeta = {
-        name: 'email',
-        label: 'Email Address'
-    };
-    emailValueTheme = NOVO_VALUE_THEME.MOBILE;
     externalLinkData = 'www.bullhorn.com';
     externalLinkMeta = {
         name: 'companyUrl',

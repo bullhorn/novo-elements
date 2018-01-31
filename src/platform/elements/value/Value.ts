@@ -2,90 +2,8 @@
 import { Component, Input, OnInit, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
 //APP
 import { Helpers } from '../../utils/Helpers';
-export enum NOVO_VALUE_TYPE { DEFAULT, EMAIL, PHONE, ENTITY_LIST, LINK, INTERNAL_LINK };
+export enum NOVO_VALUE_TYPE { DEFAULT, ENTITY_LIST, LINK, INTERNAL_LINK };
 export enum NOVO_VALUE_THEME { DEFAULT, MOBILE };
-
-
-@Component({
-    selector: 'novo-value-phone',
-    template: `
-        <div class="value-outer">
-            <label>{{ meta.label }}</label>
-            <a *ngIf="!isMobile" class="value" href="tel:{{data}}" target="_parent">
-                {{ data }}
-            </a>
-            <div *ngIf="isMobile" class="value">{{ data }}</div>
-        </div>
-        <div class="actions" *ngIf="showIcon">
-            <a href="tel:{{data}}"><i class="bhi-phone"></i></a>
-            <a href="sms:{{data}}"><i class="bhi-sms"></i></a>
-        </div>
-    `
-})
-export class NovoValuePhone {
-    @Input() data: any; //TODO use interface
-    @Input() meta: any; //use interface
-    @Input() theme: NOVO_VALUE_THEME;
-
-    @HostBinding('class.mobile')
-    public get isMobile(): boolean {
-        return this.theme === NOVO_VALUE_THEME.MOBILE;
-    }
-
-    public get showIcon(): boolean {
-        return !Helpers.isEmpty(this.data);
-    }
-}
-
-@Component({
-    selector: 'novo-value-email',
-    template: `
-        <div class="value-outer">
-            <label>{{ meta.label }}</label>
-            <a *ngIf="!isMobile"  class="value" (click)="openEmail(data)"> {{ data }}</a>
-            <div *ngIf="isMobile" class="value">{{ data }}</div>
-        </div>
-        <i class="bhi-email actions" *ngIf="showIcon" (click)="openEmail(data)"></i>
-    `
-})
-export class NovoValueEmail {
-    @Input() data: any; //use interface
-    @Input() meta: any; //use interface
-    @Input() theme: NOVO_VALUE_THEME;
-    @HostBinding('class.mobile')
-    public get isMobile(): boolean {
-        return this.theme === NOVO_VALUE_THEME.MOBILE;
-    }
-
-    openEmail(data: any): void {
-        if (this.meta && this.meta.openEmail && typeof this.meta.openEmail === 'function') {
-            this.meta.openEmail(data);
-        } else {
-            let newTab: any = window.open('', '_blank', '', true);
-            if (newTab) {
-                newTab.location.replace(`mailto:${encodeURIComponent(data)}`);
-                // Self close for desktop clients
-                setTimeout(() => {
-                    try {
-                        if (newTab.location.href === 'about:blank') {
-                            newTab.close();
-                        }
-                    } catch (error) {
-                        // No op, browser handled the mailto link
-                    }
-                });
-            }
-        }
-        if (Helpers.isEmpty(this.theme)) {
-            this.theme = NOVO_VALUE_THEME.DEFAULT;
-        }
-    }
-
-    public get showIcon(): boolean {
-        return !Helpers.isEmpty(this.data);
-    }
-}
-
 
 @Component({
     selector: 'novo-value',
@@ -97,14 +15,13 @@ export class NovoValueEmail {
                 <a *ngSwitchCase="NOVO_VALUE_TYPE.LINK" class="value" [href]="url" target="_blank" [innerHTML]="data | render : meta"></a>
             </div>
 
-            <novo-value-phone *ngSwitchCase="NOVO_VALUE_TYPE.PHONE" [data]="data" [theme]="theme" [meta]="meta"></novo-value-phone>
-            <novo-value-email *ngSwitchCase="NOVO_VALUE_TYPE.EMAIL" [data]="data" [theme]="theme" [meta]="meta"></novo-value-email>
-
             <div *ngSwitchDefault class="value-outer">
                 <label>{{ meta.label }}</label>
                 <div *ngIf="isDefault" class="value" [innerHTML]="data | render : meta"></div>
             </div>
-            <i *ngIf="showIcon" [class]="iconClass" (click)="onValueClick()"></i>
+            <div class="actions" *ngIf="showIcon">
+                <i *ngFor="let icon of meta.icons" [class]="iconClass(icon)" (click)="onValueClick(icon)"></i>
+            </div>
         </ng-container>
     `
 })
@@ -131,11 +48,16 @@ export class NovoValueElement implements OnInit, OnChanges {
         return this.theme === NOVO_VALUE_THEME.MOBILE;
     }
 
-    public get iconClass(): string {
-        if (this.meta && this.meta.icon) {
-            return `bhi-${this.meta.icon} actions`;
+    iconClass(icon): string {
+        let iconClass = '';
+        if (icon && icon.iconCls) {
+            iconClass = `bhi-${icon.iconCls} actions`;
+            if (icon.onIconClick) {
+                iconClass = `${iconClass} clickable`
+            }
+            return iconClass;
         }
-        return '';
+        return iconClass;
     }
 
     public get isDefault(): boolean {
@@ -147,12 +69,12 @@ export class NovoValueElement implements OnInit, OnChanges {
     }
 
     public get showIcon(): boolean {
-        return this.meta && this.meta.icon && !Helpers.isEmpty(this.data);
+        return this.meta && this.meta.icons && this.meta.icons.length && !Helpers.isEmpty(this.data);
     }
 
-    onValueClick(): void {
-        if (this.meta && this.meta.onIconClick && typeof this.meta.onIconClick === 'function') {
-            this.meta.onIconClick(this.data, this.meta);
+    onValueClick(icon): void {
+        if (icon.onIconClick && typeof icon.onIconClick === 'function') {
+            icon.onIconClick(this.data, this.meta);
         }
     }
     openLink(): void {
@@ -162,11 +84,7 @@ export class NovoValueElement implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes?: SimpleChanges): any {
-        if (this.meta && this.isEmailField(this.meta)) {
-            this.type = NOVO_VALUE_TYPE.EMAIL;
-        } else if (this.meta && this.isPhoneField(this.meta)) {
-            this.type = NOVO_VALUE_TYPE.PHONE;
-        } else if (this.meta && this.isLinkField(this.meta, this.data)) {
+        if (this.meta && this.isLinkField(this.meta, this.data)) {
             this.type = NOVO_VALUE_TYPE.LINK;
             // Make sure the value has a protocol, otherwise the URL will be relative
             let hasProtocol: any = new RegExp('^(http|https)://', 'i');
@@ -188,16 +106,6 @@ export class NovoValueElement implements OnInit, OnChanges {
                     break;
             }
         }
-    }
-
-    isEmailField(field: { name?: string, type?: NOVO_VALUE_TYPE }): boolean {
-        const emailFields: any = ['email', 'email2', 'email3'];
-        return emailFields.indexOf(field.name) > -1 || field.type === NOVO_VALUE_TYPE.EMAIL;
-    }
-
-    isPhoneField(field: { name?: string, type?: NOVO_VALUE_TYPE }): boolean {
-        let phoneFields: any = ['phone', 'phone2', 'phone3', 'pager', 'mobile', 'workPhone', 'billingPhone'];
-        return phoneFields.indexOf(field.name) > -1 || field.type === NOVO_VALUE_TYPE.PHONE;
     }
 
     isLinkField(field: { name?: string, type?: NOVO_VALUE_TYPE }, data: any): boolean {
