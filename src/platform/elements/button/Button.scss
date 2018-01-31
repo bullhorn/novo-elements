@@ -22,6 +22,7 @@ button {
         }
         i {
             font-size: 1em;
+            margin: 0 !important;
         }
         &:focus {
             outline: none;
@@ -65,7 +66,7 @@ button {
                 justify-content: center;
             }
             &[icon] {
-                padding: ($padding-top - 3px) ($padding-side - 10px) ($padding-top - 3px) $padding-side;
+                padding: ($padding-top - 4px) ($padding-side - 10px) ($padding-top - 4px) $padding-side;
                 i {
                     background: rgba(0, 0, 0, .15);
                     padding: 5px;
@@ -182,7 +183,7 @@ button {
                 }
             }
             &[icon] {
-                padding: ($padding-top - 4px) ($padding-side - 11px) ($padding-top - 4px) ($padding-side - 1px);
+                padding: ($padding-top - 5px) ($padding-side - 11px) ($padding-top - 5px) ($padding-side - 1px);
                 i {
                     padding: 5px;
                     border-radius: 50%;

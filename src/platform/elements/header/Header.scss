@@ -71,10 +71,14 @@ header[theme] {
     }
     &.condensed {
         >section {
-            padding: 1em;
+            padding: 0 1em;
+            height: 57px;
+            i {
+                font-size: 1.2em;
+            }
         }
-        i {
-            font-size: 1.2em;
+        novo-icon>i {
+            font-size: 1.4em;
         }
         button[theme][theme="icon"] {
             width: 30px !important;
