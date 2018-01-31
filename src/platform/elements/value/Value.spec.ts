@@ -31,7 +31,7 @@ describe('Elements: NovoValueElement', () => {
     });
 
     describe('iconClass ', () => {
-        it('should set iconClass to meta icon', () => {
+        it('should set iconClass to icon iconCls', () => {
             component.launched = false;
             let icon: object = {
                     iconCls: 'test',
@@ -39,6 +39,16 @@ describe('Elements: NovoValueElement', () => {
             };
             let result = component.iconClass(icon);
             expect(result).toBe('bhi-test actions');
+        });
+
+        it('should set iconClass to iconCls and clickable', () => {
+            component.launched = false;
+            let icon: object = {
+                    iconCls: 'test',
+                    onIconClick: function() { },
+            };
+            let result = component.iconClass(icon);
+            expect(result).toBe('bhi-test actions clickable');
         });
 
         it('should set iconClass to empty if no icon defined', () => {
@@ -81,10 +91,25 @@ describe('Elements: NovoValueElement', () => {
     });
 
     describe('oninit: showIcon ', () => {
-        it('should return true if icon is defined and not empty', () => {
+        it('should return true if icons is defined and not empty', () => {
             component.meta = {
                 icons:[{
                     iconCls: 'test',
+                    onIconClick: '',
+                }]
+            };
+            component.data = 'test';
+            component.ngOnInit();
+            expect(component.showIcon).toBeTruthy();
+        });
+
+        it('should return true with multiple icons', () => {
+            component.meta = {
+                icons:[{
+                    iconCls: 'test',
+                    onIconClick: '',
+                }, {
+                    iconCls: 'anchor',
                     onIconClick: '',
                 }]
             };
@@ -104,6 +129,17 @@ describe('Elements: NovoValueElement', () => {
             let icon: any = {
                     iconCls: 'test',
                     onIconClick: function() { },
+            };
+            component.data = 'test';
+            spyOn(icon, 'onIconClick');
+            component.onValueClick(icon);
+            expect(icon.onIconClick).toHaveBeenCalledWith(component.data, component.meta);
+        });
+
+        it('should return flase if icon is defined and not empty', () => {
+            let icon: any = {
+                    iconCls: 'test',
+                    onIconClick: '',
             };
             component.data = 'test';
             spyOn(icon, 'onIconClick');
