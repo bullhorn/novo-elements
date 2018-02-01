@@ -4,7 +4,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
 import { findByCountryId } from '../../utils/countries/Countries';
-import { EntityUtils } from '../../utils/entity-utils/EntityUtils';
 
 /**
  * @class RenderPipe
@@ -99,6 +98,49 @@ export class RenderPipe implements PipeTransform {
         return false;
     }
 
+    getEntityLabel(item: any, entity: string): string {
+        switch (entity) {
+            case 'CorporateUser':
+            case 'ClientContact':
+            case 'ClientContact1':
+            case 'ClientContact2':
+            case 'ClientContact3':
+            case 'ClientContact4':
+            case 'ClientContact5':
+            case 'Lead':
+            case 'Candidate':
+            case 'Person':
+                return `${item.firstName || ''} ${item.lastName || ''}`.trim();
+            case 'ClientCorporation':
+            case 'ClientCorporation1':
+            case 'ClientCorporation2':
+            case 'ClientCorporation3':
+            case 'ClientCorporation4':
+            case 'ClientCorporation5':
+                return `${item.name || ''}`.trim();
+            case 'JobOrder':
+            case 'JobOrder1':
+            case 'JobOrder2':
+            case 'JobOrder3':
+            case 'JobOrder4':
+            case 'JobOrder5':
+            case 'Opportunity':
+                return `${item.title || ''}`.trim();
+            case 'Placement':
+                let label: string = '';
+                if (item.candidate) {
+                    label = `${item.candidate.firstName} ${item.candidate.lastName}`.trim();
+                }
+                if (item.jobOrder) {
+                    label = `${label} - ${item.jobOrder.title}`.trim();
+                }
+                return label;
+            default:
+                return '';
+        }
+    }
+
+
     /**
      * Define the fields to set or retrieve for the given entity. Getter and Setter methods will automagically
      * be set up on the entity once the fields are defined.
@@ -115,7 +157,7 @@ export class RenderPipe implements PipeTransform {
 
         // Handle when we don't have meta, but passing an entity
         if (value && value._subtype && !args) {
-            return EntityUtils.getEntityLabel(value, value._subtype);
+            return this.getEntityLabel(value, value._subtype);
         }
 
         // Stop logic for nulls

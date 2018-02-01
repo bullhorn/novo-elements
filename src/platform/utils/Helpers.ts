@@ -24,7 +24,7 @@ export class Helpers {
                 let k = keys.shift();
                 value = k ? value[k] : `${value}.`;
             }
-            return value !== undefined ? value : original;
+            return value !== undefined ? value : '';
         });
     }
 

@@ -1,6 +1,8 @@
 // NG2
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Http } from '@angular/http';
+// Vendor
 // APP
 import {
     BaseControl,
@@ -24,9 +26,17 @@ import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/e
 import { Helpers } from '../Helpers';
 import { NovoFieldset } from '../../elements/form/FormInterfaces';
 import { NovoFormControl, NovoFormGroup } from '../../elements/form/NovoFormControl';
-
+import { NovoLabelService } from '../../services/novo-label-service';
+import { OptionsService } from './../../services/options/OptionsService';
 @Injectable()
 export class FormUtils {
+
+    ASSOCIATED_ENTITY_LIST: string[] = ['Candidate', 'ClientContact', 'ClientCorporation', 'Lead', 'Opportunity', 'JobOrder', 'CorporateUser', 'Person', 'Placement'];
+    PICKER_TEST_LIST: string[] = ['CandidateText', 'ClientText', 'ClientContactText', 'ClientCorporationText', 'LeadText', 'OpportunityText', 'JobOrderText', 'CorporateUserText', 'PersonText'];
+
+    constructor(public labels: NovoLabelService, public optionsService: OptionsService) {
+    }
+
     toFormGroup(controls: Array<any>): NovoFormGroup {
         let group: any = {};
         controls.forEach(control => {
@@ -66,46 +76,73 @@ export class FormUtils {
      * @param field
      * @returns {string}
      */
-    determineInputType(field: { dataSpecialization: string, inputType: string, options: string, multiValue: boolean, dataType: string, type: string }): string {
+    determineInputType(field: { dataSpecialization: string, inputType: string, options: string, multiValue: boolean, dataType: string, type: string, associatedEntity?: any, optionsUrl?: string, optionsType?: string }): string {
         let type: string;
-        if (field.dataSpecialization === 'DATETIME') {
-            type = 'datetime';
-        } else if (field.dataSpecialization === 'TIME') {
-            type = 'time';
-        } else if (field.dataSpecialization === 'MONEY') {
-            type = 'currency';
-        } else if (field.dataSpecialization === 'PERCENTAGE') {
-            type = 'percentage';
-        } else if (field.dataSpecialization === 'HTML') {
-            type = 'editor';
-        } else if (field.dataSpecialization === 'HTML-MINIMAL') {
-            type = 'editor-minimal';
-        } else if (field.dataSpecialization === 'YEAR') {
-            type = 'year';
-        } else if (field.dataType === 'Timestamp') {
-            type = 'date';
-        } else if (field.dataType === 'Boolean') {
-            type = 'tiles';
+        let dataSpecializationTypeMap = {
+            'DATETIME': 'datetime',
+            'TIME': 'time',
+            'MONEY': 'currency',
+            'PERCENTAGE': 'percentage',
+            'HTML': 'editor',
+            'HTML-MINIMAL': 'editor-minimal',
+            'YEAR': 'year',
+        };
+        let dataTypeToTypeMap = {
+            'Timestamp': 'date',
+            'Boolean': 'tiles',
+        };
+        let inputTypeToTypeMap = {
+            'CHECKBOX': 'radio',
+            'RADIO': 'radio',
+            'SELECT': 'select',
+            'TILES': 'tiles',
+        };
+        let inputTypeMultiToTypeMap = {
+            'CHECKBOX': 'checklist',
+            'RADIO': 'checklist',
+            'SELECT': 'chips',
+        };
+        let typeToTypeMap = {
+            'file': 'file',
+            'COMPOSITE': 'address'
+        };
+        let numberDataTypeToTypeMap = {
+            'Double': 'float',
+            'BigDecimal': 'float',
+            'Integer': 'number'
+        };
+        if (field.type === 'TO_MANY') {
+            if (field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity)) {
+                type = 'entitychips'; // TODO!
+            } else {
+                type = 'chips';
+            }
+        } else if (field.type === 'TO_ONE') {
+            if (field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity)) {
+                type = 'entitypicker'; // TODO!
+            } else {
+                type = 'picker';
+            }
+        } else if (field.optionsUrl && field.inputType === 'SELECT') {
+            if (field.optionsType && ~this.PICKER_TEST_LIST.indexOf(field.optionsType)) {
+                type = 'entitypicker'; // TODO!
+            } else {
+                type = 'picker';
+            }
+        } else if (Object.keys(dataSpecializationTypeMap).indexOf(field.dataSpecialization) > -1) {
+            type = dataSpecializationTypeMap[field.dataSpecialization];
+        } else if (Object.keys(dataTypeToTypeMap).indexOf(field.dataType) > -1) {
+            type = dataTypeToTypeMap[field.dataType];
         } else if (field.inputType === 'TEXTAREA') {
             type = 'textarea';
-        } else if (field.options && ~['CHECKBOX', 'RADIO'].indexOf(field.inputType) && field.multiValue) {
-            type = 'checklist';
-        } else if (field.options && ~['CHECKBOX', 'RADIO'].indexOf(field.inputType) && !field.multiValue) {
-            type = 'radio';
-        } else if (field.options && ~['SELECT'].indexOf(field.inputType) && field.multiValue) {
-            type = 'chips';
-        } else if (field.options && ~['SELECT'].indexOf(field.inputType) && !field.multiValue) {
-            type = 'select';
-        } else if (~['Double', 'BigDecimal'].indexOf(field.dataType)) {
-            type = 'float';
-        } else if (field.options && ~['TILES'].indexOf(field.inputType) && !field.multiValue) {
-            type = 'tiles';
-        } else if (field.type === 'COMPOSITE') {
-            type = 'address';
-        } else if (field.dataType === 'Integer') {
-            type = 'number';
-        } else if (field.type === 'file') {
-            type = 'file';
+        } else if (field.options && Object.keys(inputTypeToTypeMap).indexOf(field.inputType) > -1 && !field.multiValue) {
+            type = inputTypeToTypeMap[field.inputType];
+        } else if (field.options && Object.keys(inputTypeMultiToTypeMap).indexOf(field.inputType) > -1 && field.multiValue) {
+            type = inputTypeMultiToTypeMap[field.inputType];
+        } else if (Object.keys(typeToTypeMap).indexOf(field.type) > -1) {
+            type = typeToTypeMap[field.type];
+        } else if (Object.keys(numberDataTypeToTypeMap).indexOf(field.dataType) > -1) {
+            type = numberDataTypeToTypeMap[field.dataType];
         }/* else {
             throw new Error('FormUtils: This field type is unsupported.');
         }*/
@@ -285,7 +322,7 @@ export class FormUtils {
         return control;
     }
 
-    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any, forTable: boolean = false) {
+    toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean, }, overrides?: any, forTable: boolean = false) {
         let controls = [];
         if (meta && meta.fields) {
             let fields = meta.fields;
@@ -401,32 +438,17 @@ export class FormUtils {
         }
     }
 
-    getControlOptions(field: any, http, config: { token?: string, restUrl?: string, military?: boolean }): any {
+    getControlOptions(field: any, http: any, config: { token?: string, restUrl?: string, military?: boolean }): any {
         // TODO: The token property of config is the only property used; just pass in `token: string`
         if (field.dataType === 'Boolean' && !field.options) {
             // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
             // TODO: (cont.) returns `tiles`
             return [
-                { value: false, label: 'No' },
-                { value: true, label: 'Yes' }
+                { value: false, label: this.labels.no },
+                { value: true, label: this.labels.yes }
             ];
         } else if (field.optionsUrl) {
-            return {
-                field: 'value',
-                format: '$label',
-                options: (query) => {
-                    // TODO: should return Observable
-                    return new Promise((resolve, reject) => {
-                        if (query && query.length) {
-                            http.get(`${field.optionsUrl}?filter=${query || ''}&BhRestToken=${config.token}`)
-                                .map(response => response.json().data)
-                                .subscribe(resolve, reject);
-                        } else {
-                            resolve([]);
-                        }
-                    });
-                }
-            };
+            return this.optionsService.getOptionsConfig(http, field, config);
         } else if (Array.isArray(field.options) && field.type === 'chips') {
             let options = field.options;
             return {
@@ -504,4 +526,5 @@ export class FormUtils {
             }
         });
     }
+
 }

@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 // APP
 import { Home } from './pages/home/Home';
 import { ColorComponent, TypographyComponent, CompositionComponent, IconographyComponent } from './pages/design';
-import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent } from './pages/utils';
+import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent, SecurityDemoComponent } from './pages/utils';
 import {
     AceEditorDemoComponent,
     ButtonDemoComponent,
@@ -39,7 +39,7 @@ import {
     SimpleTableDemoComponent,
     SearchDemoComponent,
     FormGroupedDemoComponent,
-    ValueDemoComponent
+    ValueDemoComponent,
 } from './pages/elements';
 
 const routes: Routes = [
@@ -92,7 +92,7 @@ const routes: Routes = [
     { path: 'pipes', component: PipesDemoComponent, data: { title: 'Pipes', section: 'utils' } },
     { path: 'app-bridge', component: AppBridgeDemoComponent, data: { title: 'App Bridge', section: 'utils' } },
     { path: 'field-interactions', component: FieldInteractionsDemoComponent, data: { title: 'Field Interactions', section: 'utils' } },
-
+    { path: 'security', component: SecurityDemoComponent, data: { title: 'Security', section: 'utils' } },
     // Catch All
     { path: '**', redirectTo: '/', data: {} }
 ];

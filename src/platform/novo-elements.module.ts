@@ -40,7 +40,7 @@ import { NovoSearchBoxModule } from './elements/search/SearchBox.module';
 import { GooglePlacesModule } from './elements/places/places.module';
 import { NovoValueModule } from './elements/value/Value.module';
 import { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
-
+import { UnlessModule } from './elements/unless/Unless.module';
 import { NovoOverlayModule } from './elements/overlay/Overlay.module';
 import { DateFormatService } from './services/date-format/DateFormat';
 import { NovoLabelService } from './services/novo-label-service';
@@ -50,7 +50,8 @@ import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
-
+import { Security } from './services/security/Security';
+import { OptionsService } from './services/options/OptionsService';
 @NgModule({
     imports: [
         ReactiveFormsModule
@@ -95,6 +96,7 @@ import { FormUtils } from './utils/form-utils/FormUtils';
         GooglePlacesModule,
         NovoValueModule,
         NovoAceEditorModule,
+        UnlessModule,
     ],
     providers: [
         { provide: ComponentUtils, useClass: ComponentUtils },
@@ -104,7 +106,8 @@ import { FormUtils } from './utils/form-utils/FormUtils';
         { provide: GooglePlacesService, useClass: GooglePlacesService },
         { provide: GlobalRef, useClass: BrowserGlobalRef },
         { provide: LocalStorageService, useClass: LocalStorageService },
-        { provide: FormUtils, useClass: FormUtils }
+        { provide: FormUtils, useClass: FormUtils },
+        { provide: OptionsService, useClass: OptionsService }
     ]
 })
 export class NovoElementsModule {
