@@ -30,19 +30,30 @@ describe('Elements: NovoValueElement', () => {
         });
     });
 
-    describe('oninit: iconClass ', () => {
-        it('should set iconClass to meta icon', () => {
+    describe('iconClass ', () => {
+        it('should set iconClass to icon iconCls', () => {
             component.launched = false;
-            component.meta = {
-              icon: 'test',
+            let icon: object = {
+                    iconCls: 'test',
+                    onIconClick: '',
             };
-            component.ngOnInit();
-            expect(component.iconClass).toBe('bhi-test actions');
+            let result = component.iconClass(icon);
+            expect(result).toBe('bhi-test actions');
+        });
+
+        it('should set iconClass to iconCls and clickable', () => {
+            component.launched = false;
+            let icon: object = {
+                    iconCls: 'test',
+                    onIconClick: function() { },
+            };
+            let result = component.iconClass(icon);
+            expect(result).toBe('bhi-test actions clickable');
         });
 
         it('should set iconClass to empty if no icon defined', () => {
-            component.ngOnInit();
-            expect(component.iconClass).toBe('');
+            let result = component.iconClass({});
+            expect(result).toBe('');
         });
     });
 
@@ -80,9 +91,27 @@ describe('Elements: NovoValueElement', () => {
     });
 
     describe('oninit: showIcon ', () => {
-        it('should return true if icon is defined and not emoty', () => {
+        it('should return true if icons is defined and not empty', () => {
             component.meta = {
-                icon: 'test',
+                icons:[{
+                    iconCls: 'test',
+                    onIconClick: '',
+                }]
+            };
+            component.data = 'test';
+            component.ngOnInit();
+            expect(component.showIcon).toBeTruthy();
+        });
+
+        it('should return true with multiple icons', () => {
+            component.meta = {
+                icons:[{
+                    iconCls: 'test',
+                    onIconClick: '',
+                }, {
+                    iconCls: 'anchor',
+                    onIconClick: '',
+                }]
             };
             component.data = 'test';
             component.ngOnInit();
@@ -96,19 +125,31 @@ describe('Elements: NovoValueElement', () => {
     });
 
     describe('onValueClick ', () => {
-        it('should return true if icon is defined and not emoty', () => {
-            component.meta = {
-                onIconClick: function() { },
+        it('should return true if icon is defined and not empty', () => {
+            let icon: any = {
+                    iconCls: 'test',
+                    onIconClick: function() { },
             };
             component.data = 'test';
-            spyOn(component.meta, 'onIconClick');
-            component.onValueClick();
-            expect(component.meta.onIconClick).toHaveBeenCalledWith(component.data, component.meta);
+            spyOn(icon, 'onIconClick');
+            component.onValueClick(icon);
+            expect(icon.onIconClick).toHaveBeenCalledWith(component.data, component.meta);
+        });
+
+        it('should return flase if icon is defined and not empty', () => {
+            let icon: any = {
+                    iconCls: 'test',
+                    onIconClick: '',
+            };
+            component.data = 'test';
+            spyOn(icon, 'onIconClick');
+            component.onValueClick(icon);
+            expect(icon.onIconClick).toHaveBeenCalledWith(component.data, component.meta);
         });
     });
 
     describe('openLink ', () => {
-        it('should return true if icon is defined and not emoty', () => {
+        it('should return true if icon is defined and not empty', () => {
             component.meta = {
                 openLink: function() { },
             };
@@ -137,37 +178,11 @@ describe('Elements: NovoValueElement', () => {
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.INTERNAL_LINK);
         });
-        it('should set type to email for an email', () => {
-            component.meta.name = 'email';
-            component.ngOnChanges();
-            expect(component.type).toEqual(NOVO_VALUE_TYPE.EMAIL);
-        });
-        it('should set type to phone for an phone', () => {
-            component.meta.name = 'mobile';
-            component.ngOnChanges();
-            expect(component.type).toEqual(NOVO_VALUE_TYPE.PHONE);
-        });
         it('should set type to link for a link', () => {
             component.meta.name = 'companyURL';
             component.data = '';
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.LINK);
-        });
-    });
-    describe('Function: isEmailField', () => {
-        it('should return true for email fields and false if not email field', () => {
-            expect(component.isEmailField({ name: 'email' })).toBeTruthy();
-            expect(component.isEmailField({ name: 'email2' })).toBeTruthy();
-            expect(component.isEmailField({ name: 'email3' })).toBeTruthy();
-            expect(component.isEmailField({ name: 'cat' })).toBeFalsy();
-        });
-    });
-    describe('Function: isPhoneField', () => {
-        it('should return true for phone fields and false if not phone field', () => {
-            expect(component.isPhoneField({ name: 'phone' })).toBeTruthy();
-            expect(component.isPhoneField({ name: 'mobile' })).toBeTruthy();
-            expect(component.isPhoneField({ name: 'phone3' })).toBeTruthy();
-            expect(component.isPhoneField({ name: 'cat' })).toBeFalsy();
         });
     });
     describe('Function: isLinkField', () => {
