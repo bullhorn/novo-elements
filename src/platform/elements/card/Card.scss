@@ -60,6 +60,14 @@ novo-card {
                 }
             }
         }
+        novo-card-actions {
+            button {
+                font-size: 1.05rem;
+                i {
+                    font-size: 1.05em;
+                }
+            }
+        }
         main {
             padding: 0 0.8em 0.8em;
             background-color: $white;
@@ -83,8 +91,8 @@ novo-card {
             }
         }
         footer {
-            padding: 0.5em;
-            border-top: 1px solid lighten($grey, 20%);
+            display: flex;
+            justify-content: center;
         }
     }
 }
