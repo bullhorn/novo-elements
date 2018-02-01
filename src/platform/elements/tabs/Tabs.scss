@@ -154,6 +154,7 @@ novo-nav {
                 &:hover {
                     .novo-tab-link {
                         opacity: 0.5;
+                        font-weight: 400;
                     }
                 }
             }
@@ -170,6 +171,11 @@ novo-nav {
                 }
                 .indicator {
                     background: $positive;
+                }
+            }
+            &:hover {
+                .novo-tab-link {
+                    font-weight: 500;
                 }
             }
         }
