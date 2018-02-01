@@ -9,8 +9,8 @@ novo-category-dropdown {
         .dropdown-container {
             overflow: hidden;
             max-height: inherit;
-            max-width: 300px;
-            min-width: 300px;
+            max-width: 400px;
+            min-width: 400px;
             display: block;
             z-index: 1000;
             border-radius: 2px;
@@ -113,9 +113,8 @@ novo-category-dropdown {
             overflow: auto;
         }
         novo-list-item {
-            padding: 10px 23px;
-            height: 45px;
-            min-height: 45px;
+            padding: 1em;
+            flex-shrink: 0;
             cursor: pointer;
             font-size: 0.9em;
             &:focus,

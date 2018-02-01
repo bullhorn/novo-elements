@@ -37,6 +37,7 @@ import { NovoSelectElement } from '../select/Select';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { DateFormatService } from '../../services/date-format/DateFormat';
+import { OptionsService } from '../../services/options/OptionsService';
 
 describe('Elements: NovoTableElement', () => {
     let fixture;
@@ -89,6 +90,7 @@ describe('Elements: NovoTableElement', () => {
             providers: [
                 { provide: NovoLabelService, useClass: NovoLabelService },
                 { provide: FormUtils, useClass: FormUtils },
+                OptionsService,
                 NgControl,
                 FormBuilder,
                 DateFormatService

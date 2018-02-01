@@ -14,6 +14,47 @@ describe('Utils: Helpers', () => {
         it('should be defined.', () => {
             expect(Helpers.interpolate('', {})).toBeDefined();
         });
+        it('should be defined', () => {
+            expect(Helpers.interpolate).toBeDefined();
+        });
+
+        it('should interpolate using the right properties', () => {
+            let format: string = '$name';
+            let data: { name: string } = {
+                name: 'Stuff',
+            };
+            let expected: string = 'Stuff';
+            expect(Helpers.interpolate(format, data)).toBe(expected);
+        });
+
+        it('should interpolate correctly when format requires 2 properties', () => {
+            let format: string = '$firstName $lastName';
+            let data: { firstName: string, lastName: string } = {
+                firstName: 'James',
+                lastName: 'Bond',
+            };
+            let expected: string = 'James Bond';
+            expect(Helpers.interpolate(format, data)).toBe(expected);
+        });
+
+        it('should interpolate correctly when format has non-replacable characters', () => {
+            let format: string = '$id: $title';
+            let data: { id: number, title: string } = {
+                id: 213,
+                title: 'Bond',
+            };
+            let expected: string = '213: Bond';
+            expect(Helpers.interpolate(format, data)).toBe(expected);
+        });
+
+        it('should interpolate correctly when properties are undefined', () => {
+            let format: string = '$id: $title';
+            let data: { id: number } = {
+                id: 123,
+            };
+            let expected: string = '123: ';
+            expect(Helpers.interpolate(format, data)).toBe(expected);
+        });
     });
 
     xdescribe('Method: validateInterpolationProps(str, props)', () => {

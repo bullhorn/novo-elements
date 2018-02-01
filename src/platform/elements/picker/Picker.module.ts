@@ -14,12 +14,42 @@ import { NovoPickerContainer } from './extras/picker-container/PickerContainer';
 import { EntityPickerResult, EntityPickerResults } from './extras/entity-picker-results/EntityPickerResults';
 import { ChecklistPickerResults } from './extras/checklist-picker-results/ChecklistPickerResults';
 import { GroupedMultiPickerResults } from './extras/grouped-multi-picker-results/GroupedMultiPickerResults';
+import { SkillsSpecialtyPickerResults } from './extras/skills-picker-results/SkillsSpecialtyPickerResults';
+import { DistributionListPickerResults } from './extras/distributionlist-picker-results/DistributionListPickerResults';
 
 @NgModule({
     imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule, OverlayModule, NovoOverlayModule, NovoSwitchModule],
-    declarations: [NovoPickerElement, NovoPickerContainer, PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults, GroupedMultiPickerResults],
-    exports: [NovoPickerElement, NovoPickerContainer, PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults, GroupedMultiPickerResults],
-    entryComponents: [PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults, GroupedMultiPickerResults]
+    declarations: [
+        NovoPickerElement,
+        NovoPickerContainer,
+        PickerResults,
+        EntityPickerResult,
+        EntityPickerResults,
+        ChecklistPickerResults,
+        GroupedMultiPickerResults,
+        DistributionListPickerResults,
+        SkillsSpecialtyPickerResults
+    ],
+    exports: [
+        NovoPickerElement,
+        NovoPickerContainer,
+        PickerResults,
+        EntityPickerResult,
+        EntityPickerResults,
+        ChecklistPickerResults,
+        GroupedMultiPickerResults,
+        DistributionListPickerResults,
+        SkillsSpecialtyPickerResults
+    ],
+    entryComponents: [
+        PickerResults,
+        EntityPickerResult,
+        EntityPickerResults,
+        ChecklistPickerResults,
+        GroupedMultiPickerResults,
+        DistributionListPickerResults,
+        SkillsSpecialtyPickerResults
+    ]
 })
 export class NovoPickerModule {
 }
