@@ -1,5 +1,9 @@
 // NG2
-import { Component, Input, Output, ElementRef, EventEmitter, OnInit, OnDestroy, Directive, HostListener, AfterContentInit } from '@angular/core';
+import {
+    Component, Input, Output, ElementRef, EventEmitter,
+    OnInit, OnDestroy, Directive, HostListener, AfterContentInit,
+    AfterViewInit,
+} from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
 // APP
@@ -140,7 +144,7 @@ export class NovoCustomControlContainerElement {
                             <!--TextArea-->
                             <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" autosize (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></textarea>
                             <!--Editor-->
-                            <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" [minimal]="control.minimal" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
+                            <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" [startupFocus]="index === 0 || control.startupFocus" [minimal]="control.minimal" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
                             <!--AceEditor-->
                             <novo-ace-editor *ngSwitchCase="'ace-editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-ace-editor>
                             <!--HTML5 Select-->
@@ -182,7 +186,7 @@ export class NovoCustomControlContainerElement {
                             <!--Checklist-->
                             <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="form.controls[control.key].options" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (onSelect)="modelChange($event)"></novo-check-list>
                             <!--QuickNote-->
-                            <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [config]="form.controls[control.key].config" (change)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-quick-note>
+                            <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [startupFocus]="index === 0 || control.startupFocus" [placeholder]="form.controls[control.key].placeholder" [config]="form.controls[control.key].config" (change)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-quick-note>
                             <!--ReadOnly-->
                             <!--TODO - Handle rendering of different READONLY values-->
                             <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
@@ -235,10 +239,12 @@ export class NovoCustomControlContainerElement {
         '[attr.data-control-key]': 'control.key',
     }
 })
-export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy {
+export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
     @Input() control;
+    @Input() index: number;
     @Input() form: NovoFormGroup;
     @Input() condensed: boolean = false;
+    @Input() autoFocus: boolean = false;
     @Output() change: EventEmitter<any> = new EventEmitter();
 
     @Output('blur')
@@ -276,6 +282,19 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     get showCount() {
         return this.form.controls[this.control.key].maxlength && this.focused && (this.form.controls[this.control.key].controlType === 'text-area' || this.form.controls[this.control.key].controlType === 'textbox');
+    }
+
+    ngAfterViewInit() {
+        if (this.autoFocus) {
+            setTimeout(() => {
+                let input: HTMLElement = this.element.nativeElement.querySelector('input');
+                if (input) {
+                    input.focus();
+                } else {
+                    console.info('[NovoControl] - autofocus set on a control that does not support focus yet!'); // tslint:disable-line
+                }
+            });
+        }
     }
 
     ngOnInit() {

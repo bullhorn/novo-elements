@@ -27,19 +27,12 @@ declare var CKEDITOR: any;
     `
 })
 export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
-    // The quick-note-wrapper that contains the text area and results
     @ViewChild('wrapper') public wrapper: ElementRef;
-
-    // The textarea host for CKEditor
     @ViewChild('host') public host: ElementRef;
-
-    // Picker dropdown results container
     @ViewChild('results', { read: ViewContainerRef }) results: ViewContainerRef;
 
-    // The config object that customizes the Quick Note behavior
     @Input() config: any;
-
-    // The placeholder text when the value in the text field is empty
+    @Input() startupFocus: boolean = false;
     @Input() placeholder: string;
 
     // Emitter for selects
@@ -453,7 +446,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
                 // Place selection at the end of the line
                 range.moveToPosition(parentNode, CKEDITOR.POSITION_BEFORE_END);
-                this.ckeInstance.getSelection().selectRanges( [ range ] );
+                this.ckeInstance.getSelection().selectRanges([range]);
             }
         }
     }
@@ -499,11 +492,17 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         let editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
         this.wrapper.nativeElement.style.setProperty('height', '100%');
 
+        // If focus on startup, don't have placeholder
+        if (this.startupFocus) {
+            this.placeholderVisible = false;
+        }
+
         return {
             enterMode: CKEDITOR.ENTER_BR,
             shiftEnterMode: CKEDITOR.ENTER_P,
             disableNativeSpellChecker: false,
             height: editorHeight,
+            startupFocus: this.startupFocus,
             removePlugins: 'liststyle,tabletools,contextmenu', // allows browser based spell checking
             toolbar: [{
                 name: 'basicstyles',

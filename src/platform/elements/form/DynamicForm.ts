@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ViewContainerRef, AfterViewInit, ElementRef } from '@angular/core';
 // APP
 import { Helpers } from './../../utils/Helpers';
 import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
@@ -47,9 +47,9 @@ export class NovoControlCustom implements OnInit {
     template: `
         <div class="novo-fieldset-container">
             <novo-fieldset-header [icon]="icon" [title]="title" *ngIf="title"></novo-fieldset-header>
-            <ng-container *ngFor="let control of controls">
+            <ng-container *ngFor="let control of controls;let i = index">
                 <div class="novo-form-row" [class.disabled]="control.disabled" *ngIf="control.__type !== 'GroupedControl'">
-                    <novo-control *ngIf="!control.customControl" [control]="control" [form]="form"></novo-control>
+                    <novo-control *ngIf="!control.customControl" [control]="control" [form]="form" [index]="i"></novo-control>
                     <novo-control-custom *ngIf="control.customControl" [control]="control" [form]="form"></novo-control-custom>
                 </div>
                 <div *ngIf="control.__type === 'GroupedControl'">TODO - GroupedControl</div>
@@ -80,12 +80,13 @@ export class NovoFieldsetElement {
         </div>
     `
 })
-export class NovoDynamicFormElement implements OnChanges, OnInit {
+export class NovoDynamicFormElement implements OnChanges, OnInit, AfterViewInit {
     @Input() controls: Array<any> = [];
     @Input() fieldsets: Array<NovoFieldset> = [];
     @Input() form: NovoFormGroup;
     @Input() layout: string;
     @Input() hideNonRequiredFields: boolean = true;
+    @Input() autoFocusFirstField: boolean = false;
 
     allFieldsRequired = false;
     allFieldsNotRequired = false;
@@ -93,8 +94,27 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
     showingRequiredFields = true;
     numControls = 0;
 
+    constructor(private element: ElementRef) { }
+
     public ngOnInit(): void {
         this.ngOnChanges();
+    }
+
+    public ngAfterViewInit(): void {
+        if (this.autoFocusFirstField) {
+            setTimeout(() => {
+                let controls: HTMLElement[] = this.element.nativeElement.querySelectorAll('novo-control:not(.hidden)');
+                if (controls && controls.length) {
+                    let firstControl: HTMLElement = controls[0];
+                    let input: HTMLElement = firstControl.querySelector('input');
+                    if (input) {
+                        input.focus();
+                    } else {
+                        console.info('[NovoDynamicForm] - autofocus set on a control that does not support focus yet!'); // tslint:disable-line
+                    }
+                }
+            });
+        }
     }
 
     public ngOnChanges(changes?: SimpleChanges): void {
