@@ -47,9 +47,9 @@ export class NovoControlCustom implements OnInit {
     template: `
         <div class="novo-fieldset-container">
             <novo-fieldset-header [icon]="icon" [title]="title" *ngIf="title"></novo-fieldset-header>
-            <ng-container *ngFor="let control of controls;let i = index">
+            <ng-container *ngFor="let control of controls">
                 <div class="novo-form-row" [class.disabled]="control.disabled" *ngIf="control.__type !== 'GroupedControl'">
-                    <novo-control *ngIf="!control.customControl" [control]="control" [form]="form" [index]="i"></novo-control>
+                    <novo-control *ngIf="!control.customControl" [control]="control" [form]="form"></novo-control>
                     <novo-control-custom *ngIf="control.customControl" [control]="control" [form]="form"></novo-control-custom>
                 </div>
                 <div *ngIf="control.__type === 'GroupedControl'">TODO - GroupedControl</div>
