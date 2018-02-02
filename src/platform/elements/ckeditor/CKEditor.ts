@@ -26,6 +26,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
     @Input() debounce;
     @Input() name;
     @Input() minimal;
+    @Input() startupFocus: boolean = false;
 
     @Output() change = new EventEmitter();
     @Output() ready = new EventEmitter();
@@ -66,6 +67,9 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
 
     ngAfterViewInit() {
         let config = this.config || this.getBaseConfig();
+        if (this.startupFocus) {
+            config.startupFocus = true;
+        }
         this.ckeditorInit(config);
     }
 
