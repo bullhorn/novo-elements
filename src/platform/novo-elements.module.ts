@@ -51,7 +51,7 @@ import { LocalStorageService } from './services/storage/storage.service';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
 import { Security } from './services/security/Security';
-
+import { OptionsService } from './services/options/OptionsService';
 @NgModule({
     imports: [
         ReactiveFormsModule
@@ -106,6 +106,7 @@ import { Security } from './services/security/Security';
         { provide: GooglePlacesService, useClass: GooglePlacesService },
         { provide: GlobalRef, useClass: BrowserGlobalRef },
         { provide: LocalStorageService, useClass: LocalStorageService },
+        { provide: OptionsService, useClass: OptionsService },
         { provide: FormUtils, useClass: FormUtils },
     ]
 })

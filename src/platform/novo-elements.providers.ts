@@ -25,9 +25,9 @@ const NOVO_ELEMENTS_PROVIDERS = [
     { provide: ComponentUtils, useClass: ComponentUtils },
     { provide: GlobalRef, useClass: BrowserGlobalRef },
     { provide: LocalStorageService, useClass: LocalStorageService },
+    { provide: OptionsService, useClass: OptionsService },
     FieldInteractionApi,
     DateFormatService,
-    OptionsService,
     Security,
 ];
 
