@@ -51,7 +51,7 @@ import { LocalStorageService } from './services/storage/storage.service';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
 import { Security } from './services/security/Security';
-import { OptionsService } from './services/options/OptionsService';
+
 @NgModule({
     imports: [
         ReactiveFormsModule
@@ -107,7 +107,6 @@ import { OptionsService } from './services/options/OptionsService';
         { provide: GlobalRef, useClass: BrowserGlobalRef },
         { provide: LocalStorageService, useClass: LocalStorageService },
         { provide: FormUtils, useClass: FormUtils },
-        { provide: OptionsService, useClass: OptionsService }
     ]
 })
 export class NovoElementsModule {

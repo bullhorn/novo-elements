@@ -14,6 +14,7 @@ import { DateFormatService } from './services/date-format/DateFormat';
 import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
 import { Security } from './services/security/Security';
+import { OptionsService } from './services/options/OptionsService';
 
 const NOVO_ELEMENTS_PROVIDERS = [
     { provide: NovoDragulaService, useClass: NovoDragulaService },
@@ -26,6 +27,7 @@ const NOVO_ELEMENTS_PROVIDERS = [
     { provide: LocalStorageService, useClass: LocalStorageService },
     FieldInteractionApi,
     DateFormatService,
+    OptionsService,
     Security,
 ];
 
