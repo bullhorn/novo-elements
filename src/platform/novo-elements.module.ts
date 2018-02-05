@@ -106,8 +106,8 @@ import { OptionsService } from './services/options/OptionsService';
         { provide: GooglePlacesService, useClass: GooglePlacesService },
         { provide: GlobalRef, useClass: BrowserGlobalRef },
         { provide: LocalStorageService, useClass: LocalStorageService },
+        { provide: OptionsService, useClass: OptionsService },
         { provide: FormUtils, useClass: FormUtils },
-        { provide: OptionsService, useClass: OptionsService }
     ]
 })
 export class NovoElementsModule {
