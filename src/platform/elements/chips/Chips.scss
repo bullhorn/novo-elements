@@ -31,7 +31,7 @@ novo-entity-chips {
         justify-content: space-between;
         background: #EEEEEE;
         border-radius: 4px;
-        padding: 0.5em 0.75em;
+        padding: 0.3em 0.5em;
         margin-right: 5px;
         margin-bottom: 5px;
         width: auto;
@@ -53,18 +53,13 @@ novo-entity-chips {
             }
             i {
                 font-size: 0.8em;
-                &:before {
-                    vertical-align: baseline !important;
-                }
             }
         }
         i.bhi-close {
             margin-left: 10px;
+            font-size: 1.2em;
             cursor: pointer;
             color: darken(#eee, 15%);
-            &:before {
-                vertical-align: baseline;
-            }
             &:hover {
                 color: darken(#eee, 35%);
             }
