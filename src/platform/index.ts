@@ -60,6 +60,7 @@ export { NovoActivityTableState } from './elements/simple-table/state';
 export { NovoSimpleTableModule } from './elements/simple-table/simple-table.module'
 // Export specific elements that are used in local references and/or view children
 export { NovoTableElement, NovoTableConfig } from './elements/table/Table';
+export { NovoCalendarDateChangeElement } from './elements/calendar/common/CalendarDateChange';
 // Export all services
 export { NovoToastService } from './elements/toast/ToastService';
 export { NovoModalService } from './elements/modal/ModalService';
