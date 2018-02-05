@@ -1,5 +1,6 @@
 // NG2
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
     selector: 'novo-toast',
@@ -16,7 +17,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
         </div>
         <div class="toast-content">
             <h5 *ngIf="title">{{title}}</h5>
-            <p *ngIf="message" [class.message-only]="!title">{{message}}</p>
+            <p *ngIf="_message" [class.message-only]="!title" [innerHtml]="_message"></p>
             <div *ngIf="link" class="link-generated">
                 <input type="text" [value]="link" onfocus="this.select();"/>
             </div>
@@ -33,11 +34,14 @@ export class NovoToastElement implements OnInit, OnChanges {
     @Input() theme: string = 'danger';
     @Input() icon: string = 'caution';
     @Input() title: string;
-    @Input() message: string;
     @Input() hasDialogue: boolean = false;
     @Input() link: string;
     @Input() isCloseable: boolean = false;
+    @Input() set message(m: string) {
+        this._message = this.sanitizer.bypassSecurityTrustHtml(m);
+    }
 
+    _message: SafeHtml;
     show: boolean = false;
     animate: boolean = false;
     parent: any = null;
@@ -47,6 +51,8 @@ export class NovoToastElement implements OnInit, OnChanges {
     iconClass: string;
     alertTheme: string;
     embedded: any;
+
+    constructor(private sanitizer: DomSanitizer) { }
 
     ngOnInit() {
         if (!this.launched) {
@@ -70,21 +76,21 @@ export class NovoToastElement implements OnInit, OnChanges {
 
     clickHandler(event) {
         if (!this.isCloseable) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            if (this.parent) {
+                this.parent.hide(this);
+            }
+        }
+    }
+
+    close(event) {
         if (event) {
             event.stopPropagation();
             event.preventDefault();
         }
-        if (this.parent) {
-            this.parent.hide(this);
-        }
-      }
-    }
-
-    close(event) {
-      if (event) {
-          event.stopPropagation();
-          event.preventDefault();
-      }
-          this.parent.hide(this);
+        this.parent.hide(this);
     }
 }
