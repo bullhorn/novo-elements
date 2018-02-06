@@ -18,4 +18,14 @@ export class ComponentUtils {
         }
         return location.createComponent(componentFactory, location.length, childInjector);
     }
+
+    appendTopOfLocation(ComponentClass, location: ViewContainerRef, providers?: ResolvedReflectiveProvider[]): ComponentRef<any> {
+        let componentFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentClass);
+        let parentInjector = location.parentInjector;
+        let childInjector: Injector = parentInjector;
+        if (providers && providers.length > 0) {
+            childInjector = ReflectiveInjector.fromResolvedProviders(providers, parentInjector);
+        }
+        return location.createComponent(componentFactory, 0, childInjector);
+    }
 }
