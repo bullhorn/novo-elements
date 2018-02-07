@@ -240,7 +240,7 @@ export class NovoCustomControlContainerElement {
     }
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
-    @Input() control;
+    @Input() control: any;
     @Input() form: NovoFormGroup;
     @Input() condensed: boolean = false;
     @Input() autoFocus: boolean = false;
@@ -284,13 +284,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     ngAfterViewInit() {
-        if (this.autoFocus) {
+        if (this.autoFocus && this.control.controlType !== 'picker') {
             setTimeout(() => {
                 let input: HTMLElement = this.element.nativeElement.querySelector('input');
                 if (input) {
                     input.focus();
-                } else {
-                    console.info('[NovoControl] - autofocus set on a control that does not support focus yet!'); // tslint:disable-line
                 }
             });
         }

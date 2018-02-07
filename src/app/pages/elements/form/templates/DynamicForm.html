@@ -1,6 +1,6 @@
 <button theme="secondary" *ngIf="!myform.showingAllFields && !(myform.allFieldsRequired || myform.allFieldsNotRequired)" (click)="myform.showAllFields()">Show All Fields</button>
 <button theme="secondary" *ngIf="!myform.showingRequiredFields && !(myform.allFieldsRequired || myform.allFieldsNotRequired)" (click)="myform.showOnlyRequired()">Show Required Fields</button>
-<novo-dynamic-form class="dynamic" [fieldsets]="dynamic" [(form)]="dynamicForm" #myform></novo-dynamic-form>
+<novo-dynamic-form [autoFocusFirstField]="true" class="dynamic" [fieldsets]="dynamic" [(form)]="dynamicForm" #myform></novo-dynamic-form>
 <footer class="dynamic-demo-footer">
     <button (click)="save(myform)" theme="primary" icon="check">Save</button>
     <button (click)="clear()" theme="secondary" icon="check">Clear</button>

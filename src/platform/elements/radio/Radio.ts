@@ -21,11 +21,11 @@ export class NovoRadioGroup { }
     selector: 'novo-radio',
     providers: [RADIO_VALUE_ACCESSOR],
     template: `
-        <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" #radio (change)="select($event, radio)">
-        <label [attr.for]="name" (click)="select($event, radio)">
-            <button *ngIf="button" [ngClass]="{'unchecked': !radio.checked, 'checked': radio.checked, 'has-icon': !!icon}" [theme]="theme" [icon]="icon">{{ label }}</button>
+        <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" (change)="select($event)">
+        <label [attr.for]="name" (click)="select($event)">
+            <button *ngIf="button" [ngClass]="{'unchecked': !checked, 'checked': checked, 'has-icon': !!icon}" [theme]="theme" [icon]="icon">{{ label }}</button>
             <div *ngIf="!button">
-                <i [ngClass]="{'bhi-radio-empty': !radio.checked, 'bhi-radio-filled': radio.checked}"></i>
+                <i [ngClass]="{'bhi-radio-empty': !checked, 'bhi-radio-filled': checked}"></i>
                 {{ label }}
                 <ng-content></ng-content>
             </div>
@@ -55,16 +55,11 @@ export class NovoRadioElement implements ControlValueAccessor {
 
     constructor(private ref: ChangeDetectorRef) { }
 
-    /**
-     * Handles the select of the radio button, will only change if a new radio is selected
-     * @param event
-     * @param radio
-     */
-    select(event, radio) {
+    select(event) {
         Helpers.swallowEvent(event);
         // Only change the checked state if this is a new radio, they are not toggle buttons
-        if (!radio.checked) {
-            radio.checked = !radio.checked;
+        if (!this.checked) {
+            this.checked = !this.checked;
             this.change.emit(this.value);
             this.onModelChange(this.value);
             this.ref.markForCheck();
