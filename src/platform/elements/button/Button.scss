@@ -1,14 +1,16 @@
 button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
     padding: 6px 10px;
     height: 37px;
     &[class*="hint--"]:before,
     &[class*="hint--"]:after {
         text-transform: initial;
         word-wrap: break-word;
+    }
+    >div.flex-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
     i {
         font-size: 1em;
