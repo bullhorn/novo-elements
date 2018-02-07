@@ -12,7 +12,7 @@ import { Helpers } from '../../utils/Helpers';
                 <ng-content select="form-title"></ng-content>
                 <ng-content select="form-subtitle"></ng-content>
             </header>
-            <form class="novo-form" [formGroup]="form" autocomplete="off">
+            <form class="novo-form" [formGroup]="form">
                 <ng-content></ng-content>
             </form>
         </div>

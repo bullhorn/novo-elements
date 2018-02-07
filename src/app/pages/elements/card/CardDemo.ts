@@ -3,9 +3,6 @@ import { Component } from '@angular/core';
 // APP
 let AttributeCardDemoTpl = require('./templates/AttributeCardDemo.html');
 let FullConfigCardDemoTpl = require('./templates/FullConfigCardDemo.html');
-let ExtrasTimelineDemoTpl = require('./templates/ExtrasTimelineDemo.html');
-let ExtrasBestTimeDemoTpl = require('./templates/ExtrasBestTimeDemo.html');
-let ExtrasChartDonutDemoTpl = require('./templates/ExtrasChartDemoDemo.html');
 // Vendor
 import { NovoToastService } from './../../../../platform/index';
 
@@ -36,34 +33,6 @@ const template = `
         </div>
     </div>
     <code-snippet [code]="FullConfigCardDemoTpl"></code-snippet>
-
-    <h5>Card Extras - components/elements for cards</h5>
-    <p>Timeline</p>
-    <div class="example">
-        ${ExtrasTimelineDemoTpl}
-        <div class="actions">
-
-        </div>
-    </div>
-    <code-snippet [code]="ExtrasTimelineDemoTpl"></code-snippet>
-
-    <p>Best Time to *INSERT*</p>
-    <div class="example">
-        ${ExtrasBestTimeDemoTpl}
-        <div class="actions">
-
-        </div>
-    </div>
-    <code-snippet [code]="ExtrasBestTimeDemoTpl"></code-snippet>
-
-    <p>Donut Chart</p>
-    <div class="example">
-        ${ExtrasChartDonutDemoTpl}
-        <div class="actions">
-
-        </div>
-    </div>
-    <code-snippet [code]="ExtrasChartDonutDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -75,9 +44,6 @@ export class CardDemoComponent {
     // Templates
     AttributeCardDemoTpl: string = AttributeCardDemoTpl;
     FullConfigCardDemoTpl: string = FullConfigCardDemoTpl;
-    ExtrasTimelineDemoTpl: string = ExtrasTimelineDemoTpl;
-    ExtrasBestTimeDemoTpl: string = ExtrasBestTimeDemoTpl;
-    ExtrasChartDonutDemoTpl: string = ExtrasChartDonutDemoTpl;
 
     // Config for demos
     refresh: boolean = true;

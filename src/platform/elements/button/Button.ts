@@ -10,19 +10,19 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
         '[attr.loading]': 'loading'
     },
     template: `
-        <!--Flex wrapper for cross-browser support-->
-        <div [class]="flex">
+        <div class="flex-wrapper">
             <!--Left Icon-->
             <i *ngIf="icon && iconClass && leftSide" [ngClass]="iconClass"></i>
             <!--Transcluded Content-->
             <ng-content></ng-content>
             <!--Right Icon-->
             <i *ngIf="icon && iconClass && rightSide" [ngClass]="iconClass"></i>
+            <!--Loading-->
             <i *ngIf="loading" class="loading">
                 <svg version="1.1"
-                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-                 x="0px" y="0px" width="18.2px" height="18.5px" viewBox="0 0 18.2 18.5" style="enable-background:new 0 0 18.2 18.5;"
-                 xml:space="preserve">
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                    x="0px" y="0px" width="18.2px" height="18.5px" viewBox="0 0 18.2 18.5" style="enable-background:new 0 0 18.2 18.5;"
+                    xml:space="preserve">
                 <style type="text/css">
                     .spinner { fill:#FFFFFF; }
                 </style>
@@ -44,11 +44,9 @@ export class NovoButtonElement implements OnChanges {
     leftSide: boolean = false;
     rightSide: boolean = true;
     iconClass: string;
-    flex: string;
 
     ngOnChanges(changes?: SimpleChanges) {
         this.iconClass = (this.icon && !this.loading) ? `bhi-${this.icon}` : '';
-        this.flex = this.theme ? 'flex-wrapper' : '';
         if (this.side !== null && this.theme !== 'primary') {
             this.leftSide = (this.side === 'left');
             this.rightSide = !this.leftSide;

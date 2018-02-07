@@ -46,9 +46,10 @@
  $analytics-colors: ( aqua: $aqua, ocean: $ocean, mint: $mint, grass: $grass, sunflower: $sunflower, bittersweet: $bittersweet, grapefruit: $grapefruit, carnation: $carnation, lavender: $lavender); // Entity Color Map
  $entity-colors: ( star: $placement, person: $contact, company: $company, candidate: $candidate, navigation: $navigation, lead: $lead, contact: $contact, opportunity: $opportunity, job: $job, submission: $submission, sendout: $sendout, placement: $placement, note: $note, task: $neutral, distributionList: $neutral, credential: $neutral, user: $neutral, corporateuser: $neutral); // Generic Color Map
  $app-colors: ( positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, background: $off-white, black: $black, white: $white, grey: $grey, off-white: $off-white, dark: $dark, light: $light, pulse: $pulse, neutral: $neutral); // Loading Dot Color Map
- $dot-colors: ( ocean: $ocean, lavender: $lavender, grapefruit: $grapefruit, sunflower: $sunflower, mint: $mint); // All Colors
- $all-colors: ( company: $company, candidate: $candidate, navigation: $navigation, lead: $lead, contact: $contact, opportunity: $opportunity, job: $job, submission: $submission, sendout: $sendout, placement: $placement, note: $note, task: $neutral, distributionList: $neutral, credential: $neutral, user: $neutral, corporateuser: $neutral, aqua: $aqua, ocean: $ocean, mint: $mint, grass: $grass, sunflower: $sunflower, bittersweet: $bittersweet, grapefruit: $grapefruit, carnation: $carnation, lavender: $lavender, positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, background: $off-white, black: $black, white: $white, grey: $grey, off-white: $off-white, dark: $dark, light: $light, pulse: $pulse, neutral: $neutral); // Typography
- // -------------------------
+ $dot-colors: ( ocean: $ocean, lavender: $lavender, grapefruit: $grapefruit, sunflower: $sunflower, mint: $mint);
+ $dark-colors: ( company: $company, candidate: $candidate, navigation: $navigation, lead: $lead, contact: $contact, opportunity: $opportunity, job: $job, sendout: $sendout, placement: $placement, task: $neutral, distributionList: $neutral, credential: $neutral, user: $neutral, corporateuser: $neutral, aqua: $aqua, ocean: $ocean, mint: $mint, grass: $grass, sunflower: $sunflower, bittersweet: $bittersweet, grapefruit: $grapefruit, carnation: $carnation, lavender: $lavender, positive: $ocean, success: $grass, negative: $grapefruit, warning: $sunflower, black: $black, dark: $dark, pulse: $pulse, neutral: $neutral, navy: $navy);
+ $light-colors: ( submission: $submission, note: $note, background: $off-white, white: $white, grey: $grey, off-white: $off-white, light: $light);
+ $all-colors: map-merge($dark-colors, $light-colors); // -------------------------
  $base-font-size: 13px;
  $base-font-family: "Roboto",
  sans-serif;
@@ -63,7 +64,7 @@
  $whiteframe-zindex-z1: 1 !default;
  $whiteframe-shadow-z2: 0px 8px 17px rgba(0, 0, 0, 0.2) !default;
  $whiteframe-zindex-z2: 2 !default;
- $whiteframe-shadow-z3: 0px 17px 50px rgba(0, 0, 0, 0.19) !default;
+ $whiteframe-shadow-z3: 0px 4px 10px rgba(0, 0, 0, 0.15) !default;
  $whiteframe-zindex-z3: 3 !default;
  $whiteframe-shadow-z4: 0px 16px 28px 0 rgba(0, 0, 0, 0.22) !default;
  $whiteframe-zindex-z4: 4 !default;

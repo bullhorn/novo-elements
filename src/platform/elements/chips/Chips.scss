@@ -7,7 +7,7 @@ novo-entity-chips {
     align-items: center;
     flex-wrap: wrap;
     justify-content: flex-start;
-    border-bottom: 1px solid #EAEAEA;
+    border-bottom: 1px solid lighten($dark, 45%);
     transition: all 200ms ease-in-out;
     position: relative;
     padding: 5px 20px 5px 0;
@@ -15,7 +15,7 @@ novo-entity-chips {
         margin-bottom: 20px;
     }
     &:hover {
-        border-bottom: 1px solid lighten($dark, 45%);
+        border-bottom: 1px solid lighten($dark, 15%);
     }
     &.selected,
     &.selected:hover {
@@ -31,7 +31,7 @@ novo-entity-chips {
         justify-content: space-between;
         background: #EEEEEE;
         border-radius: 4px;
-        padding: 0.5em 0.75em;
+        padding: 0.3em 0.5em;
         margin-right: 5px;
         margin-bottom: 5px;
         width: auto;
@@ -53,18 +53,13 @@ novo-entity-chips {
             }
             i {
                 font-size: 0.8em;
-                &:before {
-                    vertical-align: baseline !important;
-                }
             }
         }
         i.bhi-close {
             margin-left: 10px;
+            font-size: 1.1em;
             cursor: pointer;
             color: darken(#eee, 15%);
-            &:before {
-                vertical-align: baseline;
-            }
             &:hover {
                 color: darken(#eee, 35%);
             }
@@ -114,7 +109,8 @@ novo-entity-chips {
         position: absolute;
         bottom: 8px;
         right: 0;
-        font-size: 1.2em;
+        font-size: 1.1em;
+        color: $dark;
         &.has-value {
             bottom: 14px;
         }

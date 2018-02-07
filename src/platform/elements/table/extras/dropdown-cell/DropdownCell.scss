@@ -9,12 +9,15 @@ novo-dropdown-cell,
         border-radius: 0;
         border-bottom: 1px solid #DEDEDE;
         padding: 0;
-        width: 100%;
+        width: 100% !important;
         max-width: 200px;
         i {
             font-size: 10px;
             margin-right: -5px;
             color: #A0A0A0;
+        }
+        .flex-wrapper {
+            justify-content: space-between;
         }
         &:active,
         &:hover {

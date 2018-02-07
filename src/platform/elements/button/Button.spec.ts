@@ -36,15 +36,6 @@ describe('Elements: NovoButtonElement', () => {
             expect(component.iconClass).toBe('');
         });
 
-        it('should set flex based on theme', () => {
-            component.theme = 'primary';
-            component.ngOnChanges();
-            expect(component.flex).toBe('flex-wrapper');
-            component.theme = null;
-            component.ngOnChanges();
-            expect(component.flex).toBe('');
-        });
-
         it('should force icon to right if theme is primary', () => {
             component.theme = 'primary';
             component.side = 'left';

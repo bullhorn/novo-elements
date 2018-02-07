@@ -115,7 +115,15 @@ novo-table {
             >th {
                 position: relative;
                 text-align: left;
-                padding: $table-cell-padding;
+                padding: $table-condensed-cell-padding;
+                button {
+                    padding: 5px !important;
+                    width: inherit !important;
+                    height: inherit !important;
+                }
+                .th-title {
+                    padding: 5px 5px 5px 0;
+                }
                 vertical-align: middle;
                 &.checkbox {
                     text-align: center;
@@ -394,28 +402,6 @@ novo-dropdown-container.table-dropdown {
                 padding: 0 5px 10px;
                 .calendar-top {
                     display: none;
-                }
-            }
-        }
-    }
-}
-
-// Condensed table w/ half padding
-.table-condensed {
-    tbody,
-    thead,
-    tfoot {
-        tr {
-            td,
-            th {
-                padding: $table-condensed-cell-padding;
-                button {
-                    padding: 5px !important;
-                    width: inherit !important;
-                    height: inherit !important;
-                }
-                .th-title {
-                    padding: 5px 5px 5px 0;
                 }
             }
         }

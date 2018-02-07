@@ -141,9 +141,6 @@ novo-nav {
     }
     &[theme="white"] {
         background-color: $white;
-        header & {
-            background: rgba(0, 0, 0, .03);
-        }
         &[direction="vertical"] {
             background: transparent;
         }
@@ -157,6 +154,7 @@ novo-nav {
                 &:hover {
                     .novo-tab-link {
                         opacity: 0.5;
+                        font-weight: 400;
                     }
                 }
             }
@@ -173,6 +171,11 @@ novo-nav {
                 }
                 .indicator {
                     background: $positive;
+                }
+            }
+            &:hover {
+                .novo-tab-link {
+                    font-weight: 500;
                 }
             }
         }
