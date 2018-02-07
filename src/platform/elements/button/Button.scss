@@ -1,6 +1,4 @@
 button {
-    padding: 6px 10px;
-    height: 37px;
     &[class*="hint--"]:before,
     &[class*="hint--"]:after {
         text-transform: initial;
@@ -31,6 +29,8 @@ button {
         }
     }
     &[theme] {
+        padding: 6px 10px;
+        min-height: 37px;
         font-size: 1rem;
         border: none;
         background: transparent;
