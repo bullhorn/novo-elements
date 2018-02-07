@@ -47,9 +47,9 @@ export class NovoControlCustom implements OnInit {
     template: `
         <div class="novo-fieldset-container">
             <novo-fieldset-header [icon]="icon" [title]="title" *ngIf="title"></novo-fieldset-header>
-            <ng-container *ngFor="let control of controls;let i = index">
+            <ng-container *ngFor="let control of controls;let controlIndex = index;">
                 <div class="novo-form-row" [class.disabled]="control.disabled" *ngIf="control.__type !== 'GroupedControl'">
-                    <novo-control *ngIf="!control.customControl" [control]="control" [form]="form" [index]="i"></novo-control>
+                    <novo-control *ngIf="!control.customControl" [autoFocus]="autoFocus && index === 0 && controlIndex === 0" [control]="control" [form]="form"></novo-control>
                     <novo-control-custom *ngIf="control.customControl" [control]="control" [form]="form"></novo-control-custom>
                 </div>
                 <div *ngIf="control.__type === 'GroupedControl'">TODO - GroupedControl</div>
@@ -62,6 +62,8 @@ export class NovoFieldsetElement {
     @Input() form: any;
     @Input() title: string;
     @Input() icon: string;
+    @Input() index: number;
+    @Input() autoFocus: boolean;
 }
 
 @Component({
@@ -73,14 +75,14 @@ export class NovoFieldsetElement {
                 <ng-content select="form-subtitle"></ng-content>
             </header>
             <form class="novo-form" [formGroup]="form" autocomplete="off">
-                <ng-container *ngFor="let fieldset of form.fieldsets">
-                    <novo-fieldset *ngIf="fieldset.controls.length" [icon]="fieldset.icon" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
+                <ng-container *ngFor="let fieldset of form.fieldsets;let i = index">
+                    <novo-fieldset *ngIf="fieldset.controls.length" [index]="i" [autoFocus]="autoFocusFirstField" [icon]="fieldset.icon" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
                 </ng-container>
             </form>
         </div>
     `
 })
-export class NovoDynamicFormElement implements OnChanges, OnInit, AfterViewInit {
+export class NovoDynamicFormElement implements OnChanges, OnInit {
     @Input() controls: Array<any> = [];
     @Input() fieldsets: Array<NovoFieldset> = [];
     @Input() form: NovoFormGroup;
@@ -98,23 +100,6 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterViewInit 
 
     public ngOnInit(): void {
         this.ngOnChanges();
-    }
-
-    public ngAfterViewInit(): void {
-        if (this.autoFocusFirstField) {
-            setTimeout(() => {
-                let controls: HTMLElement[] = this.element.nativeElement.querySelectorAll('novo-control:not(.hidden)');
-                if (controls && controls.length) {
-                    let firstControl: HTMLElement = controls[0];
-                    let input: HTMLElement = firstControl.querySelector('input');
-                    if (input) {
-                        input.focus();
-                    } else {
-                        console.info('[NovoDynamicForm] - autofocus set on a control that does not support focus yet!'); // tslint:disable-line
-                    }
-                }
-            });
-        }
     }
 
     public ngOnChanges(changes?: SimpleChanges): void {

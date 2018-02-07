@@ -135,7 +135,7 @@ export class NovoCustomControlContainerElement {
                             <!--Text-based Inputs-->
                             <!--TODO prefix/suffix on the control-->
                             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input *ngIf="form.controls[control.key].type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (input)="emitChange($event)" [maxlength]="form.controls[control.key].maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)">
+                                <input *ngIf="form.controls[control.key].type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (input)="emitChange($event)" [maxlength]="form.controls[control.key].maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" autocomplete>
                                 <input *ngIf="form.controls[control.key].type === 'number' && form.controls[control.key].subType !== 'percentage'" [formControlName]="control.key" [id]="control.key" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (keydown)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="form.controls[control.key].maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="numberInput.blur()" #numberInput>
                                 <input *ngIf="form.controls[control.key].type === 'number' && form.controls[control.key].subType === 'percentage'" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (keydown)="restrictKeys($event)" [value]="percentValue" (input)="handlePercentChange($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="percentInput.blur()" #percentInput>
                                 <label class="input-label" *ngIf="form.controls[control.key].subType === 'currency'">{{ control.currencyFormat }}</label>
@@ -144,7 +144,7 @@ export class NovoCustomControlContainerElement {
                             <!--TextArea-->
                             <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" autosize (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></textarea>
                             <!--Editor-->
-                            <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" [startupFocus]="index === 0 || control.startupFocus" [minimal]="control.minimal" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
+                            <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" [startupFocus]="control.startupFocus" [minimal]="control.minimal" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
                             <!--AceEditor-->
                             <novo-ace-editor *ngSwitchCase="'ace-editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-ace-editor>
                             <!--HTML5 Select-->
@@ -186,7 +186,7 @@ export class NovoCustomControlContainerElement {
                             <!--Checklist-->
                             <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="form.controls[control.key].options" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (onSelect)="modelChange($event)"></novo-check-list>
                             <!--QuickNote-->
-                            <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [startupFocus]="index === 0 || control.startupFocus" [placeholder]="form.controls[control.key].placeholder" [config]="form.controls[control.key].config" (change)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-quick-note>
+                            <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [startupFocus]="control.startupFocus" [placeholder]="form.controls[control.key].placeholder" [config]="form.controls[control.key].config" (change)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-quick-note>
                             <!--ReadOnly-->
                             <!--TODO - Handle rendering of different READONLY values-->
                             <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
@@ -240,8 +240,7 @@ export class NovoCustomControlContainerElement {
     }
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
-    @Input() control;
-    @Input() index: number;
+    @Input() control: any;
     @Input() form: NovoFormGroup;
     @Input() condensed: boolean = false;
     @Input() autoFocus: boolean = false;
@@ -285,13 +284,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     ngAfterViewInit() {
-        if (this.autoFocus) {
+        if (this.autoFocus && this.control.controlType !== 'picker') {
             setTimeout(() => {
                 let input: HTMLElement = this.element.nativeElement.querySelector('input');
                 if (input) {
                     input.focus();
-                } else {
-                    console.info('[NovoControl] - autofocus set on a control that does not support focus yet!'); // tslint:disable-line
                 }
             });
         }

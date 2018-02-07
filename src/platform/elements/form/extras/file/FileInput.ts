@@ -8,7 +8,7 @@ import { NovoFile } from './extras/file/File';
 
 // Value accessor for the component (supports ngModel)
 const FILE_VALUE_ACCESSOR = {
-    provide: NG_VALUE_ACCESSOR,
+    provide: NG_VALUE_ACCESSOR, 
     useExisting: forwardRef(() => NovoFileInputElement),
     multi: true
 };

@@ -1,11 +1,9 @@
 novo-file-input {
     display: flex;
     flex-flow: row wrap;
-
     .files-below {
         padding-top: 10px;
     }
-
     .file-output-group {
         width: 100%;
         margin-top: 15px;
@@ -13,14 +11,12 @@ novo-file-input {
             background-color: $white;
             box-shadow: 0 1px 4px rgba(#000, .15), 0 2px 10px rgba(#000, .09);
             margin-bottom: 15px;
-            position: relative;
-            //border-radius: 3px;
+            position: relative; //border-radius: 3px;
             display: flex;
             flex-flow: row nowrap;
             align-items: center;
             padding: 4px 12px;
             width: 100%;
-
             i.bhi-move {
                 color: $grey;
                 padding-right: .75em;
@@ -29,11 +25,12 @@ novo-file-input {
                 cursor: -webkit-grab;
                 cursor: grab;
             }
-
             label {
                 flex: 1;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
-
             button {
                 font-size: 1.4rem;
                 width: 42px;
@@ -49,31 +46,27 @@ novo-file-input {
             }
         }
     }
-
     .file-input-group {
         cursor: pointer;
         width: 100%;
-
         input[type="file"] {
             opacity: 0;
             position: absolute;
             width: 100% !important;
-            height: 100% !important;;
+            height: 100% !important;
+            ;
             cursor: pointer;
         }
-
         &:hover,
         &.active {
             label.boxed {
                 border: 2px dashed $positive;
             }
         }
-
         &.disabled {
             opacity: 0.3;
             pointer-events: none;
         }
-
         label {
             color: $grey;
             margin-left: 0;
@@ -84,7 +77,8 @@ novo-file-input {
             position: relative;
             padding: 15px;
             cursor: pointer;
-            pointer-events: none; /*This for FF*/
+            pointer-events: none;
+            /*This for FF*/
             strong {
                 color: $positive;
             }
@@ -98,13 +92,11 @@ novo-file-input {
             &.boxed {
                 border: 2px dashed $grey;
             }
-
             i {
                 font-size: 3em;
             }
         }
     }
-
     novo-loading {
         padding: 10px;
         transform: scale(.8, .8);
@@ -112,7 +104,7 @@ novo-file-input {
 }
 
 .gu-mirror {
-    .actions{
+    .actions {
         button {
             display: none;
         }
