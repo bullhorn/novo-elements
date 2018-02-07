@@ -1,29 +1,40 @@
-$padding-top: 10px;
-$padding-side: 15px;
 button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    height: 37px;
     &[class*="hint--"]:before,
     &[class*="hint--"]:after {
         text-transform: initial;
         word-wrap: break-word;
+    }
+    i {
+        font-size: 1em;
+    }
+    &[side="left"] {
+        i {
+            margin-right: 5px;
+        }
+    }
+    &[side="right"] {
+        i {
+            margin-left: 5px;
+        }
+    }
+    &[icon="times"] {
+        i {
+            font-size: 0.9em;
+        }
     }
     &[theme] {
         font-size: 1rem;
         border: none;
         background: transparent;
         border-radius: 3px;
-        padding: $padding-top $padding-side;
         text-transform: uppercase;
         transition: all 200ms ease-in-out;
-        div.flex-wrapper {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            align-items: center;
-        }
-        i {
-            font-size: 1em;
-            margin: 0 !important;
-        }
         &:focus {
             outline: none;
         }
@@ -56,17 +67,13 @@ button {
                     }
                 }
             }
-        } // Primary Themed Button
+        }
         &[theme="primary"] {
             background: $positive;
             color: #fff;
             min-width: 120px;
             text-align: left;
-            .flex-wrapper {
-                justify-content: center;
-            }
             &[icon] {
-                padding: ($padding-top - 4px) ($padding-side - 10px) ($padding-top - 4px) $padding-side;
                 i {
                     background: rgba(0, 0, 0, .15);
                     padding: 5px;
@@ -77,7 +84,6 @@ button {
                     align-items: center;
                     justify-content: center;
                     margin-left: 10px;
-                    line-height: 16px;
                     &:before {
                         vertical-align: baseline;
                     }
@@ -97,7 +103,7 @@ button {
             }
             &:active {
                 background: darken($positive, 5%);
-            } // Loop Generic Colors (Primary, Success, Negative, Etc.)
+            }
             @each $button,
             $color in $app-colors {
                 &[color="#{$button}"] {
@@ -124,7 +130,7 @@ button {
                 i {
                     background: rgba(0, 0, 0, .05);
                 }
-            } // Loop Analytics Colors
+            }
             @each $analytics,
             $color in $analytics-colors {
                 &[color="#{$analytics}"] {
@@ -145,9 +151,6 @@ button {
             background: #fff;
             color: $positive;
             border: 1px solid $positive;
-            .flex-wrapper {
-                justify-content: space-between;
-            }
             i.loading {
                 margin-left: 10px;
                 svg {
@@ -183,7 +186,6 @@ button {
                 }
             }
             &[icon] {
-                padding: ($padding-top - 5px) ($padding-side - 11px) ($padding-top - 5px) ($padding-side - 1px);
                 i {
                     padding: 5px;
                     border-radius: 50%;
@@ -193,19 +195,8 @@ button {
                     align-items: center;
                     justify-content: center;
                     margin-left: 10px;
-                    line-height: 16px;
                     &:before {
                         vertical-align: baseline;
-                    }
-                }
-                &[icon="collapse"] {
-                    i {
-                        &:before {}
-                    }
-                }
-                &[icon="convert"] {
-                    i {
-                        &:before {}
                     }
                 }
             }
@@ -213,9 +204,6 @@ button {
         &[theme="dialogue"] {
             background: transparent;
             color: $positive;
-            .flex-wrapper {
-                justify-content: center;
-            }
             &[icon] {
                 display: flex;
                 align-items: center;
@@ -228,21 +216,8 @@ button {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    line-height: 16px;
                     &:before {
                         vertical-align: baseline;
-                    }
-                }
-                &[side="left"] {
-                    padding: ($padding-top - 5px) $padding-side ($padding-top - 5px) ($padding-side - 10px);
-                    i {
-                        margin-right: 5px;
-                    }
-                }
-                &[side="right"] {
-                    padding: ($padding-top - 5px) ($padding-side - 10px) ($padding-top - 5px) $padding-side;
-                    i {
-                        margin-left: 5px;
                     }
                 }
             }
@@ -300,9 +275,6 @@ button {
         &[theme="standard"] {
             color: $dark;
             background: $light;
-            .flex-wrapper {
-                justify-content: center;
-            }
             &:hover,
             &:focus {
                 box-shadow: 0 3px 7px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .15);
@@ -333,13 +305,6 @@ button {
             }
         } // Icon Themed Button
         &[theme="icon"] {
-            .flex-wrapper {
-                text-align: center;
-                i {
-                    width: 100%;
-                    text-align: center;
-                }
-            }
             &[inverse] {
                 color: #fff;
             }
@@ -354,13 +319,6 @@ button {
             }
         }
         &[theme="fab"] {
-            .flex-wrapper {
-                text-align: center;
-                i {
-                    width: 100%;
-                    text-align: center;
-                }
-            }
             &[inverse] {
                 color: #fff;
             }
