@@ -74,7 +74,7 @@ export class NovoFieldsetElement {
                 <ng-content select="form-title"></ng-content>
                 <ng-content select="form-subtitle"></ng-content>
             </header>
-            <form class="novo-form" [formGroup]="form" autocomplete="off">
+            <form class="novo-form" [formGroup]="form">
                 <ng-container *ngFor="let fieldset of form.fieldsets;let i = index">
                     <novo-fieldset *ngIf="fieldset.controls.length" [index]="i" [autoFocus]="autoFocusFirstField" [icon]="fieldset.icon" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
                 </ng-container>

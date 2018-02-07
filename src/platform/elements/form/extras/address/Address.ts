@@ -18,7 +18,7 @@ const ADDRESS_VALUE_ACCESSOR = {
     template: `
         <input type="text" class="street-address" id="address1" name="address1" [placeholder]="labels.address" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="updateControl()"/>
         <input type="text" class="apt suite" id="address2" name="address2" [placeholder]="labels.apt" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()"/>
-        <input type="text" class="city locality" id="city" name="city" [placeholder]="labels.city" autocomplete="shipping city" [(ngModel)]="model.city" (ngModelChange)="updateControl()"/>
+        <input type="text" class="city locality" id="city" name="city" [placeholder]="labels.city" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()"/>
         <novo-select class="state region" id="state" [options]="states" [placeholder]="labels.state" autocomplete="shipping region" [(ngModel)]="model.state" (ngModelChange)="onStateChange($event)"></novo-select>
         <input type="text" class="zip postal-code" id="zip" name="zip" [placeholder]="labels.zipCode" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()"/>
         <novo-select class="country-name" id="country" [options]="countries" [placeholder]="labels.country" autocomplete="shipping country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event)"></novo-select>
