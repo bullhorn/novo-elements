@@ -6,6 +6,9 @@ novo-dropdown {
         z-index: 0;
         i {
             font-size: 0.8em !important;
+            padding: 0 !important;
+            width: inherit !important;
+            height: inherit !important;
         }
     }
     novo-dropdown-container {
