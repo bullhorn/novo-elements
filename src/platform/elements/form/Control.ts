@@ -284,7 +284,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     ngAfterViewInit() {
-        if (this.autoFocus && this.control.controlType !== 'picker') {
+        const DO_NOT_FOCUS_ME: string[] = ['picker', 'time', 'date', 'date-time'];
+        if (this.autoFocus && !DO_NOT_FOCUS_ME.includes(this.control.controlType)) {
             setTimeout(() => {
                 let input: HTMLElement = this.element.nativeElement.querySelector('input');
                 if (input) {
