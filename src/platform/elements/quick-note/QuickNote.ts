@@ -492,11 +492,6 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         let editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
         this.wrapper.nativeElement.style.setProperty('height', '100%');
 
-        // If focus on startup, don't have placeholder
-        if (this.startupFocus) {
-            this.placeholderVisible = false;
-        }
-
         return {
             enterMode: CKEDITOR.ENTER_BR,
             shiftEnterMode: CKEDITOR.ENTER_P,
@@ -576,7 +571,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
      * Show the placeholder text if the editor is empty
      */
     private showPlaceholder(): void {
-        if (!this.ckeInstance.getData()) {
+        if (!this.ckeInstance.getData() && !this.startupFocus) {
             this.ckeInstance.editable().getParent().$.appendChild(this.placeholderElement);
             this.placeholderVisible = true;
         }
