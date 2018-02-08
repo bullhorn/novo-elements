@@ -454,7 +454,7 @@ export class NovoTableElement implements DoCheck {
         if (filter.range && !column.calendarShow) {
             column.calenderShow = true;
             return;
-        }        
+        }
         if (Array.isArray(column.filter) && column.multiple) {
             if (~column.filter.indexOf(filter)) {
                 // Remove filter
@@ -555,6 +555,7 @@ export class NovoTableElement implements DoCheck {
             }
             // Trickle down to keep sort
             // this.onSortChange(this.currentSortColumn);
+            this.fireTableChangeEvent();
 
             // If paging, reset page
             if (this.config.paging) {
