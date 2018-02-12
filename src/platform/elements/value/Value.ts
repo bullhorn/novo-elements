@@ -13,6 +13,7 @@ export enum NOVO_VALUE_THEME { DEFAULT, MOBILE };
                 <label>{{ meta.label }}</label>
                 <a *ngSwitchCase="NOVO_VALUE_TYPE.INTERNAL_LINK" class="value" (click)="openLink()" [innerHTML]="data | render : meta"></a>
                 <a *ngSwitchCase="NOVO_VALUE_TYPE.LINK" class="value" [href]="url" target="_blank" [innerHTML]="data | render : meta"></a>
+                <entity-list [data]='data' [meta]="meta" *ngSwitchCase="VALUE_TYPE.ENTITY_LIST"></entity-list>
             </div>
 
             <div *ngSwitchDefault class="value-outer">
@@ -93,6 +94,8 @@ export class NovoValueElement implements OnInit, OnChanges {
             } else {
                 this.url = this.data;
             }
+        } else if (this.isEntityList(this.meta.type, this.meta.associatedEntity)) {
+            this.type = NOVO_VALUE_TYPE.ENTITY_LIST;
         } else if (this.meta && this.meta.associatedEntity) {
             switch (this.meta.associatedEntity.entity) {
                 case 'ClientCorporation':
@@ -113,5 +116,12 @@ export class NovoValueElement implements OnInit, OnChanges {
         let regex: any = new RegExp('^(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})$', 'gi');
         let isURL: any = Helpers.isString(data) && regex.exec(data.trim());
         return (linkFields.indexOf(field.name) > -1) || !!isURL || field.type === NOVO_VALUE_TYPE.LINK;
+    }
+
+    isEntityList(type: string, associatedEntity: { entity: string, entityMetaUrl: string, label: string, fields: any[] }): boolean {
+        if (associatedEntity && associatedEntity.entity === 'Note') {
+            return false;
+        }
+        return type === 'TO_MANY';
     }
 }

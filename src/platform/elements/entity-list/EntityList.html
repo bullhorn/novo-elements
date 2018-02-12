@@ -1,0 +1,8 @@
+<div *ngFor="let entity of data.data" class="entity">
+    <a *ngIf="isLinkable(entity)" (click)="open(entity)">
+        {{ entity | render : meta }}
+    </a>
+    <span *ngIf="!isLinkable(entity)">
+        {{ entity | render : meta }}
+    </span>
+</div>
