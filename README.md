@@ -1,5 +1,7 @@
 # NOVO Elements [![npm version](https://badge.fury.io/js/novo-elements.svg)](http://badge.fury.io/js/novo-elements) [![Build Status](https://travis-ci.org/bullhorn/novo-elements.svg?branch=master)](https://travis-ci.org/bullhorn/novo-elements) [![Coverage Status](https://coveralls.io/repos/github/bullhorn/novo-elements/badge.svg?branch=master)](https://coveralls.io/github/bullhorn/novo-elements?branch=master)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bullhorn/novo-elements.svg)](https://greenkeeper.io/)
+
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bullhorn/Open-Source?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Dependency Status](https://david-dm.org/bullhorn/novo-elements.svg)](https://david-dm.org/bullhorn/novo-elements)
 [![devDependency Status](https://david-dm.org/bullhorn/novo-elements/dev-status.svg)](https://david-dm.org/bullhorn/novo-elements#info=devDependencies)
