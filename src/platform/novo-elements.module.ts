@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 // APP
 import { NovoPipesModule } from './pipes/Pipes.module';
+import { NovoEntityListModule } from './elements/entity-list/EntityList.module';
 import { NovoButtonModule } from './elements/button/Button.module';
 import { NovoAceEditorModule } from './elements/ace-editor/AceEditor.module';
 import { NovoLoadingModule } from './elements/loading/Loading.module';
@@ -72,6 +73,7 @@ import { OptionsService } from './services/options/OptionsService';
         NovoQuickNoteModule,
         NovoRadioModule,
         NovoDropdownModule,
+        NovoEntityListModule,
         NovoSelectModule,
         NovoListModule,
         NovoSwitchModule,
