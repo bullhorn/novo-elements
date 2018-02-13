@@ -59,9 +59,9 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                     <span [innerHtml]="highlight(match.data.status, term)"></span>
                 </p>
                 <!-- OWNER -->
-                <p class="owner" *ngIf="match.data.owner && match.data.searchEntity === 'Candidate'">
+                <p class="owner" *ngIf="match.data.owner && match.data.owner.name && match.data.searchEntity === 'Candidate'">
                     <i class="bhi-person"></i>
-                    <span [innerHtml]="highlight(match.data.owner, term)"></span>
+                    <span [innerHtml]="highlight(match.data.owner.name, term)"></span>
                 </p>
             </item-content>
         </novo-list-item>
