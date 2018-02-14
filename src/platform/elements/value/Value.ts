@@ -13,7 +13,7 @@ export enum NOVO_VALUE_THEME { DEFAULT, MOBILE };
                 <label>{{ meta.label }}</label>
                 <a *ngSwitchCase="NOVO_VALUE_TYPE.INTERNAL_LINK" class="value" (click)="openLink()" [innerHTML]="data | render : meta"></a>
                 <a *ngSwitchCase="NOVO_VALUE_TYPE.LINK" class="value" [href]="url" target="_blank" [innerHTML]="data | render : meta"></a>
-                <entity-list [data]='data' [meta]="meta" *ngSwitchCase="VALUE_TYPE.ENTITY_LIST"></entity-list>
+                <entity-list *ngSwitchCase="NOVO_VALUE_TYPE.ENTITY_LIST" [data]='data' [meta]="meta"></entity-list>
             </div>
 
             <div *ngSwitchDefault class="value-outer">
@@ -66,7 +66,7 @@ export class NovoValueElement implements OnInit, OnChanges {
     }
 
     public get showLabel(): boolean {
-        return this.type === NOVO_VALUE_TYPE.INTERNAL_LINK || this.type === NOVO_VALUE_TYPE.LINK;
+        return this.type === NOVO_VALUE_TYPE.INTERNAL_LINK || this.type === NOVO_VALUE_TYPE.LINK || this.type === NOVO_VALUE_TYPE.ENTITY_LIST;
     }
 
     public get showIcon(): boolean {

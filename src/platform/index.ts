@@ -35,7 +35,6 @@ export { NovoTableExtrasModule } from './elements/table/extras/TableExtras.modul
 export { NovoFormModule } from './elements/form/Form.module';
 export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
 export { NovoCategoryDropdownModule } from './elements/category-dropdown/CategoryDropdown.module';
-export { NovoEntityListModule } from './elements/entity-list/EntityList.module';
 export { NovoMultiPickerModule } from './elements/multi-picker/MultiPicker.module';
 export { UnlessModule } from './elements/unless/Unless.module';
 export {
