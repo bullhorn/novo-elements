@@ -33,4 +33,11 @@ novo-value {
             color: $ocean;
         }
     }
+    entity-list {
+        display: block;
+        .entity {
+            padding-top: 8px;
+            font-size: 1.15em;
+        }
+    }
 }
