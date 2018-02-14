@@ -170,6 +170,10 @@ novo-form {
                             width: 100%;
                         }
                     }
+                    .field-message {
+                        height: 24px;
+                        margin-bottom: 0 !important;
+                    }
                     .field-message,
                     novo-tip-well.active {
                         font-size: 0.8em;
@@ -687,6 +691,9 @@ novo-form {
                                 >div {
                                     width: 100%;
                                 }
+                            }
+                            .field-message {
+                                height: 24px;
                             }
                             .field-message,
                             novo-tip-well.active {
