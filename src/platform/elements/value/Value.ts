@@ -94,7 +94,7 @@ export class NovoValueElement implements OnInit, OnChanges {
             } else {
                 this.url = this.data;
             }
-        } else if (this.isEntityList(this.meta.type, this.meta.associatedEntity)) {
+        } else if (this.isEntityList(this.meta.type)) {
             this.type = NOVO_VALUE_TYPE.ENTITY_LIST;
         } else if (this.meta && this.meta.associatedEntity) {
             switch (this.meta.associatedEntity.entity) {
@@ -118,10 +118,7 @@ export class NovoValueElement implements OnInit, OnChanges {
         return (linkFields.indexOf(field.name) > -1) || !!isURL || field.type === NOVO_VALUE_TYPE.LINK;
     }
 
-    isEntityList(type: string, associatedEntity: { entity: string, entityMetaUrl: string, label: string, fields: any[] }): boolean {
-        if (associatedEntity && associatedEntity.entity === 'Note') {
-            return false;
-        }
+    isEntityList(type: string): boolean {
         return type === 'TO_MANY';
     }
 }
