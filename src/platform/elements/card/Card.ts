@@ -22,7 +22,7 @@ export class CardActionsElement {
             <header>
                 <div class="title">
                     <!--Grabber Icon-->
-                    <span tooltip="{{ labels.move }}" tooltipPosition="bottomRight"><i *ngIf="move || config.move" class="bhi-move" [attr.data-automation-id]="cardAutomationId + '-move'"></i></span>
+                    <span tooltip="{{ labels.move }}" tooltipPosition="bottom-right"><i *ngIf="move || config.move" class="bhi-move" [attr.data-automation-id]="cardAutomationId + '-move'"></i></span>
                     <!--Card Title-->
                     <h3 [attr.data-automation-id]="cardAutomationId + '-title'"><i *ngIf="icon" [ngClass]="iconClass"></i> {{title || config.title}}</h3>
                 </div>
@@ -30,7 +30,7 @@ export class CardActionsElement {
                 <div class="actions" [attr.data-automation-id]="cardAutomationId + '-actions'">
                     <ng-content select="novo-card-actions"></ng-content>
                     <button theme="icon" icon="refresh"  (click)="toggleRefresh()" *ngIf="refresh || config.refresh" [attr.data-automation-id]="cardAutomationId + '-refresh'" tooltip="{{ labels.refresh }}" tooltipPosition="bottom"></button>
-                    <button theme="icon" icon="close-o" (click)="toggleClose()" *ngIf="close || config.close" [attr.data-automation-id]="cardAutomationId + '-close'" tooltip="{{ labels.close }}" tooltipPosition="bottomLeft"></button>
+                    <button theme="icon" icon="close-o" (click)="toggleClose()" *ngIf="close || config.close" [attr.data-automation-id]="cardAutomationId + '-close'" tooltip="{{ labels.close }}" tooltipPosition="bottom-left"></button>
                 </div>
             </header>
             <!--Card Main-->
