@@ -68,7 +68,6 @@ export class EntityList implements OnInit {
     }
 
     isLinkable(entity: any): boolean {
-        let type: any = entity.personSubtype || this.baseEntity;
-        return ['Candidate', 'ClientContact', 'Lead', 'Opportunity', 'Placement', 'JobOrder', 'ClientCorporation', 'Appointment', 'Task'].indexOf(type) >= 0 && entity.openLink;
+        return entity.openLink;
     }
 }
