@@ -33,4 +33,22 @@ novo-value {
             color: $ocean;
         }
     }
+    entity-list {
+        display: block;
+        .entity {
+            padding-top: 6px;
+            padding-bottom: 6px;
+            font-size: 1em;
+        }
+        @each $entity,
+        $color in $entity-colors {
+            i.#{$entity} {
+                color: $color;
+            }
+        }
+        i {
+            font-size: 1.2em;
+            margin-right: 6px;
+        }
+    }
 }

@@ -12,6 +12,7 @@ let FormatterValueDemoTpl = require('./templates/FormatterValueDemo.html');
 let AssociatedValueDemoTpl = require('./templates/AssociatedValueDemo.html');
 let DateTimeValueDemoTpl = require('./templates/DateTimeValueDemo.html');
 let ExternalLinkValueDemoTpl = require('./templates/ExternalLinkValueDemo.html');
+let EntityListDemoTpl = require('./templates/EntityListDemo.html');
 const template = `
 <div class="container">
     <h1>Value/Details/Summary <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/value">(source)</a></small></h1>
@@ -55,6 +56,10 @@ const template = `
     <p>Render associated fields</p>
     <div class="example value-demo">${AssociatedValueDemoTpl}</div>
     <code-snippet [code]="AssociatedValueDemoTpl"></code-snippet>
+    <h5>Entity Lists</h5>
+    <p>Render entity lists</p>
+    <div class="example value-demo">${EntityListDemoTpl}</div>
+    <code-snippet [code]="EntityListDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -72,6 +77,7 @@ export class ValueDemoComponent {
     private DateTimeValueDemoTpl: string = DateTimeValueDemoTpl;
     private AddressValueDemoTpl: string = AddressValueDemoTpl;
     private AssociatedValueDemoTpl: string = AssociatedValueDemoTpl;
+    private EntityListDemoTpl: string = EntityListDemoTpl;
     private toggleCount: number = 0;
     private checked: boolean = true;
     simpleData = 1234567890;
@@ -172,6 +178,35 @@ export class ValueDemoComponent {
         type: 'TO_ONE',
         name: 'owner',
         label: 'Owner',
+        associatedEntity: {
+            entity: 'CorporateUser'
+        }
+    };
+    entityListData = {
+        data: [{
+            id: 1,
+            firstName: 'George',
+            lastName: 'Washington',
+            personSubtype: 'Candidate',
+            openLink: (data) => {},
+        }, {
+            id: 2,
+            firstName: 'John',
+            lastName: 'Adams',
+            personSubtype: 'ClientContact',
+            openLink: (data) => {},
+        }, {
+            id: 3,
+            firstName: 'Abraham',
+            lastName: 'Lincoln',
+            personSubtype: 'Lead',
+            openLink: (data) => {},
+        }],
+    };
+    entityListMeta = {
+        type: 'TO_MANY',
+        name: 'guests',
+        label: 'Attendees',
         associatedEntity: {
             entity: 'CorporateUser'
         }
