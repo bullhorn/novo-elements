@@ -238,7 +238,6 @@ export class AppBridge {
      * @param packet any - packet of data to send with the open event
      */
     public open(packet: IAppBridgeOpenEvent): Promise<boolean> {
-        Object.assign(packet, { id: this.id, windowName: this.windowName });
         return new Promise<boolean>((resolve, reject) => {
             if (this._handlers[AppBridgeHandler.OPEN]) {
                 this._handlers[AppBridgeHandler.OPEN](packet, (success: boolean) => {
@@ -249,6 +248,7 @@ export class AppBridge {
                     }
                 });
             } else {
+                Object.assign(packet, { id: this.id, windowName: this.windowName });
                 postRobot.sendToParent(MESSAGE_TYPES.OPEN, packet).then((event) => {
                     this._trace(`${MESSAGE_TYPES.OPEN} (callback)`, event);
                     if (event.data) {
@@ -268,8 +268,6 @@ export class AppBridge {
      * @param packet any - packet of data to send with the open event
      */
     public openList(packet: Partial<IAppBridgeOpenListEvent>): Promise<boolean> {
-        let openListPacket = {};
-        Object.assign(openListPacket, { type: 'List', entityType: packet.type, keywords: packet.keywords, criteria: packet.criteria });
         return new Promise<boolean>((resolve, reject) => {
             if (this._handlers[AppBridgeHandler.OPEN_LIST]) {
                 this._handlers[AppBridgeHandler.OPEN_LIST](packet, (success: boolean) => {
@@ -280,6 +278,8 @@ export class AppBridge {
                     }
                 });
             } else {
+                let openListPacket = {};
+                Object.assign(openListPacket, { type: 'List', entityType: packet.type, keywords: packet.keywords, criteria: packet.criteria });
                 postRobot.sendToParent(MESSAGE_TYPES.OPEN_LIST, packet).then((event) => {
                     this._trace(`${MESSAGE_TYPES.OPEN_LIST} (callback)`, event);
                     if (event.data) {
@@ -300,7 +300,6 @@ export class AppBridge {
      * @param packet any - packet of data to send with the close event
      */
     public update(packet: Partial<{ entityType: string, entityId: string, title: string, titleKey: string, color: string }>): Promise<boolean> {
-        Object.assign(packet, { id: this.id, windowName: this.windowName });
         return new Promise<boolean>((resolve, reject) => {
             if (this._handlers[AppBridgeHandler.UPDATE]) {
                 this._handlers[AppBridgeHandler.UPDATE](packet, (success: boolean) => {
@@ -311,6 +310,7 @@ export class AppBridge {
                     }
                 });
             } else {
+                Object.assign(packet, { id: this.id, windowName: this.windowName });
                 postRobot.sendToParent(MESSAGE_TYPES.UPDATE, packet).then((event) => {
                     this._trace(`${MESSAGE_TYPES.UPDATE} (callback)`, event);
                     if (event.data) {
@@ -329,13 +329,9 @@ export class AppBridge {
      * Fires or responds to an close event
      */
     public close(packet?: object): Promise<boolean> {
-        if (packet) {
-            console.info('[AppBridge] - close(packet) is deprecated! Please just use close()!'); // tslint:disable-line
-        }
-        let realPacket = { id: this.id, windowName: this.windowName };
         return new Promise<boolean>((resolve, reject) => {
             if (this._handlers[AppBridgeHandler.CLOSE]) {
-                this._handlers[AppBridgeHandler.CLOSE](realPacket, (success: boolean) => {
+                this._handlers[AppBridgeHandler.CLOSE](packet, (success: boolean) => {
                     if (success) {
                         resolve(true);
                     } else {
@@ -343,6 +339,10 @@ export class AppBridge {
                     }
                 });
             } else {
+                if (packet) {
+                    console.info('[AppBridge] - close(packet) is deprecated! Please just use close()!'); // tslint:disable-line
+                }
+                let realPacket = { id: this.id, windowName: this.windowName };        
                 postRobot.sendToParent(MESSAGE_TYPES.CLOSE, realPacket).then((event) => {
                     this._trace(`${MESSAGE_TYPES.CLOSE} (callback)`, event);
                     if (event.data) {
@@ -361,13 +361,9 @@ export class AppBridge {
      * Fires or responds to an close event
      */
     public refresh(packet?: object): Promise<boolean> {
-        if (packet) {
-            console.info('[AppBridge] - refresh(packet) is deprecated! Please just use refresh()!'); // tslint:disable-line
-        }
-        let realPacket = { id: this.id, windowName: this.windowName };
         return new Promise<boolean>((resolve, reject) => {
             if (this._handlers[AppBridgeHandler.REFRESH]) {
-                this._handlers[AppBridgeHandler.REFRESH](realPacket, (success: boolean) => {
+                this._handlers[AppBridgeHandler.REFRESH](packet, (success: boolean) => {
                     if (success) {
                         resolve(true);
                     } else {
@@ -375,6 +371,10 @@ export class AppBridge {
                     }
                 });
             } else {
+                if (packet) {
+                    console.info('[AppBridge] - refresh(packet) is deprecated! Please just use refresh()!'); // tslint:disable-line
+                }
+                let realPacket = { id: this.id, windowName: this.windowName };        
                 postRobot.sendToParent(MESSAGE_TYPES.REFRESH, realPacket).then((event) => {
                     this._trace(`${MESSAGE_TYPES.REFRESH} (callback)`, event);
                     if (event.data) {
@@ -393,13 +393,9 @@ export class AppBridge {
      * Fires or responds to a pin event
      */
     public pin(packet?: object): Promise<boolean> {
-        if (packet) {
-            console.info('[AppBridge] - pin(packet) is deprecated! Please just use pin()!'); // tslint:disable-line
-        }
-        let realPacket = { id: this.id, windowName: this.windowName };
         return new Promise<boolean>((resolve, reject) => {
             if (this._handlers[AppBridgeHandler.PIN]) {
-                this._handlers[AppBridgeHandler.PIN](realPacket, (success: boolean) => {
+                this._handlers[AppBridgeHandler.PIN](packet, (success: boolean) => {
                     if (success) {
                         resolve(true);
                     } else {
@@ -407,6 +403,10 @@ export class AppBridge {
                     }
                 });
             } else {
+                if (packet) {
+                    console.info('[AppBridge] - pin(packet) is deprecated! Please just use pin()!'); // tslint:disable-line
+                }
+                let realPacket = { id: this.id, windowName: this.windowName };        
                 postRobot.sendToParent(MESSAGE_TYPES.PIN, realPacket).then((event) => {
                     this._trace(`${MESSAGE_TYPES.PIN} (callback)`, event);
                     if (event.data) {
@@ -426,7 +426,6 @@ export class AppBridge {
     * @param packet any - packet of data to send with the requestData event
     */
     public requestData(packet: { type: string }): Promise<any> {
-        Object.assign(packet, { id: this.id, windowName: this.windowName });
         return new Promise<any>((resolve, reject) => {
             if (this._handlers[AppBridgeHandler.REQUEST_DATA]) {
                 this._handlers[AppBridgeHandler.REQUEST_DATA](packet, (data: any) => {
@@ -437,6 +436,7 @@ export class AppBridge {
                     }
                 });
             } else {
+                Object.assign(packet, { id: this.id, windowName: this.windowName });
                 postRobot.sendToParent(MESSAGE_TYPES.REQUEST_DATA, packet).then((event) => {
                     this._trace(`${MESSAGE_TYPES.REQUEST_DATA} (callback)`, event);
                     if (event.data) {
@@ -456,7 +456,6 @@ export class AppBridge {
      * @param packet string - key: string, generic: boolean
      */
     public callback(packet: { key: string, generic: boolean, options: object }): Promise<any> {
-        Object.assign(packet, { id: this.id, windowName: this.windowName });
         return new Promise<any>((resolve, reject) => {
             if (this._handlers[AppBridgeHandler.CALLBACK]) {
                 this._handlers[AppBridgeHandler.CALLBACK](packet, (success: boolean) => {
@@ -467,6 +466,7 @@ export class AppBridge {
                     }
                 });
             } else {
+                Object.assign(packet, { id: this.id, windowName: this.windowName });
                 postRobot.sendToParent(MESSAGE_TYPES.CALLBACK, packet).then((event) => {
                     this._trace(`${MESSAGE_TYPES.CALLBACK} (callback)`, event);
                     if (event.data) {
@@ -486,7 +486,6 @@ export class AppBridge {
      * @param packet any - packet of data to send with the event
      */
     public register(packet: Partial<{ title: string, url: string, color: string }> = {}): Promise<string> {
-        Object.assign(packet, { id: this.id });
         return new Promise<string>((resolve, reject) => {
             if (this._handlers[AppBridgeHandler.REGISTER]) {
                 this._handlers[AppBridgeHandler.REGISTER](packet, (windowName: string) => {
@@ -497,6 +496,7 @@ export class AppBridge {
                     }
                 });
             } else {
+                Object.assign(packet, { id: this.id });
                 postRobot.sendToParent(MESSAGE_TYPES.REGISTER, packet).then((event) => {
                     this._trace(`${MESSAGE_TYPES.REGISTER} (callback)`, event);
                     if (event.data) {
