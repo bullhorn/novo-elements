@@ -6,10 +6,10 @@ import { Component, Input, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } 
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div *ngFor="let entity of data.data" class="entity">
-            <a *ngIf="isLinkable(entity)" (click)="openLink(entity)">
-                <i class="bhi-circle {{getClass(entity)}}"></i>{{ entity | render : meta }}
+            <a *ngIf="entity.isLinkable" (click)="openLink(entity)">
+                <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render : meta }}
             </a>
-            <span *ngIf="!isLinkable(entity)">
+            <span *ngIf="!entity.isLinkable">
                 {{ entity | render : meta }}
             </span>
         </div>
@@ -57,6 +57,10 @@ export class EntityList implements OnInit {
     ngOnInit(): any {
         this.meta.type = 'TO_ONE';
         this.baseEntity = this.meta.associatedEntity.entity;
+        for (let entity of this.data.data) {
+            entity.isLinkable = this.isLinkable(entity);
+            entity.class = this.getClass(entity);
+        }
     }
 
     getClass(entity: any): any {

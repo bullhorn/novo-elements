@@ -66,6 +66,7 @@
     "post-robot": "5.0.5"
   },
   "devDependencies": {
+    "@angular-devkit/core": "^0.4.0",
     "@angular/animations": "^5.0.0",
     "@angular/cli": "1.5.4",
     "@angular/common": "^5.0.0",
