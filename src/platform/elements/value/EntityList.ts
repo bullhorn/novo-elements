@@ -2,7 +2,7 @@
 import { Component, Input, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    selector: 'entity-list',
+    selector: 'novo-entity-list',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div *ngFor="let entity of data.data" class="entity">
