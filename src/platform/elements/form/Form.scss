@@ -171,7 +171,7 @@ novo-form {
                         }
                     }
                     .field-message {
-                        height: 24px;
+                        min-height: 24px;
                         margin-bottom: 0 !important;
                     }
                     .field-message,
@@ -693,7 +693,7 @@ novo-form {
                                 }
                             }
                             .field-message {
-                                height: 24px;
+                                min-height: 24px;
                             }
                             .field-message,
                             novo-tip-well.active {
