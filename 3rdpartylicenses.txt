@@ -74,7 +74,7 @@ MIT
 date-fns is licensed under the [MIT license](http://kossnocorp.mit-license.org).
 Read more about MIT at [TLDRLegal](https://tldrlegal.com/license/mit-license).
 
-@angular/forms@5.1.2
+@angular/forms@5.2.6
 MIT
 MIT
 
@@ -148,7 +148,7 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-brace@0.11.0
+brace@0.11.1
 MIT
 Copyright 2013 Thorsten Lorenz. 
 All rights reserved.
@@ -174,23 +174,23 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-@angular/core@5.1.2
+@angular/core@5.2.6
 MIT
 MIT
 
-@angular/platform-browser@5.1.2
+@angular/platform-browser@5.2.6
 MIT
 MIT
 
-@angular/http@5.1.2
+@angular/http@5.2.6
 MIT
 MIT
 
-@angular/router@5.1.2
+@angular/router@5.2.6
 MIT
 MIT
 
-@angular/common@5.1.2
+@angular/common@5.2.6
 MIT
 MIT
 
@@ -217,7 +217,7 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@angular/animations@5.1.2
+@angular/animations@5.2.6
 MIT
 MIT
 
@@ -271,6 +271,6 @@ custom-event@1.0.0
 MIT
 MIT
 
-@angular/platform-browser-dynamic@5.1.2
+@angular/platform-browser-dynamic@5.2.6
 MIT
 MIT
