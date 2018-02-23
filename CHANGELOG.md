@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.5.0"></a>
+# [2.5.0](https://github.com/bullhorn/novo-elements/compare/v2.4.0...v2.5.0) (2018-02-23)
+
+
+### Bug Fixes
+
+* **AppBridge:** Handling of WindowName was errorenous in register events ([#654](https://github.com/bullhorn/novo-elements/issues/654)) ([2b0102e](https://github.com/bullhorn/novo-elements/commit/2b0102e))
+* **autofocus:** Fixing autofocus on ckeditor ([77d1995](https://github.com/bullhorn/novo-elements/commit/77d1995))
+* **cards:** Change to correctly display close and move tooltips on cards ([#662](https://github.com/bullhorn/novo-elements/issues/662)) ([058e61e](https://github.com/bullhorn/novo-elements/commit/058e61e))
+* **control:** Do not autofocus for date/time/datetime controls either ([5f6bd08](https://github.com/bullhorn/novo-elements/commit/5f6bd08))
+* **counties:** Reorder the countries file ([96cb41f](https://github.com/bullhorn/novo-elements/commit/96cb41f))
+* **counties:** Reorder the countries file ([aca7a71](https://github.com/bullhorn/novo-elements/commit/aca7a71))
+* **counties:** Reorder the countries file ([a4d66f7](https://github.com/bullhorn/novo-elements/commit/a4d66f7))
+* **countries:** Remove spaces from certain States and pull in new Countries data ([#661](https://github.com/bullhorn/novo-elements/issues/661)) ([90b36bc](https://github.com/bullhorn/novo-elements/commit/90b36bc))
+* **entitylist:** scoping the component to novo ([fa4831b](https://github.com/bullhorn/novo-elements/commit/fa4831b))
+* **exports:** Fixing missing export for CalendarDateChangeElement ([3524bc9](https://github.com/bullhorn/novo-elements/commit/3524bc9))
+* **form:** Fixing autofocus, ignoring pickers ([79bb908](https://github.com/bullhorn/novo-elements/commit/79bb908))
+* **optionsservice:** Invalid provider ([05c7024](https://github.com/bullhorn/novo-elements/commit/05c7024))
+* **picker:** Use owner name in EntityPickerResults ([#657](https://github.com/bullhorn/novo-elements/issues/657)) ([554699a](https://github.com/bullhorn/novo-elements/commit/554699a))
+* **quicknote:** Fixing placeholder from showing when autofocus ([8db6813](https://github.com/bullhorn/novo-elements/commit/8db6813))
+* **quicknote:** Fixing quick note hide and adding resizable header ([b6c0200](https://github.com/bullhorn/novo-elements/commit/b6c0200))
+* **style:** Fixing a lot of padding/margins/colors after UX review ([0847aea](https://github.com/bullhorn/novo-elements/commit/0847aea))
+* **table:** Change to allow table changed event to emit ([#651](https://github.com/bullhorn/novo-elements/issues/651)) ([dce4b79](https://github.com/bullhorn/novo-elements/commit/dce4b79))
+* **toast:** Allowing message to render html ([f84e72c](https://github.com/bullhorn/novo-elements/commit/f84e72c))
+
+
+### Features
+
+* **address:** Adding support for autocomplete ([29aa46d](https://github.com/bullhorn/novo-elements/commit/29aa46d))
+* **ComponentUtils:** Adding util to append to top of container ([3b5b232](https://github.com/bullhorn/novo-elements/commit/3b5b232))
+* **control:** Supporting autocomplete ([21f959b](https://github.com/bullhorn/novo-elements/commit/21f959b))
+* **entity-list:** Adding entity list preview to value ([1524077](https://github.com/bullhorn/novo-elements/commit/1524077))
+* **form:** Adding autofocus input to dynamic form and controls ([3b7c494](https://github.com/bullhorn/novo-elements/commit/3b7c494))
+* **picker:** Add owner to EntityPickerResults for Candidate ([#656](https://github.com/bullhorn/novo-elements/issues/656)) ([c4398ab](https://github.com/bullhorn/novo-elements/commit/c4398ab))
+* **security, entity-util, form-utils:** Adding more utilities and moving over more pickers ([129103f](https://github.com/bullhorn/novo-elements/commit/129103f))
+* **value:** clean up value component ([47e6a05](https://github.com/bullhorn/novo-elements/commit/47e6a05))
+
+
+
 <a name="2.4.0"></a>
 # [2.4.0](https://github.com/bullhorn/novo-elements/compare/v2.3.0...v2.4.0) (2018-01-25)
 
