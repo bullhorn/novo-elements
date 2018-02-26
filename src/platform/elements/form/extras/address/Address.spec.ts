@@ -6,7 +6,7 @@ import { NovoAddressElement } from './Address';
 import { NovoSelectModule } from '../../../select/Select.module';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 
-describe('Elements: NovoAddressElement', () => {
+xdescribe('Elements: NovoAddressElement', () => {
     let fixture;
     let component;
 
