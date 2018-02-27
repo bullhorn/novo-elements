@@ -41,6 +41,7 @@ import { GooglePlacesModule } from './elements/places/places.module';
 import { NovoValueModule } from './elements/value/Value.module';
 import { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
 import { NovoIconModule } from './elements/icon/Icon.module';
+import { NovoStepperModule } from './elements/stepper/Stepper.module';
 import { UnlessModule } from './elements/unless/Unless.module';
 import { NovoOverlayModule } from './elements/overlay/Overlay.module';
 import { DateFormatService } from './services/date-format/DateFormat';
@@ -98,6 +99,7 @@ import { OptionsService } from './services/options/OptionsService';
         NovoValueModule,
         NovoAceEditorModule,
         NovoIconModule,
+        NovoStepperModule,
         UnlessModule,
     ],
     providers: [

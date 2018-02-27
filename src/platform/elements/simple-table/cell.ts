@@ -46,7 +46,7 @@ export class NovoSimpleHeaderCell<T> extends _NovoHeaderCell implements OnInit {
     @Input() public column: SimpleTableColumn<T>;
 
     constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2) {
-        super(columnDef, elementRef, renderer);
+        super(columnDef, elementRef);
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-column-header-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, `novo-column-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, 'novo-simple-header-cell');
@@ -68,7 +68,7 @@ export class NovoSimpleEmptyHeaderCell extends _NovoHeaderCell {
     @HostBinding('attr.role') public role = 'columnheader';
 
     constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2) {
-        super(columnDef, elementRef, renderer);
+        super(columnDef, elementRef);
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-column-header-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, `novo-column-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, 'novo-simple-empty-header-cell');
@@ -86,7 +86,7 @@ export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnD
     private selectAllSubscription: Subscription;
 
     constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2, ref: ChangeDetectorRef, @Optional() private _selection: NovoSelection) {
-        super(columnDef, elementRef, renderer);
+        super(columnDef, elementRef);
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-checkbox-column-header-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, `novo-checkbox-column-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, 'novo-simple-checkbox-header-cell');
@@ -122,7 +122,7 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
     @ViewChild('span') private spanElement: ElementRef;
 
     constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2) {
-        super(columnDef, elementRef, renderer);
+        super(columnDef, elementRef);
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-column-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, `novo-column-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, 'novo-simple-cell');
@@ -174,7 +174,7 @@ export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnIn
     private selectAllSubscription: Subscription;
 
     constructor(public columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2, @Optional() public _selection: NovoSelection) {
-        super(columnDef, elementRef, renderer);
+        super(columnDef, elementRef);
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-checkbox-column-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, `novo-checkbox-column-${columnDef.cssClassFriendlyName}`);
         renderer.addClass(elementRef.nativeElement, 'novo-simple-checkbox-cell');
@@ -225,7 +225,7 @@ export class NovoSimpleActionCell<T> extends _NovoCell implements OnInit {
     @Input() public column: SimpleTableActionColumn<T>;
 
     constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2, private labels: NovoLabelService) {
-        super(columnDef, elementRef, renderer);
+        super(columnDef, elementRef);
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-action-column-${columnDef.cssClassFriendlyName}`);
     }
 

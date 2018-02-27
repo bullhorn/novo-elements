@@ -12,7 +12,7 @@ import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { PickerResults } from './extras/picker-results/PickerResults';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { Helpers } from '../../utils/Helpers';
-import { NovoOverlayTemplate } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 
 
 // Value accessor for the component (supports ngModel)
@@ -94,7 +94,7 @@ export class NovoPickerElement implements OnInit {
     @Output() blur: EventEmitter<any> = new EventEmitter();
     @Output() typing: EventEmitter<any> = new EventEmitter();
 
-    @ViewChild(NovoOverlayTemplate) public container: NovoOverlayTemplate;
+    @ViewChild(NovoOverlayTemplateComponent) public container: NovoOverlayTemplateComponent;
     @ViewChild('input') private input: ElementRef;
 
     closeHandler: any;

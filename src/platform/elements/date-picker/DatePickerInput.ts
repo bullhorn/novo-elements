@@ -6,7 +6,7 @@ import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { TextMaskModule } from 'angular2-text-mask';
 // App
 import { NovoDatePickerElement } from './DatePicker';
-import { NovoOverlayTemplate } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 import { Helpers } from '../../utils/Helpers';
@@ -46,7 +46,7 @@ export class NovoDatePickerInputElement implements ControlValueAccessor {
     @Input() placeholder: string;
     @Input() maskOptions: any;
     /** Element for the panel containing the autocomplete options. */
-    @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
+    @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
     constructor(
         public element: ElementRef,

@@ -51,6 +51,7 @@ import {
     SimpleTableDemoComponent,
     FormGroupedDemoComponent,
     ValueDemoComponent,
+    StepperDemoComponent,
     AceEditorDemoComponent
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent, SecurityDemoComponent } from './pages/utils';
@@ -135,6 +136,7 @@ export function provideAppBridgeService(http) {
         SimpleTableDemoComponent,
         FormGroupedDemoComponent,
         ValueDemoComponent,
+        StepperDemoComponent,
         AceEditorDemoComponent,
         SecurityDemoComponent
     ],
