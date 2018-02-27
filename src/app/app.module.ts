@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     NovoElementsModule, NovoElementProviders, FormUtils, NovoLabelService,
     FieldInteractionApi, NovoToastService, NovoModalService, AppBridgeService,
-    DevAppBridgeService
+    DevAppBridgeService, GooglePlacesService
 } from './../platform/index';
 // APP
 import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
@@ -154,6 +154,7 @@ export function provideAppBridgeService(http) {
     providers: [
         FormUtils,
         NovoLabelService,
+        GooglePlacesService,
         {
             provide: FieldInteractionApi,
             useFactory: provideFieldInteractionAPI,
