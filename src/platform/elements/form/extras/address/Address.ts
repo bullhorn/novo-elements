@@ -1,5 +1,5 @@
 // NG2
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, forwardRef, OnInit, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { getCountries, getStates, getStateObjects, findByCountryName, findByCountryId } from '../../../../utils/countries/Countries';
@@ -19,13 +19,18 @@ declare let google: any;
     selector: 'novo-address',
     providers: [ADDRESS_VALUE_ACCESSOR],
     template: `
-        <input id="autocomplete" placeholder="Enter your address" [(ngModel)]="searchTerm" (ngModelChange)="onSearch($event)" type="text"/>
-        <div class="googleList">
+        <div class="addressSearch">
+        <input class="searchAddress" id="autocomplete" placeholder="Search for an address" [(ngModel)]="searchTerm" (ngModelChange)="onSearch($event)" type="text"/>
+        <i class="bhi-location" *ngIf="!searchTerm"></i>
+        </div>
+        <div class="googleList" [class.disabled]="!items || items.length === 0">
             <div *ngFor="let item of items" class="googleListItem" (click)="setAddress(item.description, item.place_id)">
-                <b>{{ item.structured_formatting.main_text }}</b><br />
-                {{ item.structured_formatting.secondary_text }}
+                <i class="bhi-location"></i>
+                <span>{{ item.structured_formatting.main_text }}</span><br />
+                <span class="addressDetails">{{ item.structured_formatting.secondary_text }}</span>
             </div>
         </div>
+
         <input type="text" class="street-address" id="address1" name="address1" [placeholder]="labels.address" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="updateControl()"/>
         <input type="text" class="apt suite" id="address2" name="address2" [placeholder]="labels.apt" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()"/>
         <input type="text" class="city locality" id="city" name="city" [placeholder]="labels.city" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()"/>
@@ -35,6 +40,8 @@ declare let google: any;
     `
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
+
+
     states: Array<any> = [];
     countries: Array<any> = getCountries();
 
@@ -47,8 +54,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     searchTerm: any;
     items: any[];
     private apiKey: string = 'AIzaSyC2ZjaGlzVKhWNWGZaOXmsRQeqXp-AKdbA';
-    
-    constructor(public labels: NovoLabelService, public googlePlacesService: GooglePlacesService) { }
+
+    constructor(public labels: NovoLabelService, public googlePlacesService: GooglePlacesService, public element: ElementRef) { }
 
     ngOnInit() {
         if (this.model) {
@@ -108,7 +115,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             let addressType: string = details.address_components[i].types[0];
             switch (addressType) {
                 case 'street_number':
-                    this.model.address1 = details.address_components[i].long_name;
+                    this.model.address1 = details.address_components[i].long_name || '';
                     break;
                 case 'route':
                     this.model.address1 = this.model.address1 + ' ' + details.address_components[i].long_name;

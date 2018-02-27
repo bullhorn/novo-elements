@@ -2,17 +2,84 @@ novo-address {
     display: flex;
     flex-flow: row wrap;
 
-    .googleList {
-        border: 1px solid #ddd;
-        width: 100%;
-        cursor: pointer;
-        .googleListItem {
-          border-bottom: 1px solid #ddd;
+    .addressSearch {
+      width: 100%;
+      position: relative;
+      margin-bottom: 15px;
+      .searchAddress {
+          font-size: 1em;
+          background: transparent !important;
+          border: none;
+          border-bottom: 1px solid lighten($dark, 45%);
+          border-radius: 0;
+          outline: none;
+          height: 2rem;
           width: 100%;
-          padding: 5px;
-        }
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          box-sizing: content-box;
+          transition: all 300ms;
+          color: #26282B;
+      }
+      i.bhi-location {
+          position: absolute;
+          bottom: 8px;
+          right: -5px;
+          color: #aaaaaa;
+          font-size: 1.5em;
+          margin-right: 10px;
+      }
     }
 
+
+    .googleList {
+      background-color: $white;
+      max-height: 200px;
+      overflow: auto;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+      border: 1px solid $positive;
+      transform: translateY(0%);
+      transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+      display: block;
+      width: 100%;
+        .googleListItem {
+          cursor: pointer;
+          padding: 12px 16px;
+          font-size: 1em;
+          border: 1px solid #ddd;
+          line-height: 1.5;
+
+          span {
+            font-weight: 500;
+            font-size: 1.2em;
+            margin-left: 5px;
+          }
+          i {
+            display: inline-block;
+            color: #aaa;
+            font-size: 1.8em;
+          }
+          .addressDetails {
+              margin-left: 26px;
+              font-size: 1em;
+              font-weight: 400;
+          }
+          &.active,
+          &:focus,
+          &:hover {
+              background-color: lighten($positive, 35%);
+          }
+        }
+
+        &.disabled {
+            display: none;
+            pointer-events: none;
+        }
+      }
 
     input {
         min-width: 10px;
