@@ -13,6 +13,8 @@ const ADDRESS_VALUE_ACCESSOR = {
     multi: true
 };
 
+declare let google: any;
+
 @Component({
     selector: 'novo-address',
     providers: [ADDRESS_VALUE_ACCESSOR],
@@ -44,7 +46,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
     searchTerm: any;
     items: any[];
-
+    private apiKey: string = 'AIzaSyC2ZjaGlzVKhWNWGZaOXmsRQeqXp-AKdbA';
+    
     constructor(public labels: NovoLabelService, public googlePlacesService: GooglePlacesService) { }
 
     ngOnInit() {
@@ -53,6 +56,14 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             this.updateControl();
         } else if (!this.model) {
             this.model = {};
+        }
+        if (typeof google === 'undefined' || typeof google['maps'] === 'undefined') {
+            window['googleInit'] = () => { };
+            let script: HTMLScriptElement = document.createElement('script');
+            script.id = 'googleMaps';
+            script.src = `https://maps.google.com/maps/api/js?key=${this.apiKey}&libraries=places&language=en-US`;
+
+            document.body.appendChild(script);
         }
     }
 
