@@ -74,6 +74,8 @@ export class NovoFieldsetElement {
                 <ng-content select="form-title"></ng-content>
                 <ng-content select="form-subtitle"></ng-content>
             </header>
+            <novo-tiles [options]="fieldOptions" (onChange)="fieldSelect($event)"></novo-tiles>
+            <i class="bhi-publish" (click)="topFunction()" id="scrollTopButton"></i>
             <form class="novo-form" [formGroup]="form">
                 <ng-container *ngFor="let fieldset of form.fieldsets;let i = index">
                     <novo-fieldset *ngIf="fieldset.controls.length" [index]="i" [autoFocus]="autoFocusFirstField" [icon]="fieldset.icon" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
@@ -95,6 +97,12 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
     showingAllFields = false;
     showingRequiredFields = true;
     numControls = 0;
+    public fieldOptions: any = [{
+        label: 'All Fields',
+        value: 'all',
+      }, {
+        label: 'Required Fields',
+        value: 'required'}, ];
 
     constructor(private element: ElementRef) { }
 
@@ -137,6 +145,18 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
             });
         }
         this.form.fieldsets = [...this.fieldsets];
+    }
+
+    public topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+    public fieldSelect(data) {
+        if (data === 'required') {
+           this.showOnlyRequired(true);
+        } else {
+            this.showAllFields();
+        }
     }
 
     public showAllFields(): void {
