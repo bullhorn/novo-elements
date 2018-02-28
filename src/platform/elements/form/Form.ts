@@ -12,6 +12,7 @@ import { Helpers } from '../../utils/Helpers';
                 <ng-content select="form-title"></ng-content>
                 <ng-content select="form-subtitle"></ng-content>
             </header>
+            <novo-tiles [options]="fieldOptions" (onChange)="fieldSelect($event)"></novo-tiles>
             <form class="novo-form" [formGroup]="form">
                 <ng-content></ng-content>
             </form>
@@ -25,6 +26,12 @@ export class NovoFormElement implements OnInit {
 
     public showingAllFields: boolean = false;
     public showingRequiredFields: boolean = true;
+    public fieldOptions: any = [{
+        label: 'All Fields',
+        value: 'all',
+      }, {
+        label: 'Required Fields',
+        value: 'required'}, ];
 
     ngOnInit() {
         this.form.layout = this.layout;
@@ -38,6 +45,13 @@ export class NovoFormElement implements OnInit {
         return this.form.valid;
     }
 
+    public fieldSelect(data) {
+        if (data === 'required') {
+           this.showOnlyRequired(true);
+        } else {
+            this.showAllFields();
+        }
+    }
     public showAllFields(): void {
         Object.keys(this.form.controls).forEach((key: string) => {
             this.form.controls[key].hidden = false;
