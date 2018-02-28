@@ -37,7 +37,22 @@ novo-address {
       }
     }
 
-
+    label.clear-all {
+        flex: 1 100%;
+        position: absolute;
+        right: 0;
+        bottom: -20px;
+        font-size: 0.9rem;
+        color: $negative;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        i {
+            font-size: 0.7rem;
+            padding-bottom: 2px;
+            margin-left: 5px;
+        }
+    }
     .googleList {
       background-color: $white;
       max-height: 200px;

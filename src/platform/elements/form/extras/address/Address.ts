@@ -22,7 +22,6 @@ declare let google: any;
         <div class="addressSearch">
         <input class="searchAddress" id="autocomplete" placeholder="Search for an address" [(ngModel)]="searchTerm" (ngModelChange)="onSearch($event)" type="text"/>
         <i class="bhi-location" *ngIf="!searchTerm"></i>
-        <i class="bhi-times" *ngIf="searchTerm" (click)="clearQuery($event)"></i>
         </div>
         <div class="googleList" [class.disabled]="!items || items.length === 0">
             <div *ngFor="let item of items" class="googleListItem" (click)="setAddress(item.description, item.place_id)">
@@ -36,7 +35,8 @@ declare let google: any;
         <input type="text" class="city locality" id="city" name="city" [placeholder]="labels.city" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()"/>
         <novo-select class="state region" id="state" [options]="states" [placeholder]="labels.state" autocomplete="shipping region" [(ngModel)]="model.state" (ngModelChange)="onStateChange($event)"></novo-select>
         <input type="text" class="zip postal-code" id="zip" name="zip" [placeholder]="labels.zipCode" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()"/>
-        <novo-select class="country-name" id="country" [options]="countries" [placeholder]="labels.country" autocomplete="shipping country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event)"></novo-select>
+        <novo-select class="country-name" id="country" [options]="countries" [placeholder]="labels.country" autocomplete="shipping country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event, true)"></novo-select>
+        <label class="clear-all" *ngIf="model.address1 || model.city || model.state || model.zip || model.countryName" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
     `
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
@@ -74,7 +74,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         }
     }
 
-    onCountryChange(evt) {
+    onCountryChange(evt, changeState) {
         let country: any = findByCountryName(evt);
         if (country) {
             this.model.countryName = country.name;
@@ -84,7 +84,9 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         }
 
         // Update state
-        this.model.state = undefined;
+        if (changeState) {
+            this.model.state = undefined;
+        }
         this.updateControl();
     }
 
@@ -108,43 +110,48 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         }
     }
 
+    clearValue() {
+        this.model.address1 = this.model.city = this.model.state = this.model.countryName = this.model.zip = '';
+        this.onModelChange(this.model);
+    }
+
     setAddress(address: string, placesId: string): void {
         this.items = [];
-        this.model.address1 = this.model.route = this.model.city = this.model.state = this.model.countryName = this.model.zip = '';
+        this.searchTerm = '';
+        this.model.address1 = this.model.city = this.model.state = this.model.countryName = this.model.zip = '';
         this.googlePlacesService.getGeoPlaceDetail(placesId).then((details: any) => {
         for (let i = 0; i < details.address_components.length; i++) {
             let addressType: string = details.address_components[i].types[0];
             switch (addressType) {
                 case 'street_number':
                     this.model.address1 = details.address_components[i].long_name || '';
+                    this.updateControl();
                     break;
                 case 'route':
                     this.model.address1 = this.model.address1 + ' ' + details.address_components[i].long_name;
+                    this.updateControl();
                     break;
                 case 'locality':
                     this.model.city = details.address_components[i].long_name;
+                    this.updateControl();
                     break;
                 case 'administrative_area_level_1':
                     this.model.state = details.address_components[i].short_name;
+                    this.onStateChange(this.model.state);
                     break;
                 case 'country':
                     this.model.countryName = details.address_components[i].long_name;
-                    // this.onCountryChange();
+                    this.onCountryChange(this.model.countryName, false);
                     break;
                 case 'postal_code':
                     this.model.zip = details.address_components[i].short_name;
+                    this.updateControl();
                     break;
                 default:
                 break;
             }
-            this.updateControl();
         }
         });
-    }
-
-    clearQuery(event) {
-        this.searchTerm = '';
-        this.items = [];
     }
 
     updateStates() {
