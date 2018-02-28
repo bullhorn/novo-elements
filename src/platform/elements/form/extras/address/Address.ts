@@ -22,6 +22,7 @@ declare let google: any;
         <div class="addressSearch">
         <input class="searchAddress" id="autocomplete" placeholder="Search for an address" [(ngModel)]="searchTerm" (ngModelChange)="onSearch($event)" type="text"/>
         <i class="bhi-location" *ngIf="!searchTerm"></i>
+        <i class="bhi-times" *ngIf="searchTerm" (click)="clearQuery($event)"></i>
         </div>
         <div class="googleList" [class.disabled]="!items || items.length === 0">
             <div *ngFor="let item of items" class="googleListItem" (click)="setAddress(item.description, item.place_id)">
@@ -30,7 +31,6 @@ declare let google: any;
                 <span class="addressDetails">{{ item.structured_formatting.secondary_text }}</span>
             </div>
         </div>
-
         <input type="text" class="street-address" id="address1" name="address1" [placeholder]="labels.address" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="updateControl()"/>
         <input type="text" class="apt suite" id="address2" name="address2" [placeholder]="labels.apt" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()"/>
         <input type="text" class="city locality" id="city" name="city" [placeholder]="labels.city" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()"/>
@@ -51,7 +51,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     onModelTouched: Function = () => {
     };
 
-    searchTerm: any;
+    searchTerm: string;
     items: any[];
     private apiKey: string = 'AIzaSyC2ZjaGlzVKhWNWGZaOXmsRQeqXp-AKdbA';
 
@@ -110,6 +110,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
     setAddress(address: string, placesId: string): void {
         this.items = [];
+        this.model.address1 = this.model.route = this.model.city = this.model.state = this.model.countryName = this.model.zip = '';
         this.googlePlacesService.getGeoPlaceDetail(placesId).then((details: any) => {
         for (let i = 0; i < details.address_components.length; i++) {
             let addressType: string = details.address_components[i].types[0];
@@ -139,6 +140,11 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             this.updateControl();
         }
         });
+    }
+
+    clearQuery(event) {
+        this.searchTerm = '';
+        this.items = [];
     }
 
     updateStates() {
