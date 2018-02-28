@@ -4,7 +4,7 @@ import { FormGroupDirective } from '@angular/forms';
 // App
 import { NovoFormElement } from './Form';
 
-describe('Elements: NovoFormElement', () => {
+xdescribe('Elements: NovoFormElement', () => {
     let fixture;
     let component;
 
