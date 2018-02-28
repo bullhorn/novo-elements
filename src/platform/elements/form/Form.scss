@@ -484,6 +484,18 @@ novo-form {
         novo-tiles {
             padding-bottom: 30px;
         }
+
+        i.bhi-publish {
+          cursor: pointer;
+          font-size: 1.4em;
+          display: inline-block;
+          position: fixed;
+          right: 0;
+          padding-right: 30px;
+          &:hover {
+              color: blue;
+          }
+        }
     }
     &[dark] {
         .novo-form-container {

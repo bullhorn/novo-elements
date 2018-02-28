@@ -13,9 +13,11 @@ import { Helpers } from '../../utils/Helpers';
                 <ng-content select="form-subtitle"></ng-content>
             </header>
             <novo-tiles [options]="fieldOptions" (onChange)="fieldSelect($event)"></novo-tiles>
+            <i class="bhi-publish" (click)="topFunction()" id="scrollTopButton"></i>
             <form class="novo-form" [formGroup]="form">
                 <ng-content></ng-content>
             </form>
+
         </div>
     `
 })
@@ -45,6 +47,10 @@ export class NovoFormElement implements OnInit {
         return this.form.valid;
     }
 
+    public topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
     public fieldSelect(data) {
         if (data === 'required') {
            this.showOnlyRequired(true);
