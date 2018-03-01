@@ -485,16 +485,16 @@ novo-form {
             padding-bottom: 30px;
         }
 
-        i.bhi-publish {
+        i.bhi-sort-asc {
           cursor: pointer;
           font-size: 1.4em;
           display: inline-block;
           position: fixed;
           right: 0;
-          bottom: 2%;
+          bottom: 15%;
           padding-right: 30px;
           &:hover {
-              color: blue;
+              color: $ocean;
           }
         }
     }
