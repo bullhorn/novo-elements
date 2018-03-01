@@ -1,5 +1,5 @@
 <div class="novo-stepper-status-line"></div>
-<div [ngSwitch]="state">
+<div [ngSwitch]="state" class="novo-stepper-status-icon">
   <novo-icon size="small" color="positive" *ngSwitchCase="'edit'">circle</novo-icon>
   <novo-icon size="small" color="positive" *ngSwitchCase="'done'">check-circle-filled</novo-icon>
   <novo-icon size="small" color="positive" *ngSwitchDefault>circle-o</novo-icon>

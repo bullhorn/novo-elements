@@ -43,7 +43,6 @@ export class StepperDemoComponent implements OnInit {
     }
 
     public next(stepper, step) {
-        console.log('form', this.firstFormGroup);
         step.editable = false;
         stepper.next();
     }
