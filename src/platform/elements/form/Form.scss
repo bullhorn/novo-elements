@@ -494,11 +494,11 @@ novo-form {
           bottom: 15%;
           margin-right: 30px;
           border-radius: 60px;
-          box-shadow: 0px 0px 12px #3D464D;
+          box-shadow: 0px 0px 6px #3D464D;
           padding: 0.2em 0.3em 0.3em 0.3em;
           &:hover {
               color: $ocean;
-              box-shadow: 0px 0px 12px $ocean;
+              box-shadow: 0px 0px 6px $ocean;
           }
         }
     }
