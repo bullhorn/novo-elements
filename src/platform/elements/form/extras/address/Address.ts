@@ -36,7 +36,7 @@ declare let google: any;
         <novo-select class="state region" id="state" [options]="states" [placeholder]="labels.state" autocomplete="shipping region" [(ngModel)]="model.state" (ngModelChange)="onStateChange($event)"></novo-select>
         <input type="text" class="zip postal-code" id="zip" name="zip" [placeholder]="labels.zipCode" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()"/>
         <novo-select class="country-name" id="country" [options]="countries" [placeholder]="labels.country" autocomplete="shipping country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event, true)"></novo-select>
-        <label class="clear-all" *ngIf="model.address1 || model.city || model.state || model.zip || model.countryName" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+        <label class="clear-all" *ngIf="model.address1 || model.city || model.state || model.zip" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
     `
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
@@ -111,7 +111,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     }
 
     clearValue() {
-        this.model.address1 = this.model.city = this.model.state = this.model.countryName = this.model.zip = '';
+        this.model.address1 = this.model.city = this.model.state = this.model.zip = '';
         this.onModelChange(this.model);
     }
 
