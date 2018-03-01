@@ -75,7 +75,7 @@ export class NovoFieldsetElement {
                 <ng-content select="form-subtitle"></ng-content>
             </header>
             <novo-tiles [options]="fieldOptions" (onChange)="fieldSelect($event)" [defaultValue]="fieldView"></novo-tiles>
-            <i class="bhi-sort-asc" (click)="topFunction()" id="scrollTopButton" tooltip="Back to Top"></i>
+            <i class="bhi-sort-asc" (click)="topFunction()"></i>
             <form class="novo-form" [formGroup]="form">
                 <ng-container *ngFor="let fieldset of form.fieldsets;let i = index">
                     <novo-fieldset *ngIf="fieldset.controls.length" [index]="i" [autoFocus]="autoFocusFirstField" [icon]="fieldset.icon" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
