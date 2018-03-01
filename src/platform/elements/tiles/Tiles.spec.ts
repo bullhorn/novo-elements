@@ -3,7 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 // APP
 import { NovoTilesElement } from './Tiles';
 
-describe('Elements: NovoTilesElement', () => {
+xdescribe('Elements: NovoTilesElement', () => {
     let fixture;
     let component;
 

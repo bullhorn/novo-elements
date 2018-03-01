@@ -41,6 +41,7 @@ const TILES_VALUE_ACCESSOR = {
 })
 export class NovoTilesElement implements ControlValueAccessor, AfterContentInit, OnChanges {
     @Input() name: string;
+    @Input() defaultValue: string;
     @Input() options: any;
     @Input() required: boolean;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
@@ -66,6 +67,7 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
 
     ngAfterContentInit() {
         this.name = this.name || '';
+        this.model = this.defaultValue || '';
         this.setupOptions();
     }
 

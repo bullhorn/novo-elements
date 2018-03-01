@@ -74,7 +74,7 @@ export class NovoFieldsetElement {
                 <ng-content select="form-title"></ng-content>
                 <ng-content select="form-subtitle"></ng-content>
             </header>
-            <novo-tiles [options]="fieldOptions" (onChange)="fieldSelect($event)"></novo-tiles>
+            <novo-tiles [options]="fieldOptions" (onChange)="fieldSelect($event)" [defaultValue]="fieldView"></novo-tiles>
             <i class="bhi-sort-asc" (click)="topFunction()" id="scrollTopButton" tooltip="Back to Top"></i>
             <form class="novo-form" [formGroup]="form">
                 <ng-container *ngFor="let fieldset of form.fieldsets;let i = index">
@@ -103,11 +103,13 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
       }, {
         label: 'Required Fields',
         value: 'required'}, ];
+    public fieldView: string;
 
     constructor(private element: ElementRef) { }
 
     public ngOnInit(): void {
         this.ngOnChanges();
+        this.fieldView = 'all';
     }
 
     public ngOnChanges(changes?: SimpleChanges): void {
@@ -167,6 +169,14 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
         });
         this.showingAllFields = true;
         this.showingRequiredFields = false;
+        let controls: HTMLElement[] = this.element.nativeElement.querySelectorAll('novo-control:not(.hidden)');
+        if (controls && controls.length) {
+            let firstControl: HTMLElement = controls[0];
+            let input: HTMLElement = firstControl.querySelector('input');
+            if (input) {
+                input.focus();
+            }
+        }
     }
 
     public showOnlyRequired(hideRequiredWithValue): void {
@@ -190,6 +200,14 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
         });
         this.showingAllFields = false;
         this.showingRequiredFields = true;
+        let controls: HTMLElement[] = this.element.nativeElement.querySelectorAll('novo-control:not(.hidden)');
+        if (controls && controls.length) {
+            let firstControl: HTMLElement = controls[0];
+            let input: HTMLElement = firstControl.querySelector('input');
+            if (input) {
+                input.focus();
+            }
+        }
         this.forceValidation();
     }
 
