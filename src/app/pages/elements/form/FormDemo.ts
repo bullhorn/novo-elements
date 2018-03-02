@@ -213,7 +213,7 @@ export class FormDemoComponent {
         this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
 
         // Dynamic
-        this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, { token: 'TOKEN', military: true }, {
+        this.dynamic = formUtils.toFieldSets(MockMeta, '$ USD', {}, { token: 'TOKEN', military: false }, {
             customfield: {
                 customControl: CustomDemoComponent
             }
@@ -221,7 +221,7 @@ export class FormDemoComponent {
         formUtils.setInitialValuesFieldsets(this.dynamic, { firstName: 'Initial F Name', number: 12 });
         this.dynamicForm = formUtils.toFormGroupFromFieldset(this.dynamic);
 
-        this.dynamicVertical = formUtils.toControls(MockMeta, '$ USD', {}, { token: 'TOKEN', military: true });
+        this.dynamicVertical = formUtils.toControls(MockMeta, '$ USD', {}, { token: 'TOKEN', military: false });
         formUtils.setInitialValues(this.dynamicVertical, { number: 0, firstName: 'Bobby Flay' });
         this.dynamicVerticalForm = formUtils.toFormGroup(this.dynamicVertical);
 

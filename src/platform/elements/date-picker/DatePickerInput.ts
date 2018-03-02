@@ -1,9 +1,11 @@
 // NG
-import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Inject, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Output, Inject, ViewChild, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
+import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
+
 // App
 import { NovoDatePickerElement } from './DatePicker';
 import { NovoOverlayTemplate } from '../overlay/Overlay';
@@ -23,7 +25,7 @@ const DATE_VALUE_ACCESSOR = {
     selector: 'novo-date-picker-input',
     providers: [DATE_VALUE_ACCESSOR],
     template: `
-        <input type="text" [name]="name" [value]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input/>
+        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input/>
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
 
@@ -45,6 +47,7 @@ export class NovoDatePickerInputElement implements ControlValueAccessor {
     @Input() name: string;
     @Input() placeholder: string;
     @Input() maskOptions: any;
+    @Output() changed: EventEmitter<any> = new EventEmitter();
     /** Element for the panel containing the autocomplete options. */
     @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
 
@@ -55,9 +58,11 @@ export class NovoDatePickerInputElement implements ControlValueAccessor {
         private _changeDetectorRef: ChangeDetectorRef
     ) {
         this.maskOptions = {
-            mask: this.dateFormatService.getDateMask(),
-            keepCharPositions: true,
-            guide: false
+            // mask: this.dateFormatService.getDateMask(),
+            mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
+            pipe: createAutoCorrectedDatePipe(this.labels.dateFormat.toLowerCase()),
+            keepCharPositions: false,
+            guide: true,
         };
         this.placeholder = this.labels.dateFormatPlaceholder;
     }
@@ -83,10 +88,19 @@ export class NovoDatePickerInputElement implements ControlValueAccessor {
 
     _handleInput(event: KeyboardEvent): void {
         if (document.activeElement === event.target) {
-            this._onChange((event.target as HTMLInputElement).value);
-            let [dateTimeValue, formatted] = this.dateFormatService.parseString((event.target as HTMLInputElement).value, false, 'date');
-            if (dateTimeValue && dateTimeValue.getTime() > 0) {
-                this._setTriggerValue(dateTimeValue);
+            // this._onChange((event.target as HTMLInputElement).value);
+            let value = (event.target as HTMLInputElement).value;
+            try {
+                let dateTimeValue = Date.parse(value);
+                if (!isNaN(dateTimeValue)) {
+                    let dt = new Date(dateTimeValue);
+                    this._onChange(dt);
+                    this._setTriggerValue(dt);
+                } else {
+                    this.changed.next(value);
+                    this._onChange(null);
+                }
+            } catch (err) {
             }
             this.openPanel();
         }
@@ -107,10 +121,13 @@ export class NovoDatePickerInputElement implements ControlValueAccessor {
 
         // Simply falling back to an empty string if the display value is falsy does not work properly.
         // The display value can also be the number zero and shouldn't fall back to an empty string.
-        const inputValue = toDisplay !== null ? toDisplay : '';
-
+        let inputValue = toDisplay !== null ? toDisplay : '';
+        if(inputValue instanceof Date && this.value instanceof Date) {
+            inputValue = new Date(inputValue.setHours(this.value.getHours(), this.value.getMinutes()));
+        }
         this.value = inputValue;
         this.formattedValue = this.formatDateValue(inputValue);
+        this.changed.next(this.value);
         this._changeDetectorRef.markForCheck();
     }
 
@@ -140,8 +157,8 @@ export class NovoDatePickerInputElement implements ControlValueAccessor {
             return '';
         }
         return this.labels.formatDateWithFormat(value, {
-            month: 'numeric',
-            day: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
             year: 'numeric'
         });
     }

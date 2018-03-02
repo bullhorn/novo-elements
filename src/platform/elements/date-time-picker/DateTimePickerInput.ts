@@ -2,8 +2,6 @@
 import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Inject, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
-// Vendor
-import { TextMaskModule } from 'angular2-text-mask';
 // App
 import { NovoDateTimePickerElement } from './DateTimePicker';
 import { NovoOverlayTemplate } from '../overlay/Overlay';
@@ -22,18 +20,14 @@ const DATE_VALUE_ACCESSOR = {
     selector: 'novo-date-time-picker-input',
     providers: [DATE_VALUE_ACCESSOR],
     template: `
-        <input type="text" [name]="name" [value]="formattedValue" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input readOnly/>
-        <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
-        <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
-
-        <novo-overlay-template [parent]="element">
-            <novo-date-time-picker inline="true" (onSelect)="setValue($event)" [ngModel]="value" [military]="military"></novo-date-time-picker>
-        </novo-overlay-template>
+        <novo-date-picker-input [(ngModel)]="datePart" (changed)="updateDate($event)"></novo-date-picker-input>
+        <novo-time-picker-input [(ngModel)]="timePart" (changed)="updateTime($event)" [military]="military"></novo-time-picker-input>
   `
 })
 export class NovoDateTimePickerInputElement implements ControlValueAccessor {
     public value: any;
-    public formattedValue: any;
+    public datePart: any;
+    public timePart: any;
 
     /** View -> model callback called when value changes */
     _onChange: (value: any) => void = () => { };
@@ -45,63 +39,53 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
     @Input() placeholder: string;
     @Input() maskOptions: any;
     @Input() military: boolean = false;
-    /** Element for the panel containing the autocomplete options. */
-    @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
-
+    
     constructor(
         public element: ElementRef,
         public labels: NovoLabelService,
         private dateFormatService: DateFormatService,
         private _changeDetectorRef: ChangeDetectorRef
-    ) {
-        this.maskOptions = {
-            mask: this.dateFormatService.getDateMask(),
-            keepCharPositions: true,
-            guide: false
-        };
-        this.placeholder = this.labels.dateFormatPlaceholder;
-    }
-
-    /** BEGIN: Convienient Panel Methods. */
-    openPanel(): void {
-        this.overlay.openPanel();
-    }
-    closePanel(): void {
-        this.overlay.closePanel();
-    }
-    get panelOpen(): boolean {
-        return this.overlay && this.overlay.panelOpen;
-    }
-    /** END: Convienient Panel Methods. */
-
-    _handleKeydown(event: KeyboardEvent): void {
-        if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
-            this.closePanel();
-            event.stopPropagation();
-        }
-    }
-
-    _handleInput(event: KeyboardEvent): void {
-        if (document.activeElement === event.target) {
-            this._onChange((event.target as HTMLInputElement).value);
-            let [dateTimeValue, formatted] = this.dateFormatService.parseString((event.target as HTMLInputElement).value, false, 'date');
-            if (dateTimeValue && dateTimeValue.getTime() > 0) {
-                this._setTriggerValue(dateTimeValue);
-            }
-            this.openPanel();
-        }
-    }
+    ) {}
 
     writeValue(value: any): void {
+        this.datePart = value;
+        this.timePart = value;
         Promise.resolve(null).then(() => this._setTriggerValue(value));
     }
+    updateDate(event) {
+        try {
+            if (event instanceof Date && this.timePart instanceof Date) {
+                let newDt = new Date(event.getFullYear(), event.getMonth(), event.getDate(), this.timePart.getHours(), this.timePart.getMinutes());
+                this.setValue({date: newDt});
+            } else {
+                this.clearValue(true);
+            }
+        } catch (err) {
+            // Date not valid
+            this.clearValue(true);
+        }
+    }
+    updateTime(event) {
+        try {
+            if (event instanceof Date && this.datePart instanceof Date) {
+                let newDt = new Date(this.datePart.getFullYear(), this.datePart.getMonth(), this.datePart.getDate(), event.getHours(), event.getMinutes());
+                this.setValue({date: newDt});
+            } else {
+                this.clearValue(true);
+            }
+        } catch (err) {
+            // Date not valid
+            this.clearValue(true);
+        }
+    }
+
     registerOnChange(fn: (value: any) => {}): void {
         this._onChange = fn;
     }
     registerOnTouched(fn: () => {}) {
         this._onTouched = fn;
     }
-
+    
     private _setTriggerValue(value: any): void {
         const toDisplay = value;
 
@@ -112,8 +96,8 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
         // If it's used within a `MdFormField`, we should set it through the property so it can go
         // through change detection.
         //this._element.nativeElement.value = inputValue;
-        this.value = inputValue;
-        this.formattedValue = this.formatDateValue(inputValue);
+        this.value = inputValue; 
+        // this.formattedValue = this.formatDateValue(inputValue);
         this._changeDetectorRef.markForCheck();
     }
 
@@ -126,28 +110,14 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
 
     public setValueAndClose(event: any | null): void {
         this.setValue(event);
-        this.closePanel();
     }
 
     /**
      * Clear any previous selected option and emit a selection change event for this option
      */
     public clearValue(skip: any) {
-        this.writeValue(null);
-        this._onChange(null);
-    }
-
-    public formatDateValue(value) {
-        if (!value) {
-            return '';
-        }
-        return this.labels.formatDateWithFormat(value, {
-            month: 'numeric',
-            day: 'numeric',
-            year: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric'
-        });
+        this._setTriggerValue(null);
+        this._onChange('');
     }
 
     public get hasValue() {

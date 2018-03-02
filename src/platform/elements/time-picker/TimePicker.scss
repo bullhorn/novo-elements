@@ -30,7 +30,7 @@ novo-time-picker-input {
     >i.bhi-calendar {
         position: absolute;
         right: 0;
-        top: 0;
+        top: 4px;
         font-size: 1.2em;
     }
     >i.bhi-times {
@@ -42,8 +42,8 @@ novo-time-picker-input {
 
 novo-time-picker {
     display: block;
-    width: 250px;
-    min-width: 250px;
+    // width: 250px;
+    // min-width: 250px;
     overflow: hidden;
     border-radius: 4px;
     background-color: #fff;
@@ -105,6 +105,27 @@ novo-time-picker {
             font-weight: 600;
         }
     }
+    .increments {
+        position: relative;
+        height: 250px;
+        width: 130px;
+        overflow-y: auto;
+
+        novo-list-item {
+            width: 130px;
+            &:focus,
+            &:hover {
+                background: lighten($light, 10%);
+                color: darken($light, 55%);
+            }
+            &.active {
+                border: 1px solid $positive;
+                color: $positive;
+                font-weight: 500;
+            }
+        }
+    }
+
     /* ANALOG CLOCK
     ----------------------------- */
     .analog {

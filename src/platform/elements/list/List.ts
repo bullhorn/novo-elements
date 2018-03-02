@@ -26,6 +26,7 @@ export class NovoListElement {
             <ng-content select="item-header"></ng-content>
             <ng-content select="item-content"></ng-content>
         </div>
+        <ng-content></ng-content>
         <ng-content select="item-end"></ng-content>
     `
 })
