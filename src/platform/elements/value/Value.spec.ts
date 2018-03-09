@@ -5,7 +5,7 @@ import { NovoValueElement, NOVO_VALUE_THEME, NOVO_VALUE_TYPE } from './Value';
 // import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoValueModule } from './Value.module';
 // TODO fix specs
-describe('Elements: NovoValueElement', () => {
+fdescribe('Elements: NovoValueElement', () => {
     let fixture;
     let component;
 
@@ -191,12 +191,28 @@ describe('Elements: NovoValueElement', () => {
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.HTML);
         });
-        it('should strip html tags in large fields', () => {
+        it('should strip html tags in large fields if stripHTML = true', () => {
+            component.meta.name = 'companyDescription';
+            component.meta.dataSpecialization = 'HTML';
+            component.meta.stripHTML = true;
+            component.data = '<span style="color:#8e44ad">test</span>';
+            component.ngOnChanges();
+            expect(component.data).toEqual('test');
+        });
+        it('should strip html tags in large fields if stripHTML = false', () => {
+            component.meta.name = 'companyDescription';
+            component.meta.dataSpecialization = 'HTML';
+            component.meta.stripHTML = false;
+            component.data = '<span style="color:#8e44ad">test</span>';
+            component.ngOnChanges();
+            expect(component.data).toEqual('<span style="color:#8e44ad">test</span>');
+        });
+        it('should strip html tags in large fields if stripHTML is not defined', () => {
             component.meta.name = 'companyDescription';
             component.meta.dataSpecialization = 'HTML';
             component.data = '<span style="color:#8e44ad">test</span>';
             component.ngOnChanges();
-            expect(component.data).toEqual('test');
+            expect(component.data).toEqual('<span style="color:#8e44ad">test</span>');
         });
     });
     describe('Function: isLinkField', () => {

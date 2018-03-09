@@ -102,7 +102,9 @@ export class NovoValueElement implements OnInit, OnChanges {
             this.type = NOVO_VALUE_TYPE.ENTITY_LIST;
         } else if (this.isHTMLField(this.meta)) {
             this.type = NOVO_VALUE_TYPE.HTML;
-            this.data = this.data.replace(/<(.|\n)+?>/gi, '');
+            if (this.meta.stripHTML) {
+                this.data = this.data.replace(/<(.|\n)+?>/gi, '');
+            }
         } else if (this.meta && this.meta.associatedEntity) {
             switch (this.meta.associatedEntity.entity) {
                 case 'ClientCorporation':
