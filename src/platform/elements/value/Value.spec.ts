@@ -184,12 +184,26 @@ describe('Elements: NovoValueElement', () => {
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.LINK);
         });
+        it('should set type to html for a html fields', () => {
+            component.meta.name = 'companyDescription';
+            component.meta.dataSpecialization = 'HTML';
+            component.data = '';
+            component.ngOnChanges();
+            expect(component.type).toEqual(NOVO_VALUE_TYPE.HTML);
+        });
     });
     describe('Function: isLinkField', () => {
         it('should return true for link fields or an obvious link', () => {
             expect(component.isLinkField({ name: 'companyURL' }, '')).toBeTruthy();
             expect(component.isLinkField({ name: 'mobile' }, '')).toBeFalsy();
             expect(component.isLinkField({ name: 'customText18' }, 'www.google.com')).toBeTruthy();
+        });
+    });
+    describe('Function: isHTMLField', () => {
+        it('should return true for html fields', () => {
+            expect(component.isHTMLField({ dataSpecialization: 'HTML' })).toBeTruthy();
+            expect(component.isHTMLField({ inputType: 'TEXTAREA' })).toBeTruthy();
+            expect(component.isHTMLField({ dataSpecialization: 'NO_HTML' })).toBeFalsy();
         });
     });
 });

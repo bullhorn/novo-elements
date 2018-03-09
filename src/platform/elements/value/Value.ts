@@ -2,7 +2,7 @@
 import { Component, Input, OnInit, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
 //APP
 import { Helpers } from '../../utils/Helpers';
-export enum NOVO_VALUE_TYPE { DEFAULT, ENTITY_LIST, LINK, INTERNAL_LINK };
+export enum NOVO_VALUE_TYPE { DEFAULT, ENTITY_LIST, LINK, INTERNAL_LINK, HTML };
 export enum NOVO_VALUE_THEME { DEFAULT, MOBILE };
 
 @Component({
@@ -16,6 +16,10 @@ export enum NOVO_VALUE_THEME { DEFAULT, MOBILE };
                 <novo-entity-list *ngSwitchCase="NOVO_VALUE_TYPE.ENTITY_LIST" [data]='data' [meta]="meta"></novo-entity-list>
             </div>
 
+            <div *ngSwitchCase="NOVO_VALUE_TYPE.HTML" class="value-outer html-field">
+                <label>{{ meta.label }}</label>
+                <div *ngIf="isDefault" class="value" [innerHTML]="data | render : meta"></div>
+            </div>
             <div *ngSwitchDefault class="value-outer">
                 <label>{{ meta.label }}</label>
                 <div *ngIf="isDefault" class="value" [innerHTML]="data | render : meta"></div>
@@ -96,6 +100,8 @@ export class NovoValueElement implements OnInit, OnChanges {
             }
         } else if (this.isEntityList(this.meta.type)) {
             this.type = NOVO_VALUE_TYPE.ENTITY_LIST;
+        } else if (this.isHTMLField(this.meta)) {
+            this.type = NOVO_VALUE_TYPE.HTML;
         } else if (this.meta && this.meta.associatedEntity) {
             switch (this.meta.associatedEntity.entity) {
                 case 'ClientCorporation':
@@ -120,5 +126,9 @@ export class NovoValueElement implements OnInit, OnChanges {
 
     isEntityList(type: string): boolean {
         return type === 'TO_MANY';
+    }
+
+    isHTMLField(meta: any): boolean {
+        return meta.dataSpecialization === 'HTML' || meta.inputType === 'TEXTAREA';
     }
 }
