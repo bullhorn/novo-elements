@@ -96,9 +96,9 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     timePickerValue: Date = new Date();
 
     model: any;
-    onModelChange: Function = () => { };
-    onModelTouched: Function = () => { };
-
+    _onChange: Function = () => { };
+    _onTouched: Function = () => { };
+    
     constructor(public labels: NovoLabelService, private element: ElementRef) { }
 
     toggleView(tab: string): void {
@@ -138,17 +138,17 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
         this.datePickerValue = event.date;
         this.model = this.createFullDateValue(this.datePickerValue, this.timePickerValue);
         this.setDateLabels(this.model);
-        this.onModelChange(this.model);
         this.onSelect.emit({ date: this.model });
+        this._onChange(this.model);
         this.toggleView('time');
     }
 
     onTimeSelected(event: { hours?: number, minutes?: number, meridian?: string, date?: Date, text?: string }) {
         this.timePickerValue = event.date;
-        this.model = this.createFullDateValue(this.datePickerValue, this.timePickerValue);
+        this.model = this.createFullDateValue(this.model, this.timePickerValue);
         this.setTimeLabels(this.model);
-        this.onModelChange(this.model);
         this.onSelect.emit({ date: this.model });
+        this._onChange(this.model);
     }
 
     createFullDateValue(datePickerValue: Date, timePickerValue: Date) {
@@ -172,10 +172,10 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     }
 
     registerOnChange(fn: Function): void {
-        this.onModelChange = fn;
+        this._onChange = fn;
     }
 
     registerOnTouched(fn: Function): void {
-        this.onModelTouched = fn;
+        this._onTouched = fn;
     }
 }

@@ -1,5 +1,5 @@
 // NG
-import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Output, Inject, ViewChild, EventEmitter } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, forwardRef, Host, Input, Output, Inject, ViewChild, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
@@ -34,7 +34,7 @@ const DATE_VALUE_ACCESSOR = {
         </novo-overlay-template>
   `
 })
-export class NovoDatePickerInputElement implements ControlValueAccessor {
+export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor {
     public value: any;
     public formattedValue: any;
 
@@ -47,6 +47,7 @@ export class NovoDatePickerInputElement implements ControlValueAccessor {
     @Input() name: string;
     @Input() placeholder: string;
     @Input() maskOptions: any;
+    @Input() format: string;
     @Output() changed: EventEmitter<any> = new EventEmitter();
     /** Element for the panel containing the autocomplete options. */
     @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
@@ -57,14 +58,17 @@ export class NovoDatePickerInputElement implements ControlValueAccessor {
         private dateFormatService: DateFormatService,
         private _changeDetectorRef: ChangeDetectorRef
     ) {
-        this.maskOptions = {
+        this.placeholder = this.labels.dateFormatPlaceholder;
+    }
+    
+    ngOnInit() {
+        this.maskOptions = this.maskOptions || {
             // mask: this.dateFormatService.getDateMask(),
             mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
-            pipe: createAutoCorrectedDatePipe(this.labels.dateFormat.toLowerCase()),
+            pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormat.toLowerCase()),
             keepCharPositions: false,
             guide: true,
         };
-        this.placeholder = this.labels.dateFormatPlaceholder;
     }
 
     /** BEGIN: Convienient Panel Methods. */

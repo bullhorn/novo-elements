@@ -20,7 +20,7 @@ const DATE_VALUE_ACCESSOR = {
     selector: 'novo-date-time-picker-input',
     providers: [DATE_VALUE_ACCESSOR],
     template: `
-        <novo-date-picker-input [(ngModel)]="datePart" (changed)="updateDate($event)"></novo-date-picker-input>
+        <novo-date-picker-input [(ngModel)]="datePart" (changed)="updateDate($event)" [maskOptions]="maskOptions"></novo-date-picker-input>
         <novo-time-picker-input [(ngModel)]="timePart" (changed)="updateTime($event)" [military]="military"></novo-time-picker-input>
   `
 })
@@ -39,6 +39,7 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
     @Input() placeholder: string;
     @Input() maskOptions: any;
     @Input() military: boolean = false;
+    @Input() format: string;
     
     constructor(
         public element: ElementRef,

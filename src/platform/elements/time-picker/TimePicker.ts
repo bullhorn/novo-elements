@@ -27,7 +27,7 @@ const TIME_PICKER_VALUE_ACCESSOR = {
         </div>
         <div class="increments" *ngIf="!analog">
             <novo-list direction="vertical">
-                <novo-list-item *ngFor="let increment of increments" (click)="setValue($event, increment)" [class.active]="increment==value">{{increment}}</novo-list-item>
+                <novo-list-item *ngFor="let increment of increments" (click)="setValue($event, increment)" [class.active]="increment==selected">{{increment}}</novo-list-item>
             </novo-list>
         </div>
         <div class="analog" *ngIf="analog">
@@ -70,14 +70,14 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
     minutesClass: string;
     activeMinute;
     increments: string[] = [];
+    selected:string;
     MERIDIANS: Array<string> = ['am', 'pm'];
     MINUTES: Array<string> = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
     HOURS: Array<string> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     model: any;
-    onModelChange: Function = () => {
-    };
-    onModelTouched: Function = () => {
-    };
+    _onChange: Function = () => { };
+    _onTouched: Function = () => { };
+
     flatten(arr) {
         return Array.prototype.concat(...arr);
     }
@@ -123,6 +123,7 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
 
     setValue(event, value) {
         Helpers.swallowEvent(event);
+        this.selected = value;
         let [time, meridian] = value.split(' ');
         let [hours, minutes] = time.split(':');
         this.hours = hours;
@@ -190,7 +191,7 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
             date: value,
             text: this.value,
         });
-        this.onModelChange(value);
+        this._onChange(value);
     }
 
     // ValueAccessor Functions
@@ -202,10 +203,10 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
     }
 
     registerOnChange(fn: Function): void {
-        this.onModelChange = fn;
+        this._onChange = fn;
     }
 
     registerOnTouched(fn: Function): void {
-        this.onModelTouched = fn;
+        this._onTouched = fn;
     }
 }

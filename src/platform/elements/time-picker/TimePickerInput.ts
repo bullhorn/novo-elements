@@ -37,8 +37,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     public formattedValue: any;
 
     /** View -> model callback called when value changes */
-    _onChange: (value: any) => void = () => { };
-
+    _onChange: (value: any) => void = () => { }
     /** View -> model callback called when autocomplete has been touched */
     _onTouched = () => { };
 
@@ -70,7 +69,8 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     /** BEGIN: Convienient Panel Methods. */
     openPanel(): void {
         this.overlay.openPanel();
-        Promise.resolve(null).then(() => this.scrollToIndex((8*4)));
+        let hour = new Date().getHours();
+        Promise.resolve(null).then(() => this.scrollToIndex((hour*4)));
     }
     closePanel(): void {
         this.overlay.closePanel();

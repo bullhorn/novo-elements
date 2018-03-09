@@ -1,6 +1,6 @@
 // NG2
-import { Component } from '@angular/core';
-import { CalendarEvent, CalendarEventResponse } from './../../../../platform/index';
+import { Component, LOCALE_ID } from '@angular/core';
+import { CalendarEvent, CalendarEventResponse, NovoLabelService } from './../../../../platform/index';
 // APP
 let DateDemoTpl = require('./templates/DateDemo.html');
 let TimeDemoTpl = require('./templates/TimeDemo.html');
@@ -8,6 +8,11 @@ let RangeDemoTpl = require('./templates/RangeDemo.html');
 let DateTimeDemoTpl = require('./templates/DateTimeDemo.html');
 let DateTimeInputDemoTpl = require('./templates/DateTimeInputDemo.html');
 let WeekStartDemoTpl = require('./templates/WeekStartDemo.html');
+
+export class ExtendedLabelService extends NovoLabelService {
+    dateFormat = 'dd/mm/yyyy';
+    dateFormatPlaceholder = 'DD/MM/YYYY';
+}
 
 const template = `
 <div class="container">
@@ -43,8 +48,26 @@ const template = `
     <h5>Customizing Week Start</h5>
     <div class="example demo">${WeekStartDemoTpl}</div>
     <code-snippet [code]="WeekStartDemoTpl"></code-snippet>
+
+    <h5>Different Locale</h5>
+    <div class="example demo">
+    <date-locale-demo></date-locale-demo>
+    </div>
+    <code-snippet [code]="DateDemoTpl"></code-snippet>
 </div>
 `;
+@Component({
+    providers: [
+        {provide: LOCALE_ID, useValue: 'en-GB'},
+        {provide: NovoLabelService, useClass: ExtendedLabelService},
+    ],
+    selector: 'date-locale-demo',
+    template: DateDemoTpl
+})
+export class DateLocaleDemoComponent {
+  dateOne: Date = new Date();
+  dateTwo: Date = new Date();
+}
 
 @Component({
     selector: 'date-picker-demo',
@@ -64,6 +87,8 @@ export class DatePickerDemoComponent {
     weekStartDate: Date = new Date();
     dateTime: Date = new Date('12/04/1987');
     dateTimeInput: Date = new Date('08/01/1983 12:57 PM');
+    dateTimeInput2: Date = new Date('08/02/1984 12:57 PM');
+    dateTimeInput3: Date = new Date('08/03/1985 12:57 PM');
     start: any = new Date().setMonth(new Date().getMonth() - 1);
     end: any = new Date().setMonth(new Date().getMonth() + 1);
     value: any = {
