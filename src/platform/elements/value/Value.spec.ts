@@ -184,12 +184,19 @@ describe('Elements: NovoValueElement', () => {
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.LINK);
         });
-        it('should set type to html for a html fields', () => {
+        it('should set type to html for a large fields', () => {
             component.meta.name = 'companyDescription';
             component.meta.dataSpecialization = 'HTML';
             component.data = '';
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.HTML);
+        });
+        it('should strip html tags in large fields', () => {
+            component.meta.name = 'companyDescription';
+            component.meta.dataSpecialization = 'HTML';
+            component.data = '<span style="color:#8e44ad">test</span>';
+            component.ngOnChanges();
+            expect(component.data).toEqual('test');
         });
     });
     describe('Function: isLinkField', () => {
