@@ -37,13 +37,12 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
         <ng-template #fileOutput>
             <div class="file-output-group" [dragula]="fileOutputBag" [dragulaModel]="files">
                 <div class="file-item" *ngFor="let file of files">
-                  <i *ngIf="layoutOptions.draggable" class="bhi-move"></i>
-                  <label *ngIf="file.link"><span><a href="{{ file.link }}">{{ file.name | decodeURI }}</a></span><span  *ngIf="file.description">||</span><span>{{ file.description }}</span></label> 
-                  <label *ngIf="!file.link">{{ file.name | decodeURI }}</label> 
-                  <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
-                    <div *ngIf="!layoutOptions.customActions">
-                      <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
-                      <button type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
+                    <i *ngIf="layoutOptions.draggable" class="bhi-move"></i>
+                    <label>{{ file.name | decodeURI }}</label>
+                    <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
+                        <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" (click)="edit(file)" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
+                        <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
+                        <button type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
                     </div>
                     <div *ngIf="layoutOptions.customActions">
                       <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" (click)="customEdit(file)" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
