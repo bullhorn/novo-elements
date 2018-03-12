@@ -118,6 +118,8 @@ export { GroupedControl } from './elements/form/controls/grouped/GroupedControl'
 export { NovoFormControl, NovoFormGroup } from './elements/form/NovoFormControl';
 export { NovoControlGroup, NovoControlGroupAddConfig } from './elements/form/ControlGroup';
 export { FieldInteractionApi } from './elements/form/FieldInteractionApi';
+export { NovoCheckListElement } from './elements/form/extras/checkbox/CheckList';
+
 // Utils
 export { OutsideClick } from './utils/outside-click/OutsideClick';
 export { KeyCodes } from './utils/key-codes/KeyCodes';
