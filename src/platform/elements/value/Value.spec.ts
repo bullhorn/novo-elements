@@ -5,7 +5,7 @@ import { NovoValueElement, NOVO_VALUE_THEME, NOVO_VALUE_TYPE } from './Value';
 // import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoValueModule } from './Value.module';
 // TODO fix specs
-fdescribe('Elements: NovoValueElement', () => {
+describe('Elements: NovoValueElement', () => {
     let fixture;
     let component;
 
@@ -184,13 +184,6 @@ fdescribe('Elements: NovoValueElement', () => {
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.LINK);
         });
-        it('should set type to html for a large fields', () => {
-            component.meta.name = 'companyDescription';
-            component.meta.dataSpecialization = 'HTML';
-            component.data = '';
-            component.ngOnChanges();
-            expect(component.type).toEqual(NOVO_VALUE_TYPE.HTML);
-        });
         it('should strip html tags in large fields if stripHTML = true', () => {
             component.meta.name = 'companyDescription';
             component.meta.dataSpecialization = 'HTML';
@@ -213,6 +206,21 @@ fdescribe('Elements: NovoValueElement', () => {
             component.data = '<span style="color:#8e44ad">test</span>';
             component.ngOnChanges();
             expect(component.data).toEqual('<span style="color:#8e44ad">test</span>');
+        });
+        it('should set customClass from meta', () => {
+            component.meta.name = 'companyDescription';
+            component.meta.dataSpecialization = 'HTML';
+            component.meta.customClass = 'testClass';
+            component.data = '<span style="color:#8e44ad">test</span>';
+            component.ngOnChanges();
+            expect(component.customClass).toEqual('testClass');
+        });
+        it('should set customClass to empty if not defined in meta', () => {
+            component.meta.name = 'companyDescription';
+            component.meta.dataSpecialization = 'HTML';
+            component.data = '<span style="color:#8e44ad">test</span>';
+            component.ngOnChanges();
+            expect(component.customClass).toEqual('');
         });
     });
     describe('Function: isLinkField', () => {
