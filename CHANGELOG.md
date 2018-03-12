@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.6.1"></a>
+## [2.6.1](https://github.com/bullhorn/novo-elements/compare/v2.6.0...v2.6.1) (2018-03-07)
+
+
+
+<a name="2.6.0"></a>
+# [2.6.0](https://github.com/bullhorn/novo-elements/compare/v2.5.1...v2.6.0) (2018-03-07)
+
+
+### Bug Fixes
+
+* **chips:** when selecting items do not scroll to top everytime ([3ea25a6](https://github.com/bullhorn/novo-elements/commit/3ea25a6))
+* **countries:** Adding missing countries ([efa5239](https://github.com/bullhorn/novo-elements/commit/efa5239))
+* **picker:** Only resetting values on new search ([0e6acaa](https://github.com/bullhorn/novo-elements/commit/0e6acaa))
+
+
+### Features
+
+* **table:** Adding id and name to the table and rows ([2a220a7](https://github.com/bullhorn/novo-elements/commit/2a220a7))
+
+
+
 <a name="2.5.0"></a>
 # [2.5.0](https://github.com/bullhorn/novo-elements/compare/v2.4.0...v2.5.0) (2018-02-23)
 
