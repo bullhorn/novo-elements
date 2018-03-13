@@ -184,12 +184,57 @@ describe('Elements: NovoValueElement', () => {
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.LINK);
         });
+        it('should strip html tags in large fields if stripHTML = true', () => {
+            component.meta.name = 'companyDescription';
+            component.meta.dataSpecialization = 'HTML';
+            component.meta.stripHTML = true;
+            component.data = '<span style="color:#8e44ad">test</span>';
+            component.ngOnChanges();
+            expect(component.data).toEqual('test');
+        });
+        it('should strip html tags in large fields if stripHTML = false', () => {
+            component.meta.name = 'companyDescription';
+            component.meta.dataSpecialization = 'HTML';
+            component.meta.stripHTML = false;
+            component.data = '<span style="color:#8e44ad">test</span>';
+            component.ngOnChanges();
+            expect(component.data).toEqual('<span style="color:#8e44ad">test</span>');
+        });
+        it('should strip html tags in large fields if stripHTML is not defined', () => {
+            component.meta.name = 'companyDescription';
+            component.meta.dataSpecialization = 'HTML';
+            component.data = '<span style="color:#8e44ad">test</span>';
+            component.ngOnChanges();
+            expect(component.data).toEqual('<span style="color:#8e44ad">test</span>');
+        });
+        it('should set customClass from meta', () => {
+            component.meta.name = 'companyDescription';
+            component.meta.dataSpecialization = 'HTML';
+            component.meta.customClass = 'testClass';
+            component.data = '<span style="color:#8e44ad">test</span>';
+            component.ngOnChanges();
+            expect(component.customClass).toEqual('testClass');
+        });
+        it('should set customClass to empty if not defined in meta', () => {
+            component.meta.name = 'companyDescription';
+            component.meta.dataSpecialization = 'HTML';
+            component.data = '<span style="color:#8e44ad">test</span>';
+            component.ngOnChanges();
+            expect(component.customClass).toEqual('');
+        });
     });
     describe('Function: isLinkField', () => {
         it('should return true for link fields or an obvious link', () => {
             expect(component.isLinkField({ name: 'companyURL' }, '')).toBeTruthy();
             expect(component.isLinkField({ name: 'mobile' }, '')).toBeFalsy();
             expect(component.isLinkField({ name: 'customText18' }, 'www.google.com')).toBeTruthy();
+        });
+    });
+    describe('Function: isHTMLField', () => {
+        it('should return true for html fields', () => {
+            expect(component.isHTMLField({ dataSpecialization: 'HTML' })).toBeTruthy();
+            expect(component.isHTMLField({ inputType: 'TEXTAREA' })).toBeTruthy();
+            expect(component.isHTMLField({ dataSpecialization: 'NO_HTML' })).toBeFalsy();
         });
     });
 });
