@@ -126,7 +126,7 @@ export class FormDemoComponent {
     private entityMultiPickerControl: any;
     private pickerForm: any;
     private updatingForm: any;
-    private updatingFormControls: [any];
+    private updatingFormControls: any[];
     private required: boolean = false;
     private disabled: boolean = true;
 
@@ -203,7 +203,7 @@ export class FormDemoComponent {
 
         // File input controls
         this.fileControl = new FileControl({ key: 'file', name: 'myfile', label: 'File', tooltip: 'Files Control' });
-        this.multiFileControl = new FileControl({ key: 'files', name: 'myfiles', label: 'Multiple Files', multiple: true, layoutOptions: { order: 'displayFilesBelow', download: false, labelStyle: 'no-box' }, value: [{ name: 'yourFile.pdf', loaded: true }] });
+        this.multiFileControl = new FileControl({ key: 'files', name: 'myfiles', label: 'Multiple Files', multiple: true, layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customButtons: true, labelStyle: 'no-box' }, value: [{ name: 'yourFile.pdf', loaded: true }] });
         this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
 
         // Calendar input controls
