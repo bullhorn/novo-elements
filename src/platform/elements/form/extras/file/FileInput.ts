@@ -40,7 +40,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
                     <i *ngIf="layoutOptions.draggable" class="bhi-move"></i>
                     <label>{{ file.name | decodeURI }}</label>
                     <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
-                        <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" (click)="edit(file)" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
+                        <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
                         <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
                         <button type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
                     </div>
@@ -65,7 +65,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   @Input() multiple: boolean = false;
   @Input() disabled: boolean = false;
   @Input() placeholder: string;
-  @Input() layoutOptions: { order?: string; download?: boolean; edit?: boolean; labelStyle?: string; draggable?: boolean };
+  @Input() layoutOptions: { order?: string; download?: boolean; edit?: boolean; customButtons?: boolean; labelStyle?: string; draggable?: boolean };
   @Input() value: Array<any> = [];
 
   @Output() edit: EventEmitter<any> = new EventEmitter();
