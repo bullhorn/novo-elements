@@ -87,7 +87,7 @@ describe('Elements: NovoFileInputElement', () => {
     });
     describe('Method: insertTemplatesBasedOnLayout()', () => {
         beforeEach(() => {
-            component.layoutOptions = { order: 'default', download: true, labelStyle: 'default' };
+            component.layoutOptions = { order: 'default', download: true, edit: true, labelStyle: 'default' };
         });
         it('should correctly insert templates by default', () => {
             expect(component.insertTemplatesBasedOnLayout).toBeDefined();
