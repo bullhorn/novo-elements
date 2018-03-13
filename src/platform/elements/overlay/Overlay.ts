@@ -17,7 +17,15 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
-import { ConnectedPositionStrategy, Overlay, OverlayRef, OverlayConfig, PositionStrategy, RepositionScrollStrategy, ScrollStrategy } from '@angular/cdk/overlay';
+import {
+  ConnectedPositionStrategy,
+  Overlay,
+  OverlayRef,
+  OverlayConfig,
+  PositionStrategy,
+  RepositionScrollStrategy,
+  ScrollStrategy,
+} from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 
 import { Observable } from 'rxjs/Observable';
@@ -30,7 +38,9 @@ import { first } from 'rxjs/operators/first';
 import { switchMap } from 'rxjs/operators/switchMap';
 
 /** Injection token that determines the scroll handling while the autocomplete panel is open. */
-export const DEFAULT_OVERLAY_SCROLL_STRATEGY: InjectionToken<ScrollStrategy> = new InjectionToken<() => ScrollStrategy>('novo-overlay-scroll-strategy');
+export const DEFAULT_OVERLAY_SCROLL_STRATEGY: InjectionToken<ScrollStrategy> = new InjectionToken<() => ScrollStrategy>(
+  'novo-overlay-scroll-strategy',
+);
 
 /** @docs-private */
 export function DEFAULT_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY(overlay: Overlay): () => RepositionScrollStrategy {
@@ -64,7 +74,7 @@ export class NovoOverlayTemplate implements OnDestroy {
   /** Element for the panel containing the autocomplete options. */
   @ViewChild('panel') public panel: ElementRef;
   @Input() public position: string = 'default';
-  @Input() public size: string = 'none';
+  @Input() public size: string = 'inherit';
   @Input() public closeOnSelect: boolean = true;
   @Output() public select: EventEmitter<any> = new EventEmitter();
   @Output() public closing: EventEmitter<any> = new EventEmitter();
