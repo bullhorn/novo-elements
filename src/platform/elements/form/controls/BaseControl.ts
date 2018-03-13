@@ -52,10 +52,14 @@ export interface NovoControlConfig {
     tooltip?: string;
     tooltipPosition?: string;
 <<<<<<< HEAD
+<<<<<<< HEAD
     layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
 =======
     layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customButtons?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
 >>>>>>> add edit btn && adjust container max-width
+=======
+    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
+>>>>>>> delete custom buttons
     customControl?: any;
     customControlConfig?: any;
     military?: boolean;
