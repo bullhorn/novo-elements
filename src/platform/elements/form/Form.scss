@@ -259,7 +259,7 @@ novo-form {
                         >div.novo-control-outer-container {
                             display: flex;
                             align-items: center;
-                            max-width: 550px;
+                            max-width: 100%;
                             position: relative;
                             width: 100%;
                             i.loading {
@@ -617,7 +617,7 @@ novo-form {
                             position: relative;
                             margin-top: 16px;
                             .novo-control-outer-container {
-                                max-width: 550px;
+                                max-width: 100%;
                                 width: 100%;
                                 .novo-control-inner-container {
                                     position: relative;
