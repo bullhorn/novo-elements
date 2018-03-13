@@ -59,7 +59,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   @Input() multiple: boolean = false;
   @Input() disabled: boolean = false;
   @Input() placeholder: string;
-  @Input() layoutOptions: { order?: string; download?: boolean; edit?: boolean; customButtons?: boolean; labelStyle?: string; draggable?: boolean };
+  @Input() layoutOptions: { order?: string; download?: boolean; edit?: boolean; labelStyle?: string; draggable?: boolean };
   @Input() value: Array<any> = [];
 
   elements: Array<any> = [];

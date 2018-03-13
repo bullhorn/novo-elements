@@ -51,7 +51,7 @@ export interface NovoControlConfig {
     description?: string;
     tooltip?: string;
     tooltipPosition?: string;
-    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customButtons?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
+    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
     customControl?: any;
     customControlConfig?: any;
     military?: boolean;
