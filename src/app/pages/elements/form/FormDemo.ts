@@ -442,6 +442,7 @@ export class FormDemoComponent {
       label: 'Multiple Files',
       multiple: true,
 <<<<<<< HEAD
+<<<<<<< HEAD
       layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customActions: true, labelStyle: 'no-box' },
 <<<<<<< HEAD
       value: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
@@ -449,6 +450,9 @@ export class FormDemoComponent {
 =======
       layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, labelStyle: 'no-box' },
 >>>>>>> demo clean up
+=======
+      layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customActions: true, labelStyle: 'no-box' },
+>>>>>>> change demo
       value: [{ name: 'yourFile.pdf', loaded: true }],
 >>>>>>> emit events for custom actions
     });
@@ -565,6 +569,7 @@ export class FormDemoComponent {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   handleEdit(file) {
     console.log('This is an Edit Action!', file); // tslint:disable-line
   }
@@ -578,14 +583,23 @@ export class FormDemoComponent {
 =======
   handleEdit(value) {
     console.log('This is an Edit Action!', value); // tslint:disable-line
+=======
+  handleEdit(file) {
+    console.log('This is an Edit Action!', file); // tslint:disable-line
+>>>>>>> change demo
   }
 
-  handleSave(value) {
-    console.log('This is a Save Action!', value); // tslint:disable-line
+  handleSave(file) {
+    console.log('This is a Save Action!', file); // tslint:disable-line
   }
 
+<<<<<<< HEAD
   handleDelete(value) {
     console.log('This is a Delete Action!', value); // tslint:disable-line
 >>>>>>> emit events for custom actions
+=======
+  handleDelete(file) {
+    console.log('This is a Delete Action!', file); // tslint:disable-line
+>>>>>>> change demo
   }
 }
