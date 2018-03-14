@@ -56,6 +56,7 @@ export interface NovoControlConfig {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
 =======
     layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customButtons?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
@@ -72,6 +73,9 @@ export interface NovoControlConfig {
 =======
     layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
 >>>>>>> revert customActions
+=======
+    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
+>>>>>>> fix max-width && remove customActions
     customControl?: any;
     customControlConfig?: any;
     military?: boolean;
