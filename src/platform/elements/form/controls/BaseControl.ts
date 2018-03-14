@@ -53,6 +53,7 @@ export interface NovoControlConfig {
     tooltipPosition?: string;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
 =======
     layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customButtons?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
@@ -60,6 +61,9 @@ export interface NovoControlConfig {
 =======
     layoutOptions?: { order?: string, download?: boolean, edit?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
 >>>>>>> delete custom buttons
+=======
+    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
+>>>>>>> add customActions as layoutOptions
     customControl?: any;
     customControlConfig?: any;
     military?: boolean;

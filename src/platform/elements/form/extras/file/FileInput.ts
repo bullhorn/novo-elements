@@ -40,9 +40,15 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
                     <i *ngIf="layoutOptions.draggable" class="bhi-move"></i>
                     <label>{{ file.name | decodeURI }}</label>
                     <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
-                        <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
+                      <div *ngIf="!layoutOptions.customActions">
                         <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
                         <button type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
+                      </div>
+                      <div *ngIf="layoutOptions.customActions">
+                        <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
+                        <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
+                        <button type="button" theme="icon" icon="close" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
+                      </div> 
                     </div>
                     <div *ngIf="layoutOptions.customActions">
                       <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" (click)="customEdit(file)" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
