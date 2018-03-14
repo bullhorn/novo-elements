@@ -441,10 +441,14 @@ export class FormDemoComponent {
       name: 'myfiles',
       label: 'Multiple Files',
       multiple: true,
+<<<<<<< HEAD
       layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customActions: true, labelStyle: 'no-box' },
 <<<<<<< HEAD
       value: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
 =======
+=======
+      layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, labelStyle: 'no-box' },
+>>>>>>> demo clean up
       value: [{ name: 'yourFile.pdf', loaded: true }],
 >>>>>>> emit events for custom actions
     });
