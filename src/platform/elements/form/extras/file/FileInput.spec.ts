@@ -116,6 +116,36 @@ describe('Elements: NovoFileInputElement', () => {
             expect(component.element.nativeElement.removeEventListener).toHaveBeenCalled();
         });
     });
+
+    describe('Method: customEdit(file)', () => {
+        beforeEach(() => {
+            spyOn(component.edit, 'emit');
+        })
+        it('should emit an event', () => {
+            component.customEdit({ name: 'file.pdf', loaded: true})
+            expect(component.edit.emit).toHaveBeenCalledWith({ name: 'file.pdf', loaded: true });
+        });
+    })
+
+    describe('Method: customSave(file)', () => {
+        beforeEach(() => {
+        spyOn(component.save, 'emit');
+        });
+        it('should emit an event', () => {
+        component.customSave({ name: 'file.pdf', loaded: true });
+        expect(component.save.emit).toHaveBeenCalledWith({ name: 'file.pdf', loaded: true });
+        });
+    });
+
+    describe('Method: customDelete(file)', () => {
+        beforeEach(() => {
+        spyOn(component.delete, 'emit');
+        });
+        it('should emit an event', () => {
+        component.customDelete({ name: 'file.pdf', loaded: true });
+        expect(component.delete.emit).toHaveBeenCalledWith({ name: 'file.pdf', loaded: true });
+        });
+    });
     //
     // describe('Method: dragEnterHandler(event)', () => {
     //     it('should set active to true.', () => {
