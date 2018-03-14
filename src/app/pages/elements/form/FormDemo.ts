@@ -279,7 +279,7 @@ export class FormDemoComponent {
       label: 'Multiple Files',
       multiple: true,
       layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customActions: true, labelStyle: 'no-box' },
-      value: [{ name: 'yourFile.pdf', loaded: true }],
+      value: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
     });
     this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
 

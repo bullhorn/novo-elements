@@ -30,6 +30,9 @@ novo-file-input {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
+                span {
+                    margin: 0 8px;
+                }
             }
             button {
                 font-size: 1.4rem;
