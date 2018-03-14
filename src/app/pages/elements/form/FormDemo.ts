@@ -278,7 +278,7 @@ export class FormDemoComponent {
       name: 'myfiles',
       label: 'Multiple Files',
       multiple: true,
-      layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, labelStyle: 'no-box' },
+      layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customActions: true, labelStyle: 'no-box' },
       value: [{ name: 'yourFile.pdf', loaded: true }],
     });
     this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
@@ -370,15 +370,15 @@ export class FormDemoComponent {
     console.log('I changed!', value); // tslint:disable-line
   }
 
-  handleEdit(value) {
-    console.log('This is an Edit Action!', value); // tslint:disable-line
+  handleEdit(file) {
+    console.log('This is an Edit Action!', file); // tslint:disable-line
   }
 
-  handleSave(value) {
-    console.log('This is a Save Action!', value); // tslint:disable-line
+  handleSave(file) {
+    console.log('This is a Save Action!', file); // tslint:disable-line
   }
 
-  handleDelete(value) {
-    console.log('This is a Delete Action!', value); // tslint:disable-line
+  handleDelete(file) {
+    console.log('This is a Delete Action!', file); // tslint:disable-line
   }
 }
