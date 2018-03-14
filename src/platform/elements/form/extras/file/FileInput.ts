@@ -212,25 +212,29 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     });
   }
 
+  download(file) {
+    window.open(file.dataURL, '_blank');
+  }
+
+  remove(file) {
+    this.files.splice(this.files.findIndex((f) => f.name === file.name && f.size === file.size), 1);
+    this.model = this.files;
+    this.onModelChange(this.model);
+  }
+
   readFile(file) {
     return new NovoFile(file).read();
   }
 
-  handleEdit(file) {
+  customEdit(file) {
     this.edit.emit(file);
   }
 
-  handleSave(file) {
-    // previously defiend method:
-      // window.open(file.dataURL, '_blank');
+  customSave(file) {
     this.save.emit(file);
   }
 
-  handleDelete(file) {
-    // previously defined method:
-      // this.files.splice(this.files.findIndex((f) => f.name === file.name && f.size === file.size), 1);
-      // this.model = this.files;
-      // this.onModelChange(this.model);
+  customDelete(file) {
     this.delete.emit(file);
   }
 
