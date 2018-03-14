@@ -278,7 +278,7 @@ export class FormDemoComponent {
       name: 'myfiles',
       label: 'Multiple Files',
       multiple: true,
-      layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customActions: true, labelStyle: 'no-box' },
+      layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, labelStyle: 'no-box' },
       value: [{ name: 'yourFile.pdf', loaded: true }],
     });
     this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
