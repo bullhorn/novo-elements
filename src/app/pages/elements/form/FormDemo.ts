@@ -88,6 +88,9 @@ export class CustomDemoComponent {
 })
 export class FormDemoComponent {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> emit events for custom actions
   private DynamicFormDemoTpl: string = DynamicFormDemoTpl;
   private VerticalDynamicFormDemoTpl: string = VerticalDynamicFormDemoTpl;
   private TextBasedControlsDemoTpl: string = TextBasedControlsDemoTpl;
@@ -133,6 +136,7 @@ export class FormDemoComponent {
   private updatingFormControls: any[];
   private required: boolean = false;
   private disabled: boolean = true;
+<<<<<<< HEAD
 =======
     private DynamicFormDemoTpl: string = DynamicFormDemoTpl;
     private VerticalDynamicFormDemoTpl: string = VerticalDynamicFormDemoTpl;
@@ -289,6 +293,8 @@ export class FormDemoComponent {
         this.updatingForm = formUtils.toFormGroup(this.updatingFormControls);
     }
 >>>>>>> add edit btn && adjust container max-width
+=======
+>>>>>>> emit events for custom actions
 
   constructor(private formUtils: FormUtils) {
     // Quick note config
@@ -436,7 +442,11 @@ export class FormDemoComponent {
       label: 'Multiple Files',
       multiple: true,
       layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customActions: true, labelStyle: 'no-box' },
+<<<<<<< HEAD
       value: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
+=======
+      value: [{ name: 'yourFile.pdf', loaded: true }],
+>>>>>>> emit events for custom actions
     });
     this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
 
@@ -460,6 +470,7 @@ export class FormDemoComponent {
     );
     formUtils.setInitialValuesFieldsets(this.dynamic, { firstName: 'Initial F Name', number: 12 });
     this.dynamicForm = formUtils.toFormGroupFromFieldset(this.dynamic);
+<<<<<<< HEAD
 
     this.dynamicVertical = formUtils.toControls(MockMeta, '$ USD', {}, { token: 'TOKEN', military: true });
     formUtils.setInitialValues(this.dynamicVertical, { number: 0, firstName: 'Bobby Flay' });
@@ -480,6 +491,28 @@ export class FormDemoComponent {
     formUtils.setInitialValuesFieldsets(this.fieldsets, { firstName: 'Initial F Name', number: 12 });
     this.fieldsetsForm = formUtils.toFormGroupFromFieldset(this.fieldsets);
 
+=======
+
+    this.dynamicVertical = formUtils.toControls(MockMeta, '$ USD', {}, { token: 'TOKEN', military: true });
+    formUtils.setInitialValues(this.dynamicVertical, { number: 0, firstName: 'Bobby Flay' });
+    this.dynamicVerticalForm = formUtils.toFormGroup(this.dynamicVertical);
+
+    // Dynamic + Fieldsets
+    this.fieldsets = formUtils.toFieldSets(
+      MockMetaHeaders,
+      '$ USD',
+      {},
+      { token: 'TOKEN' },
+      {
+        customfield: {
+          customControl: CustomDemoComponent,
+        },
+      },
+    );
+    formUtils.setInitialValuesFieldsets(this.fieldsets, { firstName: 'Initial F Name', number: 12 });
+    this.fieldsetsForm = formUtils.toFormGroupFromFieldset(this.fieldsets);
+
+>>>>>>> emit events for custom actions
     // Updating form
     this.updatingFormControls = [this.textControl, this.percentageControl, this.checkControl, this.singlePickerControl, this.fileControl];
     this.updatingForm = formUtils.toFormGroup(this.updatingFormControls);
@@ -527,6 +560,7 @@ export class FormDemoComponent {
     console.log('I changed!', value); // tslint:disable-line
   }
 
+<<<<<<< HEAD
   handleEdit(file) {
     console.log('This is an Edit Action!', file); // tslint:disable-line
   }
@@ -537,5 +571,17 @@ export class FormDemoComponent {
 
   handleDelete(file) {
     console.log('This is a Delete Action!', file); // tslint:disable-line
+=======
+  handleEdit(value) {
+    console.log('This is an Edit Action!', value); // tslint:disable-line
+  }
+
+  handleSave(value) {
+    console.log('This is a Save Action!', value); // tslint:disable-line
+  }
+
+  handleDelete(value) {
+    console.log('This is a Delete Action!', value); // tslint:disable-line
+>>>>>>> emit events for custom actions
   }
 }

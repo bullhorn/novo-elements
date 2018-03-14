@@ -45,9 +45,9 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
                         <button type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
                       </div>
                       <div *ngIf="layoutOptions.customActions">
-                        <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
-                        <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
-                        <button type="button" theme="icon" icon="close" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
+                        <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" (click)="customEdit(file)" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
+                        <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="customSave(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
+                        <button type="button" theme="icon" icon="close" (click)="customDelete(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
                       </div> 
                     </div>
                     <div *ngIf="layoutOptions.customActions">
