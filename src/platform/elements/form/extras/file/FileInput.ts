@@ -40,9 +40,15 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
                     <i *ngIf="layoutOptions.draggable" class="bhi-move"></i>
                     <label>{{ file.name | decodeURI }}</label>
                     <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
-                        <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" (click)="handleEdit(file)" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
-                        <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="handleSave(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
-                        <button type="button" theme="icon" icon="close" (click)="handleDelete(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
+                      <div *ngIf="!layoutOptions.customActions">
+                        <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
+                        <button type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
+                      </div>
+                      <div *ngIf="layoutOptions.customActions">
+                        <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" (click)="customEdit(file)" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
+                        <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="customSave(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
+                        <button type="button" theme="icon" icon="close" (click)="customDelete(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
+                      </div> 
                     </div>
                     <novo-loading *ngIf="!file.loaded"></novo-loading>
                 </div>
@@ -203,25 +209,29 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     });
   }
 
+  download(file) {
+    window.open(file.dataURL, '_blank');
+  }
+
+  remove(file) {
+    this.files.splice(this.files.findIndex((f) => f.name === file.name && f.size === file.size), 1);
+    this.model = this.files;
+    this.onModelChange(this.model);
+  }
+
   readFile(file) {
     return new NovoFile(file).read();
   }
 
-  handleEdit(file) {
+  customEdit(file) {
     this.edit.emit(file);
   }
 
-  handleSave(file) {
-    // previously defiend method:
-      // window.open(file.dataURL, '_blank');
+  customSave(file) {
     this.save.emit(file);
   }
 
-  handleDelete(file) {
-    // previously defined method:
-      // this.files.splice(this.files.findIndex((f) => f.name === file.name && f.size === file.size), 1);
-      // this.model = this.files;
-      // this.onModelChange(this.model);
+  customDelete(file) {
     this.delete.emit(file);
   }
 }
