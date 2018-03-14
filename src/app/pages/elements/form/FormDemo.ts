@@ -460,9 +460,13 @@ export class FormDemoComponent {
 >>>>>>> fix max-width && remove customActions
 =======
       layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customActions: true, labelStyle: 'no-box' },
+<<<<<<< HEAD
 >>>>>>> revert customActions
       value: [{ name: 'yourFile.pdf', loaded: true }],
 >>>>>>> emit events for custom actions
+=======
+      value: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
+>>>>>>> support file link and description
     });
     this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
 
