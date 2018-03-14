@@ -443,6 +443,7 @@ export class FormDemoComponent {
       multiple: true,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customActions: true, labelStyle: 'no-box' },
 <<<<<<< HEAD
       value: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
@@ -453,6 +454,9 @@ export class FormDemoComponent {
 =======
       layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customActions: true, labelStyle: 'no-box' },
 >>>>>>> change demo
+=======
+      layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, labelStyle: 'no-box' },
+>>>>>>> fix max-width && remove customActions
       value: [{ name: 'yourFile.pdf', loaded: true }],
 >>>>>>> emit events for custom actions
     });
