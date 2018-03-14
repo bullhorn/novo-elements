@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, ElementRef, forwardRef, OnInit, OnDestroy, OnChanges, ViewChild, ViewContainerRef, TemplateRef, SimpleChanges } from '@angular/core';
+import { Component, Input, ElementRef, forwardRef, OnInit, OnDestroy, OnChanges, ViewChild, ViewContainerRef, TemplateRef, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
@@ -45,9 +45,9 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
                         <button type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
                       </div>
                       <div *ngIf="layoutOptions.customActions">
-                        <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
-                        <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
-                        <button type="button" theme="icon" icon="close" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
+                        <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" (click)="customEdit(file)" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
+                        <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="customSave(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
+                        <button type="button" theme="icon" icon="close" (click)="customDelete(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
                       </div> 
                     </div>
                     <novo-loading *ngIf="!file.loaded"></novo-loading>
@@ -67,6 +67,10 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   @Input() placeholder: string;
   @Input() layoutOptions: { order?: string; download?: boolean; edit?: boolean; labelStyle?: string; draggable?: boolean };
   @Input() value: Array<any> = [];
+
+  @Output() edit: EventEmitter<any> = new EventEmitter();
+  @Output() save: EventEmitter<any> = new EventEmitter();
+  @Output() delete: EventEmitter<any> = new EventEmitter();
 
   elements: Array<any> = [];
   files: Array<any> = [];
@@ -217,5 +221,17 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
 
   readFile(file) {
     return new NovoFile(file).read();
+  }
+
+  customEdit(file) {
+    this.edit.emit(file);
+  }
+
+  customSave(file) {
+    this.save.emit(file);
+  }
+
+  customDelete(file) {
+    this.delete.emit(file);
   }
 }
