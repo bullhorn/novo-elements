@@ -87,7 +87,7 @@ describe('Elements: NovoFileInputElement', () => {
     });
     describe('Method: insertTemplatesBasedOnLayout()', () => {
         beforeEach(() => {
-            component.layoutOptions = { order: 'default', download: true, labelStyle: 'default' };
+            component.layoutOptions = { order: 'default', download: true, edit: true, labelStyle: 'default' };
         });
         it('should correctly insert templates by default', () => {
             expect(component.insertTemplatesBasedOnLayout).toBeDefined();
@@ -114,6 +114,36 @@ describe('Elements: NovoFileInputElement', () => {
             spyOn(component.element.nativeElement, 'removeEventListener');
             component.ngOnDestroy();
             expect(component.element.nativeElement.removeEventListener).toHaveBeenCalled();
+        });
+    });
+
+    describe('Method: customEdit(file)', () => {
+        beforeEach(() => {
+            spyOn(component.edit, 'emit');
+        })
+        it('should emit an event', () => {
+            component.customEdit({ name: 'file.pdf', loaded: true})
+            expect(component.edit.emit).toHaveBeenCalledWith({ name: 'file.pdf', loaded: true });
+        });
+    })
+
+    describe('Method: customSave(file)', () => {
+        beforeEach(() => {
+        spyOn(component.save, 'emit');
+        });
+        it('should emit an event', () => {
+        component.customSave({ name: 'file.pdf', loaded: true });
+        expect(component.save.emit).toHaveBeenCalledWith({ name: 'file.pdf', loaded: true });
+        });
+    });
+
+    describe('Method: customDelete(file)', () => {
+        beforeEach(() => {
+        spyOn(component.delete, 'emit');
+        });
+        it('should emit an event', () => {
+        component.customDelete({ name: 'file.pdf', loaded: true });
+        expect(component.delete.emit).toHaveBeenCalledWith({ name: 'file.pdf', loaded: true });
         });
     });
     //
