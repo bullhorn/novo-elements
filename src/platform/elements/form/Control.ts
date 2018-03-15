@@ -2,7 +2,7 @@
 import {
     Component, Input, Output, ElementRef, EventEmitter,
     OnInit, OnDestroy, Directive, HostListener, AfterContentInit,
-    AfterViewInit,
+    AfterViewInit, ViewChild
 } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
@@ -153,7 +153,7 @@ export class NovoCustomControlContainerElement {
                                 <option *ngFor="let opt of form.controls[control.key].options" [value]="opt.key">{{opt.value}}</option>
                             </select>
                             <!--File-->
-                            <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="form.controls[control.key].placeholder" [value]="form.controls[control.key].value" [multiple]="form.controls[control.key].multiple" [layoutOptions]="form.controls[control.key].layoutOptions" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (edit)="handleEdit($event)" (save)="handleSave($event)" (delete)="handleDelete($event)"></novo-file-input>
+                            <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="form.controls[control.key].placeholder" [value]="form.controls[control.key].value" [multiple]="form.controls[control.key].multiple" [layoutOptions]="form.controls[control.key].layoutOptions" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (edit)="handleEdit($event)" (save)="handleSave($event)" (delete)="handleDelete($event)" (upload)="handleUpload($event)" #fileInput></novo-file-input>
                             <!--Tiles-->
                             <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-tiles>
                             <!--Picker-->
@@ -240,6 +240,8 @@ export class NovoCustomControlContainerElement {
   },
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('fileInput') private;
+
   @Input() control: any;
   @Input() form: NovoFormGroup;
   @Input() condensed: boolean = false;
@@ -248,6 +250,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() save: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
+  @Output() upload: EventEmitter<any> = new EventEmitter();
 
   @Output('blur')
   get onBlur(): Observable<FocusEvent> {
@@ -544,5 +547,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   handleDelete(value) {
     this.delete.emit(value);
+  }
+
+  handleUpload(value) {
+    this.upload.emit(value);
   }
 }
