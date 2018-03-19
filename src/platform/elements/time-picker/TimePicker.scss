@@ -112,14 +112,18 @@ novo-time-picker {
         overflow-y: auto;
 
         novo-list-item {
+            padding: 5px 16px;
             width: 130px;
+            .list-item {
+                line-height: 19px;
+            }
             &:focus,
             &:hover {
                 background: lighten($light, 10%);
                 color: darken($light, 55%);
             }
             &.active {
-                border: 1px solid $positive;
+                // border: 1px solid $positive;
                 color: $positive;
                 font-weight: 500;
             }

@@ -24,7 +24,7 @@ export class NovoListElement {
     template: `
         <div class="list-item" [ngClass]="{'avatar': avatar}">
             <ng-content select="item-header"></ng-content>
-            <ng-content select="item-content"></ng-content>
+            <ng-content select="item-content"></ng-content>   
         </div>
         <ng-content></ng-content>
         <ng-content select="item-end"></ng-content>

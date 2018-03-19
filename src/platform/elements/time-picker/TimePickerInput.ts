@@ -68,9 +68,11 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
 
     /** BEGIN: Convienient Panel Methods. */
     openPanel(): void {
-        this.overlay.openPanel();
-        let hour = new Date().getHours();
-        Promise.resolve(null).then(() => this.scrollToIndex((hour*4)));
+        if(!this.overlay.panelOpen) {
+            this.overlay.openPanel();
+            let hour = new Date().getHours();
+            Promise.resolve(null).then(() => this.scrollToIndex((hour*4)));
+        }
     }
     closePanel(): void {
         this.overlay.closePanel();

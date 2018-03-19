@@ -27,7 +27,10 @@ const TIME_PICKER_VALUE_ACCESSOR = {
         </div>
         <div class="increments" *ngIf="!analog">
             <novo-list direction="vertical">
-                <novo-list-item *ngFor="let increment of increments" (click)="setValue($event, increment)" [class.active]="increment==selected">{{increment}}</novo-list-item>
+                <novo-list-item *ngFor="let increment of increments" (click)="setValue($event, increment)" [class.active]="increment==selected">
+                    <item-content>{{increment}}</item-content>
+                    <i *ngIf="increment==selected" class="bhi-check"></i>
+                </novo-list-item>
             </novo-list>
         </div>
         <div class="analog" *ngIf="analog">
@@ -96,6 +99,7 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
         if (this.model) {
             this.init(this.model, false);
         } else {
+            this.selected = null;
             this.init(new Date(), false);
         }
     }
