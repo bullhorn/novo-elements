@@ -37,8 +37,12 @@ novo-date-time-picker {
             transition: transform 200ms ease-in-out;
             z-index: 2;
             top: 0;
-            .increments, novo-list-item {
+            .increments {
+                height: 275px; 
                 width: 250px;
+                novo-list-item {
+                    width: auto;
+                }
             }
         }
         .date-time-tabs {
