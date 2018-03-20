@@ -23,8 +23,8 @@
       <ng-template novoStepLabel>Done</ng-template>
       You are now done.
       <div>
-        <!-- <button novo-button novoStepperPrevious>Back</button>
-        <button novo-button (click)="stepper.reset()">Reset</button> -->
+        <button novo-button (click)="stepper.previous()">Back</button>
+        <button novo-button (click)="stepper.complete()">Done</button>
       </div>
     </novo-step>
   </novo-horizontal-stepper>

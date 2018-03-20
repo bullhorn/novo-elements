@@ -76,6 +76,16 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   /** Consumer-specified template-refs to be used to override the header icons. */
   _iconOverrides: { [key: string]: TemplateRef<any> } = {};
 
+  get completed():boolean {
+    try {
+      let steps = this._steps.toArray();
+      let length = steps.length-1;
+      return steps[length].completed && length === this.selectedIndex ;
+    } catch (err) {
+      return false
+    }
+  }
+
   ngAfterContentInit() {
     const icons = this._icons.toArray();
     const editOverride = icons.find(icon => icon.name === 'edit');
@@ -93,13 +103,29 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
     this._steps.changes.pipe(takeUntil(this._destroyed)).subscribe(() => this._stateChanged());
   }
 
-  getIndicatorType(index: number): 'number' | 'icon' | 'edit' | 'done' {
-    let type: 'number' | 'edit' | 'done' = this._getIndicatorType(index);
-    let steps = this._steps.toArray();
-    if( steps[index] && steps[index].icon && type !== 'done') {
-      return 'icon';
+  complete() {
+    try {
+      let steps = this._steps.toArray();
+      steps[this.selectedIndex].completed = true;
+      this.next();
+      this._stateChanged();
+    } catch (err) {
+      // do nothing
     }
-    return type;
+  }
+
+  getIndicatorType(index: number): 'none' | '' | 'edit' | 'done' {
+    let steps = this._steps.toArray();    
+    if( index === this.selectedIndex ) {
+      if(steps[index] && index===steps.length-1 && steps[index].completed ) {
+        return 'done';
+      }
+      return 'edit'
+    }
+    if( index < this.selectedIndex ) {
+      return 'done'
+    }
+    return 'none';
   }
 
 }

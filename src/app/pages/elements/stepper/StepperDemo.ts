@@ -43,7 +43,7 @@ export class StepperDemoComponent implements OnInit {
     }
 
     public next(stepper, step) {
-        step.editable = false;
+        // step.editable = false;
         stepper.next();
     }
 }

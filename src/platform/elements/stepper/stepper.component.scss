@@ -18,14 +18,17 @@ $novo-stepper-line-gap: 8px !default;
   align-items: center;
   justify-content: center;
   margin-bottom: 1em;
-  background: $light;
+  background: $background;
 }
 
 .novo-stepper-horizontal-line {
-  border-bottom: $novo-stepper-line-width solid $positive;
+  border-bottom: $novo-stepper-line-width solid $light;
   flex: auto;
   min-width: 0px;
   height: $novo-horizontal-stepper-header-height;
+  &.complete {
+    border-bottom: $novo-stepper-line-width solid $positive;
+  }
 }
 
 .novo-horizontal-stepper-header {
@@ -54,7 +57,7 @@ $novo-stepper-line-gap: 8px !default;
         display: block;
         width: calc(50% - 8px);
         margin-right: 8px;
-        border-bottom: 1px solid $positive;
+        border-bottom: 1px solid $light;
       }
       &:after {
         content: "";
@@ -62,7 +65,20 @@ $novo-stepper-line-gap: 8px !default;
         width: calc(50% - 8px);
         margin-left: calc(50% + 8px);
         margin-top: -1px;
-        border-top: 1px solid $positive;
+        border-top: 1px solid $light;
+      }
+      &.edit {
+        &:before {
+          border-bottom: 1px solid $positive;
+        }
+      }
+      &.done {
+        &:before {
+          border-bottom: 1px solid $positive;
+        }
+        &:after {
+          border-top: 1px solid $positive;
+        }
       }
     }
     .novo-stepper-status-icon {

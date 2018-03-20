@@ -1,5 +1,5 @@
 <div class="novo-horizontal-stepper-header-container">
-    <div class="novo-stepper-horizontal-line"></div>
+    <div class="novo-stepper-horizontal-line complete"></div>
   <ng-container *ngFor="let step of _steps; let i = index; let isLast = last">
     <novo-step-header  class="novo-horizontal-stepper-header"
                      (click)="step.select()"
@@ -20,7 +20,7 @@
                      [iconOverrides]="_iconOverrides">
     </novo-step-header>
   </ng-container>
-  <div class="novo-stepper-horizontal-line"></div>
+  <div class="novo-stepper-horizontal-line" [class.complete]="completed"></div>
 </div>
 
 <div class="novo-horizontal-content-container">
