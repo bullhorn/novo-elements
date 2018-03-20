@@ -2,7 +2,7 @@
 import {
     Component, Input, Output, ElementRef, EventEmitter,
     OnInit, OnDestroy, Directive, HostListener, AfterContentInit,
-    AfterViewInit,
+    AfterViewInit
 } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
@@ -100,8 +100,8 @@ export class NovoCustomControlContainerElement {
 }
 
 @Component({
-    selector: 'novo-control',
-    template: `
+  selector: 'novo-control',
+  template: `
         <div class="novo-control-container" [formGroup]="form" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
             <!--Encrypted Field-->
             <span [tooltip]="labels.encryptedFieldTooltip" [tooltipPosition]="'right'"><i [hidden]="!form.controls[control.key].encrypted"
@@ -153,7 +153,7 @@ export class NovoCustomControlContainerElement {
                                 <option *ngFor="let opt of form.controls[control.key].options" [value]="opt.key">{{opt.value}}</option>
                             </select>
                             <!--File-->
-                            <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="form.controls[control.key].placeholder" [value]="form.controls[control.key].value" [multiple]="form.controls[control.key].multiple" [layoutOptions]="form.controls[control.key].layoutOptions" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-file-input>
+                            <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="form.controls[control.key].placeholder" [value]="form.controls[control.key].value" [multiple]="form.controls[control.key].multiple" [layoutOptions]="form.controls[control.key].layoutOptions" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (edit)="handleEdit($event)" (save)="handleSave($event)" (delete)="handleDelete($event)" (upload)="handleUpload($event)"></novo-file-input>
                             <!--Tiles-->
                             <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-tiles>
                             <!--Picker-->
@@ -231,300 +231,323 @@ export class NovoCustomControlContainerElement {
             </div>
         </div>
     `,
-    host: {
-        '[class]': 'form.controls[control.key].controlType',
-        '[attr.data-control-type]': 'form.controls[control.key].controlType',
-        '[class.disabled]': 'form.controls[control.key].readOnly',
-        '[class.hidden]': 'form.controls[control.key].hidden',
-        '[attr.data-control-key]': 'control.key',
-    }
+  host: {
+    '[class]': 'form.controls[control.key].controlType',
+    '[attr.data-control-type]': 'form.controls[control.key].controlType',
+    '[class.disabled]': 'form.controls[control.key].readOnly',
+    '[class.hidden]': 'form.controls[control.key].hidden',
+    '[attr.data-control-key]': 'control.key',
+  },
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
-    @Input() control: any;
-    @Input() form: NovoFormGroup;
-    @Input() condensed: boolean = false;
-    @Input() autoFocus: boolean = false;
-    @Output() change: EventEmitter<any> = new EventEmitter();
+  @Input() control: any;
+  @Input() form: NovoFormGroup;
+  @Input() condensed: boolean = false;
+  @Input() autoFocus: boolean = false;
+  @Output() change: EventEmitter<any> = new EventEmitter();
+  @Output() edit: EventEmitter<any> = new EventEmitter();
+  @Output() save: EventEmitter<any> = new EventEmitter();
+  @Output() delete: EventEmitter<any> = new EventEmitter();
+  @Output() upload: EventEmitter<any> = new EventEmitter();
 
-    @Output('blur')
-    get onBlur(): Observable<FocusEvent> {
-        return this._blurEmitter.asObservable();
-    }
+  @Output('blur')
+  get onBlur(): Observable<FocusEvent> {
+    return this._blurEmitter.asObservable();
+  }
 
-    @Output('focus')
-    get onFocus(): Observable<FocusEvent> {
-        return this._focusEmitter.asObservable();
-    }
+  @Output('focus')
+  get onFocus(): Observable<FocusEvent> {
+    return this._focusEmitter.asObservable();
+  }
 
-    private _blurEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
-    private _focusEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
-    private _focused: boolean = false;
-    private _enteredText: string = '';
-    formattedValue: string = '';
-    percentValue: number;
-    maxLengthMet: boolean = false;
-    characterCount: number = 0;
-    private forceClearSubscription: any;
-    private percentChangeSubscription: any;
-    private valueChangeSubscription: any;
-    private dateChangeSubscription: any;
+  private _blurEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  private _focusEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  private _focused: boolean = false;
+  private _enteredText: string = '';
+  formattedValue: string = '';
+  percentValue: number;
+  maxLengthMet: boolean = false;
+  characterCount: number = 0;
+  private forceClearSubscription: any;
+  private percentChangeSubscription: any;
+  private valueChangeSubscription: any;
+  private dateChangeSubscription: any;
 
-    maskOptions: IMaskOptions;
+  maskOptions: IMaskOptions;
 
-    constructor(element: ElementRef, public labels: NovoLabelService, private dateFormatService: DateFormatService, private fieldInteractionApi: FieldInteractionApi) {
-        super(element);
-    }
+  constructor(element: ElementRef, public labels: NovoLabelService, private dateFormatService: DateFormatService, private fieldInteractionApi: FieldInteractionApi) {
+    super(element);
+  }
 
-    get showFieldMessage() {
-        return !this.errors && !this.maxLengthMet && Helpers.isBlank(this.control.description);
-    }
+  get showFieldMessage() {
+    return !this.errors && !this.maxLengthMet && Helpers.isBlank(this.control.description);
+  }
 
-    get showCount() {
-        return this.form.controls[this.control.key].maxlength && this.focused && (this.form.controls[this.control.key].controlType === 'text-area' || this.form.controls[this.control.key].controlType === 'textbox');
-    }
+  get showCount() {
+    return (
+      this.form.controls[this.control.key].maxlength &&
+      this.focused &&
+      (this.form.controls[this.control.key].controlType === 'text-area' || this.form.controls[this.control.key].controlType === 'textbox')
+    );
+  }
 
-    ngAfterViewInit() {
-        const DO_NOT_FOCUS_ME: string[] = ['picker', 'time', 'date', 'date-time'];
-        if (this.autoFocus && !DO_NOT_FOCUS_ME.includes(this.control.controlType)) {
-            setTimeout(() => {
-                let input: HTMLElement = this.element.nativeElement.querySelector('input');
-                if (input) {
-                    input.focus();
-                }
-            });
+  ngAfterViewInit() {
+    const DO_NOT_FOCUS_ME: string[] = ['picker', 'time', 'date', 'date-time'];
+    if (this.autoFocus && !DO_NOT_FOCUS_ME.includes(this.control.controlType)) {
+      setTimeout(() => {
+        let input: HTMLElement = this.element.nativeElement.querySelector('input');
+        if (input) {
+          input.focus();
         }
+      });
     }
+  }
 
-    ngOnInit() {
-        // Make sure to initially format the time controls
-        if (this.control && this.form.controls[this.control.key].value) {
-            if (this.form.controls[this.control.key].controlType === 'textbox' || this.form.controls[this.control.key].controlType === 'text-area') {
-                this.characterCount = this.form.controls[this.control.key].value.length;
-            }
+  ngOnInit() {
+    // Make sure to initially format the time controls
+    if (this.control && this.form.controls[this.control.key].value) {
+      if (this.form.controls[this.control.key].controlType === 'textbox' || this.form.controls[this.control.key].controlType === 'text-area') {
+        this.characterCount = this.form.controls[this.control.key].value.length;
+      }
+    }
+    if (this.control) {
+      // Listen to clear events
+      this.forceClearSubscription = this.control.forceClear.subscribe(() => {
+        this.clearValue();
+      });
+      // Subscribe to control interactions
+      if (this.control.interactions) {
+        for (let interaction of this.control.interactions) {
+          switch (interaction.event) {
+            case 'blur':
+              this.valueChangeSubscription = this.onBlur.debounceTime(300).subscribe(() => {
+                this.executeInteraction(interaction);
+              });
+              break;
+            case 'focus':
+              this.valueChangeSubscription = this.onFocus.debounceTime(300).subscribe(() => {
+                this.executeInteraction(interaction);
+              });
+              break;
+            case 'change':
+              this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
+                this.executeInteraction(interaction);
+              });
+              break;
+            case 'init':
+              interaction.invokeOnInit = true;
+              break;
+            default:
+              break;
+          }
+          if (interaction.invokeOnInit) {
+            this.executeInteraction(interaction);
+          }
         }
-        if (this.control) {
-            // Listen to clear events
-            this.forceClearSubscription = this.control.forceClear.subscribe(() => {
-                this.clearValue();
-            });
-            // Subscribe to control interactions
-            if (this.control.interactions) {
-                for (let interaction of this.control.interactions) {
-                    switch (interaction.event) {
-                        case 'blur':
-                            this.valueChangeSubscription = this.onBlur.debounceTime(300).subscribe(() => {
-                                this.executeInteraction(interaction);
-                            });
-                            break;
-                        case 'focus':
-                            this.valueChangeSubscription = this.onFocus.debounceTime(300).subscribe(() => {
-                                this.executeInteraction(interaction);
-                            });
-                            break;
-                        case 'change':
-                            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
-                                this.executeInteraction(interaction);
-                            });
-                            break;
-                        case 'init':
-                            interaction.invokeOnInit = true;
-                            break;
-                        default:
-                            break;
-                    }
-                    if (interaction.invokeOnInit) {
-                        this.executeInteraction(interaction);
-                    }
-                }
-            }
+      }
+    }
+    if (this.form.controls[this.control.key] && this.form.controls[this.control.key].subType === 'percentage') {
+      if (!Helpers.isEmpty(this.form.controls[this.control.key].value)) {
+        this.percentValue = Number((this.form.controls[this.control.key].value * 100).toFixed(6).replace(/\.?0*$/, ''));
+      }
+      this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe((value) => {
+        if (!Helpers.isEmpty(value)) {
+          this.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
         }
-        if (this.form.controls[this.control.key] && this.form.controls[this.control.key].subType === 'percentage') {
-            if (!Helpers.isEmpty(this.form.controls[this.control.key].value)) {
-                this.percentValue = Number((this.form.controls[this.control.key].value * 100).toFixed(6).replace(/\.?0*$/, ''));
-            }
-            this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe(value => {
-                if (!Helpers.isEmpty(value)) {
-                    this.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
-                }
-            });
+      });
+    }
+  }
+
+  executeInteraction(interaction) {
+    if (interaction.script && Helpers.isFunction(interaction.script)) {
+      setTimeout(() => {
+        this.fieldInteractionApi.form = this.form;
+        this.fieldInteractionApi.currentKey = this.control.key;
+        try {
+          interaction.script(this.fieldInteractionApi, this.control.key);
+        } catch (err) {
+          console.info('Field Interaction Error!', this.control.key); // tslint:disable-line
+          console.error(err); // tslint:disable-line
         }
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe from control interactions
+    if (this.valueChangeSubscription) {
+      this.valueChangeSubscription.unsubscribe();
+    }
+    // if (this.dateChangeSubscription) {
+    //     this.dateChangeSubscription.unsubscribe();
+    // }
+    if (this.forceClearSubscription) {
+      // Un-listen for clear events
+      this.forceClearSubscription.unsubscribe();
+    }
+    if (this.percentChangeSubscription) {
+      // Un-listen for clear events
+      this.percentChangeSubscription.unsubscribe();
+    }
+    if (this.dateChangeSubscription) {
+      this.dateChangeSubscription.unsubscribe();
+    }
+    super.ngOnDestroy();
+  }
+
+  get errors() {
+    return this.form.controls[this.control.key].errors;
+  }
+
+  get isValid() {
+    return this.form.controls[this.control.key].valid;
+  }
+
+  get isDirty() {
+    return this.form.controls[this.control.key].dirty || this.control.dirty;
+  }
+
+  get hasValue() {
+    return !Helpers.isEmpty(this.form.value[this.control.key]);
+  }
+
+  get focused() {
+    return this._focused;
+  }
+
+  get tooltip() {
+    return this.form.controls[this.control.key].tooltip;
+  }
+
+  get tooltipPosition() {
+    if (Helpers.isBlank(this.form.controls[this.control.key].tooltipPosition)) {
+      return 'right';
+    }
+    return this.form.controls[this.control.key].tooltipPosition;
+  }
+
+  get alwaysActive() {
+    // Controls that have the label active if there is any user entered text in the field
+    if (this.form.controls[this.control.key].controlType === 'picker' && this._enteredText.length) {
+      return true;
     }
 
-    executeInteraction(interaction) {
-        if (interaction.script && Helpers.isFunction(interaction.script)) {
-            setTimeout(() => {
-                this.fieldInteractionApi.form = this.form;
-                this.fieldInteractionApi.currentKey = this.control.key;
-                try {
-                    interaction.script(this.fieldInteractionApi, this.control.key);
-                } catch (err) {
-                    console.info('Field Interaction Error!', this.control.key); // tslint:disable-line
-                    console.error(err); // tslint:disable-line
-                }
-            });
-        }
+    // Controls that always have the label active
+    return ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'ace-editor', 'radio', 'text-area', 'quick-note'].indexOf(this.form.controls[this.control.key].controlType) !== -1;
+  }
+
+  get requiresExtraSpacing() {
+    // Chips
+    if (this.form.controls[this.control.key].controlType === 'picker' && this.form.controls[this.control.key].multiple && this.hasValue) {
+      return true;
     }
+    return false;
+  }
 
-    ngOnDestroy() {
-        // Unsubscribe from control interactions
-        if (this.valueChangeSubscription) {
-            this.valueChangeSubscription.unsubscribe();
-        }
-        // if (this.dateChangeSubscription) {
-        //     this.dateChangeSubscription.unsubscribe();
-        // }
-        if (this.forceClearSubscription) {
-            // Un-listen for clear events
-            this.forceClearSubscription.unsubscribe();
-        }
-        if (this.percentChangeSubscription) {
-            // Un-listen for clear events
-            this.percentChangeSubscription.unsubscribe();
-        }
-        if (this.dateChangeSubscription) {
-            this.dateChangeSubscription.unsubscribe();
-        }
-        super.ngOnDestroy();
+  handleTyping(event: any) {
+    this._focused = event && event.length;
+    this._enteredText = event;
+  }
+
+  handleFocus(event: FocusEvent) {
+    this._focused = true;
+    this._focusEmitter.emit(event);
+  }
+
+  handleBlur(event: FocusEvent) {
+    this._focused = false;
+    this._blurEmitter.emit(event);
+  }
+
+  clearValue() {
+    this.form.controls[this.control.key].setValue(null);
+    this.formattedValue = null;
+  }
+
+  handleTextAreaInput(event) {
+    this.emitChange(event);
+    this.restrictKeys(event);
+  }
+
+  checkMaxLength(event) {
+    if (this.control && this.form.controls[this.control.key].maxlength) {
+      this.characterCount = event.target.value.length;
+      this.maxLengthMet = event.target.value.length >= this.form.controls[this.control.key].maxlength;
     }
+  }
 
-    get errors() {
-        return this.form.controls[this.control.key].errors;
+  modelChangeWithRaw(event) {
+    if (Helpers.isEmpty(event.value)) {
+      this._focused = false;
+      this._enteredText = '';
     }
+    this.form.controls[this.control.key].rawValue = event.rawValue;
+    this.change.emit(event.value);
+  }
 
-    get isValid() {
-        return this.form.controls[this.control.key].valid;
+  modelChange(value) {
+    if (Helpers.isEmpty(value)) {
+      this._focused = false;
+      this._enteredText = '';
     }
+    this.change.emit(value);
+  }
 
-    get isDirty() {
-        return this.form.controls[this.control.key].dirty || this.control.dirty;
+  restrictKeys(event) {
+    const NUMBERS_ONLY = /[0-9\-]/;
+    const NUMBERS_WITH_DECIMAL = /[0-9\.\-]/;
+    const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+    let key = event.key;
+    // Types
+    if (this.form.controls[this.control.key].subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
+      event.preventDefault();
+    } else if (~['currency', 'float', 'percentage'].indexOf(this.form.controls[this.control.key].subType) && !(NUMBERS_WITH_DECIMAL.test(key) || UTILITY_KEYS.includes(key))) {
+      event.preventDefault();
     }
-
-    get hasValue() {
-        return !Helpers.isEmpty(this.form.value[this.control.key]);
+    // Max Length
+    if (this.form.controls[this.control.key].maxlength && event.target.value.length >= this.form.controls[this.control.key].maxlength) {
+      event.preventDefault();
     }
+  }
 
-    get focused() {
-        return this._focused;
+  handlePercentChange(event: KeyboardEvent) {
+    let value = event.target['value'];
+    let percent = Helpers.isEmpty(value) ? null : Number((value / 100).toFixed(6).replace(/\.?0*$/, ''));
+    if (!Helpers.isEmpty(percent)) {
+      this.change.emit(percent);
+      this.form.controls[this.control.key].setValue(percent);
+    } else {
+      this.change.emit(null);
+      this.form.controls[this.control.key].setValue(null);
     }
+  }
 
-    get tooltip() {
-        return this.form.controls[this.control.key].tooltip;
+  handleTabForPickers(event: any): void {
+    if (this.active && event && event.keyCode) {
+      if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB) {
+        this.toggleActive(event, false);
+      }
     }
+  }
 
-    get tooltipPosition() {
-        if (Helpers.isBlank(this.form.controls[this.control.key].tooltipPosition)) {
-            return 'right';
-        }
-        return this.form.controls[this.control.key].tooltipPosition;
-    }
+  emitChange(value) {
+    this.change.emit(value);
+    this.checkMaxLength(value);
+  }
 
-    get alwaysActive() {
-        // Controls that have the label active if there is any user entered text in the field
-        if (this.form.controls[this.control.key].controlType === 'picker' && this._enteredText.length) {
-            return true;
-        }
+  handleEdit(value) {
+    this.edit.emit(value);
+  }
 
-        // Controls that always have the label active
-        return ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'ace-editor', 'radio', 'text-area', 'quick-note'].indexOf(this.form.controls[this.control.key].controlType) !== -1;
-    }
+  handleSave(value) {
+    this.save.emit(value);
+  }
 
-    get requiresExtraSpacing() {
-        // Chips
-        if (this.form.controls[this.control.key].controlType === 'picker' && this.form.controls[this.control.key].multiple && this.hasValue) {
-            return true;
-        }
-        return false;
-    }
+  handleDelete(value) {
+    this.delete.emit(value);
+  }
 
-    handleTyping(event: any) {
-        this._focused = event && event.length;
-        this._enteredText = event;
-    }
-
-    handleFocus(event: FocusEvent) {
-        this._focused = true;
-        this._focusEmitter.emit(event);
-    }
-
-    handleBlur(event: FocusEvent) {
-        this._focused = false;
-        this._blurEmitter.emit(event);
-    }
-
-    clearValue() {
-        this.form.controls[this.control.key].setValue(null);
-        this.formattedValue = null;
-    }
-
-    handleTextAreaInput(event) {
-        this.emitChange(event);
-        this.restrictKeys(event);
-    }
-
-    checkMaxLength(event) {
-        if (this.control && this.form.controls[this.control.key].maxlength) {
-            this.characterCount = event.target.value.length;
-            this.maxLengthMet = event.target.value.length >= this.form.controls[this.control.key].maxlength;
-
-        }
-    }
-
-    modelChangeWithRaw(event) {
-        if (Helpers.isEmpty(event.value)) {
-            this._focused = false;
-            this._enteredText = '';
-        }
-        this.form.controls[this.control.key].rawValue = event.rawValue;
-        this.change.emit(event.value);
-    }
-
-    modelChange(value) {
-        if (Helpers.isEmpty(value)) {
-            this._focused = false;
-            this._enteredText = '';
-        }
-        this.change.emit(value);
-    }
-
-    restrictKeys(event) {
-        const NUMBERS_ONLY = /[0-9\-]/;
-        const NUMBERS_WITH_DECIMAL = /[0-9\.\-]/;
-        const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
-        let key = event.key;
-        // Types
-        if (this.form.controls[this.control.key].subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
-            event.preventDefault();
-        } else if (~['currency', 'float', 'percentage'].indexOf(this.form.controls[this.control.key].subType) && !(NUMBERS_WITH_DECIMAL.test(key) || UTILITY_KEYS.includes(key))) {
-            event.preventDefault();
-        }
-        // Max Length
-        if (this.form.controls[this.control.key].maxlength && event.target.value.length >= this.form.controls[this.control.key].maxlength) {
-            event.preventDefault();
-        }
-    }
-
-    handlePercentChange(event: KeyboardEvent) {
-        let value = event.target['value'];
-        let percent = Helpers.isEmpty(value) ? null : Number((value / 100).toFixed(6).replace(/\.?0*$/, ''));
-        if (!Helpers.isEmpty(percent)) {
-            this.change.emit(percent);
-            this.form.controls[this.control.key].setValue(percent);
-        } else {
-            this.change.emit(null);
-            this.form.controls[this.control.key].setValue(null);
-        }
-    }
-
-    handleTabForPickers(event: any): void {
-        if (this.active && event && event.keyCode) {
-            if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB) {
-                this.toggleActive(event, false);
-            }
-        }
-    }
-
-    emitChange(value) {
-        this.change.emit(value);
-        this.checkMaxLength(value);
-    }
+  handleUpload(value) {
+    this.upload.emit(value);
+  }
 }

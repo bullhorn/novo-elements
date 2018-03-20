@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.0"></a>
+# [2.7.0](https://github.com/bullhorn/novo-elements/compare/v2.6.1...v2.7.0) (2018-03-13)
+
+
+### Bug Fixes
+
+* **cards:** Adding tooltip input and fixing styles ([150d1ca](https://github.com/bullhorn/novo-elements/commit/150d1ca))
+* **exports:** fixed missing export for NovoCheckListElement ([019af4c](https://github.com/bullhorn/novo-elements/commit/019af4c))
+* **overlay:** Fixing overlay sizing strategy ([62c1c55](https://github.com/bullhorn/novo-elements/commit/62c1c55))
+* **pickers:** Clearing results on new picker search ([87e5d1f](https://github.com/bullhorn/novo-elements/commit/87e5d1f))
+
+
+### Features
+
+* **dragula:** Using custom build with support for drag thresholds ([cfffb08](https://github.com/bullhorn/novo-elements/commit/cfffb08))
+
+
+
 <a name="2.6.1"></a>
 ## [2.6.1](https://github.com/bullhorn/novo-elements/compare/v2.6.0...v2.6.1) (2018-03-07)
 

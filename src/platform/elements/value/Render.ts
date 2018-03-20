@@ -303,7 +303,9 @@ export class RenderPipe implements PipeTransform {
                 if (Array.isArray(value)) {
                     value = value.join(' ');
                 }
-                text = this.sanitizationService.bypassSecurityTrustHtml(value.replace(/\<a/gi, '<a target="_blank"'));
+                if (typeof text === 'string') {
+                    text = this.sanitizationService.bypassSecurityTrustHtml(value.replace(/\<a/gi, '<a target="_blank"'));
+                }
                 break;
             case 'CandidateComment':
                 text = value.comments ? `${this.labels.formatDateShort(value.dateLastModified)} (${value.name}) - ${value.comments}` : '';
