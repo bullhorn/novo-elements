@@ -18,7 +18,7 @@
                      [iconOverrides]="_iconOverrides">
     </novo-step-header>
   
-    <div class="novo-vertical-content-container" [class.novo-stepper-vertical-line]="!isLast">
+    <div class="novo-vertical-content-container" [class.novo-stepper-vertical-line]="!isLast" [ngClass]="getIndicatorType(i)">
       <div class="novo-vertical-stepper-content" role="tabpanel"
            [@stepTransition]="_getAnimationDirection(i)"
            [id]="_getStepContentId(i)"
