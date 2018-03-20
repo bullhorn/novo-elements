@@ -80,6 +80,7 @@ export class CustomDemoComponent {
   @Input() edit: any;
   @Input() save: any;
   @Input() delete: any;
+  @Input() upload: any;
 }
 
 @Component({
@@ -380,5 +381,9 @@ export class FormDemoComponent {
 
   handleDelete(file) {
     console.log('This is a Delete Action!', file); // tslint:disable-line
+  }
+
+  handleUpload(files) {
+    console.log('This is an upload Action!', files); // tslint:disable-line
   }
 }
