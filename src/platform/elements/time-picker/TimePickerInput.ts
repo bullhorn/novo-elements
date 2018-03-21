@@ -60,7 +60,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
         this.placeholder = this.military ? this.labels.timeFormatPlaceholder24Hour : this.labels.timeFormatPlaceholderAM;
         this.maskOptions = {
             mask: this.military ? [/\d/, /\d/, ':', /\d/, /\d/] : [/\d/, /\d/, ':', /\d/, /\d/, ' ', /[aApP]/, /[mM]/], //this.dateFormatService.getTimeMask(this.military),
-            pipe: createAutoCorrectedDatePipe('HH:MM'),
+            pipe: this.military ? createAutoCorrectedDatePipe('HH:MM') : createAutoCorrectedDatePipe('mm:MM'),
             keepCharPositions: false,
             guide: true,
         }; 
