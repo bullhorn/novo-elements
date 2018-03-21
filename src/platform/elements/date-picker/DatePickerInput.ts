@@ -102,7 +102,9 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
                     this._setTriggerValue(dt);
                 } else {
                     this.changed.next(value);
-                    this._onChange(null);
+                    if( this.value ) {
+                        this._onChange(null);
+                    }
                 }
             } catch (err) {
             }
