@@ -3,6 +3,7 @@ novo-time-picker-input {
     flex: 1;
     position: relative;
     display: block;
+    max-width: 130px;
     
     input {
         font-size: 1em;
@@ -110,6 +111,7 @@ novo-time-picker {
         height: 250px;
         width: 130px;
         overflow-y: auto;
+        overflow-x: hidden;
 
         novo-list-item {
             padding: 5px 16px;
