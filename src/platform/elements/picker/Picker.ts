@@ -306,7 +306,15 @@ export class NovoPickerElement implements OnInit {
         if (this.clearValueOnSelect) {
             this.term = '';
         } else {
-            if (typeof value === 'string') {
+            if (typeof this.config.getLabels === 'function') {
+                this.config.getLabels(value).then((result) => {
+                    if (result) {
+                        this.term = result.length ? result[0].label || '' : result.label || '';
+                    } else {
+                        this.term = value;
+                    }
+                });
+            } else if (typeof value === 'string') {
                 this.term = value;
             } else if (value && value.label) {
                 this.term = value.label;
@@ -314,14 +322,6 @@ export class NovoPickerElement implements OnInit {
                 this.term = `${value.firstName} ${value.lastName}`;
             } else if (value && value.name) {
                 this.term = value.name;
-            } else if (typeof this.config.getLabels === 'function') {
-                this.config.getLabels(value).then(result => {
-                    if (result) {
-                        this.term = result.length ? result[0].label || '' : result.label || '';
-                    } else {
-                        this.term = value;
-                    }
-                });
             } else {
                 this.term = value || '';
             }
