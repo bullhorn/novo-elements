@@ -39,7 +39,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
             <div class="file-output-group" [dragula]="fileOutputBag" [dragulaModel]="files">
                 <div class="file-item" *ngFor="let file of files">
                   <i *ngIf="layoutOptions.draggable" class="bhi-move"></i>
-                  <label *ngIf="file.link"><span><a href="{{ file.link }}">{{ file.name | decodeURI }}</a></span><span  *ngIf="file.description">||</span><span>{{ file.description }}</span></label> 
+                  <label *ngIf="file.link"><span><a href="{{ file.link }}" target="_blank">{{ file.name | decodeURI }}</a></span><span  *ngIf="file.description">||</span><span>{{ file.description }}</span></label> 
                   <label *ngIf="!file.link">{{ file.name | decodeURI }}</label> 
                   <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
                     <div *ngIf="!layoutOptions.customActions">
