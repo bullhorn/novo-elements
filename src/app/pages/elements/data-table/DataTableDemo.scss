@@ -1,0 +1,19 @@
+.status-new {
+  background-color: lighten($sunflower, 20%) !important;
+}
+
+.status-active {
+  background-color: lighten($mint, 20%) !important;
+}
+
+.status-archived {
+  background-color: lighten($bittersweet, 20%) !important;
+}
+
+.data-table-demo.example {
+  height: 500px;
+  display: flex;
+  flex-flow: column nowrap;
+  border: 1px solid #e9eaea !important;
+  border-radius: 3px;
+}
