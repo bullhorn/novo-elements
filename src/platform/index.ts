@@ -38,30 +38,90 @@ export { NovoCategoryDropdownModule } from './elements/category-dropdown/Categor
 export { NovoMultiPickerModule } from './elements/multi-picker/MultiPicker.module';
 export { UnlessModule } from './elements/unless/Unless.module';
 export {
-    NovoTable, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter,
-    NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage, NovoActivityTableCustomHeader
+  NovoDataTable,
+  NovoDataTableCell,
+  NovoDataTableCheckboxCell,
+  NovoDataTableCheckboxHeaderCell,
+  NovoDataTableHeaderCell,
+  NovoDataTableCellDef,
+  NovoDataTableHeaderCellDef,
+  NovoIDataTableColumnDef,
+  NovoDataTableActionCell,
+  NovoDataTableEmptyHeaderCell,
+  NovoDataTableHeaderRow,
+  NovoDataTableRow,
+  NovoDataTableCellHeader,
+  NovoDataTableSortFilter,
+  NovoDataTableSelection,
+  NovoDataTablePagination,
+  IDataTableColumn,
+  IDataTablePaginationOptions,
+  IDataTableColumnFilterConfig,
+  IDataTableColumnFilterOption,
+  IDataTableSearchOptions,
+  IDataTableSortFilter,
+  IDataTableChangeEvent,
+  IDataTableSelectionChangeEvent,
+  IDataTablePaginationEvent,
+  DataTableSource,
+  IDataTableService,
+  RemoteDataTableService,
+  StaticDataTableService,
+  DataTableState,
+  NovoDataTableModule,
+  NovoDataTableValue,
+} from './elements/data-table';
+export {
+  NovoTable,
+  NovoActivityTable,
+  NovoActivityTableActions,
+  NovoActivityTableCustomFilter,
+  NovoActivityTableEmptyMessage,
+  NovoActivityTableNoResultsMessage,
+  NovoActivityTableCustomHeader,
 } from './elements/simple-table/table';
 export {
-    NovoSimpleCell, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleHeaderCell,
-    NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell
+  NovoSimpleCell,
+  NovoSimpleCheckboxCell,
+  NovoSimpleCheckboxHeaderCell,
+  NovoSimpleHeaderCell,
+  NovoSimpleCellDef,
+  NovoSimpleHeaderCellDef,
+  NovoSimpleColumnDef,
+  NovoSimpleActionCell,
+  NovoSimpleEmptyHeaderCell,
 } from './elements/simple-table/cell';
 export { NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleHeaderRowDef, NovoSimpleRowDef } from './elements/simple-table/row';
 export { NovoSimpleCellHeader, NovoSimpleFilterFocus } from './elements/simple-table/cell-header';
 export { NovoSortFilter, NovoSelection } from './elements/simple-table/sort';
 export { NovoSimpleTablePagination } from './elements/simple-table/pagination';
 export {
-    SimpleTableColumn, SimpleTablePaginationOptions, SimpleTableColumnFilterConfig,
-    SimpleTableColumnFilterOption, SimpleTableSearchOptions, SimpleTableActionColumnOption,
-    SimpleTableActionColumn, NovoSimpleSortFilter, NovoSimpleTableChange, NovoSimpleSelectionChange,
-    NovoSimplePaginationEvent
+  SimpleTableColumn,
+  SimpleTablePaginationOptions,
+  SimpleTableColumnFilterConfig,
+  SimpleTableColumnFilterOption,
+  SimpleTableSearchOptions,
+  SimpleTableActionColumnOption,
+  SimpleTableActionColumn,
+  NovoSimpleSortFilter,
+  NovoSimpleTableChange,
+  NovoSimpleSelectionChange,
+  NovoSimplePaginationEvent,
 } from './elements/simple-table/interfaces';
-export { ActivityTableDataSource, ActivityTableService, RemoteActivityTableService, StaticActivityTableService } from './elements/simple-table/table-source';
+export {
+  ActivityTableDataSource,
+  ActivityTableService,
+  RemoteActivityTableService,
+  StaticActivityTableService,
+} from './elements/simple-table/table-source';
 export { ActivityTableRenderers } from './elements/simple-table/activity-table-renderers';
 export { NovoActivityTableState } from './elements/simple-table/state';
-export { NovoSimpleTableModule } from './elements/simple-table/simple-table.module'
+export { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
+export { NovoCommonModule } from './elements/common/common.module';
 // Export specific elements that are used in local references and/or view children
 export { NovoTableElement, NovoTableConfig } from './elements/table/Table';
 export { NovoCalendarDateChangeElement } from './elements/calendar/common/CalendarDateChange';
+export { NovoTemplate } from './elements/common/novo-template/novo-template.directive';
 // Export all services
 export { NovoToastService } from './elements/toast/ToastService';
 export { NovoModalService } from './elements/modal/ModalService';
@@ -124,29 +184,44 @@ export { NovoCheckListElement } from './elements/form/extras/checkbox/CheckList'
 export { OutsideClick } from './utils/outside-click/OutsideClick';
 export { KeyCodes } from './utils/key-codes/KeyCodes';
 export { Deferred } from './utils/deferred/Deferred';
-export { COUNTRIES, getCountries, getStateObjects, getStates, findByCountryCode, findByCountryId, findByCountryName } from './utils/countries/Countries';
+export {
+  COUNTRIES,
+  getCountries,
+  getStateObjects,
+  getStates,
+  findByCountryCode,
+  findByCountryId,
+  findByCountryName,
+} from './utils/countries/Countries';
 export { Helpers } from './utils/Helpers';
 export { ComponentUtils } from './utils/component-utils/ComponentUtils';
 export {
-    CalendarEventTimesChangedEvent,
-    WeekDay,
-    EventColor,
-    EventAction,
-    CalendarEvent,
-    WeekViewEvent,
-    WeekViewEventRow,
-    MonthViewDay,
-    MonthView,
-    DayViewEvent,
-    DayView,
-    DayViewHourSegment,
-    DayViewHour,
-    IsEventInPeriodArgs,
-    GetEventsInPeriodArgs,
-    GetDayViewArgs
+  CalendarEventTimesChangedEvent,
+  WeekDay,
+  EventColor,
+  EventAction,
+  CalendarEvent,
+  WeekViewEvent,
+  WeekViewEventRow,
+  MonthViewDay,
+  MonthView,
+  DayViewEvent,
+  DayView,
+  DayViewHourSegment,
+  DayViewHour,
+  IsEventInPeriodArgs,
+  GetEventsInPeriodArgs,
+  GetDayViewArgs,
 } from './utils/calendar-utils/CalendarUtils';
 export * from './utils/calendar-utils/CalendarUtils';
-export { AppBridge, AppBridgeHandler, IAppBridgeOpenEvent, AppBridgeService, DevAppBridge, DevAppBridgeService } from './utils/app-bridge/AppBridge';
+export {
+  AppBridge,
+  AppBridgeHandler,
+  IAppBridgeOpenEvent,
+  AppBridgeService,
+  DevAppBridge,
+  DevAppBridgeService,
+} from './utils/app-bridge/AppBridge';
 // Providers
 export { NovoElementProviders } from './novo-elements.providers';
 // Pipes

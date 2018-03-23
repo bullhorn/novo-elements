@@ -19,7 +19,7 @@ const TILES_VALUE_ACCESSOR = {
             <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked, disabled: option.disabled}" (click)="select($event, option, i)" [attr.data-automation-id]="option.label || option">
                 <input class="tiles-input" [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i" (change)="select($event, option, i)" (focus)="setFocus(true)" (blur)="setFocus(false)">
                 <label [attr.for]="name + i" [attr.data-automation-id]="option.label || option">
-                    {{ option.label || option}}
+                    {{ option.label || option }}
                 </label>
             </div>
             <span class="active-indicator" [@tileState]="state" [hidden]="activeTile === undefined || activeTile === null"></span>
