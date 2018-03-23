@@ -117,8 +117,8 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
      * Clear any previous selected option and emit a selection change event for this option
      */
     public clearValue(skip: any) {
+        this._onChange(null);
         this._setTriggerValue(null);
-        this._onChange('');
     }
 
     public get hasValue() {
