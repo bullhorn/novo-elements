@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import { delay } from 'rxjs/operators';
 import * as dateFns from 'date-fns';
 
 let BasicDemoRowsTpl = require('./templates/basic-rows.html');
@@ -318,7 +319,7 @@ class RemoteMockDataService extends RemoteDataTableService<MockData> {
     let sortQuery: string = this.buildSortColumn(sort);
     let pageQuery: number = this.buildStart(page, pageSize);
     this.url = `http://mock-api.com?where=${whereQuery}&sort=${sortQuery}&pageSize=${pageSize}&page=${pageQuery}`;
-    return Observable.of({ results: this.data, total: this.data.length });
+    return Observable.of({ results: this.data, total: this.data.length }).pipe(delay(5000));
   }
 
   private buildWhereClause(filter: { id: string; value: string; transform?: Function }): string {
