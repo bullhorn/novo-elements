@@ -4,14 +4,11 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { NovoDataTableSelection } from '../selection/data-table-selection.directive';
 
-/** Workaround for https://github.com/angular/angular/issues/17849 */
-export const _NovoHeaderCell = CdkHeaderCell;
-
 @Component({
   selector: 'novo-data-table-checkbox-header-cell',
   template: `<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>`,
 })
-export class NovoDataTableCheckboxHeaderCell extends _NovoHeaderCell implements OnDestroy {
+export class NovoDataTableCheckboxHeaderCell extends CdkHeaderCell implements OnDestroy {
   @HostBinding('attr.role') public role = 'columnheader';
 
   public selectAll: boolean = false;

@@ -3,13 +3,10 @@ import { CdkHeaderCell, CdkColumnDef } from '@angular/cdk/table';
 
 import { IDataTableColumn } from '../interfaces';
 
-/** Workaround for https://github.com/angular/angular/issues/17849 */
-export const _NovoHeaderCell = CdkHeaderCell;
-
 @Directive({
   selector: 'novo-data-table-header-cell',
 })
-export class NovoDataTableHeaderCell<T> extends _NovoHeaderCell implements OnInit {
+export class NovoDataTableHeaderCell<T> extends CdkHeaderCell implements OnInit {
   @HostBinding('attr.role') public role = 'columnheader';
 
   @Input() public column: IDataTableColumn<T>;
