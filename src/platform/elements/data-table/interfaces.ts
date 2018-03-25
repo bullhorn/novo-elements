@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs/Observable';
 
-// TODO: Custom stuffs
 export interface IDataTableColumn<T> {
   id: string;
   label?: string;
@@ -29,6 +28,7 @@ export interface IDataTableColumn<T> {
       disabledFunc?: (row: T) => boolean;
     }[];
   };
+  attributes: { [key: string]: any }; // for any custom config in cells
 }
 
 export interface IDataTablePaginationOptions {
