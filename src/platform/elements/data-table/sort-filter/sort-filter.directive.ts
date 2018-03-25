@@ -1,6 +1,6 @@
 import { Directive } from '@angular/core';
 
-import { DataTableState } from '../state';
+import { DataTableState } from '../state/data-table-state.service';
 import { Helpers } from '../../../utils/Helpers';
 
 @Directive({

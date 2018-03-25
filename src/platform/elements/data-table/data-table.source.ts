@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import 'rxjs/add/observable/of';
 
-import { DataTableState } from './state';
+import { DataTableState } from './state/data-table-state.service';
 import { IDataTableService } from './interfaces';
 import { start } from 'repl';
 

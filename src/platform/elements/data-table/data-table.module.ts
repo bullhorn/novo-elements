@@ -15,25 +15,25 @@ import { NovoSelectModule } from '../select/Select.module';
 
 import { NovoDataTable } from './data-table.component';
 import { NovoDataTableValue } from './data-table-value.component';
-import {
-  NovoDataTableCell,
-  NovoDataTableCheckboxCell,
-  NovoDataTableCellDef,
-  NovoIDataTableColumnDef,
-  NovoDataTableActionCell,
-} from './cells';
-import { NovoDataTableHeaderRow, NovoDataTableRow, NovoDataTableHeaderRowDef, NovoDataTableRowDef } from './rows';
-import {
-  NovoDataTableCellHeader,
-  NovoDataTableCheckboxHeaderCell,
-  NovoDataTableHeaderCellDef,
-  NovoDataTableEmptyHeaderCell,
-  NovoDataTableHeaderCell,
-} from './cell-headers';
-import { NovoDataTableSortFilter } from './sort-filter';
-import { NovoDataTableSelection } from './selection';
-import { NovoDataTablePagination } from './pagination';
-import { DataTableState } from './state';
+import { NovoDataTableActionCell } from './cells/data-table-action-cell.component';
+import { NovoDataTableCell } from './cells/data-table-cell.component';
+import { NovoDataTableCheckboxCell } from './cells/data-table-checkbox-cell.component';
+import { NovoDataTableHeaderRow } from './rows/data-table-header-row.component';
+import { NovoDataTableRow } from './rows/data-table-row.component';
+import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
+import { NovoDataTableCheckboxHeaderCell } from './cell-headers/data-table-checkbox-header-cell.component';
+import { NovoDataTableEmptyHeaderCell } from './cell-headers/data-table-empty-header-cell.directive';
+import { NovoDataTableHeaderCell } from './cell-headers/data-table-header-cell.directive';
+import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
+import { NovoDataTableSelection } from './selection/data-table-selection.directive';
+import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
+import { DataTableState } from './state/data-table-state.service';
+
+import { NovoDataTableHeaderCellDef } from './cell-headers/defs/data-table-header-cell-def.directive';
+import { NovoDataTableColumnDef } from './cells/defs/data-table-column-def.directive';
+import { NovoDataTableCellDef } from './cells/defs/data-table-cell-def.directive';
+import { NovoDataTableHeaderRowDef } from './rows/defs/data-table-header-row-def.directive';
+import { NovoDataTableRowDef } from './rows/defs/data-table-row-def.directive';
 
 @NgModule({
   imports: [
@@ -50,30 +50,10 @@ import { DataTableState } from './state';
     NovoCommonModule,
     NovoSelectModule,
   ],
-  exports: [
-    NovoDataTableCellDef,
-    NovoDataTableHeaderCellDef,
-    NovoIDataTableColumnDef,
-    NovoDataTableHeaderRowDef,
-    NovoDataTableRowDef,
-    NovoDataTableCellHeader,
-    NovoDataTableSortFilter,
-    NovoDataTableActionCell,
-    NovoDataTableEmptyHeaderCell,
-    NovoDataTableHeaderCell,
-    NovoDataTableCell,
-    NovoDataTableHeaderRow,
-    NovoDataTableRow,
-    NovoDataTablePagination,
-    NovoDataTableCheckboxCell,
-    NovoDataTableCheckboxHeaderCell,
-    NovoDataTableSelection,
-    NovoDataTable,
-  ],
   declarations: [
-    NovoDataTableCellDef,
     NovoDataTableHeaderCellDef,
-    NovoIDataTableColumnDef,
+    NovoDataTableColumnDef,
+    NovoDataTableCellDef,
     NovoDataTableHeaderRowDef,
     NovoDataTableRowDef,
     NovoDataTableCellHeader,
@@ -92,5 +72,6 @@ import { DataTableState } from './state';
     NovoDataTableValue,
   ],
   providers: [DataTableState],
+  exports: [NovoDataTableValue, NovoDataTable],
 })
 export class NovoDataTableModule {}

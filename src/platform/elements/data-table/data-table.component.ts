@@ -17,13 +17,13 @@ import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subscription } from 'rxjs/Subscription';
 
-import { NovoDataTableSelection } from './selection';
-import { NovoDataTableSortFilter } from './sort-filter';
-import { NovoDataTablePagination } from './pagination';
+import { NovoDataTableSelection } from './selection/data-table-selection.directive';
+import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
+import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
 import { IDataTableColumn, IDataTablePaginationOptions, IDataTableSearchOptions, IDataTableService } from './interfaces';
 import { DataTableSource } from './data-table.source';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { DataTableState } from './state';
+import { DataTableState } from './state/data-table-state.service';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 import { Helpers } from '../../utils/Helpers';
 import { StaticDataTableService } from './services/static-data-table.service';

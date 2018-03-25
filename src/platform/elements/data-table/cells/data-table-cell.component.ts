@@ -3,6 +3,9 @@ import { CdkCell, CdkColumnDef } from '@angular/cdk/table';
 
 import { IDataTableColumn } from '../interfaces';
 
+/** Workaround for https://github.com/angular/angular/issues/17849 */
+export const _NovoCell = CdkCell;
+
 @Component({
   selector: 'novo-data-table-cell',
   template: `
@@ -10,7 +13,7 @@ import { IDataTableColumn } from '../interfaces';
     `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoDataTableCell<T> extends CdkCell implements OnInit {
+export class NovoDataTableCell<T> extends _NovoCell implements OnInit {
   @HostBinding('attr.role') public role = 'gridcell';
 
   @Input() public row: T;

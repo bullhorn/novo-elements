@@ -11,12 +11,8 @@ let BasicDemoServiceTpl = require('./templates/basic-service.html');
 let RemoteDemoServiceTpl = require('./templates/basic-remote.html');
 
 import {
-  NovoDataTableSortFilter,
-  NovoDataTableSelection,
-  NovoDataTable,
   IDataTableColumn,
   RemoteDataTableService,
-  DataTableSource,
   IDataTableSortFilter,
   StaticDataTableService,
   IDataTablePaginationOptions,

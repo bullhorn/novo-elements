@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { IDataTablePaginationEvent } from '../interfaces';
 import { NovoLabelService } from '../../../services/novo-label-service';
-import { DataTableState } from '../state';
+import { DataTableState } from '../state/data-table-state.service';
 
 const DEFAULT_PAGE_SIZE = 50;
 const MAX_PAGES_DISPLAYED = 5;

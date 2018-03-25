@@ -2,7 +2,10 @@ import { ElementRef, Input, Renderer2, HostBinding, Component, OnInit, OnDestroy
 import { CdkCell, CdkColumnDef } from '@angular/cdk/table';
 import { Subscription } from 'rxjs/Subscription';
 
-import { NovoDataTableSelection } from '../selection';
+import { NovoDataTableSelection } from '../selection/data-table-selection.directive';
+
+/** Workaround for https://github.com/angular/angular/issues/17849 */
+export const _NovoCell = CdkCell;
 
 @Component({
   selector: 'novo-data-table-checkbox-cell',
@@ -10,7 +13,7 @@ import { NovoDataTableSelection } from '../selection';
         <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox>
     `,
 })
-export class NovoDataTableCheckboxCell extends CdkCell implements OnDestroy, OnInit {
+export class NovoDataTableCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
   @HostBinding('attr.role') public role = 'gridcell';
 
   @Input() public row: any;

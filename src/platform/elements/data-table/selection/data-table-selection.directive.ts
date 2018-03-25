@@ -1,7 +1,7 @@
 import { Directive, EventEmitter, Output, OnDestroy } from '@angular/core';
 
 import { IDataTableChangeEvent } from '../interfaces';
-import { DataTableState } from '../state';
+import { DataTableState } from '../state/data-table-state.service';
 
 @Directive({
   selector: '[novoDataTableSelection]',

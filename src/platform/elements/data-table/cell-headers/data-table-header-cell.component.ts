@@ -21,9 +21,9 @@ import {
   IDataTableColumnFilterConfig,
   IDataTableColumnSortConfig,
 } from '../interfaces';
-import { NovoDataTableSortFilter } from '../sort-filter';
+import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
 import { NovoLabelService } from '../../../services/novo-label-service';
-import { DataTableState } from '../state';
+import { DataTableState } from '../state/data-table-state.service';
 import { Helpers } from '../../../utils/Helpers';
 
 @Component({

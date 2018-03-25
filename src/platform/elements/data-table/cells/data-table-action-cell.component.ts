@@ -4,6 +4,9 @@ import { CdkCell, CdkColumnDef } from '@angular/cdk/table';
 import { IDataTableColumn } from '../interfaces';
 import { NovoLabelService } from '../../../services/novo-label-service';
 
+/** Workaround for https://github.com/angular/angular/issues/17849 */
+export const _NovoCell = CdkCell;
+
 @Component({
   selector: 'novo-data-table-action-cell',
   template: `
@@ -23,7 +26,7 @@ import { NovoLabelService } from '../../../services/novo-label-service';
     `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoDataTableActionCell<T> extends CdkCell implements OnInit {
+export class NovoDataTableActionCell<T> extends _NovoCell implements OnInit {
   @HostBinding('attr.role') public role = 'gridcell';
 
   @Input() public row: T;

@@ -37,40 +37,23 @@ export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
 export { NovoCategoryDropdownModule } from './elements/category-dropdown/CategoryDropdown.module';
 export { NovoMultiPickerModule } from './elements/multi-picker/MultiPicker.module';
 export { UnlessModule } from './elements/unless/Unless.module';
+export { NovoDataTableModule } from './elements/data-table/data-table.module';
+export { RemoteDataTableService } from './elements/data-table/services/remote-data-table.service';
+export { StaticDataTableService } from './elements/data-table/services/static-data-table.service';
 export {
-  NovoDataTable,
-  NovoDataTableCell,
-  NovoDataTableCheckboxCell,
-  NovoDataTableCheckboxHeaderCell,
-  NovoDataTableHeaderCell,
-  NovoDataTableCellDef,
-  NovoDataTableHeaderCellDef,
-  NovoIDataTableColumnDef,
-  NovoDataTableActionCell,
-  NovoDataTableEmptyHeaderCell,
-  NovoDataTableHeaderRow,
-  NovoDataTableRow,
-  NovoDataTableCellHeader,
-  NovoDataTableSortFilter,
-  NovoDataTableSelection,
-  NovoDataTablePagination,
+  IDataTableCell,
+  IDataTableChangeEvent,
   IDataTableColumn,
-  IDataTablePaginationOptions,
   IDataTableColumnFilterConfig,
   IDataTableColumnFilterOption,
-  IDataTableSearchOptions,
-  IDataTableSortFilter,
-  IDataTableChangeEvent,
-  IDataTableSelectionChangeEvent,
+  IDataTableColumnSortConfig,
   IDataTablePaginationEvent,
-  DataTableSource,
+  IDataTablePaginationOptions,
+  IDataTableSearchOptions,
+  IDataTableSelectionChangeEvent,
   IDataTableService,
-  RemoteDataTableService,
-  StaticDataTableService,
-  DataTableState,
-  NovoDataTableModule,
-  NovoDataTableValue,
-} from './elements/data-table';
+  IDataTableSortFilter,
+} from './elements/data-table/interfaces';
 export {
   NovoTable,
   NovoActivityTable,
