@@ -87,6 +87,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
     if (column.filterable && Helpers.isObject(column.filterable)) {
       this.config.filterConfig = column.filterable as IDataTableColumnFilterConfig;
+      this.showCustomRange = !!this.config.filterConfig.allowCustomRange;
       if (!this.config.filterConfig.type) {
         this.config.filterConfig = { type: 'text' };
       }

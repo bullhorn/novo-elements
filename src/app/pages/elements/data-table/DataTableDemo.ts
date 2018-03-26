@@ -111,6 +111,7 @@ export class DataTableDemoComponent implements OnInit {
       type: 'date',
       filterable: {
         type: 'date',
+        allowCustomRange: true,
       },
       sortable: true,
     },

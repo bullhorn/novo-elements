@@ -28,7 +28,7 @@ export interface IDataTableColumn<T> {
       disabledFunc?: (row: T) => boolean;
     }[];
   };
-  attributes: { [key: string]: any }; // for any custom config in cells
+  attributes?: { [key: string]: any }; // for any custom config in cells
 }
 
 export interface IDataTablePaginationOptions {
