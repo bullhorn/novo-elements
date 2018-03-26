@@ -1,16 +1,15 @@
 // NG
-import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Output, Inject, OnInit, ViewChild, EventEmitter } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Inject, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
-
 // App
 import { NovoOverlayTemplate } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { DateFormatService } from '../../services/date-format/DateFormat';
 import { Helpers } from '../../utils/Helpers';
+import { DateFormatService } from '../../services/date-format/DateFormat';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -34,7 +33,7 @@ const DATE_VALUE_ACCESSOR = {
 })
 export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor {
     public value: any;
-    public formattedValue: any;
+    public formattedValue: string = '';
 
     /** View -> model callback called when value changes */
     _onChange: (value: any) => void = () => { }
@@ -45,21 +44,20 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     @Input() placeholder: string;
     @Input() military: boolean = false;
     @Input() maskOptions: any;
-    @Output() changed: EventEmitter<any> = new EventEmitter();
     /** Element for the panel containing the autocomplete options. */
     @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
 
     constructor(
         public element: ElementRef,
         public labels: NovoLabelService,
-        private dateFormatService: DateFormatService,
+        public dateFormatService: DateFormatService,
         protected _changeDetectorRef: ChangeDetectorRef,
     ) { }
 
     ngOnInit(): void {
         this.placeholder = this.military ? this.labels.timeFormatPlaceholder24Hour : this.labels.timeFormatPlaceholderAM;
         this.maskOptions = {
-            mask: this.military ? [/\d/, /\d/, ':', /\d/, /\d/] : [/\d/, /\d/, ':', /\d/, /\d/, ' ', /[aApP]/, /[mM]/], //this.dateFormatService.getTimeMask(this.military),
+            mask: this.military ? [/\d/, /\d/, ':', /\d/, /\d/] : [/\d/, /\d/, ':', /\d/, /\d/, ' ', /[aApP]/, /[mM]/],
             pipe: this.military ? createAutoCorrectedDatePipe('HH:MM') : createAutoCorrectedDatePipe('mm:MM'),
             keepCharPositions: false,
             guide: true,
@@ -96,11 +94,9 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
             let text = (event.target as HTMLInputElement).value;
             if (this.military ? text.replace(/_/g, '').length === 5 : text.replace(/_/g, '').length === 8) {
                 let [dateTimeValue, formatted] = this.dateFormatService.parseString(text, this.military, 'time');
-                this._onChange(dateTimeValue);
-                this._setTriggerValue(dateTimeValue);
+                this.dispatchOnChange(dateTimeValue);
             } else {
-                this.changed.next(text);
-                this._onChange(text);
+                this.dispatchOnChange(null);
             }
             this.openPanel();
             let num = Number(text.split(':')[0]);
@@ -117,31 +113,26 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     registerOnTouched(fn: () => {}) {
         this._onTouched = fn;
     }
-
-    private _setTriggerValue(value: any): void {
-        const toDisplay = value;
-
-        // Simply falling back to an empty string if the display value is falsy does not work properly.
-        // The display value can also be the number zero and shouldn't fall back to an empty string.
-        let inputValue = toDisplay !== null ? toDisplay : '';
-
-        // If it's used within a `MdFormField`, we should set it through the property so it can go
-        // through change detection.
-        //this._element.nativeElement.value = inputValue;
-        if(inputValue instanceof Date && this.value instanceof Date) {
-            inputValue = new Date(inputValue.setFullYear(this.value.getFullYear(), this.value.getMonth(), this.value.getDate()));
+    public dispatchOnChange(newValue?: any, skip: boolean = false) {
+        if ( newValue !== this.value ) {
+            this._onChange(newValue);
+            !skip && this.writeValue(newValue);
         }
-        
-        this.value = inputValue;
-        this.formattedValue = this.formatDateValue(inputValue);
-        this.changed.next(this.value);
+    }
+    private _setTriggerValue(value: any): void {
+        if(value instanceof Date && this.value instanceof Date) {
+            value = new Date(value.setFullYear(this.value.getFullYear(), this.value.getMonth(), this.value.getDate()));
+        }
+        this.value = value;
+        if ( this.value ) {
+            this.formattedValue = this.formatDateValue(this.value);
+        }
         this._changeDetectorRef.markForCheck();
     }
 
     public setValue(event: any | null): void {
         if (event && event.date) {
-            this._setTriggerValue(event.date);
-            this._onChange(event.date);
+            this.dispatchOnChange(event.date);
         }
     }
 
@@ -153,9 +144,9 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     /**
      * Clear any previous selected option and emit a selection change event for this option
      */
-    public clearValue(skip: any) {
-        this.writeValue(null);
-        this._onChange(null);
+    public clearValue() {
+        this.formattedValue = '';
+        this.dispatchOnChange(null);
     }
 
     public formatDateValue(value) {

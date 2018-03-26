@@ -68,8 +68,8 @@ export class NovoLabelService {
     noItems = 'There are no items';
     dateFormat = 'MM/dd/yyyy';
     dateFormatPlaceholder = 'MM/DD/YYYY';
-    timeFormatPlaceholderAM = 'hh:mm AM';
-    timeFormatPlaceholder24Hour = 'HH:mm';
+    timeFormatPlaceholderAM = 'HH:MM AM';
+    timeFormatPlaceholder24Hour = 'HH:MM';
     timeFormatAM = 'AM';
     timeFormatPM = 'PM';
     confirmChangesModalMessage = 'Are you sure you want to change this field?';
