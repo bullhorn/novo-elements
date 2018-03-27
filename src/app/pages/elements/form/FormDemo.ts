@@ -623,4 +623,8 @@ export class FormDemoComponent {
   handleUpload(files) {
     console.log('This is an upload Action!', files); // tslint:disable-line
   }
+
+  handleUpload(files) {
+    console.log('This is an upload Action!', files); // tslint:disable-line
+  }
 }
