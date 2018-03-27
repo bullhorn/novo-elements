@@ -146,6 +146,16 @@ describe('Elements: NovoFileInputElement', () => {
         expect(component.delete.emit).toHaveBeenCalledWith({ name: 'file.pdf', loaded: true });
         });
     });
+
+    describe('Method: customCheck(files)', () => {
+        beforeEach(() => {
+        spyOn(component.upload, 'emit');
+        });
+        it('should emit an event', () => {
+        component.customCheck({ name: 'file.pdf', loaded: true });
+        expect(component.upload.emit).toHaveBeenCalledWith({ name: 'file.pdf', loaded: true });
+        });
+    });
     //
     // describe('Method: dragEnterHandler(event)', () => {
     //     it('should set active to true.', () => {
@@ -198,6 +208,3 @@ describe('Elements: NovoFileInputElement', () => {
     //     });
     // });
 });
-
-
-

@@ -22,7 +22,8 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
         <div #container></div>
         <ng-template #fileInput>
             <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
-                <input type="file" [name]="name" [attr.id]="name" (change)="check($event)" [attr.multiple]="multiple" tabindex="-1"/>
+                <input *ngIf="!layoutOptions.customActions" type="file" [name]="name" [attr.id]="name" (change)="check($event)" [attr.multiple]="multiple" tabindex="-1"/>
+                <input *ngIf="layoutOptions.customActions" type="file" [name]="name" [attr.id]="name" (change)="customCheck($event)" [attr.multiple]="multiple" tabindex="-1"/>
                 <section [ngSwitch]="layoutOptions.labelStyle">
                     <label *ngSwitchCase="'no-box'" [attr.for]="name" class="no-box">
                         <div><i class="bhi-dropzone"></i>{{ placeholder || labels.chooseAFile }} {{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></div>
@@ -72,6 +73,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() save: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
+  @Output() upload: EventEmitter<any> = new EventEmitter();
 
   elements: Array<any> = [];
   files: Array<any> = [];
@@ -234,5 +236,9 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
 
   customDelete(file) {
     this.delete.emit(file);
+  }
+
+  customCheck(event) {
+    this.upload.emit(event);
   }
 }
