@@ -86,7 +86,7 @@ describe('Elements: NovoDateTimePickerElement', () => {
         let now = new Date();
         beforeEach(() => {
             spyOn(component, 'setDateLabels');
-            spyOn(component, 'onModelChange');
+            spyOn(component, '_onChange');
             spyOn(component.onSelect, 'emit');
             spyOn(component, 'createFullDateValue').and.returnValue(now);
         });
@@ -94,7 +94,7 @@ describe('Elements: NovoDateTimePickerElement', () => {
             component.onDateSelected({ date: now });
             expect(component.model).toEqual(now);
             expect(component.setDateLabels).toHaveBeenCalledWith(now);
-            expect(component.onModelChange).toHaveBeenCalledWith(now);
+            expect(component._onChange).toHaveBeenCalledWith(now);
             expect(component.onSelect.emit).toHaveBeenCalledWith({ date: now });
         });
     });
@@ -102,7 +102,7 @@ describe('Elements: NovoDateTimePickerElement', () => {
     describe('Method: onTimeSelected()', () => {
         let now = new Date();
         beforeEach(() => {
-            spyOn(component, 'onModelChange');
+            spyOn(component, '_onChange');
             spyOn(component, 'setTimeLabels');
             spyOn(component.onSelect, 'emit');
             spyOn(component, 'createFullDateValue').and.returnValue(now);
@@ -110,7 +110,7 @@ describe('Elements: NovoDateTimePickerElement', () => {
         it('should call and set everything right', () => {
             component.onTimeSelected({ date: now });
             expect(component.model).toEqual(now);
-            expect(component.onModelChange).toHaveBeenCalledWith(now);
+            expect(component._onChange).toHaveBeenCalledWith(now);
             expect(component.setTimeLabels).toHaveBeenCalledWith(now);
             expect(component.onSelect.emit).toHaveBeenCalledWith({ date: now });
         });
@@ -141,7 +141,7 @@ describe('Elements: NovoDateTimePickerElement', () => {
         it('should set the fn', () => {
             let test = () => { };
             component.registerOnChange(test);
-            expect(component.onModelChange).toEqual(test);
+            expect(component._onChange).toEqual(test);
         });
     });
 
@@ -149,7 +149,7 @@ describe('Elements: NovoDateTimePickerElement', () => {
         it('should set the fn', () => {
             let test = () => { };
             component.registerOnTouched(test);
-            expect(component.onModelTouched).toEqual(test);
+            expect(component._onTouched).toEqual(test);
         });
     });
 });

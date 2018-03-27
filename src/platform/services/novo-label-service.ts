@@ -1,5 +1,5 @@
 // NG2
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, Optional, LOCALE_ID } from '@angular/core';
 
 @Injectable()
 export class NovoLabelService {
@@ -83,6 +83,8 @@ export class NovoLabelService {
   add = 'Add';
   encryptedFieldTooltip = 'This data has been stored at the highest level of security';
 
+  constructor(@Optional() @Inject(LOCALE_ID) public userLocale: string = 'en-US') {}
+  
   getToManyPlusMore(toMany: { quantity: number }): string {
     return `+${toMany.quantity} more`;
   }
@@ -100,7 +102,7 @@ export class NovoLabelService {
     if (date.getTime() !== date.getTime()) {
       return value;
     }
-    return new Intl.DateTimeFormat('en-US', format).format(date);
+    return new Intl.DateTimeFormat(this.userLocale, format).format(date);
   }
 
   getWeekdays(): string[] {
@@ -110,7 +112,7 @@ export class NovoLabelService {
     }
 
     return [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((weekdays, dt) => {
-      weekdays.push(new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(dt));
+      weekdays.push(new Intl.DateTimeFormat(this.userLocale, { weekday: 'long' }).format(dt));
       return weekdays;
     }, []);
   }
@@ -135,7 +137,7 @@ export class NovoLabelService {
       getMonth(10),
       getMonth(11),
     ].reduce((months, dt) => {
-      months.push(new Intl.DateTimeFormat('en-US', { month: 'long' }).format(dt));
+      months.push(new Intl.DateTimeFormat(this.userLocale, { month: 'long' }).format(dt));
       return months;
     }, []);
   }
@@ -161,11 +163,11 @@ export class NovoLabelService {
 
   formatCurrency(value: number): string {
     let options = { style: 'currency', currency: 'USD' };
-    return new Intl.NumberFormat('en-US', options).format(value);
+    return new Intl.NumberFormat(this.userLocale, options).format(value);
   }
 
   formatNumber(value: any, options?: Intl.NumberFormatOptions): string {
-    return new Intl.NumberFormat('en-US', options).format(value);
+    return new Intl.NumberFormat(this.userLocale, options).format(value);
   }
 
   formatDateShort(value: any): string {
@@ -178,7 +180,7 @@ export class NovoLabelService {
       minute: '2-digit',
     };
     let _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
-    return new Intl.DateTimeFormat('en-US', options).format(_value);
+    return new Intl.DateTimeFormat(this.userLocale, options).format(_value);
   }
 
   formatTime(value: any): string {
@@ -188,7 +190,7 @@ export class NovoLabelService {
       minute: '2-digit',
     };
     let _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
-    return new Intl.DateTimeFormat('en-US', options).format(_value);
+    return new Intl.DateTimeFormat(this.userLocale, options).format(_value);
   }
 
   formatDate(value: any): string {
@@ -199,7 +201,7 @@ export class NovoLabelService {
       year: 'numeric',
     };
     let _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
-    return new Intl.DateTimeFormat('en-US', options).format(_value);
+    return new Intl.DateTimeFormat(this.userLocale, options).format(_value);
   }
 }
 

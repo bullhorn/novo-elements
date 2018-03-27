@@ -4,5 +4,8 @@
         <label>Value Two</label> {{(dateTwo | date) || 'N/A'}}
     </p>
     <novo-date-picker [(ngModel)]="dateOne"></novo-date-picker>
-    <novo-date-picker-input [(ngModel)]="dateTwo"></novo-date-picker-input>
+    <div>
+        <novo-date-picker-input [(ngModel)]="dateTwo" format="mm/dd/yyyy"></novo-date-picker-input>
+        <novo-date-picker-input [(ngModel)]="dateTwo" format="dd/mm/yyyy"></novo-date-picker-input>
+    </div>
 </div>

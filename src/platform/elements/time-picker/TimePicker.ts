@@ -25,7 +25,15 @@ const TIME_PICKER_VALUE_ACCESSOR = {
                 </div>
             </div>
         </div>
-        <div class="analog">
+        <div class="increments" *ngIf="!analog">
+            <novo-list direction="vertical" data-automation-id="novo-time-picker-increments">
+                <novo-list-item *ngFor="let increment of increments" (click)="setValue($event, increment)" [class.active]="increment==selected" [attr.data-automation-id]="increment">
+                    <item-content>{{increment}}</item-content>
+                    <i *ngIf="increment==selected" class="bhi-check"></i>
+                </novo-list-item>
+            </novo-list>
+        </div>
+        <div class="analog" *ngIf="analog">
             <div class="analog--inner">
                 <div class="analog--face">
                     <span class="analog--center"></span>
@@ -51,6 +59,7 @@ const TIME_PICKER_VALUE_ACCESSOR = {
 })
 export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
     @Input() military: boolean = false;
+    @Input() analog: boolean = false;
     @Input() inline: boolean = false;
     @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
@@ -63,18 +72,25 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
     activeHour;
     minutesClass: string;
     activeMinute;
+    increments: string[] = [];
+    selected:string;
     MERIDIANS: Array<string> = ['am', 'pm'];
     MINUTES: Array<string> = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00'];
     HOURS: Array<string> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     model: any;
-    onModelChange: Function = () => {
-    };
-    onModelTouched: Function = () => {
-    };
+    _onChange: Function = () => { };
+    _onTouched: Function = () => { };
 
+    flatten(arr) {
+        return Array.prototype.concat(...arr);
+    }
     ngOnInit() {
         if (this.military) {
             this.HOURS = ['0', ...this.HOURS, '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
+            this.increments = this.flatten([...this.HOURS.map((hour) => [`${hour}:00`, `${hour}:15`, `${hour}:30`, `${hour}:45`])]);
+        } else {
+            let hours: Array<string> = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
+            this.increments = this.flatten([...hours.map((hour) => [`${hour}:00 AM`, `${hour}:15 AM`, `${hour}:30 AM`, `${hour}:45 AM`]), ...hours.map((hour) => [`${hour}:00 PM`, `${hour}:15 PM`, `${hour}:30 PM`, `${hour}:45 PM`])]);
         }
         this.ngOnChanges();
     }
@@ -83,6 +99,7 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
         if (this.model) {
             this.init(this.model, false);
         } else {
+            this.selected = null;
             this.init(new Date(), false);
         }
     }
@@ -106,6 +123,18 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
 
     checkBetween(value) {
         this.inBetween = this.MINUTES.indexOf(String(value)) < 0;
+    }
+
+    setValue(event, value) {
+        Helpers.swallowEvent(event);
+        this.selected = value;
+        let [time, meridian] = value.split(' ');
+        let [hours, minutes] = time.split(':');
+        this.hours = hours;
+        this.minutes = minutes;
+        this.meridian = meridian;
+    
+        this.dispatchChange();
     }
 
     setHours(event, hours, dispatch) {
@@ -144,28 +173,29 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
         let hours = Number(this.hours);
 
         if (!this.military) {
-            hours = this.meridian === 'pm' ? hours + 12 : hours;
+            hours = this.meridian.toLowerCase() === 'pm' ? hours + 12 : hours;
 
             // Special case for 12
-            if (this.meridian === 'pm' && hours === 24) {
+            if (this.meridian.toLowerCase() === 'pm' && hours === 24) {
                 hours = 12;
-            } else if (this.meridian === 'am' && hours === 12) {
+            } else if (this.meridian.toLowerCase() === 'am' && hours === 12) {
                 hours = 0;
             }
         }
-
+        
         let value = new Date();
         value.setHours(hours);
         value.setMinutes(this.minutes);
         value.setSeconds(0);
+        this.value = `${this.hours}:${this.minutes} ${this.meridian}`;
         this.onSelect.next({
             hours: hours,
             minutes: this.minutes,
             meridian: this.meridian,
             date: value,
-            text: `${this.hours}:${this.minutes} ${this.meridian}`
+            text: this.value,
         });
-        this.onModelChange(value);
+        this._onChange(value);
     }
 
     // ValueAccessor Functions
@@ -177,10 +207,10 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
     }
 
     registerOnChange(fn: Function): void {
-        this.onModelChange = fn;
+        this._onChange = fn;
     }
 
     registerOnTouched(fn: Function): void {
-        this.onModelTouched = fn;
+        this._onTouched = fn;
     }
 }

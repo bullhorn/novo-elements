@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { TextMaskModule } from 'angular2-text-mask';
 // APP
 import { NovoOverlayModule } from '../overlay/Overlay.module';
+import { NovoListModule } from '../list/List.module';
 import { NovoTimePickerElement } from './TimePicker';
 import { NovoTimePickerInputElement } from './TimePickerInput';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, TextMaskModule, NovoOverlayModule],
+    imports: [CommonModule, FormsModule, TextMaskModule, NovoOverlayModule, NovoListModule],
     declarations: [NovoTimePickerElement, NovoTimePickerInputElement],
     exports: [NovoTimePickerElement, NovoTimePickerInputElement]
 })

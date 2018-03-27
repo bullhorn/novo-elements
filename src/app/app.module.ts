@@ -53,6 +53,7 @@ import {
   PopOverDemoComponent,
   CustomDemoComponent,
   DatePickerDemoComponent,
+  DateLocaleDemoComponent,
   FieldInteractionsDemoComponent,
   DataTableDemoComponent,
   FormGroupedDemoComponent,
@@ -121,6 +122,7 @@ export function provideAppBridgeService(http) {
     SearchDemoComponent,
     CalendarDemoComponent,
     DatePickerDemoComponent,
+    DateLocaleDemoComponent,
     DragulaDemoComponent,
     TilesDemoComponent,
     SlidesDemoComponent,
@@ -196,4 +198,4 @@ export function provideAppBridgeService(http) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {}        

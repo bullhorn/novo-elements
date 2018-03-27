@@ -1,0 +1,11 @@
+<div class="date-picker-demo-side-by-side">
+    <p>
+        <label>Date-Time</label> {{(dateTimeInput | date:'medium') || 'N/A'}}
+        <label>Date-Time 2</label> {{(dateTimeInput2 | date:'medium') || 'N/A'}}
+    </p>
+    <div>
+        <novo-date-time-picker-input [(ngModel)]="dateTimeInput"></novo-date-time-picker-input>
+        <novo-date-time-picker-input [(ngModel)]="dateTimeInput2" [military]="true"></novo-date-time-picker-input>
+    </div>
+    <novo-date-time-picker [(ngModel)]="dateTimeInput3"></novo-date-time-picker> 
+</div>
