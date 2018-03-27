@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.8.0"></a>
+# [2.8.0](https://github.com/bullhorn/novo-elements/compare/v2.7.0...v2.8.0) (2018-03-27)
+
+
+### Bug Fixes
+
+* **datatable:** Fixing AOT builds using DataTable ([19d4f99](https://github.com/bullhorn/novo-elements/commit/19d4f99))
+* **datatable:** Fixing AOT builds using DataTable ([5fc3194](https://github.com/bullhorn/novo-elements/commit/5fc3194))
+* **datatable:** Fixing interface ([dae0928](https://github.com/bullhorn/novo-elements/commit/dae0928))
+* **datatable:** Removing CDK workaround ([057ab1f](https://github.com/bullhorn/novo-elements/commit/057ab1f))
+* **form:** Fixing bad form scss that causes new CLI applications to break ([0ecb2b8](https://github.com/bullhorn/novo-elements/commit/0ecb2b8))
+* **picker:** Change to try fetching label before setting value ([#683](https://github.com/bullhorn/novo-elements/issues/683)) ([c02b2fc](https://github.com/bullhorn/novo-elements/commit/c02b2fc))
+* **table:** Adding extra col span if table has selection ([3ae2cf2](https://github.com/bullhorn/novo-elements/commit/3ae2cf2))
+
+
+### Features
+
+* **data-table:** Adding a data table implementation using CDK table ([2bf5364](https://github.com/bullhorn/novo-elements/commit/2bf5364))
+* **data-table:** Adding a data table implementation using CDK table ([4415d68](https://github.com/bullhorn/novo-elements/commit/4415d68))
+* **datatable:** Allowing for custom attributes in cell config ([60110dd](https://github.com/bullhorn/novo-elements/commit/60110dd))
+* **fileinput:** Allowing for edit/delete/save on file input ([7f7d4d0](https://github.com/bullhorn/novo-elements/commit/7f7d4d0))
+* **fileinput:** Allowing for upload on file input ([c4d8cad](https://github.com/bullhorn/novo-elements/commit/c4d8cad))
+
+
+
 <a name="2.7.0"></a>
 # [2.7.0](https://github.com/bullhorn/novo-elements/compare/v2.6.1...v2.7.0) (2018-03-13)
 
