@@ -51,35 +51,7 @@ export interface NovoControlConfig {
     description?: string;
     tooltip?: string;
     tooltipPosition?: string;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
-=======
-    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customButtons?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
->>>>>>> add edit btn && adjust container max-width
-=======
-    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
->>>>>>> delete custom buttons
-=======
-    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
->>>>>>> add customActions as layoutOptions
-=======
-    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
->>>>>>> fix max-width && remove customActions
-=======
-    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
->>>>>>> revert customActions
-=======
-    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
->>>>>>> fix max-width && remove customActions
-=======
-    layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
->>>>>>> revert customActions
     customControl?: any;
     customControlConfig?: any;
     military?: boolean;
