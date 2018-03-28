@@ -31,20 +31,22 @@ export class BasePickerResults {
   overlay: OverlayRef;
 
   private selectingMatches: boolean = false;
+  private scrollHandler: any;
 
   constructor(element: ElementRef, ref: ChangeDetectorRef) {
     this.element = element;
     this.ref = ref;
+    this.scrollHandler = this.onScrollDown.bind(this);
   }
 
-  @HostListener('scroll', ['$event.target'])
-  onScrollDown(target) {
-    if (target) {
-      let offset = target.offsetHeight + target.scrollTop,
-        bottom = target.scrollHeight;
+  onScrollDown(event: MouseWheelEvent) {
+    let element: any = event.target;
+    if (element) {
+      let offset = element.offsetHeight + element.scrollTop,
+        bottom = element.scrollHeight - 300;
       if (offset >= bottom) {
         event.stopPropagation();
-        if (!this.lastPage && !this.config.disableInfiniteScroll) {
+        if (!this.lastPage && !this.isLoading) {
           this.processSearch();
         }
       }
@@ -84,7 +86,15 @@ export class BasePickerResults {
         }
         this.isLoading = false;
         this.ref.markForCheck();
-        setTimeout(() => this.overlay.updatePosition()); // @bkimball: This was added for Dylan Schulte, 9.18.2017 4:14PM EST, you're welcome!
+        setTimeout(() => {
+          this.overlay.updatePosition();
+          if (this.config.enableInfiniteScroll) {
+            let element: Element = this.getListElement();
+            if (element) {
+              element.addEventListener('scroll', this.scrollHandler);
+            }
+          }
+        }, 0); // @bkimball: This was added for Dylan Schulte, 9.18.2017 4:14PM EST, you're welcome!
       },
       (err) => {
         this.hasError = this.term && this.term.length !== 0;
