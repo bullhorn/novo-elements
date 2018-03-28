@@ -1,21 +1,30 @@
 import { EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 import { IDataTableChangeEvent, IDataTableSortFilter } from '../interfaces';
 
-export class DataTableState {
+export class DataTableState<T> {
+  public selectionSource = new Subject();
+  public paginationSource = new Subject();
+  public sortFilterSource = new Subject();
+  public resetSource = new Subject();
+
   sort: { id: string; value: string } = undefined;
   filter: { id: string; value: string } = undefined;
   page: number = 0;
   pageSize: number = undefined;
   globalSearch: string = undefined;
-  selectedRows: Map<string, object> = new Map<string, object>();
+  selectedRows: Map<string, T> = new Map<string, T>();
   outsideFilter: any;
 
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
-  onReset: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   get userFiltered(): boolean {
     return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter);
+  }
+
+  get selected(): T[] {
+    return Array.from(this.selectedRows.values());
   }
 
   public reset(fireUpdate: boolean = true, persistUserFilters?: boolean): void {
@@ -26,7 +35,7 @@ export class DataTableState {
     }
     this.page = 0;
     this.selectedRows.clear();
-    this.onReset.emit(true);
+    this.resetSource.next();
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,
@@ -34,5 +43,17 @@ export class DataTableState {
         globalSearch: this.globalSearch,
       });
     }
+  }
+
+  public onSelectionChange(): void {
+    this.selectionSource.next();
+  }
+
+  public onPaginationChange(): void {
+    this.paginationSource.next();
+  }
+
+  public onSortFilterChange(): void {
+    this.sortFilterSource.next();
   }
 }

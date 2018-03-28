@@ -14,17 +14,14 @@ import { NovoCommonModule } from '../common/common.module';
 import { NovoSelectModule } from '../select/Select.module';
 
 import { NovoDataTable } from './data-table.component';
-import { NovoDataTableActionCell } from './cells/data-table-action-cell.component';
 import { NovoDataTableCell } from './cells/data-table-cell.component';
 import { NovoDataTableCheckboxCell } from './cells/data-table-checkbox-cell.component';
 import { NovoDataTableHeaderRow } from './rows/data-table-header-row.component';
 import { NovoDataTableRow } from './rows/data-table-row.component';
 import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
 import { NovoDataTableCheckboxHeaderCell } from './cell-headers/data-table-checkbox-header-cell.component';
-import { NovoDataTableEmptyHeaderCell } from './cell-headers/data-table-empty-header-cell.directive';
 import { NovoDataTableHeaderCell } from './cell-headers/data-table-header-cell.directive';
 import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
-import { NovoDataTableSelection } from './selection/data-table-selection.directive';
 import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
 import { DataTableState } from './state/data-table-state.service';
 import {
@@ -71,8 +68,6 @@ import { NovoDataTableRowDef } from './rows/defs/data-table-row-def.directive';
     NovoDataTableRowDef,
     NovoDataTableCellHeader,
     NovoDataTableSortFilter,
-    NovoDataTableActionCell,
-    NovoDataTableEmptyHeaderCell,
     NovoDataTableHeaderCell,
     NovoDataTableCell,
     NovoDataTableHeaderRow,
@@ -80,7 +75,6 @@ import { NovoDataTableRowDef } from './rows/defs/data-table-row-def.directive';
     NovoDataTablePagination,
     NovoDataTableCheckboxCell,
     NovoDataTableCheckboxHeaderCell,
-    NovoDataTableSelection,
     NovoDataTable,
   ],
   providers: [DataTableState],

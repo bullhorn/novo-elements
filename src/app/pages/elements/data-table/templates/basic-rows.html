@@ -10,11 +10,14 @@
     <novo-dropdown side="right">
       <button theme="primary"
               icon="collapse"
-              inverse>Actions ({{ basic.state.selectedRows.size }})</button>
+              inverse>
+        <span *ngIf="basic.state.selected.length === 0">Actions</span>
+        <span *ngIf="basic.state.selected.length !== 0">{{ basic.state.selected.length }}!</span>
+      </button>
       <list>
         <item>Action 1</item>
         <item>Action 2</item>
-        <item [disabled]="basic.state.selectedRows.size === 0">Action 3</item>
+        <item [disabled]="basic.state.selected.length === 0">Action 3</item>
       </list>
     </novo-dropdown>
   </ng-template>

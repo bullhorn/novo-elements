@@ -8,6 +8,8 @@ import {
   OnInit,
   Output,
   HostBinding,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -64,14 +66,14 @@ const MAX_PAGES_DISPLAYED = 5;
         <span class="spacer"></span>
         <ul class="pager" data-automation-id="pager">
             <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ 'disabled': page === 0 }"><i class="bhi-previous" data-automation-id="pager-previous"></i></li>
-            <li class="page" [ngClass]="{active: p.number === page + 1}" *ngFor="let p of pages" (click)="selectPage(p.number)">{{ p.text }}</li>
+            <li class="page" [ngClass]="{active: p.number === page + 1}" *ngFor="let p of pages" (click)="selectPage(p.number - 1)">{{ p.text }}</li>
             <li class="page" (click)="selectPage(page + 1)" [ngClass]="{ 'disabled': page + 1 === totalPages }"><i class="bhi-next" data-automation-id="pager-next"></i></li>
         </ul>
       </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoDataTablePagination implements OnInit, OnDestroy {
+export class NovoDataTablePagination<T> implements OnInit, OnDestroy, OnChanges {
   @HostBinding('class')
   @Input()
   theme: string = 'standard';
@@ -88,18 +90,6 @@ export class NovoDataTablePagination implements OnInit, OnDestroy {
     this.state.page = this._page;
   }
   _page: number = 0;
-
-  @Input()
-  get length(): number {
-    return this._length;
-  }
-  set length(length: number) {
-    this._length = length;
-    this.changeDetectorRef.markForCheck();
-    this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
-    this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
-  }
-  _length: number = 0;
 
   @Input()
   get pageSize(): number {
@@ -122,25 +112,41 @@ export class NovoDataTablePagination implements OnInit, OnDestroy {
   }
   private _pageSizeOptions: any[] = [];
 
+  @Input() totalLength: number;
+  @Input() currentLength: number;
+  @Input() userFiltered: boolean;
+
   @Output() pageChange = new EventEmitter<IDataTablePaginationEvent>();
 
   public displayedPageSizeOptions: { value: string; label: string }[];
   public longRangeLabel: string;
   public shortRangeLabel: string;
   public pages: { number: number; text: string; active: boolean }[];
+  public length: number = 0;
 
   private resetSubscription: Subscription;
   private totalPages: number;
   private _initialized: boolean;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, public labels: NovoLabelService, private state: DataTableState) {
-    if (state && state.onReset) {
-      this.resetSubscription = this.state.onReset.subscribe((clear: boolean) => {
-        if (clear) {
-          this.page = 0;
-          this.changeDetectorRef.markForCheck();
-        }
-      });
+  constructor(private changeDetectorRef: ChangeDetectorRef, public labels: NovoLabelService, private state: DataTableState<T>) {
+    this.resetSubscription = this.state.resetSource.subscribe(() => {
+      this.page = 0;
+      this.changeDetectorRef.markForCheck();
+    });
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['totalLength'] || changes['currentLength'] || changes['userFiltered']) {
+      if (this.userFiltered) {
+        this.length = this.currentLength;
+      } else {
+        this.length = this.totalLength;
+      }
+      this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
+      this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
+      this.totalPages = this.calculateTotalPages();
+      this.pages = this.getPages(this.page, this.totalPages);
+      this.changeDetectorRef.markForCheck();
     }
   }
 
@@ -231,6 +237,7 @@ export class NovoDataTablePagination implements OnInit, OnDestroy {
     this.totalPages = this.calculateTotalPages();
     this.pages = this.getPages(this.page, this.totalPages);
     this.state.updates.next(event);
+    this.state.onPaginationChange();
   }
 
   private calculateTotalPages() {
