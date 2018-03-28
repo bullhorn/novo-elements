@@ -133,6 +133,16 @@ export class NovoPickerElement implements OnInit {
             err => this.hideResults(err));
     }
 
+    private fetchLabel(value: any): void {
+      this.config.getLabels(value).then((result) => {
+        if (result) {
+          this.term = result.length ? result[0].label || '' : result.label || '';
+        } else {
+          this.term = value;
+        }
+      });
+    }
+
     private onDebouncedKeyup(event: Event) {
         if ([KeyCodes.ESC, KeyCodes.UP, KeyCodes.DOWN, KeyCodes.ENTER, KeyCodes.TAB].includes(event['keyCode'])) {
             return;
@@ -306,22 +316,21 @@ export class NovoPickerElement implements OnInit {
         if (this.clearValueOnSelect) {
             this.term = '';
         } else {
-            if (typeof this.config.getLabels === 'function') {
-                this.config.getLabels(value).then((result) => {
-                    if (result) {
-                        this.term = result.length ? result[0].label || '' : result.label || '';
-                    } else {
-                        this.term = value;
-                    }
-                });
-            } else if (typeof value === 'string') {
-                this.term = value;
+            if (typeof value === 'string') {
+                // Sometimes ID's can be strings; Here, we'd like to get the labels for those ID's instead of just showing the ID
+                if (!!parseInt(value) && typeof this.config.getLabels === 'function') {
+                  this.fetchLabel(value);
+                } else {
+                  this.term = value;
+                }
             } else if (value && value.label) {
                 this.term = value.label;
             } else if (value && value.firstName) {
                 this.term = `${value.firstName} ${value.lastName}`;
             } else if (value && value.name) {
                 this.term = value.name;
+            } else if (typeof this.config.getLabels === 'function') {
+              this.fetchLabel(value);
             } else {
                 this.term = value || '';
             }
