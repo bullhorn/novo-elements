@@ -4,15 +4,10 @@ import { Subject } from 'rxjs/Subject';
 import { IDataTableChangeEvent, IDataTableSortFilter } from '../interfaces';
 
 export class DataTableState<T> {
-  private selectionSource = new Subject();
-  private paginationSource = new Subject();
-  private sortFilterSource = new Subject();
-  private resetSource = new Subject();
-
-  public selectionSource$ = this.selectionSource.asObservable();
-  public paginationSource$ = this.paginationSource.asObservable();
-  public sortFilterSource$ = this.sortFilterSource.asObservable();
-  public resetSource$ = this.resetSource.asObservable();
+  public selectionSource = new Subject();
+  public paginationSource = new Subject();
+  public sortFilterSource = new Subject();
+  public resetSource = new Subject();
 
   sort: { id: string; value: string } = undefined;
   filter: { id: string; value: string } = undefined;

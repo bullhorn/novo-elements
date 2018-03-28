@@ -129,7 +129,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy, OnChanges 
   private _initialized: boolean;
 
   constructor(private changeDetectorRef: ChangeDetectorRef, public labels: NovoLabelService, private state: DataTableState<T>) {
-    this.resetSubscription = this.state.resetSource$.subscribe(() => {
+    this.resetSubscription = this.state.resetSource.subscribe(() => {
       this.page = 0;
       this.changeDetectorRef.markForCheck();
     });

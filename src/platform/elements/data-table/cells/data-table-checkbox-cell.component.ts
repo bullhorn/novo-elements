@@ -50,11 +50,11 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
     renderer.addClass(elementRef.nativeElement, `novo-checkbox-column-${columnDef.cssClassFriendlyName}`);
     renderer.addClass(elementRef.nativeElement, 'novo-data-table-checkbox-cell');
 
-    this.selectionSubscription = this.dataTable.state.selectionSource$.subscribe(() => {
+    this.selectionSubscription = this.dataTable.state.selectionSource.subscribe(() => {
       this.checked = this.dataTable.isSelected(this.row);
       this.ref.markForCheck();
     });
-    this.resetSubscription = this.dataTable.state.resetSource$.subscribe(() => {
+    this.resetSubscription = this.dataTable.state.resetSource.subscribe(() => {
       this.checked = false;
       this.ref.markForCheck();
     });

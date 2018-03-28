@@ -46,15 +46,15 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     renderer.addClass(elementRef.nativeElement, `novo-checkbox-column-${columnDef.cssClassFriendlyName}`);
     renderer.addClass(elementRef.nativeElement, 'novo-data-table-checkbox-header-cell');
 
-    this.selectionSubscription = this.dataTable.state.selectionSource$.subscribe(() => {
+    this.selectionSubscription = this.dataTable.state.selectionSource.subscribe(() => {
       this.checked = this.dataTable.allCurrentRowsSelected();
       this.ref.markForCheck();
     });
-    this.paginationSubscription = this.dataTable.state.paginationSource$.subscribe(() => {
+    this.paginationSubscription = this.dataTable.state.paginationSource.subscribe(() => {
       this.checked = this.dataTable.allCurrentRowsSelected();
       this.ref.markForCheck();
     });
-    this.resetSubscription = this.dataTable.state.resetSource$.subscribe(() => {
+    this.resetSubscription = this.dataTable.state.resetSource.subscribe(() => {
       this.checked = false;
       this.ref.markForCheck();
     });
