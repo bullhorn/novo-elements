@@ -59,6 +59,7 @@ import {
   FormGroupedDemoComponent,
   ValueDemoComponent,
   AceEditorDemoComponent,
+  ConfigureColumnsModal,
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent, SecurityDemoComponent } from './pages/utils';
 import {
@@ -152,6 +153,7 @@ export function provideAppBridgeService(http) {
     ValueDemoComponent,
     AceEditorDemoComponent,
     SecurityDemoComponent,
+    ConfigureColumnsModal,
   ],
   imports: [
     // NG2
@@ -195,7 +197,8 @@ export function provideAppBridgeService(http) {
     CustomPickerResults,
     CustomQuickNoteResults,
     CustomDemoComponent,
+    ConfigureColumnsModal,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}        
+export class AppModule {}

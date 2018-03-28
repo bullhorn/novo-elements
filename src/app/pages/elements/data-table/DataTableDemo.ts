@@ -19,6 +19,9 @@ import {
   IDataTableSearchOptions,
   IDataTableService,
   GroupedMultiPickerResults,
+  NovoModalRef,
+  NovoModalParams,
+  NovoModalService,
 } from '../../../../platform/index';
 
 const template = `
@@ -33,6 +36,8 @@ const template = `
     <novo-tiles [options]="paginationTypeOptions" (onChange)="switchPaginationType($event)" [(ngModel)]="loadedPaginationType"></novo-tiles>
     <h6>Toggle Global Search</h6>
     <novo-tiles [options]="globalSearchOptions" (onChange)="toggleGlobalSearch($event)" [(ngModel)]="loadedGlobalSearch"></novo-tiles>
+    <h6>Configure Columns</h6>
+    <button theme="primary" (click)="configureColumns()">Configure Columns</button>
 
     <br/>
     <br/>
@@ -68,6 +73,54 @@ interface MockData {
 }
 
 @Component({
+  selector: 'data-table-configure-columns-modal',
+  template: `
+    <novo-modal>
+      <header title="Configure Columns"
+              theme="contact">
+        <utils>
+          <util-action icon="times"
+                      (click)="close()"></util-action>
+        </utils>
+      </header>
+      <section>
+        <novo-list direction="vertical">
+          <novo-list-item *ngFor="let column of columns">
+            <item-header>
+                  <item-title>{{ column.id }}</item-title>
+                  <item-header-end>
+                    <novo-checkbox [(ngModel)]="column.enabled"></novo-checkbox>
+                  </item-header-end>
+              </item-header>
+          </novo-list-item>
+        </novo-list>
+      </section>
+      <button theme="standard"
+              (click)="close()">Cancel</button>
+      <button theme="primary"
+              color="success"
+              icon="check"
+              (click)="save()">Save</button>
+    </novo-modal>
+  `,
+})
+export class ConfigureColumnsModal {
+  public columns: IDataTableColumn<MockData>;
+
+  constructor(private modalRef: NovoModalRef, private params: NovoModalParams) {
+    this.columns = params['columns'];
+  }
+
+  public close(): void {
+    this.modalRef.close();
+  }
+
+  public save() {
+    this.modalRef.close(this.columns);
+  }
+}
+
+@Component({
   selector: 'data-table-demo',
   template: template,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -88,8 +141,32 @@ export class DataTableDemoComponent implements OnInit {
   // Shared configuration
   public sharedColumns: IDataTableColumn<MockData>[] = [
     {
+      id: 'preview',
+      type: 'action',
+      enabled: true,
+      handlers: {
+        click: this.log.bind(this),
+      },
+      action: {
+        icon: 'preview',
+      },
+    },
+    {
+      id: 'actions',
+      type: 'action',
+      enabled: true,
+      action: {
+        options: [
+          { label: 'Action 1', handlers: { click: this.log.bind(this) } },
+          { label: 'Action 2', handlers: { click: this.log.bind(this) }, disabled: true },
+          { label: 'Action 3', handlers: { click: this.log.bind(this) }, disabledFunc: this.checkDisabled.bind(this) },
+        ],
+      },
+    },
+    {
       id: 'id',
       label: 'ID',
+      enabled: true,
       type: 'string',
       filterable: true,
       sortable: true,
@@ -97,7 +174,8 @@ export class DataTableDemoComponent implements OnInit {
     {
       id: 'embeddedObj',
       label: 'Embedded',
-      property: 'embeddedObj.id',
+      enabled: true,
+      property: 'id',
       type: 'link',
       handlers: {
         click: this.log.bind(this),
@@ -108,6 +186,7 @@ export class DataTableDemoComponent implements OnInit {
     {
       id: 'date',
       label: 'Date',
+      enabled: false,
       type: 'date',
       filterable: {
         type: 'date',
@@ -118,16 +197,19 @@ export class DataTableDemoComponent implements OnInit {
     {
       id: 'dateTime',
       label: 'DateTime',
+      enabled: false,
       type: 'datetime',
     },
     {
       id: 'time',
       label: 'Time',
+      enabled: false,
       type: 'time',
     },
     {
       id: 'money',
       label: 'Money',
+      enabled: false,
       type: 'currency',
       filterable: true,
       sortable: true,
@@ -135,12 +217,14 @@ export class DataTableDemoComponent implements OnInit {
     {
       id: 'name',
       label: 'Name',
+      enabled: true,
       type: 'string',
       template: 'custom',
     },
     {
       id: 'status',
       label: 'Status',
+      enabled: true,
       type: 'string',
       filterable: true,
       sortable: true,
@@ -148,6 +232,7 @@ export class DataTableDemoComponent implements OnInit {
     {
       id: 'enabled',
       label: 'Enabled',
+      enabled: true,
       type: 'string',
       sortable: true,
       filterable: {
@@ -156,18 +241,9 @@ export class DataTableDemoComponent implements OnInit {
       },
     },
     {
-      id: 'preview',
-      type: 'action',
-      handlers: {
-        click: this.log.bind(this),
-      },
-      action: {
-        icon: 'preview',
-      },
-    },
-    {
       id: 'edit',
       type: 'action',
+      enabled: true,
       disabled: true,
       handlers: {
         click: this.log.bind(this),
@@ -176,32 +252,8 @@ export class DataTableDemoComponent implements OnInit {
         icon: 'edit',
       },
     },
-    {
-      id: 'actions',
-      type: 'action',
-      action: {
-        options: [
-          { label: 'Action 1', handlers: { click: this.log.bind(this) } },
-          { label: 'Action 2', handlers: { click: this.log.bind(this) }, disabled: true },
-          { label: 'Action 3', handlers: { click: this.log.bind(this) }, disabledFunc: this.checkDisabled.bind(this) },
-        ],
-      },
-    },
   ];
-  public sharedDisplayColumns = [
-    'selection',
-    'preview',
-    'actions',
-    'id',
-    'name',
-    'status',
-    'embeddedObj',
-    'date',
-    'dateTime',
-    'time',
-    'money',
-    'edit',
-  ];
+  public sharedDisplayColumns = ['selection', 'preview', 'actions', 'id', 'name', 'status', 'embeddedObj', 'edit'];
   public sharedPaginationOptions: IDataTablePaginationOptions = {
     theme: 'standard',
     pageSize: 10,
@@ -227,7 +279,7 @@ export class DataTableDemoComponent implements OnInit {
   private staticDataSet2: MockData[] = [];
   private staticDataSet3: MockData[] = [];
 
-  constructor(private ref: ChangeDetectorRef) {
+  constructor(private ref: ChangeDetectorRef, private modalService: NovoModalService) {
     for (let i = 0; i < 1000; i++) {
       let day = i < 500 ? dateFns.subDays(new Date(), i) : dateFns.addDays(new Date(), i - 500);
       this.staticDataSet1.push({
@@ -255,7 +307,7 @@ export class DataTableDemoComponent implements OnInit {
     }
     this.basicRows = [...this.staticDataSet1];
     this.basicService = new StaticDataTableService([...this.staticDataSet1]);
-    this.remoteService = new RemoteMockDataService([...this.staticDataSet1]);
+    this.remoteService = new RemoteMockDataService([...this.staticDataSet1.slice(0, 10)]);
   }
 
   public ngOnInit(): void {}
@@ -295,6 +347,18 @@ export class DataTableDemoComponent implements OnInit {
 
   public checkDisabled(row: MockData): boolean {
     return true;
+  }
+
+  public configureColumns(): void {
+    this.modalService
+      .open(ConfigureColumnsModal, { columns: this.sharedColumns })
+      .onClosed.then((columns: IDataTableColumn<MockData>[]) => {
+        if (columns) {
+          let enabledColumns = columns.filter((column: IDataTableColumn<MockData>) => column.enabled);
+          this.sharedDisplayColumns = ['selection', ...enabledColumns.map((column: IDataTableColumn<MockData>) => column.id)];
+          this.ref.markForCheck();
+        }
+      });
   }
 }
 

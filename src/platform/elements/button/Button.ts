@@ -1,22 +1,23 @@
 // NG2
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    selector: 'button[theme]',
-    host: {
-        '[attr.theme]': 'theme',
-        '[attr.color]': 'color',
-        '[attr.icon]': 'icon',
-        '[attr.loading]': 'loading'
-    },
-    template: `
+  selector: 'button[theme]',
+  host: {
+    '[attr.theme]': 'theme',
+    '[attr.color]': 'color',
+    '[attr.icon]': 'icon',
+    '[attr.loading]': 'loading',
+    '[attr.side]': 'side',
+  },
+  template: `
         <div class="flex-wrapper">
             <!--Left Icon-->
-            <i *ngIf="icon && iconClass && leftSide" [ngClass]="iconClass"></i>
+            <i *ngIf="icon && side === 'left' && !loading" [ngClass]="icon"></i>
             <!--Transcluded Content-->
             <ng-content></ng-content>
             <!--Right Icon-->
-            <i *ngIf="icon && iconClass && rightSide" [ngClass]="iconClass"></i>
+            <i *ngIf="icon && side === 'right' && !loading" [ngClass]="icon"></i>
             <!--Loading-->
             <i *ngIf="loading" class="loading">
                 <svg version="1.1"
@@ -32,24 +33,21 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
                 </svg>
             </i>
         </div>
-    `
+    `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoButtonElement implements OnChanges {
-    @Input() icon: string;
-    @Input() color: string;
-    @Input() side: string;
-    @Input() theme: string;
-    @Input() loading: boolean;
+export class NovoButtonElement {
+  @Input() color: string;
+  @Input() side: string = 'right';
+  @Input() theme: string;
+  @Input() loading: boolean;
+  @Input()
+  set icon(icon: string) {
+    this._icon = `bhi-${icon}`;
+  }
+  get icon(): string {
+    return this._icon;
+  }
 
-    leftSide: boolean = false;
-    rightSide: boolean = true;
-    iconClass: string;
-
-    ngOnChanges(changes?: SimpleChanges) {
-        this.iconClass = (this.icon && !this.loading) ? `bhi-${this.icon}` : '';
-        if (this.side !== null && this.theme !== 'primary') {
-            this.leftSide = (this.side === 'left');
-            this.rightSide = !this.leftSide;
-        }
-    }
+  private _icon: string;
 }

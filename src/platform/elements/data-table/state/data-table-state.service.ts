@@ -3,7 +3,6 @@ import { EventEmitter } from '@angular/core';
 import { IDataTableChangeEvent, IDataTableSortFilter } from '../interfaces';
 
 export class DataTableState {
-  id: number = Math.random();
   sort: { id: string; value: string } = undefined;
   filter: { id: string; value: string } = undefined;
   page: number = 0;

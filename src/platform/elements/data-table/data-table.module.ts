@@ -14,7 +14,6 @@ import { NovoCommonModule } from '../common/common.module';
 import { NovoSelectModule } from '../select/Select.module';
 
 import { NovoDataTable } from './data-table.component';
-import { NovoDataTableValue } from './data-table-value.component';
 import { NovoDataTableActionCell } from './cells/data-table-action-cell.component';
 import { NovoDataTableCell } from './cells/data-table-cell.component';
 import { NovoDataTableCheckboxCell } from './cells/data-table-checkbox-cell.component';
@@ -28,6 +27,14 @@ import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
 import { NovoDataTableSelection } from './selection/data-table-selection.directive';
 import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
 import { DataTableState } from './state/data-table-state.service';
+import {
+  DataTableInterpolatePipe,
+  DateTableDateRendererPipe,
+  DateTableCurrencyRendererPipe,
+  DateTableDateTimeRendererPipe,
+  DateTableNumberRendererPipe,
+  DateTableTimeRendererPipe,
+} from './data-table.pipes';
 
 import { NovoDataTableHeaderCellDef } from './cell-headers/defs/data-table-header-cell-def.directive';
 import { NovoDataTableColumnDef } from './cells/defs/data-table-column-def.directive';
@@ -51,6 +58,12 @@ import { NovoDataTableRowDef } from './rows/defs/data-table-row-def.directive';
     NovoSelectModule,
   ],
   declarations: [
+    DataTableInterpolatePipe,
+    DateTableDateRendererPipe,
+    DateTableCurrencyRendererPipe,
+    DateTableDateTimeRendererPipe,
+    DateTableNumberRendererPipe,
+    DateTableTimeRendererPipe,
     NovoDataTableHeaderCellDef,
     NovoDataTableColumnDef,
     NovoDataTableCellDef,
@@ -69,9 +82,16 @@ import { NovoDataTableRowDef } from './rows/defs/data-table-row-def.directive';
     NovoDataTableCheckboxHeaderCell,
     NovoDataTableSelection,
     NovoDataTable,
-    NovoDataTableValue,
   ],
   providers: [DataTableState],
-  exports: [NovoDataTableValue, NovoDataTable],
+  exports: [
+    NovoDataTable,
+    DataTableInterpolatePipe,
+    DateTableDateRendererPipe,
+    DateTableCurrencyRendererPipe,
+    DateTableDateTimeRendererPipe,
+    DateTableNumberRendererPipe,
+    DateTableTimeRendererPipe,
+  ],
 })
 export class NovoDataTableModule {}

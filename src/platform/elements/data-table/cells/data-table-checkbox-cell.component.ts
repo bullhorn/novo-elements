@@ -10,7 +10,7 @@ import { NovoDataTableSelection } from '../selection/data-table-selection.direct
         <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox>
     `,
 })
-export class NovoDataTableCheckboxCell extends CdkCell implements OnDestroy, OnInit {
+export class NovoDataTableCheckboxCell extends CdkCell implements OnInit, OnDestroy {
   @HostBinding('attr.role') public role = 'gridcell';
 
   @Input() public row: any;

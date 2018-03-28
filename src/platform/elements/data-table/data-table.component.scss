@@ -52,7 +52,6 @@ cdk-table {
   flex-direction: row;
   flex-wrap: no-wrap;
   .novo-data-table-header-cell,
-  novo-data-table-empty-header-cell,
   .novo-data-table-checkbox-header-cell {
     border-bottom: 1px solid $off-white;
   }
@@ -87,6 +86,52 @@ cdk-table {
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+  &.dropdown-cell,
+  &.button-cell {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 5px;
+    novo-dropdown {
+      button {
+        padding: 5px;
+        &:hover,
+        &:active,
+        &:focus {
+          background: rgba(0, 0, 0, 0.1) !important;
+        }
+      }
+    }
+  }
+  &.button-cell {
+    min-width: 40px;
+    max-width: 40px;
+  }
+  &.dropdown-cell {
+    min-width: 93px;
+    max-width: 93px;
+    &.empty {
+      min-width: 39px;
+      max-width: 39px;
+    }
+  }
+  i.data-table-icon {
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 0.5em;
+    border-radius: 3px;
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+    &:active {
+      background: rgba(0, 0, 0, 0.25);
+    }
+  }
 }
 
 .novo-data-table-header-cell {
@@ -94,7 +139,8 @@ cdk-table {
   white-space: nowrap;
   display: flex;
   align-items: center;
-  + novo-data-table-empty-header-cell {
+  + .button-header-cell,
+  + .dropdown-header-cell {
     border-left: none;
   }
   > label {
@@ -113,35 +159,16 @@ cdk-table {
   novo-dropdown[side='right'] {
     display: inline-block;
   }
-}
-
-novo-data-table-empty-header-cell {
   &.button-header-cell {
     min-width: 40px;
+    max-width: 40px;
   }
   &.dropdown-header-cell {
     min-width: 93px;
+    max-width: 93px;
     &.empty {
       min-width: 39px;
-    }
-  }
-}
-
-.novo-data-table-button-cell,
-.novo-data-table-dropdown-cell {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 5px;
-  novo-dropdown {
-    button {
-      padding: 5px;
-      &:hover,
-      &:active,
-      &:focus {
-        background: rgba(0, 0, 0, 0.1) !important;
-      }
+      max-width: 39px;
     }
   }
 }
@@ -156,6 +183,11 @@ novo-data-table-empty-header-cell {
   padding: 0 10px;
   > novo-checkbox {
     margin-top: -4px;
+    label {
+      i {
+        animation: none !important;
+      }
+    }
   }
 }
 

@@ -6,7 +6,7 @@ import { IDataTableColumn } from '../interfaces';
 @Component({
   selector: 'novo-data-table-cell',
   template: `
-        <ng-container *ngTemplateOutlet="template; context: {$implicit: row, col: column}"></ng-container>
+          <ng-container *ngTemplateOutlet="template; context: {$implicit: row, col: column}"></ng-container>
     `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

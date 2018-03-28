@@ -12,6 +12,8 @@ import {
   QueryList,
   ViewChildren,
   TemplateRef,
+  Pipe,
+  PipeTransform,
 } from '@angular/core';
 import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -67,16 +69,8 @@ import { StaticDataTableService } from './services/static-data-table.service';
                         <novo-data-table-checkbox-cell *novoDataTableCellDef="let row; let i = index" [row]="row" [index]="i"></novo-data-table-checkbox-cell>
                     </ng-container>
                     <ng-container *ngFor="let column of columns;trackBy: trackColumnsBy" [novoDataTableColumnDef]="column.id">
-                        <ng-container [ngSwitch]="column.type">
-                            <ng-container *ngSwitchCase="'action'">
-                              <novo-data-table-empty-header-cell [column]="column" [class.empty]="!column?.label" [class.button-header-cell]="!column?.action?.options" [class.dropdown-header-cell]="column?.action?.options" *novoDataTableHeaderCellDef></novo-data-table-empty-header-cell>
-                              <novo-data-table-action-cell *novoDataTableCellDef="let row; let i = index" [row]="row" [column]="column"></novo-data-table-action-cell>
-                            </ng-container>
-                            <ng-container *ngSwitchDefault>
-                              <novo-data-table-header-cell *novoDataTableHeaderCellDef [column]="column" [novo-data-table-cell-config]="column" [defaultSort]="defaultSort"></novo-data-table-header-cell>
-                              <novo-data-table-cell *novoDataTableCellDef="let row" [column]="column" [row]="row" [template]="columnToTemplate[column.id]"></novo-data-table-cell>
-                            </ng-container>
-                        </ng-container>
+                      <novo-data-table-header-cell *novoDataTableHeaderCellDef [column]="column" [novo-data-table-cell-config]="column" [defaultSort]="defaultSort" [class.empty]="column?.type === 'action' && !column?.label" [class.button-header-cell]="column?.type === 'action' && !column?.action?.options" [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-header-cell>
+                      <novo-data-table-cell *novoDataTableCellDef="let row" [column]="column" [row]="row" [template]="columnToTemplate[column.id]" [class.empty]="column?.type === 'action' && !column?.label" [class.button-cell]="column?.type === 'action' && !column?.action?.options" [class.dropdown-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-cell>
                     </ng-container>
                     <novo-data-table-header-row *novoDataTableHeaderRowDef="displayedColumns" data-automation-id="novo-data-table-header-row"></novo-data-table-header-row>
                     <novo-data-table-row *novoDataTableRowDef="let row; columns: displayedColumns;" [id]="name + '-' + row[rowIdentifier]" [dataAutomationId]="'data-automation-id-' + row[rowIdentifier]"></novo-data-table-row>
@@ -95,10 +89,57 @@ import { StaticDataTableService } from './services/static-data-table.service';
         </div>
 
          <!-- DEFAULT CELL TEMPLATE -->
-        <ng-template novoTemplate="defaultCellTemplate"
+        <ng-template novoTemplate="stringCellTemplate"
               let-row
               let-col="col">
-            <novo-data-table-value [column]="col" [row]="row"></novo-data-table-value>
+              <span>{{ row[col.id] | dataTableInterpolate:col }}</span>
+        </ng-template>
+        <ng-template novoTemplate="dateCellTemplate"
+              let-row
+              let-col="col">
+              <span>{{ row[col.id] | dataTableInterpolate:col | dataTableDateRenderer:col }}</span>
+        </ng-template>
+        <ng-template novoTemplate="datetimeCellTemplate"
+              let-row
+              let-col="col">
+              <span>{{ row[col.id] | dataTableInterpolate:col | dataTableDateTimeRenderer:col }}</span>
+        </ng-template>
+        <ng-template novoTemplate="timeCellTemplate"
+              let-row
+              let-col="col">
+              <span>{{ row[col.id] | dataTableInterpolate:col | dataTableTimeRenderer:col }}</span>
+        </ng-template>
+        <ng-template novoTemplate="currencyCellTemplate"
+              let-row
+              let-col="col">
+              <span>{{ row[col.id] | dataTableInterpolate:col | dataTableCurrencyRenderer:col }}</span>
+        </ng-template>
+        <ng-template novoTemplate="numberCellTemplate"
+              let-row
+              let-col="col">
+              <span>{{ row[col.id] | dataTableInterpolate:col | dataTableNumberRenderer:col }}</span>
+        </ng-template>
+        <ng-template novoTemplate="linkCellTemplate"
+              let-row
+              let-col="col">
+              <a (click)="col.handlers?.click({originalEvent: $event, row: row})">{{ row[col.id] | dataTableInterpolate:col }}</a>
+        </ng-template>
+        <ng-template novoTemplate="buttonCellTemplate"
+              let-row
+              let-col="col">
+              <i class="bhi-{{ col?.action?.icon }} data-table-icon" (click)="col.handlers?.click({ originalEvent: $event, row: row })" [class.disabled]="isDisabled(col, row)"></i>
+        </ng-template>
+        <ng-template novoTemplate="dropdownCellTemplate"
+              let-row
+              let-col="col">
+              <novo-dropdown appendToBody="true" parentScrollSelector=".novo-data-table" containerClass="novo-data-table-dropdown">
+                <button type="button" theme="dialogue" icon="collapse" inverse>{{ col.label }}</button>
+                <list>
+                    <item *ngFor="let option of col?.action?.options" (action)="option.handlers.click({ originalEvent: $event?.originalEvent, row: row })" [disabled]="isDisabled(option, row)">
+                        <span [attr.data-automation-id]="option.label">{{ option.label }}</span>
+                    </item>
+                </list>
+            </novo-dropdown>
         </ng-template>
         <ng-template novoTemplate="defaultNoResultsMessage">
             <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
@@ -258,6 +299,16 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     return item.id;
   }
 
+  public isDisabled(check: any, row: T): boolean {
+    if (check.disabled === true) {
+      return true;
+    }
+    if (check.disabledFunc) {
+      return check.disabledFunc(row);
+    }
+    return false;
+  }
+
   private configureColumns(): void {
     if (this.columns && this.columns.length !== 0 && Object.keys(this.templates).length !== 0) {
       // Figure the column templates
@@ -272,7 +323,15 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
           templateName = column.id;
         } else {
           // Default to the defaulCellTemplate
-          templateName = 'defaultCellTemplate';
+          if (column.type === 'action') {
+            if (column.action && column.action.options) {
+              templateName = 'dropdownCellTemplate';
+            } else {
+              templateName = 'buttonCellTemplate';
+            }
+          } else {
+            templateName = `${column.type}CellTemplate`;
+          }
         }
         this.columnToTemplate[column.id] = this.templates[templateName];
       });
