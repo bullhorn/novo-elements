@@ -83,9 +83,7 @@ cdk-table {
 
 .novo-data-table-cell {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   &.dropdown-cell,
   &.button-cell {
     display: flex;
@@ -146,7 +144,6 @@ cdk-table {
   > label {
     display: inline-block;
     padding-right: 10px;
-    cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
     &.sort-disabled {
@@ -181,13 +178,23 @@ cdk-table {
   flex-direction: column;
   max-width: 40px;
   padding: 0 10px;
-  > novo-checkbox {
-    margin-top: -4px;
-    label {
-      i {
-        animation: none !important;
+  div.data-table-checkbox {
+    display: flex;
+    cursor: pointer;
+    i {
+      cursor: pointer;
+      &.bhi-checkbox-empty {
+        color: #d2d2d2;
+      }
+      &.bhi-checkbox-filled {
+        color: $positive;
       }
     }
+  }
+  input {
+    appearance: none !important;
+    height: 0 !important;
+    border: none !important;
   }
 }
 
@@ -415,18 +422,17 @@ novo-data-table-pagination {
     .pager {
       list-style-type: none;
       user-select: none;
+      display: flex;
       .page {
-        display: inline-block;
-        padding: 0 10px;
-        line-height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
         border-radius: 2px;
-        text-align: center;
         list-style-type: none;
         cursor: pointer;
         color: $company;
-        &:last-child {
-          padding-right: 0;
-        }
         &.disabled {
           opacity: 0.3;
           pointer-events: none;

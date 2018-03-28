@@ -19,7 +19,6 @@ import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subscription } from 'rxjs/Subscription';
 
-import { NovoDataTableSelection } from './selection/data-table-selection.directive';
 import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
 import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
 import { IDataTableColumn, IDataTablePaginationOptions, IDataTableSearchOptions, IDataTableService } from './interfaces';
@@ -46,7 +45,9 @@ import { StaticDataTableService } from './services/static-data-table.service';
             <novo-data-table-pagination
                 *ngIf="paginationOptions"
                 [theme]="paginationOptions.theme"
-                [length]="dataSource?.total"
+                [totalLength]="dataSource?.total"
+                [currentLength]="dataSource?.current"
+                [userFiltered]="state?.userFiltered"
                 [page]="paginationOptions.page"
                 [pageSize]="paginationOptions.pageSize"
                 [pageSizeOptions]="paginationOptions.pageSizeOptions">
@@ -63,10 +64,10 @@ import { StaticDataTableService } from './services/static-data-table.service';
               <ng-container *ngTemplateOutlet="templates['customFiler']"></ng-container>
             </div>
             <div class="novo-data-table-container" [class.empty-user-filtered]="dataSource?.currentlyEmpty && state.userFiltered" [class.empty]="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine">
-                <cdk-table *ngIf="(columns?.length > 0) && columnsLoaded && dataSource" [dataSource]="dataSource" [trackBy]="trackByFn" novoDataTableSortFilter novoDataTableSelection [class.empty]="dataSource?.currentlyEmpty && state.userFiltered" [hidden]="dataSource?.totallyEmpty && !userFiltered">
+                <cdk-table *ngIf="(columns?.length > 0) && columnsLoaded && dataSource" [dataSource]="dataSource" [trackBy]="trackByFn" novoDataTableSortFilter [class.empty]="dataSource?.currentlyEmpty && state.userFiltered" [hidden]="dataSource?.totallyEmpty && !userFiltered">
                     <ng-container novoDataTableColumnDef="selection">
                         <novo-data-table-checkbox-header-cell *novoDataTableHeaderCellDef></novo-data-table-checkbox-header-cell>
-                        <novo-data-table-checkbox-cell *novoDataTableCellDef="let row; let i = index" [row]="row" [index]="i"></novo-data-table-checkbox-cell>
+                        <novo-data-table-checkbox-cell *novoDataTableCellDef="let row; let i = index" [row]="row"></novo-data-table-checkbox-cell>
                     </ng-container>
                     <ng-container *ngFor="let column of columns;trackBy: trackColumnsBy" [novoDataTableColumnDef]="column.id">
                       <novo-data-table-header-cell *novoDataTableHeaderCellDef [column]="column" [novo-data-table-cell-config]="column" [defaultSort]="defaultSort" [class.empty]="column?.type === 'action' && !column?.label" [class.button-header-cell]="column?.type === 'action' && !column?.action?.options" [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-header-cell>
@@ -241,6 +242,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public templates: { [key: string]: TemplateRef<any> } = {};
   public columnToTemplate: { [key: string]: TemplateRef<any> } = {};
   public columnsLoaded: boolean = false;
+  public selection: Set<string> = new Set();
 
   private outsideFilterSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
@@ -255,7 +257,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     return this.loading || (this.dataSource && this.dataSource.loading);
   }
 
-  constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState) {}
+  constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {}
 
   public ngOnDestroy(): void {
     if (this.outsideFilterSubscription) {
@@ -307,6 +309,41 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       return check.disabledFunc(row);
     }
     return false;
+  }
+
+  public isSelected(row: T): boolean {
+    return this.state.selectedRows.has(`${row[this.rowIdentifier]}`);
+  }
+
+  public selectRow(row: T): void {
+    let selected = this.isSelected(row);
+
+    if (selected) {
+      this.state.selectedRows.delete(`${row[this.rowIdentifier]}`);
+    } else {
+      this.state.selectedRows.set(`${row[this.rowIdentifier]}`, row);
+    }
+    this.state.onSelectionChange();
+  }
+
+  public selectRows(selected: boolean): void {
+    (this.dataSource.data || []).forEach((row: T) => {
+      if (!selected) {
+        this.state.selectedRows.delete(`${row[this.rowIdentifier]}`);
+      } else {
+        this.state.selectedRows.set(`${row[this.rowIdentifier]}`, row);
+      }
+    });
+    this.state.onSelectionChange();
+  }
+
+  public allCurrentRowsSelected(): boolean {
+    for (let i = 0; i < (this.dataSource.data || []).length; i++) {
+      if (!this.isSelected((this.dataSource.data || [])[i])) {
+        return false;
+      }
+    }
+    return true;
   }
 
   private configureColumns(): void {

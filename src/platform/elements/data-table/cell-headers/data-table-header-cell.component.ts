@@ -133,8 +133,8 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     public labels: NovoLabelService,
-    private state: DataTableState,
-    @Optional() public _sort: NovoDataTableSortFilter,
+    private state: DataTableState<T>,
+    @Optional() public _sort: NovoDataTableSortFilter<T>,
     @Optional() public _cdkColumnDef: CdkColumnDef,
   ) {
     this._rerenderSubscription = state.updates.subscribe((change: IDataTableChangeEvent) => {

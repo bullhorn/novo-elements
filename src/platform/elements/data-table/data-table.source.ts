@@ -13,6 +13,7 @@ export class DataTableSource<T> extends DataSource<T> {
   public current = 0;
   public loading = false;
   public pristine = true;
+  public data: T[];
 
   get totallyEmpty(): boolean {
     return this.total === 0;
@@ -22,7 +23,7 @@ export class DataTableSource<T> extends DataSource<T> {
     return this.current === 0;
   }
 
-  constructor(private tableService: IDataTableService<T>, private state: DataTableState, private ref: ChangeDetectorRef) {
+  constructor(private tableService: IDataTableService<T>, private state: DataTableState<T>, private ref: ChangeDetectorRef) {
     super();
   }
 
@@ -46,6 +47,7 @@ export class DataTableSource<T> extends DataSource<T> {
         this.loading = false;
         this.total = data.total;
         this.current = data.results.length;
+        this.data = data.results;
         setTimeout(() => {
           this.ref.markForCheck();
         });
