@@ -318,7 +318,7 @@ export class NovoPickerElement implements OnInit {
         } else {
             if (typeof value === 'string') {
                 // Sometimes ID's can be strings; Here, we'd like to get the labels for those ID's instead of just showing the ID
-                if (typeof this.config.getLabels === 'function') {
+                if (!!parseInt(value) && typeof this.config.getLabels === 'function') {
                   this.fetchLabel(value);
                 } else {
                   this.term = value;
