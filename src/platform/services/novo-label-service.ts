@@ -93,6 +93,10 @@ export class NovoLabelService {
     return `${selected} records are selected.`;
   }
 
+  showingXofXResults(shown: number, total: number) {
+    return `Showing ${shown} of ${total} Results.`;
+  }
+
   totalRecords(total: number, select: boolean) {
     return select ? `Select all ${total} records.` : `De-select remaining ${total} records.`;
   }
