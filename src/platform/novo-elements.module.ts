@@ -39,6 +39,7 @@ import { NovoPopOverModule } from './elements/popover/PopOver.module';
 import { NovoSearchBoxModule } from './elements/search/SearchBox.module';
 import { GooglePlacesModule } from './elements/places/places.module';
 import { NovoValueModule } from './elements/value/Value.module';
+import { NovoDataTableModule } from './elements/data-table/data-table.module';
 import { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
 import { NovoIconModule } from './elements/icon/Icon.module';
 import { NovoStepperModule } from './elements/stepper/Stepper.module';
@@ -54,65 +55,67 @@ import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
 import { Security } from './services/security/Security';
 import { OptionsService } from './services/options/OptionsService';
+
+import { NovoCommonModule } from './elements/common/common.module';
+
 @NgModule({
-    imports: [
-        ReactiveFormsModule
-    ],
-    exports: [
-        NovoPipesModule,
-        NovoButtonModule,
-        NovoLoadingModule,
-        NovoCardModule,
-        NovoCalendarModule,
-        NovoToastModule,
-        NovoTooltipModule,
-        NovoHeaderModule,
-        NovoTabModule,
-        NovoTilesModule,
-        NovoModalModule,
-        NovoQuickNoteModule,
-        NovoRadioModule,
-        NovoDropdownModule,
-        NovoSelectModule,
-        NovoListModule,
-        NovoSwitchModule,
-        NovoDragulaModule,
-        NovoSliderModule,
-        NovoPickerModule,
-        NovoChipsModule,
-        NovoDatePickerModule,
-        NovoTimePickerModule,
-        NovoDateTimePickerModule,
-        NovoNovoCKEditorModule,
-        NovoTipWellModule,
-        NovoTableModule,
-        NovoTableExtrasModule,
-        NovoFormModule,
-        NovoFormExtrasModule,
-        NovoCategoryDropdownModule,
-        NovoMultiPickerModule,
-        NovoPopOverModule,
-        NovoSimpleTableModule,
-        NovoSearchBoxModule,
-        NovoOverlayModule,
-        GooglePlacesModule,
-        NovoValueModule,
-        NovoAceEditorModule,
-        NovoIconModule,
-        NovoStepperModule,
-        UnlessModule,
-    ],
-    providers: [
-        { provide: ComponentUtils, useClass: ComponentUtils },
-        { provide: DateFormatService, useClass: DateFormatService },
-        { provide: NovoLabelService, useClass: NovoLabelService },
-        { provide: NovoDragulaService, useClass: NovoDragulaService },
-        { provide: GooglePlacesService, useClass: GooglePlacesService },
-        { provide: GlobalRef, useClass: BrowserGlobalRef },
-        { provide: LocalStorageService, useClass: LocalStorageService },
-        { provide: OptionsService, useClass: OptionsService },
-        { provide: FormUtils, useClass: FormUtils },
-    ]
+  imports: [ReactiveFormsModule],
+  exports: [
+    NovoPipesModule,
+    NovoButtonModule,
+    NovoLoadingModule,
+    NovoCardModule,
+    NovoCalendarModule,
+    NovoToastModule,
+    NovoTooltipModule,
+    NovoHeaderModule,
+    NovoTabModule,
+    NovoTilesModule,
+    NovoModalModule,
+    NovoQuickNoteModule,
+    NovoRadioModule,
+    NovoDropdownModule,
+    NovoSelectModule,
+    NovoListModule,
+    NovoSwitchModule,
+    NovoDragulaModule,
+    NovoSliderModule,
+    NovoPickerModule,
+    NovoChipsModule,
+    NovoDatePickerModule,
+    NovoTimePickerModule,
+    NovoDateTimePickerModule,
+    NovoNovoCKEditorModule,
+    NovoTipWellModule,
+    NovoTableModule,
+    NovoTableExtrasModule,
+    NovoFormModule,
+    NovoFormExtrasModule,
+    NovoCategoryDropdownModule,
+    NovoMultiPickerModule,
+    NovoPopOverModule,
+    NovoDataTableModule,
+    NovoSimpleTableModule,
+    NovoSearchBoxModule,
+    NovoOverlayModule,
+    GooglePlacesModule,
+    NovoValueModule,
+    NovoAceEditorModule,
+    NovoIconModule,
+    UnlessModule,
+    NovoCommonModule,
+    NovoStepperModule,
+  ],
+  providers: [
+    { provide: ComponentUtils, useClass: ComponentUtils },
+    { provide: DateFormatService, useClass: DateFormatService },
+    { provide: NovoLabelService, useClass: NovoLabelService },
+    { provide: NovoDragulaService, useClass: NovoDragulaService },
+    { provide: GooglePlacesService, useClass: GooglePlacesService },
+    { provide: GlobalRef, useClass: BrowserGlobalRef },
+    { provide: LocalStorageService, useClass: LocalStorageService },
+    { provide: OptionsService, useClass: OptionsService },
+    { provide: FormUtils, useClass: FormUtils },
+  ],
 })
-export class NovoElementsModule {
-}
+export class NovoElementsModule {}

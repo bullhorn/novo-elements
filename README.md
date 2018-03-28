@@ -10,7 +10,7 @@
 - [NPM v3.0+](https://github.com/npm/npm)
 
 ## Quick Start
-
+ 
     # Clone the project
     git clone git@github.com:bullhorn/novo-elements.git
 

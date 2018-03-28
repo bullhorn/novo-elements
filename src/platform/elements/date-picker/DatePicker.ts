@@ -157,8 +157,8 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
     hoverDay: any;
 
     rangeSelectMode: rangeSelectModes = 'startDate';
-    onModelChange: Function = () => { };
-    onModelTouched: Function = () => { };
+    _onChange: Function = () => { };
+    _onTouched: Function = () => { };
 
     constructor(public labels: NovoLabelService, private element: ElementRef) { }
 
@@ -369,7 +369,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
             if (this.range && this.selected && this.selected2) {
                 this.fireRangeSelect();
                 // Also, update the ngModel
-                this.onModelChange({
+                this._onChange({
                     startDate: this.selected,
                     endDate: this.selected2 ? this.selected2 : null
                 });
@@ -387,7 +387,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
                     date: this.selected
                 });
                 // Also, update the ngModel
-                this.onModelChange(this.selected);
+                this._onChange(this.selected);
                 this.model = this.selected;
             }
         }
@@ -533,10 +533,10 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
     }
 
     registerOnChange(fn: Function): void {
-        this.onModelChange = fn;
+        this._onChange = fn;
     }
 
     registerOnTouched(fn: Function): void {
-        this.onModelTouched = fn;
+        this._onTouched = fn;
     }
 }

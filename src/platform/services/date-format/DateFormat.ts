@@ -35,6 +35,10 @@ export class DateFormatService {
         return [ /\d/, /\d|\/|\.|\-/, /\/|\.|\-|\d/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d/, /\d/];
     }
 
+    getDateTimeMask(militaryTime: boolean = false): Array<RegExp> {
+        return [...this.getDateMask(), /\,?/, /\s/, ...this.getTimeMask(militaryTime)];
+    }
+
     getTimePlaceHolder(militaryTime: boolean): string {
         if (militaryTime) {
             return this.labels.timeFormatPlaceholder24Hour;
@@ -131,8 +135,17 @@ export class DateFormatService {
         return [value, timeString];
     }
 
-    parseString(dateTimeString: string, militaryTime: boolean, type: string) {
+    parseString(dateTimeString: string, militaryTime: boolean, type: string): [Date, string] {
         switch (type) {
+            case 'datetime':
+                let str = dateTimeString.replace(/-/g,'/');
+                let parts = str.split(' ');
+                let [dt, dts] = this.parseDateString(parts[0]);
+                if( parts.length > 1) {
+                    let [tm, tms] = this.parseTimeString(parts[1], militaryTime);
+                    return [new Date(dt.setHours(tm.getHours(), tm.getMinutes())), `${dts} ${tms}`];
+                }
+                return [dt, dts];
             case 'date':
                 return this.parseDateString(dateTimeString);
             case 'time':

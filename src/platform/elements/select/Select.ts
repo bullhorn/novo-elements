@@ -1,5 +1,18 @@
 // NG2
-import { Component, Input, Output, EventEmitter, ViewChild, forwardRef, ElementRef, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  forwardRef,
+  ElementRef,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  HostListener,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // APP
@@ -10,15 +23,15 @@ import { Helpers } from '../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const SELECT_VALUE_ACCESSOR = {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NovoSelectElement),
-    multi: true
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => NovoSelectElement),
+  multi: true,
 };
 
 @Component({
-    selector: 'novo-select',
-    providers: [SELECT_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-select',
+  providers: [SELECT_VALUE_ACCESSOR],
+  template: `
         <div (click)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
         <novo-overlay-template [parent]="element" position="center">
             <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
@@ -40,265 +53,265 @@ const SELECT_VALUE_ACCESSOR = {
             </ul>
         </novo-overlay-template>
     `,
-    host: {
-        '(keydown)': 'onKeyDown($event)'
-    }
+  host: {
+    '(keydown)': 'onKeyDown($event)',
+  },
 })
 export class NovoSelectElement implements OnInit, OnChanges {
-    @Input() name: string;
-    @Input() options: Array<any>;
-    @Input() placeholder: string = 'Select...';
-    @Input() readonly: boolean;
-    @Input() headerConfig: any;
-    @Output() onSelect: EventEmitter<any> = new EventEmitter();
+  @Input() name: string;
+  @Input() options: Array<any>;
+  @Input() placeholder: string = 'Select...';
+  @Input() readonly: boolean;
+  @Input() headerConfig: any;
+  @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
-    selectedIndex: number = -1;
-    empty: boolean = true;
-    header: any = {
-        open: false,
-        valid: true,
-        value: ''
+  selectedIndex: number = -1;
+  empty: boolean = true;
+  header: any = {
+    open: false,
+    valid: true,
+    value: '',
+  };
+  createdItem: any;
+  selected: any;
+  model: any;
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
+  filterTerm: string = '';
+  filterTermTimeout;
+  filteredOptions: any;
+
+  /** Element for the panel containing the autocomplete options. */
+  @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
+
+  constructor(public element: ElementRef, public labels: NovoLabelService, public ref: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    this.ngOnChanges();
+  }
+
+  ngOnChanges(changes?: SimpleChanges) {
+    this.readonly = this.readonly === true;
+    if (this.options && this.options.length && typeof this.options[0] === 'string') {
+      this.filteredOptions = this.options.map((item) => {
+        return { value: item, label: item };
+      });
+    } else {
+      this.filteredOptions = (this.options || []).filter((item) => {
+        return !item.readOnly;
+      });
+      this.filteredOptions.forEach((element) => {
+        element.active = false;
+      });
+    }
+
+    if (!this.model && !this.createdItem) {
+      this.clear();
+    } else if (this.createdItem) {
+      let item = this.options.find((i) => i.label === this.createdItem);
+      let index = this.options.indexOf(item);
+      this.select(item, index);
+    } else {
+      this.writeValue(this.model);
+    }
+
+    if (this.panelOpen) {
+      this.openPanel();
+    }
+  }
+
+  /** BEGIN: Convienient Panel Methods. */
+  openPanel(): void {
+    this.overlay.openPanel();
+  }
+  closePanel(): void {
+    this.overlay.closePanel();
+  }
+  get panelOpen(): boolean {
+    return this.overlay && this.overlay.panelOpen;
+  }
+  /** END: Convienient Panel Methods. */
+
+  /**
+   * This method closes the panel, and if a value is specified, also sets the associated
+   * control to that value. It will also mark the control as dirty if this interaction
+   * stemmed from the user.
+   */
+  public setValueAndClose(event: any | null): void {
+    if (event.value && event.index >= 0) {
+      this.select(event.value, event.index);
+    }
+    this.closePanel();
+  }
+
+  select(option, i, fireEvents: boolean = true) {
+    if (this.selected) {
+      this.selected.active = false;
+    }
+    this.selectedIndex = i;
+    this.selected = option;
+    this.selected.active = true;
+    this.empty = false;
+    if (fireEvents) {
+      this.onModelChange(this.selected.value);
+      this.onSelect.emit({ selected: this.selected.value });
+    }
+  }
+
+  clear() {
+    this.selected = {
+      label: this.placeholder,
+      value: null,
+      active: false,
     };
-    createdItem: any;
-    selected: any;
-    model: any;
-    onModelChange: Function = () => { };
-    onModelTouched: Function = () => { };
-    filterTerm: string = '';
-    filterTermTimeout;
-    filteredOptions: any;
+    this.header = {
+      open: false,
+      valid: true,
+      value: '',
+    };
+    this.selectedIndex = -1;
+    this.empty = true;
+  }
 
-    /** Element for the panel containing the autocomplete options. */
-    @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
-
-    constructor(
-        public element: ElementRef,
-        public labels: NovoLabelService
-    ) { }
-
-    ngOnInit() {
-        this.ngOnChanges();
-    }
-
-    ngOnChanges(changes?: SimpleChanges) {
-        this.readonly = this.readonly === true;
-        if (this.options && this.options.length && typeof this.options[0] === 'string') {
-            this.filteredOptions = this.options.map((item) => {
-                return { value: item, label: item };
-            });
-        } else {
-            this.filteredOptions = (this.options || []).filter((item) => {
-                return !item.readOnly;
-            });
-            this.filteredOptions.forEach(element => {
-                element.active = false;
-            });
-        }
-
-        if (!this.model && !this.createdItem) {
-            this.clear();
-        } else if (this.createdItem) {
-            let item = this.options.find(i => i.label === this.createdItem);
-            let index = this.options.indexOf(item);
-            this.select(item, index);
-        } else {
-            this.writeValue(this.model);
-        }
-
-        if (this.panelOpen) {
-            this.openPanel();
-        }
-    }
-
-    /** BEGIN: Convienient Panel Methods. */
-    openPanel(): void {
-        this.overlay.openPanel();
-    }
-    closePanel(): void {
-        this.overlay.closePanel();
-    }
-    get panelOpen(): boolean {
-        return this.overlay && this.overlay.panelOpen;
-    }
-    /** END: Convienient Panel Methods. */
-
-
-    /**
-    * This method closes the panel, and if a value is specified, also sets the associated
-    * control to that value. It will also mark the control as dirty if this interaction
-    * stemmed from the user.
-    */
-    public setValueAndClose(event: any | null): void {
-        if (event.value && event.index >= 0) {
-            this.select(event.value, event.index);
-        }
+  @HostListener('keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    if (this.panelOpen) {
+      if (!this.header.open) {
+        // Prevent Scrolling
+        event.preventDefault();
+      }
+      // Close popup on escape key
+      if (event.keyCode === KeyCodes.ESC) {
         this.closePanel();
-    }
-
-    select(option, i, fireEvents: boolean = true) {
-        if (this.selected) {
-            this.selected.active = false;
+        return;
+      }
+      if (event.keyCode === KeyCodes.ENTER) {
+        if (this.header.open && this.header.value) {
+          this.saveHeader();
+          return;
         }
-        this.selectedIndex = i;
-        this.selected = option;
-        this.selected.active = true;
-        this.empty = false;
-        if (fireEvents) {
-            this.onModelChange(this.selected.value);
-            this.onSelect.emit({ selected: this.selected.value });
+        this.setValueAndClose({ value: this.filteredOptions[this.selectedIndex], index: this.selectedIndex });
+        return;
+      }
+
+      if (event.keyCode === KeyCodes.UP && this.selectedIndex > 0) {
+        this.selectedIndex--;
+        this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
+        this.scrollToSelected();
+      } else if (event.keyCode === KeyCodes.DOWN && this.selectedIndex < this.filteredOptions.length - 1) {
+        this.selectedIndex++;
+        this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
+        this.scrollToSelected();
+        if (this.header.open) {
+          this.toggleHeader(null, false);
         }
-    }
-
-    clear() {
-        this.selected = {
-            label: this.placeholder,
-            value: null,
-            active: false
-        };
-        this.header = {
-            open: false,
-            valid: true,
-            value: ''
-        };
-        this.selectedIndex = -1;
-        this.empty = true;
-    }
-
-    @HostListener('keydown', ['$event'])
-    onKeyDown(event: KeyboardEvent): void {
-        if (this.panelOpen) {
-            if (!this.header.open) {
-                // Prevent Scrolling
-                event.preventDefault();
-            }
-            // Close popup on escape key
-            if (event.keyCode === KeyCodes.ESC) {
-                this.closePanel();
-                return;
-            }
-            if (event.keyCode === KeyCodes.ENTER) {
-                if (this.header.open && this.header.value) {
-                    this.saveHeader();
-                    return;
-                }
-                this.setValueAndClose({ value: this.filteredOptions[this.selectedIndex], index: this.selectedIndex });
-                return;
-            }
-
-            if (event.keyCode === KeyCodes.UP && this.selectedIndex > 0) {
-                this.selectedIndex--;
-                this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
-                this.scrollToSelected();
-            } else if (event.keyCode === KeyCodes.DOWN && this.selectedIndex < this.filteredOptions.length - 1) {
-                this.selectedIndex++;
-                this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
-                this.scrollToSelected();
-                if (this.header.open) {
-                    this.toggleHeader(null, false);
-                }
-            } else if (event.keyCode === KeyCodes.UP && this.selectedIndex === 0) {
-                this.selectedIndex--;
-                this.toggleHeader(null, true);
-            } else if (event.keyCode >= 65 && event.keyCode <= 90 || event.keyCode === KeyCodes.SPACE) {
-                clearTimeout(this.filterTermTimeout);
-                this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 2000);
-                let char = String.fromCharCode(event.keyCode);
-                this.filterTerm = this.filterTerm.concat(char);
-                // let element = this.element.nativeElement;
-                // let list = element.querySelector('.novo-select-list');
-                // let item = element.querySelector(`[data-automation-value^="${this.filterTerm}" i]`);
-                let item = this.filteredOptions.find(i => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
-                if (item) {
-                    this.select(item, this.filteredOptions.indexOf(item));
-                    this.scrollToSelected();
-                }
-            } else if ([KeyCodes.BACKSPACE, KeyCodes.DELETE].includes(event.keyCode)) {
-                clearTimeout(this.filterTermTimeout);
-                this.filterTermTimeout = setTimeout(() => { this.filterTerm = ''; }, 2000);
-                this.filterTerm = this.filterTerm.slice(0, -1);
-            }
-        } else {
-            if ([KeyCodes.DOWN, KeyCodes.UP].includes(event.keyCode)) {
-                this.panelOpen ? this.closePanel() : this.openPanel();
-            }
-        }
-    }
-
-    scrollToSelected() {
-        this.scrollToIndex(this.selectedIndex);
-    }
-
-    scrollToIndex(index: number) {
-        let element = this.overlay._overlayRef.overlayElement;
-        let list = element.querySelector('.novo-select-list');
-        let items = list.querySelectorAll('li');
-        let item = items[this.headerConfig ? index + 1 : index];
+      } else if (event.keyCode === KeyCodes.UP && this.selectedIndex === 0) {
+        this.selectedIndex--;
+        this.toggleHeader(null, true);
+      } else if ((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode === KeyCodes.SPACE) {
+        clearTimeout(this.filterTermTimeout);
+        this.filterTermTimeout = setTimeout(() => {
+          this.filterTerm = '';
+        }, 2000);
+        let char = String.fromCharCode(event.keyCode);
+        this.filterTerm = this.filterTerm.concat(char);
+        // let element = this.element.nativeElement;
+        // let list = element.querySelector('.novo-select-list');
+        // let item = element.querySelector(`[data-automation-value^="${this.filterTerm}" i]`);
+        let item = this.filteredOptions.find((i) => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
         if (item) {
-            list.scrollTop = item.offsetTop;
+          this.select(item, this.filteredOptions.indexOf(item));
+          this.scrollToSelected();
         }
+      } else if ([KeyCodes.BACKSPACE, KeyCodes.DELETE].includes(event.keyCode)) {
+        clearTimeout(this.filterTermTimeout);
+        this.filterTermTimeout = setTimeout(() => {
+          this.filterTerm = '';
+        }, 2000);
+        this.filterTerm = this.filterTerm.slice(0, -1);
+      }
+    } else {
+      if ([KeyCodes.DOWN, KeyCodes.UP].includes(event.keyCode)) {
+        this.panelOpen ? this.closePanel() : this.openPanel();
+      }
     }
+  }
 
-    toggleHeader(event, forceValue) {
-        if (event) {
-            event.stopPropagation();
-            event.preventDefault();
-        }
-        // Reverse the active property (if forceValue, use that)
-        this.header = {
-            open: forceValue !== undefined ? forceValue : !this.header.open,
-            value: '',
-            valid: true
+  scrollToSelected() {
+    this.scrollToIndex(this.selectedIndex);
+  }
+
+  scrollToIndex(index: number) {
+    let element = this.overlay._overlayRef.overlayElement;
+    let list = element.querySelector('.novo-select-list');
+    let items = list.querySelectorAll('li');
+    let item = items[this.headerConfig ? index + 1 : index];
+    if (item) {
+      list.scrollTop = item.offsetTop;
+    }
+  }
+
+  toggleHeader(event, forceValue) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    // Reverse the active property (if forceValue, use that)
+    this.header = {
+      open: forceValue !== undefined ? forceValue : !this.header.open,
+      value: '',
+      valid: true,
+    };
+  }
+
+  highlight(match, query) {
+    // Replaces the capture string with a the same string inside of a "strong" tag
+    return query ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
+  }
+
+  escapeRegexp(queryToEscape) {
+    // Ex: if the capture is "a" the result will be \a
+    return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
+  }
+
+  saveHeader() {
+    if (this.header.value) {
+      this.headerConfig.onSave(this.header.value);
+      this.createdItem = this.header.value;
+      this.closePanel();
+    } else {
+      this.header.valid = false;
+    }
+  }
+
+  writeValue(model: any): void {
+    this.model = model;
+    if (this.options) {
+      let item = this.filteredOptions.find((i) => i.value === model);
+      if (!item && !Helpers.isEmpty(model)) {
+        item = {
+          label: model,
+          value: model,
         };
-    }
-
-    highlight(match, query) {
-        // Replaces the capture string with a the same string inside of a "strong" tag
-        return query ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
-    }
-
-    escapeRegexp(queryToEscape) {
-        // Ex: if the capture is "a" the result will be \a
-        return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
-    }
-
-    saveHeader() {
-        if (this.header.value) {
-            this.headerConfig.onSave(this.header.value);
-            this.createdItem = this.header.value;
-            this.closePanel();
-        } else {
-            this.header.valid = false;
+        if (!item.readOnly) {
+          this.options.unshift(item);
         }
+      }
+      if (item) {
+        this.select(item, this.filteredOptions.indexOf(item), false);
+        this.empty = false;
+      } else {
+        this.clear();
+      }
     }
+    this.ref.markForCheck();
+  }
 
-    writeValue(model: any): void {
-        this.model = model;
-        if (this.options) {
-            let item = this.filteredOptions.find(i => i.value === model);
-            if (!item && !Helpers.isEmpty(model)) {
-                item = {
-                    label: model,
-                    value: model
-                };
-                if (!item.readOnly) {
-                    this.options.unshift(item);
-                }
-            }
-            if (item) {
-                this.select(item, this.filteredOptions.indexOf(item), false)
-                this.empty = false;
-            } else {
-                this.clear();
-            }
+  registerOnChange(fn: Function): void {
+    this.onModelChange = fn;
+  }
 
-        }
-    }
-
-    registerOnChange(fn: Function): void {
-        this.onModelChange = fn;
-    }
-
-    registerOnTouched(fn: Function): void {
-        this.onModelTouched = fn;
-    }
+  registerOnTouched(fn: Function): void {
+    this.onModelTouched = fn;
+  }
 }

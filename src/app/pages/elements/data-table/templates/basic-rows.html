@@ -1,0 +1,38 @@
+<novo-data-table [rows]="basicRows"
+                 [columns]="sharedColumns"
+                 [hideGlobalSearch]="!globalSearchEnabled"
+                 [displayedColumns]="sharedDisplayColumns"
+                 [paginationOptions]="sharedPaginationOptions"
+                 #basic>
+  <!-- Custom Actions -->
+  <ng-template novoTemplate="customActions">
+    <button theme="secondary">Add</button>
+    <novo-dropdown side="right">
+      <button theme="primary"
+              icon="collapse"
+              inverse>Actions ({{ basic.state.selectedRows.size }})</button>
+      <list>
+        <item>Action 1</item>
+        <item>Action 2</item>
+        <item [disabled]="basic.state.selectedRows.size === 0">Action 3</item>
+      </list>
+    </novo-dropdown>
+  </ng-template>
+  <!-- Custom Empty Message -->
+  <ng-template novoTemplate="emptyMessage">Yo! No Records!</ng-template>
+  <!-- Custom No Results Message -->
+  <ng-template novoTemplate="noResultsMessage">Yo! That search is really complex, no data matches that!</ng-template>
+  <!-- Custom Cell for ID Column -->
+  <ng-template novoTemplate="id"
+               let-row
+               let-col="col">
+    <i class="bhi-bull"></i> {{ row.id }}
+  </ng-template>
+  <!-- Custom Cell -- passed with template property on Column -->
+  <ng-template novoTemplate="custom"
+               let-row
+               let-col="col">
+    <b>CUSTOM</b> {{ row.name }}
+    <b>CUSTOM</b>
+  </ng-template>
+</novo-data-table>

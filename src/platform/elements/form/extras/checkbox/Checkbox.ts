@@ -1,5 +1,5 @@
 // NG2
-import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, forwardRef, Input, Output, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
@@ -37,7 +37,9 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     @Input() label: string;
     @Input() indeterminate: boolean = false;
     @Input() disabled: boolean;
-    @Input() layoutOptions: { iconStyle?: string };
+    @Input() layoutOptions: { iconStyle?: string }; // TODO - avoid configs like this
+
+    @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
     boxIcon: boolean = true;
     model;
@@ -55,9 +57,9 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     }
 
     select(event) {
-        Helpers.swallowEvent(event);
         this.model = !this.model;
         this.onModelChange(this.model);
+        this.onSelect.emit({ originalEvent: event, value: this.model });
     }
 
     writeValue(model: any): void {

@@ -1,0 +1,13 @@
+<novo-data-table [dataTableService]="basicService"
+                 [columns]="sharedColumns"
+                 [hideGlobalSearch]="!globalSearchEnabled"
+                 [displayedColumns]="sharedDisplayColumns"
+                 [paginationOptions]="sharedPaginationOptions">
+  <!-- Custom Cell -- passed with template property on Column -->
+  <ng-template novoTemplate="custom"
+               let-row
+               let-col="col">
+    <b>CUSTOM</b> {{ row.name }}
+    <b>CUSTOM</b>
+  </ng-template>
+</novo-data-table>

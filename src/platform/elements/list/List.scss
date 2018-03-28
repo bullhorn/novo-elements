@@ -132,5 +132,8 @@ novo-list-item {
         align-self: center;
         flex: 1;
         text-align: right;
+        i {
+            line-height: 1.4em;
+        }
     }
 }

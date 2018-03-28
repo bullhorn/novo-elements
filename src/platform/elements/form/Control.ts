@@ -428,12 +428,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   get alwaysActive() {
     // Controls that have the label active if there is any user entered text in the field
-    if (this.form.controls[this.control.key].controlType === 'picker' && this._enteredText.length) {
+    if (this.form.controls[this.control.key].controlType === 'picker' && this._enteredText.length ) {
       return true;
     }
 
     // Controls that always have the label active
-    return ['tiles', 'checklist', 'checkbox', 'address', 'file', 'editor', 'ace-editor', 'radio', 'text-area', 'quick-note'].indexOf(this.form.controls[this.control.key].controlType) !== -1;
+    return ['tiles', 'checklist', 'checkbox', 'date', 'time', 'date-time', 'address', 'file', 'editor', 'ace-editor', 'radio', 'text-area', 'quick-note'].indexOf(this.form.controls[this.control.key].controlType) !== -1;
   }
 
   get requiresExtraSpacing() {

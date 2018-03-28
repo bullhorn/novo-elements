@@ -1,14 +1,15 @@
 // NG
-import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Inject, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Inject, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
+import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 // App
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { DateFormatService } from '../../services/date-format/DateFormat';
 import { Helpers } from '../../utils/Helpers';
+import { DateFormatService } from '../../services/date-format/DateFormat';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -21,22 +22,21 @@ const DATE_VALUE_ACCESSOR = {
     selector: 'novo-time-picker-input',
     providers: [DATE_VALUE_ACCESSOR],
     template: `
-        <input type="text" [name]="name" [value]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input/>
+        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input data-automation-id="time-input"/>
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
 
         <novo-overlay-template [parent]="element">
-            <novo-time-picker inline="true" (onSelect)="setValue($event)" [ngModel]="value"></novo-time-picker>
+            <novo-time-picker inline="true" (onSelect)="setValue($event)" [ngModel]="value" [military]="military"></novo-time-picker>
         </novo-overlay-template>
   `
 })
-export class NovoTimePickerInputElement implements ControlValueAccessor {
+export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor {
     public value: any;
-    public formattedValue: any;
+    public formattedValue: string = '';
 
     /** View -> model callback called when value changes */
-    _onChange: (value: any) => void = () => { };
-
+    _onChange: (value: any) => void = () => { }
     /** View -> model callback called when autocomplete has been touched */
     _onTouched = () => { };
 
@@ -50,20 +50,27 @@ export class NovoTimePickerInputElement implements ControlValueAccessor {
     constructor(
         public element: ElementRef,
         public labels: NovoLabelService,
-        private dateFormatService: DateFormatService,
+        public dateFormatService: DateFormatService,
         protected _changeDetectorRef: ChangeDetectorRef,
-    ) {
+    ) { }
+
+    ngOnInit(): void {
+        this.placeholder = this.military ? this.labels.timeFormatPlaceholder24Hour : this.labels.timeFormatPlaceholderAM;
         this.maskOptions = {
-            mask: this.dateFormatService.getTimeMask(this.military),
-            keepCharPositions: true,
-            guide: false
-        };
-        this.placeholder = this.labels.dateFormatPlaceholder;
+            mask: this.military ? [/\d/, /\d/, ':', /\d/, /\d/] : [/\d/, /\d/, ':', /\d/, /\d/, ' ', /[aApP]/, /[mM]/],
+            pipe: this.military ? createAutoCorrectedDatePipe('HH:MM') : createAutoCorrectedDatePipe('mm:MM'),
+            keepCharPositions: false,
+            guide: true,
+        }; 
     }
 
     /** BEGIN: Convienient Panel Methods. */
     openPanel(): void {
-        this.overlay.openPanel();
+        if(!this.overlay.panelOpen) {
+            this.overlay.openPanel();
+            let hour = new Date().getHours();
+            Promise.resolve(null).then(() => this.scrollToIndex((hour*4)));
+        }
     }
     closePanel(): void {
         this.overlay.closePanel();
@@ -77,17 +84,23 @@ export class NovoTimePickerInputElement implements ControlValueAccessor {
         if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
             this.closePanel();
             event.stopPropagation();
+            event.stopImmediatePropagation();
         }
     }
 
     _handleInput(event: KeyboardEvent): void {
         if (document.activeElement === event.target) {
-            this._onChange((event.target as HTMLInputElement).value);
-            let [dateTimeValue, formatted] = this.dateFormatService.parseString((event.target as HTMLInputElement).value, this.military, 'time');
-            if (dateTimeValue && dateTimeValue.getTime() > 0) {
-                this._setTriggerValue(dateTimeValue);
+            // this._onChange((event.target as HTMLInputElement).value);
+            let text = (event.target as HTMLInputElement).value;
+            if (this.military ? text.replace(/_/g, '').length === 5 : text.replace(/_/g, '').length === 8) {
+                let [dateTimeValue, formatted] = this.dateFormatService.parseString(text, this.military, 'time');
+                this.dispatchOnChange(dateTimeValue);
+            } else {
+                this.dispatchOnChange(null);
             }
             this.openPanel();
+            let num = Number(text.split(':')[0]);
+            this.scrollToIndex((num*4));
         }
     }
 
@@ -100,26 +113,26 @@ export class NovoTimePickerInputElement implements ControlValueAccessor {
     registerOnTouched(fn: () => {}) {
         this._onTouched = fn;
     }
-
+    public dispatchOnChange(newValue?: any, skip: boolean = false) {
+        if ( newValue !== this.value ) {
+            this._onChange(newValue);
+            !skip && this.writeValue(newValue);
+        }
+    }
     private _setTriggerValue(value: any): void {
-        const toDisplay = value;
-
-        // Simply falling back to an empty string if the display value is falsy does not work properly.
-        // The display value can also be the number zero and shouldn't fall back to an empty string.
-        const inputValue = toDisplay !== null ? toDisplay : '';
-
-        // If it's used within a `MdFormField`, we should set it through the property so it can go
-        // through change detection.
-        //this._element.nativeElement.value = inputValue;
-        this.value = inputValue;
-        this.formattedValue = this.formatDateValue(inputValue);
+        if(value instanceof Date && this.value instanceof Date) {
+            value = new Date(value.setFullYear(this.value.getFullYear(), this.value.getMonth(), this.value.getDate()));
+        }
+        this.value = value;
+        if ( this.value ) {
+            this.formattedValue = this.formatDateValue(this.value);
+        }
         this._changeDetectorRef.markForCheck();
     }
 
     public setValue(event: any | null): void {
         if (event && event.date) {
-            this._setTriggerValue(event.date);
-            this._onChange(event.date);
+            this.dispatchOnChange(event.date);
         }
     }
 
@@ -131,23 +144,38 @@ export class NovoTimePickerInputElement implements ControlValueAccessor {
     /**
      * Clear any previous selected option and emit a selection change event for this option
      */
-    public clearValue(skip: any) {
-        this.writeValue(null);
-        this._onChange(null);
+    public clearValue() {
+        this.formattedValue = '';
+        this.dispatchOnChange(null);
     }
 
     public formatDateValue(value) {
         if (!value) {
             return '';
         }
-        return this.labels.formatDateWithFormat(value, {
-            hour: 'numeric',
-            minute: 'numeric'
+        let format = this.labels.formatDateWithFormat(value, {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: !this.military
         });
+        if (format.split(':')[0].length===1) {
+            return `0${format}`;    
+        }
+        return format;
     }
 
     public get hasValue() {
         return !Helpers.isEmpty(this.value);
+    }
+
+    public scrollToIndex(index: number) {
+        let element = this.overlay._overlayRef.overlayElement;
+        let list = element.querySelector('.increments');
+        let items = list.querySelectorAll('novo-list-item');
+        let item = items[index];
+        if (item) {
+            list.scrollTop = (item as HTMLElement).offsetTop;
+        }
     }
 
 }
