@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.9.0"></a>
+# [2.9.0](https://github.com/bullhorn/novo-elements/compare/v2.8.0...v2.9.0) (2018-03-29)
+
+
+### Bug Fixes
+
+* **button:** Removing old tests ([4f86568](https://github.com/bullhorn/novo-elements/commit/4f86568))
+* **datatable:** Fixing observable properties ([449f847](https://github.com/bullhorn/novo-elements/commit/449f847))
+* **datatable:** Fixing performance and pagination of data tables ([1948d5a](https://github.com/bullhorn/novo-elements/commit/1948d5a))
+* **datatable:** Performance fixes for data table ([4ab3816](https://github.com/bullhorn/novo-elements/commit/4ab3816))
+
+
+### Features
+
+* **datetime:** reconfiguring date time pickers to be more user friendly ([9b8eb44](https://github.com/bullhorn/novo-elements/commit/9b8eb44))
+
+
+
 <a name="2.8.0"></a>
 # [2.8.0](https://github.com/bullhorn/novo-elements/compare/v2.7.0...v2.8.0) (2018-03-27)
 
