@@ -6,7 +6,6 @@ import 'rxjs/add/observable/of';
 
 import { DataTableState } from './state/data-table-state.service';
 import { IDataTableService } from './interfaces';
-import { start } from 'repl';
 
 export class DataTableSource<T> extends DataSource<T> {
   public total = 0;
