@@ -217,7 +217,7 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
       this.toggleActive();
     } else if (event.keyCode === KeyCodes.ENTER) {
       // enter -- perform the "click"
-      this._items.toArray()[this.activeIndex].onClick();
+      this._items.toArray()[this.activeIndex].onClick(event);
     } else if (event.keyCode === KeyCodes.DOWN) {
       // down - navigate through the list ignoring disabled ones
       if (this.activeIndex !== -1) {
@@ -320,7 +320,7 @@ export class NovoItemElement {
   constructor(private dropdown: NovoDropdownElement, public element: ElementRef) {}
 
   @HostListener('click', ['$event'])
-  public onClick(): void {
+  public onClick(event: Event): void {
     // Poor man's disable
     if (!this.disabled) {
       // Close if keepOpen is false
