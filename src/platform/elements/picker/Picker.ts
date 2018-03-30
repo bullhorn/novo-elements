@@ -48,6 +48,7 @@ const PICKER_VALUE_ACCESSOR = {
         <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
         <input
             type="text"
+            class="picker-input"
             [(ngModel)]="term"
             [class.entity-picker]="config.entityIcon"
             [class.entity-selected]="config?.entityIcon && _value"

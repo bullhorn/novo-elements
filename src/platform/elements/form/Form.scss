@@ -95,20 +95,20 @@ novo-form {
           }
           &.date,
           &.time {
-              .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
-                  border-bottom: none !important;
-                  >input {
-                      border-bottom: 1px solid $negative !important;
-                  }
+            .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+              border-bottom: none !important;
+              > input {
+                border-bottom: 1px solid $negative !important;
               }
+            }
           }
           &.date-time {
-              .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
-                  border-bottom: none !important;
-                  input {
-                      border-bottom: 1px solid $negative !important;
-                  }
+            .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+              border-bottom: none !important;
+              input {
+                border-bottom: 1px solid $negative !important;
               }
+            }
           }
           &.hidden {
             height: 0;
@@ -118,7 +118,8 @@ novo-form {
           }
           &.disabled {
             pointer-events: none;
-            input:not(.tiles-input) {
+            input:not(.tiles-input),
+            input:not(.picker-input) {
               &::-webkit-input-placeholder {
                 color: lighten($dark, 30%) !important;
               }
@@ -139,6 +140,12 @@ novo-form {
               border-bottom: 1px dashed lighten($dark, 30%) !important;
               input {
                 border: none !important;
+              }
+              novo-picker {
+                border: none;
+                > input.picker-input {
+                  border: none !important;
+                }
               }
               chip {
                 opacity: 0.4;
@@ -587,6 +594,12 @@ novo-form {
                 border-bottom: 1px dashed lighten($dark, 30%) !important;
                 input {
                   border: none !important;
+                }
+                novo-picker {
+                  border-bottom: none;
+                  > input.picker-input {
+                    border: none !important;
+                  }
                 }
                 chip {
                   opacity: 0.4;
