@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.9.4"></a>
+## [2.9.4](https://github.com/bullhorn/novo-elements/compare/v2.9.1...v2.9.4) (2018-03-30)
+
+
+### Bug Fixes
+
+* **datatable:** Fixing bad import ([07d2a99](https://github.com/bullhorn/novo-elements/commit/07d2a99))
+* **dropdown:** Fix missing event property ([2cebe10](https://github.com/bullhorn/novo-elements/commit/2cebe10))
+
+
+
 <a name="2.9.3"></a>
 ## [2.9.3](https://github.com/bullhorn/novo-elements/compare/v2.9.1...v2.9.3) (2018-03-30)
 
