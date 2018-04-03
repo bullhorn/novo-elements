@@ -99,15 +99,16 @@ describe('Elements: NovoCKEditorElement', () => {
             expect(component.getBaseConfig).toBeDefined();
         });
 
-        it('should return extended config object', () => {
-            expect(component.getBaseConfig()).toEqual({
+        it('should return extended config object #1', () => {
+          component.minimal = false;
+          expect(component.getBaseConfig()).toEqual({
                 enterMode: window['CKEDITOR'].ENTER_BR,
                 shiftEnterMode: window['CKEDITOR'].ENTER_P,
                 disableNativeSpellChecker: false,
                 removePlugins: 'liststyle,tabletools,contextmenu',
                 toolbar: [
                     { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'] },
-                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
                     { name: 'links', items: ['Link'] },
                     { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
                     { name: 'tools', items: ['Maximize', 'Source'] },
@@ -115,8 +116,32 @@ describe('Elements: NovoCKEditorElement', () => {
                     { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
                     { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
                     { name: 'colors', items: ['TextColor', 'BGColor'] }
-                ]
+                ],
+                filebrowserImageUploadUrl: '',
             });
+        });
+
+        it('should return extended config object #2', () => {
+          component.minimal = false;
+          component.fileBrowserImageUploadUrl = '/foo/bar/baz.cfm';
+          expect(component.getBaseConfig()).toEqual({
+            enterMode: window['CKEDITOR'].ENTER_BR,
+            shiftEnterMode: window['CKEDITOR'].ENTER_P,
+            disableNativeSpellChecker: false,
+            removePlugins: 'liststyle,tabletools,contextmenu',
+            toolbar: [
+              { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'] },
+              { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
+              { name: 'links', items: ['Link'] },
+              { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
+              { name: 'tools', items: ['Maximize', 'Source'] },
+              '/',
+              { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
+              { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+              { name: 'colors', items: ['TextColor', 'BGColor'] }
+            ],
+            filebrowserImageUploadUrl: '/foo/bar/baz.cfm',
+          });
         });
 
         it('should return minimal config object', () => {
