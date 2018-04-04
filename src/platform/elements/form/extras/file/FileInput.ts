@@ -180,10 +180,10 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
       return;
     }
     let options: any = this.layoutOptions;
+    let filelist = Array.from(event.dataTransfer.files);
     if (options.customActions) {
-      this.upload.emit(event);
+      this.upload.emit(this.multiple ? filelist : [filelist[0]]);
     } else {
-      let filelist = Array.from(event.dataTransfer.files);
       this.process(this.multiple ? filelist : [filelist[0]]);
     }
     this.active = false;
