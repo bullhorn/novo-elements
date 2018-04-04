@@ -95,6 +95,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
                 }) || {};
                 this.model = Object.assign(model, { countryName: countryName, state: stateObj.name });
                 this.updateStates();
+            } else {
+                this.model = model;
             }
         }
     }
