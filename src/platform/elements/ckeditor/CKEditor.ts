@@ -27,6 +27,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
     @Input() name;
     @Input() minimal;
     @Input() startupFocus: boolean = false;
+    @Input() fileBrowserImageUploadUrl: string = '';
 
     @Output() change = new EventEmitter();
     @Output() ready = new EventEmitter();
@@ -150,7 +151,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
         const extendedConfig = {
             toolbar: [
                 { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'] },
-                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl'] },
                 { name: 'links', items: ['Link'] },
                 { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
                 { name: 'tools', items: ['Maximize', 'Source'] },
@@ -158,7 +159,8 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
                 { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
                 { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
                 { name: 'colors', items: ['TextColor', 'BGColor'] }
-            ]
+            ],
+            filebrowserImageUploadUrl: this.fileBrowserImageUploadUrl,
         };
 
         return Object.assign(baseConfig, this.minimal ? minimalConfig : extendedConfig);
