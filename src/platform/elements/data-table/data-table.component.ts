@@ -61,7 +61,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         </div>
         <div class="novo-data-table-outside-container">
             <div class="novo-data-table-custom-filter" *ngIf="customFilter">
-              <ng-container *ngTemplateOutlet="templates['customFiler']"></ng-container>
+              <ng-container *ngTemplateOutlet="templates['customFilter']"></ng-container>
             </div>
             <div class="novo-data-table-container" [class.empty-user-filtered]="dataSource?.currentlyEmpty && state.userFiltered" [class.empty]="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine">
                 <cdk-table *ngIf="(columns?.length > 0) && columnsLoaded && dataSource" [dataSource]="dataSource" [trackBy]="trackByFn" novoDataTableSortFilter [class.empty]="dataSource?.currentlyEmpty && state.userFiltered" [hidden]="dataSource?.totallyEmpty && !userFiltered">
