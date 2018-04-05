@@ -35,6 +35,15 @@ describe('Elements: NovoAddressElement', () => {
             expect(component.ngOnInit).toBeDefined();
             component.ngOnInit();
         });
+        it('should be set up label for address1', () => {
+            component.config = {};
+            component.ngOnInit();
+            expect(component.config.address1.label).toBeDefined();
+        });
+        it('should be set up config', () => {
+            component.ngOnInit();
+            expect(component.config.address1.label).toBeDefined();
+        });
     });
 
     describe('Method: onCountryChange()', () => {
