@@ -1,8 +1,10 @@
 // NG2
 import { Component, ElementRef, ChangeDetectorRef, HostBinding } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 // App
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
+import { Helpers } from '../../../../utils/Helpers';
 
 @Component({
     selector: 'skill-specialty-picker-results',
@@ -24,6 +26,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                     </div>
                 </item-content>
             </novo-list-item>
+            <novo-list-item *ngIf="limitedTo"><div>{{labels.showingXofXResults(limit, total)}}</div></novo-list-item>
             <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
         </novo-list>
         <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
@@ -32,6 +35,9 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
 })
 export class SkillsSpecialtyPickerResults extends BasePickerResults {
     @HostBinding('class.active') active: boolean = true;
+    limitedTo: boolean = false;
+    limit: number = 200;
+    total: number;
 
     constructor(public element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
         super(element, ref);
@@ -39,5 +45,27 @@ export class SkillsSpecialtyPickerResults extends BasePickerResults {
 
     getListElement(): any {
         return this.element.nativeElement.querySelector('novo-list');
+    }
+
+    /**
+     * @name structureArray
+     * @param collection - the data once getData resolves it
+     * @returns { Array }
+     *
+     * @description This function structures an array of nodes into an array of objects with a
+     * 'name' field by default.
+     */
+    structureArray(collection: any): any {
+        let data = collection;
+        if (collection.hasOwnProperty('data')) {
+            this.limitedTo = collection.limitedTo200;
+            this.total = collection.total;
+            data = collection.data;
+        } else if (data.length > this.limit) {
+            this.limitedTo = true;
+            this.total = data.length;
+            data = data.slice(0, this.limit);
+        }
+        return super.structureArray(data);
     }
 }
