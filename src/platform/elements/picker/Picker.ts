@@ -61,7 +61,7 @@ const PICKER_VALUE_ACCESSOR = {
             autocomplete="off" #input />
         <i class="bhi-search" *ngIf="!_value || clearValueOnSelect"></i>
         <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
-        <novo-overlay-template class="picker-results-container" [parent]="element">
+        <novo-overlay-template class="picker-results-container" [parent]="element" (closing)="onOverlayClosed()">
             <span #results></span>
             <ng-content></ng-content>
         </novo-overlay-template>
@@ -121,9 +121,35 @@ export class NovoPickerElement implements OnInit {
 
   constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) {}
 
+<<<<<<< HEAD
   ngOnInit() {
     if (this.overrideElement) {
       this.element = this.overrideElement;
+=======
+    ngOnInit() {
+        if (this.overrideElement) {
+            this.element = this.overrideElement;
+        }
+        if (this.appendToBody) {
+            console.warn(`'appendToBody' has been deprecated. Please remove this attribute.`);
+        }
+        // Custom results template
+        this.resultsComponent = this.config.resultsTemplate || PickerResults;
+        // Get all distinct key up events from the input and only fire if long enough and distinct
+        //let input = this.element.nativeElement.querySelector('input');
+        const pasteObserver = Observable.fromEvent(this.input.nativeElement, 'paste')
+            .debounceTime(250)
+            .distinctUntilChanged();
+        pasteObserver.subscribe(
+            (event: ClipboardEvent) => this.onDebouncedKeyup(event),
+            err => this.hideResults(err));
+        const keyboardObserver = Observable.fromEvent(this.input.nativeElement, 'keyup')
+            .debounceTime(250)
+            .distinctUntilChanged();
+        keyboardObserver.subscribe(
+            (event: KeyboardEvent) => this.onDebouncedKeyup(event),
+            err => this.hideResults(err)); 
+>>>>>>> Removing scroll event listener on close; fixing loading dot styles for entityPickerResults
     }
     if (this.appendToBody) {
       console.warn(`'appendToBody' has been deprecated. Please remove this attribute.`);
@@ -263,11 +289,13 @@ export class NovoPickerElement implements OnInit {
    * @description - This method deletes the picker results from the DOM.
    */
   hideResults(err?: any) {
-    if (this.popup) {
-      this.popup.destroy();
-      this.popup = null;
+    this.closePanel();
+  }
+
+  onOverlayClosed(): void {
+    if (this.popup && this.popup.instance && this.popup.instance.cleanUp) {
+      this.popup.instance.cleanUp();
     }
-    this.hide();
   }
 
   // get accessor

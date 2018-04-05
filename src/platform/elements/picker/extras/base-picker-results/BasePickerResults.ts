@@ -1,5 +1,5 @@
 // NG2
-import { ElementRef, HostListener, Input, ChangeDetectorRef } from '@angular/core';
+import { ElementRef, Input, ChangeDetectorRef } from '@angular/core';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 // Vendor
@@ -39,6 +39,14 @@ export class BasePickerResults {
     this.scrollHandler = this.onScrollDown.bind(this);
   }
 
+  cleanUp(): void {
+    let element: Element = this.getListElement();
+    if (element && element.hasAttribute('scrollListener')) {
+      element.removeAttribute('scrollListener');
+      element.removeEventListener('scroll', this.scrollHandler);
+    }
+  }
+
   onScrollDown(event: MouseWheelEvent) {
     let element: any = event.target;
     if (element) {
@@ -63,6 +71,18 @@ export class BasePickerResults {
       this.page = 0;
       this.matches = [];
       this.processSearch(true);
+    } else {
+      this.addScrollListener();
+    }
+  }
+
+  addScrollListener(): void {
+    if (this.config.enableInfiniteScroll) {
+      let element: Element = this.getListElement();
+      if (element && !element.hasAttribute('scrollListener')) {
+        element.setAttribute('scrollListener', 'true');
+        element.addEventListener('scroll', this.scrollHandler);
+      }
     }
   }
 
@@ -88,13 +108,8 @@ export class BasePickerResults {
         this.ref.markForCheck();
         setTimeout(() => {
           this.overlay.updatePosition();
-          if (this.config.enableInfiniteScroll) {
-            let element: Element = this.getListElement();
-            if (element) {
-              element.addEventListener('scroll', this.scrollHandler);
-            }
-          }
-        }, 0); // @bkimball: This was added for Dylan Schulte, 9.18.2017 4:14PM EST, you're welcome!
+          this.addScrollListener();
+        }); // @bkimball: This was added for Dylan Schulte, 9.18.2017 4:14PM EST, you're welcome!
       },
       (err) => {
         this.hasError = this.term && this.term.length !== 0;
