@@ -14,6 +14,19 @@ const ADDRESS_VALUE_ACCESSOR = {
     multi: true
 };
 
+export interface AddressSubfieldConfig {
+    label: string;
+}
+
+export interface AddressConfig {
+    address1?: AddressSubfieldConfig;
+    address2?: AddressSubfieldConfig;
+    city?: AddressSubfieldConfig;
+    state?: AddressSubfieldConfig;
+    zip?: AddressSubfieldConfig;
+    country?: AddressSubfieldConfig;
+}
+
 @Component({
     selector: 'novo-address',
     providers: [ADDRESS_VALUE_ACCESSOR],
@@ -27,7 +40,7 @@ const ADDRESS_VALUE_ACCESSOR = {
     `
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
-    @Input() config: any;
+    @Input() config: AddressConfig;
     states: Array<any> = [];
     countries: Array<any> = getCountries();
     fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'country'];
