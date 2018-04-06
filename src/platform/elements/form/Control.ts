@@ -144,7 +144,7 @@ export class NovoCustomControlContainerElement {
                             <!--TextArea-->
                             <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" autosize (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></textarea>
                             <!--Editor-->
-                            <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" [startupFocus]="control.startupFocus" [minimal]="control.minimal" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
+                            <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" [startupFocus]="control.startupFocus" [minimal]="control.minimal" [fileBrowserImageUploadUrl]="control.fileBrowserImageUploadUrl" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
                             <!--AceEditor-->
                             <novo-ace-editor *ngSwitchCase="'ace-editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-ace-editor>
                             <!--HTML5 Select-->

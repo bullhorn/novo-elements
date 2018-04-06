@@ -81,7 +81,8 @@ describe('Control: BaseControl', () => {
                 associatedEntity: 'ENTITY',
                 optionsType: 'TYPE',
                 maxlength: 100,
-                disabled: true
+                disabled: true,
+                fileBrowserImageUploadUrl: '/foo/bar/baz',
             });
         });
 
@@ -135,6 +136,9 @@ describe('Control: BaseControl', () => {
         });
         it('should set the disabled', () => {
             expect(control.disabled).toEqual(true);
+        });
+        it('should set fileBrowserImageUploadUrl', () => {
+            expect(control.fileBrowserImageUploadUrl).toEqual('/foo/bar/baz');
         });
     });
 });
