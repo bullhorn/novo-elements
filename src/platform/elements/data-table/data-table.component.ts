@@ -120,6 +120,11 @@ import { StaticDataTableService } from './services/static-data-table.service';
               let-col="col">
               <span>{{ row[col.id] | dataTableInterpolate:col | dataTableNumberRenderer:col }}</span>
         </ng-template>
+        <ng-template novoTemplate="percentCellTemplate"
+            let-row
+            let-col="col">
+            <span>{{ row[col.id] | dataTableInterpolate:col | dataTableNumberRenderer:col }}%</span>
+        </ng-template>
         <ng-template novoTemplate="linkCellTemplate"
               let-row
               let-col="col">

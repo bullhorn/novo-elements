@@ -14,6 +14,8 @@ export class DataTableSource<T> extends DataSource<T> {
   public pristine = true;
   public data: T[];
 
+  private totalSet: boolean = false;
+
   get totallyEmpty(): boolean {
     return this.total === 0;
   }
@@ -44,7 +46,9 @@ export class DataTableSource<T> extends DataSource<T> {
       }),
       map((data: { results: T[]; total: number }) => {
         this.loading = false;
-        this.total = data.total;
+        if (!this.totalSet) {
+          this.total = data.total;
+        }
         this.current = data.results.length;
         this.data = data.results;
         setTimeout(() => {

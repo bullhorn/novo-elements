@@ -4,7 +4,7 @@ export interface IDataTableColumn<T> {
   id: string;
   label?: string;
   enabled?: boolean;
-  type: 'string' | 'link' | 'date' | 'datetime' | 'time' | 'currency' | 'number' | 'action';
+  type: 'string' | 'link' | 'date' | 'datetime' | 'time' | 'currency' | 'number' | 'percent' | 'action';
   template?: string;
   property?: string;
   disabled?: boolean;
