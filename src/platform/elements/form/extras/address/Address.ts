@@ -6,6 +6,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { getCountries, getStates, getStateObjects, findByCountryName, findByCountryId } from '../../../../utils/countries/Countries';
 import { NovoLabelService } from '../../../../services/novo-label-service';
+import { Helpers } from '../../../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const ADDRESS_VALUE_ACCESSOR = {
@@ -16,6 +17,7 @@ const ADDRESS_VALUE_ACCESSOR = {
 
 export interface NovoAddressSubfieldConfig {
     label: string;
+    required: boolean;
 }
 
 export interface NovoAddressConfig {
@@ -31,12 +33,48 @@ export interface NovoAddressConfig {
     selector: 'novo-address',
     providers: [ADDRESS_VALUE_ACCESSOR],
     template: `
-        <input type="text" class="street-address" id="address1" name="address1" [placeholder]="config.address1.label" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="updateControl()"/>
-        <input type="text" class="apt suite" id="address2" name="address2" [placeholder]="config.address2.label" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()"/>
-        <input type="text" class="city locality" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()"/>
-        <novo-select class="state region" id="state" [options]="states" [placeholder]="config.state.label" autocomplete="shipping region" [(ngModel)]="model.state" (ngModelChange)="onStateChange($event)"></novo-select>
-        <input type="text" class="zip postal-code" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()"/>
-        <novo-select class="country-name" id="country" [options]="countries" [placeholder]="config.country.label" autocomplete="shipping country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event)"></novo-select>
+        <span class="street-address">
+            <i *ngIf="showRequired('address1')"
+                class="required-indicator address1"
+                [ngClass]="{'bhi-circle': !isValid('address1'), 'bhi-check': isValid('address1')}">
+            </i>
+            <input type="text" id="address1" name="address1" [placeholder]="config.address1.label" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="updateControl()"/>
+        </span>
+        <span class="apt suite">
+            <i *ngIf="showRequired('address2')"
+                class="required-indicator address2"
+                [ngClass]="{'bhi-circle': !isValid('address2'), 'bhi-check': isValid('address2')}">
+            </i>
+            <input type="text" id="address2" name="address2" [placeholder]="config.address2.label" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()"/>
+        </span>
+        <span class="city locality">
+            <i *ngIf="showRequired('city')"
+                class="required-indicator"
+                [ngClass]="{'bhi-circle': !isValid('city'), 'bhi-check': isValid('city')}">
+            </i>
+            <input type="text" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()"/>
+        </span>
+        <span class="state region">
+            <i *ngIf="showRequired('state')"
+                class="required-indicator"
+                [ngClass]="{'bhi-circle': !isValid('state'), 'bhi-check': isValid('state')}">
+            </i>
+            <novo-select id="state" [options]="states" [placeholder]="config.state.label" autocomplete="shipping region" [(ngModel)]="model.state" (ngModelChange)="onStateChange($event)"></novo-select>
+        </span>
+        <span class="zip postal-code">
+            <i *ngIf="showRequired('zip')"
+                class="required-indicator"
+                [ngClass]="{'bhi-circle': !isValid('zip'), 'bhi-check': isValid('zip')}">
+            </i>
+            <input type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()"/>
+        </span>
+        <span class="country-name">
+            <i *ngIf="showRequired('country')"
+                class="required-indicator"
+                [ngClass]="{'bhi-circle': !isValid('country'), 'bhi-check': isValid('country')}">
+            </i>
+            <novo-select id="country" [options]="countries" [placeholder]="config.country.label" autocomplete="shipping country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event)"></novo-select>
+        </span>
     `
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
@@ -59,9 +97,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         }
         this.fieldList.forEach(((field: string) => {
             if (!this.config.hasOwnProperty(field)) {
-                this.config[field] = {
-                    label: this.labels[field]
-                };
+                this.config[field] = {};
+            }
+            if (!this.config[field].hasOwnProperty('label')) {
+                this.config[field].label = this.labels[field];
             }
         }));
         if (this.model) {
@@ -70,6 +109,21 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         } else if (!this.model) {
             this.model = {};
         }
+    }
+
+    showRequired(field: string): boolean {
+        if (this.config[field].required) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    isValid(field: string): boolean {
+        if (this.config[field].required && Helpers.isEmpty(this.model[field])) {
+            return false;
+        }
+        return true;
     }
 
     onCountryChange(evt) {

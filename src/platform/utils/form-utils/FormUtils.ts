@@ -318,10 +318,123 @@ export class FormUtils {
               }
               controlConfig.value[subfield.name] = 1;
             }
+            Object.assign(controlConfig, overrides[field.name]);
           }
-        }
-        control = new AddressControl(controlConfig);
-        break;
+
+          switch (type) {
+            case 'entitychips':
+              // TODO: This doesn't belong in this codebase
+              controlConfig.multiple = true;
+              controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
+              controlConfig.config.previewTemplate = overridePreviewTemplate || EntityPickerResult;
+              // TODO: When appendToBody picker works better in table/form
+              control = new PickerControl(controlConfig);
+              break;
+            case 'chips':
+              controlConfig.multiple = true;
+              // TODO: When appendToBody picker works better in table/form
+              control = new PickerControl(controlConfig);
+              break;
+            case 'entitypicker':
+              // TODO: This doesn't belong in this codebase
+              controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
+              // TODO: When appendToBody picker works better in table/form
+              control = new PickerControl(controlConfig);
+              break;
+            case 'picker':
+              // TODO: When appendToBody picker works better in table/form
+              control = new PickerControl(controlConfig);
+              break;
+            case 'datetime':
+              controlConfig.military = config ? !!config.military : false;
+              control = new DateTimeControl(controlConfig);
+              break;
+            case 'date':
+              controlConfig.military = config ? !!config.military : false;
+              control = new DateControl(controlConfig);
+              break;
+            case 'time':
+              controlConfig.military = config ? !!config.military : false;
+              control = new TimeControl(controlConfig);
+              break;
+            case 'currency':
+            case 'money':
+            case 'email':
+            case 'percentage':
+            case 'float':
+            case 'number':
+            case 'year':
+              // TODO: Only types from `determineInputType` should be used in this class
+              if (type === 'money') {
+                type = 'currency';
+              }
+              controlConfig.type = type;
+              control = new TextBoxControl(controlConfig);
+              break;
+            case 'text':
+              control = new TextBoxControl(controlConfig);
+              break;
+            case 'textarea':
+              control = new TextAreaControl(controlConfig);
+              break;
+            case 'editor':
+              control = new EditorControl(controlConfig);
+              break;
+            case 'editor-minimal':
+              control = new EditorControl(controlConfig);
+              control.minimal = true;
+              break;
+            case 'tiles':
+              control = new TilesControl(controlConfig);
+              break;
+            case 'checkbox':
+              control = new CheckboxControl(controlConfig);
+              break;
+            case 'checklist':
+              control = new CheckListControl(controlConfig);
+              break;
+            case 'radio':
+              control = new RadioControl(controlConfig);
+              break;
+            case 'select':
+              control = new SelectControl(controlConfig);
+              break;
+            case 'address':
+              field.required = field.required || false;
+              if (field.fields && field.fields.length) {
+                for (let subfield of field.fields) {
+                  if (Helpers.isBlank(controlConfig.config)) {
+                    controlConfig.config = {};
+                  }
+                  controlConfig.config[subfield.name] = {
+                    label: subfield.label,
+                    required: subfield.required
+                  };
+                  field.required = field.required || subfield.required;
+                  if (subfield.defaultValue) {
+                    if (Helpers.isBlank(controlConfig.value)) {
+                      controlConfig.value = {};
+                    }
+                    controlConfig.value[subfield.name] = subfield.defaultValue;
+                  } else if (subfield.name === 'countryID') {
+                    if (Helpers.isBlank(controlConfig.value)) {
+                      controlConfig.value = {};
+                    }
+                    controlConfig.value[subfield.name] = 1;
+                  }
+                }
+              }
+              control = new AddressControl(controlConfig);
+              break;
+            case 'file':
+              control = new FileControl(controlConfig);
+              break;
+            default:
+              control = new TextBoxControl(controlConfig);
+              break;
+          }
+          control = new AddressControl(controlConfig);
+          break;
       case 'file':
         control = new FileControl(controlConfig);
         break;

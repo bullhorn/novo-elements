@@ -1,3 +1,5 @@
+import { Helpers } from './../../utils/Helpers';
+
 const MAX_INTEGER = 2147483647;
 const MIN_YEAR = 1753;
 
@@ -28,18 +30,23 @@ export class FormValidators {
 
     // Makes sure the control value is a valid address
     static isValidAddress(control) {
-        if (control.value && control.dirty) {
+        let fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'country'];
+        let invalidAddressFields: string[] = [];
+        let returnVal = null;
+        if (control.value && control.dirty && control.config) {
             let valid = true;
-            // Address
-            if ((!control.value.address1 || control.value.address1.length === 0) &&
-               (!control.value.city || control.value.city.length === 0) &&
-               (!control.value.state || control.value.state.length === 0) &&
-               (!control.value.address2 || control.value.address2.length === 0) &&
-               (!control.value.zip || control.value.zip.length === 0) &&
-                (!control.value.countryName || control.value.countryName.length === 0))  {
-                valid = false;
-            }
-            return valid ? null : { 'invalidAddress': true };
+            fieldList.forEach((subfield: string) => {
+                if (!Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&
+                    !Helpers.isBlank(control.value[subfield]) && Helpers.isEmpty(control.value[subfield])) {
+                    valid = false;
+                    invalidAddressFields.push(control.config[subfield].label);
+                }
+            });
+            returnVal = valid ? null : {
+                'invalidAddress': true,
+                invalidAddressFields,
+            };
+            return returnVal;
         }
         return null;
     }
