@@ -401,11 +401,12 @@ export class FormUtils {
               break;
             case 'address':
               field.required = field.required || false;
+              if (Helpers.isBlank(controlConfig.config)) {
+                controlConfig.config = {};
+              }
+              controlConfig.config.required = field.required;
               if (field.fields && field.fields.length) {
                 for (let subfield of field.fields) {
-                  if (Helpers.isBlank(controlConfig.config)) {
-                    controlConfig.config = {};
-                  }
                   controlConfig.config[subfield.name] = {
                     label: subfield.label,
                     required: subfield.required
@@ -423,18 +424,17 @@ export class FormUtils {
                     controlConfig.value[subfield.name] = 1;
                   }
                 }
+                controlConfig.value[subfield.name] = subfield.defaultValue;
+              } else if (subfield.name === 'countryID') {
+                if (Helpers.isBlank(controlConfig.value)) {
+                  controlConfig.value = {};
+                }
+                controlConfig.value[subfield.name] = 1;
               }
-              control = new AddressControl(controlConfig);
-              break;
-            case 'file':
-              control = new FileControl(controlConfig);
-              break;
-            default:
-              control = new TextBoxControl(controlConfig);
-              break;
           }
-          control = new AddressControl(controlConfig);
-          break;
+        }
+        control = new AddressControl(controlConfig);
+        break;
       case 'file':
         control = new FileControl(controlConfig);
         break;
@@ -442,90 +442,89 @@ export class FormUtils {
         control = new TextBoxControl(controlConfig);
         break;
     }
-    return control;
+    control = new AddressControl(controlConfig);
+    break;
+      case 'file':
+    control = new FileControl(controlConfig);
+    break;
+      default:
+  control = new TextBoxControl(controlConfig);
+  break;
+}
+return control;
   }
 
-  toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean, }, overrides?: any, forTable: boolean = false) {
-    let controls = [];
-    if (meta && meta.fields) {
-      let fields = meta.fields;
-      fields.forEach(field => {
-        if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
-          let control = this.getControlForField(field, http, config, overrides, forTable);
-          // Set currency format
-          if (control.subType === 'currency') {
-            control.currencyFormat = currencyFormat;
-          }
-          // Add to controls
-          controls.push(control);
+toControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean, }, overrides ?: any, forTable: boolean = false) {
+  let controls = [];
+  if (meta && meta.fields) {
+    let fields = meta.fields;
+    fields.forEach(field => {
+      if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
+        let control = this.getControlForField(field, http, config, overrides, forTable);
+        // Set currency format
+        if (control.subType === 'currency') {
+          control.currencyFormat = currencyFormat;
         }
-      });
-    }
-    return controls;
-  }
-
-  toTableControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?: any) {
-    let controls = this.toControls(meta, currencyFormat, http, config, overrides, true);
-    let ret = {};
-    controls.forEach((control: BaseControl) => {
-      ret[control.key] = {
-        editorType: control.__type,
-        editorConfig: control.__config
-      };
+        // Add to controls
+        controls.push(control);
+      }
     });
-    return ret;
   }
+  return controls;
+}
 
-  toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides?) {
-    let fieldsets: Array<NovoFieldset> = [];
-    let ranges = [];
-    if (meta && meta.fields) {
-      let fields = meta.fields.map(field => {
-        if (!field.hasOwnProperty('sortOrder')) {
-          field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
-        }
-        return field;
-      }).sort(Helpers.sortByField(['sortOrder', 'name']));
-      if (meta.sectionHeaders && meta.sectionHeaders.length) {
-        meta.sectionHeaders.sort(Helpers.sortByField(['sortOrder', 'name']));
-        meta.sectionHeaders.forEach((item, i) => {
-          if (item.enabled) {
-            if (item.sortOrder > 0 && fieldsets.length === 0) {
-              fieldsets.push({
-                controls: []
-              });
-              ranges.push({
-                min: 0,
-                max: item.sortOrder - 1,
-                fieldsetIdx: 0
-              });
-            }
+toTableControls(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides ?: any) {
+  let controls = this.toControls(meta, currencyFormat, http, config, overrides, true);
+  let ret = {};
+  controls.forEach((control: BaseControl) => {
+    ret[control.key] = {
+      editorType: control.__type,
+      editorConfig: control.__config
+    };
+  });
+  return ret;
+}
+
+toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean }, overrides ?) {
+  let fieldsets: Array<NovoFieldset> = [];
+  let ranges = [];
+  if (meta && meta.fields) {
+    let fields = meta.fields.map(field => {
+      if (!field.hasOwnProperty('sortOrder')) {
+        field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
+      }
+      return field;
+    }).sort(Helpers.sortByField(['sortOrder', 'name']));
+    if (meta.sectionHeaders && meta.sectionHeaders.length) {
+      meta.sectionHeaders.sort(Helpers.sortByField(['sortOrder', 'name']));
+      meta.sectionHeaders.forEach((item, i) => {
+        if (item.enabled) {
+          if (item.sortOrder > 0 && fieldsets.length === 0) {
             fieldsets.push({
-              title: item.label,
-              icon: item.icon || 'bhi-section',
               controls: []
             });
             ranges.push({
-              min: item.sortOrder,
-              max: Number.MAX_SAFE_INTEGER,
-              fieldsetIdx: fieldsets.length - 1
+              min: 0,
+              max: item.sortOrder - 1,
+              fieldsetIdx: 0
             });
-            if (i > 0 && fieldsets.length > 1) {
-              ranges[fieldsets.length - 2].max = item.sortOrder - 1;
-            }
           }
-        });
-        if (!ranges.length) {
           fieldsets.push({
+            title: item.label,
+            icon: item.icon || 'bhi-section',
             controls: []
           });
           ranges.push({
-            min: 0,
+            min: item.sortOrder,
             max: Number.MAX_SAFE_INTEGER,
-            fieldsetIdx: 0
+            fieldsetIdx: fieldsets.length - 1
           });
+          if (i > 0 && fieldsets.length > 1) {
+            ranges[fieldsets.length - 2].max = item.sortOrder - 1;
+          }
         }
-      } else {
+      });
+      if (!ranges.length) {
         fieldsets.push({
           controls: []
         });
@@ -535,102 +534,112 @@ export class FormUtils {
           fieldsetIdx: 0
         });
       }
-      fields.forEach(field => {
-        if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
-          let control = this.getControlForField(field, http, config, overrides);
-          // Set currency format
-          if (control.subType === 'currency') {
-            control.currencyFormat = currencyFormat;
-          }
-          let location = ranges.find(item => {
-            return (item.min <= field.sortOrder && field.sortOrder <= item.max) || (item.min <= field.sortOrder && item.min === item.max);
-          });
-          if (location) {
-            // Add to controls
-            fieldsets[location.fieldsetIdx].controls.push(control);
-          }
-        }
+    } else {
+      fieldsets.push({
+        controls: []
+      });
+      ranges.push({
+        min: 0,
+        max: Number.MAX_SAFE_INTEGER,
+        fieldsetIdx: 0
       });
     }
-    if (fieldsets.length > 0) {
-      return fieldsets;
-    } else {
-      return [{
-        controls: this.toControls(meta, currencyFormat, http, config)
-      }];
-    }
-  }
-
-  getControlOptions(field: any, http: any, config: { token?: string, restUrl?: string, military?: boolean }): any {
-    // TODO: The token property of config is the only property used; just pass in `token: string`
-    if (field.dataType === 'Boolean' && !field.options) {
-      // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
-      // TODO: (cont.) returns `tiles`
-      return [
-        { value: false, label: this.labels.no },
-        { value: true, label: this.labels.yes }
-      ];
-    } else if (field.optionsUrl) {
-      return this.optionsService.getOptionsConfig(http, field, config);
-    } else if (Array.isArray(field.options) && field.type === 'chips') {
-      let options = field.options;
-      return {
-        field: 'value',
-        format: '$label',
-        options
-      };
-    } else if (field.options) {
-      return field.options;
-    }
-    return null;
-  }
-
-  setInitialValues(controls: Array<NovoControlConfig>, values: any, keepClean?: boolean, keyOverride?: string) {
-    for (let i = 0; i < controls.length; i++) {
-      let control = controls[i];
-      let key = keyOverride ? control.key.replace(keyOverride, '') : control.key;
-      let value = values[key];
-
-      if (Helpers.isBlank(value)) {
-        continue;
-      }
-
-      if (Array.isArray(value) && value.length === 0) {
-        continue;
-      }
-
-      if (Array.isArray(value) && value.length > 0) {
-        value = value.filter(val => !(Object.keys(val).length === 0 && val.constructor === Object));
-        if (value.length === 0) {
-          continue;
+    fields.forEach(field => {
+      if (field.name !== 'id' && (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) && !field.readOnly) {
+        let control = this.getControlForField(field, http, config, overrides);
+        // Set currency format
+        if (control.subType === 'currency') {
+          control.currencyFormat = currencyFormat;
+        }
+        let location = ranges.find(item => {
+          return (item.min <= field.sortOrder && field.sortOrder <= item.max) || (item.min <= field.sortOrder && item.min === item.max);
+        });
+        if (location) {
+          // Add to controls
+          fieldsets[location.fieldsetIdx].controls.push(control);
         }
       }
+    });
+  }
+  if (fieldsets.length > 0) {
+    return fieldsets;
+  } else {
+    return [{
+      controls: this.toControls(meta, currencyFormat, http, config)
+    }];
+  }
+}
 
-      if (value.data && value.data.length === 0) {
-        continue;
-      }
+getControlOptions(field: any, http: any, config: { token?: string, restUrl?: string, military?: boolean }): any {
+  // TODO: The token property of config is the only property used; just pass in `token: string`
+  if (field.dataType === 'Boolean' && !field.options) {
+    // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
+    // TODO: (cont.) returns `tiles`
+    return [
+      { value: false, label: this.labels.no },
+      { value: true, label: this.labels.yes }
+    ];
+  } else if (field.optionsUrl) {
+    return this.optionsService.getOptionsConfig(http, field, config);
+  } else if (Array.isArray(field.options) && field.type === 'chips') {
+    let options = field.options;
+    return {
+      field: 'value',
+      format: '$label',
+      options
+    };
+  } else if (field.options) {
+    return field.options;
+  }
+  return null;
+}
 
-      if (Object.keys(value).length === 0 && value.constructor === Object) {
-        continue;
-      }
+setInitialValues(controls: Array < NovoControlConfig >, values: any, keepClean ?: boolean, keyOverride ?: string) {
+  for (let i = 0; i < controls.length; i++) {
+    let control = controls[i];
+    let key = keyOverride ? control.key.replace(keyOverride, '') : control.key;
+    let value = values[key];
 
-      control.value = value;
-      // TODO: keepClean is not required, but is always used. It should default (to true?)
-      control.dirty = !keepClean;
+    if (Helpers.isBlank(value)) {
+      continue;
     }
-  }
 
-  setInitialValuesFieldsets(fieldsets: Array<NovoFieldset>, values, keepClean?: boolean) {
-    fieldsets.forEach(fieldset => {
-      this.setInitialValues(fieldset.controls, values, keepClean);
-    });
-  }
+    if (Array.isArray(value) && value.length === 0) {
+      continue;
+    }
 
-  forceShowAllControls(controls: Array<NovoControlConfig>) {
-    controls.forEach(control => {
-      control.hidden = false;
-    });
+    if (Array.isArray(value) && value.length > 0) {
+      value = value.filter(val => !(Object.keys(val).length === 0 && val.constructor === Object));
+      if (value.length === 0) {
+        continue;
+      }
+    }
+
+    if (value.data && value.data.length === 0) {
+      continue;
+    }
+
+    if (Object.keys(value).length === 0 && value.constructor === Object) {
+      continue;
+    }
+
+    control.value = value;
+    // TODO: keepClean is not required, but is always used. It should default (to true?)
+    control.dirty = !keepClean;
   }
+}
+
+setInitialValuesFieldsets(fieldsets: Array < NovoFieldset >, values, keepClean ?: boolean) {
+  fieldsets.forEach(fieldset => {
+    this.setInitialValues(fieldset.controls, values, keepClean);
+  });
+}
+
+forceShowAllControls(controls: Array<NovoControlConfig>) {
+  controls.forEach(control => {
+    control.hidden = false;
+  });
+}
 
   forceShowAllControlsInFieldsets(fieldsets: Array<NovoFieldset>) {
     fieldsets.forEach(fieldset => {
@@ -641,13 +650,13 @@ export class FormUtils {
   }
 
   forceValidation(form: NovoFormGroup): void {
-    Object.keys(form.controls).forEach((key: string) => {
-      let control: any = form.controls[key];
-      if (control.required && Helpers.isBlank(form.value[control.key])) {
-        control.markAsDirty();
-        control.markAsTouched();
-      }
-    });
-  }
+      Object.keys(form.controls).forEach((key: string) => {
+        let control: any = form.controls[key];
+        if (control.required && Helpers.isBlank(form.value[control.key])) {
+          control.markAsDirty();
+          control.markAsTouched();
+        }
+      });
+    }
 
 }

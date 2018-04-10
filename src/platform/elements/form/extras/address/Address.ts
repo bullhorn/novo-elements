@@ -1,6 +1,6 @@
 // NG2
 import {
-    Component, forwardRef, Input, OnInit
+    Component, forwardRef, Input, OnInit, ChangeDetectionStrategy
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
@@ -21,6 +21,7 @@ export interface NovoAddressSubfieldConfig {
 }
 
 export interface NovoAddressConfig {
+    required?: boolean;
     address1?: NovoAddressSubfieldConfig;
     address2?: NovoAddressSubfieldConfig;
     city?: NovoAddressSubfieldConfig;
@@ -32,6 +33,7 @@ export interface NovoAddressConfig {
 @Component({
     selector: 'novo-address',
     providers: [ADDRESS_VALUE_ACCESSOR],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <span class="street-address">
             <i *ngIf="showRequired('address1')"
@@ -112,7 +114,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     }
 
     showRequired(field: string): boolean {
-        if (this.config[field].required) {
+        if (this.config[field].required || this.config.required) {
             return true;
         } else {
             return false;
@@ -120,7 +122,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     }
 
     isValid(field: string): boolean {
-        if (this.config[field].required && Helpers.isEmpty(this.model[field])) {
+        if (((this.showRequired(field) && Helpers.isEmpty(this.model[field])) || !this.showRequired(field)) &&
+            !(field === 'country' && this.showRequired(field) && !Helpers.isEmpty(this.model.countryName))) {
             return false;
         }
         return true;

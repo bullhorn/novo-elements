@@ -127,7 +127,7 @@ export class NovoCustomControlContainerElement {
                     <div class="novo-control-inner-input-container">
                         <!--Required Indicator-->
                         <i [hidden]="!form.controls[control.key].required || form.controls[control.key].readOnly"
-                            class="required-indicator"
+                            class="required-indicator {{ form.controls[control.key].controlType }}"
                             [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || (form.controls[control.key].required && !form.controls[control.key].readOnly)">
                         </i>
                         <!--Form Controls-->
