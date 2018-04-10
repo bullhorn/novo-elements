@@ -297,6 +297,12 @@ export class FormUtils {
             case 'address':
                 if (field.fields && field.fields.length) {
                     for (let subfield of field.fields) {
+                        if (Helpers.isBlank(controlConfig.config)) {
+                            controlConfig.config = {};
+                        }
+                        controlConfig.config[subfield.name] = {
+                            label: subfield.label
+                        };
                         if (subfield.defaultValue) {
                             if (Helpers.isBlank(controlConfig.value)) {
                                 controlConfig.value = {};
