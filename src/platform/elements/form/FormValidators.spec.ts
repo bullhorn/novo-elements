@@ -52,39 +52,46 @@ describe('FormValidators', () => {
     });
 
     describe('Method: isValidAddress(control)', () => {
+        let control: any;
+        beforeEach(() => {
+            control = {
+                dirty: true,
+                config: {
+                    address1: {
+                        label: 'address1',
+                        required: true
+                    },
+                    country: {
+                        label: 'country',
+                        required: true
+                    },
+                    state: {
+                        required: false
+                    }
+                }
+            }
+        });
         it('should be defined', () => {
             expect(FormValidators.isValidAddress).toBeDefined();
         });
         it('should return null if no value', () => {
-            expect(FormValidators.isValidAddress({})).toBe(null);
+            expect(FormValidators.isValidAddress(control)).toBe(null);
         });
         it('should return null if valid', () => {
-            let valid = createAddress('TEST', 'TEST', 'TEST', '12345', 'TEST');
-            expect(FormValidators.isValidAddress({ value: valid })).toBe(null);
+            control.value = createAddress('TEST', 'TEST', 'TEST', '12345', 'TEST');
+            expect(FormValidators.isValidAddress(control)).toBe(null);
         });
-        xit('should return invalid if no address1', () => {
-            let address = createAddress(null, 'TEST', 'TEST', '12345', 'TEST');
-            expect(FormValidators.isValidAddress({ value: address })).toEqual({ 'invalidAddress': true });
+        it('should return invalid if no address1', () => {
+            control.value = createAddress('', 'TEST', 'TEST', '12345', 'TEST');
+            expect(FormValidators.isValidAddress(control)).toEqual({ 'invalidAddress': true, invalidAddressFields: ['address1'] });
         });
-        xit('should return invalid if no city', () => {
-            let address = createAddress('TEST', null, 'TEST', '12345', 'TEST');
-            expect(FormValidators.isValidAddress({ value: address })).toEqual({ 'invalidAddress': true });
+        it('should return invalid if no countryName', () => {
+            control.value = createAddress('TEST', 'TEST', 'TEST', '12345', '');
+            expect(FormValidators.isValidAddress(control)).toEqual({ 'invalidAddress': true, invalidAddressFields: ['country'] });
         });
-        xit('should return invalid if no state', () => {
-            let address = createAddress('TEST', 'TEST', null, '12345', 'TEST');
-            expect(FormValidators.isValidAddress({ value: address })).toEqual({ 'invalidAddress': true });
-        });
-        xit('should return invalid if no zip', () => {
-            let address = createAddress('TEST', 'TEST', 'TEST', null, 'TEST');
-            expect(FormValidators.isValidAddress({ value: address })).toEqual({ 'invalidAddress': true });
-        });
-        xit('should return invalid if bad zip', () => {
-            let address = createAddress('TEST', 'TEST', 'TEST', '123', 'TEST');
-            expect(FormValidators.isValidAddress({ value: address })).toEqual({ 'invalidAddress': true });
-        });
-        xit('should return invalid if no countryName', () => {
-            let address = createAddress('TEST', 'TEST', 'TEST', '12345', null);
-            expect(FormValidators.isValidAddress({ value: address })).toEqual({ 'invalidAddress': true });
+        it('should return null if no state', () => {
+            control.value = createAddress('TEST', 'TEST', '', '12345', 'null');
+            expect(FormValidators.isValidAddress(control)).toEqual(null);
         });
     });
 });

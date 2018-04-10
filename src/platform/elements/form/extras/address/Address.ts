@@ -104,6 +104,9 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             if (!this.config[field].hasOwnProperty('label')) {
                 this.config[field].label = this.labels[field];
             }
+            if (this.config.required) {
+                this.config[field].required = true;
+            }
         }));
         if (this.model) {
             this.writeValue(this.model);
