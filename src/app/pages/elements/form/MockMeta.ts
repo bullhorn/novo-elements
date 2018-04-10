@@ -320,7 +320,7 @@ export const MockMeta = {
                     confidential: false,
                     optional: true,
                     label: 'Zip',
-                    required: true,
+                    required: false,
                     readOnly: false,
                     multiValue: false,
                     hideFromSearch: false
