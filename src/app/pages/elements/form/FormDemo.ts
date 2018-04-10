@@ -284,6 +284,7 @@ export class FormDemoComponent {
         // Address control
         this.addressControl = new AddressControl({
             key: 'address',
+            name: 'address',
             label: 'Address',
             config: {
                 address1: {
@@ -291,10 +292,12 @@ export class FormDemoComponent {
                     required: true
                 },
                 address2: {
-                    label: 'Address Line 2'
+                    label: 'Address Line 2',
+                    required: true
                 },
                 state: {
-                    label: 'State'
+                    label: 'State',
+                    required: true
                 }
             },
             value: {

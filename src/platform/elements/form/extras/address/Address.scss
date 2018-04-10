@@ -5,7 +5,12 @@ novo-address {
     input {
         min-width: 10px;
     }
-
+    .street-address, .apt, .city, .state, .zip, .country-name {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        
+    }
     .street-address {
         flex: 3 3 75%;
         padding: 0 0 5px !important;
@@ -22,7 +27,7 @@ novo-address {
     }
 
     .state {
-        flex: 1 1 30%;
+       flex: 1 1 30%;
 
         & > div {
             padding: 19px 29px 17px 0 !important;
@@ -39,3 +44,12 @@ novo-address {
         padding: 10px 0 0 !important;
     }
 }
+novo-form .novo-form-container form div.novo-form-row novo-control 
+    > div.novo-control-container 
+    > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container novo-address
+    i.required-indicator.bhi-check {
+        display: flex;
+        border-bottom: 1px solid #afb9c0;
+        padding-bottom: 26px;
+        margin-right: 0;
+    }

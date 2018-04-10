@@ -263,7 +263,7 @@ export const MockMeta = {
                     confidential: false,
                     optional: true,
                     label: 'Addressxxx',
-                    required: false,
+                    required: true,
                     readOnly: false,
                     multiValue: false,
                     hideFromSearch: false,
@@ -373,13 +373,6 @@ export const MockMeta = {
             sortOrder: 610
         },
         {
-            name: 'address',
-            type: 'address',
-            label: 'Address',
-            required: true,
-            sortOrder: 620
-        },
-        {
             name: 'attachments',
             type: 'file',
             label: 'Attachments',
@@ -447,7 +440,15 @@ export const MockMeta = {
             sortOrder: 9010,
             maxLength: 150,
             description: 'Comments, Please'
-        }, {
+        },
+        {
+            name: 'address',
+            type: 'address',
+            label: 'Address',
+            required: true,
+            sortOrder: 620
+        },
+        {
             name: 'customfield',
             label: 'Custom Component',
             required: true,

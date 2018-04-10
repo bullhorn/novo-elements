@@ -30,7 +30,6 @@ const LAYOUT_DEFAULTS = { iconStyle: 'box' };
             </label>
         </div>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     @Input() name: string;
