@@ -1,55 +1,65 @@
 novo-address {
     display: flex;
     flex-flow: row wrap;
-
     input {
         min-width: 10px;
     }
-    .street-address, .apt, .city, .state, .zip, .country-name {
+    .street-address,
+    .apt,
+    .city,
+    .state,
+    .zip,
+    .country-name {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        
     }
     .street-address {
         flex: 3 3 75%;
         padding: 0 0 5px !important;
     }
-
     .apt {
         flex: 1 1 25%;
         padding: 0 0 5px !important;
     }
-
     .city {
         flex: 2 2 40%;
         padding: 5px 0 !important;
     }
-
     .state {
-       flex: 1 1 30%;
-
-        & > div {
+        flex: 1 1 30%;
+        align-items: center;
+        &>div {
             padding: 19px 29px 17px 0 !important;
         }
     }
-
     .zip {
         flex: 1 0 20%;
         padding: 5px 0 !important;
     }
-
     .country-name {
         flex: 4 4 100%;
         padding: 10px 0 0 !important;
     }
 }
-novo-form .novo-form-container form div.novo-form-row novo-control 
-    > div.novo-control-container 
-    > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container novo-address
+
+novo-form .novo-form-container form div.novo-form-row novo-control>div.novo-control-container>div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container novo-address {
+    i.required-indicator,
     i.required-indicator.bhi-check {
         display: flex;
         border-bottom: 1px solid #afb9c0;
-        padding-bottom: 26px;
+        padding-bottom: 16px;
         margin-right: 0;
+        padding-top: 10px;
+        padding-left: 5px;
+        padding-right: 20px;
     }
+    i.required-indicator {
+        padding-bottom: 18px;
+        padding-top: 8px;
+    }
+    i.required-indicator.bhi-check {
+        padding-bottom: 20px;
+        padding-top: 6px;
+    }
+}

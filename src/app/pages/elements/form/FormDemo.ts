@@ -298,7 +298,20 @@ export class FormDemoComponent {
                 state: {
                     label: 'State',
                     required: true
+                },
+                country: {
+                    label: 'Country',
+                    required: true
+                },
+                city: {
+                    label: 'City',
+                    required: true
+                },
+                zip: {
+                    label: 'Zipcode',
+                    required: true
                 }
+
             },
             value: {
                 address1: '123 Summer Street',
