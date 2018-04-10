@@ -296,11 +296,12 @@ export class FormUtils {
                 break;
             case 'address':
                 field.required = field.required || false;
+                if (Helpers.isBlank(controlConfig.config)) {
+                    controlConfig.config = {};
+                }
+                controlConfig.config.required = field.required;
                 if (field.fields && field.fields.length) {
                     for (let subfield of field.fields) {
-                        if (Helpers.isBlank(controlConfig.config)) {
-                            controlConfig.config = {};
-                        }
                         controlConfig.config[subfield.name] = {
                             label: subfield.label,
                             required: subfield.required

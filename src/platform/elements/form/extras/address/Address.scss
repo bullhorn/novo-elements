@@ -23,7 +23,7 @@ novo-address {
         padding: 0 0 5px !important;
     }
     .city {
-        flex: 2 2 40%;
+        flex: 2 2 28%;
         padding: 5px 0 !important;
     }
     .state {
@@ -43,23 +43,29 @@ novo-address {
     }
 }
 
-novo-form .novo-form-container form div.novo-form-row novo-control>div.novo-control-container>div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container novo-address {
-    i.required-indicator,
-    i.required-indicator.bhi-check {
-        display: flex;
-        border-bottom: 1px solid #afb9c0;
-        padding-bottom: 16px;
-        margin-right: 0;
-        padding-top: 10px;
-        padding-left: 5px;
-        padding-right: 20px;
-    }
-    i.required-indicator {
-        padding-bottom: 18px;
-        padding-top: 8px;
-    }
-    i.required-indicator.bhi-check {
-        padding-bottom: 20px;
-        padding-top: 6px;
+novo-form .novo-form-container form,
+novo-dynamic-form[layout='vertical'] .novo-form-container form,
+novo-dynamic-form .novo-form-container form {
+    div.novo-form-row novo-control>div.novo-control-container>div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container novo-address,
+    div.novo-control-group-control novo-control>div.novo-control-container>div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container novo-address,
+    td.novo-form-row novo-control>div.novo-control-container>div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container novo-address {
+        i.required-indicator.bhi-circle,
+        i.required-indicator.bhi-check {
+            display: flex;
+            border-bottom: 1px solid #afb9c0;
+            padding-bottom: 16px;
+            margin-right: 0;
+            padding-top: 10px; // padding-left: 5px;
+            padding-right: 20px;
+            margin-top: 0px;
+        }
+        i.required-indicator {
+            padding-bottom: 18px;
+            padding-top: 8px;
+        }
+        i.required-indicator.bhi-check {
+            padding-bottom: 20px;
+            padding-top: 6px;
+        }
     }
 }
