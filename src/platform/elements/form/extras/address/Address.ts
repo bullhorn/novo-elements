@@ -35,42 +35,42 @@ export interface NovoAddressConfig {
     providers: [ADDRESS_VALUE_ACCESSOR],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <span class="street-address">
+        <span class="street-address" [class.invalid]="isInvalid('address1')" [class.focus]="focused.address1">
             <i *ngIf="showRequired('address1')"
                 class="required-indicator address1"
                 [ngClass]="{'bhi-circle': !isValid('address1'), 'bhi-check': isValid('address1')}">
             </i>
-            <input type="text" id="address1" name="address1" [placeholder]="config.address1.label" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="updateControl()"/>
+            <input type="text" id="address1" name="address1" [placeholder]="config.address1.label" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="updateControl()" (focus)="isFocused('address1')" (blur)="isBlurred('address1')"/>
         </span>
-        <span class="apt suite">
+        <span class="apt suite" [class.invalid]="isInvalid('address2')" [class.focus]="focused.address2">
             <i *ngIf="showRequired('address2')"
                 class="required-indicator address2"
                 [ngClass]="{'bhi-circle': !isValid('address2'), 'bhi-check': isValid('address2')}">
             </i>
-            <input type="text" id="address2" name="address2" [placeholder]="config.address2.label" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()"/>
+            <input type="text" id="address2" name="address2" [placeholder]="config.address2.label" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()" (focus)="isFocused('address2')" (blur)="isBlurred('address2')"/>
         </span>
-        <span class="city locality">
+        <span class="city locality" [class.invalid]="isInvalid('city')" [class.focus]="focused.city">
             <i *ngIf="showRequired('city')"
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !isValid('city'), 'bhi-check': isValid('city')}">
             </i>
-            <input type="text" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()"/>
+            <input type="text" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()" (focus)="isFocused('city')" (blur)="isBlurred('city')"/>
         </span>
-        <span class="state region">
+        <span class="state region" [class.invalid]="isInvalid('state')" [class.focus]="focused.state">
             <i *ngIf="showRequired('state')"
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !isValid('state'), 'bhi-check': isValid('state')}">
             </i>
             <novo-select id="state" [options]="states" [placeholder]="config.state.label" autocomplete="shipping region" [(ngModel)]="model.state" (ngModelChange)="onStateChange($event)"></novo-select>
         </span>
-        <span class="zip postal-code">
+        <span class="zip postal-code" [class.invalid]="isInvalid('zip')" [class.focus]="focused.zip">
             <i *ngIf="showRequired('zip')"
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !isValid('zip'), 'bhi-check': isValid('zip')}">
             </i>
-            <input type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()"/>
+            <input type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()" (focus)="isFocused('zip')" (blur)="isBlurred('zip')"/>
         </span>
-        <span class="country-name">
+        <span class="country-name" [class.invalid]="isInvalid('country')" [class.focus]="focused.country">
             <i *ngIf="showRequired('country')"
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !isValid('country'), 'bhi-check': isValid('country')}">
@@ -89,6 +89,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     };
     onModelTouched: Function = () => {
     };
+    focused: any = {};
 
     constructor(public labels: NovoLabelService) { }
 
@@ -130,6 +131,22 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             return false;
         }
         return true;
+    }
+
+    isInvalid(field: string): boolean {
+        if (((this.showRequired(field) && Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.model[field])) || !this.showRequired(field)) &&
+            !(field === 'country' && this.showRequired(field) && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
+                return true;
+            }
+        return false;
+    }
+
+    isFocused(field: string): void {
+        this.focused[field] = true;
+    }
+
+    isBlurred(field: string): void {
+        this.focused[field] = false;
     }
 
     onCountryChange(evt) {
