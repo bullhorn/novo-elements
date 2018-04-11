@@ -1,6 +1,6 @@
 // NG2
 import {
-    Component, forwardRef, Input, OnInit, ChangeDetectionStrategy
+    Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, EventEmitter, Output
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
@@ -18,6 +18,7 @@ const ADDRESS_VALUE_ACCESSOR = {
 export interface NovoAddressSubfieldConfig {
     label: string;
     required: boolean;
+    maxlength: number;
 }
 
 export interface NovoAddressConfig {
@@ -40,7 +41,7 @@ export interface NovoAddressConfig {
                 class="required-indicator address1"
                 [ngClass]="{'bhi-circle': !isValid('address1'), 'bhi-check': isValid('address1')}">
             </i>
-            <input type="text" id="address1" name="address1" [placeholder]="config.address1.label" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="updateControl()"/>
+            <input type="text" id="address1" name="address1" [placeholder]="config.address1.label" [maxlength]="config.address1.maxlength" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="onAddressChange('address1',$event)"/>
         </span>
         <span class="apt suite">
             <i *ngIf="showRequired('address2')"
@@ -90,6 +91,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     onModelTouched: Function = () => {
     };
 
+    @Output() change: EventEmitter<any> = new EventEmitter();
     constructor(public labels: NovoLabelService) { }
 
     ngOnInit() {
@@ -148,6 +150,11 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
     onStateChange(evt) {
         this.model.state = evt;
+        this.updateControl();
+    }
+
+    onAddressChange(field, evt) {
+        this.change.emit({ value: evt, field:  field });
         this.updateControl();
     }
 

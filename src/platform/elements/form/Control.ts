@@ -180,7 +180,7 @@ export class NovoCustomControlContainerElement {
                                 <novo-date-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military"></novo-date-time-picker-input>
                             </div>
                             <!--Address-->
-                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config"></novo-address>
+                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddresChange($event)"></novo-address>
                             <!--Checkbox-->
                             <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [label]="control.checkboxLabel" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [layoutOptions]="layoutOptions"></novo-checkbox>
                             <!--Checklist-->
@@ -212,7 +212,7 @@ export class NovoCustomControlContainerElement {
                                 {{ form.controls[control.key].description }}
                             </span>
                         </div>
-                        <span class="character-count" [class.error]="errors?.maxlength" *ngIf="showCount">{{ characterCount }}/{{ form.controls[control.key].maxlength }}</span>
+                        <span class="character-count" [class.error]="errors?.maxlength" *ngIf="showCount">{{ characterCount }}/{{ this.maxLengthCount || form.controls[control.key].maxlength }}</span>
                     </div>
                     <!--Tip Wel-->
                     <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
@@ -274,6 +274,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   private percentChangeSubscription: any;
   private valueChangeSubscription: any;
   private dateChangeSubscription: any;
+  private _showCount: boolean = false;
+  private maxLengthCount: number;
 
   maskOptions: IMaskOptions;
 
@@ -286,11 +288,15 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   get showCount() {
-    return (
-      this.form.controls[this.control.key].maxlength &&
-      this.focused &&
-      (this.form.controls[this.control.key].controlType === 'text-area' || this.form.controls[this.control.key].controlType === 'textbox')
-    );
+    let charCount: boolean = this.form.controls[this.control.key].maxlength &&
+    this.focused &&
+    (this.form.controls[this.control.key].controlType === 'text-area' || this.form.controls[this.control.key].controlType === 'textbox');
+
+    return this._showCount || charCount;
+  }
+
+  set showCount(value) {
+      this._showCount = value;
   }
 
   ngAfterViewInit() {
@@ -312,6 +318,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         this.characterCount = this.form.controls[this.control.key].value.length;
       }
     }
+    // this.maxLenghtCount = form.controls[control.key].maxlength;
     if (this.control) {
       // Listen to clear events
       this.forceClearSubscription = this.control.forceClear.subscribe(() => {
@@ -551,5 +558,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   handleUpload(value) {
     this.upload.emit(value);
+  }
+
+  handleAddresChange(data) {
+      this.characterCount = data.value.length;
+      this.maxLengthCount = this.control.config[data.field].maxlength;
+      this.showCount = true;
+
   }
 }

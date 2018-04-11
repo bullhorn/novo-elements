@@ -39,7 +39,9 @@ export class FormValidators {
                 if ((!Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&
                     !Helpers.isBlank(control.value[subfield]) && Helpers.isEmpty(control.value[subfield])) ||
                     (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
-                        !Helpers.isBlank(control.value.countryName) && Helpers.isEmpty(control.value.countryName))) {
+                        !Helpers.isBlank(control.value.countryName) && Helpers.isEmpty(control.value.countryName)) ||
+                    ((!Helpers.isEmpty(control.config[subfield]) && control.value[subfield] && control.value[subfield].length >= control.config[subfield].maxlength
+                  ))) {
                     valid = false;
                     invalidAddressFields.push(control.config[subfield].label);
                 }

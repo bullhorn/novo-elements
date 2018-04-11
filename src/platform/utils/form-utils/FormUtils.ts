@@ -308,6 +308,9 @@ export class FormUtils {
             if (!Helpers.isEmpty(subfield.label)) {
               controlConfig.config[subfield.name].label = subfield.label;
             }
+            if (!Helpers.isEmpty(subfield.maxLength)) {
+              controlConfig.config[subfield.name].maxlength = subfield.maxLength;
+            }
             field.required = field.required || subfield.required;
             if (subfield.defaultValue) {
               if (Helpers.isBlank(controlConfig.value)) {
