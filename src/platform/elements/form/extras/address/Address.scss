@@ -1,6 +1,20 @@
 novo-address {
   display: flex;
   flex-flow: row wrap;
+  align-items: center;
+  &.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+    .street-address,
+    .apt,
+    .city,
+    .state,
+    .zip,
+    .country-name {
+      input.invalid,
+      novo-select.invalid div[type=button] {
+        border-bottom: 1px solid $negative !important;
+      }
+    }
+  }
   input {
     min-width: 10px;
   }
@@ -13,16 +27,16 @@ novo-address {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-end;
   }
   .street-address {
     flex: 3 3 75%;
     padding: 0 0 5px !important;
-    align-items: flex-end;
   }
   .apt {
     flex: 1 1 25%;
-    align-items: flex-end;
     padding: 0 0 5px !important;
+    align-self: flex-end;
   }
   .city {
     flex: 2 2 28%;
@@ -42,7 +56,6 @@ novo-address {
   .country-name {
     flex: 4 4 100%;
     padding: 10px 0 0 !important;
-    align-items: flex-end;
   }
 }
 
@@ -56,11 +69,12 @@ novo-dynamic-form .novo-form-container form {
     i.required-indicator.bhi-check {
       display: flex;
       border-bottom: 1px solid #afb9c0;
-      padding-bottom: 16px;
+      padding-bottom: 18px;
       margin-right: 0;
       padding-top: 10px;
       padding-right: 20px;
       margin-top: 0px;
+      align-self: center;
     }
     i.required-indicator {
       padding-bottom: 18px;

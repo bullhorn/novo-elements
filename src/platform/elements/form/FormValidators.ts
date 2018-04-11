@@ -33,7 +33,7 @@ export class FormValidators {
         let fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'country'];
         let invalidAddressFields: string[] = [];
         let returnVal = null;
-        if (control.value && control.dirty && control.config) {
+        if (control.value && control.config) {
             let valid = true;
             fieldList.forEach((subfield: string) => {
                 if ((!Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&

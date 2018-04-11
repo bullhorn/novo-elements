@@ -33,6 +33,7 @@ export interface NovoAddressConfig {
 @Component({
     selector: 'novo-address',
     providers: [ADDRESS_VALUE_ACCESSOR],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <span class="street-address">
             <i *ngIf="showRequired('address1')"
