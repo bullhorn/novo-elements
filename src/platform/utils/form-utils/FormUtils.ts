@@ -295,7 +295,7 @@ export class FormUtils {
         control = new SelectControl(controlConfig);
         break;
       case 'address':
-        field.required = field.required || false;
+        controlConfig.required = field.required || false;
         if (Helpers.isBlank(controlConfig.config)) {
           controlConfig.config = {};
         }
@@ -308,7 +308,7 @@ export class FormUtils {
             if (!Helpers.isEmpty(subfield.label)) {
               controlConfig.config[subfield.name].label = subfield.label;
             }
-            field.required = field.required || subfield.required;
+            controlConfig.required = controlConfig.required || subfield.required;
             if (subfield.defaultValue) {
               if (Helpers.isBlank(controlConfig.value)) {
                 controlConfig.value = {};
