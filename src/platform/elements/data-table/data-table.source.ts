@@ -48,6 +48,7 @@ export class DataTableSource<T> extends DataSource<T> {
         this.loading = false;
         if (!this.totalSet) {
           this.total = data.total;
+          this.totalSet = true;
         }
         this.current = data.results.length;
         this.data = data.results;

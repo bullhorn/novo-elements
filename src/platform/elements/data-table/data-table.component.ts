@@ -90,7 +90,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         </div>
 
          <!-- DEFAULT CELL TEMPLATE -->
-        <ng-template novoTemplate="stringCellTemplate"
+        <ng-template novoTemplate="textCellTemplate"
               let-row
               let-col="col">
               <span>{{ row[col.id] | dataTableInterpolate:col }}</span>
@@ -123,12 +123,22 @@ import { StaticDataTableService } from './services/static-data-table.service';
         <ng-template novoTemplate="percentCellTemplate"
             let-row
             let-col="col">
-            <span>{{ row[col.id] | dataTableInterpolate:col | dataTableNumberRenderer:col }}%</span>
+            <span>{{ row[col.id] | dataTableInterpolate:col | dataTableNumberRenderer:col:true }}</span>
         </ng-template>
         <ng-template novoTemplate="linkCellTemplate"
               let-row
               let-col="col">
               <a (click)="col.handlers?.click({originalEvent: $event, row: row})">{{ row[col.id] | dataTableInterpolate:col }}</a>
+        </ng-template>
+        <ng-template novoTemplate="telCellTemplate"
+              let-row
+              let-col="col">
+              <a href="tel:{{ row[col.id] | dataTableInterpolate:col }}" [target]="col?.attributes?.target">{{ row[col.id] | dataTableInterpolate:col }}</a>
+        </ng-template>
+        <ng-template novoTemplate="mailtoCellTemplate"
+              let-row
+              let-col="col">
+              <a href="mailto:{{ row[col.id] | dataTableInterpolate:col }}" [target]="col?.attributes?.target">{{ row[col.id] | dataTableInterpolate:col }}</a>
         </ng-template>
         <ng-template novoTemplate="buttonCellTemplate"
               let-row
@@ -138,7 +148,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         <ng-template novoTemplate="dropdownCellTemplate"
               let-row
               let-col="col">
-              <novo-dropdown appendToBody="true" parentScrollSelector=".novo-data-table" containerClass="novo-data-table-dropdown">
+              <novo-dropdown appendToBody="true" parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
                 <button type="button" theme="dialogue" icon="collapse" inverse>{{ col.label }}</button>
                 <list>
                     <item *ngFor="let option of col?.action?.options" (action)="option.handlers.click({ originalEvent: $event?.originalEvent, row: row })" [disabled]="isDisabled(option, row)">
@@ -372,7 +382,11 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
               templateName = 'buttonCellTemplate';
             }
           } else {
-            templateName = `${column.type}CellTemplate`;
+            if (column.type === 'link:tel' || column.type === 'link:mailto') {
+              templateName = `${column.type.split(':')[1]}CellTemplate`;
+            } else {
+              templateName = `${column.type}CellTemplate`;
+            }
           }
         }
         this.columnToTemplate[column.id] = this.templates[templateName];

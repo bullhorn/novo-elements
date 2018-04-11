@@ -4,9 +4,9 @@ export interface IDataTableColumn<T> {
   id: string;
   label?: string;
   enabled?: boolean;
-  type: 'string' | 'link' | 'date' | 'datetime' | 'time' | 'currency' | 'number' | 'percent' | 'action';
+  type: 'text' | 'link' | 'link:tel' | 'link:mailto' | 'date' | 'datetime' | 'time' | 'currency' | 'number' | 'percent' | 'action';
   template?: string;
-  property?: string;
+  format?: string | string[];
   disabled?: boolean;
   cellClass?: (row: T) => string;
   disabledFunc?: (row: T) => boolean;

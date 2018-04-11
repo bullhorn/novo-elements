@@ -32,7 +32,7 @@ import { Helpers } from '../../../utils/Helpers';
         <label data-automation-id="novo-data-table-label">{{ label }}</label>
         <div>
             <button *ngIf="config.sortable" theme="icon" [icon]="icon" (click)="sort()" [class.active]="sortActive" data-automation-id="novo-data-table-sort"></button>
-            <novo-dropdown *ngIf="config.filterable" side="right" appendToBody="true" parentScrollSelector=".novo-data-table" containerClass="data-table-dropdown" data-automation-id="novo-data-table-filter">
+            <novo-dropdown *ngIf="config.filterable" side="right" appendToBody="true" parentScrollSelector=".novo-data-table-container" containerClass="data-table-dropdown" data-automation-id="novo-data-table-filter">
                 <button type="button" theme="icon" icon="filter" [class.active]="filterActive" (click)="focusInput()"></button>
                 <div class="header">
                     <span>{{ labels.filters }}</span>
@@ -76,7 +76,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   @Input('novo-data-table-cell-config')
   set column(column: IDataTableColumn<T>) {
-    this.label = column.label;
+    this.label = column.type === 'action' ? '' : column.label;
 
     this.config = {
       sortable: !!column.sortable,

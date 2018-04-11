@@ -84,6 +84,7 @@ cdk-table {
 .novo-data-table-cell {
   display: flex;
   flex-direction: row;
+  align-items: center;
   &.dropdown-cell,
   &.button-cell {
     display: flex;
@@ -233,7 +234,6 @@ novo-data-table {
       }
     }
     > div.novo-data-table-actions {
-      flex: 0;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -284,8 +284,12 @@ novo-data-table {
   .clickable {
     @extend a;
   }
+  .novo-data-table-empty-container {
+    padding-top: 0;
+  }
   .novo-data-table-empty-container,
   .novo-data-table-no-results-container {
+    padding: 2em;
     flex: 1;
     display: flex;
     align-items: center;
