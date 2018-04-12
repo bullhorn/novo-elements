@@ -95,28 +95,6 @@ describe('Elements: NovoAddressElement', () => {
         });
     });
 
-    describe('Method: showRequired()', () => {
-        beforeEach(() => {
-            component.config = {
-                country: {
-                    label: 'country'
-                }
-            };
-        });
-        it('should return true if config for field is set', () => {
-            component.config.country.required = true;
-            expect(component.showRequired('country')).toEqual(true);
-        });
-        it('should return false if config for field is set to false', () => {
-            component.config.country.required = false;
-            expect(component.showRequired('country')).toEqual(false);
-        });
-        it('should return true if config.required is true', () => {
-            component.config.required = true;
-            expect(component.showRequired('country')).toEqual(true);
-        });
-    });
-
     describe('Method: isValid(field: string): boolean', () => {
         beforeEach(() => {
             component.config = {
@@ -135,25 +113,29 @@ describe('Elements: NovoAddressElement', () => {
             component.model = {
                 countryName: 'usa'
             };
-            expect(component.isValid('country')).toEqual(true);
+            component.isValid('country');
+            expect(component.valid.country).toEqual(true);
         });
         it('should check validity of required field address1 when it is empty', () => {
             component.model = {
                 address1: ''
             };
-            expect(component.isValid('address1')).toEqual(false);
+            component.isValid('address1');
+            expect(component.valid.address1).toEqual(false);
         });
         it('should check validity of required field address1 when it is not empty', () => {
             component.model = {
                 address1: 'tste'
             };
-            expect(component.isValid('address1')).toEqual(true);
+            component.isValid('address1');
+            expect(component.valid.address1).toEqual(true);
         });
         it('should ignore validity of non-required field state', () => {
             component.model = {
                 state: 'TN'
             };
-            expect(component.isValid('state')).toEqual(false);
+            component.isValid('state');
+            expect(component.valid.state).toEqual(false);
         });
 
     });
