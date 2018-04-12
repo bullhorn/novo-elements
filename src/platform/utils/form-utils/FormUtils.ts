@@ -295,18 +295,20 @@ export class FormUtils {
         control = new SelectControl(controlConfig);
         break;
       case 'address':
+        controlConfig.required = field.required || false;
         if (Helpers.isBlank(controlConfig.config)) {
           controlConfig.config = {};
         }
+        controlConfig.config.required = field.required;
         if (field.fields && field.fields.length) {
           for (let subfield of field.fields) {
             controlConfig.config[subfield.name] = {
+              required: !!subfield.required
             };
             if (!Helpers.isEmpty(subfield.label)) {
-              controlConfig.config[subfield.name] = {
-                label: subfield.label
-              };
+              controlConfig.config[subfield.name].label = subfield.label;
             }
+            controlConfig.required = controlConfig.required || subfield.required;
             if (subfield.defaultValue) {
               if (Helpers.isBlank(controlConfig.value)) {
                 controlConfig.value = {};
@@ -320,6 +322,7 @@ export class FormUtils {
             }
           }
         }
+        controlConfig.isEmpty = this.isAddressEmpty;
         control = new AddressControl(controlConfig);
         break;
       case 'file':
@@ -537,4 +540,18 @@ export class FormUtils {
     });
   }
 
+  isAddressEmpty(control: any): boolean {
+    let fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'country'];
+    let valid: boolean = true;
+    if (control.value && control.config) {
+      fieldList.forEach((subfield: string) => {
+        if ((subfield !== 'country' && !Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&
+          (Helpers.isBlank(control.value[subfield]) || Helpers.isEmpty(control.value[subfield]))) ||
+          (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required && Helpers.isEmpty(control.value.countryName))) {
+          valid = false;
+        }
+      });
+    }
+    return valid;
+  }
 }
