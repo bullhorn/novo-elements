@@ -45,11 +45,11 @@ import { Helpers } from '../../../utils/Helpers';
                                 {{ option.label }} <i class="bhi-check" *ngIf="activeDateFilter === option.label"></i>
                             </item>
                         </ng-container>
-                        <item [class.active]="labels.customDateRange === activeDateFilter" (click)="showCustomRange = true" *ngIf="config.filterConfig.allowCustomRange && !showCustomRange" [keepOpen]="true">
+                        <item [class.active]="labels.customDateRange === activeDateFilter" (click)="toggleCustomRange($event, true)" *ngIf="config.filterConfig.allowCustomRange && !showCustomRange" [keepOpen]="true">
                             {{ labels.customDateRange }} <i class="bhi-check" *ngIf="labels.customDateRange === activeDateFilter"></i>
                         </item>
                         <div class="calender-container" *ngIf="showCustomRange">
-                            <div (click)="showCustomRange = false"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
+                            <div (click)="toggleCustomRange($event, false)"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
                             <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true"></novo-date-picker>
                         </div>
                     </list>
@@ -60,7 +60,7 @@ import { Helpers } from '../../../utils/Helpers';
                     </list>
                     <list *ngSwitchDefault>
                         <item class="filter-search" keepOpen="true">
-                            <input type="text" [(ngModel)]="filter" (ngModelChange)="filterData()" #filterInput data-automation-id="novo-data-table-filter-input"/>
+                            <input type="text" [(ngModel)]="filter" (ngModelChange)="filterData($event)" #filterInput data-automation-id="novo-data-table-filter-input"/>
                         </item>
                     </list>
                 </ng-container>
@@ -87,7 +87,6 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
     if (column.filterable && Helpers.isObject(column.filterable)) {
       this.config.filterConfig = column.filterable as IDataTableColumnFilterConfig;
-      this.showCustomRange = !!this.config.filterConfig.allowCustomRange;
       if (!this.config.filterConfig.type) {
         this.config.filterConfig = { type: 'text' };
       }
@@ -171,6 +170,12 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this._rerenderSubscription.unsubscribe();
   }
 
+  public toggleCustomRange(event: Event, value: boolean): void {
+    Helpers.swallowEvent(event);
+    this.showCustomRange = value;
+    this.changeDetectorRef.markForCheck();
+  }
+
   public focusInput(): void {
     if (this.filterInput && this.filterInput.nativeElement) {
       setTimeout(() => this.filterInput.nativeElement.focus(), 0);
@@ -189,35 +194,35 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   public filterData(filter?: any): void {
+    let actualFilter = filter;
     if (this.config.filterConfig.type === 'date' && filter) {
       this.activeDateFilter = filter.label || this.labels.customDateRange;
       if (filter.startDate && filter.endDate) {
-        filter = {
-          min: dateFns.startOfDay(filter.startDate),
-          max: dateFns.endOfDay(filter.endDate),
+        actualFilter = {
+          min: dateFns.startOfDay(filter.startDate.date).getTime(),
+          max: dateFns.endOfDay(filter.endDate.date).getTime(),
         };
       } else {
-        filter = {
-          min: dateFns.startOfDay(dateFns.addDays(dateFns.startOfToday(), filter.min)),
-          max: dateFns.endOfDay(dateFns.addDays(dateFns.startOfToday(), filter.max)),
+        actualFilter = {
+          min: dateFns.startOfDay(dateFns.addDays(dateFns.startOfToday(), filter.min)).getTime(),
+          max: dateFns.endOfDay(dateFns.addDays(dateFns.startOfToday(), filter.max)).getTime(),
         };
       }
     }
-    if (filter) {
-      if (filter.hasOwnProperty('value')) {
-        this.filter = filter.value;
-      } else {
-        this.filter = filter;
-      }
+
+    if (actualFilter && actualFilter.hasOwnProperty('value')) {
+      actualFilter = filter.value;
     }
+
     if (this.changeTimeout) {
       clearTimeout(this.changeTimeout);
     }
+
     this.changeTimeout = setTimeout(() => {
-      if (this.filter === '') {
-        this.filter = undefined;
+      if (actualFilter === '') {
+        actualFilter = undefined;
       }
-      this._sort.filter(this.id, this.filter, this.config.transforms.filter);
+      this._sort.filter(this.id, actualFilter, this.config.transforms.filter);
       this.changeDetectorRef.markForCheck();
     }, 300);
   }
@@ -225,7 +230,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   public clearFilter(): void {
     this.filter = undefined;
     this.activeDateFilter = undefined;
-    this.filterData();
+    this.filterData(undefined);
   }
 
   private getNextSortDirection(direction: string): string {
