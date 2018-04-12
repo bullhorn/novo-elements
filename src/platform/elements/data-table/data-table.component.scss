@@ -9,7 +9,6 @@ cdk-table {
   flex: 1;
   &.empty {
     min-height: 62px;
-    overflow: hidden;
     max-height: 62px;
   }
   > .novo-data-table-row:nth-of-type(odd) {
