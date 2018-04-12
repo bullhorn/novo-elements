@@ -2,6 +2,26 @@ novo-address {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+
+  .addressRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .state {
+      border-bottom: 1px solid #afb9c0;
+      i.required-indicator.bhi-circle,
+      i.required-indicator.bhi-check {
+        border: none!important;
+      }
+      novo-select {
+        >div[type='button'] {
+        border: none!important;
+      }
+    }
+    }
+  }
   &.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
     .street-address,
     .apt,
