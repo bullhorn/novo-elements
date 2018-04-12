@@ -181,7 +181,6 @@ export class BaseControl {
     }
     if (config.isEmpty) {
       this.isEmpty = config.isEmpty;
-      console.log('isEmpty found', config);
     }
   }
 }
