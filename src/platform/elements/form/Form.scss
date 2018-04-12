@@ -744,6 +744,10 @@ novo-form {
   }
 }
 
+novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.address .field-message {
+  margin-left: 0px;
+}
+
 control-confirm-modal,
 control-prompt-modal {
   p {
