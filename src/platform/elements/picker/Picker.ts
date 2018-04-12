@@ -263,7 +263,11 @@ export class NovoPickerElement implements OnInit {
    * @description - This method deletes the picker results from the DOM.
    */
   hideResults(err?: any) {
-    this.closePanel();
+    if (this.popup) {
+      this.popup.destroy();
+      this.popup = null;
+    }
+    this.hide();
   }
 
   onOverlayClosed(): void {
