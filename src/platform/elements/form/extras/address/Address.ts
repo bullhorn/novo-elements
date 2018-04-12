@@ -1,6 +1,6 @@
 // NG2
 import {
-  Component, forwardRef, Input, OnInit, ChangeDetectionStrategy
+    Component, forwardRef, Input, OnInit, ChangeDetectionStrategy
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
@@ -10,31 +10,30 @@ import { Helpers } from '../../../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const ADDRESS_VALUE_ACCESSOR = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => NovoAddressElement),
-  multi: true
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => NovoAddressElement),
+    multi: true
 };
 
 export interface NovoAddressSubfieldConfig {
-  label: string;
-  required: boolean;
+    label: string;
+    required: boolean;
 }
 
 export interface NovoAddressConfig {
-  required?: boolean;
-  address1?: NovoAddressSubfieldConfig;
-  address2?: NovoAddressSubfieldConfig;
-  city?: NovoAddressSubfieldConfig;
-  state?: NovoAddressSubfieldConfig;
-  zip?: NovoAddressSubfieldConfig;
-  country?: NovoAddressSubfieldConfig;
+    required?: boolean;
+    address1?: NovoAddressSubfieldConfig;
+    address2?: NovoAddressSubfieldConfig;
+    city?: NovoAddressSubfieldConfig;
+    state?: NovoAddressSubfieldConfig;
+    zip?: NovoAddressSubfieldConfig;
+    country?: NovoAddressSubfieldConfig;
 }
 
 @Component({
-  selector: 'novo-address',
-  providers: [ADDRESS_VALUE_ACCESSOR],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'novo-address',
+    providers: [ADDRESS_VALUE_ACCESSOR],
+    template: `
         <span class="street-address" [class.invalid]="invalid.address1" [class.focus]="focused.address1">
             <i *ngIf="config?.address1?.required"
                 class="required-indicator address1"
@@ -80,142 +79,142 @@ export interface NovoAddressConfig {
     `
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
-  @Input() config: NovoAddressConfig;
-  states: Array<any> = [];
-  countries: Array<any> = getCountries();
-  fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'country'];
-  model: any;
-  onModelChange: Function = () => {
-  };
-  onModelTouched: Function = () => {
-  };
-  focused: any = {};
-  invalid: any = {};
-  valid: any = {};
+    @Input() config: NovoAddressConfig;
+    states: Array<any> = [];
+    countries: Array<any> = getCountries();
+    fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'country'];
+    model: any;
+    onModelChange: Function = () => {
+    };
+    onModelTouched: Function = () => {
+    };
+    focused: any = {};
+    invalid: any = {};
+    valid: any = {};
 
-  constructor(public labels: NovoLabelService) { }
+    constructor(public labels: NovoLabelService) { }
 
-  ngOnInit() {
-    if (!this.config) {
-      this.config = {
-      };
-    }
-    if (this.model) {
-      this.writeValue(this.model);
-      this.updateControl();
-    } else if (!this.model) {
-      this.model = {};
-    }
-    this.fieldList.forEach(((field: string) => {
-      if (!this.config.hasOwnProperty(field)) {
-        this.config[field] = {};
-      }
-      if (!this.config[field].hasOwnProperty('label')) {
-        this.config[field].label = this.labels[field];
-      }
-      if (this.config.required) {
-        this.config[field].required = true;
-      }
-    }));
-  }
-
-  isValid(field: string): void {
-    let valid: boolean = true;
-    if (((this.config[field].required && Helpers.isEmpty(this.model[field])) || !this.config[field].required) &&
-      !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName))) {
-      valid = false;
-    }
-    this.valid[field] = valid;
-  }
-
-  isInvalid(field: string): void {
-    let invalid: boolean = false;
-    if (((this.config[field].required && Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.model[field]))) &&
-      !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
-      invalid = true;
-    }
-    this.invalid[field] = invalid;
-  }
-
-  onInput(field: string): void {
-    this.isInvalid(field);
-    this.isValid(field);
-  }
-
-  isFocused(field: string): void {
-    this.focused[field] = true;
-  }
-
-  isBlurred(field: string): void {
-    this.focused[field] = false;
-  }
-
-  onCountryChange(evt) {
-    let country: any = findByCountryName(evt);
-    if (country) {
-      this.model.countryName = country.name;
-      this.model.countryCode = country.code;
-      this.model.countryID = country.id;
-      this.updateStates();
+    ngOnInit() {
+        if (!this.config) {
+            this.config = {
+            };
+        }
+        if (this.model) {
+            this.writeValue(this.model);
+            this.updateControl();
+        } else if (!this.model) {
+            this.model = {};
+        }
+        this.fieldList.forEach(((field: string) => {
+            if (!this.config.hasOwnProperty(field)) {
+                this.config[field] = {};
+            }
+            if (!this.config[field].hasOwnProperty('label')) {
+                this.config[field].label = this.labels[field];
+            }
+            if (this.config.required) {
+                this.config[field].required = true;
+            }
+        }));
     }
 
-    // Update state
-    this.model.state = undefined;
-    this.updateControl();
-    this.onInput('country');
-  }
-
-  onStateChange(evt) {
-    this.model.state = evt;
-    this.updateControl();
-    this.onInput('state');
-  }
-
-  updateStates() {
-    if (this.model.countryName) {
-      this.states = getStates(this.model.countryName);
-    } else {
-      this.states = [];
+    isValid(field: string): void {
+        let valid: boolean = true;
+        if (((this.config[field].required && Helpers.isEmpty(this.model[field])) || !this.config[field].required) &&
+            !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName))) {
+            valid = false;
+        }
+        this.valid[field] = valid;
     }
-  }
 
-  updateControl() {
-    this.onModelChange(this.model);
-  }
+    isInvalid(field: string): void {
+        let invalid: boolean = false;
+        if (((this.config[field].required && Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.model[field]))) &&
+            !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
+            invalid = true;
+        }
+        this.invalid[field] = invalid;
+    }
 
-  writeValue(model: any): void {
-    if (model) {
-      let countryName;
-      if (model.countryName) {
-        countryName = model.countryName;
-      } else if (model.countryID) {
-        let country: any = findByCountryId(model.countryID);
+    onInput(field: string): void {
+        this.isInvalid(field);
+        this.isValid(field);
+    }
+
+    isFocused(field: string): void {
+        this.focused[field] = true;
+    }
+
+    isBlurred(field: string): void {
+        this.focused[field] = false;
+    }
+
+    onCountryChange(evt) {
+        let country: any = findByCountryName(evt);
         if (country) {
-          countryName = country.name;
-        };
-      }
-      if (countryName) {
-        countryName = countryName.trim();
-        model.state = model.state || '';
-        let stateObj: any = getStateObjects(countryName).find(state => {
-          return state.code === model.state.replace(/\W+/g, '').toUpperCase() || state.name === model.state;
-        }) || {};
-        this.model = Object.assign(model, { countryName: countryName, state: stateObj.name });
-        this.updateStates();
-      } else {
-        this.model = model;
-      }
+            this.model.countryName = country.name;
+            this.model.countryCode = country.code;
+            this.model.countryID = country.id;
+            this.updateStates();
+        }
+
+        // Update state
+        this.model.state = undefined;
+        this.updateControl();
+        this.onInput('country');
     }
-    this.fieldList.forEach((field: string) => {
-      this.onInput(field);
-    });
-  }
 
-  registerOnChange(fn: Function): void {
-    this.onModelChange = fn;
-  }
+    onStateChange(evt) {
+        this.model.state = evt;
+        this.updateControl();
+        this.onInput('state');
+    }
 
-  registerOnTouched(fn: Function): void {
-    this.onModelTouched = fn;
-  }
+    updateStates() {
+        if (this.model.countryName) {
+            this.states = getStates(this.model.countryName);
+        } else {
+            this.states = [];
+        }
+    }
+
+    updateControl() {
+        this.onModelChange(this.model);
+    }
+
+    writeValue(model: any): void {
+        if (model) {
+            let countryName;
+            if (model.countryName) {
+                countryName = model.countryName;
+            } else if (model.countryID) {
+                let country: any = findByCountryId(model.countryID);
+                if (country) {
+                    countryName = country.name;
+                };
+            }
+            if (countryName) {
+                countryName = countryName.trim();
+                model.state = model.state || '';
+                let stateObj: any = getStateObjects(countryName).find(state => {
+                    return state.code === model.state.replace(/\W+/g, '').toUpperCase() || state.name === model.state;
+                }) || {};
+                this.model = Object.assign(model, { countryName: countryName, state: stateObj.name });
+                this.updateStates();
+            } else {
+                this.model = model;
+            }
+        }
+        this.fieldList.forEach((field: string) => {
+            this.onInput(field);
+        });
+    }
+
+    registerOnChange(fn: Function): void {
+        this.onModelChange = fn;
+    }
+
+    registerOnTouched(fn: Function): void {
+        this.onModelTouched = fn;
+    }
 }
