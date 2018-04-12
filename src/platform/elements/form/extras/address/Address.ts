@@ -130,7 +130,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
   isInvalid(field: string): void {
     let invalid: boolean = false;
-    if (((this.config[field].required && Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.model[field])) || !this.config[field].required) &&
+    if (((this.config[field].required && Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.model[field]))) &&
       !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
       invalid = true;
     }
@@ -144,12 +144,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
   isFocused(field: string): void {
     this.focused[field] = true;
-    this.onInput(field);
   }
 
   isBlurred(field: string): void {
     this.focused[field] = false;
-    this.onInput(field);
   }
 
   onCountryChange(evt) {
