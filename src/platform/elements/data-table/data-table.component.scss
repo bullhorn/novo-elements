@@ -61,6 +61,9 @@ cdk-table {
   min-width: 200px;
   padding: 10px;
   flex: 1;
+  > i.label-icon {
+    margin-right: 0.5em;
+  }
   > span {
     display: block;
     min-width: 180px;
@@ -93,7 +96,8 @@ cdk-table {
     padding: 0 5px;
     novo-dropdown {
       button {
-        padding: 5px;
+        padding: 0;
+        padding-left: 5px;
         &:hover,
         &:active,
         &:focus {
@@ -151,7 +155,9 @@ cdk-table {
     }
   }
   > div {
-    width: 60px;
+    width: 55px;
+    display: flex;
+    flex: 0;
   }
   novo-dropdown[side='right'] {
     display: inline-block;
@@ -286,6 +292,13 @@ novo-data-table {
   .novo-data-table-empty-container {
     padding-top: 0;
   }
+  .novo-data-table-no-results-container {
+    position: absolute;
+    top: 48%;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
   .novo-data-table-empty-container,
   .novo-data-table-no-results-container {
     padding: 2em;
@@ -323,6 +336,7 @@ novo-data-table {
     .novo-data-table-container {
       flex: 1;
       overflow: auto;
+      position: relative;
       &.empty {
         display: flex;
         flex: 0;
@@ -330,6 +344,7 @@ novo-data-table {
       &.empty-user-filtered {
         display: flex;
         flex-flow: column nowrap;
+        min-height: 250px;
       }
     }
   }

@@ -12,8 +12,7 @@ import {
   QueryList,
   ViewChildren,
   TemplateRef,
-  Pipe,
-  PipeTransform,
+  ElementRef,
 } from '@angular/core';
 import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -61,7 +60,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
             <div class="novo-data-table-custom-filter" *ngIf="customFilter">
               <ng-container *ngTemplateOutlet="templates['customFilter']"></ng-container>
             </div>
-            <div class="novo-data-table-container" [class.empty-user-filtered]="dataSource?.currentlyEmpty && state.userFiltered" [class.empty]="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine">
+            <div #novoDataTableContainer class="novo-data-table-container" [class.empty-user-filtered]="dataSource?.currentlyEmpty && state.userFiltered" [class.empty]="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine">
                 <cdk-table *ngIf="(columns?.length > 0) && columnsLoaded && dataSource" [dataSource]="dataSource" [trackBy]="trackByFn" novoDataTableSortFilter [class.empty]="dataSource?.currentlyEmpty && state.userFiltered" [hidden]="dataSource?.totallyEmpty && !userFiltered">
                     <ng-container novoDataTableColumnDef="selection">
                         <novo-data-table-checkbox-header-cell *novoDataTableHeaderCellDef></novo-data-table-checkbox-header-cell>
@@ -74,7 +73,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
                     <novo-data-table-header-row *novoDataTableHeaderRowDef="displayedColumns" data-automation-id="novo-data-table-header-row"></novo-data-table-header-row>
                     <novo-data-table-row *novoDataTableRowDef="let row; columns: displayedColumns;" [id]="name + '-' + row[rowIdentifier]" [dataAutomationId]="'data-automation-id-' + row[rowIdentifier]"></novo-data-table-row>
                 </cdk-table>
-                <div class="novo-data-table-no-results-container" *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine">
+                <div class="novo-data-table-no-results-container" [style.left.px]="scrollLeft" *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine">
                   <div class="novo-data-table-empty-message" >
                     <ng-container *ngTemplateOutlet="templates['noResultsMessage'] || templates['defaultNoResultsMessage']"></ng-container>
                   </div>
@@ -172,6 +171,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
+  @ViewChild('novoDataTableContainer') novoDataTableContainer: ElementRef;
 
   @Input() displayedColumns: string[];
   @Input() paginationOptions: IDataTablePaginationOptions;
@@ -256,9 +256,11 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public columnToTemplate: { [key: string]: TemplateRef<any> } = {};
   public columnsLoaded: boolean = false;
   public selection: Set<string> = new Set();
+  public scrollLeft: number = 0;
 
   private outsideFilterSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
+  private scrollListenerHandler: any;
 
   @HostBinding('class.empty')
   get empty() {
@@ -270,11 +272,16 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     return this.loading || (this.dataSource && this.dataSource.loading);
   }
 
-  constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {}
+  constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
+    this.scrollListenerHandler = this.scrollListener.bind(this);
+  }
 
   public ngOnDestroy(): void {
     if (this.outsideFilterSubscription) {
       this.outsideFilterSubscription.unsubscribe();
+    }
+    if (this.novoDataTableContainer) {
+      (this.novoDataTableContainer.nativeElement as Element).removeEventListener('scroll', this.scrollListenerHandler);
     }
   }
 
@@ -290,6 +297,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     // Load columns
     this.configureColumns();
 
+    // State
     if (this.paginationOptions && !this.paginationOptions.page) {
       this.paginationOptions.page = 0;
     }
@@ -301,6 +309,10 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
     this.state.page = this.paginationOptions ? this.paginationOptions.page : undefined;
     this.state.pageSize = this.paginationOptions ? this.paginationOptions.pageSize : undefined;
+
+    // Scrolling inside table
+    (this.novoDataTableContainer.nativeElement as Element).addEventListener('scroll', this.scrollListenerHandler);
+
     this.ref.markForCheck();
   }
 
@@ -325,6 +337,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public isSelected(row: T): boolean {
+    if (!row) {
+      return false;
+    }
     return this.state.selectedRows.has(`${row[this.rowIdentifier]}`);
   }
 
@@ -390,6 +405,14 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
         this.columnToTemplate[column.id] = this.templates[templateName];
       });
       this.columnsLoaded = true;
+    }
+  }
+
+  private scrollListener(event: Event): void {
+    let left: number = (event.target as Element).scrollLeft;
+    if (left !== this.scrollLeft) {
+      this.scrollLeft = (event.target as Element).scrollLeft;
+      this.ref.markForCheck();
     }
   }
 }

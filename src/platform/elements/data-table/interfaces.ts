@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 export interface IDataTableColumn<T> {
   id: string;
   label?: string;
+  labelIcon?: string;
   enabled?: boolean;
   type: 'text' | 'link' | 'link:tel' | 'link:mailto' | 'date' | 'datetime' | 'time' | 'currency' | 'number' | 'percent' | 'action';
   template?: string;
@@ -12,8 +13,6 @@ export interface IDataTableColumn<T> {
   disabledFunc?: (row: T) => boolean;
   handlers?: {
     click?({ originalEvent: MouseEvent, row: T }): void;
-    // dblclick?({ originalEvent: MouseEvent, row: T }): void;
-    // rightclick?({ originalEvent: MouseEvent, row: T }): void;
   };
   width?: number;
   sortable?: boolean | IDataTableColumnSortConfig;
@@ -40,13 +39,10 @@ export interface IDataTablePaginationOptions {
 }
 
 export interface IDataTableColumnSortConfig {
-  // template?: string;
-  icon?: string;
   transform?: Function;
 }
 
 export interface IDataTableColumnFilterConfig {
-  // template?: string;
   type: 'text' | 'date' | 'select';
   options?: string[] | IDataTableColumnFilterOption[];
   allowCustomRange?: boolean;

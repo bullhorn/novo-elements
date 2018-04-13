@@ -29,6 +29,7 @@ import { Helpers } from '../../../utils/Helpers';
 @Component({
   selector: '[novo-data-table-cell-config]',
   template: `
+        <i class="bhi-{{ labelIcon }} label-icon" *ngIf="labelIcon" data-automation-id="novo-data-table-header-icon"></i>
         <label data-automation-id="novo-data-table-label">{{ label }}</label>
         <div>
             <button *ngIf="config.sortable" theme="icon" [icon]="icon" (click)="sort()" [class.active]="sortActive" data-automation-id="novo-data-table-sort"></button>
@@ -77,6 +78,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   @Input('novo-data-table-cell-config')
   set column(column: IDataTableColumn<T>) {
     this.label = column.type === 'action' ? '' : column.label;
+    this.labelIcon = column.labelIcon;
 
     this.config = {
       sortable: !!column.sortable,
@@ -115,6 +117,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   public label: string;
   public icon: string = 'sortable';
+  public labelIcon: string;
   public id: string;
   public filter: any;
   public direction: string;

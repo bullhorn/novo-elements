@@ -262,6 +262,7 @@ export class DataTableDemoComponent implements OnInit {
     {
       id: 'name',
       label: 'Name',
+      labelIcon: 'bull',
       enabled: true,
       type: 'text',
       template: 'custom',
