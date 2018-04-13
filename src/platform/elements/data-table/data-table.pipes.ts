@@ -78,6 +78,9 @@ export class DateTableNumberRendererPipe<T> implements PipeTransform {
   transform(value: any, column: IDataTableColumn<T>, isPercent: boolean = false): string {
     if (!Helpers.isEmpty(value)) {
       let val = interpolateCell<T>(value, column);
+      if (isPercent && Helpers.isNumber(val)) {
+        val = `${Number(val) * 100}`;
+      }
       return `${this.labels.formatNumber(val)}${isPercent ? '%' : ''}`;
     }
     return '';

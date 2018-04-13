@@ -199,13 +199,13 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       this.activeDateFilter = filter.label || this.labels.customDateRange;
       if (filter.startDate && filter.endDate) {
         actualFilter = {
-          min: dateFns.startOfDay(filter.startDate.date).getTime(),
-          max: dateFns.endOfDay(filter.endDate.date).getTime(),
+          min: dateFns.startOfDay(filter.startDate.date),
+          max: dateFns.startOfDay(dateFns.addDays(dateFns.startOfDay(filter.endDate.date), 1)),
         };
       } else {
         actualFilter = {
-          min: dateFns.startOfDay(dateFns.addDays(dateFns.startOfToday(), filter.min)).getTime(),
-          max: dateFns.endOfDay(dateFns.addDays(dateFns.startOfToday(), filter.max)).getTime(),
+          min: filter.min ? dateFns.addDays(dateFns.startOfToday(), filter.min) : dateFns.startOfToday(),
+          max: filter.max ? dateFns.addDays(dateFns.startOfTomorrow(), filter.max) : dateFns.startOfTomorrow(),
         };
       }
     }

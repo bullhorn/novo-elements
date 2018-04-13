@@ -83,6 +83,10 @@ export class Helpers {
     return typeof obj === 'string';
   }
 
+  static isNumber(obj: any) {
+    return obj && !isNaN(parseInt(obj, 10));
+  }
+
   /**
    * Checks to see if the object is a undefined or null
    */
