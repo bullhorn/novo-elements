@@ -179,7 +179,8 @@ export class FormUtils {
             tooltip: field.tooltip,
             tooltipPosition: field.tooltipPosition,
             customControl: field.customControl,
-            customControlConfig: field.customControlConfig
+            customControlConfig: field.customControlConfig,
+            
         };
         // TODO: getControlOptions should always return the correct format
         let optionsConfig = this.getControlOptions(field, http, config);
@@ -245,6 +246,8 @@ export class FormUtils {
                 control = new DateTimeControl(controlConfig);
                 break;
             case 'date':
+                controlConfig.format = field.format;
+                controlConfig.useMoment = field.useMoment;
                 controlConfig.military = config ? !!config.military : false;
                 control = new DateControl(controlConfig);
                 break;

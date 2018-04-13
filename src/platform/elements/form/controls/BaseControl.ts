@@ -56,6 +56,7 @@ export interface NovoControlConfig {
     customControlConfig?: any;
     military?: boolean;
     format?: string;
+    useMoment?: boolean;
     tipWell?: {
         tip: string,
         icon?: string,
@@ -111,6 +112,7 @@ export class BaseControl {
     customControlConfig?: any;
     military?: boolean;
     format?: string;
+    useMoment?: boolean;
     tipWell?: {
         tip: string,
         icon?: string,
@@ -150,6 +152,7 @@ export class BaseControl {
         this.layoutOptions = config.layoutOptions || {};
         this.military = !!config.military;
         this.format = config.format;
+        this.useMoment = config.useMoment;
 
         if (this.required) {
             this.validators.push(Validators.required);
