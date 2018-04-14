@@ -49,8 +49,8 @@ export class DataTableState<T> {
     this.selectionSource.next();
   }
 
-  public onPaginationChange(): void {
-    this.paginationSource.next();
+  public onPaginationChange(isPageSizeChange: boolean): void {
+    this.paginationSource.next(isPageSizeChange);
   }
 
   public onSortFilterChange(): void {

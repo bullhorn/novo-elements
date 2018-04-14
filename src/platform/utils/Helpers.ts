@@ -10,13 +10,7 @@ export class Helpers {
     }
   }
 
-  /**
-   * Interpolates a string with vars passed to it
-   * @param  {String} str   The string to interpolate
-   * @param  {Object} props The params to replace in string.
-   * @return {String}
-   */
-  static interpolate(str, props) {
+  static interpolate(str: string, props: any): string {
     return str.replace(/\$([\w\.]+)/g, (original, key) => {
       let keys = key.split('.');
       let value = props[keys.shift()];
@@ -26,6 +20,43 @@ export class Helpers {
       }
       return value !== undefined ? value : '';
     });
+  }
+
+  static interpolateWithFallback(formatString: string | string[], data: any): string {
+    // Format string can be an array, it will attempt to interpolate each item
+    // in the array, if there is a failure to replace it will mark it as such
+    // It will either return the first successful replacement of ALL variables,
+    // or an empty string
+    if (Array.isArray(formatString)) {
+      let successes: string[] = [];
+      let failures: string[] = [];
+      formatString.forEach((format: string) => {
+        let isSuccess: boolean = true;
+        let attempt = format.replace(/\$([\w\.]+)/g, (original, key) => {
+          let keys = key.split('.');
+          let value = data[keys.shift()];
+          while (keys.length && value !== undefined) {
+            let k = keys.shift();
+            value = k ? value[k] : `${value}.`;
+          }
+          if (isSuccess && Helpers.isEmpty(value)) {
+            isSuccess = false;
+          }
+          return Helpers.isEmpty(value) ? '' : value;
+        });
+        if (isSuccess) {
+          successes.push(attempt);
+        } else {
+          failures.push(attempt);
+        }
+      });
+      if (successes.length !== 0) {
+        return successes[0];
+      }
+      return '';
+    } else {
+      return Helpers.interpolate(formatString, data);
+    }
   }
 
   /**
@@ -50,6 +81,10 @@ export class Helpers {
    */
   static isString(obj: any) {
     return typeof obj === 'string';
+  }
+
+  static isNumber(obj: any) {
+    return obj && !isNaN(parseInt(obj, 10));
   }
 
   /**
