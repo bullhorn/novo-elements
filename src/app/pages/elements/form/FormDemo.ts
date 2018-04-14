@@ -287,7 +287,7 @@ export class FormDemoComponent {
 
     // Calendar input controls
     this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
-    this.dateMomentControl = new DateControl({ key: 'momentDate', label: 'Moment Date', tooltip: 'Date', format: 'll', useMoment: true });
+    this.dateMomentControl = new DateControl({ key: 'momentDate', label: 'Moment Date', tooltip: 'Date', format: 'MMM	Do YYYY (dd)', useMoment: true });
     this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
     this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time', military: true });
     this.calendarForm = formUtils.toFormGroup([this.dateControl, this.dateMomentControl, this.timeControl, this.dateTimeControl]);
