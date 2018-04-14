@@ -35,6 +35,15 @@ describe('Elements: NovoAddressElement', () => {
             expect(component.ngOnInit).toBeDefined();
             component.ngOnInit();
         });
+        it('should be set up label for address1', () => {
+            component.config = {};
+            component.ngOnInit();
+            expect(component.config.address1.label).toBeDefined();
+        });
+        it('should be set up config', () => {
+            component.ngOnInit();
+            expect(component.config.address1.label).toBeDefined();
+        });
     });
 
     describe('Method: onCountryChange()', () => {
@@ -84,5 +93,95 @@ describe('Elements: NovoAddressElement', () => {
             expect(component.registerOnTouched).toBeDefined();
             component.registerOnTouched();
         });
+    });
+
+    describe('Method: isValid(field: string): void', () => {
+        beforeEach(() => {
+            component.config = {
+                address1: {
+                    required: true
+                },
+                country: {
+                    required: true
+                },
+                state: {
+                    required: false
+                }
+            };
+        });
+        it('should check countryName value for country', () => {
+            component.model = {
+                countryName: 'usa'
+            };
+            component.isValid('country');
+            expect(component.valid.country).toEqual(true);
+        });
+        it('should check validity of required field address1 when it is empty', () => {
+            component.model = {
+                address1: ''
+            };
+            component.isValid('address1');
+            expect(component.valid.address1).toEqual(false);
+        });
+        it('should check validity of required field address1 when it is not empty', () => {
+            component.model = {
+                address1: 'tste'
+            };
+            component.isValid('address1');
+            expect(component.valid.address1).toEqual(true);
+        });
+        it('should ignore validity of non-required field state', () => {
+            component.model = {
+                state: 'TN'
+            };
+            component.isValid('state');
+            expect(component.valid.state).toEqual(false);
+        });
+
+    });
+
+    describe('Method: isInvalid(field: string): void', () => {
+        beforeEach(() => {
+            component.config = {
+                address1: {
+                    required: true
+                },
+                country: {
+                    required: true
+                },
+                state: {
+                    required: false
+                }
+            };
+        });
+        it('should check countryName value for country', () => {
+            component.model = {
+                countryName: 'r'
+            };
+            component.isInvalid('country');
+            expect(component.invalid.country).toEqual(false);
+        });
+        it('should check validity of required field address1 when it is empty', () => {
+            component.model = {
+                address1: ''
+            };
+            component.isInvalid('address1');
+            expect(component.invalid.address1).toEqual(true);
+        });
+        it('should check validity of required field address1 when it is not empty', () => {
+            component.model = {
+                address1: 'tste'
+            };
+            component.isInvalid('address1');
+            expect(component.invalid.address1).toEqual(false);
+        });
+        it('should ignore validity of non-required field state', () => {
+            component.model = {
+                state: 'TN'
+            };
+            component.isInvalid('state');
+            expect(component.invalid.state).toEqual(false);
+        });
+
     });
 });

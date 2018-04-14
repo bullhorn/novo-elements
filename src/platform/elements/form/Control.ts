@@ -1,8 +1,8 @@
 // NG2
 import {
-    Component, Input, Output, ElementRef, EventEmitter,
-    OnInit, OnDestroy, Directive, HostListener, AfterContentInit,
-    AfterViewInit
+  Component, Input, Output, ElementRef, EventEmitter,
+  OnInit, OnDestroy, Directive, HostListener, AfterContentInit,
+  AfterViewInit
 } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
@@ -16,42 +16,42 @@ import { DateFormatService } from '../../services/date-format/DateFormat';
 import { FieldInteractionApi } from './FieldInteractionApi';
 
 export interface IMaskOptions {
-    mask: any;
-    keepCharPositions: boolean;
-    guide: boolean;
+  mask: any;
+  keepCharPositions: boolean;
+  guide: boolean;
 };
 
 @Directive({
-    selector: 'textarea[autosize]'
+  selector: 'textarea[autosize]'
 })
 export class NovoAutoSize implements AfterContentInit {
-    @HostListener('input', ['$event.target'])
-    onInput(textArea: HTMLTextAreaElement): void {
-        this.adjust();
-    }
+  @HostListener('input', ['$event.target'])
+  onInput(textArea: HTMLTextAreaElement): void {
+    this.adjust();
+  }
 
-    constructor(public element: ElementRef) { }
+  constructor(public element: ElementRef) { }
 
-    ngAfterContentInit(): void {
-        setTimeout(() => {
-            this.adjust();
-        });
-    }
+  ngAfterContentInit(): void {
+    setTimeout(() => {
+      this.adjust();
+    });
+  }
 
-    adjust(): void {
-        let hasValue = this.element.nativeElement.value.length !== 0;
-        this.element.nativeElement.style.overflow = 'hidden';
-        if (hasValue) {
-            this.element.nativeElement.style.height = Math.min((this.element.nativeElement.scrollHeight - 11), 300) + 'px';
-        } else {
-            this.element.nativeElement.style.height = '14px';
-        }
+  adjust(): void {
+    let hasValue = this.element.nativeElement.value.length !== 0;
+    this.element.nativeElement.style.overflow = 'hidden';
+    if (hasValue) {
+      this.element.nativeElement.style.height = Math.min((this.element.nativeElement.scrollHeight - 11), 300) + 'px';
+    } else {
+      this.element.nativeElement.style.height = '14px';
     }
+  }
 }
 
 @Component({
-    selector: 'novo-custom-control-container',
-    template: `
+  selector: 'novo-custom-control-container',
+  template: `
         <div class="novo-control-container" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
             <!--Label (for horizontal)-->
             <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && form.controls[control.key].label">{{ form.controls[control.key].label }}</label>
@@ -95,8 +95,8 @@ export class NovoAutoSize implements AfterContentInit {
     `
 })
 export class NovoCustomControlContainerElement {
-    @Input() control;
-    @Input() form: NovoFormGroup;
+  @Input() control;
+  @Input() form: NovoFormGroup;
 }
 
 @Component({
@@ -125,21 +125,21 @@ export class NovoCustomControlContainerElement {
                 </label>
                 <div class="novo-control-inner-container">
                     <div class="novo-control-inner-input-container">
-                        <!--Required Indicator-->
+                      <!--Required Indicator-->
                         <i [hidden]="!form.controls[control.key].required || form.controls[control.key].readOnly"
-                            class="required-indicator"
-                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form.controls[control.key].required">
+                            class="required-indicator {{ form.controls[control.key].controlType }}"
+                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || (form.controls[control.key].required && !form.controls[control.key].readOnly)">
                         </i>
                         <!--Form Controls-->
                         <div class="novo-control-input {{ form.controls[control.key].controlType }}" [ngSwitch]="form.controls[control.key].controlType" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
                             <!--Text-based Inputs-->
                             <!--TODO prefix/suffix on the control-->
                             <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <input *ngIf="form.controls[control.key].type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (input)="emitChange($event)" [maxlength]="form.controls[control.key].maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" autocomplete>
-                                <input *ngIf="form.controls[control.key].type === 'number' && form.controls[control.key].subType !== 'percentage'" [formControlName]="control.key" [id]="control.key" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (keydown)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="form.controls[control.key].maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="numberInput.blur()" #numberInput>
-                                <input *ngIf="form.controls[control.key].type === 'number' && form.controls[control.key].subType === 'percentage'" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (keydown)="restrictKeys($event)" [value]="percentValue" (input)="handlePercentChange($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="percentInput.blur()" #percentInput>
-                                <label class="input-label" *ngIf="form.controls[control.key].subType === 'currency'">{{ control.currencyFormat }}</label>
-                                <label class="input-label" *ngIf="form.controls[control.key].subType === 'percentage'">%</label>
+                              <input *ngIf="form.controls[control.key].type !== 'number'" [formControlName]="control.key" [id]="control.key" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (input)="emitChange($event)" [maxlength]="form.controls[control.key].maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" autocomplete>
+                              <input *ngIf="form.controls[control.key].type === 'number' && form.controls[control.key].subType !== 'percentage'" [formControlName]="control.key" [id]="control.key" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (keydown)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="form.controls[control.key].maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="numberInput.blur()" #numberInput>
+                              <input *ngIf="form.controls[control.key].type === 'number' && form.controls[control.key].subType === 'percentage'" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (keydown)="restrictKeys($event)" [value]="percentValue" (input)="handlePercentChange($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="percentInput.blur()" #percentInput>
+                              <label class="input-label" *ngIf="form.controls[control.key].subType === 'currency'">{{ control.currencyFormat }}</label>
+                              <label class="input-label" *ngIf="form.controls[control.key].subType === 'percentage'">%</label>
                             </div>
                             <!--TextArea-->
                             <textarea *ngSwitchCase="'text-area'" [name]="control.key" [attr.id]="control.key" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" autosize (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></textarea>
@@ -180,7 +180,7 @@ export class NovoCustomControlContainerElement {
                                 <novo-date-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military"></novo-date-time-picker-input>
                             </div>
                             <!--Address-->
-                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key"></novo-address>
+                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config"></novo-address>
                             <!--Checkbox-->
                             <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [label]="control.checkboxLabel" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [layoutOptions]="layoutOptions"></novo-checkbox>
                             <!--Checklist-->
@@ -196,15 +196,17 @@ export class NovoCustomControlContainerElement {
                     <div class="field-message" *ngIf="!condensed" [class.has-tip]="form.controls[control.key].tipWell">
                         <div class="messages">
                             <span class="error-text" *ngIf="showFieldMessage"></span>
-                            <span class="error-text" *ngIf="isDirty && errors?.required">{{ form.controls[control.key].label | uppercase }} {{ labels.isRequired }}</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.required && form.controls[control.key].controlType !== 'address'">{{ form.controls[control.key].label | uppercase }} {{ labels.isRequired }}</span>
                             <span class="error-text" *ngIf="isDirty && errors?.minlength">{{ form.controls[control.key].label | uppercase }} {{ labels.minLength }} {{ form.controls[control.key].minlength }}</span>
                             <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">{{ labels.maxLengthMet }}({{ form.controls[control.key].maxlength }})</span>
                             <span class="error-text" *ngIf="errors?.maxlength">{{ labels.invalidMaxLength }}({{ form.controls[control.key].maxlength }})</span>
                             <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{ form.controls[control.key].label | uppercase }} {{ labels.invalidEmail }}</span>
-                            <span class="error-text" *ngIf="isDirty && errors?.invalidAddress">{{ form.controls[control.key].label | uppercase }} {{ labels.invalidAddress }}</span>
                             <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{ form.controls[control.key].label | uppercase }} {{ labels.isTooLarge }}</span>
                             <span *ngIf="isDirty && errors?.minYear">{{ form.controls[control.key].label | uppercase }} {{ labels.notValidYear }}</span>
                             <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
+                            <span *ngIf="isDirty && errors?.invalidAddress">
+                                <span class="error-text" *ngFor="let invalidAddressField of errors?.invalidAddressFields">{{ invalidAddressField | uppercase }} {{ labels.isRequired }} </span>
+                            </span>
                             <!--Field Hint-->
                             <span class="description" *ngIf="form.controls[control.key].description">
                                 {{ form.controls[control.key].description }}
@@ -428,7 +430,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   get alwaysActive() {
     // Controls that have the label active if there is any user entered text in the field
-    if (this.form.controls[this.control.key].controlType === 'picker' && this._enteredText.length ) {
+    if (this.form.controls[this.control.key].controlType === 'picker' && this._enteredText.length) {
       return true;
     }
 

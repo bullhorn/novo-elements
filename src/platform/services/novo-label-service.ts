@@ -54,10 +54,13 @@ export class NovoLabelService {
   backToPresetFilters = 'Back to Preset Filters';
   okGotIt = 'Ok, Got it';
   address = 'Address';
-  apt = 'Apt';
+  address1 = 'Address';
+  apt = 'Apt';// TODO delete
+  address2 = 'Apt';
   city = 'City / Locality';
   state = 'State / Region';
-  zipCode = 'Postal Code';
+  zip = 'Postal Code';
+  zipCode = 'Postal Code';// TODO delete
   country = 'Country';
   or = 'or';
   clickToBrowse = 'click to browse';
@@ -83,8 +86,8 @@ export class NovoLabelService {
   add = 'Add';
   encryptedFieldTooltip = 'This data has been stored at the highest level of security';
 
-  constructor(@Optional() @Inject(LOCALE_ID) public userLocale: string = 'en-US') {}
-  
+  constructor( @Optional() @Inject(LOCALE_ID) public userLocale: string = 'en-US') { }
+
   getToManyPlusMore(toMany: { quantity: number }): string {
     return `+${toMany.quantity} more`;
   }

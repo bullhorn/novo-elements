@@ -45,14 +45,18 @@ export class DataTableSource<T> extends DataSource<T> {
         );
       }),
       map((data: { results: T[]; total: number }) => {
-        this.loading = false;
         if (!this.totalSet) {
           this.total = data.total;
+          this.totalSet = true;
         }
         this.current = data.results.length;
         this.data = data.results;
         setTimeout(() => {
           this.ref.markForCheck();
+          setTimeout(() => {
+            this.loading = false;
+            this.ref.markForCheck();
+          });
         });
         return data.results;
       }),
