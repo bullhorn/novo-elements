@@ -5,7 +5,7 @@ import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
-import * as momentjs from 'moment';
+import * as momentImported from 'moment';
 // App
 import { NovoDatePickerElement } from './DatePicker';
 import { NovoOverlayTemplate } from '../overlay/Overlay';
@@ -159,7 +159,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
         return '';
       }
       if (this.useMoment) {
-        let momentDate = momentjs(value);
+        let momentDate = momentImported(value);
         if (momentDate.isValid()) {
           return momentDate.format(this.format);
         } else {
