@@ -5,7 +5,6 @@ import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
-import { DateFormatPipe } from 'angular2-moment';
 import * as moment from 'moment';
 // App
 import { NovoDatePickerElement } from './DatePicker';
@@ -24,7 +23,7 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-date-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-        <input type="text" [name]="name" [(ngModel)]="formattedValue" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input data-automation-id="date-input"/>
+        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input data-automation-id="date-input"/>
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
 
@@ -54,19 +53,21 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   constructor(
     public element: ElementRef, 
     public labels: NovoLabelService, 
-    private _changeDetectorRef: ChangeDetectorRef,
-    private formatPipe: DateFormatPipe
+    private _changeDetectorRef: ChangeDetectorRef
   ) {
     this.placeholder = this.labels.dateFormatPlaceholder;
   }
 
   ngOnInit() {
+    if(!this.useMoment) {
       this.maskOptions = this.maskOptions || {
-        mask: [/\d/, /\d/, /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/],
+        mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
         keepCharPositions: false,
         guide: true,
       };
-    
+    } else {
+      this.maskOptions = { mask: false};
+    }
   }
 
   /** BEGIN: Convienient Panel Methods. */
@@ -159,7 +160,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       }
       if (this.useMoment) {
         let momentDate = moment(value);
-        if(momentDate.isValid()) {
+        if (momentDate.isValid()) {
           return momentDate.format(this.format);
         } else {
           return '';

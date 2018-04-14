@@ -115,7 +115,8 @@ export class FormDemoComponent {
   private fileControl: any;
   private multiFileControl: any;
   private fileForm: any;
-  private dateControl: any;
+  private dateControl: DateControl;
+  private dateMomentControl: DateControl;
   private timeControl: any;
   private dateTimeControl: any;
   private dynamic: any;
@@ -285,10 +286,11 @@ export class FormDemoComponent {
     this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
 
     // Calendar input controls
-    this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date', format: 'yyyy/mm/dd', useMoment: true });
+    this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
+    this.dateMomentControl = new DateControl({ key: 'momentDate', label: 'Moment Date', tooltip: 'Date', format: 'll', useMoment: true });
     this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
     this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time', military: true });
-    this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
+    this.calendarForm = formUtils.toFormGroup([this.dateControl, this.dateMomentControl, this.timeControl, this.dateTimeControl]);
 
     // Dynamic
     this.dynamic = formUtils.toFieldSets(
