@@ -23,6 +23,7 @@ import {
   NovoModalParams,
   NovoModalService,
 } from '../../../../platform/index';
+import { IDataTablePreferences } from '../../../../platform/elements/data-table/interfaces';
 
 const template = `
 <div class="container">
@@ -429,6 +430,10 @@ export class DataTableDemoComponent implements OnInit {
           this.ref.markForCheck();
         }
       });
+  }
+
+  public onPreferencesChanged(event: IDataTablePreferences): void {
+    console.log('Preferences changed (persist manually):', event); // tslint:disable-line
   }
 }
 
