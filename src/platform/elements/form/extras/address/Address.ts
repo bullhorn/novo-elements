@@ -40,21 +40,21 @@ export interface NovoAddressConfig {
                 class="required-indicator address1"
                 [ngClass]="{'bhi-circle': !valid.address1, 'bhi-check': valid.address1}">
             </i>
-            <input type="text" id="address1" name="address1" [placeholder]="config.address1.label" [maxlength]="config.address1.maxlength" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="onAddressChange('address1',$event)" (focus)="isFocused('address1')" (blur)="isBlurred('address1')" (input)="onInput('address1')"/>
+            <input type="text" id="address1" name="address1" [placeholder]="config.address1.label" [maxlength]="config.address1.maxlength" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="onAddressChange('address1',$event)" (focus)="isFocused($event, 'address1')" (blur)="isBlurred($event, 'address1')" (input)="onInput('address1')"/>
         </span>
         <span class="apt suite" [class.invalid]="invalid.address2" [class.focus]="focused.address2">
             <i *ngIf="config?.address2?.required"
                 class="required-indicator address2"
                 [ngClass]="{'bhi-circle': !valid.address2, 'bhi-check': valid.address2}">
             </i>
-            <input type="text" id="address2" name="address2" [placeholder]="config.address2.label" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()" (focus)="isFocused('address2')" (blur)="isBlurred('address2')" (input)="onInput('address2')"/>
+            <input type="text" id="address2" name="address2" [placeholder]="config.address2.label" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'address2')" (blur)="isBlurred($event, 'address2')" (input)="onInput('address2')"/>
         </span>
         <span class="city locality" [class.invalid]="invalid.city" [class.focus]="focused.city">
             <i *ngIf="config?.city?.required"
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.city, 'bhi-check': valid.city}">
             </i>
-            <input type="text" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()" (focus)="isFocused('city')" (blur)="isBlurred('city')" (input)="onInput('city')"/>
+            <input type="text" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'city')" (blur)="isBlurred($event, 'city')" (input)="onInput('city')"/>
         </span>
         <span class="state region" [class.invalid]="invalid.state" [class.focus]="focused.state">
             <i *ngIf="config?.state?.required"
@@ -68,7 +68,7 @@ export interface NovoAddressConfig {
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.zip, 'bhi-check': valid.zip}">
             </i>
-            <input type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()" (focus)="isFocused('zip')" (blur)="isBlurred('zip')" (input)="onInput('zip')" />
+            <input type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'zip')" (blur)="isBlurred($event, 'zip')" (input)="onInput('zip')" />
         </span>
         <span class="country-name" [class.invalid]="invalid.country" [class.focus]="focused.country">
             <i *ngIf="config?.country?.required"
@@ -93,6 +93,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     invalid: any = {};
     valid: any = {};
     @Output() change: EventEmitter<any> = new EventEmitter();
+    @Output() focus: EventEmitter<any> = new EventEmitter();
+    @Output() blur: EventEmitter<any> = new EventEmitter();
 
     constructor(public labels: NovoLabelService) { }
 
@@ -143,12 +145,14 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         this.isValid(field);
     }
 
-    isFocused(field: string): void {
-        this.focused[field] = true;
+    isFocused(evt: Event, field: string): void {
+      this.focused[field] = true;
+      this.focus.emit(evt);
     }
 
-    isBlurred(field: string): void {
-        this.focused[field] = false;
+    isBlurred(evt: Event, field: string): void {
+      this.focused[field] = false;
+      this.blur.emit(evt);
     }
 
     onCountryChange(evt) {

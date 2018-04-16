@@ -29,30 +29,59 @@ export class FormValidators {
   }
   // Makes sure the control value is a valid address
   static isValidAddress(control) {
+    console.log('checking if address is valid')
     let fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'country'];
     let invalidAddressFields: string[] = [];
-    let returnVal = null;
+    let maxlengthFields: string[] = [];
+    let maxlengthMetFields: string[] = [];
+    let returnVal: {
+      invalidAddress?: boolean;
+      invalidAddressFields?: string[];
+      invalidAddressForForm?: boolean;
+      maxlength?: boolean;
+      maxlengthFields?: string[];
+      maxlengthMet?: boolean;
+      maxlengthMetFields?: string[];
+    } = null;
+    let maxlengthError: boolean = false;
+    let maxlengthMetError: boolean = false;
     if (control.value && control.config) {
       let valid = true;
       let formValidity = true;
       fieldList.forEach((subfield: string) => {
-        if ((subfield !== 'country' && !Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&
-          !Helpers.isBlank(control.value[subfield]) && Helpers.isEmpty(control.value[subfield])) ||
-          (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
-            !Helpers.isBlank(control.value.countryName) && Helpers.isEmpty(control.value.countryName)) ||
-            ((!Helpers.isEmpty(control.config[subfield]) && control.value[subfield] && control.value[subfield].length >= control.config[subfield].maxlength
-          ))) {
-          valid = false;
-          invalidAddressFields.push(control.config[subfield].label);
-        }
-        if ((subfield !== 'country' && !Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&
-          Helpers.isEmpty(control.value[subfield])) ||
-          (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
-            Helpers.isEmpty(control.value.countryName))) {
-          formValidity = false;
+        if (!Helpers.isEmpty(control.config[subfield])) {
+          if ((subfield !== 'country' && control.config[subfield].required &&
+            !Helpers.isBlank(control.value[subfield]) && Helpers.isEmpty(control.value[subfield])) ||
+            (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
+              !Helpers.isBlank(control.value.countryName) && Helpers.isEmpty(control.value.countryName)) ||
+              ((!Helpers.isEmpty(control.config[subfield]) && control.value[subfield] && control.value[subfield].length >= control.config[subfield].maxlength
+            ))) {
+            valid = false;
+            invalidAddressFields.push(control.config[subfield].label);
+          }
+          if ((subfield !== 'country' && control.config[subfield].required &&
+            Helpers.isEmpty(control.value[subfield])) ||
+            (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
+              Helpers.isEmpty(control.value.countryName))) {
+            formValidity = false;
+          } else if (!Helpers.isEmpty(control.config[subfield].maxlength) && !Helpers.isEmpty(control.value[subfield]) &&
+            control.value[subfield].length > control.config[subfield].maxlength) {
+              maxlengthError = true;
+              maxlengthFields.push(subfield);
+          } else if (!Helpers.isEmpty(control.config[subfield].maxlength) && !Helpers.isEmpty(control.value[subfield]) &&
+            control.value[subfield].length === control.config[subfield].maxlength) {
+              maxlengthMetError = true;
+              maxlengthMetFields.push(subfield);
+              console.log('maxlengthMeterror', maxlengthMetFields)
+          } else {
+              if (!Helpers.isEmpty(control.config[subfield].maxlength) && !Helpers.isEmpty(control.value[subfield])) {
+              console.log('control.value[subfield].length', control.value[subfield].length)            
+              console.log('control.config[subfield].maxlength', control.config[subfield].maxlength)            
+              }
+          }
         }
       });
-      if (!valid || !formValidity) {
+      if (!valid || !formValidity || maxlengthError) {
         returnVal = {};
       }
       if (!valid) {
@@ -62,8 +91,18 @@ export class FormValidators {
       if (!formValidity) {
         returnVal.invalidAddressForForm = true;
       }
+      if (maxlengthError) {
+        returnVal.maxlength = true;
+        returnVal.maxlengthFields = maxlengthFields;
+      }
+      if (maxlengthMetError) {
+        returnVal.maxlengthMet = true;
+        returnVal.maxlengthMetFields = maxlengthMetFields;
+      }
+      console.log('returnVal', returnVal)
       return returnVal;
     }
+    console.log('returning null')
     return null;
   }
 }

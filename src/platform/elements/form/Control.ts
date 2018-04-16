@@ -180,7 +180,7 @@ export class NovoCustomControlContainerElement {
                                 <novo-date-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military"></novo-date-time-picker-input>
                             </div>
                             <!--Address-->
-                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddresChange($event)"></novo-address>
+                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddresChange($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-address>
                             <!--Checkbox-->
                             <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [label]="control.checkboxLabel" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [layoutOptions]="layoutOptions"></novo-checkbox>
                             <!--Checklist-->
@@ -199,11 +199,17 @@ export class NovoCustomControlContainerElement {
                             <span class="error-text" *ngIf="isDirty && errors?.required && form.controls[control.key].controlType !== 'address'">{{ form.controls[control.key].label | uppercase }} {{ labels.isRequired }}</span>
                             <span class="error-text" *ngIf="isDirty && errors?.minlength">{{ form.controls[control.key].label | uppercase }} {{ labels.minLength }} {{ form.controls[control.key].minlength }}</span>
                             <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">{{ labels.maxLengthMet }}({{ form.controls[control.key].maxlength }})</span>
-                            <span class="error-text" *ngIf="errors?.maxlength">{{ labels.invalidMaxLength }}({{ form.controls[control.key].maxlength }})</span>
+                            <span class="error-text" *ngIf="errors?.maxlength && !errors?.maxlengthFields">{{ labels.invalidMaxLength }}({{ form.controls[control.key].maxlength }})</span>
                             <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{ form.controls[control.key].label | uppercase }} {{ labels.invalidEmail }}</span>
                             <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{ form.controls[control.key].label | uppercase }} {{ labels.isTooLarge }}</span>
                             <span *ngIf="isDirty && errors?.minYear">{{ form.controls[control.key].label | uppercase }} {{ labels.notValidYear }}</span>
                             <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
+                            <span *ngIf="errors?.maxlength && errors?.maxlengthFields">
+                                <span class="error-text" *ngFor="let maxlengthField of errors?.maxlengthFields">{{ labels.invalidMaxLength }}({{ control.config[maxlengthfield]?.maxlength }})</span>
+                            </span>
+                            <span *ngIf="isDirty && errors?.maxlengthMet && errors?.maxlengthMetFields && focused && !errors.maxlength">
+                                <span class="error-text" *ngFor="let maxlengthMetField of errors?.maxlengthMetFields">{{ labels.maxLengthMet }}({{ control.config[maxlengthMetField]?.maxlength }})</span>
+                            </span>
                             <span *ngIf="isDirty && errors?.invalidAddress">
                                 <span class="error-text" *ngFor="let invalidAddressField of errors?.invalidAddressFields">{{ invalidAddressField | uppercase }} {{ labels.isRequired }} </span>
                             </span>
@@ -212,7 +218,7 @@ export class NovoCustomControlContainerElement {
                                 {{ form.controls[control.key].description }}
                             </span>
                         </div>
-                        <span class="character-count" [class.error]="errors?.maxlength" *ngIf="showCount">{{ characterCount }}/{{ this.maxLengthCount || form.controls[control.key].maxlength }}</span>
+                        <span class="character-count" [class.error]="errors?.maxlength" *ngIf="showCount">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
                     </div>
                     <!--Tip Wel-->
                     <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
@@ -275,7 +281,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   private valueChangeSubscription: any;
   private dateChangeSubscription: any;
   private _showCount: boolean = false;
-  private maxLengthCount: number;
+  private maxLength: number;
 
   maskOptions: IMaskOptions;
 
@@ -289,14 +295,14 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   get showCount() {
     let charCount: boolean = this.form.controls[this.control.key].maxlength &&
-    this.focused &&
-    (this.form.controls[this.control.key].controlType === 'text-area' || this.form.controls[this.control.key].controlType === 'textbox');
+      this.focused &&
+      (this.form.controls[this.control.key].controlType === 'text-area' || this.form.controls[this.control.key].controlType === 'textbox');
 
     return this._showCount || charCount;
   }
 
   set showCount(value) {
-      this._showCount = value;
+    this._showCount = value;
   }
 
   ngAfterViewInit() {
@@ -561,9 +567,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   handleAddresChange(data) {
+    if (data && !Helpers.isBlank(data.value) &&
+      data.field && this.control.config[data.field] &&
+      !Helpers.isEmpty(this.control.config[data.field].maxlength)) {
       this.characterCount = data.value.length;
-      this.maxLengthCount = this.control.config[data.field].maxlength;
+      this.maxLength = this.control.config[data.field].maxlength;
       this.showCount = true;
-
+    }
   }
 }
