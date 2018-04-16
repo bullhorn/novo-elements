@@ -3,6 +3,8 @@
                  [hideGlobalSearch]="!globalSearchEnabled"
                  [displayedColumns]="sharedDisplayColumns"
                  [paginationOptions]="sharedPaginationOptions"
+                 name="demo-basic-rows"
+                 (preferencesChanged)="onPreferencesChanged($event)"
                  #basic>
   <!-- Custom Actions -->
   <ng-template novoTemplate="customActions">

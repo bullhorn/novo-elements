@@ -50,8 +50,8 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
       this.checked = this.dataTable.allCurrentRowsSelected();
       this.ref.markForCheck();
     });
-    this.paginationSubscription = this.dataTable.state.paginationSource.subscribe((isPageSizeChange: boolean) => {
-      if (isPageSizeChange) {
+    this.paginationSubscription = this.dataTable.state.paginationSource.subscribe((event: { isPageSizeChange: boolean }) => {
+      if (event.isPageSizeChange) {
         this.checked = false;
         this.dataTable.selectRows(false);
       } else {

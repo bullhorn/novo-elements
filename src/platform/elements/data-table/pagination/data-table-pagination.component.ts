@@ -229,7 +229,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
     this.totalPages = this.calculateTotalPages();
     this.pages = this.getPages(this.page, this.totalPages);
     this.state.updates.next(event);
-    this.state.onPaginationChange(isPageSizeChange);
+    this.state.onPaginationChange(isPageSizeChange, this.pageSize);
   }
 
   private calculateTotalPages() {

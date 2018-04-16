@@ -13,6 +13,7 @@ import {
   ViewChildren,
   TemplateRef,
   ElementRef,
+  Output,
 } from '@angular/core';
 import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -20,12 +21,19 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
 import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
-import { IDataTableColumn, IDataTablePaginationOptions, IDataTableSearchOptions, IDataTableService } from './interfaces';
+import {
+  IDataTableColumn,
+  IDataTablePaginationOptions,
+  IDataTableSearchOptions,
+  IDataTableService,
+  IDataTablePreferences,
+} from './interfaces';
 import { DataTableSource } from './data-table.source';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { DataTableState } from './state/data-table-state.service';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 import { Helpers } from '../../utils/Helpers';
+import { notify } from '../../utils/notifier/notifier.util';
 import { StaticDataTableService } from './services/static-data-table.service';
 
 @Component({
@@ -173,7 +181,25 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
   @ViewChild('novoDataTableContainer') novoDataTableContainer: ElementRef;
 
-  @Input() displayedColumns: string[];
+  @Input()
+  set displayedColumns(displayedColumns: string[]) {
+    if (this.displayedColumns && this.displayedColumns.length !== 0) {
+      if (this.name !== 'novo-data-table') {
+        this.preferencesChanged.emit({
+          name: this.name,
+          displayedColumns: displayedColumns,
+        });
+      } else {
+        notify('Must have [name] set on data-table to use preferences!');
+      }
+    }
+    this._disabledColumns = displayedColumns;
+  }
+  get displayedColumns(): string[] {
+    return this._disabledColumns;
+  }
+  private _disabledColumns: string[];
+
   @Input() paginationOptions: IDataTablePaginationOptions;
   @Input() searchOptions: IDataTableSearchOptions;
   @Input() defaultSort: { id: string; value: string };
@@ -250,6 +276,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
   private _hideGlobalSearch: boolean = true;
 
+  @Output() preferencesChanged: EventEmitter<IDataTablePreferences> = new EventEmitter<IDataTablePreferences>();
+
   public dataSource: DataTableSource<T>;
   public loading: boolean = true;
   public templates: { [key: string]: TemplateRef<any> } = {};
@@ -259,6 +287,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public scrollLeft: number = 0;
 
   private outsideFilterSubscription: Subscription;
+  private paginationSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
   private scrollListenerHandler: any;
 
@@ -274,6 +303,15 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
     this.scrollListenerHandler = this.scrollListener.bind(this);
+    this.paginationSubscription = this.state.paginationSource.subscribe((event: { isPageSizeChange: boolean; pageSize: number }) => {
+      if (this.name !== 'novo-data-table') {
+        if (event.isPageSizeChange) {
+          this.preferencesChanged.emit({ name: this.name, pageSize: event.pageSize });
+        }
+      } else {
+        notify('Must have [name] set on data-table to use preferences!');
+      }
+    });
   }
 
   public ngOnDestroy(): void {
