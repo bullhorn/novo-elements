@@ -46,7 +46,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @Input() placeholder: string;
   @Input() maskOptions: any;
   @Input() format: string;
-  @Input() specialFormat: boolean;
+  @Input() userDefinedFormat: boolean;
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
 
@@ -59,7 +59,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   ngOnInit() {
-    if(!this.specialFormat) {
+    if(!this.userDefinedFormat) {
       this.maskOptions = this.maskOptions || {
         mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
         keepCharPositions: false,
@@ -158,7 +158,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       if (!value) {
         return '';
       }
-      if (this.specialFormat && dateFns.isValid(value)) {
+      if (this.userDefinedFormat && dateFns.isValid(value)) {
         return dateFns.format(value, this.format);
       }
       if (!(value instanceof Date)) {
