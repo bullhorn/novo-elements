@@ -1,5 +1,11 @@
 import { Observable } from 'rxjs/Observable';
 
+export interface IDataTablePreferences {
+  name: string;
+  pageSize?: number;
+  displayedColumns?: string[];
+}
+
 export interface IDataTableColumn<T> {
   id: string;
   label?: string;
