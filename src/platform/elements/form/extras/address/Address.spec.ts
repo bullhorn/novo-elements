@@ -95,28 +95,6 @@ describe('Elements: NovoAddressElement', () => {
         });
     });
 
-    describe('Method: showRequired()', () => {
-        beforeEach(() => {
-            component.config = {
-                country: {
-                    label: 'country'
-                }
-            };
-        });
-        it('should return true if config for field is set', () => {
-            component.config.country.required = true;
-            expect(component.showRequired('country')).toEqual(true);
-        });
-        it('should return false if config for field is set to false', () => {
-            component.config.country.required = false;
-            expect(component.showRequired('country')).toEqual(false);
-        });
-        it('should return true if config.required is true', () => {
-            component.config.required = true;
-            expect(component.showRequired('country')).toEqual(true);
-        });
-    });
-
     describe('Method: isValid(field: string): void', () => {
         beforeEach(() => {
             component.config = {
