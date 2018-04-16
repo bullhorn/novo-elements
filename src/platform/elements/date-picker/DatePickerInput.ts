@@ -5,7 +5,7 @@ import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
-import * as momentImported from 'moment';
+import * as dateFns from 'date-fns';
 // App
 import { NovoDatePickerElement } from './DatePicker';
 import { NovoOverlayTemplate } from '../overlay/Overlay';
@@ -46,7 +46,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @Input() placeholder: string;
   @Input() maskOptions: any;
   @Input() format: string;
-  @Input() useMoment: boolean;
+  @Input() specialFormat: boolean;
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
 
@@ -59,7 +59,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   ngOnInit() {
-    if(!this.useMoment) {
+    if(!this.specialFormat) {
       this.maskOptions = this.maskOptions || {
         mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
         keepCharPositions: false,
@@ -158,13 +158,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       if (!value) {
         return '';
       }
-      if (this.useMoment) {
-        let momentDate = momentImported(value);
-        if (momentDate.isValid()) {
-          return momentDate.format(this.format);
-        } else {
-          return '';
-        }
+      if (this.specialFormat && dateFns.isValid(value)) {
+        return dateFns.format(value, this.format);
       }
       if (!(value instanceof Date)) {
         value = new Date(value);

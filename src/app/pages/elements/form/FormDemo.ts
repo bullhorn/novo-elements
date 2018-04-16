@@ -122,7 +122,7 @@ export class FormDemoComponent {
     private multiFileControl: any;
     private fileForm: any;
     private dateControl: any;
-    private dateMomentControl: any;
+    private specialDateControl: any;
     private timeControl: any;
     private dateTimeControl: any;
     private dynamic: any;
@@ -317,7 +317,8 @@ export class FormDemoComponent {
             value: {
                 address1: '123 Summer Street',
                 address2: 'APT 2',
-                countryID: 1
+                countryID: 1,
+                countryName: 'United States',
             }
         });
         this.addressFormControls = [this.addressControl];
@@ -336,10 +337,10 @@ export class FormDemoComponent {
 
         // Calendar input controls
         this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
-        this.dateMomentControl = new DateControl({ key: 'momentDate', label: 'Moment Date', tooltip: 'Date', format: 'MMM	Do YYYY (dd)', useMoment: true });
+        this.specialDateControl = new DateControl({ key: 'specialFormat', label: 'Unique Format', tooltip: 'Date', format: 'MMM Do YYYY (dd)', specialFormat: true });
         this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
         this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time', military: true });
-        this.calendarForm = formUtils.toFormGroup([this.dateControl, this.dateMomentControl, this.timeControl, this.dateTimeControl]);
+        this.calendarForm = formUtils.toFormGroup([this.dateControl, this.specialDateControl, this.timeControl, this.dateTimeControl]);
 
         // Dynamic
         this.dynamic = formUtils.toFieldSets(
