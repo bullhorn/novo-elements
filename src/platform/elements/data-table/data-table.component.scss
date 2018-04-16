@@ -9,7 +9,6 @@ cdk-table {
   flex: 1;
   &.empty {
     min-height: 62px;
-    overflow: hidden;
     max-height: 62px;
   }
   > .novo-data-table-row:nth-of-type(odd) {
@@ -51,6 +50,7 @@ cdk-table {
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
+  border-top: 1px solid $off-white;
   .novo-data-table-header-cell,
   .novo-data-table-checkbox-header-cell {
     border-bottom: 1px solid $off-white;
@@ -62,6 +62,9 @@ cdk-table {
   min-width: 200px;
   padding: 10px;
   flex: 1;
+  > i.label-icon {
+    margin-right: 0.5em;
+  }
   > span {
     display: block;
     min-width: 180px;
@@ -84,6 +87,7 @@ cdk-table {
 .novo-data-table-cell {
   display: flex;
   flex-direction: row;
+  align-items: center;
   &.dropdown-cell,
   &.button-cell {
     display: flex;
@@ -93,7 +97,8 @@ cdk-table {
     padding: 0 5px;
     novo-dropdown {
       button {
-        padding: 5px;
+        padding: 0;
+        padding-left: 5px;
         &:hover,
         &:active,
         &:focus {
@@ -107,8 +112,8 @@ cdk-table {
     max-width: 40px;
   }
   &.dropdown-cell {
-    min-width: 93px;
-    max-width: 93px;
+    min-width: 98px;
+    max-width: 98px;
     &.empty {
       min-width: 39px;
       max-width: 39px;
@@ -151,7 +156,9 @@ cdk-table {
     }
   }
   > div {
-    width: 60px;
+    width: 55px;
+    display: flex;
+    flex: 0;
   }
   novo-dropdown[side='right'] {
     display: inline-block;
@@ -161,8 +168,8 @@ cdk-table {
     max-width: 40px;
   }
   &.dropdown-header-cell {
-    min-width: 93px;
-    max-width: 93px;
+    min-width: 98px;
+    max-width: 98px;
     &.empty {
       min-width: 39px;
       max-width: 39px;
@@ -212,7 +219,6 @@ novo-data-table {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    border-bottom: 1px solid $off-white;
     > [novo-data-table-custom-header] {
       flex: 1;
     }
@@ -233,7 +239,6 @@ novo-data-table {
       }
     }
     > div.novo-data-table-actions {
-      flex: 0;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -284,8 +289,19 @@ novo-data-table {
   .clickable {
     @extend a;
   }
+  .novo-data-table-empty-container {
+    padding-top: 0;
+  }
+  .novo-data-table-no-results-container {
+    position: absolute;
+    top: 48%;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
   .novo-data-table-empty-container,
   .novo-data-table-no-results-container {
+    padding: 2em;
     flex: 1;
     display: flex;
     align-items: center;
@@ -320,6 +336,7 @@ novo-data-table {
     .novo-data-table-container {
       flex: 1;
       overflow: auto;
+      position: relative;
       &.empty {
         display: flex;
         flex: 0;
@@ -327,6 +344,7 @@ novo-data-table {
       &.empty-user-filtered {
         display: flex;
         flex-flow: column nowrap;
+        min-height: 250px;
       }
     }
   }

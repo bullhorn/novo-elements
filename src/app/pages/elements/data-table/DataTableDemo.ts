@@ -23,6 +23,7 @@ import {
   NovoModalParams,
   NovoModalService,
 } from '../../../../platform/index';
+import { IDataTablePreferences } from '../../../../platform/elements/data-table/interfaces';
 
 const template = `
 <div class="container">
@@ -62,7 +63,8 @@ const template = `
 
 interface MockData {
   id: number;
-  embeddedObj: { id: number };
+  embeddedObj: { id: number; test: string; another: { id: number } };
+  simpleEmbeddedObj: { id: number };
   name: string;
   status: string;
   enabled: boolean;
@@ -70,6 +72,10 @@ interface MockData {
   dateTime: Date;
   time: Date;
   money: number;
+  percent: number;
+  telephone: string;
+  email: string;
+  address: { city?: string; state?: string };
 }
 
 @Component({
@@ -154,6 +160,7 @@ export class DataTableDemoComponent implements OnInit {
     {
       id: 'actions',
       type: 'action',
+      label: 'Actions',
       enabled: true,
       action: {
         options: [
@@ -167,19 +174,50 @@ export class DataTableDemoComponent implements OnInit {
       id: 'id',
       label: 'ID',
       enabled: true,
-      type: 'string',
+      type: 'text',
       filterable: true,
       sortable: true,
     },
     {
+      id: 'telephone',
+      label: 'Phone',
+      type: 'link:tel',
+      attributes: {
+        target: '_blank',
+      },
+    },
+    {
+      id: 'email',
+      label: 'Email',
+      type: 'link:mailto',
+      attributes: {
+        target: '_blank',
+      },
+    },
+    {
+      id: 'address',
+      label: 'Address',
+      type: 'text',
+      format: ['$city, $state', '$city', '$state'],
+    },
+    {
       id: 'embeddedObj',
-      label: 'Embedded',
+      label: 'Embedded (hard)',
       enabled: true,
-      property: 'id',
+      format: ['$name', '$firstName $lastName'],
       type: 'link',
       handlers: {
         click: this.log.bind(this),
       },
+      filterable: true,
+      sortable: true,
+    },
+    {
+      id: 'simpleEmbeddedObj',
+      label: 'Embedded (simple)',
+      enabled: true,
+      format: '$id',
+      type: 'text',
       filterable: true,
       sortable: true,
     },
@@ -215,17 +253,26 @@ export class DataTableDemoComponent implements OnInit {
       sortable: true,
     },
     {
+      id: 'percent',
+      label: 'Percent',
+      enabled: true,
+      type: 'percent',
+      filterable: true,
+      sortable: true,
+    },
+    {
       id: 'name',
       label: 'Name',
+      labelIcon: 'bull',
       enabled: true,
-      type: 'string',
+      type: 'text',
       template: 'custom',
     },
     {
       id: 'status',
       label: 'Status',
       enabled: true,
-      type: 'string',
+      type: 'text',
       filterable: true,
       sortable: true,
     },
@@ -233,7 +280,7 @@ export class DataTableDemoComponent implements OnInit {
       id: 'enabled',
       label: 'Enabled',
       enabled: true,
-      type: 'string',
+      type: 'text',
       sortable: true,
       filterable: {
         type: 'select',
@@ -253,7 +300,21 @@ export class DataTableDemoComponent implements OnInit {
       },
     },
   ];
-  public sharedDisplayColumns = ['selection', 'preview', 'actions', 'id', 'name', 'status', 'embeddedObj', 'edit'];
+  public sharedDisplayColumns = [
+    'selection',
+    'preview',
+    'actions',
+    'id',
+    'date',
+    'name',
+    'telephone',
+    'email',
+    'simpleEmbeddedObj',
+    'status',
+    'percent',
+    'embeddedObj',
+    'edit',
+  ];
   public sharedPaginationOptions: IDataTablePaginationOptions = {
     theme: 'standard',
     pageSize: 10,
@@ -284,7 +345,8 @@ export class DataTableDemoComponent implements OnInit {
       let day = i < 500 ? dateFns.subDays(new Date(), i) : dateFns.addDays(new Date(), i - 500);
       this.staticDataSet1.push({
         id: i,
-        embeddedObj: { id: i },
+        embeddedObj: { id: i, test: `HMM ${i}`, another: { id: 777 } },
+        simpleEmbeddedObj: { id: i },
         name: `(1) Name ${i}`,
         status: `(1) Status ${i}`,
         enabled: i % 2 === 0,
@@ -292,10 +354,15 @@ export class DataTableDemoComponent implements OnInit {
         dateTime: day,
         time: day,
         money: i + 10,
+        percent: i / 100,
+        telephone: '555-555-5555',
+        email: 'test@google.com',
+        address: { city: 'City', state: null },
       });
       this.staticDataSet2.push({
         id: i + 1001,
-        embeddedObj: { id: i },
+        embeddedObj: { id: i, test: `HMM ${i}`, another: { id: 777 } },
+        simpleEmbeddedObj: { id: i },
         name: `(2) Name ${i}`,
         status: `(2) Status ${i}`,
         enabled: i % 2 === 0,
@@ -303,6 +370,10 @@ export class DataTableDemoComponent implements OnInit {
         dateTime: day,
         time: day,
         money: i + 10,
+        percent: i / 100,
+        telephone: '555-555-5555',
+        email: 'test@google.com',
+        address: { city: 'City', state: 'State' },
       });
     }
     this.basicRows = [...this.staticDataSet1];
@@ -359,6 +430,10 @@ export class DataTableDemoComponent implements OnInit {
           this.ref.markForCheck();
         }
       });
+  }
+
+  public onPreferencesChanged(event: IDataTablePreferences): void {
+    console.log('Preferences changed (persist manually):', event); // tslint:disable-line
   }
 }
 

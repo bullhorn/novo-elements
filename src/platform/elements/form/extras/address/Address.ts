@@ -90,6 +90,9 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     };
     onModelTouched: Function = () => {
     };
+    focused: any = {};
+    invalid: any = {};
+    valid: any = {};
 
     @Output() change: EventEmitter<any> = new EventEmitter();
     constructor(public labels: NovoLabelService) { }
@@ -116,6 +119,48 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         } else if (!this.model) {
             this.model = {};
         }
+        this.fieldList.forEach(((field: string) => {
+            if (!this.config.hasOwnProperty(field)) {
+                this.config[field] = {};
+            }
+            if (!this.config[field].hasOwnProperty('label')) {
+                this.config[field].label = this.labels[field];
+            }
+            if (this.config.required) {
+                this.config[field].required = true;
+            }
+        }));
+    }
+
+    isValid(field: string): void {
+        let valid: boolean = true;
+        if (((this.config[field].required && Helpers.isEmpty(this.model[field])) || !this.config[field].required) &&
+            !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName))) {
+            valid = false;
+        }
+        this.valid[field] = valid;
+    }
+
+    isInvalid(field: string): void {
+        let invalid: boolean = false;
+        if (((this.config[field].required && Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.model[field]))) &&
+            !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
+            invalid = true;
+        }
+        this.invalid[field] = invalid;
+    }
+
+    onInput(field: string): void {
+        this.isInvalid(field);
+        this.isValid(field);
+    }
+
+    isFocused(field: string): void {
+        this.focused[field] = true;
+    }
+
+    isBlurred(field: string): void {
+        this.focused[field] = false;
     }
 
     showRequired(field: string): boolean {
@@ -124,14 +169,6 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         } else {
             return false;
         }
-    }
-
-    isValid(field: string): boolean {
-        if (((this.showRequired(field) && Helpers.isEmpty(this.model[field])) || !this.showRequired(field)) &&
-            !(field === 'country' && this.showRequired(field) && !Helpers.isEmpty(this.model.countryName))) {
-            return false;
-        }
-        return true;
     }
 
     onCountryChange(evt) {
@@ -146,11 +183,13 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         // Update state
         this.model.state = undefined;
         this.updateControl();
+        this.onInput('country');
     }
 
     onStateChange(evt) {
         this.model.state = evt;
         this.updateControl();
+        this.onInput('state');
     }
 
     onAddressChange(field, evt) {
@@ -193,6 +232,9 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
                 this.model = model;
             }
         }
+        this.fieldList.forEach((field: string) => {
+            this.onInput(field);
+        });
     }
 
     registerOnChange(fn: Function): void {

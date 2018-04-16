@@ -3,9 +3,12 @@
                  [hideGlobalSearch]="!globalSearchEnabled"
                  [displayedColumns]="sharedDisplayColumns"
                  [paginationOptions]="sharedPaginationOptions"
+                 name="demo-basic-rows"
+                 (preferencesChanged)="onPreferencesChanged($event)"
                  #basic>
   <!-- Custom Actions -->
   <ng-template novoTemplate="customActions">
+    <span>Total: {{ basic.dataSource.total }}</span>
     <button theme="secondary">Add</button>
     <novo-dropdown side="right">
       <button theme="primary"
