@@ -180,7 +180,7 @@ export class NovoCustomControlContainerElement {
                                 <novo-date-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military"></novo-date-time-picker-input>
                             </div>
                             <!--Address-->
-                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddresChange($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-address>
+                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddressChange($event)" (focus)="handleFocus($event.event, $event.field)" (blur)="handleBlur($event.event, $event.field)"></novo-address>
                             <!--Checkbox-->
                             <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [label]="control.checkboxLabel" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [layoutOptions]="layoutOptions"></novo-checkbox>
                             <!--Checklist-->
@@ -199,16 +199,16 @@ export class NovoCustomControlContainerElement {
                             <span class="error-text" *ngIf="isDirty && errors?.required && form.controls[control.key].controlType !== 'address'">{{ form.controls[control.key].label | uppercase }} {{ labels.isRequired }}</span>
                             <span class="error-text" *ngIf="isDirty && errors?.minlength">{{ form.controls[control.key].label | uppercase }} {{ labels.minLength }} {{ form.controls[control.key].minlength }}</span>
                             <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">{{ labels.maxLengthMet }}({{ form.controls[control.key].maxlength }})</span>
-                            <span class="error-text" *ngIf="errors?.maxlength && !errors?.maxlengthFields">{{ labels.invalidMaxLength }}({{ form.controls[control.key].maxlength }})</span>
+                            <span class="error-text" *ngIf="errors?.maxlength && !errors?.maxlengthFields">{{ labels.invalidMaxLength(form.controls[control.key].maxlength) }}</span>
                             <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{ form.controls[control.key].label | uppercase }} {{ labels.invalidEmail }}</span>
                             <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{ form.controls[control.key].label | uppercase }} {{ labels.isTooLarge }}</span>
                             <span *ngIf="isDirty && errors?.minYear">{{ form.controls[control.key].label | uppercase }} {{ labels.notValidYear }}</span>
                             <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
                             <span *ngIf="errors?.maxlength && errors?.maxlengthFields">
-                                <span class="error-text" *ngFor="let maxlengthField of errors?.maxlengthFields">{{ labels.invalidMaxLength }}({{ control.config[maxlengthfield]?.maxlength }})</span>
+                                <span class="error-text" *ngFor="let maxlengthField of errors?.maxlengthFields">{{ labels.invalidMaxLengthWithField(control.config[maxlengthField]?.label, control.config[maxlengthField]?.maxlength) }}</span>
                             </span>
-                            <span *ngIf="isDirty && errors?.maxlengthMet && errors?.maxlengthMetFields && focused && !errors.maxlength">
-                                <span class="error-text" *ngFor="let maxlengthMetField of errors?.maxlengthMetFields">{{ labels.maxLengthMet }}({{ control.config[maxlengthMetField]?.maxlength }})</span>
+                            <span class="error-text" *ngIf="isDirty && maxlengthMetField && focused && !errors.maxlength">
+                                {{ labels.maxLengthMet }}({{ control.config[maxlengthMetField]?.maxlength }})
                             </span>
                             <span *ngIf="isDirty && errors?.invalidAddress">
                                 <span class="error-text" *ngFor="let invalidAddressField of errors?.invalidAddressFields">{{ invalidAddressField | uppercase }} {{ labels.isRequired }} </span>
@@ -282,11 +282,21 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   private dateChangeSubscription: any;
   private _showCount: boolean = false;
   private maxLength: number;
-
+  private focusedField: string;
+  private characterCountField: string;
+  private maxLengthMetErrorfields: string[] = [];
   maskOptions: IMaskOptions;
 
   constructor(element: ElementRef, public labels: NovoLabelService, private dateFormatService: DateFormatService, private fieldInteractionApi: FieldInteractionApi) {
     super(element);
+  }
+
+  get maxlengthMetField(): string {
+    if (this.maxLengthMetErrorfields && this.maxLengthMetErrorfields.length) {
+      return this.maxLengthMetErrorfields.find((field: string) => field === this.focusedField ) || '';
+    } else {
+      return '';
+    }
   }
 
   get showFieldMessage() {
@@ -297,7 +307,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     let charCount: boolean = this.form.controls[this.control.key].maxlength &&
       this.focused &&
       (this.form.controls[this.control.key].controlType === 'text-area' || this.form.controls[this.control.key].controlType === 'textbox');
-
     return this._showCount || charCount;
   }
 
@@ -464,13 +473,22 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this._enteredText = event;
   }
 
-  handleFocus(event: FocusEvent) {
+  handleFocus(event: FocusEvent, field) {
     this._focused = true;
+    this.focusedField = field;
+    if (this.characterCountField === field) {
+      this.showCount = true;
+    } else if (this.form.controls[this.control.key].controlType === 'address' &&
+      field && !Helpers.isEmpty(this.form.value[this.control.key]) && !Helpers.isBlank(this.form.value[this.control.key][field]) ) {
+      this.handleAddressChange({ value: this.form.value[this.control.key][field], field })
+    }
     this._focusEmitter.emit(event);
   }
 
   handleBlur(event: FocusEvent) {
     this._focused = false;
+    this.focusedField = '';
+    this.showCount = false;
     this._blurEmitter.emit(event);
   }
 
@@ -566,13 +584,19 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this.upload.emit(value);
   }
 
-  handleAddresChange(data) {
+  handleAddressChange(data) {
     if (data && !Helpers.isBlank(data.value) &&
       data.field && this.control.config[data.field] &&
       !Helpers.isEmpty(this.control.config[data.field].maxlength)) {
       this.characterCount = data.value.length;
+      this.characterCountField = data.field;
       this.maxLength = this.control.config[data.field].maxlength;
       this.showCount = true;
+      if (this.maxLength === this.characterCount) {
+        this.maxLengthMetErrorfields.push(data.field);
+      } else {
+        this.maxLengthMetErrorfields = this.maxLengthMetErrorfields.filter((field: string) => field !== data.field);
+      }
     }
   }
 }

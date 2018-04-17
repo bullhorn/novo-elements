@@ -289,11 +289,13 @@ export class FormDemoComponent {
             config: {
                 address1: {
                     label: 'Address Line 1',
-                    required: true
+                    required: true,
+                    maxlength: 20
                 },
                 address2: {
                     label: 'Address Line 2',
-                    required: true
+                    required: true,
+                    maxlength: 15
                 },
                 state: {
                     label: 'State',
@@ -315,7 +317,7 @@ export class FormDemoComponent {
             },
             value: {
                 address1: '123 Summer Street',
-                address2: 'APT 2',
+                address2: '10 Washington Street',
                 countryID: 1
             }
         });

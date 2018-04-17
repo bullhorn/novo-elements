@@ -40,21 +40,21 @@ export interface NovoAddressConfig {
                 class="required-indicator address1"
                 [ngClass]="{'bhi-circle': !valid.address1, 'bhi-check': valid.address1}">
             </i>
-            <input type="text" id="address1" name="address1" [placeholder]="config.address1.label" [maxlength]="config.address1.maxlength" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="onAddressChange('address1',$event)" (focus)="isFocused($event, 'address1')" (blur)="isBlurred($event, 'address1')" (input)="onInput('address1')"/>
+            <input type="text" id="address1" name="address1" [placeholder]="config.address1.label" [maxlength]="config.address1.maxlength" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'address1')" (blur)="isBlurred($event, 'address1')" (input)="onInput($event, 'address1')"/>
         </span>
         <span class="apt suite" [class.invalid]="invalid.address2" [class.focus]="focused.address2">
             <i *ngIf="config?.address2?.required"
                 class="required-indicator address2"
                 [ngClass]="{'bhi-circle': !valid.address2, 'bhi-check': valid.address2}">
             </i>
-            <input type="text" id="address2" name="address2" [placeholder]="config.address2.label" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'address2')" (blur)="isBlurred($event, 'address2')" (input)="onInput('address2')"/>
+            <input type="text" id="address2" name="address2" [placeholder]="config.address2.label" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'address2')" (blur)="isBlurred($event, 'address2')" (input)="onInput($event, 'address2')"/>
         </span>
         <span class="city locality" [class.invalid]="invalid.city" [class.focus]="focused.city">
             <i *ngIf="config?.city?.required"
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.city, 'bhi-check': valid.city}">
             </i>
-            <input type="text" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'city')" (blur)="isBlurred($event, 'city')" (input)="onInput('city')"/>
+            <input type="text" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'city')" (blur)="isBlurred($event, 'city')" (input)="onInput($event, 'city')"/>
         </span>
         <span class="state region" [class.invalid]="invalid.state" [class.focus]="focused.state">
             <i *ngIf="config?.state?.required"
@@ -68,7 +68,7 @@ export interface NovoAddressConfig {
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.zip, 'bhi-check': valid.zip}">
             </i>
-            <input type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'zip')" (blur)="isBlurred($event, 'zip')" (input)="onInput('zip')" />
+            <input type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'zip')" (blur)="isBlurred($event, 'zip')" (input)="onInput($event, 'zip')" />
         </span>
         <span class="country-name" [class.invalid]="invalid.country" [class.focus]="focused.country">
             <i *ngIf="config?.country?.required"
@@ -127,6 +127,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         if (((this.config[field].required && Helpers.isEmpty(this.model[field])) || !this.config[field].required) &&
             !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName))) {
             valid = false;
+        } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
+          valid = false;
         }
         this.valid[field] = valid;
     }
@@ -140,19 +142,22 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         this.invalid[field] = invalid;
     }
 
-    onInput(field: string): void {
+    onInput(event: Event, field: string): void {
         this.isInvalid(field);
         this.isValid(field);
+        if (event) {
+          this.change.emit({ value: this.model[field], field:  field });        
+        }
     }
 
-    isFocused(evt: Event, field: string): void {
+    isFocused(event: Event, field: string): void {
       this.focused[field] = true;
-      this.focus.emit(evt);
+      this.focus.emit({event, field});
     }
 
-    isBlurred(evt: Event, field: string): void {
+    isBlurred(event: Event, field: string): void {
       this.focused[field] = false;
-      this.blur.emit(evt);
+      this.blur.emit({event, field});
     }
 
     onCountryChange(evt) {
@@ -167,18 +172,13 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         // Update state
         this.model.state = undefined;
         this.updateControl();
-        this.onInput('country');
+        this.onInput(null, 'country');
     }
 
     onStateChange(evt) {
         this.model.state = evt;
         this.updateControl();
-        this.onInput('state');
-    }
-
-    onAddressChange(field, evt) {
-        this.change.emit({ value: evt, field:  field });
-        this.updateControl();
+        this.onInput(null, 'state');
     }
 
     updateStates() {
@@ -217,7 +217,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             }
         }
         this.fieldList.forEach((field: string) => {
-            this.onInput(field);
+            this.onInput(null, field);
         });
     }
 
