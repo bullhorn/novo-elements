@@ -2,16 +2,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import { IDataTableColumn } from './interfaces';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
 
 export function interpolateCell<T>(value: any, col: IDataTableColumn<T>): string {
-  if (col.property) {
-    let keys = col.property.split('.');
-    let currValue = value[keys.shift()];
-    while (keys.length && value !== undefined) {
-      let k = keys.shift();
-      value = k ? value[k] : `${value}.`;
-    }
-    return currValue !== undefined ? currValue : col.property;
+  if (col.format) {
+    return Helpers.interpolateWithFallback(col.format, value);
   }
   return value;
 }
@@ -22,7 +17,10 @@ export function interpolateCell<T>(value: any, col: IDataTableColumn<T>): string
 })
 export class DataTableInterpolatePipe<T> implements PipeTransform {
   transform(value: any, column: IDataTableColumn<T>): string {
-    return interpolateCell<T>(value, column);
+    if (!Helpers.isEmpty(value)) {
+      return interpolateCell<T>(value, column);
+    }
+    return '';
   }
 }
 
@@ -33,8 +31,11 @@ export class DataTableInterpolatePipe<T> implements PipeTransform {
 export class DateTableDateRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
   transform(value: any, column: IDataTableColumn<T>): string {
-    let val = interpolateCell<T>(value, column);
-    return this.labels.formatDate(val);
+    if (!Helpers.isEmpty(value)) {
+      let val = interpolateCell<T>(value, column);
+      return this.labels.formatDate(val);
+    }
+    return '';
   }
 }
 
@@ -45,8 +46,11 @@ export class DateTableDateRendererPipe<T> implements PipeTransform {
 export class DateTableDateTimeRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
   transform(value: any, column: IDataTableColumn<T>): string {
-    let val = interpolateCell<T>(value, column);
-    return this.labels.formatDateShort(val);
+    if (!Helpers.isEmpty(value)) {
+      let val = interpolateCell<T>(value, column);
+      return this.labels.formatDateShort(val);
+    }
+    return '';
   }
 }
 
@@ -57,8 +61,11 @@ export class DateTableDateTimeRendererPipe<T> implements PipeTransform {
 export class DateTableTimeRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
   transform(value: any, column: IDataTableColumn<T>): string {
-    let val = interpolateCell<T>(value, column);
-    return this.labels.formatTime(val);
+    if (!Helpers.isEmpty(value)) {
+      let val = interpolateCell<T>(value, column);
+      return this.labels.formatTime(val);
+    }
+    return '';
   }
 }
 
@@ -68,9 +75,15 @@ export class DateTableTimeRendererPipe<T> implements PipeTransform {
 })
 export class DateTableNumberRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
-  transform(value: any, column: IDataTableColumn<T>): string {
-    let val = interpolateCell<T>(value, column);
-    return this.labels.formatNumber(val);
+  transform(value: any, column: IDataTableColumn<T>, isPercent: boolean = false): string {
+    if (!Helpers.isEmpty(value)) {
+      let val = interpolateCell<T>(value, column);
+      if (isPercent && Helpers.isNumber(val)) {
+        val = `${Number(val) * 100}`;
+      }
+      return `${this.labels.formatNumber(val)}${isPercent ? '%' : ''}`;
+    }
+    return '';
   }
 }
 
@@ -81,7 +94,10 @@ export class DateTableNumberRendererPipe<T> implements PipeTransform {
 export class DateTableCurrencyRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
   transform(value: any, column: IDataTableColumn<T>): string {
-    let val = interpolateCell<T>(value, column);
-    return this.labels.formatCurrency(Number(val));
+    if (!Helpers.isEmpty(value)) {
+      let val = interpolateCell<T>(value, column);
+      return this.labels.formatCurrency(Number(val));
+    }
+    return '';
   }
 }

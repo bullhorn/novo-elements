@@ -35,6 +35,7 @@ export class FormValidators {
     let returnVal = null;
     if (control.value && control.config) {
       let valid = true;
+      let formValidity = true;
       fieldList.forEach((subfield: string) => {
         if ((subfield !== 'country' && !Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&
           !Helpers.isBlank(control.value[subfield]) && Helpers.isEmpty(control.value[subfield])) ||
@@ -43,11 +44,23 @@ export class FormValidators {
           valid = false;
           invalidAddressFields.push(control.config[subfield].label);
         }
+        if ((subfield !== 'country' && !Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&
+          Helpers.isEmpty(control.value[subfield])) ||
+          (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
+            Helpers.isEmpty(control.value.countryName))) {
+          formValidity = false;
+        }
       });
-      returnVal = valid ? null : {
-        'invalidAddress': true,
-        invalidAddressFields,
-      };
+      if (!valid || !formValidity) {
+        returnVal = {};
+      }
+      if (!valid) {
+        returnVal.invalidAddress = true;
+        returnVal.invalidAddressFields = invalidAddressFields;
+      }
+      if (!formValidity) {
+        returnVal.invalidAddressForForm = true;
+      }
       return returnVal;
     }
     return null;

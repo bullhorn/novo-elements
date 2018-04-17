@@ -12,8 +12,8 @@ import {
   QueryList,
   ViewChildren,
   TemplateRef,
-  Pipe,
-  PipeTransform,
+  ElementRef,
+  Output,
 } from '@angular/core';
 import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -21,12 +21,19 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
 import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
-import { IDataTableColumn, IDataTablePaginationOptions, IDataTableSearchOptions, IDataTableService } from './interfaces';
+import {
+  IDataTableColumn,
+  IDataTablePaginationOptions,
+  IDataTableSearchOptions,
+  IDataTableService,
+  IDataTablePreferences,
+} from './interfaces';
 import { DataTableSource } from './data-table.source';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { DataTableState } from './state/data-table-state.service';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 import { Helpers } from '../../utils/Helpers';
+import { notify } from '../../utils/notifier/notifier.util';
 import { StaticDataTableService } from './services/static-data-table.service';
 
 @Component({
@@ -45,9 +52,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
             <novo-data-table-pagination
                 *ngIf="paginationOptions"
                 [theme]="paginationOptions.theme"
-                [totalLength]="dataSource?.total"
-                [currentLength]="dataSource?.current"
-                [userFiltered]="state?.userFiltered"
+                [length]="dataSource?.total"
                 [page]="paginationOptions.page"
                 [pageSize]="paginationOptions.pageSize"
                 [pageSizeOptions]="paginationOptions.pageSizeOptions">
@@ -63,7 +68,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
             <div class="novo-data-table-custom-filter" *ngIf="customFilter">
               <ng-container *ngTemplateOutlet="templates['customFilter']"></ng-container>
             </div>
-            <div class="novo-data-table-container" [class.empty-user-filtered]="dataSource?.currentlyEmpty && state.userFiltered" [class.empty]="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine">
+            <div #novoDataTableContainer class="novo-data-table-container" [class.empty-user-filtered]="dataSource?.currentlyEmpty && state.userFiltered" [class.empty]="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine">
                 <cdk-table *ngIf="(columns?.length > 0) && columnsLoaded && dataSource" [dataSource]="dataSource" [trackBy]="trackByFn" novoDataTableSortFilter [class.empty]="dataSource?.currentlyEmpty && state.userFiltered" [hidden]="dataSource?.totallyEmpty && !userFiltered">
                     <ng-container novoDataTableColumnDef="selection">
                         <novo-data-table-checkbox-header-cell *novoDataTableHeaderCellDef></novo-data-table-checkbox-header-cell>
@@ -76,7 +81,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
                     <novo-data-table-header-row *novoDataTableHeaderRowDef="displayedColumns" data-automation-id="novo-data-table-header-row"></novo-data-table-header-row>
                     <novo-data-table-row *novoDataTableRowDef="let row; columns: displayedColumns;" [id]="name + '-' + row[rowIdentifier]" [dataAutomationId]="'data-automation-id-' + row[rowIdentifier]"></novo-data-table-row>
                 </cdk-table>
-                <div class="novo-data-table-no-results-container" *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine">
+                <div class="novo-data-table-no-results-container" [style.left.px]="scrollLeft" *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine">
                   <div class="novo-data-table-empty-message" >
                     <ng-container *ngTemplateOutlet="templates['noResultsMessage'] || templates['defaultNoResultsMessage']"></ng-container>
                   </div>
@@ -90,7 +95,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         </div>
 
          <!-- DEFAULT CELL TEMPLATE -->
-        <ng-template novoTemplate="stringCellTemplate"
+        <ng-template novoTemplate="textCellTemplate"
               let-row
               let-col="col">
               <span>{{ row[col.id] | dataTableInterpolate:col }}</span>
@@ -123,12 +128,22 @@ import { StaticDataTableService } from './services/static-data-table.service';
         <ng-template novoTemplate="percentCellTemplate"
             let-row
             let-col="col">
-            <span>{{ row[col.id] | dataTableInterpolate:col | dataTableNumberRenderer:col }}%</span>
+            <span>{{ row[col.id] | dataTableInterpolate:col | dataTableNumberRenderer:col:true }}</span>
         </ng-template>
         <ng-template novoTemplate="linkCellTemplate"
               let-row
               let-col="col">
               <a (click)="col.handlers?.click({originalEvent: $event, row: row})">{{ row[col.id] | dataTableInterpolate:col }}</a>
+        </ng-template>
+        <ng-template novoTemplate="telCellTemplate"
+              let-row
+              let-col="col">
+              <a href="tel:{{ row[col.id] | dataTableInterpolate:col }}" [target]="col?.attributes?.target">{{ row[col.id] | dataTableInterpolate:col }}</a>
+        </ng-template>
+        <ng-template novoTemplate="mailtoCellTemplate"
+              let-row
+              let-col="col">
+              <a href="mailto:{{ row[col.id] | dataTableInterpolate:col }}" [target]="col?.attributes?.target">{{ row[col.id] | dataTableInterpolate:col }}</a>
         </ng-template>
         <ng-template novoTemplate="buttonCellTemplate"
               let-row
@@ -138,7 +153,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         <ng-template novoTemplate="dropdownCellTemplate"
               let-row
               let-col="col">
-              <novo-dropdown appendToBody="true" parentScrollSelector=".novo-data-table" containerClass="novo-data-table-dropdown">
+              <novo-dropdown appendToBody="true" parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
                 <button type="button" theme="dialogue" icon="collapse" inverse>{{ col.label }}</button>
                 <list>
                     <item *ngFor="let option of col?.action?.options" (action)="option.handlers.click({ originalEvent: $event?.originalEvent, row: row })" [disabled]="isDisabled(option, row)">
@@ -164,8 +179,27 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
+  @ViewChild('novoDataTableContainer') novoDataTableContainer: ElementRef;
 
-  @Input() displayedColumns: string[];
+  @Input()
+  set displayedColumns(displayedColumns: string[]) {
+    if (this.displayedColumns && this.displayedColumns.length !== 0) {
+      if (this.name !== 'novo-data-table') {
+        this.preferencesChanged.emit({
+          name: this.name,
+          displayedColumns: displayedColumns,
+        });
+      } else {
+        notify('Must have [name] set on data-table to use preferences!');
+      }
+    }
+    this._disabledColumns = displayedColumns;
+  }
+  get displayedColumns(): string[] {
+    return this._disabledColumns;
+  }
+  private _disabledColumns: string[];
+
   @Input() paginationOptions: IDataTablePaginationOptions;
   @Input() searchOptions: IDataTableSearchOptions;
   @Input() defaultSort: { id: string; value: string };
@@ -242,15 +276,20 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
   private _hideGlobalSearch: boolean = true;
 
+  @Output() preferencesChanged: EventEmitter<IDataTablePreferences> = new EventEmitter<IDataTablePreferences>();
+
   public dataSource: DataTableSource<T>;
   public loading: boolean = true;
   public templates: { [key: string]: TemplateRef<any> } = {};
   public columnToTemplate: { [key: string]: TemplateRef<any> } = {};
   public columnsLoaded: boolean = false;
   public selection: Set<string> = new Set();
+  public scrollLeft: number = 0;
 
   private outsideFilterSubscription: Subscription;
+  private paginationSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
+  private scrollListenerHandler: any;
 
   @HostBinding('class.empty')
   get empty() {
@@ -262,11 +301,25 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     return this.loading || (this.dataSource && this.dataSource.loading);
   }
 
-  constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {}
+  constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
+    this.scrollListenerHandler = this.scrollListener.bind(this);
+    this.paginationSubscription = this.state.paginationSource.subscribe((event: { isPageSizeChange: boolean; pageSize: number }) => {
+      if (this.name !== 'novo-data-table') {
+        if (event.isPageSizeChange) {
+          this.preferencesChanged.emit({ name: this.name, pageSize: event.pageSize });
+        }
+      } else {
+        notify('Must have [name] set on data-table to use preferences!');
+      }
+    });
+  }
 
   public ngOnDestroy(): void {
     if (this.outsideFilterSubscription) {
       this.outsideFilterSubscription.unsubscribe();
+    }
+    if (this.novoDataTableContainer) {
+      (this.novoDataTableContainer.nativeElement as Element).removeEventListener('scroll', this.scrollListenerHandler);
     }
   }
 
@@ -282,6 +335,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     // Load columns
     this.configureColumns();
 
+    // State
     if (this.paginationOptions && !this.paginationOptions.page) {
       this.paginationOptions.page = 0;
     }
@@ -293,6 +347,10 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
     this.state.page = this.paginationOptions ? this.paginationOptions.page : undefined;
     this.state.pageSize = this.paginationOptions ? this.paginationOptions.pageSize : undefined;
+
+    // Scrolling inside table
+    (this.novoDataTableContainer.nativeElement as Element).addEventListener('scroll', this.scrollListenerHandler);
+
     this.ref.markForCheck();
   }
 
@@ -317,6 +375,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public isSelected(row: T): boolean {
+    if (!row) {
+      return false;
+    }
     return this.state.selectedRows.has(`${row[this.rowIdentifier]}`);
   }
 
@@ -372,12 +433,24 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
               templateName = 'buttonCellTemplate';
             }
           } else {
-            templateName = `${column.type}CellTemplate`;
+            if (column.type === 'link:tel' || column.type === 'link:mailto') {
+              templateName = `${column.type.split(':')[1]}CellTemplate`;
+            } else {
+              templateName = `${column.type}CellTemplate`;
+            }
           }
         }
         this.columnToTemplate[column.id] = this.templates[templateName];
       });
       this.columnsLoaded = true;
+    }
+  }
+
+  private scrollListener(event: Event): void {
+    let left: number = (event.target as Element).scrollLeft;
+    if (left !== this.scrollLeft) {
+      this.scrollLeft = (event.target as Element).scrollLeft;
+      this.ref.markForCheck();
     }
   }
 }

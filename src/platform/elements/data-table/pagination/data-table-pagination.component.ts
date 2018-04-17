@@ -8,8 +8,6 @@ import {
   OnInit,
   Output,
   HostBinding,
-  OnChanges,
-  SimpleChanges,
 } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -73,7 +71,7 @@ const MAX_PAGES_DISPLAYED = 5;
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoDataTablePagination<T> implements OnInit, OnDestroy, OnChanges {
+export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   @HostBinding('class')
   @Input()
   theme: string = 'standard';
@@ -112,9 +110,19 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy, OnChanges 
   }
   private _pageSizeOptions: any[] = [];
 
-  @Input() totalLength: number;
-  @Input() currentLength: number;
-  @Input() userFiltered: boolean;
+  @Input()
+  get length(): number {
+    return this._length;
+  }
+  set length(length: number) {
+    this._length = length;
+    this.changeDetectorRef.markForCheck();
+    this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
+    this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
+    this.totalPages = this.calculateTotalPages();
+    this.pages = this.getPages(this.page, this.totalPages);
+  }
+  _length: number = 0;
 
   @Output() pageChange = new EventEmitter<IDataTablePaginationEvent>();
 
@@ -122,7 +130,6 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy, OnChanges 
   public longRangeLabel: string;
   public shortRangeLabel: string;
   public pages: { number: number; text: string; active: boolean }[];
-  public length: number = 0;
 
   private resetSubscription: Subscription;
   private totalPages: number;
@@ -133,21 +140,6 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy, OnChanges 
       this.page = 0;
       this.changeDetectorRef.markForCheck();
     });
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['totalLength'] || changes['currentLength'] || changes['userFiltered']) {
-      if (this.userFiltered) {
-        this.length = this.currentLength;
-      } else {
-        this.length = this.totalLength;
-      }
-      this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
-      this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
-      this.totalPages = this.calculateTotalPages();
-      this.pages = this.getPages(this.page, this.totalPages);
-      this.changeDetectorRef.markForCheck();
-    }
   }
 
   public ngOnInit(): void {
@@ -194,7 +186,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy, OnChanges 
   public changePageSize(pageSize: number): void {
     this.page = 0;
     this.pageSize = pageSize;
-    this.emitPageEvent();
+    this.emitPageEvent(true);
   }
 
   private updateDisplayedPageSizeOptions(): void {
@@ -221,7 +213,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy, OnChanges 
     this.changeDetectorRef.detectChanges();
   }
 
-  private emitPageEvent(): void {
+  private emitPageEvent(isPageSizeChange: boolean = false): void {
     let event = {
       page: this.page,
       pageSize: this.pageSize,
@@ -237,7 +229,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy, OnChanges 
     this.totalPages = this.calculateTotalPages();
     this.pages = this.getPages(this.page, this.totalPages);
     this.state.updates.next(event);
-    this.state.onPaginationChange();
+    this.state.onPaginationChange(isPageSizeChange, this.pageSize);
   }
 
   private calculateTotalPages() {
