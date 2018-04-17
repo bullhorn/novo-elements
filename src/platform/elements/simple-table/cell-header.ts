@@ -13,6 +13,7 @@ import { NovoSortFilter } from './sort';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { SimpleTableColumnFilterConfig, SimpleTableColumnFilterOption } from './interfaces';
 import { NovoActivityTableState } from './state';
+import { Helpers } from '../../utils/Helpers';
 
 @Directive({
     selector: '[novoSimpleFilterFocus]'
@@ -44,11 +45,11 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
                                 {{ option.label }} <i class="bhi-check" *ngIf="activeDateFilter === option.label"></i>
                             </item>
                         </ng-container>
-                        <item [class.active]="labels.customDateRange === activeDateFilter" (click)="showCustomRange = true" *ngIf="config.filterConfig.allowCustomRange && !showCustomRange" [keepOpen]="true">
+                        <item [class.active]="labels.customDateRange === activeDateFilter" (click)="toggleCustomRange($event, true)" *ngIf="config.filterConfig.allowCustomRange && !showCustomRange" [keepOpen]="true">
                             {{ labels.customDateRange }} <i class="bhi-check" *ngIf="labels.customDateRange === activeDateFilter"></i>
                         </item>
                         <div class="calender-container" *ngIf="showCustomRange">
-                            <div (click)="showCustomRange = false"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
+                            <div (click)="toggleCustomRange($event, false)"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
                             <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true"></novo-date-picker>
                         </div>
                     </list>
@@ -59,7 +60,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
                     </list>
                     <list *ngSwitchDefault>
                         <item class="filter-search" keepOpen="true">
-                            <input type="text" [(ngModel)]="filter" (ngModelChange)="filterData()" novoSimpleFilterFocus data-automation-id="novo-activity-table-filter-input"/>
+                            <input type="text" [(ngModel)]="filter" (ngModelChange)="filterData($event)" novoSimpleFilterFocus data-automation-id="novo-activity-table-filter-input"/>
                         </item>
                     </list>
                 </ng-container>
@@ -163,6 +164,12 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
             this._sort.sort(this.id, this.direction, this._config.transforms.sort);
             this.changeDetectorRef.markForCheck();
         }, 300);
+    }
+
+    public toggleCustomRange(event: Event, value: boolean): void {
+        Helpers.swallowEvent(event);
+        this.showCustomRange = value;
+        this.changeDetectorRef.markForCheck();
     }
 
     public filterData(filter?: any): void {
