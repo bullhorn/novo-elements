@@ -89,9 +89,7 @@ novo-dynamic-form .novo-form-container form {
   td.novo-form-row novo-control>div.novo-control-container>div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container novo-address {
     .street-address,
     .apt,
-    .city,
-    .state,
-    .zip,
+    .addressRow,
     .country-name {
       &:hover:not(.invalid) i.required-indicator.bhi-circle,
       &:hover:not(.invalid) i.required-indicator.bhi-check {
