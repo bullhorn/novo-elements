@@ -48,27 +48,27 @@ export interface NovoAddressConfig {
             </i>
             <input type="text" id="address2" name="address2" [placeholder]="config.address2.label" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()" (focus)="isFocused('address2')" (blur)="isBlurred('address2')" (input)="onInput('address2')"/>
         </span>
-        <span class="city locality" [class.invalid]="invalid.city" [class.focus]="focused.city">
-            <i *ngIf="config?.city?.required"
-                class="required-indicator"
-                [ngClass]="{'bhi-circle': !valid.city, 'bhi-check': valid.city}">
-            </i>
-            <input type="text" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()" (focus)="isFocused('city')" (blur)="isBlurred('city')" (input)="onInput('city')"/>
-        </span>
-        <span class="state region" [class.invalid]="invalid.state" [class.focus]="focused.state">
-            <i *ngIf="config?.state?.required"
-                class="required-indicator"
-                [ngClass]="{'bhi-circle': !valid.state, 'bhi-check': valid.state}">
-            </i>
-            <novo-select id="state" [options]="states" [placeholder]="config.state.label" autocomplete="shipping region" [(ngModel)]="model.state" (ngModelChange)="onStateChange($event)"></novo-select>
-        </span>
-        <span class="zip postal-code" [class.invalid]="invalid.zip" [class.focus]="focused.zip">
-            <i *ngIf="config?.zip?.required"
-                class="required-indicator"
-                [ngClass]="{'bhi-circle': !valid.zip, 'bhi-check': valid.zip}">
-            </i>
-            <input type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()" (focus)="isFocused('zip')" (blur)="isBlurred('zip')" (input)="onInput('zip')" />
-        </span>
+            <span class="city locality" [class.invalid]="invalid.city" [class.focus]="focused.city">
+                <i *ngIf="config?.city?.required"
+                    class="required-indicator"
+                    [ngClass]="{'bhi-circle': !valid.city, 'bhi-check': valid.city}">
+                </i>
+                <input type="text" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [(ngModel)]="model.city" (ngModelChange)="updateControl()" (focus)="isFocused('city')" (blur)="isBlurred('city')" (input)="onInput('city')"/>
+            </span>
+            <span class="state region" [class.invalid]="invalid.state" [class.focus]="focused.state">
+                <i *ngIf="config?.state?.required"
+                    class="required-indicator"
+                    [ngClass]="{'bhi-circle': !valid.state, 'bhi-check': valid.state}">
+                </i>
+                <novo-select id="state" [options]="states" [placeholder]="config.state.label" autocomplete="shipping region" [(ngModel)]="model.state" (ngModelChange)="onStateChange($event)"></novo-select>
+            </span>
+            <span class="zip postal-code" [class.invalid]="invalid.zip" [class.focus]="focused.zip">
+                <i *ngIf="config?.zip?.required"
+                    class="required-indicator"
+                    [ngClass]="{'bhi-circle': !valid.zip, 'bhi-check': valid.zip}">
+                </i>
+                <input type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()" (focus)="isFocused('zip')" (blur)="isBlurred('zip')" (input)="onInput('zip')" />
+            </span>
         <span class="country-name" [class.invalid]="invalid.country" [class.focus]="focused.country">
             <i *ngIf="config?.country?.required"
                 class="required-indicator"

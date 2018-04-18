@@ -14,7 +14,7 @@ function createAddress(address1, city, state, zip, countryName) {
   };
 }
 
-fdescribe('FormValidators', () => {
+describe('FormValidators', () => {
   describe('Method: maxInteger(control)', () => {
     it('should be defined', () => {
       expect(FormValidators.maxInteger).toBeDefined();
