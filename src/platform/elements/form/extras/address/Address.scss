@@ -30,6 +30,9 @@ novo-address {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+    input.invalid {
+      border-botton: 1px solid $negative;
+    }
   }
   .street-address {
     flex: 3 3 75%;
