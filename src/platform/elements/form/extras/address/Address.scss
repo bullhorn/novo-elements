@@ -10,6 +10,9 @@ novo-address {
 
     .state {
       border-bottom: 1px solid #afb9c0;
+      &:hover:not(.invalid) {
+        border-bottom: 1px solid lighten($dark, 15%);
+      }
       i.required-indicator.bhi-circle,
       i.required-indicator.bhi-check {
         border: none!important;
@@ -129,6 +132,7 @@ novo-dynamic-form .novo-form-container form {
 novo-dynamic-form[layout='vertical'] .novo-form-container form {
     .state {
         margin-bottom: 1px;
+        border-bottom: 1px solid lighten($dark, 15%);
         i.required-indicator {
           margin-bottom: 1px;
         }
