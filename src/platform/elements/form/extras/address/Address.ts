@@ -48,7 +48,6 @@ export interface NovoAddressConfig {
             </i>
             <input type="text" id="address2" name="address2" [placeholder]="config.address2.label" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()" (focus)="isFocused('address2')" (blur)="isBlurred('address2')" (input)="onInput('address2')"/>
         </span>
-        <span class="addressRow">
             <span class="city locality" [class.invalid]="invalid.city" [class.focus]="focused.city">
                 <i *ngIf="config?.city?.required"
                     class="required-indicator"
@@ -70,7 +69,6 @@ export interface NovoAddressConfig {
                 </i>
                 <input type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [(ngModel)]="model.zip" (ngModelChange)="updateControl()" (focus)="isFocused('zip')" (blur)="isBlurred('zip')" (input)="onInput('zip')" />
             </span>
-        </span>
         <span class="country-name" [class.invalid]="invalid.country" [class.focus]="focused.country">
             <i *ngIf="config?.country?.required"
                 class="required-indicator"

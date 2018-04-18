@@ -2,12 +2,6 @@ novo-address {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  .addressRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-
     .state {
       border-bottom: 1px solid #afb9c0;
       &:hover:not(.invalid) {
@@ -23,7 +17,6 @@ novo-address {
         }
       }
     }
-  }
 
   &.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
     .street-address,
@@ -92,7 +85,9 @@ novo-dynamic-form .novo-form-container form {
   td.novo-form-row novo-control>div.novo-control-container>div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container novo-address {
     .street-address,
     .apt,
-    .addressRow,
+    .city,
+    .state,
+    .zip,
     .country-name {
       &:hover:not(.invalid) i.required-indicator.bhi-circle,
       &:hover:not(.invalid) i.required-indicator.bhi-check {
