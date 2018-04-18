@@ -53,6 +53,7 @@ export {
   IDataTableSelectionChangeEvent,
   IDataTableService,
   IDataTableSortFilter,
+  IDataTablePreferences,
 } from './elements/data-table/interfaces';
 export {
   NovoTable,
