@@ -45,12 +45,17 @@ export class DataTableSource<T> extends DataSource<T> {
         );
       }),
       map((data: { results: T[]; total: number }) => {
-        if (!this.totalSet) {
+        if (!this.totalSet || this.state.isForceRefresh) {
           this.total = data.total;
           this.totalSet = true;
+          this.state.isForceRefresh = false;
         }
         this.current = data.results.length;
         this.data = data.results;
+        // Clear selection
+        this.state.selectedRows.clear();
+        this.state.onSelectionChange();
+        // Mark changes
         setTimeout(() => {
           this.ref.markForCheck();
           setTimeout(() => {
