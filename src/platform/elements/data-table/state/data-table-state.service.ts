@@ -16,6 +16,7 @@ export class DataTableState<T> {
   globalSearch: string = undefined;
   selectedRows: Map<string, T> = new Map<string, T>();
   outsideFilter: any;
+  isForceRefresh: boolean = false;
 
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
 

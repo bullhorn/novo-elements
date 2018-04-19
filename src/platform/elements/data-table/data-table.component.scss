@@ -5,7 +5,6 @@ $breakpoint: 1000px;
 
 cdk-table {
   display: block;
-  min-height: 300px;
   flex: 1;
   &.empty {
     min-height: 62px;

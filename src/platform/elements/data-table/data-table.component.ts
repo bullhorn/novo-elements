@@ -240,6 +240,20 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   @Input()
+  set refreshSubject(refreshSubject: EventEmitter<any>) {
+    // Unsubscribe
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
+    // Re-subscribe
+    this.refreshSubscription = refreshSubject.subscribe((filter: any) => {
+      this.state.isForceRefresh = true;
+      this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort });
+      this.ref.markForCheck();
+    });
+  }
+
+  @Input()
   set columns(columns: IDataTableColumn<T>[]) {
     this._columns = columns;
     this.configureColumns();
@@ -287,6 +301,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public scrollLeft: number = 0;
 
   private outsideFilterSubscription: Subscription;
+  private refreshSubscription: Subscription;
   private paginationSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
   private scrollListenerHandler: any;
@@ -320,6 +335,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
     if (this.novoDataTableContainer) {
       (this.novoDataTableContainer.nativeElement as Element).removeEventListener('scroll', this.scrollListenerHandler);
+    }
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
     }
   }
 
