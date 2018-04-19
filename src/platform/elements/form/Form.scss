@@ -347,7 +347,7 @@ novo-form {
                         border-bottom: 1px solid #da4453;
                       }
                       &.maxlength-error {
-                        border-bottom: 1px solid $negative;
+                        border-bottom: 1px solid $negative !important;
                       }
                     }
                     textarea {

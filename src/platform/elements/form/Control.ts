@@ -204,7 +204,7 @@ export class NovoCustomControlContainerElement {
                             <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{ form.controls[control.key].label | uppercase }} {{ labels.isTooLarge }}</span>
                             <span *ngIf="isDirty && errors?.minYear">{{ form.controls[control.key].label | uppercase }} {{ labels.notValidYear }}</span>
                             <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
-                            <span *ngIf="errors?.maxlength && errors?.maxlengthFields">
+                            <span *ngIf="errors?.maxlength && errors?.maxlengthFields && errors.maxlengthFields?.includes(maxlengthField)">
                                 <span class="error-text" *ngFor="let maxlengthField of errors?.maxlengthFields"><span *ngIf="focusedField===maxlengthField">{{ labels.invalidMaxlengthWithField(control.config[maxlengthField]?.label, control.config[maxlengthField]?.maxlength) }}</span></span>
                             </span>
                             <span class="error-text" *ngIf="isDirty && maxlengthMetField && focused && !errors?.maxlengthFields?.includes(maxlengthMetField)">
