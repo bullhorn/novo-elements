@@ -86,19 +86,19 @@ export class NovoLabelService {
 
   constructor( @Optional() @Inject(LOCALE_ID) public userLocale: string = 'en-US') { }
 
-  maxLengthMetWithField(field: string, maxlength: number): string {
+  maxlengthMetWithField(field: string, maxlength: number): string {
     return `Sorry, you have reached the maximum character count of ${maxlength} for ${field}.`;
   }
 
-  maxLengthMet(maxlength: number): string {
+  maxlengthMet(maxlength: number): string {
     return `Sorry, you have reached the maximum character count of ${maxlength} for this field.`;
   }
 
-  invalidMaxLengthWithField(field: string, maxlength: number): string {
+  invalidMaxlengthWithField(field: string, maxlength: number): string {
     return `Sorry, you have exceeded the maximum character count of ${maxlength} for ${field}.`;
   }
 
-  invalidMaxLength(maxlength: number): string {
+  invalidMaxlength(maxlength: number): string {
     return `Sorry, you have exceeded the maximum character count of ${maxlength} for this field.`;
   }
 
