@@ -325,7 +325,7 @@ export class FormDemoComponent {
     this.secondaryAddressControl = new AddressControl({
       key: 'address',
       name: 'address',
-      label: 'Address',
+      label: 'Secondary Address',
       config: {
         address1: {
           label: 'Address Line 1',
@@ -337,6 +337,15 @@ export class FormDemoComponent {
         },
         state: {
           label: 'State',
+          pickerConfig: {
+            field: 'value',
+            format: '$label',
+            options: (query, countryId) => {
+              return new Promise((resolve, reject) => {
+                resolve(this.getStateOptions(query, countryId));
+              });
+            },
+          }
         },
         country: {
           label: 'Country',
@@ -470,5 +479,36 @@ export class FormDemoComponent {
 
   handleUpload(files) {
     console.log('This is an upload Action!', files); // tslint:disable-line
+  }
+
+  getStateOptions(filter: string, countryId: number): any[] {
+    let states: any = [{
+      value: 'MA',
+      label: 'Massachusetts',
+      countryId: 1
+    }, {
+      value: 'NY',
+      label: 'New York',
+      countryId: 1
+    }, {
+      value: 'AB',
+      label: 'Alberta',
+      countryId: 2216
+    }, {
+      value: 'BC',
+      label: 'British Columbia',
+      countryId: 2216
+    }, {
+      value: 'MB',
+      label: 'Manitoba',
+      countryId: 2216
+    },]
+    if (countryId) {
+      states = states.filter((state: any) => state.countryId === countryId);
+    }
+    if (filter && filter.length) {
+      states = states.filter((state: any) => state && state.label.indexOf(filter) >= 0);
+    }
+    return states;
   }
 }
