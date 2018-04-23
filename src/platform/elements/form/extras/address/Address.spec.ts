@@ -6,7 +6,7 @@ import { NovoAddressElement } from './Address';
 import { NovoSelectModule } from '../../../select/Select.module';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 
-describe('Elements: NovoAddressElement', () => {
+fdescribe('Elements: NovoAddressElement', () => {
     let fixture;
     let component;
 
@@ -43,6 +43,24 @@ describe('Elements: NovoAddressElement', () => {
         it('should be set up config', () => {
             component.ngOnInit();
             expect(component.config.address1.label).toBeDefined();
+        });
+        it('should be set up label default for address1', () => {
+            component.config = {
+                label: 'test',
+                address1: {
+                }
+            }
+            component.ngOnInit();
+            expect(component.config.address1.label).toBe('Address');
+        });
+        it('should be set up required for address1', () => {
+            component.config = {
+                required: true,
+                address1: {
+                }
+            }
+            component.ngOnInit();
+            expect(component.config.address1.required).toBeTruthy();
         });
     });
 
@@ -99,7 +117,8 @@ describe('Elements: NovoAddressElement', () => {
         beforeEach(() => {
             component.config = {
                 address1: {
-                    required: true
+                    required: true,
+                    maxlength: 5
                 },
                 country: {
                     required: true
@@ -137,6 +156,20 @@ describe('Elements: NovoAddressElement', () => {
             component.isValid('state');
             expect(component.valid.state).toEqual(false);
         });
+        it('should check maxlength of field address1 when it is exceeding', () => {
+            component.model = {
+                address1: 'testlength'
+            };
+            component.isValid('address1');
+            expect(component.valid.address1).toEqual(false);
+        });
+        it('should check maxlength of field address1 when it is correct', () => {
+            component.model = {
+                address1: 'test'
+            };
+            component.isValid('address1');
+            expect(component.valid.address1).toEqual(true);
+        });
 
     });
 
@@ -144,7 +177,8 @@ describe('Elements: NovoAddressElement', () => {
         beforeEach(() => {
             component.config = {
                 address1: {
-                    required: true
+                    required: true,
+                    maxlength: 5
                 },
                 country: {
                     required: true
@@ -181,6 +215,20 @@ describe('Elements: NovoAddressElement', () => {
             };
             component.isInvalid('state');
             expect(component.invalid.state).toEqual(false);
+        });
+        it('should check maxlength of field address1 when it is exceeding', () => {
+            component.model = {
+                address1: 'testlength'
+            };
+            component.isInvalid('address1');
+            expect(component.invalid.address1).toEqual(true);
+        });
+        it('should check maxlength of field address1 when it is correct', () => {
+            component.model = {
+                address1: 'test'
+            };
+            component.isInvalid('address1');
+            expect(component.invalid.address1).toEqual(false);
         });
 
     });
