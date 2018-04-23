@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { delay } from 'rxjs/operators';
 import * as dateFns from 'date-fns';
+import { Subject } from 'rxjs/Subject';
 
 let BasicDemoRowsTpl = require('./templates/basic-rows.html');
 let BasicDemoServiceTpl = require('./templates/basic-service.html');
@@ -329,6 +330,7 @@ export class DataTableDemoComponent implements OnInit {
     value: 'asc',
   };
   public globalSearchEnabled: boolean = false;
+  public refreshSubject: Subject<boolean> = new Subject();
 
   // Basic configuration
   public basicRows: MockData[];
@@ -434,6 +436,10 @@ export class DataTableDemoComponent implements OnInit {
 
   public onPreferencesChanged(event: IDataTablePreferences): void {
     console.log('Preferences changed (persist manually):', event); // tslint:disable-line
+  }
+
+  public refresh() {
+    this.refreshSubject.next();
   }
 }
 

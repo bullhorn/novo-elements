@@ -79,7 +79,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
                       <novo-data-table-cell *novoDataTableCellDef="let row" [column]="column" [row]="row" [template]="columnToTemplate[column.id]" [class.empty]="column?.type === 'action' && !column?.label" [class.button-cell]="column?.type === 'action' && !column?.action?.options" [class.dropdown-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-cell>
                     </ng-container>
                     <novo-data-table-header-row *novoDataTableHeaderRowDef="displayedColumns" data-automation-id="novo-data-table-header-row"></novo-data-table-header-row>
-                    <novo-data-table-row *novoDataTableRowDef="let row; columns: displayedColumns;" [id]="name + '-' + row[rowIdentifier]" [dataAutomationId]="'data-automation-id-' + row[rowIdentifier]"></novo-data-table-row>
+                    <novo-data-table-row *novoDataTableRowDef="let row; columns: displayedColumns;" [id]="name + '-' + row[rowIdentifier]" [dataAutomationId]="row[rowIdentifier]"></novo-data-table-row>
                 </cdk-table>
                 <div class="novo-data-table-no-results-container" [style.left.px]="scrollLeft" *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine">
                   <div class="novo-data-table-empty-message" >
@@ -231,12 +231,30 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     if (this.outsideFilterSubscription) {
       this.outsideFilterSubscription.unsubscribe();
     }
-    // Re-subscribe
-    this.outsideFilterSubscription = outsideFilter.subscribe((filter: any) => {
-      this.state.outsideFilter = filter;
-      this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort });
-      this.ref.markForCheck();
-    });
+    if (outsideFilter) {
+      // Re-subscribe
+      this.outsideFilterSubscription = outsideFilter.subscribe((filter: any) => {
+        this.state.outsideFilter = filter;
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort });
+        this.ref.markForCheck();
+      });
+    }
+  }
+
+  @Input()
+  set refreshSubject(refreshSubject: EventEmitter<any>) {
+    // Unsubscribe
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
+    if (refreshSubject) {
+      // Re-subscribe
+      this.refreshSubscription = refreshSubject.subscribe((filter: any) => {
+        this.state.isForceRefresh = true;
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort });
+        this.ref.markForCheck();
+      });
+    }
   }
 
   @Input()
@@ -287,6 +305,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public scrollLeft: number = 0;
 
   private outsideFilterSubscription: Subscription;
+  private refreshSubscription: Subscription;
   private paginationSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
   private scrollListenerHandler: any;
@@ -320,6 +339,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
     if (this.novoDataTableContainer) {
       (this.novoDataTableContainer.nativeElement as Element).removeEventListener('scroll', this.scrollListenerHandler);
+    }
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
     }
   }
 

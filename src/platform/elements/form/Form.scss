@@ -297,6 +297,14 @@ novo-form {
                 display: flex;
                 flex-direction: column;
                 width: 100%;
+                &.required {
+                  div.novo-control-input.address {
+                    margin-left: 20px;
+                  }
+                }
+                .field-message.address {
+                  margin-left: 20px;
+                }
                 .novo-control-inner-input-container {
                   display: flex;
                   flex-direction: row;
@@ -346,6 +354,9 @@ novo-form {
                       &:invalid {
                         border-bottom: 1px solid #da4453;
                       }
+                      &.maxlength-error {
+                        border-bottom: 1px solid $negative !important;
+                      }
                     }
                     textarea {
                       font-size: 1em;
@@ -374,6 +385,9 @@ novo-form {
                       }
                       &:invalid {
                         border-bottom: 1px solid #da4453;
+                      }
+                      &.maxlength-error {
+                        border-bottom: 1px solid $negative;
                       }
                     }
                     textarea:not(.quick-note-textarea) {

@@ -5,6 +5,7 @@ import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
 import * as dateFns from 'date-fns';
+import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';	
 // App
 import { NovoDatePickerElement } from './DatePicker';
 import { NovoOverlayTemplate } from '../overlay/Overlay';
@@ -62,6 +63,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     if(!this.userDefinedFormat) {
       this.maskOptions = this.maskOptions || {
         mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
+        pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormat.toLowerCase()),
         keepCharPositions: false,
         guide: true,
       };

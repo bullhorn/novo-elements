@@ -21,6 +21,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
                     <span [innerHtml]="highlight(match.label, term)"></span>
                 </item-content>
             </novo-list-item>
+            <novo-loading *ngIf="isLoading && matches.length > 0" theme="line"></novo-loading>
         </novo-list>
         <div class="picker-loader" *ngIf="isLoading && matches.length === 0">
             <novo-loading theme="line"></novo-loading>

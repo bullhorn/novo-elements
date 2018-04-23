@@ -14,7 +14,7 @@ function createAddress(address1, city, state, zip, countryName) {
   };
 }
 
-fdescribe('FormValidators', () => {
+describe('FormValidators', () => {
   describe('Method: maxInteger(control)', () => {
     it('should be defined', () => {
       expect(FormValidators.maxInteger).toBeDefined();
@@ -59,7 +59,8 @@ fdescribe('FormValidators', () => {
         config: {
           address1: {
             label: 'address1',
-            required: true
+            required: true,
+            maxlength: 5
           },
           country: {
             label: 'country',
@@ -92,6 +93,10 @@ fdescribe('FormValidators', () => {
     it('should return null if no state', () => {
       control.value = createAddress('TEST', 'TEST', '', '12345', 'null');
       expect(FormValidators.isValidAddress(control)).toEqual(null);
+    });
+    it('should return invalid if a subfield length exceeds max length', () => {
+      control.value = createAddress('TESTLENGTH', 'TEST', '', '12345', 'null');
+      expect(FormValidators.isValidAddress(control)).toEqual({ invalidAddressForForm: true, maxlength: true, maxlengthFields: [ 'address1' ] });
     });
   });
 });

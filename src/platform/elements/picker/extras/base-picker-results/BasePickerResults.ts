@@ -1,5 +1,5 @@
 // NG2
-import { ElementRef, HostListener, Input, ChangeDetectorRef } from '@angular/core';
+import { ElementRef, Input, ChangeDetectorRef } from '@angular/core';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 // Vendor
@@ -31,20 +31,30 @@ export class BasePickerResults {
   overlay: OverlayRef;
 
   private selectingMatches: boolean = false;
+  private scrollHandler: any;
 
   constructor(element: ElementRef, ref: ChangeDetectorRef) {
     this.element = element;
     this.ref = ref;
+    this.scrollHandler = this.onScrollDown.bind(this);
   }
 
-  @HostListener('scroll', ['$event.target'])
-  onScrollDown(target) {
-    if (target) {
-      let offset = target.offsetHeight + target.scrollTop,
-        bottom = target.scrollHeight;
+  cleanUp(): void {
+    let element: Element = this.getListElement();
+    if (element && element.hasAttribute('scrollListener')) {
+      element.removeAttribute('scrollListener');
+      element.removeEventListener('scroll', this.scrollHandler);
+    }
+  }
+
+  onScrollDown(event: MouseWheelEvent) {
+    let element: any = event.target;
+    if (element) {
+      let offset = element.offsetHeight + element.scrollTop,
+        bottom = element.scrollHeight - 300;
       if (offset >= bottom) {
         event.stopPropagation();
-        if (!this.lastPage && !this.config.disableInfiniteScroll) {
+        if (!this.lastPage && !this.isLoading) {
           this.processSearch();
         }
       }
@@ -61,6 +71,18 @@ export class BasePickerResults {
       this.page = 0;
       this.matches = [];
       this.processSearch(true);
+    } else {
+      this.addScrollListener();
+    }
+  }
+
+  addScrollListener(): void {
+    if (this.config.enableInfiniteScroll) {
+      let element: Element = this.getListElement();
+      if (element && !element.hasAttribute('scrollListener')) {
+        element.setAttribute('scrollListener', 'true');
+        element.addEventListener('scroll', this.scrollHandler);
+      }
     }
   }
 
@@ -84,7 +106,10 @@ export class BasePickerResults {
         }
         this.isLoading = false;
         this.ref.markForCheck();
-        setTimeout(() => this.overlay.updatePosition()); // @bkimball: This was added for Dylan Schulte, 9.18.2017 4:14PM EST, you're welcome!
+        setTimeout(() => {
+          this.overlay.updatePosition();
+          this.addScrollListener();
+        }); // @bkimball: This was added for Dylan Schulte, 9.18.2017 4:14PM EST, you're welcome!
       },
       (err) => {
         this.hasError = this.term && this.term.length !== 0;
