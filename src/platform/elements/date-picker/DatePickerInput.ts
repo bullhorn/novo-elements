@@ -4,7 +4,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
-import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 import * as dateFns from 'date-fns';
 // App
 import { NovoDatePickerElement } from './DatePicker';
@@ -35,6 +34,7 @@ const DATE_VALUE_ACCESSOR = {
 export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor {
   public value: any;
   public formattedValue: string = '';
+  private userDefinedFormat: boolean;
 
   /** View -> model callback called when value changes */
   _onChange: (value: any) => void = () => {};
@@ -46,7 +46,6 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @Input() placeholder: string;
   @Input() maskOptions: any;
   @Input() format: string;
-  @Input() userDefinedFormat: boolean;
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
 
@@ -59,6 +58,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   ngOnInit() {
+    this.userDefinedFormat = this.format? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g): false;
     if(!this.userDefinedFormat) {
       this.maskOptions = this.maskOptions || {
         mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
@@ -66,7 +66,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
         guide: true,
       };
     } else {
-      this.maskOptions = { mask: false};
+      this.maskOptions = {mask: false};
     }
   }
 
