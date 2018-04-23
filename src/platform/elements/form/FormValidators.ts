@@ -27,31 +27,46 @@ export class FormValidators {
     let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     return !control.value || EMAIL_REGEXP.test(control.value) ? null : { 'invalidEmail': true };
   }
-
   // Makes sure the control value is a valid address
   static isValidAddress(control) {
     let fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'country'];
     let invalidAddressFields: string[] = [];
-    let returnVal = null;
+    let maxlengthFields: string[] = [];
+    let returnVal: {
+      invalidAddress?: boolean;
+      invalidAddressFields?: string[];
+      invalidAddressForForm?: boolean;
+      maxlength?: boolean;
+      maxlengthFields?: string[];
+    } = null;
+    let maxlengthError: boolean = false;
     if (control.value && control.config) {
       let valid = true;
       let formValidity = true;
       fieldList.forEach((subfield: string) => {
-        if ((subfield !== 'country' && !Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&
-          !Helpers.isBlank(control.value[subfield]) && Helpers.isEmpty(control.value[subfield])) ||
-          (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
-            !Helpers.isBlank(control.value.countryName) && Helpers.isEmpty(control.value.countryName))) {
-          valid = false;
-          invalidAddressFields.push(control.config[subfield].label);
-        }
-        if ((subfield !== 'country' && !Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&
-          Helpers.isEmpty(control.value[subfield])) ||
-          (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
-            Helpers.isEmpty(control.value.countryName))) {
-          formValidity = false;
+        if (!Helpers.isEmpty(control.config[subfield])) {
+          if ((subfield !== 'country' && control.config[subfield].required &&
+            !Helpers.isBlank(control.value[subfield]) && Helpers.isEmpty(control.value[subfield])) ||
+            (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
+              !Helpers.isBlank(control.value.countryName) && Helpers.isEmpty(control.value.countryName))) {
+            valid = false;
+            invalidAddressFields.push(control.config[subfield].label);
+          }
+          if ((subfield !== 'country' && control.config[subfield].required &&
+            Helpers.isEmpty(control.value[subfield])) ||
+            (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
+              Helpers.isEmpty(control.value.countryName))) {
+            formValidity = false;
+          }
+          if (!Helpers.isEmpty(control.config[subfield].maxlength) && !Helpers.isEmpty(control.value[subfield]) &&
+            control.value[subfield].length > control.config[subfield].maxlength) {
+              maxlengthError = true;
+              maxlengthFields.push(subfield);
+              formValidity = false;              
+          }
         }
       });
-      if (!valid || !formValidity) {
+      if (!valid || !formValidity || maxlengthError) {
         returnVal = {};
       }
       if (!valid) {
@@ -60,6 +75,10 @@ export class FormValidators {
       }
       if (!formValidity) {
         returnVal.invalidAddressForForm = true;
+      }
+      if (maxlengthError) {
+        returnVal.maxlength = true;
+        returnVal.maxlengthFields = maxlengthFields;
       }
       return returnVal;
     }

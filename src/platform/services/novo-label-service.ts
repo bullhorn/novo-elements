@@ -37,8 +37,6 @@ export class NovoLabelService {
   isTooLarge = 'is too large';
   invalidAddress = 'requires at least one field filled out';
   invalidEmail = 'requires a valid email (ex. abc@123.com)';
-  invalidMaxLength = 'Sorry, you have exceeded the maximum character count of for this field';
-  maxLengthMet = 'Sorry, you have reached the maximum character count of for this field';
   minLength = 'is required to be a minimum length of';
   past1Day = 'Past 1 Day';
   past7Days = 'Past 7 Days';
@@ -87,6 +85,22 @@ export class NovoLabelService {
   encryptedFieldTooltip = 'This data has been stored at the highest level of security';
 
   constructor( @Optional() @Inject(LOCALE_ID) public userLocale: string = 'en-US') { }
+
+  maxlengthMetWithField(field: string, maxlength: number): string {
+    return `Sorry, you have reached the maximum character count of ${maxlength} for ${field}.`;
+  }
+
+  maxlengthMet(maxlength: number): string {
+    return `Sorry, you have reached the maximum character count of ${maxlength} for this field.`;
+  }
+
+  invalidMaxlengthWithField(field: string, maxlength: number): string {
+    return `Sorry, you have exceeded the maximum character count of ${maxlength} for ${field}.`;
+  }
+
+  invalidMaxlength(maxlength: number): string {
+    return `Sorry, you have exceeded the maximum character count of ${maxlength} for this field.`;
+  }
 
   getToManyPlusMore(toMany: { quantity: number }): string {
     return `+${toMany.quantity} more`;
