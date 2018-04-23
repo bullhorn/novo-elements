@@ -19,6 +19,7 @@ export interface NovoAddressSubfieldConfig {
   label: string;
   required: boolean;
   maxlength: number;
+  hidden: boolean;
 }
 
 export interface NovoAddressConfig {
@@ -28,7 +29,7 @@ export interface NovoAddressConfig {
   city?: NovoAddressSubfieldConfig;
   state?: NovoAddressSubfieldConfig;
   zip?: NovoAddressSubfieldConfig;
-  country?: NovoAddressSubfieldConfig;
+  countryID?: NovoAddressSubfieldConfig;
 }
 
 @Component({
@@ -83,7 +84,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Input() config: NovoAddressConfig;
   states: Array<any> = [];
   countries: Array<any> = getCountries();
-  fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'country'];
+  fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
   model: any;
   onModelChange: Function = () => {
   };
