@@ -61,7 +61,7 @@ const PICKER_VALUE_ACCESSOR = {
             autocomplete="off" #input />
         <i class="bhi-search" *ngIf="!_value || clearValueOnSelect"></i>
         <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
-        <novo-overlay-template class="picker-results-container" [parent]="element">
+        <novo-overlay-template class="picker-results-container" [parent]="element" (closing)="onOverlayClosed()">
             <span #results></span>
             <ng-content></ng-content>
         </novo-overlay-template>
@@ -268,6 +268,12 @@ export class NovoPickerElement implements OnInit {
       this.popup = null;
     }
     this.hide();
+  }
+
+  onOverlayClosed(): void {
+    if (this.popup && this.popup.instance && this.popup.instance.cleanUp) {
+      this.popup.instance.cleanUp();
+    }
   }
 
   // get accessor
