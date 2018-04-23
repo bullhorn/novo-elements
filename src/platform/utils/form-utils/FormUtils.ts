@@ -303,7 +303,8 @@ export class FormUtils {
         if (field.fields && field.fields.length) {
           for (let subfield of field.fields) {
             controlConfig.config[subfield.name] = {
-              required: !!subfield.required
+              required: !!subfield.required,
+              hidden: !!subfield.readOnly
             };
             if (!Helpers.isEmpty(subfield.label)) {
               controlConfig.config[subfield.name].label = subfield.label;
