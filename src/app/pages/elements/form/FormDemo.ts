@@ -317,14 +317,16 @@ export class FormDemoComponent {
 
       },
       value: {
-        address1: '123 Summer Street',
-        address2: '10 Washington Street',
-        countryID: 1
+        address1: '321 Summer Street',
+        address2: '11 Washington Street',
+        countryID: 1,
+        countryName: 'United States',
+        countryCode: 'US'
       }
     });
     this.secondaryAddressControl = new AddressControl({
-      key: 'address',
-      name: 'address',
+      key: 'secondaryAddress',
+      name: 'secondaryAddress',
       label: 'Secondary Address',
       config: {
         address1: {
@@ -340,9 +342,9 @@ export class FormDemoComponent {
           pickerConfig: {
             field: 'value',
             format: '$label',
-            options: (query, countryId) => {
+            options: (query, countryID) => {
               return new Promise((resolve, reject) => {
-                resolve(this.getStateOptions(query, countryId));
+                resolve(this.getStateOptions(query, countryID));
               });
             },
           }
@@ -355,13 +357,13 @@ export class FormDemoComponent {
         },
         zip: {
           label: 'Zipcode',
-        }
+        },
 
       },
       value: {
         address1: '123 Summer Street',
         address2: '10 Washington Street and stuff',
-        countryID: 1
+        countryID: 1,
       }
     });
     this.addressFormControls = [this.addressControl, this.secondaryAddressControl];
@@ -481,7 +483,7 @@ export class FormDemoComponent {
     console.log('This is an upload Action!', files); // tslint:disable-line
   }
 
-  getStateOptions(filter: string, countryId: number): any[] {
+  getStateOptions(filter: string, countryID: number): any[] {
     let states: any = [{
       value: 'MA',
       label: 'Massachusetts',
@@ -503,8 +505,8 @@ export class FormDemoComponent {
       label: 'Manitoba',
       countryId: 2216
     },]
-    if (countryId) {
-      states = states.filter((state: any) => state.countryId === countryId);
+    if (countryID) {
+      states = states.filter((state: any) => state.countryId === countryID);
     }
     if (filter && filter.length) {
       states = states.filter((state: any) => state && state.label.indexOf(filter) >= 0);

@@ -62,7 +62,7 @@ export interface NovoAddressConfig {
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.state, 'bhi-check': valid.state}">
             </i>
-            <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (select)="onStateChange($event)" (changed)="onStateChange($event)"></novo-picker>
+            <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (select)="onStateChange($event)" (changed)="onStateChange($event)" autocomplete="shipping region" [(ngModel)]="model.state"></novo-picker>
             <!---<novo-select id="state" [options]="states" [placeholder]="config.state.label" autocomplete="shipping region" [(ngModel)]="model.state" (ngModelChange)="onStateChange($event)"></novo-select>--->
         </span>
         <span class="zip postal-code" [class.invalid]="invalid.zip" [class.focus]="focused.zip">
@@ -77,7 +77,7 @@ export interface NovoAddressConfig {
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.country, 'bhi-check': valid.country}">
             </i>
-            <novo-picker [config]="config?.country?.pickerConfig" [placeholder]="config.country.label" (select)="onCountryChange($event)" (changed)="onCountryChange($event)"></novo-picker>
+            <novo-picker [config]="config?.country?.pickerConfig" [placeholder]="config.country.label" (select)="onCountryChange($event)" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryName"></novo-picker>
             <!---<novo-select id="country" [options]="countries" [placeholder]="config.country.label" autocomplete="shipping country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event)"></novo-select>--->
         </span>
     `
@@ -129,13 +129,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
           field: 'id',
           format: '$name',
           options: (query) => {
-            return new Promise((resolve, reject) => {
-              if (query && query.length) {
-                resolve(this.getStateOptions());
-              } else {
-                resolve(this.getStateOptions());
-              }
-            });
+            return Promise.resolve(this.getStateOptions(query));
           },
         };
       } else if (field === 'state' && this.config[field].pickerConfig && this.config[field].pickerConfig.options) {
@@ -223,14 +217,19 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   updateStates() {
     if (this.model.countryName) {
       this.states = getStates(this.model.countryName);
+      this.config.state.pickerConfig.defaultOptions = this.states;
     } else {
       this.states = [];
     }
   }
 
-  getStateOptions(): any[] {
+  getStateOptions(filter?:string): any[] {
     if (this.model.countryName) {
-      return getStates(this.model.countryName);
+      const states = getStates(this.model.countryName);
+      if (filter) {
+        return states.filter((name) => new RegExp(`${filter}`, 'gi').test(name));
+      }
+      return states;
     } else {
       return [];
     }
