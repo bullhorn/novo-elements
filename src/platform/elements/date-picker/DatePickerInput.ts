@@ -4,8 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
-import * as dateFns from 'date-fns';
-import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';	
+import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 // App
 import { NovoDatePickerElement } from './DatePicker';
 import { NovoOverlayTemplate } from '../overlay/Overlay';
@@ -35,7 +34,6 @@ const DATE_VALUE_ACCESSOR = {
 export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor {
   public value: any;
   public formattedValue: string = '';
-  private userDefinedFormat: boolean;
 
   /** View -> model callback called when value changes */
   _onChange: (value: any) => void = () => {};
@@ -50,26 +48,17 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
 
-  constructor(
-    public element: ElementRef, 
-    public labels: NovoLabelService, 
-    private _changeDetectorRef: ChangeDetectorRef
-  ) {
+  constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) {
     this.placeholder = this.labels.dateFormatPlaceholder;
   }
 
   ngOnInit() {
-    this.userDefinedFormat = this.format? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g): false;
-    if(!this.userDefinedFormat) {
-      this.maskOptions = this.maskOptions || {
-        mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
-        pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormat.toLowerCase()),
-        keepCharPositions: false,
-        guide: true,
-      };
-    } else {
-      this.maskOptions = {mask: false};
-    }
+    this.maskOptions = this.maskOptions || {
+      mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
+      pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormat.toLowerCase()),
+      keepCharPositions: false,
+      guide: true,
+    };
   }
 
   /** BEGIN: Convienient Panel Methods. */
@@ -159,9 +148,6 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     try {
       if (!value) {
         return '';
-      }
-      if (this.userDefinedFormat && dateFns.isValid(value)) {
-        return dateFns.format(value, this.format);
       }
       if (!(value instanceof Date)) {
         value = new Date(value);

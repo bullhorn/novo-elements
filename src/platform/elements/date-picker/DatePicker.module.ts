@@ -13,7 +13,7 @@ import { NovoDatePickerInputElement } from './DatePickerInput';
 @NgModule({
     imports: [CommonModule, FormsModule, NovoOverlayModule, TextMaskModule],
     declarations: [NovoDatePickerElement, NovoDatePickerInputElement],
-    exports: [NovoDatePickerElement, NovoDatePickerInputElement],
+    exports: [NovoDatePickerElement, NovoDatePickerInputElement]
 })
 export class NovoDatePickerModule {
 }
