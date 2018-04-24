@@ -172,7 +172,7 @@ export class NovoCustomControlContainerElement {
                             </div>
                             <!--Date-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <novo-date-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder"></novo-date-picker-input>
+                                <novo-date-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [format]="form.controls[control.key].format" [placeholder]="form.controls[control.key].placeholder"></novo-date-picker-input>
                             </div>
                             <!--Date and Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date-time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">

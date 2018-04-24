@@ -39,6 +39,7 @@ export class NovoFormControl extends FormControl {
     description?: string;
     layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
     military?: boolean;
+    format?: string;
     tipWell?: {
         tip: string,
         icon?: string,
@@ -77,6 +78,7 @@ export class NovoFormControl extends FormControl {
         this.readOnly = control.readOnly;
         this.layoutOptions = control.layoutOptions;
         this.military = control.military;
+        this.format = control.format;
         this.maxlength = control.maxlength;
         this.minlength = control.minlength;
         this.closeOnSelect = control.closeOnSelect;
