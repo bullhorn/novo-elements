@@ -74,7 +74,7 @@ export interface NovoAddressConfig {
         <span *ngIf="!config?.countryID?.hidden" class="country-name" [class.invalid]="invalid.country" [class.focus]="focused.country">
             <i *ngIf="config.countryID.required"
                 class="required-indicator"
-                [ngClass]="{'bhi-circle': !valid.country, 'bhi-check': valid.country}">
+                [ngClass]="{'bhi-circle': !valid.countryID, 'bhi-check': valid.countryID}">
             </i>
             <novo-select id="country" [options]="countries" [placeholder]="config.countryID.label" autocomplete="shipping country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event)"></novo-select>
         </span>
