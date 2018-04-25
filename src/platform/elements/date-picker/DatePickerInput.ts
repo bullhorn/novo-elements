@@ -47,7 +47,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @Input() placeholder: string;
   @Input() maskOptions: any;
   @Input() format: string;
-  @Input() textMaskEnabled: boolean;
+  @Input() textMaskEnabled: boolean = true;
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
 
@@ -61,7 +61,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   ngOnInit() {
     this.userDefinedFormat = this.format? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g): false;
-    if((!this.userDefinedFormat && this.textMaskEnabled) || this.textMaskEnabled === undefined) {
+    if(!this.userDefinedFormat && this.textMaskEnabled ) {
       this.maskOptions = this.maskOptions || {
         mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
         pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormat.toLowerCase()),
