@@ -62,6 +62,15 @@ fdescribe('Elements: NovoAddressElement', () => {
             component.ngOnInit();
             expect(component.config.address1.required).toBeTruthy();
         });
+        it('should be hidden to true if address field does not exist in config object', () => {
+            component.config = {
+                required: true,
+                address1: {
+                }
+            }
+            component.ngOnInit();
+            expect(component.config.address2.hidden).toBeTruthy();
+        });
     });
 
     describe('Method: onCountryChange()', () => {
