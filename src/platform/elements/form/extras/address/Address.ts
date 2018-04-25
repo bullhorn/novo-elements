@@ -113,7 +113,9 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     }
     this.fieldList.forEach(((field: string) => {
       if (!this.config.hasOwnProperty(field)) {
-        this.config[field] = {};
+        this.config[field] = {
+          hidden: true
+        };
       }
       if (!this.config[field].hasOwnProperty('label')) {
         this.config[field].label = this.labels[field];
