@@ -245,7 +245,7 @@ export class FormUtils {
         control = new DateTimeControl(controlConfig);
         break;
       case 'date':
-        controlConfig.format = field.format;
+        controlConfig.dateFormat = field.dateFormat;
         controlConfig.military = config ? !!config.military : false;        
         control = new DateControl(controlConfig);
         break;
