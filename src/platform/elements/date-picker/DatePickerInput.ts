@@ -62,7 +62,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   ngOnInit() {
     this.userDefinedFormat = this.format? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g): false;
-    if(!this.userDefinedFormat && this.textMaskEnabled ) {
+    if(!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
       this.maskOptions = this.maskOptions || {
         mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
         pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormat.toLowerCase()),
