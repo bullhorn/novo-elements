@@ -131,12 +131,14 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
           options: (query) => {
             return Promise.resolve(this.getStateOptions(query));
           },
+          custom: false,
         };
       } else if (field === 'state' && this.config[field].pickerConfig && this.config[field].pickerConfig.options) {
         let stateOptions = this.config[field].pickerConfig.options;
         this.config[field].pickerConfig.options = (query) => {
           return stateOptions(query, this.model.countryID);
         };
+        this.config[field].pickerConfig.custom = true;
       }
       if (!this.config[field].hasOwnProperty('label')) {
         this.config[field].label = this.labels[field];
@@ -215,9 +217,21 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   }
 
   updateStates() {
-    if (this.model.countryName) {
+    // should make the options call again if you change the country
+    if (this.config.state.pickerConfig.custom) {
+      let stateOptions = this.config.state.pickerConfig.options;
+        this.config.state.pickerConfig.options = (query) => {
+          return stateOptions(query, this.model.countryID);
+        };
+      } else if (this.model.countryName) {
       this.states = getStates(this.model.countryName);
-      this.config.state.pickerConfig.defaultOptions = this.states;
+      if(this.states.length) {
+        this.config.state.pickerConfig.defaultOptions = this.states;
+      } else {
+        // state when a country has no states
+        // need to disable state field in this case
+        this.config.state.pickerConfig.options = [];
+      }
     } else {
       this.states = [];
     }
