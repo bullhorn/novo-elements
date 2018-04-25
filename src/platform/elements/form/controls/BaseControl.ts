@@ -55,6 +55,9 @@ export interface NovoControlConfig {
   customControl?: any;
   customControlConfig?: any;
   military?: boolean;
+  dateFormat?: string;
+  textMaskEnabled?: boolean;
+  allowInvalidDate?: boolean;
   tipWell?: {
     tip: string,
     icon?: string,
@@ -110,6 +113,9 @@ export class BaseControl {
   customControl?: any;
   customControlConfig?: any;
   military?: boolean;
+  dateFormat?: string;
+  textMaskEnabled?: boolean;
+  allowInvalidDate?: boolean;
   tipWell?: {
     tip: string,
     icon?: string,
@@ -149,6 +155,9 @@ export class BaseControl {
     this.disabled = !!config.disabled;
     this.layoutOptions = config.layoutOptions || {};
     this.military = !!config.military;
+    this.dateFormat = config.dateFormat;
+    this.textMaskEnabled = config.textMaskEnabled;
+    this.allowInvalidDate = config.allowInvalidDate;
 
     if (this.required) {
       this.validators.push(Validators.required);

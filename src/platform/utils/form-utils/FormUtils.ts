@@ -245,7 +245,10 @@ export class FormUtils {
         control = new DateTimeControl(controlConfig);
         break;
       case 'date':
-        controlConfig.military = config ? !!config.military : false;
+        controlConfig.dateFormat = field.dateFormat;
+        controlConfig.textMaskEnabled = field.textMaskEnabled;
+        controlConfig.allowInvalidDate = field.allowInvalidDate;
+        controlConfig.military = config ? !!config.military : false;        
         control = new DateControl(controlConfig);
         break;
       case 'time':

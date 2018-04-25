@@ -39,6 +39,9 @@ export class NovoFormControl extends FormControl {
     description?: string;
     layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
     military?: boolean;
+    dateFormat?: string;
+    textMaskEnabled?: boolean;
+    allowInvalidDate?: boolean;
     tipWell?: {
         tip: string,
         icon?: string,
@@ -77,6 +80,9 @@ export class NovoFormControl extends FormControl {
         this.readOnly = control.readOnly;
         this.layoutOptions = control.layoutOptions;
         this.military = control.military;
+        this.dateFormat = control.dateFormat;
+        this.textMaskEnabled = control.textMaskEnabled;
+        this.allowInvalidDate = control.allowInvalidDate;
         this.maxlength = control.maxlength;
         this.minlength = control.minlength;
         this.closeOnSelect = control.closeOnSelect;
