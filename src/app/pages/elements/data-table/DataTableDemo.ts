@@ -159,6 +159,11 @@ export class DataTableDemoComponent implements OnInit {
       },
     },
     {
+      id: 'expand',
+      type: 'expand',
+      enabled: true,
+    },
+    {
       id: 'actions',
       type: 'action',
       label: 'Actions',
@@ -303,6 +308,7 @@ export class DataTableDemoComponent implements OnInit {
   ];
   public sharedDisplayColumns = [
     'selection',
+    'expand',
     'preview',
     'actions',
     'id',

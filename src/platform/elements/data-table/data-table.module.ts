@@ -12,6 +12,7 @@ import { NovoSearchBoxModule } from '../search/SearchBox.module';
 import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 import { NovoCommonModule } from '../common/common.module';
 import { NovoSelectModule } from '../select/Select.module';
+import { NovoTooltipModule } from '../tooltip/Tooltip.module';
 
 import { NovoDataTable } from './data-table.component';
 import { NovoDataTableCell } from './cells/data-table-cell.component';
@@ -32,12 +33,7 @@ import {
   DateTableNumberRendererPipe,
   DateTableTimeRendererPipe,
 } from './data-table.pipes';
-
-import { NovoDataTableHeaderCellDef } from './cell-headers/defs/data-table-header-cell-def.directive';
-import { NovoDataTableColumnDef } from './cells/defs/data-table-column-def.directive';
-import { NovoDataTableCellDef } from './cells/defs/data-table-cell-def.directive';
-import { NovoDataTableHeaderRowDef } from './rows/defs/data-table-header-row-def.directive';
-import { NovoDataTableRowDef } from './rows/defs/data-table-row-def.directive';
+import { NovoDataTableExpandDirective } from './data-table-expand.directive';
 
 @NgModule({
   imports: [
@@ -53,6 +49,7 @@ import { NovoDataTableRowDef } from './rows/defs/data-table-row-def.directive';
     NovoSearchBoxModule,
     NovoCommonModule,
     NovoSelectModule,
+    NovoTooltipModule,
   ],
   declarations: [
     DataTableInterpolatePipe,
@@ -61,11 +58,6 @@ import { NovoDataTableRowDef } from './rows/defs/data-table-row-def.directive';
     DateTableDateTimeRendererPipe,
     DateTableNumberRendererPipe,
     DateTableTimeRendererPipe,
-    NovoDataTableHeaderCellDef,
-    NovoDataTableColumnDef,
-    NovoDataTableCellDef,
-    NovoDataTableHeaderRowDef,
-    NovoDataTableRowDef,
     NovoDataTableCellHeader,
     NovoDataTableSortFilter,
     NovoDataTableHeaderCell,
@@ -76,6 +68,7 @@ import { NovoDataTableRowDef } from './rows/defs/data-table-row-def.directive';
     NovoDataTableCheckboxCell,
     NovoDataTableCheckboxHeaderCell,
     NovoDataTable,
+    NovoDataTableExpandDirective,
   ],
   providers: [DataTableState],
   exports: [
