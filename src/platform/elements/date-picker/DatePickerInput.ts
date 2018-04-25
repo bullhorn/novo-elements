@@ -48,6 +48,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @Input() maskOptions: any;
   @Input() format: string;
   @Input() textMaskEnabled: boolean = true;
+  @Input() allowInvalidDate: boolean = false;
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
 
@@ -164,14 +165,19 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       if (this.userDefinedFormat && dateFns.isValid(value)) {
         return dateFns.format(value, this.format);
       }
-      if (!(value instanceof Date)) {
-        value = new Date(value);
+      if (!this.allowInvalidDate) {       
+        if (!(value instanceof Date)) {
+            value = new Date(value);
+        }
+        return this.labels.formatDateWithFormat(value, {
+          month: '2-digit',
+          day: '2-digit',
+          year: 'numeric',
+        });
+      } else {
+        return value
       }
-      return this.labels.formatDateWithFormat(value, {
-        month: '2-digit',
-        day: '2-digit',
-        year: 'numeric',
-      });
+
     } catch (err) {
       return '';
     }

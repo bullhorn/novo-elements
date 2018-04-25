@@ -247,6 +247,7 @@ export class FormUtils {
       case 'date':
         controlConfig.dateFormat = field.dateFormat;
         controlConfig.textMaskEnabled = field.textMaskEnabled;
+        controlConfig.allowInvalidDate = field.allowInvalidDate;
         controlConfig.military = config ? !!config.military : false;        
         control = new DateControl(controlConfig);
         break;
