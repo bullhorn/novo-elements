@@ -158,6 +158,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   public formatDateValue(value) {
+    let originalValue = value;
     try {
       if (!value) {
         return '';
@@ -165,17 +166,17 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       if (this.userDefinedFormat && dateFns.isValid(value)) {
         return dateFns.format(value, this.format);
       }
-      if (!this.allowInvalidDate) {       
-        if (!(value instanceof Date)) {
-            value = new Date(value);
-        }
+      if (!(value instanceof Date)) {
+        value = new Date(value);
+      }
+      if(!(value === 'Invalid Date' && this.allowInvalidDate) ){
         return this.labels.formatDateWithFormat(value, {
           month: '2-digit',
           day: '2-digit',
           year: 'numeric',
         });
       } else {
-        return value
+        return originalValue;
       }
 
     } catch (err) {
