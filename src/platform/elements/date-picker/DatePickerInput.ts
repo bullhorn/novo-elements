@@ -169,7 +169,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       if (!(value instanceof Date)) {
         value = new Date(value);
       }
-      if(!(value === 'Invalid Date' && this.allowInvalidDate) ){
+      if(!(isNaN(value.valueOf()) && this.allowInvalidDate) ){
         return this.labels.formatDateWithFormat(value, {
           month: '2-digit',
           day: '2-digit',
