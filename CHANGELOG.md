@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.10.0"></a>
+# [2.10.0](https://github.com/bullhorn/novo-elements/compare/v2.9.4...v2.10.0) (2018-04-27)
+
+
+### Bug Fixes
+
+* **addresss:** Allow address to be populated without a country supplied ([e080daa](https://github.com/bullhorn/novo-elements/commit/e080daa))
+* **checkbox:** Fixing checkbox, swallowing event ([7d748da](https://github.com/bullhorn/novo-elements/commit/7d748da))
+* **control:** Allow passing of fileBrowserImageUploadUrl to controls inside forms ([fa0f077](https://github.com/bullhorn/novo-elements/commit/fa0f077))
+* **data-table:** Fixing data-automation-id ([0d7dc18](https://github.com/bullhorn/novo-elements/commit/0d7dc18))
+* **data-table:** Fixing subscription checks ([3b98da3](https://github.com/bullhorn/novo-elements/commit/3b98da3))
+* **datatable:** allowing for custom templates to be passed via input ([4f19122](https://github.com/bullhorn/novo-elements/commit/4f19122))
+* **datatable:** empty styling ([edf90f1](https://github.com/bullhorn/novo-elements/commit/edf90f1))
+* **datatable:** fixing filtering ([94b8a42](https://github.com/bullhorn/novo-elements/commit/94b8a42))
+* **datatable:** Fixing missing export ([7caf8f6](https://github.com/bullhorn/novo-elements/commit/7caf8f6))
+* **datatable:** Fixing pagination/filtering ([5e88e57](https://github.com/bullhorn/novo-elements/commit/5e88e57))
+* **datatable:** Fixing template name ([088f470](https://github.com/bullhorn/novo-elements/commit/088f470))
+* **datatable:** loading styles, header icon ([70ad42b](https://github.com/bullhorn/novo-elements/commit/70ad42b))
+* **datatable:** lots of fixes and improvements ([a8b5a9f](https://github.com/bullhorn/novo-elements/commit/a8b5a9f))
+* **datatable:** styling and percent cell ([bd908a1](https://github.com/bullhorn/novo-elements/commit/bd908a1))
+* **datepicker:** allowInvalidDate with standard date formats ([#709](https://github.com/bullhorn/novo-elements/issues/709)) ([10d8f6d](https://github.com/bullhorn/novo-elements/commit/10d8f6d))
+* **datetimepicker:** properly check invalid date ([#710](https://github.com/bullhorn/novo-elements/issues/710)) ([e45413a](https://github.com/bullhorn/novo-elements/commit/e45413a))
+* **editor:** adding param for file browser image ([ff43753](https://github.com/bullhorn/novo-elements/commit/ff43753))
+* **file control:** Fix drop handler ([e9b6577](https://github.com/bullhorn/novo-elements/commit/e9b6577))
+* **picker:** Infinite scrolling ([a039a24](https://github.com/bullhorn/novo-elements/commit/a039a24))
+* **simple-table:** fixing custom range toggle so it doesn't close the filter ([#701](https://github.com/bullhorn/novo-elements/issues/701)) ([6af617b](https://github.com/bullhorn/novo-elements/commit/6af617b))
+* **simple-table:** fixing the custom date range filter ([#699](https://github.com/bullhorn/novo-elements/issues/699)) ([99ac551](https://github.com/bullhorn/novo-elements/commit/99ac551))
+* **skills picker:** limit results to 200 ([#692](https://github.com/bullhorn/novo-elements/issues/692)) ([3e15487](https://github.com/bullhorn/novo-elements/commit/3e15487))
+
+
+### Features
+
+* **Address:** hide subfields ([fcd7383](https://github.com/bullhorn/novo-elements/commit/fcd7383))
+* **data-table:** Adding output for preferences ([90b8232](https://github.com/bullhorn/novo-elements/commit/90b8232))
+* **data-table:** Adding row expand and footer abilities ([3985684](https://github.com/bullhorn/novo-elements/commit/3985684))
+* **data-table:** Adding row expand and footer abilities ([d536fe3](https://github.com/bullhorn/novo-elements/commit/d536fe3))
+* **datatable:** Allowing for a way to refresh data from the outside ([ae2dacf](https://github.com/bullhorn/novo-elements/commit/ae2dacf))
+* **datepicker:**  support for looser date formats and different locale options ([6f1c893](https://github.com/bullhorn/novo-elements/commit/6f1c893))
+* **datepicker:**  support for looser date formats and different locale options ([594c202](https://github.com/bullhorn/novo-elements/commit/594c202))
+
+
+
 <a name="2.9.4"></a>
 ## [2.9.4](https://github.com/bullhorn/novo-elements/compare/v2.9.1...v2.9.4) (2018-03-30)
 
