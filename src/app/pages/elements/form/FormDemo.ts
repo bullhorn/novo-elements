@@ -303,7 +303,7 @@ export class FormDemoComponent {
           label: 'State',
           required: true
         },
-        country: {
+        countryID: {
           label: 'Country',
           required: true
         },
@@ -371,7 +371,7 @@ export class FormDemoComponent {
     this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
 
     // Calendar input controls
-    this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date'});
+    this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
     this.userDefinedDateControl = new DateControl({ key: 'userDefinedFormat', label: 'User Defined Format', tooltip: 'Date', dateFormat: 'MMM Do YYYY (dd)', textMaskEnabled: false });
     this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
     this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time', military: true });

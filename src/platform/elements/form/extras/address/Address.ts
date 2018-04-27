@@ -71,7 +71,7 @@ export interface NovoAddressConfig {
             </i>
             <input [class.maxlength-error]="invalidMaxlength.zip" type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [maxlength]="config?.zip?.maxlength" [(ngModel)]="model.zip" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'zip')" (blur)="isBlurred($event, 'zip')" (input)="onInput($event, 'zip')" />
         </span>
-        <span *ngIf="!config?.countryID?.hidden" class="country-name" [class.invalid]="invalid.country" [class.focus]="focused.country">
+        <span *ngIf="!config?.countryID?.hidden" class="country-name" [class.invalid]="invalid.countryID" [class.focus]="focused.countryID">
             <i *ngIf="config.countryID.required"
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.countryID, 'bhi-check': valid.countryID}">
@@ -129,7 +129,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   isValid(field: string): void {
     let valid: boolean = true;
     if (((this.config[field].required && Helpers.isEmpty(this.model[field])) || !this.config[field].required) &&
-      !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName))) {
+      !(field === 'countryID' && this.config[field].required && !Helpers.isEmpty(this.model.countryName))) {
       valid = false;
     } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
       valid = false;
@@ -141,7 +141,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     let invalid: boolean = false;
     let invalidMaxlength: boolean = false;
     if (((this.config[field].required && Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.model[field]))) &&
-      !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
+      !(field === 'countryID' && this.config[field].required && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
       invalid = true;
     } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
       invalid = true;
@@ -181,7 +181,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     // Update state
     this.model.state = undefined;
     this.updateControl();
-    this.onInput(null, 'country');
+    this.onInput(null, 'countryID');
   }
 
   onStateChange(evt) {
