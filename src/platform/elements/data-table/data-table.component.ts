@@ -222,6 +222,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() name: string = 'novo-data-table';
   @Input() rowIdentifier: string = 'id';
   @Input() trackByFn: Function = (index, item) => item.id;
+  @Input() templates: { [key: string]: TemplateRef<any> } = {};
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
@@ -323,7 +324,6 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   public dataSource: DataTableSource<T>;
   public loading: boolean = true;
-  public templates: { [key: string]: TemplateRef<any> } = {};
   public columnToTemplate: { [key: string]: TemplateRef<any> } = {};
   public columnsLoaded: boolean = false;
   public selection: Set<string> = new Set();
@@ -373,11 +373,15 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public ngAfterContentInit(): void {
     // Default templates defined here
     this.defaultTemplates.forEach((item) => {
-      this.templates[item.getType()] = item.template;
+      if (!this.templates[item.getType()]) {
+        this.templates[item.getType()] = item.template;
+      }
     });
     // Custom templates passed in
     this.customTemplates.forEach((item) => {
-      this.templates[item.getType()] = item.template;
+      if (!this.templates[item.getType()]) {
+        this.templates[item.getType()] = item.template;
+      }
     });
     // Load columns
     this.configureColumns();
