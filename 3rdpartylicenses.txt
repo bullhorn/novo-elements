@@ -67,11 +67,11 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@angular/core@5.2.9
+@angular/core@5.2.10
 MIT
 MIT
 
-@angular/forms@5.2.9
+@angular/forms@5.2.10
 MIT
 MIT
 
@@ -101,7 +101,7 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-@angular/common@5.2.9
+@angular/common@5.2.10
 MIT
 MIT
 
@@ -112,7 +112,7 @@ MIT
 date-fns is licensed under the [MIT license](http://kossnocorp.mit-license.org).
 Read more about MIT at [TLDRLegal](https://tldrlegal.com/license/mit-license).
 
-@angular/platform-browser@5.2.9
+@angular/platform-browser@5.2.10
 MIT
 MIT
 
@@ -163,23 +163,23 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@angular/animations@5.2.9
+@angular/animations@5.2.10
 MIT
 MIT
 
-@angular/http@5.2.9
+@angular/http@5.2.10
 MIT
 MIT
 
-@angular/router@5.2.9
+@angular/router@5.2.10
 MIT
 MIT
 
-@angular/platform-browser-dynamic@5.2.9
+@angular/platform-browser-dynamic@5.2.10
 MIT
 MIT
 
-@angular/compiler@5.2.9
+@angular/compiler@5.2.10
 MIT
 MIT
 
