@@ -119,7 +119,7 @@ describe('Elements: NovoAddressElement', () => {
           required: true,
           maxlength: 5,
         },
-        country: {
+        countryID: {
           required: true,
         },
         state: {
@@ -131,8 +131,8 @@ describe('Elements: NovoAddressElement', () => {
       component.model = {
         countryName: 'usa',
       };
-      component.isValid('country');
-      expect(component.valid.country).toEqual(true);
+      component.isValid('countryID');
+      expect(component.valid.countryID).toEqual(true);
     });
     it('should check validity of required field address1 when it is empty', () => {
       component.model = {
@@ -178,7 +178,7 @@ describe('Elements: NovoAddressElement', () => {
           required: true,
           maxlength: 5,
         },
-        country: {
+        countryID: {
           required: true,
         },
         state: {
@@ -190,8 +190,8 @@ describe('Elements: NovoAddressElement', () => {
       component.model = {
         countryName: 'r',
       };
-      component.isInvalid('country');
-      expect(component.invalid.country).toEqual(false);
+      component.isInvalid('countryID');
+      expect(component.invalid.countryID).toEqual(false);
     });
     it('should check validity of required field address1 when it is empty', () => {
       component.model = {
