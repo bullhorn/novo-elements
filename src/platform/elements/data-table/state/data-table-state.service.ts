@@ -8,6 +8,7 @@ export class DataTableState<T> {
   public paginationSource = new Subject();
   public sortFilterSource = new Subject();
   public resetSource = new Subject();
+  public expandSource = new Subject();
 
   sort: { id: string; value: string } = undefined;
   filter: { id: string; value: string } = undefined;
@@ -15,6 +16,7 @@ export class DataTableState<T> {
   pageSize: number = undefined;
   globalSearch: string = undefined;
   selectedRows: Map<string, T> = new Map<string, T>();
+  expandedRows: Set<string> = new Set<string>();
   outsideFilter: any;
   isForceRefresh: boolean = false;
 
@@ -48,6 +50,10 @@ export class DataTableState<T> {
 
   public onSelectionChange(): void {
     this.selectionSource.next();
+  }
+
+  public onExpandChange(): void {
+    this.expandSource.next();
   }
 
   public onPaginationChange(isPageSizeChange: boolean, pageSize: number): void {

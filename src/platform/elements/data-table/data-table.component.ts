@@ -18,6 +18,7 @@ import {
 import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subscription } from 'rxjs/Subscription';
+import { animate, state as animState, style, transition, trigger } from '@angular/animations';
 
 import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
 import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
@@ -38,6 +39,13 @@ import { StaticDataTableService } from './services/static-data-table.service';
 
 @Component({
   selector: 'novo-data-table',
+  animations: [
+    trigger('expand', [
+      animState('void', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
+      animState('*', style({ height: '*', visibility: 'visible' })),
+      transition('void <=> *', animate('70ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
   template: `
     <header *ngIf="(!(dataSource?.totallyEmpty && !state.userFiltered) && !loading) || forceShowHeader"
             [class.empty]="hideGlobalSearch && !paginationOptions && !templates['customActions']">
@@ -74,6 +82,10 @@ import { StaticDataTableService } from './services/static-data-table.service';
                 <ng-container cdkColumnDef="selection">
                     <novo-data-table-checkbox-header-cell *cdkHeaderCellDef></novo-data-table-checkbox-header-cell>
                     <novo-data-table-checkbox-cell *cdkCellDef="let row; let i = index" [row]="row"></novo-data-table-checkbox-cell>
+                </ng-container>
+                <ng-container cdkColumnDef="expand">
+                    <novo-data-table-expand-header-cell *cdkHeaderCellDef></novo-data-table-expand-header-cell>
+                    <novo-data-table-expand-cell *cdkCellDef="let row; let i = index" [row]="row"></novo-data-table-expand-cell>
                 </ng-container>
                 <ng-container *ngFor="let column of columns;trackBy: trackColumnsBy" [cdkColumnDef]="column.id">
                   <novo-data-table-header-cell *cdkHeaderCellDef [column]="column" [novo-data-table-cell-config]="column" [defaultSort]="defaultSort" [class.empty]="column?.type === 'action' && !column?.label" [class.button-header-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)" [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-header-cell>
@@ -154,10 +166,6 @@ import { StaticDataTableService } from './services/static-data-table.service';
           let-col="col">
           <i class="bhi-{{ col?.action?.icon }} data-table-icon" (click)="col.handlers?.click({ originalEvent: $event, row: row })" [class.disabled]="isDisabled(col, row)"></i>
     </ng-template>
-    <ng-template novoTemplate="expandCellTemplate"
-          let-row>
-          <i class="bhi-next data-table-icon" novo-data-table-expander="true"></i>
-    </ng-template>
     <ng-template novoTemplate="dropdownCellTemplate"
           let-row
           let-col="col">
@@ -180,7 +188,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
       You did not provide an "expandedRow" template!
     </ng-template>
     <ng-template #detailRowTemplate>
-      <div class="novo-data-table-detail-row">
+      <div class="novo-data-table-detail-row" [@expand] style="overflow: hidden">
         <ng-container *ngTemplateOutlet="templates['expandedRow']; context: {$implicit: row}"></ng-container>
       </div>
     </ng-template>
@@ -423,6 +431,44 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       return check.disabledFunc(row);
     }
     return false;
+  }
+
+  public isExpanded(row: T): boolean {
+    if (!row) {
+      return false;
+    }
+    return this.state.expandedRows.has(`${row[this.rowIdentifier]}`);
+  }
+
+  public expandRow(row: T): void {
+    let expanded = this.isExpanded(row);
+
+    if (expanded) {
+      this.state.expandedRows.delete(`${row[this.rowIdentifier]}`);
+    } else {
+      this.state.expandedRows.add(`${row[this.rowIdentifier]}`);
+    }
+    this.state.onExpandChange();
+  }
+
+  public expandRows(expand: boolean): void {
+    (this.dataSource.data || []).forEach((row: T) => {
+      if (!expand) {
+        this.state.expandedRows.delete(`${row[this.rowIdentifier]}`);
+      } else {
+        this.state.expandedRows.add(`${row[this.rowIdentifier]}`);
+      }
+    });
+    this.state.onExpandChange();
+  }
+
+  public allCurrentRowsExpanded(): boolean {
+    for (let i = 0; i < (this.dataSource.data || []).length; i++) {
+      if (!this.isExpanded((this.dataSource.data || [])[i])) {
+        return false;
+      }
+    }
+    return true;
   }
 
   public isSelected(row: T): boolean {

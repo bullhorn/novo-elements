@@ -17,9 +17,11 @@ import { NovoTooltipModule } from '../tooltip/Tooltip.module';
 import { NovoDataTable } from './data-table.component';
 import { NovoDataTableCell } from './cells/data-table-cell.component';
 import { NovoDataTableCheckboxCell } from './cells/data-table-checkbox-cell.component';
+import { NovoDataTableExpandCell } from './cells/data-table-expand-cell.component';
 import { NovoDataTableHeaderRow } from './rows/data-table-header-row.component';
 import { NovoDataTableRow } from './rows/data-table-row.component';
 import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
+import { NovoDataTableExpandHeaderCell } from './cell-headers/data-table-expand-header-cell.component';
 import { NovoDataTableCheckboxHeaderCell } from './cell-headers/data-table-checkbox-header-cell.component';
 import { NovoDataTableHeaderCell } from './cell-headers/data-table-header-cell.directive';
 import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
@@ -67,6 +69,8 @@ import { NovoDataTableExpandDirective } from './data-table-expand.directive';
     NovoDataTablePagination,
     NovoDataTableCheckboxCell,
     NovoDataTableCheckboxHeaderCell,
+    NovoDataTableExpandCell,
+    NovoDataTableExpandHeaderCell,
     NovoDataTable,
     NovoDataTableExpandDirective,
   ],
