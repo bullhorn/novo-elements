@@ -33,3 +33,4 @@ export * from './search/SearchDemo';
 export * from './form-grouped/FormGroupedDemo';
 export * from './value/ValueDemo';
 export * from './ace-editor/AceEditorDemo';
+export * from './expansion/ExpansionDemo';
