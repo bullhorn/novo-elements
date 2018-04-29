@@ -78,7 +78,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
           <ng-container *ngTemplateOutlet="templates['customFilter']"></ng-container>
         </div>
         <div #novoDataTableContainer class="novo-data-table-container" [class.empty-user-filtered]="dataSource?.currentlyEmpty && state.userFiltered" [class.empty]="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine">
-            <cdk-table *ngIf="(columns?.length > 0) && columnsLoaded && dataSource" [dataSource]="dataSource" [trackBy]="trackByFn" novoDataTableSortFilter [class.empty]="dataSource?.currentlyEmpty && state.userFiltered" [hidden]="dataSource?.totallyEmpty && !userFiltered">
+            <cdk-table *ngIf="(columns?.length > 0) && columnsLoaded && dataSource" [dataSource]="dataSource" [trackBy]="trackByFn" novoDataTableSortFilter [class.expandable]="expandable" [class.empty]="dataSource?.currentlyEmpty && state.userFiltered" [hidden]="dataSource?.totallyEmpty && !userFiltered">
                 <ng-container cdkColumnDef="selection">
                     <novo-data-table-checkbox-header-cell *cdkHeaderCellDef></novo-data-table-checkbox-header-cell>
                     <novo-data-table-checkbox-cell *cdkCellDef="let row; let i = index" [row]="row"></novo-data-table-checkbox-cell>
@@ -187,7 +187,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
     <ng-template novoTemplate="expandedRow">
       You did not provide an "expandedRow" template!
     </ng-template>
-    <ng-template #detailRowTemplate>
+    <ng-template #detailRowTemplate let-row>
       <div class="novo-data-table-detail-row" [@expand] style="overflow: hidden">
         <ng-container *ngTemplateOutlet="templates['expandedRow']; context: {$implicit: row}"></ng-container>
       </div>
@@ -336,6 +336,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public columnsLoaded: boolean = false;
   public selection: Set<string> = new Set();
   public scrollLeft: number = 0;
+  public expandable: boolean = false;
 
   private outsideFilterSubscription: Subscription;
   private refreshSubscription: Subscription;
@@ -379,6 +380,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public ngAfterContentInit(): void {
+    this.expandable = this.displayedColumns.includes('expand');
+
     // Default templates defined here
     this.defaultTemplates.forEach((item) => {
       if (!this.templates[item.getType()]) {
