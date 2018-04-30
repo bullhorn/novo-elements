@@ -122,6 +122,7 @@ export class FormDemoComponent {
   private multiFileControl: any;
   private fileForm: any;
   private dateControl: any;
+  private userDefinedDateControl: DateControl;
   private timeControl: any;
   private dateTimeControl: any;
   private dynamic: any;
@@ -302,7 +303,7 @@ export class FormDemoComponent {
           label: 'State',
           required: true
         },
-        country: {
+        countryID: {
           label: 'Country',
           required: true
         },
@@ -313,6 +314,39 @@ export class FormDemoComponent {
         zip: {
           label: 'Zipcode',
           required: true
+        }
+
+      },
+      value: {
+        address1: '123 Summer Street',
+        address2: '10 Washington Street',
+        countryID: 1
+      }
+    });
+    this.secondaryAddressControl = new AddressControl({
+      key: 'address',
+      name: 'address',
+      label: 'Address',
+      config: {
+        address1: {
+          label: 'Address Line 1',
+          maxlength: 20
+        },
+        address2: {
+          label: 'Address Line 2',
+          maxlength: 15
+        },
+        state: {
+          label: 'State',
+        },
+        countryID: {
+          label: 'Country',
+        },
+        city: {
+          label: 'City',
+        },
+        zip: {
+          label: 'Zipcode',
         }
 
       },
@@ -382,9 +416,10 @@ export class FormDemoComponent {
 
     // Calendar input controls
     this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
+    this.userDefinedDateControl = new DateControl({ key: 'userDefinedFormat', label: 'User Defined Format', tooltip: 'Date', dateFormat: 'MMM Do YYYY (dd)', textMaskEnabled: false });
     this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
     this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time', military: true });
-    this.calendarForm = formUtils.toFormGroup([this.dateControl, this.timeControl, this.dateTimeControl]);
+    this.calendarForm = formUtils.toFormGroup([this.dateControl, this.userDefinedDateControl, this.timeControl, this.dateTimeControl]);
 
     // Dynamic
     this.dynamic = formUtils.toFieldSets(

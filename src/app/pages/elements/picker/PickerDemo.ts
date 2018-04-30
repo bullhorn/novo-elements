@@ -200,15 +200,16 @@ export class PickerDemoComponent {
 
         this.value = null;
         this.async = {
+            enableInfiniteScroll: true,
             options: (term, page) => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
-                        if (page >= 10) {
-                            resolve([]);
-                        } else {
-                            resolve(abbrieviated);
+                        let arr = [];
+                        for (let i = 0; i < 20; i++) {
+                            arr.push({ value: `name ${page}`, label: `name ${page}`});
                         }
-                    }, 1000);
+                        resolve(arr);
+                    }, 5000);
                 });
             }
         };
@@ -219,7 +220,6 @@ export class PickerDemoComponent {
                 states[1]
             ],
             minSearchLength: 2,
-            disableInfiniteScroll: true,
             options: () => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
@@ -230,7 +230,6 @@ export class PickerDemoComponent {
         };
         this.defaultFunctionConfig = {
             minSearchLength: 2,
-            disableInfiniteScroll: true,
             defaultOptions: () => {
                 return [
                     states[2],

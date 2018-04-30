@@ -245,7 +245,10 @@ export class FormUtils {
         control = new DateTimeControl(controlConfig);
         break;
       case 'date':
-        controlConfig.military = config ? !!config.military : false;
+        controlConfig.dateFormat = field.dateFormat;
+        controlConfig.textMaskEnabled = field.textMaskEnabled;
+        controlConfig.allowInvalidDate = field.allowInvalidDate;
+        controlConfig.military = config ? !!config.military : false;        
         control = new DateControl(controlConfig);
         break;
       case 'time':
@@ -303,7 +306,8 @@ export class FormUtils {
         if (field.fields && field.fields.length) {
           for (let subfield of field.fields) {
             controlConfig.config[subfield.name] = {
-              required: !!subfield.required
+              required: !!subfield.required,
+              hidden: !!subfield.readOnly
             };
             if (!Helpers.isEmpty(subfield.label)) {
               controlConfig.config[subfield.name].label = subfield.label;

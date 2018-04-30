@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -23,6 +23,7 @@ import {
   NovoModalRef,
   NovoModalParams,
   NovoModalService,
+  NovoDataTable,
 } from '../../../../platform/index';
 import { IDataTablePreferences } from '../../../../platform/elements/data-table/interfaces';
 
@@ -40,6 +41,9 @@ const template = `
     <novo-tiles [options]="globalSearchOptions" (onChange)="toggleGlobalSearch($event)" [(ngModel)]="loadedGlobalSearch"></novo-tiles>
     <h6>Configure Columns</h6>
     <button theme="primary" (click)="configureColumns()">Configure Columns</button>
+    <h6>Configure Columns</h6>
+    <button theme="primary" (click)="toggleRowDetails(true)">Show Row Details (first table)</button>
+    <button theme="primary" (click)="toggleRowDetails(false)">Hide Row Details (first table)</button>
 
     <br/>
     <br/>
@@ -137,6 +141,8 @@ export class DataTableDemoComponent implements OnInit {
   public BasicDemoServiceTpl: string = BasicDemoServiceTpl;
   public RemoteDemoServiceTpl: string = RemoteDemoServiceTpl;
 
+  @ViewChild('basic') table: NovoDataTable<MockData>;
+
   // Table configuration
   public dataSetOptions: any[] = [{ label: 'Dataset #1', value: 1 }, { label: 'Dataset #2', value: 2 }, { label: 'Dataset #3', value: 3 }];
   public loadedDataSet: number = 1;
@@ -205,7 +211,7 @@ export class DataTableDemoComponent implements OnInit {
       id: 'embeddedObj',
       label: 'Embedded (hard)',
       enabled: true,
-      format: ['$name', '$firstName $lastName'],
+      format: ['$another.id', '$firstName $lastName'],
       type: 'link',
       handlers: {
         click: this.log.bind(this),
@@ -303,6 +309,7 @@ export class DataTableDemoComponent implements OnInit {
   ];
   public sharedDisplayColumns = [
     'selection',
+    'expand',
     'preview',
     'actions',
     'id',
@@ -428,7 +435,7 @@ export class DataTableDemoComponent implements OnInit {
       .onClosed.then((columns: IDataTableColumn<MockData>[]) => {
         if (columns) {
           let enabledColumns = columns.filter((column: IDataTableColumn<MockData>) => column.enabled);
-          this.sharedDisplayColumns = ['selection', ...enabledColumns.map((column: IDataTableColumn<MockData>) => column.id)];
+          this.sharedDisplayColumns = ['selection', 'expand', ...enabledColumns.map((column: IDataTableColumn<MockData>) => column.id)];
           this.ref.markForCheck();
         }
       });
@@ -438,8 +445,12 @@ export class DataTableDemoComponent implements OnInit {
     console.log('Preferences changed (persist manually):', event); // tslint:disable-line
   }
 
-  public refresh() {
+  public refresh(): void {
     this.refreshSubject.next();
+  }
+
+  public toggleRowDetails(expand: boolean): void {
+    this.table.expandRows(expand);
   }
 }
 

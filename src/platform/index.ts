@@ -55,6 +55,7 @@ export {
   IDataTableSortFilter,
   IDataTablePreferences,
 } from './elements/data-table/interfaces';
+export { NovoDataTable } from './elements/data-table/data-table.component';
 export {
   NovoTable,
   NovoActivityTable,
@@ -217,7 +218,7 @@ export { RenderPipe } from './elements/value/Render';
 // Export main module
 export { NovoElementsModule } from './novo-elements.module';
 export { NovoListElement } from './elements/list/List';
-// interfaces
+// Interfaces
 export { NOVO_VALUE_TYPE } from './elements/value/Value';
 export { NOVO_VALUE_THEME } from './elements/value/Value';
 export { NovoAddressConfig, NovoAddressSubfieldConfig } from './elements/form/extras/address/Address';

@@ -6,6 +6,10 @@ $breakpoint: 1000px;
 cdk-table {
   display: block;
   flex: 1;
+  &.expandable {
+    width: fit-content;
+    min-width: 100%;
+  }
   &.empty {
     min-height: 62px;
     max-height: 62px;
@@ -14,6 +18,7 @@ cdk-table {
     .novo-data-table-cell,
     .novo-data-table-button-cell,
     .novo-data-table-dropdown-cell,
+    .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
       background-color: $table-bg-accent;
     }
@@ -21,15 +26,23 @@ cdk-table {
       .novo-data-table-cell,
       .novo-data-table-button-cell,
       .novo-data-table-dropdown-cell,
+      .novo-data-table-expand-cell,
       .novo-data-table-checkbox-cell {
         background-color: rgba($ocean, 0.15);
       }
+      + .novo-data-table-detail-row {
+        background-color: rgba($ocean, 0.15);
+      }
+    }
+    + .novo-data-table-detail-row {
+      background: $table-bg-accent;
     }
   }
   > .novo-data-table-row:nth-of-type(even) {
     .novo-data-table-cell,
     .novo-data-table-button-cell,
     .novo-data-table-dropdown-cell,
+    .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
       background-color: $white;
     }
@@ -37,9 +50,16 @@ cdk-table {
       .novo-data-table-cell,
       .novo-data-table-button-cell,
       .novo-data-table-dropdown-cell,
+      .novo-data-table-expand-cell,
       .novo-data-table-checkbox-cell {
         background-color: rgba($ocean, 0.15);
       }
+      + .novo-data-table-detail-row {
+        background-color: rgba($ocean, 0.15);
+      }
+    }
+    + .novo-data-table-detail-row {
+      background: $white;
     }
   }
 }
@@ -49,10 +69,18 @@ cdk-table {
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
-  border-top: 1px solid $off-white;
   .novo-data-table-header-cell,
   .novo-data-table-checkbox-header-cell {
     border-bottom: 1px solid $off-white;
+  }
+  &.expanded {
+    i.bhi-next.data-table-icon {
+      cursor: pointer;
+      transition: all 0.1s;
+      &.expanded {
+        transform: rotate(90deg);
+      }
+    }
   }
 }
 
@@ -70,6 +98,7 @@ cdk-table {
     max-width: 180px;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
   novo-dropdown {
     display: inline-block;
@@ -80,6 +109,9 @@ cdk-table {
   &.clickable {
     cursor: pointer;
     color: $company;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -176,6 +208,21 @@ cdk-table {
   }
 }
 
+.novo-data-table-expand-header-cell,
+.novo-data-table-expand-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  i {
+    cursor: pointer;
+    transition: all 0.1s;
+    &.expanded {
+      transform: rotate(90deg);
+    }
+  }
+}
+
 .novo-data-table-checkbox-header-cell,
 .novo-data-table-checkbox-cell {
   display: flex;
@@ -218,6 +265,10 @@ novo-data-table {
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    border-bottom: 1px solid $off-white;
+    &.empty {
+      padding: 0;
+    }
     > [novo-data-table-custom-header] {
       flex: 1;
     }
@@ -288,6 +339,9 @@ novo-data-table {
   .clickable {
     @extend a;
   }
+  .novo-data-table-detail-row {
+    padding: 1em;
+  }
   .novo-data-table-empty-container {
     padding-top: 0;
   }
@@ -344,6 +398,21 @@ novo-data-table {
         display: flex;
         flex-flow: column nowrap;
         min-height: 250px;
+      }
+    }
+  }
+  .novo-data-table-footer {
+    display: flex;
+    align-items: center;
+    > div,
+    div.novo-data-table-footer-cell {
+      border-top: 1px solid $off-white;
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      align-items: center;
+      &:not(.button-cell):not(.dropdown-cell) {
+        padding: 10px;
       }
     }
   }
