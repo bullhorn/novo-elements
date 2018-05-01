@@ -63,6 +63,16 @@ novo-address {
     flex: 4 4 100%;
     padding: 10px 0 0 !important;
   }
+  .disabled {
+    pointer-events: none;
+    input {
+      border-bottom: 1px dashed lighten($dark, 30%) !important;
+      opacity: 0.7;
+    }
+    i.required-indicator.bhi-circle, i.required-indicator.bhi-check {
+      border-bottom: 1px dashed lighten($dark, 30%) !important;
+    }
+  }
 }
 
 novo-form .novo-form-container form,

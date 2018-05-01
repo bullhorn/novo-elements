@@ -331,7 +331,7 @@ export class FormDemoComponent {
           pickerConfig: {
             field: 'value',
             format: '$label',
-            options: (query, countryID) => {
+            options: (countryID, query) => {
               return new Promise((resolve, reject) => {
                 resolve(this.getStateOptions(countryID, query));
               });
