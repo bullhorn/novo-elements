@@ -78,7 +78,7 @@ export interface NovoAddressConfig {
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.countryID, 'bhi-check': valid.countryID}">
             </i>
-            <novo-picker [config]="config?.country?.pickerConfig" [placeholder]="config.country.label" (select)="onCountryChange($event)" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryName"></novo-picker>
+            <novo-picker [config]="config?.countryID?.pickerConfig" [placeholder]="config.countryID.label" (select)="onCountryChange($event)" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryName"></novo-picker>
             <!---<novo-select id="country" [options]="countries" [placeholder]="config.country.label" autocomplete="shipping country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event)"></novo-select>--->
         </span>
     `
@@ -118,7 +118,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       if (!this.config.hasOwnProperty(field)) {
         this.config[field] = {};
       }
-      if (field === 'country' && !this.config[field].pickerConfig) {
+      if (field === 'countryID' && !this.config[field].pickerConfig) {
         this.config.countryID.pickerConfig = {
           field: 'id',
           format: '$name',
@@ -137,9 +137,12 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       } else if (field === 'state' && this.config[field].pickerConfig && this.config[field].pickerConfig.options) {
         let stateOptions = this.config[field].pickerConfig.options;
         this.config[field].pickerConfig.options = (query) => {
-          return stateOptions(query, this.model.countryID);
+          return stateOptions(this.model.countryID, query);
         };
-        this.config[field].pickerConfig.custom = true;
+        this.config[field].pickerConfig = {
+          custom: true,
+          defaultOptions: stateOptions
+        };
       }
       if (!this.config[field].hasOwnProperty('label')) {
         this.config[field].label = this.labels[field];
@@ -153,7 +156,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   isValid(field: string): void {
     let valid: boolean = true;
     if (((this.config[field].required && Helpers.isEmpty(this.model[field])) || !this.config[field].required) &&
-      !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName))) {
+      !(field === 'countryID' && this.config[field].required && !Helpers.isEmpty(this.model.countryName))) {
       valid = false;
     } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
       valid = false;
@@ -165,7 +168,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     let invalid: boolean = false;
     let invalidMaxlength: boolean = false;
     if (((this.config[field].required && Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.model[field]))) &&
-      !(field === 'country' && this.config[field].required && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
+      !(field === 'countryID' && this.config[field].required && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
       invalid = true;
     } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
       invalid = true;
@@ -205,7 +208,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     // Update state
     this.model.state = undefined;
     this.updateControl();
-    this.onInput(null, 'country');
+    this.onInput(null, 'countryID');
   }
 
   onStateChange(evt) {
@@ -219,18 +222,20 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
   updateStates() {
     // should make the options call again if you change the country
+    // it needs to update the defaultValues, still see old states
     if (this.config.state.pickerConfig.custom) {
       let stateOptions = this.config.state.pickerConfig.options;
         this.config.state.pickerConfig.options = (query) => {
-          return stateOptions(query, this.model.countryID);
+          return stateOptions(this.model.countryID, query);
         };
-      } else if (this.model.countryName) {
+    } else if (this.model.countryName) {
       this.states = getStates(this.model.countryName);
       if(this.states.length) {
         this.config.state.pickerConfig.defaultOptions = this.states;
       } else {
         // state when a country has no states
         // need to disable state field in this case
+        // add disable styling
         this.config.state.pickerConfig.options = [];
       }
     } else {
