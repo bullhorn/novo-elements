@@ -21,7 +21,6 @@ export interface NovoAddressSubfieldConfig {
   maxlength: number;
   pickerConfig?: any;
   hidden: boolean;
-  // disabled: boolean;
 }
 
 export interface NovoAddressConfig {
@@ -32,7 +31,6 @@ export interface NovoAddressConfig {
   state?: NovoAddressSubfieldConfig;
   zip?: NovoAddressSubfieldConfig;
   countryID?: NovoAddressSubfieldConfig;
-  // disabled?: boolean;
 }
 
 @Component({
@@ -66,7 +64,6 @@ export interface NovoAddressConfig {
                 [ngClass]="{'bhi-circle': !valid.state, 'bhi-check': valid.state}">
             </i>
             <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (select)="onStateChange($event)" (changed)="onStateChange($event)" autocomplete="shipping region" [(ngModel)]="model.state"></novo-picker>
-            <!---<novo-select id="state" [options]="states" [placeholder]="config.state.label" autocomplete="shipping region" [(ngModel)]="model.state" (ngModelChange)="onStateChange($event)"></novo-select>--->
         </span>
         <span *ngIf="!config?.zip?.hidden" class="zip postal-code" [class.invalid]="invalid.zip" [class.focus]="focused.zip" [class.disabled]="disabled.zip">
             <i *ngIf="config.zip.required"
@@ -81,7 +78,6 @@ export interface NovoAddressConfig {
                 [ngClass]="{'bhi-circle': !valid.countryID, 'bhi-check': valid.countryID}">
             </i>
             <novo-picker [config]="config?.countryID?.pickerConfig" [placeholder]="config.countryID.label" (select)="onCountryChange($event)" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryName"></novo-picker>
-            <!---<novo-select id="country" [options]="countries" [placeholder]="config.country.label" autocomplete="shipping country" [(ngModel)]="model.countryName" (ngModelChange)="onCountryChange($event)"></novo-select>--->
         </span>
     `
 })
@@ -231,24 +227,29 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   }
 
   updateStates() {
-    // should make the options call again if you change the country
-    // it needs to update the defaultValues, still see old states
     if (this.config.state.pickerConfig.custom) {
-      // let stateOptions = this.config.state.pickerConfig.options;
       this.config.state.pickerConfig.options = (query) => {
         return this.stateOptions(this.model.countryID, query);
       };
       this.stateOptions(this.model.countryID).then((results) => {
+        if (results.length) {
           this.config.state.pickerConfig.defaultOptions = results;
+        } else {
+          this.isDisabled('state');
+          if (this.config.state.required) {
+            this.valid.state = true;
+          }
+        }
         });
-        // this.config.state.pickerConfig.defaultOptions = [];
     } else if (this.model.countryName) {
       this.states = getStates(this.model.countryName);
       if(this.states.length) {
         this.config.state.pickerConfig.defaultOptions = this.states;
       } else {
         this.isDisabled('state');
-        this.valid.state = true;
+        if (this.config.state.required) {
+          this.valid.state = true;
+        }
       }
     } else {
       this.states = [];
