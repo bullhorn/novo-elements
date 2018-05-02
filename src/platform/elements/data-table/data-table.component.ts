@@ -380,7 +380,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public ngAfterContentInit(): void {
-    this.expandable = this.displayedColumns.includes('expand');
+    if (this.displayedColumns && this.displayedColumns.length) {
+      this.expandable = this.displayedColumns.includes('expand');
+    }
 
     // Default templates defined here
     this.defaultTemplates.forEach((item) => {
