@@ -93,7 +93,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   };
   focused: any = {};
   invalid: any = {};
-  disabled: any ={};
+  disabled: any = {};
   invalidMaxlength: any = {};
   valid: any = {};
   stateOptions: any;
@@ -181,7 +181,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   }
 
   isDisabled(field: string): void {
-   this.disabled[field] = true;
+    this.disabled[field] = true;
   }
 
   onInput(event: Event, field: string): void {
@@ -240,10 +240,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             this.valid.state = true;
           }
         }
-        });
+      });
     } else if (this.model.countryName) {
       this.states = getStates(this.model.countryName);
-      if(this.states.length) {
+      if (this.states.length) {
         this.config.state.pickerConfig.defaultOptions = this.states;
       } else {
         this.isDisabled('state');
@@ -256,7 +256,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     }
   }
 
-  getStateOptions(filter?:string): any[] {
+  getStateOptions(filter?: string): any[] {
     if (this.model.countryName) {
       const states = getStates(this.model.countryName);
       if (filter) {
@@ -278,7 +278,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       if (model.countryName) {
         countryName = model.countryName;
       } else if (model.countryID) {
-        let country: any = findByCountryId(model.countryID);
+        let country: any = findByCountryId(model.countryID); // TODO update this for pickerConfig
         if (country) {
           countryName = country.name;
         };

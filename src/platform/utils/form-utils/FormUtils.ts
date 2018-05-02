@@ -327,6 +327,9 @@ export class FormUtils {
               }
               controlConfig.value[subfield.name] = 1;
             }
+            if (subfield.name === 'state' || subfield.name === 'countryID') {
+              controlConfig.config[subfield.name].pickerConfig = this.getControlOptions(subfield, http, config);
+            }
           }
         }
         controlConfig.isEmpty = this.isAddressEmpty;
