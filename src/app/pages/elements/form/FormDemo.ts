@@ -19,7 +19,7 @@ import {
   PickerControl, EntityPickerResult, EntityPickerResults, TextAreaControl,
   NovoFormGroup, BaseControl, AceEditorControl, AddressControl,
 } from './../../../../platform/index';
-
+import { findByCountryId } from './../../../../platform/utils/countries/Countries';
 const template = `
 <div class="container">
     <h1>Forms <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/form">(source)</a></small></h1>
@@ -132,6 +132,27 @@ export class FormDemoComponent {
   private secondaryAddressControl: any;
   private addressForm: any;
   private addressFormControls: any;
+  private states: any[] = [{
+    value: 'MA',
+    label: 'Massachusetts',
+    countryId: 1
+  }, {
+    value: 'NY',
+    label: 'New York',
+    countryId: 1
+  }, {
+    value: 'AB',
+    label: 'Alberta',
+    countryId: 2216
+  }, {
+    value: 'BC',
+    label: 'British Columbia',
+    countryId: 2216
+  }, {
+    value: 'MB',
+    label: 'Manitoba',
+    countryId: 2216
+  },];
 
   constructor(private formUtils: FormUtils) {
     // Quick note config
@@ -336,10 +357,29 @@ export class FormDemoComponent {
                 resolve(this.getStateOptions(countryID, query));
               });
             },
+            getLabels: (value: number) => {
+              return new Promise((resolve, reject) => {
+                resolve(this.getStateLabel(value));
+              });
+            }
           }
         },
         countryID: {
           label: 'Country',
+          pickerConfig: {
+            field: 'value',
+            format: '$label',
+            options: (query) => {
+              return new Promise((resolve, reject) => {
+                resolve(this.getCountryOptions(query));
+              });
+            },
+            getLabels: (value: number) => {
+              return new Promise((resolve, reject) => {
+                resolve(findByCountryId(value));
+              });
+            }
+          }
         },
         city: {
           label: 'City',
@@ -474,27 +514,7 @@ export class FormDemoComponent {
   }
 
   getStateOptions(countryID: number, filter?: string): any[] {
-    let states: any = [{
-      value: 'MA',
-      label: 'Massachusetts',
-      countryId: 1
-    }, {
-      value: 'NY',
-      label: 'New York',
-      countryId: 1
-    }, {
-      value: 'AB',
-      label: 'Alberta',
-      countryId: 2216
-    }, {
-      value: 'BC',
-      label: 'British Columbia',
-      countryId: 2216
-    }, {
-      value: 'MB',
-      label: 'Manitoba',
-      countryId: 2216
-    },]
+    let states: any[] = this.states;
     if (countryID) {
       states = states.filter((state: any) => state.countryId === countryID);
     }
@@ -502,5 +522,56 @@ export class FormDemoComponent {
       states = states.filter((state) => new RegExp(`${filter}`, 'gi').test(state.label))
     }
     return states;
+  }
+
+  getStateLabel(value: number): string {
+    let state: any = this.states.find((s: any) => {
+      return s.value === value;
+    });
+    if (state && state.label) {
+      return state.label;
+    }
+    return '';
+  }
+
+  getCountryOptions(filter?: string): any[] {
+    let countries: any = [
+      {
+        value: 2356,
+        label: 'Uganda',
+      },
+      {
+        value: 2357,
+        label: 'Ukraine',
+      },
+      {
+        value: 2358,
+        label: 'United Arab Emirates',
+      },
+      {
+        value: 2359,
+        label: 'United Kingdom',
+      },
+      {
+        value: 1,
+        label: 'United States',
+      },
+      {
+        value: 2443,
+        label: 'United States Minor Outlying Islands',
+      },
+      {
+        value: 2360,
+        label: 'Uruguay',
+      },
+      {
+        value: 2361,
+        label: 'Uzbekistan',
+      },
+    ];
+    if (filter && filter.length) {
+      countries = countries.filter((country) => new RegExp(`${filter}`, 'gi').test(country.label))
+    }
+    return countries;
   }
 }

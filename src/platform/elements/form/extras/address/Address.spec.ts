@@ -7,14 +7,14 @@ import { NovoSelectModule } from '../../../select/Select.module';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoPickerModule } from '../../../picker/Picker.module';
 
-xdescribe('Elements: NovoAddressElement', () => {
+describe('Elements: NovoAddressElement', () => {
   let fixture;
   let component;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NovoAddressElement],
-      imports: [FormsModule, NovoSelectModule],
+      imports: [FormsModule, NovoSelectModule, NovoPickerModule],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoAddressElement);
@@ -29,6 +29,9 @@ xdescribe('Elements: NovoAddressElement', () => {
       expect(component.ngOnInit).toBeDefined();
       component.ngOnInit();
     });
+  });
+
+  describe('Method: initConfig()', () => {
     it('should be set up label for address1', () => {
       component.config = {};
       component.ngOnInit();
@@ -65,9 +68,48 @@ xdescribe('Elements: NovoAddressElement', () => {
   });
 
   describe('Method: onCountryChange()', () => {
+    beforeEach(() => {
+      spyOn(component, 'updateStates');
+      component.model = {};
+    });
     it('should be defined.', () => {
       expect(component.onCountryChange).toBeDefined();
-      // component.onCountryChange();
+    });
+    it('should set model.country when country is set', () => {
+      component.config = {
+        countryID: {
+          pickerConfig: {
+            field: 'label',
+            format: '$label',
+          }
+        }
+      };
+      component.onCountryChange({ label: 'US' });
+      expect(component.model.countryID).toEqual('US');
+    });
+    it('should set model.country when country is cleared out', () => {
+      component.config = {
+        countryID: {
+          pickerConfig: {
+            field: 'label',
+            format: '$label',
+          }
+        }
+      };
+      component.onCountryChange();
+      expect(component.model.countryID).toBeUndefined();
+    });
+    it('should disable state when country is cleared out', () => {
+      component.config = {
+        countryID: {
+          pickerConfig: {
+            field: 'label',
+            format: '$label',
+          }
+        }
+      };
+      component.onCountryChange();
+      expect(component.disabled.state).toEqual(true);
     });
   });
 
