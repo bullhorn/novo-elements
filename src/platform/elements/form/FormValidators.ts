@@ -50,19 +50,30 @@ export class FormValidators {
             (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
               !Helpers.isBlank(control.value.countryName) && Helpers.isEmpty(control.value.countryName))) {
             valid = false;
-            invalidAddressFields.push(control.config[subfield].label);
+            if (subfield === 'state' && valid === false &&
+              control.config.state.pickerConfig &&
+              control.config.state.pickerConfig.defaultOptions &&
+              control.config.state.pickerConfig.defaultOptions.length === 0) {
+              valid = true
+            } else {
+              invalidAddressFields.push(control.config[subfield].label);
+            }
           }
-          if ((subfield !== 'country' && control.config[subfield].required &&
+          if (((subfield !== 'country' && control.config[subfield].required &&
             Helpers.isEmpty(control.value[subfield])) ||
             (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
-              Helpers.isEmpty(control.value.countryName))) {
+              Helpers.isEmpty(control.value.countryName))) &&
+            !(subfield === 'state' &&
+              control.config.state.pickerConfig &&
+              control.config.state.pickerConfig.defaultOptions &&
+              control.config.state.pickerConfig.defaultOptions.length === 0)) {
             formValidity = false;
           }
           if (!Helpers.isEmpty(control.config[subfield].maxlength) && !Helpers.isEmpty(control.value[subfield]) &&
             control.value[subfield].length > control.config[subfield].maxlength) {
-              maxlengthError = true;
-              maxlengthFields.push(subfield);
-              formValidity = false;              
+            maxlengthError = true;
+            maxlengthFields.push(subfield);
+            formValidity = false;
           }
         }
       });

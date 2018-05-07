@@ -1,42 +1,42 @@
 // NG2
 import {
-    Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, EventEmitter, Output
+  Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, EventEmitter, Output
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { getCountries, getStates, getStateObjects, findByCountryName, findByCountryId } from '../../../../utils/countries/Countries';
+import { getCountries, getStates, findByCountryId } from '../../../../utils/countries/Countries';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { Helpers } from '../../../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const ADDRESS_VALUE_ACCESSOR = {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NovoAddressElement),
-    multi: true
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => NovoAddressElement),
+  multi: true
 };
 
 export interface NovoAddressSubfieldConfig {
-    label: string;
-    required: boolean;
-    maxlength: number;
-    pickerConfig?: any;
-    hidden: boolean;
+  label: string;
+  required: boolean;
+  maxlength: number;
+  pickerConfig?: any;
+  hidden: boolean;
 }
 
 export interface NovoAddressConfig {
-    required?: boolean;
-    address1?: NovoAddressSubfieldConfig;
-    address2?: NovoAddressSubfieldConfig;
-    city?: NovoAddressSubfieldConfig;
-    state?: NovoAddressSubfieldConfig;
-    zip?: NovoAddressSubfieldConfig;
-    countryID?: NovoAddressSubfieldConfig;
+  required?: boolean;
+  address1?: NovoAddressSubfieldConfig;
+  address2?: NovoAddressSubfieldConfig;
+  city?: NovoAddressSubfieldConfig;
+  state?: NovoAddressSubfieldConfig;
+  zip?: NovoAddressSubfieldConfig;
+  countryID?: NovoAddressSubfieldConfig;
 }
 
 @Component({
-    selector: 'novo-address',
-    providers: [ADDRESS_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-address',
+  providers: [ADDRESS_VALUE_ACCESSOR],
+  template: `
         <span *ngIf="!config?.address1?.hidden" class="street-address" [class.invalid]="invalid.address1" [class.focus]="focused.address1" [class.disabled]="disabled.address1">
             <i *ngIf="config.address1.required"
                 class="required-indicator address1"
@@ -82,264 +82,268 @@ export interface NovoAddressConfig {
     `
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
-    @Input() config: NovoAddressConfig;
-    states: Array<any> = [];
-    countries: Array<any> = getCountries();
-    fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
-    model: any;
-    onModelChange: Function = () => {
-    };
-    onModelTouched: Function = () => {
-    };
-    focused: any = {};
-    invalid: any = {};
-    disabled: any = {};
-    invalidMaxlength: any = {};
-    valid: any = {};
-    stateOptions: any;
-    @Output() change: EventEmitter<any> = new EventEmitter();
-    @Output() focus: EventEmitter<any> = new EventEmitter();
-    @Output() blur: EventEmitter<any> = new EventEmitter();
+  @Input() config: NovoAddressConfig;
+  states: Array<any> = [];
+  countries: Array<any> = getCountries();
+  fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
+  model: any;
+  onModelChange: Function = () => {
+  };
+  onModelTouched: Function = () => {
+  };
+  focused: any = {};
+  invalid: any = {};
+  disabled: any = {};
+  invalidMaxlength: any = {};
+  valid: any = {};
+  stateOptions: any;
+  @Output() change: EventEmitter<any> = new EventEmitter();
+  @Output() focus: EventEmitter<any> = new EventEmitter();
+  @Output() blur: EventEmitter<any> = new EventEmitter();
 
-    constructor(public labels: NovoLabelService) { }
+  constructor(public labels: NovoLabelService) { }
 
-    ngOnInit() {
-        if (!this.config) {
-            this.config = {
-            };
+  ngOnInit() {
+    if (!this.config) {
+      this.config = {
+      };
+    }
+    if (this.model) {
+      this.writeValue(this.model);
+      this.updateControl();
+    } else if (!this.model) {
+      this.model = {};
+    }
+    this.initConfig();
+  }
+
+  initConfig(): void {
+    this.fieldList.forEach(((field: string) => {
+      if (!this.config.hasOwnProperty(field)) {
+        this.config[field] = {
+          hidden: true,
+        };
+      }
+      if (!this.config[field].hasOwnProperty('label')) {
+        this.config[field].label = this.labels[field];
+      }
+      if (this.config.required) {
+        this.config[field].required = true;
+      }
+      if (field === 'countryID') {
+        if (!this.config[field].pickerConfig) {
+          this.config.countryID.pickerConfig = this.getDefaultCountryConfig();
         }
-        if (this.model) {
-            this.writeValue(this.model);
-            this.updateControl();
-        } else if (!this.model) {
-            this.model = {};
+        this.config[field].pickerConfig.defaultOptions = this.config.countryID.pickerConfig.options;
+      }
+      if (field === 'state') {
+        if (!this.config[field].pickerConfig) {
+          this.config.state.pickerConfig = this.getDefaultStateConfig();
+          this.config[field].pickerConfig.defaultOptions = this.config[field].pickerConfig.options;
         }
-        this.initConfig();
+        this.stateOptions = this.config[field].pickerConfig.options;
+        this.config[field].pickerConfig.options = (query) => {
+          return this.stateOptions(this.model.countryID, query);
+        };
+        this.config[field].pickerConfig.defaultOptions = this.stateOptions;
+      }
+    }));
+  }
+
+  isValid(field: string): void {
+    let valid: boolean = true;
+    if (((this.config[field].required && Helpers.isEmpty(this.model[field])) || !this.config[field].required) &&
+      !(field === 'countryID' && this.config[field].required && !Helpers.isEmpty(this.model.countryName))) {
+      valid = false;
+    } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
+      valid = false;
+    }
+    this.valid[field] = valid;
+  }
+
+  isInvalid(field: string): void {
+    let invalid: boolean = false;
+    let invalidMaxlength: boolean = false;
+    if (((this.config[field].required && Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.model[field]))) &&
+      !(field === 'countryID' && this.config[field].required && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
+      invalid = true;
+    } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
+      invalid = true;
+      invalidMaxlength = true;
+    }
+    this.invalid[field] = invalid;
+    this.invalidMaxlength[field] = invalidMaxlength;
+  }
+
+  onInput(event: Event, field: string): void {
+    this.isInvalid(field);
+    this.isValid(field);
+    if (event) {
+      this.change.emit({ value: this.model[field], field: field });
+    }
+  }
+
+  isFocused(event: Event, field: string): void {
+    this.focused[field] = true;
+    this.focus.emit({ event, field });
+  }
+
+  isBlurred(event: Event, field: string): void {
+    this.focused[field] = false;
+    this.blur.emit({ event, field });
+  }
+
+  onCountryChange(evt) {
+    let country: any = evt;
+    let field: any;
+    if (this.config.countryID.pickerConfig) {
+      field = this.config.countryID.pickerConfig.field;
+    }
+    if (country && field && !Helpers.isBlank(country[field])) {
+      this.model.countryID = country[field];
+      this.model.countryName = Helpers.interpolate(this.config.countryID.pickerConfig.format, evt);
+      this.disabled.state = false;
+    } else if (Helpers.isBlank(country)) {
+      this.model.countryID = undefined;
+      this.model.countryName = undefined;
+      this.disabled.state = true;
+      this.invalid.state = false;
     }
 
-    initConfig(): void {
-        this.fieldList.forEach(((field: string) => {
-            if (!this.config.hasOwnProperty(field)) {
-                this.config[field] = {
-                    hidden: true,
-                };
-            }
-            if (!this.config[field].hasOwnProperty('label')) {
-                this.config[field].label = this.labels[field];
-            }
-            if (this.config.required) {
-                this.config[field].required = true;
-            }
-            if (field === 'countryID') {
-                if (!this.config[field].pickerConfig) {
-                    this.config.countryID.pickerConfig = this.getDefaultCountryConfig();
-                }
-                this.config[field].pickerConfig.defaultOptions = this.config.countryID.pickerConfig.options;
-            }
-            if (field === 'state') {
-                if (!this.config[field].pickerConfig) {
-                    this.config.state.pickerConfig = this.getDefaultStateConfig();
-                    this.config[field].pickerConfig.defaultOptions = this.config[field].pickerConfig.options;
-                }
-                this.stateOptions = this.config[field].pickerConfig.options;
-                this.config[field].pickerConfig.options = (query) => {
-                    return this.stateOptions(this.model.countryID, query);
-                };
-                this.config[field].pickerConfig.defaultOptions = this.stateOptions;
-            }
-        }));
-    }
+    // Update state
+    this.model.state = undefined;
+    this.updateControl();
+    this.updateStates();
+    this.onInput(null, 'countryID');
+  }
 
-    isValid(field: string): void {
-        let valid: boolean = true;
-        if (((this.config[field].required && Helpers.isEmpty(this.model[field])) || !this.config[field].required) &&
-            !(field === 'countryID' && this.config[field].required && !Helpers.isEmpty(this.model.countryName))) {
-            valid = false;
-        } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
-            valid = false;
-        }
-        this.valid[field] = valid;
-    }
+  onStateChange(evt) {
+    let state: any = evt && evt.value ? evt.value : null;
+    // if (state) {
+    this.model.state = evt;
+    this.updateControl();
+    this.onInput(null, 'state');
+    // }
+  }
 
-    isInvalid(field: string): void {
-        let invalid: boolean = false;
-        let invalidMaxlength: boolean = false;
-        if (((this.config[field].required && Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.model[field]))) &&
-            !(field === 'countryID' && this.config[field].required && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
-            invalid = true;
-        } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
-            invalid = true;
-            invalidMaxlength = true;
-        }
-        this.invalid[field] = invalid;
-        this.invalidMaxlength[field] = invalidMaxlength;
-    }
-
-    onInput(event: Event, field: string): void {
-        this.isInvalid(field);
-        this.isValid(field);
-        if (event) {
-            this.change.emit({ value: this.model[field], field: field });
-        }
-    }
-
-    isFocused(event: Event, field: string): void {
-        this.focused[field] = true;
-        this.focus.emit({ event, field });
-    }
-
-    isBlurred(event: Event, field: string): void {
-        this.focused[field] = false;
-        this.blur.emit({ event, field });
-    }
-
-    onCountryChange(evt) {
-        let country: any = evt;
-        let field: any;
-        if (this.config.countryID.pickerConfig) {
-            field = this.config.countryID.pickerConfig.field;
-        }
-        if (country && field && !Helpers.isBlank(country[field])) {
-            this.model.countryID = country[field];
-            this.model.countryName = Helpers.interpolate(this.config.countryID.pickerConfig.format, evt);
-            this.disabled.state = false;
-        } else if (Helpers.isBlank(country)) {
-            this.model.countryID = undefined;
-            this.model.countryName = undefined;
-            this.disabled.state = true;
-            this.invalid.state = false;
-        }
-
-        // Update state
-        this.model.state = undefined;
-        this.updateControl();
-        this.updateStates();
-        this.onInput(null, 'countryID');
-    }
-
-    onStateChange(evt) {
-        let state: any = evt && evt.value ? evt.value : null;
-        if (state) {
-            this.model.state = evt;
-            this.updateControl();
-            this.onInput(null, 'state');
-        }
-    }
-
-    updateStates() {
-        if (this.config.state.pickerConfig.options && !Helpers.isBlank(this.model.countryID)) {
-            this.config.state.pickerConfig.options = (query) => {
-                return this.stateOptions(this.model.countryID, query);
-            };
-            this.stateOptions(this.model.countryID).then((results) => {
-                if (results.length) {
-                    this.config.state.pickerConfig.defaultOptions = results;
-                    this.disabled.state = false;
-                } else {
-                    this.disabled.state = true;;
-                    if (this.config.state.required) {
-                        this.valid.state = true;
-                    }
-                }
-            });
-        }
-        else {
-            this.config.state.pickerConfig.defaultOptions = [];
-        }
-    }
-
-    getStateOptions(countryID: number, filter?: string): any[] {
-        if (countryID) {
-            const country: any = findByCountryId(countryID);
-            const states: any[] = getStates(country.name);
-            if (filter) {
-                return states.filter((name) => new RegExp(`${filter}`, 'gi').test(name));
-            }
-            return states;
+  updateStates() {
+    if (this.config.state.pickerConfig.options && !Helpers.isBlank(this.model.countryID)) {
+      this.config.state.pickerConfig.options = (query) => {
+        return this.stateOptions(this.model.countryID, query);
+      };
+      this.stateOptions(this.model.countryID).then((results) => {
+        if (results.length) {
+          this.config.state.pickerConfig.defaultOptions = results;
+          this.disabled.state = false;
         } else {
-            return [];
+          this.disabled.state = true;
+          if (this.config.state.required) {
+            this.valid.state = true;
+          }
         }
+      });
     }
-
-    updateControl() {
-        this.onModelChange(this.model);
+    else {
+      this.config.state.pickerConfig.defaultOptions = [];
+      this.disabled.state = false;
+      if (this.config.state.required) {
+        this.valid.state = false;
+      }
     }
+  }
 
-    writeValue(model: any): void {
-        if (model) {
-            let countryName;
-            if (model.countryName) {
-                countryName = model.countryName;
-            } else if (model.countryID) {
-                if (this.config.countryID.pickerConfig &&
-                    this.config.countryID.pickerConfig.getLabels) {
-                    if (Helpers.isFunction(this.config.countryID.pickerConfig.getLabels)) {
-                        let promise: any = this.config.countryID.pickerConfig.getLabels(model.countryID);
-                        if (promise.then) {
-                            promise.then((result: any) => {
-                                countryName = result;
-                                this.model = Object.assign(model, { countryName: countryName });
-                                this.updateStates();
-                            });
-                        }
-                    }
-                }
+  getStateOptions(countryID: number, filter?: string): any[] {
+    if (countryID) {
+      const country: any = findByCountryId(countryID);
+      const states: any[] = getStates(countryID);
+      if (filter) {
+        return states.filter((name) => new RegExp(`${filter}`, 'gi').test(name));
+      }
+      return states;
+    } else {
+      return [];
+    }
+  }
+
+  updateControl() {
+    this.onModelChange(this.model);
+  }
+
+  writeValue(model: any): void {
+    if (model) {
+      let countryName;
+      if (model.countryName) {
+        countryName = model.countryName;
+      } else if (model.countryID) {
+        if (this.config.countryID.pickerConfig &&
+          this.config.countryID.pickerConfig.getLabels) {
+          if (Helpers.isFunction(this.config.countryID.pickerConfig.getLabels)) {
+            let promise: any = this.config.countryID.pickerConfig.getLabels(model.countryID);
+            if (promise.then) {
+              promise.then((result: any) => {
+                countryName = Helpers.interpolateWithFallback(this.config.countryID.pickerConfig.format, result);
+                this.model = Object.assign(model, { countryName });
+                this.updateStates();
+              });
             }
-            if (countryName) {
-                countryName = countryName.trim();
-                model.state = model.state || '';
-                this.model = Object.assign(model, { countryName: countryName });
-            } else {
-                this.model = model;
-            }
-            this.updateStates();
+          }
         }
-        this.fieldList.forEach((field: string) => {
-            this.onInput(null, field);
+      }
+      if (countryName) {
+        countryName = countryName.trim();
+        model.state = model.state || '';
+        this.model = Object.assign(model, { countryName: countryName });
+      } else {
+        this.model = model;
+      }
+      this.updateStates();
+    }
+    this.fieldList.forEach((field: string) => {
+      this.onInput(null, field);
+    });
+  }
+
+  registerOnChange(fn: Function): void {
+    this.onModelChange = fn;
+  }
+
+  registerOnTouched(fn: Function): void {
+    this.onModelTouched = fn;
+  }
+
+  private getDefaultStateConfig(): any {
+    return {
+      field: 'value',
+      format: '$label',
+      options: (countryID, query) => {
+        return Promise.resolve(this.getStateOptions(countryID, query));
+      }
+    };
+  }
+
+  private getDefaultCountryConfig(): any {
+    return {
+      field: 'value',
+      format: '$label',
+      options: (query: string = '') => {
+        return new Promise((resolve: any) => {
+          let countries: any = getCountries();
+          if (query) {
+            countries = countries.filter((country) => new RegExp(`${query}`, 'gi').test(country.name));
+          }
+          return resolve(countries);
         });
-    }
-
-    registerOnChange(fn: Function): void {
-        this.onModelChange = fn;
-    }
-
-    registerOnTouched(fn: Function): void {
-        this.onModelTouched = fn;
-    }
-
-    private getDefaultStateConfig(): any {
-        return {
-            field: 'name',
-            format: '$name',
-            options: (countryID, query) => {
-                return Promise.resolve(this.getStateOptions(countryID, query));
-            }
-        };
-    }
-
-    private getDefaultCountryConfig(): any {
-        return {
-            field: 'id',
-            format: '$name',
-            options: (query: string = '') => {
-                return new Promise((resolve: any) => {
-                    let countries: any = getCountries();
-                    if (query) {
-                        countries = countries.filter((country) => new RegExp(`${query}`, 'gi').test(country.name));
-                    }
-                    return resolve(countries);
-                });
-            },
-            getLabels: (countryID) => {
-                return new Promise((resolve: any) => {
-                    let country: any = findByCountryId(countryID);
-                    if (country) {
-                        resolve(country.name);
-                    } else {
-                        resolve('');
-                    }
-                });
-            },
-        };
-    }
+      },
+      getLabels: (countryID) => {
+        return new Promise((resolve: any) => {
+          let country: any = findByCountryId(countryID);
+          if (country) {
+            resolve(country.name);
+          } else {
+            resolve('');
+          }
+        });
+      },
+    };
+  }
 }
