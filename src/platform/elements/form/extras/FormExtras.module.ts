@@ -13,9 +13,10 @@ import { NovoAddressElement } from './address/Address';
 import { NovoCheckboxElement } from './checkbox/Checkbox';
 import { NovoCheckListElement } from './checkbox/CheckList';
 import { NovoFileInputElement } from './file/FileInput';
+import { NovoTooltipModule } from './../../tooltip/Tooltip.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NovoPipesModule, NovoButtonModule, NovoSelectModule, NovoPickerModule, NovoLoadingModule, NovoDragulaModule],
+  imports: [CommonModule, FormsModule, NovoPipesModule, NovoButtonModule, NovoSelectModule, NovoPickerModule, NovoLoadingModule, NovoDragulaModule, NovoTooltipModule],
   declarations: [NovoAddressElement, NovoCheckboxElement, NovoCheckListElement, NovoFileInputElement],
   exports: [NovoAddressElement, NovoCheckboxElement, NovoCheckListElement, NovoFileInputElement]
 })

@@ -58,12 +58,12 @@ export interface NovoAddressConfig {
             </i>
             <input [class.maxlength-error]="invalidMaxlength.city" type="text" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [maxlength]="config?.city?.maxlength" [(ngModel)]="model.city" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'city')" (blur)="isBlurred($event, 'city')" (input)="onInput($event, 'city')"/>
         </span>
-        <span *ngIf="!config?.state?.hidden" class="state region" [class.invalid]="invalid.state" [class.focus]="focused.state" [class.disabled]="disabled.state">
+        <span *ngIf="!config?.state?.hidden" class="state region" [class.invalid]="invalid.state" [class.focus]="focused.state" [class.disabled]="disabled.state"  [tooltip]="tooltip.state">
             <i *ngIf="config.state.required"
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.state, 'bhi-check': valid.state}">
             </i>
-            <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (select)="onStateChange($event)" (changed)="onStateChange($event)" autocomplete="shipping region" [(ngModel)]="model.state"></novo-picker>
+            <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (select)="onStateChange($event)" (changed)="onStateChange($event)" autocomplete="shipping region" [(ngModel)]="model.state" [disablePickerInput]="disabled.state"></novo-picker>
         </span>
         <span *ngIf="!config?.zip?.hidden" class="zip postal-code" [class.invalid]="invalid.zip" [class.focus]="focused.zip" [class.disabled]="disabled.zip">
             <i *ngIf="config.zip.required"
@@ -97,6 +97,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   invalidMaxlength: any = {};
   valid: any = {};
   stateOptions: any;
+  tooltip: any = {};
   @Output() change: EventEmitter<any> = new EventEmitter();
   @Output() focus: EventEmitter<any> = new EventEmitter();
   @Output() blur: EventEmitter<any> = new EventEmitter();
@@ -115,6 +116,9 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       this.model = {};
     }
     this.initConfig();
+    if (Helpers.isBlank(this.model.countryID)) {
+      this.updateStates();
+    }
   }
 
   initConfig(): void {
@@ -203,10 +207,12 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       this.model.countryID = country[field];
       this.model.countryName = Helpers.interpolate(this.config.countryID.pickerConfig.format, evt);
       this.disabled.state = false;
+      this.tooltip.state = undefined;
     } else if (Helpers.isBlank(country)) {
       this.model.countryID = undefined;
       this.model.countryName = undefined;
       this.disabled.state = true;
+      this.tooltip.state = this.labels.selectCountryFirst;
       this.invalid.state = false;
     }
 
@@ -235,8 +241,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         if (results.length) {
           this.config.state.pickerConfig.defaultOptions = results;
           this.disabled.state = false;
+          this.tooltip.state = undefined;
         } else {
           this.disabled.state = true;
+          this.tooltip.state = this.labels.noStatesForCountry;
           if (this.config.state.required) {
             this.valid.state = true;
           }
@@ -245,7 +253,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     }
     else {
       this.config.state.pickerConfig.defaultOptions = [];
-      this.disabled.state = false;
+      this.disabled.state = true;
+      this.tooltip.state = this.labels.selectCountryFirst;
       if (this.config.state.required) {
         this.valid.state = false;
       }
