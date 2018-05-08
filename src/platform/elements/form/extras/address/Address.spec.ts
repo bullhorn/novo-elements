@@ -6,6 +6,7 @@ import { NovoAddressElement } from './Address';
 import { NovoSelectModule } from '../../../select/Select.module';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoPickerModule } from '../../../picker/Picker.module';
+import { NovoTooltipModule } from './../../../tooltip/Tooltip.module';
 
 describe('Elements: NovoAddressElement', () => {
   let fixture;
@@ -14,7 +15,7 @@ describe('Elements: NovoAddressElement', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NovoAddressElement],
-      imports: [FormsModule, NovoSelectModule, NovoPickerModule],
+      imports: [FormsModule, NovoSelectModule, NovoPickerModule, NovoTooltipModule],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoAddressElement);
