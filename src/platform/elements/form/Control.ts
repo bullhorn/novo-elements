@@ -334,13 +334,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   ngOnInit() {
-    // Make sure to initially format the time controls
-    if (this.control && this.form.controls[this.control.key].value) {
-      if (this.form.controls[this.control.key].controlType === 'textbox' || this.form.controls[this.control.key].controlType === 'text-area') {
-        this.characterCount = this.form.controls[this.control.key].value.length;
-      }
-    }
-    // this.maxLenghtCount = form.controls[control.key].maxlength;
+    this.setInitialCharacterCount();
     if (this.control) {
       // Listen to clear events
       this.forceClearSubscription = this.control.forceClear.subscribe(() => {
@@ -483,6 +477,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   handleFocus(event: FocusEvent, field) {
     this._focused = true;
     this.focusedField = field;
+    this.setInitialCharacterCount();
     if (!Helpers.isBlank(this.characterCountField) && this.characterCountField === field) {
       this.showCount = true;
     } else if (this.form.controls[this.control.key].controlType === 'address' &&
@@ -603,6 +598,14 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         this.maxLengthMetErrorfields.push(data.field);
       } else {
         this.maxLengthMetErrorfields = this.maxLengthMetErrorfields.filter((field: string) => field !== data.field);
+      }
+    }
+  }
+
+  private setInitialCharacterCount() {
+    if (this.control && this.form.controls[this.control.key].value) {
+      if (this.form.controls[this.control.key].controlType === 'textbox' || this.form.controls[this.control.key].controlType === 'text-area') {
+        this.characterCount = this.form.controls[this.control.key].value.length;
       }
     }
   }

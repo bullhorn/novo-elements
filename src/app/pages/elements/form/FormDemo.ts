@@ -104,7 +104,8 @@ export class FormDemoComponent {
   private UpdatingFormDemoTpl: string = UpdatingFormDemoTpl;
   private AddressControlDemoTpl: string = AddressControlDemoTpl;
   private quickNoteConfig: any;
-  private textControl: any;
+  private textControl: TextBoxControl;
+  private disabledTextControl: TextBoxControl;
   private emailControl: any;
   private numberControl: any;
   private currencyControl: any;
@@ -112,7 +113,7 @@ export class FormDemoComponent {
   private floatControl: any;
   private percentageControl: any;
   private quickNoteControl: any;
-  private textForm: any;
+  private textForm: NovoFormGroup;
   private checkControl: any;
   private textAreaControl: any;
   private checkListControl: any;
@@ -171,7 +172,8 @@ export class FormDemoComponent {
       },
     };
     // Text-based Controls
-    this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox', readOnly: true, value: 'HI', required: true });
+    this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox', readOnly: false, value: '', required: true, maxlength: 30 });
+    this.disabledTextControl = new TextBoxControl({ key: 'disabledText', label: 'Disabled Text Box', tooltip: 'Textbox', readOnly: true, value: 'Disabled Text Control', required: true, maxlength: 30 });
     this.textAreaControl = new TextAreaControl({
       key: 'textarea',
       label: 'Text Area',
@@ -187,6 +189,7 @@ export class FormDemoComponent {
     this.aceEditorControl = new AceEditorControl({ key: 'ace', label: 'CODE', value: 'var i = 0;' });
     this.textForm = formUtils.toFormGroup([
       this.textControl,
+      this.disabledTextControl,
       this.emailControl,
       this.textAreaControl,
       this.numberControl,
@@ -196,6 +199,22 @@ export class FormDemoComponent {
       this.quickNoteControl,
       this.aceEditorControl,
     ]);
+
+    // Test text field character count when set after initialization
+    setTimeout(() => {
+      this.textForm.setValue({
+        text: 'Initial Value',
+        disabledText: this.textForm.value.disabledText,
+        textarea: this.textForm.value.textarea,
+        email: this.textForm.value.email,
+        number: this.textForm.value.number,
+        currency: this.textForm.value.currency,
+        float: this.textForm.value.float,
+        percentage: this.textForm.value.percentage,
+        note: this.textForm.value.note,
+        ace: this.textForm.value.ace,
+      });
+    }, 2000);
 
     // Check box controls
     this.checkControl = new CheckboxControl({ key: 'check', label: 'Checkbox' });
