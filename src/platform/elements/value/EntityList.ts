@@ -10,7 +10,7 @@ import { Component, Input, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } 
                 <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render : meta }}
             </a>
             <span *ngIf="!entity.isLinkable">
-                {{ entity | render : meta }}
+                <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render : meta }}
             </span>
         </div>
     `
