@@ -85,7 +85,7 @@ describe('Elements: NovoAddressElement', () => {
           }
         }
       };
-      component.onCountryChange({ label: 'US' });
+      component.onCountryChange({ rawValue: { label: 'US' } });
       expect(component.model.countryID).toEqual('US');
     });
     it('should set model.country when country is cleared out', () => {
