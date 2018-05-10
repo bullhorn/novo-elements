@@ -9,10 +9,10 @@ import { Component, Input, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } 
             <a *ngIf="entity.isLinkable" (click)="openLink(entity)">
                 <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render : meta }}
             </a>
-            <span *ngIf="!entity.isLinkable && entity.personSubType">
+            <span *ngIf="!entity.isLinkable && entity.personSubtype">
                 <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render : meta }}
             </span>
-            <span *ngIf="!entity.isLinkable && !entity.personSubType">
+            <span *ngIf="!entity.isLinkable && !entity.personSubtype">
                 {{ entity | render : meta }}
             </span>
         </div>

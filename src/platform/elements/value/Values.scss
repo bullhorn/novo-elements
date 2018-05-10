@@ -39,7 +39,7 @@ novo-value {
         .entity {
             padding-top: 6px;
             padding-bottom: 6px;
-            font-size: 1em;
+            font-size: 1.15em;
         }
         @each $entity,
         $color in $entity-colors {
@@ -48,7 +48,7 @@ novo-value {
             }
         }
         i {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin-right: 6px;
         }
     }
