@@ -58,7 +58,7 @@ const PICKER_VALUE_ACCESSOR = {
             (focus)="onFocus($event)"
             (click)="onFocus($event)"
             (blur)="onTouched($event)"
-            autocomplete="off" #input 
+            autocomplete="off" #input
             [disabled]="disablePickerInput"/>
         <i class="bhi-search" *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput"></i>
         <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
@@ -201,9 +201,12 @@ export class NovoPickerElement implements OnInit {
         return;
       }
 
-      if (event.keyCode === KeyCodes.BACKSPACE && !Helpers.isBlank(this._value)) {
+      if ((event.keyCode === KeyCodes.BACKSPACE || event.keyCode === KeyCodes.DELETE) && !Helpers.isBlank(this._value)) {
         this.clearValue(false);
         this.closePanel();
+      }
+      if (event.keyCode === KeyCodes.DELETE && Helpers.isBlank(this._value)) {
+        this.clearValue(true);
       }
     }
   }
