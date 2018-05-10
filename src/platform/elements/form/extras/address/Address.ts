@@ -200,26 +200,33 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   onCountryChange(evt) {
     let country: any = evt && evt.rawValue ? evt.rawValue : null;
     let field: any;
+    let statesUpdatable: boolean = false;
     if (this.config.countryID.pickerConfig) {
       field = this.config.countryID.pickerConfig.field;
     }
-    if (country && field && !Helpers.isBlank(country[field])) {
+    if (country && field &&
+      !Helpers.isBlank(country[field]) &&
+      this.model.countryID !== country[field]) {
       this.model.countryID = country[field];
       this.model.countryName = Helpers.interpolate(this.config.countryID.pickerConfig.format, country);
       this.disabled.state = false;
       this.tooltip.state = undefined;
+      statesUpdatable = true;
     } else if (Helpers.isBlank(country) || Helpers.isBlank(country[field])) {
       this.model.countryID = undefined;
       this.model.countryName = undefined;
       this.disabled.state = true;
       this.tooltip.state = this.labels.selectCountryFirst;
       this.invalid.state = false;
+      statesUpdatable = true;
     }
 
     // Update state
-    this.model.state = undefined;
+    if (statesUpdatable) {
+      this.model.state = undefined;
+      this.updateStates();
+    }
     this.updateControl();
-    this.updateStates();
     this.onInput(null, 'countryID');
   }
 

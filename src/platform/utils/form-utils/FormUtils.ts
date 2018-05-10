@@ -248,7 +248,7 @@ export class FormUtils {
         controlConfig.dateFormat = field.dateFormat;
         controlConfig.textMaskEnabled = field.textMaskEnabled;
         controlConfig.allowInvalidDate = field.allowInvalidDate;
-        controlConfig.military = config ? !!config.military : false;        
+        controlConfig.military = config ? !!config.military : false;
         control = new DateControl(controlConfig);
         break;
       case 'time':
@@ -328,8 +328,18 @@ export class FormUtils {
               controlConfig.value[subfield.name] = 1;
             }
             if (subfield.name === 'state' || subfield.name === 'countryID') {
+              if (subfield.name === 'state') {
+                subfield.optionsType = 'State';
+
+              } else if (subfield.name === 'countryID') {
+                subfield.optionsType = 'Country';
+              }
+              if (!subfield.optionsUrl) {
+                subfield.optionsUrl = '';
+              }
               controlConfig.config[subfield.name].pickerConfig = this.getControlOptions(subfield, http, config);
             }
+
           }
         }
         controlConfig.isEmpty = this.isAddressEmpty;
