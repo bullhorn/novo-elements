@@ -211,7 +211,9 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             this.model.countryName = Helpers.interpolate(this.config.countryID.pickerConfig.format, country);
             this.disabled.state = false;
             this.tooltip.state = undefined;
-            this.isInvalid('state');
+            if (this.config.state.required) {
+                this.invalid.state = true;
+            }
             statesUpdatable = true;
         } else if (Helpers.isBlank(country) || Helpers.isBlank(country[field])) {
             this.model.countryID = undefined;

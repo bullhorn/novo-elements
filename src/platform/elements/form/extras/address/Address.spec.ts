@@ -71,7 +71,6 @@ describe('Elements: NovoAddressElement', () => {
   describe('Method: onCountryChange()', () => {
     beforeEach(() => {
       spyOn(component, 'updateStates');
-      spyOn(component, 'isInvalid');
       component.model = {};
     });
     it('should be defined.', () => {
