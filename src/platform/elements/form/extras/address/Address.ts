@@ -213,6 +213,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             this.tooltip.state = undefined;
             if (this.config.state.required) {
                 this.invalid.state = true;
+            } else {
+                this.invalid.state = false;
             }
             statesUpdatable = true;
         } else if (Helpers.isBlank(country) || Helpers.isBlank(country[field])) {

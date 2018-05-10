@@ -78,6 +78,9 @@ describe('Elements: NovoAddressElement', () => {
     });
     it('should set model.country when country is set', () => {
       component.config = {
+        state: {
+          required: true
+        },
         countryID: {
           pickerConfig: {
             field: 'label',
