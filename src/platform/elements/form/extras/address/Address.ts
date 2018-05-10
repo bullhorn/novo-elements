@@ -198,14 +198,14 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   }
 
   onCountryChange(evt) {
-    let country: any = evt;
+    let country: any = evt && evt.rawValue ? evt.rawValue : null;
     let field: any;
     if (this.config.countryID.pickerConfig) {
       field = this.config.countryID.pickerConfig.field;
     }
     if (country && field && !Helpers.isBlank(country[field])) {
       this.model.countryID = country[field];
-      this.model.countryName = Helpers.interpolate(this.config.countryID.pickerConfig.format, evt);
+      this.model.countryName = Helpers.interpolate(this.config.countryID.pickerConfig.format, country);
       this.disabled.state = false;
       this.tooltip.state = undefined;
     } else if (Helpers.isBlank(country)) {
@@ -225,7 +225,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
   onStateChange(evt) {
     let state: any = evt && evt.value ? evt.value : null;
-    this.model.state = evt;
+    this.model.state = state;
     this.updateControl();
     this.onInput(null, 'state');
   }
