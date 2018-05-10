@@ -353,14 +353,10 @@ export class FormDemoComponent {
             field: 'value',
             format: '$label',
             options: (query, countryID) => {
-              return new Promise((resolve, reject) => {
-                resolve(this.getStateOptions(query, countryID));
-              });
+              return Promise.resolve(this.getStateOptions(query, countryID));
             },
             getLabels: (value: number) => {
-              return new Promise((resolve, reject) => {
-                resolve(this.getStateLabel(value));
-              });
+              return Promise.resolve(this.getStateLabel(value));
             }
           }
         },
@@ -370,14 +366,10 @@ export class FormDemoComponent {
             field: 'value',
             format: '$label',
             options: (query) => {
-              return new Promise((resolve, reject) => {
-                resolve(this.getCountryOptions(query));
-              });
+              return Promise.resolve(this.getCountryOptions(query));
             },
             getLabels: (value: number) => {
-              return new Promise((resolve, reject) => {
-                resolve(findByCountryId(value));
-              });
+              return Promise.resolve(findByCountryId(value));
             }
           }
         },
