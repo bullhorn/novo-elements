@@ -352,9 +352,9 @@ export class FormDemoComponent {
           pickerConfig: {
             field: 'value',
             format: '$label',
-            options: (countryID, query) => {
+            options: (query, countryID) => {
               return new Promise((resolve, reject) => {
-                resolve(this.getStateOptions(countryID, query));
+                resolve(this.getStateOptions(query, countryID));
               });
             },
             getLabels: (value: number) => {
@@ -513,7 +513,7 @@ export class FormDemoComponent {
     console.log('This is an upload Action!', files); // tslint:disable-line
   }
 
-  getStateOptions(countryID: number, filter?: string): any[] {
+  getStateOptions(filter: string = '', countryID: number): any[] {
     let states: any[] = this.states;
     if (countryID) {
       states = states.filter((state: any) => state.countryId === countryID);

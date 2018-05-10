@@ -146,8 +146,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
                     this.config[field].pickerConfig.defaultOptions = this.config[field].pickerConfig.options;
                 }
                 this.stateOptions = this.config[field].pickerConfig.options;
-                this.config[field].pickerConfig.options = (query) => {
-                    return this.stateOptions(this.model.countryID, query);
+                this.config[field].pickerConfig.options = (query = '') => {
+                    return this.stateOptions(query, this.model.countryID);
                 };
                 this.config[field].pickerConfig.defaultOptions = this.stateOptions;
             }
@@ -239,10 +239,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
     updateStates() {
         if (this.config.state.pickerConfig.options && !Helpers.isBlank(this.model.countryID)) {
-            this.config.state.pickerConfig.options = (query) => {
-                return this.stateOptions(this.model.countryID, query);
+            this.config.state.pickerConfig.options = (query = '') => {
+                return this.stateOptions(query, this.model.countryID);
             };
-            this.stateOptions(this.model.countryID).then((results) => {
+            this.stateOptions('', this.model.countryID).then((results) => {
                 if (results.length) {
                     this.config.state.pickerConfig.defaultOptions = results;
                     this.disabled.state = false;
@@ -269,7 +269,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         }
     }
 
-    getStateOptions(countryID: number, filter?: string): any[] {
+    getStateOptions(filter: string = '', countryID: number): any[] {
         if (countryID) {
             const country: any = findByCountryId(countryID);
             const states: any[] = getStates(countryID);
@@ -332,8 +332,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         return {
             field: 'value',
             format: '$label',
-            options: (countryID, query) => {
-                return Promise.resolve(this.getStateOptions(countryID, query));
+            options: (query = '', countryID) => {
+                return Promise.resolve(this.getStateOptions(query, countryID));
             }
         };
     }
