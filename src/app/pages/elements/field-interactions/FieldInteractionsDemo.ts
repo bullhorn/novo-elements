@@ -17,6 +17,7 @@ let GlobalsTpl = require('./templates/Globals.html');
 let AsyncTpl = require('./templates/Async.html');
 let ConfirmTpl = require('./templates/Confirm.html');
 let AddingRemovingTpl = require('./templates/AddingRemoving.html');
+let TooltipTpl = require('./templates/Tooltip.html');
 import { MockMeta, MockMetaHeaders } from './MockMeta';
 
 const template = `
@@ -89,6 +90,7 @@ const template = `
             <novo-tab><span>Async Interactions</span></novo-tab>
             <novo-tab><span>Confirm Changes</span></novo-tab>
             <novo-tab><span>Adding / Removing Fields</span></novo-tab>
+            <novo-tab><span>Add Tooltip</span></novo-tab>
         </novo-nav>
 
         <novo-nav-outlet #api>
@@ -159,6 +161,12 @@ const template = `
                 <div class="example field-interaction-demo">${AddingRemovingTpl}</div>
                 <multi-code-snippet [code]="snippets.addingRemoving"></multi-code-snippet>
             </novo-nav-content>
+            <novo-nav-content>
+                <h5>Add Tooltip</h5>
+                <p>You are able to dynamically change a field's tooltip.</p>
+                <div class="example field-interaction-demo">${TooltipTpl}</div>
+                <multi-code-snippet [code]="snippets.tooltip"></multi-code-snippet>
+            </novo-nav-content>
         </novo-nav-outlet>
     </main>
 </div>
@@ -181,6 +189,7 @@ export class FieldInteractionsDemoComponent {
     public AsyncTpl: any = AsyncTpl;
     public ConfirmTpl: any = ConfirmTpl;
     public AddingRemovingTpl: any = AddingRemovingTpl;
+    public TooltipTpl: any = TooltipTpl;
 
     public forms: any = {};
     public controls: any = {
@@ -194,7 +203,8 @@ export class FieldInteractionsDemoComponent {
         globals: {},
         async: {},
         confirm: {},
-        addingRemoving: {}
+        addingRemoving: {},
+        tooltip: {}
     };
     public snippets: any = {
         validation: {},
@@ -411,6 +421,11 @@ export class FieldInteractionsDemoComponent {
                     label: 'This field will be removed'
                 }, FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD);
             }
+        }
+
+        let tooltipFunction = (API: FieldInteractionApi) => {
+            console.log('[FieldInteractionDemo] - tooltipFunction'); // tslint:disable-line
+            API.setTooltip(API.getActiveKey(), API.getActiveValue());
         }
 
         // Validation Field Interactions
@@ -679,6 +694,17 @@ export class FieldInteractionsDemoComponent {
         ];
         this.forms.addingRemoving = formUtils.toFormGroupFromFieldset(this.controls.addingRemoving);
 
+        // Tooltip Field Interactions
+        this.controls.tooltip.tooltipControl = new TextBoxControl({
+            type: 'text',
+            key: 'toolTipValue',
+            label: 'Tooltip',
+            description: 'I will add a tooltip to this control as a value is typed',
+            interactions: [
+                { event: 'change', script: tooltipFunction }
+            ]
+        });
+        this.forms.tooltip = formUtils.toFormGroup([this.controls.tooltip.tooltipControl]);
 
         // Snippets
         this.snippets.validation = {
@@ -931,5 +957,14 @@ export class FieldInteractionsDemoComponent {
 }
         `
         };
+
+        this.snippets.tooltip = {
+            'Template': TooltipTpl,
+            'Field Interaction Script (change)': `
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - tooltipFunction'); // tslint:disable-line
+    API.setTooltip(API.getActiveKey(), API.getActiveValue());
+}`
+            };
     }
 }

@@ -1,0 +1,8 @@
+<novo-form [form]="forms.tooltip" layout="vertical">
+  <div class="novo-form-row">
+      <novo-control [form]="forms.tooltip" [control]="controls.tooltip.tooltipControl"></novo-control>
+  </div>
+</novo-form>
+<div class="final-value">Form Value - {{ forms.tooltip.value | json }}</div>
+<div class="final-value">Form Dirty - {{ forms.tooltip.dirty | json }}</div>
+<div class="final-value">Is Form Valid? - {{ forms.tooltip.valid | json }}</div>
