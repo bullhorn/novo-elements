@@ -308,6 +308,13 @@ export class FieldInteractionApi {
         }
     }
 
+    public setTooltip(key: string, tooltip: string): void {
+        let control = this.getControl(key);
+        if (control) {
+            control.tooltip = tooltip;
+        }
+    }
+
     public confirmChanges(key: string, message?: string): Promise<boolean> {
         let history = this.getProperty(key, 'valueHistory');
         let oldValue = history[history.length - 2];
