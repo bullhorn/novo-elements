@@ -961,9 +961,10 @@ export class FieldInteractionsDemoComponent {
         this.snippets.tooltip = {
             'Template': TooltipTpl,
             'Field Interaction Script (change)': `
-            (API: FieldInteractionApi) => {
-                console.log('[FieldInteractionDemo] - tooltipFunction'); // tslint:disable-line
-                API.setTooltip(API.getActiveKey(), API.getActiveValue());`
+(API: FieldInteractionApi) => {
+    console.log('[FieldInteractionDemo] - tooltipFunction'); // tslint:disable-line
+    API.setTooltip(API.getActiveKey(), API.getActiveValue());
+}`
             };
     }
 }
