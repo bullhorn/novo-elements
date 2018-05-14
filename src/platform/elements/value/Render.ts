@@ -202,6 +202,7 @@ export class RenderPipe implements PipeTransform {
             case 'Address1':
             case 'AddressWithoutCountry':
                 let country: any = findByCountryId(Number(value.countryName));
+                text = '';
                 if (value.address1 || value.address2) {
                     text += `
                         ${value.address1 || ''}
