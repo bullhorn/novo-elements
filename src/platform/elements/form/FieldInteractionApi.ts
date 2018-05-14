@@ -154,7 +154,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setValue(value, options);
-            this.form.triggerEvent({controlKey: key, prop: 'value', value: value });
+            this.triggerEvent({controlKey: key, prop: 'value', value: value });
         }
     }
 
@@ -167,7 +167,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setValue(value, options);
-            this.form.triggerEvent({controlKey: key, prop: 'value', value: value });
+            this.triggerEvent({controlKey: key, prop: 'value', value: value });
         }
     }
 
@@ -175,7 +175,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setReadOnly(isReadOnly);
-            this.form.triggerEvent({controlKey: key, prop: 'readOnly', value: isReadOnly });
+            this.triggerEvent({controlKey: key, prop: 'readOnly', value: isReadOnly });
         }
     }
 
@@ -183,7 +183,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setRequired(required);
-            this.form.triggerEvent({controlKey: key, prop: 'hidden', value: true });
+            this.triggerEvent({controlKey: key, prop: 'hidden', value: true });
         }
     }
 
@@ -192,7 +192,7 @@ export class FieldInteractionApi {
         if (control) {
             control.hide(clearValue);
             this.disable(key, { emitEvent: false });
-            this.form.triggerEvent({controlKey: key, prop: 'hidden', value: true });
+            this.triggerEvent({controlKey: key, prop: 'hidden', value: true });
         }
     }
 
@@ -201,7 +201,7 @@ export class FieldInteractionApi {
         if (control) {
             control.show();
             this.enable(key, { emitEvent: false });
-            this.form.triggerEvent({controlKey: key, prop: 'hidden', value: false });
+            this.triggerEvent({controlKey: key, prop: 'hidden', value: false });
         }
     }
 
@@ -212,7 +212,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.disable(options);
-            this.form.triggerEvent({controlKey: key, prop: 'readOnly', value: false });
+            this.triggerEvent({controlKey: key, prop: 'readOnly', value: false });
         }
     }
 
@@ -223,7 +223,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.enable(options);
-            this.form.triggerEvent({controlKey: key, prop: 'readOnly', value: true });
+            this.triggerEvent({controlKey: key, prop: 'readOnly', value: true });
         }
     }
 
@@ -314,7 +314,7 @@ export class FieldInteractionApi {
                 icon: icon,
                 button: allowDismiss
             };
-            this.form.triggerEvent({controlKey: key, prop: 'tipWell', value: tip });
+            this.triggerEvent({controlKey: key, prop: 'tipWell', value: tip });
         }
     }
 
@@ -322,7 +322,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.tooltip = tooltip;
-            this.form.triggerEvent({controlKey: key, prop: 'tooltip', value: tooltip });
+            this.triggerEvent({controlKey: key, prop: 'tooltip', value: tooltip });
         }
     }
 
@@ -349,7 +349,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control[prop] = value;
-            this.form.triggerEvent({controlKey: key, prop: prop, value: value });
+            this.triggerEvent({controlKey: key, prop: prop, value: value });
         }
     }
 
@@ -398,7 +398,7 @@ export class FieldInteractionApi {
                 }
                 this.setProperty(key, 'options', [...currentOptions, optionToAdd]);
             }
-            this.form.triggerEvent({controlKey: key, prop: 'options', value: [...currentOptions, optionToAdd] });
+            this.triggerEvent({controlKey: key, prop: 'options', value: [...currentOptions, optionToAdd] });
         }
     }
 
@@ -448,7 +448,7 @@ export class FieldInteractionApi {
                 }
                 this.setProperty(key, 'options', [...currentOptions]);
             }
-            this.form.triggerEvent({controlKey: key, prop: 'options', value: control.options });
+            this.triggerEvent({controlKey: key, prop: 'options', value: control.options });
         }
     }
 
@@ -491,7 +491,7 @@ export class FieldInteractionApi {
                 newConfig.options = [...config.options];
             }
             this.setProperty(key, 'config', newConfig);
-            this.form.triggerEvent({controlKey: key, prop: 'pickerConfig', value: config });
+            this.triggerEvent({controlKey: key, prop: 'pickerConfig', value: config });
         }
     }
 
@@ -517,7 +517,7 @@ export class FieldInteractionApi {
                     this.setProperty(key, 'tipWell', null);
                 }
             }
-            this.form.triggerEvent({controlKey: key, prop: 'loading', value: loading });
+            this.triggerEvent({controlKey: key, prop: 'loading', value: loading });
         }
     }
 
@@ -582,7 +582,7 @@ export class FieldInteractionApi {
                 let formControl = new NovoFormControl(initialValue, novoControl);
                 this.form.addControl(novoControl.key, formControl);
                 this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 0, novoControl);
-                this.form.triggerEvent({controlKey: key, prop: 'addControl', value: formControl });
+                this.triggerEvent({controlKey: key, prop: 'addControl', value: formControl });
             }
         }
     }
@@ -609,7 +609,7 @@ export class FieldInteractionApi {
             if (fieldsetIndex !== -1 && controlIndex !== -1) {
                 this.form.removeControl(key);
                 this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 1);
-                this.form.triggerEvent({controlKey: key, prop: 'removeControl', value: key });
+                this.triggerEvent({controlKey: key, prop: 'removeControl', value: key });
             }
         }
     }
