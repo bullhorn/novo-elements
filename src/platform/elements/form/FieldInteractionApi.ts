@@ -13,6 +13,7 @@ import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModal
 import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { IFieldInteractionEvent} from './FormInterfaces';
 
 @Injectable()
 export class FieldInteractionApi {
@@ -153,7 +154,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setValue(value, options);
-            this.form.novoConfigChange.emit({value: value});
+            this.form.triggerEvent({controlKey: key, prop: 'value', value: value });
         }
     }
 
@@ -166,6 +167,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setValue(value, options);
+            this.form.triggerEvent({controlKey: key, prop: 'value', value: value });
         }
     }
 
@@ -173,7 +175,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setReadOnly(isReadOnly);
-            this.form.novoConfigChange.emit({readOnly: isReadOnly});
+            this.form.triggerEvent({controlKey: key, prop: 'readOnly', value: isReadOnly });
         }
     }
 
@@ -181,7 +183,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setRequired(required);
-            this.form.novoConfigChange.emit({required: required});
+            this.form.triggerEvent({controlKey: key, prop: 'hidden', value: true });
         }
     }
 
@@ -190,7 +192,7 @@ export class FieldInteractionApi {
         if (control) {
             control.hide(clearValue);
             this.disable(key, { emitEvent: false });
-            this.form.novoConfigChange.emit({hidden: true});
+            this.form.triggerEvent({controlKey: key, prop: 'hidden', value: true });
         }
     }
 
@@ -199,7 +201,7 @@ export class FieldInteractionApi {
         if (control) {
             control.show();
             this.enable(key, { emitEvent: false });
-            this.form.novoConfigChange.emit({hidden: false});
+            this.form.triggerEvent({controlKey: key, prop: 'hidden', value: false });
         }
     }
 
@@ -210,7 +212,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.disable(options);
-            this.form.novoConfigChange.emit({readOnly: true});
+            this.form.triggerEvent({controlKey: key, prop: 'readOnly', value: false });
         }
     }
 
@@ -221,7 +223,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.enable(options);
-            this.form.novoConfigChange.emit({readOnly: false});
+            this.form.triggerEvent({controlKey: key, prop: 'readOnly', value: true });
         }
     }
 
@@ -312,14 +314,15 @@ export class FieldInteractionApi {
                 icon: icon,
                 button: allowDismiss
             };
+            this.form.triggerEvent({controlKey: key, prop: 'tipWell', value: tip });
         }
     }
 
     public setTooltip(key: string, tooltip: string): void {
         let control = this.getControl(key);
         if (control) {
-            control.setTooltip(tooltip);
-            this.form.novoConfigChange.emit({tooltip: tooltip});
+            control.tooltip = tooltip;
+            this.form.triggerEvent({controlKey: key, prop: 'tooltip', value: tooltip });
         }
     }
 
@@ -346,7 +349,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control[prop] = value;
-            this.form.novoConfigChange.emit({prop: value});
+            this.form.triggerEvent({controlKey: key, prop: prop, value: value });
         }
     }
 
@@ -395,6 +398,7 @@ export class FieldInteractionApi {
                 }
                 this.setProperty(key, 'options', [...currentOptions, optionToAdd]);
             }
+            this.form.triggerEvent({controlKey: key, prop: 'options', value: [...currentOptions, optionToAdd] });
         }
     }
 
@@ -444,6 +448,7 @@ export class FieldInteractionApi {
                 }
                 this.setProperty(key, 'options', [...currentOptions]);
             }
+            this.form.triggerEvent({controlKey: key, prop: 'options', value: control.options });
         }
     }
 
@@ -486,6 +491,7 @@ export class FieldInteractionApi {
                 newConfig.options = [...config.options];
             }
             this.setProperty(key, 'config', newConfig);
+            this.form.triggerEvent({controlKey: key, prop: 'pickerConfig', value: config });
         }
     }
 
@@ -511,6 +517,7 @@ export class FieldInteractionApi {
                     this.setProperty(key, 'tipWell', null);
                 }
             }
+            this.form.triggerEvent({controlKey: key, prop: 'loading', value: loading });
         }
     }
 
@@ -575,6 +582,7 @@ export class FieldInteractionApi {
                 let formControl = new NovoFormControl(initialValue, novoControl);
                 this.form.addControl(novoControl.key, formControl);
                 this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 0, novoControl);
+                this.form.triggerEvent({controlKey: key, prop: 'addControl', value: formControl });
             }
         }
     }
@@ -601,6 +609,7 @@ export class FieldInteractionApi {
             if (fieldsetIndex !== -1 && controlIndex !== -1) {
                 this.form.removeControl(key);
                 this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 1);
+                this.form.triggerEvent({controlKey: key, prop: 'removeControl', value: key });
             }
         }
     }
@@ -609,5 +618,11 @@ export class FieldInteractionApi {
         let h: any;
         clearTimeout(h);
         h = setTimeout(() => func(), wait);
+    }
+
+    private triggerEvent(event: IFieldInteractionEvent): void {
+        if (this.form && this.form.fieldInteractionEvents) {
+            this.form.fieldInteractionEvents.emit(event);
+          }
     }
 }

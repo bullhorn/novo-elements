@@ -5,6 +5,7 @@ import { EventEmitter, Output } from '@angular/core';
 import { NovoControlConfig } from './FormControls';
 import { Helpers } from '../../utils/Helpers';
 import { Observable } from 'rxjs/Observable';
+import { IFieldInteractionEvent } from './FormInterfaces';
 
 export class NovoFormControl extends FormControl {
     displayValueChanges: EventEmitter<any> = new EventEmitter<any>();
@@ -185,15 +186,6 @@ export class NovoFormControl extends FormControl {
             this.enable();
         }
     }
-
-    /**
-     * sets the `tooltip` property on the control
-     * @name setTooltip
-     * @param tooltip 
-     */
-    public setTooltip(tooltip: string): void {
-        this.tooltip = tooltip;
-    }
     
     /**
      * @name markAsInvalid
@@ -208,7 +200,7 @@ export class NovoFormControl extends FormControl {
 
 
 export class NovoFormGroup extends FormGroup {
-    @Output() public novoConfigChange: EventEmitter<any> = new EventEmitter();
+    public fieldInteractionEvents : EventEmitter<IFieldInteractionEvent> = new EventEmitter();
     public layout: string;
     public edit: boolean;
     public currentEntity: string;
