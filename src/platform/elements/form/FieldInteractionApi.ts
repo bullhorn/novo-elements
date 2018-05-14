@@ -311,7 +311,7 @@ export class FieldInteractionApi {
     public setTooltip(key: string, tooltip: string): void {
         let control = this.getControl(key);
         if (control) {
-            control.tooltip = tooltip;
+            control.setTooltip(tooltip);
         }
     }
 

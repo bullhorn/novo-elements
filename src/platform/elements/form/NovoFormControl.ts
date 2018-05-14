@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 // APP
 import { NovoControlConfig } from './FormControls';
 import { Helpers } from '../../utils/Helpers';
+import { Observable } from 'rxjs/Observable';
 
 export class NovoFormControl extends FormControl {
     displayValueChanges: EventEmitter<any> = new EventEmitter<any>();
@@ -48,8 +49,10 @@ export class NovoFormControl extends FormControl {
         button?: boolean;
     };
     rawValue?: any;
+    public readonly tooltipChanges: Observable<any>;
 
     private historyTimeout: any;
+    
 
     constructor(value: any, control: NovoControlConfig) {
         super(value, control.validators, control.asyncValidators);
@@ -99,6 +102,7 @@ export class NovoFormControl extends FormControl {
         } else {
             this.enable();
         }
+        this.initCustomObservable();
     }
 
     /**
@@ -185,6 +189,16 @@ export class NovoFormControl extends FormControl {
     }
 
     /**
+     * sets the `tooltip` property on the control
+     * @name setTooltip
+     * @param tooltip 
+     */
+    public setTooltip(tooltip: string): void {
+        this.tooltip = tooltip;
+        (this.tooltipChanges as EventEmitter<string>).emit(this.tooltip);
+    }
+    
+    /**
      * @name markAsInvalid
      * @param message
      */
@@ -193,7 +207,12 @@ export class NovoFormControl extends FormControl {
         this.markAsTouched();
         this.setErrors(Object.assign({}, this.errors, { custom: message }));
     }
+
+    private initCustomObservable(): void {
+        (this as{tooltipChanges: Observable<any>}).tooltipChanges = new EventEmitter();
+      }
 }
+
 
 export class NovoFormGroup extends FormGroup {
     public layout: string;
