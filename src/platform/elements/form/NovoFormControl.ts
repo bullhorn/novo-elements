@@ -1,6 +1,6 @@
 // NG2
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Output } from '@angular/core';
 // APP
 import { NovoControlConfig } from './FormControls';
 import { Helpers } from '../../utils/Helpers';
@@ -49,7 +49,6 @@ export class NovoFormControl extends FormControl {
         button?: boolean;
     };
     rawValue?: any;
-    public readonly tooltipChanges: Observable<any>;
 
     private historyTimeout: any;
     
@@ -102,7 +101,6 @@ export class NovoFormControl extends FormControl {
         } else {
             this.enable();
         }
-        this.initCustomObservable();
     }
 
     /**
@@ -195,7 +193,6 @@ export class NovoFormControl extends FormControl {
      */
     public setTooltip(tooltip: string): void {
         this.tooltip = tooltip;
-        (this.tooltipChanges as EventEmitter<string>).emit(this.tooltip);
     }
     
     /**
@@ -207,14 +204,11 @@ export class NovoFormControl extends FormControl {
         this.markAsTouched();
         this.setErrors(Object.assign({}, this.errors, { custom: message }));
     }
-
-    private initCustomObservable(): void {
-        (this as{tooltipChanges: Observable<any>}).tooltipChanges = new EventEmitter();
-      }
 }
 
 
 export class NovoFormGroup extends FormGroup {
+    @Output() public novoConfigChange: EventEmitter<any> = new EventEmitter();
     public layout: string;
     public edit: boolean;
     public currentEntity: string;

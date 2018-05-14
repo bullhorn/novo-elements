@@ -153,6 +153,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setValue(value, options);
+            this.form.novoConfigChange.emit({value: value});
         }
     }
 
@@ -172,6 +173,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setReadOnly(isReadOnly);
+            this.form.novoConfigChange.emit({readOnly: isReadOnly});
         }
     }
 
@@ -179,6 +181,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setRequired(required);
+            this.form.novoConfigChange.emit({required: required});
         }
     }
 
@@ -187,6 +190,7 @@ export class FieldInteractionApi {
         if (control) {
             control.hide(clearValue);
             this.disable(key, { emitEvent: false });
+            this.form.novoConfigChange.emit({hidden: true});
         }
     }
 
@@ -195,6 +199,7 @@ export class FieldInteractionApi {
         if (control) {
             control.show();
             this.enable(key, { emitEvent: false });
+            this.form.novoConfigChange.emit({hidden: false});
         }
     }
 
@@ -205,6 +210,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.disable(options);
+            this.form.novoConfigChange.emit({readOnly: true});
         }
     }
 
@@ -215,6 +221,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.enable(options);
+            this.form.novoConfigChange.emit({readOnly: false});
         }
     }
 
@@ -312,6 +319,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setTooltip(tooltip);
+            this.form.novoConfigChange.emit({tooltip: tooltip});
         }
     }
 
@@ -338,6 +346,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control[prop] = value;
+            this.form.novoConfigChange.emit({prop: value});
         }
     }
 
