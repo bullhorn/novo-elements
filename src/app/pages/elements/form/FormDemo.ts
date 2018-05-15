@@ -117,6 +117,7 @@ export class FormDemoComponent {
   private textAreaControl: any;
   private checkListControl: any;
   private tilesControl: any;
+  private disabledTilesControl: any;
   private checkForm: any;
   private fileControl: any;
   private multiFileControl: any;
@@ -201,7 +202,8 @@ export class FormDemoComponent {
     this.checkControl = new CheckboxControl({ key: 'check', label: 'Checkbox' });
     this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'], tooltip: 'CheckList', tooltipPosition: 'Top' });
     this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }], tooltip: 'Tiles' });
-    this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl]);
+    this.disabledTilesControl = new TilesControl({ key: 'disabledTiles', label: 'Disabled Tiles', readOnly: true, options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }], tooltip: 'Tiles' });
+    this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl, this.disabledTilesControl]);
 
     // Picker controls
     this.singlePickerControl = new PickerControl({ key: 'singlePicker', label: 'Single', config: { options: ['One', 'Two', 'Three'] } });
