@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 // APP
 import { NovoControlConfig } from './FormControls';
 import { Helpers } from '../../utils/Helpers';
+import { IFieldInteractionEvent } from './FormInterfaces';
 
 export class NovoFormControl extends FormControl {
     displayValueChanges: EventEmitter<any> = new EventEmitter<any>();
@@ -50,6 +51,7 @@ export class NovoFormControl extends FormControl {
     rawValue?: any;
 
     private historyTimeout: any;
+
 
     constructor(value: any, control: NovoControlConfig) {
         super(value, control.validators, control.asyncValidators);
@@ -195,7 +197,9 @@ export class NovoFormControl extends FormControl {
     }
 }
 
+
 export class NovoFormGroup extends FormGroup {
+    public fieldInteractionEvents : EventEmitter<IFieldInteractionEvent> = new EventEmitter();
     public layout: string;
     public edit: boolean;
     public currentEntity: string;
