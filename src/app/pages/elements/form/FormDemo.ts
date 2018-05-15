@@ -201,7 +201,7 @@ export class FormDemoComponent {
     // Check box controls
     this.checkControl = new CheckboxControl({ key: 'check', label: 'Checkbox' });
     this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'], tooltip: 'CheckList', tooltipPosition: 'Top' });
-    this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }], tooltip: 'Tiles' });
+    this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }, { value: 'disabled', label: 'Disabled', disabled: true }], tooltip: 'Tiles' });
     this.disabledTilesControl = new TilesControl({ key: 'disabledTiles', label: 'Disabled Tiles', readOnly: true, options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }], tooltip: 'Tiles' });
     this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl, this.disabledTilesControl]);
 
