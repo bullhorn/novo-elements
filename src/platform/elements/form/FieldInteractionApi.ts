@@ -183,7 +183,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.setRequired(required);
-            this.triggerEvent({controlKey: key, prop: 'hidden', value: true });
+            this.triggerEvent({controlKey: key, prop: 'required', value: required });
         }
     }
 
