@@ -1,10 +1,9 @@
 // NG2
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { EventEmitter, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 // APP
 import { NovoControlConfig } from './FormControls';
 import { Helpers } from '../../utils/Helpers';
-import { Observable } from 'rxjs/Observable';
 import { IFieldInteractionEvent } from './FormInterfaces';
 
 export class NovoFormControl extends FormControl {
@@ -52,7 +51,7 @@ export class NovoFormControl extends FormControl {
     rawValue?: any;
 
     private historyTimeout: any;
-    
+
 
     constructor(value: any, control: NovoControlConfig) {
         super(value, control.validators, control.asyncValidators);
@@ -186,7 +185,7 @@ export class NovoFormControl extends FormControl {
             this.enable();
         }
     }
-    
+
     /**
      * @name markAsInvalid
      * @param message
