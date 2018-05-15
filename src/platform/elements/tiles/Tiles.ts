@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, SimpleChanges, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, AfterContentInit, OnChanges, ChangeDetectorRef, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, Input, SimpleChanges, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, AfterContentInit, OnChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
@@ -39,8 +39,8 @@ const TILES_VALUE_ACCESSOR = {
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTilesElement implements ControlValueAccessor, OnInit, AfterContentInit, OnChanges {
-    @Input() name: string;
+export class NovoTilesElement implements ControlValueAccessor, AfterContentInit, OnChanges {
+    @Input() name: string = new Date().getTime().toString();
     @Input() options: any;
     @Input() required: boolean;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
@@ -50,7 +50,6 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, AfterCont
     public activeTile: any = null;
     public state: String = 'inactive';
     public focused: boolean = false;
-    static uniqueID: number = 0;
 
     model: any;
     onModelChange: Function = () => {
@@ -63,13 +62,6 @@ export class NovoTilesElement implements ControlValueAccessor, OnInit, AfterCont
 
     public setFocus(focus: boolean): void {
         this.focused = focus;
-    }
-
-    ngOnInit() {
-      if (!this.name) {
-        this.name = NovoTilesElement.uniqueID.toString();
-        NovoTilesElement.uniqueID++;
-      }
     }
 
     ngAfterContentInit() {
