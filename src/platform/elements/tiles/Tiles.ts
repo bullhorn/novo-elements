@@ -137,18 +137,12 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
             let ind = this.element.nativeElement.querySelector('.active-indicator');
             let el = this.element.nativeElement.querySelector('.tile.active');
             if (ind && el) {
-                let w = el.clientWidth;
-                let left = el.offsetLeft;
-
-                // These style adjustments need to occur in this order.
-                setTimeout(() => {
-                    ind.style.width = `${w + 4}px`;
-                    ind.style.left = `${left - 2}px`;
-                    setTimeout(() => {
-                        this.state = 'active';
-                        this.ref.markForCheck();
-                    });
-                });
+                let w: number = el.clientWidth;
+                let left: number = el.offsetLeft - el.offsetTop; // Removes the border width that Firefox adds without affecting other browsers
+                ind.style.width = `calc(${w}px + 0.32em)`;
+                ind.style.left = `${left}px`;
+                this.state = 'active';
+                this.ref.markForCheck();
             }
         });
     }
