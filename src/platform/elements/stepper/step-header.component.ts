@@ -3,16 +3,12 @@ import {FocusMonitor} from '@angular/cdk/a11y';
 import {coerceBooleanProperty, coerceNumberProperty} from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
   OnDestroy,
-  ViewEncapsulation,
   TemplateRef,
-  HostBinding,
 } from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
 import {NovoStepLabel} from './step-label.component';
 
 @Component({
@@ -23,7 +19,6 @@ import {NovoStepLabel} from './step-label.component';
     'class': 'novo-step-header',
     'role': 'tab',
   },
-  // encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -61,7 +56,7 @@ export class NovoStepHeader implements OnDestroy {
 
   /** Whether the given step label is active. */
   get touched(): boolean { return this.selected || this.state === 'edit' || this.state === 'done'  }
-  
+
   /** Whether the given step is optional. */
   @Input()
   get optional(): boolean { return this._optional; }
@@ -70,8 +65,7 @@ export class NovoStepHeader implements OnDestroy {
 
   constructor(
     private _focusMonitor: FocusMonitor,
-    private _element: ElementRef,
-    changeDetectorRef: ChangeDetectorRef) {
+    private _element: ElementRef) {
     _focusMonitor.monitor(_element.nativeElement, true);
   }
 

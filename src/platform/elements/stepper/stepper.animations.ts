@@ -6,8 +6,8 @@ import {
     trigger,
     AnimationTriggerMetadata,
   } from '@angular/animations';
-  
-  /** Animations used by the Material steppers. */
+
+  /** Animations used by the Novo steppers. */
   export const novoStepperAnimations: {
     readonly horizontalStepTransition: AnimationTriggerMetadata;
     readonly verticalStepTransition: AnimationTriggerMetadata;
@@ -19,7 +19,7 @@ import {
       state('next', style({transform: 'translate3d(100%, 0, 0)', visibility: 'hidden'})),
       transition('* => *', animate('500ms cubic-bezier(0.35, 0, 0.25, 1)'))
     ]),
-  
+
     /** Animation that transitions the step along the Y axis in a vertical stepper. */
     verticalStepTransition: trigger('stepTransition', [
       state('previous', style({height: '0px', visibility: 'hidden'})),

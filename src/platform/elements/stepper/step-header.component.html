@@ -1,22 +1,11 @@
 <div [class.novo-step-icon]="touched"
      [class.novo-step-icon-not-touched]="!touched">
-
   <ng-container *ngIf="icon">
     <novo-icon size="small" raised="true" [theme]="theme">{{icon}}</novo-icon>
   </ng-container>
   <ng-container *ngIf="!icon">
     <span class="novo-step-number">{{index + 1}}</span>
   </ng-container>
-
-  <!-- <ng-container *ngSwitchCase="'edit'" [ngSwitch]="!!(iconOverrides && iconOverrides.edit)">
-    <ng-container *ngSwitchCase="true" [ngTemplateOutlet]="iconOverrides.edit"></ng-container>
-    <novo-icon [theme]="theme" *ngSwitchDefault>edit</novo-icon>
-  </ng-container>
-
-  <ng-container *ngSwitchCase="'done'" [ngSwitch]="!!(iconOverrides && iconOverrides.done)">
-    <ng-container *ngSwitchCase="true" [ngTemplateOutlet]="iconOverrides.done"></ng-container>
-    <novo-icon [theme]="theme" *ngSwitchDefault>check</novo-icon>
-  </ng-container> -->
 </div>
 <div class="novo-step-label"
      [class.novo-step-label-active]="active"
@@ -26,7 +15,5 @@
   </ng-container>
   <!-- It there is no label template, fall back to the text label. -->
   <div class="novo-step-text-label" *ngIf="_stringLabel()">{{label}}</div>
-<!-- 
-  <div class="novo-step-optional" *ngIf="optional">{{_intl.optionalLabel}}</div> -->
 </div>
 <novo-step-status [state]="state"></novo-step-status>

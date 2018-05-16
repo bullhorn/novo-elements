@@ -1,11 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
 import { CdkStep, CdkStepper } from '@angular/cdk/stepper';
 import { Directionality } from '@angular/cdk/bidi';
 import {
@@ -18,36 +10,32 @@ import {
   forwardRef,
   Inject,
   QueryList,
-  SkipSelf,
   ViewChildren,
-  ViewEncapsulation,
   ChangeDetectorRef,
   ChangeDetectionStrategy,
   Optional,
   TemplateRef,
   Input,
 } from '@angular/core';
+
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
-// import { ErrorStateMatcher } from '@angular/material/core';
 import { NovoStepHeader } from './step-header.component';
 import { NovoStepLabel } from './step-label.component';
 import { takeUntil } from 'rxjs/operators/takeUntil';
 import { novoStepperAnimations } from './stepper.animations';
 import { NovoIconComponent } from '../icon/Icon';
 
-/** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoStep = CdkStep;
 export const _NovoStepper = CdkStepper;
 
 @Component({
   selector: 'novo-step',
   templateUrl: 'step.component.html',
-  // encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoStep extends CdkStep {
-  /** Content for step label given by `<ng-template matStepLabel>`. */
+  /** Content for step label given by `<ng-template novoStepLabel>`. */
   @ContentChild(NovoStepLabel) stepLabel: NovoStepLabel;
 
   @Input() theme: string;
@@ -58,7 +46,6 @@ export class NovoStep extends CdkStep {
     super(stepper);
   }
 }
-
 
 @Directive({
   selector: '[novoStepper]'
@@ -87,18 +74,6 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   }
 
   ngAfterContentInit() {
-    const icons = this._icons.toArray();
-    const editOverride = icons.find(icon => icon.name === 'edit');
-    const doneOverride = icons.find(icon => icon.name === 'done');
-  
-    // if (editOverride) {
-    //   this._iconOverrides.edit = editOverride.templateRef;
-    // }
-
-    // if (doneOverride) {
-    //   this._iconOverrides.done = doneOverride.templateRef;
-    // }
-
     // Mark the component for change detection whenever the content children query changes
     this._steps.changes.pipe(takeUntil(this._destroyed)).subscribe(() => this._stateChanged());
   }
@@ -115,7 +90,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   }
 
   getIndicatorType(index: number): 'none' | '' | 'edit' | 'done' {
-    let steps = this._steps.toArray();    
+    let steps = this._steps.toArray();
     if( index === this.selectedIndex ) {
       if(steps[index] && index===steps.length-1 && steps[index].completed ) {
         return 'done';
@@ -145,7 +120,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoHorizontalStepper extends NovoStepper { 
+export class NovoHorizontalStepper extends NovoStepper {
   @Input() selectedIndex: number;
 }
 
@@ -160,7 +135,6 @@ export class NovoHorizontalStepper extends NovoStepper {
   },
   animations: [novoStepperAnimations.verticalStepTransition],
   providers: [{ provide: NovoStepper, useExisting: NovoVerticalStepper }],
-  // encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

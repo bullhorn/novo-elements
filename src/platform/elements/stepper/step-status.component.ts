@@ -1,17 +1,10 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  ElementRef,
   Input,
-  OnDestroy,
-  ViewEncapsulation,
-  TemplateRef,
-  HostBinding,
   Inject,
   forwardRef
 } from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
 import {NovoStepper} from './stepper.component';
 import {NovoStepHeader} from './step-header.component';
 
@@ -27,7 +20,7 @@ import {NovoStepHeader} from './step-header.component';
 })
 export class NovoStepStatus {
   @Input() state: string;
-  
+
   constructor(@Inject(forwardRef(() => NovoStepper)) stepper: NovoStepper, @Inject(forwardRef(() => NovoStepHeader)) step: NovoStepHeader) {
   }
 }
