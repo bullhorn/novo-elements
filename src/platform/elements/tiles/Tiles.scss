@@ -15,7 +15,6 @@ novo-tiles {
   & > .tile-container {
     display: inline-block; //height: calc(2.5em + 4px);
     text-align: center;
-    background-color: #f4f4f4;
     border: $border-properties;
     border-radius: 3px;
     position: relative;
@@ -68,7 +67,6 @@ novo-tiles {
     width: 100%;
     opacity: 0;
     z-index: 0;
-    background: white;
     border: solid $border-width $positive;
     border-radius: 3px;
     transition: all 140ms ease-in-out;
