@@ -65,7 +65,7 @@ export const DEFAULT_OVERLAY_SCROLL_STRATEGY_PROVIDER: any = {
     </ng-template>
   `,
 })
-export class NovoOverlayTemplate implements OnDestroy {
+export class NovoOverlayTemplateComponent implements OnDestroy {
   public id: string = `novo-overlay-${Date.now()}`;
 
   /** @docs-private */

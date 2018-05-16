@@ -8,7 +8,7 @@ import * as dateFns from 'date-fns';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';	
 // App
 import { NovoDatePickerElement } from './DatePicker';
-import { NovoOverlayTemplate } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 
@@ -50,7 +50,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @Input() textMaskEnabled: boolean = true;
   @Input() allowInvalidDate: boolean = false;
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
+  @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
   constructor(
     public element: ElementRef, 

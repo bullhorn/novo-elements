@@ -5,7 +5,7 @@ import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 // APP
-import { NovoOverlayTemplate } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
@@ -52,7 +52,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     _onTouched = () => { };
 
     /** Element for the panel containing the autocomplete options. */
-    @ViewChild(NovoOverlayTemplate) overlay: any;
+    @ViewChild(NovoOverlayTemplateComponent) overlay: any;
     @ViewChild('input') input: any;
 
     private debounceSearchChange: any;
