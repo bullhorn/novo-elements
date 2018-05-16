@@ -40,7 +40,7 @@ const TILES_VALUE_ACCESSOR = {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTilesElement implements ControlValueAccessor, AfterContentInit, OnChanges {
-    @Input() name: string;
+    @Input() name: string = new Date().getTime().toString();
     @Input() options: any;
     @Input() required: boolean;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
