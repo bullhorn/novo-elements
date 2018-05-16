@@ -212,7 +212,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.disable(options);
-            this.triggerEvent({controlKey: key, prop: 'readOnly', value: false });
+            this.triggerEvent({controlKey: key, prop: 'readOnly', value: true });
         }
     }
 
@@ -223,7 +223,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.enable(options);
-            this.triggerEvent({controlKey: key, prop: 'readOnly', value: true });
+            this.triggerEvent({controlKey: key, prop: 'readOnly', value: false });
         }
     }
 
