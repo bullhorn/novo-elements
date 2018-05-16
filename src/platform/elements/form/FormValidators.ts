@@ -51,6 +51,7 @@ export class FormValidators {
               !Helpers.isBlank(control.value.countryName) && Helpers.isEmpty(control.value.countryName))) {
             valid = false;
             if (subfield === 'state' && valid === false &&
+              !Helpers.isBlank(control.value.countryName) &&
               control.config.state.pickerConfig &&
               control.config.state.pickerConfig.defaultOptions &&
               control.config.state.pickerConfig.defaultOptions.length === 0) {
@@ -64,6 +65,7 @@ export class FormValidators {
             (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
               Helpers.isEmpty(control.value.countryName))) &&
             !(subfield === 'state' &&
+              !Helpers.isBlank(control.value.countryName) &&
               control.config.state.pickerConfig &&
               control.config.state.pickerConfig.defaultOptions &&
               control.config.state.pickerConfig.defaultOptions.length === 0)) {
