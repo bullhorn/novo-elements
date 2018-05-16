@@ -13,12 +13,11 @@ novo-tiles {
     position: absolute;
   }
   & > .tile-container {
-    display: inline-block; //height: calc(2.5em + 4px);
+    display: flex;
     text-align: center;
     border: $border-properties;
     border-radius: 3px;
     position: relative;
-    display: flex;
     cursor: pointer;
     align-items: center;
     .tile {
