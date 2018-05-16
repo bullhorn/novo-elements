@@ -1,6 +1,7 @@
 // NG2
-import { Component, Input, SimpleChanges, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, AfterContentInit, OnChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, SimpleChanges, Output, EventEmitter, forwardRef, ElementRef, AfterContentInit, OnChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 // APP
 import { Helpers } from '../../utils/Helpers';
 
@@ -142,12 +143,10 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
                 // These style adjustments need to occur in this order.
                 setTimeout(() => {
                     ind.style.width = `${w + 4}px`;
+                    ind.style.left = `${left - 2}px`;
                     setTimeout(() => {
-                        ind.style.transform = `translateX(${left}px)`;
-                        setTimeout(() => {
-                            this.state = 'active';
-                            this.ref.markForCheck();
-                        });
+                        this.state = 'active';
+                        this.ref.markForCheck();
                     });
                 });
             }
