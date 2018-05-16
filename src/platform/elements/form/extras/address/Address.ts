@@ -243,10 +243,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             if (this.config.state.required) {
                 this.valid.state = true;
             }
-            // this.model.state = undefined;
             this.model.state = state;
         } else {
-            // this.model.state = 'state';
             this.model.state = undefined;
             if (this.config.state.required) {
                 this.valid.state = false;
