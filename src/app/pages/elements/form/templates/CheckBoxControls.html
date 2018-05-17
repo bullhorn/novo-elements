@@ -9,5 +9,8 @@
     <div class="novo-form-row">
         <novo-control [form]="checkForm" [control]="tilesControl" (change)="onChange($event)"></novo-control>
     </div>
+    <div class="novo-form-row">
+        <novo-control [form]="checkForm" [control]="disabledTilesControl" (change)="onChange($event)"></novo-control>
+    </div>
 </novo-form>
 <div class="final-value">Value: {{checkForm.value | json}}</div>
