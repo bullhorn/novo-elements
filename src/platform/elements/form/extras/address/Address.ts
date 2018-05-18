@@ -258,8 +258,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         return this.stateOptions(query, this.model.countryID);
       };
       this.stateOptions('', this.model.countryID).then((results) => {
+        this.config.state.pickerConfig.defaultOptions = results;
         if (results.length) {
-          this.config.state.pickerConfig.defaultOptions = results;
           this.tooltip.state = undefined;
           this.disabled.state = false;
           this.setStateLabel(this.model);
