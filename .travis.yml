@@ -34,7 +34,6 @@ after_success:
   - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] ; then angular-cli-ghpages --dir="dist-ghpages" --repo="https://${SNAPSHOT_GIT_TOKEN}@github.com/bullhorn/novo-elements.git" --name="Sr. Travis" --email="hi@travis.org"; fi
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH = "master" && npm run galaxy -- $FIREBASE_URL $SLACK_WEB_HOOK $SLACK_CHANNEL
-  - test $TRAVIS_PULL_REQUEST = "false" && echo "not a pull request" || npm run analyze-mr -- $TRAVIS_PULL_REQUEST_BRANCH $FIREBASE_URL $SLACK_WEB_HOOK $SLACK_CHANNEL $GITHUB_API_KEY
   - test $TRAVIS_PULL_REQUEST == "false" && npm run snapshot-publish
 
 notifications:
