@@ -182,7 +182,9 @@ export class DataTableDemoComponent implements OnInit {
       label: 'ID',
       enabled: true,
       type: 'text',
-      filterable: true,
+      filterable: {
+        type: 'number',
+      },
       sortable: true,
     },
     {

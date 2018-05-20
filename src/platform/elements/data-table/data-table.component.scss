@@ -84,6 +84,12 @@ cdk-table {
   }
 }
 
+.novo-data-table-header-cell {
+  novo-dropdown {
+    z-index: 1001;
+  }
+}
+
 .novo-data-table-cell,
 .novo-data-table-header-cell {
   min-width: 200px;
