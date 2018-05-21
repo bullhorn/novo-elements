@@ -158,7 +158,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   isValid(field: string): void {
     let valid: boolean = true;
     if (((this.config[field].required &&
-      Helpers.isBlank(this.model[field])) ||
+      (Helpers.isBlank(this.model[field]) || Helpers.isEmpty(this.model[field]))) ||
       !this.config[field].required) &&
       !(field === 'countryID' &&
         this.config[field].required &&
