@@ -21,6 +21,7 @@ export interface NovoAddressSubfieldConfig {
   maxlength: number;
   pickerConfig?: any;
   hidden: boolean;
+  updated?: boolean;
 }
 
 export interface NovoAddressConfig {
@@ -156,8 +157,15 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
   isValid(field: string): void {
     let valid: boolean = true;
-    if (((this.config[field].required && Helpers.isEmpty(this.model[field])) || !this.config[field].required) &&
-      !(field === 'countryID' && this.config[field].required && !Helpers.isEmpty(this.model.countryName))) {
+    if (((this.config[field].required &&
+      Helpers.isBlank(this.model[field])) ||
+      !this.config[field].required) &&
+      !(field === 'countryID' &&
+        this.config[field].required &&
+        !Helpers.isBlank(this.model.countryName)) &&
+      !(field === 'state' &&
+        this.config[field].required &&
+        !Helpers.isBlank(this.model.state))) {
       valid = false;
     } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
       valid = false;
@@ -168,10 +176,21 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   isInvalid(field: string): void {
     let invalid: boolean = false;
     let invalidMaxlength: boolean = false;
-    if (((this.config[field].required && Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.model[field]))) &&
-      !(field === 'countryID' && this.config[field].required && !Helpers.isEmpty(this.model.countryName) && !Helpers.isBlank(this.model.countryName))) {
+    if (((this.config[field].required &&
+      Helpers.isEmpty(this.model[field]) &&
+      !Helpers.isBlank(this.model[field]))) ||
+      (field === 'countryID' &&
+        this.config[field].required &&
+        Helpers.isBlank(this.model.countryName) &&
+        this.config[field].updated) ||
+      (field === 'state' &&
+        this.config[field].required &&
+        Helpers.isBlank(this.model.state) &&
+        this.config[field].updated)) {
       invalid = true;
-    } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
+    } else if (!Helpers.isEmpty(this.model[field]) &&
+      !Helpers.isBlank(this.config[field].maxlength) &&
+      this.config[field].maxlength < this.model[field].length) {
       invalid = true;
       invalidMaxlength = true;
     }
@@ -201,6 +220,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     let country: any = evt && evt.rawValue ? evt.rawValue : null;
     let field: any;
     let statesUpdatable: boolean = false;
+    this.config.countryID.updated = true;
     if (this.config.countryID.pickerConfig) {
       field = this.config.countryID.pickerConfig.field;
     }
@@ -232,6 +252,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
   onStateChange(evt) {
     let state: any = evt && evt.value ? evt.value : null;
+    this.config.state.updated = true;
     this.model.state = state;
     this.updateControl();
     this.onInput(null, 'state');
