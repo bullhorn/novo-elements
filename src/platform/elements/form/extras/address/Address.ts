@@ -167,6 +167,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
                 this.config[field].required &&
                 (!Helpers.isBlank(this.model.state) ||
                     (Helpers.isBlank(this.model.state) &&
+                        !Helpers.isBlank(this.model.countryName) &&
                         this.config.state.pickerConfig &&
                         this.config.state.pickerConfig.defaultOptions &&
                         this.config.state.pickerConfig.defaultOptions.length === 0))
