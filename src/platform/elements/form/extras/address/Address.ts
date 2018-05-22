@@ -187,7 +187,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
                 this.config[field].required &&
                 Helpers.isBlank(this.model.state) &&
                 !Helpers.isBlank(this.model.countryName) &&
-                this.config[field].updated)) {
+                this.config[field].updated &&
+                this.config.state.pickerConfig &&
+                this.config.state.pickerConfig.defaultOptions &&
+                this.config.state.pickerConfig.defaultOptions.length > 0)) {
             invalid = true;
         } else if (!Helpers.isEmpty(this.model[field]) &&
             !Helpers.isBlank(this.config[field].maxlength) &&
@@ -246,10 +249,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         if (statesUpdatable) {
             this.model.state = undefined;
             this.updateStates();
-            this.onInput(null, 'state');
         }
         this.updateControl();
         this.onInput(null, 'countryID');
+        this.onInput(null, 'state');
     }
 
     onStateChange(evt) {
@@ -321,6 +324,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
 
     updateControl() {
         this.onModelChange(this.model);
+        this.onInput(null, 'countryID');
+        this.onInput(null, 'state');
     }
 
     writeValue(model: any): void {
