@@ -135,6 +135,7 @@ describe('Elements: NovoAddressElement', () => {
 
   describe('Method: updateControl()', () => {
     it('should be defined.', () => {
+      spyOn(component, 'onInput');
       expect(component.updateControl).toBeDefined();
       component.updateControl();
     });

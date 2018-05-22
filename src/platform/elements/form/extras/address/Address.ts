@@ -165,7 +165,12 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
                 !Helpers.isBlank(this.model.countryName)) &&
             !(field === 'state' &&
                 this.config[field].required &&
-                !Helpers.isBlank(this.model.state))) {
+                (!Helpers.isBlank(this.model.state) ||
+                    (Helpers.isBlank(this.model.state) &&
+                        this.config.state.pickerConfig &&
+                        this.config.state.pickerConfig.defaultOptions &&
+                        this.config.state.pickerConfig.defaultOptions.length === 0))
+            )) {
             valid = false;
         } else if (!Helpers.isEmpty(this.model[field]) && !Helpers.isBlank(this.config[field].maxlength) && this.config[field].maxlength < this.model[field].length) {
             valid = false;
