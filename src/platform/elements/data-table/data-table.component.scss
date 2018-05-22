@@ -6,6 +6,10 @@ $breakpoint: 1000px;
 cdk-table {
   display: block;
   flex: 1;
+  &.expandable {
+    width: fit-content;
+    min-width: 100%;
+  }
   &.empty {
     min-height: 62px;
     max-height: 62px;
@@ -14,6 +18,7 @@ cdk-table {
     .novo-data-table-cell,
     .novo-data-table-button-cell,
     .novo-data-table-dropdown-cell,
+    .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
       background-color: $table-bg-accent;
     }
@@ -21,15 +26,23 @@ cdk-table {
       .novo-data-table-cell,
       .novo-data-table-button-cell,
       .novo-data-table-dropdown-cell,
+      .novo-data-table-expand-cell,
       .novo-data-table-checkbox-cell {
         background-color: rgba($ocean, 0.15);
       }
+      + .novo-data-table-detail-row {
+        background-color: rgba($ocean, 0.15);
+      }
+    }
+    + .novo-data-table-detail-row {
+      background: $table-bg-accent;
     }
   }
   > .novo-data-table-row:nth-of-type(even) {
     .novo-data-table-cell,
     .novo-data-table-button-cell,
     .novo-data-table-dropdown-cell,
+    .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
       background-color: $white;
     }
@@ -37,9 +50,16 @@ cdk-table {
       .novo-data-table-cell,
       .novo-data-table-button-cell,
       .novo-data-table-dropdown-cell,
+      .novo-data-table-expand-cell,
       .novo-data-table-checkbox-cell {
         background-color: rgba($ocean, 0.15);
       }
+      + .novo-data-table-detail-row {
+        background-color: rgba($ocean, 0.15);
+      }
+    }
+    + .novo-data-table-detail-row {
+      background: $white;
     }
   }
 }
@@ -52,6 +72,21 @@ cdk-table {
   .novo-data-table-header-cell,
   .novo-data-table-checkbox-header-cell {
     border-bottom: 1px solid $off-white;
+  }
+  &.expanded {
+    i.bhi-next.data-table-icon {
+      cursor: pointer;
+      transition: all 0.1s;
+      &.expanded {
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+
+.novo-data-table-header-cell {
+  novo-dropdown {
+    z-index: 1001;
   }
 }
 
@@ -69,6 +104,7 @@ cdk-table {
     max-width: 180px;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
   novo-dropdown {
     display: inline-block;
@@ -79,6 +115,9 @@ cdk-table {
   &.clickable {
     cursor: pointer;
     color: $company;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -171,6 +210,21 @@ cdk-table {
     &.empty {
       min-width: 39px;
       max-width: 39px;
+    }
+  }
+}
+
+.novo-data-table-expand-header-cell,
+.novo-data-table-expand-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  i {
+    cursor: pointer;
+    transition: all 0.1s;
+    &.expanded {
+      transform: rotate(90deg);
     }
   }
 }

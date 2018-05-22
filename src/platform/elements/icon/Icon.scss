@@ -74,9 +74,9 @@ novo-icon {
             height: $large-icon-size;
         }
     }
-    &[raised] {
+    &[raised='true'] {
         i {
-            background-color: rgba(0, 0, 0, .25);
+            // background-color: rgba(0, 0, 0, .25);
             box-shadow: 2px 2px 0px rgba(0, 0, 0, .2);
         }
     }

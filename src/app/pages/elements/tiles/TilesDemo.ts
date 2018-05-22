@@ -35,6 +35,11 @@ export class TilesDemoComponent {
         {
             label: 'Green',
             value: 'green'
+        },
+        {
+            label: 'Disabled',
+            value: 'disabled',
+            disabled: true
         }
     ];
     private currentColor: string;

@@ -6,7 +6,7 @@ import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { TextMaskModule } from 'angular2-text-mask';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 // App
-import { NovoOverlayTemplate } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 import { DateFormatService } from '../../services/date-format/DateFormat';
@@ -45,7 +45,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     @Input() military: boolean = false;
     @Input() maskOptions: any;
     /** Element for the panel containing the autocomplete options. */
-    @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
+    @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
     constructor(
         public element: ElementRef,

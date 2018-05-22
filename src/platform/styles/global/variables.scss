@@ -36,6 +36,7 @@ $sendout: #747884;
 $placement: #0b344f;
 $note: #747884;
 $contract: #454ea0;
+$jobCode: #696d79;
 // Color Applications
 $positive: $ocean;
 $success: $grass;
@@ -82,6 +83,7 @@ $entity-colors: (
   user: $neutral,
   corporateuser: $neutral,
   contract: $contract
+  jobCode: $jobCode
 );
 // Generic Color Map
 $app-colors: (
@@ -116,6 +118,7 @@ $dark-colors: (
   contact: $contact,
   opportunity: $opportunity,
   job: $job,
+  jobCode: $jobCode,
   sendout: $sendout,
   placement: $placement,
   task: $neutral,

@@ -32,6 +32,7 @@ export { NovoValueModule } from './elements/value/Value.module';
 export { NovoTableMode } from './elements/table/Table';
 export { NovoIconModule } from './elements/icon/Icon.module';
 export { NovoExpansionModule } from './elements/expansion/expansion.module';
+export { NovoStepperModule } from './elements/stepper/stepper.module';
 export { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './elements/form/Form.module';
 export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';

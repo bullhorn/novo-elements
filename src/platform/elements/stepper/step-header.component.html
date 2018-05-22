@@ -1,0 +1,19 @@
+<div [class.novo-step-icon]="touched"
+     [class.novo-step-icon-not-touched]="!touched">
+  <ng-container *ngIf="icon">
+    <novo-icon size="small" raised="true" [theme]="theme">{{icon}}</novo-icon>
+  </ng-container>
+  <ng-container *ngIf="!icon">
+    <span class="novo-step-number">{{index + 1}}</span>
+  </ng-container>
+</div>
+<div class="novo-step-label"
+     [class.novo-step-label-active]="active"
+     [class.novo-step-label-selected]="selected">
+  <!-- If there is a label template, use it. -->
+  <ng-container *ngIf="_templateLabel()" [ngTemplateOutlet]="_templateLabel()!.template">
+  </ng-container>
+  <!-- It there is no label template, fall back to the text label. -->
+  <div class="novo-step-text-label" *ngIf="_stringLabel()">{{label}}</div>
+</div>
+<novo-step-status [state]="state"></novo-step-status>

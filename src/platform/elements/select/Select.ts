@@ -16,7 +16,7 @@ import {
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // APP
-import { NovoOverlayTemplate } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
@@ -82,7 +82,7 @@ export class NovoSelectElement implements OnInit, OnChanges {
   filteredOptions: any;
 
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
+  @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
   constructor(public element: ElementRef, public labels: NovoLabelService, public ref: ChangeDetectorRef) {}
 
