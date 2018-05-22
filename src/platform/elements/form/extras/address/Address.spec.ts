@@ -71,6 +71,7 @@ describe('Elements: NovoAddressElement', () => {
   describe('Method: onCountryChange()', () => {
     beforeEach(() => {
       spyOn(component, 'updateStates');
+      spyOn(component, 'onInput');
       component.model = {};
     });
     it('should be defined.', () => {
@@ -82,6 +83,7 @@ describe('Elements: NovoAddressElement', () => {
           required: true
         },
         countryID: {
+
           pickerConfig: {
             field: 'label',
             format: '$label',
