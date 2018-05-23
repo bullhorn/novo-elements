@@ -21,14 +21,14 @@ main.main-content {
     .example {
         margin-top: 10px;
         border: 1px solid #E9EAEA;
-        border-top-right-radius: 3px;
-        border-top-left-radius: 3px;
+        // border-top-right-radius: 3px;
+        // border-top-left-radius: 3px;
         border-bottom: none;
         box-sizing: border-box;
-        >* {
-            border-top-right-radius: 3px;
-            border-top-left-radius: 3px;
-        }
+        // >* {
+        //     border-top-right-radius: 3px;
+        //     border-top-left-radius: 3px;
+        // }
     } // Contains code snippet
     pre {
         margin: 0 0 35px;
