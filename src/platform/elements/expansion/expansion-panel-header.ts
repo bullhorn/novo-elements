@@ -1,5 +1,5 @@
-import {FocusMonitor} from '@angular/cdk/a11y';
-import {ENTER, SPACE} from '@angular/cdk/keycodes';
+import { FocusMonitor } from '@angular/cdk/a11y';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -11,12 +11,11 @@ import {
   OnDestroy,
   ViewEncapsulation,
 } from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/operator/filter';
-import {novoExpansionAnimations} from './expansion-animations';
-import {NovoExpansionPanel} from './expansion-panel';
-
+import { novoExpansionAnimations } from './expansion-animations';
+import { NovoExpansionPanel } from './expansion-panel';
 
 /**
  * `<novo-expansion-panel-header>`
@@ -24,19 +23,15 @@ import {NovoExpansionPanel} from './expansion-panel';
  * This component corresponds to the header element of an `<novo-expansion-panel>`.
  */
 @Component({
-  moduleId: module.id,
   selector: 'novo-expansion-panel-header',
   styleUrls: ['./expansion-panel-header.scss'],
   templateUrl: './expansion-panel-header.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    novoExpansionAnimations.indicatorRotate,
-    novoExpansionAnimations.expansionHeaderHeight
-  ],
+  animations: [novoExpansionAnimations.indicatorRotate, novoExpansionAnimations.expansionHeaderHeight],
   host: {
-    'class': 'novo-expansion-panel-header',
-    'role': 'button',
+    class: 'novo-expansion-panel-header',
+    role: 'button',
     '[attr.id]': 'panel._headerId',
     '[attr.tabindex]': 'panel.disabled ? -1 : 0',
     '[attr.aria-controls]': '_getPanelId()',
@@ -61,16 +56,15 @@ export class NovoExpansionPanelHeader implements OnDestroy {
     @Host() public panel: NovoExpansionPanel,
     private _element: ElementRef,
     // private _focusMonitor: FocusMonitor,
-    private _changeDetectorRef: ChangeDetectorRef) {
-
+    private _changeDetectorRef: ChangeDetectorRef,
+  ) {
     // Since the toggle state depends on an @Input on the panel, we
     // need to  subscribe and trigger change detection manually.
     this._parentChangeSubscription = merge(
       panel.opened,
       panel.closed,
-      panel._inputChanges.filter(changes => !!(changes.hideToggle || changes.disabled))
-    )
-    .subscribe(() => this._changeDetectorRef.markForCheck());
+      panel._inputChanges.filter((changes) => !!(changes.hideToggle || changes.disabled)),
+    ).subscribe(() => this._changeDetectorRef.markForCheck());
 
     // _focusMonitor.monitor(_element.nativeElement);
   }
@@ -133,9 +127,9 @@ export class NovoExpansionPanelHeader implements OnDestroy {
  */
 @Directive({
   selector: 'novo-panel-description',
-  host : {
-    class: 'novo-expansion-panel-header-description'
-  }
+  host: {
+    class: 'novo-expansion-panel-header-description',
+  },
 })
 export class NovoExpansionPanelDescription {}
 
@@ -146,8 +140,8 @@ export class NovoExpansionPanelDescription {}
  */
 @Directive({
   selector: 'novo-panel-title',
-  host : {
-    class: 'novo-expansion-panel-header-title'
-  }
+  host: {
+    class: 'novo-expansion-panel-header-title',
+  },
 })
 export class NovoExpansionPanelTitle {}
