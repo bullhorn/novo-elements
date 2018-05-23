@@ -22,6 +22,7 @@ $bittersweet: #eb6845;
 $grapefruit: #da4453;
 $carnation: #d770ad;
 $lavender: #967adc;
+$mountain: #9678b6;
 // Entity Colors
 $company: #3399dd;
 $candidate: #44bb77;
@@ -34,6 +35,7 @@ $submission: #a9adbb;
 $sendout: #747884;
 $placement: #0b344f;
 $note: #747884;
+$contract: #454ea0;
 $jobCode: #696d79;
 // Color Applications
 $positive: $ocean;
@@ -57,7 +59,8 @@ $analytics-colors: (
   bittersweet: $bittersweet,
   grapefruit: $grapefruit,
   carnation: $carnation,
-  lavender: $lavender
+  lavender: $lavender,
+  mountain: $mountain
 );
 // Entity Color Map
 $entity-colors: (
@@ -79,6 +82,7 @@ $entity-colors: (
   credential: $neutral,
   user: $neutral,
   corporateuser: $neutral,
+  contract: $contract,
   jobCode: $jobCode
 );
 // Generic Color Map
@@ -139,7 +143,9 @@ $dark-colors: (
   dark: $dark,
   pulse: $pulse,
   neutral: $neutral,
-  navy: $navy
+  navy: $navy,
+  contract: $contact,
+  mountain: $mountain
 );
 // Light map
 $light-colors: (

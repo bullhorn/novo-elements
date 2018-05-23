@@ -42,6 +42,7 @@ import { NovoValueModule } from './elements/value/Value.module';
 import { NovoDataTableModule } from './elements/data-table/data-table.module';
 import { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
 import { NovoIconModule } from './elements/icon/Icon.module';
+import { NovoExpansionModule } from './elements/expansion/expansion.module';
 import { NovoStepperModule } from './elements/stepper/stepper.module';
 import { UnlessModule } from './elements/unless/Unless.module';
 import { NovoOverlayModule } from './elements/overlay/Overlay.module';
@@ -102,6 +103,7 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoValueModule,
     NovoAceEditorModule,
     NovoIconModule,
+    NovoExpansionModule,
     UnlessModule,
     NovoCommonModule,
     NovoStepperModule,
