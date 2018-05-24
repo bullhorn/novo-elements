@@ -164,7 +164,9 @@ import { StaticDataTableService } from './services/static-data-table.service';
     <ng-template novoTemplate="buttonCellTemplate"
           let-row
           let-col="col">
-          <i class="bhi-{{ col?.action?.icon }} data-table-icon" [tooltip]="col?.action?.tooltip" tooltipPosition="right" (click)="col.handlers?.click({ originalEvent: $event, row: row })" [class.disabled]="isDisabled(col, row)"></i>
+          <span [tooltip]="col?.action?.tooltip" tooltipPosition="right">
+            <i class="bhi-{{ col?.action?.icon }} data-table-icon" (click)="col.handlers?.click({ originalEvent: $event, row: row })" [class.disabled]="isDisabled(col, row)"></i>
+          </span>
     </ng-template>
     <ng-template novoTemplate="dropdownCellTemplate"
           let-row
