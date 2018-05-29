@@ -23,6 +23,7 @@ export * from './editor/EditorDemo';
 export * from './tip-well/TipWellDemo';
 export * from './table/TableDemo';
 export * from './form/FormDemo';
+export * from './improved-form/ImprovedFormDemo';
 export * from './category-dropdown/CategoryDropdownDemo';
 export * from './popover/PopoverDemo';
 export * from './date-picker/DatePickerDemo';

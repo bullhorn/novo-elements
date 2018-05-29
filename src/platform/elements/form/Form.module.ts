@@ -28,42 +28,48 @@ import { NovoAceEditorModule } from './../ace-editor/AceEditor.module';
 import { NovoModalModule } from './../modal/Modal.module';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoControlGroup } from './ControlGroup';
+import { NovoControlTemplates } from './ControlTemplates';
+import { NovoTemplateService } from './../../services/template/NovoTemplateService';
+import { NovoCommonModule } from '../common/common.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        NovoRadioModule,
-        NovoTilesModule,
-        NovoSelectModule,
-        NovoPickerModule,
-        NovoChipsModule,
-        NovoDatePickerModule,
-        NovoTimePickerModule,
-        NovoNovoCKEditorModule,
-        NovoFormExtrasModule,
-        NovoQuickNoteModule,
-        NovoDateTimePickerModule,
-        NovoHeaderModule,
-        NovoTooltipModule,
-        NovoDragulaModule,
-        TextMaskModule,
-        NovoTipWellModule,
-        NovoModalModule,
-        NovoButtonModule,
-        NovoAceEditorModule
-    ],
-    declarations: [
-        NovoAutoSize, NovoControlElement, NovoDynamicFormElement, NovoFormElement,
-        NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom,
-        NovoCustomControlContainerElement, ControlConfirmModal, ControlPromptModal, NovoControlGroup
-    ],
-    exports: [
-        NovoAutoSize, NovoDynamicFormElement, NovoControlElement, NovoFormElement,
-        NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement,
-        NovoControlGroup
-    ],
-    entryComponents: [ControlConfirmModal, ControlPromptModal]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NovoRadioModule,
+    NovoTilesModule,
+    NovoSelectModule,
+    NovoPickerModule,
+    NovoChipsModule,
+    NovoDatePickerModule,
+    NovoTimePickerModule,
+    NovoNovoCKEditorModule,
+    NovoFormExtrasModule,
+    NovoQuickNoteModule,
+    NovoDateTimePickerModule,
+    NovoHeaderModule,
+    NovoTooltipModule,
+    NovoDragulaModule,
+    TextMaskModule,
+    NovoTipWellModule,
+    NovoModalModule,
+    NovoButtonModule,
+    NovoAceEditorModule,
+    NovoCommonModule,
+  ],
+  declarations: [
+    NovoAutoSize, NovoControlElement, NovoDynamicFormElement, NovoFormElement,
+    NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom,
+    NovoCustomControlContainerElement, ControlConfirmModal, ControlPromptModal, NovoControlGroup, NovoControlTemplates
+  ],
+  exports: [
+    NovoAutoSize, NovoDynamicFormElement, NovoControlElement, NovoFormElement,
+    NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement,
+    NovoControlGroup,
+    NovoControlTemplates
+  ],
+  entryComponents: [ControlConfirmModal, ControlPromptModal],
+  providers: [NovoTemplateService]
 })
 export class NovoFormModule {
 }

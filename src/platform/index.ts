@@ -140,6 +140,7 @@ export { FormValidators } from './elements/form/FormValidators';
 export { FormUtils } from './utils/form-utils/FormUtils';
 export { Security } from './services/security/Security';
 export { OptionsService } from './services/options/OptionsService';
+export { NovoTemplateService } from './services/template/NovoTemplateService';
 export { NovoFile } from './elements/form/extras/file/extras/file/File';
 export { BaseControl, NovoControlConfig, NovoGroupedControlConfig } from './elements/form/controls/BaseControl';
 export { ControlFactory } from './elements/form/controls/ControlFactory';

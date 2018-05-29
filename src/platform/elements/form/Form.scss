@@ -76,7 +76,7 @@ novo-form {
           width: 100%;
           height: auto;
           opacity: 1;
-          .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+          input.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
             border-bottom: 1px solid $negative !important;
             &.valid-number {
               border-bottom: none !important;
