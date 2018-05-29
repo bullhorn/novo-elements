@@ -36,6 +36,7 @@ novo-form {
     width: 100%;
     form {
       width: 100%;
+      margin-top: -1rem;
       novo-fieldset-header {
         background: $off-white;
         box-sizing: content-box;
@@ -61,12 +62,6 @@ novo-form {
       div.novo-control-group-control,
       td.novo-form-row {
         width: 100%;
-        &:first-child {
-          >novo-control,
-          >novo-custom-control-container {
-            margin-top: 0;
-          }
-        }
         novo-control,
         novo-custom-control-container {
           margin-top: 1rem;
