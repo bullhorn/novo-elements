@@ -61,7 +61,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         <novo-data-table-pagination
             *ngIf="paginationOptions"
             [theme]="paginationOptions.theme"
-            [length]="dataSource?.total"
+            [length]="dataSource?.currentTotal"
             [page]="paginationOptions.page"
             [pageSize]="paginationOptions.pageSize"
             [pageSizeOptions]="paginationOptions.pageSizeOptions">
