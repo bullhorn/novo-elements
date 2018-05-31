@@ -37,6 +37,7 @@ $placement: #0b344f;
 $note: #747884;
 $contract: #454ea0;
 $jobCode: #696d79;
+$earnCode: #696d79;
 // Color Applications
 $positive: $ocean;
 $success: $grass;
@@ -83,7 +84,8 @@ $entity-colors: (
   user: $neutral,
   corporateuser: $neutral,
   contract: $contract,
-  jobCode: $jobCode
+  jobCode: $jobCode,
+  earnCode: $earnCode
 );
 // Generic Color Map
 $app-colors: (
@@ -119,6 +121,7 @@ $dark-colors: (
   opportunity: $opportunity,
   job: $job,
   jobCode: $jobCode,
+  earnCode: $earnCode,
   sendout: $sendout,
   placement: $placement,
   task: $neutral,
