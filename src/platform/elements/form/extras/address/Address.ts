@@ -99,6 +99,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   valid: any = {};
   stateOptions: any;
   tooltip: any = {};
+  initComplete: boolean = false;
   @Output() change: EventEmitter<any> = new EventEmitter();
   @Output() focus: EventEmitter<any> = new EventEmitter();
   @Output() blur: EventEmitter<any> = new EventEmitter();
@@ -192,6 +193,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       (field === 'state' &&
         this.config[field].required &&
         Helpers.isBlank(this.model.state) &&
+        !Helpers.isEmpty(this.model.state) &&
         !Helpers.isBlank(this.model.countryName) &&
         this.config[field].updated &&
         this.config.state.pickerConfig &&
@@ -302,7 +304,11 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             this.valid.state = true;
           }
         }
-        this.updateControl();
+        if (this.initComplete) {
+            this.updateControl();
+        } else {
+            this.initComplete = true;
+        }
       });
     }
     else {
