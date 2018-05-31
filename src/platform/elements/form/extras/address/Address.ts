@@ -305,6 +305,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
           }
         }
         this.validityChange.emit();
+        this.onInput(null, 'state');
       });
     }
     else {

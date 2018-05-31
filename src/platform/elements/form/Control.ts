@@ -179,7 +179,7 @@ export class NovoCustomControlContainerElement {
                                 <novo-date-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military"></novo-date-time-picker-input>
                             </div>
                             <!--Address-->
-                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddressChange($event)" (focus)="handleFocus($event.event, $event.field)" (blur)="handleBlur($event.event, $event.field)" (validityChange)="updateValueValidity()"></novo-address>
+                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddressChange($event)" (focus)="handleFocus($event.event, $event.field)" (blur)="handleBlur($event.event, $event.field)" (validityChange)="updateValidity()"></novo-address>
                             <!--Checkbox-->
                             <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [label]="control.checkboxLabel" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [layoutOptions]="layoutOptions"></novo-checkbox>
                             <!--Checklist-->
@@ -607,7 +607,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
   }
 
-  updateValueValidity(data): void {
-    this.form.controls[this.control.key].updateValueAndValidity();
+  updateValidity(data): void {
+    this.form.controls[this.control.key].updateValueAndValidity({ emitEvent: false });
   }
 }

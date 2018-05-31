@@ -9,7 +9,7 @@ import { NovoPickerModule } from '../../../picker/Picker.module';
 import { NovoTooltipModule } from './../../../tooltip/Tooltip.module';
 import { Helpers } from '../../../../utils/Helpers';
 
-describe('Elements: NovoAddressElement', () => {
+fdescribe('Elements: NovoAddressElement', () => {
   let fixture;
   let component;
 
@@ -128,9 +128,54 @@ describe('Elements: NovoAddressElement', () => {
   });
 
   describe('Method: updateStates()', () => {
+    beforeEach(() => {
+      component.disabled = {};
+      component.stateOptions = () => {};
+      spyOn(component, 'stateOptions').and.returnValue(Promise.resolve(['MA']));
+      spyOn(component, 'setStateLabel');
+      spyOn(component.validityChange, 'emit');
+      spyOn(component, 'onInput');
+      component.config = {
+        state: {
+          required: false,
+          pickerConfig: {
+            options: () => {}
+          }
+        },
+      };
+      component.model = {
+        countryID: 1
+      };
+    });
     it('should be defined.', () => {
       expect(component.updateStates).toBeDefined();
-      // component.updateStates();
+    });
+    it('should reset state.pickerConfig.options', () => {
+      component.updateStates();
+      component.config.state.pickerConfig.options('query');
+      expect(component.stateOptions).toHaveBeenCalledWith('query', component.model.countryID);
+    });
+    it('should set config.state.pickerConfig.defaultOptions', () => {
+      component.updateStates();
+      component.config.state.pickerConfig.defaultOptions = ['MA'];
+    });
+    xit('should reset tooltip and un-disable state & setStateLabel', () => {
+      component.updateStates();
+      expect(component.tooltip.state).toBeUndefined();
+      expect(component.disabled.state).toEqual(false);
+      expect(component.setStateLabel).toHaveBeenCalled();
+    });
+    xit('should set tooltip and disable state & set validity of state when there are no state options', () => {
+      component.stateOptions.and.returnValue(Promise.resolve([]));      
+      component.updateStates();
+      expect(component.tooltip.state).toEqual(component.labels.noStatesForCountry);
+      expect(component.disabled.state).toEqual(true);
+      expect(component.valid.state).toEqual(true);
+    });
+    xit('should emit validityChangeEvent and call onInput for state', () => {
+      component.updateStates();
+      expect(component.validityChange.emit).toHaveBeenCalled();
+      expect(component.onInput).toHaveBeenCalledWith('state');
     });
   });
 
@@ -456,13 +501,13 @@ describe('Elements: NovoAddressElement', () => {
     it('should check value for state when it is required and country is selected which has state options, state was updated before', () => {
       component.model = {
         state: '',
-        countryID: undefined
+        countryID: 1
       };
       component.config.state.required = true;
       component.config.state.pickerConfig.defaultOptions = ['Massachusetts'];
       component.config.state.updated = true;
       component.isInvalid('state');
-      expect(component.invalid.state).toEqual(false);
+      expect(component.invalid.state).toEqual(true);
     });
     it('should check value for state when it is required and country is selected which has no state options', () => {
       component.model = {
