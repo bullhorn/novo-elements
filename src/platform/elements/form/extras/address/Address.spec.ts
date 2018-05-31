@@ -130,8 +130,7 @@ describe('Elements: NovoAddressElement', () => {
   describe('Method: updateStates()', () => {
     beforeEach(() => {
       component.disabled = {};
-      component.stateOptions = () => {};
-      spyOn(component, 'stateOptions').and.returnValue(Promise.resolve(['MA']));
+      component.stateOptions = () => { };
       spyOn(component, 'setStateLabel');
       spyOn(component.validityChange, 'emit');
       spyOn(component, 'onInput');
@@ -139,13 +138,14 @@ describe('Elements: NovoAddressElement', () => {
         state: {
           required: false,
           pickerConfig: {
-            options: () => {}
+            options: () => { }
           }
         },
       };
       component.model = {
         countryID: 1
       };
+      spyOn(component, 'stateOptions').and.returnValue(Promise.resolve(['MA']));
     });
     it('should be defined.', () => {
       expect(component.updateStates).toBeDefined();
@@ -155,27 +155,48 @@ describe('Elements: NovoAddressElement', () => {
       component.config.state.pickerConfig.options('query');
       expect(component.stateOptions).toHaveBeenCalledWith('query', component.model.countryID);
     });
-    it('should set config.state.pickerConfig.defaultOptions', () => {
+    it('should set config.state.pickerConfig.defaultOptions', (done: any) => {
       component.updateStates();
-      component.config.state.pickerConfig.defaultOptions = ['MA'];
+      setTimeout(() => {
+        expect(component.config.state.pickerConfig.defaultOptions).toEqual(['MA']);
+        done();
+      });
     });
-    xit('should reset tooltip and un-disable state & setStateLabel', () => {
+    it('should reset tooltip and un-disable state & setStateLabel', (done: any) => {
       component.updateStates();
-      expect(component.tooltip.state).toBeUndefined();
-      expect(component.disabled.state).toEqual(false);
-      expect(component.setStateLabel).toHaveBeenCalled();
+      setTimeout(() => {
+        expect(component.tooltip.state).toBeUndefined();
+        expect(component.disabled.state).toEqual(false);
+        expect(component.setStateLabel).toHaveBeenCalled();
+        done();
+      });
     });
-    xit('should set tooltip and disable state & set validity of state when there are no state options', () => {
-      component.stateOptions.and.returnValue(Promise.resolve([]));      
+    it('should set tooltip and disable state & set validity of state when there are no state options', (done: any) => {
+      component.stateOptions.and.returnValue(Promise.resolve([]));
       component.updateStates();
-      expect(component.tooltip.state).toEqual(component.labels.noStatesForCountry);
-      expect(component.disabled.state).toEqual(true);
-      expect(component.valid.state).toEqual(true);
+      setTimeout(() => {
+        expect(component.tooltip.state).toEqual(component.labels.noStatesForCountry);
+        expect(component.disabled.state).toEqual(true);
+        expect(component.valid.state).toEqual(undefined);
+        done();
+      });
     });
-    xit('should emit validityChangeEvent and call onInput for state', () => {
+    it('should set validity of state when there are no state options', (done: any) => {
+      component.stateOptions.and.returnValue(Promise.resolve([]));
+      component.config.state.required = true;
       component.updateStates();
-      expect(component.validityChange.emit).toHaveBeenCalled();
-      expect(component.onInput).toHaveBeenCalledWith('state');
+      setTimeout(() => {
+        expect(component.valid.state).toEqual(true);
+        done();
+      });
+    });
+    it('should emit validityChangeEvent and call onInput for state', (done: any) => {
+      component.updateStates();
+      setTimeout(() => {
+        expect(component.validityChange.emit).toHaveBeenCalled();
+        expect(component.onInput).toHaveBeenCalledWith(null, 'state');
+        done();
+      });
     });
   });
 
@@ -193,7 +214,7 @@ describe('Elements: NovoAddressElement', () => {
         countryID: {
           required: true,
           pickerConfig: {
-            getLabels: () => {}
+            getLabels: () => { }
           }
         },
         state: {
