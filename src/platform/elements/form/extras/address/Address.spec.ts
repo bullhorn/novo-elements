@@ -7,6 +7,7 @@ import { NovoSelectModule } from '../../../select/Select.module';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoPickerModule } from '../../../picker/Picker.module';
 import { NovoTooltipModule } from './../../../tooltip/Tooltip.module';
+import { Helpers } from '../../../../utils/Helpers';
 
 describe('Elements: NovoAddressElement', () => {
   let fixture;
@@ -142,9 +143,42 @@ describe('Elements: NovoAddressElement', () => {
   });
 
   describe('Method: writeValue()', () => {
+    beforeEach(() => {
+      component.config = {
+        countryID: {
+          required: true,
+          pickerConfig: {
+            getLabels: () => {}
+          }
+        },
+        state: {
+          required: false,
+          pickerConfig: {}
+        },
+      };
+      spyOn(component.config.countryID.pickerConfig, 'getLabels').and.returnValue(Promise.resolve({ label: 'country name' }));
+      spyOn(component, 'isValid');
+      spyOn(component, 'isInvalid');
+      spyOn(component, 'updateStates');
+    });
     it('should be defined.', () => {
       expect(component.writeValue).toBeDefined();
-      // component.writeValue();
+    });
+    xit('should get countryName', () => {
+      component.writeValue({ countryID: 1 });
+      expect(component.config.countryID.pickerConfig.getLabels).toHaveBeenCalled();
+      expect(component.model.countryName).toEqual('United States');
+      expect(component.updateStates).toHaveBeenCalled();
+    });
+    it('should get states if countryName and countryID exist', () => {
+      component.writeValue({ countryID: 1, countryName: 'United States' });
+      expect(component.model.countryName).toEqual('United States');
+      expect(component.updateStates).toHaveBeenCalled();
+    });
+    it('should not get states if countryName and countryID do not exist', () => {
+      component.writeValue({ address1: 'address1' });
+      expect(component.model.address1).toEqual('address1');
+      expect(component.updateStates).not.toHaveBeenCalled();
     });
   });
 
@@ -165,6 +199,9 @@ describe('Elements: NovoAddressElement', () => {
   describe('Method: isValid(field: string): void', () => {
     beforeEach(() => {
       component.config = {
+        zip: {
+          required: true,
+        },
         address1: {
           required: true,
           maxlength: 5,
@@ -174,15 +211,9 @@ describe('Elements: NovoAddressElement', () => {
         },
         state: {
           required: false,
+          pickerConfig: {}
         },
       };
-    });
-    it('should check countryName value for country', () => {
-      component.model = {
-        countryName: 'usa',
-      };
-      component.isValid('countryID');
-      expect(component.valid.countryID).toEqual(true);
     });
     it('should check validity of required field address1 when it is empty', () => {
       component.model = {
@@ -191,6 +222,13 @@ describe('Elements: NovoAddressElement', () => {
       component.isValid('address1');
       expect(component.valid.address1).toEqual(false);
     });
+    it('should check validity of required field zip when it is empty', () => {
+      component.model = {
+        zip: '',
+      };
+      component.isValid('zip');
+      expect(component.valid.zip).toEqual(false);
+    });
     it('should check validity of required field address1 when it is not empty', () => {
       component.model = {
         address1: 'tste',
@@ -198,10 +236,84 @@ describe('Elements: NovoAddressElement', () => {
       component.isValid('address1');
       expect(component.valid.address1).toEqual(true);
     });
+    it('should check countryName value for country', () => {
+      component.model = {
+        countryName: 'usa',
+        countryID: 1,
+      };
+      component.isValid('countryID');
+      expect(component.valid.countryID).toEqual(true);
+    });
+    it('should check countryName value for country', () => {
+      component.model = {
+        countryName: '',
+        countryID: undefined,
+      };
+      component.isValid('countryID');
+      expect(component.valid.countryID).toEqual(false);
+    });
     it('should ignore validity of non-required field state', () => {
       component.model = {
         state: 'TN',
       };
+      component.isValid('state');
+      expect(component.valid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and no country is selected and there is no pickerConfig', () => {
+      component.model = {
+        state: '',
+        countryName: undefined
+      };
+      component.config.state.required = true;
+      component.isValid('state');
+      expect(component.valid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and no country is selected and there is pickerConfig', () => {
+      component.model = {
+        state: '',
+        countryName: undefined
+      };
+      component.config.state.required = true;
+      component.config.state.pickerConfig.defaultOptions = ['Massachusetts'];
+      component.isValid('state');
+      expect(component.valid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and no country is selected', () => {
+      component.model = {
+        state: '',
+        countryID: undefined
+      };
+      component.config.state.required = true;
+      component.isValid('state');
+      expect(component.valid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and country is selected which has state options', () => {
+      component.model = {
+        state: '',
+        countryID: undefined
+      };
+      component.config.state.required = true;
+      component.config.state.pickerConfig.defaultOptions = ['Massachusetts'];
+      component.isValid('state');
+      expect(component.valid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and country is selected which has no state options', () => {
+      component.model = {
+        state: '',
+        countryID: undefined
+      };
+      component.config.state.required = true;
+      component.config.state.pickerConfig.defaultOptions = [];
+      component.isValid('state');
+      expect(component.valid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and country is selected which has no state options', () => {
+      component.model = {
+        state: undefined,
+        countryID: undefined
+      };
+      component.config.state.required = true;
+      component.config.state.pickerConfig.defaultOptions = [];
       component.isValid('state');
       expect(component.valid.state).toEqual(false);
     });
@@ -233,6 +345,7 @@ describe('Elements: NovoAddressElement', () => {
         },
         state: {
           required: false,
+          pickerConfig: {}
         },
       };
     });
@@ -243,12 +356,44 @@ describe('Elements: NovoAddressElement', () => {
       component.isInvalid('countryID');
       expect(component.invalid.countryID).toEqual(false);
     });
+    it('should check countryID value for country when countryID is undefined and countryName is not', () => {
+      component.model = {
+        countryID: undefined,
+        countryName: ''
+      };
+      component.isInvalid('countryID');
+      expect(component.invalid.countryID).toEqual(false);
+    });
+    it('should check countryID value for country when countryID and countryName are undefined', () => {
+      component.model = {
+        countryID: undefined,
+        countryName: undefined
+      };
+      component.isInvalid('countryID');
+      expect(component.invalid.countryID).toEqual(false);
+    });
+    it('should check countryID value for country when countryID and countryName are undefined and counrty is updated before', () => {
+      component.model = {
+        countryID: undefined,
+        countryName: undefined
+      };
+      component.config.state.updated = true;
+      component.isInvalid('countryID');
+      expect(component.invalid.countryID).toEqual(false);
+    });
     it('should check validity of required field address1 when it is empty', () => {
       component.model = {
         address1: '',
       };
       component.isInvalid('address1');
       expect(component.invalid.address1).toEqual(true);
+    });
+    it('should check validity of required field address1 when it is undefined', () => {
+      component.model = {
+        address1: undefined,
+      };
+      component.isInvalid('address1');
+      expect(component.invalid.address1).toEqual(false);
     });
     it('should check validity of required field address1 when it is not empty', () => {
       component.model = {
@@ -261,6 +406,82 @@ describe('Elements: NovoAddressElement', () => {
       component.model = {
         state: 'TN',
       };
+      component.isInvalid('state');
+      expect(component.invalid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and no country is selected and state was never updated', () => {
+      component.model = {
+        state: '',
+        countryName: undefined
+      };
+      component.config.state.required = true;
+      component.config.state.pickerConfig.defaultOptions = ['Massachusetts'];
+      component.config.state.updated = false;
+      component.isInvalid('state');
+      expect(component.invalid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and no country is selected and state was updated before', () => {
+      component.model = {
+        state: '',
+        countryName: undefined
+      };
+      component.config.state.required = true;
+      component.config.state.updated = true;
+      component.config.state.pickerConfig.defaultOptions = ['Massachusetts'];
+      component.isInvalid('state');
+      expect(component.invalid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and no country is selected', () => {
+      component.model = {
+        state: '',
+        countryID: undefined
+      };
+      component.config.state.required = true;
+      component.config.state.updated = false;
+      component.config.state.pickerConfig.defaultOptions = ['Massachusetts'];
+      component.isInvalid('state');
+      expect(component.invalid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and country is selected which has state options, state was never updated before', () => {
+      component.model = {
+        state: '',
+        countryID: undefined
+      };
+      component.config.state.required = true;
+      component.config.state.pickerConfig.defaultOptions = ['Massachusetts'];
+      component.config.state.updated = false;
+      component.isInvalid('state');
+      expect(component.invalid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and country is selected which has state options, state was updated before', () => {
+      component.model = {
+        state: '',
+        countryID: undefined
+      };
+      component.config.state.required = true;
+      component.config.state.pickerConfig.defaultOptions = ['Massachusetts'];
+      component.config.state.updated = true;
+      component.isInvalid('state');
+      expect(component.invalid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and country is selected which has no state options', () => {
+      component.model = {
+        state: '',
+        countryID: undefined
+      };
+      component.config.state.required = true;
+      component.config.state.updated = true;
+      component.config.state.pickerConfig.defaultOptions = [];
+      component.isInvalid('state');
+      expect(component.invalid.state).toEqual(false);
+    });
+    it('should check value for state when it is required and country is selected which has no state options', () => {
+      component.model = {
+        state: undefined,
+        countryID: undefined
+      };
+      component.config.state.required = true;
+      component.config.state.pickerConfig.defaultOptions = [];
       component.isInvalid('state');
       expect(component.invalid.state).toEqual(false);
     });

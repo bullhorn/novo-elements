@@ -103,6 +103,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Output() change: EventEmitter<any> = new EventEmitter();
   @Output() focus: EventEmitter<any> = new EventEmitter();
   @Output() blur: EventEmitter<any> = new EventEmitter();
+  @Output() validityChange: EventEmitter<any> = new EventEmitter();
 
   constructor(public labels: NovoLabelService) { }
 
@@ -163,7 +164,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       !this.config[field].required) &&
       !(field === 'countryID' &&
         this.config[field].required &&
-        !Helpers.isBlank(this.model.countryName)) &&
+        !Helpers.isBlank(this.model.countryID)) &&
       !(field === 'state' &&
         this.config[field].required &&
         (!Helpers.isEmpty(this.model.state) ||
@@ -192,9 +193,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         this.config[field].updated) ||
       (field === 'state' &&
         this.config[field].required &&
-        Helpers.isBlank(this.model.state) &&
-        Helpers.isEmpty(this.model.state) &&
-        !Helpers.isBlank(this.model.countryName) &&
+        (Helpers.isBlank(this.model.state) || Helpers.isEmpty(this.model.state)) &&
+        !Helpers.isBlank(this.model.countryID) &&
         this.config[field].updated &&
         this.config.state.pickerConfig &&
         this.config.state.pickerConfig.defaultOptions &&
@@ -304,11 +304,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             this.valid.state = true;
           }
         }
-        if (this.initComplete) {
-            this.updateControl();
-        } else {
-            this.initComplete = true;
-        }
+        this.validityChange.emit();
       });
     }
     else {
@@ -344,7 +340,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     let loadingCountries: boolean = false;
     if (model) {
       let countryName;
-      if (model.countryName) {
+      if (model.countryName && model.countryID) {
         countryName = model.countryName;
       } else if (model.countryID) {
         if (this.config.countryID.pickerConfig &&
@@ -370,7 +366,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       } else {
         this.model = model;
       }
-      if (!loadingCountries) {
+      if (!loadingCountries && !Helpers.isBlank(this.model.countryID)) {
         this.updateStates();
       }
     }
