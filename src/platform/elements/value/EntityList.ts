@@ -58,7 +58,6 @@ export class EntityList implements OnInit {
     }
 
     ngOnInit(): any {
-        this.meta.type = 'TO_ONE';
         this.baseEntity = this.meta.associatedEntity.entity;
         for (let entity of this.data.data) {
             entity.isLinkable = this.isLinkable(entity);
