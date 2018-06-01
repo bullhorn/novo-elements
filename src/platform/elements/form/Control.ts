@@ -300,7 +300,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   ngAfterContentInit() {
     setTimeout(() => {
       this.templates = this.templateService.getAll();
-      // console.log('templates[form.controls[control.key].controlType]', this.form.controls[this.control.key].controlType)
     });
   }
 

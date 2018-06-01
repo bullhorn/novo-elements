@@ -1,9 +1,11 @@
 // NG2
-import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ViewContainerRef, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ViewContainerRef, AfterViewInit, ElementRef, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 // APP
 import { Helpers } from './../../utils/Helpers';
 import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 import { NovoFieldset, NovoFormGroup } from './FormInterfaces';
+import { NovoTemplateService } from '../../services/template/NovoTemplateService';
+import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 
 @Component({
   selector: 'novo-fieldset-header',
@@ -80,15 +82,17 @@ export class NovoFieldsetElement {
                 </ng-container>
             </form>
         </div>
-    `
+    `,
+  providers: [NovoTemplateService]
 })
-export class NovoDynamicFormElement implements OnChanges, OnInit {
+export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentInit {
   @Input() controls: Array<any> = [];
   @Input() fieldsets: Array<NovoFieldset> = [];
   @Input() form: NovoFormGroup;
   @Input() layout: string;
   @Input() hideNonRequiredFields: boolean = true;
   @Input() autoFocusFirstField: boolean = false;
+  @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
 
   allFieldsRequired = false;
   allFieldsNotRequired = false;
@@ -96,7 +100,7 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
   showingRequiredFields = true;
   numControls = 0;
 
-  constructor(private element: ElementRef) { }
+  constructor(private element: ElementRef, private templates: NovoTemplateService) { }
 
   public ngOnInit(): void {
     this.ngOnChanges();
@@ -137,6 +141,14 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
       });
     }
     this.form.fieldsets = [...this.fieldsets];
+  }
+
+  ngAfterContentInit() {
+    if (this.customTemplates && this.customTemplates.length) {
+      this.customTemplates.forEach((template: any) => {
+        this.templates.addCustom(template.type, template.template);
+      });
+    }
   }
 
   public showAllFields(): void {

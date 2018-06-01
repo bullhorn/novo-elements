@@ -18,7 +18,8 @@ import { NovoTemplateService } from '../../services/template/NovoTemplateService
                 <ng-content></ng-content>
             </form>
         </div>
-    `
+    `,
+  providers: [NovoTemplateService]
 })
 export class NovoFormElement implements AfterContentInit, OnInit {
   @Input() form: NovoFormGroup;
@@ -47,9 +48,8 @@ export class NovoFormElement implements AfterContentInit, OnInit {
   ngAfterContentInit() {
     if (this.customTemplates && this.customTemplates.length) {
       this.customTemplates.forEach((template: any) => {
-        this.templates.add(template.type, template.template);
+        this.templates.addCustom(template.type, template.template);
       });
-      console.log('this.customTempaltes', this.customTemplates)
     }
   }
 

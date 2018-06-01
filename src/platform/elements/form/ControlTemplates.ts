@@ -115,7 +115,7 @@ import { NovoTemplateService } from '../../services/template/NovoTemplateService
         <!--Checkbox-->
         <ng-template novoTemplate="checkbox" type="checkbox" let-control let-form="form" let-errors="errors" let-methods="methods">
           <div [formGroup]="form">
-            <novo-checkbox [formControlName]="control.key" [name]="control.key" [label]="control.checkboxLabel" [tooltip]="contrtol.tooltip" [tooltipPosition]="control.tooltipPosition" [layoutOptions]="control.layoutOptions"></novo-checkbox>
+            <novo-checkbox [formControlName]="control?.key" [name]="control?.key" [label]="control?.checkboxLabel" [tooltip]="control?.tooltip" [tooltipPosition]="control?.tooltipPosition" [layoutOptions]="control?.layoutOptions"></novo-checkbox>
           </div>
         </ng-template>
 
@@ -142,7 +142,7 @@ export class NovoControlTemplates implements AfterViewInit {
   ngAfterViewInit(): void {
     if (this.defaultTemplates && this.defaultTemplates.length) {
       this.defaultTemplates.forEach((template: any) => {
-        this.templates.add(template.type, template.template);
+        this.templates.addDefault(template.type, template.template);
       });
     }
   }

@@ -2,21 +2,34 @@
 import { Injectable, QueryList } from '@angular/core';
 // App
 import { NovoTemplate } from '../../elements/common/novo-template/novo-template.directive';
+import { Helpers } from '../../utils/Helpers';
 
 @Injectable()
 export class NovoTemplateService {
-  templates: any = {};
+  templates: any = {
+    default: {},
+    custom: {},
+  };
   constructor() { }
 
   getAll(): any {
-    return this.templates;
+    let templates: any = {};
+    const customTemplateTypes: string[] = Object.keys(this.templates.custom);
+    const defaultTemplateTypes: string[] = Object.keys(this.templates.default);
+    defaultTemplateTypes.forEach((type: string) => {
+      templates[type] = this.templates.default[type];
+    });
+    customTemplateTypes.forEach((type: string) => {
+      templates[type] = this.templates.custom[type];
+    });
+    return templates;
   }
 
-  addAll(templates: any): void {
-    this.templates = templates;
+  addDefault(key: string, template: any): void {
+    this.templates.default[key] = template;
   }
 
-  add(key: string, template: any): void {
-    this.templates[key] = template;
+  addCustom(key: string, template: any): void {
+    this.templates.custom[key] = template;
   }
 }
