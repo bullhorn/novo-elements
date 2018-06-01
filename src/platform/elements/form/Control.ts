@@ -137,19 +137,10 @@ export class NovoCustomControlContainerElement {
                         </i>
                         <!--Form Controls-->
                         <div class="novo-control-input {{ form.controls[control.key].controlType }}" [ngSwitch]="form.controls[control.key].controlType" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
-                            <!--Text-based Inputs-->
                             <!--TODO prefix/suffix on the control-->
-                            <!--<div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                              <input *ngIf="form.controls[control.key].type !== 'number'" [class.maxlength-error]="errors?.maxlength" [formControlName]="control.key" [id]="control.key" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (input)="emitChange($event)" [maxlength]="form.controls[control.key].maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" autocomplete>
-                              <input *ngIf="form.controls[control.key].type === 'number' && form.controls[control.key].subType !== 'percentage'" [class.maxlength-error]="errors?.maxlength" [formControlName]="control.key" [id]="control.key" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (keydown)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="form.controls[control.key].maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="numberInput.blur()" #numberInput>
-                              <input *ngIf="form.controls[control.key].type === 'number' && form.controls[control.key].subType === 'percentage'" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (keydown)="restrictKeys($event)" [value]="percentValue" (input)="handlePercentChange($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="percentInput.blur()" #percentInput>
-                              <label class="input-label" *ngIf="form.controls[control.key].subType === 'currency'">{{ control.currencyFormat }}</label>
-                              <label class="input-label" *ngIf="form.controls[control.key].subType === 'percentage'">%</label>
-                            </div> -->
-                            <ng-container *ngSwitchCase="'textbox'">
+                            <ng-container *ngIf="templates">
                               <ng-container *ngTemplateOutlet="templates[form.controls[control.key].controlType]; context: templateContext"></ng-container>
                             </ng-container>
-                            <!--TextArea-->
                             <!--ReadOnly-->
                             <!--TODO - Handle rendering of different READONLY values-->
                             <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
@@ -309,6 +300,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   ngAfterContentInit() {
     setTimeout(() => {
       this.templates = this.templateService.getAll();
+      // console.log('templates[form.controls[control.key].controlType]', this.form.controls[this.control.key].controlType)
     });
   }
 
@@ -367,11 +359,24 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         handleFocus: this.handleFocus.bind(this),
         handlePercentChange: this.handlePercentChange.bind(this),
         handleBlur: this.handleBlur.bind(this),
+        handleTextAreaInput: this.handleTextAreaInput.bind(this),
+        handleEdit: this.handleEdit.bind(this),
+        handleSave: this.handleSave.bind(this),
+        handleDelete: this.handleDelete.bind(this),
+        handleUpload: this.handleUpload.bind(this),
+        modelChange: this.modelChange.bind(this),
+        modelChangeWithRaw: this.modelChangeWithRaw.bind(this),
+        handleAddressChange: this.handleAddressChange.bind(this),
+        handleTyping: this.handleTyping.bind(this),
       },
-      form: this.form
+      form: this.form,
     }
     this.templateContext.$implicit.tooltipPosition = this.tooltipPosition;
     this.templateContext.$implicit.tooltip = this.tooltip;
+    this.templateContext.$implicit.startupFocus = this.control.startupFocus;//what does this do????
+    this.templateContext.$implicit.fileBrowserImageUploadUrl = this.control.fileBrowserImageUploadUrl;//what does this do????
+    this.templateContext.$implicit.minimal = this.control.minimal;//what does this do????
+    this.templateContext.$implicit.config = this.control.config;// IS THIS NEEDED???
   }
 
   ngOnDestroy() {
