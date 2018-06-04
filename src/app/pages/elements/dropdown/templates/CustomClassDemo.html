@@ -1,7 +1,11 @@
-<novo-dropdown containerClass="custom-class">
-    <button type="button" theme="secondary" icon="collapse" inverse>I Have A Custom Class!</button>
-    <list>
-        <item (action)="clickMe('Hello!')">Action 1</item>
-        <item (action)="clickMe('Another!')">Action 2</item>
-    </list>
+<novo-dropdown containerClass="custom-class"
+               scrollStrategy="close">
+  <button type="button"
+          theme="secondary"
+          icon="collapse"
+          inverse>I Have A Custom Class!</button>
+  <list>
+    <item (action)="clickMe('Hello!')">Action 1</item>
+    <item (action)="clickMe('Another!')">Action 2</item>
+  </list>
 </novo-dropdown>
