@@ -342,6 +342,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   private outsideFilterSubscription: Subscription;
   private refreshSubscription: Subscription;
+  private resetSubscription: Subscription;
   private paginationSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
   private scrollListenerHandler: any;
@@ -367,6 +368,11 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
         notify('Must have [name] set on data-table to use preferences!');
       }
     });
+    this.resetSubscription = this.state.resetSource.subscribe(() => {
+      setTimeout(() => {
+        this.ref.detectChanges();
+      }, 300);
+    });
   }
 
   public ngOnDestroy(): void {
@@ -378,6 +384,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
+    }
+    if (this.resetSubscription) {
+      this.resetSubscription.unsubscribe();
     }
   }
 

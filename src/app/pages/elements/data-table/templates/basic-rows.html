@@ -10,6 +10,7 @@
   <!-- Custom Actions -->
   <ng-template novoTemplate="customActions">
     <span>Total: {{ basic.dataSource.total }}</span>
+    <novo-data-table-clear-button *ngIf="basic.state.userFiltered"></novo-data-table-clear-button>
     <button theme="secondary"
             (click)="refresh()">Refresh</button>
     <novo-dropdown side="right">
