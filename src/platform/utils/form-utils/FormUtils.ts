@@ -561,13 +561,23 @@ export class FormUtils {
     }
 
     isAddressEmpty(control: any): boolean {
-        let fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'country'];
+        let fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
         let valid: boolean = true;
         if (control.value && control.config) {
             fieldList.forEach((subfield: string) => {
-                if ((subfield !== 'country' && !Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&
+                if (((subfield !== 'countryID' &&
+                    !Helpers.isEmpty(control.config[subfield]) &&
+                    control.config[subfield].required &&
                     (Helpers.isBlank(control.value[subfield]) || Helpers.isEmpty(control.value[subfield]))) ||
-                    (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required && Helpers.isEmpty(control.value.countryName))) {
+                    (subfield === 'countryID' &&
+                        !Helpers.isEmpty(control.config.countryID) &&
+                        control.config.countryID.required &&
+                        Helpers.isEmpty(control.value.countryName))) &&
+                    !(subfield === 'state' &&
+                        !Helpers.isBlank(control.value.countryName) &&
+                        control.config.state.pickerConfig &&
+                        control.config.state.pickerConfig.defaultOptions &&
+                        control.config.state.pickerConfig.defaultOptions.length === 0)) {
                     valid = false;
                 }
             });
