@@ -129,7 +129,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       return observableOf();
     }
 
-    return merge(fromEvent(this.document, 'click'), fromEvent(this.document, 'touchend')).pipe(
+    return merge(fromEvent(this.document, 'mousedown'), fromEvent(this.document, 'touchend')).pipe(
       filter((event: MouseEvent | TouchEvent) => {
         const clickTarget: HTMLElement = event.target as HTMLElement;
         const clicked: boolean =
