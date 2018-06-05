@@ -390,6 +390,12 @@ novo-form {
                         border-bottom: 1px solid $negative;
                       }
                     }
+                    textarea[autosize] {
+                      min-height: 2rem;
+                      max-height: 300px;
+                      padding-top: 0;
+                      padding-bottom: 0;
+                    }
                     textarea:not(.quick-note-textarea) {
                       transition: height 0;
                       background: transparent !important;
