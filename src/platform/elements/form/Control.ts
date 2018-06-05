@@ -191,7 +191,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   private characterCountField: string;
   private maxLengthMetErrorfields: string[] = [];
   maskOptions: IMaskOptions;
-  private templates: any = {};
+  templates: any = {};
   templateContext: any;
 
   constructor(
