@@ -31,7 +31,7 @@ const SELECT_VALUE_ACCESSOR = {
   selector: 'novo-select',
   providers: [SELECT_VALUE_ACCESSOR],
   template: `
-    <div (click)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
+    <div (focus)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
     <novo-overlay-template [parent]="element" position="center">
       <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
         <ng-content></ng-content>
@@ -180,65 +180,54 @@ export class NovoSelectElement implements OnInit, OnChanges {
 
   @HostListener('keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    if (this.panelOpen) {
-      if (!this.header.open) {
-        // Prevent Scrolling
-        event.preventDefault();
+    // Prevent default window scrolling
+    if (!this.header.open && [KeyCodes.UP, KeyCodes.DOWN].includes(event.keyCode)) {
+      event.preventDefault();
+    }
+    // Close popup on escape and tab key
+    if ([KeyCodes.ESC, KeyCodes.TAB].includes(event.keyCode)) {
+      this.closePanel();
+    } else if (event.keyCode === KeyCodes.ENTER) {
+      if (this.header.open && this.header.value) {
+        this.saveHeader();
+      } else {
+        this.setValueAndClose({
+          value: this.filteredOptions[this.selectedIndex],
+          index: this.selectedIndex
+        });
       }
-      // Close popup on escape key
-      if (event.keyCode === KeyCodes.ESC) {
-        this.closePanel();
-        return;
+    } else if (event.keyCode === KeyCodes.UP && this.selectedIndex > 0) {
+      this.selectedIndex--;
+      this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
+      this.scrollToSelected();
+    } else if (event.keyCode === KeyCodes.DOWN && this.selectedIndex < this.filteredOptions.length - 1) {
+      this.selectedIndex++;
+      this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
+      this.scrollToSelected();
+      if (this.header.open) {
+        this.toggleHeader(null, false);
       }
-      if (event.keyCode === KeyCodes.ENTER) {
-        if (this.header.open && this.header.value) {
-          this.saveHeader();
-          return;
-        }
-        this.setValueAndClose({ value: this.filteredOptions[this.selectedIndex], index: this.selectedIndex });
-        return;
-      }
-
-      if (event.keyCode === KeyCodes.UP && this.selectedIndex > 0) {
-        this.selectedIndex--;
-        this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
+    } else if (event.keyCode === KeyCodes.UP && this.selectedIndex === 0) {
+      this.selectedIndex--;
+      this.toggleHeader(null, true);
+    } else if ((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode === KeyCodes.SPACE) {
+      clearTimeout(this.filterTermTimeout);
+      this.filterTermTimeout = setTimeout(() => {
+        this.filterTerm = '';
+      }, 2000);
+      let char = String.fromCharCode(event.keyCode);
+      this.filterTerm = this.filterTerm.concat(char);
+      let item = this.filteredOptions.find((i) => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
+      if (item) {
+        this.select(item, this.filteredOptions.indexOf(item));
         this.scrollToSelected();
-      } else if (event.keyCode === KeyCodes.DOWN && this.selectedIndex < this.filteredOptions.length - 1) {
-        this.selectedIndex++;
-        this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
-        this.scrollToSelected();
-        if (this.header.open) {
-          this.toggleHeader(null, false);
-        }
-      } else if (event.keyCode === KeyCodes.UP && this.selectedIndex === 0) {
-        this.selectedIndex--;
-        this.toggleHeader(null, true);
-      } else if ((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode === KeyCodes.SPACE) {
-        clearTimeout(this.filterTermTimeout);
-        this.filterTermTimeout = setTimeout(() => {
-          this.filterTerm = '';
-        }, 2000);
-        let char = String.fromCharCode(event.keyCode);
-        this.filterTerm = this.filterTerm.concat(char);
-        // let element = this.element.nativeElement;
-        // let list = element.querySelector('.novo-select-list');
-        // let item = element.querySelector(`[data-automation-value^="${this.filterTerm}" i]`);
-        let item = this.filteredOptions.find((i) => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
-        if (item) {
-          this.select(item, this.filteredOptions.indexOf(item));
-          this.scrollToSelected();
-        }
-      } else if ([KeyCodes.BACKSPACE, KeyCodes.DELETE].includes(event.keyCode)) {
-        clearTimeout(this.filterTermTimeout);
-        this.filterTermTimeout = setTimeout(() => {
-          this.filterTerm = '';
-        }, 2000);
-        this.filterTerm = this.filterTerm.slice(0, -1);
       }
-    } else {
-      if ([KeyCodes.DOWN, KeyCodes.UP].includes(event.keyCode)) {
-        this.panelOpen ? this.closePanel() : this.openPanel();
-      }
+    } else if ([KeyCodes.BACKSPACE, KeyCodes.DELETE].includes(event.keyCode)) {
+      clearTimeout(this.filterTermTimeout);
+      this.filterTermTimeout = setTimeout(() => {
+        this.filterTerm = '';
+      }, 2000);
+      this.filterTerm = this.filterTerm.slice(0, -1);
     }
   }
 
