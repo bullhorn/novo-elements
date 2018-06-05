@@ -55,55 +55,6 @@ export class NovoAutoSize implements AfterContentInit {
 }
 
 @Component({
-  selector: 'novo-custom-control-container',
-  template: `
-        <div class="novo-control-container" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
-            <!--Label (for horizontal)-->
-            <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && form.controls[control.key].label">{{ form.controls[control.key].label }}</label>
-            <div class="novo-control-outer-container">
-                <!--Label (for vertical)-->
-                <label
-                    *ngIf="form.layout === 'vertical' && form.controls[control.key].label"
-                    class="novo-control-label"
-                    [attr.for]="control.key"
-                    [class.novo-control-always-active]="true">
-                    {{ form.controls[control.key].label }}
-                </label>
-                <div class="novo-control-inner-container">
-                    <div class="novo-control-inner-input-container">
-                        <!--Required Indicator-->
-                        <i class="required-indicator"
-                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="form.controls[control.key].required && !form.controls[control.key].readOnly">
-                        </i>
-                        <!--Form Controls-->
-                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [attr.data-automation-id]="control.key">
-                            <ng-content></ng-content>
-                        </div>
-                    </div>
-                    <!--Error Message-->
-                    <div class="field-message">
-                        <div class="messages">
-                            <span class="error-text" *ngIf="(form.controls[control.key].dirty || control.dirty) && form.controls[control.key].errors?.required">{{ form.controls[control.key].label | uppercase }} is required</span>
-                            <span class="error-text" *ngIf="(form.controls[control.key].dirty || control.dirty) && (form.controls[control.key].errors?.custom)">{{ form.controls[control.key].errors.custom }}</span>
-                            <!--Field Hint-->
-                            <span class="description" *ngIf="form.controls[control.key].description">
-                                {{ form.controls[control.key].description }}
-                            </span>
-                        </div>
-                    </div>
-                    <!--Tip Wel-->
-                    <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
-                </div>
-            </div>
-        </div>
-    `,
-})
-export class NovoCustomControlContainerElement {
-  @Input() control;
-  @Input() form: NovoFormGroup;
-}
-
-@Component({
   selector: 'novo-control',
   template: `
         <novo-control-templates></novo-control-templates>
@@ -636,7 +587,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       }
     }
   }
-
   updateValidity(data): void {
     this.form.controls[this.control.key].updateValueAndValidity({ emitEvent: false });
   }

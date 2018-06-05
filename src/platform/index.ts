@@ -163,6 +163,7 @@ export { TextBoxControl } from './elements/form/controls/textbox/TextBoxControl'
 export { TilesControl } from './elements/form/controls/tiles/TilesControl';
 export { TimeControl } from './elements/form/controls/time/TimeControl';
 export { GroupedControl } from './elements/form/controls/grouped/GroupedControl';
+export { CustomControl } from './elements/form/controls/custom/CustomControl';
 export { NovoFormControl, NovoFormGroup } from './elements/form/NovoFormControl';
 export { NovoControlGroup, NovoControlGroupAddConfig } from './elements/form/ControlGroup';
 export { FieldInteractionApi } from './elements/form/FieldInteractionApi';

@@ -16,9 +16,9 @@ import { NovoTimePickerModule } from './../time-picker/TimePicker.module';
 import { NovoDateTimePickerModule } from './../date-time-picker/DateTimePicker.module';
 import { NovoNovoCKEditorModule } from './../ckeditor/CKEditor.module';
 import { NovoQuickNoteModule } from './../quick-note/QuickNote.module';
-import { NovoDynamicFormElement, NovoControlCustom, NovoFieldsetElement, NovoFieldsetHeaderElement } from './DynamicForm';
+import { NovoDynamicFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement } from './DynamicForm';
 import { NovoFormElement } from './Form';
-import { NovoControlElement, NovoCustomControlContainerElement, NovoAutoSize } from './Control';
+import { NovoControlElement, NovoAutoSize } from './Control';
 import { NovoFormExtrasModule } from './extras/FormExtras.module';
 import { NovoHeaderModule } from './../header/Header.module';
 import { NovoTooltipModule } from './../tooltip/Tooltip.module';
@@ -59,12 +59,12 @@ import { NovoCommonModule } from '../common/common.module';
   ],
   declarations: [
     NovoAutoSize, NovoControlElement, NovoDynamicFormElement, NovoFormElement,
-    NovoFieldsetElement, NovoFieldsetHeaderElement, NovoControlCustom,
-    NovoCustomControlContainerElement, ControlConfirmModal, ControlPromptModal, NovoControlGroup, NovoControlTemplates
+    NovoFieldsetElement, NovoFieldsetHeaderElement,
+    ControlConfirmModal, ControlPromptModal, NovoControlGroup, NovoControlTemplates
   ],
   exports: [
     NovoAutoSize, NovoDynamicFormElement, NovoControlElement, NovoFormElement,
-    NovoFieldsetHeaderElement, NovoControlCustom, NovoCustomControlContainerElement,
+    NovoFieldsetHeaderElement,
     NovoControlGroup,
     NovoControlTemplates
   ],

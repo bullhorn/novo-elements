@@ -51,7 +51,7 @@ export class NovoFormControl extends FormControl {
     button?: boolean;
   };
   rawValue?: any;
-
+  customControlConfig?: any;
   private historyTimeout: any;
 
 
@@ -101,6 +101,7 @@ export class NovoFormControl extends FormControl {
     this.description = control.description;
     this.options = control.options;
     this.tipWell = control.tipWell;
+    this.customControlConfig = control.customControlConfig;
 
     // Reactive Form, need to enable/disable, can't bind to [disabled]
     if (this.readOnly) {

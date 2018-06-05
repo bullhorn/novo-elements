@@ -78,9 +78,9 @@ const template = `
 
 @Component({
   selector: 'custom-demo-component',
-  template: `<novo-custom-control-container [formGroup]="form" [form]="form" [control]="control">
+  template: `<div [formGroup]="form">
         My Custom Input <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder">
-    </novo-custom-control-container>`,
+    </div>`,
 })
 export class CustomDemoComponent {
   @Input() control;
@@ -515,7 +515,7 @@ export class FormDemoComponent {
       { token: 'TOKEN', military: true },
       {
         customfield: {
-          customControl: CustomDemoComponent,
+          customControl: 'custom-demo-component',
         },
       },
     );
@@ -534,7 +534,7 @@ export class FormDemoComponent {
       { token: 'TOKEN' },
       {
         customfield: {
-          customControl: CustomDemoComponent,
+          customControl: 'custom-demo-component',
         },
       },
     );
