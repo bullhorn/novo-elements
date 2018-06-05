@@ -36,6 +36,7 @@ novo-form {
     width: 100%;
     form {
       width: 100%;
+      margin-top: 1rem;
       novo-fieldset-header {
         background: $off-white;
         box-sizing: content-box;
@@ -61,15 +62,15 @@ novo-form {
       div.novo-control-group-control,
       td.novo-form-row {
         width: 100%;
-        &:first-child {
+        &:last-child {
           >novo-control,
           >novo-custom-control-container {
-            margin-top: 0;
+            margin-bottom: 0;
           }
         }
         novo-control,
         novo-custom-control-container {
-          margin-top: 1rem;
+          margin-bottom: 1rem;
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -586,7 +587,7 @@ novo-form {
         div.novo-control-group-control {
           novo-control,
           novo-custom-control-container {
-            margin-top: 0;
+            margin-bottom: 0;
             &.disabled {
               pointer-events: none;
               input:not(.picker-input):not(.tiles-input) {
@@ -651,7 +652,7 @@ novo-form {
               flex-direction: column;
               align-items: flex-start;
               position: relative;
-              margin-top: 16px;
+              margin-bottom: 16px;
               .novo-control-outer-container {
                 max-width: 550px;
                 width: 100%;
