@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.12.0"></a>
+# [2.12.0](https://github.com/bullhorn/novo-elements/compare/v2.11.0...v2.12.0) (2018-06-05)
+
+
+### Bug Fixes
+
+* **datatable:** Fixing data table with icons ([0ada8ca](https://github.com/bullhorn/novo-elements/commit/0ada8ca))
+* **datatable:** Fixing data table with icons ([83a1b52](https://github.com/bullhorn/novo-elements/commit/83a1b52))
+* **datatable:** Fixing pagination when filtering ([f6988f7](https://github.com/bullhorn/novo-elements/commit/f6988f7))
+* **EntityList:** prevent meta type from being overwritten - fix ([#732](https://github.com/bullhorn/novo-elements/issues/732)) ([de8ea18](https://github.com/bullhorn/novo-elements/commit/de8ea18))
+* **EntityList:** prevent meta type from being overwritten ([#731](https://github.com/bullhorn/novo-elements/issues/731)) ([392ee4f](https://github.com/bullhorn/novo-elements/commit/392ee4f))
+* **NovoAutoSize:** Fix shrinking behavior of autosizing textareas ([#734](https://github.com/bullhorn/novo-elements/issues/734)) ([ca9a59f](https://github.com/bullhorn/novo-elements/commit/ca9a59f))
+
+
+### Features
+
+* **DataTable:** Making filter/sort more apparent and adding a clear button ([dbf38ec](https://github.com/bullhorn/novo-elements/commit/dbf38ec))
+* **header:** Allow header to be customizable ([fb62c51](https://github.com/bullhorn/novo-elements/commit/fb62c51))
+
+
+
 <a name="2.11.0"></a>
 # [2.11.0](https://github.com/bullhorn/novo-elements/compare/v2.10.2...v2.11.0) (2018-05-24)
 
