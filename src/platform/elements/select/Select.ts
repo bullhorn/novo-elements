@@ -175,7 +175,22 @@ export class NovoSelectElement implements OnInit, OnChanges {
 
   @HostListener('keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    if (this.panelOpen) {
+    if ((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode === KeyCodes.SPACE) {
+      clearTimeout(this.filterTermTimeout);
+      this.filterTermTimeout = setTimeout(() => {
+        this.filterTerm = '';
+      }, 2000);
+      let char = String.fromCharCode(event.keyCode);
+      this.filterTerm = this.filterTerm.concat(char);
+      // let element = this.element.nativeElement;
+      // let list = element.querySelector('.novo-select-list');
+      // let item = element.querySelector(`[data-automation-value^="${this.filterTerm}" i]`);
+      let item = this.filteredOptions.find((i) => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
+      if (item) {
+        this.select(item, this.filteredOptions.indexOf(item));
+        this.scrollToSelected();
+      }
+    } else if (this.panelOpen) {
       if (!this.header.open) {
         // Prevent Scrolling
         event.preventDefault();
@@ -208,21 +223,6 @@ export class NovoSelectElement implements OnInit, OnChanges {
       } else if (event.keyCode === KeyCodes.UP && this.selectedIndex === 0) {
         this.selectedIndex--;
         this.toggleHeader(null, true);
-      } else if ((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode === KeyCodes.SPACE) {
-        clearTimeout(this.filterTermTimeout);
-        this.filterTermTimeout = setTimeout(() => {
-          this.filterTerm = '';
-        }, 2000);
-        let char = String.fromCharCode(event.keyCode);
-        this.filterTerm = this.filterTerm.concat(char);
-        // let element = this.element.nativeElement;
-        // let list = element.querySelector('.novo-select-list');
-        // let item = element.querySelector(`[data-automation-value^="${this.filterTerm}" i]`);
-        let item = this.filteredOptions.find((i) => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
-        if (item) {
-          this.select(item, this.filteredOptions.indexOf(item));
-          this.scrollToSelected();
-        }
       } else if ([KeyCodes.BACKSPACE, KeyCodes.DELETE].includes(event.keyCode)) {
         clearTimeout(this.filterTermTimeout);
         this.filterTermTimeout = setTimeout(() => {
@@ -230,10 +230,9 @@ export class NovoSelectElement implements OnInit, OnChanges {
         }, 2000);
         this.filterTerm = this.filterTerm.slice(0, -1);
       }
-    } else {
-      if ([KeyCodes.DOWN, KeyCodes.UP].includes(event.keyCode)) {
-        this.panelOpen ? this.closePanel() : this.openPanel();
-      }
+    } else if ([KeyCodes.DOWN, KeyCodes.UP].includes(event.keyCode)) {
+      event.preventDefault();
+      this.openPanel();
     }
   }
 
