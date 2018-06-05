@@ -1,4 +1,4 @@
-// NG2
+// NG
 import {
   ChangeDetectorRef,
   Component,
@@ -14,7 +14,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-// APP
+// App
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -106,7 +106,6 @@ export class NovoSelectElement implements OnInit, OnChanges {
         element.active = false;
       });
     }
-
     if (!this.model && !this.createdItem) {
       this.clear();
     } else if (this.createdItem) {
@@ -116,7 +115,6 @@ export class NovoSelectElement implements OnInit, OnChanges {
     } else {
       this.writeValue(this.model);
     }
-
     if (this.panelOpen) {
       this.openPanel();
     }
@@ -134,7 +132,6 @@ export class NovoSelectElement implements OnInit, OnChanges {
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
   }
-
   /** END: Convenient Panel Methods. */
 
   /**
@@ -142,7 +139,7 @@ export class NovoSelectElement implements OnInit, OnChanges {
    * control to that value. It will also mark the control as dirty if this interaction
    * stemmed from the user.
    */
-  public setValueAndClose(event: any | null): void {
+  setValueAndClose(event: any | null): void {
     if (event.value && event.index >= 0) {
       this.select(event.value, event.index);
     }
