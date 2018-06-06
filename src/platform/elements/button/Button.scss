@@ -13,12 +13,12 @@ button {
   i {
     font-size: 1em;
   }
-  &[side='left'] {
+  &[side='left']:not([theme='fab']) {
     i {
       margin-right: 5px;
     }
   }
-  &[side='right'] {
+  &[side='right']:not([theme='fab']) {
     i {
       margin-left: 5px;
     }

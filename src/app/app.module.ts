@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule, Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 // Vendor
 import {
   NovoElementsModule,
@@ -60,6 +61,8 @@ import {
   ValueDemoComponent,
   AceEditorDemoComponent,
   ConfigureColumnsModal,
+  ExpansionDemoComponent,
+  StepperDemoComponent,
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent, SecurityDemoComponent } from './pages/utils';
 import {
@@ -154,6 +157,8 @@ export function provideAppBridgeService(http) {
     AceEditorDemoComponent,
     SecurityDemoComponent,
     ConfigureColumnsModal,
+    ExpansionDemoComponent,
+    StepperDemoComponent,
   ],
   imports: [
     // NG2
@@ -162,6 +167,7 @@ export function provideAppBridgeService(http) {
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
+    ScrollDispatchModule,
     // Vendor
     NovoElementsModule,
     NovoElementProviders.forRoot(),

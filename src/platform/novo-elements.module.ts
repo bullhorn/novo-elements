@@ -1,6 +1,7 @@
 // NG2
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 // APP
 import { NovoPipesModule } from './pipes/Pipes.module';
 import { NovoButtonModule } from './elements/button/Button.module';
@@ -42,6 +43,8 @@ import { NovoValueModule } from './elements/value/Value.module';
 import { NovoDataTableModule } from './elements/data-table/data-table.module';
 import { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
 import { NovoIconModule } from './elements/icon/Icon.module';
+import { NovoExpansionModule } from './elements/expansion/expansion.module';
+import { NovoStepperModule } from './elements/stepper/stepper.module';
 import { UnlessModule } from './elements/unless/Unless.module';
 import { NovoOverlayModule } from './elements/overlay/Overlay.module';
 import { DateFormatService } from './services/date-format/DateFormat';
@@ -52,7 +55,6 @@ import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
-import { Security } from './services/security/Security';
 import { OptionsService } from './services/options/OptionsService';
 
 import { NovoCommonModule } from './elements/common/common.module';
@@ -101,8 +103,11 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoValueModule,
     NovoAceEditorModule,
     NovoIconModule,
+    NovoExpansionModule,
     UnlessModule,
     NovoCommonModule,
+    NovoStepperModule,
+    ScrollDispatchModule,
   ],
   providers: [
     { provide: ComponentUtils, useClass: ComponentUtils },

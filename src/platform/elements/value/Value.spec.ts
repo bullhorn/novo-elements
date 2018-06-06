@@ -178,6 +178,11 @@ describe('Elements: NovoValueElement', () => {
             component.ngOnChanges();
             expect(component.type).toEqual(NOVO_VALUE_TYPE.INTERNAL_LINK);
         });
+        it('should set type to internalLink for Opportunity', () => {
+            component.meta.associatedEntity.entity = 'Opportunity';
+            component.ngOnChanges();
+            expect(component.type).toEqual(NOVO_VALUE_TYPE.INTERNAL_LINK);
+        });
         it('should set type to link for a link', () => {
             component.meta.name = 'companyURL';
             component.data = '';

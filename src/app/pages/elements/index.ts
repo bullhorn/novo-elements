@@ -32,4 +32,6 @@ export { DataTableDemoComponent, ConfigureColumnsModal } from './data-table/Data
 export * from './search/SearchDemo';
 export * from './form-grouped/FormGroupedDemo';
 export * from './value/ValueDemo';
+export * from './stepper/StepperDemo';
 export * from './ace-editor/AceEditorDemo';
+export * from './expansion/ExpansionDemo';

@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "2.10.2",
+  "version": "2.12.0",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "license": "MIT",
   "scripts": {
@@ -99,8 +99,8 @@
     "rxjs": "^5.5.6",
     "standard-version": "^4.2.0",
     "tslint": "~5.9.1",
-    "uglify-js": "3.3.18",
     "typescript": "~2.5.3",
+    "uglify-js": "3.3.18",
     "zone.js": "^0.8.19"
   },
   "publishConfig": {

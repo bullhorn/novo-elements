@@ -4,7 +4,6 @@ import { TestBed, async } from '@angular/core/testing';
 // App
 import { NovoChipElement, NovoChipsElement } from './Chips';
 import { NovoChipsModule } from './Chips.module';
-//import { NovoPickerContainer } from '../picker/extras/picker-container/PickerContainer';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
 

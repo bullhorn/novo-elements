@@ -2,6 +2,54 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.12.0"></a>
+# [2.12.0](https://github.com/bullhorn/novo-elements/compare/v2.11.0...v2.12.0) (2018-06-05)
+
+
+### Bug Fixes
+
+* **datatable:** Fixing data table with icons ([0ada8ca](https://github.com/bullhorn/novo-elements/commit/0ada8ca))
+* **datatable:** Fixing data table with icons ([83a1b52](https://github.com/bullhorn/novo-elements/commit/83a1b52))
+* **datatable:** Fixing pagination when filtering ([f6988f7](https://github.com/bullhorn/novo-elements/commit/f6988f7))
+* **EntityList:** prevent meta type from being overwritten - fix ([#732](https://github.com/bullhorn/novo-elements/issues/732)) ([de8ea18](https://github.com/bullhorn/novo-elements/commit/de8ea18))
+* **EntityList:** prevent meta type from being overwritten ([#731](https://github.com/bullhorn/novo-elements/issues/731)) ([392ee4f](https://github.com/bullhorn/novo-elements/commit/392ee4f))
+* **NovoAutoSize:** Fix shrinking behavior of autosizing textareas ([#734](https://github.com/bullhorn/novo-elements/issues/734)) ([ca9a59f](https://github.com/bullhorn/novo-elements/commit/ca9a59f))
+
+
+### Features
+
+* **DataTable:** Making filter/sort more apparent and adding a clear button ([dbf38ec](https://github.com/bullhorn/novo-elements/commit/dbf38ec))
+* **header:** Allow header to be customizable ([fb62c51](https://github.com/bullhorn/novo-elements/commit/fb62c51))
+
+
+
+<a name="2.11.0"></a>
+# [2.11.0](https://github.com/bullhorn/novo-elements/compare/v2.10.2...v2.11.0) (2018-05-24)
+
+
+### Bug Fixes
+
+* **accordion:** Remove module ids ([b737203](https://github.com/bullhorn/novo-elements/commit/b737203))
+* **data-table:** Adding tooltip to action cell ([0c8df3c](https://github.com/bullhorn/novo-elements/commit/0c8df3c))
+* **data-table:** Fixing position of tooltips ([9e14354](https://github.com/bullhorn/novo-elements/commit/9e14354))
+* **datatable:** Fixing up some styling/logic ([320dbec](https://github.com/bullhorn/novo-elements/commit/320dbec))
+* **datatable:** Safe check for expandable ([33abd60](https://github.com/bullhorn/novo-elements/commit/33abd60))
+* **dropdownAndTile:** Changes to improve accessibility ([#722](https://github.com/bullhorn/novo-elements/issues/722)) ([709145e](https://github.com/bullhorn/novo-elements/commit/709145e))
+* **FieldInteractionAPI:** Fix faulty logic for enable/disable events ([#723](https://github.com/bullhorn/novo-elements/issues/723)) ([0f48773](https://github.com/bullhorn/novo-elements/commit/0f48773))
+* **value:** Adding proper links for Opportunities ([6601521](https://github.com/bullhorn/novo-elements/commit/6601521))
+* **value:** Fixing dots and logic for value component ([be0e50e](https://github.com/bullhorn/novo-elements/commit/be0e50e))
+
+
+### Features
+
+* **datatable:** Adding expand with expand all and outside expand ([befaf90](https://github.com/bullhorn/novo-elements/commit/befaf90))
+* **DataTable:** Allowing number only filters ([9ac90ab](https://github.com/bullhorn/novo-elements/commit/9ac90ab))
+* **fieldinteractionapi:** Adding control for tooltip ([90509c8](https://github.com/bullhorn/novo-elements/commit/90509c8))
+* **fieldinteractionapi:** Adding emiter for events from API ([ad9c92d](https://github.com/bullhorn/novo-elements/commit/ad9c92d))
+* **wizard:** making a stepped wizard ([#677](https://github.com/bullhorn/novo-elements/issues/677)) ([32382d0](https://github.com/bullhorn/novo-elements/commit/32382d0))
+
+
+
 <a name="2.10.2"></a>
 ## [2.10.2](https://github.com/bullhorn/novo-elements/compare/v2.10.1...v2.10.2) (2018-04-27)
 

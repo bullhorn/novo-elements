@@ -1,11 +1,12 @@
 // NG2
 import { NgModule } from '@angular/core';
 // APP
-import { NovoDropdownElement, NovoItemElement, NovoListElement, NovoDropdownContainer, NovoItemHeaderElement } from './Dropdown';
+import { NovoDropdownElement, NovoItemElement, NovoItemHeaderElement, NovoListElement } from './Dropdown';
+import { NovoOverlayModule } from '../overlay/Overlay.module';
 
 @NgModule({
-    declarations: [NovoDropdownElement, NovoItemElement, NovoListElement, NovoDropdownContainer, NovoItemHeaderElement],
-    exports: [NovoDropdownElement, NovoItemElement, NovoListElement, NovoDropdownContainer, NovoItemHeaderElement]
+  imports: [NovoOverlayModule],
+  declarations: [NovoDropdownElement, NovoItemElement, NovoListElement, NovoItemHeaderElement],
+  exports: [NovoDropdownElement, NovoItemElement, NovoListElement, NovoItemHeaderElement],
 })
-export class NovoDropdownModule {
-}
+export class NovoDropdownModule {}

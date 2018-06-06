@@ -6,7 +6,6 @@ import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { parse, isDate } from 'date-fns';
 // App
 import { NovoDateTimePickerElement } from './DateTimePicker';
-import { NovoOverlayTemplate } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 

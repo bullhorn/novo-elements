@@ -5,10 +5,10 @@ import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
 import * as dateFns from 'date-fns';
-import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';	
+import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 // App
 import { NovoDatePickerElement } from './DatePicker';
-import { NovoOverlayTemplate } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 
@@ -50,11 +50,11 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @Input() textMaskEnabled: boolean = true;
   @Input() allowInvalidDate: boolean = false;
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplate) overlay: NovoOverlayTemplate;
+  @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
   constructor(
-    public element: ElementRef, 
-    public labels: NovoLabelService, 
+    public element: ElementRef,
+    public labels: NovoLabelService,
     private _changeDetectorRef: ChangeDetectorRef
   ) {
     this.placeholder = this.labels.dateFormatPlaceholder;
@@ -74,7 +74,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     }
   }
 
-  /** BEGIN: Convienient Panel Methods. */
+  /** BEGIN: Convenient Panel Methods. */
   openPanel(): void {
     this.overlay.openPanel();
   }
@@ -84,7 +84,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
   }
-  /** END: Convienient Panel Methods. */
+  /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
