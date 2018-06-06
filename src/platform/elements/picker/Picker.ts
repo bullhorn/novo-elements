@@ -36,28 +36,29 @@ const PICKER_VALUE_ACCESSOR = {
   selector: 'novo-picker',
   providers: [PICKER_VALUE_ACCESSOR],
   template: `
-    <i class="bhi-more" *ngIf="config?.entityIcon && !_value"></i>
-    <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
-    <input
-      type="text"
-      class="picker-input"
-      [(ngModel)]="term"
-      [class.entity-picker]="config.entityIcon"
-      [class.entity-selected]="config?.entityIcon && _value"
-      (ngModelChange)="checkTerm($event)"
-      [placeholder]="placeholder"
-      (keydown)="onKeyDown($event)"
-      (focus)="onFocus($event)"
-      (click)="onFocus($event)"
-      (blur)="onTouched($event)"
-      autocomplete="off" #input/>
-    <i class="bhi-search" *ngIf="!_value || clearValueOnSelect"></i>
-    <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
-    <novo-overlay-template class="picker-results-container" [parent]="element" (closing)="onOverlayClosed()">
-      <span #results></span>
-      <ng-content></ng-content>
-    </novo-overlay-template>
-  `,
+        <i class="bhi-more" *ngIf="config?.entityIcon && !_value"></i>
+        <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
+        <input
+            type="text"
+            class="picker-input"
+            [(ngModel)]="term"
+            [class.entity-picker]="config.entityIcon"
+            [class.entity-selected]="config?.entityIcon && _value"
+            (ngModelChange)="checkTerm($event)"
+            [placeholder]="placeholder"
+            (keydown)="onKeyDown($event)"
+            (focus)="onFocus($event)"
+            (click)="onFocus($event)"
+            (blur)="onTouched($event)"
+            autocomplete="off" #input
+            [disabled]="disablePickerInput"/>
+        <i class="bhi-search" *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput"></i>
+        <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
+        <novo-overlay-template class="picker-results-container" [parent]="element" (closing)="onOverlayClosed()">
+            <span #results></span>
+            <ng-content></ng-content>
+        </novo-overlay-template>
+    `,
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results
@@ -111,10 +112,10 @@ export class NovoPickerElement implements OnInit {
   resultsComponent: any;
   popup: any;
   _value: any;
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
+  onModelChange: Function = () => { };
+  onModelTouched: Function = () => { };
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) {}
+  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     if (this.overrideElement) {
@@ -198,9 +199,12 @@ export class NovoPickerElement implements OnInit {
         return;
       }
 
-      if (event.keyCode === KeyCodes.BACKSPACE && !Helpers.isBlank(this._value)) {
+      if ((event.keyCode === KeyCodes.BACKSPACE || event.keyCode === KeyCodes.DELETE) && !Helpers.isBlank(this._value)) {
         this.clearValue(false);
         this.closePanel();
+      }
+      if (event.keyCode === KeyCodes.DELETE && Helpers.isBlank(this._value)) {
+        this.clearValue(true);
       }
     }
   }

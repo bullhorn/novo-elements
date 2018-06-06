@@ -36,7 +36,6 @@ novo-address {
   }
   .street-address {
     flex: 3 3 75%;
-    
     padding: 0 0 5px !important;
   }
   .apt {
@@ -56,12 +55,18 @@ novo-address {
     }
   }
   .zip {
-    flex: 1 0 20%;
+    flex: 1 0 19.4%;
     padding: 5px 0 !important;
   }
   .country-name {
     flex: 4 4 100%;
     padding: 10px 0 0 !important;
+  }
+  .disabled {
+    i.required-indicator.bhi-circle,
+    i.required-indicator.bhi-check {
+      border-bottom: 1px dashed lighten($dark, 30%) !important;
+    }
   }
 }
 

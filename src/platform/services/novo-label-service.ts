@@ -86,6 +86,8 @@ export class NovoLabelService {
   groupedMultiPickerSelectCategory = 'Select a category from the right to get started';
   add = 'Add';
   encryptedFieldTooltip = 'This data has been stored at the highest level of security';
+  noStatesForCountry = 'No states available for the selected country';
+  selectCountryFirst = 'Please select a country before selecting a state';
 
   constructor(
     @Optional()
