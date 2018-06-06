@@ -13,13 +13,23 @@ button {
   i {
     font-size: 1em;
   }
+  &[side='left']:not([theme='fab']) {
+    i {
+      margin-right: 5px;
+    }
+  }
+  &[side='right']:not([theme='fab']) {
+    i {
+      margin-left: 5px;
+    }
+  }
   &[icon='times'] {
     i {
       font-size: 0.9em;
     }
   }
   &[theme] {
-    padding: 6px 12px;
+    padding: 6px 10px;
     min-height: 37px;
     font-size: 1rem;
     border: none;
@@ -183,17 +193,11 @@ button {
           width: 25px;
           display: flex;
           align-items: center;
+          justify-content: center;
+          margin-left: 10px;
           &:before {
             vertical-align: baseline;
           }
-        }
-        &[side='left'] i {
-          padding-left: 0;
-          justify-content: flex-start;
-        }
-        &[side='right'] i {
-          padding-right: 0;
-          justify-content: flex-end;
         }
       }
     } // Dialoge Themed Button
@@ -211,17 +215,10 @@ button {
           width: 25px;
           display: flex;
           align-items: center;
+          justify-content: center;
           &:before {
             vertical-align: baseline;
           }
-        }
-        &[side='left'] i {
-          padding-left: 0;
-          justify-content: flex-start;
-        }
-        &[side='right'] i {
-          padding-right: 0;
-          justify-content: flex-end;
         }
       }
       &:hover,
