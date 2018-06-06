@@ -1,15 +1,6 @@
 // NG2
 import {
-  Component,
-  EventEmitter,
-  ElementRef,
-  ViewContainerRef,
-  forwardRef,
-  ViewChild,
-  Input,
-  Output,
-  OnInit,
-  ChangeDetectorRef,
+  ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewContainerRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
@@ -24,6 +15,7 @@ import { PickerResults } from './extras/picker-results/PickerResults';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { Helpers } from '../../utils/Helpers';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { notify } from '../../utils/notifier/notifier.util';
 
 // Value accessor for the component (supports ngModel)
 const PICKER_VALUE_ACCESSOR = {
@@ -44,28 +36,28 @@ const PICKER_VALUE_ACCESSOR = {
   selector: 'novo-picker',
   providers: [PICKER_VALUE_ACCESSOR],
   template: `
-        <i class="bhi-more" *ngIf="config?.entityIcon && !_value"></i>
-        <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
-        <input
-            type="text"
-            class="picker-input"
-            [(ngModel)]="term"
-            [class.entity-picker]="config.entityIcon"
-            [class.entity-selected]="config?.entityIcon && _value"
-            (ngModelChange)="checkTerm($event)"
-            [placeholder]="placeholder"
-            (keydown)="onKeyDown($event)"
-            (focus)="onFocus($event)"
-            (click)="onFocus($event)"
-            (blur)="onTouched($event)"
-            autocomplete="off" #input />
-        <i class="bhi-search" *ngIf="!_value || clearValueOnSelect"></i>
-        <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
-        <novo-overlay-template class="picker-results-container" [parent]="element" (closing)="onOverlayClosed()">
-            <span #results></span>
-            <ng-content></ng-content>
-        </novo-overlay-template>
-    `,
+    <i class="bhi-more" *ngIf="config?.entityIcon && !_value"></i>
+    <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
+    <input
+      type="text"
+      class="picker-input"
+      [(ngModel)]="term"
+      [class.entity-picker]="config.entityIcon"
+      [class.entity-selected]="config?.entityIcon && _value"
+      (ngModelChange)="checkTerm($event)"
+      [placeholder]="placeholder"
+      (keydown)="onKeyDown($event)"
+      (focus)="onFocus($event)"
+      (click)="onFocus($event)"
+      (blur)="onTouched($event)"
+      autocomplete="off" #input/>
+    <i class="bhi-search" *ngIf="!_value || clearValueOnSelect"></i>
+    <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
+    <novo-overlay-template class="picker-results-container" [parent]="element" (closing)="onOverlayClosed()">
+      <span #results></span>
+      <ng-content></ng-content>
+    </novo-overlay-template>
+  `,
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results
@@ -90,14 +82,17 @@ export class NovoPickerElement implements OnInit {
   // Autoselects the first option in the results
   @Input() autoSelectFirstOption: boolean = true;
   @Input() overrideElement: ElementRef;
+
   // Disable from typing into the picker (result template does everything)
   @Input()
   set disablePickerInput(v: boolean) {
     this._disablePickerInput = coerceBooleanProperty(v);
   }
+
   get disablePickerInput() {
     return this._disablePickerInput;
   }
+
   private _disablePickerInput: boolean = false;
 
   // Emitter for selects
@@ -107,8 +102,8 @@ export class NovoPickerElement implements OnInit {
   @Output() blur: EventEmitter<any> = new EventEmitter();
   @Output() typing: EventEmitter<any> = new EventEmitter();
 
-    @ViewChild(NovoOverlayTemplateComponent) public container: NovoOverlayTemplateComponent;
-    @ViewChild('input') private input: ElementRef;
+  @ViewChild(NovoOverlayTemplateComponent) public container: NovoOverlayTemplateComponent;
+  @ViewChild('input') private input: ElementRef;
 
   closeHandler: any;
   isStatic: boolean = true;
@@ -126,7 +121,7 @@ export class NovoPickerElement implements OnInit {
       this.element = this.overrideElement;
     }
     if (this.appendToBody) {
-      console.warn(`'appendToBody' has been deprecated. Please remove this attribute.`);
+      notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
     }
     // Custom results template
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
@@ -149,17 +144,20 @@ export class NovoPickerElement implements OnInit {
     this.show((event.target as any).value);
   }
 
-  /** BEGIN: Convienient Panel Methods. */
+  /** BEGIN: Convenient Panel Methods. */
   public openPanel(): void {
     this.container.openPanel();
   }
+
   public closePanel(): void {
     this.container.closePanel();
   }
+
   public get panelOpen(): boolean {
     return this.container && this.container.panelOpen;
   }
-  /** END: Convienient Panel Methods. */
+
+  /** END: Convenient Panel Methods. */
 
   private show(term?: string): void {
     this.openPanel();
@@ -252,7 +250,7 @@ export class NovoPickerElement implements OnInit {
       this.popup.instance.term = this.term;
       this.popup.instance.selected = this.selected;
       this.popup.instance.autoSelectFirstOption = this.autoSelectFirstOption;
-      this.popup.instance.overlay = this.container._overlayRef;
+      this.popup.instance.overlay = this.container.overlayRef;
       this.ref.markForCheck();
     }
   }

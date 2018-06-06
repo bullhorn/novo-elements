@@ -554,14 +554,17 @@ novo-data-table-pagination {
   }
 }
 
-novo-dropdown-container.data-table-dropdown {
+.data-table-dropdown {
   min-width: 230px;
   max-width: 230px;
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: auto;
+  &.right {
+    margin-left: -150px !important;
+  }
   .header {
-    padding: 5px 10px 0px 10px;
+    padding: 5px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
