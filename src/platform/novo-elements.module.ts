@@ -54,7 +54,6 @@ import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
-import { Security } from './services/security/Security';
 import { OptionsService } from './services/options/OptionsService';
 
 import { NovoCommonModule } from './elements/common/common.module';

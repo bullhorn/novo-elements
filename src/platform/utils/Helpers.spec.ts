@@ -132,13 +132,6 @@ describe('Utils: Helpers', () => {
         });
     });
 
-    xdescribe('Method: calcPositionOffset(position, element, side)', () => {
-        it('should be defined.', () => {
-            let element = new Element();
-            expect(Helpers.calcPositionOffset({ bottom: 1, height: 1, left: 1, right: 1, top: 1, width: 1 }, element, 'right')).toBeDefined();
-        });
-    });
-
     xdescribe('Method: findAncestor(element, selector)', () => {
         it('should be defined.', () => {
             let element = new Element();

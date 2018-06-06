@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 // APP
 import { Helpers } from '../../../utils/Helpers';
 import { NovoControlGroupAddConfig } from '../ControlGroup';
+import { notify } from '../../../utils/notifier/notifier.util';
 
 export interface NovoGroupedControlConfig {
   label?: string;
@@ -46,7 +47,7 @@ export interface NovoControlConfig {
   closeOnSelect?: boolean;
   interactions?: Array<Object>;
   dataSpecialization?: string;
-  appendToBody?: boolean;
+  appendToBody?: boolean; // Deprecated
   parentScrollSelector?: string;
   description?: string;
   tooltip?: string;
@@ -104,7 +105,7 @@ export class BaseControl {
   closeOnSelect: boolean;
   interactions: Array<Object>;
   dataSpecialization: string;
-  appendToBody: boolean;
+  appendToBody: boolean; // Deprecated
   parentScrollSelector: string;
   description?: string;
   tooltip?: string;
@@ -174,6 +175,9 @@ export class BaseControl {
     this.interactions = config.interactions;
     this.dataSpecialization = config.dataSpecialization;
     this.appendToBody = !!config.appendToBody;
+    if (this.appendToBody) {
+      notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+    }
     this.parentScrollSelector = config.parentScrollSelector;
     this.description = config.description;
     if (config.tooltip) {

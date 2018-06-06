@@ -1,26 +1,10 @@
 // NG2
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Http } from '@angular/http';
 // Vendor
 // APP
 import {
-  BaseControl,
-  AddressControl,
-  CheckListControl,
-  CheckboxControl,
-  DateControl,
-  DateTimeControl,
-  EditorControl,
-  FileControl,
-  PickerControl,
-  RadioControl,
-  SelectControl,
-  TextAreaControl,
-  TextBoxControl,
-  TilesControl,
-  TimeControl,
-  NovoControlConfig
+  AddressControl, BaseControl, CheckboxControl, CheckListControl, DateControl, DateTimeControl, EditorControl, FileControl, NovoControlConfig,
+  PickerControl, RadioControl, SelectControl, TextAreaControl, TextBoxControl, TilesControl, TimeControl
 } from '../../elements/form/FormControls';
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from '../Helpers';
@@ -28,6 +12,7 @@ import { NovoFieldset } from '../../elements/form/FormInterfaces';
 import { NovoFormControl, NovoFormGroup } from '../../elements/form/NovoFormControl';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from './../../services/options/OptionsService';
+
 @Injectable()
 export class FormUtils {
 
@@ -222,22 +207,18 @@ export class FormUtils {
         controlConfig.multiple = true;
         controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
         controlConfig.config.previewTemplate = overridePreviewTemplate || EntityPickerResult;
-        // TODO: When appendToBody picker works better in table/form
         control = new PickerControl(controlConfig);
         break;
       case 'chips':
         controlConfig.multiple = true;
-        // TODO: When appendToBody picker works better in table/form
         control = new PickerControl(controlConfig);
         break;
       case 'entitypicker':
         // TODO: This doesn't belong in this codebase
         controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
-        // TODO: When appendToBody picker works better in table/form
         control = new PickerControl(controlConfig);
         break;
       case 'picker':
-        // TODO: When appendToBody picker works better in table/form
         control = new PickerControl(controlConfig);
         break;
       case 'datetime':
@@ -248,7 +229,7 @@ export class FormUtils {
         controlConfig.dateFormat = field.dateFormat;
         controlConfig.textMaskEnabled = field.textMaskEnabled;
         controlConfig.allowInvalidDate = field.allowInvalidDate;
-        controlConfig.military = config ? !!config.military : false;        
+        controlConfig.military = config ? !!config.military : false;
         control = new DateControl(controlConfig);
         break;
       case 'time':
@@ -553,7 +534,7 @@ export class FormUtils {
     if (control.value && control.config) {
       fieldList.forEach((subfield: string) => {
         if ((subfield !== 'country' && !Helpers.isEmpty(control.config[subfield]) && control.config[subfield].required &&
-          (Helpers.isBlank(control.value[subfield]) || Helpers.isEmpty(control.value[subfield]))) ||
+            (Helpers.isBlank(control.value[subfield]) || Helpers.isEmpty(control.value[subfield]))) ||
           (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required && Helpers.isEmpty(control.value.countryName))) {
           valid = false;
         }

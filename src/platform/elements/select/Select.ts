@@ -1,21 +1,20 @@
-// NG2
+// NG
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  forwardRef,
-  ElementRef,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  HostListener,
   ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
-// APP
+// App
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -32,27 +31,30 @@ const SELECT_VALUE_ACCESSOR = {
   selector: 'novo-select',
   providers: [SELECT_VALUE_ACCESSOR],
   template: `
-        <div (click)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
-        <novo-overlay-template [parent]="element" position="center">
-            <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
-                <ng-content></ng-content>
-                <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">
-                    <button  *ngIf="!header.open" (click)="toggleHeader($event); false" tabIndex="-1" type="button" class="header"><i class="bhi-add-thin"></i>&nbsp;{{headerConfig.label}}</button>
-                    <div *ngIf="header.open" [ngClass]="{active: header.open}">
-                        <input autofocus type="text" [placeholder]="headerConfig.placeholder" [attr.id]="name" autocomplete="false" [(ngModel)]="header.value" [ngClass]="{invalid: !header.valid}"/>
-                        <footer>
-                            <button (click)="toggleHeader($event, false)">{{labels.cancel}}</button>
-                            <button (click)="saveHeader()" class="primary">{{labels.save}}</button>
-                        </footer>
-                    </div>
-                </li>
-                <li *ngFor="let option of filteredOptions; let i = index" [ngClass]="{active: option.active}" (click)="setValueAndClose({value: option, index: i})" [attr.data-automation-value]="option.label">
-                    <span [innerHtml]="highlight(option.label, filterTerm)"></span>
-                    <i *ngIf="option.active" class="bhi-check"></i>
-                </li>
-            </ul>
-        </novo-overlay-template>
-    `,
+    <div (focus)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
+    <novo-overlay-template [parent]="element" position="center">
+      <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
+        <ng-content></ng-content>
+        <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">
+          <button *ngIf="!header.open" (click)="toggleHeader($event); false" tabIndex="-1" type="button" class="header"><i class="bhi-add-thin"></i>&nbsp;{{headerConfig.label}}
+          </button>
+          <div *ngIf="header.open" [ngClass]="{active: header.open}">
+            <input autofocus type="text" [placeholder]="headerConfig.placeholder" [attr.id]="name" autocomplete="false" [(ngModel)]="header.value"
+                   [ngClass]="{invalid: !header.valid}"/>
+            <footer>
+              <button (click)="toggleHeader($event, false)">{{labels.cancel}}</button>
+              <button (click)="saveHeader()" class="primary">{{labels.save}}</button>
+            </footer>
+          </div>
+        </li>
+        <li *ngFor="let option of filteredOptions; let i = index" [ngClass]="{active: option.active}"
+            (click)="setValueAndClose({value: option, index: i})" [attr.data-automation-value]="option.label">
+          <span [innerHtml]="highlight(option.label, filterTerm)"></span>
+          <i *ngIf="option.active" class="bhi-check"></i>
+        </li>
+      </ul>
+    </novo-overlay-template>
+  `,
   host: {
     '(keydown)': 'onKeyDown($event)',
   },
@@ -104,7 +106,6 @@ export class NovoSelectElement implements OnInit, OnChanges {
         element.active = false;
       });
     }
-
     if (!this.model && !this.createdItem) {
       this.clear();
     } else if (this.createdItem) {
@@ -114,30 +115,31 @@ export class NovoSelectElement implements OnInit, OnChanges {
     } else {
       this.writeValue(this.model);
     }
-
     if (this.panelOpen) {
       this.openPanel();
     }
   }
 
-  /** BEGIN: Convienient Panel Methods. */
+  /** BEGIN: Convenient Panel Methods. */
   openPanel(): void {
     this.overlay.openPanel();
   }
+
   closePanel(): void {
     this.overlay.closePanel();
   }
+
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
   }
-  /** END: Convienient Panel Methods. */
+  /** END: Convenient Panel Methods. */
 
   /**
    * This method closes the panel, and if a value is specified, also sets the associated
    * control to that value. It will also mark the control as dirty if this interaction
    * stemmed from the user.
    */
-  public setValueAndClose(event: any | null): void {
+  setValueAndClose(event: any | null): void {
     if (event.value && event.index >= 0) {
       this.select(event.value, event.index);
     }
@@ -175,65 +177,54 @@ export class NovoSelectElement implements OnInit, OnChanges {
 
   @HostListener('keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    if (this.panelOpen) {
-      if (!this.header.open) {
-        // Prevent Scrolling
-        event.preventDefault();
+    // Prevent default window scrolling
+    if (!this.header.open && [KeyCodes.UP, KeyCodes.DOWN].includes(event.keyCode)) {
+      event.preventDefault();
+    }
+    // Close popup on escape and tab key
+    if ([KeyCodes.ESC, KeyCodes.TAB].includes(event.keyCode)) {
+      this.closePanel();
+    } else if (event.keyCode === KeyCodes.ENTER) {
+      if (this.header.open && this.header.value) {
+        this.saveHeader();
+      } else {
+        this.setValueAndClose({
+          value: this.filteredOptions[this.selectedIndex],
+          index: this.selectedIndex
+        });
       }
-      // Close popup on escape key
-      if (event.keyCode === KeyCodes.ESC) {
-        this.closePanel();
-        return;
+    } else if (event.keyCode === KeyCodes.UP && this.selectedIndex > 0) {
+      this.selectedIndex--;
+      this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
+      this.scrollToSelected();
+    } else if (event.keyCode === KeyCodes.DOWN && this.selectedIndex < this.filteredOptions.length - 1) {
+      this.selectedIndex++;
+      this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
+      this.scrollToSelected();
+      if (this.header.open) {
+        this.toggleHeader(null, false);
       }
-      if (event.keyCode === KeyCodes.ENTER) {
-        if (this.header.open && this.header.value) {
-          this.saveHeader();
-          return;
-        }
-        this.setValueAndClose({ value: this.filteredOptions[this.selectedIndex], index: this.selectedIndex });
-        return;
-      }
-
-      if (event.keyCode === KeyCodes.UP && this.selectedIndex > 0) {
-        this.selectedIndex--;
-        this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
+    } else if (event.keyCode === KeyCodes.UP && this.selectedIndex === 0) {
+      this.selectedIndex--;
+      this.toggleHeader(null, true);
+    } else if ((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode === KeyCodes.SPACE) {
+      clearTimeout(this.filterTermTimeout);
+      this.filterTermTimeout = setTimeout(() => {
+        this.filterTerm = '';
+      }, 2000);
+      let char = String.fromCharCode(event.keyCode);
+      this.filterTerm = this.filterTerm.concat(char);
+      let item = this.filteredOptions.find((i) => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
+      if (item) {
+        this.select(item, this.filteredOptions.indexOf(item));
         this.scrollToSelected();
-      } else if (event.keyCode === KeyCodes.DOWN && this.selectedIndex < this.filteredOptions.length - 1) {
-        this.selectedIndex++;
-        this.select(this.filteredOptions[this.selectedIndex], this.selectedIndex);
-        this.scrollToSelected();
-        if (this.header.open) {
-          this.toggleHeader(null, false);
-        }
-      } else if (event.keyCode === KeyCodes.UP && this.selectedIndex === 0) {
-        this.selectedIndex--;
-        this.toggleHeader(null, true);
-      } else if ((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode === KeyCodes.SPACE) {
-        clearTimeout(this.filterTermTimeout);
-        this.filterTermTimeout = setTimeout(() => {
-          this.filterTerm = '';
-        }, 2000);
-        let char = String.fromCharCode(event.keyCode);
-        this.filterTerm = this.filterTerm.concat(char);
-        // let element = this.element.nativeElement;
-        // let list = element.querySelector('.novo-select-list');
-        // let item = element.querySelector(`[data-automation-value^="${this.filterTerm}" i]`);
-        let item = this.filteredOptions.find((i) => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
-        if (item) {
-          this.select(item, this.filteredOptions.indexOf(item));
-          this.scrollToSelected();
-        }
-      } else if ([KeyCodes.BACKSPACE, KeyCodes.DELETE].includes(event.keyCode)) {
-        clearTimeout(this.filterTermTimeout);
-        this.filterTermTimeout = setTimeout(() => {
-          this.filterTerm = '';
-        }, 2000);
-        this.filterTerm = this.filterTerm.slice(0, -1);
       }
-    } else {
-      if ([KeyCodes.DOWN, KeyCodes.UP].includes(event.keyCode)) {
-        this.panelOpen ? this.closePanel() : this.openPanel();
-      }
+    } else if ([KeyCodes.BACKSPACE, KeyCodes.DELETE].includes(event.keyCode)) {
+      clearTimeout(this.filterTermTimeout);
+      this.filterTermTimeout = setTimeout(() => {
+        this.filterTerm = '';
+      }, 2000);
+      this.filterTerm = this.filterTerm.slice(0, -1);
     }
   }
 
@@ -242,7 +233,7 @@ export class NovoSelectElement implements OnInit, OnChanges {
   }
 
   scrollToIndex(index: number) {
-    let element = this.overlay._overlayRef.overlayElement;
+    let element = this.overlay.overlayRef.overlayElement;
     let list = element.querySelector('.novo-select-list');
     let items = list.querySelectorAll('li');
     let item = items[this.headerConfig ? index + 1 : index];
