@@ -5,7 +5,7 @@ describe('Control: CustomControl', () => {
   let control;
 
   beforeEach(() => {
-    control = new CustomControl({ customControl: 'new', type: 'custom' });
+    control = new CustomControl({ template: 'new', type: 'custom' });
   });
 
   it('should have the right control type', () => {
