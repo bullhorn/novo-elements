@@ -48,7 +48,7 @@ export class NovoFormElement implements AfterContentInit, OnInit {
   ngAfterContentInit() {
     if (this.customTemplates && this.customTemplates.length) {
       this.customTemplates.forEach((template: any) => {
-        this.templates.addCustom(template.type, template.template);
+        this.templates.addCustom(template.name, template.template);
       });
     }
   }

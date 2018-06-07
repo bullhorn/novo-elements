@@ -199,6 +199,9 @@ export class FormUtils {
       if (overrides[field.name].pickerCallback) {
         controlConfig.config.callback = overrides[field.name].pickerCallback;
       }
+      if (overrides[field.name].type) {
+        type = overrides[field.name].type;
+      }
       Object.assign(controlConfig, overrides[field.name]);
     }
 
