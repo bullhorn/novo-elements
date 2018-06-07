@@ -57,93 +57,93 @@ export class NovoAutoSize implements AfterContentInit {
 @Component({
   selector: 'novo-control',
   template: `
-      <novo-control-templates></novo-control-templates>
-      <div class="novo-control-container" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
-          <!--Encrypted Field-->
-          <span [tooltip]="labels.encryptedFieldTooltip" [tooltipPosition]="'right'"><i [hidden]="!form.controls[control.key].encrypted"
-          class="bhi-lock"></i></span>
-          <!--Label (for horizontal)-->
-          <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && form.controls[control.key].label && !condensed" [ngClass]="{'encrypted': form.controls[control.key].encrypted }">
-              {{ form.controls[control.key].label }}
-          </label>
-          <div class="novo-control-outer-container">
-              <!--Label (for vertical)-->
-              <label
-                  *ngIf="form.layout === 'vertical' && form.controls[control.key].label && !condensed"
-                  class="novo-control-label"
-                  [attr.for]="control.key"
-                  [class.novo-control-empty]="!hasValue"
-                  [class.novo-control-focused]="focused"
-                  [class.novo-control-filled]="hasValue"
-                  [class.novo-control-always-active]="alwaysActive || form.controls[control.key].placeholder"
-                  [class.novo-control-extra-spacing]="requiresExtraSpacing">
-                  {{ form.controls[control.key].label }}
-              </label>
-              <div class="novo-control-inner-container" [class.required]="form.controls[control.key].required && !form.controls[control.key].readOnly">
-                  <div class="novo-control-inner-input-container">
-                    <!--Required Indicator-->
-                      <i [hidden]="!form.controls[control.key].required || form.controls[control.key].readOnly"
-                          class="required-indicator {{ form.controls[control.key].controlType }}"
-                          [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || (form.controls[control.key].required && !form.controls[control.key].readOnly)">
-                      </i>
-                      <!--Form Controls-->
-                      <div class="novo-control-input {{ form.controls[control.key].controlType }}" [ngSwitch]="form.controls[control.key].controlType" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
-                          <!--TODO prefix/suffix on the control-->
-                          <ng-container *ngIf="templates">
-                            <ng-container *ngTemplateOutlet="templates[form.controls[control.key].controlType]; context: templateContext"></ng-container>
-                          </ng-container>
-                          <!--ReadOnly-->
-                          <!--TODO - Handle rendering of different READONLY values-->
-                          <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
-                      </div>
-                  </div>
-                  <!--Error Message-->
-                  <div class="field-message {{ form.controls[control.key].controlType }}" *ngIf="!condensed && (isDirty || errors?.maxlength || form.controls[control.key].description || showCount)" [class.has-tip]="form.controls[control.key].tipWell">
-                      <div class="messages">
-                          <span class="error-text" *ngIf="showFieldMessage"></span>
-                          <span class="error-text" *ngIf="isDirty && errors?.required && form.controls[control.key].controlType !== 'address'">{{ form.controls[control.key].label | uppercase }} {{ labels.isRequired }}</span>
-                          <span class="error-text" *ngIf="isDirty && errors?.minlength">{{ form.controls[control.key].label | uppercase }} {{ labels.minLength }} {{ form.controls[control.key].minlength }}</span>
-                          <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">{{ labels.maxlengthMet(form.controls[control.key].maxlength) }}</span>
-                          <span class="error-text" *ngIf="errors?.maxlength && focused && !errors?.maxlengthFields">{{ labels.invalidMaxlength(form.controls[control.key].maxlength) }}</span>
-                          <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{ form.controls[control.key].label | uppercase }} {{ labels.invalidEmail }}</span>
-                          <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{ form.controls[control.key].label | uppercase }} {{ labels.isTooLarge }}</span>
-                          <span *ngIf="isDirty && errors?.minYear">{{ form.controls[control.key].label | uppercase }} {{ labels.notValidYear }}</span>
-                          <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
-                          <span class="error-text" *ngIf="errors?.maxlength && errors?.maxlengthFields && maxlengthErrorField && focused">
-                              {{ labels.invalidMaxlengthWithField(control.config[maxlengthErrorField]?.label, control.config[maxlengthErrorField]?.maxlength) }}
-                          </span>
-                          <span class="error-text" *ngIf="isDirty && maxlengthMetField && focused && !errors?.maxlengthFields?.includes(maxlengthMetField)">
-                            {{ labels.maxlengthMetWithField(control.config[maxlengthMetField]?.label, control.config[maxlengthMetField]?.maxlength) }}
-                          </span>
-                          <span *ngIf="isDirty && errors?.invalidAddress">
-                              <span class="error-text" *ngFor="let invalidAddressField of errors?.invalidAddressFields">{{ invalidAddressField | uppercase }} {{ labels.isRequired }} </span>
-                          </span>
-                          <!--Field Hint-->
-                          <span class="description" *ngIf="form.controls[control.key].description">
-                              {{ form.controls[control.key].description }}
-                          </span>
-                      </div>
-                      <span class="character-count" [class.error]="((errors?.maxlength && !errors?.maxlengthFields) || (errors?.maxlength && errors?.maxlengthFields && errors.maxlengthFields.includes(focusedField)))" *ngIf="showCount">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
-                  </div>
-                  <!--Tip Wel-->
-                  <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
-              </div>
-              <i *ngIf="form.controls[control.key].fieldInteractionloading" class="loading">
-                  <svg version="1.1"
-                   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-                   x="0px" y="0px" width="18.2px" height="18.5px" viewBox="0 0 18.2 18.5" style="enable-background:new 0 0 18.2 18.5;"
-                   xml:space="preserve">
-                  <style type="text/css">
-                      .spinner { fill:#FFFFFF; }
-                  </style>
-                      <path class="spinner" d="M9.2,18.5C4.1,18.5,0,14.4,0,9.2S4.1,0,9.2,0c0.9,0,1.9,0.1,2.7,0.4c0.8,0.2,1.2,1.1,1,1.9
-                          c-0.2,0.8-1.1,1.2-1.9,1C10.5,3.1,9.9,3,9.2,3C5.8,3,3,5.8,3,9.2s2.8,6.2,6.2,6.2c2.8,0,5.3-1.9,6-4.7c0.2-0.8,1-1.3,1.8-1.1
-                          c0.8,0.2,1.3,1,1.1,1.8C17.1,15.7,13.4,18.5,9.2,18.5z"/>
-                  </svg>
-              </i>
-          </div>
-      </div>
-  `,
+        <novo-control-templates></novo-control-templates>
+        <div class="novo-control-container" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
+            <!--Encrypted Field-->
+            <span [tooltip]="labels.encryptedFieldTooltip" [tooltipPosition]="'right'"><i [hidden]="!form.controls[control.key].encrypted"
+            class="bhi-lock"></i></span>
+            <!--Label (for horizontal)-->
+            <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && form.controls[control.key].label && !condensed" [ngClass]="{'encrypted': form.controls[control.key].encrypted }">
+                {{ form.controls[control.key].label }}
+            </label>
+            <div class="novo-control-outer-container">
+                <!--Label (for vertical)-->
+                <label
+                    *ngIf="form.layout === 'vertical' && form.controls[control.key].label && !condensed"
+                    class="novo-control-label"
+                    [attr.for]="control.key"
+                    [class.novo-control-empty]="!hasValue"
+                    [class.novo-control-focused]="focused"
+                    [class.novo-control-filled]="hasValue"
+                    [class.novo-control-always-active]="alwaysActive || form.controls[control.key].placeholder"
+                    [class.novo-control-extra-spacing]="requiresExtraSpacing">
+                    {{ form.controls[control.key].label }}
+                </label>
+                <div class="novo-control-inner-container" [class.required]="form.controls[control.key].required && !form.controls[control.key].readOnly">
+                    <div class="novo-control-inner-input-container">
+                      <!--Required Indicator-->
+                        <i [hidden]="!form.controls[control.key].required || form.controls[control.key].readOnly"
+                            class="required-indicator {{ form.controls[control.key].controlType }}"
+                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || (form.controls[control.key].required && !form.controls[control.key].readOnly)">
+                        </i>
+                        <!--Form Controls-->
+                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [ngSwitch]="form.controls[control.key].controlType" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
+                            <!--TODO prefix/suffix on the control-->
+                            <ng-container *ngIf="templates">
+                              <ng-container *ngTemplateOutlet="templates[form.controls[control.key].controlType]; context: templateContext"></ng-container>
+                            </ng-container>
+                            <!--ReadOnly-->
+                            <!--TODO - Handle rendering of different READONLY values-->
+                            <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
+                        </div>
+                    </div>
+                    <!--Error Message-->
+                    <div class="field-message {{ form.controls[control.key].controlType }}" *ngIf="!condensed" [class.has-tip]="form.controls[control.key].tipWell">
+                        <div class="messages">
+                            <span class="error-text" *ngIf="showFieldMessage"></span>
+                            <span class="error-text" *ngIf="isDirty && errors?.required && form.controls[control.key].controlType !== 'address'">{{ form.controls[control.key].label | uppercase }} {{ labels.isRequired }}</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.minlength">{{ form.controls[control.key].label | uppercase }} {{ labels.minLength }} {{ form.controls[control.key].minlength }}</span>
+                            <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">{{ labels.maxlengthMet(form.controls[control.key].maxlength) }}</span>
+                            <span class="error-text" *ngIf="errors?.maxlength && focused && !errors?.maxlengthFields">{{ labels.invalidMaxlength(form.controls[control.key].maxlength) }}</span>
+                            <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{ form.controls[control.key].label | uppercase }} {{ labels.invalidEmail }}</span>
+                            <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{ form.controls[control.key].label | uppercase }} {{ labels.isTooLarge }}</span>
+                            <span *ngIf="isDirty && errors?.minYear">{{ form.controls[control.key].label | uppercase }} {{ labels.notValidYear }}</span>
+                            <span class="error-text" *ngIf="isDirty && (errors?.custom)">{{ errors.custom }}</span>
+                            <span class="error-text" *ngIf="errors?.maxlength && errors?.maxlengthFields && maxlengthErrorField && focused">
+                                {{ labels.invalidMaxlengthWithField(control.config[maxlengthErrorField]?.label, control.config[maxlengthErrorField]?.maxlength) }}
+                            </span>
+                            <span class="error-text" *ngIf="isDirty && maxlengthMetField && focused && !errors?.maxlengthFields?.includes(maxlengthMetField)">
+                              {{ labels.maxlengthMetWithField(control.config[maxlengthMetField]?.label, control.config[maxlengthMetField]?.maxlength) }}
+                            </span>
+                            <span *ngIf="isDirty && errors?.invalidAddress">
+                                <span class="error-text" *ngFor="let invalidAddressField of errors?.invalidAddressFields">{{ invalidAddressField | uppercase }} {{ labels.isRequired }} </span>
+                            </span>
+                            <!--Field Hint-->
+                            <span class="description" *ngIf="form.controls[control.key].description">
+                                {{ form.controls[control.key].description }}
+                            </span>
+                        </div>
+                        <span class="character-count" [class.error]="((errors?.maxlength && !errors?.maxlengthFields) || (errors?.maxlength && errors?.maxlengthFields && errors.maxlengthFields.includes(focusedField)))" *ngIf="showCount">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
+                    </div>
+                    <!--Tip Wel-->
+                    <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
+                </div>
+                <i *ngIf="form.controls[control.key].fieldInteractionloading" class="loading">
+                    <svg version="1.1"
+                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                     x="0px" y="0px" width="18.2px" height="18.5px" viewBox="0 0 18.2 18.5" style="enable-background:new 0 0 18.2 18.5;"
+                     xml:space="preserve">
+                    <style type="text/css">
+                        .spinner { fill:#FFFFFF; }
+                    </style>
+                        <path class="spinner" d="M9.2,18.5C4.1,18.5,0,14.4,0,9.2S4.1,0,9.2,0c0.9,0,1.9,0.1,2.7,0.4c0.8,0.2,1.2,1.1,1,1.9
+                            c-0.2,0.8-1.1,1.2-1.9,1C10.5,3.1,9.9,3,9.2,3C5.8,3,3,5.8,3,9.2s2.8,6.2,6.2,6.2c2.8,0,5.3-1.9,6-4.7c0.2-0.8,1-1.3,1.8-1.1
+                            c0.8,0.2,1.3,1,1.1,1.8C17.1,15.7,13.4,18.5,9.2,18.5z"/>
+                    </svg>
+                </i>
+            </div>
+        </div>
+    `,
   host: {
     '[class]': 'form.controls[control.key].controlType',
     '[attr.data-control-type]': 'form.controls[control.key].controlType',
