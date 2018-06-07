@@ -5,7 +5,7 @@ export class CustomControl extends BaseControl {
   controlType = 'custom';
 
   constructor(config: NovoControlConfig) {
-    super(config.customControl, config);
-    this.controlType = config.customControl;
+    super(config.template, config);
+    this.controlType = config.template;
   }
 }

@@ -164,7 +164,7 @@ export class FormUtils {
       description: field.description || '',
       tooltip: field.tooltip,
       tooltipPosition: field.tooltipPosition,
-      customControl: field.customControl,
+      template: field.template,
       customControlConfig: field.customControlConfig
     };
     // TODO: getControlOptions should always return the correct format

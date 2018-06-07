@@ -515,7 +515,7 @@ export class FormDemoComponent {
       { token: 'TOKEN', military: true },
       {
         customfield: {
-          customControl: 'custom-demo-component',
+          template: 'custom-demo-component',
         },
       },
     );
@@ -534,7 +534,7 @@ export class FormDemoComponent {
       { token: 'TOKEN' },
       {
         customfield: {
-          customControl: 'custom-demo-component',
+          template: 'custom-demo-component',
         },
       },
     );

@@ -55,7 +55,7 @@ export interface NovoControlConfig {
   tooltipSize?: string;
   tooltipPreline?: boolean;
   layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
-  customControl?: any;
+  template?: any;
   customControlConfig?: any;
   military?: boolean;
   dateFormat?: string;
@@ -115,7 +115,7 @@ export class BaseControl {
   tooltipSize?: string;
   tooltipPreline?: boolean;
   layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
-  customControl?: any;
+  template?: any;
   customControlConfig?: any;
   military?: boolean;
   dateFormat?: string;
@@ -190,7 +190,7 @@ export class BaseControl {
       this.tooltipSize = config.tooltipSize;
       this.tooltipPreline = config.tooltipPreline;
     }
-    this.customControl = config.customControl;
+    this.template = config.template;
     this.customControlConfig = config.customControlConfig;
     this.tipWell = config.tipWell;
     this.width = config.width;
