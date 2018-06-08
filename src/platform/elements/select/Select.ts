@@ -1,19 +1,20 @@
 // NG2
 import {
-  ChangeDetectorRef,
   Component,
-  ElementRef,
-  EventEmitter,
-  forwardRef,
-  HostListener,
   Input,
-  OnChanges,
-  OnInit,
   Output,
-  SimpleChanges,
+  EventEmitter,
   ViewChild,
+  forwardRef,
+  ElementRef,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  HostListener,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // APP
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
@@ -31,30 +32,27 @@ const SELECT_VALUE_ACCESSOR = {
   selector: 'novo-select',
   providers: [SELECT_VALUE_ACCESSOR],
   template: `
-    <div (click)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
-    <novo-overlay-template [parent]="element" position="center">
-      <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
-        <ng-content></ng-content>
-        <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">
-          <button *ngIf="!header.open" (click)="toggleHeader($event); false" tabIndex="-1" type="button" class="header"><i class="bhi-add-thin"></i>&nbsp;{{headerConfig.label}}
-          </button>
-          <div *ngIf="header.open" [ngClass]="{active: header.open}">
-            <input autofocus type="text" [placeholder]="headerConfig.placeholder" [attr.id]="name" autocomplete="false" [(ngModel)]="header.value"
-                   [ngClass]="{invalid: !header.valid}"/>
-            <footer>
-              <button (click)="toggleHeader($event, false)">{{labels.cancel}}</button>
-              <button (click)="saveHeader()" class="primary">{{labels.save}}</button>
-            </footer>
-          </div>
-        </li>
-        <li *ngFor="let option of filteredOptions; let i = index" [ngClass]="{active: option.active}"
-            (click)="setValueAndClose({value: option, index: i})" [attr.data-automation-value]="option.label">
-          <span [innerHtml]="highlight(option.label, filterTerm)"></span>
-          <i *ngIf="option.active" class="bhi-check"></i>
-        </li>
-      </ul>
-    </novo-overlay-template>
-  `,
+        <div (click)="openPanel()" tabIndex="0" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
+        <novo-overlay-template [parent]="element" position="center">
+            <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
+                <ng-content></ng-content>
+                <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">
+                    <button  *ngIf="!header.open" (click)="toggleHeader($event); false" tabIndex="-1" type="button" class="header"><i class="bhi-add-thin"></i>&nbsp;{{headerConfig.label}}</button>
+                    <div *ngIf="header.open" [ngClass]="{active: header.open}">
+                        <input autofocus type="text" [placeholder]="headerConfig.placeholder" [attr.id]="name" autocomplete="false" [(ngModel)]="header.value" [ngClass]="{invalid: !header.valid}"/>
+                        <footer>
+                            <button (click)="toggleHeader($event, false)">{{labels.cancel}}</button>
+                            <button (click)="saveHeader()" class="primary">{{labels.save}}</button>
+                        </footer>
+                    </div>
+                </li>
+                <li *ngFor="let option of filteredOptions; let i = index" [ngClass]="{active: option.active}" (click)="setValueAndClose({value: option, index: i})" [attr.data-automation-value]="option.label">
+                    <span [innerHtml]="highlight(option.label, filterTerm)"></span>
+                    <i *ngIf="option.active" class="bhi-check"></i>
+                </li>
+            </ul>
+        </novo-overlay-template>
+    `,
   host: {
     '(keydown)': 'onKeyDown($event)',
   },
@@ -122,20 +120,17 @@ export class NovoSelectElement implements OnInit, OnChanges {
     }
   }
 
-  /** BEGIN: Convenient Panel Methods. */
+  /** BEGIN: Convienient Panel Methods. */
   openPanel(): void {
     this.overlay.openPanel();
   }
-
   closePanel(): void {
     this.overlay.closePanel();
   }
-
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
   }
-
-  /** END: Convenient Panel Methods. */
+  /** END: Convienient Panel Methods. */
 
   /**
    * This method closes the panel, and if a value is specified, also sets the associated
@@ -247,7 +242,7 @@ export class NovoSelectElement implements OnInit, OnChanges {
   }
 
   scrollToIndex(index: number) {
-    let element = this.overlay.overlayRef.overlayElement;
+    let element = this.overlay._overlayRef.overlayElement;
     let list = element.querySelector('.novo-select-list');
     let items = list.querySelectorAll('li');
     let item = items[this.headerConfig ? index + 1 : index];

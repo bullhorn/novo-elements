@@ -165,10 +165,10 @@ export class Helpers {
           field = field.getTime();
         }
         if (value.min) {
-          results.push(field >= value.min);
+          results.push(field > value.min);
         }
         if (value.max) {
-          results.push(field <= value.max);
+          results.push(field < value.max);
         }
         if (value.any && Array.isArray(value.any)) {
           if (Array.isArray(field)) {
@@ -192,19 +192,71 @@ export class Helpers {
       } else {
         results.push(JSON.stringify(field).match(new RegExp(value, 'gi')));
       }
+
       return results.every((x) => x);
     };
   }
 
+  static calcPositionOffset(position: ClientRect, element: Element, side: string): { top: string; left: string; width: string } {
+    if (!position) {
+      return;
+    }
+
+    let supportPageOffset = window.pageXOffset !== undefined;
+    let isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
+
+    let x = supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft;
+    let y = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+
+    let sideOffset = 0;
+
+    if (side === 'right') {
+      sideOffset = position.width - element.clientWidth;
+    }
+
+    let top = `${position.top + y + position.height + 10}px`;
+    let left = `${position.left + x + sideOffset}px`;
+    let width = `${position.width}px`;
+
+    const clientWidth = element.clientWidth,
+      clientHeight = element.clientHeight,
+      marginFromBottom = parseInt(top) + clientHeight,
+      marginFromRight = parseInt(left) + clientWidth,
+      windowScrollHeight = window.innerHeight + window.scrollY,
+      windowScrollWidth = window.innerWidth + window.scrollX;
+
+    // Force open up
+    if (marginFromBottom >= windowScrollHeight) {
+      top = `${parseInt(top.replace('px', '')) - clientHeight - position.height - 20}px`;
+    }
+
+    // Force open right
+    if (marginFromRight >= windowScrollWidth) {
+      left = `${parseInt(left.replace('px', '')) - clientWidth + position.width}px`;
+    }
+
+    // Force open middle
+    if (parseInt(top.replace('px', '')) <= window.scrollY) {
+      top = `${parseInt(top.replace('px', '')) + clientHeight / 2 + position.height / 2 + 10}px`;
+    }
+
+    // Force open left
+    if (parseInt(left.replace('px', '')) <= window.scrollX) {
+      left = `${parseInt(left.replace('px', '')) + clientWidth / 2 + position.width * 2 - 4}px`;
+    }
+
+    return { top, left, width };
+  }
+
   static findAncestor(element: Element, selector: string): Element {
-    while ((element = element.parentElement) && !element.matches.call(element, selector)) ; // tslint:disable-line
+    while ((element = element.parentElement) && !element.matches.call(element, selector)); // tslint:disable-line
     return element;
   }
 
   static deepClone(item: any): any {
     if (Array.isArray(item)) {
       let newArr = [];
-      for (let i = item.length; i-- > 0;) {
+      for (let i = item.length; i-- > 0; ) {
         // tslint:disable-line
         newArr[i] = Helpers.deepClone(item[i]);
       }
@@ -299,7 +351,6 @@ export class Helpers {
 
 export class Can {
   obj: Object;
-
   constructor(obj: Object) {
     this.obj = obj;
   }
@@ -320,7 +371,6 @@ export class Can {
     return thing !== void 0;
   }
 }
-
 /**
  * @param {any} obj
  * @returns
