@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule, Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 // Vendor
 import {
   NovoElementsModule,
@@ -167,7 +166,6 @@ export function provideAppBridgeService(http) {
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    ScrollDispatchModule,
     // Vendor
     NovoElementsModule,
     NovoElementProviders.forRoot(),

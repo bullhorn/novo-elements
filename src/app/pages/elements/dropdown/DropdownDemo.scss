@@ -1,35 +1,18 @@
 dropdown-demo {
-  .example.dropdown-demo {
-    background: $positive;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .example.dropdown-demo-scroll {
-    background: $positive;
-    padding: 20px;
-    overflow: auto;
-  }
-}
-
-.custom-class {
-  background: red;
-}
-
-.scrollable-container-demo {
-  display: block !important;
-
-  .scrollable-container {
-    max-height: 20rem;
-    overflow: scroll;
-
-    .scrollable-content {
-      height: 20em;
-
-      novo-dropdown {
-        margin-top: 10rem;
-      }
+    .example.dropdown-demo {
+        background: $positive;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
-  }
+    .example.dropdown-demo-scroll {
+        background: $positive;
+        padding: 20px;
+        overflow: auto;
+    }
+}
+
+novo-dropdown-container.custom-class {
+    background: red;
 }

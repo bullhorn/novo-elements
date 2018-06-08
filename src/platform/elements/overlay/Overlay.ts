@@ -1,109 +1,152 @@
-// Angular
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, NgZone, OnDestroy, Optional, Output, TemplateRef,
-  ViewChild, ViewContainerRef
+  Component,
+  ElementRef,
+  Input,
+  Output,
+  EventEmitter,
+  Inject,
+  InjectionToken,
+  ViewChild,
+  ChangeDetectorRef,
+  TemplateRef,
+  NgZone,
+  Optional,
+  ViewContainerRef,
+  OnDestroy,
+  ChangeDetectionStrategy,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
+
 import {
-  ConnectedPositionStrategy, HorizontalConnectionPos, Overlay, OverlayConfig, OverlayRef, ScrollStrategy, VerticalConnectionPos,
+  ConnectedPositionStrategy,
+  Overlay,
+  OverlayRef,
+  OverlayConfig,
+  PositionStrategy,
+  RepositionScrollStrategy,
+  ScrollStrategy,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
-// Vendor
-import { Subscription } from 'rxjs/Subscription';
-import { of as observableOf } from 'rxjs/observable/of';
+
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { merge } from 'rxjs/observable/merge';
+import { fromEvent } from 'rxjs/observable/fromEvent';
+import { of as observableOf } from 'rxjs/observable/of';
 import { filter } from 'rxjs/operators/filter';
 import { first } from 'rxjs/operators/first';
-import { fromEvent } from 'rxjs/observable/fromEvent';
 import { switchMap } from 'rxjs/operators/switchMap';
+
+/** Injection token that determines the scroll handling while the autocomplete panel is open. */
+export const DEFAULT_OVERLAY_SCROLL_STRATEGY: InjectionToken<ScrollStrategy> = new InjectionToken<() => ScrollStrategy>(
+  'novo-overlay-scroll-strategy',
+);
+
+/** @docs-private */
+export function DEFAULT_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY(overlay: Overlay): () => RepositionScrollStrategy {
+  return () => overlay.scrollStrategies.reposition();
+}
+
+/** @docs-private */
+export const DEFAULT_OVERLAY_SCROLL_STRATEGY_PROVIDER: any = {
+  provide: DEFAULT_OVERLAY_SCROLL_STRATEGY,
+  deps: [Overlay],
+  useFactory: DEFAULT_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY,
+};
 
 @Component({
   selector: 'novo-overlay-template',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-template>
-      <div class="novo-overlay-panel" role="listbox" [id]="id" #panel>
-        <ng-content></ng-content>
-      </div>
+        <div class="novo-overlay-panel" role="listbox" [id]="id" #panel>
+            <ng-content></ng-content>
+        </div>
     </ng-template>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoOverlayTemplateComponent implements OnDestroy {
   public id: string = `novo-overlay-${Date.now()}`;
 
+  /** @docs-private */
   @ViewChild(TemplateRef) public template: TemplateRef<any>;
+
+  /** Element for the panel containing the autocomplete options. */
   @ViewChild('panel') public panel: ElementRef;
-
   @Input() public position: string = 'default';
-  @Input() public scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
-  @Input() public width: number;
-  @Input() public height: number;
+  @Input() public size: string = 'inherit';
   @Input() public closeOnSelect: boolean = true;
-
   @Output() public select: EventEmitter<any> = new EventEmitter();
   @Output() public closing: EventEmitter<any> = new EventEmitter();
 
-  public overlayRef: OverlayRef | null;
-  public portal: TemplatePortal<any>;
+  public _overlayRef: OverlayRef | null;
+  public _portal: any; // TODO - type me!
+  public _panelOpen: boolean = false;
 
-  // The subscription for closing actions (some are bound to document)
-  protected closingActionsSubscription: Subscription;
+  /** Strategy that is used to position the panel. */
+  public _positionStrategy: ConnectedPositionStrategy;
+
+  /** The subscription for closing actions (some are bound to document). */
+  public _closingActionsSubscription: Subscription;
   private _parent: ElementRef;
 
-  constructor(protected overlay: Overlay,
-              protected viewContainerRef: ViewContainerRef,
-              protected zone: NgZone,
-              protected changeDetectorRef: ChangeDetectorRef,
-              @Optional()
-              @Inject(DOCUMENT)
-              protected document: any) {}
+  constructor(
+    protected _overlay: Overlay,
+    protected _viewContainerRef: ViewContainerRef,
+    protected _zone: NgZone,
+    protected _changeDetectorRef: ChangeDetectorRef,
+    @Inject(DEFAULT_OVERLAY_SCROLL_STRATEGY) protected _scrollStrategy: any,
+    @Optional()
+    @Inject(DOCUMENT)
+    protected _document: any,
+  ) {}
 
   public ngOnDestroy(): void {
-    this.destroyOverlay();
+    this._destroyPanel();
   }
 
+  /* Whether or not the autocomplete panel is open. */
   get panelOpen(): boolean {
-    return this.overlayRef && this.overlayRef.hasAttached();
+    return this._panelOpen;
   }
 
   @Input()
   public set parent(value: ElementRef) {
     this._parent = value;
-    this.checkSizes();
+    this._checkSizes();
   }
 
   public get parent(): ElementRef {
     return this._parent;
   }
 
+  /** Opens the autocomplete suggestion panel. */
   public openPanel(): void {
-    if (!this.overlayRef) {
-      this.createOverlay(this.template);
+    if (!this._overlayRef) {
+      this._createOverlay(this.template);
     } else {
-      this.checkSizes();
+      this._checkSizes();
     }
-    if (this.overlayRef && !this.overlayRef.hasAttached()) {
-      this.overlayRef.attach(this.portal);
-      this.closingActionsSubscription = this.subscribeToClosingActions();
+    if (this._overlayRef && !this._overlayRef.hasAttached()) {
+      this._overlayRef.attach(this._portal);
+      this._closingActionsSubscription = this._subscribeToClosingActions();
     }
-    this.changeDetectorRef.markForCheck();
-    setTimeout(() => {
-      if (this.overlayRef) {
-        this.overlayRef.updatePosition();
-      }
-    });
+    this._panelOpen = true;
+    this._changeDetectorRef.markForCheck();
+    setTimeout(() => this._overlayRef.updatePosition());
   }
 
+  /** Closes the autocomplete suggestion panel. */
   public closePanel(): void {
-    this.zone.run(() => {
-      if (this.overlayRef && this.overlayRef.hasAttached()) {
-        this.overlayRef.detach();
-        this.closingActionsSubscription.unsubscribe();
+    this._zone.run(() => {
+      if (this._overlayRef && this._overlayRef.hasAttached()) {
+        this._overlayRef.detach();
+        this._closingActionsSubscription.unsubscribe();
       }
       this.closing.emit(true);
-      if (this.panelOpen) {
-        this.changeDetectorRef.markForCheck();
+      if (this._panelOpen) {
+        this._panelOpen = false;
+        this._changeDetectorRef.markForCheck();
       }
     });
   }
@@ -119,25 +162,25 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   public get panelClosingActions(): Observable<any> {
     return merge(
       // this.overlayTemplate._keyManager.tabOut,
-      this.outsideClickStream,
+      this._outsideClickStream,
     );
   }
 
   /** Stream of clicks outside of the autocomplete panel. */
-  protected get outsideClickStream(): Observable<any> {
-    if (!this.document) {
+  protected get _outsideClickStream(): Observable<any> {
+    if (!this._document) {
       return observableOf();
     }
 
-    return merge(fromEvent(this.document, 'mousedown'), fromEvent(this.document, 'touchend')).pipe(
+    return merge(fromEvent(this._document, 'click'), fromEvent(this._document, 'touchend')).pipe(
       filter((event: MouseEvent | TouchEvent) => {
         const clickTarget: HTMLElement = event.target as HTMLElement;
         const clicked: boolean =
-          this.panelOpen &&
-          clickTarget !== this.getConnectedElement().nativeElement &&
-          !this.getConnectedElement().nativeElement.contains(clickTarget) &&
-          (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget));
-        if (this.panelOpen && !!this.overlayRef && this.overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
+          this._panelOpen &&
+          clickTarget !== this._getConnectedElement().nativeElement &&
+          !this._getConnectedElement().nativeElement.contains(clickTarget) &&
+          (!!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget));
+        if (this._panelOpen && !!this._overlayRef && this._overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
           this.select.emit(event);
         }
         return clicked;
@@ -149,8 +192,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
    * This method listens to a stream of panel closing actions and resets the
    * stream every time the option list changes.
    */
-  protected subscribeToClosingActions(): Subscription {
-    const firstStable: Observable<any> = this.zone.onStable.asObservable().pipe(first());
+  protected _subscribeToClosingActions(): Subscription {
+    const firstStable: Observable<any> = this._zone.onStable.asObservable().pipe(first());
     // const valueChanges = Observable.from(this.value);
     // When the zone is stable initially, and when the option list changes...
     return (
@@ -169,98 +212,76 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     );
   }
 
-  protected createOverlay(template: TemplateRef<any>): void {
-    this.portal = new TemplatePortal(template, this.viewContainerRef);
-    this.overlayRef = this.overlay.create(this.getOverlayConfig());
-    this.overlayRef.backdropClick().subscribe(() => this.closePanel());
-  }
-
-  protected destroyOverlay(): void {
-    if (this.overlayRef) {
+  /** Destroys the autocomplete suggestion panel. */
+  protected _destroyPanel(): void {
+    if (this._overlayRef) {
       this.closePanel();
-      this.overlayRef.dispose();
-      this.overlayRef = undefined;
+      this._overlayRef.dispose();
+      this._overlayRef = undefined;
     }
   }
 
-  protected getOverlayConfig(): OverlayConfig {
-    const config: OverlayConfig = new OverlayConfig();
-
-    if (!this.width) {
-      config.width = this.getHostWidth();
-    } else {
-      config.width = this.width;
-    }
-
-    if (this.height) {
-      config.height = this.height;
-    }
-
-    config.positionStrategy = this.getPosition();
-    config.hasBackdrop = false;
-    config.direction = 'ltr';
-    config.scrollStrategy = this.getScrollStrategy();
-
-    return config;
+  protected _createOverlay(template: TemplateRef<any>): void {
+    this._portal = new TemplatePortal(template, this._viewContainerRef);
+    this._overlayRef = this._overlay.create(this._getOverlayConfig());
   }
 
-  protected getPosition(): ConnectedPositionStrategy {
-    if (this.position === 'right') {
-      let [originX, originFallbackX]: HorizontalConnectionPos[] = ['end', 'start'];
-
-      let [overlayY, overlayFallbackY]: VerticalConnectionPos[] = ['bottom', 'bottom'];
-
-      let [originY, originFallbackY] = [overlayY, overlayFallbackY];
-      let [overlayX, overlayFallbackX] = [originX, originFallbackX];
-
-      return this.overlay
-        .position()
-        .connectedTo(this.getConnectedElement(), { originX, originY }, { overlayX, overlayY })
-        .withDirection('ltr')
-        .withFallbackPosition({ originX: originFallbackX, originY }, { overlayX: overlayFallbackX, overlayY })
-        .withFallbackPosition({ originX, originY: originFallbackY }, { overlayX, overlayY: overlayFallbackY })
-        .withFallbackPosition(
-          { originX: originFallbackX, originY: originFallbackY },
-          { overlayX: overlayFallbackX, overlayY: overlayFallbackY },
-        );
+  protected _getOverlayConfig(): OverlayConfig {
+    const overlayState: OverlayConfig = new OverlayConfig();
+    overlayState.positionStrategy = this._getOverlayPosition();
+    if (this.size === 'inherit') {
+      overlayState.width = this._getHostWidth();
     }
-    return this.overlay
-      .position()
-      .connectedTo(this.getConnectedElement(), { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
-      .withDirection('ltr')
-      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' });
+    overlayState.direction = 'ltr';
+    overlayState.scrollStrategy = this._scrollStrategy();
+    return overlayState;
   }
 
-  protected getScrollStrategy(): ScrollStrategy {
-    switch (this.scrollStrategy) {
-      case 'block':
-        return this.overlay.scrollStrategies.block();
-      case 'reposition':
-        return this.overlay.scrollStrategies.reposition();
+  protected _getOverlayPosition(): PositionStrategy {
+    switch (this.position) {
+      case 'center':
+        this._positionStrategy = this._overlay
+          .position()
+          .connectedTo(this._getConnectedElement(), { originX: 'start', originY: 'center' }, { overlayX: 'start', overlayY: 'center' })
+          .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
+          .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' });
+        break;
+      case 'right':
+        this._positionStrategy = this._overlay
+          .position()
+          .connectedTo(this._getConnectedElement(), { originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' })
+          .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
+          .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' })
+          .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' });
+        break;
       default:
-        return this.overlay.scrollStrategies.close();
+        this._positionStrategy = this._overlay
+          .position()
+          .connectedTo(this._getConnectedElement(), { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
+          .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' });
+        break;
+    }
+
+    return this._positionStrategy;
+  }
+
+  protected _checkSizes(): void {
+    if (this._overlayRef) {
+      if (this.size === 'inherit') {
+        this._overlayRef.getConfig().width = this._getHostWidth();
+      }
+      this._overlayRef.updateSize(this._overlayRef.getConfig());
+      this._overlayRef.updatePosition();
+      this._changeDetectorRef.markForCheck();
     }
   }
 
-  protected checkSizes(): void {
-    if (this.overlayRef) {
-      if (!this.width) {
-        this.overlayRef.getConfig().width = this.getHostWidth();
-      }
-      if (this.height) {
-        this.overlayRef.getConfig().height = this.height;
-      }
-      this.overlayRef.updateSize(this.overlayRef.getConfig());
-      this.overlayRef.updatePosition();
-      this.changeDetectorRef.markForCheck();
-    }
-  }
-
-  protected getConnectedElement(): ElementRef {
+  protected _getConnectedElement(): ElementRef {
     return this.parent;
   }
 
-  protected getHostWidth(): number {
-    return this.getConnectedElement().nativeElement.getBoundingClientRect().width;
+  /** Returns the width of the input element, so the panel width can match it. */
+  protected _getHostWidth(): number {
+    return this._getConnectedElement().nativeElement.getBoundingClientRect().width;
   }
 }
