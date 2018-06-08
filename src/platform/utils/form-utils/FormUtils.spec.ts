@@ -26,7 +26,25 @@ import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from '../../services/options/OptionsService';
 
-xdescribe('Utils: FormUtils', () => {
+/**
+ * Creates a mock address
+ */
+function createAddress(address1, city, state, zip, countryName) {
+    if (!countryName) {
+        return {
+            countryName: 'US'
+        };
+    }
+    return {
+        address1: address1,
+        city: city,
+        state: state,
+        zip: zip,
+        countryName: countryName
+    };
+}
+
+describe('Utils: FormUtils', () => {
     let formUtils;
 
     beforeEach(async(() => {
@@ -56,6 +74,8 @@ xdescribe('Utils: FormUtils', () => {
                     },
                     deps: [NovoLabelService, OptionsService],
                 },
+                NovoLabelService,
+                OptionsService,
             ],
         });
     }));
@@ -432,6 +452,62 @@ xdescribe('Utils: FormUtils', () => {
         it('should be defined', () => {
             expect(formUtils.forceValidation).toBeDefined();
             formUtils.forceValidation({ controls: [] });
+        });
+    });
+
+    describe('Method: isAddressEmpty(control: any): boolean', () => {
+        let control: any;
+        beforeEach(() => {
+            control = {
+                dirty: true,
+                config: {
+                    address1: {
+                        label: 'address1',
+                        required: true,
+                        maxlength: 5
+                    },
+                    countryID: {
+                        label: 'country',
+                        required: true,
+                        updated: true,
+                    },
+                    state: {
+                        required: false,
+                        pickerConfig: {
+                            defaultOptions: ['MA']
+                        }
+                    }
+                }
+            }
+        });
+        it('should be defined', () => {
+            expect(formUtils.isAddressEmpty).toBeDefined();
+        });
+        it('should return false if no value', () => {
+            expect(formUtils.isAddressEmpty(control)).toBe(true);
+        });
+        it('should return true if valid', () => {
+            control.value = createAddress('TEST', 'TEST', 'TEST', '12345', 'TEST');
+            expect(formUtils.isAddressEmpty(control)).toBe(true);
+        });
+        it('should return invalid if no address1', () => {
+            control.value = createAddress('', 'TEST', 'TEST', '12345', 'TEST');
+            expect(formUtils.isAddressEmpty(control)).toEqual(false);
+        });
+        it('should return invalid if no countryName', () => {
+            control.value = createAddress('TEST', 'TEST', 'TEST', '12345', null);
+            expect(formUtils.isAddressEmpty(control)).toEqual(false);
+        });
+        it('should return null if no state', () => {
+            control.value = createAddress('TEST', 'TEST', '', '12345', 'null');
+            expect(formUtils.isAddressEmpty(control)).toEqual(true);
+        });
+        it('should return true if state is empty and there are no state options available', () => {
+            control.value = createAddress('TESTLENGTH', 'TEST', '', '12345', 'null');
+            control.config.state.pickerConfig = {
+                defaultOptions: []
+            }
+            expect(formUtils.isAddressEmpty(control)).toEqual(true);
         });
     });
 });

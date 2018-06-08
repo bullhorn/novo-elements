@@ -4,6 +4,20 @@ const MAX_INTEGER = 2147483647;
 const MIN_YEAR = 1753;
 
 export class FormValidators {
+
+
+  private showStateRequiredFlag(subfield, control): boolean {
+    return subfield === 'state' &&
+      !Helpers.isEmpty(control.config.state) &&
+      control.config.state.required &&
+      Helpers.isBlank(control.value.state) &&
+      control.config.state.updated &&
+      !Helpers.isBlank(control.value.countryName) &&
+      control.config.state.pickerConfig &&
+      control.config.state.pickerConfig.defaultOptions &&
+      control.config.state.pickerConfig.defaultOptions.length > 0;
+  }
+
   // Makes sure the control value does not exceed the max integer value
   static maxInteger(control) {
     return control.value < MAX_INTEGER ? null : { 'integerTooLarge': true };
@@ -29,7 +43,7 @@ export class FormValidators {
   }
   // Makes sure the control value is a valid address
   static isValidAddress(control) {
-    let fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'country'];
+    let fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
     let invalidAddressFields: string[] = [];
     let maxlengthFields: string[] = [];
     let returnVal: {
@@ -40,29 +54,58 @@ export class FormValidators {
       maxlengthFields?: string[];
     } = null;
     let maxlengthError: boolean = false;
+    let showCountryRequiredFlag = (subfield, ctrl) => {
+      return subfield === 'countryID' &&
+        !Helpers.isEmpty(ctrl.config.countryID) &&
+        ctrl.config.countryID.required &&
+        Helpers.isBlank(ctrl.value.countryName) &&
+        ctrl.config.countryID.updated;
+    };
+
+    let showStateRequiredFlag = (subfield, ctrl): boolean => {
+      return subfield === 'state' &&
+        !Helpers.isEmpty(ctrl.config.state) &&
+        ctrl.config.state.required &&
+        Helpers.isBlank(ctrl.value.state) &&
+        ctrl.config.state.updated &&
+        !Helpers.isBlank(ctrl.value.countryName) &&
+        ctrl.config.state.pickerConfig &&
+        ctrl.config.state.pickerConfig.defaultOptions &&
+        ctrl.config.state.pickerConfig.defaultOptions.length > 0;
+    };
+
     if (control.value && control.config) {
       let valid = true;
       let formValidity = true;
       fieldList.forEach((subfield: string) => {
         if (!Helpers.isEmpty(control.config[subfield])) {
-          if ((subfield !== 'country' && control.config[subfield].required &&
-            !Helpers.isBlank(control.value[subfield]) && Helpers.isEmpty(control.value[subfield])) ||
-            (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
-              !Helpers.isBlank(control.value.countryName) && Helpers.isEmpty(control.value.countryName))) {
+          if (((['countryID', 'state'].indexOf(subfield) === -1) &&
+            control.config[subfield].required &&
+            !Helpers.isBlank(control.value[subfield]) &&
+            Helpers.isEmpty(control.value[subfield])) ||
+            showCountryRequiredFlag(subfield, control) ||
+            showStateRequiredFlag(subfield, control)) {
             valid = false;
             invalidAddressFields.push(control.config[subfield].label);
           }
-          if ((subfield !== 'country' && control.config[subfield].required &&
+          if (((subfield !== 'countryID' && control.config[subfield].required &&
             Helpers.isEmpty(control.value[subfield])) ||
-            (subfield === 'country' && !Helpers.isEmpty(control.config.country) && control.config.country.required &&
-              Helpers.isEmpty(control.value.countryName))) {
+            (subfield === 'countryID' &&
+              !Helpers.isEmpty(control.config.countryID) &&
+              control.config.countryID.required &&
+              Helpers.isEmpty(control.value.countryName))) &&
+            !(subfield === 'state' &&
+              !Helpers.isBlank(control.value.countryName) &&
+              control.config.state.pickerConfig &&
+              control.config.state.pickerConfig.defaultOptions &&
+              control.config.state.pickerConfig.defaultOptions.length === 0)) {
             formValidity = false;
           }
           if (!Helpers.isEmpty(control.config[subfield].maxlength) && !Helpers.isEmpty(control.value[subfield]) &&
             control.value[subfield].length > control.config[subfield].maxlength) {
-              maxlengthError = true;
-              maxlengthFields.push(subfield);
-              formValidity = false;              
+            maxlengthError = true;
+            maxlengthFields.push(subfield);
+            formValidity = false;
           }
         }
       });
@@ -84,4 +127,5 @@ export class FormValidators {
     }
     return null;
   }
+
 }

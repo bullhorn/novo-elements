@@ -44,6 +44,10 @@ novo-picker {
             padding-left: 2.5em;
             background: $off-white !important;
         }
+        &:disabled {
+            border-bottom: 1px dashed lighten($dark, 30%) !important;
+            opacity: 0.7;
+        }
     }
     i.bhi-more {
         position: absolute;
