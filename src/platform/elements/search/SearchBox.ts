@@ -90,7 +90,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     onBlur() {
         this.focused = false;
     }
-    /** BEGIN: Convenient Panel Methods. */
+    /** BEGIN: Convienient Panel Methods. */
     openPanel(): void {
         this.overlay.openPanel();
     }
@@ -104,7 +104,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     get active(): boolean {
         return this.panelOpen || this.alwaysOpen;
     }
-    /** END: Convenient Panel Methods. */
+    /** END: Convienient Panel Methods. */
 
     _handleKeydown(event: KeyboardEvent): void {
         if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
