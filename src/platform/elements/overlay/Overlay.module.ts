@@ -3,14 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 // APP
-import { NovoOverlayTemplateComponent, DEFAULT_OVERLAY_SCROLL_STRATEGY_PROVIDER } from './Overlay';
+import { NovoOverlayTemplateComponent } from './Overlay';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, OverlayModule],
-    declarations: [NovoOverlayTemplateComponent],
-    exports: [NovoOverlayTemplateComponent],
-    providers: [DEFAULT_OVERLAY_SCROLL_STRATEGY_PROVIDER]
+  imports: [CommonModule, FormsModule, OverlayModule, ScrollDispatchModule],
+  declarations: [NovoOverlayTemplateComponent],
+  exports: [NovoOverlayTemplateComponent],
 })
-export class NovoOverlayModule {
-}
+export class NovoOverlayModule {}

@@ -7,7 +7,7 @@ export { EditorControl } from './editor/EditorControl';
 export { AceEditorControl } from './ace-editor/AceEditorControl';
 export { FileControl } from './file/FileControl';
 export { NativeSelectControl } from './native-select/NativeSelectControl';
-export { PickerControl, AppendToBodyPickerControl, TablePickerControl } from './picker/PickerControl';
+export { PickerControl, TablePickerControl } from './picker/PickerControl';
 export { QuickNoteControl } from './quick-note/QuickNoteControl';
 export { RadioControl } from './radio/RadioControl';
 export { ReadOnlyControl } from './read-only/ReadOnlyControl';
