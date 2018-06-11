@@ -2,6 +2,110 @@ novo-address {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+  .addressSearch {
+    width: 100%;
+    position: relative;
+    margin-bottom: 15px;
+    .searchAddress {
+        font-size: 1em;
+        background: transparent !important;
+        border: none;
+        border-bottom: 1px solid lighten($dark, 45%);
+        border-radius: 0;
+        outline: none;
+        height: 2rem;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        box-sizing: content-box;
+        transition: all 300ms;
+        color: #26282B;
+    }
+    i.bhi-location,
+      .bhi-times {
+        position: absolute;
+        bottom: 8px;
+        right: -5px;
+        color: #aaaaaa;
+        font-size: 1.5em;
+        margin-right: 10px;
+    }
+
+    .bhi-times {
+        font-size: 0.8em;
+    }
+  }
+
+  label.clear-all {
+      flex: 1 100%;
+      position: absolute;
+      right: 0;
+      bottom: -20px;
+      font-size: 0.9rem;
+      color: $negative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      i {
+          font-size: 0.7rem;
+          padding-bottom: 2px;
+          margin-left: 5px;
+      }
+  }
+  .googleList {
+    background-color: $white;
+    max-height: 400px;
+    overflow: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    border: 1px solid $positive;
+    transform: translateY(0%);
+    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+    display: block;
+    width: 100%;
+    z-index: 9999;
+    position: absolute;
+    margin-top: 34px;
+
+      .googleListItem {
+        cursor: pointer;
+        padding: 12px 16px;
+        font-size: 1em;
+        border: 1px solid #ddd;
+        line-height: 1.2;
+
+        span {
+          font-weight: 500;
+          font-size: 1.2em;
+          margin-left: 5px;
+        }
+        i {
+          display: inline-block;
+          color: #aaa;
+          font-size: 1.8em;
+          vertical-align: text-top;
+        }
+        .addressDetails {
+            margin-left: 31px;
+            font-size: 1em;
+            font-weight: 400;
+        }
+        &.active,
+        &:focus,
+        &:hover {
+            background-color: lighten($positive, 35%);
+        }
+      }
+
+      &.disabled {
+          display: none;
+          pointer-events: none;
+      }
+    }
+
   &.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
     .street-address,
     .apt,

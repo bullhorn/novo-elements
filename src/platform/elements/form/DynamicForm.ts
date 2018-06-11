@@ -74,6 +74,8 @@ export class NovoFieldsetElement {
                 <ng-content select="form-title"></ng-content>
                 <ng-content select="form-subtitle"></ng-content>
             </header>
+            <novo-tiles [options]="fieldOptions" (onChange)="fieldSelect($event)" [defaultValue]="fieldView"></novo-tiles>
+            <i class="bhi-sort-asc" (click)="topFunction()"></i>
             <form class="novo-form" [formGroup]="form">
                 <ng-container *ngFor="let fieldset of form.fieldsets;let i = index">
                     <novo-fieldset *ngIf="fieldset.controls.length" [index]="i" [autoFocus]="autoFocusFirstField" [icon]="fieldset.icon" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form"></novo-fieldset>
@@ -95,11 +97,20 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
   showingAllFields = false;
   showingRequiredFields = true;
   numControls = 0;
+  public fieldOptions: any = [{
+    label: 'All Fields',
+    value: 'all',
+  }, {
+    label: 'Required Fields',
+    value: 'required'
+  },];
+  public fieldView: string;
 
   constructor(private element: ElementRef) { }
 
   public ngOnInit(): void {
     this.ngOnChanges();
+    this.fieldView = 'all';
   }
 
   public ngOnChanges(changes?: SimpleChanges): void {
@@ -139,6 +150,17 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
     this.form.fieldsets = [...this.fieldsets];
   }
 
+  public topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+  public fieldSelect(data) {
+    if (data === 'required') {
+      this.showOnlyRequired(true);
+    } else {
+      this.showAllFields();
+    }
+  }
   public showAllFields(): void {
     this.form.fieldsets.forEach(fieldset => {
       fieldset.controls.forEach(control => {
@@ -147,6 +169,14 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
     });
     this.showingAllFields = true;
     this.showingRequiredFields = false;
+    let controls: HTMLElement[] = this.element.nativeElement.querySelectorAll('novo-control:not(.hidden)');
+    if (controls && controls.length) {
+      let firstControl: HTMLElement = controls[0];
+      let input: HTMLElement = firstControl.querySelector('input');
+      if (input) {
+        input.focus();
+      }
+    }
   }
 
   public showOnlyRequired(hideRequiredWithValue): void {
@@ -170,6 +200,14 @@ export class NovoDynamicFormElement implements OnChanges, OnInit {
     });
     this.showingAllFields = false;
     this.showingRequiredFields = true;
+    let controls: HTMLElement[] = this.element.nativeElement.querySelectorAll('novo-control:not(.hidden)');
+    if (controls && controls.length) {
+      let firstControl: HTMLElement = controls[0];
+      let input: HTMLElement = firstControl.querySelector('input');
+      if (input) {
+        input.focus();
+      }
+    }
     this.forceValidation();
   }
 

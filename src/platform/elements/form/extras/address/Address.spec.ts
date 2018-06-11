@@ -9,7 +9,7 @@ import { NovoPickerModule } from '../../../picker/Picker.module';
 import { NovoTooltipModule } from './../../../tooltip/Tooltip.module';
 import { Helpers } from '../../../../utils/Helpers';
 
-describe('Elements: NovoAddressElement', () => {
+xdescribe('Elements: NovoAddressElement', () => {
   let fixture;
   let component;
 

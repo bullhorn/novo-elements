@@ -1,12 +1,13 @@
 // NG2
 import {
-  Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, EventEmitter, Output
+  Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, EventEmitter, Output, ElementRef
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { getCountries, getStates, findByCountryId } from '../../../../utils/countries/Countries';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { Helpers } from '../../../../utils/Helpers';
+import { GooglePlacesService } from '../../../places/places.service';
 
 // Value accessor for the component (supports ngModel)
 const ADDRESS_VALUE_ACCESSOR = {
@@ -34,10 +35,22 @@ export interface NovoAddressConfig {
   countryID?: NovoAddressSubfieldConfig;
 }
 
+declare let google: any;
 @Component({
   selector: 'novo-address',
   providers: [ADDRESS_VALUE_ACCESSOR],
   template: `
+  <div class="addressSearch">
+        <input class="searchAddress" id="autocomplete" placeholder="Search for an address" [(ngModel)]="searchTerm" (ngModelChange)="onSearch($event)" type="text"/>
+        <i class="bhi-location" *ngIf="!searchTerm"></i>
+        </div>
+        <div class="googleList" [class.disabled]="!items || items.length === 0">
+            <div *ngFor="let item of items" class="googleListItem" (click)="setAddress(item.description, item.place_id)">
+                <i class="bhi-location"></i>
+                <span>{{ item.structured_formatting.main_text }}</span><br />
+                <span class="addressDetails">{{ item.structured_formatting.secondary_text }}</span>
+            </div>
+        </div>
         <span *ngIf="!config?.address1?.hidden" class="street-address" [class.invalid]="invalid.address1" [class.focus]="focused.address1" [class.disabled]="disabled.address1">
             <i *ngIf="config.address1.required"
                 class="required-indicator address1"
@@ -80,6 +93,7 @@ export interface NovoAddressConfig {
             </i>
             <novo-picker [config]="config?.countryID?.pickerConfig" [placeholder]="config.countryID.label" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryName"></novo-picker>
         </span>
+        <label class="clear-all" *ngIf="model.address1 || model.city || model.state || model.zip" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
     `
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
@@ -105,7 +119,11 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Output() blur: EventEmitter<any> = new EventEmitter();
   @Output() validityChange: EventEmitter<any> = new EventEmitter();
 
-  constructor(public labels: NovoLabelService) { }
+  searchTerm: string;
+  items: any[];
+  private apiKey: string = 'AIzaSyC2ZjaGlzVKhWNWGZaOXmsRQeqXp-AKdbA';
+
+  constructor(public labels: NovoLabelService, public googlePlacesService: GooglePlacesService) { }
 
   ngOnInit() {
     if (!this.config) {
@@ -121,6 +139,14 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     this.initConfig();
     if (Helpers.isBlank(this.model.countryID)) {
       this.updateStates();
+    }
+    if (typeof google === 'undefined' || typeof google['maps'] === 'undefined') {
+      window['googleInit'] = () => { };
+      let script: HTMLScriptElement = document.createElement('script');
+      script.id = 'googleMaps';
+      script.src = `https://maps.google.com/maps/api/js?key=${this.apiKey}&libraries=places&language=en-US`;
+
+      document.body.appendChild(script);
     }
   }
 
@@ -284,6 +310,64 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         this.valid.state = false;
       }
     }
+  }
+  onSearch(event: any): void {
+    if (event) {
+      let _tempParams: any = {
+        query: event,
+        countryRestriction: '',
+        geoTypes: [],
+      };
+      this.googlePlacesService.getGeoPrediction(_tempParams).then((result: any) => {
+        this.items = result ? result : [];
+      });
+    } else {
+      this.items = [];
+    }
+  }
+
+  clearValue() {
+    this.model.address1 = this.model.city = this.model.state = this.model.zip = '';
+    this.onModelChange(this.model);
+  }
+
+  setAddress(address: string, placesId: string): void {
+    this.items = [];
+    this.searchTerm = '';
+    this.model.address1 = this.model.city = this.model.state = this.model.countryName = this.model.zip = '';
+    this.googlePlacesService.getGeoPlaceDetail(placesId).then((details: any) => {
+      for (let i = 0; i < details.address_components.length; i++) {
+        let addressType: string = details.address_components[i].types[0];
+        switch (addressType) {
+          case 'street_number':
+            this.model.address1 = details.address_components[i].long_name || '';
+            this.updateControl();
+            break;
+          case 'route':
+            this.model.address1 = this.model.address1 + ' ' + details.address_components[i].long_name;
+            this.updateControl();
+            break;
+          case 'locality':
+            this.model.city = details.address_components[i].long_name;
+            this.updateControl();
+            break;
+          case 'administrative_area_level_1':
+            this.model.state = details.address_components[i].short_name;
+            this.onStateChange(this.model.state);
+            break;
+          case 'country':
+            this.model.countryName = details.address_components[i].long_name;
+            this.onCountryChange(this.model.countryName);
+            break;
+          case 'postal_code':
+            this.model.zip = details.address_components[i].short_name;
+            this.updateControl();
+            break;
+          default:
+            break;
+        }
+      }
+    });
   }
 
   updateStates() {

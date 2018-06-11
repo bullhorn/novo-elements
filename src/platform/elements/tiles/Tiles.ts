@@ -45,6 +45,7 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
     @Input() options: any;
     @Input() required: boolean;
     @Input() disabled: boolean = false;
+    @Input() defaultValue: string;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
     @Output() onDisabledOptionClick: EventEmitter<any> = new EventEmitter();
 
@@ -68,6 +69,7 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
 
     ngAfterContentInit() {
         this.name = this.name || '';
+        this.model = this.defaultValue || '';
         this.setupOptions();
     }
 
