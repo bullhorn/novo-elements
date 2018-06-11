@@ -1,121 +1,38 @@
 // NG2
 import {
-  Component,
-  ElementRef,
-  ChangeDetectorRef,
-  EventEmitter,
-  OnInit,
-  AfterContentInit,
-  OnDestroy,
-  Input,
-  Output,
-  ViewChild,
-  DoCheck,
-  Renderer2,
-  HostListener,
-  ContentChildren,
-  QueryList,
+  AfterContentInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output,
+  QueryList, ViewChild,
 } from '@angular/core';
 // APP
-import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { Helpers } from '../../utils/Helpers';
-
-@Component({
-  selector: 'novo-dropdown-container',
-  template: '<ng-content></ng-content>',
-})
-export class NovoDropdownContainer implements DoCheck {
-  private position: ClientRect;
-  private isVisible: boolean;
-  private relativeElement: Element;
-  private scrollHandler: any;
-  private side: string;
-  private appendToBody: boolean;
-  public parent: NovoDropdownElement;
-
-  constructor(public element: ElementRef, private renderer: Renderer2, private ref: ChangeDetectorRef) {
-    this.scrollHandler = this.handleScroll.bind(this);
-  }
-
-  ngDoCheck() {
-    if (this.isVisible && this.position) {
-      const element = this.element.nativeElement;
-      const position = Helpers.calcPositionOffset(this.position, element, this.side);
-      if (position) {
-        this.renderer.setStyle(element, 'top', position.top);
-        this.renderer.setStyle(element, 'left', position.left);
-      }
-    }
-  }
-
-  private handleScroll(): void {
-    // On scroll, don't force the position to update (jump from top/middle/bottom/right)
-    this.updatePosition(this.relativeElement, this.side);
-  }
-
-  public show(appendToBody: boolean): void {
-    this.appendToBody = appendToBody;
-    this.renderer.setStyle(this.element.nativeElement, 'display', 'block');
-    this.renderer.setStyle(this.element.nativeElement, 'visibility', 'visible');
-    this.isVisible = true;
-    if (appendToBody) {
-      window.addEventListener('scroll', this.scrollHandler);
-    }
-    this.ref.markForCheck();
-  }
-
-  public hide(): void {
-    this.isVisible = false;
-    this.renderer.setStyle(this.element.nativeElement, 'visibility', 'hidden');
-    if (this.appendToBody) {
-      window.removeEventListener('scroll', this.scrollHandler);
-    }
-    this.ref.markForCheck();
-  }
-
-  public updatePosition(element: Element, side: string): void {
-    this.relativeElement = element;
-    this.side = side;
-    this.position = element.getBoundingClientRect();
-    this.ngDoCheck();
-    this.ref.markForCheck();
-  }
-
-  @HostListener('keydown', ['$event'])
-  public onKeyDown(event: KeyboardEvent): void {
-    // Close with ESC/Enter
-    if (this.isVisible && (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER)) {
-      this.parent.toggleActive(null, false);
-    }
-  }
-}
+import { notify } from '../../utils/notifier/notifier.util';
 
 @Component({
   selector: 'novo-dropdown',
   template: `
-        <ng-content select="button" #trigger></ng-content>
-        <novo-dropdown-container class="dropdown-container {{ containerClass }}">
-            <ng-content></ng-content>
-        </novo-dropdown-container>
-    `,
+    <ng-content select="button" #trigger></ng-content>
+    <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
+      <div class="dropdown-container {{ containerClass }}" [style.height.px]="height" [class.has-height]="!!height">
+        <ng-content></ng-content>
+      </div>
+    </novo-overlay-template>
+  `,
 })
-export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestroy {
-  // Append the dropdown container to the body
-  @Input() appendToBody: boolean = false;
-  // Listen for scroll on a parent selector, so we can close the dropdown
+export class NovoDropdownElement implements OnInit, OnDestroy {
   @Input() parentScrollSelector: string;
-  // What action to perform when we recieve scroll from parent selector
-  // TODO - handle "move"
   @Input() parentScrollAction: string = 'close';
-  // Custom class for the dropdown container
   @Input() containerClass: string;
-  // Side the dropdown will open
-  @Input() side: string = 'left';
-  // Output for when the dropdown is toggled
-  @Output() toggled: EventEmitter<boolean>;
+  @Input() side: 'default' | 'right' | 'bottom' | 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' = 'default';
+  @Input() scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
+  @Input() height: number;
+  @Input() width: number = 180;
+  @Input() appendToBody: boolean = false; // Deprecated
 
-  @ViewChild(NovoDropdownContainer) public container: NovoDropdownContainer;
+  @Output() toggled: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
   @ViewChild('trigger') public button;
 
   clickHandler: any;
@@ -127,31 +44,15 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
   private filterTerm: string = '';
   private filterTermTimeout: any;
 
-  constructor(element: ElementRef, private ref: ChangeDetectorRef) {
-    super(element);
-    // Click handler
-    this.clickHandler = this.toggleActive.bind(this);
-    this.closeHandler = this.toggleActive.bind(this);
-    this.toggled = this.onActiveChange;
-    // Listen for active change to hide/show menu
-    this.onActiveChange.subscribe((active) => {
-      if (active) {
-        this.show();
-      } else {
-        this.hide();
-      }
-    });
-  }
-
-  public set items(items: QueryList<NovoItemElement>) {
-    this._items = items;
-    // Get the innertext of all the items to allow for searching
-    this._textItems = items.map((item: NovoItemElement) => {
-      return item.element.nativeElement.innerText;
-    });
+  constructor(public element: ElementRef, private ref: ChangeDetectorRef) {
+    this.clickHandler = this.togglePanel.bind(this);
+    this.closeHandler = this.closePanel.bind(this);
   }
 
   public ngOnInit(): void {
+    if (this.appendToBody) {
+      notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+    }
     // Add a click handler to the button to toggle the menu
     let button = this.element.nativeElement.querySelector('button');
     button.addEventListener('click', this.clickHandler);
@@ -166,39 +67,36 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
     if (button) {
       button.removeEventListener('click', this.clickHandler);
     }
+    if (this.parentScrollElement && this.parentScrollAction === 'close') {
+      this.parentScrollElement.removeEventListener('scroll', this.closeHandler);
+    }
   }
 
-  private show(): void {
-    this.container.parent = this;
-    this.container.show(this.appendToBody);
-    this.otherElement = this.container.element;
-    if (this.appendToBody) {
-      this.container.updatePosition(this.element.nativeElement.children[0], this.side);
-      // If append to body then rip it out of here and put on body
-      window.document.body.appendChild(this.container.element.nativeElement);
-      window.addEventListener('resize', this.closeHandler);
-    }
-    // Listen for scroll on a parent to force close
-    if (this.parentScrollElement) {
-      if (this.parentScrollAction === 'close') {
-        this.parentScrollElement.addEventListener('scroll', this.closeHandler);
-      }
-    }
-    this.ref.markForCheck();
+  public set items(items: QueryList<NovoItemElement>) {
+    this._items = items;
+    // Get the innerText of all the items to allow for searching
+    this._textItems = items.map((item: NovoItemElement) => {
+      return item.element.nativeElement.innerText;
+    });
   }
 
-  private hide(): void {
-    this.container.hide();
-    // If append to body then rip it out of here and put on body
-    if (this.appendToBody) {
-      let elm = this.container.element.nativeElement;
-      elm.parentNode.removeChild(elm);
-      window.removeEventListener('resize', this.closeHandler);
+  /** BEGIN: Convenient Panel Methods. */
+  public get panelOpen(): boolean {
+    return this.overlay && this.overlay.panelOpen;
+  }
+
+  public openPanel(): void {
+    this.overlay.openPanel();
+    if (this.parentScrollElement && this.parentScrollAction === 'close') {
+      this.parentScrollElement.addEventListener('scroll', this.closeHandler);
     }
-    if (this.parentScrollElement) {
-      if (this.parentScrollAction === 'close') {
-        this.parentScrollElement.removeEventListener('scroll', this.closeHandler);
-      }
+    this.toggled.emit(true);
+  }
+
+  public closePanel(): void {
+    this.overlay.closePanel();
+    if (this.parentScrollElement && this.parentScrollAction === 'close') {
+      this.parentScrollElement.removeEventListener('scroll', this.closeHandler);
     }
     // Clear active index
     if (this.activeIndex !== -1) {
@@ -206,14 +104,21 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
     }
     this.activeIndex = -1;
     this.ref.markForCheck();
+    this.toggled.emit(false);
   }
+
+  public togglePanel(): void {
+    this.panelOpen ? this.closePanel() : this.openPanel();
+  }
+
+  /** END: Convenient Panel Methods. */
 
   @HostListener('keydown', ['$event'])
   public onKeyDown(event: KeyboardEvent): void {
-    if (this.active && event.keyCode === KeyCodes.ESC) {
+    if (this.panelOpen && event.keyCode === KeyCodes.ESC) {
       Helpers.swallowEvent(event);
       // active & esc hit -- close
-      this.toggleActive();
+      this.closePanel();
     } else if (event.keyCode === KeyCodes.ENTER) {
       Helpers.swallowEvent(event);
       // enter -- perform the "click"
@@ -292,16 +197,10 @@ export class NovoDropdownElement extends OutsideClick implements OnInit, OnDestr
   }
 
   private scrollToActive(): void {
-    let container = this.element.nativeElement.querySelector('novo-dropdown-container');
+    let container = this.overlay.overlayRef.overlayElement.querySelector('.dropdown-container');
     let item = this._items.toArray()[this.activeIndex];
     if (container && item) {
       container.scrollTop = item.element.nativeElement.offsetTop;
-    } else {
-      // Append to body
-      container = document.querySelector('body > novo-dropdown-container');
-      if (container && item) {
-        container.scrollTop = item.element.nativeElement.offsetTop;
-      }
     }
   }
 }
@@ -329,7 +228,7 @@ export class NovoItemElement {
     if (!this.disabled) {
       // Close if keepOpen is false
       if (!this.keepOpen) {
-        this.dropdown.toggleActive();
+        this.dropdown.closePanel();
       }
       // Emit the action
       this.action.emit({ originalEvent: event });

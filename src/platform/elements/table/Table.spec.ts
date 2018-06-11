@@ -30,7 +30,7 @@ import { NovoToastElement } from '../toast/Toast';
 import { NovoLoadingElement } from '../loading/Loading';
 import { NovoItemElement, NovoListElement } from '../dropdown/Dropdown';
 import { NovoChipsElement, NovoChipElement } from '../chips/Chips';
-import { NovoDropdownElement, NovoDropdownContainer } from '../dropdown/Dropdown';
+import { NovoDropdownElement } from '../dropdown/Dropdown';
 import { TooltipDirective } from '../tooltip/Tooltip';
 import { NovoSelectElement } from '../select/Select';
 
@@ -69,7 +69,6 @@ describe('Elements: NovoTableElement', () => {
                 NovoToastElement,
                 NovoListElement,
                 NovoChipElement,
-                NovoDropdownContainer,
                 NovoLoadingElement,
                 NovoItemElement,
                 NovoChipsElement,

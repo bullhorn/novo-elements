@@ -219,7 +219,6 @@ export class DataTableDemoComponent implements OnInit {
         click: this.log.bind(this),
       },
       filterable: true,
-      sortable: true,
     },
     {
       id: 'simpleEmbeddedObj',
@@ -233,7 +232,7 @@ export class DataTableDemoComponent implements OnInit {
     {
       id: 'date',
       label: 'Date',
-      enabled: false,
+      enabled: true,
       type: 'date',
       filterable: {
         type: 'date',
