@@ -1,7 +1,8 @@
-// NG2
-import { EventEmitter, ElementRef, OnDestroy } from '@angular/core';
-// APP
+// NG
+import { EventEmitter, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+// App
 import { Helpers } from '../Helpers';
+import { NovoOverlayTemplateComponent } from '../../elements/overlay/Overlay';
 
 /**
  * Outside click helper, makes to set the element as inactive when clicking outside of it
@@ -12,6 +13,7 @@ export class OutsideClick implements OnDestroy {
     active: boolean = false;
     onOutsideClick: EventListenerOrEventListenerObject;
     onActiveChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
     constructor(element: ElementRef) {
         // Component element
@@ -59,5 +61,9 @@ export class OutsideClick implements OnDestroy {
         if (outsideClick) {
             this.toggleActive(event, false);
         }
+    }
+
+    closePanel(): void {
+      this.overlay.closePanel();
     }
 }
