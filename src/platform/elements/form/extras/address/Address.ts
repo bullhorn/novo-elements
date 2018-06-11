@@ -341,26 +341,32 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         switch (addressType) {
           case 'street_number':
             this.model.address1 = details.address_components[i].long_name || '';
+            this.onInput(null, 'address1');
             this.updateControl();
             break;
           case 'route':
             this.model.address1 = this.model.address1 + ' ' + details.address_components[i].long_name;
+            this.onInput(null, 'address1');
             this.updateControl();
             break;
           case 'locality':
             this.model.city = details.address_components[i].long_name;
+            this.onInput(null, 'city');
             this.updateControl();
             break;
           case 'administrative_area_level_1':
             this.model.state = details.address_components[i].short_name;
-            this.onStateChange(this.model.state);
+            this.onInput(null, 'state');
+            //this.onStateChange(this.model.state);
             break;
           case 'country':
             this.model.countryName = details.address_components[i].long_name;
-            this.onCountryChange(this.model.countryName);
+            this.onInput(null, 'countryID');
+            // this.onCountryChange(this.model.countryName);
             break;
           case 'postal_code':
             this.model.zip = details.address_components[i].short_name;
+            this.onInput(null, 'zip');
             this.updateControl();
             break;
           default:
