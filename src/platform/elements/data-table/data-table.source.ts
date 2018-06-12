@@ -9,6 +9,7 @@ import { IDataTableService } from './interfaces';
 
 export class DataTableSource<T> extends DataSource<T> {
   public total = 0;
+  public currentTotal = 0;
   public current = 0;
   public loading = false;
   public pristine = true;
@@ -50,6 +51,7 @@ export class DataTableSource<T> extends DataSource<T> {
           this.totalSet = true;
           this.state.isForceRefresh = false;
         }
+        this.currentTotal = data.total;
         this.current = data.results.length;
         this.data = data.results;
         // Clear selection

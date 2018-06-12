@@ -32,9 +32,9 @@ import { Helpers } from '../../../utils/Helpers';
         <i class="bhi-{{ labelIcon }} label-icon" *ngIf="labelIcon" data-automation-id="novo-data-table-header-icon"></i>
         <label data-automation-id="novo-data-table-label">{{ label }}</label>
         <div>
-            <button *ngIf="config.sortable" tooltipPosition="bottom" [tooltip]="labels.sort" theme="icon" [icon]="icon" (click)="sort()" [class.active]="sortActive" data-automation-id="novo-data-table-sort"></button>
+            <button *ngIf="config.sortable" tooltipPosition="right" [tooltip]="labels.sort" theme="icon" [icon]="icon" (click)="sort()" [class.active]="sortActive" data-automation-id="novo-data-table-sort"></button>
             <novo-dropdown *ngIf="config.filterable" side="right" appendToBody="true" parentScrollSelector=".novo-data-table-container" containerClass="data-table-dropdown" data-automation-id="novo-data-table-filter">
-                <button type="button" theme="icon" icon="filter" [class.active]="filterActive" (click)="focusInput()" tooltipPosition="bottom" [tooltip]="labels.filters"></button>
+                <button type="button" theme="icon" icon="filter" [class.active]="filterActive" (click)="focusInput()" tooltipPosition="right" [tooltip]="labels.filters"></button>
                 <div class="header">
                     <span>{{ labels.filters }}</span>
                     <button theme="dialogue" color="negative" icon="times" (click)="clearFilter()" *ngIf="filter !== null && filter !== undefined && filter !== ''" data-automation-id="novo-data-table-filter-clear">{{ labels.clear }}</button>
@@ -61,7 +61,7 @@ import { Helpers } from '../../../utils/Helpers';
                     </list>
                     <list *ngSwitchDefault>
                         <item class="filter-search" keepOpen="true">
-                            <input type="text" [(ngModel)]="filter" (ngModelChange)="filterData($event)" #filterInput data-automation-id="novo-data-table-filter-input"/>
+                            <input [type]="config.filterConfig.type" [(ngModel)]="filter" (ngModelChange)="filterData($event)" #filterInput data-automation-id="novo-data-table-filter-input"/>
                         </item>
                     </list>
                 </ng-container>

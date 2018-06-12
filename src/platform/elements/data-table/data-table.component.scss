@@ -84,6 +84,20 @@ cdk-table {
   }
 }
 
+.novo-data-table-header-cell {
+  > div {
+    > button {
+      margin-right: 2px;
+    }
+  }
+}
+
+.novo-data-table-clear-button {
+  button {
+    min-width: 80px !important;
+  }
+}
+
 .novo-data-table-cell,
 .novo-data-table-header-cell {
   min-width: 200px;
@@ -104,7 +118,14 @@ cdk-table {
     display: inline-block;
   }
   button.active {
-    color: $positive;
+    color: $white;
+    background: $positive;
+    &:hover,
+    &:active,
+    &:focus,
+    &:visited {
+      background: $positive !important;
+    }
   }
   &.clickable {
     cursor: pointer;

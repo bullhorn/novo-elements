@@ -39,13 +39,9 @@ export class NovoAutoSize implements AfterContentInit {
   }
 
   adjust(): void {
-    let hasValue = this.element.nativeElement.value.length !== 0;
-    this.element.nativeElement.style.overflow = 'hidden';
-    if (hasValue) {
-      this.element.nativeElement.style.height = Math.min((this.element.nativeElement.scrollHeight - 11), 300) + 'px';
-    } else {
-      this.element.nativeElement.style.height = '14px';
-    }
+    const nativeElement = this.element.nativeElement;
+    nativeElement.style.height = nativeElement.style.minHeight;
+    nativeElement.style.height = `${nativeElement.scrollHeight}px`;
   }
 }
 
@@ -154,7 +150,7 @@ export class NovoCustomControlContainerElement {
                             <!--File-->
                             <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="form.controls[control.key].placeholder" [value]="form.controls[control.key].value" [multiple]="form.controls[control.key].multiple" [layoutOptions]="form.controls[control.key].layoutOptions" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (edit)="handleEdit($event)" (save)="handleSave($event)" (delete)="handleDelete($event)" (upload)="handleUpload($event)"></novo-file-input>
                             <!--Tiles-->
-                            <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-tiles>
+                            <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [disabled]="form.controls[control.key].disabled"></novo-tiles>
                             <!--Picker-->
                             <div class="novo-control-input-container" *ngSwitchCase="'picker'">
                                 <novo-picker [config]="form.controls[control.key].config" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [parentScrollSelector]="form.controls[control.key].parentScrollSelector" *ngIf="!form.controls[control.key].multiple" (select)="modelChange($event);" (changed)="modelChangeWithRaw($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-picker>
@@ -179,7 +175,7 @@ export class NovoCustomControlContainerElement {
                                 <novo-date-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military"></novo-date-time-picker-input>
                             </div>
                             <!--Address-->
-                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddressChange($event)" (focus)="handleFocus($event.event, $event.field)" (blur)="handleBlur($event.event, $event.field)"></novo-address>
+                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddressChange($event)" (focus)="handleFocus($event.event, $event.field)" (blur)="handleBlur($event.event, $event.field)" (validityChange)="updateValidity()"></novo-address>
                             <!--Checkbox-->
                             <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [label]="control.checkboxLabel" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [layoutOptions]="layoutOptions"></novo-checkbox>
                             <!--Checklist-->
@@ -605,5 +601,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         this.maxLengthMetErrorfields = this.maxLengthMetErrorfields.filter((field: string) => field !== data.field);
       }
     }
+  }
+
+  updateValidity(data): void {
+    this.form.controls[this.control.key].updateValueAndValidity({ emitEvent: false });
   }
 }

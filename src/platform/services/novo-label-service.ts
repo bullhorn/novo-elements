@@ -30,6 +30,9 @@ export class NovoLabelService {
   endDate = 'End Date';
   more = 'more';
   clearAll = 'CLEAR ALL';
+  clearAllNormalCase = 'Clear All';
+  clearSort = 'Clear Sort';
+  clearFilter = 'Clear Filter';
   today = 'Today';
   now = 'Now';
   isRequired = 'is required';
@@ -53,12 +56,12 @@ export class NovoLabelService {
   okGotIt = 'Ok, Got it';
   address = 'Address';
   address1 = 'Address';
-  apt = 'Apt';// TODO delete
+  apt = 'Apt'; // TODO delete
   address2 = 'Apt';
   city = 'City / Locality';
   state = 'State / Region';
   zip = 'Postal Code';
-  zipCode = 'Postal Code';// TODO delete
+  zipCode = 'Postal Code'; // TODO delete
   country = 'Country';
   or = 'or';
   clickToBrowse = 'click to browse';
@@ -83,8 +86,14 @@ export class NovoLabelService {
   groupedMultiPickerSelectCategory = 'Select a category from the right to get started';
   add = 'Add';
   encryptedFieldTooltip = 'This data has been stored at the highest level of security';
+  noStatesForCountry = 'No states available for the selected country';
+  selectCountryFirst = 'Please select a country before selecting a state';
 
-  constructor( @Optional() @Inject(LOCALE_ID) public userLocale: string = 'en-US') { }
+  constructor(
+    @Optional()
+    @Inject(LOCALE_ID)
+    public userLocale: string = 'en-US',
+  ) {}
 
   maxlengthMetWithField(field: string, maxlength: number): string {
     return `Sorry, you have reached the maximum character count of ${maxlength} for ${field}.`;

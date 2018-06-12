@@ -40,6 +40,7 @@ import {
   SearchDemoComponent,
   FormGroupedDemoComponent,
   ValueDemoComponent,
+  ExpansionDemoComponent,
   StepperDemoComponent,
 } from './pages/elements';
 
@@ -88,6 +89,7 @@ const routes: Routes = [
   { path: 'category-dropdown', component: CategoryDropdownDemoComponent, data: { title: 'Category Dropdown', section: 'components' } },
   { path: 'popover', component: PopOverDemoComponent, data: { title: 'PopOver', section: 'components' } },
   { path: 'value', component: ValueDemoComponent, data: { title: 'Value', section: 'components' } },
+  { path: 'expansion', component: ExpansionDemoComponent, data: { title: 'Expansion', section: 'components' } },
 
   // Utils
   { path: 'utils', component: UtilsDemoComponent, data: { title: 'Utils', section: 'utils' } },

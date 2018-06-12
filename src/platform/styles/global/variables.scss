@@ -1,6 +1,6 @@
 // Sizes
 // --------------------------------------------------
-$header-height: 54px;
+$header-height: 55px;
 // $header-height-px: rem-to-px($header-height);
 // Colors
 // --------------------------------------------------
@@ -22,6 +22,7 @@ $bittersweet: #eb6845;
 $grapefruit: #da4453;
 $carnation: #d770ad;
 $lavender: #967adc;
+$mountain: #9678b6;
 // Entity Colors
 $company: #3399dd;
 $candidate: #44bb77;
@@ -34,6 +35,9 @@ $submission: #a9adbb;
 $sendout: #747884;
 $placement: #0b344f;
 $note: #747884;
+$contract: #454ea0;
+$jobCode: #696d79;
+$earnCode: #696d79;
 // Color Applications
 $positive: $ocean;
 $success: $grass;
@@ -56,7 +60,8 @@ $analytics-colors: (
   bittersweet: $bittersweet,
   grapefruit: $grapefruit,
   carnation: $carnation,
-  lavender: $lavender
+  lavender: $lavender,
+  mountain: $mountain
 );
 // Entity Color Map
 $entity-colors: (
@@ -77,7 +82,10 @@ $entity-colors: (
   distributionList: $neutral,
   credential: $neutral,
   user: $neutral,
-  corporateuser: $neutral
+  corporateuser: $neutral,
+  contract: $contract,
+  jobCode: $jobCode,
+  earnCode: $earnCode
 );
 // Generic Color Map
 $app-colors: (
@@ -112,6 +120,8 @@ $dark-colors: (
   contact: $contact,
   opportunity: $opportunity,
   job: $job,
+  jobCode: $jobCode,
+  earnCode: $earnCode,
   sendout: $sendout,
   placement: $placement,
   task: $neutral,
@@ -136,7 +146,9 @@ $dark-colors: (
   dark: $dark,
   pulse: $pulse,
   neutral: $neutral,
-  navy: $navy
+  navy: $navy,
+  contract: $contact,
+  mountain: $mountain
 );
 // Light map
 $light-colors: (

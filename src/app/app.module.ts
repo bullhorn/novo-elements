@@ -60,6 +60,7 @@ import {
   ValueDemoComponent,
   AceEditorDemoComponent,
   ConfigureColumnsModal,
+  ExpansionDemoComponent,
   StepperDemoComponent,
 } from './pages/elements';
 import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent, SecurityDemoComponent } from './pages/utils';
@@ -155,6 +156,7 @@ export function provideAppBridgeService(http) {
     AceEditorDemoComponent,
     SecurityDemoComponent,
     ConfigureColumnsModal,
+    ExpansionDemoComponent,
     StepperDemoComponent,
   ],
   imports: [

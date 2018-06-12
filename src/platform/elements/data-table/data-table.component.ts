@@ -61,7 +61,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         <novo-data-table-pagination
             *ngIf="paginationOptions"
             [theme]="paginationOptions.theme"
-            [length]="dataSource?.total"
+            [length]="dataSource?.currentTotal"
             [page]="paginationOptions.page"
             [pageSize]="paginationOptions.pageSize"
             [pageSizeOptions]="paginationOptions.pageSizeOptions">
@@ -164,7 +164,9 @@ import { StaticDataTableService } from './services/static-data-table.service';
     <ng-template novoTemplate="buttonCellTemplate"
           let-row
           let-col="col">
-          <i class="bhi-{{ col?.action?.icon }} data-table-icon" (click)="col.handlers?.click({ originalEvent: $event, row: row })" [class.disabled]="isDisabled(col, row)"></i>
+          <p [tooltip]="col?.action?.tooltip" tooltipPosition="right">
+            <i class="bhi-{{ col?.action?.icon }} data-table-icon" (click)="col.handlers?.click({ originalEvent: $event, row: row })" [class.disabled]="isDisabled(col, row)"></i>
+          </p>
     </ng-template>
     <ng-template novoTemplate="dropdownCellTemplate"
           let-row
@@ -340,6 +342,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   private outsideFilterSubscription: Subscription;
   private refreshSubscription: Subscription;
+  private resetSubscription: Subscription;
   private paginationSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
   private scrollListenerHandler: any;
@@ -365,6 +368,11 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
         notify('Must have [name] set on data-table to use preferences!');
       }
     });
+    this.resetSubscription = this.state.resetSource.subscribe(() => {
+      setTimeout(() => {
+        this.ref.detectChanges();
+      }, 300);
+    });
   }
 
   public ngOnDestroy(): void {
@@ -376,6 +384,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
+    }
+    if (this.resetSubscription) {
+      this.resetSubscription.unsubscribe();
     }
   }
 

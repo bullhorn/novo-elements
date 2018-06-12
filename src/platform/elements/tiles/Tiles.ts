@@ -1,6 +1,7 @@
 // NG2
-import { Component, Input, SimpleChanges, Output, EventEmitter, forwardRef, ElementRef, trigger, state, style, transition, animate, AfterContentInit, OnChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, SimpleChanges, Output, EventEmitter, forwardRef, ElementRef, AfterContentInit, OnChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 // APP
 import { Helpers } from '../../utils/Helpers';
 
@@ -15,7 +16,7 @@ const TILES_VALUE_ACCESSOR = {
     selector: 'novo-tiles',
     providers: [TILES_VALUE_ACCESSOR],
     template: `
-        <div class="tile-container" [class.active]="focused">
+        <div class="tile-container" [class.active]="focused" [class.disabled]="disabled">
             <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked, disabled: option.disabled}" (click)="select($event, option, i)" [attr.data-automation-id]="option.label || option">
                 <input class="tiles-input" [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i" (change)="select($event, option, i)" (focus)="setFocus(true)" (blur)="setFocus(false)">
                 <label [attr.for]="name + i" [attr.data-automation-id]="option.label || option">
@@ -43,6 +44,7 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
     @Input() name: string = new Date().getTime().toString();
     @Input() options: any;
     @Input() required: boolean;
+    @Input() disabled: boolean = false;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
     @Output() onDisabledOptionClick: EventEmitter<any> = new EventEmitter();
 
@@ -135,20 +137,12 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
             let ind = this.element.nativeElement.querySelector('.active-indicator');
             let el = this.element.nativeElement.querySelector('.tile.active');
             if (ind && el) {
-                let w = el.clientWidth;
-                let left = el.offsetLeft;
-
-                // These style adjustments need to occur in this order.
-                setTimeout(() => {
-                    ind.style.width = `${w + 4}px`;
-                    setTimeout(() => {
-                        ind.style.transform = `translateX(${left}px)`;
-                        setTimeout(() => {
-                            this.state = 'active';
-                            this.ref.markForCheck();
-                        });
-                    });
-                });
+                let w: number = el.clientWidth;
+                let left: number = el.offsetLeft - el.offsetTop; // Removes the border width that Firefox adds without affecting other browsers
+                ind.style.width = `calc(${w}px + 0.32em)`;
+                ind.style.left = `${left}px`;
+                this.state = 'active';
+                this.ref.markForCheck();
             }
         });
     }

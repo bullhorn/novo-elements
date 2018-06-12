@@ -36,6 +36,7 @@ import {
   DateTableTimeRendererPipe,
 } from './data-table.pipes';
 import { NovoDataTableExpandDirective } from './data-table-expand.directive';
+import { NovoDataTableClearButton } from './data-table-clear-button.component';
 
 @NgModule({
   imports: [
@@ -73,6 +74,7 @@ import { NovoDataTableExpandDirective } from './data-table-expand.directive';
     NovoDataTableExpandHeaderCell,
     NovoDataTable,
     NovoDataTableExpandDirective,
+    NovoDataTableClearButton,
   ],
   providers: [DataTableState],
   exports: [
@@ -83,6 +85,7 @@ import { NovoDataTableExpandDirective } from './data-table-expand.directive';
     DateTableDateTimeRendererPipe,
     DateTableNumberRendererPipe,
     DateTableTimeRendererPipe,
+    NovoDataTableClearButton,
   ],
 })
 export class NovoDataTableModule {}

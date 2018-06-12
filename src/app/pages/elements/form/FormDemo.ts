@@ -19,54 +19,42 @@ import {
   PickerControl, EntityPickerResult, EntityPickerResults, TextAreaControl,
   NovoFormGroup, BaseControl, AceEditorControl, AddressControl,
 } from './../../../../platform/index';
-
+import { findByCountryId } from './../../../../platform/utils/countries/Countries';
 const template = `
 <div class="container">
     <h1>Forms <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/form">(source)</a></small></h1>
     <p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'</p>
-
     <h2>Static Form</h2>
     <p>Static forms <code>&lt;novo-form /&gt;</code>.
-
     <h5>Textbox Based Controls</h5>
     <div class="example form-demo">${TextBasedControlsDemoTpl}</div>
     <code-snippet [code]="TextBasedControlsDemoTpl"></code-snippet>
-
     <h5>Checkbox Controls</h5>
     <div class="example form-demo">${CheckBoxControlsDemoTpl}</div>
     <code-snippet [code]="CheckBoxControlsDemoTpl"></code-snippet>
-
     <h5>File Input Controls</h5>
     <div class="example form-demo">${FileInputControlsDemoTpl}</div>
     <code-snippet [code]="FileInputControlsDemoTpl"></code-snippet>
-
     <h5>Calendar Controls</h5>
     <div class="example form-demo">${CalendarControlsDemoTpl}</div>
     <code-snippet [code]="CalendarControlsDemoTpl"></code-snippet>
-
     <h5>Picker Controls</h5>
     <div class="example form-demo">${PickerControlsDemoTpl}</div>
     <code-snippet [code]="PickerControlsDemoTpl"></code-snippet>
-
     <h5>Address Controls</h5>
     <div class="example form-demo">${AddressControlDemoTpl}</div>
     <code-snippet [code]="AddressControlDemoTpl"></code-snippet>
-
     <h2>Dynamic Form</h2>
     <p>Dynamic forms are composed of one element, <code>&lt;novo-dynamic-form [controls]="controls"/&gt;</code> and allow you to pass in the controls and form and it will create the form for you.</p>
-
     <h5>Basic</h5>
     <div class="example form-demo dynamic">${DynamicFormDemoTpl}</div>
     <code-snippet [code]="DynamicFormDemoTpl"></code-snippet>
-
     <h5>Vertical</h5>
     <div class="example form-demo dynamic">${VerticalDynamicFormDemoTpl}</div>
     <code-snippet [code]="VerticalDynamicFormDemoTpl"></code-snippet>
-
     <h5>Fieldsets</h5>
     <div class="example form-demo fieldsets">${FieldsetsFormDemoTpl}</div>
     <code-snippet [code]="FieldsetsFormDemoTpl"></code-snippet>
-
     <h5>Updating Fields/Status</h5>
     <div class="example form-demo updating">${UpdatingFormDemoTpl}</div>
     <code-snippet [code]="UpdatingFormDemoTpl"></code-snippet>
@@ -117,6 +105,7 @@ export class FormDemoComponent {
   private textAreaControl: any;
   private checkListControl: any;
   private tilesControl: any;
+  private disabledTilesControl: any;
   private checkForm: any;
   private fileControl: any;
   private multiFileControl: any;
@@ -144,6 +133,27 @@ export class FormDemoComponent {
   private secondaryAddressControl: any;
   private addressForm: any;
   private addressFormControls: any;
+  private states: any[] = [{
+    value: 'MA',
+    label: 'Massachusetts',
+    countryId: 1
+  }, {
+    value: 'NY',
+    label: 'New York',
+    countryId: 1
+  }, {
+    value: 'AB',
+    label: 'Alberta',
+    countryId: 2216
+  }, {
+    value: 'BC',
+    label: 'British Columbia',
+    countryId: 2216
+  }, {
+    value: 'MB',
+    label: 'Manitoba',
+    countryId: 2216
+  },];
 
   constructor(private formUtils: FormUtils) {
     // Quick note config
@@ -200,8 +210,9 @@ export class FormDemoComponent {
     // Check box controls
     this.checkControl = new CheckboxControl({ key: 'check', label: 'Checkbox' });
     this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'], tooltip: 'CheckList', tooltipPosition: 'Top' });
-    this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }], tooltip: 'Tiles' });
-    this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl]);
+    this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }, { value: 'disabled', label: 'Disabled', disabled: true }], tooltip: 'Tiles' });
+    this.disabledTilesControl = new TilesControl({ key: 'disabledTiles', label: 'Disabled Tiles', readOnly: true, options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }], tooltip: 'Tiles' });
+    this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl, this.disabledTilesControl]);
 
     // Picker controls
     this.singlePickerControl = new PickerControl({ key: 'singlePicker', label: 'Single', config: { options: ['One', 'Two', 'Three'] } });
@@ -318,15 +329,17 @@ export class FormDemoComponent {
 
       },
       value: {
-        address1: '123 Summer Street',
-        address2: '10 Washington Street',
-        countryID: 1
+        address1: '321 Summer Street',
+        address2: '11 Washington Street',
+        countryID: 1,
+        countryName: 'United States',
+        countryCode: 'US'
       }
     });
     this.secondaryAddressControl = new AddressControl({
-      key: 'address',
-      name: 'address',
-      label: 'Address',
+      key: 'secondaryAddress',
+      name: 'secondaryAddress',
+      label: 'Secondary Address',
       config: {
         address1: {
           label: 'Address Line 1',
@@ -338,22 +351,42 @@ export class FormDemoComponent {
         },
         state: {
           label: 'State',
+          pickerConfig: {
+            field: 'value',
+            format: '$label',
+            options: (query, countryID) => {
+              return Promise.resolve(this.getStateOptions(query, countryID));
+            },
+            getLabels: (value: number) => {
+              return Promise.resolve(this.getStateLabel(value));
+            }
+          }
         },
-        country: {
+        countryID: {
           label: 'Country',
+          pickerConfig: {
+            field: 'value',
+            format: '$label',
+            options: (query) => {
+              return Promise.resolve(this.getCountryOptions(query));
+            },
+            getLabels: (value: number) => {
+              return Promise.resolve(findByCountryId(value));
+            }
+          }
         },
         city: {
           label: 'City',
         },
         zip: {
           label: 'Zipcode',
-        }
+        },
 
       },
       value: {
         address1: '123 Summer Street',
         address2: '10 Washington Street and stuff',
-        countryID: 1
+        countryID: 1,
       }
     });
     this.addressFormControls = [this.addressControl, this.secondaryAddressControl];
@@ -472,5 +505,67 @@ export class FormDemoComponent {
 
   handleUpload(files) {
     console.log('This is an upload Action!', files); // tslint:disable-line
+  }
+
+  getStateOptions(filter: string = '', countryID: number): any[] {
+    let states: any[] = this.states;
+    if (countryID) {
+      states = states.filter((state: any) => state.countryId === countryID);
+    }
+    if (filter && filter.length) {
+      states = states.filter((state) => new RegExp(`${filter}`, 'gi').test(state.label))
+    }
+    return states;
+  }
+
+  getStateLabel(value: number): string {
+    let state: any = this.states.find((s: any) => {
+      return s.value === value;
+    });
+    if (state && state.label) {
+      return state.label;
+    }
+    return '';
+  }
+
+  getCountryOptions(filter?: string): any[] {
+    let countries: any = [
+      {
+        value: 2356,
+        label: 'Uganda',
+      },
+      {
+        value: 2357,
+        label: 'Ukraine',
+      },
+      {
+        value: 2358,
+        label: 'United Arab Emirates',
+      },
+      {
+        value: 2359,
+        label: 'United Kingdom',
+      },
+      {
+        value: 1,
+        label: 'United States',
+      },
+      {
+        value: 2443,
+        label: 'United States Minor Outlying Islands',
+      },
+      {
+        value: 2360,
+        label: 'Uruguay',
+      },
+      {
+        value: 2361,
+        label: 'Uzbekistan',
+      },
+    ];
+    if (filter && filter.length) {
+      countries = countries.filter((country) => new RegExp(`${filter}`, 'gi').test(country.label))
+    }
+    return countries;
   }
 }

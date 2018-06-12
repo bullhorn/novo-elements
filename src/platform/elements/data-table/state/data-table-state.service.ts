@@ -48,6 +48,35 @@ export class DataTableState<T> {
     }
   }
 
+  public clearSort(fireUpdate: boolean = true): void {
+    this.sort = undefined;
+    this.page = 0;
+    this.selectedRows.clear();
+    this.resetSource.next();
+    if (fireUpdate) {
+      this.updates.emit({
+        sort: this.sort,
+        filter: this.filter,
+        globalSearch: this.globalSearch,
+      });
+    }
+  }
+
+  public clearFilter(fireUpdate: boolean = true): void {
+    this.filter = undefined;
+    this.globalSearch = undefined;
+    this.page = 0;
+    this.selectedRows.clear();
+    this.resetSource.next();
+    if (fireUpdate) {
+      this.updates.emit({
+        sort: this.sort,
+        filter: this.filter,
+        globalSearch: this.globalSearch,
+      });
+    }
+  }
+
   public onSelectionChange(): void {
     this.selectionSource.next();
   }
