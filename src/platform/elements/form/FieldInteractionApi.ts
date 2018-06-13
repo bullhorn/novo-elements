@@ -378,6 +378,7 @@ export class FieldInteractionApi {
     public addStaticOption(key: string, newOption: any): void {
         let control = this.getControl(key);
         let optionToAdd = newOption;
+        let isUnique: boolean = true;
         if (control) {
             let currentOptions = this.getProperty(key, 'options');
             if (!currentOptions || !currentOptions.length) {
@@ -396,9 +397,19 @@ export class FieldInteractionApi {
                 if (currentOptions[0].value && !optionToAdd.value) {
                     optionToAdd = { value: newOption, label: newOption };
                 }
-                this.setProperty(key, 'options', [...currentOptions, optionToAdd]);
+                // Ensure duplicate values are not added
+                currentOptions.forEach((option) => {
+                    if ((option.value && option.value === optionToAdd.value) || (option === optionToAdd)) {
+                        isUnique = false;
+                    }
+                });
+                if (isUnique) {
+                    this.setProperty(key, 'options', [...currentOptions, optionToAdd]);
+                }
             }
-            this.triggerEvent({controlKey: key, prop: 'options', value: [...currentOptions, optionToAdd] });
+            if (isUnique) {
+                this.triggerEvent({controlKey: key, prop: 'options', value: [...currentOptions, optionToAdd] });
+            }
         }
     }
 
