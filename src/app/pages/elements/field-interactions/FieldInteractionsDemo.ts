@@ -290,6 +290,7 @@ export class FieldInteractionsDemoComponent {
                 API.removeStaticOption('picker', 'NEW');
             } else {
                 API.addStaticOption('select', 'NEW');
+                API.addStaticOption('select', 'NEW'); // Duplicate options will be ignored
                 API.addStaticOption('picker', 'NEW');
             }
         };
@@ -800,6 +801,7 @@ export class FieldInteractionsDemoComponent {
         API.removeStaticOption('picker', 'NEW');
     } else {
         API.addStaticOption('select', 'NEW');
+        API.addStaticOption('select', 'NEW'); // Duplicate options will be ignored
         API.addStaticOption('picker', 'NEW');
     }
 };
