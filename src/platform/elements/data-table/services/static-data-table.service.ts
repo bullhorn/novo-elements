@@ -19,7 +19,6 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
     globalSearch?: string,
     outsideFilter?: any,
   ): Observable<{ results: T[]; total: number }> {
-    let ret: T[] = [];
     this.currentData = [...this.originalData];
     if (this.currentData.length !== 0) {
       if (globalSearch) {
@@ -38,9 +37,9 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
         this.currentData = [...this.originalData];
       }
       if (!Helpers.isBlank(page) && !Helpers.isBlank(pageSize)) {
-        ret = this.currentData.slice(page * pageSize, (page + 1) * pageSize);
+        this.currentData = this.currentData.slice(page * pageSize, (page + 1) * pageSize);
       }
     }
-    return Observable.of({ results: ret, total: this.currentData.length });
+    return Observable.of({ results: this.currentData, total: this.currentData.length });
   }
 }
