@@ -329,6 +329,18 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this.templateContext.$implicit.fileBrowserImageUploadUrl = this.control.fileBrowserImageUploadUrl;
     this.templateContext.$implicit.minimal = this.control.minimal;
     this.templateContext.$implicit.currencyFormat = this.control.currencyFormat;
+    this.templateContext.$implicit.percentValue = this.control.percentValue;
+
+    if (this.form.controls[this.control.key] && this.form.controls[this.control.key].subType === 'percentage') {
+      if (!Helpers.isEmpty(this.form.controls[this.control.key].value)) {
+        this.control.percentValue = Number((this.form.controls[this.control.key].value * 100).toFixed(6).replace(/\.?0*$/, ''));
+      }
+      this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe((value) => {
+        if (!Helpers.isEmpty(value)) {
+          this.control.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
+        }
+      });
+    }
   }
 
   ngOnDestroy() {
