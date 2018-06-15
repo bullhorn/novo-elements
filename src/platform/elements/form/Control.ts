@@ -318,6 +318,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         modelChangeWithRaw: this.modelChangeWithRaw.bind(this),
         handleAddressChange: this.handleAddressChange.bind(this),
         handleTyping: this.handleTyping.bind(this),
+        updateValidity: this.updateValidity.bind(this),
+        toggleActive: this.toggleActive.bind(this),
       },
       form: this.form,
     }
@@ -326,6 +328,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this.templateContext.$implicit.startupFocus = this.control.startupFocus;
     this.templateContext.$implicit.fileBrowserImageUploadUrl = this.control.fileBrowserImageUploadUrl;
     this.templateContext.$implicit.minimal = this.control.minimal;
+    this.templateContext.$implicit.currencyFormat = this.control.currencyFormat;
   }
 
   ngOnDestroy() {

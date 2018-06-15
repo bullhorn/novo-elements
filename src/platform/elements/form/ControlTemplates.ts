@@ -17,7 +17,7 @@ import { NovoTemplateService } from '../../services/template/NovoTemplateService
         </ng-template>
 
         <!--Textarea--->
-        <ng-template novoTemplate="textarea" let-control let-form="form" let-errors="errors" let-methods="methods">
+        <ng-template novoTemplate="text-area" let-control let-form="form" let-errors="errors" let-methods="methods">
           <div [formGroup]="form">
             <textarea [class.maxlength-error]="errors?.maxlength" [name]="control.key" [attr.id]="control.key" [placeholder]="control.placeholder" [formControlName]="control.key" autosize (input)="methods.handleTextAreaInput($event)" (focus)="methods.handleFocus($event)" (blur)="methods.handleBlur($event)" [maxlength]="control?.maxlength" [tooltip]="control?.tooltip" [tooltipPosition]="control?.tooltipPosition"></textarea>
           </div>
@@ -108,7 +108,7 @@ import { NovoTemplateService } from '../../services/template/NovoTemplateService
         <!--Address-->
         <ng-template novoTemplate="address" let-control let-form="form" let-errors="errors" let-methods="methods">
           <div [formGroup]="form">
-            <novo-address [formControlName]="control.key" [config]="control?.config" (change)="methods.handleAddressChange($event)" (focus)="methods.handleFocus($event.event, $event.field)" (blur)="methods.handleBlur($event.event, $event.field)"  (validityChange)="updateValidity()"></novo-address>
+            <novo-address [formControlName]="control.key" [config]="control?.config" (change)="methods.handleAddressChange($event)" (focus)="methods.handleFocus($event.event, $event.field)" (blur)="methods.handleBlur($event.event, $event.field)"  (validityChange)="methods.updateValidity()"></novo-address>
           </div>
         </ng-template>
 
