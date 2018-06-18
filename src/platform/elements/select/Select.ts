@@ -89,15 +89,22 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
   @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
   @ViewChild('dropdownElement') dropdown: ElementRef;
 
-  constructor(public element: ElementRef, public labels: NovoLabelService, public ref: ChangeDetectorRef, private focusMonitor: FocusMonitor, private ngZone: NgZone) {}
+  constructor(
+    public element: ElementRef,
+    public labels: NovoLabelService,
+    public ref: ChangeDetectorRef,
+    private focusMonitor: FocusMonitor,
+    private ngZone: NgZone,
+  ) {}
 
   ngOnInit() {
-    this.focusMonitor.monitor(this.dropdown.nativeElement)
-      .subscribe((origin) => this.ngZone.run(() => {
+    this.focusMonitor.monitor(this.dropdown.nativeElement).subscribe((origin) =>
+      this.ngZone.run(() => {
         if (origin === 'keyboard') {
           this.openPanel();
         }
-      }));
+      }),
+    );
     this.ngOnChanges();
   }
 
@@ -146,6 +153,9 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
     if (this.panelOpen) {
       this.closePanel();
     } else {
+      setTimeout(() => {
+        this.dropdown.nativeElement.focus();
+      });
       this.openPanel();
     }
   }
@@ -210,7 +220,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
       } else {
         this.setValueAndClose({
           value: this.filteredOptions[this.selectedIndex],
-          index: this.selectedIndex
+          index: this.selectedIndex,
         });
       }
     } else if (event.keyCode === KeyCodes.UP) {
