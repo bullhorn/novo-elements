@@ -152,7 +152,7 @@ export { EditorControl } from './elements/form/controls/editor/EditorControl';
 export { AceEditorControl } from './elements/form/controls/ace-editor/AceEditorControl';
 export { FileControl } from './elements/form/controls/file/FileControl';
 export { NativeSelectControl } from './elements/form/controls/native-select/NativeSelectControl';
-export { PickerControl, AppendToBodyPickerControl, TablePickerControl } from './elements/form/controls/picker/PickerControl';
+export { PickerControl, TablePickerControl } from './elements/form/controls/picker/PickerControl';
 export { QuickNoteControl } from './elements/form/controls/quick-note/QuickNoteControl';
 export { RadioControl } from './elements/form/controls/radio/RadioControl';
 export { ReadOnlyControl } from './elements/form/controls/read-only/ReadOnlyControl';

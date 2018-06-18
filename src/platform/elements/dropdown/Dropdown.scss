@@ -11,46 +11,29 @@ novo-dropdown {
       margin: 0 0.5em;
     }
   }
-  novo-dropdown-container {
-    margin-top: 10px;
-  }
-  &[side='left'] {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  &[side='right'] {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    novo-dropdown-container {
-      top: 42px;
-      right: 0;
-      margin-top: 0;
-    }
-  }
 }
 
-novo-dropdown-container {
+.dropdown-container {
   background-color: $white;
   list-style: none;
-  line-height: 26px;
-  display: none;
   margin: 0;
-  margin-bottom: 20px;
   position: absolute;
   padding: 0;
   min-width: 180px;
   z-index: 1000;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  margin-top: 5px;
+  box-shadow: $whiteframe-shadow-z3;
+  &.has-height {
+    overflow: auto;
+  }
   list {
     item {
       cursor: pointer;
       width: 100%;
       margin: 0;
-      padding: 0.5em 1em;
+      padding: 0.8em 1em;
       box-sizing: border-box;
-      display: flex !important;
+      display: flex;
       align-items: center;
       justify-content: space-between;
       color: darken($light, 45%);
@@ -76,8 +59,6 @@ novo-dropdown-container {
         }
       }
       i {
-        height: 30px !important;
-        width: 15px !important;
         border-radius: 0;
         margin: 0 !important;
         color: $positive;

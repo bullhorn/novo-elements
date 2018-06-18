@@ -1,6 +1,7 @@
 // NG2
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 // APP
 import { NovoPipesModule } from './pipes/Pipes.module';
 import { NovoButtonModule } from './elements/button/Button.module';
@@ -54,7 +55,6 @@ import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
-import { Security } from './services/security/Security';
 import { OptionsService } from './services/options/OptionsService';
 
 import { NovoCommonModule } from './elements/common/common.module';
@@ -107,6 +107,7 @@ import { NovoCommonModule } from './elements/common/common.module';
     UnlessModule,
     NovoCommonModule,
     NovoStepperModule,
+    ScrollDispatchModule,
   ],
   providers: [
     { provide: ComponentUtils, useClass: ComponentUtils },
