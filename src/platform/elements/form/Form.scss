@@ -93,23 +93,6 @@ novo-form {
               }
             }
           }
-          &.date,
-          &.time {
-            .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
-              border-bottom: none !important;
-              >input {
-                border-bottom: 1px solid $negative !important;
-              }
-            }
-          }
-          &.date-time {
-            .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
-              border-bottom: none !important;
-              input {
-                border-bottom: 1px solid $negative !important;
-              }
-            }
-          }
           &.hidden {
             height: 0;
             min-height: 0;
