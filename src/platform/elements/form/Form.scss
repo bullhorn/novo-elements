@@ -82,6 +82,9 @@ novo-form {
               border-bottom: none !important;
             }
           }
+          novo-picker.ng-touched.ng-invalid:not(.ng-pristine) input {
+            border-bottom: 1px solid $negative !important;
+          }
           &.checklist,
           &.file,
           &.radio,
