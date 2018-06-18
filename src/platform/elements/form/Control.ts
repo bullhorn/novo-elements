@@ -1,8 +1,16 @@
 // NG2
 import {
-  Component, Input, Output, ElementRef, EventEmitter,
-  OnInit, OnDestroy, Directive, HostListener, AfterContentInit,
-  AfterViewInit
+  Component,
+  Input,
+  Output,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  Directive,
+  HostListener,
+  AfterContentInit,
+  AfterViewInit,
 } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
@@ -19,10 +27,10 @@ export interface IMaskOptions {
   mask: any;
   keepCharPositions: boolean;
   guide: boolean;
-};
+}
 
 @Directive({
-  selector: 'textarea[autosize]'
+  selector: 'textarea[autosize]',
 })
 export class NovoAutoSize implements AfterContentInit {
   @HostListener('input', ['$event.target'])
@@ -30,7 +38,7 @@ export class NovoAutoSize implements AfterContentInit {
     this.adjust();
   }
 
-  constructor(public element: ElementRef) { }
+  constructor(public element: ElementRef) {}
 
   ngAfterContentInit(): void {
     setTimeout(() => {
@@ -87,7 +95,7 @@ export class NovoAutoSize implements AfterContentInit {
                 </div>
             </div>
         </div>
-    `
+    `,
 })
 export class NovoCustomControlContainerElement {
   @Input() control;
@@ -150,7 +158,7 @@ export class NovoCustomControlContainerElement {
                             <!--File-->
                             <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="form.controls[control.key].placeholder" [value]="form.controls[control.key].value" [multiple]="form.controls[control.key].multiple" [layoutOptions]="form.controls[control.key].layoutOptions" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (edit)="handleEdit($event)" (save)="handleSave($event)" (delete)="handleDelete($event)" (upload)="handleUpload($event)"></novo-file-input>
                             <!--Tiles-->
-                            <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [disabled]="form.controls[control.key].disabled"></novo-tiles>
+                            <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [controlDisabled]="form.controls[control.key].disabled"></novo-tiles>
                             <!--Picker-->
                             <div class="novo-control-input-container" *ngSwitchCase="'picker'">
                                 <novo-picker [config]="form.controls[control.key].config" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [parentScrollSelector]="form.controls[control.key].parentScrollSelector" *ngIf="!form.controls[control.key].multiple" (select)="modelChange($event);" (changed)="modelChangeWithRaw($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-picker>
@@ -282,7 +290,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   private maxLengthMetErrorfields: string[] = [];
   maskOptions: IMaskOptions;
 
-  constructor(element: ElementRef, public labels: NovoLabelService, private dateFormatService: DateFormatService, private fieldInteractionApi: FieldInteractionApi) {
+  constructor(
+    element: ElementRef,
+    public labels: NovoLabelService,
+    private dateFormatService: DateFormatService,
+    private fieldInteractionApi: FieldInteractionApi,
+  ) {
     super(element);
   }
 
@@ -307,7 +320,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   get showCount() {
-    let charCount: boolean = this.form.controls[this.control.key].maxlength &&
+    let charCount: boolean =
+      this.form.controls[this.control.key].maxlength &&
       this.focused &&
       (this.form.controls[this.control.key].controlType === 'text-area' || this.form.controls[this.control.key].controlType === 'textbox');
     return this._showCount || charCount;
@@ -332,7 +346,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   ngOnInit() {
     // Make sure to initially format the time controls
     if (this.control && this.form.controls[this.control.key].value) {
-      if (this.form.controls[this.control.key].controlType === 'textbox' || this.form.controls[this.control.key].controlType === 'text-area') {
+      if (
+        this.form.controls[this.control.key].controlType === 'textbox' ||
+        this.form.controls[this.control.key].controlType === 'text-area'
+      ) {
         this.characterCount = this.form.controls[this.control.key].value.length;
       }
     }
@@ -460,7 +477,23 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     // Controls that always have the label active
-    return ['tiles', 'checklist', 'checkbox', 'date', 'time', 'date-time', 'address', 'file', 'editor', 'ace-editor', 'radio', 'text-area', 'quick-note'].indexOf(this.form.controls[this.control.key].controlType) !== -1;
+    return (
+      [
+        'tiles',
+        'checklist',
+        'checkbox',
+        'date',
+        'time',
+        'date-time',
+        'address',
+        'file',
+        'editor',
+        'ace-editor',
+        'radio',
+        'text-area',
+        'quick-note',
+      ].indexOf(this.form.controls[this.control.key].controlType) !== -1
+    );
   }
 
   get requiresExtraSpacing() {
@@ -481,9 +514,13 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this.focusedField = field;
     if (!Helpers.isBlank(this.characterCountField) && this.characterCountField === field) {
       this.showCount = true;
-    } else if (this.form.controls[this.control.key].controlType === 'address' &&
-      field && !Helpers.isEmpty(this.form.value[this.control.key]) && !Helpers.isBlank(this.form.value[this.control.key][field])) {
-      this.handleAddressChange({ value: this.form.value[this.control.key][field], field })
+    } else if (
+      this.form.controls[this.control.key].controlType === 'address' &&
+      field &&
+      !Helpers.isEmpty(this.form.value[this.control.key]) &&
+      !Helpers.isBlank(this.form.value[this.control.key][field])
+    ) {
+      this.handleAddressChange({ value: this.form.value[this.control.key][field], field });
     }
     this._focusEmitter.emit(event);
   }
@@ -537,7 +574,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     // Types
     if (this.form.controls[this.control.key].subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
       event.preventDefault();
-    } else if (~['currency', 'float', 'percentage'].indexOf(this.form.controls[this.control.key].subType) && !(NUMBERS_WITH_DECIMAL.test(key) || UTILITY_KEYS.includes(key))) {
+    } else if (
+      ~['currency', 'float', 'percentage'].indexOf(this.form.controls[this.control.key].subType) &&
+      !(NUMBERS_WITH_DECIMAL.test(key) || UTILITY_KEYS.includes(key))
+    ) {
       event.preventDefault();
     }
     // Max Length
@@ -588,9 +628,13 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   handleAddressChange(data) {
-    if (data && !Helpers.isBlank(data.value) &&
-      data.field && this.control.config[data.field] &&
-      !Helpers.isEmpty(this.control.config[data.field].maxlength)) {
+    if (
+      data &&
+      !Helpers.isBlank(data.value) &&
+      data.field &&
+      this.control.config[data.field] &&
+      !Helpers.isEmpty(this.control.config[data.field].maxlength)
+    ) {
       this.characterCount = data.value.length;
       this.characterCountField = data.field;
       this.maxLength = this.control.config[data.field].maxlength;

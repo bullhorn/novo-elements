@@ -25,6 +25,10 @@
   "lint-staged": {
     "*.ts": [
       "tslint --project tsconfig.json --format codeFrame"
+    ],
+    "*.{ts,json,scss,css,html}": [
+      "prettier --write",
+      "git add"
     ]
   },
   "keywords": [
@@ -95,6 +99,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "lint-staged": "^7.0.0",
     "ng-packagr": "1.6.0",
+    "prettier": "^1.12.1",
     "rimraf": "^2.6.2",
     "rxjs": "^5.5.6",
     "standard-version": "^4.2.0",
