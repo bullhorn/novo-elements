@@ -251,6 +251,9 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
       this.selectedIndex--;
       this.toggleHeader(null, true);
     } else if ((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode === KeyCodes.SPACE) {
+      if (event.keyCode === KeyCodes.SPACE) {
+        event.preventDefault();
+      }
       if (!this.panelOpen) {
         this.openPanel();
       }
