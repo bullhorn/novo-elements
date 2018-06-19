@@ -82,7 +82,11 @@ novo-form {
               border-bottom: none !important;
             }
           }
-          novo-picker.ng-touched.ng-invalid:not(.ng-pristine) input {
+          novo-list.vertical-list {
+            margin-left: 1px;
+          }
+          novo-picker.ng-touched.ng-invalid:not(.ng-pristine) input,
+          textarea.ng-touched.ng-invalid:not(.ng-pristine):not(.ng-valid) {
             border-bottom: 1px solid $negative !important;
           }
           &.checklist,
@@ -94,6 +98,21 @@ novo-form {
               &.valid-number {
                 border-bottom: none !important;
               }
+            }
+          }
+          &.date,
+          &.time {
+            .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+              border-bottom: none !important;
+              >input {
+                border-bottom: 1px solid $negative !important;
+              }
+            }
+          }
+          novo-date-time-picker-input.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+            border-bottom: none !important;
+            input {
+              border-bottom: 1px solid $negative !important;
             }
           }
           &.hidden {
