@@ -1,6 +1,6 @@
-// NG2
+// NG
 import { Component } from '@angular/core';
-// APP
+// App
 let BasicSelectDemoTpl = require('./templates/BasicSelectDemo.html');
 let LongSelectDemoTpl = require('./templates/LongSelectDemo.html');
 
@@ -42,20 +42,15 @@ export class SelectDemoComponent {
     private placeholder: string = 'Select...';
     private options: Array<string> = ['Alpha', 'Bravo', 'Charlie'];
     private withNumbers: Array<any> = [
-        { label: 'One', value: 1 },
-        { label: 'Two', value: 2 },
-        { label: 'Zero', value: 0 },
-        { label: 'Four', value: 4, readOnly: true }
+      { label: 'One', value: 1 },
+      { label: 'Two', value: 2 },
+      { label: 'Zero', value: 0 },
+      { label: 'Four', value: 4, readOnly: true }
     ];
     private withNumbersValue: number = 4;
     private states: Array<string> = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
     private value: string = 'Bravo';
     private state: any = 'Missouri';
-    private headerConfig: any = {
-        label: 'Add New Item',
-        placeholder: 'Enter item here',
-        onSave: this.create.bind(this)
-    };
 
     create(opt) {
         this.options = [...this.options, opt];
