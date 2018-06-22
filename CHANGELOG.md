@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.13.0"></a>
+# [2.13.0](https://github.com/bullhorn/novo-elements/compare/v2.12.0...v2.13.0) (2018-06-22)
+
+
+### Bug Fixes
+
+* **DataTable:** Fix static table service ([ea120d0](https://github.com/bullhorn/novo-elements/commit/ea120d0))
+* **datepicker:** Use right animations ([7020821](https://github.com/bullhorn/novo-elements/commit/7020821))
+* **FieldInteractionAPI:** Add duplicate check to addStaticOption method ([#741](https://github.com/bullhorn/novo-elements/issues/741)) ([eff1533](https://github.com/bullhorn/novo-elements/commit/eff1533))
+* **select:** Updates to select accessibility ([#743](https://github.com/bullhorn/novo-elements/issues/743)) ([068708c](https://github.com/bullhorn/novo-elements/commit/068708c))
+* **tiles:** avoid disabled as input as its an error with reactive forms ([38e44a9](https://github.com/bullhorn/novo-elements/commit/38e44a9))
+
+
+### Features
+
+* **dropdown & select:** Making the dropdown and select properly use the CDK overlay ([23e443c](https://github.com/bullhorn/novo-elements/commit/23e443c))
+
+
+
 <a name="2.12.0"></a>
 # [2.12.0](https://github.com/bullhorn/novo-elements/compare/v2.11.0...v2.12.0) (2018-06-05)
 
