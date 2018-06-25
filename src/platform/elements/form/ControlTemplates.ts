@@ -57,7 +57,7 @@ import { NovoTemplateService } from '../../services/template/NovoTemplateService
         <!--Tiles-->
         <ng-template novoTemplate="tiles" let-control let-form="form" let-errors="errors" let-methods="methods">
           <div [formGroup]="form">
-            <novo-tiles [options]="control.options" [formControlName]="control.key" (onChange)="methods.modelChange($event)" [tooltip]="control.tooltip" [tooltipPosition]="control.tooltipPosition" [disabled]="control.disabled"></novo-tiles>
+            <novo-tiles [options]="control.options" [formControlName]="control.key" (onChange)="methods.modelChange($event)" [tooltip]="control.tooltip" [tooltipPosition]="control.tooltipPosition" [controlDisabled]="control.disabled"></novo-tiles>
           </div>
         </ng-template>
 
