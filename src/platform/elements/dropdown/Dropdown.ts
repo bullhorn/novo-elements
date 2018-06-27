@@ -1,7 +1,18 @@
 // NG2
 import {
-  AfterContentInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output,
-  QueryList, ViewChild,
+  AfterContentInit,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChild,
 } from '@angular/core';
 // APP
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
@@ -14,7 +25,7 @@ import { notify } from '../../utils/notifier/notifier.util';
   template: `
     <ng-content select="button" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
-      <div class="dropdown-container {{ containerClass }}" [style.height.px]="height" [class.has-height]="!!height">
+      <div class="dropdown-container {{ containerClass }}" [style.height.px]="height" [class.has-height]="!!height" (keydown)="onOverlayKeyDown($event)">
         <ng-content></ng-content>
       </div>
     </novo-overlay-template>
@@ -193,6 +204,13 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
         this.filterTerm = '';
       }, 2000);
       this.filterTerm = this.filterTerm.slice(0, -1);
+    }
+  }
+
+  public onOverlayKeyDown(event: KeyboardEvent): void {
+    if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER) {
+      Helpers.swallowEvent(event);
+      this.closePanel();
     }
   }
 

@@ -14,7 +14,7 @@ import {
   PercentageCell,
   SelectControl,
   TablePickerControl,
-  TextBoxControl
+  TextBoxControl,
 } from './../../../../platform/index';
 
 let TableDemoTpl = require('./templates/TableDemo.html');
@@ -23,7 +23,6 @@ let DetailsTableDemoTpl = require('./templates/DetailsTableDemo.html');
 let SelectAllTableDemoTpl = require('./templates/SelectAllTableDemo.html');
 let MovieTableDemoTpl = require('./templates/MovieTableDemo.html');
 let TotalFooterTableDemoTpl = require('./templates/TotalFooterTableDemo.html');
-
 
 const template = `
 <div class="container">
@@ -72,10 +71,9 @@ const HEADER_COLORS = ['aqua', 'ocean', 'mint', 'grass', 'sunflower', 'company',
       <i class="bhi-info"></i>
       <label>{{ value }}</label>
     </div>
-  `
+  `,
 })
-export class StatusCell extends BaseRenderer {
-}
+export class StatusCell extends BaseRenderer {}
 
 @Component({
   selector: 'extra-details',
@@ -86,10 +84,9 @@ export class StatusCell extends BaseRenderer {
       <label><i class="bhi-info"></i>Categories</label>
       <p>{{ data.categories }}</p>
     </div>
-  `
+  `,
 })
-export class ExtraDetails extends BaseRenderer {
-}
+export class ExtraDetails extends BaseRenderer {}
 
 @Component({
   selector: 'image-cell',
@@ -97,10 +94,9 @@ export class ExtraDetails extends BaseRenderer {
     <div class="image-cell">
       <img src="{{value}}"/>
     </div>
-  `
+  `,
 })
-export class ImageCell extends BaseRenderer {
-}
+export class ImageCell extends BaseRenderer {}
 
 @Component({
   selector: 'actions-cell',
@@ -119,7 +115,7 @@ export class ImageCell extends BaseRenderer {
         <item>Item 9</item>
       </list>
     </novo-dropdown>
-  `
+  `,
 })
 export class ActionsCell extends BaseRenderer {
   constructor() {
@@ -140,7 +136,7 @@ interface TableDemoConfig {
 
 @Component({
   selector: 'table-demo',
-  template: template
+  template: template,
 })
 export class TableDemoComponent implements OnInit {
   public TableDemoTpl: string = TableDemoTpl;
@@ -153,7 +149,7 @@ export class TableDemoComponent implements OnInit {
     { label: '10', value: 10 },
     { label: '20', value: 20 },
     { label: '30', value: 30 },
-    { label: '40', value: 40 }
+    { label: '40', value: 40 },
   ];
   public theme: string;
   public basic: TableDemoConfig;
@@ -166,14 +162,14 @@ export class TableDemoComponent implements OnInit {
 
   constructor() {
     let columns = [
-      { title: 'Actions', renderer: ActionsCell },
+      { title: 'Actions', renderer: ActionsCell, sorting: false, filtering: false },
       { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true },
       { title: 'Position', name: 'position', ordering: true, filtering: true },
       {
         title: 'Extn.',
         name: 'ext',
         ordering: true,
-        renderer: object => {
+        renderer: (object) => {
           return object.ext.obj;
         },
         compare: (sort, previous, current) => {
@@ -187,7 +183,7 @@ export class TableDemoComponent implements OnInit {
             return sort === 'asc' ? -1 : 1;
           }
           return 0;
-        }
+        },
       },
       {
         title: 'Start date',
@@ -196,13 +192,13 @@ export class TableDemoComponent implements OnInit {
         renderer: DateCell,
         ordering: true,
         filtering: true,
-        range: true
+        range: true,
       },
       {
         title: '%',
         name: 'percent',
         ordering: true,
-        renderer: PercentageCell
+        renderer: PercentageCell,
       },
       {
         title: 'Salary',
@@ -210,7 +206,7 @@ export class TableDemoComponent implements OnInit {
         ordering: true,
         renderer: (object) => {
           return `$ ${Number(object.salary).toFixed(2)}`;
-        }
+        },
       },
       {
         title: 'Status',
@@ -223,20 +219,20 @@ export class TableDemoComponent implements OnInit {
             options: [
               { label: 'New Lead', value: 'New Lead' },
               { label: 'Active', value: 'Active' },
-              { label: 'Archived', value: 'Archived', }
-            ]
+              { label: 'Archived', value: 'Archived' },
+            ],
           },
           {
             category: 'Move',
             callback: this.move.bind(this),
-            options: ['Kitten', 'Kitty']
+            options: ['Kitten', 'Kitty'],
           },
           {
             callback: this.move.bind(this),
-            options: ['Meow', 'Kitty']
-          }
-        ]
-      }
+            options: ['Meow', 'Kitty'],
+          },
+        ],
+      },
     ];
     this.basic = {
       columns: columns.slice(),
@@ -245,16 +241,16 @@ export class TableDemoComponent implements OnInit {
         paging: {
           current: 1,
           itemsPerPage: 10,
-          onPageChange: event => {
+          onPageChange: (event) => {
             this.basic.config.paging.current = event.page;
             this.basic.config.paging.itemsPerPage = event.itemsPerPage;
-          }
+          },
         },
         filtering: true,
         sorting: true,
         ordering: true,
-        resizing: true
-      }
+        resizing: true,
+      },
     };
     this.details = {
       columns: columns.slice(),
@@ -263,18 +259,18 @@ export class TableDemoComponent implements OnInit {
         paging: {
           current: 1,
           itemsPerPage: 10,
-          onPageChange: event => {
+          onPageChange: (event) => {
             this.details.config.paging.current = event.page;
             this.details.config.paging.itemsPerPage = event.itemsPerPage;
-          }
+          },
         },
         sorting: true,
         filtering: true,
         ordering: true,
         resizing: true,
         hasDetails: true,
-        detailsRenderer: ExtraDetails
-      }
+        detailsRenderer: ExtraDetails,
+      },
     };
     this.selectAll = {
       columns: columns.slice(),
@@ -283,25 +279,25 @@ export class TableDemoComponent implements OnInit {
         paging: {
           current: 1,
           itemsPerPage: 10,
-          onPageChange: event => {
+          onPageChange: (event) => {
             this.selectAll.config.paging.current = event.page;
             this.selectAll.config.paging.itemsPerPage = event.itemsPerPage;
-          }
+          },
         },
         sorting: true,
         filtering: true,
         ordering: true,
         resizing: true,
         selectAllEnabled: true,
-        rowSelectionStyle: 'checkbox'
-      }
+        rowSelectionStyle: 'checkbox',
+      },
     };
 
     let imdbColumns = [
       { title: 'Title', name: 'Title', ordering: true, filtering: true },
       { title: 'Year', name: 'Year', ordering: true, filtering: true },
       { title: 'Type', name: 'Type', ordering: true, filtering: true, options: ['movie', 'series', 'episode'], multiple: true },
-      { title: 'Poster', name: 'Poster', ordering: false, filtering: false, renderer: ImageCell }
+      { title: 'Poster', name: 'Poster', ordering: false, filtering: false, renderer: ImageCell },
     ];
 
     // this.remote = {
@@ -332,7 +328,7 @@ export class TableDemoComponent implements OnInit {
       'Tom Cruise',
       'Ed Bailey',
       'Bo Jackson',
-      'Ernie McDudson'
+      'Ernie McDudson',
     ];
     this.editable = {
       columns: [
@@ -342,7 +338,7 @@ export class TableDemoComponent implements OnInit {
           ordering: true,
           filtering: true,
           editorType: 'TablePickerControl',
-          editorConfig: { key: 'name', config: { options: names } }
+          editorConfig: { key: 'name', config: { options: names } },
         },
         {
           title: 'Job Type',
@@ -354,8 +350,12 @@ export class TableDemoComponent implements OnInit {
           editorType: 'SelectControl',
           editorConfig: {
             key: 'jobType',
-            options: [{ value: 'Freelance', label: 'Freelance' }, { value: 'Contract', label: 'Contract' }, { value: 'Billable', label: 'Billable' }]
-          }
+            options: [
+              { value: 'Freelance', label: 'Freelance' },
+              { value: 'Contract', label: 'Contract' },
+              { value: 'Billable', label: 'Billable' },
+            ],
+          },
         },
         {
           title: 'Rate',
@@ -374,40 +374,40 @@ export class TableDemoComponent implements OnInit {
                 script: (form) => {
                   console.log('Form Interaction Called!', form); // tslint:disable-line
                   if (form.value.rate) {
-                    if (Number(form.value.rate) >= .75) {
+                    if (Number(form.value.rate) >= 0.75) {
                       form.controls.rating.setValue('High');
-                    } else if (Number(form.value.rate) >= .50) {
+                    } else if (Number(form.value.rate) >= 0.5) {
                       form.controls.rating.setValue('Medium');
                     } else {
                       form.controls.rating.setValue('Low');
                     }
                   }
-                }
-              }
-            ]
-          }
+                },
+              },
+            ],
+          },
         },
-        { title: 'Rating', name: 'rating' }
+        { title: 'Rating', name: 'rating' },
       ],
       rows: new ArrayCollection([
         { id: 1, name: 'Joshua Godi', jobType: 'Freelance', rate: null, rating: 'Low' },
-        { id: 2, name: 'Brian Kimball', jobType: 'Contact', rate: .50, rating: 'Medium' },
-        { id: 3, name: 'Kameron Sween', jobType: 'Billable', rate: 1.00, rating: 'High' }
+        { id: 2, name: 'Brian Kimball', jobType: 'Contact', rate: 0.5, rating: 'Medium' },
+        { id: 3, name: 'Kameron Sween', jobType: 'Billable', rate: 1.0, rating: 'High' },
       ]),
       config: {
         paging: {
           current: 1,
           itemsPerPage: 10,
-          onPageChange: event => {
+          onPageChange: (event) => {
             this.basic.config.paging.current = event.page;
             this.basic.config.paging.itemsPerPage = event.itemsPerPage;
-          }
+          },
         },
         filtering: true,
         sorting: true,
         ordering: true,
-        resizing: true
-      }
+        resizing: true,
+      },
     };
 
     this.totalFooter = {
@@ -415,7 +415,7 @@ export class TableDemoComponent implements OnInit {
         { title: 'Name', name: 'name', ordering: true, filtering: true },
         { title: 'Count 1', name: 'count1', ordering: true, filtering: true },
         { title: 'Count 2', name: 'count2', ordering: true, filtering: true },
-        { title: 'Count 3', name: 'count3', ordering: true, filtering: true }
+        { title: 'Count 3', name: 'count3', ordering: true, filtering: true },
       ],
       rows: [
         { id: 1, name: 'Name 1', count1: 1, count2: 2, count3: 3 },
@@ -428,27 +428,30 @@ export class TableDemoComponent implements OnInit {
         paging: {
           current: 1,
           itemsPerPage: 10,
-          onPageChange: event => {
+          onPageChange: (event) => {
             this.basic.config.paging.current = event.page;
             this.basic.config.paging.itemsPerPage = event.itemsPerPage;
-          }
+          },
         },
-        footers: [{
-          columns: ['count1', 'count2', 'count3'],
-          method: 'SUM',
-          labelColumn: 'name',
-          label: 'Mega Total'
-        }, {
-          columns: ['count1', 'count2', 'count3'],
-          method: 'AVG',
-          labelColumn: 'name',
-          label: 'Yep, Average!'
-        }],
+        footers: [
+          {
+            columns: ['count1', 'count2', 'count3'],
+            method: 'SUM',
+            labelColumn: 'name',
+            label: 'Mega Total',
+          },
+          {
+            columns: ['count1', 'count2', 'count3'],
+            method: 'AVG',
+            labelColumn: 'name',
+            label: 'Yep, Average!',
+          },
+        ],
         filtering: true,
         sorting: true,
         ordering: true,
-        resizing: true
-      }
+        resizing: true,
+      },
     };
   }
 
