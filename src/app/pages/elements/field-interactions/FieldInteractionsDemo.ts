@@ -718,7 +718,6 @@ export class FieldInteractionsDemoComponent {
             label: 'Tooltip Size',
             description: 'Changing me will set a fixed width on the tooltip',
             options: [{ value: 'small', label: 'Small' }, { value: 'medium', label: 'Medium' }, { value: 'large', label: 'Large' } ],
-            initialValue: 'small',
             interactions: [
                 { event: 'change', script: tooltipUpdateFunction }
             ]
@@ -729,7 +728,6 @@ export class FieldInteractionsDemoComponent {
             label: 'Tooltip Multiline',
             description: 'Should the tooltip be multiple lines tall or all on one line?',
             options: [ { value: true, label: 'Yes'}, { value: false, label: 'No'} ],
-            initialValue: false,
             interactions: [
                 { event: 'change', script: tooltipUpdateFunction }
             ]
