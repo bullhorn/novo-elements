@@ -19,6 +19,8 @@ let ConfirmTpl = require('./templates/Confirm.html');
 let AddingRemovingTpl = require('./templates/AddingRemoving.html');
 let TooltipTpl = require('./templates/Tooltip.html');
 import { MockMeta, MockMetaHeaders } from './MockMeta';
+import {RadioControl} from "../../../../platform/elements/form/controls/radio/RadioControl";
+import {TilesControl} from "../../../../platform/elements/form/controls/tiles/TilesControl";
 
 const template = `
 <div class="container">
@@ -429,6 +431,12 @@ export class FieldInteractionsDemoComponent {
             API.setTooltip(API.getActiveKey(), API.getActiveValue());
         }
 
+        let tooltipUpdateFunction = (API: FieldInteractionApi) => {
+            console.log('[FieldInteractionDemo] - tooltipUpdateFunction'); // tslint:disable-line
+            API.getControl(this.controls.tooltip.tooltipControl.key).tooltipSize = API.getValue(this.controls.tooltip.tooltipSizeControl.key);
+            API.getControl(this.controls.tooltip.tooltipControl.key).tooltipPreline = API.getValue(this.controls.tooltip.tooltipPrelineControl.key);
+        }
+
         // Validation Field Interactions
         this.controls.validation.validationControl = new TextBoxControl({
             type: 'number',
@@ -705,7 +713,30 @@ export class FieldInteractionsDemoComponent {
                 { event: 'change', script: tooltipFunction }
             ]
         });
-        this.forms.tooltip = formUtils.toFormGroup([this.controls.tooltip.tooltipControl]);
+
+        this.controls.tooltip.tooltipSizeControl = new TilesControl({
+            key: 'tooltipSize',
+            label: 'Tooltip Size',
+            description: 'Changing me will set a fixed width on the tooltip',
+            options: [{ value: 'small', label: 'Small' }, { value: 'medium', label: 'Medium' }, { value: 'large', label: 'Large' } ],
+            initialValue: 'small',
+            interactions: [
+                { event: 'change', script: tooltipUpdateFunction }
+            ]
+        });
+
+        this.controls.tooltip.tooltipPrelineControl = new TilesControl({
+            key: 'tooltipPreline',
+            label: 'Tooltip Multiline',
+            description: 'Should the tooltip be multiple lines tall or all on one line?',
+            options: [ { value: true, label: 'Yes'}, { value: false, label: 'No'} ],
+            initialValue: false,
+            interactions: [
+                { event: 'change', script: tooltipUpdateFunction }
+            ]
+        });
+
+        this.forms.tooltip = formUtils.toFormGroup([this.controls.tooltip.tooltipControl, this.controls.tooltip.tooltipSizeControl, this.controls.tooltip.tooltipPrelineControl]);
 
         // Snippets
         this.snippets.validation = {
