@@ -1,6 +1,5 @@
 // NG2
 import { NgModule } from '@angular/core';
-import { Http } from '@angular/http';
 // APP
 import { GooglePlacesService } from './elements/places/places.service';
 import { NovoDragulaService } from './elements/dragula/DragulaService';
@@ -17,34 +16,34 @@ import { Security } from './services/security/Security';
 import { OptionsService } from './services/options/OptionsService';
 
 const NOVO_ELEMENTS_PROVIDERS = [
-    { provide: NovoDragulaService, useClass: NovoDragulaService },
-    { provide: NovoModalRef, useClass: NovoModalRef },
-    { provide: NovoModalService, useClass: NovoModalService },
-    { provide: GooglePlacesService, useClass: GooglePlacesService },
-    { provide: NovoToastService, useClass: NovoToastService },
-    { provide: ComponentUtils, useClass: ComponentUtils },
-    { provide: GlobalRef, useClass: BrowserGlobalRef },
-    { provide: LocalStorageService, useClass: LocalStorageService },
-    { provide: OptionsService, useClass: OptionsService },
-    FieldInteractionApi,
-    DateFormatService,
-    Security,
+  { provide: NovoDragulaService, useClass: NovoDragulaService },
+  { provide: NovoModalRef, useClass: NovoModalRef },
+  { provide: NovoModalService, useClass: NovoModalService },
+  { provide: GooglePlacesService, useClass: GooglePlacesService },
+  { provide: NovoToastService, useClass: NovoToastService },
+  { provide: ComponentUtils, useClass: ComponentUtils },
+  { provide: GlobalRef, useClass: BrowserGlobalRef },
+  { provide: LocalStorageService, useClass: LocalStorageService },
+  { provide: OptionsService, useClass: OptionsService },
+  FieldInteractionApi,
+  DateFormatService,
+  Security,
 ];
 
 @NgModule({
-    imports: []
+  imports: [],
 })
 export class NovoElementProviders {
-    static forRoot() {
-        return {
-            ngModule: NovoElementProviders,
-            providers: [...NOVO_ELEMENTS_PROVIDERS]
-        };
-    }
+  static forRoot() {
+    return {
+      ngModule: NovoElementProviders,
+      providers: [...NOVO_ELEMENTS_PROVIDERS],
+    };
+  }
 
-    static forChild() {
-        return {
-            ngModule: NovoElementProviders
-        };
-    }
+  static forChild() {
+    return {
+      ngModule: NovoElementProviders,
+    };
+  }
 }
