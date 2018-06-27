@@ -322,6 +322,10 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             control.tooltip = tooltip;
+            if (tooltip.length >= 40) {
+                control.tooltipSize = 'large';
+                control.tooltipPreline = true;
+            }
             this.triggerEvent({controlKey: key, prop: 'tooltip', value: tooltip });
         }
     }
@@ -331,7 +335,7 @@ export class FieldInteractionApi {
         let oldValue = history[history.length - 2];
         let newValue = this.getValue(key);
         let label = this.getProperty(key, 'label');
-        (document.activeElement as any).blur()
+        (document.activeElement as any).blur();
         return this.modalService.open(ControlConfirmModal, { oldValue, newValue, label, message, key }).onClosed.then(result => {
             if (!result) {
                 this.setValue(key, oldValue, { emitEvent: false });
