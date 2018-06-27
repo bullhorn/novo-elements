@@ -10,6 +10,6 @@ import { NovoOverlayTemplateComponent } from './Overlay';
 @NgModule({
   imports: [CommonModule, FormsModule, OverlayModule, ScrollDispatchModule],
   declarations: [NovoOverlayTemplateComponent],
-  exports: [NovoOverlayTemplateComponent],
+  exports: [NovoOverlayTemplateComponent, ScrollDispatchModule],
 })
 export class NovoOverlayModule {}
