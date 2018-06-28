@@ -108,8 +108,8 @@ export class NovoPickerElement implements OnInit {
   @Output() blur: EventEmitter<any> = new EventEmitter();
   @Output() typing: EventEmitter<any> = new EventEmitter();
 
-    @ViewChild(NovoOverlayTemplateComponent) public container: NovoOverlayTemplateComponent;
-    @ViewChild('input') private input: ElementRef;
+  @ViewChild(NovoOverlayTemplateComponent) public container: NovoOverlayTemplateComponent;
+  @ViewChild('input') private input: ElementRef;
 
   closeHandler: any;
   isStatic: boolean = true;
@@ -117,10 +117,10 @@ export class NovoPickerElement implements OnInit {
   resultsComponent: any;
   popup: any;
   _value: any;
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) { }
+  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
     if (this.overrideElement) {
@@ -230,7 +230,9 @@ export class NovoPickerElement implements OnInit {
    * results.
    */
   onFocus(event) {
-    this.show();
+    if (!this.panelOpen) {
+      this.show();
+    }
     this.focus.emit(event);
   }
 
