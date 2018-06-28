@@ -17,6 +17,8 @@ export class NovoFormControl extends FormControl {
     label: string;
     tooltip: string;
     tooltipPosition: string;
+    tooltipSize?: string;
+    tooltipPreline?: boolean;
     initialValue: any;
     valueHistory: any[] = [];
     validators: any;
@@ -70,6 +72,8 @@ export class NovoFormControl extends FormControl {
         this.hasRequiredValidator = this.required;
         this.tooltip = control.tooltip;
         this.tooltipPosition = control.tooltipPosition;
+        this.tooltipSize = control.tooltipSize;
+        this.tooltipPreline = control.tooltipPreline;
         this.label = control.label;
         this.name = control.name;
         this.required = control.required;
