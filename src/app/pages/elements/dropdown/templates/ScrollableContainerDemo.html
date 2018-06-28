@@ -1,0 +1,16 @@
+<div class="scrollable-container" cdkScrollable>
+  <div class="scrollable-content">
+    <novo-dropdown>
+      <button type="button"
+              theme="secondary"
+              icon="collapse"
+              inverse>Inside a Scrollable Container</button>
+      <list>
+        <item (action)="clickMe('This')"
+              keepOpen="true">This</item>
+        <item (action)="clickMe('Scrolls!')"
+              keepOpen="true">Scrolls!</item>
+      </list>
+    </novo-dropdown>
+  </div>
+</div>

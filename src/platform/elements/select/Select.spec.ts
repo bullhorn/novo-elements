@@ -260,7 +260,7 @@ describe('Elements: NovoSelectElement', () => {
       comp.header = { open: true };
       comp.filteredOptions = [{ value: 'foo', label: 'foo' }, { value: 'bar', label: 'bar' }, { value: 'baz', label: 'baz' }];
       comp.overlay = {
-        _overlayRef: {
+        overlayRef: {
           overlayElement: {
             querySelector: jasmine.createSpy('querySelector').and.returnValue({
               querySelectorAll: jasmine.createSpy('querySelectorAll').and.returnValue([{ value: 'foo' }]),
@@ -282,7 +282,7 @@ describe('Elements: NovoSelectElement', () => {
       comp.header = { open: true };
       comp.filteredOptions = [{ value: 'foo', label: 'foo' }, { value: 'bar', label: 'bar' }, { value: 'baz', label: 'baz' }];
       comp.overlay = {
-        _overlayRef: {
+        overlayRef: {
           overlayElement: {
             querySelector: jasmine.createSpy('querySelector').and.returnValue({
               querySelectorAll: jasmine.createSpy('querySelectorAll').and.returnValue([{ value: 'foo' }]),
