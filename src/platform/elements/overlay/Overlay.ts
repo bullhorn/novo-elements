@@ -54,7 +54,18 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   @ViewChild('panel') public panel: ElementRef;
 
   @Input()
-  public position: 'default' | 'right' | 'bottom' | 'center' | 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' = 'default';
+  public position:
+    | 'default'
+    | 'right'
+    | 'above-below'
+    | 'right-above-below'
+    | 'center'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'top-left'
+    | 'top-right' =
+    'default';
   @Input() public scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
   @Input() public width: number;
   @Input() public height: number;
@@ -248,11 +259,16 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
     if (this.position === 'bottom') {
       strategy = strategy.withFallbackPosition({ originX: fallbackX, originY: 'bottom' }, { overlayX: fallbackX, overlayY: 'top' });
-    } else if (this.position === 'right' || this.position === 'default') {
+    } else if (this.position === 'right' || this.position === 'default' || this.position.includes('above-below')) {
       strategy = strategy
         .withFallbackPosition({ originX, originY: 'top' }, { overlayX: originX, overlayY: 'bottom' })
         .withFallbackPosition({ originX: fallbackX, originY: 'bottom' }, { overlayX: fallbackX, overlayY: 'top' })
         .withFallbackPosition({ originX: fallbackX, originY: 'top' }, { overlayX: fallbackX, overlayY: 'bottom' });
+      if (!this.position.includes('above-below')) {
+        strategy = strategy
+          .withFallbackPosition({ originX: originX, originY: 'center' }, { overlayX: originX, overlayY: 'center' })
+          .withFallbackPosition({ originX: fallbackX, originY: 'center' }, { overlayX: fallbackX, overlayY: 'center' });
+      }
     }
     return strategy;
   }

@@ -35,7 +35,19 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
   @Input() parentScrollSelector: string;
   @Input() parentScrollAction: string = 'close';
   @Input() containerClass: string;
-  @Input() side: 'default' | 'right' | 'bottom' | 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' = 'default';
+  @Input()
+  side:
+    | 'default'
+    | 'right'
+    | 'above-below'
+    | 'right-above-below'
+    | 'center'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'top-left'
+    | 'top-right' =
+    'default';
   @Input() scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
   @Input() height: number;
   @Input() width: number = 180;

@@ -27,7 +27,7 @@ const DATE_VALUE_ACCESSOR = {
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
 
-        <novo-overlay-template [parent]="element">
+        <novo-overlay-template [parent]="element" position="above-below">
             <novo-date-picker inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value"></novo-date-picker>
         </novo-overlay-template>
   `,
@@ -52,17 +52,13 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
-  constructor(
-    public element: ElementRef,
-    public labels: NovoLabelService,
-    private _changeDetectorRef: ChangeDetectorRef
-  ) {
+  constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) {
     this.placeholder = this.labels.dateFormatPlaceholder;
   }
 
   ngOnInit() {
-    this.userDefinedFormat = this.format? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g): false;
-    if(!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
+    this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
+    if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
       this.maskOptions = this.maskOptions || {
         mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
         pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormat.toLowerCase()),
@@ -70,7 +66,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
         guide: true,
       };
     } else {
-      this.maskOptions = {mask: false};
+      this.maskOptions = { mask: false };
     }
   }
 
@@ -169,7 +165,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       if (!(value instanceof Date)) {
         value = new Date(value);
       }
-      if(!(isNaN(value.valueOf()) && this.allowInvalidDate) ){
+      if (!(isNaN(value.valueOf()) && this.allowInvalidDate)) {
         return this.labels.formatDateWithFormat(value, {
           month: '2-digit',
           day: '2-digit',
@@ -178,7 +174,6 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       } else {
         return originalValue;
       }
-
     } catch (err) {
       return '';
     }

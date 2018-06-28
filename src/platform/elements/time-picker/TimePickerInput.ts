@@ -14,7 +14,7 @@ import { DateFormatService } from '../../services/date-format/DateFormat';
 const DATE_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => NovoTimePickerInputElement),
-  multi: true
+  multi: true,
 };
 
 @Component({
@@ -26,19 +26,19 @@ const DATE_VALUE_ACCESSOR = {
     <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i>
     <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
 
-    <novo-overlay-template [parent]="element">
+    <novo-overlay-template [parent]="element" position="above-below">
       <novo-time-picker inline="true" (onSelect)="setValue($event)" [ngModel]="value" [military]="military"></novo-time-picker>
     </novo-overlay-template>
-  `
+  `,
 })
 export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor {
   public value: any;
   public formattedValue: string = '';
 
   /** View -> model callback called when value changes */
-  _onChange: (value: any) => void = () => { }
+  _onChange: (value: any) => void = () => {};
   /** View -> model callback called when autocomplete has been touched */
-  _onTouched = () => { };
+  _onTouched = () => {};
 
   @Input() name: string;
   @Input() placeholder: string;
@@ -47,10 +47,12 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
-  constructor(public element: ElementRef,
-              public labels: NovoLabelService,
-              public dateFormatService: DateFormatService,
-              protected _changeDetectorRef: ChangeDetectorRef,) { }
+  constructor(
+    public element: ElementRef,
+    public labels: NovoLabelService,
+    public dateFormatService: DateFormatService,
+    protected _changeDetectorRef: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.placeholder = this.military ? this.labels.timeFormatPlaceholder24Hour : this.labels.timeFormatPlaceholderAM;
@@ -67,7 +69,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     if (!this.overlay.panelOpen) {
       this.overlay.openPanel();
       let hour = new Date().getHours();
-      Promise.resolve(null).then(() => this.scrollToIndex((hour * 4)));
+      Promise.resolve(null).then(() => this.scrollToIndex(hour * 4));
     }
   }
 
@@ -101,7 +103,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
       }
       this.openPanel();
       let num = Number(text.split(':')[0]);
-      this.scrollToIndex((num * 4));
+      this.scrollToIndex(num * 4);
     }
   }
 
@@ -161,7 +163,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     let format = this.labels.formatDateWithFormat(value, {
       hour: '2-digit',
       minute: '2-digit',
-      hour12: !this.military
+      hour12: !this.military,
     });
     if (format.split(':')[0].length === 1) {
       return `0${format}`;
@@ -182,5 +184,4 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
       list.scrollTop = (item as HTMLElement).offsetTop;
     }
   }
-
 }

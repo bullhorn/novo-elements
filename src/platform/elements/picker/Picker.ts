@@ -1,6 +1,15 @@
 // NG2
 import {
-  ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewContainerRef,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
@@ -54,7 +63,7 @@ const PICKER_VALUE_ACCESSOR = {
             [disabled]="disablePickerInput"/>
         <i class="bhi-search" *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput"></i>
         <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
-        <novo-overlay-template class="picker-results-container" [parent]="element" (closing)="onOverlayClosed()">
+        <novo-overlay-template class="picker-results-container" [parent]="element" position="above-below" (closing)="onOverlayClosed()">
             <span #results></span>
             <ng-content></ng-content>
         </novo-overlay-template>
@@ -112,10 +121,10 @@ export class NovoPickerElement implements OnInit {
   resultsComponent: any;
   popup: any;
   _value: any;
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) { }
+  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
     if (this.overrideElement) {
