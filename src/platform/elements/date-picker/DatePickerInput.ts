@@ -23,7 +23,7 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-date-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleEvent($event, false)" (blur)="_handleEvent($event, true)" #input data-automation-id="date-input"/>
+        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="date-input"/>
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
 
@@ -89,11 +89,17 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     }
   }
 
-  _handleEvent(event: Event, blur: boolean): void {
-    blur ? this._handleInput(event, blur) : document.activeElement === event.target && this._handleInput(event, blur);
+  _handleInput(event: KeyboardEvent): void {
+    if (document.activeElement === event.target) {
+      this._handleEvent(event, false);
+    }
   }
 
-  _handleInput(event: Event, blur: boolean): void {
+  _handleBlur(event: FocusEvent): void {
+    this._handleEvent(event, true);
+  }
+
+  _handleEvent(event: Event, blur: boolean): void {
     let value = (event.target as HTMLInputElement).value;
     try {
       let dateTimeValue = Date.parse(value);
