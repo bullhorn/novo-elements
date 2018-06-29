@@ -83,6 +83,9 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
+      if (event.keyCode === ENTER) {
+        this._handleEvent(event, true);
+      }
       this.closePanel();
       event.stopPropagation();
     }
@@ -96,6 +99,9 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleBlur(event: FocusEvent): void {
     this._handleEvent(event, true);
+    if (event.relatedTarget) {
+      this.closePanel();
+    }
   }
 
   _handleEvent(event: Event, blur: boolean): void {
@@ -116,9 +122,6 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     Promise.resolve(null).then(() => this._setTriggerValue(value));
   }
 
-  writeCalendarValue(value: any): void {
-    Promise.resolve(null).then(() => this._setCalendarValue(value));
-  }
   registerOnChange(fn: (value: any) => {}): void {
     this._onChange = fn;
   }
@@ -131,7 +134,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       if (blur) {
         !skip && this.writeValue(newValue);
       } else {
-        !skip && this.writeCalendarValue(newValue);
+        !skip && this._setCalendarValue(newValue);
       }
     }
   }
