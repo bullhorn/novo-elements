@@ -141,33 +141,8 @@ novo-table {
     }
   }
   > thead > tr > th {
-    &:nth-of-type(1) {
-      .th-group {
-        novo-dropdown.column-filters {
-          novo-dropdown-container {
-            left: -80px;
-          }
-        }
-      }
-    }
     &.sorted {
       background: rgba($positive, 0.2);
-    }
-  }
-  > thead > tr {
-    th:first-child {
-      novo-dropdown {
-        novo-dropdown-container {
-          left: -90px !important;
-        }
-      }
-    }
-    th:last-child {
-      novo-dropdown {
-        novo-dropdown-container {
-          right: 0 !important;
-        }
-      }
     }
   }
   > thead > tr > th {
@@ -317,7 +292,7 @@ novo-table {
   }
 }
 
-novo-dropdown-container.table-dropdown {
+.dropdown-container.table-dropdown {
   right: -15px;
   min-width: 230px;
   max-width: 230px;

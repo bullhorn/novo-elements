@@ -171,7 +171,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
     <ng-template novoTemplate="dropdownCellTemplate"
           let-row
           let-col="col">
-          <novo-dropdown appendToBody="true" parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
+          <novo-dropdown parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
             <button type="button" theme="dialogue" icon="collapse" inverse>{{ col.label }}</button>
             <list>
                 <item *ngFor="let option of col?.action?.options" (action)="option.handlers.click({ originalEvent: $event?.originalEvent, row: row })" [disabled]="isDisabled(option, row)">
