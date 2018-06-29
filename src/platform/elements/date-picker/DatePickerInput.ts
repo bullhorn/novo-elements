@@ -26,8 +26,7 @@ const DATE_VALUE_ACCESSOR = {
         <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="date-input"/>
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
-
-        <novo-overlay-template [parent]="element">
+        <novo-overlay-template [parent]="element" position="above-below">
             <novo-date-picker inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value"></novo-date-picker>
         </novo-overlay-template>
   `,
@@ -70,7 +69,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     }
   }
 
-  /** BEGIN: Convienient Panel Methods. */
+  /** BEGIN: Convenient Panel Methods. */
   openPanel(): void {
     this.overlay.openPanel();
   }
@@ -80,7 +79,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
   }
-  /** END: Convienient Panel Methods. */
+  /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
@@ -97,7 +96,6 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleBlur(event: FocusEvent): void {
     this._handleEvent(event, true);
-    this.closePanel();
   }
 
   _handleEvent(event: Event, blur: boolean): void {
@@ -106,9 +104,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       let dateTimeValue = Date.parse(value);
       if (!isNaN(dateTimeValue)) {
         let dt = new Date(dateTimeValue);
-        if (dt !== this.value) {
-          this.dispatchOnChange(dt, blur);
-        }
+        this.dispatchOnChange(dt, blur);
       } else {
         this.dispatchOnChange(null, blur);
       }
@@ -123,7 +119,6 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   writeCalendarValue(value: any): void {
     Promise.resolve(null).then(() => this._setCalendarValue(value));
   }
-
   registerOnChange(fn: (value: any) => {}): void {
     this._onChange = fn;
   }
@@ -132,15 +127,13 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
   public dispatchOnChange(newValue?: any, blur: boolean = false, skip: boolean = false) {
     if (newValue !== this.value) {
+      this._onChange(newValue);
       if (blur) {
-        this._onChange(newValue);
         !skip && this.writeValue(newValue);
       } else {
-        this._onChange(newValue);
         !skip && this.writeCalendarValue(newValue);
       }
     }
-    this._changeDetectorRef.markForCheck();
   }
 
   private _setTriggerValue(value: any): void {
@@ -170,7 +163,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
    */
   public setValueAndClose(event: any | null): void {
     if (event && event.date) {
-      this.dispatchOnChange(event.date);
+      this.dispatchOnChange(event.date, true);
     }
     this.closePanel();
   }
