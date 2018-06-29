@@ -83,9 +83,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
-      if (event.keyCode === ENTER) {
-        this._handleEvent(event, true);
-      }
+      this._handleEvent(event, true);
       this.closePanel();
       event.stopPropagation();
     }
