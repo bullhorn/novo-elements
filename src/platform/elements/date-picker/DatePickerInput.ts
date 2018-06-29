@@ -38,10 +38,10 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   private userDefinedFormat: boolean;
 
   /** View -> model callback called when value changes */
-  _onChange: (value: any) => void = () => { };
+  _onChange: (value: any) => void = () => {};
 
   /** View -> model callback called when autocomplete has been touched */
-  _onTouched = () => { };
+  _onTouched = () => {};
 
   @Input() name: string;
   @Input() placeholder: string;
@@ -84,7 +84,6 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
-      this._handleEvent(event, true);
       this.closePanel();
       event.stopPropagation();
     }
@@ -98,6 +97,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleBlur(event: FocusEvent): void {
     this._handleEvent(event, true);
+    this.closePanel();
   }
 
   _handleEvent(event: Event, blur: boolean): void {
@@ -112,7 +112,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       } else {
         this.dispatchOnChange(null, blur);
       }
-    } catch (err) { }
+    } catch (err) {}
     this.openPanel();
   }
 
