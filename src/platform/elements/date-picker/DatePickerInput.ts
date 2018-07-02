@@ -95,13 +95,6 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     }
   }
 
-  _handleBlur(event: FocusEvent): void {
-    this._handleEvent(event, true);
-    if (event.relatedTarget) {
-      this.closePanel();
-    }
-  }
-
   _handleEvent(event: Event, blur: boolean): void {
     let value = (event.target as HTMLInputElement).value;
     try {
