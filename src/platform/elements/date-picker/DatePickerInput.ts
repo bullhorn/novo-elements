@@ -23,7 +23,7 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-date-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="date-input"/>
+        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input data-automation-id="date-input"/>
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
         <novo-overlay-template [parent]="element" position="above-below">
