@@ -1,9 +1,11 @@
-import { Directive, ElementRef, Input, Renderer2, HostBinding, Component, ChangeDetectionStrategy, ChangeDetectorRef, Optional, OnInit, OnDestroy, HostListener, ViewChild } from '@angular/core';
-import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef, DataSource } from '@angular/cdk/table';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, ElementRef, HostBinding, Input, OnDestroy, OnInit, Optional, Renderer2, ViewChild
+} from '@angular/core';
+import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef } from '@angular/cdk/table';
 import { Subscription } from 'rxjs/Subscription';
 
 import { NovoSelection } from './sort';
-import { SimpleTableColumn, SimpleTableActionColumn, SimpleTableActionColumnOption } from './interfaces';
+import { SimpleTableActionColumn, SimpleTableActionColumnOption, SimpleTableColumn } from './interfaces';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 
@@ -105,9 +107,9 @@ export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnD
 
 @Component({
   selector: 'novo-simple-cell',
-  template: `
-        <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span>
-    `,
+  template: `    
+    <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
@@ -158,8 +160,8 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
 @Component({
   selector: 'novo-simple-checkbox-cell',
   template: `
-        <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox>
-    `,
+    <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox>
+  `,
 })
 export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
   @HostBinding('attr.role') public role = 'gridcell';
@@ -199,20 +201,20 @@ export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnIn
 @Component({
   selector: 'novo-simple-action-cell',
   template: `
-        <ng-container *ngIf="!column.options">
-            <button theme="icon" [icon]="column.icon" (click)="column.onClick(row)" [disabled]="isDisabled(column, row)"></button>
-        </ng-container>
-        <ng-container *ngIf="column.options">
-            <novo-dropdown appendToBody="true" parentScrollSelector=".novo-simple-table" containerClass="novo-table-dropdown-cell">
-                <button type="button" theme="dialogue" icon="collapse" inverse>{{ column.label || labels.actions }}</button>
-                <list>
-                    <item *ngFor="let option of column.options" (action)="option.onClick(row)" [disabled]="isDisabled(option, row)">
-                        <span [attr.data-automation-id]="option.label">{{ option.label }}</span>
-                    </item>
-                </list>
-            </novo-dropdown>
-        </ng-container>
-    `,
+    <ng-container *ngIf="!column.options">
+      <button theme="icon" [icon]="column.icon" (click)="column.onClick(row)" [disabled]="isDisabled(column, row)"></button>
+    </ng-container>
+    <ng-container *ngIf="column.options">
+      <novo-dropdown parentScrollSelector=".novo-simple-table" containerClass="novo-table-dropdown-cell">
+        <button type="button" theme="dialogue" icon="collapse" inverse>{{ column.label || labels.actions }}</button>
+        <list>
+          <item *ngFor="let option of column.options" (action)="option.onClick(row)" [disabled]="isDisabled(option, row)">
+            <span [attr.data-automation-id]="option.label">{{ option.label }}</span>
+          </item>
+        </list>
+      </novo-dropdown>
+    </ng-container>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoSimpleActionCell<T> extends _NovoCell implements OnInit {

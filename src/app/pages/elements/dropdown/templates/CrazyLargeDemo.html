@@ -1,17 +1,10 @@
-<novo-dropdown appendToBody="true">
-    <button type="button" theme="secondary" icon="collapse" inverse>My Dropdown Is On The Body!</button>
-    <list>
-        <item (action)="clickMe('Hello!')">Action 1</item>
-        <item (action)="clickMe('Another!')">Action 2</item>
-        <item *ngFor="let item of items">{{ item }}</item>
-    </list>
-</novo-dropdown>
-<novo-dropdown appendToBody="true">
-    <button type="button" theme="icon" icon="menu" inverse></button>
-    <list>
-        <item>Action 1</item>
-        <item tooltip="Test tooltip :)" tooltipPosition="left">Action 2</item>
-        <item>Action 3</item>
-        <item *ngFor="let item of items">{{ item }}</item>
-    </list>
+<novo-dropdown height="250">
+  <button type="button"
+          theme="secondary"
+          icon="collapse"
+          inverse>Lots of Data Points!</button>
+  <list>
+    <item *ngFor="let name of MOCK_WORDS"
+          (action)="clickMe(name)">{{ name }}</item>
+  </list>
 </novo-dropdown>

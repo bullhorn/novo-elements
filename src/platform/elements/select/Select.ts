@@ -282,7 +282,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
   }
 
   scrollToIndex(index: number) {
-    let element = this.overlay._overlayRef.overlayElement;
+    let element = this.overlay.overlayRef.overlayElement;
     let list = element.querySelector('.novo-select-list');
     let items = list.querySelectorAll('li');
     let item = items[this.headerConfig ? index + 1 : index];

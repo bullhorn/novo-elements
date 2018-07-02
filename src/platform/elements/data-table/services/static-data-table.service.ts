@@ -40,6 +40,6 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
         this.currentData = this.currentData.slice(page * pageSize, (page + 1) * pageSize);
       }
     }
-    return Observable.of({ results: this.currentData, total: this.currentData.length });
+    return Observable.of({ results: this.currentData, total: this.originalData.length });
   }
 }

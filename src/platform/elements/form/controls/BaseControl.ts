@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 // APP
 import { Helpers } from '../../../utils/Helpers';
 import { NovoControlGroupAddConfig } from '../ControlGroup';
+import { notify } from '../../../utils/notifier/notifier.util';
 
 export interface NovoGroupedControlConfig {
   label?: string;
@@ -46,11 +47,13 @@ export interface NovoControlConfig {
   closeOnSelect?: boolean;
   interactions?: Array<Object>;
   dataSpecialization?: string;
-  appendToBody?: boolean;
+  appendToBody?: boolean; // Deprecated
   parentScrollSelector?: string;
   description?: string;
   tooltip?: string;
   tooltipPosition?: string;
+  tooltipSize?: string;
+  tooltipPreline?: boolean;
   layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
   customControl?: any;
   customControlConfig?: any;
@@ -104,11 +107,13 @@ export class BaseControl {
   closeOnSelect: boolean;
   interactions: Array<Object>;
   dataSpecialization: string;
-  appendToBody: boolean;
+  appendToBody: boolean; // Deprecated
   parentScrollSelector: string;
   description?: string;
   tooltip?: string;
   tooltipPosition?: string;
+  tooltipSize?: string;
+  tooltipPreline?: boolean;
   layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
   customControl?: any;
   customControlConfig?: any;
@@ -174,11 +179,16 @@ export class BaseControl {
     this.interactions = config.interactions;
     this.dataSpecialization = config.dataSpecialization;
     this.appendToBody = !!config.appendToBody;
+    if (this.appendToBody) {
+      notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+    }
     this.parentScrollSelector = config.parentScrollSelector;
     this.description = config.description;
     if (config.tooltip) {
       this.tooltip = config.tooltip;
       this.tooltipPosition = config.tooltipPosition;
+      this.tooltipSize = config.tooltipSize;
+      this.tooltipPreline = config.tooltipPreline;
     }
     this.customControl = config.customControl;
     this.customControlConfig = config.customControlConfig;
