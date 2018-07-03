@@ -237,7 +237,9 @@ export class NovoPickerElement implements OnInit {
    * results.
    */
   onFocus(event) {
-    this.show();
+    if (!this.panelOpen) {
+      this.show();
+    }
     this.focus.emit(event);
   }
 
