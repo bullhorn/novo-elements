@@ -325,6 +325,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
     this.templateContext.$implicit.tooltipPosition = this.tooltipPosition;
     this.templateContext.$implicit.tooltip = this.tooltip;
+    this.templateContext.$implicit.tooltipSize = this.tooltipSize;
+    this.templateContext.$implicit.tooltipPreline = this.tooltipPreline;
     this.templateContext.$implicit.startupFocus = this.control.startupFocus;
     this.templateContext.$implicit.fileBrowserImageUploadUrl = this.control.fileBrowserImageUploadUrl;
     this.templateContext.$implicit.minimal = this.control.minimal;
