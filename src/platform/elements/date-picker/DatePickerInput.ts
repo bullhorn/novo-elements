@@ -1,5 +1,17 @@
 // NG
-import { ChangeDetectorRef, Component, ElementRef, OnInit, forwardRef, Host, Input, Inject, ViewChild, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  forwardRef,
+  Host,
+  Input,
+  Output,
+  Inject,
+  ViewChild,
+  EventEmitter,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
@@ -23,7 +35,7 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-date-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input data-automation-id="date-input"/>
+        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="_handleFocus($event)" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="date-input"/>
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
         <novo-overlay-template [parent]="element" position="above-below">
@@ -48,6 +60,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @Input() format: string;
   @Input() textMaskEnabled: boolean = true;
   @Input() allowInvalidDate: boolean = false;
+  @Output() blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output() focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
@@ -93,6 +107,15 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     if (document.activeElement === event.target) {
       this._handleEvent(event, false);
     }
+  }
+
+  _handleBlur(event: FocusEvent): void {
+    this.blurEvent.emit(event);
+  }
+
+  _handleFocus(event: FocusEvent): void {
+    this.openPanel();
+    this.focusEvent.emit(event);
   }
 
   _handleEvent(event: Event, blur: boolean): void {
