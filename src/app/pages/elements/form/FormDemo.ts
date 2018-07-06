@@ -472,14 +472,10 @@ export class FormDemoComponent {
     this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
 
     // Calendar input controls
-    let test: Function = (FAPI: FieldInteractionApi) => {
-      console.log('blur test!'); // tslint:disable-line
-    };
     this.dateControl = new DateControl({
       key: 'date',
       label: 'Date',
       tooltip: 'Date',
-      interactions: [{ event: 'blur', invokeOnInit: false, script: test }],
     });
     this.userDefinedDateControl = new DateControl({
       key: 'userDefinedFormat',
@@ -492,13 +488,11 @@ export class FormDemoComponent {
       key: 'time',
       label: 'Time',
       tooltip: 'Time',
-      interactions: [{ event: 'blur', invokeOnInit: false, script: test }],
     });
     this.dateTimeControl = new DateTimeControl({
       key: 'dateTime',
       label: 'Date Time',
       military: true,
-      interactions: [{ event: 'blur', invokeOnInit: false, script: test }],
     });
     this.calendarForm = formUtils.toFormGroup([this.dateControl, this.userDefinedDateControl, this.timeControl, this.dateTimeControl]);
 
