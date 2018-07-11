@@ -87,14 +87,11 @@ export class NovoAutoSize implements AfterContentInit {
                             [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || (form.controls[control.key].required && !form.controls[control.key].readOnly)">
                         </i>
                         <!--Form Controls-->
-                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [ngSwitch]="form.controls[control.key].controlType" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
+                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
                             <!--TODO prefix/suffix on the control-->
                             <ng-container *ngIf="templates">
                               <ng-container *ngTemplateOutlet="templates[form.controls[control.key].controlType]; context: templateContext"></ng-container>
                             </ng-container>
-                            <!--ReadOnly-->
-                            <!--TODO - Handle rendering of different READONLY values-->
-                            <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
                         </div>
                     </div>
                     <!--Error Message-->
@@ -335,11 +332,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     if (this.form.controls[this.control.key] && this.form.controls[this.control.key].subType === 'percentage') {
       if (!Helpers.isEmpty(this.form.controls[this.control.key].value)) {
-        this.control.percentValue = Number((this.form.controls[this.control.key].value * 100).toFixed(6).replace(/\.?0*$/, ''));
+        this.templateContext.$implicit.percentValue = Number((this.form.controls[this.control.key].value * 100).toFixed(6).replace(/\.?0*$/, ''));
       }
       this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe((value) => {
         if (!Helpers.isEmpty(value)) {
-          this.control.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
+          this.templateContext.$implicit.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
         }
       });
     }

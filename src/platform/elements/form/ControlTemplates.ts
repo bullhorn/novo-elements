@@ -5,6 +5,10 @@ import { NovoTemplateService } from '../../services/template/NovoTemplateService
 @Component({
   selector: 'novo-control-templates',
   template: `
+        <!---Readonly--->
+        <ng-template novoTemplate="read-only" let-form="form" let-control>
+          <div>{{ form.value[control.key] }}</div>
+        </ng-template>
         <!--Textbox--->
         <ng-template novoTemplate="textbox" let-control let-form="form" let-errors="errors" let-methods="methods">
           <div [formGroup]="form" class="novo-control-input-container novo-control-input-with-label" [tooltip]="control?.tooltip" [tooltipPosition]="control?.tooltipPosition"  [tooltipSize]="control?.tooltipSize" [tooltipPreline]="control?.tooltipPreline">
