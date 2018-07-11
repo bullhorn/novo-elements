@@ -1,8 +1,11 @@
 // NG2
 import { Component } from '@angular/core';
-//Vendor
-import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from './../../../../platform/index';
+// Vendor
+import { Subject } from 'rxjs/Subject';
 // APP
+import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from './../../../../platform/index';
+import { RenderPipe } from './../../../../platform/index';
+
 let SimpleValueDemoTpl = require('./templates/SimpleValueDemo.html');
 let CategoryValueDemoTpl = require('./templates/CategoryValueDemo.html');
 let IconRightValueDemoTpl = require('./templates/IconRightValueDemo.html');
@@ -13,6 +16,7 @@ let AssociatedValueDemoTpl = require('./templates/AssociatedValueDemo.html');
 let DateTimeValueDemoTpl = require('./templates/DateTimeValueDemo.html');
 let ExternalLinkValueDemoTpl = require('./templates/ExternalLinkValueDemo.html');
 let EntityListDemoTpl = require('./templates/EntityListDemo.html');
+let RetrieveTextDemoTpl = require('./templates/RetrieveTextDemo.html');
 const template = `
 <div class="container">
     <h1>Value/Details/Summary <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/value">(source)</a></small></h1>
@@ -60,158 +64,180 @@ const template = `
     <p>Render entity lists</p>
     <div class="example value-demo">${EntityListDemoTpl}</div>
     <code-snippet [code]="EntityListDemoTpl"></code-snippet>
+    <h5>Retrieve Text</h5>
+    <p>Click to retrieve the rendered text to the parent component.</p>
+    <div class="example value-demo">${RetrieveTextDemoTpl}</div>
+    <code-snippet [code]="RetrieveTextDemoTpl"></code-snippet>
 </div>
 `;
 
 @Component({
-    selector: 'value-demo',
-    template: template
+  selector: 'value-demo',
+  template: template,
+  providers: [RenderPipe],
 })
 export class ValueDemoComponent {
-    private SimpleValueDemoTpl: string = SimpleValueDemoTpl;
-    private CategoryValueDemoTpl: string = CategoryValueDemoTpl;
-    private IconRightValueDemoTpl: string = IconRightValueDemoTpl;
-    private CorporateUserValueDemoTpl: string = CorporateUserValueDemoTpl;
-    private FormatterValueDemoTpl: string = FormatterValueDemoTpl;
-    private ExternalLinkValueDemoTpl: string = ExternalLinkValueDemoTpl;
-    private DateTimeValueDemoTpl: string = DateTimeValueDemoTpl;
-    private AddressValueDemoTpl: string = AddressValueDemoTpl;
-    private AssociatedValueDemoTpl: string = AssociatedValueDemoTpl;
-    private EntityListDemoTpl: string = EntityListDemoTpl;
-    private toggleCount: number = 0;
-    private checked: boolean = true;
-    simpleData = 1234567890;
-    simpleMeta = {
-        type: 'SCALAR',
-        name: 'phone1',
-        label: 'PH #'
-    };
-    simpleTheme = NOVO_VALUE_THEME.MOBILE;
-    categoryData = {
-        value: 'stuff',
-        label: 'Stuff Category'
-    };
-    categoryMeta = {
-        type: 'TO_ONE',
-        name: 'category',
-        label: 'Category',
-        associatedEntity: {
-            entity: 'Category'
-        }
-    };
-    iconRightData = 'Approved';
-    iconRightMeta = {
-        type: 'SCALAR',
-        options: [{
-            value: 'Approved',
-            label: 'Approved'
-        }],
-        name: 'status',
-        label: 'Status',
-        icons: [{
-            iconCls: 'next',
-            onIconClick: (data, meta) => {
-                window.alert('hey there');
-            }
-            }, {
-            iconCls: 'close',
-            onIconClick: '',
-        }]
-    };
-    corporateUserData = {
-        id: 123,
-        firstName: 'Jack',
-        lastName: 'White'
-    };
-    corporateUserMeta = {
-        type: 'TO_ONE',
-        name: 'user',
-        label: 'Internal User',
-        associatedEntity: {
-            entity: 'CorporateUser'
-        }
-    };
-    formatterData = {
-        id: 123
-    };
-    formatterMeta = {
-        name: 'Placement',
-        label: 'Placement',
-        associatedEntity: {
-            entity: 'Placement'
+  private SimpleValueDemoTpl: string = SimpleValueDemoTpl;
+  private CategoryValueDemoTpl: string = CategoryValueDemoTpl;
+  private IconRightValueDemoTpl: string = IconRightValueDemoTpl;
+  private CorporateUserValueDemoTpl: string = CorporateUserValueDemoTpl;
+  private FormatterValueDemoTpl: string = FormatterValueDemoTpl;
+  private ExternalLinkValueDemoTpl: string = ExternalLinkValueDemoTpl;
+  private DateTimeValueDemoTpl: string = DateTimeValueDemoTpl;
+  private AddressValueDemoTpl: string = AddressValueDemoTpl;
+  private AssociatedValueDemoTpl: string = AssociatedValueDemoTpl;
+  private EntityListDemoTpl: string = EntityListDemoTpl;
+  private RetrieveTextDemoTpl: string = RetrieveTextDemoTpl;
+  private toggleCount: number = 0;
+  private checked: boolean = true;
+  simpleData = 1234567890;
+  simpleMeta = {
+    type: 'SCALAR',
+    name: 'phone1',
+    label: 'PH #',
+  };
+  simpleTheme = NOVO_VALUE_THEME.MOBILE;
+  categoryData = {
+    value: 'stuff',
+    label: 'Stuff Category',
+  };
+  categoryMeta = {
+    type: 'TO_ONE',
+    name: 'category',
+    label: 'Category',
+    associatedEntity: {
+      entity: 'Category',
+    },
+  };
+  iconRightData = 'Approved';
+  iconRightMeta = {
+    type: 'SCALAR',
+    options: [
+      {
+        value: 'Approved',
+        label: 'Approved',
+      },
+    ],
+    name: 'status',
+    label: 'Status',
+    icons: [
+      {
+        iconCls: 'next',
+        onIconClick: (data, meta) => {
+          window.alert('hey there');
         },
-        formatter: (value, args) => {
-            return `${args.label} #${value && value.id || ''}`
-        }
-    };
-    externalLinkData = 'www.bullhorn.com';
-    externalLinkMeta = {
-        name: 'companyUrl',
-        label: 'Company URL'
-    };
-    dateTimeValueData = (new Date()).getTime();
-    dateTimeValueMeta = {
-        dataSpecialization: 'DATETIME',
-        label: 'Date'
-    }
-    addressValueData = {
-        address1: '100 Summer Street',
-        city: 'Boston',
-        state: 'MA',
-        zip: '02143',
-        country: {
-            name: 'United States'
-        }
-    };
-    addressValueMeta = {
-        dataType: 'Address',
-        type: 'Address',
-        label: 'Address',
-        name: 'address'
-    };
-    associatedValueData = {
+      },
+      {
+        iconCls: 'close',
+        onIconClick: '',
+      },
+    ],
+  };
+  corporateUserData = {
+    id: 123,
+    firstName: 'Jack',
+    lastName: 'White',
+  };
+  corporateUserMeta = {
+    type: 'TO_ONE',
+    name: 'user',
+    label: 'Internal User',
+    associatedEntity: {
+      entity: 'CorporateUser',
+    },
+  };
+  formatterData = {
+    id: 123,
+  };
+  formatterMeta = {
+    name: 'Placement',
+    label: 'Placement',
+    associatedEntity: {
+      entity: 'Placement',
+    },
+    formatter: (value, args) => {
+      return `${args.label} #${(value && value.id) || ''}`;
+    },
+  };
+  externalLinkData = 'www.bullhorn.com';
+  externalLinkMeta = {
+    name: 'companyUrl',
+    label: 'Company URL',
+  };
+  dateTimeValueData = new Date().getTime();
+  dateTimeValueMeta = {
+    dataSpecialization: 'DATETIME',
+    label: 'Date',
+  };
+  addressValueData = {
+    address1: '100 Summer Street',
+    city: 'Boston',
+    state: 'MA',
+    zip: '02143',
+    country: {
+      name: 'United States',
+    },
+  };
+  addressValueMeta = {
+    dataType: 'Address',
+    type: 'Address',
+    label: 'Address',
+    name: 'address',
+  };
+  associatedValueData = {
+    id: 1,
+    firstName: 'Alice',
+    lastName: 'Wonderland',
+  };
+  associatedValueMeta = {
+    type: 'TO_ONE',
+    name: 'owner',
+    label: 'Owner',
+    associatedEntity: {
+      entity: 'CorporateUser',
+    },
+  };
+  entityListData = {
+    data: [
+      {
         id: 1,
-        firstName: 'Alice',
-        lastName: 'Wonderland'
-    };
-    associatedValueMeta = {
-        type: 'TO_ONE',
-        name: 'owner',
-        label: 'Owner',
-        associatedEntity: {
-            entity: 'CorporateUser'
-        }
-    };
-    entityListData = {
-        data: [{
-            id: 1,
-            firstName: 'George',
-            lastName: 'Washington',
-            personSubtype: 'Candidate',
-            openLink: (data) => {},
-        }, {
-            id: 2,
-            firstName: 'John',
-            lastName: 'Adams',
-            personSubtype: 'ClientContact',
-            openLink: (data) => {},
-        }, {
-            id: 3,
-            firstName: 'Abraham',
-            lastName: 'Lincoln',
-            personSubtype: 'Lead',
-            openLink: (data) => {},
-        }],
-    };
-    entityListMeta = {
-        type: 'TO_MANY',
-        name: 'guests',
-        label: 'Attendees',
-        associatedEntity: {
-            entity: 'CorporateUser'
-        }
-    };
-    increment() {
-        this.toggleCount++;
-    }
+        firstName: 'George',
+        lastName: 'Washington',
+        personSubtype: 'Candidate',
+        openLink: (data) => {},
+      },
+      {
+        id: 2,
+        firstName: 'John',
+        lastName: 'Adams',
+        personSubtype: 'ClientContact',
+        openLink: (data) => {},
+      },
+      {
+        id: 3,
+        firstName: 'Abraham',
+        lastName: 'Lincoln',
+        personSubtype: 'Lead',
+        openLink: (data) => {},
+      },
+    ],
+  };
+  entityListMeta = {
+    type: 'TO_MANY',
+    name: 'guests',
+    label: 'Attendees',
+    associatedEntity: {
+      entity: 'CorporateUser',
+    },
+  };
+  retrieveText = new Subject();
+  callRetrieveText(): void {
+    this.retrieveText.next(true);
+  }
+  onRetrieveText(text): void {
+    alert(text);
+  }
+  increment() {
+    this.toggleCount++;
+  }
 }
