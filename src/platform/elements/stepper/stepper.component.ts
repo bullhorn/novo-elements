@@ -1,5 +1,6 @@
 import { CdkStep, CdkStepper } from '@angular/cdk/stepper';
 import { Directionality } from '@angular/cdk/bidi';
+import { FocusableOption } from '@angular/cdk/a11y';
 import {
   AfterContentInit,
   Component,
@@ -17,11 +18,10 @@ import {
   TemplateRef,
   Input,
 } from '@angular/core';
-
+import { takeUntil } from 'rxjs/operators';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { NovoStepHeader } from './step-header.component';
 import { NovoStepLabel } from './step-label.component';
-import { takeUntil } from 'rxjs/operators/takeUntil';
 import { novoStepperAnimations } from './stepper.animations';
 import { NovoIconComponent } from '../icon/Icon';
 
@@ -42,17 +42,20 @@ export class NovoStep extends CdkStep {
   @Input() color: string;
   @Input() icon: string;
 
-  constructor(@Inject(forwardRef(() => NovoStepper)) stepper: NovoStepper) {
+  constructor(
+    @Inject(forwardRef(() => NovoStepper))
+    stepper: CdkStepper,
+  ) {
     super(stepper);
   }
 }
 
 @Directive({
-  selector: '[novoStepper]'
+  selector: '[novoStepper]',
 })
 export class NovoStepper extends CdkStepper implements AfterContentInit {
   /** The list of step headers of the steps in the stepper. */
-  @ViewChildren(NovoStepHeader, { read: ElementRef }) _stepHeader: QueryList<ElementRef>;
+  @ViewChildren(NovoStepHeader) _stepHeader: QueryList<FocusableOption>;
 
   /** Steps that the stepper holds. */
   @ContentChildren(NovoStep) _steps: QueryList<NovoStep>;
@@ -63,13 +66,13 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   /** Consumer-specified template-refs to be used to override the header icons. */
   _iconOverrides: { [key: string]: TemplateRef<any> } = {};
 
-  get completed():boolean {
+  get completed(): boolean {
     try {
       let steps = this._steps.toArray();
-      let length = steps.length-1;
-      return steps[length].completed && length === this.selectedIndex ;
+      let length = steps.length - 1;
+      return steps[length].completed && length === this.selectedIndex;
     } catch (err) {
-      return false
+      return false;
     }
   }
 
@@ -91,18 +94,17 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
 
   getIndicatorType(index: number): 'none' | '' | 'edit' | 'done' {
     let steps = this._steps.toArray();
-    if( index === this.selectedIndex ) {
-      if(steps[index] && index===steps.length-1 && steps[index].completed ) {
+    if (index === this.selectedIndex) {
+      if (steps[index] && index === steps.length - 1 && steps[index].completed) {
         return 'done';
       }
-      return 'edit'
+      return 'edit';
     }
-    if( index < this.selectedIndex ) {
-      return 'done'
+    if (index < this.selectedIndex) {
+      return 'done';
     }
     return 'none';
   }
-
 }
 
 @Component({
@@ -110,9 +112,9 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   templateUrl: 'stepper-horizontal.html',
   styleUrls: ['stepper.component.scss'],
   host: {
-    'class': 'novo-stepper-horizontal',
+    class: 'novo-stepper-horizontal',
     'aria-orientation': 'horizontal',
-    'role': 'tablist',
+    role: 'tablist',
   },
   animations: [novoStepperAnimations.horizontalStepTransition],
   providers: [{ provide: NovoStepper, useExisting: NovoHorizontalStepper }],
@@ -129,9 +131,9 @@ export class NovoHorizontalStepper extends NovoStepper {
   templateUrl: 'stepper-vertical.html',
   styleUrls: ['stepper.component.scss'],
   host: {
-    'class': 'novo-stepper-vertical',
+    class: 'novo-stepper-vertical',
     'aria-orientation': 'vertical',
-    'role': 'tablist',
+    role: 'tablist',
   },
   animations: [novoStepperAnimations.verticalStepTransition],
   providers: [{ provide: NovoStepper, useExisting: NovoVerticalStepper }],

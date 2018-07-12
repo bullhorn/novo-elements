@@ -27,14 +27,8 @@ import {
 import { TemplatePortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 // Vendor
-import { Subscription } from 'rxjs/Subscription';
-import { of as observableOf } from 'rxjs/observable/of';
-import { Observable } from 'rxjs/Observable';
-import { merge } from 'rxjs/observable/merge';
-import { filter } from 'rxjs/operators/filter';
-import { first } from 'rxjs/operators/first';
-import { fromEvent } from 'rxjs/observable/fromEvent';
-import { switchMap } from 'rxjs/operators/switchMap';
+import { Observable, Subscription, of as observableOf, merge, fromEvent } from 'rxjs';
+import { filter, first, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'novo-overlay-template',
