@@ -477,6 +477,7 @@ export class FormDemoComponent {
       label: 'Date',
       tooltip: 'Date',
     });
+
     this.userDefinedDateControl = new DateControl({
       key: 'userDefinedFormat',
       label: 'User Defined Format',
