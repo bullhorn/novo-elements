@@ -174,15 +174,15 @@ export class NovoCustomControlContainerElement {
                             </div>
                             <!--Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [tooltipSize]="tooltipSize" [tooltipPreline]="tooltipPreline">
-                                <novo-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military"></novo-time-picker-input>
+                                <novo-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military" (focusEvent)="handleFocus($event)" (blurEvent)="handleBlur($event)"></novo-time-picker-input>
                             </div>
                             <!--Date-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [tooltipSize]="tooltipSize" [tooltipPreline]="tooltipPreline">
-                                <novo-date-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [format]="form.controls[control.key].dateFormat" [allowInvalidDate]="form.controls[control.key].allowInvalidDate" [textMaskEnabled]="form.controls[control.key].textMaskEnabled" [placeholder]="form.controls[control.key].placeholder"></novo-date-picker-input>
+                                <novo-date-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [format]="form.controls[control.key].dateFormat" [allowInvalidDate]="form.controls[control.key].allowInvalidDate" [textMaskEnabled]="form.controls[control.key].textMaskEnabled" [placeholder]="form.controls[control.key].placeholder" (blurEvent)="handleBlur($event)" (focusEvent)="handleFocus($event)"></novo-date-picker-input>
                             </div>
                             <!--Date and Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'date-time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [tooltipSize]="tooltipSize" [tooltipPreline]="tooltipPreline">
-                                <novo-date-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military"></novo-date-time-picker-input>
+                                <novo-date-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military" (focusEvent)="handleFocus($event)" (blurEvent)="handleBlur($event)"></novo-date-time-picker-input>
                             </div>
                             <!--Address-->
                             <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddressChange($event)" (focus)="handleFocus($event.event, $event.field)" (blur)="handleBlur($event.event, $event.field)" (validityChange)="updateValidity()"></novo-address>
