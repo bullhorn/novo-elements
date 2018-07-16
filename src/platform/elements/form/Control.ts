@@ -270,10 +270,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       });
       // For Asynchronous validations
       this.statusChangeSubscription = this.form.controls[this.control.key].statusChanges.subscribe((validity) => {
-          this.form.controls[this.control.key] = this.templateContext.$implicit;
-          if (validity !== 'PENDING' && this.form.updateValueAndValidity) {
-            this.form.updateValueAndValidity();
-          }
+        this.form.controls[this.control.key] = this.templateContext.$implicit;
+        if (validity !== 'PENDING' && this.form.updateValueAndValidity) {
+          this.form.updateValueAndValidity();
+        }
       });
       // Subscribe to control interactions
       if (this.control.interactions) {
@@ -337,6 +337,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this.templateContext.$implicit.minimal = this.control.minimal;
     this.templateContext.$implicit.currencyFormat = this.control.currencyFormat;
     this.templateContext.$implicit.percentValue = this.control.percentValue;
+    this.templateContext.$implicit.config = this.control.config;
 
     if (this.form.controls[this.control.key] && this.form.controls[this.control.key].subType === 'percentage') {
       if (!Helpers.isEmpty(this.form.controls[this.control.key].value)) {
@@ -612,7 +613,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
   }
   updateValidity(shouldEventBeEmitted): void {
-      let emitEvent: boolean = shouldEventBeEmitted ? true : false;
-     this.form.controls[this.control.key].updateValueAndValidity({ emitEvent });
+    let emitEvent: boolean = shouldEventBeEmitted ? true : false;
+    this.form.controls[this.control.key].updateValueAndValidity({ emitEvent });
   }
 }
