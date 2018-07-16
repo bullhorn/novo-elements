@@ -53,7 +53,7 @@ export class NovoAutoSize implements AfterContentInit {
     nativeElement.style.height = `${nativeElement.scrollHeight}px`;
   }
 }
-
+//undo all template context references!
 @Component({
   selector: 'novo-control',
   template: `
@@ -151,7 +151,7 @@ export class NovoAutoSize implements AfterContentInit {
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
   @Input() control: any;
-  @Input() form: NovoFormGroup;
+  @Input() form: any;
   @Input() condensed: boolean = false;
   @Input() autoFocus: boolean = false;
   @Output() change: EventEmitter<any> = new EventEmitter();
@@ -159,7 +159,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   @Output() save: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
   @Output() upload: EventEmitter<any> = new EventEmitter();
-
   @Output('blur')
   get onBlur(): Observable<FocusEvent> {
     return this._blurEmitter.asObservable();
@@ -187,6 +186,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   private focusedField: string;
   private characterCountField: string;
   private maxLengthMetErrorfields: string[] = [];
+  private statusChangeSubscription: any;
+
   maskOptions: IMaskOptions;
   templates: any = {};
   templateContext: any;
@@ -266,6 +267,13 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       // Listen to clear events
       this.forceClearSubscription = this.control.forceClear.subscribe(() => {
         this.clearValue();
+      });
+      // For Asynchronous validations
+      this.statusChangeSubscription = this.form.controls[this.control.key].statusChanges.subscribe((validity) => {
+          this.form.controls[this.control.key] = this.templateContext.$implicit;
+          if (validity !== 'PENDING' && this.form.updateValueAndValidity) {
+            this.form.updateValueAndValidity();
+          }
       });
       // Subscribe to control interactions
       if (this.control.interactions) {
@@ -360,6 +368,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
     if (this.dateChangeSubscription) {
       this.dateChangeSubscription.unsubscribe();
+    }
+    if (this.statusChangeSubscription) {
+      this.statusChangeSubscription.unsubscribe();
     }
     super.ngOnDestroy();
   }
@@ -600,7 +611,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       }
     }
   }
-  updateValidity(data): void {
-    this.form.controls[this.control.key].updateValueAndValidity({ emitEvent: false });
+  updateValidity(shouldEventBeEmitted): void {
+      let emitEvent: boolean = shouldEventBeEmitted ? true : false;
+     this.form.controls[this.control.key].updateValueAndValidity({ emitEvent });
   }
 }
