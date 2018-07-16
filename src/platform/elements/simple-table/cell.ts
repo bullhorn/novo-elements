@@ -1,5 +1,16 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, ElementRef, HostBinding, Input, OnDestroy, OnInit, Optional, Renderer2, ViewChild
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Directive,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef } from '@angular/cdk/table';
 import { Subscription } from 'rxjs/Subscription';
@@ -84,7 +95,13 @@ export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnD
   public selectAll: boolean = false;
   private selectAllSubscription: Subscription;
 
-  constructor(columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2, ref: ChangeDetectorRef, @Optional() private _selection: NovoSelection) {
+  constructor(
+    columnDef: CdkColumnDef,
+    elementRef: ElementRef,
+    renderer: Renderer2,
+    ref: ChangeDetectorRef,
+    @Optional() private _selection: NovoSelection,
+  ) {
     super(columnDef, elementRef);
     renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-checkbox-column-header-${columnDef.cssClassFriendlyName}`);
     renderer.addClass(elementRef.nativeElement, `novo-checkbox-column-${columnDef.cssClassFriendlyName}`);
@@ -107,7 +124,7 @@ export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnD
 
 @Component({
   selector: 'novo-simple-cell',
-  template: `    
+  template: `
     <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -223,7 +240,7 @@ export class NovoSimpleActionCell<T> extends _NovoCell implements OnInit {
   @Input() public row: T;
   @Input() public column: SimpleTableActionColumn<T>;
 
-  constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2, private labels: NovoLabelService) {
+  constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2, public labels: NovoLabelService) {
     super(columnDef, elementRef);
     renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-action-column-${columnDef.cssClassFriendlyName}`);
   }

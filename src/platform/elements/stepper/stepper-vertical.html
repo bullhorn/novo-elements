@@ -2,7 +2,7 @@
     <novo-step-header  class="novo-vertical-stepper-header"
                      (click)="step.select()"
                      (keydown)="_onKeydown($event)"
-                     [tabIndex]="_focusIndex == i ? 0 : -1"
+                     [tabIndex]="_getFocusIndex() == i ? 0 : -1"
                      [id]="_getStepLabelId(i)"
                      [attr.aria-controls]="_getStepContentId(i)"
                      [attr.aria-selected]="selectedIndex === i"
@@ -17,7 +17,7 @@
                      [optional]="step.optional"
                      [iconOverrides]="_iconOverrides">
     </novo-step-header>
-  
+
     <div class="novo-vertical-content-container" [class.novo-stepper-vertical-line]="!isLast" [ngClass]="getIndicatorType(i)">
       <div class="novo-vertical-stepper-content" role="tabpanel"
            [@stepTransition]="_getAnimationDirection(i)"

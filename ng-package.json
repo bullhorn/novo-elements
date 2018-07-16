@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "lib": {
+    "languageLevel": ["es2018", "dom"],
     "entryFile": "src/platform/index.ts",
     "externals": {
       "@angular/animations": "ng.animations",

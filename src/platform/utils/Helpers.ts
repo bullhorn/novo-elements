@@ -1,3 +1,4 @@
+// @dynamic
 export class Helpers {
   /**
    * Swallows an event to stop further execution
@@ -11,7 +12,7 @@ export class Helpers {
   }
 
   static interpolate(str: string, props: any): string {
-    return str.replace(/\$([\w\.]+)/g, (original, key) => {
+    return str.replace(new RegExp('$([w.]+)', 'g'), (original, key) => {
       let keys = key.split('.');
       let value = props[keys.shift()];
       while (keys.length && value !== undefined) {
@@ -61,11 +62,10 @@ export class Helpers {
 
   /**
    * Verifies that an object has every property expected by a string to interpolate
-   * @param  {String} str   The string to interpolate
-   * @param  {Object} props The params to replace in string.
-   * @return {Boolean}
+   * @param str   The string to interpolate
+   * @param props The params to replace in string.
    */
-  static validateInterpolationProps(str, props) {
+  static validateInterpolationProps(str: string, props: any): boolean {
     let keys = str.match(/\$([\w\.]+)/g);
     return keys.every((key) => {
       return props.hasOwnProperty(key.substr(1));
@@ -197,14 +197,14 @@ export class Helpers {
   }
 
   static findAncestor(element: Element, selector: string): Element {
-    while ((element = element.parentElement) && !element.matches.call(element, selector)) ; // tslint:disable-line
+    while ((element = element.parentElement) && !element.matches.call(element, selector)); // tslint:disable-line
     return element;
   }
 
   static deepClone(item: any): any {
     if (Array.isArray(item)) {
       let newArr = [];
-      for (let i = item.length; i-- > 0;) {
+      for (let i = item.length; i-- > 0; ) {
         // tslint:disable-line
         newArr[i] = Helpers.deepClone(item[i]);
       }
@@ -322,9 +322,8 @@ export class Can {
 }
 
 /**
- * @param {any} obj
- * @returns
+ * @param obj
  */
-export function can(obj) {
+export function can(obj: any) {
   return new Can(obj);
 }

@@ -100,6 +100,7 @@ export class NovoAutoSize implements AfterContentInit {
 export class NovoCustomControlContainerElement {
   @Input() control;
   @Input() form: NovoFormGroup;
+  @Input() isValid: boolean;
 }
 
 @Component({
@@ -168,7 +169,7 @@ export class NovoCustomControlContainerElement {
                             <novo-select *ngSwitchCase="'select'" [options]="form.controls[control.key].options" [headerConfig]="form.controls[control.key].headerConfig" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [tooltipSize]="tooltipSize" [tooltipPreline]="tooltipPreline" (onSelect)="modelChange($event)"></novo-select>
                             <!--Radio-->
                             <div class="novo-control-input-container" *ngSwitchCase="'radio'">
-                                <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of form.controls[control.key].options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [tooltipSize]="tooltipSize" [tooltipPreline]="tooltipPreline" [button]="!!option.icon" [icon]="option.icon" [attr.data-automation-id]="control.key + '-' + (option?.label || option?.value)"></novo-radio>
+                                <novo-radio [vertical]="form.layout == 'vertical'" [name]="control.key" [formControlName]="control.key" *ngFor="let option of form.controls[control.key].options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [tooltipSize]="tooltipSize" [tooltipPreline]="tooltipPreline" [button]="!!option.icon" [icon]="option.icon" [attr.data-automation-id]="control.key + '-' + (option?.label || option?.value)"></novo-radio>
                             </div>
                             <!--Time-->
                             <div class="novo-control-input-container" *ngSwitchCase="'time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [tooltipSize]="tooltipSize" [tooltipPreline]="tooltipPreline">
@@ -183,9 +184,9 @@ export class NovoCustomControlContainerElement {
                                 <novo-date-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military"></novo-date-time-picker-input>
                             </div>
                             <!--Address-->
-                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddressChange($event)" (focus)="handleFocus($event.event, $event.field)" (blur)="handleBlur($event.event, $event.field)" (validityChange)="updateValidity()"></novo-address>
+                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddressChange($event)" (focus)="handleFocus($event.event, $event.field)" (blur)="handleBlur($event.event)" (validityChange)="updateValidity()"></novo-address>
                             <!--Checkbox-->
-                            <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [label]="control.checkboxLabel" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [tooltipSize]="tooltipSize" [tooltipPreline]="tooltipPreline" [layoutOptions]="layoutOptions"></novo-checkbox>
+                            <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [label]="control.checkboxLabel" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [tooltipSize]="tooltipSize" [tooltipPreline]="tooltipPreline" [layoutOptions]="form.controls[control.key].layoutOptions"></novo-checkbox>
                             <!--Checklist-->
                             <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="form.controls[control.key].options" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [tooltipSize]="tooltipSize" [tooltipPreline]="tooltipPreline" (onSelect)="modelChange($event)"></novo-check-list>
                             <!--QuickNote-->
@@ -270,25 +271,25 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   get onFocus(): Observable<FocusEvent> {
     return this._focusEmitter.asObservable();
   }
+  public maxLength: number;
+  public focusedField: string;
+  formattedValue: string = '';
+  percentValue: number;
+  maxLengthMet: boolean = false;
+  characterCount: number = 0;
+  maskOptions: IMaskOptions;
 
   private _blurEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   private _focusEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   private _focused: boolean = false;
   private _enteredText: string = '';
-  formattedValue: string = '';
-  percentValue: number;
-  maxLengthMet: boolean = false;
-  characterCount: number = 0;
   private forceClearSubscription: any;
   private percentChangeSubscription: any;
   private valueChangeSubscription: any;
   private dateChangeSubscription: any;
   private _showCount: boolean = false;
-  private maxLength: number;
-  private focusedField: string;
   private characterCountField: string;
   private maxLengthMetErrorfields: string[] = [];
-  maskOptions: IMaskOptions;
 
   constructor(
     element: ElementRef,
@@ -523,7 +524,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this._enteredText = event;
   }
 
-  handleFocus(event: FocusEvent, field) {
+  handleFocus(event: FocusEvent, field?: any) {
     this._focused = true;
     this.focusedField = field;
     if (!Helpers.isBlank(this.characterCountField) && this.characterCountField === field) {
@@ -661,7 +662,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
   }
 
-  updateValidity(data): void {
+  updateValidity(data?: any): void {
     this.form.controls[this.control.key].updateValueAndValidity({ emitEvent: false });
   }
 }

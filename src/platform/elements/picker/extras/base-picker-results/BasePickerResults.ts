@@ -93,7 +93,7 @@ export class BasePickerResults {
     this.search(this.term).subscribe(
       (results: any) => {
         if (shouldReset) {
-            this.matches = [];
+          this.matches = [];
         }
         if (this.isStatic) {
           this.matches = this.filterData(results);
@@ -135,7 +135,10 @@ export class BasePickerResults {
             // Arrays are returned immediately
             resolve(this.structureArray(options));
           } else if (term && term.length >= (this.config.minSearchLength || 1)) {
-            if ((options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) || Object.getPrototypeOf(options).hasOwnProperty('then')) {
+            if (
+              (options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) ||
+              Object.getPrototypeOf(options).hasOwnProperty('then')
+            ) {
               this.isStatic = false;
               // Promises (ES6 or Deferred) are resolved whenever they resolve
               options.then(this.structureArray.bind(this)).then(resolve, reject);
@@ -179,7 +182,6 @@ export class BasePickerResults {
   /**
    * @name structureArray
    * @param collection - the data once getData resolves it
-   * @returns { Array }
    *
    * @description This function structures an array of nodes into an array of objects with a
    * 'name' field by default.

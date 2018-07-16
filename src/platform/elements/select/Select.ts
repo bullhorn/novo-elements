@@ -291,7 +291,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  toggleHeader(event, forceValue) {
+  toggleHeader(event, forceValue: boolean = false) {
     if (event) {
       event.stopPropagation();
       event.preventDefault();

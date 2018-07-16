@@ -3,8 +3,8 @@ import { WeekDay } from '../../../utils/calendar-utils/CalendarUtils';
 import * as dateFns from 'date-fns';
 
 @Component({
-    selector: 'novo-calendar-month-header',
-    template: `
+  selector: 'novo-calendar-month-header',
+  template: `
     <ng-template #defaultTemplate>
       <div class="calendar-header">
         <div class="calendar-header-top">
@@ -29,28 +29,27 @@ import * as dateFns from 'date-fns';
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
       [ngTemplateOutletContext]="{days: days, locale: locale, viewDate: viewDate}">
     </ng-template>
-  `
+  `,
 })
 export class NovoCalendarMonthHeaderElement {
-    @Input() viewDate: Date;
+  @Input() viewDate: Date;
 
-    @Input() days: WeekDay[];
+  @Input() days: WeekDay[];
 
-    @Input() locale: string;
+  @Input() locale: string;
 
-    @Input() customTemplate: TemplateRef<any>;
+  @Input() customTemplate: TemplateRef<any>;
 
-    /**
-     * Called when the view date is changed
-     */
-    @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
+  /**
+   * Called when the view date is changed
+   */
+  @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
 
-    prevMonth() {
-        this.viewDateChange.emit(dateFns.subMonths(this.viewDate, 1));
-    }
+  prevMonth(event: Event) {
+    this.viewDateChange.emit(dateFns.subMonths(this.viewDate, 1));
+  }
 
-    nextMonth() {
-        this.viewDateChange.emit(dateFns.addMonths(this.viewDate, 1));
-    }
-
+  nextMonth(event: Event) {
+    this.viewDateChange.emit(dateFns.addMonths(this.viewDate, 1));
+  }
 }

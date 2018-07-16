@@ -6,6 +6,8 @@ export class NovoLabelService {
   filters = 'Filter';
   clear = 'Clear';
   sort = 'Sort';
+  distributionListOwner = 'Owner';
+  dateAdded = 'Date Added';
   emptyTableMessage = 'No Records to display...';
   noMatchingRecordsMessage = 'No Matching Records';
   erroredTableMessage = 'Oops! An error occurred.';
@@ -123,7 +125,7 @@ export class NovoLabelService {
     return `Showing ${shown} of ${total} Results.`;
   }
 
-  totalRecords(total: number, select: boolean) {
+  totalRecords(total: number, select: boolean = false) {
     return select ? `Select all ${total} records.` : `De-select remaining ${total} records.`;
   }
 

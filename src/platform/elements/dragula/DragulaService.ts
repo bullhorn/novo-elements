@@ -24,7 +24,6 @@ export class NovoDragulaService {
    * @name add
    * @param name
    * @param drake
-   * @returns {*}
    */
   add(name, drake) {
     let bag = this.find(name);
@@ -49,7 +48,6 @@ export class NovoDragulaService {
   /**
    * @name find
    * @param name
-   * @returns {*}
    */
   find(name) {
     for (let i = 0; i < this.bags.length; i++) {
@@ -148,7 +146,6 @@ export class NovoDragulaService {
    * @name domIndexOf
    * @param child
    * @param parent
-   * @returns {*}
    */
   domIndexOf(child, parent) {
     return Array.prototype.indexOf.call(parent.children, child);

@@ -6,8 +6,8 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 
 @Component({
-    selector: 'distribution-list-picker-results',
-    template: `
+  selector: 'distribution-list-picker-results',
+  template: `
         <section class="picker-loading" *ngIf="isLoading && !matches?.length">
             <novo-loading theme="line"></novo-loading>
         </section>
@@ -23,7 +23,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                         <span class='label'>{{ labels.distributionListOwner }}: </span><span>{{ match?.data?.owner?.name }}</span>
                     </p>
                     <p>
-                        <span class='label'>{{ labels.dateAdded }}: </span><span>{{ labels.formatDateWithFormat(match?.data?.dateAdded, 'L') }}</span>
+                        <span class='label'>{{ labels.dateAdded }}: </span><span>{{ labels.formatDateWithFormat(match?.data?.dateAdded, { year: 'numeric', month: 'numeric', day: 'numeric' }) }}</span>
                     </p>
                 </item-content>
             </novo-list-item>
@@ -32,22 +32,22 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
     `,
 })
 export class DistributionListPickerResults extends BasePickerResults {
-    @HostBinding('class.active') active: boolean = true;
-    @HostBinding('hidden')
-    get isHidden(): boolean {
-        return this.matches.length === 0;
-    }
+  @HostBinding('class.active') active: boolean = true;
+  @HostBinding('hidden')
+  get isHidden(): boolean {
+    return this.matches.length === 0;
+  }
 
-    constructor(element: ElementRef, private sanitizer: DomSanitizer, public labels: NovoLabelService, ref: ChangeDetectorRef) {
-        super(element, ref);
-        this.sanitizer = sanitizer;
-    }
+  constructor(element: ElementRef, private sanitizer: DomSanitizer, public labels: NovoLabelService, ref: ChangeDetectorRef) {
+    super(element, ref);
+    this.sanitizer = sanitizer;
+  }
 
-    getListElement(): any {
-        return this.element.nativeElement.querySelector('novo-list');
-    }
+  getListElement(): any {
+    return this.element.nativeElement.querySelector('novo-list');
+  }
 
-    sanitizeHTML(html: any): any {
-        return this.sanitizer.bypassSecurityTrustHtml(html);
-    }
+  sanitizeHTML(html: any): any {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
 }

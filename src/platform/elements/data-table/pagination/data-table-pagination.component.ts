@@ -132,7 +132,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   public pages: { number: number; text: string; active: boolean }[];
 
   private resetSubscription: Subscription;
-  private totalPages: number;
+  public totalPages: number;
   private _initialized: boolean;
 
   constructor(private changeDetectorRef: ChangeDetectorRef, public labels: NovoLabelService, private state: DataTableState<T>) {
