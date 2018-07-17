@@ -140,6 +140,7 @@ export { FormValidators } from './elements/form/FormValidators';
 export { FormUtils } from './utils/form-utils/FormUtils';
 export { Security } from './services/security/Security';
 export { OptionsService } from './services/options/OptionsService';
+export { NovoTemplateService } from './services/template/NovoTemplateService';
 export { NovoFile } from './elements/form/extras/file/extras/file/File';
 export { BaseControl, NovoControlConfig, NovoGroupedControlConfig } from './elements/form/controls/BaseControl';
 export { ControlFactory } from './elements/form/controls/ControlFactory';
@@ -162,6 +163,7 @@ export { TextBoxControl } from './elements/form/controls/textbox/TextBoxControl'
 export { TilesControl } from './elements/form/controls/tiles/TilesControl';
 export { TimeControl } from './elements/form/controls/time/TimeControl';
 export { GroupedControl } from './elements/form/controls/grouped/GroupedControl';
+export { CustomControl } from './elements/form/controls/custom/CustomControl';
 export { NovoFormControl, NovoFormGroup } from './elements/form/NovoFormControl';
 export { NovoControlGroup, NovoControlGroupAddConfig } from './elements/form/ControlGroup';
 export { FieldInteractionApi } from './elements/form/FieldInteractionApi';
