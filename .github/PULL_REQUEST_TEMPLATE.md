@@ -10,7 +10,7 @@ INSERT A SMALL DESCRIPTION OF WHAT YOU CHANGED HERE
 - [ ] `npm test` passes and code coverage is increased
 - [ ] `npm run build` still works
 
-##### **Bullhorn Internal Developers**
+#### **Bullhorn Internal Developers**
 - [ ] Run `Novo Automation`
 - [ ] Run `BBO Automation`
 
