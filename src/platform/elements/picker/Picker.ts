@@ -349,6 +349,7 @@ export class NovoPickerElement implements OnInit {
           } else {
             this.term = value;
           }
+          this.ref.markForCheck();
         });
       } else {
         this.term = value || '';
