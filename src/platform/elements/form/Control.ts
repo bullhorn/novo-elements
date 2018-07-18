@@ -1,5 +1,6 @@
 // NG2
 import {
+  ChangeDetectorRef,
   Component,
   Input,
   Output,
@@ -198,6 +199,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private dateFormatService: DateFormatService,
     private fieldInteractionApi: FieldInteractionApi,
     private templateService: NovoTemplateService,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(element);
   }
@@ -249,6 +251,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   ngAfterContentInit() {
     setTimeout(() => {
       this.templates = this.templateService.getAll();
+      this.changeDetectorRef.detectChanges();
     });
   }
 
@@ -262,7 +265,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         this.characterCount = this.form.controls[this.control.key].value.length;
       }
     }
-    // this.maxLenghtCount = form.controls[control.key].maxlength;
     if (this.control) {
       // Listen to clear events
       this.forceClearSubscription = this.control.forceClear.subscribe(() => {
