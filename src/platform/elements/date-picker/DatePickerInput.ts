@@ -23,6 +23,7 @@ import { NovoDatePickerElement } from './DatePicker';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
+import { DateFormatService } from '../../services/date-format/DateFormat';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -65,7 +66,12 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
-  constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(
+    public element: ElementRef,
+    public labels: NovoLabelService,
+    private _changeDetectorRef: ChangeDetectorRef,
+    public dateFormatService: DateFormatService,
+  ) {
     this.placeholder = this.labels.dateFormatPlaceholder;
   }
 
@@ -121,8 +127,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   _handleEvent(event: Event, blur: boolean): void {
     let value = (event.target as HTMLInputElement).value;
     try {
-      let dateTimeValue = Date.parse(value);
-      if (!isNaN(dateTimeValue)) {
+      let [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
+      if (!isNaN(dateTimeValue.getUTCDate())) {
         let dt = new Date(dateTimeValue);
         this.dispatchOnChange(dt, blur);
       } else {
