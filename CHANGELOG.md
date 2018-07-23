@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.14.0"></a>
+# [2.14.0](https://github.com/bullhorn/novo-elements/compare/v2.13.0...v2.14.0) (2018-07-23)
+
+
+### Bug Fixes
+
+* **datatable:** Fix the static data source total count, fixes [#746](https://github.com/bullhorn/novo-elements/issues/746) ([b581107](https://github.com/bullhorn/novo-elements/commit/b581107))
+* **date-control:** Fixed data table dropdown styling ([#765](https://github.com/bullhorn/novo-elements/issues/765)) ([26ab2ee](https://github.com/bullhorn/novo-elements/commit/26ab2ee))
+* **NovoRadio:** change styling so that hidden input has correct width ([#748](https://github.com/bullhorn/novo-elements/issues/748)) ([44e8f1c](https://github.com/bullhorn/novo-elements/commit/44e8f1c))
+* **picker:** Fixing focus and opening ([cb81dfd](https://github.com/bullhorn/novo-elements/commit/cb81dfd))
+
+
+### Features
+
+* **dropdown & select:** Making the dropdown and select properly use the CDK overlay ([#742](https://github.com/bullhorn/novo-elements/issues/742)) ([d70568a](https://github.com/bullhorn/novo-elements/commit/d70568a))
+* **tooltip/form:** Allowing to control tooltip size and wrapping via forms ([a428ac8](https://github.com/bullhorn/novo-elements/commit/a428ac8))
+
+
+
 <a name="2.13.0"></a>
 # [2.13.0](https://github.com/bullhorn/novo-elements/compare/v2.12.0...v2.13.0) (2018-06-22)
 
