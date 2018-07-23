@@ -22,6 +22,7 @@ import {
   IDataTableColumnSortConfig,
 } from '../interfaces';
 import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
+import { NovoDropdownElement } from '../../dropdown/Dropdown';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { DataTableState } from '../state/data-table-state.service';
 import { Helpers } from '../../../utils/Helpers';
@@ -72,6 +73,7 @@ import { Helpers } from '../../../utils/Helpers';
 })
 export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit, OnDestroy {
   @ViewChild('filterInput') filterInput: ElementRef;
+  @ViewChild(NovoDropdownElement) dropdown: NovoDropdownElement;
 
   @Input() defaultSort: { id: string; value: string };
 
@@ -177,6 +179,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     Helpers.swallowEvent(event);
     this.showCustomRange = value;
     this.changeDetectorRef.markForCheck();
+    this.dropdown.openPanel(); // Ensures that the panel correctly updates to the dynamic size of the dropdown
   }
 
   public focusInput(): void {
