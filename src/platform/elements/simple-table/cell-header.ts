@@ -9,13 +9,15 @@ import {
   OnDestroy,
   OnInit,
   Optional,
-  ViewEncapsulation
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { Subscription } from 'rxjs/Subscription';
 import * as dateFns from 'date-fns';
 
+import { NovoDropdownElement } from '../dropdown/Dropdown';
 import { NovoSimpleSortFilter, NovoSimpleTableChange, SimpleTableColumnFilterConfig, SimpleTableColumnFilterOption } from './interfaces';
 import { NovoSortFilter } from './sort';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -23,10 +25,10 @@ import { NovoActivityTableState } from './state';
 import { Helpers } from '../../utils/Helpers';
 
 @Directive({
-  selector: '[novoSimpleFilterFocus]'
+  selector: '[novoSimpleFilterFocus]',
 })
 export class NovoSimpleFilterFocus implements AfterViewInit {
-  constructor(private element: ElementRef) { }
+  constructor(private element: ElementRef) {}
 
   ngAfterViewInit() {
     this.element.nativeElement.focus();
@@ -90,6 +92,8 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDestroy {
+  @ViewChild(NovoDropdownElement) dropdown: NovoDropdownElement;
+
   @Input() defaultSort: { id: string; value: string };
 
   @Input('novo-simple-cell-config')
@@ -141,11 +145,13 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
   public showCustomRange: boolean = false;
   public activeDateFilter: string;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef,
-              public labels: NovoLabelService,
-              private state: NovoActivityTableState,
-              @Optional() public _sort: NovoSortFilter,
-              @Optional() public _cdkColumnDef: CdkColumnDef,) {
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    public labels: NovoLabelService,
+    private state: NovoActivityTableState,
+    @Optional() public _sort: NovoSortFilter,
+    @Optional() public _cdkColumnDef: CdkColumnDef,
+  ) {
     this._rerenderSubscription = state.updates.subscribe((change: NovoSimpleTableChange) => {
       if (change.sort && change.sort.id === this.id) {
         this.icon = `sort-${change.sort.value}`;
@@ -195,6 +201,7 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
     Helpers.swallowEvent(event);
     this.showCustomRange = value;
     this.changeDetectorRef.markForCheck();
+    this.dropdown.openPanel(); // Ensures that the panel correctly updates to the dynamic size of the dropdown
   }
 
   public filterData(filter?: any): void {
