@@ -1,4 +1,6 @@
-<novo-tiles [options]="demoTiles" (onChange)="colorSelect($event)" [(ngModel)]="value"></novo-tiles>
+<novo-tiles [options]="demoTiles" (onChange)="colorSelect($event)" [(ngModel)]="value"
+            (onDisabledOptionClick)="disabledClicked($event)"
+            (onSelectedOptionClick)="selectedClicked($event)"></novo-tiles>
 <hr>
 <button theme="primary" type="button" name="button" (click)="toggleShown()">Show Tiles</button>
 <button theme="primary" type="button" name="button" (click)="addTile()">Add Tile</button>
