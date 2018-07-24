@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.14.1"></a>
+## [2.14.1](https://github.com/bullhorn/novo-elements/compare/v2.14.0...v2.14.1) (2018-07-24)
+
+
+### Bug Fixes
+
+* **date-filter:** Recalculating position of date picker filter ([#766](https://github.com/bullhorn/novo-elements/issues/766)) ([bbefd66](https://github.com/bullhorn/novo-elements/commit/bbefd66))
+
+
+
 <a name="2.14.0"></a>
 # [2.14.0](https://github.com/bullhorn/novo-elements/compare/v2.13.0...v2.14.0) (2018-07-23)
 
