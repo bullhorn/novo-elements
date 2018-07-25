@@ -440,7 +440,7 @@ export class FormUtils {
     return ret;
   }
 
-  toFieldSets(meta, currencyFormat, http, config: { token?: string; restUrl?: string; military?: boolean }, overrides?) {
+  toFieldSets(meta, currencyFormat, http, config: { token?: string, restUrl?: string, military?: boolean, formData?: any }, overrides?) {
     let fieldsets: Array<NovoFieldset> = [];
     let ranges = [];
     if (meta && meta.fields) {
