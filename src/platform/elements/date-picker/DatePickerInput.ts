@@ -126,6 +126,11 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleEvent(event: Event, blur: boolean): void {
     let value = (event.target as HTMLInputElement).value;
+    this.formatDate(value, blur);
+    this.openPanel();
+  }
+
+  protected formatDate(value: string, blur: boolean) {
     try {
       let [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
       if (!isNaN(dateTimeValue.getUTCDate())) {
@@ -135,7 +140,6 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
         this.dispatchOnChange(null, blur);
       }
     } catch (err) {}
-    this.openPanel();
   }
 
   writeValue(value: any): void {
