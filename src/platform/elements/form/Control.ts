@@ -40,7 +40,7 @@ export class NovoAutoSize implements AfterContentInit {
     this.adjust();
   }
 
-  constructor(public element: ElementRef) { }
+  constructor(public element: ElementRef) {}
 
   ngAfterContentInit(): void {
     setTimeout(() => {
@@ -85,7 +85,7 @@ export class NovoAutoSize implements AfterContentInit {
                       <!--Required Indicator-->
                         <i [hidden]="!form.controls[control.key].required || form.controls[control.key].readOnly"
                             class="required-indicator {{ form.controls[control.key].controlType }}"
-                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || (form.controls[control.key].required && !form.controls[control.key].readOnly)">
+                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form.controls[control.key].required">
                         </i>
                         <!--Form Controls-->
                         <div class="novo-control-input {{ form.controls[control.key].controlType }}" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
@@ -329,7 +329,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         toggleActive: this.toggleActive.bind(this),
       },
       form: this.form,
-    }
+    };
     this.templateContext.$implicit.tooltipPosition = this.tooltipPosition;
     this.templateContext.$implicit.tooltip = this.tooltip;
     this.templateContext.$implicit.tooltipSize = this.tooltipSize;
@@ -343,7 +343,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
     if (this.form.controls[this.control.key] && this.form.controls[this.control.key].subType === 'percentage') {
       if (!Helpers.isEmpty(this.form.controls[this.control.key].value)) {
-        this.templateContext.$implicit.percentValue = Number((this.form.controls[this.control.key].value * 100).toFixed(6).replace(/\.?0*$/, ''));
+        this.templateContext.$implicit.percentValue = Number(
+          (this.form.controls[this.control.key].value * 100).toFixed(6).replace(/\.?0*$/, ''),
+        );
       }
       this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe((value) => {
         if (!Helpers.isEmpty(value)) {
