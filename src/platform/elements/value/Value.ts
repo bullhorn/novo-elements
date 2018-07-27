@@ -2,8 +2,16 @@
 import { Component, Input, OnInit, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
 //APP
 import { Helpers } from '../../utils/Helpers';
-export enum NOVO_VALUE_TYPE { DEFAULT, ENTITY_LIST, LINK, INTERNAL_LINK };
-export enum NOVO_VALUE_THEME { DEFAULT, MOBILE };
+export enum NOVO_VALUE_TYPE {
+  DEFAULT,
+  ENTITY_LIST,
+  LINK,
+  INTERNAL_LINK,
+}
+export enum NOVO_VALUE_THEME {
+  DEFAULT,
+  MOBILE,
+}
 
 @Component({
   selector: 'novo-value',
@@ -23,7 +31,7 @@ export enum NOVO_VALUE_THEME { DEFAULT, MOBILE };
                 <i *ngFor="let icon of meta.icons" [class]="iconClass(icon)" (click)="onValueClick(icon)"></i>
             </div>
         </ng-container>
-    `
+    `,
 })
 export class NovoValueElement implements OnInit, OnChanges {
   @Input() data: any; // TODO use interface
@@ -39,7 +47,7 @@ export class NovoValueElement implements OnInit, OnChanges {
   ngOnInit() {
     if (Helpers.isEmpty(this.meta)) {
       this.meta = {
-        label: ''
+        label: '',
       };
     }
   }
@@ -54,7 +62,7 @@ export class NovoValueElement implements OnInit, OnChanges {
     if (icon && icon.iconCls) {
       iconClass = `bhi-${icon.iconCls} actions`;
       if (icon.onIconClick) {
-        iconClass = `${iconClass} clickable`
+        iconClass = `${iconClass} clickable`;
       }
       return iconClass;
     }
@@ -98,10 +106,8 @@ export class NovoValueElement implements OnInit, OnChanges {
       this.type = NOVO_VALUE_TYPE.ENTITY_LIST;
     } else if (this.isHTMLField(this.meta)) {
       this.customClass = this.meta.customClass ? this.meta.customClass : '';
-      if (this.meta.stripHTML &&
-        this.data &&
-        this.data.replace) {
-        this.data = this.data.replace(/<(.|\n)+?>/gi, '');
+      if (this.meta.stripHTML && this.data && this.data.replace) {
+        this.data = this.data.replace(/<(?!style|\/style).+?>/gi, '');
       }
     } else if (this.meta && this.meta.associatedEntity) {
       switch (this.meta.associatedEntity.entity) {
@@ -119,11 +125,11 @@ export class NovoValueElement implements OnInit, OnChanges {
     }
   }
 
-  isLinkField(field: { name?: string, type?: NOVO_VALUE_TYPE }, data: any): boolean {
+  isLinkField(field: { name?: string; type?: NOVO_VALUE_TYPE }, data: any): boolean {
     let linkFields: any = ['companyURL', 'clientCorporationCompanyURL'];
-    let regex: any = new RegExp('^(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})$', 'gi');
+    let regex: any = new RegExp('^(https?://(?:www.|(?!www))[^s.]+.[^s]{2,}|www.[^s]+.[^s]{2,})$', 'gi');
     let isURL: any = Helpers.isString(data) && regex.exec(data.trim());
-    return (linkFields.indexOf(field.name) > -1) || !!isURL || field.type === NOVO_VALUE_TYPE.LINK;
+    return linkFields.indexOf(field.name) > -1 || !!isURL || field.type === NOVO_VALUE_TYPE.LINK;
   }
 
   isEntityList(type: string): boolean {
