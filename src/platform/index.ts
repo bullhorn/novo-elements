@@ -23,6 +23,7 @@ export { NovoSliderModule } from './elements/slider/Slider.module';
 export { NovoPickerModule } from './elements/picker/Picker.module';
 export { NovoChipsModule } from './elements/chips/Chips.module';
 export { NovoDatePickerModule } from './elements/date-picker/DatePicker.module';
+export { NovoDatePickerElement } from './elements/date-picker/DatePicker';
 export { NovoTimePickerModule } from './elements/time-picker/TimePicker.module';
 export { NovoDateTimePickerModule } from './elements/date-time-picker/DateTimePicker.module';
 export { NovoNovoCKEditorModule } from './elements/ckeditor/CKEditor.module';
