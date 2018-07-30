@@ -40,7 +40,7 @@ export class NovoAutoSize implements AfterContentInit {
     this.adjust();
   }
 
-  constructor(public element: ElementRef) { }
+  constructor(public element: ElementRef) {}
 
   ngAfterContentInit(): void {
     setTimeout(() => {
@@ -331,6 +331,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       },
       form: this.form,
     };
+    console.log('SETTING CONTEXT', this.control.key, 'CONTEXT', this.templateContext.$implicit);
     this.templateContext.$implicit.tooltipPosition = this.tooltipPosition;
     this.templateContext.$implicit.tooltip = this.tooltip;
     this.templateContext.$implicit.tooltipSize = this.tooltipSize;
