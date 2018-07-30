@@ -471,7 +471,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             let newConfig: any = Object.assign({}, control.config);
-            console.log('config pre assign: ', newConfig);
+            console.log('config pre assign: ', newConfig); // tslint:disable-line
             if (config.optionsUrl || config.optionsUrlBuilder || config.optionsPromise) {
                 newConfig = Object.assign(newConfig, {
                     format: config.format,
@@ -481,9 +481,9 @@ export class FieldInteractionApi {
                         }
                         return new Promise((resolve, reject) => {
                             let url = config.optionsUrlBuilder ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
-                            console.log('url: ', url);
+                            console.log('url: ', url); // tslint:disable-line
                             if (query && query.length) {
-                                console.log('query: ', query);
+                                console.log('query: ', query); // tslint:disable-line
                                 this.http
                                     .get(url)
                                     .map(res => {
@@ -505,10 +505,10 @@ export class FieldInteractionApi {
                         });
                     }
                 });
-                console.log('config post assign: ', newConfig);
+                console.log('config post assign: ', newConfig); // tslint:disable-line
             } else if (config.options) {
                 newConfig.options = [...config.options];
-                console.log('config elseif: ', newConfig);
+                console.log('config elseif: ', newConfig); // tslint:disable-line
             }
             this.setProperty(key, 'config', newConfig);
             this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: config });

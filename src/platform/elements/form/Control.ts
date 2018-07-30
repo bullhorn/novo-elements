@@ -40,7 +40,7 @@ export class NovoAutoSize implements AfterContentInit {
     this.adjust();
   }
 
-  constructor(public element: ElementRef) {}
+  constructor(public element: ElementRef) { }
 
   ngAfterContentInit(): void {
     setTimeout(() => {
@@ -252,6 +252,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     // Subscribe to control interactions
     if (this.control.interactions) {
       for (let interaction of this.control.interactions) {
+        console.log('interaction: ', interaction); // tslint:disable-line
         switch (interaction.event) {
           case 'blur':
             this.valueChangeSubscription = this.onBlur.debounceTime(300).subscribe(() => {
