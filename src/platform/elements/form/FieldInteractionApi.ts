@@ -471,7 +471,7 @@ export class FieldInteractionApi {
         let control = this.getControl(key);
         if (control) {
             let newConfig: any = Object.assign({}, control.config);
-            console.log('config pre assign: ', newConfig); // tslint:disable-line
+            console.log('config pre assign: KEY', key, 'CONFIG', newConfig); // tslint:disable-line
             if (config.optionsUrl || config.optionsUrlBuilder || config.optionsPromise) {
                 newConfig = Object.assign(newConfig, {
                     format: config.format,
