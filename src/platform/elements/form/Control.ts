@@ -336,12 +336,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this.templateContext.$implicit.tooltip = this.tooltip;
     this.templateContext.$implicit.tooltipSize = this.tooltipSize;
     this.templateContext.$implicit.tooltipPreline = this.tooltipPreline;
-    this.templateContext.$implicit.startupFocus = this.control.startupFocus;
-    this.templateContext.$implicit.fileBrowserImageUploadUrl = this.control.fileBrowserImageUploadUrl;
-    this.templateContext.$implicit.minimal = this.control.minimal;
-    this.templateContext.$implicit.currencyFormat = this.control.currencyFormat;
-    this.templateContext.$implicit.percentValue = this.control.percentValue;
-    this.templateContext.$implicit.config = this.control.config;
+    this.templateContext.$implicit.startupFocus = this.form.controls[this.control.key].startupFocus;
+    this.templateContext.$implicit.fileBrowserImageUploadUrl = this.form.controls[this.control.key].fileBrowserImageUploadUrl;
+    this.templateContext.$implicit.minimal = this.form.controls[this.control.key].minimal;
+    this.templateContext.$implicit.currencyFormat = this.form.controls[this.control.key].currencyFormat;
+    this.templateContext.$implicit.percentValue = this.form.controls[this.control.key].percentValue;
+    this.templateContext.$implicit.config = this.form.controls[this.control.key].config;
 
     if (this.form.controls[this.control.key] && this.form.controls[this.control.key].subType === 'percentage') {
       if (!Helpers.isEmpty(this.form.controls[this.control.key].value)) {
