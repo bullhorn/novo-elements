@@ -487,6 +487,7 @@ export class FieldInteractionApi {
                                 this.http
                                     .get(url)
                                     .map(res => {
+                                        console.log('res: ', res); // tslint:disable-line
                                         if (res.json) {
                                             return res.json();
                                         }

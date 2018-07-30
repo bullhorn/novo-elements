@@ -93,7 +93,7 @@ export class BasePickerResults {
     this.search(this.term).subscribe(
       (results: any) => {
         if (shouldReset) {
-            this.matches = [];
+          this.matches = [];
         }
         if (this.isStatic) {
           this.matches = this.filterData(results);
@@ -186,6 +186,8 @@ export class BasePickerResults {
    */
   structureArray(collection: any): any {
     let dataArray = collection.data ? collection.data : collection;
+    console.log('dataArray: ', dataArray); // tslint:disable-line
+    console.log('internal config: ', this.config); // tslint:disable-line
     if (dataArray && (typeof dataArray[0] === 'string' || typeof dataArray[0] === 'number')) {
       return collection.map((item) => {
         return {
