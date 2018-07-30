@@ -186,8 +186,6 @@ export class BasePickerResults {
    */
   structureArray(collection: any): any {
     let dataArray = collection.data ? collection.data : collection;
-    console.log('dataArray: ', dataArray); // tslint:disable-line
-    console.log('internal config: ', this.config); // tslint:disable-line
     if (dataArray && (typeof dataArray[0] === 'string' || typeof dataArray[0] === 'number')) {
       return collection.map((item) => {
         return {

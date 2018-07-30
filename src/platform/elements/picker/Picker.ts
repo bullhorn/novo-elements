@@ -67,7 +67,6 @@ const PICKER_VALUE_ACCESSOR = {
             <span #results></span>
             <ng-content></ng-content>
         </novo-overlay-template>
-        {{ config | json }}
     `,
 })
 export class NovoPickerElement implements OnInit {
