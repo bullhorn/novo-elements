@@ -331,7 +331,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       },
       form: this.form,
     };
-    console.log('SETTING CONTEXT', this.control.key, 'CONTEXT', this.templateContext.$implicit);
+    console.log('SETTING CONTEXT', this.control.key, 'CONTEXT', this.templateContext.$implicit); //tslint:disable-line
     this.templateContext.$implicit.tooltipPosition = this.tooltipPosition;
     this.templateContext.$implicit.tooltip = this.tooltip;
     this.templateContext.$implicit.tooltipSize = this.tooltipSize;
