@@ -51,7 +51,7 @@ const PICKER_VALUE_ACCESSOR = {
             type="text"
             class="picker-input"
             [(ngModel)]="term"
-            [class.entity-picker]="config.entityIcon"
+            [class.entity-picker]="config?.entityIcon"
             [class.entity-selected]="config?.entityIcon && _value"
             (ngModelChange)="checkTerm($event)"
             [placeholder]="placeholder"
@@ -121,10 +121,10 @@ export class NovoPickerElement implements OnInit {
   resultsComponent: any;
   popup: any;
   _value: any;
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
+  onModelChange: Function = () => { };
+  onModelTouched: Function = () => { };
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) {}
+  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     if (this.overrideElement) {
