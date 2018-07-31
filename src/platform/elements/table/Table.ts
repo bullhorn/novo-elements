@@ -10,6 +10,7 @@ import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { ReadOnlyControl, ControlFactory } from './../form/FormControls';
 import { CollectionEvent } from '../../services/data-provider/CollectionEvent';
 import { PagedArrayCollection } from '../../services/data-provider/PagedArrayCollection';
+import { notify } from '../../utils/notifier/notifier.util';
 
 export interface NovoTableConfig {
   // Paging config
@@ -229,18 +230,29 @@ export class NovoTableElement implements DoCheck {
   @ViewChildren('filterInput', { read: ElementRef })
   filterInputs: QueryList<ElementRef>;
 
-  @Input() config: NovoTableConfig = {};
-  @Input() columns: Array<any>;
-  @Input() theme: string;
-  @Input() skipSortAndFilterClear: boolean = false;
-  @Input() mode: NovoTableMode = NovoTableMode.VIEW;
-  @Input() editable: boolean = false;
-  @Input() rowIdentifier: string = 'id';
-  @Input() name: string = 'table';
+  @Input()
+  config: NovoTableConfig = {};
+  @Input()
+  columns: Array<any>;
+  @Input()
+  theme: string;
+  @Input()
+  skipSortAndFilterClear: boolean = false;
+  @Input()
+  mode: NovoTableMode = NovoTableMode.VIEW;
+  @Input()
+  editable: boolean = false;
+  @Input()
+  rowIdentifier: string = 'id';
+  @Input()
+  name: string = 'table';
 
-  @Output() onRowClick: EventEmitter<any> = new EventEmitter();
-  @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
-  @Output() onTableChange: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowClick: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowSelect: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onTableChange: EventEmitter<any> = new EventEmitter();
 
   _dataProvider: PagedArrayCollection<any>;
   _rows: Array<any> = [];
@@ -387,7 +399,9 @@ export class NovoTableElement implements DoCheck {
     return this.tableForm.value;
   }
 
-  constructor(public labels: NovoLabelService, private formUtils: FormUtils, private builder: FormBuilder) {}
+  constructor(public labels: NovoLabelService, private formUtils: FormUtils, private builder: FormBuilder) {
+    notify('[Deprecated]: The table is deprecated. Please migrate to novo-data-tables!');
+  }
 
   onDropdownToggled(event, column): void {
     this.toggledDropdownMap[column] = event;

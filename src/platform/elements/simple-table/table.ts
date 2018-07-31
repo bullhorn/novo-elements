@@ -1,7 +1,19 @@
 import {
-    ChangeDetectionStrategy, Component, ViewEncapsulation, HostBinding,
-    Input, ViewChild, Directive, EventEmitter, Output, AfterContentInit,
-    SimpleChanges, ChangeDetectorRef, Injectable, OnChanges, OnDestroy
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  HostBinding,
+  Input,
+  ViewChild,
+  Directive,
+  EventEmitter,
+  Output,
+  AfterContentInit,
+  SimpleChanges,
+  ChangeDetectorRef,
+  Injectable,
+  OnChanges,
+  OnDestroy,
 } from '@angular/core';
 import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -13,47 +25,47 @@ import { SimpleTableColumn, SimpleTableActionColumn, SimpleTablePaginationOption
 import { ActivityTableService, ActivityTableDataSource } from './table-source';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoActivityTableState } from './state';
+import { notify } from '../../utils/notifier/notifier.util';
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoTable = CdkTable;
 
 @Component({
-    selector: 'novo-simple-table',
-    template: CDK_TABLE_TEMPLATE,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'novo-simple-table',
+  template: CDK_TABLE_TEMPLATE,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTable<T> extends _NovoTable<T> {
-}
+export class NovoTable<T> extends _NovoTable<T> {}
 
 @Directive({
-    selector: 'novo-activity-table-actions'
+  selector: 'novo-activity-table-actions',
 })
-export class NovoActivityTableActions { }
+export class NovoActivityTableActions {}
 
 @Directive({
-    selector: 'novo-activity-table-custom-header'
+  selector: 'novo-activity-table-custom-header',
 })
-export class NovoActivityTableCustomHeader { }
+export class NovoActivityTableCustomHeader {}
 
 @Directive({
-    selector: 'novo-activity-table-custom-filter'
+  selector: 'novo-activity-table-custom-filter',
 })
-export class NovoActivityTableCustomFilter { }
+export class NovoActivityTableCustomFilter {}
 
 @Directive({
-    selector: 'novo-activity-table-empty-message'
+  selector: 'novo-activity-table-empty-message',
 })
-export class NovoActivityTableEmptyMessage { }
+export class NovoActivityTableEmptyMessage {}
 
 @Directive({
-    selector: 'novo-activity-table-no-results-message'
+  selector: 'novo-activity-table-no-results-message',
 })
-export class NovoActivityTableNoResultsMessage { }
+export class NovoActivityTableNoResultsMessage {}
 
 @Component({
-    selector: 'novo-activity-table',
-    template: `
+  selector: 'novo-activity-table',
+  template: `
         <div *ngIf="debug">
             <p>Total: {{ dataSource?.total }}</p>
             <p>Current: {{ dataSource?.current }}</p>
@@ -124,112 +136,129 @@ export class NovoActivityTableNoResultsMessage { }
             </div>
         </div>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [NovoActivityTableState]
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [NovoActivityTableState],
 })
 export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDestroy {
-    @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
+  @HostBinding('class.global-search-hidden')
+  globalSearchHiddenClassToggle: boolean = false;
 
-    @Input() activityService: ActivityTableService<T>;
-    @Input() columns: SimpleTableColumn<T>[];
-    @Input() displayedColumns: string[];
-    @Input() actionColumns: SimpleTableActionColumn<T>[];
-    @Input() paginationOptions: SimpleTablePaginationOptions;
-    @Input() searchOptions: SimpleTableSearchOptions;
-    @Input() defaultSort: { id: string, value: string };
-    @Input() outsideFilter: EventEmitter<any>;
+  @Input()
+  activityService: ActivityTableService<T>;
+  @Input()
+  columns: SimpleTableColumn<T>[];
+  @Input()
+  displayedColumns: string[];
+  @Input()
+  actionColumns: SimpleTableActionColumn<T>[];
+  @Input()
+  paginationOptions: SimpleTablePaginationOptions;
+  @Input()
+  searchOptions: SimpleTableSearchOptions;
+  @Input()
+  defaultSort: { id: string; value: string };
+  @Input()
+  outsideFilter: EventEmitter<any>;
 
-    @Input() set customFilter(v: boolean) {
-        this._customFilter = coerceBooleanProperty(v);
-    }
-    get customFilter() {
-        return this._customFilter;
-    }
-    private _customFilter: boolean;
+  @Input()
+  set customFilter(v: boolean) {
+    this._customFilter = coerceBooleanProperty(v);
+  }
+  get customFilter() {
+    return this._customFilter;
+  }
+  private _customFilter: boolean;
 
-    @Input() set forceShowHeader(v: boolean) {
-        this._forceShowHeader = coerceBooleanProperty(v);
-    }
-    get forceShowHeader() {
-        return this._forceShowHeader;
-    }
-    private _forceShowHeader: boolean;
+  @Input()
+  set forceShowHeader(v: boolean) {
+    this._forceShowHeader = coerceBooleanProperty(v);
+  }
+  get forceShowHeader() {
+    return this._forceShowHeader;
+  }
+  private _forceShowHeader: boolean;
 
-    @Input() set hideGlobalSearch(v: boolean) {
-        this._hideGlobalSearch = coerceBooleanProperty(v);
-        this.globalSearchHiddenClassToggle = this._hideGlobalSearch;
-    }
-    get hideGlobalSearch() {
-        return this._hideGlobalSearch;
-    }
-    private _hideGlobalSearch: boolean;
+  @Input()
+  set hideGlobalSearch(v: boolean) {
+    this._hideGlobalSearch = coerceBooleanProperty(v);
+    this.globalSearchHiddenClassToggle = this._hideGlobalSearch;
+  }
+  get hideGlobalSearch() {
+    return this._hideGlobalSearch;
+  }
+  private _hideGlobalSearch: boolean;
 
-    @Input() set debug(v: boolean) {
-        this._debug = coerceBooleanProperty(v);
+  @Input()
+  set debug(v: boolean) {
+    this._debug = coerceBooleanProperty(v);
+  }
+  get debug() {
+    return this._debug;
+  }
+  private _debug: boolean;
+
+  public dataSource: ActivityTableDataSource<T>;
+  public loading: boolean = true;
+
+  private outsideFilterSubscription: Subscription;
+
+  @HostBinding('class.empty')
+  get empty() {
+    return this.dataSource && this.dataSource.totallyEmpty;
+  }
+
+  @HostBinding('class.loading')
+  get loadingClass() {
+    return this.loading || (this.dataSource && this.dataSource.loading);
+  }
+
+  constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: NovoActivityTableState) {
+    notify('[Deprecated]: The simple table is deprecated. Please migrate to novo-data-tables!');
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    this.loading = changes['activityService'] && !changes['activityService'].currentValue;
+    this.ref.detectChanges();
+    if (changes['activityService'] && changes['activityService'].currentValue) {
+      this.loading = false;
+      this.dataSource = new ActivityTableDataSource<T>(this.activityService, this.state, this.ref);
+      this.ref.detectChanges();
     }
-    get debug() {
-        return this._debug;
+    if (changes['outsideFilter'] && changes['outsideFilter'].currentValue) {
+      if (!this.outsideFilterSubscription) {
+        this.outsideFilterSubscription = this.outsideFilter.subscribe((filter: any) => {
+          this.state.outsideFilter = filter;
+          this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort });
+          this.ref.markForCheck();
+        });
+      }
     }
-    private _debug: boolean;
+  }
 
-    public dataSource: ActivityTableDataSource<T>;
-    public loading: boolean = true;
-
-    private outsideFilterSubscription: Subscription;
-
-    @HostBinding('class.empty') get empty() {
-        return this.dataSource && this.dataSource.totallyEmpty;
+  public ngOnDestroy(): void {
+    if (this.outsideFilterSubscription) {
+      this.outsideFilterSubscription.unsubscribe();
     }
+  }
 
-    @HostBinding('class.loading') get loadingClass() {
-        return this.loading || (this.dataSource && this.dataSource.loading);
+  public ngAfterContentInit(): void {
+    if (this.paginationOptions && !this.paginationOptions.page) {
+      this.paginationOptions.page = 0;
     }
-
-    constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: NovoActivityTableState) { }
-
-    public ngOnChanges(changes: SimpleChanges): void {
-        this.loading = changes['activityService'] && !changes['activityService'].currentValue;
-        this.ref.detectChanges();
-        if (changes['activityService'] && changes['activityService'].currentValue) {
-            this.loading = false;
-            this.dataSource = new ActivityTableDataSource<T>(this.activityService, this.state, this.ref);
-            this.ref.detectChanges();
-        }
-        if (changes['outsideFilter'] && changes['outsideFilter'].currentValue) {
-            if (!this.outsideFilterSubscription) {
-                this.outsideFilterSubscription = this.outsideFilter.subscribe((filter: any) => {
-                    this.state.outsideFilter = filter;
-                    this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort });
-                    this.ref.markForCheck();
-                });
-            }
-        }
+    if (this.paginationOptions && !this.paginationOptions.pageSize) {
+      this.paginationOptions.pageSize = 50;
     }
-
-    public ngOnDestroy(): void {
-        if (this.outsideFilterSubscription) {
-            this.outsideFilterSubscription.unsubscribe();
-        }
+    if (this.paginationOptions && !this.paginationOptions.pageSizeOptions) {
+      this.paginationOptions.pageSizeOptions = [10, 25, 50, 100];
     }
+    this.state.page = this.paginationOptions ? this.paginationOptions.page : undefined;
+    this.state.pageSize = this.paginationOptions ? this.paginationOptions.pageSize : undefined;
+    this.ref.markForCheck();
+  }
 
-    public ngAfterContentInit(): void {
-        if (this.paginationOptions && !this.paginationOptions.page) {
-            this.paginationOptions.page = 0;
-        }
-        if (this.paginationOptions && !this.paginationOptions.pageSize) {
-            this.paginationOptions.pageSize = 50;
-        }
-        if (this.paginationOptions && !this.paginationOptions.pageSizeOptions) {
-            this.paginationOptions.pageSizeOptions = [10, 25, 50, 100];
-        }
-        this.state.page = this.paginationOptions ? this.paginationOptions.page : undefined;
-        this.state.pageSize = this.paginationOptions ? this.paginationOptions.pageSize : undefined;
-        this.ref.markForCheck();
-    }
-
-    public onSearchChange(term: string): void {
-        this.state.globalSearch = term;
-        this.state.reset(false, true);
-        this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort });
-    }
+  public onSearchChange(term: string): void {
+    this.state.globalSearch = term;
+    this.state.reset(false, true);
+    this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort });
+  }
 }

@@ -201,11 +201,15 @@ import { StaticDataTableService } from './services/static-data-table.service';
   providers: [DataTableState],
 })
 export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
-  @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
+  @HostBinding('class.global-search-hidden')
+  globalSearchHiddenClassToggle: boolean = false;
 
-  @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
-  @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
-  @ViewChild('novoDataTableContainer') novoDataTableContainer: ElementRef;
+  @ContentChildren(NovoTemplate)
+  customTemplates: QueryList<NovoTemplate>;
+  @ViewChildren(NovoTemplate)
+  defaultTemplates: QueryList<NovoTemplate>;
+  @ViewChild('novoDataTableContainer')
+  novoDataTableContainer: ElementRef;
 
   @Input()
   set displayedColumns(displayedColumns: string[]) {
@@ -226,13 +230,20 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
   private _disabledColumns: string[];
 
-  @Input() paginationOptions: IDataTablePaginationOptions;
-  @Input() searchOptions: IDataTableSearchOptions;
-  @Input() defaultSort: { id: string; value: string };
-  @Input() name: string = 'novo-data-table';
-  @Input() rowIdentifier: string = 'id';
-  @Input() trackByFn: Function = (index, item) => item.id;
-  @Input() templates: { [key: string]: TemplateRef<any> } = {};
+  @Input()
+  paginationOptions: IDataTablePaginationOptions;
+  @Input()
+  searchOptions: IDataTableSearchOptions;
+  @Input()
+  defaultSort: { id: string; value: string };
+  @Input()
+  name: string = 'novo-data-table';
+  @Input()
+  rowIdentifier: string = 'id';
+  @Input()
+  trackByFn: Function = (index, item) => item.id;
+  @Input()
+  templates: { [key: string]: TemplateRef<any> } = {};
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
@@ -330,7 +341,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
   private _hideGlobalSearch: boolean = true;
 
-  @Output() preferencesChanged: EventEmitter<IDataTablePreferences> = new EventEmitter<IDataTablePreferences>();
+  @Output()
+  preferencesChanged: EventEmitter<IDataTablePreferences> = new EventEmitter<IDataTablePreferences>();
 
   public dataSource: DataTableSource<T>;
   public loading: boolean = true;
@@ -397,15 +409,15 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
     // Default templates defined here
     this.defaultTemplates.forEach((item) => {
+      // Only override if it doesn't already exist
       if (!this.templates[item.getType()]) {
         this.templates[item.getType()] = item.template;
       }
     });
     // Custom templates passed in
     this.customTemplates.forEach((item) => {
-      if (!this.templates[item.getType()]) {
-        this.templates[item.getType()] = item.template;
-      }
+      // Override anything that is custom and in HTML
+      this.templates[item.getType()] = item.template;
     });
     // Load columns
     this.configureColumns();
