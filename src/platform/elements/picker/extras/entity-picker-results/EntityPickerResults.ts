@@ -70,7 +70,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                 </p>
                 <!-- OCCUPATION -->
                 <p class="occupation" *ngIf="match.data.occupation && match.data.searchEntity === 'CorporateUser'">
-                    <i class="bhi-title"></i>
+                    <i class="bhi-occupation"></i>
                     <span [innerHtml]="highlight(match.data.occupation, term)"></span>
                 </p>
             </item-content>
