@@ -93,7 +93,7 @@ export class BasePickerResults {
     this.search(this.term).subscribe(
       (results: any) => {
         if (shouldReset) {
-            this.matches = [];
+          this.matches = [];
         }
         if (this.isStatic) {
           this.matches = this.filterData(results);
