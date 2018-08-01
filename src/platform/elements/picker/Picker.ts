@@ -13,11 +13,9 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
-import { Observable } from 'rxjs/Observable';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 // APP
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { PickerResults } from './extras/picker-results/PickerResults';
@@ -74,24 +72,36 @@ export class NovoPickerElement implements OnInit {
   @ViewChild('results', { read: ViewContainerRef })
   results: ViewContainerRef;
 
-  @Input() config: any;
-  @Input() placeholder: string;
-  @Input() clearValueOnSelect: boolean;
-  @Input() closeOnSelect: boolean = true;
-  @Input() selected: Array<any> = [];
+  @Input()
+  config: any;
+  @Input()
+  placeholder: string;
+  @Input()
+  clearValueOnSelect: boolean;
+  @Input()
+  closeOnSelect: boolean = true;
+  @Input()
+  selected: Array<any> = [];
   // Deprecated
-  @Input() appendToBody: boolean = false;
+  @Input()
+  appendToBody: boolean = false;
   // Deprecated
-  @Input() parentScrollSelector: string;
+  @Input()
+  parentScrollSelector: string;
   // Deprecated
-  @Input() parentScrollAction: string = 'close';
+  @Input()
+  parentScrollAction: string = 'close';
   // Custom class for the dropdown container
-  @Input() containerClass: string;
+  @Input()
+  containerClass: string;
   // Side the dropdown will open
-  @Input() side: string = 'left';
+  @Input()
+  side: string = 'left';
   // Autoselects the first option in the results
-  @Input() autoSelectFirstOption: boolean = true;
-  @Input() overrideElement: ElementRef;
+  @Input()
+  autoSelectFirstOption: boolean = true;
+  @Input()
+  overrideElement: ElementRef;
 
   // Disable from typing into the picker (result template does everything)
   @Input()
@@ -106,14 +116,21 @@ export class NovoPickerElement implements OnInit {
   private _disablePickerInput: boolean = false;
 
   // Emitter for selects
-  @Output() changed: EventEmitter<any> = new EventEmitter();
-  @Output() select: EventEmitter<any> = new EventEmitter();
-  @Output() focus: EventEmitter<any> = new EventEmitter();
-  @Output() blur: EventEmitter<any> = new EventEmitter();
-  @Output() typing: EventEmitter<any> = new EventEmitter();
+  @Output()
+  changed: EventEmitter<any> = new EventEmitter();
+  @Output()
+  select: EventEmitter<any> = new EventEmitter();
+  @Output()
+  focus: EventEmitter<any> = new EventEmitter();
+  @Output()
+  blur: EventEmitter<any> = new EventEmitter();
+  @Output()
+  typing: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild(NovoOverlayTemplateComponent) public container: NovoOverlayTemplateComponent;
-  @ViewChild('input') private input: ElementRef;
+  @ViewChild(NovoOverlayTemplateComponent)
+  public container: NovoOverlayTemplateComponent;
+  @ViewChild('input')
+  private input: ElementRef;
 
   closeHandler: any;
   isStatic: boolean = true;
@@ -137,13 +154,15 @@ export class NovoPickerElement implements OnInit {
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
     // Get all distinct key up events from the input and only fire if long enough and distinct
     //let input = this.element.nativeElement.querySelector('input');
-    const pasteObserver = Observable.fromEvent(this.input.nativeElement, 'paste')
-      .debounceTime(250)
-      .distinctUntilChanged();
+    const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(
+      debounceTime(250),
+      distinctUntilChanged(),
+    );
     pasteObserver.subscribe((event: ClipboardEvent) => this.onDebouncedKeyup(event), (err) => this.hideResults(err));
-    const keyboardObserver = Observable.fromEvent(this.input.nativeElement, 'keyup')
-      .debounceTime(250)
-      .distinctUntilChanged();
+    const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(
+      debounceTime(250),
+      distinctUntilChanged(),
+    );
     keyboardObserver.subscribe((event: KeyboardEvent) => this.onDebouncedKeyup(event), (err) => this.hideResults(err));
   }
 

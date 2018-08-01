@@ -1,5 +1,4 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of'; // TODO - new RXJS
+import { Observable, of } from 'rxjs';
 
 import { IDataTableService } from '../interfaces';
 import { Helpers } from '../../../utils/Helpers';
@@ -40,6 +39,6 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
         this.currentData = this.currentData.slice(page * pageSize, (page + 1) * pageSize);
       }
     }
-    return Observable.of({ results: this.currentData, total: this.originalData.length });
+    return of({ results: this.currentData, total: this.originalData.length });
   }
 }

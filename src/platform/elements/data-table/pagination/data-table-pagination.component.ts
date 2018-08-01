@@ -9,7 +9,7 @@ import {
   Output,
   HostBinding,
 } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { IDataTablePaginationEvent } from '../interfaces';
 import { NovoLabelService } from '../../../services/novo-label-service';
@@ -124,7 +124,8 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
   _length: number = 0;
 
-  @Output() pageChange = new EventEmitter<IDataTablePaginationEvent>();
+  @Output()
+  pageChange = new EventEmitter<IDataTablePaginationEvent>();
 
   public displayedPageSizeOptions: { value: string; label: string }[];
   public longRangeLabel: string;

@@ -1,5 +1,5 @@
 import { Directive, HostListener, Input, TemplateRef, ViewContainerRef, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { DataTableState } from './state/data-table-state.service';
 import { Helpers } from '../../utils/Helpers';
@@ -9,8 +9,10 @@ import { NovoDataTable } from './data-table.component';
   selector: '[novoDataTableExpand]',
 })
 export class NovoDataTableExpandDirective<T> implements OnDestroy {
-  @Input() row: T;
-  @Input('novoDataTableExpand') template: TemplateRef<any>;
+  @Input()
+  row: T;
+  @Input('novoDataTableExpand')
+  template: TemplateRef<any>;
 
   private subscription: Subscription;
 

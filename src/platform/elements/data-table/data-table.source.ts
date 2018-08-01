@@ -1,8 +1,7 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
-import { Observable } from 'rxjs/Observable';
+import { Observable, merge, of } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
-import 'rxjs/add/observable/of';
 
 import { DataTableState } from './state/data-table-state.service';
 import { IDataTableService } from './interfaces';
@@ -29,9 +28,9 @@ export class DataTableSource<T> extends DataSource<T> {
     super();
   }
 
-  public connect(): Observable<any[]> {
+  public connect(): Observable<any> {
     const displayDataChanges: any = [this.state.updates];
-    return Observable.merge(...displayDataChanges).pipe(
+    return merge(...displayDataChanges).pipe(
       startWith(null),
       switchMap(() => {
         this.pristine = false;
@@ -70,7 +69,7 @@ export class DataTableSource<T> extends DataSource<T> {
       catchError((err, caught) => {
         console.error(err, caught); // tslint: disable-line
         this.loading = false;
-        return Observable.of(null);
+        return of(null);
       }),
     );
   }

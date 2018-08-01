@@ -1,10 +1,8 @@
 // NG2
 import { Component, ElementRef, ChangeDetectorRef, HostBinding } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 // App
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
-import { Helpers } from '../../../../utils/Helpers';
 
 @Component({
   selector: 'skill-specialty-picker-results',
@@ -34,7 +32,8 @@ import { Helpers } from '../../../../utils/Helpers';
     `,
 })
 export class SkillsSpecialtyPickerResults extends BasePickerResults {
-  @HostBinding('class.active') active: boolean = true;
+  @HostBinding('class.active')
+  active: boolean = true;
   limitedTo: boolean = false;
   limit: number = 200;
   total: number;

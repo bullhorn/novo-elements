@@ -1,7 +1,7 @@
 import { EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
-import { IDataTableChangeEvent, IDataTableSortFilter } from '../interfaces';
+import { IDataTableChangeEvent } from '../interfaces';
 
 export class DataTableState<T> {
   public selectionSource = new Subject();

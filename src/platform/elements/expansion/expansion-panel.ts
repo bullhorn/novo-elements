@@ -21,7 +21,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { filter, startWith, take } from 'rxjs/operators';
 import { NovoAccordion } from './accordion';
 import { novoExpansionAnimations } from './expansion-animations';
@@ -55,8 +55,10 @@ let uniqueId = 0;
   },
 })
 export class NovoExpansionPanel extends CdkAccordionItem implements AfterContentInit, OnChanges, OnDestroy {
-  @Input() disabled: boolean;
-  @Input() expanded: boolean;
+  @Input()
+  disabled: boolean;
+  @Input()
+  expanded: boolean;
   /** Whether the toggle indicator should be hidden. */
   @Input()
   get hideToggle(): boolean {
@@ -76,9 +78,12 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
   }
   private _padding = true;
 
-  @Output() opened: EventEmitter<void> = new EventEmitter();
-  @Output() closed: EventEmitter<void> = new EventEmitter();
-  @Output() expandedChange: EventEmitter<boolean> = new EventEmitter();
+  @Output()
+  opened: EventEmitter<void> = new EventEmitter();
+  @Output()
+  closed: EventEmitter<void> = new EventEmitter();
+  @Output()
+  expandedChange: EventEmitter<boolean> = new EventEmitter();
 
   /** Stream that emits for changes in `@Input` properties. */
   readonly _inputChanges = new Subject<SimpleChanges>();
@@ -87,7 +92,8 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
   accordion: NovoAccordion;
 
   /** Content that will be rendered lazily. */
-  @ContentChild(NovoExpansionPanelContent) _lazyContent: NovoExpansionPanelContent;
+  @ContentChild(NovoExpansionPanelContent)
+  _lazyContent: NovoExpansionPanelContent;
 
   /** Portal holding the user's content. */
   _portal: TemplatePortal;

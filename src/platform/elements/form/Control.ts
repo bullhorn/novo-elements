@@ -13,7 +13,8 @@ import {
   AfterViewInit,
 } from '@angular/core';
 // Vendor
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 // APP
 import { NovoFormGroup } from './FormInterfaces';
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
@@ -98,9 +99,12 @@ export class NovoAutoSize implements AfterContentInit {
     `,
 })
 export class NovoCustomControlContainerElement {
-  @Input() control;
-  @Input() form: NovoFormGroup;
-  @Input() isValid: boolean;
+  @Input()
+  control;
+  @Input()
+  form: NovoFormGroup;
+  @Input()
+  isValid: boolean;
 }
 
 @Component({
@@ -252,15 +256,24 @@ export class NovoCustomControlContainerElement {
   },
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
-  @Input() control: any;
-  @Input() form: NovoFormGroup;
-  @Input() condensed: boolean = false;
-  @Input() autoFocus: boolean = false;
-  @Output() change: EventEmitter<any> = new EventEmitter();
-  @Output() edit: EventEmitter<any> = new EventEmitter();
-  @Output() save: EventEmitter<any> = new EventEmitter();
-  @Output() delete: EventEmitter<any> = new EventEmitter();
-  @Output() upload: EventEmitter<any> = new EventEmitter();
+  @Input()
+  control: any;
+  @Input()
+  form: NovoFormGroup;
+  @Input()
+  condensed: boolean = false;
+  @Input()
+  autoFocus: boolean = false;
+  @Output()
+  change: EventEmitter<any> = new EventEmitter();
+  @Output()
+  edit: EventEmitter<any> = new EventEmitter();
+  @Output()
+  save: EventEmitter<any> = new EventEmitter();
+  @Output()
+  delete: EventEmitter<any> = new EventEmitter();
+  @Output()
+  upload: EventEmitter<any> = new EventEmitter();
 
   @Output('blur')
   get onBlur(): Observable<FocusEvent> {
@@ -365,17 +378,17 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         for (let interaction of this.control.interactions) {
           switch (interaction.event) {
             case 'blur':
-              this.valueChangeSubscription = this.onBlur.debounceTime(300).subscribe(() => {
+              this.valueChangeSubscription = this.onBlur.pipe(debounceTime(300)).subscribe(() => {
                 this.executeInteraction(interaction);
               });
               break;
             case 'focus':
-              this.valueChangeSubscription = this.onFocus.debounceTime(300).subscribe(() => {
+              this.valueChangeSubscription = this.onFocus.pipe(debounceTime(300)).subscribe(() => {
                 this.executeInteraction(interaction);
               });
               break;
             case 'change':
-              this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
+              this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.pipe(debounceTime(300)).subscribe(() => {
                 this.executeInteraction(interaction);
               });
               break;

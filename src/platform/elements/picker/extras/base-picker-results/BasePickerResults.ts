@@ -3,8 +3,7 @@ import { ElementRef, Input, ChangeDetectorRef } from '@angular/core';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 // Vendor
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
+import { from } from 'rxjs';
 import { OverlayRef } from '@angular/cdk/overlay';
 
 /**
@@ -16,7 +15,8 @@ import { OverlayRef } from '@angular/cdk/overlay';
 export class BasePickerResults {
   _term: string = '';
   selected: Array<any> = [];
-  @Input() matches: any = [];
+  @Input()
+  matches: any = [];
   hasError: boolean = false;
   isLoading: boolean = false;
   isStatic: boolean = true;
@@ -125,7 +125,7 @@ export class BasePickerResults {
 
   search(term, mode?) {
     let options = this.config.options;
-    return Observable.fromPromise(
+    return from(
       new Promise((resolve, reject) => {
         // Check if there is match data
         if (options) {

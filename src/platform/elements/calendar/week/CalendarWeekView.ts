@@ -11,8 +11,7 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Subject, Subscription } from 'rxjs';
 import {
   CalendarEvent,
   CalendarEventTimesChangedEvent,
@@ -86,99 +85,119 @@ export class NovoCalendarWeekViewElement implements OnChanges, OnInit, OnDestroy
   /**
    * The current view date
    */
-  @Input() viewDate: Date;
+  @Input()
+  viewDate: Date;
 
   /**
    * An array of events to display on view
    */
-  @Input() events: CalendarEvent[] = [];
+  @Input()
+  events: CalendarEvent[] = [];
 
   /**
    * An array of day indexes (0 = sunday, 1 = monday etc) that will be hidden on the view
    */
-  @Input() excludeDays: number[] = [];
+  @Input()
+  excludeDays: number[] = [];
 
   /**
    * An observable that when emitted on will re-render the current view
    */
-  @Input() refresh: Subject<any>;
+  @Input()
+  refresh: Subject<any>;
 
   /**
    * The locale used to format dates
    */
-  @Input() locale: string;
+  @Input()
+  locale: string;
 
   /**
    * The placement of the event tooltip
    */
-  @Input() tooltipPosition: string = 'bottom';
+  @Input()
+  tooltipPosition: string = 'bottom';
 
   /**
    * The start number of the week
    */
-  @Input() weekStartsOn: number;
+  @Input()
+  weekStartsOn: number;
 
   /**
    * A custom template to use to replace the header
    */
-  @Input() headerTemplate: TemplateRef<any>;
+  @Input()
+  headerTemplate: TemplateRef<any>;
 
   /**
    * A custom template to use for week view events
    */
-  @Input() eventTemplate: TemplateRef<any>;
+  @Input()
+  eventTemplate: TemplateRef<any>;
 
   /**
    * The precision to display events.
    * `days` will round event start and end dates to the nearest day and `minutes` will not do this rounding
    */
-  @Input() precision: 'days' | 'minutes' = 'days';
+  @Input()
+  precision: 'days' | 'minutes' = 'days';
   /**
    * The number of segments in an hour. Must be <= 6
    */
-  @Input() hourSegments: number = 2;
+  @Input()
+  hourSegments: number = 2;
 
   /**
    * The day start hours in 24 hour time. Must be 0-23
    */
-  @Input() dayStartHour: number = 0;
+  @Input()
+  dayStartHour: number = 0;
 
   /**
    * The day start minutes. Must be 0-59
    */
-  @Input() dayStartMinute: number = 0;
+  @Input()
+  dayStartMinute: number = 0;
 
   /**
    * The day end hours in 24 hour time. Must be 0-23
    */
-  @Input() dayEndHour: number = 23;
+  @Input()
+  dayEndHour: number = 23;
 
   /**
    * The day end minutes. Must be 0-59
    */
-  @Input() dayEndMinute: number = 59;
+  @Input()
+  dayEndMinute: number = 59;
   /**
    * A custom template to use to replace the hour segment
    */
-  @Input() hourSegmentTemplate: TemplateRef<any>;
+  @Input()
+  hourSegmentTemplate: TemplateRef<any>;
   /**
    * Called when an hour segment is clicked
    */
-  @Output() hourSegmentClicked: EventEmitter<{ date: Date }> = new EventEmitter<{ date: Date }>();
+  @Output()
+  hourSegmentClicked: EventEmitter<{ date: Date }> = new EventEmitter<{ date: Date }>();
   /**
    * Called when a header week day is clicked
    */
-  @Output() dayClicked: EventEmitter<{ date: Date }> = new EventEmitter<{ date: Date }>();
+  @Output()
+  dayClicked: EventEmitter<{ date: Date }> = new EventEmitter<{ date: Date }>();
 
   /**
    * Called when the event title is clicked
    */
-  @Output() eventClicked: EventEmitter<{ event: CalendarEvent }> = new EventEmitter<{ event: CalendarEvent }>();
+  @Output()
+  eventClicked: EventEmitter<{ event: CalendarEvent }> = new EventEmitter<{ event: CalendarEvent }>();
 
   /**
    * Called when an event is resized or dragged and dropped
    */
-  @Output() eventTimesChanged: EventEmitter<CalendarEventTimesChangedEvent> = new EventEmitter<CalendarEventTimesChangedEvent>();
+  @Output()
+  eventTimesChanged: EventEmitter<CalendarEventTimesChangedEvent> = new EventEmitter<CalendarEventTimesChangedEvent>();
 
   /**
    * @hidden

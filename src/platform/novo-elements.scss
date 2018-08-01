@@ -21,7 +21,6 @@
 // Elements
 // --------------------------------------------------
 @import './elements/data-table/data-table.component';
-@import './elements/simple-table/table';
 @import './elements/tabs/Tabs';
 @import './elements/ace-editor/AceEditor';
 @import './elements/radio/Radio';
@@ -68,5 +67,5 @@
 @import './elements/icon/Icon';
 // @import './elements/expansion/expansion-panel';
 // @import './elements/expansion/expansion-panel-header';
-@import "./elements/stepper/stepper.component";
-@import "./elements/stepper/step-header.component";
+@import './elements/stepper/stepper.component';
+@import './elements/stepper/step-header.component';

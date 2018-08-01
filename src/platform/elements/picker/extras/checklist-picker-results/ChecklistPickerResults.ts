@@ -5,8 +5,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { Helpers } from '../../../../utils/Helpers';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 // Vendor
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
+import { from } from 'rxjs';
 
 /**
  * @name: ChecklistPickerResults
@@ -14,11 +13,11 @@ import 'rxjs/add/observable/fromPromise';
  * @description This is the actual list of matches that gets injected into the DOM.
  */
 @Component({
-    selector: 'checklist-picker-results',
-    host: {
-        'class': 'active picker-results'
-    },
-    template: `
+  selector: 'checklist-picker-results',
+  host: {
+    class: 'active picker-results',
+  },
+  template: `
         <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
         <ul *ngIf="matches.length > 0">
             <span *ngFor="let section of matches; let i = index">
@@ -37,86 +36,90 @@ import 'rxjs/add/observable/fromPromise';
         </ul>
         <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
         <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
-    `
+    `,
 })
 export class ChecklistPickerResults extends BasePickerResults {
-    filteredMatches: any;
+  filteredMatches: any;
 
-    constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
-        super(element, ref);
-    }
+  constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
+    super(element, ref);
+  }
 
-    search() {
-        let options = this.config.options;
-        //only set this the first time
-        return Observable.fromPromise(new Promise((resolve, reject) => {
-            // Check if there is match data
-            if (options) {
-                // Resolve the data
-                if (Array.isArray(options)) {
-                    this.isStatic = true;
-                    // Arrays are returned immediately
-                    resolve(options);
-                } else {
-                    // All other kinds of data are rejected
-                    reject('The data provided is not an array or a promise');
-                    throw new Error('The data provided is not an array or a promise');
-                }
-            } else {
-                // No data gets rejected
-                reject('error');
-            }
-        }));
-    }
-
-    /**
-     * @name filterData=
-     * @param matches - Collection of objects=
-     *
-     * @description This function loops through the picker options and creates a filtered list of objects that contain
-     * the newSearch.
-     */
-    filterData(matches): any {
-        if (this.term && matches) {
-            this.filteredMatches = matches.map(section => {
-                let items = section.originalData.filter((match) => {
-                    return ~String(match.label).toLowerCase().indexOf(this.term.toLowerCase());
-                });
-                section.data = items;
-                return section;
-            }, this);
-            return this.filteredMatches;
-        } else if (this.term === '') {
-            matches.forEach(section => {
-                section.data = section.originalData;
-            });
-            return matches;
-        }
-        // Show no recent results template
-        return matches;
-    }
-
-    /**
-     * @name selectMatch
-     * @param event
-     * @param item
-     *
-     * @description
-     */
-    selectMatch(event, item) {
-        Helpers.swallowEvent(event);
-        if (item.indeterminate) {
-            item.indeterminate = false;
-            item.checked = true;
+  search() {
+    let options = this.config.options;
+    //only set this the first time
+    return from(
+      new Promise((resolve, reject) => {
+        // Check if there is match data
+        if (options) {
+          // Resolve the data
+          if (Array.isArray(options)) {
+            this.isStatic = true;
+            // Arrays are returned immediately
+            resolve(options);
+          } else {
+            // All other kinds of data are rejected
+            reject('The data provided is not an array or a promise');
+            throw new Error('The data provided is not an array or a promise');
+          }
         } else {
-            item.checked = !item.checked;
+          // No data gets rejected
+          reject('error');
         }
+      }),
+    );
+  }
 
-        let selected = this.activeMatch;
-        if (selected) {
-            this.parent.value = selected;
-        }
-        this.ref.markForCheck();
-        return false;
+  /**
+   * @name filterData=
+   * @param matches - Collection of objects=
+   *
+   * @description This function loops through the picker options and creates a filtered list of objects that contain
+   * the newSearch.
+   */
+  filterData(matches): any {
+    if (this.term && matches) {
+      this.filteredMatches = matches.map((section) => {
+        let items = section.originalData.filter((match) => {
+          return ~String(match.label)
+            .toLowerCase()
+            .indexOf(this.term.toLowerCase());
+        });
+        section.data = items;
+        return section;
+      }, this);
+      return this.filteredMatches;
+    } else if (this.term === '') {
+      matches.forEach((section) => {
+        section.data = section.originalData;
+      });
+      return matches;
     }
+    // Show no recent results template
+    return matches;
+  }
+
+  /**
+   * @name selectMatch
+   * @param event
+   * @param item
+   *
+   * @description
+   */
+  selectMatch(event, item) {
+    Helpers.swallowEvent(event);
+    if (item.indeterminate) {
+      item.indeterminate = false;
+      item.checked = true;
+    } else {
+      item.checked = !item.checked;
+    }
+
+    let selected = this.activeMatch;
+    if (selected) {
+      this.parent.value = selected;
+    }
+    this.ref.markForCheck();
+    return false;
+  }
 }

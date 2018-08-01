@@ -1,8 +1,7 @@
 // NG2
 import { Component, ElementRef, ChangeDetectorRef } from '@angular/core';
 // Vendor
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
+import { from } from 'rxjs';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 import { PickerResults } from '../../../picker/extras/picker-results/PickerResults';
@@ -61,7 +60,7 @@ export class QuickNoteResults extends PickerResults {
 
   search(term: string, taggingMode) {
     let searchCall = this.config.options[taggingMode];
-    return Observable.fromPromise(
+    return from(
       new Promise((resolve, reject) => {
         // Check if there is match data
         if (searchCall) {

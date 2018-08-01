@@ -1,11 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, ViewChild } from '@angular/core';
-import { Http } from '@angular/http';
-import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
 import { delay } from 'rxjs/operators';
 import * as dateFns from 'date-fns';
-import { Subject } from 'rxjs/Subject';
+import { Subject, Observable, of } from 'rxjs';
 
 let BasicDemoRowsTpl = require('./templates/basic-rows.html');
 let BasicDemoServiceTpl = require('./templates/basic-service.html');
@@ -14,12 +10,10 @@ let RemoteDemoServiceTpl = require('./templates/basic-remote.html');
 import {
   IDataTableColumn,
   RemoteDataTableService,
-  IDataTableSortFilter,
   StaticDataTableService,
   IDataTablePaginationOptions,
   IDataTableSearchOptions,
   IDataTableService,
-  GroupedMultiPickerResults,
   NovoModalRef,
   NovoModalParams,
   NovoModalService,
@@ -141,7 +135,8 @@ export class DataTableDemoComponent implements OnInit {
   public BasicDemoServiceTpl: string = BasicDemoServiceTpl;
   public RemoteDemoServiceTpl: string = RemoteDemoServiceTpl;
 
-  @ViewChild('basic') table: NovoDataTable<MockData>;
+  @ViewChild('basic')
+  table: NovoDataTable<MockData>;
 
   // Table configuration
   public dataSetOptions: any[] = [{ label: 'Dataset #1', value: 1 }, { label: 'Dataset #2', value: 2 }, { label: 'Dataset #3', value: 3 }];
@@ -473,7 +468,7 @@ class RemoteMockDataService extends RemoteDataTableService<MockData> {
     let sortQuery: string = this.buildSortColumn(sort);
     let pageQuery: number = this.buildStart(page, pageSize);
     this.url = `http://mock-api.com?where=${whereQuery}&sort=${sortQuery}&pageSize=${pageSize}&page=${pageQuery}`;
-    return Observable.of({ results: this.data, total: this.data.length }).pipe(delay(5000));
+    return of({ results: this.data, total: this.data.length }).pipe(delay(5000));
   }
 
   private buildWhereClause(filter: { id: string; value: string; transform?: Function }): string {

@@ -11,9 +11,8 @@ import {
   OnDestroy,
   ViewEncapsulation,
 } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { merge } from 'rxjs/observable/merge';
-import 'rxjs/add/operator/filter';
+import { Subscription, merge } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { novoExpansionAnimations } from './expansion-animations';
 import { NovoExpansionPanel } from './expansion-panel';
 
@@ -63,17 +62,19 @@ export class NovoExpansionPanelHeader implements OnDestroy {
     this._parentChangeSubscription = merge(
       panel.opened,
       panel.closed,
-      panel._inputChanges.filter((changes) => !!(changes.hideToggle || changes.disabled)),
+      panel._inputChanges.pipe(filter((changes) => !!(changes.hideToggle || changes.disabled))),
     ).subscribe(() => this._changeDetectorRef.markForCheck());
 
     // _focusMonitor.monitor(_element.nativeElement);
   }
 
   /** Height of the header while the panel is expanded. */
-  @Input() expandedHeight: string;
+  @Input()
+  expandedHeight: string;
 
   /** Height of the header while the panel is collapsed. */
-  @Input() collapsedHeight: string;
+  @Input()
+  collapsedHeight: string;
 
   /** Toggles the expanded state of the panel. */
   _toggle(): void {

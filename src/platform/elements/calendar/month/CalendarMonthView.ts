@@ -20,8 +20,7 @@ import {
   getWeekViewHeader,
   getMonthView,
 } from '../../../utils/calendar-utils/CalendarUtils';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Subject, Subscription } from 'rxjs';
 import * as dateFns from 'date-fns';
 
 /**
@@ -66,70 +65,84 @@ export class NovoCalendarMonthViewElement implements OnChanges, OnInit, OnDestro
   /**
    * The current view date
    */
-  @Input() viewDate: Date;
+  @Input()
+  viewDate: Date;
 
   /**
    * An array of events to display on view
    */
-  @Input() events: CalendarEvent[] = [];
+  @Input()
+  events: CalendarEvent[] = [];
 
   /**
    * An array of day indexes (0 = sunday, 1 = monday etc) that will be hidden on the view
    */
-  @Input() excludeDays: number[] = [];
+  @Input()
+  excludeDays: number[] = [];
 
   /**
    * A function that will be called before each cell is rendered. The first argument will contain the calendar cell.
    * If you add the `cssClass` property to the cell it will add that class to the cell in the template
    */
-  @Input() dayModifier: Function;
+  @Input()
+  dayModifier: Function;
 
   /**
    * An observable that when emitted on will re-render the current view
    */
-  @Input() refresh: Subject<any>;
+  @Input()
+  refresh: Subject<any>;
 
   /**
    * The locale used to format dates
    */
-  @Input() locale: string = 'en-US';
+  @Input()
+  locale: string = 'en-US';
 
   /**
    * The placement of the event tooltip
    */
-  @Input() tooltipPosition: string = 'top';
+  @Input()
+  tooltipPosition: string = 'top';
 
   /**
    * The start number of the week
    */
-  @Input() weekStartsOn: number;
+  @Input()
+  weekStartsOn: number;
 
   /**
    * A custom template to use to replace the header
    */
-  @Input() headerTemplate: TemplateRef<any>;
+  @Input()
+  headerTemplate: TemplateRef<any>;
 
   /**
    * A custom template to use to replace the day cell
    */
-  @Input() cellTemplate: TemplateRef<any>;
+  @Input()
+  cellTemplate: TemplateRef<any>;
 
   /**
    * Called when the day cell is clicked
    */
-  @Output() dayClicked: EventEmitter<{ day: MonthViewDay }> = new EventEmitter<{ day: MonthViewDay }>();
+  @Output()
+  dayClicked: EventEmitter<{ day: MonthViewDay }> = new EventEmitter<{ day: MonthViewDay }>();
 
   /**
    * Called when the event title is clicked
    */
-  @Output() eventClicked: EventEmitter<{ day: any; event: CalendarEvent }> = new EventEmitter<{ day: any; event: CalendarEvent }>();
+  @Output()
+  eventClicked: EventEmitter<{ day: any; event: CalendarEvent }> = new EventEmitter<{ day: any; event: CalendarEvent }>();
 
   /**
    * Called when an event is dragged and dropped
    */
-  @Output() eventTimesChanged: EventEmitter<CalendarEventTimesChangedEvent> = new EventEmitter<CalendarEventTimesChangedEvent>();
+  @Output()
+  eventTimesChanged: EventEmitter<CalendarEventTimesChangedEvent> = new EventEmitter<CalendarEventTimesChangedEvent>();
 
-  @Output() viewDateChange: EventEmitter<Date> = new EventEmitter<Date>();
+  @Output()
+  viewDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
   /**
    * @hidden

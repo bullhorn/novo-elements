@@ -10,7 +10,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { CdkColumnDef } from '@angular/cdk/table';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import * as dateFns from 'date-fns';
 
 import {
@@ -71,9 +71,11 @@ import { Helpers } from '../../../utils/Helpers';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit, OnDestroy {
-  @ViewChild('filterInput') filterInput: ElementRef;
+  @ViewChild('filterInput')
+  filterInput: ElementRef;
 
-  @Input() defaultSort: { id: string; value: string };
+  @Input()
+  defaultSort: { id: string; value: string };
 
   @Input('novo-data-table-cell-config')
   set column(column: IDataTableColumn<T>) {

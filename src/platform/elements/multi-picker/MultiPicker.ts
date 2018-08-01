@@ -7,7 +7,7 @@ import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 // Vendor
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject } from 'rxjs';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -53,12 +53,18 @@ const CHIPS_VALUE_ACCESSOR = {
   },
 })
 export class NovoMultiPickerElement implements OnInit {
-  @Input() source: any;
-  @Input() placeholder: any = '';
-  @Input() types: any;
-  @Output() changed: EventEmitter<any> = new EventEmitter();
-  @Output() focus: EventEmitter<any> = new EventEmitter();
-  @Output() blur: EventEmitter<any> = new EventEmitter();
+  @Input()
+  source: any;
+  @Input()
+  placeholder: any = '';
+  @Input()
+  types: any;
+  @Output()
+  changed: EventEmitter<any> = new EventEmitter();
+  @Output()
+  focus: EventEmitter<any> = new EventEmitter();
+  @Output()
+  blur: EventEmitter<any> = new EventEmitter();
 
   get value() {
     return this._value;

@@ -41,7 +41,6 @@ import { NovoSearchBoxModule } from './elements/search/SearchBox.module';
 import { GooglePlacesModule } from './elements/places/places.module';
 import { NovoValueModule } from './elements/value/Value.module';
 import { NovoDataTableModule } from './elements/data-table/data-table.module';
-import { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
 import { NovoIconModule } from './elements/icon/Icon.module';
 import { NovoExpansionModule } from './elements/expansion/expansion.module';
 import { NovoStepperModule } from './elements/stepper/stepper.module';
@@ -96,7 +95,6 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoMultiPickerModule,
     NovoPopOverModule,
     NovoDataTableModule,
-    NovoSimpleTableModule,
     NovoSearchBoxModule,
     NovoOverlayModule,
     GooglePlacesModule,

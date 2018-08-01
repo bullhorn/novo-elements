@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, QueryList,
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 // Vendor
 import * as dateFns from 'date-fns';
+import { debounceTime } from 'rxjs/operators';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
@@ -229,18 +230,29 @@ export class NovoTableElement implements DoCheck {
   @ViewChildren('filterInput', { read: ElementRef })
   filterInputs: QueryList<ElementRef>;
 
-  @Input() config: NovoTableConfig = {};
-  @Input() columns: Array<any>;
-  @Input() theme: string;
-  @Input() skipSortAndFilterClear: boolean = false;
-  @Input() mode: NovoTableMode = NovoTableMode.VIEW;
-  @Input() editable: boolean = false;
-  @Input() rowIdentifier: string = 'id';
-  @Input() name: string = 'table';
+  @Input()
+  config: NovoTableConfig = {};
+  @Input()
+  columns: Array<any>;
+  @Input()
+  theme: string;
+  @Input()
+  skipSortAndFilterClear: boolean = false;
+  @Input()
+  mode: NovoTableMode = NovoTableMode.VIEW;
+  @Input()
+  editable: boolean = false;
+  @Input()
+  rowIdentifier: string = 'id';
+  @Input()
+  name: string = 'table';
 
-  @Output() onRowClick: EventEmitter<any> = new EventEmitter();
-  @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
-  @Output() onTableChange: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowClick: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowSelect: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onTableChange: EventEmitter<any> = new EventEmitter();
 
   _dataProvider: PagedArrayCollection<any>;
   _rows: Array<any> = [];
@@ -285,7 +297,7 @@ export class NovoTableElement implements DoCheck {
   @Input()
   set dataProvider(dp: any) {
     this._dataProvider = Array.isArray(dp) ? new PagedArrayCollection<any>(dp) : dp;
-    this._dataProvider.dataChange.debounceTime(100).subscribe((event: CollectionEvent) => {
+    this._dataProvider.dataChange.pipe(debounceTime(100)).subscribe((event: CollectionEvent) => {
       switch (event.type) {
         case CollectionEvent.CHANGE:
           this._rows = event.data;

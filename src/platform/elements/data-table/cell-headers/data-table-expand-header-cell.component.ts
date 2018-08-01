@@ -9,7 +9,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { CdkHeaderCell, CdkColumnDef } from '@angular/cdk/table';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { NovoDataTable } from '../data-table.component';
 
@@ -21,7 +21,8 @@ import { NovoDataTable } from '../data-table.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableExpandHeaderCell<T> extends CdkHeaderCell implements OnDestroy {
-  @HostBinding('attr.role') public role = 'columnheader';
+  @HostBinding('attr.role')
+  public role = 'columnheader';
 
   public expanded: boolean = false;
   private expandSubscription: Subscription;

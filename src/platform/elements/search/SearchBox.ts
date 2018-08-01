@@ -7,24 +7,16 @@ import {
   ViewChild,
   forwardRef,
   ElementRef,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
   HostBinding,
-  HostListener,
   ChangeDetectorRef,
   NgZone,
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 // APP
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { Helpers } from '../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const SEARCH_VALUE_ACCESSOR = {
@@ -49,17 +41,28 @@ const SEARCH_VALUE_ACCESSOR = {
     `,
 })
 export class NovoSearchBoxElement implements ControlValueAccessor {
-  @Input() public name: string;
-  @Input() public icon: string = 'search';
-  @Input() public placeholder: string = 'Search...';
-  @Input() public alwaysOpen: boolean = false;
-  @Input() public theme: string = 'positive';
-  @Input() public closeOnSelect: boolean = true;
-  @Input() public displayField: string;
-  @Input() public displayValue: string;
-  @Input() public hint: string;
-  @Output() public searchChanged: EventEmitter<string> = new EventEmitter<string>();
-  @HostBinding('class.focused') focused: boolean = false;
+  @Input()
+  public name: string;
+  @Input()
+  public icon: string = 'search';
+  @Input()
+  public placeholder: string = 'Search...';
+  @Input()
+  public alwaysOpen: boolean = false;
+  @Input()
+  public theme: string = 'positive';
+  @Input()
+  public closeOnSelect: boolean = true;
+  @Input()
+  public displayField: string;
+  @Input()
+  public displayValue: string;
+  @Input()
+  public hint: string;
+  @Output()
+  public searchChanged: EventEmitter<string> = new EventEmitter<string>();
+  @HostBinding('class.focused')
+  focused: boolean = false;
   public value: any;
 
   /** View -> model callback called when value changes */
@@ -68,8 +71,10 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   _onTouched = () => {};
 
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplateComponent) overlay: any;
-  @ViewChild('input') input: any;
+  @ViewChild(NovoOverlayTemplateComponent)
+  overlay: any;
+  @ViewChild('input')
+  input: any;
 
   private debounceSearchChange: any;
 
