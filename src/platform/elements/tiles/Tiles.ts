@@ -64,6 +64,7 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
   @Input() required: boolean;
   @Input('controlDisabled') disabled: boolean = false;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onSelectedOptionClick: EventEmitter<any> = new EventEmitter();
   @Output() onDisabledOptionClick: EventEmitter<any> = new EventEmitter();
 
   _options: Array<any> = [];
@@ -121,6 +122,7 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
       event.preventDefault();
     }
     if (item.checked) {
+      this.onSelectedOptionClick.emit(item);
       return;
     }
 

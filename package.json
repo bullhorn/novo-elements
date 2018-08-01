@@ -10,7 +10,7 @@
     "cleanup-dist": "rimraf dist/src",
     "build-ghpages": "ng build -prod -aot false --output-path \"dist-ghpages\"",
     "test": "ng test -cc --watch false",
-    "test-watch": "ng test",
+    "test-watch": "ng test -cc",
     "lint": "tslint --format codeFrame -c ./tslint.json \"./src/app/**/*.ts\" \"./src/platform/**/*.ts\" --project tsconfig.json",
     "precommit": "lint-staged",
     "loc": "node_modules/sloc/bin/sloc src/platform --format json > ./coverage/sloc.json",
