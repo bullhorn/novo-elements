@@ -40,20 +40,20 @@ export class NovoFormControl extends FormControl {
   appendToBody: boolean; // Deprecated
   parentScrollSelector: string;
   description?: string;
-  layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
+  layoutOptions?: { order?: string; download?: boolean; labelStyle?: string; draggable?: boolean; iconStyle?: string };
   military?: boolean;
   dateFormat?: string;
   textMaskEnabled?: boolean;
   allowInvalidDate?: boolean;
   tipWell?: {
-    tip: string,
-    icon?: string,
+    tip: string;
+    icon?: string;
     button?: boolean;
   };
   rawValue?: any;
   customControlConfig?: any;
+  checkboxLabel?: string;
   private historyTimeout: any;
-
 
   constructor(value: any, control: NovoControlConfig) {
     super(value, control.validators, control.asyncValidators);
@@ -94,6 +94,7 @@ export class NovoFormControl extends FormControl {
     this.closeOnSelect = control.closeOnSelect;
     this.interactions = control.interactions;
     this.appendToBody = control.appendToBody;
+    this.checkboxLabel = control.checkboxLabel;
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
     }
@@ -145,7 +146,7 @@ export class NovoFormControl extends FormControl {
       this.hasRequiredValidator = this.required;
     } else if (!this.required && this.hasRequiredValidator) {
       let validators: any = [...this.validators];
-      validators = validators.filter(val => val !== Validators.required);
+      validators = validators.filter((val) => val !== Validators.required);
       // TODO: duplicated above
       this.setValidators(validators);
       this.updateValueAndValidity();
@@ -163,12 +164,20 @@ export class NovoFormControl extends FormControl {
    * @param emitViewToModelChange
    *
    */
-  public setValue(value: any, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange }: {
-    onlySelf?: boolean,
-    emitEvent?: boolean,
-    emitModelToViewChange?: boolean,
-    emitViewToModelChange?: boolean
-  } = {}) {
+  public setValue(
+    value: any,
+    {
+      onlySelf,
+      emitEvent,
+      emitModelToViewChange,
+      emitViewToModelChange,
+    }: {
+      onlySelf?: boolean;
+      emitEvent?: boolean;
+      emitModelToViewChange?: boolean;
+      emitViewToModelChange?: boolean;
+    } = {},
+  ) {
     this.markAsDirty();
     this.markAsTouched();
     this.displayValueChanges.emit(value);
@@ -204,7 +213,6 @@ export class NovoFormControl extends FormControl {
     this.setErrors(Object.assign({}, this.errors, { custom: message }));
   }
 }
-
 
 export class NovoFormGroup extends FormGroup {
   public fieldInteractionEvents: EventEmitter<IFieldInteractionEvent> = new EventEmitter();
