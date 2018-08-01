@@ -467,11 +467,11 @@ export class FieldInteractionApi {
         }
     }
 
-    public modifyPickerConfig(key: string, config: { format?: string, optionsUrl?: string, optionsUrlBuilder?: Function, optionsPromise?: any, options?: any[], resultsTemplate?: any }, mapper?: Function): void {
+    public modifyPickerConfig(key: string, config: { format?: string, optionsUrl?: string, optionsUrlBuilder?: Function, optionsPromise?: any, options?: any[] }, mapper?: Function): void {
         let control = this.getControl(key);
         if (control) {
           let newConfig: any = {
-              resultsTemplate: config.resultsTemplate,
+              resultsTemplate: control.config.resultsTemplate,
             };
             if (config.optionsUrl || config.optionsUrlBuilder || config.optionsPromise) {
                 newConfig = Object.assign(newConfig, {
