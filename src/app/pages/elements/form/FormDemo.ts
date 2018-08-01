@@ -83,12 +83,18 @@ const template = `
     </div>`,
 })
 export class CustomDemoComponent {
-  @Input() control;
-  @Input() form: any;
-  @Input() edit: any;
-  @Input() save: any;
-  @Input() delete: any;
-  @Input() upload: any;
+  @Input()
+  control;
+  @Input()
+  form: any;
+  @Input()
+  edit: any;
+  @Input()
+  save: any;
+  @Input()
+  delete: any;
+  @Input()
+  upload: any;
 }
 
 @Component({
@@ -255,7 +261,7 @@ export class FormDemoComponent {
     ]);
 
     // Check box controls
-    this.checkControl = new CheckboxControl({ key: 'check', tooltip: 'Checkbox', label: 'Checkbox' });
+    this.checkControl = new CheckboxControl({ key: 'check', tooltip: 'Checkbox', label: 'Checkbox', checkboxLabel: 'Checkbox' });
     this.checkListControl = new CheckListControl({
       key: 'checklist',
       label: 'Check List',
