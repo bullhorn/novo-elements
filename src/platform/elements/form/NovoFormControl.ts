@@ -52,6 +52,7 @@ export class NovoFormControl extends FormControl {
   };
   rawValue?: any;
   customControlConfig?: any;
+  checkboxLabel?: string;
   private historyTimeout: any;
 
 

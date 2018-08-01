@@ -255,7 +255,7 @@ export class FormDemoComponent {
     ]);
 
     // Check box controls
-    this.checkControl = new CheckboxControl({ key: 'check', tooltip: 'Checkbox', label: 'Checkbox' });
+    this.checkControl = new CheckboxControl({ key: 'check', tooltip: 'Checkbox', label: 'Checkbox', checkboxLabel: 'Checkbox' });
     this.checkListControl = new CheckListControl({
       key: 'checklist',
       label: 'Check List',

@@ -275,6 +275,7 @@ export class FormUtils {
         control = new TilesControl(controlConfig);
         break;
       case 'checkbox':
+        controlConfig.checkboxLabel = field.checkboxLabel;
         control = new CheckboxControl(controlConfig);
         break;
       case 'checklist':
