@@ -470,7 +470,9 @@ export class FieldInteractionApi {
     public modifyPickerConfig(key: string, config: { format?: string, optionsUrl?: string, optionsUrlBuilder?: Function, optionsPromise?: any, options?: any[] }, mapper?: Function): void {
         let control = this.getControl(key);
         if (control) {
-            let newConfig: any = Object.assign({}, control.config);
+          let newConfig: any = {
+              resultsTemplate: control.config.resultsTemplate,
+            };
             if (config.optionsUrl || config.optionsUrlBuilder || config.optionsPromise) {
                 newConfig = Object.assign(newConfig, {
                     format: config.format,
