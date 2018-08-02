@@ -378,7 +378,7 @@ export class NovoCalendarWeekViewElement implements OnChanges, OnInit, OnDestroy
         hour: this.dayEndHour,
         minute: this.dayEndMinute,
       },
-      //precision: this.precision
+      // precision: this.precision
     });
   }
 

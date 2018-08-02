@@ -366,7 +366,7 @@ export class NovoMultiPickerElement implements OnInit {
     let values = allOfType.map((i) => {
       return i.value;
     });
-    //remove 'ALL' value
+    // remove 'ALL' value
     values.splice(0, 1);
     this.value[type] = values;
     let updatedItems = this.items.filter((x) => x.type !== type);
@@ -460,7 +460,7 @@ export class NovoMultiPickerElement implements OnInit {
         } else {
           obj.indeterminate = false;
           if (allChildrenOfParent.length === 0) {
-            //if it has no children and is checked, it should stay checked
+            // if it has no children and is checked, it should stay checked
             return;
           } else if (this.strictRelationship && itemChanged.type !== parentType) {
             this.remove(null, obj);
@@ -556,7 +556,7 @@ export class NovoMultiPickerElement implements OnInit {
     let parentAlreadySelected = false;
     children.forEach((x) => {
       if (x.isChildOf) {
-        //only add children if their parents are not already selected
+        // only add children if their parents are not already selected
         x[x.isChildOf].forEach((parent) => {
           if (this.value[x.isChildOf].filter((p) => p === parent).length > 0) {
             parentAlreadySelected = true;

@@ -1,6 +1,5 @@
 // NG2
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 export enum AppBridgeHandler {
   HTTP,
@@ -82,7 +81,7 @@ export class AppBridgeService {
 }
 
 export class DevAppBridgeService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
   create(name: string) {
     return new DevAppBridge(name, this.http);
   }
@@ -693,7 +692,7 @@ export class AppBridge {
 export class DevAppBridge extends AppBridge {
   private baseURL: string;
 
-  constructor(traceName: string = 'DevAppBridge', private http: Http) {
+  constructor(traceName: string = 'DevAppBridge', private http: HttpClient) {
     super(traceName);
     let cookie = this.getCookie('UlEncodedIdentity');
     if (cookie && cookie.length) {

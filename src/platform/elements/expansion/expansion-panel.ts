@@ -137,7 +137,7 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
   ngAfterContentInit() {
     if (this._lazyContent) {
       // Render the content as soon as the panel becomes open.
-      this.opened.pipe(startWith(null!), filter(() => this.expanded && !this._portal), take(1)).subscribe(() => {
+      this.opened.pipe(startWith(null), filter(() => this.expanded && !this._portal), take(1)).subscribe(() => {
         this._portal = new TemplatePortal(this._lazyContent._template, this._viewContainerRef);
       });
     }

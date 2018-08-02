@@ -416,8 +416,8 @@ export class NovoTableElement implements DoCheck {
   }
 
   onPageChange(event) {
-    //this.dataProvider.page = event.page;
-    //this.dataProvider.pageSize = event.itemsPerPage;
+    // this.dataProvider.page = event.page;
+    // this.dataProvider.pageSize = event.itemsPerPage;
   }
 
   getOptionDataAutomationId(option) {
@@ -601,13 +601,13 @@ export class NovoTableElement implements DoCheck {
 
   escapeCharacters(filter) {
     if (typeof filter === 'string') {
-      return filter.replace(/'/g, "''");
+      return filter.replace(/'/g, '\'\'');
     }
     return filter;
   }
 
   isFilterActive(column, filter): boolean {
-    //TODO: This needs to be refactored
+    // TODO: This needs to be refactored
     let isActive = false;
     if (column && !Helpers.isBlank(column.filter) && !Helpers.isBlank(filter)) {
       if (Array.isArray(column.filter)) {
@@ -722,7 +722,7 @@ export class NovoTableElement implements DoCheck {
       this.showSelectAllMessage = false;
     } else {
       this.indeterminate = false;
-      //this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
+      // this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
       for (let row of this.pagedData) {
         row._selected = this.master;
       }

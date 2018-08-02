@@ -21,7 +21,7 @@ const template = `
     <p>Angular-specific example. Fancy some ngFor?</p>
     <div class="example" style="padding: 20px;">${DragulaModelDemoTpl}</div>
     <code-snippet [code]="DragulaModelDemoTpl"></code-snippet>
-    
+
     <h5>Examples</h5>
     <p>Drag Threshold example.</p>
     <div class="example" style="padding: 20px;">${DragulaThresholdDemoTpl}</div>

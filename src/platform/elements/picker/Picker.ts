@@ -153,7 +153,7 @@ export class NovoPickerElement implements OnInit {
     // Custom results template
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
     // Get all distinct key up events from the input and only fire if long enough and distinct
-    //let input = this.element.nativeElement.querySelector('input');
+    // let input = this.element.nativeElement.querySelector('input');
     const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(
       debounceTime(250),
       distinctUntilChanged(),

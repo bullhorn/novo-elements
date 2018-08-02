@@ -21,15 +21,15 @@ const template = `
 `;
 
 @Component({
-    selector: 'switch-demo',
-    template: template
+  selector: 'switch-demo',
+  template: template,
 })
 export class SwitchDemoComponent {
-    private SwitchDemoTpl:string = SwitchDemoTpl;
-    private toggleCount:number = 0;
-    private checked:boolean = true;
+  private SwitchDemoTpl: string = SwitchDemoTpl;
+  private toggleCount: number = 0;
+  private checked: boolean = true;
 
-    increment() {
-        this.toggleCount++;
-    }
+  increment() {
+    this.toggleCount++;
+  }
 }

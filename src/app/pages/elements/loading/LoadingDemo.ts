@@ -26,10 +26,10 @@ const template = `
 `;
 
 @Component({
-    selector: 'loading-demo',
-    template: template
+  selector: 'loading-demo',
+  template: template,
 })
 export class LoadingDemoComponent {
-    private LoadingCircleDemoTpl:string = LoadingCircleDemoTpl;
-    private LoadingLineDemoTpl:string = LoadingLineDemoTpl;
+  private LoadingCircleDemoTpl: string = LoadingCircleDemoTpl;
+  private LoadingLineDemoTpl: string = LoadingLineDemoTpl;
 }

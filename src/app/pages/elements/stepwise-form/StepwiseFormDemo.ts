@@ -4,9 +4,19 @@ import { Component, Input, OnInit } from '@angular/core';
 let StepwiseFormDemoTpl = require('./templates/StepwiseForm.html');
 // Vendor
 import {
-    FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
-    QuickNoteControl, TilesControl, DateControl, TimeControl, DateTimeControl,
-    PickerControl, EntityPickerResult, EntityPickerResults
+  FormUtils,
+  TextBoxControl,
+  CheckboxControl,
+  CheckListControl,
+  FileControl,
+  QuickNoteControl,
+  TilesControl,
+  DateControl,
+  TimeControl,
+  DateTimeControl,
+  PickerControl,
+  EntityPickerResult,
+  EntityPickerResults,
 } from './../../../../platform/index';
 
 const template = `
@@ -21,34 +31,36 @@ const template = `
 `;
 
 @Component({
-    selector: 'form-workflow-demo',
-    template: template
+  selector: 'form-workflow-demo',
+  template: template,
 })
 export class FormWorkflowDemoComponent implements OnInit {
-    private StepwiseFormDemoTpl: string = StepwiseFormDemoTpl;
-    stepwiseFormConfig: any; //TODO: use interfrace
-    constructor(private formUtils: FormUtils) {
-    }
+  private StepwiseFormDemoTpl: string = StepwiseFormDemoTpl;
+  stepwiseFormConfig: any; // TODO: use interfrace
+  constructor(private formUtils: FormUtils) {}
 
-    ngOnInit() {
-        this.stepwiseFormConfig = {
-            steps: [{
-                title: 'what',
-                icon: 'bot',
-                controls: []
-            }, {
-                title: 'when',
-                icon: 'next',
-                controls: []
-            }]
-        };
-    }
+  ngOnInit() {
+    this.stepwiseFormConfig = {
+      steps: [
+        {
+          title: 'what',
+          icon: 'bot',
+          controls: [],
+        },
+        {
+          title: 'when',
+          icon: 'next',
+          controls: [],
+        },
+      ],
+    };
+  }
 
-    isValidStep(stepNumber: number) {
-        return true;
-    }
+  isValidStep(stepNumber: number) {
+    return true;
+  }
 
-    nextStep(stepwiseForm) {
-        stepwiseForm.goToNextStep();
-    }
+  nextStep(stepwiseForm) {
+    stepwiseForm.goToNextStep();
+  }
 }

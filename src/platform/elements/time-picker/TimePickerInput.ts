@@ -40,12 +40,17 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   /** View -> model callback called when autocomplete has been touched */
   _onTouched = () => {};
 
-  @Input() name: string;
-  @Input() placeholder: string;
-  @Input() military: boolean = false;
-  @Input() maskOptions: any;
+  @Input()
+  name: string;
+  @Input()
+  placeholder: string;
+  @Input()
+  military: boolean = false;
+  @Input()
+  maskOptions: any;
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
+  @ViewChild(NovoOverlayTemplateComponent)
+  overlay: NovoOverlayTemplateComponent;
 
   constructor(
     public element: ElementRef,

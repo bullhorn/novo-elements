@@ -39,14 +39,14 @@ const template = `
 </div>
 `;
 @Component({
-    selector: 'popover-demo',
-    template: template
+  selector: 'popover-demo',
+  template: template,
 })
 export class PopOverDemoComponent {
-    private PopOverPlacementDemoTpl:string = PopOverPlacementDemoTpl;
-    private PopOverHorizontalAlignmentDemo:string = PopOverHorizontalAlignmentDemo;
-    private PopOverVerticalAlignmentDemo:string = PopOverVerticalAlignmentDemo;
-    private PopOverBehaviorDemoTpl:string = PopOverBehaviorDemoTpl;
-    private PopOverWithDynamicHtmlDemoTpl:string = PopOverWithDynamicHtmlDemoTpl;
-    private PopOverAutomaticPlacementDemoTpl:string = PopOverAutomaticPlacementDemoTpl;
+  private PopOverPlacementDemoTpl: string = PopOverPlacementDemoTpl;
+  private PopOverHorizontalAlignmentDemo: string = PopOverHorizontalAlignmentDemo;
+  private PopOverVerticalAlignmentDemo: string = PopOverVerticalAlignmentDemo;
+  private PopOverBehaviorDemoTpl: string = PopOverBehaviorDemoTpl;
+  private PopOverWithDynamicHtmlDemoTpl: string = PopOverWithDynamicHtmlDemoTpl;
+  private PopOverAutomaticPlacementDemoTpl: string = PopOverAutomaticPlacementDemoTpl;
 }

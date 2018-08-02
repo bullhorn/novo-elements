@@ -16,9 +16,9 @@ const template = `
 `;
 
 @Component({
-    selector: 'pipes-demo',
-    template: template
+  selector: 'pipes-demo',
+  template: template,
 })
 export class PipesDemoComponent {
-    private PluralizeDemoTpl:string = PluralizeDemoTpl;
+  private PluralizeDemoTpl: string = PluralizeDemoTpl;
 }

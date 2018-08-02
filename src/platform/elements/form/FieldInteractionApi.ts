@@ -1,6 +1,6 @@
 // NG2
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 // Vendor
 import { map } from 'rxjs/operators';
 // APP
@@ -34,7 +34,7 @@ export class FieldInteractionApi {
     private toaster: NovoToastService,
     private modalService: NovoModalService,
     private formUtils: FormUtils,
-    private http: Http,
+    private http: HttpClient,
     private labels: NovoLabelService,
   ) {}
 
@@ -506,7 +506,7 @@ export class FieldInteractionApi {
   public modifyPickerConfig(
     key: string,
     config: { format?: string; optionsUrl?: string; optionsUrlBuilder?: Function; optionsPromise?: any; options?: any[] },
-    mapper?: Function,
+    mapper?: any,
   ): void {
     let control = this.getControl(key);
     if (control) {
@@ -524,13 +524,7 @@ export class FieldInteractionApi {
                 this.http
                   .get(url)
                   .pipe(
-                    map((res) => {
-                      if (res.json) {
-                        return res.json();
-                      }
-                      return res;
-                    }),
-                    map((results) => {
+                    map((results: any[]) => {
                       if (mapper) {
                         return results.map(mapper);
                       }

@@ -14,10 +14,24 @@ let AddressControlDemoTpl = require('./templates/AddressControl.html');
 import { MockMeta, MockMetaHeaders } from './MockMeta';
 // Vendor
 import {
-  FormUtils, TextBoxControl, CheckboxControl, CheckListControl, FileControl,
-  QuickNoteControl, TilesControl, DateControl, TimeControl, DateTimeControl,
-  PickerControl, EntityPickerResult, EntityPickerResults, TextAreaControl,
-  NovoFormGroup, BaseControl, AceEditorControl, AddressControl,
+  FormUtils,
+  TextBoxControl,
+  CheckboxControl,
+  CheckListControl,
+  FileControl,
+  QuickNoteControl,
+  TilesControl,
+  DateControl,
+  TimeControl,
+  DateTimeControl,
+  PickerControl,
+  EntityPickerResult,
+  EntityPickerResults,
+  TextAreaControl,
+  NovoFormGroup,
+  BaseControl,
+  AceEditorControl,
+  AddressControl,
 } from './../../../../platform/index';
 import { findByCountryId } from './../../../../platform/utils/countries/Countries';
 const template = `
@@ -68,12 +82,18 @@ const template = `
     </novo-custom-control-container>`,
 })
 export class CustomDemoComponent {
-  @Input() control;
-  @Input() form: any;
-  @Input() edit: any;
-  @Input() save: any;
-  @Input() delete: any;
-  @Input() upload: any;
+  @Input()
+  control;
+  @Input()
+  form: any;
+  @Input()
+  edit: any;
+  @Input()
+  save: any;
+  @Input()
+  delete: any;
+  @Input()
+  upload: any;
 }
 
 @Component({
@@ -133,27 +153,33 @@ export class FormDemoComponent {
   private secondaryAddressControl: any;
   private addressForm: any;
   private addressFormControls: any;
-  private states: any[] = [{
-    value: 'MA',
-    label: 'Massachusetts',
-    countryId: 1
-  }, {
-    value: 'NY',
-    label: 'New York',
-    countryId: 1
-  }, {
-    value: 'AB',
-    label: 'Alberta',
-    countryId: 2216
-  }, {
-    value: 'BC',
-    label: 'British Columbia',
-    countryId: 2216
-  }, {
-    value: 'MB',
-    label: 'Manitoba',
-    countryId: 2216
-  },];
+  private states: any[] = [
+    {
+      value: 'MA',
+      label: 'Massachusetts',
+      countryId: 1,
+    },
+    {
+      value: 'NY',
+      label: 'New York',
+      countryId: 1,
+    },
+    {
+      value: 'AB',
+      label: 'Alberta',
+      countryId: 2216,
+    },
+    {
+      value: 'BC',
+      label: 'British Columbia',
+      countryId: 2216,
+    },
+    {
+      value: 'MB',
+      label: 'Manitoba',
+      countryId: 2216,
+    },
+  ];
 
   constructor(private formUtils: FormUtils) {
     // Quick note config
@@ -181,19 +207,32 @@ export class FormDemoComponent {
       },
     };
     // Text-based Controls
-    this.textControl = new TextBoxControl({ key: 'text', label: 'Text Box', tooltip: 'Textbox', readOnly: true, value: 'HI', required: true });
+    this.textControl = new TextBoxControl({
+      key: 'text',
+      label: 'Text Box',
+      tooltip: 'Textbox',
+      readOnly: true,
+      value: 'HI',
+      required: true,
+    });
     this.textAreaControl = new TextAreaControl({
       key: 'textarea',
       label: 'Text Area',
       value:
-      'Bro ipsum dolor sit amet yard sale saddle pipe, poaching cork 360 punter ACL back country cornice Whistler.  Avie Ski taco mitt, manny first tracks yard sale caballerial heli fatty.  Epic dope grab, brain bucket japan air wack bowl  mute heli corn Snowboard Whistler giblets table top.  Crunchy Snowboard washboard line grab reverse camber.  Bump epic granny gear heli sketching wheelie huckfest face plant crank pow pow chain ring  dirtbag washboard.  Flow endo ski bum sucker hole, death cookies manny schwag pipe.  Dope heli stomp yard sale, saddle shreddin booter gear jammer grom bonk OTB brain bucket bonk japan air Whistler.Clipless pow pow pow, core shot corn butter bomb hole glades face plant dust on crust.  Poaching park face shots bump, Bike cornice death cookies.  Avie cruiser sucker hole face plant switch.  ACL snake bite bonk, twin tip euro rig nose press McTwist.  Ripping skinny trucks shreddin.  Apres pow line euro sharkbite gapers lid.Snake bite derailleur wheels bomb hole.  Huck apres steeps BB first tracks bowl  daffy park euro park rat euro.  North shore death cookies snake bite carve, freshies dirtbag huck reverse camber hellflip frozen chicken heads apres taco glove gnar face shots bro.  Ride flow twister cornice afterbang saddle first tracks rig berm bro face shots.  Ride stoked wack park twin tip trucks chillax shuttle Whistler gondy laps.  Grind berm schwag, table top face shots steed liftie afterbang taco glove frozen chicken heads free ride clean huck.  Rock-ectomy white room nose press avie.Frozen chicken heads gondy bail travel huckfest big ring phat clean.  Taco couloir piste derailleur wack scream backside steeps groomer glades pipe gondy switch skid lid.  Brain bucket betty bowl, moguls gondy Whistler air hardtail.  Flow euro granny gear, McTwist cruiser bonk grom chain suck.  Trucks line huck, stomp ripper washboard euro corduroy death cookies yard sale dope face plant shreddin chain suck.ACL T-bar hellflip, first tracks gondy hardtail rip wack dust on crust schwag frontside couloir laps presta backside.  Road rash Ski ski bum gnar wack flow carve lid.  Nose white room ollie rail table top grom back country washboard dust on crust chillax gear jammer bro stomp stoked.  Lid wheels nose press frontside, park ACL dirtbag huck epic bowl  taco glove OTB.  Fatty mute whip stunt, Whistler McTwist stoked Bike.  Endo brain bucket crank dust on crust back country line ollie gapers afterbang bump stoked taco road rash granny gear.  Deck dirtbag 360 gnar snake bite couloir Bike corduroy frontside crank lid bro.Air tele schwag ollie, hardtail betty crunchy epic  face shots.  Travel flowy misty huck Bike 180 schwag drop hellflip ripping bunny slope carbon roadie tele bail.  Cornice sharkbite 360 frozen chicken heads dope hellflip clipless.  Switch sketching grind brain bucket stunt taco daffy OTB ride liftie brain bucket air huckfest park 360.',
+        'Bro ipsum dolor sit amet yard sale saddle pipe, poaching cork 360 punter ACL back country cornice Whistler.  Avie Ski taco mitt, manny first tracks yard sale caballerial heli fatty.  Epic dope grab, brain bucket japan air wack bowl  mute heli corn Snowboard Whistler giblets table top.  Crunchy Snowboard washboard line grab reverse camber.  Bump epic granny gear heli sketching wheelie huckfest face plant crank pow pow chain ring  dirtbag washboard.  Flow endo ski bum sucker hole, death cookies manny schwag pipe.  Dope heli stomp yard sale, saddle shreddin booter gear jammer grom bonk OTB brain bucket bonk japan air Whistler.Clipless pow pow pow, core shot corn butter bomb hole glades face plant dust on crust.  Poaching park face shots bump, Bike cornice death cookies.  Avie cruiser sucker hole face plant switch.  ACL snake bite bonk, twin tip euro rig nose press McTwist.  Ripping skinny trucks shreddin.  Apres pow line euro sharkbite gapers lid.Snake bite derailleur wheels bomb hole.  Huck apres steeps BB first tracks bowl  daffy park euro park rat euro.  North shore death cookies snake bite carve, freshies dirtbag huck reverse camber hellflip frozen chicken heads apres taco glove gnar face shots bro.  Ride flow twister cornice afterbang saddle first tracks rig berm bro face shots.  Ride stoked wack park twin tip trucks chillax shuttle Whistler gondy laps.  Grind berm schwag, table top face shots steed liftie afterbang taco glove frozen chicken heads free ride clean huck.  Rock-ectomy white room nose press avie.Frozen chicken heads gondy bail travel huckfest big ring phat clean.  Taco couloir piste derailleur wack scream backside steeps groomer glades pipe gondy switch skid lid.  Brain bucket betty bowl, moguls gondy Whistler air hardtail.  Flow euro granny gear, McTwist cruiser bonk grom chain suck.  Trucks line huck, stomp ripper washboard euro corduroy death cookies yard sale dope face plant shreddin chain suck.ACL T-bar hellflip, first tracks gondy hardtail rip wack dust on crust schwag frontside couloir laps presta backside.  Road rash Ski ski bum gnar wack flow carve lid.  Nose white room ollie rail table top grom back country washboard dust on crust chillax gear jammer bro stomp stoked.  Lid wheels nose press frontside, park ACL dirtbag huck epic bowl  taco glove OTB.  Fatty mute whip stunt, Whistler McTwist stoked Bike.  Endo brain bucket crank dust on crust back country line ollie gapers afterbang bump stoked taco road rash granny gear.  Deck dirtbag 360 gnar snake bite couloir Bike corduroy frontside crank lid bro.Air tele schwag ollie, hardtail betty crunchy epic  face shots.  Travel flowy misty huck Bike 180 schwag drop hellflip ripping bunny slope carbon roadie tele bail.  Cornice sharkbite 360 frozen chicken heads dope hellflip clipless.  Switch sketching grind brain bucket stunt taco daffy OTB ride liftie brain bucket air huckfest park 360.',
     });
     this.emailControl = new TextBoxControl({ type: 'email', key: 'email', label: 'Email', tooltip: 'Email' });
     this.numberControl = new TextBoxControl({ type: 'number', key: 'number', label: 'Number' });
     this.currencyControl = new TextBoxControl({ type: 'currency', key: 'currency', label: 'Currency', currencyFormat: '$ USD' });
     this.floatControl = new TextBoxControl({ type: 'float', key: 'float', label: 'Float' });
     this.percentageControl = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
-    this.quickNoteControl = new QuickNoteControl({ key: 'note', label: 'Note', config: this.quickNoteConfig, required: true, tooltip: 'Quicknote' });
+    this.quickNoteControl = new QuickNoteControl({
+      key: 'note',
+      label: 'Note',
+      config: this.quickNoteConfig,
+      required: true,
+      tooltip: 'Quicknote',
+    });
     this.aceEditorControl = new AceEditorControl({ key: 'ace', label: 'CODE', value: 'var i = 0;' });
     this.textForm = formUtils.toFormGroup([
       this.textControl,
@@ -209,14 +248,36 @@ export class FormDemoComponent {
 
     // Check box controls
     this.checkControl = new CheckboxControl({ key: 'check', label: 'Checkbox' });
-    this.checkListControl = new CheckListControl({ key: 'checklist', label: 'Check List', options: ['One', 'Two', 'Three'], tooltip: 'CheckList', tooltipPosition: 'Top' });
-    this.tilesControl = new TilesControl({ key: 'tiles', label: 'Tiles', options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }, { value: 'disabled', label: 'Disabled', disabled: true }], tooltip: 'Tiles' });
-    this.disabledTilesControl = new TilesControl({ key: 'disabledTiles', label: 'Disabled Tiles', readOnly: true, options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }], tooltip: 'Tiles' });
+    this.checkListControl = new CheckListControl({
+      key: 'checklist',
+      label: 'Check List',
+      options: ['One', 'Two', 'Three'],
+      tooltip: 'CheckList',
+      tooltipPosition: 'Top',
+    });
+    this.tilesControl = new TilesControl({
+      key: 'tiles',
+      label: 'Tiles',
+      options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }, { value: 'disabled', label: 'Disabled', disabled: true }],
+      tooltip: 'Tiles',
+    });
+    this.disabledTilesControl = new TilesControl({
+      key: 'disabledTiles',
+      label: 'Disabled Tiles',
+      readOnly: true,
+      options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }],
+      tooltip: 'Tiles',
+    });
     this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl, this.disabledTilesControl]);
 
     // Picker controls
     this.singlePickerControl = new PickerControl({ key: 'singlePicker', label: 'Single', config: { options: ['One', 'Two', 'Three'] } });
-    this.multiPickerControl = new PickerControl({ key: 'multiPicker', label: 'Multiple', multiple: true, config: { options: ['One', 'Two', 'Three'], type: 'candidate' } });
+    this.multiPickerControl = new PickerControl({
+      key: 'multiPicker',
+      label: 'Multiple',
+      multiple: true,
+      config: { options: ['One', 'Two', 'Three'], type: 'candidate' },
+    });
     this.entityMultiPickerControl = new PickerControl({
       key: 'entityMultiPicker',
       label: 'Entities',
@@ -236,7 +297,14 @@ export class FormDemoComponent {
             address: { city: 'Washington', state: 'DC' },
             searchEntity: 'ClientCorporation',
           },
-          { title: 'Federal Bank', name: 'Federal Bank', email: 'info@federalbank.com', phone: '(545) 555-1212', address: { city: 'Arlington', state: 'VA' }, searchEntity: 'ClientCorporation' },
+          {
+            title: 'Federal Bank',
+            name: 'Federal Bank',
+            email: 'info@federalbank.com',
+            phone: '(545) 555-1212',
+            address: { city: 'Arlington', state: 'VA' },
+            searchEntity: 'ClientCorporation',
+          },
           {
             title: 'Aaron Burr',
             firstName: 'Aaron',
@@ -289,7 +357,14 @@ export class FormDemoComponent {
     let controls = [this.singlePickerControl, this.multiPickerControl, this.entityMultiPickerControl];
     formUtils.setInitialValues(controls, {
       entityMultiPicker: [
-        { title: 'Federal Bank', name: 'Federal Bank', email: 'info@federalbank.com', phone: '(545) 555-1212', address: { city: 'Arlington', state: 'VA' }, searchEntity: 'ClientCorporation' },
+        {
+          title: 'Federal Bank',
+          name: 'Federal Bank',
+          email: 'info@federalbank.com',
+          phone: '(545) 555-1212',
+          address: { city: 'Arlington', state: 'VA' },
+          searchEntity: 'ClientCorporation',
+        },
       ],
     });
     this.pickerForm = formUtils.toFormGroup(controls);
@@ -303,38 +378,37 @@ export class FormDemoComponent {
         address1: {
           label: 'Address Line 1',
           required: true,
-          maxlength: 20
+          maxlength: 20,
         },
         address2: {
           label: 'Address Line 2',
           required: true,
-          maxlength: 15
+          maxlength: 15,
         },
         state: {
           label: 'State',
-          required: true
+          required: true,
         },
         countryID: {
           label: 'Country',
-          required: true
+          required: true,
         },
         city: {
           label: 'City',
-          required: true
+          required: true,
         },
         zip: {
           label: 'Zipcode',
-          required: true
-        }
-
+          required: true,
+        },
       },
       value: {
         address1: '321 Summer Street',
         address2: '11 Washington Street',
         countryID: 1,
         countryName: 'United States',
-        countryCode: 'US'
-      }
+        countryCode: 'US',
+      },
     });
     this.secondaryAddressControl = new AddressControl({
       key: 'secondaryAddress',
@@ -343,11 +417,11 @@ export class FormDemoComponent {
       config: {
         address1: {
           label: 'Address Line 1',
-          maxlength: 20
+          maxlength: 20,
         },
         address2: {
           label: 'Address Line 2',
-          maxlength: 15
+          maxlength: 15,
         },
         state: {
           label: 'State',
@@ -359,8 +433,8 @@ export class FormDemoComponent {
             },
             getLabels: (value: number) => {
               return Promise.resolve(this.getStateLabel(value));
-            }
-          }
+            },
+          },
         },
         countryID: {
           label: 'Country',
@@ -372,8 +446,8 @@ export class FormDemoComponent {
             },
             getLabels: (value: number) => {
               return Promise.resolve(findByCountryId(value));
-            }
-          }
+            },
+          },
         },
         city: {
           label: 'City',
@@ -381,13 +455,12 @@ export class FormDemoComponent {
         zip: {
           label: 'Zipcode',
         },
-
       },
       value: {
         address1: '123 Summer Street',
         address2: '10 Washington Street and stuff',
         countryID: 1,
-      }
+      },
     });
     this.addressFormControls = [this.addressControl, this.secondaryAddressControl];
     this.addressForm = formUtils.toFormGroup(this.addressFormControls);
@@ -405,7 +478,13 @@ export class FormDemoComponent {
 
     // Calendar input controls
     this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
-    this.userDefinedDateControl = new DateControl({ key: 'userDefinedFormat', label: 'User Defined Format', tooltip: 'Date', dateFormat: 'MMM Do YYYY (dd)', textMaskEnabled: false });
+    this.userDefinedDateControl = new DateControl({
+      key: 'userDefinedFormat',
+      label: 'User Defined Format',
+      tooltip: 'Date',
+      dateFormat: 'MMM Do YYYY (dd)',
+      textMaskEnabled: false,
+    });
     this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
     this.dateTimeControl = new DateTimeControl({ key: 'dateTime', label: 'Date Time', military: true });
     this.calendarForm = formUtils.toFormGroup([this.dateControl, this.userDefinedDateControl, this.timeControl, this.dateTimeControl]);
@@ -513,7 +592,7 @@ export class FormDemoComponent {
       states = states.filter((state: any) => state.countryId === countryID);
     }
     if (filter && filter.length) {
-      states = states.filter((state) => new RegExp(`${filter}`, 'gi').test(state.label))
+      states = states.filter((state) => new RegExp(`${filter}`, 'gi').test(state.label));
     }
     return states;
   }
@@ -564,7 +643,7 @@ export class FormDemoComponent {
       },
     ];
     if (filter && filter.length) {
-      countries = countries.filter((country) => new RegExp(`${filter}`, 'gi').test(country.label))
+      countries = countries.filter((country) => new RegExp(`${filter}`, 'gi').test(country.label));
     }
     return countries;
   }

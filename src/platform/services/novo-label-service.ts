@@ -217,7 +217,7 @@ export class NovoLabelService {
 
   formatTime(value: any): string {
     let options: Intl.DateTimeFormatOptions = {
-      //HH:MM A - 1:17 PM
+      // HH:MM A - 1:17 PM
       hour: '2-digit',
       minute: '2-digit',
     };

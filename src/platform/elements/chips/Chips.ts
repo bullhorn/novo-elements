@@ -149,12 +149,12 @@ export class NovoChipsElement implements OnInit {
     this.setItems();
   }
 
-  //get accessor
+  // get accessor
   get value() {
     return this._value;
   }
 
-  //set accessor including call the onchange callback
+  // set accessor including call the onchange callback
   @Input()
   set value(selected) {
     this.itemToAdd = '';

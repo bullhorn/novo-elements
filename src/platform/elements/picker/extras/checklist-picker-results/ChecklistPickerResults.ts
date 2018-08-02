@@ -47,7 +47,7 @@ export class ChecklistPickerResults extends BasePickerResults {
 
   search() {
     let options = this.config.options;
-    //only set this the first time
+    // only set this the first time
     return from(
       new Promise((resolve, reject) => {
         // Check if there is match data

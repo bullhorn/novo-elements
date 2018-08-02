@@ -2,8 +2,14 @@
 import { Component } from '@angular/core';
 // Vendor
 import {
-    FormUtils, NovoFormGroup, TextBoxControl, CheckboxControl, FieldInteractionApi,
-    SelectControl, PickerControl, DateTimeControl
+  FormUtils,
+  NovoFormGroup,
+  TextBoxControl,
+  CheckboxControl,
+  FieldInteractionApi,
+  SelectControl,
+  PickerControl,
+  DateTimeControl,
 } from './../../../../platform/index';
 // APP
 let ValidationTpl = require('./templates/Validation.html');
@@ -174,571 +180,564 @@ const template = `
 `;
 
 @Component({
-    selector: 'field-interactions-demo',
-    template: template
+  selector: 'field-interactions-demo',
+  template: template,
 })
 export class FieldInteractionsDemoComponent {
-    // Templates
-    public ValidationsTpl: any = ValidationTpl;
-    public RequiredTpl: any = RequiredTpl;
-    public CalculationTpl: any = CalculationTpl;
-    public HideShowTpl: any = HideShowTpl;
-    public EnableDisableTpl: any = EnableDisableTpl;
-    public MessagingTpl: any = MessagingTpl;
-    public ModifyOptionsTpl: any = ModifyOptionsTpl;
-    public GlobalsTpl: any = GlobalsTpl;
-    public AsyncTpl: any = AsyncTpl;
-    public ConfirmTpl: any = ConfirmTpl;
-    public AddingRemovingTpl: any = AddingRemovingTpl;
-    public TooltipTpl: any = TooltipTpl;
+  // Templates
+  public ValidationsTpl: any = ValidationTpl;
+  public RequiredTpl: any = RequiredTpl;
+  public CalculationTpl: any = CalculationTpl;
+  public HideShowTpl: any = HideShowTpl;
+  public EnableDisableTpl: any = EnableDisableTpl;
+  public MessagingTpl: any = MessagingTpl;
+  public ModifyOptionsTpl: any = ModifyOptionsTpl;
+  public GlobalsTpl: any = GlobalsTpl;
+  public AsyncTpl: any = AsyncTpl;
+  public ConfirmTpl: any = ConfirmTpl;
+  public AddingRemovingTpl: any = AddingRemovingTpl;
+  public TooltipTpl: any = TooltipTpl;
 
-    public forms: any = {};
-    public controls: any = {
-        validation: {},
-        required: {},
-        calculation: {},
-        hideShow: {},
-        enableDisable: {},
-        messaging: {},
-        modifyOptions: {},
-        globals: {},
-        async: {},
-        confirm: {},
-        addingRemoving: {},
-        tooltip: {}
-    };
-    public snippets: any = {
-        validation: {},
-        required: {},
-        calculation: {},
-        hideShow: {},
-        enableDisable: {},
-        messaging: {},
-        modifyOptions: {},
-        globals: {},
-        async: {},
-        confirm: {},
-        addingRemoving: {}
-    };
+  public forms: any = {};
+  public controls: any = {
+    validation: {},
+    required: {},
+    calculation: {},
+    hideShow: {},
+    enableDisable: {},
+    messaging: {},
+    modifyOptions: {},
+    globals: {},
+    async: {},
+    confirm: {},
+    addingRemoving: {},
+    tooltip: {},
+  };
+  public snippets: any = {
+    validation: {},
+    required: {},
+    calculation: {},
+    hideShow: {},
+    enableDisable: {},
+    messaging: {},
+    modifyOptions: {},
+    globals: {},
+    async: {},
+    confirm: {},
+    addingRemoving: {},
+  };
 
-    constructor(private formUtils: FormUtils) {
-        let validationFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - validationFunction'); // tslint:disable-line
-            let activeValue = API.getActiveValue();
-            if (activeValue > 10) {
-                API.markAsInvalid(API.getActiveKey(), 'Too high! Make it a lot lower!!');
-            }
-        };
-        let requiredFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - requiredFunction'); // tslint:disable-line
-            let activeValue = API.getActiveValue();
-            if (activeValue) {
-                API.setRequired('required', true);
+  constructor(private formUtils: FormUtils) {
+    let validationFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - validationFunction'); // tslint:disable-line
+      let activeValue = API.getActiveValue();
+      if (activeValue > 10) {
+        API.markAsInvalid(API.getActiveKey(), 'Too high! Make it a lot lower!!');
+      }
+    };
+    let requiredFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - requiredFunction'); // tslint:disable-line
+      let activeValue = API.getActiveValue();
+      if (activeValue) {
+        API.setRequired('required', true);
+      } else {
+        API.setRequired('required', false);
+      }
+    };
+    let calculationFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - calculationFunction'); // tslint:disable-line
+      let a = Number(API.getValue('a'));
+      let b = Number(API.getValue('b'));
+      API.setValue('sum', a + b);
+      API.setValue('date', new Date());
+    };
+    let hideShowFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - hideShowFunction'); // tslint:disable-line
+      let activeValue = API.getActiveValue();
+      if (!activeValue) {
+        API.show('text');
+      } else {
+        API.hide('text');
+      }
+    };
+    let enableDisableFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - enableDisableFunction'); // tslint:disable-line
+      let currentValue = API.getActiveValue();
+      if (!currentValue) {
+        API.enable('text');
+      } else {
+        API.disable('text');
+      }
+    };
+    let messagingFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - messagingFunction'); // tslint:disable-line
+      if (API.getActiveKey() === 'toast') {
+        API.displayToast({
+          title: 'New Value',
+          message: API.getActiveValue(),
+        });
+      } else if (API.getActiveKey() === 'tip') {
+        API.displayTip(API.getActiveKey(), API.getActiveValue(), 'info', true);
+      } else if (API.getActiveKey() === 'prompt') {
+        API.promptUser(API.getActiveKey(), ['Update Fee Arrangement from Selected Company', 'Update DateLastModified to right now!']).then(
+          function(result) {
+            if (result) {
+              console.log('PERFORM'); // tslint:disable-line
             } else {
-                API.setRequired('required', false);
+              console.log("DON'T PERFORM"); // tslint:disable-line
             }
-        };
-        let calculationFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - calculationFunction'); // tslint:disable-line
-            let a = Number(API.getValue('a'));
-            let b = Number(API.getValue('b'));
-            API.setValue('sum', a + b);
-            API.setValue('date', new Date());
-        };
-        let hideShowFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - hideShowFunction'); // tslint:disable-line
-            let activeValue = API.getActiveValue();
-            if (!activeValue) {
-                API.show('text');
-            } else {
-                API.hide('text');
-            }
-        };
-        let enableDisableFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - enableDisableFunction'); // tslint:disable-line
-            let currentValue = API.getActiveValue();
-            if (!currentValue) {
-                API.enable('text');
-            } else {
-                API.disable('text');
-            }
-        };
-        let messagingFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - messagingFunction'); // tslint:disable-line
-            if (API.getActiveKey() === 'toast') {
-                API.displayToast({
-                    title: 'New Value',
-                    message: API.getActiveValue()
-                });
-            } else if (API.getActiveKey() === 'tip') {
-                API.displayTip(API.getActiveKey(), API.getActiveValue(), 'info', true);
-            } else if (API.getActiveKey() === 'prompt') {
-                API.promptUser(API.getActiveKey(), ['Update Fee Arrangement from Selected Company', 'Update DateLastModified to right now!'])
-                    .then(function (result) {
-                        if (result) {
-                            console.log('PERFORM'); // tslint:disable-line
-                        } else {
-                            console.log('DON\'T PERFORM'); // tslint:disable-line
-                        }
+          },
+        );
+      }
+    };
+    let modifyOptionsAddFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - modifyOptionsAddFunction'); // tslint:disable-line
+      let currentValue = API.getActiveValue();
+      if (!currentValue) {
+        API.removeStaticOption('select', 'NEW');
+        API.removeStaticOption('picker', 'NEW');
+      } else {
+        API.addStaticOption('select', 'NEW');
+        API.addStaticOption('select', 'NEW'); // Duplicate options will be ignored
+        API.addStaticOption('picker', 'NEW');
+      }
+    };
+    let modifyOptionsAsyncFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - modifyOptionsAsyncFunction'); // tslint:disable-line
+      let currentValue = API.getActiveValue();
+      switch (currentValue) {
+        case 1:
+          // Static
+          API.setProperty('picker', 'label', 'Static Picker');
+          API.modifyPickerConfig('picker', {
+            options: ['A', 'B', 'C'],
+          });
+          break;
+        case 2:
+          // Async with Options URL
+          API.setProperty('picker', 'label', 'Async Picker (with options url)');
+          API.modifyPickerConfig(
+            'picker',
+            {
+              format: '$name $test',
+              optionsUrl: 'http://novo-elements-mock.getsandbox.com/users',
+            },
+            function(result) {
+              result.test = 'Built with Options URL!';
+              return result;
+            },
+          );
+          break;
+        case 3:
+          // Async with Options URL Builder
+          API.setProperty('picker', 'label', 'Async Picker (with options url builder)');
+          API.modifyPickerConfig(
+            'picker',
+            {
+              format: '$name $test',
+              optionsUrlBuilder: (query) => {
+                return 'http://novo-elements-mock.getsandbox.com/users';
+              },
+            },
+            function(result) {
+              result.test = 'Built with Options URL Builder!';
+              return result;
+            },
+          );
+          break;
+        case 4:
+          // Async with Options Promise
+          API.setProperty('picker', 'label', 'Async Picker (with options promise)');
+          API.modifyPickerConfig('picker', {
+            format: '$name $test',
+            optionsPromise: function(query, http) {
+              return new Promise(function(resolve, reject) {
+                if (query && query.length) {
+                  http
+                    .get('http://novo-elements-mock.getsandbox.com/users')
+                    .map(function(res) {
+                      return res.json();
                     })
-            }
-        };
-        let modifyOptionsAddFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - modifyOptionsAddFunction'); // tslint:disable-line
-            let currentValue = API.getActiveValue();
-            if (!currentValue) {
-                API.removeStaticOption('select', 'NEW');
-                API.removeStaticOption('picker', 'NEW');
-            } else {
-                API.addStaticOption('select', 'NEW');
-                API.addStaticOption('select', 'NEW'); // Duplicate options will be ignored
-                API.addStaticOption('picker', 'NEW');
-            }
-        };
-        let modifyOptionsAsyncFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - modifyOptionsAsyncFunction'); // tslint:disable-line
-            let currentValue = API.getActiveValue();
-            switch (currentValue) {
-                case 1:
-                    // Static
-                    API.setProperty('picker', 'label', 'Static Picker');
-                    API.modifyPickerConfig('picker', {
-                        options: ['A', 'B', 'C']
-                    });
-                    break;
-                case 2:
-                    // Async with Options URL
-                    API.setProperty('picker', 'label', 'Async Picker (with options url)');
-                    API.modifyPickerConfig('picker', {
-                        format: '$name $test',
-                        optionsUrl: 'http://novo-elements-mock.getsandbox.com/users'
-                    }, function (result) { result.test = 'Built with Options URL!'; return result; });
-                    break;
-                case 3:
-                    // Async with Options URL Builder
-                    API.setProperty('picker', 'label', 'Async Picker (with options url builder)');
-                    API.modifyPickerConfig('picker', {
-                        format: '$name $test',
-                        optionsUrlBuilder: (query) => {
-                            return 'http://novo-elements-mock.getsandbox.com/users';
-                        }
-                    }, function (result) { result.test = 'Built with Options URL Builder!'; return result; });
-                    break;
-                case 4:
-                    // Async with Options Promise
-                    API.setProperty('picker', 'label', 'Async Picker (with options promise)');
-                    API.modifyPickerConfig('picker', {
-                        format: '$name $test',
-                        optionsPromise: function (query, http) {
-                            return new Promise(function (resolve, reject) {
-                                if (query && query.length) {
-                                    http
-                                        .get('http://novo-elements-mock.getsandbox.com/users')
-                                        .map(function (res) { return res.json() })
-                                        .map(function (results) {
-                                            return results.map(result => {
-                                                result.test = 'Built with Options Promise';
-                                                return result;
-                                            });
-                                        })
-                                        .subscribe(resolve, reject);
-                                } else {
-                                    resolve(['DEFAULT']);
-                                }
-                            });
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-        };
-        let globalsFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - globalsFunction'); // tslint:disable-line
-            API.setProperty(API.getActiveKey(), 'label', `${API.getProperty(API.getActiveKey(), 'label')} -- ${API.globals.TEST}`);
-        };
-        let asyncFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - asyncFunction'); // tslint:disable-line
-            if (API.getActiveKey() === 'async1') {
-                API.setLoading(API.getActiveKey(), true);
-                setTimeout(function () {
-                    API.setLoading(API.getActiveKey(), false);
-                }, 3000);
-            } else {
-                API.setLoading(API.getActiveKey(), true);
-                setTimeout(function () {
-                    API.setLoading(API.getActiveKey(), false);
-                }, 15000);
-            }
-        };
-        let confirmFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - confirmFunction'); // tslint:disable-line
-            if (API.getActiveKey() === 'confirm1') {
-                API.confirmChanges(API.getActiveKey());
-            } else {
-                API.confirmChanges(API.getActiveKey(), 'This is VERY serious!');
-            }
-        };
-        let addingRemovingFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - addingRemovingFunction'); // tslint:disable-line
-            // Control above field
-            API.addControl('cat', {
-                key: 'fieldAbove',
-                type: 'text',
-                label: 'Added Above Cat'
-            }, FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD, 'DEFAULT');
-            // Control below field
-            API.addControl('name', {
-                key: 'fieldBelow',
-                type: 'text',
-                label: 'Added Below Name'
-            }, FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD, ':)');
-            // Control at the top of the form
-            API.addControl('name', {
-                key: 'top',
-                type: 'text',
-                label: 'Added To The Very Top'
-            }, FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM, 'HIGHEST');
-            // Control at the bottom of the form
-            API.addControl('name', {
-                key: 'bottom',
-                type: 'text',
-                label: 'Added To The Very Bottom'
-            }, FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM, 'LOWEST');
-            // Remove the jersey color field
-            API.removeControl('jersey-color');
-        };
+                    .map(function(results) {
+                      return results.map((result) => {
+                        result.test = 'Built with Options Promise';
+                        return result;
+                      });
+                    })
+                    .subscribe(resolve, reject);
+                } else {
+                  resolve(['DEFAULT']);
+                }
+              });
+            },
+          });
+          break;
+        default:
+          break;
+      }
+    };
+    let globalsFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - globalsFunction'); // tslint:disable-line
+      API.setProperty(API.getActiveKey(), 'label', `${API.getProperty(API.getActiveKey(), 'label')} -- ${API.globals.TEST}`);
+    };
+    let asyncFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - asyncFunction'); // tslint:disable-line
+      if (API.getActiveKey() === 'async1') {
+        API.setLoading(API.getActiveKey(), true);
+        setTimeout(function() {
+          API.setLoading(API.getActiveKey(), false);
+        }, 3000);
+      } else {
+        API.setLoading(API.getActiveKey(), true);
+        setTimeout(function() {
+          API.setLoading(API.getActiveKey(), false);
+        }, 15000);
+      }
+    };
+    let confirmFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - confirmFunction'); // tslint:disable-line
+      if (API.getActiveKey() === 'confirm1') {
+        API.confirmChanges(API.getActiveKey());
+      } else {
+        API.confirmChanges(API.getActiveKey(), 'This is VERY serious!');
+      }
+    };
+    let addingRemovingFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - addingRemovingFunction'); // tslint:disable-line
+      // Control above field
+      API.addControl(
+        'cat',
+        {
+          key: 'fieldAbove',
+          type: 'text',
+          label: 'Added Above Cat',
+        },
+        FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD,
+        'DEFAULT',
+      );
+      // Control below field
+      API.addControl(
+        'name',
+        {
+          key: 'fieldBelow',
+          type: 'text',
+          label: 'Added Below Name',
+        },
+        FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD,
+        ':)',
+      );
+      // Control at the top of the form
+      API.addControl(
+        'name',
+        {
+          key: 'top',
+          type: 'text',
+          label: 'Added To The Very Top',
+        },
+        FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM,
+        'HIGHEST',
+      );
+      // Control at the bottom of the form
+      API.addControl(
+        'name',
+        {
+          key: 'bottom',
+          type: 'text',
+          label: 'Added To The Very Bottom',
+        },
+        FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM,
+        'LOWEST',
+      );
+      // Remove the jersey color field
+      API.removeControl('jersey-color');
+    };
 
-        let removeAddOnChangeFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - removeAddOnChangeFunction'); // tslint:disable-line
-            // Select control with a field interaction on change event
-            let currentValue = API.getActiveValue();
-            if (currentValue === 'Yes') {
-                API.removeControl('to-be-removed');
-            } else {
-                API.addControl('remove-select', {
-                    key: 'to-be-removed',
-                    name: 'to-be-removed',
-                    type: 'text',
-                    label: 'This field will be removed'
-                }, FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD);
-            }
-        }
-
-        let tooltipFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - tooltipFunction'); // tslint:disable-line
-            API.setTooltip(API.getActiveKey(), API.getActiveValue());
-        }
-
-        let tooltipUpdateFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - tooltipUpdateFunction'); // tslint:disable-line
-            API.getControl(this.controls.tooltip.tooltipControl.key).tooltipSize = API.getValue(this.controls.tooltip.tooltipSizeControl.key);
-            API.getControl(this.controls.tooltip.tooltipControl.key).tooltipPreline = API.getValue(this.controls.tooltip.tooltipPrelineControl.key);
-        }
-
-        // Validation Field Interactions
-        this.controls.validation.validationControl = new TextBoxControl({
-            type: 'number',
-            key: 'validation',
-            value: 5,
-            label: 'Validation Test',
-            description: 'Try to input a number larger then 10!',
-            interactions: [
-                { event: 'change', script: validationFunction, invokeOnInit: true }
-            ]
-        });
-        this.forms.validation = formUtils.toFormGroup([this.controls.validation.validationControl]);
-
-        // Required Field Interactions
-        this.controls.required.requiredControl = new TextBoxControl({
+    let removeAddOnChangeFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - removeAddOnChangeFunction'); // tslint:disable-line
+      // Select control with a field interaction on change event
+      let currentValue = API.getActiveValue();
+      if (currentValue === 'Yes') {
+        API.removeControl('to-be-removed');
+      } else {
+        API.addControl(
+          'remove-select',
+          {
+            key: 'to-be-removed',
+            name: 'to-be-removed',
             type: 'text',
-            key: 'required',
-            label: 'Test',
-            description: 'I may or may not be required, play with the checkbox below!'
-        });
-        this.controls.required.toggleControl = new CheckboxControl({
-            key: 'toggle',
-            label: 'Required?',
-            interactions: [
-                { event: 'change', script: requiredFunction }
-            ]
-        });
-        this.forms.required = formUtils.toFormGroup([
-            this.controls.required.requiredControl,
-            this.controls.required.toggleControl
-        ]);
+            label: 'This field will be removed',
+          },
+          FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD,
+        );
+      }
+    };
 
-        // Calculation Field Interactions
-        this.controls.calculation.aControl = new TextBoxControl({
-            type: 'number',
-            key: 'a',
-            label: 'A',
-            value: 1,
-            interactions: [
-                { event: 'change', invokeOnInit: false, script: calculationFunction }
-            ]
-        });
-        this.controls.calculation.bControl = new TextBoxControl({
-            type: 'number',
-            key: 'b',
-            label: 'B',
-            value: 1,
-            interactions: [
-                { event: 'change', invokeOnInit: false, script: calculationFunction }
-            ]
-        });
-        this.controls.calculation.sumControl = new TextBoxControl({
-            type: 'number',
-            key: 'sum',
-            label: 'Sum',
-            description: 'I am automatically set when you type in the boxes above me!',
-            readOnly: true
-        });
-        this.controls.calculation.dateModifiedControl = new DateTimeControl({
-            key: 'date',
-            label: 'Date Last Modified',
-            value: new Date()
-        });
-        this.forms.calculation = formUtils.toFormGroup([
-            this.controls.calculation.aControl,
-            this.controls.calculation.bControl,
-            this.controls.calculation.sumControl,
-            this.controls.calculation.dateModifiedControl
-        ]);
+    let tooltipFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - tooltipFunction'); // tslint:disable-line
+      API.setTooltip(API.getActiveKey(), API.getActiveValue());
+    };
 
-        // Hide/Show Field Interactions
-        this.controls.hideShow.textControl = new TextBoxControl({
-            type: 'text',
-            key: 'text',
-            required: true,
-            label: 'MyField'
-        });
-        this.controls.hideShow.text2Control = new TextBoxControl({
-            type: 'text',
-            key: 'text2',
-            label: 'MyField'
-        });
-        this.controls.hideShow.toggleControl = new CheckboxControl({
-            key: 'toggle',
-            label: 'Hidden?',
-            description: 'I will toggle the above field to display or not!',
-            interactions: [
-                { event: 'change', script: hideShowFunction }
-            ]
-        });
-        this.forms.hideShow = formUtils.toFormGroup([
-            this.controls.hideShow.textControl,
-            this.controls.hideShow.text2Control,
-            this.controls.hideShow.toggleControl
-        ]);
+    let tooltipUpdateFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - tooltipUpdateFunction'); // tslint:disable-line
+      API.getControl(this.controls.tooltip.tooltipControl.key).tooltipSize = API.getValue(this.controls.tooltip.tooltipSizeControl.key);
+      API.getControl(this.controls.tooltip.tooltipControl.key).tooltipPreline = API.getValue(
+        this.controls.tooltip.tooltipPrelineControl.key,
+      );
+    };
 
-        // Enable/Disable Field Interactions
-        this.controls.enableDisable.textControl = new TextBoxControl({
-            type: 'text',
-            key: 'text',
-            label: 'MyField'
-        });
-        this.controls.enableDisable.toggleControl = new CheckboxControl({
-            key: 'toggle',
-            label: 'Disable?',
-            description: 'I will disable the above field!',
-            interactions: [
-                { event: 'change', script: enableDisableFunction }
-            ]
-        });
-        this.forms.enableDisable = formUtils.toFormGroup([
-            this.controls.enableDisable.textControl,
-            this.controls.enableDisable.toggleControl
-        ]);
+    // Validation Field Interactions
+    this.controls.validation.validationControl = new TextBoxControl({
+      type: 'number',
+      key: 'validation',
+      value: 5,
+      label: 'Validation Test',
+      description: 'Try to input a number larger then 10!',
+      interactions: [{ event: 'change', script: validationFunction, invokeOnInit: true }],
+    });
+    this.forms.validation = formUtils.toFormGroup([this.controls.validation.validationControl]);
 
-        // Messaging Field Interactions
-        this.controls.messaging.toastControl = new TextBoxControl({
-            type: 'text',
-            key: 'toast',
-            label: 'Toast',
-            description: 'I will trigger a toast as you change the value!',
-            interactions: [
-                { event: 'change', script: messagingFunction }
-            ]
-        });
-        this.controls.messaging.tipControl = new TextBoxControl({
-            type: 'text',
-            key: 'tip',
-            label: 'Tip',
-            description: 'I will trigger a tip well as you change the value!',
-            interactions: [
-                { event: 'change', script: messagingFunction }
-            ]
-        });
-        this.controls.messaging.promptControl = new TextBoxControl({
-            type: 'text',
-            key: 'prompt',
-            label: 'Prompt User of Downstream Changes',
-            interactions: [
-                { event: 'change', script: messagingFunction }
-            ]
-        });
-        this.forms.messaging = formUtils.toFormGroup([
-            this.controls.messaging.toastControl,
-            this.controls.messaging.tipControl,
-            this.controls.messaging.promptControl
-        ]);
+    // Required Field Interactions
+    this.controls.required.requiredControl = new TextBoxControl({
+      type: 'text',
+      key: 'required',
+      label: 'Test',
+      description: 'I may or may not be required, play with the checkbox below!',
+    });
+    this.controls.required.toggleControl = new CheckboxControl({
+      key: 'toggle',
+      label: 'Required?',
+      interactions: [{ event: 'change', script: requiredFunction }],
+    });
+    this.forms.required = formUtils.toFormGroup([this.controls.required.requiredControl, this.controls.required.toggleControl]);
 
-        // Modify Options Field Interactions
-        this.controls.modifyOptions.selectControl = new SelectControl({
-            key: 'select',
-            label: 'Select',
-            options: ['A', 'B', 'C']
-        });
-        this.controls.modifyOptions.pickerControl = new PickerControl({
-            key: 'picker',
-            label: 'Static Picker',
-            config: {
-                options: ['A', 'B', 'C']
-            }
-        });
-        this.controls.modifyOptions.toggleControl = new CheckboxControl({
-            key: 'toggle',
-            label: 'Add Option?',
-            description: 'I will add options to the above field!',
-            interactions: [
-                { event: 'change', script: modifyOptionsAddFunction }
-            ]
-        });
-        this.controls.modifyOptions.makePickerAsyncControl = new SelectControl({
-            key: 'async',
-            label: 'Async Picker?',
-            description: 'I will make the picker now hit a service!',
-            value: 1,
-            options: [
-                { label: 'Not Async', value: 1 },
-                { label: 'Async With Options URL', value: 2 },
-                { label: 'Async With Options URL Builder', value: 3 },
-                { label: 'Async With Options Promise', value: 4 },
-            ],
-            interactions: [
-                { event: 'change', script: modifyOptionsAsyncFunction }
-            ]
-        });
-        this.forms.modifyOptions = formUtils.toFormGroup([
-            this.controls.modifyOptions.selectControl,
-            this.controls.modifyOptions.pickerControl,
-            this.controls.modifyOptions.toggleControl,
-            this.controls.modifyOptions.makePickerAsyncControl
-        ]);
+    // Calculation Field Interactions
+    this.controls.calculation.aControl = new TextBoxControl({
+      type: 'number',
+      key: 'a',
+      label: 'A',
+      value: 1,
+      interactions: [{ event: 'change', invokeOnInit: false, script: calculationFunction }],
+    });
+    this.controls.calculation.bControl = new TextBoxControl({
+      type: 'number',
+      key: 'b',
+      label: 'B',
+      value: 1,
+      interactions: [{ event: 'change', invokeOnInit: false, script: calculationFunction }],
+    });
+    this.controls.calculation.sumControl = new TextBoxControl({
+      type: 'number',
+      key: 'sum',
+      label: 'Sum',
+      description: 'I am automatically set when you type in the boxes above me!',
+      readOnly: true,
+    });
+    this.controls.calculation.dateModifiedControl = new DateTimeControl({
+      key: 'date',
+      label: 'Date Last Modified',
+      value: new Date(),
+    });
+    this.forms.calculation = formUtils.toFormGroup([
+      this.controls.calculation.aControl,
+      this.controls.calculation.bControl,
+      this.controls.calculation.sumControl,
+      this.controls.calculation.dateModifiedControl,
+    ]);
 
-        // Global Field Interactions
-        this.controls.globals.globalControl = new TextBoxControl({
-            type: 'number',
-            key: 'global',
-            value: 5,
-            label: 'Form Input',
-            description: 'The label gets updated on load to use a global!',
-            interactions: [
-                { event: 'init', script: globalsFunction, invokeOnInit: true }
-            ]
-        });
-        this.forms.globals = formUtils.toFormGroup([this.controls.globals.globalControl]);
+    // Hide/Show Field Interactions
+    this.controls.hideShow.textControl = new TextBoxControl({
+      type: 'text',
+      key: 'text',
+      required: true,
+      label: 'MyField',
+    });
+    this.controls.hideShow.text2Control = new TextBoxControl({
+      type: 'text',
+      key: 'text2',
+      label: 'MyField',
+    });
+    this.controls.hideShow.toggleControl = new CheckboxControl({
+      key: 'toggle',
+      label: 'Hidden?',
+      description: 'I will toggle the above field to display or not!',
+      interactions: [{ event: 'change', script: hideShowFunction }],
+    });
+    this.forms.hideShow = formUtils.toFormGroup([
+      this.controls.hideShow.textControl,
+      this.controls.hideShow.text2Control,
+      this.controls.hideShow.toggleControl,
+    ]);
 
-        // Async Interactions
-        this.controls.async.async1Control = new TextBoxControl({
-            type: 'text',
-            key: 'async1',
-            value: 5,
-            label: 'Async Validation',
-            description: 'As you finish typing, the async check will mark the form as invalid',
-            interactions: [
-                { event: 'change', script: asyncFunction }
-            ]
-        });
-        this.controls.async.async2Control = new TextBoxControl({
-            type: 'text',
-            key: 'async2',
-            value: 5,
-            label: 'Async Validation (takes too long)',
-            description: 'This one will take too long and trigger the default timeout (10s)',
-            interactions: [
-                { event: 'change', script: asyncFunction }
-            ]
-        });
-        this.forms.async = formUtils.toFormGroup([
-            this.controls.async.async1Control,
-            this.controls.async.async2Control
-        ]);
+    // Enable/Disable Field Interactions
+    this.controls.enableDisable.textControl = new TextBoxControl({
+      type: 'text',
+      key: 'text',
+      label: 'MyField',
+    });
+    this.controls.enableDisable.toggleControl = new CheckboxControl({
+      key: 'toggle',
+      label: 'Disable?',
+      description: 'I will disable the above field!',
+      interactions: [{ event: 'change', script: enableDisableFunction }],
+    });
+    this.forms.enableDisable = formUtils.toFormGroup([this.controls.enableDisable.textControl, this.controls.enableDisable.toggleControl]);
 
-        // Confirm Interactions
-        this.controls.confirm.confirm1Control = new TextBoxControl({
-            type: 'text',
-            key: 'confirm1',
-            value: 'Hello!',
-            label: 'Prompt!',
-            description: 'As you take focus out of this field you will be prompted for changes!',
-            interactions: [
-                { event: 'change', script: confirmFunction }
-            ]
-        });
-        this.controls.confirm.confirm2Control = new TextBoxControl({
-            type: 'text',
-            key: 'confirm2',
-            value: 'Another!',
-            label: 'Custom Promp!',
-            description: 'You can provide a custom message!',
-            interactions: [
-                { event: 'change', script: confirmFunction }
-            ]
-        });
-        this.forms.confirm = formUtils.toFormGroup([
-            this.controls.confirm.confirm1Control,
-            this.controls.confirm.confirm2Control
-        ]);
+    // Messaging Field Interactions
+    this.controls.messaging.toastControl = new TextBoxControl({
+      type: 'text',
+      key: 'toast',
+      label: 'Toast',
+      description: 'I will trigger a toast as you change the value!',
+      interactions: [{ event: 'change', script: messagingFunction }],
+    });
+    this.controls.messaging.tipControl = new TextBoxControl({
+      type: 'text',
+      key: 'tip',
+      label: 'Tip',
+      description: 'I will trigger a tip well as you change the value!',
+      interactions: [{ event: 'change', script: messagingFunction }],
+    });
+    this.controls.messaging.promptControl = new TextBoxControl({
+      type: 'text',
+      key: 'prompt',
+      label: 'Prompt User of Downstream Changes',
+      interactions: [{ event: 'change', script: messagingFunction }],
+    });
+    this.forms.messaging = formUtils.toFormGroup([
+      this.controls.messaging.toastControl,
+      this.controls.messaging.tipControl,
+      this.controls.messaging.promptControl,
+    ]);
 
-        // Adding / Removing Interactions
-        this.controls.addingRemoving = formUtils.toFieldSets(MockMetaHeaders, '$ USD', {}, { token: 'TOKEN', military: true });
-        this.controls.addingRemoving[2].controls[0].interactions = [
-            { event: 'change', script: removeAddOnChangeFunction }
-        ]
-        this.controls.addingRemoving[0].controls[0].interactions = [
-            { event: 'init', script: addingRemovingFunction }
-        ];
-        this.forms.addingRemoving = formUtils.toFormGroupFromFieldset(this.controls.addingRemoving);
+    // Modify Options Field Interactions
+    this.controls.modifyOptions.selectControl = new SelectControl({
+      key: 'select',
+      label: 'Select',
+      options: ['A', 'B', 'C'],
+    });
+    this.controls.modifyOptions.pickerControl = new PickerControl({
+      key: 'picker',
+      label: 'Static Picker',
+      config: {
+        options: ['A', 'B', 'C'],
+      },
+    });
+    this.controls.modifyOptions.toggleControl = new CheckboxControl({
+      key: 'toggle',
+      label: 'Add Option?',
+      description: 'I will add options to the above field!',
+      interactions: [{ event: 'change', script: modifyOptionsAddFunction }],
+    });
+    this.controls.modifyOptions.makePickerAsyncControl = new SelectControl({
+      key: 'async',
+      label: 'Async Picker?',
+      description: 'I will make the picker now hit a service!',
+      value: 1,
+      options: [
+        { label: 'Not Async', value: 1 },
+        { label: 'Async With Options URL', value: 2 },
+        { label: 'Async With Options URL Builder', value: 3 },
+        { label: 'Async With Options Promise', value: 4 },
+      ],
+      interactions: [{ event: 'change', script: modifyOptionsAsyncFunction }],
+    });
+    this.forms.modifyOptions = formUtils.toFormGroup([
+      this.controls.modifyOptions.selectControl,
+      this.controls.modifyOptions.pickerControl,
+      this.controls.modifyOptions.toggleControl,
+      this.controls.modifyOptions.makePickerAsyncControl,
+    ]);
 
-        // Tooltip Field Interactions
-        this.controls.tooltip.tooltipControl = new TextBoxControl({
-            type: 'text',
-            key: 'toolTipValue',
-            label: 'Tooltip',
-            description: 'I will add a tooltip to this control as a value is typed',
-            interactions: [
-                { event: 'change', script: tooltipFunction }
-            ]
-        });
+    // Global Field Interactions
+    this.controls.globals.globalControl = new TextBoxControl({
+      type: 'number',
+      key: 'global',
+      value: 5,
+      label: 'Form Input',
+      description: 'The label gets updated on load to use a global!',
+      interactions: [{ event: 'init', script: globalsFunction, invokeOnInit: true }],
+    });
+    this.forms.globals = formUtils.toFormGroup([this.controls.globals.globalControl]);
 
-        this.controls.tooltip.tooltipSizeControl = new TilesControl({
-            key: 'tooltipSize',
-            label: 'Tooltip Size',
-            description: 'Changing me will set a fixed width on the tooltip',
-            options: [{ value: 'small', label: 'Small' }, { value: 'medium', label: 'Medium' }, { value: 'large', label: 'Large' } ],
-            interactions: [
-                { event: 'change', script: tooltipUpdateFunction }
-            ]
-        });
+    // Async Interactions
+    this.controls.async.async1Control = new TextBoxControl({
+      type: 'text',
+      key: 'async1',
+      value: 5,
+      label: 'Async Validation',
+      description: 'As you finish typing, the async check will mark the form as invalid',
+      interactions: [{ event: 'change', script: asyncFunction }],
+    });
+    this.controls.async.async2Control = new TextBoxControl({
+      type: 'text',
+      key: 'async2',
+      value: 5,
+      label: 'Async Validation (takes too long)',
+      description: 'This one will take too long and trigger the default timeout (10s)',
+      interactions: [{ event: 'change', script: asyncFunction }],
+    });
+    this.forms.async = formUtils.toFormGroup([this.controls.async.async1Control, this.controls.async.async2Control]);
 
-        this.controls.tooltip.tooltipPrelineControl = new TilesControl({
-            key: 'tooltipPreline',
-            label: 'Tooltip Multiline',
-            description: 'Should the tooltip be multiple lines tall or all on one line?',
-            options: [ { value: true, label: 'Yes'}, { value: false, label: 'No'} ],
-            interactions: [
-                { event: 'change', script: tooltipUpdateFunction }
-            ]
-        });
+    // Confirm Interactions
+    this.controls.confirm.confirm1Control = new TextBoxControl({
+      type: 'text',
+      key: 'confirm1',
+      value: 'Hello!',
+      label: 'Prompt!',
+      description: 'As you take focus out of this field you will be prompted for changes!',
+      interactions: [{ event: 'change', script: confirmFunction }],
+    });
+    this.controls.confirm.confirm2Control = new TextBoxControl({
+      type: 'text',
+      key: 'confirm2',
+      value: 'Another!',
+      label: 'Custom Promp!',
+      description: 'You can provide a custom message!',
+      interactions: [{ event: 'change', script: confirmFunction }],
+    });
+    this.forms.confirm = formUtils.toFormGroup([this.controls.confirm.confirm1Control, this.controls.confirm.confirm2Control]);
 
-        this.forms.tooltip = formUtils.toFormGroup([this.controls.tooltip.tooltipControl, this.controls.tooltip.tooltipSizeControl, this.controls.tooltip.tooltipPrelineControl]);
+    // Adding / Removing Interactions
+    this.controls.addingRemoving = formUtils.toFieldSets(MockMetaHeaders, '$ USD', {}, { token: 'TOKEN', military: true });
+    this.controls.addingRemoving[2].controls[0].interactions = [{ event: 'change', script: removeAddOnChangeFunction }];
+    this.controls.addingRemoving[0].controls[0].interactions = [{ event: 'init', script: addingRemovingFunction }];
+    this.forms.addingRemoving = formUtils.toFormGroupFromFieldset(this.controls.addingRemoving);
 
-        // Snippets
-        this.snippets.validation = {
-            'Template': ValidationTpl,
-            'Field Interaction Script': `
+    // Tooltip Field Interactions
+    this.controls.tooltip.tooltipControl = new TextBoxControl({
+      type: 'text',
+      key: 'toolTipValue',
+      label: 'Tooltip',
+      description: 'I will add a tooltip to this control as a value is typed',
+      interactions: [{ event: 'change', script: tooltipFunction }],
+    });
+
+    this.controls.tooltip.tooltipSizeControl = new TilesControl({
+      key: 'tooltipSize',
+      label: 'Tooltip Size',
+      description: 'Changing me will set a fixed width on the tooltip',
+      options: [{ value: 'small', label: 'Small' }, { value: 'medium', label: 'Medium' }, { value: 'large', label: 'Large' }],
+      interactions: [{ event: 'change', script: tooltipUpdateFunction }],
+    });
+
+    this.controls.tooltip.tooltipPrelineControl = new TilesControl({
+      key: 'tooltipPreline',
+      label: 'Tooltip Multiline',
+      description: 'Should the tooltip be multiple lines tall or all on one line?',
+      options: [{ value: true, label: 'Yes' }, { value: false, label: 'No' }],
+      interactions: [{ event: 'change', script: tooltipUpdateFunction }],
+    });
+
+    this.forms.tooltip = formUtils.toFormGroup([
+      this.controls.tooltip.tooltipControl,
+      this.controls.tooltip.tooltipSizeControl,
+      this.controls.tooltip.tooltipPrelineControl,
+    ]);
+
+    // Snippets
+    this.snippets.validation = {
+      Template: ValidationTpl,
+      'Field Interaction Script': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - validationFunction'); // tslint:disable-line
     let activeValue = API.getActiveValue();
@@ -746,11 +745,11 @@ export class FieldInteractionsDemoComponent {
         API.markAsInvalid(API.getActiveKey(), 'Too high! Make it a lot lower!!');
     }
 };
-            `
-        };
-        this.snippets.required = {
-            'Template': RequiredTpl,
-            'Field Interaction Script': `
+            `,
+    };
+    this.snippets.required = {
+      Template: RequiredTpl,
+      'Field Interaction Script': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - requiredFunction'); // tslint:disable-line
     let activeValue = API.getActiveValue();
@@ -760,11 +759,11 @@ export class FieldInteractionsDemoComponent {
         API.setRequired('required', false);
     }
 };
-            `
-        };
-        this.snippets.calculation = {
-            'Template': CalculationTpl,
-            'Field Interaction Script': `
+            `,
+    };
+    this.snippets.calculation = {
+      Template: CalculationTpl,
+      'Field Interaction Script': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - calculationFunction'); // tslint:disable-line
     let a = Number(API.getValue('a'));
@@ -772,11 +771,11 @@ export class FieldInteractionsDemoComponent {
     API.setValue('sum', a + b);
     API.setValue('date', new Date());
 };
-            `
-        };
-        this.snippets.hideShow = {
-            'Template': HideShowTpl,
-            'Field Interaction Script': `
+            `,
+    };
+    this.snippets.hideShow = {
+      Template: HideShowTpl,
+      'Field Interaction Script': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - hideShowFunction'); // tslint:disable-line
     let activeValue = API.getActiveValue();
@@ -786,11 +785,11 @@ export class FieldInteractionsDemoComponent {
         API.hide('text');
     }
 };
-            `
-        };
-        this.snippets.enableDisable = {
-            'Template': EnableDisableTpl,
-            'Field Interaction Script': `
+            `,
+    };
+    this.snippets.enableDisable = {
+      Template: EnableDisableTpl,
+      'Field Interaction Script': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - enableDisableFunction'); // tslint:disable-line
     let currentValue = API.getActiveValue();
@@ -800,11 +799,11 @@ export class FieldInteractionsDemoComponent {
         API.disable('text');
     }
 };
-            `
-        };
-        this.snippets.messaging = {
-            'Template': MessagingTpl,
-            'Field Interaction Script': `
+            `,
+    };
+    this.snippets.messaging = {
+      Template: MessagingTpl,
+      'Field Interaction Script': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - messagingFunction'); // tslint:disable-line
     if (API.getActiveKey() === 'toast') {
@@ -816,11 +815,11 @@ export class FieldInteractionsDemoComponent {
         API.displayTip(API.getActiveKey(), API.getActiveValue(), 'info', true);
     }
 };
-            `
-        };
-        this.snippets.modifyOptions = {
-            'Template': ModifyOptionsTpl,
-            'Field Interaction Script (add)': `
+            `,
+    };
+    this.snippets.modifyOptions = {
+      Template: ModifyOptionsTpl,
+      'Field Interaction Script (add)': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - modifyOptionsAddFunction'); // tslint:disable-line
     let currentValue = API.getActiveValue();
@@ -834,7 +833,7 @@ export class FieldInteractionsDemoComponent {
     }
 };
             `,
-            'Field Interaction Script (async)': `
+      'Field Interaction Script (async)': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - modifyOptionsAsyncFunction'); // tslint:disable-line
     let currentValue = API.getActiveValue();
@@ -893,20 +892,20 @@ export class FieldInteractionsDemoComponent {
             break;
     }
 };
-            `
-        };
-        this.snippets.globals = {
-            'Template': GlobalsTpl,
-            'Field Interaction Script': `
+            `,
+    };
+    this.snippets.globals = {
+      Template: GlobalsTpl,
+      'Field Interaction Script': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - globalsFunction'); // tslint:disable-line
     API.setProperty(API.getActiveKey(), 'label', API.getProperty(API.getActiveKey(), 'label') + API.globals.TEST);
 };
-            `
-        };
-        this.snippets.async = {
-            'Template': AsyncTpl,
-            'Field Interaction Script': `
+            `,
+    };
+    this.snippets.async = {
+      Template: AsyncTpl,
+      'Field Interaction Script': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - asyncFunction'); // tslint:disable-line
     if (API.getActiveKey() === 'async1') {
@@ -921,11 +920,11 @@ export class FieldInteractionsDemoComponent {
         }, 15000);
     }
 };
-            `
-        };
-        this.snippets.confirm = {
-            'Template': ConfirmTpl,
-            'Field Interaction Script': `
+            `,
+    };
+    this.snippets.confirm = {
+      Template: ConfirmTpl,
+      'Field Interaction Script': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - confirmFunction'); // tslint:disable-line
     if (API.getActiveKey() === 'confirm1') {
@@ -934,11 +933,11 @@ export class FieldInteractionsDemoComponent {
         API.confirmChanges(API.getActiveKey(), 'This is VERY serious!');
     }
 };
-            `
-        };
-        this.snippets.addingRemoving = {
-            'Template': AddingRemovingTpl,
-            'Field Interaction Script (init)': `
+            `,
+    };
+    this.snippets.addingRemoving = {
+      Template: AddingRemovingTpl,
+      'Field Interaction Script (init)': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - addingRemovingFunction'); // tslint:disable-line
     // Control above field
@@ -969,7 +968,7 @@ export class FieldInteractionsDemoComponent {
     API.removeControl('jersey-color');
 };
             `,
-            'Field Interaction Script (change)': `
+      'Field Interaction Script (change)': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - removeAddOnChangeFunction'); // tslint:disable-line
     // Select control with a field interaction on change event
@@ -985,16 +984,16 @@ export class FieldInteractionsDemoComponent {
         }, FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD);
     }
 }
-        `
-        };
+        `,
+    };
 
-        this.snippets.tooltip = {
-            'Template': TooltipTpl,
-            'Field Interaction Script (change)': `
+    this.snippets.tooltip = {
+      Template: TooltipTpl,
+      'Field Interaction Script (change)': `
 (API: FieldInteractionApi) => {
     console.log('[FieldInteractionDemo] - tooltipFunction'); // tslint:disable-line
     API.setTooltip(API.getActiveKey(), API.getActiveValue());
-}`
-            };
-    }
+}`,
+    };
+  }
 }

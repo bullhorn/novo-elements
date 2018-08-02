@@ -206,7 +206,7 @@ export class ArrayCollection<T> implements Collection<T> {
    *
    * @memberOf ArrayCollection
    */
-  //invalidateItem(item:any):void {}
+  // invalidateItem(item:any):void {}
 
   /**
    * Invalidates the item at the specified index.
@@ -215,7 +215,7 @@ export class ArrayCollection<T> implements Collection<T> {
    *
    * @memberOf ArrayCollection
    */
-  //invalidateItemAt(index:number):void {}
+  // invalidateItemAt(index:number):void {}
 
   /**
    * Appends the specified data into the data that the data provider contains and removes any duplicate items.

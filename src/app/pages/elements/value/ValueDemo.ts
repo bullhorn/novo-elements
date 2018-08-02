@@ -1,6 +1,6 @@
 // NG2
 import { Component } from '@angular/core';
-//Vendor
+// Vendor
 import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from './../../../../platform/index';
 // APP
 let SimpleValueDemoTpl = require('./templates/SimpleValueDemo.html');
@@ -64,154 +64,163 @@ const template = `
 `;
 
 @Component({
-    selector: 'value-demo',
-    template: template
+  selector: 'value-demo',
+  template: template,
 })
 export class ValueDemoComponent {
-    private SimpleValueDemoTpl: string = SimpleValueDemoTpl;
-    private CategoryValueDemoTpl: string = CategoryValueDemoTpl;
-    private IconRightValueDemoTpl: string = IconRightValueDemoTpl;
-    private CorporateUserValueDemoTpl: string = CorporateUserValueDemoTpl;
-    private FormatterValueDemoTpl: string = FormatterValueDemoTpl;
-    private ExternalLinkValueDemoTpl: string = ExternalLinkValueDemoTpl;
-    private DateTimeValueDemoTpl: string = DateTimeValueDemoTpl;
-    private AddressValueDemoTpl: string = AddressValueDemoTpl;
-    private AssociatedValueDemoTpl: string = AssociatedValueDemoTpl;
-    private EntityListDemoTpl: string = EntityListDemoTpl;
-    private toggleCount: number = 0;
-    private checked: boolean = true;
-    simpleData = 1234567890;
-    simpleMeta = {
-        type: 'SCALAR',
-        name: 'phone1',
-        label: 'PH #'
-    };
-    simpleTheme = NOVO_VALUE_THEME.MOBILE;
-    categoryData = {
-        value: 'stuff',
-        label: 'Stuff Category'
-    };
-    categoryMeta = {
-        type: 'TO_ONE',
-        name: 'category',
-        label: 'Category',
-        associatedEntity: {
-            entity: 'Category'
-        }
-    };
-    iconRightData = 'Approved';
-    iconRightMeta = {
-        type: 'SCALAR',
-        options: [{
-            value: 'Approved',
-            label: 'Approved'
-        }],
-        name: 'status',
-        label: 'Status',
-        icons: [{
-            iconCls: 'next',
-            onIconClick: (data, meta) => {
-                window.alert('hey there');
-            }
-            }, {
-            iconCls: 'close',
-            onIconClick: '',
-        }]
-    };
-    corporateUserData = {
-        id: 123,
-        firstName: 'Jack',
-        lastName: 'White'
-    };
-    corporateUserMeta = {
-        type: 'TO_ONE',
-        name: 'user',
-        label: 'Internal User',
-        associatedEntity: {
-            entity: 'CorporateUser'
-        }
-    };
-    formatterData = {
-        id: 123
-    };
-    formatterMeta = {
-        name: 'Placement',
-        label: 'Placement',
-        associatedEntity: {
-            entity: 'Placement'
+  private SimpleValueDemoTpl: string = SimpleValueDemoTpl;
+  private CategoryValueDemoTpl: string = CategoryValueDemoTpl;
+  private IconRightValueDemoTpl: string = IconRightValueDemoTpl;
+  private CorporateUserValueDemoTpl: string = CorporateUserValueDemoTpl;
+  private FormatterValueDemoTpl: string = FormatterValueDemoTpl;
+  private ExternalLinkValueDemoTpl: string = ExternalLinkValueDemoTpl;
+  private DateTimeValueDemoTpl: string = DateTimeValueDemoTpl;
+  private AddressValueDemoTpl: string = AddressValueDemoTpl;
+  private AssociatedValueDemoTpl: string = AssociatedValueDemoTpl;
+  private EntityListDemoTpl: string = EntityListDemoTpl;
+  private toggleCount: number = 0;
+  private checked: boolean = true;
+  simpleData = 1234567890;
+  simpleMeta = {
+    type: 'SCALAR',
+    name: 'phone1',
+    label: 'PH #',
+  };
+  simpleTheme = NOVO_VALUE_THEME.MOBILE;
+  categoryData = {
+    value: 'stuff',
+    label: 'Stuff Category',
+  };
+  categoryMeta = {
+    type: 'TO_ONE',
+    name: 'category',
+    label: 'Category',
+    associatedEntity: {
+      entity: 'Category',
+    },
+  };
+  iconRightData = 'Approved';
+  iconRightMeta = {
+    type: 'SCALAR',
+    options: [
+      {
+        value: 'Approved',
+        label: 'Approved',
+      },
+    ],
+    name: 'status',
+    label: 'Status',
+    icons: [
+      {
+        iconCls: 'next',
+        onIconClick: (data, meta) => {
+          window.alert('hey there');
         },
-        formatter: (value, args) => {
-            return `${args.label} #${value && value.id || ''}`
-        }
-    };
-    externalLinkData = 'www.bullhorn.com';
-    externalLinkMeta = {
-        name: 'companyUrl',
-        label: 'Company URL'
-    };
-    dateTimeValueData = (new Date()).getTime();
-    dateTimeValueMeta = {
-        dataSpecialization: 'DATETIME',
-        label: 'Date'
-    }
-    addressValueData = {
-        address1: '100 Summer Street',
-        city: 'Boston',
-        state: 'MA',
-        zip: '02143',
-        country: {
-            name: 'United States'
-        }
-    };
-    addressValueMeta = {
-        dataType: 'Address',
-        type: 'Address',
-        label: 'Address',
-        name: 'address'
-    };
-    associatedValueData = {
+      },
+      {
+        iconCls: 'close',
+        onIconClick: '',
+      },
+    ],
+  };
+  corporateUserData = {
+    id: 123,
+    firstName: 'Jack',
+    lastName: 'White',
+  };
+  corporateUserMeta = {
+    type: 'TO_ONE',
+    name: 'user',
+    label: 'Internal User',
+    associatedEntity: {
+      entity: 'CorporateUser',
+    },
+  };
+  formatterData = {
+    id: 123,
+  };
+  formatterMeta = {
+    name: 'Placement',
+    label: 'Placement',
+    associatedEntity: {
+      entity: 'Placement',
+    },
+    formatter: (value, args) => {
+      return `${args.label} #${(value && value.id) || ''}`;
+    },
+  };
+  externalLinkData = 'www.bullhorn.com';
+  externalLinkMeta = {
+    name: 'companyUrl',
+    label: 'Company URL',
+  };
+  dateTimeValueData = new Date().getTime();
+  dateTimeValueMeta = {
+    dataSpecialization: 'DATETIME',
+    label: 'Date',
+  };
+  addressValueData = {
+    address1: '100 Summer Street',
+    city: 'Boston',
+    state: 'MA',
+    zip: '02143',
+    country: {
+      name: 'United States',
+    },
+  };
+  addressValueMeta = {
+    dataType: 'Address',
+    type: 'Address',
+    label: 'Address',
+    name: 'address',
+  };
+  associatedValueData = {
+    id: 1,
+    firstName: 'Alice',
+    lastName: 'Wonderland',
+  };
+  associatedValueMeta = {
+    type: 'TO_ONE',
+    name: 'owner',
+    label: 'Owner',
+    associatedEntity: {
+      entity: 'CorporateUser',
+    },
+  };
+  entityListData = {
+    data: [
+      {
         id: 1,
-        firstName: 'Alice',
-        lastName: 'Wonderland'
-    };
-    associatedValueMeta = {
-        type: 'TO_ONE',
-        name: 'owner',
-        label: 'Owner',
-        associatedEntity: {
-            entity: 'CorporateUser'
-        }
-    };
-    entityListData = {
-        data: [{
-            id: 1,
-            firstName: 'George',
-            lastName: 'Washington',
-            personSubtype: 'Candidate',
-            openLink: (data) => {},
-        }, {
-            id: 2,
-            firstName: 'John',
-            lastName: 'Adams',
-            personSubtype: 'ClientContact',
-            openLink: (data) => {},
-        }, {
-            id: 3,
-            firstName: 'Abraham',
-            lastName: 'Lincoln',
-            personSubtype: 'Lead',
-            openLink: (data) => {},
-        }],
-    };
-    entityListMeta = {
-        type: 'TO_MANY',
-        name: 'guests',
-        label: 'Attendees',
-        associatedEntity: {
-            entity: 'CorporateUser'
-        }
-    };
-    increment() {
-        this.toggleCount++;
-    }
+        firstName: 'George',
+        lastName: 'Washington',
+        personSubtype: 'Candidate',
+        openLink: (data) => {},
+      },
+      {
+        id: 2,
+        firstName: 'John',
+        lastName: 'Adams',
+        personSubtype: 'ClientContact',
+        openLink: (data) => {},
+      },
+      {
+        id: 3,
+        firstName: 'Abraham',
+        lastName: 'Lincoln',
+        personSubtype: 'Lead',
+        openLink: (data) => {},
+      },
+    ],
+  };
+  entityListMeta = {
+    type: 'TO_MANY',
+    name: 'guests',
+    label: 'Attendees',
+    associatedEntity: {
+      entity: 'CorporateUser',
+    },
+  };
+  increment() {
+    this.toggleCount++;
+  }
 }

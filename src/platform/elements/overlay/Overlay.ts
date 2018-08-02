@@ -44,8 +44,10 @@ import { filter, first, switchMap } from 'rxjs/operators';
 export class NovoOverlayTemplateComponent implements OnDestroy {
   public id: string = `novo-overlay-${Date.now()}`;
 
-  @ViewChild(TemplateRef) public template: TemplateRef<any>;
-  @ViewChild('panel') public panel: ElementRef;
+  @ViewChild(TemplateRef)
+  public template: TemplateRef<any>;
+  @ViewChild('panel')
+  public panel: ElementRef;
 
   @Input()
   public position:
@@ -60,13 +62,19 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     | 'top-left'
     | 'top-right' =
     'default';
-  @Input() public scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
-  @Input() public width: number;
-  @Input() public height: number;
-  @Input() public closeOnSelect: boolean = true;
+  @Input()
+  public scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
+  @Input()
+  public width: number;
+  @Input()
+  public height: number;
+  @Input()
+  public closeOnSelect: boolean = true;
 
-  @Output() public select: EventEmitter<any> = new EventEmitter();
-  @Output() public closing: EventEmitter<any> = new EventEmitter();
+  @Output()
+  public select: EventEmitter<any> = new EventEmitter();
+  @Output()
+  public closing: EventEmitter<any> = new EventEmitter();
 
   public overlayRef: OverlayRef | null;
   public portal: TemplatePortal<any>;

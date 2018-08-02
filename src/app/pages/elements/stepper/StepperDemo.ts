@@ -13,7 +13,7 @@ const template = `
     <h5>Horizontal</h5>
     <div class="example slides-demo">${HorizontalStepperDemoTpl}</div>
     <code-snippet [code]="HorizontalStepperDemoTpl"></code-snippet>
-    
+
     <h5>Vertical</h5>
     <div class="example slides-demo">${VerticalStepperDemoTpl}</div>
     <code-snippet [code]="VerticalStepperDemoTpl"></code-snippet>
@@ -21,29 +21,29 @@ const template = `
 `;
 
 @Component({
-    selector: 'stepper-demo',
-    template: template
+  selector: 'stepper-demo',
+  template: template,
 })
 export class StepperDemoComponent implements OnInit {
-    private HorizontalStepperDemoTpl: string = HorizontalStepperDemoTpl;
-    private VerticalStepperDemoTpl: string = VerticalStepperDemoTpl;
-    isLinear = true;
-    firstFormGroup: FormGroup;
-    secondFormGroup: FormGroup;
+  private HorizontalStepperDemoTpl: string = HorizontalStepperDemoTpl;
+  private VerticalStepperDemoTpl: string = VerticalStepperDemoTpl;
+  isLinear = true;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
-    constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder) {}
 
-    public ngOnInit() {
-        this.firstFormGroup = this._formBuilder.group({
-            firstCtrl: ['', Validators.required]
-        });
-        this.secondFormGroup = this._formBuilder.group({
-            secondCtrl: ['', Validators.required]
-        });
-    }
+  public ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required],
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required],
+    });
+  }
 
-    public next(stepper, step) {
-        // step.editable = false;
-        stepper.next();
-    }
+  public next(stepper, step) {
+    // step.editable = false;
+    stepper.next();
+  }
 }

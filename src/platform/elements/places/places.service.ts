@@ -1,13 +1,13 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { Http } from '@angular/http';
+import { isPlatformBrowser } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { GlobalRef } from '../../services/global/global.service';
 import { LocalStorageService } from '../../services/storage/storage.service';
 
 @Injectable()
 export class GooglePlacesService {
   constructor(
-    private _http: Http,
+    private _http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object,
     private _global: GlobalRef,
     private _localStorageService: LocalStorageService,

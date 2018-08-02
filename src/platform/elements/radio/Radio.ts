@@ -6,21 +6,21 @@ import { Helpers } from '../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
 const RADIO_VALUE_ACCESSOR = {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NovoRadioElement),
-    multi: true
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => NovoRadioElement),
+  multi: true,
 };
 
 @Component({
-    selector: 'novo-radio-group',
-    template: '<ng-content></ng-content>'
+  selector: 'novo-radio-group',
+  template: '<ng-content></ng-content>',
 })
-export class NovoRadioGroup { }
+export class NovoRadioGroup {}
 
 @Component({
-    selector: 'novo-radio',
-    providers: [RADIO_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-radio',
+  providers: [RADIO_VALUE_ACCESSOR],
+  template: `
         <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" (change)="select($event)">
         <label [attr.for]="name" (click)="select($event)">
             <button *ngIf="button" [ngClass]="{'unchecked': !checked, 'checked': checked, 'has-icon': !!icon}" [theme]="theme" [icon]="icon">{{ label }}</button>
@@ -31,51 +31,58 @@ export class NovoRadioGroup { }
             </div>
         </label>
     `,
-    host: {
-        '[class.vertical]': 'vertical'
-    }
+  host: {
+    '[class.vertical]': 'vertical',
+  },
 })
 export class NovoRadioElement implements ControlValueAccessor {
-    @Input() name: string;
-    @Input() value: any;
-    @Input() checked: boolean;
-    @Input() vertical: boolean;
-    @Input() label: string;
-    @Input() button: boolean = false;
-    @Input() theme: string = 'secondary';
-    @Input() icon: string;
+  @Input()
+  name: string;
+  @Input()
+  value: any;
+  @Input()
+  checked: boolean;
+  @Input()
+  vertical: boolean;
+  @Input()
+  label: string;
+  @Input()
+  button: boolean = false;
+  @Input()
+  theme: string = 'secondary';
+  @Input()
+  icon: string;
 
-    @Output() change: EventEmitter<any> = new EventEmitter();
+  @Output()
+  change: EventEmitter<any> = new EventEmitter();
 
-    model: any;
-    onModelChange: Function = () => {
-    };
-    onModelTouched: Function = () => {
-    };
+  model: any;
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
 
-    constructor(private ref: ChangeDetectorRef) { }
+  constructor(private ref: ChangeDetectorRef) {}
 
-    select(event) {
-        Helpers.swallowEvent(event);
-        // Only change the checked state if this is a new radio, they are not toggle buttons
-        if (!this.checked) {
-            this.checked = !this.checked;
-            this.change.emit(this.value);
-            this.onModelChange(this.value);
-            this.ref.markForCheck();
-        }
+  select(event) {
+    Helpers.swallowEvent(event);
+    // Only change the checked state if this is a new radio, they are not toggle buttons
+    if (!this.checked) {
+      this.checked = !this.checked;
+      this.change.emit(this.value);
+      this.onModelChange(this.value);
+      this.ref.markForCheck();
     }
+  }
 
-    writeValue(model: any): void {
-        this.model = model;
-        this.ref.markForCheck();
-    }
+  writeValue(model: any): void {
+    this.model = model;
+    this.ref.markForCheck();
+  }
 
-    registerOnChange(fn: Function): void {
-        this.onModelChange = fn;
-    }
+  registerOnChange(fn: Function): void {
+    this.onModelChange = fn;
+  }
 
-    registerOnTouched(fn: Function): void {
-        this.onModelTouched = fn;
-    }
+  registerOnTouched(fn: Function): void {
+    this.onModelTouched = fn;
+  }
 }
