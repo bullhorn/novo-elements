@@ -88,6 +88,8 @@ export class NovoToastElement implements OnInit, OnChanges {
       }
       if (this.parent) {
         this.parent.hide(this);
+      } else {
+        this.closed.emit({ closed: true });
       }
     }
   }
