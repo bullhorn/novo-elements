@@ -432,9 +432,12 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
       if (wordStart > 0) {
         let beforeSymbol: string = text.charAt(wordStart - 1);
         // We don't want to trigger the lookup call unless the symbol was preceded by whitespace
-        if (/\S/.test(beforeSymbol)) {
+        if (beforeSymbol !== '\u200B' && /\S/.test(beforeSymbol)) {
           return '';
         }
+      } else if (start.hasPrevious() && /\S$/.test(start.getPrevious().getText())) {
+        // When wordStart is <= 0, we need to check the previous node's text to see if it ended with whitespace or not
+        return '';
       }
 
       let wordEnd = text.indexOf(' ', range.startOffset + 1);
