@@ -3,7 +3,7 @@ import { ElementRef, Input, ChangeDetectorRef } from '@angular/core';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 // Vendor
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { OverlayRef } from '@angular/cdk/overlay';
 
 /**
@@ -123,7 +123,7 @@ export class BasePickerResults {
     );
   }
 
-  search(term, mode?) {
+  search(term, mode?): Observable<any> {
     let options = this.config.options;
     return from(
       new Promise((resolve, reject) => {

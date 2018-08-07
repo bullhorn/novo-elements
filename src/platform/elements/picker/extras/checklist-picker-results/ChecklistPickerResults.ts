@@ -5,7 +5,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { Helpers } from '../../../../utils/Helpers';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 // Vendor
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 /**
  * @name: ChecklistPickerResults
@@ -45,7 +45,7 @@ export class ChecklistPickerResults extends BasePickerResults {
     super(element, ref);
   }
 
-  search() {
+  search(): Observable<any> {
     let options = this.config.options;
     // only set this the first time
     return from(
