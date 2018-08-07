@@ -140,7 +140,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
       shiftEnterMode: CKEDITOR.ENTER_P,
       disableNativeSpellChecker: false,
       removePlugins: 'liststyle,tabletools,contextmenu', // allows browser based spell checking
-      extraAllowedContent: 'style;*[id,rel](*){*}', // allows incoming <style> element, id/rel attributes, class names (*) and inline styles {*}
+      extraAllowedContent: '*(*){*};table tbody tr td th[*];', // allows class names (*) and inline styles {*} for all and attributes [*] on tables
     };
 
     const minimalConfig = {

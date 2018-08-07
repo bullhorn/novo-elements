@@ -102,7 +102,7 @@ describe('Elements: NovoCKEditorElement', () => {
         shiftEnterMode: window['CKEDITOR'].ENTER_P,
         disableNativeSpellChecker: false,
         removePlugins: 'liststyle,tabletools,contextmenu',
-        extraAllowedContent: 'style;*[id,rel](*){*}',
+        extraAllowedContent: '*(*){*};table tbody tr td th[*];',
         toolbar: [
           { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'] },
           {
@@ -141,7 +141,7 @@ describe('Elements: NovoCKEditorElement', () => {
         shiftEnterMode: window['CKEDITOR'].ENTER_P,
         disableNativeSpellChecker: false,
         removePlugins: 'liststyle,tabletools,contextmenu',
-        extraAllowedContent: 'style;*[id,rel](*){*}',
+        extraAllowedContent: '*(*){*};table tbody tr td th[*];',
         toolbar: [
           { name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'] },
           {
@@ -179,7 +179,7 @@ describe('Elements: NovoCKEditorElement', () => {
         shiftEnterMode: window['CKEDITOR'].ENTER_P,
         disableNativeSpellChecker: false,
         removePlugins: 'liststyle,tabletools,contextmenu',
-        extraAllowedContent: 'style;*[id,rel](*){*}',
+        extraAllowedContent: '*(*){*};table tbody tr td th[*];',
         toolbar: [
           {
             name: 'basicstyles',
