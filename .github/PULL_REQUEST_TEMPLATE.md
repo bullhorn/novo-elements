@@ -8,6 +8,10 @@ INSERT A SMALL DESCRIPTION OF WHAT YOU CHANGED HERE
 - [ ] New demos work in `Safari`, `Chrome` and `Firefox`
 - [ ] `npm run lint` passes
 - [ ] `npm test` passes and code coverage is increased
-- [ ] `npm run compile` still works
+- [ ] `npm run build` still works
+
+#### **Bullhorn Internal Developers**
+- [ ] Run `Novo Automation`
+- [ ] Run `BBO Automation`
 
 ##### **Screenshots**

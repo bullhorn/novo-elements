@@ -1,17 +1,18 @@
 // NG2
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 // Vendor
 // APP
 import {
-  BaseControl,
   AddressControl,
-  CheckListControl,
+  BaseControl,
   CheckboxControl,
+  CheckListControl,
+  CustomControl,
   DateControl,
   DateTimeControl,
   EditorControl,
   FileControl,
+  NovoControlConfig,
   PickerControl,
   RadioControl,
   SelectControl,
@@ -19,7 +20,6 @@ import {
   TextBoxControl,
   TilesControl,
   TimeControl,
-  NovoControlConfig,
 } from '../../elements/form/FormControls';
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from '../Helpers';
@@ -27,6 +27,7 @@ import { NovoFieldset } from '../../elements/form/FormInterfaces';
 import { NovoFormControl, NovoFormGroup } from '../../elements/form/NovoFormControl';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from './../../services/options/OptionsService';
+
 @Injectable()
 export class FormUtils {
   ASSOCIATED_ENTITY_LIST: string[] = [
@@ -211,7 +212,7 @@ export class FormUtils {
       description: field.description || '',
       tooltip: field.tooltip,
       tooltipPosition: field.tooltipPosition,
-      customControl: field.customControl,
+      template: field.template,
       customControlConfig: field.customControlConfig,
     };
     // TODO: getControlOptions should always return the correct format
@@ -245,6 +246,9 @@ export class FormUtils {
       }
       if (overrides[field.name].pickerCallback) {
         controlConfig.config.callback = overrides[field.name].pickerCallback;
+      }
+      if (overrides[field.name].type) {
+        type = overrides[field.name].type;
       }
       Object.assign(controlConfig, overrides[field.name]);
     }
@@ -319,6 +323,7 @@ export class FormUtils {
         control = new TilesControl(controlConfig);
         break;
       case 'checkbox':
+        controlConfig.checkboxLabel = field.checkboxLabel;
         control = new CheckboxControl(controlConfig);
         break;
       case 'checklist':
@@ -378,6 +383,9 @@ export class FormUtils {
         break;
       case 'file':
         control = new FileControl(controlConfig);
+        break;
+      case 'custom':
+        control = new CustomControl(controlConfig);
         break;
       default:
         control = new TextBoxControl(controlConfig);

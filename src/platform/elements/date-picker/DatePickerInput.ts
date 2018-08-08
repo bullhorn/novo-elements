@@ -1,16 +1,29 @@
 // NG
-import { ChangeDetectorRef, Component, ElementRef, OnInit, forwardRef, Host, Input, Inject, ViewChild, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  forwardRef,
+  Host,
+  Input,
+  Output,
+  Inject,
+  ViewChild,
+  EventEmitter,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
 import * as dateFns from 'date-fns';
-import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';	
+import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 // App
 import { NovoDatePickerElement } from './DatePicker';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
+import { DateFormatService } from '../../services/date-format/DateFormat';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -23,11 +36,10 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-date-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input data-automation-id="date-input"/>
+        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="_handleFocus($event)" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="date-input"/>
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
-
-        <novo-overlay-template [parent]="element">
+        <novo-overlay-template [parent]="element" position="above-below">
             <novo-date-picker inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value"></novo-date-picker>
         </novo-overlay-template>
   `,
@@ -49,20 +61,23 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @Input() format: string;
   @Input() textMaskEnabled: boolean = true;
   @Input() allowInvalidDate: boolean = false;
+  @Output() blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output() focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
   constructor(
-    public element: ElementRef, 
-    public labels: NovoLabelService, 
-    private _changeDetectorRef: ChangeDetectorRef
+    public element: ElementRef,
+    public labels: NovoLabelService,
+    private _changeDetectorRef: ChangeDetectorRef,
+    public dateFormatService: DateFormatService,
   ) {
     this.placeholder = this.labels.dateFormatPlaceholder;
   }
 
   ngOnInit() {
-    this.userDefinedFormat = this.format? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g): false;
-    if(!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
+    this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
+    if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
       this.maskOptions = this.maskOptions || {
         mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
         pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormat.toLowerCase()),
@@ -70,11 +85,11 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
         guide: true,
       };
     } else {
-      this.maskOptions = {mask: false};
+      this.maskOptions = { mask: false };
     }
   }
 
-  /** BEGIN: Convienient Panel Methods. */
+  /** BEGIN: Convenient Panel Methods. */
   openPanel(): void {
     this.overlay.openPanel();
   }
@@ -84,10 +99,11 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
   }
-  /** END: Convienient Panel Methods. */
+  /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
+      this._handleEvent(event, true);
       this.closePanel();
       event.stopPropagation();
     }
@@ -95,46 +111,76 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleInput(event: KeyboardEvent): void {
     if (document.activeElement === event.target) {
-      let value = (event.target as HTMLInputElement).value;
-      try {
-        let dateTimeValue = Date.parse(value);
-        if (!isNaN(dateTimeValue)) {
-          let dt = new Date(dateTimeValue);
-          this.dispatchOnChange(dt);
-        } else {
-          this.dispatchOnChange(null);
-        }
-      } catch (err) {}
-      this.openPanel();
+      this._handleEvent(event, false);
     }
+  }
+
+  _handleBlur(event: FocusEvent): void {
+    this.blurEvent.emit(event);
+  }
+
+  _handleFocus(event: FocusEvent): void {
+    this.openPanel();
+    this.focusEvent.emit(event);
+  }
+
+  _handleEvent(event: Event, blur: boolean): void {
+    let value = (event.target as HTMLInputElement).value;
+    this.formatDate(value, blur);
+    this.openPanel();
+  }
+
+  protected formatDate(value: string, blur: boolean) {
+    try {
+      let [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
+      if (!isNaN(dateTimeValue.getUTCDate())) {
+        let dt = new Date(dateTimeValue);
+        this.dispatchOnChange(dt, blur);
+      } else {
+        this.dispatchOnChange(null, blur);
+      }
+    } catch (err) {}
   }
 
   writeValue(value: any): void {
     Promise.resolve(null).then(() => this._setTriggerValue(value));
   }
+
   registerOnChange(fn: (value: any) => {}): void {
     this._onChange = fn;
   }
   registerOnTouched(fn: () => {}) {
     this._onTouched = fn;
   }
-  public dispatchOnChange(newValue?: any, skip: boolean = false) {
+  public dispatchOnChange(newValue?: any, blur: boolean = false, skip: boolean = false) {
     if (newValue !== this.value) {
       this._onChange(newValue);
-      !skip && this.writeValue(newValue);
+      if (blur) {
+        !skip && this.writeValue(newValue);
+      } else {
+        !skip && this._setCalendarValue(newValue);
+      }
     }
   }
 
   private _setTriggerValue(value: any): void {
+    this._setCalendarValue(value);
+    this._setFormValue(value);
+    this._changeDetectorRef.markForCheck();
+  }
+
+  private _setCalendarValue(value: any): void {
     if (value instanceof Date && this.value instanceof Date) {
       value = new Date(value.setHours(this.value.getHours(), this.value.getMinutes()));
     }
     this.value = value;
+  }
+
+  private _setFormValue(value: any): void {
     if (this.value) {
       let test = this.formatDateValue(this.value);
       this.formattedValue = test;
     }
-    this._changeDetectorRef.markForCheck();
   }
 
   /**
@@ -144,7 +190,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
    */
   public setValueAndClose(event: any | null): void {
     if (event && event.date) {
-      this.dispatchOnChange(event.date);
+      this.dispatchOnChange(event.date, true);
     }
     this.closePanel();
   }
@@ -169,7 +215,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       if (!(value instanceof Date)) {
         value = new Date(value);
       }
-      if(!(isNaN(value.valueOf()) && this.allowInvalidDate) ){
+      if (!(isNaN(value.valueOf()) && this.allowInvalidDate)) {
         return this.labels.formatDateWithFormat(value, {
           month: '2-digit',
           day: '2-digit',
@@ -178,7 +224,6 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       } else {
         return originalValue;
       }
-
     } catch (err) {
       return '';
     }

@@ -76,11 +76,19 @@ novo-form {
           width: 100%;
           height: auto;
           opacity: 1;
-          .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+          input.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
             border-bottom: 1px solid $negative !important;
             &.valid-number {
               border-bottom: none !important;
             }
+          }
+          novo-list.vertical-list {
+            margin-left: 1px;
+          }
+          novo-picker.ng-touched.ng-invalid:not(.ng-pristine) input,
+          textarea.ng-touched.ng-invalid:not(.ng-pristine):not(.ng-valid),
+          chips.ng-touched.ng-invalid:not(.ng-pristine) {
+            border-bottom: 1px solid $negative !important;
           }
           &.checklist,
           &.file,
@@ -102,12 +110,10 @@ novo-form {
               }
             }
           }
-          &.date-time {
-            .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
-              border-bottom: none !important;
-              input {
-                border-bottom: 1px solid $negative !important;
-              }
+          novo-date-time-picker-input.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+            border-bottom: none !important;
+            input {
+              border-bottom: 1px solid $negative !important;
             }
           }
           &.hidden {

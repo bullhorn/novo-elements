@@ -60,6 +60,13 @@ describe('Elements: NovoSelectElement', () => {
       comp.ngOnChanges();
       expect(comp.filteredOptions).toEqual([{ readOnly: false, active: false }, { active: false }]);
     });
+    it('should clone each option in filteredOptions so its object reference changes', () => {
+      const option = { value: 'clone', label: 'me' };
+      comp.options = [option];
+      comp.ngOnChanges();
+      expect(comp.filteredOptions[0]).not.toBe(option);
+      expect(comp.filteredOptions[0]).toEqual({ value: 'clone', label: 'me', active: false });
+    });
     it('should invoke clear', () => {
       const mockPlaceholder = { test: true };
       comp.model = false;
@@ -260,7 +267,7 @@ describe('Elements: NovoSelectElement', () => {
       comp.header = { open: true };
       comp.filteredOptions = [{ value: 'foo', label: 'foo' }, { value: 'bar', label: 'bar' }, { value: 'baz', label: 'baz' }];
       comp.overlay = {
-        _overlayRef: {
+        overlayRef: {
           overlayElement: {
             querySelector: jasmine.createSpy('querySelector').and.returnValue({
               querySelectorAll: jasmine.createSpy('querySelectorAll').and.returnValue([{ value: 'foo' }]),
@@ -282,7 +289,7 @@ describe('Elements: NovoSelectElement', () => {
       comp.header = { open: true };
       comp.filteredOptions = [{ value: 'foo', label: 'foo' }, { value: 'bar', label: 'bar' }, { value: 'baz', label: 'baz' }];
       comp.overlay = {
-        _overlayRef: {
+        overlayRef: {
           overlayElement: {
             querySelector: jasmine.createSpy('querySelector').and.returnValue({
               querySelectorAll: jasmine.createSpy('querySelectorAll').and.returnValue([{ value: 'foo' }]),

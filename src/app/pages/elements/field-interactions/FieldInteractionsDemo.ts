@@ -24,10 +24,11 @@ let AsyncTpl = require('./templates/Async.html');
 let ConfirmTpl = require('./templates/Confirm.html');
 let AddingRemovingTpl = require('./templates/AddingRemoving.html');
 let TooltipTpl = require('./templates/Tooltip.html');
-import { MockMeta, MockMetaHeaders } from './MockMeta';
+import { MockMetaHeaders } from './MockMeta';
+import { TilesControl } from '../../../../platform/elements/form/controls/tiles/TilesControl';
 
 const template = `
-<div class="container">
+<div class='container'>
     <h1>Field Interactions</h1>
     <p>Field Interactions is a simple API that allows you to modify NovoForms based on field changes.</p>
     <p>The Field Interaction API gives you a simple to use API object when writing your field interaction functions.</p>
@@ -35,8 +36,8 @@ const template = `
 
     <h2>Configuration</h2>
 
-    <main class="tabs">
-        <novo-nav theme="white" [outlet]="config" direction="vertical">
+    <main class='tabs'>
+        <novo-nav theme='white' [outlet]='config' direction='vertical'>
             <novo-tab><span>Inspect Form</span></novo-tab>
             <novo-tab><span>Configuration on Field</span></novo-tab>
             <novo-tab><span>Getting Current Context</span></novo-tab>
@@ -47,30 +48,30 @@ const template = `
             <novo-nav-content>
                 <h5>Inspect Form</h5>
                 <p>There is a special <code>data-control-key</code> property added to the <code>novo-control</code> element.</p>
-                <p>You can inspec the DOM at the input and see the property to know what "key" to use in the API</p>
+                <p>You can inspec the DOM at the input and see the property to know what 'key' to use in the API</p>
                 <p>By default, if you are writing a Field Interaction for the active field you can use <code>API.getActiveKey()</code></p>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Configuration on Field</h5>
-                <pre class="field-config"><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean</code></pre>
-                <p>The Field Interactions are configured on a per control basis. There are three scenarios in which they will be fired: "change", "focus" and "blur".</p>
+                <pre class='field-config'><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean</code></pre>
+                <p>The Field Interactions are configured on a per control basis. There are three scenarios in which they will be fired: 'change', 'focus' and 'blur'.</p>
                 <p><label>init</label> -- gets fired only when the form is initialized</p>
                 <p><label>change</label> -- gets fired when the value of the form control changes</p>
                 <p><label>focus</label> -- gets fired when the field gets focused</p>
                 <p><label>blur</label> -- gets fired when the field loses focus</p>
                 <p>The script function represents the function that will be fired for the event, you can see examples of these below.</p>
-                <p>Lastly, "invokeOnInit" will also trigger the Field Interaction when the form is created as well.</p>
+                <p>Lastly, 'invokeOnInit' will also trigger the Field Interaction when the form is created as well.</p>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Getting Current Context</h5>
                 <p>If you need to write Field Interaction based on if you are on an add or edit page, or you need to know the current entity type and ID then you can get those via:</p>
-                <p><label>edit</label>: "API.isEdit"</p>
-                <p><label>entity</label>: "API.currentEntity"</p>
-                <p><label>id</label>: "API.currentEntityId"</p>
+                <p><label>edit</label>: 'API.isEdit'</p>
+                <p><label>entity</label>: 'API.currentEntity'</p>
+                <p><label>id</label>: 'API.currentEntityId'</p>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Write Field Interaction</h5>
-                <p>Writing Field Interactions is very simple. You can refer to all the examples below. If you ever get stuck, you can always open a <a href="https://github.com/bullhorn/novo-elements/issues">Github Issue</a> as well!</p>
+                <p>Writing Field Interactions is very simple. You can refer to all the examples below. If you ever get stuck, you can always open a <a href='https://github.com/bullhorn/novo-elements/issues'>Github Issue</a> as well!</p>
                 <p><b>IMPORTANT</b></p>
                 <p>When writing field interactions, you will be writing everything only the contents of the function. <b>You do not</b> write the surrounding function.</p>
                 <p><b>All field interactions must be written in vanilla ES5 as well!</b></p>
@@ -83,8 +84,8 @@ const template = `
 
     <h2>Basic API</h2>
 
-    <main class="tabs">
-        <novo-nav theme="white" [outlet]="api" direction="vertical">
+    <main class='tabs'>
+        <novo-nav theme='white' [outlet]='api' direction='vertical'>
             <novo-tab><span>Validation</span></novo-tab>
             <novo-tab><span>Mark Fields as Required</span></novo-tab>
             <novo-tab><span>Field Calculations & Modification</span></novo-tab>
@@ -103,75 +104,75 @@ const template = `
             <novo-nav-content>
                 <h5>Validation</h5>
                 <p>If you need to perform some custom validation on a field, you can use the API to quickly mark a field as invalid</p>
-                <div class="example field-interaction-demo">${ValidationTpl}</div>
-                <multi-code-snippet [code]="snippets.validation"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${ValidationTpl}</div>
+                <multi-code-snippet [code]='snippets.validation'></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Mark Fields as Required</h5>
                 <p>If you need to mark fields as required or not based on some changes in the form, you can use the API to do that!</p>
-                <div class="example field-interaction-demo">${RequiredTpl}</div>
-                <multi-code-snippet [code]="snippets.required"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${RequiredTpl}</div>
+                <multi-code-snippet [code]='snippets.required'></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Field Calculations & Modification</h5>
                 <p>If you need to do some custom calculations based off other form data, you can do that easily with the API</p>
-                <div class="example field-interaction-demo">${CalculationTpl}</div>
-                <multi-code-snippet [code]="snippets.calculation"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${CalculationTpl}</div>
+                <multi-code-snippet [code]='snippets.calculation'></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Hide / Show Fields</h5>
                 <p>You can also hide or show certain fields based on interaction with the form. Note that the value is still present in the form's value</p>
-                <div class="example field-interaction-demo">${HideShowTpl}</div>
-                <multi-code-snippet [code]="snippets.hideShow"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${HideShowTpl}</div>
+                <multi-code-snippet [code]='snippets.hideShow'></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Enable / Disable Fields</h5>
                 <p>You can also enable or disable certain fields based on interaction with the form. Note that the value is still present in the form's value but does not respond to any interactions</p>
-                <div class="example field-interaction-demo">${EnableDisableTpl}</div>
-                <multi-code-snippet [code]="snippets.enableDisable"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${EnableDisableTpl}</div>
+                <multi-code-snippet [code]='snippets.enableDisable'></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Messaging / Notifications</h5>
                 <p>You can trigger messages to users in a few different ways using the API</p>
-                <div class="example field-interaction-demo">${MessagingTpl}</div>
-                <multi-code-snippet [code]="snippets.messaging"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${MessagingTpl}</div>
+                <multi-code-snippet [code]='snippets.messaging'></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Modifying Config on Static Pickers / Selects</h5>
                 <p>You have full control over the control, you can modify the options array of static pickers and select controls!</p>
-                <div class="example field-interaction-demo">${ModifyOptionsTpl}</div>
-                <multi-code-snippet [code]="snippets.modifyOptions"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${ModifyOptionsTpl}</div>
+                <multi-code-snippet [code]='snippets.modifyOptions'></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Using Globals</h5>
                 <p>Using the config from above, you can figure the API to have a set of global variables that you can key off of inside your field interactions</p>
-                <div class="example field-interaction-demo">${GlobalsTpl}</div>
-                <multi-code-snippet [code]="snippets.globals"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${GlobalsTpl}</div>
+                <multi-code-snippet [code]='snippets.globals'></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Async Interactions</h5>
                 <p>You can perform async interactions and keep the form from saving by setting a loading state</p>
-                <div class="example field-interaction-demo">${AsyncTpl}</div>
-                <multi-code-snippet [code]="snippets.async"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${AsyncTpl}</div>
+                <multi-code-snippet [code]='snippets.async'></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Confirm Changes</h5>
                 <p>You can prompt the user if they want to update the field or not too!</p>
-                <div class="example field-interaction-demo">${ConfirmTpl}</div>
-                <multi-code-snippet [code]="snippets.confirm"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${ConfirmTpl}</div>
+                <multi-code-snippet [code]='snippets.confirm'></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Adding / Removing Fields</h5>
                 <p>With the API you can quickly add and remove fields on the form.</p>
                 <p><b>ONLY WORKS WITH DYNAMIC FORMS</b></p>
-                <div class="example field-interaction-demo">${AddingRemovingTpl}</div>
-                <multi-code-snippet [code]="snippets.addingRemoving"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${AddingRemovingTpl}</div>
+                <multi-code-snippet [code]='snippets.addingRemoving'></multi-code-snippet>
             </novo-nav-content>
             <novo-nav-content>
                 <h5>Add Tooltip</h5>
                 <p>You are able to dynamically change a field's tooltip.</p>
-                <div class="example field-interaction-demo">${TooltipTpl}</div>
-                <multi-code-snippet [code]="snippets.tooltip"></multi-code-snippet>
+                <div class='example field-interaction-demo'>${TooltipTpl}</div>
+                <multi-code-snippet [code]='snippets.tooltip'></multi-code-snippet>
             </novo-nav-content>
         </novo-nav-outlet>
     </main>
@@ -473,16 +474,24 @@ export class FieldInteractionsDemoComponent {
       API.setTooltip(API.getActiveKey(), API.getActiveValue());
     };
 
-    // Validation Field Interactions
-    this.controls.validation.validationControl = new TextBoxControl({
-      type: 'number',
-      key: 'validation',
-      value: 5,
-      label: 'Validation Test',
-      description: 'Try to input a number larger then 10!',
-      interactions: [{ event: 'change', script: validationFunction, invokeOnInit: true }],
-    });
-    this.forms.validation = formUtils.toFormGroup([this.controls.validation.validationControl]);
+        let tooltipUpdateFunction = (API: FieldInteractionApi) => {
+            console.log('[FieldInteractionDemo] - tooltipUpdateFunction'); // tslint:disable-line
+            API.getControl(this.controls.tooltip.tooltipControl.key).tooltipSize = API.getValue(this.controls.tooltip.tooltipSizeControl.key);
+            API.getControl(this.controls.tooltip.tooltipControl.key).tooltipPreline = API.getValue(this.controls.tooltip.tooltipPrelineControl.key);
+        }
+
+        // Validation Field Interactions
+        this.controls.validation.validationControl = new TextBoxControl({
+            type: 'number',
+            key: 'validation',
+            value: 5,
+            label: 'Validation Test',
+            description: 'Try to input a number larger then 10!',
+            interactions: [
+                { event: 'change', script: validationFunction, invokeOnInit: true }
+            ]
+        });
+        this.forms.validation = formUtils.toFormGroup([this.controls.validation.validationControl]);
 
     // Required Field Interactions
     this.controls.required.requiredControl = new TextBoxControl({
@@ -691,15 +700,38 @@ export class FieldInteractionsDemoComponent {
     this.controls.addingRemoving[0].controls[0].interactions = [{ event: 'init', script: addingRemovingFunction }];
     this.forms.addingRemoving = formUtils.toFormGroupFromFieldset(this.controls.addingRemoving);
 
-    // Tooltip Field Interactions
-    this.controls.tooltip.tooltipControl = new TextBoxControl({
-      type: 'text',
-      key: 'toolTipValue',
-      label: 'Tooltip',
-      description: 'I will add a tooltip to this control as a value is typed',
-      interactions: [{ event: 'change', script: tooltipFunction }],
-    });
-    this.forms.tooltip = formUtils.toFormGroup([this.controls.tooltip.tooltipControl]);
+        // Tooltip Field Interactions
+        this.controls.tooltip.tooltipControl = new TextBoxControl({
+            type: 'text',
+            key: 'toolTipValue',
+            label: 'Tooltip',
+            description: 'I will add a tooltip to this control as a value is typed',
+            interactions: [
+                { event: 'change', script: tooltipFunction }
+            ]
+        });
+
+        this.controls.tooltip.tooltipSizeControl = new TilesControl({
+            key: 'tooltipSize',
+            label: 'Tooltip Size',
+            description: 'Changing me will set a fixed width on the tooltip',
+            options: [{ value: 'small', label: 'Small' }, { value: 'medium', label: 'Medium' }, { value: 'large', label: 'Large' } ],
+            interactions: [
+                { event: 'change', script: tooltipUpdateFunction }
+            ]
+        });
+
+        this.controls.tooltip.tooltipPrelineControl = new TilesControl({
+            key: 'tooltipPreline',
+            label: 'Tooltip Multiline',
+            description: 'Should the tooltip be multiple lines tall or all on one line?',
+            options: [ { value: true, label: 'Yes'}, { value: false, label: 'No'} ],
+            interactions: [
+                { event: 'change', script: tooltipUpdateFunction }
+            ]
+        });
+
+        this.forms.tooltip = formUtils.toFormGroup([this.controls.tooltip.tooltipControl, this.controls.tooltip.tooltipSizeControl, this.controls.tooltip.tooltipPrelineControl]);
 
     // Snippets
     this.snippets.validation = {

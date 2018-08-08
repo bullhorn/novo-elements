@@ -1,5 +1,6 @@
 // NG2
 import {
+  ChangeDetectorRef,
   Component,
   Input,
   Output,
@@ -22,6 +23,7 @@ import { Helpers } from '../../utils/Helpers';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 import { FieldInteractionApi } from './FieldInteractionApi';
+import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 
 export interface IMaskOptions {
   mask: any;
@@ -52,60 +54,12 @@ export class NovoAutoSize implements AfterContentInit {
     nativeElement.style.height = `${nativeElement.scrollHeight}px`;
   }
 }
-
-@Component({
-  selector: 'novo-custom-control-container',
-  template: `
-        <div class="novo-control-container" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
-            <!--Label (for horizontal)-->
-            <label [attr.for]="control.key" *ngIf="form.layout !== 'vertical' && form.controls[control.key].label">{{ form.controls[control.key].label }}</label>
-            <div class="novo-control-outer-container">
-                <!--Label (for vertical)-->
-                <label
-                    *ngIf="form.layout === 'vertical' && form.controls[control.key].label"
-                    class="novo-control-label"
-                    [attr.for]="control.key"
-                    [class.novo-control-always-active]="true">
-                    {{ form.controls[control.key].label }}
-                </label>
-                <div class="novo-control-inner-container">
-                    <div class="novo-control-inner-input-container">
-                        <!--Required Indicator-->
-                        <i class="required-indicator"
-                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="form.controls[control.key].required && !form.controls[control.key].readOnly">
-                        </i>
-                        <!--Form Controls-->
-                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [attr.data-automation-id]="control.key">
-                            <ng-content></ng-content>
-                        </div>
-                    </div>
-                    <!--Error Message-->
-                    <div class="field-message">
-                        <div class="messages">
-                            <span class="error-text" *ngIf="(form.controls[control.key].dirty || control.dirty) && form.controls[control.key].errors?.required">{{ form.controls[control.key].label | uppercase }} is required</span>
-                            <span class="error-text" *ngIf="(form.controls[control.key].dirty || control.dirty) && (form.controls[control.key].errors?.custom)">{{ form.controls[control.key].errors.custom }}</span>
-                            <!--Field Hint-->
-                            <span class="description" *ngIf="form.controls[control.key].description">
-                                {{ form.controls[control.key].description }}
-                            </span>
-                        </div>
-                    </div>
-                    <!--Tip Wel-->
-                    <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
-                </div>
-            </div>
-        </div>
-    `,
-})
-export class NovoCustomControlContainerElement {
-  @Input() control;
-  @Input() form: NovoFormGroup;
-}
-
+//undo all template context references!
 @Component({
   selector: 'novo-control',
   template: `
-        <div class="novo-control-container" [formGroup]="form" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
+        <novo-control-templates></novo-control-templates>
+        <div class="novo-control-container" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
             <!--Encrypted Field-->
             <span [tooltip]="labels.encryptedFieldTooltip" [tooltipPosition]="'right'"><i [hidden]="!form.controls[control.key].encrypted"
             class="bhi-lock"></i></span>
@@ -131,68 +85,14 @@ export class NovoCustomControlContainerElement {
                       <!--Required Indicator-->
                         <i [hidden]="!form.controls[control.key].required || form.controls[control.key].readOnly"
                             class="required-indicator {{ form.controls[control.key].controlType }}"
-                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || (form.controls[control.key].required && !form.controls[control.key].readOnly)">
+                            [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form.controls[control.key].required">
                         </i>
                         <!--Form Controls-->
-                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [ngSwitch]="form.controls[control.key].controlType" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
-                            <!--Text-based Inputs-->
+                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
                             <!--TODO prefix/suffix on the control-->
-                            <div class="novo-control-input-container novo-control-input-with-label" *ngSwitchCase="'textbox'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                              <input *ngIf="form.controls[control.key].type !== 'number'" [class.maxlength-error]="errors?.maxlength" [formControlName]="control.key" [id]="control.key" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (input)="emitChange($event)" [maxlength]="form.controls[control.key].maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" autocomplete>
-                              <input *ngIf="form.controls[control.key].type === 'number' && form.controls[control.key].subType !== 'percentage'" [class.maxlength-error]="errors?.maxlength" [formControlName]="control.key" [id]="control.key" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (keydown)="restrictKeys($event)" (input)="emitChange($event)" [maxlength]="form.controls[control.key].maxlength" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="numberInput.blur()" #numberInput>
-                              <input *ngIf="form.controls[control.key].type === 'number' && form.controls[control.key].subType === 'percentage'" [type]="form.controls[control.key].type" [placeholder]="form.controls[control.key].placeholder" (keydown)="restrictKeys($event)" [value]="percentValue" (input)="handlePercentChange($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" step="any" (mousewheel)="percentInput.blur()" #percentInput>
-                              <label class="input-label" *ngIf="form.controls[control.key].subType === 'currency'">{{ control.currencyFormat }}</label>
-                              <label class="input-label" *ngIf="form.controls[control.key].subType === 'percentage'">%</label>
-                            </div>
-                            <!--TextArea-->
-                            <textarea *ngSwitchCase="'text-area'" [class.maxlength-error]="errors?.maxlength" [name]="control.key" [attr.id]="control.key" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" autosize (input)="handleTextAreaInput($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [maxlength]="control.maxlength" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></textarea>
-                            <!--Editor-->
-                            <novo-editor *ngSwitchCase="'editor'" [name]="control.key" [formControlName]="control.key" [startupFocus]="control.startupFocus" [minimal]="control.minimal" [fileBrowserImageUploadUrl]="control.fileBrowserImageUploadUrl" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-editor>
-                            <!--AceEditor-->
-                            <novo-ace-editor *ngSwitchCase="'ace-editor'" [name]="control.key" [formControlName]="control.key" (focus)="handleFocus($event)" (blur)="handleBlur($event)"></novo-ace-editor>
-                            <!--HTML5 Select-->
-                            <select [id]="control.key" *ngSwitchCase="'native-select'" [formControlName]="control.key" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <option *ngIf="form.controls[control.key].placeholder" value="" disabled selected hidden>{{ form.controls[control.key].placeholder }}</option>
-                                <option *ngFor="let opt of form.controls[control.key].options" [value]="opt.key">{{opt.value}}</option>
-                            </select>
-                            <!--File-->
-                            <novo-file-input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [name]="control.key" [placeholder]="form.controls[control.key].placeholder" [value]="form.controls[control.key].value" [multiple]="form.controls[control.key].multiple" [layoutOptions]="form.controls[control.key].layoutOptions" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (edit)="handleEdit($event)" (save)="handleSave($event)" (delete)="handleDelete($event)" (upload)="handleUpload($event)"></novo-file-input>
-                            <!--Tiles-->
-                            <novo-tiles *ngSwitchCase="'tiles'" [options]="control.options" [formControlName]="control.key" (onChange)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [controlDisabled]="form.controls[control.key].disabled"></novo-tiles>
-                            <!--Picker-->
-                            <div class="novo-control-input-container" *ngSwitchCase="'picker'">
-                                <novo-picker [config]="form.controls[control.key].config" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [parentScrollSelector]="form.controls[control.key].parentScrollSelector" *ngIf="!form.controls[control.key].multiple" (select)="modelChange($event);" (changed)="modelChangeWithRaw($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-picker>
-                                <chips [source]="form.controls[control.key].config" [type]="form.controls[control.key].config.type" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" *ngIf="control.multiple" [closeOnSelect]="form.controls[control.key].closeOnSelect" (changed)="modelChangeWithRaw($event)" (typing)="handleTyping($event)" (focus)="handleFocus($event)" (blur)="handleBlur($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></chips>
-                            </div>
-                            <!--Novo Select-->
-                            <novo-select *ngSwitchCase="'select'" [options]="form.controls[control.key].options" [headerConfig]="form.controls[control.key].headerConfig" [placeholder]="form.controls[control.key].placeholder" [formControlName]="control.key" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (onSelect)="modelChange($event)"></novo-select>
-                            <!--Radio-->
-                            <div class="novo-control-input-container" *ngSwitchCase="'radio'">
-                                <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of form.controls[control.key].options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [button]="!!option.icon" [icon]="option.icon" [attr.data-automation-id]="control.key + '-' + (option?.label || option?.value)"></novo-radio>
-                            </div>
-                            <!--Time-->
-                            <div class="novo-control-input-container" *ngSwitchCase="'time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <novo-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military"></novo-time-picker-input>
-                            </div>
-                            <!--Date-->
-                            <div class="novo-control-input-container" *ngSwitchCase="'date'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <novo-date-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [format]="form.controls[control.key].dateFormat" [allowInvalidDate]="form.controls[control.key].allowInvalidDate" [textMaskEnabled]="form.controls[control.key].textMaskEnabled" [placeholder]="form.controls[control.key].placeholder"></novo-date-picker-input>
-                            </div>
-                            <!--Date and Time-->
-                            <div class="novo-control-input-container" *ngSwitchCase="'date-time'" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition">
-                                <novo-date-time-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [placeholder]="form.controls[control.key].placeholder" [military]="form.controls[control.key].military"></novo-date-time-picker-input>
-                            </div>
-                            <!--Address-->
-                            <novo-address *ngSwitchCase="'address'" [formControlName]="control.key" [config]="control.config" (change)="handleAddressChange($event)" (focus)="handleFocus($event.event, $event.field)" (blur)="handleBlur($event.event, $event.field)" (validityChange)="updateValidity()"></novo-address>
-                            <!--Checkbox-->
-                            <novo-checkbox *ngSwitchCase="'checkbox'" [formControlName]="control.key" [name]="control.key" [label]="control.checkboxLabel" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" [layoutOptions]="layoutOptions"></novo-checkbox>
-                            <!--Checklist-->
-                            <novo-check-list *ngSwitchCase="'checklist'" [formControlName]="control.key" [name]="control.key" [options]="form.controls[control.key].options" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition" (onSelect)="modelChange($event)"></novo-check-list>
-                            <!--QuickNote-->
-                            <novo-quick-note *ngSwitchCase="'quick-note'" [formControlName]="control.key" [startupFocus]="control.startupFocus" [placeholder]="form.controls[control.key].placeholder" [config]="form.controls[control.key].config" (change)="modelChange($event)" [tooltip]="tooltip" [tooltipPosition]="tooltipPosition"></novo-quick-note>
-                            <!--ReadOnly-->
-                            <!--TODO - Handle rendering of different READONLY values-->
-                            <div *ngSwitchCase="'read-only'">{{ form.value[control.key] }}</div>
+                            <ng-container *ngIf="templates">
+                              <ng-container *ngTemplateOutlet="templates[form.controls[control.key].controlType]; context: templateContext"></ng-container>
+                            </ng-container>
                         </div>
                     </div>
                     <!--Error Message-->
@@ -250,9 +150,9 @@ export class NovoCustomControlContainerElement {
     '[attr.data-control-key]': 'control.key',
   },
 })
-export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
+export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
   @Input() control: any;
-  @Input() form: NovoFormGroup;
+  @Input() form: any;
   @Input() condensed: boolean = false;
   @Input() autoFocus: boolean = false;
   @Output() change: EventEmitter<any> = new EventEmitter();
@@ -260,7 +160,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   @Output() save: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
   @Output() upload: EventEmitter<any> = new EventEmitter();
-
   @Output('blur')
   get onBlur(): Observable<FocusEvent> {
     return this._blurEmitter.asObservable();
@@ -288,13 +187,19 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   private focusedField: string;
   private characterCountField: string;
   private maxLengthMetErrorfields: string[] = [];
+  private statusChangeSubscription: any;
+
   maskOptions: IMaskOptions;
+  templates: any = {};
+  templateContext: any;
 
   constructor(
     element: ElementRef,
     public labels: NovoLabelService,
     private dateFormatService: DateFormatService,
     private fieldInteractionApi: FieldInteractionApi,
+    private templateService: NovoTemplateService,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(element);
   }
@@ -343,6 +248,43 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
   }
 
+  ngAfterContentInit() {
+    // Subscribe to control interactions
+    if (this.control.interactions) {
+      for (let interaction of this.control.interactions) {
+        switch (interaction.event) {
+          case 'blur':
+            this.valueChangeSubscription = this.onBlur.debounceTime(300).subscribe(() => {
+              this.executeInteraction(interaction);
+            });
+            break;
+          case 'focus':
+            this.valueChangeSubscription = this.onFocus.debounceTime(300).subscribe(() => {
+              this.executeInteraction(interaction);
+            });
+            break;
+          case 'change':
+            this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
+              this.executeInteraction(interaction);
+            });
+            break;
+          case 'init':
+            interaction.invokeOnInit = true;
+            break;
+          default:
+            break;
+        }
+        if (interaction.invokeOnInit) {
+          this.executeInteraction(interaction);
+        }
+      }
+    }
+    setTimeout(() => {
+      this.templates = this.templateService.getAll();
+      this.changeDetectorRef.markForCheck();
+    });
+  }
+
   ngOnInit() {
     // Make sure to initially format the time controls
     if (this.control && this.form.controls[this.control.key].value) {
@@ -353,65 +295,61 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         this.characterCount = this.form.controls[this.control.key].value.length;
       }
     }
-    // this.maxLenghtCount = form.controls[control.key].maxlength;
     if (this.control) {
       // Listen to clear events
       this.forceClearSubscription = this.control.forceClear.subscribe(() => {
         this.clearValue();
       });
-      // Subscribe to control interactions
-      if (this.control.interactions) {
-        for (let interaction of this.control.interactions) {
-          switch (interaction.event) {
-            case 'blur':
-              this.valueChangeSubscription = this.onBlur.debounceTime(300).subscribe(() => {
-                this.executeInteraction(interaction);
-              });
-              break;
-            case 'focus':
-              this.valueChangeSubscription = this.onFocus.debounceTime(300).subscribe(() => {
-                this.executeInteraction(interaction);
-              });
-              break;
-            case 'change':
-              this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
-                this.executeInteraction(interaction);
-              });
-              break;
-            case 'init':
-              interaction.invokeOnInit = true;
-              break;
-            default:
-              break;
-          }
-          if (interaction.invokeOnInit) {
-            this.executeInteraction(interaction);
-          }
-        }
-      }
-    }
-    if (this.form.controls[this.control.key] && this.form.controls[this.control.key].subType === 'percentage') {
-      if (!Helpers.isEmpty(this.form.controls[this.control.key].value)) {
-        this.percentValue = Number((this.form.controls[this.control.key].value * 100).toFixed(6).replace(/\.?0*$/, ''));
-      }
-      this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe((value) => {
-        if (!Helpers.isEmpty(value)) {
-          this.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
+      // For Asynchronous validations
+      this.statusChangeSubscription = this.form.controls[this.control.key].statusChanges.subscribe((validity) => {
+        this.form.controls[this.control.key] = this.templateContext.$implicit;
+        if (validity !== 'PENDING' && this.form.updateValueAndValidity) {
+          this.form.updateValueAndValidity();
         }
       });
     }
-  }
+    this.templateContext = {
+      $implicit: this.form.controls[this.control.key],
+      methods: {
+        restrictKeys: this.restrictKeys.bind(this),
+        emitChange: this.emitChange.bind(this),
+        handleFocus: this.handleFocus.bind(this),
+        handlePercentChange: this.handlePercentChange.bind(this),
+        handleBlur: this.handleBlur.bind(this),
+        handleTextAreaInput: this.handleTextAreaInput.bind(this),
+        handleEdit: this.handleEdit.bind(this),
+        handleSave: this.handleSave.bind(this),
+        handleDelete: this.handleDelete.bind(this),
+        handleUpload: this.handleUpload.bind(this),
+        modelChange: this.modelChange.bind(this),
+        modelChangeWithRaw: this.modelChangeWithRaw.bind(this),
+        handleAddressChange: this.handleAddressChange.bind(this),
+        handleTyping: this.handleTyping.bind(this),
+        updateValidity: this.updateValidity.bind(this),
+        toggleActive: this.toggleActive.bind(this),
+      },
+      form: this.form,
+    };
+    this.templateContext.$implicit.tooltipPosition = this.tooltipPosition;
+    this.templateContext.$implicit.tooltip = this.tooltip;
+    this.templateContext.$implicit.tooltipSize = this.tooltipSize;
+    this.templateContext.$implicit.tooltipPreline = this.tooltipPreline;
+    this.templateContext.$implicit.startupFocus = this.form.controls[this.control.key].startupFocus;
+    this.templateContext.$implicit.fileBrowserImageUploadUrl = this.form.controls[this.control.key].fileBrowserImageUploadUrl;
+    this.templateContext.$implicit.minimal = this.form.controls[this.control.key].minimal;
+    this.templateContext.$implicit.currencyFormat = this.form.controls[this.control.key].currencyFormat;
+    this.templateContext.$implicit.percentValue = this.form.controls[this.control.key].percentValue;
+    this.templateContext.$implicit.config = this.form.controls[this.control.key].config;
 
-  executeInteraction(interaction) {
-    if (interaction.script && Helpers.isFunction(interaction.script)) {
-      setTimeout(() => {
-        this.fieldInteractionApi.form = this.form;
-        this.fieldInteractionApi.currentKey = this.control.key;
-        try {
-          interaction.script(this.fieldInteractionApi, this.control.key);
-        } catch (err) {
-          console.info('Field Interaction Error!', this.control.key); // tslint:disable-line
-          console.error(err); // tslint:disable-line
+    if (this.form.controls[this.control.key] && this.form.controls[this.control.key].subType === 'percentage') {
+      if (!Helpers.isEmpty(this.form.controls[this.control.key].value)) {
+        this.templateContext.$implicit.percentValue = Number(
+          (this.form.controls[this.control.key].value * 100).toFixed(6).replace(/\.?0*$/, ''),
+        );
+      }
+      this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe((value) => {
+        if (!Helpers.isEmpty(value)) {
+          this.templateContext.$implicit.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
         }
       });
     }
@@ -435,6 +373,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
     if (this.dateChangeSubscription) {
       this.dateChangeSubscription.unsubscribe();
+    }
+    if (this.statusChangeSubscription) {
+      this.statusChangeSubscription.unsubscribe();
     }
     super.ngOnDestroy();
   }
@@ -470,6 +411,20 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     return this.form.controls[this.control.key].tooltipPosition;
   }
 
+  get tooltipSize() {
+    if (Helpers.isBlank(this.form.controls[this.control.key].tooltipSize)) {
+      return '';
+    }
+    return this.form.controls[this.control.key].tooltipSize;
+  }
+
+  get tooltipPreline() {
+    if (Helpers.isBlank(this.form.controls[this.control.key].tooltipPreline)) {
+      return false;
+    }
+    return this.form.controls[this.control.key].tooltipPreline;
+  }
+
   get alwaysActive() {
     // Controls that have the label active if there is any user entered text in the field
     if (this.form.controls[this.control.key].controlType === 'picker' && this._enteredText.length) {
@@ -502,6 +457,21 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       return true;
     }
     return false;
+  }
+
+  executeInteraction(interaction) {
+    if (interaction.script && Helpers.isFunction(interaction.script)) {
+      setTimeout(() => {
+        this.fieldInteractionApi.form = this.form;
+        this.fieldInteractionApi.currentKey = this.control.key;
+        try {
+          interaction.script(this.fieldInteractionApi, this.control.key);
+        } catch (err) {
+          console.info('Field Interaction Error!', this.control.key); // tslint:disable-line
+          console.error(err); // tslint:disable-line
+        }
+      });
+    }
   }
 
   handleTyping(event: any) {
@@ -646,8 +616,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       }
     }
   }
-
-  updateValidity(data): void {
-    this.form.controls[this.control.key].updateValueAndValidity({ emitEvent: false });
+  updateValidity(shouldEventBeEmitted): void {
+    let emitEvent: boolean = shouldEventBeEmitted ? true : false;
+    this.form.controls[this.control.key].updateValueAndValidity({ emitEvent });
   }
 }

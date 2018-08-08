@@ -21,43 +21,51 @@ const template = `
 `;
 
 @Component({
-    selector: 'tiles-demo',
-    template: template
+  selector: 'tiles-demo',
+  template: template,
 })
 export class TilesDemoComponent {
-    private TilesDemoTpl: string = TilesDemoTpl;
-    private shown: boolean = false;
-    private demoTiles: Array<any> = [
-        {
-            label: 'Red',
-            value: 'red'
-        },
-        {
-            label: 'Green',
-            value: 'green'
-        },
-        {
-            label: 'Disabled',
-            value: 'disabled',
-            disabled: true
-        }
-    ];
-    private currentColor: string;
-    public value: string = 'red';
+  private TilesDemoTpl: string = TilesDemoTpl;
+  private shown: boolean = false;
+  private demoTiles: Array<any> = [
+    {
+      label: 'Red',
+      value: 'red',
+    },
+    {
+      label: 'Green',
+      value: 'green',
+    },
+    {
+      label: 'Disabled',
+      value: 'disabled',
+      disabled: true,
+    },
+  ];
+  private currentColor: string;
+  public value: string = 'red';
 
-    colorSelect(newColorValue) {
-        this.currentColor = newColorValue;
-    }
+  colorSelect(newColorValue) {
+    this.currentColor = newColorValue;
+  }
 
-    toggleShown() {
-        this.shown = !this.shown;
-    }
+  disabledClicked(tile) {
+    console.log('Disabled tile clicked: ', tile); // tslint:disable-line
+  }
 
-    addTile() {
-        this.demoTiles.push({
-            label: 'Blue',
-            value: 'blue'
-        });
-        this.demoTiles = [...this.demoTiles];
-    }
+  selectedClicked(tile) {
+    console.log('Selected tile clicked: ', tile); // tslint:disable-line
+  }
+
+  toggleShown() {
+    this.shown = !this.shown;
+  }
+
+  addTile() {
+    this.demoTiles.push({
+      label: 'Blue',
+      value: 'blue',
+    });
+    this.demoTiles = [...this.demoTiles];
+  }
 }

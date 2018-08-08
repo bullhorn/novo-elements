@@ -115,12 +115,16 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
         return { value: item, label: item };
       });
     } else {
-      this.filteredOptions = (this.options || []).filter((item) => {
-        return !item.readOnly;
-      });
-      this.filteredOptions.forEach((element) => {
-        element.active = false;
-      });
+      this.filteredOptions = (this.options || [])
+        .filter((item) => {
+          return !item.readOnly;
+        })
+        .map((element) => {
+          return {
+            ...element,
+            active: false,
+          };
+        });
     }
     if (!this.model && !this.createdItem) {
       this.clear();
@@ -282,7 +286,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
   }
 
   scrollToIndex(index: number) {
-    let element = this.overlay._overlayRef.overlayElement;
+    let element = this.overlay.overlayRef.overlayElement;
     let list = element.querySelector('.novo-select-list');
     let items = list.querySelectorAll('li');
     let item = items[this.headerConfig ? index + 1 : index];

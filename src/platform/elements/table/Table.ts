@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
+import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 // Vendor
 import * as dateFns from 'date-fns';
@@ -10,7 +10,7 @@ import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { ReadOnlyControl, ControlFactory } from './../form/FormControls';
 import { CollectionEvent } from '../../services/data-provider/CollectionEvent';
 import { PagedArrayCollection } from '../../services/data-provider/PagedArrayCollection';
-import { PagedCollection } from '../../services/data-provider/PagedCollection';
+import { notify } from '../../utils/notifier/notifier.util';
 
 export interface NovoTableConfig {
   // Paging config
@@ -101,8 +101,8 @@ export enum NovoTableMode {
                                     </div>
                                 </div>
                                 <!-- FILTER DROP-DOWN -->
-                                <novo-dropdown side="right" *ngIf="config.filtering !== false && column.filtering !== false" class="column-filters" (toggled)="onDropdownToggled($event, column.name)" appendToBody="true" parentScrollSelector=".table-container" containerClass="table-dropdown">
-                                    <button type="button" theme="icon" icon="filter" tooltipPosition="bottom" [tooltip]="labels.filters" [class.filtered]="column.filter || column.filter===false"></button>
+                                <novo-dropdown side="right" *ngIf="config.filtering !== false && column.filtering !== false" class="column-filters" (toggled)="onDropdownToggled($event, column.name)" parentScrollSelector=".table-container" containerClass="table-dropdown">
+                                    <button type="button" theme="icon" icon="filter" tooltipPosition="bottom" [tooltip]="labels.filters" [class.filtered]="column.filter || column.filter===false" (click)="focusInput()"></button>
                                     <!-- FILTER OPTIONS LIST -->
                                     <list *ngIf="(column?.options?.length || column?.originalOptions?.length) && column?.type !== 'date' && toggledDropdownMap[column.name]">
                                         <item class="filter-search">
@@ -110,7 +110,7 @@ export enum NovoTableMode {
                                                 <span>{{ labels.filters }}</span>
                                                 <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter || column.filter===false">{{ labels.clear }}</button>
                                             </div>
-                                            <input type="text" *ngIf="!!column.allowCustomTextOption" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.freetextFilter" keepFilterFocused/>
+                                            <input type="text" *ngIf="!!column.allowCustomTextOption" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterKeywords($event)" [(ngModel)]="column.freetextFilter" keepFilterFocused #filterInput/>
                                         </item>
                                         <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [attr.data-automation-id]="getOptionDataAutomationId(option)">
                                             <span>{{ option?.label || option }}</span> <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
@@ -123,7 +123,7 @@ export enum NovoTableMode {
                                                 <span>{{ labels.filters }}</span>
                                                 <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">{{ labels.clear }}</button>
                                             </div>
-                                            <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter" keepFilterFocused/>
+                                            <input type="text" [attr.id]="column.name + '-input'" [novoTableFilter]="column" (onFilterChange)="onFilterChange($event)" [(ngModel)]="column.filter" keepFilterFocused #filterInput/>
                                         </item>
                                     </list>
                                     <!-- FILTER DATE OPTIONS -->
@@ -137,7 +137,7 @@ export enum NovoTableMode {
                                         <item [ngClass]="{ active: isFilterActive(column, option) }" *ngFor="let option of column.options" (click)="onFilterClick(column, option)" [keepOpen]="option.range" [hidden]="column.calenderShow" [attr.data-automation-id]="(option?.label || option)">
                                             {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
                                         </item>
-                                        <div class="calender-container" [hidden]="!column.calenderShow">
+                                        <div class="calendar-container" [hidden]="!column.calenderShow">
                                             <div (click)="column.calenderShow=false"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
                                             <novo-date-picker #rangePicker (onSelect)="onCalenderSelect(column, $event)" [(ngModel)]="column.filter" range="true"></novo-date-picker>
                                         </div>
@@ -227,18 +227,32 @@ export enum NovoTableMode {
     `,
 })
 export class NovoTableElement implements DoCheck {
-  @Input() config: NovoTableConfig = {};
-  @Input() columns: Array<any>;
-  @Input() theme: string;
-  @Input() skipSortAndFilterClear: boolean = false;
-  @Input() mode: NovoTableMode = NovoTableMode.VIEW;
-  @Input() editable: boolean = false;
-  @Input() rowIdentifier: string = 'id';
-  @Input() name: string = 'table';
+  @ViewChildren('filterInput', { read: ElementRef })
+  filterInputs: QueryList<ElementRef>;
 
-  @Output() onRowClick: EventEmitter<any> = new EventEmitter();
-  @Output() onRowSelect: EventEmitter<any> = new EventEmitter();
-  @Output() onTableChange: EventEmitter<any> = new EventEmitter();
+  @Input()
+  config: NovoTableConfig = {};
+  @Input()
+  columns: Array<any>;
+  @Input()
+  theme: string;
+  @Input()
+  skipSortAndFilterClear: boolean = false;
+  @Input()
+  mode: NovoTableMode = NovoTableMode.VIEW;
+  @Input()
+  editable: boolean = false;
+  @Input()
+  rowIdentifier: string = 'id';
+  @Input()
+  name: string = 'table';
+
+  @Output()
+  onRowClick: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowSelect: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onTableChange: EventEmitter<any> = new EventEmitter();
 
   _dataProvider: PagedArrayCollection<any>;
   _rows: Array<any> = [];
@@ -317,7 +331,9 @@ export class NovoTableElement implements DoCheck {
             row.rowId = this._rows.length;
             this.columns.forEach((column) => {
               // Use the control passed or use a ReadOnlyControl so that the form has the values
-              let control = column.editorConfig ? ControlFactory.create(column.editorType, column.editorConfig) : new ReadOnlyControl({ key: column.name });
+              let control = column.editorConfig
+                ? ControlFactory.create(column.editorType, column.editorConfig)
+                : new ReadOnlyControl({ key: column.name });
               row.controls[column.name] = control;
               rowControls.push(control);
             });
@@ -383,10 +399,22 @@ export class NovoTableElement implements DoCheck {
     return this.tableForm.value;
   }
 
-  constructor(public labels: NovoLabelService, private formUtils: FormUtils, private builder: FormBuilder) {}
+  constructor(public labels: NovoLabelService, private formUtils: FormUtils, private builder: FormBuilder) {
+    notify('[Deprecated]: The table is deprecated. Please migrate to novo-data-tables!');
+  }
 
   onDropdownToggled(event, column): void {
     this.toggledDropdownMap[column] = event;
+  }
+
+  focusInput(): void {
+    if (this.filterInputs && this.filterInputs.length) {
+      this.filterInputs.forEach((filterInput) => {
+        if (filterInput.nativeElement) {
+          setTimeout(() => filterInput.nativeElement.focus(), 0);
+        }
+      });
+    }
   }
 
   onPageChange(event) {
@@ -859,7 +887,12 @@ export class NovoTableElement implements DoCheck {
           row._editing[column.name] = true;
         } else if (!Helpers.isEmpty(rowNumber) && rowIndex === Number(rowNumber) && Helpers.isEmpty(columnNumber)) {
           row._editing[column.name] = true;
-        } else if (!Helpers.isEmpty(rowNumber) && !Helpers.isEmpty(columnNumber) && rowIndex === Number(rowNumber) && columnIndex === Number(columnNumber)) {
+        } else if (
+          !Helpers.isEmpty(rowNumber) &&
+          !Helpers.isEmpty(columnNumber) &&
+          rowIndex === Number(rowNumber) &&
+          columnIndex === Number(columnNumber)
+        ) {
           row._editing[column.name] = true;
         } else {
           row._editing[column.name] = false;
@@ -905,7 +938,9 @@ export class NovoTableElement implements DoCheck {
     row.rowId = this._rows.length + 1;
     this.columns.forEach((column) => {
       // Use the control passed or use a ReadOnlyControl so that the form has the values
-      let control = column.editorConfig ? ControlFactory.create(column.editorType, column.editorConfig) : new ReadOnlyControl({ key: column.name });
+      let control = column.editorConfig
+        ? ControlFactory.create(column.editorType, column.editorConfig)
+        : new ReadOnlyControl({ key: column.name });
       control.value = null; // remove copied column value
       row.controls[column.name] = control;
       row._editing[column.name] = !column.viewOnly;
