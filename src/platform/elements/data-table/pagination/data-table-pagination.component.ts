@@ -21,7 +21,7 @@ const MAX_PAGES_DISPLAYED = 5;
 @Component({
   selector: 'novo-data-table-pagination',
   template: `
-      <ng-container *ngIf="theme === 'basic'">
+      <ng-container *ngIf="theme === 'basic' || theme === 'basic-wide'">
         <div class="novo-data-table-pagination-size">
             <novo-tiles *ngIf="displayedPageSizeOptions.length > 1"
                         [(ngModel)]="pageSize"
@@ -38,7 +38,7 @@ const MAX_PAGES_DISPLAYED = 5;
         <div class="novo-data-table-range-label-short" data-automation-id="novo-data-table-pagination-range-label-short">
             {{ shortRangeLabel }}
         </div>
-
+        <span class="spacer novo-data-table-spacer" *ngIf="theme === 'basic-wide'"></span>
         <button theme="dialogue" type="button"
                 class="novo-data-table-pagination-navigation-previous"
                 (click)="previousPage()"
@@ -124,7 +124,8 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
   _length: number = 0;
 
-  @Output() pageChange = new EventEmitter<IDataTablePaginationEvent>();
+  @Output()
+  pageChange = new EventEmitter<IDataTablePaginationEvent>();
 
   public displayedPageSizeOptions: { value: string; label: string }[];
   public longRangeLabel: string;
