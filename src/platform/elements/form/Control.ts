@@ -152,15 +152,24 @@ export class NovoAutoSize implements AfterContentInit {
   },
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
-  @Input() control: any;
-  @Input() form: any;
-  @Input() condensed: boolean = false;
-  @Input() autoFocus: boolean = false;
-  @Output() change: EventEmitter<any> = new EventEmitter();
-  @Output() edit: EventEmitter<any> = new EventEmitter();
-  @Output() save: EventEmitter<any> = new EventEmitter();
-  @Output() delete: EventEmitter<any> = new EventEmitter();
-  @Output() upload: EventEmitter<any> = new EventEmitter();
+  @Input()
+  control: any;
+  @Input()
+  form: any;
+  @Input()
+  condensed: boolean = false;
+  @Input()
+  autoFocus: boolean = false;
+  @Output()
+  change: EventEmitter<any> = new EventEmitter();
+  @Output()
+  edit: EventEmitter<any> = new EventEmitter();
+  @Output()
+  save: EventEmitter<any> = new EventEmitter();
+  @Output()
+  delete: EventEmitter<any> = new EventEmitter();
+  @Output()
+  upload: EventEmitter<any> = new EventEmitter();
   @Output('blur')
   get onBlur(): Observable<FocusEvent> {
     return this._blurEmitter.asObservable();
@@ -191,7 +200,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   private maxLengthMetErrorfields: string[] = [];
   private statusChangeSubscription: any;
 
-  maskOptions: IMaskOptions;
   templates: any = {};
   templateContext: any;
 

@@ -11,6 +11,7 @@ import {
   PickerControl,
   DateTimeControl,
 } from './../../../../platform/index';
+import { map } from 'rxjs/operators';
 // APP
 let ValidationTpl = require('./templates/Validation.html');
 let RequiredTpl = require('./templates/Required.html');
@@ -356,12 +357,12 @@ export class FieldInteractionsDemoComponent {
                   http
                     .get('http://novo-elements-mock.getsandbox.com/users')
                     .pipe(
-                      map(function(results) {
+                      map(function(results: any[]) {
                         return results.map((result) => {
                           result.test = 'Built with Options Promise';
                           return result;
                         });
-                      })
+                      }),
                     )
                     .subscribe(resolve, reject);
                 } else {
