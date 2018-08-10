@@ -21,8 +21,9 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 install:
-  - npm install
   - npm install -g npm
+  - npm cache verify
+  - npm install
   - npm install -g angular-cli-ghpages
 
 script:
