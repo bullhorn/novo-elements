@@ -88,6 +88,7 @@ export class NovoLabelService {
   encryptedFieldTooltip = 'This data has been stored at the highest level of security';
   noStatesForCountry = 'No states available for the selected country';
   selectCountryFirst = 'Please select a country before selecting a state';
+  loading = 'Loading...';
 
   constructor(
     @Optional()

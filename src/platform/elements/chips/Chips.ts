@@ -1,16 +1,17 @@
 // NG2
-import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit, OnDestroy, ViewChild, ViewContainerRef, HostBinding } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { debounceTime } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 // APP
-import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { ChipsStateService } from './ChipsStateService';
+import { ChipsStateService, CHIPS_STATE } from './ChipsStateService';
 import { ChipsDataService } from './ChipsDataService';
 
 // Value accessor for the component (supports ngModel)
@@ -67,9 +68,9 @@ export class NovoChipElement {
 }
 
 @Component({
-    selector: 'chips,novo-chips',
-    providers: [CHIPS_VALUE_ACCESSOR, ChipsStateService],
-    template: `
+  selector: 'chips,novo-chips',
+  providers: [CHIPS_VALUE_ACCESSOR, ChipsStateService],
+  template: `
         <chip
             *ngFor="let item of _items | async"
             [type]="type || item?.value?.searchEntity"
@@ -85,7 +86,7 @@ export class NovoChipElement {
                 [closeOnSelect]="closeOnSelect"
                 [config]="source"
                 [disablePickerInput]="disablePickerInput"
-                [placeholder]="placeholder"
+                [placeholder]="actualPlaceholder"
                 [(ngModel)]="itemToAdd"
                 (select)="add($event)"
                 (keydown)="onKeyDown($event)"
@@ -99,15 +100,18 @@ export class NovoChipElement {
         <div class="preview-container">
             <span #preview></span>
         </div>
-        <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput"></i>
+        <ng-container *ngIf="pickerLoadingState">
+          <novo-simple-spinner [spinnerCss]="{ 'fill': '#4a89dc' }"></novo-simple-spinner>
+        </ng-container>
+        <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput && !pickerLoadingState"></i>
         <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
    `,
   host: {
     '[class.with-value]': 'items.length > 0',
     '[class.disabled]': 'disablePickerInput',
-  },
+  },o
 })
-export class NovoChipsElement implements OnInit, ControlValueAccessor {
+export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy {
   @Input()
   closeOnSelect: boolean = false;
   @Input()
@@ -133,9 +137,12 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   blur: EventEmitter<any> = new EventEmitter();
   @Output()
   typing: EventEmitter<any> = new EventEmitter();
+  @Output()
+  loadingStateChange: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('preview', { read: ViewContainerRef })
   preview: ViewContainerRef;
+
   items: Array<any> = [];
   selected: any = null;
   config: any = {};
@@ -145,18 +152,36 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   // private data model
   _value: any = '';
   _items = new ReplaySubject(1);
+  pickerLoadingState: boolean = false;
+  actualPlaceholder: string;
   // Placeholders for the callbacks
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
 
-  constructor(public element: ElementRef,
+  constructor(
+    public element: ElementRef,
     private componentUtils: ComponentUtils,
     public labels: NovoLabelService,
     private chipsStateService: ChipsStateService,
-    private chipsDataService: ChipsDataService) { }
+    private chipsDataService: ChipsDataService,
+  ) {}
 
-  ngOnInit() {
-    this.setItems();
+  ngOnInit(): void {
+    this.actualPlaceholder = this.placeholder;
+    this.chipsStateService.chipsStateChange.debounceTime(500).subscribe((state: CHIPS_STATE) => {
+      if (state === 'LOADING') {
+        this.pickerLoadingState = true;
+        this.actualPlaceholder = this.labels.loading;
+      } else {
+        this.pickerLoadingState = false;
+        this.actualPlaceholder = this.placeholder;
+      }
+      this.loadingStateChange.emit(state);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.chipsStateService.chipsStateChange.unsubscribe();
   }
 
   //get accessor
@@ -184,13 +209,20 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   setItems() {
+    let loadingSet: boolean = false;
     this.items = [];
     if (this.source.getData && typeof this.source.getData === 'function') {
+      this.chipsStateService.updateState('LOADING');
+      loadingSet = true;
       this.source.getData().then((result: any) => {
         this.items = result;
         this._items.next(this.items);
+        this.value = this.items.map((i) => i.value || i.id);
+        this.onModelChange(this.value);
+        this.chipsStateService.updateState('STABLE');
       });
-    } else if (this.model && Array.isArray(this.model)) {
+    }
+    if (this.model && Array.isArray(this.model)) {
       let noLabels = [];
       for (let value of this.model) {
         let label;
@@ -214,7 +246,10 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
         }
       }
       if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
+        loadingSet = true;
+        this.chipsStateService.updateState('LOADING');
         this.source.getLabels(noLabels).then((result) => {
+          this.chipsStateService.updateState('STABLE');
           for (let value of result) {
             if (value.hasOwnProperty('label')) {
               this.items.push({
@@ -232,6 +267,44 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
       }
     }
     this.changed.emit({ value: this.model, rawValue: this.items });
+    this._items.next(this.items);
+<<<<<<< HEAD
+  }
+
+  getLabelFromOptions(value) {
+    let optLabel = this.source.options.find((val) => val.value === value);
+    return {
+      value,
+      label: optLabel ? optLabel.label : value,
+    };
+  }
+
+  deselectAll(event?) {
+    this.selected = null;
+    this.hidePreview();
+  }
+
+  select(event?, item?) {
+    this.blur.emit(event);
+    this.deselectAll();
+    this.selected = item;
+    this.showPreview();
+  }
+
+  onTyping(event?) {
+    this.typing.emit(event);
+  }
+
+  onFocus(event?) {
+    this.deselectAll();
+    this.element.nativeElement.classList.add('selected');
+    this.focus.emit(event);
+  }
+
+=======
+    if (!loadingSet) {
+      this.chipsStateService.updateState('STABLE');
+    }
     this._items.next(this.items);
   }
 
@@ -265,6 +338,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     this.focus.emit(event);
   }
 
+>>>>>>> fix(chips) - updates to load getdata and delay onInit FI execution until getData is complete
   add(event) {
     if (event && !(event instanceof Event)) {
       this.items.push(event);
