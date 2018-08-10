@@ -13,6 +13,7 @@ import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
 import { Security } from './services/security/Security';
 import { OptionsService } from './services/options/OptionsService';
+import { NovoTemplateService } from './services/template/NovoTemplateService';
 
 const NOVO_ELEMENTS_PROVIDERS = [
   { provide: NovoDragulaService, useClass: NovoDragulaService },
@@ -27,22 +28,23 @@ const NOVO_ELEMENTS_PROVIDERS = [
   FieldInteractionApi,
   DateFormatService,
   Security,
+  NovoTemplateService,
 ];
 
 @NgModule({
-  imports: [],
+  imports: []
 })
 export class NovoElementProviders {
   static forRoot() {
     return {
       ngModule: NovoElementProviders,
-      providers: [...NOVO_ELEMENTS_PROVIDERS],
+      providers: [...NOVO_ELEMENTS_PROVIDERS]
     };
   }
 
   static forChild() {
     return {
-      ngModule: NovoElementProviders,
+      ngModule: NovoElementProviders
     };
   }
 }

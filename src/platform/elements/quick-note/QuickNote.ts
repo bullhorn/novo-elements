@@ -40,19 +40,27 @@ declare var CKEDITOR: any;
     `,
 })
 export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('wrapper') public wrapper: ElementRef;
-  @ViewChild('host') public host: ElementRef;
+  @ViewChild('wrapper')
+  public wrapper: ElementRef;
+  @ViewChild('host')
+  public host: ElementRef;
   @ViewChild('results', { read: ViewContainerRef })
   results: ViewContainerRef;
 
-  @Input() config: any;
-  @Input() startupFocus: boolean = false;
-  @Input() placeholder: string;
+  @Input()
+  config: any;
+  @Input()
+  startupFocus: boolean = false;
+  @Input()
+  placeholder: string;
 
   // Emitter for selects
-  @Output() focus: EventEmitter<any> = new EventEmitter();
-  @Output() blur: EventEmitter<any> = new EventEmitter();
-  @Output() change: EventEmitter<any> = new EventEmitter();
+  @Output()
+  focus: EventEmitter<any> = new EventEmitter();
+  @Output()
+  blur: EventEmitter<any> = new EventEmitter();
+  @Output()
+  change: EventEmitter<any> = new EventEmitter();
 
   // The characters that the user enters in order to search for a person/thing to tag
   private resultsComponent: any;
@@ -420,6 +428,18 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
       let text = start.getText();
       let symbol = this.config.triggers[this.taggingMode];
       let wordStart = text.lastIndexOf(symbol, range.startOffset - 1);
+
+      if (wordStart > 0) {
+        let beforeSymbol: string = text.charAt(wordStart - 1);
+        // We don't want to trigger the lookup call unless the symbol was preceded by whitespace
+        if (beforeSymbol !== '\u200B' && /\S/.test(beforeSymbol)) {
+          return '';
+        }
+      } else if (start.hasPrevious() && /\S$/.test(start.getPrevious().getText())) {
+        // When wordStart is <= 0, we need to check the previous node's text to see if it ended with whitespace or not
+        return '';
+      }
+
       let wordEnd = text.indexOf(' ', range.startOffset + 1);
       if (wordStart === -1) {
         wordStart = 0;

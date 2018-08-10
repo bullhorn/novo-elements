@@ -1,5 +1,17 @@
 // NG
-import { ChangeDetectorRef, Component, ElementRef, OnInit, forwardRef, Host, Input, Inject, ViewChild, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  forwardRef,
+  Host,
+  Input,
+  Output,
+  Inject,
+  ViewChild,
+  EventEmitter,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
@@ -11,6 +23,7 @@ import { NovoDatePickerElement } from './DatePicker';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
+import { DateFormatService } from '../../services/date-format/DateFormat';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -23,7 +36,7 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-date-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="openPanel()" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" #input data-automation-id="date-input"/>
+        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="_handleFocus($event)" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="date-input"/>
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
         <novo-overlay-template [parent]="element" position="above-below">
@@ -42,23 +55,24 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   /** View -> model callback called when autocomplete has been touched */
   _onTouched = () => {};
 
-  @Input()
-  name: string;
-  @Input()
-  placeholder: string;
-  @Input()
-  maskOptions: any;
-  @Input()
-  format: string;
-  @Input()
-  textMaskEnabled: boolean = true;
-  @Input()
-  allowInvalidDate: boolean = false;
+  @Input() name: string;
+  @Input() placeholder: string;
+  @Input() maskOptions: any;
+  @Input() format: string;
+  @Input() textMaskEnabled: boolean = true;
+  @Input() allowInvalidDate: boolean = false;
+  @Output() blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output() focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
 
-  constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(
+    public element: ElementRef,
+    public labels: NovoLabelService,
+    private _changeDetectorRef: ChangeDetectorRef,
+    public dateFormatService: DateFormatService,
+  ) {
     this.placeholder = this.labels.dateFormatPlaceholder;
   }
 
@@ -102,18 +116,31 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     }
   }
 
+  _handleBlur(event: FocusEvent): void {
+    this.blurEvent.emit(event);
+  }
+
+  _handleFocus(event: FocusEvent): void {
+    this.openPanel();
+    this.focusEvent.emit(event);
+  }
+
   _handleEvent(event: Event, blur: boolean): void {
     let value = (event.target as HTMLInputElement).value;
+    this.formatDate(value, blur);
+    this.openPanel();
+  }
+
+  protected formatDate(value: string, blur: boolean) {
     try {
-      let dateTimeValue = Date.parse(value);
-      if (!isNaN(dateTimeValue)) {
+      let [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
+      if (!isNaN(dateTimeValue.getUTCDate())) {
         let dt = new Date(dateTimeValue);
         this.dispatchOnChange(dt, blur);
       } else {
         this.dispatchOnChange(null, blur);
       }
     } catch (err) {}
-    this.openPanel();
   }
 
   writeValue(value: any): void {

@@ -49,7 +49,7 @@ const PICKER_VALUE_ACCESSOR = {
             type="text"
             class="picker-input"
             [(ngModel)]="term"
-            [class.entity-picker]="config.entityIcon"
+            [class.entity-picker]="config?.entityIcon"
             [class.entity-selected]="config?.entityIcon && _value"
             (ngModelChange)="checkTerm($event)"
             [placeholder]="placeholder"
@@ -368,6 +368,7 @@ export class NovoPickerElement implements OnInit {
           } else {
             this.term = value;
           }
+          this.ref.markForCheck();
         });
       } else {
         this.term = value || '';

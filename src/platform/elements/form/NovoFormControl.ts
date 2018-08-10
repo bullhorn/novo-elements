@@ -51,7 +51,8 @@ export class NovoFormControl extends FormControl {
     button?: boolean;
   };
   rawValue?: any;
-
+  customControlConfig?: any;
+  checkboxLabel?: string;
   private historyTimeout: any;
 
 
@@ -93,6 +94,7 @@ export class NovoFormControl extends FormControl {
     this.minlength = control.minlength;
     this.closeOnSelect = control.closeOnSelect;
     this.interactions = control.interactions;
+    this.checkboxLabel = control.checkboxLabel;
     this.appendToBody = control.appendToBody;
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
@@ -101,6 +103,7 @@ export class NovoFormControl extends FormControl {
     this.description = control.description;
     this.options = control.options;
     this.tipWell = control.tipWell;
+    this.customControlConfig = control.customControlConfig;
 
     // Reactive Form, need to enable/disable, can't bind to [disabled]
     if (this.readOnly) {

@@ -10,6 +10,6 @@ import { NovoListModule } from '../list/List.module';
   declarations: [PlacesListComponent],
   imports: [CommonModule, HttpClientModule, FormsModule, NovoListModule],
   exports: [PlacesListComponent],
-  providers: [{ provide: GooglePlacesService, useClass: GooglePlacesService }],
+  providers: [GooglePlacesService],
 })
 export class GooglePlacesModule {}

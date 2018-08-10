@@ -355,15 +355,14 @@ export class FieldInteractionsDemoComponent {
                 if (query && query.length) {
                   http
                     .get('http://novo-elements-mock.getsandbox.com/users')
-                    .map(function(res) {
-                      return res.json();
-                    })
-                    .map(function(results) {
-                      return results.map((result) => {
-                        result.test = 'Built with Options Promise';
-                        return result;
-                      });
-                    })
+                    .pipe(
+                      map(function(results) {
+                        return results.map((result) => {
+                          result.test = 'Built with Options Promise';
+                          return result;
+                        });
+                      })
+                    )
                     .subscribe(resolve, reject);
                 } else {
                   resolve(['DEFAULT']);
@@ -873,7 +872,6 @@ export class FieldInteractionsDemoComponent {
                         if (query && query.length) {
                             http
                                 .get('http://novo-elements-mock.getsandbox.com/users')
-                                .map(res => res.json())
                                 .map(results => {
                                     return results.map(result => {
                                         result.test = 'Built with Options Promise';

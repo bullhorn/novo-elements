@@ -201,15 +201,10 @@ export class RenderPipe implements PipeTransform {
         let country: any = findByCountryId(Number(value.countryName));
         text = '';
         if (value.address1 || value.address2) {
-          text += `
-                        ${value.address1 || ''}
-                        ${value.address2 || ''}<br />
-                    `.trim();
+          text += `${value.address1 || ''} ${value.address2 || ''}<br />\n`;
         }
-        text += `
-                    ${value.city || ''} ${value.state || ''} ${value.zip || ''}${value.city || value.state || value.zip ? '<br />' : ''}
-                    ${country ? country.name : value.countryName || ''}${country || value.countryName ? '<br />' : ''}
-                `;
+        text += `${value.city || ''} ${value.state || ''} ${value.zip || ''}${value.city || value.state || value.zip ? '<br />\n' : ''}`;
+        text += `${country ? country.name : value.countryName || ''}${country || value.countryName ? '<br />\n' : ''}`;
         text = this.sanitizationService.bypassSecurityTrustHtml(text.trim());
         break;
       case 'DateTime':

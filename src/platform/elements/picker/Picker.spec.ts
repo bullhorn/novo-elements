@@ -285,6 +285,26 @@ describe('Elements: NovoPickerElement', () => {
         expect(component.term).toEqual('');
       }),
     );
+    it('should markForCheck once when not calling getLabels()', () => {
+      spyOn(component.ref, 'markForCheck');
+      component.writeValue('123');
+      expect(component.ref.markForCheck).toHaveBeenCalledTimes(1);
+    });
+    it(
+      'should markForCheck when getLabels() completes',
+      fakeAsync(() => {
+        spyOn(component.ref, 'markForCheck');
+        component.config = {
+          getLabels: () =>
+            new Promise((resolve) => {
+              resolve([{ label: 'DYNAMIC_LABEL' }]);
+            }),
+        };
+        component.writeValue(123);
+        tick();
+        expect(component.ref.markForCheck).toHaveBeenCalledTimes(2);
+      }),
+    );
   });
 
   describe('Method: registerOnChange()', () => {

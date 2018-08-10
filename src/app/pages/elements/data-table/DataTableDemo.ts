@@ -324,6 +324,11 @@ export class DataTableDemoComponent implements OnInit {
     pageSize: 10,
     pageSizeOptions: [10, 50, 100, 250, 500],
   };
+  public widePaginationOptions: IDataTablePaginationOptions = {
+    theme: 'basic-wide',
+    pageSize: 10,
+    pageSizeOptions: [10, 50, 100, 250, 500],
+  };
   public sharedSearchOptions: IDataTableSearchOptions = {
     placeholder: 'Search for things...',
     tooltip: 'HELLO',

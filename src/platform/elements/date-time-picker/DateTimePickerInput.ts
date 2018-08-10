@@ -1,5 +1,5 @@
 // NG
-import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Inject, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Output, Inject, ViewChild, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
@@ -20,8 +20,8 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-date-time-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-        <novo-date-picker-input [ngModel]="datePart" (ngModelChange)="updateDate($event)" [maskOptions]="maskOptions"></novo-date-picker-input>
-        <novo-time-picker-input [ngModel]="timePart" (ngModelChange)="updateTime($event)" [military]="military"></novo-time-picker-input>
+        <novo-date-picker-input [ngModel]="datePart" (ngModelChange)="updateDate($event)" [maskOptions]="maskOptions" (blurEvent)="handleBlur($event)" (focusEvent)="handleFocus($event)" ></novo-date-picker-input>
+        <novo-time-picker-input [ngModel]="timePart" (ngModelChange)="updateTime($event)" [military]="military" (blurEvent)="handleBlur($event)" (focusEvent)="handleFocus($event)"></novo-time-picker-input>
   `,
 })
 export class NovoDateTimePickerInputElement implements ControlValueAccessor {
@@ -40,6 +40,8 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   @Input() maskOptions: any;
   @Input() military: boolean = false;
   @Input() format: string;
+  @Output() blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output() focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) {}
 
@@ -55,6 +57,14 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   updateTime(event) {
     this.timePart = event;
     this.checkParts();
+  }
+
+  handleBlur(event) {
+    this.blurEvent.emit(event);
+  }
+
+  handleFocus(event) {
+    this.focusEvent.emit(event);
   }
 
   checkParts() {

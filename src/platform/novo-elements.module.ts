@@ -119,4 +119,4 @@ import { NovoCommonModule } from './elements/common/common.module';
     { provide: FormUtils, useClass: FormUtils },
   ],
 })
-export class NovoElementsModule {}
+export class NovoElementsModule { }

@@ -22,6 +22,7 @@ import {
   IDataTableColumnSortConfig,
 } from '../interfaces';
 import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
+import { NovoDropdownElement } from '../../dropdown/Dropdown';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { DataTableState } from '../state/data-table-state.service';
 import { Helpers } from '../../../utils/Helpers';
@@ -49,7 +50,7 @@ import { Helpers } from '../../../utils/Helpers';
                         <item [class.active]="labels.customDateRange === activeDateFilter" (click)="toggleCustomRange($event, true)" *ngIf="config.filterConfig.allowCustomRange && !showCustomRange" [keepOpen]="true">
                             {{ labels.customDateRange }} <i class="bhi-check" *ngIf="labels.customDateRange === activeDateFilter"></i>
                         </item>
-                        <div class="calender-container" *ngIf="showCustomRange">
+                        <div class="calendar-container" *ngIf="showCustomRange">
                             <div (click)="toggleCustomRange($event, false)"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
                             <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true"></novo-date-picker>
                         </div>
@@ -71,8 +72,8 @@ import { Helpers } from '../../../utils/Helpers';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit, OnDestroy {
-  @ViewChild('filterInput')
-  filterInput: ElementRef;
+  @ViewChild('filterInput') filterInput: ElementRef;
+  @ViewChild(NovoDropdownElement) dropdown: NovoDropdownElement;
 
   @Input()
   defaultSort: { id: string; value: string };
@@ -179,6 +180,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     Helpers.swallowEvent(event);
     this.showCustomRange = value;
     this.changeDetectorRef.markForCheck();
+    this.dropdown.openPanel(); // Ensures that the panel correctly updates to the dynamic size of the dropdown
   }
 
   public focusInput(): void {

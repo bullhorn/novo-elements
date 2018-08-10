@@ -409,15 +409,15 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
     // Default templates defined here
     this.defaultTemplates.forEach((item) => {
+      // Only override if it doesn't already exist
       if (!this.templates[item.getType()]) {
         this.templates[item.getType()] = item.template;
       }
     });
     // Custom templates passed in
     this.customTemplates.forEach((item) => {
-      if (!this.templates[item.getType()]) {
-        this.templates[item.getType()] = item.template;
-      }
+      // Override anything that is custom and in HTML
+      this.templates[item.getType()] = item.template;
     });
     // Load columns
     this.configureColumns();

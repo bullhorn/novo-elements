@@ -115,12 +115,16 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
         return { value: item, label: item };
       });
     } else {
-      this.filteredOptions = (this.options || []).filter((item) => {
-        return !item.readOnly;
-      });
-      this.filteredOptions.forEach((element) => {
-        element.active = false;
-      });
+      this.filteredOptions = (this.options || [])
+        .filter((item) => {
+          return !item.readOnly;
+        })
+        .map((element) => {
+          return {
+            ...element,
+            active: false,
+          };
+        });
     }
     if (!this.model && !this.createdItem) {
       this.clear();

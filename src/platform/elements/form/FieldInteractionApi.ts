@@ -510,9 +510,11 @@ export class FieldInteractionApi {
   ): void {
     let control = this.getControl(key);
     if (control) {
-      let newConfig: any = Object.assign({}, control.config);
+      let newConfig: any = {
+        resultsTemplate: control.config.resultsTemplate,
+      };
       if (config.optionsUrl || config.optionsUrlBuilder || config.optionsPromise) {
-        newConfig = {
+        newConfig = Object.assign(newConfig, {
           format: config.format,
           options: (query) => {
             if (config.optionsPromise) {
@@ -537,7 +539,7 @@ export class FieldInteractionApi {
               }
             });
           },
-        };
+        });
       } else if (config.options) {
         newConfig.options = [...config.options];
       }

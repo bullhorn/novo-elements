@@ -440,7 +440,8 @@ novo-data-table {
 }
 
 novo-data-table-pagination {
-  &.basic {
+  &.basic,
+  &.basic-wide {
     display: flex;
     align-items: center;
     flex: 1;
@@ -453,12 +454,16 @@ novo-data-table-pagination {
     > .novo-data-table-range-label-long,
     > .novo-data-table-range-label-short {
       padding-right: 10px;
+      white-space: nowrap;
     }
     > .novo-data-table-range-label-long {
       display: none;
       @media (min-width: $breakpoint) {
         display: block;
       }
+    }
+    > .novo-data-table-spacer {
+      width: 100%;
     }
     > .novo-data-table-range-label-short {
       display: block;
@@ -554,7 +559,7 @@ novo-data-table-pagination {
   }
 }
 
-.data-table-dropdown {
+.dropdown-container.data-table-dropdown {
   min-width: 230px;
   max-width: 230px;
   max-height: 500px;
@@ -638,7 +643,7 @@ novo-data-table-pagination {
       text-overflow: ellipsis;
     }
   }
-  .calender-container {
+  .calendar-container {
     height: 100%;
     min-height: 200px;
     width: 100%;

@@ -1,9 +1,13 @@
 <button theme="secondary" *ngIf="!myFieldsetsForm.showingAllFields && !(myFieldsetsForm.allFieldsRequired || myFieldsetsForm.allFieldsNotRequired)" (click)="myFieldsetsForm.showAllFields()">Show All Fields</button>
 <button theme="secondary" *ngIf="!myFieldsetsForm.showingRequiredFields && !(myFieldsetsForm.allFieldsRequired || myFieldsetsForm.allFieldsNotRequired)" (click)="myFieldsetsForm.showOnlyRequired()">Show Required Fields</button>
-<novo-dynamic-form class="dynamic" layout="vertical" [fieldsets]="fieldsets" [(form)]="fieldsetsForm" #myFieldsetsForm></novo-dynamic-form>
+<novo-dynamic-form class="dynamic" layout="vertical" [fieldsets]="fieldsets" [(form)]="fieldsetsForm" #myFieldsetsForm>
+  <ng-template novoTemplate="custom-demo-component" let-control let-form="form">
+    <custom-demo-component [control]="control" [form]="form"></custom-demo-component>
+  </ng-template>
+</novo-dynamic-form>
 <footer class="dynamic-demo-footer">
-    <button (click)="save(myform)" theme="primary" icon="check">Save</button>
-    <button (click)="clear()" theme="secondary" icon="check">Clear</button>
+  <button (click)="save(myform)" theme="primary" icon="check">Save</button>
+  <button (click)="clear()" theme="secondary" icon="check">Clear</button>
 </footer>
 <div class="final-value">Valid: {{myform.isValid | json}}</div>
 <div class="final-value">Values: {{myform.values | json}}</div>

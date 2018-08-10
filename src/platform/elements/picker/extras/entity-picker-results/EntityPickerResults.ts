@@ -63,15 +63,23 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                     <i class="bhi-person"></i>
                     <span [innerHtml]="highlight(match.data.owner.name, term)"></span>
                 </p>
+                <!-- PRIMARY DEPARTMENT -->
+                <p class="primary-department" *ngIf="match.data.primaryDepartment && match.data.primaryDepartment.name && match.data.searchEntity === 'CorporateUser'">
+                    <i class="bhi-department"></i>
+                    <span [innerHtml]="highlight(match.data.primaryDepartment.name, term)"></span>
+                </p>
+                <!-- OCCUPATION -->
+                <p class="occupation" *ngIf="match.data.occupation && match.data.searchEntity === 'CorporateUser'">
+                    <i class="bhi-occupation"></i>
+                    <span [innerHtml]="highlight(match.data.occupation, term)"></span>
+                </p>
             </item-content>
         </novo-list-item>
     `,
 })
 export class EntityPickerResult {
-  @Input()
-  match: any;
-  @Input()
-  term: any;
+  @Input() match: any;
+  @Input() term: any;
 
   constructor(public labels: NovoLabelService) {}
 
@@ -186,8 +194,7 @@ export class EntityPickerResult {
     `,
 })
 export class EntityPickerResults extends BasePickerResults {
-  @Output()
-  select: EventEmitter<any> = new EventEmitter();
+  @Output() select: EventEmitter<any> = new EventEmitter();
   constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
     super(element, ref);
   }

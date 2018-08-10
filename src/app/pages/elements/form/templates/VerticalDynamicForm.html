@@ -1,6 +1,10 @@
 <button theme="secondary" (click)="nomyform.showAllFields()">Show All Fields</button>
 <button theme="secondary" (click)="nomyform.showOnlyRequired()">Show Required Fields</button>
-<novo-dynamic-form layout="vertical" class="dynamic" [controls]="dynamicVertical" [(form)]="dynamicVerticalForm" #nomyform></novo-dynamic-form>
+<novo-dynamic-form layout="vertical" class="dynamic" [controls]="dynamicVertical" [(form)]="dynamicVerticalForm" #nomyform>
+  <ng-template novoTemplate="custom-demo-component" let-control let-form="form">
+    <custom-demo-component [control]="control" [form]="form"></custom-demo-component>
+  </ng-template>
+</novo-dynamic-form>
 <div class="final-value">Valid: {{nomyform.isValid | json}}</div>
 <div class="final-value">Values: {{nomyform.values | json}}</div>
 <div class="final-value">Updated Values: {{nomyform.updatedValues() | json}}</div>
