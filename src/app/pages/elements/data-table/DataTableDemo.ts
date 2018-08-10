@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, ViewChild } from '@angular/core';
-import { Http } from '@angular/http';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';

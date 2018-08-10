@@ -1,6 +1,5 @@
 // NG2
 import { NgModule } from '@angular/core';
-import { Http } from '@angular/http';
 // APP
 import { GooglePlacesService } from './elements/places/places.service';
 import { NovoDragulaService } from './elements/dragula/DragulaService';
