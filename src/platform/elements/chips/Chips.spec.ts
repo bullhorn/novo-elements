@@ -127,6 +127,7 @@ describe('Elements: NovoChipsElement', () => {
         });
 
         it('should change the value', () => {
+            spyOn(component, 'setItems');
             component.writeValue(10);
             expect(component.model).toBe(10);
         });
