@@ -440,7 +440,8 @@ novo-data-table {
 }
 
 novo-data-table-pagination {
-  &.basic {
+  &.basic,
+  &.basic-wide {
     display: flex;
     align-items: center;
     flex: 1;
@@ -453,12 +454,16 @@ novo-data-table-pagination {
     > .novo-data-table-range-label-long,
     > .novo-data-table-range-label-short {
       padding-right: 10px;
+      white-space: nowrap;
     }
     > .novo-data-table-range-label-long {
       display: none;
       @media (min-width: $breakpoint) {
         display: block;
       }
+    }
+    > .novo-data-table-spacer {
+      width: 100%;
     }
     > .novo-data-table-range-label-short {
       display: block;
