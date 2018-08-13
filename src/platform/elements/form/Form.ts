@@ -9,6 +9,7 @@ import { NovoTemplateService } from '../../services/template/NovoTemplateService
 @Component({
   selector: 'novo-form',
   template: `
+        <novo-control-templates></novo-control-templates>
         <div class="novo-form-container">
             <header *ngIf="!hideHeader">
                 <ng-content select="form-title"></ng-content>
@@ -19,19 +20,23 @@ import { NovoTemplateService } from '../../services/template/NovoTemplateService
             </form>
         </div>
     `,
-  providers: [NovoTemplateService]
+  providers: [NovoTemplateService],
 })
 export class NovoFormElement implements AfterContentInit, OnInit {
-  @Input() form: NovoFormGroup;
-  @Input() layout: string;
-  @Input() hideHeader: boolean = false;
+  @Input()
+  form: NovoFormGroup;
+  @Input()
+  layout: string;
+  @Input()
+  hideHeader: boolean = false;
 
-  @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
+  @ContentChildren(NovoTemplate)
+  customTemplates: QueryList<NovoTemplate>;
 
   public showingAllFields: boolean = false;
   public showingRequiredFields: boolean = true;
 
-  constructor(private templates: NovoTemplateService) { }
+  constructor(private templates: NovoTemplateService) {}
 
   get value() {
     return this.form.getRawValue();
@@ -52,7 +57,6 @@ export class NovoFormElement implements AfterContentInit, OnInit {
       });
     }
   }
-
 
   public showAllFields(): void {
     Object.keys(this.form.controls).forEach((key: string) => {

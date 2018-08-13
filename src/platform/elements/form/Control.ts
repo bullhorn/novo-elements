@@ -58,7 +58,6 @@ export class NovoAutoSize implements AfterContentInit {
 @Component({
   selector: 'novo-control',
   template: `
-        <novo-control-templates></novo-control-templates>
         <div class="novo-control-container" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
             <!--Encrypted Field-->
             <span [tooltip]="labels.encryptedFieldTooltip" [tooltipPosition]="'right'"><i [hidden]="!form.controls[control.key].encrypted"
@@ -92,6 +91,11 @@ export class NovoAutoSize implements AfterContentInit {
                             <!--TODO prefix/suffix on the control-->
                             <ng-container *ngIf="templates">
                               <ng-container *ngTemplateOutlet="templates[form.controls[control.key].controlType]; context: templateContext"></ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="!templates || loading">
+                                <div class="novo-control-input-container novo-control-input-with-label">
+                                  <input type="text"/>>
+                                </div>
                             </ng-container>
                         </div>
                     </div>
@@ -151,15 +155,24 @@ export class NovoAutoSize implements AfterContentInit {
   },
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
-  @Input() control: any;
-  @Input() form: any;
-  @Input() condensed: boolean = false;
-  @Input() autoFocus: boolean = false;
-  @Output() change: EventEmitter<any> = new EventEmitter();
-  @Output() edit: EventEmitter<any> = new EventEmitter();
-  @Output() save: EventEmitter<any> = new EventEmitter();
-  @Output() delete: EventEmitter<any> = new EventEmitter();
-  @Output() upload: EventEmitter<any> = new EventEmitter();
+  @Input()
+  control: any;
+  @Input()
+  form: any;
+  @Input()
+  condensed: boolean = false;
+  @Input()
+  autoFocus: boolean = false;
+  @Output()
+  change: EventEmitter<any> = new EventEmitter();
+  @Output()
+  edit: EventEmitter<any> = new EventEmitter();
+  @Output()
+  save: EventEmitter<any> = new EventEmitter();
+  @Output()
+  delete: EventEmitter<any> = new EventEmitter();
+  @Output()
+  upload: EventEmitter<any> = new EventEmitter();
   @Output('blur')
   get onBlur(): Observable<FocusEvent> {
     return this._blurEmitter.asObservable();
@@ -192,6 +205,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   maskOptions: IMaskOptions;
   templates: any = {};
   templateContext: any;
+  loading: boolean = false;
 
   constructor(
     element: ElementRef,
@@ -281,11 +295,13 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
     setTimeout(() => {
       this.templates = this.templateService.getAll();
+      this.loading = false;
       this.changeDetectorRef.markForCheck();
     });
   }
 
   ngOnInit() {
+    this.loading = true;
     // Make sure to initially format the time controls
     if (this.control && this.form.controls[this.control.key].value) {
       if (
