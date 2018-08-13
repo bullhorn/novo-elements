@@ -168,7 +168,7 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
 
   ngOnInit(): void {
     this.actualPlaceholder = this.placeholder;
-    this.chipsStateService.chipsStateChange.debounceTime(500).subscribe((state: CHIPS_STATE) => {
+    this.chipsStateService.chipsStateChange.subscribe((state: CHIPS_STATE) => {
       if (state === 'LOADING') {
         this.pickerLoadingState = true;
         this.actualPlaceholder = this.labels.loading;
@@ -218,7 +218,6 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
         this.items = result;
         this._items.next(this.items);
         this.value = this.items.map((i) => i.value || i.id);
-        this.onModelChange(this.value);
         this.chipsStateService.updateState('STABLE');
       });
     }
@@ -263,6 +262,9 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
             }
           }
           this._items.next(this.items);
+        }, (err: any) => {
+            this.chipsStateService.updateState('STABLE');
+            console.warn(err);
         });
       }
     }

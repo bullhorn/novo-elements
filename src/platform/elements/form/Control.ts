@@ -583,7 +583,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   handleChipsPickerStableState(event: any): void {
     if (event === 'STABLE') {
-      this.form.controls[this.control.key] = this.templateContext.$implicit;
+      this.templateContext.$implicit.markAsPristine();
       for (let interaction of this.invokeOnInitInteractions) {
         this.executeInteraction(interaction);
       }
