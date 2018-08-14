@@ -12,7 +12,6 @@ import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { ChipsStateService, CHIPS_STATE } from './ChipsStateService';
-import { ChipsDataService } from './ChipsDataService';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -163,7 +162,6 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
     private componentUtils: ComponentUtils,
     public labels: NovoLabelService,
     private chipsStateService: ChipsStateService,
-    private chipsDataService: ChipsDataService,
   ) {}
 
   ngOnInit(): void {
