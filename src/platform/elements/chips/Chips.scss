@@ -201,7 +201,7 @@ entity-chips {
         position: absolute;
         color: black;
         novo-list {
-            max-height: 450px;
+            max-height: 49vh;
             overflow: auto;
             novo-list-item {
                 flex: 0 0;
@@ -262,7 +262,7 @@ entity-chips {
             left: 0;
             width: 100%;
             min-width: 180px;
-            max-height: 450px;
+            max-height: 49vh;
             overflow: auto;
             z-index: 900;
             border: 1px solid #4A89DC;
