@@ -94,7 +94,7 @@ export class NovoAutoSize implements AfterContentInit {
                             </ng-container>
                             <ng-container *ngIf="!templates || loading">
                                 <div class="novo-control-input-container novo-control-input-with-label">
-                                  <input type="text"/>>
+                                  <input type="text"/>
                                 </div>
                             </ng-container>
                         </div>
