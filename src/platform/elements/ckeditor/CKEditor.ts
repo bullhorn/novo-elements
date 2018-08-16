@@ -1,6 +1,6 @@
 // NG2
 import { Component, Input, Output, ViewChild, EventEmitter, NgZone, forwardRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 // Value accessor for the component (supports ngModel)
 const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
@@ -21,21 +21,36 @@ declare var CKEDITOR: any;
   providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
   template: '<textarea [name]="name" [id]="name" #host></textarea>',
 })
-export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
-  @Input() config;
-  @Input() debounce;
-  @Input() name;
-  @Input() minimal;
-  @Input() startupFocus: boolean = false;
-  @Input() fileBrowserImageUploadUrl: string = '';
+export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlValueAccessor {
+  @Input()
+  config;
+  @Input()
+  debounce;
+  @Input()
+  name;
+  @Input()
+  minimal;
+  @Input()
+  startupFocus: boolean = false;
+  @Input()
+  fileBrowserImageUploadUrl: string = '';
+  @Input()
+  disabled: boolean = false;
 
-  @Output() change = new EventEmitter();
-  @Output() ready = new EventEmitter();
-  @Output() blur = new EventEmitter();
-  @Output() focus = new EventEmitter();
-  @Output() paste = new EventEmitter();
-  @Output() loaded = new EventEmitter();
-  @ViewChild('host') host;
+  @Output()
+  change = new EventEmitter();
+  @Output()
+  ready = new EventEmitter();
+  @Output()
+  blur = new EventEmitter();
+  @Output()
+  focus = new EventEmitter();
+  @Output()
+  paste = new EventEmitter();
+  @Output()
+  loaded = new EventEmitter();
+  @ViewChild('host')
+  host;
 
   _value: string = '';
   instance;
@@ -71,6 +86,9 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
     let config = this.config || this.getBaseConfig();
     if (this.startupFocus) {
       config.startupFocus = true;
+    }
+    if (this.disabled) {
+      config.readOnly = true;
     }
     this.ckeditorInit(config);
   }
@@ -215,6 +233,11 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit {
 
   registerOnTouched(fn) {
     this.onTouched = fn;
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
+    CKEDITOR.instances[this.instance.name].setReadOnly(disabled);
   }
 
   insertText(text) {

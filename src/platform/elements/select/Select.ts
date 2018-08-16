@@ -15,7 +15,7 @@ import {
   OnDestroy,
   NgZone,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { FocusMonitor } from '@angular/cdk/a11y';
 // App
@@ -35,7 +35,7 @@ const SELECT_VALUE_ACCESSOR = {
   selector: 'novo-select',
   providers: [SELECT_VALUE_ACCESSOR],
   template: `
-    <div #dropdownElement (click)="togglePanel(); false" tabIndex="{{disabled ? -1 : 0}}" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
+    <div #dropdownElement (click)="togglePanel(); false" tabIndex="{{ disabled ? -1 : 0 }}" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
     <novo-overlay-template [parent]="element" position="center" (closing)="dropdown.nativeElement.focus()">
       <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
         <ng-content></ng-content>
@@ -61,13 +61,19 @@ const SELECT_VALUE_ACCESSOR = {
     '(keydown)': 'onKeyDown($event)',
   },
 })
-export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
-  @Input() name: string;
-  @Input() options: Array<any>;
-  @Input() placeholder: string = 'Select...';
-  @Input() readonly: boolean;
-  @Input() headerConfig: any;
-  @Output() onSelect: EventEmitter<any> = new EventEmitter();
+export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
+  @Input()
+  name: string;
+  @Input()
+  options: Array<any>;
+  @Input()
+  placeholder: string = 'Select...';
+  @Input()
+  readonly: boolean;
+  @Input()
+  headerConfig: any;
+  @Output()
+  onSelect: EventEmitter<any> = new EventEmitter();
 
   selectedIndex: number = -1;
   empty: boolean = true;
@@ -84,10 +90,13 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
   filterTerm: string = '';
   filterTermTimeout;
   filteredOptions: any;
+  disabled: boolean = false;
 
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
-  @ViewChild('dropdownElement') dropdown: ElementRef;
+  @ViewChild(NovoOverlayTemplateComponent)
+  overlay: NovoOverlayTemplateComponent;
+  @ViewChild('dropdownElement')
+  dropdown: ElementRef;
 
   constructor(
     public element: ElementRef,
@@ -100,7 +109,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     this.focusMonitor.monitor(this.dropdown.nativeElement).subscribe((origin) =>
       this.ngZone.run(() => {
-        if (origin === 'keyboard') {
+        if (origin === 'keyboard' && !this.disabled) {
           this.openPanel();
         }
       }),
@@ -359,7 +368,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy {
     this.onModelTouched = fn;
   }
 
-  get disabled(): boolean {
-    return Boolean(this.element.nativeElement.attributes.getNamedItem('disabled'));
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
   }
 }
