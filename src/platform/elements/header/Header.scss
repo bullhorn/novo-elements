@@ -12,11 +12,13 @@ header[theme] {
     div.header-title {
       display: flex;
       align-items: center;
+      max-width: calc(100% - 40px);
     }
     .header-titles {
       display: flex;
       flex-direction: column;
       padding: 0px 8px;
+      max-width: 100%;
       h1 {
         font-size: 1.7em;
         margin: 0;

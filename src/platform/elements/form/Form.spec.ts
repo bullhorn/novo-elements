@@ -4,19 +4,13 @@ import { FormGroupDirective } from '@angular/forms';
 // App
 import { NovoFormElement } from './Form';
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';
-
+import { NovoFormModule } from './Form.module';
 describe('Elements: NovoFormElement', () => {
   let fixture;
   let component;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        NovoFormElement,
-        FormGroupDirective
-      ],
-      providers: [NovoTemplateService]
-    }).compileComponents();
+    TestBed.configureTestingModule({ imports: [NovoFormModule], providers: [NovoTemplateService] }).compileComponents();
     fixture = TestBed.createComponent(NovoFormElement);
     component = fixture.debugElement.componentInstance;
     // Mock @Input

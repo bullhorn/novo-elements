@@ -1,4 +1,4 @@
-import { Component, ContentChildren, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 // App
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';

@@ -1,5 +1,16 @@
 // NG
-import { ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Output, OnInit, ViewChild, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  forwardRef,
+  Input,
+  Output,
+  OnInit,
+  ViewChild,
+  EventEmitter,
+  HostBinding,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
 // Vendor
@@ -22,7 +33,7 @@ const DATE_VALUE_ACCESSOR = {
   providers: [DATE_VALUE_ACCESSOR],
   template: `
     <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="_handleFocus($event)"
-           (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="time-input"/>
+           (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="time-input" [disabled]="disabled"/>
     <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i>
     <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
 
@@ -40,14 +51,24 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   /** View -> model callback called when autocomplete has been touched */
   _onTouched = () => {};
 
-  @Input() name: string;
-  @Input() placeholder: string;
-  @Input() military: boolean = false;
-  @Input() maskOptions: any;
-  @Output() blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
-  @Output() focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Input()
+  name: string;
+  @Input()
+  placeholder: string;
+  @Input()
+  military: boolean = false;
+  @Input()
+  maskOptions: any;
+  @HostBinding('class.disabled')
+  @Input()
+  disabled: boolean = false;
+  @Output()
+  blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output()
+  focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
+  @ViewChild(NovoOverlayTemplateComponent)
+  overlay: NovoOverlayTemplateComponent;
 
   constructor(
     public element: ElementRef,
@@ -128,6 +149,10 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
 
   registerOnTouched(fn: () => {}) {
     this._onTouched = fn;
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
   }
 
   public dispatchOnChange(newValue?: any, skip: boolean = false) {
