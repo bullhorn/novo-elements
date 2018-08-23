@@ -44,6 +44,7 @@ export class NovoFormControl extends FormControl {
   layoutOptions?: { order?: string; download?: boolean; labelStyle?: string; draggable?: boolean; iconStyle?: string };
   military?: boolean;
   dateFormat?: string;
+  currencyFormat?: string;
   textMaskEnabled?: boolean;
   maskOptions: IMaskOptions;
   allowInvalidDate?: boolean;
@@ -89,6 +90,7 @@ export class NovoFormControl extends FormControl {
     this.layoutOptions = control.layoutOptions;
     this.military = control.military;
     this.dateFormat = control.dateFormat;
+    this.currencyFormat = control.currencyFormat;
     this.textMaskEnabled = control.textMaskEnabled;
     this.maskOptions = control.maskOptions;
     this.allowInvalidDate = control.allowInvalidDate;

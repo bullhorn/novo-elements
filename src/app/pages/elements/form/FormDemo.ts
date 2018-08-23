@@ -202,17 +202,10 @@ export class FormDemoComponent {
       },
     };
     // Text-based Controls
-    let textMask: any = {
-      mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
-      keepCharPositions: false,
-      guide: true,
-    };
     this.textControl = new TextBoxControl({
       key: 'text',
       label: 'Text Box',
       tooltip: 'Textbox',
-      maskOptions: textMask,
-      textMaskEnabled: true,
     });
     this.textAreaControl = new TextAreaControl({
       key: 'textarea',
