@@ -83,12 +83,18 @@ const template = `
     </div>`,
 })
 export class CustomDemoComponent {
-  @Input() control;
-  @Input() form: any;
-  @Input() edit: any;
-  @Input() save: any;
-  @Input() delete: any;
-  @Input() upload: any;
+  @Input()
+  control;
+  @Input()
+  form: any;
+  @Input()
+  edit: any;
+  @Input()
+  save: any;
+  @Input()
+  delete: any;
+  @Input()
+  upload: any;
 }
 
 @Component({
@@ -495,7 +501,12 @@ export class FormDemoComponent {
     this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
 
     // Calendar input controls
-    this.dateControl = new DateControl({ key: 'date', label: 'Date', tooltip: 'Date' });
+    this.dateControl = new DateControl({
+      key: 'date',
+      label: 'Date',
+      tooltip: 'Date',
+      startDate: new Date().setMonth(new Date().getMonth() - 1),
+    });
     this.userDefinedDateControl = new DateControl({
       key: 'userDefinedFormat',
       label: 'User Defined Format',

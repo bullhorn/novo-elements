@@ -1,11 +1,15 @@
 <div class="date-picker-demo-side-by-side">
-    <p>
-        <label>Value One</label> {{(dateOne | date) || 'N/A'}}
-        <label>Value Two</label> {{(dateTwo | date) || 'N/A'}}
-    </p>
-    <novo-date-picker [(ngModel)]="dateOne"></novo-date-picker>
-    <div>
-        <novo-date-picker-input [(ngModel)]="dateTwo" format="mm/dd/yyyy"></novo-date-picker-input>
-        <novo-date-picker-input [(ngModel)]="dateTwo" format="dd/mm/yyyy"></novo-date-picker-input>
-    </div>
+  <p>
+    <label>Value One</label> {{(dateOne | date) || 'N/A'}}
+    <label>Value Two</label> {{(dateTwo | date) || 'N/A'}}
+  </p>
+  <novo-date-picker [(ngModel)]="dateOne"></novo-date-picker>
+  <div>
+    <novo-date-picker-input [start]="start"
+                            [end]="end"
+                            [(ngModel)]="dateTwo"
+                            format="mm/dd/yyyy"></novo-date-picker-input>
+    <novo-date-picker-input [(ngModel)]="dateTwo"
+                            format="dd/mm/yyyy"></novo-date-picker-input>
+  </div>
 </div>

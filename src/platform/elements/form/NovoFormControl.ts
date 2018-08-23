@@ -45,6 +45,8 @@ export class NovoFormControl extends FormControl {
   military?: boolean;
   dateFormat?: string;
   currencyFormat?: string;
+  startDate?: Date | Number;
+  endDate?: Date | Number;
   textMaskEnabled?: boolean;
   maskOptions: IMaskOptions;
   allowInvalidDate?: boolean;
@@ -91,6 +93,8 @@ export class NovoFormControl extends FormControl {
     this.military = control.military;
     this.dateFormat = control.dateFormat;
     this.currencyFormat = control.currencyFormat;
+    this.startDate = control.startDate;
+    this.endDate = control.endDate;
     this.textMaskEnabled = control.textMaskEnabled;
     this.maskOptions = control.maskOptions;
     this.allowInvalidDate = control.allowInvalidDate;

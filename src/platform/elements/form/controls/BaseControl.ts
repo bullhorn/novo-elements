@@ -80,6 +80,8 @@ export interface NovoControlConfig {
   startupFocus?: boolean;
   fileBrowserImageUploadUrl?: string;
   isEmpty?: Function;
+  startDate?: Date | Number;
+  endDate?: Date | Number;
 }
 
 export class BaseControl {
@@ -141,6 +143,8 @@ export class BaseControl {
   startupFocus?: boolean;
   fileBrowserImageUploadUrl?: string;
   isEmpty?: Function;
+  startDate?: Date | Number;
+  endDate?: Date | Number;
 
   constructor(type: string = 'BaseControl', config: NovoControlConfig = {}) {
     this.__type = type;
@@ -175,6 +179,8 @@ export class BaseControl {
     this.textMaskEnabled = config.textMaskEnabled;
     this.maskOptions = config.maskOptions;
     this.allowInvalidDate = config.allowInvalidDate;
+    this.startDate = config.startDate;
+    this.endDate = config.endDate;
 
     if (this.required) {
       this.validators.push(Validators.required);
