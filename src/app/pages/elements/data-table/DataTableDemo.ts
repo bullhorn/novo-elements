@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, ViewChild } from '@angular/core';
-import { Http } from '@angular/http';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
@@ -141,7 +140,8 @@ export class DataTableDemoComponent implements OnInit {
   public BasicDemoServiceTpl: string = BasicDemoServiceTpl;
   public RemoteDemoServiceTpl: string = RemoteDemoServiceTpl;
 
-  @ViewChild('basic') table: NovoDataTable<MockData>;
+  @ViewChild('basic')
+  table: NovoDataTable<MockData>;
 
   // Table configuration
   public dataSetOptions: any[] = [{ label: 'Dataset #1', value: 1 }, { label: 'Dataset #2', value: 2 }, { label: 'Dataset #3', value: 3 }];
@@ -326,6 +326,11 @@ export class DataTableDemoComponent implements OnInit {
   ];
   public sharedPaginationOptions: IDataTablePaginationOptions = {
     theme: 'standard',
+    pageSize: 10,
+    pageSizeOptions: [10, 50, 100, 250, 500],
+  };
+  public widePaginationOptions: IDataTablePaginationOptions = {
+    theme: 'basic-wide',
     pageSize: 10,
     pageSizeOptions: [10, 50, 100, 250, 500],
   };

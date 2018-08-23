@@ -20,8 +20,8 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-date-time-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-        <novo-date-picker-input [ngModel]="datePart" (ngModelChange)="updateDate($event)" [maskOptions]="maskOptions" (blurEvent)="handleBlur($event)" (focusEvent)="handleFocus($event)" ></novo-date-picker-input>
-        <novo-time-picker-input [ngModel]="timePart" (ngModelChange)="updateTime($event)" [military]="military" (blurEvent)="handleBlur($event)" (focusEvent)="handleFocus($event)"></novo-time-picker-input>
+        <novo-date-picker-input [ngModel]="datePart" (ngModelChange)="updateDate($event)" [maskOptions]="maskOptions" (blurEvent)="handleBlur($event)" (focusEvent)="handleFocus($event)" [disabled]="disabled"></novo-date-picker-input>
+        <novo-time-picker-input [ngModel]="timePart" (ngModelChange)="updateTime($event)" [military]="military" (blurEvent)="handleBlur($event)" (focusEvent)="handleFocus($event)" [disabled]="disabled"></novo-time-picker-input>
   `,
 })
 export class NovoDateTimePickerInputElement implements ControlValueAccessor {
@@ -35,13 +35,22 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   /** View -> model callback called when autocomplete has been touched */
   _onTouched = () => {};
 
-  @Input() name: string;
-  @Input() placeholder: string;
-  @Input() maskOptions: any;
-  @Input() military: boolean = false;
-  @Input() format: string;
-  @Output() blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
-  @Output() focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Input()
+  name: string;
+  @Input()
+  placeholder: string;
+  @Input()
+  maskOptions: any;
+  @Input()
+  military: boolean = false;
+  @Input()
+  disabled: boolean = false;
+  @Input()
+  format: string;
+  @Output()
+  blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output()
+  focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) {}
 
@@ -90,9 +99,15 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   registerOnChange(fn: (value: any) => {}): void {
     this._onChange = fn;
   }
+
   registerOnTouched(fn: () => {}) {
     this._onTouched = fn;
   }
+
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
+  }
+
   public dispatchOnChange(newValue?: any) {
     if (newValue !== this.value) {
       this._onChange(newValue);

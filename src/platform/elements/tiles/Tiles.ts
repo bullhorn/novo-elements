@@ -30,7 +30,7 @@ const TILES_VALUE_ACCESSOR = {
   template: `
         <div class="tile-container" [class.active]="focused" [class.disabled]="disabled">
             <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked, disabled: option.disabled}" (click)="select($event, option, i)" [attr.data-automation-id]="option.label || option">
-                <input class="tiles-input" [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i" (change)="select($event, option, i)" (focus)="setFocus(true)" (blur)="setFocus(false)">
+                <input class="tiles-input" [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i" (change)="select($event, option, i)" (focus)="setFocus(true)" (blur)="setFocus(false)" [disabled]="disabled">
                 <label [attr.for]="name + i" [attr.data-automation-id]="option.label || option">
                     {{ option.label || option }}
                 </label>
@@ -59,12 +59,20 @@ const TILES_VALUE_ACCESSOR = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTilesElement implements ControlValueAccessor, AfterContentInit, OnChanges {
-  @Input() name: string = new Date().getTime().toString();
-  @Input() options: any;
-  @Input() required: boolean;
-  @Input('controlDisabled') disabled: boolean = false;
-  @Output() onChange: EventEmitter<any> = new EventEmitter();
-  @Output() onDisabledOptionClick: EventEmitter<any> = new EventEmitter();
+  @Input()
+  name: string = new Date().getTime().toString();
+  @Input()
+  options: any;
+  @Input()
+  required: boolean;
+  @Input('controlDisabled')
+  disabled: boolean = false;
+  @Output()
+  onChange: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onSelectedOptionClick: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onDisabledOptionClick: EventEmitter<any> = new EventEmitter();
 
   _options: Array<any> = [];
   public activeTile: any = null;
@@ -120,11 +128,13 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
       event.stopPropagation();
       event.preventDefault();
     }
-    if (item.checked) {
-      return;
-    }
 
     if (!item.disabled) {
+      if (item.checked) {
+        this.onSelectedOptionClick.emit(item);
+        return;
+      }
+
       for (let option of this._options) {
         option.checked = false;
       }
@@ -175,5 +185,9 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
 
   registerOnTouched(fn: Function): void {
     this.onModelTouched = fn;
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
   }
 }
