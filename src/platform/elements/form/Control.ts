@@ -100,7 +100,7 @@ export class NovoAutoSize implements AfterContentInit {
                         </div>
                     </div>
                     <!--Error Message-->
-                    <div class="field-message {{ form.controls[control.key].controlType }}" *ngIf="!condensed" [class.has-tip]="form.controls[control.key].tipWell">
+                    <div class="field-message {{ form.controls[control.key].controlType }}" *ngIf="!condensed" [class.has-tip]="form.controls[control.key].tipWell [class.error-shown]="showErrorState">
                         <div class="messages">
                             <span class="error-text" *ngIf="showFieldMessage"></span>
                             <span class="error-text" *ngIf="isDirty && errors?.required && form.controls[control.key].controlType !== 'address'">{{ form.controls[control.key].label | uppercase }} {{ labels.isRequired }}</span>
@@ -155,24 +155,15 @@ export class NovoAutoSize implements AfterContentInit {
   },
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
-  @Input()
-  control: any;
-  @Input()
-  form: any;
-  @Input()
-  condensed: boolean = false;
-  @Input()
-  autoFocus: boolean = false;
-  @Output()
-  change: EventEmitter<any> = new EventEmitter();
-  @Output()
-  edit: EventEmitter<any> = new EventEmitter();
-  @Output()
-  save: EventEmitter<any> = new EventEmitter();
-  @Output()
-  delete: EventEmitter<any> = new EventEmitter();
-  @Output()
-  upload: EventEmitter<any> = new EventEmitter();
+  @Input() control: any;
+  @Input() form: any;
+  @Input() condensed: boolean = false;
+  @Input() autoFocus: boolean = false;
+  @Output() change: EventEmitter<any> = new EventEmitter();
+  @Output() edit: EventEmitter<any> = new EventEmitter();
+  @Output() save: EventEmitter<any> = new EventEmitter();
+  @Output() delete: EventEmitter<any> = new EventEmitter();
+  @Output() upload: EventEmitter<any> = new EventEmitter();
   @Output('blur')
   get onBlur(): Observable<FocusEvent> {
     return this._blurEmitter.asObservable();
@@ -236,6 +227,14 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   get showFieldMessage() {
     return !this.errors && !this.maxLengthMet && Helpers.isBlank(this.control.description);
+  }
+
+  get showErrorState() {
+    return (
+      (this.isDirty && this.errors) ||
+      (this.maxLengthMet && this.focused && this.errors && !this.errors.maxlengthFields) ||
+      (this.focused && this.errors && this.errors.maxlength && this.errors.maxlengthFields && this.maxlengthErrorField)
+    );
   }
 
   get showCount() {
