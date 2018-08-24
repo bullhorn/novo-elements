@@ -21,7 +21,7 @@ export class NovoRadioGroup {}
   selector: 'novo-radio',
   providers: [RADIO_VALUE_ACCESSOR],
   template: `
-        <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" (change)="select($event)">
+        <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" (change)="select($event)" [disabled]="disabled">
         <label [attr.for]="name" (click)="select($event)">
             <button *ngIf="button" [ngClass]="{'unchecked': !checked, 'checked': checked, 'has-icon': !!icon}" [theme]="theme" [icon]="icon">{{ label }}</button>
             <div *ngIf="!button">
@@ -52,6 +52,8 @@ export class NovoRadioElement implements ControlValueAccessor {
   theme: string = 'secondary';
   @Input()
   icon: string;
+  @Input()
+  disabled: boolean = false;
 
   @Output()
   change: EventEmitter<any> = new EventEmitter();
@@ -84,5 +86,9 @@ export class NovoRadioElement implements ControlValueAccessor {
 
   registerOnTouched(fn: Function): void {
     this.onModelTouched = fn;
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
   }
 }

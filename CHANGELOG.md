@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.15.0"></a>
+# [2.15.0](https://github.com/bullhorn/novo-elements/compare/v2.14.1...v2.15.0) (2018-08-16)
+
+
+### Bug Fixes
+
+* **control:** fixing a typo ([#786](https://github.com/bullhorn/novo-elements/issues/786)) ([f68cd09](https://github.com/bullhorn/novo-elements/commit/f68cd09))
+* **data-table:** Fixing custom templates with data-table, also marking simple-table and table as deprecated ([f8dc56a](https://github.com/bullhorn/novo-elements/commit/f8dc56a))
+* **data-table:** spelling fix - calender should be calendar ([#770](https://github.com/bullhorn/novo-elements/issues/770)) ([108796d](https://github.com/bullhorn/novo-elements/commit/108796d))
+* **date-picker:** Make the date picker element exported ([7eaa9d6](https://github.com/bullhorn/novo-elements/commit/7eaa9d6))
+* **datepicker:** format date to proper locale when manually entering date ([#767](https://github.com/bullhorn/novo-elements/issues/767)) ([e207748](https://github.com/bullhorn/novo-elements/commit/e207748))
+* **field-interactions:** Fix issue with FI and custom picker configs ([a275eaf](https://github.com/bullhorn/novo-elements/commit/a275eaf))
+* **form:** Fixing many form controls to properly accept disabled, fixes [#788](https://github.com/bullhorn/novo-elements/issues/788) ([bd8f76b](https://github.com/bullhorn/novo-elements/commit/bd8f76b))
+* **form:** Form rendering fix with custom templates ([ee2958a](https://github.com/bullhorn/novo-elements/commit/ee2958a))
+* **quicknote:** note references triggering ([#781](https://github.com/bullhorn/novo-elements/issues/781)) ([6569058](https://github.com/bullhorn/novo-elements/commit/6569058))
+* **RenderPipe:** remove extra whitespace from address rendering ([#756](https://github.com/bullhorn/novo-elements/issues/756)) ([e06d504](https://github.com/bullhorn/novo-elements/commit/e06d504))
+* **value:** Changed html field displays to not strip style tags ([#772](https://github.com/bullhorn/novo-elements/issues/772)) ([afe8871](https://github.com/bullhorn/novo-elements/commit/afe8871))
+
+
+### Features
+
+* **data-table:** Handle overflow of header title and allow for spacing with the data-table pagination ([#782](https://github.com/bullhorn/novo-elements/issues/782)) ([a3676f5](https://github.com/bullhorn/novo-elements/commit/a3676f5))
+* **editor:** Allow pasting of html content with styles into the editor ([#779](https://github.com/bullhorn/novo-elements/issues/779)) ([70eda0f](https://github.com/bullhorn/novo-elements/commit/70eda0f))
+* **ng6:** part 1 of ng6 upgrade, using HttpClient over Http ([c70a867](https://github.com/bullhorn/novo-elements/commit/c70a867))
+* **picker:** Add dept and title fields to the internal picker ([#773](https://github.com/bullhorn/novo-elements/issues/773)) ([d5a9b98](https://github.com/bullhorn/novo-elements/commit/d5a9b98))
+* **tiles:** Added event emitter for when selected tiles are clicked ([#768](https://github.com/bullhorn/novo-elements/issues/768)) ([483bb90](https://github.com/bullhorn/novo-elements/commit/483bb90))
+* **toast:** Emit closed event for toasts that do not have a parent el… ([#780](https://github.com/bullhorn/novo-elements/issues/780)) ([71710c4](https://github.com/bullhorn/novo-elements/commit/71710c4))
+
+
+
 <a name="2.14.1"></a>
 ## [2.14.1](https://github.com/bullhorn/novo-elements/compare/v2.14.0...v2.14.1) (2018-07-24)
 

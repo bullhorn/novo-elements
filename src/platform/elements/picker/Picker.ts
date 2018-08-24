@@ -60,7 +60,7 @@ const PICKER_VALUE_ACCESSOR = {
             autocomplete="off" #input
             [disabled]="disablePickerInput"/>
         <i class="bhi-search" *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput"></i>
-        <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect" (click)="clearValue(true)"></i>
+        <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect && !disablePickerInput" (click)="clearValue(true)"></i>
         <novo-overlay-template class="picker-results-container" [parent]="element" position="above-below" (closing)="onOverlayClosed()">
             <span #results></span>
             <ng-content></ng-content>
@@ -112,7 +112,6 @@ export class NovoPickerElement implements OnInit {
   get disablePickerInput() {
     return this._disablePickerInput;
   }
-
   private _disablePickerInput: boolean = false;
 
   // Emitter for selects
@@ -202,6 +201,7 @@ export class NovoPickerElement implements OnInit {
   onKeyDown(event: KeyboardEvent) {
     if (this.disablePickerInput) {
       Helpers.swallowEvent(event);
+      return;
     }
     if (this.panelOpen && !this.disablePickerInput) {
       if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB) {
@@ -384,5 +384,9 @@ export class NovoPickerElement implements OnInit {
 
   registerOnTouched(fn: Function): void {
     this.onModelTouched = fn;
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this._disablePickerInput = disabled;
   }
 }

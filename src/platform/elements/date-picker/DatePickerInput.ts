@@ -11,6 +11,7 @@ import {
   Inject,
   ViewChild,
   EventEmitter,
+  HostBinding,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
@@ -36,11 +37,11 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-date-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="_handleFocus($event)" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="date-input"/>
+        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="_handleFocus($event)" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="date-input" [disabled]="disabled"/>
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
         <novo-overlay-template [parent]="element" position="above-below">
-            <novo-date-picker inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value"></novo-date-picker>
+            <novo-date-picker [start]="start" [end]="end" inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value"></novo-date-picker>
         </novo-overlay-template>
   `,
 })
@@ -55,14 +56,29 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   /** View -> model callback called when autocomplete has been touched */
   _onTouched = () => {};
 
-  @Input() name: string;
-  @Input() placeholder: string;
-  @Input() maskOptions: any;
-  @Input() format: string;
-  @Input() textMaskEnabled: boolean = true;
-  @Input() allowInvalidDate: boolean = false;
-  @Output() blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
-  @Output() focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Input()
+  name: string;
+  @Input()
+  start: Date;
+  @Input()
+  end: Date;
+  @Input()
+  placeholder: string;
+  @Input()
+  maskOptions: any;
+  @Input()
+  format: string;
+  @Input()
+  textMaskEnabled: boolean = true;
+  @Input()
+  allowInvalidDate: boolean = false;
+  @HostBinding('class.disabled')
+  @Input()
+  disabled: boolean = false;
+  @Output()
+  blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output()
+  focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
@@ -150,9 +166,15 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   registerOnChange(fn: (value: any) => {}): void {
     this._onChange = fn;
   }
+
   registerOnTouched(fn: () => {}) {
     this._onTouched = fn;
   }
+
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
+  }
+
   public dispatchOnChange(newValue?: any, blur: boolean = false, skip: boolean = false) {
     if (newValue !== this.value) {
       this._onChange(newValue);

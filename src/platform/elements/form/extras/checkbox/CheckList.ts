@@ -16,7 +16,7 @@ const CHECKLIST_VALUE_ACCESSOR = {
   providers: [CHECKLIST_VALUE_ACCESSOR],
   template: `
         <div class="check-box-group" *ngFor="let option of _options; let i = index" [ngClass]="{checked: option.checked}" >
-            <input [name]="name" type="checkbox" [ngModel]="option.checked" [attr.id]="name+i" [value]="option.checked" (change)="select($event, option)">
+            <input [name]="name" type="checkbox" [ngModel]="option.checked" [attr.id]="name+i" [value]="option.checked" (change)="select($event, option)" [disabled]="disabled">
             <label [attr.for]="name+i" (click)="select($event, option)">
               <i [ngClass]="{'bhi-checkbox-empty': !option.checked, 'bhi-checkbox-filled': option.checked }"></i>
               <span>{{option.label}}</span>
@@ -29,6 +29,8 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
   name: string;
   @Input()
   options: Array<any>;
+  @Input()
+  disabled: boolean;
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter();
 
@@ -44,10 +46,12 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
 
   select(event, item) {
     Helpers.swallowEvent(event);
-    item.checked = !item.checked;
-    this.model = this._options.filter((checkBox) => checkBox.checked).map((x) => x.value);
-    this.onModelChange(this.model.length > 0 ? this.model : '');
-    this.onSelect.emit({ selected: this.model });
+    if (!this.disabled) {
+      item.checked = !item.checked;
+      this.model = this._options.filter((checkBox) => checkBox.checked).map((x) => x.value);
+      this.onModelChange(this.model.length > 0 ? this.model : '');
+      this.onSelect.emit({ selected: this.model });
+    }
   }
 
   setupOptions() {
@@ -89,5 +93,9 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
 
   registerOnTouched(fn: Function): void {
     this.onModelTouched = fn;
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
   }
 }

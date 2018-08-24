@@ -1,6 +1,6 @@
 // NG2
 import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -25,7 +25,7 @@ const CHIPS_VALUE_ACCESSOR = {
             <i *ngIf="_type" class="bhi-circle"></i>
             <span><ng-content></ng-content></span>
         </span>
-        <i class="bhi-close" (click)="onRemove($event)"></i>
+        <i class="bhi-close" *ngIf="!disabled" (click)="onRemove($event)"></i>
     `,
 })
 export class NovoChipElement {
@@ -33,6 +33,9 @@ export class NovoChipElement {
   set type(type: string) {
     this._type = type ? type.toLowerCase() : null;
   }
+
+  @Input()
+  disabled: boolean = false;
 
   @Output()
   select: EventEmitter<any> = new EventEmitter();
@@ -69,6 +72,7 @@ export class NovoChipElement {
             *ngFor="let item of _items | async"
             [type]="type || item?.value?.searchEntity"
             [class.selected]="item == selected"
+            [disabled]="disablePickerInput"
             (remove)="remove($event, item)"
             (select)="select($event, item)">
             {{ item.label }}
@@ -93,14 +97,15 @@ export class NovoChipElement {
         <div class="preview-container">
             <span #preview></span>
         </div>
-        <i class="bhi-search" [class.has-value]="items.length"></i>
-        <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+        <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput"></i>
+        <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
    `,
   host: {
     '[class.with-value]': 'items.length > 0',
+    '[class.disabled]': 'disablePickerInput',
   },
 })
-export class NovoChipsElement implements OnInit {
+export class NovoChipsElement implements OnInit, ControlValueAccessor {
   @Input()
   closeOnSelect: boolean = false;
   @Input()
@@ -149,12 +154,10 @@ export class NovoChipsElement implements OnInit {
     this.setItems();
   }
 
-  // get accessor
   get value() {
     return this._value;
   }
 
-  // set accessor including call the onchange callback
   @Input()
   set value(selected) {
     this.itemToAdd = '';
@@ -310,6 +313,10 @@ export class NovoChipsElement implements OnInit {
 
   registerOnTouched(fn: Function): void {
     this.onModelTouched = fn;
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this._disablePickerInput = disabled;
   }
 
   /**

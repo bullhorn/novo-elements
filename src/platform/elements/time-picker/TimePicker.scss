@@ -1,385 +1,388 @@
-
 novo-time-picker-input {
-    flex: 1;
-    position: relative;
-    display: block;
-    max-width: 130px;
-    
-    input {
-        font-size: 1em;
-        border: none;
-        border-bottom: 1px solid rgba(lighten($dark, 12%), .25);
-        background: transparent !important;
-        border-radius: 0;
-        outline: none;
-        height: 2rem;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        box-shadow: none;
-        box-sizing: content-box;
-        transition: all 300ms;
-        color: $light;
-        
-        &:focus {
-            border-bottom: 1px solid $ocean;
-        }
+  flex: 1;
+  position: relative;
+  display: block;
+  max-width: 130px;
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  input {
+    font-size: 1em;
+    border: none;
+    border-bottom: 1px solid rgba(lighten($dark, 12%), 0.25);
+    background: transparent !important;
+    border-radius: 0;
+    outline: none;
+    height: 2rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 300ms;
+    color: $light;
+
+    &:focus {
+      border-bottom: 1px solid $ocean;
     }
-    >i.bhi-clock,
-    >i.bhi-search,
-    >i.bhi-times,
-    >i.bhi-calendar {
-        position: absolute;
-        right: 0;
-        top: 4px;
-        font-size: 1.2em;
-    }
-    >i.bhi-times {
-        cursor: pointer;
-        font-size: 1.1em;
-    }
+  }
+  > i.bhi-clock,
+  > i.bhi-search,
+  > i.bhi-times,
+  > i.bhi-calendar {
+    position: absolute;
+    right: 0;
+    top: 4px;
+    font-size: 1.2em;
+  }
+  > i.bhi-times {
+    cursor: pointer;
+    font-size: 1.1em;
+  }
 }
 
-
 novo-time-picker {
-    display: block;
-    // width: 250px;
-    // min-width: 250px;
-    overflow: hidden;
-    border-radius: 4px;
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .15), 0 2px 7px rgba(0, 0, 0, .1);
-    z-index: 999;
-    .digital {
-        padding: 6.5px 0;
-        background-color: $positive;
-        display: flex;
-        justify-content: center;
-        &.inline {
-            background: $white;
-            border-bottom: 1px solid #F0F0F0;
-            &.military {
-                border-bottom: none;
-            }
-            .digital--inner {
-                .control-block {
-                    display: flex;
-                    .digital--period {
-                        color: $positive;
-                        cursor: pointer;
-                        font-size: 1em;
-                        opacity: 0.6;
-                        margin: 0 20px;
-                        &.active {
-                            opacity: 1;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    .digital--inner {
-        display: flex;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-    }
-    .digital--clock {
-        color: #fff;
-        font-size: 1.8em;
-        font-weight: 500;
-    }
-    .control-block {
-        display: inline-block;
-    }
-    .digital--period {
-        display: block;
-        color: #fff;
-        cursor: pointer;
-        font-size: 1em;
-        opacity: 0.6;
-        text-transform: uppercase;
-        margin-left: 5px;
-        font-weight: 400;
-        &.active {
-            opacity: 1;
-            font-weight: 600;
-        }
-    }
-    .increments {
-        position: relative;
-        height: 250px;
-        width: 130px;
-        overflow-y: auto;
-        overflow-x: hidden;
-
-        novo-list-item {
-            padding: 5px 16px;
-            width: 130px;
-            .list-item {
-                line-height: 19px;
-            }
-            &:focus,
-            &:hover {
-                background: lighten($light, 10%);
-                color: darken($light, 55%);
-            }
+  display: block;
+  // width: 250px;
+  // min-width: 250px;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  .digital {
+    padding: 6.5px 0;
+    background-color: $positive;
+    display: flex;
+    justify-content: center;
+    &.inline {
+      background: $white;
+      border-bottom: 1px solid #f0f0f0;
+      &.military {
+        border-bottom: none;
+      }
+      .digital--inner {
+        .control-block {
+          display: flex;
+          .digital--period {
+            color: $positive;
+            cursor: pointer;
+            font-size: 1em;
+            opacity: 0.6;
+            margin: 0 20px;
             &.active {
-                // border: 1px solid $positive;
-                color: $positive;
-                font-weight: 500;
+              opacity: 1;
             }
+          }
         }
+      }
     }
+  }
+  .digital--inner {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .digital--clock {
+    color: #fff;
+    font-size: 1.8em;
+    font-weight: 500;
+  }
+  .control-block {
+    display: inline-block;
+  }
+  .digital--period {
+    display: block;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    opacity: 0.6;
+    text-transform: uppercase;
+    margin-left: 5px;
+    font-weight: 400;
+    &.active {
+      opacity: 1;
+      font-weight: 600;
+    }
+  }
+  .increments {
+    position: relative;
+    height: 250px;
+    width: 130px;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-    /* ANALOG CLOCK
-    ----------------------------- */
-    .analog {
-        height: 250px;
-        width: 250px;
-        position: relative;
-        margin: 10% auto;
+    novo-list-item {
+      padding: 5px 16px;
+      width: 130px;
+      .list-item {
+        line-height: 19px;
+      }
+      &:focus,
+      &:hover {
+        background: lighten($light, 10%);
+        color: darken($light, 55%);
+      }
+      &.active {
+        // border: 1px solid $positive;
+        color: $positive;
+        font-weight: 500;
+      }
     }
-    .analog--inner {
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        position: absolute;
-        transition: transform 125ms linear;
+  }
+
+  /* ANALOG CLOCK
+    ----------------------------- */
+  .analog {
+    height: 250px;
+    width: 250px;
+    position: relative;
+    margin: 10% auto;
+  }
+  .analog--inner {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    transition: transform 125ms linear;
+  }
+  .analog--face {
+    top: 5px;
+    right: 5px;
+    left: 5px;
+    bottom: 5px;
+    position: absolute;
+    border-radius: 50%;
+  }
+  .analog--hand--hours {
+    width: 240px;
+    height: 240px;
+    display: block;
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+    transform: rotate(0deg);
+    transition: transform 100ms linear;
+    z-index: 1;
+    &:before {
+      content: ' ';
+      width: 2px;
+      top: 0;
+      bottom: 0;
+      left: 30%;
+      margin: 30%;
+      z-index: -1;
+      display: block;
+      position: absolute;
+      transform: rotate(90deg);
+    }
+    .analog--ball {
+      height: 37px;
+      width: 37px;
+      display: block;
+      right: 8px;
+      top: 50%;
+      margin-top: -18px;
+      border-radius: 50%;
+      position: absolute;
+      border: 3px solid $positive;
+      background: $positive;
+    }
+    &.hour-12 {
+      transform: rotate(-90deg);
+    }
+    &.hour-1 {
+      transform: rotate(-60deg);
+    }
+    &.hour-2 {
+      transform: rotate(-30deg);
+    }
+    &.hour-3 {
+      transform: rotate(0);
+    }
+    &.hour-4 {
+      transform: rotate(30deg);
+    }
+    &.hour-5 {
+      transform: rotate(60deg);
+    }
+    &.hour-6 {
+      transform: rotate(90deg);
+    }
+    &.hour-7 {
+      transform: rotate(120deg);
+    }
+    &.hour-8 {
+      transform: rotate(150deg);
+    }
+    &.hour-9 {
+      transform: rotate(180deg);
+    }
+    &.hour-10 {
+      transform: rotate(210deg);
+    }
+    &.hour-11 {
+      transform: rotate(240deg);
+    }
+  }
+  .analog--hand--minutes {
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+    display: block;
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+    transform: rotate(0deg);
+    transition: transform 100ms linear;
+    z-index: 1;
+    &:before {
+      left: 23%;
+      margin: 33%;
+      content: ' ';
+      width: 2px;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      display: block;
+      position: absolute;
+      transform: rotate(90deg);
+    }
+    .analog--ball {
+      display: block;
+      top: 50%;
+      border-radius: 50%;
+      position: absolute;
+      height: 32px;
+      width: 32px;
+      right: 25px;
+      margin-top: -16px;
+      border: 2px solid lighten($positive, 10%);
+      background: lighten($positive, 10%);
+      transition: all 160ms ease-in-out;
+      &.between {
+        height: 1px;
+        border-radius: 2em;
+        margin-top: 0;
+      }
+    }
+    &.min-00 {
+      transform: rotate(-90deg);
+    }
+    @for $i from 1 through 9 {
+      $deg: ($i * (30/5) - 90);
+      &.min-0#{$i} {
+        transform: rotate(#{$deg}deg);
+      }
+    }
+    @for $i from 10 through 59 {
+      $deg: ($i * (30/5) - 90);
+      &.min-#{$i} {
+        transform: rotate(#{$deg}deg);
+      }
+    }
+  }
+  .analog--center {
+    height: 155px;
+    width: 155px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: block;
+    position: absolute;
+    background-color: $background;
+  }
+  .analog--hour,
+  .analog--minute {
+    font-size: 1.6em;
+    color: #666666;
+    left: 50%;
+    top: 50%;
+    z-index: 3;
+    text-align: center;
+    width: 40px;
+    padding: 8px 0;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: -20px;
+    margin-top: -20px;
+    position: absolute;
+    &.active {
+      color: #fff;
+    }
+  }
+  .analog--minute {
+    font-size: 1em;
+    margin-left: -20px;
+    margin-top: -16px;
+  }
+  .analog--hours,
+  .analog--minutes {
+    width: 250px;
+    height: 250px;
+    float: left;
+    position: relative;
+  }
+  .analog--minutes {
+    position: absolute;
+  }
+  $d: 4.5em;
+  @for $i from 1 through 12 {
+    $deg: ($i * 30 - 90);
+    .analog--hour:nth-child(#{$i}) {
+      transform: rotate(#{$deg}deg) translate($d) rotate(#{$deg * -1}deg);
+    }
+    .analog--minute:nth-child(#{$i}) {
+      transform: rotate(#{$deg}deg) translate($d) rotate(#{$deg * -1}deg);
+    }
+  }
+  &.military {
+    $md: 8em;
+    @for $i from 1 through 24 {
+      $hour: $i - 1;
+      $deg: ($i * 15 - 105);
+      .analog--hour:nth-child(#{$i}) {
+        transform: rotate(#{$deg}deg) translate($md) rotate(#{$deg * -1}deg);
+      }
+      .analog--hand--hours {
+        top: -10px;
+        left: -10px;
+        &.hour-#{$hour} {
+          transform: rotate(#{$deg}deg);
+        }
+      }
     }
     .analog--face {
-        top: 5px;
-        right: 5px;
-        left: 5px;
-        bottom: 5px;
-        position: absolute;
-        border-radius: 50%;
+      top: 15px;
+      right: 15px;
+      left: 15px;
+      bottom: 15px;
     }
-    .analog--hand--hours {
-        width: 240px;
-        height: 240px;
-        display: block;
-        position: absolute;
-        top: 0;
-        border-radius: 50%;
-        transform: rotate(0deg);
-        transition: transform 100ms linear;
-        z-index: 1;
-        &:before {
-            content: ' ';
-            width: 2px;
-            top: 0;
-            bottom: 0;
-            left: 30%;
-            margin: 30%;
-            z-index: -1;
-            display: block;
-            position: absolute;
-            transform: rotate(90deg);
-        }
-        .analog--ball {
-            height: 37px;
-            width: 37px;
-            display: block;
-            right: 8px;
-            top: 50%;
-            margin-top: -18px;
-            border-radius: 50%;
-            position: absolute;
-            border: 3px solid $positive;
-            background: $positive;
-        }
-        &.hour-12 {
-            transform: rotate(-90deg);
-        }
-        &.hour-1 {
-            transform: rotate(-60deg);
-        }
-        &.hour-2 {
-            transform: rotate(-30deg);
-        }
-        &.hour-3 {
-            transform: rotate(0);
-        }
-        &.hour-4 {
-            transform: rotate(30deg);
-        }
-        &.hour-5 {
-            transform: rotate(60deg);
-        }
-        &.hour-6 {
-            transform: rotate(90deg);
-        }
-        &.hour-7 {
-            transform: rotate(120deg);
-        }
-        &.hour-8 {
-            transform: rotate(150deg);
-        }
-        &.hour-9 {
-            transform: rotate(180deg);
-        }
-        &.hour-10 {
-            transform: rotate(210deg);
-        }
-        &.hour-11 {
-            transform: rotate(240deg);
-        }
+    .analog--hour {
+      font-size: 0.9em;
+      margin-left: -20px;
+      margin-top: -16px;
     }
     .analog--hand--minutes {
-        width: 200px;
-        height: 200px;
-        margin: 20px;
-        display: block;
-        position: absolute;
-        top: 0;
-        border-radius: 50%;
-        transform: rotate(0deg);
-        transition: transform 100ms linear;
-        z-index: 1;
-        &:before {
-            left: 23%;
-            margin: 33%;
-            content: ' ';
-            width: 2px;
-            top: 0;
-            bottom: 0;
-            z-index: -1;
-            display: block;
-            position: absolute;
-            transform: rotate(90deg);
-        }
-        .analog--ball {
-            display: block;
-            top: 50%;
-            border-radius: 50%;
-            position: absolute;
-            height: 32px;
-            width: 32px;
-            right: 25px;
-            margin-top: -16px;
-            border: 2px solid lighten($positive, 10%);
-            background: lighten($positive, 10%);
-            transition: all 160ms ease-in-out;
-            &.between {
-                height: 1px;
-                border-radius: 2em;
-                margin-top: 0;
-            }
-        }
-        &.min-00 {
-            transform: rotate(-90deg);
-        }
-        @for $i from 1 through 9 {
-            $deg: ($i * (30/5) - 90);
-            &.min-0#{$i} {
-                transform: rotate(#{$deg}deg);
-            }
-        }
-        @for $i from 10 through 59 {
-            $deg: ($i * (30/5) - 90);
-            &.min-#{$i} {
-                transform: rotate(#{$deg}deg);
-            }
-        }
+      margin: 10px;
     }
-    .analog--center {
-        height: 155px;
-        width: 155px;
-        border-radius: 50%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-        margin-top: 1px;
-        margin-left: 1px;
-        display: block;
-        position: absolute;
-        background-color: $background;
+    .analog--hand--hours {
+      .analog--ball {
+        height: 28px;
+        width: 28px;
+        right: 13px;
+        margin-top: -14px;
+      }
     }
-    .analog--hour,
-    .analog--minute {
-        font-size: 1.6em;
-        color: #666666;
-        left: 50%;
-        top: 50%;
-        z-index: 3;
-        text-align: center;
-        width: 40px;
-        padding: 8px 0;
-        border-radius: 50%;
-        cursor: pointer;
-        margin-left: -20px;
-        margin-top: -20px;
-        position: absolute;
-        &.active {
-            color: #fff;
-        }
-    }
-    .analog--minute {
-        font-size: 1.0em;
-        margin-left: -20px;
-        margin-top: -16px;
-    }
-    .analog--hours,
-    .analog--minutes {
-        width: 250px;
-        height: 250px;
-        float: left;
-        position: relative;
-    }
-    .analog--minutes {
-        position: absolute;
-    }
-    $d: 4.5em;
-    @for $i from 1 through 12 {
-        $deg: ($i * 30 - 90);
-        .analog--hour:nth-child(#{$i}) {
-            transform: rotate(#{$deg}deg) translate($d) rotate(#{$deg*-1}deg);
-        }
-        .analog--minute:nth-child(#{$i}) {
-            transform: rotate(#{$deg}deg) translate($d) rotate(#{$deg*-1}deg);
-        }
-    }
-    &.military {
-        $md: 8em;
-        @for $i from 1 through 24 {
-            $hour: $i - 1;
-            $deg: ($i * 15 - 105);
-            .analog--hour:nth-child(#{$i}) {
-                transform: rotate(#{$deg}deg) translate($md) rotate(#{$deg*-1}deg);
-            }
-            .analog--hand--hours {
-                top: -10px;
-                left: -10px;
-                &.hour-#{$hour} {
-                    transform: rotate(#{$deg}deg);
-                }
-            }
-        }
-        .analog--face {
-            top: 15px;
-            right: 15px;
-            left: 15px;
-            bottom: 15px;
-        }
-        .analog--hour {
-            font-size: 0.9em;
-            margin-left: -20px;
-            margin-top: -16px;
-        }
-        .analog--hand--minutes {
-            margin: 10px;
-        }
-        .analog--hand--hours {
-            .analog--ball {
-                height: 28px;
-                width: 28px;
-                right: 13px;
-                margin-top: -14px;
-            }
-        }
-    }
+  }
 }
