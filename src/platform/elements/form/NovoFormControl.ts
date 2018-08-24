@@ -5,6 +5,7 @@ import { EventEmitter } from '@angular/core';
 import { NovoControlConfig } from './FormControls';
 import { IFieldInteractionEvent } from './FormInterfaces';
 import { notify } from '../../utils/notifier/notifier.util';
+import { IMaskOptions } from './Control';
 
 export class NovoFormControl extends FormControl {
   displayValueChanges: EventEmitter<any> = new EventEmitter<any>();
@@ -43,9 +44,11 @@ export class NovoFormControl extends FormControl {
   layoutOptions?: { order?: string; download?: boolean; labelStyle?: string; draggable?: boolean; iconStyle?: string };
   military?: boolean;
   dateFormat?: string;
+  currencyFormat?: string;
   startDate?: Date | Number;
   endDate?: Date | Number;
   textMaskEnabled?: boolean;
+  maskOptions: IMaskOptions;
   allowInvalidDate?: boolean;
   tipWell?: {
     tip: string;
@@ -89,9 +92,11 @@ export class NovoFormControl extends FormControl {
     this.layoutOptions = control.layoutOptions;
     this.military = control.military;
     this.dateFormat = control.dateFormat;
+    this.currencyFormat = control.currencyFormat;
     this.startDate = control.startDate;
     this.endDate = control.endDate;
     this.textMaskEnabled = control.textMaskEnabled;
+    this.maskOptions = control.maskOptions;
     this.allowInvalidDate = control.allowInvalidDate;
     this.maxlength = control.maxlength;
     this.minlength = control.minlength;
