@@ -5,6 +5,7 @@ import { EventEmitter } from '@angular/core';
 import { NovoControlConfig } from './FormControls';
 import { IFieldInteractionEvent } from './FormInterfaces';
 import { notify } from '../../utils/notifier/notifier.util';
+import { IMaskOptions } from './Control';
 
 export class NovoFormControl extends FormControl {
   displayValueChanges: EventEmitter<any> = new EventEmitter<any>();
@@ -40,21 +41,24 @@ export class NovoFormControl extends FormControl {
   appendToBody: boolean; // Deprecated
   parentScrollSelector: string;
   description?: string;
-  layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
+  layoutOptions?: { order?: string; download?: boolean; labelStyle?: string; draggable?: boolean; iconStyle?: string };
   military?: boolean;
   dateFormat?: string;
+  currencyFormat?: string;
+  startDate?: Date | Number;
+  endDate?: Date | Number;
   textMaskEnabled?: boolean;
+  maskOptions: IMaskOptions;
   allowInvalidDate?: boolean;
   tipWell?: {
-    tip: string,
-    icon?: string,
+    tip: string;
+    icon?: string;
     button?: boolean;
   };
   rawValue?: any;
   customControlConfig?: any;
   checkboxLabel?: string;
   private historyTimeout: any;
-
 
   constructor(value: any, control: NovoControlConfig) {
     super(value, control.validators, control.asyncValidators);
@@ -88,7 +92,11 @@ export class NovoFormControl extends FormControl {
     this.layoutOptions = control.layoutOptions;
     this.military = control.military;
     this.dateFormat = control.dateFormat;
+    this.currencyFormat = control.currencyFormat;
+    this.startDate = control.startDate;
+    this.endDate = control.endDate;
     this.textMaskEnabled = control.textMaskEnabled;
+    this.maskOptions = control.maskOptions;
     this.allowInvalidDate = control.allowInvalidDate;
     this.maxlength = control.maxlength;
     this.minlength = control.minlength;
@@ -147,7 +155,7 @@ export class NovoFormControl extends FormControl {
       this.hasRequiredValidator = this.required;
     } else if (!this.required && this.hasRequiredValidator) {
       let validators: any = [...this.validators];
-      validators = validators.filter(val => val !== Validators.required);
+      validators = validators.filter((val) => val !== Validators.required);
       // TODO: duplicated above
       this.setValidators(validators);
       this.updateValueAndValidity();
@@ -165,12 +173,20 @@ export class NovoFormControl extends FormControl {
    * @param emitViewToModelChange
    *
    */
-  public setValue(value: any, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange }: {
-    onlySelf?: boolean,
-    emitEvent?: boolean,
-    emitModelToViewChange?: boolean,
-    emitViewToModelChange?: boolean
-  } = {}) {
+  public setValue(
+    value: any,
+    {
+      onlySelf,
+      emitEvent,
+      emitModelToViewChange,
+      emitViewToModelChange,
+    }: {
+      onlySelf?: boolean;
+      emitEvent?: boolean;
+      emitModelToViewChange?: boolean;
+      emitViewToModelChange?: boolean;
+    } = {},
+  ) {
     this.markAsDirty();
     this.markAsTouched();
     this.displayValueChanges.emit(value);
@@ -206,7 +222,6 @@ export class NovoFormControl extends FormControl {
     this.setErrors(Object.assign({}, this.errors, { custom: message }));
   }
 }
-
 
 export class NovoFormGroup extends FormGroup {
   public fieldInteractionEvents: EventEmitter<IFieldInteractionEvent> = new EventEmitter();
