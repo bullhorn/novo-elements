@@ -5,11 +5,11 @@ import { CommonModule } from '@angular/common';
 // APP
 import { NovoPickerModule } from './../picker/Picker.module';
 import { NovoChipElement, NovoChipsElement } from './Chips';
+import { NovoRowChipElement, NovoRowChipsElement } from './RowChips';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, NovoPickerModule],
-    declarations: [NovoChipElement, NovoChipsElement],
-    exports: [NovoChipElement, NovoChipsElement]
+  imports: [CommonModule, FormsModule, NovoPickerModule],
+  declarations: [NovoChipElement, NovoChipsElement, NovoRowChipElement, NovoRowChipsElement],
+  exports: [NovoChipElement, NovoChipsElement, NovoRowChipElement, NovoRowChipsElement],
 })
-export class NovoChipsModule {
-}
+export class NovoChipsModule {}
