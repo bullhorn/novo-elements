@@ -1,0 +1,58 @@
+novo-dropdown-cell,
+.novo-table-dropdown-cell {
+  > novo-dropdown > button[theme][theme='secondary'][icon] {
+    font-size: inherit;
+    color: inherit;
+    border: none;
+    background: inherit;
+    text-transform: inherit;
+    border-radius: 0;
+    border-bottom: 1px solid #dedede;
+    padding: 0;
+    width: 100% !important;
+    max-width: 200px;
+    i {
+      font-size: 10px;
+      margin-right: -5px;
+      color: #a0a0a0;
+    }
+    .flex-wrapper {
+      justify-content: space-between;
+    }
+    &:active,
+    &:hover {
+      background: inherit;
+      box-shadow: none;
+    }
+    span {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: inline-block;
+      max-width: 80%;
+    }
+  }
+  list {
+    max-height: 400px;
+    display: block;
+    overflow: auto;
+    padding: 5px 0;
+  }
+  item {
+    height: 30px !important;
+    padding: 0 16px !important;
+    span {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: inline-block;
+      max-width: 80%;
+    }
+    &.active {
+      font-weight: 500;
+    }
+  }
+  dropdown-item-header {
+    padding: 0 10px !important;
+  }
+}

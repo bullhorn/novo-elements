@@ -1,0 +1,65 @@
+skill-specialty-picker-results {
+  display: block;
+  width: 100%;
+  color: black;
+  max-width: none;
+  z-index: 99;
+  background: $white;
+  &.active {
+    border: 1px solid $positive;
+  }
+  novo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 330px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    novo-list-item {
+      cursor: pointer;
+      padding: 10px 16px;
+      box-sizing: border-box;
+      display: block;
+      item-content {
+        flex-direction: column;
+        h6 {
+          padding-top: 0;
+        }
+      }
+      div {
+        color: gray;
+      }
+      span {
+        display: inline-block;
+        min-width: 100px;
+        margin: 2px 0;
+      }
+      &.active,
+      &:focus,
+      &:hover {
+        background-color: lighten($positive, 35%);
+      }
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    }
+    novo-loading {
+      justify-content: center;
+    }
+  }
+  section {
+    box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
+    z-index: 9;
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    color: black;
+  }
+  .picker-error,
+  .picker-loading,
+  .picker-null {
+    text-align: center;
+    color: darken($light, 15%);
+  }
+}

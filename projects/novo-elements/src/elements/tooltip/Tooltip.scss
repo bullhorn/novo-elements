@@ -1,0 +1,8 @@
+.hint--hidden:before,
+.hint--hidden:after {
+  display: none !important;
+}
+
+.hint--preline:after {
+  white-space: pre-line !important;
+}

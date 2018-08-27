@@ -1,0 +1,89 @@
+novo-slider {
+  display: block;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+
+  @for $i from 0 through 100 {
+    $offset: (#{$i * 100%});
+    $dist: (#{$i * -100%});
+
+    & > [slide='#{$i}'] {
+      left: $offset;
+    }
+
+    &.slide-#{$i} {
+      .slides {
+        transform: translateX($dist);
+      }
+    }
+  }
+
+  .slides {
+    min-height: 250px;
+    transition: all 200ms ease-in-out;
+    width: 100%;
+    display: flex;
+    flex: 1 0 100%;
+
+    & > [slide] {
+      display: flex;
+      flex: 1 0 100%;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+
+    img {
+      display: block;
+      margin: auto;
+    }
+  }
+
+  .controls {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+
+    button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &[icon='previous'] {
+        left: 10px;
+      }
+      &[icon='next'],
+      &[icon='check'] {
+        right: 10px;
+      }
+    }
+  }
+
+  .indicators {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: rgba(#fff, 0.05);
+    padding: 20px;
+
+    .indicator-circle {
+      width: 8px;
+      height: 8px;
+      margin: 0 5px;
+      border-radius: 50%;
+      background: #d8d8d8;
+      opacity: 0.2;
+      transition: all 200ms ease-in-out;
+
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+}

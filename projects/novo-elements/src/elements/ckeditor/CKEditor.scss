@@ -1,0 +1,37 @@
+novo-editor {
+  .cke {
+    font: inherit !important;
+    box-shadow: none;
+    border-color: $background-dark;
+
+    .cke_top,
+    .cke_bottom {
+      background: $background-dark none;
+      box-shadow: none;
+    }
+
+    .cke_bottom {
+      border-top: none;
+    }
+  }
+}
+
+.cke_dialog_background_cover {
+  background-color: $black !important;
+}
+
+.cke_dialog {
+  .cke_dialog_title {
+    text-shadow: none;
+    background: $background-dark none;
+    box-shadow: none;
+    border-bottom: none;
+  }
+
+  .cke_dialog_footer {
+    text-shadow: none;
+    background: $background-dark none;
+    box-shadow: none;
+    border-top: none;
+  }
+}

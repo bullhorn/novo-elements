@@ -1,0 +1,50 @@
+field-interactions-demo {
+  .example.field-interaction-demo > novo-form,
+  .example.field-interaction-demo > novo-dynamic-form {
+    margin-top: 20px;
+  }
+  .example.field-interaction-demo > novo-dynamic-form {
+    max-width: 100%;
+    novo-fieldset-header {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  .final-value {
+    color: #afafaf;
+    padding: 10px;
+    background: #f4f4f4;
+  }
+  label {
+    font-weight: bold;
+    font-style: italic;
+  }
+  pre.field-config {
+    margin-bottom: 0;
+  }
+  main.tabs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    novo-nav {
+      background: rgba(0, 0, 0, 0.03) !important;
+      .novo-tab-link {
+        padding: 0;
+        font-size: 12px;
+        white-space: normal;
+      }
+    }
+    novo-nav-outlet {
+      padding: 0 25px;
+      h5 {
+        padding-top: 0 !important;
+      }
+      multi-code-snippet {
+        margin-bottom: 0 !important;
+      }
+      novo-form {
+        border-bottom: 1px solid #e9eaea;
+      }
+    }
+  }
+}

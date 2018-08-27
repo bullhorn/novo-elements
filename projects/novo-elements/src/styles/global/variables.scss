@@ -1,0 +1,286 @@
+// Sizes
+// --------------------------------------------------
+$header-height: 55px;
+// $header-height-px: rem-to-px($header-height);
+// Colors
+// --------------------------------------------------
+$black: #000000;
+$white: #ffffff;
+$grey: #999999;
+$off-white: #f4f4f4;
+$dark: #3d464d;
+$light: #d9dadc;
+$navy: #0d2d42;
+$pulse: #3bafda;
+// Analytics Colors
+$aqua: #3bafda;
+$ocean: #4a89dc;
+$mint: #37bc9b;
+$grass: #8cc152;
+$sunflower: #f6b042;
+$bittersweet: #eb6845;
+$grapefruit: #da4453;
+$carnation: #d770ad;
+$lavender: #967adc;
+$mountain: #9678b6;
+// Entity Colors
+$company: #3399dd;
+$candidate: #44bb77;
+$navigation: #2f384f;
+$lead: #aa6699;
+$contact: #ffaa44;
+$opportunity: #662255;
+$job: #bb5566;
+$submission: #a9adbb;
+$sendout: #747884;
+$placement: #0b344f;
+$note: #747884;
+$contract: #454ea0;
+$jobCode: #696d79;
+$earnCode: #696d79;
+// Color Applications
+$positive: $ocean;
+$success: $grass;
+$negative: $grapefruit;
+$warning: $sunflower;
+$background: $off-white;
+$background-dark: #e2e2e2;
+$neutral: #4f5361;
+$empty: #cccdcc;
+
+// Color Maps
+// --------------------------------------------------
+// Analytics Color Map
+$analytics-colors: (
+  aqua: $aqua,
+  ocean: $ocean,
+  mint: $mint,
+  grass: $grass,
+  sunflower: $sunflower,
+  bittersweet: $bittersweet,
+  grapefruit: $grapefruit,
+  carnation: $carnation,
+  lavender: $lavender,
+  mountain: $mountain,
+);
+// Entity Color Map
+$entity-colors: (
+  star: $placement,
+  person: $contact,
+  company: $company,
+  candidate: $candidate,
+  navigation: $navigation,
+  lead: $lead,
+  contact: $contact,
+  opportunity: $opportunity,
+  job: $job,
+  submission: $submission,
+  sendout: $sendout,
+  placement: $placement,
+  note: $note,
+  task: $neutral,
+  distributionList: $neutral,
+  credential: $neutral,
+  user: $neutral,
+  corporateuser: $neutral,
+  contract: $contract,
+  jobCode: $jobCode,
+  earnCode: $earnCode,
+);
+// Generic Color Map
+$app-colors: (
+  positive: $ocean,
+  success: $grass,
+  negative: $grapefruit,
+  warning: $sunflower,
+  background: $off-white,
+  black: $black,
+  white: $white,
+  grey: $grey,
+  off-white: $off-white,
+  dark: $dark,
+  light: $light,
+  pulse: $pulse,
+  neutral: $neutral,
+);
+// Loading Dot Color Map
+$dot-colors: (
+  ocean: $ocean,
+  lavender: $lavender,
+  grapefruit: $grapefruit,
+  sunflower: $sunflower,
+  mint: $mint,
+);
+// Dark map
+$dark-colors: (
+  company: $company,
+  candidate: $candidate,
+  navigation: $navigation,
+  lead: $lead,
+  contact: $contact,
+  opportunity: $opportunity,
+  job: $job,
+  jobCode: $jobCode,
+  earnCode: $earnCode,
+  sendout: $sendout,
+  placement: $placement,
+  task: $neutral,
+  distributionList: $neutral,
+  credential: $neutral,
+  user: $neutral,
+  corporateuser: $neutral,
+  aqua: $aqua,
+  ocean: $ocean,
+  mint: $mint,
+  grass: $grass,
+  sunflower: $sunflower,
+  bittersweet: $bittersweet,
+  grapefruit: $grapefruit,
+  carnation: $carnation,
+  lavender: $lavender,
+  positive: $ocean,
+  success: $grass,
+  negative: $grapefruit,
+  warning: $sunflower,
+  black: $black,
+  dark: $dark,
+  pulse: $pulse,
+  neutral: $neutral,
+  navy: $navy,
+  contract: $contact,
+  mountain: $mountain,
+);
+// Light map
+$light-colors: (
+  submission: $submission,
+  note: $note,
+  background: $off-white,
+  white: $white,
+  grey: $grey,
+  off-white: $off-white,
+  light: $light,
+);
+// All colors
+$all-colors: map-merge($dark-colors, $light-colors);
+
+// Typography
+// --------------------------------------------------
+$base-font-size: 13px;
+$base-font-family: 'Roboto', sans-serif;
+$base-font-color: $dark;
+$base-line-height: 1rem;
+$alt-font-family: Georgia, 'Times New Roman', Times, serif;
+
+// Whiteframes
+// -------------------------
+$whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
+$whiteframe-zindex-z1: 1 !default;
+$whiteframe-shadow-z2: 0px 8px 17px rgba(0, 0, 0, 0.2) !default;
+$whiteframe-zindex-z2: 2 !default;
+$whiteframe-shadow-z3: 0px 4px 10px rgba(0, 0, 0, 0.15) !default;
+$whiteframe-zindex-z3: 3 !default;
+$whiteframe-shadow-z4: 0px 16px 28px 0 rgba(0, 0, 0, 0.22) !default;
+$whiteframe-zindex-z4: 4 !default;
+$whiteframe-shadow-z5: 0px 27px 24px 0 rgba(0, 0, 0, 0.2) !default;
+$whiteframe-zindex-z5: 5 !default;
+
+// Z-indexes
+// -------------------------
+// Function to call z-indexes.
+// Usage: z-index: z('modal');
+@function z($layer) {
+  $z-layers: (
+    'goku': 9001,
+    'modal': 500,
+    'tooltip': 100,
+    'toast': 90,
+    'dialogue': 80,
+    'bottom-sheet': 70,
+    'sidenav': 60,
+    'backdrop': 50,
+    'fab': 20,
+    'default': 1,
+    'below': -1,
+    'bottomless-pit': -9000,
+  );
+  @if not map-has-key($z-layers, $layer) {
+    @warn 'No layer found for `#{$layer}` in $z-layers map. Property omitted.';
+  }
+  @return map-get($z-layers, $layer);
+}
+
+// Easing Curves
+// -------------------------
+// Usage: html-tag { @include ease('all', 'swift-ease-in-out'); }
+$easing-curves: (
+  'swift-ease-out': (
+    'duration': 400ms,
+    'curve': 'cubic-bezier(0.25, 0.8, 0.25, 1)',
+  ),
+  'swift-ease-in': (
+    'duration': 300ms,
+    'curve': 'cubic-bezier(0.55, 0, 0.55, 0.2)',
+  ),
+  'swift-ease-in-out': (
+    'duration': 500ms,
+    'curve': 'cubic-bezier(0.35, 0, 0.25, 1)',
+  ),
+);
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+@mixin ease($target, $curve-name) {
+  $duration: map-deep-get($easing-curves, $curve-name, 'duration');
+  $curve: map-deep-get($easing-curves, $curve-name, 'curve');
+  transition: #{$target $duration $curve};
+}
+
+// Animations
+// -------------------------
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  75% {
+    transform: rotateZ(200deg);
+  }
+  100% {
+    transform: rotateZ(180deg);
+  }
+}
+@keyframes half-rotate {
+  0% {
+    transform: rotateZ(45deg);
+  }
+  75% {
+    transform: rotateZ(100deg);
+  }
+  100% {
+    transform: rotateZ(90deg);
+  }
+}
+@keyframes rotateBack {
+  0% {
+    transform: rotateZ(90deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  75% {
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

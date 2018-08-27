@@ -1,0 +1,97 @@
+.cal-day-view,
+.cal-week-view {
+  .cal-hour-rows {
+    width: 100%;
+    border: solid 1px #e1e1e1;
+    overflow-x: scroll;
+    position: relative;
+  }
+
+  .cal-hour:nth-child(even) {
+    background-color: $off-white;
+  }
+  .cal-hour:nth-child(odd) {
+    background-color: $white;
+  }
+
+  .cal-hour-segment {
+    height: 30px;
+  }
+
+  .cal-hour-segment::after {
+    content: '\00a0';
+  }
+
+  .cal-hour:not(:last-child) .cal-hour-segment,
+  .cal-hour:last-child :not(:last-child) .cal-hour-segment {
+    border-bottom: thin dashed #e1e1e1;
+  }
+
+  .cal-time {
+    font-weight: bold;
+    padding-top: 5px;
+    width: 70px;
+    text-align: center;
+    color: $grey;
+  }
+
+  .cal-hour-segment.cal-after-hour-start {
+    .cal-time {
+      display: none;
+    }
+  }
+
+  .cal-hour-segment:hover,
+  .cal-drag-over .cal-hour-segment {
+    background-color: #ededed;
+  }
+}
+
+.cal-day-view {
+  .cal-event-container {
+    position: absolute;
+  }
+
+  novo-calendar-day-event {
+    height: inherit;
+
+    .cal-event {
+      height: inherit;
+      font-size: 12px;
+      margin-left: 2px;
+      margin-right: 2px;
+      min-height: 30px;
+      display: flex;
+      flex-flow: row nowrap;
+      background-color: $off-white;
+
+      .cal-event-ribbon {
+        width: 4px;
+        min-height: 100%;
+      }
+      .cal-event-group {
+        overflow: hidden;
+        flex: 1;
+        padding: 2px 10px;
+        display: flex;
+        flex-flow: column;
+      }
+      .cal-event-title {
+        line-height: 26px;
+      }
+      .cal-event-description {
+        font-size: 10px;
+        line-height: 13px;
+      }
+    }
+  }
+
+  .cal-draggable {
+    cursor: move;
+  }
+
+  .cal-all-day-event {
+    padding: 8px;
+    border: solid 1px;
+  }
+}

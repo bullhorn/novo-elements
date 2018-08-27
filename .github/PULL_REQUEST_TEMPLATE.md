@@ -4,7 +4,7 @@ INSERT A SMALL DESCRIPTION OF WHAT YOU CHANGED HERE
 
 #### **Verify that...**
 
-- [ ] Any related demos where added and `npm start` still works
+- [ ] Any related demos were added and `npm start` and `npm run build` still works
 - [ ] New demos work in `Safari`, `Chrome` and `Firefox`
 - [ ] `npm run lint` passes
 - [ ] `npm test` passes and code coverage is increased

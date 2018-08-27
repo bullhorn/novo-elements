@@ -1,0 +1,62 @@
+novo-pagination {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 10px;
+  > * {
+    margin: auto 5px;
+  }
+  h5.rows {
+    padding: 0;
+    font-size: 12px;
+    opacity: 0.75;
+    letter-spacing: 0.1px;
+  }
+  span.spacer {
+    flex: 1;
+  }
+  novo-select {
+    max-width: 100px;
+    min-width: 100px;
+    div[type='button'] {
+      &:hover {
+        i {
+          opacity: 0.75;
+        }
+      }
+      &:active,
+      &:focus {
+        i {
+          opacity: 1;
+        }
+      }
+      i {
+        opacity: 0.45;
+      }
+    }
+  }
+  .pager {
+    list-style-type: none;
+    .page {
+      display: inline-block;
+      padding: 0 10px;
+      line-height: 30px;
+      border-radius: 2px;
+      text-align: center;
+      list-style-type: none;
+      cursor: pointer;
+      color: $company;
+      &:last-child {
+        padding-right: 0;
+      }
+      &.disabled {
+        opacity: 0.3;
+        pointer-events: none;
+      }
+    }
+    .page.active {
+      color: $company;
+      background-color: $off-white;
+      opacity: 1;
+    }
+  }
+}

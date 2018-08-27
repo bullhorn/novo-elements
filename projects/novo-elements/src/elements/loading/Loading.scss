@@ -1,0 +1,56 @@
+novo-loading {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+
+  span.dot {
+    display: block;
+    border-radius: 50%;
+    margin: 3px;
+    height: 13px;
+    width: 13px;
+    @include enumerate($dot-colors, 'background-color', 'map-val', '');
+    @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, '', '');
+  }
+  @each $analytics, $color in $analytics-colors {
+    &.#{$analytics} {
+      span.dot {
+        background-color: $color;
+      }
+    }
+  }
+
+  &.white,
+  &[inverse] {
+    span.dot {
+      background-color: #fff !important;
+    }
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0px);
+  }
+
+  30% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+  45% {
+    transform: translateY(-1.5em);
+    opacity: 0.5;
+  }
+
+  60% {
+    transform: translateY(0.8em);
+    opacity: 0.95;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}

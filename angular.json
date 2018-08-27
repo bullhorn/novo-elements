@@ -3,117 +3,116 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "novo-elements": {
+    "novo-elements-demo": {
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "demo",
       "projectType": "application",
-      "architect": {
+      "prefix": "novo-demo",
+      "schematics": {},
+      "targets": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
+            "outputPath": "dist/novo-elements-demo",
+            "index": "demo/index.html",
+            "main": "demo/main.ts",
+            "polyfills": "demo/polyfills.ts",
+            "tsConfig": "demo/tsconfig.app.json",
+            "assets": ["demo/favicon.ico", "demo/assets"],
+            "styles": ["demo/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules/hint.css/src"]
+              "includePaths": ["node_modules/hint.css/src", "projects/novo-elements/src"]
             },
-            "assets": ["src/assets", "src/favicon.ico"],
-            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "demo/environments/environment.ts",
+                  "with": "demo/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
+              "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ]
+              "buildOptimizer": false
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "novo-elements:build"
+            "browserTarget": "novo-elements-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "novo-elements:build:production"
+              "browserTarget": "novo-elements-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "novo-elements:build"
+            "browserTarget": "novo-elements-demo:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "karmaConfig": "./karma.conf.js",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
+            "main": "demo/test.ts",
+            "polyfills": "demo/polyfills.ts",
+            "tsConfig": "demo/tsconfig.spec.json",
+            "karmaConfig": "demo/karma.conf.js",
+            "styles": ["demo/styles.scss"],
             "scripts": [],
-            "styles": ["src/styles.scss"],
-            "assets": ["src/assets", "src/favicon.ico"]
+            "assets": ["demo/favicon.ico", "demo/assets"]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
+            "tsConfig": ["demo/tsconfig.app.json", "demo/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         }
       }
     },
-    "novo-elements-e2e": {
-      "root": "",
-      "sourceRoot": "e2e",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+    "novo-elements": {
+      "root": "projects/novo-elements",
+      "sourceRoot": "projects/novo-elements/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "targets": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "novo-elements:serve"
+            "tsConfig": "projects/novo-elements/tsconfig.lib.json",
+            "project": "projects/novo-elements/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/novo-elements/src/test.ts",
+            "tsConfig": "projects/novo-elements/tsconfig.spec.json",
+            "karmaConfig": "projects/novo-elements/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [],
+            "tsConfig": ["projects/novo-elements/tsconfig.lib.json", "projects/novo-elements/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         }
       }
     }
   },
-  "defaultProject": "novo-elements",
-  "schematics": {
-    "@schematics/angular:class": {
-      "spec": false
-    },
-    "@schematics/angular:component": {
-      "prefix": "app",
-      "styleext": "scss"
-    },
-    "@schematics/angular:directive": {
-      "prefix": "app"
-    }
-  }
+  "defaultProject": "novo-elements-demo"
 }

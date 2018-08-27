@@ -1,0 +1,74 @@
+multi-picker {
+  @extend chips;
+  @extend novo-checkbox;
+
+  .chip-input-container {
+    padding-top: 10px;
+  }
+
+  ul.summary {
+    display: inline;
+    list-style: none;
+    color: darken(#d2d2d2, 30%);
+    padding: 0 10px 0;
+
+    li {
+      display: inline;
+      padding: 0 3px;
+    }
+
+    li:after {
+      content: ', ';
+    }
+
+    li:last-child:after {
+      content: ' ';
+    }
+  }
+
+  novo-picker {
+    li {
+      &.header {
+        text-transform: uppercase;
+        font-weight: 400;
+        border-top: 1px solid #e8e8e8;
+        padding-bottom: 0;
+      }
+      label {
+        color: #9e9e9e;
+        text-transform: capitalize;
+        &:hover {
+          i {
+            &.bhi-checkbox-empty,
+            &.bhi-checkbox-indeterminate {
+              color: $positive;
+            }
+          }
+        }
+      }
+      &.checked {
+        label {
+          color: darken(#d2d2d2, 60%);
+        }
+      }
+    }
+    i {
+      margin-right: 5px;
+
+      &.bhi-checkbox-empty {
+        color: #d2d2d2;
+      }
+
+      &.bhi-checkbox-filled,
+      &.bhi-checkbox-indeterminate {
+        color: $positive;
+      }
+    }
+  }
+
+  chip {
+    span {
+      text-transform: capitalize;
+    }
+  }
+}

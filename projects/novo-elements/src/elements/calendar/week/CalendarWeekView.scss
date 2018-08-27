@@ -1,0 +1,86 @@
+.cal-week-view {
+  position: relative;
+
+  .cal-day-headers {
+    display: flex;
+    border: 1px solid #e1e1e1;
+  }
+
+  .cal-day-headers .cal-header {
+    flex: 1;
+    text-align: center;
+    padding: 5px;
+    background-color: $off-white;
+  }
+
+  .cal-day-headers .cal-header:not(:last-child) {
+    border-right: 1px solid #e1e1e1;
+  }
+
+  .cal-day-headers .cal-header:hover,
+  .cal-day-headers .cal-drag-over {
+    background-color: #ededed;
+  }
+
+  .cal-day-headers span {
+    font-weight: 400;
+    opacity: 0.5;
+  }
+
+  .cal-event-container {
+    position: absolute;
+
+    &:nth-child(n + 2) {
+      border-left: 1px solid $dark;
+    }
+
+    novo-calendar-week-event {
+      height: inherit;
+
+      .cal-event {
+        height: inherit;
+        font-size: 12px;
+        min-height: 30px;
+        display: flex;
+        flex-flow: column;
+        background-color: $off-white;
+
+        .cal-event-ribbon {
+          min-height: 4px;
+          width: 100%;
+        }
+        .cal-event-title {
+          padding: 0px 0px 0px 10px;
+          line-height: 26px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .cal-event-description {
+          font-size: 10px;
+          line-height: 13px;
+          padding: 0px 0px 0px 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+
+  .cal-draggable {
+    cursor: move;
+  }
+
+  .cal-header.cal-today {
+    background-color: #e8fde7;
+  }
+
+  .cal-header.cal-weekend span {
+    color: #8b0000;
+  }
+
+  .cal-event,
+  .cal-header {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

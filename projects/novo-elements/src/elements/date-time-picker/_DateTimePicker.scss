@@ -1,0 +1,93 @@
+$time-select-height: 45px;
+
+novo-date-time-picker-input {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  max-width: 340px;
+
+  novo-date-picker-input {
+    margin-right: 20px;
+  }
+  novo-time-picker-input {
+    max-width: 130px;
+  }
+}
+
+novo-date-time-picker {
+  display: block;
+  width: 250px;
+  min-width: 250px;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  .date-time-container {
+    position: relative;
+    .view-container {
+      position: relative;
+    }
+    .time-picker {
+      position: absolute;
+      height: 100%;
+      background: #fff;
+      transform: translateX(100%);
+      transition: transform 200ms ease-in-out;
+      z-index: 2;
+      top: 0;
+      .increments {
+        height: 275px;
+        width: 250px;
+        novo-list-item {
+          width: auto;
+        }
+      }
+    }
+    .date-time-tabs {
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      height: 45px;
+      & > span {
+        color: $positive;
+        text-align: center;
+        flex: 1;
+        cursor: pointer;
+        transition: opacity 200ms ease-in-out;
+        opacity: 0.6;
+        &:hover {
+          opacity: 1 !important;
+        }
+        .meridian {
+          text-transform: uppercase;
+        }
+      }
+      .date-time-indicator {
+        position: absolute;
+        width: 50%;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background: $positive;
+        transition: transform 200ms ease-in-out;
+      }
+    }
+  }
+  .calendar {
+    box-shadow: none;
+    background: transparent;
+  }
+  .digital {
+    height: $time-select-height;
+  }
+  novo-time-picker {
+    box-shadow: none;
+    .analog {
+      margin: 0;
+    }
+  }
+}

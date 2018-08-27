@@ -1,0 +1,172 @@
+novo-spinner {
+  display: block;
+
+  svg.bullhornSpinner {
+    transform-origin: center center;
+    animation: spin 3400ms infinite;
+    @each $analytics, $color in $analytics-colors {
+      &.#{$analytics} {
+        .circleGroup circle {
+          fill: $color;
+
+          &:nth-of-type(odd) {
+            fill: lighten($color, 5%);
+          }
+        }
+      }
+    }
+
+    .circleGroup circle {
+      //cx: 47;
+      //cy: 47;
+      //r: 6;
+      fill: $dark;
+
+      &:nth-of-type(odd) {
+        fill: lighten($dark, 5%);
+      }
+      transform-origin: center center;
+      @for $i from 1 through 5 {
+        &:nth-of-type(#{$i}) {
+          //animation: circle#{$i} 3400ms infinite;
+          animation-delay: $i * 70ms;
+        }
+      }
+    }
+
+    &.multicolor {
+      .circleGroup circle {
+        @include enumerate($dot-colors, 'fill', 'map-val', '');
+      }
+    }
+
+    &.white,
+    &[inverse] {
+      .circleGroup circle {
+        fill: white;
+
+        &:nth-of-type(odd) {
+          fill: darken(white, 5%);
+        }
+      }
+    }
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    75% {
+      transform: rotate(1360deg);
+    }
+
+    100% {
+      transform: rotate(1444deg);
+    }
+  }
+  @keyframes circle1 {
+    0% {
+      cx: 43;
+      cy: 43;
+    }
+
+    25% {
+      cx: 54;
+      cy: 45;
+    }
+
+    75% {
+      cx: 80;
+      cy: 40;
+    }
+
+    100% {
+      cx: 43;
+      cy: 43;
+    }
+  }
+  @keyframes circle2 {
+    0% {
+      cx: 43;
+      cy: 43;
+    }
+
+    25% {
+      cx: 48;
+      cy: 41;
+    }
+
+    75% {
+      cx: 48;
+      cy: 18;
+    }
+
+    100% {
+      cx: 43;
+      cy: 43;
+    }
+  }
+  @keyframes circle3 {
+    0% {
+      cx: 43;
+      cy: 43;
+    }
+
+    25% {
+      cx: 42;
+      cy: 45;
+    }
+
+    75% {
+      cx: 15;
+      cy: 40;
+    }
+
+    100% {
+      cx: 43;
+      cy: 43;
+    }
+  }
+  @keyframes circle4 {
+    0% {
+      cx: 43;
+      cy: 43;
+    }
+
+    25% {
+      cx: 44;
+      cy: 52;
+    }
+
+    75% {
+      cx: 29;
+      cy: 78;
+    }
+
+    100% {
+      cx: 43;
+      cy: 43;
+    }
+  }
+  @keyframes circle5 {
+    0% {
+      cx: 43;
+      cy: 43;
+    }
+
+    25% {
+      cx: 52;
+      cy: 52;
+    }
+
+    75% {
+      cx: 68;
+      cy: 78;
+    }
+
+    100% {
+      cx: 43;
+      cy: 43;
+    }
+  }
+}
