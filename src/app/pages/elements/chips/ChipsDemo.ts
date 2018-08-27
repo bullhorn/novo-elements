@@ -228,17 +228,20 @@ export class ChipsDemoComponent {
     ];
     this.rowDemo = {
       ...this.formatted,
-      columns: {
-        label: 'Name',
-        additionalColumns: [
-          {
-            label: 'Id',
-            value: (item: any): string => {
-              return item['id'];
-            },
+      columns: [
+        {
+          label: 'Name',
+          data: (item: any): string => {
+            return item['label'];
           },
-        ],
-      },
+        },
+        {
+          label: 'Id',
+          data: (item: any): string => {
+            return item.value['id'];
+          },
+        },
+      ],
     };
 
     this.setupGroupedMultiPickerDemo();

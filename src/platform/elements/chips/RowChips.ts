@@ -15,8 +15,8 @@ const CHIPS_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'row-chip,novo-row-chip',
-  template: `<div class="row-chips-columns"><ng-content></ng-content><i class="bhi-delete-o" *ngIf="!disabled" (click)="onRemove($event)"></i></div>`,
+  selector: 'novo-row-chip',
+  template: `<div class="novo-row-chips-columns"><ng-content></ng-content><i class="bhi-delete-o" *ngIf="!disabled" (click)="onRemove($event)"></i></div>`,
 })
 export class NovoRowChipElement extends NovoChipElement {
   onSelect(e) {
@@ -25,26 +25,24 @@ export class NovoRowChipElement extends NovoChipElement {
 }
 
 @Component({
-  selector: 'row-chips,novo-row-chips',
+  selector: 'novo-row-chips',
   providers: [CHIPS_VALUE_ACCESSOR],
   host: {
     '[class.with-value]': 'items.length > 0',
   },
   template: `
-        <div class="row-chips-columns">
-          <div class="main-column label">{{ source.columns.label }}</div>
-          <div class="additional-column label" *ngFor="let column of source.columns.additionalColumns">{{ column.label }}</div>
+        <div class="novo-row-chips-columns">
+          <div class="column-label" *ngFor="let column of source.columns">{{ column.label }}</div>
         </div>
-        <row-chip
+        <novo-row-chip
           *ngFor="let item of _items | async"
           [type]="type || item?.value?.searchEntity"
           [class.selected]="item == selected"
           [disabled]="disablePickerInput"
           (remove)="remove($event, item)"
           (select)="select($event, item)">
-          <div class="main-column column-data">{{ item.label }}</div>
-          <div class="additional-column column-data" *ngFor="let column of source.columns.additionalColumns">{{ column.value(item.value) }}</div>
-        </row-chip>
+          <div class="column-data" *ngFor="let column of source.columns">{{ column.data(item) }}</div>
+        </novo-row-chip>
         <novo-picker
             clearValueOnSelect="true"
             [closeOnSelect]="closeOnSelect"

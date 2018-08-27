@@ -300,15 +300,15 @@ entity-chip-results {
   max-width: none !important;
 }
 
-row-chips,
 novo-row-chips,
-novo-row-chip,
-row-chip {
-  .row-chips-columns {
+novo-row-chip {
+  .novo-row-chips-columns {
     display: flex;
     align-items: flex-end;
     margin-bottom: 1em;
-    .label {
+    .column-label {
+      display: flex;
+      flex: 1;
       color: #9e9e9e;
       font-size: 0.9em;
       font-weight: 500;
@@ -316,8 +316,13 @@ row-chip {
       overflow: hidden;
       text-overflow: ellipsis;
       margin-right: 1em;
+      &:first-of-type {
+        flex: 0 1 275px;
+      }
     }
     .column-data {
+      display: flex;
+      flex: 1;
       background: transparent !important;
       border: none;
       border-bottom: 1px dashed #afb9c0;
@@ -329,14 +334,9 @@ row-chip {
       padding: 0;
       color: #26282b;
       align-items: center;
-    }
-    .main-column {
-      display: flex;
-      flex: 0 1 275px;
-    }
-    .additional-column {
-      display: flex;
-      flex: 1;
+      &:first-of-type {
+        flex: 0 0 275px;
+      }
     }
   }
   novo-picker {
