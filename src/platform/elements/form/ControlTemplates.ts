@@ -2,7 +2,7 @@ import { Component, AfterViewInit, ViewChildren, QueryList } from '@angular/core
 // App
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';
-import { TextMaskModule } from 'angular2-text-mask';
+
 @Component({
   selector: 'novo-control-templates',
   template: `
@@ -141,8 +141,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     `,
 })
 export class NovoControlTemplates implements AfterViewInit {
-  @ViewChildren(NovoTemplate)
-  defaultTemplates: QueryList<NovoTemplate>;
+  @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
   constructor(private templates: NovoTemplateService) {}
 
   ngAfterViewInit(): void {
