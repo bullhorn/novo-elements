@@ -1,17 +1,17 @@
 {
     "extends": "../tslint.json",
     "rules": {
-        "directive-selector": [
-            true,
-            "attribute",
-            "novo-demo",
-            "camelCase"
-        ],
-        "component-selector": [
-            true,
-            "element",
-            "novo-demo",
-            "kebab-case"
-        ]
+        // "directive-selector": [
+        //     true,
+        //     "attribute",
+        //     "novo-demo",
+        //     "camelCase"
+        // ],
+        // "component-selector": [
+        //     true,
+        //     "element",
+        //     "novo-demo",
+        //     "kebab-case"
+        // ]
     }
 }

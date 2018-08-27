@@ -577,7 +577,7 @@ class RemoteMockDataService extends RemoteDataTableService<MockData> {
     if (typeof values[0] === 'number' || typeof values[0] === 'boolean') {
       return `${values.join(',')}`;
     } else {
-      return `'${values.join("','")}'`;
+      return `'${values.join(`','`)}'`;
     }
   }
 
