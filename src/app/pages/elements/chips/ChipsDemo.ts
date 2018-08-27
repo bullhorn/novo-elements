@@ -211,6 +211,14 @@ export class ChipsDemoComponent {
         });
       },
     };
+    this.avalue = [
+      {
+        value: 'USA',
+      },
+      {
+        value: 'GB',
+      },
+    ];
     this.rowValue = [
       {
         id: 1,
