@@ -1,0 +1,21 @@
+<header title="John Deere" [icon]="icon" [theme]="theme">
+  <utils>
+    <util-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></util-action>
+    <util-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></util-action>
+    <util-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></util-action>
+  </utils>
+  <section>
+    Extra Info
+  </section>
+  <novo-nav theme="color" direction="horizontal">
+    <novo-tab>
+      <span>Overview</span>
+    </novo-tab>
+    <novo-tab>
+      <span>Activity</span>
+    </novo-tab>
+    <novo-tab>
+      <span>Email</span>
+    </novo-tab>
+  </novo-nav>
+</header>

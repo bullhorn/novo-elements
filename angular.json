@@ -112,6 +112,36 @@
           }
         }
       }
+    },
+    "novo-examples": {
+      "root": "projects/novo-examples",
+      "sourceRoot": "projects/novo-examples/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "targets": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/novo-examples/tsconfig.lib.json",
+            "project": "projects/novo-examples/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/novo-examples/src/test.ts",
+            "tsConfig": "projects/novo-examples/tsconfig.spec.json",
+            "karmaConfig": "projects/novo-examples/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["projects/novo-examples/tsconfig.lib.json", "projects/novo-examples/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
   "defaultProject": "novo-elements-demo"

@@ -71,8 +71,8 @@ nav.main-nav {
   [data-name='bullhorn-text'] {
     width: 100%;
     max-width: 150px;
-    margin: 0 auto 20px;
-    display: block;
+    margin: 0 20px;
+    display: inline-block;
   } // Start menu link styles
   .menu-list {
     position: relative;

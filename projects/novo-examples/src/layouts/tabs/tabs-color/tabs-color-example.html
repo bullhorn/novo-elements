@@ -1,0 +1,25 @@
+<header>
+  <novo-nav theme="color" [outlet]="colornav" direction="horizontal">
+      <novo-tab>
+          <span>
+              <i class="bhi-person"></i>Tab 1</span>
+      </novo-tab>
+      <novo-tab>
+          <span>
+              <i class="bhi-person"></i>Tab 2</span>
+      </novo-tab>
+       <novo-tab [disabled]="true">
+          <span>
+              <i class="bhi-person"></i>Tab 3</span>
+      </novo-tab>
+  </novo-nav>
+</header>
+
+<novo-nav-outlet #colornav>
+  <novo-nav-content>
+      <h1>Tab 1 Content</h1>
+  </novo-nav-content>
+  <novo-nav-content>
+      <h1>Tab 2 Content</h1>
+  </novo-nav-content>
+</novo-nav-outlet>

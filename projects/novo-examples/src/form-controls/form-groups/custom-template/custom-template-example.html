@@ -1,0 +1,20 @@
+<ng-template #customRowTemplate let-form="form" let-index="index" let-key="key" let-controls="controls" let-key="key">
+    <div class="novo-control-group-control">
+        <div *ngFor="let c of controls" class="novo-control-container" [class.is-label]="c.controlType === 'read-only'" [style.max-width.px]="c.width">
+            <novo-control [form]="form?.controls[key]['controls'][index]" [control]="c" [condensed]="true"></novo-control>
+        </div>
+        <div class="novo-control-container last">
+            <button tooltip="HI" type="button" (click)="customEdit(form, key, index)" theme="icon" icon="edit" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
+        </div>
+        <div class="novo-control-container last">
+            <button type="button" (click)="customDelete(form, key, index)" theme="icon" icon="delete-o" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
+        </div>
+    </div>
+</ng-template>
+
+<novo-form [form]="formGroup">
+    <novo-control-group remove="true" edit="true" [initialValue]="initValue" [controls]="controls" [rowTemplate]="customRowTemplate" [add]="simpleAddConfig" label="Custom Template" key="custom" [form]="formGroup" [emptyMessage]="emptyMessage"></novo-control-group>
+</novo-form>
+
+<div class="final-value">Initial Value: {{ initValue | json }}</div>
+<div class="final-value">Value: {{ formGroup.value | json }}</div>

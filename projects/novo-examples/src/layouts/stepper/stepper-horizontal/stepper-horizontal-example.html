@@ -1,0 +1,30 @@
+
+<novo-horizontal-stepper [linear]="isLinear" #stepper>
+  <novo-step [stepControl]="firstFormGroup" label="Fill out your name" theme="candidate" icon="candidate" #step1>
+    <form [formGroup]="firstFormGroup">
+      <input placeholder="Last name, First name" formControlName="firstCtrl" required>
+      <div>Form Valid? {{firstFormGroup?.valid}}</div>
+      <div>
+        <button (click)="next(stepper, step1)">Next</button>
+      </div>
+    </form>
+  </novo-step>
+  <novo-step [stepControl]="secondFormGroup" theme="contact">
+    <form [formGroup]="secondFormGroup">
+      <ng-template novoStepLabel>Fill out your address</ng-template>
+      <input placeholder="Address" formControlName="secondCtrl" required>
+      <div>
+        <button (click)="stepper.previous()">Back</button>
+        <button (click)="stepper.next()">Next</button>
+      </div>
+    </form>
+  </novo-step>
+  <novo-step>
+    <ng-template novoStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button novo-button (click)="stepper.previous()">Back</button>
+      <button novo-button (click)="stepper.complete()">Done</button>
+    </div>
+  </novo-step>
+</novo-horizontal-stepper>

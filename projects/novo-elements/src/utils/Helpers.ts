@@ -12,7 +12,7 @@ export class Helpers {
   }
 
   static interpolate(str: string, props: any): string {
-    return str.replace(new RegExp('$([w.]+)', 'g'), (original, key) => {
+    return str.replace(/\$([\w\.]+)/g, (original, key) => {
       let keys = key.split('.');
       let value = props[keys.shift()];
       while (keys.length && value !== undefined) {

@@ -1,0 +1,8 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/novo-examples",
+  "lib": {
+    "languageLevel": ["es2018", "dom"],
+    "entryFile": "src/index.ts"
+  }
+}

@@ -12,6 +12,9 @@ export class AppComponent {
   menuOpen: boolean = false;
   designRoutes: Array<any>;
   componentRoutes: Array<any>;
+  formRoutes: Array<any>;
+  navigationRoutes: Array<any>;
+  layoutRoutes: Array<any>;
   utilRoutes: Array<any>;
 
   constructor(router: Router, private viewContainerRef: ViewContainerRef, toaster: NovoToastService, modalService: NovoModalService) {
@@ -22,6 +25,8 @@ export class AppComponent {
 
     this.designRoutes = router.config.filter((r: any) => r.data.section === 'design').sort(this.sortMenu);
     this.componentRoutes = router.config.filter((r: any) => r.data.section === 'components').sort(this.sortMenu);
+    this.formRoutes = router.config.filter((r: any) => r.data.section === 'form-controls').sort(this.sortMenu);
+    this.layoutRoutes = router.config.filter((r: any) => r.data.section === 'layouts').sort(this.sortMenu);
     this.utilRoutes = router.config.filter((r: any) => r.data.section === 'utils').sort(this.sortMenu);
 
     router.events.subscribe(() => {

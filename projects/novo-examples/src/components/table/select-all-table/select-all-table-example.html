@@ -1,0 +1,13 @@
+<novo-table [rows]="configuration.rows" [columns]="configuration.columns" [config]="configuration.config" #table>
+    <novo-table-actions>
+        <button theme="secondary" (click)="singleAction()">Click Me!</button>
+        <novo-dropdown side="right" *ngIf="table.selected.length">
+            <button theme="primary" icon="collapse" inverse>{{table.selected.length}} Selected</button>
+            <list>
+                <item (action)="selectedAction('action 1')">Action 1</item>
+                <item (action)="selectedAction('action 2')">Action 2</item>
+                <item (action)="selectedAction('action 3')" disabled="true">Action 3</item>
+            </list>
+        </novo-dropdown>
+    </novo-table-actions>
+</novo-table>

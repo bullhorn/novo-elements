@@ -21,15 +21,12 @@ main.main-content {
   .example {
     margin-top: 10px;
     border: 1px solid #e9eaea;
-    // border-top-right-radius: 3px;
-    // border-top-left-radius: 3px;
-    border-bottom: none;
     box-sizing: border-box;
-    // >* {
-    //     border-top-right-radius: 3px;
-    //     border-top-left-radius: 3px;
-    // }
   } // Contains code snippet
+  .example-container {
+    padding: 20px 30px;
+    margin: 0 auto;
+  } // Contains component demos
   pre {
     margin: 0 0 35px;
     box-sizing: border-box;
