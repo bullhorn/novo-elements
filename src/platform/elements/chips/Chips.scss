@@ -323,19 +323,30 @@ novo-row-chip {
     .column-data {
       display: flex;
       flex: 1;
+      align-items: center;
       background: transparent !important;
       border: none;
       border-bottom: 1px dashed #afb9c0;
       border-radius: 0;
       outline: none;
-      height: 2rem;
+      height: 2em;
       width: 100%;
       margin: 0 1em 0 0;
-      padding: 0;
-      color: #26282b;
-      align-items: center;
+      padding: 0 0 0.5em 0;
       &:first-of-type {
         flex: 0 0 275px;
+      }
+      span {
+        color: #26282b;
+        align-items: start;
+        display: flex;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        line-height: 1em;
+        max-height: 2em;
+        min-height: 1em;
       }
     }
   }
