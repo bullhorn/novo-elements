@@ -11,6 +11,7 @@
     "experimentalDecorators": true,
     "target": "es5",
     "typeRoots": ["node_modules/@types"],
+    "types": ["jest"],
     "lib": ["es2017", "dom"],
     "paths": {
       "novo-elements": ["dist/novo-elements"],
