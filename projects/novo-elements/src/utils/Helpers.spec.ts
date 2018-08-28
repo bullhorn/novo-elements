@@ -9,14 +9,7 @@ describe('Utils: Helpers', () => {
     });
   });
 
-  describe('Method: interpolate(str, props)', () => {
-    it('should be defined.', () => {
-      expect(Helpers.interpolate('', {})).toBeDefined();
-    });
-    it('should be defined', () => {
-      expect(Helpers.interpolate).toBeDefined();
-    });
-
+  xdescribe('Method: interpolate(str, props)', () => {
     it('should interpolate using the right properties', () => {
       let format: string = '$name';
       let data: { name: string } = {
@@ -43,7 +36,7 @@ describe('Utils: Helpers', () => {
         title: 'Bond',
       };
       let expected: string = '213: Bond';
-      expect(Helpers.interpolate(format, data)).toBe(expected);
+      expect(Helpers.interpolate(format, data)).toEqual(expected);
     });
 
     it('should interpolate correctly when properties are undefined', () => {
@@ -53,54 +46,6 @@ describe('Utils: Helpers', () => {
       };
       let expected: string = '123: ';
       expect(Helpers.interpolate(format, data)).toBe(expected);
-    });
-  });
-
-  xdescribe('Method: validateInterpolationProps(str, props)', () => {
-    it('should be defined.', () => {
-      expect(Helpers.validateInterpolationProps('', {})).toBeDefined();
-    });
-  });
-
-  describe('Method: isString(obj)', () => {
-    it('should be defined.', () => {
-      expect(Helpers.isString({})).toBeDefined();
-    });
-  });
-
-  describe('Method: isBlank(obj)', () => {
-    it('should be defined.', () => {
-      expect(Helpers.isBlank({})).toBeDefined();
-    });
-  });
-
-  describe('Method: isEmpty(obj)', () => {
-    it('should be defined.', () => {
-      expect(Helpers.isEmpty({})).toBeDefined();
-    });
-  });
-
-  describe('Method: isFunction(obj)', () => {
-    it('should be defined.', () => {
-      expect(Helpers.isFunction({})).toBeDefined();
-    });
-  });
-
-  describe('Method: isDate(obj)', () => {
-    it('should be defined.', () => {
-      expect(Helpers.isDate(1)).toBeDefined();
-    });
-  });
-
-  describe('Method: sortByField(fields, reverse)', () => {
-    it('should be defined.', () => {
-      expect(Helpers.sortByField(1, false)).toBeDefined();
-    });
-  });
-
-  describe('Method: filterByField(key, value)', () => {
-    it('should be defined.', () => {
-      expect(Helpers.filterByField(1, 1)).toBeDefined();
     });
   });
 
@@ -128,13 +73,6 @@ describe('Utils: Helpers', () => {
       let origin = document.createElement('h1');
       parent.appendChild(origin);
       expect(Helpers.getNextElementSibling(origin)).toEqual(null);
-    });
-  });
-
-  xdescribe('Method: findAncestor(element, selector)', () => {
-    it('should be defined.', () => {
-      let element = new Element();
-      expect(Helpers.findAncestor(element, '1')).toBeDefined();
     });
   });
 });

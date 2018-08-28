@@ -11,11 +11,36 @@
     "build:demo": "ng build novo-elements-demo",
     "start": "ng serve novo-elements-demo",
     "copy-scss": "node copy-scss.js",
-    "test": "ng test",
+    "test": "jest projects",
     "lint": "ng lint",
     "release": "standard-version",
     "postrelease": "git push --follow-tags origin master; npm run build; cd dist/novo-elements && echo \"Copy version from ./package.json to dist/novo-elements/package.json and run npm publish\"",
     "snapshot-publish": "bash snapshot-publish"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupTestFrameworkScriptFile": "<rootDir>/setupJest.ts",
+    "roots": [
+      "<rootDir>/projects"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "<rootDir>/projects/novo-elements/tsconfig.spec.json"
+      },
+      "__TRANSFORM_HTML__": true
+    },
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "text-summary",
+      "html"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testURL": "http://localhost"
   },
   "lint-staged": {
     "*.{ts,json,scss,css,html}": [
@@ -49,19 +74,14 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-builders/jest": "^1.1.1",
     "@angular-devkit/build-angular": "~0.8.0-beta.0",
     "@angular-devkit/build-ng-packagr": "~0.8.0-beta.0",
     "@angular/cli": "~6.2.0-beta.1",
     "@angular/compiler-cli": "^6.1.0",
     "@angular/language-service": "^6.1.0",
-    "@types/jasmine": "~2.8.8",
-    "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.3.0",
     "husky": "^0.14.3",
-    "jasmine-core": "~2.99.1",
-    "jasmine-spec-reporter": "~4.2.1",
     "jest": "^23.5.0",
     "jest-preset-angular": "^6.0.0",
     "lint-staged": "^7.2.0",

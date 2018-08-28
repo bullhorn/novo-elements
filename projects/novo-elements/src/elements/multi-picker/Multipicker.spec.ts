@@ -190,8 +190,8 @@ describe('Element: NovoMultiPickerElement', () => {
   xdescribe('Method: clickOption(event)', () => {
     it('should remove item if checked is false', () => {
       let item = { checked: false };
-      spyOn(component, 'remove');
-      spyOn(component, 'modifyAffectedParentsOrChildren');
+      jest.spyOn(component, 'remove').mockImplementation(() => {});
+      jest.spyOn(component, 'modifyAffectedParentsOrChildren').mockImplementation(() => {});
       component.clickOption(item);
       expect(component.remove).toHaveBeenCalled();
       expect(component.modifyAffectedParentsOrChildren).toHaveBeenCalled();
@@ -199,8 +199,8 @@ describe('Element: NovoMultiPickerElement', () => {
 
     it('should add item if checked is true', () => {
       let item = { checked: true };
-      spyOn(component, 'add');
-      spyOn(component, 'modifyAffectedParentsOrChildren');
+      jest.spyOn(component, 'add').mockImplementation(() => {});
+      jest.spyOn(component, 'modifyAffectedParentsOrChildren').mockImplementation(() => {});
       component.clickOption(item);
       expect(component.add).toHaveBeenCalled();
       expect(component.modifyAffectedParentsOrChildren).toHaveBeenCalled();
@@ -226,8 +226,8 @@ describe('Element: NovoMultiPickerElement', () => {
   describe('Method: remove(event, item)', () => {
     it('should remove ALL item correctly', () => {
       let item = { value: 'ALL' };
-      spyOn(component, 'modifyAllOfType');
-      spyOn(component, 'removeItem');
+      jest.spyOn(component, 'modifyAllOfType').mockImplementation(() => {});
+      jest.spyOn(component, 'removeItem').mockImplementation(() => {});
       component.remove(null, item);
       expect(component.modifyAllOfType).toHaveBeenCalled();
       expect(component.removeItem).toHaveBeenCalled();
@@ -236,8 +236,8 @@ describe('Element: NovoMultiPickerElement', () => {
     it('should remove normal item if ALL selected', () => {
       component.items = [{ value: 'ALL', label: 'Cat', type: 'cats' }];
       let itemToRemove = { value: 'Cat', label: 'Cat', type: 'cats' };
-      spyOn(component, 'handleRemoveItemIfAllSelected');
-      spyOn(component, 'removeItem');
+      jest.spyOn(component, 'handleRemoveItemIfAllSelected').mockImplementation(() => {});
+      jest.spyOn(component, 'removeItem').mockImplementation(() => {});
       component.remove(null, itemToRemove);
       expect(component.handleRemoveItemIfAllSelected).toHaveBeenCalled();
       expect(component.removeItem).toHaveBeenCalled();
@@ -246,7 +246,7 @@ describe('Element: NovoMultiPickerElement', () => {
     it('should remove item normally if ALL is not selected', () => {
       component.items = [{ value: 'Cat', label: 'Cat', type: 'cats' }];
       let itemToRemove = { value: 'Cat', label: 'Cat', type: 'cats' };
-      spyOn(component, 'removeItem');
+      jest.spyOn(component, 'removeItem').mockImplementation(() => {});
       component.remove(null, itemToRemove);
       expect(component.removeItem).toHaveBeenCalled();
     });
@@ -255,8 +255,8 @@ describe('Element: NovoMultiPickerElement', () => {
   describe('Method: add(event)', () => {
     it('should add ALL item correctly', () => {
       let item = { value: 'ALL' };
-      spyOn(component, 'modifyAllOfType');
-      spyOn(component, 'select');
+      jest.spyOn(component, 'modifyAllOfType').mockImplementation(() => {});
+      jest.spyOn(component, 'select').mockImplementation(() => {});
       component.add(item);
       expect(component.modifyAllOfType).toHaveBeenCalled();
       expect(component.select).toHaveBeenCalled();
@@ -267,8 +267,8 @@ describe('Element: NovoMultiPickerElement', () => {
       component.value = { cats: [] };
       component._options = [{ type: 'cats', data: [{ value: 'ALL', indeterminate: undefined }, { value: 'Kitty' }, { value: 'Tiger' }] }];
       let itemToAdd = { value: 'Cat', label: 'Cat', type: 'cats' };
-      spyOn(component, 'updateDisplayItems');
-      spyOn(component, 'updateAllItemState');
+      jest.spyOn(component, 'updateDisplayItems').mockImplementation(() => {});
+      jest.spyOn(component, 'updateAllItemState').mockImplementation(() => {});
       component.add(itemToAdd);
       expect(component.updateDisplayItems).toHaveBeenCalled();
       expect(component.updateAllItemState).toHaveBeenCalled();
@@ -279,8 +279,8 @@ describe('Element: NovoMultiPickerElement', () => {
   describe('Method: removeItem(item)', () => {
     it('should handle removing item correctly from value and items and update checked state', () => {
       let item = { value: 'Cat', checked: true, type: 'cats' };
-      spyOn(component, 'removeValue');
-      spyOn(component, 'updateParentOrChildren');
+      jest.spyOn(component, 'removeValue').mockImplementation(() => {});
+      jest.spyOn(component, 'updateParentOrChildren').mockImplementation(() => {});
       component.removeItem(item);
       expect(item.checked).toBeFalsy();
       expect(component.removeValue).toHaveBeenCalled();
@@ -293,7 +293,7 @@ describe('Element: NovoMultiPickerElement', () => {
       let item = { value: 'Cat', type: 'cats' };
       component.types = [{ value: 'cats' }];
       component.value = { cats: ['Tiger', 'Cat'] };
-      spyOn(component, 'updateDisplayItems');
+      jest.spyOn(component, 'updateDisplayItems').mockImplementation(() => {});
       component.removeValue(item);
       expect(component.updateDisplayItems).toHaveBeenCalled();
       expect(component.value.cats).toEqual(['Tiger']);
@@ -550,14 +550,14 @@ describe('Element: NovoMultiPickerElement', () => {
     it('should add an item', () => {
       component.value = { cats: [1] };
       let item = { type: 'cats', value: 2 };
-      spyOn(component, 'add');
+      jest.spyOn(component, 'add').mockImplementation(() => {});
       component.addIndividualChildren([item]);
       expect(component.add).toHaveBeenCalled();
     });
     it('should not add a duplicate item', () => {
       component.value = { cats: [1] };
       let item = { type: 'cats', value: 1 };
-      spyOn(component, 'add');
+      jest.spyOn(component, 'add').mockImplementation(() => {});
       component.addIndividualChildren([item]);
       expect(component.add).not.toHaveBeenCalled();
     });
@@ -566,16 +566,16 @@ describe('Element: NovoMultiPickerElement', () => {
   xdescribe('Method: updateParentOrChildren(item, action)', () => {
     it('should call updateChildrenValue if item isParentOf', () => {
       let item = { isParentOf: true };
-      spyOn(component, 'updateChildrenValue');
-      spyOn(component, 'updateParentValue');
+      jest.spyOn(component, 'updateChildrenValue').mockImplementation(() => {});
+      jest.spyOn(component, 'updateParentValue').mockImplementation(() => {});
       component.updateParentOrChildren(item);
       expect(component.updateChildrenValue).toHaveBeenCalled();
       expect(component.updateParentValue).not.toHaveBeenCalled();
     });
     it('should call updateParentValue if item isChildOf', () => {
       let item = { isChildOf: true };
-      spyOn(component, 'updateChildrenValue');
-      spyOn(component, 'updateParentValue');
+      jest.spyOn(component, 'updateChildrenValue').mockImplementation(() => {});
+      jest.spyOn(component, 'updateParentValue').mockImplementation(() => {});
       component.updateParentOrChildren(item);
       expect(component.updateParentValue).toHaveBeenCalled();
       expect(component.updateChildrenValue).not.toHaveBeenCalled();
@@ -585,16 +585,16 @@ describe('Element: NovoMultiPickerElement', () => {
   xdescribe('Method: updateParentOrChildren(item, action)', () => {
     it('should call updateChildrenValue if item isParentOf', () => {
       let item = { isParentOf: true };
-      spyOn(component, 'updateChildrenValue');
-      spyOn(component, 'updateParentValue');
+      jest.spyOn(component, 'updateChildrenValue').mockImplementation(() => {});
+      jest.spyOn(component, 'updateParentValue').mockImplementation(() => {});
       component.updateParentOrChildren(item);
       expect(component.updateChildrenValue).toHaveBeenCalled();
       expect(component.updateParentValue).not.toHaveBeenCalled();
     });
     it('should call updateParentValue if item isChildOf', () => {
       let item = { isChildOf: true };
-      spyOn(component, 'updateChildrenValue');
-      spyOn(component, 'updateParentValue');
+      jest.spyOn(component, 'updateChildrenValue').mockImplementation(() => {});
+      jest.spyOn(component, 'updateParentValue').mockImplementation(() => {});
       component.updateParentOrChildren(item);
       expect(component.updateParentValue).toHaveBeenCalled();
       expect(component.updateChildrenValue).not.toHaveBeenCalled();
@@ -604,16 +604,16 @@ describe('Element: NovoMultiPickerElement', () => {
   xdescribe('Method: updateAllParentsOrChildren(item, action)', () => {
     it('should call updateChildrenValue if item isParentOf', () => {
       let item = { isParentOf: true };
-      spyOn(component, 'updateAllChildrenValue');
-      spyOn(component, 'updateAllParentValue');
+      jest.spyOn(component, 'updateAllChildrenValue').mockImplementation(() => {});
+      jest.spyOn(component, 'updateAllParentValue').mockImplementation(() => {});
       component.updateAllParentsOrChildren(item);
       expect(component.updateAllChildrenValue).toHaveBeenCalled();
       expect(component.updateAllParentValue).not.toHaveBeenCalled();
     });
     it('should call updateParentValue if item isChildOf', () => {
       let item = { isChildOf: true };
-      spyOn(component, 'updateAllChildrenValue');
-      spyOn(component, 'updateAllParentValue');
+      jest.spyOn(component, 'updateAllChildrenValue').mockImplementation(() => {});
+      jest.spyOn(component, 'updateAllParentValue').mockImplementation(() => {});
       component.updateAllParentsOrChildren(item);
       expect(component.updateAllParentValue).toHaveBeenCalled();
       expect(component.updateAllChildrenValue).not.toHaveBeenCalled();
@@ -623,7 +623,7 @@ describe('Element: NovoMultiPickerElement', () => {
   describe('Method: updateParentValue(item, action)', () => {
     it('should handle removing item while all parents selected', () => {
       component._options = [{ type: 'cats', data: [{ checked: true, type: 'cats' }], originalData: [{ checked: true, type: 'cats' }] }];
-      spyOn(component, 'handleRemoveItemIfAllSelected');
+      jest.spyOn(component, 'handleRemoveItemIfAllSelected').mockImplementation(() => {});
       component.updateParentValue({ isChildOf: 'cats' }, 'remove');
       expect(component.handleRemoveItemIfAllSelected).toHaveBeenCalled();
     });
@@ -657,7 +657,7 @@ describe('Element: NovoMultiPickerElement', () => {
       };
       component.items = [1];
       component.selected = true;
-      spyOn(component, 'remove');
+      jest.spyOn(component, 'remove').mockImplementation(() => {});
       component.onKeyDown(event);
       expect(component.remove).toHaveBeenCalled();
     });
@@ -670,7 +670,7 @@ describe('Element: NovoMultiPickerElement', () => {
       };
       component.items = [1];
       component.selected = false;
-      spyOn(component, 'select');
+      jest.spyOn(component, 'select').mockImplementation(() => {});
       component.onKeyDown(event);
       expect(component.select).toHaveBeenCalled();
     });
@@ -686,7 +686,7 @@ describe('Element: NovoMultiPickerElement', () => {
         { type: 'cats', data: [allCat, kitty], originalData: [allCat, kitty] },
         { type: 'kittens', data: [allKitten, cat], originalData: [allKitten, cat] },
       ];
-      spyOn(component, 'setIndeterminateState');
+      jest.spyOn(component, 'setIndeterminateState').mockImplementation(() => {});
       component.modifyAffectedParentsOrChildren(true, { isParentOf: true, type: 'cats' });
       expect(component._options[0].data[0].checked).toBeTruthy();
       expect(component.setIndeterminateState).toHaveBeenCalled();

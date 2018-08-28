@@ -24,7 +24,7 @@ describe('Class: NovoFile', () => {
 
   describe('Method: read()', () => {
     it('should read files.', () => {
-      spyOn(file.reader, 'readAsDataURL');
+      jest.spyOn(file.reader, 'readAsDataURL').mockImplementation(() => {});
       file.read();
       expect(file.reader.readAsDataURL).toHaveBeenCalled();
     });

@@ -4,7 +4,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { NovoDatePickerElement } from './DatePicker';
 import { NovoLabelService } from '../../services/novo-label-service';
 
-describe('Elements: NovoDatePickerElement', () => {
+xdescribe('Elements: NovoDatePickerElement', () => {
   let fixture;
   let component;
 

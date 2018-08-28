@@ -67,15 +67,15 @@ describe('Elements: CardElement', () => {
 
   describe('Method: toggleClose()', () => {
     it('should emit close event', () => {
-      spyOn(component.onClose, 'next');
+      jest.spyOn(component.onClose, 'next').mockImplementation(() => {});
       component.toggleClose();
       expect(component.onClose.next).toHaveBeenCalledWith();
     });
 
     it('should call close function if defined in config', () => {
       component.config.onClose = () => {};
-      spyOn(component.onClose, 'next');
-      spyOn(component.config, 'onClose');
+      jest.spyOn(component.onClose, 'next').mockImplementation(() => {});
+      jest.spyOn(component.config, 'onClose').mockImplementation(() => {});
       component.toggleClose();
       expect(component.onClose.next).not.toHaveBeenCalled();
       expect(component.config.onClose).toHaveBeenCalled();
@@ -84,15 +84,15 @@ describe('Elements: CardElement', () => {
 
   describe('Method: toggleRefresh()', () => {
     it('should emit close event', () => {
-      spyOn(component.onRefresh, 'next');
+      jest.spyOn(component.onRefresh, 'next').mockImplementation(() => {});
       component.toggleRefresh();
       expect(component.onRefresh.next).toHaveBeenCalledWith();
     });
 
     it('should call refresh function if defined in config', () => {
       component.config.onRefresh = () => {};
-      spyOn(component.onRefresh, 'next');
-      spyOn(component.config, 'onRefresh');
+      jest.spyOn(component.onRefresh, 'next').mockImplementation(() => {});
+      jest.spyOn(component.config, 'onRefresh').mockImplementation(() => {});
       component.toggleRefresh();
       expect(component.onRefresh.next).not.toHaveBeenCalled();
       expect(component.config.onRefresh).toHaveBeenCalled();
