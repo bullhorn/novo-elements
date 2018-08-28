@@ -108,7 +108,7 @@ export class NovoChipElement {
   host: {
     '[class.with-value]': 'items.length > 0',
     '[class.disabled]': 'disablePickerInput',
-  },o
+  },
 })
 export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy {
   @Input()
@@ -268,40 +268,6 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
     }
     this.changed.emit({ value: this.model, rawValue: this.items });
     this._items.next(this.items);
-<<<<<<< HEAD
-  }
-
-  getLabelFromOptions(value) {
-    let optLabel = this.source.options.find((val) => val.value === value);
-    return {
-      value,
-      label: optLabel ? optLabel.label : value,
-    };
-  }
-
-  deselectAll(event?) {
-    this.selected = null;
-    this.hidePreview();
-  }
-
-  select(event?, item?) {
-    this.blur.emit(event);
-    this.deselectAll();
-    this.selected = item;
-    this.showPreview();
-  }
-
-  onTyping(event?) {
-    this.typing.emit(event);
-  }
-
-  onFocus(event?) {
-    this.deselectAll();
-    this.element.nativeElement.classList.add('selected');
-    this.focus.emit(event);
-  }
-
-=======
     if (!loadingSet) {
       this.chipsStateService.updateState('STABLE');
     }
@@ -338,7 +304,6 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
     this.focus.emit(event);
   }
 
->>>>>>> fix(chips) - updates to load getdata and delay onInit FI execution until getData is complete
   add(event) {
     if (event && !(event instanceof Event)) {
       this.items.push(event);
