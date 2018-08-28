@@ -31,7 +31,7 @@ export class NovoRowChipElement extends NovoChipElement {
     '[class.with-value]': 'items.length > 0',
   },
   template: `
-        <div class="novo-row-chips-columns">
+        <div class="novo-row-chips-columns" *ngIf="items.length > 0">
           <div class="column-label" *ngFor="let column of source.columns">{{ column.label }}</div>
         </div>
         <novo-row-chip
