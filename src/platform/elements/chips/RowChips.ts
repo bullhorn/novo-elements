@@ -41,7 +41,7 @@ export class NovoRowChipElement extends NovoChipElement {
           [disabled]="disablePickerInput"
           (remove)="remove($event, item)"
           (select)="select($event, item)">
-          <div class="column-data" *ngFor="let column of source.columns">{{ column.data(item) }}</div>
+          <div class="column-data" *ngFor="let column of source.columns"><span>{{ column.data(item) }}</span></div>
         </novo-row-chip>
         <novo-picker
             clearValueOnSelect="true"
