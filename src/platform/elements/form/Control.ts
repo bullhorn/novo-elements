@@ -80,7 +80,7 @@ export class NovoAutoSize implements AfterContentInit {
                     {{ form.controls[control.key].label }}
                 </label>
                 <div class="novo-control-inner-container" [class.required]="form.controls[control.key].required && !form.controls[control.key].readOnly">
-                    <div class="novo-control-inner-input-container">
+                    <div class="novo-control-inner-input-container" [class.novo-control-filled]="hasValue" [class.novo-control-empty]="!hasValue">
                       <!--Required Indicator-->
                         <i [hidden]="!form.controls[control.key].required || form.controls[control.key].readOnly"
                             class="required-indicator {{ form.controls[control.key].controlType }}"
