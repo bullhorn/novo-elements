@@ -64,11 +64,11 @@ const template = `
     <p>Having custom templates makes it easy to customize the functionality of the picker, here is an example of a category selector</p>
     <div class="example chips-demo">${GroupedMultiPickerDemoTpl}</div>
     <code-snippet [code]="GroupedMultiPickerDemoTpl"></code-snippet>
-    
+
     <h5>Row Chips Example</h5>
     <p>
         By clicking on the <code>row-chips</code> element, the options list will be displayed.  Select any of the options
-        by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row. 
+        by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row.
         By clicking the delete icon at the end of the row, the row will be removec from the list of selected values.
     </p>
     <div class="example chips-demo">${RowChipsDemoTpl}</div>
@@ -81,38 +81,23 @@ const template = `
   template: template,
 })
 export class ChipsDemoComponent {
-<<<<<<< HEAD
   private BasicChipsDemoTpl: string = BasicChipsDemoTpl;
   private AsyncChipsDemoTpl: string = AsyncChipsDemoTpl;
   private FormattedChipsDemoTpl: string = FormattedChipsDemoTpl;
   private CloseOnSelectChipsDemoTpl: string = CloseOnSelectChipsDemoTpl;
   private GroupedMultiPickerDemoTpl: string = GroupedMultiPickerDemoTpl;
   private RowChipsDemoTpl: string = RowChipsDemoTpl;
+  private AsyncInitializeChipsDemoTpl: string = AsyncInitializeChipsDemoTpl;
 
   private staticDemo: any;
   private formatted: any;
   private async: any;
+  private asyncInitialize: any;
   private avalue: any;
   private placeholder: string = 'Select...';
   private value: any = ['Alabama'];
   private rowDemo: any;
   private rowValue: any;
-=======
-    private BasicChipsDemoTpl: string = BasicChipsDemoTpl;
-    private AsyncChipsDemoTpl: string = AsyncChipsDemoTpl;
-    private AsyncInitializeChipsDemoTpl: string = AsyncInitializeChipsDemoTpl;
-    private FormattedChipsDemoTpl: string = FormattedChipsDemoTpl;
-    private CloseOnSelectChipsDemoTpl: string = CloseOnSelectChipsDemoTpl;
-    private GroupedMultiPickerDemoTpl: string = GroupedMultiPickerDemoTpl;
-
-    private staticDemo: any;
-    private formatted: any;
-    private async: any;
-    private asyncInitialize: any;
-    private avalue: any;
-    private placeholder: string = 'Select...';
-    private value: any = ['Alabama'];
->>>>>>> Initial commit for chips
 
   private groupedMultiPicker1: any;
   private groupedMultiPicker2: any;
@@ -121,7 +106,6 @@ export class ChipsDemoComponent {
   private groupedMultiPicker2Value: any;
   private groupedMultiPicker3Value: any;
 
-<<<<<<< HEAD
   constructor() {
     let states = [
       'Alabama',
@@ -270,89 +254,37 @@ export class ChipsDemoComponent {
         },
       ],
     };
-=======
-    constructor() {
-        let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-        let abbrieviated = [{
-            value: 'USA',
-            label: 'United States'
-        }, {
-            value: 'GB',
-            label: 'Great Britain'
-        }, {
-            value: 'CA',
-            label: 'Canada'
-        }, {
-            value: 'AU',
-            label: 'Austrailia'
-        }];
-        let collaborators = [{
-            id: 1,
-            firstName: 'Brian',
-            lastName: 'Kimball'
-        }, {
-            id: 2,
-            firstName: 'Josh',
-            lastName: 'Godi'
-        }, {
-            id: 3,
-            firstName: 'Alec',
-            lastName: 'Sibilia'
-        }, {
-            id: 4,
-            firstName: 'Kameron',
-            lastName: 'Sween'
-        }];
-        this.staticDemo = { options: states };
-        this.formatted = {
-            format: '$firstName $lastName',
-            options: collaborators
-        };
-        this.async = {
-            options: () => {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve(abbrieviated);
-                    }, 300);
-                });
-            },
-            getLabels: (data) => {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        let values = data.map(item => item.value);
-                        let results = abbrieviated.filter(item => values.includes(item.value));
-                        resolve(results);
-                    }, 300);
-                });
-            }
-        };
-        this.asyncInitialize = {
-          options: () => {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve(abbrieviated);
-              }, 300);
-            });
-          },
-          getData: (data) => {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve([{
-                  label: 'USA'
-                }, {
-                  label: 'GB'
-                }]);
-              }, 300);
-            });
-          }
-        };
-        this.avalue = [{
-            value: 'USA'
-        }, {
-            value: 'GB'
-        }];
->>>>>>> Initial commit for chips
-
+    this.asyncInitialize = {
+      options: () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(abbrieviated);
+          }, 300);
+        });
+      },
+      getData: (data) => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve([
+              {
+                label: 'USA',
+              },
+              {
+                label: 'GB',
+              },
+            ]);
+          }, 300);
+        });
+      },
+    };
+    this.avalue = [
+      {
+        value: 'USA',
+      },
+      {
+        value: 'GB',
+      },
+    ];
     this.setupGroupedMultiPickerDemo();
   }
 
