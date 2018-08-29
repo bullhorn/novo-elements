@@ -27,7 +27,8 @@ novo-entity-chips {
   &.disabled {
     border-bottom: none;
   }
-  chip {
+  chip,
+  novo-chip {
     display: flex;
     flex-grow: inherit;
     align-items: center;
@@ -143,8 +144,11 @@ novo-entity-chips {
 }
 
 chips,
-entity-chips {
-  chip {
+novo-chips,
+entity-chips,
+novo-entity-chips {
+  chip,
+  novo-chip {
     span {
       &.contact,
       &.clientcontact {
