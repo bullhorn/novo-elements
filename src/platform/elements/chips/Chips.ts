@@ -1,5 +1,17 @@
 // NG2
-import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit, OnDestroy, ViewChild, ViewContainerRef, HostBinding } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  forwardRef,
+  ElementRef,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ViewContainerRef,
+  HostBinding,
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -209,17 +221,8 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
   setItems() {
     let loadingSet: boolean = false;
     this.items = [];
-    if (this.source.getData && typeof this.source.getData === 'function') {
-      this.chipsStateService.updateState('LOADING');
-      loadingSet = true;
-      this.source.getData().then((result: any) => {
-        this.items = result;
-        this._items.next(this.items);
-        this.value = this.items.map((i) => i.value || i.id);
-        this.chipsStateService.updateState('STABLE');
-      });
-    }
-    if (this.model && Array.isArray(this.model)) {
+
+    if (this.model && Array.isArray(this.model) && this.model.length > 0) {
       let noLabels = [];
       for (let value of this.model) {
         let label;
@@ -227,44 +230,47 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
           label = Helpers.interpolate(this.source.format, value);
         }
         if (this.source && label && label !== this.source.format) {
-          this.items.push({
-            value,
-            label,
-          });
+          this.items.push({ value, label });
         } else if (this.source.getLabels && typeof this.source.getLabels === 'function') {
           noLabels.push(value);
         } else if (this.source.options && Array.isArray(this.source.options)) {
           this.items.push(this.getLabelFromOptions(value));
         } else {
-          this.items.push({
-            value,
-            label: value,
-          });
+          this.items.push({ value, label: value });
         }
       }
       if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
         loadingSet = true;
         this.chipsStateService.updateState('LOADING');
-        this.source.getLabels(noLabels).then((result) => {
-          this.chipsStateService.updateState('STABLE');
-          for (let value of result) {
-            if (value.hasOwnProperty('label')) {
-              this.items.push({
-                value,
-                label: value.label,
-              });
-            } else if (this.source.options && Array.isArray(this.source.options)) {
-              this.items.push(this.getLabelFromOptions(value));
-            } else {
-              this.items.push(value);
+        this.source.getLabels(noLabels).then(
+          (result) => {
+            this.chipsStateService.updateState('STABLE');
+            for (let value of result) {
+              if (value.hasOwnProperty('label')) {
+                this.items.push({ value, label: value.label });
+              } else if (this.source.options && Array.isArray(this.source.options)) {
+                this.items.push(this.getLabelFromOptions(value));
+              } else {
+                this.items.push(value);
+              }
             }
-          }
-          this._items.next(this.items);
-        }, (err: any) => {
+            this._items.next(this.items);
+          },
+          (err: any) => {
             this.chipsStateService.updateState('STABLE');
             console.warn(err);
-        });
+          },
+        );
       }
+    } else if (this.source.getData && typeof this.source.getData === 'function') {
+      this.chipsStateService.updateState('LOADING');
+      loadingSet = true;
+      this.source.getData().then((result: any) => {
+        this.items = result;
+        this._items.next(this.items);
+        this.value = this.items.map((i) => i.value);
+        this.chipsStateService.updateState('STABLE');
+      });
     }
     this.changed.emit({ value: this.model, rawValue: this.items });
     this._items.next(this.items);

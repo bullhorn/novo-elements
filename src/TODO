@@ -1,0 +1,39 @@
+write unit tests
+oninit FIs for to-many fields
+list of to-many fields
+- CandidateSource - TO_One
+  - candidate
+- CorporateUser
+  - Candidate secondaryOwners
+- Internal
+  - candidate picker: text:internal
+- External
+  - Note (about)
+- CorpotaionDepartment
+  - TO_One - ClientCorporation (department)
+- Person
+  - JobOrder (assignedUesr)
+- CertificationGroup
+  - JobOrder
+- Specialty
+  - candidate
+- Skill
+  - candidate
+- BillRateCategory
+  - TO_One - JobOrder BillRateCategory
+- Category
+  - candidate
+- BusinessSector
+  - Candidate
+- Certification
+  - Candidate certificationList
+- ClientCorporation
+  - Candidate clientCorporationBlacklist
+Load and save edit tabs with to-many data on the following entities
+- Note
+- Candidate
+- JobOrder
+- Opportunityu
+- Company
+- ClientContact
+-
