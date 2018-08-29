@@ -1,5 +1,5 @@
 // NG2
-import { Component, forwardRef, ElementRef } from '@angular/core';
+import { Component, forwardRef, ElementRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 // APP
@@ -65,6 +65,9 @@ export class NovoRowChipElement extends NovoChipElement {
    `,
 })
 export class NovoRowChipsElement extends NovoChipsElement {
+  @Input()
+  closeOnSelect: boolean = true;
+
   constructor(element: ElementRef, componentUtils: ComponentUtils, labels: NovoLabelService) {
     super(element, componentUtils, labels);
   }
