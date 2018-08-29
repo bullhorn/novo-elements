@@ -4,14 +4,14 @@ import { Http } from '@angular/http';
 // Vendor
 import { Subject } from 'rxjs/Subject';
 // App
-export type CHIPS_STATE = 'STABLE' | 'LOADING';
+export type INPUT_STATE = 'STABLE' | 'LOADING';
 
 @Injectable()
-export class ChipsStateService {
-  state: CHIPS_STATE = 'STABLE';
-  public chipsStateChange: Subject<CHIPS_STATE> = new Subject();
+export class InputStateService {
+  state: INPUT_STATE = 'STABLE';
+  public chipsStateChange: Subject<INPUT_STATE> = new Subject();
 
-  updateState(state: CHIPS_STATE): void {
+  updateState(state: INPUT_STATE): void {
     this.state = state;
     this.chipsStateChange.next(state);
   }

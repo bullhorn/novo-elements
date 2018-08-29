@@ -98,7 +98,7 @@ export class ChipsDemoComponent {
   private value: any = ['Alabama'];
   private rowDemo: any;
   private rowValue: any;
-  asyncInitializeValue: any = [];
+  private asyncInitializeValue: any = [];
   private groupedMultiPicker1: any;
   private groupedMultiPicker2: any;
   private groupedMultiPicker3: any;

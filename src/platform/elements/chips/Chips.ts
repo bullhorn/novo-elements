@@ -23,7 +23,7 @@ import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { ChipsStateService, CHIPS_STATE } from './ChipsStateService';
+import { InputStateService, INPUT_STATE } from './../../services/input-state/InputStateService';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -80,7 +80,7 @@ export class NovoChipElement {
 
 @Component({
   selector: 'chips,novo-chips',
-  providers: [CHIPS_VALUE_ACCESSOR, ChipsStateService],
+  providers: [CHIPS_VALUE_ACCESSOR, InputStateService],
   template: `
         <chip
             *ngFor="let item of _items | async"
@@ -173,12 +173,12 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
     public element: ElementRef,
     private componentUtils: ComponentUtils,
     public labels: NovoLabelService,
-    private chipsStateService: ChipsStateService,
+    private InputStateService: InputStateService,
   ) {}
 
   ngOnInit(): void {
     this.actualPlaceholder = this.placeholder;
-    this.chipsStateService.chipsStateChange.subscribe((state: CHIPS_STATE) => {
+    this.InputStateService.chipsStateChange.subscribe((state: INPUT_STATE) => {
       if (state === 'LOADING') {
         this.pickerLoadingState = true;
         this.actualPlaceholder = this.labels.loading;
@@ -191,7 +191,7 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
   }
 
   ngOnDestroy(): void {
-    this.chipsStateService.chipsStateChange.unsubscribe();
+    this.InputStateService.chipsStateChange.unsubscribe();
   }
 
   //get accessor
@@ -241,10 +241,10 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
       }
       if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
         loadingSet = true;
-        this.chipsStateService.updateState('LOADING');
+        this.InputStateService.updateState('LOADING');
         this.source.getLabels(noLabels).then(
           (result) => {
-            this.chipsStateService.updateState('STABLE');
+            this.InputStateService.updateState('STABLE');
             for (let value of result) {
               if (value.hasOwnProperty('label')) {
                 this.items.push({ value, label: value.label });
@@ -257,25 +257,25 @@ export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy
             this._items.next(this.items);
           },
           (err: any) => {
-            this.chipsStateService.updateState('STABLE');
+            this.InputStateService.updateState('STABLE');
             console.warn(err);
           },
         );
       }
     } else if (this.source.getData && typeof this.source.getData === 'function') {
-      this.chipsStateService.updateState('LOADING');
+      this.InputStateService.updateState('LOADING');
       loadingSet = true;
       this.source.getData().then((result: any) => {
         this.items = result;
         this._items.next(this.items);
         this.value = this.items.map((i) => i.value);
-        this.chipsStateService.updateState('STABLE');
+        this.InputStateService.updateState('STABLE');
       });
     }
     this.changed.emit({ value: this.model, rawValue: this.items });
     this._items.next(this.items);
     if (!loadingSet) {
-      this.chipsStateService.updateState('STABLE');
+      this.InputStateService.updateState('STABLE');
     }
     this._items.next(this.items);
   }

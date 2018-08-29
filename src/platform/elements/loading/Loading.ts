@@ -2,25 +2,26 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
-    selector: 'novo-loading',
-    host: {
-        '[class]': 'theme || ""'
-    },
-    template: `
+  selector: 'novo-loading',
+  host: {
+    '[class]': 'theme || ""',
+  },
+  template: `
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
-    `
+    `,
 })
 export class NovoLoadingElement {
-    @Input() theme: string;
+  @Input()
+  theme: string;
 }
 
 @Component({
-    selector: 'novo-spinner',
-    template: `
+  selector: 'novo-spinner',
+  template: `
         <svg class="bullhornSpinner" [ngClass]="theme" height="100" width="100" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" [attr.inverse]="inverse">
             <title>Bullhorn Spinner Animation</title>
             <desc>Spinner animation indicating loading</desc>
@@ -95,14 +96,16 @@ export class NovoLoadingElement {
                 </circle>
             </g>
         </svg>
-    `
+    `,
 })
 export class NovoSpinnerElement {
-    @Input() theme: string;
-    @Input() inverse: boolean;
-    @Input() baseHref: string;
+  @Input()
+  theme: string;
+  @Input()
+  inverse: boolean;
+  @Input()
+  baseHref: string;
 }
-
 
 @Component({
   selector: 'novo-simple-spinner',
@@ -128,5 +131,4 @@ export class NovoSimpleSpinnerElement {
       fill: color,
     };
   }
-
 }
