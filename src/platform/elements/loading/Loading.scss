@@ -54,3 +54,21 @@ novo-loading {
         opacity: 1;
     }
 }
+
+novo-simple-spinner {
+   .loading-simple-spinner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: rotate 1200ms linear infinite;
+        svg {
+          width: 100%;
+          height: 100%;
+          max-width: 15px;
+          max-height: 15px;
+          .spinner {
+            fill: white;
+          }
+        }
+      }
+}

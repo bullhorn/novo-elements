@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 // APP
 let BasicChipsDemoTpl = require('./templates/BasicChipsDemo.html');
 let AsyncChipsDemoTpl = require('./templates/AsyncChipsDemo.html');
+let AsyncInitializeChipsDemoTpl = require('./templates/AsyncInitializeChipsDemo.html');
 let FormattedChipsDemoTpl = require('./templates/FormattedChipsDemo.html');
 let CloseOnSelectChipsDemoTpl = require('./templates/CloseOnSelectChipsDemo.html');
 let GroupedMultiPickerDemoTpl = require('./templates/GroupedMultiPickerDemo.html');
@@ -35,6 +36,14 @@ const template = `
     <div class="example chips-demo">${AsyncChipsDemoTpl}</div>
     <code-snippet [code]="AsyncChipsDemoTpl"></code-snippet>
 
+    <h5>Async Initialize Examples</h5>
+    <p>
+        By clicking on the <code>chips</code> element, the options list will be displayed.  Select any of the options
+        by clicking on the item in the list.  The value selected will be added to the list of selected values.
+    </p>
+    <div class="example chips-demo">${AsyncInitializeChipsDemoTpl}</div>
+    <code-snippet [code]="AsyncInitializeChipsDemoTpl"></code-snippet>
+
     <h5>Formatted Examples</h5>
     <p>
         By clicking on the <code>chips</code> element, the options list will be displayed.  Select any of the options
@@ -55,11 +64,11 @@ const template = `
     <p>Having custom templates makes it easy to customize the functionality of the picker, here is an example of a category selector</p>
     <div class="example chips-demo">${GroupedMultiPickerDemoTpl}</div>
     <code-snippet [code]="GroupedMultiPickerDemoTpl"></code-snippet>
-    
+
     <h5>Row Chips Example</h5>
     <p>
         By clicking on the <code>row-chips</code> element, the options list will be displayed.  Select any of the options
-        by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row. 
+        by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row.
         By clicking the delete icon at the end of the row, the row will be removec from the list of selected values.
     </p>
     <div class="example chips-demo">${RowChipsDemoTpl}</div>
@@ -78,16 +87,18 @@ export class ChipsDemoComponent {
   private CloseOnSelectChipsDemoTpl: string = CloseOnSelectChipsDemoTpl;
   private GroupedMultiPickerDemoTpl: string = GroupedMultiPickerDemoTpl;
   private RowChipsDemoTpl: string = RowChipsDemoTpl;
+  private AsyncInitializeChipsDemoTpl: string = AsyncInitializeChipsDemoTpl;
 
   private staticDemo: any;
   private formatted: any;
   private async: any;
+  private asyncInitialize: any;
   private avalue: any;
   private placeholder: string = 'Select...';
   private value: any = ['Alabama'];
   private rowDemo: any;
   private rowValue: any;
-
+  private asyncInitializeValue: any = [];
   private groupedMultiPicker1: any;
   private groupedMultiPicker2: any;
   private groupedMultiPicker3: any;
@@ -243,7 +254,31 @@ export class ChipsDemoComponent {
         },
       ],
     };
-
+    this.asyncInitialize = {
+      options: () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(abbrieviated);
+          }, 300);
+        });
+      },
+      getData: () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve([
+              {
+                value: 'USA',
+                label: 'USA',
+              },
+              {
+                value: 'GB',
+                label: 'GB',
+              },
+            ]);
+          }, 3000);
+        });
+      },
+    };
     this.setupGroupedMultiPickerDemo();
   }
 

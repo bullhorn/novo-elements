@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 // APP
 let LoadingCircleDemoTpl = require('./templates/LoadingCircleDemo.html');
+let LoadingSimpleSpinnerTpl = require('./templates/LoadingSimpleSpinner.html');
 let LoadingLineDemoTpl = require('./templates/LoadingLineDemo.html');
 
 const template = `
@@ -22,14 +23,22 @@ const template = `
     </p>
     <div class="example loading-spinner-demo">${LoadingCircleDemoTpl}</div>
     <code-snippet [code]="LoadingCircleDemoTpl"></code-snippet>
+
+    <h5>Simple Spinner</h5>
+    <p>
+        The Simple Spinner animation is used as an alternate to the large spinner animation.
+    </p>
+    <div class="example loading-simple-spinner-demo">${LoadingSimpleSpinnerTpl}</div>
+    <code-snippet [code]="LoadingSimpleSpinnerTpl"></code-snippet>
 </div>
 `;
 
 @Component({
-    selector: 'loading-demo',
-    template: template
+  selector: 'loading-demo',
+  template: template,
 })
 export class LoadingDemoComponent {
-    private LoadingCircleDemoTpl:string = LoadingCircleDemoTpl;
-    private LoadingLineDemoTpl:string = LoadingLineDemoTpl;
+  private LoadingCircleDemoTpl: string = LoadingCircleDemoTpl;
+  private LoadingLineDemoTpl: string = LoadingLineDemoTpl;
+  private LoadingSimpleSpinnerTpl: string = LoadingSimpleSpinnerTpl;
 }

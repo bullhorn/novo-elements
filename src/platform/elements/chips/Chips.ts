@@ -1,15 +1,29 @@
 // NG2
-import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  forwardRef,
+  ElementRef,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ViewContainerRef,
+  HostBinding,
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { debounceTime } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 // APP
-import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { InputStateService, INPUT_STATE } from './../../services/input-state/InputStateService';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -66,7 +80,7 @@ export class NovoChipElement {
 
 @Component({
   selector: 'chips,novo-chips',
-  providers: [CHIPS_VALUE_ACCESSOR],
+  providers: [CHIPS_VALUE_ACCESSOR, InputStateService],
   template: `
         <chip
             *ngFor="let item of _items | async"
@@ -83,7 +97,7 @@ export class NovoChipElement {
                 [closeOnSelect]="closeOnSelect"
                 [config]="source"
                 [disablePickerInput]="disablePickerInput"
-                [placeholder]="placeholder"
+                [placeholder]="actualPlaceholder"
                 [(ngModel)]="itemToAdd"
                 (select)="add($event)"
                 (keydown)="onKeyDown($event)"
@@ -97,7 +111,10 @@ export class NovoChipElement {
         <div class="preview-container">
             <span #preview></span>
         </div>
-        <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput"></i>
+        <ng-container *ngIf="pickerLoadingState">
+          <novo-simple-spinner fillColor="#4a89dc"></novo-simple-spinner>
+        </ng-container>
+        <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput && !pickerLoadingState"></i>
         <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
    `,
   host: {
@@ -105,7 +122,7 @@ export class NovoChipElement {
     '[class.disabled]': 'disablePickerInput',
   },
 })
-export class NovoChipsElement implements OnInit, ControlValueAccessor {
+export class NovoChipsElement implements ControlValueAccessor, OnInit, OnDestroy {
   @Input()
   closeOnSelect: boolean = false;
   @Input()
@@ -131,6 +148,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   blur: EventEmitter<any> = new EventEmitter();
   @Output()
   typing: EventEmitter<any> = new EventEmitter();
+  @Output()
+  loadingStateChange: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('preview', { read: ViewContainerRef })
   preview: ViewContainerRef;
@@ -144,14 +163,35 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   // private data model
   _value: any = '';
   _items = new ReplaySubject(1);
+  pickerLoadingState: boolean = false;
+  actualPlaceholder: string;
   // Placeholders for the callbacks
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {}
+  constructor(
+    public element: ElementRef,
+    private componentUtils: ComponentUtils,
+    public labels: NovoLabelService,
+    private InputStateService: InputStateService,
+  ) {}
 
-  ngOnInit() {
-    this.setItems();
+  ngOnInit(): void {
+    this.actualPlaceholder = this.placeholder;
+    this.InputStateService.chipsStateChange.subscribe((state: INPUT_STATE) => {
+      if (state === 'LOADING') {
+        this.pickerLoadingState = true;
+        this.actualPlaceholder = this.labels.loading;
+      } else {
+        this.pickerLoadingState = false;
+        this.actualPlaceholder = this.placeholder;
+      }
+      this.loadingStateChange.emit(state);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.InputStateService.chipsStateChange.unsubscribe();
   }
 
   //get accessor
@@ -179,8 +219,10 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   setItems() {
+    let loadingSet: boolean = false;
     this.items = [];
-    if (this.model && Array.isArray(this.model)) {
+
+    if (this.model && Array.isArray(this.model) && this.model.length > 0) {
       let noLabels = [];
       for (let value of this.model) {
         let label;
@@ -188,40 +230,53 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
           label = Helpers.interpolate(this.source.format, value);
         }
         if (this.source && label && label !== this.source.format) {
-          this.items.push({
-            value,
-            label,
-          });
+          this.items.push({ value, label });
         } else if (this.source.getLabels && typeof this.source.getLabels === 'function') {
           noLabels.push(value);
         } else if (this.source.options && Array.isArray(this.source.options)) {
           this.items.push(this.getLabelFromOptions(value));
         } else {
-          this.items.push({
-            value,
-            label: value,
-          });
+          this.items.push({ value, label: value });
         }
       }
       if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
-        this.source.getLabels(noLabels).then((result) => {
-          for (let value of result) {
-            if (value.hasOwnProperty('label')) {
-              this.items.push({
-                value,
-                label: value.label,
-              });
-            } else if (this.source.options && Array.isArray(this.source.options)) {
-              this.items.push(this.getLabelFromOptions(value));
-            } else {
-              this.items.push(value);
+        loadingSet = true;
+        this.InputStateService.updateState('LOADING');
+        this.source.getLabels(noLabels).then(
+          (result) => {
+            this.InputStateService.updateState('STABLE');
+            for (let value of result) {
+              if (value.hasOwnProperty('label')) {
+                this.items.push({ value, label: value.label });
+              } else if (this.source.options && Array.isArray(this.source.options)) {
+                this.items.push(this.getLabelFromOptions(value));
+              } else {
+                this.items.push(value);
+              }
             }
-          }
-          this._items.next(this.items);
-        });
+            this._items.next(this.items);
+          },
+          (err: any) => {
+            this.InputStateService.updateState('STABLE');
+            console.warn(err);
+          },
+        );
       }
+    } else if (this.source.getData && typeof this.source.getData === 'function') {
+      this.InputStateService.updateState('LOADING');
+      loadingSet = true;
+      this.source.getData().then((result: any) => {
+        this.items = result;
+        this._items.next(this.items);
+        this.value = this.items.map((i) => i.value);
+        this.InputStateService.updateState('STABLE');
+      });
     }
     this.changed.emit({ value: this.model, rawValue: this.items });
+    this._items.next(this.items);
+    if (!loadingSet) {
+      this.InputStateService.updateState('STABLE');
+    }
     this._items.next(this.items);
   }
 

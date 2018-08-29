@@ -2,12 +2,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // APP
-import { NovoLoadingElement, NovoSpinnerElement } from './Loading';
+import { NovoLoadingElement, NovoSpinnerElement, NovoSimpleSpinnerElement } from './Loading';
 
 @NgModule({
     imports: [CommonModule],
-    declarations: [NovoLoadingElement, NovoSpinnerElement],
-    exports: [NovoLoadingElement, NovoSpinnerElement]
+    declarations: [NovoLoadingElement, NovoSpinnerElement, NovoSimpleSpinnerElement],
+    exports: [NovoLoadingElement, NovoSpinnerElement, NovoSimpleSpinnerElement]
 })
 export class NovoLoadingModule {
 }

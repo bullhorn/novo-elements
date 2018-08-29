@@ -6,6 +6,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { NovoChipElement, NovoChipsElement } from './Chips';
+import { InputStateService, INPUT_STATE } from './../../services/input-state/InputStateService';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -65,8 +66,8 @@ export class NovoRowChipElement extends NovoChipElement {
    `,
 })
 export class NovoRowChipsElement extends NovoChipsElement {
-  constructor(element: ElementRef, componentUtils: ComponentUtils, labels: NovoLabelService) {
-    super(element, componentUtils, labels);
+  constructor(element: ElementRef, componentUtils: ComponentUtils, labels: NovoLabelService, InputStateService: InputStateService) {
+    super(element, componentUtils, labels, InputStateService);
   }
 
   onKeyDown(event) {

@@ -201,6 +201,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   private characterCountField: string;
   private maxLengthMetErrorfields: string[] = [];
   private statusChangeSubscription: any;
+  private invokeOnInitInteractions: any[] = [];
 
   maskOptions: IMaskOptions;
   templates: any = {};
@@ -288,8 +289,14 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
           default:
             break;
         }
-        if (interaction.invokeOnInit) {
+        if (
+          interaction.invokeOnInit &&
+          !(this.form.controls[this.control.key].controlType === 'picker' &&
+          this.form.controls[this.control.key].multiple === true)
+        ) {
           this.executeInteraction(interaction);
+        } else {
+          this.invokeOnInitInteractions.push(interaction);
         }
       }
     }
@@ -297,6 +304,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       this.templates = this.templateService.getAll();
       this.loading = false;
       this.changeDetectorRef.markForCheck();
+      this.loading = false;
     });
   }
 
@@ -343,6 +351,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         handleTyping: this.handleTyping.bind(this),
         updateValidity: this.updateValidity.bind(this),
         toggleActive: this.toggleActive.bind(this),
+        handleChipsPickerStableState: this.handleChipsPickerStableState.bind(this),
       },
       form: this.form,
     };
@@ -569,6 +578,16 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     // Max Length
     if (this.form.controls[this.control.key].maxlength && event.target.value.length >= this.form.controls[this.control.key].maxlength) {
       event.preventDefault();
+    }
+  }
+
+  handleChipsPickerStableState(event: any): void {
+    if (event === 'STABLE') {
+      this.templateContext.$implicit.markAsPristine();
+      for (let interaction of this.invokeOnInitInteractions) {
+        this.executeInteraction(interaction);
+      }
+      this.invokeOnInitInteractions = [];
     }
   }
 
