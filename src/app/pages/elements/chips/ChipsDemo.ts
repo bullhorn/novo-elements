@@ -98,7 +98,7 @@ export class ChipsDemoComponent {
   private value: any = ['Alabama'];
   private rowDemo: any;
   private rowValue: any;
-
+  asyncInitializeValue: any = [];
   private groupedMultiPicker1: any;
   private groupedMultiPicker2: any;
   private groupedMultiPicker3: any;
@@ -262,29 +262,23 @@ export class ChipsDemoComponent {
           }, 300);
         });
       },
-      getData: (data) => {
+      getData: () => {
         return new Promise((resolve) => {
           setTimeout(() => {
             resolve([
               {
+                value: 'USA',
                 label: 'USA',
               },
               {
+                value: 'GB',
                 label: 'GB',
               },
             ]);
-          }, 300);
+          }, 3000);
         });
       },
     };
-    this.avalue = [
-      {
-        value: 'USA',
-      },
-      {
-        value: 'GB',
-      },
-    ];
     this.setupGroupedMultiPickerDemo();
   }
 

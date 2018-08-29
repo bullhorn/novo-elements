@@ -120,6 +120,13 @@ export class NovoSpinnerElement {
     `,
 })
 export class NovoSimpleSpinnerElement {
-  @Input()
   spinnerCss: any;
+
+  @Input()
+  set fillColor(color) {
+    this.spinnerCss = {
+      fill: color,
+    };
+  }
+
 }

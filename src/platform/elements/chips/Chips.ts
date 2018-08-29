@@ -112,7 +112,7 @@ export class NovoChipElement {
             <span #preview></span>
         </div>
         <ng-container *ngIf="pickerLoadingState">
-          <novo-simple-spinner [spinnerCss]="{ 'fill': '#4a89dc' }"></novo-simple-spinner>
+          <novo-simple-spinner fillColor="#4a89dc"></novo-simple-spinner>
         </ng-container>
         <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput && !pickerLoadingState"></i>
         <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
