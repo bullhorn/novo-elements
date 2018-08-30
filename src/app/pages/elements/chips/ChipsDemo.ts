@@ -60,7 +60,7 @@ const template = `
     <p>
         By clicking on the <code>row-chips</code> element, the options list will be displayed.  Select any of the options
         by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row. 
-        By clicking the delete icon at the end of the row, the row will be removec from the list of selected values.
+        By clicking the delete icon at the end of the row, the row will be removed from the list of selected values.
     </p>
     <div class="example chips-demo">${RowChipsDemoTpl}</div>
     <code-snippet [code]="RowChipsDemoTpl"></code-snippet>
