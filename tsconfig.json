@@ -10,14 +10,35 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
-    "typeRoots": ["node_modules/@types"],
-    "types": ["jest"],
-    "lib": ["es2017", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "jest"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "paths": {
-      "@utils": ["utils"],
-      "@utils/*": ["utils/*"],
-      "novo-elements": ["dist/novo-elements"],
-      "novo-elements/*": ["dist/novo-elements/*"]
+      "@utils": [
+        "utils"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "novo-elements": [
+        "dist/novo-elements"
+      ],
+      "novo-elements/*": [
+        "dist/novo-elements/*"
+      ],
+      "chomsky": [
+        "dist/chomsky"
+      ],
+      "chomsky/*": [
+        "dist/chomsky/*"
+      ]
     }
   }
 }
