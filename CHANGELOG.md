@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.16.0"></a>
+# [2.16.0](https://github.com/bullhorn/novo-elements/compare/v2.15.0...v2.16.0) (2018-08-31)
+
+
+### Bug Fixes
+
+* **control:** Fixing ability to add text mask to form inputs ([c0c76b6](https://github.com/bullhorn/novo-elements/commit/c0c76b6))
+* **form:** Deleting maxlength from text mask form inputs ([#792](https://github.com/bullhorn/novo-elements/issues/792)) ([ac6c33e](https://github.com/bullhorn/novo-elements/commit/ac6c33e))
+* **NovoRowChipsElement:** limit text to two lines in a row. ([#796](https://github.com/bullhorn/novo-elements/issues/796)) ([44ea69b](https://github.com/bullhorn/novo-elements/commit/44ea69b))
+* **RowChipPicker:** set picker input closeOnSelect default to true ([#799](https://github.com/bullhorn/novo-elements/issues/799)) ([7725ae0](https://github.com/bullhorn/novo-elements/commit/7725ae0))
+
+
+### Features
+
+* **CKEditor:** add additional fonts to ckeditor ([#798](https://github.com/bullhorn/novo-elements/issues/798)) ([fe9a6ca](https://github.com/bullhorn/novo-elements/commit/fe9a6ca))
+* **form:** Adding ability to pass start and end date to date controls inside forms ([288ef9c](https://github.com/bullhorn/novo-elements/commit/288ef9c))
+* **NovoRowChipsElement:** Add extension of NovoChipsElement, NovoRowChipsElements. ([#793](https://github.com/bullhorn/novo-elements/issues/793)) ([23785de](https://github.com/bullhorn/novo-elements/commit/23785de)), closes [#789](https://github.com/bullhorn/novo-elements/issues/789)
+
+
+
 <a name="2.15.0"></a>
 # [2.15.0](https://github.com/bullhorn/novo-elements/compare/v2.14.1...v2.15.0) (2018-08-16)
 
