@@ -250,6 +250,11 @@ export class FormUtils {
       if (overrides[field.name].type) {
         type = overrides[field.name].type;
       }
+      if (overrides[field.name].columns) {
+        controlConfig.config.columns = overrides[field.name].columns;
+        controlConfig.closeOnSelect = true;
+        delete controlConfig.label;
+      }
       Object.assign(controlConfig, overrides[field.name]);
     }
 
