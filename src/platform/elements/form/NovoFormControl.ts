@@ -219,16 +219,16 @@ export class NovoFormControl extends FormControl {
    *
    * If the control has children, all children will be disabled to maintain the model.
    */
-  public disable(opts?: { onlySelf?: boolean; emitEvent?: boolean }): void {
+  public disable(opts: { onlySelf?: boolean; emitEvent?: boolean } = { emitEvent: false }): void {
     if (typeof opts.emitEvent === 'undefined') {
-      opts.emitEvent = true;
+      opts.emitEvent = false;
     }
     super.disable(opts);
   }
 
-  public enable(opts?: { onlySelf?: boolean; emitEvent?: boolean }): void {
+  public enable(opts: { onlySelf?: boolean; emitEvent?: boolean } = { emitEvent: false }): void {
     if (typeof opts.emitEvent === 'undefined') {
-      opts.emitEvent = true;
+      opts.emitEvent = false;
     }
     super.enable(opts);
   }
