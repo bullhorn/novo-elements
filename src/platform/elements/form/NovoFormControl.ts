@@ -104,6 +104,7 @@ export class NovoFormControl extends FormControl {
     this.interactions = control.interactions;
     this.checkboxLabel = control.checkboxLabel;
     this.appendToBody = control.appendToBody;
+    this.checkboxLabel = control.checkboxLabel;
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
     }
@@ -151,14 +152,14 @@ export class NovoFormControl extends FormControl {
       validators.push(Validators.required);
       // TODO: duplicated below
       this.setValidators(validators);
-      this.updateValueAndValidity();
+      this.updateValueAndValidity({ emitEvent: false });
       this.hasRequiredValidator = this.required;
     } else if (!this.required && this.hasRequiredValidator) {
       let validators: any = [...this.validators];
       validators = validators.filter((val) => val !== Validators.required);
       // TODO: duplicated above
       this.setValidators(validators);
-      this.updateValueAndValidity();
+      this.updateValueAndValidity({ emitEvent: false });
       this.hasRequiredValidator = this.required;
     }
   }
@@ -206,10 +207,30 @@ export class NovoFormControl extends FormControl {
   public setReadOnly(isReadOnly: boolean): void {
     this.readOnly = isReadOnly;
     if (this.readOnly) {
-      this.disable();
+      this.disable({ emitEvent: false });
     } else {
-      this.enable();
+      this.enable({ emitEvent: false });
     }
+  }
+
+  /**
+   * Disables the control. This means the control will be exempt from validation checks and
+   * excluded from the aggregate value of any parent. Its status is `DISABLED`.
+   *
+   * If the control has children, all children will be disabled to maintain the model.
+   */
+  public disable(opts?: { onlySelf?: boolean; emitEvent?: boolean }): void {
+    if (typeof opts.emitEvent === 'undefined') {
+      opts.emitEvent = true;
+    }
+    super.disable(opts);
+  }
+
+  public enable(opts?: { onlySelf?: boolean; emitEvent?: boolean }): void {
+    if (typeof opts.emitEvent === 'undefined') {
+      opts.emitEvent = true;
+    }
+    super.enable(opts);
   }
 
   /**
@@ -220,6 +241,7 @@ export class NovoFormControl extends FormControl {
     this.markAsDirty();
     this.markAsTouched();
     this.setErrors(Object.assign({}, this.errors, { custom: message }));
+    super.disable();
   }
 }
 
