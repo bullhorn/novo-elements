@@ -108,7 +108,9 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   /** BEGIN: Convenient Panel Methods. */
   openPanel(): void {
-    this.overlay.openPanel();
+    if (!this.disabled) {
+      this.overlay.openPanel();
+    }
   }
   closePanel(): void {
     this.overlay.closePanel();
