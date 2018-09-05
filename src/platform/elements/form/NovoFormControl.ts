@@ -207,9 +207,9 @@ export class NovoFormControl extends FormControl {
   public setReadOnly(isReadOnly: boolean): void {
     this.readOnly = isReadOnly;
     if (this.readOnly) {
-      this.disable({ emitEvent: false });
+      this.disable();
     } else {
-      this.enable({ emitEvent: false });
+      this.enable();
     }
   }
 
