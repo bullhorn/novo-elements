@@ -214,6 +214,7 @@ export class FormUtils {
       tooltipPosition: field.tooltipPosition,
       template: field.template,
       customControlConfig: field.customControlConfig,
+      restrictFieldInteractions: field.restrictFieldInteractions,
     };
     // TODO: getControlOptions should always return the correct format
     let optionsConfig = this.getControlOptions(field, http, config);

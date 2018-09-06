@@ -53,6 +53,7 @@ export class NovoFormControl extends FormControl {
   rawValue?: any;
   customControlConfig?: any;
   checkboxLabel?: string;
+  restrictFieldInteractions?: boolean;
   private historyTimeout: any;
 
   constructor(value: any, control: NovoControlConfig) {
@@ -94,6 +95,7 @@ export class NovoFormControl extends FormControl {
     this.closeOnSelect = control.closeOnSelect;
     this.interactions = control.interactions;
     this.checkboxLabel = control.checkboxLabel;
+    this.restrictFieldInteractions = control.restrictFieldInteractions;
     this.appendToBody = control.appendToBody;
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
