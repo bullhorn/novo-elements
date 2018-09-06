@@ -268,17 +268,23 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         switch (interaction.event) {
           case 'blur':
             this.valueChangeSubscription = this.onBlur.debounceTime(300).subscribe(() => {
-              this.executeInteraction(interaction);
+              if (!this.form.controls[this.control.key].restrictFieldInteractions) {
+                this.executeInteraction(interaction);
+              }
             });
             break;
           case 'focus':
             this.valueChangeSubscription = this.onFocus.debounceTime(300).subscribe(() => {
-              this.executeInteraction(interaction);
+              if (!this.form.controls[this.control.key].restrictFieldInteractions) {
+                this.executeInteraction(interaction);
+              }
             });
             break;
           case 'change':
             this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.debounceTime(300).subscribe(() => {
-              this.executeInteraction(interaction);
+              if (!this.form.controls[this.control.key].restrictFieldInteractions) {
+                this.executeInteraction(interaction);
+              }
             });
             break;
           case 'init':
@@ -288,7 +294,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
             break;
         }
         if (interaction.invokeOnInit) {
-          this.executeInteraction(interaction);
+          if (!this.form.controls[this.control.key].restrictFieldInteractions) {
+            this.executeInteraction(interaction);
+          }
         }
       }
     }
