@@ -294,10 +294,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
           default:
             break;
         }
-        if (interaction.invokeOnInit) {
-          if (!this.form.controls[this.control.key].restrictFieldInteractions) {
-            this.executeInteraction(interaction);
-          }
+        if (interaction.invokeOnInit && !this.form.controls[this.control.key].restrictFieldInteractions) {
+          this.executeInteraction(interaction);
         }
       }
     }
@@ -484,7 +482,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   executeInteraction(interaction) {
-    if (interaction.script && Helpers.isFunction(interaction.script)) {
+    if (interaction.script && Helpers.isFunction(interaction.script) && !this.form.controls[this.control.key].restrictFieldInteractions) {
       setTimeout(() => {
         this.fieldInteractionApi.form = this.form;
         this.fieldInteractionApi.currentKey = this.control.key;
