@@ -474,24 +474,24 @@ export class FieldInteractionsDemoComponent {
       API.setTooltip(API.getActiveKey(), API.getActiveValue());
     };
 
-        let tooltipUpdateFunction = (API: FieldInteractionApi) => {
-            console.log('[FieldInteractionDemo] - tooltipUpdateFunction'); // tslint:disable-line
-            API.getControl(this.controls.tooltip.tooltipControl.key).tooltipSize = API.getValue(this.controls.tooltip.tooltipSizeControl.key);
-            API.getControl(this.controls.tooltip.tooltipControl.key).tooltipPreline = API.getValue(this.controls.tooltip.tooltipPrelineControl.key);
-        }
+    let tooltipUpdateFunction = (API: FieldInteractionApi) => {
+      console.log('[FieldInteractionDemo] - tooltipUpdateFunction'); // tslint:disable-line
+      API.getControl(this.controls.tooltip.tooltipControl.key).tooltipSize = API.getValue(this.controls.tooltip.tooltipSizeControl.key);
+      API.getControl(this.controls.tooltip.tooltipControl.key).tooltipPreline = API.getValue(
+        this.controls.tooltip.tooltipPrelineControl.key,
+      );
+    };
 
-        // Validation Field Interactions
-        this.controls.validation.validationControl = new TextBoxControl({
-            type: 'number',
-            key: 'validation',
-            value: 5,
-            label: 'Validation Test',
-            description: 'Try to input a number larger then 10!',
-            interactions: [
-                { event: 'change', script: validationFunction, invokeOnInit: true }
-            ]
-        });
-        this.forms.validation = formUtils.toFormGroup([this.controls.validation.validationControl]);
+    // Validation Field Interactions
+    this.controls.validation.validationControl = new TextBoxControl({
+      type: 'number',
+      key: 'validation',
+      value: 5,
+      label: 'Validation Test',
+      description: 'Try to input a number larger then 10!',
+      interactions: [{ event: 'change', script: validationFunction, invokeOnInit: true }],
+    });
+    this.forms.validation = formUtils.toFormGroup([this.controls.validation.validationControl]);
 
     // Required Field Interactions
     this.controls.required.requiredControl = new TextBoxControl({
@@ -700,38 +700,36 @@ export class FieldInteractionsDemoComponent {
     this.controls.addingRemoving[0].controls[0].interactions = [{ event: 'init', script: addingRemovingFunction }];
     this.forms.addingRemoving = formUtils.toFormGroupFromFieldset(this.controls.addingRemoving);
 
-        // Tooltip Field Interactions
-        this.controls.tooltip.tooltipControl = new TextBoxControl({
-            type: 'text',
-            key: 'toolTipValue',
-            label: 'Tooltip',
-            description: 'I will add a tooltip to this control as a value is typed',
-            interactions: [
-                { event: 'change', script: tooltipFunction }
-            ]
-        });
+    // Tooltip Field Interactions
+    this.controls.tooltip.tooltipControl = new TextBoxControl({
+      type: 'text',
+      key: 'toolTipValue',
+      label: 'Tooltip',
+      description: 'I will add a tooltip to this control as a value is typed',
+      interactions: [{ event: 'change', script: tooltipFunction }],
+    });
 
-        this.controls.tooltip.tooltipSizeControl = new TilesControl({
-            key: 'tooltipSize',
-            label: 'Tooltip Size',
-            description: 'Changing me will set a fixed width on the tooltip',
-            options: [{ value: 'small', label: 'Small' }, { value: 'medium', label: 'Medium' }, { value: 'large', label: 'Large' } ],
-            interactions: [
-                { event: 'change', script: tooltipUpdateFunction }
-            ]
-        });
+    this.controls.tooltip.tooltipSizeControl = new TilesControl({
+      key: 'tooltipSize',
+      label: 'Tooltip Size',
+      description: 'Changing me will set a fixed width on the tooltip',
+      options: [{ value: 'small', label: 'Small' }, { value: 'medium', label: 'Medium' }, { value: 'large', label: 'Large' }],
+      interactions: [{ event: 'change', script: tooltipUpdateFunction }],
+    });
 
-        this.controls.tooltip.tooltipPrelineControl = new TilesControl({
-            key: 'tooltipPreline',
-            label: 'Tooltip Multiline',
-            description: 'Should the tooltip be multiple lines tall or all on one line?',
-            options: [ { value: true, label: 'Yes'}, { value: false, label: 'No'} ],
-            interactions: [
-                { event: 'change', script: tooltipUpdateFunction }
-            ]
-        });
+    this.controls.tooltip.tooltipPrelineControl = new TilesControl({
+      key: 'tooltipPreline',
+      label: 'Tooltip Multiline',
+      description: 'Should the tooltip be multiple lines tall or all on one line?',
+      options: [{ value: true, label: 'Yes' }, { value: false, label: 'No' }],
+      interactions: [{ event: 'change', script: tooltipUpdateFunction }],
+    });
 
-        this.forms.tooltip = formUtils.toFormGroup([this.controls.tooltip.tooltipControl, this.controls.tooltip.tooltipSizeControl, this.controls.tooltip.tooltipPrelineControl]);
+    this.forms.tooltip = formUtils.toFormGroup([
+      this.controls.tooltip.tooltipControl,
+      this.controls.tooltip.tooltipSizeControl,
+      this.controls.tooltip.tooltipPrelineControl,
+    ]);
 
     // Snippets
     this.snippets.validation = {

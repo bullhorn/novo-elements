@@ -54,7 +54,15 @@ export interface NovoControlConfig {
   tooltipPosition?: string;
   tooltipSize?: string;
   tooltipPreline?: boolean;
-  layoutOptions?: { order?: string, download?: boolean, edit?: boolean, customActions?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
+  layoutOptions?: {
+    order?: string;
+    download?: boolean;
+    edit?: boolean;
+    customActions?: boolean;
+    labelStyle?: string;
+    draggable?: boolean;
+    iconStyle?: string;
+  };
   template?: any;
   customControlConfig?: any;
   military?: boolean;
@@ -62,14 +70,15 @@ export interface NovoControlConfig {
   textMaskEnabled?: boolean;
   allowInvalidDate?: boolean;
   tipWell?: {
-    tip: string,
-    icon?: string,
+    tip: string;
+    icon?: string;
     button?: boolean;
   };
   width?: number;
   startupFocus?: boolean;
   fileBrowserImageUploadUrl?: string;
   isEmpty?: Function;
+  restrictFieldInteractions?: boolean;
 }
 
 export class BaseControl {
@@ -114,7 +123,7 @@ export class BaseControl {
   tooltipPosition?: string;
   tooltipSize?: string;
   tooltipPreline?: boolean;
-  layoutOptions?: { order?: string, download?: boolean, labelStyle?: string, draggable?: boolean, iconStyle?: string };
+  layoutOptions?: { order?: string; download?: boolean; labelStyle?: string; draggable?: boolean; iconStyle?: string };
   template?: any;
   customControlConfig?: any;
   military?: boolean;
@@ -122,14 +131,15 @@ export class BaseControl {
   textMaskEnabled?: boolean;
   allowInvalidDate?: boolean;
   tipWell?: {
-    tip: string,
-    icon?: string,
+    tip: string;
+    icon?: string;
     button?: boolean;
   };
   width: number;
   startupFocus?: boolean;
   fileBrowserImageUploadUrl?: string;
   isEmpty?: Function;
+  restrictFieldInteractions?: boolean;
 
   constructor(type: string = 'BaseControl', config: NovoControlConfig = {}) {
     this.__type = type;
@@ -163,6 +173,7 @@ export class BaseControl {
     this.dateFormat = config.dateFormat;
     this.textMaskEnabled = config.textMaskEnabled;
     this.allowInvalidDate = config.allowInvalidDate;
+    this.restrictFieldInteractions = !!config.restrictFieldInteractions;
 
     if (this.required) {
       this.validators.push(Validators.required);
