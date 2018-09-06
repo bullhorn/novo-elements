@@ -264,7 +264,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   ngAfterContentInit() {
     // Subscribe to control interactions
-    if (this.control.interactions) {
+    if (this.control.interactions && !this.form.controls[this.control.key].restrictFieldInteractions) {
       for (let interaction of this.control.interactions) {
         switch (interaction.event) {
           case 'blur':

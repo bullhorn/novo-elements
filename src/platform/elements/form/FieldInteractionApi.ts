@@ -160,7 +160,7 @@ export class FieldInteractionApi {
     },
   ): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.setValue(value, options);
       this.triggerEvent({ controlKey: key, prop: 'value', value: value });
     }
@@ -177,7 +177,7 @@ export class FieldInteractionApi {
     },
   ): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.setValue(value, options);
       this.triggerEvent({ controlKey: key, prop: 'value', value: value });
     }
@@ -185,7 +185,7 @@ export class FieldInteractionApi {
 
   public setReadOnly(key: string, isReadOnly: boolean): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.setReadOnly(isReadOnly);
       this.triggerEvent({ controlKey: key, prop: 'readOnly', value: isReadOnly });
     }
@@ -193,7 +193,7 @@ export class FieldInteractionApi {
 
   public setRequired(key: string, required: boolean): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.setRequired(required);
       this.triggerEvent({ controlKey: key, prop: 'required', value: required });
     }
@@ -201,7 +201,7 @@ export class FieldInteractionApi {
 
   public hide(key: string, clearValue: boolean = true): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.hide(clearValue);
       this.disable(key, { emitEvent: false });
       this.triggerEvent({ controlKey: key, prop: 'hidden', value: true });
@@ -210,7 +210,7 @@ export class FieldInteractionApi {
 
   public show(key: string): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.show();
       this.enable(key, { emitEvent: false });
       this.triggerEvent({ controlKey: key, prop: 'hidden', value: false });
@@ -225,7 +225,7 @@ export class FieldInteractionApi {
     },
   ): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.disable(options);
       this.triggerEvent({ controlKey: key, prop: 'readOnly', value: true });
     }
@@ -239,7 +239,7 @@ export class FieldInteractionApi {
     },
   ): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.enable(options);
       this.triggerEvent({ controlKey: key, prop: 'readOnly', value: false });
     }
@@ -248,7 +248,7 @@ export class FieldInteractionApi {
   public markAsInvalid(key: string, validationMessage?: string): void {
     let control = this.getControl(key);
     if (control) {
-      if (control && !control.restrictFieldInteractions) {
+      if (control && !this.form.controls[control.key].restrictFieldInteractions) {
         control.markAsInvalid(validationMessage);
       }
     }
@@ -261,7 +261,7 @@ export class FieldInteractionApi {
     },
   ): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.markAsDirty(options);
     }
   }
@@ -273,7 +273,7 @@ export class FieldInteractionApi {
     },
   ): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.markAsPending(options);
     }
   }
@@ -285,7 +285,7 @@ export class FieldInteractionApi {
     },
   ): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.markAsPristine(options);
     }
   }
@@ -297,7 +297,7 @@ export class FieldInteractionApi {
     },
   ): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.markAsTouched(options);
     }
   }
@@ -309,7 +309,7 @@ export class FieldInteractionApi {
     },
   ): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.markAsUntouched(options);
     }
   }
@@ -322,7 +322,7 @@ export class FieldInteractionApi {
     },
   ): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.updateValueAndValidity(options);
     }
   }
@@ -344,7 +344,7 @@ export class FieldInteractionApi {
 
   public displayTip(key: string, tip: string, icon?: string, allowDismiss?: boolean): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.tipWell = {
         tip: tip,
         icon: icon,
@@ -356,7 +356,7 @@ export class FieldInteractionApi {
 
   public setTooltip(key: string, tooltip: string): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control.tooltip = tooltip;
       if (tooltip.length >= 40) {
         control.tooltipSize = 'large';
@@ -387,7 +387,7 @@ export class FieldInteractionApi {
 
   public setProperty(key: string, prop: string, value: any): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       control[prop] = value;
       this.triggerEvent({ controlKey: key, prop: prop, value: value });
     }
@@ -395,7 +395,7 @@ export class FieldInteractionApi {
 
   public getProperty(key: string, prop: string): any {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       return control[prop];
     }
     return null;
@@ -419,7 +419,7 @@ export class FieldInteractionApi {
     let control = this.getControl(key);
     let optionToAdd = newOption;
     let isUnique: boolean = true;
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       let currentOptions = this.getProperty(key, 'options');
       if (!currentOptions || !currentOptions.length) {
         let config = this.getProperty(key, 'config');
@@ -455,7 +455,7 @@ export class FieldInteractionApi {
 
   public removeStaticOption(key: string, optionToRemove: string): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       let currentOptions = this.getProperty(key, 'options');
       if (!currentOptions || !currentOptions.length) {
         let config = this.getProperty(key, 'config');
@@ -509,7 +509,7 @@ export class FieldInteractionApi {
     mapper?: any,
   ): void {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       let newConfig: any = {
         resultsTemplate: control.config.resultsTemplate,
       };
@@ -548,7 +548,7 @@ export class FieldInteractionApi {
 
   public setLoading(key: string, loading: boolean) {
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       if (loading) {
         this.form.controls[key].fieldInteractionloading = true;
         control.setErrors({ loading: true });
@@ -649,7 +649,7 @@ export class FieldInteractionApi {
       return null;
     }
     let control = this.getControl(key);
-    if (control && !control.restrictFieldInteractions) {
+    if (control && !this.form.controls[control.key].restrictFieldInteractions) {
       let fieldsetIndex = -1;
       let controlIndex = -1;
 
