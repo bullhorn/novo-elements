@@ -21,7 +21,7 @@ const CHIPS_VALUE_ACCESSOR = {
 @Component({
   selector: 'chip,novo-chip',
   template: `
-        <span (click)="onSelect($event)" (mouseover)="onSelect($event)" [ngClass]="_type">
+        <span (click)="onSelect($event)" (mouseenter)="onSelect($event)" (mouseleave)="onDeselect($event)" [ngClass]="_type">
             <i *ngIf="_type" class="bhi-circle"></i>
             <span><ng-content></ng-content></span>
         </span>
@@ -41,6 +41,8 @@ export class NovoChipElement {
   select: EventEmitter<any> = new EventEmitter();
   @Output()
   remove: EventEmitter<any> = new EventEmitter();
+  @Output()
+  deselect: EventEmitter<any> = new EventEmitter();
 
   entity: string;
   _type: string;
@@ -62,6 +64,15 @@ export class NovoChipElement {
     this.select.emit(e);
     return false;
   }
+
+  onDeselect(e) {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    this.deselect.emit(e);
+    return false;
+  }
 }
 
 @Component({
@@ -74,7 +85,8 @@ export class NovoChipElement {
             [class.selected]="item == selected"
             [disabled]="disablePickerInput"
             (remove)="remove($event, item)"
-            (select)="select($event, item)">
+            (select)="select($event, item)"
+            (deselect)="deselect($event, item)">
             {{ item.label }}
         </novo-chip>
         <div class="chip-input-container">
@@ -243,6 +255,11 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     this.deselectAll();
     this.selected = item;
     this.showPreview();
+  }
+
+  deselect(event?, item?) {
+    this.blur.emit(event);
+    this.deselectAll();
   }
 
   onTyping(event?) {
