@@ -30,7 +30,7 @@ describe('Elements: NovoCKEditorElement', () => {
 
   describe('Method: ngAfterViewInit()', () => {
     beforeEach(() => {
-      spyOn(component, 'ckeditorInit');
+      jest.spyOn(component, 'ckeditorInit').mockImplementation(() => {});
     });
 
     it('should be defined', () => {
@@ -38,13 +38,13 @@ describe('Elements: NovoCKEditorElement', () => {
     });
 
     it('should set the base config', () => {
-      spyOn(component, 'getBaseConfig').and.returnValue({ test: true });
+      jest.spyOn(component, 'getBaseConfig').mockReturnValue({ test: true });
       component.ngAfterViewInit();
       expect(component.ckeditorInit).toHaveBeenCalledWith({ test: true });
     });
 
     it('should set with passed config', () => {
-      spyOn(component, 'getBaseConfig').and.returnValue({ test: false });
+      jest.spyOn(component, 'getBaseConfig').mockReturnValue({ test: false });
       component.config = { test: true };
       component.ngAfterViewInit();
       expect(component.ckeditorInit).toHaveBeenCalledWith({ test: true });

@@ -2,18 +2,24 @@
 import { TestBed, async } from '@angular/core/testing';
 // APP
 import { NovoButtonElement } from './Button';
+import { setupTestSuite } from '../../../../../utils/test-setup';
 
 describe('Elements: NovoButtonElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  setupTestSuite();
+
+  beforeAll(() => {
     TestBed.configureTestingModule({
       declarations: [NovoButtonElement],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(NovoButtonElement);
-    component = fixture.debugElement.componentInstance;
-  }));
+    component = fixture.componentInstance;
+  });
 
   it('should be compiled', () => {
     expect(component).toBeDefined();

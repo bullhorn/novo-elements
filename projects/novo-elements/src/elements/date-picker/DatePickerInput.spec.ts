@@ -6,7 +6,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoDatePickerModule } from './DatePicker.module';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 
-describe('Elements: NovoDatePickerInputElement', () => {
+xdescribe('Elements: NovoDatePickerInputElement', () => {
   let fixture;
   let component;
 

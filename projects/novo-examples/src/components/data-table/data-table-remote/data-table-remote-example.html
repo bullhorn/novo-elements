@@ -1,0 +1,27 @@
+<h6>Change Dataset</h6>
+<novo-tiles [options]="dataSetOptions" (onChange)="loadDataset($event)" [(ngModel)]="loadedDataSet"></novo-tiles>
+<h6>Change Pagination Style</h6>
+<novo-tiles [options]="paginationTypeOptions" (onChange)="switchPaginationType($event)" [(ngModel)]="loadedPaginationType"></novo-tiles>
+<h6>Toggle Global Search</h6>
+<novo-tiles [options]="globalSearchOptions" (onChange)="toggleGlobalSearch($event)" [(ngModel)]="loadedGlobalSearch"></novo-tiles>
+<h6>Configure Columns</h6>
+<button theme="primary" (click)="configureColumns()">Configure Columns</button>
+<h6>Configure Columns</h6>
+<button theme="primary" (click)="toggleRowDetails(true)">Show Row Details (first table)</button>
+<button theme="primary" (click)="toggleRowDetails(false)">Hide Row Details (first table)</button>
+
+
+
+<novo-data-table [dataTableService]="remoteService"
+                 [columns]="sharedColumns"
+                 [hideGlobalSearch]="!globalSearchEnabled"
+                 [displayedColumns]="sharedDisplayColumns"
+                 [paginationOptions]="widePaginationOptions">
+  <!-- Custom Cell -- passed with template property on Column -->
+  <ng-template novoTemplate="custom"
+               let-row
+               let-col="col">
+    <b>CUSTOM</b> {{ row.name }}
+    <b>CUSTOM</b>
+  </ng-template>
+</novo-data-table>

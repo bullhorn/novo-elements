@@ -24,6 +24,12 @@ export class CalendarPage {}
 export class ComponentsPage {}
 
 @Component({
+  selector: 'data-table-page',
+  template: `<h1>Data Table <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/data-table">(source)</a></h1><h5>Working with static data</h5><h6>Change Dataset</h6><h6>Change Pagination Style</h6><h6>Toggle Global Search</h6><h6>Configure Columns</h6><p>Configure Columns</p><h6>Configure Columns</h6><p>Show Row Details (first table) Hide Row Details (first table)</p><h5>Passing an array of rows</h5><p>${BasicDemoRowsTpl}</p><h5>Using the static data service</h5><p>${BasicDemoServiceTpl}</p><h5>Working with remote data</h5><h5>Using the remote data service</h5><p>Data won't actually change, the URL will update with the proper request it will make!</p><h6>URL: {{ remoteService.url }}</h6><p>${RemoteDemoServiceTpl}</p>`,
+})
+export class DataTablePage {}
+
+@Component({
   selector: 'dropdown-page',
   template: `<h1>Dropdown <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/dropdown">(source)</a></h1><p>Dropdown allow users to take an action by selecting from a list of choices revealed upon opening a temporary menu.</p><h2>Types</h2><h5>Dropdown Menu</h5><p>This is a simple dropdown menu.</p><p><code-example example="basic-drop-down"></code-example></p><h5>Dropdown Position Options</h5><p>This is an example of how dropdowns can be positioned. Use the [side] input to specify how the popup positions or re-positions itself on the page using a preferred location and one or more fallback locations:</p><p><code-example example="position-drop-down"></code-example></p><h5>Lots of data!</h5><p>Crazy large dropdown to demonstrate how the smart positioning works.</p><p><code-example example="large-drop-down"></code-example></p><h5>Scrollable Container Class</h5><p>This is an example of using a dropdown within a scrollable container. Simply place the directive cdkScrollable on the ancestor element that does the scrolling.</p><p><code-example example="scrollable-drop-down"></code-example></p><h5>Custom Class</h5><p>You can have custom classes on the dropdown container that opens up by using the &quot;containerClass&quot; property. Use scrollStrategy to close, block or reposition the dropdown when the parent scrolls. The default scrollStrategy is reposition.</p><p><code-example example="custom-drop-down"></code-example></p><h5>Keep Open</h5><p>You can set the &quot;keepOpen&quot; property on the &quot;item&quot; in order to keep it from closing the dropdown automatically.</p><p><code-example example="multi-drop-down"></code-example></p>`,
 })
@@ -268,6 +274,7 @@ const routes: Routes = [
   { path: 'src/components/buttons', component: ButtonsPage, data: { title: 'Buttons', section: 'components' } },
   { path: 'src/components/calendar', component: CalendarPage, data: { title: 'Calendar', section: 'components' } },
   { path: 'src/components', component: ComponentsPage, data: { title: 'Components', section: 'src' } },
+  { path: 'src/components/data-table', component: DataTablePage, data: { title: 'Data Table', section: 'components' } },
   { path: 'src/components/dropdown', component: DropdownPage, data: { title: 'Dropdown', section: 'components' } },
   { path: 'src/components/icon', component: IconPage, data: { title: 'Icon', section: 'components' } },
   { path: 'src/components/loading', component: LoadingPage, data: { title: 'Loading', section: 'components' } },
@@ -316,6 +323,7 @@ export const PAGE_LIST = [
   ButtonsPage,
   CalendarPage,
   ComponentsPage,
+  DataTablePage,
   DropdownPage,
   IconPage,
   LoadingPage,

@@ -37,8 +37,8 @@ describe('Elements: NovoFormControl', () => {
 
   describe('Method: setRequired(isRequired)', () => {
     beforeEach(() => {
-      spyOn(component, 'setValidators').and.callThrough();
-      spyOn(component, 'updateValueAndValidity').and.callThrough();
+      jest.spyOn(component, 'setValidators');
+      jest.spyOn(component, 'updateValueAndValidity');
     });
     it("should add new a validator and update the value and validity if it wasn't required before.", () => {
       expect(component.setRequired).toBeDefined();
@@ -63,8 +63,8 @@ describe('Elements: NovoFormControl', () => {
 
   describe('Method: setValue(value, config)', () => {
     beforeEach(() => {
-      spyOn(component, 'markAsDirty').and.callThrough();
-      spyOn(component, 'markAsTouched').and.callThrough();
+      jest.spyOn(component, 'markAsDirty');
+      jest.spyOn(component, 'markAsTouched');
     });
     it('should update the value of the control and mark it as dirty and touched.', () => {
       expect(component.setValue).toBeDefined();
@@ -76,7 +76,7 @@ describe('Elements: NovoFormControl', () => {
 
   describe('Method: setReadOnly(isReadOnly)', () => {
     it('should set readOnly to true when called with true.', () => {
-      spyOn(component, 'disable');
+      jest.spyOn(component, 'disable').mockImplementation(() => {});
       expect(component.setReadOnly).toBeDefined();
       component.setReadOnly(true);
       expect(component.readOnly).toBe(true);
@@ -84,7 +84,7 @@ describe('Elements: NovoFormControl', () => {
     });
 
     it('should set readOnly to true when called with false.', () => {
-      spyOn(component, 'enable');
+      jest.spyOn(component, 'enable').mockImplementation(() => {});
       expect(component.setReadOnly).toBeDefined();
       component.setReadOnly(false);
       expect(component.readOnly).toBe(false);
@@ -94,9 +94,9 @@ describe('Elements: NovoFormControl', () => {
 
   describe('Method: markAsInvalid(message)', () => {
     beforeEach(() => {
-      spyOn(component, 'markAsDirty').and.callThrough();
-      spyOn(component, 'markAsTouched').and.callThrough();
-      spyOn(component, 'setErrors').and.callThrough();
+      jest.spyOn(component, 'markAsDirty');
+      jest.spyOn(component, 'markAsTouched');
+      jest.spyOn(component, 'setErrors');
     });
     it('should mark the control as having an error.', () => {
       expect(component.markAsInvalid).toBeDefined();

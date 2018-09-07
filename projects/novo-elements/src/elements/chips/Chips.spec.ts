@@ -30,7 +30,7 @@ describe('Elements: NovoChipElement', () => {
 
   describe('Method: onRemove(event)', () => {
     it('should emit remove event', () => {
-      spyOn(component.remove, 'emit');
+      jest.spyOn(component.remove, 'emit').mockImplementation(() => {});
       component.onRemove();
       expect(component.remove.emit).toHaveBeenCalled();
     });
@@ -38,7 +38,7 @@ describe('Elements: NovoChipElement', () => {
 
   describe('Method: onSelect(event)', () => {
     it('should emit select event', () => {
-      spyOn(component.select, 'emit');
+      jest.spyOn(component.select, 'emit').mockImplementation(() => {});
       component.onSelect();
       expect(component.select.emit).toHaveBeenCalled();
     });
@@ -90,7 +90,7 @@ describe('Elements: NovoChipsElement', () => {
 
   xdescribe('Method: onFocus(event)', () => {
     it('should remove selection', () => {
-      spyOn(component.focus, 'emit');
+      jest.spyOn(component.focus, 'emit').mockImplementation(() => {});
       component.onFocus();
       expect(component.focus.emit).toHaveBeenCalled();
     });

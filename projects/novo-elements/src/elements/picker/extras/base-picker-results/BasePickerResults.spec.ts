@@ -56,12 +56,12 @@ describe('Elements: BasePickerResults', () => {
 
   describe('Method: selectActiveMatch()', () => {
     it('should be defined.', () => {
-      spyOn(component, 'selectMatch');
+      jest.spyOn(component, 'selectMatch').mockImplementation(() => {});
       expect(component.selectActiveMatch).toBeDefined();
       component.selectActiveMatch();
     });
     it('should call selectMatch.', () => {
-      spyOn(component, 'selectMatch');
+      jest.spyOn(component, 'selectMatch').mockImplementation(() => {});
       component.selectActiveMatch();
       expect(component.selectMatch).toHaveBeenCalled();
     });
@@ -73,7 +73,7 @@ describe('Elements: BasePickerResults', () => {
       component.prevActiveMatch();
     });
     it('should scroll to active.', () => {
-      spyOn(component, 'scrollToActive');
+      jest.spyOn(component, 'scrollToActive').mockImplementation(() => {});
       component.prevActiveMatch();
       expect(component.scrollToActive).toHaveBeenCalled();
     });
