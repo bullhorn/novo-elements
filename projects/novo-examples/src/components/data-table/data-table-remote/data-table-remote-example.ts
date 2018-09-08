@@ -6,12 +6,9 @@ import { Subject, Observable, of } from 'rxjs';
 import {
   IDataTableColumn,
   RemoteDataTableService,
-  StaticDataTableService,
   IDataTablePaginationOptions,
   IDataTableSearchOptions,
-  IDataTableService,
   NovoModalService,
-  NovoDataTable,
   IDataTablePreferences,
 } from 'novo-elements';
 
@@ -293,10 +290,6 @@ export class DataTableRemoteExample {
 
   public refresh(): void {
     this.refreshSubject.next();
-  }
-
-  public toggleRowDetails(expand: boolean): void {
-    this.table.expandRows(expand);
   }
 }
 

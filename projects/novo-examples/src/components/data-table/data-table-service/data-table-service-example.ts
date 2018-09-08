@@ -11,7 +11,6 @@ import {
   IDataTableSearchOptions,
   IDataTableService,
   NovoModalService,
-  NovoDataTable,
   IDataTablePreferences,
 } from 'novo-elements';
 

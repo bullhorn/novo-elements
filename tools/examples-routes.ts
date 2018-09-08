@@ -149,7 +149,7 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
     route: path
       .dirname(filePath)
       .split(path.sep)
-      .slice(2)
+      .slice(3)
       .join('/'),
   };
 }

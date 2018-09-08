@@ -61,7 +61,7 @@
         }
       }
     },
-    "novo-elements-demo": {
+    "demo": {
       "root": "",
       "sourceRoot": "demo",
       "projectType": "application",
@@ -71,7 +71,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/novo-elements-demo",
+            "outputPath": "dist/demo",
             "index": "demo/index.html",
             "main": "demo/main.ts",
             "polyfills": "demo/polyfills.ts",
@@ -106,18 +106,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "novo-elements-demo:build"
+            "browserTarget": "demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "novo-elements-demo:build:production"
+              "browserTarget": "demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "novo-elements-demo:build"
+            "browserTarget": "demo:build"
           }
         },
         "lint": {
@@ -128,7 +128,37 @@
           }
         }
       }
+    },
+    "chomsky": {
+      "root": "projects/chomsky",
+      "sourceRoot": "projects/chomsky/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "targets": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/chomsky/tsconfig.lib.json",
+            "project": "projects/chomsky/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/chomsky/src/test.ts",
+            "tsConfig": "projects/chomsky/tsconfig.spec.json",
+            "karmaConfig": "projects/chomsky/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["projects/chomsky/tsconfig.lib.json", "projects/chomsky/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
-  "defaultProject": "novo-elements-demo"
+  "defaultProject": "demo"
 }

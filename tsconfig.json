@@ -19,7 +19,9 @@
       "novo-elements": ["dist/novo-elements"],
       "novo-elements/*": ["dist/novo-elements/*"],
       "novo-examples": ["dist/novo-examples"],
-      "novo-examples/*": ["dist/novo-examples/*"]
+      "novo-examples/*": ["dist/novo-examples/*"],
+      "chomsky": ["dist/chomsky"],
+      "chomsky/*": ["dist/chomsky/*"]
     }
   }
 }

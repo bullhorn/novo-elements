@@ -234,9 +234,6 @@ export class DataTableRowsExample {
 
   // Basic configuration
   public basicRows: MockData[];
-  public basicService: IDataTableService<MockData>;
-  // Remote configuration
-  public remoteService: RemoteDataTableService<MockData>;
 
   private staticDataSet1: MockData[] = [];
   private staticDataSet2: MockData[] = [];

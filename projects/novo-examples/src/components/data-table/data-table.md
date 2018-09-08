@@ -20,11 +20,11 @@ Show Row Details (first table) Hide Row Details (first table)
 
 ##### Passing an array of rows
 
-${BasicDemoRowsTpl}
+<code-example example="data-table-rows"></code-example>
 
 ##### Using the static data service
 
-${BasicDemoServiceTpl}
+<code-example example="data-table-service"></code-example>
 
 ##### Working with remote data
 
@@ -32,6 +32,6 @@ ${BasicDemoServiceTpl}
 
 Data won't actually change, the URL will update with the proper request it will make!
 
-###### URL: {{ remoteService.url }}
+###### URL
 
-${RemoteDemoServiceTpl}
+<code-example example="data-table-remote"></code-example>
