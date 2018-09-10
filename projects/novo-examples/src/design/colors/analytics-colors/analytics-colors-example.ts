@@ -4,41 +4,62 @@ import { Component } from '@angular/core';
 import { NovoToastService } from 'novo-elements';
 
 /**
- * @title Primary Colors
+ * @title Analytics Colors
  */
 @Component({
-  selector: 'primary-colors-example',
-  templateUrl: './primary-colors-example.html',
-  styleUrls: ['./primary-colors-example.scss'],
+  selector: 'analytics-colors-example',
+  templateUrl: './analytics-colors-example.html',
+  styleUrls: ['./analytics-colors-example.scss'],
 })
-export class PrimaryColorsExample {
-  primaryColors: Array<any> = [
+export class AnalyticsColorsExample {
+  public analyticsColors: Array<any> = [
     {
-      name: 'navigation',
-      variables: ['navigation'],
-      hex: '2F383F',
+      name: 'grapefruit',
+      variables: ['grapefruit'],
+      hex: 'DA4453',
     },
     {
-      name: 'positive',
-      variables: ['positive'],
+      name: 'bittersweet',
+      variables: ['bittersweet'],
+      hex: 'EB6845',
+    },
+    {
+      name: 'sunflower',
+      variables: ['sunflower'],
+      hex: 'F6B042',
+    },
+    {
+      name: 'grass',
+      variables: ['grass'],
+      hex: '8CC152',
+    },
+    {
+      name: 'mint',
+      variables: ['mint'],
+      hex: '37BC9B',
+    },
+    {
+      name: 'aqua',
+      variables: ['aqua'],
+      hex: '3BAFDA',
+    },
+    {
+      name: 'ocean',
+      variables: ['ocean'],
       hex: '4A89DC',
     },
     {
-      name: 'dark',
-      variables: ['dark'],
-      hex: '474747',
+      name: 'carnation',
+      variables: ['carnation'],
+      hex: 'D770AD',
     },
     {
-      name: 'background',
-      variables: ['background'],
-      hex: 'F4F4F4',
-    },
-    {
-      name: 'neutral',
-      variables: ['neutral'],
-      hex: '4F5361',
+      name: 'lavender',
+      variables: ['lavender'],
+      hex: '967ADC',
     },
   ];
+
   options: any;
 
   constructor(private toaster: NovoToastService) {}

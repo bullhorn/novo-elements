@@ -4,41 +4,57 @@ import { Component } from '@angular/core';
 import { NovoToastService } from 'novo-elements';
 
 /**
- * @title Primary Colors
+ * @title Entity Colors
  */
 @Component({
-  selector: 'primary-colors-example',
-  templateUrl: './primary-colors-example.html',
-  styleUrls: ['./primary-colors-example.scss'],
+  selector: 'entity-colors-example',
+  templateUrl: './entity-colors-example.html',
+  styleUrls: ['./entity-colors-example.scss'],
 })
-export class PrimaryColorsExample {
-  primaryColors: Array<any> = [
+export class EntityColorsExample {
+  entityColors: Array<any> = [
     {
-      name: 'navigation',
-      variables: ['navigation'],
-      hex: '2F383F',
+      name: 'lead',
+      variables: ['lead'],
+      hex: 'AA6699',
     },
     {
-      name: 'positive',
-      variables: ['positive'],
-      hex: '4A89DC',
+      name: 'contact',
+      variables: ['contact'],
+      hex: 'FFAA44',
     },
     {
-      name: 'dark',
-      variables: ['dark'],
-      hex: '474747',
+      name: 'company',
+      variables: ['company'],
+      hex: '3399DD',
     },
     {
-      name: 'background',
-      variables: ['background'],
-      hex: 'F4F4F4',
+      name: 'candidate',
+      variables: ['candidate'],
+      hex: '44BB77',
     },
     {
-      name: 'neutral',
-      variables: ['neutral'],
-      hex: '4F5361',
+      name: 'opportunity',
+      variables: ['opportunity'],
+      hex: '662255',
+    },
+    {
+      name: 'job',
+      variables: ['job'],
+      hex: 'BB5566',
+    },
+    {
+      name: 'submission',
+      variables: ['submission'],
+      hex: 'A9ADBB',
+    },
+    {
+      name: 'placement',
+      variables: ['placement'],
+      hex: '0B344F',
     },
   ];
+
   options: any;
 
   constructor(private toaster: NovoToastService) {}

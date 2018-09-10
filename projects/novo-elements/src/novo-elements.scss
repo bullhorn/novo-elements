@@ -69,3 +69,23 @@
 // @import './elements/expansion/expansion-panel-header';
 @import './elements/stepper/stepper.component';
 @import './elements/stepper/step-header.component';
+
+@each $basic, $color in $dark-colors {
+  .bgc-#{$basic} {
+    background: $color;
+    color: $white;
+  }
+}
+
+@each $basic, $color in $light-colors {
+  .bgc-#{$basic} {
+    background: $color;
+    color: $dark;
+  }
+}
+
+@each $basic, $color in $all-colors {
+  .tc-#{$basic} {
+    color: $color;
+  }
+}

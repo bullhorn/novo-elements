@@ -79,7 +79,7 @@ export class TablePage {}
 
 @Component({
   selector: 'colors-page',
-  template: `<h2>Primary Colors</h2><p>These are the base colors of the application.</p><!-- Example: PrimaryColorsExample --><p><primary-colors-example></primary-colors-example></p>`,
+  template: `<h1>Color</h1><h2>Efficient and expressive</h2><p>Our colors are bold, fresh, and approachable. They are expressive and delightful, but selected with usability and accessibility in mind.</p><h2>Primary Colors</h2><p>These are the base colors of the application.</p><p><primary-colors-example></primary-colors-example></p><h2>Entity Colors</h2><p>This bold palette uses carefully balanced colors to distinguish entities from one another.</p><p><entity-colors-example></entity-colors-example></p><h2>Analyltics Colors</h2><p>This palette features vibrant, bold colors for use in data visualization.</p><p><analytics-colors-example></analytics-colors-example></p>`,
 })
 export class ColorsPage {}
 
@@ -305,7 +305,7 @@ const routes: Routes = [
   { path: 'form-controls/select', component: SelectPage, data: { title: 'Select', section: 'form-controls' } },
   { path: 'form-controls/tiles', component: TilesPage, data: { title: 'Tiles', section: 'form-controls' } },
   { path: 'form-controls/value', component: ValuePage, data: { title: 'Value', section: 'form-controls' } },
-  { path: '', component: HomePage, data: { title: 'Home', section: 'novo-examples' } },
+  { path: 'home', component: HomePage, data: { title: 'Home', section: 'src' } },
   { path: 'layouts/cards', component: CardsPage, data: { title: 'Cards', section: 'layouts' } },
   { path: 'layouts/expansion', component: ExpansionPage, data: { title: 'Expansion', section: 'layouts' } },
   { path: 'layouts/header', component: HeaderPage, data: { title: 'Header', section: 'layouts' } },
