@@ -7,6 +7,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "build": "ng build novo-elements && ng build chomsky",
+    "postbuild": "npm run copy-scss",
     "build:chomsky": "ng build chomsky",
     "build:watch": "ng build novo-elements --watch",
     "build:chomsky:watch": "ng build chomsky --watch",
