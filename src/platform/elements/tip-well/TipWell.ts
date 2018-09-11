@@ -9,7 +9,8 @@ import { NovoLabelService } from '../../services/novo-label-service';
         <div *ngIf="isActive">
             <div>
                 <i class="bhi-{{ icon }}" *ngIf="icon" [attr.data-automation-id]="'novo-tip-well-icon-' + name"></i>
-                <p [attr.data-automation-id]="'novo-tip-well-tip-' + name" [innerHTML]="tip"></p>
+                <p *ngIf="sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name">{{ tip }}</p>
+                <p *ngIf="!sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name" [innerHTML]="tip"></p>
             </div>
             <button theme="dialogue" (click)="hideTip()" *ngIf="button" [attr.data-automation-id]="'novo-tip-well-button-' + name">{{ buttonText }}</button>
         </div>
@@ -29,6 +30,8 @@ export class NovoTipWellElement implements OnInit {
   button: boolean = true;
   @Input()
   icon: string;
+  @Input()
+  sanitize: boolean = true;
   @Output()
   confirmed = new EventEmitter();
 
