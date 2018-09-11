@@ -83,6 +83,8 @@ describe('Control: BaseControl', () => {
         maxlength: 100,
         disabled: true,
         fileBrowserImageUploadUrl: '/foo/bar/baz',
+        textMaskEnabled: true,
+        maskOptions: { mask: ['TEST_MASK_OPTIONS'], keepCharPositions: false, guide: true },
       });
     });
 
@@ -139,6 +141,12 @@ describe('Control: BaseControl', () => {
     });
     it('should set fileBrowserImageUploadUrl', () => {
       expect(control.fileBrowserImageUploadUrl).toEqual('/foo/bar/baz');
+    });
+    it('should set textMaskEnabled', () => {
+      expect(control.textMaskEnabled).toEqual(true);
+    });
+    it('should set maskOptions', () => {
+      expect(control.maskOptions).toEqual({ mask: ['TEST_MASK_OPTIONS'], keepCharPositions: false, guide: true });
     });
   });
 });

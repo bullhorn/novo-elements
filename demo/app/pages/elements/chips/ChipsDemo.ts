@@ -6,6 +6,7 @@ let AsyncChipsDemoTpl = require('./templates/AsyncChipsDemo.html');
 let FormattedChipsDemoTpl = require('./templates/FormattedChipsDemo.html');
 let CloseOnSelectChipsDemoTpl = require('./templates/CloseOnSelectChipsDemo.html');
 let GroupedMultiPickerDemoTpl = require('./templates/GroupedMultiPickerDemo.html');
+let RowChipsDemoTpl = require('./templates/RowChipsDemo.html');
 
 import { GroupedMultiPickerResults } from 'novo-elements';
 
@@ -54,6 +55,15 @@ const template = `
     <p>Having custom templates makes it easy to customize the functionality of the picker, here is an example of a category selector</p>
     <div class="example chips-demo">${GroupedMultiPickerDemoTpl}</div>
     <code-snippet [code]="GroupedMultiPickerDemoTpl"></code-snippet>
+
+    <h5>Row Chips Example</h5>
+    <p>
+        By clicking on the <code>row-chips</code> element, the options list will be displayed.  Select any of the options
+        by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row.
+        By clicking the delete icon at the end of the row, the row will be removed from the list of selected values.
+    </p>
+    <div class="example chips-demo">${RowChipsDemoTpl}</div>
+    <code-snippet [code]="RowChipsDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -67,6 +77,7 @@ export class ChipsDemoComponent {
   private FormattedChipsDemoTpl: string = FormattedChipsDemoTpl;
   private CloseOnSelectChipsDemoTpl: string = CloseOnSelectChipsDemoTpl;
   private GroupedMultiPickerDemoTpl: string = GroupedMultiPickerDemoTpl;
+  private RowChipsDemoTpl: string = RowChipsDemoTpl;
 
   private staticDemo: any;
   private formatted: any;
@@ -74,6 +85,8 @@ export class ChipsDemoComponent {
   private avalue: any;
   private placeholder: string = 'Select...';
   private value: any = ['Alabama'];
+  private rowDemo: any;
+  private rowValue: any;
 
   private groupedMultiPicker1: any;
   private groupedMultiPicker2: any;
@@ -150,7 +163,7 @@ export class ChipsDemoComponent {
       },
       {
         value: 'AU',
-        label: 'Austrailia',
+        label: 'Australia',
       },
     ];
     let collaborators = [
@@ -206,6 +219,30 @@ export class ChipsDemoComponent {
         value: 'GB',
       },
     ];
+    this.rowValue = [
+      {
+        id: 1,
+        firstName: 'Brian',
+        lastName: 'Kimball',
+      },
+    ];
+    this.rowDemo = {
+      ...this.formatted,
+      columns: [
+        {
+          label: 'Name',
+          data: (item: any): string => {
+            return item['label'];
+          },
+        },
+        {
+          label: 'Id',
+          data: (item: any): string => {
+            return item.value['id'];
+          },
+        },
+      ],
+    };
 
     this.setupGroupedMultiPickerDemo();
   }

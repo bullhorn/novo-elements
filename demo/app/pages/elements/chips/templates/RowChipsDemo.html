@@ -1,0 +1,2 @@
+<div class="selected-value">Selected Value: {{rowValue | json}}</div>
+<novo-row-chips [source]="rowDemo" [placeholder]="placeholder" [(ngModel)]="rowValue" (changed)="onChanged($event)"></novo-row-chips>

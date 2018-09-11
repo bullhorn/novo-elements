@@ -43,8 +43,6 @@ export class NovoFormControl extends FormControl {
   layoutOptions?: { order?: string; download?: boolean; labelStyle?: string; draggable?: boolean; iconStyle?: string };
   military?: boolean;
   dateFormat?: string;
-  startDate?: Date | Number;
-  endDate?: Date | Number;
   textMaskEnabled?: boolean;
   allowInvalidDate?: boolean;
   tipWell?: {
@@ -55,6 +53,7 @@ export class NovoFormControl extends FormControl {
   rawValue?: any;
   customControlConfig?: any;
   checkboxLabel?: string;
+  restrictFieldInteractions?: boolean;
   private historyTimeout: any;
 
   constructor(value: any, control: NovoControlConfig) {
@@ -89,8 +88,6 @@ export class NovoFormControl extends FormControl {
     this.layoutOptions = control.layoutOptions;
     this.military = control.military;
     this.dateFormat = control.dateFormat;
-    this.startDate = control.startDate;
-    this.endDate = control.endDate;
     this.textMaskEnabled = control.textMaskEnabled;
     this.allowInvalidDate = control.allowInvalidDate;
     this.maxlength = control.maxlength;
@@ -98,6 +95,7 @@ export class NovoFormControl extends FormControl {
     this.closeOnSelect = control.closeOnSelect;
     this.interactions = control.interactions;
     this.checkboxLabel = control.checkboxLabel;
+    this.restrictFieldInteractions = control.restrictFieldInteractions;
     this.appendToBody = control.appendToBody;
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
@@ -146,14 +144,14 @@ export class NovoFormControl extends FormControl {
       validators.push(Validators.required);
       // TODO: duplicated below
       this.setValidators(validators);
-      this.updateValueAndValidity();
+      this.updateValueAndValidity({ emitEvent: false });
       this.hasRequiredValidator = this.required;
     } else if (!this.required && this.hasRequiredValidator) {
       let validators: any = [...this.validators];
       validators = validators.filter((val) => val !== Validators.required);
       // TODO: duplicated above
       this.setValidators(validators);
-      this.updateValueAndValidity();
+      this.updateValueAndValidity({ emitEvent: false });
       this.hasRequiredValidator = this.required;
     }
   }
@@ -205,6 +203,26 @@ export class NovoFormControl extends FormControl {
     } else {
       this.enable();
     }
+  }
+
+  /**
+   * Disables the control. This means the control will be exempt from validation checks and
+   * excluded from the aggregate value of any parent. Its status is `DISABLED`.
+   *
+   * If the control has children, all children will be disabled to maintain the model.
+   */
+  public disable(opts: { onlySelf?: boolean; emitEvent?: boolean } = { emitEvent: false }): void {
+    if (typeof opts.emitEvent === 'undefined') {
+      opts.emitEvent = false;
+    }
+    super.disable(opts);
+  }
+
+  public enable(opts: { onlySelf?: boolean; emitEvent?: boolean } = { emitEvent: false }): void {
+    if (typeof opts.emitEvent === 'undefined') {
+      opts.emitEvent = false;
+    }
+    super.enable(opts);
   }
 
   /**
