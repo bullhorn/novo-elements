@@ -1,0 +1,16 @@
+<!--Check out the FormDemo.js for more information!-->
+<novo-form [form]="checkForm">
+    <div class="novo-form-row">
+        <novo-control [form]="checkForm" [control]="checkControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="checkForm" [control]="checkListControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="checkForm" [control]="tilesControl" (change)="onChange($event)"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="checkForm" [control]="disabledTilesControl" (change)="onChange($event)"></novo-control>
+    </div>
+</novo-form>
+<div class="final-value">Value: {{checkForm.value | json}}</div>

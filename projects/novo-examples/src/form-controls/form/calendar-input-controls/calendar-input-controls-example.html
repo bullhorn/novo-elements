@@ -1,0 +1,16 @@
+<!--Check out the FormDemo.js for more information!-->
+<novo-form [form]="calendarForm" layout="vertical">
+    <div class="novo-form-row">
+        <novo-control [form]="calendarForm" [control]="dateControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="calendarForm" [control]="userDefinedDateControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="calendarForm" [control]="timeControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="calendarForm" [control]="dateTimeControl"></novo-control>
+    </div>
+</novo-form>
+<div class="final-value">Value: {{calendarForm.value | json}}</div>

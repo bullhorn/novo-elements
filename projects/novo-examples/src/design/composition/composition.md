@@ -27,7 +27,7 @@ The top frame contains key functions (Find, Add) and navigation to the Resource 
 
 The bowling alley is where all active items are displayed, allowing users to easily shift between them.
 
-![bowling alley](assets/images/LayoutMainframeBowlingAlley.svg  =300x)
+<img src="assets/images/LayoutMainframeBowlingAlley.svg" alt="bowling alley" width="300"/>
 
 ##### Menu
 

@@ -6,7 +6,7 @@ Crafted amid Complexity
 
 Enterprise software is highly complex and demands a high level of flexibility. Design offers clarity and enables us to make deep, powerful connections.
 
-![](assets/images/IntroPageHeaderImage.svg)
+<img src="assets/images/IntroPageHeaderImage.svg" width="300"/>
 
 ##### A NEW STANDARD
 

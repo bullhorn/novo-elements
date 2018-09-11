@@ -1,0 +1,13 @@
+<!--Check out the FormDemo.js for more information!-->
+<novo-form [form]="pickerForm">
+    <div class="novo-form-row">
+        <novo-control [form]="pickerForm" [control]="singlePickerControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="pickerForm" [control]="multiPickerControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="pickerForm" [control]="entityMultiPickerControl"></novo-control>
+    </div>
+</novo-form>
+<div class="final-value">Value: {{pickerForm.value | json}}</div>

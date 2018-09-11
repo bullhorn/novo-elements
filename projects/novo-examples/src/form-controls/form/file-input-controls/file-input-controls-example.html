@@ -1,0 +1,10 @@
+<!--Check out the FormDemo.js for more information!-->
+<novo-form [form]="fileForm" layout="vertical">
+    <div class="novo-form-row">
+        <novo-control [form]="fileForm" [control]="fileControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="fileForm" [control]="multiFileControl" (edit)="handleEdit($event)" (save)="handleSave($event)" (delete)="handleDelete($event)" (upload)="handleUpload($event)"></novo-control>
+    </div>
+</novo-form>
+<div class="final-value">Value: {{fileForm.value | json}}</div>

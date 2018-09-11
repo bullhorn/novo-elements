@@ -1,0 +1,10 @@
+<novo-form [form]="addressForm">
+  <div class="novo-form-row">
+    <novo-control [form]="addressForm" [control]="addressControl"></novo-control>
+  </div>
+  <div class="novo-form-row">
+    <novo-control [form]="addressForm" [control]="secondaryAddressControl"></novo-control>
+  </div>
+</novo-form>
+
+<div class="final-value">Value: {{addressForm.value | json}}</div>

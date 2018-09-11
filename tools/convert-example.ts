@@ -2,9 +2,9 @@ import { sync as glob } from 'glob';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const srcPath = path.join('./demo/', 'app/pages/utils');
+const srcPath = path.join('./demo/', 'app');
 /** Path to find the examples */
-const examplesPath = path.join('./projects/', 'examples');
+const examplesPath = path.join('./projects/', 'novo-examples/src');
 
 /**
  * Builds the template for the examples module
@@ -94,6 +94,7 @@ function convertToSentence(name: string): string {
  */
 const task = () => {
   let example = process.argv[2];
+  console.log(example);
 
   const matchedFiles = glob(path.join(srcPath, example, 'templates/**/*.html'));
 
@@ -108,7 +109,7 @@ const task = () => {
     console.log('source', sourcePath);
     let fileName = path.basename(sourcePath, '.html');
     let name = convertToDashCase(fileName.replace('Demo', ''));
-    let exdir = path.join(dir, name);
+    let exdir = path.join(dir, `${name}`);
     fs.mkdirSync(exdir);
 
     let selector = `${name}-example`;
