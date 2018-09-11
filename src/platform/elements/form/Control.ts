@@ -231,6 +231,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   get showErrorState() {
     return (
+      this.showCount ||
       (this.isDirty && this.errors) ||
       (this.maxLengthMet && this.focused && this.errors && !this.errors.maxlengthFields) ||
       (this.focused && this.errors && this.errors.maxlength && this.errors.maxlengthFields && this.maxlengthErrorField)
