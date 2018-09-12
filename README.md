@@ -51,6 +51,16 @@ If using SCSS/SASS you will need to include the following includes: `node_module
     # npm run deploy:gh-pages
     # npm publish
 
+## Building Examples
+
+> All examples can be added to the appropriate directory in the `novo-examples` project.  Each markdown file will be converted to a demo page and a route will automatically be added to the demo. You can import any example project by using the angular selector, or inject it using the `code-example` tag, ie. `<code-example example="demo-name"></code-example>`.
+
+    # Compile markdown, generate routes, and AOT build the project
+    npm run build:examples
+    
+    # Automatically rebuild changes to the examples project
+    npm run build:examples:watch
+
 ## Customizing Labels
 
 With Novo Elements there are a few hard coded labels throughout the library. To override these labels with your own, you will simply extend the `NovoLabelService` and override any labels that you wish.

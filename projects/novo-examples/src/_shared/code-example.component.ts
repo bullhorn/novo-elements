@@ -21,7 +21,7 @@ import { EXAMPLE_COMPONENTS, LiveExample } from '../examples.module';
         <code-snippet [example]="example" *ngIf="showSource"></code-snippet>
       </div>
     `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeExampleComponent {
   /** Component portal for the currently displayed example. */

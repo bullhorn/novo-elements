@@ -5,4 +5,4 @@ Basic code editor using Ace Editor.
 
 ##### Basic Example
 
-<code-example example="base-ace"></code-example>
+<code-example example="basic-ace"></code-example>

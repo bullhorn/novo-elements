@@ -7,7 +7,7 @@ import { NovoExamplesSharedModule } from './_shared/shared.module';
 
 @Component({
   selector: 'ace-editor-page',
-  template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/ace-editor">(source)</a></h1><p>Basic code editor using Ace Editor.</p><h5>Basic Example</h5><p><code-example example="base-ace"></code-example></p>`,
+  template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/ace-editor">(source)</a></h1><p>Basic code editor using Ace Editor.</p><h5>Basic Example</h5><p><code-example example="basic-ace"></code-example></p>`,
 })
 export class AceEditorPage {}
 
@@ -43,7 +43,7 @@ export class DropdownPage {}
 
 @Component({
   selector: 'icon-page',
-  template: `<h1>Icons <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/icon">(source)</a></h1><p>This component ...</p>`,
+  template: `<h1>Icons <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/icon">(source)</a></h1><p>If you want to use bullhorn icons, it is easier to use the <code>novo-icon</code> element to style them.  You can always style them within the <code>i</code> tag too.</p><h5>Basic Usage</h5><p><code-example example="basic-icons"></code-example></p><h5>Themes &amp; Colors</h5><p><code-example example="themed-icons"></code-example></p><h5>Raised Icons</h5><p><code-example example="raised-icons"></code-example></p>`,
 })
 export class IconPage {}
 

@@ -25,7 +25,7 @@ import { EXAMPLE_COMPONENTS } from '../examples.module';
       </novo-nav-content>
     </novo-nav-outlet>
     `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeSnippetComponent implements OnInit {
   @Input()

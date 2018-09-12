@@ -6,6 +6,7 @@ $medium-icon-size: 1.4em;
 $large-icon-size: 1.8em;
 $icon-border-radius: 0.3em;
 novo-icon {
+  display: inline-block;
   i {
     display: flex;
     justify-content: center;
