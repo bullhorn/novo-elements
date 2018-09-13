@@ -50,7 +50,7 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
     'default';
   @Input() scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
   @Input() height: number;
-  @Input() width: number = 180;
+  @Input() width: number = -1; // Defaults to dynamic width (no hardcoded width value and no host width lookup)
   @Input() appendToBody: boolean = false; // Deprecated
 
   @Output() toggled: EventEmitter<boolean> = new EventEmitter<boolean>();
