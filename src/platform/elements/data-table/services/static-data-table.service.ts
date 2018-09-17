@@ -20,18 +20,22 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
     outsideFilter?: any,
   ): Observable<{ results: T[]; total: number }> {
     this.currentData = [...this.originalData];
+    let total: number = this.originalData.length;
     if (this.currentData.length !== 0) {
       if (globalSearch) {
         this.currentData = this.currentData.filter((item) =>
           Object.keys(item).some((key) => `${item[key]}`.toLowerCase().includes(globalSearch.toLowerCase())),
         );
+        total = this.currentData.length;
       }
       if (filter) {
         let value = Helpers.isString(filter.value) ? filter.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') : filter.value;
         this.currentData = this.currentData.filter(Helpers.filterByField(filter.id, value));
+        total = this.currentData.length;
       }
       if (sort) {
         this.currentData = this.currentData.sort(Helpers.sortByField(sort.id, sort.value === 'desc'));
+        total = this.currentData.length;
       }
       if (!sort && !filter && !globalSearch && !outsideFilter) {
         this.currentData = [...this.originalData];
@@ -40,6 +44,6 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
         this.currentData = this.currentData.slice(page * pageSize, (page + 1) * pageSize);
       }
     }
-    return Observable.of({ results: this.currentData, total: this.originalData.length });
+    return Observable.of({ results: this.currentData, total: total });
   }
 }
