@@ -72,10 +72,13 @@ import { Helpers } from '../../../utils/Helpers';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit, OnDestroy {
-  @ViewChild('filterInput') filterInput: ElementRef;
-  @ViewChild(NovoDropdownElement) dropdown: NovoDropdownElement;
+  @ViewChild('filterInput')
+  filterInput: ElementRef;
+  @ViewChild(NovoDropdownElement)
+  dropdown: NovoDropdownElement;
 
-  @Input() defaultSort: { id: string; value: string };
+  @Input()
+  defaultSort: { id: string; value: string };
 
   @Input('novo-data-table-cell-config')
   set column(column: IDataTableColumn<T>) {
@@ -211,7 +214,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       } else {
         actualFilter = {
           min: filter.min ? dateFns.addDays(dateFns.startOfToday(), filter.min) : dateFns.startOfToday(),
-          max: filter.max ? dateFns.addDays(dateFns.startOfTomorrow(), filter.max) : dateFns.startOfTomorrow(),
+          max: filter.max ? dateFns.addDays(dateFns.endOfToday(), filter.max) : dateFns.endOfToday(),
         };
       }
     }
