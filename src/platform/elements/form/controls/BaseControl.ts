@@ -48,6 +48,7 @@ export interface NovoControlConfig {
   closeOnSelect?: boolean;
   interactions?: Array<Object>;
   dataSpecialization?: string;
+  dataType?: string;
   appendToBody?: boolean; // Deprecated
   parentScrollSelector?: string;
   description?: string;
@@ -120,6 +121,7 @@ export class BaseControl {
   closeOnSelect: boolean;
   interactions: Array<Object>;
   dataSpecialization: string;
+  dataType: string;
   appendToBody: boolean; // Deprecated
   parentScrollSelector: string;
   description?: string;
@@ -199,6 +201,7 @@ export class BaseControl {
     this.closeOnSelect = !!config.closeOnSelect;
     this.interactions = config.interactions;
     this.dataSpecialization = config.dataSpecialization;
+    this.dataType = config.dataType;
     this.appendToBody = !!config.appendToBody;
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
