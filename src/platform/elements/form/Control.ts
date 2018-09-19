@@ -12,6 +12,8 @@ import {
   HostListener,
   AfterContentInit,
   AfterViewInit,
+  LOCALE_ID,
+  Inject,
 } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
@@ -214,6 +216,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private fieldInteractionApi: FieldInteractionApi,
     private templateService: NovoTemplateService,
     private changeDetectorRef: ChangeDetectorRef,
+    @Inject(LOCALE_ID) private locale: string = 'en-US',
   ) {
     super(element);
   }
