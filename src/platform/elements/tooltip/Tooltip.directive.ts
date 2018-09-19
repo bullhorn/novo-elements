@@ -1,7 +1,14 @@
 // NG2
 import { Directive, Input, HostListener, OnDestroy, ViewChild, Component, ViewContainerRef, ElementRef, OnChanges } from '@angular/core';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
-import { Overlay, OverlayRef, OverlayConfig, ConnectedPositionStrategy } from '@angular/cdk/overlay';
+import {
+  Overlay,
+  OverlayRef,
+  OverlayConfig,
+  ConnectedPositionStrategy,
+  OriginConnectionPosition,
+  OverlayConnectionPosition,
+} from '@angular/cdk/overlay';
 import { NovoTooltip } from './Tooltip.component';
 import { ComponentPortal } from '@angular/cdk/portal';
 
@@ -78,7 +85,7 @@ export class TooltipDirective implements OnDestroy, OnChanges {
   private show(): void {
     const overlayState = new OverlayConfig();
     let positionStrategy = this.getPosition();
-    overlayState.positionStrategy = positionStrategy.strategy;
+    overlayState.positionStrategy = positionStrategy;
 
     if (this.scrollStrategy === 'reposition') {
       overlayState.scrollStrategy = this.overlay.scrollStrategies.reposition();
@@ -97,19 +104,19 @@ export class TooltipDirective implements OnDestroy, OnChanges {
     tooltipInstance.tooltipType = this.type;
     tooltipInstance.rounded = this.rounded;
     tooltipInstance.size = this.size;
-    tooltipInstance.positionStrategy = positionStrategy;
     tooltipInstance.preline = this.preline;
     tooltipInstance.noAnimate = this.noAnimate;
+    tooltipInstance.position = this.position;
   }
 
   private hide(): void {
     this.overlayRef.detach();
   }
 
-  private getPosition(): { strategy: ConnectedPositionStrategy; offsetY: number; offsetX: number } {
+  private getPosition(): ConnectedPositionStrategy {
     let strategy: ConnectedPositionStrategy;
-    let originPosition;
-    let overlayPosition;
+    let originPosition: OriginConnectionPosition;
+    let overlayPosition: OverlayConnectionPosition;
     let offsetX: number;
     let offsetY: number;
 
@@ -172,7 +179,7 @@ export class TooltipDirective implements OnDestroy, OnChanges {
       .withOffsetX(offsetX)
       .withOffsetY(offsetY);
 
-    return { strategy: this.withFallbackStrategy(strategy), offsetY: offsetY, offsetX: offsetX };
+    return this.withFallbackStrategy(strategy);
   }
   private withFallbackStrategy(strategy: ConnectedPositionStrategy): ConnectedPositionStrategy {
     strategy

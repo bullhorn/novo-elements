@@ -12,18 +12,30 @@
     &.error {
       background-color: #b34e4d;
       text-shadow: 0 -1px 0 #592726;
+      &:before {
+        border-top-color: #b34e4d;
+      }
     }
     &.info {
       background-color: #3986ac;
       text-shadow: 0 -1px 0 #1a3c4d;
+      &:before {
+        border-top-color: #3986ac;
+      }
     }
     &.warning {
       background-color: #c09854;
       text-shadow: 0 -1px 0 #6c5328;
+      &:before {
+        border-top-color: #c09854;
+      }
     }
     &.success {
       background-color: #458746;
       text-shadow: 0 -1px 0 #1a321a;
+      &:before {
+        border-top-color: #458746;
+      }
     }
     &.rounded {
       border-radius: 4px;
@@ -51,6 +63,32 @@
     }
     &.preline {
       white-space: pre-line;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      background: 0 0;
+      border: 6px solid transparent;
+      margin-bottom: -11px;
+      left: calc(50% - 6px);
+      bottom: 0;
+      box-sizing: border-box;
+      border-top-color: #383838;
+      &.top {
+        bottom: 0;
+      }
+      &.bottom {
+        bottom: 100%;
+      }
+      &.left {
+        right: 100%;
+        margin-right: -11px;
+        border-left-color: #383838;
+      }
+      &.right {
+        left: 100%;
+        border-right-color: #383838;
+      }
     }
   }
 }
