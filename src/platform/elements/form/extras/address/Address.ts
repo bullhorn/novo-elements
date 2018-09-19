@@ -22,10 +22,12 @@ export interface NovoAddressSubfieldConfig {
   pickerConfig?: any;
   hidden: boolean;
   updated?: boolean;
+  readOnly?: boolean;
 }
 
 export interface NovoAddressConfig {
   required?: boolean;
+  readOnly?: boolean;
   address1?: NovoAddressSubfieldConfig;
   address2?: NovoAddressSubfieldConfig;
   city?: NovoAddressSubfieldConfig;
@@ -78,7 +80,7 @@ export interface NovoAddressConfig {
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.countryID, 'bhi-check': valid.countryID}">
             </i>
-            <novo-picker [config]="config?.countryID?.pickerConfig" [placeholder]="config.countryID.label" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryName"></novo-picker>
+            <novo-picker [config]="config?.countryID?.pickerConfig" [placeholder]="config.countryID.label" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryName" [disablePickerInput]="disabled.countryID"></novo-picker>
         </span>
     `
 })
@@ -105,12 +107,11 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Output() blur: EventEmitter<any> = new EventEmitter();
   @Output() validityChange: EventEmitter<any> = new EventEmitter();
 
-  constructor(public labels: NovoLabelService) { }
+  constructor(public labels: NovoLabelService) {}
 
   ngOnInit() {
     if (!this.config) {
-      this.config = {
-      };
+      this.config = {};
     }
     if (this.model) {
       this.writeValue(this.model);
@@ -125,7 +126,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   }
 
   initConfig(): void {
-    this.fieldList.forEach(((field: string) => {
+    this.fieldList.forEach((field: string) => {
       if (!this.config.hasOwnProperty(field)) {
         this.config[field] = {
           hidden: true,
@@ -136,6 +137,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       }
       if (this.config.required) {
         this.config[field].required = true;
+      }
+      if (this.config[field].readOnly || this.config.readOnly) {
+        this.config[field].readOnly = true;
+        this.disabled[field] = true;
       }
       if (field === 'countryID') {
         if (!this.config[field].pickerConfig) {
@@ -154,7 +159,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         };
         this.config[field].pickerConfig.defaultOptions = this.stateOptions;
       }
-    }));
+    });
   }
 
   isValid(field: string): void {
@@ -287,7 +292,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   }
 
   updateStates() {
-    if (this.config.state.pickerConfig.options && !Helpers.isBlank(this.model.countryID)) {
+    if (this.config.state.pickerConfig.options && !Helpers.isBlank(this.model.countryID) &&
+      !(this.config.readOnly || this.config.state.readOnly)) {
       this.config.state.pickerConfig.options = (query = '') => {
         return this.stateOptions(query, this.model.countryID);
       };

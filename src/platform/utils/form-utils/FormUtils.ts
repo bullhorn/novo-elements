@@ -347,6 +347,7 @@ export class FormUtils {
           controlConfig.config = {};
         }
         controlConfig.config.required = field.required;
+        controlConfig.config.readOnly = controlConfig.readOnly;
         if (field.fields && field.fields.length) {
           for (let subfield of field.fields) {
             controlConfig.config[subfield.name] = {
