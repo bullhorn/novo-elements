@@ -1,7 +1,9 @@
 // NG2
-import { Directive, Input, HostListener, OnDestroy, ViewChild, Component } from '@angular/core';
+import { Directive, Input, HostListener, OnDestroy, ViewChild, Component, ViewContainerRef } from '@angular/core';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { NovoTooltip } from './Tooltip.component';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 @Directive({
   selector: '[tooltip]',
@@ -28,8 +30,10 @@ export class TooltipDirective implements OnDestroy {
   @Input('tooltipPreline')
   preline: boolean;
   private tooltipInstance: NovoTooltip | null;
+  private portal: ComponentPortal<NovoTooltip>;
+  private overlayRef: OverlayRef;
 
-  constructor(protected overlay: Overlay) {}
+  constructor(protected overlay: Overlay, private viewContainerRef: ViewContainerRef) {}
   isPosition(position: string): boolean {
     return position.toLowerCase() === (this.position || '').toLowerCase();
   }
@@ -44,10 +48,9 @@ export class TooltipDirective implements OnDestroy {
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    this.overlay.create({
-      height: '400px',
-      width: '600px',
-    });
+    if (this.tooltip) {
+      this.show();
+    }
   }
 
   @HostListener('mouseleave')
@@ -58,16 +61,18 @@ export class TooltipDirective implements OnDestroy {
   ngOnDestroy(): void {
     // hide tooltip
   }
-}
 
-@Component({
-  selector: 'novo-tooltip',
-  template: `<div>{{message}}</div>`,
-})
-export class NovoTooltip {
-  public message: string;
+  private show(): void {
+    this.overlayRef = this.overlay.create({
+      height: '400px',
+      width: '600px',
+    });
 
-  constructor(protected overlay: Overlay) {}
+    this.overlayRef.detach();
+    this.portal = this.portal || new ComponentPortal(NovoTooltip, this.viewContainerRef);
 
-  public open(): void {}
+    let tooltipInstance = this.overlayRef.attach(this.portal).instance;
+    tooltipInstance.message = this.tooltip;
+    tooltipInstance!.show();
+  }
 }
