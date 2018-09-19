@@ -81,7 +81,7 @@ export class NovoAutoSize implements AfterContentInit {
                     {{ form.controls[control.key].label }}
                 </label>
                 <div class="novo-control-inner-container" [class.required]="form.controls[control.key].required && !form.controls[control.key].readOnly">
-                    <div class="novo-control-inner-input-container">
+                    <div class="novo-control-inner-input-container" [class.novo-control-filled]="hasValue" [class.novo-control-empty]="!hasValue">
                       <!--Required Indicator-->
                         <i [hidden]="!form.controls[control.key].required || form.controls[control.key].readOnly"
                             class="required-indicator {{ form.controls[control.key].controlType }}"
@@ -101,7 +101,7 @@ export class NovoAutoSize implements AfterContentInit {
                         </div>
                     </div>
                     <!--Error Message-->
-                    <div class="field-message {{ form.controls[control.key].controlType }}" *ngIf="!condensed" [class.has-tip]="form.controls[control.key].tipWell">
+                    <div class="field-message {{ form.controls[control.key].controlType }}" *ngIf="!condensed" [class.has-tip]="form.controls[control.key].tipWell" [ngClass]="showErrorState ? 'error-shown' : 'error-hidden'">
                         <div class="messages">
                             <span class="error-text" *ngIf="showFieldMessage"></span>
                             <span class="error-text" *ngIf="isDirty && errors?.required && form.controls[control.key].controlType !== 'address'">{{ form.controls[control.key].label | uppercase }} {{ labels.isRequired }}</span>
@@ -239,6 +239,14 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     return !this.errors && !this.maxLengthMet && Helpers.isBlank(this.control.description);
   }
 
+  get showErrorState() {
+    return (
+      (this.isDirty && this.errors) ||
+      (this.maxLengthMet && this.focused && this.errors && !this.errors.maxlengthFields) ||
+      (this.focused && this.errors && this.errors.maxlength && this.errors.maxlengthFields && this.maxlengthErrorField)
+    );
+  }
+
   get showCount() {
     let charCount: boolean =
       this.form.controls[this.control.key].maxlength &&
@@ -265,22 +273,28 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   ngAfterContentInit() {
     // Subscribe to control interactions
-    if (this.control.interactions) {
+    if (this.control.interactions && !this.form.controls[this.control.key].restrictFieldInteractions) {
       for (let interaction of this.control.interactions) {
         switch (interaction.event) {
           case 'blur':
             this.valueChangeSubscription = this.onBlur.pipe(debounceTime(300)).subscribe(() => {
-              this.executeInteraction(interaction);
+              if (!this.form.controls[this.control.key].restrictFieldInteractions) {
+                this.executeInteraction(interaction);
+              }
             });
             break;
           case 'focus':
             this.valueChangeSubscription = this.onFocus.pipe(debounceTime(300)).subscribe(() => {
-              this.executeInteraction(interaction);
+              if (!this.form.controls[this.control.key].restrictFieldInteractions) {
+                this.executeInteraction(interaction);
+              }
             });
             break;
           case 'change':
             this.valueChangeSubscription = this.form.controls[this.control.key].valueChanges.pipe(debounceTime(300)).subscribe(() => {
-              this.executeInteraction(interaction);
+              if (!this.form.controls[this.control.key].restrictFieldInteractions) {
+                this.executeInteraction(interaction);
+              }
             });
             break;
           case 'init':
@@ -290,7 +304,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
             break;
         }
         if (interaction.invokeOnInit) {
-          this.executeInteraction(interaction);
+          if (!this.form.controls[this.control.key].restrictFieldInteractions) {
+            this.executeInteraction(interaction);
+          }
         }
       }
     }

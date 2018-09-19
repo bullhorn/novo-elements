@@ -318,6 +318,9 @@ novo-form {
                   > div.novo-control-input {
                     width: 100%;
                     position: relative;
+                    .textarea-container {
+                      display: flex;
+                    }
                     &.control-disabled {
                       pointer-events: none;
                     }

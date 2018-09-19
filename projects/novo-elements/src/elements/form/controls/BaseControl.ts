@@ -5,6 +5,7 @@ import { EventEmitter } from '@angular/core';
 import { Helpers } from '../../../utils/Helpers';
 import { NovoControlGroupAddConfig } from '../ControlGroup';
 import { notify } from '../../../utils/notifier/notifier.util';
+import { IMaskOptions } from '../Control';
 
 export interface NovoGroupedControlConfig {
   label?: string;
@@ -69,6 +70,7 @@ export interface NovoControlConfig {
   military?: boolean;
   dateFormat?: string;
   textMaskEnabled?: boolean;
+  maskOptions?: IMaskOptions;
   allowInvalidDate?: boolean;
   tipWell?: {
     tip: string;
@@ -81,6 +83,7 @@ export interface NovoControlConfig {
   isEmpty?: Function;
   startDate?: Date | Number;
   endDate?: Date | Number;
+  restrictFieldInteractions?: boolean;
 }
 
 export class BaseControl {
@@ -131,6 +134,7 @@ export class BaseControl {
   military?: boolean;
   dateFormat?: string;
   textMaskEnabled?: boolean;
+  maskOptions?: IMaskOptions;
   allowInvalidDate?: boolean;
   tipWell?: {
     tip: string;
@@ -143,6 +147,7 @@ export class BaseControl {
   isEmpty?: Function;
   startDate?: Date | Number;
   endDate?: Date | Number;
+  restrictFieldInteractions?: boolean;
 
   constructor(type: string = 'BaseControl', config: NovoControlConfig = {}) {
     this.__type = type;
@@ -175,9 +180,11 @@ export class BaseControl {
     this.military = !!config.military;
     this.dateFormat = config.dateFormat;
     this.textMaskEnabled = config.textMaskEnabled;
+    this.maskOptions = config.maskOptions;
     this.allowInvalidDate = config.allowInvalidDate;
     this.startDate = config.startDate;
     this.endDate = config.endDate;
+    this.restrictFieldInteractions = !!config.restrictFieldInteractions;
 
     if (this.required) {
       this.validators.push(Validators.required);

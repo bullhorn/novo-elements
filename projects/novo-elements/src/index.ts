@@ -181,3 +181,50 @@ export { NovoListElement } from './elements/list/List';
 export { NOVO_VALUE_TYPE } from './elements/value/Value';
 export { NOVO_VALUE_THEME } from './elements/value/Value';
 export { NovoAddressConfig, NovoAddressSubfieldConfig } from './elements/form/extras/address/Address';
+// Simple Table (to be removed)
+export {
+  NovoTable,
+  NovoActivityTable,
+  NovoActivityTableActions,
+  NovoActivityTableCustomFilter,
+  NovoActivityTableEmptyMessage,
+  NovoActivityTableNoResultsMessage,
+  NovoActivityTableCustomHeader,
+} from './elements/simple-table/table';
+export {
+  NovoSimpleCell,
+  NovoSimpleCheckboxCell,
+  NovoSimpleCheckboxHeaderCell,
+  NovoSimpleHeaderCell,
+  NovoSimpleCellDef,
+  NovoSimpleHeaderCellDef,
+  NovoSimpleColumnDef,
+  NovoSimpleActionCell,
+  NovoSimpleEmptyHeaderCell,
+} from './elements/simple-table/cell';
+export { NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleHeaderRowDef, NovoSimpleRowDef } from './elements/simple-table/row';
+export { NovoSimpleCellHeader, NovoSimpleFilterFocus } from './elements/simple-table/cell-header';
+export { NovoSortFilter, NovoSelection } from './elements/simple-table/sort';
+export { NovoSimpleTablePagination } from './elements/simple-table/pagination';
+export {
+  SimpleTableColumn,
+  SimpleTablePaginationOptions,
+  SimpleTableColumnFilterConfig,
+  SimpleTableColumnFilterOption,
+  SimpleTableSearchOptions,
+  SimpleTableActionColumnOption,
+  SimpleTableActionColumn,
+  NovoSimpleSortFilter,
+  NovoSimpleTableChange,
+  NovoSimpleSelectionChange,
+  NovoSimplePaginationEvent,
+} from './elements/simple-table/interfaces';
+export {
+  ActivityTableDataSource,
+  ActivityTableService,
+  RemoteActivityTableService,
+  StaticActivityTableService,
+} from './elements/simple-table/table-source';
+export { ActivityTableRenderers } from './elements/simple-table/activity-table-renderers';
+export { NovoActivityTableState } from './elements/simple-table/state';
+export { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';

@@ -30,6 +30,7 @@ import { NovoTimePickerModule } from './elements/time-picker/TimePicker.module';
 import { NovoDateTimePickerModule } from './elements/date-time-picker/DateTimePicker.module';
 import { NovoNovoCKEditorModule } from './elements/ckeditor/CKEditor.module';
 import { NovoTipWellModule } from './elements/tip-well/TipWell.module';
+import { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
 import { NovoTableModule } from './elements/table/Table.module';
 import { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 import { NovoFormModule } from './elements/form/Form.module';
@@ -87,6 +88,7 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoDateTimePickerModule,
     NovoNovoCKEditorModule,
     NovoTipWellModule,
+    NovoSimpleTableModule,
     NovoTableModule,
     NovoTableExtrasModule,
     NovoFormModule,
