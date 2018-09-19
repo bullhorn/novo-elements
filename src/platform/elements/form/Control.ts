@@ -155,15 +155,24 @@ export class NovoAutoSize implements AfterContentInit {
   },
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
-  @Input() control: any;
-  @Input() form: any;
-  @Input() condensed: boolean = false;
-  @Input() autoFocus: boolean = false;
-  @Output() change: EventEmitter<any> = new EventEmitter();
-  @Output() edit: EventEmitter<any> = new EventEmitter();
-  @Output() save: EventEmitter<any> = new EventEmitter();
-  @Output() delete: EventEmitter<any> = new EventEmitter();
-  @Output() upload: EventEmitter<any> = new EventEmitter();
+  @Input()
+  control: any;
+  @Input()
+  form: any;
+  @Input()
+  condensed: boolean = false;
+  @Input()
+  autoFocus: boolean = false;
+  @Output()
+  change: EventEmitter<any> = new EventEmitter();
+  @Output()
+  edit: EventEmitter<any> = new EventEmitter();
+  @Output()
+  save: EventEmitter<any> = new EventEmitter();
+  @Output()
+  delete: EventEmitter<any> = new EventEmitter();
+  @Output()
+  upload: EventEmitter<any> = new EventEmitter();
   @Output('blur')
   get onBlur(): Observable<FocusEvent> {
     return this._blurEmitter.asObservable();
@@ -561,7 +570,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   restrictKeys(event) {
     const NUMBERS_ONLY = /[0-9\-]/;
-    const NUMBERS_WITH_DECIMAL = /[0-9\.\-]/;
+    const NUMBERS_WITH_DECIMAL = /[0-9\.\,\-]/;
     const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
     let key = event.key;
     // Types
