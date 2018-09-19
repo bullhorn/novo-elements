@@ -28,6 +28,7 @@
     &.rounded {
       border-radius: 4px;
     }
+    &.extra-large,
     &.large,
     &.small,
     &.medium {
@@ -35,8 +36,12 @@
       line-height: 1.4em;
       word-wrap: break-word;
     }
-    &.large {
+    &.extra-large {
       width: 400px;
+      font-size: 1.1vh;
+    }
+    &.large {
+      width: 300px;
     }
     &.medium {
       width: 150px;
