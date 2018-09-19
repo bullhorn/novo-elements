@@ -83,45 +83,66 @@ export class TooltipDirective implements OnDestroy {
 
     let tooltipInstance = this.overlayRef.attach(this.portal).instance;
     tooltipInstance.message = this.tooltip;
-    tooltipInstance!.show();
+    tooltipInstance.show();
+  }
+
+  private hide(): void {
+    if (this.overlayRef) {
+      this.overlayRef.detach();
+    }
   }
 
   private getPosition(): ConnectedPositionStrategy {
     // The tooltip will try to be placed in the position given.
     // But it has a FallbackStrategy to avoid tooltips outside of screen and that type of issues
-    if (this.position === 'right') {
-      const strategy = this.overlay
-        .position()
-        .connectedTo(this.elementRef, { originX: 'end', originY: 'center' }, { overlayX: 'start', overlayY: 'center' })
-        .withOffsetX(20)
-        .withOffsetY(0);
+    let strategy: ConnectedPositionStrategy;
+    let originPosition;
+    let overlayPosition;
 
-      return this.withFallbackStrategy(strategy);
-    } else if (this.position === 'bottom') {
-      const strategy = this.overlay
-        .position()
-        .connectedTo(this.elementRef, { originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' })
-        .withOffsetX(0)
-        .withOffsetY(20);
+    switch (this.position) {
+      case 'right':
+        originPosition = { originX: 'end', originY: 'center' };
+        overlayPosition = { overlayX: 'start', overlayY: 'center' };
+        break;
+      case 'bottom':
+        originPosition = { originX: 'center', originY: 'bottom' };
+        overlayPosition = { overlayX: 'center', overlayY: 'top' };
+        break;
+      case 'top':
+        originPosition = { originX: 'center', originY: 'top' };
+        overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
+        break;
+      case 'left':
+        originPosition = { originX: 'start', originY: 'center' };
+        overlayPosition = { overlayX: 'end', overlayY: 'center' };
+        break;
+      case 'top-left':
+        originPosition = { originX: 'start', originY: 'top' };
+        overlayPosition = { overlayX: 'end', overlayY: 'bottom' };
+        break;
+      case 'bottom-left':
+        originPosition = { originX: 'start', originY: 'bottom' };
+        overlayPosition = { overlayX: 'end', overlayY: 'top' };
+        break;
+      case 'top-right':
+        originPosition = { originX: 'end', originY: 'top' };
+        overlayPosition = { overlayX: 'start', overlayY: 'bottom' };
+        break;
+      case 'bottom-right':
+        originPosition = { originX: 'end', originY: 'bottom' };
+        overlayPosition = { overlayX: 'start', overlayY: 'top' };
+        break;
 
-      return this.withFallbackStrategy(strategy);
-    } else if (this.position === 'top') {
-      const strategy = this.overlay
-        .position()
-        .connectedTo(this.elementRef, { originX: 'center', originY: 'top' }, { overlayX: 'center', overlayY: 'bottom' })
-        .withOffsetX(0)
-        .withOffsetY(-20);
-
-      return this.withFallbackStrategy(strategy);
-    } else if (this.position === 'left') {
-      const strategy = this.overlay
-        .position()
-        .connectedTo(this.elementRef, { originX: 'start', originY: 'center' }, { overlayX: 'end', overlayY: 'center' })
-        .withOffsetX(-20)
-        .withOffsetY(0);
-
-      return this.withFallbackStrategy(strategy);
+      default:
+        break;
     }
+    strategy = this.overlay
+      .position()
+      .connectedTo(this.elementRef, originPosition, overlayPosition)
+      .withOffsetX(20)
+      .withOffsetY(0);
+
+    return this.withFallbackStrategy(strategy);
   }
   private withFallbackStrategy(strategy: ConnectedPositionStrategy): ConnectedPositionStrategy {
     strategy
@@ -133,7 +154,6 @@ export class TooltipDirective implements OnDestroy {
       .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, 0, 20)
       .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, 0, -20)
       .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 0, -20);
-
     return strategy;
   }
 }

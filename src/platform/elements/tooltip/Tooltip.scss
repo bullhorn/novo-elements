@@ -1,5 +1,13 @@
 :host {
   div {
-    background-color: red;
+    background: #383838;
+    color: #fff;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 12px;
+    white-space: nowrap;
+    text-shadow: 0 -1px 0 #000;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
   }
 }

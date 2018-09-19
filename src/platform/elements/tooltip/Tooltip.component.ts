@@ -6,7 +6,7 @@ import { Overlay } from '@angular/cdk/overlay';
 @Component({
   selector: 'novo-tooltip',
   template: `<div>{{message}}</div>`,
-  styles: ['./Tooltip.scss'],
+  styleUrls: ['./Tooltip.scss'],
 })
 export class NovoTooltip {
   public message: string;
@@ -18,5 +18,9 @@ export class NovoTooltip {
 
   public show(): void {
     this.hidden = false;
+  }
+
+  public hide(): void {
+    this.hidden = true;
   }
 }
