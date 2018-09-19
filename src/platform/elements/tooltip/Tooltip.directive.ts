@@ -98,6 +98,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
     tooltipInstance.rounded = this.rounded;
     tooltipInstance.size = this.size;
     tooltipInstance.positionStrategy = positionStrategy;
+    tooltipInstance.preline = this.preline;
     tooltipInstance.show();
   }
 

@@ -6,7 +6,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 
 @Component({
   selector: 'novo-tooltip',
-  template: `<div [@state]="'visible'" [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '']" [ngStyle]="style">{{message}}</div>`,
+  template: `<div [@state]="'visible'" [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '', this.preline? 'preline' : '']" 
+  [ngStyle]="style">{{message}}</div>`,
   styleUrls: ['./Tooltip.scss'],
   animations: [
     trigger('state', [
@@ -40,6 +41,7 @@ export class NovoTooltip {
   public rounded: boolean;
   public size: string;
   public positionStrategy: any;
+  public preline: boolean;
 
   constructor(private overlay: Overlay, private containerRef: ViewContainerRef) {}
 

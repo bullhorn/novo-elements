@@ -44,5 +44,8 @@
     &.small {
       width: 80px;
     }
+    &.preline {
+      white-space: pre-line;
+    }
   }
 }
