@@ -59,6 +59,7 @@ export class NovoAutoSize implements AfterContentInit {
 //undo all template context references!
 @Component({
   selector: 'novo-control',
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   template: `
         <div class="novo-control-container" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
             <!--Encrypted Field-->
@@ -394,7 +395,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   getDecimalSeparator(): string {
-    let result = (1.2).toLocaleString(this.locale, { minimumFractionDigits: 1 })[1];
+    let result = new Intl.NumberFormat(this.locale).format(1.2)[1];
     return result;
   }
 
