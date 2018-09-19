@@ -49,14 +49,17 @@ export class TooltipDirective implements OnDestroy, OnInit {
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    if (this.tooltip && this.active) {
+    if (this.tooltip && this.active && !this.always) {
       this.show();
     }
   }
 
   @HostListener('mouseleave')
   onMouseLeave(): void {
-    this.hide();
+    if (this.overlayRef && !this.always) {
+      this.hide();
+      this.overlayRef.dispose();
+    }
   }
 
   ngOnInit(): void {
@@ -66,14 +69,16 @@ export class TooltipDirective implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-    this.hide();
+    if (this.overlayRef && !this.always) {
+      this.hide();
+      this.overlayRef.dispose();
+    }
   }
 
   private show(): void {
     const overlayState = new OverlayConfig();
-
-    // Get the Connected position stategy (There are other positions strategies like in the middle of the screen for modals)
-    overlayState.positionStrategy = this.getPosition();
+    let positionStrategy = this.getPosition();
+    overlayState.positionStrategy = positionStrategy;
 
     if (this.scrollStrategy === 'reposition') {
       overlayState.scrollStrategy = this.overlay.scrollStrategies.reposition();
@@ -92,18 +97,15 @@ export class TooltipDirective implements OnDestroy, OnInit {
     tooltipInstance.tooltipType = this.type;
     tooltipInstance.rounded = this.rounded;
     tooltipInstance.size = this.size;
+    tooltipInstance.positionStrategy = positionStrategy;
     tooltipInstance.show();
   }
 
   private hide(): void {
-    if (this.overlayRef && !this.always) {
-      this.overlayRef.detach();
-    }
+    this.overlayRef.detach();
   }
 
   private getPosition(): ConnectedPositionStrategy {
-    // The tooltip will try to be placed in the position given.
-    // But it has a FallbackStrategy to avoid tooltips outside of screen and that type of issues
     let strategy: ConnectedPositionStrategy;
     let originPosition;
     let overlayPosition;
@@ -114,50 +116,50 @@ export class TooltipDirective implements OnDestroy, OnInit {
       case 'right':
         originPosition = { originX: 'end', originY: 'center' };
         overlayPosition = { overlayX: 'start', overlayY: 'center' };
-        offsetX = 20;
+        offsetX = 10;
         offsetY = 0;
         break;
       case 'bottom':
         originPosition = { originX: 'center', originY: 'bottom' };
         overlayPosition = { overlayX: 'center', overlayY: 'top' };
         offsetX = 0;
-        offsetY = 20;
+        offsetY = 10;
         break;
       case 'top':
         originPosition = { originX: 'center', originY: 'top' };
         overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
         offsetX = 0;
-        offsetY = -20;
+        offsetY = -10;
         break;
       case 'left':
         originPosition = { originX: 'start', originY: 'center' };
         overlayPosition = { overlayX: 'end', overlayY: 'center' };
-        offsetX = -20;
+        offsetX = -10;
         offsetY = 0;
         break;
       case 'top-left':
         originPosition = { originX: 'start', originY: 'top' };
         overlayPosition = { overlayX: 'end', overlayY: 'bottom' };
-        offsetX = 20;
-        offsetY = -20;
+        offsetX = 10;
+        offsetY = -10;
         break;
       case 'bottom-left':
         originPosition = { originX: 'start', originY: 'bottom' };
         overlayPosition = { overlayX: 'end', overlayY: 'top' };
-        offsetX = 20;
-        offsetY = 20;
+        offsetX = 10;
+        offsetY = 10;
         break;
       case 'top-right':
         originPosition = { originX: 'end', originY: 'top' };
         overlayPosition = { overlayX: 'start', overlayY: 'bottom' };
-        offsetX = -20;
-        offsetY = -20;
+        offsetX = -10;
+        offsetY = -10;
         break;
       case 'bottom-right':
         originPosition = { originX: 'end', originY: 'bottom' };
         overlayPosition = { overlayX: 'start', overlayY: 'top' };
-        offsetX = -20;
-        offsetY = 20;
+        offsetX = -10;
+        offsetY = 10;
         break;
 
       default:
@@ -173,18 +175,18 @@ export class TooltipDirective implements OnDestroy, OnInit {
   }
   private withFallbackStrategy(strategy: ConnectedPositionStrategy): ConnectedPositionStrategy {
     strategy
-      .withFallbackPosition({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' }, 0, 20)
-      .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 0, 20)
-      .withFallbackPosition({ originX: 'end', originY: 'center' }, { overlayX: 'start', overlayY: 'center' }, 20, 0)
-      .withFallbackPosition({ originX: 'start', originY: 'center' }, { overlayX: 'end', overlayY: 'center' }, -20, 0)
-      .withFallbackPosition({ originX: 'center', originY: 'top' }, { overlayX: 'center', overlayY: 'bottom' }, 0, -20)
-      .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, 0, 20)
-      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, 0, -20)
-      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 0, -20)
-      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 20, -20)
-      .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 20, 20)
-      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -20, -20)
-      .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -20, 20);
+      .withFallbackPosition({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' }, 0, 10)
+      .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 0, 10)
+      .withFallbackPosition({ originX: 'end', originY: 'center' }, { overlayX: 'start', overlayY: 'center' }, 10, 0)
+      .withFallbackPosition({ originX: 'start', originY: 'center' }, { overlayX: 'end', overlayY: 'center' }, -10, 0)
+      .withFallbackPosition({ originX: 'center', originY: 'top' }, { overlayX: 'center', overlayY: 'bottom' }, 0, -10)
+      .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, 0, 10)
+      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, 0, -10)
+      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 0, -10)
+      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 10, -10)
+      .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 10, 10)
+      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -10, -10)
+      .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -10, 10);
 
     return strategy;
   }
