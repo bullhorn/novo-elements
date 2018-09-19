@@ -1,5 +1,15 @@
 // NG2
-import { Directive, Input, HostListener, OnDestroy, ViewChild, Component, ViewContainerRef, ElementRef, OnInit } from '@angular/core';
+import {
+  Directive,
+  Input,
+  HostListener,
+  OnDestroy,
+  ViewChild,
+  Component,
+  ViewContainerRef,
+  ElementRef,
+  AfterContentInit,
+} from '@angular/core';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { Overlay, OverlayRef, OverlayConfig, ConnectedPositionStrategy } from '@angular/cdk/overlay';
 import { NovoTooltip } from './Tooltip.component';
@@ -8,7 +18,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 @Directive({
   selector: '[tooltip]',
 })
-export class TooltipDirective implements OnDestroy, OnInit {
+export class TooltipDirective implements OnDestroy, AfterContentInit {
   @Input()
   tooltip: string;
   @Input('tooltipPosition')
@@ -62,7 +72,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
     }
   }
 
-  ngOnInit(): void {
+  ngAfterContentInit(): void {
     if (this.tooltip && this.active && this.always) {
       this.show();
     }
@@ -99,7 +109,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
     tooltipInstance.size = this.size;
     tooltipInstance.positionStrategy = positionStrategy;
     tooltipInstance.preline = this.preline;
-    tooltipInstance.show();
+    tooltipInstance.noAnimate = this.noAnimate;
   }
 
   private hide(): void {
