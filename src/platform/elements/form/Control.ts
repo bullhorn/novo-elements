@@ -208,6 +208,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   templates: any = {};
   templateContext: any;
   loading: boolean = false;
+  decimalSeparator: string = '.';
 
   constructor(
     element: ElementRef,
@@ -388,6 +389,13 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
       });
     }
+
+    this.decimalSeparator = this.getDecimalSeparator();
+  }
+
+  getDecimalSeparator(): string {
+    let result = (1.2).toLocaleString(this.locale, { minimumFractionDigits: 1 })[1];
+    return result;
   }
 
   ngOnDestroy() {
@@ -573,7 +581,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   restrictKeys(event) {
     const NUMBERS_ONLY = /[0-9\-]/;
-    const NUMBERS_WITH_DECIMAL = /[0-9\.\,\-]/;
+    const NUMBERS_WITH_DECIMAL_DOT = /[0-9\.\-]/;
+    const NUMBERS_WITH_DECIMAL_COMMA = /[0-9\,\-]/;
     const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
     let key = event.key;
     // Types
@@ -581,7 +590,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       event.preventDefault();
     } else if (
       ~['currency', 'float', 'percentage'].indexOf(this.form.controls[this.control.key].subType) &&
-      !(NUMBERS_WITH_DECIMAL.test(key) || UTILITY_KEYS.includes(key))
+      !(
+        (this.decimalSeparator === '.' && NUMBERS_WITH_DECIMAL_DOT.test(key)) ||
+        (this.decimalSeparator === ',' && NUMBERS_WITH_DECIMAL_COMMA.test(key)) ||
+        UTILITY_KEYS.includes(key)
+      )
     ) {
       event.preventDefault();
     }
