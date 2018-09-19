@@ -1,5 +1,5 @@
 // NG2
-import { Directive, Input, HostListener, OnDestroy, ViewChild, Component, ViewContainerRef, ElementRef } from '@angular/core';
+import { Directive, Input, HostListener, OnDestroy, ViewChild, Component, ViewContainerRef, ElementRef, OnInit } from '@angular/core';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { Overlay, OverlayRef, OverlayConfig, ConnectedPositionStrategy } from '@angular/cdk/overlay';
 import { NovoTooltip } from './Tooltip.component';
@@ -8,13 +8,13 @@ import { ComponentPortal } from '@angular/cdk/portal';
 @Directive({
   selector: '[tooltip]',
 })
-export class TooltipDirective implements OnDestroy {
+export class TooltipDirective implements OnDestroy, OnInit {
   @Input()
   tooltip: string;
   @Input('tooltipPosition')
   position: string = 'top';
   @Input('tooltipType')
-  type: string;
+  type: string = 'normal';
   @Input('tooltipSize')
   size: string;
   @Input('tooltipBounce')
@@ -26,7 +26,7 @@ export class TooltipDirective implements OnDestroy {
   @Input('tooltipAlways')
   always: boolean;
   @Input('tooltipActive')
-  active: boolean;
+  active: boolean = true;
   @Input('tooltipPreline')
   preline: boolean;
   private tooltipInstance: NovoTooltip | null;
@@ -49,18 +49,24 @@ export class TooltipDirective implements OnDestroy {
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    if (this.tooltip) {
+    if (this.tooltip && this.active) {
       this.show();
     }
   }
 
   @HostListener('mouseleave')
   onMouseLeave(): void {
-    // hide tooltip
+    this.hide();
+  }
+
+  ngOnInit(): void {
+    if (this.tooltip && this.active && this.always) {
+      this.show();
+    }
   }
 
   ngOnDestroy(): void {
-    // hide tooltip
+    this.hide();
   }
 
   private show(): void {
@@ -83,11 +89,14 @@ export class TooltipDirective implements OnDestroy {
 
     let tooltipInstance = this.overlayRef.attach(this.portal).instance;
     tooltipInstance.message = this.tooltip;
+    tooltipInstance.tooltipType = this.type;
+    tooltipInstance.rounded = this.rounded;
+    tooltipInstance.size = this.size;
     tooltipInstance.show();
   }
 
   private hide(): void {
-    if (this.overlayRef) {
+    if (this.overlayRef && !this.always) {
       this.overlayRef.detach();
     }
   }
@@ -98,39 +107,57 @@ export class TooltipDirective implements OnDestroy {
     let strategy: ConnectedPositionStrategy;
     let originPosition;
     let overlayPosition;
+    let offsetX: number;
+    let offsetY: number;
 
     switch (this.position) {
       case 'right':
         originPosition = { originX: 'end', originY: 'center' };
         overlayPosition = { overlayX: 'start', overlayY: 'center' };
+        offsetX = 20;
+        offsetY = 0;
         break;
       case 'bottom':
         originPosition = { originX: 'center', originY: 'bottom' };
         overlayPosition = { overlayX: 'center', overlayY: 'top' };
+        offsetX = 0;
+        offsetY = 20;
         break;
       case 'top':
         originPosition = { originX: 'center', originY: 'top' };
         overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
+        offsetX = 0;
+        offsetY = -20;
         break;
       case 'left':
         originPosition = { originX: 'start', originY: 'center' };
         overlayPosition = { overlayX: 'end', overlayY: 'center' };
+        offsetX = -20;
+        offsetY = 0;
         break;
       case 'top-left':
         originPosition = { originX: 'start', originY: 'top' };
         overlayPosition = { overlayX: 'end', overlayY: 'bottom' };
+        offsetX = 20;
+        offsetY = -20;
         break;
       case 'bottom-left':
         originPosition = { originX: 'start', originY: 'bottom' };
         overlayPosition = { overlayX: 'end', overlayY: 'top' };
+        offsetX = 20;
+        offsetY = 20;
         break;
       case 'top-right':
         originPosition = { originX: 'end', originY: 'top' };
         overlayPosition = { overlayX: 'start', overlayY: 'bottom' };
+        offsetX = -20;
+        offsetY = -20;
         break;
       case 'bottom-right':
         originPosition = { originX: 'end', originY: 'bottom' };
         overlayPosition = { overlayX: 'start', overlayY: 'top' };
+        offsetX = -20;
+        offsetY = 20;
         break;
 
       default:
@@ -139,8 +166,8 @@ export class TooltipDirective implements OnDestroy {
     strategy = this.overlay
       .position()
       .connectedTo(this.elementRef, originPosition, overlayPosition)
-      .withOffsetX(20)
-      .withOffsetY(0);
+      .withOffsetX(offsetX)
+      .withOffsetY(offsetY);
 
     return this.withFallbackStrategy(strategy);
   }
@@ -153,7 +180,12 @@ export class TooltipDirective implements OnDestroy {
       .withFallbackPosition({ originX: 'center', originY: 'top' }, { overlayX: 'center', overlayY: 'bottom' }, 0, -20)
       .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, 0, 20)
       .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, 0, -20)
-      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 0, -20);
+      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 0, -20)
+      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 20, -20)
+      .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 20, 20)
+      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -20, -20)
+      .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -20, 20);
+
     return strategy;
   }
 }

@@ -9,5 +9,40 @@
     white-space: nowrap;
     text-shadow: 0 -1px 0 #000;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    &.error {
+      background-color: #b34e4d;
+      text-shadow: 0 -1px 0 #592726;
+    }
+    &.info {
+      background-color: #3986ac;
+      text-shadow: 0 -1px 0 #1a3c4d;
+    }
+    &.warning {
+      background-color: #c09854;
+      text-shadow: 0 -1px 0 #6c5328;
+    }
+    &.success {
+      background-color: #458746;
+      text-shadow: 0 -1px 0 #1a321a;
+    }
+    &.rounded {
+      border-radius: 4px;
+    }
+    &.large,
+    &.small,
+    &.medium {
+      white-space: normal;
+      line-height: 1.4em;
+      word-wrap: break-word;
+    }
+    &.large {
+      width: 300px;
+    }
+    &.medium {
+      width: 150px;
+    }
+    &.small {
+      width: 80px;
+    }
   }
 }
