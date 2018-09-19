@@ -6,17 +6,13 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 
 @Component({
   selector: 'novo-tooltip',
-  template: `<div [@state]="noAnimate ? 'no-animation' : 'visible'" [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '', this.preline? 'preline' : '']" 
-  [ngStyle]="style">{{message}}</div>`,
+  template: `<div [@state]="noAnimate ? 'no-animation' : 'visible'" 
+  [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '', this.preline? 'preline' : '']">{{message}}</div>`,
   styleUrls: ['./Tooltip.scss'],
   animations: [
     trigger('state', [
-      state('initial, void, hidden', style({ opacity: '0', transform: 'translate(0px, 0px)' })),
-      state(
-        'visible',
-        style({ opacity: '1', transform: 'translate({{positionStrategy.withOffsetX}}px, {{positionStrategy.withOffsetY}}px)' }),
-        { params: { 'positionStrategy.withOffsetX': 0, 'positionStrategy.withOffsetY': 0 } },
-      ),
+      state('initial, void, hidden', style({ opacity: '0' })),
+      state('visible', style({ opacity: '1' })),
       transition('* => visible', [
         style({
           opacity: 0,

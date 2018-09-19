@@ -1,15 +1,5 @@
 // NG2
-import {
-  Directive,
-  Input,
-  HostListener,
-  OnDestroy,
-  ViewChild,
-  Component,
-  ViewContainerRef,
-  ElementRef,
-  AfterContentInit,
-} from '@angular/core';
+import { Directive, Input, HostListener, OnDestroy, ViewChild, Component, ViewContainerRef, ElementRef, OnChanges } from '@angular/core';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { Overlay, OverlayRef, OverlayConfig, ConnectedPositionStrategy } from '@angular/cdk/overlay';
 import { NovoTooltip } from './Tooltip.component';
@@ -18,7 +8,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 @Directive({
   selector: '[tooltip]',
 })
-export class TooltipDirective implements OnDestroy, AfterContentInit {
+export class TooltipDirective implements OnDestroy, OnChanges {
   @Input()
   tooltip: string;
   @Input('tooltipPosition')
@@ -72,7 +62,7 @@ export class TooltipDirective implements OnDestroy, AfterContentInit {
     }
   }
 
-  ngAfterContentInit(): void {
+  ngOnChanges(): void {
     if (this.tooltip && this.active && this.always) {
       this.show();
     }
@@ -88,7 +78,7 @@ export class TooltipDirective implements OnDestroy, AfterContentInit {
   private show(): void {
     const overlayState = new OverlayConfig();
     let positionStrategy = this.getPosition();
-    overlayState.positionStrategy = positionStrategy;
+    overlayState.positionStrategy = positionStrategy.strategy;
 
     if (this.scrollStrategy === 'reposition') {
       overlayState.scrollStrategy = this.overlay.scrollStrategies.reposition();
@@ -116,7 +106,7 @@ export class TooltipDirective implements OnDestroy, AfterContentInit {
     this.overlayRef.detach();
   }
 
-  private getPosition(): ConnectedPositionStrategy {
+  private getPosition(): { strategy: ConnectedPositionStrategy; offsetY: number; offsetX: number } {
     let strategy: ConnectedPositionStrategy;
     let originPosition;
     let overlayPosition;
@@ -127,50 +117,50 @@ export class TooltipDirective implements OnDestroy, AfterContentInit {
       case 'right':
         originPosition = { originX: 'end', originY: 'center' };
         overlayPosition = { overlayX: 'start', overlayY: 'center' };
-        offsetX = 10;
+        offsetX = 8;
         offsetY = 0;
         break;
       case 'bottom':
         originPosition = { originX: 'center', originY: 'bottom' };
         overlayPosition = { overlayX: 'center', overlayY: 'top' };
         offsetX = 0;
-        offsetY = 10;
+        offsetY = 8;
         break;
       case 'top':
         originPosition = { originX: 'center', originY: 'top' };
         overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
         offsetX = 0;
-        offsetY = -10;
+        offsetY = -8;
         break;
       case 'left':
         originPosition = { originX: 'start', originY: 'center' };
         overlayPosition = { overlayX: 'end', overlayY: 'center' };
-        offsetX = -10;
+        offsetX = -8;
         offsetY = 0;
         break;
       case 'top-left':
         originPosition = { originX: 'start', originY: 'top' };
         overlayPosition = { overlayX: 'end', overlayY: 'bottom' };
-        offsetX = 10;
-        offsetY = -10;
+        offsetX = 8;
+        offsetY = -8;
         break;
       case 'bottom-left':
         originPosition = { originX: 'start', originY: 'bottom' };
         overlayPosition = { overlayX: 'end', overlayY: 'top' };
-        offsetX = 10;
-        offsetY = 10;
+        offsetX = 8;
+        offsetY = 8;
         break;
       case 'top-right':
         originPosition = { originX: 'end', originY: 'top' };
         overlayPosition = { overlayX: 'start', overlayY: 'bottom' };
-        offsetX = -10;
-        offsetY = -10;
+        offsetX = -8;
+        offsetY = -8;
         break;
       case 'bottom-right':
         originPosition = { originX: 'end', originY: 'bottom' };
         overlayPosition = { overlayX: 'start', overlayY: 'top' };
-        offsetX = -10;
-        offsetY = 10;
+        offsetX = -8;
+        offsetY = 8;
         break;
 
       default:
@@ -182,22 +172,22 @@ export class TooltipDirective implements OnDestroy, AfterContentInit {
       .withOffsetX(offsetX)
       .withOffsetY(offsetY);
 
-    return this.withFallbackStrategy(strategy);
+    return { strategy: this.withFallbackStrategy(strategy), offsetY: offsetY, offsetX: offsetX };
   }
   private withFallbackStrategy(strategy: ConnectedPositionStrategy): ConnectedPositionStrategy {
     strategy
-      .withFallbackPosition({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' }, 0, 10)
-      .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 0, 10)
-      .withFallbackPosition({ originX: 'end', originY: 'center' }, { overlayX: 'start', overlayY: 'center' }, 10, 0)
-      .withFallbackPosition({ originX: 'start', originY: 'center' }, { overlayX: 'end', overlayY: 'center' }, -10, 0)
-      .withFallbackPosition({ originX: 'center', originY: 'top' }, { overlayX: 'center', overlayY: 'bottom' }, 0, -10)
-      .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, 0, 10)
-      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, 0, -10)
-      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 0, -10)
-      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 10, -10)
-      .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 10, 10)
-      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -10, -10)
-      .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -10, 10);
+      .withFallbackPosition({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' }, 0, 8)
+      .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 0, 8)
+      .withFallbackPosition({ originX: 'end', originY: 'center' }, { overlayX: 'start', overlayY: 'center' }, 8, 0)
+      .withFallbackPosition({ originX: 'start', originY: 'center' }, { overlayX: 'end', overlayY: 'center' }, -8, 0)
+      .withFallbackPosition({ originX: 'center', originY: 'top' }, { overlayX: 'center', overlayY: 'bottom' }, 0, -8)
+      .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, 0, 8)
+      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, 0, -8)
+      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 0, -8)
+      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 8, -8)
+      .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 8, 8)
+      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -8, -8)
+      .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 8);
 
     return strategy;
   }
