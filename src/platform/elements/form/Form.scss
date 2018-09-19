@@ -126,6 +126,9 @@ novo-form {
             pointer-events: none;
           }
           &.disabled {
+            input {
+              -webkit-text-fill-color: $dark;
+            }
             input:not(.picker-input):not(.tiles-input) {
               &::-webkit-input-placeholder {
                 color: lighten($dark, 30%) !important;
@@ -137,6 +140,7 @@ novo-form {
             }
             textarea {
               border-bottom-style: dashed !important;
+              -webkit-text-fill-color: $dark;
             }
             div[type='button'] {
               border-bottom-style: dashed !important;
