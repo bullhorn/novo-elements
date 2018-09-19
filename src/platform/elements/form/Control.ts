@@ -59,7 +59,6 @@ export class NovoAutoSize implements AfterContentInit {
 //undo all template context references!
 @Component({
   selector: 'novo-control',
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   template: `
         <div class="novo-control-container" [hidden]="form.controls[control.key].hidden || form.controls[control.key].type === 'hidden' || form.controls[control.key].controlType === 'hidden'">
             <!--Encrypted Field-->
