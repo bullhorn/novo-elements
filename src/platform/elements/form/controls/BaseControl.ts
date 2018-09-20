@@ -55,7 +55,7 @@ export interface NovoControlConfig {
   tooltipPosition?: string;
   tooltipSize?: string;
   tooltipPreline?: boolean;
-  tooltipArrow?: boolean;
+  removeTooltipArrow?: boolean;
   layoutOptions?: {
     order?: string;
     download?: boolean;
@@ -128,7 +128,7 @@ export class BaseControl {
   tooltipPosition?: string;
   tooltipSize?: string;
   tooltipPreline?: boolean;
-  tooltipArrow?: boolean;
+  removeTooltipArrow?: boolean;
   layoutOptions?: { order?: string; download?: boolean; labelStyle?: string; draggable?: boolean; iconStyle?: string };
   template?: any;
   customControlConfig?: any;
@@ -212,7 +212,7 @@ export class BaseControl {
       this.tooltipPosition = config.tooltipPosition;
       this.tooltipSize = config.tooltipSize;
       this.tooltipPreline = config.tooltipPreline;
-      this.tooltipArrow = config.tooltipArrow;
+      this.removeTooltipArrow = config.removeTooltipArrow;
     }
     this.template = config.template;
     this.customControlConfig = config.customControlConfig;

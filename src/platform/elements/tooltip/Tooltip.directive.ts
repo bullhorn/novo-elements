@@ -1,5 +1,5 @@
 // NG2
-import { Directive, Input, HostListener, OnDestroy, ViewChild, Component, ViewContainerRef, ElementRef, OnChanges } from '@angular/core';
+import { Directive, Input, HostListener, OnDestroy, ViewChild, Component, ViewContainerRef, ElementRef, OnInit } from '@angular/core';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import {
   Overlay,
@@ -8,6 +8,7 @@ import {
   ConnectedPositionStrategy,
   OriginConnectionPosition,
   OverlayConnectionPosition,
+  ScrollStrategy,
 } from '@angular/cdk/overlay';
 import { NovoTooltip } from './Tooltip.component';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -15,7 +16,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 @Directive({
   selector: '[tooltip]',
 })
-export class TooltipDirective implements OnDestroy, OnChanges {
+export class TooltipDirective implements OnDestroy, OnInit {
   @Input()
   tooltip: string;
   @Input('tooltipPosition')
@@ -36,12 +37,11 @@ export class TooltipDirective implements OnDestroy, OnChanges {
   active: boolean = true;
   @Input('tooltipPreline')
   preline: boolean;
-  @Input('tooltipArrow')
-  arrow: boolean = true;
+  @Input('removeTooltipArrow')
+  removeArrow: boolean = false;
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
   private overlayRef: OverlayRef;
-  private scrollStrategy: string;
 
   constructor(protected overlay: Overlay, private viewContainerRef: ViewContainerRef, private elementRef: ElementRef) {}
   isPosition(position: string): boolean {
@@ -71,8 +71,8 @@ export class TooltipDirective implements OnDestroy, OnChanges {
     }
   }
 
-  ngOnChanges(): void {
-    if (this.tooltip && this.active && this.always) {
+  ngOnInit(): void {
+    if (this.tooltip && this.always && this.active) {
       this.show();
     }
   }
@@ -86,10 +86,9 @@ export class TooltipDirective implements OnDestroy, OnChanges {
 
   private show(): void {
     const overlayState = new OverlayConfig();
-    let positionStrategy = this.getPosition();
-    overlayState.positionStrategy = positionStrategy;
+    overlayState.positionStrategy = this.getPosition();
 
-    if (this.scrollStrategy === 'reposition') {
+    if (this.always) {
       overlayState.scrollStrategy = this.overlay.scrollStrategies.reposition();
     } else {
       overlayState.scrollStrategy = this.overlay.scrollStrategies.close();
@@ -108,11 +107,13 @@ export class TooltipDirective implements OnDestroy, OnChanges {
     tooltipInstance.size = this.size;
     tooltipInstance.preline = this.preline;
     tooltipInstance.noAnimate = this.noAnimate;
-    tooltipInstance.position = this.arrow ? this.position : 'no-arrow';
+    tooltipInstance.position = this.removeArrow ? 'no-arrow' : this.position;
   }
 
   private hide(): void {
-    this.overlayRef.detach();
+    if (this.overlayRef) {
+      this.overlayRef.detach();
+    }
   }
 
   private getPosition(): ConnectedPositionStrategy {
