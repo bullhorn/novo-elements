@@ -15,6 +15,9 @@ import { ComponentPortal } from '@angular/cdk/portal';
 
 @Directive({
   selector: '[tooltip]',
+  host: {
+    '[attr.data-hint]': 'tooltip',
+  },
 })
 export class TooltipDirective implements OnDestroy, OnInit {
   @Input()
