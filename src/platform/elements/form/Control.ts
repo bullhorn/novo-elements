@@ -391,9 +391,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     this.decimalSeparator = this.getDecimalSeparator();
+    console.log('decimalSeparator:' + this.decimalSeparator);
   }
 
   getDecimalSeparator(): string {
+    console.log('locale:' + this.locale);
     let result = new Intl.NumberFormat(this.locale).format(1.2)[1];
     return result;
   }
@@ -580,6 +582,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   restrictKeys(event) {
+    debugger;
     const NUMBERS_ONLY = /[0-9\-]/;
     const NUMBERS_WITH_DECIMAL_DOT = /[0-9\.\-]/;
     const NUMBERS_WITH_DECIMAL_COMMA = /[0-9\,\-]/;
