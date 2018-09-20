@@ -391,11 +391,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     this.decimalSeparator = this.getDecimalSeparator();
-    console.log('decimalSeparator:' + this.decimalSeparator);
+    console.error('decimalSeparator:[' + this.decimalSeparator + ']');
   }
 
   getDecimalSeparator(): string {
-    console.log('locale:' + this.locale);
+    console.error('locale:[' + this.locale + ']');
     let result = new Intl.NumberFormat(this.locale).format(1.2)[1];
     return result;
   }
@@ -582,12 +582,20 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   restrictKeys(event) {
-    debugger;
     const NUMBERS_ONLY = /[0-9\-]/;
     const NUMBERS_WITH_DECIMAL_DOT = /[0-9\.\-]/;
     const NUMBERS_WITH_DECIMAL_COMMA = /[0-9\,\-]/;
     const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
     let key = event.key;
+
+    console.error('restrictKeys using=[' + this.decimalSeparator + ']');
+    if (this.decimalSeparator === '.' && NUMBERS_WITH_DECIMAL_DOT.test(key)) {
+      console.error('Using NUMBERS_WITH_DECIMAL_DOT');
+    }
+    if (this.decimalSeparator === ',' && NUMBERS_WITH_DECIMAL_COMMA.test(key)) {
+      console.error('Using NUMBERS_WITH_DECIMAL_COMMA');
+    }
+
     // Types
     if (this.form.controls[this.control.key].subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
       event.preventDefault();
