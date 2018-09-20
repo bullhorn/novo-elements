@@ -36,6 +36,8 @@ export class TooltipDirective implements OnDestroy, OnChanges {
   active: boolean = true;
   @Input('tooltipPreline')
   preline: boolean;
+  @Input('tooltipArrow')
+  arrow: boolean = true;
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
   private overlayRef: OverlayRef;
@@ -106,7 +108,7 @@ export class TooltipDirective implements OnDestroy, OnChanges {
     tooltipInstance.size = this.size;
     tooltipInstance.preline = this.preline;
     tooltipInstance.noAnimate = this.noAnimate;
-    tooltipInstance.position = this.position;
+    tooltipInstance.position = this.arrow ? this.position : 'no-arrow';
   }
 
   private hide(): void {

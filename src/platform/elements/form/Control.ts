@@ -155,15 +155,24 @@ export class NovoAutoSize implements AfterContentInit {
   },
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
-  @Input() control: any;
-  @Input() form: any;
-  @Input() condensed: boolean = false;
-  @Input() autoFocus: boolean = false;
-  @Output() change: EventEmitter<any> = new EventEmitter();
-  @Output() edit: EventEmitter<any> = new EventEmitter();
-  @Output() save: EventEmitter<any> = new EventEmitter();
-  @Output() delete: EventEmitter<any> = new EventEmitter();
-  @Output() upload: EventEmitter<any> = new EventEmitter();
+  @Input()
+  control: any;
+  @Input()
+  form: any;
+  @Input()
+  condensed: boolean = false;
+  @Input()
+  autoFocus: boolean = false;
+  @Output()
+  change: EventEmitter<any> = new EventEmitter();
+  @Output()
+  edit: EventEmitter<any> = new EventEmitter();
+  @Output()
+  save: EventEmitter<any> = new EventEmitter();
+  @Output()
+  delete: EventEmitter<any> = new EventEmitter();
+  @Output()
+  upload: EventEmitter<any> = new EventEmitter();
   @Output('blur')
   get onBlur(): Observable<FocusEvent> {
     return this._blurEmitter.asObservable();
@@ -357,6 +366,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this.templateContext.$implicit.tooltip = this.tooltip;
     this.templateContext.$implicit.tooltipSize = this.tooltipSize;
     this.templateContext.$implicit.tooltipPreline = this.tooltipPreline;
+    this.templateContext.$implicit.tooltipArrow = this.tooltipArrow;
     this.templateContext.$implicit.startupFocus = this.form.controls[this.control.key].startupFocus;
     this.templateContext.$implicit.fileBrowserImageUploadUrl = this.form.controls[this.control.key].fileBrowserImageUploadUrl;
     this.templateContext.$implicit.minimal = this.form.controls[this.control.key].minimal;
@@ -446,6 +456,13 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       return false;
     }
     return this.form.controls[this.control.key].tooltipPreline;
+  }
+
+  get tooltipArrow() {
+    if (Helpers.isBlank(this.form.controls[this.control.key].tooltipArrow)) {
+      return false;
+    }
+    return this.form.controls[this.control.key].tooltipArrow;
   }
 
   get alwaysActive() {
