@@ -583,7 +583,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     const NUMBERS_WITH_DECIMAL_COMMA = /[0-9\,\-]/;
     const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
     let key = event.key;
-
     // Types
     if (this.form.controls[this.control.key].subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
       event.preventDefault();
