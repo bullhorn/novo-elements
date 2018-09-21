@@ -61,12 +61,13 @@ describe('Elements: NovoFileInputElement', () => {
         });
     });
     describe('Method: updateLayout()', () => {
-        it('should set layoutOptions and call insertTemplatesBasedOnLayout', () => {
+        it('should set default layoutOptions and call insertTemplatesBasedOnLayout', () => {
             expect(component.updateLayout).toBeDefined();
             expect(component.layoutOptions).not.toBeDefined();
             spyOn(component, 'insertTemplatesBasedOnLayout');
             component.updateLayout();
             expect(component.layoutOptions).toBeDefined();
+            expect(component.layoutOptions).toEqual({ order: 'default', download: true, remove: true, labelStyle: 'default', draggable: false });
             expect(component.insertTemplatesBasedOnLayout).toHaveBeenCalled();
         });
     });
