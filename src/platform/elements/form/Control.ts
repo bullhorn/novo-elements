@@ -220,6 +220,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     @Inject(LOCALE_ID) private locale: string = 'en-US',
   ) {
     super(element);
+    console.error('Control constructor locale=[' + locale + ']');
   }
 
   get maxlengthMetField(): string {
