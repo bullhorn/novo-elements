@@ -218,10 +218,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private templateService: NovoTemplateService,
     private changeDetectorRef: ChangeDetectorRef,
     @Inject(LOCALE_ID) private locale: string = 'en-US',
-  ) {
-    super(element);
-    console.error('Control constructor locale=[' + locale + ']');
-  }
+  ) {}
 
   get maxlengthMetField(): string {
     if (this.maxLengthMetErrorfields && this.maxLengthMetErrorfields.length) {
@@ -392,11 +389,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
 
     this.decimalSeparator = this.getDecimalSeparator();
-    console.error('decimalSeparator:[' + this.decimalSeparator + ']');
   }
 
   getDecimalSeparator(): string {
-    console.error('locale:[' + this.locale + ']');
     let result = new Intl.NumberFormat(this.locale).format(1.2)[1];
     return result;
   }
@@ -588,14 +583,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     const NUMBERS_WITH_DECIMAL_COMMA = /[0-9\,\-]/;
     const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
     let key = event.key;
-
-    console.error('restrictKeys using=[' + this.decimalSeparator + ']');
-    if (this.decimalSeparator === '.' && NUMBERS_WITH_DECIMAL_DOT.test(key)) {
-      console.error('Using NUMBERS_WITH_DECIMAL_DOT');
-    }
-    if (this.decimalSeparator === ',' && NUMBERS_WITH_DECIMAL_COMMA.test(key)) {
-      console.error('Using NUMBERS_WITH_DECIMAL_COMMA');
-    }
 
     // Types
     if (this.form.controls[this.control.key].subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
