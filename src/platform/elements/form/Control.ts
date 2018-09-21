@@ -583,7 +583,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   validateIntegerInput() {
     const NUMBERS_ONLY = /^[\d\-]\d*$/;
-    if (!NUMBERS_ONLY.test(this.form.controls[this.control.key].value)) {
+    if (this.form.controls[this.control.key].value && !NUMBERS_ONLY.test(this.form.controls[this.control.key].value)) {
       this.form.controls[this.control.key].markAsInvalid(this.labels.invalidIntegerInput);
     }
   }
