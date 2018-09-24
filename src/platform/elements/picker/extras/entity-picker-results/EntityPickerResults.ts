@@ -78,8 +78,10 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
     `,
 })
 export class EntityPickerResult {
-  @Input() match: any;
-  @Input() term: any;
+  @Input()
+  match: any;
+  @Input()
+  term: any;
 
   constructor(public labels: NovoLabelService) {}
 
@@ -103,6 +105,7 @@ export class EntityPickerResult {
    * @description This function should return a <strong>-tag wrapped HTML string.
    */
   highlight(match, query) {
+    query = query.trim();
     // Replaces the capture string with a the same string inside of a "strong" tag
     return query && match ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
   }
@@ -194,7 +197,8 @@ export class EntityPickerResult {
     `,
 })
 export class EntityPickerResults extends BasePickerResults {
-  @Output() select: EventEmitter<any> = new EventEmitter();
+  @Output()
+  select: EventEmitter<any> = new EventEmitter();
   constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
     super(element, ref);
   }

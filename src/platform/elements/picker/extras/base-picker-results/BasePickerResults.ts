@@ -16,7 +16,8 @@ import { OverlayRef } from '@angular/cdk/overlay';
 export class BasePickerResults {
   _term: string = '';
   selected: Array<any> = [];
-  @Input() matches: any = [];
+  @Input()
+  matches: any = [];
   hasError: boolean = false;
   isLoading: boolean = false;
   isStatic: boolean = true;
@@ -135,7 +136,10 @@ export class BasePickerResults {
             // Arrays are returned immediately
             resolve(this.structureArray(options));
           } else if (term && term.length >= (this.config.minSearchLength || 1)) {
-            if ((options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) || Object.getPrototypeOf(options).hasOwnProperty('then')) {
+            if (
+              (options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) ||
+              Object.getPrototypeOf(options).hasOwnProperty('then')
+            ) {
               this.isStatic = false;
               // Promises (ES6 or Deferred) are resolved whenever they resolve
               options.then(this.structureArray.bind(this)).then(resolve, reject);
@@ -344,6 +348,7 @@ export class BasePickerResults {
    * @description This function should return a <strong>-tag wrapped HTML string.
    */
   highlight(match, query) {
+    query = query.trim();
     // Replaces the capture string with a the same string inside of a "strong" tag
     return query ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
   }
