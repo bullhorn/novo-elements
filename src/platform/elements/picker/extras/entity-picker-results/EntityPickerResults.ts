@@ -105,9 +105,8 @@ export class EntityPickerResult {
    * @description This function should return a <strong>-tag wrapped HTML string.
    */
   highlight(match, query) {
-    query = query.trim();
     // Replaces the capture string with a the same string inside of a "strong" tag
-    return query && match ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
+    return query && match ? match.replace(new RegExp(this.escapeRegexp(query.trim()), 'gi'), '<strong>$&</strong>') : match;
   }
 
   getIconForResult(result?: any): string {
