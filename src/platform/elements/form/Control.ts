@@ -12,6 +12,8 @@ import {
   HostListener,
   AfterContentInit,
   AfterViewInit,
+  LOCALE_ID,
+  Inject,
 } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs/Observable';
@@ -155,15 +157,24 @@ export class NovoAutoSize implements AfterContentInit {
   },
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
-  @Input() control: any;
-  @Input() form: any;
-  @Input() condensed: boolean = false;
-  @Input() autoFocus: boolean = false;
-  @Output() change: EventEmitter<any> = new EventEmitter();
-  @Output() edit: EventEmitter<any> = new EventEmitter();
-  @Output() save: EventEmitter<any> = new EventEmitter();
-  @Output() delete: EventEmitter<any> = new EventEmitter();
-  @Output() upload: EventEmitter<any> = new EventEmitter();
+  @Input()
+  control: any;
+  @Input()
+  form: any;
+  @Input()
+  condensed: boolean = false;
+  @Input()
+  autoFocus: boolean = false;
+  @Output()
+  change: EventEmitter<any> = new EventEmitter();
+  @Output()
+  edit: EventEmitter<any> = new EventEmitter();
+  @Output()
+  save: EventEmitter<any> = new EventEmitter();
+  @Output()
+  delete: EventEmitter<any> = new EventEmitter();
+  @Output()
+  upload: EventEmitter<any> = new EventEmitter();
   @Output('blur')
   get onBlur(): Observable<FocusEvent> {
     return this._blurEmitter.asObservable();
@@ -197,6 +208,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   templates: any = {};
   templateContext: any;
   loading: boolean = false;
+  decimalSeparator: string = '.';
 
   constructor(
     element: ElementRef,
@@ -205,6 +217,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     private fieldInteractionApi: FieldInteractionApi,
     private templateService: NovoTemplateService,
     private changeDetectorRef: ChangeDetectorRef,
+    @Inject(LOCALE_ID) private locale: string = 'en-US',
   ) {
     super(element);
   }
@@ -386,6 +399,13 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
       });
     }
+
+    this.decimalSeparator = this.getDecimalSeparator();
+  }
+
+  getDecimalSeparator(): string {
+    let result = new Intl.NumberFormat(this.locale).format(1.2)[1];
+    return result;
   }
 
   ngOnDestroy() {
@@ -571,15 +591,21 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   restrictKeys(event) {
     const NUMBERS_ONLY = /[0-9\-]/;
-    const NUMBERS_WITH_DECIMAL = /[0-9\.\-]/;
+    const NUMBERS_WITH_DECIMAL_DOT = /[0-9\.\-]/;
+    const NUMBERS_WITH_DECIMAL_COMMA = /[0-9\,\-]/;
     const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
     let key = event.key;
+
     // Types
     if (this.form.controls[this.control.key].subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
       event.preventDefault();
     } else if (
       ~['currency', 'float', 'percentage'].indexOf(this.form.controls[this.control.key].subType) &&
-      !(NUMBERS_WITH_DECIMAL.test(key) || UTILITY_KEYS.includes(key))
+      !(
+        (this.decimalSeparator === '.' && NUMBERS_WITH_DECIMAL_DOT.test(key)) ||
+        (this.decimalSeparator === ',' && NUMBERS_WITH_DECIMAL_COMMA.test(key)) ||
+        UTILITY_KEYS.includes(key)
+      )
     ) {
       event.preventDefault();
     }

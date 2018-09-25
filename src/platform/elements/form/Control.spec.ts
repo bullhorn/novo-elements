@@ -1,28 +1,31 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 // App
 import { NovoAutoSize } from './Control';
+import { NovoControlElement } from './Control';
 
 @Component({
   selector: 'novo-auto-size-test-component',
   template: `
         <textarea autosize></textarea>
     `,
-  styles: [`
-    textarea {
-      width: 100px;
-      height: 20px;
-      min-height: 20px;
-      padding: 0;
-      margin: 0;
-      border: 0;
-      line-height: 20px;
-    }
-  `]
+  styles: [
+    `
+      textarea {
+        width: 100px;
+        height: 20px;
+        min-height: 20px;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        line-height: 20px;
+      }
+    `,
+  ],
 })
-class NovoAutoSizeTestComponent { }
+class NovoAutoSizeTestComponent {}
 
 describe('Elements: NovoAutoSize', () => {
   describe('Directive:', () => {
@@ -32,10 +35,7 @@ describe('Elements: NovoAutoSize', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        declarations: [
-          NovoAutoSize,
-          NovoAutoSizeTestComponent
-        ]
+        declarations: [NovoAutoSize, NovoAutoSizeTestComponent],
       }).compileComponents();
       fixture = TestBed.createComponent(NovoAutoSizeTestComponent);
       component = fixture.debugElement.componentInstance;
@@ -53,7 +53,7 @@ describe('Elements: NovoAutoSize', () => {
       expect(textarea.clientHeight).toBe(initialHeight * 3);
     });
 
-    it ('should shrink when content is removed', () => {
+    it('should shrink when content is removed', () => {
       textarea.value = 'textarea \n should \n shrink'; // Three lines of text
       textarea.dispatchEvent(new Event('input'));
       const initialHeight = textarea.clientHeight;
@@ -61,5 +61,15 @@ describe('Elements: NovoAutoSize', () => {
       textarea.dispatchEvent(new Event('input'));
       expect(textarea.clientHeight).toBe(initialHeight / 3);
     });
+  });
+});
+
+describe('Test Localization', () => {
+  let mockElement: ElementRef = new ElementRef(document.createElement('div'));
+
+  it('should set decimal seperator based on locale correctly', () => {
+    let component = new NovoControlElement(mockElement, null, null, null, null, null, 'fr-FR');
+    let decimalSeperator = component.getDecimalSeparator();
+    expect(decimalSeperator).toBe(',');
   });
 });
