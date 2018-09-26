@@ -37,6 +37,9 @@ novo-address {
   .street-address {
     flex: 3 3 75%;
     padding: 0 0 5px !important;
+    &.disabled {
+      padding: 0 2px 5px 0 !important;
+    }
   }
   .apt {
     flex: 1 1 25%;
@@ -46,11 +49,17 @@ novo-address {
   .city {
     flex: 2 2 28%;
     padding: 5px 0 !important;
+    &.disabled {
+      padding: 5px 2px 5px 0 !important;
+    }
   }
   .state {
     flex: 1 1 30%;
     align-items: center;
-    &>div {
+    &.disabled {
+      padding-right: 2px;
+    }
+    & > div {
       padding: 19px 29px 17px 0 !important;
     }
   }
@@ -65,7 +74,14 @@ novo-address {
   .disabled {
     i.required-indicator.bhi-circle,
     i.required-indicator.bhi-check {
-      border-bottom: 1px dashed lighten($dark, 30%) !important;
+      display: none !important;
+    }
+    pointer-events: none;
+    input {
+      &::-webkit-input-placeholder {
+        color: lighten($dark, 30%) !important;
+      }
+      border-bottom-style: dashed !important;
     }
   }
 }

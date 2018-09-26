@@ -248,7 +248,9 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
 
   setDisabledState(disabled: boolean): void {
     this.disabled = disabled;
-    CKEDITOR.instances[this.instance.name].setReadOnly(disabled);
+    if (this.instance) {
+      CKEDITOR.instances[this.instance.name].setReadOnly(disabled);
+    }
   }
 
   insertText(text) {

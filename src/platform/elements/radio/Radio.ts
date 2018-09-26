@@ -22,7 +22,7 @@ export class NovoRadioGroup {}
   providers: [RADIO_VALUE_ACCESSOR],
   template: `
         <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" (change)="select($event)" [disabled]="disabled">
-        <label [attr.for]="name" (click)="select($event)">
+        <label [attr.for]="name" (click)="select($event)" [class.disabled]="disabled">
             <button *ngIf="button" [ngClass]="{'unchecked': !checked, 'checked': checked, 'has-icon': !!icon}" [theme]="theme" [icon]="icon">{{ label }}</button>
             <div *ngIf="!button">
                 <i [ngClass]="{'bhi-radio-empty': !checked, 'bhi-radio-filled': checked}"></i>
