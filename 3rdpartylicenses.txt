@@ -105,21 +105,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 MIT
 MIT
 
-date-fns@1.29.0
-MIT
-# License
-
-date-fns is licensed under the [MIT license](http://kossnocorp.mit-license.org).
-Read more about MIT at [TLDRLegal](https://tldrlegal.com/license/mit-license).
-
-@angular/platform-browser@5.2.11
-MIT
-MIT
-
-@angular/animations@5.2.11
-MIT
-MIT
-
 @angular/cdk@5.2.4
 MIT
 The MIT License
@@ -143,6 +128,21 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+@angular/animations@5.2.11
+MIT
+MIT
+
+date-fns@1.29.0
+MIT
+# License
+
+date-fns is licensed under the [MIT license](http://kossnocorp.mit-license.org).
+Read more about MIT at [TLDRLegal](https://tldrlegal.com/license/mit-license).
+
+@angular/platform-browser@5.2.11
+MIT
+MIT
 
 @bullhorn/dragula@1.0.1
 MIT
