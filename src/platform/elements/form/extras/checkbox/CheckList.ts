@@ -15,7 +15,7 @@ const CHECKLIST_VALUE_ACCESSOR = {
   selector: 'novo-check-list',
   providers: [CHECKLIST_VALUE_ACCESSOR],
   template: `
-        <div class="check-box-group" *ngFor="let option of _options; let i = index" [ngClass]="{checked: option.checked}" >
+        <div class="check-box-group" *ngFor="let option of _options; let i = index" [ngClass]="{checked: option.checked}" [class.disabled]="disabled">
             <input [name]="name" type="checkbox" [ngModel]="option.checked" [attr.id]="name+i" [value]="option.checked" (change)="select($event, option)" [disabled]="disabled">
             <label [attr.for]="name+i" (click)="select($event, option)">
               <i [ngClass]="{'bhi-checkbox-empty': !option.checked, 'bhi-checkbox-filled': option.checked }"></i>

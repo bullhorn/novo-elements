@@ -1,0 +1,10 @@
+<novo-dynamic-form [autoFocusFirstField]="true" class="dynamic" [fieldsets]="disabledControls" [(form)]="disabledForm" #myform></novo-dynamic-form>
+<div class="final-value">Values: {{myform.values | json}}</div>
+<br>
+<h5>QUICK NOTE</h5>
+<br>
+<novo-quick-note [(ngModel)]="disabledNote" [placeholder]="placeholder" [config]="disabledQuickNote"></novo-quick-note>
+<div class="data">
+  <p>Note: {{note | json}}</p>
+</div>
+
