@@ -62,6 +62,7 @@ export class DataTableSource<T> extends DataSource<T> {
           this.ref.markForCheck();
           setTimeout(() => {
             this.loading = false;
+            this.state.dataLoaded.next();
             this.ref.markForCheck();
           });
         });
