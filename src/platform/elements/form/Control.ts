@@ -380,6 +380,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this.templateContext.$implicit.tooltip = this.tooltip;
     this.templateContext.$implicit.tooltipSize = this.tooltipSize;
     this.templateContext.$implicit.tooltipPreline = this.tooltipPreline;
+    this.templateContext.$implicit.removeTooltipArrow = this.removeTooltipArrow;
     this.templateContext.$implicit.startupFocus = this.form.controls[this.control.key].startupFocus;
     this.templateContext.$implicit.fileBrowserImageUploadUrl = this.form.controls[this.control.key].fileBrowserImageUploadUrl;
     this.templateContext.$implicit.minimal = this.form.controls[this.control.key].minimal;
@@ -476,6 +477,13 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       return false;
     }
     return this.form.controls[this.control.key].tooltipPreline;
+  }
+
+  get removeTooltipArrow() {
+    if (Helpers.isBlank(this.form.controls[this.control.key].removeTooltipArrow)) {
+      return false;
+    }
+    return this.form.controls[this.control.key].removeTooltipArrow;
   }
 
   get alwaysActive() {
