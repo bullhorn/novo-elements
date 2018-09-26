@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0-beta.2",
   "peerDependencies": {
     "@angular/animations": "^6.0.0",
     "@angular/cdk": "^6.0.0",
@@ -15,6 +15,6 @@
     "date-fns": "^1.29.0",
     "post-robot": "^8.0.0",
     "rxjs": "^6.0.0",
-    "text-mask-addons": "^3.7.0",
+    "text-mask-addons": "^3.7.0"
   }
 }

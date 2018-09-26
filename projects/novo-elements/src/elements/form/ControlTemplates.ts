@@ -86,7 +86,7 @@ import { TextMaskModule } from 'angular2-text-mask';
         <!--Radio-->
         <ng-template novoTemplate="radio" let-control let-form="form" let-errors="errors" let-methods="methods">
           <div [formGroup]="form" class="novo-control-input-container">
-            <novo-radio [vertical]="vertical" [name]="control.key" [formControlName]="control.key" *ngFor="let option of control.options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [tooltip]="control.tooltip" [tooltipPosition]="control.tooltipPosition" [tooltipSize]="control?.tooltipSize" [tooltipPreline]="control?.tooltipPreline" [removeTooltipArrow]="control?.removeTooltipArrow" [button]="!!option.icon" [icon]="option.icon" [attr.data-automation-id]="control.key + '-' + (option?.label || option?.value)"></novo-radio>
+            <novo-radio [name]="control.key" [formControlName]="control.key" *ngFor="let option of control.options" [value]="option.value" [label]="option.label" [checked]="option.value === form.value[control.key]" [tooltip]="control.tooltip" [tooltipPosition]="control.tooltipPosition" [tooltipSize]="control?.tooltipSize" [tooltipPreline]="control?.tooltipPreline" [removeTooltipArrow]="control?.removeTooltipArrow" [button]="!!option.icon" [icon]="option.icon" [attr.data-automation-id]="control.key + '-' + (option?.label || option?.value)"></novo-radio>
           </div>
         </ng-template>
 
