@@ -1,6 +1,5 @@
-// NG2
-import { Directive, Input, HostListener, OnDestroy, ViewChild, Component, ViewContainerRef, ElementRef, OnInit } from '@angular/core';
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+// NG
+import { Directive, Input, HostListener, OnDestroy, ViewContainerRef, ElementRef, OnInit } from '@angular/core';
 import {
   Overlay,
   OverlayRef,
@@ -8,10 +7,10 @@ import {
   ConnectedPositionStrategy,
   OriginConnectionPosition,
   OverlayConnectionPosition,
-  ScrollStrategy,
 } from '@angular/cdk/overlay';
-import { NovoTooltip } from './Tooltip.component';
 import { ComponentPortal } from '@angular/cdk/portal';
+// APP
+import { NovoTooltip } from './Tooltip.component';
 
 @Directive({
   selector: '[tooltip]',
