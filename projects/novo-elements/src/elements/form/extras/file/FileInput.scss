@@ -47,6 +47,10 @@ novo-file-input {
         background: none;
         color: $positive;
       }
+      &.disabled {
+        box-shadow: none;
+        border: 2px dashed $grey;
+      }
     }
   }
   .file-input-group {

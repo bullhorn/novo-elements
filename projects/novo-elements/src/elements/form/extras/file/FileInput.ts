@@ -51,19 +51,19 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
         </ng-template>
         <ng-template #fileOutput>
             <div class="file-output-group" [dragula]="fileOutputBag" [dragulaModel]="files">
-                <div class="file-item" *ngFor="let file of files">
+                <div class="file-item" *ngFor="let file of files" [class.disabled]="disabled">
                   <i *ngIf="layoutOptions.draggable" class="bhi-move"></i>
                   <label *ngIf="file.link"><span><a href="{{ file.link }}" target="_blank">{{ file.name | decodeURI }}</a></span><span  *ngIf="file.description">||</span><span>{{ file.description }}</span></label>
                   <label *ngIf="!file.link">{{ file.name | decodeURI }}</label>
                   <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
                     <div *ngIf="!layoutOptions.customActions">
                       <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
-                      <button type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
+                      <button *ngIf="!disabled" type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
                     </div>
                     <div *ngIf="layoutOptions.customActions">
-                      <button *ngIf="layoutOptions.edit" type="button" theme="icon" icon="edit" (click)="customEdit(file)" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
+                      <button *ngIf="layoutOptions.edit && !disabled" type="button" theme="icon" icon="edit" (click)="customEdit(file)" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
                       <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="customSave(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
-                      <button type="button" theme="icon" icon="close" (click)="customDelete(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
+                      <button *ngIf="!disabled" type="button" theme="icon" icon="close" (click)="customDelete(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
                     </div>
                   </div>
                     <novo-loading *ngIf="!file.loaded"></novo-loading>
@@ -271,5 +271,9 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
 
   customCheck(event) {
     this.upload.emit(event);
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
   }
 }

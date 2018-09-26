@@ -11,7 +11,8 @@ let FieldsetsFormDemoTpl = require('./templates/DynamicFormFieldSets.html');
 let PickerControlsDemoTpl = require('./templates/PickerControls.html');
 let UpdatingFormDemoTpl = require('./templates/UpdatingFormDemo.html');
 let AddressControlDemoTpl = require('./templates/AddressControl.html');
-import { MockMeta, MockMetaHeaders } from './MockMeta';
+let DisabledFormDemoTpl = require('./templates/DisabledFormDemo.html');
+import { MockMeta, MockMetaHeaders, MockMetaForDisabledForm } from './MockMeta';
 // Vendor
 import {
   FormUtils,
@@ -28,13 +29,11 @@ import {
   EntityPickerResult,
   EntityPickerResults,
   TextAreaControl,
-  NovoFormGroup,
-  BaseControl,
   AceEditorControl,
   AddressControl,
-  FieldInteractionApi,
 } from 'novo-elements';
 import { findByCountryId } from 'novo-elements';
+
 const template = `
 <div class="container">
     <h1>Forms <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/form">(source)</a></small></h1>
@@ -73,6 +72,9 @@ const template = `
     <h5>Updating Fields/Status</h5>
     <div class="example form-demo updating">${UpdatingFormDemoTpl}</div>
     <code-snippet [code]="UpdatingFormDemoTpl"></code-snippet>
+    <h2>Disabled Form</h2>
+    <div class="example form-demo updating">${DisabledFormDemoTpl}</div>
+    <code-snippet [code]="DisabledFormDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -112,6 +114,7 @@ export class FormDemoComponent {
   private PickerControlsDemoTpl: string = PickerControlsDemoTpl;
   private UpdatingFormDemoTpl: string = UpdatingFormDemoTpl;
   private AddressControlDemoTpl: string = AddressControlDemoTpl;
+  private DisabledFormDemoTpl: string = DisabledFormDemoTpl;
   private quickNoteConfig: any;
   private textControl: any;
   private emailControl: any;
@@ -139,6 +142,10 @@ export class FormDemoComponent {
   private dynamicForm: any;
   private dynamicVertical: any;
   private dynamicVerticalForm: any;
+  private disabledControls: any;
+  private disabledQuickNote: any;
+  private disabledForm: any;
+  private disabledNote: any;
   private calendarForm: any;
   private fieldsets: Array<any>;
   private fieldsetsForm: any;
@@ -555,6 +562,134 @@ export class FormDemoComponent {
     // Updating form
     this.updatingFormControls = [this.textControl, this.percentageControl, this.checkControl, this.singlePickerControl, this.fileControl];
     this.updatingForm = formUtils.toFormGroup(this.updatingFormControls);
+
+    // Disabled Form
+    let disabledOverrides: any = {
+      address: {
+        readOnly: true,
+      },
+      textbox: {
+        readOnly: true,
+      },
+      textarea: {
+        readOnly: true,
+      },
+      date: {
+        readOnly: true,
+      },
+      time: {
+        readOnly: true,
+      },
+      datetime: {
+        readOnly: true,
+      },
+      select: {
+        readOnly: true,
+      },
+      tiles: {
+        readOnly: true,
+      },
+      picker: {
+        readOnly: true,
+      },
+      chips: {
+        readOnly: true,
+      },
+      checkbox: {
+        readOnly: true,
+      },
+      checklist: {
+        readOnly: true,
+      },
+      file: {
+        readOnly: true,
+      },
+      type: {
+        readOnly: true,
+      },
+      radio: {
+        readOnly: true,
+      },
+      htmlFieldFullEditor: {
+        readOnly: true,
+      },
+      rowChips: {
+        readOnly: true,
+        label: 'Row Chips',
+        columns: [
+          {
+            label: 'Value',
+            data: (item: any): string => {
+              return item.value['value'];
+            },
+          },
+          {
+            label: 'Description',
+            data: (item: any): string => {
+              return item.value['description'];
+            },
+          },
+        ],
+      },
+    };
+
+    this.disabledControls = formUtils.toFieldSets(
+      MockMetaForDisabledForm,
+      '$ USD',
+      {},
+      { token: 'TOKEN', military: true },
+      disabledOverrides,
+    );
+    formUtils.setInitialValuesFieldsets(this.disabledControls, {
+      textbox: 'Disabled TextBox',
+      textarea:
+        'Disabled TextArea Disabled TextArea Disabled TextArea Disabled TextArea Disabled TextArea Disabled TextArea Disabled TextArea ',
+      select: 'disabledValue',
+      checklist: 'Disabled',
+      tiles: 'Disabled',
+      radio: 'Yes',
+      chips: ['Disabled', 'Chip'],
+      address: {
+        address1: '100 Summer St',
+        address2: 'apt 25',
+        countryID: 1,
+        state: 'Georgia',
+        city: 'Atlanta',
+        zip: '30312',
+        countryName: 'United States',
+        countryCode: 'US',
+      },
+      file: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
+      htmlFieldFullEditor: `<h1>Disabled Editor</h1><br><ui><li>Disabled</li><li>Editor</li></ui>`,
+      picker: 'Disabled Picker',
+      rowChips: [{ id: 1, value: 'Disabled Row Chip', description: 'This is a disabled Row Chip' }],
+    });
+    this.disabledForm = formUtils.toFormGroupFromFieldset(this.disabledControls);
+    this.disabledNote = 'Disabled QuickNote';
+    this.disabledQuickNote = {
+      triggers: {
+        tags: '@',
+        references: '#',
+        boos: '^',
+      },
+      options: {
+        tags: ['First', 'Second', 'Space Between'],
+        references: ['Third', 'Fourth'],
+        boos: ['Test'],
+      },
+      readOnly: true,
+      renderer: {
+        tags: (symbol, item) => {
+          return `<a href="https://www.google.com/search?q=bullhorn&oq=bullhorn">${symbol}${item.label}</a>`;
+        },
+        references: (symbol, item) => {
+          return `<a href="https://www.google.com/search?q=bullhorn&oq=bullhorn">${symbol}${item.label}</a>`;
+        },
+        boos: (symbol, item) => {
+          return `<strong>${symbol}${item.label}</strong>`;
+        },
+      },
+    };
   }
 
   toggleEnabled() {

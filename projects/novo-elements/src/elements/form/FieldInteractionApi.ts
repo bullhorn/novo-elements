@@ -358,9 +358,11 @@ export class FieldInteractionApi {
     let control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.tooltip = tooltip;
-      if (tooltip.length >= 40) {
+      if (tooltip.length >= 40 && tooltip.length <= 400) {
         control.tooltipSize = 'large';
         control.tooltipPreline = true;
+      } else if (tooltip.length > 400) {
+        control.tooltipSize = 'extra-large';
       }
       this.triggerEvent({ controlKey: key, prop: 'tooltip', value: tooltip });
     }
