@@ -9,6 +9,7 @@ export class DataTableState<T> {
   public sortFilterSource = new Subject();
   public resetSource = new Subject();
   public expandSource = new Subject();
+  public dataLoaded = new Subject();
 
   sort: { id: string; value: string } = undefined;
   filter: { id: string; value: string } = undefined;
