@@ -41,6 +41,8 @@ export class TooltipDirective implements OnDestroy, OnInit {
   preline: boolean;
   @Input('removeTooltipArrow')
   removeArrow: boolean = false;
+  @Input('tooltipAutoPosition')
+  autoPosition: boolean = false;
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
   private overlayRef: OverlayRef;
@@ -184,7 +186,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
       .withOffsetX(offsetX)
       .withOffsetY(offsetY);
 
-    return this.withFallbackStrategy(strategy);
+    return this.autoPosition ? this.withFallbackStrategy(strategy) : strategy;
   }
   private withFallbackStrategy(strategy: ConnectedPositionStrategy): ConnectedPositionStrategy {
     strategy
