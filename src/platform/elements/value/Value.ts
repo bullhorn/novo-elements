@@ -37,7 +37,6 @@ export class NovoValueElement implements OnInit, OnChanges {
   @Input() data: any; // TODO use interface
   @Input() meta: any; // TODO use interface
   @Input() theme: NOVO_VALUE_THEME = NOVO_VALUE_THEME.DEFAULT;
-  originalData: any;
 
   type: NOVO_VALUE_TYPE;
   NOVO_VALUE_TYPE = NOVO_VALUE_TYPE;
