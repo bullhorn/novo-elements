@@ -1,6 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
+import { OverlayModule } from '@angular/cdk/overlay';
 // App
 import { TooltipDirective } from './Tooltip.directive';
 
@@ -17,6 +18,7 @@ describe('Elements: TooltipDirective', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TooltipDirective, TestComponent],
+      imports: [OverlayModule],
     }).compileComponents();
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.debugElement.componentInstance;
