@@ -41,6 +41,7 @@ export class RenderPipe implements PipeTransform {
   value: any;
   lastValue: any;
   lastArgs: any;
+  unTouchedValue: any;
 
   constructor(private changeDetector: ChangeDetectorRef, private sanitizationService: DomSanitizer, private labels: NovoLabelService) {}
 
@@ -323,7 +324,9 @@ export class RenderPipe implements PipeTransform {
 
   updateValue(value: any, args: any): any {
     this.value = this.render(value, args);
+    this.unTouchedValue = value;
     this.changeDetector.markForCheck();
+    return this.unTouchedValue;
   }
 
   transform(value?: any, args?: any): any {
