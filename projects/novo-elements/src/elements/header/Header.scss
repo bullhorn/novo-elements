@@ -42,10 +42,15 @@ header[theme] {
       flex: 2 2 250px;
       min-width: 100px;
     }
-    utils {
+    utils,
+    novo-utils {
       display: flex;
       align-items: center;
       justify-content: flex-start;
+    }
+
+    novo-action {
+      display: flex;
     }
   }
   @each $basic, $color in $all-colors {

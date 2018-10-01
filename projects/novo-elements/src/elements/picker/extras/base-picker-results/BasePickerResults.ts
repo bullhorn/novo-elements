@@ -347,7 +347,7 @@ export class BasePickerResults {
    */
   highlight(match, query) {
     // Replaces the capture string with a the same string inside of a "strong" tag
-    return query ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;
+    return query ? match.replace(new RegExp(this.escapeRegexp(query.trim()), 'gi'), '<strong>$&</strong>') : match;
   }
 
   preselected(match) {

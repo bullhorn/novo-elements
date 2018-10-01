@@ -39,7 +39,7 @@ novo-tiles {
         }
       }
       &.disabled {
-        color: $disabled-color;
+        color: $positive;
         cursor: not-allowed;
         label {
           cursor: not-allowed;

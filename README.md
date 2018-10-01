@@ -33,7 +33,7 @@
 
 Depending on what system you are using (SystemJS, Webpack, etc..) the setup will vary.
 
-If using SCSS/SASS you will need to include the following includes: `node_modules/novo-elements/lib` and `node_modules/hint.css/src`.
+If using SCSS/SASS you will need to include the following includes: `node_modules/novo-elements/lib`.
 
 ## Build/Release/Publish
 

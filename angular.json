@@ -79,7 +79,7 @@
             "assets": ["demo/favicon.ico", "demo/assets"],
             "styles": ["demo/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules/hint.css/src", "projects/novo-elements/src"]
+              "includePaths": ["projects/novo-elements/src"]
             },
             "scripts": []
           },

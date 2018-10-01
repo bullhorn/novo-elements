@@ -56,12 +56,12 @@ describe('Elements: BasePickerResults', () => {
 
   describe('Method: selectActiveMatch()', () => {
     it('should be defined.', () => {
-      jest.spyOn(component, 'selectMatch').mockImplementation(() => {});
+      spyOn(component, 'selectMatch');
       expect(component.selectActiveMatch).toBeDefined();
       component.selectActiveMatch();
     });
     it('should call selectMatch.', () => {
-      jest.spyOn(component, 'selectMatch').mockImplementation(() => {});
+      spyOn(component, 'selectMatch');
       component.selectActiveMatch();
       expect(component.selectMatch).toHaveBeenCalled();
     });
@@ -73,7 +73,7 @@ describe('Elements: BasePickerResults', () => {
       component.prevActiveMatch();
     });
     it('should scroll to active.', () => {
-      jest.spyOn(component, 'scrollToActive').mockImplementation(() => {});
+      spyOn(component, 'scrollToActive');
       component.prevActiveMatch();
       expect(component.scrollToActive).toHaveBeenCalled();
     });
@@ -121,10 +121,9 @@ describe('Elements: BasePickerResults', () => {
     });
   });
 
-  describe('Method: highlight()', () => {
-    it('should be defined.', () => {
-      expect(component.highlight).toBeDefined();
-      // component.highlight();
+  describe('Method: highlight(match, query)', () => {
+    it('should insert strong tags where matching occurs', () => {
+      expect(component.highlight('Testing stuff...', 'stuff ')).toEqual('Testing <strong>stuff</strong>...');
     });
   });
 

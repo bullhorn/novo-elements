@@ -12,7 +12,6 @@
 // --------------------------------------------------
 // Plugins (Third-Party-Libraries)
 // --------------------------------------------------
-@import 'hint';
 // --------------------------------------------------
 // Content
 // --------------------------------------------------
@@ -87,5 +86,23 @@
 @each $basic, $color in $all-colors {
   .tc-#{$basic} {
     color: $color;
+  }
+}
+
+.skeleton:empty {
+  width: 100px;
+  margin: 0.2em 0px;
+  height: 1em;
+  display: inline-flex;
+  background: rgba($dark, 0.1);
+  background-image: linear-gradient(to right, rgba($grey, 0.2) 0%, rgba($grey, 0.3) 50%, rgba($grey, 0.2) 100%);
+  background-repeat: repeat-y;
+  background-size: 25% 100%;
+  background-position: 0 0;
+  animation: shine 1s infinite;
+  @keyframes shine {
+    to {
+      background-position: 100% 0;
+    }
   }
 }

@@ -28,11 +28,10 @@ novo-check-list {
       }
     }
     &.disabled {
-      opacity: 0.3;
-      pointer-events: none;
-      label {
-        opacity: 1;
+      label > i {
+        opacity: 0.7;
       }
+      pointer-events: none;
     }
     input {
       appearance: none !important;

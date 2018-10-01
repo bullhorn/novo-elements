@@ -175,6 +175,8 @@ export class RenderPipe implements PipeTransform {
       type = 'DateTime';
     } else if (args.dataSpecialization === 'YEAR') {
       type = 'Year';
+    } else if (args.dataSpecialization === 'DATE' && args.dataType === 'Date') {
+      type = 'Date';
     } else if (args.dataType === 'Timestamp') {
       type = 'Timestamp';
     } else if (['mobile', 'phone', 'phone1', 'phone2', 'phone3', 'workPhone'].indexOf(args.name) > -1) {
@@ -210,6 +212,9 @@ export class RenderPipe implements PipeTransform {
       case 'DateTime':
       case 'Timestamp':
         text = this.labels.formatDateShort(value);
+        break;
+      case 'Date':
+        text = this.labels.formatDate(new Date(value));
         break;
       case 'Year':
         text = new Date(value).getFullYear();

@@ -172,6 +172,10 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     // Show placeholder if the note is empty, after the editor is instantiated
     this.ckeInstance.on('instanceReady', (event: any) => {
       this.showPlaceholder();
+      // Set editor to readOnly
+      if (this.config.readOnly) {
+        this.ckeInstance.setReadOnly(this.config.readOnly);
+      }
     });
   }
 

@@ -1,5 +1,15 @@
 // NG2
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  Directive,
+  TemplateRef,
+  ViewContainerRef,
+  ContentChildren,
+  EmbeddedViewRef,
+  HostBinding,
+  QueryList,
+} from '@angular/core';
 
 @Component({
   selector: 'novo-loading',
@@ -105,4 +115,55 @@ export class NovoSpinnerElement {
   inverse: boolean;
   @Input()
   baseHref: string;
+}
+
+@Directive({
+  selector: '[skeleton]',
+})
+export class NovoSkeletonDirective {
+  @HostBinding('class.skeleton')
+  skeleton: boolean = true;
+}
+@Directive({
+  selector: '[loaded]',
+})
+export class NovoLoadedDirective {}
+
+@Directive({
+  selector: '[isLoading]',
+})
+export class NovoIsLoadingDirective {
+  @ContentChildren(NovoSkeletonDirective, { read: TemplateRef })
+  public skeletonTemplates: QueryList<TemplateRef<any>>;
+  @ContentChildren(NovoLoadedDirective, { read: TemplateRef })
+  public loadedTemplates: QueryList<TemplateRef<any>>;
+
+  private hasView = false;
+  private skeletonViews: EmbeddedViewRef<NovoSkeletonDirective>[] = [];
+  private loadedViews: EmbeddedViewRef<NovoLoadedDirective>[] = [];
+
+  constructor(private viewContainer: ViewContainerRef) {}
+
+  @Input()
+  set isLoading(condition: boolean) {
+    if (!condition && !this.hasView) {
+      this.destroyViews(this.loadedViews);
+      this.skeletonViews = this.createViews(this.skeletonTemplates);
+      this.hasView = true;
+    } else if (condition && this.hasView) {
+      this.destroyViews(this.skeletonViews);
+      this.loadedViews = this.createViews(this.loadedTemplates);
+      this.hasView = false;
+    }
+  }
+  createViews(templates: QueryList<TemplateRef<any>>) {
+    return templates && templates.map((v) => this.viewContainer.createEmbeddedView(v));
+  }
+  destroyViews(views: EmbeddedViewRef<any>[]) {
+    if (views) {
+      for (let view of views) {
+        view.destroy();
+      }
+    }
+  }
 }

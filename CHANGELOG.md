@@ -8,6 +8,24 @@
 
 
 
+<a name="2.17.0"></a>
+# [2.17.0](https://github.com/bullhorn/novo-elements/compare/v2.16.0...v2.17.0) (2018-09-14)
+
+
+### Bug Fixes
+
+* **chips:** change chip hover functionality to deselect on mouseleave ([#807](https://github.com/bullhorn/novo-elements/issues/807)) ([ae019f0](https://github.com/bullhorn/novo-elements/commit/ae019f0))
+* **chips:** Chips disabled state styling fix ([#814](https://github.com/bullhorn/novo-elements/issues/814)) ([858b602](https://github.com/bullhorn/novo-elements/commit/858b602))
+* **Dropdown:** Defaulting dropdowns to use dynamic width ([#813](https://github.com/bullhorn/novo-elements/issues/813)) ([b894802](https://github.com/bullhorn/novo-elements/commit/b894802))
+* **form:** Fixing issue where textarea tooltip didn't appear ([300ae35](https://github.com/bullhorn/novo-elements/commit/300ae35))
+
+
+### Features
+
+* **tipwell:** add ability to put HTML  ([f4422e1](https://github.com/bullhorn/novo-elements/commit/f4422e1))
+
+
+
 <a name="2.16.0"></a>
 # [2.16.0](https://github.com/bullhorn/novo-elements/compare/v2.15.0...v2.16.0) (2018-08-31)
 

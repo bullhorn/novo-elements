@@ -2,7 +2,7 @@ import { sync as glob } from 'glob';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const srcPath = path.join('./demo/', 'app');
+const srcPath = path.join('./demo/', 'app/pages/elements');
 /** Path to find the examples */
 const examplesPath = path.join('./projects/', 'novo-examples/src');
 

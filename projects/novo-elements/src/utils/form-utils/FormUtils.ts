@@ -115,6 +115,7 @@ export class FormUtils {
     };
     let dataTypeToTypeMap = {
       Timestamp: 'date',
+      Date: 'date',
       Boolean: 'tiles',
     };
     let inputTypeToTypeMap = {
@@ -207,6 +208,7 @@ export class FormUtils {
       maxlength: field.maxLength,
       interactions: field.interactions,
       dataSpecialization: field.dataSpecialization,
+      dataType: field.dataType,
       description: field.description || '',
       tooltip: field.tooltip,
       tooltipPosition: field.tooltipPosition,
@@ -346,6 +348,7 @@ export class FormUtils {
           controlConfig.config = {};
         }
         controlConfig.config.required = field.required;
+        controlConfig.config.readOnly = controlConfig.readOnly;
         if (field.fields && field.fields.length) {
           for (let subfield of field.fields) {
             controlConfig.config[subfield.name] = {

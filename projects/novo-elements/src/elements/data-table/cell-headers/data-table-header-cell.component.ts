@@ -214,7 +214,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       } else {
         actualFilter = {
           min: filter.min ? dateFns.addDays(dateFns.startOfToday(), filter.min) : dateFns.startOfToday(),
-          max: filter.max ? dateFns.addDays(dateFns.startOfTomorrow(), filter.max) : dateFns.startOfTomorrow(),
+          max: filter.max ? dateFns.addDays(dateFns.endOfToday(), filter.max) : dateFns.endOfToday(),
         };
       }
     }

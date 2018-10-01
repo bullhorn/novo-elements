@@ -67,6 +67,14 @@ describe('Elements: NovoAddressElement', () => {
       component.ngOnInit();
       expect(component.config.address2.hidden).toBeTruthy();
     });
+    it('should be set up readOnly for address1', () => {
+      component.config = {
+        required: true,
+        readOnly: true,
+      };
+      component.ngOnInit();
+      expect(component.config.address1.readOnly).toBeTruthy();
+    });
   });
 
   describe('Method: onCountryChange()', () => {

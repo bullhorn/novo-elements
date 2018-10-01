@@ -115,7 +115,7 @@ export class TypographyPage {}
 
 @Component({
   selector: 'chips-page',
-  template: `<h1>Chips <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/chips">(source)</a></h1><p>The chips element (<code>chips</code>) represents a control that presents a menu of options. The options within are set by the <code>source</code> attribute. Options can be pre-selected for the user using the <code>ngModel</code> attribute. Chips are the multi-select version of <code>pickers</code></p><h5>Basic Examples</h5><p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.</p><p><code-example example="basic-chips"></code-example></p><h5>Async Examples</h5><p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.</p><p><code-example example="async-chips"></code-example></p><h5>Formatted Examples</h5><p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.</p><p><code-example example="formatted-chips"></code-example></p><h5>Options Closing Example</h5><p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values and the options list will be removed.</p><p><code-example example="close-on-select-chips"></code-example></p><h5>Grouped Multi Picker (categories) with Chips</h5><p>Having custom templates makes it easy to customize the functionality of the picker, here is an example of a category selector</p><p><code-example example="grouped-multi-picker"></code-example></p>`,
+  template: `<h1>Chips <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/chips">(source)</a></h1><p>The chips element (<code>chips</code>) represents a control that presents a menu of options. The options within are set by the <code>source</code> attribute. Options can be pre-selected for the user using the <code>ngModel</code> attribute. Chips are the multi-select version of <code>pickers</code></p><h5>Basic Examples</h5><p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.</p><p><code-example example="basic-chips"></code-example></p><h5>Async Examples</h5><p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.</p><p><code-example example="async-chips"></code-example></p><h5>Formatted Examples</h5><p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.</p><p><code-example example="formatted-chips"></code-example></p><h5>Options Closing Example</h5><p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values and the options list will be removed.</p><p><code-example example="close-on-select-chips"></code-example></p><h5>Grouped Multi Picker (categories) with Chips</h5><p>Having custom templates makes it easy to customize the functionality of the picker, here is an example of a category selector</p><p><code-example example="grouped-multi-picker"></code-example></p><h5>Row Chips Example</h5><p>By clicking on the <code>row-chips</code> element, the options list will be displayed.  Select any of the options by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row. By clicking the delete icon at the end of the row, the row will be removed from the list of selected values.</p><p><code-example example="row-chips"></code-example></p>`,
 })
 export class ChipsPage {}
 
@@ -145,7 +145,7 @@ export class FormGroupsPage {}
 
 @Component({
   selector: 'form-page',
-  template: `<h1>Forms <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/form">(source)</a></h1><p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'</p><h2>Static Form</h2><p>Static forms <code>&lt;novo-form /&gt;</code>.</p><h5>Textbox Based Controls</h5><p><code-example example="text-based-controls"></code-example></p><h5>Checkbox Controls</h5><p><code-example example="check-box-controls"></code-example></p><h5>File Input Controls</h5><p><code-example example="file-input-controls"></code-example></p><h5>Calendar Controls</h5><p><code-example example="calendar-input-controls"></code-example></p><h5>Picker Controls</h5><p><code-example example="picker-controls"></code-example></p><h5>Address Controls</h5><p><code-example example="address-control"></code-example></p><h2>Dynamic Form</h2><p>Dynamic forms are composed of one element, <code>&lt;novo-dynamic-form [controls]=&quot;controls&quot;/&gt;</code> and allow you to pass in the controls and form and it will create the form for you.</p><h5>Basic</h5><p><code-example example="dynamic-form"></code-example></p><h5>Vertical</h5><p><code-example example="vertical-dynamic-form"></code-example></p><h5>Fieldsets</h5><p><code-example example="dynamic-form-field-sets"></code-example></p><h5>Updating Fields/Status</h5><p><code-example example="updating-form"></code-example></p>`,
+  template: `<h1>Forms <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/form">(source)</a></h1><p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'</p><h2>Static Form</h2><p>Static forms <code>&lt;novo-form /&gt;</code>.</p><h5>Textbox Based Controls</h5><p><code-example example="text-based-controls"></code-example></p><h5>Checkbox Controls</h5><p><code-example example="check-box-controls"></code-example></p><h5>File Input Controls</h5><p><code-example example="file-input-controls"></code-example></p><h5>Calendar Controls</h5><p><code-example example="calendar-input-controls"></code-example></p><h5>Picker Controls</h5><p><code-example example="picker-controls"></code-example></p><h5>Address Controls</h5><p><code-example example="address-control"></code-example></p><h2>Dynamic Form</h2><p>Dynamic forms are composed of one element, <code>&lt;novo-dynamic-form [controls]=&quot;controls&quot;/&gt;</code> and allow you to pass in the controls and form and it will create the form for you.</p><h5>Basic</h5><p><code-example example="dynamic-form"></code-example></p><h5>Vertical</h5><p><code-example example="vertical-dynamic-form"></code-example></p><h5>Fieldsets</h5><p><code-example example="dynamic-form-field-sets"></code-example></p><h5>Updating Fields/Status</h5><p><code-example example="updating-form"></code-example></p><h5>Disabled Field States</h5><p><code-example example="disabled-form"></code-example></p>`,
 })
 export class FormPage {}
 
@@ -235,7 +235,7 @@ export class TabsPage {}
 
 @Component({
   selector: 'patterns-page',
-  template: `<h1>Design Patterns</h1><p>The following are examples of know composition patterns to create a common user exeperience.  The component library is design to be used in these patterns.</p><h2>Activity Sections</h2><p>Displaying a series of list data in ... blah, blah, blah</p><p><code-example example="activity-section"></code-example></p>`,
+  template: `<h1>Design Patterns</h1><p>The following are examples of know composition patterns to create a common user exeperience.  The component library is design to be used in these patterns.</p><h2>Activity Sections</h2><p>Displaying a series of list data in ... blah, blah, blah</p><p><code-example example="activity-section"></code-example></p><h2>Record Headers</h2><p>Entity Record Headers Patterns.</p><p><code-example example="record-header"></code-example></p>`,
 })
 export class PatternsPage {}
 
@@ -283,7 +283,7 @@ export class SecurityPage {}
 
 @Component({
   selector: 'tip-well-page',
-  template: `<h1>TipWell <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/tip-well">(source)</a></h1><p>This component is meant to be akin to Bootstrap's 'well'. It's a small container for help text.</p><h4>Demo</h4><p><code-example example="basic-tip-well"></code-example></p><p>Did you hide the TipWell?</p><p>Reset localStorage and Reload</p><h4>Code</h4><h4>No Button Demo</h4><p><code-example example="buttonless-tip-well"></code-example></p><h4>Code</h4><h4>Icon Demo</h4><p><code-example example="icon-tip-well"></code-example></p><h4>Code</h4>`,
+  template: `<h1>TipWell <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/tip-well">(source)</a></h1><p>This component is meant to be akin to Bootstrap's 'well'. It's a small container for help text.</p><h4>Demo</h4><p><code-example example="basic-tip-well"></code-example></p><h4>No Button Demo</h4><p><code-example example="buttonless-tip-well"></code-example></p><h4>Icon Demo</h4><p><code-example example="icon-tip-well"></code-example></p><h4>HTML Demo</h4><p><code-example example="html-tip-well"></code-example></p>`,
 })
 export class TipWellPage {}
 
@@ -292,6 +292,12 @@ export class TipWellPage {}
   template: `<h1>Toast Notifications <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/toast">(source)</a></h1><p>Toasts are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p><h2>Types</h2><h5>Alert</h5><p>This type of toast notification takes a template, a style, and a location.</p><h2>Embedded Toast</h2><p><code-example example="toast-usage"></code-example></p><h2>Toaster Service</h2><p><code-example example="toast-service"></code-example></p>`,
 })
 export class ToasterPage {}
+
+@Component({
+  selector: 'tooltip-page',
+  template: `<h1>Tooltips <a href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/tooltip">(source)</a></h1><p>We use the <a href="http://kushagragour.in/lab/hint/">hint.css</a> module for our tooltip implementation, wrapping it inside a directive.</p><h2>Helper</h2><p>Helper tooltips contain basic text that provides some additional information about an element.</p><h5>Placement</h5><p><code-example example="tooltip-placement"></code-example></p><h5>Alignment</h5><p><code-example example="tooltip-align"></code-example></p><h5>Types</h5><p><code-example example="tooltip-types"></code-example></p><h5>Sizes</h5><p><code-example example="tooltip-sizes"></code-example></p><h5>Options</h5><p><code-example example="tooltip-options"></code-example></p><h5>Toggle Trigger</h5><p><code-example example="tooltip-toggle"></code-example></p>`,
+})
+export class TooltipPage {}
 
 const routes: Routes = [
   //{ path: '', component: Home, data: {} },
@@ -343,6 +349,7 @@ const routes: Routes = [
   { path: 'utils/security', component: SecurityPage, data: { title: 'Security', section: 'utils' } },
   { path: 'utils/tip-well', component: TipWellPage, data: { title: 'Tip Well', section: 'utils' } },
   { path: 'utils/toaster', component: ToasterPage, data: { title: 'Toaster', section: 'utils' } },
+  { path: 'utils/tooltip', component: TooltipPage, data: { title: 'Tooltip', section: 'utils' } },
   // Catch All
   { path: '**', redirectTo: '/home', data: {} },
 ];
@@ -396,6 +403,7 @@ export const PAGE_LIST = [
   SecurityPage,
   TipWellPage,
   ToasterPage,
+  TooltipPage,
 ];
 
 @NgModule({

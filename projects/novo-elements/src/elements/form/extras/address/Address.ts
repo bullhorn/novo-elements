@@ -20,10 +20,12 @@ export interface NovoAddressSubfieldConfig {
   pickerConfig?: any;
   hidden: boolean;
   updated?: boolean;
+  readOnly?: boolean;
 }
 
 export interface NovoAddressConfig {
   required?: boolean;
+  readOnly?: boolean;
   address1?: NovoAddressSubfieldConfig;
   address2?: NovoAddressSubfieldConfig;
   city?: NovoAddressSubfieldConfig;
@@ -62,7 +64,7 @@ export interface NovoAddressConfig {
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.state, 'bhi-check': valid.state}">
             </i>
-            <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (changed)="onStateChange($event)" autocomplete="shipping region" [(ngModel)]="model.state" [disablePickerInput]="disabled.state"></novo-picker>
+            <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (changed)="onStateChange($event)" autocomplete="shipping region" [(ngModel)]="model.state" [disablePickerInput]="disabled.state || config.readOnly"></novo-picker>
         </span>
         <span *ngIf="!config?.zip?.hidden" class="zip postal-code" [class.invalid]="invalid.zip" [class.focus]="focused.zip" [class.disabled]="disabled.zip">
             <i *ngIf="config.zip.required"
@@ -76,7 +78,7 @@ export interface NovoAddressConfig {
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.countryID, 'bhi-check': valid.countryID}">
             </i>
-            <novo-picker [config]="config?.countryID?.pickerConfig" [placeholder]="config.countryID.label" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryName"></novo-picker>
+            <novo-picker [config]="config?.countryID?.pickerConfig" [placeholder]="config.countryID.label" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryName" [disablePickerInput]="disabled.countryID"></novo-picker>
         </span>
     `,
 })
@@ -136,6 +138,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       }
       if (this.config.required) {
         this.config[field].required = true;
+      }
+      if (this.config[field].readOnly || this.config.readOnly) {
+        this.config[field].readOnly = true;
+        this.disabled[field] = true;
       }
       if (field === 'countryID') {
         if (!this.config[field].pickerConfig) {

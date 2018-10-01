@@ -1,8 +1,5 @@
 // NG2
-import { Injectable, QueryList } from '@angular/core';
-// App
-import { NovoTemplate } from '../../elements/common/novo-template/novo-template.directive';
-import { Helpers } from '../../utils/Helpers';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class NovoTemplateService {

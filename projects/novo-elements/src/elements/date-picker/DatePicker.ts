@@ -131,8 +131,8 @@ export type rangeSelectModes = 'startDate' | 'endDate';
                             startfill: isStartFill(range, day.date, selected, selected2),
                             endfill: isEndFill(range, day.date, selected, selected2),
                             'selecting-range': isSelectingRange(range, day.date, selected, selected2, hoverDay, rangeSelectMode, weekRangeSelect)
-                           }" (click)="select($event, day, true)" (mouseover)="rangeHover($event, day)" [attr.data-automation-id]="day.number">
-                            <button class="day" [attr.data-automation-id]="day.number" [disabled]="isDisabled(day.date, start, end)">{{day.number}}</button>
+                           }" (mouseover)="rangeHover($event, day)" [attr.data-automation-id]="day.number">
+                            <button class="day" [attr.data-automation-id]="day.number" [disabled]="isDisabled(day.date, start, end)" (click)="select($event, day, true)">{{day.number}}</button>
                         </td>
                     </tr>
                 </tbody>

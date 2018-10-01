@@ -55,7 +55,7 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
   @Input()
   height: number;
   @Input()
-  width: number = 180;
+  width: number = -1; // Defaults to dynamic width (no hardcoded width value and no host width lookup)
   @Input()
   appendToBody: boolean = false; // Deprecated
 

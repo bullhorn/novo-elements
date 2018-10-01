@@ -55,6 +55,7 @@ export class NovoUtilActionComponent {
       <ng-content select="section"></ng-content>
       <span flex></span>
       <ng-content select="utils"></ng-content>
+      <ng-content select="novo-action"></ng-content>
     </section>
     <ng-content></ng-content>
   `,

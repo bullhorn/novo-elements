@@ -5,9 +5,8 @@ novo-value {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-left: 10px;
-  padding-bottom: 10px;
-  padding-right: 15px;
+  padding: 8px;
+
   .value-outer {
     display: flex;
     flex-direction: column;
@@ -18,7 +17,6 @@ novo-value {
       font-weight: 500;
       transition: 200ms ease-out;
       text-transform: uppercase;
-      padding: 5px 0;
       overflow-wrap: break-word;
     }
   }

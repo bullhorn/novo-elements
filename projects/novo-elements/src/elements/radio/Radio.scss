@@ -70,6 +70,14 @@ novo-radio {
         color: $positive;
       }
     }
+    &.disabled {
+      i {
+        opacity: 0.7;
+      }
+      button[theme].has-icon {
+        opacity: 0.7;
+      }
+    }
   }
   button[theme].has-icon {
     opacity: 0.7;

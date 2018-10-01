@@ -137,4 +137,10 @@ describe('Elements: EntityPickerResult', () => {
       expect(component.getNameForResult(input)).toBe('');
     });
   });
+
+  describe('Method: highlight(match, query)', () => {
+    it('should insert strong tags where matching occurs', () => {
+      expect(component.highlight('Testing stuff...', 'stuff ')).toEqual('Testing <strong>stuff</strong>...');
+    });
+  });
 });
