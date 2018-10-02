@@ -111,7 +111,7 @@ export class NovoValueElement implements OnInit, OnChanges {
       this.customClass = this.meta.customClass ? this.meta.customClass : '';
       if (this.meta.stripHTML && this.data && this.data.replace) {
         this.meta.originalData = this.dataClone;
-        this.data = this.data.replace(/<(?!style|\/style).+?>/gi, '');
+        this.data = this.data.replace(/<(?!style|\/style).+?>/gi, '').trim();
       }
     } else if (this.meta && this.meta.associatedEntity) {
       switch (this.meta.associatedEntity.entity) {
