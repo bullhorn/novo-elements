@@ -43,6 +43,7 @@ export class NovoValueElement implements OnInit, OnChanges {
   NOVO_VALUE_THEME = NOVO_VALUE_THEME;
   url: string;
   customClass: string = '';
+  dataClone: any;
 
   ngOnInit() {
     if (Helpers.isEmpty(this.meta)) {
@@ -94,6 +95,7 @@ export class NovoValueElement implements OnInit, OnChanges {
 
   ngOnChanges(changes?: SimpleChanges): any {
     if (this.meta && this.isLinkField(this.meta, this.data)) {
+      this.dataClone = JSON.parse(JSON.stringify(this.data));
       this.type = NOVO_VALUE_TYPE.LINK;
       // Make sure the value has a protocol, otherwise the URL will be relative
       let hasProtocol: any = new RegExp('^(http|https)://', 'i');
@@ -105,9 +107,10 @@ export class NovoValueElement implements OnInit, OnChanges {
     } else if (this.isEntityList(this.meta.type)) {
       this.type = NOVO_VALUE_TYPE.ENTITY_LIST;
     } else if (this.isHTMLField(this.meta)) {
+      this.dataClone = JSON.parse(JSON.stringify(this.data));
       this.customClass = this.meta.customClass ? this.meta.customClass : '';
       if (this.meta.stripHTML && this.data && this.data.replace) {
-        this.meta.originalData = this.data;
+        this.meta.originalData = this.dataClone;
         this.data = this.data.replace(/<(?!style|\/style).+?>/gi, '');
       }
     } else if (this.meta && this.meta.associatedEntity) {
