@@ -1,0 +1,9 @@
+<div class="calendar-demo-side-by-side">
+    <p>
+        <label>Value One</label> {{(dateOne | date) || 'N/A'}}
+
+        <label>Value Two</label> {{(dateTwo | date) || 'N/A'}}
+    </p>
+    <novo-date-picker [(ngModel)]="dateOne" minYear="2000" maxYear="2020"></novo-date-picker>
+    <novo-date-picker [(ngModel)]="dateTwo"></novo-date-picker>
+</div>

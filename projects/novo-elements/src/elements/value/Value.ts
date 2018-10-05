@@ -18,14 +18,14 @@ export enum NOVO_VALUE_THEME {
   template: `
         <ng-container [ngSwitch]="type">
             <div class="value-outer" *ngIf="showLabel">
-                <label>{{ meta.label }}</label>
+                <label class="skeleton">{{ label }}</label>
                 <a *ngSwitchCase="NOVO_VALUE_TYPE.INTERNAL_LINK" class="value" (click)="openLink()" [innerHTML]="data | render : meta"></a>
                 <a *ngSwitchCase="NOVO_VALUE_TYPE.LINK" class="value" [href]="url" target="_blank" [innerHTML]="data | render : meta"></a>
                 <novo-entity-list *ngSwitchCase="NOVO_VALUE_TYPE.ENTITY_LIST" [data]='data' [meta]="meta"></novo-entity-list>
             </div>
             <div *ngSwitchDefault class="value-outer" [ngClass]="customClass">
-                <label>{{ meta.label }}</label>
-                <div *ngIf="isDefault" class="value" [innerHTML]="data | render : meta"></div>
+                <label class="skeleton">{{ label }}</label>
+                <div *ngIf="isDefault" class="value skeleton" [innerHTML]="data | render : meta"></div>
             </div>
             <div class="actions" *ngIf="showIcon">
                 <i *ngFor="let icon of meta.icons" [class]="iconClass(icon)" (click)="onValueClick(icon)"></i>
@@ -37,15 +37,31 @@ export class NovoValueElement implements OnInit, OnChanges {
   @Input()
   data: any; // TODO use interface
   @Input()
-  meta: any; // TODO use interface
+  meta: any = { type: 'SCALAR', label: '' }; // TODO use interface
   @Input()
   theme: NOVO_VALUE_THEME = NOVO_VALUE_THEME.DEFAULT;
 
-  type: NOVO_VALUE_TYPE;
+  private _type: NOVO_VALUE_TYPE;
   NOVO_VALUE_TYPE = NOVO_VALUE_TYPE;
   NOVO_VALUE_THEME = NOVO_VALUE_THEME;
   url: string;
   customClass: string = '';
+
+  @Input()
+  set label(lbl: string) {
+    this.meta.label = lbl;
+  }
+  get label(): string {
+    return this.meta.label;
+  }
+
+  @Input()
+  set type(typ: string) {
+    this.meta.type = typ;
+  }
+  get type(): string {
+    return this.meta.type;
+  }
 
   ngOnInit() {
     if (Helpers.isEmpty(this.meta)) {
@@ -77,7 +93,9 @@ export class NovoValueElement implements OnInit, OnChanges {
   }
 
   public get showLabel(): boolean {
-    return this.type === NOVO_VALUE_TYPE.INTERNAL_LINK || this.type === NOVO_VALUE_TYPE.LINK || this.type === NOVO_VALUE_TYPE.ENTITY_LIST;
+    return (
+      this._type === NOVO_VALUE_TYPE.INTERNAL_LINK || this._type === NOVO_VALUE_TYPE.LINK || this._type === NOVO_VALUE_TYPE.ENTITY_LIST
+    );
   }
 
   public get showIcon(): boolean {
@@ -97,7 +115,7 @@ export class NovoValueElement implements OnInit, OnChanges {
 
   ngOnChanges(changes?: SimpleChanges): any {
     if (this.meta && this.isLinkField(this.meta, this.data)) {
-      this.type = NOVO_VALUE_TYPE.LINK;
+      this._type = NOVO_VALUE_TYPE.LINK;
       // Make sure the value has a protocol, otherwise the URL will be relative
       let hasProtocol: any = new RegExp('^(http|https)://', 'i');
       if (!hasProtocol.test(this.data)) {
@@ -106,7 +124,7 @@ export class NovoValueElement implements OnInit, OnChanges {
         this.url = this.data;
       }
     } else if (this.isEntityList(this.meta.type)) {
-      this.type = NOVO_VALUE_TYPE.ENTITY_LIST;
+      this._type = NOVO_VALUE_TYPE.ENTITY_LIST;
     } else if (this.isHTMLField(this.meta)) {
       this.customClass = this.meta.customClass ? this.meta.customClass : '';
       if (this.meta.stripHTML && this.data && this.data.replace) {
@@ -120,7 +138,7 @@ export class NovoValueElement implements OnInit, OnChanges {
         case 'Opportunity':
         case 'JobOrder':
         case 'Placement':
-          this.type = NOVO_VALUE_TYPE.INTERNAL_LINK;
+          this._type = NOVO_VALUE_TYPE.INTERNAL_LINK;
           break;
         default:
           break;

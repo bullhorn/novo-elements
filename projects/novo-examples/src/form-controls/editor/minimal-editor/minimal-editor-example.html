@@ -1,0 +1,9 @@
+<novo-editor [name]="'demoEditor'" [(ngModel)]="editorValue" [minimal]="true" #editor></novo-editor>
+
+<button theme="primary" (click)="insertText(editor)">Insert "Hello World" at Cursor</button>
+
+<p>Value:</p>
+<p [innerHtml]="editorValue"></p>
+
+<p>HTML:</p>
+<pre><code>{{editorValue}}</code></pre>

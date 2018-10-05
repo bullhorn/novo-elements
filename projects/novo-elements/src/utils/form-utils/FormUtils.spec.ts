@@ -192,7 +192,7 @@ describe('Utils: FormUtils', () => {
       expect(formUtils.determineInputType).toBeDefined();
       expect(formUtils.determineInputType({ type: 'file' })).toBe('file');
     });
-    xit('should throw an error when a type doesn\'t exist for the field.', () => {
+    xit("should throw an error when a type doesn't exist for the field.", () => {
       expect(formUtils.determineInputType).toBeDefined();
       expect(() => {
         formUtils.determineInputType({});
@@ -384,7 +384,7 @@ describe('Utils: FormUtils', () => {
       expect(formUtils.getControlOptions).toBeDefined();
       formUtils.getControlOptions({ dataType: 'Boolean' });
     });
-    it('should return an object with a function that returns a promise when there\'s an optionsUrl', () => {
+    it("should return an object with a function that returns a promise when there's an optionsUrl", () => {
       expect(formUtils.getControlOptions).toBeDefined();
       let result = formUtils.getControlOptions({ optionsUrl: 'TEST' });
       expect(result.field).toBe('value');
@@ -394,7 +394,7 @@ describe('Utils: FormUtils', () => {
         expect(returnValue.length).toBe(0);
       });
     });
-    it('should return an object with a function that returns a promise when there\'s an optionsUrl that calls an API', () => {
+    it("should return an object with a function that returns a promise when there's an optionsUrl that calls an API", () => {
       expect(formUtils.getControlOptions).toBeDefined();
       let mockHttp = {
         get: () => {

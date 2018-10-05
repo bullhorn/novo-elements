@@ -71,8 +71,8 @@ nav.main-nav {
   [data-name='bullhorn-text'] {
     width: 100%;
     max-width: 150px;
-    margin: 0 auto 20px;
-    display: block;
+    margin: 0 20px;
+    display: inline-block;
   } // Start menu link styles
   .menu-list {
     position: relative;
@@ -102,17 +102,21 @@ nav.main-nav {
     padding-left: 15px;
   }
   .menu-link:focus,
-  .menu-link:hover {
+  .menu-link:hover,
+  a.menu-item-header:focus,
+  a.menu-item-header:hover {
     outline: none;
     color: #fff;
   }
-  .menu-item .router-link-active.menu-link {
+  .router-link-active.menu-link,
+  .router-link-active.menu-item-header {
     color: #fff;
     transition: color 0.5s;
   }
   .menu-section-header {
     display: block;
-    span {
+    .menu-item-header {
+      color: darken(#acaeb1, 4%);
       height: 2.5rem;
       line-height: 2.5rem;
       display: block;

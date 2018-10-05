@@ -1,0 +1,16 @@
+
+<novo-tiles [options]="locales" [(ngModel)]="currentLocale" (onChange)="changeLanguage($event)"></novo-tiles>
+
+<h4>Pipe</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p>{{ 'greeting' | translate }}</p>
+    </div>
+</div>
+
+<h4>Directive</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p [translate]="'greeting'"></p>
+    </div>
+</div>

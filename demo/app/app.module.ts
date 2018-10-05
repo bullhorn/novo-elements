@@ -5,6 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { NovoExamplesRoutesModule } from 'novo-examples';
+
 // Vendor
 import {
   NovoElementsModule,
@@ -16,67 +18,9 @@ import {
   NovoModalService,
   AppBridgeService,
   DevAppBridgeService,
-  NovoTemplateService,
+  // NovoTemplateService,
 } from 'novo-elements';
-// APP
-import { CodeSnippet } from './elements/codesnippet/CodeSnippet';
-import { MultiCodeSnippet } from './elements/codesnippet/MultiCodeSnippet';
-import { Home } from './pages/home/Home';
-import { ColorComponent, CompositionComponent, TypographyComponent, IconographyComponent } from './pages/design';
-import {
-  ButtonDemoComponent,
-  RadioDemoComponent,
-  CustomQuickNoteResults,
-  QuickNoteDemoComponent,
-  ModalDemoComponent,
-  FormDemoComponent,
-  ToastDemoComponent,
-  TooltipDemoComponent,
-  CardDemoComponent,
-  LoadingDemoComponent,
-  DropdownDemoComponent,
-  PickerDemoComponent,
-  ChipsDemoComponent,
-  SelectDemoComponent,
-  TabsDemoComponent,
-  TableDemoComponent,
-  ListDemoComponent,
-  HeaderDemoComponent,
-  SwitchDemoComponent,
-  SearchDemoComponent,
-  CalendarDemoComponent,
-  DragulaDemoComponent,
-  TilesDemoComponent,
-  SlidesDemoComponent,
-  EditorDemoComponent,
-  TipWellDemoComponent,
-  CategoryDropdownDemoComponent,
-  MultiPickerDemoComponent,
-  PopOverDemoComponent,
-  CustomDemoComponent,
-  DatePickerDemoComponent,
-  DateLocaleDemoComponent,
-  FieldInteractionsDemoComponent,
-  DataTableDemoComponent,
-  FormGroupedDemoComponent,
-  ValueDemoComponent,
-  AceEditorDemoComponent,
-  ConfigureColumnsModal,
-  ExpansionDemoComponent,
-  StepperDemoComponent,
-} from './pages/elements';
-import { PipesDemoComponent, UtilsDemoComponent, AppBridgeDemoComponent, SecurityDemoComponent } from './pages/utils';
-import {
-  ModalSuccessDemo,
-  ModalWarningDemo,
-  ModalErrorDemo,
-  ModalCustomDemo,
-  ModalAddDemo,
-  ModalEditDemo,
-} from './pages/elements/modal/ModalDemo';
-import { StatusCell, ExtraDetails, ImageCell, ActionsCell } from './pages/elements/table/TableDemo';
-import { CustomPickerResults } from './pages/elements/picker/PickerDemo';
-import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 
@@ -96,71 +40,7 @@ export function provideAppBridgeService(http) {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CodeSnippet,
-    MultiCodeSnippet,
-    Home,
-    ColorComponent,
-    CompositionComponent,
-    TypographyComponent,
-    IconographyComponent,
-    ButtonDemoComponent,
-    RadioDemoComponent,
-    CustomQuickNoteResults,
-    QuickNoteDemoComponent,
-    ModalDemoComponent,
-    FormDemoComponent,
-    ToastDemoComponent,
-    TooltipDemoComponent,
-    CardDemoComponent,
-    LoadingDemoComponent,
-    DropdownDemoComponent,
-    PickerDemoComponent,
-    ChipsDemoComponent,
-    SelectDemoComponent,
-    TabsDemoComponent,
-    TableDemoComponent,
-    ListDemoComponent,
-    HeaderDemoComponent,
-    SwitchDemoComponent,
-    SearchDemoComponent,
-    CalendarDemoComponent,
-    DatePickerDemoComponent,
-    DateLocaleDemoComponent,
-    DragulaDemoComponent,
-    TilesDemoComponent,
-    SlidesDemoComponent,
-    EditorDemoComponent,
-    TipWellDemoComponent,
-    UtilsDemoComponent,
-    PipesDemoComponent,
-    ModalSuccessDemo,
-    ModalWarningDemo,
-    ModalErrorDemo,
-    ModalCustomDemo,
-    ModalAddDemo,
-    ModalEditDemo,
-    StatusCell,
-    ActionsCell,
-    ExtraDetails,
-    ImageCell,
-    CustomPickerResults,
-    CategoryDropdownDemoComponent,
-    MultiPickerDemoComponent,
-    PopOverDemoComponent,
-    CustomDemoComponent,
-    AppBridgeDemoComponent,
-    FieldInteractionsDemoComponent,
-    DataTableDemoComponent,
-    FormGroupedDemoComponent,
-    ValueDemoComponent,
-    AceEditorDemoComponent,
-    SecurityDemoComponent,
-    ConfigureColumnsModal,
-    ExpansionDemoComponent,
-    StepperDemoComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     // NG2
     BrowserAnimationsModule,
@@ -173,10 +53,10 @@ export function provideAppBridgeService(http) {
     NovoElementsModule,
     NovoElementProviders.forRoot(),
     // APP
-    AppRoutingModule,
+    NovoExamplesRoutesModule,
   ],
   providers: [
-    NovoTemplateService,
+    // NovoTemplateService,
     FormUtils,
     NovoLabelService,
     {
@@ -190,23 +70,7 @@ export function provideAppBridgeService(http) {
       deps: [HttpClient],
     },
   ],
-  entryComponents: [
-    AppComponent,
-    ModalSuccessDemo,
-    ModalWarningDemo,
-    ModalErrorDemo,
-    ModalCustomDemo,
-    ModalAddDemo,
-    ModalEditDemo,
-    StatusCell,
-    ExtraDetails,
-    ImageCell,
-    ActionsCell,
-    CustomPickerResults,
-    CustomQuickNoteResults,
-    CustomDemoComponent,
-    ConfigureColumnsModal,
-  ],
+  entryComponents: [AppComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

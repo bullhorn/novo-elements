@@ -1,0 +1,23 @@
+/** No CSS for this example */
+:host {
+  padding: 20px 30px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  flex-grow: 0;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  transition: background 460ms ease-in-out;
+}
+
+:host label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+:host .caption {
+  font-size: 0.9em;
+  margin-right: 5px;
+}

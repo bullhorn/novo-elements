@@ -1,0 +1,5 @@
+/** CSS for this example */
+.flex {
+  display: flex;
+  flex-flow: row nowrap;
+}

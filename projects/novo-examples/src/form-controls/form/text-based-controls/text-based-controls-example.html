@@ -1,0 +1,35 @@
+<!--Check out the FormDemo.js for more information!-->
+<button theme="secondary" (click)="form.showAllFields()">Show All Fields</button>
+<button theme="secondary" (click)="form.showOnlyRequired(false)">Show Required Fields</button>
+<br/>
+<br/>
+<novo-form [form]="textForm" #form>
+    <div class="novo-form-row">
+        <novo-control [form]="textForm" [control]="textControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [autoFocus]="true" [form]="textForm" [control]="emailControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="textForm" [control]="numberControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="textForm" [control]="currencyControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="textForm" [control]="floatControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="textForm" [control]="percentageControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="textForm" [control]="textAreaControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="textForm" [control]="quickNoteControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+        <novo-control [form]="textForm" [control]="aceEditorControl"></novo-control>
+    </div>
+</novo-form>
+<div class="final-value">Value: {{textForm.value | json}}</div>

@@ -1,0 +1,9 @@
+<article class="color-blocks primary-colors">
+  <div *ngFor="let color of primaryColors" class="block">
+      <div class="color-square bgc-{{color.name}}" (click)="copyLink(color)">
+        <h3 class="color-text"><span>#</span>{{color.hex}}</h3>
+      </div>
+      <h6>{{color.name}}</h6>
+      <span class="vars" *ngFor="let variable of color.variables">${{variable}}</span>
+  </div>
+</article>

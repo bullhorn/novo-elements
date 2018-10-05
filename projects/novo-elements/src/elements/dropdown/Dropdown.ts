@@ -49,12 +49,15 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
     | 'bottom-left'
     | 'bottom-right'
     | 'top-left'
-    | 'top-right' =
-    'default';
-  @Input() scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
-  @Input() height: number;
-  @Input() width: number = -1; // Defaults to dynamic width (no hardcoded width value and no host width lookup)
-  @Input() appendToBody: boolean = false; // Deprecated
+    | 'top-right' = 'default';
+  @Input()
+  scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
+  @Input()
+  height: number;
+  @Input()
+  width: number = -1; // Defaults to dynamic width (no hardcoded width value and no host width lookup)
+  @Input()
+  appendToBody: boolean = false; // Deprecated
 
   @Output()
   toggled: EventEmitter<boolean> = new EventEmitter<boolean>();

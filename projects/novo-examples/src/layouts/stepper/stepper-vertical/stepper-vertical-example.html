@@ -1,0 +1,30 @@
+
+<novo-vertical-stepper [linear]="isLinear">
+  <novo-step [stepControl]="firstFormGroup" theme="candidate" icon="candidate">
+    <form [formGroup]="firstFormGroup">
+      <ng-template novoStepLabel>Fill out your name</ng-template>
+      <input placeholder="Last name, First name" formControlName="firstCtrl" required>
+      <div>
+        <!-- <button novo-button novoStepperNext>Next</button> -->
+      </div>
+    </form>
+  </novo-step>
+  <novo-step [stepControl]="secondFormGroup" theme="contact" icon="person">
+    <form [formGroup]="secondFormGroup">
+      <ng-template novoStepLabel>Fill out your address</ng-template>
+      <input placeholder="Address" formControlName="secondCtrl" required>
+      <div>
+        <!-- <button novo-button novoStepperPrevious>Back</button>
+        <button novo-button novoStepperNext>Next</button> -->
+      </div>
+    </form>
+  </novo-step>
+  <novo-step>
+    <ng-template novoStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <!-- <button novo-button novoStepperPrevious>Back</button>
+      <button novo-button (click)="stepper.reset()">Reset</button> -->
+    </div>
+  </novo-step>
+</novo-vertical-stepper>

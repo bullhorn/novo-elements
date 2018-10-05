@@ -1,0 +1,8 @@
+<button theme="primary" (click)="updateInitialValue()">Update Initial Value</button>
+<br/>
+<br/>
+<novo-form [form]="formGroup">
+    <novo-control-group [canEdit]="canEditFunction" [canRemove]="canRemoveFunction" (onRemove)="onRemove($event)" (onEdit)="onEdit($event)" [initialValue]="initValue" [add]="simpleAddConfig" remove="true" edit="true" label="Horizontal" key="horizontal" [form]="formGroup" [controls]="controls" [emptyMessage]="emptyMessage"></novo-control-group>
+</novo-form>
+<div class="final-value">Initial Value: {{ initValue | json }}</div>
+<div class="final-value">Value: {{ formGroup.value | json }}</div>
