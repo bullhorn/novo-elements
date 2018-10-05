@@ -17,7 +17,7 @@ export class AppComponent {
   layoutRoutes: Array<any>;
   utilRoutes: Array<any>;
 
-  constructor(router: Router, private viewContainerRef: ViewContainerRef, toaster: NovoToastService, modalService: NovoModalService) {
+  constructor(router: Router, viewContainerRef: ViewContainerRef, toaster: NovoToastService, modalService: NovoModalService) {
     toaster.parentViewContainer = viewContainerRef;
     modalService.parentViewContainer = viewContainerRef;
 

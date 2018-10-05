@@ -1,10 +1,6 @@
-Tooltips [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/tooltip)
-===============================================================================================
+# Tooltips [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/tooltip)
 
-We use the [hint.css](http://kushagragour.in/lab/hint/) module for our tooltip implementation, wrapping it inside a directive.
-
-Helper
-------
+## Helper
 
 Helper tooltips contain basic text that provides some additional information about an element.
 

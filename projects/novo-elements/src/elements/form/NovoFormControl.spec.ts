@@ -40,7 +40,7 @@ describe('Elements: NovoFormControl', () => {
       jest.spyOn(component, 'setValidators');
       jest.spyOn(component, 'updateValueAndValidity');
     });
-    it("should add new a validator and update the value and validity if it wasn't required before.", () => {
+    it('should add new a validator and update the value and validity if it wasn\'t required before.', () => {
       expect(component.setRequired).toBeDefined();
       component.hasRequiredValidator = false;
       component.setRequired(true);
@@ -50,7 +50,7 @@ describe('Elements: NovoFormControl', () => {
       expect(component.setValidators).toHaveBeenCalledWith([Validators.required]);
       expect(component.updateValueAndValidity).toHaveBeenCalled();
     });
-    it("should add new a validator and update the value and validity if it wasn't required before.", () => {
+    it('should add new a validator and update the value and validity if it wasn\'t required before.', () => {
       expect(component.setRequired).toBeDefined();
       component.hasRequiredValidator = true;
       component.setRequired(false);

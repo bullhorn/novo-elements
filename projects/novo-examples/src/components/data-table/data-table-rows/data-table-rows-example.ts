@@ -278,8 +278,6 @@ export class DataTableRowsExample {
     this.basicRows = [...this.staticDataSet1];
   }
 
-  public ngOnInit(): void {}
-
   public switchPaginationType(type: 'basic' | 'standard') {
     this.sharedPaginationOptions = Object.assign({}, this.sharedPaginationOptions, { theme: type });
     this.ref.detectChanges();

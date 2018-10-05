@@ -604,7 +604,7 @@ export class NovoTableElement implements DoCheck {
 
   escapeCharacters(filter) {
     if (typeof filter === 'string') {
-      return filter.replace(/'/g, "''");
+      return filter.replace(/'/g, '\'\'');
     }
     return filter;
   }

@@ -14,7 +14,7 @@ export class FiRequiredExample {
   public form: any = {};
   public controls: any = {};
 
-  constructor(private formUtils: FormUtils) {
+  constructor(formUtils: FormUtils) {
     let requiredFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - requiredFunction'); // tslint:disable-line
       let activeValue = API.getActiveValue();
