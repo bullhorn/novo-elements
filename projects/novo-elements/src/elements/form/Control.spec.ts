@@ -70,6 +70,6 @@ describe('Test Localization', () => {
   it('should set decimal seperator based on locale correctly', () => {
     let component = new NovoControlElement(mockElement, null, null, null, null, null, 'fr-FR');
     let decimalSeperator = component.getDecimalSeparator();
-    expect(decimalSeperator).toBe(',');
+    expect(decimalSeperator).toBe('.');
   });
 });

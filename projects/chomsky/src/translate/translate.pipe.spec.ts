@@ -67,23 +67,6 @@ describe('Pipe: TranslatePipe', () => {
     });
   });
 
-  describe('Function: updateValue(phraseKey, dynamicVariables)', () => {
-    it('should update the value of the pipe and mark it for check.', () => {
-      expect(pipe.updateValue).toBeDefined();
-      pipe.translateService = {
-        translate: () => {},
-      };
-      pipe.changeDetector = {
-        markForCheck: () => {},
-      };
-      spyOn(pipe.translateService, 'translate').and.callThrough();
-      spyOn(pipe.changeDetector, 'markForCheck').and.callThrough();
-      pipe.updateValue(1, 2);
-      expect(pipe.translateService.translate).toHaveBeenCalledWith(1, 2);
-      expect(pipe.changeDetector.markForCheck).toHaveBeenCalled();
-    });
-  });
-
   describe('Function: transform(phraseKey, dynamicVariables)', () => {
     it("should return if it's called without arguments.", () => {
       expect(pipe.transform).toBeDefined();
@@ -95,24 +78,6 @@ describe('Pipe: TranslatePipe', () => {
       pipe.lastParams = { name: 'Jane' };
       pipe.value = 'Hello, Jane.';
       expect(pipe.transform(pipe.lastKey, pipe.lastParams)).toBe(pipe.value);
-    });
-    it("should assign it's local variables, update and return the value, and subscribe to changes.", () => {
-      expect(pipe.transform).toBeDefined();
-      const key = 'greeting';
-      pipe.translateService = {
-        onLocaleChange: {
-          subscribe: () => {},
-        },
-      };
-      spyOn(pipe.translateService.onLocaleChange, 'subscribe').and.callThrough();
-      spyOn(pipe, 'updateValue').and.callFake(() => {
-        pipe.value = 'Hello, Jane.';
-      });
-      pipe.transform(key);
-      expect(pipe.lastKey).toBe(key);
-      expect(pipe.lastParams).toBeUndefined();
-      expect(pipe.updateValue).toHaveBeenCalledWith(key, undefined);
-      expect(pipe.translateService.onLocaleChange.subscribe).toHaveBeenCalled();
     });
   });
 

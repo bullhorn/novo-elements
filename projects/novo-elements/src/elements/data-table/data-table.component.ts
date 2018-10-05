@@ -114,7 +114,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
     <ng-template novoTemplate="textCellTemplate"
           let-row
           let-col="col">
-          <span>{{ row[col.id] | dataTableInterpolate:col }}</span>
+          <span [style.width.px]="col?.width" [style.min-width.px]="col?.width" [style.max-width.px]="col?.width">{{ row[col.id] | dataTableInterpolate:col }}</span>
     </ng-template>
     <ng-template novoTemplate="dateCellTemplate"
           let-row
@@ -149,7 +149,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
     <ng-template novoTemplate="linkCellTemplate"
           let-row
           let-col="col">
-          <a (click)="col.handlers?.click({originalEvent: $event, row: row})">{{ row[col.id] | dataTableInterpolate:col }}</a>
+          <a (click)="col.handlers?.click({originalEvent: $event, row: row})" [style.width.px]="col?.width" [style.min-width.px]="col?.width" [style.max-width.px]="col?.width">{{ row[col.id] | dataTableInterpolate:col }}</a>
     </ng-template>
     <ng-template novoTemplate="telCellTemplate"
           let-row
