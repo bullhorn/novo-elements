@@ -31,7 +31,7 @@ import { NovoLoadingElement } from '../loading/Loading';
 import { NovoItemElement, NovoListElement } from '../dropdown/Dropdown';
 import { NovoChipsElement, NovoChipElement } from '../chips/Chips';
 import { NovoDropdownElement } from '../dropdown/Dropdown';
-import { TooltipDirective } from '../tooltip/Tooltip';
+import { TooltipDirective } from '../tooltip/Tooltip.directive';
 import { NovoSelectElement } from '../select/Select';
 
 import { NovoLabelService } from '../../services/novo-label-service';

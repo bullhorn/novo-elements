@@ -374,6 +374,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         handleTyping: this.handleTyping.bind(this),
         updateValidity: this.updateValidity.bind(this),
         toggleActive: this.toggleActive.bind(this),
+        validateIntegerInput: this.validateIntegerInput.bind(this),
+        validateNumberOnBlur: this.validateNumberOnBlur.bind(this),
       },
       form: this.form,
     };
@@ -596,6 +598,25 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       this._enteredText = '';
     }
     this.change.emit(value);
+  }
+
+  validateNumberOnBlur(event: FocusEvent) {
+    this._focused = false;
+    this.focusedField = '';
+    this.showCount = false;
+    if (this.form.controls[this.control.key].subType === 'number') {
+      this.validateIntegerInput();
+    }
+    this._blurEmitter.emit(event);
+  }
+
+  validateIntegerInput() {
+    const NUMBERS_ONLY = /^[\d\-]\d*$/;
+    if (this.form.controls[this.control.key].value && !NUMBERS_ONLY.test(this.form.controls[this.control.key].value)) {
+      this.form.controls[this.control.key].markAsInvalid(
+        `${this.labels.invalidIntegerInput} ${this.form.controls[this.control.key].label.toUpperCase()}`,
+      );
+    }
   }
 
   restrictKeys(event) {
