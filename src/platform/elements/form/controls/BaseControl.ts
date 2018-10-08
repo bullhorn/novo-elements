@@ -66,7 +66,7 @@ export interface NovoControlConfig {
     labelStyle?: string;
     draggable?: boolean;
     iconStyle?: string;
-    remove?: boolean;
+    removable?: boolean;
   };
   template?: any;
   customControlConfig?: any;
@@ -140,7 +140,7 @@ export class BaseControl {
     labelStyle?: string;
     draggable?: boolean;
     iconStyle?: string;
-    remove?: boolean;
+    removable?: boolean;
   };
   template?: any;
   customControlConfig?: any;

@@ -67,7 +67,7 @@ describe('Elements: NovoFileInputElement', () => {
             spyOn(component, 'insertTemplatesBasedOnLayout');
             component.updateLayout();
             expect(component.layoutOptions).toBeDefined();
-            expect(component.layoutOptions).toEqual({ order: 'default', download: true, remove: true, labelStyle: 'default', draggable: false });
+            expect(component.layoutOptions).toEqual({ order: 'default', download: true, removable: true, labelStyle: 'default', draggable: false });
             expect(component.insertTemplatesBasedOnLayout).toHaveBeenCalled();
         });
     });
