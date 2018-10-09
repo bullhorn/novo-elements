@@ -82,6 +82,7 @@ describe('Control: BaseControl', () => {
         optionsType: 'TYPE',
         maxlength: 100,
         disabled: true,
+        layoutOptions: { removable: false },
         fileBrowserImageUploadUrl: '/foo/bar/baz',
         textMaskEnabled: true,
         maskOptions: { mask: ['TEST_MASK_OPTIONS'], keepCharPositions: false, guide: true },
@@ -138,6 +139,9 @@ describe('Control: BaseControl', () => {
     });
     it('should set the disabled', () => {
       expect(control.disabled).toEqual(true);
+    });
+    it('should set the layoutOptions', () => {
+      expect(control.layoutOptions).toEqual({ removable: false });
     });
     it('should set fileBrowserImageUploadUrl', () => {
       expect(control.fileBrowserImageUploadUrl).toEqual('/foo/bar/baz');

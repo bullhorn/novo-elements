@@ -13,7 +13,7 @@ const FILE_VALUE_ACCESSOR = {
     multi: true
 };
 
-const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default', draggable: false };
+const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, labelStyle: 'default', draggable: false };
 
 @Component({
   selector: 'novo-file-input',
@@ -44,7 +44,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, labelStyle: 'default
                   <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
                     <div *ngIf="!layoutOptions.customActions">
                       <button *ngIf="layoutOptions.download" type="button" theme="icon" icon="save" (click)="download(file)" [attr.data-automation-id]="'file-download'" tabindex="-1"></button>
-                      <button *ngIf="!disabled" type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
+                      <button *ngIf="!disabled && layoutOptions.removable" type="button" theme="icon" icon="close" (click)="remove(file)" [attr.data-automation-id]="'file-remove'" tabindex="-1"></button>
                     </div>
                     <div *ngIf="layoutOptions.customActions">
                       <button *ngIf="layoutOptions.edit && !disabled" type="button" theme="icon" icon="edit" (click)="customEdit(file)" [attr.data-automation-id]="'file-edit'" tabindex="-1"></button>
@@ -67,7 +67,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   @Input() multiple: boolean = false;
   @Input() disabled: boolean = false;
   @Input() placeholder: string;
-  @Input() layoutOptions: { order?: string; download?: boolean; edit?: boolean; labelStyle?: string; draggable?: boolean };
+  @Input() layoutOptions: { order?: string; download?: boolean; removable?: boolean; edit?: boolean; labelStyle?: string; draggable?: boolean };
   @Input() value: Array<any> = [];
 
   @Output() edit: EventEmitter<any> = new EventEmitter();
