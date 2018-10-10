@@ -32,6 +32,9 @@ novo-value {
         &.clickable {
             cursor: pointer;
             color: $ocean;
+            &.bhi-next {
+                color: $grey;
+            }
         }
     }
     novo-entity-list {
