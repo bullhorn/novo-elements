@@ -21,6 +21,11 @@ novo-value {
             padding: 5px 0;
             overflow-wrap: break-word;
         }
+        .value {
+            > i {
+              margin: 0;
+            }
+          }
     }
     .actions {
         i {
