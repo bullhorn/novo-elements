@@ -26,6 +26,11 @@ novo-value {
         margin: 0;
       }
     }
+    @each $entity, $color in $entity-colors {
+      i.#{$entity} {
+        color: $color;
+      }
+    }
   }
   .actions {
     i {
