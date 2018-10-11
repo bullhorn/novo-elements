@@ -81,14 +81,12 @@ export class FiModifyOptionsExample {
                 if (query && query.length) {
                   http
                     .get('http://novo-elements-mock.getsandbox.com/users')
-                    .pipe(
-                      map(function(results: any[]) {
-                        return results.map((result) => {
-                          result.test = 'Built with Options Promise';
-                          return result;
-                        });
-                      }),
-                    )
+                    .map(function(results: any[]) {
+                      return results.map((result) => {
+                        result.test = 'Built with Options Promise';
+                        return result;
+                      });
+                    })
                     .subscribe(resolve, reject);
                 } else {
                   resolve(['DEFAULT']);

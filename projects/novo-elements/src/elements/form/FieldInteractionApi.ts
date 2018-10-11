@@ -15,6 +15,32 @@ import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { IFieldInteractionEvent } from './FormInterfaces';
 
+class CustomHttp {
+  url: string;
+  options: any;
+  mapFn: any;
+
+  constructor(private http: HttpClient) {}
+
+  get(url: string, options?: any) {
+    this.url = url;
+    this.options = options;
+    return this;
+  }
+
+  map(mapFn: any) {
+    this.mapFn = mapFn;
+    return this;
+  }
+
+  subscribe(resolve: any, reject?: any) {
+    return this.http
+      .get(this.url, this.options)
+      .pipe(map(this.mapFn))
+      .subscribe(resolve, reject);
+  }
+}
+
 @Injectable()
 export class FieldInteractionApi {
   private _globals: any;
@@ -520,7 +546,7 @@ export class FieldInteractionApi {
           format: config.format,
           options: (query) => {
             if (config.optionsPromise) {
-              return config.optionsPromise(query, this.http);
+              return config.optionsPromise(query, new CustomHttp(this.http));
             }
             return new Promise((resolve, reject) => {
               let url = config.optionsUrlBuilder ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
