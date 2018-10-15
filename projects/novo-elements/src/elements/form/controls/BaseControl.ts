@@ -66,6 +66,7 @@ export interface NovoControlConfig {
     labelStyle?: string;
     draggable?: boolean;
     iconStyle?: string;
+    removable?: boolean;
   };
   template?: any;
   customControlConfig?: any;
@@ -134,7 +135,14 @@ export class BaseControl {
   tooltipPreline?: boolean;
   removeTooltipArrow?: boolean;
   tooltipAutoPosition?: boolean;
-  layoutOptions?: { order?: string; download?: boolean; labelStyle?: string; draggable?: boolean; iconStyle?: string };
+  layoutOptions?: {
+    order?: string;
+    download?: boolean;
+    labelStyle?: string;
+    draggable?: boolean;
+    iconStyle?: string;
+    removable?: boolean;
+  };
   template?: any;
   customControlConfig?: any;
   military?: boolean;

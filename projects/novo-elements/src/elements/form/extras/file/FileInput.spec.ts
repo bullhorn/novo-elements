@@ -1,4 +1,4 @@
-// NG2
+// NG
 import { TestBed, async } from '@angular/core/testing';
 // App
 import { NovoFileInputElement } from './FileInput';
@@ -29,36 +29,43 @@ describe('Elements: NovoFileInputElement', () => {
   describe('Method: ngOnInit()', () => {
     it('should setup drag events', () => {
       expect(component.ngOnInit).toBeDefined();
-      jest.spyOn(component.element.nativeElement, 'addEventListener').mockImplementation(() => {});
+      spyOn(component.element.nativeElement, 'addEventListener');
       component.ngOnInit();
       expect(component.element.nativeElement.addEventListener).toHaveBeenCalled();
     });
     it('should update layout', () => {
       expect(component.ngOnInit).toBeDefined();
-      jest.spyOn(component, 'updateLayout').mockImplementation(() => {});
+      spyOn(component, 'updateLayout');
       component.ngOnInit();
       expect(component.updateLayout).toHaveBeenCalled();
     });
     it('should setup initial files list', () => {
       expect(component.ngOnInit).toBeDefined();
-      jest.spyOn(component, 'setInitialFileList').mockImplementation(() => {});
+      spyOn(component, 'setInitialFileList');
       component.ngOnInit();
       expect(component.setInitialFileList).toHaveBeenCalled();
     });
     it('should initialize dragula', () => {
       expect(component.ngOnInit).toBeDefined();
-      jest.spyOn(component, 'initializeDragula').mockImplementation(() => {});
+      spyOn(component, 'initializeDragula');
       component.ngOnInit();
       expect(component.initializeDragula).toHaveBeenCalled();
     });
   });
   describe('Method: updateLayout()', () => {
-    it('should set layoutOptions and call insertTemplatesBasedOnLayout', () => {
+    it('should set default layoutOptions and call insertTemplatesBasedOnLayout', () => {
       expect(component.updateLayout).toBeDefined();
       expect(component.layoutOptions).not.toBeDefined();
-      jest.spyOn(component, 'insertTemplatesBasedOnLayout').mockImplementation(() => {});
+      spyOn(component, 'insertTemplatesBasedOnLayout');
       component.updateLayout();
       expect(component.layoutOptions).toBeDefined();
+      expect(component.layoutOptions).toEqual({
+        order: 'default',
+        download: true,
+        removable: true,
+        labelStyle: 'default',
+        draggable: false,
+      });
       expect(component.insertTemplatesBasedOnLayout).toHaveBeenCalled();
     });
   });
@@ -71,7 +78,7 @@ describe('Elements: NovoFileInputElement', () => {
       };
       expect(component.initializeDragula).toBeDefined();
       expect(component.fileOutputBag).not.toBeDefined();
-      jest.spyOn(component.dragula, 'setOptions').mockImplementation(() => {});
+      spyOn(component.dragula, 'setOptions');
       component.initializeDragula();
       expect(component.fileOutputBag).toBe(expectedBag);
       expect(component.dragula.setOptions).toHaveBeenCalled();
@@ -83,7 +90,7 @@ describe('Elements: NovoFileInputElement', () => {
     });
     it('should correctly insert templates by default', () => {
       expect(component.insertTemplatesBasedOnLayout).toBeDefined();
-      jest.spyOn(component.container, 'createEmbeddedView').mockImplementation(() => {});
+      spyOn(component.container, 'createEmbeddedView');
       let expected = ['fileOutput', 'fileInput'];
       let insertedOrder = component.insertTemplatesBasedOnLayout();
       expect(component.container.createEmbeddedView).toHaveBeenCalled();
@@ -92,7 +99,7 @@ describe('Elements: NovoFileInputElement', () => {
     it('should correctly insert template if order is displayFilesBelow', () => {
       component.layoutOptions.order = 'displayFilesBelow';
       expect(component.insertTemplatesBasedOnLayout).toBeDefined();
-      jest.spyOn(component.container, 'createEmbeddedView').mockImplementation(() => {});
+      spyOn(component.container, 'createEmbeddedView');
       let expected = ['fileInput', 'fileOutput'];
       let insertedOrder = component.insertTemplatesBasedOnLayout();
       expect(component.container.createEmbeddedView).toHaveBeenCalled();
@@ -103,7 +110,7 @@ describe('Elements: NovoFileInputElement', () => {
   describe('Method: ngOnDestroy()', () => {
     it('should destroy events.', () => {
       expect(component.ngOnDestroy).toBeDefined();
-      jest.spyOn(component.element.nativeElement, 'removeEventListener').mockImplementation(() => {});
+      spyOn(component.element.nativeElement, 'removeEventListener');
       component.ngOnDestroy();
       expect(component.element.nativeElement.removeEventListener).toHaveBeenCalled();
     });
@@ -111,7 +118,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customEdit(file)', () => {
     beforeEach(() => {
-      jest.spyOn(component.edit, 'emit').mockImplementation(() => {});
+      spyOn(component.edit, 'emit');
     });
     it('should emit an event', () => {
       component.customEdit({ name: 'file.pdf', loaded: true });
@@ -121,7 +128,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customSave(file)', () => {
     beforeEach(() => {
-      jest.spyOn(component.save, 'emit').mockImplementation(() => {});
+      spyOn(component.save, 'emit');
     });
     it('should emit an event', () => {
       component.customSave({ name: 'file.pdf', loaded: true });
@@ -131,7 +138,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customDelete(file)', () => {
     beforeEach(() => {
-      jest.spyOn(component.delete, 'emit').mockImplementation(() => {});
+      spyOn(component.delete, 'emit');
     });
     it('should emit an event', () => {
       component.customDelete({ name: 'file.pdf', loaded: true });
@@ -141,7 +148,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customCheck(files)', () => {
     beforeEach(() => {
-      jest.spyOn(component.upload, 'emit').mockImplementation(() => {});
+      spyOn(component.upload, 'emit');
     });
     it('should emit an event', () => {
       component.customCheck({ name: 'file.pdf', loaded: true });

@@ -27,10 +27,31 @@ novo-value {
       cursor: default;
       color: #9e9e9e;
       margin-left: 15px;
+      margin-top: 7px;
     }
     &.clickable {
       cursor: pointer;
       color: $ocean;
+      &.bhi-next {
+        color: $grey;
+      }
+    }
+  }
+  novo-entity-list {
+    display: block;
+    .entity {
+      padding-top: 6px;
+      padding-bottom: 6px;
+      font-size: 1.15em;
+    }
+    @each $entity, $color in $entity-colors {
+      i.#{$entity} {
+        color: $color;
+      }
+    }
+    i {
+      font-size: 1.1em;
+      margin-right: 6px;
     }
   }
 }

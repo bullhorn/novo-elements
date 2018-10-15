@@ -8,6 +8,38 @@
 
 
 
+<a name="2.18.0"></a>
+# [2.18.0](https://github.com/bullhorn/novo-elements/compare/v2.17.0...v2.18.0) (2018-10-11)
+
+
+### Bug Fixes
+
+* **calendar:** Move click event to button to avoid bad clicks ([151aea6](https://github.com/bullhorn/novo-elements/commit/151aea6))
+* **control:** Checking LOCALE for number seperator ([56e1c37](https://github.com/bullhorn/novo-elements/commit/56e1c37))
+* **control:** set classes on error messages if count is shown or not([#815](https://github.com/bullhorn/novo-elements/issues/815)) ([5a067ca](https://github.com/bullhorn/novo-elements/commit/5a067ca))
+* **data-table:** Fixing width with text based cells ([a7ac259](https://github.com/bullhorn/novo-elements/commit/a7ac259))
+* **datatable:** Fixing filter for dates to help with getting today only, fixes [#804](https://github.com/bullhorn/novo-elements/issues/804) ([eb1b37d](https://github.com/bullhorn/novo-elements/commit/eb1b37d))
+* **datatable:** Fixing pagingation on filter/search with static service, fixes [#803](https://github.com/bullhorn/novo-elements/issues/803) ([99f099c](https://github.com/bullhorn/novo-elements/commit/99f099c))
+* **form-utils:** Handle data type date and data specialization date as strings ([d821d05](https://github.com/bullhorn/novo-elements/commit/d821d05))
+* **picker:** Change to handle empty use case ([#822](https://github.com/bullhorn/novo-elements/issues/822)) ([2606f84](https://github.com/bullhorn/novo-elements/commit/2606f84))
+* **picker:** Change to trim highlight text ([#820](https://github.com/bullhorn/novo-elements/issues/820)) ([18865f1](https://github.com/bullhorn/novo-elements/commit/18865f1))
+* **tooltip:** Fix issue with novo tooltip styling ([227f5a7](https://github.com/bullhorn/novo-elements/commit/227f5a7))
+* **tooltip:** Fix issue with novo tooltip styling ([9007357](https://github.com/bullhorn/novo-elements/commit/9007357))
+
+
+### Features
+
+* **data-table:** Added an observable for when data is loaded into table ([#824](https://github.com/bullhorn/novo-elements/issues/824)) ([4494fdf](https://github.com/bullhorn/novo-elements/commit/4494fdf))
+* **FileInput:** Add flag to hide remove button ([#819](https://github.com/bullhorn/novo-elements/issues/819)) ([aa26be2](https://github.com/bullhorn/novo-elements/commit/aa26be2))
+* **tooltip:** Remove dependency on hint.css for tooltips and utilize CDK portals ([93c1e42](https://github.com/bullhorn/novo-elements/commit/93c1e42))
+
+
+### BREAKING CHANGES
+
+* **tooltip:** remove hint.css dependency and references to hint.css in build scripts
+
+
+
 <a name="2.17.0"></a>
 # [2.17.0](https://github.com/bullhorn/novo-elements/compare/v2.16.0...v2.17.0) (2018-09-14)
 
