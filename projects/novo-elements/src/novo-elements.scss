@@ -68,6 +68,7 @@
 // @import './elements/expansion/expansion-panel-header';
 @import './elements/stepper/stepper.component';
 @import './elements/stepper/step-header.component';
+@import './elements/simple-table/table';
 
 @each $basic, $color in $dark-colors {
   .bgc-#{$basic} {
