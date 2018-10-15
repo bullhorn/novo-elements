@@ -37,27 +37,20 @@ If using SCSS/SASS you will need to include the following includes: `node_module
 
 ## Build/Release/Publish
 
-> Automatically runs the tests, updates the `package.json` version, generates the `CHANGELOG.md`, generates a GitHub release, uploads the demo to GH-Pages and publishes.
-
-    # Bump the version up via NPM
-    npm version patch|major|minor
-
-    # This runs the following scripts AUTOMATICALLY
+    # Manually update the projects/*/package.json to the version you want
     # npm test
-    # npm run changelog (pushes git)
-    # npm run github-release
-    # npm run clean
-    # npm run compile (demo/bundles)
-    # npm run deploy:gh-pages
+    # npm run lint
+    # npm run build
+    # CD INTO EACH PROJECT IN DIST
     # npm publish
 
 ## Building Examples
 
-> All examples can be added to the appropriate directory in the `novo-examples` project.  Each markdown file will be converted to a demo page and a route will automatically be added to the demo. You can import any example project by using the angular selector, or inject it using the `code-example` tag, ie. `<code-example example="demo-name"></code-example>`.
+> All examples can be added to the appropriate directory in the `novo-examples` project. Each markdown file will be converted to a demo page and a route will automatically be added to the demo. You can import any example project by using the angular selector, or inject it using the `code-example` tag, ie. `<code-example example="demo-name"></code-example>`.
 
     # Compile markdown, generate routes, and AOT build the project
     npm run build:examples
-    
+
     # Automatically rebuild changes to the examples project
     npm run build:examples:watch
 
