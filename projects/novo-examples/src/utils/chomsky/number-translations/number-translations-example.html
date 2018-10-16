@@ -1,0 +1,18 @@
+
+<novo-tiles [options]="locales" [(ngModel)]="currentLocale" (onChange)="changeLanguage($event)"></novo-tiles>
+
+<h4>Pipe</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p>{{ 'alert' | translate: { count: demoVariables.count } }}</p>
+        <p>{{ 'debt' | translate: { balance: demoVariables.balance } }}</p>
+    </div>
+</div>
+
+<h4>Directive</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p [translate]="'alert'" [dynamicValues]="{ count: demoVariables.count }"></p>
+        <p [translate]="'debt'" [dynamicValues]="{ balance: demoVariables.balance }"></p>
+    </div>
+</div>

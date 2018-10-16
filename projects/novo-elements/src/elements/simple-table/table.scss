@@ -1,0 +1,344 @@
+$table-bg-accent: #f4f4f4;
+$novo-row-horizontal-padding: 20px;
+$breakpoint: 1000px;
+novo-simple-table {
+  display: block;
+  min-height: 300px;
+  flex: 1;
+  &.empty {
+    min-height: 52px;
+    overflow: hidden;
+    max-height: 52px;
+  }
+  > .novo-simple-row:nth-of-type(odd) {
+    .novo-simple-cell,
+    .novo-simple-button-cell,
+    .novo-simple-dropdown-cell,
+    .novo-simple-checkbox-cell {
+      background-color: $table-bg-accent;
+    }
+    &.active {
+      .novo-simple-cell,
+      .novo-simple-button-cell,
+      .novo-simple-dropdown-cell,
+      .novo-simple-checkbox-cell {
+        background-color: rgba($ocean, 0.15);
+      }
+    }
+  }
+  > .novo-simple-row:nth-of-type(even) {
+    .novo-simple-cell,
+    .novo-simple-button-cell,
+    .novo-simple-dropdown-cell,
+    .novo-simple-checkbox-cell {
+      background-color: $white;
+    }
+    &.active {
+      .novo-simple-cell,
+      .novo-simple-button-cell,
+      .novo-simple-dropdown-cell,
+      .novo-simple-checkbox-cell {
+        background-color: rgba($ocean, 0.15);
+      }
+    }
+  }
+}
+
+.novo-simple-row,
+.novo-simple-header-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  .novo-simple-header-cell,
+  novo-simple-empty-header-cell,
+  .novo-simple-checkbox-header-cell {
+    border-bottom: 1px solid $off-white;
+  }
+}
+
+.novo-simple-cell,
+.novo-simple-header-cell {
+  min-width: 200px;
+  padding: 10px;
+  flex: 1;
+  > span {
+    display: block;
+    min-width: 180px;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  novo-dropdown {
+    display: inline-block;
+  }
+  button.active {
+    color: $positive;
+  }
+  &.clickable {
+    cursor: pointer;
+    color: $company;
+  }
+}
+
+.novo-simple-cell {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.novo-simple-header-cell {
+  border-left: 1px solid $off-white;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  + novo-simple-empty-header-cell {
+    border-left: none;
+  }
+  > label {
+    display: inline-block;
+    padding-right: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &.sort-disabled {
+      cursor: default;
+    }
+  }
+  > div {
+    width: 60px;
+  }
+  novo-dropdown[side='right'] {
+    display: inline-block;
+  }
+}
+
+novo-simple-empty-header-cell {
+  &.button-header-cell {
+    min-width: 40px;
+  }
+  &.dropdown-header-cell {
+    min-width: 98px;
+  }
+}
+
+.novo-simple-button-cell,
+.novo-simple-dropdown-cell {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 5px;
+  novo-dropdown {
+    button {
+      padding: 5px;
+      &:hover,
+      &:active,
+      &:focus {
+        background: rgba(0, 0, 0, 0.1) !important;
+      }
+    }
+  }
+}
+
+.novo-simple-checkbox-header-cell,
+.novo-simple-checkbox-cell {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 40px;
+  padding: 0 10px;
+  > novo-checkbox {
+    margin-top: -4px;
+  }
+}
+
+novo-activity-table {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  &.loading {
+    min-height: 300px;
+  }
+  header {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    border-bottom: 1px solid $off-white;
+    > [novo-activity-table-custom-header] {
+      flex: 1;
+    }
+    > novo-search {
+      padding-right: 10px;
+      display: none;
+      @media (min-width: $breakpoint) {
+        display: flex;
+      }
+      > input {
+        padding: 8.5px;
+        font-size: 1.1em;
+        height: 35px;
+      }
+      &.active > button[theme='fab'] {
+        height: 35px;
+      }
+    }
+    > div.novo-activity-table-actions {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      > div,
+      > section {
+        display: flex;
+        align-items: center;
+        button {
+          margin-left: 3px;
+        }
+        button[theme][theme='icon'] {
+          height: 35px;
+          width: 35px;
+          font-size: 1.4em;
+        }
+        novo-dropdown {
+          button[theme] {
+            white-space: nowrap;
+            padding: 6px 5px 6px 15px !important;
+          }
+        }
+      }
+    }
+  }
+  button[theme][theme='icon'] {
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+  }
+  .novo-activity-table-loading-mask {
+    position: absolute;
+    display: flex;
+    padding-top: 10%;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.07);
+    z-index: 99;
+  }
+  .clickable {
+    @extend a;
+  }
+  .novo-activity-table-empty-container,
+  .novo-activity-table-no-results-container {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $grey;
+  }
+  .novo-activity-table-filter-container {
+    display: flex;
+    flex: 1;
+    .novo-activity-table-custom-filter {
+      border-right: 1px solid $off-white;
+      novo-date-picker {
+        .calendar {
+          box-shadow: none;
+          .date-range-tabs {
+            height: 51px;
+          }
+          .calendar-footer {
+            display: none;
+          }
+        }
+      }
+      div.period-selector {
+        padding: 1em;
+        .novo-form-control-label {
+          display: block;
+          max-width: 100%;
+          margin-bottom: 1em;
+        }
+      }
+    }
+    .novo-activity-table-container {
+      flex: 1;
+      overflow: auto;
+    }
+  }
+}
+
+novo-simple-table-pagination {
+  display: flex;
+  align-items: center;
+  novo-tiles > .tile-container .tile {
+    padding: 7px 10px;
+  }
+  > .novo-simple-table-pagination-size {
+    padding-right: 10px;
+  }
+  > .novo-simple-table-range-label-long,
+  > .novo-simple-table-range-label-short {
+    padding-right: 10px;
+  }
+  > .novo-simple-table-range-label-long {
+    display: none;
+    @media (min-width: $breakpoint) {
+      display: block;
+    }
+  }
+  > .novo-simple-table-range-label-short {
+    display: block;
+    @media (min-width: $breakpoint) {
+      display: none;
+    }
+  }
+  > button:first-of-type {
+    margin-right: 5px;
+  }
+  > button {
+    span {
+      display: none;
+      @media (min-width: $breakpoint) {
+        display: block;
+      }
+    }
+  }
+  > button[theme][theme='dialogue'][icon][side='left'] {
+    padding: 5px;
+    @media (min-width: $breakpoint) {
+      padding: 5px 15px 5px 5px;
+    }
+  }
+  > button[theme][theme='dialogue'][icon][side='right'] {
+    padding: 5px;
+    @media (min-width: $breakpoint) {
+      padding: 5px 5px 5px 15px;
+    }
+  }
+}
+
+.simple-table-dropdown {
+  @extend .table-dropdown;
+  .header {
+    padding: 5px 10px 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      padding: 3px;
+      icon {
+        font-size: 0.8em;
+      }
+    }
+  }
+  list item.active {
+    background: transparent;
+    font-weight: 500;
+  }
+}

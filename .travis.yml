@@ -1,26 +1,30 @@
 language: node_js
+sudo: required
+dist: trusty
+
 node_js:
   - 8
 
+cache:
+  directories:
+    - ./node_modules/
+
 env:
   global:
-    - secure: "YCKTPsF1tiHjBYXUef1dW3FXxVRkdhGUfDxBQAwe7fyQnlzJsLsLlwzJavPaV59nkajhMTdXQX0mNdKO9dqp6R939AGgvHO9bF5an6uE0FJoRG6hDNj5kuYe6r2nQo2S2c7YrftwArfOVbhi/bZIXh73Si1961YR+vU5gTA/30HuiGrnG0zgvip6pxFVJEoBRvKJ5qaxZoeNXNgUW9Tb10EMOmcCBU0IYDXRK+Pl++gxQDc8tWQTKqR2fFe3dPWAwcohkJUZvY0s6AGVKkDVA2qQrpsDSmslBy51oWBE5t7FQwpCZWpVjHfzNc+9l2w2NTbqCYyvZgRtybyExv99dmWFTxDcb5KWznhIOWy4XQoAM4rPamV/KXvhQwdclgBkBGWrPJ1YEqklT+JY9vUOmTY0+WugZkp6iHIU48Lf46UTqMa0NZlz4MGrDXoEYHusJAwzBb6gtnpwtkt5ue8t8WjknCzUiSMd0iXFfirv8QE85adOij5acKMgKsLPf3eVja/fu9YEwCMSjzV0BQGkixOOcoeaMafHQ34By9OQA3zVkyJbS90NkyPnl08aV2L1kVJiubSeqVjEMHfqHMvNKGMkjLPvovGVS8J12pzURcci+5L33LowVyjDbdD24LuvDe9sJVvMksVTJjIZcq85jk+XdpwFFlXoMxyZDpCwFeQ="
+    - secure: 'YCKTPsF1tiHjBYXUef1dW3FXxVRkdhGUfDxBQAwe7fyQnlzJsLsLlwzJavPaV59nkajhMTdXQX0mNdKO9dqp6R939AGgvHO9bF5an6uE0FJoRG6hDNj5kuYe6r2nQo2S2c7YrftwArfOVbhi/bZIXh73Si1961YR+vU5gTA/30HuiGrnG0zgvip6pxFVJEoBRvKJ5qaxZoeNXNgUW9Tb10EMOmcCBU0IYDXRK+Pl++gxQDc8tWQTKqR2fFe3dPWAwcohkJUZvY0s6AGVKkDVA2qQrpsDSmslBy51oWBE5t7FQwpCZWpVjHfzNc+9l2w2NTbqCYyvZgRtybyExv99dmWFTxDcb5KWznhIOWy4XQoAM4rPamV/KXvhQwdclgBkBGWrPJ1YEqklT+JY9vUOmTY0+WugZkp6iHIU48Lf46UTqMa0NZlz4MGrDXoEYHusJAwzBb6gtnpwtkt5ue8t8WjknCzUiSMd0iXFfirv8QE85adOij5acKMgKsLPf3eVja/fu9YEwCMSjzV0BQGkixOOcoeaMafHQ34By9OQA3zVkyJbS90NkyPnl08aV2L1kVJiubSeqVjEMHfqHMvNKGMkjLPvovGVS8J12pzURcci+5L33LowVyjDbdD24LuvDe9sJVvMksVTJjIZcq85jk+XdpwFFlXoMxyZDpCwFeQ='
 
 install:
-  - npm install -g npm
-  - npm cache verify
   - npm install
   - npm install -g angular-cli-ghpages
 
 script:
   - npm run lint
+  - npm test
   - npm run build
-  - npm run build-ghpages
+  - npm run build:demo
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] ; then angular-cli-ghpages --dir="dist-ghpages" --repo="https://${SNAPSHOT_GIT_TOKEN}@github.com/bullhorn/novo-elements.git" --name="Sr. Travis" --email="hi@travis.org"; fi
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH = "master" && npm run galaxy -- $FIREBASE_URL $SLACK_WEB_HOOK $SLACK_CHANNEL
+  - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] ; then angular-cli-ghpages --dir="dist/demo" --repo="https://${SNAPSHOT_GIT_TOKEN}@github.com/bullhorn/novo-elements.git" --name="Sr. Travis" --email="hi@travis.org"; fi
   - test $TRAVIS_PULL_REQUEST == "false" && npm run snapshot-publish
 
 notifications:

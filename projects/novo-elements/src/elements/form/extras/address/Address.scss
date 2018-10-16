@@ -1,0 +1,152 @@
+novo-address {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  &.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
+    .street-address,
+    .apt,
+    .city,
+    .state,
+    .zip,
+    .country-name {
+      &.invalid {
+        input,
+        novo-select div[type='button'] {
+          border-bottom: 1px solid $negative !important;
+        }
+      }
+    }
+  }
+  input {
+    min-width: 10px;
+  }
+  .street-address,
+  .apt,
+  .city,
+  .state,
+  .zip,
+  .country-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    input.invalid {
+      border-bottom: 1px solid $negative;
+    }
+  }
+  .street-address {
+    flex: 3 3 75%;
+    padding: 0 0 5px !important;
+    &.disabled {
+      padding: 0 2px 5px 0 !important;
+    }
+  }
+  .apt {
+    flex: 1 1 25%;
+    padding: 0 0 5px !important;
+    align-self: flex-end;
+  }
+  .city {
+    flex: 2 2 28%;
+    padding: 5px 0 !important;
+    &.disabled {
+      padding: 5px 2px 5px 0 !important;
+    }
+  }
+  .state {
+    flex: 1 1 30%;
+    align-items: center;
+    &.disabled {
+      padding-right: 2px;
+    }
+    & > div {
+      padding: 19px 29px 17px 0 !important;
+    }
+  }
+  .zip {
+    flex: 1 0 19.4%;
+    padding: 5px 0 !important;
+  }
+  .country-name {
+    flex: 4 4 100%;
+    padding: 10px 0 0 !important;
+  }
+  .disabled {
+    i.required-indicator.bhi-circle,
+    i.required-indicator.bhi-check {
+      display: none !important;
+    }
+    pointer-events: none;
+    input {
+      &::-webkit-input-placeholder {
+        color: lighten($dark, 30%) !important;
+      }
+      border-bottom-style: dashed !important;
+    }
+  }
+}
+
+novo-form .novo-form-container form,
+novo-dynamic-form[layout='vertical'] .novo-form-container form,
+novo-dynamic-form .novo-form-container form {
+  div.novo-form-row
+    novo-control
+    > div.novo-control-container
+    > div.novo-control-outer-container
+    .novo-control-inner-container
+    .novo-control-inner-input-container
+    novo-address,
+  div.novo-control-group-control
+    novo-control
+    > div.novo-control-container
+    > div.novo-control-outer-container
+    .novo-control-inner-container
+    .novo-control-inner-input-container
+    novo-address,
+  td.novo-form-row
+    novo-control
+    > div.novo-control-container
+    > div.novo-control-outer-container
+    .novo-control-inner-container
+    .novo-control-inner-input-container
+    novo-address {
+    .street-address,
+    .apt,
+    .city,
+    .state,
+    .zip,
+    .country-name {
+      &:hover:not(.invalid) i.required-indicator.bhi-circle,
+      &:hover:not(.invalid) i.required-indicator.bhi-check {
+        border-bottom: 1px solid lighten($dark, 15%);
+      }
+      &.focus:not(.invalid) i.required-indicator.bhi-circle,
+      &.focus:not(.invalid) i.required-indicator.bhi-check {
+        border-bottom: 1px solid $positive;
+      }
+    }
+    i.required-indicator.bhi-circle,
+    i.required-indicator.bhi-check {
+      display: flex;
+      border-bottom: 1px solid #afb9c0;
+      padding-bottom: 18px;
+      margin-right: 0;
+      padding-top: 10px;
+      padding-right: 20px;
+      margin-top: 0px;
+      align-self: flex-end;
+    }
+    i.required-indicator {
+      padding-bottom: 18px;
+      padding-top: 8px;
+    }
+    i.required-indicator.bhi-check {
+      padding-bottom: 20px;
+      padding-top: 6px;
+    }
+    .invalid i.required-indicator,
+    .invalid i.required-indicator {
+      border-bottom: 1px solid $negative;
+    }
+  }
+}

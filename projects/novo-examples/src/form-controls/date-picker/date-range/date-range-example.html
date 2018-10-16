@@ -1,0 +1,13 @@
+<div class="date-picker-demo-side-by-side">
+    <p>
+        <label>Start date</label>
+        {{(rangeOne?.startDate | date) || 'N/A'}}
+        <br/> {{(rangeTwo?.startDate | date) || 'N/A'}}
+
+        <label>End date</label>
+        {{(rangeOne?.endDate | date) || 'N/A'}}
+        <br/> {{(rangeTwo?.endDate | date) || 'N/A'}}
+    </p>
+    <novo-date-picker [(ngModel)]="rangeOne" range="true"></novo-date-picker>
+    <novo-date-picker [(ngModel)]="rangeTwo" range="true" weekRangeSelect="true" weekStart="1"></novo-date-picker>
+</div>

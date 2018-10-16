@@ -1,0 +1,77 @@
+novo-tiles {
+  $border-width: 0.2em;
+  $border-radius: 3px;
+  $positive-lighter: lighten($positive, 20%);
+  $disabled-color: lighten($grey, 20%);
+  display: inline-block;
+  position: relative;
+  color: $positive-lighter;
+  $border-properties: solid $border-width $positive-lighter;
+  input {
+    appearance: none !important;
+    height: 0 !important;
+    border: none !important;
+    position: absolute;
+  }
+  & > .tile-container {
+    display: flex;
+    text-align: center;
+    background-color: $white;
+    border: $border-properties;
+    border-radius: $border-radius;
+    position: relative;
+    cursor: pointer;
+    align-items: center;
+    .tile {
+      padding: 10px 15px;
+      line-height: 1.5em;
+      height: 100%;
+      z-index: 1;
+      position: relative;
+      cursor: pointer;
+      &:not(.disabled) {
+        &.active,
+        &:hover {
+          color: $positive;
+        }
+        label {
+          cursor: pointer;
+        }
+      }
+      &.disabled {
+        color: $positive;
+        cursor: not-allowed;
+        label {
+          cursor: not-allowed;
+        }
+      }
+      label {
+        z-index: 1;
+        position: relative;
+        font-weight: 500;
+      }
+    }
+    &.active {
+      color: $positive;
+      border-color: $positive;
+      box-shadow: 0px 0px 15px 3px rgba(74, 137, 220, 0.25);
+    }
+    &.disabled {
+      border-color: $disabled-color;
+      color: $disabled-color;
+    }
+  }
+  span.active-indicator {
+    position: absolute;
+    top: -0.15em;
+    margin-left: -0.15em;
+    height: calc(100% + 0.34em);
+    width: 100%;
+    opacity: 0;
+    z-index: 0;
+    border: solid $border-width $positive;
+    border-radius: $border-radius;
+    transition: all 140ms ease-in-out;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  }
+}

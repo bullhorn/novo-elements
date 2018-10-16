@@ -1,0 +1,32 @@
+<div class="novo-step" *ngFor="let step of _steps; let i = index; let isLast = last">
+    <novo-step-header  class="novo-vertical-stepper-header"
+                     (click)="step.select()"
+                     (keydown)="_onKeydown($event)"
+                     [tabIndex]="_getFocusIndex() == i ? 0 : -1"
+                     [id]="_getStepLabelId(i)"
+                     [attr.aria-controls]="_getStepContentId(i)"
+                     [attr.aria-selected]="selectedIndex === i"
+                     [index]="i"
+                     [theme]="step.theme"
+                     [color]="step.color"
+                     [icon]="step.icon"
+                     [state]="getIndicatorType(i)"
+                     [label]="step.stepLabel || step.label"
+                     [selected]="selectedIndex === i"
+                     [active]="step.completed || selectedIndex === i || !linear"
+                     [optional]="step.optional"
+                     [iconOverrides]="_iconOverrides">
+    </novo-step-header>
+
+    <div class="novo-vertical-content-container" [class.novo-stepper-vertical-line]="!isLast" [ngClass]="getIndicatorType(i)">
+      <div class="novo-vertical-stepper-content" role="tabpanel"
+           [@stepTransition]="_getAnimationDirection(i)"
+           [id]="_getStepContentId(i)"
+           [attr.aria-labelledby]="_getStepLabelId(i)"
+           [attr.aria-expanded]="selectedIndex === i">
+        <div class="novo-vertical-content">
+          <ng-container [ngTemplateOutlet]="step.content"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>

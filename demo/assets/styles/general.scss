@@ -1,0 +1,23 @@
+// App general body styles
+html {
+  margin: 0;
+  padding: 0;
+  body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: auto;
+    background: $white;
+    novo-demo-app {
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      display: block;
+    }
+  }
+}
+
+code-snippet,
+multi-code-snippet {
+  margin-bottom: 20px;
+}

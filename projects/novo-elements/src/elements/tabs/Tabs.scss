@@ -1,0 +1,287 @@
+novo-nav {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  &.condensed {
+    novo-tab,
+    novo-tab-link {
+      font-size: 12px;
+      .novo-tab-link {
+        padding: 8px 12px;
+      }
+    }
+  }
+  novo-tab,
+  novo-tab-link {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 45px;
+    position: relative;
+    &.disabled {
+      .novo-tab-link {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      &:hover {
+        .novo-tab-link {
+          opacity: 0.5;
+        }
+      }
+    }
+    .novo-tab-link {
+      padding: 10px 20px;
+      color: #fff;
+      opacity: 0.7;
+      font-weight: 400;
+      cursor: pointer;
+      text-transform: uppercase;
+      &:focus {
+        outline: none;
+      }
+    }
+    .indicator {
+      position: absolute;
+      bottom: 0;
+      width: 0;
+      height: 3px;
+      display: block;
+      background: transparent;
+      transition: all 220ms ease-in-out;
+    }
+    &.active,
+    &.router-link-active {
+      .novo-tab-link {
+        opacity: 1;
+        font-weight: 500;
+      }
+      .indicator {
+        background: #fff;
+        width: 100%;
+      }
+    }
+    &:hover {
+      .novo-tab-link {
+        opacity: 1;
+      }
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  &[type='button-bar'] {
+    display: inline-flex;
+    border-radius: 3px;
+    border: 2px solid #fff;
+    novo-tab-button {
+      padding: 15px 20px;
+      cursor: pointer;
+      transition: all 120ms ease-in-out;
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+  &[theme='color'] {
+    background: rgba(0, 0, 0, 0.2);
+    novo-tab,
+    novo-tab-link {
+      .novo-tab-link {
+        color: #fff;
+      }
+      &.active,
+      &.router-link-active {
+        .indicator {
+          background: #fff;
+        }
+      }
+      &.disabled {
+        .novo-tab-link {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        &:hover {
+          .novo-tab-link {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+    &[type='button-bar'] {
+      border: 2px solid #fff;
+      novo-tab-button {
+        color: rgba(255, 255, 255, 0.75);
+        &.active {
+          color: #fff;
+          background: rgba(0, 0, 0, 0.2);
+        }
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+        &.disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+  &[theme='white'] {
+    background-color: $white;
+    &[direction='vertical'] {
+      background: transparent;
+    }
+    novo-tab,
+    novo-tab-link {
+      &.disabled {
+        .novo-tab-link {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        &:hover {
+          .novo-tab-link {
+            opacity: 0.5;
+            font-weight: 400;
+          }
+        }
+      }
+      .novo-tab-link {
+        color: $dark;
+        opacity: 0.75;
+      }
+      &.active,
+      &.router-link-active {
+        color: $positive;
+        .novo-tab-link {
+          color: $positive;
+          opacity: 1;
+        }
+        .indicator {
+          background: $positive;
+        }
+      }
+      &:hover {
+        .novo-tab-link {
+          font-weight: 500;
+        }
+      }
+    }
+    &[type='button-bar'] {
+      border: 2px solid $light;
+      novo-tab-button {
+        color: $dark;
+        opacity: 0.75;
+        &.active {
+          color: $positive;
+          background: rgba(0, 0, 0, 0.05);
+          opacity: 1;
+        }
+        &:hover {
+          opacity: 1;
+        }
+        &.disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+  &[direction='vertical'] {
+    flex-direction: column;
+    width: auto;
+    novo-tab,
+    novo-tab-link {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      height: 50px;
+      min-width: 150px;
+      justify-content: space-between;
+      transition: all 120ms ease-in-out;
+      &:first-of-type {
+      }
+      &:last-of-type {
+      }
+      .novo-tab-link {
+        order: 2;
+        flex: 1;
+        width: 100%;
+        display: block;
+        max-width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        opacity: 0.75;
+      }
+      .indicator {
+        order: 1;
+        position: relative;
+        width: 4px;
+        height: 0;
+        display: block;
+        background: transparent;
+        transition: all 220ms ease-in-out;
+      }
+      &.active,
+      &.router-link-active {
+        background: rgba(0, 0, 0, 0.05);
+        .novo-tab-link {
+          opacity: 1;
+        }
+        .indicator {
+          height: 100%;
+        }
+      }
+      &:hover {
+        .novo-tab-link {
+          opacity: 1;
+        }
+      }
+      &.disabled {
+        .novo-tab-link {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        &:hover {
+          .novo-tab-link {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Outlets
+novo-nav-outlet {
+  display: block;
+  novo-nav-header {
+    display: block;
+    padding: 8px;
+    border: 1px solid #333;
+    margin: 8px;
+  }
+  novo-nav-content {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+}

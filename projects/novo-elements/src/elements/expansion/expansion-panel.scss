@@ -1,0 +1,68 @@
+@import '../../styles/global/variables';
+@import '../../styles/global/functions';
+
+@import './_expansion-theme';
+
+@include novo-expansion-panel-theme();
+
+.novo-expansion-panel {
+  // @include novo-elevation-transition;
+  @include novo-elevation(2);
+  box-sizing: content-box;
+  display: block;
+  margin: 0;
+  transition: margin 225ms ease-in-out;
+  margin: 0px 16px;
+
+  &.novo-expanded {
+    margin: 16px 4px;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.novo-expansion-panel-content {
+  overflow: hidden;
+
+  &.novo-expanded {
+    overflow: visible;
+  }
+}
+
+.novo-expansion-panel-padding {
+  .novo-expansion-panel-body {
+    padding: 0 24px 16px;
+  }
+}
+
+.novo-expansion-panel-spacing {
+  .novo-accordion &:first-child {
+    margin-top: 0;
+  }
+
+  .novo-accordion &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.novo-action-row {
+  border-top-style: solid;
+  border-top-width: 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 16px 8px 16px 24px;
+
+  button.novo-button {
+    margin-left: 8px;
+
+    [dir='rtl'] & {
+      margin-left: 0;
+      margin-right: 8px;
+    }
+  }
+}

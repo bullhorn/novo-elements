@@ -1,0 +1,15 @@
+<novo-expansion-panel [disabled]="isDisabled">
+  <novo-expansion-panel-header>
+    <novo-panel-title>
+      This is the expansion title
+    </novo-panel-title>
+    <novo-panel-description>
+      This is a summary of the content
+    </novo-panel-description>
+  </novo-expansion-panel-header>
+  <p>This is the primary content of the panel.</p>
+</novo-expansion-panel>
+<div>
+  <span>Is Disabled?</span>
+  <novo-switch theme="grapefruit" [(ngModel)]="isDisabled"></novo-switch>
+</div>

@@ -1,0 +1,26 @@
+google-places-list {
+  novo-list {
+    border: 1px solid #4a89dc;
+    novo-list-item {
+      cursor: pointer;
+      flex: 0 0;
+      transition: background-color 250ms;
+      & > div {
+        width: 100%;
+      }
+      &.active {
+        background-color: lighten($positive, 35%);
+      }
+      &:hover {
+        background-color: lighten($positive, 39%);
+      }
+      item-content {
+        flex-flow: row wrap;
+        & > * {
+          flex: 0 0 33%;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}

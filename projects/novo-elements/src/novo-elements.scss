@@ -1,0 +1,109 @@
+// --------------------------------------------------
+// Global
+// --------------------------------------------------
+@import './styles/global/reset';
+@import './styles/global/functions';
+@import './styles/global/variables';
+@import './styles/global/include-media';
+@import './styles/global/flex-grid';
+@import './styles/global/layout';
+@import './styles/global/cdk';
+@include cdk-overlay();
+// --------------------------------------------------
+// Plugins (Third-Party-Libraries)
+// --------------------------------------------------
+// --------------------------------------------------
+// Content
+// --------------------------------------------------
+@import './styles/content/typography';
+// --------------------------------------------------
+// Elements
+// --------------------------------------------------
+@import './elements/data-table/data-table.component';
+@import './elements/tabs/Tabs';
+@import './elements/ace-editor/AceEditor';
+@import './elements/radio/Radio';
+@import './elements/button/Button';
+@import './elements/toast/Toast';
+@import './elements/modal/Modal';
+@import './elements/card/Card';
+@import './elements/calendar/month/CalendarMonthView';
+@import './elements/calendar/week/CalendarWeekView';
+@import './elements/calendar/day/CalendarDayView';
+@import './elements/calendar/common/CalendarDateChange';
+@import './elements/loading/Loading';
+@import './elements/loading/NovoSpinner';
+@import './elements/select/Select';
+@import './elements/picker/Picker';
+@import './elements/picker/extras/grouped-multi-picker-results/GroupedMultiPickerResults';
+@import './elements/picker/extras/distributionlist-picker-results/DistributionListPickerResults';
+@import './elements/picker/extras/skills-picker-results/SkillsSpecialtyPickerResults';
+@import './elements/chips/Chips';
+@import './elements/dropdown/Dropdown';
+@import './elements/switch/Switch';
+@import './elements/date-picker/DatePicker';
+@import './elements/time-picker/TimePicker';
+@import './elements/date-time-picker/DateTimePicker';
+@import './elements/header/Header';
+@import './elements/list/List';
+@import './elements/table/Table';
+@import './elements/table/extras/pagination/Pagination';
+@import './elements/dragula/Dragula';
+@import './elements/form/Form';
+@import './elements/quick-note/QuickNote';
+@import './elements/tiles/Tiles';
+@import './elements/tooltip/Tooltip';
+@import './elements/slider/Slider';
+@import './elements/tip-well/TipWell';
+@import './elements/ckeditor/CKEditor';
+@import './elements/category-dropdown/CategoryDropdown';
+@import './elements/multi-picker/MultiPicker';
+@import './elements/popover/PopOver';
+@import './elements/table/extras/dropdown-cell/DropdownCell';
+@import './elements/search/SearchBox';
+@import './elements/places/places.component';
+@import './elements/value/Values';
+@import './elements/icon/Icon';
+// @import './elements/expansion/expansion-panel';
+// @import './elements/expansion/expansion-panel-header';
+@import './elements/stepper/stepper.component';
+@import './elements/stepper/step-header.component';
+@import './elements/simple-table/table';
+
+@each $basic, $color in $dark-colors {
+  .bgc-#{$basic} {
+    background: $color;
+    color: $white;
+  }
+}
+
+@each $basic, $color in $light-colors {
+  .bgc-#{$basic} {
+    background: $color;
+    color: $dark;
+  }
+}
+
+@each $basic, $color in $all-colors {
+  .tc-#{$basic} {
+    color: $color;
+  }
+}
+
+.skeleton:empty {
+  width: 100px;
+  margin: 0.2em 0px;
+  height: 1em;
+  display: inline-flex;
+  background: rgba($dark, 0.1);
+  background-image: linear-gradient(to right, rgba($grey, 0.2) 0%, rgba($grey, 0.3) 50%, rgba($grey, 0.2) 100%);
+  background-repeat: repeat-y;
+  background-size: 25% 100%;
+  background-position: 0 0;
+  animation: shine 1s infinite;
+  @keyframes shine {
+    to {
+      background-position: 100% 0;
+    }
+  }
+}

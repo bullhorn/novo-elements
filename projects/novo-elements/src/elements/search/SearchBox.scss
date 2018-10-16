@@ -1,0 +1,67 @@
+novo-search {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  > input {
+    height: 100%;
+    width: 0;
+    display: block;
+    background: $white;
+    padding: 12px 8px;
+    position: relative;
+    border: 1px solid $light;
+    border-left: none;
+    border-radius: 0 2px 2px 0;
+    font-size: 1.4em;
+    color: $dark;
+    z-index: 12;
+    opacity: 0;
+    transition: background-color 250ms ease-in-out, opacity 150ms ease-in-out, 250ms width ease-in-out;
+    &:focus,
+    &:active {
+      outline: none;
+      border: 1px solid $positive;
+      border-left: none;
+    }
+    &::-webkit-input-placeholder {
+      color: $empty !important;
+    }
+  }
+  &.active {
+    max-width: 400px;
+    min-width: 250px;
+    z-index: 1000;
+
+    > button[theme='fab'] {
+      border-radius: 2px 0 0 2px !important;
+      width: 47px;
+      height: 47px;
+      box-shadow: none;
+    }
+
+    > input {
+      opacity: 1;
+      width: 100%;
+    }
+  }
+  &.focused {
+    > button {
+      color: $positive !important;
+      border: 1px solid $positive;
+      border-right: none;
+      background: $white !important;
+      box-shadow: none !important;
+      &:hover {
+        box-shadow: none !important;
+      }
+    }
+    @each $key, $color in $all-colors {
+      &[theme='#{$key}'] {
+        > button {
+          color: $color !important;
+        }
+      }
+    }
+  }
+}

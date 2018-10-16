@@ -1,0 +1,30 @@
+<header [theme]="theme" [condensed]="true">
+  <utils>
+    <util-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></util-action>
+    <util-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></util-action>
+    <util-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></util-action>
+  </utils>
+  <novo-icon [theme]="theme" [name]="icon" [raised]="true">{{icon}}</novo-icon>
+  <div class="entity-header" novo-title>
+    <span class="id">123456</span>
+    <header-spacer></header-spacer>
+    <span class="name">Steve Jobs</span>
+    <header-spacer></header-spacer>
+    <span class="links">
+            <button theme="icon" [icon]="'google'"></button>
+            <button theme="icon" [icon]="'linkedin-f'"></button>
+            <button theme="icon" [icon]="'location'"></button>
+        </span>
+  </div>
+  <novo-nav theme="white" direction="horizontal" [condensed]="true">
+    <novo-tab>
+      <span>Overview</span>
+    </novo-tab>
+    <novo-tab>
+      <span>Activity</span>
+    </novo-tab>
+    <novo-tab>
+      <span>Email</span>
+    </novo-tab>
+  </novo-nav>
+</header>

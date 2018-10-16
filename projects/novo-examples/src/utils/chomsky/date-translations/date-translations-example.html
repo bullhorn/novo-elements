@@ -1,0 +1,22 @@
+
+<novo-tiles [options]="locales" [(ngModel)]="currentLocale" (onChange)="changeLanguage($event)"></novo-tiles>
+
+<h4>Pipe</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p>{{ 'today' | translate: { today: demoVariables.today } }}</p>
+        <p>{{ 'formatToday' | translate: { today: demoVariables.today } }}</p>
+        <p>{{ 'long' | translate: { today: demoVariables.today } }}</p>
+        <p>{{ 'timeLong' | translate: { today: demoVariables.today } }}</p>
+    </div>
+</div>
+
+<h4>Directive</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p [translate]="'today'" [dynamicValues]="{ today: demoVariables.today }"></p>
+        <p [translate]="'formatToday'" [dynamicValues]="{ today: demoVariables.today }"></p>
+        <p [translate]="'long'" [dynamicValues]="{ today: demoVariables.today }"></p>
+        <p [translate]="'timeLong'" [dynamicValues]="{ today: demoVariables.today }"></p>
+    </div>
+</div>

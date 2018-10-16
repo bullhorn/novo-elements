@@ -1,0 +1,200 @@
+// HTML Root
+// --------------------------------------------------
+html {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  color: $base-font-color;
+}
+
+// Headers
+// --------------------------------------------------
+h1 {
+  font-size: 2.5em;
+  font-weight: 400;
+  margin: 0;
+  padding: 0.45em 0 0.35em;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: 500;
+  margin: 0;
+  padding: 0.75em 0 0.3em;
+}
+
+h3 {
+  font-size: 1.75em;
+  font-weight: 300;
+  margin: 0;
+  padding: 0.6em 0 0.4em;
+}
+
+h4 {
+  font-size: 1.375em;
+  font-weight: 400;
+  margin: 0;
+  padding: 0.75em 0 0.5em;
+}
+
+h5 {
+  font-size: 1.125em;
+  font-weight: 700;
+  margin: 0;
+  padding: 0.75em 0 0.25em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+h6 {
+  font-size: 1.125em;
+  font-weight: 500;
+  margin: 0;
+  padding: 0.75em 0 0.25em;
+}
+
+// Body And Paragraph
+// --------------------------------------------------
+p {
+  font-size: 1em;
+  line-height: 1.7em;
+  margin: 0;
+  padding: 0.25em 0 0.55em;
+  // max-width: 33em;  // @bkimball removed this on 9/7/2018
+}
+
+// Special Classes
+// --------------------------------------------------
+.caption {
+  font-size: 1.125em;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0.55;
+  letter-spacing: 0.1px;
+}
+
+h1.novo-section-header,
+h2.novo-section-header,
+h3.novo-section-header,
+h4.novo-section-header,
+h5.novo-section-header,
+h6.novo-section-header {
+  background: $off-white;
+  box-sizing: content-box;
+  font-weight: 400;
+  display: flex;
+  width: 100%;
+  padding: 1em 0.5em 1em 1.5em;
+  margin-left: -1.5em;
+  margin-right: -1.5em;
+  > i {
+    display: flex;
+    margin-right: 10px;
+    &.bhi-section {
+      // Special case for icons that are not vertically centered
+      margin-top: -0.2em;
+    }
+  }
+}
+
+// Iconography
+// --------------------------------------------------
+$icon-height: 1.7em; // 24px Base background size
+$icon-width: 1.7em; // 24px Base background size
+$base-icon-size: 1.4em; //18px Base font-size
+i {
+  font-size: $base-icon-size;
+  display: inline-block;
+  &[theme] {
+    &[theme='contained'] {
+      font-size: 0.8em;
+      border-radius: 0.55em;
+      height: $icon-height;
+      width: $icon-width;
+      text-align: center;
+      &:before {
+        vertical-align: baseline;
+        line-height: 1.8;
+      }
+      @each $entity, $color in $entity-colors {
+        &.#{$entity} {
+          color: $white;
+          background: $color;
+        }
+      }
+      @each $key, $color in $analytics-colors {
+        &.#{$key} {
+          color: $white;
+          background: $color;
+        }
+      }
+      &.large {
+        font-size: 1.2em;
+      }
+    }
+    &[theme='entity'] {
+      @each $entity, $color in $entity-colors {
+        &.#{$entity} {
+          color: $color;
+          background: transparent;
+        }
+      }
+    }
+  }
+}
+
+// Nested icons
+figcaption,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  i {
+    margin: 0 0.45em 0 0;
+    padding: 0;
+    &:before {
+      vertical-align: middle !important;
+    }
+    &[theme] {
+      &[theme='contained'] {
+        font-size: 0.8em;
+        vertical-align: 0.1em;
+        &:before {
+          vertical-align: baseline;
+          line-height: $icon-width;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// Hyperlinks
+// --------------------------------------------------
+a {
+  color: $positive;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 200ms ease-in-out;
+  &:visited {
+    color: $positive;
+  }
+  &:active,
+  &:hover {
+    color: darken($positive, 10%);
+  }
+}
+
+// Code
+// --------------------------------------------------
+code {
+  font-size: 0.8em;
+  background: #f8f8f8;
+  border: 1px solid #e9eaea;
+  color: #4c545a;
+  padding: 2px 4px;
+}

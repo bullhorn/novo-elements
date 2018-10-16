@@ -1,0 +1,178 @@
+/* Contains all Design Page /Component Demo Page SCSS imports
+starting at line 82. >>
+=============================================================
+*/
+
+// Main content container
+main.main-content {
+  position: relative;
+  min-height: 300px;
+  margin: 0 0 0 300px; // Container class to center content
+  .container {
+    padding: 70px 5.5rem;
+    margin: 0 auto;
+    h1 {
+      small {
+        font-size: 14px;
+        vertical-align: middle;
+      }
+    }
+  } // Contains component demos
+  .example {
+    margin-top: 10px;
+    border: 1px solid #e9eaea;
+    box-sizing: border-box;
+  } // Contains code snippet
+  .example-container {
+    padding: 20px 30px;
+    margin: 0 auto;
+  } // Contains component demos
+  pre {
+    margin: 0 0 35px;
+    box-sizing: border-box;
+    font-size: 0.9em;
+    background: #f8f8f8;
+    border: 1px solid #e9eaea;
+    color: #4c545a;
+    code {
+      border: none;
+      width: 100%;
+      display: block;
+      box-sizing: border-box;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      line-height: 1.5em;
+      padding: 15px 25px;
+      &.hljs {
+        background: #f9f9f9 !important;
+      }
+    }
+  } // DESIGN STYLES
+  header {
+    &.design {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      > * {
+        width: 50%;
+      }
+
+      img {
+        max-height: 250px;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+    }
+  }
+  section {
+    &.design {
+      background: $white;
+    }
+    > aside {
+      background: $background;
+      padding: 10px 20px;
+      border-radius: 3px;
+      display: inline-block;
+      border: 2px solid darken($background, 2%);
+      h6 {
+        color: $mint;
+        margin-bottom: 5px;
+      }
+      &.design-principle {
+        h6 {
+          border-bottom: 1px solid darken($background, 5%);
+          padding-bottom: 8px;
+          span {
+            font-weight: 300;
+          }
+        }
+        .hint {
+          display: block;
+          color: darken($background, 50%);
+          margin: 5px 0;
+          padding: 10px;
+          font-size: 0.9em;
+          border-radius: 3px;
+          background: darken($background, 5%);
+          border: 1px solid darken($background, 10%);
+          i {
+            margin-right: 10px;
+          }
+          > span {
+            display: block;
+          }
+          .link {
+            display: block;
+            margin-top: 10px;
+            font-weight: 400;
+            strong {
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+  }
+  .accepted,
+  .not-accepted {
+    display: block;
+    margin-top: 15px;
+  }
+  .not-accepted {
+    color: $negative;
+  }
+  .accepted {
+    color: $success;
+  } // Custom page element initial display reset
+  color,
+  home,
+  iconography,
+  layout,
+  typography {
+    display: block;
+    & > header {
+      background: $off-white;
+    }
+    & > section.design.container {
+      article {
+        margin: 80px 0;
+      }
+    }
+  } // DEMO STYLES
+  // Custom page element initial display reset
+  buttons-demo,
+  from-demo,
+  modal-demo,
+  switch-demo,
+  tooltip-demo {
+    display: block;
+  }
+}
+
+multi-code-snippet {
+  background: #f8f8f8;
+  border: 1px solid #e9eaea;
+  display: block;
+  label {
+    font-size: 0.8em;
+    font-weight: 500;
+    padding: 5px 10px;
+    text-transform: uppercase;
+  }
+  pre {
+    margin: 0 !important;
+    font-size: 0.8em;
+    color: #4c545a;
+    border: none !important;
+    code {
+      border: none;
+      width: 100%;
+      display: block;
+      line-height: 1.5em;
+      padding: 15px 25px;
+      &.hljs {
+        background: #f9f9f9 !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+novo-value {
+  display: flex;
+  flex-direction: row;
+  max-width: 500px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-right: 15px;
+  .value-outer {
+    display: flex;
+    flex-direction: column;
+    label {
+      color: #9e9e9e;
+      font-size: 0.9em;
+      flex: 1;
+      font-weight: 500;
+      transition: 200ms ease-out;
+      text-transform: uppercase;
+      padding: 5px 0;
+      overflow-wrap: break-word;
+    }
+  }
+  .actions {
+    i {
+      cursor: default;
+      color: #9e9e9e;
+      margin-left: 15px;
+      margin-top: 7px;
+    }
+    &.clickable {
+      cursor: pointer;
+      color: $ocean;
+      &.bhi-next {
+        color: $grey;
+      }
+    }
+  }
+  novo-entity-list {
+    display: block;
+    .entity {
+      padding-top: 6px;
+      padding-bottom: 6px;
+      font-size: 1.15em;
+    }
+    @each $entity, $color in $entity-colors {
+      i.#{$entity} {
+        color: $color;
+      }
+    }
+    i {
+      font-size: 1.1em;
+      margin-right: 6px;
+    }
+  }
+}

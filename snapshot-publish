@@ -2,7 +2,7 @@
 
 set -o errexit -o nounset
 
-buildDir="dist"
+buildDir="dist/novo-elements"
 
 commitSha=$(git rev-parse --short HEAD)
 commitAuthorName=$(git --no-pager show -s --format='%an' HEAD)

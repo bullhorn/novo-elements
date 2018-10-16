@@ -1,0 +1,134 @@
+novo-list {
+  display: flex;
+  &.vertical-list {
+    flex-direction: column;
+  }
+  &.horizontal-list {
+    flex-direction: row;
+  }
+  @each $entity, $color in $entity-colors {
+    &[theme='#{$entity}'] {
+      novo-list-item {
+        background: $color;
+        color: #fff;
+        border-bottom: 1px solid rgba(#fff, 0.1);
+        i {
+          color: #fff;
+        }
+        item-title h6 {
+          color: #fff;
+        }
+        item-content {
+          > * {
+            color: rgba(#fff, 0.65);
+          }
+        }
+      }
+    }
+  }
+  @each $basic, $color in $app-colors {
+    &[theme='#{$basic}'] {
+      novo-list-item {
+        background: $color;
+        color: #fff;
+        border-bottom: 1px solid rgba(#fff, 0.1);
+        i {
+          color: #fff;
+        }
+        item-title h6 {
+          color: #fff;
+        }
+        item-content {
+          > * {
+            color: rgba(#fff, 0.65);
+          }
+        }
+      }
+    }
+  }
+}
+
+novo-list-item {
+  background: #fff;
+  border-bottom: 1px solid #f4f4f4;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  &:last-child {
+    border-bottom: none;
+  }
+  .list-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0;
+  }
+  item-header {
+    display: flex;
+    align-items: center;
+    item-avatar {
+      margin-right: 0.5em;
+      font-size: 20px;
+      i {
+        @each $entity, $color in $entity-colors {
+          &.#{$entity} {
+            background: $color;
+          }
+        }
+      }
+    }
+    item-title {
+      flex: 2 0 0;
+      h6 {
+        margin: 0;
+        color: #434343;
+        padding: 0;
+      }
+    }
+    item-header-end {
+      flex: 1 0 0;
+      text-align: right;
+    }
+  }
+  .avatar item-content {
+    margin-left: 2.7em;
+  }
+  item-content {
+    display: flex;
+    margin-left: 0.2em;
+    > * {
+      color: rgba(#434343, 0.65);
+    }
+    i {
+      &.positive {
+        color: map-get($analytics-colors, 'grass');
+      }
+      &.negative {
+        color: map-get($analytics-colors, 'grapefruit');
+      }
+      @each $analytic, $color in $analytics-colors {
+        &.#{$analytic} {
+          color: $color;
+        }
+      }
+      @each $entity, $color in $entity-colors {
+        &.#{$entity} {
+          color: $color;
+        }
+      }
+    }
+    &.vertical-list {
+      flex-direction: column;
+    }
+    &.horizontal-list {
+      flex-direction: row;
+    }
+  }
+  item-end {
+    align-self: center;
+    flex: 1;
+    text-align: right;
+    i {
+      line-height: 1.4em;
+    }
+  }
+}

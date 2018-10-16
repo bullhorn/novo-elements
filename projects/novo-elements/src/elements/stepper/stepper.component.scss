@@ -1,0 +1,200 @@
+@import '../../styles/global/variables';
+
+$novo-horizontal-stepper-header-height: 80px !default;
+$novo-stepper-label-header-height: 24px !default;
+$novo-stepper-side-gap: 24px !default;
+$novo-vertical-stepper-content-margin: 36px !default;
+$novo-stepper-line-width: 1px !default;
+$novo-stepper-line-gap: 8px !default;
+
+.novo-stepper-vertical,
+.novo-stepper-horizontal {
+  display: block;
+}
+
+.novo-horizontal-stepper-header-container {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+  background: $background;
+}
+
+.novo-stepper-horizontal-line {
+  border-bottom: $novo-stepper-line-width solid $light;
+  flex: auto;
+  min-width: 0px;
+  height: $novo-horizontal-stepper-header-height;
+  &.complete {
+    border-bottom: $novo-stepper-line-width solid $positive;
+  }
+}
+
+.novo-horizontal-stepper-header {
+  display: flex;
+  height: $novo-horizontal-stepper-header-height;
+  flex-flow: column;
+  overflow: visible;
+  align-items: center;
+  justify-content: center;
+  padding: 0 $novo-stepper-side-gap;
+
+  .novo-step-status {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 1px;
+    bottom: 0px;
+
+    .novo-stepper-status-line {
+      width: 100%;
+      position: absolute;
+      &:before {
+        content: '';
+        display: block;
+        width: calc(50% - 8px);
+        margin-right: 8px;
+        border-bottom: 1px solid $light;
+      }
+      &:after {
+        content: '';
+        display: block;
+        width: calc(50% - 8px);
+        margin-left: calc(50% + 8px);
+        margin-top: -1px;
+        border-top: 1px solid $light;
+      }
+      &.edit {
+        &:before {
+          border-bottom: 1px solid $positive;
+        }
+      }
+      &.done {
+        &:before {
+          border-bottom: 1px solid $positive;
+        }
+        &:after {
+          border-top: 1px solid $positive;
+        }
+      }
+    }
+    .novo-stepper-status-icon {
+      position: relative;
+      &:before {
+        content: '';
+        display: block;
+        background: $white;
+        border-radius: 50%;
+        position: absolute;
+        z-index: 0;
+        top: 1px;
+        left: 1px;
+        bottom: 1px;
+        right: 1px;
+      }
+      & > * {
+        position: relative;
+        z-index: 1;
+      }
+    }
+  }
+}
+
+.novo-vertical-stepper-header {
+  display: flex;
+  align-items: center;
+  padding: $novo-stepper-side-gap;
+  max-height: $novo-stepper-label-header-height;
+
+  .novo-step-icon,
+  .novo-step-icon-not-touched {
+    margin-right: $novo-vertical-stepper-content-margin - $novo-stepper-side-gap;
+
+    [dir='rtl'] & {
+      margin-right: 0;
+      margin-left: $novo-vertical-stepper-content-margin - $novo-stepper-side-gap;
+    }
+  }
+}
+
+.novo-horizontal-stepper-content {
+  overflow: hidden;
+
+  &[aria-expanded='false'] {
+    height: 0;
+  }
+}
+
+.novo-horizontal-content-container {
+  overflow: hidden;
+  padding: 0 $novo-stepper-side-gap $novo-stepper-side-gap $novo-stepper-side-gap;
+}
+
+.novo-vertical-content-container {
+  margin-left: $novo-vertical-stepper-content-margin;
+  border: 0;
+  position: relative;
+
+  [dir='rtl'] & {
+    margin-left: 0;
+    margin-right: $novo-vertical-stepper-content-margin;
+  }
+}
+
+.novo-stepper-vertical-line {
+  &:before {
+    content: '';
+    position: absolute;
+    top: $novo-stepper-line-gap - $novo-stepper-side-gap;
+    bottom: $novo-stepper-line-gap - $novo-stepper-side-gap;
+    left: 0;
+    z-index: -1;
+    border-left-width: $novo-stepper-line-width;
+    border-left-style: solid;
+    border-left-color: $light;
+
+    [dir='rtl'] & {
+      left: auto;
+      right: 0;
+    }
+  }
+  &.edit {
+    &:before {
+      border-left-color: 1px solid $positive;
+    }
+  }
+  &.done {
+    &:before {
+      border-left-color: 1px solid $positive;
+    }
+    &:after {
+      border-left-color: 1px solid $positive;
+    }
+  }
+}
+
+.novo-stepper-vertical {
+  novo-step-status {
+    position: absolute;
+    left: 35px;
+    top: 25px;
+    transform: scale(0.8);
+  }
+}
+
+.novo-vertical-stepper-content {
+  overflow: hidden;
+}
+
+.novo-vertical-content {
+  padding: 0 $novo-stepper-side-gap $novo-stepper-side-gap $novo-stepper-side-gap;
+}
+
+.novo-step:last-child {
+  .novo-vertical-content-container {
+    border: none;
+  }
+}

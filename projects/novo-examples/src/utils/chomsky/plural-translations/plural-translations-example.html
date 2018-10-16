@@ -1,0 +1,29 @@
+
+<novo-tiles [options]="locales" [(ngModel)]="currentLocale" (onChange)="changeLanguage($event)"></novo-tiles>
+
+<h4>Pipe</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p>{{ 'messages' | translate: { quantity: 0 } }}</p>
+        <p>{{ 'messages' | translate: { quantity: 1 } }}</p>
+        <p>{{ 'messages' | translate: { quantity: 20 } }}</p>
+        <p>{{ 'messages' | translate: { quantity: 50 } }}</p>
+        <p>{{ 'candidate' | translate:{ gender: 'female', quantity: 1, host: 'Jane', candidate: 'candidates' } }}</p>
+        <p>{{ 'candidate' | translate:{ gender: 'male', quantity: 0, host: 'John', candidate: 'candidates' } }}</p>
+        <p>{{ 'candidate' | translate:{ gender: 'other', quantity: 0, host: 'Les gens', candidate: 'candidates' } }}</p>
+    </div>
+</div>
+
+<h4>Directive</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p [translate]="'messages'" [dynamicValues]="{ quantity: 0 }"></p>
+        <p [translate]="'messages'" [dynamicValues]="{ quantity: 1 }"></p>
+        <p [translate]="'messages'" [dynamicValues]="{ quantity: 20 }"></p>
+        <p [translate]="'messages'" [dynamicValues]="{ quantity: 50 }"></p>
+        <p [translate]="'candidate'" [dynamicValues]="{ gender: 'female', quantity: 1, host: 'Jane', candidate: 'candidates' }"></p>
+        <p [translate]="'candidate'" [dynamicValues]="{ gender: 'male', quantity: 0, host: 'John', candidate: 'candidates' }"></p>
+        <p [translate]="'candidate'" [dynamicValues]="{ gender: 'other', quantity: 0, host: 'Les gens', candidate: 'candidates' }"></p>
+    </div>
+</div>
+

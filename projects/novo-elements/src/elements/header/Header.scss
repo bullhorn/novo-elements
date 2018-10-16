@@ -1,0 +1,96 @@
+header[theme] {
+  & > section {
+    height: $header-height;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    i.header-icon {
+      padding: 12px;
+    }
+    div.header-title {
+      display: flex;
+      align-items: center;
+      max-width: calc(100% - 40px);
+    }
+    .header-titles {
+      display: flex;
+      flex-direction: column;
+      padding: 0px 8px;
+      max-width: 100%;
+      h1 {
+        font-size: 1.7em;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        font-weight: 500;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-right: 20px;
+      }
+      header-spacer {
+        display: inline-block;
+        height: 1.8em;
+        width: 2px;
+        margin: 0 0.6em;
+        background-color: rgba(0, 0, 0, 0.25);
+      }
+    }
+    > section {
+      flex: 2 2 250px;
+      min-width: 100px;
+    }
+    utils,
+    novo-utils {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    novo-action {
+      display: flex;
+    }
+  }
+  @each $basic, $color in $all-colors {
+    &[theme='#{$basic}'] {
+      background: $color;
+      color: #fff;
+      & > section.primary {
+        background: $color;
+      }
+    }
+  }
+  &[theme='light'],
+  &[theme='off-white'],
+  &[theme='white'] {
+    color: $dark;
+  }
+  & > main {
+    padding: 4px 16px 4px 32px;
+  }
+  & > novo-nav {
+    padding-left: 16px;
+    &.block {
+      padding-left: 0;
+    }
+  }
+  &.condensed {
+    > section {
+      padding: 0 1em;
+      height: $header-height;
+      i {
+        font-size: 1.2em;
+      }
+    }
+    novo-icon > i {
+      font-size: 1.4em;
+    }
+    button[theme][theme='icon'] {
+      width: 30px !important;
+      height: 30px !important;
+      padding: 5px;
+    }
+  }
+}

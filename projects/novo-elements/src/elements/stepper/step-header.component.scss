@@ -1,0 +1,78 @@
+@import '../../styles/global/variables';
+
+$novo-stepper-label-header-height: 24px !default;
+$novo-stepper-label-min-width: 50px !default;
+$novo-stepper-side-gap: 24px !default;
+$novo-vertical-stepper-content-margin: 36px !default;
+$novo-stepper-line-gap: 8px !default;
+$novo-step-optional-font-size: 12px;
+$novo-step-header-icon-size: 1em !default;
+
+.novo-step-header {
+  overflow: visible;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  //box-sizing: border-box;
+}
+
+.novo-step-optional {
+  font-size: $novo-step-optional-font-size;
+}
+
+.novo-step-icon,
+.novo-step-icon-not-touched {
+  border-radius: 50%;
+  height: $novo-stepper-label-header-height;
+  width: $novo-stepper-label-header-height;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+
+  .novo-step-number {
+    font-size: $novo-step-header-icon-size;
+    min-width: 1.6em;
+    height: 1.6em;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+  }
+}
+
+.novo-step-icon {
+  .novo-step-number {
+    background: $positive;
+    color: $white;
+  }
+}
+.novo-step-icon-not-touched {
+  .novo-step-number {
+    background: $submission;
+    color: $white;
+  }
+}
+
+// .novo-step-icon .novo-icon {
+//   font-size: $novo-step-header-icon-size;
+//   height: $novo-step-header-icon-size;
+//   width: $novo-step-header-icon-size;
+// }
+
+.novo-step-label {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: $novo-stepper-label-min-width;
+  vertical-align: middle;
+  text-align: center;
+  padding: 4px 0px;
+}
+
+.novo-step-text-label {
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

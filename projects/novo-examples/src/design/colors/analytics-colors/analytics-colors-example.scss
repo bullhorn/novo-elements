@@ -1,0 +1,49 @@
+:host {
+  .color-blocks {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    width: 100%;
+
+    .block {
+      display: inline-block;
+      text-align: center;
+      width: 25%;
+      min-width: 200px;
+      position: relative;
+      padding: 20px;
+
+      &:active,
+      &:focus,
+      &:hover {
+        .color-square {
+          transform: scale(1.125);
+        }
+      }
+
+      .color-square {
+        border-radius: 4px;
+        height: 150px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        position: relative;
+      }
+    }
+    .color-text {
+      &:after {
+        content: 'Click to copy';
+        position: absolute;
+        color: rgba(255, 255, 255, 0.4);
+        left: 50%;
+        bottom: 40px;
+        font-size: 10px;
+        text-transform: uppercase;
+        transform: translateX(-50%);
+        width: 100%;
+      }
+    }
+  }
+}

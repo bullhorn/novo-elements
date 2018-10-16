@@ -1,0 +1,31 @@
+novo-tip-well {
+  &.active {
+    display: inline-block;
+    margin-bottom: 1em;
+  }
+  > div {
+    display: inline-block;
+    border-radius: 0.25em;
+    background-color: $off-white;
+    color: $dark;
+    padding: 1em;
+    text-align: right;
+    > div {
+      display: flex;
+      > i {
+        flex-shrink: 0;
+        text-align: center;
+        margin-top: 0.3em;
+        margin-right: 10px;
+        color: #aaaaaa;
+      }
+      > p {
+        width: 100%;
+        max-width: 33em;
+        text-align: left;
+        padding-top: 6px;
+        white-space: pre-line;
+      }
+    }
+  }
+}
