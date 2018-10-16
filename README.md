@@ -38,6 +38,7 @@ If using SCSS/SASS you will need to include the following includes: `node_module
 ## Build/Release/Publish
 
     # Manually update the projects/*/package.json to the version you want
+    # TAG
     # npm test
     # npm run lint
     # npm run build
