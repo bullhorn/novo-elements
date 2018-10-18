@@ -11,6 +11,7 @@ import { TranslateService } from 'chomsky';
 })
 export class DateTranslationsExample {
   public currentLocale: string = 'en-US';
+  public useMilitaryTime: boolean = false;
   public locales: Array<any> = [
     {
       label: 'en-US',
@@ -25,12 +26,23 @@ export class DateTranslationsExample {
       value: 'ru-RU',
     },
   ];
+  public militaryTime: Array<any> = [
+    {
+      label: '12 Hour',
+      value: false,
+    },
+    {
+      label: '24 Hour',
+      value: true,
+    },
+  ];
   public greeting: string = 'greeting';
   public demoVariables: any = {
     today: new Date(),
     name: 'Jane',
     balance: 9874.34,
     count: 1,
+    timestamp: 1506470400000,
   };
 
   public translateService: any = TranslateService;
@@ -47,5 +59,11 @@ export class DateTranslationsExample {
   changeLanguage(locale) {
     this.currentLocale = locale;
     TranslateService.use(locale);
+  }
+
+  changeMilitaryTime(useMilitaryTime) {
+    this.useMilitaryTime = useMilitaryTime;
+    TranslateService.forceDisplayTo24HourTime(useMilitaryTime);
+    this.changeLanguage('en-US');
   }
 }

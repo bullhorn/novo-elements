@@ -1,1 +1,4 @@
-/** No CSS for this example */
+.spacer {
+  width: 60px;
+  display: inline-block;
+}

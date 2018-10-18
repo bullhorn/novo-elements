@@ -22,6 +22,7 @@ export const FORMAT_DEFAULTS: IFormatDefaults = {
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
+      hour12: true,
     },
     medium: {
       // MMM DD, YYYY, HH:MM A - Feb 14, 2017, 1:17 PM
@@ -30,6 +31,7 @@ export const FORMAT_DEFAULTS: IFormatDefaults = {
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
+      hour12: true,
     },
     long: {
       // MMMM DD, YYYY, HH:MM A - Febuary 14, 2017, 1:17 PM
@@ -38,6 +40,7 @@ export const FORMAT_DEFAULTS: IFormatDefaults = {
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
+      hour12: true,
     },
     dateShort: {
       // DEFAULT: DD/MM/YYYY - 02/14/2017
@@ -61,12 +64,14 @@ export const FORMAT_DEFAULTS: IFormatDefaults = {
       // HH:MM A - 1:17 PM
       hour: '2-digit',
       minute: '2-digit',
+      hour12: true,
     },
     timeLong: {
       // HH:MM A Z - 1:17 PM CST
       hour: '2-digit',
       minute: '2-digit',
       timeZoneName: 'short',
+      hour12: true,
     },
   },
 };
