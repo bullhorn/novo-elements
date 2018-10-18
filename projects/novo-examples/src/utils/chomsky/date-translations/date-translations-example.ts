@@ -64,6 +64,6 @@ export class DateTranslationsExample {
   changeMilitaryTime(useMilitaryTime) {
     this.useMilitaryTime = useMilitaryTime;
     TranslateService.forceDisplayTo24HourTime(useMilitaryTime);
-    this.changeLanguage('en-US');
+    this.changeLanguage(this.currentLocale);
   }
 }
