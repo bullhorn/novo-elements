@@ -20,6 +20,11 @@ novo-value {
       overflow-wrap: break-word;
     }
   }
+  @each $entity, $color in $entity-colors {
+    i.#{$entity} {
+      color: $color;
+    }
+  }
   .actions {
     i {
       cursor: default;
