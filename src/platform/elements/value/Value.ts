@@ -25,7 +25,10 @@ export enum NOVO_VALUE_THEME {
             </div>
             <div *ngSwitchDefault class="value-outer" [ngClass]="customClass">
                 <label>{{ meta.label }}</label>
-                <div *ngIf="isDefault" class="value" [innerHTML]="data | render : meta"></div>
+                <div *ngIf="isDefault" class="value skeleton">
+                  <i *ngIf="meta.showEntityIcon" class="bhi-circle {{meta.entityIconClass}}"></i>
+                  <span>{{ data | render : meta }}</span>
+                </div>
             </div>
             <div class="actions" *ngIf="showIcon">
                 <i *ngFor="let icon of meta.icons" [class]="iconClass(icon)" (click)="onValueClick(icon)"></i>
@@ -34,9 +37,12 @@ export enum NOVO_VALUE_THEME {
     `,
 })
 export class NovoValueElement implements OnInit, OnChanges {
-  @Input() data: any; // TODO use interface
-  @Input() meta: any; // TODO use interface
-  @Input() theme: NOVO_VALUE_THEME = NOVO_VALUE_THEME.DEFAULT;
+  @Input()
+  data: any; // TODO use interface
+  @Input()
+  meta: any; // TODO use interface
+  @Input()
+  theme: NOVO_VALUE_THEME = NOVO_VALUE_THEME.DEFAULT;
 
   type: NOVO_VALUE_TYPE;
   NOVO_VALUE_TYPE = NOVO_VALUE_TYPE;
