@@ -25,7 +25,10 @@ export enum NOVO_VALUE_THEME {
             </div>
             <div *ngSwitchDefault class="value-outer" [ngClass]="customClass">
                 <label class="skeleton">{{ label }}</label>
-                <div *ngIf="isDefault" class="value skeleton" [innerHTML]="data | render : meta"></div>
+                <div *ngIf="isDefault" class="value skeleton">
+                  <i *ngIf="meta.showEntityIcon" class="bhi-circle {{meta.entityIconClass}}"></i>
+                  <span>{{ data | render : meta }}</span>
+                </div>
             </div>
             <div class="actions" *ngIf="showIcon">
                 <i *ngFor="let icon of meta.icons" [class]="iconClass(icon)" (click)="onValueClick(icon)"></i>

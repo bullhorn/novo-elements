@@ -21,6 +21,8 @@ export class FormatterValueExample {
     associatedEntity: {
       entity: 'Placement',
     },
+    showEntityIcon: true,
+    entityIconClass: 'candidate',
     formatter: (value, args) => {
       return `${args.label} #${(value && value.id) || ''}`;
     },
