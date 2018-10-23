@@ -5,6 +5,7 @@
   "formatToday": "Сегодня {today:date}.",
   "long": "Сегодня {today:date:long}.",
   "timeLong": "Сегодня {today:date:timeLong}.",
+  "militaryFormat": "Для тестирования военного времени: {today:date:short}.",
   "alert": "У вас есть {count:number} сообщение.",
   "debt": "Вы должны: {balance:currency}",
   "html": "<b>I am HTML!</b>",
