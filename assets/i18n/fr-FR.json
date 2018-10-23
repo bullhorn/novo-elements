@@ -5,6 +5,7 @@
   "long": "Aujourd hui est {today:date:long}.",
   "timeLong": "Aujourd hui est {today:date:timeLong}.",
   "formatToday": "Aujourd hui est {today:date}.",
+  "militaryFormat": "Pour tester le temps militaire: {today:date:short}.",
   "alert": "Vous avez {count:number} message.",
   "debt": "Vouz devez: {balance:currency}",
   "html": "<b>I am HTML!</b>",
