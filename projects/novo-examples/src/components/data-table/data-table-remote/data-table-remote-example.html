@@ -2,7 +2,8 @@
                  [columns]="sharedColumns"
                  [hideGlobalSearch]="!globalSearchEnabled"
                  [displayedColumns]="sharedDisplayColumns"
-                 [paginationOptions]="widePaginationOptions">
+                 [paginationOptions]="widePaginationOptions"
+                 [fixedHeader]="true">
   <!-- Custom Cell -- passed with template property on Column -->
   <ng-template novoTemplate="custom"
                let-row
