@@ -88,8 +88,8 @@ import { StaticDataTableService } from './services/static-data-table.service';
                     <novo-data-table-expand-cell *cdkCellDef="let row; let i = index" [row]="row"></novo-data-table-expand-cell>
                 </ng-container>
                 <ng-container *ngFor="let column of columns;trackBy: trackColumnsBy" [cdkColumnDef]="column.id">
-                  <novo-data-table-header-cell *cdkHeaderCellDef [column]="column" [novo-data-table-cell-config]="column" [defaultSort]="defaultSort" [class.empty]="column?.type === 'action' && !column?.label" [class.button-header-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)" [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-header-cell>
-                  <novo-data-table-cell *cdkCellDef="let row" [column]="column" [row]="row" [template]="columnToTemplate[column.id]" [class.empty]="column?.type === 'action' && !column?.label" [class.button-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)" [class.dropdown-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-cell>
+                  <novo-data-table-header-cell *cdkHeaderCellDef [column]="column" [novo-data-table-cell-config]="column" [resized]="resized" [defaultSort]="defaultSort" [class.empty]="column?.type === 'action' && !column?.label" [class.button-header-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)" [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-header-cell>
+                  <novo-data-table-cell *cdkCellDef="let row" [resized]="resized" [column]="column" [row]="row" [template]="columnToTemplate[column.id]" [class.empty]="column?.type === 'action' && !column?.label" [class.button-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)" [class.dropdown-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-cell>
                 </ng-container>
                 <novo-data-table-header-row *cdkHeaderRowDef="displayedColumns" data-automation-id="novo-data-table-header-row"></novo-data-table-header-row>
                 <novo-data-table-row *cdkRowDef="let row; columns: displayedColumns" [novoDataTableExpand]="detailRowTemplate" [row]="row" [id]="name + '-' + row[rowIdentifier]" [dataAutomationId]="row[rowIdentifier]"></novo-data-table-row>
@@ -210,6 +210,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   defaultTemplates: QueryList<NovoTemplate>;
   @ViewChild('novoDataTableContainer')
   novoDataTableContainer: ElementRef;
+  @Output()
+  resized: EventEmitter<IDataTableColumn<T>> = new EventEmitter();
 
   @Input()
   set displayedColumns(displayedColumns: string[]) {

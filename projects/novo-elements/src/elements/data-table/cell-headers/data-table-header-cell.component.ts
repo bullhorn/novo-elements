@@ -8,9 +8,12 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
+  Renderer2,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { CdkColumnDef } from '@angular/cdk/table';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import * as dateFns from 'date-fns';
 
 import {
@@ -68,6 +71,10 @@ import { Helpers } from '../../../utils/Helpers';
                 </ng-container>
             </novo-dropdown>
         </div>
+        <div class="spacer"></div>
+        <div>
+          <i class="bhi-sortable data-table-header-resizable" (mousedown)="startResize($event)" *ngIf="config.resizable"></i>
+        </div>
     `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -79,15 +86,19 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   @Input()
   defaultSort: { id: string; value: string };
+  @Input()
+  resized: EventEmitter<IDataTableColumn<T>>;
 
   @Input('novo-data-table-cell-config')
   set column(column: IDataTableColumn<T>) {
+    this._column = column;
     this.label = column.type === 'action' ? '' : column.label;
     this.labelIcon = column.labelIcon;
 
     this.config = {
       sortable: !!column.sortable,
       filterable: !!column.filterable,
+      resizable: !!column.resizable,
     };
 
     let transforms: { filter?: Function; sort?: Function } = {};
@@ -133,14 +144,19 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   public config: {
     sortable: boolean;
     filterable: boolean;
+    resizable: boolean;
     transforms?: { filter?: Function; sort?: Function };
     filterConfig?: IDataTableColumnFilterConfig;
   };
+  private subscriptions: Subscription[] = [];
+  private _column: IDataTableColumn<T>;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     public labels: NovoLabelService,
     private state: DataTableState<T>,
+    private renderer: Renderer2,
+    private elementRef: ElementRef,
     @Optional() public _sort: NovoDataTableSortFilter<T>,
     @Optional() public _cdkColumnDef: CdkColumnDef,
   ) {
@@ -176,6 +192,31 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   public ngOnDestroy(): void {
     this._rerenderSubscription.unsubscribe();
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
+  }
+
+  public startResize(mouseDownEvent: MouseEvent): void {
+    mouseDownEvent.preventDefault();
+    let startingWidth: number = this.elementRef.nativeElement.getBoundingClientRect().width;
+    const mouseMoveSubscription: Subscription = fromEvent(window.document, 'mousemove').subscribe((middleMouseEvent: MouseEvent) => {
+      let differenceWidth: number = middleMouseEvent.clientX - mouseDownEvent.clientX;
+      this._column.width = startingWidth + differenceWidth;
+      this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${this._column.width}px`);
+      this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${this._column.width}px`);
+      this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${this._column.width}px`);
+      this.changeDetectorRef.markForCheck();
+      this.resized.next(this._column);
+    });
+
+    let mouseUpSubscription: Subscription = fromEvent(window.document, 'mouseup').subscribe(() => {
+      mouseUpSubscription.unsubscribe();
+      mouseMoveSubscription.unsubscribe();
+      this.changeDetectorRef.markForCheck();
+    });
+    this.subscriptions.push(mouseMoveSubscription);
+    this.subscriptions.push(mouseUpSubscription);
   }
 
   public toggleCustomRange(event: Event, value: boolean): void {
