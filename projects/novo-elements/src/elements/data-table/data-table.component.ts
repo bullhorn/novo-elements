@@ -241,9 +241,11 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input()
   rowIdentifier: string = 'id';
   @Input()
-  trackByFn: Function = (index, item) => item.id
+  trackByFn: Function = (index, item) => item.id;
   @Input()
   templates: { [key: string]: TemplateRef<any> } = {};
+  @Input()
+  fixedHeader: boolean = false;
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
@@ -576,6 +578,13 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     if (left !== this.scrollLeft) {
       this.scrollLeft = (event.target as Element).scrollLeft;
       this.ref.markForCheck();
+    }
+    if (this.fixedHeader) {
+      const top: number = (event.target as Element).scrollTop;
+      const header: any = (this.novoDataTableContainer.nativeElement as Element).querySelector(
+        ':scope > cdk-table > novo-data-table-header-row',
+      );
+      header.style.transform = `translateY(${top}px)`;
     }
   }
 }
