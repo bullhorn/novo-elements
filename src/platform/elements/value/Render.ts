@@ -379,6 +379,8 @@ export class RenderPipe implements PipeTransform {
       for (const item of list) {
         if (item.value === value) {
           return item.label;
+        } else if (value.value && value.value === item.value) {
+          return item.label;
         }
       }
     } catch (e) {
