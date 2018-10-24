@@ -135,8 +135,6 @@ export class ValueDemoComponent {
     associatedEntity: {
       entity: 'CorporateUser',
     },
-    showEntityIcon: true,
-    entityIconClass: 'candidate',
   };
   formatterData = {
     id: 123,
@@ -147,6 +145,8 @@ export class ValueDemoComponent {
     associatedEntity: {
       entity: 'Placement',
     },
+    showEntityIcon: true,
+    entityIconClass: 'candidate',
     formatter: (value, args) => {
       return `${args.label} #${(value && value.id) || ''}`;
     },
