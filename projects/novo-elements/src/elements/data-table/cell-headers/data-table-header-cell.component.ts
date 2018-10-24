@@ -199,10 +199,15 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   public startResize(mouseDownEvent: MouseEvent): void {
     mouseDownEvent.preventDefault();
+    const minimumWidth = 60 + (this.config.filterable ? 30 : 0) + (this.config.sortable ? 30 : 0);
     let startingWidth: number = this.elementRef.nativeElement.getBoundingClientRect().width;
     const mouseMoveSubscription: Subscription = fromEvent(window.document, 'mousemove').subscribe((middleMouseEvent: MouseEvent) => {
       let differenceWidth: number = middleMouseEvent.clientX - mouseDownEvent.clientX;
-      this._column.width = startingWidth + differenceWidth;
+      let width: number = startingWidth + differenceWidth;
+      if (width < minimumWidth) {
+        width = minimumWidth;
+      }
+      this._column.width = width;
       this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${this._column.width}px`);
       this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${this._column.width}px`);
       this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${this._column.width}px`);
