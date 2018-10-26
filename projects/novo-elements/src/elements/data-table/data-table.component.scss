@@ -68,7 +68,8 @@ cdk-table {
 .novo-data-table-header-row {
   display: flex;
   flex-direction: row;
-  flex-wrap: no-wrap;
+  flex-wrap: nowrap;
+  background-color: $white;
   .novo-data-table-header-cell,
   .novo-data-table-checkbox-header-cell {
     border-bottom: 1px solid $off-white;
