@@ -15,13 +15,10 @@ import {
   ElementRef,
   Output,
 } from '@angular/core';
-import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subscription } from 'rxjs';
 import { animate, state as animState, style, transition, trigger } from '@angular/animations';
 
-import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
-import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
 import {
   IDataTableColumn,
   IDataTablePaginationOptions,
@@ -33,7 +30,6 @@ import { DataTableSource } from './data-table.source';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { DataTableState } from './state/data-table-state.service';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
-import { Helpers } from '../../utils/Helpers';
 import { notify } from '../../utils/notifier/notifier.util';
 import { StaticDataTableService } from './services/static-data-table.service';
 
