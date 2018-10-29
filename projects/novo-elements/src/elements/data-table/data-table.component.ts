@@ -246,7 +246,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input()
   rowIdentifier: string = 'id';
   @Input()
-  trackByFn: Function = (index, item) => item.id;
+  trackByFn: Function = (index, item) => item.id
   @Input()
   templates: { [key: string]: TemplateRef<any> } = {};
   @Input()
