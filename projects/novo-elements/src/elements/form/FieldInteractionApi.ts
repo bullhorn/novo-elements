@@ -18,7 +18,7 @@ import { IFieldInteractionEvent } from './FormInterfaces';
 class CustomHttp {
   url: string;
   options: any;
-  mapFn: any;
+  mapFn: any = (x) => x;
 
   constructor(private http: HttpClient) {}
 
