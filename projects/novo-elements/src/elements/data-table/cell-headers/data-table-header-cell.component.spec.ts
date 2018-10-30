@@ -4,6 +4,7 @@ import { NovoDataTableCellHeader } from './data-table-header-cell.component';
 import { NovoButtonModule, NovoLabelService, NovoTooltipModule, NovoDropdownModule, NovoDatePickerModule } from '../../..';
 import { FormsModule } from '@angular/forms';
 import { DataTableState } from '../state/data-table-state.service';
+import { EventEmitter } from '@angular/core';
 // App
 
 describe('Elements: NovoDataTableCellHeader', () => {
@@ -26,6 +27,10 @@ describe('Elements: NovoDataTableCellHeader', () => {
       sortable: true,
       resizable: true,
     };
+    component._column = {
+      width: 999,
+    };
+    component.resizable = new EventEmitter();
   });
 
   describe('Method: ngOnInit()', () => {
@@ -40,8 +45,18 @@ describe('Elements: NovoDataTableCellHeader', () => {
 
     beforeEach(() => {
       mouseDownEvent = window.document.createEvent('MouseEvents');
-      mouseDownEvent.initEvent('mousedown', true, true);
+      mouseDownEvent.initMouseEvent('mousedown', true, true, window, 1, 50, 50, 500, 50, false, false, false, false, 0, null);
       spyOn(mouseDownEvent, 'preventDefault');
+
+      component.elementRef = {
+        nativeElement: {
+          getBoundingClientRect: () => {
+            return {
+              width: 120,
+            };
+          },
+        },
+      };
     });
 
     it('should stop from dispatching the event', () => {
@@ -54,15 +69,18 @@ describe('Elements: NovoDataTableCellHeader', () => {
       expect(component.subscriptions.length).toEqual(2);
     });
 
-    it('should unsubscribe when the mouse is lifted', () => {
+    it('should change the width when moving mouse', () => {
+      spyOn(component.renderer, 'setStyle');
       component.startResize(mouseDownEvent);
 
-      let mouseUpEvent = window.document.createEvent('MouseEvents');
-      mouseUpEvent.initEvent('mouseup', true, true);
-      window.document.dispatchEvent(mouseUpEvent);
+      let mouseMoveEvent: MouseEvent = window.document.createEvent('MouseEvents');
+      mouseMoveEvent.initMouseEvent('mousemove', true, true, window, 1, 50, 50, 550, 50, false, false, false, false, 0, null);
+      window.document.dispatchEvent(mouseMoveEvent);
 
-      expect(component.subscriptions[0].closed).toBeTruthy();
-      expect(component.subscriptions[1].closed).toBeTruthy();
+      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'min-width', '170px');
+      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'width', '170px');
+      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'max-width', '170px');
+      expect(component._column.width).toEqual(170);
     });
   });
 });
