@@ -35,6 +35,7 @@ export interface IDataTableColumn<T> {
   width?: number;
   sortable?: boolean | IDataTableColumnSortConfig;
   filterable?: boolean | IDataTableColumnFilterConfig;
+  resizable?: boolean;
   action?: {
     icon?: string;
     tooltip?: string;

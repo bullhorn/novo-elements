@@ -1,7 +1,19 @@
-import { ElementRef, Input, Renderer2, HostBinding, Component, ChangeDetectionStrategy, OnInit, TemplateRef } from '@angular/core';
+import {
+  ElementRef,
+  Input,
+  Renderer2,
+  HostBinding,
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  TemplateRef,
+  EventEmitter,
+  OnDestroy,
+} from '@angular/core';
 import { CdkCell, CdkColumnDef } from '@angular/cdk/table';
 
 import { IDataTableColumn } from '../interfaces';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'novo-data-table-cell',
@@ -10,7 +22,7 @@ import { IDataTableColumn } from '../interfaces';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoDataTableCell<T> extends CdkCell implements OnInit {
+export class NovoDataTableCell<T> extends CdkCell implements OnInit, OnDestroy {
   @HostBinding('attr.role')
   public role = 'gridcell';
 
@@ -20,8 +32,9 @@ export class NovoDataTableCell<T> extends CdkCell implements OnInit {
   public template: TemplateRef<any>;
   @Input()
   public column: IDataTableColumn<T>;
-
-  public templateName: string;
+  @Input()
+  public resized: EventEmitter<IDataTableColumn<T>>;
+  private subscriptions: Subscription[] = [];
 
   constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2) {
     super(columnDef, elementRef);
@@ -34,6 +47,23 @@ export class NovoDataTableCell<T> extends CdkCell implements OnInit {
     if (this.column.cellClass) {
       this.renderer.addClass(this.elementRef.nativeElement, this.column.cellClass(this.row));
     }
+    this.calculateWidths();
+    this.subscriptions.push(
+      this.resized.subscribe((column: IDataTableColumn<T>) => {
+        if (column === this.column) {
+          this.calculateWidths();
+        }
+      }),
+    );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
+  }
+
+  private calculateWidths(): void {
     if (this.column.width) {
       this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${this.column.width}px`);
       this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${this.column.width}px`);

@@ -78,6 +78,7 @@ export class DataTableRowsExample {
       id: 'telephone',
       label: 'Phone',
       type: 'link:tel',
+      resizable: true,
       attributes: {
         target: '_blank',
       },
@@ -326,6 +327,10 @@ export class DataTableRowsExample {
 
   public onPreferencesChanged(event: IDataTablePreferences): void {
     console.log('Preferences changed (persist manually):', event); // tslint:disable-line
+  }
+
+  public resized(column: IDataTableColumn<MockData>): void {
+    console.log('Column Width changed (persist manually): ', event); // tslint:disable-line
   }
 
   public refresh(): void {
