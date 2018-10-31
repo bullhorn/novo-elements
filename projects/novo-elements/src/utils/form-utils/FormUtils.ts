@@ -217,7 +217,9 @@ export class FormUtils {
       customControlConfig: field.customControlConfig,
       restrictFieldInteractions: field.restrictFieldInteractions,
       validators: field.validators,
-      warning: field.warning
+      warning: field.warning,
+      config: field.config || {},
+      closeOnSelect: field.closeOnSelect,
     };
     // TODO: getControlOptions should always return the correct format
     let optionsConfig = this.getControlOptions(field, http, config);

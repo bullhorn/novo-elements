@@ -32,6 +32,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                     [attr.data-automation-id]="category.label"
                     [class.disabled]="isLoading">
                     <item-content>
+                        <i *ngIf="category.iconClass" [class]="category.iconClass"></i>
                         <span data-automation-id="label">{{ category.label }}</span>
                     </item-content>
                     <item-end>
@@ -206,7 +207,7 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
   public selectMatch(event?: MouseEvent, item?: { value: string; label: string }): boolean {
     // Set focus
     this.inputElement.nativeElement.focus();
-    return super.selectMatch(event, item);
+    return super.selectMatch(event);
   }
 
   public fireCustomFilter(value: boolean) {
@@ -274,15 +275,12 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
     let matches: { value: string; label: string; filterValue?: any }[] = array;
     if (this.searchTerm && this.searchTerm.length !== 0 && this.selectedCategory) {
       matches = matches.filter((match) => {
-        return ~String(match.label)
-          .toLowerCase()
-          .indexOf(this.searchTerm.toLowerCase());
+        const searchTerm = this.searchTerm.toLowerCase();
+        return match.label.toLowerCase().indexOf(searchTerm) > -1 || match.value.toLowerCase().indexOf(searchTerm) > -1;
       });
     }
     if (this.customFilterEnabled && this.config.customFilter.matchFunction && !ignoreCustomFilter) {
-      matches = matches.filter((match) => {
-        return this.config.customFilter.matchFunction(match, this.customFilterValue);
-      });
+      matches = matches.filter((match) => this.config.customFilter.matchFunction(match, this.customFilterValue));
     }
     return matches;
   }

@@ -313,7 +313,7 @@ export class BasePickerResults {
       event.preventDefault();
     }
 
-    let selected = this.activeMatch;
+    const selected = this.activeMatch;
     if (selected && this.parent) {
       this.parent.value = selected;
       this.selectingMatches = true;

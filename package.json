@@ -21,6 +21,7 @@
     "start": "ng serve demo",
     "copy-scss": "node copy-scss.js",
     "test": "jest projects",
+    "test:watch": "jest projects --watch",
     "lint": "ng lint",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "release:elements": "standard-version",

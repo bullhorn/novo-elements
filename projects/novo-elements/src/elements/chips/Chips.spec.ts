@@ -96,10 +96,15 @@ describe('Elements: NovoChipsElement', () => {
     });
   });
 
-  xdescribe('Method: add(event)', () => {
+  describe('Method: add(event)', () => {
     it('should add an item', () => {
       component.add({ value: 'test' });
       expect(component.items[0].value).toBe('test');
+    });
+    it('should set value wih valueFomatterFunc if provided', () => {
+      component.source = { valueFormatterFunc: (values) => `${values[0].label} (${values[0].value})` };
+      component.add({ label: 'Test', value: 'test' });
+      expect(component.value).toBe('Test (test)');
     });
   });
 
@@ -161,6 +166,39 @@ describe('Elements: NovoChipsElement', () => {
       setTimeout(() => {
         component._items.subscribe((result) => {
           expect(result[0].label).toEqual('one');
+          done();
+        });
+      }, 1);
+    });
+    it('should handle category labels', (done) => {
+      component.model = [
+        {
+          category: {
+            label: 'One',
+            value: 'one',
+          },
+          item: {
+            label: 'Two',
+            value: 'two',
+          },
+        },
+      ];
+      component.source = {
+        categoryMap: new Map([
+          [
+            'numbers',
+            {
+              value: 'numbers',
+              label: 'Numbers',
+              items: [{ label: 'One', value: 'one' }, { label: 'Two', value: 'two' }, { label: 'Three', value: 'three' }],
+            },
+          ],
+        ]),
+      };
+      component.setItems();
+      setTimeout(() => {
+        component._items.subscribe((result) => {
+          expect(result).toEqual(component.model);
           done();
         });
       }, 1);
