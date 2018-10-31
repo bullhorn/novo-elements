@@ -19,6 +19,7 @@
                  name="demo-basic-rows"
                  [refreshSubject]="refreshSubject"
                  (preferencesChanged)="onPreferencesChanged($event)"
+                 (resized)="resized($event)"
                  #basic>
   <!-- Custom Actions -->
   <ng-template novoTemplate="customActions">
