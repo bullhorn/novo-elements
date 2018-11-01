@@ -139,12 +139,18 @@ export class FormUtils {
       Integer: 'number',
     };
     if (field.type === 'TO_MANY') {
-      if (field.multiValue === false) {
-        type = 'entitypicker';
-      } else if (field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity)) {
-        type = 'entitychips'; // TODO!
+      if (field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity)) {
+        if (field.multiValue === false) {
+          type = 'entitypicker';
+        } else {
+          type = 'entitychips';
+        }
       } else {
-        type = 'chips';
+        if (field.multiValue === false) {
+          type = 'picker';
+        } else {
+          type = 'chips';
+        }
       }
     } else if (field.type === 'TO_ONE') {
       if (field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity)) {
@@ -172,9 +178,10 @@ export class FormUtils {
       type = typeToTypeMap[field.type];
     } else if (Object.keys(numberDataTypeToTypeMap).indexOf(field.dataType) > -1) {
       type = numberDataTypeToTypeMap[field.dataType];
-    } /* else {
-            throw new Error('FormUtils: This field type is unsupported.');
-        }*/
+    }
+    /* else {
+               throw new Error('FormUtils: This field type is unsupported.');
+           }*/
     return type;
   }
 
