@@ -139,7 +139,9 @@ export class FormUtils {
       Integer: 'number',
     };
     if (field.type === 'TO_MANY') {
-      if (field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity)) {
+      if (field.multiValue === false) {
+        type = 'entitypicker';
+      } else if (field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity)) {
         type = 'entitychips'; // TODO!
       } else {
         type = 'chips';
