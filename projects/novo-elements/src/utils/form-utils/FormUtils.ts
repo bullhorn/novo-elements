@@ -216,6 +216,8 @@ export class FormUtils {
       template: field.template,
       customControlConfig: field.customControlConfig,
       restrictFieldInteractions: field.restrictFieldInteractions,
+      validators: field.validators,
+      warning: field.warning
     };
     // TODO: getControlOptions should always return the correct format
     let optionsConfig = this.getControlOptions(field, http, config);
@@ -256,6 +258,9 @@ export class FormUtils {
         controlConfig.config.columns = overrides[field.name].columns;
         controlConfig.closeOnSelect = true;
         delete controlConfig.label;
+      }
+      if (overrides[field.name].warning) {
+        controlConfig.warning = overrides[field.name].warning;
       }
       Object.assign(controlConfig, overrides[field.name]);
     }
