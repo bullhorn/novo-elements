@@ -86,17 +86,24 @@ cdk-table {
 }
 
 .novo-data-table-header-cell {
+  &.resizable {
+    padding-right: 0;
+    .data-table-header-resizable {
+      height: 100%;
+
+      span {
+        cursor: ew-resize;
+        width: 8px;
+        display: block;
+      }
+    }
+  }
   > div {
     > button {
       margin-right: 2px;
     }
     &.spacer {
       flex-grow: 100;
-    }
-    .data-table-header-resizable {
-      transform: rotate(90deg);
-      cursor: e-resize;
-      font-size: 1em;
     }
   }
 }
