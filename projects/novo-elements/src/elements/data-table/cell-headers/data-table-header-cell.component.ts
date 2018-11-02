@@ -10,7 +10,7 @@ import {
   ElementRef,
   Renderer2,
   EventEmitter,
-  Output,
+  Output, HostBinding,
 } from '@angular/core';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { fromEvent, Subscription } from 'rxjs';
@@ -72,8 +72,8 @@ import { Helpers } from '../../../utils/Helpers';
             </novo-dropdown>
         </div>
         <div class="spacer"></div>
-        <div>
-          <i class="bhi-sortable data-table-header-resizable" (mousedown)="startResize($event)" *ngIf="config.resizable"></i>
+        <div class="data-table-header-resizable" *ngIf="config.resizable">
+          <span (mousedown)="startResize($event)" >&nbsp;</span>
         </div>
     `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -88,6 +88,8 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   defaultSort: { id: string; value: string };
   @Input()
   resized: EventEmitter<IDataTableColumn<T>>;
+  @HostBinding('class.resizable')
+  public resizable: boolean;
 
   @Input('novo-data-table-cell-config')
   set column(column: IDataTableColumn<T>) {
@@ -100,6 +102,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       filterable: !!column.filterable,
       resizable: !!column.resizable,
     };
+    this.resizable = this.config.resizable;
 
     let transforms: { filter?: Function; sort?: Function } = {};
 
