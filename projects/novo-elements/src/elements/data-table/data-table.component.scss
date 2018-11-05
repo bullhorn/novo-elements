@@ -64,6 +64,12 @@ cdk-table {
   }
 }
 
+.novo-data-table-header-row,
+.novo-data-table-header-cell {
+  position: relative;
+  z-index: 1;
+}
+
 .novo-data-table-row,
 .novo-data-table-header-row {
   display: flex;
