@@ -24,6 +24,7 @@ import {
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from '../Helpers';
 import { NovoFieldset } from '../../elements/form/FormInterfaces';
+import { FormField } from '../../elements/form/FormTypes';
 import { NovoFormControl, NovoFormGroup } from '../../elements/form/NovoFormControl';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from './../../services/options/OptionsService';
@@ -89,20 +90,18 @@ export class FormUtils {
   }
 
   /**
+   * @name hasAssociatedEntity
+   * @param field
+   */
+  hasAssociatedEntity(field: FormField): boolean {
+    return !!(field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity));
+  }
+
+  /**
    * @name determineInputType
    * @param field
    */
-  determineInputType(field: {
-    dataSpecialization: string;
-    inputType: string;
-    options: string;
-    multiValue: boolean;
-    dataType: string;
-    type: string;
-    associatedEntity?: any;
-    optionsUrl?: string;
-    optionsType?: string;
-  }): string {
+  determineInputType(field: FormField): string {
     let type: string;
     let dataSpecializationTypeMap = {
       DATETIME: 'datetime',
@@ -139,7 +138,7 @@ export class FormUtils {
       Integer: 'number',
     };
     if (field.type === 'TO_MANY') {
-      if (field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity)) {
+      if (this.hasAssociatedEntity(field)) {
         if (field.multiValue === false) {
           type = 'entitypicker';
         } else {
@@ -153,7 +152,7 @@ export class FormUtils {
         }
       }
     } else if (field.type === 'TO_ONE') {
-      if (field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity)) {
+      if (this.hasAssociatedEntity(field)) {
         type = 'entitypicker'; // TODO!
       } else {
         type = 'picker';
