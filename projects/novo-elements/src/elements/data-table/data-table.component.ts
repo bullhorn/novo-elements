@@ -222,7 +222,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       }
     }
     this._disabledColumns = displayedColumns;
-
+    this.configureLastDisplayedColumn();
     if (this.initialized) {
       setTimeout(() => {
         this.scrollListener();
@@ -246,7 +246,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input()
   rowIdentifier: string = 'id';
   @Input()
-  trackByFn: Function = (index, item) => item.id
+  trackByFn: Function = (index, item) => item.id;
   @Input()
   templates: { [key: string]: TemplateRef<any> } = {};
   @Input()
@@ -546,6 +546,38 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     return true;
   }
 
+  private configureLastDisplayedColumn(): void {
+    if (this.columns && this.displayedColumns && 0 !== this.columns.length && 0 !== this.displayedColumns.length) {
+      this.columns.forEach((column: IDataTableColumn<T>) => {
+        if (column.initialResizable) {
+          column.resizable = column.initialResizable.resizable;
+          column.width = column.initialResizable.width;
+          column.initialResizable = undefined;
+        }
+      });
+      const resizableColumns: string[] = this.displayedColumns.filter(
+        (name: string): boolean => {
+          return (
+            this.columns.findIndex(
+              (column: IDataTableColumn<T>): boolean => {
+                return column.resizable && column.id === name;
+              },
+            ) !== -1
+          );
+        },
+      );
+      const lastResizableColumn: IDataTableColumn<T> = this.columns.find((column: IDataTableColumn<T>) => {
+        return column.id === resizableColumns[resizableColumns.length - 1];
+      });
+      lastResizableColumn.initialResizable = {
+        resizable: lastResizableColumn.resizable,
+        width: lastResizableColumn.width,
+      };
+      lastResizableColumn.width = undefined;
+      lastResizableColumn.resizable = false;
+    }
+  }
+
   private configureColumns(): void {
     if (this.columns && this.columns.length !== 0 && Object.keys(this.templates).length !== 0) {
       // Figure the column templates
@@ -576,6 +608,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
         }
         this.columnToTemplate[column.id] = this.templates[templateName];
       });
+      this.configureLastDisplayedColumn();
       this.columnsLoaded = true;
     }
   }

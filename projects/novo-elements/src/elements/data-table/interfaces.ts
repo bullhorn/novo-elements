@@ -49,6 +49,10 @@ export interface IDataTableColumn<T> {
     }[];
   };
   attributes?: { [key: string]: any }; // for any custom config in cells
+  initialResizable?: {
+    resizable: boolean;
+    width: number;
+  };
 }
 
 export interface IDataTablePaginationOptions {
