@@ -85,6 +85,17 @@ export interface NovoAddressConfig {
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Input()
   config: NovoAddressConfig;
+  private _readOnly: boolean = false;
+  @Input()
+  set readOnly(readOnly: boolean) {
+    this._readOnly = readOnly;
+    this.fieldList.forEach((field: string) => {
+      this.disabled[field] = this.readOnly;
+    });
+  }
+  get readOnly(): boolean {
+    return this._readOnly;
+  }
   states: Array<any> = [];
   countries: Array<any> = getCountries();
   fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
@@ -306,7 +317,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         this.config.state.pickerConfig.defaultOptions = results;
         if (results.length) {
           this.tooltip.state = undefined;
-          this.disabled.state = false;
+          this.disabled.state = this._readOnly;
           this.setStateLabel(this.model);
         } else {
           this.disabled.state = true;

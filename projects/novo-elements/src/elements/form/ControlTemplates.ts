@@ -115,7 +115,7 @@ import { NovoTemplateService } from '../../services/template/NovoTemplateService
         <!--Address-->
         <ng-template novoTemplate="address" let-control let-form="form" let-errors="errors" let-methods="methods">
           <div [formGroup]="form">
-            <novo-address [formControlName]="control.key" [config]="control?.config" (change)="methods.handleAddressChange($event)" (focus)="methods.handleFocus($event.event, $event.field)" (blur)="methods.handleBlur($event.event, $event.field)"  (validityChange)="methods.updateValidity()"></novo-address>
+            <novo-address [formControlName]="control.key" [config]="control?.config" [readOnly]="control?.readOnly" (change)="methods.handleAddressChange($event)" (focus)="methods.handleFocus($event.event, $event.field)" (blur)="methods.handleBlur($event.event, $event.field)"  (validityChange)="methods.updateValidity()"></novo-address>
           </div>
         </ng-template>
 
