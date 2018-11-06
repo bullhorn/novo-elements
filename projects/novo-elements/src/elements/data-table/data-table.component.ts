@@ -566,6 +566,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
           );
         },
       );
+      if (!resizableColumns || resizableColumns.length === 0) {
+        return;
+      }
       const lastResizableColumn: IDataTableColumn<T> = this.columns.find((column: IDataTableColumn<T>) => {
         return column.id === resizableColumns[resizableColumns.length - 1];
       });
