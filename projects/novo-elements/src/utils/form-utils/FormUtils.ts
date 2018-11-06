@@ -177,10 +177,9 @@ export class FormUtils {
       type = typeToTypeMap[field.type];
     } else if (Object.keys(numberDataTypeToTypeMap).indexOf(field.dataType) > -1) {
       type = numberDataTypeToTypeMap[field.dataType];
-    }
-    /* else {
-               throw new Error('FormUtils: This field type is unsupported.');
-           }*/
+    } /* else {
+            throw new Error('FormUtils: This field type is unsupported.');
+        }*/
     return type;
   }
 

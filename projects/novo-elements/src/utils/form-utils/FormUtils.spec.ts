@@ -44,7 +44,7 @@ function createAddress(address1, city, state, zip, countryName) {
   };
 }
 
-describe.only('Utils: FormUtils', () => {
+describe('Utils: FormUtils', () => {
   let formUtils;
 
   beforeEach(async(() => {
@@ -204,10 +204,10 @@ describe.only('Utils: FormUtils', () => {
       };
 
       describe('without associated field types', () => {
-        it("should return type 'picker' if no 'Allow Multiple' property", () => {
+        it('should return type \'picker\' if no \'Allow Multiple\' property', () => {
           expect(formUtils.determineInputType({ ...toManyField, multiValue: false })).toBe('picker');
         });
-        it("should return type 'chips' with 'Allow Multiple' property", () => {
+        it('should return type \'chips\' with \'Allow Multiple\' property', () => {
           expect(formUtils.determineInputType({ ...toManyField, multiValue: true })).toBe('chips');
         });
       });
@@ -215,17 +215,17 @@ describe.only('Utils: FormUtils', () => {
         beforeEach(() => {
           jest.spyOn(formUtils, 'hasAssociatedEntity').mockImplementation(() => true);
         });
-        it("should return type 'entitypicker' with no 'Allow Multiple' property", () => {
+        it('should return type \'entitypicker\' with no \'Allow Multiple\' property', () => {
           const field: FormField = { ...toManyField, multiValue: false };
           expect(formUtils.determineInputType(field)).toBe('entitypicker');
         });
-        it("should return type 'entitychips' with 'Allow Multiple' property", () => {
+        it('should return type \'entitychips\' with \'Allow Multiple\' property', () => {
           const field: FormField = { ...toManyField, multiValue: true };
           expect(formUtils.determineInputType(field)).toBe('entitychips');
         });
       });
     });
-    xit("should throw an error when a type doesn't exist for the field.", () => {
+    xit('should throw an error when a type doesn\'t exist for the field.', () => {
       expect(formUtils.determineInputType).toBeDefined();
       expect(() => {
         formUtils.determineInputType({});
@@ -417,7 +417,7 @@ describe.only('Utils: FormUtils', () => {
       expect(formUtils.getControlOptions).toBeDefined();
       formUtils.getControlOptions({ dataType: 'Boolean' });
     });
-    it("should return an object with a function that returns a promise when there's an optionsUrl", () => {
+    it('should return an object with a function that returns a promise when there\'s an optionsUrl', () => {
       expect(formUtils.getControlOptions).toBeDefined();
       let result = formUtils.getControlOptions({ optionsUrl: 'TEST' });
       expect(result.field).toBe('value');
@@ -427,7 +427,7 @@ describe.only('Utils: FormUtils', () => {
         expect(returnValue.length).toBe(0);
       });
     });
-    it("should return an object with a function that returns a promise when there's an optionsUrl that calls an API", () => {
+    it('should return an object with a function that returns a promise when there\'s an optionsUrl that calls an API', () => {
       expect(formUtils.getControlOptions).toBeDefined();
       let mockHttp = {
         get: () => {
