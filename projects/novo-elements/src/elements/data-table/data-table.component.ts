@@ -245,6 +245,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   name: string = 'novo-data-table';
   @Input()
   rowIdentifier: string = 'id';
+  // prettier-ignore
   @Input()
   trackByFn: Function = (index, item) => item.id
   @Input()
@@ -566,18 +567,17 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
           );
         },
       );
-      if (!resizableColumns || resizableColumns.length === 0) {
-        return;
+      if (resizableColumns && resizableColumns.length > 0) {
+        const lastResizableColumn: IDataTableColumn<T> = this.columns.find((column: IDataTableColumn<T>) => {
+          return column.id === resizableColumns[resizableColumns.length - 1];
+        });
+        lastResizableColumn.initialResizable = {
+          resizable: lastResizableColumn.resizable,
+          width: lastResizableColumn.width,
+        };
+        lastResizableColumn.width = undefined;
+        lastResizableColumn.resizable = false;
       }
-      const lastResizableColumn: IDataTableColumn<T> = this.columns.find((column: IDataTableColumn<T>) => {
-        return column.id === resizableColumns[resizableColumns.length - 1];
-      });
-      lastResizableColumn.initialResizable = {
-        resizable: lastResizableColumn.resizable,
-        width: lastResizableColumn.width,
-      };
-      lastResizableColumn.width = undefined;
-      lastResizableColumn.resizable = false;
     }
   }
 
