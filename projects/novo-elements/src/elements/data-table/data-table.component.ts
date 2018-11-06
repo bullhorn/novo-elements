@@ -246,7 +246,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input()
   rowIdentifier: string = 'id';
   @Input()
-  trackByFn: Function = (index, item) => item.id
+  trackByFn: Function = (index, item) => item.id;
   @Input()
   templates: { [key: string]: TemplateRef<any> } = {};
   @Input()
@@ -566,6 +566,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
           );
         },
       );
+      if (!resizableColumns || resizableColumns.length === 0) {
+        return;
+      }
       const lastResizableColumn: IDataTableColumn<T> = this.columns.find((column: IDataTableColumn<T>) => {
         return column.id === resizableColumns[resizableColumns.length - 1];
       });
