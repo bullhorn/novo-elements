@@ -572,16 +572,5 @@ describe('Elements: NovoAddressElement', () => {
       component.isInvalid('address1');
       expect(component.invalid.address1).toEqual(false);
     });
-    it('should render element disabled when containing control element set to readOnly', () => {
-      component.disabled = {};
-      component.readOnly = true;
-      component.fieldList.forEach((field: string) => {
-        expect(component.disabled[field]).toEqual(true);
-      });
-      component.readOnly = false;
-      component.fieldList.forEach((field: string) => {
-        expect(component.disabled[field]).toEqual(false);
-      });
-    });
   });
 });
