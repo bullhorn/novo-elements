@@ -23,6 +23,8 @@
     "test": "jest projects",
     "lint": "ng lint",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "release:elements": "standard-version",
+    "postrelease:elements": "git push --follow-tags origin master; npm run build; cd dist/novo-elements && npm publish",
     "snapshot-publish": "bash snapshot-publish"
   },
   "jest": {
