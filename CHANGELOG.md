@@ -1,3 +1,17 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/bullhorn/novo-elements/compare/v3.0.0...v3.1.0) (2018-11-09)
+
+
+### Features
+
+* **data-table:** Add option for fixed headers and resizing columns ([f2f2ace](https://github.com/bullhorn/novo-elements/commit/f2f2ace))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/bullhorn/novo-elements/compare/v2.15.0...v3.0.0) (2018-08-30)
 
@@ -4955,6 +4969,3 @@ For docs on how to use the custom headers/actions please refer to [TABLE README]
 
 * **button:** Adding base library code with a Button element and demo. ([216f054](https://github.com/bullhorn/novo-elements/commit/216f054))
 * **tabs:** Adds Tabs element and demo. Closes [#19](https://github.com/bullhorn/novo-elements/issues/19) ([9c38e7c](https://github.com/bullhorn/novo-elements/commit/9c38e7c))
-
-
-
