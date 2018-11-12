@@ -64,7 +64,7 @@ export interface NovoAddressConfig {
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.state, 'bhi-check': valid.state}">
             </i>
-            <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (changed)="onStateChange($event)" autocomplete="shipping region" [(ngModel)]="model.state" [disablePickerInput]="disabled.state || !valid.countryID"></novo-picker>
+            <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (changed)="onStateChange($event)" autocomplete="shipping region" [(ngModel)]="model.state" [disablePickerInput]="disabled.state"></novo-picker>
         </span>
         <span *ngIf="!config?.zip?.hidden" class="zip postal-code" [class.invalid]="invalid.zip" [class.focus]="focused.zip" [class.disabled]="disabled.zip">
             <i *ngIf="config.zip.required"
@@ -90,8 +90,11 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   set readOnly(readOnly: boolean) {
     this._readOnly = readOnly;
     this.fieldList.forEach((field: string) => {
-      this.disabled[field] = this.readOnly;
+      this.disabled[field] = this._readOnly;
     });
+    if (this.model) {
+      this.updateStates();
+    }
   }
   get readOnly(): boolean {
     return this._readOnly;
