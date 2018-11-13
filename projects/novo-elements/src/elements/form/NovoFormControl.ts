@@ -61,6 +61,7 @@ export class NovoFormControl extends FormControl {
   customControlConfig?: any;
   checkboxLabel?: string;
   restrictFieldInteractions?: boolean;
+  warning?: string;
   private historyTimeout: any;
 
   constructor(value: any, control: NovoControlConfig) {
@@ -119,6 +120,8 @@ export class NovoFormControl extends FormControl {
     this.options = control.options;
     this.tipWell = control.tipWell;
     this.customControlConfig = control.customControlConfig;
+    this.warning = control.warning;
+
 
     // Reactive Form, need to enable/disable, can't bind to [disabled]
     if (this.readOnly) {

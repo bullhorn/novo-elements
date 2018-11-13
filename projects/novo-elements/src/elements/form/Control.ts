@@ -104,7 +104,7 @@ export class NovoAutoSize implements AfterContentInit {
                     </div>
                     <!--Error Message-->
                     <div class="field-message {{ form.controls[control.key].controlType }}" *ngIf="!condensed" [class.has-tip]="form.controls[control.key].tipWell" [ngClass]="showErrorState || showMaxLengthMetMessage ? 'error-shown' : 'error-hidden'">
-                        <div class="messages" [ngClass]="showCount ? 'count-shown' : 'count-hidden'">
+                        <div class="messages" [ngClass]="showMessages ? 'count-shown messages-shown' : 'count-hidden messages-hidden'">
                             <span class="error-text" *ngIf="showFieldMessage"></span>
                             <span class="error-text" *ngIf="isDirty && errors?.required && form.controls[control.key].controlType !== 'address'">{{ form.controls[control.key].label | uppercase }} {{ labels.isRequired }}</span>
                             <span class="error-text" *ngIf="isDirty && errors?.minlength">{{ form.controls[control.key].label | uppercase }} {{ labels.minLength }} {{ form.controls[control.key].minlength }}</span>
@@ -127,6 +127,8 @@ export class NovoAutoSize implements AfterContentInit {
                             <span class="description" *ngIf="form.controls[control.key].description">
                                 {{ form.controls[control.key].description }}
                             </span>
+                            <span class="warning-text" *ngIf="form.controls[control.key].warning">{{ form.controls[control.key].warning }}</span>
+
                         </div>
                         <span class="character-count" [class.error]="((errors?.maxlength && !errors?.maxlengthFields) || (errors?.maxlength && errors?.maxlengthFields && errors.maxlengthFields.includes(focusedField)))" *ngIf="showCount">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
                     </div>
@@ -271,6 +273,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   set showCount(value) {
     this._showCount = value;
+  }
+
+  get showMessages(): boolean {
+    return this.showCount || !Helpers.isEmpty(this.form.controls[this.control.key].warning) || !Helpers.isEmpty(this.form.controls[this.control.key].description);
   }
 
   ngAfterViewInit() {

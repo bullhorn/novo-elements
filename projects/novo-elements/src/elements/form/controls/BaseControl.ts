@@ -88,6 +88,7 @@ export interface NovoControlConfig {
   startDate?: Date | Number;
   endDate?: Date | Number;
   restrictFieldInteractions?: boolean;
+  warning?: string;
 }
 
 export class BaseControl {
@@ -162,6 +163,7 @@ export class BaseControl {
   startDate?: Date | Number;
   endDate?: Date | Number;
   restrictFieldInteractions?: boolean;
+  warning?: string;
 
   constructor(type: string = 'BaseControl', config: NovoControlConfig = {}) {
     this.__type = type;
@@ -199,6 +201,9 @@ export class BaseControl {
     this.startDate = config.startDate;
     this.endDate = config.endDate;
     this.restrictFieldInteractions = !!config.restrictFieldInteractions;
+    if (!Helpers.isEmpty(config.warning)) {
+      this.warning = config.warning;
+    }
 
     if (this.required) {
       this.validators.push(Validators.required);
