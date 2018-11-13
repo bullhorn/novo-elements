@@ -242,6 +242,9 @@ novo-form {
                 padding-bottom: 5px;
                 flex: 1;
               }
+              .warning-text {
+                color: $warning;
+              }
             }
           }
           .error-message {
