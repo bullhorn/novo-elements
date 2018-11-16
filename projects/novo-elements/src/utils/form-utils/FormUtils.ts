@@ -23,8 +23,7 @@ import {
 } from '../../elements/form/FormControls';
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from '../Helpers';
-import { NovoFieldset } from '../../elements/form/FormInterfaces';
-import { FormField } from '../../elements/form/FormTypes';
+import { NovoFieldset, FormField } from '../../elements/form/FormInterfaces';
 import { NovoFormControl, NovoFormGroup } from '../../elements/form/NovoFormControl';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from './../../services/options/OptionsService';
