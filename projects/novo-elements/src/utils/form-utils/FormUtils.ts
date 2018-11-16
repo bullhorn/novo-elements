@@ -42,7 +42,7 @@ export class FormUtils {
     'Person',
     'Placement',
   ];
-  PICKER_TEST_LIST: string[] = [
+  PICKER_TEXT_LIST: string[] = [
     'CandidateText',
     'ClientText',
     'ClientContactText',
@@ -158,7 +158,7 @@ export class FormUtils {
         type = 'picker';
       }
     } else if (field.optionsUrl && field.inputType === 'SELECT') {
-      if (field.optionsType && ~this.PICKER_TEST_LIST.indexOf(field.optionsType)) {
+      if (field.optionsType && ~this.PICKER_TEXT_LIST.indexOf(field.optionsType)) {
         type = 'entitypicker'; // TODO!
       } else {
         type = 'picker';
@@ -199,6 +199,7 @@ export class FormUtils {
     let type: string = this.determineInputType(field) || field.type;
     let control: any;
     let controlConfig: NovoControlConfig = {
+      metaType: field.type,
       type: type,
       key: field.name,
       label: field.label,

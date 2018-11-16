@@ -49,6 +49,7 @@ export interface NovoControlConfig {
   interactions?: Array<Object>;
   dataSpecialization?: string;
   dataType?: string;
+  metaType?: string;
   appendToBody?: boolean; // Deprecated
   parentScrollSelector?: string;
   description?: string;
