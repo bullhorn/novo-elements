@@ -85,7 +85,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
           </ng-container>
           <ng-container *ngFor="let column of columns;trackBy: trackColumnsBy" [cdkColumnDef]="column.id">
             <ng-container *cdkHeaderCellDef>
-              <ng-container *ngTemplateOutlet="templates['columnHeader'+column.id] || templates['columnHeader']; context: {$implicit: columns, resized: resized, defaultSort: defaultSort}"></ng-container>
+              <ng-container *ngTemplateOutlet="templates['columnHeader'+column.id] || templates['columnHeader']; context: {$implicit: column, resized: resized, defaultSort: defaultSort}"></ng-container>
             </ng-container>
             <novo-data-table-cell *cdkCellDef="let row" [resized]="resized" [column]="column" [row]="row" [template]="columnToTemplate[column.id]" [class.empty]="column?.type === 'action' && !column?.label" [class.button-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)" [class.dropdown-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-cell>
           </ng-container>
