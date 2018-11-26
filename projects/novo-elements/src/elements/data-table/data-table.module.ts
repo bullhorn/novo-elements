@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CdkTableModule, CdkColumnDef } from '@angular/cdk/table';
+import { CdkTableModule } from '@angular/cdk/table';
 
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoDropdownModule } from '../dropdown/Dropdown.module';
@@ -76,7 +76,7 @@ import { NovoDataTableClearButton } from './data-table-clear-button.component';
     NovoDataTableExpandDirective,
     NovoDataTableClearButton,
   ],
-  providers: [DataTableState, CdkColumnDef],
+  providers: [DataTableState],
   exports: [
     NovoDataTable,
     DataTableInterpolatePipe,
