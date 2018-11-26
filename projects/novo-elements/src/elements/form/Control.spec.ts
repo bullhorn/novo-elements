@@ -67,9 +67,8 @@ describe('Elements: NovoAutoSize', () => {
 describe('Test Localization', () => {
   let mockElement: ElementRef = new ElementRef(document.createElement('div'));
 
-  it('should set decimal seperator based on locale correctly', () => {
+  it('should set decimal separator based on locale correctly', () => {
     let component = new NovoControlElement(mockElement, null, null, null, null, null, 'fr-FR');
-    let decimalSeperator = component.getDecimalSeparator();
-    expect(decimalSeperator).toBe('.');
+    expect(component.decimalSeparator).toBe('.');
   });
 });
