@@ -10,7 +10,9 @@ import {
   ElementRef,
   Renderer2,
   EventEmitter,
-  Output, HostBinding,
+  Output,
+  HostBinding,
+  TemplateRef,
 } from '@angular/core';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { fromEvent, Subscription } from 'rxjs';
@@ -33,6 +35,12 @@ import { Helpers } from '../../../utils/Helpers';
 @Component({
   selector: '[novo-data-table-cell-config]',
   template: `
+        <ng-container *ngTemplateOutlet="template || defaultHeaderCellTemplate; context: {$implicit: column}"></ng-container>
+
+        <ng-template #defaultHeaderCellTemplate
+        let-column
+        let-resized="resized"
+        let-defaultSort="defaultSort">
         <i class="bhi-{{ labelIcon }} label-icon" *ngIf="labelIcon" data-automation-id="novo-data-table-header-icon"></i>
         <label data-automation-id="novo-data-table-label">{{ label }}</label>
         <div>
@@ -75,6 +83,8 @@ import { Helpers } from '../../../utils/Helpers';
         <div class="data-table-header-resizable" *ngIf="config.resizable">
           <span (mousedown)="startResize($event)" >&nbsp;</span>
         </div>
+        </ng-template>
+
     `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -86,8 +96,11 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   @Input()
   defaultSort: { id: string; value: string };
+
   @Input()
   resized: EventEmitter<IDataTableColumn<T>>;
+  @Input()
+  template: TemplateRef<any>;
   @HostBinding('class.resizable')
   public resizable: boolean;
 

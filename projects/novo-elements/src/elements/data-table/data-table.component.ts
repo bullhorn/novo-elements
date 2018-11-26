@@ -84,9 +84,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
             <novo-data-table-expand-cell *cdkCellDef="let row; let i = index" [row]="row"></novo-data-table-expand-cell>
           </ng-container>
           <ng-container *ngFor="let column of columns;trackBy: trackColumnsBy" [cdkColumnDef]="column.id">
-            <ng-container *cdkHeaderCellDef>
-              <ng-container *ngTemplateOutlet="templates['columnHeader'+column.id] || templates['columnHeader']; context: {$implicit: column, resized: resized, defaultSort: defaultSort}"></ng-container>
-            </ng-container>
+            <novo-data-table-header-cell *cdkHeaderCellDef [column]="column" [template]="false" [novo-data-table-cell-config]="column" [resized]="resized" [defaultSort]="defaultSort" [class.empty]="column?.type === 'action' && !column?.label" [class.button-header-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)" [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-header-cell>
             <novo-data-table-cell *cdkCellDef="let row" [resized]="resized" [column]="column" [row]="row" [template]="columnToTemplate[column.id]" [class.empty]="column?.type === 'action' && !column?.label" [class.button-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)" [class.dropdown-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-cell>
           </ng-container>
           <novo-data-table-header-row *cdkHeaderRowDef="displayedColumns" data-automation-id="novo-data-table-header-row"></novo-data-table-header-row>
@@ -191,12 +189,6 @@ import { StaticDataTableService } from './services/static-data-table.service';
       <div class="novo-data-table-detail-row" [@expand] style="overflow: hidden">
         <ng-container *ngTemplateOutlet="templates['expandedRow']; context: {$implicit: row}"></ng-container>
       </div>
-    </ng-template>
-    <ng-template novoTemplate="columnHeader"
-                 let-column
-                 let-resized="resized"
-                 let-defaultSort="defaultSort">
-      <novo-data-table-header-cell [column]="column" [novo-data-table-cell-config]="column" [resized]="resized" [defaultSort]="defaultSort" [class.empty]="column?.type === 'action' && !column?.label" [class.button-header-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)" [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-header-cell>
     </ng-template>
     <!-- CUSTOM CELLS PASSED IN -->
     <ng-content></ng-content>
