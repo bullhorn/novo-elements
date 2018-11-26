@@ -35,12 +35,6 @@ import { Helpers } from '../../../utils/Helpers';
 @Component({
   selector: '[novo-data-table-cell-config]',
   template: `
-        <ng-container *ngTemplateOutlet="template || defaultHeaderCellTemplate; context: {$implicit: column}"></ng-container>
-
-        <ng-template #defaultHeaderCellTemplate
-        let-column
-        let-resized="resized"
-        let-defaultSort="defaultSort">
         <i class="bhi-{{ labelIcon }} label-icon" *ngIf="labelIcon" data-automation-id="novo-data-table-header-icon"></i>
         <label data-automation-id="novo-data-table-label">{{ label }}</label>
         <div>
@@ -71,6 +65,9 @@ import { Helpers } from '../../../utils/Helpers';
                             <span>{{ option?.label || option }}</span> <i class="bhi-check" *ngIf="option.hasOwnProperty('value') ? filter === option.value : filter === option"></i>
                         </item>
                     </list>
+                    <list *ngSwitchCase="'custom'">
+                        <ng-container *ngTemplateOutlet="filterTemplate; context: {$implicit: config}"></ng-container>
+                    </list>
                     <list *ngSwitchDefault>
                         <item class="filter-search" keepOpen="true">
                             <input [type]="config.filterConfig.type" [(ngModel)]="filter" (ngModelChange)="filterData($event)" #filterInput data-automation-id="novo-data-table-filter-input"/>
@@ -83,8 +80,6 @@ import { Helpers } from '../../../utils/Helpers';
         <div class="data-table-header-resizable" *ngIf="config.resizable">
           <span (mousedown)="startResize($event)" >&nbsp;</span>
         </div>
-        </ng-template>
-
     `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -100,7 +95,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   @Input()
   resized: EventEmitter<IDataTableColumn<T>>;
   @Input()
-  template: TemplateRef<any>;
+  filterTemplate: TemplateRef<any>;
   @HostBinding('class.resizable')
   public resizable: boolean;
 
