@@ -66,7 +66,9 @@ import { Helpers } from '../../../utils/Helpers';
                         </item>
                     </list>
                     <list *ngSwitchCase="'custom'">
-                        <ng-container *ngTemplateOutlet="filterTemplate; context: {$implicit: config}"></ng-container>
+                        <item class="filter-search" keepOpen="true">
+                            <ng-container *ngTemplateOutlet="filterTemplate; context: {$implicit: config}"></ng-container>
+                        </item>
                     </list>
                     <list *ngSwitchDefault>
                         <item class="filter-search" keepOpen="true">
