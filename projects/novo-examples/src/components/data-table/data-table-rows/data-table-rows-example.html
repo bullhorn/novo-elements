@@ -63,4 +63,8 @@
                let-row>
     Why look at that, you clicked the details!
   </ng-template>
+  <!-- Custom Status Filter -->
+  <ng-template novoTemplate="column-filter-status">
+    <novo-tiles [options]="customStatusColumnOptions" (onChange)="filterList($event)" [(ngModel)]="customStatusColumnValue"></novo-tiles>
+  </ng-template>
 </novo-data-table>

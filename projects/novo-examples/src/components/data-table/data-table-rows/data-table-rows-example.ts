@@ -37,6 +37,17 @@ export class DataTableRowsExample {
   public loadedPaginationType: string = 'standard';
   public globalSearchOptions: any[] = [{ label: 'Show', value: true }, { label: 'Hide', value: false }];
   public loadedGlobalSearch: boolean = false;
+  public customStatusColumnValue: string = '';
+  public customStatusColumnOptions: object[] = [
+    {
+      label: 'Has A 5 in status',
+      value: '5',
+    },
+    {
+      label: 'All',
+      value: '',
+    },
+  ];
 
   // Shared configuration
   public sharedColumns: IDataTableColumn<MockData>[] = [
@@ -169,7 +180,7 @@ export class DataTableRowsExample {
       label: 'Status',
       enabled: true,
       type: 'text',
-      filterable: true,
+      filterable: { type: 'custom' },
       sortable: true,
     },
     {
@@ -339,5 +350,15 @@ export class DataTableRowsExample {
 
   public toggleRowDetails(expand: boolean): void {
     this.table.expandRows(expand);
+  }
+
+  public filterList(value: any): void {
+    this.table.state.filter = { id: 'status', value: value };
+    this.table.state.updates.next({
+      globalSearch: this.table.state.globalSearch,
+      filter: this.table.state.filter,
+      sort: this.table.state.sort,
+    });
+    this.ref.markForCheck();
   }
 }
