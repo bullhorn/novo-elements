@@ -10,7 +10,9 @@ import {
   ElementRef,
   Renderer2,
   EventEmitter,
-  Output, HostBinding,
+  Output,
+  HostBinding,
+  TemplateRef,
 } from '@angular/core';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { fromEvent, Subscription } from 'rxjs';
@@ -63,6 +65,11 @@ import { Helpers } from '../../../utils/Helpers';
                             <span>{{ option?.label || option }}</span> <i class="bhi-check" *ngIf="option.hasOwnProperty('value') ? filter === option.value : filter === option"></i>
                         </item>
                     </list>
+                    <list *ngSwitchCase="'custom'">
+                        <item class="filter-search" keepOpen="true">
+                            <ng-container *ngTemplateOutlet="filterTemplate; context: {$implicit: config}"></ng-container>
+                        </item>
+                    </list>
                     <list *ngSwitchDefault>
                         <item class="filter-search" keepOpen="true">
                             <input [type]="config.filterConfig.type" [(ngModel)]="filter" (ngModelChange)="filterData($event)" #filterInput data-automation-id="novo-data-table-filter-input"/>
@@ -86,8 +93,11 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   @Input()
   defaultSort: { id: string; value: string };
+
   @Input()
   resized: EventEmitter<IDataTableColumn<T>>;
+  @Input()
+  filterTemplate: TemplateRef<any>;
   @HostBinding('class.resizable')
   public resizable: boolean;
 
