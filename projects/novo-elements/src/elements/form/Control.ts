@@ -211,7 +211,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   templates: any = {};
   templateContext: any;
   loading: boolean = false;
-  decimalSeparator: string = '.';
 
   constructor(
     element: ElementRef,
@@ -276,7 +275,15 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   get showMessages(): boolean {
-    return this.showCount || !Helpers.isEmpty(this.form.controls[this.control.key].warning) || !Helpers.isEmpty(this.form.controls[this.control.key].description);
+    return (
+      this.showCount ||
+      !Helpers.isEmpty(this.form.controls[this.control.key].warning) ||
+      !Helpers.isEmpty(this.form.controls[this.control.key].description)
+    );
+  }
+
+  get decimalSeparator(): string {
+    return new Intl.NumberFormat(this.locale).format(1.2)[1];
   }
 
   ngAfterViewInit() {
@@ -409,13 +416,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
       });
     }
-
-    this.decimalSeparator = this.getDecimalSeparator();
-  }
-
-  getDecimalSeparator(): string {
-    let result = new Intl.NumberFormat(this.locale).format(1.2)[1];
-    return result;
   }
 
   ngOnDestroy() {
@@ -628,18 +628,18 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   restrictKeys(event) {
     const NUMBERS_ONLY = /[0-9\-]/;
     const NUMBERS_WITH_DECIMAL_DOT = /[0-9\.\-]/;
-    const NUMBERS_WITH_DECIMAL_COMMA = /[0-9\,\-]/;
+    const NUMBERS_WITH_DECIMAL_DOT_AND_COMMA = /[0-9\.\,\-]/;
     const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
     let key = event.key;
 
-    // Types
+    // Numbers or numbers and decimal characters only
     if (this.form.controls[this.control.key].subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
       event.preventDefault();
     } else if (
-      ~['currency', 'float', 'percentage'].indexOf(this.form.controls[this.control.key].subType) &&
+      ['currency', 'float', 'percentage'].includes(this.form.controls[this.control.key].subType) &&
       !(
         (this.decimalSeparator === '.' && NUMBERS_WITH_DECIMAL_DOT.test(key)) ||
-        (this.decimalSeparator === ',' && NUMBERS_WITH_DECIMAL_COMMA.test(key)) ||
+        (this.decimalSeparator === ',' && NUMBERS_WITH_DECIMAL_DOT_AND_COMMA.test(key)) ||
         UTILITY_KEYS.includes(key)
       )
     ) {
