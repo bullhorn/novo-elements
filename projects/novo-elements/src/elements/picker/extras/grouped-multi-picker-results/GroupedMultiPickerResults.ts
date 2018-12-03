@@ -58,9 +58,8 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
                         (click)="selectMatch($event)"
                         [class.active]="match === activeMatch"
                         (mouseenter)="selectActive(match)"
-                        [class.disabled]="preselected(match)"
-                        [attr.data-automation-id]="match.label"
-                        [class.disabled]="isLoading">
+                        [class.disabled]="preselected(match) || isLoading"
+                        [attr.data-automation-id]="match.label">
                         <item-content>
                             <span>{{ match.label }}</span>
                         </item-content>
