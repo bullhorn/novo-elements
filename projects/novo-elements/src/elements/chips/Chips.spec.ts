@@ -102,7 +102,7 @@ describe('Elements: NovoChipsElement', () => {
       expect(component.items[0].value).toBe('test');
     });
     it('should set value wih valueFomatterFunc if provided', () => {
-      component.source = { valueFormatterFunc: (values) => `${values[0].label} (${values[0].value})` };
+      component.source = { valueFormatter: (values) => `${values[0].label} (${values[0].value})` };
       component.add({ label: 'Test', value: 'test' });
       expect(component.value).toBe('Test (test)');
     });
