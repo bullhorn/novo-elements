@@ -356,6 +356,10 @@ novo-row-chip {
       }
     }
   }
+  .novo-row-chips-empty-message {
+    font-style: italic;
+    color: $grey;
+  }
   novo-picker {
     max-width: 275px;
   }
