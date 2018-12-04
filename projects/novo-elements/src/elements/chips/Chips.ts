@@ -292,7 +292,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     }
     this.items.splice(this.items.indexOf(item), 1);
     this.deselectAll();
-    this.value = this.items.map((i) => i.value);
+    this.value = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
     this.changed.emit({ value: this.value.length ? this.value : '', rawValue: this.items });
     this.onModelChange(this.value.length ? this.value : '');
     this._items.next(this.items);
