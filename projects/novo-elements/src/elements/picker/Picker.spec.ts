@@ -145,6 +145,10 @@ describe('Elements: NovoPickerElement', () => {
       component.writeValue({ name: 'NAME' });
       expect(component.term).toEqual('NAME');
     });
+    it('should use title for a complex object if present.', () => {
+      component.writeValue({ title: 'TITLE' });
+      expect(component.term).toEqual('TITLE');
+    });
     it('should use getLabels for a number if present.', fakeAsync(() => {
       component.config = {
         getLabels: () =>
