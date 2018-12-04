@@ -206,6 +206,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
           noLabels.push(value);
         } else if (this.source.options && Array.isArray(this.source.options)) {
           this.items.push(this.getLabelFromOptions(value));
+        } else if (this.source.categoryMap && this.source.categoryMap.size) {
+          this.items.push(value);
         } else {
           this.items.push({
             value,
@@ -273,7 +275,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   add(event) {
     if (event && !(event instanceof Event)) {
       this.items.push(event);
-      this.value = this.items.map((i) => i.value);
+      this.value = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
       // Set focus on the picker
       let input = this.element.nativeElement.querySelector('novo-picker > input');
       if (input) {

@@ -112,6 +112,30 @@ describe('Elements: BasePickerResults', () => {
       expect(component.selectMatch).toBeDefined();
       component.selectMatch();
     });
+    it('should prevent events from bubbling up', () => {
+      const mockEvent: any = {
+        stopPropagation: jasmine.createSpy('stopPropagation'),
+        preventDefault: jasmine.createSpy('preventDefault'),
+      };
+      component.selectMatch(mockEvent);
+      expect(mockEvent.stopPropagation).toHaveBeenCalled();
+      expect(mockEvent.preventDefault).toHaveBeenCalled();
+    });
+    it('should set value', () => {
+      component.parent = {};
+      component.activeMatch = 'Stuff';
+      component.selectMatch();
+      expect(component.parent.value).toEqual('Stuff');
+    });
+    it('should handle closeOnSelect', () => {
+      component.parent = {
+        closeOnSelect: true,
+        hideResults: jasmine.createSpy('hideResults'),
+      };
+      component.activeMatch = 'Stuff';
+      component.selectMatch();
+      expect(component.parent.hideResults).toHaveBeenCalled();
+    });
   });
 
   describe('Method: escapeRegexp()', () => {
