@@ -115,6 +115,15 @@ describe('Elements: NovoChipsElement', () => {
       component.remove(null, item);
       expect(component.items.length).toBe(0);
     });
+    it('should remove an item wih valueFomatterFunc if provided', () => {
+      const itemFoo = { label: 'Foo', value: 'foo' };
+      const itemBar = { label: 'Bar', value: 'bar' };
+      component.source = { valueFormatter: (values) => `${values[0].label} (${values[0].value})` };
+      component.items = [itemFoo, itemBar];
+      component.remove(null, itemFoo);
+      expect(component.value).toBe('Bar (bar)');
+      expect(component.items.length).toEqual(1);
+    });
   });
 
   describe('Method: writeValue()', () => {

@@ -33,6 +33,7 @@ export class NovoRowChipElement extends NovoChipElement {
         <div class="novo-row-chips-columns" *ngIf="items.length > 0">
           <div class="column-label" *ngFor="let column of source.columns">{{ column.label }}</div>
         </div>
+        <div class="novo-row-chips-empty-message" *ngIf="source.emptyReadOnlyMessage && disablePickerInput && items.length === 0">{{source.emptyReadOnlyMessage}}</div>
         <novo-row-chip
           *ngFor="let item of _items | async"
           [type]="type || item?.value?.searchEntity"
