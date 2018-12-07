@@ -49,7 +49,6 @@ export interface NovoControlConfig {
   interactions?: Array<Object>;
   dataSpecialization?: string;
   dataType?: string;
-  metaType?: string;
   appendToBody?: boolean; // Deprecated
   parentScrollSelector?: string;
   description?: string;
@@ -107,7 +106,6 @@ export class BaseControl {
   encrypted: boolean;
   sortOrder: number;
   controlType: string;
-  metaType: string;
   placeholder: string;
   config: any;
   dirty: boolean;
@@ -182,7 +180,6 @@ export class BaseControl {
     this.encrypted = !!config.encrypted;
     this.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;
     this.controlType = config.controlType || '';
-    this.metaType = config.metaType;
     this.placeholder = config.placeholder || '';
     this.config = config.config || null;
     this.dirty = !!config.value;
