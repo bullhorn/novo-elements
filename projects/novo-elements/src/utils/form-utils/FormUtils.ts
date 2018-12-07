@@ -23,7 +23,7 @@ import {
 } from '../../elements/form/FormControls';
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from '../Helpers';
-import { NovoFieldset, FormField } from '../../elements/form/FormInterfaces';
+import { NovoFieldset } from '../../elements/form/FormInterfaces';
 import { NovoFormControl, NovoFormGroup } from '../../elements/form/NovoFormControl';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from './../../services/options/OptionsService';
@@ -41,7 +41,7 @@ export class FormUtils {
     'Person',
     'Placement',
   ];
-  PICKER_TEXT_LIST: string[] = [
+  PICKER_TEST_LIST: string[] = [
     'CandidateText',
     'ClientText',
     'ClientContactText',
@@ -89,18 +89,20 @@ export class FormUtils {
   }
 
   /**
-   * @name hasAssociatedEntity
-   * @param field
-   */
-  hasAssociatedEntity(field: FormField): boolean {
-    return !!(field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity));
-  }
-
-  /**
    * @name determineInputType
    * @param field
    */
-  determineInputType(field: FormField): string {
+  determineInputType(field: {
+    dataSpecialization: string;
+    inputType: string;
+    options: string;
+    multiValue: boolean;
+    dataType: string;
+    type: string;
+    associatedEntity?: any;
+    optionsUrl?: string;
+    optionsType?: string;
+  }): string {
     let type: string;
     let dataSpecializationTypeMap = {
       DATETIME: 'datetime',
@@ -137,27 +139,19 @@ export class FormUtils {
       Integer: 'number',
     };
     if (field.type === 'TO_MANY') {
-      if (this.hasAssociatedEntity(field)) {
-        if (field.multiValue === false) {
-          type = 'entitypicker';
-        } else {
-          type = 'entitychips';
-        }
+      if (field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity)) {
+        type = 'entitychips'; // TODO!
       } else {
-        if (field.multiValue === false) {
-          type = 'picker';
-        } else {
-          type = 'chips';
-        }
+        type = 'chips';
       }
     } else if (field.type === 'TO_ONE') {
-      if (this.hasAssociatedEntity(field)) {
+      if (field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity)) {
         type = 'entitypicker'; // TODO!
       } else {
         type = 'picker';
       }
     } else if (field.optionsUrl && field.inputType === 'SELECT') {
-      if (field.optionsType && ~this.PICKER_TEXT_LIST.indexOf(field.optionsType)) {
+      if (field.optionsType && ~this.PICKER_TEST_LIST.indexOf(field.optionsType)) {
         type = 'entitypicker'; // TODO!
       } else {
         type = 'picker';
@@ -198,7 +192,6 @@ export class FormUtils {
     let type: string = this.determineInputType(field) || field.type;
     let control: any;
     let controlConfig: NovoControlConfig = {
-      metaType: field.type,
       type: type,
       key: field.name,
       label: field.label,
