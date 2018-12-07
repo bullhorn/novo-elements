@@ -417,7 +417,7 @@ describe('Utils: FormUtils', () => {
       expect(formUtils.getControlOptions).toBeDefined();
       formUtils.getControlOptions({ dataType: 'Boolean' });
     });
-    it("should return an object with a function that returns a promise when there's an optionsUrl", () => {
+    it('should return an object with a function that returns a promise when there is an optionsUrl', () => {
       expect(formUtils.getControlOptions).toBeDefined();
       let result = formUtils.getControlOptions({ optionsUrl: 'TEST' });
       expect(result.field).toBe('value');
@@ -427,7 +427,7 @@ describe('Utils: FormUtils', () => {
         expect(returnValue.length).toBe(0);
       });
     });
-    it("should return an object with a function that returns a promise when there's an optionsUrl that calls an API", () => {
+    it('should return an object with a function that returns a promise when there is an optionsUrl that calls an API', () => {
       expect(formUtils.getControlOptions).toBeDefined();
       let mockHttp = {
         get: () => {
