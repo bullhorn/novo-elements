@@ -24,7 +24,7 @@ import { FormUtils } from './FormUtils';
 import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from '../../services/options/OptionsService';
-import { FormField } from '../../elements/form/FormTypes';
+import { FormField } from '../../elements/form/FormInterfaces';
 
 /**
  * Creates a mock address
@@ -203,29 +203,29 @@ describe('Utils: FormUtils', () => {
         dataSpecialization: 'fake',
       };
 
-      describe('without associated field types', () => {
-        it("should return type 'picker' if no 'Allow Multiple' property", () => {
+      describe('without associated entity', () => {
+        it('when allow multiple is disabled should return picker', () => {
           expect(formUtils.determineInputType({ ...toManyField, multiValue: false })).toBe('picker');
         });
-        it("should return type 'chips' with 'Allow Multiple' property", () => {
+        it('when allow multiple is enabled should return chips', () => {
           expect(formUtils.determineInputType({ ...toManyField, multiValue: true })).toBe('chips');
         });
       });
-      describe('with associated entities', () => {
+      describe('with associated entity', () => {
         beforeEach(() => {
           jest.spyOn(formUtils, 'hasAssociatedEntity').mockImplementation(() => true);
         });
-        it("should return type 'entitypicker' with no 'Allow Multiple' property", () => {
+        it('when allow multiple is disabled should return entitypicker', () => {
           const field: FormField = { ...toManyField, multiValue: false };
           expect(formUtils.determineInputType(field)).toBe('entitypicker');
         });
-        it("should return type 'entitychips' with 'Allow Multiple' property", () => {
+        it('when allow multiple is enabled should return entitychips', () => {
           const field: FormField = { ...toManyField, multiValue: true };
           expect(formUtils.determineInputType(field)).toBe('entitychips');
         });
       });
     });
-    xit("should throw an error when a type doesn't exist for the field.", () => {
+    xit('should throw an error when a type does not exist for the field.', () => {
       expect(formUtils.determineInputType).toBeDefined();
       expect(() => {
         formUtils.determineInputType({});
