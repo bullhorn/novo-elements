@@ -5,6 +5,67 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { findByCountryId } from '../../utils/countries/Countries';
 
+type ValueDataType =
+  | 'Address'
+  | 'Address1'
+  | 'AddressWithoutCountry'
+  | 'BigDecimal'
+  | 'BusinessSector'
+  | 'Candidate'
+  | 'CandidateComment'
+  | 'Category'
+  | 'Certification'
+  | 'ClientContact'
+  | 'ClientCorporation'
+  | 'CorporateUser'
+  | 'CorporationDepartment'
+  | 'Country'
+  | 'Date'
+  | 'DateTime'
+  | 'default'
+  | 'DistributionList'
+  | 'Double'
+  | 'Email'
+  | 'Html'
+  | 'Integer'
+  | 'JobOrder'
+  | 'JobSubmission'
+  | 'Lead'
+  | 'Money'
+  | 'Opportunity'
+  | 'Options'
+  | 'Options'
+  | 'Percentage'
+  | 'Person'
+  | 'Phone'
+  | 'Placement'
+  | 'Skill'
+  | 'SkillText'
+  | 'Specialty'
+  | 'Ssn'
+  | 'Tearsheet'
+  | 'Timestamp'
+  | 'ToMany'
+  | 'WorkersCompensationRate'
+  | 'Year';
+
+type SomeType = 'Apples' | 'Bananas' | 'Kumkwats';
+
+function discriminatedFunction(type: SomeType): number {
+  switch (type) {
+    case 'Apples':
+      return 1;
+    case 'Bananas':
+      return 4;
+    default:
+      assertNever(type);
+  }
+}
+
+function assertNever(x: never): never {
+  throw new Error('Unexpected object: ' + x);
+}
+
 /**
  * @classdesc
  * Renders data appropriately based on the data type found in Meta
@@ -148,7 +209,7 @@ export class RenderPipe implements PipeTransform {
    * @return text
    */
   render(value: any, args: any): any {
-    let type: any = null;
+    let type: ValueDataType;
     let text: any = value;
     let rezonedTime: any;
 
@@ -190,7 +251,7 @@ export class RenderPipe implements PipeTransform {
     } else if (args.options || args.inputType === 'SELECT') {
       type = 'Options';
     } else if (['MONEY', 'PERCENTAGE', 'HTML', 'SSN'].indexOf(args.dataSpecialization) > -1) {
-      type = this.capitalize(args.dataSpecialization.toLowerCase());
+      type = this.formatDataSpecializationToDataType(args.dataSpecialization);
     } else {
       type = args.dataType || 'default';
     }
@@ -319,10 +380,14 @@ export class RenderPipe implements PipeTransform {
         text = value.comments ? `${this.labels.formatDateShort(value.dateLastModified)} (${value.name}) - ${value.comments}` : '';
         break;
       default:
-        text = value.trim ? value.trim() : value;
-        break;
+        assertNever(type);
     }
-    return text;
+
+    if (text) {
+      return text;
+    } else {
+      return value.trim ? value.trim() : value;
+    }
   }
 
   updateValue(value: any, args: any): any {
@@ -400,5 +465,9 @@ export class RenderPipe implements PipeTransform {
    */
   capitalize(value: any): string {
     return value.charAt(0).toUpperCase() + value.slice(1);
+  }
+
+  private formatDataSpecializationToDataType(dataSpecialization: any): ValueDataType {
+    return this.capitalize(dataSpecialization.toLowerCase()) as ValueDataType;
   }
 }
