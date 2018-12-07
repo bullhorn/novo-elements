@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.0"></a>
+# [3.3.0](https://github.com/bullhorn/novo-elements/compare/v3.2.0...v3.3.0) (2018-12-07)
+
+
+### Bug Fixes
+
+* **address:** Update address disabled state ([#857](https://github.com/bullhorn/novo-elements/issues/857)) ([07feb74](https://github.com/bullhorn/novo-elements/commit/07feb74))
+* **Currency:** Allow Comma or Period as decimal for non-English users ([#862](https://github.com/bullhorn/novo-elements/issues/862)) ([7b67c44](https://github.com/bullhorn/novo-elements/commit/7b67c44))
+* **picker:** respect allow multiple false for picker fields ([#846](https://github.com/bullhorn/novo-elements/issues/846)) ([7124173](https://github.com/bullhorn/novo-elements/commit/7124173))
+* **row-chips:** Various picker changes to support row chip pickers ([#845](https://github.com/bullhorn/novo-elements/issues/845)) ([ca3e635](https://github.com/bullhorn/novo-elements/commit/ca3e635))
+
+
+### Features
+
+* **RowChips:** Add empty state message for disabled RowChips and RowChip delete functionality ([#868](https://github.com/bullhorn/novo-elements/issues/868)) ([d9499c7](https://github.com/bullhorn/novo-elements/commit/d9499c7))
+
+
 <a name="3.2.0"></a>
 ## [3.2.0](https://github.com/bullhorn/novo-elements/compare/v3.1.1...v3.2.0) (2018-11-09)
 
