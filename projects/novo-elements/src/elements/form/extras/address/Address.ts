@@ -64,7 +64,7 @@ export interface NovoAddressConfig {
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.state, 'bhi-check': valid.state}">
             </i>
-            <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (changed)="onStateChange($event)" autocomplete="shipping region" [(ngModel)]="model.state" [disablePickerInput]="disabled.state || config.readOnly"></novo-picker>
+            <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (changed)="onStateChange($event)" autocomplete="shipping region" [(ngModel)]="model.state" [disablePickerInput]="disabled.state"></novo-picker>
         </span>
         <span *ngIf="!config?.zip?.hidden" class="zip postal-code" [class.invalid]="invalid.zip" [class.focus]="focused.zip" [class.disabled]="disabled.zip">
             <i *ngIf="config.zip.required"
@@ -85,6 +85,20 @@ export interface NovoAddressConfig {
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Input()
   config: NovoAddressConfig;
+  private _readOnly: boolean = false;
+  @Input()
+  set readOnly(readOnly: boolean) {
+    this._readOnly = readOnly;
+    this.fieldList.forEach((field: string) => {
+      this.disabled[field] = this._readOnly;
+    });
+    if (this.model) {
+      this.updateStates();
+    }
+  }
+  get readOnly(): boolean {
+    return this._readOnly;
+  }
   states: Array<any> = [];
   countries: Array<any> = getCountries();
   fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
@@ -306,7 +320,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         this.config.state.pickerConfig.defaultOptions = results;
         if (results.length) {
           this.tooltip.state = undefined;
-          this.disabled.state = false;
+          this.disabled.state = this._readOnly;
           this.setStateLabel(this.model);
         } else {
           this.disabled.state = true;
