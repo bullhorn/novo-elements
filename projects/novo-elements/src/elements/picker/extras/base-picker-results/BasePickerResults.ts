@@ -29,6 +29,15 @@ export class BasePickerResults {
   lastPage: boolean = false;
   autoSelectFirstOption: boolean = true;
   overlay: OverlayRef;
+  statusDisplayValueMap: { [status: string]: string } = {
+    blah332V: 'blah332DV,',
+    testV: 'testDV,',
+    'New LeadV': 'New LeadDV',
+    InterviewingV: 'InterviewingDV',
+    AcceptedV: 'AcceptedDV',
+    RejectedV: 'RejectedDV',
+    Archive: 'ArchiveDV',
+  };
 
   private selectingMatches: boolean = false;
   private scrollHandler: any;
@@ -86,12 +95,29 @@ export class BasePickerResults {
     }
   }
 
+  /*
+   * status can have a display value as well as an actual value per fieldmaps
+   */
+  resultsHaveStatus(results: { status?: string }[]): boolean {
+    return this.statusDisplayValueMap && results.some((item) => !!item.status);
+  }
+
+  mapStatusToDisplayValue(results: { status?: string }[]): { status?: string }[] {
+    return results.map((result) => ({
+      ...result,
+      ...(result.status ? { status: this.statusDisplayValueMap[result.status] } : {}),
+    }));
+  }
+
   processSearch(shouldReset?: boolean) {
     this.hasError = false;
     this.isLoading = true;
     this.ref.markForCheck();
     this.search(this.term).subscribe(
       (results: any) => {
+        if (this.resultsHaveStatus(results)) {
+          results = this.mapStatusToDisplayValue(results);
+        }
         if (shouldReset) {
           this.matches = [];
         }
