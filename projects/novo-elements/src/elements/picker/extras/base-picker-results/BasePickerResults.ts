@@ -98,14 +98,21 @@ export class BasePickerResults {
   /*
    * status can have a display value as well as an actual value per fieldmaps
    */
-  resultsHaveStatus(results: { status?: string }[]): boolean {
-    return this.statusDisplayValueMap && results.some((item) => !!item.status);
+  resultsHaveStatus(results: { data?: { status?: string } }[]): boolean {
+    return this.statusDisplayValueMap && results.some(({ data }) => data && !!data.status);
   }
 
-  mapStatusToDisplayValue(results: { status?: string }[]): { status?: string }[] {
+  mapStatusToDisplayValue(results: { data?: { status?: string } }[]): { data?: { status?: string } }[] {
     return results.map((result) => ({
       ...result,
-      ...(result.status ? { status: this.statusDisplayValueMap[result.status] } : {}),
+      ...(result.data
+        ? {
+            data: {
+              ...result.data,
+              ...(result.data.status ? { status: this.statusDisplayValueMap[result.data.status] } : {}),
+            },
+          }
+        : {}),
     }));
   }
 
