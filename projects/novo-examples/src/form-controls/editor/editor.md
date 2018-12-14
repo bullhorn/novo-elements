@@ -1,4 +1,4 @@
-CK Editor [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/ckeditor)
+CK Editor [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/ckeditor)
 =================================================================================================
 
 Basic HTML editor using CK Editor.

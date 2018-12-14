@@ -1,4 +1,4 @@
-List / Item [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/list)
+List / Item [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/list)
 ===============================================================================================
 
 Lists are used to display rows of information like entities or entity data and appear on cards, our mobile app, and several other places across the Bullhorn platform.

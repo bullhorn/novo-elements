@@ -1,4 +1,4 @@
-TipWell [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/tip-well)
+TipWell [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/tip-well)
 ===============================================================================================
 
 This component is meant to be akin to Bootstrap's 'well'. It's a small container for help text.

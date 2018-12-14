@@ -1,4 +1,4 @@
-Tabs [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/tabs)
+Tabs [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/tabs)
 ========================================================================================
 
 Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets. Tabs in Bullhorn have two different themes; A 'color' theme for tabbed navigation on a colored background, and a 'white' theme for tabs on a white background.

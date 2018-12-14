@@ -1,4 +1,4 @@
-Dropdown [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/dropdown)
+Dropdown [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/dropdown)
 ================================================================================================
 
 Dropdown allow users to take an action by selecting from a list of choices revealed upon opening a temporary menu.

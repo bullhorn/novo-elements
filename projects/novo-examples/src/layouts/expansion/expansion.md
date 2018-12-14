@@ -1,4 +1,4 @@
-Expandable Containers[(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/expansion)
+Expandable Containers[(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/expansion)
 =============================================================================================================
 
 Expansion Panel provides an expandable details\-summary view. Each expansion\-panel must include a header and may optionally include an action bar.
