@@ -213,7 +213,7 @@ describe('Utils: FormUtils', () => {
       });
       describe('with associated entity', () => {
         beforeEach(() => {
-          jest.spyOn(formUtils, 'hasAssociatedEntity').mockImplementation(() => true);
+          spyOn(formUtils, 'hasAssociatedEntity').and.callFake(() => true);
         });
         it('when allow multiple is disabled should return entitypicker', () => {
           const field: FormField = { ...toManyField, multiValue: false };
