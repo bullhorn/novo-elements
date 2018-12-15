@@ -1,4 +1,4 @@
-Switches & Toggles [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/switch)
+Switches & Toggles [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/switch)
 ========================================================================================================
 
 Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.

@@ -1,4 +1,4 @@
-MultiPicker [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/multi-picker)
+MultiPicker [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/multi-picker)
 =======================================================================================================
 
 The multipicker element (`multipicker`) represents a control that presents a menu of options of multiple types. The options within are set by the `source` attribute. Options can be pre\-selected for the user using the `ngModel` attribute. Multipicker is the multi\-category version of `chips`

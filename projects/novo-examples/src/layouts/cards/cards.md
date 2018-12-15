@@ -1,4 +1,4 @@
-Cards [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/card)
+Cards [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/card)
 =========================================================================================
 
 Components and elements for cards to make sure the loading/empty/layout views are all consistent.

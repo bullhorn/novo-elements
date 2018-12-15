@@ -1,4 +1,4 @@
-Icons [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/icon)
+Icons [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/icon)
 ==========================================================================================
 
 If you want to use bullhorn icons, it is easier to use the `novo-icon` element to style them.  You can always style them within the `i` tag too. 

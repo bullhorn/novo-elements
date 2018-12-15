@@ -1,4 +1,4 @@
-Select [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/select)
+Select [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/select)
 ============================================================================================
 
 The select element (`novo-select`) represents a control that presents a menu of options. The options within are set by the `items` attribute. Options can be pre\-selected for the user using the `value` attribute.

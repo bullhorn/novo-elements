@@ -1,4 +1,4 @@
-Picker [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/picker)
+Picker [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/picker)
 ============================================================================================
 
 The picker element (`input[picker]`) represents a control that presents a menu of options. The options within are set by the `items` attribute. Options can be pre\-pickered for the user using the `value` attribute.

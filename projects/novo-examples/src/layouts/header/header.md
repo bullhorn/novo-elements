@@ -1,4 +1,4 @@
-Headers [(source)](https://github.com/bullhorn/novo-elements/tree/master/projects/novo-examples/src/elements/header)
+Headers [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/header)
 =============================================================================================
 
 Headers are used in Mainframe Record pages and some modals.
