@@ -16,12 +16,6 @@ By clicking on the `chips` element, the options list will be displayed. Select a
 
 <code-example example="async-chips"></code-example>
 
-##### Maxlength Examples
-
-By clicking on the `chips` element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values and count will increment. If max number of items is reached, picker will not show.
-
-<code-example example="maxlength-chips"></code-example>
-
 ##### Formatted Examples
 
 By clicking on the `chips` element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.
