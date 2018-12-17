@@ -108,8 +108,9 @@ export class NovoAutoSize implements AfterContentInit {
                             <span class="error-text" *ngIf="showFieldMessage"></span>
                             <span class="error-text" *ngIf="isDirty && errors?.required && form.controls[control.key].controlType !== 'address'">{{ form.controls[control.key].label | uppercase }} {{ labels.isRequired }}</span>
                             <span class="error-text" *ngIf="isDirty && errors?.minlength">{{ form.controls[control.key].label | uppercase }} {{ labels.minLength }} {{ form.controls[control.key].minlength }}</span>
-                            <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength">{{ labels.maxlengthMet(form.controls[control.key].maxlength) }}</span>
-                            <span class="error-text" *ngIf="errors?.maxlength && focused && !errors?.maxlengthFields">{{ labels.invalidMaxlength(form.controls[control.key].maxlength) }}</span>
+                            <span class="error-text" *ngIf="isDirty && maxLengthMet && focused && !errors?.maxlength && form.controls[control.key].controlType !== 'picker'">{{ labels.maxlengthMet(form.controls[control.key].maxlength) }}</span>
+                            <span class="error-text" *ngIf="errors?.maxlength && focused && !errors?.maxlengthFields">{{ labels.invalidMaxlength(form.controls[control.key].maxlength) }}</span>                            
+                            <span class="error-text" *ngIf="maxLengthMet && form.controls[control.key].controlType === 'picker'">{{ labels.maxRecordsReached }}</span>                            
                             <span class="error-text" *ngIf="isDirty && errors?.invalidEmail">{{ form.controls[control.key].label | uppercase }} {{ labels.invalidEmail }}</span>
                             <span class="error-text" *ngIf="isDirty && (errors?.integerTooLarge || errors?.doubleTooLarge)">{{ form.controls[control.key].label | uppercase }} {{ labels.isTooLarge }}</span>
                             <span *ngIf="isDirty && errors?.minYear">{{ form.controls[control.key].label | uppercase }} {{ labels.notValidYear }}</span>
@@ -123,7 +124,6 @@ export class NovoAutoSize implements AfterContentInit {
                             <span *ngIf="isDirty && errors?.invalidAddress">
                                 <span class="error-text" *ngFor="let invalidAddressField of errors?.invalidAddressFields">{{ invalidAddressField | uppercase }} {{ labels.isRequired }} </span>
                             </span>
-                            <span class="error-text" *ngIf="form.controls[control.key].controlType === 'picker'">{{ labels.maxRecordsReached }}</span>
                             <!--Field Hint-->
                             <span class="description" *ngIf="form.controls[control.key].description">
                                 {{ form.controls[control.key].description }}
@@ -598,6 +598,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       this._focused = false;
       this._enteredText = '';
     }
+    if (this.form.controls[this.control.key].controlType === 'picker' && this.form.controls[this.control.key].maxlength) {
+      this.characterCount = event.value.length;
+      this.maxLengthMet = this.characterCount >= this.form.controls[this.control.key].maxlength ? true : false;
+    }
     this.form.controls[this.control.key].rawValue = event.rawValue;
     this.change.emit(event.value);
   }
@@ -714,21 +718,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         this.maxLengthMetErrorfields = this.maxLengthMetErrorfields.filter((field: string) => field !== data.field);
       }
     }
-  }
-
-  handlePickerChange(event) {
-    if (Helpers.isEmpty(event.value)) {
-      this._focused = false;
-      this._enteredText = '';
-    } else if (this.form.controls[this.control.key].maxlength) {
-      if (event.value.length >= this.form.controls[this.control.key].maxlength) {
-        this.maxLengthMet = true;
-      } else {
-        this.maxLengthMet = false;
-      }
-    }
-    this.form.controls[this.control.key].rawValue = event.rawValue;
-    this.change.emit(event.value);
   }
 
   updateValidity(shouldEventBeEmitted): void {

@@ -26,7 +26,7 @@ const CHIPS_VALUE_ACCESSOR = {
             <span><ng-content></ng-content></span>
         </span>
         <i class="bhi-close" *ngIf="!disabled" (click)="onRemove($event)"></i>
-  `,
+    `,
 })
 export class NovoChipElement {
   @Input()
@@ -89,7 +89,7 @@ export class NovoChipElement {
             (deselect)="deselect($event, item)">
             {{ item.label }}
         </novo-chip>
-        <div class="chip-input-container">
+        <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
             <novo-picker
                 clearValueOnSelect="true"
                 [closeOnSelect]="closeOnSelect"
