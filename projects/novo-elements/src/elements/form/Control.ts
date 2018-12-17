@@ -123,6 +123,7 @@ export class NovoAutoSize implements AfterContentInit {
                             <span *ngIf="isDirty && errors?.invalidAddress">
                                 <span class="error-text" *ngFor="let invalidAddressField of errors?.invalidAddressFields">{{ invalidAddressField | uppercase }} {{ labels.isRequired }} </span>
                             </span>
+                            <span class="error-text" *ngIf="form.controls[control.key].controlType === 'picker'">{{ labels.maxRecordsReached }}</span>
                             <!--Field Hint-->
                             <span class="description" *ngIf="form.controls[control.key].description">
                                 {{ form.controls[control.key].description }}
@@ -130,7 +131,8 @@ export class NovoAutoSize implements AfterContentInit {
                             <span class="warning-text" *ngIf="form.controls[control.key].warning">{{ form.controls[control.key].warning }}</span>
 
                         </div>
-                        <span class="character-count" [class.error]="((errors?.maxlength && !errors?.maxlengthFields) || (errors?.maxlength && errors?.maxlengthFields && errors.maxlengthFields.includes(focusedField)))" *ngIf="showCount">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
+                        <span class="character-count" [class.error]="((errors?.maxlength && !errors?.maxlengthFields) || (errors?.maxlength && errors?.maxlengthFields && errors.maxlengthFields.includes(focusedField)))" *ngIf="showCount && form.controls[control.key].controlType !== 'picker'">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
+                        <span class="item-count" *ngIf="showCount && form.controls[control.key].controlType === 'picker'">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
                     </div>
                     <!--Tip Wel-->
                     <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
@@ -264,9 +266,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   get showCount() {
     let charCount: boolean =
-      this.form.controls[this.control.key].maxlength &&
-      this.focused &&
-      (this.form.controls[this.control.key].controlType === 'text-area' || this.form.controls[this.control.key].controlType === 'textbox');
+      (this.form.controls[this.control.key].maxlength &&
+        this.focused &&
+        (this.form.controls[this.control.key].controlType === 'text-area' ||
+          this.form.controls[this.control.key].controlType === 'textbox')) ||
+      (this.form.controls[this.control.key].maxlength && this.form.controls[this.control.key].controlType === 'picker');
     return this._showCount || charCount;
   }
 
@@ -711,6 +715,22 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       }
     }
   }
+
+  handlePickerChange(event) {
+    if (Helpers.isEmpty(event.value)) {
+      this._focused = false;
+      this._enteredText = '';
+    } else if (this.form.controls[this.control.key].maxlength) {
+      if (event.value.length >= this.form.controls[this.control.key].maxlength) {
+        this.maxLengthMet = true;
+      } else {
+        this.maxLengthMet = false;
+      }
+    }
+    this.form.controls[this.control.key].rawValue = event.rawValue;
+    this.change.emit(event.value);
+  }
+
   updateValidity(shouldEventBeEmitted): void {
     let emitEvent: boolean = shouldEventBeEmitted ? true : false;
     this.form.controls[this.control.key].updateValueAndValidity({ emitEvent });

@@ -228,6 +228,14 @@ novo-form {
                 color: $negative;
               }
             }
+            .item-count {
+              font-size: 12px;
+              color: $grey;
+              &.error {
+                color: $negative;
+              }
+              margin-right: 9em;
+            }
             .messages {
               flex: 1;
               span.error-text {

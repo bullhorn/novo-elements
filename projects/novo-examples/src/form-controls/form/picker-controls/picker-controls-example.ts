@@ -42,8 +42,6 @@ export class PickerControlsExample {
       multiple: true,
       config: { options: ['Apples', 'Oranges', 'Bananas', 'Grapes'], type: 'candidate' },
       maxlength: 2,
-      description: 'You can pick 2 fruits',
-      warning: 'error message',
     });
     this.entityMultiPickerControl = new PickerControl({
       key: 'entityMultiPicker',
