@@ -109,8 +109,10 @@ export class NovoChipElement {
     </div>
     <div class="preview-container"><span #preview></span></div>
     <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput"></i>
-    <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()">{{ labels.clearAll }}<i class="bhi-times"></i></label>
-    <label class="max-count" *ngIf="maxlength && items.length >= maxlength && !disablePickerInput">{{ labels.maxRecipientsReached }}</label>
+    <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()"
+      >{{ labels.clearAll }}<i class="bhi-times"></i
+    ></label>
+    <label class="max-count" *ngIf="maxlength && warning && items.length >= maxlength && !disablePickerInput">{{ warning }}</label>
     <label class="count" *ngIf="maxlength && items.length && !disablePickerInput">{{ items.length }} / {{ maxlength }}</label>
   `,
   host: {
@@ -127,6 +129,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   source: any;
   @Input()
   maxlength: any;
+  @Input()
+  warning: string = '';
   @Input()
   type: any;
   @Input()
