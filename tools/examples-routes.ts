@@ -143,12 +143,12 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
     title: convertToSentence(fileName),
     section: path
       .dirname(filePath)
-      .split(path.sep)
+      .split('/') // Platform specific File separator doesn't apply
       .slice(-2, -1)[0],
     template: markup,
     route: path
       .dirname(filePath)
-      .split(path.sep)
+      .split('/')
       .slice(3)
       .join('/'),
   };
