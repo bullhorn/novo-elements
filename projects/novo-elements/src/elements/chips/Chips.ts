@@ -79,16 +79,18 @@ export class NovoChipElement {
   selector: 'chips,novo-chips',
   providers: [CHIPS_VALUE_ACCESSOR],
   template: `
-        <novo-chip
-            *ngFor="let item of _items | async"
-            [type]="type || item?.value?.searchEntity"
-            [class.selected]="item == selected"
-            [disabled]="disablePickerInput"
-            (remove)="remove($event, item)"
-            (select)="select($event, item)"
-            (deselect)="deselect($event, item)">
-            {{ item.label }}
-        </novo-chip>
+        <div class="max-height-div">
+          <novo-chip
+              *ngFor="let item of _items | async"
+              [type]="type || item?.value?.searchEntity"
+              [class.selected]="item == selected"
+              [disabled]="disablePickerInput"
+              (remove)="remove($event, item)"
+              (select)="select($event, item)"
+              (deselect)="deselect($event, item)">
+              {{ item.label }}
+          </novo-chip>
+        </div>
         <div class="chip-input-container">
             <novo-picker
                 clearValueOnSelect="true"

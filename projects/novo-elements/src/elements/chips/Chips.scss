@@ -367,3 +367,10 @@ novo-row-chip {
     cursor: pointer;
   }
 }
+
+.max-height-div {
+  max-height: 24.5em;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
