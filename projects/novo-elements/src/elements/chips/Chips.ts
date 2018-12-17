@@ -21,10 +21,11 @@ const CHIPS_VALUE_ACCESSOR = {
 @Component({
   selector: 'chip,novo-chip',
   template: `
-    <span (click)="onSelect($event)" (mouseenter)="onSelect($event)" (mouseleave)="onDeselect($event)" [ngClass]="_type">
-      <i *ngIf="_type" class="bhi-circle"></i> <span><ng-content></ng-content></span>
-    </span>
-    <i class="bhi-close" *ngIf="!disabled" (click)="onRemove($event)"></i>
+        <span (click)="onSelect($event)" (mouseenter)="onSelect($event)" (mouseleave)="onDeselect($event)" [ngClass]="_type">
+            <i *ngIf="_type" class="bhi-circle"></i>
+            <span><ng-content></ng-content></span>
+        </span>
+        <i class="bhi-close" *ngIf="!disabled" (click)="onRemove($event)"></i>
   `,
 })
 export class NovoChipElement {
@@ -78,43 +79,39 @@ export class NovoChipElement {
   selector: 'chips,novo-chips',
   providers: [CHIPS_VALUE_ACCESSOR],
   template: `
-    <novo-chip
-      *ngFor="let item of (_items | async)"
-      [type]="type || item?.value?.searchEntity"
-      [class.selected]="item == selected"
-      [disabled]="disablePickerInput"
-      (remove)="remove($event, item)"
-      (select)="select($event, item)"
-      (deselect)="deselect($event, item)"
-    >
-      {{ item.label }}
-    </novo-chip>
-    <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
-      <novo-picker
-        clearValueOnSelect="true"
-        [closeOnSelect]="closeOnSelect"
-        [config]="source"
-        [disablePickerInput]="disablePickerInput"
-        [placeholder]="placeholder"
-        [(ngModel)]="itemToAdd"
-        (select)="add($event)"
-        (keydown)="onKeyDown($event)"
-        (focus)="onFocus($event)"
-        (typing)="onTyping($event)"
-        (blur)="onTouched($event)"
-        [selected]="items"
-        [overrideElement]="element"
-      >
-      </novo-picker>
-    </div>
-    <div class="preview-container"><span #preview></span></div>
-    <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput"></i>
-    <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()"
-      >{{ labels.clearAll }}<i class="bhi-times"></i
-    ></label>
-    <label class="max-count" *ngIf="maxlength && warning && items.length >= maxlength && !disablePickerInput">{{ warning }}</label>
-    <label class="count" *ngIf="maxlength && items.length && !disablePickerInput">{{ items.length }} / {{ maxlength }}</label>
-  `,
+        <novo-chip
+            *ngFor="let item of _items | async"
+            [type]="type || item?.value?.searchEntity"
+            [class.selected]="item == selected"
+            [disabled]="disablePickerInput"
+            (remove)="remove($event, item)"
+            (select)="select($event, item)"
+            (deselect)="deselect($event, item)">
+            {{ item.label }}
+        </novo-chip>
+        <div class="chip-input-container">
+            <novo-picker
+                clearValueOnSelect="true"
+                [closeOnSelect]="closeOnSelect"
+                [config]="source"
+                [disablePickerInput]="disablePickerInput"
+                [placeholder]="placeholder"
+                [(ngModel)]="itemToAdd"
+                (select)="add($event)"
+                (keydown)="onKeyDown($event)"
+                (focus)="onFocus($event)"
+                (typing)="onTyping($event)"
+                (blur)="onTouched($event)"
+                [selected]="items"
+                [overrideElement]="element">
+            </novo-picker>
+        </div>
+        <div class="preview-container">
+            <span #preview></span>
+        </div>
+        <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput"></i>
+        <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+   `,
   host: {
     '[class.with-value]': 'items.length > 0',
     '[class.disabled]': 'disablePickerInput',
@@ -129,8 +126,6 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   source: any;
   @Input()
   maxlength: any;
-  @Input()
-  warning: string = '';
   @Input()
   type: any;
   @Input()

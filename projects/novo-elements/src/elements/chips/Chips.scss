@@ -109,27 +109,6 @@ novo-entity-chips {
       margin-left: 5px;
     }
   }
-  label.count {
-    flex: 1 100%;
-    position: absolute;
-    right: 9em;
-    bottom: -20px;
-    font-size: 0.9rem;
-    color: $neutral;
-    display: flex;
-    align-items: center;
-  }
-  label.max-count {
-    flex: 1 100%;
-    position: absolute;
-    left: 0;
-    bottom: -20px;
-    font-size: 0.9rem;
-    color: $negative;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-  }
   i.bhi-search {
     position: absolute;
     bottom: 8px;
