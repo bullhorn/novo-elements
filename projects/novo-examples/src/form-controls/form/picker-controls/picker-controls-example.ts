@@ -16,6 +16,7 @@ import { FormUtils, PickerControl, EntityPickerResult, EntityPickerResults } fro
 export class PickerControlsExample {
   public singlePickerControl: any;
   public multiPickerControl: any;
+  public multiPickerControlWithMaxlength: any;
   public entityMultiPickerControl: any;
   public pickerForm: any;
 
@@ -33,6 +34,16 @@ export class PickerControlsExample {
       label: 'Multiple',
       multiple: true,
       config: { options: ['One', 'Two', 'Three'], type: 'candidate' },
+    });
+    this.multiPickerControlWithMaxlength = new PickerControl({
+      key: 'multiPickerWithMaxlength',
+      tooltip: 'Multiple',
+      label: 'Multiple',
+      multiple: true,
+      config: { options: ['Apples', 'Oranges', 'Bananas', 'Grapes'], type: 'candidate' },
+      maxlength: 2,
+      description: 'You can pick 2 fruits',
+      warning: 'error message',
     });
     this.entityMultiPickerControl = new PickerControl({
       key: 'entityMultiPicker',
@@ -111,7 +122,7 @@ export class PickerControlsExample {
         ],
       },
     });
-    let controls = [this.singlePickerControl, this.multiPickerControl, this.entityMultiPickerControl];
+    let controls = [this.singlePickerControl, this.multiPickerControl, this.entityMultiPickerControl, this.multiPickerControlWithMaxlength];
     formUtils.setInitialValues(controls, {
       entityMultiPicker: [
         {
