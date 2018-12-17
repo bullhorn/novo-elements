@@ -1,7 +1,7 @@
 
 slides
 =============
-Slides [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/slides)
+Slides [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/slides)
 ============================================================================================
 
 Slide element to toggle some information

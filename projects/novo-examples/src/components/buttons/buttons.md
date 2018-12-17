@@ -1,4 +1,4 @@
-Button [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/button)
+Button [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/button)
 ============================================================================================
 
 A button clearly indicates a point of action for the user. Bullhorn buttons come in a variety of themes, custom tailored to fit your use\-case.

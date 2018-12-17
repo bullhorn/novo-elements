@@ -1,4 +1,4 @@
-Quick Note [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/quick-note)
+Quick Note [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/quick-note)
 ====================================================================================================
 
 Tag Autocomplete

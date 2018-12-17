@@ -1,4 +1,4 @@
-Steppers [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/stepper)
+Steppers [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/stepper)
 =========================================================================================
 
 Stepper component provides a wizard-like workflow by dividing content into logical steps.

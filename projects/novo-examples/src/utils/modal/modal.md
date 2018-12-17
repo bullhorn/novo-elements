@@ -1,4 +1,4 @@
-Modals [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/modal)
+Modals [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/modal)
 ===========================================================================================
 
 Modals are pop\-up dialogues designed to grab attention and inform the user of something critical, force a decision, or extend a workflow. There are two categories of modals: notification and workflow. Regardless of type, a modal should have a maximum of two main buttons.

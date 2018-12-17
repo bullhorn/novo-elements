@@ -1,4 +1,4 @@
-# Tooltips [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/tooltip)
+# Tooltips [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltip)
 
 ## Helper
 

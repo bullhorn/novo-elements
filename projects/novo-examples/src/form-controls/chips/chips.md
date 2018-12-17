@@ -1,4 +1,4 @@
-Chips [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/chips)
+Chips [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/chips)
 ==========================================================================================
 
 The chips element (`chips`) represents a control that presents a menu of options. The options within are set by the `source` attribute. Options can be pre\-selected for the user using the `ngModel` attribute. Chips are the multi\-select version of `pickers`

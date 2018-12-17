@@ -1,4 +1,4 @@
-Loading Animations [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/loading)
+Loading Animations [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/loading)
 =========================================================================================================
 
 Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.

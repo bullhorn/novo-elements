@@ -1,4 +1,4 @@
-Value/Details/Summary [(source)](https://github.com/bullhorn/novo-elements/blob/master/src/elements/value)
+Value/Details/Summary [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/value)
 ==========================================================================================================
 
 Used to render data based on its field type provided in meta. It has two themes, DEFAULT \- horizontal view and MOBILE \- vertical view
