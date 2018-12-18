@@ -17,10 +17,41 @@ export class PickerControlsExample {
   public singlePickerControl: any;
   public multiPickerControl: any;
   public multiPickerControlWithMaxlength: any;
+  public multiPickerControlWithMaxlengthAndPreselects: any;
   public entityMultiPickerControl: any;
+  public rowMultiPickerControl: any;
+  public rowMultiPickerControlWithMaxlength: any;
   public pickerForm: any;
 
   constructor(private formUtils: FormUtils) {
+    let fruits = ['Apples', 'Oranges', 'Bananas', 'Grapes'];
+    let pokemon = [
+      {
+        id: 1,
+        name: 'Pichu',
+      },
+      {
+        id: 2,
+        name: 'Pikachu',
+      },
+      {
+        id: 3,
+        name: 'Raichu',
+      },
+      {
+        id: 4,
+        name: 'Azurill',
+      },
+      {
+        id: 5,
+        name: 'Azumarill',
+      },
+      {
+        id: 6,
+        name: 'Marill',
+      },
+    ];
+
     // Picker controls
     this.singlePickerControl = new PickerControl({
       key: 'singlePicker',
@@ -37,11 +68,25 @@ export class PickerControlsExample {
     });
     this.multiPickerControlWithMaxlength = new PickerControl({
       key: 'multiPickerWithMaxlength',
-      tooltip: 'Multiple',
-      label: 'Multiple',
+      tooltip: 'Multiple With Maxlength',
+      label: 'Multiple With Maxlength',
       multiple: true,
-      config: { options: ['Apples', 'Oranges', 'Bananas', 'Grapes'], type: 'candidate' },
       maxlength: 2,
+      config: {
+        options: fruits,
+        type: 'candidate',
+      },
+    });
+    this.multiPickerControlWithMaxlengthAndPreselects = new PickerControl({
+      key: 'multiPickerControlWithMaxlengthAndPreselects',
+      tooltip: 'Multiple With Maxlength and Preselects',
+      label: 'Multiple With Maxlength & Preselects',
+      multiple: true,
+      maxlength: 2,
+      config: {
+        options: fruits,
+        type: 'candidate',
+      },
     });
     this.entityMultiPickerControl = new PickerControl({
       key: 'entityMultiPicker',
@@ -120,7 +165,66 @@ export class PickerControlsExample {
         ],
       },
     });
-    let controls = [this.singlePickerControl, this.multiPickerControl, this.entityMultiPickerControl, this.multiPickerControlWithMaxlength];
+    this.rowMultiPickerControl = new PickerControl({
+      key: 'rowMultiPickerControl',
+      tooltip: 'Multiple Rows',
+      label: 'Multiple Rows',
+      multiple: true,
+      config: {
+        format: '$name',
+        options: pokemon,
+        type: 'candidate',
+        columns: [
+          {
+            label: 'Name',
+            data: (item: any): string => {
+              return item['label'];
+            },
+          },
+          {
+            label: 'Id',
+            data: (item: any): string => {
+              return item.value['id'];
+            },
+          },
+        ],
+      },
+    });
+    this.rowMultiPickerControlWithMaxlength = new PickerControl({
+      key: 'rowMultiPickerControlWithMaxlength',
+      tooltip: 'Multiple Rows With Maxlength',
+      label: 'Multiple Rows With Maxlength',
+      multiple: true,
+      maxlength: 4,
+      config: {
+        format: '$name',
+        options: pokemon,
+        type: 'candidate',
+        columns: [
+          {
+            label: 'Name',
+            data: (item: any): string => {
+              return item['label'];
+            },
+          },
+          {
+            label: 'Id',
+            data: (item: any): string => {
+              return item.value['id'];
+            },
+          },
+        ],
+      },
+    });
+    let controls = [
+      this.singlePickerControl,
+      this.multiPickerControl,
+      this.entityMultiPickerControl,
+      this.multiPickerControlWithMaxlength,
+      this.multiPickerControlWithMaxlengthAndPreselects,
+      this.rowMultiPickerControl,
+      this.rowMultiPickerControlWithMaxlength,
+    ];
     formUtils.setInitialValues(controls, {
       entityMultiPicker: [
         {
@@ -130,6 +234,21 @@ export class PickerControlsExample {
           phone: '(545) 555-1212',
           address: { city: 'Arlington', state: 'VA' },
           searchEntity: 'ClientCorporation',
+        },
+      ],
+      multiPickerControlWithMaxlengthAndPreselects: ['Oranges', 'Bananas'],
+      rowMultiPickerControlWithMaxlength: [
+        {
+          id: 1,
+          name: 'Pichu',
+        },
+        {
+          id: 2,
+          name: 'Pikachu',
+        },
+        {
+          id: 4,
+          name: 'Azurill',
         },
       ],
     });
