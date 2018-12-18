@@ -37,17 +37,15 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoButtonElement {
-  @Input()
-  color: string;
-  @Input()
-  side: string = 'right';
-  @Input()
-  theme: string;
-  @Input()
-  loading: boolean;
+  @Input() color: string;
+  @Input() side: string = 'right';
+  @Input() theme: string;
+  @Input() loading: boolean;
   @Input()
   set icon(icon: string) {
-    this._icon = `bhi-${icon}`;
+    if (icon) {
+      this._icon = `bhi-${icon}`;
+    }
   }
   get icon(): string {
     return this._icon;
