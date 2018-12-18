@@ -25,30 +25,30 @@ export class PickerControlsExample {
 
   constructor(private formUtils: FormUtils) {
     let fruits = ['Apples', 'Oranges', 'Bananas', 'Grapes'];
-    let pokemon = [
+    let cities = [
       {
         id: 1,
-        name: 'Pichu',
+        name: 'Boston',
       },
       {
         id: 2,
-        name: 'Pikachu',
+        name: 'New York',
       },
       {
         id: 3,
-        name: 'Raichu',
+        name: 'Washington D.C.',
       },
       {
         id: 4,
-        name: 'Azurill',
+        name: 'Orlando',
       },
       {
         id: 5,
-        name: 'Azumarill',
+        name: 'Houston',
       },
       {
         id: 6,
-        name: 'Marill',
+        name: 'Chicago',
       },
     ];
 
@@ -172,7 +172,7 @@ export class PickerControlsExample {
       multiple: true,
       config: {
         format: '$name',
-        options: pokemon,
+        options: cities,
         type: 'candidate',
         columns: [
           {
@@ -198,7 +198,7 @@ export class PickerControlsExample {
       maxlength: 4,
       config: {
         format: '$name',
-        options: pokemon,
+        options: cities,
         type: 'candidate',
         columns: [
           {
@@ -240,15 +240,15 @@ export class PickerControlsExample {
       rowMultiPickerControlWithMaxlength: [
         {
           id: 1,
-          name: 'Pichu',
+          name: 'Boston',
         },
         {
-          id: 2,
-          name: 'Pikachu',
+          id: 5,
+          name: 'Houston',
         },
         {
-          id: 4,
-          name: 'Azurill',
+          id: 6,
+          name: 'Chicago',
         },
       ],
     });
