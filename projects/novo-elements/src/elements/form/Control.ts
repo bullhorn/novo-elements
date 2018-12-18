@@ -599,7 +599,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       this._enteredText = '';
     }
     if (this.form.controls[this.control.key].controlType === 'picker' && this.form.controls[this.control.key].maxlength) {
-      this.characterCount = event.value.length;
+      this.characterCount = event.value ? event.value.length : 0;
       this.maxLengthMet = this.characterCount >= this.form.controls[this.control.key].maxlength ? true : false;
     }
     this.form.controls[this.control.key].rawValue = event.rawValue;
