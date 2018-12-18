@@ -131,8 +131,8 @@ export class NovoAutoSize implements AfterContentInit {
                             <span class="warning-text" *ngIf="form.controls[control.key].warning">{{ form.controls[control.key].warning }}</span>
 
                         </div>
-                        <span class="character-count" [class.error]="((errors?.maxlength && !errors?.maxlengthFields) || (errors?.maxlength && errors?.maxlengthFields && errors.maxlengthFields.includes(focusedField)))" *ngIf="showCount && form.controls[control.key].controlType !== 'picker'">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
-                        <span class="record-count" [class.row-picker]="form.controls[this.control.key].config.columns" *ngIf="showCount && form.controls[control.key].controlType === 'picker'">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
+                        <span class="character-count" [class.error]="((errors?.maxlength && !errors?.maxlengthFields) || (errors?.maxlength && errors?.maxlengthFields && errors.maxlengthFields.includes(focusedField)))" *ngIf="showCount && form.controls[control.key].controlType !== 'picker'">{{ itemCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
+                        <span class="record-count" [class.zero-count]="itemCount === 0" [class.row-picker]="form.controls[this.control.key].config.columns" *ngIf="showCount && form.controls[control.key].controlType === 'picker'">{{ itemCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
                     </div>
                     <!--Tip Wel-->
                     <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
@@ -194,7 +194,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   formattedValue: string = '';
   percentValue: number;
   maxLengthMet: boolean = false;
-  characterCount: number = 0;
+  itemCount: number = 0;
   maskOptions: IMaskOptions;
 
   private _blurEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
@@ -356,7 +356,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         this.form.controls[this.control.key].controlType === 'textbox' ||
         this.form.controls[this.control.key].controlType === 'text-area'
       ) {
-        this.characterCount = this.form.controls[this.control.key].value.length;
+        this.itemCount = this.form.controls[this.control.key].value.length;
       }
     }
     if (this.control) {
@@ -588,7 +588,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   checkMaxLength(event) {
     if (this.control && this.form.controls[this.control.key].maxlength) {
-      this.characterCount = event.target.value.length;
+      this.itemCount = event.target.value.length;
       this.maxLengthMet = event.target.value.length >= this.form.controls[this.control.key].maxlength;
     }
   }
@@ -599,8 +599,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       this._enteredText = '';
     }
     if (this.form.controls[this.control.key].controlType === 'picker' && this.form.controls[this.control.key].maxlength) {
-      this.characterCount = event.value ? event.value.length : 0;
-      this.maxLengthMet = this.characterCount >= this.form.controls[this.control.key].maxlength ? true : false;
+      this.itemCount = event.value ? event.value.length : 0;
+      this.maxLengthMet = this.itemCount >= this.form.controls[this.control.key].maxlength ? true : false;
     }
     this.form.controls[this.control.key].rawValue = event.rawValue;
     this.change.emit(event.value);
@@ -708,11 +708,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       this.control.config[data.field] &&
       !Helpers.isEmpty(this.control.config[data.field].maxlength)
     ) {
-      this.characterCount = data.value.length;
+      this.itemCount = data.value.length;
       this.characterCountField = data.field;
       this.maxLength = this.control.config[data.field].maxlength;
       this.showCount = true;
-      if (this.maxLength === this.characterCount) {
+      if (this.maxLength === this.itemCount) {
         this.maxLengthMetErrorfields.push(data.field);
       } else {
         this.maxLengthMetErrorfields = this.maxLengthMetErrorfields.filter((field: string) => field !== data.field);

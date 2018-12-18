@@ -223,7 +223,7 @@ export class PickerControlsExample {
       this.multiPickerControlWithMaxlength,
       this.multiPickerControlWithMaxlengthAndPreselects,
       this.rowMultiPickerControl,
-      this.rowMultiPickerControlWithMaxlength,
+      // this.rowMultiPickerControlWithMaxlength,
     ];
     formUtils.setInitialValues(controls, {
       entityMultiPicker: [
