@@ -132,7 +132,7 @@ export class NovoAutoSize implements AfterContentInit {
 
                         </div>
                         <span class="character-count" [class.error]="((errors?.maxlength && !errors?.maxlengthFields) || (errors?.maxlength && errors?.maxlengthFields && errors.maxlengthFields.includes(focusedField)))" *ngIf="showCount && form.controls[control.key].controlType !== 'picker'">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
-                        <span class="item-count" *ngIf="showCount && form.controls[control.key].controlType === 'picker'">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
+                        <span class="record-count" [class.row-picker]="form.controls[this.control.key].config.columns" *ngIf="showCount && form.controls[control.key].controlType === 'picker'">{{ characterCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
                     </div>
                     <!--Tip Wel-->
                     <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>

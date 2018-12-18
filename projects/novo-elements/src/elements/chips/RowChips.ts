@@ -57,7 +57,8 @@ export class NovoRowChipElement extends NovoChipElement {
             (typing)="onTyping($event)"
             (blur)="onTouched($event)"
             [selected]="items"
-            [overrideElement]="element">
+            [overrideElement]="element"
+            *ngIf="!maxlength || (maxlength && items.length < maxlength)">
         </novo-picker>
         <div class="preview-container">
             <span #preview></span>
