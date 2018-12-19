@@ -16,7 +16,7 @@ export interface NovoGroupedControlConfig {
   initialValue?: {}[];
 }
 
-class Control {
+class ControlConfig {
   allowInvalidDate?: boolean;
   appendToBody: boolean; // Deprecated;
   associatedEntity: string;
@@ -92,11 +92,9 @@ class Control {
   };
 }
 
-type Partialify<T> = { [K in keyof T]?: T[K] };
+export type NovoControlConfig = Partial<ControlConfig>;
 
-export type NovoControlConfig = Partialify<Control>;
-
-export class BaseControl extends Control {
+export class BaseControl extends ControlConfig {
   __type: string = 'BaseControl';
   __config: NovoControlConfig;
 
