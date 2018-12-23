@@ -317,7 +317,6 @@ novo-data-table {
     }
     > novo-search {
       padding-right: 10px;
-      display: none;
       @media (min-width: $breakpoint) {
         display: flex;
       }
