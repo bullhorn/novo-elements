@@ -9,5 +9,19 @@
     <div class="novo-form-row">
         <novo-control [form]="pickerForm" [control]="entityMultiPickerControl"></novo-control>
     </div>
+    <div class="novo-form-row">
+      <novo-control [form]="pickerForm" [control]="rowMultiPickerControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+      <novo-control [form]="pickerForm" [control]="multiPickerControlWithMaxlength"></novo-control>
+    </div>
+    <div class="novo-form-row">
+      <novo-control [form]="pickerForm" [control]="multiPickerControlWithMaxlengthAndPreselects"></novo-control>
+    </div>
+    <!-- Row picker with maxlength is implemented but currently turned off because it is not being used and there was no UI created for it.
+         To turn it back on, add '[maxlength]="control?.maxlength"' to ControlTemplate.ts
+    <div class="novo-form-row">
+      <novo-control [form]="pickerForm" [control]="rowMultiPickerControlWithMaxlength"></novo-control>
+    </div-->
 </novo-form>
 <div class="final-value">Value: {{pickerForm.value | json}}</div>
