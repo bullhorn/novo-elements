@@ -12017,15 +12017,20 @@ var EntityPickerResult = /** @class */ (function () {
                     return ("" + (result.name || '')).trim();
                 case 'Opportunity':
                 case 'JobOrder':
-                    return ("" + (result.title || '')).trim();
+                    return (result.id + " | " + (result.title || '')).trim();
                 case 'Placement':
                     /** @type {?} */
-                    var label = '';
-                    if (result.candidate) {
-                        label = (result.candidate.firstName + " " + result.candidate.lastName).trim();
-                    }
-                    if (result.jobOrder) {
-                        label = (label + " - " + result.jobOrder.title).trim();
+                    var label = "" + result.id;
+                    if (result.candidate || result.jobOrder) {
+                        if (result.candidate && result.jobOrder) {
+                            label = (label + " | " + result.candidate.firstName + " " + result.candidate.lastName + " - " + result.jobOrder.title).trim();
+                        }
+                        else if (result.jobOrder) {
+                            label = (label + " | " + result.jobOrder.title).trim();
+                        }
+                        else {
+                            label = (label + " | " + result.candidate.firstName + " " + result.candidate.lastName).trim();
+                        }
                     }
                     return label;
                 default:
