@@ -85,9 +85,10 @@ describe('Elements: EntityPickerResult', () => {
     it('should return a correctly formatted name for Opportunity', () => {
       let input = {
         searchEntity: 'Opportunity',
-        title: 'Lead Bottlemaker',
+        id: 789,
+        title: 'Bottlemaking Opportunity',
       };
-      expect(component.getNameForResult(input)).toBe('Lead Bottlemaker');
+      expect(component.getNameForResult(input)).toBe('789 | Bottlemaking Opportunity');
     });
     it('should return a correctly formatted name for Lead', () => {
       let input = {
@@ -108,19 +109,52 @@ describe('Elements: EntityPickerResult', () => {
     it('should return a correctly formatted name for Job Order', () => {
       let input = {
         searchEntity: 'JobOrder',
+        id: 567,
         title: 'Mock Job Title',
       };
-      expect(component.getNameForResult(input)).toBe('Mock Job Title');
+      expect(component.getNameForResult(input)).toBe('567 | Mock Job Title');
     });
-    it('should return a correctly formatted name for Placement', () => {
+    it('when candidate and job are defined, should concatenate id, candidate name, and job title', () => {
       let input = {
         searchEntity: 'Placement',
+        id: 1234,
+        candidate: {
+          firstName: 'James',
+          lastName: 'Bond',
+        },
+        jobOrder: {
+          title: 'Gud Picker',
+        },
+      };
+      expect(component.getNameForResult(input)).toBe('1234 | James Bond - Gud Picker');
+    });
+    it('when candidate is undefined and job is defined, should concatenate id and job title', () => {
+      let input = {
+        searchEntity: 'Placement',
+        id: 1234,
+        jobOrder: {
+          title: 'Gud Picker',
+        },
+      };
+      expect(component.getNameForResult(input)).toBe('1234 | Gud Picker');
+    });
+    it('when candidate and job are undefined, should only return id', () => {
+      let input = {
+        searchEntity: 'Placement',
+        id: 1234,
+      };
+      expect(component.getNameForResult(input)).toBe('1234');
+    });
+    it('when candidate is defined and job is undefined, should concatenate id and candidate name', () => {
+      let input = {
+        searchEntity: 'Placement',
+        id: 1234,
         candidate: {
           firstName: 'James',
           lastName: 'Bond',
         },
       };
-      expect(component.getNameForResult(input)).toBe('James Bond');
+      expect(component.getNameForResult(input)).toBe('1234 | James Bond');
     });
     it('should return the name when present for an unknown entity', () => {
       let input = {
