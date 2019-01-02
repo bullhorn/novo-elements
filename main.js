@@ -60856,6 +60856,16 @@ var EntityColorsExample = /** @class */ (function () {
                 hex: 'BB5566',
             },
             {
+                name: 'job code',
+                variables: ['jobCode'],
+                hex: '696D79',
+            },
+            {
+                name: 'earn code',
+                variables: ['earnCode'],
+                hex: '696D79',
+            },
+            {
                 name: 'submission',
                 variables: ['submission'],
                 hex: 'A9ADBB',
@@ -60864,6 +60874,36 @@ var EntityColorsExample = /** @class */ (function () {
                 name: 'placement',
                 variables: ['placement'],
                 hex: '0B344F',
+            },
+            {
+                name: 'navigation',
+                variables: ['navigation'],
+                hex: '2F384F',
+            },
+            {
+                name: 'sendout',
+                variables: ['sendout'],
+                hex: '747884',
+            },
+            {
+                name: 'note',
+                variables: ['note'],
+                hex: '747884',
+            },
+            {
+                name: 'contract',
+                variables: ['contract'],
+                hex: '454EA0',
+            },
+            {
+                name: 'invoice statement',
+                variables: ['invoiceStatement'],
+                hex: '696D79',
+            },
+            {
+                name: 'billable item',
+                variables: ['billableItem'],
+                hex: '696D79',
             },
         ];
     }
@@ -70109,7 +70149,7 @@ var EXAMPLE_COMPONENTS = {
     'entity-colors': {
         title: 'Entity Colors',
         component: EntityColorsExample,
-        tsSource: "%2F%2F%20NG2%0Aimport%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20NovoToastService%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Entity%20Colors%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'entity-colors-example'%2C%0A%20%20templateUrl%3A%20'.%2Fentity-colors-example.html'%2C%0A%20%20styleUrls%3A%20%5B'.%2Fentity-colors-example.scss'%5D%2C%0A%7D)%0Aexport%20class%20EntityColorsExample%20%7B%0A%20%20entityColors%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'lead'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'lead'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'AA6699'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'contact'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'contact'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'FFAA44'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'company'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'company'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'3399DD'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'candidate'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'candidate'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'44BB77'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'opportunity'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'opportunity'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'662255'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'job'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'job'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'BB5566'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'submission'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'submission'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'A9ADBB'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'placement'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'placement'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'0B344F'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20options%3A%20any%3B%0A%0A%20%20constructor(private%20toaster%3A%20NovoToastService)%20%7B%7D%0A%0A%20%20copyLink(color)%20%7B%0A%20%20%20%20%2F%2F%20Create%20dom%20element%20to%20copy%20from%0A%20%20%20%20let%20copyFrom%20%3D%20document.createElement('textarea')%3B%0A%20%20%20%20copyFrom.textContent%20%3D%20%60%23%24%7Bcolor.hex%7D%60%3B%0A%20%20%20%20let%20body%20%3D%20document.getElementsByTagName('body')%5B0%5D%3B%0A%20%20%20%20body.appendChild(copyFrom)%3B%0A%20%20%20%20copyFrom.select()%3B%0A%20%20%20%20%2F%2F%20Copy%20text%0A%20%20%20%20document.execCommand('copy')%3B%0A%20%20%20%20%2F%2F%20Delete%20element%0A%20%20%20%20body.removeChild(copyFrom)%3B%0A%0A%20%20%20%20%2F%2F%20Set%20toast%20options%0A%20%20%20%20this.options%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20%60%23%24%7Bcolor.hex%7D%60%2C%0A%20%20%20%20%20%20message%3A%20'Copied%20to%20your%20clipboard'%2C%0A%20%20%20%20%20%20theme%3A%20color.name%2C%0A%20%20%20%20%20%20icon%3A%20'clipboard'%2C%0A%20%20%20%20%20%20position%3A%20'growlTopRight'%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20if%20(color.name%20%3D%3D%3D%20'action')%20%7B%0A%20%20%20%20%20%20this.options.theme%20%3D%20'ocean'%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Fire%20toast%0A%20%20%20%20this.toaster.alert(this.options)%3B%0A%20%20%7D%0A%7D%0A",
+        tsSource: "%2F%2F%20NG2%0Aimport%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20NovoToastService%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Entity%20Colors%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'entity-colors-example'%2C%0A%20%20templateUrl%3A%20'.%2Fentity-colors-example.html'%2C%0A%20%20styleUrls%3A%20%5B'.%2Fentity-colors-example.scss'%5D%2C%0A%7D)%0Aexport%20class%20EntityColorsExample%20%7B%0A%20%20entityColors%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'lead'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'lead'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'AA6699'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'contact'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'contact'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'FFAA44'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'company'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'company'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'3399DD'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'candidate'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'candidate'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'44BB77'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'opportunity'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'opportunity'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'662255'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'job'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'job'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'BB5566'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'job%20code'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'jobCode'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'earn%20code'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'earnCode'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'submission'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'submission'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'A9ADBB'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'placement'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'placement'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'0B344F'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'navigation'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'navigation'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'2F384F'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'sendout'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'sendout'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'747884'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'note'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'note'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'747884'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'contract'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'contract'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'454EA0'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'invoice%20statement'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'invoiceStatement'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'billable%20item'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'billableItem'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20options%3A%20any%3B%0A%0A%20%20constructor(private%20toaster%3A%20NovoToastService)%20%7B%7D%0A%0A%20%20copyLink(color)%20%7B%0A%20%20%20%20%2F%2F%20Create%20dom%20element%20to%20copy%20from%0A%20%20%20%20let%20copyFrom%20%3D%20document.createElement('textarea')%3B%0A%20%20%20%20copyFrom.textContent%20%3D%20%60%23%24%7Bcolor.hex%7D%60%3B%0A%20%20%20%20let%20body%20%3D%20document.getElementsByTagName('body')%5B0%5D%3B%0A%20%20%20%20body.appendChild(copyFrom)%3B%0A%20%20%20%20copyFrom.select()%3B%0A%20%20%20%20%2F%2F%20Copy%20text%0A%20%20%20%20document.execCommand('copy')%3B%0A%20%20%20%20%2F%2F%20Delete%20element%0A%20%20%20%20body.removeChild(copyFrom)%3B%0A%0A%20%20%20%20%2F%2F%20Set%20toast%20options%0A%20%20%20%20this.options%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20%60%23%24%7Bcolor.hex%7D%60%2C%0A%20%20%20%20%20%20message%3A%20'Copied%20to%20your%20clipboard'%2C%0A%20%20%20%20%20%20theme%3A%20color.name%2C%0A%20%20%20%20%20%20icon%3A%20'clipboard'%2C%0A%20%20%20%20%20%20position%3A%20'growlTopRight'%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20if%20(color.name%20%3D%3D%3D%20'action')%20%7B%0A%20%20%20%20%20%20this.options.theme%20%3D%20'ocean'%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Fire%20toast%0A%20%20%20%20this.toaster.alert(this.options)%3B%0A%20%20%7D%0A%7D%0A",
         cssSource: "",
         htmlSource: "%3Carticle%20class%3D%22color-blocks%20entity-colors%22%3E%0A%20%20%3Cdiv%20*ngFor%3D%22let%20color%20of%20entityColors%22%20class%3D%22block%22%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22color-square%20bgc-%7B%7Bcolor.name%7D%7D%22%20(click)%3D%22copyLink(color)%22%3E%0A%20%20%20%20%20%20%20%20%3Ch3%20class%3D%22color-text%22%3E%3Cspan%3E%23%3C%2Fspan%3E%7B%7Bcolor.hex%7D%7D%3C%2Fh3%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3Ch6%3E%7B%7Bcolor.name%7D%7D%3C%2Fh6%3E%0A%20%20%20%20%20%20%3Cspan%20class%3D%22vars%22%20*ngFor%3D%22let%20variable%20of%20color.variables%22%3E%24%7B%7Bvariable%7D%7D%3C%2Fspan%3E%0A%20%20%3C%2Fdiv%3E%0A%3C%2Farticle%3E%0A"
     },
