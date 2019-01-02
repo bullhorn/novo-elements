@@ -44,6 +44,16 @@ export class EntityColorsExample {
       hex: 'BB5566',
     },
     {
+      name: 'job code',
+      variables: ['jobCode'],
+      hex: '696D79',
+    },
+    {
+      name: 'earn code',
+      variables: ['earnCode'],
+      hex: '696D79',
+    },
+    {
       name: 'submission',
       variables: ['submission'],
       hex: 'A9ADBB',
@@ -52,6 +62,36 @@ export class EntityColorsExample {
       name: 'placement',
       variables: ['placement'],
       hex: '0B344F',
+    },
+    {
+      name: 'navigation',
+      variables: ['navigation'],
+      hex: '2F384F',
+    },
+    {
+      name: 'sendout',
+      variables: ['sendout'],
+      hex: '747884',
+    },
+    {
+      name: 'note',
+      variables: ['note'],
+      hex: '747884',
+    },
+    {
+      name: 'contract',
+      variables: ['contract'],
+      hex: '454EA0',
+    },
+    {
+      name: 'invoice statement',
+      variables: ['invoiceStatement'],
+      hex: '696D79',
+    },
+    {
+      name: 'billable item',
+      variables: ['billableItem'],
+      hex: '696D79',
     },
   ];
 
