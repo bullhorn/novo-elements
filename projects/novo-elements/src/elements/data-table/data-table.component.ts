@@ -486,7 +486,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     } else {
       this.state.expandedRows.add(`${row[this.rowIdentifier]}`);
     }
-    this.state.onExpandChange();
+    this.state.onExpandChange((row as any).id);
   }
 
   public expandRows(expand: boolean): void {

@@ -17,11 +17,13 @@ export class NovoDataTableExpandDirective<T> implements OnDestroy {
   private subscription: Subscription;
 
   constructor(public vcRef: ViewContainerRef, private state: DataTableState<T>, private dataTable: NovoDataTable<T>) {
-    this.subscription = this.state.expandSource.subscribe(() => {
-      if (dataTable.isExpanded(this.row)) {
-        this.render();
-      } else {
-        this.clear();
+    this.subscription = this.state.expandSource.subscribe((targetId?: number) => {
+      if ([undefined, (this.row as any).id].includes(targetId)) {
+        if (dataTable.isExpanded(this.row)) {
+          this.render();
+        } else {
+          this.clear();
+        }
       }
     });
   }
