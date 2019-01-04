@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.4.0"></a>
+# [3.4.0](https://github.com/bullhorn/novo-elements/compare/v3.3.0...v3.4.0) (2019-01-04)
+
+
+### Bug Fixes
+
+* **button:** Only set icon on button if exists ([#884](https://github.com/bullhorn/novo-elements/issues/884)) ([ce70633](https://github.com/bullhorn/novo-elements/commit/ce70633))
+* **demo:** Update Dead links ([#876](https://github.com/bullhorn/novo-elements/issues/876)) ([5e122fd](https://github.com/bullhorn/novo-elements/commit/5e122fd))
+* **FormUtils:** Respect Allow Multiple false for to-many association fields ([#874](https://github.com/bullhorn/novo-elements/issues/874)) ([40fd5d5](https://github.com/bullhorn/novo-elements/commit/40fd5d5))
+
+
+### Features
+
+* **EntityPickerResults:** Update Job, Placement, and Opportunity results to include ID ([#885](https://github.com/bullhorn/novo-elements/issues/885)) ([3e00f23](https://github.com/bullhorn/novo-elements/commit/3e00f23))
+* **picker:** Added container div to picker chips form control ([#883](https://github.com/bullhorn/novo-elements/issues/883)) ([70258db](https://github.com/bullhorn/novo-elements/commit/70258db))
+
+
+
 <a name="3.3.0"></a>
 # [3.3.0](https://github.com/bullhorn/novo-elements/compare/v3.2.0...v3.3.0) (2018-12-07)
 
