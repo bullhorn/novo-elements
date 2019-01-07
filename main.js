@@ -18086,93 +18086,101 @@ var NovoFormGroup = /** @class */ (function (_super) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var BaseControl = /** @class */ (function () {
+var ControlConfig = /** @class */ (function () {
+    function ControlConfig() {
+    }
+    return ControlConfig;
+}());
+var BaseControl = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__extends"])(BaseControl, _super);
     function BaseControl(type, config) {
         if (type === void 0) { type = 'BaseControl'; }
         if (config === void 0) { config = {}; }
-        this.__type = 'BaseControl';
-        this.__type = type;
-        this.__config = config;
-        this.validators = config.validators || [];
-        this.asyncValidators = config.asyncValidators || [];
-        this.value = config.value;
-        this.key = config.key || '';
-        this.label = config.label || '';
-        this.checkboxLabel = config.checkboxLabel;
-        this.name = config.name || '';
-        this.required = !!config.required;
-        this.hidden = !!config.hidden;
-        this.encrypted = !!config.encrypted;
-        this.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;
-        this.controlType = config.controlType || '';
-        this.metaType = config.metaType;
-        this.placeholder = config.placeholder || '';
-        this.config = config.config || null;
-        this.dirty = !!config.value;
-        this.multiple = !!config.multiple;
-        this.headerConfig = config.headerConfig || null;
-        this.currencyFormat = config.currencyFormat || null;
-        this.associatedEntity = config.associatedEntity || null;
-        this.optionsType = config.optionsType || null;
-        this.options = config.options || [];
-        this.forceClear = new _angular_core__WEBPACK_IMPORTED_MODULE_26__["EventEmitter"]();
-        this.readOnly = !!config.readOnly || !!config.disabled;
-        this.disabled = !!config.disabled;
-        this.layoutOptions = config.layoutOptions || {};
-        this.military = !!config.military;
-        this.dateFormat = config.dateFormat;
-        this.textMaskEnabled = config.textMaskEnabled;
-        this.maskOptions = config.maskOptions;
-        this.allowInvalidDate = config.allowInvalidDate;
-        this.startDate = config.startDate;
-        this.endDate = config.endDate;
-        this.restrictFieldInteractions = !!config.restrictFieldInteractions;
+        var _this = _super.call(this) || this;
+        _this.__type = 'BaseControl';
+        _this.__type = type;
+        _this.__config = config;
+        _this.validators = config.validators || [];
+        _this.asyncValidators = config.asyncValidators || [];
+        _this.value = config.value;
+        _this.key = config.key || '';
+        _this.label = config.label || '';
+        _this.checkboxLabel = config.checkboxLabel;
+        _this.name = config.name || '';
+        _this.required = !!config.required;
+        _this.hidden = !!config.hidden;
+        _this.encrypted = !!config.encrypted;
+        _this.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;
+        _this.controlType = config.controlType || '';
+        _this.metaType = config.metaType;
+        _this.placeholder = config.placeholder || '';
+        _this.config = config.config || null;
+        _this.dirty = !!config.value;
+        _this.multiple = !!config.multiple;
+        _this.headerConfig = config.headerConfig || null;
+        _this.currencyFormat = config.currencyFormat || null;
+        _this.associatedEntity = config.associatedEntity || null;
+        _this.optionsType = config.optionsType || null;
+        _this.options = config.options || [];
+        _this.forceClear = new _angular_core__WEBPACK_IMPORTED_MODULE_26__["EventEmitter"]();
+        _this.readOnly = !!config.readOnly || !!config.disabled;
+        _this.disabled = !!config.disabled;
+        _this.layoutOptions = config.layoutOptions || {};
+        _this.military = !!config.military;
+        _this.dateFormat = config.dateFormat;
+        _this.textMaskEnabled = config.textMaskEnabled;
+        _this.maskOptions = config.maskOptions;
+        _this.allowInvalidDate = config.allowInvalidDate;
+        _this.startDate = config.startDate;
+        _this.endDate = config.endDate;
+        _this.restrictFieldInteractions = !!config.restrictFieldInteractions;
         if (!Helpers.isEmpty(config.warning)) {
-            this.warning = config.warning;
+            _this.warning = config.warning;
         }
-        if (this.required) {
-            this.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_24__["Validators"].required);
+        if (_this.required) {
+            _this.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_24__["Validators"].required);
         }
         if (!Helpers.isBlank(config.maxlength)) {
-            this.maxlength = config.maxlength;
-            this.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_24__["Validators"].maxLength(this.maxlength));
+            _this.maxlength = config.maxlength;
+            _this.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_24__["Validators"].maxLength(_this.maxlength));
         }
         if (!Helpers.isBlank(config.minlength)) {
-            this.minlength = config.minlength;
-            this.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_24__["Validators"].minLength(this.minlength));
+            _this.minlength = config.minlength;
+            _this.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_24__["Validators"].minLength(_this.minlength));
         }
-        this.closeOnSelect = !!config.closeOnSelect;
-        this.interactions = config.interactions;
-        this.dataSpecialization = config.dataSpecialization;
-        this.dataType = config.dataType;
-        this.appendToBody = !!config.appendToBody;
-        if (this.appendToBody) {
+        _this.closeOnSelect = !!config.closeOnSelect;
+        _this.interactions = config.interactions;
+        _this.dataSpecialization = config.dataSpecialization;
+        _this.dataType = config.dataType;
+        _this.appendToBody = !!config.appendToBody;
+        if (_this.appendToBody) {
             notify("'appendToBody' has been deprecated. Please remove this attribute.");
         }
-        this.parentScrollSelector = config.parentScrollSelector;
-        this.description = config.description;
+        _this.parentScrollSelector = config.parentScrollSelector;
+        _this.description = config.description;
         if (config.tooltip) {
-            this.tooltip = config.tooltip;
-            this.tooltipPosition = config.tooltipPosition;
-            this.tooltipSize = config.tooltipSize;
-            this.tooltipPreline = config.tooltipPreline;
-            this.removeTooltipArrow = config.removeTooltipArrow;
-            this.tooltipAutoPosition = config.tooltipAutoPosition;
+            _this.tooltip = config.tooltip;
+            _this.tooltipPosition = config.tooltipPosition;
+            _this.tooltipSize = config.tooltipSize;
+            _this.tooltipPreline = config.tooltipPreline;
+            _this.removeTooltipArrow = config.removeTooltipArrow;
+            _this.tooltipAutoPosition = config.tooltipAutoPosition;
         }
-        this.template = config.template;
-        this.customControlConfig = config.customControlConfig;
-        this.tipWell = config.tipWell;
-        this.width = config.width;
-        this.startupFocus = !!config.startupFocus;
+        _this.template = config.template;
+        _this.customControlConfig = config.customControlConfig;
+        _this.tipWell = config.tipWell;
+        _this.width = config.width;
+        _this.startupFocus = !!config.startupFocus;
         if (config.fileBrowserImageUploadUrl) {
-            this.fileBrowserImageUploadUrl = config.fileBrowserImageUploadUrl;
+            _this.fileBrowserImageUploadUrl = config.fileBrowserImageUploadUrl;
         }
         if (config.isEmpty) {
-            this.isEmpty = config.isEmpty;
+            _this.isEmpty = config.isEmpty;
         }
+        return _this;
     }
     return BaseControl;
-}());
+}(ControlConfig));
 
 /**
  * @fileoverview added by tsickle
