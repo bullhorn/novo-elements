@@ -387,8 +387,10 @@ export class FormUtils {
               }
               controlConfig.value[subfield.name] = 1;
             }
-            if (subfield.name === 'countryID') {
-              subfield.optionsType = 'Country';
+            if (subfield.name === 'state' || subfield.name === 'countryID') {
+              if (subfield.name === 'countryID') {
+                subfield.optionsType = 'Country';
+              }
               if (!subfield.optionsUrl) {
                 subfield.optionsUrl = `options/${subfield.optionsType}`;
               }
