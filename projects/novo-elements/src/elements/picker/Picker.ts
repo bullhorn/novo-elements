@@ -2,6 +2,7 @@
 import {
   ChangeDetectorRef,
   Component,
+  ComponentRef,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -43,29 +44,36 @@ const PICKER_VALUE_ACCESSOR = {
   selector: 'novo-picker',
   providers: [PICKER_VALUE_ACCESSOR],
   template: `
-        <i class="bhi-more" *ngIf="config?.entityIcon && !_value"></i>
-        <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
-        <input
-            type="text"
-            class="picker-input"
-            [(ngModel)]="term"
-            [class.entity-picker]="config?.entityIcon"
-            [class.entity-selected]="config?.entityIcon && _value"
-            (ngModelChange)="checkTerm($event)"
-            [placeholder]="placeholder"
-            (keydown)="onKeyDown($event)"
-            (focus)="onFocus($event)"
-            (click)="onFocus($event)"
-            (blur)="onTouched($event)"
-            autocomplete="off" #input
-            [disabled]="disablePickerInput"/>
-        <i class="bhi-search" *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput"></i>
-        <i class="bhi-times" [class.entity-selected]="config?.entityIcon && _value" *ngIf="_value && !clearValueOnSelect && !disablePickerInput" (click)="clearValue(true)"></i>
-        <novo-overlay-template class="picker-results-container" [parent]="element" position="above-below" (closing)="onOverlayClosed()">
-            <span #results></span>
-            <ng-content></ng-content>
-        </novo-overlay-template>
-    `,
+    <i class="bhi-more" *ngIf="config?.entityIcon && !_value"></i>
+    <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
+    <input
+      type="text"
+      class="picker-input"
+      [(ngModel)]="term"
+      [class.entity-picker]="config?.entityIcon"
+      [class.entity-selected]="config?.entityIcon && _value"
+      (ngModelChange)="checkTerm($event)"
+      [placeholder]="placeholder"
+      (keydown)="onKeyDown($event)"
+      (focus)="onFocus($event)"
+      (click)="onFocus($event)"
+      (blur)="onTouched($event)"
+      autocomplete="off"
+      #input
+      [disabled]="disablePickerInput"
+    />
+    <i class="bhi-search" *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput"></i>
+    <i
+      class="bhi-times"
+      [class.entity-selected]="config?.entityIcon && _value"
+      *ngIf="_value && !clearValueOnSelect && !disablePickerInput"
+      (click)="clearValue(true)"
+    ></i>
+    <novo-overlay-template class="picker-results-container" [parent]="element" position="above-below" (closing)="onOverlayClosed()">
+      <span #results></span>
+      <ng-content></ng-content>
+    </novo-overlay-template>
+  `,
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results
@@ -112,6 +120,7 @@ export class NovoPickerElement implements OnInit {
   get disablePickerInput() {
     return this._disablePickerInput;
   }
+
   private _disablePickerInput: boolean = false;
 
   // Emitter for selects
@@ -131,11 +140,9 @@ export class NovoPickerElement implements OnInit {
   @ViewChild('input')
   private input: ElementRef;
 
-  closeHandler: any;
-  isStatic: boolean = true;
   term: string = '';
   resultsComponent: any;
-  popup: any;
+  popup: ComponentRef<any>;
   _value: any;
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
@@ -172,7 +179,6 @@ export class NovoPickerElement implements OnInit {
     this.show((event.target as any).value);
   }
 
-  /** BEGIN: Convenient Panel Methods. */
   public openPanel(): void {
     this.container.openPanel();
   }
@@ -184,8 +190,6 @@ export class NovoPickerElement implements OnInit {
   public get panelOpen(): boolean {
     return this.container && this.container.panelOpen;
   }
-
-  /** END: Convenient Panel Methods. */
 
   private show(term?: string): void {
     this.openPanel();
