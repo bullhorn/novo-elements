@@ -197,11 +197,6 @@ export class NovoPickerElement implements OnInit {
     this.showResults(term);
   }
 
-  private hide(): void {
-    this.closePanel();
-    this.ref.markForCheck();
-  }
-
   onKeyDown(event: KeyboardEvent) {
     if (this.disablePickerInput) {
       Helpers.swallowEvent(event);
@@ -266,12 +261,7 @@ export class NovoPickerElement implements OnInit {
     this.focus.emit(event);
   }
 
-  /**
-   * @name showResults
-   *
-   * @description This method creates an instance of the results (called popup) and adds all the bindings to that
-   * instance.
-   */
+  // Creates an instance of the results (called popup) and adds all the bindings to that instance.
   showResults(term?: any) {
     // Update Matches
     if (this.popup) {
@@ -293,19 +283,14 @@ export class NovoPickerElement implements OnInit {
     }
   }
 
-  /**
-   * @name hideResults
-   *
-   * @description - This method deletes the picker results from the DOM.
-   */
+  // Tells the overlay component to hide the picker results from the DOM without deleting the dynamically allocated popup instance created in
+  // showResults. The popup instance will remain in memory from the first time the results are shown until this component is destroyed.
   hideResults(err?: any) {
-    if (this.popup) {
-      this.popup.destroy();
-      this.popup = null;
-    }
-    this.hide();
+    this.closePanel();
+    this.ref.markForCheck();
   }
 
+  // Cleans up listeners for the popup - will get executed no matter how the popup is closed.
   onOverlayClosed(): void {
     if (this.popup && this.popup.instance && this.popup.instance.cleanUp) {
       this.popup.instance.cleanUp();
