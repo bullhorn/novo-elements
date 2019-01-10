@@ -28,7 +28,7 @@ export class NovoToastService {
     this._parentViewContainer = view;
   }
 
-  alert(options) {
+  alert(options, toastElement: any = NovoToastElement) {
     return new Promise((resolve) => {
       if (!this._parentViewContainer) {
         console.error(
@@ -36,7 +36,7 @@ export class NovoToastService {
         );
         return;
       }
-      let toast = this.componentUtils.appendNextToLocation(NovoToastElement, this._parentViewContainer);
+      let toast = this.componentUtils.appendNextToLocation(toastElement, this._parentViewContainer);
       this.references.push(toast);
       this.handleAlert(toast.instance, options);
       resolve(toast);
