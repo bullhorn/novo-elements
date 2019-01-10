@@ -1,6 +1,6 @@
 {
   "name": "novo-elements-projects",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "Bullhorn's Novo-Elements repository, including core projects and tools",
   "license": "MIT",
   "private": true,
@@ -87,7 +87,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.11.2",
-    "@angular-devkit/build-ng-packagr": "~0.8.0-beta.0",
+    "@angular-devkit/build-ng-packagr": "^0.11.4",
     "@angular/cli": "^7.1.2",
     "@angular/compiler-cli": "^7.1.2",
     "@angular/language-service": "^7.1.2",
