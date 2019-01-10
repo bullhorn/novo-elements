@@ -23,5 +23,8 @@
     <div class="novo-form-row">
       <novo-control [form]="pickerForm" [control]="rowMultiPickerControlWithMaxlength"></novo-control>
     </div-->
+    <div class="novo-form-row">
+      <novo-control [form]="pickerForm" [control]="textPickerWithGetLabels"></novo-control>
+    </div>
 </novo-form>
 <div class="final-value">Value: {{pickerForm.value | json}}</div>
