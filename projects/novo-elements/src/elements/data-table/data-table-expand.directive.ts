@@ -18,7 +18,7 @@ export class NovoDataTableExpandDirective<T> implements OnDestroy {
 
   constructor(public vcRef: ViewContainerRef, private state: DataTableState<T>, private dataTable: NovoDataTable<T>) {
     this.subscription = this.state.expandSource.subscribe((targetId?: number) => {
-      if ([undefined, (this.row as any).id].includes(targetId)) {
+      if ([undefined, ((this.row as unknown) as { id: number }).id].includes(targetId)) {
         if (dataTable.isExpanded(this.row)) {
           this.render();
         } else {
