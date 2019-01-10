@@ -237,6 +237,25 @@ describe('Elements: NovoPickerElement', () => {
       tick();
       expect(component.term).toEqual('DYNAMIC LABEL');
     }));
+    it('should call getLabels for string value if getLabels is present.', fakeAsync(() => {
+      component.config = {
+        getLabels: () =>
+          new Promise((resolve) => {
+            resolve({ label: 'DYNAMIC LABEL' });
+          }),
+      };
+      component.writeValue('New Value');
+      tick();
+      expect(component.term).toEqual('DYNAMIC LABEL');
+    }));
+    it('should not call getLabels for string value if getLabels is not a function.', fakeAsync(() => {
+      component.config = {
+        getLabels: '',
+      };
+      component.writeValue('New Value');
+      tick();
+      expect(component.term).toEqual('New Value');
+    }));
     it('should handle getLabels that returns an array by using the first array element.', fakeAsync(() => {
       component.config = {
         getLabels: () =>
