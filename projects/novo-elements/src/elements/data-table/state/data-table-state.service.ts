@@ -82,8 +82,8 @@ export class DataTableState<T> {
     this.selectionSource.next();
   }
 
-  public onExpandChange(): void {
-    this.expandSource.next();
+  public onExpandChange(targetId?: number): void {
+    this.expandSource.next(targetId);
   }
 
   public onPaginationChange(isPageSizeChange: boolean, pageSize: number): void {

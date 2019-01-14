@@ -17,14 +17,20 @@ export class NovoDataTableExpandDirective<T> implements OnDestroy {
   private subscription: Subscription;
 
   constructor(public vcRef: ViewContainerRef, private state: DataTableState<T>, private dataTable: NovoDataTable<T>) {
-    this.subscription = this.state.expandSource.subscribe(() => {
-      if (dataTable.isExpanded(this.row)) {
-        this.render();
-      } else {
-        this.clear();
+    this.subscription = this.state.expandSource.subscribe((targetId?: number) => {
+      if (this.shouldExpandAllRows(targetId) || this.shouldExpandOneRow(targetId)) {
+        if (dataTable.isExpanded(this.row)) {
+          this.render();
+        } else {
+          this.clear();
+        }
       }
     });
   }
+
+  shouldExpandAllRows = (targetId: number): boolean => targetId === undefined;
+
+  shouldExpandOneRow = (targetId: number) => targetId === ((this.row as unknown) as { id: number }).id;
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
