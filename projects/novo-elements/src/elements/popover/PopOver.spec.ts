@@ -7,8 +7,8 @@ import { PopOverDirective } from './PopOver';
 @Component({
   selector: 'test-component',
   template: `
-        <div popover=""></div>
-    `,
+    <div popover=""></div>
+  `,
 })
 class TestComponent {}
 
@@ -31,7 +31,7 @@ describe('Elements: PopOverDirective', () => {
 
     describe('Class: ', () => {
       let mockComponentFactoryResolver: ComponentFactoryResolver = {
-        resolveComponentFactory<T>(c: { new (...args: any[]): T }): ComponentFactory<T> {
+        resolveComponentFactory<T>(c: { new (...args: any[]) }): ComponentFactory<T> {
           // This was a monster to mock...
           if (c) {
             return null;
