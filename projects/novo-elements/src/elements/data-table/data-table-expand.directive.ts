@@ -18,7 +18,7 @@ export class NovoDataTableExpandDirective<T> implements OnDestroy {
 
   constructor(public vcRef: ViewContainerRef, private state: DataTableState<T>, private dataTable: NovoDataTable<T>) {
     this.subscription = this.state.expandSource.subscribe((targetId?: number) => {
-      if ([undefined, ((this.row as unknown) as { id: number }).id].includes(targetId)) {
+      if (this.shouldExpandAllRows(targetId) || this.shouldExpandOneRow(targetId)) {
         if (dataTable.isExpanded(this.row)) {
           this.render();
         } else {
@@ -27,6 +27,10 @@ export class NovoDataTableExpandDirective<T> implements OnDestroy {
       }
     });
   }
+
+  shouldExpandAllRows = (targetId: number): boolean => targetId === undefined;
+
+  shouldExpandOneRow = (targetId: number) => targetId === ((this.row as unknown) as { id: number }).id;
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
