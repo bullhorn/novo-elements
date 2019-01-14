@@ -21,7 +21,6 @@ export class PickerControlsExample {
   public entityMultiPickerControl: any;
   public rowMultiPickerControl: any;
   public rowMultiPickerControlWithMaxlength: any;
-  public textPickerWithGetLabels: any;
   public pickerForm: any;
 
   constructor(private formUtils: FormUtils) {
@@ -50,40 +49,6 @@ export class PickerControlsExample {
       {
         id: 6,
         name: 'Chicago',
-      },
-    ];
-    let states = [
-      {
-        value: 'ME',
-        label: 'Maine',
-      },
-      {
-        value: 'MD',
-        label: 'Maryland',
-      },
-      {
-        value: 'MA',
-        label: 'Massachusetts',
-      },
-      {
-        value: 'MI',
-        label: 'Michigan',
-      },
-      {
-        value: 'MN',
-        label: 'Minnesota',
-      },
-      {
-        value: 'MS',
-        label: 'Mississippi',
-      },
-      {
-        value: 'MO',
-        label: 'Missouri',
-      },
-      {
-        value: 'MT',
-        label: 'Montana',
       },
     ];
 
@@ -251,26 +216,6 @@ export class PickerControlsExample {
         ],
       },
     });
-    this.textPickerWithGetLabels = new PickerControl({
-      key: 'textPickerWithGetLabels',
-      tooltip: 'Text Value Picker with getLabels()',
-      label: 'Text Value Picker with getLabels()',
-      multiple: false,
-      config: {
-        field: 'value',
-        format: '$label',
-        options: states,
-        getLabels: (value) => {
-          return new Promise((resolve) => {
-            states.forEach((state) => {
-              if (state.value === value) {
-                resolve(state);
-              }
-            });
-          });
-        },
-      },
-    });
     let controls = [
       this.singlePickerControl,
       this.multiPickerControl,
@@ -279,7 +224,6 @@ export class PickerControlsExample {
       this.multiPickerControlWithMaxlengthAndPreselects,
       this.rowMultiPickerControl,
       // this.rowMultiPickerControlWithMaxlength,
-      this.textPickerWithGetLabels,
     ];
     formUtils.setInitialValues(controls, {
       entityMultiPicker: [
@@ -307,7 +251,6 @@ export class PickerControlsExample {
           name: 'Chicago',
         },
       ],
-      textPickerWithGetLabels: 'MD',
     });
     this.pickerForm = formUtils.toFormGroup(controls);
   }
