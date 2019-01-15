@@ -56,32 +56,21 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   /** View -> model callback called when autocomplete has been touched */
   _onTouched = () => {};
 
-  @Input()
-  name: string;
-  @Input()
-  start: Date;
-  @Input()
-  end: Date;
-  @Input()
-  placeholder: string;
-  @Input()
-  maskOptions: any;
-  @Input()
-  format: string;
-  @Input()
-  textMaskEnabled: boolean = true;
-  @Input()
-  allowInvalidDate: boolean = false;
+  @Input() name: string;
+  @Input() start: Date;
+  @Input() end: Date;
+  @Input() placeholder: string;
+  @Input() maskOptions: any;
+  @Input() format: string;
+  @Input() textMaskEnabled: boolean = true;
+  @Input() allowInvalidDate: boolean = false;
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean = false;
-  @Output()
-  blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
-  @Output()
-  focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output() blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output() focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplateComponent)
-  overlay: NovoOverlayTemplateComponent;
+  @ViewChild(NovoOverlayTemplateComponent) overlay: NovoOverlayTemplateComponent;
 
   constructor(
     public element: ElementRef,
@@ -233,6 +222,10 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     try {
       if (!value) {
         return '';
+      }
+      // Handle dates stored as string values
+      if (/\d{4}-\d{2}-\d{2}/.test(value)) {
+        return value;
       }
       if (this.userDefinedFormat && dateFns.isValid(value)) {
         return dateFns.format(value, this.format);
