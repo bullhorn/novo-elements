@@ -19290,10 +19290,7 @@ var FormUtils = /** @class */ (function () {
                                 controlConfig.value[subfield.name] = 1;
                             }
                             if (subfield.name === 'state' || subfield.name === 'countryID') {
-                                if (subfield.name === 'state') {
-                                    subfield.optionsType = 'State';
-                                }
-                                else if (subfield.name === 'countryID') {
+                                if (subfield.name === 'countryID') {
                                     subfield.optionsType = 'Country';
                                 }
                                 if (!subfield.optionsUrl) {
