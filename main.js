@@ -19737,21 +19737,24 @@ var NovoToastService = /** @class */ (function () {
     });
     /**
      * @param {?} options
+     * @param {?=} toastElement
      * @return {?}
      */
     NovoToastService.prototype.alert = /**
      * @param {?} options
+     * @param {?=} toastElement
      * @return {?}
      */
-    function (options) {
+    function (options, toastElement) {
         var _this = this;
+        if (toastElement === void 0) { toastElement = NovoToastElement; }
         return new Promise(function (resolve) {
             if (!_this._parentViewContainer) {
                 console.error('No parent view container specified for the ToastService. Set it inside your main application. \nthis.toastService.parentViewContainer = view (ViewContainerRef)');
                 return;
             }
             /** @type {?} */
-            var toast = _this.componentUtils.appendNextToLocation(NovoToastElement, _this._parentViewContainer);
+            var toast = _this.componentUtils.appendNextToLocation(toastElement, _this._parentViewContainer);
             _this.references.push(toast);
             _this.handleAlert(toast.instance, options);
             resolve(toast);
