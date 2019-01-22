@@ -342,7 +342,7 @@ export class NovoPickerElement implements OnInit {
     if (this.clearValueOnSelect) {
       this.term = '';
     } else {
-      if (typeof value === 'string') {
+      if (typeof value === 'string' && !this.config.useGetLabels) {
         this.term = value;
       } else if (value && value.label) {
         this.term = value.label;
