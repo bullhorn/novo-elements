@@ -26,22 +26,22 @@ describe('Elements: NovoDatePickerInputElement', () => {
 
   describe('Method: openPanel()', () => {
     it('should open the Calendar picker panel if the field has not been disabled', () => {
-      //Arrange
+      // Arrange
       component.disabled = false;
       spyOn(component.overlay, 'openPanel');
-      //Act
+      // Act
       component.openPanel();
-      //Assert
+      // Assert
       expect(component.overlay.openPanel).toHaveBeenCalled();
     });
 
     it('should not open the Calendar picker panel if the field has been disabled', () => {
-      //Arrange
+      // Arrange
       component.disabled = true;
       spyOn(component.overlay, 'openPanel');
-      //Act
+      // Act
       component.openPanel();
-      //Assert
+      // Assert
       expect(component.overlay.openPanel).not.toHaveBeenCalled();
     });
   });
@@ -57,68 +57,68 @@ describe('Elements: NovoDatePickerInputElement', () => {
     });
 
     it('should call formatDate if the Enter key has been pressed', () => {
-      //Arrange
+      // Arrange
       const enterEvent: Pick<KeyboardEvent, 'keyCode' | 'target' | 'stopPropagation'> = {
         ...keyboardEvent,
         keyCode: ENTER,
       };
-      //Act
+      // Act
       component._handleKeydown(enterEvent);
-      //Assert
+      // Assert
       expect(component.formatDate).toHaveBeenCalled();
       expect(enterEvent.stopPropagation).toHaveBeenCalled();
     });
 
     it('should call formatDate if the Tab key has been pressed', () => {
-      //Arrange
+      // Arrange
       const tabEvent: Pick<KeyboardEvent, 'keyCode' | 'target' | 'stopPropagation'> = {
         ...keyboardEvent,
         keyCode: TAB,
       };
-      //Act
+      // Act
       component._handleKeydown(tabEvent);
-      //Assert
+      // Assert
       expect(component.formatDate).toHaveBeenCalled();
       expect(tabEvent.stopPropagation).toHaveBeenCalled();
     });
 
     it('should call closePanel if the Tab key has been pressed', () => {
-      //Arrange
+      // Arrange
       const tabEvent: Pick<KeyboardEvent, 'keyCode' | 'target' | 'stopPropagation'> = {
         ...keyboardEvent,
         keyCode: TAB,
       };
-      //Act
+      // Act
       component._handleKeydown(tabEvent);
-      //Assert
+      // Assert
       expect(component.closePanel).toHaveBeenCalled();
       expect(tabEvent.stopPropagation).toHaveBeenCalled();
     });
 
     it('should set value that appears in the field to the value it had before edits were made if the Escape key has been pressed', () => {
-      //Arrange
+      // Arrange
       const escapeEvent: Pick<KeyboardEvent, 'keyCode' | 'target' | 'stopPropagation'> = {
         ...keyboardEvent,
         keyCode: ESCAPE,
       };
       component.formattedValue = 'Test1';
       component.currentValue = 'Test2';
-      //Act
+      // Act
       component._handleKeydown(escapeEvent);
-      //Assert
+      // Assert
       expect(component.formattedValue).toBe('Test2');
       expect(escapeEvent.stopPropagation).toHaveBeenCalled();
     });
 
     it('should call closePanel if the Escape key has been pressed', () => {
-      //Arrange
+      // Arrange
       const escapeEvent: Pick<KeyboardEvent, 'keyCode' | 'target' | 'stopPropagation'> = {
         ...keyboardEvent,
         keyCode: ESCAPE,
       };
-      //Act
+      // Act
       component._handleKeydown(escapeEvent);
-      //Assert
+      // Assert
       expect(component.closePanel).toHaveBeenCalled();
       expect(escapeEvent.stopPropagation).toHaveBeenCalled();
     });
@@ -127,13 +127,13 @@ describe('Elements: NovoDatePickerInputElement', () => {
   describe('Method: _handleBlur()', () => {
     let blurEvent: Pick<FocusEvent, 'type'> = { type: 'blur' };
     it('should reset the value in the field if it is different from the original', () => {
-      //Arrange
+      // Arrange
       spyOn(component.blurEvent, 'emit');
       component.currentValue = 'Test1';
       component.formattedValue = 'Test2';
-      //Act
+      // Act
       component._handleBlur(blurEvent);
-      //Assert
+      // Assert
       expect(component.formattedValue).toBe('Test1');
     });
   });
@@ -142,28 +142,28 @@ describe('Elements: NovoDatePickerInputElement', () => {
     let focusEvent: Pick<FocusEvent, 'type'> = { type: 'focus' };
 
     it('should set the current value to that which is currently in the field upon focusing', () => {
-      //Arrange
+      // Arrange
       spyOn(component.focusEvent, 'emit');
       spyOn(component, 'openPanel').and.callFake(() => {});
       component.currentValue = 'Test1';
       component.formattedValue = 'Test2';
-      //Act
+      // Act
       component._handleFocus(focusEvent);
-      //Assert
+      // Assert
       expect(component.currentValue).toBe('Test2');
     });
   });
 
   describe('Method: _setFormValue()', () => {
     it('should set the currentValue and formattedValue to the same upon saving when this.value is defined', () => {
-      //Arrange
+      // Arrange
       component.value = '06/07/2008';
       component.formattedValue = '';
       component.currentValue = '';
       spyOn(component, 'formatDateValue').and.returnValue(component.value);
-      //Act
+      // Act
       component._setFormValue(component.value);
-      //Assert
+      // Assert
       expect(component.currentValue).toBe('06/07/2008');
       expect(component.formattedValue).toBe('06/07/2008');
     });
