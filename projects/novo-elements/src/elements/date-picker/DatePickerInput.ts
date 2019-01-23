@@ -124,29 +124,35 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       this.overlay.openPanel();
     }
   }
+
   closePanel(): void {
     this.overlay.closePanel();
   }
+
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
   }
   /** END: Convenient Panel Methods. */
 
-  _handleKeydown(event: KeyboardEvent): void {
+  _handleKeydown({ keyCode, target, stopPropagation }: Pick<KeyboardEvent, 'keyCode' | 'target' | 'stopPropagation'>): void {
     if (!this.panelOpen) {
       this.openPanel();
     }
-    if (event.keyCode === ENTER || event.keyCode === TAB) {
-      let value = (event.target as HTMLInputElement).value;
+    if (keyCode === ENTER || keyCode === TAB) {
+      let value = this._getHTMLInputElementValue(target);
       this.formatDate(value, true);
-      if (event.keyCode === TAB) {
+      if (keyCode === TAB) {
         this.closePanel();
       }
-    } else if (event.keyCode === ESCAPE) {
+    } else if (keyCode === ESCAPE) {
       this.formattedValue = this.currentValue;
       this.closePanel();
     }
-    event.stopPropagation();
+    stopPropagation();
+  }
+
+  _getHTMLInputElementValue(target: EventTarget): string {
+    return (target as HTMLInputElement).value;
   }
 
   _handleBlur(event: FocusEvent): void {
