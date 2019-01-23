@@ -41,15 +41,24 @@ export class FormUtils {
     'Person',
     'Placement',
   ];
-  PICKER_TEXT_LIST: string[] = [
+  ENTITY_PICKER_LIST: string[] = [
+    'Candidate',
     'CandidateText',
+    'Client',
     'ClientText',
+    'ClientContact',
     'ClientContactText',
+    'ClientCorporation',
     'ClientCorporationText',
+    'Lead',
     'LeadText',
+    'Opportunity',
     'OpportunityText',
+    'JobOrder',
     'JobOrderText',
+    'CorporateUser',
     'CorporateUserText',
+    'Person',
     'PersonText',
   ];
 
@@ -157,7 +166,7 @@ export class FormUtils {
         type = 'picker';
       }
     } else if (field.optionsUrl && field.inputType === 'SELECT') {
-      if (field.optionsType && ~this.PICKER_TEXT_LIST.indexOf(field.optionsType)) {
+      if (field.optionsType && ~this.ENTITY_PICKER_LIST.indexOf(field.optionsType)) {
         type = 'entitypicker'; // TODO!
       } else {
         type = 'picker';
