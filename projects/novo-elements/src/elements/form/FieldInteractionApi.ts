@@ -543,7 +543,6 @@ export class FieldInteractionApi {
       };
       if (config.optionsUrl || config.optionsUrlBuilder || config.optionsPromise) {
         newConfig = Object.assign(newConfig, {
-          format: config.format,
           options: (query) => {
             if (config.optionsPromise) {
               return config.optionsPromise(query, new CustomHttp(this.http));
@@ -568,6 +567,9 @@ export class FieldInteractionApi {
             });
           },
         });
+        if (config.hasOwnProperty('format')) {
+          newConfig.format = config.format;
+        }
       } else if (config.options) {
         newConfig.options = [...config.options];
       }
