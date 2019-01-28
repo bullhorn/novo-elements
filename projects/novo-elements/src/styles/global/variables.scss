@@ -39,7 +39,7 @@ $contract: #454ea0;
 $jobCode: #696d79;
 $earnCode: #696d79;
 $invoiceStatement: #696d79;
-$billableItem: #696d79;
+$billableCharge: #696d79;
 // Color Applications
 $positive: $ocean;
 $success: $grass;
@@ -88,6 +88,7 @@ $entity-colors: (
   contract: $contract,
   jobCode: $jobCode,
   earnCode: $earnCode,
+  billableCharge: $billableCharge,
 );
 // Generic Color Map
 $app-colors: (
@@ -151,6 +152,7 @@ $dark-colors: (
   navy: $navy,
   contract: $contact,
   mountain: $mountain,
+  billableCharge: $billableCharge,
 );
 // Light map
 $light-colors: (

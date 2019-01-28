@@ -89,8 +89,8 @@ export class EntityColorsExample {
       hex: '696D79',
     },
     {
-      name: 'billable item',
-      variables: ['billableItem'],
+      name: 'billable charge',
+      variables: ['billableCharge'],
       hex: '696D79',
     },
   ];
