@@ -26,7 +26,7 @@ export class PrimaryColorsExample {
     {
       name: 'dark',
       variables: ['dark'],
-      hex: '474747',
+      hex: '3D464D',
     },
     {
       name: 'background',
@@ -34,9 +34,34 @@ export class PrimaryColorsExample {
       hex: 'F4F4F4',
     },
     {
+      name: 'background dark',
+      variables: ['background dark'],
+      hex: 'E2E2E2',
+    },
+    {
       name: 'neutral',
       variables: ['neutral'],
       hex: '4F5361',
+    },
+    {
+      name: 'success',
+      variables: ['success'],
+      hex: '8CC152',
+    },
+    {
+      name: 'negative',
+      variables: ['negative'],
+      hex: 'DA4453',
+    },
+    {
+      name: 'warning',
+      variables: ['warning'],
+      hex: 'F6B042',
+    },
+    {
+      name: 'empty',
+      variables: ['empty'],
+      hex: 'CCCDCC',
     },
   ];
   options: any;
@@ -59,7 +84,7 @@ export class PrimaryColorsExample {
     this.options = {
       title: `#${color.hex}`,
       message: 'Copied to your clipboard',
-      theme: color.name,
+      theme: color.variables[0],
       icon: 'clipboard',
       position: 'growlTopRight',
     };

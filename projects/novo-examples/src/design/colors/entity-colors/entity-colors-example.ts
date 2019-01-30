@@ -64,11 +64,6 @@ export class EntityColorsExample {
       hex: '0B344F',
     },
     {
-      name: 'navigation',
-      variables: ['navigation'],
-      hex: '2F384F',
-    },
-    {
       name: 'sendout',
       variables: ['sendout'],
       hex: '747884',
@@ -115,7 +110,7 @@ export class EntityColorsExample {
     this.options = {
       title: `#${color.hex}`,
       message: 'Copied to your clipboard',
-      theme: color.name,
+      theme: color.variables[0],
       icon: 'clipboard',
       position: 'growlTopRight',
     };

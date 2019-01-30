@@ -198,6 +198,11 @@ novo-toast {
       background: $color;
     }
   }
+  @each $entity, $color in $app-colors {
+    &.#{$entity} {
+      background: $color;
+    }
+  }
   &.text {
     background: $dark;
   }

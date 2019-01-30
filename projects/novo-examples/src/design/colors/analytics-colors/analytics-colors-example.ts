@@ -58,6 +58,11 @@ export class AnalyticsColorsExample {
       variables: ['lavender'],
       hex: '967ADC',
     },
+    {
+      name: 'mountain',
+      variables: ['mountain'],
+      hex: '9678B6',
+    },
   ];
 
   options: any;
@@ -80,7 +85,7 @@ export class AnalyticsColorsExample {
     this.options = {
       title: `#${color.hex}`,
       message: 'Copied to your clipboard',
-      theme: color.name,
+      theme: color.variables[0],
       icon: 'clipboard',
       position: 'growlTopRight',
     };
