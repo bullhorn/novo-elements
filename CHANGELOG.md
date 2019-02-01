@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.5.0"></a>
+# [3.5.0](https://github.com/bullhorn/novo-elements/compare/v3.4.0...v3.5.0) (2019-02-01)
+
+
+### Bug Fixes
+
+* **DataTable:** Fixed data table expansion behavior ([2afac62](https://github.com/bullhorn/novo-elements/commit/2afac62))
+* **Picker:** Fixed potential memory leak issue in NovoPickerElement ([#890](https://github.com/bullhorn/novo-elements/issues/890)) ([fbca21d](https://github.com/bullhorn/novo-elements/commit/fbca21d))
+
+
+### Features
+
+* **picker:** Added container div to picker chips form control 2 ([#892](https://github.com/bullhorn/novo-elements/issues/892)) ([1bc4a8c](https://github.com/bullhorn/novo-elements/commit/1bc4a8c))
+* **Picker:** Add flag to force using getLabels function even if value is text ([#904](https://github.com/bullhorn/novo-elements/issues/904)) ([c787978](https://github.com/bullhorn/novo-elements/commit/c787978))
+* **Picker:** Changing all entity id pickers to use full entity results ([#902](https://github.com/bullhorn/novo-elements/issues/902)) ([0afbda6](https://github.com/bullhorn/novo-elements/commit/0afbda6))
+
+
+
 <a name="3.4.1"></a>
 ## [3.4.1](https://github.com/bullhorn/novo-elements/compare/v3.5.1...v3.4.1) (2019-01-10)
 
