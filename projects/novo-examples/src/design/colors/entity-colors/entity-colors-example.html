@@ -1,6 +1,6 @@
 <article class="color-blocks entity-colors">
   <div *ngFor="let color of entityColors" class="block">
-      <div class="color-square bgc-{{color.name}}" (click)="copyLink(color)">
+      <div class="color-square bgc-{{color.variables[0]}}" (click)="copyLink(color)">
         <h3 class="color-text"><span>#</span>{{color.hex}}</h3>
       </div>
       <h6>{{color.name}}</h6>
