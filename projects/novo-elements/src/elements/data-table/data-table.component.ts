@@ -88,7 +88,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
             <novo-data-table-cell *cdkCellDef="let row" [resized]="resized" [column]="column" [row]="row" [template]="columnToTemplate[column.id]" [class.empty]="column?.type === 'action' && !column?.label" [class.button-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)" [class.dropdown-cell]="column?.type === 'action' && column?.action?.options"></novo-data-table-cell>
           </ng-container>
           <novo-data-table-header-row *cdkHeaderRowDef="displayedColumns" data-automation-id="novo-data-table-header-row"></novo-data-table-header-row>
-          <novo-data-table-row *cdkRowDef="let row; columns: displayedColumns" [novoDataTableExpand]="detailRowTemplate" [row]="row" [id]="name + '-' + row[rowIdentifier]" [dataAutomationId]="row[rowIdentifier]"></novo-data-table-row>
+          <novo-data-table-row *cdkRowDef="let row; columns: displayedColumns" [ngClass]="{ 'active': row[rowIdentifier] === activeRowIdentifier }" [novoDataTableExpand]="detailRowTemplate" [row]="row" [id]="name + '-' + row[rowIdentifier]" [dataAutomationId]="row[rowIdentifier]"></novo-data-table-row>
         </cdk-table>
         <div class="novo-data-table-footer" *ngIf="templates['footer']">
           <ng-container *ngTemplateOutlet="templates['footer']; context: {$implicit: columns, data: dataSource.data}"></ng-container>
@@ -245,6 +245,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   name: string = 'novo-data-table';
   @Input()
   rowIdentifier: string = 'id';
+  @Input()
+  activeRowIdentifier: string = '';
   // prettier-ignore
   @Input()
   trackByFn: Function = (index, item) => item.id
