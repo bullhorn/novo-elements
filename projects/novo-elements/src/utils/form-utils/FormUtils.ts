@@ -60,6 +60,7 @@ export class FormUtils {
     'CorporateUserText',
     'Person',
     'PersonText',
+    'Placement',
   ];
 
   constructor(public labels: NovoLabelService, public optionsService: OptionsService) {}
