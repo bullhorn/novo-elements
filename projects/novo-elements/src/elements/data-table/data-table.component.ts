@@ -158,9 +158,8 @@ import { StaticDataTableService } from './services/static-data-table.service';
         </div>
       </div>
     </div>
-
-    /ng-container>
-        </div>
+    </ng-container>
+        </div
     <ng-template novoTemplate="textCellTemplate" let-row let-col="col">
       <span [style.width.px]="col?.width" [style.min-width.px]="col?.width" [style.max-width.px]="col?.width">{{
         row[col.id] | dataTableInterpolate: col
@@ -238,7 +237,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         <ng-container *ngTemplateOutlet="templates['expandedRow']; context: { $implicit: row }"></ng-container>
       </div>
     </ng-template>
-           <ng-container *ngTemplat
+          <ng-container *ngTemplate
     <ng-content></ng-content>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
