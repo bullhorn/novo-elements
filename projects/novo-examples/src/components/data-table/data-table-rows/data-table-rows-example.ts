@@ -56,7 +56,7 @@ export class DataTableRowsExample {
       type: 'action',
       enabled: true,
       handlers: {
-        click: this.log.bind(this),
+        click: this.preview.bind(this),
       },
       action: {
         icon: 'preview',
@@ -251,6 +251,8 @@ export class DataTableRowsExample {
   private staticDataSet2: MockData[] = [];
   private staticDataSet3: MockData[] = [];
 
+  public selectedRecordId: string = '';
+
   constructor(private ref: ChangeDetectorRef, private modalService: NovoModalService) {
     for (let i = 0; i < 1000; i++) {
       let day = i < 500 ? dateFns.subDays(new Date(), i) : dateFns.addDays(new Date(), i - 500);
@@ -318,6 +320,11 @@ export class DataTableRowsExample {
 
   public log(event: { originalEvent: MouseEvent; row: MockData }): void {
     console.log('[DataTable] Event Triggered!', event); // tslint:disable-line
+  }
+
+  public preview(event: { originalEvent: MouseEvent; row: MockData }): void {
+    this.selectedRecordId = event.row.id.toString();
+    this.log(event);
   }
 
   public checkDisabled(row: MockData): boolean {
