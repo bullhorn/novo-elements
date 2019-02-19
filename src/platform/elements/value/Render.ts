@@ -376,14 +376,15 @@ export class RenderPipe implements PipeTransform {
    */
   options(value: any, list: any): any {
     if (!Array.isArray(value)) {
-        value = [value];
+      value = [value];
     }
     return value.map((item: any) => {
-        for (const option of list) {
-            if (option.value === item) {
-                return option.label;
-            }
+      for (const option of list) {
+        if (option.value === item) {
+          return option.label;
         }
+      }
+      return item;
     });
   }
 
