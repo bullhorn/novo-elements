@@ -975,7 +975,49 @@ export class TilesPage {}
 
 @Component({
   selector: 'value-page',
-  template: `<h1>Value/Details/Summary <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/value">(source)</a></h1><p>Used to render data based on its field type provided in meta. It has two themes, DEFAULT - horizontal view and MOBILE - vertical view</p><h2>Mobile Theme</h2><h5>Value/Details/Summary</h5><p>Render SCALAR fields</p><p><code-example example="basic-value"></code-example></p><h5>Category Value</h5><p>Render TO_ONE fields</p><p><code-example example="category-value"></code-example></p><h5>Using Icons w/Values</h5><p>Render fields with one or multiple icons on the right with an onclick event that calls a function on the meta object</p><p><code-example example="icon-value"></code-example></p><h5>CorporateUser</h5><p>Render TO_ONE fields with CorporateUser as an Associated Entity</p><p><code-example example="corporate-user-value"></code-example></p><h5>Custom Formatter</h5><p>Render Entity TO_ONE fields as links</p><p><code-example example="formatter-value"></code-example></p><h5>External Links</h5><p>Render external links</p><p><code-example example="external-link-value"></code-example></p><h5>DateTime</h5><p>Render DateTime and Timestamp fields in the localized Date format</p><p><code-example example="date-time-value"></code-example></p><h5>Address</h5><p>Render Address fields</p><p><code-example example="address-value"></code-example></p><h5>Associated Entities</h5><p>Render associated fields</p><p><code-example example="associated-value"></code-example></p><h5>Entity Lists</h5><p>Render entity lists</p><p><code-example example="entity-list-value"></code-example></p><h5>Multi Options</h5><p>Render multi option fields (Radio and Checkbox)</p><p><code-example example="multi-option-value"></code-example></p`,
+  template: `
+    <h1>
+      Value/Details/Summary
+      <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/value">(source)</a>
+    </h1>
+    <p>
+      Used to render data based on its field type provided in meta. It has two themes, DEFAULT - horizontal view and MOBILE - vertical view
+    </p>
+    <h2>Mobile Theme</h2>
+    <h5>Value/Details/Summary</h5>
+    <p>Render SCALAR fields</p>
+    <p><code-example example="basic-value"></code-example></p>
+    <h5>Category Value</h5>
+    <p>Render TO_ONE fields</p>
+    <p><code-example example="category-value"></code-example></p>
+    <h5>Using Icons w/Values</h5>
+    <p>Render fields with one or multiple icons on the right with an onclick event that calls a function on the meta object</p>
+    <p><code-example example="icon-value"></code-example></p>
+    <h5>CorporateUser</h5>
+    <p>Render TO_ONE fields with CorporateUser as an Associated Entity</p>
+    <p><code-example example="corporate-user-value"></code-example></p>
+    <h5>Custom Formatter</h5>
+    <p>Render Entity TO_ONE fields as links</p>
+    <p><code-example example="formatter-value"></code-example></p>
+    <h5>External Links</h5>
+    <p>Render external links</p>
+    <p><code-example example="external-link-value"></code-example></p>
+    <h5>DateTime</h5>
+    <p>Render DateTime and Timestamp fields in the localized Date format</p>
+    <p><code-example example="date-time-value"></code-example></p>
+    <h5>Address</h5>
+    <p>Render Address fields</p>
+    <p><code-example example="address-value"></code-example></p>
+    <h5>Associated Entities</h5>
+    <p>Render associated fields</p>
+    <p><code-example example="associated-value"></code-example></p>
+    <h5>Entity Lists</h5>
+    <p>Render entity lists</p>
+    <p><code-example example="entity-list-value"></code-example></p>
+    <h5>Multi Options</h5>
+    <p>Render multi option fields (Checkbox, radio, etc.)</p>
+    <p><code-example example="multi-option-value"></code-example></p>
+  `,
 })
 export class ValuePage {}
 
