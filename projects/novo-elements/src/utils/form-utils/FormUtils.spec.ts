@@ -104,6 +104,16 @@ describe('Utils: FormUtils', () => {
     });
   });
 
+  describe('Method: removeControls(formGroup, controls)', () => {
+    it('should remove controls from a form group.', () => {
+      expect(formUtils.removeControls).toBeDefined();
+      let formGroup: FormGroup = formUtils.toFormGroup([{ key: 'Test' }, { key: 'Test2' }]);
+      formUtils.removeControls(formGroup, [{ key: 'Test2' }]);
+      // Can't use `.Test2` because the formGroup isn't returned
+      expect(formGroup.controls['Test2']).not.toBeDefined();
+    });
+  });
+
   describe('Method: toFormGroupFromFieldset(fieldsets)', () => {
     it('should create FormGroups from a collection of FieldSets that contain controls.', () => {
       expect(formUtils.toFormGroup).toBeDefined();

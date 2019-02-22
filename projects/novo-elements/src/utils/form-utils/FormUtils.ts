@@ -86,6 +86,12 @@ export class FormUtils {
     });
   }
 
+  removeControls(formGroup: NovoFormGroup, controls: Array<NovoControlConfig>): void {
+    controls.forEach((control) => {
+      formGroup.removeControl(control.key);
+    });
+  }
+
   /**
    * @name toFormGroupFromFieldset
    * @param fieldsets
