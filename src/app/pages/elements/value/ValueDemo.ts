@@ -13,6 +13,7 @@ let AssociatedValueDemoTpl = require('./templates/AssociatedValueDemo.html');
 let DateTimeValueDemoTpl = require('./templates/DateTimeValueDemo.html');
 let ExternalLinkValueDemoTpl = require('./templates/ExternalLinkValueDemo.html');
 let EntityListDemoTpl = require('./templates/EntityListDemo.html');
+let MultiOptionDemoTpl = require('./templates/MultiOptionDemo.html');
 const template = `
 <div class="container">
     <h1>Value/Details/Summary <small><a target="_blank" href="https://github.com/bullhorn/novo-elements/blob/master/src/elements/value">(source)</a></small></h1>
@@ -60,6 +61,10 @@ const template = `
     <p>Render entity lists</p>
     <div class="example value-demo">${EntityListDemoTpl}</div>
     <code-snippet [code]="EntityListDemoTpl"></code-snippet>
+    <h5>Multi Options</h5>
+    <p>Render multi option fields (Checkbox, radio, etc.) </p>
+    <div class="example value-demo">${MultiOptionDemoTpl}</div>
+    <code-snippet [code]="MultiOptionDemoTpl"></code-snippet>
 </div>
 `;
 
@@ -78,6 +83,7 @@ export class ValueDemoComponent {
   private AddressValueDemoTpl: string = AddressValueDemoTpl;
   private AssociatedValueDemoTpl: string = AssociatedValueDemoTpl;
   private EntityListDemoTpl: string = EntityListDemoTpl;
+  private MultiOptionDemoTpl: string = MultiOptionDemoTpl;
   private toggleCount: number = 0;
   private checked: boolean = true;
   simpleData = 1234567890;
@@ -221,6 +227,16 @@ export class ValueDemoComponent {
     associatedEntity: {
       entity: 'CorporateUser',
     },
+  };
+  multiOptionData = ['1', '3'];
+  multiOptionMeta = {
+    inputType: 'SELECT',
+    options: [
+      { label: 'New Lead', value: '1' },
+      { label: 'Old Lead', value: '2' },
+      { label: 'Active', value: '3' },
+      { label: 'Archived', value: '4' },
+    ],
   };
   increment() {
     this.toggleCount++;
