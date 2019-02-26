@@ -83,8 +83,14 @@ export class Helpers {
     return typeof obj === 'string';
   }
 
-  static isNumber(obj: any) {
-    return obj && !isNaN(parseInt(obj, 10));
+  static isNumber(val: any) {
+    if (typeof val === 'number') {
+      return !isNaN(val);
+    } else if (typeof val === 'string') {
+      return val.length > 0 && val !== '.' && /^\d*\.?\d*$/.test(val);
+    } else {
+      return val && !isNaN(parseInt(val, 10));
+    }
   }
 
   /**
