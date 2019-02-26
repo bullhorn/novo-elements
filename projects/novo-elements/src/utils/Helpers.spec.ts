@@ -75,4 +75,19 @@ describe('Utils: Helpers', () => {
       expect(Helpers.getNextElementSibling(origin)).toEqual(null);
     });
   });
+
+  describe('Method: isNumber(val)', () => {
+    it('should return true', () => {
+      const numbers: any[] = [0, 1, 10.75, '25', '8.75', '5.', '.5', '0.10', '0'];
+      numbers.forEach((number) => {
+        expect(Helpers.isNumber(number)).toEqual(true);
+      });
+    });
+    it('should return false', () => {
+      const notNumbers: any[] = [NaN, undefined, null, '', [], {}, 'test', '.'];
+      notNumbers.forEach((notNumber) => {
+        expect(Helpers.isNumber(notNumber)).toBeFalsy();
+      });
+    });
+  });
 });

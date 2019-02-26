@@ -83,8 +83,8 @@ export class Helpers {
     return typeof obj === 'string';
   }
 
-  static isNumber(obj: any) {
-    return obj && !isNaN(parseInt(obj, 10));
+  static isNumber(val: any) {
+    return !isNaN(parseFloat(val));
   }
 
   /**
