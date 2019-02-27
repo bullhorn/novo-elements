@@ -432,6 +432,11 @@ xdescribe('Render', () => {
     it('should be defined.', () => {
       expect(pipe.options).toBeDefined();
     });
+    it('should return an array of corresponding labels for values passed', () => {
+      let values = ['1', '3'];
+      let list = [{ label: 'Archived', value: '1' }, { label: 'New Lead', value: '2' }, { label: 'Old Lead', value: '3' }];
+      expect(pipe.options(values, list)).toEqual(['Archived', 'Old Lead']);
+    });
   });
 
   describe('Function: getNumberDecimalPlaces(number)', () => {

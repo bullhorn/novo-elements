@@ -1014,6 +1014,9 @@ export class TilesPage {}
     <h5>Entity Lists</h5>
     <p>Render entity lists</p>
     <p><code-example example="entity-list-value"></code-example></p>
+    <h5>Multi Options</h5>
+    <p>Render multi option fields (Checkbox, radio, etc.)</p>
+    <p><code-example example="multi-option-value"></code-example></p>
   `,
 })
 export class ValuePage {}
