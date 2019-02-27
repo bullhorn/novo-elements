@@ -84,7 +84,7 @@ describe('Utils: Helpers', () => {
       });
     });
     it('should return false', () => {
-      const notNumbers: any[] = [NaN, undefined, null, '', [], {}, 'test', '.'];
+      const notNumbers: any[] = [NaN, undefined, null, '', [], {}, 'test', '.', '1f'];
       notNumbers.forEach((notNumber) => {
         expect(Helpers.isNumber(notNumber)).toBeFalsy();
       });

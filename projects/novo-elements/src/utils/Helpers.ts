@@ -84,7 +84,11 @@ export class Helpers {
   }
 
   static isNumber(val: any) {
-    return !isNaN(parseFloat(val));
+    if (typeof val === 'string') {
+      return val.length > 0 && val !== '.' && /^\d*\.?\d*$/.test(val);
+    } else {
+      return !isNaN(parseFloat(val));
+    }
   }
 
   /**
