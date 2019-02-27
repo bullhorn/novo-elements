@@ -45329,7 +45329,7 @@ var RenderPipe = /** @class */ (function () {
         else if (args.optionsType === 'SkillText') {
             type = 'SkillText';
         }
-        else if (args.options || args.inputType === 'SELECT') {
+        else if (args.options || args.inputType === 'SELECT' || args.inputType === 'CHECKBOX') {
             type = 'Options';
         }
         else if (['MONEY', 'PERCENTAGE', 'HTML', 'SSN'].indexOf(args.dataSpecialization) > -1) {
@@ -45581,13 +45581,16 @@ var RenderPipe = /** @class */ (function () {
      * @return {?}
      */
     function (value, list) {
-        var e_3, _a;
-        try {
+        if (!Array.isArray(value)) {
+            value = [value];
+        }
+        return value.map(function (item) {
+            var e_3, _a;
             try {
                 for (var list_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__values"])(list), list_2_1 = list_2.next(); !list_2_1.done; list_2_1 = list_2.next()) {
-                    var item = list_2_1.value;
-                    if (item.value === value) {
-                        return item.label;
+                    var option = list_2_1.value;
+                    if (option.value === item) {
+                        return option.label;
                     }
                 }
             }
@@ -45598,11 +45601,8 @@ var RenderPipe = /** @class */ (function () {
                 }
                 finally { if (e_3) throw e_3.error; }
             }
-        }
-        catch (e) {
-            // do nothing
-        }
-        return value;
+            return item;
+        });
     };
     /**
      * @param {?} value
@@ -55862,7 +55862,7 @@ var ActivityTableRenderers = /** @class */ (function () {
 /*!***************************************************!*\
   !*** ./dist/novo-examples/fesm5/novo-examples.js ***!
   \***************************************************/
-/*! exports provided: ExampleData, EXAMPLE_COMPONENTS, EXAMPLE_LIST, NovoExamplesModule, AceEditorPage, ButtonsPage, CalendarPage, ComponentsPage, DataTablePage, DropdownPage, IconPage, LoadingPage, QuickNotePage, SearchPage, SlidesPage, SwitchPage, TablePage, ColorsPage, CompositionPage, DesignPage, IconographyPage, TypographyPage, ChipsPage, DatePickerPage, EditorPage, FormControlsPage, FormGroupsPage, FormPage, MultiPickerPage, PickerPage, RadioButtonsPage, SelectPage, TilesPage, ValuePage, HomePage, CardsPage, ExpansionPage, HeaderPage, LayoutsPage, ListPage, StepperPage, TabsPage, PatternsPage, TemplatesPage, ChomskyPage, FieldInteractionsPage, ModalPage, PipesPage, PopOverPage, SecurityPage, TipWellPage, ToasterPage, TooltipPage, PAGE_LIST, NovoExamplesRoutesModule, ɵgw, ɵgu, ɵgv, ɵgt, ɵgx, ɵa, ɵb, ɵc, ɵd, ɵe, ɵf, ɵg, ɵh, ɵi, ɵj, ɵk, ɵl, ɵm, ɵn, ɵo, ɵp, ɵq, ɵr, ɵs, ɵt, ɵu, ɵv, ɵw, ɵx, ɵy, ɵz, ɵba, ɵbb, ɵbc, ɵbd, ɵbe, ɵbf, ɵbg, ɵbh, ɵbi, ɵbj, ɵbk, ɵbl, ɵbn, ɵbm, ɵbo, ɵbp, ɵbq, ɵbr, ɵbs, ɵbt, ɵbu, ɵbv, ɵbw, ɵbx, ɵby, ɵbz, ɵca, ɵcb, ɵcc, ɵcd, ɵce, ɵcf, ɵcg, ɵch, ɵci, ɵcj, ɵck, ɵcl, ɵcm, ɵcn, ɵco, ɵcp, ɵcq, ɵcr, ɵcs, ɵct, ɵcu, ɵcv, ɵcw, ɵcx, ɵcy, ɵcz, ɵda, ɵdb, ɵdc, ɵdd, ɵde, ɵdf, ɵdg, ɵdh, ɵdi, ɵdj, ɵdk, ɵdl, ɵdm, ɵdn, ɵdo, ɵdp, ɵdq, ɵdr, ɵds, ɵdt, ɵdu, ɵdv, ɵdw, ɵdx, ɵdy, ɵdz, ɵea, ɵeb, ɵec, ɵed, ɵee, ɵef, ɵeg, ɵeh, ɵei, ɵej, ɵek, ɵel, ɵem, ɵen, ɵeo, ɵep, ɵeq, ɵer, ɵes, ɵet, ɵeu, ɵev, ɵew, ɵex, ɵey, ɵez, ɵfa, ɵfb, ɵfc, ɵfd, ɵfe, ɵff, ɵfg, ɵfh, ɵfi, ɵfj, ɵfk, ɵfl, ɵfm, ɵfo, ɵfn, ɵfq, ɵfp, ɵfr, ɵfs, ɵft, ɵfu, ɵfv, ɵfw, ɵfx, ɵfy, ɵfz, ɵga, ɵgb, ɵgc, ɵgd, ɵge, ɵgf, ɵgg, ɵgh, ɵgi, ɵgj, ɵgk, ɵgl, ɵgm, ɵgn, ɵgo, ɵgp, ɵgq, ɵgr, ɵgs */
+/*! exports provided: ExampleData, EXAMPLE_COMPONENTS, EXAMPLE_LIST, NovoExamplesModule, AceEditorPage, ButtonsPage, CalendarPage, ComponentsPage, DataTablePage, DropdownPage, IconPage, LoadingPage, QuickNotePage, SearchPage, SlidesPage, SwitchPage, TablePage, ColorsPage, CompositionPage, DesignPage, IconographyPage, TypographyPage, ChipsPage, DatePickerPage, EditorPage, FormControlsPage, FormGroupsPage, FormPage, MultiPickerPage, PickerPage, RadioButtonsPage, SelectPage, TilesPage, ValuePage, HomePage, CardsPage, ExpansionPage, HeaderPage, LayoutsPage, ListPage, StepperPage, TabsPage, PatternsPage, TemplatesPage, ChomskyPage, FieldInteractionsPage, ModalPage, PipesPage, PopOverPage, SecurityPage, TipWellPage, ToasterPage, TooltipPage, PAGE_LIST, NovoExamplesRoutesModule, ɵgx, ɵgv, ɵgw, ɵgu, ɵgy, ɵa, ɵb, ɵc, ɵd, ɵe, ɵf, ɵg, ɵh, ɵi, ɵj, ɵk, ɵl, ɵm, ɵn, ɵo, ɵp, ɵq, ɵr, ɵs, ɵt, ɵu, ɵv, ɵw, ɵx, ɵy, ɵz, ɵba, ɵbb, ɵbc, ɵbd, ɵbe, ɵbf, ɵbg, ɵbh, ɵbi, ɵbj, ɵbk, ɵbl, ɵbn, ɵbm, ɵbo, ɵbp, ɵbq, ɵbr, ɵbs, ɵbt, ɵbu, ɵbv, ɵbw, ɵbx, ɵby, ɵbz, ɵca, ɵcb, ɵcc, ɵcd, ɵce, ɵcf, ɵcg, ɵch, ɵci, ɵcj, ɵck, ɵcl, ɵcm, ɵcn, ɵco, ɵcp, ɵcq, ɵcr, ɵcs, ɵct, ɵcu, ɵcv, ɵcw, ɵcx, ɵcy, ɵcz, ɵda, ɵdb, ɵdc, ɵdd, ɵde, ɵdf, ɵdg, ɵdh, ɵdi, ɵdj, ɵdk, ɵdl, ɵdm, ɵdn, ɵdo, ɵdp, ɵdq, ɵdr, ɵds, ɵdt, ɵdu, ɵdv, ɵdw, ɵdx, ɵdy, ɵdz, ɵea, ɵeb, ɵec, ɵed, ɵee, ɵef, ɵeg, ɵeh, ɵei, ɵej, ɵek, ɵel, ɵem, ɵen, ɵeo, ɵep, ɵeq, ɵer, ɵes, ɵet, ɵeu, ɵev, ɵew, ɵex, ɵey, ɵez, ɵfa, ɵfb, ɵfc, ɵfd, ɵfe, ɵff, ɵfg, ɵfh, ɵfi, ɵfj, ɵfk, ɵfl, ɵfm, ɵfn, ɵfp, ɵfo, ɵfr, ɵfq, ɵfs, ɵft, ɵfu, ɵfv, ɵfw, ɵfx, ɵfy, ɵfz, ɵga, ɵgb, ɵgc, ɵgd, ɵge, ɵgf, ɵgg, ɵgh, ɵgi, ɵgj, ɵgk, ɵgl, ɵgm, ɵgn, ɵgo, ɵgp, ɵgq, ɵgr, ɵgs, ɵgt */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55922,11 +55922,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TooltipPage", function() { return TooltipPage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PAGE_LIST", function() { return PAGE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoExamplesRoutesModule", function() { return NovoExamplesRoutesModule; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgw", function() { return CodeExampleComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgu", function() { return CodeSnippetComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgv", function() { return HighlightJS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgt", function() { return NovoExamplesSharedModule; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgx", function() { return StackblitzButtonModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgx", function() { return CodeExampleComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgv", function() { return CodeSnippetComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgw", function() { return HighlightJS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgu", function() { return NovoExamplesSharedModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgy", function() { return StackblitzButtonModule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵa", function() { return BasicAceExample; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵb", function() { return ButtonDialogueExample; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵc", function() { return ButtonDynamicExample; });
@@ -56033,75 +56033,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵdz", function() { return ExternalLinkValueExample; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵea", function() { return FormatterValueExample; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeb", function() { return IconValueExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵec", function() { return BasicCardExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵed", function() { return CardConfigExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵee", function() { return AccordionExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵef", function() { return BasicExpansionExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeg", function() { return LazyExpansionExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeh", function() { return BasicHeaderExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵei", function() { return CondensedHeaderExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵej", function() { return HeaderSearchbarExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵek", function() { return HeaderSubtitleExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵel", function() { return BasicListExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵem", function() { return ThemedListExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵen", function() { return StepperHorizontalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeo", function() { return StepperVerticalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵep", function() { return TabsBasicExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeq", function() { return TabsColorExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵer", function() { return TabsCondensedExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵes", function() { return TabsRouterExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵet", function() { return TabsVerticalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeu", function() { return ActivitySectionExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵev", function() { return RecordHeaderExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵew", function() { return DateTranslationsExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵex", function() { return NumberTranslationsExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵey", function() { return PluralTranslationsExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵez", function() { return SimpleTranslationsExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfa", function() { return TranslationsVariablesExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfb", function() { return FiAddingRemovingExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfc", function() { return FiAsyncExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfd", function() { return FiCalculationExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfe", function() { return FiConfirmExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵff", function() { return FiEnableDisableExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfg", function() { return FiGlobalsExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfh", function() { return FiHideShowExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfi", function() { return FiMessagingExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfj", function() { return FiModifyOptionsExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfk", function() { return FiRequiredExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfl", function() { return FiTooltipExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfm", function() { return FiValidationExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfo", function() { return CustomModalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfn", function() { return ModalCustomDemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfq", function() { return ErrorModalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfp", function() { return ModalErrorDemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfr", function() { return ModalAddFormDemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfs", function() { return ModalAddFormExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵft", function() { return ModalEditFormDemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfu", function() { return ModalEditFormExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfv", function() { return ModalSuccessDemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfw", function() { return SuccessModalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfx", function() { return ModalWarningDemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfy", function() { return WarningModalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfz", function() { return PluralizeExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵga", function() { return PopOverAutoPlacementExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgb", function() { return PopOverBehaviorsExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgc", function() { return PopOverDynamicExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgd", function() { return PopOverHorizontalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵge", function() { return PopOverPlacementExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgf", function() { return PopOverVerticalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgg", function() { return SecurityExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgh", function() { return BasicTipWellExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgi", function() { return ButtonlessTipWellExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgj", function() { return HtmlTipWellExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgk", function() { return IconTipWellExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgl", function() { return ToastServiceExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgm", function() { return ToastUsageExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgn", function() { return TooltipAlignExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgo", function() { return TooltipOptionsExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgp", function() { return TooltipPlacementExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgq", function() { return TooltipSizesExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgr", function() { return TooltipToggleExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgs", function() { return TooltipTypesExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵec", function() { return MultiOptionValueExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵed", function() { return BasicCardExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵee", function() { return CardConfigExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵef", function() { return AccordionExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeg", function() { return BasicExpansionExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeh", function() { return LazyExpansionExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵei", function() { return BasicHeaderExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵej", function() { return CondensedHeaderExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵek", function() { return HeaderSearchbarExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵel", function() { return HeaderSubtitleExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵem", function() { return BasicListExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵen", function() { return ThemedListExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeo", function() { return StepperHorizontalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵep", function() { return StepperVerticalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeq", function() { return TabsBasicExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵer", function() { return TabsColorExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵes", function() { return TabsCondensedExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵet", function() { return TabsRouterExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeu", function() { return TabsVerticalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵev", function() { return ActivitySectionExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵew", function() { return RecordHeaderExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵex", function() { return DateTranslationsExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵey", function() { return NumberTranslationsExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵez", function() { return PluralTranslationsExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfa", function() { return SimpleTranslationsExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfb", function() { return TranslationsVariablesExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfc", function() { return FiAddingRemovingExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfd", function() { return FiAsyncExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfe", function() { return FiCalculationExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵff", function() { return FiConfirmExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfg", function() { return FiEnableDisableExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfh", function() { return FiGlobalsExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfi", function() { return FiHideShowExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfj", function() { return FiMessagingExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfk", function() { return FiModifyOptionsExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfl", function() { return FiRequiredExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfm", function() { return FiTooltipExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfn", function() { return FiValidationExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfp", function() { return CustomModalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfo", function() { return ModalCustomDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfr", function() { return ErrorModalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfq", function() { return ModalErrorDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfs", function() { return ModalAddFormDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵft", function() { return ModalAddFormExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfu", function() { return ModalEditFormDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfv", function() { return ModalEditFormExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfw", function() { return ModalSuccessDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfx", function() { return SuccessModalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfy", function() { return ModalWarningDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfz", function() { return WarningModalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵga", function() { return PluralizeExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgb", function() { return PopOverAutoPlacementExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgc", function() { return PopOverBehaviorsExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgd", function() { return PopOverDynamicExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵge", function() { return PopOverHorizontalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgf", function() { return PopOverPlacementExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgg", function() { return PopOverVerticalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgh", function() { return SecurityExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgi", function() { return BasicTipWellExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgj", function() { return ButtonlessTipWellExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgk", function() { return HtmlTipWellExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgl", function() { return IconTipWellExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgm", function() { return ToastServiceExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgn", function() { return ToastUsageExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgo", function() { return TooltipAlignExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgp", function() { return TooltipOptionsExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgq", function() { return TooltipPlacementExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgr", function() { return TooltipSizesExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgs", function() { return TooltipToggleExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgt", function() { return TooltipTypesExample; });
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/index.js");
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(date_fns__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var chomsky__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! chomsky */ "./dist/chomsky/fesm5/chomsky.js");
@@ -66312,6 +66313,39 @@ var IconValueExample = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
+ * \@title Multi Option Value Example
+ */
+var MultiOptionValueExample = /** @class */ (function () {
+    function MultiOptionValueExample() {
+        this.theme = novo_elements__WEBPACK_IMPORTED_MODULE_12__["NOVO_VALUE_THEME"].DEFAULT;
+        this.data = ['1', '3'];
+        this.meta = {
+            name: 'status',
+            label: 'Status',
+            inputType: 'SELECT',
+            options: [
+                { label: 'New Lead', value: '1' },
+                { label: 'Old Lead', value: '2' },
+                { label: 'Active', value: '3' },
+                { label: 'Archived', value: '4' },
+            ],
+        };
+    }
+    MultiOptionValueExample.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_11__["Component"], args: [{
+                    selector: 'multi-option-value-example',
+                    template: "<novo-value [data]=\"data\" [meta]=\"meta\" [theme]=\"theme\"></novo-value>\n",
+                    styles: [""]
+                }] }
+    ];
+    return MultiOptionValueExample;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
  * \@title Basic Cards
  */
 var BasicCardExample = /** @class */ (function () {
@@ -70661,6 +70695,13 @@ var EXAMPLE_COMPONENTS = {
         cssSource: "%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A",
         htmlSource: "%3Cnovo-value%20%5Bdata%5D%3D%22data%22%20%5Bmeta%5D%3D%22meta%22%20%5Btheme%5D%3D%22theme%22%3E%3C%2Fnovo-value%3E%0A"
     },
+    'multi-option-value': {
+        title: 'Multi Option Value Example',
+        component: MultiOptionValueExample,
+        tsSource: "import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20NOVO_VALUE_TYPE%2C%20NOVO_VALUE_THEME%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Multi%20Option%20Value%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'multi-option-value-example'%2C%0A%20%20templateUrl%3A%20'multi-option-value-example.html'%2C%0A%20%20styleUrls%3A%20%5B'multi-option-value-example.css'%5D%2C%0A%7D)%0Aexport%20class%20MultiOptionValueExample%20%7B%0A%20%20public%20theme%20%3D%20NOVO_VALUE_THEME.DEFAULT%3B%0A%20%20public%20data%3A%20any%20%3D%20%5B'1'%2C%20'3'%5D%3B%0A%20%20public%20meta%3A%20any%20%3D%20%7B%0A%20%20%20%20name%3A%20'status'%2C%0A%20%20%20%20label%3A%20'Status'%2C%0A%20%20%20%20inputType%3A%20'SELECT'%2C%0A%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%7B%20label%3A%20'New%20Lead'%2C%20value%3A%20'1'%20%7D%2C%0A%20%20%20%20%20%20%7B%20label%3A%20'Old%20Lead'%2C%20value%3A%20'2'%20%7D%2C%0A%20%20%20%20%20%20%7B%20label%3A%20'Active'%2C%20value%3A%20'3'%20%7D%2C%0A%20%20%20%20%20%20%7B%20label%3A%20'Archived'%2C%20value%3A%20'4'%20%7D%2C%0A%20%20%20%20%5D%2C%0A%20%20%7D%3B%0A%7D%0A",
+        cssSource: "%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A",
+        htmlSource: "%3Cnovo-value%20%5Bdata%5D%3D%22data%22%20%5Bmeta%5D%3D%22meta%22%20%5Btheme%5D%3D%22theme%22%3E%3C%2Fnovo-value%3E%0A"
+    },
     'basic-card': {
         title: 'Basic Cards',
         component: BasicCardExample,
@@ -71214,6 +71255,7 @@ var EXAMPLE_LIST = [
     ExternalLinkValueExample,
     FormatterValueExample,
     IconValueExample,
+    MultiOptionValueExample,
     BasicCardExample,
     CardConfigExample,
     AccordionExample,
@@ -72395,7 +72437,7 @@ var ValuePage = /** @class */ (function () {
     ValuePage.decorators = [
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_11__["Component"], args: [{
                     selector: 'value-page',
-                    template: "<h1>Value/Details/Summary <a href=\"https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/value\">(source)</a></h1><p>Used to render data based on its field type provided in meta. It has two themes, DEFAULT - horizontal view and MOBILE - vertical view</p><h2>Mobile Theme</h2><h5>Value/Details/Summary</h5><p>Render SCALAR fields</p><p><code-example example=\"basic-value\"></code-example></p><h5>Category Value</h5><p>Render TO_ONE fields</p><p><code-example example=\"category-value\"></code-example></p><h5>Using Icons w/Values</h5><p>Render fields with one or multiple icons on the right with an onclick event that calls a function on the meta object</p><p><code-example example=\"icon-value\"></code-example></p><h5>CorporateUser</h5><p>Render TO_ONE fields with CorporateUser as an Associated Entity</p><p><code-example example=\"corporate-user-value\"></code-example></p><h5>Custom Formatter</h5><p>Render Entity TO_ONE fields as links</p><p><code-example example=\"formatter-value\"></code-example></p><h5>External Links</h5><p>Render external links</p><p><code-example example=\"external-link-value\"></code-example></p><h5>DateTime</h5><p>Render DateTime and Timestamp fields in the localized Date format</p><p><code-example example=\"date-time-value\"></code-example></p><h5>Address</h5><p>Render Address fields</p><p><code-example example=\"address-value\"></code-example></p><h5>Associated Entities</h5><p>Render associated fields</p><p><code-example example=\"associated-value\"></code-example></p><h5>Entity Lists</h5><p>Render entity lists</p><p><code-example example=\"entity-list-value\"></code-example></p>"
+                    template: "<h1>Value/Details/Summary <a href=\"https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/value\">(source)</a></h1><p>Used to render data based on its field type provided in meta. It has two themes, DEFAULT - horizontal view and MOBILE - vertical view</p><h2>Mobile Theme</h2><h5>Value/Details/Summary</h5><p>Render SCALAR fields</p><p><code-example example=\"basic-value\"></code-example></p><h5>Category Value</h5><p>Render TO_ONE fields</p><p><code-example example=\"category-value\"></code-example></p><h5>Using Icons w/Values</h5><p>Render fields with one or multiple icons on the right with an onclick event that calls a function on the meta object</p><p><code-example example=\"icon-value\"></code-example></p><h5>CorporateUser</h5><p>Render TO_ONE fields with CorporateUser as an Associated Entity</p><p><code-example example=\"corporate-user-value\"></code-example></p><h5>Custom Formatter</h5><p>Render Entity TO_ONE fields as links</p><p><code-example example=\"formatter-value\"></code-example></p><h5>External Links</h5><p>Render external links</p><p><code-example example=\"external-link-value\"></code-example></p><h5>DateTime</h5><p>Render DateTime and Timestamp fields in the localized Date format</p><p><code-example example=\"date-time-value\"></code-example></p><h5>Address</h5><p>Render Address fields</p><p><code-example example=\"address-value\"></code-example></p><h5>Associated Entities</h5><p>Render associated fields</p><p><code-example example=\"associated-value\"></code-example></p><h5>Entity Lists</h5><p>Render entity lists</p><p><code-example example=\"entity-list-value\"></code-example></p><h5>Multi Options</h5><p>Render multi option fields (Checkbox, radio, etc.)</p><p><code-example example=\"multi-option-value\"></code-example></p>"
                 }] }
     ];
     return ValuePage;
