@@ -45348,6 +45348,8 @@ var RenderPipe = /** @class */ (function () {
             case 'Address':
             case 'Address1':
             case 'AddressWithoutCountry':
+            case 'SecondaryAddress':
+            case 'BillingAddress':
                 /** @type {?} */
                 var country = findByCountryId(Number(value.countryName));
                 text = '';
