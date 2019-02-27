@@ -97,6 +97,34 @@ xdescribe('Render', () => {
       };
       expect(pipe.render(mockValue, mockArgs)).toBe(mockValue);
     });
+    it('should render an SecondaryAddress.', () => {
+      expect(pipe.render).toBeDefined();
+      let mockValue: any = {
+        address1: 'Derp',
+        address2: '264 Hess Rd',
+        city: 'Leola',
+        state: 'PA',
+        zip: '17540',
+      };
+      let mockArgs: any = {
+        type: 'SecondaryAddress',
+      };
+      expect(pipe.render(mockValue, mockArgs)).toBe(mockValue);
+    });
+    it('should render an BillingAddress.', () => {
+      expect(pipe.render).toBeDefined();
+      let mockValue: any = {
+        address1: 'Derp',
+        address2: '264 Hess Rd',
+        city: 'Leola',
+        state: 'PA',
+        zip: '17540',
+      };
+      let mockArgs: any = {
+        type: 'BillingAddress',
+      };
+      expect(pipe.render(mockValue, mockArgs)).toBe(mockValue);
+    });
     // TODO: DateTime
     // WILL BREAK THE NEXT DAY
     xit('should render a timestamp.', () => {
@@ -431,6 +459,11 @@ xdescribe('Render', () => {
   describe('Function: options(value, list)', () => {
     it('should be defined.', () => {
       expect(pipe.options).toBeDefined();
+    });
+    it('should return an array of corresponding labels for values passed', () => {
+      let values = ['1', '3'];
+      let list = [{ label: 'Archived', value: '1' }, { label: 'New Lead', value: '2' }, { label: 'Old Lead', value: '3' }];
+      expect(pipe.options(values, list)).toEqual(['Archived', 'Old Lead']);
     });
   });
 

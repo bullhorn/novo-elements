@@ -187,7 +187,7 @@ export class RenderPipe implements PipeTransform {
       type = 'Country';
     } else if (args.optionsType === 'SkillText') {
       type = 'SkillText';
-    } else if (args.options || args.inputType === 'SELECT') {
+    } else if (args.options || args.inputType === 'SELECT' || args.inputType === 'CHECKBOX') {
       type = 'Options';
     } else if (['MONEY', 'PERCENTAGE', 'HTML', 'SSN'].indexOf(args.dataSpecialization) > -1) {
       type = this.capitalize(args.dataSpecialization.toLowerCase());
@@ -200,6 +200,8 @@ export class RenderPipe implements PipeTransform {
       case 'Address':
       case 'Address1':
       case 'AddressWithoutCountry':
+      case 'SecondaryAddress':
+      case 'BillingAddress':
         let country: any = findByCountryId(Number(value.countryName));
         text = '';
         if (value.address1 || value.address2) {
@@ -372,16 +374,17 @@ export class RenderPipe implements PipeTransform {
    * @param list - list of options (label/value pairs)
    */
   options(value: any, list: any): any {
-    try {
-      for (const item of list) {
-        if (item.value === value) {
-          return item.label;
+    if (!Array.isArray(value)) {
+      value = [value];
+    }
+    return value.map((item: any) => {
+      for (const option of list) {
+        if (option.value === item) {
+          return option.label;
         }
       }
-    } catch (e) {
-      // do nothing
-    }
-    return value;
+      return item;
+    });
   }
 
   getNumberDecimalPlaces(value: any): any {

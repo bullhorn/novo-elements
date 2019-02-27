@@ -65,3 +65,9 @@ Render associated fields
 Render entity lists
 
 <code-example example="entity-list-value"></code-example>
+
+##### Multi Options
+
+Render multi option fields (Checkbox, radio, etc.)
+
+<code-example example="multi-option-value"></code-example>
