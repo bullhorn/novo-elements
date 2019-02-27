@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "2.21.0",
+  "version": "2.22.0",
   "description": "Bullhorn's NOVO Element Repository for Angular 2",
   "license": "MIT",
   "scripts": {
@@ -19,7 +19,7 @@
     "galaxy": "galaxy analyze",
     "analyze-mr": "galaxy analyze-mr",
     "release": "standard-version",
-    "postrelease": "git push --follow-tags origin master; npm run build; cd dist && npm publish",
+    "postrelease": "git push --follow-tags origin support/2.x.x; npm run build; cd dist && npm publish",
     "snapshot-publish": "bash snapshot-publish"
   },
   "lint-staged": {
