@@ -97,6 +97,34 @@ xdescribe('Render', () => {
       };
       expect(pipe.render(mockValue, mockArgs)).toBe(mockValue);
     });
+    it('should render an SecondaryAddress.', () => {
+      expect(pipe.render).toBeDefined();
+      let mockValue: any = {
+        address1: 'Derp',
+        address2: '264 Hess Rd',
+        city: 'Leola',
+        state: 'PA',
+        zip: '17540',
+      };
+      let mockArgs: any = {
+        type: 'SecondaryAddress',
+      };
+      expect(pipe.render(mockValue, mockArgs)).toBe(mockValue);
+    });
+    it('should render an BillingAddress.', () => {
+      expect(pipe.render).toBeDefined();
+      let mockValue: any = {
+        address1: 'Derp',
+        address2: '264 Hess Rd',
+        city: 'Leola',
+        state: 'PA',
+        zip: '17540',
+      };
+      let mockArgs: any = {
+        type: 'BillingAddress',
+      };
+      expect(pipe.render(mockValue, mockArgs)).toBe(mockValue);
+    });
     // TODO: DateTime
     // WILL BREAK THE NEXT DAY
     xit('should render a timestamp.', () => {
