@@ -1855,7 +1855,12 @@ Helpers = /** @class */ (function () {
      * @return {?}
      */
     function (val) {
-        return !isNaN(parseFloat(val));
+        if (typeof val === 'string') {
+            return val.length > 0 && val !== '.' && /^\d*\.?\d*$/.test(val);
+        }
+        else {
+            return !isNaN(parseFloat(val));
+        }
     };
     /**
      * Checks to see if the object is a undefined or null
