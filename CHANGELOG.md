@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.6.0"></a>
+# [3.6.0](https://github.com/bullhorn/novo-elements/compare/v3.2.0...v3.6.0) (2019-03-01)
+
+
+### Bug Fixes
+
+* **address:** Update address disabled state ([#857](https://github.com/bullhorn/novo-elements/issues/857)) ([07feb74](https://github.com/bullhorn/novo-elements/commit/07feb74))
+* **button:** Only set icon on button if exists ([#884](https://github.com/bullhorn/novo-elements/issues/884)) ([ce70633](https://github.com/bullhorn/novo-elements/commit/ce70633))
+* **controlGroup:** Decrement currentIndex so it stays up to date ([#915](https://github.com/bullhorn/novo-elements/issues/915)) ([407ffa9](https://github.com/bullhorn/novo-elements/commit/407ffa9))
+* **Currency:** Allow Comma or Period as decimal for non-English users ([#862](https://github.com/bullhorn/novo-elements/issues/862)) ([7b67c44](https://github.com/bullhorn/novo-elements/commit/7b67c44))
+* **DataTable:** Fixed data table expansion behavior ([2afac62](https://github.com/bullhorn/novo-elements/commit/2afac62))
+* **demo:** Update Dead links ([#876](https://github.com/bullhorn/novo-elements/issues/876)) ([5e122fd](https://github.com/bullhorn/novo-elements/commit/5e122fd))
+* **FormUtils:** Respect Allow Multiple false for to-many association fields ([#874](https://github.com/bullhorn/novo-elements/issues/874)) ([40fd5d5](https://github.com/bullhorn/novo-elements/commit/40fd5d5))
+* **picker:** respect allow multiple false for picker fields ([#846](https://github.com/bullhorn/novo-elements/issues/846)) ([7124173](https://github.com/bullhorn/novo-elements/commit/7124173))
+* **Picker:** Fixed potential memory leak issue in NovoPickerElement ([#890](https://github.com/bullhorn/novo-elements/issues/890)) ([fbca21d](https://github.com/bullhorn/novo-elements/commit/fbca21d))
+* **row-chips:** Various picker changes to support row chip pickers ([#845](https://github.com/bullhorn/novo-elements/issues/845)) ([ca3e635](https://github.com/bullhorn/novo-elements/commit/ca3e635))
+
+
+### Features
+
+* **countries:** Updates to Countries.ts file ([#919](https://github.com/bullhorn/novo-elements/issues/919)) ([82ac51f](https://github.com/bullhorn/novo-elements/commit/82ac51f))
+* **EntityPickerResults:** Update Job, Placement, and Opportunity results to include ID ([#885](https://github.com/bullhorn/novo-elements/issues/885)) ([3e00f23](https://github.com/bullhorn/novo-elements/commit/3e00f23))
+* **fieldInteractions:** modified to make format optional ([#903](https://github.com/bullhorn/novo-elements/issues/903)) ([2ab46f4](https://github.com/bullhorn/novo-elements/commit/2ab46f4))
+* **formUtils:** add remove controls function to form utils ([#916](https://github.com/bullhorn/novo-elements/issues/916)) ([ab48194](https://github.com/bullhorn/novo-elements/commit/ab48194))
+* **helpers:** Extended the logic of isNumber ([#917](https://github.com/bullhorn/novo-elements/issues/917)) ([5f099d3](https://github.com/bullhorn/novo-elements/commit/5f099d3))
+* **picker:** Added container div to picker chips form control ([#883](https://github.com/bullhorn/novo-elements/issues/883)) ([70258db](https://github.com/bullhorn/novo-elements/commit/70258db))
+* **picker:** Added container div to picker chips form control 2 ([#892](https://github.com/bullhorn/novo-elements/issues/892)) ([1bc4a8c](https://github.com/bullhorn/novo-elements/commit/1bc4a8c))
+* **Picker:** Add flag to force using getLabels function even if value is text ([#904](https://github.com/bullhorn/novo-elements/issues/904)) ([c787978](https://github.com/bullhorn/novo-elements/commit/c787978))
+* **Picker:** Changing all entity id pickers to use full entity results ([#902](https://github.com/bullhorn/novo-elements/issues/902)) ([0afbda6](https://github.com/bullhorn/novo-elements/commit/0afbda6))
+* **RowChips:** Add empty state message for disabled RowChips and RowChip delete functionality ([#868](https://github.com/bullhorn/novo-elements/issues/868)) ([d9499c7](https://github.com/bullhorn/novo-elements/commit/d9499c7))
+
+
+
 <a name="3.5.1"></a>
 ## [3.5.1](https://github.com/bullhorn/novo-elements/compare/v3.5.0...v3.5.1) (2019-02-01)
 
