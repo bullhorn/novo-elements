@@ -222,7 +222,12 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
       if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
         this.source.getLabels(noLabels).then((result) => {
           for (let value of result) {
-            if (value.hasOwnProperty('label')) {
+            if (value.hasOwnProperty('label') && this.source.useGetLabels) {
+              this.items.push({
+                value: value.value,
+                label: value.label,
+              });
+            } else if (value.hasOwnProperty('label')) {
               this.items.push({
                 value,
                 label: value.label,
