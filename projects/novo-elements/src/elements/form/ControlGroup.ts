@@ -1,3 +1,4 @@
+// NG
 import {
   Component,
   Directive,
@@ -15,8 +16,8 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormArray } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-
-import { NovoFormGroup, NovoFormControl } from './NovoFormControl';
+// App
+import { NovoFormGroup } from './NovoFormGroup';
 import { BaseControl } from './controls/BaseControl';
 import { FormUtils } from './../../utils/form-utils/FormUtils';
 import { Helpers } from '../../utils/Helpers';

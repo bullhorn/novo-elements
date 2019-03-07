@@ -1,7 +1,6 @@
-// NG2
+// NG
 import { Injectable } from '@angular/core';
-// Vendor
-// APP
+// App
 import {
   AddressControl,
   BaseControl,
@@ -24,7 +23,8 @@ import {
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from '../Helpers';
 import { NovoFieldset, FormField } from '../../elements/form/FormInterfaces';
-import { NovoFormControl, NovoFormGroup } from '../../elements/form/NovoFormControl';
+import { NovoFormControl } from '../../elements/form/NovoFormControl';
+import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from './../../services/options/OptionsService';
 

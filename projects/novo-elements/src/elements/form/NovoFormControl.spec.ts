@@ -1,46 +1,7 @@
-// NG2
+// NG
 import { Validators } from '@angular/forms';
-
 // App
-import { NovoFormControl, NovoFormGroup } from './NovoFormControl';
-
-describe('Elements: NovoFormGroup', () => {
-  let component = new NovoFormGroup({});
-
-  describe('Method: enableAllControls()', () => {
-    it('should enable all controls', () => {
-      component.controls = {
-        firstName: new NovoFormControl('John', {}),
-        lastName: new NovoFormControl('Doe', {}),
-      };
-      for (let key in component.controls) {
-        spyOn(component.controls[key], 'enable');
-      }
-      component.enableAllControls();
-      for (let key in component.controls) {
-        expect((component.controls[key] as NovoFormControl).readOnly).toEqual(false);
-        expect((component.controls[key] as NovoFormControl).enable).toHaveBeenCalled();
-      }
-    });
-  });
-
-  describe('Method: disableAllControls()', () => {
-    it('should disable all controls', () => {
-      component.controls = {
-        firstName: new NovoFormControl('John', {}),
-        lastName: new NovoFormControl('Doe', {}),
-      };
-      for (let key in component.controls) {
-        spyOn(component.controls[key], 'disable');
-      }
-      component.disableAllControls();
-      for (let key in component.controls) {
-        expect((component.controls[key] as NovoFormControl).readOnly).toEqual(true);
-        expect((component.controls[key] as NovoFormControl).disable).toHaveBeenCalled();
-      }
-    });
-  });
-});
+import { NovoFormControl } from './NovoFormControl';
 
 describe('Elements: NovoFormControl', () => {
   let component = new NovoFormControl('1', { validators: [] });
@@ -78,7 +39,7 @@ describe('Elements: NovoFormControl', () => {
       jest.spyOn(component, 'setValidators');
       jest.spyOn(component, 'updateValueAndValidity');
     });
-    it("should add new a validator and update the value and validity if it wasn't required before.", () => {
+    it('should add new a validator and update the value and validity if it wasn\'t required before.', () => {
       expect(component.setRequired).toBeDefined();
       component.hasRequiredValidator = false;
       component.setRequired(true);
@@ -88,7 +49,7 @@ describe('Elements: NovoFormControl', () => {
       expect(component.setValidators).toHaveBeenCalledWith([Validators.required]);
       expect(component.updateValueAndValidity).toHaveBeenCalled();
     });
-    it("should add new a validator and update the value and validity if it wasn't required before.", () => {
+    it('should add new a validator and update the value and validity if it wasn\'t required before.', () => {
       expect(component.setRequired).toBeDefined();
       component.hasRequiredValidator = true;
       component.setRequired(false);
