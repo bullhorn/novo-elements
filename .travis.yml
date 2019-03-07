@@ -16,11 +16,14 @@ env:
 install:
   - npm install
   - npm install -g angular-cli-ghpages
+  - npm install -g wait-on 
 
 script:
   - npm run lint
   - npm test
   - npm run build
+  - npm start & wait-on http://localhost:4200
+  - cypress run
   - npm run build:demo
 
 after_success:
