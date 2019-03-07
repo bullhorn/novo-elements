@@ -1,5 +1,5 @@
 // NG2
-import { Validators, AbstractControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 // App
 import { NovoFormControl, NovoFormGroup } from './NovoFormControl';
