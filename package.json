@@ -29,8 +29,8 @@
     "snapshot-publish": "bash snapshot-publish",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "e2e": "concurrently \"npm start\" \"wait-on http-get://localhost:4200 && npm run cy:run\" --kill-others --success",
-    "e2e-gui": "concurrently \"npm start\" \"wait-on http-get://localhost:4200 && npm run cy:open\" --kill-others --success"
+    "e2e": "concurrently \"npm start\" \"wait-on http-get://localhost:4200 && npm run cy:run\" --success all --kill-others ",
+    "e2e-gui": "concurrently \"npm start\" \"wait-on http-get://localhost:4200 && npm run cy:open\" --success all --kill-others "
   },
   "jest": {
     "preset": "jest-preset-angular",
