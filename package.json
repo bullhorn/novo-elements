@@ -27,7 +27,10 @@
     "release:elements": "standard-version",
     "postrelease:elements": "git push --follow-tags origin master; npm run build; cd dist/novo-elements && npm publish",
     "snapshot-publish": "bash snapshot-publish",
-    "e2e": "cypress open"
+  "cy:open": "cypress open",
+  "cy:run": "cypress run",
+  "e2e": "concurrently \"npm run start\" \"wait-on http-get://localhost:4200 && npm run cy:run\" --kill-others",
+  "e2e-gui": "concurrently \"npm run start\" \"wait-on http-get://localhost:4200 && npm run cy:open\" --kill-others"
   },
   "jest": {
     "preset": "jest-preset-angular",
@@ -97,6 +100,7 @@
     "@types/jasminewd2": "~2.0.6",
     "@types/node": "^10.12.18",
     "codelyzer": "^4.5.0",
+    "concurrently": "^4.1.0",
     "conventional-changelog-cli": "^2.0.11",
     "cypress": "^3.1.5",
     "glob": "^7.1.3",
@@ -122,6 +126,7 @@
     "tslib": "^1.9.3",
     "tslint": "^5.12.1",
     "typescript": "~3.2.2",
+    "wait-on": "^3.2.0",
     "webpack": "^4.28.4"
   }
 }
