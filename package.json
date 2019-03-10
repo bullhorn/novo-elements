@@ -27,10 +27,10 @@
     "release:elements": "standard-version",
     "postrelease:elements": "git push --follow-tags origin master; npm run build; cd dist/novo-elements && npm publish",
     "snapshot-publish": "bash snapshot-publish",
-  "cy:open": "cypress open",
-  "cy:run": "cypress run",
-  "e2e": "concurrently \"npm run start\" \"wait-on http-get://localhost:4200 && npm run cy:run\" --kill-others",
-  "e2e-gui": "concurrently \"npm run start\" \"wait-on http-get://localhost:4200 && npm run cy:open\" --kill-others"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "e2e": "concurrently \"npm start\" \"wait-on http-get://localhost:4200 && npm run cy:run\" --kill-others --success last",
+    "e2e-gui": "concurrently \"npm start\" \"wait-on http-get://localhost:4200 && npm run cy:open\" --kill-others --success last"
   },
   "jest": {
     "preset": "jest-preset-angular",
