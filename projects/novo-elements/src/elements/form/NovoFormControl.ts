@@ -122,7 +122,6 @@ export class NovoFormControl extends FormControl {
     this.customControlConfig = control.customControlConfig;
     this.warning = control.warning;
 
-
     // Reactive Form, need to enable/disable, can't bind to [disabled]
     if (this.readOnly) {
       this.disable();
@@ -250,22 +249,5 @@ export class NovoFormControl extends FormControl {
     this.markAsDirty();
     this.markAsTouched();
     this.setErrors(Object.assign({}, this.errors, { custom: message }));
-  }
-}
-
-export class NovoFormGroup extends FormGroup {
-  public fieldInteractionEvents: EventEmitter<IFieldInteractionEvent> = new EventEmitter();
-  public layout: string;
-  public edit: boolean;
-  public currentEntity: string;
-  public currentEntityId: string;
-  public associations: object;
-  public _value: any;
-  get value() {
-    return this.getRawValue();
-  }
-
-  set value(v: any) {
-    this._value = v;
   }
 }

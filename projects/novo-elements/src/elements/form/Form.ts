@@ -1,6 +1,6 @@
-// NG2
+// NG
 import { AfterContentInit, Component, Input, OnInit, ContentChildren, QueryList } from '@angular/core';
-// APP
+// App
 import { NovoFormGroup } from './FormInterfaces';
 import { Helpers } from '../../utils/Helpers';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';

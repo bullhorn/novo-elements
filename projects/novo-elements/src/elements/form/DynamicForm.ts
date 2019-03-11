@@ -1,19 +1,16 @@
-// NG2
+// NG
 import {
   Component,
   Input,
   OnInit,
   OnChanges,
   SimpleChanges,
-  ViewChild,
-  ViewContainerRef,
-  AfterViewInit,
   ElementRef,
   ContentChildren,
   QueryList,
   AfterContentInit,
 } from '@angular/core';
-// APP
+// App
 import { Helpers } from './../../utils/Helpers';
 import { NovoFieldset, NovoFormGroup } from './FormInterfaces';
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';

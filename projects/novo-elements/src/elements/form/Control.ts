@@ -19,7 +19,6 @@ import {
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 // APP
-import { NovoFormGroup } from './FormInterfaces';
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';

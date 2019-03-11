@@ -903,3 +903,34 @@ export const MockMetaForDisabledForm = {
     },
   ],
 };
+export const MockMetaForForm = {
+  entity: 'ENTITY_NAME',
+  entityMetaUrl: '',
+  label: 'ENTITY_LABEL',
+  fields: [
+    {
+      name: 'textbox1',
+      type: 'text',
+      label: 'TextBox 1',
+      required: true,
+      sortOrder: 110,
+      maxLength: 10,
+    },
+    {
+      name: 'textbox2',
+      type: 'text',
+      label: 'TextBox 2',
+      required: true,
+      sortOrder: 120,
+      maxLength: 10,
+    },
+    {
+      name: 'textbox3',
+      type: 'text',
+      label: 'TextBox 3',
+      required: true,
+      sortOrder: 130,
+      maxLength: 10,
+    },
+  ],
+};
