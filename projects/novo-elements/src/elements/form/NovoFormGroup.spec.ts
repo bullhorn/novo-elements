@@ -13,6 +13,7 @@ describe('Elements: NovoFormGroup', () => {
       };
       for (let key in component.controls) {
         spyOn(component.controls[key], 'enable');
+        (component.controls[key] as NovoFormControl).readOnly = true;
       }
       component.enableAllControls();
       for (let key in component.controls) {
@@ -30,6 +31,7 @@ describe('Elements: NovoFormGroup', () => {
       };
       for (let key in component.controls) {
         spyOn(component.controls[key], 'disable');
+        (component.controls[key] as NovoFormControl).readOnly = false;
       }
       component.disableAllControls();
       for (let key in component.controls) {
