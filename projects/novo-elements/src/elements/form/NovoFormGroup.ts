@@ -24,15 +24,19 @@ export class NovoFormGroup extends FormGroup {
 
   public enableAllControls(): void {
     for (let key in this.controls) {
-      (this.controls[key] as NovoFormControl).readOnly = false;
-      this.controls[key].enable();
+      if ((this.controls[key] as NovoFormControl).readOnly) {
+        (this.controls[key] as NovoFormControl).readOnly = false;
+        this.controls[key].enable();
+      }
     }
   }
 
   public disableAllControls(): void {
     for (let key in this.controls) {
-      (this.controls[key] as NovoFormControl).readOnly = true;
-      this.controls[key].disable();
+      if (!(this.controls[key] as NovoFormControl).readOnly) {
+        (this.controls[key] as NovoFormControl).readOnly = true;
+        this.controls[key].disable();
+      }
     }
   }
 }

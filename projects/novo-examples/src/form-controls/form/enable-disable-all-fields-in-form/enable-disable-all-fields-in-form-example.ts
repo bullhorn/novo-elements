@@ -16,6 +16,7 @@ import { MockMetaForForm } from '../MockMeta';
 export class EnableDisableAllFieldsInFormExample {
   public controls: any;
   public form: any;
+  public disabled: boolean = false;
 
   constructor(public formUtils: FormUtils) {
     // Updating form
@@ -32,12 +33,9 @@ export class EnableDisableAllFieldsInFormExample {
     this.form = formUtils.toFormGroupFromFieldset(this.controls);
   }
 
-  public get buttonText(): string {
-    return this.form.controls.textbox.readOnly ? 'Enable fields' : 'Disable fields';
-  }
-
   public toggleEnableDisableAllFields(): void {
-    if (this.form.controls.textbox.readOnly) {
+    this.disabled = !this.disabled;
+    if (this.disabled) {
       this.form.enableAllControls();
     } else {
       this.form.disableAllControls();
