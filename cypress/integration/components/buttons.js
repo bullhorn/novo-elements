@@ -1,23 +1,26 @@
-const COLORS = [
-  'positive',
-  'success',
-  'negative',
-  'warning',
-  'black',
-  'grey',
-  'dark',
-  'light',
-  'pulse',
-  'neutral'
-];
+const COLORS = {
+  positive: '#4a89dc',
+  success: '#8cc152',
+  negative: '#da4453',
+  warning: '#f6b042',
+  black: '#000000',
+  grey: '#999999',
+  dark: '#3d464d',
+  light: '#d9dadc',
+  pulse: '#3bafda',
+  neutral: '#4f5361',
+  white: '#fff'
+};
 
-const THEMES = [
-  'primary',
-  'secondary',
-  'dialogue',
-  'standard',
-  'icon'
-];
+const THEMES = {
+  basic: [
+    'primary',
+    'secondary',
+    'standard',
+    'dialogue',
+    'icon'
+  ]
+};
 
 context('Demo: Buttons', () => {
   beforeEach(() => {
@@ -25,60 +28,14 @@ context('Demo: Buttons', () => {
     cy.visit(baseURL + '/#/components/buttons')
   });
 
-  context('themes', () => {
-      it(theme, () => {
-        let selector = `demo-buttons-${theme} > button`;
+  context('basic buttons', () => {
+      it('theme', () => {
+        let selector = `button-overview-example > button`;
         let i = 0;
-        COLORS.forEach(color => {
-          cy.get(selector).eq(i).should('have.class', theme);
-          cy.get(selector).eq(i).should('have.class', COLORS[i]);
-          i++;
-        });
-        COLORS.forEach(color => {
-          cy.get(selector).eq(i).should('have.class', theme);
-          cy.get(selector).eq(i).should('have.attr', 'disabled');
+        THEMES.basic.forEach(theme => {
+          cy.get(selector).eq(i).should('have.attr','theme',theme);
           i++;
         });
       });
-      it(theme, () => {
-        let selector = `demo-buttons-${theme} > button`;
-        let i = 0;
-        COLORS.forEach(color => {
-          cy.get(selector).eq(i).should('have.class', theme);
-          cy.get(selector).eq(i).should('have.class', COLORS[i]);
-          i++;
-        });
-        COLORS.forEach(color => {
-          cy.get(selector).eq(i).should('have.class', theme);
-          cy.get(selector).eq(i).should('have.attr', 'disabled');
-          i++;
-        });
-      });
-      it(theme, () => {
-        let selector = `demo-buttons-${theme} > button`;
-        let i = 0;
-        COLORS.forEach(color => {
-          cy.get(selector).eq(i).should('have.class', theme);
-          cy.get(selector).eq(i).should('have.class', COLORS[i]);
-          i++;
-        });
-        COLORS.forEach(color => {
-          cy.get(selector).eq(i).should('have.class', theme);
-          cy.get(selector).eq(i).should('have.attr', 'disabled');
-          i++;
-        });
-      });
-  });
-
-  context('other', () => {
-    it('loading', () => {
-      cy.get('demo-buttons-loading > button')
-        .eq(0)
-        .should('have.class', 'primary')
-        .click()
-        .should('have.class', 'loading')
-        .wait(3001)
-        .and('not.have.class', 'loading');
-    });
   });
 });
