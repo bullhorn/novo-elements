@@ -9,6 +9,7 @@ import {
   ContentChildren,
   QueryList,
   AfterContentInit,
+  ViewChild,
 } from '@angular/core';
 // App
 import { Helpers } from './../../utils/Helpers';
@@ -19,14 +20,27 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 @Component({
   selector: 'novo-fieldset-header',
   template: `
-        <h6><i [class]="icon || 'bhi-section'"></i>{{title}}</h6>
+        <h6>
+          <ng-template *ngIf="title; else customHeadingWrapper">
+            <i [class]="icon || 'bhi-section'"></i>{{title}}
+          </ng-template>
+          <div #customHeadingWrapper>
+            <ng-content></ng-content>
+          </div>
+        </h6>
     `,
 })
-export class NovoFieldsetHeaderElement {
+export class NovoFieldsetHeaderElement implements AfterContentInit {
   @Input()
-  title: string;
+  title?: string = '';
   @Input()
   icon: string;
+  @ViewChild('customHeadingWrapper') customHeadingWrapper;
+  public useCustomHeading: boolean = false;
+
+  ngAfterContentInit(): void {
+    this.useCustomHeading = this.customHeadingWrapper.nativeElement.childNodes.length > 0;
+  }
 }
 
 @Component({
