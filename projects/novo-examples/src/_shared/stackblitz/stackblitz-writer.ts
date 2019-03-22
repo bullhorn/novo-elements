@@ -8,7 +8,7 @@ const COPYRIGHT = `Copyright 2018 Bullhorn Inc. All Rights Reserved.
     Use of this source code is governed by an MIT-style license that
     can be found in the LICENSE file at http://angular.io/license`;
 
-const TEMPLATE_PATH = '/assets/stackblitz/';
+const TEMPLATE_PATH = './assets/stackblitz/';
 const TEMPLATE_FILES = ['index.html', 'styles.scss', 'polyfills.ts', '.angular-cli.json', 'main.ts'];
 
 const TAGS: string[] = ['angular', 'bullhon', 'novo-elements', 'example'];
@@ -169,7 +169,7 @@ export class StackblitzWriter {
       // Replace the component name in `main.ts`.
       // Replace `import {NovoDocsExample} from 'novo-docs-example'`
       // will be replaced as `import {ButtonDemo} from './button-demo'`
-      fileContent = fileContent.replace(/{NovoDocsExample}/g, `{${data.componentName}}`);
+      fileContent = fileContent.replace(/{ NovoDocsExample }/g, `{ ${data.componentName} }`);
 
       // Replace `declarations: [NovoDocsExample]`
       // will be replaced as `declarations: [ButtonDemo]`
