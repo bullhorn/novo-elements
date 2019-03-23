@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NovoElementsModule } from 'novo-elements';
+import { NovoElementsModule, FieldInteractionApi, NovoToastService, NovoModalService } from 'novo-elements';
 import { NovoDocsExample } from './app/novo-docs-example';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { NovoDocsExample } from './app/novo-docs-example';
   entryComponents: [NovoDocsExample],
   declarations: [NovoDocsExample],
   bootstrap: [NovoDocsExample],
-  providers: [],
+  providers: [FieldInteractionApi, NovoToastService, NovoModalService],
 })
 export class AppModule {}
 
