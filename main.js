@@ -71851,13 +71851,13 @@ var STACKBLITZ_URL = 'https://run.stackblitz.com/api/angular/v1';
 /** @type {?} */
 var COPYRIGHT = "Copyright 2018 Bullhorn Inc. All Rights Reserved.\n    Use of this source code is governed by an MIT-style license that\n    can be found in the LICENSE file at http://angular.io/license";
 /** @type {?} */
-var TEMPLATE_PATH = '/assets/stackblitz/';
+var TEMPLATE_PATH = './assets/stackblitz/';
 /** @type {?} */
 var TEMPLATE_FILES = ['index.html', 'styles.scss', 'polyfills.ts', '.angular-cli.json', 'main.ts'];
 /** @type {?} */
 var TAGS = ['angular', 'bullhon', 'novo-elements', 'example'];
 /** @type {?} */
-var angularVersion = '>=6.0.0-beta.0 <7.0.0';
+var angularVersion = '^7.2.0';
 /** @type {?} */
 var dependencies = {
     '@angular/cdk': angularVersion,
@@ -71870,11 +71870,20 @@ var dependencies = {
     '@angular/platform-browser': angularVersion,
     '@angular/platform-browser-dynamic': angularVersion,
     '@angular/router': angularVersion,
-    'novo-elements': '2.15.0',
+    'novo-elements': '3.6.0',
     'angular-in-memory-web-api': '~0.5.0',
-    'core-js': '^2.4.1',
-    rxjs: '>=6.0.0-beta.0 <7.0.0',
+    'core-js': '^2.6.2',
+    rxjs: '^6.3.3',
+    'rxjs-compat': '^6.3.3',
+    '@bullhorn/dragula': '1.0.1',
+    'ace-builds': '1.4.2',
+    'angular2-text-mask': '9.0.0',
+    brace: '0.11.1',
+    'classlist.js': '^1.1.20150312',
+    'date-fns': '1.30.1',
+    'post-robot': '9.0.30',
     'web-animations-js': '^2.3.1',
+    'text-mask-addons': '^3.8.0',
     'zone.js': '^0.8.14',
     hammerjs: '^2.0.8',
     moment: '^2.18.1',
@@ -72097,7 +72106,7 @@ var StackblitzWriter = /** @class */ (function () {
             // Replace the component name in `main.ts`.
             // Replace `import {NovoDocsExample} from 'novo-docs-example'`
             // will be replaced as `import {ButtonDemo} from './button-demo'`
-            fileContent = fileContent.replace(/{NovoDocsExample}/g, "{" + data.componentName + "}");
+            fileContent = fileContent.replace(/{ NovoDocsExample }/g, "{ " + data.componentName + " }");
             // Replace `declarations: [NovoDocsExample]`
             // will be replaced as `declarations: [ButtonDemo]`
             fileContent = fileContent.replace(/declarations: \[NovoDocsExample\]/g, "declarations: [" + data.componentName + "]");
