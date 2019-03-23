@@ -27,10 +27,13 @@
     "release:elements": "standard-version",
     "postrelease:elements": "git push --follow-tags origin master; npm run build; cd dist/novo-elements && npm publish",
     "snapshot-publish": "bash snapshot-publish",
-    "cy:open": "wait-on http-get://localhost:4200 && cypress open",
-    "cy:run": "wait-on http-get://localhost:4200 && cypress run",
-    "e2e": "run-p start cy:run -r",
-    "e2e-gui": "run-p start cy:open -r"
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "cy:open:ghpages": "cypress open --env host=https://bullhorn.github.io/novo-elements",
+    "cy:open:ci": "wait-on http-get://localhost:4200 && cypress open",
+    "cy:run:ci": "wait-on http-get://localhost:4200 && cypress run",
+    "e2e": "run-p start cy:run:ci -r",
+    "e2e-gui": "run-p start cy:open:ci -r"
   },
   "jest": {
     "preset": "jest-preset-angular",
