@@ -8,6 +8,7 @@ node_js:
 cache:
   directories:
     - ./node_modules/
+    - /home/travis/.cache/Cypress
 
 env:
   global:
@@ -16,11 +17,13 @@ env:
 install:
   - npm install
   - npm install -g angular-cli-ghpages
+  - npm install -g wait-on concurrently 
 
 script:
   - npm run lint
   - npm test
   - npm run build
+  - npm run e2e
   - npm run build:demo
 
 after_success:
