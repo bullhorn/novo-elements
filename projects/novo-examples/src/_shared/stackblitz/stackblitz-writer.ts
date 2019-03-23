@@ -9,7 +9,7 @@ const COPYRIGHT = `Copyright 2018 Bullhorn Inc. All Rights Reserved.
     can be found in the LICENSE file at http://angular.io/license`;
 
 const TEMPLATE_PATH = './assets/stackblitz/';
-const TEMPLATE_FILES = ['index.html', 'styles.scss', 'polyfills.ts', '.angular-cli.json', 'main.ts'];
+const TEMPLATE_FILES = ['index.html', 'styles.scss', 'polyfills.ts', 'main.ts'];
 
 const TAGS: string[] = ['angular', 'bullhon', 'novo-elements', 'example'];
 const angularVersion = '^7.2.0';
@@ -97,6 +97,11 @@ export class StackblitzWriter {
       exampleContents.push(
         Promise.resolve(
           this._addFileToForm(form, data, decodeURIComponent(data.source.cssSource), `app/${data.selectorName}.css`, TEMPLATE_PATH),
+        ),
+      );
+      exampleContents.push(
+        Promise.resolve(
+          this._addFileToForm(form, data, JSON.stringify({ apps: [{ styles: ['styles.scss'] }] }), `.angular-cli.json`, TEMPLATE_PATH),
         ),
       );
 
