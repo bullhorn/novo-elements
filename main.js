@@ -71853,7 +71853,7 @@ var COPYRIGHT = "Copyright 2018 Bullhorn Inc. All Rights Reserved.\n    Use of t
 /** @type {?} */
 var TEMPLATE_PATH = './assets/stackblitz/';
 /** @type {?} */
-var TEMPLATE_FILES = ['index.html', 'styles.scss', 'polyfills.ts', '.angular-cli.json', 'main.ts'];
+var TEMPLATE_FILES = ['index.html', 'styles.scss', 'polyfills.ts', 'main.ts'];
 /** @type {?} */
 var TAGS = ['angular', 'bullhon', 'novo-elements', 'example'];
 /** @type {?} */
@@ -71945,6 +71945,7 @@ var StackblitzWriter = /** @class */ (function () {
             exampleContents.push(Promise.resolve(_this._addFileToForm(form, data, decodeURIComponent(data.source.tsSource), "app/" + data.selectorName + ".ts", TEMPLATE_PATH)));
             exampleContents.push(Promise.resolve(_this._addFileToForm(form, data, decodeURIComponent(data.source.htmlSource), "app/" + data.selectorName + ".html", TEMPLATE_PATH)));
             exampleContents.push(Promise.resolve(_this._addFileToForm(form, data, decodeURIComponent(data.source.cssSource), "app/" + data.selectorName + ".css", TEMPLATE_PATH)));
+            exampleContents.push(Promise.resolve(_this._addFileToForm(form, data, JSON.stringify({ apps: [{ styles: ['styles.scss'] }] }), ".angular-cli.json", TEMPLATE_PATH)));
             // // TODO(josephperrott): Prevent including assets to be manually checked.
             // if (data.selectorName === 'icon-svg-example') {
             //   this._readFile(form, data, 'assets/img/examples/thumbup-icon.svg', '', false);
