@@ -186,7 +186,7 @@ context('Demo: Data Table', () => {
       cy.get(`${exampleContainerSelector} novo-data-table novo-data-table-row [data-automation-id="novo-column-${column}"]`, { timeout: 10000 })
         .should('contain', filterValue);
     });
-    it.only('should filter date column', () => {
+    it('should filter date column', () => {
       let column = 'date';
       let dayAgo = new Date();
       cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-${column}"] [data-automation-id="novo-data-table-filter"]`)
