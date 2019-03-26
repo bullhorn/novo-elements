@@ -90,7 +90,7 @@ context('Demo: Data Table', () => {
   context('sorting', () => {
     it('should sort number column ascending', () => {
       let column = 'id';
-      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-id"] [data-automation-id="novo-data-table-sort"]`)
+      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-${column}"] [data-automation-id="novo-data-table-sort"]`)
         .eq(0)
         .click()
         .should('have.attr', 'icon', 'bhi-sort-asc');
@@ -103,7 +103,7 @@ context('Demo: Data Table', () => {
     });
     it('should sort number column descending', () => {
       let column = 'id';
-      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-id"] [data-automation-id="novo-data-table-sort"]`)
+      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-${column}"] [data-automation-id="novo-data-table-sort"]`)
         .eq(0)
         .click()
         .should('have.attr', 'icon', 'bhi-sort-asc')
@@ -118,7 +118,7 @@ context('Demo: Data Table', () => {
     });
     it('should sort text column ascending', () => {
       let column = 'status';
-      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-status"] [data-automation-id="novo-data-table-sort"]`)
+      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-${column}"] [data-automation-id="novo-data-table-sort"]`)
         .eq(0)
         .click()
         .should('have.attr', 'icon', 'bhi-sort-asc');
@@ -131,7 +131,7 @@ context('Demo: Data Table', () => {
     });
     it('should sort text column descending', () => {
       let column = 'status';
-      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-status"] [data-automation-id="novo-data-table-sort"]`)
+      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-${column}"] [data-automation-id="novo-data-table-sort"]`)
         .eq(0)
         .click()
         .should('have.attr', 'icon', 'bhi-sort-asc')
@@ -144,5 +144,61 @@ context('Demo: Data Table', () => {
         .last()
         .should('contain', `(1) Status 990`)
     });
+    it('should sort date column ascending', () => {
+      let column = 'date';
+      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-${column}"] [data-automation-id="novo-data-table-sort"]`)
+        .eq(0)
+        .click()
+        .should('have.attr', 'icon', 'bhi-sort-asc');
+      cy.get(`${exampleContainerSelector} novo-data-table novo-data-table-row [data-automation-id="novo-column-${column}"]`).first().invoke('text').then((dateText) => {
+          let date = new Date(dateText);
+        cy.get(`${exampleContainerSelector} novo-data-table novo-data-table-row [data-automation-id="novo-column-${column}"]`).last().invoke('text').should((dateText2)=>{
+            expect(date).to.be.lessThan(new Date(dateText2));
+          })
+        });
+    });
+    it('should sort date column descending', () => {
+      let column = 'date';
+      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-${column}"] [data-automation-id="novo-data-table-sort"]`)
+        .eq(0)
+        .click()
+        .should('have.attr', 'icon', 'bhi-sort-asc')
+        .click()
+        .should('have.attr', 'icon', 'bhi-sort-desc');
+      cy.get(`${exampleContainerSelector} novo-data-table novo-data-table-row [data-automation-id="novo-column-${column}"]`).first().invoke('text').then((dateText) => {
+        let date = new Date(dateText);
+        cy.get(`${exampleContainerSelector} novo-data-table novo-data-table-row [data-automation-id="novo-column-${column}"]`).last().invoke('text').should((dateText2) => {
+          expect(date).to.be.greaterThan(new Date(dateText2));
+        })
+      });
+    });
   });
+  context('Filtering', () => {
+    it('should filter number column', () => {
+      let filterValue = Math.floor(Math.random() * (999 - 100 + 1) + 100).toString()
+      let column = 'id';
+      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-${column}"] [data-automation-id="novo-data-table-filter"]`)
+        .eq(0)
+        .click();
+      cy.get(`.data-table-dropdown list > item > input`)
+        .eq(0)
+        .type(filterValue + `{enter}`);
+      cy.get(`${exampleContainerSelector} novo-data-table novo-data-table-row [data-automation-id="novo-column-${column}"]`, { timeout: 10000 })
+        .should('contain', filterValue);
+    });
+    it.only('should filter date column', () => {
+      let column = 'date';
+      let dayAgo = new Date();
+      cy.get(`${exampleContainerSelector} novo-data-table [data-automation-id="novo-column-header-${column}"] [data-automation-id="novo-data-table-filter"]`)
+        .eq(0)
+        .click();
+      cy.get(`.data-table-dropdown list  > [data-automation-id="novo-data-table-filter-Past 1 Day"]`, { timeout: 10000 })
+        .click();
+      cy.get(`${exampleContainerSelector} novo-data-table novo-data-table-row [data-automation-id="novo-column-${column}"]`, { timeout: 10000 })
+      .should('have.length', 3)
+      .each((element)=> {
+        expect(Cypress.moment(element.text()).valueOf()).to.be.within(Cypress.moment().subtract(2, "days"), Cypress.moment())
+      });
+    });
+  }); 
 });
