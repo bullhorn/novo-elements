@@ -9,8 +9,8 @@ import { NovoControlElement } from './Control';
 @Component({
   selector: 'novo-auto-size-test-component',
   template: `
-        <textarea autosize></textarea>
-    `,
+    <textarea autosize></textarea>
+  `,
   styles: [
     `
       textarea {
@@ -69,6 +69,6 @@ describe('Test Localization', () => {
 
   it('should set decimal separator based on locale correctly', () => {
     let component = new NovoControlElement(mockElement, null, null, null, null, null, 'fr-FR');
-    expect(component.decimalSeparator).toBe('.');
+    expect(component.decimalSeparator).toBe(',');
   });
 });
