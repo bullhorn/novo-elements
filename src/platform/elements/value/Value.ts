@@ -123,6 +123,7 @@ export class NovoValueElement implements OnInit, OnChanges {
         case 'Opportunity':
         case 'JobOrder':
         case 'Placement':
+        case 'Lead':
           this.type = NOVO_VALUE_TYPE.INTERNAL_LINK;
           break;
         default:
