@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.7.0"></a>
+# [3.7.0](https://github.com/bullhorn/novo-elements/compare/v3.6.0...v3.7.0) (2019-03-29)
+
+
+### Bug Fixes
+
+* **demo:** remove angular-cli json file and add it in typescript ([15653d3](https://github.com/bullhorn/novo-elements/commit/15653d3))
+
+
+### Features
+
+* **novoFormControl:** Added ability to enable and disable all controls ([#925](https://github.com/bullhorn/novo-elements/issues/925)) ([8304157](https://github.com/bullhorn/novo-elements/commit/8304157))
+
+
+
 <a name="3.6.0"></a>
 # [3.6.0](https://github.com/bullhorn/novo-elements/compare/v3.2.0...v3.6.0) (2019-03-01)
 
