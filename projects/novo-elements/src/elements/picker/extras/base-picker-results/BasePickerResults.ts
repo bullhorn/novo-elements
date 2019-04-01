@@ -357,6 +357,8 @@ export class BasePickerResults {
         if (item && item.value && match && match.value) {
           if (item.value.id && match.value.id) {
             isPreselected = item.value.id === match.value.id;
+          } else if (item.value instanceof Object && item.value.hasOwnProperty('value')) {
+            isPreselected = item.value.value === match.value;
           } else {
             isPreselected = item.value === match.value;
           }
