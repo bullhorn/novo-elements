@@ -715,6 +715,7 @@ export class DevAppBridge extends AppBridge {
    * @param packet any - packet of data to send with the event
    */
   public httpGET(relativeURL: string): Promise<any> {
+    // TODO: Unwrap the response
     return this.http.get(`${this.baseURL}/${relativeURL}`, { withCredentials: true }).toPromise();
   }
 
@@ -723,6 +724,7 @@ export class DevAppBridge extends AppBridge {
    * @param packet any - packet of data to send with the event
    */
   public httpPOST(relativeURL: string, postData: any): Promise<any> {
+    // TODO: Unwrap the response
     return this.http.post(`${this.baseURL}/${relativeURL}`, postData, { withCredentials: true }).toPromise();
   }
 
@@ -731,6 +733,7 @@ export class DevAppBridge extends AppBridge {
    * @param packet any - packet of data to send with the event
    */
   public httpPUT(relativeURL: string, putData: any): Promise<any> {
+    // TODO: Unwrap the response
     return this.http.put(`${this.baseURL}/${relativeURL}`, putData, { withCredentials: true }).toPromise();
   }
 
@@ -739,6 +742,7 @@ export class DevAppBridge extends AppBridge {
    * @param packet any - packet of data to send with the event
    */
   public httpDELETE(relativeURL: string): Promise<any> {
+    // TODO: Unwrap the response
     return this.http.delete(`${this.baseURL}/${relativeURL}`, { withCredentials: true }).toPromise();
   }
 
