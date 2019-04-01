@@ -156,5 +156,20 @@ describe('Elements: BasePickerResults', () => {
       expect(component.preselected).toBeDefined();
       // component.preselected();
     });
+    it('should match by id when applicable', () => {
+      component.selected = [{ id: 1, value: 'test0' }, { id: 2, value: 'test1' }];
+      expect(component.preselected({ id: 1, value: 'test0' })).toEqual(true);
+      expect(component.preselected({ id: 5, value: 'not a match' })).toEqual(false);
+    });
+    it('should match by the nested value property when an object', () => {
+      component.selected = [{ id: 1, value: { value: 'test0' } }, { id: 2, value: { value: 'test1' } }];
+      expect(component.preselected({ value: 'test0' })).toEqual(true);
+      expect(component.preselected({ value: 'not a match' })).toEqual(false);
+    });
+    it('should match by the value property when applicable', () => {
+      component.selected = [{ id: 1, value: 'test0' }, { id: 2, value: 'test1' }];
+      expect(component.preselected({ value: 'test0' })).toEqual(true);
+      expect(component.preselected({ value: 'not a match' })).toEqual(false);
+    });
   });
 });
