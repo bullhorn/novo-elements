@@ -542,7 +542,7 @@ export class AppBridge {
           })
           .catch((err) => {
             this._trace(`${MESSAGE_TYPES.REGISTER} - FAILED - (no parent)`, err);
-            reject(null);
+            reject(err);
           });
       }
     });
