@@ -351,18 +351,17 @@ export class BasePickerResults {
   }
 
   preselected(match) {
-    return (
-      this.selected.findIndex((item) => {
-        let isPreselected = false;
-        if (item && item.value && match && match.value) {
-          if (item.value.id && match.value.id) {
-            isPreselected = item.value.id === match.value.id;
-          } else {
-            isPreselected = item.value === match.value;
-          }
+    let b = this.selected.findIndex((item) => {
+      let isPreselected = false;
+      if (item && item.value && match && match.value) {
+        if (item.value.id && match.value.id) {
+          isPreselected = item.value.id === match.value.id;
+        } else {
+          isPreselected = item.value === match.value;
         }
-        return isPreselected;
-      }) !== -1
-    );
+      }
+      return isPreselected;
+    });
+    return b !== -1;
   }
 }
