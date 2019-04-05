@@ -203,6 +203,9 @@ describe('Utils: FormUtils', () => {
       expect(formUtils.determineInputType).toBeDefined();
       expect(formUtils.determineInputType({ type: 'file' })).toBe('file');
     });
+    it('should return the type of WorkflowOptions correctly.', () => {
+      expect(formUtils.determineInputType({ dataSpecialization: 'WORKFLOW_OPTIONS' })).toBe('select');
+    });
     describe('TO_MANY field types', () => {
       const toManyField: FormField = {
         type: 'TO_MANY',
@@ -323,6 +326,13 @@ describe('Utils: FormUtils', () => {
       let result = formUtils.getControlForField({ type: 'editor-minimal' });
       expect(result instanceof EditorControl).toBeTruthy();
     });
+    it('should return the right component for WorkflowOptions and call getControlOptions with data', () => {
+      const field: { type: string } = { type: 'select' };
+      spyOn(formUtils, 'getControlOptions');
+      const result = formUtils.getControlForField(field, undefined, undefined, undefined, undefined, 'First');
+      expect(formUtils.getControlOptions).toHaveBeenCalledWith(field, undefined, undefined, 'First');
+      expect(result instanceof SelectControl).toBeTruthy();
+    });
     describe('with type: address', () => {
       it('should return the right component for address', () => {
         expect(formUtils.getControlForField).toBeDefined();
@@ -420,6 +430,35 @@ describe('Utils: FormUtils', () => {
       expect(fieldset[0].icon).toBe('bhi-certification');
       expect(fieldset[0].controls.length).toBe(1);
     });
+    it('should call getControlForField with data', () => {
+      let meta = {
+        entity: 'ENTITY_NAME',
+        label: 'ENTITY_LABEL',
+        fields: [
+          {
+            name: 'firstName',
+            type: 'text',
+            label: 'First Name',
+            required: true,
+            sortOrder: 10,
+            maxLength: 10,
+            description: 'First Name, Yo!',
+          },
+        ],
+        sectionHeaders: [
+          {
+            label: 'Header',
+            name: 'header',
+            sortOrder: 0,
+            enabled: true,
+            icon: 'bhi-certification',
+          },
+        ],
+      };
+      spyOn(formUtils, 'getControlForField').and.returnValue({});
+      formUtils.toFieldSets(meta, 'USD', {}, {}, {}, { firstName: 'First' });
+      expect(formUtils.getControlForField).toHaveBeenCalledWith(meta.fields[0], {}, {}, {}, undefined, 'First');
+    });
   });
 
   describe('Method: getControlOptions(field, http, config)', () => {
@@ -462,6 +501,17 @@ describe('Utils: FormUtils', () => {
     it('should return an array when options is an array', () => {
       expect(formUtils.getControlOptions).toBeDefined();
       let result = formUtils.getControlOptions({ dataSpecialization: 'DATETIME' });
+    });
+    it('should return an array when there are WorkflowOptions', () => {
+      const field: { workflowOptions: Object } = {
+        workflowOptions: {
+          '1': [{ value: '1', label: '1' }],
+          '2': [{ value: '2', label: '2' }],
+        },
+      };
+      const expected: Array<{ value: string; label: string }> = [{ value: '2', label: '2' }];
+      const result = formUtils.getControlOptions(field, undefined, undefined, { id: '2' });
+      expect(result).toEqual(expected);
     });
   });
 
