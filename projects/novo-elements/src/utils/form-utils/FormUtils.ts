@@ -584,8 +584,7 @@ export class FormUtils {
       // TODO: (cont.) returns `tiles`
       return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
     } else if (field.workflowOptions && fieldData) {
-      const currentWorkflowOption: number | string = fieldData.id ? fieldData.id : 'initial';
-      return field.workflowOptions[currentWorkflowOption] || [];
+      return this.getWorkflowOptions(field.workflowOptions, fieldData);
     } else if (field.optionsUrl) {
       return this.optionsService.getOptionsConfig(http, field, config);
     } else if (Array.isArray(field.options) && field.type === 'chips') {
@@ -599,6 +598,25 @@ export class FormUtils {
       return field.options;
     }
     return null;
+  }
+
+  private getWorkflowOptions(
+    workflowOptions: { [key: string]: any },
+    fieldData: { [key: string]: any },
+  ): Array<{ value: string | number; label: string | number }> {
+    let currentValue: { value: string | number; label: string | number };
+    if (fieldData.id) {
+      currentValue = { value: fieldData.id, label: fieldData.label ? fieldData.label : fieldData.id };
+    }
+
+    const currentWorkflowOption: number | string = fieldData.id ? fieldData.id : 'initial';
+    let updateWorkflowOptions: Array<{ value: string | number; label: string | number }> = workflowOptions[currentWorkflowOption] || [];
+
+    if (currentValue && !updateWorkflowOptions.find((option) => option.value === currentValue.value)) {
+      updateWorkflowOptions.unshift(currentValue);
+    }
+
+    return updateWorkflowOptions;
   }
 
   setInitialValues(controls: Array<NovoControlConfig>, values: any, keepClean?: boolean, keyOverride?: string) {

@@ -513,6 +513,28 @@ describe('Utils: FormUtils', () => {
       const result = formUtils.getControlOptions(field, undefined, undefined, { id: '2' });
       expect(result).toEqual(expected);
     });
+    it('should add current option to array if current value is not there for WorkflowOptions', () => {
+      const field: { workflowOptions: Object } = {
+        workflowOptions: {
+          '1': [{ value: '1', label: 'one' }, { value: '3', label: 'three' }],
+          '2': [{ value: '2', label: 'two' }],
+        },
+      };
+      const expected: Array<{ value: string; label: string }> = [{ value: '1', label: 'one' }, { value: '3', label: 'three' }];
+      const result = formUtils.getControlOptions(field, undefined, undefined, { id: '1', label: 'one' });
+      expect(result).toEqual(expected);
+    });
+    it('should return an array when there are WorkflowOptions and value has no id', () => {
+      const field: { workflowOptions: Object } = {
+        workflowOptions: {
+          initial: [{ value: '1', label: '1' }],
+          '2': [{ value: '2', label: '2' }],
+        },
+      };
+      const expected: Array<{ value: string; label: string }> = [{ value: '1', label: '1' }];
+      const result = formUtils.getControlOptions(field, undefined, undefined, { label: '2' });
+      expect(result).toEqual(expected);
+    });
   });
 
   describe('Method: setInitialValues(controls, values, keepClean)', () => {
