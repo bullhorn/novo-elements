@@ -11108,7 +11108,7 @@ var NovoSelectElement = /** @class */ (function () {
         this.model = model;
         if (this.options) {
             /** @type {?} */
-            var item = this.filteredOptions.find(function (i) { return i.value === model; });
+            var item = this.filteredOptions.find(function (i) { return i.value === model || (model && i.value === model.id); });
             if (!item && !Helpers.isEmpty(model)) {
                 item = {
                     label: model,
@@ -11165,7 +11165,7 @@ var NovoSelectElement = /** @class */ (function () {
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Component"], args: [{
                     selector: 'novo-select',
                     providers: [SELECT_VALUE_ACCESSOR],
-                    template: "\n    <div #dropdownElement (click)=\"togglePanel(); false\" tabIndex=\"{{ disabled ? -1 : 0 }}\" type=\"button\" [class.empty]=\"empty\">{{selected.label}}<i class=\"bhi-collapse\"></i></div>\n    <novo-overlay-template [parent]=\"element\" position=\"center\" (closing)=\"dropdown.nativeElement.focus()\">\n      <ul class=\"novo-select-list\" tabIndex=\"-1\" [class.header]=\"headerConfig\" [class.active]=\"panelOpen\">\n        <ng-content></ng-content>\n        <li *ngIf=\"headerConfig\" class=\"select-header\" [class.open]=\"header.open\">\n          <button *ngIf=\"!header.open\" (click)=\"toggleHeader($event); false\" tabIndex=\"-1\" type=\"button\" class=\"header\"><i class=\"bhi-add-thin\"></i>&nbsp;{{headerConfig.label}}\n          </button>\n          <div *ngIf=\"header.open\" [ngClass]=\"{active: header.open}\">\n            <input autofocus type=\"text\" [placeholder]=\"headerConfig.placeholder\" [attr.id]=\"name\" autocomplete=\"false\" [(ngModel)]=\"header.value\" [ngClass]=\"{invalid: !header.valid}\" />\n            <footer>\n              <button (click)=\"toggleHeader($event, false)\">{{labels.cancel}}</button>\n              <button (click)=\"saveHeader()\" class=\"primary\">{{labels.save}}</button>\n            </footer>\n          </div>\n        </li>\n        <li *ngFor=\"let option of filteredOptions; let i = index\" [ngClass]=\"{active: option.active}\" (click)=\"setValueAndClose({value: option, index: i})\" [attr.data-automation-value]=\"option.label\">\n          <span [innerHtml]=\"highlight(option.label, filterTerm)\"></span>\n          <i *ngIf=\"option.active\" class=\"bhi-check\"></i>\n        </li>\n      </ul>\n    </novo-overlay-template>\n  ",
+                    template: "\n    <div #dropdownElement (click)=\"togglePanel(); (false)\" tabIndex=\"{{ disabled ? -1 : 0 }}\" type=\"button\" [class.empty]=\"empty\">\n      {{ selected.label }}<i class=\"bhi-collapse\"></i>\n    </div>\n    <novo-overlay-template [parent]=\"element\" position=\"center\" (closing)=\"dropdown.nativeElement.focus()\">\n      <ul class=\"novo-select-list\" tabIndex=\"-1\" [class.header]=\"headerConfig\" [class.active]=\"panelOpen\">\n        <ng-content></ng-content>\n        <li *ngIf=\"headerConfig\" class=\"select-header\" [class.open]=\"header.open\">\n          <button *ngIf=\"!header.open\" (click)=\"toggleHeader($event); (false)\" tabIndex=\"-1\" type=\"button\" class=\"header\">\n            <i class=\"bhi-add-thin\"></i>&nbsp;{{ headerConfig.label }}\n          </button>\n          <div *ngIf=\"header.open\" [ngClass]=\"{ active: header.open }\">\n            <input\n              autofocus\n              type=\"text\"\n              [placeholder]=\"headerConfig.placeholder\"\n              [attr.id]=\"name\"\n              autocomplete=\"false\"\n              [(ngModel)]=\"header.value\"\n              [ngClass]=\"{ invalid: !header.valid }\"\n            />\n            <footer>\n              <button (click)=\"toggleHeader($event, false)\">{{ labels.cancel }}</button>\n              <button (click)=\"saveHeader()\" class=\"primary\">{{ labels.save }}</button>\n            </footer>\n          </div>\n        </li>\n        <li\n          *ngFor=\"let option of filteredOptions; let i = index\"\n          [ngClass]=\"{ active: option.active }\"\n          (click)=\"setValueAndClose({ value: option, index: i })\"\n          [attr.data-automation-value]=\"option.label\"\n        >\n          <span [innerHtml]=\"highlight(option.label, filterTerm)\"></span>\n          <i *ngIf=\"option.active\" class=\"bhi-check\"></i>\n        </li>\n      </ul>\n    </novo-overlay-template>\n  ",
                     host: {
                         '(keydown)': 'onKeyDown($event)',
                     }
@@ -19037,6 +19037,7 @@ var FormUtils = /** @class */ (function () {
             HTML: 'editor',
             'HTML-MINIMAL': 'editor-minimal',
             YEAR: 'year',
+            WORKFLOW_OPTIONS: 'select',
         };
         /** @type {?} */
         var dataTypeToTypeMap = {
@@ -19087,7 +19088,10 @@ var FormUtils = /** @class */ (function () {
             }
         }
         else if (field.type === 'TO_ONE') {
-            if (this.hasAssociatedEntity(field)) {
+            if (field.dataSpecialization === 'WORKFLOW_OPTIONS') {
+                type = dataSpecializationTypeMap[field.dataSpecialization];
+            }
+            else if (this.hasAssociatedEntity(field)) {
                 type = 'entitypicker'; // TODO!
             }
             else {
@@ -19144,6 +19148,7 @@ var FormUtils = /** @class */ (function () {
      * @param {?} config
      * @param {?=} overrides
      * @param {?=} forTable
+     * @param {?=} fieldData
      * @return {?}
      */
     FormUtils.prototype.getControlForField = /**
@@ -19152,9 +19157,10 @@ var FormUtils = /** @class */ (function () {
      * @param {?} config
      * @param {?=} overrides
      * @param {?=} forTable
+     * @param {?=} fieldData
      * @return {?}
      */
-    function (field, http, config, overrides, forTable) {
+    function (field, http, config, overrides, forTable, fieldData) {
         if (forTable === void 0) { forTable = false; }
         var e_1, _a;
         // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
@@ -19197,7 +19203,7 @@ var FormUtils = /** @class */ (function () {
         };
         // TODO: getControlOptions should always return the correct format
         /** @type {?} */
-        var optionsConfig = this.getControlOptions(field, http, config);
+        var optionsConfig = this.getControlOptions(field, http, config, fieldData);
         if (Array.isArray(optionsConfig) && !(type === 'chips' || type === 'picker')) {
             controlConfig.options = optionsConfig;
         }
@@ -19365,7 +19371,7 @@ var FormUtils = /** @class */ (function () {
                                 if (!subfield.optionsUrl) {
                                     subfield.optionsUrl = "options/" + subfield.optionsType;
                                 }
-                                controlConfig.config[subfield.name].pickerConfig = this.getControlOptions(subfield, http, config);
+                                controlConfig.config[subfield.name].pickerConfig = this.getControlOptions(subfield, http, config, fieldData);
                             }
                         }
                     }
@@ -19470,6 +19476,7 @@ var FormUtils = /** @class */ (function () {
      * @param {?} http
      * @param {?} config
      * @param {?=} overrides
+     * @param {?=} data
      * @return {?}
      */
     FormUtils.prototype.toFieldSets = /**
@@ -19478,9 +19485,10 @@ var FormUtils = /** @class */ (function () {
      * @param {?} http
      * @param {?} config
      * @param {?=} overrides
+     * @param {?=} data
      * @return {?}
      */
-    function (meta, currencyFormat, http, config, overrides) {
+    function (meta, currencyFormat, http, config, overrides, data) {
         var _this = this;
         /** @type {?} */
         var fieldsets = [];
@@ -19551,7 +19559,9 @@ var FormUtils = /** @class */ (function () {
                     (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
                     !field.readOnly) {
                     /** @type {?} */
-                    var control = _this.getControlForField(field, http, config, overrides);
+                    var fieldData = data && data[field.name] ? data[field.name] : null;
+                    /** @type {?} */
+                    var control = _this.getControlForField(field, http, config, overrides, undefined, fieldData);
                     // Set currency format
                     if (control.subType === 'currency') {
                         control.currencyFormat = currencyFormat;
@@ -19582,20 +19592,25 @@ var FormUtils = /** @class */ (function () {
      * @param {?} field
      * @param {?} http
      * @param {?} config
+     * @param {?=} fieldData
      * @return {?}
      */
     FormUtils.prototype.getControlOptions = /**
      * @param {?} field
      * @param {?} http
      * @param {?} config
+     * @param {?=} fieldData
      * @return {?}
      */
-    function (field, http, config) {
+    function (field, http, config, fieldData) {
         // TODO: The token property of config is the only property used; just pass in `token: string`
         if (field.dataType === 'Boolean' && !field.options) {
             // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
             // TODO: (cont.) returns `tiles`
             return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
+        }
+        else if (field.workflowOptions && fieldData) {
+            return this.getWorkflowOptions(field.workflowOptions, fieldData);
         }
         else if (field.optionsUrl) {
             return this.optionsService.getOptionsConfig(http, field, config);
@@ -19613,6 +19628,33 @@ var FormUtils = /** @class */ (function () {
             return field.options;
         }
         return null;
+    };
+    /**
+     * @private
+     * @param {?} workflowOptions
+     * @param {?} fieldData
+     * @return {?}
+     */
+    FormUtils.prototype.getWorkflowOptions = /**
+     * @private
+     * @param {?} workflowOptions
+     * @param {?} fieldData
+     * @return {?}
+     */
+    function (workflowOptions, fieldData) {
+        /** @type {?} */
+        var currentValue;
+        if (fieldData.id) {
+            currentValue = { value: fieldData.id, label: fieldData.label ? fieldData.label : fieldData.id };
+        }
+        /** @type {?} */
+        var currentWorkflowOption = fieldData.id ? fieldData.id : 'initial';
+        /** @type {?} */
+        var updateWorkflowOptions = workflowOptions[currentWorkflowOption] || [];
+        if (currentValue && !updateWorkflowOptions.find(function (option) { return option.value === currentValue.value; })) {
+            updateWorkflowOptions.unshift(currentValue);
+        }
+        return updateWorkflowOptions;
     };
     /**
      * @param {?} controls
