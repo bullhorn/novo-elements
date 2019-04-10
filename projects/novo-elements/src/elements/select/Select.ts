@@ -35,22 +35,38 @@ const SELECT_VALUE_ACCESSOR = {
   selector: 'novo-select',
   providers: [SELECT_VALUE_ACCESSOR],
   template: `
-    <div #dropdownElement (click)="togglePanel(); false" tabIndex="{{ disabled ? -1 : 0 }}" type="button" [class.empty]="empty">{{selected.label}}<i class="bhi-collapse"></i></div>
+    <div #dropdownElement (click)="togglePanel(); (false)" tabIndex="{{ disabled ? -1 : 0 }}" type="button" [class.empty]="empty">
+      {{ selected.label }}<i class="bhi-collapse"></i>
+    </div>
     <novo-overlay-template [parent]="element" position="center" (closing)="dropdown.nativeElement.focus()">
       <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
         <ng-content></ng-content>
         <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">
-          <button *ngIf="!header.open" (click)="toggleHeader($event); false" tabIndex="-1" type="button" class="header"><i class="bhi-add-thin"></i>&nbsp;{{headerConfig.label}}
+          <button *ngIf="!header.open" (click)="toggleHeader($event); (false)" tabIndex="-1" type="button" class="header">
+            <i class="bhi-add-thin"></i>&nbsp;{{ headerConfig.label }}
           </button>
-          <div *ngIf="header.open" [ngClass]="{active: header.open}">
-            <input autofocus type="text" [placeholder]="headerConfig.placeholder" [attr.id]="name" autocomplete="false" [(ngModel)]="header.value" [ngClass]="{invalid: !header.valid}" />
+          <div *ngIf="header.open" [ngClass]="{ active: header.open }">
+            <input
+              autofocus
+              type="text"
+              [placeholder]="headerConfig.placeholder"
+              [attr.id]="name"
+              autocomplete="false"
+              [(ngModel)]="header.value"
+              [ngClass]="{ invalid: !header.valid }"
+            />
             <footer>
-              <button (click)="toggleHeader($event, false)">{{labels.cancel}}</button>
-              <button (click)="saveHeader()" class="primary">{{labels.save}}</button>
+              <button (click)="toggleHeader($event, false)">{{ labels.cancel }}</button>
+              <button (click)="saveHeader()" class="primary">{{ labels.save }}</button>
             </footer>
           </div>
         </li>
-        <li *ngFor="let option of filteredOptions; let i = index" [ngClass]="{active: option.active}" (click)="setValueAndClose({value: option, index: i})" [attr.data-automation-value]="option.label">
+        <li
+          *ngFor="let option of filteredOptions; let i = index"
+          [ngClass]="{ active: option.active }"
+          (click)="setValueAndClose({ value: option, index: i })"
+          [attr.data-automation-value]="option.label"
+        >
           <span [innerHtml]="highlight(option.label, filterTerm)"></span>
           <i *ngIf="option.active" class="bhi-check"></i>
         </li>
@@ -340,7 +356,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   writeValue(model: any): void {
     this.model = model;
     if (this.options) {
-      let item = this.filteredOptions.find((i) => i.value === model);
+      let item = this.filteredOptions.find((i) => i.value === model || (model && i.value === model.id));
       if (!item && !Helpers.isEmpty(model)) {
         item = {
           label: model,

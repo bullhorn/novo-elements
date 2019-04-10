@@ -126,6 +126,7 @@ export class FormUtils {
       HTML: 'editor',
       'HTML-MINIMAL': 'editor-minimal',
       YEAR: 'year',
+      WORKFLOW_OPTIONS: 'select',
     };
     let dataTypeToTypeMap = {
       Timestamp: 'date',
@@ -167,7 +168,9 @@ export class FormUtils {
         }
       }
     } else if (field.type === 'TO_ONE') {
-      if (this.hasAssociatedEntity(field)) {
+      if (field.dataSpecialization === 'WORKFLOW_OPTIONS') {
+        type = dataSpecializationTypeMap[field.dataSpecialization];
+      } else if (this.hasAssociatedEntity(field)) {
         type = 'entitypicker'; // TODO!
       } else {
         type = 'picker';
@@ -208,6 +211,7 @@ export class FormUtils {
     config: { token?: string; restUrl?: string; military?: boolean },
     overrides?: any,
     forTable: boolean = false,
+    fieldData?: any,
   ) {
     // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
     // TODO: (cont.) as the setter of the field argument
@@ -245,7 +249,7 @@ export class FormUtils {
       closeOnSelect: field.closeOnSelect,
     };
     // TODO: getControlOptions should always return the correct format
-    let optionsConfig = this.getControlOptions(field, http, config);
+    const optionsConfig = this.getControlOptions(field, http, config, fieldData);
     if (Array.isArray(optionsConfig) && !(type === 'chips' || type === 'picker')) {
       controlConfig.options = optionsConfig;
     } else if (Array.isArray(optionsConfig) && (type === 'chips' || type === 'picker')) {
@@ -410,7 +414,7 @@ export class FormUtils {
               if (!subfield.optionsUrl) {
                 subfield.optionsUrl = `options/${subfield.optionsType}`;
               }
-              controlConfig.config[subfield.name].pickerConfig = this.getControlOptions(subfield, http, config);
+              controlConfig.config[subfield.name].pickerConfig = this.getControlOptions(subfield, http, config, fieldData);
             }
           }
         }
@@ -472,7 +476,14 @@ export class FormUtils {
     return ret;
   }
 
-  toFieldSets(meta, currencyFormat, http, config: { token?: string; restUrl?: string; military?: boolean }, overrides?) {
+  toFieldSets(
+    meta,
+    currencyFormat,
+    http,
+    config: { token?: string; restUrl?: string; military?: boolean },
+    overrides?,
+    data?: { [key: string]: any },
+  ) {
     let fieldsets: Array<NovoFieldset> = [];
     let ranges = [];
     if (meta && meta.fields) {
@@ -539,7 +550,8 @@ export class FormUtils {
           (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
           !field.readOnly
         ) {
-          let control = this.getControlForField(field, http, config, overrides);
+          const fieldData: any = data && data[field.name] ? data[field.name] : null;
+          let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
           // Set currency format
           if (control.subType === 'currency') {
             control.currencyFormat = currencyFormat;
@@ -565,12 +577,14 @@ export class FormUtils {
     }
   }
 
-  getControlOptions(field: any, http: any, config: { token?: string; restUrl?: string; military?: boolean }): any {
+  getControlOptions(field: any, http: any, config: { token?: string; restUrl?: string; military?: boolean }, fieldData?: any): any {
     // TODO: The token property of config is the only property used; just pass in `token: string`
     if (field.dataType === 'Boolean' && !field.options) {
       // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
       // TODO: (cont.) returns `tiles`
       return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
+    } else if (field.workflowOptions && fieldData) {
+      return this.getWorkflowOptions(field.workflowOptions, fieldData);
     } else if (field.optionsUrl) {
       return this.optionsService.getOptionsConfig(http, field, config);
     } else if (Array.isArray(field.options) && field.type === 'chips') {
@@ -584,6 +598,25 @@ export class FormUtils {
       return field.options;
     }
     return null;
+  }
+
+  private getWorkflowOptions(
+    workflowOptions: { [key: string]: any },
+    fieldData: { [key: string]: any },
+  ): Array<{ value: string | number; label: string | number }> {
+    let currentValue: { value: string | number; label: string | number };
+    if (fieldData.id) {
+      currentValue = { value: fieldData.id, label: fieldData.label ? fieldData.label : fieldData.id };
+    }
+
+    const currentWorkflowOption: number | string = fieldData.id ? fieldData.id : 'initial';
+    let updateWorkflowOptions: Array<{ value: string | number; label: string | number }> = workflowOptions[currentWorkflowOption] || [];
+
+    if (currentValue && !updateWorkflowOptions.find((option) => option.value === currentValue.value)) {
+      updateWorkflowOptions.unshift(currentValue);
+    }
+
+    return updateWorkflowOptions;
   }
 
   setInitialValues(controls: Array<NovoControlConfig>, values: any, keepClean?: boolean, keyOverride?: string) {
