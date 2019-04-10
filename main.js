@@ -19176,7 +19176,7 @@ var FormUtils = /** @class */ (function () {
             key: field.name,
             label: field.label,
             placeholder: field.hint || '',
-            required: field.required,
+            required: field.required || field.systemRequired,
             hidden: !field.required,
             encrypted: this.isFieldEncrypted(field.name ? field.name.toString() : ''),
             value: field.value || field.defaultValue,
