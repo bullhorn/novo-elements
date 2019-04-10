@@ -249,7 +249,7 @@ export class FormUtils {
       closeOnSelect: field.closeOnSelect,
     };
     // TODO: getControlOptions should always return the correct format
-    let optionsConfig = this.getControlOptions(field, http, config, fieldData);
+    const optionsConfig = this.getControlOptions(field, http, config, fieldData);
     if (Array.isArray(optionsConfig) && !(type === 'chips' || type === 'picker')) {
       controlConfig.options = optionsConfig;
     } else if (Array.isArray(optionsConfig) && (type === 'chips' || type === 'picker')) {
