@@ -10,13 +10,12 @@ import { ComponentUtils } from './../../../../utils/component-utils/ComponentUti
 @Component({
   selector: 'novo-table-cell',
   template: `
-        <div [ngSwitch]="column._type">
-            <span #container></span>
-            <date-cell *ngSwitchCase="'date'" [value]="value"></date-cell>
-            <a *ngSwitchCase="'link'" (click)="onClick($event);">{{ value }}</a>
-            <span *ngSwitchDefault>{{ value }}</span>
-        </div>
-    `,
+    <div [ngSwitch]="column._type">
+      <span #container></span>
+      <date-cell *ngSwitchCase="'date'" [value]="value"></date-cell>
+      <a *ngSwitchCase="'link'" (click)="onClick($event)">{{ value }}</a> <span *ngSwitchDefault>{{ value }}</span>
+    </div>
+  `,
 })
 export class TableCell implements OnInit, OnDestroy {
   @ViewChild('container', { read: ViewContainerRef })
@@ -44,10 +43,10 @@ export class TableCell implements OnInit, OnDestroy {
     if (this.column.renderer) {
       if (this.column.renderer.prototype instanceof BaseRenderer) {
         this.column._type = 'custom';
-        let componentRef = this.componentUtils.appendNextToLocation(this.column.renderer, this.container);
-        componentRef.instance.meta = this.column;
-        componentRef.instance.data = this.row;
-        componentRef.instance.value = this.form && this.hasEditor ? this.form.value[this.column.name] : this.row[this.column.name];
+        let componentRef = this.componentUtils.append(this.column.renderer, this.container);
+        componentRef.instance['meta'] = this.column;
+        componentRef.instance['data'] = this.row;
+        componentRef.instance['value'] = this.form && this.hasEditor ? this.form.value[this.column.name] : this.row[this.column.name];
         // TODO - save ref to this and update in the valueChanges below!!
       } else {
         // TODO - wtf to do here?
