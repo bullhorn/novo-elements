@@ -288,6 +288,13 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     }
   }
 
+  private resetAddRemove(): void {
+    this.disabledArray.forEach((item: { edit: boolean; remove: boolean }, idx: number) => {
+      item.edit = this.checkCanEdit(idx);
+      item.remove = this.checkCanRemove(idx);
+    });
+  }
+
   public addNewControl(value?: {}): void {
     const control: FormArray = <FormArray>this.form.controls[this.key];
     const newCtrl: NovoFormGroup = this.buildControl(value);
@@ -297,9 +304,10 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
       this.form.addControl(this.key, this.fb.array([newCtrl]));
     }
     this.disabledArray.push({
-      edit: this.checkCanEdit(this.currentIndex),
-      remove: this.checkCanRemove(this.currentIndex),
+      edit: true,
+      remove: true,
     });
+    this.resetAddRemove();
     if (!value) {
       this.onAdd.emit();
     }
@@ -322,6 +330,8 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
       this.onRemove.emit({ value: control.at(index).value, index: index });
     }
     control.removeAt(index);
+    this.disabledArray = this.disabledArray.filter((value: {edit: boolean; remove: boolean}, idx: number) => idx !== index);
+    this.resetAddRemove();
     this.currentIndex--;
     this.ref.markForCheck();
   }
