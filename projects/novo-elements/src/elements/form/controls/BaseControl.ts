@@ -114,6 +114,8 @@ export class BaseControl extends ControlConfig {
     this.encrypted = !!config.encrypted;
     this.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;
     this.controlType = config.controlType || '';
+    this.type = config.type;
+    this.subType = config.subType;
     this.metaType = config.metaType;
     this.placeholder = config.placeholder || '';
     this.config = config.config || null;
