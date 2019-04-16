@@ -627,4 +627,18 @@ describe('Utils: FormUtils', () => {
       expect(formUtils.isAddressEmpty(control)).toEqual(true);
     });
   });
+  describe('Method: getStartDate(data: any, meta: any): string | null', () => {
+    let data, meta;
+    beforeEach(() => {
+      data = { _metaOverrides: { effectiveDate: { allowedDateRange: { minDate: '2019-01-26' } } } };
+      meta = { fields: [{ name: 'effectiveDate', allowedDateRange: { minOffset: 1 } }] };
+    });
+    it('should be data override', () => {
+      expect(formUtils.getStartDate(data, meta)).toBe('2019-01-26');
+    });
+    it('should be data override', () => {
+      data._metaOverrides = null;
+      expect(formUtils.getStartDate(data, meta)).toBeDefined();
+    });
+  });
 });

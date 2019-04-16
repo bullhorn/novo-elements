@@ -714,7 +714,7 @@ export class FormUtils {
     return valid;
   }
 
-  private getStartDateFromRange(dateRange: { minDate; minOffset }) {
+  private getStartDateFromRange(dateRange: { minDate; minOffset }): string {
     if (dateRange.minDate) {
       return dateRange.minDate;
     }
@@ -728,13 +728,12 @@ export class FormUtils {
    * @param data entity data
    * @param meta entity meta
    */
-  public getStartDate(data: any, meta: any) {
+  public getStartDate(data: any, meta: any): string | null {
     // edit or create a new version of a EDE
     if (data._metaOverrides && data._metaOverrides.effectiveDate.allowedDateRange) {
       const dateRange = data._metaOverrides.effectiveDate.allowedDateRange;
       return this.getStartDateFromRange(dateRange);
     }
-
     // create a new EDE
     if (!data._metaOverrides) {
       const fields: any = meta.fields.filter((f) => f.name === 'effectiveDate');
@@ -742,6 +741,7 @@ export class FormUtils {
         return this.getStartDateFromRange(fields[0].allowedDateRange);
       }
     }
+    // there is no restriction on the start date
     return null;
   }
 }
