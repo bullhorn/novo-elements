@@ -27,134 +27,14 @@ export interface NovoControlGroupAddConfig {
   label: string;
 }
 
+export interface NovoControlGroupRowConfig {
+  edit: boolean;
+  remove: boolean;
+}
+
 @Component({
   selector: 'novo-control-group',
-  template: `
-    <h6 class="novo-section-header" *ngIf="label">
-      <span (click)="toggle($event)" [class.clickable]="collapsible">
-        <i *ngIf="icon && !collapsible" [ngClass]="icon" [attr.data-automation-id]="'novo-control-group-icon-' + key"></i>
-        <i
-          *ngIf="collapsible"
-          class="bhi-next"
-          [class.toggled]="toggled"
-          [attr.data-automation-id]="'novo-control-group-collapse-' + key"
-        ></i>
-        <span [attr.data-automation-id]="'novo-control-group-label-' + key">{{ label }}</span>
-      </span>
-      <label
-        class="novo-control-group-description"
-        *ngIf="description"
-        [attr.data-automation-id]="'novo-control-group-description-' + key"
-        >{{ description }}</label
-      >
-    </h6>
-    <div
-      class="novo-control-group-controls"
-      [class.vertical]="vertical"
-      [class.horizontal]="!vertical"
-      [class.hidden]="collapsible && !toggled"
-    >
-      <ng-template #defaultTemplate let-index="index" let-form="form" let-key="key">
-        <div class="novo-control-group-control">
-          <div
-            *ngFor="let c of controls"
-            class="novo-control-container"
-            [class.is-label]="c.controlType === 'read-only'"
-            [style.max-width.px]="c.width"
-          >
-            <novo-control
-              [form]="(form?.controls)[key]['controls'][index]"
-              [control]="c"
-              [condensed]="!vertical || c.controlType === 'read-only'"
-            ></novo-control>
-          </div>
-          <div class="novo-control-container last" *ngIf="edit && !vertical">
-            <button
-              [disabled]="!disabledArray[index].edit"
-              type="button"
-              *ngIf="edit && !vertical"
-              theme="icon"
-              icon="edit"
-              (click)="editControl(index)"
-              [attr.data-automation-id]="'novo-control-group-edit-' + key"
-              index="-1"
-            ></button>
-          </div>
-          <div class="novo-control-container last" *ngIf="remove && !vertical">
-            <button
-              [disabled]="!disabledArray[index].remove"
-              type="button"
-              *ngIf="remove && !vertical"
-              theme="icon"
-              icon="delete-o"
-              (click)="removeControl(index)"
-              [attr.data-automation-id]="'novo-control-group-delete-' + key"
-              index="-1"
-            ></button>
-          </div>
-        </div>
-        <button
-          [disabled]="!disabledArray[index].edit"
-          type="button"
-          *ngIf="edit && vertical"
-          theme="icon"
-          icon="edit"
-          (click)="editControl(index)"
-          [attr.data-automation-id]="'novo-control-group-edit-' + key"
-          index="-1"
-        ></button>
-        <button
-          [disabled]="!disabledArray[index].remove"
-          type="button"
-          *ngIf="remove && vertical"
-          theme="icon"
-          icon="delete-o"
-          (click)="removeControl(index)"
-          [attr.data-automation-id]="'novo-control-group-delete-' + key"
-          index="-1"
-        ></button>
-      </ng-template>
-      <div class="novo-control-group-labels" *ngIf="!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0">
-        <div class="novo-control-group-control-label" *ngFor="let label of controlLabels" [style.max-width.px]="label.width">
-          <span [attr.data-automation-id]="'novo-control-group-label-' + label.value">{{ label.value }}</span>
-        </div>
-        <div class="novo-control-group-control-label last" *ngIf="edit" [attr.data-automation-id]="'novo-control-group-edit-' + key"></div>
-        <div
-          class="novo-control-group-control-label last"
-          *ngIf="remove"
-          [attr.data-automation-id]="'novo-control-group-delete-' + key"
-        ></div>
-      </div>
-      <ng-container *ngIf="(form?.controls)[key]">
-        <div class="novo-control-group-row" *ngFor="let control of (form?.controls)[key]['controls']; let index = index">
-          <ng-template
-            [ngTemplateOutlet]="rowTemplate || defaultTemplate"
-            [ngTemplateOutletContext]="{ form: form, index: index, key: key, controls: controls }"
-          >
-          </ng-template>
-        </div>
-      </ng-container>
-      <div
-        class="novo-control-group-empty"
-        *ngIf="(form?.controls)[key] && (form?.controls)[key]['controls'].length === 0"
-        [attr.data-automation-id]="'novo-control-group-empty-' + key"
-      >
-        {{ emptyMessage }}
-      </div>
-      <p *ngIf="add">
-        <button
-          type="button"
-          theme="dialogue"
-          icon="add-thin"
-          (click)="addNewControl()"
-          [attr.data-automation-id]="'novo-control-group-bottom-add-' + key"
-          index="-1"
-        >
-          {{ add?.label }}
-        </button>
-      </p>
-    </div>
-  `,
+  templateUrl: './ControlGroup.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoControlGroup implements AfterContentInit, OnChanges {
@@ -282,6 +162,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
         return {
           value: control.label,
           width: control.width,
+          required: control.required,
         };
       });
       this.ref.markForCheck();
@@ -289,7 +170,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   }
 
   private resetAddRemove(): void {
-    this.disabledArray.forEach((item: { edit: boolean; remove: boolean }, idx: number) => {
+    this.disabledArray.forEach((item: NovoControlGroupRowConfig, idx: number) => {
       item.edit = this.checkCanEdit(idx);
       item.remove = this.checkCanRemove(idx);
     });
@@ -330,7 +211,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
       this.onRemove.emit({ value: control.at(index).value, index: index });
     }
     control.removeAt(index);
-    this.disabledArray = this.disabledArray.filter((value: {edit: boolean; remove: boolean}, idx: number) => idx !== index);
+    this.disabledArray = this.disabledArray.filter((value: NovoControlGroupRowConfig, idx: number) => idx !== index);
     this.resetAddRemove();
     this.currentIndex--;
     this.ref.markForCheck();
