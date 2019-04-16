@@ -10,6 +10,7 @@
     <button theme="primary" (click)="toggleRowDetails(true)">Show Row Details (first table)</button>
     <button theme="primary" (click)="toggleRowDetails(false)">Hide Row Details (first table)</button>
 
+<div class="fixedWindowSize">
 <novo-data-table [rows]="basicRows"
                  [columns]="sharedColumns"
                  [hideGlobalSearch]="!globalSearchEnabled"
@@ -20,6 +21,7 @@
                  (preferencesChanged)="onPreferencesChanged($event)"
                  (resized)="resized($event)"
                  [activeRowIdentifier]="selectedRecordId"
+                 [fixedHeader]="true"
                  #basic>
   <!-- Custom Actions -->
   <ng-template novoTemplate="customActions">
@@ -68,3 +70,4 @@
     <novo-tiles [options]="customStatusColumnOptions" (onChange)="filterList($event)" [(ngModel)]="customStatusColumnValue"></novo-tiles>
   </ng-template>
 </novo-data-table>
+</div>

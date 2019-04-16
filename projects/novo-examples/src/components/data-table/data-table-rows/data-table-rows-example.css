@@ -1,1 +1,8 @@
 /** No CSS for this example */
+.fixedWindowSize {
+  height: 600px;
+}
+
+novo-data-table {
+  height: 100%;
+}

@@ -433,6 +433,8 @@ novo-data-table {
       flex: 1;
       overflow: auto;
       position: relative;
+      width: 100%;
+      height: 100%;
       &.empty {
         display: flex;
         flex: 0;
