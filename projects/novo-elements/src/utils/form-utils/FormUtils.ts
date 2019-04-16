@@ -1,5 +1,6 @@
 // NG
 import { Injectable } from '@angular/core';
+import * as dateFns from 'date-fns';
 // App
 import {
   AddressControl,
@@ -711,5 +712,36 @@ export class FormUtils {
       });
     }
     return valid;
+  }
+
+  private getStartDateFromRange(dateRange: { minDate; minOffset }) {
+    if (dateRange.minDate) {
+      return dateRange.minDate;
+    }
+    if (dateRange.minOffset) {
+      return dateFns.format(dateFns.addDays(new Date(), dateRange.minOffset), 'YYYY-MM-DD');
+    }
+  }
+
+  /**
+   * Get the min start date of a EDE base on data or meta.
+   * @param data entity data
+   * @param meta entity meta
+   */
+  public getStartDate(data: any, meta: any) {
+    // edit or create a new version of a EDE
+    if (data._metaOverrides && data._metaOverrides.effectiveDate.allowedDateRange) {
+      const dateRange = data._metaOverrides.effectiveDate.allowedDateRange;
+      return this.getStartDateFromRange(dateRange);
+    }
+
+    // create a new EDE
+    if (!data._metaOverrides) {
+      const fields: any = meta.fields.filter((f) => f.name === 'effectiveDate');
+      if (fields && fields.length && fields[0].allowedDateRange) {
+        return this.getStartDateFromRange(fields[0].allowedDateRange);
+      }
+    }
+    return null;
   }
 }
