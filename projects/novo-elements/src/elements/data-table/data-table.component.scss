@@ -407,6 +407,7 @@ novo-data-table {
   .novo-data-table-outside-container {
     display: flex;
     flex: 1;
+    overflow: hidden;
     .novo-data-table-custom-filter {
       border-right: 1px solid $off-white;
       novo-date-picker {
