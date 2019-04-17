@@ -124,7 +124,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   @Output()
   public onAdd: EventEmitter<any> = new EventEmitter<any>();
 
-  public controlLabels: { value: string; width: number }[] = [];
+  public controlLabels: { value: string; width: number, required: boolean; key: string; }[] = [];
   public toggled: boolean = false;
   public disabledArray: { edit: boolean; remove: boolean }[] = [];
 
@@ -163,6 +163,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
           value: control.label,
           width: control.width,
           required: control.required,
+          key: control.key,
         };
       });
       this.ref.markForCheck();

@@ -23,7 +23,7 @@
     <button [disabled]="!disabledArray[index].remove" type="button" *ngIf="remove && vertical" theme="icon" icon="delete-o" (click)="removeControl(index)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
   </ng-template>
   <div class="novo-control-group-labels" *ngIf="!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0">
-    <div class="novo-control-group-control-label" *ngFor="let label of controlLabels" [style.max-width.px]="label.width" [class.column-required]="label.required">
+    <div class="novo-control-group-control-label {{ label.key }}" *ngFor="let label of controlLabels" [style.max-width.px]="label.width" [class.column-required]="label.required">
       <span [attr.data-automation-id]="'novo-control-group-label-' + label.value">{{ label.value }}</span>
     </div>
     <div class="novo-control-group-control-label last" *ngIf="edit" [attr.data-automation-id]="'novo-control-group-edit-' + key"></div>
