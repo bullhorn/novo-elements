@@ -18,25 +18,33 @@ import { from, Observable } from 'rxjs';
     class: 'active picker-results',
   },
   template: `
-        <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
-        <ul *ngIf="matches.length > 0">
-            <span *ngFor="let section of matches; let i = index">
-                <li class="header caption" *ngIf="section.data.length > 0">{{ section.label || section.type }}</li>
-                <li
-                    *ngFor="let match of section.data; let i = index" [ngClass]="{checked: match.checked}"
-                    (click)="selectMatch($event, match)"
-                    [class.active]="match === activeMatch"
-                    (mouseenter)="selectActive(match)">
-                    <label>
-                        <i [ngClass]="{'bhi-checkbox-empty': !match.checked, 'bhi-checkbox-filled': match.checked, 'bhi-checkbox-indeterminate': match.indeterminate }"></i>
-                        {{match.label}}
-                    </label>
-                </li>
-            </span>
-        </ul>
-        <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
-        <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
-    `,
+    <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
+    <ul *ngIf="matches.length > 0">
+      <span *ngFor="let section of matches; let i = index">
+        <li class="header caption" *ngIf="section.data.length > 0">{{ section.label || section.type }}</li>
+        <li
+          *ngFor="let match of section.data; let i = index"
+          [ngClass]="{ checked: match.checked }"
+          (click)="selectMatch($event, match)"
+          [class.active]="match === activeMatch"
+          (mouseenter)="selectActive(match)"
+        >
+          <label>
+            <i
+              [ngClass]="{
+                'bhi-checkbox-empty': !match.checked,
+                'bhi-checkbox-filled': match.checked,
+                'bhi-checkbox-indeterminate': match.indeterminate
+              }"
+            ></i>
+            {{ match.label }}
+          </label>
+        </li>
+      </span>
+    </ul>
+    <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
+    <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError && term !== ''">{{ labels.resultsEmpty }}</p>
+  `,
 })
 export class ChecklistPickerResults extends BasePickerResults {
   filteredMatches: any;
