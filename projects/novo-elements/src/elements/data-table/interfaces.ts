@@ -67,7 +67,7 @@ export interface IDataTableColumnSortConfig {
 }
 
 export interface IDataTableColumnFilterConfig {
-  type: 'text' | 'number' | 'date' | 'select' | 'custom';
+  type: 'text' | 'number' | 'date' | 'select' | 'multi-select' | 'custom';
   options?: string[] | IDataTableColumnFilterOption[];
   allowCustomRange?: boolean;
   transform?: Function;
@@ -94,7 +94,7 @@ export interface IDataTableSortFilter {
 
 export interface IDataTableChangeEvent {
   sort?: { id: string; value: string };
-  filter?: { id: string; value: string };
+  filter?: { id: string; value: string | string[] };
   page?: number;
   pageSize?: number;
   globalSearch?: string;
@@ -113,7 +113,7 @@ export interface IDataTablePaginationEvent {
 export interface IDataTableService<T> {
   getTableResults(
     sort: { id: string; value: string; transform?: Function },
-    filter: { id: string; value: string; transform?: Function },
+    filter: { id: string; value: string | string[]; transform?: Function },
     page: number,
     pageSize: number,
     globalSearch?: string,

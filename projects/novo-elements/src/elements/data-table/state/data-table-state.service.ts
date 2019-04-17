@@ -12,7 +12,7 @@ export class DataTableState<T> {
   public dataLoaded = new Subject();
 
   sort: { id: string; value: string } = undefined;
-  filter: { id: string; value: string } = undefined;
+  filter: { id: string; value: string | string[] } = undefined;
   page: number = 0;
   pageSize: number = undefined;
   globalSearch: string = undefined;
