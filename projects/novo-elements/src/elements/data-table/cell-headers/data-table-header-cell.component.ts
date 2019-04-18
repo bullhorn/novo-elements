@@ -122,8 +122,8 @@ import { Helpers } from '../../../utils/Helpers';
             >
               <span>{{ option?.label || option }}</span>
               <i
-                [class.bhi-checkbox-empty]="multiSelectedOptions ? !isSelected(option, multiSelectedOptions) : !isSelected(option, filter)"
-                [class.bhi-checkbox-filled]="multiSelectedOptions ? isSelected(option, multiSelectedOptions) : isSelected(option, filter)"
+                [class.bhi-checkbox-empty]="!multiSelectedOptions || !isSelected(option, multiSelectedOptions)"
+                [class.bhi-checkbox-filled]="multiSelectedOptions && isSelected(option, multiSelectedOptions)"
               ></i>
             </item>
           </list>
@@ -144,23 +144,11 @@ import { Helpers } from '../../../utils/Helpers';
             </item>
           </list>
         </ng-container>
-        <div class="footer">
-          <button
-            theme="dialogue"
-            color="empty"
-            (click)="cancel()"
-            *ngIf="multiSelect && multiSelectedOptions"
-            data-automation-id="novo-data-table-multi-select-cancel"
-          >
+        <div class="footer" *ngIf="multiSelect">
+          <button theme="dialogue" color="dark" (click)="cancel()" data-automation-id="novo-data-table-multi-select-cancel">
             {{ labels.cancel }}
           </button>
-          <button
-            theme="dialogue"
-            color="positive"
-            (click)="filterMultiSelect()"
-            *ngIf="multiSelect && multiSelectedOptions"
-            data-automation-id="novo-data-table-multi-select-filter"
-          >
+          <button theme="dialogue" color="positive" (click)="filterMultiSelect()" data-automation-id="novo-data-table-multi-select-filter">
             {{ labels.filters }}
           </button>
         </div>
@@ -248,7 +236,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     filterConfig?: IDataTableColumnFilterConfig;
   };
   public multiSelect: boolean = false;
-  public multiSelectedOptions: Array<any>;
+  public multiSelectedOptions: Array<any> = [];
   private subscriptions: Subscription[] = [];
   private _column: IDataTableColumn<T>;
 
@@ -275,7 +263,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       } else {
         this.filterActive = false;
         this.filter = undefined;
-        this.multiSelectedOptions = undefined;
+        this.multiSelectedOptions = [];
       }
       changeDetectorRef.markForCheck();
     });
@@ -291,6 +279,9 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       this.changeDetectorRef.markForCheck();
     }
     this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
+    if (this.multiSelect) {
+      this.multiSelectedOptions = this.filter ? [...this.filter] : [];
+    }
   }
 
   public ngOnDestroy(): void {
@@ -302,11 +293,13 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   public isSelected(option: any, optionsList: any) {
     if (optionsList) {
+      const optionValue = option.hasOwnProperty('value') ? option.value : option;
+
       let found = optionsList.find((item) => {
         if (item.hasOwnProperty('value')) {
-          return item.value === (option && option.value ? option.value : option);
+          return item.value === optionValue;
         } else {
-          return item === (option && option.value ? option.value : option);
+          return item === optionValue;
         }
       });
       return found !== undefined;
@@ -315,33 +308,29 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   public toggleSelection(option: any) {
-    if (!this.multiSelectedOptions) {
-      this.multiSelectedOptions = this.filter ? [...this.filter] : [];
-    }
+    const optionValue = option.hasOwnProperty('value') ? option.value : option;
 
     let optionIndex = this.multiSelectedOptions.findIndex((item) => {
       if (item.hasOwnProperty('value')) {
-        return item.value === (option && option.value ? option.value : option);
+        return item.value === optionValue;
       } else {
-        return item === (option && option.value ? option.value : option);
+        return item === optionValue;
       }
     });
+
     if (optionIndex > -1) {
       this.multiSelectedOptions.splice(optionIndex, 1);
     } else {
-      this.multiSelectedOptions.push(option);
-    }
-    if (this.multiSelectedOptions.length === 0) {
-      this.multiSelectedOptions = undefined;
+      this.multiSelectedOptions.push(optionValue);
     }
   }
 
   public cancel(): void {
-    this.multiSelectedOptions = this.filter ? [...this.filter] : undefined;
+    this.multiSelectedOptions = this.filter ? [...this.filter] : [];
   }
 
   public filterMultiSelect(): void {
-    let actualFilter = [...this.multiSelectedOptions];
+    let actualFilter = this.multiSelectedOptions.length > 0 ? [...this.multiSelectedOptions] : undefined;
     this.filterData(actualFilter);
   }
 
@@ -439,7 +428,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   public clearFilter(): void {
     this.filter = undefined;
-    this.multiSelectedOptions = undefined;
+    this.multiSelectedOptions = [];
     this.activeDateFilter = undefined;
     this.filterData(undefined);
   }
