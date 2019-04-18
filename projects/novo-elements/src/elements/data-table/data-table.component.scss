@@ -603,12 +603,12 @@ novo-data-table-pagination {
     }
   }
   .footer {
+    border-top: 1px solid $light;
     padding: 5px 10px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     button {
-      padding: 3px;
       icon {
         font-size: 0.8em;
       }
