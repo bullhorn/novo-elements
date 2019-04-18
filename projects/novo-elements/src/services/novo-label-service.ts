@@ -13,7 +13,7 @@ export class NovoLabelService {
   erroredTableMessage = 'Oops! An error occurred.';
   pickerError = 'Oops! An error occurred.';
   pickerTextFieldEmpty = 'Begin typing to see results.';
-  resultsEmpty = 'No results to display...';
+  pickerEmpty = 'No results to display...';
   quickNoteError = 'Oops! An error occurred.';
   quickNoteEmpty = 'No results to display...';
   required = 'Required';

@@ -191,7 +191,7 @@ export class EntityPickerResult {
       <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
     </novo-list>
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
-    <p class="picker-null-results" *ngIf="hasNonErrorMessage && term !== ''">{{ labels.resultsEmpty }}</p>
+    <p class="picker-null-results" *ngIf="hasNonErrorMessage && term !== ''">{{ labels.pickerEmpty }}</p>
     <p class="picker-null-results" *ngIf="hasNonErrorMessage && term === ''">{{ labels.pickerTextFieldEmpty }}</p>
   `,
 })

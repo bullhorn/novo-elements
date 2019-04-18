@@ -30,7 +30,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
       <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
     </novo-list>
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
-    <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.resultsEmpty }}</p>
+    <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
   `,
 })
 export class SkillsSpecialtyPickerResults extends BasePickerResults {

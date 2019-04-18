@@ -13,7 +13,7 @@ describe('Service: NovoLabelService', () => {
     expect(service.erroredTableMessage).toBeDefined();
     expect(service.pickerError).toBeDefined();
     expect(service.pickerTextFieldEmpty).toBeDefined();
-    expect(service.resultsEmpty).toBeDefined();
+    expect(service.pickerEmpty).toBeDefined();
     expect(service.quickNoteError).toBeDefined();
     expect(service.quickNoteEmpty).toBeDefined();
     expect(service.required).toBeDefined();
