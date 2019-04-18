@@ -35,3 +35,7 @@ Data won't actually change, the URL will update with the proper request it will 
 ###### URL
 
 <code-example example="data-table-remote"></code-example>
+
+##### Data Table Column Filter Options
+
+<code-example example="data-table-filters"></code-example>

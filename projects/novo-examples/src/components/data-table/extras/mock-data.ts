@@ -4,6 +4,7 @@ export interface MockData {
   simpleEmbeddedObj: { id: number };
   name: string;
   status: string;
+  priority?: string;
   enabled: boolean;
   date: Date;
   dateTime: Date;
