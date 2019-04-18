@@ -327,11 +327,13 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   public cancel(): void {
     this.multiSelectedOptions = this.filter ? [...this.filter] : [];
+    this.dropdown.closePanel();
   }
 
   public filterMultiSelect(): void {
     let actualFilter = this.multiSelectedOptions.length > 0 ? [...this.multiSelectedOptions] : undefined;
     this.filterData(actualFilter);
+    this.dropdown.closePanel();
   }
 
   public startResize(mouseDownEvent: MouseEvent): void {
