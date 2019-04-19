@@ -5,7 +5,7 @@ import { NovoButtonModule, NovoLabelService, NovoTooltipModule, NovoDropdownModu
 import { FormsModule } from '@angular/forms';
 import { DataTableState } from '../state/data-table-state.service';
 import { EventEmitter } from '@angular/core';
-import { Subscription } from 'rxjs';
+
 // App
 
 describe('Elements: NovoDataTableCellHeader', () => {
