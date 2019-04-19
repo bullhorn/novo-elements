@@ -457,7 +457,7 @@ describe('Utils: FormUtils', () => {
       };
       spyOn(formUtils, 'getControlForField').and.returnValue({});
       formUtils.toFieldSets(meta, 'USD', {}, {}, {}, { firstName: 'First' });
-      expect(formUtils.getControlForField).toHaveBeenCalledWith(meta.fields[0], {}, {}, {}, undefined, 'First');
+      expect(formUtils.getControlForField).toHaveBeenCalledWith(meta.fields[0], {}, {}, {}, undefined, 'First', meta);
     });
   });
 
@@ -628,17 +628,17 @@ describe('Utils: FormUtils', () => {
     });
   });
   describe('Method: getStartDate(data: any, meta: any): string | null', () => {
-    let data, meta;
+    let field, meta;
     beforeEach(() => {
-      data = { _metaOverrides: { effectiveDate: { allowedDateRange: { minDate: '2019-01-26' } } } };
+      field = { name: 'effectiveDate', _metaOverrides: { effectiveDate: { allowedDateRange: { minDate: '2019-01-26' } } } };
       meta = { fields: [{ name: 'effectiveDate', allowedDateRange: { minOffset: 1 } }] };
     });
     it('should be data override', () => {
-      expect(formUtils.getStartDate(data, meta)).toBe('2019-01-26');
+      expect(formUtils.getStartDate(field, meta)).toBeInstanceOf(Date);
     });
     it('should be data override', () => {
-      data._metaOverrides = null;
-      expect(formUtils.getStartDate(data, meta)).toBeDefined();
+      field._metaOverrides = null;
+      expect(formUtils.getStartDate(field, meta)).toBeDefined();
     });
   });
 });
