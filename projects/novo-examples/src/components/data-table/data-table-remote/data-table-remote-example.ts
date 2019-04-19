@@ -166,6 +166,17 @@ export class DataTableRemoteExample {
       sortable: true,
     },
     {
+      id: 'priority',
+      label: 'Priority',
+      enabled: true,
+      type: 'text',
+      filterable: {
+        type: 'multi-select',
+        options: ['Blazing', 'Hot', 'Warm', 'Cold', 'Freezing'],
+      },
+      sortable: true,
+    },
+    {
       id: 'enabled',
       label: 'Enabled',
       enabled: true,
@@ -201,6 +212,7 @@ export class DataTableRemoteExample {
     'email',
     'simpleEmbeddedObj',
     'status',
+    'priority',
     'percent',
     'embeddedObj',
     'edit',
@@ -240,6 +252,7 @@ export class DataTableRemoteExample {
         simpleEmbeddedObj: { id: i },
         name: `(1) Name ${i}`,
         status: `(1) Status ${i}`,
+        priority: this.getPriority(),
         enabled: i % 2 === 0,
         date: day,
         dateTime: day,
@@ -252,6 +265,22 @@ export class DataTableRemoteExample {
       });
     }
     this.remoteService = new RemoteMockDataService([...this.staticDataSet1.slice(0, 10)]);
+  }
+
+  public getPriority(): string {
+    const x = Math.round(Math.random() * 4);
+    switch (x) {
+      case 4:
+        return 'Blazing';
+      case 3:
+        return 'Hot';
+      case 2:
+        return 'Warm';
+      case 1:
+        return 'Cold';
+      default:
+        return 'Freezing';
+    }
   }
 
   public switchPaginationType(type: 'basic' | 'standard') {

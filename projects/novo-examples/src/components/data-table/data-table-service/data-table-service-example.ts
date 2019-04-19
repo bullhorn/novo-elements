@@ -168,6 +168,17 @@ export class DataTableServiceExample {
       sortable: true,
     },
     {
+      id: 'priority',
+      label: 'Priority',
+      enabled: true,
+      type: 'text',
+      filterable: {
+        type: 'multi-select',
+        options: ['Blazing', 'Hot', 'Warm', 'Cold', 'Freezing'],
+      },
+      sortable: true,
+    },
+    {
       id: 'enabled',
       label: 'Enabled',
       enabled: true,
@@ -203,6 +214,7 @@ export class DataTableServiceExample {
     'email',
     'simpleEmbeddedObj',
     'status',
+    'priority',
     'percent',
     'embeddedObj',
     'edit',
@@ -244,6 +256,7 @@ export class DataTableServiceExample {
         simpleEmbeddedObj: { id: i },
         name: `(1) Name ${i}`,
         status: `(1) Status ${i}`,
+        priority: this.getPriority(),
         enabled: i % 2 === 0,
         date: day,
         dateTime: day,
@@ -260,6 +273,7 @@ export class DataTableServiceExample {
         simpleEmbeddedObj: { id: i },
         name: `(2) Name ${i}`,
         status: `(2) Status ${i}`,
+        priority: this.getPriority(),
         enabled: i % 2 === 0,
         date: day,
         dateTime: day,
@@ -272,6 +286,22 @@ export class DataTableServiceExample {
       });
     }
     this.basicService = new StaticDataTableService([...this.staticDataSet1]);
+  }
+
+  public getPriority(): string {
+    const x = Math.round(Math.random() * 4);
+    switch (x) {
+      case 4:
+        return 'Blazing';
+      case 3:
+        return 'Hot';
+      case 2:
+        return 'Warm';
+      case 1:
+        return 'Cold';
+      default:
+        return 'Freezing';
+    }
   }
 
   public switchPaginationType(type: 'basic' | 'standard') {
