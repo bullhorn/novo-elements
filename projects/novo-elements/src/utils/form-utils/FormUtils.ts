@@ -219,7 +219,7 @@ export class FormUtils {
     // TODO: (cont.) as the setter of the field argument
     let type: string = this.determineInputType(field) || field.type;
     let control: any;
-    let controlConfig: NovoControlConfig = {
+    const controlConfig: NovoControlConfig = {
       metaType: field.type,
       type: type,
       key: field.name,
@@ -249,8 +249,10 @@ export class FormUtils {
       warning: field.warning,
       config: field.config || {},
       closeOnSelect: field.closeOnSelect,
-      startDate: this.getStartDate(field, meta),
     };
+    if (field.dataType === 'Date') {
+      controlConfig.startDate = this.getStartDate(field, meta);
+    }
     // TODO: getControlOptions should always return the correct format
     const optionsConfig = this.getControlOptions(field, http, config, fieldData);
     if (Array.isArray(optionsConfig) && !(type === 'chips' || type === 'picker')) {
@@ -554,12 +556,12 @@ export class FormUtils {
           !field.readOnly
         ) {
           const fieldData: any = data && data[field.name] ? data[field.name] : null;
-          let control = this.getControlForField(field, http, config, overrides, undefined, fieldData, meta);
+          const control = this.getControlForField(field, http, config, overrides, undefined, fieldData, meta);
           // Set currency format
           if (control.subType === 'currency') {
             control.currencyFormat = currencyFormat;
           }
-          let location = ranges.find((item) => {
+          const location = ranges.find((item) => {
             return (item.min <= field.sortOrder && field.sortOrder <= item.max) || (item.min <= field.sortOrder && item.min === item.max);
           });
           if (location) {
@@ -719,26 +721,21 @@ export class FormUtils {
   private getStartDateFromRange(dateRange: { minDate: string; minOffset: number }): Date {
     if (dateRange.minDate) {
       return new Date(dateRange.minDate);
-    }
-    if (dateRange.minOffset) {
+    } else if (dateRange.minOffset) {
       return dateFns.addDays(new Date(), dateRange.minOffset - 1);
     }
   }
 
   /**
-   * Get the min start date of a EDE base on data or meta.
+   * Get the min start date of a Date base on data or meta.
    */
   private getStartDate(field: any, meta: any): Date | null {
-    if (field.name === 'effectiveDate') {
-      if (field.allowedDateRange) {
-        // edit or create a new version of a EDE
-        return this.getStartDateFromRange(field.allowedDateRange);
-      } else {
-        // create a new EDE
-        const fields: any = meta.fields.filter((f) => f.name === 'effectiveDate');
-        if (fields && fields.length && fields[0].allowedDateRange) {
-          return this.getStartDateFromRange(fields[0].allowedDateRange);
-        }
+    if (field.allowedDateRange) {
+      return this.getStartDateFromRange(field.allowedDateRange);
+    } else {
+      const fields: any = meta.fields.filter((f) => f.name === 'effectiveDate');
+      if (fields && fields.length && fields[0].allowedDateRange) {
+        return this.getStartDateFromRange(fields[0].allowedDateRange);
       }
     }
     // there is no restriction on the start date
@@ -746,15 +743,19 @@ export class FormUtils {
   }
 
   private getControlValue(field, meta) {
-    if (field.name === 'effectiveDate') {
+    if (field.value || field.defaultValue) {
+      return field.value || field.defaultValue;
+    } else if (field.dataType === 'Date') {
       const startDate = this.getStartDate(field, meta);
-      if (!startDate || startDate < new Date()) {
+      if (!startDate || this.isBeforeToday(startDate)) {
         return Date.now();
       } else {
         return dateFns.addDays(startDate, 1);
       }
-    } else {
-      return field.value || field.defaultValue;
     }
+  }
+
+  private isBeforeToday(startDate: Date): boolean {
+    return startDate.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
   }
 }
