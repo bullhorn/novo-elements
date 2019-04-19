@@ -243,7 +243,7 @@ export class NovoPickerElement implements OnInit {
     this.onModelChange(this._value);
 
     if (wipeTerm) {
-      this.term = null;
+      this.term = '';
       this.hideResults();
     }
     this.ref.markForCheck();
