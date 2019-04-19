@@ -5,6 +5,7 @@ import { NovoButtonModule, NovoLabelService, NovoTooltipModule, NovoDropdownModu
 import { FormsModule } from '@angular/forms';
 import { DataTableState } from '../state/data-table-state.service';
 import { EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs';
 // App
 
 describe('Elements: NovoDataTableCellHeader', () => {
@@ -40,51 +41,10 @@ describe('Elements: NovoDataTableCellHeader', () => {
     });
   });
 
-  describe('Method: startResize(mouseDownEvent: MouseEvent)', () => {
-    let mouseDownEvent: MouseEvent;
-
-    beforeEach(() => {
-      mouseDownEvent = window.document.createEvent('MouseEvents');
-      mouseDownEvent.initMouseEvent('mousedown', true, true, window, 1, 50, 50, 500, 50, false, false, false, false, 0, null);
-      spyOn(mouseDownEvent, 'preventDefault');
-
-      component.elementRef = {
-        nativeElement: {
-          getBoundingClientRect: () => {
-            return {
-              width: 120,
-            };
-          },
-        },
-      };
-    });
-
-    it('should stop from dispatching the event', () => {
-      component.startResize(mouseDownEvent);
-      expect(mouseDownEvent.preventDefault).toHaveBeenCalled();
-    });
-
-    it('should add subscriptions to global list', () => {
-      component.startResize(mouseDownEvent);
-      expect(component.subscriptions.length).toEqual(2);
-    });
-
-    it('should change the width when moving mouse', () => {
-      spyOn(component.renderer, 'setStyle');
-      component.startResize(mouseDownEvent);
-
-      let mouseMoveEvent: MouseEvent = window.document.createEvent('MouseEvents');
-      mouseMoveEvent.initMouseEvent('mousemove', true, true, window, 1, 50, 50, 550, 50, false, false, false, false, 0, null);
-      window.document.dispatchEvent(mouseMoveEvent);
-
-      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'min-width', '170px');
-      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'width', '170px');
-      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'max-width', '170px');
-      expect(component._column.width).toEqual(170);
-    });
-  });
-
   describe('MultiSelect Tests:', () => {
+    beforeAll(() => {
+      component.config.resizable = false;
+    });
     describe('method isSelected()', () => {
       it('should return true if an option in the optionList', () => {
         const optionList = [1, 2, 3, 4, 5];
@@ -165,6 +125,55 @@ describe('Elements: NovoDataTableCellHeader', () => {
         component.toggleSelection({ value: 5 });
         expect(component.multiSelectedOptions).not.toContain(5);
       });
+    });
+  });
+
+  describe('Method: startResize(mouseDownEvent: MouseEvent)', () => {
+    let mouseDownEvent: MouseEvent;
+    let mouseUpEvent: MouseEvent;
+
+    beforeEach(() => {
+      mouseDownEvent = window.document.createEvent('MouseEvents');
+      mouseDownEvent.initMouseEvent('mousedown', true, true, window, 1, 50, 50, 500, 50, false, false, false, false, 0, null);
+      spyOn(mouseDownEvent, 'preventDefault');
+
+      mouseUpEvent = window.document.createEvent('MouseEvents');
+      mouseUpEvent.initMouseEvent('mouseup', true, true, window, 1, 50, 50, 550, 50, false, false, false, false, 0, null);
+      spyOn(mouseUpEvent, 'preventDefault');
+      component.elementRef = {
+        nativeElement: {
+          getBoundingClientRect: () => {
+            return {
+              width: 120,
+            };
+          },
+        },
+      };
+    });
+
+    it('should stop from dispatching the event', () => {
+      component.startResize(mouseDownEvent);
+      expect(mouseDownEvent.preventDefault).toHaveBeenCalled();
+    });
+
+    it('should add subscriptions to global list', () => {
+      component.startResize(mouseDownEvent);
+      expect(component.subscriptions.length).toEqual(2);
+    });
+
+    it('should change the width when moving mouse', async () => {
+      spyOn(component.renderer, 'setStyle');
+      component.startResize(mouseDownEvent);
+
+      let mouseMoveEvent: MouseEvent = window.document.createEvent('MouseEvents');
+      mouseMoveEvent.initMouseEvent('mousemove', true, true, window, 1, 50, 50, 550, 50, false, false, false, false, 0, null);
+      window.document.dispatchEvent(mouseMoveEvent);
+
+      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'min-width', '170px');
+      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'width', '170px');
+      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'max-width', '170px');
+      expect(component._column.width).toEqual(170);
+      window.document.dispatchEvent(mouseUpEvent);
     });
   });
 });
