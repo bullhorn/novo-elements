@@ -83,4 +83,88 @@ describe('Elements: NovoDataTableCellHeader', () => {
       expect(component._column.width).toEqual(170);
     });
   });
+
+  describe('MultiSelect Tests:', () => {
+    describe('method isSelected()', () => {
+      it('should return true if an option in the optionList', () => {
+        const optionList = [1, 2, 3, 4, 5];
+
+        const result = component.isSelected(1, optionList);
+        expect(result).toBe(true);
+
+        const result2 = component.isSelected({ value: 1, label: 'A Label' }, optionList);
+        expect(result2).toBe(true);
+
+        const optionList2 = [{ value: 1, label: '1 Label' }, { value: 2, label: '2 Label' }];
+
+        const result3 = component.isSelected(1, optionList2);
+        expect(result3).toBe(true);
+      });
+      it('should return false if an option is not in the optionList', () => {
+        const optionList = [1, 2, 3, 4, 5];
+
+        const result = component.isSelected(6, optionList);
+        expect(result).toBe(false);
+
+        const result2 = component.isSelected({ value: 6, label: 'A Label' }, optionList);
+        expect(result2).toBe(false);
+
+        const optionList2 = [{ value: 1, label: '1 Label' }, { value: 2, label: '2 Label' }];
+
+        const result3 = component.isSelected(3, optionList2);
+        expect(result3).toBe(false);
+      });
+      it('should return false if there is no optionList', () => {
+        const result = component.isSelected(6, undefined);
+        expect(result).toBe(false);
+      });
+    });
+
+    describe('method cancel()', () => {
+      beforeEach(() => {
+        component.dropdown = {
+          closePanel: () => {},
+        };
+        spyOn(component.dropdown, 'closePanel');
+      });
+      it('should reset multiSelectOptions', () => {
+        component.filter = [1, 2];
+        component.multiSelectedOptions = [2, 3, 4];
+        component.cancel();
+        expect(component.multiSelectedOptions).toEqual(component.filter);
+
+        component.filter = undefined;
+        component.multiSelectedOptions = [2, 3, 4];
+        component.cancel();
+        expect(component.multiSelectedOptions).toEqual([]);
+      });
+
+      it('should call closePanel()', () => {
+        component.filter = [1, 2];
+        component.multiSelectedOptions = [2, 3, 4];
+        component.cancel();
+        expect(component.dropdown.closePanel).toHaveBeenCalled();
+      });
+    });
+
+    describe('method toggleSelection()', () => {
+      it('should add an item to the multiSelectedOptions if not already in', () => {
+        component.multiSelectedOptions = [1, 2, 3, 4, 5];
+        component.toggleSelection(6);
+        expect(component.multiSelectedOptions).toContain(6);
+
+        component.toggleSelection({ value: 7 });
+        expect(component.multiSelectedOptions).toContain(7);
+      });
+
+      it('should remove an item from the multiSelectedOptions if already there', () => {
+        component.multiSelectedOptions = [1, 2, 3, 4, 5];
+        component.toggleSelection(2);
+        expect(component.multiSelectedOptions).not.toContain(2);
+
+        component.toggleSelection({ value: 5 });
+        expect(component.multiSelectedOptions).not.toContain(5);
+      });
+    });
+  });
 });
