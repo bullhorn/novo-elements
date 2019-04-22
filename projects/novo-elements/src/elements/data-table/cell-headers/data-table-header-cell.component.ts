@@ -291,7 +291,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     });
   }
 
-  public isSelected(option: any, optionsList: any) {
+  public isSelected(option, optionsList) {
     if (optionsList) {
       const optionValue = option.hasOwnProperty('value') ? option.value : option;
 
@@ -307,8 +307,8 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     return false;
   }
 
-  public toggleSelection(option: any) {
-    const optionValue = option.hasOwnProperty('value') ? option.value : option;
+  public toggleSelection(option) {
+    const optionValue = option.value ? option.value : option;
 
     let optionIndex = this.multiSelectedOptions.findIndex((item) => {
       if (item.hasOwnProperty('value')) {
