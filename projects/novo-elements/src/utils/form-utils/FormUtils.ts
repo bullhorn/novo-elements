@@ -724,7 +724,7 @@ export class FormUtils {
   }
 
   /**
-   * Get the min start date of a Date base on data or meta.
+   * Get the min start date of a Date base on field data.
    */
   private getStartDate(field: any): Date | null {
     if (field.allowedDateRange) {
