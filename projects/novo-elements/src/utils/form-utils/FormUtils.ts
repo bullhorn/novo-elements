@@ -219,7 +219,7 @@ export class FormUtils {
     // TODO: (cont.) as the setter of the field argument
     let type: string = this.determineInputType(field) || field.type;
     let control: any;
-    const controlConfig: NovoControlConfig = {
+    let controlConfig: NovoControlConfig = {
       metaType: field.type,
       type: type,
       key: field.name,
@@ -228,7 +228,7 @@ export class FormUtils {
       required: field.required || field.systemRequired,
       hidden: !field.required,
       encrypted: this.isFieldEncrypted(field.name ? field.name.toString() : ''),
-      value: this.getControlValue(field, meta),
+      value: this.getControlValue(field),
       sortOrder: field.sortOrder,
       associatedEntity: field.associatedEntity,
       optionsType: field.optionsType,
@@ -251,7 +251,7 @@ export class FormUtils {
       closeOnSelect: field.closeOnSelect,
     };
     if (field.dataType === 'Date') {
-      controlConfig.startDate = this.getStartDate(field, meta);
+      controlConfig.startDate = this.getStartDate(field);
     }
     // TODO: getControlOptions should always return the correct format
     const optionsConfig = this.getControlOptions(field, http, config, fieldData);
@@ -456,7 +456,7 @@ export class FormUtils {
           (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
           !field.readOnly
         ) {
-          const control = this.getControlForField(field, http, config, overrides, forTable, undefined, meta);
+          let control = this.getControlForField(field, http, config, overrides, forTable, undefined);
           // Set currency format
           if (control.subType === 'currency') {
             control.currencyFormat = currencyFormat;
@@ -556,12 +556,12 @@ export class FormUtils {
           !field.readOnly
         ) {
           const fieldData: any = data && data[field.name] ? data[field.name] : null;
-          const control = this.getControlForField(field, http, config, overrides, undefined, fieldData, meta);
+          let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
           // Set currency format
           if (control.subType === 'currency') {
             control.currencyFormat = currencyFormat;
           }
-          const location = ranges.find((item) => {
+          let location = ranges.find((item) => {
             return (item.min <= field.sortOrder && field.sortOrder <= item.max) || (item.min <= field.sortOrder && item.min === item.max);
           });
           if (location) {
@@ -729,24 +729,19 @@ export class FormUtils {
   /**
    * Get the min start date of a Date base on data or meta.
    */
-  private getStartDate(field: any, meta: any): Date | null {
+  private getStartDate(field: any): Date | null {
     if (field.allowedDateRange) {
       return this.getStartDateFromRange(field.allowedDateRange);
-    } else {
-      const fields: any = meta.fields.filter((f) => f.name === 'effectiveDate');
-      if (fields && fields.length && fields[0].allowedDateRange) {
-        return this.getStartDateFromRange(fields[0].allowedDateRange);
-      }
     }
     // there is no restriction on the start date
     return null;
   }
 
-  private getControlValue(field, meta) {
+  private getControlValue(field) {
     if (field.value || field.defaultValue) {
       return field.value || field.defaultValue;
     } else if (field.dataType === 'Date') {
-      const startDate = this.getStartDate(field, meta);
+      const startDate = this.getStartDate(field);
       if (!startDate || this.isBeforeToday(startDate)) {
         return Date.now();
       } else {
