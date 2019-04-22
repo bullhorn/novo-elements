@@ -83,9 +83,10 @@ export class Helpers {
     return typeof obj === 'string';
   }
 
-  static isNumber(val: any) {
+  static isNumber(val: any, includeNegatives: boolean = false) {
+    const numberRegex = includeNegatives ? /^-{0,1}\d*\.?\d*$/ : /^\d*\.?\d*$/;
     if (typeof val === 'string') {
-      return val.length > 0 && val !== '.' && /^\d*\.?\d*$/.test(val);
+      return val.length > 0 && val !== '.' && numberRegex.test(val);
     } else {
       return !isNaN(parseFloat(val));
     }
