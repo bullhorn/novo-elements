@@ -213,7 +213,6 @@ export class FormUtils {
     overrides?: any,
     forTable: boolean = false,
     fieldData?: any,
-    meta?: any,
   ) {
     // TODO: if field.type overrides `determineInputType` we should use it in that method or use this method
     // TODO: (cont.) as the setter of the field argument
@@ -456,7 +455,7 @@ export class FormUtils {
           (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
           !field.readOnly
         ) {
-          let control = this.getControlForField(field, http, config, overrides, forTable, undefined);
+          let control = this.getControlForField(field, http, config, overrides, forTable);
           // Set currency format
           if (control.subType === 'currency') {
             control.currencyFormat = currencyFormat;
