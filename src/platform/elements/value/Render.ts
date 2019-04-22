@@ -202,7 +202,7 @@ export class RenderPipe implements PipeTransform {
       case 'Address1':
       case 'AddressWithoutCountry':
       case 'SecondaryAddress':
-      case 'BillingAddress':  
+      case 'BillingAddress':
         let country: any = findByCountryId(Number(value.countryName));
         text = '';
         if (value.address1 || value.address2) {
@@ -283,7 +283,7 @@ export class RenderPipe implements PipeTransform {
         text = `${value.compensation ? `${value.compensation.code} - ` : ''} ${value.compensation ? value.compensation.name : ''}`;
         break;
       case 'Options':
-        text = this.options(value, args.options);
+        text = this.options(value, args.options, args);
         break;
       case 'ToMany':
         if (['Candidate', 'CorporateUser', 'Person'].indexOf(args.associatedEntity.entity) > -1) {
@@ -376,18 +376,25 @@ export class RenderPipe implements PipeTransform {
    * @param {Array} list - list of options (label/value pairs)
    * @return {String}
    */
-  options(value: any, list: any): any {
+  options(value: any, list: any, args: any): any {
     if (!Array.isArray(value)) {
       value = [value];
     }
-    return value.map((item: any) => {
-      for (const option of list) {
-        if (option.value === item) {
-          return option.label;
+    try {
+      return value.map((item: any) => {
+        for (const option of list) {
+          if (option.value === item) {
+            return option.label;
+          }
         }
+        return item;
+      });
+    } catch (e) {
+      if (!args.optionsType) {
+        console.error(`WARNING: There are no options configured for the field: ${args.label}`);
       }
-      return item;
-    });
+      return value;
+    }
   }
 
   getNumberDecimalPlaces(value: any): any {

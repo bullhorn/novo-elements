@@ -231,6 +231,7 @@ export class ValueDemoComponent {
   multiOptionData = ['1', '3'];
   multiOptionMeta = {
     inputType: 'SELECT',
+    label: 'Status',
     options: [
       { label: 'New Lead', value: '1' },
       { label: 'Old Lead', value: '2' },
