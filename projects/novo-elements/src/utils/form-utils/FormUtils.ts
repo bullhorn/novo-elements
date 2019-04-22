@@ -227,7 +227,7 @@ export class FormUtils {
       required: field.required || field.systemRequired,
       hidden: !field.required,
       encrypted: this.isFieldEncrypted(field.name ? field.name.toString() : ''),
-      value: this.getControlValue(field),
+      value: field.value || field.defaultValue,
       sortOrder: field.sortOrder,
       associatedEntity: field.associatedEntity,
       optionsType: field.optionsType,
@@ -249,9 +249,7 @@ export class FormUtils {
       config: field.config || {},
       closeOnSelect: field.closeOnSelect,
     };
-    if (field.dataType === 'Date') {
-      controlConfig.startDate = this.getStartDate(field);
-    }
+    this.inferStartDate(controlConfig, field);
     // TODO: getControlOptions should always return the correct format
     const optionsConfig = this.getControlOptions(field, http, config, fieldData);
     if (Array.isArray(optionsConfig) && !(type === 'chips' || type === 'picker')) {
@@ -736,16 +734,20 @@ export class FormUtils {
     return null;
   }
 
-  private getControlValue(field) {
-    if (field.value || field.defaultValue) {
-      return field.value || field.defaultValue;
-    } else if (field.dataType === 'Date') {
+  private inferStartDate(controlConfig, field) {
+    if (field.dataType === 'Date') {
       const startDate = this.getStartDate(field);
-      if (!startDate || this.isBeforeToday(startDate)) {
-        return Date.now();
-      } else {
-        return dateFns.addDays(startDate, 1);
+      if (startDate) {
+        controlConfig.startDate = startDate;
       }
+      if (!controlConfig.value) {
+        if (!startDate || this.isBeforeToday(startDate)) {
+          controlConfig.value = Date.now();
+        } else {
+          controlConfig.value = dateFns.addDays(startDate, 1);
+        }
+      }
+      return startDate;
     }
   }
 

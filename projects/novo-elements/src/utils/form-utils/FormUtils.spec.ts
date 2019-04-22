@@ -639,10 +639,10 @@ describe('Utils: FormUtils', () => {
       expect(startDate).toBeInstanceOf(Date);
     });
   });
-  describe('Method: getControlValue()', () => {
+  describe('Method: inferStartDate()', () => {
     it('should return Date', () => {
       const field = { dataType: 'Date', allowedDateRange: { minOffset: 1 } };
-      const startDate = formUtils.getControlValue(field);
+      const startDate = formUtils.inferStartDate({}, field);
       expect(startDate).toBeInstanceOf(Date);
     });
   });
