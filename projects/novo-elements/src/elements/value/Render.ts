@@ -329,6 +329,7 @@ export class RenderPipe implements PipeTransform {
     } catch (e) {
       console.error(`WARNING: There was a problem rendering the value of the field: ${args.label}. Please check the configuration`);
       console.error(e);
+      return text;
     }
   }
 
@@ -393,7 +394,7 @@ export class RenderPipe implements PipeTransform {
       });
     } catch (e) {
       if (!args.optionsType) {
-        console.error(`WARNING: There are no options configured for the field: ${args.label}`);
+        throw Error(e);
       }
       return value;
     }
