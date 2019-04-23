@@ -124,7 +124,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   @Output()
   public onAdd: EventEmitter<any> = new EventEmitter<any>();
 
-  public controlLabels: { value: string; width: number, required: boolean; key: string; }[] = [];
+  public controlLabels: { value: string; width: number; required: boolean; key: string }[] = [];
   public toggled: boolean = false;
   public disabledArray: { edit: boolean; remove: boolean }[] = [];
 
@@ -170,7 +170,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     }
   }
 
-  private resetAddRemove(): void {
+  public resetAddRemove(): void {
     this.disabledArray.forEach((item: NovoControlGroupRowConfig, idx: number) => {
       item.edit = this.checkCanEdit(idx);
       item.remove = this.checkCanRemove(idx);
