@@ -602,6 +602,11 @@ novo-data-table-pagination {
       }
     }
   }
+  .dropdown-list-options {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
   .footer {
     border-top: 1px solid $light;
     padding: 5px 10px;

@@ -114,18 +114,20 @@ import { Helpers } from '../../../utils/Helpers';
             </item>
           </list>
           <list *ngSwitchCase="'multi-select'">
-            <item
-              *ngFor="let option of config.filterConfig.options"
-              (click)="toggleSelection(option)"
-              [attr.data-automation-id]="'novo-data-table-filter-' + (option?.label || option)"
-              [keepOpen]="true"
-            >
-              <span>{{ option?.label || option }}</span>
-              <i
-                [class.bhi-checkbox-empty]="!multiSelectedOptions || !isSelected(option, multiSelectedOptions)"
-                [class.bhi-checkbox-filled]="multiSelectedOptions && isSelected(option, multiSelectedOptions)"
-              ></i>
-            </item>
+            <div class="dropdown-list-options">
+              <item
+                *ngFor="let option of config.filterConfig.options"
+                (click)="toggleSelection(option)"
+                [attr.data-automation-id]="'novo-data-table-filter-' + (option?.label || option)"
+                [keepOpen]="true"
+              >
+                <span>{{ option?.label || option }}</span>
+                <i
+                  [class.bhi-checkbox-empty]="!multiSelectedOptions || !isSelected(option, multiSelectedOptions)"
+                  [class.bhi-checkbox-filled]="multiSelectedOptions && isSelected(option, multiSelectedOptions)"
+                ></i>
+              </item>
+            </div>
           </list>
           <list *ngSwitchCase="'custom'">
             <item class="filter-search" keepOpen="true">

@@ -174,7 +174,7 @@ export class DataTableServiceExample {
       type: 'text',
       filterable: {
         type: 'multi-select',
-        options: ['Blazing', 'Hot', 'Warm', 'Cold', 'Freezing'],
+        options: this.getPriorityOptions(),
       },
       sortable: true,
     },
@@ -289,21 +289,18 @@ export class DataTableServiceExample {
   }
 
   public getPriority(): string {
-    const x = Math.round(Math.random() * 4);
-    switch (x) {
-      case 4:
-        return 'Blazing';
-      case 3:
-        return 'Hot';
-      case 2:
-        return 'Warm';
-      case 1:
-        return 'Cold';
-      default:
-        return 'Freezing';
-    }
+    const x = Math.round(Math.random() * 50);
+    return 'test ' + x.toString();
   }
 
+  public getPriorityOptions() {
+    let options = new Array();
+    let i;
+    for (i = 0; i < 49; i++) {
+      options.push('test ' + i.toString());
+    }
+    return options;
+  }
   public switchPaginationType(type: 'basic' | 'standard') {
     this.sharedPaginationOptions = Object.assign({}, this.sharedPaginationOptions, { theme: type });
     this.ref.detectChanges();
