@@ -297,13 +297,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     if (optionsList) {
       const optionValue = option.hasOwnProperty('value') ? option.value : option;
 
-      let found = optionsList.find((item) => {
-        if (item.hasOwnProperty('value')) {
-          return item.value === optionValue;
-        } else {
-          return item === optionValue;
-        }
-      });
+      let found = optionsList.find((item) => this.optionPresentCheck(item, optionValue));
       return found !== undefined;
     }
     return false;
@@ -312,18 +306,20 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   public toggleSelection(option) {
     const optionValue = option.value ? option.value : option;
 
-    let optionIndex = this.multiSelectedOptions.findIndex((item) => {
-      if (item.hasOwnProperty('value')) {
-        return item.value === optionValue;
-      } else {
-        return item === optionValue;
-      }
-    });
+    let optionIndex = this.multiSelectedOptions.findIndex((item) => this.optionPresentCheck(item, optionValue));
 
     if (optionIndex > -1) {
       this.multiSelectedOptions.splice(optionIndex, 1);
     } else {
       this.multiSelectedOptions.push(optionValue);
+    }
+  }
+
+  public optionPresentCheck(item, optionValue): boolean {
+    if (item.hasOwnProperty('value')) {
+      return item.value === optionValue;
+    } else {
+      return item === optionValue;
     }
   }
 
