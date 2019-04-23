@@ -9,7 +9,7 @@
 <div class="novo-control-group-controls" [class.vertical]="vertical" [class.horizontal]="!vertical" [class.hidden]="collapsible && !toggled">
   <ng-template #defaultTemplate let-index="index" let-form="form" let-key="key">
     <div class="novo-control-group-control">
-      <div *ngFor="let c of controls" class="novo-control-container" [class.is-label]="c.controlType === 'read-only'" [style.max-width.px]="c.width">
+      <div *ngFor="let c of controls" class="novo-control-container {{c.key}}" [class.is-label]="c.controlType === 'read-only'" [style.max-width.px]="c.width">
         <novo-control [form]="(form?.controls)[key]['controls'][index]" [control]="c" [condensed]="!vertical || c.controlType === 'read-only'"></novo-control>
       </div>
       <div class="novo-control-container last" *ngIf="edit && !vertical">
