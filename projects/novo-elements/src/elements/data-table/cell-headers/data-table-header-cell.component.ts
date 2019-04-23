@@ -123,8 +123,8 @@ import { Helpers } from '../../../utils/Helpers';
               >
                 <span>{{ option?.label || option }}</span>
                 <i
-                  [class.bhi-checkbox-empty]="!multiSelectedOptions || !isSelected(option, multiSelectedOptions)"
-                  [class.bhi-checkbox-filled]="multiSelectedOptions && isSelected(option, multiSelectedOptions)"
+                  [class.bhi-checkbox-empty]="!isSelected(option, multiSelectedOptions)"
+                  [class.bhi-checkbox-filled]="isSelected(option, multiSelectedOptions)"
                 ></i>
               </item>
             </div>
