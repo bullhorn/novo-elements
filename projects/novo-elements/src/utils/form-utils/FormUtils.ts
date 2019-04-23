@@ -740,18 +740,7 @@ export class FormUtils {
       if (startDate) {
         controlConfig.startDate = startDate;
       }
-      if (!controlConfig.value) {
-        if (!startDate || this.isBeforeToday(startDate)) {
-          controlConfig.value = Date.now();
-        } else {
-          controlConfig.value = dateFns.addDays(startDate, 1);
-        }
-      }
       return startDate;
     }
-  }
-
-  private isBeforeToday(startDate: Date): boolean {
-    return startDate.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
   }
 }
