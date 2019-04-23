@@ -79,6 +79,7 @@ cdk-table {
   .novo-data-table-header-cell,
   .novo-data-table-checkbox-header-cell {
     border-bottom: 1px solid $off-white;
+    background-color: $white;
   }
   &.expanded {
     i.bhi-next.data-table-icon {
