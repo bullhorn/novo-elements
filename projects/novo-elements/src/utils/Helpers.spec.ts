@@ -89,5 +89,11 @@ describe('Utils: Helpers', () => {
         expect(Helpers.isNumber(notNumber)).toBeFalsy();
       });
     });
+    it('should return true for negative numbers', () => {
+      const numbers: any[] = ['-10', '-2145'];
+      numbers.forEach((number) => {
+        expect(Helpers.isNumber(number, true)).toBeTruthy();
+      });
+    });
   });
 });
