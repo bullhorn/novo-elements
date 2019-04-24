@@ -3,7 +3,6 @@ import { ChangeDetectorRef } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { FormBuilder, FormArray } from '@angular/forms';
 // App
-// App
 import { NovoControlGroup } from './ControlGroup';
 import { NovoFormModule } from './Form.module';
 import { FormUtils } from './../../utils/form-utils/FormUtils';
