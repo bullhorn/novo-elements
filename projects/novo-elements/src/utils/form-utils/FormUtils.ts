@@ -717,9 +717,9 @@ export class FormUtils {
 
   private getStartDateFromRange(dateRange: { minDate: string; minOffset: number }): Date {
     if (dateRange.minDate) {
-      return new Date(dateRange.minDate);
+      return dateFns.parse(dateRange.minDate);
     } else if (dateRange.minOffset) {
-      return dateFns.addDays(new Date(), dateRange.minOffset - 1);
+      return dateFns.addDays(dateFns.startOfToday(), dateRange.minOffset);
     }
   }
 
