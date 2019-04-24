@@ -79,6 +79,7 @@ cdk-table {
   .novo-data-table-header-cell,
   .novo-data-table-checkbox-header-cell {
     border-bottom: 1px solid $off-white;
+    background-color: $white;
   }
   &.expanded {
     i.bhi-next.data-table-icon {
@@ -442,6 +443,15 @@ novo-data-table {
         flex-flow: column nowrap;
         min-height: 250px;
       }
+    }
+  }
+  .novo-data-table-outside-container-fixed {
+    overflow: hidden;
+    position: relative;
+    .novo-data-table-container-fixed {
+      position: absolute;
+      width: 100%;
+      height: 100%;
     }
   }
   .novo-data-table-footer {
