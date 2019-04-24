@@ -1848,15 +1848,20 @@ Helpers = /** @class */ (function () {
     };
     /**
      * @param {?} val
+     * @param {?=} includeNegatives
      * @return {?}
      */
     Helpers.isNumber = /**
      * @param {?} val
+     * @param {?=} includeNegatives
      * @return {?}
      */
-    function (val) {
+    function (val, includeNegatives) {
+        if (includeNegatives === void 0) { includeNegatives = false; }
+        /** @type {?} */
+        var numberRegex = includeNegatives ? /^-{0,1}\d*\.?\d*$/ : /^\d*\.?\d*$/;
         if (typeof val === 'string') {
-            return val.length > 0 && val !== '.' && /^\d*\.?\d*$/.test(val);
+            return val.length > 0 && val !== '.' && numberRegex.test(val);
         }
         else {
             return !isNaN(parseFloat(val));
@@ -18086,6 +18091,8 @@ var BaseControl = /** @class */ (function (_super) {
         _this.encrypted = !!config.encrypted;
         _this.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;
         _this.controlType = config.controlType || '';
+        _this.type = config.type;
+        _this.subType = config.subType;
         _this.metaType = config.metaType;
         _this.placeholder = config.placeholder || '';
         _this.config = config.config || null;
@@ -41233,10 +41240,25 @@ var NovoControlGroup = /** @class */ (function () {
                 return {
                     value: control.label,
                     width: control.width,
+                    required: control.required,
+                    key: control.key,
                 };
             });
             this.ref.markForCheck();
         }
+    };
+    /**
+     * @return {?}
+     */
+    NovoControlGroup.prototype.resetAddRemove = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.disabledArray.forEach(function (item, idx) {
+            item.edit = _this.checkCanEdit(idx);
+            item.remove = _this.checkCanRemove(idx);
+        });
     };
     /**
      * @param {?=} value
@@ -41258,9 +41280,10 @@ var NovoControlGroup = /** @class */ (function () {
             this.form.addControl(this.key, this.fb.array([newCtrl]));
         }
         this.disabledArray.push({
-            edit: this.checkCanEdit(this.currentIndex),
-            remove: this.checkCanRemove(this.currentIndex),
+            edit: true,
+            remove: true,
         });
+        this.resetAddRemove();
         if (!value) {
             this.onAdd.emit();
         }
@@ -41303,6 +41326,8 @@ var NovoControlGroup = /** @class */ (function () {
             this.onRemove.emit({ value: control.at(index).value, index: index });
         }
         control.removeAt(index);
+        this.disabledArray = this.disabledArray.filter(function (value, idx) { return idx !== index; });
+        this.resetAddRemove();
         this.currentIndex--;
         this.ref.markForCheck();
     };
@@ -41409,7 +41434,7 @@ var NovoControlGroup = /** @class */ (function () {
     NovoControlGroup.decorators = [
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Component"], args: [{
                     selector: 'novo-control-group',
-                    template: "\n    <h6 class=\"novo-section-header\" *ngIf=\"label\">\n      <span (click)=\"toggle($event)\" [class.clickable]=\"collapsible\">\n        <i *ngIf=\"icon && !collapsible\" [ngClass]=\"icon\" [attr.data-automation-id]=\"'novo-control-group-icon-' + key\"></i>\n        <i\n          *ngIf=\"collapsible\"\n          class=\"bhi-next\"\n          [class.toggled]=\"toggled\"\n          [attr.data-automation-id]=\"'novo-control-group-collapse-' + key\"\n        ></i>\n        <span [attr.data-automation-id]=\"'novo-control-group-label-' + key\">{{ label }}</span>\n      </span>\n      <label\n        class=\"novo-control-group-description\"\n        *ngIf=\"description\"\n        [attr.data-automation-id]=\"'novo-control-group-description-' + key\"\n        >{{ description }}</label\n      >\n    </h6>\n    <div\n      class=\"novo-control-group-controls\"\n      [class.vertical]=\"vertical\"\n      [class.horizontal]=\"!vertical\"\n      [class.hidden]=\"collapsible && !toggled\"\n    >\n      <ng-template #defaultTemplate let-index=\"index\" let-form=\"form\" let-key=\"key\">\n        <div class=\"novo-control-group-control\">\n          <div\n            *ngFor=\"let c of controls\"\n            class=\"novo-control-container\"\n            [class.is-label]=\"c.controlType === 'read-only'\"\n            [style.max-width.px]=\"c.width\"\n          >\n            <novo-control\n              [form]=\"(form?.controls)[key]['controls'][index]\"\n              [control]=\"c\"\n              [condensed]=\"!vertical || c.controlType === 'read-only'\"\n            ></novo-control>\n          </div>\n          <div class=\"novo-control-container last\" *ngIf=\"edit && !vertical\">\n            <button\n              [disabled]=\"!disabledArray[index].edit\"\n              type=\"button\"\n              *ngIf=\"edit && !vertical\"\n              theme=\"icon\"\n              icon=\"edit\"\n              (click)=\"editControl(index)\"\n              [attr.data-automation-id]=\"'novo-control-group-edit-' + key\"\n              index=\"-1\"\n            ></button>\n          </div>\n          <div class=\"novo-control-container last\" *ngIf=\"remove && !vertical\">\n            <button\n              [disabled]=\"!disabledArray[index].remove\"\n              type=\"button\"\n              *ngIf=\"remove && !vertical\"\n              theme=\"icon\"\n              icon=\"delete-o\"\n              (click)=\"removeControl(index)\"\n              [attr.data-automation-id]=\"'novo-control-group-delete-' + key\"\n              index=\"-1\"\n            ></button>\n          </div>\n        </div>\n        <button\n          [disabled]=\"!disabledArray[index].edit\"\n          type=\"button\"\n          *ngIf=\"edit && vertical\"\n          theme=\"icon\"\n          icon=\"edit\"\n          (click)=\"editControl(index)\"\n          [attr.data-automation-id]=\"'novo-control-group-edit-' + key\"\n          index=\"-1\"\n        ></button>\n        <button\n          [disabled]=\"!disabledArray[index].remove\"\n          type=\"button\"\n          *ngIf=\"remove && vertical\"\n          theme=\"icon\"\n          icon=\"delete-o\"\n          (click)=\"removeControl(index)\"\n          [attr.data-automation-id]=\"'novo-control-group-delete-' + key\"\n          index=\"-1\"\n        ></button>\n      </ng-template>\n      <div class=\"novo-control-group-labels\" *ngIf=\"!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0\">\n        <div class=\"novo-control-group-control-label\" *ngFor=\"let label of controlLabels\" [style.max-width.px]=\"label.width\">\n          <span [attr.data-automation-id]=\"'novo-control-group-label-' + label.value\">{{ label.value }}</span>\n        </div>\n        <div class=\"novo-control-group-control-label last\" *ngIf=\"edit\" [attr.data-automation-id]=\"'novo-control-group-edit-' + key\"></div>\n        <div\n          class=\"novo-control-group-control-label last\"\n          *ngIf=\"remove\"\n          [attr.data-automation-id]=\"'novo-control-group-delete-' + key\"\n        ></div>\n      </div>\n      <ng-container *ngIf=\"(form?.controls)[key]\">\n        <div class=\"novo-control-group-row\" *ngFor=\"let control of (form?.controls)[key]['controls']; let index = index\">\n          <ng-template\n            [ngTemplateOutlet]=\"rowTemplate || defaultTemplate\"\n            [ngTemplateOutletContext]=\"{ form: form, index: index, key: key, controls: controls }\"\n          >\n          </ng-template>\n        </div>\n      </ng-container>\n      <div\n        class=\"novo-control-group-empty\"\n        *ngIf=\"(form?.controls)[key] && (form?.controls)[key]['controls'].length === 0\"\n        [attr.data-automation-id]=\"'novo-control-group-empty-' + key\"\n      >\n        {{ emptyMessage }}\n      </div>\n      <p *ngIf=\"add\">\n        <button\n          type=\"button\"\n          theme=\"dialogue\"\n          icon=\"add-thin\"\n          (click)=\"addNewControl()\"\n          [attr.data-automation-id]=\"'novo-control-group-bottom-add-' + key\"\n          index=\"-1\"\n        >\n          {{ add?.label }}\n        </button>\n      </p>\n    </div>\n  ",
+                    template: "<h6 class=\"novo-section-header\" *ngIf=\"label\">\n  <span (click)=\"toggle($event)\" [class.clickable]=\"collapsible\">\n    <i *ngIf=\"icon && !collapsible\" [ngClass]=\"icon\" [attr.data-automation-id]=\"'novo-control-group-icon-' + key\"></i>\n    <i *ngIf=\"collapsible\" class=\"bhi-next\" [class.toggled]=\"toggled\" [attr.data-automation-id]=\"'novo-control-group-collapse-' + key\"></i>\n    <span [attr.data-automation-id]=\"'novo-control-group-label-' + key\">{{ label }}</span>\n  </span>\n  <label class=\"novo-control-group-description\" *ngIf=\"description\" [attr.data-automation-id]=\"'novo-control-group-description-' + key\">{{ description }}</label>\n</h6>\n<div class=\"novo-control-group-controls\" [class.vertical]=\"vertical\" [class.horizontal]=\"!vertical\" [class.hidden]=\"collapsible && !toggled\">\n  <ng-template #defaultTemplate let-index=\"index\" let-form=\"form\" let-key=\"key\">\n    <div class=\"novo-control-group-control\">\n      <div *ngFor=\"let c of controls\" class=\"novo-control-container {{c.key}}\" [class.is-label]=\"c.controlType === 'read-only'\" [style.max-width.px]=\"c.width\">\n        <novo-control [form]=\"(form?.controls)[key]['controls'][index]\" [control]=\"c\" [condensed]=\"!vertical || c.controlType === 'read-only'\"></novo-control>\n      </div>\n      <div class=\"novo-control-container last\" *ngIf=\"edit && !vertical\">\n        <button [disabled]=\"!disabledArray[index].edit\" type=\"button\" *ngIf=\"edit && !vertical\" theme=\"icon\" icon=\"edit\" (click)=\"editControl(index)\" [attr.data-automation-id]=\"'novo-control-group-edit-' + key\" index=\"-1\"></button>\n      </div>\n      <div class=\"novo-control-container last\" *ngIf=\"remove && !vertical\">\n        <button [disabled]=\"!disabledArray[index].remove\" type=\"button\" *ngIf=\"remove && !vertical\" theme=\"icon\" icon=\"delete-o\" (click)=\"removeControl(index)\" [attr.data-automation-id]=\"'novo-control-group-delete-' + key\" index=\"-1\"></button>\n      </div>\n    </div>\n    <button [disabled]=\"!disabledArray[index].edit\" type=\"button\" *ngIf=\"edit && vertical\" theme=\"icon\" icon=\"edit\" (click)=\"editControl(index)\" [attr.data-automation-id]=\"'novo-control-group-edit-' + key\" index=\"-1\"></button>\n    <button [disabled]=\"!disabledArray[index].remove\" type=\"button\" *ngIf=\"remove && vertical\" theme=\"icon\" icon=\"delete-o\" (click)=\"removeControl(index)\" [attr.data-automation-id]=\"'novo-control-group-delete-' + key\" index=\"-1\"></button>\n  </ng-template>\n  <div class=\"novo-control-group-labels\" *ngIf=\"!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0\">\n    <div class=\"novo-control-group-control-label {{ label.key }}\" *ngFor=\"let label of controlLabels\" [style.max-width.px]=\"label.width\" [class.column-required]=\"label.required\">\n      <span [attr.data-automation-id]=\"'novo-control-group-label-' + label.value\">{{ label.value }}</span>\n    </div>\n    <div class=\"novo-control-group-control-label last\" *ngIf=\"edit\" [attr.data-automation-id]=\"'novo-control-group-edit-' + key\"></div>\n    <div class=\"novo-control-group-control-label last\" *ngIf=\"remove\" [attr.data-automation-id]=\"'novo-control-group-delete-' + key\"></div>\n  </div>\n  <ng-container *ngIf=\"(form?.controls)[key]\">\n    <div class=\"novo-control-group-row\" *ngFor=\"let control of (form?.controls)[key]['controls']; let index = index\">\n      <ng-template [ngTemplateOutlet]=\"rowTemplate || defaultTemplate\" [ngTemplateOutletContext]=\"{ form: form, index: index, key: key, controls: controls }\">\n      </ng-template>\n    </div>\n  </ng-container>\n  <div class=\"novo-control-group-empty\" *ngIf=\"(form?.controls)[key] && (form?.controls)[key]['controls'].length === 0\" [attr.data-automation-id]=\"'novo-control-group-empty-' + key\">\n    {{ emptyMessage }}\n  </div>\n  <p *ngIf=\"add\">\n    <button type=\"button\" theme=\"dialogue\" icon=\"add-thin\" (click)=\"addNewControl()\" [attr.data-automation-id]=\"'novo-control-group-bottom-add-' + key\" index=\"-1\">\n      {{ add?.label }}\n    </button>\n  </p>\n</div>\n",
                     changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_26__["ChangeDetectionStrategy"].OnPush
                 }] }
     ];
