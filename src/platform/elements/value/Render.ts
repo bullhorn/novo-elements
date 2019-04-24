@@ -197,135 +197,141 @@ export class RenderPipe implements PipeTransform {
     }
 
     // Transform data here
-    switch (type) {
-      case 'Address':
-      case 'Address1':
-      case 'AddressWithoutCountry':
-      case 'SecondaryAddress':
-      case 'BillingAddress':  
-        let country: any = findByCountryId(Number(value.countryName));
-        text = '';
-        if (value.address1 || value.address2) {
-          text += `${value.address1 || ''} ${value.address2 || ''}<br />\n`;
-        }
-        text += `${value.city || ''} ${value.state || ''} ${value.zip || ''}${value.city || value.state || value.zip ? '<br />\n' : ''}`;
-        text += `${country ? country.name : value.countryName || ''}${country || value.countryName ? '<br />\n' : ''}`;
-        text = this.sanitizationService.bypassSecurityTrustHtml(text.trim());
-        break;
-      case 'DateTime':
-      case 'Timestamp':
-        text = this.labels.formatDateShort(value);
-        break;
-      case 'Date':
-        text = this.labels.formatDate(new Date(value));
-        break;
-      case 'Year':
-        text = new Date(value).getFullYear();
-        break;
-      case 'Phone':
-      case 'Email':
-        text = value;
-        break;
-      case 'Money':
-        text = this.labels.formatCurrency(value);
-        break;
-      case 'Percentage':
-        text = this.labels.formatNumber(parseFloat(value).toString(), { style: 'percent', minimumFractionDigits: 2 });
-        break;
-      case 'Double':
-      case 'BigDecimal':
-        text = this.labels.formatNumber(value, { minimumFractionDigits: this.getNumberDecimalPlaces(value) });
-        break;
-      case 'Integer':
-        text = value;
-        break;
-      case 'BusinessSector':
-      case 'Category':
-      case 'Certification':
-      case 'ClientCorporation':
-      case 'CorporationDepartment':
-      case 'DistributionList':
-      case 'Skill':
-      case 'Tearsheet':
-      case 'Specialty':
-        text = value.label || value.name || '';
-        break;
-      case 'SkillText':
-        text = Array.isArray(value) ? value.join(', ') : value;
-        break;
-      case 'Lead':
-      case 'Candidate':
-      case 'ClientContact':
-      case 'CorporateUser':
-      case 'Person':
-        text = value.label || `${value.firstName || ''} ${value.lastName || ''}`;
-        break;
-      case 'Opportunity':
-      case 'JobOrder':
-        text = value.label || value.title || '';
-        break;
-      case 'Placement':
-        if (value.candidate) {
-          text = `${value.candidate.firstName || ''} ${value.candidate.lastName || ''}`;
-        }
-        if (value.jobOrder) {
-          text = value.candidate ? `${text} - ${value.jobOrder.title || ''}` : `${value.jobOrder.title || ''}`;
-        }
-        break;
-      case 'JobSubmission':
-        text =
-          value.label ||
-          `${value.jobOrder ? `${value.jobOrder.title} - ` : ''} ${value.candidate ? value.candidate.firstName : ''} ${
-            value.candidate ? value.candidate.lastName : ''
-          }`;
-        break;
-      case 'WorkersCompensationRate':
-        text = `${value.compensation ? `${value.compensation.code} - ` : ''} ${value.compensation ? value.compensation.name : ''}`;
-        break;
-      case 'Options':
-        text = this.options(value, args.options);
-        break;
-      case 'ToMany':
-        if (['Candidate', 'CorporateUser', 'Person'].indexOf(args.associatedEntity.entity) > -1) {
-          text = this.concat(value.data, 'firstName', 'lastName');
-          if (value.data.length < value.total) {
-            text = text + ', ' + this.labels.getToManyPlusMore({ quantity: value.total - value.data.length });
+    try {
+      switch (type) {
+        case 'Address':
+        case 'Address1':
+        case 'AddressWithoutCountry':
+        case 'SecondaryAddress':
+        case 'BillingAddress':
+          let country: any = findByCountryId(Number(value.countryName));
+          text = '';
+          if (value.address1 || value.address2) {
+            text += `${value.address1 || ''} ${value.address2 || ''}<br />\n`;
           }
-        } else if (
-          ['Category', 'BusinessSector', 'Skill', 'Specialty', 'ClientCorporation', 'CorporationDepartment'].indexOf(
-            args.associatedEntity.entity,
-          ) > -1
-        ) {
-          text = this.concat(value.data, 'name');
-          if (value.data.length < value.total) {
-            text = text + ', ' + this.labels.getToManyPlusMore({ quantity: value.total - value.data.length });
+          text += `${value.city || ''} ${value.state || ''} ${value.zip || ''}${value.city || value.state || value.zip ? '<br />\n' : ''}`;
+          text += `${country ? country.name : value.countryName || ''}${country || value.countryName ? '<br />\n' : ''}`;
+          text = this.sanitizationService.bypassSecurityTrustHtml(text.trim());
+          break;
+        case 'DateTime':
+        case 'Timestamp':
+          text = this.labels.formatDateShort(value);
+          break;
+        case 'Date':
+          text = this.labels.formatDate(new Date(value));
+          break;
+        case 'Year':
+          text = new Date(value).getFullYear();
+          break;
+        case 'Phone':
+        case 'Email':
+          text = value;
+          break;
+        case 'Money':
+          text = this.labels.formatCurrency(value);
+          break;
+        case 'Percentage':
+          text = this.labels.formatNumber(parseFloat(value).toString(), { style: 'percent', minimumFractionDigits: 2 });
+          break;
+        case 'Double':
+        case 'BigDecimal':
+          text = this.labels.formatNumber(value, { minimumFractionDigits: this.getNumberDecimalPlaces(value) });
+          break;
+        case 'Integer':
+          text = value;
+          break;
+        case 'BusinessSector':
+        case 'Category':
+        case 'Certification':
+        case 'ClientCorporation':
+        case 'CorporationDepartment':
+        case 'DistributionList':
+        case 'Skill':
+        case 'Tearsheet':
+        case 'Specialty':
+          text = value.label || value.name || '';
+          break;
+        case 'SkillText':
+          text = Array.isArray(value) ? value.join(', ') : value;
+          break;
+        case 'Lead':
+        case 'Candidate':
+        case 'ClientContact':
+        case 'CorporateUser':
+        case 'Person':
+          text = value.label || `${value.firstName || ''} ${value.lastName || ''}`;
+          break;
+        case 'Opportunity':
+        case 'JobOrder':
+          text = value.label || value.title || '';
+          break;
+        case 'Placement':
+          if (value.candidate) {
+            text = `${value.candidate.firstName || ''} ${value.candidate.lastName || ''}`;
           }
-        } else if (args.associatedEntity.entity === 'MailListPushHistoryDetail') {
-          text = this.concat(value.data, 'externalListName');
-        } else {
-          text = `${value.total || ''}`;
-        }
-        break;
-      case 'Country':
-        let countryObj: any = findByCountryId(Number(value));
-        text = countryObj ? countryObj.name : value;
-        break;
-      case 'Html':
-        if (Array.isArray(value)) {
-          value = value.join(' ');
-        }
-        if (typeof text === 'string') {
-          text = this.sanitizationService.bypassSecurityTrustHtml(value.replace(/\<a/gi, '<a target="_blank"'));
-        }
-        break;
-      case 'CandidateComment':
-        text = value.comments ? `${this.labels.formatDateShort(value.dateLastModified)} (${value.name}) - ${value.comments}` : '';
-        break;
-      default:
-        text = value.trim ? value.trim() : value;
-        break;
+          if (value.jobOrder) {
+            text = value.candidate ? `${text} - ${value.jobOrder.title || ''}` : `${value.jobOrder.title || ''}`;
+          }
+          break;
+        case 'JobSubmission':
+          text =
+            value.label ||
+            `${value.jobOrder ? `${value.jobOrder.title} - ` : ''} ${value.candidate ? value.candidate.firstName : ''} ${
+              value.candidate ? value.candidate.lastName : ''
+            }`;
+          break;
+        case 'WorkersCompensationRate':
+          text = `${value.compensation ? `${value.compensation.code} - ` : ''} ${value.compensation ? value.compensation.name : ''}`;
+          break;
+        case 'Options':
+          text = this.options(value, args.options, args);
+          break;
+        case 'ToMany':
+          if (['Candidate', 'CorporateUser', 'Person'].indexOf(args.associatedEntity.entity) > -1) {
+            text = this.concat(value.data, 'firstName', 'lastName');
+            if (value.data.length < value.total) {
+              text = text + ', ' + this.labels.getToManyPlusMore({ quantity: value.total - value.data.length });
+            }
+          } else if (
+            ['Category', 'BusinessSector', 'Skill', 'Specialty', 'ClientCorporation', 'CorporationDepartment'].indexOf(
+              args.associatedEntity.entity,
+            ) > -1
+          ) {
+            text = this.concat(value.data, 'name');
+            if (value.data.length < value.total) {
+              text = text + ', ' + this.labels.getToManyPlusMore({ quantity: value.total - value.data.length });
+            }
+          } else if (args.associatedEntity.entity === 'MailListPushHistoryDetail') {
+            text = this.concat(value.data, 'externalListName');
+          } else {
+            text = `${value.total || ''}`;
+          }
+          break;
+        case 'Country':
+          let countryObj: any = findByCountryId(Number(value));
+          text = countryObj ? countryObj.name : value;
+          break;
+        case 'Html':
+          if (Array.isArray(value)) {
+            value = value.join(' ');
+          }
+          if (typeof text === 'string') {
+            text = this.sanitizationService.bypassSecurityTrustHtml(value.replace(/\<a/gi, '<a target="_blank"'));
+          }
+          break;
+        case 'CandidateComment':
+          text = value.comments ? `${this.labels.formatDateShort(value.dateLastModified)} (${value.name}) - ${value.comments}` : '';
+          break;
+        default:
+          text = value.trim ? value.trim() : value;
+          break;
+      }
+      return text;
+    } catch (e) {
+      console.error(`WARNING: There was a problem rendering the value of the field: ${args.label}. Please check the configuration`);
+      console.error(e);
+      return text;
     }
-    return text;
   }
 
   updateValue(value: any, args: any): any {
@@ -376,18 +382,25 @@ export class RenderPipe implements PipeTransform {
    * @param {Array} list - list of options (label/value pairs)
    * @return {String}
    */
-  options(value: any, list: any): any {
+  options(value: any, list: any, args: any): any {
     if (!Array.isArray(value)) {
       value = [value];
     }
-    return value.map((item: any) => {
-      for (const option of list) {
-        if (option.value === item) {
-          return option.label;
+    try {
+      return value.map((item: any) => {
+        for (const option of list) {
+          if (option.value === item) {
+            return option.label;
+          }
         }
+        return item;
+      });
+    } catch (e) {
+      if (!args.optionsType) {
+        throw Error(e);
       }
-      return item;
-    });
+      return value;
+    }
   }
 
   getNumberDecimalPlaces(value: any): any {
