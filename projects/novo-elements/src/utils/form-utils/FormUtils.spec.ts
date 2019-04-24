@@ -627,4 +627,23 @@ describe('Utils: FormUtils', () => {
       expect(formUtils.isAddressEmpty(control)).toEqual(true);
     });
   });
+  describe('Method: getStartDate(data: any, meta: any): string | null', () => {
+    it('should use minDate', () => {
+      const field = { allowedDateRange: { minDate: '2019-01-26' } };
+      const startDate = formUtils.getStartDate(field);
+      expect(startDate).toBeInstanceOf(Date);
+    });
+    it('should use minOffset', () => {
+      const field = { allowedDateRange: { minOffset: 1 } };
+      const startDate = formUtils.getStartDate(field);
+      expect(startDate).toBeInstanceOf(Date);
+    });
+  });
+  describe('Method: inferStartDate()', () => {
+    it('should return Date', () => {
+      const field = { dataType: 'Date', allowedDateRange: { minOffset: 1 } };
+      const startDate = formUtils.inferStartDate({}, field);
+      expect(startDate).toBeInstanceOf(Date);
+    });
+  });
 });

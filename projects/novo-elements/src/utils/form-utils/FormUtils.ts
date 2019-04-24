@@ -1,5 +1,6 @@
 // NG
 import { Injectable } from '@angular/core';
+import * as dateFns from 'date-fns';
 // App
 import {
   AddressControl,
@@ -248,6 +249,7 @@ export class FormUtils {
       config: field.config || {},
       closeOnSelect: field.closeOnSelect,
     };
+    this.inferStartDate(controlConfig, field);
     // TODO: getControlOptions should always return the correct format
     const optionsConfig = this.getControlOptions(field, http, config, fieldData);
     if (Array.isArray(optionsConfig) && !(type === 'chips' || type === 'picker')) {
@@ -711,5 +713,34 @@ export class FormUtils {
       });
     }
     return valid;
+  }
+
+  private getStartDateFromRange(dateRange: { minDate: string; minOffset: number }): Date {
+    if (dateRange.minDate) {
+      return dateFns.parse(dateRange.minDate);
+    } else if (dateRange.minOffset) {
+      return dateFns.addDays(dateFns.startOfToday(), dateRange.minOffset);
+    }
+  }
+
+  /**
+   * Get the min start date of a Date base on field data.
+   */
+  private getStartDate(field: any): Date | null {
+    if (field.allowedDateRange) {
+      return this.getStartDateFromRange(field.allowedDateRange);
+    }
+    // there is no restriction on the start date
+    return null;
+  }
+
+  private inferStartDate(controlConfig, field) {
+    if (field.dataType === 'Date') {
+      const startDate = this.getStartDate(field);
+      if (startDate) {
+        controlConfig.startDate = startDate;
+      }
+      return startDate;
+    }
   }
 }
