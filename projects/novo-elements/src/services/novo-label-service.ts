@@ -12,6 +12,7 @@ export class NovoLabelService {
   noMatchingRecordsMessage = 'No Matching Records';
   erroredTableMessage = 'Oops! An error occurred.';
   pickerError = 'Oops! An error occurred.';
+  pickerTextFieldEmpty = 'Begin typing to see results.';
   pickerEmpty = 'No results to display...';
   quickNoteError = 'Oops! An error occurred.';
   quickNoteEmpty = 'No results to display...';

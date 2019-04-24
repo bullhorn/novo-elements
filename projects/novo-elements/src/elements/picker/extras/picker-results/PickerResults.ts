@@ -10,29 +10,31 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     class: 'active',
   },
   template: `
-        <novo-list *ngIf="matches.length > 0" direction="vertical">
-            <novo-list-item
-                *ngFor="let match of matches"
-                (click)="selectMatch($event)"
-                [class.active]="match === activeMatch"
-                (mouseenter)="selectActive(match)"
-                [class.disabled]="preselected(match)">
-                <item-content>
-                    <span [innerHtml]="highlight(match.label, term)"></span>
-                </item-content>
-            </novo-list-item>
-            <novo-loading *ngIf="isLoading && matches.length > 0" theme="line"></novo-loading>
-        </novo-list>
-        <div class="picker-loader" *ngIf="isLoading && matches.length === 0">
-            <novo-loading theme="line"></novo-loading>
-        </div>
-        <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
-        <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
-    `,
+    <novo-list *ngIf="matches.length > 0" direction="vertical">
+      <novo-list-item
+        *ngFor="let match of matches"
+        (click)="selectMatch($event)"
+        [class.active]="match === activeMatch"
+        (mouseenter)="selectActive(match)"
+        [class.disabled]="preselected(match)"
+      >
+        <item-content> <span [innerHtml]="highlight(match.label, term)"></span> </item-content>
+      </novo-list-item>
+      <novo-loading *ngIf="isLoading && matches.length > 0" theme="line"></novo-loading>
+    </novo-list>
+    <div class="picker-loader" *ngIf="isLoading && matches.length === 0"><novo-loading theme="line"></novo-loading></div>
+    <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
+    <p class="picker-null-results" *ngIf="hasNonErrorMessage && term !== ''">{{ labels.pickerEmpty }}</p>
+    <p class="picker-null-results" *ngIf="hasNonErrorMessage && term === ''">{{ labels.pickerTextFieldEmpty }}</p>
+  `,
 })
 export class PickerResults extends BasePickerResults {
   constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
     super(element, ref);
+  }
+
+  get hasNonErrorMessage() {
+    return !this.isLoading && !this.matches.length && !this.hasError;
   }
 
   getListElement() {
