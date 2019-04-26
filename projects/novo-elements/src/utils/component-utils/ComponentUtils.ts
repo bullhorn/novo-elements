@@ -13,10 +13,10 @@ import {
 
 @Injectable()
 export class ComponentUtils {
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
+  constructor(public componentFactoryResolver: ComponentFactoryResolver) {}
 
   /**
-   * @deprecated since version 3.7. Use append() instead.
+   * @deprecated use append() instead.
    */
   appendNextToLocation(ComponentClass, location: ViewContainerRef, providers?: ResolvedReflectiveProvider[]): ComponentRef<any> {
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentClass);
@@ -29,7 +29,7 @@ export class ComponentUtils {
   }
 
   /**
-   * @deprecated since version 3.7. Use append() instead.
+   * @deprecated
    */
   appendTopOfLocation(ComponentClass, location: ViewContainerRef, providers?: ResolvedReflectiveProvider[]): ComponentRef<any> {
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentClass);
