@@ -155,6 +155,44 @@ describe('Elements: NovoFileInputElement', () => {
       expect(component.upload.emit).toHaveBeenCalledWith({ name: 'file.pdf', loaded: true });
     });
   });
+
+  describe('Method: validate(files)', () => {
+    it('should return true if undefined custom validation', () => {
+      component.layoutOptions = {
+        customValidation: undefined,
+      };
+      const result = component.validate([]);
+      expect(result).toBeTruthy();
+    });
+    it('should return true if null custom validation', () => {
+      component.layoutOptions = {
+        customValidation: null,
+      };
+      const result = component.validate([]);
+      expect(result).toBeTruthy();
+    });
+    it('should return true if [] custom validation', () => {
+      component.layoutOptions = {
+        customValidation: [],
+      };
+      const result = component.validate([]);
+      expect(result).toBeTruthy();
+    });
+    it('should return true if truthy custom validation', () => {
+      component.layoutOptions = {
+        customValidation: [{ action: 'upload', fn: () => true }],
+      };
+      const result = component.validate([]);
+      expect(result).toBeTruthy();
+    });
+    it('should return false if falsey custom validation', () => {
+      component.layoutOptions = {
+        customValidation: [{ action: 'upload', fn: () => false }],
+      };
+      const result = component.validate([]);
+      expect(result).toBeFalsy();
+    });
+  });
   //
   // describe('Method: dragEnterHandler(event)', () => {
   //     it('should set active to true.', () => {

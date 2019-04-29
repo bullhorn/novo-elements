@@ -84,6 +84,7 @@ class ControlConfig {
     labelStyle?: string;
     order?: string;
     removable?: boolean;
+    customValidation?: { action: string; fn: Function }[];
   };
   tipWell?: {
     button?: boolean;

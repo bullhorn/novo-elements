@@ -8,3 +8,11 @@
     </div>
 </novo-form>
 <div class="final-value">Value: {{fileForm.value | json}}</div>
+<br />
+<br />
+<novo-form layout="vertical" [form]="customValidationFileForm">
+    <div class="novo-form-row">
+        <novo-control [form]="customValidationFileForm" [control]="customValidationFileControl"></novo-control>
+    </div>
+</novo-form>
+<div>{{ message }}</div>
