@@ -94,7 +94,7 @@ export interface IDataTableSortFilter {
 
 export interface IDataTableChangeEvent {
   sort?: { id: string; value: string };
-  filter?: { id: string; value: string | string[] };
+  filter?: IDataTableFilter | IDataTableFilter[];
   page?: number;
   pageSize?: number;
   globalSearch?: string;
@@ -110,10 +110,16 @@ export interface IDataTablePaginationEvent {
   length: number;
 }
 
+export interface IDataTableFilter {
+  id: string;
+  value: string | string[];
+  transform?: Function;
+}
+
 export interface IDataTableService<T> {
   getTableResults(
     sort: { id: string; value: string; transform?: Function },
-    filter: { id: string; value: string | string[]; transform?: Function },
+    filter: IDataTableFilter | IDataTableFilter[],
     page: number,
     pageSize: number,
     globalSearch?: string,

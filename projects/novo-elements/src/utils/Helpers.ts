@@ -120,6 +120,15 @@ export class Helpers {
     return obj instanceof Date;
   }
 
+  static convertToArray(obj: any): any[] {
+    if (obj === undefined) {
+      return [];
+    } else if (!Array.isArray(obj)) {
+      return [obj];
+    }
+    return obj;
+  }
+
   static sortByField(fields: any, reverse = false) {
     return (previous: any, current: any) => {
       if (Helpers.isFunction(fields)) {
