@@ -311,7 +311,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   public toggleSelection(option) {
-    const optionValue = option.value ? option.value : option;
+    const optionValue = option.hasOwnProperty('value') ? option.value : option;
 
     let optionIndex = this.multiSelectedOptions.findIndex((item) => this.optionPresentCheck(item, optionValue));
 
