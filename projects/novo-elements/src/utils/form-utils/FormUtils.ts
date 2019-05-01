@@ -128,6 +128,7 @@ export class FormUtils {
       'HTML-MINIMAL': 'editor-minimal',
       YEAR: 'year',
       WORKFLOW_OPTIONS: 'select',
+      SPECIALIZED_OPTIONS: 'select',
     };
     let dataTypeToTypeMap = {
       Timestamp: 'date',
@@ -169,7 +170,7 @@ export class FormUtils {
         }
       }
     } else if (field.type === 'TO_ONE') {
-      if (field.dataSpecialization === 'WORKFLOW_OPTIONS') {
+      if (['WORKFLOW_OPTIONS', 'SPECIALIZED_OPTIONS'].includes(field.dataSpecialization)) {
         type = dataSpecializationTypeMap[field.dataSpecialization];
       } else if (this.hasAssociatedEntity(field)) {
         type = 'entitypicker'; // TODO!
