@@ -13,15 +13,15 @@ export class NovoDataTableSortFilter<T> {
     let filter;
 
     if (allowMultipleFilters) {
-      this.state.filter = Helpers.convertToArray(this.state.filter);
+      let currentFilters = Helpers.convertToArray(this.state.filter);
 
-      let filterIndex = this.state.filter.findIndex((aFilter) => aFilter && aFilter.id === id);
+      let filterIndex = currentFilters.findIndex((aFilter) => aFilter && aFilter.id === id);
       if (filterIndex > -1) {
-        this.state.filter.splice(filterIndex, 1);
+        currentFilters.splice(filterIndex, 1);
       }
 
       if (!Helpers.isBlank(value)) {
-        filter = this.state.filter.length > 0 ? [...this.state.filter, { id, value, transform }] : [{ id, value, transform }];
+        filter = currentFilters.length > 0 ? [...currentFilters, { id, value, transform }] : [{ id, value, transform }];
       }
 
       if (filter.length < 1) {
