@@ -309,10 +309,11 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   validate(files): boolean {
     let passedValidation = true;
     if (this.layoutOptions.customValidation) {
-      const uploadValidations = this.layoutOptions.customValidation.filter((validation) => validation.action === 'upload');
-      uploadValidations.forEach((uploadValidation) => {
-        passedValidation = passedValidation && uploadValidation.fn(files);
-      });
+      this.layoutOptions.customValidation
+        .filter((validation) => validation.action === 'upload')
+        .forEach((uploadValidation) => {
+          passedValidation = uploadValidation.fn(files) && passedValidation;
+        });
     }
     return passedValidation;
   }
