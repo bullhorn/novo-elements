@@ -588,6 +588,8 @@ export class FormUtils {
       return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
     } else if (field.workflowOptions && fieldData) {
       return this.getWorkflowOptions(field.workflowOptions, fieldData);
+    } else if (field.dataSpecialization === 'SPECIALIZED_OPTIONS') {
+      return field.options;
     } else if (field.optionsUrl) {
       return this.optionsService.getOptionsConfig(http, field, config);
     } else if (Array.isArray(field.options) && field.type === 'chips') {
