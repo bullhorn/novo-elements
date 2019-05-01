@@ -282,13 +282,10 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     }
     let options: any = this.layoutOptions;
     let filelist = Array.from(event.dataTransfer.files);
-    const files = this.multiple ? filelist : [filelist[0]];
     if (options.customActions) {
-      this.upload.emit(files);
+      this.upload.emit(this.multiple ? filelist : [filelist[0]]);
     } else {
-      if (this.validate(files)) {
-        this.process(files);
-      }
+      this.process(this.multiple ? filelist : [filelist[0]]);
     }
     this.active = false;
   }
@@ -322,15 +319,17 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   }
 
   process(filelist) {
-    Promise.all(filelist.map((file) => this.readFile(file))).then((files) => {
-      if (this.multiple) {
-        this.files.push(...files);
-      } else {
-        this.files = files;
-      }
-      this.model = this.files;
-      this.onModelChange(this.model);
-    });
+    if (this.validate(filelist)) {
+      Promise.all(filelist.map((file) => this.readFile(file))).then((files) => {
+        if (this.multiple) {
+          this.files.push(...files);
+        } else {
+          this.files = files;
+        }
+        this.model = this.files;
+        this.onModelChange(this.model);
+      });
+    }
   }
 
   download(file) {
