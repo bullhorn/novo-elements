@@ -30,13 +30,16 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
       if (filter) {
         let filters = Helpers.convertToArray(filter);
         filters.forEach((aFilter) => {
-          let values = Helpers.convertToArray(aFilter.value);
-          values.forEach((aValue) => {
-            aValue = Helpers.isString(aValue) ? aValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') : aValue;
-
-            this.currentData = this.currentData.filter(Helpers.filterByField(aFilter.id, aValue));
-            total = this.currentData.length;
-          });
+          if (Array.isArray(aFilter.value)) {
+            let values = Helpers.convertToArray(aFilter.value).map((aValue) => {
+              return Helpers.cleanIfString(aValue);
+            });
+            this.currentData = this.currentData.filter(Helpers.filterByField(aFilter.id, values));
+          } else {
+            let value = Helpers.cleanIfString(aFilter.value);
+            this.currentData = this.currentData.filter(Helpers.filterByField(aFilter.id, value));
+          }
+          total = this.currentData.length;
         });
       }
       if (sort) {

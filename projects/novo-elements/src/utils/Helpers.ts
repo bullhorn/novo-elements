@@ -83,6 +83,13 @@ export class Helpers {
     return typeof obj === 'string';
   }
 
+  static cleanIfString(obj: any): any {
+    if (Helpers.isString(obj)) {
+      return obj.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    return obj;
+  }
+
   static isNumber(val: any, includeNegatives: boolean = false) {
     const numberRegex = includeNegatives ? /^-{0,1}\d*\.?\d*$/ : /^\d*\.?\d*$/;
     if (typeof val === 'string') {
