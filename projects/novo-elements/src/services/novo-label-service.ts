@@ -93,6 +93,7 @@ export class NovoLabelService {
   selectCountryFirst = 'Please select a country before selecting a state';
   invalidIntegerInput = 'Special characters are not allowed for';
   maxRecordsReached = 'Sorry, you have reached the maximum number of records allowed for this field';
+  selectFilterOptions = 'Please select one or more filter options below.';
 
   constructor(
     @Optional()
