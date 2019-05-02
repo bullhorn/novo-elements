@@ -272,6 +272,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       } else {
         this.filterActive = false;
         this.filter = undefined;
+        this.activeDateFilter = undefined;
         this.multiSelectedOptions = [];
       }
       changeDetectorRef.markForCheck();
