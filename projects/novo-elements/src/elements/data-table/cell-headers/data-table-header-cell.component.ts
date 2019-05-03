@@ -256,7 +256,6 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   public multiSelect: boolean = false;
   public multiSelectedOptions: Array<any> = [];
   private multiSelectedOptionIsHidden: Array<{ option: string | IDataTableColumnFilterOption; hidden: boolean }> = [];
-  private multiSelectHighlightedOption: number = 0;
   public optionFilter: string = '';
   public error: boolean = false;
   private subscriptions: Subscription[] = [];
@@ -383,18 +382,14 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   public multiSelectOptionFilter(optionFilter: string) {
     this.multiSelectedOptionIsHidden.forEach((record) => {
-      if (
-        this.getOptionText(record.option)
-          .toLowerCase()
-          .startsWith(optionFilter.toLowerCase()) ||
-        this.isSelected(record.option, this.multiSelectedOptions)
-      ) {
-        record.hidden = false;
-      } else {
-        record.hidden = true;
+      if (record.option) {
+        record.hidden = !(
+          this.getOptionText(record.option)
+            .toLowerCase()
+            .startsWith(optionFilter.toLowerCase()) || this.isSelected(record.option, this.multiSelectedOptions)
+        );
       }
     });
-    this.multiSelectHighlightedOption = 0;
   }
 
   public multiSelectOptionIsHidden(option: string | IDataTableColumnFilterOption): boolean {
@@ -410,7 +405,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       return option as string;
     } else {
       const opt = option as IDataTableColumnFilterOption;
-      return opt.label && opt.value ? opt.label : opt.value;
+      return (opt.label && opt.value ? opt.label : opt.value).toString();
     }
   }
 
