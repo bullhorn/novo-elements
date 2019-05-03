@@ -14,6 +14,8 @@ import {
   TemplateRef,
   ElementRef,
   Output,
+  OnInit,
+  AfterViewInit,
 } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subscription } from 'rxjs';
@@ -243,7 +245,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DataTableState],
 })
-export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
+export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDestroy {
   @HostBinding('class.global-search-hidden')
   globalSearchHiddenClassToggle: boolean = false;
 
@@ -458,6 +460,10 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     if (this.resetSubscription) {
       this.resetSubscription.unsubscribe();
     }
+  }
+
+  public ngAfterViewInit(): void {
+    this.state.getInitialFilterSortState(this.name);
   }
 
   public ngAfterContentInit(): void {

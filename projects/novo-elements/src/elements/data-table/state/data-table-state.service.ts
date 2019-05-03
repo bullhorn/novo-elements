@@ -11,6 +11,7 @@ export class DataTableState<T> {
   public expandSource = new Subject();
   public dataLoaded = new Subject();
 
+  tableName: string;
   sort: { id: string; value: string } = undefined;
   filter: { id: string; value: string | string[] } = undefined;
   page: number = 0;
@@ -40,6 +41,7 @@ export class DataTableState<T> {
     this.page = 0;
     this.selectedRows.clear();
     this.resetSource.next();
+    this.setState();
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,
@@ -54,6 +56,7 @@ export class DataTableState<T> {
     this.page = 0;
     this.selectedRows.clear();
     this.resetSource.next();
+    this.setState();
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,
@@ -69,6 +72,7 @@ export class DataTableState<T> {
     this.page = 0;
     this.selectedRows.clear();
     this.resetSource.next();
+    this.setState();
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,
@@ -92,5 +96,27 @@ export class DataTableState<T> {
 
   public onSortFilterChange(): void {
     this.sortFilterSource.next();
+  }
+
+  public setState(): void {
+    if (this.tableName) {
+      const stickyState = {
+        filter: this.filter,
+        sort: this.sort,
+        globalSearch: this.globalSearch,
+      };
+      window.localStorage.setItem(this.tableName, JSON.stringify(stickyState));
+    }
+  }
+
+  public getInitialFilterSortState(name: string) {
+    this.tableName = name;
+    const stickyState = JSON.parse(window.localStorage.getItem(name));
+    if (stickyState !== null && stickyState !== undefined) {
+      this.filter = stickyState.filter;
+      this.sort = stickyState.sort;
+      this.globalSearch = stickyState.globalSearch;
+      this.reset(true, true);
+    }
   }
 }
