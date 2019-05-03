@@ -245,7 +245,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DataTableState],
 })
-export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDestroy {
+export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @HostBinding('class.global-search-hidden')
   globalSearchHiddenClassToggle: boolean = false;
 
@@ -462,10 +462,6 @@ export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDest
     }
   }
 
-  public ngAfterViewInit(): void {
-    this.state.getInitialFilterSortState(this.name);
-  }
-
   public ngAfterContentInit(): void {
     if (this.displayedColumns && this.displayedColumns.length) {
       this.expandable = this.displayedColumns.includes('expand');
@@ -498,6 +494,8 @@ export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDest
     }
     this.state.page = this.paginationOptions ? this.paginationOptions.page : undefined;
     this.state.pageSize = this.paginationOptions ? this.paginationOptions.pageSize : undefined;
+
+    this.state.getInitialFilterSortState(this.name);
 
     // Scrolling inside table
     (this.novoDataTableContainer.nativeElement as Element).addEventListener('scroll', this.scrollListenerHandler);

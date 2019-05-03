@@ -116,7 +116,6 @@ export class DataTableState<T> {
       this.filter = stickyState.filter;
       this.sort = stickyState.sort;
       this.globalSearch = stickyState.globalSearch;
-      this.reset(true, true);
     }
   }
 }

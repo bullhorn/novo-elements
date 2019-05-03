@@ -251,24 +251,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     @Optional() public _sort: NovoDataTableSortFilter<T>,
     @Optional() public _cdkColumnDef: CdkColumnDef,
   ) {
-    this._rerenderSubscription = state.updates.subscribe((change: IDataTableChangeEvent) => {
-      if (change.sort && change.sort.id === this.id) {
-        this.icon = `sort-${change.sort.value}`;
-        this.sortActive = true;
-      } else {
-        this.icon = 'sortable';
-        this.sortActive = false;
-      }
-      if (change.filter && change.filter.id === this.id) {
-        this.filterActive = true;
-        this.filter = change.filter.value;
-      } else {
-        this.filterActive = false;
-        this.filter = undefined;
-        this.multiSelectedOptions = [];
-      }
-      changeDetectorRef.markForCheck();
-    });
+    this._rerenderSubscription = state.updates.subscribe((change: IDataTableChangeEvent) => this.checkSortFilterState(change));
   }
 
   public ngOnInit(): void {
@@ -284,6 +267,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     if (this.multiSelect) {
       this.multiSelectedOptions = this.filter ? [...this.filter] : [];
     }
+    this.checkSortFilterState({ filter: this.state.filter, sort: this.state.sort });
   }
 
   public ngOnDestroy(): void {
@@ -291,6 +275,25 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this.subscriptions.forEach((subscription: Subscription) => {
       subscription.unsubscribe();
     });
+  }
+
+  public checkSortFilterState(sortFilterState: IDataTableChangeEvent): void {
+    if (sortFilterState.sort && sortFilterState.sort.id === this.id) {
+      this.icon = `sort-${sortFilterState.sort.value}`;
+      this.sortActive = true;
+    } else {
+      this.icon = 'sortable';
+      this.sortActive = false;
+    }
+    if (sortFilterState.filter && sortFilterState.filter.id === this.id) {
+      this.filterActive = true;
+      this.filter = sortFilterState.filter.value;
+    } else {
+      this.filterActive = false;
+      this.filter = undefined;
+      this.multiSelectedOptions = [];
+    }
+    this.changeDetectorRef.markForCheck();
   }
 
   public isSelected(option, optionsList) {
