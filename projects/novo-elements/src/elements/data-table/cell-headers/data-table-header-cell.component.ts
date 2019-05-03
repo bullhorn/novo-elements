@@ -401,11 +401,11 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   private getOptionText(option: string | IDataTableColumnFilterOption): string {
-    if (typeof option === 'string') {
-      return option as string;
+    if (typeof option !== 'object') {
+      return option.toString();
     } else {
       const opt = option as IDataTableColumnFilterOption;
-      return (opt.label && opt.value ? opt.label : opt.value).toString();
+      return (opt.label.length > 0 ? opt.label : opt.value).toString();
     }
   }
 
