@@ -107,6 +107,12 @@ You have full control over the control, you can modify the options array of stat
 
 <code-example example="fi-modify-options"></code-example>
 
+##### Modifying Config on Static Pickers / Selects to mimic an Entity Picker
+
+You can modify a picker added to a form via field interactions to look like an entity picker!
+
+<code-example example="fi-modify-added-picker"></code-example>
+
 ##### Using Globals
 
 Using the config from above, you can figure the API to have a set of global variables that you can key off of inside your field interactions

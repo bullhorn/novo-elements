@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 // APP
 import { NovoFormControl } from './NovoFormControl';
-import { NovoControlConfig } from './FormControls';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoToastService } from '../toast/ToastService';
 import { NovoModalService } from '../modal/ModalService';
@@ -14,6 +13,7 @@ import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { IFieldInteractionEvent } from './FormInterfaces';
+import { EntityPickerResults } from '../picker/extras/entity-picker-results/EntityPickerResults';
 
 class CustomHttp {
   url: string;
@@ -533,7 +533,14 @@ export class FieldInteractionApi {
 
   public modifyPickerConfig(
     key: string,
-    config: { format?: string; optionsUrl?: string; optionsUrlBuilder?: Function; optionsPromise?: any; options?: any[] },
+    config: {
+      format?: string;
+      optionsUrl?: string;
+      optionsUrlBuilder?: Function;
+      optionsPromise?: any;
+      options?: any[];
+      entityPicker?: boolean;
+    },
     mapper?: any,
   ): void {
     let control = this.getControl(key);
@@ -572,6 +579,9 @@ export class FieldInteractionApi {
         }
       } else if (config.options) {
         newConfig.options = [...config.options];
+      }
+      if (config.entityPicker) {
+        newConfig.resultsTemplate = EntityPickerResults;
       }
       this.setProperty(key, 'config', newConfig);
       this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: config });
