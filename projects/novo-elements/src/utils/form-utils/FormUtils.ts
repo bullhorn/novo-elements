@@ -589,7 +589,7 @@ export class FormUtils {
     } else if (field.workflowOptions && fieldData) {
       return this.getWorkflowOptions(field.workflowOptions, fieldData);
     } else if (field.dataSpecialization === 'SPECIALIZED_OPTIONS') {
-      return field.options;
+      return field.options.filter((o) => !o.readOnly);
     } else if (field.optionsUrl) {
       return this.optionsService.getOptionsConfig(http, field, config);
     } else if (Array.isArray(field.options) && field.type === 'chips') {
