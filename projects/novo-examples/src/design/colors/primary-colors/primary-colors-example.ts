@@ -35,7 +35,7 @@ export class PrimaryColorsExample {
     },
     {
       name: 'background dark',
-      variables: ['background dark'],
+      variables: ['background-dark'],
       hex: 'E2E2E2',
     },
     {
