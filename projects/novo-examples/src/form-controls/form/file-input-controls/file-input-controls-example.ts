@@ -58,7 +58,14 @@ export class FileInputControlsExample {
       label: 'Multiple Files - Delete New Only',
       tooltip: 'Multiple Files - Delete New Only',
       multiple: true,
-      layoutOptions: { order: 'displayFilesBelow', labelStyle: 'no-box', download: true, edit: false, removable: false },
+      layoutOptions: {
+        order: 'displayFilesBelow',
+        labelStyle: 'no-box',
+        download: true,
+        edit: false,
+        removable: false,
+        removableWhenNew: true,
+      },
       value: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
     });
     this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl, this.multiFileControlMixRemove]);
