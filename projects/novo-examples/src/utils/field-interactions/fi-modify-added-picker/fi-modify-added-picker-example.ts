@@ -40,7 +40,7 @@ export class FiModifyAddedPickerExample {
         },
         format: '$name',
         // This is how we set the picker to be of an entity type
-        entityPicker: true,
+        resultsTemplateType: 'entity-picker',
       });
     };
 

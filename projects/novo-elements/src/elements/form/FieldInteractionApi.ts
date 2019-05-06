@@ -12,7 +12,7 @@ import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModal
 import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { IFieldInteractionEvent } from './FormInterfaces';
+import { IFieldInteractionEvent, ResultsTemplateType } from './FormInterfaces';
 import { EntityPickerResults } from '../picker/extras/entity-picker-results/EntityPickerResults';
 
 class CustomHttp {
@@ -539,7 +539,7 @@ export class FieldInteractionApi {
       optionsUrlBuilder?: Function;
       optionsPromise?: any;
       options?: any[];
-      entityPicker?: boolean;
+      resultsTemplateType?: ResultsTemplateType;
     },
     mapper?: any,
   ): void {
@@ -580,8 +580,8 @@ export class FieldInteractionApi {
       } else if (config.options) {
         newConfig.options = [...config.options];
       }
-      if (config.entityPicker) {
-        newConfig.resultsTemplate = EntityPickerResults;
+      if (config.resultsTemplateType) {
+        this.assignAppropriateResultsTemplate(config.resultsTemplateType, newConfig);
       }
       this.setProperty(key, 'config', newConfig);
       this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: config });
@@ -721,6 +721,14 @@ export class FieldInteractionApi {
   private triggerEvent(event: IFieldInteractionEvent): void {
     if (this.form && this.form.fieldInteractionEvents) {
       this.form.fieldInteractionEvents.emit(event);
+    }
+  }
+
+  private assignAppropriateResultsTemplate(resultsTemplateType: ResultsTemplateType, config: { resultsTemplate: any }): void {
+    switch (resultsTemplateType) {
+      case 'entity-picker':
+        config.resultsTemplate = EntityPickerResults;
+        break;
     }
   }
 }
