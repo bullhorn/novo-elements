@@ -84,6 +84,7 @@ class ControlConfig {
     labelStyle?: string;
     order?: string;
     removable?: boolean;
+    removableWhenNew?: boolean;
   };
   tipWell?: {
     button?: boolean;

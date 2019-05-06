@@ -6,5 +6,8 @@
     <div class="novo-form-row">
         <novo-control [form]="fileForm" [control]="multiFileControl" (edit)="handleEdit($event)" (save)="handleSave($event)" (delete)="handleDelete($event)" (upload)="handleUpload($event)"></novo-control>
     </div>
+    <div class="novo-form-row">
+        <novo-control [form]="fileForm" [control]="multiFileControlMixRemove"></novo-control>
+    </div>
 </novo-form>
 <div class="final-value">Value: {{fileForm.value | json}}</div>

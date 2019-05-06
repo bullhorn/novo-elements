@@ -16,6 +16,7 @@ import { FormUtils, FileControl } from 'novo-elements';
 export class FileInputControlsExample {
   public fileControl: any;
   public multiFileControl: any;
+  public multiFileControlMixRemove: FileControl;
   public fileForm: any;
 
   constructor(private formUtils: FormUtils) {
@@ -30,7 +31,16 @@ export class FileInputControlsExample {
       layoutOptions: { order: 'displayFilesBelow', download: true, edit: true, customActions: true, labelStyle: 'no-box' },
       value: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
     });
-    this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
+    this.multiFileControlMixRemove = new FileControl({
+      key: 'mixDeleteFiles',
+      name: 'mymixDeleteFiles',
+      label: 'Multiple Files - Delete New Only',
+      tooltip: 'Multiple Files - Delete New Only',
+      multiple: true,
+      layoutOptions: { order: 'displayFilesBelow', labelStyle: 'no-box', download: true, edit: false, removable: false },
+      value: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
+    });
+    this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl, this.multiFileControlMixRemove]);
   }
 
   public handleEdit(file) {
