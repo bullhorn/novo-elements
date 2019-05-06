@@ -28,19 +28,8 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
         total = this.currentData.length;
       }
       if (filter) {
-        let filters = Helpers.convertToArray(filter);
-        filters.forEach((aFilter) => {
-          if (Array.isArray(aFilter.value)) {
-            let values = Helpers.convertToArray(aFilter.value).map((aValue) => {
-              return Helpers.cleanIfString(aValue);
-            });
-            this.currentData = this.currentData.filter(Helpers.filterByField(aFilter.id, values));
-          } else {
-            let value = Helpers.cleanIfString(aFilter.value);
-            this.currentData = this.currentData.filter(Helpers.filterByField(aFilter.id, value));
-          }
-          total = this.currentData.length;
-        });
+        this.currentData = this.filterData(this.currentData, filter);
+        total = this.currentData.length;
       }
       if (sort) {
         this.currentData = this.currentData.sort(Helpers.sortByField(sort.id, sort.value === 'desc'));
@@ -54,5 +43,21 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
       }
     }
     return of({ results: this.currentData, total: total });
+  }
+
+  public filterData(currentData: T[], filter: IDataTableFilter | IDataTableFilter[]): T[] {
+    let filters = Helpers.convertToArray(filter);
+    filters.forEach((aFilter) => {
+      if (Array.isArray(aFilter.value)) {
+        let values = Helpers.convertToArray(aFilter.value).map((aValue) => {
+          return Helpers.cleanIfString(aValue);
+        });
+        currentData = currentData.filter(Helpers.filterByField(aFilter.id, values));
+      } else {
+        let value = Helpers.cleanIfString(aFilter.value);
+        currentData = currentData.filter(Helpers.filterByField(aFilter.id, value));
+      }
+    });
+    return currentData;
   }
 }
