@@ -141,7 +141,7 @@ import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
                 ></i>
               </item>
             </div>
-            <p class="filter-null-results" [hidden]="multiSelectOptionEmptyState()">{{ labels.pickerEmpty }}</p>
+            <p class="filter-null-results" [hidden]="multiSelectHasVisibleOptions()">{{ labels.pickerEmpty }}</p>
           </list>
           <list *ngSwitchCase="'custom'">
             <item class="filter-search" keepOpen="true">
@@ -371,7 +371,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   public filterMultiSelect(): void {
     if ((this.multiSelectedOptions.length === 0 && !this.filter) || this.multiSelectedOptions === this.filter) {
-      this.multiSelectOptionEmptyState() ? (this.error = true) : null;
+      this.multiSelectHasVisibleOptions() ? (this.error = true) : null;
     } else {
       this.clearOptionFilter();
       let actualFilter = this.multiSelectedOptions.length > 0 ? [...this.multiSelectedOptions] : undefined;
@@ -396,7 +396,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     return this.multiSelectedOptionIsHidden.find((record) => record.option === option).hidden;
   }
 
-  public multiSelectOptionEmptyState(): boolean {
+  public multiSelectHasVisibleOptions(): boolean {
     return this.multiSelectedOptionIsHidden.some((record) => !record.hidden);
   }
 
