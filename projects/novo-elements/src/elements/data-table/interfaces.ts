@@ -2,6 +2,9 @@ import { Observable } from 'rxjs';
 
 export interface IDataTablePreferences {
   name: string;
+  sort?: { id: string; value: string };
+  filter?: IDataTableFilter | IDataTableFilter[];
+  globalSearch?: any;
   pageSize?: number;
   displayedColumns?: string[];
 }

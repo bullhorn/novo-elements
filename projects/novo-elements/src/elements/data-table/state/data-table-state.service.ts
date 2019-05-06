@@ -91,6 +91,10 @@ export class DataTableState<T> {
   }
 
   public onSortFilterChange(): void {
-    this.sortFilterSource.next();
+    this.sortFilterSource.next({
+      sort: this.sort,
+      filter: this.filter,
+      globalSearch: this.globalSearch,
+    });
   }
 }
