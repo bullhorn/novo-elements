@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 
 // Vendor
-import { FormUtils, FileControl } from 'novo-elements';
-
-// import { MockMeta, MockMetaHeaders } from './MockMeta';
+import { FormUtils, FileControl, NovoFormGroup } from 'novo-elements';
 
 /**
  * @title File Input Controls Example
@@ -18,6 +16,11 @@ export class FileInputControlsExample {
   public multiFileControl: any;
   public fileForm: any;
 
+  // custom upload validation
+  public message: string = '';
+  public customValidationFileControl: FileControl;
+  public customValidationFileForm: NovoFormGroup;
+
   constructor(private formUtils: FormUtils) {
     // File input controls
     this.fileControl = new FileControl({ key: 'file', name: 'myfile', label: 'File', tooltip: 'Files Control' });
@@ -31,6 +34,22 @@ export class FileInputControlsExample {
       value: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
     });
     this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
+
+    this.customValidationFileControl = new FileControl({
+      key: 'customValidationFiles',
+      name: 'customValidationFiles',
+      label: 'Custom Validation',
+      tooltip: 'Custom Validation Multiple Files',
+      multiple: true,
+      layoutOptions: {
+        order: 'displayFilesBelow',
+        download: true,
+        edit: true,
+        customActions: false,
+        customValidation: [{ action: 'upload', fn: this.checkFileSize.bind(this) }],
+      },
+    });
+    this.customValidationFileForm = formUtils.toFormGroup([this.customValidationFileControl]);
   }
 
   public handleEdit(file) {
@@ -47,5 +66,16 @@ export class FileInputControlsExample {
 
   public handleUpload(files) {
     console.log('This is an upload Action!', files); // tslint:disable-line
+  }
+
+  public checkFileSize(fileList): boolean {
+    const maxSizeKb: number = 5120; // (5 MB in KB)
+    for (let file of fileList) {
+      if (file.size > maxSizeKb * 1024) {
+        this.message = 'File is bigger than the allowed 5MB';
+        return false;
+      }
+    }
+    return true;
   }
 }
