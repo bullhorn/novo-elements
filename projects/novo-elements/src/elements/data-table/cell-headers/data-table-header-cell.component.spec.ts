@@ -224,6 +224,7 @@ describe('Elements: NovoDataTableCellHeader', () => {
           panelOpen: true,
           closePanel: () => {},
         };
+        component.multiSelect = true;
       });
       it('should clear filter text and close dropdown on ESC', () => {
         const event = { keyCode: KeyCodes.ESC, stopPropagation: () => {}, preventDefault: () => {} };
