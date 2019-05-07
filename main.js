@@ -40968,6 +40968,26 @@ var NovoFileInputElement = /** @class */ (function () {
         this.process(Array.from(event.target.files));
     };
     /**
+     * @param {?} files
+     * @return {?}
+     */
+    NovoFileInputElement.prototype.validate = /**
+     * @param {?} files
+     * @return {?}
+     */
+    function (files) {
+        /** @type {?} */
+        var passedValidation = true;
+        if (this.layoutOptions.customValidation) {
+            this.layoutOptions.customValidation
+                .filter(function (validation) { return validation.action === 'upload'; })
+                .forEach(function (uploadValidation) {
+                passedValidation = uploadValidation.fn(files) && passedValidation;
+            });
+        }
+        return passedValidation;
+    };
+    /**
      * @param {?} filelist
      * @return {?}
      */
@@ -40977,17 +40997,19 @@ var NovoFileInputElement = /** @class */ (function () {
      */
     function (filelist) {
         var _this = this;
-        Promise.all(filelist.map(function (file) { return _this.readFile(file); })).then(function (files) {
-            var _a;
-            if (_this.multiple) {
-                (_a = _this.files).push.apply(_a, Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__spread"])(files));
-            }
-            else {
-                _this.files = files;
-            }
-            _this.model = _this.files;
-            _this.onModelChange(_this.model);
-        });
+        if (this.validate(filelist)) {
+            Promise.all(filelist.map(function (file) { return _this.readFile(file); })).then(function (files) {
+                var _a;
+                if (_this.multiple) {
+                    (_a = _this.files).push.apply(_a, Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__spread"])(files));
+                }
+                else {
+                    _this.files = files;
+                }
+                _this.model = _this.files;
+                _this.onModelChange(_this.model);
+            });
+        }
     };
     /**
      * @param {?} file
@@ -41083,7 +41105,7 @@ var NovoFileInputElement = /** @class */ (function () {
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Component"], args: [{
                     selector: 'novo-file-input',
                     providers: [FILE_VALUE_ACCESSOR],
-                    template: "\n        <div #container></div>\n        <ng-template #fileInput>\n            <div class=\"file-input-group\" [class.disabled]=\"disabled\" [class.active]=\"active\">\n                <input *ngIf=\"!layoutOptions.customActions\" type=\"file\" [name]=\"name\" [attr.id]=\"name\" (change)=\"check($event)\" [attr.multiple]=\"multiple\" tabindex=\"-1\"/>\n                <input *ngIf=\"layoutOptions.customActions\" type=\"file\" [name]=\"name\" [attr.id]=\"name\" (change)=\"customCheck($event)\" [attr.multiple]=\"multiple\" tabindex=\"-1\"/>\n                <section [ngSwitch]=\"layoutOptions.labelStyle\">\n                    <label *ngSwitchCase=\"'no-box'\" [attr.for]=\"name\" class=\"no-box\">\n                        <div><i class=\"bhi-dropzone\"></i>{{ placeholder || labels.chooseAFile }} {{ labels.or }} <strong class=\"link\">{{ labels.clickToBrowse }}</strong></div>\n                    </label>\n                    <label *ngSwitchDefault [attr.for]=\"name\" class=\"boxed\">\n                        <span>{{ placeholder || labels.chooseAFile }}</span>\n                        <small>{{ labels.or }} <strong class=\"link\">{{ labels.clickToBrowse }}</strong></small>\n                    </label>\n                </section>\n            </div>\n        </ng-template>\n        <ng-template #fileOutput>\n            <div class=\"file-output-group\" [dragula]=\"fileOutputBag\" [dragulaModel]=\"files\">\n                <div class=\"file-item\" *ngFor=\"let file of files\" [class.disabled]=\"disabled\">\n                  <i *ngIf=\"layoutOptions.draggable\" class=\"bhi-move\"></i>\n                  <label *ngIf=\"file.link\"><span><a href=\"{{ file.link }}\" target=\"_blank\">{{ file.name | decodeURI }}</a></span><span  *ngIf=\"file.description\">||</span><span>{{ file.description }}</span></label>\n                  <label *ngIf=\"!file.link\">{{ file.name | decodeURI }}</label>\n                  <div class=\"actions\" [attr.data-automation-id]=\"'file-actions'\" *ngIf=\"file.loaded\">\n                    <div *ngIf=\"!layoutOptions.customActions\">\n                      <button *ngIf=\"layoutOptions.download\" type=\"button\" theme=\"icon\" icon=\"save\" (click)=\"download(file)\" [attr.data-automation-id]=\"'file-download'\" tabindex=\"-1\"></button>\n                      <button *ngIf=\"!disabled && layoutOptions.removable\" type=\"button\" theme=\"icon\" icon=\"close\" (click)=\"remove(file)\" [attr.data-automation-id]=\"'file-remove'\" tabindex=\"-1\"></button>\n                    </div>\n                    <div *ngIf=\"layoutOptions.customActions\">\n                      <button *ngIf=\"layoutOptions.edit && !disabled\" type=\"button\" theme=\"icon\" icon=\"edit\" (click)=\"customEdit(file)\" [attr.data-automation-id]=\"'file-edit'\" tabindex=\"-1\"></button>\n                      <button *ngIf=\"layoutOptions.download\" type=\"button\" theme=\"icon\" icon=\"save\" (click)=\"customSave(file)\" [attr.data-automation-id]=\"'file-download'\" tabindex=\"-1\"></button>\n                      <button *ngIf=\"!disabled\" type=\"button\" theme=\"icon\" icon=\"close\" (click)=\"customDelete(file)\" [attr.data-automation-id]=\"'file-remove'\" tabindex=\"-1\"></button>\n                    </div>\n                  </div>\n                    <novo-loading *ngIf=\"!file.loaded\"></novo-loading>\n                </div>\n            </div>\n        </ng-template>"
+                    template: "\n    <div #container></div>\n    <ng-template #fileInput>\n      <div class=\"file-input-group\" [class.disabled]=\"disabled\" [class.active]=\"active\">\n        <input\n          *ngIf=\"!layoutOptions.customActions\"\n          type=\"file\"\n          [name]=\"name\"\n          [attr.id]=\"name\"\n          (change)=\"check($event)\"\n          [attr.multiple]=\"multiple\"\n          tabindex=\"-1\"\n        />\n        <input\n          *ngIf=\"layoutOptions.customActions\"\n          type=\"file\"\n          [name]=\"name\"\n          [attr.id]=\"name\"\n          (change)=\"customCheck($event)\"\n          [attr.multiple]=\"multiple\"\n          tabindex=\"-1\"\n        />\n        <section [ngSwitch]=\"layoutOptions.labelStyle\">\n          <label *ngSwitchCase=\"'no-box'\" [attr.for]=\"name\" class=\"no-box\">\n            <div>\n              <i class=\"bhi-dropzone\"></i>{{ placeholder || labels.chooseAFile }} {{ labels.or }}\n              <strong class=\"link\">{{ labels.clickToBrowse }}</strong>\n            </div>\n          </label>\n          <label *ngSwitchDefault [attr.for]=\"name\" class=\"boxed\">\n            <span>{{ placeholder || labels.chooseAFile }}</span>\n            <small\n              >{{ labels.or }} <strong class=\"link\">{{ labels.clickToBrowse }}</strong></small\n            >\n          </label>\n        </section>\n      </div>\n    </ng-template>\n    <ng-template #fileOutput>\n      <div class=\"file-output-group\" [dragula]=\"fileOutputBag\" [dragulaModel]=\"files\">\n        <div class=\"file-item\" *ngFor=\"let file of files\" [class.disabled]=\"disabled\">\n          <i *ngIf=\"layoutOptions.draggable\" class=\"bhi-move\"></i>\n          <label *ngIf=\"file.link\"\n            ><span\n              ><a href=\"{{ file.link }}\" target=\"_blank\">{{ file.name | decodeURI }}</a></span\n            ><span *ngIf=\"file.description\">||</span><span>{{ file.description }}</span></label\n          >\n          <label *ngIf=\"!file.link\">{{ file.name | decodeURI }}</label>\n          <div class=\"actions\" [attr.data-automation-id]=\"'file-actions'\" *ngIf=\"file.loaded\">\n            <div *ngIf=\"!layoutOptions.customActions\">\n              <button\n                *ngIf=\"layoutOptions.download\"\n                type=\"button\"\n                theme=\"icon\"\n                icon=\"save\"\n                (click)=\"download(file)\"\n                [attr.data-automation-id]=\"'file-download'\"\n                tabindex=\"-1\"\n              ></button>\n              <button\n                *ngIf=\"!disabled && layoutOptions.removable\"\n                type=\"button\"\n                theme=\"icon\"\n                icon=\"close\"\n                (click)=\"remove(file)\"\n                [attr.data-automation-id]=\"'file-remove'\"\n                tabindex=\"-1\"\n              ></button>\n            </div>\n            <div *ngIf=\"layoutOptions.customActions\">\n              <button\n                *ngIf=\"layoutOptions.edit && !disabled\"\n                type=\"button\"\n                theme=\"icon\"\n                icon=\"edit\"\n                (click)=\"customEdit(file)\"\n                [attr.data-automation-id]=\"'file-edit'\"\n                tabindex=\"-1\"\n              ></button>\n              <button\n                *ngIf=\"layoutOptions.download\"\n                type=\"button\"\n                theme=\"icon\"\n                icon=\"save\"\n                (click)=\"customSave(file)\"\n                [attr.data-automation-id]=\"'file-download'\"\n                tabindex=\"-1\"\n              ></button>\n              <button\n                *ngIf=\"!disabled\"\n                type=\"button\"\n                theme=\"icon\"\n                icon=\"close\"\n                (click)=\"customDelete(file)\"\n                [attr.data-automation-id]=\"'file-remove'\"\n                tabindex=\"-1\"\n              ></button>\n            </div>\n          </div>\n          <novo-loading *ngIf=\"!file.loaded\"></novo-loading>\n        </div>\n      </div>\n    </ng-template>\n  "
                 }] }
     ];
     /** @nocollapse */
@@ -64635,13 +64657,14 @@ var EnableDisableAllFieldsInFormExample = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// import { MockMeta, MockMetaHeaders } from './MockMeta';
 /**
  * \@title File Input Controls Example
  */
 var FileInputControlsExample = /** @class */ (function () {
     function FileInputControlsExample(formUtils) {
         this.formUtils = formUtils;
+        // custom upload validation
+        this.message = '';
         // File input controls
         this.fileControl = new novo_elements__WEBPACK_IMPORTED_MODULE_12__["FileControl"]({ key: 'file', name: 'myfile', label: 'File', tooltip: 'Files Control' });
         this.multiFileControl = new novo_elements__WEBPACK_IMPORTED_MODULE_12__["FileControl"]({
@@ -64654,6 +64677,21 @@ var FileInputControlsExample = /** @class */ (function () {
             value: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
         });
         this.fileForm = formUtils.toFormGroup([this.fileControl, this.multiFileControl]);
+        this.customValidationFileControl = new novo_elements__WEBPACK_IMPORTED_MODULE_12__["FileControl"]({
+            key: 'customValidationFiles',
+            name: 'customValidationFiles',
+            label: 'Custom Validation',
+            tooltip: 'Custom Validation Multiple Files',
+            multiple: true,
+            layoutOptions: {
+                order: 'displayFilesBelow',
+                download: true,
+                edit: true,
+                customActions: false,
+                customValidation: [{ action: 'upload', fn: this.checkFileSize.bind(this) }],
+            },
+        });
+        this.customValidationFileForm = formUtils.toFormGroup([this.customValidationFileControl]);
     }
     /**
      * @param {?} file
@@ -64699,10 +64737,40 @@ var FileInputControlsExample = /** @class */ (function () {
     function (files) {
         console.log('This is an upload Action!', files); // tslint:disable-line
     };
+    /**
+     * @param {?} fileList
+     * @return {?}
+     */
+    FileInputControlsExample.prototype.checkFileSize = /**
+     * @param {?} fileList
+     * @return {?}
+     */
+    function (fileList) {
+        var e_1, _a;
+        /** @type {?} */
+        var maxSizeKb = 5120;
+        try {
+            for (var fileList_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_6__["__values"])(fileList), fileList_1_1 = fileList_1.next(); !fileList_1_1.done; fileList_1_1 = fileList_1.next()) {
+                var file = fileList_1_1.value;
+                if (file.size > maxSizeKb * 1024) {
+                    this.message = 'File is bigger than the allowed 5MB';
+                    return false;
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (fileList_1_1 && !fileList_1_1.done && (_a = fileList_1.return)) _a.call(fileList_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return true;
+    };
     FileInputControlsExample.decorators = [
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_11__["Component"], args: [{
                     selector: 'file-input-controls-example',
-                    template: "<!--Check out the FormDemo.js for more information!-->\n<novo-form [form]=\"fileForm\" layout=\"vertical\">\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"fileForm\" [control]=\"fileControl\"></novo-control>\n    </div>\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"fileForm\" [control]=\"multiFileControl\" (edit)=\"handleEdit($event)\" (save)=\"handleSave($event)\" (delete)=\"handleDelete($event)\" (upload)=\"handleUpload($event)\"></novo-control>\n    </div>\n</novo-form>\n<div class=\"final-value\">Value: {{fileForm.value | json}}</div>\n",
+                    template: "<!--Check out the FormDemo.js for more information!-->\n<novo-form [form]=\"fileForm\" layout=\"vertical\">\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"fileForm\" [control]=\"fileControl\"></novo-control>\n    </div>\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"fileForm\" [control]=\"multiFileControl\" (edit)=\"handleEdit($event)\" (save)=\"handleSave($event)\" (delete)=\"handleDelete($event)\" (upload)=\"handleUpload($event)\"></novo-control>\n    </div>\n</novo-form>\n<div class=\"final-value\">Value: {{fileForm.value | json}}</div>\n<br />\n<br />\n<novo-form layout=\"vertical\" [form]=\"customValidationFileForm\">\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"customValidationFileForm\" [control]=\"customValidationFileControl\"></novo-control>\n    </div>\n</novo-form>\n<div>{{ message }}</div>\n",
                     styles: [""]
                 }] }
     ];
@@ -71010,9 +71078,9 @@ var EXAMPLE_COMPONENTS = {
     'file-input-controls': {
         title: 'File Input Controls Example',
         component: FileInputControlsExample,
-        tsSource: "import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20FileControl%20%7D%20from%20'novo-elements'%3B%0A%0A%2F%2F%20import%20%7B%20MockMeta%2C%20MockMetaHeaders%20%7D%20from%20'.%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20File%20Input%20Controls%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'file-input-controls-example'%2C%0A%20%20templateUrl%3A%20'file-input-controls-example.html'%2C%0A%20%20styleUrls%3A%20%5B'file-input-controls-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FileInputControlsExample%20%7B%0A%20%20public%20fileControl%3A%20any%3B%0A%20%20public%20multiFileControl%3A%20any%3B%0A%20%20public%20fileForm%3A%20any%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20File%20input%20controls%0A%20%20%20%20this.fileControl%20%3D%20new%20FileControl(%7B%20key%3A%20'file'%2C%20name%3A%20'myfile'%2C%20label%3A%20'File'%2C%20tooltip%3A%20'Files%20Control'%20%7D)%3B%0A%20%20%20%20this.multiFileControl%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'files'%2C%0A%20%20%20%20%20%20name%3A%20'myfiles'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%20order%3A%20'displayFilesBelow'%2C%20download%3A%20true%2C%20edit%3A%20true%2C%20customActions%3A%20true%2C%20labelStyle%3A%20'no-box'%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.fileForm%20%3D%20formUtils.toFormGroup(%5Bthis.fileControl%2C%20this.multiFileControl%5D)%3B%0A%20%20%7D%0A%0A%20%20public%20handleEdit(file)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20Edit%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleSave(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Save%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleDelete(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Delete%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleUpload(files)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20upload%20Action!'%2C%20files)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A",
+        tsSource: "import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20FileControl%2C%20NovoFormGroup%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20File%20Input%20Controls%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'file-input-controls-example'%2C%0A%20%20templateUrl%3A%20'file-input-controls-example.html'%2C%0A%20%20styleUrls%3A%20%5B'file-input-controls-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FileInputControlsExample%20%7B%0A%20%20public%20fileControl%3A%20any%3B%0A%20%20public%20multiFileControl%3A%20any%3B%0A%20%20public%20fileForm%3A%20any%3B%0A%0A%20%20%2F%2F%20custom%20upload%20validation%0A%20%20public%20message%3A%20string%20%3D%20''%3B%0A%20%20public%20customValidationFileControl%3A%20FileControl%3B%0A%20%20public%20customValidationFileForm%3A%20NovoFormGroup%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20File%20input%20controls%0A%20%20%20%20this.fileControl%20%3D%20new%20FileControl(%7B%20key%3A%20'file'%2C%20name%3A%20'myfile'%2C%20label%3A%20'File'%2C%20tooltip%3A%20'Files%20Control'%20%7D)%3B%0A%20%20%20%20this.multiFileControl%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'files'%2C%0A%20%20%20%20%20%20name%3A%20'myfiles'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%20order%3A%20'displayFilesBelow'%2C%20download%3A%20true%2C%20edit%3A%20true%2C%20customActions%3A%20true%2C%20labelStyle%3A%20'no-box'%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.fileForm%20%3D%20formUtils.toFormGroup(%5Bthis.fileControl%2C%20this.multiFileControl%5D)%3B%0A%0A%20%20%20%20this.customValidationFileControl%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'customValidationFiles'%2C%0A%20%20%20%20%20%20name%3A%20'customValidationFiles'%2C%0A%20%20%20%20%20%20label%3A%20'Custom%20Validation'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Custom%20Validation%20Multiple%20Files'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%0A%20%20%20%20%20%20%20%20order%3A%20'displayFilesBelow'%2C%0A%20%20%20%20%20%20%20%20download%3A%20true%2C%0A%20%20%20%20%20%20%20%20edit%3A%20true%2C%0A%20%20%20%20%20%20%20%20customActions%3A%20false%2C%0A%20%20%20%20%20%20%20%20customValidation%3A%20%5B%7B%20action%3A%20'upload'%2C%20fn%3A%20this.checkFileSize.bind(this)%20%7D%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.customValidationFileForm%20%3D%20formUtils.toFormGroup(%5Bthis.customValidationFileControl%5D)%3B%0A%20%20%7D%0A%0A%20%20public%20handleEdit(file)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20Edit%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleSave(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Save%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleDelete(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Delete%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleUpload(files)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20upload%20Action!'%2C%20files)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20checkFileSize(fileList)%3A%20boolean%20%7B%0A%20%20%20%20const%20maxSizeKb%3A%20number%20%3D%205120%3B%20%2F%2F%20(5%20MB%20in%20KB)%0A%20%20%20%20for%20(let%20file%20of%20fileList)%20%7B%0A%20%20%20%20%20%20if%20(file.size%20%3E%20maxSizeKb%20*%201024)%20%7B%0A%20%20%20%20%20%20%20%20this.message%20%3D%20'File%20is%20bigger%20than%20the%20allowed%205MB'%3B%0A%20%20%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20return%20true%3B%0A%20%20%7D%0A%7D%0A",
         cssSource: "%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A",
-        htmlSource: "%3C!--Check%20out%20the%20FormDemo.js%20for%20more%20information!--%3E%0A%3Cnovo-form%20%5Bform%5D%3D%22fileForm%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22fileForm%22%20%5Bcontrol%5D%3D%22fileControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22fileForm%22%20%5Bcontrol%5D%3D%22multiFileControl%22%20(edit)%3D%22handleEdit(%24event)%22%20(save)%3D%22handleSave(%24event)%22%20(delete)%3D%22handleDelete(%24event)%22%20(upload)%3D%22handleUpload(%24event)%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7BfileForm.value%20%7C%20json%7D%7D%3C%2Fdiv%3E%0A"
+        htmlSource: "%3C!--Check%20out%20the%20FormDemo.js%20for%20more%20information!--%3E%0A%3Cnovo-form%20%5Bform%5D%3D%22fileForm%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22fileForm%22%20%5Bcontrol%5D%3D%22fileControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22fileForm%22%20%5Bcontrol%5D%3D%22multiFileControl%22%20(edit)%3D%22handleEdit(%24event)%22%20(save)%3D%22handleSave(%24event)%22%20(delete)%3D%22handleDelete(%24event)%22%20(upload)%3D%22handleUpload(%24event)%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7BfileForm.value%20%7C%20json%7D%7D%3C%2Fdiv%3E%0A%3Cbr%20%2F%3E%0A%3Cbr%20%2F%3E%0A%3Cnovo-form%20layout%3D%22vertical%22%20%5Bform%5D%3D%22customValidationFileForm%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22customValidationFileForm%22%20%5Bcontrol%5D%3D%22customValidationFileControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%3E%7B%7B%20message%20%7D%7D%3C%2Fdiv%3E%0A"
     },
     'picker-controls': {
         title: 'Picker Controls Example',
