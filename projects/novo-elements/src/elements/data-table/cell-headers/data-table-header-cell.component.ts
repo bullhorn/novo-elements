@@ -13,6 +13,7 @@ import {
   Output,
   HostBinding,
   TemplateRef,
+  HostListener,
 } from '@angular/core';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { fromEvent, Subscription } from 'rxjs';
@@ -123,7 +124,8 @@ import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
                   #optionFilterInput
                   data-automation-id="novo-data-table-multi-select-option-filter-input"
                 />
-                <i class="bhi-search"></i> <span class="error-text" [hidden]="!error">{{ labels.selectFilterOptions }}</span>
+                <i class="bhi-search"></i>
+                <span class="error-text" [hidden]="!error || !multiSelectHasVisibleOptions()">{{ labels.selectFilterOptions }}</span>
               </item>
             </div>
             <div class="dropdown-list-options">
@@ -371,7 +373,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   public filterMultiSelect(): void {
     if ((this.multiSelectedOptions.length === 0 && !this.filter) || this.multiSelectedOptions === this.filter) {
-      this.multiSelectHasVisibleOptions() ? (this.error = true) : null;
+      this.multiSelectHasVisibleOptions() && this.dropdown ? (this.error = true) : null;
     } else {
       this.clearOptionFilter();
       let actualFilter = this.multiSelectedOptions.length > 0 ? [...this.multiSelectedOptions] : undefined;
@@ -409,17 +411,25 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     }
   }
 
+  @HostListener('document:keydown', ['$event'])
   public multiSelectOptionFilterHandleKeydown(event: KeyboardEvent) {
-    if (this.dropdown.panelOpen && event.keyCode === KeyCodes.ESC) {
-      // escape = clear text box and close
-      Helpers.swallowEvent(event);
-      this.clearOptionFilter();
-      this.dropdown.closePanel();
-    } else if (event.keyCode === KeyCodes.ENTER) {
-      Helpers.swallowEvent(event);
-      this.filterMultiSelect();
-    } else {
+    if (this.multiSelect) {
       this.error = false;
+      if (this.dropdown.panelOpen && event.keyCode === KeyCodes.ESC) {
+        // escape = clear text box and close
+        Helpers.swallowEvent(event);
+        this.clearOptionFilter();
+        this.dropdown.closePanel();
+      } else if (event.keyCode === KeyCodes.ENTER) {
+        Helpers.swallowEvent(event);
+        this.filterMultiSelect();
+      } else if (
+        (event.keyCode >= 65 && event.keyCode <= 90) ||
+        (event.keyCode >= 96 && event.keyCode <= 105) ||
+        (event.keyCode >= 48 && event.keyCode <= 57)
+      ) {
+        this.optionFilterInput.nativeElement.focus();
+      }
     }
   }
 
@@ -472,16 +482,11 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       setTimeout(() => this.filterInput.nativeElement.focus(), 0);
     }
     if (this.multiSelect && this.dropdown) {
-      this.dropdown.onKeyDown = (event: KeyboardEvent): void => {
-        if (
-          (event.keyCode >= 65 && event.keyCode <= 90) ||
-          (event.keyCode >= 96 && event.keyCode <= 105) ||
-          (event.keyCode >= 48 && event.keyCode <= 57)
-        ) {
-          this.optionFilterInput.nativeElement.focus();
-        }
+      this.dropdown.onKeyDown = (event: KeyboardEvent) => {
         this.multiSelectOptionFilterHandleKeydown(event);
       };
+      setTimeout(() => this.optionFilterInput.nativeElement.focus(), 0);
+      this.changeDetectorRef.markForCheck();
     }
   }
 
