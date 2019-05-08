@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 
 import { IDataTableChangeEvent, IDataTableFilter } from '../interfaces';
 import { Helpers } from '../../..';
-import { DataTableFilterUtils } from '../services/data-table-filter-utils';
+import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
 export class DataTableState<T> {
   public selectionSource = new Subject();
@@ -22,6 +22,8 @@ export class DataTableState<T> {
   expandedRows: Set<string> = new Set<string>();
   outsideFilter: any;
   isForceRefresh: boolean = false;
+
+  constructor(private filterUtils: NovoDataTableFilterUtils) {}
 
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
 
@@ -110,7 +112,7 @@ export class DataTableState<T> {
         let filters = Helpers.convertToArray(preferences.filter);
         filters.forEach((filter) => {
           filter.value =
-            filter.selectedOption && filter.type ? DataTableFilterUtils.constructFilter(filter.selectedOption, filter.type) : filter.value;
+            filter.selectedOption && filter.type ? this.filterUtils.constructFilter(filter.selectedOption, filter.type) : filter.value;
         });
         this.filter = filters;
       }

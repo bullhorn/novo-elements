@@ -33,6 +33,7 @@ import { NovoDropdownElement } from '../../dropdown/Dropdown';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { DataTableState } from '../state/data-table-state.service';
 import { Helpers } from '../../../utils/Helpers';
+import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
 import { DataTableFilterUtils } from '../services/data-table-filter-utils';
 
@@ -274,6 +275,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     private state: DataTableState<T>,
     private renderer: Renderer2,
     private elementRef: ElementRef,
+    private filterUtils: NovoDataTableFilterUtils,
     @Optional() public _sort: NovoDataTableSortFilter<T>,
     @Optional() public _cdkColumnDef: CdkColumnDef,
   ) {
@@ -529,7 +531,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   public filterData(filter?: any): void {
-    let actualFilter = DataTableFilterUtils.constructFilter(filter, this.config.filterConfig.type, this.multiSelect);
+    let actualFilter = this.filterUtils.constructFilter(filter, this.config.filterConfig.type, this.multiSelect);
     const selectedOption = this.config.filterConfig.type === 'date' && filter ? filter : undefined;
 
     if (this.changeTimeout) {

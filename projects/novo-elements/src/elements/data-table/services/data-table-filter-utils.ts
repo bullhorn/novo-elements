@@ -1,10 +1,7 @@
 import * as dateFns from 'date-fns';
-import { NovoLabelService } from '../../../services/novo-label-service';
 
-export class DataTableFilterUtils {
-  constructor(private labels: NovoLabelService) {}
-
-  static constructFilter(filter?: any, type?: any, multiSelect?: boolean) {
+export class NovoDataTableFilterUtils {
+  public constructFilter(filter?: any, type?: any, multiSelect?: boolean) {
     let actualFilter = filter;
     if (filter) {
       if (type && type === 'date') {
