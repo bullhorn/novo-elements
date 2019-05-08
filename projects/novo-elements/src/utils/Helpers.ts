@@ -83,7 +83,7 @@ export class Helpers {
     return typeof obj === 'string';
   }
 
-  static cleanIfString(obj: any): any {
+  static escapeString(obj: any): any {
     if (Helpers.isString(obj)) {
       return obj.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
@@ -127,7 +127,7 @@ export class Helpers {
     return obj instanceof Date;
   }
 
-  static convertToArray(obj: any): any[] {
+  static convertToArray(obj: undefined | Object | Object[]): any[] {
     if (obj === undefined) {
       return [];
     } else if (!Array.isArray(obj)) {

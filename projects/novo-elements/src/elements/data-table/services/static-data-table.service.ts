@@ -49,12 +49,10 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
     let filters = Helpers.convertToArray(filter);
     filters.forEach((aFilter) => {
       if (Array.isArray(aFilter.value)) {
-        let values = Helpers.convertToArray(aFilter.value).map((aValue) => {
-          return Helpers.cleanIfString(aValue);
-        });
+        let values = Helpers.convertToArray(aFilter.value).map(Helpers.escapeString);
         currentData = currentData.filter(Helpers.filterByField(aFilter.id, values));
       } else {
-        let value = Helpers.cleanIfString(aFilter.value);
+        let value = Helpers.escapeString(aFilter.value);
         currentData = currentData.filter(Helpers.filterByField(aFilter.id, value));
       }
     });
