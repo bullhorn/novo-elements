@@ -304,18 +304,19 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
     if (this.multiSelect) {
       this.multiSelectedOptions = this.filter ? [...this.filter] : [];
-      if (typeof this.config.filterConfig.options[1] === 'string') {
-        (this.config.filterConfig.options as string[]).forEach(
-          (option: string): void => {
-            this.multiSelectedOptionIsHidden.push({ option: option, hidden: false });
-          },
-        );
-      } else {
-        (this.config.filterConfig.options as IDataTableColumnFilterOption[]).forEach(
-          (option: IDataTableColumnFilterOption): void => {
-            this.multiSelectedOptionIsHidden.push({ option: option, hidden: false });
-          },
-        );
+      if (this.config.filterConfig.options) {
+        if (typeof this.config.filterConfig.options[0] === 'string') {
+          this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as string[]).map(
+            (option: string): { option: string; hidden: boolean } => ({ option: option, hidden: false }),
+          );
+        } else {
+          this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as IDataTableColumnFilterOption[]).map(
+            (option: IDataTableColumnFilterOption): { option: IDataTableColumnFilterOption; hidden: boolean } => ({
+              option: option,
+              hidden: false,
+            }),
+          );
+        }
       }
     }
   }
@@ -372,7 +373,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   public filterMultiSelect(): void {
-    if ((this.multiSelectedOptions.length === 0 && !this.filter) || this.multiSelectedOptions === this.filter) {
+    if (this.multiSelectedOptions.length === 0 && !this.filter) {
       this.multiSelectHasVisibleOptions() && this.dropdown ? (this.error = true) : null;
     } else {
       this.clearOptionFilter();
