@@ -27,6 +27,7 @@ import {
   IDataTableColumnFilterConfig,
   IDataTableColumnSortConfig,
 } from '../interfaces';
+
 import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
 import { NovoDropdownElement } from '../../dropdown/Dropdown';
 import { NovoLabelService } from '../../../services/novo-label-service';

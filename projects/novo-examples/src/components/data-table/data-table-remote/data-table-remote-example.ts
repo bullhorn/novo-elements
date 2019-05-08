@@ -13,6 +13,8 @@ import {
 } from 'novo-elements';
 
 import { ConfigureColumnsModal, MockData } from '../extras';
+import { IDataTableFilter } from '../../../../../novo-elements/src/elements/data-table/interfaces';
+import { Helpers } from '../../../../../novo-elements/src';
 
 /**
  * @title Remote Data Table Example
@@ -329,7 +331,7 @@ class RemoteMockDataService extends RemoteDataTableService<MockData> {
 
   public getTableResults(
     sort: { id: string; value: string; transform?: Function },
-    filter: { id: string; value: string; transform?: Function },
+    filter: IDataTableFilter | IDataTableFilter[],
     page: number,
     pageSize: number,
     globalSearch?: string,
@@ -341,10 +343,13 @@ class RemoteMockDataService extends RemoteDataTableService<MockData> {
     return of({ results: this.data, total: this.data.length }).pipe(delay(5000));
   }
 
-  private buildWhereClause(filter: { id: string; value: string; transform?: Function }): string {
+  private buildWhereClause(filter: IDataTableFilter | IDataTableFilter[]): string {
     let query: any = {};
     if (filter) {
-      query[filter.id] = filter.transform ? filter.transform(filter.value) : filter.value;
+      let filters = Helpers.convertToArray(filter);
+      filters.forEach((aFilter) => {
+        query[aFilter.id] = aFilter.transform ? aFilter.transform(aFilter.value) : aFilter.value;
+      });
     }
     return this.toQuerySyntax(query);
   }

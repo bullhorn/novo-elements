@@ -388,7 +388,7 @@ export class DataTableRowsExample {
   }
 
   public filterList(value: any): void {
-    this.table.state.filter = { id: 'status', value: value };
+    this.table.state.filter = { id: 'status', type: 'text', value: value };
     this.table.state.updates.next({
       globalSearch: this.table.state.globalSearch,
       filter: this.table.state.filter,
