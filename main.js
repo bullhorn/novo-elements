@@ -3776,6 +3776,7 @@ var NovoLabelService = /** @class */ (function () {
         this.selectCountryFirst = 'Please select a country before selecting a state';
         this.invalidIntegerInput = 'Special characters are not allowed for';
         this.maxRecordsReached = 'Sorry, you have reached the maximum number of records allowed for this field';
+        this.selectFilterOptions = 'Please select one or more filter options below.';
     }
     /**
      * @param {?} field
@@ -50173,6 +50174,9 @@ var NovoDataTableCellHeader = /** @class */ (function () {
         this.showCustomRange = false;
         this.multiSelect = false;
         this.multiSelectedOptions = [];
+        this.multiSelectedOptionIsHidden = [];
+        this.optionFilter = '';
+        this.error = false;
         this.subscriptions = [];
         this._rerenderSubscription = state$$1.updates.subscribe(function (change) {
             if (change.sort && change.sort.id === _this.id) {
@@ -50260,6 +50264,17 @@ var NovoDataTableCellHeader = /** @class */ (function () {
         this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
         if (this.multiSelect) {
             this.multiSelectedOptions = this.filter ? Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__spread"])(this.filter) : [];
+            if (this.config.filterConfig.options) {
+                if (typeof this.config.filterConfig.options[0] === 'string') {
+                    this.multiSelectedOptionIsHidden = ((/** @type {?} */ (this.config.filterConfig.options))).map(function (option) { return ({ option: option, hidden: false }); });
+                }
+                else {
+                    this.multiSelectedOptionIsHidden = ((/** @type {?} */ (this.config.filterConfig.options))).map(function (option) { return ({
+                        option: option,
+                        hidden: false,
+                    }); });
+                }
+            }
         }
     };
     /**
@@ -50309,8 +50324,15 @@ var NovoDataTableCellHeader = /** @class */ (function () {
         var optionValue = option.hasOwnProperty('value') ? option.value : option;
         /** @type {?} */
         var optionIndex = this.multiSelectedOptions.findIndex(function (item) { return _this.optionPresentCheck(item, optionValue); });
+        this.error = false;
         if (optionIndex > -1) {
             this.multiSelectedOptions.splice(optionIndex, 1);
+            if (this.optionFilter &&
+                !this.getOptionText(option)
+                    .toLowerCase()
+                    .startsWith(this.optionFilter.toLowerCase())) {
+                this.multiSelectedOptionIsHidden[this.multiSelectedOptionIsHidden.findIndex(function (record) { return record.option === option; })].hidden = true;
+            }
         }
         else {
             this.multiSelectedOptions.push(optionValue);
@@ -50343,6 +50365,7 @@ var NovoDataTableCellHeader = /** @class */ (function () {
     function () {
         this.multiSelectedOptions = this.filter ? Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__spread"])(this.filter) : [];
         this.dropdown.closePanel();
+        this.clearOptionFilter();
     };
     /**
      * @return {?}
@@ -50351,10 +50374,119 @@ var NovoDataTableCellHeader = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        /** @type {?} */
-        var actualFilter = this.multiSelectedOptions.length > 0 ? Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__spread"])(this.multiSelectedOptions) : undefined;
-        this.filterData(actualFilter);
-        this.dropdown.closePanel();
+        if (this.multiSelectedOptions.length === 0 && !this.filter) {
+            this.multiSelectHasVisibleOptions() && this.dropdown ? (this.error = true) : null;
+        }
+        else {
+            this.clearOptionFilter();
+            /** @type {?} */
+            var actualFilter = this.multiSelectedOptions.length > 0 ? Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__spread"])(this.multiSelectedOptions) : undefined;
+            this.filterData(actualFilter);
+            this.dropdown.closePanel();
+        }
+    };
+    /**
+     * @param {?} optionFilter
+     * @return {?}
+     */
+    NovoDataTableCellHeader.prototype.multiSelectOptionFilter = /**
+     * @param {?} optionFilter
+     * @return {?}
+     */
+    function (optionFilter) {
+        var _this = this;
+        this.multiSelectedOptionIsHidden.forEach(function (record) {
+            if (record.option) {
+                record.hidden = !(_this.getOptionText(record.option)
+                    .toLowerCase()
+                    .startsWith(optionFilter.toLowerCase()) || _this.isSelected(record.option, _this.multiSelectedOptions));
+            }
+        });
+    };
+    /**
+     * @param {?} option
+     * @return {?}
+     */
+    NovoDataTableCellHeader.prototype.multiSelectOptionIsHidden = /**
+     * @param {?} option
+     * @return {?}
+     */
+    function (option) {
+        return this.multiSelectedOptionIsHidden.find(function (record) { return record.option === option; }).hidden;
+    };
+    /**
+     * @return {?}
+     */
+    NovoDataTableCellHeader.prototype.multiSelectHasVisibleOptions = /**
+     * @return {?}
+     */
+    function () {
+        return this.multiSelectedOptionIsHidden.some(function (record) { return !record.hidden; });
+    };
+    /**
+     * @private
+     * @param {?} option
+     * @return {?}
+     */
+    NovoDataTableCellHeader.prototype.getOptionText = /**
+     * @private
+     * @param {?} option
+     * @return {?}
+     */
+    function (option) {
+        if (typeof option !== 'object') {
+            return option.toString();
+        }
+        else {
+            /** @type {?} */
+            var opt = (/** @type {?} */ (option));
+            return (opt.label.length > 0 ? opt.label : opt.value).toString();
+        }
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    NovoDataTableCellHeader.prototype.multiSelectOptionFilterHandleKeydown = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        if (this.multiSelect) {
+            this.error = false;
+            if (this.dropdown.panelOpen && event.keyCode === KeyCodes.ESC) {
+                // escape = clear text box and close
+                Helpers.swallowEvent(event);
+                this.clearOptionFilter();
+                this.dropdown.closePanel();
+            }
+            else if (event.keyCode === KeyCodes.ENTER) {
+                Helpers.swallowEvent(event);
+                this.filterMultiSelect();
+            }
+            else if ((event.keyCode >= 65 && event.keyCode <= 90) ||
+                (event.keyCode >= 96 && event.keyCode <= 105) ||
+                (event.keyCode >= 48 && event.keyCode <= 57)) {
+                this.optionFilterInput.nativeElement.focus();
+            }
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    NovoDataTableCellHeader.prototype.clearOptionFilter = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.error = false;
+        if (this.optionFilter.length > 0) {
+            this.optionFilter = '';
+            this.multiSelectedOptionIsHidden.forEach(function (record) {
+                record.hidden = false;
+            });
+        }
     };
     /**
      * @param {?} mouseDownEvent
@@ -50422,6 +50554,13 @@ var NovoDataTableCellHeader = /** @class */ (function () {
         var _this = this;
         if (this.filterInput && this.filterInput.nativeElement) {
             setTimeout(function () { return _this.filterInput.nativeElement.focus(); }, 0);
+        }
+        if (this.multiSelect && this.dropdown) {
+            this.dropdown.onKeyDown = function (event) {
+                _this.multiSelectOptionFilterHandleKeydown(event);
+            };
+            setTimeout(function () { return _this.optionFilterInput.nativeElement.focus(); }, 0);
+            this.changeDetectorRef.markForCheck();
         }
     };
     /**
@@ -50501,6 +50640,7 @@ var NovoDataTableCellHeader = /** @class */ (function () {
         this.multiSelectedOptions = [];
         this.activeDateFilter = undefined;
         this.filterData(undefined);
+        this.clearOptionFilter();
     };
     /**
      * @private
@@ -50548,7 +50688,7 @@ var NovoDataTableCellHeader = /** @class */ (function () {
     NovoDataTableCellHeader.decorators = [
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Component"], args: [{
                     selector: '[novo-data-table-cell-config]',
-                    template: "\n    <i class=\"bhi-{{ labelIcon }} label-icon\" *ngIf=\"labelIcon\" data-automation-id=\"novo-data-table-header-icon\"></i>\n    <label data-automation-id=\"novo-data-table-label\">{{ label }}</label>\n    <div>\n      <button\n        *ngIf=\"config.sortable\"\n        tooltipPosition=\"right\"\n        [tooltip]=\"labels.sort\"\n        theme=\"icon\"\n        [icon]=\"icon\"\n        (click)=\"sort()\"\n        [class.active]=\"sortActive\"\n        data-automation-id=\"novo-data-table-sort\"\n      ></button>\n      <novo-dropdown\n        *ngIf=\"config.filterable\"\n        side=\"right\"\n        parentScrollSelector=\".novo-data-table-container\"\n        containerClass=\"data-table-dropdown\"\n        data-automation-id=\"novo-data-table-filter\"\n      >\n        <button\n          type=\"button\"\n          theme=\"icon\"\n          icon=\"filter\"\n          [class.active]=\"filterActive\"\n          (click)=\"focusInput()\"\n          tooltipPosition=\"right\"\n          [tooltip]=\"labels.filters\"\n        ></button>\n        <div class=\"header\">\n          <span>{{ labels.filters }}</span>\n          <button\n            theme=\"dialogue\"\n            color=\"negative\"\n            icon=\"times\"\n            (click)=\"clearFilter()\"\n            *ngIf=\"filter !== null && filter !== undefined && filter !== ''\"\n            data-automation-id=\"novo-data-table-filter-clear\"\n          >\n            {{ labels.clear }}\n          </button>\n        </div>\n        <ng-container [ngSwitch]=\"config.filterConfig.type\">\n          <list *ngSwitchCase=\"'date'\">\n            <ng-container *ngIf=\"!showCustomRange\">\n              <item\n                [class.active]=\"activeDateFilter === option.label\"\n                *ngFor=\"let option of config.filterConfig.options\"\n                (click)=\"filterData(option)\"\n                [attr.data-automation-id]=\"'novo-data-table-filter-' + option.label\"\n              >\n                {{ option.label }} <i class=\"bhi-check\" *ngIf=\"activeDateFilter === option.label\"></i>\n              </item>\n            </ng-container>\n            <item\n              [class.active]=\"labels.customDateRange === activeDateFilter\"\n              (click)=\"toggleCustomRange($event, true)\"\n              *ngIf=\"config.filterConfig.allowCustomRange && !showCustomRange\"\n              [keepOpen]=\"true\"\n            >\n              {{ labels.customDateRange }} <i class=\"bhi-check\" *ngIf=\"labels.customDateRange === activeDateFilter\"></i>\n            </item>\n            <div class=\"calendar-container\" *ngIf=\"showCustomRange\">\n              <div (click)=\"toggleCustomRange($event, false)\"><i class=\"bhi-previous\"></i>{{ labels.backToPresetFilters }}</div>\n              <novo-date-picker (onSelect)=\"filterData($event)\" [(ngModel)]=\"filter\" range=\"true\"></novo-date-picker>\n            </div>\n          </list>\n          <list *ngSwitchCase=\"'select'\">\n            <item\n              [class.active]=\"filter === option\"\n              *ngFor=\"let option of config.filterConfig.options\"\n              (click)=\"filterData(option)\"\n              [attr.data-automation-id]=\"'novo-data-table-filter-' + (option?.label || option)\"\n            >\n              <span>{{ option?.label || option }}</span>\n              <i class=\"bhi-check\" *ngIf=\"option.hasOwnProperty('value') ? filter === option.value : filter === option\"></i>\n            </item>\n          </list>\n          <list *ngSwitchCase=\"'multi-select'\">\n            <div class=\"dropdown-list-options\">\n              <item\n                *ngFor=\"let option of config.filterConfig.options\"\n                (click)=\"toggleSelection(option)\"\n                [attr.data-automation-id]=\"'novo-data-table-filter-' + (option?.label || option)\"\n                [keepOpen]=\"true\"\n              >\n                <span>{{ option?.label || option }}</span>\n                <i\n                  [class.bhi-checkbox-empty]=\"!isSelected(option, multiSelectedOptions)\"\n                  [class.bhi-checkbox-filled]=\"isSelected(option, multiSelectedOptions)\"\n                ></i>\n              </item>\n            </div>\n          </list>\n          <list *ngSwitchCase=\"'custom'\">\n            <item class=\"filter-search\" keepOpen=\"true\">\n              <ng-container *ngTemplateOutlet=\"filterTemplate; context: { $implicit: config }\"></ng-container>\n            </item>\n          </list>\n          <list *ngSwitchDefault>\n            <item class=\"filter-search\" keepOpen=\"true\">\n              <input\n                [type]=\"config.filterConfig.type\"\n                [(ngModel)]=\"filter\"\n                (ngModelChange)=\"filterData($event)\"\n                #filterInput\n                data-automation-id=\"novo-data-table-filter-input\"\n              />\n            </item>\n          </list>\n        </ng-container>\n        <div class=\"footer\" *ngIf=\"multiSelect\">\n          <button theme=\"dialogue\" color=\"dark\" (click)=\"cancel()\" data-automation-id=\"novo-data-table-multi-select-cancel\">\n            {{ labels.cancel }}\n          </button>\n          <button theme=\"dialogue\" color=\"positive\" (click)=\"filterMultiSelect()\" data-automation-id=\"novo-data-table-multi-select-filter\">\n            {{ labels.filters }}\n          </button>\n        </div>\n      </novo-dropdown>\n    </div>\n    <div class=\"spacer\"></div>\n    <div class=\"data-table-header-resizable\" *ngIf=\"config.resizable\"><span (mousedown)=\"startResize($event)\">&nbsp;</span></div>\n  ",
+                    template: "\n    <i class=\"bhi-{{ labelIcon }} label-icon\" *ngIf=\"labelIcon\" data-automation-id=\"novo-data-table-header-icon\"></i>\n    <label data-automation-id=\"novo-data-table-label\">{{ label }}</label>\n    <div>\n      <button\n        *ngIf=\"config.sortable\"\n        tooltipPosition=\"right\"\n        [tooltip]=\"labels.sort\"\n        theme=\"icon\"\n        [icon]=\"icon\"\n        (click)=\"sort()\"\n        [class.active]=\"sortActive\"\n        data-automation-id=\"novo-data-table-sort\"\n      ></button>\n      <novo-dropdown\n        *ngIf=\"config.filterable\"\n        side=\"right\"\n        parentScrollSelector=\".novo-data-table-container\"\n        containerClass=\"data-table-dropdown\"\n        data-automation-id=\"novo-data-table-filter\"\n      >\n        <button\n          type=\"button\"\n          theme=\"icon\"\n          icon=\"filter\"\n          [class.active]=\"filterActive\"\n          (click)=\"focusInput()\"\n          tooltipPosition=\"right\"\n          [tooltip]=\"labels.filters\"\n        ></button>\n        <div class=\"header\">\n          <span>{{ labels.filters }}</span>\n          <button\n            theme=\"dialogue\"\n            color=\"negative\"\n            icon=\"times\"\n            (click)=\"clearFilter()\"\n            *ngIf=\"filter !== null && filter !== undefined && filter !== ''\"\n            data-automation-id=\"novo-data-table-filter-clear\"\n          >\n            {{ labels.clear }}\n          </button>\n        </div>\n        <ng-container [ngSwitch]=\"config.filterConfig.type\">\n          <list *ngSwitchCase=\"'date'\">\n            <ng-container *ngIf=\"!showCustomRange\">\n              <item\n                [class.active]=\"activeDateFilter === option.label\"\n                *ngFor=\"let option of config.filterConfig.options\"\n                (click)=\"filterData(option)\"\n                [attr.data-automation-id]=\"'novo-data-table-filter-' + option.label\"\n              >\n                {{ option.label }} <i class=\"bhi-check\" *ngIf=\"activeDateFilter === option.label\"></i>\n              </item>\n            </ng-container>\n            <item\n              [class.active]=\"labels.customDateRange === activeDateFilter\"\n              (click)=\"toggleCustomRange($event, true)\"\n              *ngIf=\"config.filterConfig.allowCustomRange && !showCustomRange\"\n              [keepOpen]=\"true\"\n            >\n              {{ labels.customDateRange }} <i class=\"bhi-check\" *ngIf=\"labels.customDateRange === activeDateFilter\"></i>\n            </item>\n            <div class=\"calendar-container\" *ngIf=\"showCustomRange\">\n              <div (click)=\"toggleCustomRange($event, false)\"><i class=\"bhi-previous\"></i>{{ labels.backToPresetFilters }}</div>\n              <novo-date-picker (onSelect)=\"filterData($event)\" [(ngModel)]=\"filter\" range=\"true\"></novo-date-picker>\n            </div>\n          </list>\n          <list *ngSwitchCase=\"'select'\">\n            <item\n              [class.active]=\"filter === option\"\n              *ngFor=\"let option of config.filterConfig.options\"\n              (click)=\"filterData(option)\"\n              [attr.data-automation-id]=\"'novo-data-table-filter-' + (option?.label || option)\"\n            >\n              <span>{{ option?.label || option }}</span>\n              <i class=\"bhi-check\" *ngIf=\"option.hasOwnProperty('value') ? filter === option.value : filter === option\"></i>\n            </item>\n          </list>\n          <list *ngSwitchCase=\"'multi-select'\">\n            <div class=\"dropdown-list-filter\" (keydown)=\"multiSelectOptionFilterHandleKeydown($event)\">\n              <item class=\"filter-search\" keepOpen=\"true\">\n                <input\n                  [(ngModel)]=\"optionFilter\"\n                  (ngModelChange)=\"multiSelectOptionFilter($event)\"\n                  #optionFilterInput\n                  data-automation-id=\"novo-data-table-multi-select-option-filter-input\"\n                />\n                <i class=\"bhi-search\"></i>\n                <span class=\"error-text\" [hidden]=\"!error || !multiSelectHasVisibleOptions()\">{{ labels.selectFilterOptions }}</span>\n              </item>\n            </div>\n            <div class=\"dropdown-list-options\">\n              <item\n                *ngFor=\"let option of config.filterConfig.options\"\n                [hidden]=\"multiSelectOptionIsHidden(option)\"\n                (click)=\"toggleSelection(option)\"\n                [attr.data-automation-id]=\"'novo-data-table-filter-' + (option?.label || option)\"\n                [keepOpen]=\"true\"\n              >\n                <span>{{ option?.label || option }}</span>\n                <i\n                  [class.bhi-checkbox-empty]=\"!isSelected(option, multiSelectedOptions)\"\n                  [class.bhi-checkbox-filled]=\"isSelected(option, multiSelectedOptions)\"\n                ></i>\n              </item>\n            </div>\n            <p class=\"filter-null-results\" [hidden]=\"multiSelectHasVisibleOptions()\">{{ labels.pickerEmpty }}</p>\n          </list>\n          <list *ngSwitchCase=\"'custom'\">\n            <item class=\"filter-search\" keepOpen=\"true\">\n              <ng-container *ngTemplateOutlet=\"filterTemplate; context: { $implicit: config }\"></ng-container>\n            </item>\n          </list>\n          <list *ngSwitchDefault>\n            <item class=\"filter-search\" keepOpen=\"true\">\n              <input\n                [type]=\"config.filterConfig.type\"\n                [(ngModel)]=\"filter\"\n                (ngModelChange)=\"filterData($event)\"\n                #filterInput\n                data-automation-id=\"novo-data-table-filter-input\"\n              />\n            </item>\n          </list>\n        </ng-container>\n        <div class=\"footer\" *ngIf=\"multiSelect\">\n          <button theme=\"dialogue\" color=\"dark\" (click)=\"cancel()\" data-automation-id=\"novo-data-table-multi-select-cancel\">\n            {{ labels.cancel }}\n          </button>\n          <button theme=\"dialogue\" color=\"positive\" (click)=\"filterMultiSelect()\" data-automation-id=\"novo-data-table-multi-select-filter\">\n            {{ labels.filters }}\n          </button>\n        </div>\n      </novo-dropdown>\n    </div>\n    <div class=\"spacer\"></div>\n    <div class=\"data-table-header-resizable\" *ngIf=\"config.resizable\"><span (mousedown)=\"startResize($event)\">&nbsp;</span></div>\n  ",
                     changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_26__["ChangeDetectionStrategy"].OnPush
                 }] }
     ];
@@ -50565,12 +50705,14 @@ var NovoDataTableCellHeader = /** @class */ (function () {
     NovoDataTableCellHeader.propDecorators = {
         filterInput: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["ViewChild"], args: ['filterInput',] }],
         dropdown: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["ViewChild"], args: [NovoDropdownElement,] }],
+        optionFilterInput: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["ViewChild"], args: ['optionFilterInput',] }],
         defaultSort: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Input"] }],
         allowMultipleFilters: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Input"] }],
         resized: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Input"] }],
         filterTemplate: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Input"] }],
         resizable: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["HostBinding"], args: ['class.resizable',] }],
-        column: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Input"], args: ['novo-data-table-cell-config',] }]
+        column: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Input"], args: ['novo-data-table-cell-config',] }],
+        multiSelectOptionFilterHandleKeydown: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["HostListener"], args: ['document:keydown', ['$event'],] }]
     };
     return NovoDataTableCellHeader;
 }());
@@ -71201,7 +71343,7 @@ var EXAMPLE_COMPONENTS = {
     'file-input-controls': {
         title: 'File Input Controls Example',
         component: FileInputControlsExample,
-        tsSource: "import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20FileControl%2C%20NovoFormGroup%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20File%20Input%20Controls%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'file-input-controls-example'%2C%0A%20%20templateUrl%3A%20'file-input-controls-example.html'%2C%0A%20%20styleUrls%3A%20%5B'file-input-controls-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FileInputControlsExample%20%7B%0A%20%20public%20fileControl%3A%20any%3B%0A%20%20public%20multiFileControl%3A%20any%3B%0A%20%20public%20multiFileControlMixRemove%3A%20FileControl%3B%0A%20%20public%20fileForm%3A%20any%3B%0A%0A%20%20%2F%2F%20custom%20upload%20validation%0A%20%20public%20message%3A%20string%20%3D%20''%3B%0A%20%20public%20customValidationFileControl%3A%20FileControl%3B%0A%20%20public%20customValidationFileForm%3A%20NovoFormGroup%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20File%20input%20controls%0A%20%20%20%20this.fileControl%20%3D%20new%20FileControl(%7B%20key%3A%20'file'%2C%20name%3A%20'myfile'%2C%20label%3A%20'File'%2C%20tooltip%3A%20'Files%20Control'%20%7D)%3B%0A%20%20%20%20this.multiFileControl%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'files'%2C%0A%20%20%20%20%20%20name%3A%20'myfiles'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%20order%3A%20'displayFilesBelow'%2C%20download%3A%20true%2C%20edit%3A%20true%2C%20customActions%3A%20true%2C%20labelStyle%3A%20'no-box'%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.fileForm%20%3D%20formUtils.toFormGroup(%5Bthis.fileControl%2C%20this.multiFileControl%5D)%3B%0A%0A%20%20%20%20this.customValidationFileControl%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'customValidationFiles'%2C%0A%20%20%20%20%20%20name%3A%20'customValidationFiles'%2C%0A%20%20%20%20%20%20label%3A%20'Custom%20Validation'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Custom%20Validation%20Multiple%20Files'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%0A%20%20%20%20%20%20%20%20order%3A%20'displayFilesBelow'%2C%0A%20%20%20%20%20%20%20%20download%3A%20true%2C%0A%20%20%20%20%20%20%20%20edit%3A%20true%2C%0A%20%20%20%20%20%20%20%20customActions%3A%20false%2C%0A%20%20%20%20%20%20%20%20customValidation%3A%20%5B%7B%20action%3A%20'upload'%2C%20fn%3A%20this.checkFileSize.bind(this)%20%7D%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.customValidationFileForm%20%3D%20formUtils.toFormGroup(%5Bthis.customValidationFileControl%5D)%3B%0A%0A%20%20%20%20this.multiFileControlMixRemove%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'mixDeleteFiles'%2C%0A%20%20%20%20%20%20name%3A%20'mymixDeleteFiles'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Files%20-%20Delete%20New%20Only'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Files%20-%20Delete%20New%20Only'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%0A%20%20%20%20%20%20%20%20order%3A%20'displayFilesBelow'%2C%0A%20%20%20%20%20%20%20%20labelStyle%3A%20'no-box'%2C%0A%20%20%20%20%20%20%20%20download%3A%20true%2C%0A%20%20%20%20%20%20%20%20edit%3A%20false%2C%0A%20%20%20%20%20%20%20%20removable%3A%20false%2C%0A%20%20%20%20%20%20%20%20removableWhenNew%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.fileForm%20%3D%20formUtils.toFormGroup(%5Bthis.fileControl%2C%20this.multiFileControl%2C%20this.multiFileControlMixRemove%5D)%3B%0A%20%20%7D%0A%0A%20%20public%20handleEdit(file)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20Edit%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleSave(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Save%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleDelete(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Delete%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleUpload(files)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20upload%20Action!'%2C%20files)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20checkFileSize(fileList)%3A%20boolean%20%7B%0A%20%20%20%20const%20maxSizeKb%3A%20number%20%3D%205120%3B%20%2F%2F%20(5%20MB%20in%20KB)%0A%20%20%20%20for%20(let%20file%20of%20fileList)%20%7B%0A%20%20%20%20%20%20if%20(file.size%20%3E%20maxSizeKb%20*%201024)%20%7B%0A%20%20%20%20%20%20%20%20this.message%20%3D%20'File%20is%20bigger%20than%20the%20allowed%205MB'%3B%0A%20%20%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20return%20true%3B%0A%20%20%7D%0A%7D%0A",
+        tsSource: "import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20FileControl%2C%20NovoFormGroup%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20File%20Input%20Controls%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'file-input-controls-example'%2C%0A%20%20templateUrl%3A%20'file-input-controls-example.html'%2C%0A%20%20styleUrls%3A%20%5B'file-input-controls-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FileInputControlsExample%20%7B%0A%20%20public%20fileControl%3A%20any%3B%0A%20%20public%20multiFileControl%3A%20any%3B%0A%20%20public%20multiFileControlMixRemove%3A%20FileControl%3B%0A%20%20public%20fileForm%3A%20any%3B%0A%0A%20%20%2F%2F%20custom%20upload%20validation%0A%20%20public%20message%3A%20string%20%3D%20''%3B%0A%20%20public%20customValidationFileControl%3A%20FileControl%3B%0A%20%20public%20customValidationFileForm%3A%20NovoFormGroup%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20File%20input%20controls%0A%20%20%20%20this.fileControl%20%3D%20new%20FileControl(%7B%20key%3A%20'file'%2C%20name%3A%20'myfile'%2C%20label%3A%20'File'%2C%20tooltip%3A%20'Files%20Control'%20%7D)%3B%0A%20%20%20%20this.multiFileControl%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'files'%2C%0A%20%20%20%20%20%20name%3A%20'myfiles'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%20order%3A%20'displayFilesBelow'%2C%20download%3A%20true%2C%20edit%3A%20true%2C%20customActions%3A%20true%2C%20labelStyle%3A%20'no-box'%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.fileForm%20%3D%20formUtils.toFormGroup(%5Bthis.fileControl%2C%20this.multiFileControl%5D)%3B%0A%0A%20%20%20%20this.customValidationFileControl%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'customValidationFiles'%2C%0A%20%20%20%20%20%20name%3A%20'customValidationFiles'%2C%0A%20%20%20%20%20%20label%3A%20'Custom%20Validation'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Custom%20Validation%20Multiple%20Files'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%0A%20%20%20%20%20%20%20%20order%3A%20'displayFilesBelow'%2C%0A%20%20%20%20%20%20%20%20download%3A%20true%2C%0A%20%20%20%20%20%20%20%20edit%3A%20true%2C%0A%20%20%20%20%20%20%20%20customActions%3A%20false%2C%0A%20%20%20%20%20%20%20%20customValidation%3A%20%5B%7B%20action%3A%20'upload'%2C%20fn%3A%20this.checkFileSize.bind(this)%20%7D%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.customValidationFileForm%20%3D%20formUtils.toFormGroup(%5Bthis.customValidationFileControl%5D)%3B%0A%20%20%20%20this.multiFileControlMixRemove%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'mixDeleteFiles'%2C%0A%20%20%20%20%20%20name%3A%20'mymixDeleteFiles'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Files%20-%20Delete%20New%20Only'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Files%20-%20Delete%20New%20Only'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%0A%20%20%20%20%20%20%20%20order%3A%20'displayFilesBelow'%2C%0A%20%20%20%20%20%20%20%20labelStyle%3A%20'no-box'%2C%0A%20%20%20%20%20%20%20%20download%3A%20true%2C%0A%20%20%20%20%20%20%20%20edit%3A%20false%2C%0A%20%20%20%20%20%20%20%20removable%3A%20false%2C%0A%20%20%20%20%20%20%20%20removableWhenNew%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.fileForm%20%3D%20formUtils.toFormGroup(%5Bthis.fileControl%2C%20this.multiFileControl%2C%20this.multiFileControlMixRemove%5D)%3B%0A%20%20%7D%0A%0A%20%20public%20handleEdit(file)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20Edit%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleSave(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Save%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleDelete(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Delete%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleUpload(files)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20upload%20Action!'%2C%20files)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20checkFileSize(fileList)%3A%20boolean%20%7B%0A%20%20%20%20const%20maxSizeKb%3A%20number%20%3D%205120%3B%20%2F%2F%20(5%20MB%20in%20KB)%0A%20%20%20%20for%20(let%20file%20of%20fileList)%20%7B%0A%20%20%20%20%20%20if%20(file.size%20%3E%20maxSizeKb%20*%201024)%20%7B%0A%20%20%20%20%20%20%20%20this.message%20%3D%20'File%20is%20bigger%20than%20the%20allowed%205MB'%3B%0A%20%20%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20return%20true%3B%0A%20%20%7D%0A%7D%0A",
         cssSource: "%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A",
         htmlSource: "%3C!--Check%20out%20the%20FormDemo.js%20for%20more%20information!--%3E%0A%3Cnovo-form%20%5Bform%5D%3D%22fileForm%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22fileForm%22%20%5Bcontrol%5D%3D%22fileControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22fileForm%22%20%5Bcontrol%5D%3D%22multiFileControl%22%20(edit)%3D%22handleEdit(%24event)%22%20(save)%3D%22handleSave(%24event)%22%20(delete)%3D%22handleDelete(%24event)%22%20(upload)%3D%22handleUpload(%24event)%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22fileForm%22%20%5Bcontrol%5D%3D%22multiFileControlMixRemove%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7BfileForm.value%20%7C%20json%7D%7D%3C%2Fdiv%3E%0A%3Cbr%20%2F%3E%0A%3Cbr%20%2F%3E%0A%3Cnovo-form%20layout%3D%22vertical%22%20%5Bform%5D%3D%22customValidationFileForm%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22customValidationFileForm%22%20%5Bcontrol%5D%3D%22customValidationFileControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%3E%7B%7B%20message%20%7D%7D%3C%2Fdiv%3E%0A"
     },
