@@ -83,6 +83,13 @@ export class Helpers {
     return typeof obj === 'string';
   }
 
+  static escapeString(obj: any): any {
+    if (Helpers.isString(obj)) {
+      return obj.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    return obj;
+  }
+
   static isNumber(val: any, includeNegatives: boolean = false) {
     const numberRegex = includeNegatives ? /^-{0,1}\d*\.?\d*$/ : /^\d*\.?\d*$/;
     if (typeof val === 'string') {
@@ -118,6 +125,15 @@ export class Helpers {
    */
   static isDate(obj: any) {
     return obj instanceof Date;
+  }
+
+  static convertToArray(obj: undefined | Object | Object[]): any[] {
+    if (obj === undefined) {
+      return [];
+    } else if (!Array.isArray(obj)) {
+      return [obj];
+    }
+    return obj;
   }
 
   static sortByField(fields: any, reverse = false) {

@@ -1,6 +1,6 @@
 import { Observable, of } from 'rxjs';
 
-import { IDataTableService } from '../interfaces';
+import { IDataTableFilter, IDataTableService } from '../interfaces';
 import { Helpers } from '../../../utils/Helpers';
 
 export class StaticDataTableService<T> implements IDataTableService<T> {
@@ -12,7 +12,7 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
 
   public getTableResults(
     sort: { id: string; value: string; transform?: Function },
-    filter: { id: string; value: string; transform?: Function },
+    filter: IDataTableFilter | IDataTableFilter[],
     page: number = 0,
     pageSize: number,
     globalSearch?: string,
@@ -28,8 +28,7 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
         total = this.currentData.length;
       }
       if (filter) {
-        let value = Helpers.isString(filter.value) ? filter.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') : filter.value;
-        this.currentData = this.currentData.filter(Helpers.filterByField(filter.id, value));
+        this.currentData = this.filterData(this.currentData, filter);
         total = this.currentData.length;
       }
       if (sort) {
@@ -44,5 +43,19 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
       }
     }
     return of({ results: this.currentData, total: total });
+  }
+
+  public filterData(currentData: T[], filter: IDataTableFilter | IDataTableFilter[]): T[] {
+    let filters = Helpers.convertToArray(filter);
+    filters.forEach((aFilter) => {
+      if (Array.isArray(aFilter.value)) {
+        let values = Helpers.convertToArray(aFilter.value).map(Helpers.escapeString);
+        currentData = currentData.filter(Helpers.filterByField(aFilter.id, values));
+      } else {
+        let value = Helpers.escapeString(aFilter.value);
+        currentData = currentData.filter(Helpers.filterByField(aFilter.id, value));
+      }
+    });
+    return currentData;
   }
 }

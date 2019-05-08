@@ -109,6 +109,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
               [novo-data-table-cell-config]="column"
               [resized]="resized"
               [defaultSort]="defaultSort"
+              [allowMultipleFilters]="allowMultipleFilters"
               [class.empty]="column?.type === 'action' && !column?.label"
               [class.button-header-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)"
               [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"
@@ -290,6 +291,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   defaultSort: { id: string; value: string };
   @Input()
   name: string = 'novo-data-table';
+  @Input()
+  allowMultipleFilters: boolean = false;
   @Input()
   rowIdentifier: string = 'id';
   @Input()

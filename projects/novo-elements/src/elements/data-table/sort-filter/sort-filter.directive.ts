@@ -9,13 +9,19 @@ import { Helpers } from '../../../utils/Helpers';
 export class NovoDataTableSortFilter<T> {
   constructor(private state: DataTableState<T>) {}
 
-  public filter(id: string, value: any, transform: Function): void {
+  public filter(id: string, value: any, transform: Function, allowMultipleFilters: boolean = false): void {
     let filter;
-    if (!Helpers.isBlank(value)) {
-      filter = { id, value, transform };
+
+    if (allowMultipleFilters) {
+      filter = this.resolveMultiFilter(id, value, transform);
     } else {
-      filter = undefined;
+      if (!Helpers.isBlank(value)) {
+        filter = { id, value, transform };
+      } else {
+        filter = undefined;
+      }
     }
+
     this.state.filter = filter;
     this.state.reset(false, true);
     this.state.updates.next({ filter: filter, sort: this.state.sort });
@@ -28,5 +34,26 @@ export class NovoDataTableSortFilter<T> {
     this.state.reset(false, true);
     this.state.updates.next({ sort: sort, filter: this.state.filter });
     this.state.onSortFilterChange();
+  }
+
+  public resolveMultiFilter(id: string, value: any, transform: Function) {
+    let filter;
+
+    filter = Helpers.convertToArray(this.state.filter);
+
+    let filterIndex = filter.findIndex((aFilter) => aFilter && aFilter.id === id);
+    if (filterIndex > -1) {
+      filter.splice(filterIndex, 1);
+    }
+
+    if (!Helpers.isBlank(value)) {
+      filter = [...filter, { id, value, transform }];
+    }
+
+    if (filter.length < 1) {
+      filter = undefined;
+    }
+
+    return filter;
   }
 }

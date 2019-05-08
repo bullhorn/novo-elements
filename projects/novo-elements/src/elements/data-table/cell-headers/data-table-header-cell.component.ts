@@ -189,6 +189,9 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   defaultSort: { id: string; value: string };
 
   @Input()
+  allowMultipleFilters: boolean = false;
+
+  @Input()
   resized: EventEmitter<IDataTableColumn<T>>;
   @Input()
   filterTemplate: TemplateRef<any>;
@@ -280,12 +283,17 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
         this.icon = 'sortable';
         this.sortActive = false;
       }
-      if (change.filter && change.filter.id === this.id) {
+
+      let tableFilter = Helpers.convertToArray(change.filter);
+      let thisFilter = tableFilter.find((filter) => filter && filter.id === this.id);
+
+      if (thisFilter) {
         this.filterActive = true;
-        this.filter = change.filter.value;
+        this.filter = thisFilter.value;
       } else {
         this.filterActive = false;
         this.filter = undefined;
+        this.activeDateFilter = undefined;
         this.multiSelectedOptions = [];
       }
       changeDetectorRef.markForCheck();
@@ -339,7 +347,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   public toggleSelection(option) {
-    const optionValue = option.value ? option.value : option;
+    const optionValue = option.hasOwnProperty('value') ? option.value : option;
 
     let optionIndex = this.multiSelectedOptions.findIndex((item) => this.optionPresentCheck(item, optionValue));
     this.error = false;
@@ -538,7 +546,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       if (actualFilter === '') {
         actualFilter = undefined;
       }
-      this._sort.filter(this.id, actualFilter, this.config.transforms.filter);
+      this._sort.filter(this.id, actualFilter, this.config.transforms.filter, this.allowMultipleFilters);
       this.changeDetectorRef.markForCheck();
     }, 300);
   }

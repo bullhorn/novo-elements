@@ -92,7 +92,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
                 tabindex="-1"
               ></button>
               <button
-                *ngIf="!disabled && layoutOptions.removable"
+                *ngIf="!disabled && (layoutOptions.removable || (!layoutOptions.removable && layoutOptions.removableWhenNew && !file.link))"
                 type="button"
                 theme="icon"
                 icon="close"
@@ -163,6 +163,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     customActions: boolean;
     removable?: boolean;
     customValidation?: { action: string; fn: Function }[];
+    removableWhenNew?: boolean;
   };
   @Input()
   value: Array<any> = [];

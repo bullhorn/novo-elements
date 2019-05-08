@@ -1,7 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { IDataTableChangeEvent } from '../interfaces';
+import { IDataTableChangeEvent, IDataTableFilter } from '../interfaces';
 
 export class DataTableState<T> {
   public selectionSource = new Subject();
@@ -12,7 +12,7 @@ export class DataTableState<T> {
   public dataLoaded = new Subject();
 
   sort: { id: string; value: string } = undefined;
-  filter: { id: string; value: string | string[] } = undefined;
+  filter: IDataTableFilter | IDataTableFilter[] = undefined;
   page: number = 0;
   pageSize: number = undefined;
   globalSearch: string = undefined;
