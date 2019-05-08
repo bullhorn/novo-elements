@@ -115,6 +115,7 @@ export interface IDataTablePaginationEvent {
 
 export interface IDataTableFilter {
   id: string;
+  type: string;
   value: string | string[];
   transform?: Function;
 }

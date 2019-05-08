@@ -2,6 +2,8 @@ import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { IDataTableChangeEvent, IDataTableFilter } from '../interfaces';
+import { Helpers } from '../../..';
+import { DataTableFilterUtils } from '../services/data-table-filter-utils';
 
 export class DataTableState<T> {
   public selectionSource = new Subject();
@@ -96,5 +98,22 @@ export class DataTableState<T> {
       filter: this.filter,
       globalSearch: this.globalSearch,
     });
+  }
+
+  private setInitialSortFilter(preferences): void {
+    if (preferences) {
+      if (preferences.sort) {
+        this.sort = preferences.sort;
+      }
+
+      if (preferences.filter) {
+        let filters = Helpers.convertToArray(preferences.filter);
+        filters.forEach((filter) => {
+          filter.value =
+            filter.selectedOption && filter.type ? DataTableFilterUtils.constructFilter(filter.selectedOption, filter.type) : filter.value;
+        });
+        this.filter = filters;
+      }
+    }
   }
 }

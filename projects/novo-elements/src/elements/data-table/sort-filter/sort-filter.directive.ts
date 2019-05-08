@@ -9,14 +9,28 @@ import { Helpers } from '../../../utils/Helpers';
 export class NovoDataTableSortFilter<T> {
   constructor(private state: DataTableState<T>) {}
 
-  public filter(id: string, value: any, transform: Function, allowMultipleFilters: boolean = false): void {
+  public filter(id: string, type: string, value: any, transform: Function, allowMultipleFilters: boolean = false, selectedOption): void {
     let filter;
 
     if (allowMultipleFilters) {
+      filter = Helpers.convertToArray(this.state.filter);
+
+      let filterIndex = filter.findIndex((aFilter) => aFilter && aFilter.id === id);
+      if (filterIndex > -1) {
+        filter.splice(filterIndex, 1);
+      }
+
+      if (!Helpers.isBlank(value)) {
+        filter = [...filter, { id, type, value, transform, selectedOption }];
+      }
+
+      if (filter.length < 1) {
+        filter = undefined;
+      }
       filter = this.resolveMultiFilter(id, value, transform);
     } else {
       if (!Helpers.isBlank(value)) {
-        filter = { id, value, transform };
+        filter = { id, type, value, transform, selectedOption };
       } else {
         filter = undefined;
       }
