@@ -51,7 +51,6 @@ export class FileInputControlsExample {
       },
     });
     this.customValidationFileForm = formUtils.toFormGroup([this.customValidationFileControl]);
-
     this.multiFileControlMixRemove = new FileControl({
       key: 'mixDeleteFiles',
       name: 'mymixDeleteFiles',

@@ -1,10 +1,18 @@
 // NG2
 import { TestBed, async } from '@angular/core/testing';
 import { NovoDataTableCellHeader } from './data-table-header-cell.component';
-import { NovoButtonModule, NovoLabelService, NovoTooltipModule, NovoDropdownModule, NovoDatePickerModule } from '../../..';
+import {
+  NovoButtonModule,
+  NovoLabelService,
+  NovoTooltipModule,
+  NovoDropdownModule,
+  NovoDatePickerModule,
+  IDataTableColumnFilterOption,
+} from '../../..';
 import { FormsModule } from '@angular/forms';
 import { DataTableState } from '../state/data-table-state.service';
 import { EventEmitter } from '@angular/core';
+import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
 
 // App
 
@@ -124,6 +132,128 @@ describe('Elements: NovoDataTableCellHeader', () => {
 
         component.toggleSelection({ value: 5 });
         expect(component.multiSelectedOptions).not.toContain(5);
+      });
+    });
+
+    describe('method multiSelectOptionFilter', () => {
+      it('should hide options based on their label, not value, when the options are an object array', () => {
+        component.multiSelectedOptionIsHidden = [
+          { hidden: false, option: { label: 'abc', value: 'def' } },
+          { hidden: false, option: { label: 'def', value: 'abc' } },
+        ];
+        component.multiSelectOptionFilter('ab');
+        expect(component.multiSelectedOptionIsHidden).toEqual([
+          { hidden: false, option: { label: 'abc', value: 'def' } },
+          { hidden: true, option: { label: 'def', value: 'abc' } },
+        ]);
+      });
+
+      it('should hide string options when the options are a string array', () => {
+        component.multiSelectedOptionIsHidden = [{ hidden: false, option: 'abc' }, { hidden: false, option: 'def' }];
+        component.multiSelectOptionFilter('ab');
+        expect(component.multiSelectedOptionIsHidden).toEqual([{ hidden: false, option: 'abc' }, { hidden: true, option: 'def' }]);
+      });
+
+      it('should not hide string options that are selected', () => {
+        component.multiSelectedOptionIsHidden = [
+          { hidden: false, option: 'abc' },
+          { hidden: false, option: 'def' },
+          { hidden: false, option: 'ghi' },
+        ];
+        component.multiSelectedOptions = ['def'];
+        component.multiSelectOptionFilter('ab');
+        expect(component.multiSelectedOptionIsHidden).toEqual([
+          { hidden: false, option: 'abc' },
+          { hidden: false, option: 'def' },
+          { hidden: true, option: 'ghi' },
+        ]);
+      });
+    });
+
+    describe('method multiSelectOptionIsHidden', () => {
+      it('should return hidden value for matching option when option is a string', () => {
+        component.multiSelectedOptionIsHidden = [{ hidden: false, option: 'abc' }, { hidden: true, option: 'def' }];
+        expect(component.multiSelectOptionIsHidden('def')).toEqual(true);
+      });
+
+      it('should return hidden value for matching option when option is an object', () => {
+        const options: IDataTableColumnFilterOption[] = [{ label: 'abc', value: 'def' }, { label: 'def', value: 'abc' }];
+        component.multiSelectedOptionIsHidden = [{ hidden: false, option: options[0] }, { hidden: true, option: options[1] }];
+        expect(component.multiSelectOptionIsHidden(options[1])).toEqual(true);
+      });
+    });
+
+    describe('method multiSelectHasVisibleOptions', () => {
+      it('should be true if some options are not hidden', () => {
+        component.multiSelectedOptionIsHidden = [{ hidden: false, option: 'abc' }, { hidden: true, option: 'def' }];
+        expect(component.multiSelectHasVisibleOptions()).toEqual(true);
+      });
+
+      it('should be false if all options are hidden', () => {
+        component.multiSelectedOptionIsHidden = [{ hidden: true, option: 'abc' }, { hidden: true, option: 'def' }];
+        expect(component.multiSelectHasVisibleOptions()).toEqual(false);
+      });
+
+      it('should be false if there are no options', () => {
+        component.multiSelectedOptionIsHidden = [];
+        expect(component.multiSelectHasVisibleOptions()).toEqual(false);
+      });
+    });
+
+    describe('method getOptionText', () => {
+      it('should return a string if option is a string', () => {
+        expect(component.getOptionText('abc')).toEqual('abc');
+      });
+
+      it('should return a string if option is a boolean', () => {
+        expect(component.getOptionText(true)).toEqual('true');
+      });
+
+      it('should return label if option is an object', () => {
+        expect(component.getOptionText({ label: 'abc', value: true })).toEqual('abc');
+      });
+
+      it('should return value if option is an object but label is empty', () => {
+        expect(component.getOptionText({ label: '', value: 123 })).toEqual('123');
+      });
+    });
+
+    describe('method multiSelectOptionFilterHandleKeydown', () => {
+      beforeEach(() => {
+        component.dropdown = {
+          panelOpen: true,
+          closePanel: () => {},
+        };
+        component.multiSelect = true;
+      });
+      it('should clear filter text and close dropdown on ESC', () => {
+        const event = { keyCode: KeyCodes.ESC, stopPropagation: () => {}, preventDefault: () => {} };
+        spyOn(component.dropdown, 'closePanel');
+        spyOn(component, 'clearOptionFilter');
+        component.multiSelectOptionFilterHandleKeydown(event);
+        expect(component.dropdown.closePanel).toHaveBeenCalled();
+        expect(component.clearOptionFilter).toHaveBeenCalled();
+      });
+
+      it('should attempt to filter on ENTER', () => {
+        const event = { keyCode: KeyCodes.ENTER, stopPropagation: () => {}, preventDefault: () => {} };
+        spyOn(component, 'filterMultiSelect');
+        component.multiSelectOptionFilterHandleKeydown(event);
+        expect(component.filterMultiSelect).toHaveBeenCalled();
+      });
+    });
+
+    describe('method clearOptionFilter', () => {
+      it('should clear error state', () => {
+        component.error = true;
+        component.clearOptionFilter();
+        expect(component.error).toEqual(false);
+      });
+
+      it('should clear option filter text', () => {
+        component.optionFilter = 'abc';
+        component.clearOptionFilter();
+        expect(component.optionFilter).toEqual('');
       });
     });
   });
