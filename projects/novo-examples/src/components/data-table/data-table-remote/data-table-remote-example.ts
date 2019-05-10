@@ -10,11 +10,11 @@ import {
   IDataTableSearchOptions,
   NovoModalService,
   IDataTablePreferences,
+  IDataTableFilter,
+  Helpers,
 } from 'novo-elements';
 
 import { ConfigureColumnsModal, MockData } from '../extras';
-import { IDataTableFilter } from '../../../../../novo-elements/src/elements/data-table/interfaces';
-import { Helpers } from '../../../../../novo-elements/src';
 
 /**
  * @title Remote Data Table Example

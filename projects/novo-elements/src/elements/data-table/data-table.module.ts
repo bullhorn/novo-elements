@@ -25,7 +25,6 @@ import { NovoDataTableExpandHeaderCell } from './cell-headers/data-table-expand-
 import { NovoDataTableCheckboxHeaderCell } from './cell-headers/data-table-checkbox-header-cell.component';
 import { NovoDataTableHeaderCell } from './cell-headers/data-table-header-cell.directive';
 import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
-import { NovoDataTableFilterUtils } from './services/data-table-filter-utils';
 import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
 import { DataTableState } from './state/data-table-state.service';
 import {
@@ -77,7 +76,7 @@ import { NovoDataTableClearButton } from './data-table-clear-button.component';
     NovoDataTableExpandDirective,
     NovoDataTableClearButton,
   ],
-  providers: [NovoDataTableFilterUtils, DataTableState],
+  providers: [DataTableState],
   exports: [
     NovoDataTable,
     DataTableInterpolatePipe,

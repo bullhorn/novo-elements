@@ -1,11 +1,9 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { delay } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import * as dateFns from 'date-fns';
-import { Subject, Observable, of } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import {
   IDataTableColumn,
-  RemoteDataTableService,
   StaticDataTableService,
   IDataTablePaginationOptions,
   IDataTableSearchOptions,
@@ -331,7 +329,7 @@ export class DataTableServiceExample {
     console.log('[DataTable] Event Triggered!', event); // tslint:disable-line
   }
 
-  public checkDisabled(row: MockData): boolean {
+  public checkDisabled(): boolean {
     return true;
   }
 
