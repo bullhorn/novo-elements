@@ -5,8 +5,8 @@
   letter-spacing: normal;
   line-break: auto;
   line-height: 1.428571429;
-  text-align: left; // Fallback for where `start` is not supported
-  text-align: start;
+  text-align: left; // Fallback for where `flex-start` is not supported
+  text-align: flex-start;
   text-decoration: none;
   text-shadow: none;
   text-transform: none;
