@@ -1,7 +1,7 @@
 import * as dateFns from 'date-fns';
 
 export class NovoDataTableFilterUtils {
-  public constructFilter(filter?: any, type?: any, multiSelect?: boolean) {
+  static constructFilter(filter?: any, type?: any, multiSelect?: boolean) {
     let actualFilter = filter;
     if (filter) {
       if (type && type === 'date') {

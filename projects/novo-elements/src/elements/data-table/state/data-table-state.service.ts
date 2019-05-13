@@ -23,8 +23,6 @@ export class DataTableState<T> {
   outsideFilter: any;
   isForceRefresh: boolean = false;
 
-  constructor(private filterUtils: NovoDataTableFilterUtils) {}
-
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
 
   get userFiltered(): boolean {
@@ -112,7 +110,9 @@ export class DataTableState<T> {
         let filters = Helpers.convertToArray(preferences.filter);
         filters.forEach((filter) => {
           filter.value =
-            filter.selectedOption && filter.type ? this.filterUtils.constructFilter(filter.selectedOption, filter.type) : filter.value;
+            filter.selectedOption && filter.type
+              ? NovoDataTableFilterUtils.constructFilter(filter.selectedOption, filter.type)
+              : filter.value;
         });
         this.filter = filters;
       }

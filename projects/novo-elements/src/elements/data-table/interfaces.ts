@@ -118,6 +118,7 @@ export interface IDataTableFilter {
   type: string;
   value: string | string[];
   transform?: Function;
+  selectedOption?: Object;
 }
 
 export interface IDataTableService<T> {

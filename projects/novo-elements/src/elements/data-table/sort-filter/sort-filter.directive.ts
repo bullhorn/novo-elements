@@ -9,28 +9,21 @@ import { Helpers } from '../../../utils/Helpers';
 export class NovoDataTableSortFilter<T> {
   constructor(private state: DataTableState<T>) {}
 
-  public filter(id: string, type: string, value: any, transform: Function, allowMultipleFilters: boolean = false, selectedOption): void {
+  public filter(
+    id: string,
+    type: string,
+    value: any,
+    transform: Function,
+    allowMultipleFilters: boolean = false,
+    selectedOption?: Object,
+  ): void {
     let filter;
 
     if (allowMultipleFilters) {
-      filter = Helpers.convertToArray(this.state.filter);
-
-      let filterIndex = filter.findIndex((aFilter) => aFilter && aFilter.id === id);
-      if (filterIndex > -1) {
-        filter.splice(filterIndex, 1);
-      }
-
-      if (!Helpers.isBlank(value)) {
-        filter = [...filter, { id, type, value, transform, selectedOption }];
-      }
-
-      if (filter.length < 1) {
-        filter = undefined;
-      }
-      filter = this.resolveMultiFilter(id, value, transform);
+      filter = this.resolveMultiFilter(id, type, value, transform, selectedOption);
     } else {
       if (!Helpers.isBlank(value)) {
-        filter = { id, type, value, transform, selectedOption };
+        filter = { id, type, value, transform, ...(selectedOption && { selectedOption }) };
       } else {
         filter = undefined;
       }
@@ -50,7 +43,7 @@ export class NovoDataTableSortFilter<T> {
     this.state.onSortFilterChange();
   }
 
-  public resolveMultiFilter(id: string, value: any, transform: Function) {
+  public resolveMultiFilter(id: string, type: string, value: any, transform: Function, selectedOption: Object) {
     let filter;
 
     filter = Helpers.convertToArray(this.state.filter);
@@ -61,7 +54,7 @@ export class NovoDataTableSortFilter<T> {
     }
 
     if (!Helpers.isBlank(value)) {
-      filter = [...filter, { id, value, transform }];
+      filter = [...filter, { id, type, value, transform, ...(selectedOption && { selectedOption }) }];
     }
 
     if (filter.length < 1) {
