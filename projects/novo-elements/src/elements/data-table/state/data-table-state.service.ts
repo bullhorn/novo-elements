@@ -100,7 +100,7 @@ export class DataTableState<T> {
     });
   }
 
-  private setInitialSortFilter(preferences): void {
+  public setInitialSortFilter(preferences): void {
     if (preferences) {
       if (preferences.sort) {
         this.sort = preferences.sort;

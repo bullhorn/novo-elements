@@ -115,16 +115,16 @@ export interface IDataTablePaginationEvent {
 
 export interface IDataTableFilter {
   id: string;
-  type: string;
   value: string | string[];
   transform?: Function;
+  type?: string;
   selectedOption?: Object;
 }
 
 export interface IDataTableService<T> {
   getTableResults(
     sort: { id: string; value: string; transform?: Function },
-    filter: IDataTableFilter | IDataTableFilter[],
+    filter: { id: string; value: string; transform?: Function } | IDataTableFilter | IDataTableFilter[],
     page: number,
     pageSize: number,
     globalSearch?: string,
