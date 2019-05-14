@@ -42,6 +42,7 @@ export class DataTableState<T> {
     this.page = 0;
     this.selectedRows.clear();
     this.resetSource.next();
+    this.onSortFilterChange();
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,
@@ -56,6 +57,7 @@ export class DataTableState<T> {
     this.page = 0;
     this.selectedRows.clear();
     this.resetSource.next();
+    this.onSortFilterChange();
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,
@@ -71,6 +73,7 @@ export class DataTableState<T> {
     this.page = 0;
     this.selectedRows.clear();
     this.resetSource.next();
+    this.onSortFilterChange();
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,

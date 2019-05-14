@@ -552,36 +552,6 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     }, 300);
   }
 
-  constructFilter(filter?: any) {
-    let actualFilter = filter;
-    if (this.config.filterConfig.type === 'date' && filter) {
-      if (filter.startDate && filter.endDate) {
-        actualFilter = {
-          min: dateFns.startOfDay(filter.startDate.date),
-          max: dateFns.startOfDay(dateFns.addDays(dateFns.startOfDay(filter.endDate.date), 1)),
-        };
-      } else {
-        actualFilter = {
-          min: filter.min ? dateFns.addDays(dateFns.startOfToday(), filter.min) : dateFns.startOfToday(),
-          max: filter.max ? dateFns.addDays(dateFns.endOfToday(), filter.max) : dateFns.endOfToday(),
-        };
-      }
-    }
-
-    if (this.multiSelect && Array.isArray(filter)) {
-      actualFilter = filter.map((filterItem) => {
-        if (filterItem && filterItem.hasOwnProperty('value')) {
-          return filterItem.value;
-        }
-        return filterItem;
-      });
-    } else if (actualFilter && actualFilter.hasOwnProperty('value')) {
-      actualFilter = filter.value;
-    }
-
-    return actualFilter;
-  }
-
   public clearFilter(): void {
     this.filter = undefined;
     this.multiSelectedOptions = [];
