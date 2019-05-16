@@ -1,9 +1,8 @@
 // NG2
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 // APP
 import { NovoControlConfig } from './FormControls';
-import { IFieldInteractionEvent } from './FormInterfaces';
 import { notify } from '../../utils/notifier/notifier.util';
 import { IMaskOptions } from './Control';
 
@@ -62,6 +61,7 @@ export class NovoFormControl extends FormControl {
   checkboxLabel?: string;
   restrictFieldInteractions?: boolean;
   warning?: string;
+  isHiddenByLogic = false; // if a control is hidden because not releavant (email address in billing profile)
   private historyTimeout: any;
 
   constructor(value: any, control: NovoControlConfig) {

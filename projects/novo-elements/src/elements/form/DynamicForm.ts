@@ -91,6 +91,7 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
   autoFocusFirstField: boolean = false;
   @ContentChildren(NovoTemplate)
   customTemplates: QueryList<NovoTemplate>;
+  @Input() fieldsToToggleHidden: string[];
 
   allFieldsRequired = false;
   allFieldsNotRequired = false;
@@ -154,7 +155,10 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
   public showAllFields(): void {
     this.form.fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
-        this.form.controls[control.key].hidden = false;
+        const ctl = this.form.controls[control.key];
+        if (!this.fieldsToToggleHidden.includes(control.key) || !ctl.isHiddenByLogic) {
+          ctl.hidden = false;
+        }
       });
     });
     this.showingAllFields = true;
