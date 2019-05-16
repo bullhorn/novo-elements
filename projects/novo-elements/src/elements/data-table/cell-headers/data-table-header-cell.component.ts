@@ -287,15 +287,11 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
     this.checkSortFilterState({ filter: this.state.filter, sort: this.state.sort }, true);
 
-    if (this.defaultSort && this.id === this.defaultSort.id) {
-      this.icon = `sort-${this.defaultSort.value}`;
-      this.sortActive = true;
-      this.changeDetectorRef.markForCheck();
-    }
     this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
     if (this.multiSelect) {
       this.multiSelectedOptions = this.filter ? [...this.filter] : [];
     }
+    this.changeDetectorRef.markForCheck();
   }
 
   public ngOnDestroy(): void {
@@ -332,7 +328,6 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     if (this.defaultSort && this.id === this.defaultSort.id) {
       this.icon = `sort-${this.defaultSort.value}`;
       this.sortActive = true;
-      this.changeDetectorRef.markForCheck();
     }
     this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
     if (this.multiSelect) {
