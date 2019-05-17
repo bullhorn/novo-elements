@@ -127,7 +127,7 @@ export class Helpers {
     return obj instanceof Date;
   }
 
-  static convertToArray(obj: any): any[] {
+  static convertToArray(obj: unknown): any[] {
     if (obj === undefined) {
       return [];
     } else if (!Array.isArray(obj)) {
