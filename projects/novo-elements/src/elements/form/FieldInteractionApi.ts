@@ -243,11 +243,6 @@ export class FieldInteractionApi {
     }
   }
 
-  public isHiddenByLogic(key: string, value: boolean): void {
-    const control = this.getControl(key);
-    control.isHiddenByLogic = value;
-  }
-
   public disable(
     key: string,
     options?: {

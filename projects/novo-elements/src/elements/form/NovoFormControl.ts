@@ -61,7 +61,6 @@ export class NovoFormControl extends FormControl {
   checkboxLabel?: string;
   restrictFieldInteractions?: boolean;
   warning?: string;
-  isHiddenByLogic = false; // if a control is hidden because not releavant (email address in billing profile)
   private historyTimeout: any;
 
   constructor(value: any, control: NovoControlConfig) {
