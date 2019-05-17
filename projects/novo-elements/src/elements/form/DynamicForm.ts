@@ -169,29 +169,29 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
     this.fieldsAlreadyHidden = [];
     this.form.fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
-        const formControl = this.form.controls[control.key];
+        const ctl = this.form.controls[control.key];
 
-        if (formControl.hidden) {
+        if (ctl.hidden) {
           this.fieldsAlreadyHidden.push(control.key);
         }
 
         // Hide any non-required fields
         if (!control.required) {
-          formControl.hidden = true;
+          ctl.hidden = true;
         }
 
         // Hide required fields that have been successfully filled out
         if (
           hideRequiredWithValue &&
           !Helpers.isBlank(this.form.value[control.key]) &&
-          (!control.isEmpty || (control.isEmpty && control.isEmpty(formControl)))
+          (!control.isEmpty || (control.isEmpty && control.isEmpty(ctl)))
         ) {
-          formControl.hidden = true;
+          ctl.hidden = true;
         }
 
         // Don't hide fields with errors
-        if (formControl.errors) {
-          formControl.hidden = false;
+        if (ctl.errors) {
+          ctl.hidden = false;
         }
       });
     });
