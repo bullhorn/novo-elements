@@ -156,6 +156,7 @@ export class NovoPickerElement implements OnInit {
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
     }
+    this.initConfig();
     // Custom results template
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
     // Get all distinct key up events from the input and only fire if long enough and distinct
@@ -170,6 +171,12 @@ export class NovoPickerElement implements OnInit {
       distinctUntilChanged(),
     );
     keyboardObserver.subscribe((event: KeyboardEvent) => this.onDebouncedKeyup(event), (err) => this.hideResults(err));
+  }
+
+  private initConfig(): void {
+    if (this.config.defaultEmptyTermSearch) {
+      this.config.defaultOptions = this.config.options;
+    }
   }
 
   private onDebouncedKeyup(event: Event) {
