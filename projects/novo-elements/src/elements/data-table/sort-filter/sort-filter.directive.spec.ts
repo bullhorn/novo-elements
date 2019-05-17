@@ -40,8 +40,8 @@ describe('Directive: sort-filter', () => {
 
     it('should return an array of results', () => {
       testState.filter = { id: 'test', type: 'text', transform: undefined, value: 'test' };
-      let result = directive.resolveMultiFilter('test2', 'text', 'also a test', undefined, undefined);
-      let expected = [
+      const result = directive.resolveMultiFilter('test2', 'text', 'also a test', undefined, undefined);
+      const expected = [
         { id: 'test', transform: undefined, type: 'text', value: 'test' },
         { id: 'test2', transform: undefined, type: 'text', value: 'also a test' },
       ];
@@ -50,8 +50,8 @@ describe('Directive: sort-filter', () => {
 
     it('should replace a result if id already exists', () => {
       testState.filter = { id: 'test', type: 'text', transform: undefined, value: 'test' };
-      let result = directive.resolveMultiFilter('test', 'text', 'replacement test', undefined, undefined);
-      let expected = [{ id: 'test', transform: undefined, type: 'text', value: 'replacement test' }];
+      const result = directive.resolveMultiFilter('test', 'text', 'replacement test', undefined, undefined);
+      const expected = [{ id: 'test', transform: undefined, type: 'text', value: 'replacement test' }];
       expect(result).toEqual(expected);
     });
 
@@ -60,14 +60,14 @@ describe('Directive: sort-filter', () => {
         { id: 'test', type: 'text', transform: undefined, value: 'test' },
         { id: 'test2', type: 'text', transform: undefined, value: 'also a test' },
       ];
-      let result = directive.resolveMultiFilter('test2', 'text', null, undefined, undefined);
-      let expected = [{ id: 'test', transform: undefined, type: 'text', value: 'test' }];
+      const result = directive.resolveMultiFilter('test2', 'text', null, undefined, undefined);
+      const expected = [{ id: 'test', transform: undefined, type: 'text', value: 'test' }];
       expect(result).toEqual(expected);
     });
 
     it('should return undefined rather than an empty array', () => {
       testState.filter = [{ id: 'test2', type: 'text', transform: undefined, value: 'also a test' }];
-      let result = directive.resolveMultiFilter('test2', 'text', null, undefined, undefined);
+      const result = directive.resolveMultiFilter('test2', 'text', null, undefined, undefined);
       expect(result).toEqual(undefined);
     });
   });

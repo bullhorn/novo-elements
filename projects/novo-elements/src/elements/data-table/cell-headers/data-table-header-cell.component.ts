@@ -310,8 +310,8 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       this.sortActive = false;
     }
 
-    let tableFilter = Helpers.convertToArray(sortFilterState.filter);
-    let thisFilter = tableFilter.find((filter) => filter && filter.id === this.id);
+    const tableFilter = Helpers.convertToArray(sortFilterState.filter);
+    const thisFilter = tableFilter.find((filter) => filter && filter.id === this.id);
 
     if (thisFilter) {
       this.filterActive = true;
