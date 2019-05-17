@@ -347,6 +347,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
         }
       }
     }
+    this.changeDetectorRef.markForCheck();
   }
 
   public isSelected(option, optionsList) {
