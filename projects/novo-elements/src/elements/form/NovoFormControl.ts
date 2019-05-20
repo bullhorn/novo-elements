@@ -1,9 +1,8 @@
 // NG2
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 // APP
 import { NovoControlConfig } from './FormControls';
-import { IFieldInteractionEvent } from './FormInterfaces';
 import { notify } from '../../utils/notifier/notifier.util';
 import { IMaskOptions } from './Control';
 

@@ -91,6 +91,7 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
   autoFocusFirstField: boolean = false;
   @ContentChildren(NovoTemplate)
   customTemplates: QueryList<NovoTemplate>;
+  private fieldsAlreadyHidden: string[];
 
   allFieldsRequired = false;
   allFieldsNotRequired = false;
@@ -154,7 +155,10 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
   public showAllFields(): void {
     this.form.fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
-        this.form.controls[control.key].hidden = false;
+        const ctl = this.form.controls[control.key];
+        if (!this.fieldsAlreadyHidden.includes(control.key)) {
+          ctl.hidden = false;
+        }
       });
     });
     this.showingAllFields = true;
@@ -162,25 +166,32 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
   }
 
   public showOnlyRequired(hideRequiredWithValue): void {
+    this.fieldsAlreadyHidden = [];
     this.form.fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
+        const ctl = this.form.controls[control.key];
+
+        if (ctl.hidden) {
+          this.fieldsAlreadyHidden.push(control.key);
+        }
+
         // Hide any non-required fields
         if (!control.required) {
-          this.form.controls[control.key].hidden = true;
+          ctl.hidden = true;
         }
 
         // Hide required fields that have been successfully filled out
         if (
           hideRequiredWithValue &&
           !Helpers.isBlank(this.form.value[control.key]) &&
-          (!control.isEmpty || (control.isEmpty && control.isEmpty(this.form.controls[control.key])))
+          (!control.isEmpty || (control.isEmpty && control.isEmpty(ctl)))
         ) {
-          this.form.controls[control.key].hidden = true;
+          ctl.hidden = true;
         }
 
         // Don't hide fields with errors
-        if (this.form.controls[control.key].errors) {
-          this.form.controls[control.key].hidden = false;
+        if (ctl.errors) {
+          ctl.hidden = false;
         }
       });
     });
