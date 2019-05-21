@@ -476,6 +476,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     if (this.resetSubscription) {
       this.resetSubscription.unsubscribe();
     }
+    if (this.sortFilterSubscription) {
+      this.sortFilterSubscription.unsubscribe();
+    }
   }
 
   public ngAfterContentInit(): void {
