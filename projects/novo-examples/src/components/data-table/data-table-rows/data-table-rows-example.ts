@@ -1,15 +1,11 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { delay } from 'rxjs/operators';
 import * as dateFns from 'date-fns';
-import { Subject, Observable, of } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import {
   IDataTableColumn,
-  RemoteDataTableService,
-  StaticDataTableService,
   IDataTablePaginationOptions,
   IDataTableSearchOptions,
-  IDataTableService,
   NovoModalService,
   NovoDataTable,
   IDataTablePreferences,
@@ -355,7 +351,7 @@ export class DataTableRowsExample {
     this.log(event);
   }
 
-  public checkDisabled(row: MockData): boolean {
+  public checkDisabled(): boolean {
     return true;
   }
 
@@ -375,7 +371,7 @@ export class DataTableRowsExample {
     console.log('Preferences changed (persist manually):', event); // tslint:disable-line
   }
 
-  public resized(column: IDataTableColumn<MockData>): void {
+  public resized(event): void {
     console.log('Column Width changed (persist manually): ', event); // tslint:disable-line
   }
 
@@ -388,7 +384,7 @@ export class DataTableRowsExample {
   }
 
   public filterList(value: any): void {
-    this.table.state.filter = { id: 'status', value: value };
+    this.table.state.filter = { id: 'status', type: 'text', value: value };
     this.table.state.updates.next({
       globalSearch: this.table.state.globalSearch,
       filter: this.table.state.filter,

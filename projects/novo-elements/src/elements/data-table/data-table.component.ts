@@ -25,6 +25,7 @@ import {
   IDataTableSearchOptions,
   IDataTableService,
   IDataTablePreferences,
+  IDataTableFilter,
 } from './interfaces';
 import { DataTableSource } from './data-table.source';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -416,6 +417,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   private refreshSubscription: Subscription;
   private resetSubscription: Subscription;
   private paginationSubscription: Subscription;
+  private sortFilterSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
   private scrollListenerHandler: any;
   private initialized: boolean = false;
@@ -432,6 +434,19 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
     this.scrollListenerHandler = this.scrollListener.bind(this);
+    this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
+      (event: {
+        sort: { id: string; value: string; transform?: Function };
+        filter: IDataTableFilter | IDataTableFilter[];
+        globalSearch: string;
+      }) => {
+        if (this.name !== 'novo-data-table') {
+          this.preferencesChanged.emit({ name: this.name, sort: event.sort, filter: event.filter, globalSearch: event.globalSearch });
+        } else {
+          notify('Must have [name] set on data-table to use preferences!');
+        }
+      },
+    );
     this.paginationSubscription = this.state.paginationSource.subscribe((event: { isPageSizeChange: boolean; pageSize: number }) => {
       if (this.name !== 'novo-data-table') {
         if (event.isPageSizeChange) {
@@ -460,6 +475,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
     if (this.resetSubscription) {
       this.resetSubscription.unsubscribe();
+    }
+    if (this.sortFilterSubscription) {
+      this.sortFilterSubscription.unsubscribe();
     }
   }
 

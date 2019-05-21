@@ -2,6 +2,8 @@ import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { IDataTableChangeEvent, IDataTableFilter } from '../interfaces';
+import { Helpers } from '../../..';
+import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
 export class DataTableState<T> {
   public selectionSource = new Subject();
@@ -40,6 +42,7 @@ export class DataTableState<T> {
     this.page = 0;
     this.selectedRows.clear();
     this.resetSource.next();
+    this.onSortFilterChange();
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,
@@ -54,6 +57,7 @@ export class DataTableState<T> {
     this.page = 0;
     this.selectedRows.clear();
     this.resetSource.next();
+    this.onSortFilterChange();
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,
@@ -69,6 +73,7 @@ export class DataTableState<T> {
     this.page = 0;
     this.selectedRows.clear();
     this.resetSource.next();
+    this.onSortFilterChange();
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,
@@ -91,6 +96,29 @@ export class DataTableState<T> {
   }
 
   public onSortFilterChange(): void {
-    this.sortFilterSource.next();
+    this.sortFilterSource.next({
+      sort: this.sort,
+      filter: this.filter,
+      globalSearch: this.globalSearch,
+    });
+  }
+
+  public setInitialSortFilter(preferences): void {
+    if (preferences) {
+      if (preferences.sort) {
+        this.sort = preferences.sort;
+      }
+
+      if (preferences.filter) {
+        let filters = Helpers.convertToArray(preferences.filter);
+        filters.forEach((filter) => {
+          filter.value =
+            filter.selectedOption && filter.type
+              ? NovoDataTableFilterUtils.constructFilter(filter.selectedOption, filter.type)
+              : filter.value;
+        });
+        this.filter = filters;
+      }
+    }
   }
 }

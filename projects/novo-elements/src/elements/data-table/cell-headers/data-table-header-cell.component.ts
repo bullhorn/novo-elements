@@ -27,11 +27,13 @@ import {
   IDataTableColumnFilterConfig,
   IDataTableColumnSortConfig,
 } from '../interfaces';
+
 import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
 import { NovoDropdownElement } from '../../dropdown/Dropdown';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { DataTableState } from '../state/data-table-state.service';
 import { Helpers } from '../../../utils/Helpers';
+import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
 
 @Component({
@@ -275,39 +277,57 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     @Optional() public _sort: NovoDataTableSortFilter<T>,
     @Optional() public _cdkColumnDef: CdkColumnDef,
   ) {
-    this._rerenderSubscription = state.updates.subscribe((change: IDataTableChangeEvent) => {
-      if (change.sort && change.sort.id === this.id) {
-        this.icon = `sort-${change.sort.value}`;
-        this.sortActive = true;
-      } else {
-        this.icon = 'sortable';
-        this.sortActive = false;
-      }
-
-      let tableFilter = Helpers.convertToArray(change.filter);
-      let thisFilter = tableFilter.find((filter) => filter && filter.id === this.id);
-
-      if (thisFilter) {
-        this.filterActive = true;
-        this.filter = thisFilter.value;
-      } else {
-        this.filterActive = false;
-        this.filter = undefined;
-        this.activeDateFilter = undefined;
-        this.multiSelectedOptions = [];
-      }
-      changeDetectorRef.markForCheck();
-    });
+    this._rerenderSubscription = state.updates.subscribe((change: IDataTableChangeEvent) => this.checkSortFilterState(change));
   }
 
   public ngOnInit(): void {
     if (this._cdkColumnDef) {
       this.id = this._cdkColumnDef.name;
     }
+
+    this.checkSortFilterState({ filter: this.state.filter, sort: this.state.sort }, true);
+
+    this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
+    if (this.multiSelect) {
+      this.multiSelectedOptions = this.filter ? [...this.filter] : [];
+    }
+    this.changeDetectorRef.markForCheck();
+  }
+
+  public ngOnDestroy(): void {
+    this._rerenderSubscription.unsubscribe();
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
+  }
+
+  public checkSortFilterState(sortFilterState: IDataTableChangeEvent, initialConfig: boolean = false): void {
+    if (sortFilterState.sort && sortFilterState.sort.id === this.id) {
+      this.icon = `sort-${sortFilterState.sort.value}`;
+      this.sortActive = true;
+    } else {
+      this.icon = 'sortable';
+      this.sortActive = false;
+    }
+
+    const tableFilter = Helpers.convertToArray(sortFilterState.filter);
+    const thisFilter = tableFilter.find((filter) => filter && filter.id === this.id);
+
+    if (thisFilter) {
+      this.filterActive = true;
+      if (initialConfig && thisFilter.type === 'date' && thisFilter.selectedOption) {
+        this.activeDateFilter = thisFilter.selectedOption.label || this.labels.customDateRange;
+      }
+      this.filter = thisFilter.value;
+    } else {
+      this.filterActive = false;
+      this.filter = undefined;
+      this.activeDateFilter = undefined;
+      this.multiSelectedOptions = [];
+    }
     if (this.defaultSort && this.id === this.defaultSort.id) {
       this.icon = `sort-${this.defaultSort.value}`;
       this.sortActive = true;
-      this.changeDetectorRef.markForCheck();
     }
     this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
     if (this.multiSelect) {
@@ -327,13 +347,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
         }
       }
     }
-  }
-
-  public ngOnDestroy(): void {
-    this._rerenderSubscription.unsubscribe();
-    this.subscriptions.forEach((subscription: Subscription) => {
-      subscription.unsubscribe();
-    });
+    this.changeDetectorRef.markForCheck();
   }
 
   public isSelected(option, optionsList) {
@@ -511,32 +525,8 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   public filterData(filter?: any): void {
-    let actualFilter = filter;
-    if (this.config.filterConfig.type === 'date' && filter) {
-      this.activeDateFilter = filter.label || this.labels.customDateRange;
-      if (filter.startDate && filter.endDate) {
-        actualFilter = {
-          min: dateFns.startOfDay(filter.startDate.date),
-          max: dateFns.startOfDay(dateFns.addDays(dateFns.startOfDay(filter.endDate.date), 1)),
-        };
-      } else {
-        actualFilter = {
-          min: filter.min ? dateFns.addDays(dateFns.startOfToday(), filter.min) : dateFns.startOfToday(),
-          max: filter.max ? dateFns.addDays(dateFns.endOfToday(), filter.max) : dateFns.endOfToday(),
-        };
-      }
-    }
-
-    if (this.multiSelect && Array.isArray(filter)) {
-      actualFilter = filter.map((filterItem) => {
-        if (filterItem && filterItem.hasOwnProperty('value')) {
-          return filterItem.value;
-        }
-        return filterItem;
-      });
-    } else if (actualFilter && actualFilter.hasOwnProperty('value')) {
-      actualFilter = filter.value;
-    }
+    let actualFilter = NovoDataTableFilterUtils.constructFilter(filter, this.config.filterConfig.type, this.multiSelect);
+    const selectedOption = this.config.filterConfig.type === 'date' && filter ? filter : undefined;
 
     if (this.changeTimeout) {
       clearTimeout(this.changeTimeout);
@@ -546,7 +536,14 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       if (actualFilter === '') {
         actualFilter = undefined;
       }
-      this._sort.filter(this.id, actualFilter, this.config.transforms.filter, this.allowMultipleFilters);
+      this._sort.filter(
+        this.id,
+        this.config.filterConfig.type,
+        actualFilter,
+        this.config.transforms.filter,
+        this.allowMultipleFilters,
+        selectedOption,
+      );
       this.changeDetectorRef.markForCheck();
     }, 300);
   }
