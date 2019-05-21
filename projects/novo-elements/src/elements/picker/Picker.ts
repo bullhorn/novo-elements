@@ -144,10 +144,10 @@ export class NovoPickerElement implements OnInit {
   resultsComponent: any;
   popup: ComponentRef<any>;
   _value: any;
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
+  onModelChange: Function = () => { };
+  onModelTouched: Function = () => { };
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) {}
+  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     if (this.overrideElement) {
@@ -156,7 +156,6 @@ export class NovoPickerElement implements OnInit {
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
     }
-    this.initConfig();
     // Custom results template
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
     // Get all distinct key up events from the input and only fire if long enough and distinct
@@ -171,12 +170,6 @@ export class NovoPickerElement implements OnInit {
       distinctUntilChanged(),
     );
     keyboardObserver.subscribe((event: KeyboardEvent) => this.onDebouncedKeyup(event), (err) => this.hideResults(err));
-  }
-
-  private initConfig(): void {
-    if (this.config.defaultEmptyTermSearch) {
-      this.config.defaultOptions = this.config.options;
-    }
   }
 
   private onDebouncedKeyup(event: Event) {

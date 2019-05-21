@@ -134,14 +134,16 @@ export class BasePickerResults {
             this.isStatic = true;
             // Arrays are returned immediately
             resolve(this.structureArray(options));
-          } else if (term && term.length >= (this.config.minSearchLength || 1)) {
+          } else if ((this.config.minSearchLength === 0) || (term && term.length >= (this.config.minSearchLength || 1))) {
             if (
               (options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) ||
               Object.getPrototypeOf(options).hasOwnProperty('then')
             ) {
               this.isStatic = false;
               // Promises (ES6 or Deferred) are resolved whenever they resolve
-              options.then(this.structureArray.bind(this)).then(resolve, reject);
+              options
+                .then(this.structureArray.bind(this))
+                .then(resolve, reject);
             } else if (typeof options === 'function') {
               this.isStatic = false;
               // Promises (ES6 or Deferred) are resolved whenever they resolve
@@ -159,7 +161,9 @@ export class BasePickerResults {
               if (typeof this.config.defaultOptions === 'function') {
                 let defaultOptions = this.config.defaultOptions(term, ++this.page);
                 if (Object.getPrototypeOf(defaultOptions).hasOwnProperty('then')) {
-                  defaultOptions.then(this.structureArray.bind(this)).then(resolve, reject);
+                  defaultOptions
+                    .then(this.structureArray.bind(this))
+                    .then(resolve, reject);
                 } else {
                   resolve(this.structureArray(defaultOptions));
                 }
