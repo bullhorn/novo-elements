@@ -203,8 +203,17 @@ describe('Utils: FormUtils', () => {
       expect(formUtils.determineInputType).toBeDefined();
       expect(formUtils.determineInputType({ type: 'file' })).toBe('file');
     });
+    it('should return the type of WorkflowOptionsLookup correctly.', () => {
+      expect(formUtils.determineInputType({ dataSpecialization: 'WorkflowOptionsLookup' })).toBe('select');
+    });
+    it('should return the type of SpecializedOptionsLookup correctly.', () => {
+      expect(formUtils.determineInputType({ dataSpecialization: 'SpecializedOptionsLookup' })).toBe('select');
+    });
     it('should return the type of WorkflowOptions correctly.', () => {
       expect(formUtils.determineInputType({ dataSpecialization: 'WORKFLOW_OPTIONS' })).toBe('select');
+    });
+    it('should return the type of SpecializedOptions correctly.', () => {
+      expect(formUtils.determineInputType({ dataSpecialization: 'SPECIALIZED_OPTIONS' })).toBe('select');
     });
     describe('TO_MANY field types', () => {
       const toManyField: FormField = {
