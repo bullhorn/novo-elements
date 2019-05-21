@@ -66,7 +66,7 @@ export class BasePickerResults {
   }
 
   set term(value) {
-    if (value !== this._term || this.page === 0) {
+    if (value !== this._term || this.page === 0 || value === '') {
       this._term = value;
       this.page = 0;
       this.matches = [];
