@@ -221,8 +221,11 @@ export class NovoPickerElement implements OnInit {
       }
 
       if (event.keyCode === KeyCodes.ENTER) {
-        this.popup.instance.selectActiveMatch();
-        this.ref.markForCheck();
+        const activeMatch = this.popup.instance.activeMatch;
+        if (!this.selected.find((selected) => activeMatch && activeMatch.value && selected.value === activeMatch.value)) {
+          this.popup.instance.selectActiveMatch();
+          this.ref.markForCheck();
+        }
         return;
       }
 
