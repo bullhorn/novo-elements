@@ -11585,8 +11585,12 @@ var NovoPickerElement = /** @class */ (function () {
                 return;
             }
             if (event.keyCode === KeyCodes.ENTER) {
-                this.popup.instance.selectActiveMatch();
-                this.ref.markForCheck();
+                /** @type {?} */
+                var activeMatch_1 = this.popup.instance.activeMatch;
+                if (!this.selected.find(function (selected) { return activeMatch_1 && activeMatch_1.value && selected.value === activeMatch_1.value; })) {
+                    this.popup.instance.selectActiveMatch();
+                    this.ref.markForCheck();
+                }
                 return;
             }
             if ((event.keyCode === KeyCodes.BACKSPACE || event.keyCode === KeyCodes.DELETE) && !Helpers.isBlank(this._value)) {
