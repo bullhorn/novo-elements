@@ -202,6 +202,15 @@ export class NovoLabelService {
     return new Intl.NumberFormat(this.userLocale, options).format(value);
   }
 
+  formatBigDecimal(value: number): string {
+    const options = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
+    let _value = new Intl.NumberFormat(this.userLocale, options).format(value);
+    if (value < 0) {
+      _value = `(${_value.slice(1)})`;
+    }
+    return _value;
+  }
+
   formatNumber(value: any, options?: Intl.NumberFormatOptions): string {
     return new Intl.NumberFormat(this.userLocale, options).format(value);
   }

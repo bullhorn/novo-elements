@@ -161,7 +161,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         </div>
       </div>
     </div>
-    <!-- DEFAULT CELL TEMPLATE -->
+    mptyMessage'] || templates['de
     <ng-template novoTemplate="textCellTemplate" let-row let-col="col">
       <span [style.width.px]="col?.width" [style.min-width.px]="col?.width" [style.max-width.px]="col?.width">{{
         row[col.id] | dataTableInterpolate: col
@@ -178,6 +178,9 @@ import { StaticDataTableService } from './services/static-data-table.service';
     </ng-template>
     <ng-template novoTemplate="currencyCellTemplate" let-row let-col="col">
       <span>{{ row[col.id] | dataTableInterpolate: col | dataTableCurrencyRenderer: col }}</span>
+    </ng-template>
+    <ng-template novoTemplate="bigdecimalCellTemplate" let-row let-col="col">
+      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableBigDecimalRenderer: col }}</span>
     </ng-template>
     <ng-template novoTemplate="numberCellTemplate" let-row let-col="col">
       <span>{{ row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col }}</span>
@@ -239,7 +242,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         <ng-container *ngTemplateOutlet="templates['expandedRow']; context: { $implicit: row }"></ng-container>
       </div>
     </ng-template>
-    <!-- CUSTOM CELLS PASSED IN -->
+    etail-row" [@expand] style="ove
     <ng-content></ng-content>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

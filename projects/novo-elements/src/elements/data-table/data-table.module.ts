@@ -34,6 +34,7 @@ import {
   DateTableDateTimeRendererPipe,
   DateTableNumberRendererPipe,
   DateTableTimeRendererPipe,
+  DataTableBigDecimalRendererPipe,
 } from './data-table.pipes';
 import { NovoDataTableExpandDirective } from './data-table-expand.directive';
 import { NovoDataTableClearButton } from './data-table-clear-button.component';
@@ -61,6 +62,7 @@ import { NovoDataTableClearButton } from './data-table-clear-button.component';
     DateTableDateTimeRendererPipe,
     DateTableNumberRendererPipe,
     DateTableTimeRendererPipe,
+    DataTableBigDecimalRendererPipe,
     NovoDataTableCellHeader,
     NovoDataTableSortFilter,
     NovoDataTableHeaderCell,
@@ -85,6 +87,7 @@ import { NovoDataTableClearButton } from './data-table-clear-button.component';
     DateTableDateTimeRendererPipe,
     DateTableNumberRendererPipe,
     DateTableTimeRendererPipe,
+    DataTableBigDecimalRendererPipe,
     NovoDataTableClearButton,
   ],
 })
