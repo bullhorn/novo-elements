@@ -41,9 +41,10 @@ export class ComponentUtils {
     return location.createComponent(componentFactory, 0, childInjector);
   }
 
-  append<T>(ComponentClass: Type<T>, location: ViewContainerRef, providers?: StaticProvider[]): ComponentRef<T> {
+  append<T>(ComponentClass: Type<T>, location: ViewContainerRef, providers?: StaticProvider[], onTop?: boolean): ComponentRef<T> {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentClass);
     const parent = location.injector;
-    return location.createComponent(componentFactory, location.length, Injector.create({ providers, parent }));
+    const index = onTop ? 0 : location.length;
+    return location.createComponent(componentFactory, index, Injector.create({ providers, parent }));
   }
 }
