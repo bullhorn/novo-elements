@@ -161,7 +161,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         </div>
       </div>
     </div>
-    mptyMessage'] || templates['de
+    <!-- DEFAULT CELL TEMPLATE -->
     <ng-template novoTemplate="textCellTemplate" let-row let-col="col">
       <span [style.width.px]="col?.width" [style.min-width.px]="col?.width" [style.max-width.px]="col?.width">{{
         row[col.id] | dataTableInterpolate: col
@@ -242,7 +242,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         <ng-container *ngTemplateOutlet="templates['expandedRow']; context: { $implicit: row }"></ng-container>
       </div>
     </ng-template>
-    etail-row" [@expand] style="ove
+    <!-- CUSTOM CELLS PASSED IN -->
     <ng-content></ng-content>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
