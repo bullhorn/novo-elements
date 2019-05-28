@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.9.0"></a>
+# [3.9.0](https://github.com/bullhorn/novo-elements/compare/v3.8.2...v3.9.0) (2019-05-28)
+
+
+### Bug Fixes
+
+* **demo:** Fix variable name for color on demo page ([#962](https://github.com/bullhorn/novo-elements/issues/962)) ([258f414](https://github.com/bullhorn/novo-elements/commit/258f414))
+
+
+
 <a name="3.8.2"></a>
 ## [3.8.2](https://github.com/bullhorn/novo-elements/compare/v3.8.1...v3.8.2) (2019-04-26)
 
