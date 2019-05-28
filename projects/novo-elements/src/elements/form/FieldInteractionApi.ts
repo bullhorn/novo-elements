@@ -537,10 +537,11 @@ export class FieldInteractionApi {
     mapper?: any,
   ): void {
     let control = this.getControl(key);
-    const { minSearchLength } = control.config;
+    const { minSearchLength, enableInfiniteScroll } = control.config;
     if (control && !control.restrictFieldInteractions) {
 
       const newConfig: NovoControlConfig['config'] = {
+        ...(enableInfiniteScroll && { enableInfiniteScroll }),
         ...(Number.isInteger(minSearchLength) && { minSearchLength }),
         resultsTemplate: control.config.resultsTemplate,
       };
