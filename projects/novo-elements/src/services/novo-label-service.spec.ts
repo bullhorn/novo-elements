@@ -108,4 +108,31 @@ describe('Service: NovoLabelService', () => {
       expect(service.getProperty).toBeDefined();
     });
   });
+
+  describe('Method: formatBigDecimal', () => {
+    it('should format positive value as decimal, whole number', () => {
+      const value = service.formatBigDecimal(2);
+      expect(value).toEqual('2.00');
+    });
+
+    it('should format positive value as decimal, one decimal place', () => {
+      const value = service.formatBigDecimal(2.1);
+      expect(value).toEqual('2.10');
+    });
+
+    it('should format positive value as decimal, two decimal places', () => {
+      const value = service.formatBigDecimal(2.14);
+      expect(value).toEqual('2.14');
+    });
+
+    it('should format positive value as decimal, three decimal places, round up', () => {
+      const value = service.formatBigDecimal(2.145);
+      expect(value).toEqual('2.15');
+    });
+
+    it('should format negative value as decimal in parens without negative sign', () => {
+      const value = service.formatBigDecimal(-2);
+      expect(value).toEqual('(2.00)');
+    });
+  });
 });
