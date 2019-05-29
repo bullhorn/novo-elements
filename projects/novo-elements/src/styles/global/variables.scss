@@ -38,6 +38,7 @@ $jobCode: #696d79;
 $earnCode: #696d79;
 $invoiceStatement: #696d79;
 $billableCharge: #696d79;
+$payableCharge: #696d79;
 // Color Applications
 $dark: #3d464d;
 $navigation: #2f384f;
@@ -89,6 +90,7 @@ $entity-colors: (
   jobCode: $jobCode,
   earnCode: $earnCode,
   billableCharge: $billableCharge,
+  payableCharge: $payableCharge,
   invoiceStatement: $invoiceStatement,
 );
 // Generic Color Map
@@ -155,6 +157,7 @@ $dark-colors: (
   contract: $contract,
   mountain: $mountain,
   billableCharge: $billableCharge,
+  paybleCharge: $payableCharge,
   invoiceStatement: $invoiceStatement,
   submission: $submission,
   note: $note,
@@ -170,7 +173,6 @@ $light-colors: (
 );
 // All colors
 $all-colors: map-merge($dark-colors, $light-colors);
-
 // Typography
 // --------------------------------------------------
 $base-font-size: 13px;
@@ -178,7 +180,6 @@ $base-font-family: 'Roboto', sans-serif;
 $base-font-color: $dark;
 $base-line-height: 1rem;
 $alt-font-family: Georgia, 'Times New Roman', Times, serif;
-
 // Whiteframes
 // -------------------------
 $whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
@@ -191,7 +192,6 @@ $whiteframe-shadow-z4: 0px 16px 28px 0 rgba(0, 0, 0, 0.22) !default;
 $whiteframe-zindex-z4: 4 !default;
 $whiteframe-shadow-z5: 0px 27px 24px 0 rgba(0, 0, 0, 0.2) !default;
 $whiteframe-zindex-z5: 5 !default;
-
 // Z-indexes
 // -------------------------
 // Function to call z-indexes.
@@ -216,7 +216,6 @@ $whiteframe-zindex-z5: 5 !default;
   }
   @return map-get($z-layers, $layer);
 }
-
 // Easing Curves
 // -------------------------
 // Usage: html-tag { @include ease('all', 'swift-ease-in-out'); }
@@ -240,13 +239,11 @@ $easing-curves: (
   }
   @return $map;
 }
-
 @mixin ease($target, $curve-name) {
   $duration: map-deep-get($easing-curves, $curve-name, 'duration');
   $curve: map-deep-get($easing-curves, $curve-name, 'curve');
   transition: #{$target $duration $curve};
 }
-
 // Animations
 // -------------------------
 @keyframes rotate {
