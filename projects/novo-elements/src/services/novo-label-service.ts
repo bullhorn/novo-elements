@@ -203,8 +203,13 @@ export class NovoLabelService {
   }
 
   formatBigDecimal(value: number): string {
+    let valueAsString = value.toString();
+    // truncate at two decimals (do not round)
+    valueAsString = valueAsString.substring(0, valueAsString.indexOf('.') + 3);
+    // convert back to number
+    const truncatedValue = Number(valueAsString);
     const options = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
-    let _value = new Intl.NumberFormat(this.userLocale, options).format(value);
+    let _value = new Intl.NumberFormat(this.userLocale, options).format(truncatedValue);
     if (value < 0) {
       _value = `(${_value.slice(1)})`;
     }

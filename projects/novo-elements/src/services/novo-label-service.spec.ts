@@ -125,9 +125,9 @@ describe('Service: NovoLabelService', () => {
       expect(value).toEqual('2.14');
     });
 
-    it('should format positive value as decimal, three decimal places, round up', () => {
-      const value = service.formatBigDecimal(2.145);
-      expect(value).toEqual('2.15');
+    it('should format positive value as decimal, two decimal places do not round', () => {
+      const value = service.formatBigDecimal(2.147);
+      expect(value).toEqual('2.14');
     });
 
     it('should format negative value as decimal in parens without negative sign', () => {
