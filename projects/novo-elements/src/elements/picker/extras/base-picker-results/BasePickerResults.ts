@@ -66,7 +66,7 @@ export class BasePickerResults {
   }
 
   set term(value) {
-    if (value !== this._term || this.page === 0 || (this.page > 0 && value === '')) {
+    if (this.shouldSearch(value)) {
       this._term = value;
       this.page = 0;
       this.matches = [];
@@ -74,6 +74,14 @@ export class BasePickerResults {
     } else {
       this.addScrollListener();
     }
+  }
+
+  shouldSearch(value: unknown): boolean {
+    const termHasChanged = value !== this._term;
+    const optionsNotYetCalled = this.page === 0;
+    const optionsCalledOnEmptyStringSearch = !termHasChanged && this.page > 0 && value === '';
+
+    return termHasChanged || optionsNotYetCalled || optionsCalledOnEmptyStringSearch;
   }
 
   addScrollListener(): void {
@@ -134,7 +142,7 @@ export class BasePickerResults {
             this.isStatic = true;
             // Arrays are returned immediately
             resolve(this.structureArray(options));
-          } else if ((this.config.minSearchLength === 0) || (term && term.length >= (this.config.minSearchLength || 1))) {
+          } else if ((this.config.minSearchLength === 0) || (term && term.length >= this.config.minSearchLength)) {
             if (
               (options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) ||
               Object.getPrototypeOf(options).hasOwnProperty('then')

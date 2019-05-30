@@ -537,36 +537,33 @@ export class FieldInteractionApi {
     mapper?: any,
   ): void {
     let control = this.getControl(key);
-    const { minSearchLength, enableInfiniteScroll } = control.config;
+    const { minSearchLength } = control.config;
     if (control && !control.restrictFieldInteractions) {
 
       const newConfig: NovoControlConfig['config'] = {
-        ...(enableInfiniteScroll && { enableInfiniteScroll }),
         ...(Number.isInteger(minSearchLength) && { minSearchLength }),
         resultsTemplate: control.config.resultsTemplate,
       };
       if (config.optionsUrl || config.optionsUrlBuilder || config.optionsPromise) {
-        Object.assign(newConfig, {
-          options: (query) => {
-            if (config.optionsPromise) {
-              return config.optionsPromise(query, new CustomHttp(this.http));
-            }
-            return new Promise((resolve, reject) => {
-              let url = config.optionsUrlBuilder ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
-              this.http
-                .get(url)
-                .pipe(
-                  map((results: any[]) => {
-                    if (mapper) {
-                      return results.map(mapper);
-                    }
-                    return results;
-                  }),
-                )
-                .subscribe(resolve, reject);
-            });
-          },
-        });
+        newConfig.options = (query) => {
+          if (config.optionsPromise) {
+            return config.optionsPromise(query, new CustomHttp(this.http));
+          }
+          return new Promise((resolve, reject) => {
+            let url = config.optionsUrlBuilder ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
+            this.http
+              .get(url)
+              .pipe(
+                map((results: any[]) => {
+                  if (mapper) {
+                    return results.map(mapper);
+                  }
+                  return results;
+                }),
+              )
+              .subscribe(resolve, reject);
+          });
+        };
         if (config.hasOwnProperty('format')) {
           newConfig.format = config.format;
         }
