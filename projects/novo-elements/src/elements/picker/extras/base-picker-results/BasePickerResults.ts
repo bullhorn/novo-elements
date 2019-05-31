@@ -142,7 +142,7 @@ export class BasePickerResults {
             this.isStatic = true;
             // Arrays are returned immediately
             resolve(this.structureArray(options));
-          } else if ((this.config.minSearchLength === 0) || (term && term.length >= (this.config.minSearchLength || 1))) {
+          } else if (this.shouldCallOptionsFunction(term)) {
             if (
               (options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) ||
               Object.getPrototypeOf(options).hasOwnProperty('then')
@@ -189,6 +189,14 @@ export class BasePickerResults {
         }
       }),
     );
+  }
+
+  shouldCallOptionsFunction(term: string): boolean {
+    if (this.config && 'minSearchLength' in this.config && Number.isInteger(this.config.minSearchLength)) {
+      return typeof term === 'string' && term.length >= this.config.minSearchLength;
+    } else {
+      return !!(term && term.length);
+    }
   }
 
   /**
