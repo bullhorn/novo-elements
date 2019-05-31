@@ -142,7 +142,7 @@ export class BasePickerResults {
             this.isStatic = true;
             // Arrays are returned immediately
             resolve(this.structureArray(options));
-          } else if ((this.config.minSearchLength === 0) || (term && term.length >= this.config.minSearchLength)) {
+          } else if ((this.config.minSearchLength === 0) || (term && term.length >= (this.config.minSearchLength || 1))) {
             if (
               (options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) ||
               Object.getPrototypeOf(options).hasOwnProperty('then')
