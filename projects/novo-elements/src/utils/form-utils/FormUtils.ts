@@ -253,6 +253,7 @@ export class FormUtils {
       warning: field.warning,
       config: field.config || {},
       closeOnSelect: field.closeOnSelect,
+      layoutOptions: field.layoutOptions,
     };
     this.inferStartDate(controlConfig, field);
     // TODO: getControlOptions should always return the correct format
