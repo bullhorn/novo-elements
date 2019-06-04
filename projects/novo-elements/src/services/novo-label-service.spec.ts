@@ -134,5 +134,25 @@ describe('Service: NovoLabelService', () => {
       const value = service.formatBigDecimal(-2);
       expect(value).toEqual('(2.00)');
     });
+
+    it('should format positive value as decimal, one decimal', () => {
+      const value = service.formatBigDecimal(2.3);
+      expect(value).toEqual('2.30');
+    });
+
+    it('should format positive value as decimal, four decimal should truncate', () => {
+      const value = service.formatBigDecimal(2.3444);
+      expect(value).toEqual('2.34');
+    });
+
+    it('should format positive value as decimal, large number whole number', () => {
+      const value = service.formatBigDecimal(23444);
+      expect(value).toEqual('23,444.00');
+    });
+
+    it('should format positive value as decimal, large number with four decimal should truncate', () => {
+      const value = service.formatBigDecimal(23444.1273);
+      expect(value).toEqual('23,444.12');
+    });
   });
 });

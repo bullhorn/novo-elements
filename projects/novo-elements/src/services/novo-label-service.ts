@@ -205,7 +205,10 @@ export class NovoLabelService {
   formatBigDecimal(value: number): string {
     let valueAsString = value ? value.toString() : '0';
     // truncate at two decimals (do not round)
-    valueAsString = valueAsString.substring(0, valueAsString.indexOf('.') + 3);
+    const decimalIndex = valueAsString.indexOf('.');
+    if (decimalIndex > -1 && decimalIndex + 3 < valueAsString.length) {
+      valueAsString = valueAsString.substring(0, valueAsString.indexOf('.') + 3);
+    }
     // convert back to number
     const truncatedValue = Number(valueAsString);
     const options = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
