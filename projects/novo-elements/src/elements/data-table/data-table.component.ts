@@ -179,6 +179,9 @@ import { StaticDataTableService } from './services/static-data-table.service';
     <ng-template novoTemplate="currencyCellTemplate" let-row let-col="col">
       <span>{{ row[col.id] | dataTableInterpolate: col | dataTableCurrencyRenderer: col }}</span>
     </ng-template>
+    <ng-template novoTemplate="bigdecimalCellTemplate" let-row let-col="col">
+      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableBigDecimalRenderer: col }}</span>
+    </ng-template>
     <ng-template novoTemplate="numberCellTemplate" let-row let-col="col">
       <span>{{ row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col }}</span>
     </ng-template>

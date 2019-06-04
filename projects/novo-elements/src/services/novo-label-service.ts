@@ -202,6 +202,23 @@ export class NovoLabelService {
     return new Intl.NumberFormat(this.userLocale, options).format(value);
   }
 
+  formatBigDecimal(value: number): string {
+    let valueAsString = value ? value.toString() : '0';
+    // truncate at two decimals (do not round)
+    const decimalIndex = valueAsString.indexOf('.');
+    if (decimalIndex > -1 && decimalIndex + 3 < valueAsString.length) {
+      valueAsString = valueAsString.substring(0, valueAsString.indexOf('.') + 3);
+    }
+    // convert back to number
+    const truncatedValue = Number(valueAsString);
+    const options = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
+    let _value = new Intl.NumberFormat(this.userLocale, options).format(truncatedValue);
+    if (value < 0) {
+      _value = `(${_value.slice(1)})`;
+    }
+    return _value;
+  }
+
   formatNumber(value: any, options?: Intl.NumberFormatOptions): string {
     return new Intl.NumberFormat(this.userLocale, options).format(value);
   }

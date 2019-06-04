@@ -88,6 +88,21 @@ export class DateTableNumberRendererPipe<T> implements PipeTransform {
 }
 
 @Pipe({
+  name: 'dataTableBigDecimalRenderer',
+  pure: true,
+})
+export class DataTableBigDecimalRendererPipe<T> implements PipeTransform {
+  constructor(private labels: NovoLabelService) {}
+  transform(value: any, column: IDataTableColumn<T>): string {
+    if (!Helpers.isEmpty(value)) {
+      let val = interpolateCell<T>(value, column);
+      return this.labels.formatBigDecimal(Number(val));
+    }
+    return '';
+  }
+}
+
+@Pipe({
   name: 'dataTableCurrencyRenderer',
   pure: true,
 })

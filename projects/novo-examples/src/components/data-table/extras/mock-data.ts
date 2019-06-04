@@ -14,4 +14,5 @@ export interface MockData {
   telephone: string;
   email: string;
   address: { city?: string; state?: string };
+  bigdecimal?: number;
 }

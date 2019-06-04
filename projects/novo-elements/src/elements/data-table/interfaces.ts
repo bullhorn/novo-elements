@@ -23,6 +23,7 @@ export interface IDataTableColumn<T> {
     | 'datetime'
     | 'time'
     | 'currency'
+    | 'bigdecimal'
     | 'number'
     | 'percent'
     | 'action'

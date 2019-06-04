@@ -164,6 +164,14 @@ export class DataTableRowsExample {
       sortable: true,
     },
     {
+      id: 'bigdecimal',
+      label: 'BigDecimal',
+      enabled: true,
+      type: 'bigdecimal',
+      filterable: true,
+      sortable: true,
+    },
+    {
       id: 'name',
       label: 'Name',
       labelIcon: 'bull',
@@ -228,6 +236,7 @@ export class DataTableRowsExample {
     'status',
     'priority',
     'percent',
+    'bigdecimal',
     'embeddedObj',
     'edit',
   ];
@@ -280,6 +289,7 @@ export class DataTableRowsExample {
         telephone: '555-555-5555',
         email: 'test@google.com',
         address: { city: 'City', state: null },
+        bigdecimal: 3.25 * (i + 1) * (i % 5 === 1 ? -1 : 1),
       });
       this.staticDataSet2.push({
         id: i + 1001,
@@ -297,6 +307,7 @@ export class DataTableRowsExample {
         telephone: '555-555-5555',
         email: 'test@google.com',
         address: { city: 'City', state: 'State' },
+        bigdecimal: -75,
       });
     }
     this.basicRows = [...this.staticDataSet1];
