@@ -238,6 +238,7 @@ export class FormUtils {
       optionsType: field.optionsType,
       multiple: field.multiValue,
       readOnly: !!field.disabled || !!field.readOnly,
+      disabled: field.disabled,
       maxlength: field.maxLength,
       interactions: field.interactions,
       dataSpecialization: field.dataSpecialization,
