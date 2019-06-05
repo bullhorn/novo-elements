@@ -20,7 +20,7 @@ class CustomHttp {
   options: any;
   mapFn: any = (x) => x;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   get(url: string, options?: any) {
     this.url = url;
@@ -62,7 +62,7 @@ export class FieldInteractionApi {
     private formUtils: FormUtils,
     private http: HttpClient,
     private labels: NovoLabelService,
-  ) {}
+  ) { }
 
   set form(form: any) {
     this._form = form;
@@ -537,36 +537,33 @@ export class FieldInteractionApi {
     mapper?: any,
   ): void {
     let control = this.getControl(key);
+    const { minSearchLength } = control.config;
     if (control && !control.restrictFieldInteractions) {
-      let newConfig: any = {
+
+      const newConfig: NovoControlConfig['config'] = {
+        ...(Number.isInteger(minSearchLength) && { minSearchLength }),
         resultsTemplate: control.config.resultsTemplate,
       };
       if (config.optionsUrl || config.optionsUrlBuilder || config.optionsPromise) {
-        newConfig = Object.assign(newConfig, {
-          options: (query) => {
-            if (config.optionsPromise) {
-              return config.optionsPromise(query, new CustomHttp(this.http));
-            }
-            return new Promise((resolve, reject) => {
-              let url = config.optionsUrlBuilder ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
-              if (query && query.length) {
-                this.http
-                  .get(url)
-                  .pipe(
-                    map((results: any[]) => {
-                      if (mapper) {
-                        return results.map(mapper);
-                      }
-                      return results;
-                    }),
-                  )
-                  .subscribe(resolve, reject);
-              } else {
-                resolve([]);
-              }
-            });
-          },
-        });
+        newConfig.options = (query) => {
+          if (config.optionsPromise) {
+            return config.optionsPromise(query, new CustomHttp(this.http));
+          }
+          return new Promise((resolve, reject) => {
+            let url = config.optionsUrlBuilder ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
+            this.http
+              .get(url)
+              .pipe(
+                map((results: any[]) => {
+                  if (mapper) {
+                    return results.map(mapper);
+                  }
+                  return results;
+                }),
+              )
+              .subscribe(resolve, reject);
+          });
+        };
         if (config.hasOwnProperty('format')) {
           newConfig.format = config.format;
         }

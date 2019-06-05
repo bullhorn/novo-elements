@@ -66,7 +66,7 @@ export class BasePickerResults {
   }
 
   set term(value) {
-    if (value !== this._term || this.page === 0) {
+    if (this.shouldSearch(value)) {
       this._term = value;
       this.page = 0;
       this.matches = [];
@@ -74,6 +74,14 @@ export class BasePickerResults {
     } else {
       this.addScrollListener();
     }
+  }
+
+  shouldSearch(value: unknown): boolean {
+    const termHasChanged = value !== this._term;
+    const optionsNotYetCalled = this.page === 0;
+    const optionsCalledOnEmptyStringSearch = !termHasChanged && this.page > 0 && value === '';
+
+    return termHasChanged || optionsNotYetCalled || optionsCalledOnEmptyStringSearch;
   }
 
   addScrollListener(): void {
@@ -134,14 +142,16 @@ export class BasePickerResults {
             this.isStatic = true;
             // Arrays are returned immediately
             resolve(this.structureArray(options));
-          } else if (term && term.length >= (this.config.minSearchLength || 1)) {
+          } else if (this.shouldCallOptionsFunction(term)) {
             if (
               (options.hasOwnProperty('reject') && options.hasOwnProperty('resolve')) ||
               Object.getPrototypeOf(options).hasOwnProperty('then')
             ) {
               this.isStatic = false;
               // Promises (ES6 or Deferred) are resolved whenever they resolve
-              options.then(this.structureArray.bind(this)).then(resolve, reject);
+              options
+                .then(this.structureArray.bind(this))
+                .then(resolve, reject);
             } else if (typeof options === 'function') {
               this.isStatic = false;
               // Promises (ES6 or Deferred) are resolved whenever they resolve
@@ -159,7 +169,9 @@ export class BasePickerResults {
               if (typeof this.config.defaultOptions === 'function') {
                 let defaultOptions = this.config.defaultOptions(term, ++this.page);
                 if (Object.getPrototypeOf(defaultOptions).hasOwnProperty('then')) {
-                  defaultOptions.then(this.structureArray.bind(this)).then(resolve, reject);
+                  defaultOptions
+                    .then(this.structureArray.bind(this))
+                    .then(resolve, reject);
                 } else {
                   resolve(this.structureArray(defaultOptions));
                 }
@@ -177,6 +189,14 @@ export class BasePickerResults {
         }
       }),
     );
+  }
+
+  shouldCallOptionsFunction(term: string): boolean {
+    if (this.config && 'minSearchLength' in this.config && Number.isInteger(this.config.minSearchLength)) {
+      return typeof term === 'string' && term.length >= this.config.minSearchLength;
+    } else {
+      return !!(term && term.length);
+    }
   }
 
   /**
