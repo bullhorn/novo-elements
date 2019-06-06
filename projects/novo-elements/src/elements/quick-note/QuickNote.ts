@@ -341,7 +341,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
           };
         } else {
           // Create the results DOM element
-          this.quickNoteResults = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
+          this.quickNoteResults = this.componentUtils.append(this.resultsComponent, this.results);
           this.quickNoteResults.instance.parent = this;
           this.quickNoteResults.instance.config = this.config;
           this.quickNoteResults.instance.term = {
