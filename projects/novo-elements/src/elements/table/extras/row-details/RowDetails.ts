@@ -27,8 +27,8 @@ export class RowDetails implements OnInit {
   ngOnInit() {
     if (this.renderer) {
       if (this.renderer.prototype instanceof BaseRenderer) {
-        let componentRef = this.componentUtils.appendNextToLocation(this.renderer, this.container);
-        componentRef.instance.data = this.data;
+        const componentRef = this.componentUtils.append(this.renderer, this.container);
+        componentRef.instance['data'] = this.data;
       } else {
         this.value = this.renderer(this.data);
       }

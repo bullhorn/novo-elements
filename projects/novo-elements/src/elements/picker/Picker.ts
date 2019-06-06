@@ -275,7 +275,7 @@ export class NovoPickerElement implements OnInit {
       this.popup.instance.autoSelectFirstOption = this.autoSelectFirstOption;
       this.ref.markForCheck();
     } else {
-      this.popup = this.componentUtils.appendNextToLocation(this.resultsComponent, this.results);
+      this.popup = this.componentUtils.append(this.resultsComponent, this.results);
       this.popup.instance.parent = this;
       this.popup.instance.config = this.config;
       this.popup.instance.term = this.term;
