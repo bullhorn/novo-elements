@@ -404,6 +404,7 @@ novo-data-table {
     align-items: center;
     justify-content: center;
     color: $grey;
+    z-index: 5;
   }
   .novo-data-table-outside-container {
     display: flex;
