@@ -388,7 +388,6 @@ novo-data-table {
   }
   .novo-data-table-empty-container {
     padding-top: 0;
-    z-index: 5;
   }
   .novo-data-table-no-results-container {
     position: absolute;
@@ -405,6 +404,7 @@ novo-data-table {
     align-items: center;
     justify-content: center;
     color: $grey;
+    z-index: 5;
   }
   .novo-data-table-outside-container {
     display: flex;
