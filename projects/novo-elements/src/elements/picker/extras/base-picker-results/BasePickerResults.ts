@@ -79,7 +79,13 @@ export class BasePickerResults {
   shouldSearch(value: unknown): boolean {
     const termHasChanged = value !== this._term;
     const optionsNotYetCalled = this.page === 0;
-    const optionsCalledOnEmptyStringSearch = !termHasChanged && this.page > 0 && value === '';
+    // problem here is that BasePickerResults has no way to know that this.config.options has changed
+    // out from under it due to field interactions
+    // so selecting a client corp, clicking in (and searching) on Billing Profile, then selecting a diff client corp
+    // then clicking back into Billing Profile, will mean that results for previous client corp show up
+    // *until search term changes*
+    // AFAIK there is no way to discern this state only using page, value, and term
+    const optionsCalledOnEmptyStringSearch = this.page === 0 && value === '';
 
     return termHasChanged || optionsNotYetCalled || optionsCalledOnEmptyStringSearch;
   }

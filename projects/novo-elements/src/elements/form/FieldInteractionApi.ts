@@ -14,27 +14,28 @@ import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { IFieldInteractionEvent } from './FormInterfaces';
-import { ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
+import { ModifyPickerConfigArgs, OptionsFunction, CustomHttp } from './FieldInteractionApiTypes';
+import { Observable, Subscription } from 'rxjs';
 
-class CustomHttp {
+class CustomHttpImpl implements CustomHttp {
   url: string;
   options: any;
-  mapFn: any = (x) => x;
+  mapFn = (x) => x;
 
   constructor(private http: HttpClient) {}
 
-  get(url: string, options?: any) {
+  get(url: string, options?: any): CustomHttp {
     this.url = url;
     this.options = options;
     return this;
   }
 
-  map(mapFn: any) {
+  map(mapFn): CustomHttp {
     this.mapFn = mapFn;
     return this;
   }
 
-  subscribe(resolve: any, reject?: any) {
+  subscribe(resolve: any, reject?: any): Subscription {
     return this.http
       .get(this.url, this.options)
       .pipe(map(this.mapFn))
@@ -534,13 +535,15 @@ export class FieldInteractionApi {
 
   public modifyPickerConfig(key: string, args: ModifyPickerConfigArgs, mapper?: any): void {
     let control = this.getControl(key);
-    const { minSearchLength, enableInfiniteScroll } = control.config;
     if (control && !control.restrictFieldInteractions) {
-      const options = this.getOptions(args, mapper);
+      const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator } = control.config;
+      const optionsConfig = this.getOptionsConfig(args, mapper, filteredOptionsCreator);
+
       const newConfig: NovoControlConfig['config'] = {
         ...(Number.isInteger(minSearchLength) && { minSearchLength }),
         ...(enableInfiniteScroll && { enableInfiniteScroll }),
-        ...(options && { options }),
+        ...(filteredOptionsCreator && { filteredOptionsCreator }),
+        ...(optionsConfig && optionsConfig),
         resultsTemplate: control.config.resultsTemplate,
       };
 
@@ -548,14 +551,15 @@ export class FieldInteractionApi {
       this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: args });
     }
   }
-  getOptions = (
+  getOptionsConfig = (
     args: ModifyPickerConfigArgs,
-    mapper?: Function,
+    mapper?: (item: unknown) => unknown,
+    filteredOptionsCreator?: (where: string) => (query: string) => Promise<unknown[]>,
   ): undefined | { options: unknown[] } | { options: OptionsFunction; format?: string } => {
-    if ('optionsUrl' in args || 'optionsUrlBuilder' in args || 'optionsPromise' in args) {
+    if (filteredOptionsCreator || 'optionsUrl' in args || 'optionsUrlBuilder' in args || 'optionsPromise' in args) {
       const format = 'format' in args && args.format;
       return {
-        options: this.createOptionsFunction(args, mapper),
+        options: this.createOptionsFunction(args, mapper, filteredOptionsCreator),
         ...(format && { format }),
       };
     } else if ('options' in args && Array.isArray(args.options)) {
@@ -567,16 +571,26 @@ export class FieldInteractionApi {
     }
   };
 
-  createOptionsFunction = (config: ModifyPickerConfigArgs, mapper): ((query: string) => Promise<unknown[]>) => (query: string) => {
-    if ('optionsPromise' in config && config.optionsPromise) {
-      return config.optionsPromise(query, new CustomHttp(this.http));
-    } else if ('optionsUrlBuilder' in config || 'optionsUrl' in config) {
+  createOptionsFunction = (
+    config: ModifyPickerConfigArgs,
+    mapper?: (item: unknown) => unknown,
+    filteredOptionsCreator?: (where?: string) => ((query: string, page?: number) => Promise<unknown[]>),
+  ): ((query: string) => Promise<unknown[]>) => (query: string, page?: number) => {
+    if (filteredOptionsCreator) {
+      if ('where' in config) {
+        return filteredOptionsCreator(config.where)(query, page);
+      } else {
+        return filteredOptionsCreator()(query, page);
+      }
+    } else if ('optionsPromise' in config && config.optionsPromise) {
+      return config.optionsPromise(query, new CustomHttpImpl(this.http));
+    } else if (('optionsUrlBuilder' in config && config.optionsUrlBuilder) || ('optionsUrl' in config && config.optionsUrl)) {
       return new Promise((resolve, reject) => {
-        let url = 'optionsUrlBuilder' in config ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
+        const url = 'optionsUrlBuilder' in config ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
         this.http
           .get(url)
           .pipe(
-            map((results: any[]) => {
+            map((results: unknown[]) => {
               if (mapper) {
                 return results.map(mapper);
               }
