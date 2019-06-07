@@ -462,10 +462,9 @@ export class FormUtils {
           field.readOnly = false;
         }
         if (
-          (field.name !== 'id' &&
-            (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
-            !field.readOnly) ||
-          field.systemRequired
+          field.name !== 'id' &&
+          (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
+          !field.readOnly
         ) {
           let control = this.getControlForField(field, http, config, overrides, forTable);
           // Set currency format
