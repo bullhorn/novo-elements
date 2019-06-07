@@ -64,7 +64,7 @@ export class FormUtils {
     'Placement',
   ];
 
-  constructor(public labels: NovoLabelService, public optionsService: OptionsService) { }
+  constructor(public labels: NovoLabelService, public optionsService: OptionsService) {}
 
   toFormGroup(controls: Array<any>): NovoFormGroup {
     let group: any = {};
@@ -268,7 +268,7 @@ export class FormUtils {
     } else if (optionsConfig) {
       controlConfig.config = {
         ...optionsConfig,
-        ...controlConfig && controlConfig.config,
+        ...(controlConfig && controlConfig.config),
       };
     }
 
@@ -458,10 +458,14 @@ export class FormUtils {
     if (meta && meta.fields) {
       let fields = meta.fields;
       fields.forEach((field) => {
+        if (field.systemRequired) {
+          field.readOnly = false;
+        }
         if (
-          field.name !== 'id' &&
-          (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
-          !field.readOnly
+          (field.name !== 'id' &&
+            (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
+            !field.readOnly) ||
+          field.systemRequired
         ) {
           let control = this.getControlForField(field, http, config, overrides, forTable);
           // Set currency format
@@ -557,6 +561,9 @@ export class FormUtils {
         });
       }
       fields.forEach((field) => {
+        if (field.systemRequired) {
+          field.readOnly = false;
+        }
         if (
           field.name !== 'id' &&
           (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
