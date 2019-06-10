@@ -1,6 +1,7 @@
 // NG2
-import { Component, Input, Output, ViewChild, EventEmitter, NgZone, forwardRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, ViewChild, EventEmitter, NgZone, forwardRef, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+// import 'CKEDITOR';
 
 // Value accessor for the component (supports ngModel)
 const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
@@ -107,6 +108,11 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
       console.error('Make sure to include CKEditor sources in your dependencies!');
       return;
     }
+    CKEDITOR.plugins.addExternal(
+      'inclusion-helper',
+      '/dist/novo-elements/esm2015/elements/ckeditor/plugins/inclusion-helper/',
+      'inclusion-helper-plugin.js',
+    );
 
     // CKEditor replace textarea
     this.instance = CKEDITOR.replace(this.host.nativeElement, config);
@@ -154,6 +160,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
 
   getBaseConfig() {
     const baseConfig = {
+      extraPlugins: 'inclusion-helper',
       enterMode: CKEDITOR.ENTER_BR,
       shiftEnterMode: CKEDITOR.ENTER_P,
       disableNativeSpellChecker: false,
@@ -214,7 +221,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
           ],
         },
         { name: 'links', items: ['Link'] },
-        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
+        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Inclusion-Helper'] },
         { name: 'tools', items: ['Maximize', 'Source'] },
         '/', // line break
         { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },

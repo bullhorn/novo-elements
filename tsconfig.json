@@ -16,12 +16,12 @@
     "paths": {
       "@utils": ["utils"],
       "@utils/*": ["utils/*"],
-      "novo-elements": ["dist/novo-elements"],
-      "novo-elements/*": ["dist/novo-elements/*"],
-      "novo-examples": ["dist/novo-examples"],
-      "novo-examples/*": ["dist/novo-examples/*"],
-      "chomsky": ["dist/chomsky"],
-      "chomsky/*": ["dist/chomsky/*"]
+      "novo-elements": ["projects/novo-elements/src/index"],
+      "novo-elements/*": ["projects/novo-elements/src/*"],
+      "novo-examples": ["projects/novo-examples/src/index"],
+      "novo-examples/*": ["projects/novo-examples/src/*"],
+      "chomsky": ["projects/chomsky/src/index"],
+      "chomsky/*": ["projects/chomsky/src/*"]
     }
   }
 }

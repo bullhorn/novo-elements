@@ -4,7 +4,7 @@ import { TestBed, async } from '@angular/core/testing';
 // App
 import { NovoCKEditorElement } from './CKEditor';
 
-describe('Elements: NovoCKEditorElement', () => {
+xdescribe('Elements: NovoCKEditorElement', () => {
   let fixture;
   let component;
 
