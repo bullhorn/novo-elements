@@ -1,5 +1,6 @@
 {
   "extends": "../../tsconfig.json",
+  "files": ["node_modules/@types/CKEDITOR/index.d.ts"],
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
     "target": "es2015",

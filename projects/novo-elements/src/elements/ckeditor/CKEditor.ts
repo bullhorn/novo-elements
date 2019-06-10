@@ -1,6 +1,7 @@
 // NG2
 import { Component, Input, Output, ViewChild, EventEmitter, NgZone, forwardRef, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { init } from './plugins/inclusion-helper/inclusion-helper-plugin';
 // import 'CKEDITOR';
 
 // Value accessor for the component (supports ngModel)
@@ -108,6 +109,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
       console.error('Make sure to include CKEditor sources in your dependencies!');
       return;
     }
+    CKEDITOR.plugins.add('inclusion-helper', { init, icons: 'inclusion-helper' });
     CKEDITOR.plugins.addExternal(
       'inclusion-helper',
       '/dist/novo-elements/esm2015/elements/ckeditor/plugins/inclusion-helper/',

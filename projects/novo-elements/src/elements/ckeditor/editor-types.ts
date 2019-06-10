@@ -1,3 +1,3 @@
-import 'CKEDITOR';
+// import 'CKEDITOR';
 
-export type Editor = CKEDITOR.editor;
+export type Editor = any; // CKEDITOR.editor;

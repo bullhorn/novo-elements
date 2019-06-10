@@ -1,9 +1,4 @@
-import { alex } from 'alex';
 import { Editor } from '../../editor-types';
-
-declare var CKEDITOR: Editor;
-
-CKEDITOR.plugins.add('inclusion-helper', { init, icons: 'inclusion-helper' });
 
 export function init(editor: Editor): void {
   // we don't necessarily want a command, we want an event listener to listen for new words
