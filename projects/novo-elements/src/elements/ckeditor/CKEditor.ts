@@ -141,6 +141,13 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
     return this._shouldShowPopover;
   }
 
+  learnMore() {}
+
+  changeTerm() {
+    this.shouldShowPopover = false;
+    this.inclusionPopover.hide();
+  }
+
   onInclusionEvent = (info: CKEventInfo) => {
     const data: InclusionSuggestionArgs = info.data;
     const editor: Editor = info.editor;
@@ -149,7 +156,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
     this.popoverText = data.suggestions;
     this.popoverTitle = `"${data.word}"`;
     this.changeDetectorRef.detectChanges();
-  }
+  };
 
   ckeditorInit = (config) => {
     if (!CKEDITOR) {
@@ -202,7 +209,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
     this.instance.on('loaded', (event) => {
       this.loaded.emit(event);
     });
-  }
+  };
 
   getBaseConfig() {
     const baseConfig = {

@@ -11,23 +11,28 @@
     "experimentalDecorators": true,
     "target": "es5",
     "typeRoots": ["node_modules/@types"],
-    "types": ["jest"],
+    "types": ["jest", "node"],
     "lib": ["es2017", "dom"],
     "paths": {
+      "os": ["./node_modules/os-browserify/main.js"],
+      "path": ["./node_modules/path-browserify/index.js"],
+      "stream": ["./node_modules/stream-browserify/index.js"],
+      "http": ["./node_modules/https-browserify/index.js"],
+      "process": ["./node_modules/node-libs-browser/index.js"],
       "@utils": ["utils"],
       "@utils/*": ["utils/*"],
-      "novo-elements": ["dist/novo-elements"],
-      "novo-elements/*": ["dist/novo-elements/*"],
-      "novo-examples": ["dist/novo-examples"],
-      "novo-examples/*": ["dist/novo-examples/*"],
-      "chomsky": ["dist/chomsky"],
-      "chomsky/*": ["dist/chomsky/*"]
-      // "novo-elements": ["projects/novo-elements/src/index"],
-      // "novo-elements/*": ["projects/novo-elements/src/*"],
-      // "novo-examples": ["projects/novo-examples/src/index"],
-      // "novo-examples/*": ["projects/novo-examples/src/*"],
-      // "chomsky": ["projects/chomsky/src/index"],
-      // "chomsky/*": ["projects/chomsky/src/*"]
+      // "novo-elements": ["dist/novo-elements"],
+      // "novo-elements/*": ["dist/novo-elements/*"],
+      // "novo-examples": ["dist/novo-examples"],
+      // "novo-examples/*": ["dist/novo-examples/*"],
+      // "chomsky": ["dist/chomsky"],
+      // "chomsky/*": ["dist/chomsky/*"]
+      "novo-elements": ["projects/novo-elements/src/index"],
+      "novo-elements/*": ["projects/novo-elements/src/*"],
+      "novo-examples": ["projects/novo-examples/src/index"],
+      "novo-examples/*": ["projects/novo-examples/src/*"],
+      "chomsky": ["projects/chomsky/src/index"],
+      "chomsky/*": ["projects/chomsky/src/*"]
     }
   }
 }

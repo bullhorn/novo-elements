@@ -2,16 +2,15 @@
   <popover-content
     #inclusionPopover
     [title]="popoverTitle"
-    placement="right">
+    placement="right"
+    onclick="">
     "{{popoverText}}"
-    <div>here is a div</div>
+    <div>
+        <button theme="standard" (click)="learnMore()">Learn More</button>
+        <button theme="primary" icon="check" (click)="changeTerm()">Change</button>
+    </div>
+
   </popover-content>
-  <!-- <span
-  id="inclusion-popover-container"
-  class="popover-container"
-  [popover]="inclusionPopover"
-  [popoverDisabled]="true"
-  [popoverAlways]="shouldShowPopover"></span> -->
 <div
 [popover]="inclusionPopover"
   [popoverDisabled]="true"

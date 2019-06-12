@@ -1,13 +1,16 @@
 import { Editor, InclusionSuggestionArgs } from '../../editor-types';
+// import * as unifiedProxy from 'unified';
+// const unified = (<any>unifiedProxy).default || unifiedProxy; // workaround for a delightfully terrible rollup issue
+// const unified = require('unified');
+import * as retextProxy from 'retext';
+const retext = (<any>retextProxy).default || retextProxy; // workaround for a delightfully terrible rollup issue
+import * as english from 'retext-english';
+import * as equality from 'retext-equality';
+import * as stringify from 'retext-stringify';
+import { VFile } from 'vfile';
+import { Processor } from 'unified';
 
 export function init(editor: Editor): void {
-  // we don't necessarily want a command, we want an event listener to listen for new words
-  // when we get a new document, we need to run it through retext to give us back
-  // a list of words or phrases with the means to locate their specific occurence in the dom
-  // then we need to add squiggly styling & a tooltip
-
-  // editor.addContentsCss('projects/novo-elements/src/elements/ckeditor/plugins/inclusion-helper/styles/inclusion-helper.scss');
-
   editor.on('change', () => {
     // const msgs = alex.html(editor.getData()).messages;
     const body = editor.document.$.body;
@@ -16,9 +19,14 @@ export function init(editor: Editor): void {
 }
 
 function walk(element: HTMLElement, editor: Editor): void {
+  const processor = retext()
+    .use(english)
+    .use(equality)
+    .use(stringify);
+
   flattenChildNodes(element)
     .filter((node: Node) => node.nodeType === Node.TEXT_NODE)
-    .forEach((item) => parseAndAddSuggestions(item, editor));
+    .forEach((item) => parseAndAddSuggestions(item, editor, processor));
 }
 
 function flattenChildNodes(parent: Node | HTMLElement): Node[] {
@@ -40,26 +48,33 @@ function flatten<T>(a: T[][]): T[] {
   return a.reduce((prev, next) => [...(Array.isArray(prev) ? prev : [prev]), ...(Array.isArray(next) ? next : [next])]);
 }
 
-function parseAndAddSuggestions(element: HTMLElement | Node, editor: Editor): void {
+async function parseAndAddSuggestions(element: HTMLElement | Node, editor: Editor, processor: Processor): Promise<void> {
   const doc = element.ownerDocument;
   const text = element.textContent;
   const wordToReplace = 'poop';
   const parent = element.parentNode;
 
+  const messages: VFile = await processor.process(text);
+  console.log(messages);
+
   if (text.includes(wordToReplace) && !(parent as HTMLElement).className.includes('inclusion-helper-warning')) {
     parent.removeChild(element);
     const [leftText, rightText] = text.split(wordToReplace);
-    [doc.createTextNode(leftText), makeWarningElement(doc, wordToReplace, editor), doc.createTextNode(rightText)].forEach((item) =>
-      parent.appendChild(item),
-    );
+    if (leftText) {
+      parent.appendChild(doc.createTextNode(leftText));
+    }
+    parent.appendChild(makeWarningElement(doc, wordToReplace, editor));
+    if (rightText) {
+      parent.appendChild(doc.createTextNode(rightText));
+    }
   }
 }
 
 function makeWarningElement(document: Document, word: string, editor: Editor): HTMLElement {
-  const span = document.createElement('span');
+  const warning = document.createElement('span');
   const textNodeForMatchedWord = document.createTextNode(word);
 
-  span.appendChild(textNodeForMatchedWord);
+  warning.appendChild(textNodeForMatchedWord);
 
   const inclusionArgs: InclusionSuggestionArgs = {
     offset: 50,
@@ -67,36 +82,28 @@ function makeWarningElement(document: Document, word: string, editor: Editor): H
     word: 'poop',
   };
 
-  span.onclick = () => {
+  warning.onclick = () => {
     editor.fire('inclusion', inclusionArgs, editor);
   };
   const spanStyles = {
     display: 'inline-block',
     'border-bottom': '2px dashed gold',
     'border-right': '2px dashed gold',
+    'font-style': 'normal',
     background: '#ffef94',
     padding: '0px 4px',
   };
-  const style = Object.entries(spanStyles).map(property => property.join(' : ')).join(';');
+  const style = Object.entries(spanStyles)
+    .map((property) => property.join(' : '))
+    .join(';');
 
   const spanAttributes = {
     style,
     class: 'inclusion-helper-warning',
   };
   Object.entries(spanAttributes).forEach(([key, value]) => {
-    span.setAttribute(key, value);
+    warning.setAttribute(key, value);
   });
 
-  return span;
-}
-
-function parse(editor: Editor) {
-  const html = editor.document.getBody().getHtml();
-  console.log(html);
-}
-
-function exec(editor: Editor): boolean {
-  const now = new Date();
-  editor.insertHtml('The current date and time is: <em>' + now.toString() + '</em>');
-  return true;
+  return warning;
 }
