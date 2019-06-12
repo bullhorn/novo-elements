@@ -32,7 +32,13 @@ export class PopOverContent implements AfterViewInit {
 
   @ViewChild('popoverDiv')
   popoverDiv: ElementRef;
-  popover: PopOverDirective;
+  set popover(value: PopOverDirective) {
+    this._popover = value;
+  }
+  get popover(): PopOverDirective {
+    return this._popover;
+  }
+  _popover: PopOverDirective;
   onCloseFromOutside = new EventEmitter();
   top: number = -10000;
   left: number = -10000;

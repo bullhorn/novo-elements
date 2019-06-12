@@ -1,7 +1,22 @@
 // NG2
-import { Component, Input, Output, ViewChild, EventEmitter, NgZone, forwardRef, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  ViewChild,
+  EventEmitter,
+  NgZone,
+  forwardRef,
+  AfterViewInit,
+  OnDestroy,
+  OnInit,
+  ElementRef,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { init } from './plugins/inclusion-helper/inclusion-helper-plugin';
+import { InclusionSuggestionArgs, CKEventInfo, Editor } from './editor-types';
+import { PopOverContent } from '../popover/PopOverContent';
 // import 'CKEDITOR';
 
 // Value accessor for the component (supports ngModel)
@@ -21,7 +36,7 @@ declare var CKEDITOR: any;
 @Component({
   selector: 'novo-editor',
   providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
-  template: '<textarea [name]="name" [id]="name" #host></textarea>',
+  templateUrl: 'CKEditor.html',
 })
 export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlValueAccessor {
   @Input()
@@ -58,7 +73,10 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   instance;
   debounceTimeout;
 
-  constructor(private zone: NgZone) {}
+  popoverTitle: string = '';
+  popoverText: string = '';
+
+  constructor(private zone: NgZone, private changeDetectorRef: ChangeDetectorRef) {}
 
   get value() {
     return this._value;
@@ -103,18 +121,42 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
       this.change.emit(value);
     });
   }
+  popover: PopOverContent;
 
-  ckeditorInit(config) {
+  @ViewChild('inclusionPopover')
+  set inclusionPopover(p: PopOverContent) {
+    this.popover = p;
+  }
+
+  get inclusionPopover() {
+    return this.popover;
+  }
+  _shouldShowPopover = false;
+
+  set shouldShowPopover(value: boolean) {
+    this._shouldShowPopover = value;
+  }
+
+  get shouldShowPopover() {
+    return this._shouldShowPopover;
+  }
+
+  onInclusionEvent = (info: CKEventInfo) => {
+    const data: InclusionSuggestionArgs = info.data;
+    const editor: Editor = info.editor;
+    console.log('inclusion event heard');
+    this.shouldShowPopover = true;
+    this.popoverText = data.suggestions;
+    this.popoverTitle = `"${data.word}"`;
+    this.changeDetectorRef.detectChanges();
+  }
+
+  ckeditorInit = (config) => {
     if (!CKEDITOR) {
       console.error('Make sure to include CKEditor sources in your dependencies!');
       return;
     }
-    CKEDITOR.plugins.add('inclusion-helper', { init, icons: 'inclusion-helper' });
-    CKEDITOR.plugins.addExternal(
-      'inclusion-helper',
-      '/dist/novo-elements/esm2015/elements/ckeditor/plugins/inclusion-helper/',
-      'inclusion-helper-plugin.js',
-    );
+    CKEDITOR.plugins.add('inclusion-helper', { init }); // , onLoad });
 
     // CKEditor replace textarea
     this.instance = CKEDITOR.replace(this.host.nativeElement, config);
@@ -127,6 +169,8 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
       // send the evt to the EventEmitter
       this.ready.emit(evt);
     });
+
+    this.instance.on('inclusion', this.onInclusionEvent.bind(this));
 
     // CKEditor change event
     this.instance.on('change', () => {
@@ -167,7 +211,8 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
       shiftEnterMode: CKEDITOR.ENTER_P,
       disableNativeSpellChecker: false,
       removePlugins: 'liststyle,tabletools,contextmenu', // allows browser based spell checking
-      extraAllowedContent: '*(*){*};table tbody tr td th[*];', // allows class names (*) and inline styles {*} for all and attributes [*] on tables
+      allowedContent: true,
+      // extraAllowedContent: '*(*){*};table tbody tr td th[*];', // allows class names (*) and inline styles {*} for all and attributes [*] on tables
       font_names:
         'Arial/Arial, Helvetica, sans-serif;' +
         'Calibri/Calibri, Verdana, Geneva, sans-serif;' +

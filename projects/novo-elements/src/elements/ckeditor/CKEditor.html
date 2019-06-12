@@ -1,0 +1,25 @@
+
+  <popover-content
+    #inclusionPopover
+    [title]="popoverTitle"
+    placement="right">
+    "{{popoverText}}"
+    <div>here is a div</div>
+  </popover-content>
+  <!-- <span
+  id="inclusion-popover-container"
+  class="popover-container"
+  [popover]="inclusionPopover"
+  [popoverDisabled]="true"
+  [popoverAlways]="shouldShowPopover"></span> -->
+<div
+[popover]="inclusionPopover"
+  [popoverDisabled]="true"
+  [popoverAlways]="shouldShowPopover"
+>
+<textarea
+[name]="name"
+[id]="name"
+#host>
+</textarea>
+</div>
