@@ -662,7 +662,7 @@ export class FormUtils {
         continue;
       }
 
-      if (control.dataType === 'Date' && typeof value === 'string') {
+      if (control.dataType === 'Date' && typeof value === 'string' && control.optionsType !== 'skipConversion') {
         value = dateFns.startOfDay(value);
       }
 
