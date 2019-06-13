@@ -158,10 +158,10 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
     const data: InclusionSuggestionArgs = info.data;
     const editor: Editor = info.editor;
     this.createChangeTerm(info.data.suggestion.id, editor.document.$);
-    console.log('inclusion event heard');
     this.shouldShowPopover = true;
     this.suggestedReplacements = data.suggestion.suggestedReplacements;
     this.popoverTitle = `"${data.suggestion.problematicTerm}"`;
+    this.popoverText = data.suggestion.explanation;
     this.changeDetectorRef.detectChanges();
   }
 
