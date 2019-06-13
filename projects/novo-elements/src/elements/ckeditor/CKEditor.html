@@ -4,10 +4,13 @@
     [title]="popoverTitle"
     placement="right"
     onclick="">
-    "{{popoverText}}"
+    Try Instead:
+    <div *ngFor="let suggestion of suggestedReplacements">
+      <div>{{suggestion}}</div>
+    </div>
     <div>
         <button theme="standard" (click)="learnMore()">Learn More</button>
-        <button theme="primary" icon="check" (click)="changeTerm()">Change</button>
+        <button theme="primary" icon="check" (click)="changeTerm(suggestedReplacements[0])">Change</button>
     </div>
 
   </popover-content>

@@ -76,6 +76,8 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   popoverTitle: string = '';
   popoverText: string = '';
 
+  suggestedReplacements: string[] = [];
+
   constructor(private zone: NgZone, private changeDetectorRef: ChangeDetectorRef) {}
 
   get value() {
@@ -143,7 +145,11 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
 
   learnMore() {}
 
-  changeTerm() {
+  changeTerm(term: string) {
+    this.hidePopover();
+  }
+
+  hidePopover() {
     this.shouldShowPopover = false;
     this.inclusionPopover.hide();
   }
@@ -151,12 +157,22 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   onInclusionEvent = (info: CKEventInfo) => {
     const data: InclusionSuggestionArgs = info.data;
     const editor: Editor = info.editor;
+    this.createChangeTerm(info.data.suggestion.id, editor.document.$);
     console.log('inclusion event heard');
     this.shouldShowPopover = true;
-    this.popoverText = data.suggestions;
-    this.popoverTitle = `"${data.word}"`;
+    this.suggestedReplacements = data.suggestion.suggestedReplacements;
+    this.popoverTitle = `"${data.suggestion.problematicTerm}"`;
     this.changeDetectorRef.detectChanges();
-  };
+  }
+
+  createChangeTerm(id: string, document: Document): void {
+    this.changeTerm = (term: string) => {
+      const element = document.getElementById(id);
+      const parent = element.parentNode;
+      parent.replaceChild(document.createTextNode(term), element);
+      this.hidePopover();
+    };
+  }
 
   ckeditorInit = (config) => {
     if (!CKEDITOR) {
@@ -209,7 +225,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
     this.instance.on('loaded', (event) => {
       this.loaded.emit(event);
     });
-  };
+  }
 
   getBaseConfig() {
     const baseConfig = {

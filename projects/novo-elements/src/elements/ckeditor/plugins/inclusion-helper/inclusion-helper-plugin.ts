@@ -1,4 +1,4 @@
-import { Editor, InclusionSuggestionArgs } from '../../editor-types';
+import { Editor, InclusionSuggestionArgs, Suggestion } from '../../editor-types';
 // import * as unifiedProxy from 'unified';
 // const unified = (<any>unifiedProxy).default || unifiedProxy; // workaround for a delightfully terrible rollup issue
 // const unified = require('unified');
@@ -11,28 +11,48 @@ import { VFile } from 'vfile';
 import { Processor } from 'unified';
 
 export function init(editor: Editor): void {
-  editor.on('change', () => {
-    // const msgs = alex.html(editor.getData()).messages;
-    const body = editor.document.$.body;
-    walk(body, editor);
-  });
-}
-
-function walk(element: HTMLElement, editor: Editor): void {
   const processor = retext()
     .use(english)
     .use(equality)
     .use(stringify);
 
-  flattenChildNodes(element)
+  editor.on('change', () => {
+    // const msgs = alex.html(editor.getData()).messages;
+    const body = editor.document.$.body;
+    walk(body, editor, processor);
+  });
+}
+
+async function walk(element: HTMLElement, editor: Editor, processor: Processor) {
+  await verifyExistingWarnings(element.ownerDocument, processor);
+
+  flattenChildNodes(element, 'inclusion-helper-warning')
     .filter((node: Node) => node.nodeType === Node.TEXT_NODE)
     .forEach((item) => parseAndAddSuggestions(item, editor, processor));
 }
 
-function flattenChildNodes(parent: Node | HTMLElement): Node[] {
+async function verifyExistingWarnings(document: Document, processor: Processor) {
+  await Promise.all(
+    Array.from(document.getElementsByClassName('inclusion-helper-warning')).map(async (element) => {
+      const text = element.textContent;
+      const vfile: VFile = await processor.process(text);
+      if (vfile.messages.length !== 1 || vfile.messages[0].location.end.offset !== text.length) {
+        removeWarning(element, document);
+      }
+      return;
+    }),
+  );
+}
+
+function removeWarning(element: Element, document: Document) {
+  const parent = element.parentNode;
+  parent.replaceChild(document.createTextNode(element.textContent), element);
+}
+
+function flattenChildNodes(parent: Node | HTMLElement, filter?: string): Node[] {
   const children = Array.from(parent.childNodes).filter((child: Node | HTMLElement) => {
-    if ({}.hasOwnProperty.call(child, 'className')) {
-      return !(child as HTMLElement).className.includes('inclusion-helper-warning');
+    if ({}.hasOwnProperty.call(child, 'className') && filter) {
+      return !(child as HTMLElement).className.includes(filter);
     } else {
       return true;
     }
@@ -40,7 +60,7 @@ function flattenChildNodes(parent: Node | HTMLElement): Node[] {
   if (children.length === 0) {
     return [parent];
   } else {
-    return [parent, ...flatten(children.map(flattenChildNodes))];
+    return [parent, ...flatten(children.map((n) => flattenChildNodes(n, 'inclusion-helper-warning')))];
   }
 }
 
@@ -48,38 +68,110 @@ function flatten<T>(a: T[][]): T[] {
   return a.reduce((prev, next) => [...(Array.isArray(prev) ? prev : [prev]), ...(Array.isArray(next) ? next : [next])]);
 }
 
+function getSuggestions(vfile: VFile): Suggestion[] {
+  if (!vfile.messages && vfile.messages.length) {
+    return [];
+  }
+  return vfile.messages.map((vmessage) => {
+    const suggestedReplacements = vmessage.message.match(/`([^`]*)`/g).map((s) => s.replace(/`/g, ''));
+    const problematicTerm = suggestedReplacements.shift();
+    return {
+      start: vmessage.location.start.offset,
+      stop: vmessage.location.end.offset,
+      id: vmessage.name + problematicTerm,
+      problematicTerm,
+      suggestedReplacements,
+      explanation: vmessage.message,
+    };
+  });
+}
+
 async function parseAndAddSuggestions(element: HTMLElement | Node, editor: Editor, processor: Processor): Promise<void> {
   const doc = element.ownerDocument;
   const text = element.textContent;
-  const wordToReplace = 'poop';
   const parent = element.parentNode;
 
-  const messages: VFile = await processor.process(text);
-  console.log(messages);
+  const vfile: VFile = await processor.process(text);
+  console.log(vfile);
+  const suggestions: Suggestion[] = getSuggestions(vfile);
 
-  if (text.includes(wordToReplace) && !(parent as HTMLElement).className.includes('inclusion-helper-warning')) {
+  if (suggestions.length && !(parent as HTMLElement).className.includes('inclusion-helper-warning')) {
+    // for reach suggestion, splice it into the thing
+    const offset = getSelection(doc, element);
+
+    splitIntoNodes(suggestions, text, doc, editor).forEach((node) => parent.insertBefore(node, element as ChildNode));
+
     parent.removeChild(element);
-    const [leftText, rightText] = text.split(wordToReplace);
-    if (leftText) {
-      parent.appendChild(doc.createTextNode(leftText));
-    }
-    parent.appendChild(makeWarningElement(doc, wordToReplace, editor));
-    if (rightText) {
-      parent.appendChild(doc.createTextNode(rightText));
-    }
+
+    setSelection(doc, offset, parent);
+    // reset selection
   }
 }
 
-function makeWarningElement(document: Document, word: string, editor: Editor): HTMLElement {
+function getSelection(doc: Document, element) {
+  const selection: Selection = doc.getSelection();
+  return selection.focusNode === element ? selection.focusOffset : -1;
+}
+
+function setSelection(doc: Document, location: number, parent: Node & ParentNode) {
+  if (location === -1) {
+    return;
+  }
+  let offset = 0;
+  flattenChildNodes(parent)
+    .filter((node: Node) => node.nodeType === Node.TEXT_NODE)
+    .forEach((node) => {
+      const width = node.textContent.length;
+      if (location > offset && location < offset + width) {
+        // set that mothafuckin range
+        const range = document.createRange();
+        range.setStart(node, location - offset);
+        range.collapse(true);
+        const selection = doc.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      offset += width;
+    });
+}
+
+function splitIntoNodes(suggestions: Suggestion[], text: string, doc, editor): (Node | HTMLElement)[] {
+  const nodes = [];
+  let index = 0;
+  suggestions.sort(suggestionSorter).forEach((suggestion) => {
+    if (index < suggestion.start) {
+      nodes.push(doc.createTextNode(text.slice(index, suggestion.start)));
+    }
+    nodes.push(makeWarningElement(doc, suggestion, editor));
+    index = suggestion.stop;
+  });
+
+  if (index < text.length) {
+    nodes.push(doc.createTextNode(text.slice(index)));
+  }
+
+  return nodes;
+}
+
+function suggestionSorter(a: Suggestion, b: Suggestion): number {
+  if (a.start < b.start) {
+    return -1;
+  }
+  if (a.start > b.start) {
+    return 1;
+  }
+  return 0;
+}
+
+function makeWarningElement(document: Document, suggestion: Suggestion, editor: Editor): HTMLElement {
   const warning = document.createElement('span');
-  const textNodeForMatchedWord = document.createTextNode(word);
+  const textNodeForMatchedWord = document.createTextNode(suggestion.problematicTerm);
 
   warning.appendChild(textNodeForMatchedWord);
 
   const inclusionArgs: InclusionSuggestionArgs = {
     offset: 50,
-    suggestions: 'something other than poop',
-    word: 'poop',
+    suggestion,
   };
 
   warning.onclick = () => {
@@ -99,6 +191,7 @@ function makeWarningElement(document: Document, word: string, editor: Editor): H
 
   const spanAttributes = {
     style,
+    id: suggestion.id,
     class: 'inclusion-helper-warning',
   };
   Object.entries(spanAttributes).forEach(([key, value]) => {
