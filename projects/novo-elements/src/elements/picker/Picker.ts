@@ -191,10 +191,10 @@ export class NovoPickerElement implements OnInit {
     return this.container && this.container.panelOpen;
   }
 
-  private show(term?: string): void {
+  private show(term?: string, resetPage?: boolean): void {
     this.openPanel();
     // Show the results inside
-    this.showResults(term);
+    this.showResults(term, resetPage);
   }
 
   onKeyDown(event: KeyboardEvent) {
@@ -259,16 +259,17 @@ export class NovoPickerElement implements OnInit {
    */
   onFocus(event) {
     if (!this.panelOpen) {
-      this.show();
+      this.show(this.term || '', true);
     }
     this.focus.emit(event);
   }
 
   // Creates an instance of the results (called popup) and adds all the bindings to that instance.
-  showResults(term?: any) {
+  showResults(term?: any, resetPage?: boolean) {
     // Update Matches
     if (this.popup) {
       // Update existing list or create the DOM element
+      this.popup.instance.page = resetPage ? 0 : this.popup.instance.page;
       this.popup.instance.config = this.config;
       this.popup.instance.term = this.term;
       this.popup.instance.selected = this.selected;
