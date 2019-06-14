@@ -36,7 +36,7 @@ declare var CKEDITOR: any;
 @Component({
   selector: 'novo-editor',
   providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
-  templateUrl: 'CKEditor.html',
+  templateUrl: './ck-editor.html',
 })
 export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlValueAccessor {
   @Input()
@@ -122,6 +122,10 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
       this.onTouched();
       this.change.emit(value);
     });
+  }
+
+  dismiss() {
+    this.hidePopover();
   }
   popover: PopOverContent;
 

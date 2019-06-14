@@ -5,9 +5,10 @@ import { CommonModule } from '@angular/common';
 // APP
 import { NovoCKEditorElement } from './CKEditor';
 import { NovoPopOverModule } from '../popover/PopOver.module';
+import { NovoButtonModule } from '../button/Button.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NovoPopOverModule],
+  imports: [CommonModule, FormsModule, NovoPopOverModule, NovoButtonModule],
   declarations: [NovoCKEditorElement],
   exports: [NovoCKEditorElement],
 })

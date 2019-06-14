@@ -16,6 +16,20 @@ novo-editor {
   }
 }
 
+.popover-text {
+  padding: 20px;
+  padding-bottom: 40px;
+}
+
+.popover-cta {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    flex-basis: 30%;
+    margin-right: 15%;
+  }
+}
+
 .cke_dialog_background_cover {
   background-color: $black !important;
 }

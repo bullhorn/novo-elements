@@ -17,7 +17,6 @@ export function init(editor: Editor): void {
     .use(stringify);
 
   editor.on('change', () => {
-    // const msgs = alex.html(editor.getData()).messages;
     const body = editor.document.$.body;
     walk(body, editor, processor);
   });
@@ -81,7 +80,10 @@ function getSuggestions(vfile: VFile): Suggestion[] {
       id: vmessage.name + problematicTerm,
       problematicTerm,
       suggestedReplacements,
-      explanation: vmessage.message,
+      explanation: `"${problematicTerm}" is potentially a less inclusive term than ${suggestedReplacements
+        .slice(0, -1)
+        .map((t) => `"${t}"`)
+        .join(', ')}, or ${suggestedReplacements.slice(-1).map((t) => `"${t}"`)}`,
     };
   });
 }
@@ -179,6 +181,7 @@ function makeWarningElement(document: Document, suggestion: Suggestion, editor: 
   };
   const spanStyles = {
     display: 'inline-block',
+    cursor: 'pointer',
     'border-bottom': '2px dashed gold',
     'border-right': '2px dashed gold',
     'font-style': 'normal',

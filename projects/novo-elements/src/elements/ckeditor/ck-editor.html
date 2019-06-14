@@ -1,0 +1,25 @@
+
+  <popover-content
+    #inclusionPopover
+    [title]="popoverTitle"
+    placement="right"
+    onclick="">
+    <div class="popover-text">
+      {{popoverText}}
+    </div>
+    <div class="popover-cta">
+        <button theme="secondary" (click)="dismiss()" side="right">Dismiss</button>
+        <button theme="primary" icon="check" side="right" (click)="changeTerm(suggestedReplacements[0])">Change</button>
+    </div>
+  </popover-content>
+<div
+[popover]="inclusionPopover"
+  [popoverDisabled]="true"
+  [popoverAlways]="shouldShowPopover"
+>
+<textarea
+[name]="name"
+[id]="name"
+#host>
+</textarea>
+</div>
