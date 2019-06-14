@@ -24,6 +24,7 @@ import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { Helpers } from '../../utils/Helpers';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { notify } from '../../utils/notifier/notifier.util';
+import { NovoControlConfig } from '../form/FormControls';
 
 // Value accessor for the component (supports ngModel)
 const PICKER_VALUE_ACCESSOR = {
@@ -81,7 +82,7 @@ export class NovoPickerElement implements OnInit {
   results: ViewContainerRef;
 
   @Input()
-  config: any;
+  config: NovoControlConfig['config'];
   @Input()
   placeholder: string;
   @Input()
@@ -191,10 +192,10 @@ export class NovoPickerElement implements OnInit {
     return this.container && this.container.panelOpen;
   }
 
-  private show(term?: string, resetPage?: boolean): void {
+  private show(term?: string): void {
     this.openPanel();
     // Show the results inside
-    this.showResults(term, resetPage);
+    this.showResults(term);
   }
 
   onKeyDown(event: KeyboardEvent) {
@@ -259,17 +260,16 @@ export class NovoPickerElement implements OnInit {
    */
   onFocus(event) {
     if (!this.panelOpen) {
-      this.show(this.term || '', true);
+      this.show();
     }
     this.focus.emit(event);
   }
 
   // Creates an instance of the results (called popup) and adds all the bindings to that instance.
-  showResults(term?: any, resetPage?: boolean) {
+  showResults(term?: any) {
     // Update Matches
     if (this.popup) {
       // Update existing list or create the DOM element
-      this.popup.instance.page = resetPage ? 0 : this.popup.instance.page;
       this.popup.instance.config = this.config;
       this.popup.instance.term = this.term;
       this.popup.instance.selected = this.selected;

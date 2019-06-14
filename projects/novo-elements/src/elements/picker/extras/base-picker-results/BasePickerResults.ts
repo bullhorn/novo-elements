@@ -5,6 +5,7 @@ import { Helpers } from '../../../../utils/Helpers';
 // Vendor
 import { from, Observable } from 'rxjs';
 import { OverlayRef } from '@angular/cdk/overlay';
+import { NovoControlConfig } from '../../../form/controls/BaseControl';
 
 /**
  * @name: PickerResults
@@ -20,7 +21,7 @@ export class BasePickerResults {
   hasError: boolean = false;
   isLoading: boolean = false;
   isStatic: boolean = true;
-  config: any;
+  _config: NovoControlConfig['config'];
   activeMatch: any;
   parent: any;
   element: ElementRef;
@@ -29,7 +30,7 @@ export class BasePickerResults {
   lastPage: boolean = false;
   autoSelectFirstOption: boolean = true;
   overlay: OverlayRef;
-
+  optionsCallHasChanged: boolean = false;
   private selectingMatches: boolean = false;
   private scrollHandler: any;
 
@@ -69,6 +70,7 @@ export class BasePickerResults {
     if (this.shouldSearch(value)) {
       this._term = value;
       this.page = 0;
+      this.optionsCallHasChanged = false;
       this.matches = [];
       this.processSearch(true);
     } else {
@@ -76,18 +78,22 @@ export class BasePickerResults {
     }
   }
 
+  set config(value: NovoControlConfig['config']) {
+    if (this.config && this.config.options !== value.options) {
+      this.optionsCallHasChanged = true; // reset page so that new options call is used to search
+    }
+    this._config = value;
+  }
+
+  get config(): NovoControlConfig['config'] {
+    return this._config;
+  }
+
   shouldSearch(value: unknown): boolean {
     const termHasChanged = value !== this._term;
     const optionsNotYetCalled = this.page === 0;
-    // problem here is that BasePickerResults has no way to know that this.config.options has changed
-    // out from under it due to field interactions
-    // so selecting a client corp, clicking in (and searching) on Billing Profile, then selecting a diff client corp
-    // then clicking back into Billing Profile, will mean that results for previous client corp show up
-    // *until search term changes*
-    // AFAIK there is no way to discern this state only using page, value, and term
-    const optionsCalledOnEmptyStringSearch = this.page === 0 && value === '';
 
-    return termHasChanged || optionsNotYetCalled || optionsCalledOnEmptyStringSearch;
+    return termHasChanged || optionsNotYetCalled || this.optionsCallHasChanged;
   }
 
   addScrollListener(): void {
