@@ -536,8 +536,8 @@ export class FieldInteractionApi {
   public modifyPickerConfig(key: string, args: ModifyPickerConfigArgs, mapper?: any): void {
     let control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
-      const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator } = control.config;
-      const optionsConfig = this.getOptionsConfig(args, mapper, filteredOptionsCreator);
+      const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator, format } = control.config;
+      const optionsConfig = this.getOptionsConfig(args, mapper, filteredOptionsCreator, format);
 
       const newConfig: NovoControlConfig['config'] = {
         ...(Number.isInteger(minSearchLength) && { minSearchLength }),
@@ -555,9 +555,10 @@ export class FieldInteractionApi {
     args: ModifyPickerConfigArgs,
     mapper?: (item: unknown) => unknown,
     filteredOptionsCreator?: (where: string) => (query: string) => Promise<unknown[]>,
+    pickerConfigFormat?: string,
   ): undefined | { options: unknown[] } | { options: OptionsFunction; format?: string } => {
     if (filteredOptionsCreator || 'optionsUrl' in args || 'optionsUrlBuilder' in args || 'optionsPromise' in args) {
-      const format = 'format' in args && args.format;
+      const format = ('format' in args && args.format) || pickerConfigFormat;
       return {
         options: this.createOptionsFunction(args, mapper, filteredOptionsCreator),
         ...(format && { format }),
