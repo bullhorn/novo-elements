@@ -10,3 +10,7 @@ Basic HTML editor using CK Editor.
 ##### Minimal Example
 
 <code-example example="minimal-editor"></code-example>
+
+##### Custom Config Example
+
+<code-example example="custom-editor"></code-example>

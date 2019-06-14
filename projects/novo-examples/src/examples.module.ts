@@ -68,6 +68,7 @@ import { DateTimeExample } from './form-controls/date-picker/date-time/date-time
 import { TimePickerExample } from './form-controls/date-picker/time-picker/time-picker-example';
 import { WeekStartExample } from './form-controls/date-picker/week-start/week-start-example';
 import { BasicEditorExample } from './form-controls/editor/basic-editor/basic-editor-example';
+import { CustomEditorExample } from './form-controls/editor/custom-editor/custom-editor-example';
 import { MinimalEditorExample } from './form-controls/editor/minimal-editor/minimal-editor-example';
 import { CustomTemplateExample } from './form-controls/form-groups/custom-template/custom-template-example';
 import { HorizontalOptionsExample } from './form-controls/form-groups/horizontal-options/horizontal-options-example';
@@ -600,6 +601,13 @@ export const EXAMPLE_COMPONENTS: { [key: string]: LiveExample } = {
     tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0D%0A%0D%0A%2F**%0D%0A%20*%20%40title%20Basic%20Editor%20Example%0D%0A%20*%2F%0D%0A%40Component(%7B%0D%0A%20%20selector%3A%20'basic-editor-example'%2C%0D%0A%20%20templateUrl%3A%20'basic-editor-example.html'%2C%0D%0A%20%20styleUrls%3A%20%5B'basic-editor-example.css'%5D%2C%0D%0A%7D)%0D%0Aexport%20class%20BasicEditorExample%20%7B%0D%0A%20%20public%20editorValue%3A%20string%20%3D%20'%3Cp%3EI%20AM%20A%20PRE-RENDERED%20VALUE%3C%2Fp%3E%3Ch1%3ETEST%3C%2Fh1%3E'%3B%0D%0A%0D%0A%20%20insertText(editor)%20%7B%0D%0A%20%20%20%20editor.insertText('Hello%20World')%3B%0D%0A%20%20%7D%0D%0A%7D%0D%0A`,
     cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0D%0A`,
     htmlSource: `%3Cnovo-editor%20%5Bname%5D%3D%22'demoEditor'%22%20%5B(ngModel)%5D%3D%22editorValue%22%20%23editor%3E%3C%2Fnovo-editor%3E%0D%0A%0D%0A%3Cbutton%20theme%3D%22primary%22%20(click)%3D%22insertText(editor)%22%3EInsert%20%22Hello%20World%22%20at%20Cursor%3C%2Fbutton%3E%0D%0A%0D%0A%3Cp%3EValue%3A%3C%2Fp%3E%0D%0A%3Cp%20%5BinnerHtml%5D%3D%22editorValue%22%3E%3C%2Fp%3E%0D%0A%0D%0A%3Cp%3EHTML%3A%3C%2Fp%3E%0D%0A%3Cpre%3E%3Ccode%3E%7B%7BeditorValue%7D%7D%3C%2Fcode%3E%3C%2Fpre%3E%0D%0A`,
+  },
+  'custom-editor': {
+    title: 'Custom Editor Example',
+    component: CustomEditorExample,
+    tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0D%0A%0D%0A%0D%0A%2F**%0D%0A%20*%20%40title%20Custom%20Editor%20Example%0D%0A%20*%2F%0D%0A%40Component(%7B%0D%0A%20%20selector%3A%20'custom-editor-example'%2C%0D%0A%20%20templateUrl%3A%20'custom-editor-example.html'%2C%0D%0A%20%20styleUrls%3A%20%5B'custom-editor-example.css'%5D%2C%0D%0A%7D)%0D%0Aexport%20class%20CustomEditorExample%20%7B%0D%0A%20%20public%20editorValue%3A%20string%20%3D%20'%3Cp%3EI%20AM%20A%20PRE-RENDERED%20VALUE%3C%2Fp%3E%3Ch1%3ETEST%3C%2Fh1%3E'%3B%0D%0A%20%20public%20config%3A%20object%20%3D%20%7B%0D%0A%20%20%20%20height%3A%20400%2C%0D%0A%20%20%20%20width%3A%20320%2C%0D%0A%20%20%20%20resize_enabled%3A%20false%2C%0D%0A%20%20%20%20uiColor%3A%20'%23AADC6E'%2C%0D%0A%20%20%20%20toolbar%3A%20%5B%7B%0D%0A%20%20%20%20%20%20items%3A%20%5B%0D%0A%20%20%20%20%20%20%20%20'Bold'%2C%0D%0A%20%20%20%20%20%20%20%20'Italic'%2C%0D%0A%20%20%20%20%20%20%20%20'Underline'%2C%0D%0A%20%20%20%20%20%20%20%20'Link'%2C%20%5D%2C%0D%0A%20%20%20%20%20%20%7D%2C%20%7B%0D%0A%20%20%20%20%20%20items%3A%20%5B%0D%0A%20%20%20%20%20%20%20%20'Cut'%2C%0D%0A%20%20%20%20%20%20%20%20'Copy'%2C%0D%0A%20%20%20%20%20%20%20%20'Paste'%2C%0D%0A%20%20%20%20%20%20%20%20'Undo'%2C%0D%0A%20%20%20%20%20%20%20%20'Redo'%2C%20%5D%2C%0D%0A%20%20%20%20%20%20%7D%2C%0D%0A%20%20%20%20%5D%2C%0D%0A%20%20%7D%3B%0D%0A%0D%0A%20%20insertText(editor)%20%7B%0D%0A%20%20%20%20editor.insertText('Hello%20World')%3B%0D%0A%20%20%7D%0D%0A%7D%0D%0A`,
+    cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0D%0A`,
+    htmlSource: `%3Cnovo-editor%20%5Bname%5D%3D%22'demoEditor'%22%20%5B(ngModel)%5D%3D%22editorValue%22%20%5Bconfig%5D%3D%22config%22%20%23editor%3E%3C%2Fnovo-editor%3E%0D%0A%0D%0A%3Cbutton%20theme%3D%22primary%22%20(click)%3D%22insertText(editor)%22%3EInsert%20%22Hello%20World%22%20at%20Cursor%3C%2Fbutton%3E%0D%0A%0D%0A%3Cp%3EValue%3A%3C%2Fp%3E%0D%0A%3Cp%20%5BinnerHtml%5D%3D%22editorValue%22%3E%3C%2Fp%3E%0D%0A%0D%0A%3Cp%3EHTML%3A%3C%2Fp%3E%0D%0A%3Cpre%3E%3Ccode%3E%7B%7BeditorValue%7D%7D%3C%2Fcode%3E%3C%2Fpre%3E%0D%0A`,
   },
   'minimal-editor': {
     title: 'Minimal Editor Example',
@@ -1441,6 +1449,7 @@ export const EXAMPLE_LIST = [
   TimePickerExample,
   WeekStartExample,
   BasicEditorExample,
+  CustomEditorExample,
   MinimalEditorExample,
   CustomTemplateExample,
   HorizontalOptionsExample,
