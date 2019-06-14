@@ -80,12 +80,25 @@ function getSuggestions(vfile: VFile): Suggestion[] {
       id: vmessage.name + problematicTerm,
       problematicTerm,
       suggestedReplacements,
-      explanation: `"${problematicTerm}" is potentially a less inclusive term than ${suggestedReplacements
-        .slice(0, -1)
-        .map((t) => `"${t}"`)
-        .join(', ')}, or ${suggestedReplacements.slice(-1).map((t) => `"${t}"`)}`,
+      explanation: makeExplanation(suggestedReplacements, problematicTerm),
     };
   });
+}
+
+function makeExplanation(suggestedReplacements: string[], problematicTerm: string): string {
+  let replacements;
+  if (suggestedReplacements.length === 1) {
+    replacements = suggestedReplacements.map((t) => `"${t}"`).pop();
+  } else if (suggestedReplacements.length === 2) {
+    replacements = suggestedReplacements.map((t) => `"${t}"`).join(' or ');
+  } else if (suggestedReplacements.length > 2) {
+    replacements = `${suggestedReplacements
+      .slice(0, -1)
+      .map((t) => `"${t}"`)
+      .join(', ')}, or ${suggestedReplacements.slice(-1).map((t) => `"${t}"`)}`;
+  }
+  return `"${problematicTerm}" is potentially a less inclusive term than ${replacements}`;
+
 }
 
 async function parseAndAddSuggestions(element: HTMLElement | Node, editor: Editor, processor: Processor): Promise<void> {
