@@ -64,7 +64,7 @@ export class FormUtils {
     'Placement',
   ];
 
-  constructor(public labels: NovoLabelService, public optionsService: OptionsService) { }
+  constructor(public labels: NovoLabelService, public optionsService: OptionsService) {}
 
   toFormGroup(controls: Array<any>): NovoFormGroup {
     let group: any = {};
@@ -268,7 +268,7 @@ export class FormUtils {
     } else if (optionsConfig) {
       controlConfig.config = {
         ...optionsConfig,
-        ...controlConfig && controlConfig.config,
+        ...(controlConfig && controlConfig.config),
       };
     }
 
@@ -635,8 +635,8 @@ export class FormUtils {
 
   setInitialValues(controls: Array<NovoControlConfig>, values: any, keepClean?: boolean, keyOverride?: string) {
     for (let i = 0; i < controls.length; i++) {
-      let control = controls[i];
-      let key = keyOverride ? control.key.replace(keyOverride, '') : control.key;
+      const control = controls[i];
+      const key = keyOverride ? control.key.replace(keyOverride, '') : control.key;
       let value = values[key];
 
       if (Helpers.isBlank(value)) {
@@ -660,6 +660,10 @@ export class FormUtils {
 
       if (Object.keys(value).length === 0 && value.constructor === Object) {
         continue;
+      }
+
+      if (control.dataType === 'Date' && typeof value === 'string' && control.optionsType !== 'skipConversion') {
+        value = dateFns.startOfDay(value);
       }
 
       control.value = value;
