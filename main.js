@@ -19364,7 +19364,7 @@ var FormUtils = /** @class */ (function () {
             };
         }
         else if (optionsConfig) {
-            controlConfig.config = Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__assign"])({}, optionsConfig, controlConfig && controlConfig.config);
+            controlConfig.config = Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__assign"])({}, optionsConfig, (controlConfig && controlConfig.config));
         }
         if (type === 'year') {
             controlConfig.maxlength = 4;
@@ -19849,6 +19849,9 @@ var FormUtils = /** @class */ (function () {
             }
             if (Object.keys(value).length === 0 && value.constructor === Object) {
                 continue;
+            }
+            if (control.dataType === 'Date' && typeof value === 'string' && control.optionsType !== 'skipConversion') {
+                value = Object(date_fns__WEBPACK_IMPORTED_MODULE_22__["startOfDay"])(value);
             }
             control.value = value;
             // TODO: keepClean is not required, but is always used. It should default (to true?)
