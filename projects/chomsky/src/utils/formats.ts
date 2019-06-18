@@ -82,14 +82,21 @@ export class Formats {
   }
 
   public formatTime(value: any, format?: string | Intl.DateTimeFormatOptions): string {
-    const _value = (value === null || value === undefined || value === '') ? new Date() : new Date(value);
-    let options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
-    let timeParts: { [p: string]: string } = Intl.DateTimeFormat([this.locale, 'en-US'], options).formatToParts(_value).reduce((obj, part) => {
-      obj[part.type] = part.value;
+    const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
+    const shortHands = mergeDeep({}, this.defaults.date);
+    let options: Intl.DateTimeFormatOptions = typeof format === 'string' ? shortHands[format] : format;
+    if (!options || Object.keys(options).length === 0) {
+      options = shortHands.dateShort;
+    }
+    if (this.use24HourTime) {
+      options.hour12 = false;
+    }
+    let timeParts: { [type: string]: string } =  Intl.DateTimeFormat([this.locale, 'en-US'], options).formatToParts(_value).reduce((obj, part) => {
+      obj[part.type] = part.value
       return obj;
     }, {});
-    const dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
-    return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
+    const dayPeriod = timeParts.dayPeriod ? timeParts.dayPeriod : '';
+    return `${timeParts.hour}:${timeParts.minute}${dayPeriod}`;
   }
 
   public format(value: string, format?: string): string {
