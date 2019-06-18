@@ -1,5 +1,6 @@
 import { mergeDeep } from './object-assign-deep';
 import { currencyOverridesMap } from './currency-overrides';
+import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
 // Interface for defaults
 export interface IFormatDefaults {
@@ -86,8 +87,10 @@ export class Formats {
     if (this.use24HourTime) {
       options.hour12 = false;
     }
-    let timeResult: { [type: string]: string }[] =  Intl.DateTimeFormat([this.locale, 'en-US'], options).formatToParts(_value).map(part => ({[part.type]: part.value}));
-    const timeParts = Object.assign({}, ...timeResult);
+    let timeParts: { [type: string]: string } =  Intl.DateTimeFormat([this.locale, 'en-US'], options).formatToParts(_value).reduce((obj, part) => {
+      obj[part.type] = part.value
+      return obj;
+    }, {});
     const dayPeriod = timeParts.dayPeriod ? timeParts.dayPeriod : '';
     return `${timeParts.hour}:${timeParts.minute}${dayPeriod}`;
   }
