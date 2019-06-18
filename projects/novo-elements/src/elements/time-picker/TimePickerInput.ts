@@ -196,7 +196,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     if (!value) {
       return '';
     }
-    let format = this.labels.formatDateWithFormat(value, {
+    let format = this.labels.formatTimeWithFormat(value, {
       hour: '2-digit',
       minute: '2-digit',
       hour12: !this.military,
