@@ -16,8 +16,7 @@ import { NovoControlConfig } from '../../../form/controls/BaseControl';
 export class BasePickerResults {
   _term: string = '';
   selected: Array<any> = [];
-  @Input()
-  matches: any = [];
+  @Input() matches: any = [];
   hasError: boolean = false;
   isLoading: boolean = false;
   isStatic: boolean = true;
@@ -30,7 +29,7 @@ export class BasePickerResults {
   lastPage: boolean = false;
   autoSelectFirstOption: boolean = true;
   overlay: OverlayRef;
-  optionsCallHasChanged: boolean = false;
+  optionsFunctionHasChanged: boolean = false;
   private selectingMatches: boolean = false;
   private scrollHandler: any;
 
@@ -70,7 +69,7 @@ export class BasePickerResults {
     if (this.shouldSearch(value)) {
       this._term = value;
       this.page = 0;
-      this.optionsCallHasChanged = false;
+      this.optionsFunctionHasChanged = false;
       this.matches = [];
       this.processSearch(true);
     } else {
@@ -80,7 +79,7 @@ export class BasePickerResults {
 
   set config(value: NovoControlConfig['config']) {
     if (this.config && this.config.options !== value.options) {
-      this.optionsCallHasChanged = true; // reset page so that new options call is used to search
+      this.optionsFunctionHasChanged = true; // reset page so that new options call is used to search
     }
     this._config = value;
   }
@@ -93,7 +92,7 @@ export class BasePickerResults {
     const termHasChanged = value !== this._term;
     const optionsNotYetCalled = this.page === 0;
 
-    return termHasChanged || optionsNotYetCalled || this.optionsCallHasChanged;
+    return termHasChanged || optionsNotYetCalled || this.optionsFunctionHasChanged;
   }
 
   addScrollListener(): void {

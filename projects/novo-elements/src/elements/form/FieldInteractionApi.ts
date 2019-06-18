@@ -533,7 +533,16 @@ export class FieldInteractionApi {
     }
   }
 
-  public modifyPickerConfig(key: string, args: ModifyPickerConfigArgs, mapper?: any): void {
+  public modifyPickerConfig(
+    key: string,
+    config: { format?: string; optionsUrl?: string; optionsUrlBuilder?: Function; optionsPromise?: any; options?: any[] },
+    mapper?: any,
+  ): void {
+    // call another public method to avoid a breaking change but still enable stricter types
+    this.mutatePickerConfig(key, config as ModifyPickerConfigArgs, mapper);
+  }
+
+  public mutatePickerConfig(key: string, args: ModifyPickerConfigArgs, mapper?: (item: unknown) => unknown): void {
     let control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator, format } = control.config;

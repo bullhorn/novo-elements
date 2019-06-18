@@ -70,7 +70,7 @@ describe('FieldInteractionApi', () => {
       expect(spy).toHaveBeenCalled();
       done();
     });
-    it('uses the optionsURLBuilder if included and no optionsPromise', async (done) => {
+    it('uses the optionsURLBuilder if included and not optionsUrl', async (done) => {
       const args: ModifyPickerConfigArgs = {
         optionsUrlBuilder: (query) => `asdf${query}`,
         optionsUrl: 'fake/url',
