@@ -265,11 +265,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   get showCount() {
     let charCount: boolean =
-      (this.form.controls[this.control.key].maxlength &&
-        this.focused &&
+      this.focused &&
+      ((this.form.controls[this.control.key].maxlength &&
         (this.form.controls[this.control.key].controlType === 'text-area' ||
           this.form.controls[this.control.key].controlType === 'textbox')) ||
-      (this.form.controls[this.control.key].maxlength && this.form.controls[this.control.key].controlType === 'picker');
+        (this.form.controls[this.control.key].maxlength && this.form.controls[this.control.key].controlType === 'picker'));
     return this._showCount || charCount;
   }
 
