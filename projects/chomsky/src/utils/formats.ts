@@ -76,6 +76,22 @@ export class Formats {
     return new Intl.DateTimeFormat([this.locale, 'en-US'], options).format(_value);
   }
 
+  public formatTime(value: any, format?: string | Intl.DateTimeFormatOptions): string {
+    const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
+    const shortHands = mergeDeep({}, this.defaults.date);
+    let options: Intl.DateTimeFormatOptions = typeof format === 'string' ? shortHands[format] : format;
+    if (!options || Object.keys(options).length === 0) {
+      options = shortHands.dateShort;
+    }
+    if (this.use24HourTime) {
+      options.hour12 = false;
+    }
+    let timeResult: { [type: string]: string }[] =  Intl.DateTimeFormat([this.locale, 'en-US'], options).formatToParts(_value).map(part => ({[part.type]: part.value}));
+    const timeParts = Object.assign({}, ...timeResult);
+    const dayPeriod = timeParts.dayPeriod ? timeParts.dayPeriod : '';
+    return `${timeParts.hour}:${timeParts.minute}${dayPeriod}`;
+  }
+
   public format(value: string, format?: string): string {
     if (!value) {
       return value;
