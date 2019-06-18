@@ -209,7 +209,7 @@ export class Chomsky {
     return this.formats.formatDate(date, format);
   }
 
-  public formatTime(date: any, format?: string | Intl.DateTimeFormatOptions): any {
+  public formatTime(date: any, format?: string | Intl.DateTimeFormatOptions): string {
     return this.formats.formatTime(date, format);
   }
 
