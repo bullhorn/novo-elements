@@ -83,14 +83,7 @@ export class Formats {
 
   public formatTime(value: any, format?: string | Intl.DateTimeFormatOptions): string {
     const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
-    const shortHands = mergeDeep({}, this.defaults.date);
-    let options: Intl.DateTimeFormatOptions = typeof format === 'string' ? shortHands[format] : format;
-    if (!options || Object.keys(options).length === 0) {
-      options = shortHands.dateShort;
-    }
-    if (this.use24HourTime) {
-      options.hour12 = false;
-    }
+    let options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
     let timeParts: { [type: string]: string } =  Intl.DateTimeFormat([this.locale, 'en-US'], options).formatToParts(_value).reduce((obj, part) => {
       obj[part.type] = part.value
       return obj;
