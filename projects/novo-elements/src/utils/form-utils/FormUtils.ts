@@ -446,6 +446,18 @@ export class FormUtils {
     return control;
   }
 
+  private shouldCreateControl(field): boolean {
+    if (field.systemRequired) {
+      field.readOnly = false;
+    }
+
+    return (
+      field.name !== 'id' &&
+      (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
+      !field.readOnly
+    );
+  }
+
   toControls(
     meta,
     currencyFormat,
@@ -458,11 +470,7 @@ export class FormUtils {
     if (meta && meta.fields) {
       let fields = meta.fields;
       fields.forEach((field) => {
-        if (
-          field.name !== 'id' &&
-          (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
-          !field.readOnly
-        ) {
+        if (this.shouldCreateControl(field)) {
           let control = this.getControlForField(field, http, config, overrides, forTable);
           // Set currency format
           if (control.subType === 'currency') {
@@ -557,11 +565,7 @@ export class FormUtils {
         });
       }
       fields.forEach((field) => {
-        if (
-          field.name !== 'id' &&
-          (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
-          !field.readOnly
-        ) {
+        if (this.shouldCreateControl(field)) {
           const fieldData: any = data && data[field.name] ? data[field.name] : null;
           let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
           // Set currency format
