@@ -82,7 +82,7 @@ export class Formats {
   }
 
   public formatTime(value: any, format?: string | Intl.DateTimeFormatOptions): string {
-    const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
+    const _value = (value === null || value === undefined || value === '') ? new Date() : new Date(value);
     let options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
     let timeParts: { [p: string]: string } = Intl.DateTimeFormat([this.locale, 'en-US'], options).formatToParts(_value).reduce((obj, part) => {
       obj[part.type] = part.value;
