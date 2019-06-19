@@ -5,6 +5,7 @@ import { Helpers } from '../../../../utils/Helpers';
 // Vendor
 import { from, Observable } from 'rxjs';
 import { OverlayRef } from '@angular/cdk/overlay';
+import { NovoControlConfig } from '../../../form/controls/BaseControl';
 
 /**
  * @name: PickerResults
@@ -15,12 +16,11 @@ import { OverlayRef } from '@angular/cdk/overlay';
 export class BasePickerResults {
   _term: string = '';
   selected: Array<any> = [];
-  @Input()
-  matches: any = [];
+  @Input() matches: any = [];
   hasError: boolean = false;
   isLoading: boolean = false;
   isStatic: boolean = true;
-  config: any;
+  _config: NovoControlConfig['config'];
   activeMatch: any;
   parent: any;
   element: ElementRef;
@@ -29,7 +29,7 @@ export class BasePickerResults {
   lastPage: boolean = false;
   autoSelectFirstOption: boolean = true;
   overlay: OverlayRef;
-
+  optionsFunctionHasChanged: boolean = false;
   private selectingMatches: boolean = false;
   private scrollHandler: any;
 
@@ -69,6 +69,7 @@ export class BasePickerResults {
     if (this.shouldSearch(value)) {
       this._term = value;
       this.page = 0;
+      this.optionsFunctionHasChanged = false;
       this.matches = [];
       this.processSearch(true);
     } else {
@@ -76,12 +77,22 @@ export class BasePickerResults {
     }
   }
 
+  set config(value: NovoControlConfig['config']) {
+    if (this.config && this.config.options !== value.options) {
+      this.optionsFunctionHasChanged = true; // reset page so that new options call is used to search
+    }
+    this._config = value;
+  }
+
+  get config(): NovoControlConfig['config'] {
+    return this._config;
+  }
+
   shouldSearch(value: unknown): boolean {
     const termHasChanged = value !== this._term;
     const optionsNotYetCalled = this.page === 0;
-    const optionsCalledOnEmptyStringSearch = !termHasChanged && this.page > 0 && value === '';
 
-    return termHasChanged || optionsNotYetCalled || optionsCalledOnEmptyStringSearch;
+    return termHasChanged || optionsNotYetCalled || this.optionsFunctionHasChanged;
   }
 
   addScrollListener(): void {

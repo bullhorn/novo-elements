@@ -24,6 +24,7 @@ import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { Helpers } from '../../utils/Helpers';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { notify } from '../../utils/notifier/notifier.util';
+import { NovoControlConfig } from '../form/FormControls';
 
 // Value accessor for the component (supports ngModel)
 const PICKER_VALUE_ACCESSOR = {
@@ -81,7 +82,7 @@ export class NovoPickerElement implements OnInit {
   results: ViewContainerRef;
 
   @Input()
-  config: any;
+  config: NovoControlConfig['config'];
   @Input()
   placeholder: string;
   @Input()

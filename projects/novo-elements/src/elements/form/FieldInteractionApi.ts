@@ -14,26 +14,28 @@ import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { IFieldInteractionEvent } from './FormInterfaces';
+import { ModifyPickerConfigArgs, OptionsFunction, CustomHttp } from './FieldInteractionApiTypes';
+import { Observable, Subscription } from 'rxjs';
 
-class CustomHttp {
+class CustomHttpImpl implements CustomHttp {
   url: string;
   options: any;
-  mapFn: any = (x) => x;
+  mapFn = (x) => x;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  get(url: string, options?: any) {
+  get(url: string, options?: any): CustomHttp {
     this.url = url;
     this.options = options;
     return this;
   }
 
-  map(mapFn: any) {
+  map(mapFn): CustomHttp {
     this.mapFn = mapFn;
     return this;
   }
 
-  subscribe(resolve: any, reject?: any) {
+  subscribe(resolve: any, reject?: any): Subscription {
     return this.http
       .get(this.url, this.options)
       .pipe(map(this.mapFn))
@@ -62,7 +64,7 @@ export class FieldInteractionApi {
     private formUtils: FormUtils,
     private http: HttpClient,
     private labels: NovoLabelService,
-  ) { }
+  ) {}
 
   set form(form: any) {
     this._form = form;
@@ -536,44 +538,79 @@ export class FieldInteractionApi {
     config: { format?: string; optionsUrl?: string; optionsUrlBuilder?: Function; optionsPromise?: any; options?: any[] },
     mapper?: any,
   ): void {
+    // call another public method to avoid a breaking change but still enable stricter types
+    this.mutatePickerConfig(key, config as ModifyPickerConfigArgs, mapper);
+  }
+
+  public mutatePickerConfig(key: string, args: ModifyPickerConfigArgs, mapper?: (item: unknown) => unknown): void {
     let control = this.getControl(key);
-    const { minSearchLength } = control.config;
     if (control && !control.restrictFieldInteractions) {
+      const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator, format } = control.config;
+      const optionsConfig = this.getOptionsConfig(args, mapper, filteredOptionsCreator, format);
 
       const newConfig: NovoControlConfig['config'] = {
         ...(Number.isInteger(minSearchLength) && { minSearchLength }),
+        ...(enableInfiniteScroll && { enableInfiniteScroll }),
+        ...(filteredOptionsCreator && { filteredOptionsCreator }),
+        ...(optionsConfig && optionsConfig),
         resultsTemplate: control.config.resultsTemplate,
       };
-      if (config.optionsUrl || config.optionsUrlBuilder || config.optionsPromise) {
-        newConfig.options = (query) => {
-          if (config.optionsPromise) {
-            return config.optionsPromise(query, new CustomHttp(this.http));
-          }
-          return new Promise((resolve, reject) => {
-            let url = config.optionsUrlBuilder ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
-            this.http
-              .get(url)
-              .pipe(
-                map((results: any[]) => {
-                  if (mapper) {
-                    return results.map(mapper);
-                  }
-                  return results;
-                }),
-              )
-              .subscribe(resolve, reject);
-          });
-        };
-        if (config.hasOwnProperty('format')) {
-          newConfig.format = config.format;
-        }
-      } else if (config.options) {
-        newConfig.options = [...config.options];
-      }
+
       this.setProperty(key, 'config', newConfig);
-      this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: config });
+      this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: args });
     }
   }
+  getOptionsConfig = (
+    args: ModifyPickerConfigArgs,
+    mapper?: (item: unknown) => unknown,
+    filteredOptionsCreator?: (where: string) => (query: string) => Promise<unknown[]>,
+    pickerConfigFormat?: string,
+  ): undefined | { options: unknown[] } | { options: OptionsFunction; format?: string } => {
+    if (filteredOptionsCreator || 'optionsUrl' in args || 'optionsUrlBuilder' in args || 'optionsPromise' in args) {
+      const format = ('format' in args && args.format) || pickerConfigFormat;
+      return {
+        options: this.createOptionsFunction(args, mapper, filteredOptionsCreator),
+        ...(format && { format }),
+      };
+    } else if ('options' in args && Array.isArray(args.options)) {
+      return {
+        options: [...args.options],
+      };
+    } else {
+      return undefined;
+    }
+  };
+
+  createOptionsFunction = (
+    config: ModifyPickerConfigArgs,
+    mapper?: (item: unknown) => unknown,
+    filteredOptionsCreator?: (where?: string) => ((query: string, page?: number) => Promise<unknown[]>),
+  ): ((query: string) => Promise<unknown[]>) => (query: string, page?: number) => {
+    if (filteredOptionsCreator) {
+      if ('where' in config) {
+        return filteredOptionsCreator(config.where)(query, page);
+      } else {
+        return filteredOptionsCreator()(query, page);
+      }
+    } else if ('optionsPromise' in config && config.optionsPromise) {
+      return config.optionsPromise(query, new CustomHttpImpl(this.http));
+    } else if (('optionsUrlBuilder' in config && config.optionsUrlBuilder) || ('optionsUrl' in config && config.optionsUrl)) {
+      return new Promise((resolve, reject) => {
+        const url = 'optionsUrlBuilder' in config ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
+        this.http
+          .get(url)
+          .pipe(
+            map((results: unknown[]) => {
+              if (mapper) {
+                return results.map(mapper);
+              }
+              return results;
+            }),
+          )
+          .subscribe(resolve, reject);
+      });
+    }
+  };
 
   public setLoading(key: string, loading: boolean) {
     let control = this.getControl(key);
