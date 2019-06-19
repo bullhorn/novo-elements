@@ -54,6 +54,7 @@ export class DataTableSource<T> extends DataSource<T> {
       }),
       map((data: { results: T[]; total: number }) => {
         if (this.state.isForceRefresh) {
+          this.totalSet = false;
           this.state.isForceRefresh = false;
         }
         this.currentTotal = data.total;
