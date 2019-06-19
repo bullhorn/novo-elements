@@ -1,7 +1,7 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { Observable, merge, of } from 'rxjs';
-import { startWith, switchMap, map, catchError, distinctUntilChanged } from 'rxjs/operators';
+import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 
 import { DataTableState } from './state/data-table-state.service';
 import { IDataTableService } from './interfaces';
