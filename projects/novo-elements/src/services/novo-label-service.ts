@@ -154,11 +154,11 @@ export class NovoLabelService {
       return value;
     }
     let timeParts: { [type: string]: string } =  Intl.DateTimeFormat(this.userLocale, format).formatToParts(date).reduce((obj, part) => {
-      obj[part.type] = part.value
+      obj[part.type] = part.value;
       return obj;
     }, {});
-    const dayPeriod = timeParts.dayPeriod ? timeParts.dayPeriod : '';
-    return `${timeParts.hour}:${timeParts.minute}${dayPeriod}`;
+    const dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
+    return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
   }
 
   getWeekdays(): string[] {
