@@ -31,7 +31,7 @@ describe('Formats', () => {
 
       formats.setLocale('en-US');
       const timeResult: string = formats.formatTime(date, options);
-      const result = timeResult.includes('AM') || timeResult.includes('PM')
+      const result = timeResult.includes('AM') || timeResult.includes('PM');
       expect(result).toBe(true);
     });
   });
