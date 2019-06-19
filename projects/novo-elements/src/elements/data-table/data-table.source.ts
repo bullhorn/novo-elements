@@ -1,7 +1,7 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { Observable, merge, of } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { startWith, switchMap, map, catchError, distinctUntilChanged } from 'rxjs/operators';
 
 import { DataTableState } from './state/data-table-state.service';
 import { IDataTableService } from './interfaces';
@@ -26,6 +26,14 @@ export class DataTableSource<T> extends DataSource<T> {
 
   constructor(private tableService: IDataTableService<T>, private state: DataTableState<T>, private ref: ChangeDetectorRef) {
     super();
+    this.connect().subscribe(() => {
+      if (!this.totalSet || this.currentTotal > this.total) {
+        this.total = this.currentTotal;
+        this.totalSet = true;
+      }
+      this.loading = false;
+      this.ref.markForCheck();
+    });
   }
 
   public connect(): Observable<any> {
@@ -45,9 +53,7 @@ export class DataTableSource<T> extends DataSource<T> {
         );
       }),
       map((data: { results: T[]; total: number }) => {
-        if (!this.totalSet || this.state.isForceRefresh) {
-          this.total = data.total;
-          this.totalSet = true;
+        if (this.state.isForceRefresh) {
           this.state.isForceRefresh = false;
         }
         this.currentTotal = data.total;
@@ -60,9 +66,7 @@ export class DataTableSource<T> extends DataSource<T> {
         setTimeout(() => {
           this.ref.markForCheck();
           setTimeout(() => {
-            this.loading = false;
             this.state.dataLoaded.next();
-            this.ref.markForCheck();
           });
         });
         return data.results;
