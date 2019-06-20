@@ -36,6 +36,8 @@ export { NovoExpansionModule } from './elements/expansion/expansion.module';
 export { NovoStepperModule } from './elements/stepper/stepper.module';
 export { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './elements/form/Form.module';
+export { NovoDynamicFormElement } from './elements/form/DynamicForm';
+export { NovoFieldset, IFieldInteractionEvent, FormField } from './elements/form/FormInterfaces';
 export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
 export { NovoCategoryDropdownModule } from './elements/category-dropdown/CategoryDropdown.module';
 export { NovoMultiPickerModule } from './elements/multi-picker/MultiPicker.module';
