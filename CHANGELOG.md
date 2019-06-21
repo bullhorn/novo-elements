@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.10.0"></a>
+# [3.10.0](https://github.com/bullhorn/novo-elements/compare/v3.9.0...v3.10.0) (2019-06-21)
+
+
+### Bug Fixes
+
+* **data-table:** novo-data-table empty state is unclickable ([#977](https://github.com/bullhorn/novo-elements/issues/977)) ([627bbe7](https://github.com/bullhorn/novo-elements/commit/627bbe7))
+
+
+### Features
+
+* **data-table:** added cell renderer to support decimal and negative… ([#973](https://github.com/bullhorn/novo-elements/issues/973)) ([ff56da1](https://github.com/bullhorn/novo-elements/commit/ff56da1))
+* **field-control:** system required fields should show ([#979](https://github.com/bullhorn/novo-elements/issues/979)) ([fd284ab](https://github.com/bullhorn/novo-elements/commit/fd284ab))
+* **pickers:** enable FieldInteractionAPI to create filtered options calls for pickers, allow pickers to infinitely scroll with zero-length search term ([#980](https://github.com/bullhorn/novo-elements/issues/980)) ([ff10011](https://github.com/bullhorn/novo-elements/commit/ff10011))
+
+
+
 <a name="3.9.0"></a>
 # [3.9.0](https://github.com/bullhorn/novo-elements/compare/v3.8.2...v3.9.0) (2019-05-28)
 
