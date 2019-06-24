@@ -489,6 +489,27 @@ var Formats = /** @class */ (function () {
             : currencyValue;
     };
     /**
+     * @param {?} format
+     * @return {?}
+     */
+    Formats.prototype.getDateOptions = /**
+     * @param {?} format
+     * @return {?}
+     */
+    function (format) {
+        /** @type {?} */
+        var shortHands = mergeDeep({}, this.defaults.date);
+        /** @type {?} */
+        var options = typeof format === 'string' ? shortHands[format] : format;
+        if (!options || Object.keys(options).length === 0) {
+            options = shortHands.dateShort;
+        }
+        if (this.use24HourTime) {
+            options.hour12 = false;
+        }
+        return options;
+    };
+    /**
      * @param {?} value
      * @param {?=} format
      * @return {?}
@@ -502,16 +523,32 @@ var Formats = /** @class */ (function () {
         /** @type {?} */
         var _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
         /** @type {?} */
-        var shortHands = mergeDeep({}, this.defaults.date);
-        /** @type {?} */
-        var options = typeof format === 'string' ? shortHands[format] : format;
-        if (!options || Object.keys(options).length === 0) {
-            options = shortHands.dateShort;
-        }
-        if (this.use24HourTime) {
-            options.hour12 = false;
-        }
+        var options = this.getDateOptions(format);
         return new Intl.DateTimeFormat([this.locale, 'en-US'], options).format(_value);
+    };
+    /**
+     * @param {?} value
+     * @param {?=} format
+     * @return {?}
+     */
+    Formats.prototype.formatTime = /**
+     * @param {?} value
+     * @param {?=} format
+     * @return {?}
+     */
+    function (value, format) {
+        /** @type {?} */
+        var _value = (value === null || value === undefined || value === '') ? new Date() : new Date(value);
+        /** @type {?} */
+        var options = this.getDateOptions(format);
+        /** @type {?} */
+        var timeParts = Intl.DateTimeFormat([this.locale, 'en-US'], options).formatToParts(_value).reduce(function (obj, part) {
+            obj[part.type] = part.value;
+            return obj;
+        }, {});
+        /** @type {?} */
+        var dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
+        return timeParts.hour + ":" + timeParts.minute + dayperiod;
     };
     /**
      * @param {?} value
@@ -889,6 +926,19 @@ var Chomsky = /** @class */ (function () {
      */
     function (date, format) {
         return this.formats.formatDate(date, format);
+    };
+    /**
+     * @param {?} date
+     * @param {?=} format
+     * @return {?}
+     */
+    Chomsky.prototype.formatTime = /**
+     * @param {?} date
+     * @param {?=} format
+     * @return {?}
+     */
+    function (date, format) {
+        return this.formats.formatTime(date, format);
     };
     /**
      * @param {?} value
@@ -3894,6 +3944,31 @@ var NovoLabelService = /** @class */ (function () {
             return value;
         }
         return new Intl.DateTimeFormat(this.userLocale, format$$1).format(date);
+    };
+    /**
+     * @param {?} value
+     * @param {?} format
+     * @return {?}
+     */
+    NovoLabelService.prototype.formatTimeWithFormat = /**
+     * @param {?} value
+     * @param {?} format
+     * @return {?}
+     */
+    function (value, format$$1) {
+        /** @type {?} */
+        var date = value instanceof Date ? value : new Date(value);
+        if (date.getTime() !== date.getTime()) {
+            return value;
+        }
+        /** @type {?} */
+        var timeParts = Intl.DateTimeFormat(this.userLocale, format$$1).formatToParts(date).reduce(function (obj, part) {
+            obj[part.type] = part.value;
+            return obj;
+        }, {});
+        /** @type {?} */
+        var dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
+        return timeParts.hour + ":" + timeParts.minute + dayperiod;
     };
     /**
      * @return {?}
@@ -16123,7 +16198,7 @@ var NovoTimePickerInputElement = /** @class */ (function () {
     function () {
         this.placeholder = this.military ? this.labels.timeFormatPlaceholder24Hour : this.labels.timeFormatPlaceholderAM;
         this.maskOptions = {
-            mask: this.military ? [/\d/, /\d/, ':', /\d/, /\d/] : [/\d/, /\d/, ':', /\d/, /\d/, ' ', /[aApP]/, /[mM]/],
+            mask: this.military ? [/\d/, /\d/, ':', /\d/, /\d/] : [/\d/, /\d/, ':', /\d/, /\d/, ' ', /[aApP上下]/, /[mM午]/],
             pipe: this.military ? text_mask_addons_dist_createAutoCorrectedDatePipe__WEBPACK_IMPORTED_MODULE_6___default()('HH:MM') : text_mask_addons_dist_createAutoCorrectedDatePipe__WEBPACK_IMPORTED_MODULE_6___default()('mm:MM'),
             keepCharPositions: false,
             guide: true,
@@ -16368,7 +16443,7 @@ var NovoTimePickerInputElement = /** @class */ (function () {
             return '';
         }
         /** @type {?} */
-        var format$$1 = this.labels.formatDateWithFormat(value, {
+        var format$$1 = this.labels.formatTimeWithFormat(value, {
             hour: '2-digit',
             minute: '2-digit',
             hour12: !this.military,
