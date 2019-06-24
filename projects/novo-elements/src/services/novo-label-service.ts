@@ -1,5 +1,12 @@
 // NG2
 import { Injectable, Inject, Optional, LOCALE_ID } from '@angular/core';
+import DateTimeFormatPart = Intl.DateTimeFormatPart;
+
+interface TimeFormatParts {
+  hour: string;
+  minute: string;
+  dayPeriod?: string;
+}
 
 @Injectable()
 export class NovoLabelService {
@@ -139,6 +146,19 @@ export class NovoLabelService {
       return value;
     }
     return new Intl.DateTimeFormat(this.userLocale, format).format(date);
+  }
+
+  formatTimeWithFormat(value: any, format: Intl.DateTimeFormatOptions): string {
+    let date = value instanceof Date ? value : new Date(value);
+    if (date.getTime() !== date.getTime()) {
+      return value;
+    }
+    let timeParts: { [type: string]: string } =  Intl.DateTimeFormat(this.userLocale, format).formatToParts(date).reduce((obj, part) => {
+      obj[part.type] = part.value;
+      return obj;
+    }, {});
+    const dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
+    return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
   }
 
   getWeekdays(): string[] {
