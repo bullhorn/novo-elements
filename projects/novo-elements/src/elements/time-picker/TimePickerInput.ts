@@ -80,7 +80,6 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   ngOnInit(): void {
     this.placeholder = this.military ? this.labels.timeFormatPlaceholder24Hour : this.labels.timeFormatPlaceholderAM;
     this.maskOptions = {
-      mask: this.military ? [/\d/, /\d/, ':', /\d/, /\d/] : [/\d/, /\d/, ':', /\d/, /\d/, ' ', /[aApP上下]/, /[mM午]/],
       pipe: this.military ? createAutoCorrectedDatePipe('HH:MM') : createAutoCorrectedDatePipe('mm:MM'),
       keepCharPositions: false,
       guide: true,
@@ -196,7 +195,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     if (!value) {
       return '';
     }
-    let format = this.labels.formatTimeWithFormat(value, {
+    let format = this.labels.formatDateWithFormat(value, {
       hour: '2-digit',
       minute: '2-digit',
       hour12: !this.military,
