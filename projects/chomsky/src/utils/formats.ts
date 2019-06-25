@@ -88,7 +88,7 @@ export class Formats {
       obj[part.type] = part.value;
       return obj;
     }, {});
-    const dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
+    const dayperiod = timeParts.dayPeriod || timeParts.dayperiod ? (timeParts.dayPeriod || timeParts.dayperiod) : '';
     return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
   }
 
