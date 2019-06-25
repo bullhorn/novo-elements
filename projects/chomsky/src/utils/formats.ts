@@ -88,8 +88,8 @@ export class Formats {
       obj[part.type] = part.value;
       return obj;
     }, {});
-    const dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
-    return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
+    const dayPeriod = timeParts.dayPeriod ? timeParts.dayPeriod : '';
+    return `${timeParts.hour}:${timeParts.minute} ${dayPeriod}`;
   }
 
   public format(value: string, format?: string): string {
