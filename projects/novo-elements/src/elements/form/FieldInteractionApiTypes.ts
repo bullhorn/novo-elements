@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 type OptionsFunctionConfig = {
   format?: string;
 } & (
-  | { where: string }
+  | { where: string; emptyPickerMessage?: string }
   | { optionsPromise: (query: string, http: CustomHttp) => Promise<unknown[]> }
   | { optionsUrl: string }
   | { optionsUrlBuilder: (query: string) => string });
