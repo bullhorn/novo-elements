@@ -63,7 +63,8 @@ export class Formats {
       : currencyValue;
   }
 
-  public getDateOptions(format) {
+  public formatDate(value: any, format?: string | Intl.DateTimeFormatOptions): string {
+    const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
     const shortHands = mergeDeep({}, this.defaults.date);
     let options: Intl.DateTimeFormatOptions = typeof format === 'string' ? shortHands[format] : format;
     if (!options || Object.keys(options).length === 0) {
@@ -72,24 +73,7 @@ export class Formats {
     if (this.use24HourTime) {
       options.hour12 = false;
     }
-    return options;
-  }
-
-  public formatDate(value: any, format?: string | Intl.DateTimeFormatOptions): string {
-    const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
-    let options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
     return new Intl.DateTimeFormat([this.locale, 'en-US'], options).format(_value);
-  }
-
-  public formatTime(value: any, format?: string | Intl.DateTimeFormatOptions): string {
-    const _value = (value === null || value === undefined || value === '') ? new Date() : new Date(value);
-    let options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
-    let timeParts: { [p: string]: string } = Intl.DateTimeFormat([this.locale, 'en-US'], options).formatToParts(_value).reduce((obj, part) => {
-      obj[part.type] = part.value;
-      return obj;
-    }, {});
-    const dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
-    return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
   }
 
   public format(value: string, format?: string): string {

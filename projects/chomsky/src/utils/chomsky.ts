@@ -209,10 +209,6 @@ export class Chomsky {
     return this.formats.formatDate(date, format);
   }
 
-  public formatTime(date: any, format?: string | Intl.DateTimeFormatOptions): string {
-    return this.formats.formatTime(date, format);
-  }
-
   public formatCurrency(value: any, format?: string | Intl.NumberFormatOptions): string {
     return this.formats.formatCurrency(value, format);
   }
