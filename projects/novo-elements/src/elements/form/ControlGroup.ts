@@ -115,7 +115,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   public toggled: boolean = false;
   public disabledArray: { edit: boolean; remove: boolean }[] = [];
 
-  private currentIndex: number = 0;
+  currentIndex = 0;
 
   constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef, private labels: NovoLabelService) {}
 
