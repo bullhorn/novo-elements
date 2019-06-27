@@ -545,13 +545,14 @@ export class FieldInteractionApi {
   public mutatePickerConfig(key: string, args: ModifyPickerConfigArgs, mapper?: (item: unknown) => unknown): void {
     let control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
-      const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator, format } = control.config;
+      const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator, format, getLabels } = control.config;
       const optionsConfig = this.getOptionsConfig(args, mapper, filteredOptionsCreator, format);
 
       const newConfig: NovoControlConfig['config'] = {
         ...(Number.isInteger(minSearchLength) && { minSearchLength }),
         ...(enableInfiniteScroll && { enableInfiniteScroll }),
         ...(filteredOptionsCreator && { filteredOptionsCreator }),
+        ...(getLabels && { getLabels }),
         ...(optionsConfig && optionsConfig),
         resultsTemplate: control.config.resultsTemplate,
       };
