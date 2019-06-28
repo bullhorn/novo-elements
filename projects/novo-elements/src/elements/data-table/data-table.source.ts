@@ -42,7 +42,9 @@ export class DataTableSource<T> extends DataSource<T> {
       startWith(null),
       switchMap(() => {
         this.pristine = false;
-        this.loading = true;
+          if (this.state.isForceRefresh || this.total === 0) {
+            this.loading = true;
+          }
         return this.tableService.getTableResults(
           this.state.sort,
           this.state.filter,
@@ -70,11 +72,11 @@ export class DataTableSource<T> extends DataSource<T> {
             this.state.dataLoaded.next();
           });
         });
+        this.loading = false;
         return data.results;
       }),
       catchError((err, caught) => {
         console.error(err, caught); // tslint: disable-line
-        this.loading = false;
         return of(null);
       }),
     );
