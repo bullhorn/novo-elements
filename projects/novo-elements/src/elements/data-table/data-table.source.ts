@@ -72,7 +72,6 @@ export class DataTableSource<T> extends DataSource<T> {
             this.state.dataLoaded.next();
           });
         });
-        this.loading = false;
         return data.results;
       }),
       catchError((err, caught) => {
