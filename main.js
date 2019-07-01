@@ -21388,11 +21388,11 @@ var FieldInteractionApi = /** @class */ (function () {
         /** @type {?} */
         var control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
-            var _a = control.config, minSearchLength = _a.minSearchLength, enableInfiniteScroll = _a.enableInfiniteScroll, filteredOptionsCreator = _a.filteredOptionsCreator, format$$1 = _a.format;
+            var _a = control.config, minSearchLength = _a.minSearchLength, enableInfiniteScroll = _a.enableInfiniteScroll, filteredOptionsCreator = _a.filteredOptionsCreator, format$$1 = _a.format, getLabels = _a.getLabels;
             /** @type {?} */
             var optionsConfig = this.getOptionsConfig(args, mapper, filteredOptionsCreator, format$$1);
             /** @type {?} */
-            var newConfig = Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__assign"])({}, (Number.isInteger(minSearchLength) && { minSearchLength: minSearchLength }), (enableInfiniteScroll && { enableInfiniteScroll: enableInfiniteScroll }), (filteredOptionsCreator && { filteredOptionsCreator: filteredOptionsCreator }), (optionsConfig && optionsConfig), { resultsTemplate: control.config.resultsTemplate });
+            var newConfig = Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__assign"])({}, (Number.isInteger(minSearchLength) && { minSearchLength: minSearchLength }), (enableInfiniteScroll && { enableInfiniteScroll: enableInfiniteScroll }), (filteredOptionsCreator && { filteredOptionsCreator: filteredOptionsCreator }), (getLabels && { getLabels: getLabels }), (optionsConfig && optionsConfig), { resultsTemplate: control.config.resultsTemplate });
             this.setProperty(key, 'config', newConfig);
             this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: args });
         }
