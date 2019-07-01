@@ -571,6 +571,7 @@ export class FieldInteractionApi {
       const format = ('format' in args && args.format) || pickerConfigFormat;
       return {
         options: this.createOptionsFunction(args, mapper, filteredOptionsCreator),
+        ...('emptyPickerMessage' in args && { emptyPickerMessage: args.emptyPickerMessage }),
         ...(format && { format }),
       };
     } else if ('options' in args && Array.isArray(args.options)) {
