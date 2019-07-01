@@ -48,8 +48,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   }
   private _vertical: boolean = false;
   // Hides/shows the add button for adding a new control
-  @Input()
-  add: NovoControlGroupAddConfig;
+  @Input() add: NovoControlGroupAddConfig;
   // Hide/shows the remove button for removing a control
   @Input()
   set remove(v: boolean) {
@@ -78,23 +77,17 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   }
   private _collapsible: boolean = false;
   // Main form group
-  @Input()
-  form: NovoFormGroup;
+  @Input() form: NovoFormGroup;
   // Controls for each item in the control group
-  @Input()
-  controls: BaseControl[];
+  @Input() controls: BaseControl[];
   // Key of the control group (on the main form)
-  @Input()
-  key: string;
+  @Input() key: string;
   // Label of the control group
-  @Input()
-  label: string;
+  @Input() label: string;
   // Description of the control group (only use with position:bottom Add button!)
-  @Input()
-  description: string;
+  @Input() description: string;
   // Message to display if there are no controls
-  @Input()
-  emptyMessage: string;
+  @Input() emptyMessage: string;
   // Icon of the control group (can have bhi prefix or not)
   @Input()
   set icon(v: string) {
@@ -105,30 +98,24 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   }
   private _icon: string;
   // The initial value object, will create the form rows off of
-  @Input()
-  initialValue: {}[];
+  @Input() initialValue: {}[];
   // Callback to determine if the user can edit
-  @Input()
-  canEdit: Function;
+  @Input() canEdit: Function;
   // Callback to determine if the user can delete
-  @Input()
-  canRemove: Function;
+  @Input() canRemove: Function;
   // Template for custom row rendering
-  @Input()
-  rowTemplate: TemplateRef<any>;
+  @Input() rowTemplate: TemplateRef<any>;
 
-  @Output()
-  public onRemove: EventEmitter<any> = new EventEmitter<any>();
-  @Output()
-  public onEdit: EventEmitter<any> = new EventEmitter<any>();
-  @Output()
-  public onAdd: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onRemove: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onEdit: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onAdd: EventEmitter<any> = new EventEmitter<any>();
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   public controlLabels: { value: string; width: number; required: boolean; key: string }[] = [];
   public toggled: boolean = false;
   public disabledArray: { edit: boolean; remove: boolean }[] = [];
 
-  private currentIndex: number = 0;
+  currentIndex = 0;
 
   constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef, private labels: NovoLabelService) {}
 
@@ -168,6 +155,10 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
       });
       this.ref.markForCheck();
     }
+  }
+
+  onChange(change: any): void {
+    this.change.emit(this);
   }
 
   public resetAddRemove(): void {
