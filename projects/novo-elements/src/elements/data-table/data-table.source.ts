@@ -1,18 +1,19 @@
-import { ChangeDetectorRef } from '@angular/core';
+import {ChangeDetectorRef, OnDestroy} from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
-import { Observable, merge, of } from 'rxjs';
+import {Observable, merge, of, Subscription} from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 
 import { DataTableState } from './state/data-table-state.service';
 import { IDataTableService } from './interfaces';
 
-export class DataTableSource<T> extends DataSource<T> {
+export class DataTableSource<T> extends DataSource<T> implements OnDestroy {
   public total = 0;
   public currentTotal = 0;
   public current = 0;
   public loading = false;
   public pristine = true;
   public data: T[];
+  private connectSub: Subscription;
 
   private totalSet: boolean = false;
 
@@ -26,6 +27,18 @@ export class DataTableSource<T> extends DataSource<T> {
 
   constructor(private tableService: IDataTableService<T>, private state: DataTableState<T>, private ref: ChangeDetectorRef) {
     super();
+    this.connectSub = this.connect().subscribe(() => {
+      if (!this.totalSet || this.currentTotal > this.total) {
+        this.total = this.currentTotal;
+        this.totalSet = true;
+      }
+      this.loading = false;
+      this.ref.markForCheck();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.connectSub.unsubscribe();
   }
 
   public connect(): Observable<any> {
@@ -34,7 +47,9 @@ export class DataTableSource<T> extends DataSource<T> {
       startWith(null),
       switchMap(() => {
         this.pristine = false;
-        this.loading = true;
+          if (this.state.isForceRefresh || this.total === 0) {
+            this.loading = true;
+          }
         return this.tableService.getTableResults(
           this.state.sort,
           this.state.filter,
@@ -45,9 +60,8 @@ export class DataTableSource<T> extends DataSource<T> {
         );
       }),
       map((data: { results: T[]; total: number }) => {
-        if (!this.totalSet || this.state.isForceRefresh) {
-          this.total = data.total;
-          this.totalSet = true;
+        if (this.state.isForceRefresh) {
+          this.totalSet = false;
           this.state.isForceRefresh = false;
         }
         this.currentTotal = data.total;
@@ -60,16 +74,13 @@ export class DataTableSource<T> extends DataSource<T> {
         setTimeout(() => {
           this.ref.markForCheck();
           setTimeout(() => {
-            this.loading = false;
             this.state.dataLoaded.next();
-            this.ref.markForCheck();
           });
         });
         return data.results;
       }),
       catchError((err, caught) => {
         console.error(err, caught); // tslint: disable-line
-        this.loading = false;
         return of(null);
       }),
     );
