@@ -547,7 +547,9 @@ var Formats = /** @class */ (function () {
             return obj;
         }, {});
         /** @type {?} */
-        var dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
+        var dayPeriodPropertyName = Object.keys(timeParts).find(function (n) { return n.toLowerCase() === 'dayperiod'; });
+        /** @type {?} */
+        var dayperiod = timeParts[dayPeriodPropertyName] || '';
         return timeParts.hour + ":" + timeParts.minute + dayperiod;
     };
     /**
