@@ -5,17 +5,8 @@ import { By } from '@angular/platform-browser';
 // App
 import { NovoAutoSize } from './Control';
 import { NovoControlElement } from './Control';
-import {NovoFormControl} from "./NovoFormControl";
-import {EntityPickerResult, FieldInteractionApi, NovoLabelService, NovoListElement, NovoTemplateService} from "../..";
-import {NovoLoadingElement} from "../loading/Loading";
-import {
-  NovoItemAvatarElement,
-  NovoItemContentElement,
-  NovoItemHeaderElement,
-  NovoItemTitleElement,
-  NovoListItemElement
-} from "../list/List";
-import {DateFormatService} from "../../services/date-format/DateFormat";
+import {FieldInteractionApi, NovoLabelService, NovoTemplateService} from '../..';
+import {DateFormatService} from '../../services/date-format/DateFormat';
 
 @Component({
   selector: 'novo-auto-size-test-component',
@@ -90,7 +81,7 @@ describe('Test Localization', () => {
   `
 })
 class TestComponent {}
-describe("NovoControlElement", () => {
+describe('NovoControlElement', () => {
   let component: NovoControlElement;
   let fixture: ComponentFixture<NovoControlElement>;
   beforeEach(() => {
@@ -137,23 +128,74 @@ describe("NovoControlElement", () => {
     expect(testBoolean).toEqual(false);
   });
 
-  it('should return true if the field has a MAX_LENGTH property but is not focused', () => {
+  it('should return true if the field has a MAX_LENGTH property and is focused', () => {
     // Arrange
     component.control = {
-      key: 0,
+      key: 'newField',
     };
     component.form = {
-      controls: [{
-        maxLength: 1,
-      }],
+      controls: {
+        newField: {
+          maxlength: 10,
+          controlType: 'textbox',
+        },
+      },
     };
 
-    (component as any)._focused = true;
+    // (component as any)._focused = true;
+    (component as any).handleFocus(new FocusEvent('input'));
 
     // Act
     let testBoolean = component.showCount;
 
     // Assert
     expect(testBoolean).toEqual(true);
+  });
+
+  it('should return false if the field does not have a MAX_LENGTH property and is focused', () => {
+    // Arrange
+    component.control = {
+      key: 'newField',
+    };
+    component.form = {
+      controls: {
+        newField: {
+          controlType: 'textbox',
+        },
+      },
+    };
+
+    // (component as any)._focused = true;
+    (component as any).handleFocus(new FocusEvent('input'));
+
+    // Act
+    let testBoolean = component.showCount;
+
+    // Assert
+    expect(testBoolean).toEqual(false);
+  });
+
+  it('should return false if the controlType of the field is not textbox, picker, or text-area', () => {
+    // Arrange
+    component.control = {
+      key: 'newField',
+    };
+    component.form = {
+      controls: {
+        newField: {
+          maxlength: 10,
+          controlType: 'test',
+        },
+      },
+    };
+
+    // (component as any)._focused = true;
+    (component as any).handleFocus(new FocusEvent('input'));
+
+    // Act
+    let testBoolean = component.showCount;
+
+    // Assert
+    expect(testBoolean).toEqual(false);
   });
 });
