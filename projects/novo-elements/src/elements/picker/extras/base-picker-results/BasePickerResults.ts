@@ -382,6 +382,14 @@ export class BasePickerResults {
   }
 
   preselected(match) {
+    if (this.config.preselected) {
+      let preselectedFunc: Function = this.config.preselected;
+      return (
+        this.selected.findIndex((item) => {
+        return preselectedFunc(match, item);
+      }) !== -1
+      );
+    }
     return (
       this.selected.findIndex((item) => {
         let isPreselected = false;
