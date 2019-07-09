@@ -118,7 +118,7 @@ import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
             </item>
           </list>
           <list *ngSwitchCase="'multi-select'">
-            <div class="dropdown-list-filter" (keydown)="multiSelectOptionFilterHandleKeydown($event)" #blah>
+            <div class="dropdown-list-filter" (keydown)="multiSelectOptionFilterHandleKeydown($event)">
               <item class="filter-search" keepOpen="true">
                 <input
                   [(ngModel)]="optionFilter"
