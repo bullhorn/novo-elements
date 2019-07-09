@@ -118,7 +118,7 @@ import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
             </item>
           </list>
           <list *ngSwitchCase="'multi-select'">
-            <div class="dropdown-list-filter" (keydown)="multiSelectOptionFilterHandleKeydown($event)">
+            <div class="dropdown-list-filter">
               <item class="filter-search" keepOpen="true">
                 <input
                   [(ngModel)]="optionFilter"
@@ -434,7 +434,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     }
   }
 
-  @HostListener('document:keydown', ['$event'])
+  @HostListener('keydown', ['$event'])
   public multiSelectOptionFilterHandleKeydown(event: KeyboardEvent) {
     if (this.multiSelect) {
       this.error = false;
