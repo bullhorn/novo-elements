@@ -272,6 +272,7 @@ export class NovoPickerElement implements OnInit {
       // Update existing list or create the DOM element
       this.popup.instance.config = this.config;
       this.popup.instance.term = this.term;
+      this.popup.instance.pickerLabel = this.config.label;
       this.popup.instance.selected = this.selected;
       this.popup.instance.autoSelectFirstOption = this.autoSelectFirstOption;
       this.ref.markForCheck();
