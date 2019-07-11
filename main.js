@@ -51065,7 +51065,7 @@ var NovoDataTableCellHeader = /** @class */ (function () {
         filterTemplate: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Input"] }],
         resizable: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["HostBinding"], args: ['class.resizable',] }],
         column: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Input"], args: ['novo-data-table-cell-config',] }],
-        multiSelectOptionFilterHandleKeydown: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["HostListener"], args: ['document:keydown', ['$event'],] }]
+        multiSelectOptionFilterHandleKeydown: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["HostListener"], args: ['keydown', ['$event'],] }]
     };
     return NovoDataTableCellHeader;
 }());
