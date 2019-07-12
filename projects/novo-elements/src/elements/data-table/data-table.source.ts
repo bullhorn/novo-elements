@@ -1,6 +1,6 @@
-import {ChangeDetectorRef, OnDestroy} from '@angular/core';
+import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
-import {Observable, merge, of, Subscription} from 'rxjs';
+import { Observable, merge, of, Subscription } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 
 import { DataTableState } from './state/data-table-state.service';
@@ -47,9 +47,7 @@ export class DataTableSource<T> extends DataSource<T> implements OnDestroy {
       startWith(null),
       switchMap(() => {
         this.pristine = false;
-          if (this.state.isForceRefresh || this.total === 0) {
-            this.loading = true;
-          }
+        this.loading = true;
         return this.tableService.getTableResults(
           this.state.sort,
           this.state.filter,
@@ -74,12 +72,14 @@ export class DataTableSource<T> extends DataSource<T> implements OnDestroy {
         setTimeout(() => {
           this.ref.markForCheck();
           setTimeout(() => {
+            this.loading = false;
             this.state.dataLoaded.next();
           });
         });
         return data.results;
       }),
       catchError((err, caught) => {
+        this.loading = false;
         console.error(err, caught); // tslint: disable-line
         return of(null);
       }),
