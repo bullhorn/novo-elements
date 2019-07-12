@@ -30,8 +30,6 @@ export class BasePickerResults {
   autoSelectFirstOption: boolean = true;
   overlay: OverlayRef;
   optionsFunctionHasChanged: boolean = false;
-
-  pickerLabel: string;
   private selectingMatches: boolean = false;
   private scrollHandler: any;
 
