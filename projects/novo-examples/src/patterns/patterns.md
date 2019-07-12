@@ -1,11 +1,11 @@
 Design Patterns
 ============================================================================================
 
-The following are examples of know composition patterns to create a common user exeperience.  The component library is design to be used in these patterns.
+The following are examples of know composition patterns to create a common user experience.  The component library is design to be used in these patterns.
 
 ## Activity Sections
 
-Displaying a series of list data in ... blah, blah, blah
+Displaying a series of lists in expandable sections, like in the activity tab.
 
 <code-example example="activity-section"></code-example>
 
