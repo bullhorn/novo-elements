@@ -14,13 +14,9 @@ export class NovoModalService {
     this._parentViewContainer = view;
   }
 
-  // open<T>(component: Type<T>, scope = {}) {
-  open(component, scope = {}) {
+  open<T>(component: Type<T>, scope = {}): NovoModalRef {
     if (!this._parentViewContainer) {
-      console.error(
-        'No parent view container specified for the ModalService. Set it inside your main application. \nthis.modalService.parentViewContainer = view (ViewContainerRef)',
-      );
-      return null;
+      throw new Error('No parent view container specified for the ModalService. Set it inside your main application. \nthis.modalService.parentViewContainer = view (ViewContainerRef)');
     }
 
     const modal = new NovoModalRef();
