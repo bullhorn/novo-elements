@@ -218,28 +218,13 @@ import { StaticDataTableService } from './services/static-data-table.service';
     </ng-template>
     <ng-template novoTemplate="dropdownCellTemplate" let-row let-col="col">
       <novo-dropdown parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
-        <button type="button" theme="dialogue" icon="collapse" inverse>{{ col.label }}</button>
+        <button type="button" theme="dialogue" [icon]="col.action.icon" inverse>{{ col.label }}</button>
         <list>
           <item
             *ngFor="let option of col?.action?.options"
             (action)="option.handlers.click({ originalEvent: $event?.originalEvent, row: row })"
             [disabled]="isDisabled(option, row)"
           >
-            <span [attr.data-automation-id]="option.label">{{ option.label }}</span>
-          </item>
-        </list>
-      </novo-dropdown>
-    </ng-template>
-    <ng-template novoTemplate="dropdownIconCellTemplate" let-row let-col="col">
-      <novo-dropdown parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
-        <button theme="dialogue" [icon]="col.action.icon"></button>
-        <list>
-          <item
-            *ngFor="let option of col?.action?.options"
-            (action)="option.handlers.click({ originalEvent: $event?.originalEvent, row: row })"
-            [disabled]="isDisabled(option, row)"
-          >
-            <i *ngIf="option.icon" class="bhi-{{option.icon}} data-table-icon"></i>
             <span [attr.data-automation-id]="option.label">{{ option.label }}</span>
           </item>
         </list>
@@ -684,12 +669,10 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
         } else {
           // Default to the defaulCellTemplate
           if (column.type === 'action') {
-            if (column.action && column.action.options && !column.label) {
+            if (column.action && column.action.options) {
               if (!column.action.icon) {
-                column.action.icon = 'more';
+                column.action.icon = 'collapse';
               }
-              templateName = 'dropdownIconCellTemplate';
-            } else if (column.action && column.action.options) {
               templateName = 'dropdownCellTemplate';
             } else {
               templateName = 'buttonCellTemplate';
