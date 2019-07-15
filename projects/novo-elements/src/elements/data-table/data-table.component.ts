@@ -230,6 +230,20 @@ import { StaticDataTableService } from './services/static-data-table.service';
         </list>
       </novo-dropdown>
     </ng-template>
+    <ng-template novoTemplate="dropdownIconCellTemplate" let-row let-col="col">
+      <novo-dropdown parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
+        <button theme="icon" [icon]="col.action.icon"></button>
+        <list>
+          <item
+            *ngFor="let option of col?.action?.options"
+            (action)="option.handlers.click({ originalEvent: $event?.originalEvent, row: row })"
+            [disabled]="isDisabled(option, row)"
+          >
+            <span [attr.data-automation-id]="option.label">{{ option.label }}</span>
+          </item>
+        </list>
+      </novo-dropdown>
+    </ng-template>
     <ng-template novoTemplate="defaultNoResultsMessage">
       <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
     </ng-template>
@@ -669,7 +683,12 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
         } else {
           // Default to the defaulCellTemplate
           if (column.type === 'action') {
-            if (column.action && column.action.options) {
+            if (column.action && column.action.options && !column.label) {
+              if (!column.action.icon) {
+                column.action.icon = 'more';
+              }
+              templateName = 'dropdownIconCellTemplate';
+            } else if (column.action && column.action.options) {
               templateName = 'dropdownCellTemplate';
             } else {
               templateName = 'buttonCellTemplate';
