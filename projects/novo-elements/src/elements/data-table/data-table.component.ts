@@ -232,13 +232,14 @@ import { StaticDataTableService } from './services/static-data-table.service';
     </ng-template>
     <ng-template novoTemplate="dropdownIconCellTemplate" let-row let-col="col">
       <novo-dropdown parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
-        <button theme="icon" [icon]="col.action.icon"></button>
+        <button theme="dialogue" [icon]="col.action.icon"></button>
         <list>
           <item
             *ngFor="let option of col?.action?.options"
             (action)="option.handlers.click({ originalEvent: $event?.originalEvent, row: row })"
             [disabled]="isDisabled(option, row)"
           >
+            <i *ngIf="option.icon" class="bhi-{{option.icon}} data-table-icon"></i>
             <span [attr.data-automation-id]="option.label">{{ option.label }}</span>
           </item>
         </list>
