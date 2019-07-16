@@ -570,7 +570,7 @@ export class FieldInteractionApi {
     }
 
     const config = {
-      ...(control && control.config),
+      ...control.config,
       ...properties,
     };
 
