@@ -563,7 +563,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public addPropertiesToPickerConfig(key: string, properties: { [key: string]: unknown }) {
+  addPropertiesToPickerConfig(key: string, properties: { [key: string]: unknown }) {
     let control = this.getControl(key);
     if (!control || control.restrictFieldInteractions) {
       return;
