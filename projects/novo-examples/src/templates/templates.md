@@ -2,31 +2,7 @@
 Bullhorn Application Templates
 ------------------
 
-## Example starter templates for your application
+Bullhorn provides customization of the user experience with custom tabs, custom cards, custom actions and more.
 
-### Email
-
-List App
-
-TODO: Add linked image
-
-
-### Form App
-
-form-based app template
-
-TODO: Add linked image
-
-
-### Custom Card Starter Template
-
-empty starter template
-
-TODO: Add linked image
-
-
-### Dashboard
-
-dashboard template
-
-TODO: Add linked image
+The [Bullhorn Extension Samples](https://github.com/bullhorn/extension-samples) repo
+provides several examples for getting started building custom apps using Novo Elements.

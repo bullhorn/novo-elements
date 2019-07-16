@@ -434,7 +434,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     }
   }
 
-  @HostListener('document:keydown', ['$event'])
+  @HostListener('keydown', ['$event'])
   public multiSelectOptionFilterHandleKeydown(event: KeyboardEvent) {
     if (this.multiSelect) {
       this.error = false;
