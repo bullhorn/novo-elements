@@ -152,6 +152,11 @@ describe('Elements: BasePickerResults', () => {
   });
 
   describe('Method: preselected()', () => {
+    beforeAll(() => {
+      component.config = {
+        preselected: undefined,
+      };
+    });
     it('should be defined.', () => {
       expect(component.preselected).toBeDefined();
       // component.preselected();
@@ -170,6 +175,14 @@ describe('Elements: BasePickerResults', () => {
       component.selected = [{ id: 1, value: 'test0' }, { id: 2, value: 'test1' }];
       expect(component.preselected({ value: 'test0' })).toEqual(true);
       expect(component.preselected({ value: 'not a match' })).toEqual(false);
+    });
+    it('should use custom preselect when applicable', () => {
+      component.config.preselected = (match, item) => {
+        return match.testVal === item.testVal;
+      };
+      component.selected = [{ id: 1, testVal: 'test0' }, { id: 2, testVal: 'test1' }];
+      expect(component.preselected({ testVal: 'test0' })).toEqual(true);
+      expect(component.preselected({ testVal: 'not a match' })).toEqual(false);
     });
   });
 });
