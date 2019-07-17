@@ -47,7 +47,7 @@ export class DataTableSource<T> extends DataSource<T> implements OnDestroy {
       startWith(null),
       switchMap(() => {
         this.pristine = false;
-          if (this.state.isForceRefresh || this.total === 0) {
+          if (this.state.isForceRefresh) {
             this.loading = true;
           }
         return this.tableService.getTableResults(
