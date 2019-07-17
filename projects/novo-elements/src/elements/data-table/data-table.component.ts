@@ -218,7 +218,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
     </ng-template>
     <ng-template novoTemplate="dropdownCellTemplate" let-row let-col="col">
       <novo-dropdown parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
-        <button type="button" theme="dialogue" icon="collapse" inverse>{{ col.label }}</button>
+        <button type="button" theme="dialogue" [icon]="col.action.icon" inverse>{{ col.label }}</button>
         <list>
           <item
             *ngFor="let option of col?.action?.options"
@@ -670,6 +670,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
           // Default to the defaulCellTemplate
           if (column.type === 'action') {
             if (column.action && column.action.options) {
+              if (!column.action.icon) {
+                column.action.icon = 'collapse';
+              }
               templateName = 'dropdownCellTemplate';
             } else {
               templateName = 'buttonCellTemplate';
