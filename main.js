@@ -8829,6 +8829,30 @@ var PickerResults = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
+    PickerResults.prototype.getEmptyMessage = /**
+     * @return {?}
+     */
+    function () {
+        if (this.shouldShowMessageForZeroLengthSearch()) {
+            // this property comes from Field Interactions
+            return this.config.emptyPickerMessage;
+        }
+        else {
+            return this.term === '' ? this.labels.pickerTextFieldEmpty : this.labels.pickerEmpty;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    PickerResults.prototype.shouldShowMessageForZeroLengthSearch = /**
+     * @return {?}
+     */
+    function () {
+        return this.config && this.config.minSearchLength === 0 && this.term === '' && this.config.emptyPickerMessage;
+    };
+    /**
+     * @return {?}
+     */
     PickerResults.prototype.getListElement = /**
      * @return {?}
      */
@@ -8841,7 +8865,7 @@ var PickerResults = /** @class */ (function (_super) {
                     host: {
                         class: 'active',
                     },
-                    template: "\n    <novo-list *ngIf=\"matches.length > 0\" direction=\"vertical\">\n      <novo-list-item\n        *ngFor=\"let match of matches\"\n        (click)=\"selectMatch($event)\"\n        [class.active]=\"match === activeMatch\"\n        (mouseenter)=\"selectActive(match)\"\n        [class.disabled]=\"preselected(match)\"\n      >\n        <item-content> <span [innerHtml]=\"highlight(match.label, term)\"></span> </item-content>\n      </novo-list-item>\n      <novo-loading *ngIf=\"isLoading && matches.length > 0\" theme=\"line\"></novo-loading>\n    </novo-list>\n    <div class=\"picker-loader\" *ngIf=\"isLoading && matches.length === 0\"><novo-loading theme=\"line\"></novo-loading></div>\n    <p class=\"picker-error\" *ngIf=\"hasError\">{{ labels.pickerError }}</p>\n    <p class=\"picker-null-results\" *ngIf=\"hasNonErrorMessage && term !== ''\">{{ labels.pickerEmpty }}</p>\n    <p class=\"picker-null-results\" *ngIf=\"hasNonErrorMessage && term === ''\">{{ labels.pickerTextFieldEmpty }}</p>\n  "
+                    template: "\n    <novo-list *ngIf=\"matches.length > 0\" direction=\"vertical\">\n      <novo-list-item\n        *ngFor=\"let match of matches\"\n        (click)=\"selectMatch($event)\"\n        [class.active]=\"match === activeMatch\"\n        (mouseenter)=\"selectActive(match)\"\n        [class.disabled]=\"preselected(match)\"\n      >\n        <item-content> <span [innerHtml]=\"highlight(match.label, term)\"></span> </item-content>\n      </novo-list-item>\n      <novo-loading *ngIf=\"isLoading && matches.length > 0\" theme=\"line\"></novo-loading>\n    </novo-list>\n    <div class=\"picker-loader\" *ngIf=\"isLoading && matches.length === 0\"><novo-loading theme=\"line\"></novo-loading></div>\n    <p class=\"picker-error\" *ngIf=\"hasError\">{{ labels.pickerError }}</p>\n    <p class=\"picker-null-results\" *ngIf=\"hasNonErrorMessage\">{{ getEmptyMessage() }}</p>\n  "
                 }] }
     ];
     /** @nocollapse */
