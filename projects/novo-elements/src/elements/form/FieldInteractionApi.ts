@@ -545,10 +545,11 @@ export class FieldInteractionApi {
   public mutatePickerConfig(key: string, args: ModifyPickerConfigArgs, mapper?: (item: unknown) => unknown): void {
     let control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
-      const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator, format, getLabels } = control.config;
+      const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator, format, getLabels, emptyPickerMessage } = control.config;
       const optionsConfig = this.getOptionsConfig(args, mapper, filteredOptionsCreator, format);
 
       const newConfig: NovoControlConfig['config'] = {
+        ...(emptyPickerMessage && { emptyPickerMessage }),
         ...(Number.isInteger(minSearchLength) && { minSearchLength }),
         ...(enableInfiniteScroll && { enableInfiniteScroll }),
         ...(filteredOptionsCreator && { filteredOptionsCreator }),
@@ -560,6 +561,21 @@ export class FieldInteractionApi {
       this.setProperty(key, 'config', newConfig);
       this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: args });
     }
+  }
+
+  addPropertiesToPickerConfig(key: string, properties: { [key: string]: unknown }) {
+    let control = this.getControl(key);
+    if (!control || control.restrictFieldInteractions) {
+      return;
+    }
+
+    const config = {
+      ...control.config,
+      ...properties,
+    };
+
+    this.setProperty(key, 'config', config);
+    this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: properties });
   }
   getOptionsConfig = (
     args: ModifyPickerConfigArgs,

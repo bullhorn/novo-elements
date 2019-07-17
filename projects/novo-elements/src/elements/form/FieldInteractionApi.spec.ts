@@ -36,9 +36,42 @@ describe('FieldInteractionApi', () => {
     });
   }));
 
+  let triggerEvent;
+  let setProperty;
+
   beforeEach(inject([FieldInteractionApi], (_service) => {
     service = _service;
+    service.form = { controls: { doughnuts: { restrictFieldInteractions: false } } };
+    triggerEvent = spyOn(service as any, 'triggerEvent');
+    setProperty = spyOn(service as any, 'setProperty');
   }));
+
+  describe('Function: addPropertiesToPickerConfig', () => {
+    it('adds properties to a picker config without deleting any', () => {
+      service.form.controls.doughnuts.config = { oldProperty: 'old!' };
+
+      service.addPropertiesToPickerConfig('doughnuts', {newProperty: 'new!'});
+
+      expect(setProperty).toBeCalledWith('doughnuts', 'config', { newProperty: 'new!', oldProperty: 'old!' });
+      expect(triggerEvent).toBeCalledWith({controlKey: 'doughnuts', prop: 'pickerConfig', value: {newProperty: 'new!'} });
+    });
+    it('overrides pre-existing properties', () => {
+      service.form.controls.doughnuts.config = { oldProperty: 'old!'};
+
+      service.addPropertiesToPickerConfig('doughnuts', {oldProperty: 'new!'});
+
+      expect(setProperty).toBeCalledWith('doughnuts', 'config', {oldProperty: 'new!'});
+      expect(triggerEvent).toBeCalledWith({controlKey: 'doughnuts', prop: 'pickerConfig', value: {oldProperty: 'new!'} });
+    });
+    it('does not allow picker modifications if restrictFieldInteractions is true for that control', () => {
+      service.form = { controls: { doughnuts: { restrictFieldInteractions: true } } };
+
+      service.addPropertiesToPickerConfig('doughnuts', { foo: 'bar' });
+
+      expect(setProperty).not.toBeCalled();
+      expect(triggerEvent).not.toBeCalled();
+    });
+  });
 
   describe('Function: getOptions', () => {
     it('is defined', () => {
@@ -101,10 +134,10 @@ describe('FieldInteractionApi', () => {
     });
     it('uses the mapper if present', async (done) => {
       const args: ModifyPickerConfigArgs = {
-        optionsUrl: 'fake/url'
+        optionsUrl: 'fake/url',
       };
-      const mapper = ({name}) => name;
-      spyOn((service as any).http, 'get').and.returnValue(of([{name: 'Dr. Strangelove'}]));
+      const mapper = ({ name }) => name;
+      spyOn((service as any).http, 'get').and.returnValue(of([{ name: 'Dr. Strangelove' }]));
       const result = service.getOptionsConfig(args, mapper);
       const results = await (result.options as OptionsFunction)('asdf');
       expect(results).toEqual(['Dr. Strangelove']);
