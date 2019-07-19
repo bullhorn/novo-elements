@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.11.0"></a>
+# [3.11.0](https://github.com/bullhorn/novo-elements/compare/v3.10.0...v3.11.0) (2019-07-19)
+
+
+### Bug Fixes
+
+* **data-table:** Reduce scope of capturing keydown events ([#1001](https://github.com/bullhorn/novo-elements/issues/1001)) ([7f144c5](https://github.com/bullhorn/novo-elements/commit/7f144c5))
+* **data-tables:** Fix issue where novo data tables weren't showing results if they started with a filter ([d41abb6](https://github.com/bullhorn/novo-elements/commit/d41abb6))
+* **picker:** fix dayPeriod issue for time picker ([dd01bb7](https://github.com/bullhorn/novo-elements/commit/dd01bb7))
+* **picker:** Keep getLabels function from picker config when updated via field interaction ([#997](https://github.com/bullhorn/novo-elements/issues/997)) ([124ce21](https://github.com/bullhorn/novo-elements/commit/124ce21))
+
+
+### Features
+
+* **data-table:** Add icon dropdown ([2bc4f67](https://github.com/bullhorn/novo-elements/commit/2bc4f67))
+* **picker:** allow custom preselected configs ([d344859](https://github.com/bullhorn/novo-elements/commit/d344859))
+* **picker:** preserve empty results message on config for pickers ([9c1a66a](https://github.com/bullhorn/novo-elements/commit/9c1a66a))
+
+
+
 <a name="3.10.0"></a>
 # [3.10.0](https://github.com/bullhorn/novo-elements/compare/v3.9.0...v3.10.0) (2019-06-21)
 
