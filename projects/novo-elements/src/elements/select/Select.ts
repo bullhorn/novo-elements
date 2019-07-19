@@ -109,9 +109,9 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   disabled: boolean = false;
 
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplateComponent)
+  @ViewChild(NovoOverlayTemplateComponent, { static: true })
   overlay: NovoOverlayTemplateComponent;
-  @ViewChild('dropdownElement')
+  @ViewChild('dropdownElement', { static: true })
   dropdown: ElementRef;
 
   constructor(

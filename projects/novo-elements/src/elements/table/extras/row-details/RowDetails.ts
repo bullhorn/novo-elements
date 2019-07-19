@@ -12,7 +12,7 @@ import { ComponentUtils } from './../../../../utils/component-utils/ComponentUti
     `,
 })
 export class RowDetails implements OnInit {
-  @ViewChild('container', { read: ViewContainerRef })
+  @ViewChild('container', { read: ViewContainerRef, static: true })
   container: ViewContainerRef;
 
   @Input()

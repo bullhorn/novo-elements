@@ -23,7 +23,7 @@ import { ConfigureColumnsModal, MockData } from '../extras';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowsExample {
-  @ViewChild('basic')
+  @ViewChild('basic', { static: false })
   table: NovoDataTable<MockData>;
 
   // Table configuration

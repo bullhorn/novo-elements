@@ -256,7 +256,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   customTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoTemplate)
   defaultTemplates: QueryList<NovoTemplate>;
-  @ViewChild('novoDataTableContainer')
+  @ViewChild('novoDataTableContainer', { static: false })
   novoDataTableContainer: ElementRef;
   @Output()
   resized: EventEmitter<IDataTableColumn<T>> = new EventEmitter();

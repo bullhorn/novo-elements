@@ -71,9 +71,9 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   _onTouched = () => {};
 
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplateComponent)
+  @ViewChild(NovoOverlayTemplateComponent, { static: true })
   overlay: any;
-  @ViewChild('input')
+  @ViewChild('input', { static: true })
   input: any;
 
   private debounceSearchChange: any;

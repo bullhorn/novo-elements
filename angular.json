@@ -8,7 +8,7 @@
       "sourceRoot": "projects/novo-elements/src",
       "projectType": "library",
       "prefix": "lib",
-      "targets": {
+      "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
@@ -36,7 +36,7 @@
       "sourceRoot": "projects/novo-examples/src",
       "projectType": "library",
       "prefix": "lib",
-      "targets": {
+      "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
@@ -67,7 +67,7 @@
       "projectType": "application",
       "prefix": "novo-demo",
       "schematics": {},
-      "targets": {
+      "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
@@ -134,7 +134,7 @@
       "sourceRoot": "projects/chomsky/src",
       "projectType": "library",
       "prefix": "lib",
-      "targets": {
+      "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {

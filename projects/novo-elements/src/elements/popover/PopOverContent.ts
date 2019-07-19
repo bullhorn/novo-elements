@@ -30,7 +30,7 @@ export class PopOverContent implements AfterViewInit {
   @Input()
   animation: boolean = true;
 
-  @ViewChild('popoverDiv')
+  @ViewChild('popoverDiv', { static: true })
   popoverDiv: ElementRef;
   popover: PopOverDirective;
   onCloseFromOutside = new EventEmitter();

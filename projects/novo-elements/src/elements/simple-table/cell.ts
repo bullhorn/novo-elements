@@ -143,7 +143,7 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
   @Input()
   public column: SimpleTableColumn<T>;
 
-  @ViewChild('span')
+  @ViewChild('span', { static: true })
   private spanElement: ElementRef;
 
   constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2) {

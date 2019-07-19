@@ -5,11 +5,8 @@ import { CalendarEvent } from '../../../utils/calendar-utils/CalendarUtils';
   selector: 'novo-calendar-all-day-event',
   template: `
     <ng-template #defaultTemplate>
-      <div
-        class="cal-all-day-event"
-        [style.backgroundColor]="event.color.secondary"
-        [style.borderColor]="event.color.primary">
-        {{event.title}}
+      <div class="cal-all-day-event" [style.backgroundColor]="event.color.secondary" [style.borderColor]="event.color.primary">
+        {{ event.title }}
         <!--<novo-calendar-event-title
           [event]="event"
           view="day"
@@ -23,7 +20,8 @@ import { CalendarEvent } from '../../../utils/calendar-utils/CalendarUtils';
       [ngTemplateOutletContext]="{
         event: event,
         eventClicked: eventClicked
-      }">
+      }"
+    >
     </ng-template>
   `,
 })

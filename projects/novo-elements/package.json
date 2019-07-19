@@ -2,19 +2,19 @@
   "name": "novo-elements",
   "version": "3.10.0",
   "peerDependencies": {
-    "@angular/animations": "^7.0.0",
-    "@angular/cdk": "^7.0.0",
-    "@angular/common": "^7.0.0",
-    "@angular/core": "^7.0.0",
-    "@angular/forms": "^7.0.0",
-    "@bullhorn/dragula": "^1.0.0",
-    "ace-builds": "^1.3.0",
+    "@angular/animations": "^8.1.1",
+    "@angular/cdk": "^8.1.1",
+    "@angular/common": "^8.1.1",
+    "@angular/core": "^8.1.1",
+    "@angular/forms": "^8.1.1",
+    "@bullhorn/dragula": "^1.0.1",
+    "ace-builds": "^1.4.5",
     "angular2-text-mask": "^9.0.0",
-    "brace": "^0.11.0",
+    "brace": "^0.11.1",
     "classlist.js": "^1.1.20150312",
-    "date-fns": "^1.29.0",
-    "post-robot": "^8.0.0",
-    "rxjs": "^6.0.0",
-    "text-mask-addons": "^3.7.0"
+    "date-fns": "^1.30.1",
+    "post-robot": "^10.0.18",
+    "rxjs": "^6.5.2",
+    "text-mask-addons": "^3.8.0"
   }
 }

@@ -92,7 +92,7 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
   accordion: NovoAccordion;
 
   /** Content that will be rendered lazily. */
-  @ContentChild(NovoExpansionPanelContent)
+  @ContentChild(NovoExpansionPanelContent, { static: false })
   _lazyContent: NovoExpansionPanelContent;
 
   /** Portal holding the user's content. */

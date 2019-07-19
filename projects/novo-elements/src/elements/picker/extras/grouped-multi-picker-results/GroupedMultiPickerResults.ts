@@ -79,9 +79,9 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
     `,
 })
 export class GroupedMultiPickerResults extends BasePickerResults implements OnInit, OnDestroy {
-  @ViewChild('input')
+  @ViewChild('input', { static: true })
   private inputElement: ElementRef;
-  @ViewChild('list')
+  @ViewChild('list', { static: true })
   private listElement: NovoListElement;
 
   public selectedCategory: { value: string; label: string };

@@ -50,7 +50,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
         <div class="header">
           <span>{{ labels.filters }}</span>
           <button theme="dialogue" color="negative" icon="times" (click)="clearFilter()"
-                  *ngIf="filter !== null && filter !== undefined && filter !== ''" data-automation-id="novo-activity-table-filter-clear">
+                  *ngIf="filter" data-automation-id="novo-activity-table-filter-clear">
             {{ labels.clear }}
           </button>
         </div>
@@ -92,7 +92,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDestroy {
-  @ViewChild(NovoDropdownElement)
+  @ViewChild(NovoDropdownElement, { static: false })
   dropdown: NovoDropdownElement;
 
   @Input()

@@ -19,7 +19,7 @@ import { ComponentUtils } from './../../../../utils/component-utils/ComponentUti
     `,
 })
 export class TableCell implements OnInit, OnDestroy {
-  @ViewChild('container', { read: ViewContainerRef })
+  @ViewChild('container', { read: ViewContainerRef, static: true })
   container: ViewContainerRef;
 
   @Input()
