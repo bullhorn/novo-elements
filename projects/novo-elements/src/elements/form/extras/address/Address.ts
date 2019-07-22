@@ -2,7 +2,7 @@
 import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { getCountries, getStates, findByCountryId } from '../../../../utils/countries/Countries';
+import { getCountries, getStates, findByCountryId, COUNTRIES } from '../../../../utils/countries/Countries';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { Helpers } from '../../../../utils/Helpers';
 
@@ -78,7 +78,7 @@ export interface NovoAddressConfig {
                 class="required-indicator"
                 [ngClass]="{'bhi-circle': !valid.countryID, 'bhi-check': valid.countryID}">
             </i>
-            <novo-picker [config]="config?.countryID?.pickerConfig" [placeholder]="config.countryID.label" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryName" [disablePickerInput]="disabled.countryID"></novo-picker>
+            <novo-picker [config]="config?.countryID?.pickerConfig" [placeholder]="config.countryID.label" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryID" [disablePickerInput]="disabled.countryID"></novo-picker>
         </span>
     `,
 })
@@ -426,11 +426,11 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       format: '$label',
       options: (query: string = '') => {
         return new Promise((resolve: any) => {
-          let countries: any = getCountries();
+          let countries: any = COUNTRIES;
           if (query) {
             countries = countries.filter((country) => new RegExp(`${query}`, 'gi').test(country.name));
           }
-          return resolve(countries);
+          return resolve(countries.map(country => { return { value: country.id, label: country.name }}));
         });
       },
       getLabels: (countryID) => {
