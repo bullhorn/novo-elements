@@ -430,7 +430,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
           if (query) {
             countries = countries.filter((country) => new RegExp(`${query}`, 'gi').test(country.name));
           }
-          return resolve(countries.map(country => { return { value: country.id, label: country.name }}));
+          return resolve(countries.map((country) => ({ value: country.id, label: country.name })));
         });
       },
       getLabels: (countryID) => {
