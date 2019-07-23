@@ -69,6 +69,7 @@
 @import './elements/stepper/stepper.component';
 @import './elements/stepper/step-header.component';
 @import './elements/simple-table/table';
+@import './elements/group-member-picker/GroupMemberPicker';
 
 @each $basic, $color in $dark-colors {
   .bgc-#{$basic} {

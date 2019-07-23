@@ -1,0 +1,13 @@
+<div>Selected Groups: {{ selectedGroups }}</div>
+<div>Selected Members: {{ selectedMembers }}</div>
+<novo-group-member-picker [buttonLabel]="mock_buttonLabel"
+                          [schema]="mock_schema"
+                          [groups]="mock_groups"
+                          [groupSingleLabel]="mock_groupSingleLabel"
+                          [groupPluralLabel]="mock_groupPluralLabel"
+                          [groupNoneLabel]="mock_groupNoneLabel"
+                          [members]="mock_members"
+                          [memberSingleLabel]="mock_memberSingleLabel"
+                          [memberPluralLabel]="mock_memberPluralLabel"
+                          [memberNoneLabel]="mock_memberNoneLabel"
+                          (selectionChange)="onSelectionChange($event)"></novo-group-member-picker>
