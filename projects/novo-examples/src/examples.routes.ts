@@ -49,6 +49,13 @@ export class DropdownPage {}
 
 
 @Component({
+  selector: 'group-member-picker-page',
+  template: `<h1>Group Member Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/group-member-picker">(source)</a></h1><h5>Basic</h5><p>Group Member Picker allows for nested selection of groups and members via a tabbed interface.</p><p><code-example example="group-member-picker-basic"></code-example></p>`
+})
+export class GroupMemberPickerPage {}
+
+
+@Component({
   selector: 'icon-page',
   template: `<h1>Icons <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/icon">(source)</a></h1><p>If you want to use bullhorn icons, it is easier to use the <code>novo-icon</code> element to style them.  You can always style them within the <code>i</code> tag too.</p><h5>Basic Usage</h5><p><code-example example="basic-icons"></code-example></p><h5>Themes &amp; Colors</h5><p><code-example example="themed-icons"></code-example></p><h5>Raised Icons</h5><p><code-example example="raised-icons"></code-example></p>`
 })
@@ -274,14 +281,14 @@ export class TabsPage {}
 
 @Component({
   selector: 'patterns-page',
-  template: `<h1>Design Patterns</h1><p>The following are examples of know composition patterns to create a common user exeperience.  The component library is design to be used in these patterns.</p><h2>Activity Sections</h2><p>Displaying a series of list data in ... blah, blah, blah</p><p><code-example example="activity-section"></code-example></p><h2>Record Headers</h2><p>Entity Record Headers Patterns.</p><p><code-example example="record-header"></code-example></p>`
+  template: `<h1>Design Patterns</h1><p>The following are examples of know composition patterns to create a common user experience.  The component library is design to be used in these patterns.</p><h2>Activity Sections</h2><p>Displaying a series of lists in expandable sections, like in the activity tab.</p><p><code-example example="activity-section"></code-example></p><h2>Record Headers</h2><p>Entity Record Headers Patterns.</p><p><code-example example="record-header"></code-example></p>`
 })
 export class PatternsPage {}
 
 
 @Component({
   selector: 'templates-page',
-  template: `<h2>Bullhorn Application Templates</h2><h2>Example starter templates for your application</h2><h3>Email</h3><p>List App</p><p>TODO: Add linked image</p><h3>Form App</h3><p>form-based app template</p><p>TODO: Add linked image</p><h3>Custom Card Starter Template</h3><p>empty starter template</p><p>TODO: Add linked image</p><h3>Dashboard</h3><p>dashboard template</p><p>TODO: Add linked image</p>`
+  template: `<h2>Bullhorn Application Templates</h2><p>Bullhorn provides customization of the user experience with custom tabs, custom cards, custom actions and more.</p><p>The <a href="https://github.com/bullhorn/extension-samples">Bullhorn Extension Samples</a> repoprovides several examples for getting started building custom apps using Novo Elements.</p>`
 })
 export class TemplatesPage {}
 
@@ -356,6 +363,7 @@ const routes: Routes = [
   { path: 'components', component: ComponentsPage, data: { title: 'Components', section: 'src' } },
   { path: 'components/data-table', component: DataTablePage, data: { title: 'Data Table', section: 'components' } },
   { path: 'components/dropdown', component: DropdownPage, data: { title: 'Dropdown', section: 'components' } },
+  { path: 'components/group-member-picker', component: GroupMemberPickerPage, data: { title: 'Group Member Picker', section: 'components' } },
   { path: 'components/icon', component: IconPage, data: { title: 'Icon', section: 'components' } },
   { path: 'components/loading', component: LoadingPage, data: { title: 'Loading', section: 'components' } },
   { path: 'components/quick-note', component: QuickNotePage, data: { title: 'Quick Note', section: 'components' } },
@@ -404,7 +412,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,ButtonsPage,CalendarPage,ComponentsPage,DataTablePage,DropdownPage,IconPage,LoadingPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TablePage,ColorsPage,CompositionPage,DesignPage,IconographyPage,TypographyPage,ChipsPage,DatePickerPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,ValuePage,HomePage,CardsPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,StepperPage,TabsPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,ModalPage,PipesPage,PopOverPage,SecurityPage,TipWellPage,ToasterPage,TooltipPage
+  AceEditorPage,ButtonsPage,CalendarPage,ComponentsPage,DataTablePage,DropdownPage,GroupMemberPickerPage,IconPage,LoadingPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TablePage,ColorsPage,CompositionPage,DesignPage,IconographyPage,TypographyPage,ChipsPage,DatePickerPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,ValuePage,HomePage,CardsPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,StepperPage,TabsPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,ModalPage,PipesPage,PopOverPage,SecurityPage,TipWellPage,ToasterPage,TooltipPage
 ];
 
 @NgModule({
