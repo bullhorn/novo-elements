@@ -50,6 +50,7 @@ export const TableColumns = [
     renderer: (object) => {
       return `$ ${Number(object.salary).toFixed(2)}`;
     },
+    rightAlignCellContent: true,
   },
   {
     title: 'Status',
