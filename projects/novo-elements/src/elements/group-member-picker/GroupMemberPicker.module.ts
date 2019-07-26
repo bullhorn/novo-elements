@@ -8,9 +8,10 @@ import { NovoTabModule } from '../tabs/Tabs.module';
 import { NovoListModule } from '../list/List.module';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
 import { NovoButtonModule } from '../button/Button.module';
+import { NovoDropdownModule } from '../dropdown/Dropdown.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NovoTabModule, NovoListModule, NovoFormExtrasModule, NovoButtonModule],
+  imports: [CommonModule, FormsModule, NovoTabModule, NovoListModule, NovoFormExtrasModule, NovoButtonModule, NovoDropdownModule],
   declarations: [NovoGroupMemberPickerElement],
   exports: [NovoGroupMemberPickerElement],
 })

@@ -1,12 +1,11 @@
-<button (click)="onDropdownToggled($event)"
-        theme="buttonConfig.theme"
-        side="buttonConfig.side"
-        icon="buttonConfig.icon">
-  <span class="dropdown-button-label">{{ buttonConfig.label }}</span>
-  <i class="bhi-sort-desc"></i>
-</button>
-<div class="group-member-picker-dropdown-container"
-     *ngIf="active">
+<novo-dropdown>
+  <button theme="buttonConfig.theme"
+          side="buttonConfig.side"
+          icon="buttonConfig.icon"
+          [loading]="loading">
+    <span class="dropdown-button-label">{{ buttonConfig.label }}</span>
+    <i class="bhi-sort-desc"></i>
+  </button>
   <!-- todo: search input goes here-->
   <div class="group-member-picker-column-container">
     <div class="group-member-picker-column left">
@@ -38,4 +37,4 @@
       <!-- todo: empty state goes here-->
     </div>
   </div>
-</div>
+</novo-dropdown>

@@ -1,5 +1,4 @@
-import {Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output} from '@angular/core';
-import {OutsideClick} from '../..';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 export type GroupMemberPickerSchemaType = {
   typeName: string,
@@ -12,8 +11,7 @@ export type GroupMemberPickerSchemaType = {
   selector: 'novo-group-member-picker',
   templateUrl: './GroupMemberPicker.html',
 })
-export class NovoGroupMemberPickerElement extends OutsideClick implements OnInit {
-  @HostBinding('class.loading') public loading = true;
+export class NovoGroupMemberPickerElement implements OnInit {
   @Input() buttonConfig: {
     theme: string,
     side: string,
@@ -27,20 +25,13 @@ export class NovoGroupMemberPickerElement extends OutsideClick implements OnInit
 
   public activeType: GroupMemberPickerSchemaType;
   public items: any[] = [];
+  public loading = true;
 
-  constructor(element: ElementRef) {
-    super(element);
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    this.loading = true;
     this.setActiveType(this.typeSchema[0]);
     this.loading = false;
-  }
-
-  onDropdownToggled(event) {
-    // this.setActiveType(this.schema.group.typeName);
-    this.toggleActive(event);
   }
 
   setActiveType(newActiveSchema: GroupMemberPickerSchemaType) {
