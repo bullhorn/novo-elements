@@ -1,10 +1,8 @@
 <button (click)="onDropdownToggled($event)"
-        theme="dialog"
-        side="left"
-        icon="user-o">
-  <span class="dropdown-button-label">
-    {{ buttonLabel }}
-  </span>
+        theme="buttonConfig.theme"
+        side="buttonConfig.side"
+        icon="buttonConfig.icon">
+  <span class="dropdown-button-label">{{ buttonConfig.label }}</span>
   <i class="bhi-sort-desc"></i>
 </button>
 <div class="group-member-picker-dropdown-container"
@@ -14,10 +12,10 @@
     <div class="group-member-picker-column left">
       <novo-nav theme="white"
                 direction="vertical">
-        <novo-tab *ngFor="let tab of tabs"
-                  [attr.data-automation-id]="tab"
-                  (activeChange)="onTabSelected(tab)">
-          <span>{{ entityLabels[tab].plural }}</span><i class="bhi-next"></i>
+        <novo-tab *ngFor="let schema of typeSchema"
+                  [attr.data-automation-id]="schema.typeName"
+                  (activeChange)="setActiveType(schema)">
+          <span>{{ schema.typeLabel }}</span><i class="bhi-next"></i>
         </novo-tab>
       </novo-nav>
       <!-- todo: clear all button goes here-->
@@ -28,9 +26,9 @@
         <!-- todo: quick select goes here-->
         <!-- todo: add virtual scroll-->
         <novo-list-item *ngFor="let item of items"
-                        [attr.data-automation-id]="item[schema.labelField]">
+                        [attr.data-automation-id]="item[activeType.labelField]">
           <item-content>
-            <novo-checkbox [label]="item[schema.labelField]"
+            <novo-checkbox [label]="item[activeType.labelField]"
                            [name]="'selected'"
                            [(ngModel)]="item.selected"
                            (ngModelChange)="onItemToggled()"></novo-checkbox>
