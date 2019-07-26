@@ -9,105 +9,113 @@ import {Component} from '@angular/core';
   // styleUrls: ['large-drop-down-example.css'],
 })
 export class GroupMemberPickerBasicExample {
-  public mock_buttonLabel: string = 'Click Me';
-  public mock_schema: any = {
-    groupIdField: 'groupId',
-    groupMembersField: 'members',
-    memberIdField: 'memberId',
-    memberGroupsField: 'groups',
-    labelField: 'label',
+  public example_schema = [
+    {
+      typeName: 'colors',
+      typeLabel: 'Colors',
+      valueField: 'value',
+      labelField: 'name',
+    }, {
+      typeName: 'animals',
+      typeLabel: 'Animals',
+      valueField: 'animalId',
+      labelField: 'name',
+    }, {
+      typeName: 'places',
+      typeLabel: 'Places',
+      valueField: 'localName',
+      labelField: 'englishName',
+    }
+  ];
+  public example_data: any = {
+    colors: [
+      {
+        value: { r: 255, g: 0, b: 0 },
+        name: 'Red',
+      }, {
+        value: { r: 0, g: 255, b: 0 },
+        name: 'Green',
+      }, {
+        value: { r: 0, g: 0, b: 255 },
+        name: 'Blue',
+      }, {
+        value: { r: 255, g: 255, b: 255 },
+        name: 'White',
+      }, {
+        value: { r: 0, g: 0, b: 0 },
+        name: 'Black',
+      },
+    ],
+    animals: [
+      {
+        animalId: 1,
+        name: 'Dog'
+      }, {
+        animalId: 2,
+        name: 'Cat'
+      }, {
+        animalId: 3,
+        name: 'Mouse'
+      }, {
+        animalId: 4,
+        name: 'Horse'
+      }, {
+        animalId: 5,
+        name: 'Cow'
+      }, {
+        animalId: 6,
+        name: 'Pig'
+      }, {
+        animalId: 7,
+        name: 'Chicken'
+      }, {
+        animalId: 8,
+        name: 'Sheep'
+      }, {
+        animalId: 9,
+        name: 'Goat'
+      }, {
+        animalId: 10,
+        name: 'Goose'
+      },
+    ],
+    places: [
+      {
+        localName: 'Roma',
+        englishName: 'Rome',
+      }, {
+        localName: 'Firenze',
+        englishName: 'Florence',
+      }, {
+        localName: 'Munchen',
+        englishName: 'Munich',
+      }, {
+        localName: 'Paris',
+        englishName: 'Paris',
+      }, {
+        localName: 'Sevilla',
+        englishName: 'Seville',
+      }, {
+        localName: 'Athinai',
+        englishName: 'Athens',
+      },
+    ]
   };
-  public mock_groups: any[] = [
-    {
-      groupId: 1,
-      label: 'First Group',
-      members: [1, 2, 3, 4, 5],
-    }, {
-      groupId: 2,
-      label: 'Second Group',
-      members: [6, 7, 8, 9, 10],
-    }, {
-      groupId: 3,
-      label: 'Third Group',
-      members: [11, 12, 13, 14, 15],
-    }
-  ];
-  public mock_groupSingleLabel: string = 'Group';
-  public mock_groupPluralLabel: string = 'Groups';
-  public mock_groupNoneLabel: string = 'Groups';
 
-  public mock_members: any[] = [
-    {
-      memberId: 1,
-      label: 'First Member',
-      groups: [1],
-    }, {
-      memberId: 2,
-      label: 'Second Member',
-      groups: [1],
-    }, {
-      memberId: 3,
-      label: 'Third Member',
-      groups: [1],
-    }, {
-      memberId: 4,
-      label: 'Fourth Member',
-      groups: [1],
-    }, {
-      memberId: 5,
-      label: 'Fifth Member',
-      groups: [1],
-    }, {
-      memberId: 6,
-      label: 'Sixth Member',
-      groups: [2],
-    }, {
-      memberId: 7,
-      label: 'Seventh Member',
-      groups: [2],
-    }, {
-      memberId: 8,
-      label: 'Eighth Member',
-      groups: [2],
-    }, {
-      memberId: 9,
-      label: 'Ninth Member',
-      groups: [2],
-    }, {
-      memberId: 10,
-      label: 'Tenth Member',
-      groups: [2],
-    }, {
-      memberId: 11,
-      label: 'Eleventh Member',
-      groups: [3],
-    }, {
-      memberId: 12,
-      label: 'Twelfth Member',
-      groups: [3],
-    }, {
-      memberId: 13,
-      label: 'Thirteenth Member',
-      groups: [3],
-    }, {
-      memberId: 14,
-      label: 'Fourteenth Member',
-      groups: [3],
-    }, {
-      memberId: 15,
-      label: 'Fifteenth Member',
-      groups: [3],
-    }
-  ];
-  public mock_memberSingleLabel: string = 'Member';
-  public mock_memberPluralLabel: string = 'Members';
-  public mock_memberNoneLabel: string = 'Members';
+  public example_buttonConfig = {
+    theme: 'dialog',
+    side: 'left',
+    icon: 'user-o',
+    label: 'Click Me',
+  };
 
-  public selectedGroups: string;
-  public selectedMembers: string;
+  public selectedColors: any[] = [];
+  public selectedAnimals: any[] = [];
+  public selectedPlaces: any[] = [];
 
-  onSelectionChange(event) {
-    this.selectedGroups = event.groups.join(', ');
-    this.selectedMembers = event.members.join(', ');
+  onSelectionChange(selectedData) {
+    this.selectedColors = selectedData['colors'].map(color => JSON.stringify(color));
+    this.selectedAnimals = selectedData['animals'];
+    this.selectedPlaces = selectedData['places'];
   }
 }

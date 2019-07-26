@@ -9,7 +9,7 @@ novo-group-member-picker {
     font-size: 0.9em;
   }
 
-  &.disabled {
+  &.loading {
     pointer-events: none;
     opacity: 0.7;
   }

@@ -1,44 +1,31 @@
 import {Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output} from '@angular/core';
 import {OutsideClick} from '../..';
 
-type SelectionChange = {
-  groups: number[],
-  members: number[],
-};
+export type GroupMemberPickerSchemaType = {
+  typeName: string,
+  typeLabel: string,
+  valueField: string,
+  labelField: string,
+} & ({ childTypeName?: string } | { parentTypeName?: string });
 
 @Component({
   selector: 'novo-group-member-picker',
   templateUrl: './GroupMemberPicker.html',
 })
 export class NovoGroupMemberPickerElement extends OutsideClick implements OnInit {
-  @HostBinding('class.disabled') public loading = true;
-  @Input() buttonLabel: string = 'HARDCODED BUTTON LABEL';
-  @Input() schema: any = {
-    groupIdField: 'groupId',
-    groupMembersField: 'members',
-    memberIdField: 'memberId',
-    memberGroupsField: 'groups',
-    labelField: 'label',
+  @HostBinding('class.loading') public loading = true;
+  @Input() buttonConfig: {
+    theme: string,
+    side: string,
+    icon: string,
+    label: string,
   };
-  @Input() groups: any[] = [];
-  @Input() groupSingleLabel: string;
-  @Input() groupPluralLabel: string;
-  @Input() groupNoneLabel: string;
+  @Input() typeSchema: GroupMemberPickerSchemaType[];
+  @Input() data;
 
-  @Input() members: any[] = [];
-  @Input() memberSingleLabel: string;
-  @Input() memberPluralLabel: string;
-  @Input() memberNoneLabel: string;
+  @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output() selectionChange: EventEmitter<SelectionChange> = new EventEmitter<SelectionChange>();
-
-  private selectedMembers: Set<number> | Set<string>;
-  private selectedGroups: Set<number> | Set<string>;
-
-  public readonly tabs: ('GROUPS' | 'MEMBERS')[] = ['GROUPS', 'MEMBERS'];
-
-  public entityLabels;
-  public activeTab = 'GROUPS';
+  public activeType: GroupMemberPickerSchemaType;
   public items: any[] = [];
 
   constructor(element: ElementRef) {
@@ -47,37 +34,25 @@ export class NovoGroupMemberPickerElement extends OutsideClick implements OnInit
 
   ngOnInit(): void {
     this.loading = true;
-    this.entityLabels = {
-      GROUPS: {
-        single: this.groupSingleLabel,
-        plural: this.groupPluralLabel,
-        none: this.groupNoneLabel,
-      },
-      MEMBERS: {
-        single: this.memberSingleLabel,
-        plural: this.memberPluralLabel,
-        none: this.memberNoneLabel,
-      },
-    };
-    this.items = this.groups;
+    this.setActiveType(this.typeSchema[0]);
     this.loading = false;
   }
 
   onDropdownToggled(event) {
-    this.onTabSelected('GROUPS');
+    // this.setActiveType(this.schema.group.typeName);
     this.toggleActive(event);
   }
 
-  onTabSelected(tab: 'GROUPS' | 'MEMBERS') {
-    this.activeTab = tab;
-    this.items = tab === 'GROUPS' ? this.groups : this.members;
+  setActiveType(newActiveSchema: GroupMemberPickerSchemaType) {
+    this.activeType = newActiveSchema;
+    this.items = this.data[newActiveSchema.typeName];
   }
 
   onItemToggled() {
-    const currentSelection = {
-      members: this.members.filter(member => member.selected).map(member => member[this.schema.memberIdField]),
-      groups: this.groups.filter(group => group.selected).map(group => group[this.schema.groupIdField]),
-    };
+    let currentSelection = {};
+    this.typeSchema.forEach((type) => {
+      currentSelection[type.typeName] = this.data[type.typeName].filter(item => item.selected).map(item => item[type.valueField]);
+    });
     this.selectionChange.emit(currentSelection);
   }
 }
