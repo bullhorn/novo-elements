@@ -36,7 +36,26 @@ export class ControlConfirmModal {
     `,
 })
 export class ControlPromptModal {
-  constructor(private modalRef: NovoModalRef, public params: NovoModalParams, public labels: NovoLabelService) {}
+  constructor(private modalRef: NovoModalRef, public params: NovoModalParams, public labels: NovoLabelService) { }
+
+  public close(result: boolean): void {
+    this.modalRef.close(result);
+  }
+}
+
+@Component({
+  selector: 'control-prompt-custom-modal',
+  template: `
+        <novo-notification type="{{params['modalConfig'].notificationType}}" [attr.data-automation-id]="'field-interaction-modal-' + params['key']">
+            <h1>{{ params['modalConfig'].header }}</h1>
+            <h2 *ngIf="params['modalConfig'].message"><label [innerHTML]="params['modalConfig'].message"></label></h2>
+            <button *ngIf="params['modalConfig'].buttonCancel.label" theme="{{params['modalConfig'].buttonCancel.theme}}" icon="{{params['modalConfig'].buttonCancel.icon}}" (click)="close(false)" [attr.data-automation-id]="'field-interaction-modal-cancel' + params['key']">{{ params['modalConfig'].buttonCancel.label }}</button>
+            <button *ngIf="params['modalConfig'].buttonOK.label" theme="{{params['modalConfig'].buttonOK.theme}}" icon="{{params['modalConfig'].buttonOK.icon}}" (click)="close(true)" autofocus [attr.data-automation-id]="'field-interaction-modal-yes-' + params['key']">{{ params['modalConfig'].buttonOK.label }}</button>
+        </novo-notification>
+    `,
+})
+export class ControlCustomPromptModal {
+  constructor(private modalRef: NovoModalRef, public params: NovoModalParams, public labels: NovoLabelService) { }
 
   public close(result: boolean): void {
     this.modalRef.close(result);

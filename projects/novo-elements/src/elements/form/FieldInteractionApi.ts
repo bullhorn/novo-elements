@@ -9,7 +9,7 @@ import { NovoControlConfig } from './FormControls';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoToastService } from '../toast/ToastService';
 import { NovoModalService } from '../modal/ModalService';
-import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
+import { ControlConfirmModal, ControlPromptModal, ControlCustomPromptModal } from './FieldInteractionModals';
 import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -22,7 +22,7 @@ class CustomHttpImpl implements CustomHttp {
   options: any;
   mapFn = (x) => x;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   get(url: string, options?: any): CustomHttp {
     this.url = url;
@@ -64,7 +64,7 @@ export class FieldInteractionApi {
     private formUtils: FormUtils,
     private http: HttpClient,
     private labels: NovoLabelService,
-  ) {}
+  ) { }
 
   set form(form: any) {
     this._form = form;
@@ -413,6 +413,18 @@ export class FieldInteractionApi {
     let showYes: boolean = true;
     (document.activeElement as any).blur();
     return this.modalService.open(ControlPromptModal, { changes: changes, key: key }).onClosed;
+  }
+
+  public promptCustomModal(key: string,
+    modalConfig: {
+      notificationType?: string,
+      header?: string,
+      message?: string,
+      buttonCancel?: { label: string; theme?: string, icon?: string },
+      buttonOK?: { label: string; theme?: string, icon?: string }
+    }): Promise<boolean> {
+    (document.activeElement as any).blur();
+    return this.modalService.open(ControlCustomPromptModal, { key, modalConfig }).onClosed;
   }
 
   public setProperty(key: string, prop: string, value: any): void {
