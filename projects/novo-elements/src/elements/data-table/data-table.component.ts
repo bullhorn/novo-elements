@@ -114,6 +114,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
               [class.empty]="column?.type === 'action' && !column?.label"
               [class.button-header-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)"
               [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"
+              [class.fixed-header]="fixedHeader"
             ></novo-data-table-header-cell>
             <novo-data-table-cell
               *cdkCellDef="let row"
@@ -128,6 +129,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
           </ng-container>
           <novo-data-table-header-row
             *cdkHeaderRowDef="displayedColumns"
+            [fixedHeader]="fixedHeader"
             data-automation-id="novo-data-table-header-row"
           ></novo-data-table-header-row>
           <novo-data-table-row
@@ -697,13 +699,6 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     let left: number = target.scrollLeft;
     if (left !== this.scrollLeft) {
       this.scrollLeft = target.scrollLeft;
-    }
-    if (this.fixedHeader) {
-      const top: number = target.scrollTop;
-      const header: any = target.querySelector('cdk-table > novo-data-table-header-row');
-      if (header) {
-        header.style.transform = `translateY(${top}px)`;
-      }
     }
     this.ref.markForCheck();
   }
