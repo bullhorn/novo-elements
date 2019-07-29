@@ -584,4 +584,12 @@ describe('Elements: NovoAddressElement', () => {
       });
     });
   });
+  describe('Method: get default country config', () => {
+    it('maps the countries global into a list of value/label objects', async () => {
+      const result = await component['getDefaultCountryConfig']()['options']();
+
+      expect(result.length > 0).toBe(true);
+      expect(result.every((country) => 'value' in country && 'label' in country && Object.keys(country).length === 2)).toBe(true);
+    });
+  });
 });
