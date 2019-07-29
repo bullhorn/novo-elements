@@ -153,4 +153,39 @@ describe('Control: BaseControl', () => {
       expect(control.maskOptions).toEqual({ mask: ['TEST_MASK_OPTIONS'], keepCharPositions: false, guide: true });
     });
   });
+
+  describe('Integer field', () => {
+    it('non-zero default value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        validators: ['TEST_VALIDATORS'],
+        key: 'TEST_KEY',
+        label: 'TEST_LABEL',
+        required: true,
+        hidden: false,
+        encrypted: true,
+        sortOrder: 2,
+        placeholder: 'TEST_PLACEHOLDER',
+        config: { test: 'TEST_CONFIG' },
+        dataType: 'Integer',
+        value: 2,
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('zero default value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        validators: ['TEST_VALIDATORS'],
+        key: 'TEST_KEY',
+        label: 'TEST_LABEL',
+        required: true,
+        hidden: false,
+        encrypted: true,
+        sortOrder: 2,
+        placeholder: 'TEST_PLACEHOLDER',
+        config: { test: 'TEST_CONFIG' },
+        dataType: 'Integer',
+        value: 0,
+      });
+      expect(control.dirty).toBe(true);
+    });
+  });
 });
