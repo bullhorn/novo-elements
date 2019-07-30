@@ -157,15 +157,6 @@ describe('Control: BaseControl', () => {
   describe('Integer field', () => {
     it('non-zero default value should be marked dirty', () => {
       control = new BaseControl('BaseControl', {
-        validators: ['TEST_VALIDATORS'],
-        key: 'TEST_KEY',
-        label: 'TEST_LABEL',
-        required: true,
-        hidden: false,
-        encrypted: true,
-        sortOrder: 2,
-        placeholder: 'TEST_PLACEHOLDER',
-        config: { test: 'TEST_CONFIG' },
         dataType: 'Integer',
         value: 2,
       });
@@ -173,17 +164,43 @@ describe('Control: BaseControl', () => {
     });
     it('zero default value should be marked dirty', () => {
       control = new BaseControl('BaseControl', {
-        validators: ['TEST_VALIDATORS'],
-        key: 'TEST_KEY',
-        label: 'TEST_LABEL',
-        required: true,
-        hidden: false,
-        encrypted: true,
-        sortOrder: 2,
-        placeholder: 'TEST_PLACEHOLDER',
-        config: { test: 'TEST_CONFIG' },
         dataType: 'Integer',
         value: 0,
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('string default value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'String',
+        value: 'remote work',
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('string default value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Boolean',
+        value: false,
+      });
+      expect(control.dirty).toBe(false);
+    });
+    it('string default value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Boolean',
+        value: true,
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('string default value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Double',
+        value: 12.34,
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('string default value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Timestamp',
+        value: '10-04-19 12:00:17',
       });
       expect(control.dirty).toBe(true);
     });
