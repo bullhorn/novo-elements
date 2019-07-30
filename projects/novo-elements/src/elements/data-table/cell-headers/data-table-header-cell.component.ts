@@ -554,6 +554,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this.activeDateFilter = undefined;
     this.filterData(undefined);
     this.clearOptionFilter();
+    this.dropdown.closePanel();
   }
 
   private getNextSortDirection(direction: string): string {
