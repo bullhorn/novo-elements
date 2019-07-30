@@ -18,7 +18,7 @@ novo-dropdown {
   list-style: none;
   margin: 0;
   padding: 0;
-  min-width: 240px;
+  min-width: 180px;
   margin-top: 5px;
   margin-bottom: 5px;
   box-shadow: $whiteframe-shadow-z3;
@@ -40,6 +40,7 @@ novo-dropdown {
       text-align: left;
       span {
         display: inline-block;
+        max-width: 240px;
       }
       a {
         color: inherit;
