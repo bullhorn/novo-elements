@@ -18338,7 +18338,7 @@ var BaseControl = /** @class */ (function (_super) {
         _this.metaType = config.metaType;
         _this.placeholder = config.placeholder || '';
         _this.config = config.config || null;
-        _this.dirty = !!config.value;
+        _this.dirty = !!(config.value !== undefined && config.value !== null);
         _this.multiple = !!config.multiple;
         _this.headerConfig = config.headerConfig || null;
         _this.currencyFormat = config.currencyFormat || null;
