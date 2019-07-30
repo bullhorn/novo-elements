@@ -153,4 +153,90 @@ describe('Control: BaseControl', () => {
       expect(control.maskOptions).toEqual({ mask: ['TEST_MASK_OPTIONS'], keepCharPositions: false, guide: true });
     });
   });
+
+  describe('Dirty flag tests', () => {
+    it('non-zero value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Integer',
+        value: 2,
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('zero value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Integer',
+        value: 0,
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('string value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'String',
+        value: 'remote work',
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('empty string value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'String',
+        value: '',
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('boolean value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Boolean',
+        value: false,
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('boolean value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Boolean',
+        value: true,
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('double value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Double',
+        value: 12.34,
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('zero double value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Double',
+        value: 0.0,
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('timestamp value should be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Timestamp',
+        value: '10-04-19 12:00:17',
+      });
+      expect(control.dirty).toBe(true);
+    });
+    it('undefined value should not be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'String',
+      });
+      expect(control.dirty).toBe(false);
+    });
+    it('null string value should not be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'String',
+        value: null,
+      });
+      expect(control.dirty).toBe(false);
+    });
+    it('null boolean should not be marked dirty', () => {
+      control = new BaseControl('BaseControl', {
+        dataType: 'Boolean',
+        value: null,
+      });
+      expect(control.dirty).toBe(false);
+    });
+  });
 });
