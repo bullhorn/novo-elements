@@ -28,6 +28,7 @@ import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from './../../services/options/OptionsService';
+import { NovoControlGroup } from '../../elements/form/ControlGroup';
 
 @Injectable()
 export class FormUtils {
@@ -505,83 +506,119 @@ export class FormUtils {
     data?: { [key: string]: any },
   ) {
     let fieldsets: Array<NovoFieldset> = [];
-    let ranges = [];
-    debugger;
+    let formFields = [];
+
+    console.log('We are finally debugging!!!!');
+
     if (meta && meta.fields) {
-      let fields = meta.fields
-        .map((field) => {
-          if (!field.hasOwnProperty('sortOrder')) {
-            field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
-          }
-          return field;
-        })
-        .sort(Helpers.sortByField(['sortOrder', 'name']));
-      if (meta.sectionHeaders && meta.sectionHeaders.length) {
-        meta.sectionHeaders.sort(Helpers.sortByField(['sortOrder', 'name']));
-        meta.sectionHeaders.forEach((item, i) => {
-          if (item.enabled) {
-            if (item.sortOrder > 0 && fieldsets.length === 0) {
-              fieldsets.push({
-                controls: [],
-              });
-              ranges.push({
-                min: 0,
-                max: item.sortOrder - 1,
-                fieldsetIdx: 0,
-              });
-            }
+      let sectionHeaders = meta.sectionHeaders.map((element) => {
+        element.isSectionHeader = true;
+        return element;
+      });
+
+      formFields = [...sectionHeaders, ...meta.fields];
+
+      formFields.sort(Helpers.sortByField(['sortOrder', 'name']));
+
+      console.log(formFields);
+
+      formFields.forEach((field) => {
+        if (this.isHeader(field)) {
+          if (field.enabled) {
             fieldsets.push({
-              title: item.label,
-              icon: item.icon || 'bhi-section',
+              title: field.label,
+              icon: field.icon || 'bhi-section',
               controls: [],
             });
-            ranges.push({
-              min: item.sortOrder,
-              max: Number.MAX_SAFE_INTEGER,
-              fieldsetIdx: fieldsets.length - 1,
-            });
-            if (i > 0 && fieldsets.length > 1) {
-              ranges[fieldsets.length - 2].max = item.sortOrder - 1;
+          }
+        } else {
+          if (this.shouldCreateControl(field)) {
+            const fieldData: any = data && data[field.name] ? data[field.name] : null;
+            let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
+            // Set currency format
+            if (control.subType === 'currency') {
+              control.currencyFormat = currencyFormat;
             }
-          }
-        });
-        if (!ranges.length) {
-          fieldsets.push({
-            controls: [],
-          });
-          ranges.push({
-            min: 0,
-            max: Number.MAX_SAFE_INTEGER,
-            fieldsetIdx: 0,
-          });
-        }
-      } else {
-        fieldsets.push({
-          controls: [],
-        });
-        ranges.push({
-          min: 0,
-          max: Number.MAX_SAFE_INTEGER,
-          fieldsetIdx: 0,
-        });
-      }
-      fields.forEach((field) => {
-        if (this.shouldCreateControl(field)) {
-          const fieldData: any = data && data[field.name] ? data[field.name] : null;
-          let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
-          // Set currency format
-          if (control.subType === 'currency') {
-            control.currencyFormat = currencyFormat;
-          }
-          let location = ranges.find((item) => {
-            return (item.min <= field.sortOrder && field.sortOrder <= item.max) || (item.min <= field.sortOrder && item.min === item.max);
-          });
-          if (location) {
-            // Add to controls
-            fieldsets[location.fieldsetIdx].controls.push(control);
+
+            this.insertControl(fieldsets, control);
           }
         }
       });
+
+      // let fields = meta.fields
+      //   .map((field) => {
+      //     if (!field.hasOwnProperty('sortOrder')) {
+      //       field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
+      //     }
+      //     return field;
+      //   })
+      //   .sort(Helpers.sortByField(['sortOrder', 'name']));
+      // if (meta.sectionHeaders && meta.sectionHeaders.length) {
+      //   meta.sectionHeaders.sort(Helpers.sortByField(['sortOrder', 'name']));
+      //   meta.sectionHeaders.forEach((item, i) => {
+      //     if (item.enabled) {
+      //       if (item.sortOrder > 0 && fieldsets.length === 0) {
+      //         fieldsets.push({
+      //           controls: [],
+      //         });
+      //         ranges.push({
+      //           min: 0,
+      //           max: item.sortOrder - 1,
+      //           fieldsetIdx: 0,
+      //         });
+      //       }
+      //       fieldsets.push({
+      //         title: item.label,
+      //         icon: item.icon || 'bhi-section',
+      //         controls: [],
+      //       });
+      //       ranges.push({
+      //         min: item.sortOrder,
+      //         max: Number.MAX_SAFE_INTEGER,
+      //         fieldsetIdx: fieldsets.length - 1,
+      //       });
+      //       if (i > 0 && fieldsets.length > 1) {
+      //         ranges[fieldsets.length - 2].max = item.sortOrder - 1;
+      //       }
+      //     }
+      //   });
+      //   if (!ranges.length) {
+      //     fieldsets.push({
+      //       controls: [],
+      //     });
+      //     ranges.push({
+      //       min: 0,
+      //       max: Number.MAX_SAFE_INTEGER,
+      //       fieldsetIdx: 0,
+      //     });
+      //   }
+      // } else {
+      //   fieldsets.push({
+      //     controls: [],
+      //   });
+      //   ranges.push({
+      //     min: 0,
+      //     max: Number.MAX_SAFE_INTEGER,
+      //     fieldsetIdx: 0,
+      //   });
+      // }
+      // fields.forEach((field) => {
+      //   if (this.shouldCreateControl(field)) {
+      //     const fieldData: any = data && data[field.name] ? data[field.name] : null;
+      //     let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
+      //     // Set currency format
+      //     if (control.subType === 'currency') {
+      //       control.currencyFormat = currencyFormat;
+      //     }
+      //     let location = ranges.find((item) => {
+      //       return (item.min <= field.sortOrder && field.sortOrder <= item.max) || (item.min <= field.sortOrder && item.min === item.max);
+      //     });
+      //     if (location) {
+      //       // Add to controls
+      //       fieldsets[location.fieldsetIdx].controls.push(control);
+      //     }
+      //   }
+      // });
     }
     if (fieldsets.length > 0) {
       return fieldsets;
@@ -592,6 +629,17 @@ export class FormUtils {
         },
       ];
     }
+  }
+
+  private isHeader(field): boolean {
+    return field != null && field.hasOwnProperty('isSectionHeader') && field.isSectionHeader;
+  }
+
+  private insertControl(fieldsets, control) {
+    if (fieldsets.length === 0) {
+      fieldsets.push({ controls: [] });
+    }
+    fieldsets[fieldsets.length - 1].controls.push(control);
   }
 
   getControlOptions(field: any, http: any, config: { token?: string; restUrl?: string; military?: boolean }, fieldData?: any): any {
