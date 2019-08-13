@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 export type GroupMemberPickerSchemaType = {
-  typeName: string,
-  typeLabel: string,
-  valueField: string,
-  labelField: string,
+  typeName: string;
+  typeLabel: string;
+  valueField: string;
+  labelField: string;
 } & ({ childTypeName?: string } | { parentTypeName?: string });
 
 @Component({
@@ -13,10 +13,10 @@ export type GroupMemberPickerSchemaType = {
 })
 export class NovoGroupMemberPickerElement implements OnInit {
   @Input() buttonConfig: {
-    theme: string,
-    side: string,
-    icon: string,
-    label: string,
+    theme: string;
+    side: string;
+    icon: string;
+    label: string;
   };
   @Input() typeSchema: GroupMemberPickerSchemaType[];
   @Input() data;
@@ -42,8 +42,15 @@ export class NovoGroupMemberPickerElement implements OnInit {
   onItemToggled() {
     let currentSelection = {};
     this.typeSchema.forEach((type) => {
-      currentSelection[type.typeName] = this.data[type.typeName].filter(item => item.selected).map(item => item[type.valueField]);
+      currentSelection[type.typeName] = this.data[type.typeName]
+        .filter((dataItem) => dataItem.selected)
+        .map((dataItem) => dataItem[type.valueField]);
     });
     this.selectionChange.emit(currentSelection);
+  }
+
+  onListItemClicked(item) {
+    item.selected = !item.selected;
+    this.onItemToggled();
   }
 }
