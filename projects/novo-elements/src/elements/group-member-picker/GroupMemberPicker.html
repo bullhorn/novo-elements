@@ -25,7 +25,8 @@
         <!-- todo: quick select goes here-->
         <!-- todo: add virtual scroll-->
         <novo-list-item *ngFor="let item of items"
-                        [attr.data-automation-id]="item[activeType.labelField]">
+                        [attr.data-automation-id]="item[activeType.labelField]"
+                        (click)="onListItemClicked(item);">
           <item-content>
             <novo-checkbox [label]="item[activeType.labelField]"
                            [name]="'selected'"
