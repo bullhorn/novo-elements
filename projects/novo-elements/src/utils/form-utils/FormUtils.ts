@@ -28,7 +28,6 @@ import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from './../../services/options/OptionsService';
-import { NovoControlGroup } from '../../elements/form/ControlGroup';
 
 @Injectable()
 export class FormUtils {
