@@ -521,8 +521,8 @@ export class FormUtils {
 
             let embeddedFields = this.getEmbeddedFields(field);
 
-            embeddedFields.forEach((field) => {
-              let control = this.createControl(field, data, http, config, overrides, currencyFormat);
+            embeddedFields.forEach((embeddedField) => {
+              let control = this.createControl(embeddedField, data, http, config, overrides, currencyFormat);
 
               fieldsets[fieldsets.length - 1].controls.push(control);
             });
