@@ -581,7 +581,7 @@ export class FormUtils {
       }
     });
 
-    return [...fields].sort(Helpers.sortByField(['sortOrder', 'name']));
+    return fields.sort(Helpers.sortByField(['sortOrder', 'name']));
   }
 
   private isHeader(field): boolean {
