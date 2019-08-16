@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.12.0"></a>
+# [3.12.0](https://github.com/bullhorn/novo-elements/compare/v3.11.0...v3.12.0) (2019-08-16)
+
+
+### Features
+
+* **data-table:** added flag to right align table cell data in column ([#1011](https://github.com/bullhorn/novo-elements/issues/1011)) ([8bef27e](https://github.com/bullhorn/novo-elements/commit/8bef27e))
+
+
+
 <a name="3.11.0"></a>
 # [3.11.0](https://github.com/bullhorn/novo-elements/compare/v3.10.0...v3.11.0) (2019-07-19)
 
