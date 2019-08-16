@@ -75,7 +75,10 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
       this.instance.focusManager.blur(true); // Remove focus from editor
       setTimeout(() => {
         this.instance.removeAllListeners();
-        CKEDITOR.instances[this.instance.name].destroy();
+        const aInstance = CKEDITOR.instances[this.instance.name];
+        if (aInstance) {
+          aInstance.destroy();
+        }
         this.instance.destroy();
         this.instance = null;
       });
@@ -102,7 +105,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
     });
   }
 
-  ckeditorInit(config) {
+  private ckeditorInit(config) {
     if (!CKEDITOR) {
       console.error('Make sure to include CKEditor sources in your dependencies!');
       return;

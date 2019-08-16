@@ -16,49 +16,57 @@ const CHIPS_VALUE_ACCESSOR = {
   multi: true,
 };
 
+interface Item {
+  type;
+  label;
+  value;
+}
+
 @Component({
   selector: 'multi-picker',
   providers: [CHIPS_VALUE_ACCESSOR],
   template: `
-        <chip
-            *ngFor="let item of _items | async | slice:0:chipsCount"
-            [type]="item.type"
-            [class.selected]="item == selected"
-            (remove)="removeFromDisplay($event, item)"
-            (select)="select($event, item)">
-            {{ item.label }}
-        </chip>
-        <div *ngIf="items.length > chipsCount">
-            <ul class="summary">
-                <li *ngFor="let type of notShown">+ {{type.count}} {{ labels.more }} {{type.type}}</li>
-            </ul>
-        </div>
-        <div class="chip-input-container">
-            <novo-picker
-                clearValueOnSelect="true"
-                [config]="source"
-                [placeholder]="placeholder"
-                (select)="clickOption($event)"
-                (keydown)="onKeyDown($event)"
-                (focus)="onFocus($event)"
-                (blur)="onTouched($event)"
-                [overrideElement]="element">
-            </novo-picker>
-        </div>
-        <i class="bhi-search" [class.has-value]="items.length"></i>
-        <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
-   `,
+    <chip
+      *ngFor="let item of (_items | async | slice: 0:chipsCount)"
+      [type]="item.type"
+      [class.selected]="item == selected"
+      (remove)="removeFromDisplay($event, item)"
+      (select)="select($event, item)"
+    >
+      {{ item.label }}
+    </chip>
+    <div *ngIf="items.length > chipsCount">
+      <ul class="summary">
+        <li *ngFor="let type of notShown">+ {{ type.count }} {{ labels.more }} {{ type.type }}</li>
+      </ul>
+    </div>
+    <div class="chip-input-container">
+      <novo-picker
+        clearValueOnSelect="true"
+        [config]="source"
+        [placeholder]="placeholder"
+        (select)="clickOption($event)"
+        (keydown)="onKeyDown($event)"
+        (focus)="onFocus($event)"
+        (blur)="onTouched($event)"
+        [overrideElement]="element"
+      >
+      </novo-picker>
+    </div>
+    <i class="bhi-search" [class.has-value]="items.length"></i>
+    <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+  `,
   host: {
     '[class.with-value]': 'items.length > 0',
   },
 })
 export class NovoMultiPickerElement implements OnInit {
   @Input()
-  source: any;
+  source: { options: []; resultsTemplate; selectAllOption: boolean; chipsCount; strictRelationship };
   @Input()
   placeholder: any = '';
   @Input()
-  types: any;
+  types: { value; singular; plural; isParentOf; isChildOf }[];
   @Output()
   changed: EventEmitter<any> = new EventEmitter();
   @Output()
@@ -82,8 +90,8 @@ export class NovoMultiPickerElement implements OnInit {
     this.onModelChange(selectedItems);
   }
 
-  items: any = [];
-  _items = new ReplaySubject(1);
+  items: Item[] = [];
+  _items = new ReplaySubject<Item[]>(1);
   options: any;
   _options: any;
   selected: any = null;
@@ -92,7 +100,7 @@ export class NovoMultiPickerElement implements OnInit {
   selectAllOption: boolean;
   strictRelationship: boolean;
   // private data model
-  _value: any = {};
+  _value = {};
   notShown: any = {};
   // Placeholders for the callbacks
   model: any;
@@ -114,7 +122,7 @@ export class NovoMultiPickerElement implements OnInit {
     this.types.forEach((type) => this.modifyAllOfType(type.value, 'unselect'));
     this.items = [];
     this._items.next(this.items);
-    this.value = this.setInitialValue(null);
+    this.setInitialValue(null);
     this.onModelChange(this.value);
   }
 
@@ -569,7 +577,7 @@ export class NovoMultiPickerElement implements OnInit {
     });
   }
 
-  setInitialValue(model) {
+  setInitialValue(model): void {
     this.items = [];
     this.value = model || {};
     if (!this.types) {

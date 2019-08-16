@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NovoExamplesRoutesModule } from 'novo-examples';
 
 // Vendor
@@ -48,7 +48,7 @@ export function provideAppBridgeService(http) {
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ScrollDispatchModule,
+    ScrollingModule,
     // Vendor
     NovoElementsModule,
     NovoElementProviders.forRoot(),

@@ -25,7 +25,12 @@ import { notify } from '../../utils/notifier/notifier.util';
   template: `
     <ng-content select="button" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
-      <div class="dropdown-container {{ containerClass }}" [style.height.px]="height" [class.has-height]="!!height" (keydown)="onOverlayKeyDown($event)">
+      <div
+        class="dropdown-container {{ containerClass }}"
+        [style.height.px]="height"
+        [class.has-height]="!!height"
+        (keydown)="onOverlayKeyDown($event)"
+      >
         <ng-content></ng-content>
       </div>
     </novo-overlay-template>
@@ -64,8 +69,6 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
 
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
-  @ViewChild('trigger')
-  public button;
 
   clickHandler: any;
   closeHandler: any;

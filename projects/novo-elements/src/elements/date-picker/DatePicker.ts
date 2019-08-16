@@ -7,8 +7,6 @@ import {
   Input,
   Output,
   OnInit,
-  ViewChild,
-  TemplateRef,
   OnChanges,
   SimpleChanges,
   SimpleChange,
@@ -95,63 +93,89 @@ export type rangeSelectModes = 'startDate' | 'endDate';
     ]),
   ],
   template: `
-        <div class="calendar">
-            <div class="calendar-top" *ngIf="!inline && !range">
-                <h4 class="day" [attr.data-automation-id]="heading?.day">{{heading?.day}}</h4>
-                <h2 class="month" [attr.data-automation-id]="heading?.month">{{heading?.month}}</h2>
-                <h1 class="date" [attr.data-automation-id]="heading?.date">{{heading?.date}}</h1>
-                <h3 class="year" [attr.data-automation-id]="heading?.year">{{heading?.year}}</h3>
-            </div>
-            <div class="date-range-tabs" *ngIf="range" [class.week-select-mode]="weekRangeSelect">
-                <span class="range-tab" (click)="toggleRangeSelect('startDate')" [@startDateTextState]="rangeSelectMode" data-automation-id="calendar-start-date">{{selectedLabel}}</span>
-                <span class="range-tab" (click)="toggleRangeSelect('endDate')" [@endDateTextState]="rangeSelectMode" data-automation-id="calendar-end-date">{{selected2Label}}</span>
-                <i class="indicator" [@indicatorState]="rangeSelectMode"></i>
-            </div>
-            <div class="calendar-header">
-                <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
-                <span class="heading">
-                    <span class="month" (click)="open($event, 'months')" data-automation-id="header-month">{{monthLabel}}</span>
-                    <span class="year" (click)="open($event, 'years')" data-automation-id="header-year">{{month?.getFullYear()}}</span>
-                </span>
-                <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
-            </div>
-            <table class="calendar-content days" cellspacing="0" cellpadding="0" [hidden]="!(view=='days')">
-                <thead>
-                    <tr>
-                        <th *ngFor="let day of weekdays" title="{{day}}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">{{day.substr(0, 2)}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let week of weeks">
-                        <td *ngFor="let day of week.days" [ngClass]="{
-                            today: day.isToday,
-                            'notinmonth': day.date.getMonth() !== this.month.getMonth(),
-                            selected: isSelected(range, day.date, selected, selected2),
-                            filler: isFiller(range, day.date, selected, selected2),
-                            startfill: isStartFill(range, day.date, selected, selected2),
-                            endfill: isEndFill(range, day.date, selected, selected2),
-                            'selecting-range': isSelectingRange(range, day.date, selected, selected2, hoverDay, rangeSelectMode, weekRangeSelect)
-                           }" (mouseover)="rangeHover($event, day)" [attr.data-automation-id]="day.number">
-                            <button class="day" [attr.data-automation-id]="day.number" [disabled]="isDisabled(day.date, start, end)" (click)="select($event, day, true)">{{day.number}}</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <section class="calendar-content months" [hidden]="view !== 'months'">
-                <div *ngFor="let month of months;let i = index" (click)="setMonth(i)">
-                    <div class="month" [ngClass]="{selected: i === selected?.getMonth()}" [attr.data-automation-id]="month">{{month}}</div>
-                </div>
-            </section>
-            <section class="calendar-content years" [hidden]="view !== 'years'">
-                <div *ngFor="let year of years" (click)="setYear(year)">
-                    <div class="year" [ngClass]="{selected: year == selected?.getFullYear()}" [attr.data-automation-id]="year">{{year}}</div>
-                </div>
-            </section>
-            <div class="calendar-footer">
-                <span (click)="setToday()" class="today" data-automation-id="calendar-today">{{ labels.today }}</span>
-            </div>
+    <div class="calendar">
+      <div class="calendar-top" *ngIf="!inline && !range">
+        <h4 class="day" [attr.data-automation-id]="heading?.day">{{ heading?.day }}</h4>
+        <h2 class="month" [attr.data-automation-id]="heading?.month">{{ heading?.month }}</h2>
+        <h1 class="date" [attr.data-automation-id]="heading?.date">{{ heading?.date }}</h1>
+        <h3 class="year" [attr.data-automation-id]="heading?.year">{{ heading?.year }}</h3>
+      </div>
+      <div class="date-range-tabs" *ngIf="range" [class.week-select-mode]="weekRangeSelect">
+        <span
+          class="range-tab"
+          (click)="toggleRangeSelect('startDate')"
+          [@startDateTextState]="rangeSelectMode"
+          data-automation-id="calendar-start-date"
+          >{{ selectedLabel }}</span
+        >
+        <span
+          class="range-tab"
+          (click)="toggleRangeSelect('endDate')"
+          [@endDateTextState]="rangeSelectMode"
+          data-automation-id="calendar-end-date"
+          >{{ selected2Label }}</span
+        >
+        <i class="indicator" [@indicatorState]="rangeSelectMode"></i>
+      </div>
+      <div class="calendar-header">
+        <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
+        <span class="heading">
+          <span class="month" (click)="open($event, 'months')" data-automation-id="header-month">{{ monthLabel }}</span>
+          <span class="year" (click)="open($event, 'years')" data-automation-id="header-year">{{ month?.getFullYear() }}</span>
+        </span>
+        <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
+      </div>
+      <table class="calendar-content days" cellspacing="0" cellpadding="0" [hidden]="!(view == 'days')">
+        <thead>
+          <tr>
+            <th *ngFor="let day of weekdays" title="{{ day }}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">
+              {{ day.substr(0, 2) }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let week of weeks">
+            <td
+              *ngFor="let day of week.days"
+              [ngClass]="{
+                today: day.isToday,
+                notinmonth: day.date.getMonth() !== this.month.getMonth(),
+                selected: isSelected(range, day.date, selected, selected2),
+                filler: isFiller(range, day.date, selected, selected2),
+                startfill: isStartFill(range, day.date, selected, selected2),
+                endfill: isEndFill(range, day.date, selected, selected2),
+                'selecting-range': isSelectingRange(range, day.date, selected, selected2, hoverDay, rangeSelectMode, weekRangeSelect)
+              }"
+              (mouseover)="rangeHover($event, day)"
+              [attr.data-automation-id]="day.number"
+            >
+              <button
+                class="day"
+                [attr.data-automation-id]="day.number"
+                [disabled]="isDisabled(day.date, start, end)"
+                (click)="select($event, day, true)"
+              >
+                {{ day.number }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <section class="calendar-content months" [hidden]="view !== 'months'">
+        <div *ngFor="let month of months; let i = index" (click)="setMonth(i)">
+          <div class="month" [ngClass]="{ selected: i === selected?.getMonth() }" [attr.data-automation-id]="month">{{ month }}</div>
         </div>
-    `,
+      </section>
+      <section class="calendar-content years" [hidden]="view !== 'years'">
+        <div *ngFor="let year of years" (click)="setYear(year)">
+          <div class="year" [ngClass]="{ selected: year == selected?.getFullYear() }" [attr.data-automation-id]="year">{{ year }}</div>
+        </div>
+      </section>
+      <div class="calendar-footer">
+        <span (click)="setToday()" class="today" data-automation-id="calendar-today">{{ labels.today }}</span>
+      </div>
+    </div>
+  `,
 })
 export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnChanges {
   @Input()
@@ -173,8 +197,6 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   // Select callback for output
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter(false);
-  @ViewChild(TemplateRef)
-  template: TemplateRef<any>;
 
   // List of all the weekdays
   weekdays: string[] = [];
