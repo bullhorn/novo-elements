@@ -4,23 +4,23 @@ import { Injectable } from '@angular/core';
 import { NovoToastElement } from './Toast';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 
+export interface ToastOptions {
+  title?: string;
+  message?: string;
+  icon?: 'bell' | 'check' | 'info' | 'warning' | 'remove' | 'caution' | 'times' | 'coffee';
+  theme?: 'default' | 'success' | 'info' | 'warning' | 'danger';
+  hideDelay?: number;
+  position?: 'fixedTop' | 'fixedBottom' | 'growlTopRight' | 'growlTopLeft' | 'growlBottomRight' | 'growlBottomLeft';
+  isCloseable?: boolean;
+  customClass?: string;
+}
+
 @Injectable()
 export class NovoToastService {
   _parentViewContainer: any;
   references: Array<any> = [];
-  themes: Array<string> = ['default', 'success', 'info', 'warning', 'danger'];
-  icons: any = {
-    default: 'bell',
-    success: 'check',
-    info: 'info',
-    warning: 'warning',
-    danger: 'remove',
-  };
-  defaults: any = {
-    hideDelay: 3500,
-    position: 'growlTopRight',
-    theme: 'default',
-  };
+  icons = { default: 'bell', success: 'check', info: 'info', warning: 'warning', danger: 'remove' };
+  defaults = { hideDelay: 3500, position: 'growlTopRight', theme: 'default' };
 
   constructor(private componentUtils: ComponentUtils) {}
 
@@ -28,7 +28,7 @@ export class NovoToastService {
     this._parentViewContainer = view;
   }
 
-  alert(options, toastElement: any = NovoToastElement) {
+  alert(options: ToastOptions, toastElement: any = NovoToastElement): Promise<any> {
     return new Promise((resolve) => {
       if (!this._parentViewContainer) {
         console.error(
