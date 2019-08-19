@@ -7,7 +7,7 @@ import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 export interface ToastOptions {
   title?: string;
   message?: string;
-  icon?: 'bell' | 'check' | 'info' | 'warning' | 'remove' | 'caution' | 'times' | 'coffee';
+  icon?: 'bell' | 'check' | 'info' | 'warning' | 'remove' | 'caution' | 'times' | 'coffee' | 'danger' | string;
   theme?: 'default' | 'success' | 'info' | 'warning' | 'danger';
   hideDelay?: number;
   position?: 'fixedTop' | 'fixedBottom' | 'growlTopRight' | 'growlTopLeft' | 'growlBottomRight' | 'growlBottomLeft';
