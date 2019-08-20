@@ -7,7 +7,6 @@ import {
   ContentChild,
   ContentChildren,
   Directive,
-  ElementRef,
   forwardRef,
   Inject,
   QueryList,
@@ -19,7 +18,6 @@ import {
   Input,
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { NovoStepHeader } from './step-header.component';
 import { NovoStepLabel } from './step-label.component';
 import { novoStepperAnimations } from './stepper.animations';
