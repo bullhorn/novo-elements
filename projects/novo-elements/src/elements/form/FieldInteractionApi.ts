@@ -604,13 +604,7 @@ export class FieldInteractionApi {
     mapper?: (item: unknown) => unknown,
     filteredOptionsCreator?: (where?: string) => ((query: string, page?: number) => Promise<unknown[]>),
   ): ((query: string) => Promise<unknown[]>) => (query: string, page?: number) => {
-    if (filteredOptionsCreator) {
-      if ('where' in config) {
-        return filteredOptionsCreator(config.where)(query, page);
-      } else {
-        return filteredOptionsCreator()(query, page);
-      }
-    } else if ('optionsPromise' in config && config.optionsPromise) {
+    if ('optionsPromise' in config && config.optionsPromise) {
       return config.optionsPromise(query, new CustomHttpImpl(this.http));
     } else if (('optionsUrlBuilder' in config && config.optionsUrlBuilder) || ('optionsUrl' in config && config.optionsUrl)) {
       return new Promise((resolve, reject) => {
@@ -627,6 +621,12 @@ export class FieldInteractionApi {
           )
           .subscribe(resolve, reject);
       });
+    } else if (filteredOptionsCreator) {
+      if ('where' in config) {
+        return filteredOptionsCreator(config.where)(query, page);
+      } else {
+        return filteredOptionsCreator()(query, page);
+      }
     }
   };
 
