@@ -65,7 +65,7 @@ export {
 } from './elements/data-table/interfaces';
 export { NovoDataTable } from './elements/data-table/data-table.component';
 export { NovoCommonModule } from './elements/common/common.module';
-export { NovoGroupMemberPickerModule } from './elements/group-member-picker/GroupMemberPicker.module';
+export { NovoTabbedGroupPickerModule } from './elements/tabbed-group-picker/TabbedGroupPicker.module';
 // Export specific elements that are used in local references and/or view children
 export { NovoTableElement, NovoTableConfig } from './elements/table/Table';
 export { NovoCalendarDateChangeElement } from './elements/calendar/common/CalendarDateChange';

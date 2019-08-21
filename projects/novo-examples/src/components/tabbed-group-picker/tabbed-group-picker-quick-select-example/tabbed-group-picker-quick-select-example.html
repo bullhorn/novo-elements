@@ -1,0 +1,11 @@
+<div class="tabbed-group-picker-example">
+  <novo-tabbed-group-picker [schemata]="example_schema"
+                            [quickSelectConfig]="example_quickSelectConfig"
+                            [buttonConfig]="example_buttonConfig"
+                            [data]="example_data"
+                            (selectionChange)="onSelectionChange($event)"></novo-tabbed-group-picker>
+  <div class="selected-data-wrapper">
+    <h6>Selected Animal IDs:</h6>
+    <div>{{ selectedAnimals.join(', ') }}</div>
+  </div>
+</div>
