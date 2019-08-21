@@ -564,13 +564,12 @@ export class FormUtils {
   }
 
   private getFormFields(meta) {
-    if (!meta.sectionHeaders) {
-      return meta;
-    }
-    let sectionHeaders = meta.sectionHeaders.map((element) => {
-      element.isSectionHeader = true;
-      return element;
-    });
+    let sectionHeaders = meta.sectionHeaders
+      ? meta.sectionHeaders.map((element) => {
+          element.isSectionHeader = true;
+          return element;
+        })
+      : [];
 
     return [...sectionHeaders, ...meta.fields].sort(Helpers.sortByField(['sortOrder', 'name']));
   }
