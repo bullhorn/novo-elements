@@ -1,0 +1,14 @@
+<div class="tabbed-group-picker-example">
+  <novo-tabbed-group-picker [schemata]="example_schema"
+                            [buttonConfig]="example_buttonConfig"
+                            [data]="example_data"
+                            (selectionChange)="onSelectionChange($event)"></novo-tabbed-group-picker>
+  <div class="selected-data-wrapper">
+    <h6>Selected Animal IDs:</h6>
+    <div>{{ selectedAnimals.join(', ') }}</div>
+    <h6>Selected Local Place Names:</h6>
+    <div>{{ selectedPlaces.join(', ') }}</div>
+    <h6>Selected Colors:</h6>
+    <div>{{ selectedColors.join(' | ') }}</div>
+  </div>
+</div>

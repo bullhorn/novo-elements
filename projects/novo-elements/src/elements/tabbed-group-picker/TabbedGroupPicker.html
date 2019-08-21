@@ -1,0 +1,55 @@
+<novo-dropdown>
+  <button class="tabbed-group-picker-button"
+          [theme]="buttonConfig.theme"
+          [side]="buttonConfig.side"
+          [icon]="buttonConfig.icon"
+          [loading]="loading">
+    <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
+  </button>
+  <!-- todo: search input goes here-->
+  <div class="tabbed-group-picker-column-container">
+    <div class="tabbed-group-picker-column left">
+      <novo-nav theme="white"
+                direction="vertical">
+        <novo-tab *ngFor="let schema of schemata"
+                  [attr.data-automation-id]="schema.typeName"
+                  (activeChange)="setActiveSchema(schema)">
+          <span>{{ schema.typeLabel }}</span><i class="bhi-next"></i>
+        </novo-tab>
+      </novo-nav>
+      <!-- todo: clear all button goes here-->
+    </div>
+    <div class="tabbed-group-picker-column right">
+      <div class="quick-select" *ngIf="quickSelectConfig">
+        <div class="quick-select-label">{{ quickSelectConfig.label }}</div>
+        <novo-list direction="vertical">
+          <novo-list-item *ngFor="let quickSelect of quickSelectConfig.items"
+                          [attr.data-automation-id]="quickSelect.label"
+                          (click)="onQuickSelectListItemClicked(quickSelect)">
+            <item-content>
+              <novo-checkbox [label]="quickSelect.label"
+                             [name]="'active'"
+                             [(ngModel)]="quickSelect.active"
+                             (ngModelChange)="onQuickSelectToggled(quickSelect)"></novo-checkbox>
+            </item-content>
+          </novo-list-item>
+        </novo-list>
+      </div>
+      <!-- todo: add virtual scroll-->
+      <novo-list *ngIf="data[activeSchema.typeName].length"
+                 direction="vertical">
+        <novo-list-item *ngFor="let item of data[activeSchema.typeName]"
+                        [attr.data-automation-id]="item[activeSchema.labelField]"
+                        (click)="onDataListItemClicked(activeSchema, item);">
+          <item-content>
+            <novo-checkbox [label]="item[activeSchema.labelField]"
+                           [name]="'selected'"
+                           [(ngModel)]="item.selected"
+                           (ngModelChange)="onItemToggled(activeSchema)"></novo-checkbox>
+          </item-content>
+        </novo-list-item>
+      </novo-list>
+      <!-- todo: empty state goes here-->
+    </div>
+  </div>
+</novo-dropdown>

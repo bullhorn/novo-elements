@@ -56,7 +56,7 @@ import { LocalStorageService } from './services/storage/storage.service';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
 import { OptionsService } from './services/options/OptionsService';
-import { NovoGroupMemberPickerModule } from './elements/group-member-picker/GroupMemberPicker.module';
+import { NovoTabbedGroupPickerModule } from './elements/tabbed-group-picker/TabbedGroupPicker.module';
 
 import { NovoCommonModule } from './elements/common/common.module';
 
@@ -108,7 +108,7 @@ import { NovoCommonModule } from './elements/common/common.module';
     UnlessModule,
     NovoCommonModule,
     NovoStepperModule,
-    NovoGroupMemberPickerModule,
+    NovoTabbedGroupPickerModule,
     ScrollDispatchModule,
   ],
   providers: [

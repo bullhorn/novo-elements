@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 // APP
-import { NovoGroupMemberPickerElement } from './GroupMemberPicker';
+import { NovoTabbedGroupPickerElement } from './TabbedGroupPicker';
 import { NovoTabModule } from '../tabs/Tabs.module';
 import { NovoListModule } from '../list/List.module';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
@@ -12,7 +12,7 @@ import { NovoDropdownModule } from '../dropdown/Dropdown.module';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NovoTabModule, NovoListModule, NovoFormExtrasModule, NovoButtonModule, NovoDropdownModule],
-  declarations: [NovoGroupMemberPickerElement],
-  exports: [NovoGroupMemberPickerElement],
+  declarations: [NovoTabbedGroupPickerElement],
+  exports: [NovoTabbedGroupPickerElement],
 })
-export class NovoGroupMemberPickerModule {}
+export class NovoTabbedGroupPickerModule {}

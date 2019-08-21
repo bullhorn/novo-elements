@@ -1,0 +1,11 @@
+.tabbed-group-picker-example {
+  display: flex;
+  justify-content: space-between;
+
+  novo-tabbed-group-picker {
+    max-width: 40%;
+  }
+  .selected-data-wrapper {
+    width: 40%;
+  }
+}
