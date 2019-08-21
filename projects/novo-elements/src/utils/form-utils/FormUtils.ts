@@ -564,7 +564,9 @@ export class FormUtils {
   }
 
   private getFormFields(meta) {
-    if (!meta.sectionHeaders && !meta.sectionHeaders.length) return meta;
+    if (!meta.sectionHeaders && !meta.sectionHeaders.length) {
+      return meta;
+    }
     let sectionHeaders = meta.sectionHeaders.map((element) => {
       element.isSectionHeader = true;
       return element;
