@@ -68,6 +68,7 @@ import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
           (click)="focusInput()"
           tooltipPosition="right"
           [tooltip]="labels.filters"
+          [attr.data-feature-id]="'novo-data-table-filter-' + dataFeatureId"
         ></button>
         <div class="header">
           <span>{{ labels.filters }}</span>
