@@ -515,26 +515,26 @@ export class FormUtils {
           if (field.enabled) {
             this.insertHeaderToFieldsets(fieldsets, field);
           }
-        } else {
-          if (this.isEmbeddedField(field)) {
-            this.insertHeaderToFieldsets(fieldsets, field);
+        } else if (this.isEmbeddedField(field)) {
+          this.insertHeaderToFieldsets(fieldsets, field);
 
-            let embeddedFields = this.getEmbeddedFields(field);
+          let embeddedFields = this.getEmbeddedFields(field);
 
-            embeddedFields.forEach((embeddedField) => {
+          embeddedFields.forEach((embeddedField) => {
+            if (this.shouldCreateControl(embeddedField)) {
               let control = this.createControl(embeddedField, data, http, config, overrides, currencyFormat);
 
               fieldsets[fieldsets.length - 1].controls.push(control);
-            });
-          } else if (this.shouldCreateControl(field)) {
-            let control = this.createControl(field, data, http, config, overrides, currencyFormat);
-
-            if (fieldsets.length === 0) {
-              fieldsets.push({ controls: [] });
             }
+          });
+        } else if (this.shouldCreateControl(field)) {
+          let control = this.createControl(field, data, http, config, overrides, currencyFormat);
 
-            fieldsets[fieldsets.length - 1].controls.push(control);
+          if (fieldsets.length === 0) {
+            fieldsets.push({ controls: [] });
           }
+
+          fieldsets[fieldsets.length - 1].controls.push(control);
         }
       });
     }
