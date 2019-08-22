@@ -9,7 +9,6 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
     '[attr.icon]': 'icon',
     '[attr.loading]': 'loading',
     '[attr.side]': 'side',
-    // '[attr.data-feature-id]': 'dataFeatureId',
   },
   template: `
     <div class="flex-wrapper">
@@ -56,7 +55,6 @@ export class NovoButtonElement {
   @Input() side: string = 'right';
   @Input() theme: string;
   @Input() loading: boolean;
-  // @Input() dataFeatureId: string;
   @Input()
   set icon(icon: string) {
     if (icon) {
