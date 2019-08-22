@@ -51,6 +51,7 @@ import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
         (click)="sort()"
         [class.active]="sortActive"
         data-automation-id="novo-data-table-sort"
+        [attr.data-feature-id]="'novo-data-table-sort-' + dataFeatureId"
       ></button>
       <novo-dropdown
         *ngIf="config.filterable"
@@ -192,6 +193,9 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   @Input()
   allowMultipleFilters: boolean = false;
+
+  @Input()
+  dataFeatureId: string;
 
   @Input()
   resized: EventEmitter<IDataTableColumn<T>>;
