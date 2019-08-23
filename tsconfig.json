@@ -21,6 +21,7 @@
       // "novo-elements": ["projects/novo-elements/src/index"],
       // "novo-examples": ["projects/novo-examples/src/index"],
       // "chomsky": ["projects/chomsky/src/index"],
+      // "@angular/cdk/*": ["../components/src/cdk/*"],
     }
   }
 }
