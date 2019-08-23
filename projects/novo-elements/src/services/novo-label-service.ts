@@ -153,10 +153,12 @@ export class NovoLabelService {
     if (date.getTime() !== date.getTime()) {
       return value;
     }
-    let timeParts: { [type: string]: string } =  Intl.DateTimeFormat(this.userLocale, format).formatToParts(date).reduce((obj, part) => {
-      obj[part.type] = part.value;
-      return obj;
-    }, {});
+    let timeParts: { [type: string]: string } = Intl.DateTimeFormat(this.userLocale, format)
+      .formatToParts(date)
+      .reduce((obj, part) => {
+        obj[part.type] = part.value;
+        return obj;
+      }, {});
     const dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
     return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
   }
@@ -249,7 +251,7 @@ export class NovoLabelService {
       month: '2-digit',
       day: '2-digit',
       year: 'numeric',
-      hour: '2-digit',
+      hour: 'numeric',
       minute: '2-digit',
     };
     let _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
@@ -259,7 +261,7 @@ export class NovoLabelService {
   formatTime(value: any): string {
     let options: Intl.DateTimeFormatOptions = {
       // HH:MM A - 1:17 PM
-      hour: '2-digit',
+      hour: 'numeric',
       minute: '2-digit',
     };
     let _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
