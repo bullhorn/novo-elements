@@ -1351,7 +1351,7 @@ var ChomskyModule = /** @class */ (function () {
 /*!***************************************************!*\
   !*** ./dist/novo-elements/fesm5/novo-elements.js ***!
   \***************************************************/
-/*! exports provided: NovoAceEditorModule, NovoPipesModule, NovoButtonModule, NovoLoadingModule, NovoCardModule, NovoCalendarModule, NovoToastModule, NovoTooltipModule, NovoHeaderModule, NovoTabModule, NovoTilesModule, NovoModalModule, NovoQuickNoteModule, NovoRadioModule, NovoDropdownModule, NovoSelectModule, NovoListModule, NovoSwitchModule, NovoSearchBoxModule, NovoDragulaModule, NovoSliderModule, NovoPickerModule, NovoChipsModule, NovoDatePickerModule, NovoDatePickerElement, NovoTimePickerModule, NovoDateTimePickerModule, NovoNovoCKEditorModule, NovoTipWellModule, NovoTableModule, NovoValueModule, NovoTableMode, NovoIconModule, NovoExpansionModule, NovoStepperModule, NovoTableExtrasModule, NovoFormModule, NovoDynamicFormElement, NovoFormExtrasModule, NovoCategoryDropdownModule, NovoMultiPickerModule, UnlessModule, NovoDataTableModule, RemoteDataTableService, StaticDataTableService, NovoDataTableFilterUtils, NovoDataTable, NovoCommonModule, NovoTableElement, NovoCalendarDateChangeElement, NovoTemplate, NovoToastService, NovoModalService, NovoLabelService, NovoDragulaService, GooglePlacesService, CollectionEvent, ArrayCollection, PagedArrayCollection, NovoModalParams, NovoModalRef, QuickNoteResults, PickerResults, BasePickerResults, EntityPickerResult, EntityPickerResults, DistributionListPickerResults, SkillsSpecialtyPickerResults, ChecklistPickerResults, GroupedMultiPickerResults, BaseRenderer, DateCell, PercentageCell, NovoDropdownCell, FormValidators, FormUtils, Security, OptionsService, NovoTemplateService, NovoFile, BaseControl, ControlFactory, AddressControl, CheckListControl, CheckboxControl, DateControl, DateTimeControl, EditorControl, AceEditorControl, FileControl, NativeSelectControl, PickerControl, TablePickerControl, QuickNoteControl, RadioControl, ReadOnlyControl, SelectControl, TextAreaControl, TextBoxControl, TilesControl, TimeControl, GroupedControl, CustomControl, NovoFormControl, NovoFormGroup, NovoControlGroup, FieldInteractionApi, NovoCheckListElement, OutsideClick, KeyCodes, Deferred, COUNTRIES, getCountries, getStateObjects, getStates, findByCountryCode, findByCountryId, findByCountryName, Helpers, notify, ComponentUtils, AppBridge, AppBridgeHandler, AppBridgeService, DevAppBridge, DevAppBridgeService, NovoElementProviders, PluralPipe, DecodeURIPipe, GroupByPipe, RenderPipe, NovoElementsModule, NovoListElement, NOVO_VALUE_TYPE, NOVO_VALUE_THEME, NovoTable, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage, NovoActivityTableCustomHeader, NovoSimpleCell, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleHeaderCell, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleHeaderRowDef, NovoSimpleRowDef, NovoSimpleCellHeader, NovoSimpleFilterFocus, NovoSortFilter, NovoSelection, NovoSimpleTablePagination, ActivityTableDataSource, RemoteActivityTableService, StaticActivityTableService, ActivityTableRenderers, NovoActivityTableState, NovoSimpleTableModule, getWeekViewEventOffset, getWeekViewHeader, getWeekView, getMonthView, getDayView, getDayViewHourGrid, CalendarEventResponse, ɵo, ɵp, ɵz, ɵbj, ɵbh, ɵbg, ɵbi, ɵbc, ɵbb, ɵba, ɵbl, ɵbq, ɵbp, ɵbm, ɵbn, ɵbk, ɵbo, ɵbf, ɵbe, ɵbd, ɵx, ɵy, ɵep, ɵct, ɵcu, ɵcv, ɵcw, ɵdd, ɵfi, ɵfk, ɵez, ɵfc, ɵfd, ɵfh, ɵfj, ɵfm, ɵfl, ɵex, ɵes, ɵey, ɵet, ɵeu, ɵew, ɵev, ɵfg, ɵfe, ɵff, ɵfb, ɵfa, ɵcx, ɵdb, ɵdc, ɵcr, ɵcj, ɵck, ɵcm, ɵcl, ɵdz, ɵec, ɵea, ɵeb, ɵed, ɵef, ɵee, ɵeg, ɵdh, ɵdi, ɵdm, ɵb, ɵa, ɵdk, ɵdl, ɵdj, ɵn, ɵdf, ɵdg, ɵbv, ɵbs, ɵbu, ɵbt, ɵdy, ɵg, ɵk, ɵj, ɵl, ɵi, ɵh, ɵf, ɵu, ɵt, ɵq, ɵs, ɵr, ɵc, ɵd, ɵe, ɵeq, ɵci, ɵch, ɵcp, ɵfu, ɵft, ɵfs, ɵfq, ɵfr, ɵce, ɵcg, ɵcf, ɵcq, ɵcn, ɵcs, ɵel, ɵem, ɵeo, ɵen, ɵej, ɵeh, ɵei, ɵek, ɵco, ɵdq, ɵdr, ɵds, ɵdp, ɵdt, ɵdu, ɵdo, ɵdn, ɵdv, ɵdw, ɵcb, ɵbw, ɵcc, ɵca, ɵby, ɵbx, ɵbz, ɵcd, ɵcz, ɵda, ɵde, ɵbr, ɵw, ɵv, ɵer, ɵdx, ɵm, ɵcy, ɵfo, ɵfn, ɵfp */
+/*! exports provided: NovoAceEditorModule, NovoPipesModule, NovoButtonModule, NovoLoadingModule, NovoCardModule, NovoCalendarModule, NovoToastModule, NovoTooltipModule, NovoHeaderModule, NovoTabModule, NovoTilesModule, NovoModalModule, NovoQuickNoteModule, NovoRadioModule, NovoDropdownModule, NovoSelectModule, NovoListModule, NovoSwitchModule, NovoSearchBoxModule, NovoDragulaModule, NovoSliderModule, NovoPickerModule, NovoChipsModule, NovoDatePickerModule, NovoDatePickerElement, NovoTimePickerModule, NovoDateTimePickerModule, NovoNovoCKEditorModule, NovoTipWellModule, NovoTableModule, NovoValueModule, NovoTableMode, NovoIconModule, NovoExpansionModule, NovoStepperModule, NovoVerticalStepper, NovoHorizontalStepper, NovoStep, NovoStepper, NovoTableExtrasModule, NovoFormModule, NovoDynamicFormElement, NovoFormExtrasModule, NovoCategoryDropdownModule, NovoMultiPickerModule, UnlessModule, NovoDataTableModule, RemoteDataTableService, StaticDataTableService, NovoDataTableFilterUtils, NovoDataTable, NovoCommonModule, NovoTableElement, NovoCalendarDateChangeElement, NovoTemplate, NovoToastService, NovoModalService, NovoLabelService, NovoDragulaService, GooglePlacesService, CollectionEvent, ArrayCollection, PagedArrayCollection, NovoModalParams, NovoModalRef, QuickNoteResults, PickerResults, BasePickerResults, EntityPickerResult, EntityPickerResults, DistributionListPickerResults, SkillsSpecialtyPickerResults, ChecklistPickerResults, GroupedMultiPickerResults, BaseRenderer, DateCell, PercentageCell, NovoDropdownCell, FormValidators, FormUtils, Security, OptionsService, NovoTemplateService, NovoFile, BaseControl, ControlFactory, AddressControl, CheckListControl, CheckboxControl, DateControl, DateTimeControl, EditorControl, AceEditorControl, FileControl, NativeSelectControl, PickerControl, TablePickerControl, QuickNoteControl, RadioControl, ReadOnlyControl, SelectControl, TextAreaControl, TextBoxControl, TilesControl, TimeControl, GroupedControl, CustomControl, NovoFormControl, NovoFormGroup, NovoControlGroup, FieldInteractionApi, NovoCheckListElement, OutsideClick, KeyCodes, Deferred, COUNTRIES, getCountries, getStateObjects, getStates, findByCountryCode, findByCountryId, findByCountryName, Helpers, notify, ComponentUtils, AppBridge, AppBridgeHandler, AppBridgeService, DevAppBridge, DevAppBridgeService, NovoElementProviders, PluralPipe, DecodeURIPipe, GroupByPipe, RenderPipe, NovoElementsModule, NovoListElement, NOVO_VALUE_TYPE, NOVO_VALUE_THEME, NovoTable, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage, NovoActivityTableCustomHeader, NovoSimpleCell, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleHeaderCell, NovoSimpleCellDef, NovoSimpleHeaderCellDef, NovoSimpleColumnDef, NovoSimpleActionCell, NovoSimpleEmptyHeaderCell, NovoSimpleHeaderRow, NovoSimpleRow, NovoSimpleHeaderRowDef, NovoSimpleRowDef, NovoSimpleCellHeader, NovoSimpleFilterFocus, NovoSortFilter, NovoSelection, NovoSimpleTablePagination, ActivityTableDataSource, RemoteActivityTableService, StaticActivityTableService, ActivityTableRenderers, NovoActivityTableState, NovoSimpleTableModule, getWeekViewEventOffset, getWeekViewHeader, getWeekView, getMonthView, getDayView, getDayViewHourGrid, CalendarEventResponse, ɵo, ɵp, ɵz, ɵbj, ɵbh, ɵbg, ɵbi, ɵbc, ɵbb, ɵba, ɵbl, ɵbq, ɵbp, ɵbm, ɵbn, ɵbk, ɵbo, ɵbf, ɵbe, ɵbd, ɵx, ɵy, ɵel, ɵct, ɵcu, ɵcv, ɵcw, ɵdd, ɵfe, ɵfg, ɵev, ɵey, ɵez, ɵfd, ɵff, ɵfi, ɵfh, ɵet, ɵeo, ɵeu, ɵep, ɵeq, ɵes, ɵer, ɵfc, ɵfa, ɵfb, ɵex, ɵew, ɵcx, ɵdb, ɵdc, ɵcr, ɵcj, ɵck, ɵcm, ɵcl, ɵdz, ɵec, ɵea, ɵeb, ɵed, ɵef, ɵee, ɵeg, ɵdh, ɵdi, ɵdm, ɵb, ɵa, ɵdk, ɵdl, ɵdj, ɵn, ɵdf, ɵdg, ɵbv, ɵbs, ɵbu, ɵbt, ɵdy, ɵg, ɵk, ɵj, ɵl, ɵi, ɵh, ɵf, ɵu, ɵt, ɵq, ɵs, ɵr, ɵc, ɵd, ɵe, ɵem, ɵci, ɵch, ɵcp, ɵfq, ɵfp, ɵfo, ɵfm, ɵfn, ɵce, ɵcg, ɵcf, ɵcq, ɵcn, ɵcs, ɵeh, ɵei, ɵek, ɵej, ɵco, ɵdq, ɵdr, ɵds, ɵdp, ɵdt, ɵdu, ɵdo, ɵdn, ɵdv, ɵdw, ɵcb, ɵbw, ɵcc, ɵca, ɵby, ɵbx, ɵbz, ɵcd, ɵcz, ɵda, ɵde, ɵbr, ɵw, ɵv, ɵen, ɵdx, ɵm, ɵcy, ɵfk, ɵfj, ɵfl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1391,6 +1391,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoIconModule", function() { return NovoIconModule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoExpansionModule", function() { return NovoExpansionModule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoStepperModule", function() { return NovoStepperModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoVerticalStepper", function() { return NovoVerticalStepper; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoHorizontalStepper", function() { return NovoHorizontalStepper; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoStep", function() { return NovoStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoStepper", function() { return NovoStepper; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoTableExtrasModule", function() { return NovoTableExtrasModule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoFormModule", function() { return NovoFormModule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoDynamicFormElement", function() { return NovoDynamicFormElement; });
@@ -1551,33 +1555,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵbd", function() { return NovoCalendarWeekViewElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵx", function() { return CardActionsElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵy", function() { return CardElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵep", function() { return NovoCategoryDropdownElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵel", function() { return NovoCategoryDropdownElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵct", function() { return NovoChipElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcu", function() { return NovoChipsElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcv", function() { return NovoRowChipElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcw", function() { return NovoRowChipsElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵdd", function() { return NovoCKEditorElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfi", function() { return NovoDataTableCheckboxHeaderCell; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfk", function() { return NovoDataTableExpandHeaderCell; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵez", function() { return NovoDataTableCellHeader; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfc", function() { return NovoDataTableHeaderCell; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfd", function() { return NovoDataTableCell; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfh", function() { return NovoDataTableCheckboxCell; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfj", function() { return NovoDataTableExpandCell; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfm", function() { return NovoDataTableClearButton; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfl", function() { return NovoDataTableExpandDirective; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵex", function() { return DataTableBigDecimalRendererPipe; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵes", function() { return DataTableInterpolatePipe; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵey", function() { return DateTableCurrencyRendererPipe; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵet", function() { return DateTableDateRendererPipe; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeu", function() { return DateTableDateTimeRendererPipe; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵew", function() { return DateTableNumberRendererPipe; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵev", function() { return DateTableTimeRendererPipe; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfg", function() { return NovoDataTablePagination; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfe", function() { return NovoDataTableHeaderRow; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵff", function() { return NovoDataTableRow; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfb", function() { return NovoDataTableSortFilter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfa", function() { return DataTableState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfe", function() { return NovoDataTableCheckboxHeaderCell; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfg", function() { return NovoDataTableExpandHeaderCell; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵev", function() { return NovoDataTableCellHeader; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵey", function() { return NovoDataTableHeaderCell; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵez", function() { return NovoDataTableCell; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfd", function() { return NovoDataTableCheckboxCell; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵff", function() { return NovoDataTableExpandCell; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfi", function() { return NovoDataTableClearButton; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfh", function() { return NovoDataTableExpandDirective; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵet", function() { return DataTableBigDecimalRendererPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeo", function() { return DataTableInterpolatePipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeu", function() { return DateTableCurrencyRendererPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵep", function() { return DateTableDateRendererPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeq", function() { return DateTableDateTimeRendererPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵes", function() { return DateTableNumberRendererPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵer", function() { return DateTableTimeRendererPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfc", function() { return NovoDataTablePagination; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfa", function() { return NovoDataTableHeaderRow; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfb", function() { return NovoDataTableRow; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵex", function() { return NovoDataTableSortFilter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵew", function() { return DataTableState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcx", function() { return NovoDatePickerInputElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵdb", function() { return NovoDateTimePickerElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵdc", function() { return NovoDateTimePickerInputElement; });
@@ -1625,29 +1629,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵc", function() { return NovoModalContainerElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵd", function() { return NovoModalElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵe", function() { return NovoModalNotificationElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeq", function() { return NovoMultiPickerElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵem", function() { return NovoMultiPickerElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵci", function() { return NovoOverlayTemplateComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵch", function() { return NovoOverlayModule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcp", function() { return NovoPickerElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfu", function() { return PlacesListComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵft", function() { return GooglePlacesModule; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfs", function() { return PopOverDirective; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfq", function() { return NovoPopOverModule; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfr", function() { return PopOverContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfq", function() { return PlacesListComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfp", function() { return GooglePlacesModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfo", function() { return PopOverDirective; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfm", function() { return NovoPopOverModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfn", function() { return PopOverContent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵce", function() { return QuickNoteElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcg", function() { return NovoRadioElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcf", function() { return NovoRadioGroup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcq", function() { return NovoSearchBoxElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcn", function() { return NovoSelectElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcs", function() { return NovoSliderElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵel", function() { return NovoStepHeader; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵem", function() { return NovoStepLabel; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeo", function() { return NovoStepStatus; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵen", function() { return novoStepperAnimations; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵej", function() { return NovoHorizontalStepper; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeh", function() { return NovoStep; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵei", function() { return NovoStepper; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵek", function() { return NovoVerticalStepper; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵeh", function() { return NovoStepHeader; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵei", function() { return NovoStepLabel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵek", function() { return NovoStepStatus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵej", function() { return novoStepperAnimations; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵco", function() { return NovoSwitchElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵdq", function() { return NovoTableKeepFilterFocus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵdr", function() { return Pagination; });
@@ -1673,13 +1673,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵbr", function() { return NovoToastElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵw", function() { return NovoTooltip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵv", function() { return TooltipDirective; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵer", function() { return Unless; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵen", function() { return Unless; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵdx", function() { return EntityList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵm", function() { return NovoValueElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcy", function() { return DateFormatService; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfo", function() { return BrowserGlobalRef; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfn", function() { return GlobalRef; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfp", function() { return LocalStorageService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfk", function() { return BrowserGlobalRef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfj", function() { return GlobalRef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfl", function() { return LocalStorageService; });
 /* harmony import */ var brace_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! brace/index */ "./node_modules/brace/index.js");
 /* harmony import */ var brace_index__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(brace_index__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var brace_theme_chrome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! brace/theme/chrome */ "./node_modules/brace/theme/chrome.js");
@@ -47052,11 +47052,14 @@ var NovoStepLabel = /** @class */ (function (_super) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var NovoStepHeader = /** @class */ (function () {
+var NovoStepHeader = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_25__["__extends"])(NovoStepHeader, _super);
     function NovoStepHeader(_focusMonitor, _element) {
-        this._focusMonitor = _focusMonitor;
-        this._element = _element;
+        var _this = _super.call(this, _element) || this;
+        _this._focusMonitor = _focusMonitor;
+        _this._element = _element;
         _focusMonitor.monitor(_element.nativeElement, true);
+        return _this;
     }
     Object.defineProperty(NovoStepHeader.prototype, "index", {
         /** Index of the given step. */
@@ -47222,7 +47225,7 @@ var NovoStepHeader = /** @class */ (function () {
         optional: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_26__["Input"] }]
     };
     return NovoStepHeader;
-}());
+}(_angular_cdk_stepper__WEBPACK_IMPORTED_MODULE_14__["CdkStepHeader"]));
 
 /**
  * @fileoverview added by tsickle
@@ -68573,7 +68576,7 @@ var StepperHorizontalExample = /** @class */ (function () {
      * @return {?}
      */
     function (stepper, step) {
-        // step.editable = false;
+        step.editable = false;
         stepper.next();
     };
     StepperHorizontalExample.decorators = [
@@ -68627,13 +68630,13 @@ var StepperVerticalExample = /** @class */ (function () {
      * @return {?}
      */
     function (stepper, step) {
-        // step.editable = false;
+        step.editable = false;
         stepper.next();
     };
     StepperVerticalExample.decorators = [
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_11__["Component"], args: [{
                     selector: 'stepper-vertical-example',
-                    template: "\n<novo-vertical-stepper [linear]=\"isLinear\">\n  <novo-step [stepControl]=\"firstFormGroup\" theme=\"candidate\" icon=\"candidate\">\n    <form [formGroup]=\"firstFormGroup\">\n      <ng-template novoStepLabel>Fill out your name</ng-template>\n      <input placeholder=\"Last name, First name\" formControlName=\"firstCtrl\" required>\n      <div>\n        <!-- <button novo-button novoStepperNext>Next</button> -->\n      </div>\n    </form>\n  </novo-step>\n  <novo-step [stepControl]=\"secondFormGroup\" theme=\"contact\" icon=\"person\">\n    <form [formGroup]=\"secondFormGroup\">\n      <ng-template novoStepLabel>Fill out your address</ng-template>\n      <input placeholder=\"Address\" formControlName=\"secondCtrl\" required>\n      <div>\n        <!-- <button novo-button novoStepperPrevious>Back</button>\n        <button novo-button novoStepperNext>Next</button> -->\n      </div>\n    </form>\n  </novo-step>\n  <novo-step>\n    <ng-template novoStepLabel>Done</ng-template>\n    You are now done.\n    <div>\n      <!-- <button novo-button novoStepperPrevious>Back</button>\n      <button novo-button (click)=\"stepper.reset()\">Reset</button> -->\n    </div>\n  </novo-step>\n</novo-vertical-stepper>\n",
+                    template: "\n<novo-vertical-stepper [linear]=\"isLinear\" #stepper>\n  <novo-step [stepControl]=\"firstFormGroup\" theme=\"candidate\" icon=\"candidate\" #step1>\n    <form [formGroup]=\"firstFormGroup\">\n      <ng-template novoStepLabel>Fill out your name</ng-template>\n      <input placeholder=\"Last name, First name\" formControlName=\"firstCtrl\" required>\n      <div>\n        <!-- <button novo-button novoStepperNext>Next</button> -->\n        <button (click)=\"next(stepper, step1)\" [disabled]=\"!firstFormGroup?.valid\">Next</button>\n      </div>\n    </form>\n  </novo-step>\n  <novo-step [stepControl]=\"secondFormGroup\" theme=\"contact\" icon=\"person\">\n    <form [formGroup]=\"secondFormGroup\">\n      <ng-template novoStepLabel>Fill out your address</ng-template>\n      <input placeholder=\"Address\" formControlName=\"secondCtrl\" required>\n      <div>\n        <!-- <button novo-button novoStepperPrevious>Back</button>\n        <button novo-button novoStepperNext>Next</button> -->\n        <button (click)=\"stepper.previous()\">Back</button>\n        <button (click)=\"stepper.next()\">Next</button>\n      </div>\n    </form>\n  </novo-step>\n  <novo-step>\n    <ng-template novoStepLabel>Done</ng-template>\n    You are now done.\n    <div>\n      <button novo-button (click)=\"stepper.reset()\">Reset</button>\n    </div>\n  </novo-step>\n</novo-vertical-stepper>\n",
                     styles: [""]
                 }] }
     ];
@@ -72104,16 +72107,16 @@ var EXAMPLE_COMPONENTS = {
     'stepper-horizontal': {
         title: 'Basic Stepper Component',
         component: StepperHorizontalExample,
-        tsSource: "import%20%7B%20Component%2C%20OnInit%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormBuilder%2C%20FormGroup%2C%20Validators%20%7D%20from%20'%40angular%2Fforms'%3B%0A%0A%2F**%0A%20*%20%40title%20Basic%20Stepper%20Component%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'stepper-horizontal-example'%2C%0A%20%20templateUrl%3A%20'stepper-horizontal-example.html'%2C%0A%20%20styleUrls%3A%20%5B'stepper-horizontal-example.css'%5D%2C%0A%7D)%0Aexport%20class%20StepperHorizontalExample%20implements%20OnInit%20%7B%0A%20%20isLinear%20%3D%20true%3B%0A%20%20firstFormGroup%3A%20FormGroup%3B%0A%20%20secondFormGroup%3A%20FormGroup%3B%0A%0A%20%20constructor(private%20_formBuilder%3A%20FormBuilder)%20%7B%7D%0A%0A%20%20public%20ngOnInit()%20%7B%0A%20%20%20%20this.firstFormGroup%20%3D%20this._formBuilder.group(%7B%0A%20%20%20%20%20%20firstCtrl%3A%20%5B''%2C%20Validators.required%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.secondFormGroup%20%3D%20this._formBuilder.group(%7B%0A%20%20%20%20%20%20secondCtrl%3A%20%5B''%2C%20Validators.required%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%7D%0A%0A%20%20public%20next(stepper%2C%20step)%20%7B%0A%20%20%20%20%2F%2F%20step.editable%20%3D%20false%3B%0A%20%20%20%20stepper.next()%3B%0A%20%20%7D%0A%7D%0A",
+        tsSource: "import%20%7B%20Component%2C%20OnInit%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormBuilder%2C%20FormGroup%2C%20Validators%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%20NovoHorizontalStepper%2C%20NovoStep%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Basic%20Stepper%20Component%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'stepper-horizontal-example'%2C%0A%20%20templateUrl%3A%20'stepper-horizontal-example.html'%2C%0A%20%20styleUrls%3A%20%5B'stepper-horizontal-example.css'%5D%2C%0A%7D)%0Aexport%20class%20StepperHorizontalExample%20implements%20OnInit%20%7B%0A%20%20isLinear%20%3D%20true%3B%0A%20%20firstFormGroup%3A%20FormGroup%3B%0A%20%20secondFormGroup%3A%20FormGroup%3B%0A%0A%20%20constructor(private%20_formBuilder%3A%20FormBuilder)%20%7B%7D%0A%0A%20%20ngOnInit()%20%7B%0A%20%20%20%20this.firstFormGroup%20%3D%20this._formBuilder.group(%7B%0A%20%20%20%20%20%20firstCtrl%3A%20%5B''%2C%20Validators.required%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.secondFormGroup%20%3D%20this._formBuilder.group(%7B%0A%20%20%20%20%20%20secondCtrl%3A%20%5B''%2C%20Validators.required%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%7D%0A%0A%20%20next(stepper%3A%20NovoHorizontalStepper%2C%20step%3A%20NovoStep)%20%7B%0A%20%20%20%20step.editable%20%3D%20false%3B%0A%20%20%20%20stepper.next()%3B%0A%20%20%7D%0A%7D%0A",
         cssSource: "%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A",
         htmlSource: "%0A%3Cnovo-horizontal-stepper%20%5Blinear%5D%3D%22isLinear%22%20%23stepper%3E%0A%20%20%3Cnovo-step%20%5BstepControl%5D%3D%22firstFormGroup%22%20label%3D%22Fill%20out%20your%20name%22%20theme%3D%22candidate%22%20icon%3D%22candidate%22%20%23step1%3E%0A%20%20%20%20%3Cform%20%5BformGroup%5D%3D%22firstFormGroup%22%3E%0A%20%20%20%20%20%20%3Cinput%20placeholder%3D%22Last%20name%2C%20First%20name%22%20formControlName%3D%22firstCtrl%22%20required%3E%0A%20%20%20%20%20%20%3Cdiv%3EForm%20Valid%3F%20%7B%7BfirstFormGroup%3F.valid%7D%7D%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3Cbutton%20(click)%3D%22next(stepper%2C%20step1)%22%3ENext%3C%2Fbutton%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3C%2Fform%3E%0A%20%20%3C%2Fnovo-step%3E%0A%20%20%3Cnovo-step%20%5BstepControl%5D%3D%22secondFormGroup%22%20theme%3D%22contact%22%3E%0A%20%20%20%20%3Cform%20%5BformGroup%5D%3D%22secondFormGroup%22%3E%0A%20%20%20%20%20%20%3Cng-template%20novoStepLabel%3EFill%20out%20your%20address%3C%2Fng-template%3E%0A%20%20%20%20%20%20%3Cinput%20placeholder%3D%22Address%22%20formControlName%3D%22secondCtrl%22%20required%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3Cbutton%20(click)%3D%22stepper.previous()%22%3EBack%3C%2Fbutton%3E%0A%20%20%20%20%20%20%20%20%3Cbutton%20(click)%3D%22stepper.next()%22%3ENext%3C%2Fbutton%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3C%2Fform%3E%0A%20%20%3C%2Fnovo-step%3E%0A%20%20%3Cnovo-step%3E%0A%20%20%20%20%3Cng-template%20novoStepLabel%3EDone%3C%2Fng-template%3E%0A%20%20%20%20You%20are%20now%20done.%0A%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%3Cbutton%20novo-button%20(click)%3D%22stepper.previous()%22%3EBack%3C%2Fbutton%3E%0A%20%20%20%20%20%20%3Cbutton%20novo-button%20(click)%3D%22stepper.complete()%22%3EDone%3C%2Fbutton%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%3C%2Fnovo-step%3E%0A%3C%2Fnovo-horizontal-stepper%3E%0A"
     },
     'stepper-vertical': {
         title: 'Stepper w/ Vertical Layout',
         component: StepperVerticalExample,
-        tsSource: "import%20%7B%20Component%2C%20OnInit%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormBuilder%2C%20FormGroup%2C%20Validators%20%7D%20from%20'%40angular%2Fforms'%3B%0A%0A%2F**%0A%20*%20%40title%20Stepper%20w%2F%20Vertical%20Layout%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'stepper-vertical-example'%2C%0A%20%20templateUrl%3A%20'stepper-vertical-example.html'%2C%0A%20%20styleUrls%3A%20%5B'stepper-vertical-example.css'%5D%2C%0A%7D)%0Aexport%20class%20StepperVerticalExample%20implements%20OnInit%20%7B%0A%20%20isLinear%20%3D%20true%3B%0A%20%20firstFormGroup%3A%20FormGroup%3B%0A%20%20secondFormGroup%3A%20FormGroup%3B%0A%0A%20%20constructor(private%20_formBuilder%3A%20FormBuilder)%20%7B%7D%0A%0A%20%20public%20ngOnInit()%20%7B%0A%20%20%20%20this.firstFormGroup%20%3D%20this._formBuilder.group(%7B%0A%20%20%20%20%20%20firstCtrl%3A%20%5B''%2C%20Validators.required%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.secondFormGroup%20%3D%20this._formBuilder.group(%7B%0A%20%20%20%20%20%20secondCtrl%3A%20%5B''%2C%20Validators.required%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%7D%0A%0A%20%20public%20next(stepper%2C%20step)%20%7B%0A%20%20%20%20%2F%2F%20step.editable%20%3D%20false%3B%0A%20%20%20%20stepper.next()%3B%0A%20%20%7D%0A%7D%0A",
+        tsSource: "import%20%7B%20Component%2C%20OnInit%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormBuilder%2C%20FormGroup%2C%20Validators%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%20NovoVerticalStepper%2C%20NovoStep%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Stepper%20w%2F%20Vertical%20Layout%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'stepper-vertical-example'%2C%0A%20%20templateUrl%3A%20'stepper-vertical-example.html'%2C%0A%20%20styleUrls%3A%20%5B'stepper-vertical-example.css'%5D%2C%0A%7D)%0Aexport%20class%20StepperVerticalExample%20implements%20OnInit%20%7B%0A%20%20isLinear%20%3D%20true%3B%0A%20%20firstFormGroup%3A%20FormGroup%3B%0A%20%20secondFormGroup%3A%20FormGroup%3B%0A%0A%20%20constructor(private%20_formBuilder%3A%20FormBuilder)%20%7B%7D%0A%0A%20%20ngOnInit()%20%7B%0A%20%20%20%20this.firstFormGroup%20%3D%20this._formBuilder.group(%7B%0A%20%20%20%20%20%20firstCtrl%3A%20%5B''%2C%20Validators.required%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.secondFormGroup%20%3D%20this._formBuilder.group(%7B%0A%20%20%20%20%20%20secondCtrl%3A%20%5B''%2C%20Validators.required%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%7D%0A%0A%20%20next(stepper%3A%20NovoVerticalStepper%2C%20step%3A%20NovoStep)%20%7B%0A%20%20%20%20step.editable%20%3D%20false%3B%0A%20%20%20%20stepper.next()%3B%0A%20%20%7D%0A%7D%0A",
         cssSource: "%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A",
-        htmlSource: "%0A%3Cnovo-vertical-stepper%20%5Blinear%5D%3D%22isLinear%22%3E%0A%20%20%3Cnovo-step%20%5BstepControl%5D%3D%22firstFormGroup%22%20theme%3D%22candidate%22%20icon%3D%22candidate%22%3E%0A%20%20%20%20%3Cform%20%5BformGroup%5D%3D%22firstFormGroup%22%3E%0A%20%20%20%20%20%20%3Cng-template%20novoStepLabel%3EFill%20out%20your%20name%3C%2Fng-template%3E%0A%20%20%20%20%20%20%3Cinput%20placeholder%3D%22Last%20name%2C%20First%20name%22%20formControlName%3D%22firstCtrl%22%20required%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3C!--%20%3Cbutton%20novo-button%20novoStepperNext%3ENext%3C%2Fbutton%3E%20--%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3C%2Fform%3E%0A%20%20%3C%2Fnovo-step%3E%0A%20%20%3Cnovo-step%20%5BstepControl%5D%3D%22secondFormGroup%22%20theme%3D%22contact%22%20icon%3D%22person%22%3E%0A%20%20%20%20%3Cform%20%5BformGroup%5D%3D%22secondFormGroup%22%3E%0A%20%20%20%20%20%20%3Cng-template%20novoStepLabel%3EFill%20out%20your%20address%3C%2Fng-template%3E%0A%20%20%20%20%20%20%3Cinput%20placeholder%3D%22Address%22%20formControlName%3D%22secondCtrl%22%20required%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3C!--%20%3Cbutton%20novo-button%20novoStepperPrevious%3EBack%3C%2Fbutton%3E%0A%20%20%20%20%20%20%20%20%3Cbutton%20novo-button%20novoStepperNext%3ENext%3C%2Fbutton%3E%20--%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3C%2Fform%3E%0A%20%20%3C%2Fnovo-step%3E%0A%20%20%3Cnovo-step%3E%0A%20%20%20%20%3Cng-template%20novoStepLabel%3EDone%3C%2Fng-template%3E%0A%20%20%20%20You%20are%20now%20done.%0A%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%3C!--%20%3Cbutton%20novo-button%20novoStepperPrevious%3EBack%3C%2Fbutton%3E%0A%20%20%20%20%20%20%3Cbutton%20novo-button%20(click)%3D%22stepper.reset()%22%3EReset%3C%2Fbutton%3E%20--%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%3C%2Fnovo-step%3E%0A%3C%2Fnovo-vertical-stepper%3E%0A"
+        htmlSource: "%0A%3Cnovo-vertical-stepper%20%5Blinear%5D%3D%22isLinear%22%20%23stepper%3E%0A%20%20%3Cnovo-step%20%5BstepControl%5D%3D%22firstFormGroup%22%20theme%3D%22candidate%22%20icon%3D%22candidate%22%20%23step1%3E%0A%20%20%20%20%3Cform%20%5BformGroup%5D%3D%22firstFormGroup%22%3E%0A%20%20%20%20%20%20%3Cng-template%20novoStepLabel%3EFill%20out%20your%20name%3C%2Fng-template%3E%0A%20%20%20%20%20%20%3Cinput%20placeholder%3D%22Last%20name%2C%20First%20name%22%20formControlName%3D%22firstCtrl%22%20required%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3C!--%20%3Cbutton%20novo-button%20novoStepperNext%3ENext%3C%2Fbutton%3E%20--%3E%0A%20%20%20%20%20%20%20%20%3Cbutton%20(click)%3D%22next(stepper%2C%20step1)%22%20%5Bdisabled%5D%3D%22!firstFormGroup%3F.valid%22%3ENext%3C%2Fbutton%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3C%2Fform%3E%0A%20%20%3C%2Fnovo-step%3E%0A%20%20%3Cnovo-step%20%5BstepControl%5D%3D%22secondFormGroup%22%20theme%3D%22contact%22%20icon%3D%22person%22%3E%0A%20%20%20%20%3Cform%20%5BformGroup%5D%3D%22secondFormGroup%22%3E%0A%20%20%20%20%20%20%3Cng-template%20novoStepLabel%3EFill%20out%20your%20address%3C%2Fng-template%3E%0A%20%20%20%20%20%20%3Cinput%20placeholder%3D%22Address%22%20formControlName%3D%22secondCtrl%22%20required%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3C!--%20%3Cbutton%20novo-button%20novoStepperPrevious%3EBack%3C%2Fbutton%3E%0A%20%20%20%20%20%20%20%20%3Cbutton%20novo-button%20novoStepperNext%3ENext%3C%2Fbutton%3E%20--%3E%0A%20%20%20%20%20%20%20%20%3Cbutton%20(click)%3D%22stepper.previous()%22%3EBack%3C%2Fbutton%3E%0A%20%20%20%20%20%20%20%20%3Cbutton%20(click)%3D%22stepper.next()%22%3ENext%3C%2Fbutton%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3C%2Fform%3E%0A%20%20%3C%2Fnovo-step%3E%0A%20%20%3Cnovo-step%3E%0A%20%20%20%20%3Cng-template%20novoStepLabel%3EDone%3C%2Fng-template%3E%0A%20%20%20%20You%20are%20now%20done.%0A%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%3Cbutton%20novo-button%20(click)%3D%22stepper.reset()%22%3EReset%3C%2Fbutton%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%3C%2Fnovo-step%3E%0A%3C%2Fnovo-vertical-stepper%3E%0A"
     },
     'tabs-basic': {
         title: 'Basic Tabs',
