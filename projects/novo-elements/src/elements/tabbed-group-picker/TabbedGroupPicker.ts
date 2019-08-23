@@ -1,4 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Helpers } from '../..';
+import { BehaviorSubject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 export type TabbedGroupPickerSchema = {
   typeName: string;
@@ -35,21 +38,30 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   @Input() schemata: TabbedGroupPickerSchema[];
   @Input() quickSelectConfig: { label: string; items: TabbedGroupPickerQuickSelect[] };
   @Input() data: TabbedGroupPickerData;
+  displayData: TabbedGroupPickerData;
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
   public activeSchema: TabbedGroupPickerSchema;
+  queryTimeout: Promise<void>;
+  filterText: BehaviorSubject<string> = new BehaviorSubject('');
+  searchLabel: string = 'Search';
+
   public loading = true;
 
   constructor() {}
 
   ngOnInit(): void {
     this.validateData();
+    this.displayData = this.data;
     if (this.quickSelectConfig) {
       this.validateQuickSelectConfig();
     }
     this.setActiveSchema(this.schemata[0]);
     this.loading = false;
+    this.filterText.pipe(debounceTime(300)).subscribe({
+      next: this.filter,
+    });
   }
 
   setActiveSchema(newActiveSchema: TabbedGroupPickerSchema) {
@@ -177,12 +189,37 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   }
 
   emitSelectedValues() {
-    let currentSelection = {};
-    this.schemata.forEach((schema) => {
-      currentSelection[schema.typeName] = this.data[schema.typeName]
-        .filter((dataItem) => dataItem.selected)
-        .map((dataItem) => dataItem[schema.valueField]);
-    });
-    this.selectionChange.emit(currentSelection);
+    this.selectionChange.emit(this.getSelectedValues());
   }
+
+  getSelectedValues = () =>
+    this.schemata.reduce((prev, { typeName, valueField }) => {
+      return {
+        ...prev,
+        [typeName]: this.data[typeName].filter((dataItem) => dataItem.selected).map((dataItem) => dataItem[valueField]),
+      };
+    }, {});
+
+  clearFilter() {
+    this.filterText.next('');
+  }
+
+  onClearFilter(event) {
+    Helpers.swallowEvent(event); // dunno if this is necessary
+    this.clearFilter();
+  }
+
+  onFilter(textInput) {
+    this.filterText.next(textInput);
+  }
+
+  filter = (searchTerm: string) => {
+    this.displayData = Object.keys(this.data).reduce((accumulator, schema) => {
+      const { labelField } = this.schemata.find(({ typeName }) => typeName === schema);
+      return {
+        ...accumulator,
+        [schema]: this.data[schema].filter((item) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
+      };
+    }, {});
+  };
 }
