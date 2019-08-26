@@ -200,26 +200,21 @@ export class NovoTabbedGroupPickerElement implements OnInit {
       };
     }, {});
 
-  clearFilter() {
+  onClearFilter(event) {
+    Helpers.swallowEvent(event); // dunno if this is necessary
     this.filterText.next('');
   }
 
-  onClearFilter(event) {
-    Helpers.swallowEvent(event); // dunno if this is necessary
-    this.clearFilter();
+  onFilter(event: { target: { value: string } }) {
+    this.filterText.next(event.target.value);
   }
 
-  onFilter(textInput) {
-    this.filterText.next(textInput);
-  }
-
-  filter = (searchTerm: string) => {
-    this.displayData = Object.keys(this.data).reduce((accumulator, schema) => {
-      const { labelField } = this.schemata.find(({ typeName }) => typeName === schema);
-      return {
+  filter = (searchTerm: string) =>
+    (this.displayData = this.schemata.reduce(
+      (accumulator, { labelField, typeName }) => ({
         ...accumulator,
-        [schema]: this.data[schema].filter((item) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
-      };
-    }, {});
-  };
+        [typeName]: this.data[typeName].filter((item) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
+      }),
+      {},
+    ));
 }

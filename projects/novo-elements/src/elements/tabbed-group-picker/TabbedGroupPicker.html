@@ -7,7 +7,7 @@
     <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
   </button>
   <div class="novo-category-dropdown-search" data-automation-id="novo-category-dropdown-search">
-    <input type="text" [placeholder]="searchLabel" [value]="filterText | async" (input)="onFilter($event.target.value)" />
+    <input type="text" [placeholder]="searchLabel" [value]="filterText | async" (input)="onFilter($event)" />
     <i class="bhi-search" *ngIf="!(filterText | async)"></i>
     <i class="bhi-times" *ngIf="filterText | async" (click)="onClearFilter($event)"></i>
   </div>
