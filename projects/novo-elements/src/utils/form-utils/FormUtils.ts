@@ -554,13 +554,22 @@ export class FormUtils {
   }
 
   private createControl(field, data, http, config, overrides, currencyFormat) {
-    const fieldData: any = data && data[field.name] ? data[field.name] : null;
+    const fieldData: any = field.name.includes('.') ? this.getEmbeddedFieldData(field, data) : this.getFieldData(field, data);
     let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
     // Set currency format
     if (control.subType === 'currency') {
       control.currencyFormat = currencyFormat;
     }
     return control;
+  }
+
+  private getFieldData(field, data) {
+    return (data && data[field.name]) || null;
+  }
+
+  private getEmbeddedFieldData(field, data) {
+    let [parentFieldName, fieldName] = field.name.split('.');
+    return (data && data[parentFieldName] && data[parentFieldName][fieldName]) || null;
   }
 
   private getFormFields(meta) {
@@ -571,7 +580,14 @@ export class FormUtils {
         })
       : [];
 
-    return [...sectionHeaders, ...meta.fields].sort(Helpers.sortByField(['sortOrder', 'name']));
+    let fields = meta.fields.map((field) => {
+      if (!field.hasOwnProperty('sortOrder')) {
+        field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
+      }
+      return field;
+    });
+
+    return [...sectionHeaders, ...fields].sort(Helpers.sortByField(['sortOrder', 'name']));
   }
 
   private getEmbeddedFields(subHeader) {
