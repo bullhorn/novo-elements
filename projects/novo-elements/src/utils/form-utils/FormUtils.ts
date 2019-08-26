@@ -523,7 +523,7 @@ export class FormUtils {
           embeddedFields.forEach((embeddedField) => {
             if (this.shouldCreateControl(embeddedField)) {
               let control = this.createControl(embeddedField, data, http, config, overrides, currencyFormat);
-
+              control = this.markControlAsEmbedded(control);
               fieldsets[fieldsets.length - 1].controls.push(control);
             }
           });
@@ -612,6 +612,12 @@ export class FormUtils {
       icon: field.icon || 'bhi-section',
       controls: [],
     });
+  }
+
+  private markControlAsEmbedded(control) {
+    let tempControl = { ...control };
+    tempControl['config']['embedded'] = true;
+    return tempControl;
   }
 
   getControlOptions(field: any, http: any, config: { token?: string; restUrl?: string; military?: boolean }, fieldData?: any): any {
