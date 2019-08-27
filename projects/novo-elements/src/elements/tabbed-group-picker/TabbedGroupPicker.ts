@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Helpers } from '../..';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Helpers } from '../../utils/Helpers';
 
 export type TabbedGroupPickerSchema = {
   typeName: string;
@@ -42,12 +42,11 @@ export class NovoTabbedGroupPickerElement implements OnInit {
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
-  public activeSchema: TabbedGroupPickerSchema;
-  queryTimeout: Promise<void>;
+  activeSchema: TabbedGroupPickerSchema;
   filterText: BehaviorSubject<string> = new BehaviorSubject('');
   searchLabel: string = 'Search';
 
-  public loading = true;
+  loading = true;
 
   constructor() {}
 
@@ -213,7 +212,7 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     (this.displayData = this.schemata.reduce(
       (accumulator, { labelField, typeName }) => ({
         ...accumulator,
-        [typeName]: this.data[typeName].filter((item) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
+        [typeName]: this.data[typeName] && this.data[typeName].filter((item) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
       }),
       {},
     ));
