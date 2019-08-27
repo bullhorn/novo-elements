@@ -57,8 +57,8 @@
       <div class="novo-category-dropdown-empty-item" *ngIf="!displayData[activeSchema.typeName].length && (filterText | async)">
         <!-- TODO: add bhi-users icon if parent-child relationship-->
         <i class="bhi-user"></i>
-        <div class="empty-item-main-message">{{ 'NO RESULTS PLS TRANSLATE' }}</div>
-        <div class="empty-item-sub-message">{{ 'CLEAR SAERCH PLS TRANSLATE' }}</div>
+        <div class="empty-item-main-message">{{ labelService.tabbedGroupPickerEmpty }}</div>
+        <div class="empty-item-sub-message">{{ labelService.tabbedGroupClearSuggestion(this.activeSchema.typeLabel) }}</div>
       </div>
     </div>
   </div>

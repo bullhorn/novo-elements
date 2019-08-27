@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 export type TabbedGroupPickerSchema = {
   typeName: string;
@@ -48,7 +49,7 @@ export class NovoTabbedGroupPickerElement implements OnInit {
 
   loading = true;
 
-  constructor() {}
+  constructor(public labelService: NovoLabelService) {}
 
   ngOnInit(): void {
     this.validateData();

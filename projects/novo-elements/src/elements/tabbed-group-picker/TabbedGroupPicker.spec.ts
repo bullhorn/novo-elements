@@ -4,6 +4,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { NovoTabbedGroupPickerElement, TabbedGroupPickerSchema } from './TabbedGroupPicker';
 import { NovoTabbedGroupPickerModule } from './TabbedGroupPicker.module';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 describe('Elements: NovoTabbedGroupPickerElement', () => {
   let fixture;
@@ -11,7 +12,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: ComponentUtils, useClass: ComponentUtils }],
+      providers: [{ provide: ComponentUtils, useClass: ComponentUtils }, NovoLabelService],
       imports: [NovoTabbedGroupPickerModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoTabbedGroupPickerElement);
@@ -73,12 +74,15 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       spyOn(component, 'validateQuickSelectConfig').and.callFake(() => {});
       spyOn(component, 'setActiveSchema').and.callFake(() => {});
     });
+
     const getLetter = (n: number) => String.fromCharCode((n % 26) + 65);
+
     const turnNumbersIntoLetters = (val: string): string =>
       Array.from(val)
         .map((n) => parseInt(n, 10))
         .map(getLetter)
         .join('');
+
     const buildBigDataset = (): { data; schemata } => {
       const names: string[] = Array(2000)
         .fill(0)
@@ -93,8 +97,8 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       schemata.forEach(({ labelField, typeName }) => {
         data[typeName] = Array(1000)
           .fill(0)
-          .map(() => ({
-            [labelField]: turnNumbersIntoLetters(labelField),
+          .map((n, i) => ({
+            [labelField]: turnNumbersIntoLetters(`${labelField}${i}`),
           }));
       });
       return { data, schemata };
