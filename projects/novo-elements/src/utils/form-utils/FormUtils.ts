@@ -554,13 +554,17 @@ export class FormUtils {
   }
 
   private createControl(field, data, http, config, overrides, currencyFormat) {
-    const fieldData: any = field.name.includes('.') ? this.getEmbeddedFieldData(field, data) : this.getFieldData(field, data);
+    const fieldData: any = this.isEmbeddedFieldData(field, data) ? this.getEmbeddedFieldData(field, data) : this.getFieldData(field, data);
     let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
     // Set currency format
     if (control.subType === 'currency') {
       control.currencyFormat = currencyFormat;
     }
     return control;
+  }
+
+  private isEmbeddedFieldData(field, data) {
+    return data && field.name.includes('.');
   }
 
   private getFieldData(field, data) {
