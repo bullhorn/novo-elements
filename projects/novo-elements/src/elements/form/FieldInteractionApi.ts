@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { NovoFormControl } from './NovoFormControl';
 import { NovoControlConfig } from './FormControls';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { NovoToastService } from '../toast/ToastService';
+import { NovoToastService, ToastOptions } from '../toast/ToastService';
 import { NovoModalService } from '../modal/ModalService';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { Helpers } from '../../utils/Helpers';
@@ -355,16 +355,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public displayToast(toastConfig: {
-    message: string;
-    title?: string;
-    hideDelay?: number;
-    icon?: string;
-    theme?: string;
-    position?: string;
-    isCloseable?: boolean;
-    customClass?: string;
-  }): void {
+  displayToast(toastConfig: ToastOptions): void {
     if (this.toaster) {
       this.toaster.alert(toastConfig);
     }
