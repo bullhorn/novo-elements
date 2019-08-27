@@ -554,7 +554,7 @@ export class FormUtils {
   }
 
   private createControl(field, data, http, config, overrides, currencyFormat) {
-    const fieldData: any = this.isEmbeddedFieldData(field, data) ? this.getEmbeddedFieldData(field, data) : this.getFieldData(field, data);
+    const fieldData = this.isEmbeddedFieldData(field, data) ? this.getEmbeddedFieldData(field, data) : this.getFieldData(field, data);
     let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
     // Set currency format
     if (control.subType === 'currency') {
@@ -595,19 +595,17 @@ export class FormUtils {
   }
 
   private getEmbeddedFields(subHeader) {
-    let fields = [];
-    subHeader.associatedEntity.fields.forEach((field) => {
-      if (field.name !== 'id') {
+    return subHeader.associatedEntity.fields
+      .filter((field) => field.name !== 'id')
+      .map((field) => {
         field.name = `${subHeader.name}.${field.name}`;
-        fields.push(field);
-      }
-    });
-
-    return fields.sort(Helpers.sortByField(['sortOrder', 'name']));
+        return field;
+      })
+      .sort(Helpers.sortByField(['sortOrder', 'name']));
   }
 
   private isHeader(field): boolean {
-    return field != null && field.hasOwnProperty('isSectionHeader') && field.isSectionHeader;
+    return !Helpers.isBlank(field) && field.hasOwnProperty('isSectionHeader') && field.isSectionHeader;
   }
 
   private insertHeaderToFieldsets(fieldsets, field) {
@@ -619,9 +617,11 @@ export class FormUtils {
   }
 
   private markControlAsEmbedded(control) {
-    let tempControl = { ...control };
-    tempControl['config']['embedded'] = true;
-    return tempControl;
+    if (Helpers.isBlank(control['config'])) {
+      control['config'] = {};
+    }
+    control['config']['embedded'] = true;
+    return control;
   }
 
   getControlOptions(field: any, http: any, config: { token?: string; restUrl?: string; military?: boolean }, fieldData?: any): any {
