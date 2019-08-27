@@ -34,6 +34,7 @@ export { NovoTableMode } from './elements/table/Table';
 export { NovoIconModule } from './elements/icon/Icon.module';
 export { NovoExpansionModule } from './elements/expansion/expansion.module';
 export { NovoStepperModule } from './elements/stepper/stepper.module';
+export { NovoVerticalStepper, NovoHorizontalStepper, NovoStep, NovoStepper} from './elements/stepper/stepper.component';
 export { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './elements/form/Form.module';
 export { NovoDynamicFormElement } from './elements/form/DynamicForm';
@@ -74,8 +75,6 @@ export { NovoModalService } from './elements/modal/ModalService';
 export { NovoLabelService } from './services/novo-label-service';
 export { NovoDragulaService } from './elements/dragula/DragulaService';
 export { GooglePlacesService } from './elements/places/places.service';
-import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
-import { LocalStorageService } from './services/storage/storage.service';
 // Export all data services
 export { Collection } from './services/data-provider/Collection';
 export { CollectionEvent } from './services/data-provider/CollectionEvent';

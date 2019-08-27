@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.12.1"></a>
+## [3.12.1](https://github.com/bullhorn/novo-elements/compare/v3.12.0...v3.12.1) (2019-08-20)
+
+
+### Features
+
+* **field interaction:** give field interactions with optionsPromise precedence over those preconfigured with filteredOptionsCreator ([#1024](https://github.com/bullhorn/novo-elements/issues/1024)) ([6cb1e71](https://github.com/bullhorn/novo-elements/commit/6cb1e71))
+
+
+
 <a name="3.12.0"></a>
 # [3.12.0](https://github.com/bullhorn/novo-elements/compare/v3.11.0...v3.12.0) (2019-08-16)
 
