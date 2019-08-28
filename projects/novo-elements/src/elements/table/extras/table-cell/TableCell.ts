@@ -44,7 +44,7 @@ export class TableCell implements OnInit, OnDestroy {
     if (this.column.renderer) {
       if (this.column.renderer.prototype instanceof BaseRenderer) {
         this.column._type = 'custom';
-        let componentRef = this.componentUtils.appendNextToLocation(this.column.renderer, this.container);
+        const componentRef = this.componentUtils.append(this.column.renderer, this.container) as any;
         componentRef.instance.meta = this.column;
         componentRef.instance.data = this.row;
         componentRef.instance.value = this.form && this.hasEditor ? this.form.value[this.column.name] : this.row[this.column.name];
