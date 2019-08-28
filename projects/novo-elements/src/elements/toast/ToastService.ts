@@ -8,7 +8,7 @@ export interface ToastOptions {
   title?: string;
   message?: string;
   icon?: 'bell' | 'check' | 'info' | 'warning' | 'remove' | 'caution' | 'times' | 'coffee' | 'danger' | string;
-  theme?: 'default' | 'success' | 'info' | 'warning' | 'danger';
+  theme?: 'default' | 'success' | 'info' | 'warning' | 'danger' | 'positive' | string;
   hideDelay?: number;
   position?: 'fixedTop' | 'fixedBottom' | 'growlTopRight' | 'growlTopLeft' | 'growlBottomRight' | 'growlBottomLeft';
   isCloseable?: boolean;
