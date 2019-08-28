@@ -4,13 +4,17 @@ import { Injectable } from '@angular/core';
 import { NovoToastElement } from './Toast';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 
+export type ToastThemes = 'default' | 'success' | 'info' | 'warning' | 'danger' | 'positive' | string;
+export type ToastIcons = 'bell' | 'check' | 'info' | 'warning' | 'remove' | 'caution' | 'times' | 'coffee' | 'danger' | string;
+export type ToastPositions = 'fixedTop' | 'fixedBottom' | 'growlTopRight' | 'growlTopLeft' | 'growlBottomRight' | 'growlBottomLeft';
+
 export interface ToastOptions {
   title?: string;
   message?: string;
-  icon?: 'bell' | 'check' | 'info' | 'warning' | 'remove' | 'caution' | 'times' | 'coffee' | 'danger' | string;
-  theme?: 'default' | 'success' | 'info' | 'warning' | 'danger';
+  icon?: ToastIcons;
+  theme?: ToastThemes;
   hideDelay?: number;
-  position?: 'fixedTop' | 'fixedBottom' | 'growlTopRight' | 'growlTopLeft' | 'growlBottomRight' | 'growlBottomLeft';
+  position?: ToastPositions;
   isCloseable?: boolean;
   customClass?: string;
 }
