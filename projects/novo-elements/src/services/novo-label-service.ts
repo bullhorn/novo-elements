@@ -21,6 +21,7 @@ export class NovoLabelService {
   pickerError = 'Oops! An error occurred.';
   pickerTextFieldEmpty = 'Begin typing to see results.';
   pickerEmpty = 'No results to display...';
+  tabbedGroupPickerEmpty = 'No results found';
   quickNoteError = 'Oops! An error occurred.';
   quickNoteEmpty = 'No results to display...';
   required = 'Required';
@@ -138,6 +139,10 @@ export class NovoLabelService {
 
   totalRecords(total: number, select: boolean = false) {
     return select ? `Select all ${total} records.` : `De-select remaining ${total} records.`;
+  }
+
+  tabbedGroupClearSuggestion(tabLabelPlural: string): string {
+    return `Clear your search to see all ${tabLabelPlural}.`;
   }
 
   formatDateWithFormat(value: any, format: Intl.DateTimeFormatOptions) {
