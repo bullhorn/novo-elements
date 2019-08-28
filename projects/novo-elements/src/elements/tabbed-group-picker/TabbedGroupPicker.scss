@@ -10,6 +10,45 @@
   }
 }
 
+.novo-category-dropdown-search {
+  width: 100%;
+  padding: 0.5em;
+  border-bottom: .1em solid #ccc;
+  position: relative;
+  input {
+    font-size: 1em;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    height: 2rem;
+    width: 95%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 300ms;
+    color: #26282b;
+    margin-left: 1em;
+    &::-webkit-input-placeholder {
+      color: #aaaaaa;
+    }
+  }
+  i.bhi-search,
+  i.bhi-times {
+    position: absolute;
+    bottom: 1em;
+    right: .5em;
+    color: #aaaaaa;
+    font-size: 1em;
+    margin-right: 1em;
+  }
+  i.bhi-times {
+    cursor: pointer;
+    font-size: 1em;
+  }
+}
+
 .tabbed-group-picker-column-container {
   display: flex;
   flex-direction: row;
@@ -69,6 +108,35 @@
               min-height: 3.1em;
             }
           }
+        }
+      }
+
+      .novo-category-dropdown-empty-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $grey;
+        width: 100%;
+        height: 100%;
+
+        i {
+          padding-bottom: 0.2em;
+
+          &.bhi-users {
+            font-size: 3em;
+          }
+          &.bhi-user {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+          }
+        }
+        .empty-item-main-message {
+          font-weight: 500;
+          color: $dark;
+        }
+        .empty-item-sub-message {
+          font-size: 0.9em;
         }
       }
 

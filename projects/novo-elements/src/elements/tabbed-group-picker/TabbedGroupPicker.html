@@ -6,7 +6,11 @@
           [loading]="loading">
     <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
   </button>
-  <!-- todo: search input goes here-->
+  <div class="novo-category-dropdown-search" data-automation-id="novo-category-dropdown-search">
+    <input type="text" [placeholder]="searchLabel" [value]="filterText | async" (input)="onFilter($event)" />
+    <i class="bhi-search" *ngIf="!(filterText | async)"></i>
+    <i class="bhi-times" *ngIf="filterText | async" (click)="onClearFilter($event)"></i>
+  </div>
   <div class="tabbed-group-picker-column-container">
     <div class="tabbed-group-picker-column left">
       <novo-nav theme="white"
@@ -14,13 +18,13 @@
         <novo-tab *ngFor="let schema of schemata"
                   [attr.data-automation-id]="schema.typeName"
                   (activeChange)="setActiveSchema(schema)">
-          <span>{{ schema.typeLabel }}</span><i class="bhi-next"></i>
+          <span>{{schema.typeLabel}} ({{displayData[schema.typeName].length}})</span><i class="bhi-next"></i>
         </novo-tab>
       </novo-nav>
       <!-- todo: clear all button goes here-->
     </div>
     <div class="tabbed-group-picker-column right">
-      <div class="quick-select" *ngIf="quickSelectConfig">
+      <div class="quick-select" *ngIf="quickSelectConfig && !(filterText | async)">
         <div class="quick-select-label">{{ quickSelectConfig.label }}</div>
         <novo-list direction="vertical">
           <novo-list-item *ngFor="let quickSelect of quickSelectConfig.items"
@@ -36,9 +40,9 @@
         </novo-list>
       </div>
       <!-- todo: add virtual scroll-->
-      <novo-list *ngIf="data[activeSchema.typeName].length"
+      <novo-list *ngIf="displayData[activeSchema.typeName].length"
                  direction="vertical">
-        <novo-list-item *ngFor="let item of data[activeSchema.typeName]"
+        <novo-list-item *ngFor="let item of displayData[activeSchema.typeName]"
                         [attr.data-automation-id]="item[activeSchema.labelField]"
                         (click)="onDataListItemClicked(activeSchema, item);">
           <item-content>
@@ -49,7 +53,13 @@
           </item-content>
         </novo-list-item>
       </novo-list>
-      <!-- todo: empty state goes here-->
+      <!-- TODO: add empty result message for no data in the case of no search -->
+      <div class="novo-category-dropdown-empty-item" *ngIf="!displayData[activeSchema.typeName].length && (filterText | async)">
+        <!-- TODO: add bhi-users icon if parent-child relationship-->
+        <i class="bhi-user"></i>
+        <div class="empty-item-main-message">{{ labelService.tabbedGroupPickerEmpty }}</div>
+        <div class="empty-item-sub-message">{{ labelService.tabbedGroupClearSuggestion(this.activeSchema.typeLabel) }}</div>
+      </div>
     </div>
   </div>
 </novo-dropdown>

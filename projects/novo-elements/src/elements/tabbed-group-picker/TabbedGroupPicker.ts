@@ -1,4 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 
 export type TabbedGroupPickerSchema = {
   typeName: string;
@@ -35,21 +39,29 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   @Input() schemata: TabbedGroupPickerSchema[];
   @Input() quickSelectConfig: { label: string; items: TabbedGroupPickerQuickSelect[] };
   @Input() data: TabbedGroupPickerData;
+  displayData: TabbedGroupPickerData;
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
-  public activeSchema: TabbedGroupPickerSchema;
-  public loading = true;
+  activeSchema: TabbedGroupPickerSchema;
+  filterText: BehaviorSubject<string> = new BehaviorSubject('');
+  searchLabel: string = 'Search';
 
-  constructor() {}
+  loading = true;
+
+  constructor(public labelService: NovoLabelService) {}
 
   ngOnInit(): void {
     this.validateData();
+    this.displayData = this.data;
     if (this.quickSelectConfig) {
       this.validateQuickSelectConfig();
     }
     this.setActiveSchema(this.schemata[0]);
     this.loading = false;
+    this.filterText.pipe(debounceTime(300)).subscribe({
+      next: this.filter,
+    });
   }
 
   setActiveSchema(newActiveSchema: TabbedGroupPickerSchema) {
@@ -177,12 +189,32 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   }
 
   emitSelectedValues() {
-    let currentSelection = {};
-    this.schemata.forEach((schema) => {
-      currentSelection[schema.typeName] = this.data[schema.typeName]
-        .filter((dataItem) => dataItem.selected)
-        .map((dataItem) => dataItem[schema.valueField]);
-    });
-    this.selectionChange.emit(currentSelection);
+    this.selectionChange.emit(this.getSelectedValues());
   }
+
+  getSelectedValues = () =>
+    this.schemata.reduce((prev, { typeName, valueField }) => {
+      return {
+        ...prev,
+        [typeName]: this.data[typeName].filter((dataItem) => dataItem.selected).map((dataItem) => dataItem[valueField]),
+      };
+    }, {});
+
+  onClearFilter(event) {
+    Helpers.swallowEvent(event); // dunno if this is necessary
+    this.filterText.next('');
+  }
+
+  onFilter(event: { target: { value: string } }) {
+    this.filterText.next(event.target.value);
+  }
+
+  filter = (searchTerm: string) =>
+    (this.displayData = this.schemata.reduce(
+      (accumulator, { labelField, typeName }) => ({
+        ...accumulator,
+        [typeName]: this.data[typeName] && this.data[typeName].filter((item) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
+      }),
+      {},
+    ));
 }
