@@ -74,6 +74,10 @@ describe('Elements: QuickNoteElement', () => {
       fakeResultsDropdown.visible = true;
       return fakeResultsDropdown;
     }
+    append() {
+      fakeResultsDropdown.visible = true;
+      return fakeResultsDropdown;
+    }
   }
 
   beforeEach(() => {
