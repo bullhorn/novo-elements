@@ -47,7 +47,7 @@ export class BasePickerResults {
     }
   }
 
-  onScrollDown(event: MouseWheelEvent) {
+  onScrollDown(event: WheelEvent) {
     let element: any = event.target;
     if (element) {
       let offset = element.offsetHeight + element.scrollTop,
