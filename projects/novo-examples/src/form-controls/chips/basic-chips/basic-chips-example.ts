@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['basic-chips-example.css'],
 })
 export class BasicChipsExample {
-  public staticDemo: {
+  staticDemo = {
     options: [
       'Alabama',
       'Alaska',
@@ -60,11 +60,11 @@ export class BasicChipsExample {
       'Washington',
       'West Virginia',
       'Wisconsin',
-      'Wyoming'
-    ];
+      'Wyoming',
+    ],
   };
-  public placeholder: string = 'Select...';
-  public value: any = ['Alabama'];
+  placeholder = 'Select...';
+  value = ['Alabama'];
 
   onChanged(event) {
     console.log('EVENT', event); // tslint:disable-line
