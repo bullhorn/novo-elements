@@ -104,7 +104,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       return { data, schemata };
     };
 
-    it('should filter large datasets in a reasonable amount of time', () => {
+    xit('should filter large datasets in a reasonable amount of time', () => {
       const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 4000;
       const { data, schemata } = buildBigDataset();
       component.data = data;
@@ -115,6 +115,33 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const timeItTakesToSearchAMillionItems = performance.now() - start;
 
       expect(timeItTakesToSearchAMillionItems).toBeLessThan(amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm);
+    });
+  });
+  describe('onDataListItemClicked', () => {
+    it('should update the selected status of a group if the only item in the group is selected', () => {
+      component.schemata = [
+        {
+          typeName: 'dinosaurs',
+          typeLabel: 'Dinosaurs',
+          valueField: 'id',
+          labelField: 'name',
+          childTypeName: 'chickens',
+        },
+        {
+          typeName: 'chickens',
+          typeLabel: 'Chickens',
+          valueField: 'chickenId',
+          labelField: 'bwaack',
+        },
+      ];
+      const chicken = { chickenId: '3', bwaack: 'bwock?' };
+      component.data = {
+        dinosaurs: [{ id: '1', name: 'Tyrannosaurus' }],
+        chickens: [chicken],
+      };
+      component.onDataListItemClicked(component.schemata[1], chicken);
+      expect(component.data.chickens[0].selected).toEqual('selected');
+      expect(component.data.dinosaurs[0].selected).toEqual('selected');
     });
   });
 });

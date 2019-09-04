@@ -4,13 +4,37 @@ import { debounceTime } from 'rxjs/operators';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 
-export type TabbedGroupPickerSchema = {
-  typeName: string;
+export type TabbedGroupPickerSchema<N extends string, V extends string, L extends string, R = never> = {
+  typeName: N;
   typeLabel: string;
-  valueField: string;
-  labelField: string;
-} & ({ childTypeName?: string } | { parentTypeName?: string });
+  valueField: V;
+  labelField: L;
+  childTypeName?: R extends TabbedGroupPickerSchema<infer NN, infer VV, infer LL, infer RR> ? NN : never;
+  data: SelectableItem<V, L, R>[];
+};
 
+export type SelectableItem<V extends string, L extends string, R = never> = { [key in V | L]: string } & {
+  selected?: 'selected' | 'partial';
+  children?: R extends TabbedGroupPickerSchema<infer N, infer VV, infer LL, infer RR> ? SelectableItem<VV, LL, RR>[] : never;
+};
+
+type Dinosaurs = TabbedGroupPickerSchema<'dinosaurs', 'id', 'name', Chickens>;
+
+const dinos: Dinosaurs = {
+  typeName: 'dinosaurs',
+  typeLabel: 'Dinosaurs',
+  childTypeName: 'chickens',
+  valueField: 'id',
+  labelField: 'name',
+  data: [{ name: 'Tyrannosaurus', id: '5', children: [{ chickenId: '11', bwaack: 'bwock?' }] }, { name: 'Velociraptor', id: '6' }],
+};
+type Chickens = TabbedGroupPickerSchema<'chickens', 'chickenId', 'bwaack', {}>;
+
+type SchemaDictionary<S> = { [key in DistributeTypeName<S>]: DistributeData<S> };
+
+type Keyify<U> = U extends PropertyKey ? U : never;
+type DistributeTypeName<U> = Keyify<U extends { typeName: infer K } ? K : never>;
+type DistributeData<U> = U extends { data: SelectableItem<infer V, infer L, infer R>[] } ? SelectableItem<V, L, R>[] : never;
 export type TabbedGroupPickerQuickSelect = {
   typeName: string;
   label: string;
@@ -19,31 +43,24 @@ export type TabbedGroupPickerQuickSelect = {
   values?: any[];
 };
 
-export type SelectableItem = { selected?: boolean };
-
-export type TabbedGroupPickerData = {
-  [key: string]: SelectableItem[];
-};
-
 @Component({
   selector: 'novo-tabbed-group-picker',
   templateUrl: './TabbedGroupPicker.html',
 })
-export class NovoTabbedGroupPickerElement implements OnInit {
+export class NovoTabbedGroupPickerElement<S extends TabbedGroupPickerSchema<string, string, string>> implements OnInit {
   @Input() buttonConfig: {
     theme: string;
     side: string;
     icon: string;
     label: string;
   };
-  @Input() schemata: TabbedGroupPickerSchema[];
+  @Input() schemata: S[];
   @Input() quickSelectConfig: { label: string; items: TabbedGroupPickerQuickSelect[] };
-  @Input() data: TabbedGroupPickerData;
-  displayData: TabbedGroupPickerData;
+  displayData: SchemaDictionary<S>;
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
-  activeSchema: TabbedGroupPickerSchema;
+  activeSchema: TabbedGroupPickerSchema<string, string, string>;
   filterText: BehaviorSubject<string> = new BehaviorSubject('');
   searchLabel: string = 'Search';
 
@@ -53,7 +70,13 @@ export class NovoTabbedGroupPickerElement implements OnInit {
 
   ngOnInit(): void {
     this.validateData();
-    this.displayData = this.data;
+    this.displayData = this.schemata.reduce(
+      (prev, { typeName, data }) => ({
+        ...prev,
+        [typeName]: data,
+      }),
+      {} as SchemaDictionary<S>,
+    );
     if (this.quickSelectConfig) {
       this.validateQuickSelectConfig();
     }
@@ -64,25 +87,25 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     });
   }
 
-  setActiveSchema(newActiveSchema: TabbedGroupPickerSchema) {
+  setActiveSchema(newActiveSchema: TabbedGroupPickerSchema<string, string, string>) {
     this.activeSchema = newActiveSchema;
   }
 
   validateData() {
     let warning = '';
     this.schemata.forEach((schema) => {
-      if (this.data[schema.typeName] === undefined) {
-        warning += `Property ${schema.typeName} is missing from data.\n`;
-      } else if (!Array.isArray(this.data[schema.typeName])) {
-        warning += `data.${schema.typeName} is not an array.\n`;
-      } else {
-        if (this.data[schema.typeName].some((item) => !(schema.valueField in item))) {
-          warning += `At least one item in data.${schema.typeName} is missing the ${schema.valueField} property.\n`;
-        }
-        if (this.data[schema.typeName].some((item) => !(schema.labelField in item))) {
-          warning += `At least one item in data.${schema.typeName} is missing the ${schema.labelField} property.\n`;
-        }
-      }
+      // if (this.data[schema.typeName] === undefined) {
+      //   warning += `Property ${schema.typeName} is missing from data.\n`;
+      // } else if (!Array.isArray(this.data[schema.typeName])) {
+      //   warning += `data.${schema.typeName} is not an array.\n`;
+      // } else {
+      //   if (this.data[schema.typeName].some((item) => !(schema.valueField in item))) {
+      //     warning += `At least one item in data.${schema.typeName} is missing the ${schema.valueField} property.\n`;
+      //   }
+      //   if (this.data[schema.typeName].some((item) => !(schema.labelField in item))) {
+      //     warning += `At least one item in data.${schema.typeName} is missing the ${schema.labelField} property.\n`;
+      //   }
+      // }
     });
     if (warning) {
       console.warn(`TabbedGroupPicker data validation warning:\n${warning}`);
@@ -119,19 +142,19 @@ export class NovoTabbedGroupPickerElement implements OnInit {
           warning += `Invalid properties for ${quickSelectIdentifier} config: either 'values' or 'all' is required.\n`;
         }
         if ('values' in quickSelect) {
-          if (!Array.isArray(quickSelect.values)) {
-            warning += `Invalid values for ${quickSelectIdentifier} config:  'values' property is not an array.\n`;
-          } else if (!Array.isArray(quickSelect.values)) {
-            warning += `Invalid values for ${quickSelectIdentifier} config:  'values' property contains no values.\n`;
-          } else if (
-            !quickSelect.values.every((quickSelectValue) =>
-              this.data[schema.typeName].some((dataItem) => dataItem[schema.valueField] === quickSelectValue),
-            )
-          ) {
-            warning += `Invalid value for ${quickSelectIdentifier} config: at least one value in values is not present in any item in data.${
-              schema.typeName
-            }\n`;
-          }
+          // if (!Array.isArray(quickSelect.values)) {
+          //   warning += `Invalid values for ${quickSelectIdentifier} config:  'values' property is not an array.\n`;
+          // } else if (!Array.isArray(quickSelect.values)) {
+          //   warning += `Invalid values for ${quickSelectIdentifier} config:  'values' property contains no values.\n`;
+          // } else if (
+          //   !quickSelect.values.every((quickSelectValue) =>
+          //     this.data[schema.typeName].some((dataItem) => dataItem[schema.valueField] === quickSelectValue),
+          //   )
+          // ) {
+          //   warning += `Invalid value for ${quickSelectIdentifier} config: at least one value in values is not present in any item in data.${
+          //     schema.typeName
+          //   }\n`;
+          // }
         }
       });
     }
@@ -140,17 +163,52 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     }
   }
 
-  onDataListItemClicked(activeSchema: TabbedGroupPickerSchema, item: SelectableItem) {
-    item.selected = !item.selected;
+  onDataListItemClicked(activeSchema: { typeName: string; valueField: string }, item: { selected: 'selected' | 'partial' }) {
+    item.selected ? delete item.selected : (item.selected = 'selected');
     this.onItemToggled(activeSchema);
   }
 
-  onItemToggled(schema: TabbedGroupPickerSchema) {
+  onItemToggled(schema: { typeName: string; valueField: string }) {
     if (this.quickSelectConfig) {
       this.updateQuickSelectCheckboxes(schema);
     }
+    this.updateParents();
     this.emitSelectedValues();
   }
+
+  updateParents(): void {
+    this.schemata = this.schemata.map((schema) => {
+      const { childTypeName, data } = schema;
+      if (!childTypeName) {
+        return schema;
+      }
+      return {
+        ...schema,
+        data: data.map(({ selected: previousValue, ...item }) => {
+          const selected: undefined | 'selected' | 'partial' = this.getSelectedValue(
+            this.schemata.find(({ typeName: childName }) => childName === childTypeName).data,
+          );
+          return {
+            ...item,
+            ...(selected ? { selected } : {}),
+          };
+        }),
+      };
+    });
+  }
+
+  getSelectedValue = (childArray: { selected?: 'selected' | 'partial' }[]): undefined | 'selected' | 'partial' =>
+    childArray
+      .map(({ selected }) => selected)
+      .reduce((prev: 'selected' | 'partial', next: 'selected' | 'partial') => {
+        if (prev === 'partial') {
+          return prev;
+        } else if (prev === 'selected') {
+          return next === 'selected' ? 'selected' : 'partial';
+        } else {
+          return next === 'selected' ? 'partial' : undefined;
+        }
+      });
 
   onQuickSelectListItemClicked(quickSelect: TabbedGroupPickerQuickSelect) {
     quickSelect.active = !quickSelect.active;
@@ -158,33 +216,31 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   }
 
   onQuickSelectToggled(quickSelect: TabbedGroupPickerQuickSelect) {
-    const schema: TabbedGroupPickerSchema = this.schemata.find((schemaItem) => quickSelect.typeName === schemaItem.typeName);
-    let itemsToSelect: SelectableItem[] = [];
-    if (quickSelect.all) {
-      itemsToSelect = this.data[schema.typeName];
-    } else {
-      itemsToSelect = this.data[schema.typeName].filter((item) => quickSelect.values.includes(item[schema.valueField]));
-    }
-    if (itemsToSelect && itemsToSelect.length) {
-      itemsToSelect.forEach((itemToSelect) => {
-        itemToSelect.selected = !!quickSelect.active;
-      });
-    }
+    const schema = this.schemata.find((schemaItem) => quickSelect.typeName === schemaItem.typeName);
+
+    schema.data = schema.data.map((item) => {
+      if (quickSelect.all || quickSelect.values.includes(item[schema.valueField])) {
+        const { selected, ...unselectedItem } = item;
+        return {
+          ...unselectedItem,
+          ...(quickSelect.active ? { selected: 'selected' } : {}),
+        };
+      } else {
+        return item;
+      }
+    });
+
     this.onItemToggled(schema);
   }
 
-  updateQuickSelectCheckboxes(activeSchema: TabbedGroupPickerSchema) {
+  updateQuickSelectCheckboxes(activeSchema: { typeName: string; valueField: string }) {
     const relevantQuickSelects = this.quickSelectConfig.items.filter((quickSelect) => activeSchema.typeName === quickSelect.typeName);
     relevantQuickSelects.forEach((quickSelect) => {
-      let itemsToCheck: SelectableItem[] = [];
-      if (quickSelect.all) {
-        itemsToCheck = this.data[activeSchema.typeName];
-      } else {
-        itemsToCheck = this.data[activeSchema.typeName].filter((dataItem) =>
-          quickSelect.values.includes(dataItem[activeSchema.valueField]),
-        );
+      let itemsToCheck = this.schemata.find(({ typeName }) => typeName === activeSchema.typeName).data;
+      if (!quickSelect.all) {
+        itemsToCheck = itemsToCheck.filter((item) => quickSelect.values.includes(item[activeSchema.valueField]));
       }
-      quickSelect.active = itemsToCheck.every((dataItem) => dataItem.selected === true);
+      quickSelect.active = itemsToCheck.every((item) => item.selected === 'selected');
     });
   }
 
@@ -193,12 +249,10 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   }
 
   getSelectedValues = () =>
-    this.schemata.reduce((prev, { typeName, valueField }) => {
-      return {
+    this.schemata.reduce((prev, { typeName, valueField, data }) => ({
         ...prev,
-        [typeName]: this.data[typeName].filter((dataItem) => dataItem.selected).map((dataItem) => dataItem[valueField]),
-      };
-    }, {});
+        [typeName]: data.filter(({selected}) => selected === 'selected').map((item) => item[valueField]),
+      }), {});
 
   onClearFilter(event) {
     Helpers.swallowEvent(event); // dunno if this is necessary
@@ -211,10 +265,10 @@ export class NovoTabbedGroupPickerElement implements OnInit {
 
   filter = (searchTerm: string) =>
     (this.displayData = this.schemata.reduce(
-      (accumulator, { labelField, typeName }) => ({
+      (accumulator, { labelField, typeName, data }) => ({
         ...accumulator,
-        [typeName]: this.data[typeName] && this.data[typeName].filter((item) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
+        [typeName]: data[typeName] && data[typeName].filter((item) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
       }),
-      {},
+      {} as SchemaDictionary<S>,
     ));
 }
